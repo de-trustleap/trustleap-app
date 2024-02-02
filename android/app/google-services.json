@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "962239137198",
+    "project_id": "finanzwegbegleiter",
+    "storage_bucket": "finanzwegbegleiter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962239137198:android:1b012781f09e5bd544743f",
+        "android_client_info": {
+          "package_name": "com.example.finanzbegleiter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYug60Zd671UX-bT9RxV3GMYpvPH33HGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
