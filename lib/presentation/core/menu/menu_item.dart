@@ -37,7 +37,7 @@ class MenuItem extends StatelessWidget {
                   Routemaster.of(context).push(path);
                 },
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
@@ -46,7 +46,7 @@ class MenuItem extends StatelessWidget {
                               : themeData.colorScheme.background),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
+                            horizontal: 12, vertical: 16),
                         child: Row(children: [
                           Icon(icon,
                               color: selectedMenuItem == type

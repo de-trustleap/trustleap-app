@@ -1,25 +1,28 @@
 import 'package:finanzbegleiter/application/menu/menu_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
+import 'package:finanzbegleiter/injection.dart' as di;
 import 'package:finanzbegleiter/presentation/activity_page/activity_page.dart';
+import 'package:finanzbegleiter/presentation/authentication/login_page.dart';
+import 'package:finanzbegleiter/presentation/authentication/register_page.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/dashboard_page.dart';
 import 'package:finanzbegleiter/presentation/landing_page/landing_page.dart';
 import 'package:finanzbegleiter/presentation/profile_page/profile_page.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoters_page.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendations_page.dart';
 import 'package:finanzbegleiter/theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -28,7 +31,9 @@ final routes = RouteMap(
       return const MaterialPage(child: Placeholder(color: Colors.red));
     },
     routes: {
-      "/": (_) => const Redirect(RoutePaths.dashboardPath),
+      "/": (_) => const Redirect(RoutePaths.loginPath),
+      RoutePaths.loginPath: (_) => const MaterialPage(child: LoginPage()),
+      RoutePaths.registerPath: (_) => const MaterialPage(child: RegisterPage()),
       RoutePaths.dashboardPath: (_) =>
           const MaterialPage(child: DashboardPage()),
       RoutePaths.profilePath: (_) => const MaterialPage(child: ProfilePage()),
