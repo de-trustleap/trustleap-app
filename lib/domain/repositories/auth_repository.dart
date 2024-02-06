@@ -6,4 +6,5 @@ abstract class AuthRepository {
       {required String email, required String password});
   Future<Either<AuthFailure, Unit>> loginWithEmailAndPassword(
       {required String email, required String password});
+  Future<void> signOut();
 }

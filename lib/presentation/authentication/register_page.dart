@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/authentication/auth_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
 import 'package:finanzbegleiter/injection.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_form.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class RegisterPage extends StatelessWidget {
             child: Container(
                 constraints: const BoxConstraints(maxWidth: 500),
                 child: BlocProvider(
-                  create: (context) => sl<AuthBloc>(),
+                  create: (context) => sl<SignInBloc>(),
                   child: const RegisterForm(),
                 ))));
   }

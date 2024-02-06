@@ -13,3 +13,5 @@ class UserDisabledFailure extends AuthFailure {}
 class UserNotFoundFailure extends AuthFailure {}
 
 class WrongPasswordFailure extends AuthFailure {}
+
+class InvalidCredentialsFailure extends AuthFailure {}

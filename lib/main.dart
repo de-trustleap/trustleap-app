@@ -1,7 +1,9 @@
+import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
 import 'package:finanzbegleiter/injection.dart' as di;
+import 'package:finanzbegleiter/injection.dart';
 import 'package:finanzbegleiter/presentation/activity_page/activity_page.dart';
 import 'package:finanzbegleiter/presentation/authentication/login_page.dart';
 import 'package:finanzbegleiter/presentation/authentication/register_page.dart';
@@ -53,8 +55,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MenuBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => sl<AuthBloc>()),
+        BlocProvider(create: (context) => sl<MenuBloc>())
+      ],
       child: MaterialApp.router(
         routeInformationParser: const RoutemasterParser(),
         routerDelegate: RoutemasterDelegate(routesBuilder: (context) => routes),

@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
 import 'package:finanzbegleiter/presentation/core/menu/appbar.dart';
 import 'package:finanzbegleiter/presentation/core/menu/side_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class PageTemplate extends StatelessWidget {
@@ -12,8 +14,7 @@ class PageTemplate extends StatelessWidget {
     required this.child,
   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
+  Widget getResponsiveWidget(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final themeData = Theme.of(context);
 
@@ -21,7 +22,8 @@ class PageTemplate extends StatelessWidget {
       return Material(
         child: Row(children: [
           const SizedBox(width: 240, child: SideMenu()),
-          Container(width: 0.5, color: themeData.textTheme.headlineLarge!.color),
+          Container(
+              width: 0.5, color: themeData.textTheme.headlineLarge!.color),
           Expanded(child: child)
         ]),
       );
@@ -34,5 +36,16 @@ class PageTemplate extends StatelessWidget {
           endDrawer:
               const SizedBox(width: 240, child: Drawer(child: SideMenu())));
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocListener(listeners: [
+      BlocListener<AuthBloc, AuthState>(listener: (context, state) {
+        if (state is AuthStateUnAuthenticated) {
+          // TODO: Route to Login
+        }
+      })
+    ], child: getResponsiveWidget(context));
   }
 }

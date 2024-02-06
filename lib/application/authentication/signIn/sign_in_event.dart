@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'auth_bloc.dart';
+part of 'sign_in_bloc.dart';
 
 @immutable
-sealed class AuthEvent {}
+sealed class SignInEvent {}
 
-class RegisterWithEmailAndPasswordPressed extends AuthEvent {
+class RegisterWithEmailAndPasswordPressed extends SignInEvent {
   final String? email;
   final String? password;
 
@@ -14,7 +14,7 @@ class RegisterWithEmailAndPasswordPressed extends AuthEvent {
   });
 }
 
-class LoginWithEmailAndPasswordPressed extends AuthEvent {
+class LoginWithEmailAndPasswordPressed extends SignInEvent {
   final String? email;
   final String? password;
 

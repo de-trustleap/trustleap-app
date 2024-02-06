@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
+import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -19,14 +20,19 @@ class AuthRepositoryImplementation implements AuthRepository {
           email: email, password: password);
       return right(unit);
     } on FirebaseAuthException catch (e) {
-      if (e.code == "user-disabled") {
+      final String code =
+          FirebaseExceptionParser.parseFirebaseAuthExceptionMessage(
+              input: e.message);
+      if (code == "user-disabled") {
         return left(UserDisabledFailure());
-      } else if (e.code == "invalid-email") {
+      } else if (code == "invalid-email") {
         return left(InvalidEmailFailure());
-      } else if (e.code == "user-not-found") {
+      } else if (code == "user-not-found") {
         return left(UserNotFoundFailure());
-      } else if (e.code == "wrong-password") {
+      } else if (code == "wrong-password") {
         return left(WrongPasswordFailure());
+      } else if (code == "invalid-credential") {
+        return left(InvalidCredentialsFailure());
       } else {
         return left(ServerFailure());
       }
@@ -41,15 +47,23 @@ class AuthRepositoryImplementation implements AuthRepository {
           email: email, password: password);
       return right(unit);
     } on FirebaseAuthException catch (e) {
-      if (e.code == "email-already-in-use") {
+      final String code =
+          FirebaseExceptionParser.parseFirebaseAuthExceptionMessage(
+              input: e.message);
+      if (code == "email-already-in-use") {
         return left(EmailAlreadyInUseFailure());
-      } else if (e.code == "invalid-email") {
+      } else if (code == "invalid-email") {
         return left(InvalidEmailFailure());
-      } else if (e.code == "weak-password") {
+      } else if (code == "weak-password") {
         return left(WeakPasswordFailure());
       } else {
         return left(ServerFailure());
       }
     }
+  }
+
+  @override
+  Future<void> signOut() async {
+    await firebaseAuth.signOut();
   }
 }
