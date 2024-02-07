@@ -42,9 +42,7 @@ class PageTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocListener(listeners: [
       BlocListener<AuthBloc, AuthState>(listener: (context, state) {
-        if (state is AuthStateUnAuthenticated) {
-          // TODO: Route to Login
-        }
+        if (state is AuthStateUnAuthenticated) {}
       })
     ], child: getResponsiveWidget(context));
   }

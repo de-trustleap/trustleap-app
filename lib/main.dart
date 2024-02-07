@@ -28,26 +28,40 @@ Future main() async {
   runApp(const MyApp());
 }
 
-final routes = RouteMap(
-    onUnknownRoute: (route) {
-      return const MaterialPage(child: Placeholder(color: Colors.red));
-    },
-    routes: {
-      "/": (_) => const Redirect(RoutePaths.loginPath),
-      RoutePaths.loginPath: (_) => const MaterialPage(child: LoginPage()),
-      RoutePaths.registerPath: (_) => const MaterialPage(child: RegisterPage()),
-      RoutePaths.dashboardPath: (_) =>
-          const MaterialPage(child: DashboardPage()),
-      RoutePaths.profilePath: (_) => const MaterialPage(child: ProfilePage()),
-      RoutePaths.recommendationsPath: (_) =>
-          const MaterialPage(child: RecommendationsPage()),
-      RoutePaths.promotersPath: (_) =>
-          const MaterialPage(child: PromotersPage()),
-      RoutePaths.landingPagePath: (_) =>
-          const MaterialPage(child: LandingPage()),
-      RoutePaths.activitiesPath: (_) =>
-          const MaterialPage(child: ActivityPage())
-    });
+RouteMap getRoutes(bool isAuthenticated) {
+  if (isAuthenticated) {
+    return RouteMap(
+        onUnknownRoute: (route) {
+          return const MaterialPage(child: Placeholder(color: Colors.red));
+        },
+        routes: {
+          RoutePaths.initialPath: (_) =>
+              const MaterialPage(child: DashboardPage()),
+          RoutePaths.dashboardPath: (_) =>
+              const MaterialPage(child: DashboardPage()),
+          RoutePaths.profilePath: (_) =>
+              const MaterialPage(child: ProfilePage()),
+          RoutePaths.recommendationsPath: (_) =>
+              const MaterialPage(child: RecommendationsPage()),
+          RoutePaths.promotersPath: (_) =>
+              const MaterialPage(child: PromotersPage()),
+          RoutePaths.landingPagePath: (_) =>
+              const MaterialPage(child: LandingPage()),
+          RoutePaths.activitiesPath: (_) =>
+              const MaterialPage(child: ActivityPage())
+        });
+  } else {
+    return RouteMap(
+      onUnknownRoute: (_) => const Redirect(RoutePaths.initialPath),
+      routes: {
+        RoutePaths.initialPath: (_) => const MaterialPage(child: LoginPage()),
+        RoutePaths.registerPath: (_) =>
+            const MaterialPage(child: RegisterPage()),
+        RoutePaths.loginPath: (_) => const MaterialPage(child: LoginPage()),
+      },
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -55,27 +69,42 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    bool isAuthenticated = false;
+
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => sl<AuthBloc>()),
+        BlocProvider(
+            create: (context) =>
+                sl<AuthBloc>()..add(AuthCheckRequestedEvent())),
         BlocProvider(create: (context) => sl<MenuBloc>())
       ],
-      child: MaterialApp.router(
-        routeInformationParser: const RoutemasterParser(),
-        routerDelegate: RoutemasterDelegate(routesBuilder: (context) => routes),
-        title: 'Finanzbegleiter',
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.light,
-        debugShowCheckedModeBanner: false,
-        //   home: const DashboardPage(),
-        builder: (context, widget) =>
-            ResponsiveBreakpoints.builder(child: widget!, breakpoints: const [
-          Breakpoint(start: 0, end: 599, name: MOBILE),
-          Breakpoint(start: 600, end: 999, name: TABLET),
-          Breakpoint(start: 1000, end: double.infinity, name: DESKTOP)
-        ]),
-      ),
+      child: BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
+        if (state is AuthStateUnAuthenticated) {
+          print("UNAUTHENTICATED: $state");
+          isAuthenticated = false;
+        } else if (state is AuthStateAuthenticated) {
+          print("AUTHENTICATED: $state");
+          isAuthenticated = true;
+        }
+      }, builder: (BuildContext context, state) {
+        return MaterialApp.router(
+          routeInformationParser: const RoutemasterParser(),
+          routerDelegate: RoutemasterDelegate(
+              routesBuilder: (context) => getRoutes(isAuthenticated)),
+          title: 'Finanzbegleiter',
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.light,
+          debugShowCheckedModeBanner: false,
+          //   home: const DashboardPage(),
+          builder: (context, widget) =>
+              ResponsiveBreakpoints.builder(child: widget!, breakpoints: const [
+            Breakpoint(start: 0, end: 599, name: MOBILE),
+            Breakpoint(start: 600, end: 999, name: TABLET),
+            Breakpoint(start: 1000, end: double.infinity, name: DESKTOP)
+          ]),
+        );
+      }),
     );
   }
 }

@@ -2,7 +2,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
+import 'package:finanzbegleiter/infrastructure/models/firebase_user_mapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepositoryImplementation implements AuthRepository {
@@ -66,4 +68,8 @@ class AuthRepositoryImplementation implements AuthRepository {
   Future<void> signOut() async {
     await firebaseAuth.signOut();
   }
+
+  @override
+  Option<CustomUser> getSignedInUser() =>
+      optionOf(firebaseAuth.currentUser?.toDomain());
 }

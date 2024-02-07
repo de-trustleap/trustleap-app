@@ -1,6 +1,7 @@
 const String fontFamily = "Poppins";
 
 class RoutePaths {
+  static const String initialPath = "/";
   static const String dashboardPath = "/dashboard";
   static const String profilePath = "/profile";
   static const String recommendationsPath = "/recommendations";

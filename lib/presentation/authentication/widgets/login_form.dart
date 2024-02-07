@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
@@ -42,12 +43,12 @@ class _LoginFormState extends State<LoginForm> {
         state.authFailureOrSuccessOption.fold(
             () => {},
             (eitherFailureOrSuccess) => eitherFailureOrSuccess.fold((failure) {
-                  print("FAILURE: $failure");
                   errorMessage = AuthFailureMapper.mapFailureMessage(failure);
                   showError = true;
                 }, (_) {
-                  print("Logged in!");
                   showError = false;
+                  BlocProvider.of<AuthBloc>(context)
+                      .add(AuthCheckRequestedEvent());
                 }));
       },
       builder: (context, state) {

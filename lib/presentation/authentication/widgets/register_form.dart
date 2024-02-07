@@ -1,10 +1,13 @@
+import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/auth_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:routemaster/routemaster.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -43,8 +46,10 @@ class _RegisterFormState extends State<RegisterForm> {
                   errorMessage = AuthFailureMapper.mapFailureMessage(failure);
                   showError = true;
                 }, (_) {
-                  print("Registered!");
                   showError = false;
+                  BlocProvider.of<AuthBloc>(context)
+                      .add(AuthCheckRequestedEvent());
+                  Routemaster.of(context).replace(RoutePaths.initialPath);
                 }));
       },
       builder: (context, state) {

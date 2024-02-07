@@ -20,6 +20,7 @@ dependencies:
   firebase_auth: ^4.17.3
   cloud_firestore: ^4.15.3
   dartz: ^0.10.1
+  uuid: ^4.3.3
 
 dev_dependencies:
   flutter_test:
