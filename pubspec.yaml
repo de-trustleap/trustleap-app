@@ -21,6 +21,7 @@ dependencies:
   cloud_firestore: ^4.15.3
   dartz: ^0.10.1
   uuid: ^4.3.3
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:

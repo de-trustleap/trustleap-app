@@ -14,14 +14,16 @@ class AuthErrorView extends StatelessWidget {
     final themeData = Theme.of(context);
     return Container(
         decoration: BoxDecoration(
-            color: themeData.colorScheme.error.withOpacity(0.3),
+            color: themeData.colorScheme.errorContainer,
             border: Border.all(color: themeData.colorScheme.error),
             borderRadius: BorderRadius.circular(8)),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Text(message,
-              style: themeData.textTheme.bodyLarge!
-                  .copyWith(color: themeData.colorScheme.error, fontSize: 14)),
+              style: themeData.textTheme.bodyLarge!.copyWith(
+                  color: themeData.colorScheme.error,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold)),
         ));
   }
 }
