@@ -22,15 +22,26 @@ class _RegisterFormState extends State<RegisterForm> {
 
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+  final passwordRepeatTextController = TextEditingController();
+  final firstNameTextController = TextEditingController();
+  final lastNameTextController = TextEditingController();
 
   bool showError = false;
   String errorMessage = "";
+  bool validationHasError = false;
 
   @override
   void dispose() {
     emailTextController.dispose();
     passwordTextController.dispose();
     super.dispose();
+  }
+
+  void resetError() {
+    setState(() {
+      showError = false;
+      errorMessage = "";
+    });
   }
 
   @override
@@ -42,9 +53,9 @@ class _RegisterFormState extends State<RegisterForm> {
         state.authFailureOrSuccessOption.fold(
             () => {},
             (eitherFailureOrSuccess) => eitherFailureOrSuccess.fold((failure) {
-                  print("FAILURE: $failure");
                   errorMessage = AuthFailureMapper.mapFailureMessage(failure);
                   showError = true;
+                  print("ERRORMESSAGE2: $errorMessage");
                 }, (_) {
                   showError = false;
                   BlocProvider.of<AuthBloc>(context)
@@ -74,10 +85,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   TextFormField(
                     controller: emailTextController,
                     onChanged: (_) {
-                      setState(() {
-                        showError = false;
-                        errorMessage = "";
-                      });
+                      resetError();
                     },
                     validator: validator.validateEmail,
                     decoration: const InputDecoration(labelText: "E-Mail"),
@@ -86,12 +94,22 @@ class _RegisterFormState extends State<RegisterForm> {
                   TextFormField(
                     controller: passwordTextController,
                     onChanged: (_) {
-                      setState(() {
-                        showError = false;
-                        errorMessage = "";
-                      });
+                      resetError();
                     },
                     validator: validator.validatePassword,
+                    obscureText: true,
+                    decoration: const InputDecoration(labelText: "Passwort"),
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: passwordRepeatTextController,
+                    onChanged: (_) {
+                      resetError();
+                    },
+                    validator: (val) {
+                      return validator.validatePasswordRepeat(
+                          val, passwordTextController.text);
+                    },
                     obscureText: true,
                     decoration: const InputDecoration(labelText: "Passwort"),
                   ),
@@ -100,11 +118,13 @@ class _RegisterFormState extends State<RegisterForm> {
                       title: "Registrieren",
                       onTap: () {
                         if (formKey.currentState!.validate()) {
+                          validationHasError = false;
                           BlocProvider.of<SignInBloc>(context).add(
                               RegisterWithEmailAndPasswordPressed(
                                   email: emailTextController.text,
                                   password: passwordTextController.text));
                         } else {
+                          validationHasError = true;
                           BlocProvider.of<SignInBloc>(context).add(
                               RegisterWithEmailAndPasswordPressed(
                                   email: null, password: null));
@@ -122,7 +142,8 @@ class _RegisterFormState extends State<RegisterForm> {
                   ],
                   if (errorMessage != "" &&
                       showError &&
-                      !state.isSubmitting) ...[
+                      !state.isSubmitting &&
+                      !validationHasError) ...[
                     const SizedBox(height: 20),
                     AuthErrorView(message: errorMessage)
                   ]

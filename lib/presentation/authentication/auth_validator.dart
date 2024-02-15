@@ -19,4 +19,14 @@ class AuthValidator {
       return null;
     }
   }
+
+  String? validatePasswordRepeat(String? input, String? otherPassword) {
+    if (input == null || input.isEmpty) {
+      return "Bitte das Passwort bestätigen";
+    } else if (otherPassword != input) {
+      return "Die Passwörter stimmen nicht überein";
+    } else {
+      return null;
+    }
+  }
 }
