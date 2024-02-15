@@ -29,4 +29,24 @@ class AuthValidator {
       return null;
     }
   }
+
+  String? validateFirstName(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Bitte den Vornamen angeben";
+    } else if (input.length > 60) {
+      return "Der angegebene Vorname ist zu lang";
+    } else {
+      return null;
+    }
+  }
+
+  String? validateLastName(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Bitte den Nachnamen angeben";
+    } else if (input.length > 60) {
+      return "Der angegebene Nachname ist zu lang";
+    } else {
+      return null;
+    }
+  }
 }

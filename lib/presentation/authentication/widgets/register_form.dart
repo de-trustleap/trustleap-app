@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/presentation/authentication/widgets/auth_button.
 import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -29,6 +30,7 @@ class _RegisterFormState extends State<RegisterForm> {
   bool showError = false;
   String errorMessage = "";
   bool validationHasError = false;
+  double textFieldSpacing = 20;
 
   @override
   void dispose() {
@@ -47,6 +49,7 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return BlocConsumer<SignInBloc, SignInState>(
       listener: (context, state) {
@@ -55,7 +58,6 @@ class _RegisterFormState extends State<RegisterForm> {
             (eitherFailureOrSuccess) => eitherFailureOrSuccess.fold((failure) {
                   errorMessage = AuthFailureMapper.mapFailureMessage(failure);
                   showError = true;
-                  print("ERRORMESSAGE2: $errorMessage");
                 }, (_) {
                   showError = false;
                   BlocProvider.of<AuthBloc>(context)
@@ -82,6 +84,47 @@ class _RegisterFormState extends State<RegisterForm> {
                           fontWeight: FontWeight.w500,
                           letterSpacing: 4)),
                   const SizedBox(height: 80),
+                  ResponsiveRowColumn(
+                    layout: responsiveValue.largerThan(MOBILE)
+                        ? ResponsiveRowColumnType.ROW
+                        : ResponsiveRowColumnType.COLUMN,
+                    children: [
+                      ResponsiveRowColumnItem(
+                          child: SizedBox(
+                        width: responsiveValue.largerThan(MOBILE)
+                            ? (230 - textFieldSpacing / 2)
+                            : 460,
+                        child: TextFormField(
+                          controller: firstNameTextController,
+                          onChanged: (_) {
+                            resetError();
+                          },
+                          validator: validator.validateFirstName,
+                          decoration:
+                              const InputDecoration(labelText: "Vorname"),
+                        ),
+                      )),
+                      ResponsiveRowColumnItem(
+                          child: SizedBox(height: 20, width: textFieldSpacing)),
+                      ResponsiveRowColumnItem(
+                        child: SizedBox(
+                          width: responsiveValue.largerThan(MOBILE)
+                              ? (230 - textFieldSpacing / 2)
+                              : 460,
+                          child: TextFormField(
+                            controller: lastNameTextController,
+                            onChanged: (_) {
+                              resetError();
+                            },
+                            validator: validator.validateLastName,
+                            decoration:
+                                const InputDecoration(labelText: "Nachname"),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 20),
                   TextFormField(
                     controller: emailTextController,
                     onChanged: (_) {
@@ -111,7 +154,8 @@ class _RegisterFormState extends State<RegisterForm> {
                           val, passwordTextController.text);
                     },
                     obscureText: true,
-                    decoration: const InputDecoration(labelText: "Passwort"),
+                    decoration:
+                        const InputDecoration(labelText: "Passwort bestätigen"),
                   ),
                   const SizedBox(height: 20),
                   AuthButton(
