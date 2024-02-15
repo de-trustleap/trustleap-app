@@ -18,6 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthCheckRequestedEvent>((event, emit) async {
+      emit(AuthStateLoading());
       final userOption = authRepo.getSignedInUser();
       userOption.fold(() => emit(AuthStateUnAuthenticated()),
           (a) => emit(AuthStateAuthenticated()));

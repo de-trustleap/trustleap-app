@@ -20,6 +20,7 @@ class AppRouter {
   AppRouter._internal();
 
   RouteMap getRoutes(bool isAuthenticated) {
+    print("ISAUTHENTICATED: $isAuthenticated");
     if (isAuthenticated) {
       return RouteMap(
           onUnknownRoute: (route) {

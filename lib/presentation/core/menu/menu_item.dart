@@ -34,7 +34,7 @@ class MenuItem extends StatelessWidget {
                 onTap: () {
                   BlocProvider.of<MenuBloc>(context).add(
                       SelectedMenuItemChangedEvent(selectedMenuItem: type));
-                  Routemaster.of(context).push(path);
+                  Routemaster.of(context).replace(path);
                 },
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),

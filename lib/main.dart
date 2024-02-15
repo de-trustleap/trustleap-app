@@ -48,11 +48,12 @@ class MyApp extends StatelessWidget {
           routeInformationParser: const RoutemasterParser(),
           routerDelegate: RoutemasterDelegate(
               routesBuilder: (context) =>
+                  // TODO: Auf isAuthenticated muss hier gewartet werden sonst ist es am Anfang immer false. Hierfür einen Loading State in den Bloc packen und wenn Loading aktiv ist dann Inidcator anzeigen anstatt der MaterialApp.
                   AppRouter().getRoutes(isAuthenticated)),
           title: 'Finanzbegleiter',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.dark,
           debugShowCheckedModeBanner: false,
           builder: (context, widget) =>
               ResponsiveBreakpoints.builder(child: widget!, breakpoints: const [
