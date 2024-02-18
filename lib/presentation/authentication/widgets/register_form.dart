@@ -1,7 +1,6 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/user/user_bloc.dart';
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:routemaster/routemaster.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -43,6 +41,14 @@ class _RegisterFormState extends State<RegisterForm> {
   void dispose() {
     emailTextController.dispose();
     passwordTextController.dispose();
+    passwordRepeatTextController.dispose();
+    firstNameTextController.dispose();
+    lastNameTextController.dispose();
+    birthDateTextController.dispose();
+    streetAndNumberTextController.dispose();
+    plzTextController.dispose();
+    placeTextController.dispose();
+
     super.dispose();
   }
 
@@ -85,9 +91,6 @@ class _RegisterFormState extends State<RegisterForm> {
           }),
           BlocListener<UserBloc, UserState>(listener: (context, state) {
             BlocProvider.of<AuthBloc>(context).add(AuthCheckRequestedEvent());
-            Routemaster.of(context)
-                .replace(RoutePaths.initialPath); // TODO: ROUTING IST KAPUTT!!!
-            print("ROUTE REPLACED!");
           })
         ],
         child: BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
