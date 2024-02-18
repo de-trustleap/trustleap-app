@@ -29,6 +29,8 @@ class AppRouter {
           routes: {
             RoutePaths.initialPath: (_) =>
                 const Redirect(RoutePaths.dashboardPath),
+            RoutePaths.registerPath: (_) =>
+                const Redirect(RoutePaths.dashboardPath),
             RoutePaths.dashboardPath: (_) =>
                 const MaterialPage(child: DashboardPage()),
             RoutePaths.profilePath: (_) =>
@@ -40,7 +42,7 @@ class AppRouter {
             RoutePaths.landingPagePath: (_) =>
                 const MaterialPage(child: LandingPage()),
             RoutePaths.activitiesPath: (_) =>
-                const MaterialPage(child: ActivityPage())
+                const MaterialPage(child: ActivityPage()),
           });
     } else {
       return RouteMap(

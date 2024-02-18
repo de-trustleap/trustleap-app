@@ -4,7 +4,7 @@ import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
-import 'package:finanzbegleiter/infrastructure/models/firebase_user_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/extensions/firebase_user_mapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepositoryImplementation implements AuthRepository {
@@ -15,12 +15,12 @@ class AuthRepositoryImplementation implements AuthRepository {
   });
 
   @override
-  Future<Either<AuthFailure, Unit>> loginWithEmailAndPassword(
+  Future<Either<AuthFailure, UserCredential>> loginWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      await firebaseAuth.signInWithEmailAndPassword(
+      final creds = await firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return right(unit);
+      return right(creds);
     } on FirebaseAuthException catch (e) {
       final String code =
           FirebaseExceptionParser.parseFirebaseAuthExceptionMessage(
@@ -42,12 +42,12 @@ class AuthRepositoryImplementation implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
+  Future<Either<AuthFailure, UserCredential>> registerWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      await firebaseAuth.createUserWithEmailAndPassword(
+      final creds = await firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return right(unit);
+      return right(creds);
     } on FirebaseAuthException catch (e) {
       final String code =
           FirebaseExceptionParser.parseFirebaseAuthExceptionMessage(

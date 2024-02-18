@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/user/user_bloc.dart';
 import 'package:finanzbegleiter/injection.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_form.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,11 @@ class RegisterPage extends StatelessWidget {
         body: Center(
             child: Container(
                 constraints: const BoxConstraints(maxWidth: 500),
-                child: BlocProvider(
-                  create: (context) => sl<SignInBloc>(),
+                child: MultiBlocProvider(
+                  providers: [
+                    BlocProvider(create: (context) => sl<SignInBloc>()),
+                    BlocProvider(create: (context) => sl<UserBloc>())
+                  ],
                   child: const RegisterForm(),
                 ))));
   }

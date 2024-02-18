@@ -8,10 +8,8 @@ class RegisterWithEmailAndPasswordPressed extends SignInEvent {
   final String? email;
   final String? password;
 
-  RegisterWithEmailAndPasswordPressed({
-    required this.email,
-    required this.password,
-  });
+  RegisterWithEmailAndPasswordPressed(
+      {required this.email, required this.password});
 }
 
 class LoginWithEmailAndPasswordPressed extends SignInEvent {

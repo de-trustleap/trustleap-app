@@ -26,12 +26,20 @@ class _LoginFormState extends State<LoginForm> {
 
   bool showError = false;
   String errorMessage = "";
+  bool validationHasError = false;
 
   @override
   void dispose() {
     emailTextController.dispose();
     passwordTextController.dispose();
     super.dispose();
+  }
+
+  void resetError() {
+    setState(() {
+      showError = false;
+      errorMessage = "";
+    });
   }
 
   @override
@@ -76,10 +84,7 @@ class _LoginFormState extends State<LoginForm> {
                   TextFormField(
                     controller: emailTextController,
                     onChanged: (_) {
-                      setState(() {
-                        showError = false;
-                        errorMessage = "";
-                      });
+                      resetError();
                     },
                     validator: validator.validateEmail,
                     decoration: const InputDecoration(labelText: "E-Mail"),
@@ -88,10 +93,7 @@ class _LoginFormState extends State<LoginForm> {
                   TextFormField(
                     controller: passwordTextController,
                     onChanged: (_) {
-                      setState(() {
-                        showError = false;
-                        errorMessage = "";
-                      });
+                      resetError();
                     },
                     validator: validator.validatePassword,
                     obscureText: true,
@@ -102,11 +104,13 @@ class _LoginFormState extends State<LoginForm> {
                       title: "Anmelden",
                       onTap: () {
                         if (formKey.currentState!.validate()) {
+                          validationHasError = false;
                           BlocProvider.of<SignInBloc>(context).add(
                               LoginWithEmailAndPasswordPressed(
                                   email: emailTextController.text,
                                   password: passwordTextController.text));
                         } else {
+                          validationHasError = true;
                           BlocProvider.of<SignInBloc>(context).add(
                               LoginWithEmailAndPasswordPressed(
                                   email: null, password: null));
@@ -130,7 +134,8 @@ class _LoginFormState extends State<LoginForm> {
                   ],
                   if (errorMessage != "" &&
                       showError &&
-                      !state.isSubmitting) ...[
+                      !state.isSubmitting &&
+                      !validationHasError) ...[
                     const SizedBox(height: 20),
                     AuthErrorView(message: errorMessage)
                   ]
