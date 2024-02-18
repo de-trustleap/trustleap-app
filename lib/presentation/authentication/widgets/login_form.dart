@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/auth_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
@@ -18,7 +19,6 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final validator = AuthValidator();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final emailTextController = TextEditingController();
@@ -45,6 +45,8 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+    final validator = AuthValidator(localization: localization);
 
     return BlocConsumer<SignInBloc, SignInState>(
       listener: (context, state) {
@@ -69,13 +71,13 @@ class _LoginFormState extends State<LoginForm> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: [
                   const SizedBox(height: 80),
-                  Text("Willkommen",
+                  Text(localization.login_title,
                       style: themeData.textTheme.headlineLarge!.copyWith(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 4)),
                   const SizedBox(height: 20),
-                  Text("Melde dich an oder registriere dich.",
+                  Text(localization.login_subtitle,
                       style: themeData.textTheme.headlineLarge!.copyWith(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -87,7 +89,8 @@ class _LoginFormState extends State<LoginForm> {
                       resetError();
                     },
                     validator: validator.validateEmail,
-                    decoration: const InputDecoration(labelText: "E-Mail"),
+                    decoration:
+                        InputDecoration(labelText: localization.login_email),
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
@@ -97,11 +100,12 @@ class _LoginFormState extends State<LoginForm> {
                     },
                     validator: validator.validatePassword,
                     obscureText: true,
-                    decoration: const InputDecoration(labelText: "Passwort"),
+                    decoration:
+                        InputDecoration(labelText: localization.login_password),
                   ),
                   const SizedBox(height: 20),
                   AuthButton(
-                      title: "Anmelden",
+                      title: localization.login_login_buttontitle,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           validationHasError = false;

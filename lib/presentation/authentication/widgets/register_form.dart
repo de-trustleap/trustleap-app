@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/application/authentication/user/user_bloc.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/auth_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
@@ -20,7 +21,6 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  final validator = AuthValidator();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final emailTextController = TextEditingController();
@@ -62,7 +62,9 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final validator = AuthValidator(localization: localization);
     const double textFieldSpacing = 20;
 
     return MultiBlocListener(
@@ -101,13 +103,13 @@ class _RegisterFormState extends State<RegisterForm> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   children: [
                     const SizedBox(height: 80),
-                    Text("Registrieren",
+                    Text(localization.register_title,
                         style: themeData.textTheme.headlineLarge!.copyWith(
                             fontSize: 50,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 4)),
                     const SizedBox(height: textFieldSpacing),
-                    Text("Registriere dich jetzt um den Service zu nutzen",
+                    Text(localization.register_subtitle,
                         style: themeData.textTheme.headlineLarge!.copyWith(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -129,8 +131,8 @@ class _RegisterFormState extends State<RegisterForm> {
                               resetError();
                             },
                             validator: validator.validateFirstName,
-                            decoration:
-                                const InputDecoration(labelText: "Vorname"),
+                            decoration: InputDecoration(
+                                labelText: localization.register_firstname),
                           ),
                         )),
                         const ResponsiveRowColumnItem(
@@ -148,8 +150,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                 resetError();
                               },
                               validator: validator.validateLastName,
-                              decoration:
-                                  const InputDecoration(labelText: "Nachname"),
+                              decoration: InputDecoration(
+                                  labelText: localization.register_lastname),
                             ),
                           ),
                         )
@@ -162,9 +164,10 @@ class _RegisterFormState extends State<RegisterForm> {
                           resetError();
                         },
                         validator: validator.validateBirthDate,
-                        decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.calendar_today_rounded),
-                            labelText: "Geburtsdatum"),
+                        decoration: InputDecoration(
+                            prefixIcon:
+                                const Icon(Icons.calendar_today_rounded),
+                            labelText: localization.register_birthdate),
                         onTap: () async {
                           DateTime? pickedDate = await showDatePicker(
                               context: context,
@@ -184,8 +187,8 @@ class _RegisterFormState extends State<RegisterForm> {
                       onChanged: (_) {
                         resetError();
                       },
-                      decoration: const InputDecoration(
-                          labelText: "Straße u. Hausnummer (optional)"),
+                      decoration: InputDecoration(
+                          labelText: localization.register_address),
                     ),
                     const SizedBox(height: textFieldSpacing),
                     Row(children: [
@@ -196,8 +199,8 @@ class _RegisterFormState extends State<RegisterForm> {
                           onChanged: (_) {
                             resetError();
                           },
-                          decoration: const InputDecoration(
-                              labelText: "PLZ (optional)"),
+                          decoration: InputDecoration(
+                              labelText: localization.register_postcode),
                         ),
                       ),
                       const SizedBox(width: textFieldSpacing),
@@ -208,8 +211,8 @@ class _RegisterFormState extends State<RegisterForm> {
                           onChanged: (_) {
                             resetError();
                           },
-                          decoration: const InputDecoration(
-                              labelText: "Ort (optional)"),
+                          decoration: InputDecoration(
+                              labelText: localization.register_place),
                         ),
                       ),
                     ]),
@@ -220,7 +223,8 @@ class _RegisterFormState extends State<RegisterForm> {
                         resetError();
                       },
                       validator: validator.validateEmail,
-                      decoration: const InputDecoration(labelText: "E-Mail"),
+                      decoration: InputDecoration(
+                          labelText: localization.register_email),
                     ),
                     const SizedBox(height: textFieldSpacing),
                     TextFormField(
@@ -230,7 +234,8 @@ class _RegisterFormState extends State<RegisterForm> {
                       },
                       validator: validator.validatePassword,
                       obscureText: true,
-                      decoration: const InputDecoration(labelText: "Passwort"),
+                      decoration: InputDecoration(
+                          labelText: localization.register_password),
                     ),
                     const SizedBox(height: textFieldSpacing),
                     TextFormField(
@@ -243,12 +248,12 @@ class _RegisterFormState extends State<RegisterForm> {
                             val, passwordTextController.text);
                       },
                       obscureText: true,
-                      decoration: const InputDecoration(
-                          labelText: "Passwort bestätigen"),
+                      decoration: InputDecoration(
+                          labelText: localization.register_repeat_password),
                     ),
                     const SizedBox(height: textFieldSpacing),
                     AuthButton(
-                        title: "Registrieren",
+                        title: localization.register_now_buttontitle,
                         onTap: () {
                           if (formKey.currentState!.validate()) {
                             validationHasError = false;

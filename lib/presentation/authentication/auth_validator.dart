@@ -1,20 +1,27 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+
 class AuthValidator {
+  final AppLocalizations localization;
+
+  AuthValidator({required this.localization});
+
   String? validateEmail(String? input) {
     const emailRegex =
         r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
 
     if (input == null || input.isEmpty) {
-      return "Please enter email";
+      return localization.auth_validation_missing_email;
     } else if (RegExp(emailRegex).hasMatch(input)) {
       return null;
     } else {
-      return "Ungültige E-Mail Adresse";
+      return localization.auth_validation_invalid_email;
     }
   }
 
   String? validatePassword(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte ein Password angeben";
+      return localization.auth_validation_missing_password;
     } else {
       return null;
     }
@@ -22,9 +29,9 @@ class AuthValidator {
 
   String? validatePasswordRepeat(String? input, String? otherPassword) {
     if (input == null || input.isEmpty) {
-      return "Bitte das Passwort bestätigen";
+      return localization.auth_validation_confirm_password;
     } else if (otherPassword != input) {
-      return "Die Passwörter stimmen nicht überein";
+      return localization.auth_validation_matching_passwords;
     } else {
       return null;
     }
@@ -32,9 +39,9 @@ class AuthValidator {
 
   String? validateFirstName(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte den Vornamen angeben";
+      return localization.auth_validation_missing_firstname;
     } else if (input.length > 60) {
-      return "Der angegebene Vorname ist zu lang";
+      return localization.auth_validation_long_firstname;
     } else {
       return null;
     }
@@ -42,9 +49,9 @@ class AuthValidator {
 
   String? validateLastName(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte den Nachnamen angeben";
+      return localization.auth_validation_missing_lastname;
     } else if (input.length > 60) {
-      return "Der angegebene Nachname ist zu lang";
+      return localization.auth_validation_long_lastname;
     } else {
       return null;
     }
@@ -52,9 +59,9 @@ class AuthValidator {
 
   String? validateBirthDate(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte das Geburtsdatum angeben";
+      return localization.auth_validation_missing_birthdate;
     } else if (!_isAdult(DateTime.parse(_prepareDateStringForParser(input)))) {
-      return "Sie müssen 18 oder älter sein";
+      return localization.auth_validation_invalid_birthdate;
     } else {
       return null;
     }
