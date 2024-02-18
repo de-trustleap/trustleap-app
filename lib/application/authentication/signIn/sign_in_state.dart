@@ -4,7 +4,7 @@ part of 'sign_in_bloc.dart';
 class SignInState {
   final bool isSubmitting;
   final bool showValidationMessages;
-  final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
+  final Option<Either<AuthFailure, UserCredential>> authFailureOrSuccessOption;
 
   SignInState(
       {required this.isSubmitting,
@@ -14,7 +14,8 @@ class SignInState {
   SignInState copyWith(
       {bool? isSubmitting,
       bool? showValidationMessages,
-      Option<Either<AuthFailure, Unit>>? authFailureOrSuccessOption}) {
+      Option<Either<AuthFailure, UserCredential>>?
+          authFailureOrSuccessOption}) {
     return SignInState(
         isSubmitting: isSubmitting ?? this.isSubmitting,
         showValidationMessages:

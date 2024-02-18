@@ -49,4 +49,29 @@ class AuthValidator {
       return null;
     }
   }
+
+  String? validateBirthDate(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Bitte das Geburtsdatum angeben";
+    } else if (!_isAdult(DateTime.parse(_prepareDateStringForParser(input)))) {
+      return "Sie müssen 18 oder älter sein";
+    } else {
+      return null;
+    }
+  }
+
+  bool _isAdult(DateTime date) {
+    final DateTime today = DateTime.now();
+    final DateTime adultDate = DateTime(
+      date.year + 18,
+      date.month,
+      date.day,
+    );
+    return adultDate.isBefore(today);
+  }
+
+  String _prepareDateStringForParser(String input) {
+    final splitted = input.split(".").reversed;
+    return splitted.join("");
+  }
 }
