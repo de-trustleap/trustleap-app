@@ -12,14 +12,12 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: Container(
-                constraints: const BoxConstraints(maxWidth: 500),
-                child: MultiBlocProvider(
-                  providers: [
-                    BlocProvider(create: (context) => sl<SignInBloc>()),
-                    BlocProvider(create: (context) => sl<UserBloc>())
-                  ],
-                  child: const RegisterForm(),
-                ))));
+            child: MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => sl<SignInBloc>()),
+        BlocProvider(create: (context) => sl<UserBloc>())
+      ],
+      child: const RegisterForm(),
+    )));
   }
 }
