@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           title: 'Finanzbegleiter',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          themeMode: ThemeMode.dark,
+          themeMode: ThemeMode.light,
           supportedLocales: L10n.all,
           locale: const Locale("de"),
           localizationsDelegates: const [
