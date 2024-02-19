@@ -4,10 +4,13 @@ import 'package:finanzbegleiter/approuter.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
 import 'package:finanzbegleiter/injection.dart' as di;
 import 'package:finanzbegleiter/injection.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/l10n/l10n.dart';
 import 'package:finanzbegleiter/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -54,6 +57,14 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.dark,
+          supportedLocales: L10n.all,
+          locale: const Locale("de"),
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate
+          ],
           debugShowCheckedModeBanner: false,
           builder: (context, widget) =>
               ResponsiveBreakpoints.builder(child: widget!, breakpoints: const [

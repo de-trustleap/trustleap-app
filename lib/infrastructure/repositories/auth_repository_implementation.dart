@@ -18,10 +18,12 @@ class AuthRepositoryImplementation implements AuthRepository {
   Future<Either<AuthFailure, UserCredential>> loginWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      final creds = await firebaseAuth.createUserWithEmailAndPassword(
+      final creds = await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       return right(creds);
     } on FirebaseAuthException catch (e) {
+      final message = e.message;
+      print("AUTHFAILURE: $message");
       final String code =
           FirebaseExceptionParser.parseFirebaseAuthExceptionMessage(
               input: e.message);

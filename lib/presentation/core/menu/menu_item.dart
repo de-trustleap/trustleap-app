@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/menu/menu_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
@@ -22,6 +23,24 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+
+    String getLocalizedMenuItem() {
+      switch (type) {
+        case MenuItems.profile:
+          return localization.menuitems_profile;
+        case MenuItems.dashboard:
+          return localization.menuitems_dashboard;
+        case MenuItems.recommendations:
+          return localization.menuitems_recommendations;
+        case MenuItems.promoters:
+          return localization.menuitems_promoters;
+        case MenuItems.landingpage:
+          return localization.menuitems_landingpage;
+        case MenuItems.activities:
+          return localization.menuitems_activities;
+      }
+    }
 
     return BlocProvider.value(
       value: BlocProvider.of<MenuBloc>(context),
@@ -53,7 +72,7 @@ class MenuItem extends StatelessWidget {
                                   ? themeData.colorScheme.background
                                   : themeData.iconTheme.color),
                           const SizedBox(width: 12),
-                          Text(type.value,
+                          Text(getLocalizedMenuItem(),
                               style: selectedMenuItem == type
                                   ? themeData.textTheme.headlineLarge!.copyWith(
                                       color: themeData.colorScheme.background)

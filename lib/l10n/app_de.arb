@@ -1,0 +1,179 @@
+{
+    "@@locale": "de",
+    "register_title": "Registrieren",
+    "@register_title": {
+        "description": "Überschrift der Registrieren Seite"
+    },
+    "register_subtitle": "Registriere dich jetzt um den Service zu nutzen.",
+    "@register_subtitle": {
+        "description": "Der Untertitel der Registrieren Seite"
+    },
+    "register_firstname": "Vorname",
+    "@register_firstname": {
+        "description": "Der Vorname im Registrierungsformular"
+    },
+    "register_lastname": "Name",
+    "@register_lastname": {
+        "description": "Der Nachname im Registrierungsformular"
+    },
+    "register_birthdate": "Geburtsdatum",
+    "@register_birthdate": {
+        "description": "Das Geburtsdatum im Registrierungsformular"
+    },
+    "register_address": "Straße u. Hausnummer (optional)",
+    "@register_address": {
+        "description": "Die Adresse im Registrierungsformular"
+    },
+    "register_postcode": "PLZ (optional)",
+    "@register_postcode": {
+        "description": "Die PLZ im Registrierungsformular"
+    },
+    "register_place": "Ort (optional)",
+    "@register_place": {
+        "description": "Der Wohnort im Registrierungsformular"
+    },
+    "register_email": "E-Mail",
+    "@register_email": {
+        "description": "Die E-Mail Adresse im Registrierungsformular"
+    },
+    "register_password": "Passwort",
+    "@register_password": {
+        "description": "Das Password im Registrierungsformular"
+    },
+    "register_repeat_password": "Passwort bestätigen",
+    "@register_repeat_password": {
+        "description": "Das bestätigte Passwort im Registrierungsformular"
+    },
+    "register_now_buttontitle": "Jetzt Registrieren",
+    "@register_now_buttontitle": {
+        "description": "Der Button Text für die Registrierung"
+    },
+    "login_title": "Willkommen",
+    "@login_title": {
+        "description": "Die Überschrift der Login Seite"
+    },
+    "login_subtitle": "Melde dich an oder registriere dich.",
+    "@login_subtitle": {
+        "description": "Der Untertitel der Login Seite"
+    },
+    "login_email": "E-Mail",
+    "@login_email": {
+        "description": "Email Feld auf der Login Seite"
+    },
+    "login_password": "Passwort",
+    "@login_password": {
+        "description": "Password Feld auf der Login Seite"
+    },
+    "login_login_buttontitle": "Anmelden",
+    "@login_login_buttontitle": {
+        "description": "Titel des Login Buttons auf der Login Seite"
+    },
+    "login_register_linktitle": "Jetzt registrieren",
+    "@login_register_linktitle": {
+        "description": "Registrieren Link auf der Login Seite der zur Registrierung führt"
+    },
+    "login_register_text": "Du hast kein Konto? ",
+    "@login_register_text": {
+        "description": "Registrieren Text auf der Login Seite"
+    },
+    "auth_validation_missing_email": "Gib bitte eine E-Mail Adresse an",
+    "@auth_validation_missing_email": {
+        "description": "Validierungsnachricht wenn keine E-Mail angegeben wurde"
+    },
+    "auth_validation_invalid_email": "Ungültige E-Mail Adresse",
+    "@auth_validation_invalid_email": {
+        "description": "Validierungsnachricht wenn die E-Mail ungültig ist"
+    },
+    "auth_validation_missing_password": "Bitte ein Password angeben",
+    "@auth_validation_missing_password": {
+        "description": "Validierungsnachricht wenn kein Passwort angegeben wurde"
+    },
+    "auth_validation_confirm_password": "Bitte das Passwort bestätigen",
+    "@auth_validation_confirm_password": {
+        "description": "Validierungsnachricht wenn kein Bestätigungspasswort angegeben wurde"
+    },
+    "auth_validation_matching_passwords": "Die Passwörter stimmen nicht überein",
+    "@auth_validation_matching_passwords": {
+        "description": "Validierungsnachricht wenn Passwörter nicht übereinstimmen"
+    },
+    "auth_validation_missing_firstname": "Bitte den Vornamen angeben",
+    "@auth_validation_missing_firstname": {
+        "description": "Validierungsnachricht wenn kein Vorname angegeben wurde"
+    },
+    "auth_validation_long_firstname": "Der angegebene Vorname ist zu lang",
+    "@auth_validation_long_firstname": {
+        "description": "Validierungsnachricht wenn Vorname zu lang ist"
+    },
+    "auth_validation_missing_lastname": "Bitte den Nachnamen angeben",
+    "@auth_validation_missing_lastname": {
+        "description": "Validierungsnachricht wenn kein Nachname angegeben wurde"
+    },
+    "auth_validation_long_lastname": "Der angegebene Nachname ist zu lang",
+    "@auth_validation_long_lastname": {
+        "description": "Validierungsnachricht wenn Nachname zu lang ist"
+    },
+    "auth_validation_missing_birthdate": "Bitte das Geburtsdatum angeben",
+    "@auth_validation_missing_birthdate": {
+        "description": "Validierungsnachricht wenn kein Geburtsdatum angegeben wurde"
+    },
+    "auth_validation_invalid_birthdate": "Sie müssen 18 oder älter sein",
+    "@auth_validation_invalid_birthdate": {
+        "description": "Validierungsnachricht wenn Geburtdatum ungültig ist"
+    },
+    "authfailure_email_already_in_use": "Die E-Mail Adresse ist bereits vergeben.",
+    "@authfailure_email_already_in_use": {
+        "description": "Fehlermeldung wenn E-Mail bereits existiert"
+    },
+    "authfailure_invalid_email": "Die eingegebene E-Mail Adresse ist ungültig.",
+    "@authfailure_invalid_email": {
+        "description": "Fehlermeldung wenn E-Mail ungültig ist"
+    },
+    "authfailure_weak_password": "Das angegebene Passwort ist zu schwach. Bitte nutze mindestens 6 Zeichen.",
+    "@authfailure_weak_password": {
+        "description": "Fehlermeldung wenn Passwort zu schwach ist"
+    },
+    "authfailure_user_disabled": "Der angegebene Nutzername ist gesperrt.",
+    "@authfailure_user_disabled": {
+        "description": "Fehlermeldung wenn der angegebene Nutzer gesperrt ist"
+    },
+    "authfailure_user_not_found": "Der angegebene Nutzername existiert nicht.",
+    "@authfailure_user_not_found": {
+        "description": "Fehlermeldung wenn der angegebene Nutzer nicht existiert"
+    },
+    "authfailure_wrong_password": "Das angegebene Passwort ist falsch.",
+    "@authfailure_wrong_password": {
+        "description": "Fehlermeldung wenn ein falsches Passwort eingegeben wurde"
+    },
+    "authfailure_invalid_credentials": "Deine Zugangsdaten existieren nicht.",
+    "@authfailure_invalid_credentials": {
+        "description": "Fehlermeldung wenn die Zugangsdaten nicht existieren"
+    },
+    "authfailure_unknown": "Ein unbekannter Fehler ist aufgetreten.",
+    "@authfailure_unknown": {
+        "description": "Fehlermeldung wenn ein unbekannter Fehler aufgetreten ist"
+    },
+    "menuitems_profile": "Profil",
+    "@menuitems_profile": {
+        "description": "Der Menüpunkt für das Profil"
+    },
+    "menuitems_dashboard": "Dashboard",
+    "@menuitems_dashboard": {
+        "description": "Der Menüpunkt für das Dashboard"
+    },
+    "menuitems_recommendations": "Empfehlungen",
+    "@menuitems_recommendations": {
+        "description": "Der Menüpunkt für die Empfehlungen"
+    },
+    "menuitems_promoters": "Promoter",
+    "@menuitems_promoters": {
+        "description": "Der Menüpunkt für die Promoter"
+    },
+    "menuitems_landingpage": "Landingpage",
+    "@menuitems_landingpage": {
+        "description": "Der Menüpunkt für die Landingpage"
+    },
+    "menuitems_activities": "Aktivitäten",
+    "@menuitems_activities": {
+        "description": "Der Menüpunkt für die Aktivitäten"
+    }
+}

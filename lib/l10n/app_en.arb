@@ -1,0 +1,179 @@
+{
+    "@@locale": "en",
+    "register_title": "Register",
+    "@register_title": {
+        "description": "Caption of the register page"
+    },
+    "register_subtitle": "Registriere now to use our service.",
+    "@register_subtitle": {
+        "description": "The subtitle of the register page"
+    },
+    "register_firstname": "firstname",
+    "@register_firstname": {
+        "description": "The firstname in the register form"
+    },
+    "register_lastname": "lastname",
+    "@register_lastname": {
+        "description": "The lastname in the register form"
+    },
+    "register_birthdate": "birthdate",
+    "@register_birthdate": {
+        "description": "The birthdate in the register form"
+    },
+    "register_address": "address (optional)",
+    "@register_address": {
+        "description": "The address in the register form"
+    },
+    "register_postcode": "postcode (optional)",
+    "@register_postcode": {
+        "description": "The postcode in the register form"
+    },
+    "register_place": "place (optional)",
+    "@register_place": {
+        "description": "The living place in the register form"
+    },
+    "register_email": "email address",
+    "@register_email": {
+        "description": "The email address in the register form"
+    },
+    "register_password": "password",
+    "@register_password": {
+        "description": "The password in the register form"
+    },
+    "register_repeat_password": "confirm password",
+    "@register_repeat_password": {
+        "description": "The confirmed password in the register form"
+    },
+    "register_now_buttontitle": "Rgister now",
+    "@register_now_buttontitle": {
+        "description": "The button text for the registration"
+    },
+    "login_title": "Welcome",
+    "@login_title": {
+        "description": "The title of the login page"
+    },
+    "login_subtitle": "Please login or register.",
+    "@login_subtitle": {
+        "description": "The subtitle of the login page"
+    },
+    "login_email": "email address",
+    "@login_email": {
+        "description": "email address field of the login form on the login page"
+    },
+    "login_password": "password",
+    "@login_password": {
+        "description": "password field of the login form on the login page"
+    },
+    "login_login_buttontitle": "Login",
+    "@login_login_buttontitle": {
+        "description": "Title of the login button on the login page"
+    },
+    "login_register_linktitle": "Register now",
+    "@login_register_linktitle": {
+        "description": "Register link on the login page which leads to the register page"
+    },
+    "login_register_text": "You don''t have an account? ",
+    "@login_register_text": {
+        "description": "Register text on the login page"
+    },
+    "auth_validation_missing_email": "Please enter an email address",
+    "@auth_validation_missing_email": {
+        "description": "validationmessage when no email was entered"
+    },
+    "auth_validation_invalid_email": "Invalid email address",
+    "@auth_validation_invalid_email": {
+        "description": "validationmessage when email is invalid"
+    },
+    "auth_validation_missing_password": "Please enter a password",
+    "@auth_validation_missing_password": {
+        "description": "validationmessage when no password was entered"
+    },
+    "auth_validation_confirm_password": "Please confirm the password",
+    "@auth_validation_confirm_password": {
+        "description": "validationmessage when no confirmation password was entered"
+    },
+    "auth_validation_matching_passwords": "The passwords don''t match",
+    "@auth_validation_matching_passwords": {
+        "description": "validationmessage when passwords not match"
+    },
+    "auth_validation_missing_firstname": "Please enter firstname",
+    "@auth_validation_missing_firstname": {
+        "description": "validationmessage when no firstname was entered"
+    },
+    "auth_validation_long_firstname": "The entered firstname is too long",
+    "@auth_validation_long_firstname": {
+        "description": "validationmessage when firstname is too long"
+    },
+    "auth_validation_missing_lastname": "Please enter lastname",
+    "@auth_validation_missing_lastname": {
+        "description": "validationmessage when no lastname was entered"
+    },
+    "auth_validation_long_lastname": "The entered lastname is too long",
+    "@auth_validation_long_lastname": {
+        "description": "validationmessage when lastname is too long"
+    },
+    "auth_validation_missing_birthdate": "Please enter birthdate",
+    "@auth_validation_missing_birthdate": {
+        "description": "validationmessage when no birthdate was entered"
+    },
+    "auth_validation_invalid_birthdate": "You must be 18 or older",
+    "@auth_validation_invalid_birthdate": {
+        "description": "validationmessage when birthdate is invalid"
+    },
+    "authfailure_email_already_in_use": "The email address is already in use.",
+    "@authfailure_email_already_in_use": {
+        "description": "error message when email is already in use"
+    },
+    "authfailure_invalid_email": "The entered email adress is invalid.",
+    "@authfailure_invalid_email": {
+        "description": "error message when email is invalid"
+    },
+    "authfailure_weak_password": "The entered password is too weak. Please use at least 6 characters.",
+    "@authfailure_weak_password": {
+        "description": "error message when password is too weak"
+    },
+    "authfailure_user_disabled": "The user is disabled.",
+    "@authfailure_user_disabled": {
+        "description": "error message when the user is disabled"
+    },
+    "authfailure_user_not_found": "The user doesn''t exist.",
+    "@authfailure_user_not_found": {
+        "description": "error message when the user doesn''t exist"
+    },
+    "authfailure_wrong_password": "The entered password is wrong.",
+    "@authfailure_wrong_password": {
+        "description": "error message when a wrong password was entered"
+    },
+    "authfailure_invalid_credentials": "Your credentials are invalid.",
+    "@authfailure_invalid_credentials": {
+        "description": "error message when invalid credentials have been entered"
+    },
+    "authfailure_unknown": "An unknown error occured.",
+    "@authfailure_unknown": {
+        "description": "error message when an unknown authentication error occured"
+    },
+    "menuitems_profile": "Profile",
+    "@menuitems_profile": {
+        "description": "the menu entry for the profile"
+    },
+    "menuitems_dashboard": "Dashboard",
+    "@menuitems_dashboard": {
+        "description": "the menu entry for the dashboard"
+    },
+    "menuitems_recommendations": "Recommendations",
+    "@menuitems_recommendations": {
+        "description": "the menu entry for the recommendations"
+    },
+    "menuitems_promoters": "Promoter",
+    "@menuitems_promoters": {
+        "description": "the menu entry for the promoters"
+    },
+    "menuitems_landingpage": "Landingpage",
+    "@menuitems_landingpage": {
+        "description": "the menu entry for the landingpage"
+    },
+    "menuitems_activities": "Activities",
+    "@menuitems_activities": {
+        "description": "the menu entry for the activities"
+    }
+}
