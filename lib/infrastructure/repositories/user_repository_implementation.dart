@@ -29,4 +29,10 @@ class UserRepositoryImplementation implements UserRepository {
       }
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> updateUser({required CustomUser user}) {
+    // TODO: implement updateUser
+    throw UnimplementedError();
+  }
 }

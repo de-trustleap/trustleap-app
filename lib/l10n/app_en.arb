@@ -148,6 +148,10 @@
     "@authfailure_invalid_credentials": {
         "description": "error message when invalid credentials have been entered"
     },
+    "authfailure_too_many_requests": "You have entered your login details incorrectly too many times. Try again later.",
+    "@authfailure_too_many_requests": {
+        "description": "error message when credentials has been entered incorrectly too often."
+    },
     "authfailure_unknown": "An unknown error occured.",
     "@authfailure_unknown": {
         "description": "error message when an unknown authentication error occured"

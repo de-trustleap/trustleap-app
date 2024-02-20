@@ -37,6 +37,8 @@ class AuthRepositoryImplementation implements AuthRepository {
         return left(WrongPasswordFailure());
       } else if (code == "invalid-credential") {
         return left(InvalidCredentialsFailure());
+      } else if (code == "too-many-requests") {
+        return left(TooManyRequestsFailure());
       } else {
         return left(ServerFailure());
       }

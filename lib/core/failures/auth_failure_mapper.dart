@@ -17,6 +17,8 @@ class AuthFailureMapper {
         return "Das angegebene Passwort ist falsch.";
       case == InvalidCredentialsFailure:
         return "Deine Zugangsdaten existieren nicht.";
+      case == TooManyRequestsFailure:
+        return "Du hast deine Zugangsdaten zu oft falsch eingegeben. Versuche es später noch einmal.";
       case == ServerFailure:
         return "Ein unbekannter Fehler ist aufgetreten.";
       default:
