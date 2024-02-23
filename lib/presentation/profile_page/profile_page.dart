@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/injection.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/page_template.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/error_view.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_information.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,7 +40,7 @@ class ProfilePage extends StatelessWidget {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
-                            children: [ContactInformation(user: state.user)])),
+                            children: [ContactSection(user: state.user)])),
                   ]));
             } else if (state is ProfileObserverFailure) {
               return CenteredConstrainedWrapper(

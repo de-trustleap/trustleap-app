@@ -4,8 +4,8 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_button.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +41,19 @@ class _LoginFormState extends State<LoginForm> {
       showError = false;
       errorMessage = "";
     });
+  }
+
+  void submit() {
+    if (formKey.currentState!.validate()) {
+      validationHasError = false;
+      BlocProvider.of<SignInBloc>(context).add(LoginWithEmailAndPasswordPressed(
+          email: emailTextController.text,
+          password: passwordTextController.text));
+    } else {
+      validationHasError = true;
+      BlocProvider.of<SignInBloc>(context)
+          .add(LoginWithEmailAndPasswordPressed(email: null, password: null));
+    }
   }
 
   @override
@@ -90,6 +103,7 @@ class _LoginFormState extends State<LoginForm> {
                     onChanged: (_) {
                       resetError();
                     },
+                    onFieldSubmitted: (_) => submit(),
                     validator: validator.validateEmail,
                     decoration:
                         InputDecoration(labelText: localization.login_email),
@@ -100,6 +114,7 @@ class _LoginFormState extends State<LoginForm> {
                     onChanged: (_) {
                       resetError();
                     },
+                    onFieldSubmitted: (_) => submit(),
                     validator: validator.validatePassword,
                     obscureText: true,
                     decoration:
@@ -109,18 +124,7 @@ class _LoginFormState extends State<LoginForm> {
                   PrimaryButton(
                       title: localization.login_login_buttontitle,
                       onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          validationHasError = false;
-                          BlocProvider.of<SignInBloc>(context).add(
-                              LoginWithEmailAndPasswordPressed(
-                                  email: emailTextController.text,
-                                  password: passwordTextController.text));
-                        } else {
-                          validationHasError = true;
-                          BlocProvider.of<SignInBloc>(context).add(
-                              LoginWithEmailAndPasswordPressed(
-                                  email: null, password: null));
-                        }
+                        submit();
                       }),
                   const SizedBox(height: 20),
                   RegisterButton(
@@ -137,7 +141,7 @@ class _LoginFormState extends State<LoginForm> {
                       !state.isSubmitting &&
                       !validationHasError) ...[
                     const SizedBox(height: 20),
-                    AuthErrorView(message: errorMessage)
+                    FormErrorView(message: errorMessage)
                   ]
                 ]));
       },

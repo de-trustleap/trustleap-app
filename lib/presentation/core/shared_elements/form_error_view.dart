@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-class AuthErrorView extends StatelessWidget {
+class FormErrorView extends StatelessWidget {
   final String message;
 
-  const AuthErrorView({
+  const FormErrorView({
     Key? key,
     required this.message,
   }) : super(key: key);

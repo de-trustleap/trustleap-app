@@ -3,23 +3,23 @@ import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class ContactInformation extends StatefulWidget {
+class ContactSection extends StatefulWidget {
   final CustomUser user;
 
-  const ContactInformation({required this.user, super.key});
+  const ContactSection({required this.user, super.key});
   @override
-  State<ContactInformation> createState() => _ContactInformationState();
+  State<ContactSection> createState() => _ContactSectionState();
 }
 
-class _ContactInformationState extends State<ContactInformation> {
+class _ContactSectionState extends State<ContactSection> {
   final firstNameTextController = TextEditingController();
   final lastNameTextController = TextEditingController();
   final streetTextController = TextEditingController();
@@ -27,6 +27,10 @@ class _ContactInformationState extends State<ContactInformation> {
   final placeTextController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  bool showError = false;
+  String errorMessage = "";
+  bool validationHasError = false;
 
   @override
   void initState() {
@@ -54,6 +58,29 @@ class _ContactInformationState extends State<ContactInformation> {
     super.dispose();
   }
 
+  void resetError() {
+    setState(() {
+      showError = false;
+      errorMessage = "";
+    });
+  }
+
+  void submit() {
+    if (formKey.currentState!.validate()) {
+      validationHasError = false;
+      BlocProvider.of<ProfileBloc>(context).add(UpdateProfileEvent(
+          user: widget.user.copyWith(
+              firstName: firstNameTextController.text,
+              lastName: lastNameTextController.text,
+              address: streetTextController.text,
+              postCode: postcodeTextController.text,
+              place: placeTextController.text)));
+    } else {
+      validationHasError = true;
+      BlocProvider.of<ProfileBloc>(context).add(UpdateProfileEvent(user: null));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -61,10 +88,6 @@ class _ContactInformationState extends State<ContactInformation> {
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
     const double textFieldSpacing = 20;
-
-    bool showError = false;
-    String errorMessage = "";
-    bool validationHasError = false;
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
@@ -109,6 +132,10 @@ class _ContactInformationState extends State<ContactInformation> {
                                   : maxWidth / 2,
                               child: TextFormField(
                                 controller: firstNameTextController,
+                                onFieldSubmitted: (_) => submit(),
+                                onChanged: (_) {
+                                  resetError();
+                                },
                                 validator: validator.validateFirstName,
                                 decoration:
                                     const InputDecoration(labelText: ""),
@@ -133,6 +160,10 @@ class _ContactInformationState extends State<ContactInformation> {
                                   : maxWidth / 2 - textFieldSpacing,
                               child: TextFormField(
                                 controller: lastNameTextController,
+                                onFieldSubmitted: (_) => submit(),
+                                onChanged: (_) {
+                                  resetError();
+                                },
                                 validator: validator.validateLastName,
                                 decoration:
                                     const InputDecoration(labelText: ""),
@@ -150,6 +181,10 @@ class _ContactInformationState extends State<ContactInformation> {
                     width: maxWidth,
                     child: TextFormField(
                       controller: streetTextController,
+                      onFieldSubmitted: (_) => submit(),
+                      onChanged: (_) {
+                        resetError();
+                      },
                       decoration: const InputDecoration(labelText: ""),
                     ),
                   ),
@@ -176,6 +211,10 @@ class _ContactInformationState extends State<ContactInformation> {
                               child: TextFormField(
                                 keyboardType: TextInputType.number,
                                 controller: postcodeTextController,
+                                onFieldSubmitted: (_) => submit(),
+                                onChanged: (_) {
+                                  resetError();
+                                },
                                 validator: validator.validatePostcode,
                                 decoration: const InputDecoration(
                                     labelText: "", hintText: "en"),
@@ -200,6 +239,10 @@ class _ContactInformationState extends State<ContactInformation> {
                                   : maxWidth / 2 - textFieldSpacing,
                               child: TextFormField(
                                 controller: placeTextController,
+                                onFieldSubmitted: (_) => submit(),
+                                onChanged: (_) {
+                                  resetError();
+                                },
                                 decoration:
                                     const InputDecoration(labelText: ""),
                               ),
@@ -215,21 +258,7 @@ class _ContactInformationState extends State<ContactInformation> {
                         title: "Änderungen speichern",
                         width: maxWidth / 2 - textFieldSpacing,
                         onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            validationHasError = false;
-                            BlocProvider.of<ProfileBloc>(context).add(
-                                UpdateProfileEvent(
-                                    user: widget.user.copyWith(
-                                        firstName: firstNameTextController.text,
-                                        lastName: lastNameTextController.text,
-                                        address: streetTextController.text,
-                                        postCode: postcodeTextController.text,
-                                        place: placeTextController.text)));
-                          } else {
-                            validationHasError = true;
-                            BlocProvider.of<ProfileBloc>(context)
-                                .add(UpdateProfileEvent(user: null));
-                          }
+                          submit();
                         })
                   ],
                 ),
@@ -242,7 +271,7 @@ class _ContactInformationState extends State<ContactInformation> {
                     state is ProfileFailureState &&
                     !validationHasError) ...[
                   const SizedBox(height: 20),
-                  AuthErrorView(message: errorMessage)
+                  FormErrorView(message: errorMessage)
                 ]
               ],
             ),
