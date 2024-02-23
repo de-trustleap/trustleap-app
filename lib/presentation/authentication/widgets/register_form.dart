@@ -6,8 +6,9 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/auth_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -199,6 +200,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       SizedBox(
                         width: getResponsiveWidth(1),
                         child: TextFormField(
+                            keyboardType: TextInputType.datetime,
                             controller: birthDateTextController,
                             onChanged: (_) {
                               resetError();
@@ -244,7 +246,9 @@ class _RegisterFormState extends State<RegisterForm> {
                         width:
                             getResponsiveWidth(2, shouldWrapToNextLine: false),
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           controller: plzTextController,
+                          validator: validator.validatePostcode,
                           onChanged: (_) {
                             resetError();
                           },
@@ -271,6 +275,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       SizedBox(
                         width: getResponsiveWidth(1),
                         child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
                           controller: emailTextController,
                           onChanged: (_) {
                             resetError();
@@ -320,7 +325,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: getResponsiveWidth(1),
-                        child: AuthButton(
+                        child: PrimaryButton(
                             title: localization.register_now_buttontitle,
                             onTap: () {
                               if (formKey.currentState!.validate()) {
@@ -340,13 +345,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     ]),
                     if (state.isSubmitting) ...[
                       const SizedBox(height: 80),
-                      Center(
-                        child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: CircularProgressIndicator(
-                                color: themeData.colorScheme.secondary)),
-                      )
+                      const LoadingIndicator()
                     ],
                     if (errorMessage != "" &&
                         showError &&

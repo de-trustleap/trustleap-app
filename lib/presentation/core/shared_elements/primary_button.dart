@@ -1,15 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-class AuthButton extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final String title;
+  final double width;
   final Function onTap;
 
-  const AuthButton({
-    Key? key,
-    required this.title,
-    required this.onTap,
-  }) : super(key: key);
+  const PrimaryButton(
+      {Key? key,
+      required this.title,
+      required this.onTap,
+      this.width = double.infinity})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class AuthButton extends StatelessWidget {
         onTap: () => onTap(),
         child: Container(
             height: 40,
-            width: double.infinity,
+            width: width,
             decoration: BoxDecoration(
                 color: themeData.colorScheme.primary,
                 borderRadius: BorderRadius.circular(8)),
@@ -28,6 +30,6 @@ class AuthButton extends StatelessWidget {
                         fontSize: 14,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 4)))));
+                        letterSpacing: 2)))));
   }
 }

@@ -4,9 +4,10 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/auth_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_button.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routemaster/routemaster.dart';
@@ -84,6 +85,7 @@ class _LoginFormState extends State<LoginForm> {
                           letterSpacing: 4)),
                   const SizedBox(height: 80),
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     controller: emailTextController,
                     onChanged: (_) {
                       resetError();
@@ -104,7 +106,7 @@ class _LoginFormState extends State<LoginForm> {
                         InputDecoration(labelText: localization.login_password),
                   ),
                   const SizedBox(height: 20),
-                  AuthButton(
+                  PrimaryButton(
                       title: localization.login_login_buttontitle,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
@@ -128,13 +130,7 @@ class _LoginFormState extends State<LoginForm> {
                           }),
                   if (state.isSubmitting) ...[
                     const SizedBox(height: 80),
-                    Center(
-                      child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: CircularProgressIndicator(
-                              color: themeData.colorScheme.secondary)),
-                    )
+                    const LoadingIndicator()
                   ],
                   if (errorMessage != "" &&
                       showError &&

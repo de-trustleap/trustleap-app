@@ -67,6 +67,16 @@ class AuthValidator {
     }
   }
 
+  String? validatePostcode(String? input) {
+    if (input == null || input.isEmpty) {
+      return null;
+    } else if (isNumeric(input)) {
+      return null;
+    } else {
+      return "Die PLZ ist ungültig";
+    }
+  }
+
   bool _isAdult(DateTime date) {
     final DateTime today = DateTime.now();
     final DateTime adultDate = DateTime(
@@ -80,5 +90,9 @@ class AuthValidator {
   String _prepareDateStringForParser(String input) {
     final splitted = input.split(".").reversed;
     return splitted.join("");
+  }
+
+  bool isNumeric(String s) {
+    return int.tryParse(s) != null;
   }
 }

@@ -3,6 +3,8 @@ import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/user/user_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_bloc.dart';
+import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
+import 'package:finanzbegleiter/application/profile/profile_bloc/profile_bloc.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
@@ -18,6 +20,8 @@ Future<void> init() async {
   sl.registerFactory(() => AuthBloc(authRepo: sl()));
   sl.registerFactory(() => MenuBloc());
   sl.registerFactory(() => UserBloc(userRepo: sl()));
+  sl.registerFactory(() => ProfileBloc(userRepo: sl()));
+  sl.registerFactory(() => ProfileObserverBloc(userRepo: sl()));
 
   //! Repositories
   sl.registerLazySingleton<AuthRepository>(

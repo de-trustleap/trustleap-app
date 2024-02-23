@@ -77,9 +77,8 @@ class UserModel {
     );
   }
 
-  factory UserModel.fromFirestore(
-      QueryDocumentSnapshot<Map<String, dynamic>> doc) {
-    return UserModel.fromMap(doc.data()).copyWith(id: doc.id);
+  factory UserModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
+    return UserModel.fromMap(doc.data()!).copyWith(id: doc.id);
   }
 
   CustomUser toDomain() {
