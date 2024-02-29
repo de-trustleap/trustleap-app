@@ -31,3 +31,5 @@ class VerifyEmailEvent extends ProfileEvent {}
 class GetCurrentUserEvent extends ProfileEvent {}
 
 class SignoutUserEvent extends ProfileEvent {}
+
+class ResendEmailVerificationEvent extends ProfileEvent {}

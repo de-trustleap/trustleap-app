@@ -75,4 +75,9 @@ class AuthRepositoryImplementation implements AuthRepository {
   Stream<User?> observeAuthState() async* {
     yield* firebaseAuth.authStateChanges();
   }
+
+  @override
+  Future<void> resendEmailVerification() async {
+    await firebaseAuth.currentUser?.sendEmailVerification();
+  }
 }

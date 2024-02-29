@@ -14,4 +14,5 @@ abstract class AuthRepository {
   Future<void> signOut();
   Option<CustomUser> getSignedInUser();
   User? getCurrentUser();
+  Future<void> resendEmailVerification();
 }

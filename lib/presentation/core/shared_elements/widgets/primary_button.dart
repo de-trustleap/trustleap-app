@@ -16,7 +16,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    return InkResponse(
+    return InkWell(
         onTap: () => onTap(),
         child: Container(
             height: 40,

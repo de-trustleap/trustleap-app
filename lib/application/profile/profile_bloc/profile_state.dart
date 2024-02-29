@@ -6,17 +6,17 @@ sealed class ProfileState {}
 
 final class ProfileInitial extends ProfileState {}
 
-class ProfileLoadingState extends ProfileState {}
-
-class ProfileSuccessState extends ProfileState {}
-
 class ProfileShowValidationState extends ProfileState {}
 
-class ProfileFailureState extends ProfileState {
+class ProfileUpdateContactInformationFailureState extends ProfileState {
   final DatabaseFailure failure;
 
-  ProfileFailureState({required this.failure});
+  ProfileUpdateContactInformationFailureState({required this.failure});
 }
+
+class ProfileUpdateContactInformationLoadingState extends ProfileState {}
+
+class ProfileUpdateContactInformationSuccessState extends ProfileState {}
 
 class ProfileGetCurrentUserSuccessState extends ProfileState {
   final User? user;
@@ -47,3 +47,7 @@ class ProfileEmailVerifySuccessState extends ProfileState {
     required this.isEmailVerified,
   });
 }
+
+class ProfileResendEmailVerificationLoadingState extends ProfileState {}
+
+class ProfileResendEmailVerificationSuccessState extends ProfileState {}

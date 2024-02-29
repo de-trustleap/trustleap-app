@@ -21,11 +21,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       if (event.user == null) {
         emit(ProfileShowValidationState());
       } else {
-        emit(ProfileLoadingState());
+        emit(ProfileUpdateContactInformationLoadingState());
         final failureOrSuccess = await userRepo.updateUser(user: event.user!);
         failureOrSuccess.fold(
-            (failure) => emit(ProfileFailureState(failure: failure)),
-            (_) => emit(ProfileSuccessState()));
+            (failure) => emit(
+                ProfileUpdateContactInformationFailureState(failure: failure)),
+            (_) => emit(ProfileUpdateContactInformationSuccessState()));
       }
     });
 
@@ -68,6 +69,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     on<SignoutUserEvent>((event, emit) async {
       await authRepo.signOut();
+    });
+
+    on<ResendEmailVerificationEvent>((event, emit) async {
+      emit(ProfileResendEmailVerificationLoadingState());
+      await authRepo.resendEmailVerification();
+      emit(ProfileResendEmailVerificationSuccessState());
     });
   }
 }

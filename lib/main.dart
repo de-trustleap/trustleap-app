@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) => sl<AuthBloc>()
-              //   ..add(AuthCheckRequestedEvent())
+              ..add(AuthCheckRequestedEvent())
               ..add(AuthObserverEvent())),
         BlocProvider(create: (context) => sl<MenuBloc>())
       ],

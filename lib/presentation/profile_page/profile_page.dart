@@ -5,9 +5,10 @@ import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/injection.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/page_template.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,9 +48,19 @@ class ProfilePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                          ContactSection(user: state.user),
+                          ContactSection(
+                              user: state.user,
+                              changesSaved: () => {
+                                    CustomSnackBar.of(context).showCustomSnackBar(
+                                        "Die Änderung deiner Kontaktinformationen war erfolgreich.")
+                                  }),
                           const SizedBox(height: 60),
-                          EmailSection(user: state.user),
+                          EmailSection(
+                              user: state.user,
+                              sendEmailVerificationCallback: () => {
+                                    CustomSnackBar.of(context).showCustomSnackBar(
+                                        "Es wurde ein Link zur E-Mail Verifikation an dich versendet.")
+                                  }),
                           const SizedBox(height: 100)
                         ])),
                   ]));

@@ -19,14 +19,12 @@ class PageTemplate extends StatelessWidget {
     final themeData = Theme.of(context);
 
     if (responsiveValue.largerThan(TABLET)) {
-      return Material(
-        child: Row(children: [
-          const SizedBox(width: 240, child: SideMenu()),
-          Container(
-              width: 0.5, color: themeData.textTheme.headlineLarge!.color),
-          Expanded(child: child)
-        ]),
-      );
+      return Scaffold(
+          body: Row(children: [
+        const SizedBox(width: 240, child: SideMenu()),
+        Container(width: 0.5, color: themeData.textTheme.headlineLarge!.color),
+        Expanded(child: child)
+      ]));
     } else {
       return Scaffold(
           appBar: const PreferredSize(

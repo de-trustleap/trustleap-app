@@ -3,13 +3,14 @@ import 'package:finanzbegleiter/application/profile/profile_bloc/profile_bloc.da
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/card_container.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/expanded_section.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/form_error_view.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section_expandable_email.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section_expandable_password.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/email_verification_badge.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_expandable_email.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_expandable_password.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_verification_link.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_verification_badge.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,11 +20,13 @@ enum VisibleTextField { password, email, none }
 
 class EmailSection extends StatefulWidget {
   final CustomUser user;
+  final Function sendEmailVerificationCallback;
 
-  const EmailSection({
-    Key? key,
-    required this.user,
-  }) : super(key: key);
+  const EmailSection(
+      {Key? key,
+      required this.user,
+      required this.sendEmailVerificationCallback})
+      : super(key: key);
 
   @override
   State<EmailSection> createState() => _EmailSectionState();
@@ -109,6 +112,8 @@ class _EmailSectionState extends State<EmailSection> {
           BlocProvider.of<ProfileBloc>(context).add(SignoutUserEvent());
         } else if (state is ProfileGetCurrentUserSuccessState) {
           currentUser = state.user;
+        } else if (state is ProfileResendEmailVerificationSuccessState) {
+          widget.sendEmailVerificationCallback();
         }
       }, builder: (context, state) {
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -169,6 +174,18 @@ class _EmailSectionState extends State<EmailSection> {
                           size: 22)),
                 ])
               ]),
+          if (!isEmailVerified) ...[
+            const SizedBox(height: 16),
+            EmailsectionVerificationLink(
+                onTap: () => {
+                      BlocProvider.of<ProfileBloc>(context)
+                          .add(ResendEmailVerificationEvent())
+                    }),
+          ],
+          if (state is ProfileResendEmailVerificationLoadingState) ...[
+            const SizedBox(height: 80),
+            const LoadingIndicator()
+          ],
           const SizedBox(height: 32),
           ExpandedSection(
             expand: _isExpanded,
@@ -199,8 +216,7 @@ class _EmailSectionState extends State<EmailSection> {
                     ],
                     if (errorMessage != "" &&
                         showError &&
-                        (state is ProfileFailureState ||
-                            state is ProfileEmailUpdateFailureState) &&
+                        state is ProfileEmailUpdateFailureState &&
                         !validationHasError) ...[
                       const SizedBox(height: 20),
                       FormErrorView(message: errorMessage)

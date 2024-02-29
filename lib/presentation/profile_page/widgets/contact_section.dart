@@ -3,18 +3,20 @@ import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/card_container.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/form_error_view.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/primary_button.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ContactSection extends StatefulWidget {
   final CustomUser user;
+  final Function changesSaved;
 
-  const ContactSection({required this.user, super.key});
+  const ContactSection(
+      {required this.user, required this.changesSaved, super.key});
   @override
   State<ContactSection> createState() => _ContactSectionState();
 }
@@ -93,10 +95,12 @@ class _ContactSectionState extends State<ContactSection> {
       final maxWidth = constraints.maxWidth;
       return BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {
-          if (state is ProfileFailureState) {
+          if (state is ProfileUpdateContactInformationFailureState) {
             errorMessage =
                 DatabaseFailureMapper.mapFailureMessage(state.failure);
             showError = true;
+          } else if (state is ProfileUpdateContactInformationSuccessState) {
+            widget.changesSaved();
           }
         },
         builder: (context, state) {
@@ -262,7 +266,7 @@ class _ContactSectionState extends State<ContactSection> {
                         })
                   ],
                 ),
-                if (state is ProfileLoadingState) ...[
+                if (state is ProfileUpdateContactInformationLoadingState) ...[
                   const SizedBox(height: 80),
                   const LoadingIndicator()
                 ],
