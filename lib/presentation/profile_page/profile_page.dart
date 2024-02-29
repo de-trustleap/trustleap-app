@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackba
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/promoters_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -61,6 +62,8 @@ class ProfilePage extends StatelessWidget {
                                     CustomSnackBar.of(context).showCustomSnackBar(
                                         "Es wurde ein Link zur E-Mail Verifikation an dich versendet.")
                                   }),
+                          const SizedBox(height: 60),
+                          PromotersSection(user: state.user),
                           const SizedBox(height: 100)
                         ])),
                   ]));
