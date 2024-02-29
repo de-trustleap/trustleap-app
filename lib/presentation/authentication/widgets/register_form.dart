@@ -80,6 +80,7 @@ class _RegisterFormState extends State<RegisterForm> {
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final validator = AuthValidator(localization: localization);
+    final FocusNode node1 = FocusNode();
     const double textFieldSpacing = 20;
     const double maxViewWidth = 500;
     const double listPadding = 20;
@@ -122,7 +123,6 @@ class _RegisterFormState extends State<RegisterForm> {
                       BlocProvider.of<UserBloc>(context).add(CreateUserEvent(
                           user: CustomUser(
                               id: UniqueID.fromUniqueString(creds.user!.uid),
-                              email: creds.user!.email,
                               firstName: firstNameTextController.text,
                               lastName: lastNameTextController.text,
                               birthDate: birthDateTextController.text,
@@ -259,6 +259,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: streetAndNumberTextController,
+                          focusNode: node1,
                           onFieldSubmitted: (_) => submit(),
                           onChanged: (_) {
                             resetError();

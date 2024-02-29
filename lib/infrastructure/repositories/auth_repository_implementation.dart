@@ -22,26 +22,7 @@ class AuthRepositoryImplementation implements AuthRepository {
           email: email, password: password);
       return right(creds);
     } on FirebaseAuthException catch (e) {
-      final message = e.message;
-      print("AUTHFAILURE: $message");
-      final String code =
-          FirebaseExceptionParser.parseFirebaseAuthExceptionMessage(
-              input: e.message);
-      if (code == "user-disabled") {
-        return left(UserDisabledFailure());
-      } else if (code == "invalid-email") {
-        return left(InvalidEmailFailure());
-      } else if (code == "user-not-found") {
-        return left(UserNotFoundFailure());
-      } else if (code == "wrong-password") {
-        return left(WrongPasswordFailure());
-      } else if (code == "invalid-credential") {
-        return left(InvalidCredentialsFailure());
-      } else if (code == "too-many-requests") {
-        return left(TooManyRequestsFailure());
-      } else {
-        return left(ServerFailure());
-      }
+      return left(FirebaseExceptionParser.getAuthException(input: e.message));
     }
   }
 
@@ -53,18 +34,28 @@ class AuthRepositoryImplementation implements AuthRepository {
           email: email, password: password);
       return right(creds);
     } on FirebaseAuthException catch (e) {
-      final String code =
-          FirebaseExceptionParser.parseFirebaseAuthExceptionMessage(
-              input: e.message);
-      if (code == "email-already-in-use") {
-        return left(EmailAlreadyInUseFailure());
-      } else if (code == "invalid-email") {
-        return left(InvalidEmailFailure());
-      } else if (code == "weak-password") {
-        return left(WeakPasswordFailure());
-      } else {
-        return left(ServerFailure());
-      }
+      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, UserCredential>> reauthenticateWithPassword(
+      {required String password}) async {
+    try {
+      final currentUser = optionOf(firebaseAuth.currentUser);
+      return await currentUser.fold(() {
+        return left(UserNotFoundFailure());
+      }, (user) async {
+        if (user.email == null) {
+          return left(InvalidEmailFailure());
+        } else {
+          final credential = EmailAuthProvider.credential(
+              email: user.email!, password: password);
+          return right(await user.reauthenticateWithCredential(credential));
+        }
+      });
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getAuthException(input: e.message));
     }
   }
 
@@ -76,4 +67,12 @@ class AuthRepositoryImplementation implements AuthRepository {
   @override
   Option<CustomUser> getSignedInUser() =>
       optionOf(firebaseAuth.currentUser?.toDomain());
+
+  @override
+  User? getCurrentUser() => firebaseAuth.currentUser;
+
+  @override
+  Stream<User?> observeAuthState() async* {
+    yield* firebaseAuth.authStateChanges();
+  }
 }

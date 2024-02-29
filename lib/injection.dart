@@ -20,14 +20,14 @@ Future<void> init() async {
   sl.registerFactory(() => AuthBloc(authRepo: sl()));
   sl.registerFactory(() => MenuBloc());
   sl.registerFactory(() => UserBloc(userRepo: sl()));
-  sl.registerFactory(() => ProfileBloc(userRepo: sl()));
+  sl.registerFactory(() => ProfileBloc(userRepo: sl(), authRepo: sl()));
   sl.registerFactory(() => ProfileObserverBloc(userRepo: sl()));
 
   //! Repositories
   sl.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImplementation(firebaseAuth: sl()));
   sl.registerLazySingleton<UserRepository>(
-      () => UserRepositoryImplementation(firestore: sl()));
+      () => UserRepositoryImplementation(firestore: sl(), firebaseAuth: sl()));
 
   //! Extern
   final firebaseAuth = FirebaseAuth.instance;

@@ -23,3 +23,11 @@ enum MenuItems {
   final String value;
   const MenuItems(this.value);
 }
+
+enum EmailVerificationState {
+  verified("Verifiziert"),
+  unverified("Unverifiziert");
+
+  final String value;
+  const EmailVerificationState(this.value);
+}

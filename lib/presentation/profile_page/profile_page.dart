@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/application/authentication/user/user_bloc.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_bloc.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -6,6 +7,7 @@ import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrai
 import 'package:finanzbegleiter/presentation/core/page_wrapper/page_template.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/error_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +23,11 @@ class ProfilePage extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => profileObserverBloc),
-          BlocProvider(create: (context) => sl<ProfileBloc>())
+          BlocProvider(
+              create: (context) => sl<ProfileBloc>()
+                ..add(VerifyEmailEvent())
+                ..add(GetCurrentUserEvent())),
+          BlocProvider(create: (context) => sl<UserBloc>())
         ],
         child: BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
           builder: (context, state) {
@@ -40,7 +46,12 @@ class ProfilePage extends StatelessWidget {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
-                            children: [ContactSection(user: state.user)])),
+                            children: [
+                          ContactSection(user: state.user),
+                          const SizedBox(height: 60),
+                          EmailSection(user: state.user),
+                          const SizedBox(height: 100)
+                        ])),
                   ]));
             } else if (state is ProfileObserverFailure) {
               return CenteredConstrainedWrapper(

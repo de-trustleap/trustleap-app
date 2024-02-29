@@ -30,6 +30,6 @@ class PrimaryButton extends StatelessWidget {
                         fontSize: 14,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 2)))));
+                        letterSpacing: 1)))));
   }
 }

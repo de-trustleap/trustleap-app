@@ -19,6 +19,14 @@ class AuthFailureMapper {
         return "Deine Zugangsdaten existieren nicht.";
       case == TooManyRequestsFailure:
         return "Du hast deine Zugangsdaten zu oft falsch eingegeben. Versuche es später noch einmal.";
+      case == UserMisMatchFailure:
+        return "Deine Anmeldeinformationen gehören nicht zum aktuellen User.";
+      case == InvalidVerificationCode:
+        return "Dein Verifizierungscode ist ungültig.";
+      case == InvalidVerificationId:
+        return "Die ID zu deinen Anmeldeinformationen ist ungültig.";
+      case == RequiresRecentLogin:
+        return "Deine letzte Anmeldung ist zu lange her. Melde dich erneut an.";
       case == ServerFailure:
         return "Ein unbekannter Fehler ist aufgetreten.";
       default:

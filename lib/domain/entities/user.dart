@@ -5,7 +5,6 @@ class CustomUser {
   UniqueID id;
   final String? firstName;
   final String? lastName;
-  final String? email;
   final String? birthDate;
   final String? address;
   final String? postCode;
@@ -15,7 +14,6 @@ class CustomUser {
     required this.id,
     this.firstName,
     this.lastName,
-    this.email,
     this.birthDate,
     this.address,
     this.postCode,
@@ -26,7 +24,6 @@ class CustomUser {
     UniqueID? id,
     String? firstName,
     String? lastName,
-    String? email,
     String? birthDate,
     String? address,
     String? postCode,
@@ -36,7 +33,6 @@ class CustomUser {
       id: id ?? this.id,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
-      email: email ?? this.email,
       birthDate: birthDate ?? this.birthDate,
       address: address ?? this.address,
       postCode: postCode ?? this.postCode,
