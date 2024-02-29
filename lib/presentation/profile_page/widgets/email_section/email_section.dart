@@ -1,16 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_bloc.dart';
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_desktop.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_expandable_email.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_expandable_password.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_mobile.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_verification_link.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_verification_badge.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,6 +70,19 @@ class _EmailSectionState extends State<EmailSection> {
     });
   }
 
+  void editEmailPressed() {
+    setState(() {
+      _toogleExpand();
+      _clearFields();
+      if (visibleField == VisibleTextField.password ||
+          visibleField == VisibleTextField.email) {
+        visibleField = VisibleTextField.none;
+      } else {
+        visibleField = VisibleTextField.password;
+      }
+    });
+  }
+
   void submitPassword() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
@@ -121,59 +134,17 @@ class _EmailSectionState extends State<EmailSection> {
               style: themeData.textTheme.headlineLarge!
                   .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
           const SizedBox(height: 16),
-          Table(
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              columnWidths: const {
-                0: FlexColumnWidth(50),
-                1: FlexColumnWidth(25),
-                2: FlexColumnWidth(25)
-              },
-              children: [
-                TableRow(children: [
-                  Text("E-Mail",
-                      style: themeData.textTheme.headlineLarge!
-                          .copyWith(fontSize: 16)),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text("Status",
-                        style: themeData.textTheme.headlineLarge!
-                            .copyWith(fontSize: 16)),
-                  ),
-                  const SizedBox(width: 8)
-                ]),
-                const TableRow(children: [
-                  SizedBox(height: 8),
-                  SizedBox(height: 8),
-                  SizedBox(height: 8)
-                ]),
-                TableRow(children: [
-                  Text(currentUser?.email ?? "",
-                      style: themeData.textTheme.headlineLarge!
-                          .copyWith(fontSize: 16)),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: EmailVerificationBadge(
-                          state: isEmailVerified
-                              ? EmailVerificationState.verified
-                              : EmailVerificationState.unverified)),
-                  IconButton(
-                      onPressed: () => {
-                            setState(() {
-                              _toogleExpand();
-                              _clearFields();
-                              if (visibleField == VisibleTextField.password ||
-                                  visibleField == VisibleTextField.email) {
-                                visibleField = VisibleTextField.none;
-                              } else {
-                                visibleField = VisibleTextField.password;
-                              }
-                            })
-                          },
-                      icon: Icon(Icons.edit,
-                          color: Theme.of(context).colorScheme.secondary,
-                          size: 22)),
-                ])
-              ]),
+          if (responsiveValue.largerThan(MOBILE)) ...[
+            EmailSectionDesktop(
+                email: currentUser?.email,
+                isEmailVerified: isEmailVerified,
+                editEmailPressed: editEmailPressed)
+          ] else ...[
+            EmailSectionMobile(
+                email: currentUser?.email,
+                isEmailVerified: isEmailVerified,
+                editEmailPressed: editEmailPressed)
+          ],
           if (!isEmailVerified) ...[
             const SizedBox(height: 16),
             EmailsectionVerificationLink(
