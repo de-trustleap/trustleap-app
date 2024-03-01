@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
+import 'package:finanzbegleiter/core/failures/database_failures.dart';
 
 class FirebaseExceptionParser {
   static String parseFirebaseAuthExceptionMessage(
@@ -18,8 +19,7 @@ class FirebaseExceptionParser {
     return "unknown";
   }
 
-  static AuthFailure getAuthException(
-      {String plugin = "auth", required String? input}) {
+  static AuthFailure getAuthException({required String? input}) {
     final String code =
         FirebaseExceptionParser.parseFirebaseAuthExceptionMessage(input: input);
     if (code == "user-disabled") {
@@ -48,6 +48,25 @@ class FirebaseExceptionParser {
       return RequiresRecentLogin();
     } else {
       return ServerFailure();
+    }
+  }
+
+  static DatabaseFailure getDatabaseException({required String code}) {
+    if (code.contains("permission-denied") ||
+        code.contains("PERMISSION_DENIED")) {
+      return PermissionDeniedFailure();
+    } else if (code.contains("already-exists") ||
+        code.contains("ALREADY_EXISTS")) {
+      return AlreadyExistsFailure();
+    } else if (code.contains("deadline-exceeded") ||
+        code.contains("DEADLINE_EXCEEDED")) {
+      return DeadlineExceededFailure();
+    } else if (code.contains("cancelled") || code.contains("CANCELLED")) {
+      return CancelledFailure();
+    } else if (code.contains("unavailable") || code.contains("UNAVAILABLE")) {
+      return UnavailableFailure();
+    } else {
+      return BackendFailure();
     }
   }
 }

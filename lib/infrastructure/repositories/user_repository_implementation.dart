@@ -32,12 +32,7 @@ class UserRepositoryImplementation implements UserRepository {
       return right<DatabaseFailure, CustomUser>(model);
     }).handleError((e) {
       if (e is FirebaseException) {
-        if (e.code.contains("permission-denied") ||
-            e.code.contains("PERMISSION_DENIED")) {
-          return left(PermissionDeniedFailure());
-        } else {
-          return left(BackendFailure());
-        }
+        return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
       } else {
         return left(BackendFailure());
       }
@@ -53,11 +48,7 @@ class UserRepositoryImplementation implements UserRepository {
       await userCollection.doc(userModel.id).set(userModel.toMap());
       return right(unit);
     } on FirebaseException catch (e) {
-      if (e.code.contains("PERMISSION_DENIED")) {
-        return left(PermissionDeniedFailure());
-      } else {
-        return left(BackendFailure());
-      }
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
 
@@ -70,13 +61,7 @@ class UserRepositoryImplementation implements UserRepository {
       await userCollection.doc(userModel.id).update(userModel.toMap());
       return right(unit);
     } on FirebaseException catch (e) {
-      if (e.code.contains("PERMISSION_DENIED")) {
-        return left(PermissionDeniedFailure());
-      } else if (e.code.contains("NOT_FOUND")) {
-        return left(NotFoundFailure());
-      } else {
-        return left(BackendFailure());
-      }
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
 
