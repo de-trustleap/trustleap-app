@@ -4,7 +4,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:routemaster/routemaster.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class MenuItem extends StatelessWidget {
   final String path;
@@ -53,7 +53,7 @@ class MenuItem extends StatelessWidget {
                 onTap: () {
                   BlocProvider.of<MenuBloc>(context).add(
                       SelectedMenuItemChangedEvent(selectedMenuItem: type));
-                  Routemaster.of(context).replace(path);
+                  Modular.to.navigate(RoutePaths.homePath + path);
                 },
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),

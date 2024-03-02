@@ -1,6 +1,5 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
@@ -10,7 +9,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:routemaster/routemaster.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -129,8 +128,7 @@ class _LoginFormState extends State<LoginForm> {
                   const SizedBox(height: 20),
                   RegisterButton(
                       onTap: () => {
-                            Routemaster.of(context)
-                                .push(RoutePaths.registerPath)
+                            Modular.to.pushNamed('/register')
                           }),
                   if (state.isSubmitting) ...[
                     const SizedBox(height: 80),

@@ -1,4 +1,3 @@
-import 'package:finanzbegleiter/presentation/core/page_wrapper/page_template.dart';
 import 'package:flutter/material.dart';
 
 class PromotersPage extends StatelessWidget {
@@ -6,6 +5,6 @@ class PromotersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PageTemplate(child: Text("Promoter"));
+    return const Text("Promoter");
   }
 }

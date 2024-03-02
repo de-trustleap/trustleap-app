@@ -4,14 +4,15 @@ import 'package:finanzbegleiter/presentation/core/menu/appbar.dart';
 import 'package:finanzbegleiter/presentation/core/menu/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class PageTemplate extends StatelessWidget {
-  final Widget child;
+  // final Widget child;
 
   const PageTemplate({
     Key? key,
-    required this.child,
+    // required this.child,
   }) : super(key: key);
 
   Widget getResponsiveWidget(BuildContext context) {
@@ -23,14 +24,14 @@ class PageTemplate extends StatelessWidget {
           body: Row(children: [
         const SizedBox(width: 240, child: SideMenu()),
         Container(width: 0.5, color: themeData.textTheme.headlineLarge!.color),
-        Expanded(child: child)
+        const Expanded(child: RouterOutlet())
       ]));
     } else {
       return Scaffold(
           appBar: const PreferredSize(
               preferredSize: Size(double.infinity, 44), child: CustomAppBar()),
           backgroundColor: themeData.colorScheme.background,
-          body: child,
+          body: const RouterOutlet(),
           endDrawer:
               const SizedBox(width: 240, child: Drawer(child: SideMenu())));
     }

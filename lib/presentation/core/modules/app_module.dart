@@ -9,30 +9,31 @@ import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
+import 'package:finanzbegleiter/presentation/core/modules/auth_module.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-final sl = GetIt.I;
+class AppModule extends Module {
+  @override
+  void binds(i) {
+    final firebaseAuth = FirebaseAuth.instance;
+    final firestore = FirebaseFirestore.instance;
 
-Future<void> init() async {
-  //! State Management
-  sl.registerFactory(() => SignInBloc(authRepo: sl()));
-  sl.registerFactory(() => AuthBloc(authRepo: sl()));
-  sl.registerFactory(() => MenuBloc());
-  sl.registerFactory(() => UserBloc(userRepo: sl()));
-  sl.registerFactory(() => ProfileBloc(userRepo: sl(), authRepo: sl()));
-  sl.registerFactory(() => ProfileObserverBloc(userRepo: sl()));
+    i
+      ..add(SignInBloc.new)
+      ..add(AuthBloc.new)
+      ..add(MenuBloc.new)
+      ..add(UserBloc.new)
+      ..add(ProfileBloc.new)
+      ..add(ProfileObserverBloc.new)
+      ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
+      ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
+      ..addLazySingleton(() => firebaseAuth)
+      ..addLazySingleton(() => firestore);
+  }
 
-  //! Repositories
-  sl.registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImplementation(firebaseAuth: sl()));
-  sl.registerLazySingleton<UserRepository>(
-      () => UserRepositoryImplementation(firestore: sl(), firebaseAuth: sl()));
-
-  //! Extern
-  final firebaseAuth = FirebaseAuth.instance;
-  sl.registerLazySingleton(() => firebaseAuth);
-
-  final firestore = FirebaseFirestore.instance;
-  sl.registerLazySingleton(() => firestore);
+  @override
+  void routes(r) {
+    r.module("/", module: AuthModule());
+  }
 }

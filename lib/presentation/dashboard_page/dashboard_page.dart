@@ -6,6 +6,6 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PageTemplate(child: Text("Dashboard"));
+    return const Text("Dashboard");
   }
 }
