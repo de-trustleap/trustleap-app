@@ -22,10 +22,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthCheckRequestedEvent>((event, emit) async {
-      emit(AuthStateLoading());
       final userOption = authRepo.getSignedInUser();
-      userOption.fold(() => emit(AuthStateUnAuthenticated()),
-          (a) => emit(AuthStateAuthenticated()));
+      userOption.fold(() => emit(AuthStateUnAuthenticated()), (a) {
+        print("CHECK REQUESTED!");
+        emit(AuthStateAuthenticated());
+      });
     });
 
     on<AuthObserverEvent>((event, emit) async {
@@ -37,6 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthObserverGotResultEvent>((event, emit) {
       if (event.user == null) {
+        print("OBSERVER!");
         emit(AuthStateUnAuthenticated());
       }
     });

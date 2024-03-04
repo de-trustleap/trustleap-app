@@ -27,5 +27,6 @@ class HomeModule extends Module {
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),
         ]);
+    r.wildcard(child: (_) => const DashboardPage());
   }
 }

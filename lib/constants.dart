@@ -19,7 +19,8 @@ enum MenuItems {
   recommendations("Empfehlungen"),
   promoters("Promoter"),
   landingpage("Landingpage"),
-  activities("Aktivitäten");
+  activities("Aktivitäten"),
+  none("");
 
   final String value;
   const MenuItems(this.value);

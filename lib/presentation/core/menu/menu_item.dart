@@ -11,13 +11,15 @@ class MenuItem extends StatelessWidget {
   final IconData icon;
   final MenuItems type;
   final MenuItems selectedMenuItem;
+  final bool isURLMatching;
 
   const MenuItem(
       {Key? key,
       required this.path,
       required this.icon,
       required this.type,
-      required this.selectedMenuItem})
+      required this.selectedMenuItem,
+      required this.isURLMatching})
       : super(key: key);
 
   @override
@@ -39,13 +41,14 @@ class MenuItem extends StatelessWidget {
           return localization.menuitems_landingpage;
         case MenuItems.activities:
           return localization.menuitems_activities;
+        case MenuItems.none:
+          return "";
       }
     }
 
     return BlocProvider.value(
       value: BlocProvider.of<MenuBloc>(context),
-      child: BlocConsumer<MenuBloc, MenuState>(
-        listener: (context, state) {},
+      child: BlocBuilder<MenuBloc, MenuState>(
         builder: (context, state) {
           return MouseRegion(
               cursor: SystemMouseCursors.click,
@@ -60,7 +63,7 @@ class MenuItem extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: selectedMenuItem == type
+                          color: (selectedMenuItem == type || isURLMatching)
                               ? themeData.colorScheme.primary
                               : themeData.colorScheme.background),
                       child: Padding(
@@ -68,12 +71,12 @@ class MenuItem extends StatelessWidget {
                             horizontal: 12, vertical: 16),
                         child: Row(children: [
                           Icon(icon,
-                              color: selectedMenuItem == type
+                              color: (selectedMenuItem == type || isURLMatching)
                                   ? themeData.colorScheme.background
                                   : themeData.iconTheme.color),
                           const SizedBox(width: 12),
                           Text(getLocalizedMenuItem(),
-                              style: selectedMenuItem == type
+                              style: (selectedMenuItem == type || isURLMatching)
                                   ? themeData.textTheme.headlineLarge!.copyWith(
                                       color: themeData.colorScheme.background)
                                   : themeData.textTheme.headlineLarge)

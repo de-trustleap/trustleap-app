@@ -45,12 +45,20 @@ class MyApp extends StatelessWidget {
             if (state is AuthStateUnAuthenticated) {
               isAuthenticated = false;
               print("AUTHENTICATED: $isAuthenticated");
+
               Modular.to.navigate(RoutePaths.loginPath);
             } else if (state is AuthStateAuthenticated) {
               isAuthenticated = true;
-              print("AUTHENTICATED: $isAuthenticated");
-              Modular.to
-                  .navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
+              final lastRoute =
+                  WidgetsBinding.instance.platformDispatcher.defaultRouteName;
+              print(
+                  "AUTHENTICATED: $isAuthenticated"); //TODO: HIER LIEGT DER FEHLER. DIESER CODE WIRD IMMER NEU AUSGEFÜHRT WENN MAN PER HAND DIE URL ANPASST!
+              if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
+                Modular.to.navigate(lastRoute);
+              } else {
+                Modular.to
+                    .navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
+              }
             }
           },
           builder: (BuildContext context, state) {

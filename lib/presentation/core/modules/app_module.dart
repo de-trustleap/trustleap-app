@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
 import 'package:finanzbegleiter/presentation/core/modules/auth_module.dart';
+import 'package:finanzbegleiter/presentation/core/modules/home_module.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -35,5 +36,6 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.module("/", module: AuthModule());
+    r.module("/home", module: HomeModule());
   }
 }

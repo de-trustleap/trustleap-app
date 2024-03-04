@@ -10,8 +10,7 @@ class AuthModule extends Module {
   void routes(r) {
     r.child(Modular.initialRoute, child: (_) => const LoginPage());
     r.child(RoutePaths.registerPath, child: (_) => const RegisterPage());
-    r.child(RoutePaths.loginPath, child: (_) => const LoginPage());
     r.module(RoutePaths.homePath, module: HomeModule(), guards: [AuthGuard()]);
-    //  r.wildcard(child: (_) => const LoginPage());
+    r.wildcard(child: (_) => const LoginPage());
   }
 }
