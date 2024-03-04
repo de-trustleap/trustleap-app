@@ -8,6 +8,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AuthModule extends Module {
   @override
   void routes(r) {
+    r.redirect(Modular.initialRoute, to: RoutePaths.loginPath);
     r.child(Modular.initialRoute, child: (_) => const LoginPage());
     r.child(RoutePaths.registerPath, child: (_) => const RegisterPage());
     r.module(RoutePaths.homePath, module: HomeModule(), guards: [AuthGuard()]);

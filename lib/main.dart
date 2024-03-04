@@ -29,8 +29,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    bool isAuthenticated = false;
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -42,17 +40,13 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<AuthBloc, AuthState>(
           listenWhen: (previous, current) => previous != current,
           listener: (context, state) {
+            final lastRoute =
+                WidgetsBinding.instance.platformDispatcher.defaultRouteName;
             if (state is AuthStateUnAuthenticated) {
-              isAuthenticated = false;
-              print("AUTHENTICATED: $isAuthenticated");
-
+              print("NOT AUTHENTICATED");
               Modular.to.navigate(RoutePaths.loginPath);
             } else if (state is AuthStateAuthenticated) {
-              isAuthenticated = true;
-              final lastRoute =
-                  WidgetsBinding.instance.platformDispatcher.defaultRouteName;
-              print(
-                  "AUTHENTICATED: $isAuthenticated"); //TODO: HIER LIEGT DER FEHLER. DIESER CODE WIRD IMMER NEU AUSGEFÜHRT WENN MAN PER HAND DIE URL ANPASST!
+              print("AUTHENTICATED");
               if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
                 Modular.to.navigate(lastRoute);
               } else {
@@ -62,6 +56,11 @@ class MyApp extends StatelessWidget {
             }
           },
           builder: (BuildContext context, state) {
+            Modular.to.addListener(() {
+              print('Navigate: ${Modular.to.path}');
+              print(
+                  'History: ${Modular.to.navigateHistory.map((e) => e.name)}');
+            });
             return MaterialApp.router(
               routerConfig: Modular.routerConfig,
               title: 'Finanzbegleiter',

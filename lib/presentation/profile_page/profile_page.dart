@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/promoters_section.dart';
@@ -62,6 +63,14 @@ class ProfilePage extends StatelessWidget {
                                 }),
                         const SizedBox(height: 60),
                         PromotersSection(user: state.user),
+                        const SizedBox(height: 60),
+                        SecondaryButton(
+                            title: "Abmelden",
+                            width: 200,
+                            onTap: () => {
+                                  BlocProvider.of<ProfileBloc>(context)
+                                      .add(SignoutUserEvent())
+                                }),
                         const SizedBox(height: 100)
                       ])),
                 ]));
