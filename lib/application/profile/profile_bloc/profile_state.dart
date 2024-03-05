@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'profile_bloc.dart';
+part of 'profile_cubit.dart';
 
 @immutable
 sealed class ProfileState {}

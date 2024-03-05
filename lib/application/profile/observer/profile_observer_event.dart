@@ -1,6 +1,5 @@
 part of 'profile_observer_bloc.dart';
 
-@immutable
 sealed class ProfileObserverEvent {}
 
 final class ProfileObserveAllEvent extends ProfileObserverEvent {}

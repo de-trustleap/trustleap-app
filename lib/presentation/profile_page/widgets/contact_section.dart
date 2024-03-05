@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/profile/profile_bloc/profile_bloc.dart';
+import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -70,16 +70,15 @@ class _ContactSectionState extends State<ContactSection> {
   void submit() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<ProfileBloc>(context).add(UpdateProfileEvent(
-          user: widget.user.copyWith(
-              firstName: firstNameTextController.text,
-              lastName: lastNameTextController.text,
-              address: streetTextController.text,
-              postCode: postcodeTextController.text,
-              place: placeTextController.text)));
+      BlocProvider.of<ProfileCubit>(context).updateProfile(widget.user.copyWith(
+          firstName: firstNameTextController.text,
+          lastName: lastNameTextController.text,
+          address: streetTextController.text,
+          postCode: postcodeTextController.text,
+          place: placeTextController.text));
     } else {
       validationHasError = true;
-      BlocProvider.of<ProfileBloc>(context).add(UpdateProfileEvent(user: null));
+      BlocProvider.of<ProfileCubit>(context).updateProfile(null);
     }
   }
 
@@ -93,7 +92,7 @@ class _ContactSectionState extends State<ContactSection> {
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
-      return BlocConsumer<ProfileBloc, ProfileState>(
+      return BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is ProfileUpdateContactInformationFailureState) {
             errorMessage =

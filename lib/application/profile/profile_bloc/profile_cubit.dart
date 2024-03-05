@@ -1,0 +1,77 @@
+import 'package:bloc/bloc.dart';
+import 'package:finanzbegleiter/core/failures/auth_failures.dart';
+import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+part 'profile_state.dart';
+
+class ProfileCubit extends Cubit<ProfileState> {
+  final UserRepository userRepo;
+  final AuthRepository authRepo;
+
+  ProfileCubit({required this.userRepo, required this.authRepo})
+      : super(ProfileInitial());
+
+  void updateProfile(CustomUser? user) async {
+    if (user == null) {
+      emit(ProfileShowValidationState());
+    } else {
+      emit(ProfileUpdateContactInformationLoadingState());
+      final failureOrSuccess = await userRepo.updateUser(user: user);
+      failureOrSuccess.fold(
+          (failure) => emit(
+              ProfileUpdateContactInformationFailureState(failure: failure)),
+          (_) => emit(ProfileUpdateContactInformationSuccessState()));
+    }
+  }
+
+  void reauthenticateWithPassword(String? password) async {
+    if (password == null) {
+      emit(ProfileShowValidationState());
+    } else {
+      emit(ProfileEmailLoadingState());
+      final failureOrSuccess =
+          await authRepo.reauthenticateWithPassword(password: password);
+      failureOrSuccess.fold(
+          (failure) => emit(ProfileEmailUpdateFailureState(failure: failure)),
+          (_) => emit(ProfileReauthenticateSuccessState()));
+    }
+  }
+
+  void updateEmail(String? email) async {
+    emit(ProfileEmailLoadingState());
+    if (email == null) {
+      emit(ProfileShowValidationState());
+    } else {
+      emit(ProfileEmailLoadingState());
+      final failureOrSuccess = await userRepo.updateEmail(email: email);
+      failureOrSuccess.fold(
+          (failure) => emit(ProfileEmailUpdateFailureState(failure: failure)),
+          (_) => emit(ProfileEmailUpdateSuccessState()));
+    }
+  }
+
+  void verifyEmail() async {
+    final isEmailVerified = await userRepo.isEmailVerified();
+    emit(ProfileEmailVerifySuccessState(isEmailVerified: isEmailVerified));
+  }
+
+  void getCurrentUser() async {
+    final currentUser = await authRepo.getCurrentUser();
+    emit(ProfileGetCurrentUserSuccessState(user: currentUser));
+  }
+
+  void signOutUser() async {
+    await authRepo.signOut();
+  }
+
+  void resendEmailVerification() async {
+    emit(ProfileResendEmailVerificationLoadingState());
+    await authRepo.resendEmailVerification();
+    emit(ProfileResendEmailVerificationSuccessState());
+  }
+}

@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/menu/menu_bloc.dart';
+import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -55,17 +55,15 @@ class _MenuItemState extends State<MenuItem> {
       const height = 56.0;
       const padding = 12.0;
       return BlocProvider.value(
-        value: BlocProvider.of<MenuBloc>(context),
-        child: BlocBuilder<MenuBloc, MenuState>(
+        value: BlocProvider.of<MenuCubit>(context),
+        child: BlocBuilder<MenuCubit, MenuState>(
           builder: (context, state) {
             return MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
                   onTap: () {
-                    BlocProvider.of<MenuBloc>(context).add(
-                        SelectedMenuItemChangedEvent(
-                            selectedMenuItem: widget.type));
+                    BlocProvider.of<MenuCubit>(context).selectMenu(widget.type);
                     Modular.to.navigate(RoutePaths.homePath + widget.path);
                   },
                   child: Padding(

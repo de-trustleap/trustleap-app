@@ -1,6 +1,6 @@
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
-import 'package:finanzbegleiter/application/profile/profile_bloc/profile_bloc.dart';
+import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -25,9 +25,9 @@ class ProfilePage extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => profileObserverBloc),
         BlocProvider(
-            create: (context) => Modular.get<ProfileBloc>()
-              ..add(VerifyEmailEvent())
-              ..add(GetCurrentUserEvent())),
+            create: (context) => Modular.get<ProfileCubit>()
+              ..verifyEmail()
+              ..getCurrentUser()),
         BlocProvider(create: (context) => Modular.get<UserCubit>())
       ],
       child: BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
@@ -68,8 +68,8 @@ class ProfilePage extends StatelessWidget {
                             title: "Abmelden",
                             width: 200,
                             onTap: () => {
-                                  BlocProvider.of<ProfileBloc>(context)
-                                      .add(SignoutUserEvent())
+                                  BlocProvider.of<ProfileCubit>(context)
+                                      .signOutUser()
                                 }),
                         const SizedBox(height: 100)
                       ])),

@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

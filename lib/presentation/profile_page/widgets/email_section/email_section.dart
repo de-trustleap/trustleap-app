@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/profile/profile_bloc/profile_bloc.dart';
+import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -86,17 +86,16 @@ class _EmailSectionState extends State<EmailSection> {
   void submitPassword() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<ProfileBloc>(context).add(
-          ReauthenticateWithPasswordInitiated(
-              password: passwordTextController.text));
+      BlocProvider.of<ProfileCubit>(context)
+          .reauthenticateWithPassword(passwordTextController.text);
     }
   }
 
   void submitEmail() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<ProfileBloc>(context)
-          .add(UpdateEmailEvent(email: emailTextController.text));
+      BlocProvider.of<ProfileCubit>(context)
+          .updateEmail(emailTextController.text);
     }
   }
 
@@ -112,7 +111,7 @@ class _EmailSectionState extends State<EmailSection> {
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
-      return BlocConsumer<ProfileBloc, ProfileState>(
+      return BlocConsumer<ProfileCubit, ProfileState>(
           listener: (context, state) {
         if (state is ProfileEmailVerifySuccessState) {
           isEmailVerified = state.isEmailVerified;
@@ -122,7 +121,7 @@ class _EmailSectionState extends State<EmailSection> {
         } else if (state is ProfileReauthenticateSuccessState) {
           visibleField = VisibleTextField.email;
         } else if (state is ProfileEmailUpdateSuccessState) {
-          BlocProvider.of<ProfileBloc>(context).add(SignoutUserEvent());
+          BlocProvider.of<ProfileCubit>(context).signOutUser();
         } else if (state is ProfileGetCurrentUserSuccessState) {
           currentUser = state.user;
         } else if (state is ProfileResendEmailVerificationSuccessState) {
@@ -149,8 +148,8 @@ class _EmailSectionState extends State<EmailSection> {
             const SizedBox(height: 16),
             EmailsectionVerificationLink(
                 onTap: () => {
-                      BlocProvider.of<ProfileBloc>(context)
-                          .add(ResendEmailVerificationEvent())
+                      BlocProvider.of<ProfileCubit>(context)
+                          .resendEmailVerification()
                     }),
           ],
           if (state is ProfileResendEmailVerificationLoadingState) ...[

@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
-import 'package:finanzbegleiter/application/menu/menu_bloc.dart';
+import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/l10n/l10n.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             create: (context) => Modular.get<AuthBloc>()
               ..add(AuthCheckRequestedEvent())
               ..add(AuthObserverEvent())),
-        BlocProvider(create: (context) => Modular.get<MenuBloc>())
+        BlocProvider(create: (context) => Modular.get<MenuCubit>())
       ],
       child: BlocConsumer<AuthBloc, AuthState>(
           listenWhen: (previous, current) => previous != current,

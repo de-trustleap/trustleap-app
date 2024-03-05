@@ -1,6 +1,5 @@
 part of 'profile_observer_bloc.dart';
 
-@immutable
 sealed class ProfileObserverState {}
 
 final class ProfileObserverInitial extends ProfileObserverState {}
