@@ -148,6 +148,10 @@
     "@authfailure_invalid_credentials": {
         "description": "Fehlermeldung wenn die Zugangsdaten nicht existieren"
     },
+    "authfailure_too_many_requests": "Du hast deine Zugangsdaten zu oft falsch eingegeben. Versuche es später noch einmal.",
+    "@authfailure_too_many_requests": {
+        "description": "Fehlermeldung wenn zu oft falsche Anmeldedaten eingegeben wurden."
+    },
     "authfailure_unknown": "Ein unbekannter Fehler ist aufgetreten.",
     "@authfailure_unknown": {
         "description": "Fehlermeldung wenn ein unbekannter Fehler aufgetreten ist"

@@ -1,15 +1,15 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
-import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
-import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/auth_button.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_button.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:routemaster/routemaster.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -42,13 +42,25 @@ class _LoginFormState extends State<LoginForm> {
     });
   }
 
+  void submit() {
+    if (formKey.currentState!.validate()) {
+      validationHasError = false;
+      BlocProvider.of<SignInCubit>(context).loginWithEmailAndPassword(
+          emailTextController.text, passwordTextController.text);
+    } else {
+      validationHasError = true;
+      BlocProvider.of<SignInCubit>(context)
+          .loginWithEmailAndPassword(null, null);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
 
-    return BlocConsumer<SignInBloc, SignInState>(
+    return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
         state.authFailureOrSuccessOption.fold(
             () => {},
@@ -84,10 +96,12 @@ class _LoginFormState extends State<LoginForm> {
                           letterSpacing: 4)),
                   const SizedBox(height: 80),
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     controller: emailTextController,
                     onChanged: (_) {
                       resetError();
                     },
+                    onFieldSubmitted: (_) => submit(),
                     validator: validator.validateEmail,
                     decoration:
                         InputDecoration(labelText: localization.login_email),
@@ -98,50 +112,31 @@ class _LoginFormState extends State<LoginForm> {
                     onChanged: (_) {
                       resetError();
                     },
+                    onFieldSubmitted: (_) => submit(),
                     validator: validator.validatePassword,
                     obscureText: true,
                     decoration:
                         InputDecoration(labelText: localization.login_password),
                   ),
                   const SizedBox(height: 20),
-                  AuthButton(
+                  PrimaryButton(
                       title: localization.login_login_buttontitle,
                       onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          validationHasError = false;
-                          BlocProvider.of<SignInBloc>(context).add(
-                              LoginWithEmailAndPasswordPressed(
-                                  email: emailTextController.text,
-                                  password: passwordTextController.text));
-                        } else {
-                          validationHasError = true;
-                          BlocProvider.of<SignInBloc>(context).add(
-                              LoginWithEmailAndPasswordPressed(
-                                  email: null, password: null));
-                        }
+                        submit();
                       }),
                   const SizedBox(height: 20),
                   RegisterButton(
-                      onTap: () => {
-                            Routemaster.of(context)
-                                .push(RoutePaths.registerPath)
-                          }),
+                      onTap: () => {Modular.to.pushNamed('/register')}),
                   if (state.isSubmitting) ...[
                     const SizedBox(height: 80),
-                    Center(
-                      child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: CircularProgressIndicator(
-                              color: themeData.colorScheme.secondary)),
-                    )
+                    const LoadingIndicator()
                   ],
                   if (errorMessage != "" &&
                       showError &&
                       !state.isSubmitting &&
                       !validationHasError) ...[
                     const SizedBox(height: 20),
-                    AuthErrorView(message: errorMessage)
+                    FormErrorView(message: errorMessage)
                   ]
                 ]));
       },

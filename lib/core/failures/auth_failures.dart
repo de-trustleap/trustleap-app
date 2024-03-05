@@ -15,3 +15,13 @@ class UserNotFoundFailure extends AuthFailure {}
 class WrongPasswordFailure extends AuthFailure {}
 
 class InvalidCredentialsFailure extends AuthFailure {}
+
+class TooManyRequestsFailure extends AuthFailure {}
+
+class UserMisMatchFailure extends AuthFailure {}
+
+class InvalidVerificationCode extends AuthFailure {}
+
+class InvalidVerificationId extends AuthFailure {}
+
+class RequiresRecentLogin extends AuthFailure {}

@@ -116,6 +116,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get authfailure_invalid_credentials => 'Deine Zugangsdaten existieren nicht.';
 
   @override
+  String get authfailure_too_many_requests => 'Du hast deine Zugangsdaten zu oft falsch eingegeben. Versuche es später noch einmal.';
+
+  @override
   String get authfailure_unknown => 'Ein unbekannter Fehler ist aufgetreten.';
 
   @override

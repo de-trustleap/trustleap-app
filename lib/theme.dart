@@ -97,6 +97,24 @@ class AppTheme {
   static const IconThemeData _darkIconTheme =
       IconThemeData(color: _darkTextColor);
 
+  static const DrawerThemeData _lightDrawerTheme = DrawerThemeData(
+    backgroundColor: _lightBackgroundColor,
+  );
+
+  static const DrawerThemeData _darkDrawerTheme = DrawerThemeData(
+    backgroundColor: _darkBackgroundColor,
+  );
+
+  static final SnackBarThemeData _lightSnackbarTheme = SnackBarThemeData(
+      backgroundColor: _lightPrimaryColor,
+      contentTextStyle: _lightHeadlineLargeText.copyWith(
+          color: _darkTextColor, fontSize: 14));
+
+  static final SnackBarThemeData _darkSnackbarTheme = SnackBarThemeData(
+      backgroundColor: _darkPrimaryColor,
+      contentTextStyle: _lightHeadlineLargeText.copyWith(
+          color: _darkTextColor, fontSize: 14));
+
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
           primary: _lightPrimaryColor,
@@ -108,7 +126,9 @@ class AppTheme {
       textTheme: _lightTextTheme,
       iconTheme: _lightIconTheme,
       textSelectionTheme: _lightTextSelectionTheme,
-      inputDecorationTheme: _lightInputDecorationTheme);
+      inputDecorationTheme: _lightInputDecorationTheme,
+      drawerTheme: _lightDrawerTheme,
+      snackBarTheme: _lightSnackbarTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -121,5 +141,7 @@ class AppTheme {
       textTheme: _darkTextTheme,
       iconTheme: _darkIconTheme,
       textSelectionTheme: _darkTextSelectionTheme,
-      inputDecorationTheme: _darkInputDecorationTheme);
+      inputDecorationTheme: _darkInputDecorationTheme,
+      drawerTheme: _darkDrawerTheme,
+      snackBarTheme: _darkSnackbarTheme);
 }

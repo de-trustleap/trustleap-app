@@ -315,6 +315,12 @@ abstract class AppLocalizations {
   /// **'Your credentials are invalid.'**
   String get authfailure_invalid_credentials;
 
+  /// error message when credentials has been entered incorrectly too often.
+  ///
+  /// In en, this message translates to:
+  /// **'You have entered your login details incorrectly too many times. Try again later.'**
+  String get authfailure_too_many_requests;
+
   /// error message when an unknown authentication error occured
   ///
   /// In en, this message translates to:

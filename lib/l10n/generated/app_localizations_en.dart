@@ -116,6 +116,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authfailure_invalid_credentials => 'Your credentials are invalid.';
 
   @override
+  String get authfailure_too_many_requests => 'You have entered your login details incorrectly too many times. Try again later.';
+
+  @override
   String get authfailure_unknown => 'An unknown error occured.';
 
   @override

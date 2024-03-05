@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class AuthValidator {
   final AppLocalizations localization;
@@ -60,10 +61,22 @@ class AuthValidator {
   String? validateBirthDate(String? input) {
     if (input == null || input.isEmpty) {
       return localization.auth_validation_missing_birthdate;
+    } else if (!_stringIsValidDate(input)) {
+      return "Das eingegebene Datum ist ungültig";
     } else if (!_isAdult(DateTime.parse(_prepareDateStringForParser(input)))) {
       return localization.auth_validation_invalid_birthdate;
     } else {
       return null;
+    }
+  }
+
+  String? validatePostcode(String? input) {
+    if (input == null || input.isEmpty) {
+      return null;
+    } else if (isNumeric(input)) {
+      return null;
+    } else {
+      return "Die PLZ ist ungültig";
     }
   }
 
@@ -77,8 +90,22 @@ class AuthValidator {
     return adultDate.isBefore(today);
   }
 
+  bool _stringIsValidDate(String input) {
+    DateFormat format = DateFormat("dd.MM.yyyy");
+    try {
+      format.parseStrict(input);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   String _prepareDateStringForParser(String input) {
     final splitted = input.split(".").reversed;
     return splitted.join("");
+  }
+
+  bool isNumeric(String s) {
+    return int.tryParse(s) != null;
   }
 }

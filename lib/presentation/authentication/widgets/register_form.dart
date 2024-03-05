@@ -1,13 +1,14 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
-import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
-import 'package:finanzbegleiter/application/authentication/user/user_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
+import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/auth_button.dart';
-import 'package:finanzbegleiter/presentation/authentication/widgets/auth_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -59,12 +60,25 @@ class _RegisterFormState extends State<RegisterForm> {
     });
   }
 
+  void submit() {
+    if (formKey.currentState!.validate()) {
+      validationHasError = false;
+      BlocProvider.of<SignInCubit>(context).registerWithEmailAndPassword(
+          emailTextController.text, passwordTextController.text);
+    } else {
+      validationHasError = true;
+      BlocProvider.of<SignInCubit>(context)
+          .registerWithEmailAndPassword(null, null);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final validator = AuthValidator(localization: localization);
+    final FocusNode node1 = FocusNode();
     const double textFieldSpacing = 20;
     const double maxViewWidth = 500;
     const double listPadding = 20;
@@ -94,7 +108,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
     return MultiBlocListener(
         listeners: [
-          BlocListener<SignInBloc, SignInState>(listener: (context, state) {
+          BlocListener<SignInCubit, SignInState>(listener: (context, state) {
             state.authFailureOrSuccessOption.fold(
                 () => {},
                 (eitherFailureOrSuccess) =>
@@ -104,23 +118,21 @@ class _RegisterFormState extends State<RegisterForm> {
                       showError = true;
                     }, (creds) {
                       showError = false;
-                      BlocProvider.of<UserBloc>(context).add(CreateUserEvent(
-                          user: CustomUser(
-                              id: UniqueID.fromUniqueString(creds.user!.uid),
-                              email: creds.user!.email,
-                              firstName: firstNameTextController.text,
-                              lastName: lastNameTextController.text,
-                              birthDate: birthDateTextController.text,
-                              address: streetAndNumberTextController.text,
-                              postCode: plzTextController.text,
-                              place: placeTextController.text)));
+                      BlocProvider.of<UserCubit>(context).createUser(CustomUser(
+                          id: UniqueID.fromUniqueString(creds.user!.uid),
+                          firstName: firstNameTextController.text,
+                          lastName: lastNameTextController.text,
+                          birthDate: birthDateTextController.text,
+                          address: streetAndNumberTextController.text,
+                          postCode: plzTextController.text,
+                          place: placeTextController.text));
                     }));
           }),
-          BlocListener<UserBloc, UserState>(listener: (context, state) {
+          BlocListener<UserCubit, UserState>(listener: (context, state) {
             BlocProvider.of<AuthBloc>(context).add(AuthCheckRequestedEvent());
           })
         ],
-        child: BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+        child: BlocBuilder<SignInCubit, SignInState>(builder: (context, state) {
           return Form(
               key: formKey,
               child: ListView(
@@ -163,6 +175,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               width: getResponsiveWidth(2),
                               child: TextFormField(
                                 controller: firstNameTextController,
+                                onFieldSubmitted: (_) => submit(),
                                 onChanged: (_) {
                                   resetError();
                                 },
@@ -180,6 +193,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 width: getResponsiveWidth(2),
                                 child: TextFormField(
                                   controller: lastNameTextController,
+                                  onFieldSubmitted: (_) => submit(),
                                   onChanged: (_) {
                                     resetError();
                                   },
@@ -198,30 +212,42 @@ class _RegisterFormState extends State<RegisterForm> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: getResponsiveWidth(1),
-                        child: TextFormField(
-                            controller: birthDateTextController,
-                            onChanged: (_) {
-                              resetError();
-                            },
-                            validator: validator.validateBirthDate,
-                            decoration: InputDecoration(
-                                prefixIcon:
-                                    const Icon(Icons.calendar_today_rounded),
-                                labelText: localization.register_birthdate),
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime.now());
-                              if (pickedDate != null) {
-                                setState(() {
-                                  birthDateTextController.text =
-                                      DateFormat("dd.MM.yyyy")
-                                          .format(pickedDate);
-                                });
+                        child: FocusScope(
+                          child: Focus(
+                            onFocusChange: (focus) async {
+                              if (focus) {
+                                DateTime? pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(1900),
+                                    lastDate: DateTime.now());
+                                if (pickedDate != null) {
+                                  setState(() {
+                                    birthDateTextController.text =
+                                        DateFormat("dd.MM.yyyy")
+                                            .format(pickedDate);
+                                  });
+                                }
+                                WidgetsBinding
+                                    .instance.focusManager.primaryFocus
+                                    ?.unfocus();
                               }
-                            }),
+                            },
+                            child: TextFormField(
+                                keyboardType: TextInputType.datetime,
+                                controller: birthDateTextController,
+                                onFieldSubmitted: (_) => submit(),
+                                onChanged: (_) {
+                                  resetError();
+                                },
+                                validator: validator.validateBirthDate,
+                                decoration: InputDecoration(
+                                    prefixIcon: const Icon(
+                                        Icons.calendar_today_rounded),
+                                    labelText: localization.register_birthdate),
+                                onTap: () async {}),
+                          ),
+                        ),
                       ),
                     ]),
                     const SizedBox(height: textFieldSpacing),
@@ -230,6 +256,8 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: streetAndNumberTextController,
+                          focusNode: node1,
+                          onFieldSubmitted: (_) => submit(),
                           onChanged: (_) {
                             resetError();
                           },
@@ -244,7 +272,10 @@ class _RegisterFormState extends State<RegisterForm> {
                         width:
                             getResponsiveWidth(2, shouldWrapToNextLine: false),
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           controller: plzTextController,
+                          onFieldSubmitted: (_) => submit(),
+                          validator: validator.validatePostcode,
                           onChanged: (_) {
                             resetError();
                           },
@@ -258,6 +289,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             getResponsiveWidth(2, shouldWrapToNextLine: false),
                         child: TextFormField(
                           controller: placeTextController,
+                          onFieldSubmitted: (_) => submit(),
                           onChanged: (_) {
                             resetError();
                           },
@@ -271,7 +303,9 @@ class _RegisterFormState extends State<RegisterForm> {
                       SizedBox(
                         width: getResponsiveWidth(1),
                         child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
                           controller: emailTextController,
+                          onFieldSubmitted: (_) => submit(),
                           onChanged: (_) {
                             resetError();
                           },
@@ -287,6 +321,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: passwordTextController,
+                          onFieldSubmitted: (_) => submit(),
                           onChanged: (_) {
                             resetError();
                           },
@@ -303,6 +338,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: passwordRepeatTextController,
+                          onFieldSubmitted: (_) => submit(),
                           onChanged: (_) {
                             resetError();
                           },
@@ -320,33 +356,16 @@ class _RegisterFormState extends State<RegisterForm> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: getResponsiveWidth(1),
-                        child: AuthButton(
+                        child: PrimaryButton(
                             title: localization.register_now_buttontitle,
                             onTap: () {
-                              if (formKey.currentState!.validate()) {
-                                validationHasError = false;
-                                BlocProvider.of<SignInBloc>(context).add(
-                                    RegisterWithEmailAndPasswordPressed(
-                                        email: emailTextController.text,
-                                        password: passwordTextController.text));
-                              } else {
-                                validationHasError = true;
-                                BlocProvider.of<SignInBloc>(context).add(
-                                    RegisterWithEmailAndPasswordPressed(
-                                        email: null, password: null));
-                              }
+                              submit();
                             }),
                       ),
                     ]),
                     if (state.isSubmitting) ...[
                       const SizedBox(height: 80),
-                      Center(
-                        child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: CircularProgressIndicator(
-                                color: themeData.colorScheme.secondary)),
-                      )
+                      const LoadingIndicator()
                     ],
                     if (errorMessage != "" &&
                         showError &&
@@ -358,7 +377,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           children: [
                             SizedBox(
                                 width: getResponsiveWidth(1),
-                                child: AuthErrorView(message: errorMessage)),
+                                child: FormErrorView(message: errorMessage)),
                           ])
                     ],
                     const SizedBox(height: 80),
