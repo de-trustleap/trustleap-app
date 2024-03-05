@@ -6,6 +6,6 @@ class RoutePaths {
   static const String promotersPath = "/promoters";
   static const String landingPagePath = "/landingpage";
   static const String activitiesPath = "/activities";
-  static const String loginPath = "/login";
+  static const String loginPath = "/";
   static const String registerPath = "/register";
 }
