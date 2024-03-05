@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/menu/menu_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/presentation/core/menu/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/presentation/activity_page/activity_page.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/home_page.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/dashboard_page.dart';

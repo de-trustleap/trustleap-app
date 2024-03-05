@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/presentation/authentication/login_page.dart';
 import 'package:finanzbegleiter/presentation/authentication/register_page.dart';
 import 'package:finanzbegleiter/presentation/core/modules/auth_guard.dart';

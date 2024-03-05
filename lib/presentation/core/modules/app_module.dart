@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/application/authentication/user/user_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_bloc.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_bloc.dart';
-import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
