@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/authentication/user/user_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_bloc.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -28,7 +28,7 @@ class ProfilePage extends StatelessWidget {
             create: (context) => Modular.get<ProfileBloc>()
               ..add(VerifyEmailEvent())
               ..add(GetCurrentUserEvent())),
-        BlocProvider(create: (context) => Modular.get<UserBloc>())
+        BlocProvider(create: (context) => Modular.get<UserCubit>())
       ],
       child: BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
         builder: (context, state) {

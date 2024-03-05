@@ -1,6 +1,6 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
-import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
-import 'package:finanzbegleiter/application/authentication/user/user_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
+import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -63,14 +63,12 @@ class _RegisterFormState extends State<RegisterForm> {
   void submit() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<SignInBloc>(context).add(
-          RegisterWithEmailAndPasswordPressed(
-              email: emailTextController.text,
-              password: passwordTextController.text));
+      BlocProvider.of<SignInCubit>(context).registerWithEmailAndPassword(
+          emailTextController.text, passwordTextController.text);
     } else {
       validationHasError = true;
-      BlocProvider.of<SignInBloc>(context).add(
-          RegisterWithEmailAndPasswordPressed(email: null, password: null));
+      BlocProvider.of<SignInCubit>(context)
+          .registerWithEmailAndPassword(null, null);
     }
   }
 
@@ -110,7 +108,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
     return MultiBlocListener(
         listeners: [
-          BlocListener<SignInBloc, SignInState>(listener: (context, state) {
+          BlocListener<SignInCubit, SignInState>(listener: (context, state) {
             state.authFailureOrSuccessOption.fold(
                 () => {},
                 (eitherFailureOrSuccess) =>
@@ -120,22 +118,21 @@ class _RegisterFormState extends State<RegisterForm> {
                       showError = true;
                     }, (creds) {
                       showError = false;
-                      BlocProvider.of<UserBloc>(context).add(CreateUserEvent(
-                          user: CustomUser(
-                              id: UniqueID.fromUniqueString(creds.user!.uid),
-                              firstName: firstNameTextController.text,
-                              lastName: lastNameTextController.text,
-                              birthDate: birthDateTextController.text,
-                              address: streetAndNumberTextController.text,
-                              postCode: plzTextController.text,
-                              place: placeTextController.text)));
+                      BlocProvider.of<UserCubit>(context).createUser(CustomUser(
+                          id: UniqueID.fromUniqueString(creds.user!.uid),
+                          firstName: firstNameTextController.text,
+                          lastName: lastNameTextController.text,
+                          birthDate: birthDateTextController.text,
+                          address: streetAndNumberTextController.text,
+                          postCode: plzTextController.text,
+                          place: placeTextController.text));
                     }));
           }),
-          BlocListener<UserBloc, UserState>(listener: (context, state) {
+          BlocListener<UserCubit, UserState>(listener: (context, state) {
             BlocProvider.of<AuthBloc>(context).add(AuthCheckRequestedEvent());
           })
         ],
-        child: BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+        child: BlocBuilder<SignInCubit, SignInState>(builder: (context, state) {
           return Form(
               key: formKey,
               child: ListView(

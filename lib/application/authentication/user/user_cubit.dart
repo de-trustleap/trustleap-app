@@ -5,19 +5,17 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:meta/meta.dart';
 
-part 'user_event.dart';
 part 'user_state.dart';
 
-class UserBloc extends Bloc<UserEvent, UserState> {
+class UserCubit extends Cubit<UserState> {
   final UserRepository userRepo;
-
-  UserBloc({
+  UserCubit({
     required this.userRepo,
-  }) : super(UserInitial()) {
-    on<CreateUserEvent>((event, emit) async {
-      final failureOrSuccess = await userRepo.createUser(user: event.user);
-      failureOrSuccess.fold((failure) => emit(UserFailure(failure: failure)),
-          (r) => emit(UserSuccess()));
-    });
+  }) : super(UserInitial());
+
+  void createUser(CustomUser user) async {
+    final failureOrSuccess = await userRepo.createUser(user: user);
+    failureOrSuccess.fold((failure) => emit(UserFailure(failure: failure)),
+        (r) => emit(UserSuccess()));
   }
 }

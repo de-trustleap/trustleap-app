@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/authentication/signIn/sign_in_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
             child: Container(
                 constraints: const BoxConstraints(maxWidth: 500),
                 child: BlocProvider(
-                  create: (context) => Modular.get<SignInBloc>(),
+                  create: (context) => Modular.get<SignInCubit>(),
                   child: const LoginForm(),
                 ))));
   }
