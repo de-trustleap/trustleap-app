@@ -63,7 +63,8 @@ class AuthValidator {
       return localization.auth_validation_missing_birthdate;
     } else if (!_stringIsValidDate(input)) {
       return "Das eingegebene Datum ist ungültig";
-    } else if (!_isAdult(DateTime.parse(_prepareDateStringForParser(input)))) {
+    } else if (_dateIsParsable(input) &&
+        !_isAdult(DateTime.parse(_prepareDateStringForParser(input)))) {
       return localization.auth_validation_invalid_birthdate;
     } else {
       return null;
@@ -94,6 +95,15 @@ class AuthValidator {
     DateFormat format = DateFormat("dd.MM.yyyy");
     try {
       format.parseStrict(input);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool _dateIsParsable(String input) {
+    try {
+      DateTime.parse(_prepareDateStringForParser(input));
       return true;
     } catch (e) {
       return false;
