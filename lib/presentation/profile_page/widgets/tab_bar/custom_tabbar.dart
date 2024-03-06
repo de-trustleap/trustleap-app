@@ -16,7 +16,9 @@ class CustomTabbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     return SizedBox(
-        width: responsiveValue.screenWidth * 0.5,
+        width: responsiveValue.largerThan(MOBILE)
+            ? responsiveValue.screenWidth * 0.6
+            : responsiveValue.screenWidth * 0.9,
         child: TabBar(
           controller: controller,
           tabs: tabs,

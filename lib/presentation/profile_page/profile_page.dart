@@ -56,11 +56,11 @@ class _ProfilePageState extends State<ProfilePage>
         ],
         child: Padding(
           padding: EdgeInsets.only(top: topPadding),
-          child: desktopView(),
+          child: tabbar(),
         ));
   }
 
-  Widget desktopView() {
+  Widget tabbar() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,15 +68,11 @@ class _ProfilePageState extends State<ProfilePage>
           CustomTabbar(
               controller: tabController,
               tabs: tabViews.map((e) => e.tab).toList()),
-          Container(
+          SizedBox(
               height: screenHeight * 0.85,
               child: TabBarView(
                   controller: tabController,
                   children: tabViews.map((e) => e.content).toList()))
         ]);
-  }
-
-  Widget mobileView() {
-    return const Column();
   }
 }
