@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+
 abstract class AuthFailure {}
 
 class ServerFailure extends AuthFailure {}
@@ -20,8 +22,10 @@ class TooManyRequestsFailure extends AuthFailure {}
 
 class UserMisMatchFailure extends AuthFailure {}
 
-class InvalidVerificationCode extends AuthFailure {}
+class InvalidVerificationCodeFailure extends AuthFailure {}
 
-class InvalidVerificationId extends AuthFailure {}
+class InvalidVerificationIdFailure extends AuthFailure {}
 
-class RequiresRecentLogin extends AuthFailure {}
+class RequiresRecentLoginFailure extends AuthFailure {}
+
+class MissingPasswordFailure extends AuthFailure {}

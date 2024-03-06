@@ -8,6 +8,7 @@ final class ProfileInitial extends ProfileState {}
 
 class ProfileShowValidationState extends ProfileState {}
 
+// Contact Information States
 class ProfileUpdateContactInformationFailureState extends ProfileState {
   final DatabaseFailure failure;
 
@@ -18,6 +19,7 @@ class ProfileUpdateContactInformationLoadingState extends ProfileState {}
 
 class ProfileUpdateContactInformationSuccessState extends ProfileState {}
 
+// Get Current User States
 class ProfileGetCurrentUserSuccessState extends ProfileState {
   final User? user;
 
@@ -26,8 +28,12 @@ class ProfileGetCurrentUserSuccessState extends ProfileState {
   });
 }
 
-class ProfileReauthenticateSuccessState extends ProfileState {}
+// Reauthentication States
+class ProfileReauthenticateForEmailUpdateSuccessState extends ProfileState {}
 
+class ProfileReauthenticateForPasswordUpdateSuccessState extends ProfileState {}
+
+//Update Email States
 class ProfileEmailLoadingState extends ProfileState {}
 
 class ProfileEmailUpdateSuccessState extends ProfileState {}
@@ -40,6 +46,7 @@ class ProfileEmailUpdateFailureState extends ProfileState {
   });
 }
 
+// Verify Email States
 class ProfileEmailVerifySuccessState extends ProfileState {
   final bool isEmailVerified;
 
@@ -51,3 +58,16 @@ class ProfileEmailVerifySuccessState extends ProfileState {
 class ProfileResendEmailVerificationLoadingState extends ProfileState {}
 
 class ProfileResendEmailVerificationSuccessState extends ProfileState {}
+
+// Update Password States
+class ProfilePasswordUpdateLoadingState extends ProfileState {}
+
+class ProfilePasswordUpdateSuccessState extends ProfileState {}
+
+class ProfilePasswordUpdateFailureState extends ProfileState {
+  final AuthFailure failure;
+
+  ProfilePasswordUpdateFailureState({
+    required this.failure,
+  });
+}

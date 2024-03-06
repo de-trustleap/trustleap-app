@@ -55,6 +55,8 @@ class AuthRepositoryImplementation implements AuthRepository {
         }
       });
     } on FirebaseException catch (e) {
+      final message = e.message;
+      print("THE MESSAGE: $message");
       return left(FirebaseExceptionParser.getAuthException(input: e.message));
     }
   }

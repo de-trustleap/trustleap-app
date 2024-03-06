@@ -41,11 +41,13 @@ class FirebaseExceptionParser {
     } else if (code == "user-mismatch") {
       return UserMisMatchFailure();
     } else if (code == "invalid-verification-code") {
-      return InvalidVerificationCode();
+      return InvalidVerificationCodeFailure();
     } else if (code == "invalid-verification-id") {
-      return InvalidVerificationId();
+      return InvalidVerificationIdFailure();
     } else if (code == "requires-recent-login") {
-      return RequiresRecentLogin();
+      return RequiresRecentLoginFailure();
+    } else if (code == "missing-password") {
+      return MissingPasswordFailure();
     } else {
       return ServerFailure();
     }

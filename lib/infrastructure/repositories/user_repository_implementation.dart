@@ -85,4 +85,19 @@ class UserRepositoryImplementation implements UserRepository {
     final user = firebaseAuth.currentUser;
     return user?.emailVerified ?? false;
   }
+
+  @override
+  Future<Either<AuthFailure, void>> updatePassword(
+      {required String password}) async {
+    try {
+      final currentUser = optionOf(firebaseAuth.currentUser);
+      return await currentUser.fold(() {
+        return left(UserNotFoundFailure());
+      }, (user) async {
+        return right(await user.updatePassword(password));
+      });
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+    }
+  }
 }

@@ -29,7 +29,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  void reauthenticateWithPassword(String? password) async {
+  void reauthenticateWithPasswordForEmailUpdate(String? password) async {
     if (password == null) {
       emit(ProfileShowValidationState());
     } else {
@@ -38,12 +38,25 @@ class ProfileCubit extends Cubit<ProfileState> {
           await authRepo.reauthenticateWithPassword(password: password);
       failureOrSuccess.fold(
           (failure) => emit(ProfileEmailUpdateFailureState(failure: failure)),
-          (_) => emit(ProfileReauthenticateSuccessState()));
+          (_) => emit(ProfileReauthenticateForEmailUpdateSuccessState()));
+    }
+  }
+
+  void reauthenticateWithPasswordForPasswordUpdate(String? password) async {
+    if (password == null) {
+      emit(ProfileShowValidationState());
+    } else {
+      emit(ProfilePasswordUpdateLoadingState());
+      final failureOrSuccess =
+          await authRepo.reauthenticateWithPassword(password: password);
+      failureOrSuccess.fold(
+          (failure) =>
+              emit(ProfilePasswordUpdateFailureState(failure: failure)),
+          (_) => emit(ProfileReauthenticateForPasswordUpdateSuccessState()));
     }
   }
 
   void updateEmail(String? email) async {
-    emit(ProfileEmailLoadingState());
     if (email == null) {
       emit(ProfileShowValidationState());
     } else {
@@ -58,6 +71,20 @@ class ProfileCubit extends Cubit<ProfileState> {
   void verifyEmail() async {
     final isEmailVerified = await userRepo.isEmailVerified();
     emit(ProfileEmailVerifySuccessState(isEmailVerified: isEmailVerified));
+  }
+
+  void updatePassword(String? password) async {
+    if (password == null) {
+      emit(ProfileShowValidationState());
+    } else {
+      emit(ProfilePasswordUpdateLoadingState());
+      final failureOrSuccess =
+          await userRepo.updatePassword(password: password);
+      failureOrSuccess.fold(
+          (failure) =>
+              emit(ProfilePasswordUpdateFailureState(failure: failure)),
+          (_) => emit(ProfilePasswordUpdateSuccessState()));
+    }
   }
 
   void getCurrentUser() async {
