@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/tab_bar/tabbar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -19,6 +20,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
+  late double screenHeight;
+  late double topPadding;
   late TabController tabController;
   final List<TabbarContent> tabViews = [
     TabbarContent(
@@ -37,16 +40,24 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    final responsiveValue = ResponsiveBreakpoints.of(context);
+    screenHeight = responsiveValue.screenHeight;
+    topPadding = responsiveValue.screenHeight * 0.02;
     final profileObserverBloc = Modular.get<ProfileObserverBloc>()
       ..add(ProfileObserveAllEvent());
-    return MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => profileObserverBloc),
-      BlocProvider(
-          create: (context) => Modular.get<ProfileCubit>()
-            ..verifyEmail()
-            ..getCurrentUser()),
-      BlocProvider(create: (context) => Modular.get<UserCubit>())
-    ], child: desktopView());
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => profileObserverBloc),
+          BlocProvider(
+              create: (context) => Modular.get<ProfileCubit>()
+                ..verifyEmail()
+                ..getCurrentUser()),
+          BlocProvider(create: (context) => Modular.get<UserCubit>())
+        ],
+        child: Padding(
+          padding: EdgeInsets.only(top: topPadding),
+          child: desktopView(),
+        ));
   }
 
   Widget desktopView() {
@@ -58,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage>
               controller: tabController,
               tabs: tabViews.map((e) => e.tab).toList()),
           Container(
-              height: 400,
+              height: screenHeight * 0.85,
               child: TabBarView(
                   controller: tabController,
                   children: tabViews.map((e) => e.content).toList()))
