@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
-enum VisibleTextField { password, email, none }
+enum EmailSectionVisibleTextField { password, email, none }
 
 class EmailSection extends StatefulWidget {
   final CustomUser user;
@@ -42,7 +42,7 @@ class _EmailSectionState extends State<EmailSection> {
   String errorMessage = "";
   bool validationHasError = false;
 
-  VisibleTextField visibleField = VisibleTextField.none;
+  EmailSectionVisibleTextField visibleField = EmailSectionVisibleTextField.none;
   bool _isExpanded = false;
 
   bool isEmailVerified = false;
@@ -74,11 +74,11 @@ class _EmailSectionState extends State<EmailSection> {
     setState(() {
       _toogleExpand();
       _clearFields();
-      if (visibleField == VisibleTextField.password ||
-          visibleField == VisibleTextField.email) {
-        visibleField = VisibleTextField.none;
+      if (visibleField == EmailSectionVisibleTextField.password ||
+          visibleField == EmailSectionVisibleTextField.email) {
+        visibleField = EmailSectionVisibleTextField.none;
       } else {
-        visibleField = VisibleTextField.password;
+        visibleField = EmailSectionVisibleTextField.password;
       }
     });
   }
@@ -87,7 +87,8 @@ class _EmailSectionState extends State<EmailSection> {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
       BlocProvider.of<ProfileCubit>(context)
-          .reauthenticateWithPassword(passwordTextController.text);
+          .reauthenticateWithPasswordForEmailUpdate(
+              passwordTextController.text);
     }
   }
 
@@ -118,8 +119,8 @@ class _EmailSectionState extends State<EmailSection> {
         } else if (state is ProfileEmailUpdateFailureState) {
           errorMessage = AuthFailureMapper.mapFailureMessage(state.failure);
           showError = true;
-        } else if (state is ProfileReauthenticateSuccessState) {
-          visibleField = VisibleTextField.email;
+        } else if (state is ProfileReauthenticateForEmailUpdateSuccessState) {
+          visibleField = EmailSectionVisibleTextField.email;
         } else if (state is ProfileEmailUpdateSuccessState) {
           BlocProvider.of<ProfileCubit>(context).signOutUser();
         } else if (state is ProfileGetCurrentUserSuccessState) {
@@ -167,13 +168,15 @@ class _EmailSectionState extends State<EmailSection> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (visibleField == VisibleTextField.password) ...[
+                    if (visibleField ==
+                        EmailSectionVisibleTextField.password) ...[
                       EmailSectionExpandablePassword(
                           passwordTextController: passwordTextController,
                           maxWidth: maxWidth,
                           resetError: resetError,
                           submit: submitPassword)
-                    ] else if (visibleField == VisibleTextField.email) ...[
+                    ] else if (visibleField ==
+                        EmailSectionVisibleTextField.email) ...[
                       EmailSectionExpandableEmail(
                           emailTextController: emailTextController,
                           maxWidth: maxWidth,

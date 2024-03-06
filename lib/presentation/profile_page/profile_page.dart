@@ -1,8 +1,8 @@
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_password_forgotten_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/tab_bar/tabbar_content.dart';
@@ -28,8 +28,8 @@ class _ProfilePageState extends State<ProfilePage>
         tab: const CustomTab(title: "Allgemein"),
         content: const ProfileGeneralView()),
     TabbarContent(
-        tab: const CustomTab(title: "Passwort vergessen"),
-        content: const ProfilePasswordForgottenView())
+        tab: const CustomTab(title: "Passwort ändern"),
+        content: const ProfilePasswordUpdateView())
   ];
 
   @override
