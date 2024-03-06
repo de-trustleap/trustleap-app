@@ -14,7 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc({
     required this.authRepo,
-  }) : super(AuthInitial()) {
+  }) : super(AuthStateUnAuthenticated()) {
     on<SignOutPressedEvent>((event, emit) async {
       await authRepo.signOut();
       //    emit(AuthStateUnAuthenticated());
@@ -35,7 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthObserverGotResultEvent>((event, emit) {
-      if (event.user == null) {
+      if (event.user == null && state is! AuthStateUnAuthenticated) {
         emit(AuthStateUnAuthenticated());
       }
     });

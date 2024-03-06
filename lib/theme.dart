@@ -115,6 +115,22 @@ class AppTheme {
       contentTextStyle: _lightHeadlineLargeText.copyWith(
           color: _darkTextColor, fontSize: 14));
 
+  static final TabBarTheme _lightTabbarTheme = TabBarTheme(
+      indicatorColor: _lightSecondaryColor,
+      splashFactory: NoSplash.splashFactory,
+      labelColor: _lightTextColor,
+      labelStyle:
+          _lightHeadlineLargeText.copyWith(color: _darkTextColor, fontSize: 14),
+      overlayColor: const MaterialStatePropertyAll(Colors.transparent));
+
+  static final TabBarTheme _darkTabbarTheme = TabBarTheme(
+      indicatorColor: _darkSecondaryColor,
+      splashFactory: NoSplash.splashFactory,
+      labelColor: _darkTextColor,
+      labelStyle:
+          _darkHeadlineLargeText.copyWith(color: _darkTextColor, fontSize: 14),
+      overlayColor: const MaterialStatePropertyAll(Colors.transparent));
+
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
           primary: _lightPrimaryColor,
@@ -128,7 +144,8 @@ class AppTheme {
       textSelectionTheme: _lightTextSelectionTheme,
       inputDecorationTheme: _lightInputDecorationTheme,
       drawerTheme: _lightDrawerTheme,
-      snackBarTheme: _lightSnackbarTheme);
+      snackBarTheme: _lightSnackbarTheme,
+      tabBarTheme: _lightTabbarTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -143,5 +160,6 @@ class AppTheme {
       textSelectionTheme: _darkTextSelectionTheme,
       inputDecorationTheme: _darkInputDecorationTheme,
       drawerTheme: _darkDrawerTheme,
-      snackBarTheme: _darkSnackbarTheme);
+      snackBarTheme: _darkSnackbarTheme,
+      tabBarTheme: _darkTabbarTheme);
 }
