@@ -219,8 +219,8 @@ class _ContactSectionState extends State<ContactSection> {
                                   resetError();
                                 },
                                 validator: validator.validatePostcode,
-                                decoration: const InputDecoration(
-                                    labelText: "", hintText: "en"),
+                                decoration:
+                                    const InputDecoration(labelText: ""),
                               ),
                             ),
                           ])),
