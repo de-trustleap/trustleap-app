@@ -3,10 +3,12 @@ import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
+import 'package:finanzbegleiter/presentation/authentication/widgets/password_forgotten_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -118,15 +120,20 @@ class _LoginFormState extends State<LoginForm> {
                     decoration:
                         InputDecoration(labelText: localization.login_password),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
+                  PasswordForgottenButton(
+                      onTap: () =>
+                          {Modular.to.pushNamed(RoutePaths.passwordReset)}),
+                  const SizedBox(height: 24),
                   PrimaryButton(
                       title: localization.login_login_buttontitle,
                       onTap: () {
                         submit();
                       }),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   RegisterButton(
-                      onTap: () => {Modular.to.pushNamed('/register')}),
+                      onTap: () =>
+                          {Modular.to.pushNamed(RoutePaths.registerPath)}),
                   if (state.isSubmitting) ...[
                     const SizedBox(height: 80),
                     const LoadingIndicator()

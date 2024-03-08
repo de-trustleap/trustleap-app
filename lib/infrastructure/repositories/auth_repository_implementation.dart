@@ -82,4 +82,15 @@ class AuthRepositoryImplementation implements AuthRepository {
   Future<void> resendEmailVerification() async {
     await firebaseAuth.currentUser?.sendEmailVerification();
   }
+
+  @override
+  Future<Either<AuthFailure, void>> resetPassword(
+      {required String email}) async {
+    try {
+      final result = await firebaseAuth.sendPasswordResetEmail(email: email);
+      return right(result);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+    }
+  }
 }

@@ -8,4 +8,5 @@ class RoutePaths {
   static const String activitiesPath = "/activities";
   static const String loginPath = "/";
   static const String registerPath = "/register";
+  static const String passwordReset = "/password-reset";
 }

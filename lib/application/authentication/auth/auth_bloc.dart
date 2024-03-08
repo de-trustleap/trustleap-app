@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -37,6 +38,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthObserverGotResultEvent>((event, emit) {
       if (event.user == null && state is! AuthStateUnAuthenticated) {
         emit(AuthStateUnAuthenticated());
+      }
+    });
+
+    on<AuthPasswordResetRequestedEvent>((event, emit) async {
+      if (event.email == null) {
+        emit(AuthShowValidationState());
+      } else {
+        emit(AuthPasswordResetLoadingState());
+        final failureOrSuccess =
+            await authRepo.resetPassword(email: event.email!);
+        failureOrSuccess.fold(
+            (failure) => emit(AuthPasswordResetFailureState(failure: failure)),
+            (_) => emit(AuthPasswordResetSuccessState()));
       }
     });
   }
