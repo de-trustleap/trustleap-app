@@ -11,6 +11,7 @@ class UserModel {
   final String? address;
   final String? postCode;
   final String? place;
+  final String? profileImageURL;
   final List<String>? promoters;
   final dynamic createdAt;
 
@@ -22,6 +23,7 @@ class UserModel {
       this.address,
       this.postCode,
       this.place,
+      this.profileImageURL,
       this.promoters,
       this.createdAt});
 
@@ -34,6 +36,7 @@ class UserModel {
       'address': address,
       'postCode': postCode,
       'place': place,
+      'profileImageURL': profileImageURL,
       'promoters': promoters,
       'createdAt': createdAt,
     };
@@ -48,6 +51,9 @@ class UserModel {
       address: map['address'] != null ? map['address'] as String : null,
       postCode: map['postCode'] != null ? map['postCode'] as String : null,
       place: map['place'] != null ? map['place'] as String : null,
+      profileImageURL: map['profileImageURL'] != null
+          ? map['profileImageURL'] as String
+          : null,
       promoters:
           map['promoters'] != null ? List<String>.from(map['promoters']) : null,
       createdAt: map['createdAt'] as dynamic,
@@ -62,6 +68,7 @@ class UserModel {
     String? address,
     String? postCode,
     String? place,
+    String? profileImageURL,
     List<String>? promoters,
     dynamic createdAt,
   }) {
@@ -73,6 +80,7 @@ class UserModel {
       address: address ?? this.address,
       postCode: postCode ?? this.postCode,
       place: place ?? this.place,
+      profileImageURL: profileImageURL ?? this.profileImageURL,
       promoters: promoters ?? this.promoters,
       createdAt: createdAt ?? this.createdAt,
     );
@@ -91,6 +99,7 @@ class UserModel {
         address: address,
         postCode: postCode,
         place: place,
+        profileImageURL: profileImageURL,
         promoters: promoters);
   }
 
@@ -103,6 +112,7 @@ class UserModel {
         address: user.address,
         postCode: user.postCode,
         place: user.place,
+        profileImageURL: user.profileImageURL,
         promoters: user.promoters,
         createdAt: FieldValue.serverTimestamp());
   }
