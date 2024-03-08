@@ -15,4 +15,5 @@ abstract class AuthRepository {
   Option<CustomUser> getSignedInUser();
   User? getCurrentUser();
   Future<void> resendEmailVerification();
+  Future<Either<AuthFailure, void>> resetPassword({required String email});
 }

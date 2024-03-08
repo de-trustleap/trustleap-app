@@ -78,7 +78,6 @@ class _RegisterFormState extends State<RegisterForm> {
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final validator = AuthValidator(localization: localization);
-    final FocusNode node1 = FocusNode();
     const double textFieldSpacing = 20;
     const double maxViewWidth = 500;
     const double listPadding = 20;
@@ -212,42 +211,32 @@ class _RegisterFormState extends State<RegisterForm> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: getResponsiveWidth(1),
-                        child: FocusScope(
-                          child: Focus(
-                            onFocusChange: (focus) async {
-                              if (focus) {
-                                DateTime? pickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime.now());
-                                if (pickedDate != null) {
-                                  setState(() {
-                                    birthDateTextController.text =
-                                        DateFormat("dd.MM.yyyy")
-                                            .format(pickedDate);
-                                  });
-                                }
-                                WidgetsBinding
-                                    .instance.focusManager.primaryFocus
-                                    ?.unfocus();
-                              }
+                        child: TextFormField(
+                            keyboardType: TextInputType.datetime,
+                            controller: birthDateTextController,
+                            onFieldSubmitted: (_) => submit(),
+                            onChanged: (_) {
+                              resetError();
                             },
-                            child: TextFormField(
-                                keyboardType: TextInputType.datetime,
-                                controller: birthDateTextController,
-                                onFieldSubmitted: (_) => submit(),
-                                onChanged: (_) {
-                                  resetError();
-                                },
-                                validator: validator.validateBirthDate,
-                                decoration: InputDecoration(
-                                    prefixIcon: const Icon(
-                                        Icons.calendar_today_rounded),
-                                    labelText: localization.register_birthdate),
-                                onTap: () async {}),
-                          ),
-                        ),
+                            validator: validator.validateBirthDate,
+                            decoration: InputDecoration(
+                                prefixIcon:
+                                    const Icon(Icons.calendar_today_rounded),
+                                labelText: localization.register_birthdate),
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime.now());
+                              if (pickedDate != null) {
+                                setState(() {
+                                  birthDateTextController.text =
+                                      DateFormat("dd.MM.yyyy")
+                                          .format(pickedDate);
+                                });
+                              }
+                            }),
                       ),
                     ]),
                     const SizedBox(height: textFieldSpacing),
@@ -256,7 +245,6 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: streetAndNumberTextController,
-                          focusNode: node1,
                           onFieldSubmitted: (_) => submit(),
                           onChanged: (_) {
                             resetError();

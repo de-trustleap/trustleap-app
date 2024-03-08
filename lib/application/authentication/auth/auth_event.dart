@@ -16,3 +16,11 @@ class AuthObserverGotResultEvent extends AuthEvent {
     required this.user,
   });
 }
+
+class AuthPasswordResetRequestedEvent extends AuthEvent {
+  final String? email;
+
+  AuthPasswordResetRequestedEvent({
+    this.email,
+  });
+}

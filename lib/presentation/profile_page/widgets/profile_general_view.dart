@@ -12,11 +12,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class ProfileGeneralView extends StatelessWidget {
+class ProfileGeneralView extends StatefulWidget {
   const ProfileGeneralView({super.key});
 
   @override
+  State<ProfileGeneralView> createState() => _ProfileGeneralViewState();
+}
+
+class _ProfileGeneralViewState extends State<ProfileGeneralView>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     final themeData = Theme.of(context);
     final profileObserverBloc = Modular.get<ProfileObserverBloc>();
     return BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
