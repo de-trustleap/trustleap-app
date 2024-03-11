@@ -27,6 +27,7 @@ dependencies:
   flutter_modular: ^6.0.4+1
   firebase_storage: ^11.6.9
   cached_network_image: ^3.3.1
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:

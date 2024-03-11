@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
             } else if (state is AuthStateAuthenticated) {
               print("AUTHENTICATED");
               if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
-                print("LASTROUTE: $lastRoute");
                 Modular.to.navigate(lastRoute);
               } else {
                 Modular.to

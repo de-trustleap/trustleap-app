@@ -9,7 +9,8 @@ class CustomUser {
   final String? address;
   final String? postCode;
   final String? place;
-  final String? profileImageURL;
+  final String? profileImageDownloadURL;
+  final String? thumbnailDownloadURL;
   final List<String>? promoters;
 
   CustomUser(
@@ -20,7 +21,8 @@ class CustomUser {
       this.address,
       this.postCode,
       this.place,
-      this.profileImageURL,
+      this.profileImageDownloadURL,
+      this.thumbnailDownloadURL,
       this.promoters});
 
   CustomUser copyWith(
@@ -31,7 +33,8 @@ class CustomUser {
       String? address,
       String? postCode,
       String? place,
-      String? profileImageURL,
+      String? profileImageDownloadURL,
+      String? thumbnailDownloadURL,
       List<String>? promoters}) {
     return CustomUser(
         id: id ?? this.id,
@@ -41,7 +44,9 @@ class CustomUser {
         address: address ?? this.address,
         postCode: postCode ?? this.postCode,
         place: place ?? this.place,
-        profileImageURL: profileImageURL ?? this.profileImageURL,
+        profileImageDownloadURL:
+            profileImageDownloadURL ?? this.profileImageDownloadURL,
+        thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         promoters: promoters ?? this.promoters);
   }
 }

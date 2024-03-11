@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 
 class FirebaseExceptionParser {
   static String parseFirebaseAuthExceptionMessage(
@@ -69,6 +70,23 @@ class FirebaseExceptionParser {
       return UnavailableFailure();
     } else {
       return BackendFailure();
+    }
+  }
+
+  static StorageFailure getStorageException({required String code}) {
+    if (code.contains("object-not-found") ||
+        code.contains("OBJECT_NOT_FOUND")) {
+      return ObjectNotFound();
+    } else if (code.contains("unauthenticated") ||
+        code.contains("UNAUTHENTICATED")) {
+      return NotAuthenticated();
+    } else if (code.contains("unauthorized") || code.contains("UNAUTHORIZED")) {
+      return UnAuthorized();
+    } else if (code.contains("retry-limit-exceeded") ||
+        code.contains("RETRY_LIMIT_EXCEEDED")) {
+      return RetryLimitExceeded();
+    } else {
+      return UnknownFailure();
     }
   }
 }

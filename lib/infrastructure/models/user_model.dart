@@ -11,7 +11,8 @@ class UserModel {
   final String? address;
   final String? postCode;
   final String? place;
-  final String? profileImageURL;
+  final String? profileImageDownloadURL;
+  final String? thumbnailDownloadURL;
   final List<String>? promoters;
   final dynamic createdAt;
 
@@ -23,7 +24,8 @@ class UserModel {
       this.address,
       this.postCode,
       this.place,
-      this.profileImageURL,
+      this.profileImageDownloadURL,
+      this.thumbnailDownloadURL,
       this.promoters,
       this.createdAt});
 
@@ -36,7 +38,8 @@ class UserModel {
       'address': address,
       'postCode': postCode,
       'place': place,
-      'profileImageURL': profileImageURL,
+      'profileImageDownloadURL': profileImageDownloadURL,
+      'thumbnailDownloadURL': thumbnailDownloadURL,
       'promoters': promoters,
       'createdAt': createdAt,
     };
@@ -51,8 +54,11 @@ class UserModel {
       address: map['address'] != null ? map['address'] as String : null,
       postCode: map['postCode'] != null ? map['postCode'] as String : null,
       place: map['place'] != null ? map['place'] as String : null,
-      profileImageURL: map['profileImageURL'] != null
-          ? map['profileImageURL'] as String
+      profileImageDownloadURL: map['profileImageDownloadURL'] != null
+          ? map['profileImageDownloadURL'] as String
+          : null,
+      thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
+          ? map['thumbnailDownloadURL'] as String
           : null,
       promoters:
           map['promoters'] != null ? List<String>.from(map['promoters']) : null,
@@ -68,7 +74,8 @@ class UserModel {
     String? address,
     String? postCode,
     String? place,
-    String? profileImageURL,
+    String? profileImageDownloadURL,
+    String? thumbnailDownloadURL,
     List<String>? promoters,
     dynamic createdAt,
   }) {
@@ -80,7 +87,9 @@ class UserModel {
       address: address ?? this.address,
       postCode: postCode ?? this.postCode,
       place: place ?? this.place,
-      profileImageURL: profileImageURL ?? this.profileImageURL,
+      profileImageDownloadURL:
+          profileImageDownloadURL ?? this.profileImageDownloadURL,
+      thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
       promoters: promoters ?? this.promoters,
       createdAt: createdAt ?? this.createdAt,
     );
@@ -99,7 +108,8 @@ class UserModel {
         address: address,
         postCode: postCode,
         place: place,
-        profileImageURL: profileImageURL,
+        profileImageDownloadURL: profileImageDownloadURL,
+        thumbnailDownloadURL: thumbnailDownloadURL,
         promoters: promoters);
   }
 
@@ -112,7 +122,8 @@ class UserModel {
         address: user.address,
         postCode: user.postCode,
         place: user.place,
-        profileImageURL: user.profileImageURL,
+        profileImageDownloadURL: user.profileImageDownloadURL,
+        thumbnailDownloadURL: user.thumbnailDownloadURL,
         promoters: user.promoters,
         createdAt: FieldValue.serverTimestamp());
   }
