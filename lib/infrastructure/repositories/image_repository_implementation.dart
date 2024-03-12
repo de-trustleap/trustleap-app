@@ -25,7 +25,6 @@ class ImageRepositoryImplementation implements ImageRepository {
       final downloadURL = await userImagesRef.getDownloadURL();
       return right(downloadURL);
     } on FirebaseException catch (e) {
-      print("ERROR: $e");
       return left(FirebaseExceptionParser.getStorageException(code: e.code));
     }
   }
