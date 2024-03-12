@@ -19,7 +19,8 @@ class ImageRepositoryImplementation implements ImageRepository {
   Future<Either<StorageFailure, String>> uploadImageForWeb(
       Uint8List image, String userID) async {
     final Reference refRoot = firebaseStorage.ref();
-    final Reference userImagesRef = refRoot.child("profileImages/$userID");
+    final Reference userImagesRef =
+        refRoot.child("profileImages/$userID/$userID");
     try {
       await userImagesRef.putData(image);
       final downloadURL = await userImagesRef.getDownloadURL();
@@ -33,7 +34,8 @@ class ImageRepositoryImplementation implements ImageRepository {
   Future<Either<StorageFailure, String>> uploadImageForApp(
       File image, String userID) async {
     final Reference refRoot = firebaseStorage.ref();
-    final Reference userImagesRef = refRoot.child("profileImages/$userID");
+    final Reference userImagesRef =
+        refRoot.child("profileImages/$userID/$userID");
     try {
       await userImagesRef.putFile(File(image.path));
       final downloadURL = await userImagesRef.getDownloadURL();

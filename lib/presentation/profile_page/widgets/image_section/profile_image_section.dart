@@ -55,7 +55,7 @@ class _MyWidgetState extends State<ProfileImageSection> {
   }
 
   String _getImageThumbnailURL(ImagesState state, String? thumbnailURL) {
-    if (state is ImageUploadSuccessState && thumbnailURL == null) {
+    if (state is ImageUploadSuccessState) {
       return state.imageURL;
     } else if (thumbnailURL != null) {
       return thumbnailURL;
@@ -70,9 +70,26 @@ class _MyWidgetState extends State<ProfileImageSection> {
     });
   }
 
+  Widget placeholderImage(Size imageSize, ThemeData themeData) {
+    return Container(
+      width: imageSize.width,
+      height: imageSize.height,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+              width: 5,
+              color: hovered
+                  ? themeData.colorScheme.secondary
+                  : Colors.transparent),
+          image: const DecorationImage(
+              image: AssetImage("images/placeholder.jpg"))),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    const Size imageSize = Size(200, 200);
 
     return BlocConsumer<ImagesBloc, ImagesState>(
       listener: (context, state) {
@@ -85,8 +102,8 @@ class _MyWidgetState extends State<ProfileImageSection> {
         return Column(
           children: [
             SizedBox(
-              width: 200,
-              height: 200,
+              width: imageSize.width,
+              height: imageSize.height,
               child: ImageUploadDropzone(
                 onDroppedFile: (file) {
                   setHovered(false);
@@ -123,8 +140,8 @@ class _MyWidgetState extends State<ProfileImageSection> {
                               closeButtonTooltip: "Schließen");
                         },
                         child: CachedNetworkImage(
-                          width: 200,
-                          height: 200,
+                          width: imageSize.width,
+                          height: imageSize.height,
                           imageUrl: _getImageThumbnailURL(
                               state, widget.user.thumbnailDownloadURL),
                           imageBuilder: (context, imageProvider) {
@@ -142,14 +159,12 @@ class _MyWidgetState extends State<ProfileImageSection> {
                           },
                           placeholder: (context, url) {
                             return Stack(children: [
-                              Image.asset("images/placeholder.jpg",
-                                  height: 200, width: 200),
+                              placeholderImage(imageSize, themeData),
                               const LoadingIndicator()
                             ]);
                           },
                           errorWidget: (context, url, error) {
-                            return Image.asset("images/placeholder.jpg",
-                                height: 200, width: 200);
+                            return placeholderImage(imageSize, themeData);
                           },
                         ),
                       ),
