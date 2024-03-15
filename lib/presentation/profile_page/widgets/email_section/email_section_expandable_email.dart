@@ -25,8 +25,7 @@ class EmailSectionExpandableEmail extends StatelessWidget {
     final themeData = Theme.of(context);
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-          "Geben Sie jetzt ihre neue E-Mail Adresse an und bestätigen Sie. An die neue E-Mail Adresse wird anschließend ein Bestätigungslink gesendet. Durch diesen Link können Sie Ihre neue E-Mail Adresse verifizieren und sich erneut anmelden.",
+      Text(localization.profile_page_email_section_description,
           style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
       const SizedBox(height: 16),
       TextFormField(
@@ -47,7 +46,8 @@ class EmailSectionExpandableEmail extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           PrimaryButton(
-              title: "E-Mail Adresse ändern",
+              title: localization
+                  .profile_page_email_section_change_email_button_title,
               width: maxWidth / 2 - 20,
               onTap: () {
                 submit();

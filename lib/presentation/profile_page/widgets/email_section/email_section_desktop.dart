@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_verification_badge.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,8 @@ class EmailSectionDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+
     return Table(
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         columnWidths: const {
@@ -27,12 +30,12 @@ class EmailSectionDesktop extends StatelessWidget {
         },
         children: [
           TableRow(children: [
-            Text("E-Mail",
+            Text(localization.profile_page_email_section_email,
                 style:
                     themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text("Status",
+              child: Text(localization.profile_page_email_section_status,
                   style: themeData.textTheme.headlineLarge!
                       .copyWith(fontSize: 16)),
             ),

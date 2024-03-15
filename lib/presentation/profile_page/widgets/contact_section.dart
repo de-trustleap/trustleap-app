@@ -95,8 +95,8 @@ class _ContactSectionState extends State<ContactSection> {
       return BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is ProfileUpdateContactInformationFailureState) {
-            errorMessage =
-                DatabaseFailureMapper.mapFailureMessage(state.failure);
+            errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                state.failure, localization);
             showError = true;
           } else if (state is ProfileUpdateContactInformationSuccessState) {
             widget.changesSaved();
@@ -111,7 +111,7 @@ class _ContactSectionState extends State<ContactSection> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Kontaktinformationen",
+                Text(localization.profile_page_contact_section_title,
                     style: themeData.textTheme.headlineLarge!
                         .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
@@ -125,7 +125,9 @@ class _ContactSectionState extends State<ContactSection> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            Text("Vorname",
+                            Text(
+                                localization
+                                    .profile_page_contact_section_form_firstname,
                                 style: themeData.textTheme.headlineLarge!
                                     .copyWith(fontSize: 16)),
                             const SizedBox(height: 4),
@@ -153,7 +155,9 @@ class _ContactSectionState extends State<ContactSection> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            Text("Nachname",
+                            Text(
+                                localization
+                                    .profile_page_contact_section_form_lastname,
                                 style: themeData.textTheme.headlineLarge!
                                     .copyWith(fontSize: 16)),
                             const SizedBox(height: 4),
@@ -176,7 +180,7 @@ class _ContactSectionState extends State<ContactSection> {
                     ]),
                 const SizedBox(height: textFieldSpacing),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text("Straße und Hausnummer",
+                  Text(localization.profile_page_contact_section_form_address,
                       style: themeData.textTheme.headlineLarge!
                           .copyWith(fontSize: 16)),
                   const SizedBox(height: 4),
@@ -203,7 +207,9 @@ class _ContactSectionState extends State<ContactSection> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            Text("PLZ",
+                            Text(
+                                localization
+                                    .profile_page_contact_section_form_postcode,
                                 style: themeData.textTheme.headlineLarge!
                                     .copyWith(fontSize: 16)),
                             const SizedBox(height: 4),
@@ -232,7 +238,9 @@ class _ContactSectionState extends State<ContactSection> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            Text("Ort",
+                            Text(
+                                localization
+                                    .profile_page_contact_section_form_place,
                                 style: themeData.textTheme.headlineLarge!
                                     .copyWith(fontSize: 16)),
                             const SizedBox(height: 4),
@@ -258,7 +266,8 @@ class _ContactSectionState extends State<ContactSection> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     PrimaryButton(
-                        title: "Änderungen speichern",
+                        title: localization
+                            .profile_page_contact_section_form_save_button_title,
                         width: maxWidth / 2 - textFieldSpacing,
                         onTap: () {
                           submit();

@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
+import 'package:finanzbegleiter/application/images/images_bloc.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
@@ -52,7 +53,8 @@ class _ProfilePageState extends State<ProfilePage>
               create: (context) => Modular.get<ProfileCubit>()
                 ..verifyEmail()
                 ..getCurrentUser()),
-          BlocProvider(create: (context) => Modular.get<UserCubit>())
+          BlocProvider(create: (context) => Modular.get<UserCubit>()),
+          BlocProvider(create: (context) => Modular.get<ImagesBloc>())
         ],
         child: Padding(
           padding: EdgeInsets.only(top: topPadding),

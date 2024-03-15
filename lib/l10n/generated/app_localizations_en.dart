@@ -56,6 +56,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_login_buttontitle => 'Login';
 
   @override
+  String get login_password_forgotten_text => 'Do you have your ';
+
+  @override
+  String get login_password_forgotten_linktext => 'Password forgotten?';
+
+  @override
   String get login_register_linktitle => 'Register now';
 
   @override
@@ -95,31 +101,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_validation_invalid_birthdate => 'You must be 18 or older';
 
   @override
-  String get authfailure_email_already_in_use => 'The email address is already in use.';
+  String get auth_validation_invalid_date => 'The entered date is invalid.';
 
   @override
-  String get authfailure_invalid_email => 'The entered email adress is invalid.';
-
-  @override
-  String get authfailure_weak_password => 'The entered password is too weak. Please use at least 6 characters.';
-
-  @override
-  String get authfailure_user_disabled => 'The user is disabled.';
-
-  @override
-  String get authfailure_user_not_found => 'The user doesn\'\'t exist.';
-
-  @override
-  String get authfailure_wrong_password => 'The entered password is wrong.';
-
-  @override
-  String get authfailure_invalid_credentials => 'Your credentials are invalid.';
-
-  @override
-  String get authfailure_too_many_requests => 'You have entered your login details incorrectly too many times. Try again later.';
-
-  @override
-  String get authfailure_unknown => 'An unknown error occured.';
+  String get auth_validation_invalid_postcode => 'the postcode is invalid';
 
   @override
   String get menuitems_profile => 'Profile';
@@ -138,4 +123,223 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get menuitems_activities => 'Activities';
+
+  @override
+  String get auth_failure_email_already_in_use => 'The email adress is already taken.';
+
+  @override
+  String get auth_failure_invalid_email => 'The email address is invalid';
+
+  @override
+  String get auth_failure_weak_password => 'The password is too weak. Please use at least 6 characters.';
+
+  @override
+  String get auth_failure_user_disabled => 'The user is disabled.';
+
+  @override
+  String get auth_failure_user_not_found => 'The user does not exist.';
+
+  @override
+  String get auth_failure_wrong_password => 'The entered password is not correct.';
+
+  @override
+  String get auth_failure_invalid_credentials => 'Your entered credentials do not exist.';
+
+  @override
+  String get auth_failure_too_many_requests => 'You have entered your login details incorrectly too many times. Try again later.';
+
+  @override
+  String get auth_failure_user_mismatch => 'Your login information does not belong to the current user.';
+
+  @override
+  String get auth_failure_invalid_verification_code => 'Your verification code is invalid.';
+
+  @override
+  String get auth_failure_invalid_verification_id => 'Your verification id is invalid.';
+
+  @override
+  String get auth_failure_requires_recent_login => 'Its been too long since you last logged in. Sign in again.';
+
+  @override
+  String get auth_failure_missing_password => 'You have to type in your password.';
+
+  @override
+  String get auth_failure_unknown => 'An unknown error occured.';
+
+  @override
+  String get database_failure_permission_denied => 'Permission denied to access these resources.';
+
+  @override
+  String get database_failure_not_found => 'The requested data was not found.';
+
+  @override
+  String get database_failure_already_exists => 'the data already exists.';
+
+  @override
+  String get database_failure_deadline_exceeded => 'Data retrieval takes too long. Try again later.';
+
+  @override
+  String get database_failure_cancelled => 'The operation has been cancelled.';
+
+  @override
+  String get database_failure_unavailable => 'The service is currently unavailable.';
+
+  @override
+  String get database_failure_unknown => 'An unknown error occured.';
+
+  @override
+  String get storage_failure_object_not_found => 'Image not found.';
+
+  @override
+  String get storage_failure_not_authenticated => 'You are not logged in. Please login and try again.';
+
+  @override
+  String get storage_failure_not_authorized => 'You are not permitted to do this.';
+
+  @override
+  String get storage_failure_retry_limit_exceeded => 'There seems to be a problem. The action is taking longer than usual. Please try again later.';
+
+  @override
+  String get storage_failure_unknown => 'An unknown error occured. Please try again later.';
+
+  @override
+  String get password_forgotten_title => 'Reset password';
+
+  @override
+  String get password_forgotten_description => 'Please enter your email address and confirm. A link will then be sent to the email address you provided. You can use this link to reset your password.';
+
+  @override
+  String get password_forgotten_success_dialog_title => 'Password reset succeeded';
+
+  @override
+  String get password_forgotten_success_dialog_description => 'An email has been sent to the email address provided. You can set your new password using the link in the email.';
+
+  @override
+  String get password_forgotten_success_dialog_ok_button_title => 'Back to Login';
+
+  @override
+  String get password_forgotten_button_title => 'Reset password';
+
+  @override
+  String get password_forgotten_email_textfield_placeholder => 'email address';
+
+  @override
+  String get general_error_view_refresh_button_title => 'Try again';
+
+  @override
+  String get profile_page_email_section_email => 'E-Mail';
+
+  @override
+  String get profile_page_email_section_status => 'Status';
+
+  @override
+  String get profile_page_email_section_description => 'Now enter your new email address and confirm. A confirmation link will then be sent to the new email address. You can use this link to verify your new email address and log in again.';
+
+  @override
+  String get profile_page_email_section_change_email_button_title => 'Change email address';
+
+  @override
+  String get profile_page_email_section_change_email_password_description => 'Please enter your password if you would like to change your email address.';
+
+  @override
+  String get profile_page_email_section_change_email_password_continue_button_title => 'Continue';
+
+  @override
+  String get profile_page_email_section_resend_verify_email_button_title => 'Resend link for email verification';
+
+  @override
+  String get profile_page_email_section_title => 'E-Mail Settings';
+
+  @override
+  String get profile_page_email_section_verification_badge_verified => 'Verified';
+
+  @override
+  String get profile_page_email_section_verification_badge_unverified => 'Unverifiziert';
+
+  @override
+  String get profile_page_image_section_validation_exceededFileSize => 'You have exceeded the maximum allowed size of 5 MB';
+
+  @override
+  String get profile_page_image_section_validation_not_valid => 'The image format is invalid';
+
+  @override
+  String get profile_page_image_section_only_one_allowed => 'You can only upload one image at a time';
+
+  @override
+  String get profile_page_image_section_upload_not_found => 'The image to upload was not found';
+
+  @override
+  String get profile_page_image_section_large_image_view_close_button_tooltip_title => 'Close';
+
+  @override
+  String get profile_page_password_update_section_title => 'Change password';
+
+  @override
+  String get profile_page_password_update_section_new_password_description => 'Please enter your new password and confirm it. You will then be logged out and you can log in with the new password.';
+
+  @override
+  String get profile_page_password_update_section_new_password_textfield_placeholder => 'New password';
+
+  @override
+  String get profile_page_password_update_section_new_password_repeat_textfield_placeholder => 'Repeat new password';
+
+  @override
+  String get profile_page_password_update_section_new_password_confirm_button_text => 'Change password';
+
+  @override
+  String get profile_page_password_update_section_reauth_description => 'Please enter your current password so that you can create a new password.';
+
+  @override
+  String get profile_page_password_update_section_reauth_password_textfield_placeholder => 'Password';
+
+  @override
+  String get profile_page_password_update_section_reauth_continue_button_title => 'Weiter';
+
+  @override
+  String get profile_page_contact_section_title => 'Contact Information';
+
+  @override
+  String get profile_page_contact_section_form_firstname => 'first name';
+
+  @override
+  String get profile_page_contact_section_form_lastname => 'last name';
+
+  @override
+  String get profile_page_contact_section_form_address => 'address';
+
+  @override
+  String get profile_page_contact_section_form_postcode => 'postcode';
+
+  @override
+  String get profile_page_contact_section_form_place => 'place';
+
+  @override
+  String get profile_page_contact_section_form_save_button_title => 'Save changes';
+
+  @override
+  String get profile_page_snackbar_image_changed_message => 'You have successfully customized the profile picture.';
+
+  @override
+  String get profile_page_snackbar_contact_information_changes => 'The change to your contact information was successful.';
+
+  @override
+  String get profile_page_snackbar_email_verification => 'A link for email verification has been sent to you.';
+
+  @override
+  String get profile_page_logout_button_title => 'Logout';
+
+  @override
+  String get profile_page_request_failure_message => 'An error occurred while retrieving the data.';
+
+  @override
+  String get profile_page_promoters_section_title => 'Recommender';
+
+  @override
+  String get profile_page_promoters_section_recommender_count => 'Number of recommenders:';
+
+  @override
+  String get profile_page_general_tab_title => 'General';
+
+  @override
+  String get profile_page_change_password_tab_title => 'Change Password';
 }

@@ -1,5 +1,3 @@
-import 'package:dartz/dartz.dart';
-
 abstract class AuthFailure {}
 
 class ServerFailure extends AuthFailure {}

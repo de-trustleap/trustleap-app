@@ -112,8 +112,8 @@ class _RegisterFormState extends State<RegisterForm> {
                 () => {},
                 (eitherFailureOrSuccess) =>
                     eitherFailureOrSuccess.fold((failure) {
-                      errorMessage =
-                          AuthFailureMapper.mapFailureMessage(failure);
+                      errorMessage = AuthFailureMapper.mapFailureMessage(
+                          failure, localization);
                       showError = true;
                     }, (creds) {
                       showError = false;

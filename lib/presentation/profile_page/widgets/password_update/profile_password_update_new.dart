@@ -29,7 +29,8 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-          "Geben Sie bitte ihr neues Passwort an und bestätigen Sie es. Danach werden Sie ausgeloggt und Sie können sich mit dem neuen Passwort anmelden.",
+          localization
+              .profile_page_password_update_section_new_password_description,
           style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
       const SizedBox(height: textFieldSpacing),
       TextFormField(
@@ -40,7 +41,9 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
         onFieldSubmitted: (_) => submit(),
         validator: validator.validatePassword,
         obscureText: true,
-        decoration: const InputDecoration(labelText: "Neues Passwort"),
+        decoration: InputDecoration(
+            labelText: localization
+                .profile_page_password_update_section_new_password_textfield_placeholder),
       ),
       const SizedBox(height: textFieldSpacing),
       TextFormField(
@@ -54,8 +57,9 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
               val, passwordTextController.text);
         },
         obscureText: true,
-        decoration:
-            const InputDecoration(labelText: "Neues Passwort wiederholen"),
+        decoration: InputDecoration(
+            labelText: localization
+                .profile_page_password_update_section_new_password_repeat_textfield_placeholder),
       ),
       const SizedBox(height: textFieldSpacing * 2),
       Row(
@@ -63,7 +67,8 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           PrimaryButton(
-              title: "Passwort ändern",
+              title: localization
+                  .profile_page_password_update_section_new_password_confirm_button_text,
               width: maxWidth / 2 - textFieldSpacing,
               onTap: () {
                 submit();

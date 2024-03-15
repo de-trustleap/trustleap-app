@@ -195,6 +195,18 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login_login_buttontitle;
 
+  /// password forgotten text on login page.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you have your '**
+  String get login_password_forgotten_text;
+
+  /// password forgotten link text on login page.
+  ///
+  /// In en, this message translates to:
+  /// **'Password forgotten?'**
+  String get login_password_forgotten_linktext;
+
   /// Register link on the login page which leads to the register page
   ///
   /// In en, this message translates to:
@@ -273,59 +285,17 @@ abstract class AppLocalizations {
   /// **'You must be 18 or older'**
   String get auth_validation_invalid_birthdate;
 
-  /// error message when email is already in use
+  /// validationmessage when date is invalid
   ///
   /// In en, this message translates to:
-  /// **'The email address is already in use.'**
-  String get authfailure_email_already_in_use;
+  /// **'The entered date is invalid.'**
+  String get auth_validation_invalid_date;
 
-  /// error message when email is invalid
+  /// validationmessage when postcode is invalid
   ///
   /// In en, this message translates to:
-  /// **'The entered email adress is invalid.'**
-  String get authfailure_invalid_email;
-
-  /// error message when password is too weak
-  ///
-  /// In en, this message translates to:
-  /// **'The entered password is too weak. Please use at least 6 characters.'**
-  String get authfailure_weak_password;
-
-  /// error message when the user is disabled
-  ///
-  /// In en, this message translates to:
-  /// **'The user is disabled.'**
-  String get authfailure_user_disabled;
-
-  /// error message when the user doesn''t exist
-  ///
-  /// In en, this message translates to:
-  /// **'The user doesn\'\'t exist.'**
-  String get authfailure_user_not_found;
-
-  /// error message when a wrong password was entered
-  ///
-  /// In en, this message translates to:
-  /// **'The entered password is wrong.'**
-  String get authfailure_wrong_password;
-
-  /// error message when invalid credentials have been entered
-  ///
-  /// In en, this message translates to:
-  /// **'Your credentials are invalid.'**
-  String get authfailure_invalid_credentials;
-
-  /// error message when credentials has been entered incorrectly too often.
-  ///
-  /// In en, this message translates to:
-  /// **'You have entered your login details incorrectly too many times. Try again later.'**
-  String get authfailure_too_many_requests;
-
-  /// error message when an unknown authentication error occured
-  ///
-  /// In en, this message translates to:
-  /// **'An unknown error occured.'**
-  String get authfailure_unknown;
+  /// **'the postcode is invalid'**
+  String get auth_validation_invalid_postcode;
 
   /// the menu entry for the profile
   ///
@@ -362,6 +332,444 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Activities'**
   String get menuitems_activities;
+
+  /// error message when the email address is already taken.
+  ///
+  /// In en, this message translates to:
+  /// **'The email adress is already taken.'**
+  String get auth_failure_email_already_in_use;
+
+  /// error message when the email address is invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'The email address is invalid'**
+  String get auth_failure_invalid_email;
+
+  /// error message when the password is too weak.
+  ///
+  /// In en, this message translates to:
+  /// **'The password is too weak. Please use at least 6 characters.'**
+  String get auth_failure_weak_password;
+
+  /// error message when the user is disabled.
+  ///
+  /// In en, this message translates to:
+  /// **'The user is disabled.'**
+  String get auth_failure_user_disabled;
+
+  /// error message when the user does not exist.
+  ///
+  /// In en, this message translates to:
+  /// **'The user does not exist.'**
+  String get auth_failure_user_not_found;
+
+  /// error message when the password is not correct.
+  ///
+  /// In en, this message translates to:
+  /// **'The entered password is not correct.'**
+  String get auth_failure_wrong_password;
+
+  /// error message when the credentials are wrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Your entered credentials do not exist.'**
+  String get auth_failure_invalid_credentials;
+
+  /// error message when the credentials has been entered wrong too many times.
+  ///
+  /// In en, this message translates to:
+  /// **'You have entered your login details incorrectly too many times. Try again later.'**
+  String get auth_failure_too_many_requests;
+
+  /// error message when the credentials do not belong to the current user.
+  ///
+  /// In en, this message translates to:
+  /// **'Your login information does not belong to the current user.'**
+  String get auth_failure_user_mismatch;
+
+  /// error message when the verification code is invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Your verification code is invalid.'**
+  String get auth_failure_invalid_verification_code;
+
+  /// error message for an invalid verification id.
+  ///
+  /// In en, this message translates to:
+  /// **'Your verification id is invalid.'**
+  String get auth_failure_invalid_verification_id;
+
+  /// error message if the last login was too long ago and you have to log in again.
+  ///
+  /// In en, this message translates to:
+  /// **'Its been too long since you last logged in. Sign in again.'**
+  String get auth_failure_requires_recent_login;
+
+  /// error message when there is a missing password.
+  ///
+  /// In en, this message translates to:
+  /// **'You have to type in your password.'**
+  String get auth_failure_missing_password;
+
+  /// general error message.
+  ///
+  /// In en, this message translates to:
+  /// **'An unknown error occured.'**
+  String get auth_failure_unknown;
+
+  /// Error message if you want to access files for which you need authorization without authorization.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied to access these resources.'**
+  String get database_failure_permission_denied;
+
+  /// error message when the requested data was not found.
+  ///
+  /// In en, this message translates to:
+  /// **'The requested data was not found.'**
+  String get database_failure_not_found;
+
+  /// error message when the data already exists.
+  ///
+  /// In en, this message translates to:
+  /// **'the data already exists.'**
+  String get database_failure_already_exists;
+
+  /// error message when there is a timeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Data retrieval takes too long. Try again later.'**
+  String get database_failure_deadline_exceeded;
+
+  /// error message when the operation has been cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'The operation has been cancelled.'**
+  String get database_failure_cancelled;
+
+  /// error message when the service is unavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'The service is currently unavailable.'**
+  String get database_failure_unavailable;
+
+  /// general error message.
+  ///
+  /// In en, this message translates to:
+  /// **'An unknown error occured.'**
+  String get database_failure_unknown;
+
+  /// error message that the image was not found
+  ///
+  /// In en, this message translates to:
+  /// **'Image not found.'**
+  String get storage_failure_object_not_found;
+
+  /// error message when are not logged in.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not logged in. Please login and try again.'**
+  String get storage_failure_not_authenticated;
+
+  /// error message when are not permitted.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not permitted to do this.'**
+  String get storage_failure_not_authorized;
+
+  /// error message when there is a timeout.
+  ///
+  /// In en, this message translates to:
+  /// **'There seems to be a problem. The action is taking longer than usual. Please try again later.'**
+  String get storage_failure_retry_limit_exceeded;
+
+  /// general error message.
+  ///
+  /// In en, this message translates to:
+  /// **'An unknown error occured. Please try again later.'**
+  String get storage_failure_unknown;
+
+  /// title of the password forgotten page.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
+  String get password_forgotten_title;
+
+  /// description of the password forgotten page.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email address and confirm. A link will then be sent to the email address you provided. You can use this link to reset your password.'**
+  String get password_forgotten_description;
+
+  /// title for the password forgotten success alert.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset succeeded'**
+  String get password_forgotten_success_dialog_title;
+
+  /// description for the password forgotten success alert.
+  ///
+  /// In en, this message translates to:
+  /// **'An email has been sent to the email address provided. You can set your new password using the link in the email.'**
+  String get password_forgotten_success_dialog_description;
+
+  /// ok button title for the password forgotten success alert.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Login'**
+  String get password_forgotten_success_dialog_ok_button_title;
+
+  /// button title for password reset on the password forgotten page.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
+  String get password_forgotten_button_title;
+
+  /// placeholder for the email address textfield on the password forgotten page.
+  ///
+  /// In en, this message translates to:
+  /// **'email address'**
+  String get password_forgotten_email_textfield_placeholder;
+
+  /// title for the refresh button on the page that appears when no data could be loaded
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get general_error_view_refresh_button_title;
+
+  /// Row heading for the email column in the email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'E-Mail'**
+  String get profile_page_email_section_email;
+
+  /// Row heading for the status column in the email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get profile_page_email_section_status;
+
+  /// description text in the email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Now enter your new email address and confirm. A confirmation link will then be sent to the new email address. You can use this link to verify your new email address and log in again.'**
+  String get profile_page_email_section_description;
+
+  /// button title of the change email button in the email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Change email address'**
+  String get profile_page_email_section_change_email_button_title;
+
+  /// description of the passwort entry in the email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password if you would like to change your email address.'**
+  String get profile_page_email_section_change_email_password_description;
+
+  /// button title of the continue button of the passwort entry in the email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get profile_page_email_section_change_email_password_continue_button_title;
+
+  /// button title of the resend email verification button in the email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend link for email verification'**
+  String get profile_page_email_section_resend_verify_email_button_title;
+
+  /// title of the email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'E-Mail Settings'**
+  String get profile_page_email_section_title;
+
+  /// title of the verified verification badge in email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get profile_page_email_section_verification_badge_verified;
+
+  /// title of the unverified verification badge in email area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Unverifiziert'**
+  String get profile_page_email_section_verification_badge_unverified;
+
+  /// validation message when upload image is larger than 5 MB.
+  ///
+  /// In en, this message translates to:
+  /// **'You have exceeded the maximum allowed size of 5 MB'**
+  String get profile_page_image_section_validation_exceededFileSize;
+
+  /// validation message when image format is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'The image format is invalid'**
+  String get profile_page_image_section_validation_not_valid;
+
+  /// validation message when trying to upload multiple images at once using drag and drop.
+  ///
+  /// In en, this message translates to:
+  /// **'You can only upload one image at a time'**
+  String get profile_page_image_section_only_one_allowed;
+
+  /// validation message if the image was not found to upload.
+  ///
+  /// In en, this message translates to:
+  /// **'The image to upload was not found'**
+  String get profile_page_image_section_upload_not_found;
+
+  /// the title of the tooltip that is displayed when you hover over the close button in full screen mode
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get profile_page_image_section_large_image_view_close_button_tooltip_title;
+
+  /// title of the change password section on profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get profile_page_password_update_section_title;
+
+  /// the description of the change password page on the profile page if a new password should be specified.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your new password and confirm it. You will then be logged out and you can log in with the new password.'**
+  String get profile_page_password_update_section_new_password_description;
+
+  /// placeholder for the new password text field on the change password page in the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get profile_page_password_update_section_new_password_textfield_placeholder;
+
+  /// placeholder for the new password repeat text field on the change password page in the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat new password'**
+  String get profile_page_password_update_section_new_password_repeat_textfield_placeholder;
+
+  /// button title for the confirm password change button on the change password page in the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get profile_page_password_update_section_new_password_confirm_button_text;
+
+  /// Description for reauthentication on the Change Password page in the Profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your current password so that you can create a new password.'**
+  String get profile_page_password_update_section_reauth_description;
+
+  /// Placeholder for the password text field of the reauthentication on the change password page in the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get profile_page_password_update_section_reauth_password_textfield_placeholder;
+
+  /// Continue button title of reauthentication on the change password page in the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Weiter'**
+  String get profile_page_password_update_section_reauth_continue_button_title;
+
+  /// Title of the contact information section in the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Information'**
+  String get profile_page_contact_section_title;
+
+  /// First name text field designation in the contact information area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'first name'**
+  String get profile_page_contact_section_form_firstname;
+
+  /// Last name text field designation in the contact information area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'last name'**
+  String get profile_page_contact_section_form_lastname;
+
+  /// Address text field designation in the contact information area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'address'**
+  String get profile_page_contact_section_form_address;
+
+  /// Postcode text field designation in the contact information area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'postcode'**
+  String get profile_page_contact_section_form_postcode;
+
+  /// Place text field designation in the contact information area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'place'**
+  String get profile_page_contact_section_form_place;
+
+  /// Save changes button title in the contact information area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get profile_page_contact_section_form_save_button_title;
+
+  /// Snackbar title for changing the profile picture on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'You have successfully customized the profile picture.'**
+  String get profile_page_snackbar_image_changed_message;
+
+  /// Snackbar title for changing contact information on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'The change to your contact information was successful.'**
+  String get profile_page_snackbar_contact_information_changes;
+
+  /// Snackbar title to send the email for verification.
+  ///
+  /// In en, this message translates to:
+  /// **'A link for email verification has been sent to you.'**
+  String get profile_page_snackbar_email_verification;
+
+  /// Title of the logout button on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get profile_page_logout_button_title;
+
+  /// Message if no data can be loaded on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while retrieving the data.'**
+  String get profile_page_request_failure_message;
+
+  /// title of the recommender section on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommender'**
+  String get profile_page_promoters_section_title;
+
+  /// Number of recommenders in the recommender area on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Number of recommenders:'**
+  String get profile_page_promoters_section_recommender_count;
+
+  /// Title of the general tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get profile_page_general_tab_title;
+
+  /// Title of the change password tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get profile_page_change_password_tab_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

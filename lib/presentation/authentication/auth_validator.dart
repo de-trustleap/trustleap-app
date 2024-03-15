@@ -62,7 +62,7 @@ class AuthValidator {
     if (input == null || input.isEmpty) {
       return localization.auth_validation_missing_birthdate;
     } else if (!_stringIsValidDate(input)) {
-      return "Das eingegebene Datum ist ungültig";
+      return localization.auth_validation_invalid_date;
     } else if (_dateIsParsable(input) &&
         !_isAdult(DateTime.parse(_prepareDateStringForParser(input)))) {
       return localization.auth_validation_invalid_birthdate;
@@ -77,7 +77,7 @@ class AuthValidator {
     } else if (isNumeric(input)) {
       return null;
     } else {
-      return "Die PLZ ist ungültig";
+      return localization.auth_validation_invalid_postcode;
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -69,6 +70,7 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
@@ -77,7 +79,8 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
           if (state is ProfileReauthenticateForPasswordUpdateSuccessState) {
             visibleField = PasswordUpdateVisibleTextField.passwordsNew;
           } else if (state is ProfilePasswordUpdateFailureState) {
-            errorMessage = AuthFailureMapper.mapFailureMessage(state.failure);
+            errorMessage = AuthFailureMapper.mapFailureMessage(
+                state.failure, localization);
             showError = true;
           } else if (state is ProfilePasswordUpdateSuccessState) {
             BlocProvider.of<ProfileCubit>(context).signOutUser();
@@ -92,7 +95,8 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Passwort ändern",
+                    Text(
+                        localization.profile_page_password_update_section_title,
                         style: themeData.textTheme.headlineLarge!.copyWith(
                             fontSize: 22, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),

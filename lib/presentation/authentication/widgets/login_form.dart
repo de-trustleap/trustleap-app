@@ -67,7 +67,8 @@ class _LoginFormState extends State<LoginForm> {
         state.authFailureOrSuccessOption.fold(
             () => {},
             (eitherFailureOrSuccess) => eitherFailureOrSuccess.fold((failure) {
-                  errorMessage = AuthFailureMapper.mapFailureMessage(failure);
+                  errorMessage = AuthFailureMapper.mapFailureMessage(
+                      failure, localization);
                   showError = true;
                 }, (_) {
                   showError = false;
