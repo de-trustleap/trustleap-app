@@ -336,10 +336,4 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get profile_page_promoters_section_recommender_count => 'Anzahl der Empfehlungsgeber:';
-
-  @override
-  String get profile_page_general_tab_title => 'Allgemein';
-
-  @override
-  String get profile_page_change_password_tab_title => 'Passwort ändern';
 }

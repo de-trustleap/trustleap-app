@@ -758,18 +758,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Number of recommenders:'**
   String get profile_page_promoters_section_recommender_count;
-
-  /// Title of the general tab on the profile page.
-  ///
-  /// In en, this message translates to:
-  /// **'General'**
-  String get profile_page_general_tab_title;
-
-  /// Title of the change password tab on the profile page.
-  ///
-  /// In en, this message translates to:
-  /// **'Change Password'**
-  String get profile_page_change_password_tab_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

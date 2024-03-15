@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/profile_image_dropzone.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,6 +28,7 @@ class ProfileImageSection extends StatefulWidget {
 class _MyWidgetState extends State<ProfileImageSection> {
   final GlobalKey<_MyWidgetState> myWidgetKey = GlobalKey();
   bool hovered = false;
+  bool isImageClickable = true;
 
   Future<void> _pickImage() async {
     final context = myWidgetKey.currentContext;
@@ -85,7 +87,9 @@ class _MyWidgetState extends State<ProfileImageSection> {
                   ? themeData.colorScheme.secondary
                   : Colors.transparent),
           image: const DecorationImage(
-              image: AssetImage("images/placeholder.jpg"))),
+              image: AssetImage(kDebugMode
+                  ? "images/placeholder.jpg"
+                  : "assets/images/placeholder.jpg"))),
     );
   }
 
@@ -131,18 +135,22 @@ class _MyWidgetState extends State<ProfileImageSection> {
                   key: myWidgetKey,
                   children: [
                     MouseRegion(
-                      cursor: SystemMouseCursors.click,
+                      cursor: isImageClickable
+                          ? SystemMouseCursors.click
+                          : SystemMouseCursors.basic,
                       child: GestureDetector(
                         onTap: () async {
-                          final imageProvider = Image.network(
-                                  widget.user.profileImageDownloadURL ?? "")
-                              .image;
-                          showImageViewer(context, imageProvider,
-                              swipeDismissible: true,
-                              doubleTapZoomable: true,
-                              useSafeArea: true,
-                              closeButtonTooltip: localization
-                                  .profile_page_image_section_large_image_view_close_button_tooltip_title);
+                          if (isImageClickable) {
+                            final imageProvider = Image.network(
+                                    widget.user.profileImageDownloadURL ?? "")
+                                .image;
+                            showImageViewer(context, imageProvider,
+                                swipeDismissible: true,
+                                doubleTapZoomable: true,
+                                useSafeArea: true,
+                                closeButtonTooltip: localization
+                                    .profile_page_image_section_large_image_view_close_button_tooltip_title);
+                          }
                         },
                         child: CachedNetworkImage(
                           width: imageSize.width,
@@ -150,6 +158,7 @@ class _MyWidgetState extends State<ProfileImageSection> {
                           imageUrl: _getImageThumbnailURL(
                               state, widget.user.thumbnailDownloadURL),
                           imageBuilder: (context, imageProvider) {
+                            isImageClickable = true;
                             return Container(
                                 decoration: BoxDecoration(
                               shape: BoxShape.circle,
@@ -169,6 +178,7 @@ class _MyWidgetState extends State<ProfileImageSection> {
                             ]);
                           },
                           errorWidget: (context, url, error) {
+                            isImageClickable = false;
                             return placeholderImage(imageSize, themeData);
                           },
                         ),

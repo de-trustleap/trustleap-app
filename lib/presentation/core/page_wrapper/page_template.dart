@@ -25,6 +25,7 @@ class PageTemplate extends StatelessWidget {
       ]));
     } else {
       return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: const PreferredSize(
               preferredSize: Size(double.infinity, 44), child: CustomAppBar()),
           backgroundColor: themeData.colorScheme.background,
