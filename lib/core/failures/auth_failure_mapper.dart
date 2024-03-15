@@ -1,38 +1,38 @@
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 
 class AuthFailureMapper {
-  static String mapFailureMessage(AuthFailure failure) {
+  static String mapFailureMessage(
+      AuthFailure failure, AppLocalizations localization) {
     switch (failure.runtimeType) {
       case == EmailAlreadyInUseFailure:
-        return "Die E-Mail Adresse ist bereits vergeben.";
+        return localization.auth_failure_email_already_in_use;
       case == InvalidEmailFailure:
-        return "Die eingegebene E-Mail Adresse ist ungültig.";
+        return localization.auth_failure_invalid_email;
       case == WeakPasswordFailure:
-        return "Das angegebene Passwort ist zu schwach. Bitte nutze mindestens 6 Zeichen.";
+        return localization.auth_failure_weak_password;
       case == UserDisabledFailure:
-        return "Der angegebene Nutzername ist gesperrt.";
+        return localization.auth_failure_user_disabled;
       case == UserNotFoundFailure:
-        return "Der angegebene Nutzername existiert nicht.";
+        return localization.auth_failure_user_not_found;
       case == WrongPasswordFailure:
-        return "Das angegebene Passwort ist falsch.";
+        return localization.auth_failure_wrong_password;
       case == InvalidCredentialsFailure:
-        return "Deine Zugangsdaten existieren nicht.";
+        return localization.auth_failure_invalid_credentials;
       case == TooManyRequestsFailure:
-        return "Du hast deine Zugangsdaten zu oft falsch eingegeben. Versuche es später noch einmal.";
+        return localization.auth_failure_too_many_requests;
       case == UserMisMatchFailure:
-        return "Deine Anmeldeinformationen gehören nicht zum aktuellen User.";
+        return localization.auth_failure_user_mismatch;
       case == InvalidVerificationCodeFailure:
-        return "Dein Verifizierungscode ist ungültig.";
+        return localization.auth_failure_invalid_verification_code;
       case == InvalidVerificationIdFailure:
-        return "Die ID zu deinen Anmeldeinformationen ist ungültig.";
+        return localization.auth_failure_invalid_verification_id;
       case == RequiresRecentLoginFailure:
-        return "Deine letzte Anmeldung ist zu lange her. Melde dich erneut an.";
+        return localization.auth_failure_requires_recent_login;
       case == MissingPasswordFailure:
-        return "Du musst dein Password angeben";
-      case == ServerFailure:
-        return "Ein unbekannter Fehler ist aufgetreten.";
+        return localization.auth_failure_missing_password;
       default:
-        return "Ein unbekannter Fehler ist aufgetreten.";
+        return localization.auth_failure_unknown;
     }
   }
 }

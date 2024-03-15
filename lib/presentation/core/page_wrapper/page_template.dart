@@ -8,11 +8,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class PageTemplate extends StatelessWidget {
-  // final Widget child;
-
   const PageTemplate({
     Key? key,
-    // required this.child,
   }) : super(key: key);
 
   Widget getResponsiveWidget(BuildContext context) {

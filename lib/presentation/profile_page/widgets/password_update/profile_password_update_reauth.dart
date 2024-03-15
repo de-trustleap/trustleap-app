@@ -26,8 +26,7 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
     const double textFieldSpacing = 20;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-          "Geben Sie bitte ihr aktuelles Password ein damit Sie ein neues Password erstellen können.",
+      Text(localization.profile_page_password_update_section_reauth_description,
           style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
       const SizedBox(height: textFieldSpacing),
       TextFormField(
@@ -38,14 +37,17 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
           onFieldSubmitted: (_) => submit(),
           validator: validator.validatePassword,
           obscureText: true,
-          decoration: const InputDecoration(labelText: "Passwort")),
+          decoration: InputDecoration(
+              labelText: localization
+                  .profile_page_password_update_section_reauth_password_textfield_placeholder)),
       const SizedBox(height: textFieldSpacing * 2),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           PrimaryButton(
-              title: "Weiter",
+              title: localization
+                  .profile_page_password_update_section_reauth_continue_button_title,
               width: maxWidth / 2 - textFieldSpacing,
               onTap: () {
                 submit();

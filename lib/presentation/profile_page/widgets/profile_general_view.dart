@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
@@ -30,6 +31,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
     super.build(context);
 
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     final profileObserverBloc = Modular.get<ProfileObserverBloc>();
     return BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
       builder: (context, state) {
@@ -53,27 +55,30 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                           user: state.user,
                           imageUploadSuccessful: () => {
                                 CustomSnackBar.of(context).showCustomSnackBar(
-                                    "Die haben das Profilbild erfolgreich angepasst.")
+                                    localization
+                                        .profile_page_snackbar_image_changed_message)
                               }),
                       const SizedBox(height: 20),
                       ContactSection(
                           user: state.user,
                           changesSaved: () => {
                                 CustomSnackBar.of(context).showCustomSnackBar(
-                                    "Die Änderung deiner Kontaktinformationen war erfolgreich.")
+                                    localization
+                                        .profile_page_snackbar_contact_information_changes)
                               }),
                       const SizedBox(height: 60),
                       EmailSection(
                           user: state.user,
                           sendEmailVerificationCallback: () => {
                                 CustomSnackBar.of(context).showCustomSnackBar(
-                                    "Es wurde ein Link zur E-Mail Verifikation an dich versendet.")
+                                    localization
+                                        .profile_page_snackbar_email_verification)
                               }),
                       const SizedBox(height: 60),
                       PromotersSection(user: state.user),
                       const SizedBox(height: 60),
                       SecondaryButton(
-                          title: "Abmelden",
+                          title: localization.profile_page_logout_button_title,
                           width: 200,
                           onTap: () => {
                                 BlocProvider.of<ProfileCubit>(context)
@@ -85,9 +90,9 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
         } else if (state is ProfileObserverFailure) {
           return CenteredConstrainedWrapper(
               child: ErrorView(
-                  title: "Ein Fehler beim Abruf der Daten ist aufgetreten.",
-                  message:
-                      DatabaseFailureMapper.mapFailureMessage(state.failure),
+                  title: localization.profile_page_request_failure_message,
+                  message: DatabaseFailureMapper.mapFailureMessage(
+                      state.failure, localization),
                   callback: () =>
                       {profileObserverBloc.add(ProfileObserveAllEvent())}));
         } else {

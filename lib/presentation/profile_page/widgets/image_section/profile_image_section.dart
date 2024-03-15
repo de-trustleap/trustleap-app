@@ -4,6 +4,7 @@ import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:finanzbegleiter/application/images/images_bloc.dart';
 import 'package:finanzbegleiter/core/failures/storage_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/profile_image_dropzone.dart';
@@ -38,9 +39,11 @@ class _MyWidgetState extends State<ProfileImageSection> {
     }
   }
 
-  String? _getImageUploadFailureMessage(ImagesState state) {
+  String? _getImageUploadFailureMessage(
+      ImagesState state, AppLocalizations localization) {
     if (state is ImageUploadFailureState) {
-      return StorageFailureMapper.mapFailureMessage(state.failure);
+      return StorageFailureMapper.mapFailureMessage(
+          state.failure, localization);
     } else if (state is ImageExceedsFileSizeLimitFailureState) {
       return "Sie haben die zulässige Maximalgröße von 5 MB überschritten";
     } else if (state is ImageIsNotValidFailureState) {
@@ -89,6 +92,7 @@ class _MyWidgetState extends State<ProfileImageSection> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     const Size imageSize = Size(200, 200);
 
     return BlocConsumer<ImagesBloc, ImagesState>(
@@ -137,7 +141,8 @@ class _MyWidgetState extends State<ProfileImageSection> {
                               swipeDismissible: true,
                               doubleTapZoomable: true,
                               useSafeArea: true,
-                              closeButtonTooltip: "Schließen");
+                              closeButtonTooltip: localization
+                                  .profile_page_image_section_large_image_view_close_button_tooltip_title);
                         },
                         child: CachedNetworkImage(
                           width: imageSize.width,
@@ -190,9 +195,10 @@ class _MyWidgetState extends State<ProfileImageSection> {
                 ),
               ),
             ),
-            if (_getImageUploadFailureMessage(state) != null) ...[
+            if (_getImageUploadFailureMessage(state, localization) != null) ...[
               const SizedBox(height: 20),
-              FormErrorView(message: _getImageUploadFailureMessage(state)!)
+              FormErrorView(
+                  message: _getImageUploadFailureMessage(state, localization)!)
             ]
           ],
         );

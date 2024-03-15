@@ -58,15 +58,16 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
     Modular.to.navigate(RoutePaths.loginPath);
   }
 
-  void showSuccessDialog(ThemeData themeData) {
+  void showSuccessDialog(ThemeData themeData, AppLocalizations localizations) {
     showDialog(
         context: context,
         builder: (_) {
           return CustomAlertDialog(
-              title: "Passwort erfolgreich zurückgesetzt",
+              title: localizations.password_forgotten_success_dialog_title,
               message:
-                  "Eine E-Mail wurde an die angegebene E-Mail Adresse gesendet. Über den Link in der Mail können Sie ihr neues Passwort festlegen.",
-              actionButtonTitle: "Zurück zum Login",
+                  localizations.password_forgotten_success_dialog_description,
+              actionButtonTitle: localizations
+                  .password_forgotten_success_dialog_ok_button_title,
               actionButtonAction: alertAction);
         });
   }
@@ -79,10 +80,11 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
     const double padding = 20;
     return BlocConsumer<AuthBloc, AuthState>(listener: ((context, state) {
       if (state is AuthPasswordResetFailureState) {
-        errorMessage = AuthFailureMapper.mapFailureMessage(state.failure);
+        errorMessage =
+            AuthFailureMapper.mapFailureMessage(state.failure, localization);
         showError = true;
       } else if (state is AuthPasswordResetSuccessState) {
-        showSuccessDialog(themeData);
+        showSuccessDialog(themeData, localization);
       }
     }), builder: (context, state) {
       return CardContainer(
@@ -100,12 +102,11 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 80),
-                      Text("Passwort zurücksetzen",
+                      Text(localization.password_forgotten_title,
                           style: themeData.textTheme.headlineLarge!.copyWith(
                               fontSize: 22, fontWeight: FontWeight.bold)),
                       const SizedBox(height: padding),
-                      Text(
-                          "Bitte geben Sie ihre E-Mail Adresse ein und bestätigen Sie. Ihnen wird anschließend ein Link an die angegebene E-Mail Adresse gesendet.\nÜber diesen Link können Sie ihr Passwort zurücksetzen.",
+                      Text(localization.password_forgotten_description,
                           style: themeData.textTheme.headlineLarge!
                               .copyWith(fontSize: 16)),
                       const SizedBox(height: padding),
@@ -116,8 +117,9 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                         },
                         onFieldSubmitted: (_) => submit(),
                         validator: validator.validateEmail,
-                        decoration:
-                            const InputDecoration(labelText: "E-Mail Adresse"),
+                        decoration: InputDecoration(
+                            labelText: localization
+                                .password_forgotten_email_textfield_placeholder),
                       ),
                       const SizedBox(height: padding * 2),
                       Row(
@@ -125,7 +127,8 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           PrimaryButton(
-                              title: "Passwort zurücksetzen",
+                              title:
+                                  localization.password_forgotten_button_title,
                               width: maxWidth / 2 - padding,
                               onTap: () {
                                 submit();

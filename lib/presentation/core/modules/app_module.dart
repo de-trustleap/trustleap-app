@@ -33,7 +33,6 @@ class AppModule extends Module {
       ..add(MenuCubit.new)
       ..add(UserCubit.new)
       ..add(ProfileCubit.new)
-      //  ..add(ImageCubit.new)
       ..add(ImagesBloc.new)
       ..add(ProfileObserverBloc.new)
       ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)

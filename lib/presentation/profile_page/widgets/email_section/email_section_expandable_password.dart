@@ -26,7 +26,8 @@ class EmailSectionExpandablePassword extends StatelessWidget {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-          "Geben Sie bitte ihr Passwort ein wenn Sie ihre E-Mail Adresse ändern möchten.",
+          localization
+              .profile_page_email_section_change_email_password_description,
           style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
       const SizedBox(height: 16),
       TextFormField(
@@ -47,7 +48,8 @@ class EmailSectionExpandablePassword extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           PrimaryButton(
-              title: "Weiter",
+              title: localization
+                  .profile_page_email_section_change_email_password_continue_button_title,
               width: maxWidth / 2 - 20,
               onTap: () {
                 submit();

@@ -1,22 +1,24 @@
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 
 class DatabaseFailureMapper {
-  static String mapFailureMessage(DatabaseFailure failure) {
+  static String mapFailureMessage(
+      DatabaseFailure failure, AppLocalizations localizations) {
     switch (failure.runtimeType) {
       case == PermissionDeniedFailure:
-        return "Sie sind nicht berechtigt auf die Daten zuzugreifen.";
+        return localizations.database_failure_permission_denied;
       case == NotFoundFailure:
-        return "Die angefragten Daten wurden nicht gefunden.";
+        return localizations.database_failure_not_found;
       case == AlreadyExistsFailure:
-        return "Die angegebenen Daten existieren bereits.";
+        return localizations.database_failure_already_exists;
       case == DeadlineExceededFailure:
-        return "Der Datenabruf dauert zu lange. Versuche es später nochmal.";
+        return localizations.database_failure_deadline_exceeded;
       case == CancelledFailure:
-        return "Die Operation wurde abgebrochen.";
+        return localizations.database_failure_cancelled;
       case == UnavailableFailure:
-        return "Der Service ist gerade nicht erreichbar.";
+        return localizations.database_failure_unavailable;
       default:
-        return "Ein unbekannter Fehler ist aufgetreten.";
+        return localizations.database_failure_unknown;
     }
   }
 }

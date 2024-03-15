@@ -2,6 +2,7 @@
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
@@ -109,6 +110,7 @@ class _EmailSectionState extends State<EmailSection> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
@@ -117,7 +119,8 @@ class _EmailSectionState extends State<EmailSection> {
         if (state is ProfileEmailVerifySuccessState) {
           isEmailVerified = state.isEmailVerified;
         } else if (state is ProfileEmailUpdateFailureState) {
-          errorMessage = AuthFailureMapper.mapFailureMessage(state.failure);
+          errorMessage =
+              AuthFailureMapper.mapFailureMessage(state.failure, localization);
           showError = true;
         } else if (state is ProfileReauthenticateForEmailUpdateSuccessState) {
           visibleField = EmailSectionVisibleTextField.email;
@@ -130,7 +133,7 @@ class _EmailSectionState extends State<EmailSection> {
         }
       }, builder: (context, state) {
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text("E-Mail Einstellungen",
+          Text(localization.profile_page_email_section_title,
               style: themeData.textTheme.headlineLarge!
                   .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
           const SizedBox(height: 16),

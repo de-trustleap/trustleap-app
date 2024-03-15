@@ -1,18 +1,20 @@
 import 'package:finanzbegleiter/core/failures/storage_failures.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 
 class StorageFailureMapper {
-  static String mapFailureMessage(StorageFailure failure) {
+  static String mapFailureMessage(
+      StorageFailure failure, AppLocalizations localization) {
     switch (failure.runtimeType) {
       case == ObjectNotFound:
-        return "Es wurde kein Bild gefunden.";
+        return localization.storage_failure_object_not_found;
       case == NotAuthenticated:
-        return "Du musst dich anmelden um diesen Service nutzen zu können.";
+        return localization.storage_failure_not_authenticated;
       case == UnAuthorized:
-        return "Du bist nicht berechtigt diese Aktion auszuführen.";
+        return localization.storage_failure_not_authorized;
       case == RetryLimitExceeded:
-        return "Es scheint ein Problem aufgetreten zu sein. Die Aktion dauert länger als gewöhnlich. Bitte versuche es später erneut.";
+        return localization.storage_failure_retry_limit_exceeded;
       default:
-        return "Ein unbekannter Fehler ist aufgetreten. Bitte versuche es später erneut.";
+        return localization.storage_failure_unknown;
     }
   }
 }

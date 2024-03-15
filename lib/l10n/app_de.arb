@@ -68,6 +68,14 @@
     "@login_login_buttontitle": {
         "description": "Titel des Login Buttons auf der Login Seite"
     },
+    "login_password_forgotten_text": "Haben Sie ihr ",
+    "@login_password_forgotten_text": {
+        "description": "Passwort vergessen Text auf der Login Seite."
+    },
+    "login_password_forgotten_linktext": "Passwort vergessen?",
+    "@login_password_forgotten_linktext": {
+        "description": "Passwort vergessen Link Text auf der Login Seite."
+    },
     "login_register_linktitle": "Jetzt registrieren",
     "@login_register_linktitle": {
         "description": "Registrieren Link auf der Login Seite der zur Registrierung führt"
@@ -120,41 +128,13 @@
     "@auth_validation_invalid_birthdate": {
         "description": "Validierungsnachricht wenn Geburtdatum ungültig ist"
     },
-    "authfailure_email_already_in_use": "Die E-Mail Adresse ist bereits vergeben.",
-    "@authfailure_email_already_in_use": {
-        "description": "Fehlermeldung wenn E-Mail bereits existiert"
+    "auth_validation_invalid_date": "Das eingegebene Datum ist ungültig",
+    "@auth_validation_invalid_date": {
+        "description": "Validierungsnachricht wenn Datum ungültig ist"
     },
-    "authfailure_invalid_email": "Die eingegebene E-Mail Adresse ist ungültig.",
-    "@authfailure_invalid_email": {
-        "description": "Fehlermeldung wenn E-Mail ungültig ist"
-    },
-    "authfailure_weak_password": "Das angegebene Passwort ist zu schwach. Bitte nutze mindestens 6 Zeichen.",
-    "@authfailure_weak_password": {
-        "description": "Fehlermeldung wenn Passwort zu schwach ist"
-    },
-    "authfailure_user_disabled": "Der angegebene Nutzername ist gesperrt.",
-    "@authfailure_user_disabled": {
-        "description": "Fehlermeldung wenn der angegebene Nutzer gesperrt ist"
-    },
-    "authfailure_user_not_found": "Der angegebene Nutzername existiert nicht.",
-    "@authfailure_user_not_found": {
-        "description": "Fehlermeldung wenn der angegebene Nutzer nicht existiert"
-    },
-    "authfailure_wrong_password": "Das angegebene Passwort ist falsch.",
-    "@authfailure_wrong_password": {
-        "description": "Fehlermeldung wenn ein falsches Passwort eingegeben wurde"
-    },
-    "authfailure_invalid_credentials": "Deine Zugangsdaten existieren nicht.",
-    "@authfailure_invalid_credentials": {
-        "description": "Fehlermeldung wenn die Zugangsdaten nicht existieren"
-    },
-    "authfailure_too_many_requests": "Du hast deine Zugangsdaten zu oft falsch eingegeben. Versuche es später noch einmal.",
-    "@authfailure_too_many_requests": {
-        "description": "Fehlermeldung wenn zu oft falsche Anmeldedaten eingegeben wurden."
-    },
-    "authfailure_unknown": "Ein unbekannter Fehler ist aufgetreten.",
-    "@authfailure_unknown": {
-        "description": "Fehlermeldung wenn ein unbekannter Fehler aufgetreten ist"
+    "auth_validation_invalid_postcode": "Die PLZ ist ungültig",
+    "@auth_validation_invalid_postcode": {
+        "description": "Validierungsnachricht wenn die PLZ ungültig ist"
     },
     "menuitems_profile": "Profil",
     "@menuitems_profile": {
@@ -179,5 +159,289 @@
     "menuitems_activities": "Aktivitäten",
     "@menuitems_activities": {
         "description": "Der Menüpunkt für die Aktivitäten"
+    },
+    "auth_failure_email_already_in_use": "Die E-Mail Adresse ist bereits vergeben.",
+    "@auth_failure_email_already_in_use": {
+        "description": "Fehlermeldung wenn die E-Mail Adresse bereits vergeben ist."
+    },
+    "auth_failure_invalid_email": "Die eingegebene E-Mail Adresse ist ungültig.",
+    "@auth_failure_invalid_email": {
+        "description": "Fehlermeldung wenn die E-Mail Adresse kein gültiges Format hat."
+    },
+    "auth_failure_weak_password": "Das angegebene Passwort ist zu schwach. Bitte nutze mindestens 6 Zeichen.",
+    "@auth_failure_weak_password": {
+        "description": "Fehlermeldung wenn das eingegebene Passwort zu schwach ist."
+    },
+    "auth_failure_user_disabled": "Der angegebene Nutzername ist gesperrt.",
+    "@auth_failure_user_disabled": {
+        "description": "Fehlermeldung wenn der Nutzer gesperrt oder deaktiviert ist."
+    },
+    "auth_failure_user_not_found": "Der angegebene Nutzername existiert nicht.",
+    "@auth_failure_user_not_found": {
+        "description": "Fehlermeldung wenn der Nutzer nicht gefunden wurde."
+    },
+    "auth_failure_wrong_password": "Das angegebene Passwort ist falsch.",
+    "@auth_failure_wrong_password": {
+        "description": "Fehlermeldung wenn das Passwort falsch ist."
+    },
+    "auth_failure_invalid_credentials": "Deine angegebenen Zugangsdaten existieren nicht.",
+    "@auth_failure_invalid_credentials": {
+        "description": "Fehlermeldung wenn die Zugangsdaten falsch sind."
+    },
+    "auth_failure_too_many_requests": "Du hast deine Zugangsdaten zu oft falsch eingegeben. Versuche es später noch einmal.",
+    "@auth_failure_too_many_requests": {
+        "description": "Fehlermeldung wenn die Zugangsdaten zu oft falsch eingegeben wurden."
+    },
+    "auth_failure_user_mismatch": "Deine Anmeldeinformationen gehören nicht zum aktuellen User.",
+    "@auth_failure_user_mismatch": {
+        "description": "Fehlermeldung wenn die Anmeldeinformationen nicht zum aktuellen Nutzer gehören."
+    },
+    "auth_failure_invalid_verification_code": "Dein Verifizierungscode ist ungültig.",
+    "@auth_failure_invalid_verification_code": {
+        "description": "Fehlermeldung wenn der Verifizierungscode ungültig ist."
+    },
+    "auth_failure_invalid_verification_id": "Die ID zu deinen Anmeldeinformationen ist ungültig.",
+    "@auth_failure_invalid_verification_id": {
+        "description": "Fehlermeldung wenn der Verifizierungs ID ungültig ist."
+    },
+    "auth_failure_requires_recent_login": "Deine letzte Anmeldung ist zu lange her. Melde dich erneut an.",
+    "@auth_failure_requires_recent_login": {
+        "description": "Fehlermeldung wenn die letzte Anmeldung zu lange her ist und man sich neu anmelden muss."
+    },
+    "auth_failure_missing_password": "Du musst dein Password angeben.",
+    "@auth_failure_missing_password": {
+        "description": "Fehlermeldung wenn das Passwort fehlt."
+    },
+    "auth_failure_unknown": "Ein unbekannter Fehler ist aufgetreten.",
+    "@auth_failure_unknown": {
+        "description": "Allgemeine Fehlermeldung."
+    },
+    "database_failure_permission_denied": "Sie sind nicht berechtigt auf die Daten zuzugreifen.",
+    "@database_failure_permission_denied": {
+        "description": "Fehlermeldung wenn man ohne Berechtigung auf Dateien zugreifen möchte, für die man eine Berechtigung braucht."
+    },
+    "database_failure_not_found": "Die angefragten Daten wurden nicht gefunden.",
+    "@database_failure_not_found": {
+        "description": "Fehlermeldung wenn die angefragten Daten nicht gefunden wurden."
+    },
+    "database_failure_already_exists": "Die angegebenen Daten existieren bereits.",
+    "@database_failure_already_exists": {
+        "description": "Fehlermeldung wenn die Daten bereits existieren."
+    },
+    "database_failure_deadline_exceeded": "Der Datenabruf dauert zu lange. Versuche es später nochmal.",
+    "@database_failure_deadline_exceeded": {
+        "description": "Fehlermeldung wenn man in einen Timeout läuft."
+    },
+    "database_failure_cancelled": "Die Operation wurde abgebrochen.",
+    "@database_failure_cancelled": {
+        "description": "Fehlermeldung wenn die Operation abgebrochen wurde."
+    },
+    "database_failure_unavailable": "Der Service ist gerade nicht erreichbar.",
+    "@database_failure_unavailable": {
+        "description": "Fehlermeldung wenn das Backend nicht erreichbar ist."
+    },
+    "database_failure_unknown": "Ein unbekannter Fehler ist aufgetreten.",
+    "@database_failure_unknown": {
+        "description": "Allgemeine Fehlermeldung."
+    },
+    "storage_failure_object_not_found": "Es wurde kein Bild gefunden.",
+    "@storage_failure_object_not_found": {
+        "description": "Fehlermeldung wenn kein Bild gefunden wurde."
+    },
+    "storage_failure_not_authenticated": "Du musst dich anmelden um diesen Service nutzen zu können.",
+    "@storage_failure_not_authenticated": {
+        "description": "Fehlermeldung wenn man nicht angemeldet ist."
+    },
+    "storage_failure_not_authorized": "Du bist nicht berechtigt diese Aktion auszuführen.",
+    "@storage_failure_not_authorized": {
+        "description": "Fehlermeldung wenn man nicht berechtigt ist."
+    },
+    "storage_failure_retry_limit_exceeded": "Es scheint ein Problem aufgetreten zu sein. Die Aktion dauert länger als gewöhnlich. Bitte versuche es später erneut.",
+    "@storage_failure_retry_limit_exceeded": {
+        "description": "Fehlermeldung wenn die Aktion zu lange dauert."
+    },
+    "storage_failure_unknown": "Ein unbekannter Fehler ist aufgetreten. Bitte versuche es später erneut.",
+    "@storage_failure_unknown": {
+        "description": "Allgemeine Fehlermeldung."
+    },
+    "password_forgotten_title": "Passwort zurücksetzen",
+    "@password_forgotten_title": {
+        "description": "Titel der Passwort vergessen Seite"
+    },
+    "password_forgotten_description": "Bitte geben Sie ihre E-Mail Adresse ein und bestätigen Sie. Ihnen wird anschließend ein Link an die angegebene E-Mail Adresse gesendet.\nÜber diesen Link können Sie ihr Passwort zurücksetzen.",
+    "@password_forgotten_description": {
+        "description": "Beschreibung der Passwort vergessen Seite"
+    },
+    "password_forgotten_success_dialog_title": "Passwort erfolgreich zurückgesetzt",
+    "@password_forgotten_success_dialog_title": {
+        "description": "Titel für den Success Alert auf der Passwort vergessen Seite"
+    },
+    "password_forgotten_success_dialog_description": "Eine E-Mail wurde an die angegebene E-Mail Adresse gesendet. Über den Link in der Mail können Sie ihr neues Passwort festlegen.",
+    "@password_forgotten_success_dialog_description": {
+        "description": "Beschreibung für den Success Alert auf der Passwort vergessen Seite"
+    },
+    "password_forgotten_success_dialog_ok_button_title": "Zurück zum Login",
+    "@password_forgotten_success_dialog_ok_button_title": {
+        "description": "Button Titel für den Success Alert auf der Passwort vergessen Seite"
+    },
+    "password_forgotten_button_title": "Passwort zurücksetzen",
+    "@password_forgotten_button_title": {
+        "description": "Button Titel für das zurücksetzen des Passworts auf der Passwort vergessen Seite."
+    },
+    "password_forgotten_email_textfield_placeholder": "E-Mail Adresse",
+    "@password_forgotten_email_textfield_placeholder": {
+        "description": "Platzhalter für das E-Mail Adresse Textfeld auf der Passwort vergessen Seite."
+    },
+    "general_error_view_refresh_button_title": "Erneut versuchen",
+    "@general_error_view_refresh_button_title": {
+        "description": "Title für den Refresh Button auf der Seite die erscheint, wenn keine Daten geladen werden konnten."
+    },
+    "profile_page_email_section_email": "E-Mail",
+    "@profile_page_email_section_email": {
+        "description": "Zeilen Überschrift für die E-Mail Spalte im E-Mail Bereich auf der Profil Seite."
+    },
+    "profile_page_email_section_status": "Status",
+    "@profile_page_email_section_status": {
+        "description": "Zeilen Überschrift für die Status Spalte im E-Mail Bereich auf der Profil Seite."
+    },
+    "profile_page_email_section_description": "Geben Sie jetzt ihre neue E-Mail Adresse an und bestätigen Sie. An die neue E-Mail Adresse wird anschließend ein Bestätigungslink gesendet. Durch diesen Link können Sie Ihre neue E-Mail Adresse verifizieren und sich erneut anmelden.",
+    "@profile_page_email_section_description": {
+        "description": "Beschreibungstext im E-Mail Bereich auf der Profil Seite."
+    },
+    "profile_page_email_section_change_email_button_title": "E-Mail Adresse ändern",
+    "@profile_page_email_section_change_email_button_title": {
+        "description": "Button Titel des Email ändern Buttons im E-Mail Bereich auf der Profil Seite."
+    },
+    "profile_page_email_section_change_email_password_description": "Geben Sie bitte ihr Passwort ein wenn Sie ihre E-Mail Adresse ändern möchten.",
+    "@profile_page_email_section_change_email_password_description": {
+        "description": "Beschreibung der Passworteingabe im E-Mail Bereich auf der Profil Seite."
+    },
+    "profile_page_email_section_change_email_password_continue_button_title": "Weiter",
+    "@profile_page_email_section_change_email_password_continue_button_title": {
+        "description": "Button Titel des Weiter Buttons der Passworteingabe im E-Mail Bereich auf der Profil Seite."
+    },
+    "profile_page_email_section_resend_verify_email_button_title": "Link zur Email-Verifikation erneut senden",
+    "@profile_page_email_section_resend_verify_email_button_title": {
+        "description": "Button Titel des Email Verifikation Buttons im E-Mail Bereich auf der Profil Seite."
+    },
+    "profile_page_email_section_title": "E-Mail Einstellungen",
+    "@profile_page_email_section_title": {
+        "description": "Titel des E-Mail Bereichs auf der Profil Seite."
+    },
+    "profile_page_email_section_verification_badge_verified": "Verifiziert",
+    "@profile_page_email_section_verification_badge_verified": {
+        "description": "Titel des verifizierten Verifizierungsbadge im E-Mail Bereichs auf der Profil Seite."
+    },
+    "profile_page_email_section_verification_badge_unverified": "Unverifiziert",
+    "@profile_page_email_section_verification_badge_unverified": {
+        "description": "Titel des nicht verifizierten Verifizierungsbadge im E-Mail Bereichs auf der Profil Seite."
+    },
+    "profile_page_image_section_validation_exceededFileSize": "Sie haben die zulässige Maximalgröße von 5 MB überschritten",
+    "@profile_page_image_section_validation_exceededFileSize": {
+        "description": "Validierungsnachricht wenn das Bild zum Upload über 5 MB groß ist."
+    },
+    "profile_page_image_section_validation_not_valid": "Das ist kein gültiges Bildformat",
+    "@profile_page_image_section_validation_not_valid": {
+        "description": "Validierungsnachricht wenn das Bild ein falsches Format hat."
+    },
+    "profile_page_image_section_only_one_allowed": "Du kannst nur ein Bild gleichzeitig hochladen",
+    "@profile_page_image_section_only_one_allowed": {
+        "description": "Validierungsnachricht wenn versucht wird per Drag and Drop mehrere Bilder auf einmal hochzuladen."
+    },
+    "profile_page_image_section_upload_not_found": "Das Bild zum Hochladen wurde nicht gefunden",
+    "@profile_page_image_section_upload_not_found": {
+        "description": "Validierungsnachricht wenn das Bild zum Hochladen nicht gefunden wurde."
+    },
+    "profile_page_image_section_large_image_view_close_button_tooltip_title": "Schließen",
+    "@profile_page_image_section_large_image_view_close_button_tooltip_title": {
+        "description": "Der Titel des Tooltips das angezeigt wird, wenn man per Maus über den Schließen Button im Vollbild Modus hovert."
+    },
+    "profile_page_password_update_section_title": "Passwort ändern",
+    "@profile_page_password_update_section_title": {
+        "description": "Der Titel der Passwort ändern Seite auf der Profil Page"
+    },
+    "profile_page_password_update_section_new_password_description": "Geben Sie bitte ihr neues Passwort an und bestätigen Sie es. Danach werden Sie ausgeloggt und Sie können sich mit dem neuen Passwort anmelden.",
+    "@profile_page_password_update_section_new_password_description": {
+        "description": "Der Beschreibung der Passwort ändern Seite auf der Profil Page wenn ein neues Passwort angegeben werden soll."
+    },
+    "profile_page_password_update_section_new_password_textfield_placeholder": "Neues Passwort",
+    "@profile_page_password_update_section_new_password_textfield_placeholder": {
+        "description": "Platzhalter für das Neues Passwort Textfeld auf der Passwort ändern Seite in der Profil Seite."
+    },
+    "profile_page_password_update_section_new_password_repeat_textfield_placeholder": "Neues Passwort wiederholen",
+    "@profile_page_password_update_section_new_password_repeat_textfield_placeholder": {
+        "description": "Platzhalter für das Neues Passwort bestätigen Textfeld auf der Passwort ändern Seite in der Profil Seite."
+    },
+    "profile_page_password_update_section_new_password_confirm_button_text": "Passwort ändern",
+    "@profile_page_password_update_section_new_password_confirm_button_text": {
+        "description": "Titel für den Passwort ändern Button auf der Passwort ändern Seite in der Profil Seite."
+    },
+    "profile_page_password_update_section_reauth_description": "Geben Sie bitte ihr aktuelles Password ein damit Sie ein neues Password erstellen können.",
+    "@profile_page_password_update_section_reauth_description": {
+        "description": "Beschreibung für die Reauthentifizierung auf der Passwort ändern Seite in der Profil Seite."
+    },
+    "profile_page_password_update_section_reauth_password_textfield_placeholder": "Passwort",
+    "@profile_page_password_update_section_reauth_password_textfield_placeholder": {
+        "description": "Platzhalter für das Passwort Textfeld der Reauthentifizierung auf der Passwort ändern Seite in der Profil Seite."
+    },
+    "profile_page_password_update_section_reauth_continue_button_title": "Weiter",
+    "@profile_page_password_update_section_reauth_continue_button_title": {
+        "description": "Weiter Button Titel der Reauthentifizierung auf der Passwort ändern Seite in der Profil Seite."
+    },
+    "profile_page_contact_section_title": "Kontaktinformationen",
+    "@profile_page_contact_section_title": {
+        "description": "Titel des Kontaktinformationen Bereichs auf der Profil Seite."
+    },
+    "profile_page_contact_section_form_firstname": "Vorname",
+    "@profile_page_contact_section_form_firstname": {
+        "description": "Vorname Textfeld Bezeichnung im Kontaktinformationen Bereich auf der Profil Seite."
+    },
+    "profile_page_contact_section_form_lastname": "Nachname",
+    "@profile_page_contact_section_form_lastname": {
+        "description": "Nachname Textfeld Bezeichnung im Kontaktinformationen Bereich auf der Profil Seite."
+    },
+    "profile_page_contact_section_form_address": "Straße und Hausnummer",
+    "@profile_page_contact_section_form_address": {
+        "description": "Straße und Hausnummer Textfeld Bezeichnung im Kontaktinformationen Bereich auf der Profil Seite."
+    },
+    "profile_page_contact_section_form_postcode": "PLZ",
+    "@profile_page_contact_section_form_postcode": {
+        "description": "PLZ Textfeld Bezeichnung im Kontaktinformationen Bereich auf der Profil Seite."
+    },
+    "profile_page_contact_section_form_place": "Ort",
+    "@profile_page_contact_section_form_place": {
+        "description": "Ort Textfeld Bezeichnung im Kontaktinformationen Bereich auf der Profil Seite."
+    },
+    "profile_page_contact_section_form_save_button_title": "Änderungen speichern",
+    "@profile_page_contact_section_form_save_button_title": {
+        "description": "Button zum Speichern der Änderungen im Kontaktinformationen Bereich auf der Profil Seite."
+    },
+    "profile_page_snackbar_image_changed_message": "Sie haben das Profilbild erfolgreich angepasst.",
+    "@profile_page_snackbar_image_changed_message": {
+        "description": "Snackbar Titel zum Ändern des Profilbildes auf der Profil Seite."
+    },
+    "profile_page_snackbar_contact_information_changes": "Die Änderung deiner Kontaktinformationen war erfolgreich.",
+    "@profile_page_snackbar_contact_information_changes": {
+        "description": "Snackbar Titel zum Ändern der Kontaktinformationen auf der Profil Seite."
+    },
+    "profile_page_snackbar_email_verification": "Es wurde ein Link zur E-Mail Verifikation an dich versendet.",
+    "@profile_page_snackbar_email_verification": {
+        "description": "Snackbar Titel zur Sendung der E-Mail für die Verifizierung."
+    },
+    "profile_page_logout_button_title": "Abmelden",
+    "@profile_page_logout_button_title": {
+        "description": "Titel des Logout Buttons auf der Profil Seite."
+    },
+    "profile_page_request_failure_message": "Ein Fehler beim Abruf der Daten ist aufgetreten.",
+    "@profile_page_request_failure_message": {
+        "description": "Meldung wenn keine Daten geladen werden können auf der Profil Seite."
+    },
+    "profile_page_promoters_section_title": "Empfehlungsgeber",
+    "@profile_page_promoters_section_title": {
+        "description": "Titel des Empfehlungsgeber Bereichs auf der Profil Seite."
+    },
+    "profile_page_promoters_section_recommender_count": "Anzahl der Empfehlungsgeber:",
+    "@profile_page_promoters_section_recommender_count": {
+        "description": "Anzahl der Empfehlungsgeber im Empfehlungsgeber Bereich auf der Profil Seite."
     }
 }
