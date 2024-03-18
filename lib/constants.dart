@@ -20,3 +20,12 @@ enum EmailVerificationState {
   final String value;
   const EmailVerificationState(this.value);
 }
+
+enum Gender {
+  male("Männlich"),
+  femaile("Weiblich"),
+  none("Nicht ausgewählt");
+
+  final String value;
+  const Gender(this.value);
+}

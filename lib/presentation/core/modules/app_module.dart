@@ -6,11 +6,14 @@ import 'package:finanzbegleiter/application/images/images_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
+import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/recommendations_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/image_repository_implementation.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/recommendations_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
 import 'package:finanzbegleiter/presentation/core/modules/auth_guard.dart';
 import 'package:finanzbegleiter/presentation/core/modules/auth_module.dart';
@@ -35,9 +38,11 @@ class AppModule extends Module {
       ..add(ProfileCubit.new)
       ..add(ImagesBloc.new)
       ..add(ProfileObserverBloc.new)
+      ..add(RecommendationsCubit.new)
       ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
       ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
       ..addLazySingleton<ImageRepository>(ImageRepositoryImplementation.new)
+      ..addLazySingleton<RecommendationsRepository>(RecommendationsRepositoryImplementation.new)
       ..addLazySingleton(() => firebaseAuth)
       ..addLazySingleton(() => firestore)
       ..addLazySingleton(() => storage);

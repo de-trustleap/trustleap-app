@@ -26,6 +26,7 @@ class SecondaryButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8)),
             child: Center(
                 child: Text(title,
+                textAlign: TextAlign.center,
                     style: themeData.textTheme.headlineLarge!.copyWith(
                         fontSize: 14,
                         color: Colors.white,

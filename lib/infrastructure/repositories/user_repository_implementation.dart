@@ -42,7 +42,7 @@ class UserRepositoryImplementation implements UserRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> createUser(
       {required CustomUser user}) async {
-    final userCollection = FirebaseFirestore.instance.collection("users");
+    final userCollection = firestore.collection("users");
     final userModel = UserModel.fromDomain(user);
     try {
       await userCollection.doc(userModel.id).set(userModel.toMap());
@@ -55,7 +55,7 @@ class UserRepositoryImplementation implements UserRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> updateUser(
       {required CustomUser user}) async {
-    final userCollection = FirebaseFirestore.instance.collection("users");
+    final userCollection = firestore.collection("users");
     final userModel = UserModel.fromDomain(user);
     try {
       await userCollection.doc(userModel.id).update(userModel.toMap());

@@ -1,12 +1,14 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +35,12 @@ class _RegisterFormState extends State<RegisterForm> {
   final streetAndNumberTextController = TextEditingController();
   final plzTextController = TextEditingController();
   final placeTextController = TextEditingController();
+  late Gender? selectedGender;
 
   bool showError = false;
   String errorMessage = "";
   bool validationHasError = false;
+  String? genderValid;
 
   @override
   void dispose() {
@@ -60,13 +64,20 @@ class _RegisterFormState extends State<RegisterForm> {
     });
   }
 
-  void submit() {
-    if (formKey.currentState!.validate()) {
+  void submit(AuthValidator validator) {
+    if (formKey.currentState!.validate() &&
+        validator.validateGender(selectedGender) == null) {
       validationHasError = false;
+      setState(() {
+        genderValid = null;
+      });
       BlocProvider.of<SignInCubit>(context).registerWithEmailAndPassword(
           emailTextController.text, passwordTextController.text);
     } else {
       validationHasError = true;
+      setState(() {
+        genderValid = validator.validateGender(selectedGender);
+      });
       BlocProvider.of<SignInCubit>(context)
           .registerWithEmailAndPassword(null, null);
     }
@@ -119,12 +130,14 @@ class _RegisterFormState extends State<RegisterForm> {
                       showError = false;
                       BlocProvider.of<UserCubit>(context).createUser(CustomUser(
                           id: UniqueID.fromUniqueString(creds.user!.uid),
+                          gender: selectedGender,
                           firstName: firstNameTextController.text,
                           lastName: lastNameTextController.text,
                           birthDate: birthDateTextController.text,
                           address: streetAndNumberTextController.text,
                           postCode: plzTextController.text,
-                          place: placeTextController.text));
+                          place: placeTextController.text,
+                          email: emailTextController.text));
                     }));
           }),
           BlocListener<UserCubit, UserState>(listener: (context, state) {
@@ -161,6 +174,19 @@ class _RegisterFormState extends State<RegisterForm> {
                       ),
                     ]),
                     const SizedBox(height: 80),
+                                        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      GenderPicker(
+                          width: getResponsiveWidth(1),
+                          validate: genderValid,
+                          onSelected: (gender) {
+                            setState(() {
+                              genderValid = validator.validateGender(gender);
+                              selectedGender = gender;
+                            });
+                            resetError();
+                          })
+                    ]),
+                    const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: getResponsiveWidth(1),
@@ -174,7 +200,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               width: getResponsiveWidth(2),
                               child: TextFormField(
                                 controller: firstNameTextController,
-                                onFieldSubmitted: (_) => submit(),
+                                onFieldSubmitted: (_) => submit(validator),
                                 onChanged: (_) {
                                   resetError();
                                 },
@@ -192,7 +218,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 width: getResponsiveWidth(2),
                                 child: TextFormField(
                                   controller: lastNameTextController,
-                                  onFieldSubmitted: (_) => submit(),
+                                  onFieldSubmitted: (_) => submit(validator),
                                   onChanged: (_) {
                                     resetError();
                                   },
@@ -214,7 +240,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: TextFormField(
                             keyboardType: TextInputType.datetime,
                             controller: birthDateTextController,
-                            onFieldSubmitted: (_) => submit(),
+                            onFieldSubmitted: (_) => submit(validator),
                             onChanged: (_) {
                               resetError();
                             },
@@ -245,7 +271,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: streetAndNumberTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -262,7 +288,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: TextFormField(
                           keyboardType: TextInputType.number,
                           controller: plzTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           validator: validator.validatePostcode,
                           onChanged: (_) {
                             resetError();
@@ -277,7 +303,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             getResponsiveWidth(2, shouldWrapToNextLine: false),
                         child: TextFormField(
                           controller: placeTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -293,7 +319,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: emailTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -309,7 +335,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: passwordTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -326,7 +352,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: passwordRepeatTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -347,7 +373,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: PrimaryButton(
                             title: localization.register_now_buttontitle,
                             onTap: () {
-                              submit();
+                              submit(validator);
                             }),
                       ),
                     ]),

@@ -4,9 +4,9 @@ import 'package:finanzbegleiter/application/profile/observer/profile_observer_bl
 import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/tab_bar/custom_tab.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/tab_bar/custom_tabbar.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/tab_bar/tabbar_content.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
