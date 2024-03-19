@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
+import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';

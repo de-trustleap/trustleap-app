@@ -40,7 +40,8 @@ class _RecommendationsPageState extends State<RecommendationsPage>
     screenHeight = responsiveValue.screenHeight;
     topPadding = responsiveValue.screenHeight * 0.02;
     return BlocProvider(
-      create: (context) => Modular.get<RecommendationsCubit>(),
+      create: (context) =>
+          Modular.get<RecommendationsCubit>()..getCurrentUser(),
       child: Padding(
         padding: EdgeInsets.only(top: topPadding),
         child: tabbar(),

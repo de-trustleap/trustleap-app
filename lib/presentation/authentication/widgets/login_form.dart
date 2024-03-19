@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -72,8 +72,7 @@ class _LoginFormState extends State<LoginForm> {
                   showError = true;
                 }, (_) {
                   showError = false;
-                  BlocProvider.of<AuthBloc>(context)
-                      .add(AuthCheckRequestedEvent());
+                  BlocProvider.of<AuthCubit>(context).checkForAuthState();
                 }));
       },
       builder: (context, state) {

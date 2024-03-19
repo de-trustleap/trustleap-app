@@ -1,4 +1,5 @@
-import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
+import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -23,6 +24,20 @@ Future main() async {
   runApp(ModularApp(module: AppModule(), child: const MyApp()));
 }
 
+void routeToInitial(bool authenticated) {
+  if (!authenticated) {
+    Modular.to.navigate(RoutePaths.loginPath);
+  } else {
+    final lastRoute =
+        WidgetsBinding.instance.platformDispatcher.defaultRouteName;
+    if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
+      Modular.to.navigate(lastRoute);
+    } else {
+      Modular.to.navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
+    }
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -31,60 +46,60 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => Modular.get<AuthCubit>()),
         BlocProvider(
-            create: (context) => Modular.get<AuthBloc>()
-              ..add(AuthCheckRequestedEvent())
-              ..add(AuthObserverEvent())),
+            create: (context) => Modular.get<AuthObserverBloc>()
+              ..add(AuthObserverStartedEvent())),
         BlocProvider(create: (context) => Modular.get<MenuCubit>())
       ],
-      child: BlocConsumer<AuthBloc, AuthState>(
-          listenWhen: (previous, current) => previous != current,
-          listener: (context, state) {
-            final lastRoute =
-                WidgetsBinding.instance.platformDispatcher.defaultRouteName;
-            if (state is AuthStateUnAuthenticated) {
-              print("NOT AUTHENTICATED");
-              Modular.to.navigate(RoutePaths.loginPath);
-            } else if (state is AuthStateAuthenticated) {
-              print("AUTHENTICATED");
-              if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
-                Modular.to.navigate(lastRoute);
-              } else {
-                Modular.to
-                    .navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
+      child: MultiBlocListener(
+          listeners: [
+            BlocListener<AuthCubit, AuthState>(
+                listenWhen: (previous, current) => previous != current,
+                listener: (context, state) {
+                  if (state is AuthStateUnAuthenticated) {
+                    print("NOT AUTHENTICATED");
+                    routeToInitial(false);
+                  } else if (state is AuthStateAuthenticated) {
+                    print("AUTHENTICATED");
+                    routeToInitial(true);
+                  }
+                }),
+            BlocListener<AuthObserverBloc, AuthObserverState>(
+                listener: (context, state) {
+              print("GOT STATE: $state");
+              if (state is AuthObserverStateUnAuthenticated) {
+                print("NOT AUTHENTICATED");
+                routeToInitial(false);
+              } else if (state is AuthObserverStateAuthenticated) {
+                print("AUTHENTICATED");
+                routeToInitial(true);
               }
-            }
-          },
-          builder: (BuildContext context, state) {
-            Modular.to.addListener(() {
-              print('Navigate: ${Modular.to.path}');
-              print(
-                  'History: ${Modular.to.navigateHistory.map((e) => e.name)}');
-            });
-            return MaterialApp.router(
-              routerConfig: Modular.routerConfig,
-              title: 'Finanzbegleiter',
-              theme: AppTheme.lightTheme,
-              darkTheme: AppTheme.darkTheme,
-              themeMode: ThemeMode.light,
-              supportedLocales: L10n.all,
-              locale: const Locale("de"),
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate
-              ],
-              debugShowCheckedModeBanner: false,
-              builder: (context, widget) => ResponsiveBreakpoints.builder(
-                  child: widget!,
-                  breakpoints: const [
-                    Breakpoint(start: 0, end: 599, name: MOBILE),
-                    Breakpoint(start: 600, end: 999, name: TABLET),
-                    Breakpoint(start: 1000, end: double.infinity, name: DESKTOP)
-                  ]),
-            );
-          }),
+            })
+          ],
+          child: MaterialApp.router(
+            routerConfig: Modular.routerConfig,
+            title: 'Finanzbegleiter',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.light,
+            supportedLocales: L10n.all,
+            locale: const Locale("de"),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate
+            ],
+            debugShowCheckedModeBanner: false,
+            builder: (context, widget) => ResponsiveBreakpoints.builder(
+                child: widget!,
+                breakpoints: const [
+                  Breakpoint(start: 0, end: 599, name: MOBILE),
+                  Breakpoint(start: 600, end: 999, name: TABLET),
+                  Breakpoint(start: 1000, end: double.infinity, name: DESKTOP)
+                ]),
+          )),
     );
   }
 }

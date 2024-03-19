@@ -24,3 +24,15 @@ final class RecommendorRegisterFailureState extends RecommendationsState {
 final class RecommendorAlreadyExistsFailureState extends RecommendationsState {}
 
 final class RecommendorRegisteredSuccessState extends RecommendationsState {}
+
+final class RecommendationsGetCurrentUserLoadingState
+    extends RecommendationsState {}
+
+final class RecommendationsGetCurrentUserSuccessState
+    extends RecommendationsState {
+  final User? user;
+
+  const RecommendationsGetCurrentUserSuccessState({
+    required this.user,
+  });
+}

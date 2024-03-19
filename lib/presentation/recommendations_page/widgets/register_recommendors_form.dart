@@ -1,22 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_row_column.dart';
-
-import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
-import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 
 class RegisterRecommendorsForm extends StatefulWidget {
   final Function changesSaved;
@@ -37,6 +37,7 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
   final birthDateTextController = TextEditingController();
   final emailTextController = TextEditingController();
   Gender? selectedGender;
+  User? currentUser;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -77,6 +78,7 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
               lastName: lastNameTextController.text,
               birthDate: birthDateTextController.text,
               email: emailTextController.text,
+              parentUserID: UniqueID.fromUniqueString(currentUser?.uid ?? ""),
               code: UniqueID()));
     } else {
       validationHasError = true;
@@ -106,157 +108,171 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
           showError = true;
         } else if (state is RecommendorRegisteredSuccessState) {
           widget.changesSaved();
+        } else if (state is RecommendationsGetCurrentUserSuccessState) {
+          currentUser = state.user;
         }
       },
       builder: (context, state) {
         return CardContainer(
             child: LayoutBuilder(builder: (context, constraints) {
           final maxWidth = constraints.maxWidth;
-          return Form(
-              key: formKey,
-              autovalidateMode: (state is RecommendationsShowValidationState)
-                  ? AutovalidateMode.always
-                  : AutovalidateMode.disabled,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Empfehlungsgeber registrieren",
-                        style: themeData.textTheme.headlineLarge!.copyWith(
-                            fontSize: 22, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: textFieldSpacing + 4),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      GenderPicker(
-                          width: maxWidth,
-                          validate: genderValid,
-                          onSelected: (gender) {
-                            setState(() {
-                              genderValid = validator.validateGender(gender);
-                              selectedGender = gender;
-                            });
-                            resetError();
-                          })
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    ResponsiveRowColumn(
-                        columnMainAxisSize: MainAxisSize.min,
-                        layout: responsiveValue.isMobile
-                            ? ResponsiveRowColumnType.COLUMN
-                            : ResponsiveRowColumnType.ROW,
-                        children: [
-                          ResponsiveRowColumnItem(
-                            child: SizedBox(
-                              width: responsiveValue.isMobile
-                                  ? maxWidth
-                                  : maxWidth / 2,
-                              child: TextFormField(
-                                controller: firstNameTextController,
-                                onFieldSubmitted: (_) => submit(validator),
-                                onChanged: (_) {
+          if (state is RecommendationsGetCurrentUserLoadingState) {
+            return const LoadingIndicator();
+          } else {
+            return Form(
+                key: formKey,
+                autovalidateMode: (state is RecommendationsShowValidationState)
+                    ? AutovalidateMode.always
+                    : AutovalidateMode.disabled,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Empfehlungsgeber registrieren",
+                          style: themeData.textTheme.headlineLarge!.copyWith(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: textFieldSpacing + 4),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GenderPicker(
+                                width: maxWidth,
+                                validate: genderValid,
+                                onSelected: (gender) {
+                                  setState(() {
+                                    genderValid =
+                                        validator.validateGender(gender);
+                                    selectedGender = gender;
+                                  });
                                   resetError();
-                                },
-                                validator: validator.validateFirstName,
-                                decoration:
-                                    const InputDecoration(labelText: "Vorname"),
-                              ),
-                            ),
-                          ),
-                          const ResponsiveRowColumnItem(
+                                })
+                          ]),
+                      const SizedBox(height: textFieldSpacing),
+                      ResponsiveRowColumn(
+                          columnMainAxisSize: MainAxisSize.min,
+                          layout: responsiveValue.isMobile
+                              ? ResponsiveRowColumnType.COLUMN
+                              : ResponsiveRowColumnType.ROW,
+                          children: [
+                            ResponsiveRowColumnItem(
                               child: SizedBox(
-                                  height: textFieldSpacing,
-                                  width: textFieldSpacing)),
-                          ResponsiveRowColumnItem(
-                            child: SizedBox(
-                              width: responsiveValue.isMobile
-                                  ? maxWidth
-                                  : maxWidth / 2 - textFieldSpacing,
+                                width: responsiveValue.isMobile
+                                    ? maxWidth
+                                    : maxWidth / 2,
+                                child: TextFormField(
+                                  controller: firstNameTextController,
+                                  onFieldSubmitted: (_) => submit(validator),
+                                  onChanged: (_) {
+                                    resetError();
+                                  },
+                                  validator: validator.validateFirstName,
+                                  decoration: const InputDecoration(
+                                      labelText: "Vorname"),
+                                ),
+                              ),
+                            ),
+                            const ResponsiveRowColumnItem(
+                                child: SizedBox(
+                                    height: textFieldSpacing,
+                                    width: textFieldSpacing)),
+                            ResponsiveRowColumnItem(
+                              child: SizedBox(
+                                width: responsiveValue.isMobile
+                                    ? maxWidth
+                                    : maxWidth / 2 - textFieldSpacing,
+                                child: TextFormField(
+                                  controller: lastNameTextController,
+                                  onFieldSubmitted: (_) => submit(validator),
+                                  onChanged: (_) {
+                                    resetError();
+                                  },
+                                  validator: validator.validateLastName,
+                                  decoration: const InputDecoration(
+                                      labelText: "Nachname"),
+                                ),
+                              ),
+                            )
+                          ]),
+                      const SizedBox(height: textFieldSpacing),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: maxWidth,
                               child: TextFormField(
-                                controller: lastNameTextController,
+                                  keyboardType: TextInputType.datetime,
+                                  controller: birthDateTextController,
+                                  onFieldSubmitted: (_) => submit(validator),
+                                  onChanged: (_) {
+                                    resetError();
+                                  },
+                                  validator: validator.validateBirthDate,
+                                  decoration: InputDecoration(
+                                      prefixIcon: const Icon(
+                                          Icons.calendar_today_rounded),
+                                      labelText:
+                                          localization.register_birthdate),
+                                  onTap: () async {
+                                    DateTime? pickedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime.now());
+                                    if (pickedDate != null) {
+                                      setState(() {
+                                        birthDateTextController.text =
+                                            DateFormat("dd.MM.yyyy")
+                                                .format(pickedDate);
+                                      });
+                                    }
+                                  }),
+                            ),
+                          ]),
+                      const SizedBox(height: textFieldSpacing),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: maxWidth,
+                              child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                controller: emailTextController,
                                 onFieldSubmitted: (_) => submit(validator),
                                 onChanged: (_) {
                                   resetError();
                                 },
-                                validator: validator.validateLastName,
-                                decoration: const InputDecoration(
-                                    labelText: "Nachname"),
+                                validator: validator.validateEmail,
+                                decoration: InputDecoration(
+                                    labelText: localization.register_email),
                               ),
                             ),
-                          )
-                        ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: maxWidth,
-                        child: TextFormField(
-                            keyboardType: TextInputType.datetime,
-                            controller: birthDateTextController,
-                            onFieldSubmitted: (_) => submit(validator),
-                            onChanged: (_) {
-                              resetError();
-                            },
-                            validator: validator.validateBirthDate,
-                            decoration: InputDecoration(
-                                prefixIcon:
-                                    const Icon(Icons.calendar_today_rounded),
-                                labelText: localization.register_birthdate),
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime.now());
-                              if (pickedDate != null) {
-                                setState(() {
-                                  birthDateTextController.text =
-                                      DateFormat("dd.MM.yyyy")
-                                          .format(pickedDate);
-                                });
-                              }
-                            }),
+                          ]),
+                      const SizedBox(height: textFieldSpacing * 2),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          PrimaryButton(
+                              title: "Registrieren",
+                              width: maxWidth / 2 - textFieldSpacing,
+                              onTap: () {
+                                submit(validator);
+                              })
+                        ],
                       ),
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: maxWidth,
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          controller: emailTextController,
-                          onFieldSubmitted: (_) => submit(validator),
-                          onChanged: (_) {
-                            resetError();
-                          },
-                          validator: validator.validateEmail,
-                          decoration: InputDecoration(
-                              labelText: localization.register_email),
-                        ),
-                      ),
-                    ]),
-                    const SizedBox(height: textFieldSpacing * 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        PrimaryButton(
-                            title: "Registrieren",
-                            width: maxWidth / 2 - textFieldSpacing,
-                            onTap: () {
-                              submit(validator);
-                            })
+                      if (state is RecommendorRegisterLoadingState) ...[
+                        const SizedBox(height: 80),
+                        const LoadingIndicator()
                       ],
-                    ),
-                    if (state is RecommendorRegisterLoadingState) ...[
-                      const SizedBox(height: 80),
-                      const LoadingIndicator()
-                    ],
-                    if (errorMessage != "" &&
-                        showError &&
-                        (state is RecommendorRegisterFailureState ||
-                            state is RecommendorAlreadyExistsFailureState) &&
-                        !validationHasError) ...[
-                      const SizedBox(height: 20),
-                      FormErrorView(message: errorMessage)
-                    ]
-                  ]));
+                      if (errorMessage != "" &&
+                          showError &&
+                          (state is RecommendorRegisterFailureState ||
+                              state is RecommendorAlreadyExistsFailureState) &&
+                          !validationHasError) ...[
+                        const SizedBox(height: 20),
+                        FormErrorView(message: errorMessage)
+                      ]
+                    ]));
+          }
         }));
       },
     );

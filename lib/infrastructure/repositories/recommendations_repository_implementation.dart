@@ -8,7 +8,8 @@ import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendations_repository.dart';
 import 'package:finanzbegleiter/infrastructure/models/registered_recommendor_model.dart';
 
-class RecommendationsRepositoryImplementation implements RecommendationsRepository {
+class RecommendationsRepositoryImplementation
+    implements RecommendationsRepository {
   final FirebaseFirestore firestore;
 
   RecommendationsRepositoryImplementation({
@@ -16,11 +17,15 @@ class RecommendationsRepositoryImplementation implements RecommendationsReposito
   });
 
   @override
-  Future<Either<DatabaseFailure, Unit>> registerRecommendor({required RegisteredRecommendor recommendor}) async {
-    final recommendorCollection = firestore.collection("registeredRecommendors");
+  Future<Either<DatabaseFailure, Unit>> registerRecommendor(
+      {required RegisteredRecommendor recommendor}) async {
+    final recommendorCollection =
+        firestore.collection("registeredRecommendors");
     final recommendorModel = RegisteredRecommendorModel.fromDomain(recommendor);
     try {
-      await recommendorCollection.doc(recommendorModel.id).set(recommendorModel.toMap());
+      await recommendorCollection
+          .doc(recommendorModel.id)
+          .set(recommendorModel.toMap());
       return right(unit);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
@@ -28,10 +33,15 @@ class RecommendationsRepositoryImplementation implements RecommendationsReposito
   }
 
   @override
-  Future<Either<DatabaseFailure, bool>> checkIfRecommendorAlreadyExists({required String email}) async {
-    final recommendorCollection = firestore.collection("registeredRecommendors");
+  Future<Either<DatabaseFailure, bool>> checkIfRecommendorAlreadyExists(
+      {required String email}) async {
+    final recommendorCollection =
+        firestore.collection("registeredRecommendors");
     try {
-      final recommendor = await recommendorCollection.where('email', isEqualTo: email).limit(1).get();
+      final recommendor = await recommendorCollection
+          .where('email', isEqualTo: email)
+          .limit(1)
+          .get();
       if (recommendor.docs.isEmpty) {
         return right(false);
       } else {
@@ -41,5 +51,4 @@ class RecommendationsRepositoryImplementation implements RecommendationsReposito
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
-
 }

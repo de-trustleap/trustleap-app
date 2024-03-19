@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
@@ -141,7 +141,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     }));
           }),
           BlocListener<UserCubit, UserState>(listener: (context, state) {
-            BlocProvider.of<AuthBloc>(context).add(AuthCheckRequestedEvent());
+            BlocProvider.of<AuthCubit>(context).checkForAuthState();
           })
         ],
         child: BlocBuilder<SignInCubit, SignInState>(builder: (context, state) {
@@ -174,7 +174,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       ),
                     ]),
                     const SizedBox(height: 80),
-                                        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       GenderPicker(
                           width: getResponsiveWidth(1),
                           validate: genderValid,

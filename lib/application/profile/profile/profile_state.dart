@@ -19,15 +19,6 @@ class ProfileUpdateContactInformationLoadingState extends ProfileState {}
 
 class ProfileUpdateContactInformationSuccessState extends ProfileState {}
 
-// Get Current User States
-class ProfileGetCurrentUserSuccessState extends ProfileState {
-  final User? user;
-
-  ProfileGetCurrentUserSuccessState({
-    required this.user,
-  });
-}
-
 // Reauthentication States
 class ProfileReauthenticateForEmailUpdateSuccessState extends ProfileState {}
 
@@ -69,5 +60,13 @@ class ProfilePasswordUpdateFailureState extends ProfileState {
 
   ProfilePasswordUpdateFailureState({
     required this.failure,
+  });
+}
+
+class ProfileGetCurrentUserSuccessState extends ProfileState {
+  final User? user;
+
+  ProfileGetCurrentUserSuccessState({
+    required this.user,
   });
 }

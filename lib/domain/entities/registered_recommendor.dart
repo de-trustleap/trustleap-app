@@ -9,35 +9,36 @@ class RegisteredRecommendor {
   final String? lastName;
   final String? birthDate;
   final String? email;
+  final UniqueID? parentUserID;
   final UniqueID? code;
 
-  RegisteredRecommendor({
-    required this.id,
-    this.gender,
-    this.firstName,
-    this.lastName,
-    this.birthDate,
-    this.email,
-    this.code
-  });
+  RegisteredRecommendor(
+      {required this.id,
+      this.gender,
+      this.firstName,
+      this.lastName,
+      this.birthDate,
+      this.email,
+      this.parentUserID,
+      this.code});
 
-  RegisteredRecommendor copyWith({
-    UniqueID? id,
-    Gender? gender,
-    String? firstName,
-    String? lastName,
-    String? birthDate,
-    String? email,
-    UniqueID? code
-  }) {
+  RegisteredRecommendor copyWith(
+      {UniqueID? id,
+      Gender? gender,
+      String? firstName,
+      String? lastName,
+      String? birthDate,
+      String? email,
+      UniqueID? parentUserID,
+      UniqueID? code}) {
     return RegisteredRecommendor(
-      id: id ?? this.id,
-      gender: gender ?? this.gender,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      birthDate: birthDate ?? this.birthDate,
-      email: email ?? this.email,
-      code: code ?? this.code
-    );
+        id: id ?? this.id,
+        gender: gender ?? this.gender,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        birthDate: birthDate ?? this.birthDate,
+        email: email ?? this.email,
+        parentUserID: parentUserID ?? this.parentUserID,
+        code: code ?? this.code);
   }
 }

@@ -1,12 +1,12 @@
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/images/images_bloc.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
-import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
+import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -54,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage>
                 ..verifyEmail()
                 ..getCurrentUser()),
           BlocProvider(create: (context) => Modular.get<UserCubit>()),
-          BlocProvider(create: (context) => Modular.get<ImagesBloc>())
+          BlocProvider(create: (context) => Modular.get<ImagesBloc>()),
         ],
         child: Padding(
           padding: EdgeInsets.only(top: topPadding),
