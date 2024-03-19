@@ -23,7 +23,7 @@ enum EmailVerificationState {
 
 enum Gender {
   male("Männlich"),
-  femaile("Weiblich"),
+  female("Weiblich"),
   none("Nicht ausgewählt");
 
   final String value;

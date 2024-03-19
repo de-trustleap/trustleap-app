@@ -72,10 +72,27 @@ class UserRepositoryImplementation implements UserRepository {
       return await currentUser.fold(() {
         return left(UserNotFoundFailure());
       }, (user) async {
-        return right(await user.verifyBeforeUpdateEmail(email));
+        await user.verifyBeforeUpdateEmail(email);
+        final updateDatabaseFailureOrSuccess =
+            await _updateEmailInDatabase(user: user, email: email);
+        return updateDatabaseFailureOrSuccess.fold((failure) {
+          return left(ServerFailure());
+        }, (r) {
+          return right(r);
+        });
       });
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getAuthException(input: e.message));
+    }
+  }
+
+  Future<Either<DatabaseFailure, void>> _updateEmailInDatabase(
+      {required User user, required String email}) async {
+    final doc = firestore.collection("users").doc(user.uid);
+    try {
+      return right(await doc.update({"email": email}));
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
 

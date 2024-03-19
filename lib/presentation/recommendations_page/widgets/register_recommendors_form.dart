@@ -63,7 +63,8 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
   }
 
   void submit(AuthValidator validator) {
-    if (formKey.currentState!.validate() && validator.validateGender(selectedGender) == null) {
+    if (formKey.currentState!.validate() &&
+        validator.validateGender(selectedGender) == null) {
       validationHasError = false;
       setState(() {
         genderValid = null;
@@ -96,17 +97,14 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
     return BlocConsumer<RecommendationsCubit, RecommendationsState>(
       listener: (context, state) {
         if (state is RecommendorRegisterFailureState) {
-          print("FAILURE");
           errorMessage = DatabaseFailureMapper.mapFailureMessage(
               state.failure, localization);
           showError = true;
         } else if (state is RecommendorAlreadyExistsFailureState) {
-          print("FAILURE2");
           errorMessage =
               "Die E-Mail Adresse existiert bereits bei einem anderen Nutzer.";
           showError = true;
         } else if (state is RecommendorRegisteredSuccessState) {
-          print("SUCCESS");
           widget.changesSaved();
         }
       },
