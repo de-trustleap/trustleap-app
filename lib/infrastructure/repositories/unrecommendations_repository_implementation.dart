@@ -37,15 +37,24 @@ class RecommendationsRepositoryImplementation
       {required String email}) async {
     final recommendorCollection =
         firestore.collection("unregisteredRecommendors");
+    final usersCollection = firestore.collection("users");
     try {
       final recommendor = await recommendorCollection
           .where('email', isEqualTo: email)
           .limit(1)
           .get();
-      if (recommendor.docs.isEmpty) {
+      final user =
+          await usersCollection.where('email', isEqualTo: email).limit(1).get();
+      if (recommendor.docs.isEmpty && user.docs.isEmpty) {
         return right(false);
       } else {
-        return right(recommendor.docs.first.exists ? true : false);
+        if (recommendor.docs.isNotEmpty && recommendor.docs.first.exists) {
+          return right(true);
+        } else if (user.docs.isNotEmpty && user.docs.first.exists) {
+          return right(true);
+        } else {
+          return right(false);
+        }
       }
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
