@@ -16,7 +16,7 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
   RecommendationsCubit(this.recommendationsRepo, this.authRepo)
       : super(RecommendationsInitial());
 
-  void registerRecommendor(RegisteredRecommendor? recommendor) async {
+  void registerRecommendor(UnregisteredRecommendor? recommendor) async {
     if (recommendor == null) {
       emit(RecommendationsShowValidationState());
     } else {

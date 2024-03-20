@@ -26,8 +26,10 @@ Future main() async {
 
 void routeToInitial(bool authenticated) {
   if (!authenticated) {
+    print("NOT AUTHENTICATED");
     Modular.to.navigate(RoutePaths.loginPath);
   } else {
+    print("AUTHENTICATED");
     final lastRoute =
         WidgetsBinding.instance.platformDispatcher.defaultRouteName;
     if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
@@ -58,21 +60,16 @@ class MyApp extends StatelessWidget {
                 listenWhen: (previous, current) => previous != current,
                 listener: (context, state) {
                   if (state is AuthStateUnAuthenticated) {
-                    print("NOT AUTHENTICATED");
                     routeToInitial(false);
                   } else if (state is AuthStateAuthenticated) {
-                    print("AUTHENTICATED");
                     routeToInitial(true);
                   }
                 }),
             BlocListener<AuthObserverBloc, AuthObserverState>(
                 listener: (context, state) {
-              print("GOT STATE: $state");
               if (state is AuthObserverStateUnAuthenticated) {
-                print("NOT AUTHENTICATED");
                 routeToInitial(false);
               } else if (state is AuthObserverStateAuthenticated) {
-                print("AUTHENTICATED");
                 routeToInitial(true);
               }
             })

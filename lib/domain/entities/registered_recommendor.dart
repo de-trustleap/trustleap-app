@@ -2,7 +2,7 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
-class RegisteredRecommendor {
+class UnregisteredRecommendor {
   final UniqueID? id;
   final Gender? gender;
   final String? firstName;
@@ -12,7 +12,7 @@ class RegisteredRecommendor {
   final UniqueID? parentUserID;
   final UniqueID? code;
 
-  RegisteredRecommendor(
+  UnregisteredRecommendor(
       {required this.id,
       this.gender,
       this.firstName,
@@ -22,7 +22,7 @@ class RegisteredRecommendor {
       this.parentUserID,
       this.code});
 
-  RegisteredRecommendor copyWith(
+  UnregisteredRecommendor copyWith(
       {UniqueID? id,
       Gender? gender,
       String? firstName,
@@ -31,7 +31,7 @@ class RegisteredRecommendor {
       String? email,
       UniqueID? parentUserID,
       UniqueID? code}) {
-    return RegisteredRecommendor(
+    return UnregisteredRecommendor(
         id: id ?? this.id,
         gender: gender ?? this.gender,
         firstName: firstName ?? this.firstName,

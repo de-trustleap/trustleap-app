@@ -14,7 +14,7 @@ import 'package:finanzbegleiter/domain/repositories/recommendations_repository.d
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/image_repository_implementation.dart';
-import 'package:finanzbegleiter/infrastructure/repositories/recommendations_repository_implementation.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/unrecommendations_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
 import 'package:finanzbegleiter/presentation/core/modules/auth_guard.dart';
 import 'package:finanzbegleiter/presentation/core/modules/auth_module.dart';

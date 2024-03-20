@@ -4,7 +4,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
 
-class RegisteredRecommendorModel {
+class UnregisteredRecommendorModel {
   final String id;
   final String? gender;
   final String? firstName;
@@ -15,7 +15,7 @@ class RegisteredRecommendorModel {
   final String? code;
   final dynamic createdAt;
 
-  RegisteredRecommendorModel(
+  UnregisteredRecommendorModel(
       {required this.id,
       this.gender,
       this.firstName,
@@ -40,8 +40,8 @@ class RegisteredRecommendorModel {
     };
   }
 
-  factory RegisteredRecommendorModel.fromMap(Map<String, dynamic> map) {
-    return RegisteredRecommendorModel(
+  factory UnregisteredRecommendorModel.fromMap(Map<String, dynamic> map) {
+    return UnregisteredRecommendorModel(
         id: "",
         gender: map['gender'] != null ? map['gender'] as String : null,
         firstName: map['firstName'] != null ? map['firstName'] as String : null,
@@ -54,7 +54,7 @@ class RegisteredRecommendorModel {
         createdAt: map['createdAt'] as dynamic);
   }
 
-  RegisteredRecommendorModel copyWith({
+  UnregisteredRecommendorModel copyWith({
     String? id,
     String? gender,
     String? firstName,
@@ -65,7 +65,7 @@ class RegisteredRecommendorModel {
     String? code,
     dynamic createdAt,
   }) {
-    return RegisteredRecommendorModel(
+    return UnregisteredRecommendorModel(
       id: id ?? this.id,
       gender: gender ?? this.gender,
       firstName: firstName ?? this.firstName,
@@ -78,13 +78,14 @@ class RegisteredRecommendorModel {
     );
   }
 
-  factory RegisteredRecommendorModel.fromFirestore(
+  factory UnregisteredRecommendorModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> doc) {
-    return RegisteredRecommendorModel.fromMap(doc.data()!).copyWith(id: doc.id);
+    return UnregisteredRecommendorModel.fromMap(doc.data()!)
+        .copyWith(id: doc.id);
   }
 
-  RegisteredRecommendor toDomain() {
-    return RegisteredRecommendor(
+  UnregisteredRecommendor toDomain() {
+    return UnregisteredRecommendor(
         id: UniqueID.fromUniqueString(id),
         gender: Gender.values.firstWhere((element) => element.name == gender),
         firstName: firstName,
@@ -95,9 +96,9 @@ class RegisteredRecommendorModel {
         code: UniqueID.fromUniqueString(code ?? ""));
   }
 
-  factory RegisteredRecommendorModel.fromDomain(
-      RegisteredRecommendor recommendor) {
-    return RegisteredRecommendorModel(
+  factory UnregisteredRecommendorModel.fromDomain(
+      UnregisteredRecommendor recommendor) {
+    return UnregisteredRecommendorModel(
         id: recommendor.id?.value ?? "",
         gender: recommendor.gender?.name,
         firstName: recommendor.firstName,

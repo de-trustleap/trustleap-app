@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -23,11 +22,7 @@ class AuthObserverBloc extends Bloc<AuthObserverEvent, AuthObserverState> {
     });
 
     on<AuthObserverGotResultEvent>((event, emit) {
-      final test = event.user;
-      print("AUTHOBSERVERCALLED: $test");
-      print("STATE: $state");
       if (event.user == null && state is AuthObserverStateUnAuthenticated) {
-        print("SEND STATE");
         emit(AuthObserverStateUnAuthenticated());
       }
     });

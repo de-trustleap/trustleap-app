@@ -71,7 +71,7 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
         genderValid = null;
       });
       BlocProvider.of<RecommendationsCubit>(context).registerRecommendor(
-          RegisteredRecommendor(
+          UnregisteredRecommendor(
               id: UniqueID(),
               gender: selectedGender,
               firstName: firstNameTextController.text,

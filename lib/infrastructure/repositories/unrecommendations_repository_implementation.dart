@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendations_repository.dart';
-import 'package:finanzbegleiter/infrastructure/models/registered_recommendor_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/unregistered_recommendor_model.dart';
 
 class RecommendationsRepositoryImplementation
     implements RecommendationsRepository {
@@ -18,10 +17,11 @@ class RecommendationsRepositoryImplementation
 
   @override
   Future<Either<DatabaseFailure, Unit>> registerRecommendor(
-      {required RegisteredRecommendor recommendor}) async {
+      {required UnregisteredRecommendor recommendor}) async {
     final recommendorCollection =
-        firestore.collection("registeredRecommendors");
-    final recommendorModel = RegisteredRecommendorModel.fromDomain(recommendor);
+        firestore.collection("unregisteredRecommendors");
+    final recommendorModel =
+        UnregisteredRecommendorModel.fromDomain(recommendor);
     try {
       await recommendorCollection
           .doc(recommendorModel.id)
@@ -36,7 +36,7 @@ class RecommendationsRepositoryImplementation
   Future<Either<DatabaseFailure, bool>> checkIfRecommendorAlreadyExists(
       {required String email}) async {
     final recommendorCollection =
-        firestore.collection("registeredRecommendors");
+        firestore.collection("unregisteredRecommendors");
     try {
       final recommendor = await recommendorCollection
           .where('email', isEqualTo: email)
