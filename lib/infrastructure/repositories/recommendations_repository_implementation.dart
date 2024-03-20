@@ -40,11 +40,11 @@ class RecommendationsRepositoryImplementation
     final usersCollection = firestore.collection("users");
     try {
       final recommendor = await recommendorCollection
-          .where('email', isEqualTo: email)
+          .where("email", isEqualTo: email)
           .limit(1)
           .get();
       final user =
-          await usersCollection.where('email', isEqualTo: email).limit(1).get();
+          await usersCollection.where("email", isEqualTo: email).limit(1).get();
       if (recommendor.docs.isEmpty && user.docs.isEmpty) {
         return right(false);
       } else {

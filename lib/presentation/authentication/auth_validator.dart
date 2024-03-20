@@ -90,6 +90,14 @@ class AuthValidator {
     }
   }
 
+  String? validateCode(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Geben Sie bitte ihren Registrierungscode an";
+    } else {
+      return null;
+    }
+  }
+
   bool _isAdult(DateTime date) {
     final DateTime today = DateTime.now();
     final DateTime adultDate = DateTime(

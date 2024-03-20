@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
+import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -35,7 +36,8 @@ class _RegisterFormState extends State<RegisterForm> {
   final streetAndNumberTextController = TextEditingController();
   final plzTextController = TextEditingController();
   final placeTextController = TextEditingController();
-  late Gender? selectedGender;
+  final codeTextController = TextEditingController();
+  var selectedGender = Gender.none;
 
   bool showError = false;
   String errorMessage = "";
@@ -53,6 +55,7 @@ class _RegisterFormState extends State<RegisterForm> {
     streetAndNumberTextController.dispose();
     plzTextController.dispose();
     placeTextController.dispose();
+    codeTextController.dispose();
 
     super.dispose();
   }
@@ -71,15 +74,15 @@ class _RegisterFormState extends State<RegisterForm> {
       setState(() {
         genderValid = null;
       });
-      BlocProvider.of<SignInCubit>(context).registerWithEmailAndPassword(
-          emailTextController.text, passwordTextController.text);
+      BlocProvider.of<SignInCubit>(context).checkForValidRegistrationCode(
+          emailTextController.text, codeTextController.text);
     } else {
       validationHasError = true;
       setState(() {
         genderValid = validator.validateGender(selectedGender);
       });
       BlocProvider.of<SignInCubit>(context)
-          .registerWithEmailAndPassword(null, null);
+          .checkForValidRegistrationCode(null, null);
     }
   }
 
@@ -119,26 +122,35 @@ class _RegisterFormState extends State<RegisterForm> {
     return MultiBlocListener(
         listeners: [
           BlocListener<SignInCubit, SignInState>(listener: (context, state) {
-            state.authFailureOrSuccessOption.fold(
-                () => {},
-                (eitherFailureOrSuccess) =>
-                    eitherFailureOrSuccess.fold((failure) {
-                      errorMessage = AuthFailureMapper.mapFailureMessage(
-                          failure, localization);
-                      showError = true;
-                    }, (creds) {
-                      showError = false;
-                      BlocProvider.of<UserCubit>(context).createUser(CustomUser(
-                          id: UniqueID.fromUniqueString(creds.user!.uid),
-                          gender: selectedGender,
-                          firstName: firstNameTextController.text,
-                          lastName: lastNameTextController.text,
-                          birthDate: birthDateTextController.text,
-                          address: streetAndNumberTextController.text,
-                          postCode: plzTextController.text,
-                          place: placeTextController.text,
-                          email: emailTextController.text));
-                    }));
+            if (state is SignInFailureState) {
+              errorMessage = AuthFailureMapper.mapFailureMessage(
+                  state.failure, localization);
+              showError = true;
+            } else if (state is SignInSuccessState) {
+              showError = false;
+              BlocProvider.of<UserCubit>(context).createUser(CustomUser(
+                  id: UniqueID.fromUniqueString(state.creds.user!.uid),
+                  gender: selectedGender,
+                  firstName: firstNameTextController.text,
+                  lastName: lastNameTextController.text,
+                  birthDate: birthDateTextController.text,
+                  address: streetAndNumberTextController.text,
+                  postCode: plzTextController.text,
+                  place: placeTextController.text,
+                  email: emailTextController.text));
+            } else if (state is SignInCheckCodeFailureState) {
+              errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                  state.failure, localization);
+              showError = true;
+            } else if (state is SignInCheckCodeNotValidFailureState) {
+              errorMessage =
+                  "Die Registrierung ist fehlgeschlagen. Bitte prüfen Sie ob Sie einen gültigen Code und die zugehörige E-Mail Adresse verwenden.";
+              showError = true;
+            } else if (state is SignInCheckCodeSuccessState) {
+              BlocProvider.of<SignInCubit>(context)
+                  .registerWithEmailAndPassword(
+                      emailTextController.text, passwordTextController.text);
+            }
           }),
           BlocListener<UserCubit, UserState>(listener: (context, state) {
             BlocProvider.of<AuthCubit>(context).checkForAuthState();
@@ -147,6 +159,9 @@ class _RegisterFormState extends State<RegisterForm> {
         child: BlocBuilder<SignInCubit, SignInState>(builder: (context, state) {
           return Form(
               key: formKey,
+              autovalidateMode: (state is SignInShowValidationState)
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.disabled,
               child: ListView(
                   shrinkWrap: true,
                   padding: const EdgeInsets.symmetric(horizontal: listPadding),
@@ -370,6 +385,22 @@ class _RegisterFormState extends State<RegisterForm> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: getResponsiveWidth(1),
+                        child: TextFormField(
+                          controller: codeTextController,
+                          onFieldSubmitted: (_) => submit(validator),
+                          onChanged: (_) {
+                            resetError();
+                          },
+                          validator: validator.validateCode,
+                          decoration: const InputDecoration(
+                              labelText: "Registrierungscode"),
+                        ),
+                      ),
+                    ]),
+                    const SizedBox(height: textFieldSpacing),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      SizedBox(
+                        width: getResponsiveWidth(1),
                         child: PrimaryButton(
                             title: localization.register_now_buttontitle,
                             onTap: () {
@@ -377,13 +408,13 @@ class _RegisterFormState extends State<RegisterForm> {
                             }),
                       ),
                     ]),
-                    if (state.isSubmitting) ...[
+                    if (state is SignInLoadingState) ...[
                       const SizedBox(height: 80),
                       const LoadingIndicator()
                     ],
                     if (errorMessage != "" &&
                         showError &&
-                        !state.isSubmitting &&
+                        (state is! SignInLoadingState) &&
                         !validationHasError) ...[
                       const SizedBox(height: textFieldSpacing),
                       Row(
