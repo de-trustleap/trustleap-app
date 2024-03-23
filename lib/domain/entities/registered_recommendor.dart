@@ -13,7 +13,7 @@ class UnregisteredRecommendor extends Equatable {
   final UniqueID? parentUserID;
   final UniqueID? code;
 
-  UnregisteredRecommendor(
+  const UnregisteredRecommendor(
       {required this.id,
       this.gender,
       this.firstName,
@@ -42,8 +42,8 @@ class UnregisteredRecommendor extends Equatable {
         parentUserID: parentUserID ?? this.parentUserID,
         code: code ?? this.code);
   }
-  
-  @override
-  List<Object?> get props => [id, gender, firstName, lastName, birthDate, email, parentUserID, code];
 
+  @override
+  List<Object?> get props =>
+      [id, gender, firstName, lastName, birthDate, email, parentUserID, code];
 }

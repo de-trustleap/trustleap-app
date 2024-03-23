@@ -4,7 +4,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
 class CustomUser extends Equatable {
-  UniqueID id;
+  final UniqueID id;
   final Gender? gender;
   final String? firstName;
   final String? lastName;
@@ -17,7 +17,7 @@ class CustomUser extends Equatable {
   final String? thumbnailDownloadURL;
   final List<String>? promoters;
 
-  CustomUser(
+  const CustomUser(
       {required this.id,
       this.gender,
       this.firstName,
