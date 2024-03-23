@@ -27,8 +27,7 @@ class UserRepositoryImplementation implements UserRepository {
 
     yield* userDoc.snapshots().map((snapshot) {
       var document = snapshot.data() as Map<String, dynamic>;
-      var model =
-          UserModel.fromMap(document).copyWith(id: snapshot.id).toDomain();
+      var model = UserModel.fromFirestore(document, snapshot.id).toDomain();
       return right<DatabaseFailure, CustomUser>(model);
     }).handleError((e) {
       if (e is FirebaseException) {

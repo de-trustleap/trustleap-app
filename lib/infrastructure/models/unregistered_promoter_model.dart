@@ -14,6 +14,7 @@ class UnregisteredPromoterModel extends Equatable {
   final String? email;
   final String? parentUserID;
   final String? code;
+  final DateTime expiresAt;
   final dynamic createdAt;
 
   const UnregisteredPromoterModel(
@@ -25,6 +26,7 @@ class UnregisteredPromoterModel extends Equatable {
       this.email,
       this.parentUserID,
       this.code,
+      required this.expiresAt,
       this.createdAt});
 
   Map<String, dynamic> toMap() {
@@ -37,6 +39,7 @@ class UnregisteredPromoterModel extends Equatable {
       'email': email,
       'parentUserID': parentUserID,
       'code': code,
+      'expiresAt': expiresAt,
       'createdAt': createdAt
     };
   }
@@ -52,6 +55,7 @@ class UnregisteredPromoterModel extends Equatable {
         parentUserID:
             map['parentUserID'] != null ? map['parentUserID'] as String : null,
         code: map['code'] != null ? map['code'] as String : null,
+        expiresAt: map['expiresAt'] as DateTime,
         createdAt: map['createdAt'] as dynamic);
   }
 
@@ -64,6 +68,7 @@ class UnregisteredPromoterModel extends Equatable {
     String? email,
     String? parentUserID,
     String? code,
+    DateTime? expiresAt,
     dynamic createdAt,
   }) {
     return UnregisteredPromoterModel(
@@ -75,13 +80,14 @@ class UnregisteredPromoterModel extends Equatable {
       email: email ?? this.email,
       parentUserID: parentUserID ?? this.parentUserID,
       code: code ?? this.code,
+      expiresAt: expiresAt ?? this.expiresAt,
       createdAt: createdAt ?? this.createdAt,
     );
   }
 
   factory UnregisteredPromoterModel.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> doc) {
-    return UnregisteredPromoterModel.fromMap(doc.data()!).copyWith(id: doc.id);
+      Map<String, dynamic> doc, String id) {
+    return UnregisteredPromoterModel.fromMap(doc).copyWith(id: id);
   }
 
   UnregisteredPromoter toDomain() {
@@ -95,7 +101,8 @@ class UnregisteredPromoterModel extends Equatable {
         birthDate: birthDate,
         email: email,
         parentUserID: UniqueID.fromUniqueString(parentUserID ?? ""),
-        code: UniqueID.fromUniqueString(code ?? ""));
+        code: UniqueID.fromUniqueString(code ?? ""),
+        expiresAt: expiresAt);
   }
 
   factory UnregisteredPromoterModel.fromDomain(UnregisteredPromoter promoter) {
@@ -108,6 +115,7 @@ class UnregisteredPromoterModel extends Equatable {
         email: promoter.email,
         parentUserID: promoter.parentUserID?.value ?? "",
         code: promoter.code?.value,
+        expiresAt: promoter.expiresAt,
         createdAt: FieldValue.serverTimestamp());
   }
 

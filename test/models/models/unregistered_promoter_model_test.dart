@@ -6,15 +6,16 @@ import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_mode
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  final date = DateTime.now();
   group("UnregisteredPromoterModel_CopyWith", () {
     test(
         "set lastName with copyWith should change lastName for resulting object",
         () {
       // Given
-      const user = UnregisteredPromoterModel(
-          id: "1", firstName: "Max", lastName: "Mustermann");
-      const expectedResult = UnregisteredPromoterModel(
-          id: "1", firstName: "Max", lastName: "Neumann");
+      final user = UnregisteredPromoterModel(
+          id: "1", firstName: "Max", lastName: "Mustermann", expiresAt: date);
+      final expectedResult = UnregisteredPromoterModel(
+          id: "1", firstName: "Max", lastName: "Neumann", expiresAt: date);
       // WHen
       final result = user.copyWith(lastName: "Neumann");
       // Then
@@ -33,6 +34,7 @@ void main() {
           email: "tester@test.de",
           parentUserID: "2",
           code: "1234",
+          expiresAt: date,
           createdAt: Timestamp(1000000, 0));
       final expectedResult = {
         "id": "1",
@@ -43,6 +45,7 @@ void main() {
         "email": "tester@test.de",
         "parentUserID": "2",
         "code": "1234",
+        "expiresAt": date,
         "createdAt": Timestamp(1000000, 0)
       };
       // When
@@ -64,6 +67,7 @@ void main() {
         "email": "tester@test.de",
         "parentUserID": "2",
         "code": "1234",
+        "expiresAt": date,
         "createdAt": Timestamp(1000000, 0)
       };
       final expectedResult = UnregisteredPromoterModel(
@@ -74,6 +78,7 @@ void main() {
           email: "tester@test.de",
           parentUserID: "2",
           code: "1234",
+          expiresAt: date,
           createdAt: Timestamp(1000000, 0));
       // When
       final result = UnregisteredPromoterModel.fromMap(map);
@@ -96,6 +101,7 @@ void main() {
           email: "tester@test.de",
           parentUserID: "2",
           code: "1234",
+          expiresAt: date,
           createdAt: Timestamp(1000000, 0));
       final expectedResult = UnregisteredPromoter(
           id: UniqueID.fromUniqueString("1"),
@@ -105,7 +111,8 @@ void main() {
           birthDate: "23.12.2023",
           email: "tester@test.de",
           parentUserID: UniqueID.fromUniqueString("2"),
-          code: UniqueID.fromUniqueString("1234"));
+          code: UniqueID.fromUniqueString("1234"),
+          expiresAt: date);
       // When
       final result = model.toDomain();
       // Then
@@ -125,17 +132,52 @@ void main() {
           lastName: "Mustermann",
           birthDate: "23.12.2023",
           parentUserID: UniqueID.fromUniqueString("2"),
-          code: UniqueID.fromUniqueString("1234"));
-      const expectedResult = UnregisteredPromoterModel(
+          code: UniqueID.fromUniqueString("1234"),
+          expiresAt: date);
+      final expectedResult = UnregisteredPromoterModel(
           id: "1",
           gender: "male",
           firstName: "Max",
           lastName: "Mustermann",
           birthDate: "23.12.2023",
           parentUserID: "2",
-          code: "1234");
+          code: "1234",
+          expiresAt: date);
       // When
       final result = UnregisteredPromoterModel.fromDomain(user);
+      // Then
+      expect(expectedResult, result);
+    });
+  });
+
+  group("UnregisteredPromoterModel_FromFirestore", () {
+    test("test if fromFirestore sets the id successfully", () {
+      // Given
+      final map = {
+        "id": "",
+        "gender": null,
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "birthDate": "23.12.2023",
+        "email": "tester@test.de",
+        "parentUserID": "2",
+        "code": "1234",
+        "expiresAt": date,
+        "createdAt": Timestamp(1000000, 0)
+      };
+      final expectedResult = UnregisteredPromoterModel(
+          id: "1",
+          gender: null,
+          firstName: "Max",
+          lastName: "Mustermann",
+          birthDate: "23.12.2023",
+          email: "tester@test.de",
+          parentUserID: "2",
+          code: "1234",
+          expiresAt: date,
+          createdAt: Timestamp(1000000, 0));
+      // When
+      final result = UnregisteredPromoterModel.fromFirestore(map, "1");
       // Then
       expect(expectedResult, result);
     });
@@ -153,6 +195,7 @@ void main() {
           email: "tester@test.de",
           parentUserID: "2",
           code: "1234",
+          expiresAt: date,
           createdAt: Timestamp(10000, 0));
       final user2 = UnregisteredPromoterModel(
           id: "1",
@@ -163,6 +206,7 @@ void main() {
           email: "tester@test.de",
           parentUserID: "2",
           code: "1234",
+          expiresAt: date,
           createdAt: Timestamp(10000, 0));
       // Then
       expect(user1, user2);

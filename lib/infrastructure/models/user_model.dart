@@ -120,8 +120,8 @@ class UserModel extends Equatable {
     );
   }
 
-  factory UserModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
-    return UserModel.fromMap(doc.data()!).copyWith(id: doc.id);
+  factory UserModel.fromFirestore(Map<String, dynamic> doc, String id) {
+    return UserModel.fromMap(doc).copyWith(id: id);
   }
 
   CustomUser toDomain() {

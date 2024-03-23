@@ -187,6 +187,47 @@ void main() {
     });
   });
 
+  group("UserModel_FromFirestore", () {
+    test("test if fromFirestore sets the id successfully", () {
+      // Given
+      final map = {
+        "id": "",
+        "gender": "male",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "birthDate": "23.12.2023",
+        "address": null,
+        "postCode": "41542",
+        "place": "Test",
+        "email": "tester@test.de",
+        "profileImageDownloadURL": "https://test.de",
+        "thumbnailDownloadURL": "https://thumb.de",
+        "registeredPromoterIDs": ["id"],
+        "unregisteredPromoterIDs": ["id"],
+        "createdAt": Timestamp(100000, 0)
+      };
+      final expectedResult = UserModel(
+          id: "1",
+          gender: "male",
+          firstName: "Max",
+          lastName: "Mustermann",
+          birthDate: "23.12.2023",
+          address: null,
+          postCode: "41542",
+          place: "Test",
+          email: "tester@test.de",
+          profileImageDownloadURL: "https://test.de",
+          thumbnailDownloadURL: "https://thumb.de",
+          registeredPromoterIDs: const ["id"],
+          unregisteredPromoterIDs: const ["id"],
+          createdAt: Timestamp(100000, 0));
+      // When
+      final result = UserModel.fromFirestore(map, "1");
+      // Then
+      expect(expectedResult, result);
+    });
+  });
+
   group("UserModel_Props", () {
     test("check if value equality works", () {
       // Given
