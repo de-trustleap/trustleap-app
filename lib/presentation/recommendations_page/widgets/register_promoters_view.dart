@@ -1,17 +1,16 @@
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/widgets/register_recommendors_form.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/widgets/register_promoters_form.dart';
 import 'package:flutter/material.dart';
 
-class RegisterRecommendorsView extends StatefulWidget {
-  const RegisterRecommendorsView({super.key});
+class RegisterPromotersView extends StatefulWidget {
+  const RegisterPromotersView({super.key});
 
   @override
-  State<RegisterRecommendorsView> createState() =>
-      _RegisterRecommendorsViewState();
+  State<RegisterPromotersView> createState() => _RegisterPromotersViewState();
 }
 
-class _RegisterRecommendorsViewState extends State<RegisterRecommendorsView>
+class _RegisterPromotersViewState extends State<RegisterPromotersView>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -30,9 +29,13 @@ class _RegisterRecommendorsViewState extends State<RegisterRecommendorsView>
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
-                  children: [RegisterRecommendorsForm(changesSaved: () => {
-                    CustomSnackBar.of(context).showCustomSnackBar("Der neue Empfehlungsgeber wurde erfolgreich registriert!")
-                  })])),
+                  children: [
+                RegisterPromotersForm(
+                    changesSaved: () => {
+                          CustomSnackBar.of(context).showCustomSnackBar(
+                              "Der neue Empfehlungsgeber wurde erfolgreich registriert!")
+                        })
+              ])),
         ]));
   }
 }

@@ -2,7 +2,7 @@ import 'package:finanzbegleiter/application/recommendations/recommendations_cubi
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/widgets/register_recommendors_view.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/widgets/register_promoters_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -25,7 +25,7 @@ class _RecommendationsPageState extends State<RecommendationsPage>
         tab: const CustomTab(title: "Test"), content: const Placeholder()),
     TabbarContent(
         tab: const CustomTab(title: "Empfehlungsgeber registrieren"),
-        content: const RegisterRecommendorsView())
+        content: const RegisterPromotersView())
   ];
 
   @override

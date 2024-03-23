@@ -3,7 +3,7 @@ import 'package:finanzbegleiter/application/recommendations/recommendations_cubi
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
+import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -18,20 +18,19 @@ import 'package:intl/intl.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_row_column.dart';
 
-class RegisterRecommendorsForm extends StatefulWidget {
+class RegisterPromotersForm extends StatefulWidget {
   final Function changesSaved;
 
-  const RegisterRecommendorsForm({
+  const RegisterPromotersForm({
     Key? key,
     required this.changesSaved,
   }) : super(key: key);
 
   @override
-  State<RegisterRecommendorsForm> createState() =>
-      _RegisterRecommendorsFormState();
+  State<RegisterPromotersForm> createState() => _RegisterPromotersFormState();
 }
 
-class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
+class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   final firstNameTextController = TextEditingController();
   final lastNameTextController = TextEditingController();
   final birthDateTextController = TextEditingController();
@@ -70,8 +69,8 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
       setState(() {
         genderValid = null;
       });
-      BlocProvider.of<RecommendationsCubit>(context).registerRecommendor(
-          UnregisteredRecommendor(
+      BlocProvider.of<RecommendationsCubit>(context).registerPromoter(
+          UnregisteredPromoter(
               id: UniqueID(),
               gender: selectedGender,
               firstName: firstNameTextController.text,
@@ -85,7 +84,7 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
       setState(() {
         genderValid = validator.validateGender(selectedGender);
       });
-      BlocProvider.of<RecommendationsCubit>(context).registerRecommendor(null);
+      BlocProvider.of<RecommendationsCubit>(context).registerPromoter(null);
     }
   }
 
@@ -98,15 +97,15 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
     const double textFieldSpacing = 20;
     return BlocConsumer<RecommendationsCubit, RecommendationsState>(
       listener: (context, state) {
-        if (state is RecommendorRegisterFailureState) {
+        if (state is PromoterRegisterFailureState) {
           errorMessage = DatabaseFailureMapper.mapFailureMessage(
               state.failure, localization);
           showError = true;
-        } else if (state is RecommendorAlreadyExistsFailureState) {
+        } else if (state is PromoterAlreadyExistsFailureState) {
           errorMessage =
               "Die E-Mail Adresse existiert bereits bei einem anderen Nutzer.";
           showError = true;
-        } else if (state is RecommendorRegisteredSuccessState) {
+        } else if (state is PromoterRegisteredSuccessState) {
           widget.changesSaved();
         } else if (state is RecommendationsGetCurrentUserSuccessState) {
           currentUser = state.user;
@@ -259,14 +258,14 @@ class _RegisterRecommendorsFormState extends State<RegisterRecommendorsForm> {
                               })
                         ],
                       ),
-                      if (state is RecommendorRegisterLoadingState) ...[
+                      if (state is PromoterRegisterLoadingState) ...[
                         const SizedBox(height: 80),
                         const LoadingIndicator()
                       ],
                       if (errorMessage != "" &&
                           showError &&
-                          (state is RecommendorRegisterFailureState ||
-                              state is RecommendorAlreadyExistsFailureState) &&
+                          (state is PromoterRegisterFailureState ||
+                              state is PromoterAlreadyExistsFailureState) &&
                           !validationHasError) ...[
                         const SizedBox(height: 20),
                         FormErrorView(message: errorMessage)

@@ -3,9 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
+import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 
-class UnregisteredRecommendorModel extends Equatable {
+class UnregisteredPromoterModel extends Equatable {
   final String id;
   final String? gender;
   final String? firstName;
@@ -16,7 +16,7 @@ class UnregisteredRecommendorModel extends Equatable {
   final String? code;
   final dynamic createdAt;
 
-  const UnregisteredRecommendorModel(
+  const UnregisteredPromoterModel(
       {required this.id,
       this.gender,
       this.firstName,
@@ -41,8 +41,8 @@ class UnregisteredRecommendorModel extends Equatable {
     };
   }
 
-  factory UnregisteredRecommendorModel.fromMap(Map<String, dynamic> map) {
-    return UnregisteredRecommendorModel(
+  factory UnregisteredPromoterModel.fromMap(Map<String, dynamic> map) {
+    return UnregisteredPromoterModel(
         id: "",
         gender: map['gender'] != null ? map['gender'] as String : null,
         firstName: map['firstName'] != null ? map['firstName'] as String : null,
@@ -55,7 +55,7 @@ class UnregisteredRecommendorModel extends Equatable {
         createdAt: map['createdAt'] as dynamic);
   }
 
-  UnregisteredRecommendorModel copyWith({
+  UnregisteredPromoterModel copyWith({
     String? id,
     String? gender,
     String? firstName,
@@ -66,7 +66,7 @@ class UnregisteredRecommendorModel extends Equatable {
     String? code,
     dynamic createdAt,
   }) {
-    return UnregisteredRecommendorModel(
+    return UnregisteredPromoterModel(
       id: id ?? this.id,
       gender: gender ?? this.gender,
       firstName: firstName ?? this.firstName,
@@ -79,14 +79,13 @@ class UnregisteredRecommendorModel extends Equatable {
     );
   }
 
-  factory UnregisteredRecommendorModel.fromFirestore(
+  factory UnregisteredPromoterModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> doc) {
-    return UnregisteredRecommendorModel.fromMap(doc.data()!)
-        .copyWith(id: doc.id);
+    return UnregisteredPromoterModel.fromMap(doc.data()!).copyWith(id: doc.id);
   }
 
-  UnregisteredRecommendor toDomain() {
-    return UnregisteredRecommendor(
+  UnregisteredPromoter toDomain() {
+    return UnregisteredPromoter(
         id: UniqueID.fromUniqueString(id),
         gender: Gender.values.firstWhere((element) =>
             element.name ==
@@ -99,17 +98,16 @@ class UnregisteredRecommendorModel extends Equatable {
         code: UniqueID.fromUniqueString(code ?? ""));
   }
 
-  factory UnregisteredRecommendorModel.fromDomain(
-      UnregisteredRecommendor recommendor) {
-    return UnregisteredRecommendorModel(
-        id: recommendor.id?.value ?? "",
-        gender: recommendor.gender?.name,
-        firstName: recommendor.firstName,
-        lastName: recommendor.lastName,
-        birthDate: recommendor.birthDate,
-        email: recommendor.email,
-        parentUserID: recommendor.parentUserID?.value ?? "",
-        code: recommendor.code?.value,
+  factory UnregisteredPromoterModel.fromDomain(UnregisteredPromoter promoter) {
+    return UnregisteredPromoterModel(
+        id: promoter.id?.value ?? "",
+        gender: promoter.gender?.name,
+        firstName: promoter.firstName,
+        lastName: promoter.lastName,
+        birthDate: promoter.birthDate,
+        email: promoter.email,
+        parentUserID: promoter.parentUserID?.value ?? "",
+        code: promoter.code?.value,
         createdAt: FieldValue.serverTimestamp());
   }
 

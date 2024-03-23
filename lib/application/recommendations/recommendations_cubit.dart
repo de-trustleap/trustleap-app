@@ -2,7 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
+import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendations_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,29 +16,28 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
   RecommendationsCubit(this.recommendationsRepo, this.authRepo)
       : super(RecommendationsInitial());
 
-  void registerRecommendor(UnregisteredRecommendor? recommendor) async {
-    if (recommendor == null) {
+  void registerPromoter(UnregisteredPromoter? promoter) async {
+    if (promoter == null) {
       emit(RecommendationsShowValidationState());
     } else {
-      emit(RecommendorRegisterLoadingState());
-      if (recommendor.email == null) {
-        emit(RecommendorRegisterFailureState(failure: BackendFailure()));
+      emit(PromoterRegisterLoadingState());
+      if (promoter.email == null) {
+        emit(PromoterRegisterFailureState(failure: BackendFailure()));
       } else {
         final failureOrSuccess = await recommendationsRepo
-            .checkIfRecommendorAlreadyExists(email: recommendor.email!);
+            .checkIfPromoterAlreadyExists(email: promoter.email!);
         failureOrSuccess.fold(
-            (failure) =>
-                emit(RecommendorRegisterFailureState(failure: failure)),
+            (failure) => emit(PromoterRegisterFailureState(failure: failure)),
             (emailExists) async {
           if (emailExists) {
-            emit(RecommendorAlreadyExistsFailureState());
+            emit(PromoterAlreadyExistsFailureState());
           } else {
-            final failureOrSuccessRegister = await recommendationsRepo
-                .registerRecommendor(recommendor: recommendor);
+            final failureOrSuccessRegister =
+                await recommendationsRepo.registerPromoter(promoter: promoter);
             failureOrSuccessRegister.fold(
                 (failure) =>
-                    emit(RecommendorRegisterFailureState(failure: failure)),
-                (r) => emit(RecommendorRegisteredSuccessState()));
+                    emit(PromoterRegisterFailureState(failure: failure)),
+                (r) => emit(PromoterRegisteredSuccessState()));
           }
         });
       }

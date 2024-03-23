@@ -42,7 +42,8 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
-          promoters: const ["id"],
+          registeredPromoterIDs: const ["id"],
+          unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
       final expectedResult = {
         "id": "1",
@@ -56,7 +57,8 @@ void main() {
         "email": "tester@test.de",
         "profileImageDownloadURL": "https://test.de",
         "thumbnailDownloadURL": "https://thumb.de",
-        "promoters": ["id"],
+        "registeredPromoterIDs": ["id"],
+        "unregisteredPromoterIDs": ["id"],
         "createdAt": Timestamp(100000, 0)
       };
       // When
@@ -81,7 +83,8 @@ void main() {
         "email": "tester@test.de",
         "profileImageDownloadURL": "https://test.de",
         "thumbnailDownloadURL": "https://thumb.de",
-        "promoters": ["id"],
+        "registeredPromoterIDs": ["id"],
+        "unregisteredPromoterIDs": ["id"],
         "createdAt": Timestamp(100000, 0)
       };
       final expectedResult = UserModel(
@@ -96,7 +99,8 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
-          promoters: const ["id"],
+          registeredPromoterIDs: const ["id"],
+          unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
       // When
       final result = UserModel.fromMap(map);
@@ -120,22 +124,23 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
-          promoters: const ["id"],
+          registeredPromoterIDs: const ["id"],
+          unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
       final expectedResult = CustomUser(
-        id: UniqueID.fromUniqueString("1"),
-        gender: Gender.male,
-        firstName: "Max",
-        lastName: "Mustermann",
-        birthDate: "23.12.2023",
-        address: null,
-        postCode: "41542",
-        place: "Test",
-        email: "tester@test.de",
-        profileImageDownloadURL: "https://test.de",
-        thumbnailDownloadURL: "https://thumb.de",
-        promoters: const ["id"],
-      );
+          id: UniqueID.fromUniqueString("1"),
+          gender: Gender.male,
+          firstName: "Max",
+          lastName: "Mustermann",
+          birthDate: "23.12.2023",
+          address: null,
+          postCode: "41542",
+          place: "Test",
+          email: "tester@test.de",
+          profileImageDownloadURL: "https://test.de",
+          thumbnailDownloadURL: "https://thumb.de",
+          registeredPromoterIDs: const ["id"],
+          unregisteredPromoterIDs: const ["id"]);
       // When
       final result = model.toDomain();
       // Then
@@ -147,19 +152,19 @@ void main() {
     test("check if conversion from CustomUser to UserModel works", () {
       // Given
       final user = CustomUser(
-        id: UniqueID.fromUniqueString("1"),
-        gender: Gender.male,
-        firstName: "Max",
-        lastName: "Mustermann",
-        birthDate: "23.12.2023",
-        address: null,
-        postCode: "41542",
-        place: "Test",
-        email: "tester@test.de",
-        profileImageDownloadURL: "https://test.de",
-        thumbnailDownloadURL: "https://thumb.de",
-        promoters: const ["id"],
-      );
+          id: UniqueID.fromUniqueString("1"),
+          gender: Gender.male,
+          firstName: "Max",
+          lastName: "Mustermann",
+          birthDate: "23.12.2023",
+          address: null,
+          postCode: "41542",
+          place: "Test",
+          email: "tester@test.de",
+          profileImageDownloadURL: "https://test.de",
+          thumbnailDownloadURL: "https://thumb.de",
+          registeredPromoterIDs: const ["id"],
+          unregisteredPromoterIDs: const ["id"]);
       final expectedResult = UserModel(
           id: "1",
           gender: "male",
@@ -172,7 +177,8 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
-          promoters: const ["id"],
+          registeredPromoterIDs: const ["id"],
+          unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
       // When
       final result = UserModel.fromDomain(user);
@@ -196,7 +202,8 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
-          promoters: const ["id"],
+          registeredPromoterIDs: const ["id"],
+          unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
       final user2 = UserModel(
           id: "1",
@@ -210,7 +217,8 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
-          promoters: const ["id"],
+          registeredPromoterIDs: const ["id"],
+          unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
       // Then
       expect(user1, user2);

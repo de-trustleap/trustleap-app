@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
-class UnregisteredRecommendor extends Equatable {
+class UnregisteredPromoter extends Equatable {
   final UniqueID? id;
   final Gender? gender;
   final String? firstName;
@@ -13,7 +13,7 @@ class UnregisteredRecommendor extends Equatable {
   final UniqueID? parentUserID;
   final UniqueID? code;
 
-  const UnregisteredRecommendor(
+  const UnregisteredPromoter(
       {required this.id,
       this.gender,
       this.firstName,
@@ -23,7 +23,7 @@ class UnregisteredRecommendor extends Equatable {
       this.parentUserID,
       this.code});
 
-  UnregisteredRecommendor copyWith(
+  UnregisteredPromoter copyWith(
       {UniqueID? id,
       Gender? gender,
       String? firstName,
@@ -32,7 +32,7 @@ class UnregisteredRecommendor extends Equatable {
       String? email,
       UniqueID? parentUserID,
       UniqueID? code}) {
-    return UnregisteredRecommendor(
+    return UnregisteredPromoter(
         id: id ?? this.id,
         gender: gender ?? this.gender,
         firstName: firstName ?? this.firstName,

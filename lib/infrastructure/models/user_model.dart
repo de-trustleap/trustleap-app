@@ -17,7 +17,8 @@ class UserModel extends Equatable {
   final String? email;
   final String? profileImageDownloadURL;
   final String? thumbnailDownloadURL;
-  final List<String>? promoters;
+  final List<String>? unregisteredPromoterIDs;
+  final List<String>? registeredPromoterIDs;
   final dynamic createdAt;
 
   const UserModel(
@@ -32,7 +33,8 @@ class UserModel extends Equatable {
       this.email,
       this.profileImageDownloadURL,
       this.thumbnailDownloadURL,
-      this.promoters,
+      this.unregisteredPromoterIDs,
+      this.registeredPromoterIDs,
       this.createdAt});
 
   Map<String, dynamic> toMap() {
@@ -48,7 +50,8 @@ class UserModel extends Equatable {
       'email': email,
       'profileImageDownloadURL': profileImageDownloadURL,
       'thumbnailDownloadURL': thumbnailDownloadURL,
-      'promoters': promoters,
+      'unregisteredPromoterIDs': unregisteredPromoterIDs,
+      'registeredPromoterIDs': registeredPromoterIDs,
       'createdAt': createdAt,
     };
   }
@@ -70,8 +73,12 @@ class UserModel extends Equatable {
       thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
           ? map['thumbnailDownloadURL'] as String
           : null,
-      promoters:
-          map['promoters'] != null ? List<String>.from(map['promoters']) : null,
+      unregisteredPromoterIDs: map['unregisteredPromoterIDs'] != null
+          ? List<String>.from(map['unregisteredPromoterIDs'])
+          : null,
+      registeredPromoterIDs: map['registeredPromoterIDs'] != null
+          ? List<String>.from(map['registeredPromoterIDs'])
+          : null,
       createdAt: map['createdAt'] as dynamic,
     );
   }
@@ -88,7 +95,8 @@ class UserModel extends Equatable {
     String? email,
     String? profileImageDownloadURL,
     String? thumbnailDownloadURL,
-    List<String>? promoters,
+    List<String>? unregisteredPromoterIDs,
+    List<String>? registeredPromoterIDs,
     dynamic createdAt,
   }) {
     return UserModel(
@@ -104,7 +112,10 @@ class UserModel extends Equatable {
       profileImageDownloadURL:
           profileImageDownloadURL ?? this.profileImageDownloadURL,
       thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-      promoters: promoters ?? this.promoters,
+      unregisteredPromoterIDs:
+          unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
+      registeredPromoterIDs:
+          registeredPromoterIDs ?? this.registeredPromoterIDs,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -128,7 +139,8 @@ class UserModel extends Equatable {
         email: email,
         profileImageDownloadURL: profileImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL,
-        promoters: promoters);
+        unregisteredPromoterIDs: unregisteredPromoterIDs,
+        registeredPromoterIDs: registeredPromoterIDs);
   }
 
   factory UserModel.fromDomain(CustomUser user) {
@@ -144,7 +156,8 @@ class UserModel extends Equatable {
         email: user.email,
         profileImageDownloadURL: user.profileImageDownloadURL,
         thumbnailDownloadURL: user.thumbnailDownloadURL,
-        promoters: user.promoters,
+        unregisteredPromoterIDs: user.unregisteredPromoterIDs,
+        registeredPromoterIDs: user.registeredPromoterIDs,
         createdAt: FieldValue.serverTimestamp());
   }
 
@@ -161,6 +174,7 @@ class UserModel extends Equatable {
         email,
         profileImageDownloadURL,
         thumbnailDownloadURL,
-        promoters
+        unregisteredPromoterIDs,
+        registeredPromoterIDs
       ];
 }

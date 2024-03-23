@@ -1,19 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
-import 'package:finanzbegleiter/infrastructure/models/unregistered_recommendor_model.dart';
+import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
+import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group("UnregisteredRecommendorModel_CopyWith", () {
+  group("UnregisteredPromoterModel_CopyWith", () {
     test(
         "set lastName with copyWith should change lastName for resulting object",
         () {
       // Given
-      const user = UnregisteredRecommendorModel(
+      const user = UnregisteredPromoterModel(
           id: "1", firstName: "Max", lastName: "Mustermann");
-      const expectedResult = UnregisteredRecommendorModel(
+      const expectedResult = UnregisteredPromoterModel(
           id: "1", firstName: "Max", lastName: "Neumann");
       // WHen
       final result = user.copyWith(lastName: "Neumann");
@@ -22,10 +22,10 @@ void main() {
     });
   });
 
-  group("UnregisteredRecommendorModel_ToMap", () {
+  group("UnregisteredPromoterModel_ToMap", () {
     test("check if model is successfully converted to a map", () {
       // Given
-      final model = UnregisteredRecommendorModel(
+      final model = UnregisteredPromoterModel(
           id: "1",
           firstName: "Max",
           lastName: "Mustermann",
@@ -52,7 +52,7 @@ void main() {
     });
   });
 
-  group("UnregisteredRecommendorModel_FromMap", () {
+  group("UnregisteredPromoterModel_FromMap", () {
     test("check if map is successfully converted to model", () {
       // Given
       final map = {
@@ -66,7 +66,7 @@ void main() {
         "code": "1234",
         "createdAt": Timestamp(1000000, 0)
       };
-      final expectedResult = UnregisteredRecommendorModel(
+      final expectedResult = UnregisteredPromoterModel(
           id: "",
           firstName: "Max",
           lastName: "Mustermann",
@@ -76,18 +76,18 @@ void main() {
           code: "1234",
           createdAt: Timestamp(1000000, 0));
       // When
-      final result = UnregisteredRecommendorModel.fromMap(map);
+      final result = UnregisteredPromoterModel.fromMap(map);
       // Then
       expect(expectedResult, result);
     });
   });
 
-  group("UnregisteredRecommendorModel_ToDomain", () {
+  group("UnregisteredPromoterModel_ToDomain", () {
     test(
-        "check if conversion from UnregisteredRecommendorModel to UnregisteredRecommendor works",
+        "check if conversion from UnregisteredPromoterModel to UnregisteredPromoter works",
         () {
       //Given
-      final model = UnregisteredRecommendorModel(
+      final model = UnregisteredPromoterModel(
           id: "1",
           gender: "male",
           firstName: "Max",
@@ -97,7 +97,7 @@ void main() {
           parentUserID: "2",
           code: "1234",
           createdAt: Timestamp(1000000, 0));
-      final expectedResult = UnregisteredRecommendor(
+      final expectedResult = UnregisteredPromoter(
           id: UniqueID.fromUniqueString("1"),
           gender: Gender.male,
           firstName: "Max",
@@ -113,12 +113,12 @@ void main() {
     });
   });
 
-  group("UnregisteredRecommendorModel_FromDomain", () {
+  group("UnregisteredPromoterModel_FromDomain", () {
     test(
-        "check if conversion from UnregisteredRecommendor to UnregisteredRecommendorModel works",
+        "check if conversion from UnregisteredPromoter to UnregisteredPromoterModel works",
         () {
       // Given
-      final user = UnregisteredRecommendor(
+      final user = UnregisteredPromoter(
           id: UniqueID.fromUniqueString("1"),
           gender: Gender.male,
           firstName: "Max",
@@ -126,7 +126,7 @@ void main() {
           birthDate: "23.12.2023",
           parentUserID: UniqueID.fromUniqueString("2"),
           code: UniqueID.fromUniqueString("1234"));
-      const expectedResult = UnregisteredRecommendorModel(
+      const expectedResult = UnregisteredPromoterModel(
           id: "1",
           gender: "male",
           firstName: "Max",
@@ -135,16 +135,16 @@ void main() {
           parentUserID: "2",
           code: "1234");
       // When
-      final result = UnregisteredRecommendorModel.fromDomain(user);
+      final result = UnregisteredPromoterModel.fromDomain(user);
       // Then
       expect(expectedResult, result);
     });
   });
 
-  group("UnregisteredRecommendorModel_Props", () {
+  group("UnregisteredPromoterModel_Props", () {
     test("check if value equality works", () {
       // Given
-      final user1 = UnregisteredRecommendorModel(
+      final user1 = UnregisteredPromoterModel(
           id: "1",
           gender: "male",
           firstName: "Max",
@@ -154,7 +154,7 @@ void main() {
           parentUserID: "2",
           code: "1234",
           createdAt: Timestamp(10000, 0));
-      final user2 = UnregisteredRecommendorModel(
+      final user2 = UnregisteredPromoterModel(
           id: "1",
           gender: "male",
           firstName: "Max",

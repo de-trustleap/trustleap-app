@@ -3,9 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
-import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
+import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendations_repository.dart';
-import 'package:finanzbegleiter/infrastructure/models/unregistered_recommendor_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_model.dart';
 
 class RecommendationsRepositoryImplementation
     implements RecommendationsRepository {
@@ -16,16 +16,12 @@ class RecommendationsRepositoryImplementation
   });
 
   @override
-  Future<Either<DatabaseFailure, Unit>> registerRecommendor(
-      {required UnregisteredRecommendor recommendor}) async {
-    final recommendorCollection =
-        firestore.collection("unregisteredRecommendors");
-    final recommendorModel =
-        UnregisteredRecommendorModel.fromDomain(recommendor);
+  Future<Either<DatabaseFailure, Unit>> registerPromoter(
+      {required UnregisteredPromoter promoter}) async {
+    final promoterCollection = firestore.collection("unregisteredPromoters");
+    final promoterModel = UnregisteredPromoterModel.fromDomain(promoter);
     try {
-      await recommendorCollection
-          .doc(recommendorModel.id)
-          .set(recommendorModel.toMap());
+      await promoterCollection.doc(promoterModel.id).set(promoterModel.toMap());
       return right(unit);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
@@ -33,22 +29,21 @@ class RecommendationsRepositoryImplementation
   }
 
   @override
-  Future<Either<DatabaseFailure, bool>> checkIfRecommendorAlreadyExists(
+  Future<Either<DatabaseFailure, bool>> checkIfPromoterAlreadyExists(
       {required String email}) async {
-    final recommendorCollection =
-        firestore.collection("unregisteredRecommendors");
+    final promoterCollection = firestore.collection("unregisteredPromoters");
     final usersCollection = firestore.collection("users");
     try {
-      final recommendor = await recommendorCollection
+      final promoter = await promoterCollection
           .where("email", isEqualTo: email)
           .limit(1)
           .get();
       final user =
           await usersCollection.where("email", isEqualTo: email).limit(1).get();
-      if (recommendor.docs.isEmpty && user.docs.isEmpty) {
+      if (promoter.docs.isEmpty && user.docs.isEmpty) {
         return right(false);
       } else {
-        if (recommendor.docs.isNotEmpty && recommendor.docs.first.exists) {
+        if (promoter.docs.isNotEmpty && promoter.docs.first.exists) {
           return right(true);
         } else if (user.docs.isNotEmpty && user.docs.first.exists) {
           return right(true);

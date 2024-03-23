@@ -97,15 +97,14 @@ class AuthRepositoryImplementation implements AuthRepository {
   @override
   Future<Either<DatabaseFailure, bool>> isRegistrationCodeValid(
       {required String email, required String code}) async {
-    final recommendorsCollection =
-        firestore.collection("unregisteredRecommendors");
+    final promotersCollection = firestore.collection("unregisteredPromoters");
     try {
-      final recommendor = await recommendorsCollection
+      final promoter = await promotersCollection
           .where("code", isEqualTo: code)
           .where("email", isEqualTo: email)
           .limit(1)
           .get();
-      if (recommendor.docs.isEmpty) {
+      if (promoter.docs.isEmpty) {
         return right(false);
       } else {
         return right(true);

@@ -15,7 +15,8 @@ class CustomUser extends Equatable {
   final String? email;
   final String? profileImageDownloadURL;
   final String? thumbnailDownloadURL;
-  final List<String>? promoters;
+  final List<String>? unregisteredPromoterIDs;
+  final List<String>? registeredPromoterIDs;
 
   const CustomUser(
       {required this.id,
@@ -29,7 +30,8 @@ class CustomUser extends Equatable {
       this.email,
       this.profileImageDownloadURL,
       this.thumbnailDownloadURL,
-      this.promoters});
+      this.unregisteredPromoterIDs,
+      this.registeredPromoterIDs});
 
   CustomUser copyWith(
       {UniqueID? id,
@@ -43,7 +45,8 @@ class CustomUser extends Equatable {
       String? email,
       String? profileImageDownloadURL,
       String? thumbnailDownloadURL,
-      List<String>? promoters}) {
+      List<String>? unregisteredPromoterIDs,
+      List<String>? registeredPromoterIDs}) {
     return CustomUser(
         id: id ?? this.id,
         gender: gender ?? this.gender,
@@ -57,7 +60,10 @@ class CustomUser extends Equatable {
         profileImageDownloadURL:
             profileImageDownloadURL ?? this.profileImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-        promoters: promoters ?? this.promoters);
+        unregisteredPromoterIDs:
+            unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
+        registeredPromoterIDs:
+            registeredPromoterIDs ?? this.registeredPromoterIDs);
   }
 
   @override
@@ -73,6 +79,7 @@ class CustomUser extends Equatable {
         email,
         profileImageDownloadURL,
         thumbnailDownloadURL,
-        promoters
+        unregisteredPromoterIDs,
+        registeredPromoterIDs
       ];
 }

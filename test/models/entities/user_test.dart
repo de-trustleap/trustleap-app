@@ -24,16 +24,19 @@ void main() {
         "set lastName, address and promoters with copyWith should set fields for resulting object",
         () {
       // Given
-      final user = CustomUser(
-          id: UniqueID.fromUniqueString("1"), firstName: "Max");
+      final user =
+          CustomUser(id: UniqueID.fromUniqueString("1"), firstName: "Max");
       final expectedResult = CustomUser(
           id: UniqueID.fromUniqueString("1"),
           firstName: "Max",
           lastName: "Mustermann",
           address: "Teststreet 5",
-          promoters: const ["1"]);
+          registeredPromoterIDs: const ["1"]);
       // When
-      final result = user.copyWith(lastName: "Mustermann", address: "Teststreet 5", promoters: ["1"]);
+      final result = user.copyWith(
+          lastName: "Mustermann",
+          address: "Teststreet 5",
+          registeredPromoterIDs: ["1"]);
       // Then
       expect(expectedResult, result);
     });

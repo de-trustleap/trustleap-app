@@ -27,7 +27,7 @@ class PromotersSection extends StatelessWidget {
         Text(localization.profile_page_promoters_section_recommender_count,
             style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
         const SizedBox(width: 16),
-        Text(user.promoters?.length.toString() ?? "0",
+        Text(user.registeredPromoterIDs?.length.toString() ?? "0",
             style: themeData.textTheme.headlineLarge!
                 .copyWith(fontSize: 16, fontWeight: FontWeight.bold)),
         const Spacer()
