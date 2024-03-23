@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:intl/intl.dart';
 
@@ -78,6 +79,22 @@ class AuthValidator {
       return null;
     } else {
       return localization.auth_validation_invalid_postcode;
+    }
+  }
+
+  String? validateGender(Gender? input) {
+    if (input == null || input == Gender.none) {
+      return "Geben Sie bitte ihr Geschlecht an";
+    } else {
+      return null;
+    }
+  }
+
+  String? validateCode(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Geben Sie bitte ihren Registrierungscode an";
+    } else {
+      return null;
     }
   }
 

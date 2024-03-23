@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -64,22 +64,19 @@ class _LoginFormState extends State<LoginForm> {
 
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
-        state.authFailureOrSuccessOption.fold(
-            () => {},
-            (eitherFailureOrSuccess) => eitherFailureOrSuccess.fold((failure) {
-                  errorMessage = AuthFailureMapper.mapFailureMessage(
-                      failure, localization);
-                  showError = true;
-                }, (_) {
-                  showError = false;
-                  BlocProvider.of<AuthBloc>(context)
-                      .add(AuthCheckRequestedEvent());
-                }));
+        if (state is SignInFailureState) {
+          errorMessage =
+              AuthFailureMapper.mapFailureMessage(state.failure, localization);
+          showError = true;
+        } else if (state is SignInSuccessState) {
+          showError = false;
+          BlocProvider.of<AuthCubit>(context).checkForAuthState();
+        }
       },
       builder: (context, state) {
         return Form(
             key: formKey,
-            autovalidateMode: state.showValidationMessages
+            autovalidateMode: (state is SignInShowValidationState)
                 ? AutovalidateMode.always
                 : AutovalidateMode.disabled,
             child: ListView(
@@ -135,13 +132,13 @@ class _LoginFormState extends State<LoginForm> {
                   RegisterButton(
                       onTap: () =>
                           {Modular.to.pushNamed(RoutePaths.registerPath)}),
-                  if (state.isSubmitting) ...[
+                  if (state is SignInLoadingState) ...[
                     const SizedBox(height: 80),
                     const LoadingIndicator()
                   ],
                   if (errorMessage != "" &&
                       showError &&
-                      !state.isSubmitting &&
+                      (state is! SignInLoadingState) &&
                       !validationHasError) ...[
                     const SizedBox(height: 20),
                     FormErrorView(message: errorMessage)

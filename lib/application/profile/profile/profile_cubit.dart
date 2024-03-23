@@ -87,11 +87,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  void getCurrentUser() async {
-    final currentUser = await authRepo.getCurrentUser();
-    emit(ProfileGetCurrentUserSuccessState(user: currentUser));
-  }
-
   void signOutUser() async {
     await authRepo.signOut();
   }
@@ -100,5 +95,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileResendEmailVerificationLoadingState());
     await authRepo.resendEmailVerification();
     emit(ProfileResendEmailVerificationSuccessState());
+  }
+
+  void getCurrentUser() async {
+    final currentUser = await authRepo.getCurrentUser();
+    emit(ProfileGetCurrentUserSuccessState(user: currentUser));
   }
 }

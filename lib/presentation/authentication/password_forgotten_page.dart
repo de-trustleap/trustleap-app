@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/password_forgotten_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +11,8 @@ class PasswordForgottenPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: BlocProvider<AuthBloc>(
-                create: (context) => Modular.get<AuthBloc>(),
+            child: BlocProvider<AuthCubit>(
+                create: (context) => Modular.get<AuthCubit>(),
                 child: const PasswordForgottenForm())));
   }
 }

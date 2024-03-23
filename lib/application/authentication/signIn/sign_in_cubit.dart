@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
+import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -10,34 +10,50 @@ class SignInCubit extends Cubit<SignInState> {
   final AuthRepository authRepo;
   SignInCubit({
     required this.authRepo,
-  }) : super(SignInState(
-            isSubmitting: false,
-            showValidationMessages: false,
-            authFailureOrSuccessOption: none()));
+  }) : super(SignInInitial());
+
+  void checkForValidRegistrationCode(String? email, String? code) async {
+    if (email == null || code == null) {
+      emit(SignInShowValidationState());
+    } else {
+      emit(SignInLoadingState());
+      final failureOrSuccess =
+          await authRepo.isRegistrationCodeValid(email: email, code: code);
+      failureOrSuccess.fold(
+          (failure) => emit(SignInCheckCodeFailureState(failure: failure)),
+          (isValid) {
+        if (isValid) {
+          emit(SignInCheckCodeSuccessState());
+        } else {
+          emit(SignInCheckCodeNotValidFailureState());
+        }
+      });
+    }
+  }
 
   void registerWithEmailAndPassword(String? email, String? password) async {
     if (email == null || password == null) {
-      emit(state.copyWith(isSubmitting: false, showValidationMessages: true));
+      emit(SignInShowValidationState());
     } else {
-      emit(state.copyWith(isSubmitting: true, showValidationMessages: false));
+      emit(SignInLoadingState());
       final failureOrSuccess = await authRepo.registerWithEmailAndPassword(
           email: email, password: password);
-      emit(state.copyWith(
-          isSubmitting: false,
-          authFailureOrSuccessOption: optionOf(failureOrSuccess)));
+      failureOrSuccess.fold(
+          (failure) => emit(SignInFailureState(failure: failure)),
+          (creds) => emit(SignInSuccessState(creds: creds)));
     }
   }
 
   void loginWithEmailAndPassword(String? email, String? password) async {
     if (email == null || password == null) {
-      emit(state.copyWith(isSubmitting: false, showValidationMessages: true));
+      emit(SignInShowValidationState());
     } else {
-      emit(state.copyWith(isSubmitting: true, showValidationMessages: false));
+      emit(SignInLoadingState());
       final failureOrSuccess = await authRepo.loginWithEmailAndPassword(
           email: email, password: password);
-      emit(state.copyWith(
-          isSubmitting: false,
-          authFailureOrSuccessOption: optionOf(failureOrSuccess)));
+      failureOrSuccess.fold(
+          (failure) => emit(SignInFailureState(failure: failure)),
+          (creds) => emit(SignInSuccessState(creds: creds)));
     }
   }
 }

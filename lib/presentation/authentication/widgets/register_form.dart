@@ -1,12 +1,15 @@
-import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
+import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +36,13 @@ class _RegisterFormState extends State<RegisterForm> {
   final streetAndNumberTextController = TextEditingController();
   final plzTextController = TextEditingController();
   final placeTextController = TextEditingController();
+  final codeTextController = TextEditingController();
+  var selectedGender = Gender.none;
 
   bool showError = false;
   String errorMessage = "";
   bool validationHasError = false;
+  String? genderValid;
 
   @override
   void dispose() {
@@ -49,6 +55,7 @@ class _RegisterFormState extends State<RegisterForm> {
     streetAndNumberTextController.dispose();
     plzTextController.dispose();
     placeTextController.dispose();
+    codeTextController.dispose();
 
     super.dispose();
   }
@@ -60,15 +67,22 @@ class _RegisterFormState extends State<RegisterForm> {
     });
   }
 
-  void submit() {
-    if (formKey.currentState!.validate()) {
+  void submit(AuthValidator validator) {
+    if (formKey.currentState!.validate() &&
+        validator.validateGender(selectedGender) == null) {
       validationHasError = false;
-      BlocProvider.of<SignInCubit>(context).registerWithEmailAndPassword(
-          emailTextController.text, passwordTextController.text);
+      setState(() {
+        genderValid = null;
+      });
+      BlocProvider.of<SignInCubit>(context).checkForValidRegistrationCode(
+          emailTextController.text, codeTextController.text);
     } else {
       validationHasError = true;
+      setState(() {
+        genderValid = validator.validateGender(selectedGender);
+      });
       BlocProvider.of<SignInCubit>(context)
-          .registerWithEmailAndPassword(null, null);
+          .checkForValidRegistrationCode(null, null);
     }
   }
 
@@ -108,32 +122,46 @@ class _RegisterFormState extends State<RegisterForm> {
     return MultiBlocListener(
         listeners: [
           BlocListener<SignInCubit, SignInState>(listener: (context, state) {
-            state.authFailureOrSuccessOption.fold(
-                () => {},
-                (eitherFailureOrSuccess) =>
-                    eitherFailureOrSuccess.fold((failure) {
-                      errorMessage = AuthFailureMapper.mapFailureMessage(
-                          failure, localization);
-                      showError = true;
-                    }, (creds) {
-                      showError = false;
-                      BlocProvider.of<UserCubit>(context).createUser(CustomUser(
-                          id: UniqueID.fromUniqueString(creds.user!.uid),
-                          firstName: firstNameTextController.text,
-                          lastName: lastNameTextController.text,
-                          birthDate: birthDateTextController.text,
-                          address: streetAndNumberTextController.text,
-                          postCode: plzTextController.text,
-                          place: placeTextController.text));
-                    }));
+            if (state is SignInFailureState) {
+              errorMessage = AuthFailureMapper.mapFailureMessage(
+                  state.failure, localization);
+              showError = true;
+            } else if (state is SignInSuccessState) {
+              showError = false;
+              BlocProvider.of<UserCubit>(context).createUser(CustomUser(
+                  id: UniqueID.fromUniqueString(state.creds.user!.uid),
+                  gender: selectedGender,
+                  firstName: firstNameTextController.text,
+                  lastName: lastNameTextController.text,
+                  birthDate: birthDateTextController.text,
+                  address: streetAndNumberTextController.text,
+                  postCode: plzTextController.text,
+                  place: placeTextController.text,
+                  email: emailTextController.text));
+            } else if (state is SignInCheckCodeFailureState) {
+              errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                  state.failure, localization);
+              showError = true;
+            } else if (state is SignInCheckCodeNotValidFailureState) {
+              errorMessage =
+                  "Die Registrierung ist fehlgeschlagen. Bitte prüfen Sie ob Sie einen gültigen Code und die zugehörige E-Mail Adresse verwenden.";
+              showError = true;
+            } else if (state is SignInCheckCodeSuccessState) {
+              BlocProvider.of<SignInCubit>(context)
+                  .registerWithEmailAndPassword(
+                      emailTextController.text, passwordTextController.text);
+            }
           }),
           BlocListener<UserCubit, UserState>(listener: (context, state) {
-            BlocProvider.of<AuthBloc>(context).add(AuthCheckRequestedEvent());
+            BlocProvider.of<AuthCubit>(context).checkForAuthState();
           })
         ],
         child: BlocBuilder<SignInCubit, SignInState>(builder: (context, state) {
           return Form(
               key: formKey,
+              autovalidateMode: (state is SignInShowValidationState)
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.disabled,
               child: ListView(
                   shrinkWrap: true,
                   padding: const EdgeInsets.symmetric(horizontal: listPadding),
@@ -162,6 +190,19 @@ class _RegisterFormState extends State<RegisterForm> {
                     ]),
                     const SizedBox(height: 80),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      GenderPicker(
+                          width: getResponsiveWidth(1),
+                          validate: genderValid,
+                          onSelected: (gender) {
+                            setState(() {
+                              genderValid = validator.validateGender(gender);
+                              selectedGender = gender;
+                            });
+                            resetError();
+                          })
+                    ]),
+                    const SizedBox(height: textFieldSpacing),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: getResponsiveWidth(1),
                         child: ResponsiveRowColumn(
@@ -174,7 +215,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               width: getResponsiveWidth(2),
                               child: TextFormField(
                                 controller: firstNameTextController,
-                                onFieldSubmitted: (_) => submit(),
+                                onFieldSubmitted: (_) => submit(validator),
                                 onChanged: (_) {
                                   resetError();
                                 },
@@ -192,7 +233,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 width: getResponsiveWidth(2),
                                 child: TextFormField(
                                   controller: lastNameTextController,
-                                  onFieldSubmitted: (_) => submit(),
+                                  onFieldSubmitted: (_) => submit(validator),
                                   onChanged: (_) {
                                     resetError();
                                   },
@@ -214,7 +255,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: TextFormField(
                             keyboardType: TextInputType.datetime,
                             controller: birthDateTextController,
-                            onFieldSubmitted: (_) => submit(),
+                            onFieldSubmitted: (_) => submit(validator),
                             onChanged: (_) {
                               resetError();
                             },
@@ -245,7 +286,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: streetAndNumberTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -262,7 +303,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: TextFormField(
                           keyboardType: TextInputType.number,
                           controller: plzTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           validator: validator.validatePostcode,
                           onChanged: (_) {
                             resetError();
@@ -277,7 +318,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             getResponsiveWidth(2, shouldWrapToNextLine: false),
                         child: TextFormField(
                           controller: placeTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -293,7 +334,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: emailTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -309,7 +350,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: passwordTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -326,7 +367,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: getResponsiveWidth(1),
                         child: TextFormField(
                           controller: passwordRepeatTextController,
-                          onFieldSubmitted: (_) => submit(),
+                          onFieldSubmitted: (_) => submit(validator),
                           onChanged: (_) {
                             resetError();
                           },
@@ -344,20 +385,36 @@ class _RegisterFormState extends State<RegisterForm> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: getResponsiveWidth(1),
+                        child: TextFormField(
+                          controller: codeTextController,
+                          onFieldSubmitted: (_) => submit(validator),
+                          onChanged: (_) {
+                            resetError();
+                          },
+                          validator: validator.validateCode,
+                          decoration: const InputDecoration(
+                              labelText: "Registrierungscode"),
+                        ),
+                      ),
+                    ]),
+                    const SizedBox(height: textFieldSpacing),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      SizedBox(
+                        width: getResponsiveWidth(1),
                         child: PrimaryButton(
                             title: localization.register_now_buttontitle,
                             onTap: () {
-                              submit();
+                              submit(validator);
                             }),
                       ),
                     ]),
-                    if (state.isSubmitting) ...[
+                    if (state is SignInLoadingState) ...[
                       const SizedBox(height: 80),
                       const LoadingIndicator()
                     ],
                     if (errorMessage != "" &&
                         showError &&
-                        !state.isSubmitting &&
+                        (state is! SignInLoadingState) &&
                         !validationHasError) ...[
                       const SizedBox(height: textFieldSpacing),
                       Row(

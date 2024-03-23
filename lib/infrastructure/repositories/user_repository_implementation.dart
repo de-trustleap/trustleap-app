@@ -27,8 +27,7 @@ class UserRepositoryImplementation implements UserRepository {
 
     yield* userDoc.snapshots().map((snapshot) {
       var document = snapshot.data() as Map<String, dynamic>;
-      var model =
-          UserModel.fromMap(document).copyWith(id: snapshot.id).toDomain();
+      var model = UserModel.fromFirestore(document, snapshot.id).toDomain();
       return right<DatabaseFailure, CustomUser>(model);
     }).handleError((e) {
       if (e is FirebaseException) {
@@ -42,7 +41,7 @@ class UserRepositoryImplementation implements UserRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> createUser(
       {required CustomUser user}) async {
-    final userCollection = FirebaseFirestore.instance.collection("users");
+    final userCollection = firestore.collection("users");
     final userModel = UserModel.fromDomain(user);
     try {
       await userCollection.doc(userModel.id).set(userModel.toMap());
@@ -55,7 +54,7 @@ class UserRepositoryImplementation implements UserRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> updateUser(
       {required CustomUser user}) async {
-    final userCollection = FirebaseFirestore.instance.collection("users");
+    final userCollection = firestore.collection("users");
     final userModel = UserModel.fromDomain(user);
     try {
       await userCollection.doc(userModel.id).update(userModel.toMap());
@@ -72,10 +71,27 @@ class UserRepositoryImplementation implements UserRepository {
       return await currentUser.fold(() {
         return left(UserNotFoundFailure());
       }, (user) async {
-        return right(await user.verifyBeforeUpdateEmail(email));
+        await user.verifyBeforeUpdateEmail(email);
+        final updateDatabaseFailureOrSuccess =
+            await _updateEmailInDatabase(user: user, email: email);
+        return updateDatabaseFailureOrSuccess.fold((failure) {
+          return left(ServerFailure());
+        }, (r) {
+          return right(r);
+        });
       });
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getAuthException(input: e.message));
+    }
+  }
+
+  Future<Either<DatabaseFailure, void>> _updateEmailInDatabase(
+      {required User user, required String email}) async {
+    final doc = firestore.collection("users").doc(user.uid);
+    try {
+      return right(await doc.update({"email": email}));
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
 

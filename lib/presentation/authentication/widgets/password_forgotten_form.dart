@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
@@ -44,12 +44,11 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
   void submit() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<AuthBloc>(context).add(
-          AuthPasswordResetRequestedEvent(email: emailTextController.text));
+      BlocProvider.of<AuthCubit>(context)
+          .resetPassword(emailTextController.text);
     } else {
       validationHasError = true;
-      BlocProvider.of<AuthBloc>(context)
-          .add(AuthPasswordResetRequestedEvent(email: null));
+      BlocProvider.of<AuthCubit>(context).resetPassword(null);
     }
   }
 
@@ -78,7 +77,7 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
     const double padding = 20;
-    return BlocConsumer<AuthBloc, AuthState>(listener: ((context, state) {
+    return BlocConsumer<AuthCubit, AuthState>(listener: ((context, state) {
       if (state is AuthPasswordResetFailureState) {
         errorMessage =
             AuthFailureMapper.mapFailureMessage(state.failure, localization);

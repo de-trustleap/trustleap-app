@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
+import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
@@ -9,10 +11,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepositoryImplementation implements AuthRepository {
   final FirebaseAuth firebaseAuth;
+  final FirebaseFirestore firestore;
 
-  AuthRepositoryImplementation({
-    required this.firebaseAuth,
-  });
+  AuthRepositoryImplementation(
+      {required this.firebaseAuth, required this.firestore});
 
   @override
   Future<Either<AuthFailure, UserCredential>> loginWithEmailAndPassword(
@@ -55,8 +57,6 @@ class AuthRepositoryImplementation implements AuthRepository {
         }
       });
     } on FirebaseException catch (e) {
-      final message = e.message;
-      print("THE MESSAGE: $message");
       return left(FirebaseExceptionParser.getAuthException(input: e.message));
     }
   }
@@ -91,6 +91,26 @@ class AuthRepositoryImplementation implements AuthRepository {
       return right(result);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getAuthException(input: e.message));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, bool>> isRegistrationCodeValid(
+      {required String email, required String code}) async {
+    final promotersCollection = firestore.collection("unregisteredPromoters");
+    try {
+      final promoter = await promotersCollection
+          .where("code", isEqualTo: code)
+          .where("email", isEqualTo: email)
+          .limit(1)
+          .get();
+      if (promoter.docs.isEmpty) {
+        return right(false);
+      } else {
+        return right(true);
+      }
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
 }

@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/authentication/auth/auth_bloc.dart';
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/menu/appbar.dart';
 import 'package:finanzbegleiter/presentation/core/menu/side_menu.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class PageTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(listeners: [
-      BlocListener<AuthBloc, AuthState>(listener: (context, state) {
+      BlocListener<AuthCubit, AuthState>(listener: (context, state) {
         if (state is AuthStateUnAuthenticated) {}
       })
     ], child: getResponsiveWidget(context));

@@ -1,10 +1,12 @@
-import 'package:finanzbegleiter/application/profile/profile_bloc/profile_cubit.dart';
+import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +29,14 @@ class _ContactSectionState extends State<ContactSection> {
   final streetTextController = TextEditingController();
   final postcodeTextController = TextEditingController();
   final placeTextController = TextEditingController();
+  Gender? selectedGender;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool showError = false;
   String errorMessage = "";
   bool validationHasError = false;
+  String? genderValid;
 
   @override
   void initState() {
@@ -40,6 +44,7 @@ class _ContactSectionState extends State<ContactSection> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
+        selectedGender = widget.user.gender;
         firstNameTextController.text = widget.user.firstName ?? "";
         lastNameTextController.text = widget.user.lastName ?? "";
         streetTextController.text = widget.user.address ?? "";
@@ -67,10 +72,15 @@ class _ContactSectionState extends State<ContactSection> {
     });
   }
 
-  void submit() {
-    if (formKey.currentState!.validate()) {
+  void submit(AuthValidator validator) {
+    if (formKey.currentState!.validate() &&
+        validator.validateGender(selectedGender) == null) {
       validationHasError = false;
+      setState(() {
+        genderValid = null;
+      });
       BlocProvider.of<ProfileCubit>(context).updateProfile(widget.user.copyWith(
+          gender: selectedGender,
           firstName: firstNameTextController.text,
           lastName: lastNameTextController.text,
           address: streetTextController.text,
@@ -78,6 +88,9 @@ class _ContactSectionState extends State<ContactSection> {
           place: placeTextController.text));
     } else {
       validationHasError = true;
+      setState(() {
+        genderValid = validator.validateGender(selectedGender);
+      });
       BlocProvider.of<ProfileCubit>(context).updateProfile(null);
     }
   }
@@ -115,6 +128,20 @@ class _ContactSectionState extends State<ContactSection> {
                     style: themeData.textTheme.headlineLarge!
                         .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  GenderPicker(
+                      width: maxWidth,
+                      validate: genderValid,
+                      initialValue: selectedGender,
+                      onSelected: (gender) {
+                        setState(() {
+                          genderValid = validator.validateGender(gender);
+                          selectedGender = gender;
+                        });
+                        resetError();
+                      })
+                ]),
+                const SizedBox(height: 16),
                 ResponsiveRowColumn(
                     columnMainAxisSize: MainAxisSize.min,
                     layout: responsiveValue.isMobile
@@ -137,7 +164,7 @@ class _ContactSectionState extends State<ContactSection> {
                                   : maxWidth / 2,
                               child: TextFormField(
                                 controller: firstNameTextController,
-                                onFieldSubmitted: (_) => submit(),
+                                onFieldSubmitted: (_) => submit(validator),
                                 onChanged: (_) {
                                   resetError();
                                 },
@@ -167,7 +194,7 @@ class _ContactSectionState extends State<ContactSection> {
                                   : maxWidth / 2 - textFieldSpacing,
                               child: TextFormField(
                                 controller: lastNameTextController,
-                                onFieldSubmitted: (_) => submit(),
+                                onFieldSubmitted: (_) => submit(validator),
                                 onChanged: (_) {
                                   resetError();
                                 },
@@ -188,7 +215,7 @@ class _ContactSectionState extends State<ContactSection> {
                     width: maxWidth,
                     child: TextFormField(
                       controller: streetTextController,
-                      onFieldSubmitted: (_) => submit(),
+                      onFieldSubmitted: (_) => submit(validator),
                       onChanged: (_) {
                         resetError();
                       },
@@ -220,7 +247,7 @@ class _ContactSectionState extends State<ContactSection> {
                               child: TextFormField(
                                 keyboardType: TextInputType.number,
                                 controller: postcodeTextController,
-                                onFieldSubmitted: (_) => submit(),
+                                onFieldSubmitted: (_) => submit(validator),
                                 onChanged: (_) {
                                   resetError();
                                 },
@@ -250,7 +277,7 @@ class _ContactSectionState extends State<ContactSection> {
                                   : maxWidth / 2 - textFieldSpacing,
                               child: TextFormField(
                                 controller: placeTextController,
-                                onFieldSubmitted: (_) => submit(),
+                                onFieldSubmitted: (_) => submit(validator),
                                 onChanged: (_) {
                                   resetError();
                                 },
@@ -270,7 +297,7 @@ class _ContactSectionState extends State<ContactSection> {
                             .profile_page_contact_section_form_save_button_title,
                         width: maxWidth / 2 - textFieldSpacing,
                         onTap: () {
-                          submit();
+                          submit(validator);
                         })
                   ],
                 ),

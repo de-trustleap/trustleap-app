@@ -131,6 +131,24 @@ class AppTheme {
           _darkHeadlineLargeText.copyWith(color: _darkTextColor, fontSize: 14),
       overlayColor: const MaterialStatePropertyAll(Colors.transparent));
 
+  static const DropdownMenuThemeData _lightDropDownMenuTheme =
+      DropdownMenuThemeData(
+          textStyle: _lightBodyLargeText,
+          menuStyle: MenuStyle(
+              backgroundColor: MaterialStatePropertyAll(_lightBackgroundColor),
+              shadowColor: MaterialStatePropertyAll(_lightBackgroundColor),
+              surfaceTintColor: MaterialStatePropertyAll(_lightBackgroundColor),
+              visualDensity: VisualDensity.comfortable));
+
+  static const DropdownMenuThemeData _darkDropDownMenuTheme =
+      DropdownMenuThemeData(
+          textStyle: _lightBodyLargeText,
+          menuStyle: MenuStyle(
+              backgroundColor: MaterialStatePropertyAll(_darkBackgroundColor),
+              shadowColor: MaterialStatePropertyAll(_darkBackgroundColor),
+              surfaceTintColor: MaterialStatePropertyAll(_darkBackgroundColor),
+              visualDensity: VisualDensity.comfortable));
+
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
           primary: _lightPrimaryColor,
@@ -145,7 +163,8 @@ class AppTheme {
       inputDecorationTheme: _lightInputDecorationTheme,
       drawerTheme: _lightDrawerTheme,
       snackBarTheme: _lightSnackbarTheme,
-      tabBarTheme: _lightTabbarTheme);
+      tabBarTheme: _lightTabbarTheme,
+      dropdownMenuTheme: _lightDropDownMenuTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -161,5 +180,6 @@ class AppTheme {
       inputDecorationTheme: _darkInputDecorationTheme,
       drawerTheme: _darkDrawerTheme,
       snackBarTheme: _darkSnackbarTheme,
-      tabBarTheme: _darkTabbarTheme);
+      tabBarTheme: _darkTabbarTheme,
+      dropdownMenuTheme: _darkDropDownMenuTheme);
 }

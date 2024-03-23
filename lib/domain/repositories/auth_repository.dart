@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
+import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -16,4 +17,6 @@ abstract class AuthRepository {
   User? getCurrentUser();
   Future<void> resendEmailVerification();
   Future<Either<AuthFailure, void>> resetPassword({required String email});
+  Future<Either<DatabaseFailure, bool>> isRegistrationCodeValid(
+      {required String email, required String code});
 }
