@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
-class CustomUser {
+class CustomUser extends Equatable {
   UniqueID id;
   final Gender? gender;
   final String? firstName;
@@ -58,4 +59,20 @@ class CustomUser {
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         promoters: promoters ?? this.promoters);
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        gender,
+        firstName,
+        lastName,
+        birthDate,
+        address,
+        postCode,
+        place,
+        email,
+        profileImageDownloadURL,
+        thumbnailDownloadURL,
+        promoters
+      ];
 }

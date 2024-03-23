@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
-class UnregisteredRecommendor {
+class UnregisteredRecommendor extends Equatable {
   final UniqueID? id;
   final Gender? gender;
   final String? firstName;
@@ -41,4 +42,8 @@ class UnregisteredRecommendor {
         parentUserID: parentUserID ?? this.parentUserID,
         code: code ?? this.code);
   }
+  
+  @override
+  List<Object?> get props => [id, gender, firstName, lastName, birthDate, email, parentUserID, code];
+
 }

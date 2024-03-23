@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/registered_recommendor.dart';
 
-class UnregisteredRecommendorModel {
+class UnregisteredRecommendorModel extends Equatable {
   final String id;
   final String? gender;
   final String? firstName;
@@ -15,7 +16,7 @@ class UnregisteredRecommendorModel {
   final String? code;
   final dynamic createdAt;
 
-  UnregisteredRecommendorModel(
+  const UnregisteredRecommendorModel(
       {required this.id,
       this.gender,
       this.firstName,
@@ -87,7 +88,9 @@ class UnregisteredRecommendorModel {
   UnregisteredRecommendor toDomain() {
     return UnregisteredRecommendor(
         id: UniqueID.fromUniqueString(id),
-        gender: Gender.values.firstWhere((element) => element.name == gender),
+        gender: Gender.values.firstWhere((element) =>
+            element.name ==
+            gender), // TODO: Im Test crasht es hier wenn gender = null ist.
         firstName: firstName,
         lastName: lastName,
         birthDate: birthDate,
@@ -109,4 +112,8 @@ class UnregisteredRecommendorModel {
         code: recommendor.code?.value,
         createdAt: FieldValue.serverTimestamp());
   }
+
+  @override
+  List<Object?> get props =>
+      [id, firstName, lastName, gender, email, birthDate, parentUserID, code];
 }

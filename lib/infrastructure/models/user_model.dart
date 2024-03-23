@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 
-class UserModel {
+class UserModel extends Equatable {
   final String id;
   final String? gender;
   final String? firstName;
@@ -19,7 +20,7 @@ class UserModel {
   final List<String>? promoters;
   final dynamic createdAt;
 
-  UserModel(
+  const UserModel(
       {required this.id,
       this.gender,
       this.firstName,
@@ -115,7 +116,9 @@ class UserModel {
   CustomUser toDomain() {
     return CustomUser(
         id: UniqueID.fromUniqueString(id),
-        gender: Gender.values.firstWhere((element) => element.name == gender),
+        gender: Gender.values.firstWhere((element) =>
+            element.name ==
+            gender), // TODO: Im Test crasht es hier wenn gender = null ist.
         firstName: firstName,
         lastName: lastName,
         birthDate: birthDate,
@@ -144,4 +147,20 @@ class UserModel {
         promoters: user.promoters,
         createdAt: FieldValue.serverTimestamp());
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        firstName,
+        lastName,
+        gender,
+        birthDate,
+        address,
+        postCode,
+        place,
+        email,
+        profileImageDownloadURL,
+        thumbnailDownloadURL,
+        promoters
+      ];
 }

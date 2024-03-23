@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
-class UniqueID {
+class UniqueID extends Equatable {
   final String value;
 
   const UniqueID._(this.value);
@@ -12,4 +13,7 @@ class UniqueID {
   factory UniqueID.fromUniqueString(String uniqueID) {
     return UniqueID._(uniqueID);
   }
+  
+  @override
+  List<Object?> get props => [value];
 }
