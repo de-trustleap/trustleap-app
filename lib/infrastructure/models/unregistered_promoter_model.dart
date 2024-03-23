@@ -47,7 +47,7 @@ class UnregisteredPromoterModel extends Equatable {
   factory UnregisteredPromoterModel.fromMap(Map<String, dynamic> map) {
     return UnregisteredPromoterModel(
         id: "",
-        gender: map['gender'] != null ? map['gender'] as String : null,
+        gender: map['gender'] != null ? map['gender'] as String : "none",
         firstName: map['firstName'] != null ? map['firstName'] as String : null,
         lastName: map['lastName'] != null ? map['lastName'] as String : null,
         birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
@@ -93,9 +93,9 @@ class UnregisteredPromoterModel extends Equatable {
   UnregisteredPromoter toDomain() {
     return UnregisteredPromoter(
         id: UniqueID.fromUniqueString(id),
-        gender: Gender.values.firstWhere((element) =>
-            element.name ==
-            gender), // TODO: Im Test crasht es hier wenn gender = null ist.
+        gender: gender == null
+            ? Gender.none
+            : Gender.values.firstWhere((element) => element.name == gender),
         firstName: firstName,
         lastName: lastName,
         birthDate: birthDate,
@@ -107,7 +107,7 @@ class UnregisteredPromoterModel extends Equatable {
 
   factory UnregisteredPromoterModel.fromDomain(UnregisteredPromoter promoter) {
     return UnregisteredPromoterModel(
-        id: promoter.id?.value ?? "",
+        id: promoter.id.value,
         gender: promoter.gender?.name,
         firstName: promoter.firstName,
         lastName: promoter.lastName,

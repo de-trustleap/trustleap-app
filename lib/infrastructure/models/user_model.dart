@@ -59,7 +59,7 @@ class UserModel extends Equatable {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       id: "",
-      gender: map['gender'] != null ? map['gender'] as String : null,
+      gender: map['gender'] != null ? map['gender'] as String : "none",
       firstName: map['firstName'] != null ? map['firstName'] as String : null,
       lastName: map['lastName'] != null ? map['lastName'] as String : null,
       birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
@@ -127,9 +127,9 @@ class UserModel extends Equatable {
   CustomUser toDomain() {
     return CustomUser(
         id: UniqueID.fromUniqueString(id),
-        gender: Gender.values.firstWhere((element) =>
-            element.name ==
-            gender), // TODO: Im Test crasht es hier wenn gender = null ist.
+        gender: gender == null
+            ? Gender.none
+            : Gender.values.firstWhere((element) => element.name == gender),
         firstName: firstName,
         lastName: lastName,
         birthDate: birthDate,

@@ -72,6 +72,7 @@ void main() {
       };
       final expectedResult = UnregisteredPromoterModel(
           id: "",
+          gender: "none",
           firstName: "Max",
           lastName: "Mustermann",
           birthDate: "23.12.2023",
@@ -167,7 +168,7 @@ void main() {
       };
       final expectedResult = UnregisteredPromoterModel(
           id: "1",
-          gender: null,
+          gender: "none",
           firstName: "Max",
           lastName: "Mustermann",
           birthDate: "23.12.2023",

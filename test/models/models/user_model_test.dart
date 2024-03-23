@@ -114,7 +114,7 @@ void main() {
       // Given
       final model = UserModel(
           id: "1",
-          gender: "male",
+          gender: null,
           firstName: "Max",
           lastName: "Mustermann",
           birthDate: "23.12.2023",
@@ -129,7 +129,7 @@ void main() {
           createdAt: Timestamp(100000, 0));
       final expectedResult = CustomUser(
           id: UniqueID.fromUniqueString("1"),
-          gender: Gender.male,
+          gender: Gender.none,
           firstName: "Max",
           lastName: "Mustermann",
           birthDate: "23.12.2023",
@@ -192,7 +192,7 @@ void main() {
       // Given
       final map = {
         "id": "",
-        "gender": "male",
+        "gender": null,
         "firstName": "Max",
         "lastName": "Mustermann",
         "birthDate": "23.12.2023",
@@ -208,7 +208,7 @@ void main() {
       };
       final expectedResult = UserModel(
           id: "1",
-          gender: "male",
+          gender: "none",
           firstName: "Max",
           lastName: "Mustermann",
           birthDate: "23.12.2023",
