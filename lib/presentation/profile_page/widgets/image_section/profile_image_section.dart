@@ -7,8 +7,8 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/profile_image_dropzone.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -73,24 +73,6 @@ class _MyWidgetState extends State<ProfileImageSection> {
     setState(() {
       hovered = isHovered;
     });
-  }
-
-  Widget placeholderImage(Size imageSize, ThemeData themeData) {
-    return Container(
-      width: imageSize.width,
-      height: imageSize.height,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-              width: 5,
-              color: hovered
-                  ? themeData.colorScheme.secondary
-                  : Colors.transparent),
-          image: const DecorationImage(
-              image: AssetImage(kDebugMode
-                  ? "images/placeholder.jpg"
-                  : "assets/images/placeholder.jpg"))),
-    );
   }
 
   @override
@@ -173,13 +155,15 @@ class _MyWidgetState extends State<ProfileImageSection> {
                           },
                           placeholder: (context, url) {
                             return Stack(children: [
-                              placeholderImage(imageSize, themeData),
+                              PlaceholderImage(
+                                  imageSize: imageSize, hovered: hovered),
                               const LoadingIndicator()
                             ]);
                           },
                           errorWidget: (context, url, error) {
                             isImageClickable = false;
-                            return placeholderImage(imageSize, themeData);
+                            return PlaceholderImage(
+                                imageSize: imageSize, hovered: hovered);
                           },
                         ),
                       ),

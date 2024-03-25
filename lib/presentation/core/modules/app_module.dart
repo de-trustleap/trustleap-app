@@ -7,7 +7,8 @@ import 'package:finanzbegleiter/application/images/images_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
-import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/recommendations/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/recommendations/recommendations_observer/recommendations_observer_cubit.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendations_repository.dart';
@@ -41,6 +42,7 @@ class AppModule extends Module {
       ..add(ImagesBloc.new)
       ..add(ProfileObserverBloc.new)
       ..add(RecommendationsCubit.new)
+      ..add(RecommendationsObserverCubit.new)
       ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
       ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
       ..addLazySingleton<ImageRepository>(ImageRepositoryImplementation.new)

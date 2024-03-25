@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/recommendations/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
@@ -46,6 +46,12 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   String? genderValid;
 
   @override
+  void initState() {
+    BlocProvider.of<RecommendationsCubit>(context).getCurrentUser();
+    super.initState();
+  }
+
+  @override
   void dispose() {
     firstNameTextController.dispose();
     lastNameTextController.dispose();
@@ -69,16 +75,18 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
       setState(() {
         genderValid = null;
       });
-      BlocProvider.of<RecommendationsCubit>(context).registerPromoter(
-          UnregisteredPromoter(
-              id: UniqueID(),
-              gender: selectedGender,
-              firstName: firstNameTextController.text,
-              lastName: lastNameTextController.text,
-              birthDate: birthDateTextController.text,
-              email: emailTextController.text,
-              parentUserID: UniqueID.fromUniqueString(currentUser?.uid ?? ""),
-              code: UniqueID()));
+      if (currentUser != null) {
+        BlocProvider.of<RecommendationsCubit>(context).registerPromoter(
+            UnregisteredPromoter(
+                id: UniqueID(),
+                gender: selectedGender,
+                firstName: firstNameTextController.text,
+                lastName: lastNameTextController.text,
+                birthDate: birthDateTextController.text,
+                email: emailTextController.text,
+                parentUserID: UniqueID.fromUniqueString(currentUser?.uid ?? ""),
+                code: UniqueID()));
+      }
     } else {
       validationHasError = true;
       setState(() {
@@ -108,6 +116,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
         } else if (state is PromoterRegisteredSuccessState) {
           widget.changesSaved();
         } else if (state is RecommendationsGetCurrentUserSuccessState) {
+          print("GOT USER!");
           currentUser = state.user;
         }
       },

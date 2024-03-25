@@ -1,7 +1,9 @@
-import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/recommendations/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/recommendations/recommendations_observer/recommendations_observer_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/widgets/promoters_overview.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/widgets/register_promoters_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +24,8 @@ class _RecommendationsPageState extends State<RecommendationsPage>
   late double topPadding;
   final List<TabbarContent> tabViews = [
     TabbarContent(
-        tab: const CustomTab(title: "Test"), content: const Placeholder()),
+        tab: const CustomTab(title: "Meine Empfehlungsgeber"),
+        content: const PromotersOverview()),
     TabbarContent(
         tab: const CustomTab(title: "Empfehlungsgeber registrieren"),
         content: const RegisterPromotersView())
@@ -39,9 +42,15 @@ class _RecommendationsPageState extends State<RecommendationsPage>
     final responsiveValue = ResponsiveBreakpoints.of(context);
     screenHeight = responsiveValue.screenHeight;
     topPadding = responsiveValue.screenHeight * 0.02;
-    return BlocProvider(
-      create: (context) =>
-          Modular.get<RecommendationsCubit>()..getCurrentUser(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) =>
+                Modular.get<RecommendationsCubit>()..getCurrentUser()),
+        BlocProvider(
+            create: (context) => Modular.get<RecommendationsObserverCubit>()
+              ..observeAllPromoters())
+      ],
       child: Padding(
         padding: EdgeInsets.only(top: topPadding),
         child: tabbar(),
