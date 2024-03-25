@@ -47,7 +47,16 @@ class RecommendationsObserverCubit extends Cubit<RecommendationsObserverState> {
       }
       if (unregisteredPromoterIDs != null &&
           unregisteredPromoterIDs.isNotEmpty) {
-        // TODO: Get the unregistered promoters
+        final failureOrSuccess = await recommendationsRepo
+            .getUnregisteredPromoters(unregisteredPromoterIDs);
+        failureOrSuccess
+            .fold((failure) => emit(PromotersObserverFailure(failure: failure)),
+                (unregisteredPromoters) {
+          for (final unregisteredPromoter in unregisteredPromoters) {
+            promoters
+                .add(Promoter.fromUnregisteredPromoter(unregisteredPromoter));
+          }
+        });
       }
       emit(PromotersObserverSuccess(promoters: promoters));
     });

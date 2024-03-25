@@ -55,7 +55,7 @@ class UnregisteredPromoterModel extends Equatable {
         parentUserID:
             map['parentUserID'] != null ? map['parentUserID'] as String : null,
         code: map['code'] != null ? map['code'] as String : null,
-        expiresAt: map['expiresAt'] as DateTime,
+        expiresAt: (map['expiresAt'] as Timestamp).toDate(),
         createdAt: map['createdAt'] as dynamic);
   }
 

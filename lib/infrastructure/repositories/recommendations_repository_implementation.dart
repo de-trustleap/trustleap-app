@@ -67,11 +67,9 @@ class RecommendationsRepositoryImplementation
     if (!requestedUser.exists) {
       yield left(NotFoundFailure());
     }
-    print("USER: $requestedUser");
     yield* userDoc.snapshots().map((snapshot) {
       var document = snapshot.data() as Map<String, dynamic>;
       var model = UserModel.fromFirestore(document, snapshot.id).toDomain();
-      print("MODEL: $model");
       return right<DatabaseFailure, CustomUser>(model);
     }).handleError((e) {
       if (e is FirebaseException) {
@@ -112,8 +110,31 @@ class RecommendationsRepositoryImplementation
 
   @override
   Future<Either<DatabaseFailure, List<UnregisteredPromoter>>>
-      getUnregisteredPromoters(List<String> ids) {
-    // TODO: implement getUnregisteredPromoters
-    throw UnimplementedError();
+      getUnregisteredPromoters(List<String> ids) async {
+    final unregisteredPromotersCollection =
+        firestore.collection("unregisteredPromoters");
+    // The ids needs to be sliced into chunks of 10 elements because the whereIn function can only process 10 elements at once.
+    final chunks = ids.slices(10);
+    final List<QuerySnapshot<Map<String, dynamic>>> querySnapshots = [];
+    final List<UnregisteredPromoter> unregisteredPromoters = [];
+    try {
+      await Future.forEach(chunks, (element) async {
+        final document = await unregisteredPromotersCollection
+            .where(FieldPath.documentId, whereIn: ids)
+            .get();
+        querySnapshots.add(document);
+      });
+      for (var document in querySnapshots) {
+        for (var snapshot in document.docs) {
+          var doc = snapshot.data();
+          var model = UnregisteredPromoterModel.fromFirestore(doc, snapshot.id)
+              .toDomain();
+          unregisteredPromoters.add(model);
+        }
+      }
+      return right(unregisteredPromoters);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
   }
 }

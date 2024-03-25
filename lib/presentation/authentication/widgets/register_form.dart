@@ -75,7 +75,7 @@ class _RegisterFormState extends State<RegisterForm> {
         genderValid = null;
       });
       BlocProvider.of<SignInCubit>(context).checkForValidRegistrationCode(
-          emailTextController.text, codeTextController.text);
+          emailTextController.text.trim(), codeTextController.text.trim());
     } else {
       validationHasError = true;
       setState(() {

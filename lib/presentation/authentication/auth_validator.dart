@@ -14,7 +14,7 @@ class AuthValidator {
 
     if (input == null || input.isEmpty) {
       return localization.auth_validation_missing_email;
-    } else if (RegExp(emailRegex).hasMatch(input)) {
+    } else if (RegExp(emailRegex).hasMatch(input.trim())) {
       return null;
     } else {
       return localization.auth_validation_invalid_email;

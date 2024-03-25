@@ -86,7 +86,6 @@ class PromotersOverviewGrid extends StatelessWidget {
                     physics: const ScrollPhysics(),
                     childAspectRatio: 0.734,
                     children: List.generate(state.promoters.length, (index) {
-                      // TODO: Hier sollen jetzt die echten Backend Daten angezeigt werden. Dafür ein paar Promoter erstellen.
                       return Center(
                           child: GridTile(
                               child: PromotersOverviewGridTile(
@@ -103,7 +102,6 @@ class PromotersOverviewGrid extends StatelessWidget {
                         .observeAllPromoters()
                   });
         } else {
-          print("THE STATE: $state");
           return const LoadingIndicator();
         }
       },
