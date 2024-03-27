@@ -436,12 +436,12 @@
     "@profile_page_request_failure_message": {
         "description": "Message if no data can be loaded on the profile page."
     },
-    "profile_page_promoters_section_title": "Recommender",
+    "profile_page_promoters_section_title": "Promoter",
     "@profile_page_promoters_section_title": {
-        "description": "title of the recommender section on the profile page."
+        "description": "title of the promoter section on the profile page."
     },
-    "profile_page_promoters_section_recommender_count": "Number of recommenders:",
+    "profile_page_promoters_section_recommender_count": "Number of promoters:",
     "@profile_page_promoters_section_recommender_count": {
-        "description": "Number of recommenders in the recommender area on the profile page."
+        "description": "Number of promoters in the promoter area on the profile page."
     }
 }

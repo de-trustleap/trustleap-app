@@ -747,16 +747,16 @@ abstract class AppLocalizations {
   /// **'An error occurred while retrieving the data.'**
   String get profile_page_request_failure_message;
 
-  /// title of the recommender section on the profile page.
+  /// title of the promoter section on the profile page.
   ///
   /// In en, this message translates to:
-  /// **'Recommender'**
+  /// **'Promoter'**
   String get profile_page_promoters_section_title;
 
-  /// Number of recommenders in the recommender area on the profile page.
+  /// Number of promoters in the promoter area on the profile page.
   ///
   /// In en, this message translates to:
-  /// **'Number of recommenders:'**
+  /// **'Number of promoters:'**
   String get profile_page_promoters_section_recommender_count;
 }
 

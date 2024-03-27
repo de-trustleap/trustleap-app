@@ -1,6 +1,6 @@
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/widgets/register_promoters_form.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/register_promoters_form.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPromotersView extends StatefulWidget {
@@ -33,7 +33,7 @@ class _RegisterPromotersViewState extends State<RegisterPromotersView>
                 RegisterPromotersForm(
                     changesSaved: () => {
                           CustomSnackBar.of(context).showCustomSnackBar(
-                              "Der neue Empfehlungsgeber wurde erfolgreich registriert!")
+                              "Der neue Promoter wurde erfolgreich registriert!")
                         })
               ])),
         ]));

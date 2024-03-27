@@ -332,8 +332,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_page_request_failure_message => 'An error occurred while retrieving the data.';
 
   @override
-  String get profile_page_promoters_section_title => 'Recommender';
+  String get profile_page_promoters_section_title => 'Promoter';
 
   @override
-  String get profile_page_promoters_section_recommender_count => 'Number of recommenders:';
+  String get profile_page_promoters_section_recommender_count => 'Number of promoters:';
 }

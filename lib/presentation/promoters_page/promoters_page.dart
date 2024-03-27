@@ -1,10 +1,79 @@
+import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
+import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoters_overview.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/register_promoters_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
-class PromotersPage extends StatelessWidget {
+class PromotersPage extends StatefulWidget {
   const PromotersPage({super.key});
 
   @override
+  State<PromotersPage> createState() => _PromotersPageState();
+}
+
+class _PromotersPageState extends State<PromotersPage>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+  late double screenHeight;
+  late double topPadding;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Text("Promoter");
+    final responsiveValue = ResponsiveBreakpoints.of(context);
+    screenHeight = responsiveValue.screenHeight;
+    topPadding = responsiveValue.screenHeight * 0.02;
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) =>
+                Modular.get<PromoterCubit>()..getCurrentUser()),
+        BlocProvider(
+            create: (context) =>
+                Modular.get<PromoterObserverCubit>()..observeAllPromoters())
+      ],
+      child: Padding(
+        padding: EdgeInsets.only(top: topPadding),
+        child: tabbar(),
+      ),
+    );
+  }
+
+  List<TabbarContent> getTabbarContent() {
+    return [
+      TabbarContent(
+          tab: const CustomTab(title: "Meine Promoter"),
+          content: PromotersOverview(tabController: tabController)),
+      TabbarContent(
+          tab: const CustomTab(title: "Promoter registrieren"),
+          content: const RegisterPromotersView())
+    ];
+  }
+
+  Widget tabbar() {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomTabbar(
+              controller: tabController,
+              tabs: getTabbarContent().map((e) => e.tab).toList()),
+          SizedBox(
+              height: screenHeight * 0.85,
+              child: TabBarView(
+                  controller: tabController,
+                  children: getTabbarContent().map((e) => e.content).toList()))
+        ]);
   }
 }

@@ -146,7 +146,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Empfehlungsgeber registrieren",
+                      Text("Promoter registrieren",
                           style: themeData.textTheme.headlineLarge!.copyWith(
                               fontSize: 22, fontWeight: FontWeight.bold)),
                       const SizedBox(height: textFieldSpacing + 4),

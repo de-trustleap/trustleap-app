@@ -90,6 +90,7 @@ class PromoterRepositoryImplementation implements PromoterRepository {
     try {
       await Future.forEach(chunks, (element) async {
         final document = await usersCollection
+            .orderBy("createdAt")
             .where(FieldPath.documentId, whereIn: element)
             .get();
         querySnapshots.add(document);
@@ -101,6 +102,13 @@ class PromoterRepositoryImplementation implements PromoterRepository {
           users.add(model);
         }
       }
+      users.sort((a, b) {
+        if (a.createdAt != null && b.createdAt != null) {
+          return a.createdAt!.compareTo(b.createdAt!);
+        } else {
+          return a.id.value.compareTo(b.id.value);
+        }
+      });
       return right(users);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
@@ -119,6 +127,7 @@ class PromoterRepositoryImplementation implements PromoterRepository {
     try {
       await Future.forEach(chunks, (element) async {
         final document = await unregisteredPromotersCollection
+            .orderBy("createdAt")
             .where(FieldPath.documentId, whereIn: element)
             .get();
         querySnapshots.add(document);
@@ -131,6 +140,7 @@ class PromoterRepositoryImplementation implements PromoterRepository {
           unregisteredPromoters.add(model);
         }
       }
+      unregisteredPromoters.sort((a, b) => a.expiresAt.compareTo(b.expiresAt));
       return right(unregisteredPromoters);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));

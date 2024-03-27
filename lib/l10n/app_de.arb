@@ -436,12 +436,12 @@
     "@profile_page_request_failure_message": {
         "description": "Meldung wenn keine Daten geladen werden können auf der Profil Seite."
     },
-    "profile_page_promoters_section_title": "Empfehlungsgeber",
+    "profile_page_promoters_section_title": "Promoter",
     "@profile_page_promoters_section_title": {
-        "description": "Titel des Empfehlungsgeber Bereichs auf der Profil Seite."
+        "description": "Titel des Promoter Bereichs auf der Profil Seite."
     },
-    "profile_page_promoters_section_recommender_count": "Anzahl der Empfehlungsgeber:",
+    "profile_page_promoters_section_recommender_count": "Anzahl der Promoter:",
     "@profile_page_promoters_section_recommender_count": {
-        "description": "Anzahl der Empfehlungsgeber im Empfehlungsgeber Bereich auf der Profil Seite."
+        "description": "Anzahl der Promoter im Promoter Bereich auf der Profil Seite."
     }
 }

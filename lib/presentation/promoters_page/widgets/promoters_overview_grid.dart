@@ -6,10 +6,10 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/widgets/promoter_overview_list_tile.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/widgets/promoter_overview_view_state_button.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/widgets/promoters_overview_empty_page.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/widgets/promoters_overview_grid_tile.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview_list_tile.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview_view_state_button.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoters_overview_empty_page.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoters_overview_grid_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -53,7 +53,7 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("Meine Empfehlungsgeber",
+                            Text("Meine Promoter",
                                 style: themeData.textTheme.headlineLarge!
                                     .copyWith(
                                         fontSize: 22,
