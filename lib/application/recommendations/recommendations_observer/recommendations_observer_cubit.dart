@@ -28,6 +28,7 @@ class RecommendationsObserverCubit extends Cubit<RecommendationsObserverState> {
 
   void promotersObserverUpdated(
       Either<DatabaseFailure, CustomUser> failureOrUser) async {
+    emit(PromotersObserverLoading());
     failureOrUser
         .fold((failure) => emit(PromotersObserverFailure(failure: failure)),
             (user) async {
@@ -40,6 +41,7 @@ class RecommendationsObserverCubit extends Cubit<RecommendationsObserverState> {
         failureOrSuccess
             .fold((failure) => emit(PromotersObserverFailure(failure: failure)),
                 (registeredPromoters) {
+          print("THE REGISTERED PROMOTERS: $registeredPromoters");
           for (final registeredPromoter in registeredPromoters) {
             promoters.add(Promoter.fromUser(registeredPromoter));
           }
@@ -52,6 +54,7 @@ class RecommendationsObserverCubit extends Cubit<RecommendationsObserverState> {
         failureOrSuccess
             .fold((failure) => emit(PromotersObserverFailure(failure: failure)),
                 (unregisteredPromoters) {
+          print("THE UNREGISTERED PROMOTERS: $unregisteredPromoters");
           for (final unregisteredPromoter in unregisteredPromoters) {
             promoters
                 .add(Promoter.fromUnregisteredPromoter(unregisteredPromoter));

@@ -22,19 +22,11 @@ class _RecommendationsPageState extends State<RecommendationsPage>
   late TabController tabController;
   late double screenHeight;
   late double topPadding;
-  final List<TabbarContent> tabViews = [
-    TabbarContent(
-        tab: const CustomTab(title: "Meine Empfehlungsgeber"),
-        content: const PromotersOverview()),
-    TabbarContent(
-        tab: const CustomTab(title: "Empfehlungsgeber registrieren"),
-        content: const RegisterPromotersView())
-  ];
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: tabViews.length, vsync: this);
+    tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -58,6 +50,17 @@ class _RecommendationsPageState extends State<RecommendationsPage>
     );
   }
 
+  List<TabbarContent> getTabbarContent() {
+    return [
+      TabbarContent(
+          tab: const CustomTab(title: "Meine Empfehlungsgeber"),
+          content: PromotersOverview(tabController: tabController)),
+      TabbarContent(
+          tab: const CustomTab(title: "Empfehlungsgeber registrieren"),
+          content: const RegisterPromotersView())
+    ];
+  }
+
   Widget tabbar() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -65,12 +68,12 @@ class _RecommendationsPageState extends State<RecommendationsPage>
         children: [
           CustomTabbar(
               controller: tabController,
-              tabs: tabViews.map((e) => e.tab).toList()),
+              tabs: getTabbarContent().map((e) => e.tab).toList()),
           SizedBox(
               height: screenHeight * 0.85,
               child: TabBarView(
                   controller: tabController,
-                  children: tabViews.map((e) => e.content).toList()))
+                  children: getTabbarContent().map((e) => e.content).toList()))
         ]);
   }
 }

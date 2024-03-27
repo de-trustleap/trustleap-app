@@ -15,6 +15,7 @@ class Promoter extends Equatable {
   final String? thumbnailDownloadURL;
   final bool? registered;
   final DateTime? expiresAt;
+  final DateTime? createdAt;
 
   const Promoter({
     required this.id,
@@ -26,6 +27,7 @@ class Promoter extends Equatable {
     this.thumbnailDownloadURL,
     this.registered,
     this.expiresAt,
+    this.createdAt
   });
 
   Promoter copyWith({
@@ -38,6 +40,7 @@ class Promoter extends Equatable {
     String? thumbnailDownloadURL,
     bool? registered,
     DateTime? expiresAt,
+    DateTime? createdAt
   }) {
     return Promoter(
       id: id ?? this.id,
@@ -49,6 +52,7 @@ class Promoter extends Equatable {
       thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
       registered: registered ?? this.registered,
       expiresAt: expiresAt ?? this.expiresAt,
+      createdAt: createdAt ?? this.createdAt
     );
   }
 
@@ -62,7 +66,8 @@ class Promoter extends Equatable {
         email: user.email,
         thumbnailDownloadURL: user.thumbnailDownloadURL,
         registered: true,
-        expiresAt: null);
+        expiresAt: null,
+        createdAt: user.createdAt);
   }
 
   factory Promoter.fromUnregisteredPromoter(UnregisteredPromoter promoter) {

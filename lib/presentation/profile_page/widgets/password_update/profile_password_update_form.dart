@@ -28,6 +28,7 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
   bool showError = false;
   String errorMessage = "";
   bool validationHasError = false;
+  bool buttonDisabled = false;
 
   PasswordUpdateVisibleTextField visibleField =
       PasswordUpdateVisibleTextField.passwordReauth;
@@ -44,6 +45,12 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
     setState(() {
       showError = false;
       errorMessage = "";
+    });
+  }
+
+  void setButtonToDisabled(bool disabled) {
+    setState(() {
+      buttonDisabled = disabled;
     });
   }
 
@@ -78,12 +85,17 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
         listener: (context, state) {
           if (state is ProfileReauthenticateForPasswordUpdateSuccessState) {
             visibleField = PasswordUpdateVisibleTextField.passwordsNew;
+            setButtonToDisabled(false);
           } else if (state is ProfilePasswordUpdateFailureState) {
             errorMessage = AuthFailureMapper.mapFailureMessage(
                 state.failure, localization);
             showError = true;
+            setButtonToDisabled(false);
           } else if (state is ProfilePasswordUpdateSuccessState) {
             BlocProvider.of<ProfileCubit>(context).signOutUser();
+            setButtonToDisabled(false);
+          } else if (state is ProfilePasswordUpdateLoadingState) {
+            setButtonToDisabled(true);
           }
         },
         builder: (context, state) {
@@ -105,6 +117,7 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
                       ProfilePasswordUpdateReauth(
                           passwordTextController: oldPasswordTextController,
                           maxWidth: maxWidth,
+                          buttonDisabled: buttonDisabled,
                           resetError: resetError,
                           submit: submitOldPassword)
                     ] else ...[
@@ -113,6 +126,7 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
                           passwordRepeatTextController:
                               passwordRepeatTextController,
                           maxWidth: maxWidth,
+                          buttonDisabled: buttonDisabled,
                           resetError: resetError,
                           submit: submitNewPassword)
                     ],

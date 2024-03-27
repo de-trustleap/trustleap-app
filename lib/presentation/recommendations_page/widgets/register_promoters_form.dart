@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
@@ -44,6 +44,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   String errorMessage = "";
   bool validationHasError = false;
   String? genderValid;
+  bool buttonDisabled = false;
 
   @override
   void initState() {
@@ -65,6 +66,12 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     setState(() {
       showError = false;
       errorMessage = "";
+    });
+  }
+
+  void setButtonToDisabled(bool disabled) {
+    setState(() {
+      buttonDisabled = disabled;
     });
   }
 
@@ -109,15 +116,19 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
           errorMessage = DatabaseFailureMapper.mapFailureMessage(
               state.failure, localization);
           showError = true;
+          setButtonToDisabled(false);
         } else if (state is PromoterAlreadyExistsFailureState) {
           errorMessage =
               "Die E-Mail Adresse existiert bereits bei einem anderen Nutzer.";
           showError = true;
+          setButtonToDisabled(false);
         } else if (state is PromoterRegisteredSuccessState) {
           widget.changesSaved();
+          setButtonToDisabled(false);
         } else if (state is RecommendationsGetCurrentUserSuccessState) {
-          print("GOT USER!");
           currentUser = state.user;
+        } else if (state is PromoterRegisterLoadingState) {
+          setButtonToDisabled(true);
         }
       },
       builder: (context, state) {
@@ -262,6 +273,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                           PrimaryButton(
                               title: "Registrieren",
                               width: maxWidth / 2 - textFieldSpacing,
+                              disabled: buttonDisabled,
                               onTap: () {
                                 submit(validator);
                               })

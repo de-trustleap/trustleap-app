@@ -2,7 +2,7 @@ import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart'
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/password_forgotten_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';

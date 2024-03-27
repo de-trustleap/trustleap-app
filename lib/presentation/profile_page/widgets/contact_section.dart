@@ -3,7 +3,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
@@ -37,6 +37,7 @@ class _ContactSectionState extends State<ContactSection> {
   String errorMessage = "";
   bool validationHasError = false;
   String? genderValid;
+  bool buttonDisabled = false;
 
   @override
   void initState() {
@@ -63,6 +64,12 @@ class _ContactSectionState extends State<ContactSection> {
     placeTextController.dispose();
 
     super.dispose();
+  }
+
+  void setButtonStateToDisabled(bool disabled) {
+    setState(() {
+      buttonDisabled = disabled;
+    });
   }
 
   void resetError() {
@@ -111,8 +118,12 @@ class _ContactSectionState extends State<ContactSection> {
             errorMessage = DatabaseFailureMapper.mapFailureMessage(
                 state.failure, localization);
             showError = true;
+            setButtonStateToDisabled(false);
           } else if (state is ProfileUpdateContactInformationSuccessState) {
             widget.changesSaved();
+            setButtonStateToDisabled(false);
+          } else if (state is ProfileUpdateContactInformationLoadingState) {
+            setButtonStateToDisabled(true);
           }
         },
         builder: (context, state) {
@@ -296,6 +307,7 @@ class _ContactSectionState extends State<ContactSection> {
                         title: localization
                             .profile_page_contact_section_form_save_button_title,
                         width: maxWidth / 2 - textFieldSpacing,
+                        disabled: buttonDisabled,
                         onTap: () {
                           submit(validator);
                         })

@@ -1,12 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePasswordUpdateReauth extends StatelessWidget {
   final TextEditingController passwordTextController;
   final double maxWidth;
+  final bool buttonDisabled;
   final Function resetError;
   final Function submit;
 
@@ -14,6 +15,7 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
     Key? key,
     required this.passwordTextController,
     required this.maxWidth,
+    required this.buttonDisabled,
     required this.resetError,
     required this.submit,
   }) : super(key: key);
@@ -49,6 +51,7 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
               title: localization
                   .profile_page_password_update_section_reauth_continue_button_title,
               width: maxWidth / 2 - textFieldSpacing,
+              disabled: buttonDisabled,
               onTap: () {
                 submit();
               })

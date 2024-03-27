@@ -91,7 +91,7 @@ class RecommendationsRepositoryImplementation
     try {
       await Future.forEach(chunks, (element) async {
         final document = await usersCollection
-            .where(FieldPath.documentId, whereIn: ids)
+            .where(FieldPath.documentId, whereIn: element)
             .get();
         querySnapshots.add(document);
       });
@@ -120,7 +120,7 @@ class RecommendationsRepositoryImplementation
     try {
       await Future.forEach(chunks, (element) async {
         final document = await unregisteredPromotersCollection
-            .where(FieldPath.documentId, whereIn: ids)
+            .where(FieldPath.documentId, whereIn: element)
             .get();
         querySnapshots.add(document);
       });
