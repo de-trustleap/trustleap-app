@@ -1,5 +1,5 @@
-import 'package:finanzbegleiter/application/recommendations/recommendations/recommendations_cubit.dart';
-import 'package:finanzbegleiter/application/recommendations/recommendations_observer/recommendations_observer_cubit.dart';
+import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
+import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
@@ -38,10 +38,10 @@ class _RecommendationsPageState extends State<RecommendationsPage>
       providers: [
         BlocProvider(
             create: (context) =>
-                Modular.get<RecommendationsCubit>()..getCurrentUser()),
+                Modular.get<PromoterCubit>()..getCurrentUser()),
         BlocProvider(
-            create: (context) => Modular.get<RecommendationsObserverCubit>()
-              ..observeAllPromoters())
+            create: (context) =>
+                Modular.get<PromoterObserverCubit>()..observeAllPromoters())
       ],
       child: Padding(
         padding: EdgeInsets.only(top: topPadding),

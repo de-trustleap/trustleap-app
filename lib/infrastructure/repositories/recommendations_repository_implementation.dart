@@ -6,16 +6,15 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/domain/repositories/recommendations_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 
-class RecommendationsRepositoryImplementation
-    implements RecommendationsRepository {
+class PromoterRepositoryImplementation implements PromoterRepository {
   final FirebaseFirestore firestore;
 
-  RecommendationsRepositoryImplementation({
+  PromoterRepositoryImplementation({
     required this.firestore,
   });
 

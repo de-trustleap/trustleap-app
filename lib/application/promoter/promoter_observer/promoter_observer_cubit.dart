@@ -7,17 +7,17 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/domain/repositories/recommendations_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 
-part 'recommendations_observer_state.dart';
+part 'promoter_observer_state.dart';
 
-class RecommendationsObserverCubit extends Cubit<RecommendationsObserverState> {
-  final RecommendationsRepository recommendationsRepo;
+class PromoterObserverCubit extends Cubit<PromoterObserverState> {
+  final PromoterRepository recommendationsRepo;
   StreamSubscription<Either<DatabaseFailure, CustomUser>>? _usersStreamSub;
 
-  RecommendationsObserverCubit(
+  PromoterObserverCubit(
     this.recommendationsRepo,
-  ) : super(RecommendationsObserverInitial());
+  ) : super(PromoterObserverInitial());
 
   void observeAllPromoters() async {
     emit(PromotersObserverLoading());
@@ -41,7 +41,6 @@ class RecommendationsObserverCubit extends Cubit<RecommendationsObserverState> {
         failureOrSuccess
             .fold((failure) => emit(PromotersObserverFailure(failure: failure)),
                 (registeredPromoters) {
-          print("THE REGISTERED PROMOTERS: $registeredPromoters");
           for (final registeredPromoter in registeredPromoters) {
             promoters.add(Promoter.fromUser(registeredPromoter));
           }
@@ -54,7 +53,6 @@ class RecommendationsObserverCubit extends Cubit<RecommendationsObserverState> {
         failureOrSuccess
             .fold((failure) => emit(PromotersObserverFailure(failure: failure)),
                 (unregisteredPromoters) {
-          print("THE UNREGISTERED PROMOTERS: $unregisteredPromoters");
           for (final unregisteredPromoter in unregisteredPromoters) {
             promoters
                 .add(Promoter.fromUnregisteredPromoter(unregisteredPromoter));

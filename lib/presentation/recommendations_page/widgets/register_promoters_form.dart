@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/recommendations/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
@@ -48,7 +48,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
 
   @override
   void initState() {
-    BlocProvider.of<RecommendationsCubit>(context).getCurrentUser();
+    BlocProvider.of<PromoterCubit>(context).getCurrentUser();
     super.initState();
   }
 
@@ -83,7 +83,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
         genderValid = null;
       });
       if (currentUser != null) {
-        BlocProvider.of<RecommendationsCubit>(context).registerPromoter(
+        BlocProvider.of<PromoterCubit>(context).registerPromoter(
             UnregisteredPromoter(
                 id: UniqueID(),
                 gender: selectedGender,
@@ -99,7 +99,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
       setState(() {
         genderValid = validator.validateGender(selectedGender);
       });
-      BlocProvider.of<RecommendationsCubit>(context).registerPromoter(null);
+      BlocProvider.of<PromoterCubit>(context).registerPromoter(null);
     }
   }
 
@@ -110,7 +110,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
     const double textFieldSpacing = 20;
-    return BlocConsumer<RecommendationsCubit, RecommendationsState>(
+    return BlocConsumer<PromoterCubit, PromoterState>(
       listener: (context, state) {
         if (state is PromoterRegisterFailureState) {
           errorMessage = DatabaseFailureMapper.mapFailureMessage(
@@ -125,7 +125,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
         } else if (state is PromoterRegisteredSuccessState) {
           widget.changesSaved();
           setButtonToDisabled(false);
-        } else if (state is RecommendationsGetCurrentUserSuccessState) {
+        } else if (state is PromoterGetCurrentUserSuccessState) {
           currentUser = state.user;
         } else if (state is PromoterRegisterLoadingState) {
           setButtonToDisabled(true);
@@ -135,12 +135,12 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
         return CardContainer(
             child: LayoutBuilder(builder: (context, constraints) {
           final maxWidth = constraints.maxWidth;
-          if (state is RecommendationsGetCurrentUserLoadingState) {
+          if (state is PromoterGetCurrentUserLoadingState) {
             return const LoadingIndicator();
           } else {
             return Form(
                 key: formKey,
-                autovalidateMode: (state is RecommendationsShowValidationState)
+                autovalidateMode: (state is PromoterShowValidationState)
                     ? AutovalidateMode.always
                     : AutovalidateMode.disabled,
                 child: Column(

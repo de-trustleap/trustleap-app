@@ -4,21 +4,21 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
-import 'package:finanzbegleiter/domain/repositories/recommendations_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-part 'recommendations_state.dart';
+part 'promoter_state.dart';
 
-class RecommendationsCubit extends Cubit<RecommendationsState> {
-  final RecommendationsRepository recommendationsRepo;
+class PromoterCubit extends Cubit<PromoterState> {
+  final PromoterRepository recommendationsRepo;
   final AuthRepository authRepo;
 
-  RecommendationsCubit(this.recommendationsRepo, this.authRepo)
-      : super(RecommendationsInitial());
+  PromoterCubit(this.recommendationsRepo, this.authRepo)
+      : super(PromoterInitial());
 
   void registerPromoter(UnregisteredPromoter? promoter) async {
     if (promoter == null) {
-      emit(RecommendationsShowValidationState());
+      emit(PromoterShowValidationState());
     } else {
       emit(PromoterRegisterLoadingState());
       if (promoter.email == null) {
@@ -45,8 +45,8 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
   }
 
   void getCurrentUser() async {
-    emit(RecommendationsGetCurrentUserLoadingState());
+    emit(PromoterGetCurrentUserLoadingState());
     final currentUser = await authRepo.getCurrentUser();
-    emit(RecommendationsGetCurrentUserSuccessState(user: currentUser));
+    emit(PromoterGetCurrentUserSuccessState(user: currentUser));
   }
 }

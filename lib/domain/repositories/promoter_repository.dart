@@ -3,7 +3,7 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 
-abstract class RecommendationsRepository {
+abstract class PromoterRepository {
   Future<Either<DatabaseFailure, Unit>> registerPromoter(
       {required UnregisteredPromoter promoter});
   Future<Either<DatabaseFailure, bool>> checkIfPromoterAlreadyExists(

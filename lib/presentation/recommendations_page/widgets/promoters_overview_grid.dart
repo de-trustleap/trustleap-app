@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/recommendations/recommendations_observer/recommendations_observer_cubit.dart';
+import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -37,8 +37,7 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
-    return BlocBuilder<RecommendationsObserverCubit,
-        RecommendationsObserverState>(
+    return BlocBuilder<PromoterObserverCubit, PromoterObserverState>(
       builder: (context, state) {
         if (state is PromotersObserverSuccess) {
           if (state.promoters.isEmpty) {
@@ -81,7 +80,7 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
               message: DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization),
               callback: () => {
-                    BlocProvider.of<RecommendationsObserverCubit>(context)
+                    BlocProvider.of<PromoterObserverCubit>(context)
                         .observeAllPromoters()
                   });
         } else {
