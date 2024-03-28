@@ -149,6 +149,52 @@ class AppTheme {
               surfaceTintColor: MaterialStatePropertyAll(_darkBackgroundColor),
               visualDensity: VisualDensity.comfortable));
 
+  static final SegmentedButtonThemeData _lightSegmentedButtonTheme =
+      SegmentedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return _lightSecondaryColor;
+                } else {
+                  return Colors.transparent;
+                }
+              }),
+              iconColor: MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return _lightBackgroundColor;
+                } else {
+                  return _lightTextColor;
+                }
+              }),
+              side: MaterialStateProperty.all(BorderSide(
+                  color: _lightTextColor.withOpacity(0.3),
+                  width: 1.0,
+                  style: BorderStyle.solid))));
+
+  static final SegmentedButtonThemeData _darkSegmentedButtonTheme =
+      SegmentedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return _darkSecondaryColor;
+                } else {
+                  return Colors.transparent;
+                }
+              }),
+              iconColor: MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return _darkBackgroundColor;
+                } else {
+                  return _darkTextColor;
+                }
+              }),
+              side: MaterialStateProperty.all(BorderSide(
+                  color: _darkTextColor.withOpacity(0.3),
+                  width: 1.0,
+                  style: BorderStyle.solid))));
+
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
           primary: _lightPrimaryColor,
@@ -165,7 +211,8 @@ class AppTheme {
       drawerTheme: _lightDrawerTheme,
       snackBarTheme: _lightSnackbarTheme,
       tabBarTheme: _lightTabbarTheme,
-      dropdownMenuTheme: _lightDropDownMenuTheme);
+      dropdownMenuTheme: _lightDropDownMenuTheme,
+      segmentedButtonTheme: _lightSegmentedButtonTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -183,5 +230,6 @@ class AppTheme {
       drawerTheme: _darkDrawerTheme,
       snackBarTheme: _darkSnackbarTheme,
       tabBarTheme: _darkTabbarTheme,
-      dropdownMenuTheme: _darkDropDownMenuTheme);
+      dropdownMenuTheme: _darkDropDownMenuTheme,
+      segmentedButtonTheme: _darkSegmentedButtonTheme);
 }
