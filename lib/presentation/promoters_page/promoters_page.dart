@@ -30,6 +30,12 @@ class _PromotersPageState extends State<PromotersPage>
   }
 
   @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     screenHeight = responsiveValue.screenHeight;
@@ -53,10 +59,11 @@ class _PromotersPageState extends State<PromotersPage>
   List<TabbarContent> getTabbarContent() {
     return [
       TabbarContent(
-          tab: const CustomTab(title: "Meine Promoter"),
+          tab: const CustomTab(icon: Icons.people, title: "Meine Promoter"),
           content: PromotersOverview(tabController: tabController)),
       TabbarContent(
-          tab: const CustomTab(title: "Promoter registrieren"),
+          tab: const CustomTab(
+              icon: Icons.person_add, title: "Promoter registrieren"),
           content: const RegisterPromotersView())
     ];
   }

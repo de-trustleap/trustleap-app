@@ -26,10 +26,10 @@ class _ProfilePageState extends State<ProfilePage>
   late TabController tabController;
   final List<TabbarContent> tabViews = [
     TabbarContent(
-        tab: const CustomTab(title: "Allgemein"),
+        tab: const CustomTab(icon: Icons.person, title: "Allgemein"),
         content: const ProfileGeneralView()),
     TabbarContent(
-        tab: const CustomTab(title: "Passwort ändern"),
+        tab: const CustomTab(icon: Icons.lock, title: "Passwort ändern"),
         content: const ProfilePasswordUpdateView())
   ];
 
@@ -37,6 +37,12 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     super.initState();
     tabController = TabController(length: tabViews.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 
   @override

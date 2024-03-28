@@ -20,8 +20,8 @@ class CustomTabbar extends StatelessWidget {
             ? responsiveValue.screenWidth * 0.6
             : responsiveValue.screenWidth * 0.9,
         child: TabBar(
-          controller: controller,
-          tabs: tabs,
-        ));
+            controller: controller,
+            tabs: tabs,
+            indicatorPadding: const EdgeInsets.only(bottom: 4)));
   }
 }
