@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_c
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview_list_tile.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview_searchbar.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview_view_state_button.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoters_overview_empty_page.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoters_overview_grid_tile.dart';
@@ -88,19 +89,34 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("Meine Promoter",
-                                style: themeData.textTheme.headlineLarge!
-                                    .copyWith(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold)),
+                            Flexible(
+                              flex: responsiveValue.isDesktop ? 3 : 0,
+                              child: Text("Meine Promoter",
+                                  style: themeData.textTheme.headlineLarge!
+                                      .copyWith(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold)),
+                            ),
+                            if (responsiveValue.isDesktop) ...[
+                              const Spacer(),
+                              const Flexible(
+                                  flex: 5, child: PromoterOverviewSearchBar()),
+                            ],
                             const Spacer(),
-                            PromoterOverviewViewStateButton(
-                                onSelected: (selectedValue) {
-                              setState(() {
-                                _viewState = selectedValue;
-                              });
-                            })
+                            Flexible(
+                              flex: responsiveValue.isDesktop ? 2 : 0,
+                              child: PromoterOverviewViewStateButton(
+                                  onSelected: (selectedValue) {
+                                setState(() {
+                                  _viewState = selectedValue;
+                                });
+                              }),
+                            )
                           ]),
+                      if (responsiveValue.smallerThan(DESKTOP)) ...[
+                        const SizedBox(height: 12),
+                        const PromoterOverviewSearchBar()
+                      ],
                       const SizedBox(height: 24),
                       if (_viewState == PromotersOverviewViewState.grid) ...[
                         gridView(responsiveValue, visiblePromoters)
@@ -194,9 +210,8 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
         !_controller.position.outOfRange) {
       if (!_isLoading) {
         _isLoading = true;
-        BlocProvider.of<PromoterObserverCubit>(context).getPromoters(
-            allPromoters,
-            lastIndexLoaded); // TODO: Listener reagiert schonmal. Landet aber nach dem Scrollen in einer infinite laoding Animation. Es muss statt dem Observer Success State einen State für das Initiale Laden und einen State für das Nachladen geben.
+        BlocProvider.of<PromoterObserverCubit>(context)
+            .getPromoters(allPromoters, lastIndexLoaded);
       }
     }
   }

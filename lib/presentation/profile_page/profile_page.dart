@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage>
     return Column(
       children: [
         SizedBox(
-            width: responsiveValue.largerThan(MOBILE)
+            width: responsiveValue.largerThan(TABLET)
                 ? responsiveValue.screenWidth * 0.6
                 : responsiveValue.screenWidth * 0.9,
             child: TabBar(
