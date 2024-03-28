@@ -26,3 +26,11 @@ final class PromotersObserverSuccess extends PromoterObserverState {
     required this.promoters,
   });
 }
+
+final class PromotersObserverGetElementsSuccess extends PromoterObserverState {
+  final List<Promoter> promoters;
+
+  const PromotersObserverGetElementsSuccess({
+    required this.promoters,
+  });
+}

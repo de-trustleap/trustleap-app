@@ -30,17 +30,52 @@ class PromotersOverviewGrid extends StatefulWidget {
 }
 
 class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
-  PromotersOverviewViewState viewState = PromotersOverviewViewState.grid;
+  PromotersOverviewViewState _viewState = PromotersOverviewViewState.grid;
+  final ScrollController _controller = ScrollController();
+  int lastIndexLoaded = 0;
+  List<Promoter> allPromoters = [];
+  List<Promoter> visiblePromoters = [];
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
-    return BlocBuilder<PromoterObserverCubit, PromoterObserverState>(
-      builder: (context, state) {
+    return BlocConsumer<PromoterObserverCubit, PromoterObserverState>(
+      listener: (context, state) {
         if (state is PromotersObserverSuccess) {
+          allPromoters = state.promoters;
+          BlocProvider.of<PromoterObserverCubit>(context)
+              .getPromoters(allPromoters, lastIndexLoaded);
+        }
+        if (state is PromotersObserverGetElementsSuccess) {
           if (state.promoters.isEmpty) {
+            lastIndexLoaded = visiblePromoters.length;
+          } else {
+            setState(() {
+              visiblePromoters.addAll(state.promoters);
+              lastIndexLoaded = visiblePromoters.length;
+              _isLoading = false;
+            });
+          }
+        }
+      },
+      builder: (context, state) {
+        if (state is PromotersObserverGetElementsSuccess) {
+          if (state.promoters.isEmpty && visiblePromoters.isEmpty) {
             return PromotersOverviewEmptyPage(registerPromoterTapped: () {
               widget.tabController.animateTo(1);
             });
@@ -62,15 +97,15 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
                             PromoterOverviewViewStateButton(
                                 onSelected: (selectedValue) {
                               setState(() {
-                                viewState = selectedValue;
+                                _viewState = selectedValue;
                               });
                             })
                           ]),
                       const SizedBox(height: 24),
-                      if (viewState == PromotersOverviewViewState.grid) ...[
-                        gridView(responsiveValue, state.promoters)
+                      if (_viewState == PromotersOverviewViewState.grid) ...[
+                        gridView(responsiveValue, visiblePromoters)
                       ] else ...[
-                        listView(state.promoters)
+                        listView(visiblePromoters)
                       ]
                     ]));
           }
@@ -91,48 +126,56 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
   }
 
   Widget listView(List<Promoter> promoters) {
-    return ListView.builder(
-        itemCount: promoters.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return AnimationConfiguration.staggeredList(
-            position: index,
-            duration: const Duration(milliseconds: 150),
-            child: ScaleAnimation(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: PromoterOverviewListTile(promoter: promoters[index]),
+    return Container(
+      constraints: const BoxConstraints(maxHeight: 600),
+      child: ListView.builder(
+          itemCount: promoters.length,
+          shrinkWrap: true,
+          controller: _controller,
+          itemBuilder: (context, index) {
+            return AnimationConfiguration.staggeredList(
+              position: index,
+              duration: const Duration(milliseconds: 150),
+              child: ScaleAnimation(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: PromoterOverviewListTile(promoter: promoters[index]),
+                ),
               ),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 
   Widget gridView(
       ResponsiveBreakpointsData responsiveValue, List<Promoter> promoters) {
-    return AnimationLimiter(
-      child: GridView.count(
-          crossAxisCount: responsiveValue.largerThan(MOBILE) ? 3 : 2,
-          crossAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
-          mainAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          physics: const ScrollPhysics(),
-          childAspectRatio: calculateChildAspectRatio(responsiveValue),
-          children: List.generate(promoters.length, (index) {
-            return AnimationConfiguration.staggeredGrid(
-              position: index,
-              duration: const Duration(milliseconds: 150),
-              columnCount: responsiveValue.largerThan(MOBILE) ? 3 : 2,
-              child: ScaleAnimation(
-                child: Center(
-                    child: GridTile(
-                        child: PromotersOverviewGridTile(
-                            promoter: promoters[index]))),
-              ),
-            );
-          })),
+    return Container(
+      constraints: const BoxConstraints(maxHeight: 600),
+      child: AnimationLimiter(
+        child: GridView.count(
+            crossAxisCount: responsiveValue.largerThan(MOBILE) ? 3 : 2,
+            crossAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
+            mainAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
+            shrinkWrap: true,
+            controller: _controller,
+            scrollDirection: Axis.vertical,
+            physics: const ScrollPhysics(),
+            childAspectRatio: calculateChildAspectRatio(responsiveValue),
+            children: List.generate(promoters.length, (index) {
+              return AnimationConfiguration.staggeredGrid(
+                position: index,
+                duration: const Duration(milliseconds: 150),
+                columnCount: responsiveValue.largerThan(MOBILE) ? 3 : 2,
+                child: ScaleAnimation(
+                  child: Center(
+                      child: GridTile(
+                          child: PromotersOverviewGridTile(
+                              promoter: promoters[index]))),
+                ),
+              );
+            })),
+      ),
     );
   }
 
@@ -143,6 +186,18 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
       return 0.67;
     } else {
       return 0.8;
+    }
+  }
+
+  void _onScroll() {
+    if (_controller.offset >= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange) {
+      if (!_isLoading) {
+        _isLoading = true;
+        BlocProvider.of<PromoterObserverCubit>(context).getPromoters(
+            allPromoters,
+            lastIndexLoaded); // TODO: Listener reagiert schonmal. Landet aber nach dem Scrollen in einer infinite laoding Animation. Es muss statt dem Observer Success State einen State für das Initiale Laden und einen State für das Nachladen geben.
+      }
     }
   }
 }

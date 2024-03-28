@@ -26,6 +26,13 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
         (failureOrSuccess) => promotersObserverUpdated(failureOrSuccess));
   }
 
+  void getPromoters(List<Promoter> promoters, int last) {
+    List<Promoter> visiblePromoters = [];
+    visiblePromoters = promoters.skip(last).take(9).toList();
+    emit(PromotersObserverLoading());
+    emit(PromotersObserverGetElementsSuccess(promoters: visiblePromoters));
+  }
+
   void promotersObserverUpdated(
       Either<DatabaseFailure, CustomUser> failureOrUser) async {
     emit(PromotersObserverLoading());
@@ -59,6 +66,7 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
           }
         });
       }
+      promoters = promoters;
       emit(PromotersObserverSuccess(promoters: promoters));
     });
   }
