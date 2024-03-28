@@ -1,7 +1,6 @@
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoters_overview.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/register_promoters_view.dart';
@@ -51,7 +50,7 @@ class _PromotersPageState extends State<PromotersPage>
       ],
       child: Padding(
         padding: EdgeInsets.only(top: topPadding),
-        child: tabbar(),
+        child: tabbar(responsiveValue),
       ),
     );
   }
@@ -68,19 +67,22 @@ class _PromotersPageState extends State<PromotersPage>
     ];
   }
 
-  Widget tabbar() {
+  Widget tabbar(ResponsiveBreakpointsData responsiveValue) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomTabbar(
-              controller: tabController,
-              tabs: getTabbarContent().map((e) => e.tab).toList()),
-          SizedBox(
-              height: screenHeight * 0.85,
-              child: TabBarView(
-                  controller: tabController,
-                  children: getTabbarContent().map((e) => e.content).toList()))
-        ]);
+      children: [
+        SizedBox(
+            width: responsiveValue.largerThan(MOBILE)
+                ? responsiveValue.screenWidth * 0.6
+                : responsiveValue.screenWidth * 0.9,
+            child: TabBar(
+                controller: tabController,
+                tabs: getTabbarContent().map((e) => e.tab).toList(),
+                indicatorPadding: const EdgeInsets.only(bottom: 4))),
+        Expanded(
+            child: TabBarView(
+                controller: tabController,
+                children: getTabbarContent().map((e) => e.content).toList()))
+      ],
+    );
   }
 }

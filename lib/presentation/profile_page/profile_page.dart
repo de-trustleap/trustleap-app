@@ -3,7 +3,6 @@ import 'package:finanzbegleiter/application/images/images_bloc.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
@@ -64,23 +63,26 @@ class _ProfilePageState extends State<ProfilePage>
         ],
         child: Padding(
           padding: EdgeInsets.only(top: topPadding),
-          child: tabbar(),
+          child: tabbar(responsiveValue),
         ));
   }
 
-  Widget tabbar() {
+  Widget tabbar(ResponsiveBreakpointsData responsiveValue) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomTabbar(
-              controller: tabController,
-              tabs: tabViews.map((e) => e.tab).toList()),
-          SizedBox(
-              height: screenHeight * 0.85,
-              child: TabBarView(
-                  controller: tabController,
-                  children: tabViews.map((e) => e.content).toList()))
-        ]);
+      children: [
+        SizedBox(
+            width: responsiveValue.largerThan(MOBILE)
+                ? responsiveValue.screenWidth * 0.6
+                : responsiveValue.screenWidth * 0.9,
+            child: TabBar(
+                controller: tabController,
+                tabs: tabViews.map((e) => e.tab).toList(),
+                indicatorPadding: const EdgeInsets.only(bottom: 4))),
+        Expanded(
+            child: TabBarView(
+                controller: tabController,
+                children: tabViews.map((e) => e.content).toList()))
+      ],
+    );
   }
 }
