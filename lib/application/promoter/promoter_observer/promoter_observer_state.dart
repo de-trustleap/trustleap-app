@@ -34,3 +34,13 @@ final class PromotersObserverGetElementsSuccess extends PromoterObserverState {
     required this.promoters,
   });
 }
+
+final class PromotersObserverSearchSuccess extends PromoterObserverState {
+  final List<Promoter> promoters;
+
+  const PromotersObserverSearchSuccess({
+    required this.promoters,
+  });
+}
+
+final class PromotersObserverSearchNotFound extends PromoterObserverState {}

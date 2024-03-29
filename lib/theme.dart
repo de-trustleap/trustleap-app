@@ -195,6 +195,24 @@ class AppTheme {
                   width: 1.0,
                   style: BorderStyle.solid))));
 
+  static final SearchBarThemeData _lightSearchBarTheme = SearchBarThemeData(
+      elevation: const MaterialStatePropertyAll(1),
+      backgroundColor: const MaterialStatePropertyAll(_lightCardColor),
+      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+      hintStyle: MaterialStatePropertyAll(
+          _lightHeadlineLargeText.copyWith(fontSize: 14)),
+      textStyle: MaterialStatePropertyAll(
+          _lightHeadlineLargeText.copyWith(fontSize: 14)));
+
+  static final SearchBarThemeData _darkSearchBarTheme = SearchBarThemeData(
+      elevation: const MaterialStatePropertyAll(1),
+      backgroundColor: const MaterialStatePropertyAll(_darkCardColor),
+      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+      hintStyle: MaterialStatePropertyAll(
+          _darkHeadlineLargeText.copyWith(fontSize: 14)),
+      textStyle: MaterialStatePropertyAll(
+          _darkHeadlineLargeText.copyWith(fontSize: 14)));
+
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
           primary: _lightPrimaryColor,
@@ -212,7 +230,8 @@ class AppTheme {
       snackBarTheme: _lightSnackbarTheme,
       tabBarTheme: _lightTabbarTheme,
       dropdownMenuTheme: _lightDropDownMenuTheme,
-      segmentedButtonTheme: _lightSegmentedButtonTheme);
+      segmentedButtonTheme: _lightSegmentedButtonTheme,
+      searchBarTheme: _lightSearchBarTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -231,5 +250,6 @@ class AppTheme {
       snackBarTheme: _darkSnackbarTheme,
       tabBarTheme: _darkTabbarTheme,
       dropdownMenuTheme: _darkDropDownMenuTheme,
-      segmentedButtonTheme: _darkSegmentedButtonTheme);
+      segmentedButtonTheme: _darkSegmentedButtonTheme,
+      searchBarTheme: _darkSearchBarTheme);
 }

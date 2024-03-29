@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -81,6 +82,9 @@ class _ProfilePageState extends State<ProfilePage>
         Expanded(
             child: TabBarView(
                 controller: tabController,
+                physics: kIsWeb
+                    ? const NeverScrollableScrollPhysics()
+                    : const ScrollPhysics(),
                 children: tabViews.map((e) => e.content).toList()))
       ],
     );

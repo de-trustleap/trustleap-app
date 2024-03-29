@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoters_overview.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/register_promoters_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -81,6 +82,9 @@ class _PromotersPageState extends State<PromotersPage>
         Expanded(
             child: TabBarView(
                 controller: tabController,
+                physics: kIsWeb
+                    ? const NeverScrollableScrollPhysics()
+                    : const ScrollPhysics(),
                 children: getTabbarContent().map((e) => e.content).toList()))
       ],
     );

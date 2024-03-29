@@ -33,9 +33,11 @@ class PromotersOverviewGrid extends StatefulWidget {
 class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
   PromotersOverviewViewState _viewState = PromotersOverviewViewState.grid;
   final ScrollController _controller = ScrollController();
+  final TextEditingController _searchController = TextEditingController();
   int lastIndexLoaded = 0;
   List<Promoter> allPromoters = [];
   List<Promoter> visiblePromoters = [];
+  List<Promoter> searchResults = [];
   bool _isLoading = false;
 
   @override
@@ -50,6 +52,35 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
     super.dispose();
   }
 
+  void onSearchQueryChanged(String query) {
+    setState(() {
+      lastIndexLoaded = 0;
+      visiblePromoters = [];
+      searchResults = allPromoters.where((element) {
+        if (element.firstName != null && element.lastName != null) {
+          return element.firstName!
+                  .toLowerCase()
+                  .contains(query.toLowerCase()) ||
+              element.firstName!.toLowerCase().contains(query.toLowerCase());
+        } else {
+          return false;
+        }
+      }).toList();
+    });
+    BlocProvider.of<PromoterObserverCubit>(context)
+        .searchForPromoter(searchResults, 0);
+  }
+
+  void clearSearch() {
+    setState(() {
+      visiblePromoters = [];
+      searchResults = [];
+      _searchController.clear();
+    });
+    BlocProvider.of<PromoterObserverCubit>(context)
+        .getPromoters(allPromoters, 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -61,8 +92,7 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
           allPromoters = state.promoters;
           BlocProvider.of<PromoterObserverCubit>(context)
               .getPromoters(allPromoters, lastIndexLoaded);
-        }
-        if (state is PromotersObserverGetElementsSuccess) {
+        } else if (state is PromotersObserverGetElementsSuccess) {
           if (state.promoters.isEmpty) {
             lastIndexLoaded = visiblePromoters.length;
           } else {
@@ -72,10 +102,21 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
               _isLoading = false;
             });
           }
+        } else if (state is PromotersObserverSearchSuccess) {
+          if (state.promoters.isEmpty) {
+            lastIndexLoaded = visiblePromoters.length;
+          }
+          setState(() {
+            visiblePromoters = state.promoters;
+            lastIndexLoaded = visiblePromoters.length;
+            _isLoading = false;
+          });
         }
       },
       builder: (context, state) {
-        if (state is PromotersObserverGetElementsSuccess) {
+        if (state is PromotersObserverSearchNotFound) {
+          return const Center(child: Text("NOT FOUND!"));
+        } else if (state is PromotersObserverGetElementsSuccess) {
           if (state.promoters.isEmpty && visiblePromoters.isEmpty) {
             return PromotersOverviewEmptyPage(registerPromoterTapped: () {
               widget.tabController.animateTo(1);
@@ -99,8 +140,19 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
                             ),
                             if (responsiveValue.isDesktop) ...[
                               const Spacer(),
-                              const Flexible(
-                                  flex: 5, child: PromoterOverviewSearchBar()),
+                              Flexible(
+                                  flex: 5,
+                                  child: SearchBar(
+                                    controller: _searchController,
+                                    leading: const Icon(Icons.search),
+                                    onChanged: onSearchQueryChanged,
+                                    trailing: [
+                                      IconButton(
+                                          onPressed: () => clearSearch(),
+                                          icon: const Icon(Icons.close))
+                                    ],
+                                    hintText: "Suche...",
+                                  )),
                             ],
                             const Spacer(),
                             Flexible(
@@ -210,8 +262,13 @@ class _PromotersOverviewGridState extends State<PromotersOverviewGrid> {
         !_controller.position.outOfRange) {
       if (!_isLoading) {
         _isLoading = true;
-        BlocProvider.of<PromoterObserverCubit>(context)
-            .getPromoters(allPromoters, lastIndexLoaded);
+        if (searchResults.isEmpty) {
+          BlocProvider.of<PromoterObserverCubit>(context)
+              .getPromoters(allPromoters, lastIndexLoaded);
+        } else {
+          BlocProvider.of<PromoterObserverCubit>(context)
+              .searchForPromoter(searchResults, lastIndexLoaded);
+        }
       }
     }
   }

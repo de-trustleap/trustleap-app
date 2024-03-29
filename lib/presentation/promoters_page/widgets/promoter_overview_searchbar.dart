@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 
-class PromoterOverviewSearchBar extends StatelessWidget {
+class PromoterOverviewSearchBar extends StatefulWidget {
   const PromoterOverviewSearchBar({super.key});
+
+  @override
+  State<PromoterOverviewSearchBar> createState() =>
+      _PromoterOverviewSearchBarState();
+}
+
+class _PromoterOverviewSearchBarState extends State<PromoterOverviewSearchBar> {
+  String query = "";
+
+  void onQueryChanged(String newQuery) {
+    setState(() {
+      query = newQuery;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,6 +24,7 @@ class PromoterOverviewSearchBar extends StatelessWidget {
     return SizedBox(
       height: 50,
       child: TextField(
+          onChanged: onQueryChanged,
           cursorHeight: 20,
           decoration: InputDecoration(
               labelText: "Suche...",

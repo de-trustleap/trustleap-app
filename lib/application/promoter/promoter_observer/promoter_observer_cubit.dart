@@ -33,6 +33,17 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
     emit(PromotersObserverGetElementsSuccess(promoters: visiblePromoters));
   }
 
+  void searchForPromoter(List<Promoter> results, int last) {
+    emit(PromotersObserverLoading());
+    List<Promoter> visiblePromoters = [];
+    visiblePromoters = results.skip(last).take(9).toList();
+    if (last == 0 && visiblePromoters.isEmpty) {
+      emit(PromotersObserverSearchNotFound());
+    } else {
+      emit(PromotersObserverGetElementsSuccess(promoters: visiblePromoters));
+    }
+  }
+
   void promotersObserverUpdated(
       Either<DatabaseFailure, CustomUser> failureOrUser) async {
     emit(PromotersObserverLoading());
