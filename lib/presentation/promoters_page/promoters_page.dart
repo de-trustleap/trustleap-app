@@ -2,8 +2,8 @@ import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dar
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoters_overview.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/register_promoters_view.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_wrapper.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoters_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +60,7 @@ class _PromotersPageState extends State<PromotersPage>
     return [
       TabbarContent(
           tab: const CustomTab(icon: Icons.people, title: "Meine Promoter"),
-          content: PromotersOverview(tabController: tabController)),
+          content: PromotersOverviewWrapper(tabController: tabController)),
       TabbarContent(
           tab: const CustomTab(
               icon: Icons.person_add, title: "Promoter registrieren"),

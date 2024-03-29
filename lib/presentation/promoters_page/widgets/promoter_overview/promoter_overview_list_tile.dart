@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration_badge.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
 import 'package:flutter/material.dart';
 
 class PromoterOverviewListTile extends StatelessWidget {

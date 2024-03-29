@@ -1,21 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoters_overview_grid.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_page.dart';
 import 'package:flutter/material.dart';
 
-class PromotersOverview extends StatefulWidget {
+class PromotersOverviewWrapper extends StatefulWidget {
   final TabController tabController;
 
-  const PromotersOverview({
+  const PromotersOverviewWrapper({
     Key? key,
     required this.tabController,
   }) : super(key: key);
 
   @override
-  State<PromotersOverview> createState() => _PromotersOverviewState();
+  State<PromotersOverviewWrapper> createState() =>
+      _PromotersOverviewWrapperState();
 }
 
-class _PromotersOverviewState extends State<PromotersOverview>
+class _PromotersOverviewWrapperState extends State<PromotersOverviewWrapper>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -35,7 +36,7 @@ class _PromotersOverviewState extends State<PromotersOverview>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                PromotersOverviewGrid(tabController: widget.tabController)
+                PromotersOverviewPage(tabController: widget.tabController)
               ]))
         ]));
   }
