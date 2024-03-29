@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_grid.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_list.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_no_search_results_view.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_empty_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,7 +60,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
             return element.firstName!
                     .toLowerCase()
                     .contains(query.toLowerCase()) ||
-                element.firstName!.toLowerCase().contains(query.toLowerCase());
+                element.lastName!.toLowerCase().contains(query.toLowerCase());
           } else {
             return false;
           }
@@ -117,32 +118,23 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
               widget.tabController.animateTo(1);
             });
           } else {
-            return CardContainer(
-                maxWidth: 800,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PromoterOverviewHeader(
-                          searchController: _searchController,
-                          onSearchQueryChanged: onSearchQueryChanged,
-                          clearSearch: clearSearch,
-                          onViewStateButtonPressed: (viewState) {
-                            setState(() {
-                              _viewState = viewState;
-                            });
-                          }),
-                      const SizedBox(height: 24),
-                      if (_viewState == PromotersOverviewViewState.grid) ...[
-                        PromoterOverviewGrid(
-                            controller: _controller,
-                            promoters: visiblePromoters)
-                      ] else ...[
-                        PromoterOverviewList(
-                            controller: _controller,
-                            promoters: visiblePromoters)
-                      ]
-                    ]));
+            return headerWithChildren([
+              const SizedBox(height: 24),
+              if (_viewState == PromotersOverviewViewState.grid) ...[
+                PromoterOverviewGrid(
+                    controller: _controller, promoters: visiblePromoters)
+              ] else ...[
+                PromoterOverviewList(
+                    controller: _controller, promoters: visiblePromoters)
+              ]
+            ]);
           }
+        } else if (state is PromotersObserverSearchNotFound) {
+          return headerWithChildren([
+            const SizedBox(height: 24),
+            const PromoterOverviewNoSearchResultsView(),
+            const SizedBox(height: 24)
+          ]);
         } else if (state is PromotersObserverFailure) {
           return ErrorView(
               title: "Ein Fehler beim Abruf der Daten ist aufgetreten.",
@@ -157,6 +149,26 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
         }
       },
     );
+  }
+
+  Widget headerWithChildren(List<Widget> children) {
+    children.insert(0, header());
+    return CardContainer(
+        maxWidth: 800,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start, children: children));
+  }
+
+  Widget header() {
+    return PromoterOverviewHeader(
+        searchController: _searchController,
+        onSearchQueryChanged: onSearchQueryChanged,
+        clearSearch: clearSearch,
+        onViewStateButtonPressed: (viewState) {
+          setState(() {
+            _viewState = viewState;
+          });
+        });
   }
 
   void _onScroll() {
