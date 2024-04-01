@@ -6,8 +6,10 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/promoter_overview_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_grid.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_list.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_no_search_results_view.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_empty_page.dart';
@@ -30,18 +32,22 @@ class PromotersOverviewPage extends StatefulWidget {
 
 class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   PromotersOverviewViewState _viewState = PromotersOverviewViewState.grid;
+  PromoterOverviewFilter filter = PromoterOverviewFilter();
   final ScrollController _controller = ScrollController();
   final TextEditingController _searchController = TextEditingController();
+  late PromoterOverviewFilterStates _filterStates;
   int lastIndexLoaded = 0;
   List<Promoter> allPromoters = [];
   List<Promoter> visiblePromoters = [];
   List<Promoter> searchResults = [];
+  List<Promoter> unfilteredData = [];
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
     _controller.addListener(_onScroll);
+    _filterStates = PromoterOverviewFilterStates();
   }
 
   @override
@@ -50,21 +56,29 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
     super.dispose();
   }
 
+  void onFilterChanged(PromoterOverviewFilterStates filterStates) {
+      setState(() {
+        _filterStates = filterStates;
+        lastIndexLoaded = 0;
+        visiblePromoters = [];
+        if (searchResults.isEmpty) {
+          searchResults = filter.onFilterChanged(filterStates, allPromoters);
+        } else {
+          searchResults = filter.onFilterChanged(filterStates, unfilteredData);
+        }
+      });
+      BlocProvider.of<PromoterObserverCubit>(context).searchForPromoter(searchResults, 0);
+  }
+
   void onSearchQueryChanged(String? query) {
     if (query != null) {
+      final trimmedQuery = query.trim();
       setState(() {
         lastIndexLoaded = 0;
         visiblePromoters = [];
-        searchResults = allPromoters.where((element) {
-          if (element.firstName != null && element.lastName != null) {
-            return element.firstName!
-                    .toLowerCase()
-                    .contains(query.toLowerCase()) ||
-                element.lastName!.toLowerCase().contains(query.toLowerCase());
-          } else {
-            return false;
-          }
-        }).toList();
+        searchResults = filter.onSearchQueryChanged(trimmedQuery, allPromoters);
+        unfilteredData = searchResults;
+        searchResults = filter.onFilterChanged(_filterStates, searchResults);
       });
     }
     BlocProvider.of<PromoterObserverCubit>(context)
@@ -75,6 +89,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
     setState(() {
       visiblePromoters = [];
       searchResults = [];
+      unfilteredData = [];
       _searchController.clear();
     });
     BlocProvider.of<PromoterObserverCubit>(context)
@@ -88,6 +103,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
       listener: (context, state) {
         if (state is PromotersObserverSuccess) {
           allPromoters = state.promoters;
+          unfilteredData = allPromoters;
           BlocProvider.of<PromoterObserverCubit>(context)
               .getPromoters(allPromoters, lastIndexLoaded);
         } else if (state is PromotersObserverGetElementsSuccess) {
@@ -100,15 +116,6 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
               _isLoading = false;
             });
           }
-        } else if (state is PromotersObserverSearchSuccess) {
-          if (state.promoters.isEmpty) {
-            lastIndexLoaded = visiblePromoters.length;
-          }
-          setState(() {
-            visiblePromoters = state.promoters;
-            lastIndexLoaded = visiblePromoters.length;
-            _isLoading = false;
-          });
         }
       },
       builder: (context, state) {
@@ -164,6 +171,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
         searchController: _searchController,
         onSearchQueryChanged: onSearchQueryChanged,
         clearSearch: clearSearch,
+        onFilterChanged: onFilterChanged,
         onViewStateButtonPressed: (viewState) {
           setState(() {
             _viewState = viewState;

@@ -1,29 +1,73 @@
-abstract class AuthFailure {}
+import 'package:equatable/equatable.dart';
 
-class ServerFailure extends AuthFailure {}
+abstract class AuthFailure extends Equatable {}
 
-class EmailAlreadyInUseFailure extends AuthFailure {}
+class ServerFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class InvalidEmailFailure extends AuthFailure {}
+class EmailAlreadyInUseFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class WeakPasswordFailure extends AuthFailure {}
+class InvalidEmailFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class UserDisabledFailure extends AuthFailure {}
+class WeakPasswordFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class UserNotFoundFailure extends AuthFailure {}
+class UserDisabledFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class WrongPasswordFailure extends AuthFailure {}
+class UserNotFoundFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class InvalidCredentialsFailure extends AuthFailure {}
+class WrongPasswordFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class TooManyRequestsFailure extends AuthFailure {}
+class InvalidCredentialsFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class UserMisMatchFailure extends AuthFailure {}
+class TooManyRequestsFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class InvalidVerificationCodeFailure extends AuthFailure {}
+class UserMisMatchFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class InvalidVerificationIdFailure extends AuthFailure {}
+class InvalidVerificationCodeFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class RequiresRecentLoginFailure extends AuthFailure {}
+class InvalidVerificationIdFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class MissingPasswordFailure extends AuthFailure {}
+class RequiresRecentLoginFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
+
+class MissingPasswordFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
