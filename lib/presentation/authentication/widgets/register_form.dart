@@ -4,10 +4,10 @@ import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart'
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -131,13 +131,13 @@ class _RegisterFormState extends State<RegisterForm> {
               BlocProvider.of<UserCubit>(context).createUser(CustomUser(
                   id: UniqueID.fromUniqueString(state.creds.user!.uid),
                   gender: selectedGender,
-                  firstName: firstNameTextController.text,
-                  lastName: lastNameTextController.text,
-                  birthDate: birthDateTextController.text,
-                  address: streetAndNumberTextController.text,
-                  postCode: plzTextController.text,
-                  place: placeTextController.text,
-                  email: emailTextController.text));
+                  firstName: firstNameTextController.text.trim(),
+                  lastName: lastNameTextController.text.trim(),
+                  birthDate: birthDateTextController.text.trim(),
+                  address: streetAndNumberTextController.text.trim(),
+                  postCode: plzTextController.text.trim(),
+                  place: placeTextController.text.trim(),
+                  email: emailTextController.text.trim()));
             } else if (state is SignInCheckCodeFailureState) {
               errorMessage = DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization);
@@ -148,8 +148,8 @@ class _RegisterFormState extends State<RegisterForm> {
               showError = true;
             } else if (state is SignInCheckCodeSuccessState) {
               BlocProvider.of<SignInCubit>(context)
-                  .registerWithEmailAndPassword(
-                      emailTextController.text, passwordTextController.text);
+                  .registerWithEmailAndPassword(emailTextController.text.trim(),
+                      passwordTextController.text);
             }
           }),
           BlocListener<UserCubit, UserState>(listener: (context, state) {

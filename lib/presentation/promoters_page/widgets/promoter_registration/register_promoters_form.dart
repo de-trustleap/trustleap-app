@@ -87,10 +87,10 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
             UnregisteredPromoter(
                 id: UniqueID(),
                 gender: selectedGender,
-                firstName: firstNameTextController.text,
-                lastName: lastNameTextController.text,
-                birthDate: birthDateTextController.text,
-                email: emailTextController.text,
+                firstName: firstNameTextController.text.trim(),
+                lastName: lastNameTextController.text.trim(),
+                birthDate: birthDateTextController.text.trim(),
+                email: emailTextController.text.trim(),
                 parentUserID: UniqueID.fromUniqueString(currentUser?.uid ?? ""),
                 code: UniqueID()));
       }

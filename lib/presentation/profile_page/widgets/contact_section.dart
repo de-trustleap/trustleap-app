@@ -1,9 +1,9 @@
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
@@ -88,11 +88,11 @@ class _ContactSectionState extends State<ContactSection> {
       });
       BlocProvider.of<ProfileCubit>(context).updateProfile(widget.user.copyWith(
           gender: selectedGender,
-          firstName: firstNameTextController.text,
-          lastName: lastNameTextController.text,
-          address: streetTextController.text,
-          postCode: postcodeTextController.text,
-          place: placeTextController.text));
+          firstName: firstNameTextController.text.trim(),
+          lastName: lastNameTextController.text.trim(),
+          address: streetTextController.text.trim(),
+          postCode: postcodeTextController.text.trim(),
+          place: placeTextController.text.trim()));
     } else {
       validationHasError = true;
       setState(() {

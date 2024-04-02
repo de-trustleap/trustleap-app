@@ -40,6 +40,8 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   List<Promoter> allPromoters = [];
   List<Promoter> visiblePromoters = [];
   List<Promoter> searchResults = [];
+  // unfilteredData is used to save the search results without applied filter.
+  // This is neeeded to make it possible to not apply new filters on an already filtered array.
   List<Promoter> unfilteredData = [];
   bool _isLoading = false;
 
@@ -97,17 +99,22 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
         .getPromoters(allPromoters, 0);
   }
 
+  void resetPromoters(List<Promoter> promoters) {
+    allPromoters = promoters;
+    unfilteredData = allPromoters;
+    visiblePromoters = [];
+    searchResults = [];
+    lastIndexLoaded = 0;
+    _searchController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     return BlocConsumer<PromoterObserverCubit, PromoterObserverState>(
       listener: (context, state) {
         if (state is PromotersObserverSuccess) {
-          allPromoters = state.promoters;
-          unfilteredData = allPromoters;
-          visiblePromoters = [];
-          searchResults = [];
-          lastIndexLoaded = 0;
+          resetPromoters(state.promoters);
           BlocProvider.of<PromoterObserverCubit>(context)
               .getPromoters(allPromoters, lastIndexLoaded);
         } else if (state is PromotersObserverGetElementsSuccess) {

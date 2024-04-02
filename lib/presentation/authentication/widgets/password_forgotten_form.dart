@@ -45,7 +45,7 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
       BlocProvider.of<AuthCubit>(context)
-          .resetPassword(emailTextController.text);
+          .resetPassword(emailTextController.text.trim());
     } else {
       validationHasError = true;
       BlocProvider.of<AuthCubit>(context).resetPassword(null);

@@ -104,7 +104,7 @@ class _EmailSectionState extends State<EmailSection> {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
       BlocProvider.of<ProfileCubit>(context)
-          .updateEmail(emailTextController.text);
+          .updateEmail(emailTextController.text.trim());
     }
   }
 
