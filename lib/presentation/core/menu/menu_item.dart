@@ -32,29 +32,29 @@ class _MenuItemState extends State<MenuItem> {
         itemIsHovered = isHovering;
       });
 
+  String getLocalizedMenuItem(AppLocalizations localization) {
+    switch (widget.type) {
+      case MenuItems.profile:
+        return localization.menuitems_profile;
+      case MenuItems.dashboard:
+        return localization.menuitems_dashboard;
+      case MenuItems.recommendations:
+        return localization.menuitems_recommendations;
+      case MenuItems.promoters:
+        return localization.menuitems_promoters;
+      case MenuItems.landingpage:
+        return localization.menuitems_landingpage;
+      case MenuItems.activities:
+        return localization.menuitems_activities;
+      case MenuItems.none:
+        return "";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-
-    String getLocalizedMenuItem() {
-      switch (widget.type) {
-        case MenuItems.profile:
-          return localization.menuitems_profile;
-        case MenuItems.dashboard:
-          return localization.menuitems_dashboard;
-        case MenuItems.recommendations:
-          return localization.menuitems_recommendations;
-        case MenuItems.promoters:
-          return localization.menuitems_promoters;
-        case MenuItems.landingpage:
-          return localization.menuitems_landingpage;
-        case MenuItems.activities:
-          return localization.menuitems_activities;
-        case MenuItems.none:
-          return "";
-      }
-    }
 
     return LayoutBuilder(builder: (context, constraints) {
       final hoveredTransform = Matrix4.identity()..scale(1.1);
@@ -104,7 +104,7 @@ class _MenuItemState extends State<MenuItem> {
                                 ? themeData.colorScheme.background
                                 : themeData.iconTheme.color),
                         const SizedBox(width: 12),
-                        Text(getLocalizedMenuItem(),
+                        Text(getLocalizedMenuItem(localization),
                             style: widget.isURLMatching
                                 ? themeData.textTheme.headlineLarge!.copyWith(
                                     color: themeData.colorScheme.background)
