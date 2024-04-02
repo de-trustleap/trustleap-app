@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
@@ -83,9 +83,9 @@ class PromotersOverviewGridTile extends StatelessWidget {
                         ? PromoterRegistrationState.registered
                         : PromoterRegistrationState.unregistered)
               ],
-              if (getPromoterDateText(context) != null) ...[
+              if (PromoterHelper().getPromoterDateText(context, promoter) != null) ...[
                 const SizedBox(height: 8),
-                Text(getPromoterDateText(context)!,
+                Text(PromoterHelper().getPromoterDateText(context, promoter)!,
                     style: themeData.textTheme.headlineLarge!.copyWith(
                         fontSize: 12,
                         color:
@@ -95,20 +95,6 @@ class PromotersOverviewGridTile extends StatelessWidget {
             ]),
       ),
     );
-  }
-
-  String? getPromoterDateText(BuildContext context) {
-    if (promoter.expiresAt != null && promoter.registered == false) {
-      final date =
-          DateTimeFormatter().getStringFromDate(context, promoter.expiresAt!);
-      return "Läuft am $date ab";
-    } else if (promoter.createdAt != null && promoter.registered == true) {
-      final date =
-          DateTimeFormatter().getStringFromDate(context, promoter.createdAt!);
-      return "Mitglied seit $date";
-    } else {
-      return null;
-    }
   }
 
   Widget placeHolderImage(ResponsiveBreakpointsData responsiveValue) {

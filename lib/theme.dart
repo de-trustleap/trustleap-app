@@ -213,6 +213,30 @@ class AppTheme {
       textStyle: MaterialStatePropertyAll(
           _darkHeadlineLargeText.copyWith(fontSize: 14)));
 
+  static final RadioThemeData _lightRadioTheme = RadioThemeData(
+    fillColor: MaterialStateProperty.resolveWith((states) {
+      if (states.contains(MaterialState.selected)) {
+        return _lightSecondaryColor;
+      } else {
+        return _lightTextColor.withOpacity(0.7);
+      }
+    }),
+    splashRadius: 0,
+    overlayColor:const MaterialStatePropertyAll(_lightPrimaryColor)
+  );
+
+    static final RadioThemeData _darkRadioTheme = RadioThemeData(
+    fillColor: MaterialStateProperty.resolveWith((states) {
+      if (states.contains(MaterialState.selected)) {
+        return _darkSecondaryColor;
+      } else {
+        return _darkTextColor.withOpacity(0.7);
+      }
+    }),
+    splashRadius: 0,
+    overlayColor:const MaterialStatePropertyAll(_darkPrimaryColor)
+  );
+
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
           primary: _lightPrimaryColor,
@@ -231,7 +255,8 @@ class AppTheme {
       tabBarTheme: _lightTabbarTheme,
       dropdownMenuTheme: _lightDropDownMenuTheme,
       segmentedButtonTheme: _lightSegmentedButtonTheme,
-      searchBarTheme: _lightSearchBarTheme);
+      searchBarTheme: _lightSearchBarTheme,
+      radioTheme: _lightRadioTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -251,5 +276,6 @@ class AppTheme {
       tabBarTheme: _darkTabbarTheme,
       dropdownMenuTheme: _darkDropDownMenuTheme,
       segmentedButtonTheme: _darkSegmentedButtonTheme,
-      searchBarTheme: _darkSearchBarTheme);
+      searchBarTheme: _darkSearchBarTheme,
+      radioTheme: _darkRadioTheme);
 }

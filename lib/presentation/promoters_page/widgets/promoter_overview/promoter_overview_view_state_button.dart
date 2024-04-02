@@ -29,6 +29,7 @@ class _PromoterOverviewViewStateButtonState
               value: PromotersOverviewViewState.list,
               icon: Icon(Icons.format_list_bulleted))
         ],
+        showSelectedIcon: false,
         selected: selected,
         onSelectionChanged: (Set<PromotersOverviewViewState> newSelectedValue) {
           setState(() {

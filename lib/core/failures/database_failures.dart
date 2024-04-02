@@ -1,15 +1,38 @@
-abstract class DatabaseFailure {}
+import 'package:equatable/equatable.dart';
 
-class BackendFailure extends DatabaseFailure {}
+abstract class DatabaseFailure extends Equatable {}
 
-class PermissionDeniedFailure extends DatabaseFailure {}
+class BackendFailure extends DatabaseFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class NotFoundFailure extends DatabaseFailure {}
+class PermissionDeniedFailure extends DatabaseFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class AlreadyExistsFailure extends DatabaseFailure {}
+class NotFoundFailure extends DatabaseFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class DeadlineExceededFailure extends DatabaseFailure {}
+class AlreadyExistsFailure extends DatabaseFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class CancelledFailure extends DatabaseFailure {}
+class DeadlineExceededFailure extends DatabaseFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class UnavailableFailure extends DatabaseFailure {}
+class CancelledFailure extends DatabaseFailure {
+  @override
+  List<Object?> get props => [];
+}
+
+class UnavailableFailure extends DatabaseFailure {
+  @override
+  List<Object?> get props => [];
+}
