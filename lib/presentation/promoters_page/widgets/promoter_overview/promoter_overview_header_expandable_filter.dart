@@ -120,7 +120,8 @@ class _PromoterOverviewHeaderExpandableFilterState
                         label: "E-Mail Adresse")
                   ],
                   onSelected: (sortBy) {
-                    filterStates.sortByFilterState = sortBy ?? PromoterSortByFilterState.createdAt;
+                    filterStates.sortByFilterState =
+                        sortBy ?? PromoterSortByFilterState.createdAt;
                     widget.onFilterChanged(filterStates);
                   }),
               RadioListTile(
