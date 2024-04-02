@@ -57,17 +57,18 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   }
 
   void onFilterChanged(PromoterOverviewFilterStates filterStates) {
-      setState(() {
-        _filterStates = filterStates;
-        lastIndexLoaded = 0;
-        visiblePromoters = [];
-        if (searchResults.isEmpty) {
-          searchResults = filter.onFilterChanged(filterStates, allPromoters);
-        } else {
-          searchResults = filter.onFilterChanged(filterStates, unfilteredData);
-        }
-      });
-      BlocProvider.of<PromoterObserverCubit>(context).searchForPromoter(searchResults, 0);
+    setState(() {
+      _filterStates = filterStates;
+      lastIndexLoaded = 0;
+      visiblePromoters = [];
+      if (searchResults.isEmpty) {
+        searchResults = filter.onFilterChanged(filterStates, allPromoters);
+      } else {
+        searchResults = filter.onFilterChanged(filterStates, unfilteredData);
+      }
+    });
+    BlocProvider.of<PromoterObserverCubit>(context)
+        .searchForPromoter(searchResults, 0);
   }
 
   void onSearchQueryChanged(String? query) {
@@ -104,6 +105,9 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
         if (state is PromotersObserverSuccess) {
           allPromoters = state.promoters;
           unfilteredData = allPromoters;
+          visiblePromoters = [];
+          searchResults = [];
+          lastIndexLoaded = 0;
           BlocProvider.of<PromoterObserverCubit>(context)
               .getPromoters(allPromoters, lastIndexLoaded);
         } else if (state is PromotersObserverGetElementsSuccess) {

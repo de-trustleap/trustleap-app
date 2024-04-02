@@ -25,8 +25,13 @@ class UnregisteredPromoter extends Equatable {
       this.code,
       DateTime? expiresAt})
       : expiresAt = expiresAt ??
-            DateTime(DateTime.now().year, DateTime.now().month,
-                DateTime.now().day + 30);
+            DateTime(
+                DateTime.now().year,
+                DateTime.now().month,
+                DateTime.now().day + 30,
+                DateTime.now().hour,
+                DateTime.now().minute,
+                DateTime.now().second);
 
   @override
   List<Object?> get props =>
