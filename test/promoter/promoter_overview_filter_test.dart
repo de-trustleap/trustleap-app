@@ -29,6 +29,7 @@ void main() {
           id: UniqueID.fromUniqueString("2"),
           gender: Gender.female,
           firstName: "Test2",
+          lastName: "Tester",
           birthDate: "23.12.2023",
           email: "tester2@test.de",
           thumbnailDownloadURL: "https://test2.de",
@@ -228,6 +229,95 @@ void main() {
       ];
       // When
       final result = sut.onFilterChanged(filter, searchResults);
+      // Then
+      expect(expectedResult, result);
+    });
+  });
+
+  group("PromoterOverviewFilter_OnSearchQueryChanged", () {
+    final date = DateTime.now();
+    final List<Promoter> allPromoters = [
+      Promoter(
+          id: UniqueID.fromUniqueString("1"),
+          gender: Gender.male,
+          firstName: "Test",
+          birthDate: "23.12.2023",
+          email: "tester@test.de",
+          thumbnailDownloadURL: "https://test.de",
+          registered: false,
+          expiresAt: date,
+          createdAt: null),
+      Promoter(
+          id: UniqueID.fromUniqueString("2"),
+          gender: Gender.female,
+          firstName: "Test2",
+          lastName: "Tester",
+          birthDate: "23.12.2023",
+          email: "tester2@test.de",
+          thumbnailDownloadURL: "https://test2.de",
+          registered: true,
+          createdAt: date),
+      Promoter(
+          id: UniqueID.fromUniqueString("3"),
+          gender: Gender.male,
+          firstName: "Test3",
+          birthDate: "23.12.2023",
+          email: "tester3@test.de",
+          thumbnailDownloadURL: "https://test3.de",
+          registered: true,
+          createdAt: date)
+    ];
+    test("should return promoter with firstName = Test2 when query is Test2",
+        () {
+      // Given
+      const query = "Test2";
+      final List<Promoter> expectedResult = [
+        Promoter(
+            id: UniqueID.fromUniqueString("2"),
+            gender: Gender.female,
+            firstName: "Test2",
+            lastName: "Tester",
+            birthDate: "23.12.2023",
+            email: "tester2@test.de",
+            thumbnailDownloadURL: "https://test2.de",
+            registered: true,
+            createdAt: date)
+      ];
+      // When
+      final result = sut.onSearchQueryChanged(query, allPromoters);
+      // Then
+      expect(expectedResult, result);
+    });
+
+    test("should ignore element when lastName is null", () {
+      // Given
+      const query = "Test3";
+      final List<Promoter> expectedResult = [];
+      // When
+      final result = sut.onSearchQueryChanged(query, allPromoters);
+      // Then
+      expect(expectedResult, result);
+    });
+
+    test(
+        "should return only the element where lastName is set when query is Test",
+        () {
+      // Given
+      const query = "Test";
+      final List<Promoter> expectedResult = [
+        Promoter(
+            id: UniqueID.fromUniqueString("2"),
+            gender: Gender.female,
+            firstName: "Test2",
+            lastName: "Tester",
+            birthDate: "23.12.2023",
+            email: "tester2@test.de",
+            thumbnailDownloadURL: "https://test2.de",
+            registered: true,
+            createdAt: date)
+      ];
+      // When
+      final result = sut.onSearchQueryChanged(query, allPromoters);
       // Then
       expect(expectedResult, result);
     });
