@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';

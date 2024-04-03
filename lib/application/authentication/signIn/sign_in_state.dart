@@ -3,37 +3,61 @@ part of 'sign_in_cubit.dart';
 
 sealed class SignInState {}
 
-final class SignInInitial extends SignInState {}
+final class SignInInitial extends SignInState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
 
-class SignInShowValidationState extends SignInState {}
+class SignInShowValidationState extends SignInState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
 
-class SignInLoadingState extends SignInState {}
+class SignInLoadingState extends SignInState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
 
-class SignInFailureState extends SignInState {
+class SignInFailureState extends SignInState with EquatableMixin {
   final AuthFailure failure;
 
   SignInFailureState({
     required this.failure,
   });
+
+  @override
+  List<Object?> get props => [failure];
 }
 
-class SignInSuccessState extends SignInState {
+class SignInSuccessState extends SignInState with EquatableMixin {
   final UserCredential creds;
 
   SignInSuccessState({
     required this.creds,
   });
+
+  @override
+  List<Object?> get props => [creds];
 }
 
-class SignInCheckCodeFailureState extends SignInState {
+class SignInCheckCodeFailureState extends SignInState with EquatableMixin {
   final DatabaseFailure failure;
 
   SignInCheckCodeFailureState({
     required this.failure,
   });
+
+  @override
+  List<Object?> get props => [failure];
 }
 
-class SignInCheckCodeNotValidFailureState extends SignInState {}
+class SignInCheckCodeNotValidFailureState extends SignInState
+    with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
 
-class SignInCheckCodeSuccessState extends SignInState {}
-
+class SignInCheckCodeSuccessState extends SignInState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
