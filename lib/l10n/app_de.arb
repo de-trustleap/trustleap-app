@@ -44,9 +44,17 @@
     "@register_repeat_password": {
         "description": "Das bestätigte Passwort im Registrierungsformular"
     },
+    "register_code": "Registrierungscode",
+    "@register_code": {
+        "description": "Der Registrierungscode im Registrierungsformular"
+    },
     "register_now_buttontitle": "Jetzt Registrieren",
     "@register_now_buttontitle": {
         "description": "Der Button Text für die Registrierung"
+    },
+    "register_invalid_code_error": "Die Registrierung ist fehlgeschlagen. Bitte prüfen Sie ob Sie einen gültigen Code und die zugehörige E-Mail Adresse verwenden.",
+    "@register_invalid_code_error": {
+        "description": "Die Fehlermeldung auf dem Registrierungsformular wenn der Code ungültig ist."
     },
     "login_title": "Willkommen",
     "@login_title": {
@@ -135,6 +143,14 @@
     "auth_validation_invalid_postcode": "Die PLZ ist ungültig",
     "@auth_validation_invalid_postcode": {
         "description": "Validierungsnachricht wenn die PLZ ungültig ist"
+    },
+    "auth_validation_missing_code": "Geben Sie bitte ihren Registrierungscode an",
+    "@auth_validation_missing_code": {
+        "description": "Validierungsnachricht wenn kein Registrierungscode angegeben wurde"
+    },
+    "auth_validation_missing_gender": "Geben Sie bitte ihr Geschlecht an",
+    "@auth_validation_missing_gender": {
+        "description": "Validierungsnachricht wenn kein Geschlecht angegeben wurde"
     },
     "menuitems_profile": "Profil",
     "@menuitems_profile": {
@@ -443,5 +459,53 @@
     "profile_page_promoters_section_recommender_count": "Anzahl der Promoter:",
     "@profile_page_promoters_section_recommender_count": {
         "description": "Anzahl der Promoter im Promoter Bereich auf der Profil Seite."
+    },
+    "gender_picker_choose": "Wählen Sie ihr Geschlecht",
+    "@gender_picker_choose": {
+        "description": "Der Text über dem Geschlechter Dropdown Menü wenn noch kein Geschlecht gewählt wurde."
+    },
+    "gender_picker_not_choosen": "Nicht ausgewählt",
+    "@gender_picker_not_choosen": {
+        "description": "Der Text im Geschlechter Dropdown Menü wenn noch kein Geschlecht gewählt wurde."
+    },
+    "gender_picker_male": "Männlich",
+    "@gender_picker_male": {
+        "description": "Der Text im Geschlechter Dropdown Menü wenn Männlich gewählt wurde"
+    },
+    "gender_picker_female": "Weiblich",
+    "@gender_picker_female": {
+        "description": "Der Text im Geschlechter Dropdown Menü wenn Weiblich gewählt wurde"
+    },
+    "register_promoter_email_already_in_use": "Die E-Mail Adresse existiert bereits bei einem anderen Nutzer.",
+    "@register_promoter_email_already_in_use": {
+        "description": "Der Fehler Text im Promoter Registrierungsformular wenn es bereits einen Promoter mit dieser E-Mail Adresse gibt."
+    },
+    "register_promoter_title": "Promoter registrieren",
+    "@register_promoter_title": {
+        "description": "Der Titel vom Promoter registrieren Formular"
+    },
+    "register_promoter_first_name": "Vorname",
+    "@register_promoter_first_name": {
+        "description": "Der Vorname Platzhalter im Textfeld vom Promoter registrieren Formular"
+    },
+    "register_promoter_last_name": "Nachname",
+    "@register_promoter_last_name": {
+        "description": "Der Nachname Platzhalter im Textfeld vom Promoter registrieren Formular"
+    },
+    "register_promoter_birthdate": "Geburtsdatum",
+    "@register_promoter_birthdate": {
+        "description": "Das Geburtsdatum Platzhalter im Textfeld vom Promoter registrieren Formular"
+    },
+    "register_promoter_email": "E-Mail Adresse",
+    "@register_promoter_email": {
+        "description": "Die E-Mail Adresse Platzhalter im Textfeld vom Promoter registrieren Formular"
+    },
+    "register_promoter_register_button": "Registrieren",
+    "@register_promoter_register_button": {
+        "description": "Der Button Titel um einen neuen Promoter zu registrieren"
+    },
+    "register_promoter_snackbar_success": "Der neue Promoter wurde erfolgreich registriert!",
+    "@register_promoter_snackbar_success": {
+        "description": "Der Titel der Snackbar wenn neuer Promoter registriert wurde"
     }
 }

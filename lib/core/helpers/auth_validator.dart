@@ -65,7 +65,8 @@ class AuthValidator {
     } else if (!DateTimeFormatter().stringIsValidDate(input)) {
       return localization.auth_validation_invalid_date;
     } else if (DateTimeFormatter().dateIsParsable(input) &&
-        !_isAdult(DateTime.parse(DateTimeFormatter().prepareDateStringForParser(input)))) {
+        !_isAdult(DateTime.parse(
+            DateTimeFormatter().prepareDateStringForParser(input)))) {
       return localization.auth_validation_invalid_birthdate;
     } else {
       return null;
@@ -84,7 +85,7 @@ class AuthValidator {
 
   String? validateGender(Gender? input) {
     if (input == null || input == Gender.none) {
-      return "Geben Sie bitte ihr Geschlecht an";
+      return localization.auth_validation_missing_gender;
     } else {
       return null;
     }
@@ -92,7 +93,7 @@ class AuthValidator {
 
   String? validateCode(String? input) {
     if (input == null || input.isEmpty) {
-      return "Geben Sie bitte ihren Registrierungscode an";
+      return localization.auth_validation_missing_code;
     } else {
       return null;
     }

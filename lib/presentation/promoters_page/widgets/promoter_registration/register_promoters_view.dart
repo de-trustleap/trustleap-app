@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoters_form.dart';
@@ -20,6 +21,8 @@ class _RegisterPromotersViewState extends State<RegisterPromotersView>
     super.build(context);
 
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+
     return Container(
         width: double.infinity,
         decoration: BoxDecoration(color: themeData.colorScheme.background),
@@ -33,7 +36,7 @@ class _RegisterPromotersViewState extends State<RegisterPromotersView>
                 RegisterPromotersForm(
                     changesSaved: () => {
                           CustomSnackBar.of(context).showCustomSnackBar(
-                              "Der neue Promoter wurde erfolgreich registriert!")
+                              localization.register_promoter_snackbar_success)
                         })
               ])),
         ]));

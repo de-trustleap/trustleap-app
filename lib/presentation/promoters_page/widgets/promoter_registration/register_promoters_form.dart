@@ -118,8 +118,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
           showError = true;
           setButtonToDisabled(false);
         } else if (state is PromoterAlreadyExistsFailureState) {
-          errorMessage =
-              "Die E-Mail Adresse existiert bereits bei einem anderen Nutzer.";
+          errorMessage = localization.register_promoter_email_already_in_use;
           showError = true;
           setButtonToDisabled(false);
         } else if (state is PromoterRegisteredSuccessState) {
@@ -146,7 +145,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Promoter registrieren",
+                      Text(localization.register_promoter_title,
                           style: themeData.textTheme.headlineLarge!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: textFieldSpacing + 4),
@@ -185,8 +184,9 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                   },
                                   validator: validator.validateFirstName,
                                   style: themeData.textTheme.titleMedium,
-                                  decoration: const InputDecoration(
-                                      labelText: "Vorname"),
+                                  decoration: InputDecoration(
+                                      labelText: localization
+                                          .register_promoter_first_name),
                                 ),
                               ),
                             ),
@@ -207,8 +207,9 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                   },
                                   validator: validator.validateLastName,
                                   style: themeData.textTheme.titleMedium,
-                                  decoration: const InputDecoration(
-                                      labelText: "Nachname"),
+                                  decoration: InputDecoration(
+                                      labelText: localization
+                                          .register_promoter_last_name),
                                 ),
                               ),
                             )
@@ -231,8 +232,8 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                   decoration: InputDecoration(
                                       prefixIcon: const Icon(
                                           Icons.calendar_today_rounded),
-                                      labelText:
-                                          localization.register_birthdate),
+                                      labelText: localization
+                                          .register_promoter_birthdate),
                                   onTap: () async {
                                     DateTime? pickedDate = await showDatePicker(
                                         context: context,
@@ -265,7 +266,8 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                 validator: validator.validateEmail,
                                 style: themeData.textTheme.titleMedium,
                                 decoration: InputDecoration(
-                                    labelText: localization.register_email),
+                                    labelText:
+                                        localization.register_promoter_email),
                               ),
                             ),
                           ]),
@@ -275,7 +277,8 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           PrimaryButton(
-                              title: "Registrieren",
+                              title: localization
+                                  .register_promoter_register_button,
                               width: maxWidth / 2 - textFieldSpacing,
                               disabled: buttonDisabled,
                               onTap: () {

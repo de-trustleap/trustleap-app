@@ -143,8 +143,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   state.failure, localization);
               showError = true;
             } else if (state is SignInCheckCodeNotValidFailureState) {
-              errorMessage =
-                  "Die Registrierung ist fehlgeschlagen. Bitte prüfen Sie ob Sie einen gültigen Code und die zugehörige E-Mail Adresse verwenden.";
+              errorMessage = localization.register_invalid_code_error;
               showError = true;
             } else if (state is SignInCheckCodeSuccessState) {
               BlocProvider.of<SignInCubit>(context)
@@ -400,8 +399,8 @@ class _RegisterFormState extends State<RegisterForm> {
                           },
                           validator: validator.validateCode,
                           style: themeData.textTheme.titleMedium,
-                          decoration: const InputDecoration(
-                              labelText: "Registrierungscode"),
+                          decoration: InputDecoration(
+                              labelText: localization.register_code),
                         ),
                       ),
                     ]),

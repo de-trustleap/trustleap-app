@@ -159,11 +159,23 @@ abstract class AppLocalizations {
   /// **'confirm password'**
   String get register_repeat_password;
 
+  /// The registration code in the register form
+  ///
+  /// In en, this message translates to:
+  /// **'Registration code'**
+  String get register_code;
+
   /// The button text for the registration
   ///
   /// In en, this message translates to:
   /// **'Rgister now'**
   String get register_now_buttontitle;
+
+  /// The error message on the registration form if the code is invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration failed. Please check whether you are using a valid code and the associated email address.'**
+  String get register_invalid_code_error;
 
   /// The title of the login page
   ///
@@ -296,6 +308,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'the postcode is invalid'**
   String get auth_validation_invalid_postcode;
+
+  /// validationmessage when registration code is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your registration code'**
+  String get auth_validation_missing_code;
+
+  /// validationmessage when gender is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Please indicate your gender'**
+  String get auth_validation_missing_gender;
 
   /// the menu entry for the profile
   ///
@@ -758,6 +782,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Number of promoters:'**
   String get profile_page_promoters_section_recommender_count;
+
+  /// The text above the gender dropdown menu if no gender has yet been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your gender'**
+  String get gender_picker_choose;
+
+  /// The text in the gender dropdown menu if no gender has yet been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Not choosen'**
+  String get gender_picker_not_choosen;
+
+  /// The text in the gender dropdown menu if male has been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get gender_picker_male;
+
+  /// The text in the gender dropdown menu if female has been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get gender_picker_female;
+
+  /// The error text in the promoter registration form if there is already a promoter with this email address.
+  ///
+  /// In en, this message translates to:
+  /// **'The email address already exists for another user.'**
+  String get register_promoter_email_already_in_use;
+
+  /// The title of the promoter registration form.
+  ///
+  /// In en, this message translates to:
+  /// **'Register promoter'**
+  String get register_promoter_title;
+
+  /// The first name placeholder in the text field of the promoter register form
+  ///
+  /// In en, this message translates to:
+  /// **'firstname'**
+  String get register_promoter_first_name;
+
+  /// The last name placeholder in the text field of the promoter register form
+  ///
+  /// In en, this message translates to:
+  /// **'lastname'**
+  String get register_promoter_last_name;
+
+  /// The birthdate placeholder in the text field of the promoter register form
+  ///
+  /// In en, this message translates to:
+  /// **'birthdate'**
+  String get register_promoter_birthdate;
+
+  /// The email placeholder in the text field of the promoter register form
+  ///
+  /// In en, this message translates to:
+  /// **'email address'**
+  String get register_promoter_email;
+
+  /// The button title to register a new promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register_promoter_register_button;
+
+  /// The title of the snack bar when a new promoter is registered
+  ///
+  /// In en, this message translates to:
+  /// **'The new promoter has been successfully registered!'**
+  String get register_promoter_snackbar_success;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

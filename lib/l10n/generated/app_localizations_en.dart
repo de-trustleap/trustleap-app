@@ -38,7 +38,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_repeat_password => 'confirm password';
 
   @override
+  String get register_code => 'Registration code';
+
+  @override
   String get register_now_buttontitle => 'Rgister now';
+
+  @override
+  String get register_invalid_code_error => 'Registration failed. Please check whether you are using a valid code and the associated email address.';
 
   @override
   String get login_title => 'Welcome';
@@ -105,6 +111,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get auth_validation_invalid_postcode => 'the postcode is invalid';
+
+  @override
+  String get auth_validation_missing_code => 'Please enter your registration code';
+
+  @override
+  String get auth_validation_missing_gender => 'Please indicate your gender';
 
   @override
   String get menuitems_profile => 'Profile';
@@ -336,4 +348,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_page_promoters_section_recommender_count => 'Number of promoters:';
+
+  @override
+  String get gender_picker_choose => 'Choose your gender';
+
+  @override
+  String get gender_picker_not_choosen => 'Not choosen';
+
+  @override
+  String get gender_picker_male => 'Male';
+
+  @override
+  String get gender_picker_female => 'Female';
+
+  @override
+  String get register_promoter_email_already_in_use => 'The email address already exists for another user.';
+
+  @override
+  String get register_promoter_title => 'Register promoter';
+
+  @override
+  String get register_promoter_first_name => 'firstname';
+
+  @override
+  String get register_promoter_last_name => 'lastname';
+
+  @override
+  String get register_promoter_birthdate => 'birthdate';
+
+  @override
+  String get register_promoter_email => 'email address';
+
+  @override
+  String get register_promoter_register_button => 'Register';
+
+  @override
+  String get register_promoter_snackbar_success => 'The new promoter has been successfully registered!';
 }

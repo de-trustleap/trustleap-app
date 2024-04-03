@@ -38,7 +38,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get register_repeat_password => 'Passwort bestätigen';
 
   @override
+  String get register_code => 'Registrierungscode';
+
+  @override
   String get register_now_buttontitle => 'Jetzt Registrieren';
+
+  @override
+  String get register_invalid_code_error => 'Die Registrierung ist fehlgeschlagen. Bitte prüfen Sie ob Sie einen gültigen Code und die zugehörige E-Mail Adresse verwenden.';
 
   @override
   String get login_title => 'Willkommen';
@@ -105,6 +111,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get auth_validation_invalid_postcode => 'Die PLZ ist ungültig';
+
+  @override
+  String get auth_validation_missing_code => 'Geben Sie bitte ihren Registrierungscode an';
+
+  @override
+  String get auth_validation_missing_gender => 'Geben Sie bitte ihr Geschlecht an';
 
   @override
   String get menuitems_profile => 'Profil';
@@ -336,4 +348,40 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get profile_page_promoters_section_recommender_count => 'Anzahl der Promoter:';
+
+  @override
+  String get gender_picker_choose => 'Wählen Sie ihr Geschlecht';
+
+  @override
+  String get gender_picker_not_choosen => 'Nicht ausgewählt';
+
+  @override
+  String get gender_picker_male => 'Männlich';
+
+  @override
+  String get gender_picker_female => 'Weiblich';
+
+  @override
+  String get register_promoter_email_already_in_use => 'Die E-Mail Adresse existiert bereits bei einem anderen Nutzer.';
+
+  @override
+  String get register_promoter_title => 'Promoter registrieren';
+
+  @override
+  String get register_promoter_first_name => 'Vorname';
+
+  @override
+  String get register_promoter_last_name => 'Nachname';
+
+  @override
+  String get register_promoter_birthdate => 'Geburtsdatum';
+
+  @override
+  String get register_promoter_email => 'E-Mail Adresse';
+
+  @override
+  String get register_promoter_register_button => 'Registrieren';
+
+  @override
+  String get register_promoter_snackbar_success => 'Der neue Promoter wurde erfolgreich registriert!';
 }

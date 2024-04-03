@@ -44,9 +44,17 @@
     "@register_repeat_password": {
         "description": "The confirmed password in the register form"
     },
+    "register_code": "Registration code",
+    "@register_code": {
+        "description": "The registration code in the register form"
+    },
     "register_now_buttontitle": "Rgister now",
     "@register_now_buttontitle": {
         "description": "The button text for the registration"
+    },
+    "register_invalid_code_error": "Registration failed. Please check whether you are using a valid code and the associated email address.",
+    "@register_invalid_code_error": {
+        "description": "The error message on the registration form if the code is invalid."
     },
     "login_title": "Welcome",
     "@login_title": {
@@ -135,6 +143,14 @@
     "auth_validation_invalid_postcode": "the postcode is invalid",
     "@auth_validation_invalid_postcode": {
         "description": "validationmessage when postcode is invalid"
+    },
+    "auth_validation_missing_code": "Please enter your registration code",
+    "@auth_validation_missing_code": {
+        "description": "validationmessage when registration code is missing"
+    },
+    "auth_validation_missing_gender": "Please indicate your gender",
+    "@auth_validation_missing_gender": {
+        "description": "validationmessage when gender is missing"
     },
     "menuitems_profile": "Profile",
     "@menuitems_profile": {
@@ -443,5 +459,53 @@
     "profile_page_promoters_section_recommender_count": "Number of promoters:",
     "@profile_page_promoters_section_recommender_count": {
         "description": "Number of promoters in the promoter area on the profile page."
+    },
+    "gender_picker_choose": "Choose your gender",
+    "@gender_picker_choose": {
+        "description": "The text above the gender dropdown menu if no gender has yet been selected."
+    },
+    "gender_picker_not_choosen": "Not choosen",
+    "@gender_picker_not_choosen": {
+        "description": "The text in the gender dropdown menu if no gender has yet been selected."
+    },
+    "gender_picker_male": "Male",
+    "@gender_picker_male": {
+        "description": "The text in the gender dropdown menu if male has been selected."
+    },
+    "gender_picker_female": "Female",
+    "@gender_picker_female": {
+        "description": "The text in the gender dropdown menu if female has been selected."
+    },
+    "register_promoter_email_already_in_use": "The email address already exists for another user.",
+    "@register_promoter_email_already_in_use": {
+        "description": "The error text in the promoter registration form if there is already a promoter with this email address."
+    },
+    "register_promoter_title": "Register promoter",
+    "@register_promoter_title": {
+        "description": "The title of the promoter registration form."
+    },
+    "register_promoter_first_name": "firstname",
+    "@register_promoter_first_name": {
+        "description": "The first name placeholder in the text field of the promoter register form"
+    },
+    "register_promoter_last_name": "lastname",
+    "@register_promoter_last_name": {
+        "description": "The last name placeholder in the text field of the promoter register form"
+    },
+    "register_promoter_birthdate": "birthdate",
+    "@register_promoter_birthdate": {
+        "description": "The birthdate placeholder in the text field of the promoter register form"
+    },
+    "register_promoter_email": "email address",
+    "@register_promoter_email": {
+        "description": "The email placeholder in the text field of the promoter register form"
+    },
+    "register_promoter_register_button": "Register",
+    "@register_promoter_register_button": {
+        "description": "The button title to register a new promoter"
+    },
+    "register_promoter_snackbar_success": "The new promoter has been successfully registered!",
+    "@register_promoter_snackbar_success": {
+        "description": "The title of the snack bar when a new promoter is registered"
     }
 }
