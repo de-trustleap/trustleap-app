@@ -63,14 +63,13 @@ class PromotersOverviewGridTile extends StatelessWidget {
               ],
               const SizedBox(height: 4),
               Text("${promoter.firstName ?? ""} ${promoter.lastName ?? ""}",
-                  style:
-                      themeData.textTheme.headlineLarge!.copyWith(fontSize: 14),
+                  style: themeData.textTheme.bodySmall,
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis),
               const SizedBox(height: 4),
               Text(promoter.email ?? "",
-                  style: themeData.textTheme.headlineLarge!.copyWith(
+                  style: themeData.textTheme.bodySmall!.copyWith(
                       fontSize: 12,
                       color:
                           themeData.colorScheme.surfaceTint.withOpacity(0.6)),
@@ -83,10 +82,11 @@ class PromotersOverviewGridTile extends StatelessWidget {
                         ? PromoterRegistrationState.registered
                         : PromoterRegistrationState.unregistered)
               ],
-              if (PromoterHelper().getPromoterDateText(context, promoter) != null) ...[
+              if (PromoterHelper().getPromoterDateText(context, promoter) !=
+                  null) ...[
                 const SizedBox(height: 8),
                 Text(PromoterHelper().getPromoterDateText(context, promoter)!,
-                    style: themeData.textTheme.headlineLarge!.copyWith(
+                    style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
                         color:
                             themeData.colorScheme.surfaceTint.withOpacity(0.6)),

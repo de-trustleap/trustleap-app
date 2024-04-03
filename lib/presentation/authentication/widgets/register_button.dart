@@ -18,12 +18,12 @@ class RegisterButton extends StatelessWidget {
     return Row(
       children: [
         Text(localization.login_register_text,
-            style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+            style: themeData.textTheme.bodyMedium),
         InkWell(
             onTap: () => onTap(),
             child: Text(localization.login_register_linktitle,
-                style: themeData.textTheme.headlineLarge!.copyWith(
-                    fontSize: 16, color: themeData.colorScheme.secondary)))
+                style: themeData.textTheme.bodyMedium!
+                    .copyWith(color: themeData.colorScheme.secondary)))
       ],
     );
   }

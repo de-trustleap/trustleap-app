@@ -17,12 +17,12 @@ class PasswordForgottenButton extends StatelessWidget {
 
     return Row(children: [
       Text(localization.login_password_forgotten_text,
-          style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+          style: themeData.textTheme.bodyMedium),
       InkWell(
           onTap: () => onTap(),
           child: Text(localization.login_password_forgotten_linktext,
-              style: themeData.textTheme.headlineLarge!.copyWith(
-                  fontSize: 16, color: themeData.colorScheme.secondary)))
+              style: themeData.textTheme.bodyMedium!
+                  .copyWith(color: themeData.colorScheme.secondary)))
     ]);
   }
 }

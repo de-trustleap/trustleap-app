@@ -35,19 +35,17 @@ class PromoterOverviewListTile extends StatelessWidget {
                       Expanded(
                           child: Text(
                               "${promoter.firstName ?? ""} ${promoter.lastName ?? ""}",
-                              style: themeData.textTheme.headlineLarge!
-                                  .copyWith(fontSize: 14),
+                              style: themeData.textTheme.bodySmall,
                               textAlign: TextAlign.start,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis)),
                       const SizedBox(width: 8),
                       Expanded(
                           child: Text(promoter.email ?? "",
-                              style: themeData.textTheme.headlineLarge!
-                                  .copyWith(
-                                      fontSize: 12,
-                                      color: themeData.colorScheme.surfaceTint
-                                          .withOpacity(0.6)),
+                              style: themeData.textTheme.bodySmall!.copyWith(
+                                  fontSize: 12,
+                                  color: themeData.colorScheme.surfaceTint
+                                      .withOpacity(0.6)),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis))
                     ]),
@@ -57,23 +55,25 @@ class PromoterOverviewListTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        if (promoter.registered == true) ... [
-                          const PromoterRegistrationBadge(state: PromoterRegistrationState.registered),
+                        if (promoter.registered == true) ...[
+                          const PromoterRegistrationBadge(
+                              state: PromoterRegistrationState.registered),
                           const Spacer(flex: 3)
-                        ]
-                        else ... [
-                          const PromoterRegistrationBadge(state: PromoterRegistrationState.unregistered),
+                        ] else ...[
+                          const PromoterRegistrationBadge(
+                              state: PromoterRegistrationState.unregistered),
                           const Spacer(flex: 10)
                         ],
                         Expanded(
-                          flex: promoter.registered == true ? 4 : 15,
+                            flex: promoter.registered == true ? 4 : 15,
                             child: Text(
-                                PromoterHelper().getPromoterDateText(context, promoter) ?? "",
-                                style: themeData.textTheme.headlineLarge!
-                                    .copyWith(
-                                        fontSize: 12,
-                                        color: themeData.colorScheme.surfaceTint
-                                            .withOpacity(0.6)),
+                                PromoterHelper().getPromoterDateText(
+                                        context, promoter) ??
+                                    "",
+                                style: themeData.textTheme.bodySmall!.copyWith(
+                                    fontSize: 12,
+                                    color: themeData.colorScheme.surfaceTint
+                                        .withOpacity(0.6)),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis))
                       ])

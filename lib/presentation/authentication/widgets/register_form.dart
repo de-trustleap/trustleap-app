@@ -182,10 +182,8 @@ class _RegisterFormState extends State<RegisterForm> {
                       SizedBox(
                         width: getResponsiveWidth(1),
                         child: Text(localization.register_subtitle,
-                            style: themeData.textTheme.headlineLarge!.copyWith(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 4)),
+                            style: themeData.textTheme.bodySmall!.copyWith(
+                                fontWeight: FontWeight.w500, letterSpacing: 4)),
                       ),
                     ]),
                     const SizedBox(height: 80),
@@ -220,6 +218,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   resetError();
                                 },
                                 validator: validator.validateFirstName,
+                                style: themeData.textTheme.titleMedium,
                                 decoration: InputDecoration(
                                     labelText: localization.register_firstname),
                               ),
@@ -238,6 +237,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     resetError();
                                   },
                                   validator: validator.validateLastName,
+                                  style: themeData.textTheme.titleMedium,
                                   decoration: InputDecoration(
                                       labelText:
                                           localization.register_lastname),
@@ -260,6 +260,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               resetError();
                             },
                             validator: validator.validateBirthDate,
+                            style: themeData.textTheme.titleMedium,
                             decoration: InputDecoration(
                                 prefixIcon:
                                     const Icon(Icons.calendar_today_rounded),
@@ -290,6 +291,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           onChanged: (_) {
                             resetError();
                           },
+                          style: themeData.textTheme.titleMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_address),
                         ),
@@ -305,6 +307,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           controller: plzTextController,
                           onFieldSubmitted: (_) => submit(validator),
                           validator: validator.validatePostcode,
+                          style: themeData.textTheme.titleMedium,
                           onChanged: (_) {
                             resetError();
                           },
@@ -322,6 +325,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           onChanged: (_) {
                             resetError();
                           },
+                          style: themeData.textTheme.titleMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_place),
                         ),
@@ -339,6 +343,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             resetError();
                           },
                           validator: validator.validateEmail,
+                          style: themeData.textTheme.titleMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_email),
                         ),
@@ -356,6 +361,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           },
                           validator: validator.validatePassword,
                           obscureText: true,
+                          style: themeData.textTheme.titleMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_password),
                         ),
@@ -376,6 +382,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 val, passwordTextController.text);
                           },
                           obscureText: true,
+                          style: themeData.textTheme.titleMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_repeat_password),
                         ),
@@ -392,6 +399,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             resetError();
                           },
                           validator: validator.validateCode,
+                          style: themeData.textTheme.titleMedium,
                           decoration: const InputDecoration(
                               labelText: "Registrierungscode"),
                         ),

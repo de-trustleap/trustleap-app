@@ -33,7 +33,7 @@ class GenderPicker extends StatelessWidget {
           child: DropdownMenu<Gender>(
               width: width,
               label: Text("Wählen Sie ihr Geschlecht",
-                  style: Theme.of(context).textTheme.headlineLarge),
+                  style: Theme.of(context).textTheme.bodyMedium),
               initialSelection: initialValue ?? Gender.none,
               enableSearch: false,
               requestFocusOnTap: false,

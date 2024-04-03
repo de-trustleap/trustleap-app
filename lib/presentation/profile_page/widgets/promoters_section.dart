@@ -21,15 +21,15 @@ class PromotersSection extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(localization.profile_page_promoters_section_title,
           style: themeData.textTheme.headlineLarge!
-              .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
+              .copyWith(fontWeight: FontWeight.bold)),
       const SizedBox(height: 16),
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(localization.profile_page_promoters_section_recommender_count,
-            style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+            style: themeData.textTheme.bodyMedium),
         const SizedBox(width: 16),
         Text(user.registeredPromoterIDs?.length.toString() ?? "0",
-            style: themeData.textTheme.headlineLarge!
-                .copyWith(fontSize: 16, fontWeight: FontWeight.bold)),
+            style: themeData.textTheme.bodyMedium!
+                .copyWith(fontWeight: FontWeight.bold)),
         const Spacer()
       ])
     ]));

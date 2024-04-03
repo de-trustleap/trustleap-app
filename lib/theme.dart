@@ -20,22 +20,39 @@ class AppTheme {
   static const Color _darkSecondaryColor = Color(0xfff07f5e);
   static const Color _darkErrorColor = Color(0xffFF8D8E);
   static const Color _darkErrorContainerColor = Color(0xff503035);
+  static const String _fontFamily = "Poppins";
 
   static const TextStyle _lightHeadlineLargeText =
-      TextStyle(color: _lightTextColor, fontFamily: "Poppins", fontSize: 16);
+      TextStyle(color: _lightTextColor, fontFamily: _fontFamily, fontSize: 20);
   static const TextStyle _lightBodyLargeText =
-      TextStyle(color: _lightTextColor, fontFamily: "Poppins");
+      TextStyle(color: _lightTextColor, fontFamily: _fontFamily, fontSize: 18);
+  static const TextStyle _lightBodyMediumText =
+      TextStyle(color: _lightTextColor, fontFamily: _fontFamily, fontSize: 16);
+  static const TextStyle _lightBodySmallText =
+      TextStyle(color: _lightTextColor, fontFamily: _fontFamily, fontSize: 14);
 
   static final TextStyle _darkHeadlineLargeText =
       _lightHeadlineLargeText.copyWith(color: _darkTextColor);
   static final TextStyle _darkBodyLargeText =
       _lightBodyLargeText.copyWith(color: _darkTextColor);
+  static final TextStyle _darkBodyMediumText =
+      _lightBodyMediumText.copyWith(color: _darkTextColor);
+  static final TextStyle _darkBodySmallText =
+      _lightBodySmallText.copyWith(color: _darkTextColor);
 
   static const TextTheme _lightTextTheme = TextTheme(
-      headlineLarge: _lightHeadlineLargeText, bodyLarge: _lightBodyLargeText);
+      headlineLarge: _lightHeadlineLargeText,
+      bodyLarge: _lightBodyLargeText,
+      bodyMedium: _lightBodyMediumText,
+      bodySmall: _lightBodySmallText,
+      titleMedium: _lightBodyMediumText);
 
   static final TextTheme _darkTextTheme = TextTheme(
-      headlineLarge: _darkHeadlineLargeText, bodyLarge: _darkBodyLargeText);
+      headlineLarge: _darkHeadlineLargeText,
+      bodyLarge: _darkBodyLargeText,
+      bodyMedium: _darkBodyMediumText,
+      bodySmall: _darkBodySmallText,
+      titleMedium: _darkBodyMediumText);
 
   static const TextSelectionThemeData _lightTextSelectionTheme =
       TextSelectionThemeData(
@@ -55,7 +72,8 @@ class AppTheme {
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _lightErrorColor)),
           floatingLabelStyle: const TextStyle(color: _lightTextColor),
-          labelStyle: const TextStyle(color: _lightTextColor),
+          labelStyle: _lightBodyMediumText,
+          hintStyle: _lightBodyMediumText,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _lightTextColor)),
@@ -76,7 +94,8 @@ class AppTheme {
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _darkErrorColor)),
           floatingLabelStyle: const TextStyle(color: _darkTextColor),
-          labelStyle: const TextStyle(color: _darkTextColor),
+          labelStyle: _darkBodyMediumText,
+          hintStyle: _darkBodyMediumText,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _darkTextColor)),
@@ -119,31 +138,29 @@ class AppTheme {
       indicatorColor: _lightSecondaryColor,
       splashFactory: NoSplash.splashFactory,
       labelColor: _lightTextColor,
-      labelStyle:
-          _lightHeadlineLargeText.copyWith(color: _darkTextColor, fontSize: 14),
+      labelStyle: _lightBodySmallText.copyWith(color: _darkTextColor),
       overlayColor: const MaterialStatePropertyAll(Colors.transparent));
 
   static final TabBarTheme _darkTabbarTheme = TabBarTheme(
       indicatorColor: _darkSecondaryColor,
       splashFactory: NoSplash.splashFactory,
       labelColor: _darkTextColor,
-      labelStyle:
-          _darkHeadlineLargeText.copyWith(color: _darkTextColor, fontSize: 14),
+      labelStyle: _darkBodySmallText.copyWith(color: _darkTextColor),
       overlayColor: const MaterialStatePropertyAll(Colors.transparent));
 
   static const DropdownMenuThemeData _lightDropDownMenuTheme =
       DropdownMenuThemeData(
-          textStyle: _lightBodyLargeText,
+          textStyle: _lightBodyMediumText,
           menuStyle: MenuStyle(
               backgroundColor: MaterialStatePropertyAll(_lightBackgroundColor),
               shadowColor: MaterialStatePropertyAll(_lightBackgroundColor),
               surfaceTintColor: MaterialStatePropertyAll(_lightBackgroundColor),
               visualDensity: VisualDensity.comfortable));
 
-  static const DropdownMenuThemeData _darkDropDownMenuTheme =
+  static final DropdownMenuThemeData _darkDropDownMenuTheme =
       DropdownMenuThemeData(
-          textStyle: _lightBodyLargeText,
-          menuStyle: MenuStyle(
+          textStyle: _darkBodyMediumText,
+          menuStyle: const MenuStyle(
               backgroundColor: MaterialStatePropertyAll(_darkBackgroundColor),
               shadowColor: MaterialStatePropertyAll(_darkBackgroundColor),
               surfaceTintColor: MaterialStatePropertyAll(_darkBackgroundColor),
@@ -195,47 +212,41 @@ class AppTheme {
                   width: 1.0,
                   style: BorderStyle.solid))));
 
-  static final SearchBarThemeData _lightSearchBarTheme = SearchBarThemeData(
-      elevation: const MaterialStatePropertyAll(1),
-      backgroundColor: const MaterialStatePropertyAll(_lightCardColor),
-      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-      hintStyle: MaterialStatePropertyAll(
-          _lightHeadlineLargeText.copyWith(fontSize: 14)),
-      textStyle: MaterialStatePropertyAll(
-          _lightHeadlineLargeText.copyWith(fontSize: 14)));
+  static const SearchBarThemeData _lightSearchBarTheme = SearchBarThemeData(
+      elevation: MaterialStatePropertyAll(1),
+      backgroundColor: MaterialStatePropertyAll(_lightCardColor),
+      overlayColor: MaterialStatePropertyAll(Colors.transparent),
+      hintStyle: MaterialStatePropertyAll(_lightBodySmallText),
+      textStyle: MaterialStatePropertyAll(_lightBodySmallText));
 
   static final SearchBarThemeData _darkSearchBarTheme = SearchBarThemeData(
       elevation: const MaterialStatePropertyAll(1),
       backgroundColor: const MaterialStatePropertyAll(_darkCardColor),
       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-      hintStyle: MaterialStatePropertyAll(
-          _darkHeadlineLargeText.copyWith(fontSize: 14)),
-      textStyle: MaterialStatePropertyAll(
-          _darkHeadlineLargeText.copyWith(fontSize: 14)));
+      hintStyle: MaterialStatePropertyAll(_darkBodySmallText),
+      textStyle: MaterialStatePropertyAll(_darkBodySmallText));
 
   static final RadioThemeData _lightRadioTheme = RadioThemeData(
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
-        return _lightSecondaryColor;
-      } else {
-        return _lightTextColor.withOpacity(0.7);
-      }
-    }),
-    splashRadius: 0,
-    overlayColor:const MaterialStatePropertyAll(_lightPrimaryColor)
-  );
+      fillColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return _lightSecondaryColor;
+        } else {
+          return _lightTextColor.withOpacity(0.7);
+        }
+      }),
+      splashRadius: 0,
+      overlayColor: const MaterialStatePropertyAll(_lightPrimaryColor));
 
-    static final RadioThemeData _darkRadioTheme = RadioThemeData(
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
-        return _darkSecondaryColor;
-      } else {
-        return _darkTextColor.withOpacity(0.7);
-      }
-    }),
-    splashRadius: 0,
-    overlayColor:const MaterialStatePropertyAll(_darkPrimaryColor)
-  );
+  static final RadioThemeData _darkRadioTheme = RadioThemeData(
+      fillColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return _darkSecondaryColor;
+        } else {
+          return _darkTextColor.withOpacity(0.7);
+        }
+      }),
+      splashRadius: 0,
+      overlayColor: const MaterialStatePropertyAll(_darkPrimaryColor));
 
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(

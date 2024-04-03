@@ -147,8 +147,8 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Promoter registrieren",
-                          style: themeData.textTheme.headlineLarge!.copyWith(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
+                          style: themeData.textTheme.headlineLarge!
+                              .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: textFieldSpacing + 4),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -184,6 +184,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     resetError();
                                   },
                                   validator: validator.validateFirstName,
+                                  style: themeData.textTheme.titleMedium,
                                   decoration: const InputDecoration(
                                       labelText: "Vorname"),
                                 ),
@@ -205,6 +206,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     resetError();
                                   },
                                   validator: validator.validateLastName,
+                                  style: themeData.textTheme.titleMedium,
                                   decoration: const InputDecoration(
                                       labelText: "Nachname"),
                                 ),
@@ -225,6 +227,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     resetError();
                                   },
                                   validator: validator.validateBirthDate,
+                                  style: themeData.textTheme.titleMedium,
                                   decoration: InputDecoration(
                                       prefixIcon: const Icon(
                                           Icons.calendar_today_rounded),
@@ -260,6 +263,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                   resetError();
                                 },
                                 validator: validator.validateEmail,
+                                style: themeData.textTheme.titleMedium,
                                 decoration: InputDecoration(
                                     labelText: localization.register_email),
                               ),

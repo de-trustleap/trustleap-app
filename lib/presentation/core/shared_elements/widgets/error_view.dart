@@ -31,9 +31,7 @@ class ErrorView extends StatelessWidget {
                 style: themeData.textTheme.headlineLarge!
                     .copyWith(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
-            Text(message,
-                style:
-                    themeData.textTheme.headlineLarge!.copyWith(fontSize: 20)),
+            Text(message, style: themeData.textTheme.headlineLarge),
             const SizedBox(height: 32),
             PrimaryButton(
                 title: localization.general_error_view_refresh_button_title,

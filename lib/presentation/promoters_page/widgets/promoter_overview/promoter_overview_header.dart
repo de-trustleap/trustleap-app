@@ -46,7 +46,7 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
             flex: responsiveValue.isDesktop ? 2 : 0,
             child: Text("Meine Promoter",
                 style: themeData.textTheme.headlineLarge!
-                    .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
+                    .copyWith(fontWeight: FontWeight.bold)),
           ),
           if (responsiveValue.isDesktop) ...[
             const Spacer(),
@@ -118,7 +118,8 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 16),
-                  PromoterOverviewHeaderExpandableFilter(onFilterChanged: widget.onFilterChanged)
+                  PromoterOverviewHeaderExpandableFilter(
+                      onFilterChanged: widget.onFilterChanged)
                 ]))
       ],
     );

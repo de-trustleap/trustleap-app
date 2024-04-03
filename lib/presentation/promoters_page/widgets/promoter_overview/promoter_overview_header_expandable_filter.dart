@@ -48,8 +48,7 @@ class _PromoterOverviewHeaderExpandableFilterState
             children: [
               RadioListTile(
                   title: Text("Alle anzeigen",
-                      style: themeData.textTheme.headlineLarge!
-                          .copyWith(fontSize: 14)),
+                      style: themeData.textTheme.bodySmall),
                   value: PromoterRegistrationFilterState.all,
                   groupValue: filterStates.registrationFilterState,
                   onChanged: (value) {
@@ -62,8 +61,7 @@ class _PromoterOverviewHeaderExpandableFilterState
               const SizedBox(height: 8),
               RadioListTile(
                   title: Text("Registrierte anzeigen",
-                      style: themeData.textTheme.headlineLarge!
-                          .copyWith(fontSize: 14)),
+                      style: themeData.textTheme.bodySmall),
                   value: PromoterRegistrationFilterState.registered,
                   groupValue: filterStates.registrationFilterState,
                   onChanged: (value) {
@@ -76,8 +74,7 @@ class _PromoterOverviewHeaderExpandableFilterState
               const SizedBox(height: 8),
               RadioListTile(
                   title: Text("Unregistrierte anzeigen",
-                      style: themeData.textTheme.headlineLarge!
-                          .copyWith(fontSize: 14)),
+                      style: themeData.textTheme.bodySmall),
                   value: PromoterRegistrationFilterState.unregistered,
                   groupValue: filterStates.registrationFilterState,
                   onChanged: (value) {
@@ -96,11 +93,10 @@ class _PromoterOverviewHeaderExpandableFilterState
             mainAxisSize: MainAxisSize.min,
             children: [
               DropdownMenu<PromoterSortByFilterState>(
-                  textStyle:
-                      themeData.textTheme.headlineLarge!.copyWith(fontSize: 14),
+                  textStyle: themeData.textTheme.bodySmall,
                   width: responsiveValue.largerThan(MOBILE) ? 250 : 190,
                   label: Text("Sortieren nach",
-                      style: themeData.textTheme.headlineLarge!
+                      style: themeData.textTheme.bodySmall!
                           .copyWith(fontSize: 12)),
                   initialSelection: PromoterSortByFilterState.createdAt,
                   enableSearch: false,
@@ -125,9 +121,8 @@ class _PromoterOverviewHeaderExpandableFilterState
                     widget.onFilterChanged(filterStates);
                   }),
               RadioListTile(
-                  title: Text("Absteigend",
-                      style: themeData.textTheme.headlineLarge!
-                          .copyWith(fontSize: 14)),
+                  title:
+                      Text("Absteigend", style: themeData.textTheme.bodySmall),
                   value: PromoterSortOrderFilterState.desc,
                   groupValue: filterStates.sortOrderFilterState,
                   onChanged: (value) {
@@ -138,9 +133,8 @@ class _PromoterOverviewHeaderExpandableFilterState
                     });
                   }),
               RadioListTile(
-                  title: Text("Aufsteigend",
-                      style: themeData.textTheme.headlineLarge!
-                          .copyWith(fontSize: 14)),
+                  title:
+                      Text("Aufsteigend", style: themeData.textTheme.bodySmall),
                   value: PromoterSortOrderFilterState.asc,
                   groupValue: filterStates.sortOrderFilterState,
                   onChanged: (value) {

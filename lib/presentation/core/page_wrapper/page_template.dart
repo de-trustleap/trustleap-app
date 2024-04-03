@@ -20,7 +20,7 @@ class PageTemplate extends StatelessWidget {
       return Scaffold(
           body: Row(children: [
         const SizedBox(width: 240, child: SideMenu()),
-        Container(width: 0.5, color: themeData.textTheme.headlineLarge!.color),
+        Container(width: 0.5, color: themeData.textTheme.bodyMedium!.color),
         const Expanded(child: RouterOutlet())
       ]));
     } else {

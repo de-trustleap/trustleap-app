@@ -109,8 +109,8 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
                   children: [
                     Text(
                         localization.profile_page_password_update_section_title,
-                        style: themeData.textTheme.headlineLarge!.copyWith(
-                            fontSize: 22, fontWeight: FontWeight.bold)),
+                        style: themeData.textTheme.headlineLarge!
+                            .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
                     if (visibleField ==
                         PasswordUpdateVisibleTextField.passwordReauth) ...[

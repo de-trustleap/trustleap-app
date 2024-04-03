@@ -26,13 +26,14 @@ class PrimaryButton extends StatelessWidget {
               height: 40,
               width: width,
               decoration: BoxDecoration(
-                  color: disabled ? Colors.grey[400] :themeData.colorScheme.primary,
+                  color: disabled
+                      ? Colors.grey[400]
+                      : themeData.colorScheme.primary,
                   borderRadius: BorderRadius.circular(8)),
               child: Center(
                   child: Text(title,
-                  textAlign: TextAlign.center,
-                      style: themeData.textTheme.headlineLarge!.copyWith(
-                          fontSize: 14,
+                      textAlign: TextAlign.center,
+                      style: themeData.textTheme.bodySmall!.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1))))),

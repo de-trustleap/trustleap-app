@@ -19,8 +19,7 @@ class EmailsectionVerificationLink extends StatelessWidget {
         child: Text(
             localization
                 .profile_page_email_section_resend_verify_email_button_title,
-            style: themeData.textTheme.headlineLarge!.copyWith(
-                fontSize: 16,
+            style: themeData.textTheme.bodyMedium!.copyWith(
                 decoration: TextDecoration.underline,
                 decorationColor: themeData.colorScheme.secondary,
                 color: themeData.colorScheme.secondary)));

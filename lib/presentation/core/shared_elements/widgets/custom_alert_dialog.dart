@@ -23,14 +23,13 @@ class CustomAlertDialog extends StatelessWidget {
           TextButton(
               onPressed: () => actionButtonAction(),
               child: Text(actionButtonTitle,
-                  style: themeData.textTheme.headlineLarge!.copyWith(
-                      fontSize: 16, color: themeData.colorScheme.secondary)))
+                  style: themeData.textTheme.bodyMedium!
+                      .copyWith(color: themeData.colorScheme.secondary)))
         ],
         title: Text(title,
             style: themeData.textTheme.headlineLarge!
                 .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
         contentPadding: const EdgeInsets.all(20),
-        content: Text(message,
-            style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)));
+        content: Text(message, style: themeData.textTheme.bodyMedium));
   }
 }

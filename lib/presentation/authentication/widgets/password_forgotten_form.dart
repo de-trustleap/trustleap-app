@@ -1,7 +1,7 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
@@ -102,12 +102,11 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                     children: [
                       const SizedBox(height: 80),
                       Text(localization.password_forgotten_title,
-                          style: themeData.textTheme.headlineLarge!.copyWith(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
+                          style: themeData.textTheme.headlineLarge!
+                              .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: padding),
                       Text(localization.password_forgotten_description,
-                          style: themeData.textTheme.headlineLarge!
-                              .copyWith(fontSize: 16)),
+                          style: themeData.textTheme.bodyMedium),
                       const SizedBox(height: padding),
                       TextFormField(
                         controller: emailTextController,
@@ -116,6 +115,7 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                         },
                         onFieldSubmitted: (_) => submit(),
                         validator: validator.validateEmail,
+                        style: themeData.textTheme.titleMedium,
                         decoration: InputDecoration(
                             labelText: localization
                                 .password_forgotten_email_textfield_placeholder),

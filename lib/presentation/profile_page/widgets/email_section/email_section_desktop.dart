@@ -31,13 +31,11 @@ class EmailSectionDesktop extends StatelessWidget {
         children: [
           TableRow(children: [
             Text(localization.profile_page_email_section_email,
-                style:
-                    themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+                style: themeData.textTheme.bodyMedium),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(localization.profile_page_email_section_status,
-                  style: themeData.textTheme.headlineLarge!
-                      .copyWith(fontSize: 16)),
+                  style: themeData.textTheme.bodyMedium),
             ),
             const SizedBox(width: 8)
           ]),
@@ -47,9 +45,7 @@ class EmailSectionDesktop extends StatelessWidget {
             SizedBox(height: 8)
           ]),
           TableRow(children: [
-            Text(email ?? "",
-                style:
-                    themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+            Text(email ?? "", style: themeData.textTheme.bodyMedium),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: EmailVerificationBadge(

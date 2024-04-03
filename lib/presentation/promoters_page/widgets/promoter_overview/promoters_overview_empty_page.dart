@@ -32,8 +32,7 @@ class PromotersOverviewEmptyPage extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
                 "Sie scheinen noch keine Promoter registriert zu haben. Registrieren Sie jetzt ihre Promoter um die ersten Neukunden zu gewinnen.",
-                style:
-                    themeData.textTheme.headlineLarge!.copyWith(fontSize: 20),
+                style: themeData.textTheme.headlineLarge,
                 textAlign: TextAlign.center),
             const SizedBox(height: 24),
             Row(

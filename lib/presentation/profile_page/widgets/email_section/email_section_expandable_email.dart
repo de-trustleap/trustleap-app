@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +28,7 @@ class EmailSectionExpandableEmail extends StatelessWidget {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(localization.profile_page_email_section_description,
-          style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+          style: themeData.textTheme.bodyMedium),
       const SizedBox(height: 16),
       TextFormField(
         controller: emailTextController,
@@ -40,6 +40,7 @@ class EmailSectionExpandableEmail extends StatelessWidget {
           submit();
         },
         validator: validator.validateEmail,
+        style: themeData.textTheme.titleMedium,
         decoration: InputDecoration(labelText: localization.login_email),
       ),
       const SizedBox(height: 40),

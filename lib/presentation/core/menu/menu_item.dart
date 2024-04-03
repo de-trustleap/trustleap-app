@@ -106,9 +106,9 @@ class _MenuItemState extends State<MenuItem> {
                         const SizedBox(width: 12),
                         Text(getLocalizedMenuItem(localization),
                             style: widget.isURLMatching
-                                ? themeData.textTheme.headlineLarge!.copyWith(
+                                ? themeData.textTheme.bodyMedium!.copyWith(
                                     color: themeData.colorScheme.background)
-                                : themeData.textTheme.headlineLarge)
+                                : themeData.textTheme.bodyMedium)
                       ]),
                     ),
                   ]),

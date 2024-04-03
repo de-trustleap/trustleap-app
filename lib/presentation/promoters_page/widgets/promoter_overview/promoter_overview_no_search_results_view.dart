@@ -19,7 +19,7 @@ class PromoterOverviewNoSearchResultsView extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
               "Sie scheinen noch keine Promoter mit dem gesuchten Namen registriert zu haben.\nÄndern Sie Ihren Suchbegriff um nach anderen Promotern zu suchen.",
-              style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 20),
+              style: themeData.textTheme.headlineLarge,
               textAlign: TextAlign.center),
         ]);
   }

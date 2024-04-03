@@ -90,10 +90,8 @@ class _LoginFormState extends State<LoginForm> {
                           letterSpacing: 4)),
                   const SizedBox(height: 20),
                   Text(localization.login_subtitle,
-                      style: themeData.textTheme.headlineLarge!.copyWith(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 4)),
+                      style: themeData.textTheme.bodySmall!.copyWith(
+                          fontWeight: FontWeight.w500, letterSpacing: 4)),
                   const SizedBox(height: 80),
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
@@ -103,6 +101,7 @@ class _LoginFormState extends State<LoginForm> {
                     },
                     onFieldSubmitted: (_) => submit(),
                     validator: validator.validateEmail,
+                    style: themeData.textTheme.titleMedium,
                     decoration:
                         InputDecoration(labelText: localization.login_email),
                   ),
@@ -115,6 +114,7 @@ class _LoginFormState extends State<LoginForm> {
                     onFieldSubmitted: (_) => submit(),
                     validator: validator.validatePassword,
                     obscureText: true,
+                    style: themeData.textTheme.titleMedium,
                     decoration:
                         InputDecoration(labelText: localization.login_password),
                   ),
