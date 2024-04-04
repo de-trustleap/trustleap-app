@@ -38,7 +38,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get register_repeat_password => 'Passwort bestätigen';
 
   @override
+  String get register_code => 'Registrierungscode';
+
+  @override
   String get register_now_buttontitle => 'Jetzt Registrieren';
+
+  @override
+  String get register_invalid_code_error => 'Die Registrierung ist fehlgeschlagen. Bitte prüfen Sie ob Sie einen gültigen Code und die zugehörige E-Mail Adresse verwenden.';
 
   @override
   String get login_title => 'Willkommen';
@@ -105,6 +111,18 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get auth_validation_invalid_postcode => 'Die PLZ ist ungültig';
+
+  @override
+  String get auth_validation_missing_code => 'Geben Sie bitte ihren Registrierungscode an';
+
+  @override
+  String get auth_validation_missing_gender => 'Geben Sie bitte ihr Geschlecht an';
+
+  @override
+  String get auth_validation_missing_additional_info => 'Bitte einen Empfehlungsgrund angeben';
+
+  @override
+  String get auth_validation_additional_info_exceed_limit => 'Es sind maximal 500 Zeichen erlaubt';
 
   @override
   String get menuitems_profile => 'Profil';
@@ -332,8 +350,117 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profile_page_request_failure_message => 'Ein Fehler beim Abruf der Daten ist aufgetreten.';
 
   @override
-  String get profile_page_promoters_section_title => 'Empfehlungsgeber';
+  String get profile_page_promoters_section_title => 'Promoter';
 
   @override
-  String get profile_page_promoters_section_recommender_count => 'Anzahl der Empfehlungsgeber:';
+  String get profile_page_promoters_section_recommender_count => 'Anzahl der Promoter:';
+
+  @override
+  String get gender_picker_choose => 'Wählen Sie ihr Geschlecht';
+
+  @override
+  String get gender_picker_not_choosen => 'Nicht ausgewählt';
+
+  @override
+  String get gender_picker_male => 'Männlich';
+
+  @override
+  String get gender_picker_female => 'Weiblich';
+
+  @override
+  String get register_promoter_email_already_in_use => 'Die E-Mail Adresse existiert bereits bei einem anderen Nutzer.';
+
+  @override
+  String get register_promoter_title => 'Promoter registrieren';
+
+  @override
+  String get register_promoter_first_name => 'Vorname';
+
+  @override
+  String get register_promoter_last_name => 'Nachname';
+
+  @override
+  String get register_promoter_birthdate => 'Geburtsdatum';
+
+  @override
+  String get register_promoter_email => 'E-Mail Adresse';
+
+  @override
+  String get register_promoter_additional_info => 'Grund der Empfehlung';
+
+  @override
+  String get register_promoter_register_button => 'Registrieren';
+
+  @override
+  String get register_promoter_snackbar_success => 'Der neue Promoter wurde erfolgreich registriert!';
+
+  @override
+  String get promoter_overview_title => 'Meine Promoter';
+
+  @override
+  String get promoter_overview_search_placeholder => 'Suche...';
+
+  @override
+  String get promoter_overview_filter_show_all => 'Alle anzeigen';
+
+  @override
+  String get promoter_overview_filter_show_registered => 'Registrierte anzeigen';
+
+  @override
+  String get promoter_overview_filter_show_unregistered => 'Unregistrierte anzeigen';
+
+  @override
+  String get promoter_overview_filter_sortby_choose => 'Sortieren nach';
+
+  @override
+  String get promoter_overview_filter_sortby_date => 'Erstellungsdatum';
+
+  @override
+  String get promoter_overview_filter_sortby_firstname => 'Vorname';
+
+  @override
+  String get promoter_overview_filter_sortby_lastname => 'Nachname';
+
+  @override
+  String get promoter_overview_filter_sortby_email => 'E-Mail Adresse';
+
+  @override
+  String get promoter_overview_filter_sortorder_asc => 'Aufsteigend';
+
+  @override
+  String get promoter_overview_filter_sortorder_desc => 'Absteigend';
+
+  @override
+  String get promoter_overview_no_search_results_title => 'Keine Suchergebnisse';
+
+  @override
+  String get promoter_overview_no_search_results_subtitle => 'Sie scheinen noch keine Promoter mit dem gesuchten Namen registriert zu haben.\nÄndern Sie Ihren Suchbegriff um nach anderen Promotern zu suchen.';
+
+  @override
+  String get promoter_overview_registration_badge_registered => 'Registriert';
+
+  @override
+  String get promoter_overview_registration_badge_unregistered => 'Nicht registriert';
+
+  @override
+  String get promoter_overview_empty_page_title => 'Keine Promoter gefunden';
+
+  @override
+  String get promoter_overview_empty_page_subtitle => 'Sie scheinen noch keine Promoter registriert zu haben. Registrieren Sie jetzt ihre Promoter um die ersten Neukunden zu gewinnen.';
+
+  @override
+  String get promoter_overview_empty_page_button_title => 'Promoter registrieren';
+
+  @override
+  String get promoter_overview_error_view_title => 'Ein Fehler beim Abruf der Daten ist aufgetreten.';
+
+  @override
+  String promoter_overview_expiration_date(String date) {
+    return 'Läuft am $date ab';
+  }
+
+  @override
+  String promoter_overview_creation_date(String date) {
+    return 'Mitglied seit $date';
+  }
 }

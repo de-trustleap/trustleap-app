@@ -33,6 +33,9 @@ dependencies:
   easy_image_viewer: ^1.4.1
   mockito: ^5.4.4
   build_runner: ^2.4.8
+  collection: ^1.18.0
+  flutter_staggered_animations: ^1.1.1
+  firebase_auth_mocks: ^0.13.0
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class PromotersSection extends StatelessWidget {
   final CustomUser user;
@@ -16,20 +17,21 @@ class PromotersSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return CardContainer(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(localization.profile_page_promoters_section_title,
-          style: themeData.textTheme.headlineLarge!
-              .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
+          style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold) : themeData.textTheme.headlineLarge!
+                        .copyWith(fontWeight: FontWeight.bold)),
       const SizedBox(height: 16),
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(localization.profile_page_promoters_section_recommender_count,
-            style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+            style: themeData.textTheme.bodyMedium),
         const SizedBox(width: 16),
         Text(user.registeredPromoterIDs?.length.toString() ?? "0",
-            style: themeData.textTheme.headlineLarge!
-                .copyWith(fontSize: 16, fontWeight: FontWeight.bold)),
+            style: themeData.textTheme.bodyMedium!
+                .copyWith(fontWeight: FontWeight.bold)),
         const Spacer()
       ])
     ]));

@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class GenderPicker extends StatelessWidget {
   final double width;
@@ -18,6 +20,10 @@ class GenderPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context);
+    final themeData = Theme.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
+
     return FormField(builder: (FormFieldState<Gender> state) {
       return SizedBox(
         width: width,
@@ -32,16 +38,20 @@ class GenderPicker extends StatelessWidget {
           ),
           child: DropdownMenu<Gender>(
               width: width,
-              label: Text("Wählen Sie ihr Geschlecht",
-                  style: Theme.of(context).textTheme.headlineLarge),
+              label: Text(localization.gender_picker_choose,
+                  style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
               initialSelection: initialValue ?? Gender.none,
               enableSearch: false,
               requestFocusOnTap: false,
-              dropdownMenuEntries: const [
+              dropdownMenuEntries: [
                 DropdownMenuEntry(
-                    value: Gender.none, label: "Nicht ausgewählt"),
-                DropdownMenuEntry(value: Gender.male, label: "Männlich"),
-                DropdownMenuEntry(value: Gender.female, label: "Weiblich")
+                    value: Gender.none,
+                    label: localization.gender_picker_not_choosen),
+                DropdownMenuEntry(
+                    value: Gender.male, label: localization.gender_picker_male),
+                DropdownMenuEntry(
+                    value: Gender.female,
+                    label: localization.gender_picker_female)
               ],
               onSelected: (gender) {
                 onSelected(gender);

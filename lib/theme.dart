@@ -20,22 +20,39 @@ class AppTheme {
   static const Color _darkSecondaryColor = Color(0xfff07f5e);
   static const Color _darkErrorColor = Color(0xffFF8D8E);
   static const Color _darkErrorContainerColor = Color(0xff503035);
+  static const String _fontFamily = "Poppins";
 
   static const TextStyle _lightHeadlineLargeText =
-      TextStyle(color: _lightTextColor, fontFamily: "Poppins", fontSize: 16);
+      TextStyle(color: _lightTextColor, fontFamily: _fontFamily, fontSize: 20);
   static const TextStyle _lightBodyLargeText =
-      TextStyle(color: _lightTextColor, fontFamily: "Poppins");
+      TextStyle(color: _lightTextColor, fontFamily: _fontFamily, fontSize: 18);
+  static const TextStyle _lightBodyMediumText =
+      TextStyle(color: _lightTextColor, fontFamily: _fontFamily, fontSize: 16);
+  static const TextStyle _lightBodySmallText =
+      TextStyle(color: _lightTextColor, fontFamily: _fontFamily, fontSize: 14);
 
   static final TextStyle _darkHeadlineLargeText =
       _lightHeadlineLargeText.copyWith(color: _darkTextColor);
   static final TextStyle _darkBodyLargeText =
       _lightBodyLargeText.copyWith(color: _darkTextColor);
+  static final TextStyle _darkBodyMediumText =
+      _lightBodyMediumText.copyWith(color: _darkTextColor);
+  static final TextStyle _darkBodySmallText =
+      _lightBodySmallText.copyWith(color: _darkTextColor);
 
   static const TextTheme _lightTextTheme = TextTheme(
-      headlineLarge: _lightHeadlineLargeText, bodyLarge: _lightBodyLargeText);
+      headlineLarge: _lightHeadlineLargeText,
+      bodyLarge: _lightBodyLargeText,
+      bodyMedium: _lightBodyMediumText,
+      bodySmall: _lightBodySmallText,
+      titleMedium: _lightBodyMediumText);
 
   static final TextTheme _darkTextTheme = TextTheme(
-      headlineLarge: _darkHeadlineLargeText, bodyLarge: _darkBodyLargeText);
+      headlineLarge: _darkHeadlineLargeText,
+      bodyLarge: _darkBodyLargeText,
+      bodyMedium: _darkBodyMediumText,
+      bodySmall: _darkBodySmallText,
+      titleMedium: _darkBodyMediumText);
 
   static const TextSelectionThemeData _lightTextSelectionTheme =
       TextSelectionThemeData(
@@ -55,7 +72,8 @@ class AppTheme {
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _lightErrorColor)),
           floatingLabelStyle: const TextStyle(color: _lightTextColor),
-          labelStyle: const TextStyle(color: _lightTextColor),
+          labelStyle: _lightBodyMediumText,
+          hintStyle: _lightBodyMediumText,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _lightTextColor)),
@@ -76,7 +94,8 @@ class AppTheme {
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _darkErrorColor)),
           floatingLabelStyle: const TextStyle(color: _darkTextColor),
-          labelStyle: const TextStyle(color: _darkTextColor),
+          labelStyle: _darkBodyMediumText,
+          hintStyle: _darkBodyMediumText,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _darkTextColor)),
@@ -119,35 +138,115 @@ class AppTheme {
       indicatorColor: _lightSecondaryColor,
       splashFactory: NoSplash.splashFactory,
       labelColor: _lightTextColor,
-      labelStyle:
-          _lightHeadlineLargeText.copyWith(color: _darkTextColor, fontSize: 14),
+      labelStyle: _lightBodySmallText.copyWith(color: _darkTextColor),
       overlayColor: const MaterialStatePropertyAll(Colors.transparent));
 
   static final TabBarTheme _darkTabbarTheme = TabBarTheme(
       indicatorColor: _darkSecondaryColor,
       splashFactory: NoSplash.splashFactory,
       labelColor: _darkTextColor,
-      labelStyle:
-          _darkHeadlineLargeText.copyWith(color: _darkTextColor, fontSize: 14),
+      labelStyle: _darkBodySmallText.copyWith(color: _darkTextColor),
       overlayColor: const MaterialStatePropertyAll(Colors.transparent));
 
   static const DropdownMenuThemeData _lightDropDownMenuTheme =
       DropdownMenuThemeData(
-          textStyle: _lightBodyLargeText,
+          textStyle: _lightBodyMediumText,
           menuStyle: MenuStyle(
               backgroundColor: MaterialStatePropertyAll(_lightBackgroundColor),
               shadowColor: MaterialStatePropertyAll(_lightBackgroundColor),
               surfaceTintColor: MaterialStatePropertyAll(_lightBackgroundColor),
               visualDensity: VisualDensity.comfortable));
 
-  static const DropdownMenuThemeData _darkDropDownMenuTheme =
+  static final DropdownMenuThemeData _darkDropDownMenuTheme =
       DropdownMenuThemeData(
-          textStyle: _lightBodyLargeText,
-          menuStyle: MenuStyle(
+          textStyle: _darkBodyMediumText,
+          menuStyle: const MenuStyle(
               backgroundColor: MaterialStatePropertyAll(_darkBackgroundColor),
               shadowColor: MaterialStatePropertyAll(_darkBackgroundColor),
               surfaceTintColor: MaterialStatePropertyAll(_darkBackgroundColor),
               visualDensity: VisualDensity.comfortable));
+
+  static final SegmentedButtonThemeData _lightSegmentedButtonTheme =
+      SegmentedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return _lightSecondaryColor;
+                } else {
+                  return Colors.transparent;
+                }
+              }),
+              iconColor: MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return _lightBackgroundColor;
+                } else {
+                  return _lightTextColor;
+                }
+              }),
+              side: MaterialStateProperty.all(BorderSide(
+                  color: _lightTextColor.withOpacity(0.3),
+                  width: 1.0,
+                  style: BorderStyle.solid))));
+
+  static final SegmentedButtonThemeData _darkSegmentedButtonTheme =
+      SegmentedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return _darkSecondaryColor;
+                } else {
+                  return Colors.transparent;
+                }
+              }),
+              iconColor: MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return _darkBackgroundColor;
+                } else {
+                  return _darkTextColor;
+                }
+              }),
+              side: MaterialStateProperty.all(BorderSide(
+                  color: _darkTextColor.withOpacity(0.3),
+                  width: 1.0,
+                  style: BorderStyle.solid))));
+
+  static const SearchBarThemeData _lightSearchBarTheme = SearchBarThemeData(
+      elevation: MaterialStatePropertyAll(1),
+      backgroundColor: MaterialStatePropertyAll(_lightCardColor),
+      overlayColor: MaterialStatePropertyAll(Colors.transparent),
+      hintStyle: MaterialStatePropertyAll(_lightBodySmallText),
+      textStyle: MaterialStatePropertyAll(_lightBodySmallText));
+
+  static final SearchBarThemeData _darkSearchBarTheme = SearchBarThemeData(
+      elevation: const MaterialStatePropertyAll(1),
+      backgroundColor: const MaterialStatePropertyAll(_darkCardColor),
+      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+      hintStyle: MaterialStatePropertyAll(_darkBodySmallText),
+      textStyle: MaterialStatePropertyAll(_darkBodySmallText));
+
+  static final RadioThemeData _lightRadioTheme = RadioThemeData(
+      fillColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return _lightSecondaryColor;
+        } else {
+          return _lightTextColor.withOpacity(0.7);
+        }
+      }),
+      splashRadius: 0,
+      overlayColor: const MaterialStatePropertyAll(_lightPrimaryColor));
+
+  static final RadioThemeData _darkRadioTheme = RadioThemeData(
+      fillColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return _darkSecondaryColor;
+        } else {
+          return _darkTextColor.withOpacity(0.7);
+        }
+      }),
+      splashRadius: 0,
+      overlayColor: const MaterialStatePropertyAll(_darkPrimaryColor));
 
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
@@ -156,7 +255,8 @@ class AppTheme {
           onPrimaryContainer: _lightCardColor,
           secondary: _lightSecondaryColor,
           error: _lightErrorColor,
-          errorContainer: _lightErrorContainerColor),
+          errorContainer: _lightErrorContainerColor,
+          surfaceTint: _lightTextColor),
       textTheme: _lightTextTheme,
       iconTheme: _lightIconTheme,
       textSelectionTheme: _lightTextSelectionTheme,
@@ -164,7 +264,10 @@ class AppTheme {
       drawerTheme: _lightDrawerTheme,
       snackBarTheme: _lightSnackbarTheme,
       tabBarTheme: _lightTabbarTheme,
-      dropdownMenuTheme: _lightDropDownMenuTheme);
+      dropdownMenuTheme: _lightDropDownMenuTheme,
+      segmentedButtonTheme: _lightSegmentedButtonTheme,
+      searchBarTheme: _lightSearchBarTheme,
+      radioTheme: _lightRadioTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -173,7 +276,8 @@ class AppTheme {
           onPrimaryContainer: _darkCardColor,
           secondary: _darkSecondaryColor,
           error: _darkErrorColor,
-          errorContainer: _darkErrorContainerColor),
+          errorContainer: _darkErrorContainerColor,
+          surfaceTint: _darkTextColor),
       textTheme: _darkTextTheme,
       iconTheme: _darkIconTheme,
       textSelectionTheme: _darkTextSelectionTheme,
@@ -181,5 +285,8 @@ class AppTheme {
       drawerTheme: _darkDrawerTheme,
       snackBarTheme: _darkSnackbarTheme,
       tabBarTheme: _darkTabbarTheme,
-      dropdownMenuTheme: _darkDropDownMenuTheme);
+      dropdownMenuTheme: _darkDropDownMenuTheme,
+      segmentedButtonTheme: _darkSegmentedButtonTheme,
+      searchBarTheme: _darkSearchBarTheme,
+      radioTheme: _darkRadioTheme);
 }

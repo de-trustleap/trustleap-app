@@ -1,11 +1,28 @@
-abstract class StorageFailure {}
+import 'package:equatable/equatable.dart';
 
-class UnknownFailure extends StorageFailure {}
+abstract class StorageFailure extends Equatable {}
 
-class ObjectNotFound extends StorageFailure {}
+class UnknownFailure extends StorageFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class NotAuthenticated extends StorageFailure {}
+class ObjectNotFound extends StorageFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class UnAuthorized extends StorageFailure {}
+class NotAuthenticated extends StorageFailure {
+  @override
+  List<Object?> get props => [];
+}
 
-class RetryLimitExceeded extends StorageFailure {}
+class UnAuthorized extends StorageFailure {
+  @override
+  List<Object?> get props => [];
+}
+
+class RetryLimitExceeded extends StorageFailure {
+  @override
+  List<Object?> get props => [];
+}

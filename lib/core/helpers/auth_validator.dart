@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:intl/intl.dart';
 
 class AuthValidator {
   final AppLocalizations localization;
@@ -14,7 +14,7 @@ class AuthValidator {
 
     if (input == null || input.isEmpty) {
       return localization.auth_validation_missing_email;
-    } else if (RegExp(emailRegex).hasMatch(input)) {
+    } else if (RegExp(emailRegex).hasMatch(input.trim())) {
       return null;
     } else {
       return localization.auth_validation_invalid_email;
@@ -62,10 +62,11 @@ class AuthValidator {
   String? validateBirthDate(String? input) {
     if (input == null || input.isEmpty) {
       return localization.auth_validation_missing_birthdate;
-    } else if (!_stringIsValidDate(input)) {
+    } else if (!DateTimeFormatter().stringIsValidDate(input)) {
       return localization.auth_validation_invalid_date;
-    } else if (_dateIsParsable(input) &&
-        !_isAdult(DateTime.parse(_prepareDateStringForParser(input)))) {
+    } else if (DateTimeFormatter().dateIsParsable(input) &&
+        !_isAdult(DateTime.parse(
+            DateTimeFormatter().prepareDateStringForParser(input)))) {
       return localization.auth_validation_invalid_birthdate;
     } else {
       return null;
@@ -84,7 +85,7 @@ class AuthValidator {
 
   String? validateGender(Gender? input) {
     if (input == null || input == Gender.none) {
-      return "Geben Sie bitte ihr Geschlecht an";
+      return localization.auth_validation_missing_gender;
     } else {
       return null;
     }
@@ -92,7 +93,17 @@ class AuthValidator {
 
   String? validateCode(String? input) {
     if (input == null || input.isEmpty) {
-      return "Geben Sie bitte ihren Registrierungscode an";
+      return localization.auth_validation_missing_code;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateAdditionalInfo(String? input) {
+    if (input == null || input.isEmpty) {
+      return localization.auth_validation_missing_additional_info;
+    } else if (input.length > 500) {
+      return localization.auth_validation_additional_info_exceed_limit;
     } else {
       return null;
     }
@@ -106,30 +117,6 @@ class AuthValidator {
       date.day,
     );
     return adultDate.isBefore(today);
-  }
-
-  bool _stringIsValidDate(String input) {
-    DateFormat format = DateFormat("dd.MM.yyyy");
-    try {
-      format.parseStrict(input);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool _dateIsParsable(String input) {
-    try {
-      DateTime.parse(_prepareDateStringForParser(input));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  String _prepareDateStringForParser(String input) {
-    final splitted = input.split(".").reversed;
-    return splitted.join("");
   }
 
   bool isNumeric(String s) {

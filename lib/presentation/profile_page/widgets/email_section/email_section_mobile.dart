@@ -23,11 +23,10 @@ class EmailSectionMobile extends StatelessWidget {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(localization.profile_page_email_section_email,
-          style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+          style: themeData.textTheme.bodySmall),
       const SizedBox(height: 8),
       Row(children: [
-        Text(email ?? "",
-            style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+        Text(email ?? "", style: themeData.textTheme.bodySmall),
         const SizedBox(width: 8),
         IconButton(
             onPressed: () => {editEmailPressed()},
@@ -36,7 +35,7 @@ class EmailSectionMobile extends StatelessWidget {
       ]),
       const SizedBox(height: 16),
       Text(localization.profile_page_email_section_status,
-          style: themeData.textTheme.headlineLarge!.copyWith(fontSize: 16)),
+          style: themeData.textTheme.bodySmall),
       const SizedBox(height: 8),
       EmailVerificationBadge(
           state: isEmailVerified

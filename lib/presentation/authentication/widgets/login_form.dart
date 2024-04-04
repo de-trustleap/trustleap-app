@@ -1,8 +1,8 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/password_forgotten_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -48,7 +49,7 @@ class _LoginFormState extends State<LoginForm> {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
       BlocProvider.of<SignInCubit>(context).loginWithEmailAndPassword(
-          emailTextController.text, passwordTextController.text);
+          emailTextController.text.trim(), passwordTextController.text);
     } else {
       validationHasError = true;
       BlocProvider.of<SignInCubit>(context)
@@ -61,6 +62,7 @@ class _LoginFormState extends State<LoginForm> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
@@ -82,18 +84,16 @@ class _LoginFormState extends State<LoginForm> {
             child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: [
-                  const SizedBox(height: 80),
+                  SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                   Text(localization.login_title,
                       style: themeData.textTheme.headlineLarge!.copyWith(
-                          fontSize: 50,
+                          fontSize: responsiveValue.isMobile ? 20 : 50,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 4)),
                   const SizedBox(height: 20),
                   Text(localization.login_subtitle,
-                      style: themeData.textTheme.headlineLarge!.copyWith(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 4)),
+                      style: themeData.textTheme.bodySmall!.copyWith(
+                          fontWeight: FontWeight.w500, letterSpacing: 4)),
                   const SizedBox(height: 80),
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
@@ -103,6 +103,7 @@ class _LoginFormState extends State<LoginForm> {
                     },
                     onFieldSubmitted: (_) => submit(),
                     validator: validator.validateEmail,
+                    style: responsiveValue.isMobile ? themeData.textTheme.titleSmall : themeData.textTheme.titleMedium,
                     decoration:
                         InputDecoration(labelText: localization.login_email),
                   ),
@@ -115,6 +116,7 @@ class _LoginFormState extends State<LoginForm> {
                     onFieldSubmitted: (_) => submit(),
                     validator: validator.validatePassword,
                     obscureText: true,
+                    style: responsiveValue.isMobile ? themeData.textTheme.titleSmall : themeData.textTheme.titleMedium,
                     decoration:
                         InputDecoration(labelText: localization.login_password),
                   ),

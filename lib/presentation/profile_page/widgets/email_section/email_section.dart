@@ -42,6 +42,7 @@ class _EmailSectionState extends State<EmailSection> {
   bool showError = false;
   String errorMessage = "";
   bool validationHasError = false;
+  bool buttonDisabled = false;
 
   EmailSectionVisibleTextField visibleField = EmailSectionVisibleTextField.none;
   bool _isExpanded = false;
@@ -61,6 +62,12 @@ class _EmailSectionState extends State<EmailSection> {
     setState(() {
       showError = false;
       errorMessage = "";
+    });
+  }
+
+  void setButtonToDisabled(bool disabled) {
+    setState(() {
+      buttonDisabled = disabled;
     });
   }
 
@@ -97,7 +104,7 @@ class _EmailSectionState extends State<EmailSection> {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
       BlocProvider.of<ProfileCubit>(context)
-          .updateEmail(emailTextController.text);
+          .updateEmail(emailTextController.text.trim());
     }
   }
 
@@ -122,20 +129,25 @@ class _EmailSectionState extends State<EmailSection> {
           errorMessage =
               AuthFailureMapper.mapFailureMessage(state.failure, localization);
           showError = true;
+          setButtonToDisabled(false);
         } else if (state is ProfileReauthenticateForEmailUpdateSuccessState) {
           visibleField = EmailSectionVisibleTextField.email;
+          setButtonToDisabled(false);
         } else if (state is ProfileEmailUpdateSuccessState) {
           BlocProvider.of<ProfileCubit>(context).signOutUser();
+          setButtonToDisabled(false);
         } else if (state is ProfileGetCurrentUserSuccessState) {
           currentUser = state.user;
         } else if (state is ProfileResendEmailVerificationSuccessState) {
           widget.sendEmailVerificationCallback();
+        } else if (state is ProfileEmailLoadingState) {
+          setButtonToDisabled(true);
         }
       }, builder: (context, state) {
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(localization.profile_page_email_section_title,
-              style: themeData.textTheme.headlineLarge!
-                  .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
+              style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold) : themeData.textTheme.headlineLarge!
+                        .copyWith(fontWeight: FontWeight.bold)),
           const SizedBox(height: 16),
           if (responsiveValue.largerThan(MOBILE)) ...[
             EmailSectionDesktop(
@@ -176,6 +188,7 @@ class _EmailSectionState extends State<EmailSection> {
                       EmailSectionExpandablePassword(
                           passwordTextController: passwordTextController,
                           maxWidth: maxWidth,
+                          buttonDisabled: buttonDisabled,
                           resetError: resetError,
                           submit: submitPassword)
                     ] else if (visibleField ==
@@ -183,6 +196,7 @@ class _EmailSectionState extends State<EmailSection> {
                       EmailSectionExpandableEmail(
                           emailTextController: emailTextController,
                           maxWidth: maxWidth,
+                          buttonDisabled: buttonDisabled,
                           resetError: resetError,
                           submit: submitEmail)
                     ],

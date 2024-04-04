@@ -3,20 +3,38 @@ part of 'auth_cubit.dart';
 
 sealed class AuthState {}
 
-class AuthStateAuthenticated extends AuthState {}
+class AuthStateAuthenticated extends AuthState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
 
-class AuthStateUnAuthenticated extends AuthState {}
+class AuthStateUnAuthenticated extends AuthState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
 
-class AuthShowValidationState extends AuthState {}
+class AuthShowValidationState extends AuthState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
 
-class AuthPasswordResetSuccessState extends AuthState {}
+class AuthPasswordResetSuccessState extends AuthState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
 
-class AuthPasswordResetLoadingState extends AuthState {}
+class AuthPasswordResetLoadingState extends AuthState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
 
-class AuthPasswordResetFailureState extends AuthState {
+class AuthPasswordResetFailureState extends AuthState with EquatableMixin {
   final AuthFailure failure;
 
   AuthPasswordResetFailureState({
     required this.failure,
   });
+
+  @override
+  List<Object?> get props => [failure];
 }

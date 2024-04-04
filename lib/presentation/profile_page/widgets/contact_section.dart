@@ -1,9 +1,9 @@
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
@@ -37,6 +37,7 @@ class _ContactSectionState extends State<ContactSection> {
   String errorMessage = "";
   bool validationHasError = false;
   String? genderValid;
+  bool buttonDisabled = false;
 
   @override
   void initState() {
@@ -65,6 +66,12 @@ class _ContactSectionState extends State<ContactSection> {
     super.dispose();
   }
 
+  void setButtonStateToDisabled(bool disabled) {
+    setState(() {
+      buttonDisabled = disabled;
+    });
+  }
+
   void resetError() {
     setState(() {
       showError = false;
@@ -81,11 +88,11 @@ class _ContactSectionState extends State<ContactSection> {
       });
       BlocProvider.of<ProfileCubit>(context).updateProfile(widget.user.copyWith(
           gender: selectedGender,
-          firstName: firstNameTextController.text,
-          lastName: lastNameTextController.text,
-          address: streetTextController.text,
-          postCode: postcodeTextController.text,
-          place: placeTextController.text));
+          firstName: firstNameTextController.text.trim(),
+          lastName: lastNameTextController.text.trim(),
+          address: streetTextController.text.trim(),
+          postCode: postcodeTextController.text.trim(),
+          place: placeTextController.text.trim()));
     } else {
       validationHasError = true;
       setState(() {
@@ -111,8 +118,12 @@ class _ContactSectionState extends State<ContactSection> {
             errorMessage = DatabaseFailureMapper.mapFailureMessage(
                 state.failure, localization);
             showError = true;
+            setButtonStateToDisabled(false);
           } else if (state is ProfileUpdateContactInformationSuccessState) {
             widget.changesSaved();
+            setButtonStateToDisabled(false);
+          } else if (state is ProfileUpdateContactInformationLoadingState) {
+            setButtonStateToDisabled(true);
           }
         },
         builder: (context, state) {
@@ -125,8 +136,8 @@ class _ContactSectionState extends State<ContactSection> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(localization.profile_page_contact_section_title,
-                    style: themeData.textTheme.headlineLarge!
-                        .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
+                    style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold) : themeData.textTheme.headlineLarge!
+                        .copyWith(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   GenderPicker(
@@ -155,8 +166,7 @@ class _ContactSectionState extends State<ContactSection> {
                             Text(
                                 localization
                                     .profile_page_contact_section_form_firstname,
-                                style: themeData.textTheme.headlineLarge!
-                                    .copyWith(fontSize: 16)),
+                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
                             SizedBox(
                               width: responsiveValue.isMobile
@@ -169,6 +179,7 @@ class _ContactSectionState extends State<ContactSection> {
                                   resetError();
                                 },
                                 validator: validator.validateFirstName,
+                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                                 decoration:
                                     const InputDecoration(labelText: ""),
                               ),
@@ -185,8 +196,7 @@ class _ContactSectionState extends State<ContactSection> {
                             Text(
                                 localization
                                     .profile_page_contact_section_form_lastname,
-                                style: themeData.textTheme.headlineLarge!
-                                    .copyWith(fontSize: 16)),
+                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
                             SizedBox(
                               width: responsiveValue.isMobile
@@ -199,6 +209,7 @@ class _ContactSectionState extends State<ContactSection> {
                                   resetError();
                                 },
                                 validator: validator.validateLastName,
+                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                                 decoration:
                                     const InputDecoration(labelText: ""),
                               ),
@@ -208,8 +219,7 @@ class _ContactSectionState extends State<ContactSection> {
                 const SizedBox(height: textFieldSpacing),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(localization.profile_page_contact_section_form_address,
-                      style: themeData.textTheme.headlineLarge!
-                          .copyWith(fontSize: 16)),
+                      style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
                   const SizedBox(height: 4),
                   SizedBox(
                     width: maxWidth,
@@ -219,6 +229,7 @@ class _ContactSectionState extends State<ContactSection> {
                       onChanged: (_) {
                         resetError();
                       },
+                      style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                       decoration: const InputDecoration(labelText: ""),
                     ),
                   ),
@@ -237,8 +248,7 @@ class _ContactSectionState extends State<ContactSection> {
                             Text(
                                 localization
                                     .profile_page_contact_section_form_postcode,
-                                style: themeData.textTheme.headlineLarge!
-                                    .copyWith(fontSize: 16)),
+                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
                             SizedBox(
                               width: responsiveValue.isMobile
@@ -252,6 +262,7 @@ class _ContactSectionState extends State<ContactSection> {
                                   resetError();
                                 },
                                 validator: validator.validatePostcode,
+                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                                 decoration:
                                     const InputDecoration(labelText: ""),
                               ),
@@ -268,8 +279,7 @@ class _ContactSectionState extends State<ContactSection> {
                             Text(
                                 localization
                                     .profile_page_contact_section_form_place,
-                                style: themeData.textTheme.headlineLarge!
-                                    .copyWith(fontSize: 16)),
+                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
                             SizedBox(
                               width: responsiveValue.isMobile
@@ -281,6 +291,7 @@ class _ContactSectionState extends State<ContactSection> {
                                 onChanged: (_) {
                                   resetError();
                                 },
+                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                                 decoration:
                                     const InputDecoration(labelText: ""),
                               ),
@@ -295,7 +306,8 @@ class _ContactSectionState extends State<ContactSection> {
                     PrimaryButton(
                         title: localization
                             .profile_page_contact_section_form_save_button_title,
-                        width: maxWidth / 2 - textFieldSpacing,
+                        width: responsiveValue.isMobile ? maxWidth - textFieldSpacing : maxWidth / 2 - textFieldSpacing,
+                        disabled: buttonDisabled,
                         onTap: () {
                           submit(validator);
                         })

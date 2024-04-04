@@ -29,3 +29,11 @@ enum Gender {
   final String value;
   const Gender(this.value);
 }
+
+enum PromoterRegistrationState {
+  registered("Registriert"),
+  unregistered("Nicht registriert");
+
+  final String value;
+  const PromoterRegistrationState(this.value);
+}

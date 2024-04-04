@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
@@ -35,6 +35,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   final lastNameTextController = TextEditingController();
   final birthDateTextController = TextEditingController();
   final emailTextController = TextEditingController();
+  final additionalInfoTextController = TextEditingController();
   Gender? selectedGender;
   User? currentUser;
 
@@ -44,6 +45,13 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   String errorMessage = "";
   bool validationHasError = false;
   String? genderValid;
+  bool buttonDisabled = false;
+
+  @override
+  void initState() {
+    BlocProvider.of<PromoterCubit>(context).getCurrentUser();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -51,6 +59,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     lastNameTextController.dispose();
     birthDateTextController.dispose();
     emailTextController.dispose();
+    additionalInfoTextController.dispose();
 
     super.dispose();
   }
@@ -62,6 +71,12 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     });
   }
 
+  void setButtonToDisabled(bool disabled) {
+    setState(() {
+      buttonDisabled = disabled;
+    });
+  }
+
   void submit(AuthValidator validator) {
     if (formKey.currentState!.validate() &&
         validator.validateGender(selectedGender) == null) {
@@ -69,22 +84,25 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
       setState(() {
         genderValid = null;
       });
-      BlocProvider.of<RecommendationsCubit>(context).registerPromoter(
-          UnregisteredPromoter(
-              id: UniqueID(),
-              gender: selectedGender,
-              firstName: firstNameTextController.text,
-              lastName: lastNameTextController.text,
-              birthDate: birthDateTextController.text,
-              email: emailTextController.text,
-              parentUserID: UniqueID.fromUniqueString(currentUser?.uid ?? ""),
-              code: UniqueID()));
+      if (currentUser != null) {
+        BlocProvider.of<PromoterCubit>(context).registerPromoter(
+            UnregisteredPromoter(
+                id: UniqueID(),
+                gender: selectedGender,
+                firstName: firstNameTextController.text.trim(),
+                lastName: lastNameTextController.text.trim(),
+                birthDate: birthDateTextController.text.trim(),
+                email: emailTextController.text.trim(),
+                additionalInfo: additionalInfoTextController.text.trim(),
+                parentUserID: UniqueID.fromUniqueString(currentUser?.uid ?? ""),
+                code: UniqueID()));
+      }
     } else {
       validationHasError = true;
       setState(() {
         genderValid = validator.validateGender(selectedGender);
       });
-      BlocProvider.of<RecommendationsCubit>(context).registerPromoter(null);
+      BlocProvider.of<PromoterCubit>(context).registerPromoter(null);
     }
   }
 
@@ -95,40 +113,47 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
     const double textFieldSpacing = 20;
-    return BlocConsumer<RecommendationsCubit, RecommendationsState>(
+    return BlocConsumer<PromoterCubit, PromoterState>(
       listener: (context, state) {
         if (state is PromoterRegisterFailureState) {
           errorMessage = DatabaseFailureMapper.mapFailureMessage(
               state.failure, localization);
           showError = true;
+          setButtonToDisabled(false);
         } else if (state is PromoterAlreadyExistsFailureState) {
-          errorMessage =
-              "Die E-Mail Adresse existiert bereits bei einem anderen Nutzer.";
+          errorMessage = localization.register_promoter_email_already_in_use;
           showError = true;
+          setButtonToDisabled(false);
         } else if (state is PromoterRegisteredSuccessState) {
           widget.changesSaved();
-        } else if (state is RecommendationsGetCurrentUserSuccessState) {
+          setButtonToDisabled(false);
+        } else if (state is PromoterGetCurrentUserSuccessState) {
           currentUser = state.user;
+        } else if (state is PromoterRegisterLoadingState) {
+          setButtonToDisabled(true);
         }
       },
       builder: (context, state) {
         return CardContainer(
             child: LayoutBuilder(builder: (context, constraints) {
           final maxWidth = constraints.maxWidth;
-          if (state is RecommendationsGetCurrentUserLoadingState) {
+          if (state is PromoterGetCurrentUserLoadingState) {
             return const LoadingIndicator();
           } else {
             return Form(
                 key: formKey,
-                autovalidateMode: (state is RecommendationsShowValidationState)
+                autovalidateMode: (state is PromoterShowValidationState)
                     ? AutovalidateMode.always
                     : AutovalidateMode.disabled,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Empfehlungsgeber registrieren",
-                          style: themeData.textTheme.headlineLarge!.copyWith(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
+                      Text(localization.register_promoter_title,
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodyMedium!
+                                  .copyWith(fontWeight: FontWeight.bold)
+                              : themeData.textTheme.headlineLarge!
+                                  .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: textFieldSpacing + 4),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -164,8 +189,12 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     resetError();
                                   },
                                   validator: validator.validateFirstName,
-                                  decoration: const InputDecoration(
-                                      labelText: "Vorname"),
+                                  style: responsiveValue.isMobile
+                                      ? themeData.textTheme.bodySmall
+                                      : themeData.textTheme.bodyMedium,
+                                  decoration: InputDecoration(
+                                      labelText: localization
+                                          .register_promoter_first_name),
                                 ),
                               ),
                             ),
@@ -185,8 +214,12 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     resetError();
                                   },
                                   validator: validator.validateLastName,
-                                  decoration: const InputDecoration(
-                                      labelText: "Nachname"),
+                                  style: responsiveValue.isMobile
+                                      ? themeData.textTheme.bodySmall
+                                      : themeData.textTheme.bodyMedium,
+                                  decoration: InputDecoration(
+                                      labelText: localization
+                                          .register_promoter_last_name),
                                 ),
                               ),
                             )
@@ -205,11 +238,14 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     resetError();
                                   },
                                   validator: validator.validateBirthDate,
+                                  style: responsiveValue.isMobile
+                                      ? themeData.textTheme.bodySmall
+                                      : themeData.textTheme.bodyMedium,
                                   decoration: InputDecoration(
                                       prefixIcon: const Icon(
                                           Icons.calendar_today_rounded),
-                                      labelText:
-                                          localization.register_birthdate),
+                                      labelText: localization
+                                          .register_promoter_birthdate),
                                   onTap: () async {
                                     DateTime? pickedDate = await showDatePicker(
                                         context: context,
@@ -240,8 +276,37 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                   resetError();
                                 },
                                 validator: validator.validateEmail,
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium,
                                 decoration: InputDecoration(
-                                    labelText: localization.register_email),
+                                    labelText:
+                                        localization.register_promoter_email),
+                              ),
+                            ),
+                          ]),
+                      const SizedBox(height: textFieldSpacing),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: maxWidth,
+                              child: TextFormField(
+                                keyboardType: TextInputType.multiline,
+                                minLines: 2,
+                                maxLines: 5,
+                                controller: additionalInfoTextController,
+                                onFieldSubmitted: (_) => submit(validator),
+                                onChanged: (_) {
+                                  resetError();
+                                },
+                                validator: validator.validateAdditionalInfo,
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium,
+                                decoration: InputDecoration(
+                                    labelText: localization
+                                        .register_promoter_additional_info),
                               ),
                             ),
                           ]),
@@ -251,8 +316,12 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           PrimaryButton(
-                              title: "Registrieren",
-                              width: maxWidth / 2 - textFieldSpacing,
+                              title: localization
+                                  .register_promoter_register_button,
+                              width: responsiveValue.isMobile
+                                  ? maxWidth - textFieldSpacing
+                                  : maxWidth / 2 - textFieldSpacing,
+                              disabled: buttonDisabled,
                               onTap: () {
                                 submit(validator);
                               })

@@ -2,17 +2,19 @@
 import 'package:flutter/material.dart';
 
 class CardContainer extends StatelessWidget {
+  final double? maxWidth;
   final Widget child;
 
   const CardContainer({
     Key? key,
+    this.maxWidth,
     required this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        constraints: const BoxConstraints(maxWidth: 600),
+        constraints: BoxConstraints(maxWidth: maxWidth ?? 600),
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.onPrimaryContainer,

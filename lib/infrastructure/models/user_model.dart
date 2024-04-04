@@ -140,7 +140,8 @@ class UserModel extends Equatable {
         profileImageDownloadURL: profileImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL,
         unregisteredPromoterIDs: unregisteredPromoterIDs,
-        registeredPromoterIDs: registeredPromoterIDs);
+        registeredPromoterIDs: registeredPromoterIDs,
+        createdAt: (createdAt as Timestamp).toDate());
   }
 
   factory UserModel.fromDomain(CustomUser user) {

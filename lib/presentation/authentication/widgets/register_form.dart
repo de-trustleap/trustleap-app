@@ -4,10 +4,10 @@ import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart'
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/authentication/auth_validator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -75,7 +75,7 @@ class _RegisterFormState extends State<RegisterForm> {
         genderValid = null;
       });
       BlocProvider.of<SignInCubit>(context).checkForValidRegistrationCode(
-          emailTextController.text, codeTextController.text);
+          emailTextController.text.trim(), codeTextController.text.trim());
     } else {
       validationHasError = true;
       setState(() {
@@ -131,25 +131,24 @@ class _RegisterFormState extends State<RegisterForm> {
               BlocProvider.of<UserCubit>(context).createUser(CustomUser(
                   id: UniqueID.fromUniqueString(state.creds.user!.uid),
                   gender: selectedGender,
-                  firstName: firstNameTextController.text,
-                  lastName: lastNameTextController.text,
-                  birthDate: birthDateTextController.text,
-                  address: streetAndNumberTextController.text,
-                  postCode: plzTextController.text,
-                  place: placeTextController.text,
-                  email: emailTextController.text));
+                  firstName: firstNameTextController.text.trim(),
+                  lastName: lastNameTextController.text.trim(),
+                  birthDate: birthDateTextController.text.trim(),
+                  address: streetAndNumberTextController.text.trim(),
+                  postCode: plzTextController.text.trim(),
+                  place: placeTextController.text.trim(),
+                  email: emailTextController.text.trim()));
             } else if (state is SignInCheckCodeFailureState) {
               errorMessage = DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization);
               showError = true;
             } else if (state is SignInCheckCodeNotValidFailureState) {
-              errorMessage =
-                  "Die Registrierung ist fehlgeschlagen. Bitte prüfen Sie ob Sie einen gültigen Code und die zugehörige E-Mail Adresse verwenden.";
+              errorMessage = localization.register_invalid_code_error;
               showError = true;
             } else if (state is SignInCheckCodeSuccessState) {
               BlocProvider.of<SignInCubit>(context)
-                  .registerWithEmailAndPassword(
-                      emailTextController.text, passwordTextController.text);
+                  .registerWithEmailAndPassword(emailTextController.text.trim(),
+                      passwordTextController.text);
             }
           }),
           BlocListener<UserCubit, UserState>(listener: (context, state) {
@@ -166,13 +165,13 @@ class _RegisterFormState extends State<RegisterForm> {
                   shrinkWrap: true,
                   padding: const EdgeInsets.symmetric(horizontal: listPadding),
                   children: [
-                    const SizedBox(height: 80),
+                    SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: getResponsiveWidth(1),
                         child: Text(localization.register_title,
                             style: themeData.textTheme.headlineLarge!.copyWith(
-                                fontSize: 50,
+                                fontSize: responsiveValue.isMobile ? 20 : 50,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 4)),
                       ),
@@ -182,13 +181,11 @@ class _RegisterFormState extends State<RegisterForm> {
                       SizedBox(
                         width: getResponsiveWidth(1),
                         child: Text(localization.register_subtitle,
-                            style: themeData.textTheme.headlineLarge!.copyWith(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 4)),
+                            style: themeData.textTheme.bodySmall!.copyWith(
+                                fontWeight: FontWeight.w500, letterSpacing: 4)),
                       ),
                     ]),
-                    const SizedBox(height: 80),
+                    SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       GenderPicker(
                           width: getResponsiveWidth(1),
@@ -220,6 +217,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                   resetError();
                                 },
                                 validator: validator.validateFirstName,
+                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                                 decoration: InputDecoration(
                                     labelText: localization.register_firstname),
                               ),
@@ -238,6 +236,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     resetError();
                                   },
                                   validator: validator.validateLastName,
+                                  style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                                   decoration: InputDecoration(
                                       labelText:
                                           localization.register_lastname),
@@ -260,6 +259,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               resetError();
                             },
                             validator: validator.validateBirthDate,
+                            style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                             decoration: InputDecoration(
                                 prefixIcon:
                                     const Icon(Icons.calendar_today_rounded),
@@ -290,6 +290,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           onChanged: (_) {
                             resetError();
                           },
+                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_address),
                         ),
@@ -305,6 +306,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           controller: plzTextController,
                           onFieldSubmitted: (_) => submit(validator),
                           validator: validator.validatePostcode,
+                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                           onChanged: (_) {
                             resetError();
                           },
@@ -322,6 +324,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           onChanged: (_) {
                             resetError();
                           },
+                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_place),
                         ),
@@ -339,6 +342,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             resetError();
                           },
                           validator: validator.validateEmail,
+                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_email),
                         ),
@@ -356,6 +360,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           },
                           validator: validator.validatePassword,
                           obscureText: true,
+                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_password),
                         ),
@@ -376,6 +381,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 val, passwordTextController.text);
                           },
                           obscureText: true,
+                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_repeat_password),
                         ),
@@ -392,8 +398,9 @@ class _RegisterFormState extends State<RegisterForm> {
                             resetError();
                           },
                           validator: validator.validateCode,
-                          decoration: const InputDecoration(
-                              labelText: "Registrierungscode"),
+                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                          decoration: InputDecoration(
+                              labelText: localization.register_code),
                         ),
                       ),
                     ]),

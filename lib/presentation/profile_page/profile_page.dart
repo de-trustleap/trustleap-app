@@ -3,10 +3,10 @@ import 'package:finanzbegleiter/application/images/images_bloc.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -26,10 +26,10 @@ class _ProfilePageState extends State<ProfilePage>
   late TabController tabController;
   final List<TabbarContent> tabViews = [
     TabbarContent(
-        tab: const CustomTab(title: "Allgemein"),
+        tab: const CustomTab(icon: Icons.person, title: "Allgemein"),
         content: const ProfileGeneralView()),
     TabbarContent(
-        tab: const CustomTab(title: "Passwort ändern"),
+        tab: const CustomTab(icon: Icons.lock, title: "Passwort ändern"),
         content: const ProfilePasswordUpdateView())
   ];
 
@@ -37,6 +37,12 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     super.initState();
     tabController = TabController(length: tabViews.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -58,23 +64,29 @@ class _ProfilePageState extends State<ProfilePage>
         ],
         child: Padding(
           padding: EdgeInsets.only(top: topPadding),
-          child: tabbar(),
+          child: tabbar(responsiveValue),
         ));
   }
 
-  Widget tabbar() {
+  Widget tabbar(ResponsiveBreakpointsData responsiveValue) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomTabbar(
-              controller: tabController,
-              tabs: tabViews.map((e) => e.tab).toList()),
-          SizedBox(
-              height: screenHeight * 0.85,
-              child: TabBarView(
-                  controller: tabController,
-                  children: tabViews.map((e) => e.content).toList()))
-        ]);
+      children: [
+        SizedBox(
+            width: responsiveValue.largerThan(TABLET)
+                ? responsiveValue.screenWidth * 0.6
+                : responsiveValue.screenWidth * 0.9,
+            child: TabBar(
+                controller: tabController,
+                tabs: tabViews.map((e) => e.tab).toList(),
+                indicatorPadding: const EdgeInsets.only(bottom: 4))),
+        Expanded(
+            child: TabBarView(
+                controller: tabController,
+                physics: kIsWeb
+                    ? const NeverScrollableScrollPhysics()
+                    : const ScrollPhysics(),
+                children: tabViews.map((e) => e.content).toList()))
+      ],
+    );
   }
 }
