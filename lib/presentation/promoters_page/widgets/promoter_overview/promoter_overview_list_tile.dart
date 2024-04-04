@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class PromoterOverviewListTile extends StatelessWidget {
   final Promoter promoter;
@@ -16,6 +18,8 @@ class PromoterOverviewListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return Container(
         decoration: BoxDecoration(
@@ -52,22 +56,22 @@ class PromoterOverviewListTile extends StatelessWidget {
                 if (promoter.registered != null) ...[
                   const SizedBox(height: 8),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: responsiveValue.isMobile ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         if (promoter.registered == true) ...[
                           const PromoterRegistrationBadge(
                               state: PromoterRegistrationState.registered),
-                          const Spacer(flex: 3)
+                          Spacer(flex: responsiveValue.isMobile ? 1 : 3)
                         ] else ...[
                           const PromoterRegistrationBadge(
                               state: PromoterRegistrationState.unregistered),
-                          const Spacer(flex: 10)
+                            Spacer(flex: responsiveValue.isMobile ? 1 : 10)
                         ],
                         Expanded(
-                            flex: promoter.registered == true ? 4 : 15,
+                            flex: responsiveValue.isMobile ? 0 : (promoter.registered == true ? 4 : 15),
                             child: Text(
-                                PromoterHelper().getPromoterDateText(
+                                PromoterHelper(localization: localization).getPromoterDateText(
                                         context, promoter) ??
                                     "",
                                 style: themeData.textTheme.bodySmall!.copyWith(

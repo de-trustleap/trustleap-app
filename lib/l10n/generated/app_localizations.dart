@@ -321,6 +321,18 @@ abstract class AppLocalizations {
   /// **'Please indicate your gender'**
   String get auth_validation_missing_gender;
 
+  /// validationmessage when reason for recommendation is missing.
+  ///
+  /// In en, this message translates to:
+  /// **'reason for recommendation is missing'**
+  String get auth_validation_missing_additional_info;
+
+  /// validationmessage when limit of 500 characters has been exceeded.
+  ///
+  /// In en, this message translates to:
+  /// **'You exceeded the maximal amount of 500 characters'**
+  String get auth_validation_additional_info_exceed_limit;
+
   /// the menu entry for the profile
   ///
   /// In en, this message translates to:
@@ -843,6 +855,12 @@ abstract class AppLocalizations {
   /// **'email address'**
   String get register_promoter_email;
 
+  /// The reason for the recommendation placeholder in the text field of the promoter register form
+  ///
+  /// In en, this message translates to:
+  /// **'reason for the recommendation'**
+  String get register_promoter_additional_info;
+
   /// The button title to register a new promoter
   ///
   /// In en, this message translates to:
@@ -854,6 +872,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The new promoter has been successfully registered!'**
   String get register_promoter_snackbar_success;
+
+  /// The title of the promoter overview
+  ///
+  /// In en, this message translates to:
+  /// **'My promoter'**
+  String get promoter_overview_title;
+
+  /// Placeholder in searchbar on the promoter overview
+  ///
+  /// In en, this message translates to:
+  /// **'Search...'**
+  String get promoter_overview_search_placeholder;
+
+  /// Radio button title for selecting which type of users should be displayed
+  ///
+  /// In en, this message translates to:
+  /// **'Show all'**
+  String get promoter_overview_filter_show_all;
+
+  /// Radio button title for selecting which type of users should be displayed
+  ///
+  /// In en, this message translates to:
+  /// **'Show registered'**
+  String get promoter_overview_filter_show_registered;
+
+  /// Radio button title for selecting which type of users should be displayed
+  ///
+  /// In en, this message translates to:
+  /// **'Show unregistered'**
+  String get promoter_overview_filter_show_unregistered;
+
+  /// The text above the sorting dropdown menu if no gender has yet been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get promoter_overview_filter_sortby_choose;
+
+  /// The text in the sorting dropdown menu if creation date has been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'creation date'**
+  String get promoter_overview_filter_sortby_date;
+
+  /// The text in the sorting dropdown menu if firstname has been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'firstname'**
+  String get promoter_overview_filter_sortby_firstname;
+
+  /// The text in the sorting dropdown menu if lastname has been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'lastname'**
+  String get promoter_overview_filter_sortby_lastname;
+
+  /// The text in the sorting dropdown menu if email address has been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'email address'**
+  String get promoter_overview_filter_sortby_email;
+
+  /// Radio button title for selecting which sorting order has been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Ascending'**
+  String get promoter_overview_filter_sortorder_asc;
+
+  /// Radio button title for selecting which sorting order has been selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Descending'**
+  String get promoter_overview_filter_sortorder_desc;
+
+  /// Title for the no search results view.
+  ///
+  /// In en, this message translates to:
+  /// **'No search results'**
+  String get promoter_overview_no_search_results_title;
+
+  /// Text for the no search results view.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t seem to have registered any promoters with the name you\'re looking for yet.\nChange your search term to search for other promoters.'**
+  String get promoter_overview_no_search_results_subtitle;
+
+  /// Text that says if the shown promoter is registered.
+  ///
+  /// In en, this message translates to:
+  /// **'Registered'**
+  String get promoter_overview_registration_badge_registered;
+
+  /// Text that says if the shown promoter is not registered.
+  ///
+  /// In en, this message translates to:
+  /// **'Not registered'**
+  String get promoter_overview_registration_badge_unregistered;
+
+  /// Title for the page that appears when there are no promoters.
+  ///
+  /// In en, this message translates to:
+  /// **'No promoter found'**
+  String get promoter_overview_empty_page_title;
+
+  /// Text for the page that appears when there are no promoters.
+  ///
+  /// In en, this message translates to:
+  /// **'You dont seem to have any promoters registered yet. Register your promoters now to win your first new customers.'**
+  String get promoter_overview_empty_page_subtitle;
+
+  /// Title for the button on the page that appears when there are no promoters.
+  ///
+  /// In en, this message translates to:
+  /// **'Register promoter'**
+  String get promoter_overview_empty_page_button_title;
+
+  /// Title for the error view that appears if an error occurred while retrieving the data.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while retrieving the data.'**
+  String get promoter_overview_error_view_title;
+
+  /// Text on the promoter tile that says when the promoter expires.
+  ///
+  /// In en, this message translates to:
+  /// **'expires at {date}'**
+  String promoter_overview_expiration_date(String date);
+
+  /// Text on the promoter tile that says when the promoter has been created.
+  ///
+  /// In en, this message translates to:
+  /// **'Member since {date}'**
+  String promoter_overview_creation_date(String date);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

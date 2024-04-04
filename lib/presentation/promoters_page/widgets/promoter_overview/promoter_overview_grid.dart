@@ -54,7 +54,7 @@ class PromoterOverviewGrid extends StatelessWidget {
     } else if (responsiveValue.isTablet) {
       return 0.67;
     } else {
-      return 0.8;
+      return 0.6;
     }
   }
 }

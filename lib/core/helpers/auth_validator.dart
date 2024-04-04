@@ -99,6 +99,16 @@ class AuthValidator {
     }
   }
 
+  String? validateAdditionalInfo(String? input) {
+    if (input == null || input.isEmpty) {
+      return localization.auth_validation_missing_additional_info;
+    } else if (input.length > 500) {
+      return localization.auth_validation_additional_info_exceed_limit;
+    } else {
+      return null;
+    }
+  }
+
   bool _isAdult(DateTime date) {
     final DateTime today = DateTime.now();
     final DateTime adultDate = DateTime(

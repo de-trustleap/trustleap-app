@@ -13,6 +13,7 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/promoters_sect
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class ProfileGeneralView extends StatefulWidget {
   const ProfileGeneralView({super.key});
@@ -32,7 +33,9 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
 
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
     final profileObserverBloc = Modular.get<ProfileObserverBloc>();
+
     return BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
       builder: (context, state) {
         if (state is ProfileObserverLoading) {
@@ -66,7 +69,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                                     localization
                                         .profile_page_snackbar_contact_information_changes)
                               }),
-                      const SizedBox(height: 60),
+                      SizedBox(height: responsiveValue.isMobile ? 20 : 60),
                       EmailSection(
                           user: state.user,
                           sendEmailVerificationCallback: () => {
@@ -74,17 +77,17 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                                     localization
                                         .profile_page_snackbar_email_verification)
                               }),
-                      const SizedBox(height: 60),
+                      SizedBox(height: responsiveValue.isMobile ? 20 : 60),
                       PromotersSection(user: state.user),
-                      const SizedBox(height: 60),
+                      SizedBox(height: responsiveValue.isMobile ? 20 : 60),
                       SecondaryButton(
                           title: localization.profile_page_logout_button_title,
-                          width: 200,
+                          width: responsiveValue.isMobile ? responsiveValue.screenWidth - 80 : 200,
                           onTap: () => {
                                 BlocProvider.of<ProfileCubit>(context)
                                     .signOutUser()
                               }),
-                      const SizedBox(height: 100)
+                      SizedBox(height: responsiveValue.isMobile ? 50 : 100)
                     ])),
               ]));
         } else if (state is ProfileObserverFailure) {

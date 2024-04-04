@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -38,6 +39,7 @@ class _PromoterOverviewHeaderExpandableFilterState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
       Expanded(
@@ -47,7 +49,7 @@ class _PromoterOverviewHeaderExpandableFilterState
             mainAxisSize: MainAxisSize.min,
             children: [
               RadioListTile(
-                  title: Text("Alle anzeigen",
+                  title: Text(localization.promoter_overview_filter_show_all,
                       style: themeData.textTheme.bodySmall),
                   value: PromoterRegistrationFilterState.all,
                   groupValue: filterStates.registrationFilterState,
@@ -60,7 +62,7 @@ class _PromoterOverviewHeaderExpandableFilterState
                   }),
               const SizedBox(height: 8),
               RadioListTile(
-                  title: Text("Registrierte anzeigen",
+                  title: Text(localization.promoter_overview_filter_show_registered,
                       style: themeData.textTheme.bodySmall),
                   value: PromoterRegistrationFilterState.registered,
                   groupValue: filterStates.registrationFilterState,
@@ -73,7 +75,7 @@ class _PromoterOverviewHeaderExpandableFilterState
                   }),
               const SizedBox(height: 8),
               RadioListTile(
-                  title: Text("Unregistrierte anzeigen",
+                  title: Text(localization.promoter_overview_filter_show_unregistered,
                       style: themeData.textTheme.bodySmall),
                   value: PromoterRegistrationFilterState.unregistered,
                   groupValue: filterStates.registrationFilterState,
@@ -95,25 +97,25 @@ class _PromoterOverviewHeaderExpandableFilterState
               DropdownMenu<PromoterSortByFilterState>(
                   textStyle: themeData.textTheme.bodySmall,
                   width: responsiveValue.largerThan(MOBILE) ? 250 : 190,
-                  label: Text("Sortieren nach",
+                  label: Text(localization.promoter_overview_filter_sortby_choose,
                       style: themeData.textTheme.bodySmall!
                           .copyWith(fontSize: 12)),
                   initialSelection: PromoterSortByFilterState.createdAt,
                   enableSearch: false,
                   requestFocusOnTap: false,
-                  dropdownMenuEntries: const [
+                  dropdownMenuEntries: [
                     DropdownMenuEntry(
                         value: PromoterSortByFilterState.createdAt,
-                        label: "Erstellungsdatum"),
+                        label: localization.promoter_overview_filter_sortby_date),
                     DropdownMenuEntry(
                         value: PromoterSortByFilterState.firstName,
-                        label: "Vorname"),
+                        label: localization.promoter_overview_filter_sortby_firstname),
                     DropdownMenuEntry(
                         value: PromoterSortByFilterState.lastName,
-                        label: "Nachname"),
+                        label: localization.promoter_overview_filter_sortby_lastname),
                     DropdownMenuEntry(
                         value: PromoterSortByFilterState.email,
-                        label: "E-Mail Adresse")
+                        label: localization.promoter_overview_filter_sortby_email)
                   ],
                   onSelected: (sortBy) {
                     filterStates.sortByFilterState =
@@ -122,7 +124,7 @@ class _PromoterOverviewHeaderExpandableFilterState
                   }),
               RadioListTile(
                   title:
-                      Text("Absteigend", style: themeData.textTheme.bodySmall),
+                      Text(localization.promoter_overview_filter_sortorder_desc, style: themeData.textTheme.bodySmall),
                   value: PromoterSortOrderFilterState.desc,
                   groupValue: filterStates.sortOrderFilterState,
                   onChanged: (value) {
@@ -134,7 +136,7 @@ class _PromoterOverviewHeaderExpandableFilterState
                   }),
               RadioListTile(
                   title:
-                      Text("Aufsteigend", style: themeData.textTheme.bodySmall),
+                      Text(localization.promoter_overview_filter_sortorder_asc, style: themeData.textTheme.bodySmall),
                   value: PromoterSortOrderFilterState.asc,
                   groupValue: filterStates.sortOrderFilterState,
                   onChanged: (value) {

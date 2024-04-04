@@ -152,6 +152,14 @@
     "@auth_validation_missing_gender": {
         "description": "Validierungsnachricht wenn kein Geschlecht angegeben wurde"
     },
+    "auth_validation_missing_additional_info": "Bitte einen Empfehlungsgrund angeben",
+    "@auth_validation_missing_additional_info": {
+        "description": "Validierungsnachricht wenn kein Empfehlungsgrund angegeben wurde"
+    },
+    "auth_validation_additional_info_exceed_limit": "Es sind maximal 500 Zeichen erlaubt",
+    "@auth_validation_additional_info_exceed_limit": {
+        "description": "Validierungsnachricht wenn kein Empfehlungsgrund mehr als 500 Zeichen umfasst"
+    },
     "menuitems_profile": "Profil",
     "@menuitems_profile": {
         "description": "Der Menüpunkt für das Profil"
@@ -500,6 +508,10 @@
     "@register_promoter_email": {
         "description": "Die E-Mail Adresse Platzhalter im Textfeld vom Promoter registrieren Formular"
     },
+    "register_promoter_additional_info": "Grund der Empfehlung",
+    "@register_promoter_additional_info": {
+        "description": "Der Grund der Empfehlung Platzhalter im Textfeld vom Promoter registrieren Formular"
+    },
     "register_promoter_register_button": "Registrieren",
     "@register_promoter_register_button": {
         "description": "Der Button Titel um einen neuen Promoter zu registrieren"
@@ -507,5 +519,105 @@
     "register_promoter_snackbar_success": "Der neue Promoter wurde erfolgreich registriert!",
     "@register_promoter_snackbar_success": {
         "description": "Der Titel der Snackbar wenn neuer Promoter registriert wurde"
+    },
+    "promoter_overview_title": "Meine Promoter",
+    "@promoter_overview_title": {
+        "description": "Der Titel der Promoter Übersicht"
+    },
+    "promoter_overview_search_placeholder": "Suche...",
+    "@promoter_overview_search_placeholder": {
+        "description": "Platzhalter in der Suchleiste auf der Promoter Übersicht"
+    },
+    "promoter_overview_filter_show_all": "Alle anzeigen",
+    "@promoter_overview_filter_show_all": {
+        "description": "Radio Button Titel für Auswahl welche Art von Nutzern angezeigt werden sollen"
+    },
+    "promoter_overview_filter_show_registered": "Registrierte anzeigen",
+    "@promoter_overview_filter_show_registered": {
+        "description": "Radio Button Titel für Auswahl welche Art von Nutzern angezeigt werden sollen"
+    },
+    "promoter_overview_filter_show_unregistered": "Unregistrierte anzeigen",
+    "@promoter_overview_filter_show_unregistered": {
+        "description": "Radio Button Titel für Auswahl welche Art von Nutzern angezeigt werden sollen"
+    },
+    "promoter_overview_filter_sortby_choose": "Sortieren nach",
+    "@promoter_overview_filter_sortby_choose": {
+        "description": "Der Text über dem Sortieren Dropdown Menü wenn noch kein Geschlecht gewählt wurde."
+    },
+    "promoter_overview_filter_sortby_date": "Erstellungsdatum",
+    "@promoter_overview_filter_sortby_date": {
+        "description": "Der Text im Sortieren Dropdown Menü wenn Erstellungsdatum gewählt wurde."
+    },
+    "promoter_overview_filter_sortby_firstname": "Vorname",
+    "@promoter_overview_filter_sortby_firstname": {
+        "description": "Der Text im Sortieren Dropdown Menü wenn Vorname gewählt wurde."
+    },
+    "promoter_overview_filter_sortby_lastname": "Nachname",
+    "@promoter_overview_filter_sortby_lastname": {
+        "description": "Der Text im Sortieren Dropdown Menü wenn Nachname gewählt wurde."
+    },
+    "promoter_overview_filter_sortby_email": "E-Mail Adresse",
+    "@promoter_overview_filter_sortby_email": {
+        "description": "Der Text im Sortieren Dropdown Menü wenn E-Mail Adresse gewählt wurde."
+    },
+    "promoter_overview_filter_sortorder_asc": "Aufsteigend",
+    "@promoter_overview_filter_sortorder_asc": {
+        "description": "Radio Button Titel für Auswahl welche Sortierreihenfolge gewählt wurde"
+    },
+    "promoter_overview_filter_sortorder_desc": "Absteigend",
+    "@promoter_overview_filter_sortorder_desc": {
+        "description": "Radio Button Titel für Auswahl welche Sortierreihenfolge gewählt wurde"
+    },
+    "promoter_overview_no_search_results_title": "Keine Suchergebnisse",
+    "@promoter_overview_no_search_results_title": {
+        "description": "Titel für die Anzeige dass keine Suchergebnisse gefunden wurden"
+    },
+    "promoter_overview_no_search_results_subtitle": "Sie scheinen noch keine Promoter mit dem gesuchten Namen registriert zu haben.\nÄndern Sie Ihren Suchbegriff um nach anderen Promotern zu suchen.",
+    "@promoter_overview_no_search_results_subtitle": {
+        "description": "Text für die Anzeige dass keine Suchergebnisse gefunden wurden"
+    },
+    "promoter_overview_registration_badge_registered": "Registriert",
+    "@promoter_overview_registration_badge_registered": {
+        "description": "Text ob der angezeigte Promoter registriert ist"
+    },
+    "promoter_overview_registration_badge_unregistered": "Nicht registriert",
+    "@promoter_overview_registration_badge_unregistered": {
+        "description": "Text ob der angezeigte Promoter nicht registriert ist"
+    },
+    "promoter_overview_empty_page_title": "Keine Promoter gefunden",
+    "@promoter_overview_empty_page_title": {
+        "description": "Titel für die Seite die erscheint wenn man noch keine Promoter registriert hat"
+    },
+    "promoter_overview_empty_page_subtitle": "Sie scheinen noch keine Promoter registriert zu haben. Registrieren Sie jetzt ihre Promoter um die ersten Neukunden zu gewinnen.",
+    "@promoter_overview_empty_page_subtitle": {
+        "description": "Text für die Seite die erscheint wenn man noch keine Promoter registriert hat"
+    },
+    "promoter_overview_empty_page_button_title": "Promoter registrieren",
+    "@promoter_overview_empty_page_button_title": {
+        "description": "Titel für dem Button auf der Seite die erscheint wenn man noch keine Promoter registriert hat"
+    },
+    "promoter_overview_error_view_title": "Ein Fehler beim Abruf der Daten ist aufgetreten.",
+    "@promoter_overview_error_view_title": {
+        "description": "Titel für die Error View die erscheint wenn ein Fehler beim Abruf der Daten aufgetreten ist"
+    },
+    "promoter_overview_expiration_date": "Läuft am {date} ab",
+    "@promoter_overview_expiration_date": {
+        "description": "Text auf einer Promoter Tile der aussagt wann der Promoter abläuft",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "23.12.2023"
+            }   
+        }
+    },
+    "promoter_overview_creation_date": "Mitglied seit {date}",
+    "@promoter_overview_creation_date": {
+        "description": "Text auf einer Promoter Tile der aussagt wann der Promoter erstellt wurde",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "23.12.2023"
+            }   
+        }
     }
 }

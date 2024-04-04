@@ -11,6 +11,7 @@ import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class PasswordForgottenForm extends StatefulWidget {
   const PasswordForgottenForm({super.key});
@@ -76,6 +77,7 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
     const double padding = 20;
     return BlocConsumer<AuthCubit, AuthState>(listener: ((context, state) {
       if (state is AuthPasswordResetFailureState) {
@@ -96,17 +98,20 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                   ? AutovalidateMode.always
                   : AutovalidateMode.disabled,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: padding),
+                padding: const EdgeInsets.symmetric(horizontal: padding / 2),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 80),
                       Text(localization.password_forgotten_title,
-                          style: themeData.textTheme.headlineLarge!
-                              .copyWith(fontWeight: FontWeight.bold)),
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodyMedium!
+                                  .copyWith(fontWeight: FontWeight.bold)
+                              : themeData.textTheme.headlineLarge!
+                                  .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: padding),
                       Text(localization.password_forgotten_description,
-                          style: themeData.textTheme.bodyMedium),
+                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
                       const SizedBox(height: padding),
                       TextFormField(
                         controller: emailTextController,
@@ -115,7 +120,7 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                         },
                         onFieldSubmitted: (_) => submit(),
                         validator: validator.validateEmail,
-                        style: themeData.textTheme.titleMedium,
+                        style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
                         decoration: InputDecoration(
                             labelText: localization
                                 .password_forgotten_email_textfield_placeholder),
@@ -128,7 +133,7 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                           PrimaryButton(
                               title:
                                   localization.password_forgotten_button_title,
-                              width: maxWidth / 2 - padding,
+                              width: responsiveValue.isMobile ? maxWidth - padding : maxWidth / 2 - padding,
                               onTap: () {
                                 submit();
                               })

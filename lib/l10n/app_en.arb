@@ -152,6 +152,14 @@
     "@auth_validation_missing_gender": {
         "description": "validationmessage when gender is missing"
     },
+    "auth_validation_missing_additional_info": "reason for recommendation is missing",
+    "@auth_validation_missing_additional_info": {
+        "description": "validationmessage when reason for recommendation is missing."
+    },
+    "auth_validation_additional_info_exceed_limit": "You exceeded the maximal amount of 500 characters",
+    "@auth_validation_additional_info_exceed_limit": {
+        "description": "validationmessage when limit of 500 characters has been exceeded."
+    },
     "menuitems_profile": "Profile",
     "@menuitems_profile": {
         "description": "the menu entry for the profile"
@@ -500,6 +508,10 @@
     "@register_promoter_email": {
         "description": "The email placeholder in the text field of the promoter register form"
     },
+    "register_promoter_additional_info": "reason for the recommendation",
+    "@register_promoter_additional_info": {
+        "description": "The reason for the recommendation placeholder in the text field of the promoter register form"
+    },
     "register_promoter_register_button": "Register",
     "@register_promoter_register_button": {
         "description": "The button title to register a new promoter"
@@ -507,5 +519,105 @@
     "register_promoter_snackbar_success": "The new promoter has been successfully registered!",
     "@register_promoter_snackbar_success": {
         "description": "The title of the snack bar when a new promoter is registered"
+    },
+    "promoter_overview_title": "My promoter",
+    "@promoter_overview_title": {
+        "description": "The title of the promoter overview"
+    },
+    "promoter_overview_search_placeholder": "Search...",
+    "@promoter_overview_search_placeholder": {
+        "description": "Placeholder in searchbar on the promoter overview"
+    },
+    "promoter_overview_filter_show_all": "Show all",
+    "@promoter_overview_filter_show_all": {
+        "description": "Radio button title for selecting which type of users should be displayed"
+    },
+    "promoter_overview_filter_show_registered": "Show registered",
+    "@promoter_overview_filter_show_registered": {
+        "description": "Radio button title for selecting which type of users should be displayed"
+    },
+    "promoter_overview_filter_show_unregistered": "Show unregistered",
+    "@promoter_overview_filter_show_unregistered": {
+        "description": "Radio button title for selecting which type of users should be displayed"
+    },
+    "promoter_overview_filter_sortby_choose": "Sort by",
+    "@promoter_overview_filter_sortby_choose": {
+        "description": "The text above the sorting dropdown menu if no gender has yet been selected."
+    },
+    "promoter_overview_filter_sortby_date": "creation date",
+    "@promoter_overview_filter_sortby_date": {
+        "description": "The text in the sorting dropdown menu if creation date has been selected."
+    },
+    "promoter_overview_filter_sortby_firstname": "firstname",
+    "@promoter_overview_filter_sortby_firstname": {
+        "description": "The text in the sorting dropdown menu if firstname has been selected."
+    },
+    "promoter_overview_filter_sortby_lastname": "lastname",
+    "@promoter_overview_filter_sortby_lastname": {
+        "description": "The text in the sorting dropdown menu if lastname has been selected."
+    },
+    "promoter_overview_filter_sortby_email": "email address",
+    "@promoter_overview_filter_sortby_email": {
+        "description": "The text in the sorting dropdown menu if email address has been selected."
+    },
+    "promoter_overview_filter_sortorder_asc": "Ascending",
+    "@promoter_overview_filter_sortorder_asc": {
+        "description": "Radio button title for selecting which sorting order has been selected."
+    },
+    "promoter_overview_filter_sortorder_desc": "Descending",
+    "@promoter_overview_filter_sortorder_desc": {
+        "description": "Radio button title for selecting which sorting order has been selected."
+    },
+    "promoter_overview_no_search_results_title": "No search results",
+    "@promoter_overview_no_search_results_title": {
+        "description": "Title for the no search results view."
+    },
+    "promoter_overview_no_search_results_subtitle": "You don't seem to have registered any promoters with the name you're looking for yet.\nChange your search term to search for other promoters.",
+    "@promoter_overview_no_search_results_subtitle": {
+        "description": "Text for the no search results view."
+    },
+    "promoter_overview_registration_badge_registered": "Registered",
+    "@promoter_overview_registration_badge_registered": {
+        "description": "Text that says if the shown promoter is registered."
+    },
+    "promoter_overview_registration_badge_unregistered": "Not registered",
+    "@promoter_overview_registration_badge_unregistered": {
+        "description": "Text that says if the shown promoter is not registered."
+    },
+    "promoter_overview_empty_page_title": "No promoter found",
+    "@promoter_overview_empty_page_title": {
+        "description": "Title for the page that appears when there are no promoters."
+    },
+    "promoter_overview_empty_page_subtitle": "You dont seem to have any promoters registered yet. Register your promoters now to win your first new customers.",
+    "@promoter_overview_empty_page_subtitle": {
+        "description": "Text for the page that appears when there are no promoters."
+    },
+    "promoter_overview_empty_page_button_title": "Register promoter",
+    "@promoter_overview_empty_page_button_title": {
+        "description": "Title for the button on the page that appears when there are no promoters."
+    },
+    "promoter_overview_error_view_title": "An error occurred while retrieving the data.",
+    "@promoter_overview_error_view_title": {
+        "description": "Title for the error view that appears if an error occurred while retrieving the data."
+    },
+    "promoter_overview_expiration_date": "expires at {date}",
+    "@promoter_overview_expiration_date": {
+        "description": "Text on the promoter tile that says when the promoter expires.",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "23.12.2023"
+            }   
+        }
+    },
+    "promoter_overview_creation_date": "Member since {date}",
+    "@promoter_overview_creation_date": {
+        "description": "Text on the promoter tile that says when the promoter has been created.",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "23.12.2023"
+            }   
+        }
     }
 }

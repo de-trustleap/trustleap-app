@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
@@ -21,6 +22,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Container(
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
@@ -82,10 +84,10 @@ class PromotersOverviewGridTile extends StatelessWidget {
                         ? PromoterRegistrationState.registered
                         : PromoterRegistrationState.unregistered)
               ],
-              if (PromoterHelper().getPromoterDateText(context, promoter) !=
+              if (PromoterHelper(localization: localization).getPromoterDateText(context, promoter) !=
                   null) ...[
                 const SizedBox(height: 8),
-                Text(PromoterHelper().getPromoterDateText(context, promoter)!,
+                Text(PromoterHelper(localization: localization).getPromoterDateText(context, promoter)!,
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
                         color:

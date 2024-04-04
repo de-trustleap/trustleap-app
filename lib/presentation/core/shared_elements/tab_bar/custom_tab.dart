@@ -45,7 +45,7 @@ class _CustomTabState extends State<CustomTab> {
               const SizedBox(width: 8),
               Flexible(
                 child: Text(widget.title,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: responsiveValue.isMobile ? Theme.of(context).textTheme.bodySmall : Theme.of(context).textTheme.bodyMedium,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis),
               )

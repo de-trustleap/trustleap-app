@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:js_util';
+
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
@@ -10,6 +12,7 @@ class UnregisteredPromoter extends Equatable {
   final String? lastName;
   final String? birthDate;
   final String? email;
+  final String? additionalInfo;
   final UniqueID? parentUserID;
   final UniqueID? code;
   final DateTime expiresAt;
@@ -21,6 +24,7 @@ class UnregisteredPromoter extends Equatable {
       this.lastName,
       this.birthDate,
       this.email,
+      this.additionalInfo,
       this.parentUserID,
       this.code,
       DateTime? expiresAt})
@@ -35,7 +39,7 @@ class UnregisteredPromoter extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, gender, firstName, lastName, birthDate, email, parentUserID, code];
+      [id, gender, firstName, lastName, birthDate, email, parentUserID, code, additionalInfo];
 
   UnregisteredPromoter copyWith({
     UniqueID? id,
@@ -44,6 +48,7 @@ class UnregisteredPromoter extends Equatable {
     String? lastName,
     String? birthDate,
     String? email,
+    String? additionalInfo,
     UniqueID? parentUserID,
     UniqueID? code,
   }) {
@@ -54,6 +59,7 @@ class UnregisteredPromoter extends Equatable {
         lastName: lastName ?? this.lastName,
         birthDate: birthDate ?? this.birthDate,
         email: email ?? this.email,
+        additionalInfo: additionalInfo ?? this.additionalInfo,
         parentUserID: parentUserID ?? this.parentUserID,
         code: code ?? this.code,
         expiresAt: expiresAt);

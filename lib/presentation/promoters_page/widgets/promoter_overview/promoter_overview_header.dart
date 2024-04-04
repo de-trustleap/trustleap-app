@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_view_state_button.dart';
@@ -38,14 +39,17 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Flexible(
             flex: responsiveValue.isDesktop ? 2 : 0,
-            child: Text("Meine Promoter",
-                style: themeData.textTheme.headlineLarge!
+            child: Text(localization.promoter_overview_title,
+                style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium!
+                    .copyWith(fontWeight: FontWeight.bold) : themeData.textTheme.headlineLarge!
                     .copyWith(fontWeight: FontWeight.bold)),
           ),
           if (responsiveValue.isDesktop) ...[
@@ -61,7 +65,7 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
                         onPressed: () => widget.clearSearch(),
                         icon: const Icon(Icons.close))
                   ],
-                  hintText: "Suche...",
+                  hintText: localization.promoter_overview_search_placeholder,
                 )),
             const SizedBox(width: 8),
             SizedBox(
@@ -97,7 +101,7 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
                         onPressed: () => widget.clearSearch(),
                         icon: const Icon(Icons.close))
                   ],
-                  hintText: "Suche...",
+                  hintText: localization.promoter_overview_search_placeholder,
                 ),
               ),
               const SizedBox(width: 8),

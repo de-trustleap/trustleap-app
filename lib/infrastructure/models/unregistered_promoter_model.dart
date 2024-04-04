@@ -12,6 +12,7 @@ class UnregisteredPromoterModel extends Equatable {
   final String? lastName;
   final String? birthDate;
   final String? email;
+  final String? additionalInfo;
   final String? parentUserID;
   final String? code;
   final DateTime expiresAt;
@@ -24,6 +25,7 @@ class UnregisteredPromoterModel extends Equatable {
       this.lastName,
       this.birthDate,
       this.email,
+      this.additionalInfo,
       this.parentUserID,
       this.code,
       required this.expiresAt,
@@ -37,6 +39,7 @@ class UnregisteredPromoterModel extends Equatable {
       'lastName': lastName,
       'birthDate': birthDate,
       'email': email,
+      'additionalInfo': additionalInfo,
       'parentUserID': parentUserID,
       'code': code,
       'expiresAt': expiresAt,
@@ -52,6 +55,7 @@ class UnregisteredPromoterModel extends Equatable {
         lastName: map['lastName'] != null ? map['lastName'] as String : null,
         birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
         email: map['email'] != null ? map['email'] as String : null,
+        additionalInfo: map['additionalInfo'] != null ? map['additionalInfo'] as String : null,
         parentUserID:
             map['parentUserID'] != null ? map['parentUserID'] as String : null,
         code: map['code'] != null ? map['code'] as String : null,
@@ -66,6 +70,7 @@ class UnregisteredPromoterModel extends Equatable {
     String? lastName,
     String? birthDate,
     String? email,
+    String? additionalInfo,
     String? parentUserID,
     String? code,
     DateTime? expiresAt,
@@ -78,6 +83,7 @@ class UnregisteredPromoterModel extends Equatable {
       lastName: lastName ?? this.lastName,
       birthDate: birthDate ?? this.birthDate,
       email: email ?? this.email,
+      additionalInfo: additionalInfo ?? this.additionalInfo,
       parentUserID: parentUserID ?? this.parentUserID,
       code: code ?? this.code,
       expiresAt: expiresAt ?? this.expiresAt,
@@ -100,6 +106,7 @@ class UnregisteredPromoterModel extends Equatable {
         lastName: lastName,
         birthDate: birthDate,
         email: email,
+        additionalInfo: additionalInfo,
         parentUserID: UniqueID.fromUniqueString(parentUserID ?? ""),
         code: UniqueID.fromUniqueString(code ?? ""),
         expiresAt: expiresAt);
@@ -113,6 +120,7 @@ class UnregisteredPromoterModel extends Equatable {
         lastName: promoter.lastName,
         birthDate: promoter.birthDate,
         email: promoter.email,
+        additionalInfo: promoter.additionalInfo,
         parentUserID: promoter.parentUserID?.value ?? "",
         code: promoter.code?.value,
         expiresAt: promoter.expiresAt,
@@ -121,5 +129,5 @@ class UnregisteredPromoterModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, firstName, lastName, gender, email, birthDate, parentUserID, code];
+      [id, firstName, lastName, gender, email, birthDate, parentUserID, code, additionalInfo];
 }

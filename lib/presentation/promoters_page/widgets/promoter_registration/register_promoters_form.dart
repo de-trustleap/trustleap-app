@@ -35,6 +35,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   final lastNameTextController = TextEditingController();
   final birthDateTextController = TextEditingController();
   final emailTextController = TextEditingController();
+  final additionalInfoTextController = TextEditingController();
   Gender? selectedGender;
   User? currentUser;
 
@@ -58,6 +59,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     lastNameTextController.dispose();
     birthDateTextController.dispose();
     emailTextController.dispose();
+    additionalInfoTextController.dispose();
 
     super.dispose();
   }
@@ -91,6 +93,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                 lastName: lastNameTextController.text.trim(),
                 birthDate: birthDateTextController.text.trim(),
                 email: emailTextController.text.trim(),
+                additionalInfo: additionalInfoTextController.text.trim(),
                 parentUserID: UniqueID.fromUniqueString(currentUser?.uid ?? ""),
                 code: UniqueID()));
       }
@@ -146,8 +149,11 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(localization.register_promoter_title,
-                          style: themeData.textTheme.headlineLarge!
-                              .copyWith(fontWeight: FontWeight.bold)),
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodyMedium!
+                                  .copyWith(fontWeight: FontWeight.bold)
+                              : themeData.textTheme.headlineLarge!
+                                  .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: textFieldSpacing + 4),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -183,7 +189,9 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     resetError();
                                   },
                                   validator: validator.validateFirstName,
-                                  style: themeData.textTheme.titleMedium,
+                                  style: responsiveValue.isMobile
+                                      ? themeData.textTheme.bodySmall
+                                      : themeData.textTheme.bodyMedium,
                                   decoration: InputDecoration(
                                       labelText: localization
                                           .register_promoter_first_name),
@@ -206,7 +214,9 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     resetError();
                                   },
                                   validator: validator.validateLastName,
-                                  style: themeData.textTheme.titleMedium,
+                                  style: responsiveValue.isMobile
+                                      ? themeData.textTheme.bodySmall
+                                      : themeData.textTheme.bodyMedium,
                                   decoration: InputDecoration(
                                       labelText: localization
                                           .register_promoter_last_name),
@@ -228,7 +238,9 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     resetError();
                                   },
                                   validator: validator.validateBirthDate,
-                                  style: themeData.textTheme.titleMedium,
+                                  style: responsiveValue.isMobile
+                                      ? themeData.textTheme.bodySmall
+                                      : themeData.textTheme.bodyMedium,
                                   decoration: InputDecoration(
                                       prefixIcon: const Icon(
                                           Icons.calendar_today_rounded),
@@ -264,10 +276,37 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                   resetError();
                                 },
                                 validator: validator.validateEmail,
-                                style: themeData.textTheme.titleMedium,
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium,
                                 decoration: InputDecoration(
                                     labelText:
                                         localization.register_promoter_email),
+                              ),
+                            ),
+                          ]),
+                      const SizedBox(height: textFieldSpacing),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: maxWidth,
+                              child: TextFormField(
+                                keyboardType: TextInputType.multiline,
+                                minLines: 2,
+                                maxLines: 5,
+                                controller: additionalInfoTextController,
+                                onFieldSubmitted: (_) => submit(validator),
+                                onChanged: (_) {
+                                  resetError();
+                                },
+                                validator: validator.validateAdditionalInfo,
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium,
+                                decoration: InputDecoration(
+                                    labelText: localization
+                                        .register_promoter_additional_info),
                               ),
                             ),
                           ]),
@@ -279,7 +318,9 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                           PrimaryButton(
                               title: localization
                                   .register_promoter_register_button,
-                              width: maxWidth / 2 - textFieldSpacing,
+                              width: responsiveValue.isMobile
+                                  ? maxWidth - textFieldSpacing
+                                  : maxWidth / 2 - textFieldSpacing,
                               disabled: buttonDisabled,
                               onTap: () {
                                 submit(validator);

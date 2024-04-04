@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -61,6 +62,7 @@ class _LoginFormState extends State<LoginForm> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
@@ -82,10 +84,10 @@ class _LoginFormState extends State<LoginForm> {
             child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: [
-                  const SizedBox(height: 80),
+                  SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                   Text(localization.login_title,
                       style: themeData.textTheme.headlineLarge!.copyWith(
-                          fontSize: 50,
+                          fontSize: responsiveValue.isMobile ? 20 : 50,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 4)),
                   const SizedBox(height: 20),
@@ -101,7 +103,7 @@ class _LoginFormState extends State<LoginForm> {
                     },
                     onFieldSubmitted: (_) => submit(),
                     validator: validator.validateEmail,
-                    style: themeData.textTheme.titleMedium,
+                    style: responsiveValue.isMobile ? themeData.textTheme.titleSmall : themeData.textTheme.titleMedium,
                     decoration:
                         InputDecoration(labelText: localization.login_email),
                   ),
@@ -114,7 +116,7 @@ class _LoginFormState extends State<LoginForm> {
                     onFieldSubmitted: (_) => submit(),
                     validator: validator.validatePassword,
                     obscureText: true,
-                    style: themeData.textTheme.titleMedium,
+                    style: responsiveValue.isMobile ? themeData.textTheme.titleSmall : themeData.textTheme.titleMedium,
                     decoration:
                         InputDecoration(labelText: localization.login_password),
                   ),

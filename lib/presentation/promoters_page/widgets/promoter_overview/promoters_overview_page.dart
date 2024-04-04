@@ -155,7 +155,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
           ]);
         } else if (state is PromotersObserverFailure) {
           return ErrorView(
-              title: "Ein Fehler beim Abruf der Daten ist aufgetreten.",
+              title: localization.promoter_overview_error_view_title,
               message: DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization),
               callback: () => {

@@ -146,8 +146,8 @@ class _EmailSectionState extends State<EmailSection> {
       }, builder: (context, state) {
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(localization.profile_page_email_section_title,
-              style: themeData.textTheme.headlineLarge!
-                  .copyWith(fontWeight: FontWeight.bold)),
+              style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold) : themeData.textTheme.headlineLarge!
+                        .copyWith(fontWeight: FontWeight.bold)),
           const SizedBox(height: 16),
           if (responsiveValue.largerThan(MOBILE)) ...[
             EmailSectionDesktop(
