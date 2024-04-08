@@ -141,7 +141,7 @@ void main() {
       verifyNoMoreInteractions(mockAuthRepo);
     });
 
-    test("should return failure when call has failedf", () async {
+    test("should return failure when call has failed", () async {
       // Given
       final expectedResult = left(TooManyRequestsFailure());
       when(mockAuthRepo.resetPassword(email: testEmail))
@@ -186,6 +186,34 @@ void main() {
       // Then
       verify(mockAuthRepo.isRegistrationCodeValid(
           email: testEmail, code: testCode));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockAuthRepo);
+    });
+  });
+
+  group("AuthRepositoryImplementation_deleteAccount", () {
+    test("should return unit when call was successful", () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockAuthRepo.deleteAccount())
+          .thenAnswer((realInvocation) async => right(unit));
+      // When
+      final result = await mockAuthRepo.deleteAccount();
+      // Then
+      verify(mockAuthRepo.deleteAccount());
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockAuthRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(TooManyRequestsFailure());
+      when(mockAuthRepo.deleteAccount())
+          .thenAnswer((realInvocation) async => left(TooManyRequestsFailure()));
+      // When
+      final result = await mockAuthRepo.deleteAccount();
+      // Then
+      verify(mockAuthRepo.deleteAccount());
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockAuthRepo);
     });
