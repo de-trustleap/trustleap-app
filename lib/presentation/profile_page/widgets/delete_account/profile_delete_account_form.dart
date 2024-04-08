@@ -62,16 +62,17 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
     }
   }
 
-  void showAlert(ThemeData themeData) {
+  void showAlert(ThemeData themeData, AppLocalizations localizations) {
     showDialog(
         context: context,
         builder: (_) {
           return CustomAlertDialog(
-              title: "Account wirklich löschen?",
-              message:
-                  "Sind Sie sicher dass Sie ihren Account löschen möchten?",
-              actionButtonTitle: "Account löschen",
-              cancelButtonTitle: "Abbrechen",
+              title: localizations.delete_account_confirmation_alert_title,
+              message: localizations.delete_account_confirmation_alert_message,
+              actionButtonTitle: localizations
+                  .delete_account_confirmation_alert_ok_button_title,
+              cancelButtonTitle: localizations
+                  .delete_account_confirmation_alert_cancel_button_title,
               actionButtonAction: submitAccountDeletion,
               cancelButtonAction: () => Modular.to.pop());
         });
@@ -100,7 +101,7 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
             setButtonToDisabled(false);
           } else if (state
               is ProfileReauthenticateForAccountDeletionSuccessState) {
-            showAlert(themeData);
+            showAlert(themeData, localization);
             setButtonToDisabled(false);
           } else if (state is ProfileAccountDeletionSuccessState) {
             BlocProvider.of<AuthCubit>(context).signOut();
@@ -114,13 +115,12 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Account löschen",
+                    Text(localization.delete_account_title,
                         style: themeData.textTheme.headlineLarge!.copyWith(
                             fontSize: responsiveValue.isMobile ? 16 : 20,
                             fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
-                    Text(
-                        "Mit der Löschung Ihres Accounts verbleiben Ihre Daten noch 30 Tage bei uns. In dieser Zeit können Sie sich noch beim Support melden um die Löschung rückgängig zu machen. Danach werden Ihre Daten unwiderruflich gelöscht sein.\n\nGeben Sie bitte ihr Passwort ein um den Account zu löschen.",
+                    Text(localization.delete_account_subtitle,
                         style: responsiveValue.isMobile
                             ? themeData.textTheme.bodySmall
                             : themeData.textTheme.bodyMedium),
@@ -136,7 +136,9 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
                       style: responsiveValue.isMobile
                           ? themeData.textTheme.bodySmall
                           : themeData.textTheme.bodyMedium,
-                      decoration: const InputDecoration(labelText: "Passwort"),
+                      decoration: InputDecoration(
+                          labelText:
+                              localization.delete_account_password_placeholder),
                     ),
                     const SizedBox(height: 48),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -145,7 +147,7 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
                             ? maxWidth - 20
                             : maxWidth / 2 - 20,
                         child: SecondaryButton(
-                            title: "Account löschen",
+                            title: localization.delete_account_button_title,
                             disabled: buttonDisabled,
                             onTap: submit),
                       ),

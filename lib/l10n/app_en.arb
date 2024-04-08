@@ -619,5 +619,37 @@
                 "example": "23.12.2023"
             }
         }
+    },
+    "delete_account_title": "Delete account",
+    "@delete_account_title": {
+        "description": "Title for the page to delete the account."
+    },
+    "delete_account_subtitle": "Once your account is deleted, your data will remain with us for 30 days. During this time you can still contact support to reverse the deletion. Your data will then be irrevocably deleted.\n\nPlease enter your password to delete the account.",
+    "@delete_account_subtitle": {
+        "description": "Text for the page to delete the account"
+    },
+    "delete_account_password_placeholder": "Password",
+    "@delete_account_password_placeholder": {
+        "description": "Placeholder for the password textfield on the account deletion page."
+    },
+    "delete_account_button_title": "Delete account",
+    "@delete_account_button_title": {
+        "description": "Title for the button on the account deletion page."
+    },
+    "delete_account_confirmation_alert_title": "Really delete your account?",
+    "@delete_account_confirmation_alert_title": {
+        "description": "Title for the confirmation alert on the account deletion page."
+    },
+    "delete_account_confirmation_alert_message": "Are you sure you want to delete your account?",
+    "@delete_account_confirmation_alert_message": {
+        "description": "Message for the confirmation alert on the account deletion page."
+    },
+    "delete_account_confirmation_alert_ok_button_title": "Delete account",
+    "@delete_account_confirmation_alert_ok_button_title": {
+        "description": "Title for the confirm button on the confirmation alert to delete the account."
+    },
+    "delete_account_confirmation_alert_cancel_button_title": "Cancel",
+    "@delete_account_confirmation_alert_cancel_button_title": {
+        "description": "Title for the cancel button on the confirmation alert to delete the account."
     }
 }

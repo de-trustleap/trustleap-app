@@ -1004,6 +1004,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Member since {date}'**
   String promoter_overview_creation_date(String date);
+
+  /// Title for the page to delete the account.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get delete_account_title;
+
+  /// Text for the page to delete the account
+  ///
+  /// In en, this message translates to:
+  /// **'Once your account is deleted, your data will remain with us for 30 days. During this time you can still contact support to reverse the deletion. Your data will then be irrevocably deleted.\n\nPlease enter your password to delete the account.'**
+  String get delete_account_subtitle;
+
+  /// Placeholder for the password textfield on the account deletion page.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get delete_account_password_placeholder;
+
+  /// Title for the button on the account deletion page.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get delete_account_button_title;
+
+  /// Title for the confirmation alert on the account deletion page.
+  ///
+  /// In en, this message translates to:
+  /// **'Really delete your account?'**
+  String get delete_account_confirmation_alert_title;
+
+  /// Message for the confirmation alert on the account deletion page.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get delete_account_confirmation_alert_message;
+
+  /// Title for the confirm button on the confirmation alert to delete the account.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get delete_account_confirmation_alert_ok_button_title;
+
+  /// Title for the cancel button on the confirmation alert to delete the account.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get delete_account_confirmation_alert_cancel_button_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
