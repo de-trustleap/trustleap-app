@@ -152,7 +152,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_failure_weak_password => 'The password is too weak. Please use at least 6 characters.';
 
   @override
-  String get auth_failure_user_disabled => 'The user is disabled.';
+  String get auth_failure_user_disabled => 'The user does not exist anymore. Please contact our support team for further investigation.';
 
   @override
   String get auth_failure_user_not_found => 'The user does not exist.';

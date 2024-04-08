@@ -152,7 +152,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get auth_failure_weak_password => 'Das angegebene Passwort ist zu schwach. Bitte nutze mindestens 6 Zeichen.';
 
   @override
-  String get auth_failure_user_disabled => 'Der angegebene Nutzername ist gesperrt.';
+  String get auth_failure_user_disabled => 'Der angegebene Nutzer existiert nicht mehr. Wenden Sie sich bitte an den Support.';
 
   @override
   String get auth_failure_user_not_found => 'Der angegebene Nutzername existiert nicht.';

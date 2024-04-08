@@ -1,5 +1,5 @@
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
-import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
@@ -82,11 +82,11 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                       SizedBox(height: responsiveValue.isMobile ? 20 : 60),
                       SecondaryButton(
                           title: localization.profile_page_logout_button_title,
-                          width: responsiveValue.isMobile ? responsiveValue.screenWidth - 80 : 200,
-                          onTap: () => {
-                                BlocProvider.of<ProfileCubit>(context)
-                                    .signOutUser()
-                              }),
+                          width: responsiveValue.isMobile
+                              ? responsiveValue.screenWidth - 80
+                              : 200,
+                          onTap: () =>
+                              {BlocProvider.of<AuthCubit>(context).signOut()}),
                       SizedBox(height: responsiveValue.isMobile ? 50 : 100)
                     ])),
               ]));

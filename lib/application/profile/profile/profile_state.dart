@@ -129,3 +129,33 @@ class ProfileGetCurrentUserSuccessState extends ProfileState
   @override
   List<Object?> get props => [user];
 }
+
+class ProfileAccountDeletionLoadingState extends ProfileState
+    with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+class ProfileAccountDeletionFailureState extends ProfileState
+    with EquatableMixin {
+  final AuthFailure failure;
+
+  ProfileAccountDeletionFailureState({
+    required this.failure,
+  });
+
+  @override
+  List<Object?> get props => [failure];
+}
+
+class ProfileReauthenticateForAccountDeletionSuccessState extends ProfileState
+    with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+class ProfileAccountDeletionSuccessState extends ProfileState
+    with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}

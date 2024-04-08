@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
@@ -31,6 +32,7 @@ class AppModule extends Module {
     final firebaseAuth = FirebaseAuth.instance;
     final firestore = FirebaseFirestore.instance;
     final storage = FirebaseStorage.instance;
+    final firebaseFunctions = FirebaseFunctions.instance;
 
     i
       ..add(SignInCubit.new)
@@ -50,7 +52,8 @@ class AppModule extends Module {
           PromoterRepositoryImplementation.new)
       ..addLazySingleton(() => firebaseAuth)
       ..addLazySingleton(() => firestore)
-      ..addLazySingleton(() => storage);
+      ..addLazySingleton(() => storage)
+      ..addLazySingleton(() => firebaseFunctions);
   }
 
   @override

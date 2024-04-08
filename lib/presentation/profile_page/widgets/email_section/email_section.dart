@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -134,7 +135,7 @@ class _EmailSectionState extends State<EmailSection> {
           visibleField = EmailSectionVisibleTextField.email;
           setButtonToDisabled(false);
         } else if (state is ProfileEmailUpdateSuccessState) {
-          BlocProvider.of<ProfileCubit>(context).signOutUser();
+          BlocProvider.of<AuthCubit>(context).signOut();
           setButtonToDisabled(false);
         } else if (state is ProfileGetCurrentUserSuccessState) {
           currentUser = state.user;
@@ -146,8 +147,11 @@ class _EmailSectionState extends State<EmailSection> {
       }, builder: (context, state) {
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(localization.profile_page_email_section_title,
-              style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold) : themeData.textTheme.headlineLarge!
-                        .copyWith(fontWeight: FontWeight.bold)),
+              style: responsiveValue.isMobile
+                  ? themeData.textTheme.bodyMedium!
+                      .copyWith(fontWeight: FontWeight.bold)
+                  : themeData.textTheme.headlineLarge!
+                      .copyWith(fontWeight: FontWeight.bold)),
           const SizedBox(height: 16),
           if (responsiveValue.largerThan(MOBILE)) ...[
             EmailSectionDesktop(

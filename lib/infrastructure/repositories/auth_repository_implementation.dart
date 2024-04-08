@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -12,9 +13,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthRepositoryImplementation implements AuthRepository {
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firestore;
+  final FirebaseFunctions firebaseFunctions;
 
   AuthRepositoryImplementation(
-      {required this.firebaseAuth, required this.firestore});
+      {required this.firebaseAuth,
+      required this.firestore,
+      required this.firebaseFunctions});
 
   @override
   Future<Either<AuthFailure, UserCredential>> loginWithEmailAndPassword(
@@ -111,6 +115,18 @@ class AuthRepositoryImplementation implements AuthRepository {
       }
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> deleteAccount() async {
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("deactivateAccount");
+    try {
+      await callable.call();
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getAuthException(input: e.message));
     }
   }
 }

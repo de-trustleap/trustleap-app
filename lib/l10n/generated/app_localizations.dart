@@ -390,7 +390,7 @@ abstract class AppLocalizations {
   /// error message when the user is disabled.
   ///
   /// In en, this message translates to:
-  /// **'The user is disabled.'**
+  /// **'The user does not exist anymore. Please contact our support team for further investigation.'**
   String get auth_failure_user_disabled;
 
   /// error message when the user does not exist.

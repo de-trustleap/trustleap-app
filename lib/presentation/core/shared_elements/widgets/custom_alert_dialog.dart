@@ -6,15 +6,19 @@ class CustomAlertDialog extends StatelessWidget {
   final String title;
   final String message;
   final String actionButtonTitle;
+  final String? cancelButtonTitle;
   final Function actionButtonAction;
+  final Function? cancelButtonAction;
 
-  const CustomAlertDialog({
-    Key? key,
-    required this.title,
-    required this.message,
-    required this.actionButtonTitle,
-    required this.actionButtonAction,
-  }) : super(key: key);
+  const CustomAlertDialog(
+      {Key? key,
+      required this.title,
+      required this.message,
+      required this.actionButtonTitle,
+      required this.actionButtonAction,
+      this.cancelButtonTitle,
+      this.cancelButtonAction})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +34,22 @@ class CustomAlertDialog extends StatelessWidget {
                       ? themeData.textTheme.bodySmall!
                           .copyWith(color: themeData.colorScheme.secondary)
                       : themeData.textTheme.bodyMedium!
-                          .copyWith(color: themeData.colorScheme.secondary)))
+                          .copyWith(color: themeData.colorScheme.secondary))),
+          if (cancelButtonAction != null && cancelButtonTitle != null) ...[
+            TextButton(
+                onPressed: () => cancelButtonAction!(),
+                child: Text(cancelButtonTitle!,
+                    style: responsiveValue.isMobile
+                        ? themeData.textTheme.bodySmall!
+                            .copyWith(color: themeData.colorScheme.secondary)
+                        : themeData.textTheme.bodyMedium!
+                            .copyWith(color: themeData.colorScheme.secondary)))
+          ]
         ],
         title: Text(title,
-            style: themeData.textTheme.headlineLarge!
-                .copyWith(fontSize: responsiveValue.isMobile ? 18 : 22, fontWeight: FontWeight.bold)),
+            style: themeData.textTheme.headlineLarge!.copyWith(
+                fontSize: responsiveValue.isMobile ? 18 : 22,
+                fontWeight: FontWeight.bold)),
         contentPadding: const EdgeInsets.all(20),
         content: Text(message, style: themeData.textTheme.bodyMedium));
   }

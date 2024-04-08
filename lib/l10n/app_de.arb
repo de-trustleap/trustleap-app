@@ -196,9 +196,9 @@
     "@auth_failure_weak_password": {
         "description": "Fehlermeldung wenn das eingegebene Passwort zu schwach ist."
     },
-    "auth_failure_user_disabled": "Der angegebene Nutzername ist gesperrt.",
+    "auth_failure_user_disabled": "Der angegebene Nutzer existiert nicht mehr. Wenden Sie sich bitte an den Support.",
     "@auth_failure_user_disabled": {
-        "description": "Fehlermeldung wenn der Nutzer gesperrt oder deaktiviert ist."
+        "description": "Fehlermeldung wenn der Nutzer deaktiviert ist."
     },
     "auth_failure_user_not_found": "Der angegebene Nutzername existiert nicht.",
     "@auth_failure_user_not_found": {
@@ -607,7 +607,7 @@
             "date": {
                 "type": "String",
                 "example": "23.12.2023"
-            }   
+            }
         }
     },
     "promoter_overview_creation_date": "Mitglied seit {date}",
@@ -617,7 +617,7 @@
             "date": {
                 "type": "String",
                 "example": "23.12.2023"
-            }   
+            }
         }
     }
 }

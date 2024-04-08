@@ -14,7 +14,9 @@ class AuthCubit extends Cubit<AuthState> {
   }) : super(AuthStateUnAuthenticated());
 
   void signOut() async {
+    emit(AuthStateAuthenticationLoading());
     await authRepo.signOut();
+    checkForAuthState();
   }
 
   void checkForAuthState() {
