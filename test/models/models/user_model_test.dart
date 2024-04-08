@@ -59,6 +59,7 @@ void main() {
         "thumbnailDownloadURL": "https://thumb.de",
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
+        "deletesAt": null,
         "createdAt": Timestamp(100000, 0)
       };
       // When

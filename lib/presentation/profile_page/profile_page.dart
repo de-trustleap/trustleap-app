@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/application/profile/observer/profile_observer_bl
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/delete_account/profile_delete_account_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
 import 'package:flutter/foundation.dart';
@@ -30,7 +31,11 @@ class _ProfilePageState extends State<ProfilePage>
         content: const ProfileGeneralView()),
     TabbarContent(
         tab: const CustomTab(icon: Icons.lock, title: "Passwort ändern"),
-        content: const ProfilePasswordUpdateView())
+        content: const ProfilePasswordUpdateView()),
+    TabbarContent(
+        tab: const CustomTab(
+            icon: Icons.delete_forever, title: "Account löschen"),
+        content: const ProfileDeleteAccountView())
   ];
 
   @override
@@ -77,6 +82,10 @@ class _ProfilePageState extends State<ProfilePage>
                 : responsiveValue.screenWidth * 0.9,
             child: TabBar(
                 controller: tabController,
+                tabAlignment: responsiveValue.isMobile
+                    ? TabAlignment.start
+                    : TabAlignment.fill,
+                isScrollable: responsiveValue.isMobile ? true : false,
                 tabs: tabViews.map((e) => e.tab).toList(),
                 indicatorPadding: const EdgeInsets.only(bottom: 4))),
         Expanded(

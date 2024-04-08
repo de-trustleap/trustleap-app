@@ -57,6 +57,20 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
+  void reauthenticateWithPasswordForAccountDeletion(String? password) async {
+    if (password == null) {
+      emit(ProfileShowValidationState());
+    } else {
+      emit(ProfileAccountDeletionLoadingState());
+      final failureOrSuccess =
+          await authRepo.reauthenticateWithPassword(password: password);
+      failureOrSuccess.fold(
+          (failure) =>
+              emit(ProfileAccountDeletionFailureState(failure: failure)),
+          (_) => emit(ProfileReauthenticateForAccountDeletionSuccessState()));
+    }
+  }
+
   void updateEmail(String? email) async {
     if (email == null) {
       emit(ProfileShowValidationState());
@@ -88,10 +102,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  void signOutUser() async {
-    await authRepo.signOut();
-  }
-
   void resendEmailVerification() async {
     emit(ProfileResendEmailVerificationLoadingState());
     await authRepo.resendEmailVerification();
@@ -101,5 +111,13 @@ class ProfileCubit extends Cubit<ProfileState> {
   void getCurrentUser() async {
     final currentUser = await authRepo.getCurrentUser();
     emit(ProfileGetCurrentUserSuccessState(user: currentUser));
+  }
+
+  void deleteAccount() async {
+    emit(ProfileAccountDeletionLoadingState());
+    final failureOrSuccess = await authRepo.deleteAccount();
+    failureOrSuccess.fold(
+        (failure) => emit(ProfileAccountDeletionFailureState(failure: failure)),
+        (_) => emit(ProfileAccountDeletionSuccessState()));
   }
 }

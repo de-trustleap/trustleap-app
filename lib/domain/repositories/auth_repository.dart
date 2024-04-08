@@ -19,4 +19,5 @@ abstract class AuthRepository {
   Future<Either<AuthFailure, void>> resetPassword({required String email});
   Future<Either<DatabaseFailure, bool>> isRegistrationCodeValid(
       {required String email, required String code});
+  Future<Either<AuthFailure, Unit>> deleteAccount();
 }

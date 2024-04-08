@@ -43,6 +43,7 @@ void main() {
         "lastName": "Mustermann",
         "birthDate": "23.12.2023",
         "email": "tester@test.de",
+        "additionalInfo": null,
         "parentUserID": "2",
         "code": "1234",
         "expiresAt": date,
@@ -67,7 +68,7 @@ void main() {
         "email": "tester@test.de",
         "parentUserID": "2",
         "code": "1234",
-        "expiresAt": date,
+        "expiresAt": Timestamp(1000000, 0),
         "createdAt": Timestamp(1000000, 0)
       };
       final expectedResult = UnregisteredPromoterModel(
@@ -163,7 +164,7 @@ void main() {
         "email": "tester@test.de",
         "parentUserID": "2",
         "code": "1234",
-        "expiresAt": date,
+        "expiresAt": Timestamp(1000000, 0),
         "createdAt": Timestamp(1000000, 0)
       };
       final expectedResult = UnregisteredPromoterModel(

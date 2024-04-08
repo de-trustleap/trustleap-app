@@ -317,7 +317,7 @@ void main() {
 
   group("ProfileCubit_GetCurrentUser", () {
     final testUser = MockUser();
-    test("should call user auth when function is called", () async {
+    test("should call auth repo when function is called", () async {
       // Given
       when(mockAuthRepo.getCurrentUser()).thenAnswer((_) => testUser);
       // When
@@ -339,6 +339,48 @@ void main() {
       // Then
       expectLater(profileCubit.stream, emitsInOrder(expectedResult));
       profileCubit.getCurrentUser();
+    });
+  });
+
+  group("ProfileCubit_DeleteAccount", () {
+    test("should call auth repo when function is called", () async {
+      // Given
+      when(mockAuthRepo.deleteAccount()).thenAnswer((_) async => right(unit));
+      // When
+      profileCubit.deleteAccount();
+      await untilCalled(mockAuthRepo.deleteAccount());
+      // Then
+      verify(mockAuthRepo.deleteAccount());
+      verifyNoMoreInteractions(mockAuthRepo);
+    });
+
+    test(
+        "should emit ProfileAccountDeletionSuccessState when function is called",
+        () async {
+      // Given
+      final expectedResult = [
+        ProfileAccountDeletionLoadingState(),
+        ProfileAccountDeletionSuccessState()
+      ];
+      when(mockAuthRepo.deleteAccount()).thenAnswer((_) async => right(unit));
+      // Then
+      expectLater(profileCubit.stream, emitsInOrder(expectedResult));
+      profileCubit.deleteAccount();
+    });
+
+    test(
+        "should emit ProfileAccountDeletionFailureState when function is called",
+        () async {
+      // Given
+      final expectedResult = [
+        ProfileAccountDeletionLoadingState(),
+        ProfileAccountDeletionFailureState(failure: TooManyRequestsFailure())
+      ];
+      when(mockAuthRepo.deleteAccount())
+          .thenAnswer((_) async => left(TooManyRequestsFailure()));
+      // Then
+      expectLater(profileCubit.stream, emitsInOrder(expectedResult));
+      profileCubit.deleteAccount();
     });
   });
 }

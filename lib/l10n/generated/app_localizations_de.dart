@@ -152,7 +152,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get auth_failure_weak_password => 'Das angegebene Passwort ist zu schwach. Bitte nutze mindestens 6 Zeichen.';
 
   @override
-  String get auth_failure_user_disabled => 'Der angegebene Nutzername ist gesperrt.';
+  String get auth_failure_user_disabled => 'Der angegebene Nutzer existiert nicht mehr. Wenden Sie sich bitte an den Support.';
 
   @override
   String get auth_failure_user_not_found => 'Der angegebene Nutzername existiert nicht.';
@@ -463,4 +463,28 @@ class AppLocalizationsDe extends AppLocalizations {
   String promoter_overview_creation_date(String date) {
     return 'Mitglied seit $date';
   }
+
+  @override
+  String get delete_account_title => 'Account löschen';
+
+  @override
+  String get delete_account_subtitle => 'Mit der Löschung Ihres Accounts verbleiben Ihre Daten noch 30 Tage bei uns. In dieser Zeit können Sie sich noch beim Support melden um die Löschung rückgängig zu machen. Danach werden Ihre Daten unwiderruflich gelöscht sein.\n\nGeben Sie bitte ihr Passwort ein um den Account zu löschen.';
+
+  @override
+  String get delete_account_password_placeholder => 'Passwort';
+
+  @override
+  String get delete_account_button_title => 'Account löschen';
+
+  @override
+  String get delete_account_confirmation_alert_title => 'Account wirklich löschen?';
+
+  @override
+  String get delete_account_confirmation_alert_message => 'Sind Sie sicher dass Sie ihren Account löschen möchten?';
+
+  @override
+  String get delete_account_confirmation_alert_ok_button_title => 'Account löschen';
+
+  @override
+  String get delete_account_confirmation_alert_cancel_button_title => 'Abbrechen';
 }

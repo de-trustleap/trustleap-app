@@ -196,9 +196,9 @@
     "@auth_failure_weak_password": {
         "description": "Fehlermeldung wenn das eingegebene Passwort zu schwach ist."
     },
-    "auth_failure_user_disabled": "Der angegebene Nutzername ist gesperrt.",
+    "auth_failure_user_disabled": "Der angegebene Nutzer existiert nicht mehr. Wenden Sie sich bitte an den Support.",
     "@auth_failure_user_disabled": {
-        "description": "Fehlermeldung wenn der Nutzer gesperrt oder deaktiviert ist."
+        "description": "Fehlermeldung wenn der Nutzer deaktiviert ist."
     },
     "auth_failure_user_not_found": "Der angegebene Nutzername existiert nicht.",
     "@auth_failure_user_not_found": {
@@ -607,7 +607,7 @@
             "date": {
                 "type": "String",
                 "example": "23.12.2023"
-            }   
+            }
         }
     },
     "promoter_overview_creation_date": "Mitglied seit {date}",
@@ -617,7 +617,39 @@
             "date": {
                 "type": "String",
                 "example": "23.12.2023"
-            }   
+            }
         }
+    },
+    "delete_account_title": "Account löschen",
+    "@delete_account_title": {
+        "description": "Titel für Seite zum Account löschen"
+    },
+    "delete_account_subtitle": "Mit der Löschung Ihres Accounts verbleiben Ihre Daten noch 30 Tage bei uns. In dieser Zeit können Sie sich noch beim Support melden um die Löschung rückgängig zu machen. Danach werden Ihre Daten unwiderruflich gelöscht sein.\n\nGeben Sie bitte ihr Passwort ein um den Account zu löschen.",
+    "@delete_account_subtitle": {
+        "description": "Text für Seite zum Account löschen"
+    },
+    "delete_account_password_placeholder": "Passwort",
+    "@delete_account_password_placeholder": {
+        "description": "Platzhalter im Textfeld für das Passwort auf der Account löschen Seite"
+    },
+    "delete_account_button_title": "Account löschen",
+    "@delete_account_button_title": {
+        "description": "Titel für den Button auf der Seite zum Account löschen"
+    },
+    "delete_account_confirmation_alert_title": "Account wirklich löschen?",
+    "@delete_account_confirmation_alert_title": {
+        "description": "Titel für den Bestätigungs Alert auf der Seite zum Account löschen"
+    },
+    "delete_account_confirmation_alert_message": "Sind Sie sicher dass Sie ihren Account löschen möchten?",
+    "@delete_account_confirmation_alert_message": {
+        "description": "Nachricht für den Bestätigungs Alert auf der Seite zum Account löschen"
+    },
+    "delete_account_confirmation_alert_ok_button_title": "Account löschen",
+    "@delete_account_confirmation_alert_ok_button_title": {
+        "description": "Titel für den Bestätigungs Button im Bestätigungs Alert auf der Seite zum Account löschen"
+    },
+    "delete_account_confirmation_alert_cancel_button_title": "Abbrechen",
+    "@delete_account_confirmation_alert_cancel_button_title": {
+        "description": "Titel für den Abbrechen Button im Bestätigungs Alert auf der Seite zum Account löschen"
     }
 }

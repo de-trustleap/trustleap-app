@@ -34,7 +34,7 @@ class _MyWidgetState extends State<ProfileImageSection> {
     final context = myWidgetKey.currentContext;
     final ImagePicker picker = ImagePicker();
     final XFile? image =
-        await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
     if (context != null && context.mounted) {
       BlocProvider.of<ImagesBloc>(context).add(UploadImageTriggeredEvent(
           rawImage: image, userID: widget.user.id.value));
@@ -47,13 +47,14 @@ class _MyWidgetState extends State<ProfileImageSection> {
       return StorageFailureMapper.mapFailureMessage(
           state.failure, localization);
     } else if (state is ImageExceedsFileSizeLimitFailureState) {
-      return "Sie haben die zulässige Maximalgröße von 5 MB überschritten";
+      return localization
+          .profile_page_image_section_validation_exceededFileSize;
     } else if (state is ImageIsNotValidFailureState) {
-      return "Das ist kein gültiges Bildformat";
+      return localization.profile_page_image_section_validation_not_valid;
     } else if (state is ImageOnlyOneAllowedFailureState) {
-      return "Du kannst nur ein Bild gleichzeitig hochladen";
+      return localization.profile_page_image_section_only_one_allowed;
     } else if (state is ImageUploadNotFoundFailureState) {
-      return "Das Bild zum Hochladen wurde nicht gefunden";
+      return localization.profile_page_image_section_upload_not_found;
     } else {
       return null;
     }

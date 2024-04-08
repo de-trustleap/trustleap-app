@@ -13,6 +13,11 @@ class AuthStateUnAuthenticated extends AuthState with EquatableMixin {
   List<Object?> get props => [];
 }
 
+class AuthStateAuthenticationLoading extends AuthState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
 class AuthShowValidationState extends AuthState with EquatableMixin {
   @override
   List<Object?> get props => [];

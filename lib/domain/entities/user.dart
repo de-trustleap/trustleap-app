@@ -17,6 +17,7 @@ class CustomUser extends Equatable {
   final String? thumbnailDownloadURL;
   final List<String>? unregisteredPromoterIDs;
   final List<String>? registeredPromoterIDs;
+  final DateTime? deletesAt;
   final DateTime? createdAt;
 
   const CustomUser(
@@ -33,6 +34,7 @@ class CustomUser extends Equatable {
       this.thumbnailDownloadURL,
       this.unregisteredPromoterIDs,
       this.registeredPromoterIDs,
+      this.deletesAt,
       this.createdAt});
 
   CustomUser copyWith(
@@ -49,6 +51,7 @@ class CustomUser extends Equatable {
       String? thumbnailDownloadURL,
       List<String>? unregisteredPromoterIDs,
       List<String>? registeredPromoterIDs,
+      DateTime? deletesAt,
       DateTime? createdAt}) {
     return CustomUser(
         id: id ?? this.id,
@@ -67,6 +70,7 @@ class CustomUser extends Equatable {
             unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
         registeredPromoterIDs:
             registeredPromoterIDs ?? this.registeredPromoterIDs,
+        deletesAt: deletesAt ?? this.deletesAt,
         createdAt: createdAt ?? this.createdAt);
   }
 

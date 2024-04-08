@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -94,7 +95,7 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
             showError = true;
             setButtonToDisabled(false);
           } else if (state is ProfilePasswordUpdateSuccessState) {
-            BlocProvider.of<ProfileCubit>(context).signOutUser();
+            BlocProvider.of<AuthCubit>(context).signOut();
             setButtonToDisabled(false);
           } else if (state is ProfilePasswordUpdateLoadingState) {
             setButtonToDisabled(true);
@@ -111,8 +112,9 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
                   children: [
                     Text(
                         localization.profile_page_password_update_section_title,
-                        style: themeData.textTheme.headlineLarge!
-                            .copyWith(fontSize: responsiveValue.isMobile ? 16 : 20, fontWeight: FontWeight.bold)),
+                        style: themeData.textTheme.headlineLarge!.copyWith(
+                            fontSize: responsiveValue.isMobile ? 16 : 20,
+                            fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
                     if (visibleField ==
                         PasswordUpdateVisibleTextField.passwordReauth) ...[

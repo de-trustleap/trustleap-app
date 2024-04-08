@@ -19,6 +19,7 @@ class UserModel extends Equatable {
   final String? thumbnailDownloadURL;
   final List<String>? unregisteredPromoterIDs;
   final List<String>? registeredPromoterIDs;
+  final DateTime? deletesAt;
   final dynamic createdAt;
 
   const UserModel(
@@ -35,6 +36,7 @@ class UserModel extends Equatable {
       this.thumbnailDownloadURL,
       this.unregisteredPromoterIDs,
       this.registeredPromoterIDs,
+      this.deletesAt,
       this.createdAt});
 
   Map<String, dynamic> toMap() {
@@ -52,6 +54,7 @@ class UserModel extends Equatable {
       'thumbnailDownloadURL': thumbnailDownloadURL,
       'unregisteredPromoterIDs': unregisteredPromoterIDs,
       'registeredPromoterIDs': registeredPromoterIDs,
+      'deletesAt': deletesAt,
       'createdAt': createdAt,
     };
   }
@@ -79,6 +82,9 @@ class UserModel extends Equatable {
       registeredPromoterIDs: map['registeredPromoterIDs'] != null
           ? List<String>.from(map['registeredPromoterIDs'])
           : null,
+      deletesAt: map['deletesAt'] != null
+          ? (map['deletesAt'] as Timestamp).toDate()
+          : null,
       createdAt: map['createdAt'] as dynamic,
     );
   }
@@ -97,6 +103,7 @@ class UserModel extends Equatable {
     String? thumbnailDownloadURL,
     List<String>? unregisteredPromoterIDs,
     List<String>? registeredPromoterIDs,
+    DateTime? deletesAt,
     dynamic createdAt,
   }) {
     return UserModel(
@@ -116,6 +123,7 @@ class UserModel extends Equatable {
           unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
       registeredPromoterIDs:
           registeredPromoterIDs ?? this.registeredPromoterIDs,
+      deletesAt: deletesAt ?? this.deletesAt,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -141,6 +149,7 @@ class UserModel extends Equatable {
         thumbnailDownloadURL: thumbnailDownloadURL,
         unregisteredPromoterIDs: unregisteredPromoterIDs,
         registeredPromoterIDs: registeredPromoterIDs,
+        deletesAt: deletesAt,
         createdAt: (createdAt as Timestamp).toDate());
   }
 
@@ -159,6 +168,7 @@ class UserModel extends Equatable {
         thumbnailDownloadURL: user.thumbnailDownloadURL,
         unregisteredPromoterIDs: user.unregisteredPromoterIDs,
         registeredPromoterIDs: user.registeredPromoterIDs,
+        deletesAt: user.deletesAt,
         createdAt: FieldValue.serverTimestamp());
   }
 

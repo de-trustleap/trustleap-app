@@ -152,7 +152,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_failure_weak_password => 'The password is too weak. Please use at least 6 characters.';
 
   @override
-  String get auth_failure_user_disabled => 'The user is disabled.';
+  String get auth_failure_user_disabled => 'The user does not exist anymore. Please contact our support team for further investigation.';
 
   @override
   String get auth_failure_user_not_found => 'The user does not exist.';
@@ -463,4 +463,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String promoter_overview_creation_date(String date) {
     return 'Member since $date';
   }
+
+  @override
+  String get delete_account_title => 'Delete account';
+
+  @override
+  String get delete_account_subtitle => 'Once your account is deleted, your data will remain with us for 30 days. During this time you can still contact support to reverse the deletion. Your data will then be irrevocably deleted.\n\nPlease enter your password to delete the account.';
+
+  @override
+  String get delete_account_password_placeholder => 'Password';
+
+  @override
+  String get delete_account_button_title => 'Delete account';
+
+  @override
+  String get delete_account_confirmation_alert_title => 'Really delete your account?';
+
+  @override
+  String get delete_account_confirmation_alert_message => 'Are you sure you want to delete your account?';
+
+  @override
+  String get delete_account_confirmation_alert_ok_button_title => 'Delete account';
+
+  @override
+  String get delete_account_confirmation_alert_cancel_button_title => 'Cancel';
 }

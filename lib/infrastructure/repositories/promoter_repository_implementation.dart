@@ -99,7 +99,10 @@ class PromoterRepositoryImplementation implements PromoterRepository {
         for (var snapshot in document.docs) {
           var doc = snapshot.data();
           var model = UserModel.fromFirestore(doc, snapshot.id).toDomain();
-          users.add(model);
+          // do not show deactivated users
+          if (model.deletesAt == null) {
+            users.add(model);
+          }
         }
       }
       users.sort((a, b) {
