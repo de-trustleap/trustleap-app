@@ -1,0 +1,26 @@
+image: ghcr.io/cirruslabs/flutter
+
+stages:
+  - lints
+  - tests
+
+lints:
+  stage: lints
+  before_script:
+    - bash reconfigure.sh
+  script:
+    - flutter analyze
+  tags:
+    - flutter
+
+unit tests:
+  stage: tests
+  script:
+    - flutter test --coverage ./lib
+    - lcov -r coverage/lcov.info '*/__tests*__/*' -o coverage/lcov_cleaned.info
+    - genhtml coverage/lcov_cleaned.info --output=coverage
+  tags:
+    - flutter
+  artifacts:
+    paths:
+      - coverage
