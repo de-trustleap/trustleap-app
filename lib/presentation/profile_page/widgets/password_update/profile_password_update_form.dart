@@ -9,7 +9,6 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/password_updat
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_reauth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
 
 enum PasswordUpdateVisibleTextField { passwordReauth, passwordsNew }
 
@@ -80,7 +79,6 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
@@ -112,9 +110,8 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
                   children: [
                     Text(
                         localization.profile_page_password_update_section_title,
-                        style: themeData.textTheme.headlineLarge!.copyWith(
-                            fontSize: responsiveValue.isMobile ? 16 : 20,
-                            fontWeight: FontWeight.bold)),
+                        style: themeData.textTheme.headlineLarge!
+                            .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
                     if (visibleField ==
                         PasswordUpdateVisibleTextField.passwordReauth) ...[

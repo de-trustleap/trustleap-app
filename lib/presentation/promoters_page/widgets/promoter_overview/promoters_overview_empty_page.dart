@@ -28,16 +28,16 @@ class PromotersOverviewEmptyPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.person_add,
-                size: responsiveValue.isMobile ? 40 : 60, color: themeData.colorScheme.secondary),
+                size: responsiveValue.isMobile ? 40 : 60,
+                color: themeData.colorScheme.secondary),
             const SizedBox(height: 16),
             Text(localization.promoter_overview_empty_page_title,
-                style: responsiveValue.isMobile ? themeData.textTheme.headlineLarge!
-                    .copyWith(fontWeight: FontWeight.bold) : themeData.textTheme.headlineLarge!
-                    .copyWith(fontSize: 24, fontWeight: FontWeight.bold)),
+                style: themeData.textTheme.headlineLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: responsiveValue.isMobile ? 20 : 24)),
             const SizedBox(height: 16),
-            Text(
-                localization.promoter_overview_empty_page_subtitle,
-                style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium : themeData.textTheme.headlineLarge,
+            Text(localization.promoter_overview_empty_page_subtitle,
+                style: themeData.textTheme.headlineLarge,
                 textAlign: TextAlign.center),
             const SizedBox(height: 24),
             Row(
@@ -45,8 +45,11 @@ class PromotersOverviewEmptyPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PrimaryButton(
-                    title: localization.promoter_overview_empty_page_button_title,
-                    width: responsiveValue.isMobile ? responsiveValue.screenWidth - 20 : 300,
+                    title:
+                        localization.promoter_overview_empty_page_button_title,
+                    width: responsiveValue.isMobile
+                        ? responsiveValue.screenWidth - 20
+                        : 300,
                     onTap: () {
                       registerPromoterTapped();
                     }),
