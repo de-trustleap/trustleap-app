@@ -103,7 +103,9 @@ class _LoginFormState extends State<LoginForm> {
                     },
                     onFieldSubmitted: (_) => submit(),
                     validator: validator.validateEmail,
-                    style: responsiveValue.isMobile ? themeData.textTheme.titleSmall : themeData.textTheme.titleMedium,
+                    style: responsiveValue.isMobile
+                        ? themeData.textTheme.titleSmall
+                        : themeData.textTheme.titleMedium,
                     decoration:
                         InputDecoration(labelText: localization.login_email),
                   ),
@@ -116,7 +118,9 @@ class _LoginFormState extends State<LoginForm> {
                     onFieldSubmitted: (_) => submit(),
                     validator: validator.validatePassword,
                     obscureText: true,
-                    style: responsiveValue.isMobile ? themeData.textTheme.titleSmall : themeData.textTheme.titleMedium,
+                    style: responsiveValue.isMobile
+                        ? themeData.textTheme.titleSmall
+                        : themeData.textTheme.titleMedium,
                     decoration:
                         InputDecoration(labelText: localization.login_password),
                   ),

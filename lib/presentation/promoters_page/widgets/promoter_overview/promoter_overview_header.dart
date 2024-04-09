@@ -48,8 +48,7 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
           Flexible(
             flex: responsiveValue.isDesktop ? 2 : 0,
             child: Text(localization.promoter_overview_title,
-                style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium!
-                    .copyWith(fontWeight: FontWeight.bold) : themeData.textTheme.headlineLarge!
+                style: themeData.textTheme.headlineLarge!
                     .copyWith(fontWeight: FontWeight.bold)),
           ),
           if (responsiveValue.isDesktop) ...[

@@ -136,7 +136,7 @@ class _ContactSectionState extends State<ContactSection> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(localization.profile_page_contact_section_title,
-                    style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold) : themeData.textTheme.headlineLarge!
+                    style: themeData.textTheme.headlineLarge!
                         .copyWith(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -166,7 +166,9 @@ class _ContactSectionState extends State<ContactSection> {
                             Text(
                                 localization
                                     .profile_page_contact_section_form_firstname,
-                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
                             SizedBox(
                               width: responsiveValue.isMobile
@@ -179,7 +181,9 @@ class _ContactSectionState extends State<ContactSection> {
                                   resetError();
                                 },
                                 validator: validator.validateFirstName,
-                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium,
                                 decoration:
                                     const InputDecoration(labelText: ""),
                               ),
@@ -196,7 +200,9 @@ class _ContactSectionState extends State<ContactSection> {
                             Text(
                                 localization
                                     .profile_page_contact_section_form_lastname,
-                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
                             SizedBox(
                               width: responsiveValue.isMobile
@@ -209,7 +215,9 @@ class _ContactSectionState extends State<ContactSection> {
                                   resetError();
                                 },
                                 validator: validator.validateLastName,
-                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium,
                                 decoration:
                                     const InputDecoration(labelText: ""),
                               ),
@@ -219,7 +227,9 @@ class _ContactSectionState extends State<ContactSection> {
                 const SizedBox(height: textFieldSpacing),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(localization.profile_page_contact_section_form_address,
-                      style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+                      style: responsiveValue.isMobile
+                          ? themeData.textTheme.bodySmall
+                          : themeData.textTheme.bodyMedium),
                   const SizedBox(height: 4),
                   SizedBox(
                     width: maxWidth,
@@ -229,7 +239,9 @@ class _ContactSectionState extends State<ContactSection> {
                       onChanged: (_) {
                         resetError();
                       },
-                      style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                      style: responsiveValue.isMobile
+                          ? themeData.textTheme.bodySmall
+                          : themeData.textTheme.bodyMedium,
                       decoration: const InputDecoration(labelText: ""),
                     ),
                   ),
@@ -248,7 +260,9 @@ class _ContactSectionState extends State<ContactSection> {
                             Text(
                                 localization
                                     .profile_page_contact_section_form_postcode,
-                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
                             SizedBox(
                               width: responsiveValue.isMobile
@@ -262,7 +276,9 @@ class _ContactSectionState extends State<ContactSection> {
                                   resetError();
                                 },
                                 validator: validator.validatePostcode,
-                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium,
                                 decoration:
                                     const InputDecoration(labelText: ""),
                               ),
@@ -279,7 +295,9 @@ class _ContactSectionState extends State<ContactSection> {
                             Text(
                                 localization
                                     .profile_page_contact_section_form_place,
-                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
                             SizedBox(
                               width: responsiveValue.isMobile
@@ -291,7 +309,9 @@ class _ContactSectionState extends State<ContactSection> {
                                 onChanged: (_) {
                                   resetError();
                                 },
-                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium,
                                 decoration:
                                     const InputDecoration(labelText: ""),
                               ),
@@ -306,7 +326,9 @@ class _ContactSectionState extends State<ContactSection> {
                     PrimaryButton(
                         title: localization
                             .profile_page_contact_section_form_save_button_title,
-                        width: responsiveValue.isMobile ? maxWidth - textFieldSpacing : maxWidth / 2 - textFieldSpacing,
+                        width: responsiveValue.isMobile
+                            ? maxWidth - textFieldSpacing
+                            : maxWidth / 2 - textFieldSpacing,
                         disabled: buttonDisabled,
                         onTap: () {
                           submit(validator);

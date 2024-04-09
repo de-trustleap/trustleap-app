@@ -104,14 +104,13 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                     children: [
                       const SizedBox(height: 80),
                       Text(localization.password_forgotten_title,
-                          style: responsiveValue.isMobile
-                              ? themeData.textTheme.bodyMedium!
-                                  .copyWith(fontWeight: FontWeight.bold)
-                              : themeData.textTheme.headlineLarge!
-                                  .copyWith(fontWeight: FontWeight.bold)),
+                          style: themeData.textTheme.headlineLarge!
+                              .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: padding),
                       Text(localization.password_forgotten_description,
-                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodySmall
+                              : themeData.textTheme.bodyMedium),
                       const SizedBox(height: padding),
                       TextFormField(
                         controller: emailTextController,
@@ -120,7 +119,9 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                         },
                         onFieldSubmitted: (_) => submit(),
                         validator: validator.validateEmail,
-                        style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                        style: responsiveValue.isMobile
+                            ? themeData.textTheme.bodySmall
+                            : themeData.textTheme.bodyMedium,
                         decoration: InputDecoration(
                             labelText: localization
                                 .password_forgotten_email_textfield_placeholder),
@@ -133,7 +134,9 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                           PrimaryButton(
                               title:
                                   localization.password_forgotten_button_title,
-                              width: responsiveValue.isMobile ? maxWidth - padding : maxWidth / 2 - padding,
+                              width: responsiveValue.isMobile
+                                  ? maxWidth - padding
+                                  : maxWidth / 2 - padding,
                               onTap: () {
                                 submit();
                               })

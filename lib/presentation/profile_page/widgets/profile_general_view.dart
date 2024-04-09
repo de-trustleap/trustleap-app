@@ -48,7 +48,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
               decoration:
                   BoxDecoration(color: themeData.colorScheme.background),
               child: ListView(children: [
-                const SizedBox(height: 80),
+                SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                 CenteredConstrainedWrapper(
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

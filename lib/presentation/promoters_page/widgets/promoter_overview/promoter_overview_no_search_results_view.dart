@@ -18,14 +18,12 @@ class PromoterOverviewNoSearchResultsView extends StatelessWidget {
           Icon(Icons.search, size: 60, color: themeData.colorScheme.secondary),
           const SizedBox(height: 16),
           Text(localization.promoter_overview_no_search_results_title,
-              style: responsiveValue.isMobile
-                  ? themeData.textTheme.headlineLarge!
-                      .copyWith(fontWeight: FontWeight.bold)
-                  : themeData.textTheme.headlineLarge!
-                      .copyWith(fontSize: 24, fontWeight: FontWeight.bold)),
+              style: themeData.textTheme.headlineLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: responsiveValue.isMobile ? 20 : 24)),
           const SizedBox(height: 16),
           Text(localization.promoter_overview_no_search_results_subtitle,
-              style: responsiveValue.isMobile ? themeData.textTheme.bodyMedium : themeData.textTheme.headlineLarge,
+              style: themeData.textTheme.headlineLarge,
               textAlign: TextAlign.center),
         ]);
   }

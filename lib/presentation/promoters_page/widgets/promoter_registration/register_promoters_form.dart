@@ -149,11 +149,8 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(localization.register_promoter_title,
-                          style: responsiveValue.isMobile
-                              ? themeData.textTheme.bodyMedium!
-                                  .copyWith(fontWeight: FontWeight.bold)
-                              : themeData.textTheme.headlineLarge!
-                                  .copyWith(fontWeight: FontWeight.bold)),
+                          style: themeData.textTheme.headlineLarge!
+                              .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: textFieldSpacing + 4),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
