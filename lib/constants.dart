@@ -30,10 +30,30 @@ enum Gender {
   const Gender(this.value);
 }
 
+enum Role {
+  admin("Administrator"),
+  serviceProvider("Dienstleister"),
+  promoter("Promoter"),
+  none("Keine");
+
+  final String value;
+  const Role(this.value);
+}
+
 enum PromoterRegistrationState {
   registered("Registriert"),
   unregistered("Nicht registriert");
 
   final String value;
   const PromoterRegistrationState(this.value);
+}
+
+enum RecommendationReason {
+  finance("Finanzdienstleistung"),
+  car("KFZ-Dienstleistung"),
+  insurance("Versicherungsdienstleistung"),
+  none("Nicht ausgewählt");
+
+  final String value;
+  const RecommendationReason(this.value);
 }

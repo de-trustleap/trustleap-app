@@ -10,4 +10,7 @@ abstract class UserRepository {
   Future<Either<AuthFailure, void>> updateEmail({required String email});
   Future<bool> isEmailVerified();
   Future<Either<AuthFailure, void>> updatePassword({required String password});
+  Future<Either<DatabaseFailure, CustomUser>> getUser();
+  Future<Either<DatabaseFailure, CustomUser>> getParentUser(
+      {required String parentID});
 }

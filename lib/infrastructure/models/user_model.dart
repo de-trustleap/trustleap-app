@@ -15,6 +15,8 @@ class UserModel extends Equatable {
   final String? postCode;
   final String? place;
   final String? email;
+  final String? parentUserID;
+  final String? role;
   final String? profileImageDownloadURL;
   final String? thumbnailDownloadURL;
   final List<String>? unregisteredPromoterIDs;
@@ -32,6 +34,8 @@ class UserModel extends Equatable {
       this.postCode,
       this.place,
       this.email,
+      this.parentUserID,
+      this.role,
       this.profileImageDownloadURL,
       this.thumbnailDownloadURL,
       this.unregisteredPromoterIDs,
@@ -50,6 +54,8 @@ class UserModel extends Equatable {
       'postCode': postCode,
       'place': place,
       'email': email,
+      'parentUserID': parentUserID,
+      'role': role,
       'profileImageDownloadURL': profileImageDownloadURL,
       'thumbnailDownloadURL': thumbnailDownloadURL,
       'unregisteredPromoterIDs': unregisteredPromoterIDs,
@@ -70,6 +76,9 @@ class UserModel extends Equatable {
       postCode: map['postCode'] != null ? map['postCode'] as String : null,
       place: map['place'] != null ? map['place'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
+      parentUserID:
+          map['parentUserID'] != null ? map['parentUserID'] as String : null,
+      role: map['role'] != null ? map['role'] as String : "none",
       profileImageDownloadURL: map['profileImageDownloadURL'] != null
           ? map['profileImageDownloadURL'] as String
           : null,
@@ -99,6 +108,8 @@ class UserModel extends Equatable {
     String? postCode,
     String? place,
     String? email,
+    String? parentUserID,
+    String? role,
     String? profileImageDownloadURL,
     String? thumbnailDownloadURL,
     List<String>? unregisteredPromoterIDs,
@@ -116,6 +127,8 @@ class UserModel extends Equatable {
       postCode: postCode ?? this.postCode,
       place: place ?? this.place,
       email: email ?? this.email,
+      parentUserID: parentUserID ?? this.parentUserID,
+      role: role ?? this.role,
       profileImageDownloadURL:
           profileImageDownloadURL ?? this.profileImageDownloadURL,
       thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
@@ -145,6 +158,10 @@ class UserModel extends Equatable {
         postCode: postCode,
         place: place,
         email: email,
+        parentUserID: parentUserID,
+        role: role == null
+            ? Role.none
+            : Role.values.firstWhere((element) => element.name == role),
         profileImageDownloadURL: profileImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL,
         unregisteredPromoterIDs: unregisteredPromoterIDs,
@@ -164,6 +181,8 @@ class UserModel extends Equatable {
         postCode: user.postCode,
         place: user.place,
         email: user.email,
+        parentUserID: user.parentUserID,
+        role: user.role?.name,
         profileImageDownloadURL: user.profileImageDownloadURL,
         thumbnailDownloadURL: user.thumbnailDownloadURL,
         unregisteredPromoterIDs: user.unregisteredPromoterIDs,
@@ -183,6 +202,8 @@ class UserModel extends Equatable {
         postCode,
         place,
         email,
+        parentUserID,
+        role,
         profileImageDownloadURL,
         thumbnailDownloadURL,
         unregisteredPromoterIDs,

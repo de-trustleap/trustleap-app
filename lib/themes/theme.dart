@@ -267,4 +267,16 @@ class AppTheme {
       }),
       splashRadius: 0,
       overlayColor: const MaterialStatePropertyAll(AppTheme.darkPrimaryColor));
+
+  static const ChipThemeData lightChipTheme = ChipThemeData(
+      iconTheme: lightIconTheme,
+      backgroundColor: lightBackgroundColor,
+      deleteIconColor: lightTextColor,
+      labelStyle: lightBodySmallText);
+
+  static final ChipThemeData darkChipTheme = ChipThemeData(
+      iconTheme: darkIconTheme,
+      backgroundColor: darkBackgroundColor,
+      deleteIconColor: darkTextColor,
+      labelStyle: darkBodySmallText);
 }

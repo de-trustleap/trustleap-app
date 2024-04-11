@@ -38,11 +38,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
 
     return BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
       builder: (context, state) {
-        if (state is ProfileObserverLoading) {
-          return CenteredConstrainedWrapper(
-              child: CircularProgressIndicator(
-                  color: themeData.colorScheme.secondary));
-        } else if (state is ProfileObserverSuccess) {
+        if (state is ProfileObserverSuccess) {
           return Container(
               width: double.infinity,
               decoration:

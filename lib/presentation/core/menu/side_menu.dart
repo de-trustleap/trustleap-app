@@ -13,8 +13,7 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: BlocProvider.of<MenuCubit>(context),
-      child: BlocConsumer<MenuCubit, MenuState>(
-        listener: (context, state) {},
+      child: BlocBuilder<MenuCubit, MenuState>(
         builder: (context, state) {
           return NavigationListener(builder: (context, child) {
             return Column(
