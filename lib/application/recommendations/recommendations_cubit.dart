@@ -26,16 +26,13 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
 
   void getParentUser(String parentID) async {
     emit(RecommendationGetUserLoadingState());
-    print("LOADING!");
     final failureOrSuccess = await userRepo.getParentUser(parentID: parentID);
     failureOrSuccess.fold((failure) {
       if (!isClosed) {
-        print("FAILURE!");
         emit(RecommendationGetUserFailureState(failure: failure));
       }
     }, (user) {
       if (!isClosed) {
-        print("SUCCESS!");
         emit(RecommendationGetParentUserSuccessState(user: user));
       }
     });

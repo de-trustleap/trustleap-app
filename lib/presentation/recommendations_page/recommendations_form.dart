@@ -13,6 +13,7 @@ import 'package:finanzbegleiter/presentation/recommendations_page/recommendors_v
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RecommendorItem extends Equatable {
   final String name;
@@ -73,7 +74,6 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   void addRecommendor(RecommendorsValidator validator) {
-    print("SUBMIT");
     if (formKey.currentState!.validate() &&
         validator.validateReason(selectedReason) == null) {
       setState(() {
@@ -107,7 +107,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
           serviceProviderTextController.text =
               "${parentUser!.firstName} ${parentUser!.lastName}";
         });
-      } // TODO: Textfield muss readyOnly sein wenn es einen user gibt.
+      }
     }
   }
 
@@ -120,11 +120,21 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
         serviceProviderTextController.text =
             "${parentUser!.firstName} ${parentUser!.lastName}";
       });
-    } // TODO: Textfield muss readyOnly sein wenn es einen parent user gibt.
+    }
   }
 
   void generateRecommendation() {
     print("GENERATE");
+    sendMessageViaWhatsApp();
+  }
+
+  void sendMessageViaWhatsApp() async {
+    String url = "https://api.whatsapp.com/send?text=iwanttotestit";
+    if (await canLaunchUrl(Uri.parse(Uri.encodeFull(url)))) {
+      await launchUrl(Uri.parse(Uri.encodeFull(url)));
+    } else {
+      throw "Could not launch";
+    }
   }
 
   @override
@@ -143,7 +153,6 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
             setUser(state.user);
             if (state.user.role == Role.promoter &&
                 state.user.parentUserID != null) {
-              print("PROMOTER");
               BlocProvider.of<RecommendationsCubit>(context)
                   .getParentUser(state.user.parentUserID!);
             }
