@@ -8,7 +8,7 @@ class RecommendorsValidator {
 
   String? validateRecommendorsName(String? input) {
     if (input == null || input.isEmpty) {
-      return "Geben Sie bitte einen Namen an";
+      return localization.recommendations_validation_missing_recommendor_name;
     } else {
       return null;
     }
@@ -16,7 +16,7 @@ class RecommendorsValidator {
 
   String? validatePromotersName(String? input) {
     if (input == null || input.isEmpty) {
-      return "Geben Sie bitte einen Namen an";
+      return localization.recommendations_validation_missing_promoter_name;
     } else {
       return null;
     }
@@ -24,7 +24,7 @@ class RecommendorsValidator {
 
   String? validateReason(RecommendationReason? input) {
     if (input == null || input == RecommendationReason.none) {
-      return "Bitte einen Grund angeben";
+      return localization.recommendations_validation_missing_reason;
     } else {
       return null;
     }

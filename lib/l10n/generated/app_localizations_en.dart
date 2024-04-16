@@ -487,4 +487,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get delete_account_confirmation_alert_cancel_button_title => 'Cancel';
+
+  @override
+  String get recommendations_choose_reason_placeholder => 'Choose a reason';
+
+  @override
+  String get recommendations_choose_reason_not_chosen => 'Not chosen';
+
+  @override
+  String get recommendations_title => 'Generate recommendations';
+
+  @override
+  String get recommendations_form_promoter_placeholder => 'Promoter';
+
+  @override
+  String get recommendations_form_service_provider_placeholder => 'Service provider';
+
+  @override
+  String get recommendations_form_recommendation_name_placeholder => 'Recommendation name';
+
+  @override
+  String get recommendations_form_generate_recommendation_button_title => 'Generate recommendations';
+
+  @override
+  String get recommendations_error_view_title => 'An error occurred while retrieving the data';
+
+  @override
+  String get recommendations_validation_missing_recommendor_name => 'Please enter a name';
+
+  @override
+  String get recommendations_validation_missing_promoter_name => 'Please enter a name';
+
+  @override
+  String get recommendations_validation_missing_reason => 'Please enter a reason';
 }

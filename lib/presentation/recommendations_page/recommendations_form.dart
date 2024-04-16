@@ -171,7 +171,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Empfehlungen generieren",
+                      Text(localization.recommendations_title,
                           style: themeData.textTheme.headlineLarge!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 16),
@@ -192,7 +192,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                     ? themeData.textTheme.bodySmall
                                     : themeData.textTheme.bodyMedium,
                                 decoration: InputDecoration(
-                                    labelText: "Promoter",
+                                    labelText: localization
+                                        .recommendations_form_promoter_placeholder,
                                     hoverColor: Colors.transparent,
                                     filled: promoterTextFieldDisabled
                                         ? true
@@ -219,7 +220,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                       ? themeData.textTheme.bodySmall
                                       : themeData.textTheme.bodyMedium,
                                   decoration: InputDecoration(
-                                      labelText: "Dienstleister",
+                                      labelText: localization
+                                          .recommendations_form_service_provider_placeholder,
                                       hoverColor: Colors.transparent,
                                       filled: true,
                                       fillColor:
@@ -246,8 +248,9 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                 style: responsiveValue.isMobile
                                     ? themeData.textTheme.bodySmall
                                     : themeData.textTheme.bodyMedium,
-                                decoration: const InputDecoration(
-                                    labelText: "Empfehlungsname"),
+                                decoration: InputDecoration(
+                                    labelText: localization
+                                        .recommendations_form_recommendation_name_placeholder),
                               ),
                             ),
                             const Spacer(),
@@ -295,7 +298,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           PrimaryButton(
-                              title: "Empfehlung generieren",
+                              title: localization
+                                  .recommendations_form_generate_recommendation_button_title,
                               width: responsiveValue.isMobile
                                   ? maxWidth - textFieldSpacing
                                   : maxWidth / 2 - textFieldSpacing,
@@ -308,7 +312,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
           } else if (state is RecommendationGetUserFailureState) {
             return CenteredConstrainedWrapper(
                 child: ErrorView(
-                    title: "Beim Abrufen der Daten ist ein Fehler aufgetreten",
+                    title: localization.recommendations_error_view_title,
                     message: DatabaseFailureMapper.mapFailureMessage(
                         state.failure, localization),
                     callback: () => {
