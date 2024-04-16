@@ -2,7 +2,7 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class GenderPicker extends StatelessWidget {
   final double width;
@@ -39,7 +39,9 @@ class GenderPicker extends StatelessWidget {
           child: DropdownMenu<Gender>(
               width: width,
               label: Text(localization.gender_picker_choose,
-                  style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+                  style: responsiveValue.isMobile
+                      ? themeData.textTheme.bodySmall
+                      : themeData.textTheme.bodyMedium),
               initialSelection: initialValue ?? Gender.none,
               enableSearch: false,
               requestFocusOnTap: false,

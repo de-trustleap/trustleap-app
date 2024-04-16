@@ -11,7 +11,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/second
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileDeleteAccountForm extends StatefulWidget {
   const ProfileDeleteAccountForm({super.key});

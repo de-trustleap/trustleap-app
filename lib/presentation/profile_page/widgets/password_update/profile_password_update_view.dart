@@ -1,7 +1,7 @@
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_form.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfilePasswordUpdateView extends StatefulWidget {
   const ProfilePasswordUpdateView({super.key});

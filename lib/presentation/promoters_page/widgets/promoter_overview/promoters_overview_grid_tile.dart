@@ -8,7 +8,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeh
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersOverviewGridTile extends StatelessWidget {
   final Promoter promoter;
@@ -84,10 +84,13 @@ class PromotersOverviewGridTile extends StatelessWidget {
                         ? PromoterRegistrationState.registered
                         : PromoterRegistrationState.unregistered)
               ],
-              if (PromoterHelper(localization: localization).getPromoterDateText(context, promoter) !=
+              if (PromoterHelper(localization: localization)
+                      .getPromoterDateText(context, promoter) !=
                   null) ...[
                 const SizedBox(height: 8),
-                Text(PromoterHelper(localization: localization).getPromoterDateText(context, promoter)!,
+                Text(
+                    PromoterHelper(localization: localization)
+                        .getPromoterDateText(context, promoter)!,
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
                         color:

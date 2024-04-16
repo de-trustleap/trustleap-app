@@ -16,7 +16,7 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 enum EmailSectionVisibleTextField { password, email, none }
 
