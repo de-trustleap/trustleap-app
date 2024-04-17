@@ -9,8 +9,8 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class PageTemplate extends StatelessWidget {
   const PageTemplate({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   Widget getResponsiveWidget(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);

@@ -22,9 +22,9 @@ class PromotersOverviewPage extends StatefulWidget {
   final TabController tabController;
 
   const PromotersOverviewPage({
-    Key? key,
+    super.key,
     required this.tabController,
-  }) : super(key: key);
+  });
 
   @override
   State<PromotersOverviewPage> createState() => _PromotersOverviewPageState();

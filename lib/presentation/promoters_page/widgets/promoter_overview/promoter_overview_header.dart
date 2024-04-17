@@ -14,13 +14,12 @@ class PromoterOverviewHeader extends StatefulWidget {
   final Function(PromoterOverviewFilterStates filterStates) onFilterChanged;
   final Function(PromotersOverviewViewState) onViewStateButtonPressed;
   const PromoterOverviewHeader(
-      {Key? key,
+      {super.key,
       required this.searchController,
       required this.onSearchQueryChanged,
       required this.clearSearch,
       required this.onFilterChanged,
-      required this.onViewStateButtonPressed})
-      : super(key: key);
+      required this.onViewStateButtonPressed});
 
   @override
   State<PromoterOverviewHeader> createState() => _PromoterOverviewHeaderState();

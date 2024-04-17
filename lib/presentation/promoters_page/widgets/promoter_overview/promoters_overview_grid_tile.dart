@@ -14,9 +14,9 @@ class PromotersOverviewGridTile extends StatelessWidget {
   final Promoter promoter;
 
   const PromotersOverviewGridTile({
-    Key? key,
+    super.key,
     required this.promoter,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

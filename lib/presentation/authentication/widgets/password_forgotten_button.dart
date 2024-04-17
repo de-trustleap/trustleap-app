@@ -7,9 +7,9 @@ class PasswordForgottenButton extends StatelessWidget {
   final Function onTap;
 
   const PasswordForgottenButton({
-    Key? key,
+    super.key,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

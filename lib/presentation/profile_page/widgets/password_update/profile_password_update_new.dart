@@ -14,14 +14,14 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
   final Function submit;
 
   const ProfilePasswordUpdateNew({
-    Key? key,
+    super.key,
     required this.passwordTextController,
     required this.passwordRepeatTextController,
     required this.maxWidth,
     required this.buttonDisabled,
     required this.resetError,
     required this.submit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

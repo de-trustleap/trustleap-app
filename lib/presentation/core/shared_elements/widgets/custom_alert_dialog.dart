@@ -11,14 +11,13 @@ class CustomAlertDialog extends StatelessWidget {
   final Function? cancelButtonAction;
 
   const CustomAlertDialog(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.message,
       required this.actionButtonTitle,
       required this.actionButtonAction,
       this.cancelButtonTitle,
-      this.cancelButtonAction})
-      : super(key: key);
+      this.cancelButtonAction});
 
   @override
   Widget build(BuildContext context) {

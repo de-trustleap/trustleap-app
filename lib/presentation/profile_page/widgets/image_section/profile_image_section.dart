@@ -18,8 +18,7 @@ class ProfileImageSection extends StatefulWidget {
   final Function imageUploadSuccessful;
 
   const ProfileImageSection(
-      {Key? key, required this.user, required this.imageUploadSuccessful})
-      : super(key: key);
+      {super.key, required this.user, required this.imageUploadSuccessful});
 
   @override
   State<ProfileImageSection> createState() => _MyWidgetState();

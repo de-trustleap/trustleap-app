@@ -7,9 +7,9 @@ class EmailsectionVerificationLink extends StatelessWidget {
   final Function onTap;
 
   const EmailsectionVerificationLink({
-    Key? key,
+    super.key,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

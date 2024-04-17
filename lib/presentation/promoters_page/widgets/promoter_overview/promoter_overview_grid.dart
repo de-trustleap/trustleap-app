@@ -10,10 +10,10 @@ class PromoterOverviewGrid extends StatelessWidget {
   final List<Promoter> promoters;
 
   const PromoterOverviewGrid({
-    Key? key,
+    super.key,
     required this.controller,
     required this.promoters,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

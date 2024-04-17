@@ -14,12 +14,11 @@ class MenuItem extends StatefulWidget {
   final bool isURLMatching;
 
   const MenuItem(
-      {Key? key,
+      {super.key,
       required this.path,
       required this.icon,
       required this.type,
-      required this.isURLMatching})
-      : super(key: key);
+      required this.isURLMatching});
 
   @override
   State<MenuItem> createState() => _MenuItemState();

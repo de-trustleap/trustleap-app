@@ -8,9 +8,9 @@ class PromotersSection extends StatelessWidget {
   final CustomUser user;
 
   const PromotersSection({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

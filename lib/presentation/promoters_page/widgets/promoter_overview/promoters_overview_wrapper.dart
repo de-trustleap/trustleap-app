@@ -8,9 +8,9 @@ class PromotersOverviewWrapper extends StatefulWidget {
   final TabController tabController;
 
   const PromotersOverviewWrapper({
-    Key? key,
+    super.key,
     required this.tabController,
-  }) : super(key: key);
+  });
 
   @override
   State<PromotersOverviewWrapper> createState() =>

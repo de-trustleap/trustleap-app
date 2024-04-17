@@ -6,10 +6,10 @@ class ExpandedSection extends StatefulWidget {
   final bool expand;
 
   const ExpandedSection({
-    Key? key,
+    super.key,
     required this.child,
     required this.expand,
-  }) : super(key: key);
+  });
 
   @override
   ExpandedSectionState createState() => ExpandedSectionState();

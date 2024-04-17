@@ -25,10 +25,9 @@ class EmailSection extends StatefulWidget {
   final Function sendEmailVerificationCallback;
 
   const EmailSection(
-      {Key? key,
+      {super.key,
       required this.user,
-      required this.sendEmailVerificationCallback})
-      : super(key: key);
+      required this.sendEmailVerificationCallback});
 
   @override
   State<EmailSection> createState() => _EmailSectionState();

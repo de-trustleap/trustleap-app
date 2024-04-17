@@ -7,8 +7,7 @@ class PlaceholderImage extends StatelessWidget {
   final bool hovered;
 
   const PlaceholderImage(
-      {Key? key, required this.imageSize, required this.hovered})
-      : super(key: key);
+      {super.key, required this.imageSize, required this.hovered});
 
   @override
   Widget build(BuildContext context) {

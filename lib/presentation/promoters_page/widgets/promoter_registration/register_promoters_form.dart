@@ -21,9 +21,9 @@ class RegisterPromotersForm extends StatefulWidget {
   final Function changesSaved;
 
   const RegisterPromotersForm({
-    Key? key,
+    super.key,
     required this.changesSaved,
-  }) : super(key: key);
+  });
 
   @override
   State<RegisterPromotersForm> createState() => _RegisterPromotersFormState();

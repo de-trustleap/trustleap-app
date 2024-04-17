@@ -13,13 +13,13 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
   final Function submit;
 
   const ProfilePasswordUpdateReauth({
-    Key? key,
+    super.key,
     required this.passwordTextController,
     required this.maxWidth,
     required this.buttonDisabled,
     required this.resetError,
     required this.submit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

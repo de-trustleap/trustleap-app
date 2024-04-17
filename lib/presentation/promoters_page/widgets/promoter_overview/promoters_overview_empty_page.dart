@@ -9,9 +9,9 @@ class PromotersOverviewEmptyPage extends StatelessWidget {
   final Function registerPromoterTapped;
 
   const PromotersOverviewEmptyPage({
-    Key? key,
+    super.key,
     required this.registerPromoterTapped,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -5,9 +5,9 @@ class FormErrorView extends StatelessWidget {
   final String message;
 
   const FormErrorView({
-    Key? key,
+    super.key,
     required this.message,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

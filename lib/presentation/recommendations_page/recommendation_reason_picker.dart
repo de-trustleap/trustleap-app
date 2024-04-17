@@ -11,12 +11,12 @@ class RecommendationReaseonPicker extends StatelessWidget {
   final Function onSelected;
 
   const RecommendationReaseonPicker({
-    Key? key,
+    super.key,
     required this.width,
     required this.validate,
     this.initialValue,
     required this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

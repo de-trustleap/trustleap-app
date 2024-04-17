@@ -7,9 +7,9 @@ class EmailVerificationBadge extends StatelessWidget {
   final EmailVerificationState state;
 
   const EmailVerificationBadge({
-    Key? key,
+    super.key,
     required this.state,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
