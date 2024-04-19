@@ -78,6 +78,12 @@ class MobileAppTheme {
           hintStyle: MaterialStatePropertyAll(_darkBodySmallText),
           textStyle: MaterialStatePropertyAll(_darkBodySmallText));
 
+  static final ChipThemeData _lightChipTheme =
+      AppTheme.lightChipTheme.copyWith(labelStyle: _lightBodySmallText);
+
+  static final ChipThemeData _darkChipTheme =
+      AppTheme.lightChipTheme.copyWith(labelStyle: _darkBodySmallText);
+
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
           primary: AppTheme.lightPrimaryColor,
@@ -97,7 +103,8 @@ class MobileAppTheme {
       dropdownMenuTheme: _lightDropDownMenuTheme,
       segmentedButtonTheme: AppTheme.lightSegmentedButtonTheme,
       searchBarTheme: _lightSearchBarTheme,
-      radioTheme: AppTheme.lightRadioTheme);
+      radioTheme: AppTheme.lightRadioTheme,
+      chipTheme: _lightChipTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -118,5 +125,6 @@ class MobileAppTheme {
       dropdownMenuTheme: _darkDropDownMenuTheme,
       segmentedButtonTheme: AppTheme.darkSegmentedButtonTheme,
       searchBarTheme: _darkSearchBarTheme,
-      radioTheme: AppTheme.darkRadioTheme);
+      radioTheme: AppTheme.darkRadioTheme,
+      chipTheme: _darkChipTheme);
 }

@@ -3,7 +3,7 @@ import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class EmailSectionExpandablePassword extends StatelessWidget {
   final TextEditingController passwordTextController;
@@ -13,13 +13,13 @@ class EmailSectionExpandablePassword extends StatelessWidget {
   final Function submit;
 
   const EmailSectionExpandablePassword({
-    Key? key,
+    super.key,
     required this.passwordTextController,
     required this.maxWidth,
     required this.buttonDisabled,
     required this.resetError,
     required this.submit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,9 @@ class EmailSectionExpandablePassword extends StatelessWidget {
       Text(
           localization
               .profile_page_email_section_change_email_password_description,
-          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+          style: responsiveValue.isMobile
+              ? themeData.textTheme.bodySmall
+              : themeData.textTheme.bodyMedium),
       const SizedBox(height: 16),
       TextFormField(
         controller: passwordTextController,
@@ -44,7 +46,9 @@ class EmailSectionExpandablePassword extends StatelessWidget {
         },
         validator: validator.validatePassword,
         obscureText: true,
-        style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+        style: responsiveValue.isMobile
+            ? themeData.textTheme.bodySmall
+            : themeData.textTheme.bodyMedium,
         decoration: InputDecoration(labelText: localization.login_password),
       ),
       const SizedBox(height: 40),
@@ -55,7 +59,8 @@ class EmailSectionExpandablePassword extends StatelessWidget {
           PrimaryButton(
               title: localization
                   .profile_page_email_section_change_email_password_continue_button_title,
-              width: responsiveValue.isMobile ? maxWidth - 20 : maxWidth / 2 - 20,
+              width:
+                  responsiveValue.isMobile ? maxWidth - 20 : maxWidth / 2 - 20,
               disabled: buttonDisabled,
               onTap: () {
                 submit();

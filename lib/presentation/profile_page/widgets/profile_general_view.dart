@@ -13,7 +13,7 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/promoters_sect
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileGeneralView extends StatefulWidget {
   const ProfileGeneralView({super.key});
@@ -38,11 +38,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
 
     return BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
       builder: (context, state) {
-        if (state is ProfileObserverLoading) {
-          return CenteredConstrainedWrapper(
-              child: CircularProgressIndicator(
-                  color: themeData.colorScheme.secondary));
-        } else if (state is ProfileObserverSuccess) {
+        if (state is ProfileObserverSuccess) {
           return Container(
               width: double.infinity,
               decoration:

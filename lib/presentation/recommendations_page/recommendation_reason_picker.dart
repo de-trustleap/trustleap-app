@@ -4,13 +4,13 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class GenderPicker extends StatelessWidget {
+class RecommendationReaseonPicker extends StatelessWidget {
   final double width;
   final String? validate;
-  final Gender? initialValue;
+  final RecommendationReason? initialValue;
   final Function onSelected;
 
-  const GenderPicker({
+  const RecommendationReaseonPicker({
     super.key,
     required this.width,
     required this.validate,
@@ -20,11 +20,11 @@ class GenderPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
 
-    return FormField(builder: (FormFieldState<Gender> state) {
+    return FormField(builder: (FormFieldState<RecommendationReason> state) {
       return SizedBox(
         width: width,
         child: InputDecorator(
@@ -36,27 +36,33 @@ class GenderPicker extends StatelessWidget {
             disabledBorder: InputBorder.none,
             errorText: validate,
           ),
-          child: DropdownMenu<Gender>(
+          child: DropdownMenu<RecommendationReason>(
               width: width,
-              label: Text(localization.gender_picker_choose,
+              label: Text(
+                  localization.recommendations_choose_reason_placeholder,
                   style: responsiveValue.isMobile
                       ? themeData.textTheme.bodySmall
                       : themeData.textTheme.bodyMedium),
-              initialSelection: initialValue ?? Gender.none,
+              initialSelection: initialValue ?? RecommendationReason.none,
               enableSearch: false,
               requestFocusOnTap: false,
               dropdownMenuEntries: [
                 DropdownMenuEntry(
-                    value: Gender.none,
-                    label: localization.gender_picker_not_choosen),
-                DropdownMenuEntry(
-                    value: Gender.male, label: localization.gender_picker_male),
-                DropdownMenuEntry(
-                    value: Gender.female,
-                    label: localization.gender_picker_female)
+                    value: RecommendationReason.none,
+                    label:
+                        localization.recommendations_choose_reason_not_chosen),
+                const DropdownMenuEntry(
+                    value: RecommendationReason.finance,
+                    label: "Finanzdienstleistung"),
+                const DropdownMenuEntry(
+                    value: RecommendationReason.insurance,
+                    label: "Versicherungsdienstleistung"),
+                const DropdownMenuEntry(
+                    value: RecommendationReason.car,
+                    label: "KFZ-Dienstleistung")
               ],
-              onSelected: (gender) {
-                onSelected(gender);
+              onSelected: (reason) {
+                onSelected(reason);
               }),
         ),
       );

@@ -116,4 +116,45 @@ class UserRepositoryImplementation implements UserRepository {
       return left(FirebaseExceptionParser.getAuthException(input: e.message));
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, CustomUser>> getUser() async {
+    final currentUser = optionOf(firebaseAuth.currentUser);
+    try {
+      return await currentUser.fold(() {
+        return left(BackendFailure());
+      }, (user) async {
+        final id = user.uid;
+        final userCollection = firestore.collection("users");
+        final userDoc = await userCollection.doc(id).get();
+        if (userDoc.data() != null) {
+          var userModel =
+              UserModel.fromFirestore(userDoc.data()!, id).toDomain();
+          return right(userModel);
+        } else {
+          return left(NotFoundFailure());
+        }
+      });
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, CustomUser>> getParentUser(
+      {required String parentID}) async {
+    final userCollection = firestore.collection("users");
+    try {
+      final userDoc = await userCollection.doc(parentID).get();
+      if (userDoc.data() != null) {
+        var userModel =
+            UserModel.fromFirestore(userDoc.data()!, parentID).toDomain();
+        return right(userModel);
+      } else {
+        return left(NotFoundFailure());
+      }
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }

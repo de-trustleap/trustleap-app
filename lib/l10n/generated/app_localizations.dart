@@ -1052,6 +1052,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get delete_account_confirmation_alert_cancel_button_title;
+
+  /// Placeholder for the drop-down menu of recommendation reasons on the recommendation page.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a reason'**
+  String get recommendations_choose_reason_placeholder;
+
+  /// Not selected Entry for the recommendation reasons drop-down menu on the recommendation page.
+  ///
+  /// In en, this message translates to:
+  /// **'Not chosen'**
+  String get recommendations_choose_reason_not_chosen;
+
+  /// Title for the recommendations page.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate recommendations'**
+  String get recommendations_title;
+
+  /// Placeholder for the promoter text field in the recommendation form.
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter'**
+  String get recommendations_form_promoter_placeholder;
+
+  /// Placeholder for the service provider text field in the recommendation form.
+  ///
+  /// In en, this message translates to:
+  /// **'Service provider'**
+  String get recommendations_form_service_provider_placeholder;
+
+  /// Placeholder for the recommendation name text field in the recommendation form.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation name'**
+  String get recommendations_form_recommendation_name_placeholder;
+
+  /// Title for the generate recommendations button in the recommendation form.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate recommendations'**
+  String get recommendations_form_generate_recommendation_button_title;
+
+  /// Text in the error view in the recommendation form.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while retrieving the data'**
+  String get recommendations_error_view_title;
+
+  /// Validation message if you have not provided a name in the recommendation name field in the recommendation form.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a name'**
+  String get recommendations_validation_missing_recommendor_name;
+
+  /// Validation message if you have not provided a name in the promoter name field in the recommendation form.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a name'**
+  String get recommendations_validation_missing_promoter_name;
+
+  /// Validation message if you have not provided a reason in the recommendation reason field in the recommendation form.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a reason'**
+  String get recommendations_validation_missing_reason;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

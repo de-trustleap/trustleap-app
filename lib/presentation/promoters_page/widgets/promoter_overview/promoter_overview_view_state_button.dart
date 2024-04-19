@@ -6,9 +6,9 @@ class PromoterOverviewViewStateButton extends StatefulWidget {
   final Function(PromotersOverviewViewState) onSelected;
 
   const PromoterOverviewViewStateButton({
-    Key? key,
+    super.key,
     required this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<PromoterOverviewViewStateButton> createState() =>

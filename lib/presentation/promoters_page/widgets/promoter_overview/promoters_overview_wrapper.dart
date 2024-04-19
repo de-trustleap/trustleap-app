@@ -2,15 +2,15 @@
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_page.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersOverviewWrapper extends StatefulWidget {
   final TabController tabController;
 
   const PromotersOverviewWrapper({
-    Key? key,
+    super.key,
     required this.tabController,
-  }) : super(key: key);
+  });
 
   @override
   State<PromotersOverviewWrapper> createState() =>

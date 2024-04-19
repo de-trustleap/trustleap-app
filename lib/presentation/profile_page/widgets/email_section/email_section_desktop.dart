@@ -10,11 +10,11 @@ class EmailSectionDesktop extends StatelessWidget {
   final Function editEmailPressed;
 
   const EmailSectionDesktop({
-    Key? key,
+    super.key,
     this.email,
     required this.isEmailVerified,
     required this.editEmailPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

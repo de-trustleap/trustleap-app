@@ -3,7 +3,7 @@ import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrai
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoters_form.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class RegisterPromotersView extends StatefulWidget {
   const RegisterPromotersView({super.key});

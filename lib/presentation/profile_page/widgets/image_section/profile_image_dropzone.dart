@@ -11,13 +11,12 @@ class ImageUploadDropzone extends StatefulWidget {
   final Function onLeave;
 
   const ImageUploadDropzone(
-      {Key? key,
+      {super.key,
       required this.child,
       required this.onDroppedFile,
       required this.onDroppedMultipleFiles,
       required this.onHover,
-      required this.onLeave})
-      : super(key: key);
+      required this.onLeave});
 
   @override
   State<ImageUploadDropzone> createState() => _ImageUploadDropzoneState();

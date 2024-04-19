@@ -3,7 +3,7 @@ import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfilePasswordUpdateNew extends StatelessWidget {
   final TextEditingController passwordTextController;
@@ -14,14 +14,14 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
   final Function submit;
 
   const ProfilePasswordUpdateNew({
-    Key? key,
+    super.key,
     required this.passwordTextController,
     required this.passwordRepeatTextController,
     required this.maxWidth,
     required this.buttonDisabled,
     required this.resetError,
     required this.submit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,9 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
       Text(
           localization
               .profile_page_password_update_section_new_password_description,
-          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+          style: responsiveValue.isMobile
+              ? themeData.textTheme.bodySmall
+              : themeData.textTheme.bodyMedium),
       const SizedBox(height: textFieldSpacing),
       TextFormField(
         controller: passwordTextController,
@@ -45,7 +47,9 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
         onFieldSubmitted: (_) => submit(),
         validator: validator.validatePassword,
         obscureText: true,
-        style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+        style: responsiveValue.isMobile
+            ? themeData.textTheme.bodySmall
+            : themeData.textTheme.bodyMedium,
         decoration: InputDecoration(
             labelText: localization
                 .profile_page_password_update_section_new_password_textfield_placeholder),
@@ -62,7 +66,9 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
               val, passwordTextController.text);
         },
         obscureText: true,
-        style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+        style: responsiveValue.isMobile
+            ? themeData.textTheme.bodySmall
+            : themeData.textTheme.bodyMedium,
         decoration: InputDecoration(
             labelText: localization
                 .profile_page_password_update_section_new_password_repeat_textfield_placeholder),
@@ -75,7 +81,9 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
           PrimaryButton(
               title: localization
                   .profile_page_password_update_section_new_password_confirm_button_text,
-              width: responsiveValue.isMobile ? maxWidth - textFieldSpacing : maxWidth / 2 - textFieldSpacing,
+              width: responsiveValue.isMobile
+                  ? maxWidth - textFieldSpacing
+                  : maxWidth / 2 - textFieldSpacing,
               disabled: buttonDisabled,
               onTap: () {
                 submit();

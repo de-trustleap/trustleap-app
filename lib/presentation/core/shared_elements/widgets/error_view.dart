@@ -2,7 +2,7 @@
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ErrorView extends StatelessWidget {
   final String title;
@@ -10,11 +10,11 @@ class ErrorView extends StatelessWidget {
   final Function callback;
 
   const ErrorView({
-    Key? key,
+    super.key,
     required this.title,
     required this.message,
     required this.callback,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

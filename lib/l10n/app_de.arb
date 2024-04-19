@@ -651,5 +651,49 @@
     "delete_account_confirmation_alert_cancel_button_title": "Abbrechen",
     "@delete_account_confirmation_alert_cancel_button_title": {
         "description": "Titel für den Abbrechen Button im Bestätigungs Alert auf der Seite zum Account löschen"
+    },
+    "recommendations_choose_reason_placeholder": "Wähle einen Grund",
+    "@recommendations_choose_reason_placeholder": {
+        "description": "Platzhalter für das Dropdown Menü der Empfehlungsgründe auf der Empfehlungsseite"
+    },
+    "recommendations_choose_reason_not_chosen": "Nicht ausgewählt",
+    "@recommendations_choose_reason_not_chosen": {
+        "description": "Nicht ausgewählt Eintrag für das Dropdown Menü der Empfehlungsgründe auf der Empfehlungsseite"
+    },
+    "recommendations_title": "Empfehlungen generieren",
+    "@recommendations_title": {
+        "description": "Titel für die Empfehlungsseite"
+    },
+    "recommendations_form_promoter_placeholder": "Promoter",
+    "@recommendations_form_promoter_placeholder": {
+        "description": "Platzhalter für das Promoter Textfeld im Empfehlungsformular"
+    },
+    "recommendations_form_service_provider_placeholder": "Dienstleister",
+    "@recommendations_form_service_provider_placeholder": {
+        "description": "Platzhalter für das Dienstleister Textfeld im Empfehlungsformular"
+    },
+    "recommendations_form_recommendation_name_placeholder": "Empfehlungsname",
+    "@recommendations_form_recommendation_name_placeholder": {
+        "description": "Platzhalter für das Empfehlungsname Textfeld im Empfehlungsformular"
+    },
+    "recommendations_form_generate_recommendation_button_title": "Empfehlungen generieren",
+    "@recommendations_form_generate_recommendation_button_title": {
+        "description": "Title für den Empfehlungen generieren Button im Empfehlungsformular"
+    },
+    "recommendations_error_view_title": "Beim Abrufen der Daten ist ein Fehler aufgetreten",
+    "@recommendations_error_view_title": {
+        "description": "Text in der Error View im Empfehlungsformular"
+    },
+    "recommendations_validation_missing_recommendor_name": "Geben Sie bitte einen Namen an",
+    "@recommendations_validation_missing_recommendor_name": {
+        "description": "Validierungsnachricht wenn man keinen Namen im Empfehlungsnamen Feld im Empfehlungsformular angegeben hat"
+    },
+    "recommendations_validation_missing_promoter_name": "Geben Sie bitte einen Namen an",
+    "@recommendations_validation_missing_promoter_name": {
+        "description": "Validierungsnachricht wenn man keinen Namen im Promoter Feld im Empfehlungsformular angegeben hat"
+    },
+    "recommendations_validation_missing_reason": "Bitte einen Grund angeben",
+    "@recommendations_validation_missing_reason": {
+        "description": "Validierungsnachricht wenn man keinen Grund im Empfehlungsgrund Feld im Empfehlungsformular angegeben hat"
     }
 }

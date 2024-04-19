@@ -137,7 +137,8 @@ class _RegisterFormState extends State<RegisterForm> {
                   address: streetAndNumberTextController.text.trim(),
                   postCode: plzTextController.text.trim(),
                   place: placeTextController.text.trim(),
-                  email: emailTextController.text.trim()));
+                  email: emailTextController.text.trim(),
+                  role: Role.promoter));
             } else if (state is SignInCheckCodeFailureState) {
               errorMessage = DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization);
@@ -217,7 +218,9 @@ class _RegisterFormState extends State<RegisterForm> {
                                   resetError();
                                 },
                                 validator: validator.validateFirstName,
-                                style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                                style: responsiveValue.isMobile
+                                    ? themeData.textTheme.bodySmall
+                                    : themeData.textTheme.bodyMedium,
                                 decoration: InputDecoration(
                                     labelText: localization.register_firstname),
                               ),
@@ -236,7 +239,9 @@ class _RegisterFormState extends State<RegisterForm> {
                                     resetError();
                                   },
                                   validator: validator.validateLastName,
-                                  style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                                  style: responsiveValue.isMobile
+                                      ? themeData.textTheme.bodySmall
+                                      : themeData.textTheme.bodyMedium,
                                   decoration: InputDecoration(
                                       labelText:
                                           localization.register_lastname),
@@ -259,7 +264,9 @@ class _RegisterFormState extends State<RegisterForm> {
                               resetError();
                             },
                             validator: validator.validateBirthDate,
-                            style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                            style: responsiveValue.isMobile
+                                ? themeData.textTheme.bodySmall
+                                : themeData.textTheme.bodyMedium,
                             decoration: InputDecoration(
                                 prefixIcon:
                                     const Icon(Icons.calendar_today_rounded),
@@ -290,7 +297,9 @@ class _RegisterFormState extends State<RegisterForm> {
                           onChanged: (_) {
                             resetError();
                           },
-                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodySmall
+                              : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_address),
                         ),
@@ -306,7 +315,9 @@ class _RegisterFormState extends State<RegisterForm> {
                           controller: plzTextController,
                           onFieldSubmitted: (_) => submit(validator),
                           validator: validator.validatePostcode,
-                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodySmall
+                              : themeData.textTheme.bodyMedium,
                           onChanged: (_) {
                             resetError();
                           },
@@ -324,7 +335,9 @@ class _RegisterFormState extends State<RegisterForm> {
                           onChanged: (_) {
                             resetError();
                           },
-                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodySmall
+                              : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_place),
                         ),
@@ -342,7 +355,9 @@ class _RegisterFormState extends State<RegisterForm> {
                             resetError();
                           },
                           validator: validator.validateEmail,
-                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodySmall
+                              : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_email),
                         ),
@@ -360,7 +375,9 @@ class _RegisterFormState extends State<RegisterForm> {
                           },
                           validator: validator.validatePassword,
                           obscureText: true,
-                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodySmall
+                              : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_password),
                         ),
@@ -381,7 +398,9 @@ class _RegisterFormState extends State<RegisterForm> {
                                 val, passwordTextController.text);
                           },
                           obscureText: true,
-                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodySmall
+                              : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_repeat_password),
                         ),
@@ -398,7 +417,9 @@ class _RegisterFormState extends State<RegisterForm> {
                             resetError();
                           },
                           validator: validator.validateCode,
-                          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodySmall
+                              : themeData.textTheme.bodyMedium,
                           decoration: InputDecoration(
                               labelText: localization.register_code),
                         ),

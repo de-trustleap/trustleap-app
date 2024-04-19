@@ -13,56 +13,58 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: BlocProvider.of<MenuCubit>(context),
-      child: BlocConsumer<MenuCubit, MenuState>(
-        listener: (context, state) {},
+      child: BlocBuilder<MenuCubit, MenuState>(
         builder: (context, state) {
           return NavigationListener(builder: (context, child) {
-            return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 40),
-                  MenuItem(
-                      path: RoutePaths.profilePath,
-                      icon: Icons.person,
-                      type: MenuItems.profile,
-                      isURLMatching:
-                          Modular.to.path.endsWith(RoutePaths.profilePath)),
-                  const SizedBox(height: 52),
-                  MenuItem(
-                      path: RoutePaths.dashboardPath,
-                      icon: Icons.dashboard,
-                      type: MenuItems.dashboard,
-                      isURLMatching:
-                          Modular.to.path.endsWith(RoutePaths.dashboardPath)),
-                  const SizedBox(height: 28),
-                  MenuItem(
-                      path: RoutePaths.recommendationsPath,
-                      icon: Icons.thumb_up,
-                      type: MenuItems.recommendations,
-                      isURLMatching: Modular.to.path
-                          .endsWith(RoutePaths.recommendationsPath)),
-                  const SizedBox(height: 28),
-                  MenuItem(
-                      path: RoutePaths.promotersPath,
-                      icon: Icons.phone_bluetooth_speaker,
-                      type: MenuItems.promoters,
-                      isURLMatching:
-                          Modular.to.path.endsWith(RoutePaths.promotersPath)),
-                  const SizedBox(height: 28),
-                  MenuItem(
-                      path: RoutePaths.landingPagePath,
-                      icon: Icons.airplanemode_active,
-                      type: MenuItems.landingpage,
-                      isURLMatching:
-                          Modular.to.path.endsWith(RoutePaths.landingPagePath)),
-                  const SizedBox(height: 28),
-                  MenuItem(
-                      path: RoutePaths.activitiesPath,
-                      icon: Icons.history,
-                      type: MenuItems.activities,
-                      isURLMatching:
-                          Modular.to.path.endsWith(RoutePaths.activitiesPath))
-                ]);
+            return ListView(
+              children: [ Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 40),
+                    MenuItem(
+                        path: RoutePaths.profilePath,
+                        icon: Icons.person,
+                        type: MenuItems.profile,
+                        isURLMatching:
+                            Modular.to.path.endsWith(RoutePaths.profilePath)),
+                    const SizedBox(height: 52),
+                    MenuItem(
+                        path: RoutePaths.dashboardPath,
+                        icon: Icons.dashboard,
+                        type: MenuItems.dashboard,
+                        isURLMatching:
+                            Modular.to.path.endsWith(RoutePaths.dashboardPath)),
+                    const SizedBox(height: 28),
+                    MenuItem(
+                        path: RoutePaths.recommendationsPath,
+                        icon: Icons.thumb_up,
+                        type: MenuItems.recommendations,
+                        isURLMatching: Modular.to.path
+                            .endsWith(RoutePaths.recommendationsPath)),
+                    const SizedBox(height: 28),
+                    MenuItem(
+                        path: RoutePaths.promotersPath,
+                        icon: Icons.phone_bluetooth_speaker,
+                        type: MenuItems.promoters,
+                        isURLMatching:
+                            Modular.to.path.endsWith(RoutePaths.promotersPath)),
+                    const SizedBox(height: 28),
+                    MenuItem(
+                        path: RoutePaths.landingPagePath,
+                        icon: Icons.airplanemode_active,
+                        type: MenuItems.landingpage,
+                        isURLMatching:
+                            Modular.to.path.endsWith(RoutePaths.landingPagePath)),
+                    const SizedBox(height: 28),
+                    MenuItem(
+                        path: RoutePaths.activitiesPath,
+                        icon: Icons.history,
+                        type: MenuItems.activities,
+                        isURLMatching:
+                            Modular.to.path.endsWith(RoutePaths.activitiesPath)),
+                    const SizedBox(height: 28),
+                  ]),
+            ]);
           });
         },
       ),

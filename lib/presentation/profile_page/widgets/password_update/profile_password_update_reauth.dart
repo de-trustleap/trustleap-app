@@ -3,7 +3,7 @@ import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfilePasswordUpdateReauth extends StatelessWidget {
   final TextEditingController passwordTextController;
@@ -13,13 +13,13 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
   final Function submit;
 
   const ProfilePasswordUpdateReauth({
-    Key? key,
+    super.key,
     required this.passwordTextController,
     required this.maxWidth,
     required this.buttonDisabled,
     required this.resetError,
     required this.submit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,9 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(localization.profile_page_password_update_section_reauth_description,
-          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+          style: responsiveValue.isMobile
+              ? themeData.textTheme.bodySmall
+              : themeData.textTheme.bodyMedium),
       const SizedBox(height: textFieldSpacing),
       TextFormField(
           controller: passwordTextController,
@@ -41,7 +43,9 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
           onFieldSubmitted: (_) => submit(),
           validator: validator.validatePassword,
           obscureText: true,
-          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+          style: responsiveValue.isMobile
+              ? themeData.textTheme.bodySmall
+              : themeData.textTheme.bodyMedium,
           decoration: InputDecoration(
               labelText: localization
                   .profile_page_password_update_section_reauth_password_textfield_placeholder)),
@@ -53,7 +57,9 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
           PrimaryButton(
               title: localization
                   .profile_page_password_update_section_reauth_continue_button_title,
-              width: responsiveValue.isMobile ? maxWidth - textFieldSpacing : maxWidth / 2 - textFieldSpacing,
+              width: responsiveValue.isMobile
+                  ? maxWidth - textFieldSpacing
+                  : maxWidth / 2 - textFieldSpacing,
               disabled: buttonDisabled,
               onTap: () {
                 submit();

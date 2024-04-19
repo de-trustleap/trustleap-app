@@ -1,15 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PasswordForgottenButton extends StatelessWidget {
   final Function onTap;
 
   const PasswordForgottenButton({
-    Key? key,
+    super.key,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,9 @@ class PasswordForgottenButton extends StatelessWidget {
 
     return Row(children: [
       Text(localization.login_password_forgotten_text,
-          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+          style: responsiveValue.isMobile
+              ? themeData.textTheme.bodySmall
+              : themeData.textTheme.bodyMedium),
       InkWell(
           onTap: () => onTap(),
           child: Text(localization.login_password_forgotten_linktext,

@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String title;
@@ -11,14 +11,13 @@ class CustomAlertDialog extends StatelessWidget {
   final Function? cancelButtonAction;
 
   const CustomAlertDialog(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.message,
       required this.actionButtonTitle,
       required this.actionButtonAction,
       this.cancelButtonTitle,
-      this.cancelButtonAction})
-      : super(key: key);
+      this.cancelButtonAction});
 
   @override
   Widget build(BuildContext context) {

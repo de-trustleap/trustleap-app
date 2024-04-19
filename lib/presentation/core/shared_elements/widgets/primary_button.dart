@@ -8,12 +8,11 @@ class PrimaryButton extends StatelessWidget {
   final Function onTap;
 
   const PrimaryButton(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.onTap,
       this.disabled = false,
-      this.width = double.infinity})
-      : super(key: key);
+      this.width = double.infinity});
 
   @override
   Widget build(BuildContext context) {

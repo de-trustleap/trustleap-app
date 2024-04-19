@@ -3,7 +3,7 @@ import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class EmailSectionExpandableEmail extends StatelessWidget {
   final TextEditingController emailTextController;
@@ -13,13 +13,13 @@ class EmailSectionExpandableEmail extends StatelessWidget {
   final Function submit;
 
   const EmailSectionExpandableEmail({
-    Key? key,
+    super.key,
     required this.emailTextController,
     required this.maxWidth,
     required this.buttonDisabled,
     required this.resetError,
     required this.submit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,9 @@ class EmailSectionExpandableEmail extends StatelessWidget {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(localization.profile_page_email_section_description,
-          style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium),
+          style: responsiveValue.isMobile
+              ? themeData.textTheme.bodySmall
+              : themeData.textTheme.bodyMedium),
       const SizedBox(height: 16),
       TextFormField(
         controller: emailTextController,
@@ -42,7 +44,9 @@ class EmailSectionExpandableEmail extends StatelessWidget {
           submit();
         },
         validator: validator.validateEmail,
-        style: responsiveValue.isMobile ? themeData.textTheme.bodySmall : themeData.textTheme.bodyMedium,
+        style: responsiveValue.isMobile
+            ? themeData.textTheme.bodySmall
+            : themeData.textTheme.bodyMedium,
         decoration: InputDecoration(labelText: localization.login_email),
       ),
       const SizedBox(height: 40),
@@ -53,7 +57,8 @@ class EmailSectionExpandableEmail extends StatelessWidget {
           PrimaryButton(
               title: localization
                   .profile_page_email_section_change_email_button_title,
-              width: responsiveValue.isMobile ? maxWidth - 20 : maxWidth / 2 - 20,
+              width:
+                  responsiveValue.isMobile ? maxWidth - 20 : maxWidth / 2 - 20,
               disabled: buttonDisabled,
               onTap: () {
                 submit();

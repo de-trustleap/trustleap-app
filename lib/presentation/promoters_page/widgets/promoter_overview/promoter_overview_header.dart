@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_ove
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_view_state_button.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_page.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PromoterOverviewHeader extends StatefulWidget {
   final TextEditingController searchController;
@@ -14,13 +14,12 @@ class PromoterOverviewHeader extends StatefulWidget {
   final Function(PromoterOverviewFilterStates filterStates) onFilterChanged;
   final Function(PromotersOverviewViewState) onViewStateButtonPressed;
   const PromoterOverviewHeader(
-      {Key? key,
+      {super.key,
       required this.searchController,
       required this.onSearchQueryChanged,
       required this.clearSearch,
       required this.onFilterChanged,
-      required this.onViewStateButtonPressed})
-      : super(key: key);
+      required this.onViewStateButtonPressed});
 
   @override
   State<PromoterOverviewHeader> createState() => _PromoterOverviewHeaderState();

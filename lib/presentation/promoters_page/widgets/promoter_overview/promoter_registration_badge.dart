@@ -7,9 +7,9 @@ class PromoterRegistrationBadge extends StatelessWidget {
   final PromoterRegistrationState state;
 
   const PromoterRegistrationBadge({
-    Key? key,
+    super.key,
     required this.state,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,8 @@ class PromoterRegistrationBadge extends StatelessWidget {
           child: Text(
               state == PromoterRegistrationState.registered
                   ? localization.promoter_overview_registration_badge_registered
-                  : localization.promoter_overview_registration_badge_unregistered,
+                  : localization
+                      .promoter_overview_registration_badge_unregistered,
               style: themeData.textTheme.bodyLarge!.copyWith(
                   color: state == PromoterRegistrationState.registered
                       ? themeData.colorScheme.primary

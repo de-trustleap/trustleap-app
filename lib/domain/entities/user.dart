@@ -13,6 +13,8 @@ class CustomUser extends Equatable {
   final String? postCode;
   final String? place;
   final String? email;
+  final String? parentUserID;
+  final Role? role;
   final String? profileImageDownloadURL;
   final String? thumbnailDownloadURL;
   final List<String>? unregisteredPromoterIDs;
@@ -30,6 +32,8 @@ class CustomUser extends Equatable {
       this.postCode,
       this.place,
       this.email,
+      this.parentUserID,
+      this.role,
       this.profileImageDownloadURL,
       this.thumbnailDownloadURL,
       this.unregisteredPromoterIDs,
@@ -47,6 +51,8 @@ class CustomUser extends Equatable {
       String? postCode,
       String? place,
       String? email,
+      String? parentUserID,
+      Role? role,
       String? profileImageDownloadURL,
       String? thumbnailDownloadURL,
       List<String>? unregisteredPromoterIDs,
@@ -63,6 +69,8 @@ class CustomUser extends Equatable {
         postCode: postCode ?? this.postCode,
         place: place ?? this.place,
         email: email ?? this.email,
+        parentUserID: parentUserID ?? this.parentUserID,
+        role: role ?? this.role,
         profileImageDownloadURL:
             profileImageDownloadURL ?? this.profileImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
@@ -85,6 +93,8 @@ class CustomUser extends Equatable {
         postCode,
         place,
         email,
+        parentUserID,
+        role,
         profileImageDownloadURL,
         thumbnailDownloadURL,
         unregisteredPromoterIDs,

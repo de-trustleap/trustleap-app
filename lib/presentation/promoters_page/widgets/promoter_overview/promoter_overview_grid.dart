@@ -3,17 +3,17 @@ import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_grid_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PromoterOverviewGrid extends StatelessWidget {
   final ScrollController controller;
   final List<Promoter> promoters;
 
   const PromoterOverviewGrid({
-    Key? key,
+    super.key,
     required this.controller,
     required this.promoters,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

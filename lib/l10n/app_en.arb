@@ -651,5 +651,49 @@
     "delete_account_confirmation_alert_cancel_button_title": "Cancel",
     "@delete_account_confirmation_alert_cancel_button_title": {
         "description": "Title for the cancel button on the confirmation alert to delete the account."
+    },
+    "recommendations_choose_reason_placeholder": "Choose a reason",
+    "@recommendations_choose_reason_placeholder": {
+        "description": "Placeholder for the drop-down menu of recommendation reasons on the recommendation page."
+    },
+    "recommendations_choose_reason_not_chosen": "Not chosen",
+    "@recommendations_choose_reason_not_chosen": {
+        "description": "Not selected Entry for the recommendation reasons drop-down menu on the recommendation page."
+    },
+    "recommendations_title": "Generate recommendations",
+    "@recommendations_title": {
+        "description": "Title for the recommendations page."
+    },
+    "recommendations_form_promoter_placeholder": "Promoter",
+    "@recommendations_form_promoter_placeholder": {
+        "description": "Placeholder for the promoter text field in the recommendation form."
+    },
+    "recommendations_form_service_provider_placeholder": "Service provider",
+    "@recommendations_form_service_provider_placeholder": {
+        "description": "Placeholder for the service provider text field in the recommendation form."
+    },
+    "recommendations_form_recommendation_name_placeholder": "Recommendation name",
+    "@recommendations_form_recommendation_name_placeholder": {
+        "description": "Placeholder for the recommendation name text field in the recommendation form."
+    },
+    "recommendations_form_generate_recommendation_button_title": "Generate recommendations",
+    "@recommendations_form_generate_recommendation_button_title": {
+        "description": "Title for the generate recommendations button in the recommendation form."
+    },
+    "recommendations_error_view_title": "An error occurred while retrieving the data",
+    "@recommendations_error_view_title": {
+        "description": "Text in the error view in the recommendation form."
+    },
+    "recommendations_validation_missing_recommendor_name": "Please enter a name",
+    "@recommendations_validation_missing_recommendor_name": {
+        "description": "Validation message if you have not provided a name in the recommendation name field in the recommendation form."
+    },
+    "recommendations_validation_missing_promoter_name": "Please enter a name",
+    "@recommendations_validation_missing_promoter_name": {
+        "description": "Validation message if you have not provided a name in the promoter name field in the recommendation form."
+    },
+    "recommendations_validation_missing_reason": "Please enter a reason",
+    "@recommendations_validation_missing_reason": {
+        "description": "Validation message if you have not provided a reason in the recommendation reason field in the recommendation form."
     }
 }
