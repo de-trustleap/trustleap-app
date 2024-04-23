@@ -10,7 +10,7 @@ class CompanyValidator {
 
   String? validateName(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte den Unternehmensnamen angeben";
+      return localization.profile_company_validator_missing_name;
     } else {
       return null;
     }
@@ -18,7 +18,7 @@ class CompanyValidator {
 
   String? validateIndustry(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte die Branche angeben";
+      return localization.profile_company_validator_missing_industry;
     } else {
       return null;
     }
@@ -28,10 +28,10 @@ class CompanyValidator {
     const phoneNumberRegex = r'(^(?:[+0]9)?[0-9]{10,12}$)';
     if (input == null || input.isEmpty) {
       return null;
-    } else if (RegExp(phoneNumberRegex).hasMatch(input.trim())){
+    } else if (RegExp(phoneNumberRegex).hasMatch(input.trim())) {
       return null;
     } else {
-      return "Die angegebene Telefonnummer ist ungültig";
+      return localization.profile_company_validator_invalid_phone;
     }
   }
 }

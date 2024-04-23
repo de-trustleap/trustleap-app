@@ -695,5 +695,53 @@
     "recommendations_validation_missing_reason": "Bitte einen Grund angeben",
     "@recommendations_validation_missing_reason": {
         "description": "Validierungsnachricht wenn man keinen Grund im Empfehlungsgrund Feld im Empfehlungsformular angegeben hat"
+    },
+    "profile_company_contact_section_title": "Unternehmensinformationen",
+    "@profile_company_contact_section_title": {
+        "description": "Title der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_name": "Unternehmensbezeichnung",
+    "@profile_company_contact_section_name": {
+        "description": "Bezeichnung über dem Unternehmensbezeichnung Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_industry": "Branche",
+    "@profile_company_contact_section_industry": {
+        "description": "Bezeichnung über dem Branche Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_website": "Webseite",
+    "@profile_company_contact_section_website": {
+        "description": "Bezeichnung über dem Webseite Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_address": "Straße und Hausnummer",
+    "@profile_company_contact_section_address": {
+        "description": "Bezeichnung über dem Straße und Hausnummer Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_postcode": "PLZ",
+    "@profile_company_contact_section_postcode": {
+        "description": "Bezeichnung über dem PLZ Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_place": "Ort",
+    "@profile_company_contact_section_place": {
+        "description": "Bezeichnung über dem Ort Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_phone": "Telefonnummer",
+    "@profile_company_contact_section_phone": {
+        "description": "Bezeichnung über dem Telefonnummer Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_validator_missing_name": "Bitte den Unternehmensnamen angeben",
+    "@profile_company_validator_missing_name": {
+        "description": "Validierungsnachricht wenn kein Unternehmensname angegeben wurde"
+    },
+    "profile_company_validator_missing_industry": "Bitte die Branche angeben",
+    "@profile_company_validator_missing_industry": {
+        "description": "Validierungsnachricht wenn keine Branche angegeben wurde"
+    },
+    "profile_company_validator_invalid_phone": "Die angegebene Telefonnummer ist ungültig",
+    "@profile_company_validator_invalid_phone": {
+        "description": "Validierungsnachricht wenn Telefonnummer ungültig ist"
+    },
+    "profile_company_contact_section_success_snackbar_message": "Unternehmensinformationen erfolgreich geändert",
+    "@profile_company_contact_section_success_snackbar_message": {
+        "description": "Snackbar Nachricht wenn Unternehmensinformationen erfolgreich geändert wurden"
     }
 }

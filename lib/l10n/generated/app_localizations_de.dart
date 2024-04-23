@@ -520,4 +520,40 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recommendations_validation_missing_reason => 'Bitte einen Grund angeben';
+
+  @override
+  String get profile_company_contact_section_title => 'Unternehmensinformationen';
+
+  @override
+  String get profile_company_contact_section_name => 'Unternehmensbezeichnung';
+
+  @override
+  String get profile_company_contact_section_industry => 'Branche';
+
+  @override
+  String get profile_company_contact_section_website => 'Webseite';
+
+  @override
+  String get profile_company_contact_section_address => 'Straße und Hausnummer';
+
+  @override
+  String get profile_company_contact_section_postcode => 'PLZ';
+
+  @override
+  String get profile_company_contact_section_place => 'Ort';
+
+  @override
+  String get profile_company_contact_section_phone => 'Telefonnummer';
+
+  @override
+  String get profile_company_validator_missing_name => 'Bitte den Unternehmensnamen angeben';
+
+  @override
+  String get profile_company_validator_missing_industry => 'Bitte die Branche angeben';
+
+  @override
+  String get profile_company_validator_invalid_phone => 'Die angegebene Telefonnummer ist ungültig';
+
+  @override
+  String get profile_company_contact_section_success_snackbar_message => 'Unternehmensinformationen erfolgreich geändert';
 }

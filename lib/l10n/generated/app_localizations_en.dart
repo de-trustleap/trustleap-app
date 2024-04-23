@@ -520,4 +520,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendations_validation_missing_reason => 'Please enter a reason';
+
+  @override
+  String get profile_company_contact_section_title => 'Company Information';
+
+  @override
+  String get profile_company_contact_section_name => 'Company name';
+
+  @override
+  String get profile_company_contact_section_industry => 'Industry';
+
+  @override
+  String get profile_company_contact_section_website => 'Website';
+
+  @override
+  String get profile_company_contact_section_address => 'Address';
+
+  @override
+  String get profile_company_contact_section_postcode => 'Postcode';
+
+  @override
+  String get profile_company_contact_section_place => 'Place';
+
+  @override
+  String get profile_company_contact_section_phone => 'Phone';
+
+  @override
+  String get profile_company_validator_missing_name => 'Please enter the company name';
+
+  @override
+  String get profile_company_validator_missing_industry => 'Please enter the industry';
+
+  @override
+  String get profile_company_validator_invalid_phone => 'The phone number is invalid';
+
+  @override
+  String get profile_company_contact_section_success_snackbar_message => 'Company information changed successfully';
 }

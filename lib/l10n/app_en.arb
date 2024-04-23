@@ -695,5 +695,53 @@
     "recommendations_validation_missing_reason": "Please enter a reason",
     "@recommendations_validation_missing_reason": {
         "description": "Validation message if you have not provided a reason in the recommendation reason field in the recommendation form."
+    },
+    "profile_company_contact_section_title": "Company Information",
+    "@profile_company_contact_section_title": {
+        "description": "Title of the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_name": "Company name",
+    "@profile_company_contact_section_name": {
+        "description": "Name above the company name text field of the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_industry": "Industry",
+    "@profile_company_contact_section_industry": {
+        "description": "Name above the industry text field of the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_website": "Website",
+    "@profile_company_contact_section_website": {
+        "description": "Name above the website text field of the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_address": "Address",
+    "@profile_company_contact_section_address": {
+        "description": "Name above the address text field of the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_postcode": "Postcode",
+    "@profile_company_contact_section_postcode": {
+        "description": "Name above the postcode text field of the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_place": "Place",
+    "@profile_company_contact_section_place": {
+        "description": "Name above the place text field of the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_phone": "Phone",
+    "@profile_company_contact_section_phone": {
+        "description": "Bezeichnung über dem phone Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_validator_missing_name": "Please enter the company name",
+    "@profile_company_validator_missing_name": {
+        "description": "Validation message when there is no company name."
+    },
+    "profile_company_validator_missing_industry": "Please enter the industry",
+    "@profile_company_validator_missing_industry": {
+        "description": "Validation message when there is no industry."
+    },
+    "profile_company_validator_invalid_phone": "The phone number is invalid",
+    "@profile_company_validator_invalid_phone": {
+        "description": "Validation message when the phone number is invalid."
+    },
+    "profile_company_contact_section_success_snackbar_message": "Company information changed successfully",
+    "@profile_company_contact_section_success_snackbar_message": {
+        "description": "Snackbar message when company information changed successfully."
     }
 }

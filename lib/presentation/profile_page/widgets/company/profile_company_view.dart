@@ -1,19 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/cached_image_view.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_contact_section.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/cached_image_view.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_contact_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_image_section.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileCompanyView extends StatefulWidget {
   final CustomUser user;
@@ -63,7 +63,7 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
                   children: [
                     if (widget.user.role == Role.company) ...[
                       CompanyImageSection(
-                          company: state.company, // TODO: Localizations nachziehen
+                          company: state.company,
                           imageUploadSuccessful: () => {
                                 CustomSnackBar.of(context).showCustomSnackBar(
                                     localization
@@ -72,7 +72,8 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
                     ] else ...[
                       CachedImageView(
                           imageSize: const Size(200, 200),
-                          imageDownloadURL: state.company.companyImageDownloadURL ?? "",
+                          imageDownloadURL:
+                              state.company.companyImageDownloadURL ?? "",
                           thumbnailDownloadURL:
                               state.company.thumbnailDownloadURL ?? "",
                           hovered: false)
@@ -82,8 +83,8 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
                         user: widget.user,
                         company: state.company,
                         changesSaved: () {
-                          CustomSnackBar.of(context).showCustomSnackBar(
-                              "Unternehmensinformationen erfolgreich geändert");
+                          CustomSnackBar.of(context).showCustomSnackBar(localization
+                              .profile_company_contact_section_success_snackbar_message);
                         }),
                     SizedBox(height: responsiveValue.isMobile ? 50 : 100)
                   ],

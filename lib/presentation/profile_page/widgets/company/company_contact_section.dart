@@ -2,6 +2,7 @@
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -10,8 +11,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_validator.dart';
 import 'package:flutter/material.dart';
-
-import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -145,14 +144,15 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Unternehmensinformationen",
+                    Text(localization.profile_company_contact_section_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Unternehmensbezeichnung",
+                          Text(
+                              localization.profile_company_contact_section_name,
                               style: responsiveValue.isMobile
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
@@ -182,7 +182,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Branche",
+                          Text(
+                              localization
+                                  .profile_company_contact_section_industry,
                               style: responsiveValue.isMobile
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
@@ -212,7 +214,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Webseite",
+                          Text(
+                              localization
+                                  .profile_company_contact_section_website,
                               style: responsiveValue.isMobile
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
@@ -241,7 +245,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Straße und Hausnummer",
+                          Text(
+                              localization
+                                  .profile_company_contact_section_address,
                               style: responsiveValue.isMobile
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
@@ -277,7 +283,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                Text("PLZ",
+                                Text(
+                                    localization
+                                        .profile_company_contact_section_postcode,
                                     style: responsiveValue.isMobile
                                         ? themeData.textTheme.bodySmall
                                         : themeData.textTheme.bodyMedium),
@@ -314,7 +322,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                Text("Ort",
+                                Text(
+                                    localization
+                                        .profile_company_contact_section_place,
                                     style: responsiveValue.isMobile
                                         ? themeData.textTheme.bodySmall
                                         : themeData.textTheme.bodyMedium),
@@ -348,7 +358,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Telefonnummer",
+                          Text(
+                              localization
+                                  .profile_company_contact_section_phone,
                               style: responsiveValue.isMobile
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
