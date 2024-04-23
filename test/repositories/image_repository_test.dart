@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'image_repository_test.mocks.dart';
+import 'package:finanzbegleiter/constants.dart';
 
 @GenerateMocks([ImageRepository])
 void main() {
@@ -22,12 +23,12 @@ void main() {
     test("should return image url when call was successful", () async {
       // Given
       final expectedResult = right(testURL);
-      when(mockImageRepo.uploadImageForWeb(testImage, testID))
+      when(mockImageRepo.uploadImageForWeb(testImage, testID, ImageUploader.user))
           .thenAnswer((_) async => right(testURL));
       // When
-      final result = await mockImageRepo.uploadImageForWeb(testImage, testID);
+      final result = await mockImageRepo.uploadImageForWeb(testImage, testID, ImageUploader.user);
       // Then
-      verify(mockImageRepo.uploadImageForWeb(testImage, testID));
+      verify(mockImageRepo.uploadImageForWeb(testImage, testID, ImageUploader.user));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockImageRepo);
     });
@@ -35,12 +36,12 @@ void main() {
     test("should return failure when call has failed", () async {
       // Given
       final expectedResult = left(ObjectNotFound());
-      when(mockImageRepo.uploadImageForWeb(testImage, testID))
+      when(mockImageRepo.uploadImageForWeb(testImage, testID, ImageUploader.user))
           .thenAnswer((_) async => left(ObjectNotFound()));
       // When
-      final result = await mockImageRepo.uploadImageForWeb(testImage, testID);
+      final result = await mockImageRepo.uploadImageForWeb(testImage, testID, ImageUploader.user);
       // Then
-      verify(mockImageRepo.uploadImageForWeb(testImage, testID));
+      verify(mockImageRepo.uploadImageForWeb(testImage, testID, ImageUploader.user));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockImageRepo);
     });

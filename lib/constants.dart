@@ -32,6 +32,7 @@ enum Gender {
 
 enum Role {
   admin("Administrator"),
+  company("Unternehmen"),
   serviceProvider("Dienstleister"),
   promoter("Promoter"),
   none("Keine");
@@ -57,3 +58,5 @@ enum RecommendationReason {
   final String value;
   const RecommendationReason(this.value);
 }
+
+enum ImageUploader { user, company }

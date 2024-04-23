@@ -145,4 +145,43 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i7.AuthFailure, void>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.DatabaseFailure, _i6.CustomUser>> getUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUser,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.DatabaseFailure, _i6.CustomUser>>.value(
+                _FakeEither_0<_i5.DatabaseFailure, _i6.CustomUser>(
+          this,
+          Invocation.method(
+            #getUser,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.DatabaseFailure, _i6.CustomUser>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.DatabaseFailure, _i6.CustomUser>> getParentUser(
+          {required String? parentID}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getParentUser,
+          [],
+          {#parentID: parentID},
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.DatabaseFailure, _i6.CustomUser>>.value(
+                _FakeEither_0<_i5.DatabaseFailure, _i6.CustomUser>(
+          this,
+          Invocation.method(
+            #getParentUser,
+            [],
+            {#parentID: parentID},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.DatabaseFailure, _i6.CustomUser>>);
 }

@@ -341,7 +341,7 @@ class _ContactSectionState extends State<ContactSection> {
                 ],
                 if (errorMessage != "" &&
                     showError &&
-                    state is ProfileEmailUpdateFailureState &&
+                    state is ProfileUpdateContactInformationFailureState &&
                     !validationHasError) ...[
                   const SizedBox(height: 20),
                   FormErrorView(message: errorMessage)

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
@@ -17,13 +18,20 @@ class ImageRepositoryImplementation implements ImageRepository {
 
   @override
   Future<Either<StorageFailure, String>> uploadImageForWeb(
-      Uint8List image, String userID) async {
+      Uint8List image, String id, ImageUploader uploader) async {
     final Reference refRoot = firebaseStorage.ref();
-    final Reference userImagesRef =
-        refRoot.child("profileImages/$userID/$userID");
+    Reference imageRef;
+    switch (uploader) {
+      case ImageUploader.user:
+        imageRef = refRoot.child("profileImages/$id/$id");
+        break;
+      case ImageUploader.company:
+        imageRef = refRoot.child("companyImages/$id/$id");
+        break;
+    }
     try {
-      await userImagesRef.putData(image);
-      final downloadURL = await userImagesRef.getDownloadURL();
+      await imageRef.putData(image);
+      final downloadURL = await imageRef.getDownloadURL();
       return right(downloadURL);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getStorageException(code: e.code));
@@ -32,10 +40,10 @@ class ImageRepositoryImplementation implements ImageRepository {
 
   @override
   Future<Either<StorageFailure, String>> uploadImageForApp(
-      File image, String userID) async {
+      File image, String id, ImageUploader uploader) async {
     final Reference refRoot = firebaseStorage.ref();
     final Reference userImagesRef =
-        refRoot.child("profileImages/$userID/$userID");
+        refRoot.child("profileImages/$id/$id");
     try {
       await userImagesRef.putFile(File(image.path));
       final downloadURL = await userImagesRef.getDownloadURL();

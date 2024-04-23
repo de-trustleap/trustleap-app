@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
-import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
+import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
@@ -38,7 +38,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
 
     return BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
       builder: (context, state) {
-        if (state is ProfileObserverSuccess) {
+        if (state is ProfileUserObserverSuccess) {
           return Container(
               width: double.infinity,
               decoration:
@@ -86,14 +86,14 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                       SizedBox(height: responsiveValue.isMobile ? 50 : 100)
                     ])),
               ]));
-        } else if (state is ProfileObserverFailure) {
+        } else if (state is ProfileUserObserverFailure) {
           return CenteredConstrainedWrapper(
               child: ErrorView(
                   title: localization.profile_page_request_failure_message,
                   message: DatabaseFailureMapper.mapFailureMessage(
                       state.failure, localization),
                   callback: () =>
-                      {profileObserverBloc.add(ProfileObserveAllEvent())}));
+                      {profileObserverBloc.add(ProfileObserveUserEvent())}));
         } else {
           return CenteredConstrainedWrapper(
               child: CircularProgressIndicator(

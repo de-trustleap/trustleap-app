@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/profile_image_dropped_file.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/image_dropped_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 
 class ImageUploadDropzone extends StatefulWidget {
   final Widget child;
-  final ValueChanged<ProfileImageDroppedFile> onDroppedFile;
-  final ValueChanged<List<ProfileImageDroppedFile>> onDroppedMultipleFiles;
+  final ValueChanged<ImageDroppedFile> onDroppedFile;
+  final ValueChanged<List<ImageDroppedFile>> onDroppedMultipleFiles;
   final Function onHover;
   final Function onLeave;
 
@@ -30,22 +30,22 @@ class _ImageUploadDropzoneState extends State<ImageUploadDropzone> {
     final mime = await controller.getFileMIME(event);
     final bytes = await controller.getFileSize(event);
     final data = await controller.getFileData(event);
-    final droppedFile = ProfileImageDroppedFile(
-        data: data, name: name, mime: mime, bytes: bytes);
+    final droppedFile =
+        ImageDroppedFile(data: data, name: name, mime: mime, bytes: bytes);
     widget.onDroppedFile(droppedFile);
   }
 
   Future multipleFilesDropped(List<dynamic>? events) async {
     if (events != null) {
-      final List<ProfileImageDroppedFile> fileList = [];
+      final List<ImageDroppedFile> fileList = [];
       for (var event in events) {
         final name = event.name;
         final mime = await controller.getFileMIME(event);
         final bytes = await controller.getFileSize(event);
         final data = await controller.getFileData(event);
 
-        final droppedFile = ProfileImageDroppedFile(
-            data: data, name: name, mime: mime, bytes: bytes);
+        final droppedFile =
+            ImageDroppedFile(data: data, name: name, mime: mime, bytes: bytes);
         fileList.add(droppedFile);
       }
       widget.onDroppedMultipleFiles(fileList);

@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
+import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/core/failures/storage_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section.dart';
@@ -11,19 +11,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProfileImageSection extends StatefulWidget {
-  final CustomUser user;
+class CompanyImageSection extends StatefulWidget {
+  final Company company;
   final Function imageUploadSuccessful;
 
-  const ProfileImageSection(
-      {super.key, required this.user, required this.imageUploadSuccessful});
+  const CompanyImageSection({
+    super.key,
+    required this.company,
+    required this.imageUploadSuccessful
+  });
 
   @override
-  State<ProfileImageSection> createState() => _MyWidgetState();
+  State<CompanyImageSection> createState() => _CompanyImageSectionState();
 }
 
-class _MyWidgetState extends State<ProfileImageSection> {
-  final GlobalKey<_MyWidgetState> myWidgetKey = GlobalKey();
+class _CompanyImageSectionState extends State<CompanyImageSection> {
+  final GlobalKey<_CompanyImageSectionState> myWidgetKey = GlobalKey();
   bool hovered = false;
 
   Future<void> _pickImage() async {
@@ -32,40 +35,39 @@ class _MyWidgetState extends State<ProfileImageSection> {
     final XFile? image =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
     if (context != null && context.mounted) {
-      BlocProvider.of<ProfileImageBloc>(context).add(UploadImageTriggeredEvent(
-          rawImage: image,
-          id: widget.user.id.value));
+      BlocProvider.of<CompanyImageBloc>(context).add(
+          UploadCompanyImageTriggeredEvent(
+              rawImage: image, id: widget.company.id.value));
     }
   }
 
   void onDroppedFile(List<ImageDroppedFile> files) {
-    BlocProvider.of<ProfileImageBloc>(context).add(
-        UploadImageFromDropZoneTriggeredEvent(
-            files: files,
-            id: widget.user.id.value));
+    BlocProvider.of<CompanyImageBloc>(context).add(
+        UploadCompanyImageFromDropZoneTriggeredEvent(
+            files: files, id: widget.company.id.value));
   }
 
   String? _getImageUploadFailureMessage(
-      ProfileImageState state, AppLocalizations localization) {
-    if (state is ProfileImageUploadFailureState) {
+      CompanyImageState state, AppLocalizations localization) {
+    if (state is CompanyImageUploadFailureState) {
       return StorageFailureMapper.mapFailureMessage(
           state.failure, localization);
-    } else if (state is ProfileImageExceedsFileSizeLimitFailureState) {
+    } else if (state is CompanyImageExceedsFileSizeLimitFailureState) {
       return localization
           .profile_page_image_section_validation_exceededFileSize;
-    } else if (state is ProfileImageIsNotValidFailureState) {
+    } else if (state is CompanyImageIsNotValidFailureState) {
       return localization.profile_page_image_section_validation_not_valid;
-    } else if (state is ProfileImageOnlyOneAllowedFailureState) {
+    } else if (state is CompanyImageOnlyOneAllowedFailureState) {
       return localization.profile_page_image_section_only_one_allowed;
-    } else if (state is ProfileImageUploadNotFoundFailureState) {
+    } else if (state is CompanyImageUploadNotFoundFailureState) {
       return localization.profile_page_image_section_upload_not_found;
     } else {
       return null;
     }
   }
 
-  String _getImageThumbnailURL(ProfileImageState state, String? thumbnailURL) {
-    if (state is ProfileImageUploadSuccessState) {
+  String _getImageThumbnailURL(CompanyImageState state, String? thumbnailURL) {
+    if (state is CompanyImageUploadSuccessState) {
       return state.imageURL;
     } else if (thumbnailURL != null) {
       return thumbnailURL;
@@ -85,9 +87,9 @@ class _MyWidgetState extends State<ProfileImageSection> {
     final localization = AppLocalizations.of(context);
     const Size imageSize = Size(200, 200);
 
-    return BlocConsumer<ProfileImageBloc, ProfileImageState>(
+    return BlocConsumer<CompanyImageBloc, CompanyImageState>(
       listener: (context, state) {
-        if (state is ProfileImageUploadSuccessState) {
+        if (state is CompanyImageUploadSuccessState) {
           widget.imageUploadSuccessful();
           PaintingBinding.instance.imageCache.clear();
         }
@@ -116,12 +118,12 @@ class _MyWidgetState extends State<ProfileImageSection> {
                   child: ImageSection(
                       widgetKey: myWidgetKey,
                       imageDownloadURL:
-                          widget.user.profileImageDownloadURL ?? "",
+                          widget.company.companyImageDownloadURL ?? "",
                       thumbnailDownloadURL: _getImageThumbnailURL(
-                          state, widget.user.thumbnailDownloadURL),
+                          state, widget.company.thumbnailDownloadURL),
                       imageSize: imageSize,
                       hovered: hovered,
-                      isLoading: state is ProfileImageUploadLoadingState,
+                      isLoading: state is CompanyImageUploadLoadingState,
                       pickImage: () => _pickImage())),
             ),
             if (_getImageUploadFailureMessage(state, localization) != null) ...[

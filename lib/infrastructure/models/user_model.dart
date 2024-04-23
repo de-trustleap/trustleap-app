@@ -16,6 +16,7 @@ class UserModel extends Equatable {
   final String? place;
   final String? email;
   final String? parentUserID;
+  final String? companyID;
   final String? role;
   final String? profileImageDownloadURL;
   final String? thumbnailDownloadURL;
@@ -35,6 +36,7 @@ class UserModel extends Equatable {
       this.place,
       this.email,
       this.parentUserID,
+      this.companyID,
       this.role,
       this.profileImageDownloadURL,
       this.thumbnailDownloadURL,
@@ -55,6 +57,7 @@ class UserModel extends Equatable {
       'place': place,
       'email': email,
       'parentUserID': parentUserID,
+      'companyID': companyID,
       'role': role,
       'profileImageDownloadURL': profileImageDownloadURL,
       'thumbnailDownloadURL': thumbnailDownloadURL,
@@ -78,6 +81,7 @@ class UserModel extends Equatable {
       email: map['email'] != null ? map['email'] as String : null,
       parentUserID:
           map['parentUserID'] != null ? map['parentUserID'] as String : null,
+      companyID: map['companyID'] != null ? map['companyID'] as String : null,
       role: map['role'] != null ? map['role'] as String : "none",
       profileImageDownloadURL: map['profileImageDownloadURL'] != null
           ? map['profileImageDownloadURL'] as String
@@ -109,6 +113,7 @@ class UserModel extends Equatable {
     String? place,
     String? email,
     String? parentUserID,
+    String? companyID,
     String? role,
     String? profileImageDownloadURL,
     String? thumbnailDownloadURL,
@@ -128,6 +133,7 @@ class UserModel extends Equatable {
       place: place ?? this.place,
       email: email ?? this.email,
       parentUserID: parentUserID ?? this.parentUserID,
+      companyID: companyID ?? this.companyID,
       role: role ?? this.role,
       profileImageDownloadURL:
           profileImageDownloadURL ?? this.profileImageDownloadURL,
@@ -159,6 +165,7 @@ class UserModel extends Equatable {
         place: place,
         email: email,
         parentUserID: parentUserID,
+        companyID: companyID,
         role: role == null
             ? Role.none
             : Role.values.firstWhere((element) => element.name == role),
@@ -182,6 +189,7 @@ class UserModel extends Equatable {
         place: user.place,
         email: user.email,
         parentUserID: user.parentUserID,
+        companyID: user.companyID,
         role: user.role?.name,
         profileImageDownloadURL: user.profileImageDownloadURL,
         thumbnailDownloadURL: user.thumbnailDownloadURL,
@@ -203,6 +211,7 @@ class UserModel extends Equatable {
         place,
         email,
         parentUserID,
+        companyID,
         role,
         profileImageDownloadURL,
         thumbnailDownloadURL,
