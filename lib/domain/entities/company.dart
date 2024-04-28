@@ -1,0 +1,66 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
+
+class Company extends Equatable {
+  final UniqueID id;
+  final String? name;
+  final String? industry;
+  final String? address;
+  final String? postCode;
+  final String? place;
+  final String? phoneNumber;
+  final String? websiteURL;
+  final String? companyImageDownloadURL;
+  final String? thumbnailDownloadURL;
+  final List<String>? employeeIDs;
+  final DateTime? createdAt;
+
+  const Company({
+    required this.id,
+    this.name,
+    this.industry,
+    this.address,
+    this.postCode,
+    this.place,
+    this.phoneNumber,
+    this.websiteURL,
+    this.companyImageDownloadURL,
+    this.thumbnailDownloadURL,
+    this.employeeIDs,
+    this.createdAt,
+  });
+
+  Company copyWith({
+    UniqueID? id,
+    String? name,
+    String? industry,
+    String? address,
+    String? postCode,
+    String? place,
+    String? phoneNumber,
+    String? websiteURL,
+    String? companyImageDownloadURL,
+    String? thumbnailDownloadURL,
+    List<String>? employeeIDs,
+    DateTime? createdAt,
+  }) {
+    return Company(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      industry: industry ?? this.industry,
+      address: address ?? this.address,
+      postCode: postCode ?? this.postCode,
+      place: place ?? this.place,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      websiteURL: websiteURL ?? this.websiteURL,
+      companyImageDownloadURL: companyImageDownloadURL ?? this.companyImageDownloadURL,
+      thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+      employeeIDs: employeeIDs ?? this.employeeIDs,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+  
+  @override
+  List<Object?> get props => [id, name, industry, address, postCode, place, phoneNumber, websiteURL, companyImageDownloadURL, thumbnailDownloadURL, employeeIDs];
+}

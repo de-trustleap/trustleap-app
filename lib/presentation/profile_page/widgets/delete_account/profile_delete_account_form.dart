@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
@@ -124,21 +125,15 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
                             ? themeData.textTheme.bodySmall
                             : themeData.textTheme.bodyMedium),
                     const SizedBox(height: 24),
-                    TextFormField(
-                      controller: passwordTextController,
-                      onFieldSubmitted: (_) => submit(),
-                      onChanged: (_) {
-                        resetError();
-                      },
-                      validator: validator.validatePassword,
-                      obscureText: true,
-                      style: responsiveValue.isMobile
-                          ? themeData.textTheme.bodySmall
-                          : themeData.textTheme.bodyMedium,
-                      decoration: InputDecoration(
-                          labelText:
-                              localization.delete_account_password_placeholder),
-                    ),
+                    FormTextfield(
+                        controller: passwordTextController,
+                        disabled: false,
+                        placeholder:
+                            localization.delete_account_password_placeholder,
+                        onChanged: resetError,
+                        onFieldSubmitted: () => submit,
+                        validator: validator.validatePassword,
+                        obscureText: true),
                     const SizedBox(height: 48),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(

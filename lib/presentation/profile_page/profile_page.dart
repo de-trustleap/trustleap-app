@@ -1,9 +1,14 @@
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
-import 'package:finanzbegleiter/application/images/images_bloc.dart';
-import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
+import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
+import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
+import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
+import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
+import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/company/profile_company_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/delete_account/profile_delete_account_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
@@ -21,27 +26,14 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late double screenHeight;
   late double topPadding;
   late TabController tabController;
-  final List<TabbarContent> tabViews = [
-    TabbarContent(
-        tab: const CustomTab(icon: Icons.person, title: "Allgemein"),
-        content: const ProfileGeneralView()),
-    TabbarContent(
-        tab: const CustomTab(icon: Icons.lock, title: "Passwort ändern"),
-        content: const ProfilePasswordUpdateView()),
-    TabbarContent(
-        tab: const CustomTab(
-            icon: Icons.delete_forever, title: "Account löschen"),
-        content: const ProfileDeleteAccountView())
-  ];
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: tabViews.length, vsync: this);
   }
 
   @override
@@ -56,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage>
     screenHeight = responsiveValue.screenHeight;
     topPadding = responsiveValue.screenHeight * 0.02;
     final profileObserverBloc = Modular.get<ProfileObserverBloc>()
-      ..add(ProfileObserveAllEvent());
+      ..add(ProfileObserveUserEvent());
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => profileObserverBloc),
@@ -64,21 +56,61 @@ class _ProfilePageState extends State<ProfilePage>
               create: (context) => Modular.get<ProfileCubit>()
                 ..verifyEmail()
                 ..getCurrentUser()),
+          BlocProvider(create: (context) => Modular.get<CompanyObserverCubit>()),
+          BlocProvider(create: (context) => Modular.get<CompanyCubit>()),
           BlocProvider(create: (context) => Modular.get<UserCubit>()),
-          BlocProvider(create: (context) => Modular.get<ImagesBloc>()),
+          BlocProvider(create: (context) => Modular.get<ProfileImageBloc>()),
+          BlocProvider(create: (context) => Modular.get<CompanyImageBloc>())
         ],
-        child: Padding(
-          padding: EdgeInsets.only(top: topPadding),
-          child: tabbar(responsiveValue),
+        child: BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
+          builder: (context, state) {
+            return Padding(
+              padding: EdgeInsets.only(top: topPadding),
+              child: tabbar(responsiveValue, state),
+            );
+          },
         ));
   }
 
-  Widget tabbar(ResponsiveBreakpointsData responsiveValue) {
+  bool canAccessCompanyProfile(ProfileUserObserverSuccess state) {
+    if (state.user.role == Role.company && state.user.companyID != null) {
+      return true;
+    } else if (state.user.role == Role.serviceProvider && state.user.companyID != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  List<TabbarContent> getTabbarContent(ProfileObserverState state) {
+    return [
+      TabbarContent(
+          tab: const CustomTab(icon: Icons.person, title: "Persönliche Daten"),
+          content: const ProfileGeneralView()),
+      if (state is ProfileUserObserverSuccess && canAccessCompanyProfile(state)) ...[
+        TabbarContent(
+            tab: const CustomTab(icon: Icons.home, title: "Unternehmen"),
+            content: ProfileCompanyView(user: state.user, companyID: state.user.companyID!))
+      ],
+      TabbarContent(
+          tab: const CustomTab(icon: Icons.lock, title: "Passwort ändern"),
+          content: const ProfilePasswordUpdateView()),
+      TabbarContent(
+          tab: const CustomTab(
+              icon: Icons.delete_forever, title: "Account löschen"),
+          content: const ProfileDeleteAccountView())
+    ];
+  }
+
+  Widget tabbar(
+      ResponsiveBreakpointsData responsiveValue, ProfileObserverState state) {
+    List<TabbarContent> tabViews = getTabbarContent(state);
+    tabController = TabController(length: tabViews.length, vsync: this);
     return Column(
       children: [
         SizedBox(
             width: responsiveValue.largerThan(TABLET)
-                ? responsiveValue.screenWidth * 0.6
+                ? responsiveValue.screenWidth * 0.9
                 : responsiveValue.screenWidth * 0.9,
             child: TabBar(
                 controller: tabController,

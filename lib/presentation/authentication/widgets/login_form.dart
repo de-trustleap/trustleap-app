@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/password_forgotten_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -95,35 +96,23 @@ class _LoginFormState extends State<LoginForm> {
                       style: themeData.textTheme.bodySmall!.copyWith(
                           fontWeight: FontWeight.w500, letterSpacing: 4)),
                   const SizedBox(height: 80),
-                  TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    controller: emailTextController,
-                    onChanged: (_) {
-                      resetError();
-                    },
-                    onFieldSubmitted: (_) => submit(),
-                    validator: validator.validateEmail,
-                    style: responsiveValue.isMobile
-                        ? themeData.textTheme.titleSmall
-                        : themeData.textTheme.titleMedium,
-                    decoration:
-                        InputDecoration(labelText: localization.login_email),
-                  ),
+                  FormTextfield(
+                      controller: emailTextController,
+                      disabled: false,
+                      placeholder: localization.login_email,
+                      onChanged: resetError,
+                      onFieldSubmitted: submit,
+                      validator: validator.validateEmail,
+                      keyboardType: TextInputType.emailAddress),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    controller: passwordTextController,
-                    onChanged: (_) {
-                      resetError();
-                    },
-                    onFieldSubmitted: (_) => submit(),
-                    validator: validator.validatePassword,
-                    obscureText: true,
-                    style: responsiveValue.isMobile
-                        ? themeData.textTheme.titleSmall
-                        : themeData.textTheme.titleMedium,
-                    decoration:
-                        InputDecoration(labelText: localization.login_password),
-                  ),
+                  FormTextfield(
+                      controller: passwordTextController,
+                      disabled: false,
+                      placeholder: localization.login_password,
+                      onChanged: resetError,
+                      onFieldSubmitted: submit,
+                      validator: validator.validatePassword,
+                      obscureText: true),
                   const SizedBox(height: 16),
                   PasswordForgottenButton(
                       onTap: () =>

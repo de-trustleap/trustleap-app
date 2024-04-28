@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/profile/observer/profile_observer_bloc.dart';
+import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -34,7 +34,7 @@ void main() {
           Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
               [right(testUser)]));
       // When
-      profileObserverBloc.add(ProfileObserveAllEvent());
+      profileObserverBloc.add(ProfileObserveUserEvent());
       await untilCalled(mockUserRepo.observeUser());
       // Then
       verify(mockUserRepo.observeUser());
@@ -46,15 +46,15 @@ void main() {
         () {
       // Given
       final expectedResult = [
-        ProfileObserverLoading(),
-        ProfileObserverSuccess(user: testUser)
+        ProfileUserObserverLoading(),
+        ProfileUserObserverSuccess(user: testUser)
       ];
       when(mockUserRepo.observeUser()).thenAnswer((_) =>
           Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
               [right(testUser)]));
       // Then
       expectLater(profileObserverBloc.stream, emitsInOrder(expectedResult));
-      profileObserverBloc.add(ProfileObserveAllEvent());
+      profileObserverBloc.add(ProfileObserveUserEvent());
     });
 
     test(
@@ -62,15 +62,15 @@ void main() {
         () {
       // Given
       final expectedResult = [
-        ProfileObserverLoading(),
-        ProfileObserverFailure(failure: BackendFailure())
+        ProfileUserObserverLoading(),
+        ProfileUserObserverFailure(failure: BackendFailure())
       ];
       when(mockUserRepo.observeUser()).thenAnswer((_) =>
           Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
               [left(BackendFailure())]));
       // Then
       expectLater(profileObserverBloc.stream, emitsInOrder(expectedResult));
-      profileObserverBloc.add(ProfileObserveAllEvent());
+      profileObserverBloc.add(ProfileObserveUserEvent());
     });
   });
 }

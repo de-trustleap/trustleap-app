@@ -1118,6 +1118,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter a reason'**
   String get recommendations_validation_missing_reason;
+
+  /// Title of the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Company Information'**
+  String get profile_company_contact_section_title;
+
+  /// Name above the company name text field of the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Company name'**
+  String get profile_company_contact_section_name;
+
+  /// Name above the industry text field of the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Industry'**
+  String get profile_company_contact_section_industry;
+
+  /// Name above the website text field of the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get profile_company_contact_section_website;
+
+  /// Name above the address text field of the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get profile_company_contact_section_address;
+
+  /// Name above the postcode text field of the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Postcode'**
+  String get profile_company_contact_section_postcode;
+
+  /// Name above the place text field of the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Place'**
+  String get profile_company_contact_section_place;
+
+  /// Bezeichnung über dem phone Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get profile_company_contact_section_phone;
+
+  /// Validation message when there is no company name.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the company name'**
+  String get profile_company_validator_missing_name;
+
+  /// Validation message when there is no industry.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the industry'**
+  String get profile_company_validator_missing_industry;
+
+  /// Validation message when the phone number is invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'The phone number is invalid'**
+  String get profile_company_validator_invalid_phone;
+
+  /// Snackbar message when company information changed successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Company information changed successfully'**
+  String get profile_company_contact_section_success_snackbar_message;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

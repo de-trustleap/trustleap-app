@@ -5,31 +5,32 @@ import 'dart:ui';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/profile_image_dropped_file.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/image_dropped_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
-part 'images_event.dart';
-part 'images_state.dart';
+part 'profile_image_event.dart';
+part 'profile_image_state.dart';
 
-class ImagesBloc extends Bloc<ImagesEvent, ImagesState> {
+class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
   final ImageRepository imageRepo;
   final fileSizeLimit = 5000000;
 
-  ImagesBloc(
+  ProfileImageBloc(
     this.imageRepo,
   ) : super(ImagesInitial()) {
     on<UploadImageTriggeredEvent>((event, emit) async {
-      emit(ImageUploadLoadingState());
+      emit(ProfileImageUploadLoadingState());
       if (event.rawImage != null) {
         if (kIsWeb) {
           add(UploadImageForWebTriggeredEvent(
-              image: event.rawImage!, userID: event.userID));
+              image: event.rawImage!, id: event.id));
         } else {
           add(UploadImageForAppTriggeredEvent(
-              image: event.rawImage!, userID: event.userID));
+              image: event.rawImage!, id: event.id));
         }
       } else {
         emit(ImageUploadCancelledState());
@@ -37,20 +38,20 @@ class ImagesBloc extends Bloc<ImagesEvent, ImagesState> {
     }, transformer: restartable());
 
     on<UploadImageFromDropZoneTriggeredEvent>((event, emit) {
-      emit(ImageUploadLoadingState());
+      emit(ProfileImageUploadLoadingState());
       if (event.files.length > 1) {
-        emit(ImageOnlyOneAllowedFailureState());
+        emit(ProfileImageOnlyOneAllowedFailureState());
         return;
       } else if (event.files.isEmpty) {
-        emit(ImageIsNotValidFailureState());
+        emit(ProfileImageIsNotValidFailureState());
       } else {
         final file = event.files.first;
         if (file.mime.contains("image")) {
           final xFileImage = XFile.fromData(file.data);
           add(UploadImageTriggeredEvent(
-              rawImage: xFileImage, userID: event.userID));
+              rawImage: xFileImage, id: event.id));
         } else {
-          emit(ImageIsNotValidFailureState());
+          emit(ProfileImageIsNotValidFailureState());
         }
       }
     });
@@ -60,32 +61,34 @@ class ImagesBloc extends Bloc<ImagesEvent, ImagesState> {
       final imageFileSize = selectedImage.length;
       final isImageValid = await _isImageValid(selectedImage);
       if (!isImageValid) {
-        emit(ImageIsNotValidFailureState());
+        emit(ProfileImageIsNotValidFailureState());
         return;
       }
       if (imageFileSize > fileSizeLimit) {
-        emit(ImageExceedsFileSizeLimitFailureState());
+        emit(ProfileImageExceedsFileSizeLimitFailureState());
         return;
       }
-      final failureOrSuccess =
-          await imageRepo.uploadImageForWeb(selectedImage, event.userID);
+      final failureOrSuccess = await imageRepo.uploadImageForWeb(
+          selectedImage, event.id, ImageUploader.user);
       failureOrSuccess.fold(
-          (failure) => emit(ImageUploadFailureState(failure: failure)),
-          (imageURL) => emit(ImageUploadSuccessState(imageURL: imageURL)));
+          (failure) => emit(ProfileImageUploadFailureState(failure: failure)),
+          (imageURL) =>
+              emit(ProfileImageUploadSuccessState(imageURL: imageURL)));
     });
 
     on<UploadImageForAppTriggeredEvent>((event, emit) async {
       final selectedImage = File(event.image.path);
       final imageFileSize = await selectedImage.length();
       if (imageFileSize > fileSizeLimit) {
-        emit(ImageExceedsFileSizeLimitFailureState());
+        emit(ProfileImageExceedsFileSizeLimitFailureState());
         return;
       }
-      final failureOrSuccess =
-          await imageRepo.uploadImageForApp(selectedImage, event.userID);
+      final failureOrSuccess = await imageRepo.uploadImageForApp(
+          selectedImage, event.id, ImageUploader.user);
       failureOrSuccess.fold(
-          (failure) => emit(ImageUploadFailureState(failure: failure)),
-          (imageURL) => emit(ImageUploadSuccessState(imageURL: imageURL)));
+          (failure) => emit(ProfileImageUploadFailureState(failure: failure)),
+          (imageURL) =>
+              emit(ProfileImageUploadSuccessState(imageURL: imageURL)));
     });
   }
 

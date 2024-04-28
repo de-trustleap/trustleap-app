@@ -4,10 +4,11 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:io' as _i7;
+import 'dart:io' as _i8;
 import 'dart:typed_data' as _i6;
 
 import 'package:dartz/dartz.dart' as _i2;
+import 'package:finanzbegleiter/constants.dart' as _i7;
 import 'package:finanzbegleiter/core/failures/storage_failures.dart' as _i5;
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart'
     as _i3;
@@ -47,14 +48,16 @@ class MockImageRepository extends _i1.Mock implements _i3.ImageRepository {
   @override
   _i4.Future<_i2.Either<_i5.StorageFailure, String>> uploadImageForWeb(
     _i6.Uint8List? image,
-    String? userID,
+    String? id,
+    _i7.ImageUploader? uploader,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
           #uploadImageForWeb,
           [
             image,
-            userID,
+            id,
+            uploader,
           ],
         ),
         returnValue: _i4.Future<_i2.Either<_i5.StorageFailure, String>>.value(
@@ -64,7 +67,8 @@ class MockImageRepository extends _i1.Mock implements _i3.ImageRepository {
             #uploadImageForWeb,
             [
               image,
-              userID,
+              id,
+              uploader,
             ],
           ),
         )),
@@ -72,15 +76,17 @@ class MockImageRepository extends _i1.Mock implements _i3.ImageRepository {
 
   @override
   _i4.Future<_i2.Either<_i5.StorageFailure, String>> uploadImageForApp(
-    _i7.File? image,
-    String? userID,
+    _i8.File? image,
+    String? id,
+    _i7.ImageUploader? uploader,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
           #uploadImageForApp,
           [
             image,
-            userID,
+            id,
+            uploader,
           ],
         ),
         returnValue: _i4.Future<_i2.Either<_i5.StorageFailure, String>>.value(
@@ -90,7 +96,8 @@ class MockImageRepository extends _i1.Mock implements _i3.ImageRepository {
             #uploadImageForApp,
             [
               image,
-              userID,
+              id,
+              uploader,
             ],
           ),
         )),

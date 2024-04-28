@@ -8,28 +8,27 @@ final class ProfileObserverInitial extends ProfileObserverState
   List<Object?> get props => [];
 }
 
-final class ProfileObserverLoading extends ProfileObserverState
+final class ProfileUserObserverLoading extends ProfileObserverState
     with EquatableMixin {
-  @override
   @override
   List<Object?> get props => [];
 }
 
-final class ProfileObserverFailure extends ProfileObserverState
+final class ProfileUserObserverFailure extends ProfileObserverState
     with EquatableMixin {
   final DatabaseFailure failure;
 
-  ProfileObserverFailure({required this.failure});
+  ProfileUserObserverFailure({required this.failure});
 
   @override
   List<Object?> get props => [failure];
 }
 
-final class ProfileObserverSuccess extends ProfileObserverState
+final class ProfileUserObserverSuccess extends ProfileObserverState
     with EquatableMixin {
   final CustomUser user;
 
-  ProfileObserverSuccess({required this.user});
+  ProfileUserObserverSuccess({required this.user});
 
   @override
   List<Object?> get props => [user];
