@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
@@ -170,24 +171,17 @@ class _ContactSectionState extends State<ContactSection> {
                                     ? themeData.textTheme.bodySmall
                                     : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
-                            SizedBox(
-                              width: responsiveValue.isMobile
-                                  ? maxWidth
-                                  : maxWidth / 2,
-                              child: TextFormField(
+                            FormTextfield(
+                                maxWidth: responsiveValue.isMobile
+                                    ? maxWidth
+                                    : maxWidth / 2,
                                 controller: firstNameTextController,
+                                disabled: false,
+                                placeholder: localization
+                                    .profile_page_password_update_section_reauth_password_textfield_placeholder,
+                                onChanged: resetError,
                                 onFieldSubmitted: (_) => submit(validator),
-                                onChanged: (_) {
-                                  resetError();
-                                },
-                                validator: validator.validateFirstName,
-                                style: responsiveValue.isMobile
-                                    ? themeData.textTheme.bodySmall
-                                    : themeData.textTheme.bodyMedium,
-                                decoration:
-                                    const InputDecoration(labelText: ""),
-                              ),
-                            ),
+                                validator: validator.validateFirstName),
                           ])),
                       const ResponsiveRowColumnItem(
                           child: SizedBox(
@@ -204,24 +198,16 @@ class _ContactSectionState extends State<ContactSection> {
                                     ? themeData.textTheme.bodySmall
                                     : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
-                            SizedBox(
-                              width: responsiveValue.isMobile
-                                  ? maxWidth
-                                  : maxWidth / 2 - textFieldSpacing,
-                              child: TextFormField(
+                            FormTextfield(
+                                maxWidth: responsiveValue.isMobile
+                                    ? maxWidth
+                                    : maxWidth / 2,
                                 controller: lastNameTextController,
+                                disabled: false,
+                                placeholder: "",
+                                onChanged: resetError,
                                 onFieldSubmitted: (_) => submit(validator),
-                                onChanged: (_) {
-                                  resetError();
-                                },
-                                validator: validator.validateLastName,
-                                style: responsiveValue.isMobile
-                                    ? themeData.textTheme.bodySmall
-                                    : themeData.textTheme.bodyMedium,
-                                decoration:
-                                    const InputDecoration(labelText: ""),
-                              ),
-                            ),
+                                validator: validator.validateLastName)
                           ]))
                     ]),
                 const SizedBox(height: textFieldSpacing),
@@ -231,20 +217,13 @@ class _ContactSectionState extends State<ContactSection> {
                           ? themeData.textTheme.bodySmall
                           : themeData.textTheme.bodyMedium),
                   const SizedBox(height: 4),
-                  SizedBox(
-                    width: maxWidth,
-                    child: TextFormField(
+                  FormTextfield(
+                      maxWidth: maxWidth,
                       controller: streetTextController,
-                      onFieldSubmitted: (_) => submit(validator),
-                      onChanged: (_) {
-                        resetError();
-                      },
-                      style: responsiveValue.isMobile
-                          ? themeData.textTheme.bodySmall
-                          : themeData.textTheme.bodyMedium,
-                      decoration: const InputDecoration(labelText: ""),
-                    ),
-                  ),
+                      disabled: false,
+                      placeholder: "",
+                      onChanged: resetError,
+                      onFieldSubmitted: (_) => submit(validator))
                 ]),
                 const SizedBox(height: textFieldSpacing),
                 ResponsiveRowColumn(
@@ -264,25 +243,17 @@ class _ContactSectionState extends State<ContactSection> {
                                     ? themeData.textTheme.bodySmall
                                     : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
-                            SizedBox(
-                              width: responsiveValue.isMobile
-                                  ? maxWidth
-                                  : maxWidth / 2,
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
+                            FormTextfield(
+                                maxWidth: responsiveValue.isMobile
+                                    ? maxWidth
+                                    : maxWidth / 2,
                                 controller: postcodeTextController,
+                                disabled: false,
+                                placeholder: "",
+                                onChanged: resetError,
                                 onFieldSubmitted: (_) => submit(validator),
-                                onChanged: (_) {
-                                  resetError();
-                                },
                                 validator: validator.validatePostcode,
-                                style: responsiveValue.isMobile
-                                    ? themeData.textTheme.bodySmall
-                                    : themeData.textTheme.bodyMedium,
-                                decoration:
-                                    const InputDecoration(labelText: ""),
-                              ),
-                            ),
+                                keyboardType: TextInputType.number)
                           ])),
                       const ResponsiveRowColumnItem(
                           child: SizedBox(
@@ -299,23 +270,15 @@ class _ContactSectionState extends State<ContactSection> {
                                     ? themeData.textTheme.bodySmall
                                     : themeData.textTheme.bodyMedium),
                             const SizedBox(height: 4),
-                            SizedBox(
-                              width: responsiveValue.isMobile
-                                  ? maxWidth
-                                  : maxWidth / 2 - textFieldSpacing,
-                              child: TextFormField(
+                            FormTextfield(
+                                maxWidth: responsiveValue.isMobile
+                                    ? maxWidth
+                                    : maxWidth / 2,
                                 controller: placeTextController,
-                                onFieldSubmitted: (_) => submit(validator),
-                                onChanged: (_) {
-                                  resetError();
-                                },
-                                style: responsiveValue.isMobile
-                                    ? themeData.textTheme.bodySmall
-                                    : themeData.textTheme.bodyMedium,
-                                decoration:
-                                    const InputDecoration(labelText: ""),
-                              ),
-                            ),
+                                disabled: false,
+                                placeholder: "",
+                                onChanged: resetError,
+                                onFieldSubmitted: (_) => submit(validator))
                           ]))
                     ]),
                 const SizedBox(height: textFieldSpacing * 2),

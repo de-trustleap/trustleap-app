@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -112,20 +113,15 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                               ? themeData.textTheme.bodySmall
                               : themeData.textTheme.bodyMedium),
                       const SizedBox(height: padding),
-                      TextFormField(
-                        controller: emailTextController,
-                        onChanged: (_) {
-                          resetError();
-                        },
-                        onFieldSubmitted: (_) => submit(),
-                        validator: validator.validateEmail,
-                        style: responsiveValue.isMobile
-                            ? themeData.textTheme.bodySmall
-                            : themeData.textTheme.bodyMedium,
-                        decoration: InputDecoration(
-                            labelText: localization
-                                .password_forgotten_email_textfield_placeholder),
-                      ),
+                      FormTextfield(
+                          controller: emailTextController,
+                          disabled: false,
+                          placeholder: localization
+                              .password_forgotten_email_textfield_placeholder,
+                          onChanged: resetError,
+                          onFieldSubmitted: submit,
+                          validator: validator.validateEmail,
+                          keyboardType: TextInputType.emailAddress),
                       const SizedBox(height: padding * 2),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

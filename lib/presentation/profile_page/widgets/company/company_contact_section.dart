@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_validator.dart';
@@ -157,26 +158,14 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
                           const SizedBox(height: 4),
-                          SizedBox(
-                            width: maxWidth,
-                            child: TextFormField(
+                          FormTextfield(
+                              maxWidth: maxWidth,
                               controller: nameTextController,
-                              onFieldSubmitted: (_) => submit(validator),
-                              readOnly: textFieldsDisabled ? true : false,
-                              onChanged: (_) {
-                                resetError();
-                              },
-                              validator: validator.validateName,
-                              style: responsiveValue.isMobile
-                                  ? themeData.textTheme.bodySmall
-                                  : themeData.textTheme.bodyMedium,
-                              decoration: InputDecoration(
-                                  labelText: "",
-                                  hoverColor: Colors.transparent,
-                                  filled: textFieldsDisabled ? true : false,
-                                  fillColor: themeData.colorScheme.background),
-                            ),
-                          ),
+                              disabled: textFieldsDisabled,
+                              placeholder: "",
+                              onChanged: resetError,
+                              onFieldSubmitted: () => submit(validator),
+                              validator: validator.validateName)
                         ]),
                     const SizedBox(height: textFieldSpacing),
                     Column(
@@ -189,26 +178,14 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
                           const SizedBox(height: 4),
-                          SizedBox(
-                            width: maxWidth,
-                            child: TextFormField(
+                          FormTextfield(
+                              maxWidth: maxWidth,
                               controller: industryTextController,
-                              onFieldSubmitted: (_) => submit(validator),
-                              readOnly: textFieldsDisabled ? true : false,
-                              onChanged: (_) {
-                                resetError();
-                              },
-                              validator: validator.validateIndustry,
-                              style: responsiveValue.isMobile
-                                  ? themeData.textTheme.bodySmall
-                                  : themeData.textTheme.bodyMedium,
-                              decoration: InputDecoration(
-                                  labelText: "",
-                                  hoverColor: Colors.transparent,
-                                  filled: textFieldsDisabled ? true : false,
-                                  fillColor: themeData.colorScheme.background),
-                            ),
-                          ),
+                              disabled: textFieldsDisabled,
+                              placeholder: "",
+                              onChanged: resetError,
+                              onFieldSubmitted: () => submit(validator),
+                              validator: validator.validateIndustry)
                         ]),
                     const SizedBox(height: textFieldSpacing),
                     Column(
@@ -221,25 +198,13 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
                           const SizedBox(height: 4),
-                          SizedBox(
-                            width: maxWidth,
-                            child: TextFormField(
+                          FormTextfield(
+                              maxWidth: maxWidth,
                               controller: websiteTextController,
-                              onFieldSubmitted: (_) => submit(validator),
-                              readOnly: textFieldsDisabled ? true : false,
-                              onChanged: (_) {
-                                resetError();
-                              },
-                              style: responsiveValue.isMobile
-                                  ? themeData.textTheme.bodySmall
-                                  : themeData.textTheme.bodyMedium,
-                              decoration: InputDecoration(
-                                  labelText: "",
-                                  hoverColor: Colors.transparent,
-                                  filled: textFieldsDisabled ? true : false,
-                                  fillColor: themeData.colorScheme.background),
-                            ),
-                          ),
+                              disabled: textFieldsDisabled,
+                              placeholder: "",
+                              onChanged: resetError,
+                              onFieldSubmitted: () => submit(validator))
                         ]),
                     const SizedBox(height: textFieldSpacing),
                     Column(
@@ -252,25 +217,13 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
                           const SizedBox(height: 4),
-                          SizedBox(
-                            width: maxWidth,
-                            child: TextFormField(
+                          FormTextfield(
+                              maxWidth: maxWidth,
                               controller: addressTextController,
-                              onFieldSubmitted: (_) => submit(validator),
-                              readOnly: textFieldsDisabled ? true : false,
-                              onChanged: (_) {
-                                resetError();
-                              },
-                              style: responsiveValue.isMobile
-                                  ? themeData.textTheme.bodySmall
-                                  : themeData.textTheme.bodyMedium,
-                              decoration: InputDecoration(
-                                  labelText: "",
-                                  hoverColor: Colors.transparent,
-                                  filled: textFieldsDisabled ? true : false,
-                                  fillColor: themeData.colorScheme.background),
-                            ),
-                          ),
+                              disabled: textFieldsDisabled,
+                              placeholder: "",
+                              onChanged: resetError,
+                              onFieldSubmitted: () => submit(validator))
                         ]),
                     const SizedBox(height: textFieldSpacing),
                     ResponsiveRowColumn(
@@ -290,29 +243,15 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                         ? themeData.textTheme.bodySmall
                                         : themeData.textTheme.bodyMedium),
                                 const SizedBox(height: 4),
-                                SizedBox(
-                                  width: responsiveValue.isMobile
-                                      ? maxWidth
-                                      : maxWidth / 2,
-                                  child: TextFormField(
+                                FormTextfield(
+                                    maxWidth: responsiveValue.isMobile
+                                        ? maxWidth
+                                        : maxWidth / 2,
                                     controller: postCodeTextController,
-                                    onFieldSubmitted: (_) => submit(validator),
-                                    readOnly: textFieldsDisabled ? true : false,
-                                    onChanged: (_) {
-                                      resetError();
-                                    },
-                                    style: responsiveValue.isMobile
-                                        ? themeData.textTheme.bodySmall
-                                        : themeData.textTheme.bodyMedium,
-                                    decoration: InputDecoration(
-                                        labelText: "",
-                                        hoverColor: Colors.transparent,
-                                        filled:
-                                            textFieldsDisabled ? true : false,
-                                        fillColor:
-                                            themeData.colorScheme.background),
-                                  ),
-                                ),
+                                    disabled: textFieldsDisabled,
+                                    placeholder: "",
+                                    onChanged: resetError,
+                                    onFieldSubmitted: () => submit(validator))
                               ])),
                           const ResponsiveRowColumnItem(
                               child: SizedBox(
@@ -329,29 +268,15 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                         ? themeData.textTheme.bodySmall
                                         : themeData.textTheme.bodyMedium),
                                 const SizedBox(height: 4),
-                                SizedBox(
-                                  width: responsiveValue.isMobile
-                                      ? maxWidth
-                                      : maxWidth / 2 - textFieldSpacing,
-                                  child: TextFormField(
+                                FormTextfield(
+                                    maxWidth: responsiveValue.isMobile
+                                        ? maxWidth
+                                        : maxWidth / 2,
                                     controller: placeTextController,
-                                    onFieldSubmitted: (_) => submit(validator),
-                                    readOnly: textFieldsDisabled ? true : false,
-                                    onChanged: (_) {
-                                      resetError();
-                                    },
-                                    style: responsiveValue.isMobile
-                                        ? themeData.textTheme.bodySmall
-                                        : themeData.textTheme.bodyMedium,
-                                    decoration: InputDecoration(
-                                        labelText: "",
-                                        hoverColor: Colors.transparent,
-                                        filled:
-                                            textFieldsDisabled ? true : false,
-                                        fillColor:
-                                            themeData.colorScheme.background),
-                                  ),
-                                ),
+                                    disabled: textFieldsDisabled,
+                                    placeholder: "",
+                                    onChanged: resetError,
+                                    onFieldSubmitted: () => submit(validator))
                               ]))
                         ]),
                     const SizedBox(height: textFieldSpacing),
@@ -365,26 +290,13 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                   ? themeData.textTheme.bodySmall
                                   : themeData.textTheme.bodyMedium),
                           const SizedBox(height: 4),
-                          SizedBox(
-                            width: maxWidth,
-                            child: TextFormField(
+                          FormTextfield(
+                              maxWidth: maxWidth,
                               controller: phoneNumberTextController,
-                              onFieldSubmitted: (_) => submit(validator),
-                              readOnly: textFieldsDisabled ? true : false,
-                              onChanged: (_) {
-                                resetError();
-                              },
-                              validator: validator.validatePhoneNumber,
-                              style: responsiveValue.isMobile
-                                  ? themeData.textTheme.bodySmall
-                                  : themeData.textTheme.bodyMedium,
-                              decoration: InputDecoration(
-                                  labelText: "",
-                                  hoverColor: Colors.transparent,
-                                  filled: textFieldsDisabled ? true : false,
-                                  fillColor: themeData.colorScheme.background),
-                            ),
-                          ),
+                              disabled: textFieldsDisabled,
+                              placeholder: "",
+                              onChanged: resetError,
+                              onFieldSubmitted: () => submit(validator))
                         ]),
                     if (widget.user.role == Role.company) ...[
                       const SizedBox(height: textFieldSpacing * 2),

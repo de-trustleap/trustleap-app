@@ -7,13 +7,13 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendors_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class RecommendorItem extends Equatable {
   final String name;
@@ -129,12 +129,12 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   void sendMessageViaWhatsApp() async {
-    String url = "https://api.whatsapp.com/send?text=iwanttotestit";
+    /*   String url = "https://api.whatsapp.com/send?text=iwanttotestit";
     if (await canLaunchUrl(Uri.parse(Uri.encodeFull(url)))) {
       await launchUrl(Uri.parse(Uri.encodeFull(url)));
     } else {
       throw "Could not launch";
-    }
+    } */
   }
 
   @override
@@ -178,81 +178,45 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: maxWidth,
-                              child: TextFormField(
+                            FormTextfield(
+                                maxWidth: maxWidth,
                                 controller: promoterTextController,
-                                onChanged: (_) {
-                                  resetError();
-                                },
-                                readOnly:
-                                    promoterTextFieldDisabled ? true : false,
-                                validator: validator.validatePromotersName,
-                                style: responsiveValue.isMobile
-                                    ? themeData.textTheme.bodySmall
-                                    : themeData.textTheme.bodyMedium,
-                                decoration: InputDecoration(
-                                    labelText: localization
-                                        .recommendations_form_promoter_placeholder,
-                                    hoverColor: Colors.transparent,
-                                    filled: promoterTextFieldDisabled
-                                        ? true
-                                        : false,
-                                    fillColor:
-                                        themeData.colorScheme.background),
-                              ),
-                            ),
+                                disabled: promoterTextFieldDisabled,
+                                placeholder: localization
+                                    .recommendations_form_promoter_placeholder,
+                                onChanged: resetError,
+                                validator: validator.validatePromotersName)
                           ]),
                       const SizedBox(height: textFieldSpacing),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: maxWidth,
-                              child: TextFormField(
-                                  controller: serviceProviderTextController,
-                                  onChanged: (_) {
-                                    resetError();
-                                  },
-                                  readOnly: true,
-                                  validator: validator.validateRecommendorsName,
-                                  style: responsiveValue.isMobile
-                                      ? themeData.textTheme.bodySmall
-                                      : themeData.textTheme.bodyMedium,
-                                  decoration: InputDecoration(
-                                      labelText: localization
-                                          .recommendations_form_service_provider_placeholder,
-                                      hoverColor: Colors.transparent,
-                                      filled: true,
-                                      fillColor:
-                                          themeData.colorScheme.background)),
-                            ),
+                            FormTextfield(
+                                maxWidth: maxWidth,
+                                controller: serviceProviderTextController,
+                                disabled: true,
+                                placeholder: localization
+                                    .recommendations_form_service_provider_placeholder,
+                                onChanged: resetError,
+                                validator: validator.validateRecommendorsName)
                           ]),
                       const SizedBox(height: textFieldSpacing),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: maxWidth * 0.85,
-                              child: TextFormField(
+                            FormTextfield(
+                                maxWidth: maxWidth * 0.85,
                                 controller: recommendorTextController,
-                                onFieldSubmitted: (_) {
+                                disabled: false,
+                                placeholder: localization
+                                    .recommendations_form_recommendation_name_placeholder,
+                                onChanged: resetError,
+                                onFieldSubmitted: () {
                                   addRecommendor(validator);
                                   focusNode!.requestFocus();
                                 },
-                                onChanged: (_) {
-                                  resetError();
-                                },
                                 focusNode: focusNode,
-                                validator: validator.validateRecommendorsName,
-                                style: responsiveValue.isMobile
-                                    ? themeData.textTheme.bodySmall
-                                    : themeData.textTheme.bodyMedium,
-                                decoration: InputDecoration(
-                                    labelText: localization
-                                        .recommendations_form_recommendation_name_placeholder),
-                              ),
-                            ),
+                                validator: validator.validateRecommendorsName),
                             const Spacer(),
                             IconButton(
                                 onPressed: () => addRecommendor(validator),

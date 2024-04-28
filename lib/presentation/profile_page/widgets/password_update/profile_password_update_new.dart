@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -39,40 +40,28 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
               ? themeData.textTheme.bodySmall
               : themeData.textTheme.bodyMedium),
       const SizedBox(height: textFieldSpacing),
-      TextFormField(
-        controller: passwordTextController,
-        onChanged: (_) {
-          resetError();
-        },
-        onFieldSubmitted: (_) => submit(),
-        validator: validator.validatePassword,
-        obscureText: true,
-        style: responsiveValue.isMobile
-            ? themeData.textTheme.bodySmall
-            : themeData.textTheme.bodyMedium,
-        decoration: InputDecoration(
-            labelText: localization
-                .profile_page_password_update_section_new_password_textfield_placeholder),
-      ),
+      FormTextfield(
+          controller: passwordTextController,
+          disabled: false,
+          placeholder: localization
+              .profile_page_password_update_section_new_password_textfield_placeholder,
+          onChanged: resetError,
+          onFieldSubmitted: () => submit,
+          validator: validator.validatePassword,
+          obscureText: true),
       const SizedBox(height: textFieldSpacing),
-      TextFormField(
-        controller: passwordRepeatTextController,
-        onChanged: (_) {
-          resetError();
-        },
-        onFieldSubmitted: (_) => submit(),
-        validator: (val) {
-          return validator.validatePasswordRepeat(
-              val, passwordTextController.text);
-        },
-        obscureText: true,
-        style: responsiveValue.isMobile
-            ? themeData.textTheme.bodySmall
-            : themeData.textTheme.bodyMedium,
-        decoration: InputDecoration(
-            labelText: localization
-                .profile_page_password_update_section_new_password_repeat_textfield_placeholder),
-      ),
+      FormTextfield(
+          controller: passwordRepeatTextController,
+          disabled: false,
+          placeholder: localization
+              .profile_page_password_update_section_new_password_repeat_textfield_placeholder,
+          onChanged: resetError,
+          onFieldSubmitted: () => submit,
+          validator: (val) {
+            return validator.validatePasswordRepeat(
+                val, passwordTextController.text);
+          },
+          obscureText: true),
       const SizedBox(height: textFieldSpacing * 2),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,

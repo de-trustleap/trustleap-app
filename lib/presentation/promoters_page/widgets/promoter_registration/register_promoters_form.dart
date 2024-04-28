@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
@@ -174,137 +175,94 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                               : ResponsiveRowColumnType.ROW,
                           children: [
                             ResponsiveRowColumnItem(
-                              child: SizedBox(
-                                width: responsiveValue.isMobile
-                                    ? maxWidth
-                                    : maxWidth / 2,
-                                child: TextFormField(
-                                  controller: firstNameTextController,
-                                  onFieldSubmitted: (_) => submit(validator),
-                                  onChanged: (_) {
-                                    resetError();
-                                  },
-                                  validator: validator.validateFirstName,
-                                  style: responsiveValue.isMobile
-                                      ? themeData.textTheme.bodySmall
-                                      : themeData.textTheme.bodyMedium,
-                                  decoration: InputDecoration(
-                                      labelText: localization
-                                          .register_promoter_first_name),
-                                ),
-                              ),
-                            ),
+                                child: FormTextfield(
+                                    maxWidth: responsiveValue.isMobile
+                                        ? maxWidth
+                                        : maxWidth / 2,
+                                    controller: firstNameTextController,
+                                    disabled: false,
+                                    placeholder: localization
+                                        .register_promoter_first_name,
+                                    onChanged: resetError,
+                                    onFieldSubmitted: (_) => submit(validator),
+                                    validator: validator.validateFirstName)),
                             const ResponsiveRowColumnItem(
                                 child: SizedBox(
                                     height: textFieldSpacing,
                                     width: textFieldSpacing)),
                             ResponsiveRowColumnItem(
-                              child: SizedBox(
-                                width: responsiveValue.isMobile
-                                    ? maxWidth
-                                    : maxWidth / 2 - textFieldSpacing,
-                                child: TextFormField(
-                                  controller: lastNameTextController,
-                                  onFieldSubmitted: (_) => submit(validator),
-                                  onChanged: (_) {
-                                    resetError();
-                                  },
-                                  validator: validator.validateLastName,
-                                  style: responsiveValue.isMobile
-                                      ? themeData.textTheme.bodySmall
-                                      : themeData.textTheme.bodyMedium,
-                                  decoration: InputDecoration(
-                                      labelText: localization
-                                          .register_promoter_last_name),
-                                ),
-                              ),
-                            )
+                                child: FormTextfield(
+                                    maxWidth: responsiveValue.isMobile
+                                        ? maxWidth
+                                        : maxWidth / 2 - textFieldSpacing,
+                                    controller: lastNameTextController,
+                                    disabled: false,
+                                    placeholder: localization
+                                        .register_promoter_last_name,
+                                    onChanged: resetError,
+                                    onFieldSubmitted: (_) => submit(validator),
+                                    validator: validator.validateLastName))
                           ]),
                       const SizedBox(height: textFieldSpacing),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: maxWidth,
-                              child: TextFormField(
-                                  keyboardType: TextInputType.datetime,
-                                  controller: birthDateTextController,
-                                  onFieldSubmitted: (_) => submit(validator),
-                                  onChanged: (_) {
-                                    resetError();
-                                  },
-                                  validator: validator.validateBirthDate,
-                                  style: responsiveValue.isMobile
-                                      ? themeData.textTheme.bodySmall
-                                      : themeData.textTheme.bodyMedium,
-                                  decoration: InputDecoration(
-                                      prefixIcon: const Icon(
-                                          Icons.calendar_today_rounded),
-                                      labelText: localization
-                                          .register_promoter_birthdate),
-                                  onTap: () async {
-                                    DateTime? pickedDate = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime.now());
-                                    if (pickedDate != null) {
-                                      setState(() {
-                                        birthDateTextController.text =
-                                            DateFormat("dd.MM.yyyy")
-                                                .format(pickedDate);
-                                      });
-                                    }
-                                  }),
-                            ),
-                          ]),
-                      const SizedBox(height: textFieldSpacing),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: maxWidth,
-                              child: TextFormField(
-                                keyboardType: TextInputType.emailAddress,
-                                controller: emailTextController,
+                            FormTextfield(
+                                maxWidth: maxWidth,
+                                controller: birthDateTextController,
+                                disabled: false,
+                                placeholder:
+                                    localization.register_promoter_birthdate,
+                                onChanged: resetError,
                                 onFieldSubmitted: (_) => submit(validator),
-                                onChanged: (_) {
-                                  resetError();
-                                },
-                                validator: validator.validateEmail,
-                                style: responsiveValue.isMobile
-                                    ? themeData.textTheme.bodySmall
-                                    : themeData.textTheme.bodyMedium,
-                                decoration: InputDecoration(
-                                    labelText:
-                                        localization.register_promoter_email),
-                              ),
-                            ),
+                                validator: validator.validateLastName,
+                                keyboardType: TextInputType.datetime,
+                                prefixIcon: Icons.calendar_today_rounded,
+                                onTap: () async {
+                                  DateTime? pickedDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime.now());
+                                  if (pickedDate != null) {
+                                    setState(() {
+                                      birthDateTextController.text =
+                                          DateFormat("dd.MM.yyyy")
+                                              .format(pickedDate);
+                                    });
+                                  }
+                                })
                           ]),
                       const SizedBox(height: textFieldSpacing),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: maxWidth,
-                              child: TextFormField(
-                                keyboardType: TextInputType.multiline,
-                                minLines: 2,
-                                maxLines: 5,
-                                controller: additionalInfoTextController,
-                                onFieldSubmitted: (_) => submit(validator),
-                                onChanged: (_) {
-                                  resetError();
-                                },
-                                validator: validator.validateAdditionalInfo,
-                                style: responsiveValue.isMobile
-                                    ? themeData.textTheme.bodySmall
-                                    : themeData.textTheme.bodyMedium,
-                                decoration: InputDecoration(
-                                    labelText: localization
-                                        .register_promoter_additional_info),
-                              ),
-                            ),
+                            FormTextfield(
+                                    maxWidth: maxWidth,
+                                    controller: emailTextController,
+                                    disabled: false,
+                                    placeholder: localization.register_promoter_email,
+                                    onChanged: resetError,
+                                    onFieldSubmitted: (_) => submit(validator),
+                                    validator: validator.validateEmail,
+                                    keyboardType: TextInputType.emailAddress)
+                          ]),
+                      const SizedBox(height: textFieldSpacing),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                                                        FormTextfield(
+                                    maxWidth: maxWidth,
+                                    controller: additionalInfoTextController,
+                                    disabled: false,
+                                    placeholder: localization
+                                        .register_promoter_additional_info,
+                                    onChanged: resetError,
+                                    onFieldSubmitted: (_) => submit(validator),
+                                    validator: validator.validateAdditionalInfo,
+                                    minLines: 2,
+                                    maxLines: 5,
+                                    keyboardType: TextInputType.multiline)
                           ]),
                       const SizedBox(height: textFieldSpacing * 2),
                       Row(

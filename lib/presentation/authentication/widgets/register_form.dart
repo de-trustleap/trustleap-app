@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
@@ -209,221 +210,137 @@ class _RegisterFormState extends State<RegisterForm> {
                               : ResponsiveRowColumnType.COLUMN,
                           children: [
                             ResponsiveRowColumnItem(
-                                child: SizedBox(
-                              width: getResponsiveWidth(2),
-                              child: TextFormField(
-                                controller: firstNameTextController,
-                                onFieldSubmitted: (_) => submit(validator),
-                                onChanged: (_) {
-                                  resetError();
-                                },
-                                validator: validator.validateFirstName,
-                                style: responsiveValue.isMobile
-                                    ? themeData.textTheme.bodySmall
-                                    : themeData.textTheme.bodyMedium,
-                                decoration: InputDecoration(
-                                    labelText: localization.register_firstname),
-                              ),
-                            )),
+                                child: FormTextfield(
+                                    controller: firstNameTextController,
+                                    disabled: false,
+                                    placeholder:
+                                        localization.register_firstname,
+                                    onChanged: resetError,
+                                    onFieldSubmitted: () => submit(validator),
+                                    validator: validator.validateFirstName)),
                             const ResponsiveRowColumnItem(
                                 child: SizedBox(
                                     height: textFieldSpacing,
                                     width: textFieldSpacing)),
                             ResponsiveRowColumnItem(
-                              child: SizedBox(
-                                width: getResponsiveWidth(2),
-                                child: TextFormField(
-                                  controller: lastNameTextController,
-                                  onFieldSubmitted: (_) => submit(validator),
-                                  onChanged: (_) {
-                                    resetError();
-                                  },
-                                  validator: validator.validateLastName,
-                                  style: responsiveValue.isMobile
-                                      ? themeData.textTheme.bodySmall
-                                      : themeData.textTheme.bodyMedium,
-                                  decoration: InputDecoration(
-                                      labelText:
-                                          localization.register_lastname),
-                                ),
-                              ),
-                            )
+                                child: FormTextfield(
+                                    controller: lastNameTextController,
+                                    disabled: false,
+                                    placeholder: localization.register_lastname,
+                                    onChanged: resetError,
+                                    onFieldSubmitted: () => submit(validator),
+                                    validator: validator.validateLastName))
                           ],
                         ),
                       ),
                     ]),
                     const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: TextFormField(
-                            keyboardType: TextInputType.datetime,
-                            controller: birthDateTextController,
-                            onFieldSubmitted: (_) => submit(validator),
-                            onChanged: (_) {
-                              resetError();
-                            },
-                            validator: validator.validateBirthDate,
-                            style: responsiveValue.isMobile
-                                ? themeData.textTheme.bodySmall
-                                : themeData.textTheme.bodyMedium,
-                            decoration: InputDecoration(
-                                prefixIcon:
-                                    const Icon(Icons.calendar_today_rounded),
-                                labelText: localization.register_birthdate),
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime.now());
-                              if (pickedDate != null) {
-                                setState(() {
-                                  birthDateTextController.text =
-                                      DateFormat("dd.MM.yyyy")
-                                          .format(pickedDate);
-                                });
-                              }
-                            }),
-                      ),
+                      FormTextfield(
+                          maxWidth: getResponsiveWidth(1),
+                          controller: birthDateTextController,
+                          disabled: false,
+                          placeholder: localization.register_birthdate,
+                          onChanged: resetError,
+                          onFieldSubmitted: () => submit(validator),
+                          validator: validator.validateBirthDate,
+                          prefixIcon: Icons.calendar_today_rounded,
+                          keyboardType: TextInputType.datetime,
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime.now());
+                            if (pickedDate != null) {
+                              setState(() {
+                                birthDateTextController.text =
+                                    DateFormat("dd.MM.yyyy").format(pickedDate);
+                              });
+                            }
+                          })
                     ]),
                     const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: TextFormField(
+                      FormTextfield(
+                          maxWidth: getResponsiveWidth(1),
                           controller: streetAndNumberTextController,
-                          onFieldSubmitted: (_) => submit(validator),
-                          onChanged: (_) {
-                            resetError();
-                          },
-                          style: responsiveValue.isMobile
-                              ? themeData.textTheme.bodySmall
-                              : themeData.textTheme.bodyMedium,
-                          decoration: InputDecoration(
-                              labelText: localization.register_address),
-                        ),
-                      ),
+                          disabled: false,
+                          placeholder: localization.register_address,
+                          onChanged: resetError,
+                          onFieldSubmitted: () => submit(validator))
                     ]),
                     const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width:
-                            getResponsiveWidth(2, shouldWrapToNextLine: false),
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
+                      FormTextfield(
+                          maxWidth: getResponsiveWidth(2,
+                              shouldWrapToNextLine: false),
                           controller: plzTextController,
-                          onFieldSubmitted: (_) => submit(validator),
+                          disabled: false,
+                          placeholder: localization.register_postcode,
+                          onChanged: resetError,
+                          onFieldSubmitted: () => submit(validator),
                           validator: validator.validatePostcode,
-                          style: responsiveValue.isMobile
-                              ? themeData.textTheme.bodySmall
-                              : themeData.textTheme.bodyMedium,
-                          onChanged: (_) {
-                            resetError();
-                          },
-                          decoration: InputDecoration(
-                              labelText: localization.register_postcode),
-                        ),
-                      ),
+                          keyboardType: TextInputType.number),
                       const SizedBox(width: textFieldSpacing),
-                      SizedBox(
-                        width:
-                            getResponsiveWidth(2, shouldWrapToNextLine: false),
-                        child: TextFormField(
+                      FormTextfield(
+                          maxWidth: getResponsiveWidth(2,
+                              shouldWrapToNextLine: false),
                           controller: placeTextController,
-                          onFieldSubmitted: (_) => submit(validator),
-                          onChanged: (_) {
-                            resetError();
-                          },
-                          style: responsiveValue.isMobile
-                              ? themeData.textTheme.bodySmall
-                              : themeData.textTheme.bodyMedium,
-                          decoration: InputDecoration(
-                              labelText: localization.register_place),
-                        ),
-                      ),
+                          disabled: false,
+                          placeholder: localization.register_place,
+                          onChanged: resetError,
+                          onFieldSubmitted: () => submit(validator))
                     ]),
                     const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
+                      FormTextfield(
+                          maxWidth: getResponsiveWidth(1),
                           controller: emailTextController,
-                          onFieldSubmitted: (_) => submit(validator),
-                          onChanged: (_) {
-                            resetError();
-                          },
+                          disabled: false,
+                          placeholder: localization.register_email,
+                          onChanged: resetError,
+                          onFieldSubmitted: () => submit(validator),
                           validator: validator.validateEmail,
-                          style: responsiveValue.isMobile
-                              ? themeData.textTheme.bodySmall
-                              : themeData.textTheme.bodyMedium,
-                          decoration: InputDecoration(
-                              labelText: localization.register_email),
-                        ),
-                      ),
+                          keyboardType: TextInputType.emailAddress)
                     ]),
                     const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: TextFormField(
+                      FormTextfield(
+                          maxWidth: getResponsiveWidth(1),
                           controller: passwordTextController,
-                          onFieldSubmitted: (_) => submit(validator),
-                          onChanged: (_) {
-                            resetError();
-                          },
+                          disabled: false,
+                          placeholder: localization.register_password,
+                          onChanged: resetError,
+                          onFieldSubmitted: () => submit(validator),
                           validator: validator.validatePassword,
-                          obscureText: true,
-                          style: responsiveValue.isMobile
-                              ? themeData.textTheme.bodySmall
-                              : themeData.textTheme.bodyMedium,
-                          decoration: InputDecoration(
-                              labelText: localization.register_password),
-                        ),
-                      ),
+                          obscureText: true)
                     ]),
                     const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: TextFormField(
+                      FormTextfield(
+                          maxWidth: getResponsiveWidth(1),
                           controller: passwordRepeatTextController,
-                          onFieldSubmitted: (_) => submit(validator),
-                          onChanged: (_) {
-                            resetError();
-                          },
+                          disabled: false,
+                          placeholder: localization.register_repeat_password,
+                          onChanged: resetError,
+                          onFieldSubmitted: () => submit(validator),
                           validator: (val) {
                             return validator.validatePasswordRepeat(
                                 val, passwordTextController.text);
                           },
-                          obscureText: true,
-                          style: responsiveValue.isMobile
-                              ? themeData.textTheme.bodySmall
-                              : themeData.textTheme.bodyMedium,
-                          decoration: InputDecoration(
-                              labelText: localization.register_repeat_password),
-                        ),
-                      ),
+                          obscureText: true)
                     ]),
                     const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: TextFormField(
+                      FormTextfield(
+                          maxWidth: getResponsiveWidth(1),
                           controller: codeTextController,
-                          onFieldSubmitted: (_) => submit(validator),
-                          onChanged: (_) {
-                            resetError();
-                          },
-                          validator: validator.validateCode,
-                          style: responsiveValue.isMobile
-                              ? themeData.textTheme.bodySmall
-                              : themeData.textTheme.bodyMedium,
-                          decoration: InputDecoration(
-                              labelText: localization.register_code),
-                        ),
-                      ),
+                          disabled: false,
+                          placeholder: localization.register_code,
+                          onChanged: resetError,
+                          onFieldSubmitted: () => submit(validator),
+                          validator: validator.validateCode)
                     ]),
                     const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [

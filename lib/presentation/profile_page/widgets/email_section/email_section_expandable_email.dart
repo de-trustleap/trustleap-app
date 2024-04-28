@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -34,21 +35,14 @@ class EmailSectionExpandableEmail extends StatelessWidget {
               ? themeData.textTheme.bodySmall
               : themeData.textTheme.bodyMedium),
       const SizedBox(height: 16),
-      TextFormField(
-        controller: emailTextController,
-        keyboardType: TextInputType.emailAddress,
-        onChanged: (_) {
-          resetError();
-        },
-        onFieldSubmitted: (_) {
-          submit();
-        },
-        validator: validator.validateEmail,
-        style: responsiveValue.isMobile
-            ? themeData.textTheme.bodySmall
-            : themeData.textTheme.bodyMedium,
-        decoration: InputDecoration(labelText: localization.login_email),
-      ),
+      FormTextfield(
+          controller: emailTextController,
+          disabled: false,
+          placeholder: localization.login_email,
+          onChanged: resetError,
+          onFieldSubmitted: () => submit,
+          validator: validator.validateEmail,
+          keyboardType: TextInputType.emailAddress),
       const SizedBox(height: 40),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
