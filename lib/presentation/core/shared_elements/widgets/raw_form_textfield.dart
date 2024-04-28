@@ -52,7 +52,7 @@ class RawFormTextField extends StatelessWidget {
       validator: validator,
       focusNode: focusNode,
       minLines: minLines,
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
       style: responsiveValue.isMobile
           ? themeData.textTheme.bodySmall
           : themeData.textTheme.bodyMedium,

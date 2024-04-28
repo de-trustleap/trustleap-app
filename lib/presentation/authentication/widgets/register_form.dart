@@ -212,6 +212,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ResponsiveRowColumnItem(
                                 child: FormTextfield(
                                     controller: firstNameTextController,
+                                    maxWidth: getResponsiveWidth(2),
                                     disabled: false,
                                     placeholder:
                                         localization.register_firstname,
@@ -225,6 +226,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             ResponsiveRowColumnItem(
                                 child: FormTextfield(
                                     controller: lastNameTextController,
+                                    maxWidth: getResponsiveWidth(2),
                                     disabled: false,
                                     placeholder: localization.register_lastname,
                                     onChanged: resetError,
