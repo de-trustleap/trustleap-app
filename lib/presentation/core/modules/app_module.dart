@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
+import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
@@ -17,11 +18,13 @@ import 'package:finanzbegleiter/application/recommendations/recommendations_cubi
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/company_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/image_repository_implementation.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/promoter_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
 import 'package:finanzbegleiter/presentation/core/modules/auth_guard.dart';
@@ -55,12 +58,14 @@ class AppModule extends Module {
       ..add(PromoterCubit.new)
       ..add(PromoterObserverCubit.new)
       ..add(RecommendationsCubit.new)
+      ..add(LandingPageCubit.new)
       ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
       ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
       ..addLazySingleton<ImageRepository>(ImageRepositoryImplementation.new)
       ..addLazySingleton<PromoterRepository>(
           PromoterRepositoryImplementation.new)
       ..addLazySingleton<CompanyRepository>(CompanyRepositoryImplementation.new)
+      ..addLazySingleton<LandingPageRepository>(LandingPageRepositoryImplementation.new)
       ..addLazySingleton(() => firebaseAuth)
       ..addLazySingleton(() => firestore)
       ..addLazySingleton(() => storage)
