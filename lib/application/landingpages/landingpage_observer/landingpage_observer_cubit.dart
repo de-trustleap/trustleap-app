@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -37,13 +36,13 @@ class LandingPageCubit extends Cubit<LandingPageObserverState> {
       final landingPagesIDs = user.landingPageIDs;
       List<LandingPage> landingPages = [];
       if (landingPagesIDs != null && landingPagesIDs.isNotEmpty) {
-        final failureOrSuccess = await landingPagesRepo
-            .getAllLandingPages(landingPagesIDs);
-        failureOrSuccess
-            .fold((failure) => emit(LandingPageObserverFailure(failure: failure)),
-                (landingPages) {
+        final failureOrSuccess =
+            await landingPagesRepo.getAllLandingPages(landingPagesIDs);
+        failureOrSuccess.fold(
+            (failure) => emit(LandingPageObserverFailure(failure: failure)),
+            (landingPages) {
           for (final landingPage in landingPages) {
-            landingPages.add(LandingPage.fromUser(landingPage));
+            landingPages.add(landingPage);
           }
         });
       }
