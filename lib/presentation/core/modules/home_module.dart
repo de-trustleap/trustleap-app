@@ -23,7 +23,7 @@ class HomeModule extends Module {
           ChildRoute(RoutePaths.promotersPath,
               child: (_) => const PromotersPage()),
           ChildRoute(RoutePaths.landingPagePath,
-              child: (_) => const LandingPage()),
+              child: (_) => const LandingPageView()),
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),
         ]);
