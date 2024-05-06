@@ -174,11 +174,10 @@ class _ContactSectionState extends State<ContactSection> {
                             FormTextfield(
                                 maxWidth: responsiveValue.isMobile
                                     ? maxWidth
-                                    : maxWidth / 2,
+                                    : maxWidth / 2 - textFieldSpacing / 2,
                                 controller: firstNameTextController,
                                 disabled: false,
-                                placeholder: localization
-                                    .profile_page_password_update_section_reauth_password_textfield_placeholder,
+                                placeholder: "",
                                 onChanged: resetError,
                                 onFieldSubmitted: (_) => submit(validator),
                                 validator: validator.validateFirstName),
@@ -201,7 +200,7 @@ class _ContactSectionState extends State<ContactSection> {
                             FormTextfield(
                                 maxWidth: responsiveValue.isMobile
                                     ? maxWidth
-                                    : maxWidth / 2,
+                                    : maxWidth / 2 - textFieldSpacing / 2,
                                 controller: lastNameTextController,
                                 disabled: false,
                                 placeholder: "",
@@ -246,7 +245,7 @@ class _ContactSectionState extends State<ContactSection> {
                             FormTextfield(
                                 maxWidth: responsiveValue.isMobile
                                     ? maxWidth
-                                    : maxWidth / 2,
+                                    : maxWidth / 2 - textFieldSpacing / 2,
                                 controller: postcodeTextController,
                                 disabled: false,
                                 placeholder: "",
@@ -273,7 +272,7 @@ class _ContactSectionState extends State<ContactSection> {
                             FormTextfield(
                                 maxWidth: responsiveValue.isMobile
                                     ? maxWidth
-                                    : maxWidth / 2,
+                                    : maxWidth / 2 - textFieldSpacing / 2,
                                 controller: placeTextController,
                                 disabled: false,
                                 placeholder: "",
