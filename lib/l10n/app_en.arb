@@ -180,6 +180,10 @@
     "@menuitems_landingpage": {
         "description": "the menu entry for the landingpage"
     },
+    "landingpage_overview_error_view_title": "An error occurred while retrieving the data.",
+    "@landingpage_overview_error_view_title": {
+        "description": "Title for the error view that appears if an error occurred while retrieving the data."
+    },
     "menuitems_activities": "Activities",
     "@menuitems_activities": {
         "description": "the menu entry for the activities"

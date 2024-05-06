@@ -363,6 +363,12 @@ abstract class AppLocalizations {
   /// **'Landingpage'**
   String get menuitems_landingpage;
 
+  /// Title for the error view that appears if an error occurred while retrieving the data.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while retrieving the data.'**
+  String get landingpage_overview_error_view_title;
+
   /// the menu entry for the activities
   ///
   /// In en, this message translates to:

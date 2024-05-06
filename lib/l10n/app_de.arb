@@ -180,6 +180,10 @@
     "@menuitems_landingpage": {
         "description": "Der Menüpunkt für die Landingpage"
     },
+    "landingpage_overview_error_view_title": "Ein Fehler beim Abruf der Daten ist aufgetreten.",
+    "@landingpage_overview_error_view_title": {
+        "description": "Titel für die Error View die erscheint wenn ein Fehler beim Abruf der Daten aufgetreten ist"
+    },
     "menuitems_activities": "Aktivitäten",
     "@menuitems_activities": {
         "description": "Der Menüpunkt für die Aktivitäten"
