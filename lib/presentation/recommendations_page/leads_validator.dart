@@ -1,14 +1,14 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 
-class RecommendorsValidator {
+class LeadsValidator {
   final AppLocalizations localization;
 
-  RecommendorsValidator({required this.localization});
+  LeadsValidator({required this.localization});
 
-  String? validateRecommendorsName(String? input) {
+  String? validateLeadsName(String? input) {
     if (input == null || input.isEmpty) {
-      return localization.recommendations_validation_missing_recommendor_name;
+      return localization.recommendations_validation_missing_lead_name;
     } else {
       return null;
     }

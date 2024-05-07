@@ -1,6 +1,8 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
+import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/l10n/l10n.dart';
@@ -41,6 +43,30 @@ void routeToInitial(bool authenticated) {
   }
 }
 
+ThemeData getTheme(BuildContext context, ThemeState state) {
+  if (MediaQuery.of(context).size.width < 600) {
+    if (state is ThemeChanged) {
+      if (state.status == ThemeStatus.light) {
+        return MobileAppTheme.lightTheme;
+      } else {
+        return MobileAppTheme.darkTheme;
+      }
+    } else {
+      return MobileAppTheme.lightTheme;
+    }
+  } else {
+    if (state is ThemeChanged) {
+      if (state.status == ThemeStatus.light) {
+        return DesktopAppTheme.lightTheme;
+      } else {
+        return DesktopAppTheme.darkTheme;
+      }
+    } else {
+      return DesktopAppTheme.lightTheme;
+    }
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -53,7 +79,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => Modular.get<AuthObserverBloc>()
               ..add(AuthObserverStartedEvent())),
-        BlocProvider(create: (context) => Modular.get<MenuCubit>())
+        BlocProvider(create: (context) => Modular.get<MenuCubit>()),
+        BlocProvider(create: (context) => Modular.get<ThemeCubit>())
       ],
       child: MultiBlocListener(
           listeners: [
@@ -75,32 +102,31 @@ class MyApp extends StatelessWidget {
               }
             })
           ],
-          child: MaterialApp.router(
-            routerConfig: Modular.routerConfig,
-            title: 'Finanzbegleiter',
-            theme: MediaQuery.of(context).size.width < 600
-                ? MobileAppTheme.lightTheme
-                : DesktopAppTheme.lightTheme,
-            darkTheme: MediaQuery.of(context).size.width < 600
-                ? MobileAppTheme.darkTheme
-                : DesktopAppTheme.darkTheme,
-            themeMode: ThemeMode.light,
-            supportedLocales: L10n.all,
-            locale: const Locale("de"),
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate
-            ],
-            debugShowCheckedModeBanner: false,
-            builder: (context, widget) => ResponsiveBreakpoints.builder(
-                child: widget!,
-                breakpoints: const [
-                  Breakpoint(start: 0, end: 599, name: MOBILE),
-                  Breakpoint(start: 600, end: 999, name: TABLET),
-                  Breakpoint(start: 1000, end: double.infinity, name: DESKTOP)
-                ]),
+          child: BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return MaterialApp.router(
+                routerConfig: Modular.routerConfig,
+                title: 'Finanzbegleiter',
+                theme: getTheme(context, state),
+                supportedLocales: L10n.all,
+                locale: const Locale("de"),
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate
+                ],
+                debugShowCheckedModeBanner: false,
+                builder: (context, widget) => ResponsiveBreakpoints.builder(
+                    child: widget!,
+                    breakpoints: const [
+                      Breakpoint(start: 0, end: 599, name: MOBILE),
+                      Breakpoint(start: 600, end: 999, name: TABLET),
+                      Breakpoint(
+                          start: 1000, end: double.infinity, name: DESKTOP)
+                    ]),
+              );
+            },
           )),
     );
   }

@@ -31,6 +31,7 @@ class ProfileObserverBloc
     });
 
     @override
+    // ignore: unused_element
     Future<void> close() async {
       await _userStreamSub?.cancel();
       return super.close();

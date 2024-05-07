@@ -17,22 +17,21 @@ class RawFormTextField extends StatelessWidget {
   final int? maxLines;
   final Function? onTap;
 
-  const RawFormTextField({
-    super.key,
-    required this.controller,
-    required this.disabled,
-    required this.placeholder,
-    this.focusNode,
-    this.obscureText,
-    required this.onChanged,
-    this.onFieldSubmitted,
-    this.keyboardType,
-    this.validator,
-    this.prefixIcon,
-    this.minLines,
-    this.maxLines,
-    this.onTap
-  });
+  const RawFormTextField(
+      {super.key,
+      required this.controller,
+      required this.disabled,
+      required this.placeholder,
+      this.focusNode,
+      this.obscureText,
+      required this.onChanged,
+      this.onFieldSubmitted,
+      this.keyboardType,
+      this.validator,
+      this.prefixIcon,
+      this.minLines,
+      this.maxLines,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class RawFormTextField extends StatelessWidget {
       validator: validator,
       focusNode: focusNode,
       minLines: minLines,
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
       style: responsiveValue.isMobile
           ? themeData.textTheme.bodySmall
           : themeData.textTheme.bodyMedium,

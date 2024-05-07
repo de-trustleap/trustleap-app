@@ -10,16 +10,16 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/recommendors_validator.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/leads_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class RecommendorItem extends Equatable {
+class LeadItem extends Equatable {
   final String name;
   final String reason;
 
-  const RecommendorItem({required this.name, required this.reason});
+  const LeadItem({required this.name, required this.reason});
 
   @override
   List<Object?> get props => [name, reason];
@@ -34,7 +34,7 @@ class RecommendationsForm extends StatefulWidget {
 
 class _RecommendationsFormState extends State<RecommendationsForm> {
   final promoterTextController = TextEditingController();
-  final recommendorTextController = TextEditingController();
+  final leadTextController = TextEditingController();
   final serviceProviderTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   RecommendationReason? selectedReason;
@@ -42,7 +42,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   CustomUser? currentUser;
   CustomUser? parentUser;
 
-  List<RecommendorItem> recommendors = [];
+  List<LeadItem> leads = [];
 
   bool showError = false;
   String errorMessage = "";
@@ -59,7 +59,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   @override
   void dispose() {
     promoterTextController.dispose();
-    recommendorTextController.dispose();
+    leadTextController.dispose();
     serviceProviderTextController.dispose();
     focusNode!.dispose();
 
@@ -73,16 +73,16 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     });
   }
 
-  void addRecommendor(RecommendorsValidator validator) {
+  void addLead(LeadsValidator validator) {
     if (formKey.currentState!.validate() &&
         validator.validateReason(selectedReason) == null) {
       setState(() {
         validationHasError = false;
         reasonValid = null;
-        recommendors.add(RecommendorItem(
-            name: recommendorTextController.text.trim(),
+        leads.add(LeadItem(
+            name: leadTextController.text.trim(),
             reason: selectedReason!.value));
-        recommendorTextController.clear();
+        leadTextController.clear();
       });
     } else {
       setState(() {
@@ -124,7 +124,6 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   void generateRecommendation() {
-    print("GENERATE");
     sendMessageViaWhatsApp();
   }
 
@@ -142,7 +141,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
-    final validator = RecommendorsValidator(localization: localization);
+    final validator = LeadsValidator(localization: localization);
     const double textFieldSpacing = 20;
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
@@ -198,7 +197,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                 placeholder: localization
                                     .recommendations_form_service_provider_placeholder,
                                 onChanged: resetError,
-                                validator: validator.validateRecommendorsName)
+                                validator: validator.validateLeadsName)
                           ]),
                       const SizedBox(height: textFieldSpacing),
                       Row(
@@ -206,35 +205,34 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                           children: [
                             FormTextfield(
                                 maxWidth: maxWidth * 0.85,
-                                controller: recommendorTextController,
+                                controller: leadTextController,
                                 disabled: false,
                                 placeholder: localization
                                     .recommendations_form_recommendation_name_placeholder,
                                 onChanged: resetError,
                                 onFieldSubmitted: () {
-                                  addRecommendor(validator);
+                                  addLead(validator);
                                   focusNode!.requestFocus();
                                 },
                                 focusNode: focusNode,
-                                validator: validator.validateRecommendorsName),
+                                validator: validator.validateLeadsName),
                             const Spacer(),
                             IconButton(
-                                onPressed: () => addRecommendor(validator),
+                                onPressed: () => addLead(validator),
                                 icon: const Icon(Icons.add_circle),
                                 iconSize: 48,
                                 color: themeData.colorScheme.secondary)
                           ]),
                       const SizedBox(height: textFieldSpacing),
                       Wrap(spacing: 8, runSpacing: 8, children: [
-                        for (var recommendor in recommendors)
+                        for (var lead in leads)
                           Chip(
-                            label: Text(
-                                "${recommendor.name}\n${recommendor.reason}",
+                            label: Text("${lead.name}\n${lead.reason}",
                                 maxLines: 2),
                             deleteIcon: const Icon(Icons.close, size: 16),
                             onDeleted: () {
                               setState(() {
-                                recommendors.remove(recommendor);
+                                leads.remove(lead);
                               });
                             },
                           )
