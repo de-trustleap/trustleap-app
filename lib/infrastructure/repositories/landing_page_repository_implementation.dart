@@ -2,7 +2,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
-
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
@@ -21,26 +20,27 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
 
   @override
   Stream<Either<DatabaseFailure, CustomUser>> observeAllLandingPages() async* {
-      final userDoc = await firestore.userDocument();
-      var requestedUser = await userDoc.get();
-      if (!requestedUser.exists) {
-        yield left(NotFoundFailure());
+    final userDoc = await firestore.userDocument();
+    var requestedUser = await userDoc.get();
+    if (!requestedUser.exists) {
+      yield left(NotFoundFailure());
+    }
+    yield* userDoc.snapshots().map((snapshot) {
+      var document = snapshot.data() as Map<String, dynamic>;
+      var model = UserModel.fromFirestore(document, snapshot.id).toDomain();
+      return right<DatabaseFailure, CustomUser>(model);
+    }).handleError((e) {
+      if (e is FirebaseException) {
+        return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+      } else {
+        return left(BackendFailure());
       }
-      yield* userDoc.snapshots().map((snapshot) {
-        var document = snapshot.data() as Map<String, dynamic>;
-        var model = UserModel.fromFirestore(document, snapshot.id).toDomain();
-        return right<DatabaseFailure, CustomUser>(model);
-      }).handleError((e) {
-        if (e is FirebaseException) {
-          return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-        } else {
-          return left(BackendFailure());
-        }
     });
   }
 
   @override
-  Future<Either<DatabaseFailure, List<LandingPage>>> getAllLandingPages(List<String> ids) async {
+  Future<Either<DatabaseFailure, List<LandingPage>>> getAllLandingPages(
+      List<String> ids) async {
     final landingPagesCollection = firestore.collection("landingPages");
     // The ids needs to be sliced into chunks of 10 elements because the whereIn function can only process 10 elements at once.
     final chunks = ids.slices(10);
@@ -57,7 +57,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       for (var document in querySnapshots) {
         for (var snapshot in document.docs) {
           var doc = snapshot.data();
-          var model = LandingPageModel.fromFirestore(doc, snapshot.id).toDomain();
+          var model =
+              LandingPageModel.fromFirestore(doc, snapshot.id).toDomain();
           landingPages.add(model);
         }
       }
@@ -73,5 +74,4 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
-
 }

@@ -28,20 +28,21 @@ class LandingPageCubit extends Cubit<LandingPageObserverState> {
 
   void landingPageObserverUpdated(
       Either<DatabaseFailure, CustomUser> failureOrUser) async {
-
     emit(LandingPageObserverLoading());
     failureOrUser
         .fold((failure) => emit(LandingPageObserverFailure(failure: failure)),
             (user) async {
       final landingPagesIDs = user.landingPageIDs;
       if (landingPagesIDs != null && landingPagesIDs.isNotEmpty) {
-        final failureOrSuccess = await landingPagesRepo
-            .getAllLandingPages(landingPagesIDs);
-        failureOrSuccess
-            .fold((failure) => emit(LandingPageObserverFailure(failure: failure)),
-                (landingPages) {
-            emit(LandingPageObserverSuccess(landingPages: landingPages));
+        final failureOrSuccess =
+            await landingPagesRepo.getAllLandingPages(landingPagesIDs);
+        failureOrSuccess.fold((failure) {
+          emit(LandingPageObserverFailure(failure: failure));
+        }, (landingPages) {
+          emit(LandingPageObserverSuccess(landingPages: landingPages));
         });
+      } else {
+        emit(const LandingPageObserverSuccess(landingPages: []));
       }
     });
   }

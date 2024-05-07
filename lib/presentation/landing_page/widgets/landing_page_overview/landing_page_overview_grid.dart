@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/add_new_landing_page_grid_tile.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -26,7 +27,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
             scrollDirection: Axis.vertical,
             physics: const ScrollPhysics(),
             childAspectRatio: calculateChildAspectRatio(responsiveValue),
-            children: List.generate(landingpages.length, (index) {
+            children: List.generate(landingpages.length + 1, (index) {
               return AnimationConfiguration.staggeredGrid(
                 position: index,
                 duration: const Duration(milliseconds: 150),
@@ -34,8 +35,11 @@ class LandingPageOverviewGrid extends StatelessWidget {
                 child: ScaleAnimation(
                   child: Center(
                       child: GridTile(
-                          child: LandingPageOverviewGridTile(
-                              landingPage: landingpages[index]))),
+                          child: index == 0
+                              ? AddNewLandingPageGridTile(
+                                  onPressed: () => print("PRESSED"))
+                              : LandingPageOverviewGridTile(
+                                  landingPage: landingpages[index - 1]))),
                 ),
               );
             })),
