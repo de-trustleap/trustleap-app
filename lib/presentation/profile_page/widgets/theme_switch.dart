@@ -27,7 +27,6 @@ class _ThemeSwitchState extends State<ThemeSwitch> {
         setState(() {
           selected = newSelectedValue;
         });
-        print("PRESSED!");
         BlocProvider.of<ThemeCubit>(context).changeTheme(selected.first);
       },
     );

@@ -124,7 +124,6 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   void generateRecommendation() {
-    print("GENERATE");
     sendMessageViaWhatsApp();
   }
 
@@ -228,8 +227,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                       Wrap(spacing: 8, runSpacing: 8, children: [
                         for (var lead in leads)
                           Chip(
-                            label: Text(
-                                "${lead.name}\n${lead.reason}",
+                            label: Text("${lead.name}\n${lead.reason}",
                                 maxLines: 2),
                             deleteIcon: const Icon(Icons.close, size: 16),
                             onDeleted: () {

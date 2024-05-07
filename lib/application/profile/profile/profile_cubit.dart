@@ -109,6 +109,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void getCurrentUser() async {
+    // ignore: await_only_futures
     final currentUser = await authRepo.getCurrentUser();
     emit(ProfileGetCurrentUserSuccessState(user: currentUser));
   }

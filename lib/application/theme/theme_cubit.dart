@@ -8,7 +8,6 @@ class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit() : super(ThemeInitial());
 
   void changeTheme(ThemeStatus status) {
-    print("WILL CHANGE!");
     emit(ThemeChanged(status: status));
   }
 }

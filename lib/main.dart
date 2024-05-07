@@ -44,7 +44,6 @@ void routeToInitial(bool authenticated) {
 }
 
 ThemeData getTheme(BuildContext context, ThemeState state) {
-  print("CALLED GETTHEME");
   if (MediaQuery.of(context).size.width < 600) {
     if (state is ThemeChanged) {
       if (state.status == ThemeStatus.light) {
