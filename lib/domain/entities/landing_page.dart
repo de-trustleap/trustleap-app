@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
 
 class LandingPage extends Equatable {
   final UniqueID id;
@@ -12,8 +11,7 @@ class LandingPage extends Equatable {
   final String? text;
   final DateTime? createdAt;
 
-
- const LandingPage({
+  const LandingPage({
     required this.id,
     this.name,
     this.downloadImageUrl,
@@ -42,14 +40,8 @@ class LandingPage extends Equatable {
       createdAt: createdAt ?? this.createdAt,
     );
   }
-  
+
   @override
-  List<Object?> get props => [
-        id,
-        name,
-        downloadImageUrl,
-        thumbnailDownloadURL,
-        parentUserId,
-        text
-      ];
+  List<Object?> get props =>
+      [id, name, downloadImageUrl, thumbnailDownloadURL, parentUserId, text];
 }

@@ -1,18 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/landing_page.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid_tile.dart';
-
 class LandingPageOverviewGrid extends StatelessWidget {
   final List<LandingPage> landingpages;
-  LandingPageOverviewGrid({
-    Key? key,
+  const LandingPageOverviewGrid({
+    super.key,
     required this.landingpages,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
