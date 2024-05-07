@@ -42,7 +42,7 @@ class MobileAppTheme {
 
   static final InputDecorationTheme _darkInputDecorationTheme =
       AppTheme.darkInputDecorationTheme.copyWith(
-          labelStyle: _lightBodyMediumText, hintStyle: _lightBodyMediumText);
+          labelStyle: _darkBodyMediumText, hintStyle: _darkBodyMediumText);
 
   static final SnackBarThemeData _lightSnackbarTheme =
       AppTheme.lightSnackbarTheme.copyWith(
@@ -66,7 +66,7 @@ class MobileAppTheme {
       AppTheme.lightDropDownMenuTheme.copyWith(textStyle: _lightBodyMediumText);
 
   static final DropdownMenuThemeData _darkDropDownMenuTheme =
-      AppTheme.lightDropDownMenuTheme.copyWith(textStyle: _darkBodyMediumText);
+      AppTheme.darkDropDownMenuTheme.copyWith(textStyle: _darkBodyMediumText);
 
   static final SearchBarThemeData _lightSearchBarTheme =
       AppTheme.lightSearchBarTheme.copyWith(
@@ -74,7 +74,7 @@ class MobileAppTheme {
           textStyle: MaterialStatePropertyAll(_lightBodySmallText));
 
   static final SearchBarThemeData _darkSearchBarTheme =
-      AppTheme.lightSearchBarTheme.copyWith(
+      AppTheme.darkSearchBarTheme.copyWith(
           hintStyle: MaterialStatePropertyAll(_darkBodySmallText),
           textStyle: MaterialStatePropertyAll(_darkBodySmallText));
 
@@ -82,7 +82,7 @@ class MobileAppTheme {
       AppTheme.lightChipTheme.copyWith(labelStyle: _lightBodySmallText);
 
   static final ChipThemeData _darkChipTheme =
-      AppTheme.lightChipTheme.copyWith(labelStyle: _darkBodySmallText);
+      AppTheme.darkChipTheme.copyWith(labelStyle: _darkBodySmallText);
 
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
