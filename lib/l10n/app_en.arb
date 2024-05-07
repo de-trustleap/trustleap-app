@@ -184,6 +184,10 @@
     "@landingpage_overview_error_view_title": {
         "description": "Title for the error view that appears if an error occurred while retrieving the data."
     },
+    "landingpage_overview_empty_page_title": "No landingpage found",
+    "@landingpage_overview_empty_page_title": {
+        "description": "Title for the page that appears when there are no landingpage."
+    },
     "menuitems_activities": "Activities",
     "@menuitems_activities": {
         "description": "the menu entry for the activities"

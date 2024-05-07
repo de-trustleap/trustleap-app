@@ -184,6 +184,18 @@
     "@landingpage_overview_error_view_title": {
         "description": "Titel für die Error View die erscheint wenn ein Fehler beim Abruf der Daten aufgetreten ist"
     },
+    "landingpage_overview_empty_page_title": "Keine Landingpage gefunden",
+    "@landingpage_overview_empty_page_title": {
+        "description": "Titel für die Seite die erscheint wenn man noch keine Landingpage hat"
+    },
+    "landingpage_overview_empty_page_subtitle": "Sie scheinen noch keine Landingpage zu haben. Erstellen Sie jetzt ihre Landingpage.",
+    "@landingpage_overview_empty_page_subtitle": {
+        "description": "Text für die Seite die erscheint wenn man noch keine Landingpage hat"
+    },
+    "landingpage_overview_empty_page_button_title": "Landingpage registrieren",
+    "@landingpage_overview_empty_page_button_title": {
+        "description": "Titel für dem Button auf der Seite die erscheint wenn man noch keine Landingpage hat"
+    },
     "menuitems_activities": "Aktivitäten",
     "@menuitems_activities": {
         "description": "Der Menüpunkt für die Aktivitäten"
