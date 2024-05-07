@@ -60,3 +60,5 @@ enum RecommendationReason {
 }
 
 enum ImageUploader { user, company }
+
+enum ThemeStatus { light, dark }

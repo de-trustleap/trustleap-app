@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/landingpages/landingpage_observer/la
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid.dart';
@@ -13,23 +14,36 @@ class LandingPageOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+
     return BlocBuilder<LandingPageCubit, LandingPageObserverState>(
       builder: (context, state) {
         if (state is LandingPageObserverSuccess) {
-          return CardContainer(
-            child: LayoutBuilder(builder: (context, constraints) {
-          final themeData = Theme.of(context);
-          return Column(
-            children: [
-              Text("Landing Pages Übersicht",
-                  style: themeData.textTheme.headlineLarge!
-                      .copyWith(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 24),
-              LandingPageOverviewGrid(landingpages: state.landingPages,)
-            ],
-          );
-        }));
+          if (state.landingPages.isEmpty) {
+            return EmptyPage(
+                icon: Icons.note_add,
+                title: "Keine Landingpages gefunden",
+                subTitle:
+                    "Sie scheinen noch keine Landingpages erstellt zu haben. Erstellen Sie jetzt Ihre erste Landingpage um Ihre Dienstleistung zu präsentieren.",
+                buttonTitle: "Landingpage erstellen",
+                onTap: () {
+                  print("PRESSED!");
+                });
+          } else {
+            return CardContainer(
+                child: Column(
+              children: [
+                Text("Landing Pages Übersicht",
+                    style: themeData.textTheme.headlineLarge!
+                        .copyWith(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 24),
+                LandingPageOverviewGrid(
+                  landingpages: state.landingPages,
+                )
+              ],
+            ));
+          }
         } else if (state is LandingPageObserverFailure) {
           return ErrorView(
               title: localization.landingpage_overview_error_view_title,
