@@ -46,6 +46,7 @@ class PromoterCubit extends Cubit<PromoterState> {
 
   void getCurrentUser() async {
     emit(PromoterGetCurrentUserLoadingState());
+    // ignore: await_only_futures
     final currentUser = await authRepo.getCurrentUser();
     emit(PromoterGetCurrentUserSuccessState(user: currentUser));
   }

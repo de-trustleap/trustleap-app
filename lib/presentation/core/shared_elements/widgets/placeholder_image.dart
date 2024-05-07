@@ -25,8 +25,8 @@ class PlaceholderImage extends StatelessWidget {
                   : Colors.transparent),
           image: const DecorationImage(
               image: AssetImage(kDebugMode
-                  ? "images/placeholder.jpg"
-                  : "assets/images/placeholder.jpg"))),
+                  ? "images/placeholder.png"
+                  : "assets/images/placeholder.png"))),
     );
   }
 }

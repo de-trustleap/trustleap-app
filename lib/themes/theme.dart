@@ -13,8 +13,8 @@ class AppTheme {
   static const Color lightErrorContainerColor = Color(0xffFAADA8);
 
   static const Color darkPrimaryColor = Color(0xff3fb488);
-  static const Color darkBackgroundColor = Color(0xff536895);
-  static const Color darkCardColor = Color(0xff7285B0);
+  static const Color darkBackgroundColor = Color(0xff252E42);
+  static const Color darkCardColor = Color(0xff3C4A6A);
   static const Color darkTextColor = Color(0xfff5f5f5);
   static const Color darkTextSelectionColor = Color(0xffB4D5FD);
   static const Color darkSecondaryColor = Color(0xfff07f5e);
@@ -158,6 +158,7 @@ class AppTheme {
       indicatorColor: AppTheme.darkSecondaryColor,
       splashFactory: NoSplash.splashFactory,
       labelColor: AppTheme.darkTextColor,
+      dividerColor: Colors.transparent,
       labelStyle:
           AppTheme.darkBodySmallText.copyWith(color: AppTheme.darkTextColor),
       overlayColor: const MaterialStatePropertyAll(Colors.transparent));

@@ -516,7 +516,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendations_error_view_title => 'An error occurred while retrieving the data';
 
   @override
-  String get recommendations_validation_missing_recommendor_name => 'Please enter a name';
+  String get recommendations_validation_missing_lead_name => 'Please enter a name';
 
   @override
   String get recommendations_validation_missing_promoter_name => 'Please enter a name';

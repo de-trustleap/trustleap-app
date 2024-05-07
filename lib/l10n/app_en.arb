@@ -688,8 +688,8 @@
     "@recommendations_error_view_title": {
         "description": "Text in the error view in the recommendation form."
     },
-    "recommendations_validation_missing_recommendor_name": "Please enter a name",
-    "@recommendations_validation_missing_recommendor_name": {
+    "recommendations_validation_missing_lead_name": "Please enter a name",
+    "@recommendations_validation_missing_lead_name": {
         "description": "Validation message if you have not provided a name in the recommendation name field in the recommendation form."
     },
     "recommendations_validation_missing_promoter_name": "Please enter a name",

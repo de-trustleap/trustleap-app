@@ -516,7 +516,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get recommendations_error_view_title => 'Beim Abrufen der Daten ist ein Fehler aufgetreten';
 
   @override
-  String get recommendations_validation_missing_recommendor_name => 'Geben Sie bitte einen Namen an';
+  String get recommendations_validation_missing_lead_name => 'Geben Sie bitte einen Namen an';
 
   @override
   String get recommendations_validation_missing_promoter_name => 'Geben Sie bitte einen Namen an';

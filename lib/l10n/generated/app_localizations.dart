@@ -1111,7 +1111,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Please enter a name'**
-  String get recommendations_validation_missing_recommendor_name;
+  String get recommendations_validation_missing_lead_name;
 
   /// Validation message if you have not provided a name in the promoter name field in the recommendation form.
   ///
