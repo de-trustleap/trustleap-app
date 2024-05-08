@@ -143,6 +143,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_overview_error_view_title => 'An error occurred while retrieving the data.';
 
   @override
+  String get landingpage_overview_empty_page_title => 'No landingpage found';
+
+  @override
   String get menuitems_activities => 'Activities';
 
   @override

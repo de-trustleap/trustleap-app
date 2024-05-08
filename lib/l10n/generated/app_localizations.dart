@@ -369,6 +369,12 @@ abstract class AppLocalizations {
   /// **'An error occurred while retrieving the data.'**
   String get landingpage_overview_error_view_title;
 
+  /// Title for the page that appears when there are no landingpage.
+  ///
+  /// In en, this message translates to:
+  /// **'No landingpage found'**
+  String get landingpage_overview_empty_page_title;
+
   /// the menu entry for the activities
   ///
   /// In en, this message translates to:

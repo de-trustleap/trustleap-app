@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/presentation/activity_page/activity_page.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/home_page.dart';
@@ -24,6 +25,8 @@ class HomeModule extends Module {
               child: (_) => const PromotersPage()),
           ChildRoute(RoutePaths.landingPagePath,
               child: (_) => const LandingPageView()),
+          ChildRoute(RoutePaths.landingPageCreatorPath,
+              child: (_) => const LandingPageCreator()),
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),
         ]);

@@ -143,6 +143,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_overview_error_view_title => 'Ein Fehler beim Abruf der Daten ist aufgetreten.';
 
   @override
+  String get landingpage_overview_empty_page_title => 'Keine Landingpage gefunden';
+
+  @override
   String get menuitems_activities => 'Aktivitäten';
 
   @override

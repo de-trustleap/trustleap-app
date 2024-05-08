@@ -6,8 +6,10 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageOverview extends StatelessWidget {
   const LandingPageOverview({super.key});
@@ -28,7 +30,7 @@ class LandingPageOverview extends StatelessWidget {
                     "Sie scheinen noch keine Landingpages erstellt zu haben. Erstellen Sie jetzt Ihre erste Landingpage um Ihre Dienstleistung zu präsentieren.",
                 buttonTitle: "Landingpage erstellen",
                 onTap: () {
-                  print("PRESSED!");
+                  Modular.to.navigate(RoutePaths.homePath + RoutePaths.landingPageCreatorPath);
                 });
           } else {
             return CardContainer(

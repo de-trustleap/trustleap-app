@@ -5,6 +5,7 @@ class RoutePaths {
   static const String recommendationsPath = "/recommendations";
   static const String promotersPath = "/promoters";
   static const String landingPagePath = "/landingpage";
+  static const String landingPageCreatorPath = "/landingpage-creator";
   static const String activitiesPath = "/activities";
   static const String loginPath = "/";
   static const String registerPath = "/register";
