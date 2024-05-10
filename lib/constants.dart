@@ -59,6 +59,6 @@ enum RecommendationReason {
   const RecommendationReason(this.value);
 }
 
-enum ImageUploader { user, company }
+enum ImageUploader { user, company, landingPage }
 
 enum ThemeStatus { light, dark }

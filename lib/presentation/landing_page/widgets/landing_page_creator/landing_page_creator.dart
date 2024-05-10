@@ -17,11 +17,6 @@ class LandingPageCreator extends StatelessWidget {
         child: ListView(children: [
           SizedBox(height: responsiveValue.isMobile ? 40 : 80),
           const CenteredConstrainedWrapper(child: LandingPageCreatorForm())
-          // CenteredConstrainedWrapper(
-          //     child: BlocProvider(
-          //         create: (context) =>
-          //             Modular.get<RecommendationsCubit>()..getUser(),
-          //         child: const RecommendationsForm()))
         ]));
   }
 }

@@ -2,7 +2,9 @@
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/add_new_landing_page_grid_tile.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid_tile.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -37,7 +39,9 @@ class LandingPageOverviewGrid extends StatelessWidget {
                       child: GridTile(
                           child: index == 0
                               ? AddNewLandingPageGridTile(
-                                  onPressed: () => print("PRESSED"))
+                                  onPressed: () => Modular.to.navigate(
+                                      RoutePaths.homePath +
+                                          RoutePaths.landingPageCreatorPath))
                               : LandingPageOverviewGridTile(
                                   landingPage: landingpages[index - 1]))),
                 ),

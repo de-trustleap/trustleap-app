@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/application/authentication/auth_observer/auth_ob
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
+import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
@@ -54,6 +55,7 @@ class AppModule extends Module {
       ..add(ProfileCubit.new)
       ..add(ProfileImageBloc.new)
       ..add(CompanyImageBloc.new)
+      ..add(LandingPageImageBloc.new)
       ..add(ProfileObserverBloc.new)
       ..add(CompanyObserverCubit.new)
       ..add(CompanyCubit.new)
@@ -67,7 +69,8 @@ class AppModule extends Module {
       ..addLazySingleton<PromoterRepository>(
           PromoterRepositoryImplementation.new)
       ..addLazySingleton<CompanyRepository>(CompanyRepositoryImplementation.new)
-      ..addLazySingleton<LandingPageRepository>(LandingPageRepositoryImplementation.new)
+      ..addLazySingleton<LandingPageRepository>(
+          LandingPageRepositoryImplementation.new)
       ..addLazySingleton(() => firebaseAuth)
       ..addLazySingleton(() => firestore)
       ..addLazySingleton(() => storage)
