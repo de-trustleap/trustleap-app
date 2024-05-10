@@ -28,6 +28,8 @@ class ImageRepositoryImplementation implements ImageRepository {
       case ImageUploader.company:
         imageRef = refRoot.child("companyImages/$id/$id");
         break;
+      case ImageUploader.landingPage:
+        imageRef = refRoot.child("landingPageImages/$id/$id");
     }
     try {
       await imageRef.putData(image);
@@ -42,8 +44,7 @@ class ImageRepositoryImplementation implements ImageRepository {
   Future<Either<StorageFailure, String>> uploadImageForApp(
       File image, String id, ImageUploader uploader) async {
     final Reference refRoot = firebaseStorage.ref();
-    final Reference userImagesRef =
-        refRoot.child("profileImages/$id/$id");
+    final Reference userImagesRef = refRoot.child("profileImages/$id/$id");
     try {
       await userImagesRef.putFile(File(image.path));
       final downloadURL = await userImagesRef.getDownloadURL();
