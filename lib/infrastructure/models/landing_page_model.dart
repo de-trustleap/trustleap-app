@@ -92,7 +92,7 @@ class LandingPageModel extends Equatable {
       thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
       parentUserId: landingPage.parentUserId?.value ?? "",
       text: landingPage.text,
-      createdAt: landingPage.createdAt,
+      createdAt: FieldValue.serverTimestamp()
     );
   }
 

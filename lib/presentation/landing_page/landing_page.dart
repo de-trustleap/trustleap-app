@@ -15,7 +15,7 @@ class LandingPageView extends StatelessWidget {
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return BlocProvider(
-      create: (context) => Modular.get<LandingPageCubit>()..observeAllLandingPages(),
+      create: (context) => Modular.get<LandingPageObserverCubit>()..observeAllLandingPages(),
       child: Container(
           width: double.infinity,
           decoration: BoxDecoration(color: themeData.colorScheme.background),

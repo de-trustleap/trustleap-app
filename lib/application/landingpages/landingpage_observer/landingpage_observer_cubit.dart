@@ -11,11 +11,11 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 
 part 'landingpage_observer_state.dart';
 
-class LandingPageCubit extends Cubit<LandingPageObserverState> {
+class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
   final LandingPageRepository landingPagesRepo;
   StreamSubscription<Either<DatabaseFailure, CustomUser>>? _usersStreamSub;
 
-  LandingPageCubit(
+  LandingPageObserverCubit(
     this.landingPagesRepo,
   ) : super(LandingPageObserverInitial());
 

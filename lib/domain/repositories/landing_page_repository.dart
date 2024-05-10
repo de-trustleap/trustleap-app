@@ -7,4 +7,7 @@ abstract class LandingPageRepository{
   Stream<Either<DatabaseFailure, CustomUser>> observeAllLandingPages();
 
   Future<Either<DatabaseFailure, List<LandingPage>>> getAllLandingPages(List<String> ids);
+
+  Future<Either<DatabaseFailure, Unit>> createLandingPage(LandingPage landingPage);
+
 }

@@ -19,7 +19,7 @@ class LandingPageOverview extends StatelessWidget {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
-    return BlocBuilder<LandingPageCubit, LandingPageObserverState>(
+    return BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(
       builder: (context, state) {
         if (state is LandingPageObserverSuccess) {
           if (state.landingPages.isEmpty) {
@@ -52,7 +52,7 @@ class LandingPageOverview extends StatelessWidget {
               message: DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization),
               callback: () => {
-                    BlocProvider.of<LandingPageCubit>(context)
+                    BlocProvider.of<LandingPageObserverCubit>(context)
                         .observeAllLandingPages()
                   });
         } else {

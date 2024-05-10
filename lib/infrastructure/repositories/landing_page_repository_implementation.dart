@@ -74,4 +74,16 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+  
+  @override
+  Future<Either<DatabaseFailure, Unit>> createLandingPage(LandingPage landingPage) async {
+    final landingPageCollection = firestore.collection("landingPages");
+    final landingPageModel = LandingPageModel.fromDomain(landingPage);
+    try {
+      await landingPageCollection.doc(landingPageModel.id).set(landingPageModel.toMap());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }
