@@ -30,7 +30,7 @@ Future main() async {
 void routeToInitial(bool authenticated) {
   if (!authenticated) {
     print("NOT AUTHENTICATED");
-    Modular.to.navigate(RoutePaths.loginPath);
+    Modular.to.navigate(RoutePaths.basePath);
   } else {
     print("AUTHENTICATED");
     final lastRoute =
