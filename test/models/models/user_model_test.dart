@@ -45,6 +45,7 @@ void main() {
           role: "promoter",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
+          landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
@@ -63,6 +64,7 @@ void main() {
         "role": "promoter",
         "profileImageDownloadURL": "https://test.de",
         "thumbnailDownloadURL": "https://thumb.de",
+        "landingPageIDs": ["id"],
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
         "deletesAt": null,
@@ -91,6 +93,7 @@ void main() {
         "role": "promoter",
         "profileImageDownloadURL": "https://test.de",
         "thumbnailDownloadURL": "https://thumb.de",
+        "landingPageIDs": ["id"],
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
         "createdAt": Timestamp(100000, 0)
@@ -108,6 +111,7 @@ void main() {
           role: "promoter",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
+          landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
@@ -134,6 +138,7 @@ void main() {
           role: null,
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
+          landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
@@ -150,6 +155,7 @@ void main() {
           role: Role.none,
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
+          landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"]);
       // When
@@ -174,6 +180,7 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
+          landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"]);
       final expectedResult = UserModel(
@@ -188,6 +195,7 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
+          landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
@@ -214,6 +222,7 @@ void main() {
         "role": "promoter",
         "profileImageDownloadURL": "https://test.de",
         "thumbnailDownloadURL": "https://thumb.de",
+        "landingPageIDs": ["id"],
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
         "createdAt": Timestamp(100000, 0)
@@ -231,6 +240,7 @@ void main() {
           role: "promoter",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
+          landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
@@ -256,6 +266,7 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
+          landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));
@@ -271,6 +282,7 @@ void main() {
           email: "tester@test.de",
           profileImageDownloadURL: "https://test.de",
           thumbnailDownloadURL: "https://thumb.de",
+          landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"],
           createdAt: Timestamp(100000, 0));

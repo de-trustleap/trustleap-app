@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:typed_data';
+
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
 import 'package:finanzbegleiter/core/failures/storage_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
@@ -13,13 +15,14 @@ import 'package:image_picker/image_picker.dart';
 
 class LandingPageCreatorImageSection extends StatefulWidget {
   final LandingPage? landingPage;
+  final Function imageSelected;
   final Function imageUploadSuccessful;
 
-  const LandingPageCreatorImageSection({
-    super.key,
-    this.landingPage,
-    required this.imageUploadSuccessful,
-  });
+  const LandingPageCreatorImageSection(
+      {super.key,
+      this.landingPage,
+      required this.imageSelected,
+      required this.imageUploadSuccessful});
 
   @override
   State<LandingPageCreatorImageSection> createState() =>
@@ -31,17 +34,26 @@ class _LandingPageCreatorImageSectionState
   final GlobalKey<_LandingPageCreatorImageSectionState> myWidgetKey =
       GlobalKey();
   bool hovered = false;
-  XFile? _pickedImage;
-  List<ImageDroppedFile>? _droppedFiles;
+  Uint8List? _convertedImage;
+  List<ImageDroppedFile>?
+      _droppedFiles; // TODO: Muss auch zu Uint8List umgewandelt werden und in _convertedImage abgelegt werden.
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    _pickedImage =
+    final image =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+    if (image != null) {
+      final convertedTempImage = await image.readAsBytes();
+      setState(() {
+        _convertedImage = convertedTempImage;
+      });
+    }
   }
 
   void onDroppedFile(List<ImageDroppedFile> files) {
-    _droppedFiles = files;
+    setState(() {
+      _droppedFiles = files;
+    });
   }
 
   String? _getImageUploadFailureMessage(
@@ -63,7 +75,8 @@ class _LandingPageCreatorImageSectionState
     }
   }
 
-  String _getImageThumbnailURL(LandingPageImageState state, String? thumbnailURL) {
+  String _getImageThumbnailURL(
+      LandingPageImageState state, String? thumbnailURL) {
     if (state is LandingPageImageUploadSuccessState) {
       return state.imageURL;
     } else if (thumbnailURL != null) {
@@ -120,6 +133,7 @@ class _LandingPageCreatorImageSectionState
                           state, widget.landingPage?.thumbnailDownloadURL),
                       imageSize: imageSize,
                       hovered: hovered,
+                      imageBytes: _convertedImage,
                       isLoading: state is LandingPageImageUploadLoadingState,
                       pickImage: () => _pickImage())),
             ),

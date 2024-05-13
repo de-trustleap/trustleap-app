@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:typed_data';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -11,20 +13,22 @@ class CachedImageView extends StatefulWidget {
   final String imageDownloadURL;
   final String thumbnailDownloadURL;
   final bool hovered;
+  final Uint8List? imageBytes;
 
-  const CachedImageView({
-    super.key,
-    required this.imageSize,
-    required this.imageDownloadURL,
-    required this.thumbnailDownloadURL,
-    required this.hovered,
-  });
+  const CachedImageView(
+      {super.key,
+      required this.imageSize,
+      required this.imageDownloadURL,
+      required this.thumbnailDownloadURL,
+      required this.hovered,
+      this.imageBytes});
 
   @override
   State<CachedImageView> createState() => _CachedImageViewState();
 }
 
 class _CachedImageViewState extends State<CachedImageView> {
+
   bool isImageClickable = false;
 
   @override
@@ -32,53 +36,91 @@ class _CachedImageViewState extends State<CachedImageView> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
+    print("WIDGET: ${widget.imageBytes}");
     return MouseRegion(
       cursor: isImageClickable
           ? SystemMouseCursors.click
           : SystemMouseCursors.basic,
       child: GestureDetector(
-        onTap: () async {
-          if (isImageClickable) {
-            final imageProvider = Image.network(widget.imageDownloadURL).image;
-            showImageViewer(context, imageProvider,
-                swipeDismissible: true,
-                doubleTapZoomable: true,
-                useSafeArea: true,
-                closeButtonTooltip: localization
-                    .profile_page_image_section_large_image_view_close_button_tooltip_title);
-          }
-        },
-        child: CachedNetworkImage(
-          width: widget.imageSize.width,
-          height: widget.imageSize.height,
-          imageUrl: widget.thumbnailDownloadURL,
-          imageBuilder: (context, imageProvider) {
-            isImageClickable = true;
-            return Container(
-                decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                  width: 5,
-                  color: widget.hovered
-                      ? themeData.colorScheme.secondary
-                      : Colors.transparent),
-              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-            ));
+          onTap: () async {
+            if (isImageClickable) {
+              final imageProvider =
+                  Image.network(widget.imageDownloadURL).image;
+              showImageViewer(context, imageProvider,
+                  swipeDismissible: true,
+                  doubleTapZoomable: true,
+                  useSafeArea: true,
+                  closeButtonTooltip: localization
+                      .profile_page_image_section_large_image_view_close_button_tooltip_title);
+            }
           },
-          placeholder: (context, url) {
-            return Stack(children: [
-              PlaceholderImage(
-                  imageSize: widget.imageSize, hovered: widget.hovered),
-              const LoadingIndicator()
-            ]);
-          },
-          errorWidget: (context, url, error) {
-            isImageClickable = false;
-            return PlaceholderImage(
-                imageSize: widget.imageSize, hovered: widget.hovered);
-          },
-        ),
-      ),
+          child: Column(children: [
+            if (widget.imageBytes == null) ...[
+              CachedNetworkImage(
+                width: widget.imageSize.width,
+                height: widget.imageSize.height,
+                imageUrl: widget.thumbnailDownloadURL,
+                imageBuilder: (context, imageProvider) {
+                  isImageClickable = true;
+                  return Container(
+                      decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                        width: 5,
+                        color: widget.hovered
+                            ? themeData.colorScheme.secondary
+                            : Colors.transparent),
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
+                  ));
+                },
+                placeholder: (context, url) {
+                  return Stack(children: [
+                    PlaceholderImage(
+                        imageSize: widget.imageSize, hovered: widget.hovered),
+                    const LoadingIndicator()
+                  ]);
+                },
+                errorWidget: (context, url, error) {
+                  isImageClickable = false;
+                  return PlaceholderImage(
+                      imageSize: widget.imageSize, hovered: widget.hovered);
+                },
+              ),
+            ] else ...[
+              if (widget.imageBytes != null) ...[
+                CircleAvatar(
+                  radius: 100,
+                  backgroundColor: Colors.transparent,
+                  child: ClipOval(
+                    child: Image.memory(
+                      widget.imageBytes!,
+                      width: widget.imageSize.width,
+                      height: widget.imageSize.height,
+                      frameBuilder:
+                          (context, child, frame, wasSynchronouslyLoaded) {
+                        isImageClickable = true;
+                        return Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 5,
+                                  color: widget.hovered
+                                      ? themeData.colorScheme.secondary
+                                      : Colors.transparent),
+                            ),
+                            child: child);
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return PlaceholderImage(
+                            imageSize: widget.imageSize, hovered: widget.hovered);
+                      },
+                    ),
+                  ),
+                )
+              ]
+            ]
+          ])),
     );
   }
 }

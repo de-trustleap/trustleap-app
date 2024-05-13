@@ -32,7 +32,7 @@ class LandingPageCreator extends StatelessWidget {
             LandingPageCreatorImageSection(
                 imageUploadSuccessful: () => CustomSnackBar.of(context)
                     .showCustomSnackBar(localization
-                        .profile_page_snackbar_image_changed_message)),
+                        .profile_page_snackbar_image_changed_message), imageSelected: () => print("Test")),
             const SizedBox(height: 20),
             const CenteredConstrainedWrapper(child: LandingPageCreatorForm())
           ])),
