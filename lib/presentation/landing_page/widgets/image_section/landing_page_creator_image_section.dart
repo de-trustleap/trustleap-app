@@ -39,20 +39,21 @@ class _LandingPageCreatorImageSectionState
       _droppedFiles; // TODO: Muss auch zu Uint8List umgewandelt werden und in _convertedImage abgelegt werden.
 
   Future<void> _pickImage() async {
+    final context = myWidgetKey.currentContext;
     final ImagePicker picker = ImagePicker();
-    final image =
+    final XFile? image =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
     if (image != null) {
       final convertedTempImage = await image.readAsBytes();
       setState(() {
         _convertedImage = convertedTempImage;
-      });
+      });      
     }
   }
 
   void onDroppedFile(List<ImageDroppedFile> files) {
     setState(() {
-      _droppedFiles = files;
+      _convertedImage = files.first.data;
     });
   }
 

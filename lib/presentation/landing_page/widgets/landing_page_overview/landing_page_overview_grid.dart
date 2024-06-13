@@ -17,6 +17,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     return Container(
       constraints: const BoxConstraints(maxHeight: 600),
@@ -29,7 +30,9 @@ class LandingPageOverviewGrid extends StatelessWidget {
             scrollDirection: Axis.vertical,
             physics: const ScrollPhysics(),
             childAspectRatio: calculateChildAspectRatio(responsiveValue),
-            children: List.generate(landingpages.length + 1, (index) {
+            children: List.generate(
+                landingpages.length > 11 ? 12 : landingpages.length + 1,
+                (index) {
               return AnimationConfiguration.staggeredGrid(
                 position: index,
                 duration: const Duration(milliseconds: 150),
@@ -38,10 +41,22 @@ class LandingPageOverviewGrid extends StatelessWidget {
                   child: Center(
                       child: GridTile(
                           child: index == 0
-                              ? AddNewLandingPageGridTile(
-                                  onPressed: () => Modular.to.navigate(
-                                      RoutePaths.homePath +
-                                          RoutePaths.landingPageCreatorPath))
+                              ? (landingpages.length >= 12
+                                  ? Center(
+                                      child: Text(
+                                        'Max Anzahl erreicht',
+                                        style: themeData.textTheme.labelSmall!.copyWith(
+                                        fontSize: responsiveValue.isMobile ? 10 : 20,
+                                        fontWeight: FontWeight.bold,),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  : AddNewLandingPageGridTile(
+                                      onPressed: () => Modular.to.navigate(
+                                            RoutePaths.homePath +
+                                                RoutePaths
+                                                    .landingPageCreatorPath,
+                                          )))
                               : LandingPageOverviewGridTile(
                                   landingPage: landingpages[index - 1]))),
                 ),

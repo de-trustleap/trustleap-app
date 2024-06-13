@@ -36,7 +36,6 @@ class _CachedImageViewState extends State<CachedImageView> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
-    print("WIDGET: ${widget.imageBytes}");
     return MouseRegion(
       cursor: isImageClickable
           ? SystemMouseCursors.click
@@ -97,6 +96,7 @@ class _CachedImageViewState extends State<CachedImageView> {
                       widget.imageBytes!,
                       width: widget.imageSize.width,
                       height: widget.imageSize.height,
+                      fit: BoxFit.cover,
                       frameBuilder:
                           (context, child, frame, wasSynchronouslyLoaded) {
                         isImageClickable = true;
@@ -104,7 +104,7 @@ class _CachedImageViewState extends State<CachedImageView> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                  width: 5,
+                                  width: 0,
                                   color: widget.hovered
                                       ? themeData.colorScheme.secondary
                                       : Colors.transparent),
