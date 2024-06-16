@@ -18,18 +18,22 @@ class HomeModule extends Module {
         children: [
           ChildRoute(RoutePaths.dashboardPath,
               child: (_) => const DashboardPage()),
-          ChildRoute(RoutePaths.profilePath, child: (_) => const ProfilePage()),
+          ChildRoute(RoutePaths.profilePath,
+              child: (_) => const ProfilePage()),
           ChildRoute(RoutePaths.recommendationsPath,
               child: (_) => const RecommendationsPage()),
           ChildRoute(RoutePaths.promotersPath,
               child: (_) => const PromotersPage()),
-          ChildRoute(RoutePaths.landingPagePath,
-              child: (_) => const LandingPageView()),
+          //ModuleRoute(RoutePaths.landingPagePath, module: LandingPageModul()),
+          //ChildRoute(AppPaths.profile, child: (_) => const ProfilePage()),
+           ChildRoute(RoutePaths.landingPagePath,
+               child: (_) => const LandingPageView()),
           ChildRoute(RoutePaths.landingPageCreatorPath,
               child: (_) => const LandingPageCreator()),
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),
         ]);
+
     r.wildcard(child: (_) => const DashboardPage());
   }
 }

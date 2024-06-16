@@ -8,7 +8,7 @@ sealed class LandingPageImageEvent extends Equatable {
 }
 
 class UploadLandingPageImageTriggeredEvent extends LandingPageImageEvent {
-  final XFile? rawImage;
+  final Uint8List? rawImage;
   final String id;
 
   const UploadLandingPageImageTriggeredEvent(
@@ -25,7 +25,7 @@ class UploadLandingPageImageFromDropZoneTriggeredEvent
 }
 
 class UploadLandingPageImageForWebTriggeredEvent extends LandingPageImageEvent {
-  final XFile image;
+  final Uint8List image;
   final String id;
 
   const UploadLandingPageImageForWebTriggeredEvent(
@@ -33,7 +33,7 @@ class UploadLandingPageImageForWebTriggeredEvent extends LandingPageImageEvent {
 }
 
 class UploadLandingPageImageForAppTriggeredEvent extends LandingPageImageEvent {
-  final XFile image;
+  final Uint8List image;
   final String id;
 
   const UploadLandingPageImageForAppTriggeredEvent(

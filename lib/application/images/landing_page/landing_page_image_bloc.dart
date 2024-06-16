@@ -45,9 +45,9 @@ class LandingPageImageBloc
       } else {
         final file = event.files.first;
         if (file.mime.contains("image")) {
-          final xFileImage = XFile.fromData(file.data);
+          
           add(UploadLandingPageImageTriggeredEvent(
-              rawImage: xFileImage, id: event.id));
+              rawImage: file.data, id: event.id));
         } else {
           emit(LandingPageImageIsNotValidFailureState());
         }
@@ -55,7 +55,7 @@ class LandingPageImageBloc
     });
 
     on<UploadLandingPageImageForWebTriggeredEvent>((event, emit) async {
-      final selectedImage = await event.image.readAsBytes();
+      final selectedImage = event.image;
       final imageFileSize = selectedImage.length;
       final isImageValid = await _isImageValid(selectedImage);
       if (!isImageValid) {
@@ -76,7 +76,8 @@ class LandingPageImageBloc
     });
 
     on<UploadLandingPageImageForAppTriggeredEvent>((event, emit) async {
-      final selectedImage = File(event.image.path);
+      final xFileImage = XFile.fromData(event.image);
+      final selectedImage = File(xFileImage.path);
       final imageFileSize = await selectedImage.length();
       if (imageFileSize > fileSizeLimit) {
         emit(LandingPageImageExceedsFileSizeLimitFailureState());

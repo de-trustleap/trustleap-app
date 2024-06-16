@@ -21,8 +21,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorForm extends StatefulWidget {
+  final UniqueID id;
+  final Function(LandingPage) onSaveTap;
   const LandingPageCreatorForm({
     super.key,
+    required this.id,
+    required this.onSaveTap
   });
 
   @override
@@ -70,8 +74,8 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
   void submit(LandingPageCreatorFormValidator validator) {
     if (formKey.currentState!.validate() && user != null) {
       validationHasError = false;
-      BlocProvider.of<LandingPageCubit>(context).createLangingPage(LandingPage(
-          id: UniqueID(),
+      widget.onSaveTap(LandingPage(
+          id: widget.id,
           name: nameTextController.text.trim(),
           text: textTextController.text.trim(),
           parentUserId: user!.id));

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
 import 'package:finanzbegleiter/core/failures/storage_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
@@ -15,14 +16,15 @@ import 'package:image_picker/image_picker.dart';
 
 class LandingPageCreatorImageSection extends StatefulWidget {
   final LandingPage? landingPage;
-  final Function imageSelected;
-  final Function imageUploadSuccessful;
+  final UniqueID id;
+  final Function(Uint8List?) imageSelected;
 
   const LandingPageCreatorImageSection(
       {super.key,
       this.landingPage,
-      required this.imageSelected,
-      required this.imageUploadSuccessful});
+      required this.id,
+      required this.imageSelected
+      });
 
   @override
   State<LandingPageCreatorImageSection> createState() =>
@@ -47,6 +49,7 @@ class _LandingPageCreatorImageSectionState
       final convertedTempImage = await image.readAsBytes();
       setState(() {
         _convertedImage = convertedTempImage;
+        widget.imageSelected(_convertedImage);
       });      
     }
   }
@@ -54,6 +57,7 @@ class _LandingPageCreatorImageSectionState
   void onDroppedFile(List<ImageDroppedFile> files) {
     setState(() {
       _convertedImage = files.first.data;
+      widget.imageSelected(_convertedImage);
     });
   }
 
@@ -101,7 +105,7 @@ class _LandingPageCreatorImageSectionState
     return BlocConsumer<LandingPageImageBloc, LandingPageImageState>(
       listener: (context, state) {
         if (state is LandingPageImageUploadSuccessState) {
-          widget.imageUploadSuccessful();
+          //widget.imageUploadSuccessful();
           PaintingBinding.instance.imageCache.clear();
         }
       },
