@@ -17,14 +17,15 @@ import 'package:image_picker/image_picker.dart';
 class LandingPageCreatorImageSection extends StatefulWidget {
   final LandingPage? landingPage;
   final UniqueID id;
+  final LandingPageImageState? failureState;
   final Function(Uint8List?) imageSelected;
 
   const LandingPageCreatorImageSection(
       {super.key,
       this.landingPage,
       required this.id,
-      required this.imageSelected
-      });
+      this.failureState,
+      required this.imageSelected});
 
   @override
   State<LandingPageCreatorImageSection> createState() =>
@@ -37,11 +38,8 @@ class _LandingPageCreatorImageSectionState
       GlobalKey();
   bool hovered = false;
   Uint8List? _convertedImage;
-  List<ImageDroppedFile>?
-      _droppedFiles; // TODO: Muss auch zu Uint8List umgewandelt werden und in _convertedImage abgelegt werden.
 
   Future<void> _pickImage() async {
-    final context = myWidgetKey.currentContext;
     final ImagePicker picker = ImagePicker();
     final XFile? image =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
@@ -50,7 +48,7 @@ class _LandingPageCreatorImageSectionState
       setState(() {
         _convertedImage = convertedTempImage;
         widget.imageSelected(_convertedImage);
-      });      
+      });
     }
   }
 
@@ -62,7 +60,7 @@ class _LandingPageCreatorImageSectionState
   }
 
   String? _getImageUploadFailureMessage(
-      LandingPageImageState state, AppLocalizations localization) {
+      LandingPageImageState? state, AppLocalizations localization) {
     if (state is LandingPageImageUploadFailureState) {
       return StorageFailureMapper.mapFailureMessage(
           state.failure, localization);
@@ -142,7 +140,9 @@ class _LandingPageCreatorImageSectionState
                       isLoading: state is LandingPageImageUploadLoadingState,
                       pickImage: () => _pickImage())),
             ),
-            if (_getImageUploadFailureMessage(state, localization) != null) ...[
+            if (_getImageUploadFailureMessage(
+                    widget.failureState, localization) !=
+                null) ...[
               const SizedBox(height: 20),
               FormErrorView(
                   message: _getImageUploadFailureMessage(state, localization)!)
