@@ -44,9 +44,9 @@ class _LandingPageCreatorImageSectionState
   Uint8List? _convertedImage;
 
   @override
-  void initState() {
-    super.initState();
+  void didUpdateWidget(covariant LandingPageCreatorImageSection oldWidget) {
     _downloadCompanyImageFromURL();
+    super.didUpdateWidget(oldWidget);
   }
 
   bool _urlIsValid(String url) {
@@ -68,7 +68,8 @@ class _LandingPageCreatorImageSectionState
 
   _downloadCompanyImageFromURL() async {
     if (widget.company?.companyImageDownloadURL != null &&
-        _urlIsValid(widget.company!.companyImageDownloadURL!)) {
+        _urlIsValid(widget.company!.companyImageDownloadURL!) &&
+        _convertedImage == null) {
       http.Response response =
           await http.get(Uri.parse(widget.company!.companyImageDownloadURL!));
       _convertedImage = response.bodyBytes;
