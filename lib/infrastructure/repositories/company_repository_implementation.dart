@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
@@ -35,7 +34,7 @@ class CompanyRepositoryImplementation implements CompanyRepository {
       }
     });
   }
-  
+
   @override
   Future<Either<DatabaseFailure, Unit>> updateCompany(Company company) async {
     final companyCollection = firestore.collection("companies");
@@ -43,6 +42,24 @@ class CompanyRepositoryImplementation implements CompanyRepository {
     try {
       await companyCollection.doc(companyModel.id).update(companyModel.toMap());
       return right(unit);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Company>> getCompany(String companyID) async {
+    final companyDoc = firestore.collection("companies").doc(companyID);
+    try {
+      final snapshot = await companyDoc.get();
+      if (snapshot.data() == null) {
+        return left(NotFoundFailure());
+      } else {
+        final company =
+            CompanyModel.fromFirestore(snapshot.data()!, snapshot.id)
+                .toDomain();
+        return right(company);
+      }
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }

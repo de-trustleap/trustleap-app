@@ -1,5 +1,7 @@
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
+import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
+import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
@@ -23,6 +25,7 @@ class LandingPageCreatorInput extends StatefulWidget {
 
 class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
   late UniqueID id;
+  Company? company;
   Uint8List? image;
   bool showNoImageFailureMessage = false;
 
@@ -30,6 +33,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
   void initState() {
     super.initState();
     id = UniqueID();
+    BlocProvider.of<LandingPageCubit>(context).getUser();
   }
 
   @override
@@ -45,16 +49,25 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
               BlocProvider.of<LandingPageImageBloc>(context).add(
                   UploadLandingPageImageTriggeredEvent(
                       rawImage: image, id: id.value));
-            } else if (state is CreatedLandingPageSuccessState) {
-              print("SUCCESS!!");
+            } else if (state is GetUserSuccessState) {
+              if (state.user.companyID != null) {
+                BlocProvider.of<CompanyCubit>(context)
+                    .getCompany(state.user.companyID!);
+              }
             }
           }),
           BlocListener<LandingPageImageBloc, LandingPageImageState>(
               listener: (context, state) {
             if (state is LandingPageImageUploadSuccessState) {
-              print("UPLOAD SUCCESSFUL");
               Modular.to
                   .navigate(RoutePaths.homePath + RoutePaths.landingPagePath);
+            } // TODO: LandingPageImageUploadSuccessState wird nicht gefeuert wenn bereits ein Company Bild existiert. Hier muss noch was gemacht werden. Das Company Bild muss ebenfalls hochgeladen werden wenn man auf Speichern klickt.
+          }),
+          BlocListener<CompanyCubit, CompanyState>(listener: (context, state) {
+            if (state is GetCompanySuccessState) {
+              setState(() {
+                company = state.company;
+              });
             }
           })
         ],
@@ -70,6 +83,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
                       SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                       LandingPageCreatorImageSection(
                           id: id,
+                          company: company,
                           failureState: imageState,
                           imageSelected: (tempImage) => image = tempImage),
                       const SizedBox(height: 20),
@@ -77,7 +91,8 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
                           child: LandingPageCreatorForm(
                         id: id,
                         onSaveTap: (landingPage) {
-                          if (image != null) {
+                          if (image != null ||
+                              company?.companyImageDownloadURL != null) {
                             setState(() {
                               showNoImageFailureMessage = false;
                             });

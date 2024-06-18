@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
@@ -26,5 +25,13 @@ class CompanyCubit extends Cubit<CompanyState> {
               CompanyUpdateContactInformationFailureState(failure: failure)),
           (_) => emit(CompanyUpdateContactInformationSuccessState()));
     }
+  }
+
+  void getCompany(String companyID) async {
+    emit(GetCompanyLoadingState());
+    final failureOrSuccess = await companyRepo.getCompany(companyID);
+    failureOrSuccess.fold(
+        (failure) => emit(GetCompanyFailureState(failure: failure)),
+        (company) => emit(GetCompanySuccessState(company: company)));
   }
 }

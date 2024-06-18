@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
 import 'package:finanzbegleiter/core/failures/storage_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -12,11 +13,13 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/
 import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/profile_image_dropzone.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 class LandingPageCreatorImageSection extends StatefulWidget {
   final LandingPage? landingPage;
   final UniqueID id;
+  final Company? company;
   final LandingPageImageState? failureState;
   final Function(Uint8List?) imageSelected;
 
@@ -24,6 +27,7 @@ class LandingPageCreatorImageSection extends StatefulWidget {
       {super.key,
       this.landingPage,
       required this.id,
+      this.company,
       this.failureState,
       required this.imageSelected});
 
@@ -39,6 +43,16 @@ class _LandingPageCreatorImageSectionState
   bool hovered = false;
   Uint8List? _convertedImage;
 
+  @override
+  void initState() {
+    super.initState();
+    _downloadCompanyImageFromURL();
+  }
+
+  bool _urlIsValid(String url) {
+    return Uri.tryParse(url)?.hasAbsolutePath ?? false;
+  }
+
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image =
@@ -49,6 +63,16 @@ class _LandingPageCreatorImageSectionState
         _convertedImage = convertedTempImage;
         widget.imageSelected(_convertedImage);
       });
+    }
+  }
+
+  _downloadCompanyImageFromURL() async {
+    if (widget.company?.companyImageDownloadURL != null &&
+        _urlIsValid(widget.company!.companyImageDownloadURL!)) {
+      http.Response response =
+          await http.get(Uri.parse(widget.company!.companyImageDownloadURL!));
+      _convertedImage = response.bodyBytes;
+      widget.imageSelected(_convertedImage);
     }
   }
 
@@ -84,6 +108,8 @@ class _LandingPageCreatorImageSectionState
       return state.imageURL;
     } else if (thumbnailURL != null) {
       return thumbnailURL;
+    } else if (widget.company?.companyImageDownloadURL != null) {
+      return widget.company!.companyImageDownloadURL!;
     } else {
       return "";
     }
