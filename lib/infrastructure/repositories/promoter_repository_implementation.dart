@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -13,20 +14,22 @@ import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 
 class PromoterRepositoryImplementation implements PromoterRepository {
   final FirebaseFirestore firestore;
+  final FirebaseFunctions firebaseFunctions;
 
-  PromoterRepositoryImplementation({
-    required this.firestore,
-  });
+  PromoterRepositoryImplementation(
+      {required this.firestore, required this.firebaseFunctions});
 
   @override
   Future<Either<DatabaseFailure, Unit>> registerPromoter(
       {required UnregisteredPromoter promoter}) async {
-    final promoterCollection = firestore.collection("unregisteredPromoters");
-    final promoterModel = UnregisteredPromoterModel.fromDomain(promoter);
+    HttpsCallable callable = firebaseFunctions.httpsCallable("createPromoter");
+    final promoterMap = UnregisteredPromoterModel.fromDomain(promoter).toMap();
+    promoterMap.remove("createdAt");
+    promoterMap.remove("expiresAt");
     try {
-      await promoterCollection.doc(promoterModel.id).set(promoterModel.toMap());
+      await callable.call(promoterMap);
       return right(unit);
-    } on FirebaseException catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
