@@ -1,5 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -13,10 +17,10 @@ import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 
 class LandingPageRepositoryImplementation implements LandingPageRepository {
   final FirebaseFirestore firestore;
+  final FirebaseFunctions firebaseFunctions;
 
-  LandingPageRepositoryImplementation({
-    required this.firestore,
-  });
+  LandingPageRepositoryImplementation(
+      {required this.firestore, required this.firebaseFunctions});
 
   @override
   Stream<Either<DatabaseFailure, CustomUser>> observeAllLandingPages() async* {
@@ -74,15 +78,23 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
-  
+
   @override
-  Future<Either<DatabaseFailure, Unit>> createLandingPage(LandingPage landingPage) async {
-    final landingPageCollection = firestore.collection("landingPages");
-    final landingPageModel = LandingPageModel.fromDomain(landingPage);
+  Future<Either<DatabaseFailure, Unit>> createLandingPage(
+      LandingPage landingPage, Uint8List imageData) async {
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("createLandingPage");
     try {
-      await landingPageCollection.doc(landingPageModel.id).set(landingPageModel.toMap());
+      await callable.call({
+        "id": landingPage.id.value,
+        "title": landingPage.name,
+        "text": landingPage.text,
+        "parentUserID": landingPage.parentUserId?.value,
+        "imageData": base64Encode(imageData)
+      });
       return right(unit);
-    } on FirebaseException catch (e) {
+    } on FirebaseFunctionsException catch (e) {
+      print("THE ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

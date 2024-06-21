@@ -13,7 +13,6 @@ class LandingPageModel extends Equatable {
   final String? text;
   final dynamic createdAt;
 
-
   const LandingPageModel({
     required this.id,
     this.name,
@@ -60,9 +59,14 @@ class LandingPageModel extends Equatable {
     return LandingPageModel(
       id: "",
       name: map['name'] != null ? map['name'] as String : null,
-      downloadImageUrl: map['downloadImageUrl'] != null ? map['downloadImageUrl'] as String : null,
-      thumbnailDownloadURL: map['thumbnailDownloadURL'] != null ? map['thumbnailDownloadURL'] as String : null,
-      parentUserId: map['parentUserId'] != null ? map['parentUserId'] as String : null,
+      downloadImageUrl: map['downloadImageUrl'] != null
+          ? map['downloadImageUrl'] as String
+          : null,
+      thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
+          ? map['thumbnailDownloadURL'] as String
+          : null,
+      parentUserId:
+          map['parentUserId'] != null ? map['parentUserId'] as String : null,
       text: map['text'] != null ? map['text'] as String : null,
       createdAt: map['createdAt'] as dynamic,
     );
@@ -72,38 +76,29 @@ class LandingPageModel extends Equatable {
     return LandingPageModel.fromMap(doc).copyWith(id: id);
   }
 
-  LandingPage toDomain(){
+  LandingPage toDomain() {
     return LandingPage(
-      id: UniqueID.fromUniqueString(id),
-      name: name,
-      downloadImageUrl: downloadImageUrl,
-      thumbnailDownloadURL: thumbnailDownloadURL,
-      parentUserId: UniqueID.fromUniqueString(parentUserId ?? ""),
-      text: text,
-      createdAt: (createdAt as Timestamp).toDate()
-    );
+        id: UniqueID.fromUniqueString(id),
+        name: name,
+        downloadImageUrl: downloadImageUrl,
+        thumbnailDownloadURL: thumbnailDownloadURL,
+        parentUserId: UniqueID.fromUniqueString(parentUserId ?? ""),
+        text: text,
+        createdAt: (createdAt as Timestamp).toDate());
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
     return LandingPageModel(
-      id: landingPage.id.value,
-      name: landingPage.name,
-      downloadImageUrl: landingPage.downloadImageUrl,
-      thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
-      parentUserId: landingPage.parentUserId?.value ?? "",
-      text: landingPage.text,
-      createdAt: FieldValue.serverTimestamp()
-    );
+        id: landingPage.id.value,
+        name: landingPage.name,
+        downloadImageUrl: landingPage.downloadImageUrl,
+        thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
+        parentUserId: landingPage.parentUserId?.value ?? "",
+        text: landingPage.text,
+        createdAt: FieldValue.serverTimestamp());
   }
 
   @override
-  
-  List<Object?> get props => [
-        id,
-        name,
-        downloadImageUrl,
-        thumbnailDownloadURL,
-        parentUserId,
-        text
-      ];
-  }
+  List<Object?> get props =>
+      [id, name, downloadImageUrl, thumbnailDownloadURL, parentUserId, text];
+}

@@ -2,12 +2,9 @@
 import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
-import 'package:finanzbegleiter/core/failures/storage_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/image_dropped_file.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/profile_image_dropzone.dart';
@@ -20,7 +17,6 @@ class LandingPageCreatorImageSection extends StatefulWidget {
   final LandingPage? landingPage;
   final UniqueID id;
   final Company? company;
-  final LandingPageImageState? failureState;
   final Function(Uint8List?) imageSelected;
 
   const LandingPageCreatorImageSection(
@@ -28,7 +24,6 @@ class LandingPageCreatorImageSection extends StatefulWidget {
       this.landingPage,
       required this.id,
       this.company,
-      this.failureState,
       required this.imageSelected});
 
   @override
@@ -84,25 +79,6 @@ class _LandingPageCreatorImageSectionState
     });
   }
 
-  String? _getImageUploadFailureMessage(
-      LandingPageImageState? state, AppLocalizations localization) {
-    if (state is LandingPageImageUploadFailureState) {
-      return StorageFailureMapper.mapFailureMessage(
-          state.failure, localization);
-    } else if (state is LandingPageImageExceedsFileSizeLimitFailureState) {
-      return localization
-          .profile_page_image_section_validation_exceededFileSize;
-    } else if (state is LandingPageImageIsNotValidFailureState) {
-      return localization.profile_page_image_section_validation_not_valid;
-    } else if (state is LandingPageImageOnlyOneAllowedFailureState) {
-      return localization.profile_page_image_section_only_one_allowed;
-    } else if (state is LandingPageImageUploadNotFoundFailureState) {
-      return localization.profile_page_image_section_upload_not_found;
-    } else {
-      return null;
-    }
-  }
-
   String _getImageThumbnailURL(
       LandingPageImageState state, String? thumbnailURL) {
     if (state is LandingPageImageUploadSuccessState) {
@@ -124,7 +100,6 @@ class _LandingPageCreatorImageSectionState
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
     const Size imageSize = Size(200, 200);
 
     return BlocConsumer<LandingPageImageBloc, LandingPageImageState>(
@@ -167,13 +142,6 @@ class _LandingPageCreatorImageSectionState
                       isLoading: state is LandingPageImageUploadLoadingState,
                       pickImage: () => _pickImage())),
             ),
-            if (_getImageUploadFailureMessage(
-                    widget.failureState, localization) !=
-                null) ...[
-              const SizedBox(height: 20),
-              FormErrorView(
-                  message: _getImageUploadFailureMessage(state, localization)!)
-            ]
           ],
         );
       },

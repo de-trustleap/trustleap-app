@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -18,13 +20,13 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     this.userRepo,
   ) : super(LandingPageInitial());
 
-  void createLangingPage(LandingPage? landingpage) async {
+  void createLangingPage(LandingPage? landingpage, Uint8List imageData) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
     } else {
       emit(CreateLandingPageLoadingState());
       final failureOrSuccess =
-          await landingPageRepo.createLandingPage(landingpage);
+          await landingPageRepo.createLandingPage(landingpage, imageData);
       failureOrSuccess.fold(
           (failure) => emit(CreateLandingPageFailureState(failure: failure)),
           (_) => emit(CreatedLandingPageSuccessState()));

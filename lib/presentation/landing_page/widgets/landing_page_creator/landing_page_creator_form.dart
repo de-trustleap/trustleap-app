@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:typed_data';
+
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
@@ -74,7 +76,8 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
           parentUserId: user!.id));
     } else {
       validationHasError = true;
-      BlocProvider.of<LandingPageCubit>(context).createLangingPage(null);
+      BlocProvider.of<LandingPageCubit>(context)
+          .createLangingPage(null, Uint8List(0));
     }
   }
 
@@ -92,8 +95,12 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
         if (state is GetUserSuccessState) {
           user = state.user;
         } else if (state is CreateLandingPageFailureState) {
-          errorMessage = DatabaseFailureMapper.mapFailureMessage(
-              state.failure, localization);
+          setState(() {
+            showError = true;
+            errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                state.failure, localization);
+          });
+          setButtonToDisabled(false);
         } else if (state is CreatedLandingPageSuccessState) {
           setButtonToDisabled(false);
         } else if (state is CreateLandingPageLoadingState) {
