@@ -44,8 +44,9 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
           BlocListener<LandingPageCubit, LandingPageState>(
               listener: (context, state) {
             if (state is CreatedLandingPageSuccessState) {
-              Modular.to
-                  .navigate(RoutePaths.homePath + RoutePaths.landingPagePath);
+              const params = "?createdNewPage=true";
+              Modular.to.navigate(
+                  RoutePaths.homePath + RoutePaths.landingPagePath + params);
             } else if (state is GetUserSuccessState) {
               if (state.user.companyID != null) {
                 BlocProvider.of<CompanyCubit>(context)

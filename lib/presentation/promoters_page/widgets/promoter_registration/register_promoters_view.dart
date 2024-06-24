@@ -1,12 +1,15 @@
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoters_form.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class RegisterPromotersView extends StatefulWidget {
-  const RegisterPromotersView({super.key});
+  final TabController tabController;
+  final Function newPromoterCreated;
+  const RegisterPromotersView(
+      {super.key,
+      required this.tabController,
+      required this.newPromoterCreated});
 
   @override
   State<RegisterPromotersView> createState() => _RegisterPromotersViewState();
@@ -22,7 +25,6 @@ class _RegisterPromotersViewState extends State<RegisterPromotersView>
     super.build(context);
 
     final themeData = Theme.of(context);
-    final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return Container(
@@ -35,11 +37,10 @@ class _RegisterPromotersViewState extends State<RegisterPromotersView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                RegisterPromotersForm(
-                    changesSaved: () => {
-                          CustomSnackBar.of(context).showCustomSnackBar(
-                              localization.register_promoter_snackbar_success)
-                        })
+                RegisterPromotersForm(changesSaved: () {
+                  widget.tabController.animateTo(0);
+                  widget.newPromoterCreated();
+                })
               ])),
         ]));
   }
