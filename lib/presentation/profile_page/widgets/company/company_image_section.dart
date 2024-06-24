@@ -4,9 +4,9 @@ import 'package:finanzbegleiter/core/failures/storage_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/image_dropped_file.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/profile_image_dropzone.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_section.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_dropped_file.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_upload_dropzone.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,11 +15,8 @@ class CompanyImageSection extends StatefulWidget {
   final Company company;
   final Function imageUploadSuccessful;
 
-  const CompanyImageSection({
-    super.key,
-    required this.company,
-    required this.imageUploadSuccessful
-  });
+  const CompanyImageSection(
+      {super.key, required this.company, required this.imageUploadSuccessful});
 
   @override
   State<CompanyImageSection> createState() => _CompanyImageSectionState();

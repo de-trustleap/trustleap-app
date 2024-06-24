@@ -8,7 +8,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/profile_image_section.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_image_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/promoters_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

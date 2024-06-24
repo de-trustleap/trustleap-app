@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/image_dropped_file.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_dropped_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 
