@@ -29,7 +29,6 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
   void landingPageObserverUpdated(
       Either<DatabaseFailure, CustomUser> failureOrUser) async {
     emit(LandingPageObserverLoading());
-    print("OBSERVER FIRED!");
     failureOrUser
         .fold((failure) => emit(LandingPageObserverFailure(failure: failure)),
             (user) async {

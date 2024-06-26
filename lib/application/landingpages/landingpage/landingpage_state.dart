@@ -38,3 +38,14 @@ final class GetUserFailureState extends LandingPageState {
     required this.failure,
   });
 }
+
+final class DeleteLandingPageLoadingState extends LandingPageState {}
+
+final class DeleteLandingPageFailureState extends LandingPageState {
+  final DatabaseFailure failure;
+  const DeleteLandingPageFailureState({
+    required this.failure,
+  });
+}
+
+final class DeleteLandingPageSuccessState extends LandingPageState {}

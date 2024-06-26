@@ -10,10 +10,9 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageOverviewGrid extends StatelessWidget {
   final List<LandingPage> landingpages;
-  const LandingPageOverviewGrid({
-    super.key,
-    required this.landingpages,
-  });
+  final Function(String, String) deletePressed;
+  const LandingPageOverviewGrid(
+      {super.key, required this.landingpages, required this.deletePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +44,13 @@ class LandingPageOverviewGrid extends StatelessWidget {
                                   ? Center(
                                       child: Text(
                                         'Max Anzahl erreicht',
-                                        style: themeData.textTheme.labelSmall!.copyWith(
-                                        fontSize: responsiveValue.isMobile ? 10 : 20,
-                                        fontWeight: FontWeight.bold,),
+                                        style: themeData.textTheme.labelSmall!
+                                            .copyWith(
+                                          fontSize: responsiveValue.isMobile
+                                              ? 10
+                                              : 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                         textAlign: TextAlign.center,
                                       ),
                                     )
@@ -58,7 +61,8 @@ class LandingPageOverviewGrid extends StatelessWidget {
                                                     .landingPageCreatorPath,
                                           )))
                               : LandingPageOverviewGridTile(
-                                  landingPage: landingpages[index - 1]))),
+                                  landingPage: landingpages[index - 1],
+                                  deletePressed: deletePressed))),
                 ),
               );
             })),
@@ -69,7 +73,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
 
 double calculateChildAspectRatio(ResponsiveBreakpointsData responsiveValue) {
   if (responsiveValue.isDesktop) {
-    return 0.85;
+    return 0.77;
   } else if (responsiveValue.isTablet) {
     return 0.67;
   } else {

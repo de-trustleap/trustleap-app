@@ -33,6 +33,15 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     }
   }
 
+  void deleteLandingPage(String id, String parentUserID) async {
+    emit(DeleteLandingPageLoadingState());
+    final failureOrSuccess =
+        await landingPageRepo.deleteLandingPage(id, parentUserID);
+    failureOrSuccess.fold(
+        (failure) => emit(DeleteLandingPageFailureState(failure: failure)),
+        (_) => emit(DeleteLandingPageSuccessState()));
+  }
+
   void getUser() async {
     emit(GetUserLoadingState());
     final failureOrSuccess = await userRepo.getUser();

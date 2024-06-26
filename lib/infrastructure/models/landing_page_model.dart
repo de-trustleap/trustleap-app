@@ -49,7 +49,7 @@ class LandingPageModel extends Equatable {
       'name': name,
       'downloadImageUrl': downloadImageUrl,
       'thumbnailDownloadURL': thumbnailDownloadURL,
-      'parentUserId': parentUserId,
+      'parentUserID': parentUserId,
       'text': text,
       'createdAt': createdAt,
     };
@@ -66,7 +66,7 @@ class LandingPageModel extends Equatable {
           ? map['thumbnailDownloadURL'] as String
           : null,
       parentUserId:
-          map['parentUserId'] != null ? map['parentUserId'] as String : null,
+          map['parentUserID'] != null ? map['parentUserID'] as String : null,
       text: map['text'] != null ? map['text'] as String : null,
       createdAt: map['createdAt'] as dynamic,
     );

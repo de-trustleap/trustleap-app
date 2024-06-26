@@ -8,11 +8,10 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageOverviewGridTile extends StatelessWidget {
   final LandingPage landingPage;
+  final Function(String, String) deletePressed;
 
-  const LandingPageOverviewGridTile({
-    super.key,
-    required this.landingPage,
-  });
+  const LandingPageOverviewGridTile(
+      {super.key, required this.landingPage, required this.deletePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +29,25 @@ class LandingPageOverviewGridTile extends StatelessWidget {
           padding: const EdgeInsets.all(4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                        onPressed: () => deletePressed(landingPage.id.value,
+                            landingPage.parentUserId?.value ?? ""),
+                        iconSize: 24,
+                        icon: Icon(Icons.delete,
+                            color: themeData.colorScheme.secondary, size: 24)),
+                    const Spacer(),
+                    IconButton(
+                        onPressed: () {},
+                        iconSize: 24,
+                        icon: Icon(Icons.edit,
+                            color: themeData.colorScheme.secondary, size: 24)),
+                  ]),
               CachedNetworkImage(
                 width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
                 height: responsiveValue.largerThan(MOBILE) ? 120 : 140,
@@ -54,7 +70,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                   return placeHolderImage(responsiveValue);
                 },
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 8),
               Text(landingPage.name ?? "",
                   style: themeData.textTheme.bodySmall,
                   textAlign: TextAlign.center,

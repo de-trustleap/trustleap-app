@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -37,9 +38,13 @@ class _LandingPageViewState extends State<LandingPageView> {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
-    return BlocProvider(
-      create: (context) =>
-          Modular.get<LandingPageObserverCubit>()..observeAllLandingPages(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => Modular.get<LandingPageObserverCubit>()
+              ..observeAllLandingPages()),
+        BlocProvider(create: (context) => Modular.get<LandingPageCubit>())
+      ],
       child: Container(
           width: double.infinity,
           decoration: BoxDecoration(color: themeData.colorScheme.background),

@@ -94,7 +94,19 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
-      print("THE ERROR: $e");
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> deleteLandingPage(
+      String id, String parentUserID) async {
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("deleteLandingPage");
+    try {
+      await callable.call({"id": id, "parentUserID": parentUserID});
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
