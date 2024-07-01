@@ -81,7 +81,7 @@ class UserRepositoryImplementation implements UserRepository {
         });
       });
     } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+      return left(FirebaseExceptionParser.getAuthException(code: e.code));
     }
   }
 
@@ -113,7 +113,7 @@ class UserRepositoryImplementation implements UserRepository {
         return right(await user.updatePassword(password));
       });
     } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+      return left(FirebaseExceptionParser.getAuthException(code: e.code));
     }
   }
 

@@ -28,7 +28,7 @@ class AuthRepositoryImplementation implements AuthRepository {
           email: email, password: password);
       return right(creds);
     } on FirebaseAuthException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+      return left(FirebaseExceptionParser.getAuthException(code: e.code));
     }
   }
 
@@ -40,7 +40,7 @@ class AuthRepositoryImplementation implements AuthRepository {
           email: email, password: password);
       return right(creds);
     } on FirebaseAuthException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+      return left(FirebaseExceptionParser.getAuthException(code: e.code));
     }
   }
 
@@ -61,7 +61,7 @@ class AuthRepositoryImplementation implements AuthRepository {
         }
       });
     } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+      return left(FirebaseExceptionParser.getAuthException(code: e.code));
     }
   }
 
@@ -94,7 +94,7 @@ class AuthRepositoryImplementation implements AuthRepository {
       final result = await firebaseAuth.sendPasswordResetEmail(email: email);
       return right(result);
     } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+      return left(FirebaseExceptionParser.getAuthException(code: e.code));
     }
   }
 
@@ -126,7 +126,7 @@ class AuthRepositoryImplementation implements AuthRepository {
       await callable.call();
       return right(unit);
     } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+      return left(FirebaseExceptionParser.getAuthException(code: e.code));
     }
   }
 }
