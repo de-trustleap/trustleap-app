@@ -27,7 +27,7 @@ class HomeModule extends Module {
               child: (_) => LandingPageView(
                   createdNewPage: r.args.queryParams["createdNewPage"])),
           ChildRoute(RoutePaths.landingPageCreatorPath,
-              child: (_) => const LandingPageCreator()),
+              child: (_) => LandingPageCreator(landingPage: r.args.data)),
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),
         ]);

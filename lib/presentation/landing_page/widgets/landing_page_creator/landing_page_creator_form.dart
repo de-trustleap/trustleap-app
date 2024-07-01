@@ -20,9 +20,12 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorForm extends StatefulWidget {
   final UniqueID id;
+  final LandingPage?
+      landingPage;
   final Function(LandingPage) onSaveTap;
+  final Function (LandingPage) onEditTapped;
   const LandingPageCreatorForm(
-      {super.key, required this.id, required this.onSaveTap});
+      {super.key, required this.id, this.landingPage, required this.onSaveTap, required this.onEditTapped});
 
   @override
   State<LandingPageCreatorForm> createState() => _LandingPageCreatorFormState();
@@ -43,6 +46,11 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
   void initState() {
     super.initState();
     BlocProvider.of<LandingPageCubit>(context).getUser();
+
+    if(widget.landingPage != null) {
+      nameTextController.text = widget.landingPage?.name ?? "";
+      textTextController.text = widget.landingPage?.text ?? "";
+    }
   }
 
   @override
@@ -69,11 +77,16 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
   void submit(LandingPageCreatorFormValidator validator) {
     if (formKey.currentState!.validate() && user != null) {
       validationHasError = false;
-      widget.onSaveTap(LandingPage(
+      if (widget.landingPage == null) {
+              widget.onSaveTap(LandingPage(
           id: widget.id,
           name: nameTextController.text.trim(),
           text: textTextController.text.trim(),
           parentUserId: user!.id));
+      } else {
+        // TODO: Edit landingpage Action
+        print("EDIT!!!");
+      }
     } else {
       validationHasError = true;
       BlocProvider.of<LandingPageCubit>(context)
@@ -101,9 +114,16 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                 state.failure, localization);
           });
           setButtonToDisabled(false);
-        } else if (state is CreatedLandingPageSuccessState) {
+        } else if (state is EditLandingPageFailureState) {
+          setState(() {
+            showError = true;
+            errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                state.failure, localization);
+          });
           setButtonToDisabled(false);
-        } else if (state is CreateLandingPageLoadingState) {
+        } else if (state is CreatedLandingPageSuccessState || state is EditLandingPageSuccessState) {
+          setButtonToDisabled(false);
+        } else if (state is CreateLandingPageLoadingState || state is EditLandingPageLoadingState) {
           setButtonToDisabled(true);
         }
       },
@@ -166,7 +186,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             PrimaryButton(
-                                title: "LandingPage erstellen",
+                                title: widget.landingPage == null ? "LandingPage erstellen" : "Änderungen speichern",
                                 disabled: buttonDisabled,
                                 width: responsiveValue.isMobile
                                     ? maxWidth - textFieldSpacing
@@ -176,13 +196,13 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                 })
                           ],
                         ),
-                        if (state is CreateLandingPageLoadingState) ...[
+                        if (state is CreateLandingPageLoadingState || state is EditLandingPageLoadingState) ...[
                           const SizedBox(height: 80),
                           const LoadingIndicator()
                         ],
                         if (errorMessage != "" &&
                             showError &&
-                            (state is CreateLandingPageFailureState) &&
+                            (state is CreateLandingPageFailureState || state is EditLandingPageFailureState) &&
                             !validationHasError) ...[
                           const SizedBox(height: 20),
                           FormErrorView(message: errorMessage)

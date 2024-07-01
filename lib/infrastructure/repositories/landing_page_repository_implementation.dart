@@ -110,4 +110,21 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+  
+  @override
+  Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage, Uint8List imageData) async {
+    HttpsCallable callable = firebaseFunctions.httpsCallable("editLandingPage"); // TODO: Implement editLandingPage in Backend!
+    try {
+      await callable.call({
+        "id": landingPage.id.value,
+        "title": landingPage.name,
+        "text": landingPage.text,
+        "parentUserID": landingPage.parentUserId?.value,
+        "imageData": base64Encode(imageData)
+      });
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }

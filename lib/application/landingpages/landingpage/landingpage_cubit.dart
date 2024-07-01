@@ -14,6 +14,7 @@ part 'landingpage_state.dart';
 class LandingPageCubit extends Cubit<LandingPageState> {
   final LandingPageRepository landingPageRepo;
   final UserRepository userRepo;
+  final fileSizeLimit = 5000000;
 
   LandingPageCubit(
     this.landingPageRepo,
@@ -23,6 +24,8 @@ class LandingPageCubit extends Cubit<LandingPageState> {
   void createLangingPage(LandingPage? landingpage, Uint8List imageData) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
+    } else if (imageData.lengthInBytes > fileSizeLimit) {
+      emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(CreateLandingPageLoadingState());
       final failureOrSuccess =
@@ -30,6 +33,21 @@ class LandingPageCubit extends Cubit<LandingPageState> {
       failureOrSuccess.fold(
           (failure) => emit(CreateLandingPageFailureState(failure: failure)),
           (_) => emit(CreatedLandingPageSuccessState()));
+    }
+  }
+
+  void editLandingPage(LandingPage? landingPage, Uint8List imageData) async {
+    if (landingPage == null) {
+      emit(LandingPageShowValidationState());
+    } else if (imageData.lengthInBytes > fileSizeLimit) {
+      emit(LandingPageImageExceedsFileSizeLimitFailureState());
+    } else {
+      emit(EditLandingPageLoadingState());
+      final failureOrSuccess =
+          await landingPageRepo.editLandingPage(landingPage, imageData);
+      failureOrSuccess.fold(
+          (failure) => emit(EditLandingPageFailureState(failure: failure)),
+          (_) => emit(EditLandingPageSuccessState()));
     }
   }
 

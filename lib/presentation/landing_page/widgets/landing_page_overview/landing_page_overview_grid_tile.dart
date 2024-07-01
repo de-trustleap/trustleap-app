@@ -3,7 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageOverviewGridTile extends StatelessWidget {
@@ -43,7 +45,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                             color: themeData.colorScheme.secondary, size: 24)),
                     const Spacer(),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Modular.to.navigate(RoutePaths.homePath +
+                          RoutePaths.landingPageCreatorPath, arguments: landingPage);
+                        },
                         iconSize: 24,
                         icon: Icon(Icons.edit,
                             color: themeData.colorScheme.secondary, size: 24)),

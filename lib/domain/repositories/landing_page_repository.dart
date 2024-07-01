@@ -16,4 +16,6 @@ abstract class LandingPageRepository {
 
   Future<Either<DatabaseFailure, Unit>> deleteLandingPage(
       String id, String parentUserID);
+
+  Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage, Uint8List imageData);
 }
