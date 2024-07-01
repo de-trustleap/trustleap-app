@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
@@ -46,8 +47,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     const Spacer(),
                     IconButton(
                         onPressed: () {
-                          Modular.to.navigate(RoutePaths.homePath +
-                          RoutePaths.landingPageCreatorPath, arguments: landingPage);
+                          Modular.to.navigate(
+                              RoutePaths.homePath +
+                                  RoutePaths.landingPageCreatorPath,
+                              arguments: landingPage);
                         },
                         iconSize: 24,
                         icon: Icon(Icons.edit,
@@ -81,6 +84,16 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis),
+              if (landingPage.createdAt != null) ...[
+                const SizedBox(height: 8),
+                Text(
+                    "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
+                    style: themeData.textTheme.bodySmall!.copyWith(
+                        fontSize: 12,
+                        color:
+                            themeData.colorScheme.surfaceTint.withOpacity(0.6)),
+                    maxLines: 1)
+              ]
             ],
           )),
     );
