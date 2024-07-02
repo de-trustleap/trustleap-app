@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
@@ -43,7 +44,12 @@ class LandingPageOverview extends StatelessWidget {
           });
     }
 
-    return BlocBuilder<LandingPageCubit, LandingPageState>(
+    return BlocConsumer<LandingPageCubit, LandingPageState>(
+      listener: (context, state) {
+        if(state is DeleteLandingPageSuccessState) {
+          CustomSnackBar.of(context).showCustomSnackBar("Landinpage erfolgriech gelöscht!");
+        }
+      },
       builder: (context, state) {
         return BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(
           builder: (context, observerState) {
@@ -63,6 +69,7 @@ class LandingPageOverview extends StatelessWidget {
                     });
               } else {
                 return CardContainer(
+                  maxWidth: 800,
                     child: Column(
                   children: [
                     Text("Landing Pages Übersicht",

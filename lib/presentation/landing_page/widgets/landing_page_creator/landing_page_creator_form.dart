@@ -84,13 +84,16 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
           text: textTextController.text.trim(),
           parentUserId: user!.id));
       } else {
-        // TODO: Edit landingpage Action
-        print("EDIT!!!");
+        widget.onEditTapped(LandingPage(
+          id: widget.landingPage?.id ?? UniqueID.fromUniqueString(""),
+          name: nameTextController.text.trim(),
+          text: textTextController.text.trim(),
+          parentUserId: user!.id));
       }
     } else {
       validationHasError = true;
       BlocProvider.of<LandingPageCubit>(context)
-          .createLangingPage(null, Uint8List(0));
+          .createLangingPage(null, Uint8List(0), false);
     }
   }
 
@@ -136,7 +139,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
               callback: () =>
                   {BlocProvider.of<LandingPageCubit>(context).getUser()});
         } else {
-          return CardContainer(
+          return CardContainer(            
               child: LayoutBuilder(builder: (context, constraints) {
             final maxWidth = constraints.maxWidth;
             if (state is GetUserLoadingState) {

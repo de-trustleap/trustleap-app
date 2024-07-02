@@ -28,6 +28,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
   late UniqueID id;
   Company? company;
   Uint8List? image;
+  bool imageHasChanged = false;
   bool showError = false;
   String errorMessage = "";
 
@@ -100,7 +101,10 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
                   id: id,
                   landingPage: widget.landingPage,
                   company: company,
-                  imageSelected: (tempImage) => image = tempImage),
+                  imageSelected: (tempImage) {
+                      image = tempImage;
+                      imageHasChanged = true;
+                    }),
               const SizedBox(height: 20),
               CenteredConstrainedWrapper(
                   child: LandingPageCreatorForm(
@@ -110,13 +114,13 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
                   onSubmit(
                       landingPage,
                       () => BlocProvider.of<LandingPageCubit>(context)
-                          .createLangingPage(landingPage, image!));
+                          .createLangingPage(landingPage, image!, imageHasChanged));
                 },
                 onEditTapped: (landingPage) {
                   onSubmit(
                       landingPage,
                       () => BlocProvider.of<LandingPageCubit>(context)
-                          .editLandingPage(landingPage, image!));
+                          .editLandingPage(landingPage, image!, imageHasChanged));
                 },
               )),
               if (showError && errorMessage != "") ...[

@@ -12,10 +12,10 @@ abstract class LandingPageRepository {
       List<String> ids);
 
   Future<Either<DatabaseFailure, Unit>> createLandingPage(
-      LandingPage landingPage, Uint8List imageData);
+      LandingPage landingPage, Uint8List imageData, bool imageHasChanged);
 
   Future<Either<DatabaseFailure, Unit>> deleteLandingPage(
       String id, String parentUserID);
 
-  Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage, Uint8List imageData);
+  Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage, Uint8List imageData, bool imageHasChanged);
 }

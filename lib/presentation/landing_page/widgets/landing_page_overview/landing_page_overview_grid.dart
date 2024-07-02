@@ -73,7 +73,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
 
 double calculateChildAspectRatio(ResponsiveBreakpointsData responsiveValue) {
   if (responsiveValue.isDesktop) {
-    return 0.69;
+    return 0.85;
   } else if (responsiveValue.isTablet) {
     return 0.67;
   } else {
