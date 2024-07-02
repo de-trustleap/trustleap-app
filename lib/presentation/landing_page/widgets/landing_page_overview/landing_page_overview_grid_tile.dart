@@ -84,10 +84,20 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis),
-              if (landingPage.createdAt != null) ...[
+              if (landingPage.createdAt != null &&
+                  landingPage.lastUpdated == null) ...[
                 const SizedBox(height: 8),
                 Text(
                     "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
+                    style: themeData.textTheme.bodySmall!.copyWith(
+                        fontSize: 12,
+                        color:
+                            themeData.colorScheme.surfaceTint.withOpacity(0.6)),
+                    maxLines: 1)
+              ] else if (landingPage.lastUpdated != null) ...[
+                const SizedBox(height: 8),
+                Text(
+                    "Zuletzt geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdated!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
                         color:

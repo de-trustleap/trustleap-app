@@ -10,35 +10,36 @@ class LandingPage extends Equatable {
   final UniqueID? parentUserId;
   final String? text;
   final DateTime? createdAt;
+  final DateTime? lastUpdated;
 
-  const LandingPage({
-    required this.id,
-    this.name,
-    this.downloadImageUrl,
-    this.thumbnailDownloadURL,
-    this.parentUserId,
-    this.text,
-    this.createdAt,
-  });
+  const LandingPage(
+      {required this.id,
+      this.name,
+      this.downloadImageUrl,
+      this.thumbnailDownloadURL,
+      this.parentUserId,
+      this.text,
+      this.createdAt,
+      this.lastUpdated});
 
-  LandingPage copyWith({
-    UniqueID? id,
-    String? name,
-    String? downloadImageUrl,
-    String? thumbnailDownloadURL,
-    UniqueID? parentUserId,
-    String? text,
-    DateTime? createdAt,
-  }) {
+  LandingPage copyWith(
+      {UniqueID? id,
+      String? name,
+      String? downloadImageUrl,
+      String? thumbnailDownloadURL,
+      UniqueID? parentUserId,
+      String? text,
+      DateTime? createdAt,
+      DateTime? lastUpdated}) {
     return LandingPage(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
-      thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-      parentUserId: parentUserId ?? this.parentUserId,
-      text: text ?? this.text,
-      createdAt: createdAt ?? this.createdAt,
-    );
+        id: id ?? this.id,
+        name: name ?? this.name,
+        downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
+        thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+        parentUserId: parentUserId ?? this.parentUserId,
+        text: text ?? this.text,
+        createdAt: createdAt ?? this.createdAt,
+        lastUpdated: lastUpdated ?? this.lastUpdated);
   }
 
   @override
