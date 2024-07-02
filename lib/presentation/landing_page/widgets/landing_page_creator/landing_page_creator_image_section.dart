@@ -40,7 +40,9 @@ class _LandingPageCreatorImageSectionState
 
   @override
   void didUpdateWidget(covariant LandingPageCreatorImageSection oldWidget) {
-    _downloadCompanyImageFromURL();
+    if(LandingPage == null) {
+      _downloadCompanyImageFromURL();
+    }
     super.didUpdateWidget(oldWidget);
   }
 
