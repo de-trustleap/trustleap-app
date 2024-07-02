@@ -70,7 +70,9 @@ class LandingPageModel extends Equatable {
         parentUserId:
             map['parentUserID'] != null ? map['parentUserID'] as String : null,
         text: map['text'] != null ? map['text'] as String : null,
-        lastUpdated: (map['lastUpdated'] as Timestamp).toDate(),
+        lastUpdated: map['lastUpdated'] != null
+            ? (map['lastUpdated'] as Timestamp).toDate()
+            : null,
         createdAt: map['createdAt'] as dynamic);
   }
 
