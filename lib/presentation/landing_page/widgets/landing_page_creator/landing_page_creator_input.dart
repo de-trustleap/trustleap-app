@@ -39,12 +39,25 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
     BlocProvider.of<LandingPageCubit>(context).getUser();
   }
 
-  void onSubmit(LandingPage? landingPage, Function completion) {
+  void onSubmitCreate(LandingPage? landingPage, Function completion) {
     if (image != null || company?.companyImageDownloadURL != null) {
       setState(() {
         showError = false;
       });
-      print("completion=====");
+      completion();
+    } else {
+      setState(() {
+        showError = true;
+        errorMessage = "Bitte ein Bild hochladen";
+      });
+    }
+  }
+
+  void onSubmitEdit(LandingPage? landingPage, Function completion) {
+    if (landingPage?.thumbnailDownloadURL != null) {
+      setState(() {
+        showError = false;
+      });
       completion();
     } else {
       setState(() {
@@ -112,19 +125,17 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
                 id: id,
                 landingPage: widget.landingPage,
                 onSaveTap: (landingPage) {
-                  onSubmit(
+                  onSubmitCreate(
                       landingPage,
                       () => BlocProvider.of<LandingPageCubit>(context)
                           .createLangingPage(landingPage, image!, imageHasChanged));
                 },
                 onEditTapped: (landingPage) {
-                  onSubmit(
+                  onSubmitEdit(
                       landingPage,
                       () {
-                        print("landingPage $landingPage");
-                        print("image $image");
                         BlocProvider.of<LandingPageCubit>(context)
-                          .editLandingPage(landingPage, image!, imageHasChanged);
+                          .editLandingPage(landingPage, image, imageHasChanged);
                           }
                   );
                 },

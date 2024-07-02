@@ -36,12 +36,13 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     }
   }
 
-  void editLandingPage(LandingPage? landingPage, Uint8List imageData, bool imageHasChanged) async {
-    print("editLandingPage");
+  void editLandingPage(LandingPage? landingPage, Uint8List? imageData, bool imageHasChanged) async {
     if (landingPage == null) {
       emit(LandingPageShowValidationState());
-    } else if (imageData.lengthInBytes > fileSizeLimit) {
-      emit(LandingPageImageExceedsFileSizeLimitFailureState());
+    } else if (imageData != null) {
+      if(imageData.lengthInBytes > fileSizeLimit) {
+        emit(LandingPageImageExceedsFileSizeLimitFailureState());
+      }
     } else {
       emit(EditLandingPageLoadingState());
       final failureOrSuccess =

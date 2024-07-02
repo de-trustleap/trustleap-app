@@ -76,25 +76,21 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
 
   void submit(LandingPageCreatorFormValidator validator) {
     if (formKey.currentState!.validate() && user != null) {
-      print("ON TAP HIER 2");
       validationHasError = false;
       if (widget.landingPage == null) {
-        print("ON TAP HIER 2.1");
               widget.onSaveTap(LandingPage(
           id: widget.id,
           name: nameTextController.text.trim(),
           text: textTextController.text.trim(),
           parentUserId: user!.id));
       } else {
-        print("ON TAP HIER 2.2");
-        widget.onEditTapped(LandingPage(
-          id: widget.landingPage?.id ?? UniqueID.fromUniqueString(""),
-          name: nameTextController.text.trim(),
-          text: textTextController.text.trim(),
-          parentUserId: user!.id));
+        widget.onEditTapped(
+          widget.landingPage!.copyWith(
+            name: nameTextController.text.trim(),
+            text: textTextController.text.trim())
+          );
       }
-    } else {
-      print("ON TAP HIER 3");
+    } else {      
       validationHasError = true;
       BlocProvider.of<LandingPageCubit>(context)
           .createLangingPage(null, Uint8List(0), false);
@@ -199,7 +195,6 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                     ? maxWidth - textFieldSpacing
                                     : maxWidth / 2 - textFieldSpacing,
                                 onTap: () {
-                                  print("ON TAP HIER: ");
                                   submit(validator);
                                 })
                           ],
