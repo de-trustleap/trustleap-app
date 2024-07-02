@@ -44,6 +44,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
       setState(() {
         showError = false;
       });
+      print("completion=====");
       completion();
     } else {
       setState(() {
@@ -119,8 +120,13 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
                 onEditTapped: (landingPage) {
                   onSubmit(
                       landingPage,
-                      () => BlocProvider.of<LandingPageCubit>(context)
-                          .editLandingPage(landingPage, image!, imageHasChanged));
+                      () {
+                        print("landingPage $landingPage");
+                        print("image $image");
+                        BlocProvider.of<LandingPageCubit>(context)
+                          .editLandingPage(landingPage, image!, imageHasChanged);
+                          }
+                  );
                 },
               )),
               if (showError && errorMessage != "") ...[

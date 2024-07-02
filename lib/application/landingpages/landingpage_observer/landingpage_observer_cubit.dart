@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
+import 'package:flutter/material.dart';
 
 part 'landingpage_observer_state.dart';
 
@@ -39,6 +40,7 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
         failureOrSuccess.fold((failure) {
           emit(LandingPageObserverFailure(failure: failure));
         }, (landingPages) {
+          PaintingBinding.instance.imageCache.clear();
           emit(LandingPageObserverSuccess(landingPages: landingPages));
         });
       } else {
