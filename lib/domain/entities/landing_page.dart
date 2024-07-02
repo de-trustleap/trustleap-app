@@ -10,7 +10,7 @@ class LandingPage extends Equatable {
   final UniqueID? parentUserId;
   final String? text;
   final DateTime? createdAt;
-  final DateTime? lastUpdated;
+  final DateTime? lastUpdatedAt;
 
   const LandingPage(
       {required this.id,
@@ -20,7 +20,7 @@ class LandingPage extends Equatable {
       this.parentUserId,
       this.text,
       this.createdAt,
-      this.lastUpdated});
+      this.lastUpdatedAt});
 
   LandingPage copyWith(
       {UniqueID? id,
@@ -30,7 +30,7 @@ class LandingPage extends Equatable {
       UniqueID? parentUserId,
       String? text,
       DateTime? createdAt,
-      DateTime? lastUpdated}) {
+      DateTime? lastUpdatedAt}) {
     return LandingPage(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -39,7 +39,7 @@ class LandingPage extends Equatable {
         parentUserId: parentUserId ?? this.parentUserId,
         text: text ?? this.text,
         createdAt: createdAt ?? this.createdAt,
-        lastUpdated: lastUpdated ?? this.lastUpdated);
+        lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt);
   }
 
   @override

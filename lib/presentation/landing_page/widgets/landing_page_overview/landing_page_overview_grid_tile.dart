@@ -85,7 +85,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis),
               if (landingPage.createdAt != null &&
-                  landingPage.lastUpdated == null) ...[
+                  landingPage.lastUpdatedAt == null) ...[
                 const SizedBox(height: 8),
                 Text(
                     "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
@@ -94,10 +94,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                         color:
                             themeData.colorScheme.surfaceTint.withOpacity(0.6)),
                     maxLines: 1)
-              ] else if (landingPage.lastUpdated != null) ...[
+              ] else if (landingPage.lastUpdatedAt != null) ...[
                 const SizedBox(height: 8),
                 Text(
-                    "Zuletzt geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdated!)}",
+                    "Geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
                         color:

@@ -11,7 +11,7 @@ class LandingPageModel extends Equatable {
   final String? thumbnailDownloadURL;
   final String? parentUserId;
   final String? text;
-  final DateTime? lastUpdated;
+  final DateTime? lastUpdatedAt;
   final dynamic createdAt;
 
   const LandingPageModel(
@@ -21,7 +21,7 @@ class LandingPageModel extends Equatable {
       this.thumbnailDownloadURL,
       this.parentUserId,
       this.text,
-      this.lastUpdated,
+      this.lastUpdatedAt,
       required this.createdAt});
 
   LandingPageModel copyWith(
@@ -31,7 +31,7 @@ class LandingPageModel extends Equatable {
       String? thumbnailDownloadURL,
       String? parentUserId,
       String? text,
-      DateTime? lastUpdated,
+      DateTime? lastUpdatedAt,
       dynamic createdAt}) {
     return LandingPageModel(
         id: id ?? this.id,
@@ -40,7 +40,7 @@ class LandingPageModel extends Equatable {
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         parentUserId: parentUserId ?? this.parentUserId,
         text: text ?? this.text,
-        lastUpdated: lastUpdated ?? this.lastUpdated,
+        lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
         createdAt: createdAt ?? this.createdAt);
   }
 
@@ -52,7 +52,7 @@ class LandingPageModel extends Equatable {
       'thumbnailDownloadURL': thumbnailDownloadURL,
       'parentUserID': parentUserId,
       'text': text,
-      'lastUpdated': lastUpdated,
+      'lastUpdatedAt': lastUpdatedAt,
       'createdAt': createdAt
     };
   }
@@ -70,8 +70,8 @@ class LandingPageModel extends Equatable {
         parentUserId:
             map['parentUserID'] != null ? map['parentUserID'] as String : null,
         text: map['text'] != null ? map['text'] as String : null,
-        lastUpdated: map['lastUpdated'] != null
-            ? (map['lastUpdated'] as Timestamp).toDate()
+        lastUpdatedAt: map['lastUpdatedAt'] != null
+            ? (map['lastUpdatedAt'] as Timestamp).toDate()
             : null,
         createdAt: map['createdAt'] as dynamic);
   }
@@ -88,7 +88,7 @@ class LandingPageModel extends Equatable {
         thumbnailDownloadURL: thumbnailDownloadURL,
         parentUserId: UniqueID.fromUniqueString(parentUserId ?? ""),
         text: text,
-        lastUpdated: lastUpdated,
+        lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate());
   }
 
@@ -100,7 +100,7 @@ class LandingPageModel extends Equatable {
         thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
         parentUserId: landingPage.parentUserId?.value ?? "",
         text: landingPage.text,
-        lastUpdated: landingPage.lastUpdated,
+        lastUpdatedAt: landingPage.lastUpdatedAt,
         createdAt: FieldValue.serverTimestamp());
   }
 
