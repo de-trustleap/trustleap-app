@@ -30,9 +30,9 @@ import 'package:finanzbegleiter/infrastructure/repositories/image_repository_imp
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/promoter_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
-import 'package:finanzbegleiter/presentation/core/modules/auth_guard.dart';
-import 'package:finanzbegleiter/presentation/core/modules/auth_module.dart';
-import 'package:finanzbegleiter/presentation/core/modules/home_module.dart';
+import 'package:finanzbegleiter/core/modules/auth_guard.dart';
+import 'package:finanzbegleiter/core/modules/auth_module.dart';
+import 'package:finanzbegleiter/core/modules/home_module.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
