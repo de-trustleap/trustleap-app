@@ -34,11 +34,11 @@ class LandingPageOverview extends StatelessWidget {
           builder: (_) {
             return CustomAlertDialog(
                 title:
-                    "Soll die ausgewählte Landingpage wirklich gelöscht werden?",
+                    localization.landingpage_delete_alert_title,
                 message:
-                    "Das Löschen der Landingpage kann nicht rückgängig gemacht werden.",
-                actionButtonTitle: "Löschen",
-                cancelButtonTitle: "Abbrechen",
+                    localization.landingpage_delete_alert_msg,
+                actionButtonTitle: localization.delete_buttontitle,
+                cancelButtonTitle: localization.cancel_buttontitle,
                 actionButtonAction: () => submitDeletion(id, parentUserID),
                 cancelButtonAction: () => Modular.to.pop());
           });
@@ -47,7 +47,7 @@ class LandingPageOverview extends StatelessWidget {
     return BlocConsumer<LandingPageCubit, LandingPageState>(
       listener: (context, state) {
         if(state is DeleteLandingPageSuccessState) {
-          CustomSnackBar.of(context).showCustomSnackBar("Landinpage erfolgriech gelöscht!");
+          CustomSnackBar.of(context).showCustomSnackBar(localization.landingpage_success_delete_snackbar_message);
         }
       },
       builder: (context, state) {
@@ -59,10 +59,10 @@ class LandingPageOverview extends StatelessWidget {
               if (observerState.landingPages.isEmpty) {
                 return EmptyPage(
                     icon: Icons.note_add,
-                    title: "Keine Landingpages gefunden",
+                    title: localization.landingpage_overview_empty_page_title,
                     subTitle:
-                        "Sie scheinen noch keine Landingpages erstellt zu haben. Erstellen Sie jetzt Ihre erste Landingpage um Ihre Dienstleistung zu präsentieren.",
-                    buttonTitle: "Landingpage erstellen",
+                        localization.landingpage_overview_empty_page_subtitle,
+                    buttonTitle: localization.landingpage_create_buttontitle,
                     onTap: () {
                       Modular.to.navigate(RoutePaths.homePath +
                           RoutePaths.landingPageCreatorPath);
@@ -72,7 +72,7 @@ class LandingPageOverview extends StatelessWidget {
                   maxWidth: 800,
                     child: Column(
                   children: [
-                    Text("Landing Pages Übersicht",
+                    Text(localization.landingpage_overview_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 24),

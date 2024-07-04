@@ -62,6 +62,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_login_buttontitle => 'Login';
 
   @override
+  String get delete_buttontitle => 'delete';
+
+  @override
+  String get cancel_buttontitle => 'cancel';
+
+  @override
+  String get changes_save_button_title => 'save changes';
+
+  @override
   String get login_password_forgotten_text => 'Do you have your ';
 
   @override
@@ -137,6 +146,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get menuitems_promoters => 'Promoter';
 
   @override
+  String get landingpage_overview_title => 'Landing pages overview';
+
+  @override
   String get menuitems_landingpage => 'Landingpage';
 
   @override
@@ -144,6 +156,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_overview_empty_page_title => 'No landingpage found';
+
+  @override
+  String get landingpage_overview_empty_page_subtitle => 'Seems like you dont have a landing page yet. Create your landing page now.';
+
+  @override
+  String get landingpage_overview_empty_page_button_title => 'Register Landing Page';
+
+  @override
+  String get landingpage_delete_alert_title => 'Do you really want to delete the selected landing page?';
+
+  @override
+  String get landingpage_delete_alert_msg => 'Deleting the landing page cannot be undone.';
+
+  @override
+  String get landingpage_success_delete_snackbar_message => 'Landing page successfully deleted!';
+
+  @override
+  String get landingpage_create_buttontitle => 'Create Landing Page';
+
+  @override
+  String get landingpage_validate_LandingPageName => 'Please enter a name!';
+
+  @override
+  String get landingpage_validate_LandingPageText => 'Please enter text!';
+
+  @override
+  String get landingpage_create_txt => 'Create Landing Page';
+
+  @override
+  String get placeholder_title => 'Title';
+
+  @override
+  String get placeholder_text => 'Text';
+
+  @override
+  String get error_msg_pleace_upload_picture => 'Please upload an image';
 
   @override
   String get menuitems_activities => 'Activities';

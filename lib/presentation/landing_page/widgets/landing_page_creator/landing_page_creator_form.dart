@@ -153,7 +153,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Landingpage erstellen!",
+                        Text(localization.landingpage_create_txt,
                             style: themeData.textTheme.headlineLarge!
                                 .copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 16),
@@ -164,7 +164,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                   maxWidth: maxWidth,
                                   controller: nameTextController,
                                   disabled: false,
-                                  placeholder: "Titel",
+                                  placeholder: localization.placeholder_title,
                                   onChanged: resetError,
                                   validator: validator.validateLandingPageName)
                             ]),
@@ -176,7 +176,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                   maxWidth: maxWidth,
                                   controller: textTextController,
                                   disabled: false,
-                                  placeholder: "Text",
+                                  placeholder: localization.placeholder_text,
                                   onChanged: resetError,
                                   validator: validator.validateLandingPageText,
                                   minLines: 2,
@@ -189,7 +189,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             PrimaryButton(
-                                title: widget.landingPage == null ? "LandingPage erstellen" : "Änderungen speichern",
+                                title: widget.landingPage == null ? localization.landingpage_create_buttontitle: localization.changes_save_button_title,
                                 disabled: buttonDisabled,
                                 width: responsiveValue.isMobile
                                     ? maxWidth - textFieldSpacing

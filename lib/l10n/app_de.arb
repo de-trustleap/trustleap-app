@@ -76,6 +76,18 @@
     "@login_login_buttontitle": {
         "description": "Titel des Login Buttons auf der Login Seite"
     },
+    "delete_buttontitle": "Löschen",
+    "@delete_buttontitle": {
+        "description": "Titel des Löschen Buttons"
+    },
+    "cancel_buttontitle": "Abbrechen",
+    "@cancel_buttontitle": {
+        "description": "Titel des Abbrechen Buttons"
+    },
+    "changes_save_button_title": "Änderungen speichern",
+    "@changes_save_button_title": {
+        "description": "Button zum Speichern der Änderungen."
+    },
     "login_password_forgotten_text": "Haben Sie ihr ",
     "@login_password_forgotten_text": {
         "description": "Passwort vergessen Text auf der Login Seite."
@@ -176,6 +188,10 @@
     "@menuitems_promoters": {
         "description": "Der Menüpunkt für die Promoter"
     },
+    "landingpage_overview_title": "Landing Pages Übersicht",
+    "@landingpage_overview_title": {
+        "description": "Der Titel der Landing Pages Übersicht"
+    },
     "menuitems_landingpage": "Landingpage",
     "@menuitems_landingpage": {
         "description": "Der Menüpunkt für die Landingpage"
@@ -195,6 +211,46 @@
     "landingpage_overview_empty_page_button_title": "Landingpage registrieren",
     "@landingpage_overview_empty_page_button_title": {
         "description": "Titel für dem Button auf der Seite die erscheint wenn man noch keine Landingpage hat"
+    },
+    "landingpage_delete_alert_title": "Soll die ausgewählte Landingpage wirklich gelöscht werden?",
+    "@landingpage_delete_alert_title": {
+        "description": "Titel zum Landingpage Löschdialog"
+    },
+    "landingpage_delete_alert_msg": "Das Löschen der Landingpage kann nicht rückgängig gemacht werden.",
+    "@landingpage_delete_alert_msg": {
+        "description": "Message zum Landingpage Löschdialog"
+    },
+    "landingpage_success_delete_snackbar_message": "Landinpage erfolgriech gelöscht!",
+    "@landingpage_success_delete_snackbar_message": {
+        "description": "Snackbar Nachricht wenn eine Landingpage erfolgreich gelöscht wurden"
+    },
+    "landingpage_create_buttontitle": "Landingpage erstellen",
+    "@landingpage_create_buttontitle": {
+        "description": "Titel des Landingpage erstellen Button"
+    },
+    "landingpage_validate_LandingPageName": "Bitte Namen eingeben!",
+    "@landingpage_validate_LandingPageName": {
+        "description": "Validierungsnachricht für LandingPageName"
+    },
+    "landingpage_validate_LandingPageText": "Bitte Text eingeben!",
+    "@landingpage_validate_LandingPageText": {
+        "description": "Validierungsnachricht für LandingPageText"
+    },
+    "landingpage_create_txt": "Landingpage erstellen",
+    "@landingpage_create_txt": {
+        "description": "Text Landingpage erstellen"
+    },
+    "placeholder_title": "Titel",
+    "@placeholder_title": {
+        "description": "Platzhalter textbox für Titel"
+    },
+    "placeholder_text": "Text",
+    "@placeholder_text": {
+        "description": "Platzhalter textbox für Text"
+    },
+    "error_msg_pleace_upload_picture": "Bitte ein Bild hochladen",
+    "@error_msg_pleace_upload_picture": {
+        "description": "Fehlernachricht wenn kein Bild hochgeladen wurde."
     },
     "menuitems_activities": "Aktivitäten",
     "@menuitems_activities": {

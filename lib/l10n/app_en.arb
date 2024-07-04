@@ -76,6 +76,18 @@
     "@login_login_buttontitle": {
         "description": "Title of the login button on the login page"
     },
+    "delete_buttontitle": "delete",
+    "@delete_buttontitle": {
+        "description": "Title of the delete buttons"
+    },
+    "cancel_buttontitle": "cancel",
+    "@cancel_buttontitle": {
+        "description": "Titel of the cancel buttons"
+    },
+    "changes_save_button_title": "save changes",
+    "@changes_save_button_title": {
+        "description": "Button for save changes"
+    },
     "login_password_forgotten_text": "Do you have your ",
     "@login_password_forgotten_text": {
         "description": "password forgotten text on login page."
@@ -176,6 +188,10 @@
     "@menuitems_promoters": {
         "description": "the menu entry for the promoters"
     },
+    "landingpage_overview_title": "Landing pages overview",
+    "@landingpage_overview_title": {
+        "description": "The title for the landing pages overview"
+    },
     "menuitems_landingpage": "Landingpage",
     "@menuitems_landingpage": {
         "description": "the menu entry for the landingpage"
@@ -187,6 +203,54 @@
     "landingpage_overview_empty_page_title": "No landingpage found",
     "@landingpage_overview_empty_page_title": {
         "description": "Title for the page that appears when there are no landingpage."
+    },
+    "landingpage_overview_empty_page_subtitle": "Seems like you dont have a landing page yet. Create your landing page now.",
+    "@landingpage_overview_empty_page_subtitle": {
+        "description": "Text for the page that appears when you don't have a landing page yet"
+    },
+    "landingpage_overview_empty_page_button_title": "Register Landing Page",
+    "@landingpage_overview_empty_page_button_title": {
+        "description": "Title for the button on the page that appears when you don't have a landing page yet"
+    },
+    "landingpage_delete_alert_title": "Do you really want to delete the selected landing page?",
+    "@landingpage_delete_alert_title": {
+        "description": "Title for the Landing Page Deletion Dialog"
+    },
+    "landingpage_delete_alert_msg": "Deleting the landing page cannot be undone.",
+    "@landingpage_delete_alert_msg": {
+        "description": "Message for the Landing Page Deletion Dialog"
+    },
+    "landingpage_success_delete_snackbar_message": "Landing page successfully deleted!",
+    "@landingpage_success_delete_snackbar_message": {
+        "description": "Snackbar message when a landing page has been successfully deleted"
+    },
+    "landingpage_create_buttontitle": "Create Landing Page",
+    "@landingpage_create_buttontitle": {
+        "description": "Title of the Create Landing Page Button"
+    },
+    "landingpage_validate_LandingPageName": "Please enter a name!",
+    "@landingpage_validate_LandingPageName": {
+        "description": "Validation message for Landing Page Name"
+    },
+    "landingpage_validate_LandingPageText": "Please enter text!",
+    "@landingpage_validate_LandingPageText": {
+        "description": "Validation message for Landing Page Text"
+    },
+    "landingpage_create_txt": "Create Landing Page",
+    "@landingpage_create_txt": {
+        "description": "Text for Creating Landing Page"
+    },
+    "placeholder_title": "Title",
+    "@placeholder_title": {
+        "description": "Platzhalter textbox for Title"
+    },
+    "placeholder_text": "Text",
+    "@placeholder_text": {
+        "description": "Platzhalter textbox for Text"
+    },
+    "error_msg_pleace_upload_picture": "Please upload an image",
+    "@error_msg_pleace_upload_picture": {
+        "description": "Error message when no image has been uploaded."
     },
     "menuitems_activities": "Activities",
     "@menuitems_activities": {

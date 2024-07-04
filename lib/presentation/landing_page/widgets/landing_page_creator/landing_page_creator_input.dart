@@ -16,7 +16,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorInput extends StatefulWidget {
-  final LandingPage? landingPage;
+  final LandingPage? landingPage;  
   const LandingPageCreatorInput({super.key, this.landingPage});
 
   @override
@@ -39,40 +39,39 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
     BlocProvider.of<LandingPageCubit>(context).getUser();
   }
 
-  void onSubmitCreate(LandingPage? landingPage, Function completion) {
-    if (image != null || company?.companyImageDownloadURL != null) {
-      setState(() {
-        showError = false;
-      });
-      completion();
-    } else {
-      setState(() {
-        showError = true;
-        errorMessage = "Bitte ein Bild hochladen";
-      });
-    }
-  }
-
-  void onSubmitEdit(LandingPage? landingPage, Function completion) {
-    if (landingPage?.thumbnailDownloadURL != null) {
-      setState(() {
-        showError = false;
-      });
-      completion();
-    } else {
-      setState(() {
-        showError = true;
-        errorMessage = "Bitte ein Bild hochladen";
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
 
+    void onSubmitCreate(LandingPage? landingPage, Function completion) {
+      if (image != null || company?.companyImageDownloadURL != null) {
+        setState(() {
+          showError = false;
+        });
+        completion();
+      } else {
+        setState(() {
+          showError = true;
+          errorMessage = localization.error_msg_pleace_upload_picture;
+        });
+      }
+    }
+
+  void onSubmitEdit(LandingPage? landingPage, Function completion) {
+      if (landingPage?.thumbnailDownloadURL != null) {
+        setState(() {
+          showError = false;
+        });
+        completion();
+      } else {
+        setState(() {
+          showError = true;
+          errorMessage = localization.error_msg_pleace_upload_picture;
+        });
+      }
+    }
     return MultiBlocListener(
         listeners: [
           BlocListener<LandingPageCubit, LandingPageState>(

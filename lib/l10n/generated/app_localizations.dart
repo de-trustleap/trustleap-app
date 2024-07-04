@@ -207,6 +207,24 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login_login_buttontitle;
 
+  /// Title of the delete buttons
+  ///
+  /// In en, this message translates to:
+  /// **'delete'**
+  String get delete_buttontitle;
+
+  /// Titel of the cancel buttons
+  ///
+  /// In en, this message translates to:
+  /// **'cancel'**
+  String get cancel_buttontitle;
+
+  /// Button for save changes
+  ///
+  /// In en, this message translates to:
+  /// **'save changes'**
+  String get changes_save_button_title;
+
   /// password forgotten text on login page.
   ///
   /// In en, this message translates to:
@@ -357,6 +375,12 @@ abstract class AppLocalizations {
   /// **'Promoter'**
   String get menuitems_promoters;
 
+  /// The title for the landing pages overview
+  ///
+  /// In en, this message translates to:
+  /// **'Landing pages overview'**
+  String get landingpage_overview_title;
+
   /// the menu entry for the landingpage
   ///
   /// In en, this message translates to:
@@ -374,6 +398,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No landingpage found'**
   String get landingpage_overview_empty_page_title;
+
+  /// Text for the page that appears when you don't have a landing page yet
+  ///
+  /// In en, this message translates to:
+  /// **'Seems like you dont have a landing page yet. Create your landing page now.'**
+  String get landingpage_overview_empty_page_subtitle;
+
+  /// Title for the button on the page that appears when you don't have a landing page yet
+  ///
+  /// In en, this message translates to:
+  /// **'Register Landing Page'**
+  String get landingpage_overview_empty_page_button_title;
+
+  /// Title for the Landing Page Deletion Dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to delete the selected landing page?'**
+  String get landingpage_delete_alert_title;
+
+  /// Message for the Landing Page Deletion Dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting the landing page cannot be undone.'**
+  String get landingpage_delete_alert_msg;
+
+  /// Snackbar message when a landing page has been successfully deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Landing page successfully deleted!'**
+  String get landingpage_success_delete_snackbar_message;
+
+  /// Title of the Create Landing Page Button
+  ///
+  /// In en, this message translates to:
+  /// **'Create Landing Page'**
+  String get landingpage_create_buttontitle;
+
+  /// Validation message for Landing Page Name
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a name!'**
+  String get landingpage_validate_LandingPageName;
+
+  /// Validation message for Landing Page Text
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter text!'**
+  String get landingpage_validate_LandingPageText;
+
+  /// Text for Creating Landing Page
+  ///
+  /// In en, this message translates to:
+  /// **'Create Landing Page'**
+  String get landingpage_create_txt;
+
+  /// Platzhalter textbox for Title
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get placeholder_title;
+
+  /// Platzhalter textbox for Text
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get placeholder_text;
+
+  /// Error message when no image has been uploaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Please upload an image'**
+  String get error_msg_pleace_upload_picture;
 
   /// the menu entry for the activities
   ///

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -14,6 +15,7 @@ class AddNewLandingPageGridTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
 
     return InkWell(
       onTap: () => onPressed(),
@@ -34,7 +36,7 @@ class AddNewLandingPageGridTile extends StatelessWidget {
                       size: responsiveValue.isMobile ? 30 : 50,
                       color: themeData.colorScheme.secondary),
                   const SizedBox(height: 16),
-                  Text("Landingpage erstellen",
+                  Text(localization.landingpage_create_txt,
                       style: themeData.textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.bold,
                           color: themeData.colorScheme.secondary),

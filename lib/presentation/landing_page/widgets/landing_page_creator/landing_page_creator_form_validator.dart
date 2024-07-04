@@ -10,7 +10,7 @@ class LandingPageCreatorFormValidator {
 
   String? validateLandingPageName(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte Namen eingeben!";
+      return localization.landingpage_validate_LandingPageName;
     } else {
       return null;
     }
@@ -18,7 +18,7 @@ class LandingPageCreatorFormValidator {
 
   String? validateLandingPageText(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte Text eingeben!";
+      return localization.landingpage_validate_LandingPageText;
     } else {
       return null;
     }
