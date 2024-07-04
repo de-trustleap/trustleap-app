@@ -25,7 +25,9 @@ class HomeModule extends Module {
               child: (_) => const PromotersPage()),
           ChildRoute(RoutePaths.landingPagePath,
               child: (_) => LandingPageView(
-                  createdNewPage: r.args.queryParams["createdNewPage"])),
+                    createdNewPage: r.args.queryParams["createdNewPage"],
+                    editedPage: r.args.queryParams["editedPage"],
+                  )),
           ChildRoute(RoutePaths.landingPageCreatorPath,
               child: (_) => LandingPageCreator(landingPage: r.args.data)),
           ChildRoute(RoutePaths.activitiesPath,

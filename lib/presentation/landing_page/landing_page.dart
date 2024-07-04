@@ -11,11 +11,9 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageView extends StatefulWidget {
   final String? createdNewPage;
+  final String? editedPage;
 
-  const LandingPageView({
-    super.key,
-    this.createdNewPage,
-  });
+  const LandingPageView({super.key, this.createdNewPage, this.editedPage});
 
   @override
   State<LandingPageView> createState() => _LandingPageViewState();
@@ -28,6 +26,11 @@ class _LandingPageViewState extends State<LandingPageView> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         CustomSnackBar.of(context)
             .showCustomSnackBar("Neue Landingpage erfolgreich erstellt!");
+      });
+    } else if (widget.editedPage == "true") {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        CustomSnackBar.of(context)
+            .showCustomSnackBar("Landingpage erfolgreich geändert!");
       });
     }
     super.initState();
