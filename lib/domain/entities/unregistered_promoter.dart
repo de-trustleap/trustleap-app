@@ -10,7 +10,7 @@ class UnregisteredPromoter extends Equatable {
   final String? lastName;
   final String? birthDate;
   final String? email;
-  final String? additionalInfo;
+  final List<String>? landingPageIDs;
   final UniqueID? parentUserID;
   final UniqueID? code;
   final DateTime expiresAt;
@@ -22,7 +22,7 @@ class UnregisteredPromoter extends Equatable {
       this.lastName,
       this.birthDate,
       this.email,
-      this.additionalInfo,
+      this.landingPageIDs,
       this.parentUserID,
       this.code,
       DateTime? expiresAt})
@@ -36,8 +36,17 @@ class UnregisteredPromoter extends Equatable {
                 DateTime.now().second);
 
   @override
-  List<Object?> get props =>
-      [id, gender, firstName, lastName, birthDate, email, parentUserID, code, additionalInfo];
+  List<Object?> get props => [
+        id,
+        gender,
+        firstName,
+        lastName,
+        birthDate,
+        email,
+        parentUserID,
+        code,
+        landingPageIDs
+      ];
 
   UnregisteredPromoter copyWith({
     UniqueID? id,
@@ -46,7 +55,7 @@ class UnregisteredPromoter extends Equatable {
     String? lastName,
     String? birthDate,
     String? email,
-    String? additionalInfo,
+    List<String>? landingPageIDs,
     UniqueID? parentUserID,
     UniqueID? code,
   }) {
@@ -57,7 +66,7 @@ class UnregisteredPromoter extends Equatable {
         lastName: lastName ?? this.lastName,
         birthDate: birthDate ?? this.birthDate,
         email: email ?? this.email,
-        additionalInfo: additionalInfo ?? this.additionalInfo,
+        landingPageIDs: landingPageIDs ?? this.landingPageIDs,
         parentUserID: parentUserID ?? this.parentUserID,
         code: code ?? this.code,
         expiresAt: expiresAt);

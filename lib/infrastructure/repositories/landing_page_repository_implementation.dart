@@ -81,7 +81,9 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> createLandingPage(
-      LandingPage landingPage, Uint8List imageData, bool imageHasChanged) async {
+      LandingPage landingPage,
+      Uint8List imageData,
+      bool imageHasChanged) async {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("createLandingPage");
     try {
@@ -111,10 +113,11 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
-  
+
   @override
-  Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage, Uint8List? imageData, bool imageHasChanged) async {
-    HttpsCallable callable = firebaseFunctions.httpsCallable("editLandingPage"); // TODO: Implement editLandingPage in Backend!
+  Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage,
+      Uint8List? imageData, bool imageHasChanged) async {
+    HttpsCallable callable = firebaseFunctions.httpsCallable("editLandingPage");
     try {
       await callable.call({
         "id": landingPage.id.value,
@@ -126,7 +129,6 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
-      print("Error: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

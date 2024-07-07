@@ -104,7 +104,9 @@ class DesktopAppTheme {
       segmentedButtonTheme: AppTheme.lightSegmentedButtonTheme,
       searchBarTheme: _lightSearchBarTheme,
       radioTheme: AppTheme.lightRadioTheme,
-      chipTheme: _lightChipTheme);
+      chipTheme: _lightChipTheme,
+      popupMenuTheme: AppTheme.lightPopupMenuTheme,
+      checkboxTheme: AppTheme.lightCheckboxTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -126,5 +128,7 @@ class DesktopAppTheme {
       segmentedButtonTheme: AppTheme.darkSegmentedButtonTheme,
       searchBarTheme: _darkSearchBarTheme,
       radioTheme: AppTheme.darkRadioTheme,
-      chipTheme: _darkChipTheme);
+      chipTheme: _darkChipTheme,
+      popupMenuTheme: AppTheme.darkPopupMenuTheme,
+      checkboxTheme: AppTheme.darkCheckboxTheme);
 }

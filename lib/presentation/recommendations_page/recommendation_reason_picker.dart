@@ -1,22 +1,48 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class RecommendationReaseonPicker extends StatelessWidget {
+class RecommendationReaseonPicker extends StatefulWidget {
   final double width;
   final String? validate;
-  final RecommendationReason? initialValue;
+  final List<String> reasons;
+  final String initialValue;
   final Function onSelected;
 
   const RecommendationReaseonPicker({
     super.key,
     required this.width,
     required this.validate,
-    this.initialValue,
+    required this.reasons,
+    required this.initialValue,
     required this.onSelected,
   });
+
+  @override
+  State<RecommendationReaseonPicker> createState() =>
+      _RecommendationReaseonPickerState();
+}
+
+class _RecommendationReaseonPickerState
+    extends State<RecommendationReaseonPicker> {
+  List<DropdownMenuEntry<String>> dropdownItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    dropdownItems = createDropdownEntries(widget.reasons);
+  }
+
+  List<DropdownMenuEntry<String>> createDropdownEntries(List<String> reasons) {
+    List<DropdownMenuEntry<String>> entries = [];
+    for (var reason in reasons) {
+      var entry = DropdownMenuEntry<String>(value: reason, label: reason);
+      entries.add(entry);
+    }
+    return entries;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +50,9 @@ class RecommendationReaseonPicker extends StatelessWidget {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
 
-    return FormField(builder: (FormFieldState<RecommendationReason> state) {
+    return FormField(builder: (FormFieldState<String> state) {
       return SizedBox(
-        width: width,
+        width: widget.width,
         child: InputDecorator(
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -34,35 +60,21 @@ class RecommendationReaseonPicker extends StatelessWidget {
             enabledBorder: InputBorder.none,
             errorBorder: InputBorder.none,
             disabledBorder: InputBorder.none,
-            errorText: validate,
+            errorText: widget.validate,
           ),
-          child: DropdownMenu<RecommendationReason>(
-              width: width,
+          child: DropdownMenu<String>(
+              width: widget.width,
               label: Text(
                   localization.recommendations_choose_reason_placeholder,
                   style: responsiveValue.isMobile
                       ? themeData.textTheme.bodySmall
                       : themeData.textTheme.bodyMedium),
-              initialSelection: initialValue ?? RecommendationReason.none,
+              initialSelection: widget.initialValue,
               enableSearch: false,
               requestFocusOnTap: false,
-              dropdownMenuEntries: [
-                DropdownMenuEntry(
-                    value: RecommendationReason.none,
-                    label:
-                        localization.recommendations_choose_reason_not_chosen),
-                const DropdownMenuEntry(
-                    value: RecommendationReason.finance,
-                    label: "Finanzdienstleistung"),
-                const DropdownMenuEntry(
-                    value: RecommendationReason.insurance,
-                    label: "Versicherungsdienstleistung"),
-                const DropdownMenuEntry(
-                    value: RecommendationReason.car,
-                    label: "KFZ-Dienstleistung")
-              ],
+              dropdownMenuEntries: dropdownItems,
               onSelected: (reason) {
-                onSelected(reason);
+                widget.onSelected(reason);
               }),
         ),
       );
