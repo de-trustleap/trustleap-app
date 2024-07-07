@@ -7,7 +7,7 @@ class LandingPage extends Equatable {
   final String? name;
   final String? downloadImageUrl;
   final String? thumbnailDownloadURL;
-  final UniqueID? parentUserId;
+  final UniqueID? ownerID;
   final String? text;
   final DateTime? createdAt;
   final DateTime? lastUpdatedAt;
@@ -17,7 +17,7 @@ class LandingPage extends Equatable {
       this.name,
       this.downloadImageUrl,
       this.thumbnailDownloadURL,
-      this.parentUserId,
+      this.ownerID,
       this.text,
       this.createdAt,
       this.lastUpdatedAt});
@@ -27,7 +27,7 @@ class LandingPage extends Equatable {
       String? name,
       String? downloadImageUrl,
       String? thumbnailDownloadURL,
-      UniqueID? parentUserId,
+      UniqueID? ownerID,
       String? text,
       DateTime? createdAt,
       DateTime? lastUpdatedAt}) {
@@ -36,7 +36,7 @@ class LandingPage extends Equatable {
         name: name ?? this.name,
         downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-        parentUserId: parentUserId ?? this.parentUserId,
+        ownerID: ownerID ?? this.ownerID,
         text: text ?? this.text,
         createdAt: createdAt ?? this.createdAt,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt);
@@ -44,5 +44,5 @@ class LandingPage extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, downloadImageUrl, thumbnailDownloadURL, parentUserId, text];
+      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text];
 }

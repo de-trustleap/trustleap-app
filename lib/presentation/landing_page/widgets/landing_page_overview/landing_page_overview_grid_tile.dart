@@ -57,30 +57,33 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                    Icon(Icons.delete,
-                                        color: themeData.colorScheme.secondary,
-                                        size: 24),
-                                    const SizedBox(width: 8),
-                                    const Text("Löschen")
-                                  ])),
+                                        Icon(Icons.delete,
+                                            color:
+                                                themeData.colorScheme.secondary,
+                                            size: 24),
+                                        const SizedBox(width: 8),
+                                        const Text("Löschen")
+                                      ])),
                               PopupMenuItem(
                                   value: "copy",
                                   child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                    Icon(Icons.copy,
-                                        color: themeData.colorScheme.secondary,
-                                        size: 24),
-                                    const SizedBox(width: 8),
-                                    const Text("Duplizieren")
-                                  ]))
-                            ], onSelected: (String newValue) {
-                              if (newValue == "delete") {
-                                deletePressed(landingPage.id.value,
-                            landingPage.parentUserId?.value ?? ""); // TODO: Menu needs to be styled in themes
-                              }
-                            })
+                                        Icon(Icons.copy,
+                                            color:
+                                                themeData.colorScheme.secondary,
+                                            size: 24),
+                                        const SizedBox(width: 8),
+                                        const Text("Duplizieren")
+                                      ]))
+                            ],
+                        onSelected: (String newValue) {
+                          if (newValue == "delete") {
+                            deletePressed(landingPage.id.value,
+                                landingPage.ownerID?.value ?? "");
+                          }
+                        })
                   ]),
               CachedNetworkImage(
                 width: responsiveValue.largerThan(MOBILE) ? 120 : 140,

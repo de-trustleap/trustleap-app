@@ -9,7 +9,7 @@ class LandingPageModel extends Equatable {
   final String? name;
   final String? downloadImageUrl;
   final String? thumbnailDownloadURL;
-  final String? parentUserId;
+  final String? ownerID;
   final String? text;
   final DateTime? lastUpdatedAt;
   final dynamic createdAt;
@@ -19,7 +19,7 @@ class LandingPageModel extends Equatable {
       this.name,
       this.downloadImageUrl,
       this.thumbnailDownloadURL,
-      this.parentUserId,
+      this.ownerID,
       this.text,
       this.lastUpdatedAt,
       required this.createdAt});
@@ -29,7 +29,7 @@ class LandingPageModel extends Equatable {
       String? name,
       String? downloadImageUrl,
       String? thumbnailDownloadURL,
-      String? parentUserId,
+      String? ownerID,
       String? text,
       DateTime? lastUpdatedAt,
       dynamic createdAt}) {
@@ -38,7 +38,7 @@ class LandingPageModel extends Equatable {
         name: name ?? this.name,
         downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-        parentUserId: parentUserId ?? this.parentUserId,
+        ownerID: ownerID ?? this.ownerID,
         text: text ?? this.text,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
         createdAt: createdAt ?? this.createdAt);
@@ -50,7 +50,7 @@ class LandingPageModel extends Equatable {
       'name': name,
       'downloadImageUrl': downloadImageUrl,
       'thumbnailDownloadURL': thumbnailDownloadURL,
-      'parentUserID': parentUserId,
+      'ownerID': ownerID,
       'text': text,
       'lastUpdatedAt': lastUpdatedAt,
       'createdAt': createdAt
@@ -67,8 +67,7 @@ class LandingPageModel extends Equatable {
         thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
             ? map['thumbnailDownloadURL'] as String
             : null,
-        parentUserId:
-            map['parentUserID'] != null ? map['parentUserID'] as String : null,
+        ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
         text: map['text'] != null ? map['text'] as String : null,
         lastUpdatedAt: map['lastUpdatedAt'] != null
             ? (map['lastUpdatedAt'] as Timestamp).toDate()
@@ -86,7 +85,7 @@ class LandingPageModel extends Equatable {
         name: name,
         downloadImageUrl: downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL,
-        parentUserId: UniqueID.fromUniqueString(parentUserId ?? ""),
+        ownerID: UniqueID.fromUniqueString(ownerID ?? ""),
         text: text,
         lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate());
@@ -98,7 +97,7 @@ class LandingPageModel extends Equatable {
         name: landingPage.name,
         downloadImageUrl: landingPage.downloadImageUrl,
         thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
-        parentUserId: landingPage.parentUserId?.value ?? "",
+        ownerID: landingPage.ownerID?.value ?? "",
         text: landingPage.text,
         lastUpdatedAt: landingPage.lastUpdatedAt,
         createdAt: FieldValue.serverTimestamp());
@@ -106,5 +105,5 @@ class LandingPageModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, downloadImageUrl, thumbnailDownloadURL, parentUserId, text];
+      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text];
 }

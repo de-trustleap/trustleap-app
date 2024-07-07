@@ -91,7 +91,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "id": landingPage.id.value,
         "title": landingPage.name,
         "text": landingPage.text,
-        "parentUserID": landingPage.parentUserId?.value,
+        "ownerID": landingPage.ownerID?.value,
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged
       });
@@ -103,11 +103,11 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> deleteLandingPage(
-      String id, String parentUserID) async {
+      String id, String ownerID) async {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("deleteLandingPage");
     try {
-      await callable.call({"id": id, "parentUserID": parentUserID});
+      await callable.call({"id": id, "ownerID": ownerID});
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
@@ -123,7 +123,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "id": landingPage.id.value,
         "title": landingPage.name,
         "text": landingPage.text,
-        "parentUserID": landingPage.parentUserId?.value,
+        "ownerID": landingPage.ownerID?.value,
         "imageData": imageData != null ? base64Encode(imageData) : null,
         "imageHasChanged": imageHasChanged
       });
