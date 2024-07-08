@@ -11,6 +11,7 @@ class LandingPageModel extends Equatable {
   final String? thumbnailDownloadURL;
   final String? ownerID;
   final String? text;
+  final List<String>? associatedUsersIDs;
   final DateTime? lastUpdatedAt;
   final dynamic createdAt;
 
@@ -21,6 +22,7 @@ class LandingPageModel extends Equatable {
       this.thumbnailDownloadURL,
       this.ownerID,
       this.text,
+      this.associatedUsersIDs,
       this.lastUpdatedAt,
       required this.createdAt});
 
@@ -31,6 +33,7 @@ class LandingPageModel extends Equatable {
       String? thumbnailDownloadURL,
       String? ownerID,
       String? text,
+      List<String>? associatedUsersIDs,
       DateTime? lastUpdatedAt,
       dynamic createdAt}) {
     return LandingPageModel(
@@ -40,6 +43,7 @@ class LandingPageModel extends Equatable {
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         ownerID: ownerID ?? this.ownerID,
         text: text ?? this.text,
+        associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
         createdAt: createdAt ?? this.createdAt);
   }
@@ -52,6 +56,7 @@ class LandingPageModel extends Equatable {
       'thumbnailDownloadURL': thumbnailDownloadURL,
       'ownerID': ownerID,
       'text': text,
+      'associatedUsersIDs': associatedUsersIDs,
       'lastUpdatedAt': lastUpdatedAt,
       'createdAt': createdAt
     };
@@ -69,6 +74,9 @@ class LandingPageModel extends Equatable {
             : null,
         ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
         text: map['text'] != null ? map['text'] as String : null,
+        associatedUsersIDs: map['associatedUsersIDs'] != null
+            ? List<String>.from(map['associatedUsersIDs'])
+            : null,
         lastUpdatedAt: map['lastUpdatedAt'] != null
             ? (map['lastUpdatedAt'] as Timestamp).toDate()
             : null,
@@ -87,6 +95,7 @@ class LandingPageModel extends Equatable {
         thumbnailDownloadURL: thumbnailDownloadURL,
         ownerID: UniqueID.fromUniqueString(ownerID ?? ""),
         text: text,
+        associatedUsersIDs: associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate());
   }
@@ -99,6 +108,7 @@ class LandingPageModel extends Equatable {
         thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
         ownerID: landingPage.ownerID?.value ?? "",
         text: landingPage.text,
+        associatedUsersIDs: landingPage.associatedUsersIDs,
         lastUpdatedAt: landingPage.lastUpdatedAt,
         createdAt: FieldValue.serverTimestamp());
   }
