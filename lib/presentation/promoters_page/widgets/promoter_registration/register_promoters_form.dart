@@ -4,19 +4,31 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoter_no_landingpage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+
+class LandingPageCheckboxItem {
+  LandingPage landingPage;
+  bool isSelected;
+  LandingPageCheckboxItem({
+    required this.landingPage,
+    required this.isSelected,
+  });
+}
 
 class RegisterPromotersForm extends StatefulWidget {
   final Function changesSaved;
@@ -35,9 +47,10 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   final lastNameTextController = TextEditingController();
   final birthDateTextController = TextEditingController();
   final emailTextController = TextEditingController();
-  final additionalInfoTextController = TextEditingController();
+
   Gender? selectedGender;
-  User? currentUser;
+  CustomUser? currentUser;
+  List<LandingPageCheckboxItem> landingPageItems = [];
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -59,7 +72,6 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     lastNameTextController.dispose();
     birthDateTextController.dispose();
     emailTextController.dispose();
-    additionalInfoTextController.dispose();
 
     super.dispose();
   }
@@ -93,8 +105,9 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                 lastName: lastNameTextController.text.trim(),
                 birthDate: birthDateTextController.text.trim(),
                 email: emailTextController.text.trim(),
-                additionalInfo: additionalInfoTextController.text.trim(),
-                parentUserID: UniqueID.fromUniqueString(currentUser?.uid ?? ""),
+                landingPageIDs: getSelectedLandingPagesIDs(),
+                parentUserID:
+                    UniqueID.fromUniqueString(currentUser?.id.value ?? ""),
                 code: UniqueID()));
       }
     } else {
@@ -104,6 +117,37 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
       });
       BlocProvider.of<PromoterCubit>(context).registerPromoter(null);
     }
+  }
+
+  List<String> getSelectedLandingPagesIDs() {
+    return landingPageItems
+        .map((e) {
+          if (e.isSelected) {
+            return e.landingPage.id.value;
+          }
+        })
+        .whereType<String>()
+        .toList();
+  }
+
+  List<Widget> createCheckboxes() {
+    List<Widget> checkboxes = [];
+    landingPageItems.asMap().forEach((index, _) {
+      checkboxes.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+        Checkbox(
+            value: landingPageItems[index].isSelected,
+            onChanged: ((value) {
+              if (value != null) {
+                setState(() {
+                  landingPageItems[index].isSelected = value;
+                });
+              }
+            })),
+        const SizedBox(width: 8),
+        Text(landingPageItems[index].landingPage.name ?? "")
+      ]));
+    });
+    return checkboxes;
   }
 
   @override
@@ -129,16 +173,44 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
           setButtonToDisabled(false);
         } else if (state is PromoterGetCurrentUserSuccessState) {
           currentUser = state.user;
+          BlocProvider.of<PromoterCubit>(context)
+              .getPromotingLandingPages(currentUser?.landingPageIDs ?? []);
         } else if (state is PromoterRegisterLoadingState) {
           setButtonToDisabled(true);
+        } else if (state is PromoterGetLandingPagesSuccessState) {
+          setState(() {
+            for (var landingPage in state.landingPages) {
+              landingPageItems.add(LandingPageCheckboxItem(
+                  landingPage: landingPage, isSelected: false));
+            }
+          });
         }
       },
       builder: (context, state) {
         return CardContainer(
             child: LayoutBuilder(builder: (context, constraints) {
           final maxWidth = constraints.maxWidth;
-          if (state is PromoterGetCurrentUserLoadingState) {
+          if (state is PromoterLoadingState) {
             return const LoadingIndicator();
+          } else if (state is PromoterGetCurrentUserFailureState) {
+            return ErrorView(
+                title: localization.landingpage_overview_error_view_title,
+                message: DatabaseFailureMapper.mapFailureMessage(
+                    state.failure, localization),
+                callback: () =>
+                    {BlocProvider.of<PromoterCubit>(context).getCurrentUser()});
+          } else if (state is PromoterGetLandingPagesFailureState) {
+            return ErrorView(
+                title: localization.landingpage_overview_error_view_title,
+                message: DatabaseFailureMapper.mapFailureMessage(
+                    state.failure, localization),
+                callback: () => {
+                      BlocProvider.of<PromoterCubit>(context)
+                          .getPromotingLandingPages(
+                              currentUser?.landingPageIDs ?? [])
+                    });
+          } else if (state is PromoterNoLandingPagesState) {
+            return const RegisterPromoterNoLandingPageView();
           } else {
             return Form(
                 key: formKey,
@@ -238,32 +310,18 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FormTextfield(
-                                    maxWidth: maxWidth,
-                                    controller: emailTextController,
-                                    disabled: false,
-                                    placeholder: localization.register_promoter_email,
-                                    onChanged: resetError,
-                                    onFieldSubmitted: (_) => submit(validator),
-                                    validator: validator.validateEmail,
-                                    keyboardType: TextInputType.emailAddress)
+                                maxWidth: maxWidth,
+                                controller: emailTextController,
+                                disabled: false,
+                                placeholder:
+                                    localization.register_promoter_email,
+                                onChanged: resetError,
+                                onFieldSubmitted: (_) => submit(validator),
+                                validator: validator.validateEmail,
+                                keyboardType: TextInputType.emailAddress)
                           ]),
                       const SizedBox(height: textFieldSpacing),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                                                        FormTextfield(
-                                    maxWidth: maxWidth,
-                                    controller: additionalInfoTextController,
-                                    disabled: false,
-                                    placeholder: localization
-                                        .register_promoter_additional_info,
-                                    onChanged: resetError,
-                                    onFieldSubmitted: (_) => submit(validator),
-                                    validator: validator.validateAdditionalInfo,
-                                    minLines: 2,
-                                    maxLines: 5,
-                                    keyboardType: TextInputType.multiline)
-                          ]),
+                      Column(children: createCheckboxes()),
                       const SizedBox(height: textFieldSpacing * 2),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -284,8 +342,12 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                       if (state is PromoterRegisterLoadingState) ...[
                         const SizedBox(height: 80),
                         const LoadingIndicator()
-                      ],
-                      if (errorMessage != "" &&
+                      ] else if (state is PromoterLandingPagesMissingState) ...[
+                        const SizedBox(height: 20),
+                        const FormErrorView(
+                            message:
+                                "Dem Promoter wurde noch keine Landingpage zugewiesen")
+                      ] else if (errorMessage != "" &&
                           showError &&
                           (state is PromoterRegisterFailureState ||
                               state is PromoterAlreadyExistsFailureState) &&

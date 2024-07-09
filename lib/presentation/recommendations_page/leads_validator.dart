@@ -1,4 +1,3 @@
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 
 class LeadsValidator {
@@ -22,8 +21,8 @@ class LeadsValidator {
     }
   }
 
-  String? validateReason(RecommendationReason? input) {
-    if (input == null || input == RecommendationReason.none) {
+  String? validateReason(String? input) {
+    if (input == null) {
       return localization.recommendations_validation_missing_reason;
     } else {
       return null;

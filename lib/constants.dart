@@ -49,16 +49,6 @@ enum PromoterRegistrationState {
   const PromoterRegistrationState(this.value);
 }
 
-enum RecommendationReason {
-  finance("Finanzdienstleistung"),
-  car("KFZ-Dienstleistung"),
-  insurance("Versicherungsdienstleistung"),
-  none("Nicht ausgewählt");
-
-  final String value;
-  const RecommendationReason(this.value);
-}
-
 enum ImageUploader { user, company, landingPage }
 
 enum ThemeStatus { light, dark }

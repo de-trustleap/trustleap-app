@@ -7,6 +7,11 @@ final class UserInitial extends UserState with EquatableMixin {
   List<Object?> get props => [];
 }
 
+final class UserLoading extends UserState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
 final class UserSuccess extends UserState with EquatableMixin {
   @override
   List<Object?> get props => [];

@@ -280,4 +280,48 @@ class AppTheme {
       backgroundColor: darkBackgroundColor,
       deleteIconColor: darkTextColor,
       labelStyle: darkBodySmallText);
+
+  static final PopupMenuThemeData lightPopupMenuTheme = PopupMenuThemeData(
+      textStyle: lightBodyMediumText.copyWith(color: lightSecondaryColor),
+      labelTextStyle: MaterialStatePropertyAll(
+          lightBodyMediumText.copyWith(color: lightSecondaryColor)),
+      iconColor: lightSecondaryColor,
+      iconSize: 24,
+      enableFeedback: false);
+
+  static final PopupMenuThemeData darkPopupMenuTheme = PopupMenuThemeData(
+      textStyle: darkBodyMediumText.copyWith(color: darkSecondaryColor),
+      labelTextStyle: MaterialStatePropertyAll(
+          darkBodyMediumText.copyWith(color: darkSecondaryColor)),
+      iconColor: darkSecondaryColor,
+      iconSize: 24,
+      enableFeedback: false);
+
+  static final CheckboxThemeData lightCheckboxTheme = CheckboxThemeData(
+      fillColor: const MaterialStatePropertyAll(Colors.transparent),
+      checkColor: const MaterialStatePropertyAll(lightSecondaryColor),
+      visualDensity: VisualDensity.comfortable,
+      splashRadius: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
+      ),
+      side: MaterialStateBorderSide.resolveWith(
+        (states) => const BorderSide(width: 1, color: lightTextColor),
+      ));
+
+  static final CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
+      fillColor: const MaterialStatePropertyAll(Colors.transparent),
+      checkColor: const MaterialStatePropertyAll(darkSecondaryColor),
+      visualDensity: VisualDensity.comfortable,
+      splashRadius: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
+      ),
+      side: MaterialStateBorderSide.resolveWith(
+        (states) => const BorderSide(width: 1, color: darkTextColor),
+      ));
 }
+
+// TODO: Kaskadiertes Löschen von Landingpages im Backend ermöglichen
+// TODO: Duplizieren Funktion implementieren
+// TODO: Wöchentliche Cloud Function die alle Landingpages löscht, deren ID kein User mehr hat.

@@ -40,6 +40,7 @@ class _RegisterFormState extends State<RegisterForm> {
   final codeTextController = TextEditingController();
   var selectedGender = Gender.none;
 
+  bool buttonDisabled = false;
   bool showError = false;
   String errorMessage = "";
   bool validationHasError = false;
@@ -87,6 +88,12 @@ class _RegisterFormState extends State<RegisterForm> {
     }
   }
 
+  void setButtonToDisabled(bool disabled) {
+    setState(() {
+      buttonDisabled = disabled;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -127,6 +134,7 @@ class _RegisterFormState extends State<RegisterForm> {
               errorMessage = AuthFailureMapper.mapFailureMessage(
                   state.failure, localization);
               showError = true;
+              setButtonToDisabled(false);
             } else if (state is SignInSuccessState) {
               showError = false;
               BlocProvider.of<UserCubit>(context).createUser(CustomUser(
@@ -144,236 +152,291 @@ class _RegisterFormState extends State<RegisterForm> {
               errorMessage = DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization);
               showError = true;
+              setButtonToDisabled(false);
             } else if (state is SignInCheckCodeNotValidFailureState) {
               errorMessage = localization.register_invalid_code_error;
               showError = true;
+              setButtonToDisabled(false);
             } else if (state is SignInCheckCodeSuccessState) {
               BlocProvider.of<SignInCubit>(context)
                   .registerWithEmailAndPassword(emailTextController.text.trim(),
                       passwordTextController.text);
+            } else if (state is SignInLoadingState) {
+              setButtonToDisabled(true);
             }
           }),
           BlocListener<UserCubit, UserState>(listener: (context, state) {
-            BlocProvider.of<AuthCubit>(context).checkForAuthState();
+            if (state is UserSuccess) {
+              setButtonToDisabled(false);
+              BlocProvider.of<AuthCubit>(context).checkForAuthState();
+            } else if (state is UserLoading) {
+              setButtonToDisabled(true);
+            }
           })
         ],
-        child: BlocBuilder<SignInCubit, SignInState>(builder: (context, state) {
-          return Form(
-              key: formKey,
-              autovalidateMode: (state is SignInShowValidationState)
-                  ? AutovalidateMode.always
-                  : AutovalidateMode.disabled,
-              child: ListView(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: listPadding),
-                  children: [
-                    SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: Text(localization.register_title,
-                            style: themeData.textTheme.headlineLarge!.copyWith(
-                                fontSize: responsiveValue.isMobile ? 20 : 50,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 4)),
-                      ),
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: Text(localization.register_subtitle,
-                            style: themeData.textTheme.bodySmall!.copyWith(
-                                fontWeight: FontWeight.w500, letterSpacing: 4)),
-                      ),
-                    ]),
-                    SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      GenderPicker(
-                          width: getResponsiveWidth(1),
-                          validate: genderValid,
-                          onSelected: (gender) {
-                            setState(() {
-                              genderValid = validator.validateGender(gender);
-                              selectedGender = gender;
-                            });
-                            resetError();
-                          })
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: ResponsiveRowColumn(
-                          layout: responsiveValue.largerThan(MOBILE)
-                              ? ResponsiveRowColumnType.ROW
-                              : ResponsiveRowColumnType.COLUMN,
-                          children: [
-                            ResponsiveRowColumnItem(
-                                child: FormTextfield(
-                                    controller: firstNameTextController,
-                                    maxWidth: getResponsiveWidth(2),
-                                    disabled: false,
-                                    placeholder:
-                                        localization.register_firstname,
-                                    onChanged: resetError,
-                                    onFieldSubmitted: () => submit(validator),
-                                    validator: validator.validateFirstName)),
-                            const ResponsiveRowColumnItem(
-                                child: SizedBox(
-                                    height: textFieldSpacing,
-                                    width: textFieldSpacing)),
-                            ResponsiveRowColumnItem(
-                                child: FormTextfield(
-                                    controller: lastNameTextController,
-                                    maxWidth: getResponsiveWidth(2),
-                                    disabled: false,
-                                    placeholder: localization.register_lastname,
-                                    onChanged: resetError,
-                                    onFieldSubmitted: () => submit(validator),
-                                    validator: validator.validateLastName))
-                          ],
-                        ),
-                      ),
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      FormTextfield(
-                          maxWidth: getResponsiveWidth(1),
-                          controller: birthDateTextController,
-                          disabled: false,
-                          placeholder: localization.register_birthdate,
-                          onChanged: resetError,
-                          onFieldSubmitted: () => submit(validator),
-                          validator: validator.validateBirthDate,
-                          prefixIcon: Icons.calendar_today_rounded,
-                          keyboardType: TextInputType.datetime,
-                          onTap: () async {
-                            DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime.now());
-                            if (pickedDate != null) {
-                              setState(() {
-                                birthDateTextController.text =
-                                    DateFormat("dd.MM.yyyy").format(pickedDate);
-                              });
-                            }
-                          })
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      FormTextfield(
-                          maxWidth: getResponsiveWidth(1),
-                          controller: streetAndNumberTextController,
-                          disabled: false,
-                          placeholder: localization.register_address,
-                          onChanged: resetError,
-                          onFieldSubmitted: () => submit(validator))
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      FormTextfield(
-                          maxWidth: getResponsiveWidth(2,
-                              shouldWrapToNextLine: false),
-                          controller: plzTextController,
-                          disabled: false,
-                          placeholder: localization.register_postcode,
-                          onChanged: resetError,
-                          onFieldSubmitted: () => submit(validator),
-                          validator: validator.validatePostcode,
-                          keyboardType: TextInputType.number),
-                      const SizedBox(width: textFieldSpacing),
-                      FormTextfield(
-                          maxWidth: getResponsiveWidth(2,
-                              shouldWrapToNextLine: false),
-                          controller: placeTextController,
-                          disabled: false,
-                          placeholder: localization.register_place,
-                          onChanged: resetError,
-                          onFieldSubmitted: () => submit(validator))
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      FormTextfield(
-                          maxWidth: getResponsiveWidth(1),
-                          controller: emailTextController,
-                          disabled: false,
-                          placeholder: localization.register_email,
-                          onChanged: resetError,
-                          onFieldSubmitted: () => submit(validator),
-                          validator: validator.validateEmail,
-                          keyboardType: TextInputType.emailAddress)
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      FormTextfield(
-                          maxWidth: getResponsiveWidth(1),
-                          controller: passwordTextController,
-                          disabled: false,
-                          placeholder: localization.register_password,
-                          onChanged: resetError,
-                          onFieldSubmitted: () => submit(validator),
-                          validator: validator.validatePassword,
-                          obscureText: true)
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      FormTextfield(
-                          maxWidth: getResponsiveWidth(1),
-                          controller: passwordRepeatTextController,
-                          disabled: false,
-                          placeholder: localization.register_repeat_password,
-                          onChanged: resetError,
-                          onFieldSubmitted: () => submit(validator),
-                          validator: (val) {
-                            return validator.validatePasswordRepeat(
-                                val, passwordTextController.text);
-                          },
-                          obscureText: true)
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      FormTextfield(
-                          maxWidth: getResponsiveWidth(1),
-                          controller: codeTextController,
-                          disabled: false,
-                          placeholder: localization.register_code,
-                          onChanged: resetError,
-                          onFieldSubmitted: () => submit(validator),
-                          validator: validator.validateCode)
-                    ]),
-                    const SizedBox(height: textFieldSpacing),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: PrimaryButton(
-                            title: localization.register_now_buttontitle,
-                            onTap: () {
-                              submit(validator);
-                            }),
-                      ),
-                    ]),
-                    if (state is SignInLoadingState) ...[
-                      const SizedBox(height: 80),
-                      const LoadingIndicator()
-                    ],
-                    if (errorMessage != "" &&
-                        showError &&
-                        (state is! SignInLoadingState) &&
-                        !validationHasError) ...[
-                      const SizedBox(height: textFieldSpacing),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
+        child: BlocBuilder<UserCubit, UserState>(
+          builder: (context, userState) {
+            return BlocBuilder<SignInCubit, SignInState>(
+                builder: (context, state) {
+              return Form(
+                  key: formKey,
+                  autovalidateMode: (state is SignInShowValidationState)
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
+                  child: ListView(
+                      shrinkWrap: true,
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: listPadding),
+                      children: [
+                        SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
                                 width: getResponsiveWidth(1),
-                                child: FormErrorView(message: errorMessage)),
-                          ])
-                    ],
-                    const SizedBox(height: 80),
-                  ]));
-        }));
+                                child: Text(localization.register_title,
+                                    style: themeData.textTheme.headlineLarge!
+                                        .copyWith(
+                                            fontSize: responsiveValue.isMobile
+                                                ? 20
+                                                : 50,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 4)),
+                              ),
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: getResponsiveWidth(1),
+                                child: Text(localization.register_subtitle,
+                                    style: themeData.textTheme.bodySmall!
+                                        .copyWith(
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 4)),
+                              ),
+                            ]),
+                        SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GenderPicker(
+                                  width: getResponsiveWidth(1),
+                                  validate: genderValid,
+                                  onSelected: (gender) {
+                                    setState(() {
+                                      genderValid =
+                                          validator.validateGender(gender);
+                                      selectedGender = gender;
+                                    });
+                                    resetError();
+                                  })
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: getResponsiveWidth(1),
+                                child: ResponsiveRowColumn(
+                                  layout: responsiveValue.largerThan(MOBILE)
+                                      ? ResponsiveRowColumnType.ROW
+                                      : ResponsiveRowColumnType.COLUMN,
+                                  children: [
+                                    ResponsiveRowColumnItem(
+                                        child: FormTextfield(
+                                            controller: firstNameTextController,
+                                            maxWidth: getResponsiveWidth(2),
+                                            disabled: false,
+                                            placeholder:
+                                                localization.register_firstname,
+                                            onChanged: resetError,
+                                            onFieldSubmitted: () =>
+                                                submit(validator),
+                                            validator:
+                                                validator.validateFirstName)),
+                                    const ResponsiveRowColumnItem(
+                                        child: SizedBox(
+                                            height: textFieldSpacing,
+                                            width: textFieldSpacing)),
+                                    ResponsiveRowColumnItem(
+                                        child: FormTextfield(
+                                            controller: lastNameTextController,
+                                            maxWidth: getResponsiveWidth(2),
+                                            disabled: false,
+                                            placeholder:
+                                                localization.register_lastname,
+                                            onChanged: resetError,
+                                            onFieldSubmitted: () =>
+                                                submit(validator),
+                                            validator:
+                                                validator.validateLastName))
+                                  ],
+                                ),
+                              ),
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FormTextfield(
+                                  maxWidth: getResponsiveWidth(1),
+                                  controller: birthDateTextController,
+                                  disabled: false,
+                                  placeholder: localization.register_birthdate,
+                                  onChanged: resetError,
+                                  onFieldSubmitted: () => submit(validator),
+                                  validator: validator.validateBirthDate,
+                                  prefixIcon: Icons.calendar_today_rounded,
+                                  keyboardType: TextInputType.datetime,
+                                  onTap: () async {
+                                    DateTime? pickedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime.now());
+                                    if (pickedDate != null) {
+                                      setState(() {
+                                        birthDateTextController.text =
+                                            DateFormat("dd.MM.yyyy")
+                                                .format(pickedDate);
+                                      });
+                                    }
+                                  })
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FormTextfield(
+                                  maxWidth: getResponsiveWidth(1),
+                                  controller: streetAndNumberTextController,
+                                  disabled: false,
+                                  placeholder: localization.register_address,
+                                  onChanged: resetError,
+                                  onFieldSubmitted: () => submit(validator))
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FormTextfield(
+                                  maxWidth: getResponsiveWidth(2,
+                                      shouldWrapToNextLine: false),
+                                  controller: plzTextController,
+                                  disabled: false,
+                                  placeholder: localization.register_postcode,
+                                  onChanged: resetError,
+                                  onFieldSubmitted: () => submit(validator),
+                                  validator: validator.validatePostcode,
+                                  keyboardType: TextInputType.number),
+                              const SizedBox(width: textFieldSpacing),
+                              FormTextfield(
+                                  maxWidth: getResponsiveWidth(2,
+                                      shouldWrapToNextLine: false),
+                                  controller: placeTextController,
+                                  disabled: false,
+                                  placeholder: localization.register_place,
+                                  onChanged: resetError,
+                                  onFieldSubmitted: () => submit(validator))
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FormTextfield(
+                                  maxWidth: getResponsiveWidth(1),
+                                  controller: emailTextController,
+                                  disabled: false,
+                                  placeholder: localization.register_email,
+                                  onChanged: resetError,
+                                  onFieldSubmitted: () => submit(validator),
+                                  validator: validator.validateEmail,
+                                  keyboardType: TextInputType.emailAddress)
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FormTextfield(
+                                  maxWidth: getResponsiveWidth(1),
+                                  controller: passwordTextController,
+                                  disabled: false,
+                                  placeholder: localization.register_password,
+                                  onChanged: resetError,
+                                  onFieldSubmitted: () => submit(validator),
+                                  validator: validator.validatePassword,
+                                  obscureText: true)
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FormTextfield(
+                                  maxWidth: getResponsiveWidth(1),
+                                  controller: passwordRepeatTextController,
+                                  disabled: false,
+                                  placeholder:
+                                      localization.register_repeat_password,
+                                  onChanged: resetError,
+                                  onFieldSubmitted: () => submit(validator),
+                                  validator: (val) {
+                                    return validator.validatePasswordRepeat(
+                                        val, passwordTextController.text);
+                                  },
+                                  obscureText: true)
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FormTextfield(
+                                  maxWidth: getResponsiveWidth(1),
+                                  controller: codeTextController,
+                                  disabled: false,
+                                  placeholder: localization.register_code,
+                                  onChanged: resetError,
+                                  onFieldSubmitted: () => submit(validator),
+                                  validator: validator.validateCode)
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: getResponsiveWidth(1),
+                                child: PrimaryButton(
+                                    title:
+                                        localization.register_now_buttontitle,
+                                    disabled: buttonDisabled,
+                                    onTap: () {
+                                      submit(validator);
+                                    }),
+                              ),
+                            ]),
+                        if (state is SignInLoadingState || userState is UserLoading) ...[
+                          const SizedBox(height: 80),
+                          const LoadingIndicator()
+                        ],
+                        if (errorMessage != "" &&
+                            showError &&
+                            (state is SignInLoadingState) &&
+                            !validationHasError) ...[
+                          const SizedBox(height: textFieldSpacing),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                    width: getResponsiveWidth(1),
+                                    child:
+                                        FormErrorView(message: errorMessage)),
+                              ])
+                        ],
+                        const SizedBox(height: 80),
+                      ]));
+            });
+          },
+        ));
   }
 }

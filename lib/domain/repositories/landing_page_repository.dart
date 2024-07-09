@@ -15,7 +15,8 @@ abstract class LandingPageRepository {
       LandingPage landingPage, Uint8List imageData, bool imageHasChanged);
 
   Future<Either<DatabaseFailure, Unit>> deleteLandingPage(
-      String id, String parentUserID);
+      String id, String ownerID);
 
-  Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage, Uint8List? imageData, bool imageHasChanged);
+  Future<Either<DatabaseFailure, Unit>> editLandingPage(
+      LandingPage landingPage, Uint8List? imageData, bool imageHasChanged);
 }

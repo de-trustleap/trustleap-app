@@ -1,4 +1,3 @@
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,14 +12,14 @@ void main() {
           name: "Tester Test",
           serviceProvider: "Test Provider",
           promoter: "Test Promoter",
-          reason: RecommendationReason.finance);
+          reason: "Test");
 
       final expectedResult = Recommendation(
           id: UniqueID.fromUniqueString("1"),
           name: "Tester Test",
           serviceProvider: "Test Provider",
           promoter: "Test Promoter New",
-          reason: RecommendationReason.finance);
+          reason: "Test");
       // When
       final result = recommendation.copyWith(promoter: "Test Promoter New");
       // Then
@@ -36,14 +35,14 @@ void main() {
           name: "Tester Test",
           serviceProvider: "Test Provider",
           promoter: "Test Promoter",
-          reason: RecommendationReason.finance);
+          reason: "Test");
 
       final recommendation2 = Recommendation(
           id: UniqueID.fromUniqueString("1"),
           name: "Tester Test",
           serviceProvider: "Test Provider",
           promoter: "Test Promoter",
-          reason: RecommendationReason.finance);
+          reason: "Test");
       // Then
       expect(recommendation, recommendation2);
     });

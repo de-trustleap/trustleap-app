@@ -14,6 +14,7 @@ class UserCubit extends Cubit<UserState> {
   }) : super(UserInitial());
 
   void createUser(CustomUser user) async {
+    emit(UserLoading());
     final failureOrSuccess = await userRepo.createUser(user: user);
     failureOrSuccess.fold((failure) => emit(UserFailure(failure: failure)),
         (r) => emit(UserSuccess()));

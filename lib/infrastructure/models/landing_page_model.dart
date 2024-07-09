@@ -9,8 +9,9 @@ class LandingPageModel extends Equatable {
   final String? name;
   final String? downloadImageUrl;
   final String? thumbnailDownloadURL;
-  final String? parentUserId;
+  final String? ownerID;
   final String? text;
+  final List<String>? associatedUsersIDs;
   final DateTime? lastUpdatedAt;
   final dynamic createdAt;
   final bool isDefaultPage;
@@ -20,8 +21,9 @@ class LandingPageModel extends Equatable {
       this.name,
       this.downloadImageUrl,
       this.thumbnailDownloadURL,
-      this.parentUserId,
+      this.ownerID,
       this.text,
+      this.associatedUsersIDs,
       this.lastUpdatedAt,
       required this.createdAt,
       this.isDefaultPage = false});
@@ -31,8 +33,9 @@ class LandingPageModel extends Equatable {
       String? name,
       String? downloadImageUrl,
       String? thumbnailDownloadURL,
-      String? parentUserId,
+      String? ownerID,
       String? text,
+      List<String>? associatedUsersIDs,
       DateTime? lastUpdatedAt,
       dynamic createdAt,
       bool? isDefaultPage}) {
@@ -41,8 +44,9 @@ class LandingPageModel extends Equatable {
         name: name ?? this.name,
         downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-        parentUserId: parentUserId ?? this.parentUserId,
+        ownerID: ownerID ?? this.ownerID,
         text: text ?? this.text,
+        associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
         createdAt: createdAt ?? this.createdAt,
         isDefaultPage: isDefaultPage ?? false);
@@ -54,8 +58,9 @@ class LandingPageModel extends Equatable {
       'name': name,
       'downloadImageUrl': downloadImageUrl,
       'thumbnailDownloadURL': thumbnailDownloadURL,
-      'parentUserID': parentUserId,
+      'ownerID': ownerID,
       'text': text,
+      'associatedUsersIDs': associatedUsersIDs,
       'lastUpdatedAt': lastUpdatedAt,
       'createdAt': createdAt,
       'isDefaultPage': isDefaultPage
@@ -72,9 +77,11 @@ class LandingPageModel extends Equatable {
         thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
             ? map['thumbnailDownloadURL'] as String
             : null,
-        parentUserId:
-            map['parentUserID'] != null ? map['parentUserID'] as String : null,
+        ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
         text: map['text'] != null ? map['text'] as String : null,
+        associatedUsersIDs: map['associatedUsersIDs'] != null
+            ? List<String>.from(map['associatedUsersIDs'])
+            : null,
         lastUpdatedAt: map['lastUpdatedAt'] != null
             ? (map['lastUpdatedAt'] as Timestamp).toDate()
             : null,
@@ -93,8 +100,9 @@ class LandingPageModel extends Equatable {
         name: name,
         downloadImageUrl: downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL,
-        parentUserId: UniqueID.fromUniqueString(parentUserId ?? ""),
+        ownerID: UniqueID.fromUniqueString(ownerID ?? ""),
         text: text,
+        associatedUsersIDs: associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate(),
         isDefaultPage: isDefaultPage
@@ -107,8 +115,9 @@ class LandingPageModel extends Equatable {
         name: landingPage.name,
         downloadImageUrl: landingPage.downloadImageUrl,
         thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
-        parentUserId: landingPage.parentUserId?.value ?? "",
+        ownerID: landingPage.ownerID?.value ?? "",
         text: landingPage.text,
+        associatedUsersIDs: landingPage.associatedUsersIDs,
         lastUpdatedAt: landingPage.lastUpdatedAt,
         createdAt: FieldValue.serverTimestamp(),
         isDefaultPage: landingPage.isDefaultPage
@@ -117,5 +126,5 @@ class LandingPageModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, downloadImageUrl, thumbnailDownloadURL, parentUserId, text, isDefaultPage];
+      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text];
 }
