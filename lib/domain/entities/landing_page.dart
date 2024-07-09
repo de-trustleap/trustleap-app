@@ -47,7 +47,7 @@ class LandingPage extends Equatable {
         associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
         createdAt: createdAt ?? this.createdAt,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
-        isDefaultPage: isDefaultPage ?? false);
+        isDefaultPage: isDefaultPage ?? this.isDefaultPage);
   }
 
   @override

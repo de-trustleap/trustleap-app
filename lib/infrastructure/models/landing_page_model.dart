@@ -126,5 +126,5 @@ class LandingPageModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text];
+      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text, isDefaultPage];
 }

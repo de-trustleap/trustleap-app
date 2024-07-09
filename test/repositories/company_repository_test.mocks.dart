@@ -73,4 +73,23 @@ class MockCompanyRepository extends _i1.Mock implements _i3.CompanyRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.DatabaseFailure, _i6.Company>> getCompany(
+          String? companyID) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCompany,
+          [companyID],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.DatabaseFailure, _i6.Company>>.value(
+                _FakeEither_0<_i5.DatabaseFailure, _i6.Company>(
+          this,
+          Invocation.method(
+            #getCompany,
+            [companyID],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.DatabaseFailure, _i6.Company>>);
 }

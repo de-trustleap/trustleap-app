@@ -98,7 +98,6 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
-      print("HIER: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
