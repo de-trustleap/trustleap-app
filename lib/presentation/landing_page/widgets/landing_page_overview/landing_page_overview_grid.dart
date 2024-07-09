@@ -18,6 +18,13 @@ class LandingPageOverviewGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    // First the Default Page
+    landingpages.sort((a, b) {
+      if (b.isDefaultPage) {
+        return 1;
+      }
+      return -1;
+    });
     return Container(
       constraints: const BoxConstraints(maxHeight: 600),
       child: AnimationLimiter(
@@ -43,7 +50,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
                               ? (landingpages.length >= 12
                                   ? Center(
                                       child: Text(
-                                        'Max Anzahl erreicht',
+                                        "Max Anzahl erreicht",
                                         style: themeData.textTheme.labelSmall!
                                             .copyWith(
                                           fontSize: responsiveValue.isMobile

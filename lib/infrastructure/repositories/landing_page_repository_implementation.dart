@@ -91,10 +91,12 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "text": landingPage.text,
         "parentUserID": landingPage.parentUserId?.value,
         "imageData": base64Encode(imageData),
-        "imageHasChanged": imageHasChanged
+        "imageHasChanged": imageHasChanged,
+        "isDefaultPage": landingPage.isDefaultPage
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
+      print("HIER: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
@@ -122,7 +124,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "text": landingPage.text,
         "parentUserID": landingPage.parentUserId?.value,
         "imageData": imageData != null ? base64Encode(imageData) : null,
-        "imageHasChanged": imageHasChanged
+        "imageHasChanged": imageHasChanged,
+        "isDefaultPage": landingPage.isDefaultPage
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {

@@ -25,7 +25,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
       height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
       decoration: BoxDecoration(
-          color: themeData.colorScheme.background,
+          color: landingPage.isDefaultPage ? themeData.colorScheme.primary: themeData.colorScheme.background,
           border: Border.all(color: Colors.transparent),
           borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Padding(
