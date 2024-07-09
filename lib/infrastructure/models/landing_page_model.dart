@@ -14,7 +14,7 @@ class LandingPageModel extends Equatable {
   final List<String>? associatedUsersIDs;
   final DateTime? lastUpdatedAt;
   final dynamic createdAt;
-  final bool isDefaultPage;
+  final bool? isDefaultPage;
 
   const LandingPageModel(
       {required this.id,
@@ -26,7 +26,7 @@ class LandingPageModel extends Equatable {
       this.associatedUsersIDs,
       this.lastUpdatedAt,
       required this.createdAt,
-      this.isDefaultPage = false});
+      this.isDefaultPage});
 
   LandingPageModel copyWith(
       {String? id,
@@ -49,7 +49,7 @@ class LandingPageModel extends Equatable {
         associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
         createdAt: createdAt ?? this.createdAt,
-        isDefaultPage: isDefaultPage ?? false);
+        isDefaultPage: isDefaultPage ?? this.isDefaultPage);
   }
 
   Map<String, dynamic> toMap() {
@@ -105,7 +105,7 @@ class LandingPageModel extends Equatable {
         associatedUsersIDs: associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate(),
-        isDefaultPage: isDefaultPage
+        isDefaultPage: isDefaultPage ?? false
         );
   }
 

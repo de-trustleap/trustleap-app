@@ -12,7 +12,7 @@ class LandingPage extends Equatable {
   final List<String>? associatedUsersIDs;
   final DateTime? createdAt;
   final DateTime? lastUpdatedAt;
-  final bool isDefaultPage;
+  final bool? isDefaultPage;
 
   const LandingPage(
       {required this.id,
@@ -24,7 +24,7 @@ class LandingPage extends Equatable {
       this.associatedUsersIDs,
       this.createdAt,
       this.lastUpdatedAt,
-      this.isDefaultPage = false});
+      this.isDefaultPage});
 
   LandingPage copyWith(
       {UniqueID? id,

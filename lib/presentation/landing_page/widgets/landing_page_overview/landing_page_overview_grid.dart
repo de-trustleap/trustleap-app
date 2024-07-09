@@ -20,7 +20,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     // First the Default Page
     landingpages.sort((a, b) {
-      if (b.isDefaultPage) {
+      if (b.isDefaultPage ?? false) {
         return 1;
       }
       return -1;
