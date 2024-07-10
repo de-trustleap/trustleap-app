@@ -14,6 +14,7 @@ class LandingPageModel extends Equatable {
   final List<String>? associatedUsersIDs;
   final DateTime? lastUpdatedAt;
   final dynamic createdAt;
+  final bool? isDefaultPage;
 
   const LandingPageModel(
       {required this.id,
@@ -24,7 +25,8 @@ class LandingPageModel extends Equatable {
       this.text,
       this.associatedUsersIDs,
       this.lastUpdatedAt,
-      required this.createdAt});
+      required this.createdAt,
+      this.isDefaultPage});
 
   LandingPageModel copyWith(
       {String? id,
@@ -35,7 +37,8 @@ class LandingPageModel extends Equatable {
       String? text,
       List<String>? associatedUsersIDs,
       DateTime? lastUpdatedAt,
-      dynamic createdAt}) {
+      dynamic createdAt,
+      bool? isDefaultPage}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -45,7 +48,8 @@ class LandingPageModel extends Equatable {
         text: text ?? this.text,
         associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
-        createdAt: createdAt ?? this.createdAt);
+        createdAt: createdAt ?? this.createdAt,
+        isDefaultPage: isDefaultPage ?? this.isDefaultPage);
   }
 
   Map<String, dynamic> toMap() {
@@ -58,7 +62,8 @@ class LandingPageModel extends Equatable {
       'text': text,
       'associatedUsersIDs': associatedUsersIDs,
       'lastUpdatedAt': lastUpdatedAt,
-      'createdAt': createdAt
+      'createdAt': createdAt,
+      'isDefaultPage': isDefaultPage
     };
   }
 
@@ -80,7 +85,9 @@ class LandingPageModel extends Equatable {
         lastUpdatedAt: map['lastUpdatedAt'] != null
             ? (map['lastUpdatedAt'] as Timestamp).toDate()
             : null,
-        createdAt: map['createdAt'] as dynamic);
+        createdAt: map['createdAt'] as dynamic,
+        isDefaultPage: map['isDefaultPage'] != null ? map['isDefaultPage'] as bool : false
+        );
   }
 
   factory LandingPageModel.fromFirestore(Map<String, dynamic> doc, String id) {
@@ -97,7 +104,9 @@ class LandingPageModel extends Equatable {
         text: text,
         associatedUsersIDs: associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt,
-        createdAt: (createdAt as Timestamp).toDate());
+        createdAt: (createdAt as Timestamp).toDate(),
+        isDefaultPage: isDefaultPage ?? false
+        );
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -110,10 +119,12 @@ class LandingPageModel extends Equatable {
         text: landingPage.text,
         associatedUsersIDs: landingPage.associatedUsersIDs,
         lastUpdatedAt: landingPage.lastUpdatedAt,
-        createdAt: FieldValue.serverTimestamp());
+        createdAt: FieldValue.serverTimestamp(),
+        isDefaultPage: landingPage.isDefaultPage
+        );
   }
 
   @override
   List<Object?> get props =>
-      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text];
+      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text, isDefaultPage];
 }

@@ -12,6 +12,7 @@ class LandingPage extends Equatable {
   final List<String>? associatedUsersIDs;
   final DateTime? createdAt;
   final DateTime? lastUpdatedAt;
+  final bool? isDefaultPage;
 
   const LandingPage(
       {required this.id,
@@ -22,7 +23,8 @@ class LandingPage extends Equatable {
       this.text,
       this.associatedUsersIDs,
       this.createdAt,
-      this.lastUpdatedAt});
+      this.lastUpdatedAt,
+      this.isDefaultPage});
 
   LandingPage copyWith(
       {UniqueID? id,
@@ -33,7 +35,8 @@ class LandingPage extends Equatable {
       String? text,
       List<String>? associatedUsersIDs,
       DateTime? createdAt,
-      DateTime? lastUpdatedAt}) {
+      DateTime? lastUpdatedAt,
+      bool? isDefaultPage}) {
     return LandingPage(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -43,10 +46,11 @@ class LandingPage extends Equatable {
         text: text ?? this.text,
         associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
         createdAt: createdAt ?? this.createdAt,
-        lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt);
+        lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
+        isDefaultPage: isDefaultPage ?? this.isDefaultPage);
   }
 
   @override
   List<Object?> get props =>
-      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text];
+      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text, isDefaultPage];
 }
