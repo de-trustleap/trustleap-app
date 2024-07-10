@@ -29,7 +29,8 @@ void main() {
     test("should return landingpages when the call was successful", () async {
       // Given
       final expectedResult = right(testLandingPages);
-      when(mockLandingPageRepo.getAllLandingPages(ids)).thenAnswer((_) async => right(testLandingPages));
+      when(mockLandingPageRepo.getAllLandingPages(ids))
+          .thenAnswer((_) async => right(testLandingPages));
       // When
       final result = await mockLandingPageRepo.getAllLandingPages(ids);
       // Then
@@ -38,10 +39,11 @@ void main() {
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
 
-     test("should return failure when the call has failed", () async {
+    test("should return failure when the call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockLandingPageRepo.getAllLandingPages(ids)).thenAnswer((_) async => left(BackendFailure()));
+      when(mockLandingPageRepo.getAllLandingPages(ids))
+          .thenAnswer((_) async => left(BackendFailure()));
       // When
       final result = await mockLandingPageRepo.getAllLandingPages(ids);
       // Then
@@ -53,36 +55,154 @@ void main() {
 
   group("LandingPageRepositoryImplementation_createLandingPage", () {
     final testLandingPage = LandingPage(
-      id: UniqueID.fromUniqueString("1"),
-      name: "Test",
-      text: "Test",
-      ownerID: UniqueID.fromUniqueString("1"));
+        id: UniqueID.fromUniqueString("1"),
+        name: "Test",
+        text: "Test",
+        ownerID: UniqueID.fromUniqueString("1"));
     final testImageData = Uint8List(1);
     const imageHasChanged = false;
-  test( "should return unit when landingpage has been created and the call was successful", () async {
-     // Given
+    test(
+        "should return unit when landingpage has been created and the call was successful",
+        () async {
+      // Given
       final expectedResult = right(unit);
-      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData, imageHasChanged)).thenAnswer((_) async => right(unit));
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, imageHasChanged))
+          .thenAnswer((_) async => right(unit));
       // When
-      final result = await mockLandingPageRepo.createLandingPage(testLandingPage, testImageData, imageHasChanged);
+      final result = await mockLandingPageRepo.createLandingPage(
+          testLandingPage, testImageData, imageHasChanged);
       // Then
-      verify(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData, imageHasChanged));
+      verify(mockLandingPageRepo.createLandingPage(
+          testLandingPage, testImageData, imageHasChanged));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.createLandingPage(
+              testLandingPage, testImageData, imageHasChanged))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockLandingPageRepo.createLandingPage(
+          testLandingPage, testImageData, imageHasChanged);
+      // Then
+      verify(mockLandingPageRepo.createLandingPage(
+          testLandingPage, testImageData, imageHasChanged));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
   });
 
-  test( "should return failure when the call has failed", () async {
-     // Given
-      final expectedResult = left(BackendFailure());
-      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData, imageHasChanged)).thenAnswer((_) async => left(BackendFailure()));
+  group("LandingPageRepositoryImplementation_deleteLandingPage", () {
+    const landingPageID = "1";
+    const ownerID = "1";
+    test(
+        "should return unit when landingpage has been deleted and the call was successful",
+        () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockLandingPageRepo.deleteLandingPage(landingPageID, ownerID))
+          .thenAnswer((_) async => right(unit));
       // When
-      final result = await mockLandingPageRepo.createLandingPage(testLandingPage, testImageData, imageHasChanged);
+      final result =
+          await mockLandingPageRepo.deleteLandingPage(landingPageID, ownerID);
       // Then
-      verify(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData, imageHasChanged));
+      verify(mockLandingPageRepo.deleteLandingPage(landingPageID, ownerID));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.deleteLandingPage(landingPageID, ownerID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result =
+          await mockLandingPageRepo.deleteLandingPage(landingPageID, ownerID);
+      // Then
+      verify(mockLandingPageRepo.deleteLandingPage(landingPageID, ownerID));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
   });
+
+  group("LandingPageRepositoryImplementation_editLandingPage", () {
+    final testLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("1"),
+        name: "Test",
+        text: "Test",
+        ownerID: UniqueID.fromUniqueString("1"));
+    final testImageData = Uint8List(1);
+    const imageHasChanged = false;
+    test(
+        "should return unit when landingpage has been edited and the call was successful",
+        () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockLandingPageRepo.editLandingPage(
+              testLandingPage, testImageData, imageHasChanged))
+          .thenAnswer((_) async => right(unit));
+      // When
+      final result = await mockLandingPageRepo.editLandingPage(
+          testLandingPage, testImageData, imageHasChanged);
+      // Then
+      verify(mockLandingPageRepo.editLandingPage(
+          testLandingPage, testImageData, imageHasChanged));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.editLandingPage(
+              testLandingPage, testImageData, imageHasChanged))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockLandingPageRepo.editLandingPage(
+          testLandingPage, testImageData, imageHasChanged);
+      // Then
+      verify(mockLandingPageRepo.editLandingPage(
+          testLandingPage, testImageData, imageHasChanged));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+  });
+
+  group("LandingPageRepositoryImplementation_duplicateLandingPage", () {
+    const landingPageID = "1";
+    test(
+        "should return unit when landingpage has been duplicated and the call was successful",
+        () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockLandingPageRepo.duplicateLandingPage(landingPageID))
+          .thenAnswer((_) async => right(unit));
+      // When
+      final result =
+          await mockLandingPageRepo.duplicateLandingPage(landingPageID);
+      // Then
+      verify(mockLandingPageRepo.duplicateLandingPage(landingPageID));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.duplicateLandingPage(landingPageID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result =
+          await mockLandingPageRepo.duplicateLandingPage(landingPageID);
+      // Then
+      verify(mockLandingPageRepo.duplicateLandingPage(landingPageID));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
   });
 }
-
-

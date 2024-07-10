@@ -163,4 +163,23 @@ class MockLandingPageRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.DatabaseFailure, _i2.Unit>> duplicateLandingPage(
+          String? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #duplicateLandingPage,
+          [id],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i5.DatabaseFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #duplicateLandingPage,
+            [id],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.DatabaseFailure, _i2.Unit>>);
 }
