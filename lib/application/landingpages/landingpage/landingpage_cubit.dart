@@ -21,7 +21,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     this.userRepo,
   ) : super(LandingPageInitial());
 
-  void createLangingPage(LandingPage? landingpage, Uint8List imageData,
+  void createLandingPage(LandingPage? landingpage, Uint8List imageData,
       bool imageHasChanged) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
