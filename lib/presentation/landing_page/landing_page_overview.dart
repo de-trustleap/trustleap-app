@@ -28,15 +28,17 @@ class LandingPageOverview extends StatelessWidget {
           .deleteLandingPage(id, parentUserID);
     }
 
+    void submitDuplication(String id) {
+      BlocProvider.of<LandingPageCubit>(context).duplicateLandingPage(id);
+    }
+
     void showDeleteAlert(String id, parentUserID) {
       showDialog(
           context: context,
           builder: (_) {
             return CustomAlertDialog(
-                title:
-                    localization.landingpage_delete_alert_title,
-                message:
-                    localization.landingpage_delete_alert_msg,
+                title: localization.landingpage_delete_alert_title,
+                message: localization.landingpage_delete_alert_msg,
                 actionButtonTitle: localization.delete_buttontitle,
                 cancelButtonTitle: localization.cancel_buttontitle,
                 actionButtonAction: () => submitDeletion(id, parentUserID),
@@ -46,14 +48,19 @@ class LandingPageOverview extends StatelessWidget {
 
     return BlocConsumer<LandingPageCubit, LandingPageState>(
       listener: (context, state) {
-        if(state is DeleteLandingPageSuccessState) {
-          CustomSnackBar.of(context).showCustomSnackBar(localization.landingpage_success_delete_snackbar_message);
+        if (state is DeleteLandingPageSuccessState) {
+          CustomSnackBar.of(context).showCustomSnackBar(
+              localization.landingpage_success_delete_snackbar_message);
+        } else if (state is DuplicateLandingPageSuccessState) {
+          CustomSnackBar.of(context)
+              .showCustomSnackBar("Landingpage erfolgreich dupliziert!");
         }
       },
       builder: (context, state) {
         return BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(
           builder: (context, observerState) {
-            if (state is DeleteLandingPageLoadingState) {
+            if (state is DeleteLandingPageLoadingState ||
+                state is DuplicateLandingPageLoadingState) {
               return const LoadingIndicator();
             } else if (observerState is LandingPageObserverSuccess) {
               if (observerState.landingPages.isEmpty) {
@@ -69,19 +76,21 @@ class LandingPageOverview extends StatelessWidget {
                     });
               } else {
                 return CardContainer(
-                  maxWidth: 800,
+                    maxWidth: 800,
                     child: Column(
-                  children: [
-                    Text(localization.landingpage_overview_title,
-                        style: themeData.textTheme.headlineLarge!
-                            .copyWith(fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 24),
-                    LandingPageOverviewGrid(
-                        landingpages: observerState.landingPages,
-                        deletePressed: (landingPageID, parentUserID) =>
-                            showDeleteAlert(landingPageID, parentUserID))
-                  ],
-                ));
+                      children: [
+                        Text(localization.landingpage_overview_title,
+                            style: themeData.textTheme.headlineLarge!
+                                .copyWith(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 24),
+                        LandingPageOverviewGrid(
+                            landingpages: observerState.landingPages,
+                            deletePressed: (landingPageID, parentUserID) =>
+                                showDeleteAlert(landingPageID, parentUserID),
+                            duplicatePressed: (landinPageID) =>
+                                submitDuplication(landinPageID))
+                      ],
+                    ));
               }
             } else if (observerState is LandingPageObserverFailure) {
               return ErrorView(

@@ -132,4 +132,16 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> duplicateLandingPage(String id) async {
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("duplicateLandingPage");
+    try {
+      await callable.call({"id": id});
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }
