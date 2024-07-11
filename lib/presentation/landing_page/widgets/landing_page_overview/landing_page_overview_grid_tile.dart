@@ -12,9 +12,10 @@ import 'package:responsive_framework/responsive_framework.dart';
 class LandingPageOverviewGridTile extends StatelessWidget {
   final LandingPage landingPage;
   final Function(String, String) deletePressed;
+  final Function(String) duplicatePressed;
 
   const LandingPageOverviewGridTile(
-      {super.key, required this.landingPage, required this.deletePressed});
+      {super.key, required this.landingPage, required this.deletePressed, required this.duplicatePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                         const Text("Löschen")
                                       ])),
                               PopupMenuItem(
-                                  value: "copy",
+                                  value: "duplicate",
                                   child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -82,6 +83,9 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                           if (newValue == "delete") {
                             deletePressed(landingPage.id.value,
                                 landingPage.ownerID?.value ?? "");
+                          }
+                          else if (newValue == "duplicate") {
+                            duplicatePressed(landingPage.id.value);
                           }
                         })
                   ]),

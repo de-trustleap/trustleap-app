@@ -16,7 +16,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorInput extends StatefulWidget {
-  final LandingPage? landingPage;  
+  final LandingPage? landingPage;
   const LandingPageCreatorInput({super.key, this.landingPage});
 
   @override
@@ -59,7 +59,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
       }
     }
 
-  void onSubmitEdit(LandingPage? landingPage, Function completion) {
+    void onSubmitEdit(LandingPage? landingPage, Function completion) {
       if (landingPage?.thumbnailDownloadURL != null) {
         setState(() {
           showError = false;
@@ -72,6 +72,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
         });
       }
     }
+
     return MultiBlocListener(
         listeners: [
           BlocListener<LandingPageCubit, LandingPageState>(
@@ -131,7 +132,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
                   onSubmitCreate(
                       landingPage,
                       () => BlocProvider.of<LandingPageCubit>(context)
-                          .createLangingPage(
+                          .createLandingPage(
                               landingPage, image!, imageHasChanged));
                 },
                 onEditTapped: (landingPage) {

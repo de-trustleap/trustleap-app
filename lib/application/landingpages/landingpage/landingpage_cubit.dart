@@ -21,32 +21,34 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     this.userRepo,
   ) : super(LandingPageInitial());
 
-  void createLangingPage(LandingPage? landingpage, Uint8List imageData, bool imageHasChanged) async {
+  void createLandingPage(LandingPage? landingpage, Uint8List imageData,
+      bool imageHasChanged) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
     } else if (imageData.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(CreateLandingPageLoadingState());
-      final failureOrSuccess =
-          await landingPageRepo.createLandingPage(landingpage, imageData, imageHasChanged);
+      final failureOrSuccess = await landingPageRepo.createLandingPage(
+          landingpage, imageData, imageHasChanged);
       failureOrSuccess.fold(
           (failure) => emit(CreateLandingPageFailureState(failure: failure)),
           (_) => emit(CreatedLandingPageSuccessState()));
     }
   }
 
-  void editLandingPage(LandingPage? landingPage, Uint8List? imageData, bool imageHasChanged) async {
+  void editLandingPage(LandingPage? landingPage, Uint8List? imageData,
+      bool imageHasChanged) async {
     if (landingPage == null) {
       emit(LandingPageShowValidationState());
     } else if (imageData != null) {
-      if(imageData.lengthInBytes > fileSizeLimit) {
+      if (imageData.lengthInBytes > fileSizeLimit) {
         emit(LandingPageImageExceedsFileSizeLimitFailureState());
       }
     } else {
       emit(EditLandingPageLoadingState());
-      final failureOrSuccess =
-          await landingPageRepo.editLandingPage(landingPage, imageData, imageHasChanged);
+      final failureOrSuccess = await landingPageRepo.editLandingPage(
+          landingPage, imageData, imageHasChanged);
       failureOrSuccess.fold(
           (failure) => emit(EditLandingPageFailureState(failure: failure)),
           (_) => emit(EditLandingPageSuccessState()));
@@ -60,6 +62,14 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     failureOrSuccess.fold(
         (failure) => emit(DeleteLandingPageFailureState(failure: failure)),
         (_) => emit(DeleteLandingPageSuccessState()));
+  }
+
+  void duplicateLandingPage(String id) async {
+    emit(DuplicateLandingPageLoadingState());
+    final failureOrSuccess = await landingPageRepo.duplicateLandingPage(id);
+    failureOrSuccess.fold(
+        (failure) => emit(DuplicateLandingPageFailureState(failure: failure)),
+        (_) => DuplicateLandingPageSuccessState());
   }
 
   void getUser() async {

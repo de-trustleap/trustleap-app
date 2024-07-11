@@ -11,8 +11,9 @@ import 'package:responsive_framework/responsive_framework.dart';
 class LandingPageOverviewGrid extends StatelessWidget {
   final List<LandingPage> landingpages;
   final Function(String, String) deletePressed;
+  final Function(String) duplicatePressed;
   const LandingPageOverviewGrid(
-      {super.key, required this.landingpages, required this.deletePressed});
+      {super.key, required this.landingpages, required this.deletePressed, required this.duplicatePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,8 @@ class LandingPageOverviewGrid extends StatelessWidget {
                                           )))
                               : LandingPageOverviewGridTile(
                                   landingPage: landingpages[index - 1],
-                                  deletePressed: deletePressed))),
+                                  deletePressed: deletePressed,
+                                  duplicatePressed: duplicatePressed))),
                 ),
               );
             })),

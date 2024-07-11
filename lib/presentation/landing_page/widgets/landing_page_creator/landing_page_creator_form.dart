@@ -94,7 +94,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
     } else {
       validationHasError = true;
       BlocProvider.of<LandingPageCubit>(context)
-          .createLangingPage(null, Uint8List(0), false);
+          .createLandingPage(null, Uint8List(0), false);
     }
   }
 
