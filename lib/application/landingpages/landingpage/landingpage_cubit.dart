@@ -43,10 +43,8 @@ class LandingPageCubit extends Cubit<LandingPageState> {
       bool imageHasChanged) async {
     if (landingPage == null) {
       emit(LandingPageShowValidationState());
-    } else if (imageData != null) {
-      if (imageData.lengthInBytes > fileSizeLimit) {
-        emit(LandingPageImageExceedsFileSizeLimitFailureState());
-      }
+    } else if (imageData != null && imageData.lengthInBytes > fileSizeLimit) {
+      emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(EditLandingPageLoadingState());
       final failureOrSuccess = await landingPageRepo.editLandingPage(
