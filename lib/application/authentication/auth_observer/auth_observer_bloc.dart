@@ -22,8 +22,11 @@ class AuthObserverBloc extends Bloc<AuthObserverEvent, AuthObserverState> {
           .listen((user) => add(AuthObserverGotResultEvent(user: user)));
     });
 
-    on<AuthObserverGotResultEvent>((event, emit) {
-      if (event.user == null && state is AuthObserverStateUnAuthenticated) {
+    on<AuthObserverGotResultEvent>((event, emit) async {
+      if (event.user != null) {
+        await event.user!.getIdToken(true);
+      } else if (event.user == null &&
+          state is AuthObserverStateUnAuthenticated) {
         emit(AuthObserverStateUnAuthenticated());
       }
     });
