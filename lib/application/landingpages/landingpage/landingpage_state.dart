@@ -53,7 +53,7 @@ final class DeleteLandingPageSuccessState extends LandingPageState {}
 final class EditLandingPageLoadingState extends LandingPageState {}
 
 final class EditLandingPageFailureState extends LandingPageState {
-    final DatabaseFailure failure;
+  final DatabaseFailure failure;
   const EditLandingPageFailureState({
     required this.failure,
   });
@@ -61,7 +61,10 @@ final class EditLandingPageFailureState extends LandingPageState {
 
 final class EditLandingPageSuccessState extends LandingPageState {}
 
-final class LandingPageImageExceedsFileSizeLimitFailureState extends LandingPageState {}
+final class LandingPageImageExceedsFileSizeLimitFailureState
+    extends LandingPageState {}
+
+final class LandingPageNoImageFailureState extends LandingPageState {}
 
 final class DuplicateLandingPageLoadingState extends LandingPageState {}
 

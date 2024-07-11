@@ -25,6 +25,8 @@ class LandingPageCubit extends Cubit<LandingPageState> {
       bool imageHasChanged) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
+    } else if (imageData == [0]) {
+      emit(LandingPageNoImageFailureState());
     } else if (imageData.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {

@@ -5,8 +5,8 @@ import 'package:finanzbegleiter/application/images/landing_page/landing_page_ima
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_dropped_file.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_upload_dropzone.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +40,7 @@ class _LandingPageCreatorImageSectionState
 
   @override
   void didUpdateWidget(covariant LandingPageCreatorImageSection oldWidget) {
-    if(widget.landingPage == null) {
+    if (widget.landingPage == null) {
       _downloadCompanyImageFromURL();
     }
     super.didUpdateWidget(oldWidget);

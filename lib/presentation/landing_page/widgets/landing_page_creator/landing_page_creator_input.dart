@@ -98,6 +98,9 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
               showError = true;
               errorMessage = localization
                   .profile_page_image_section_validation_exceededFileSize;
+            } else if (state is LandingPageNoImageFailureState) {
+              showError = true;
+              errorMessage = "Bitte ein Bild hochladen";
             } else {
               showError = false;
             }
