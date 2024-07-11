@@ -20,12 +20,6 @@ class LandingPageOverviewGrid extends StatelessWidget {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     // First the Default Page
-    landingpages.sort((a, b) {
-      if (b.isDefaultPage ?? false) {
-        return 1;
-      }
-      return -1;
-    });
     return Container(
       constraints: const BoxConstraints(maxHeight: 600),
       child: AnimationLimiter(
