@@ -150,7 +150,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
             } else {
               return Form(
                   key: formKey,
-                  autovalidateMode: validationHasError
+                  autovalidateMode: state is LandingPageShowValidationState
                       ? AutovalidateMode.always
                       : AutovalidateMode.disabled,
                   child: Column(
