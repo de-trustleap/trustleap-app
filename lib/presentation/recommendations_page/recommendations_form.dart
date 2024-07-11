@@ -49,6 +49,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   bool validationHasError = false;
   String? reasonValid;
   bool promoterTextFieldDisabled = false;
+  List<String> reasons = [];
 
   @override
   void initState() {
@@ -158,6 +159,10 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
             }
           } else if (state is RecommendationGetParentUserSuccessState) {
             setParentUser(state.user);
+          } else if (state is RecommendationGetReasonsSuccessState) {
+            setState(() {
+              reasons = state.reasons;
+            });
           }
         },
         builder: (context, state) {
@@ -240,16 +245,16 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                           )
                       ]),
                       const SizedBox(height: textFieldSpacing),
-                      if (state is RecommendationGetReasonsSuccessState) ...[
+                      if (reasons.isNotEmpty) ...[
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               RecommendationReaseonPicker(
                                   width: maxWidth,
                                   validate: reasonValid,
-                                  reasons: state.reasons,
+                                  reasons: reasons,
                                   initialValue:
-                                      selectedReason ?? state.reasons[0],
+                                      selectedReason ?? reasons[0],
                                   onSelected: (reason) {
                                     setState(() {
                                       reasonValid =

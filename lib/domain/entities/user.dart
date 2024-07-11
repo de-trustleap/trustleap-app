@@ -22,6 +22,7 @@ class CustomUser extends Equatable {
   final List<String>? registeredPromoterIDs;
   final List<String>? landingPageIDs;
   final DateTime? deletesAt;
+  final DateTime? lastUpdated;
   final DateTime? createdAt;
 
   const CustomUser(
@@ -43,6 +44,7 @@ class CustomUser extends Equatable {
       this.registeredPromoterIDs,
       this.landingPageIDs,
       this.deletesAt,
+      this.lastUpdated,
       this.createdAt});
 
   CustomUser copyWith(
@@ -64,6 +66,7 @@ class CustomUser extends Equatable {
       List<String>? registeredPromoterIDs,
       List<String>? landingPageIDs,
       DateTime? deletesAt,
+      DateTime? lastUpdated,
       DateTime? createdAt}) {
     return CustomUser(
         id: id ?? this.id,
@@ -85,9 +88,9 @@ class CustomUser extends Equatable {
             unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
         registeredPromoterIDs:
             registeredPromoterIDs ?? this.registeredPromoterIDs,
-        landingPageIDs:
-            landingPageIDs ?? this.landingPageIDs,           
+        landingPageIDs: landingPageIDs ?? this.landingPageIDs,
         deletesAt: deletesAt ?? this.deletesAt,
+        lastUpdated: lastUpdated ?? this.lastUpdated,
         createdAt: createdAt ?? this.createdAt);
   }
 

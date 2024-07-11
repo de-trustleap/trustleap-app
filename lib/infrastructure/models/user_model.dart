@@ -24,6 +24,7 @@ class UserModel extends Equatable {
   final List<String>? registeredPromoterIDs;
   final List<String>? landingPageIDs;
   final DateTime? deletesAt;
+  final DateTime? lastUpdated;
   final dynamic createdAt;
 
   const UserModel(
@@ -45,6 +46,7 @@ class UserModel extends Equatable {
       this.registeredPromoterIDs,
       this.landingPageIDs,
       this.deletesAt,
+      this.lastUpdated,
       this.createdAt});
 
   Map<String, dynamic> toMap() {
@@ -67,6 +69,7 @@ class UserModel extends Equatable {
       'registeredPromoterIDs': registeredPromoterIDs,
       'landingPageIDs': landingPageIDs,
       'deletesAt': deletesAt,
+      'lastUpdated': lastUpdated,
       'createdAt': createdAt,
     };
   }
@@ -104,6 +107,9 @@ class UserModel extends Equatable {
       deletesAt: map['deletesAt'] != null
           ? (map['deletesAt'] as Timestamp).toDate()
           : null,
+      lastUpdated: map['lastUpdated'] != null
+          ? (map['lastUpdated'] as Timestamp).toDate()
+          : null,
       createdAt: map['createdAt'] as dynamic,
     );
   }
@@ -127,6 +133,7 @@ class UserModel extends Equatable {
     List<String>? registeredPromoterIDs,
     List<String>? landingPageIDs,
     DateTime? deletesAt,
+    DateTime? lastUpdated,
     dynamic createdAt,
   }) {
     return UserModel(
@@ -149,9 +156,9 @@ class UserModel extends Equatable {
           unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
       registeredPromoterIDs:
           registeredPromoterIDs ?? this.registeredPromoterIDs,
-      landingPageIDs:
-          landingPageIDs ?? this.landingPageIDs,
+      landingPageIDs: landingPageIDs ?? this.landingPageIDs,
       deletesAt: deletesAt ?? this.deletesAt,
+      lastUpdated: lastUpdated ?? this.lastUpdated,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -184,6 +191,7 @@ class UserModel extends Equatable {
         registeredPromoterIDs: registeredPromoterIDs,
         landingPageIDs: landingPageIDs,
         deletesAt: deletesAt,
+        lastUpdated: lastUpdated,
         createdAt: (createdAt as Timestamp).toDate());
   }
 
@@ -207,6 +215,7 @@ class UserModel extends Equatable {
         registeredPromoterIDs: user.registeredPromoterIDs,
         landingPageIDs: user.landingPageIDs,
         deletesAt: user.deletesAt,
+        lastUpdated: user.lastUpdated,
         createdAt: FieldValue.serverTimestamp());
   }
 

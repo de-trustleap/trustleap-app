@@ -71,7 +71,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     final failureOrSuccess = await landingPageRepo.duplicateLandingPage(id);
     failureOrSuccess.fold(
         (failure) => emit(DuplicateLandingPageFailureState(failure: failure)),
-        (_) => DuplicateLandingPageSuccessState());
+        (_) => emit(DuplicateLandingPageSuccessState()));
   }
 
   void getUser() async {

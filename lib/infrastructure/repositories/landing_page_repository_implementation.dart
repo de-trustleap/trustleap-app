@@ -68,11 +68,9 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       }
 
       landingPages.sort((a, b) {
-
         if (b.isDefaultPage ?? false) {
           return 1;
-        }
-        else if (a.isDefaultPage ?? false) {
+        } else if (a.isDefaultPage ?? false) {
           return -1;
         }
         if (a.createdAt != null && b.createdAt != null) {
