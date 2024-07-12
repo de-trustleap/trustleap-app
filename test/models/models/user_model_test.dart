@@ -62,12 +62,13 @@ void main() {
         "parentUserID": null,
         "companyID": "2",
         "role": "promoter",
+        "landingPageIDs": ["id"],
         "profileImageDownloadURL": "https://test.de",
         "thumbnailDownloadURL": "https://thumb.de",
-        "landingPageIDs": ["id"],
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
         "deletesAt": null,
+        "lastUpdated": null,
         "createdAt": Timestamp(100000, 0)
       };
       // When
