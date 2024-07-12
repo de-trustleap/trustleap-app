@@ -39,39 +39,41 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
     BlocProvider.of<LandingPageCubit>(context).getUser();
   }
 
+  void onSubmitCreate(LandingPage? landingPage, Function completion,
+      AppLocalizations localization) {
+    if (image != null || company?.companyImageDownloadURL != null) {
+      setState(() {
+        showError = false;
+      });
+      completion();
+    } else {
+      setState(() {
+        showError = true;
+        errorMessage = localization.error_msg_pleace_upload_picture;
+      });
+    }
+  }
+
+  void onSubmitEdit(LandingPage? landingPage, Function completion,
+      AppLocalizations localization) {
+    if (landingPage?.thumbnailDownloadURL != null) {
+      setState(() {
+        showError = false;
+      });
+      completion();
+    } else {
+      setState(() {
+        showError = true;
+        errorMessage = localization.error_msg_pleace_upload_picture;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
-
-    void onSubmitCreate(LandingPage? landingPage, Function completion) {
-      if (image != null || company?.companyImageDownloadURL != null) {
-        setState(() {
-          showError = false;
-        });
-        completion();
-      } else {
-        setState(() {
-          showError = true;
-          errorMessage = localization.error_msg_pleace_upload_picture;
-        });
-      }
-    }
-
-    void onSubmitEdit(LandingPage? landingPage, Function completion) {
-      if (landingPage?.thumbnailDownloadURL != null) {
-        setState(() {
-          showError = false;
-        });
-        completion();
-      } else {
-        setState(() {
-          showError = true;
-          errorMessage = localization.error_msg_pleace_upload_picture;
-        });
-      }
-    }
 
     return MultiBlocListener(
         listeners: [
@@ -136,13 +138,14 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
                       landingPage,
                       () => BlocProvider.of<LandingPageCubit>(context)
                           .createLandingPage(
-                              landingPage, image!, imageHasChanged));
+                              landingPage, image!, imageHasChanged),
+                      localization);
                 },
                 onEditTapped: (landingPage) {
                   onSubmitEdit(landingPage, () {
                     BlocProvider.of<LandingPageCubit>(context)
                         .editLandingPage(landingPage, image, imageHasChanged);
-                  });
+                  }, localization);
                 },
               )),
               if (showError && errorMessage != "") ...[

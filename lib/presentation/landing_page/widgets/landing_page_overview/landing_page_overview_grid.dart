@@ -13,7 +13,10 @@ class LandingPageOverviewGrid extends StatelessWidget {
   final Function(String, String) deletePressed;
   final Function(String) duplicatePressed;
   const LandingPageOverviewGrid(
-      {super.key, required this.landingpages, required this.deletePressed, required this.duplicatePressed});
+      {super.key,
+      required this.landingpages,
+      required this.deletePressed,
+      required this.duplicatePressed});
 
   final maxLandingPageCount = 11;
 
@@ -21,7 +24,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
-    // First the Default Page
+
     return Container(
       constraints: const BoxConstraints(maxHeight: 600),
       child: AnimationLimiter(
@@ -34,8 +37,9 @@ class LandingPageOverviewGrid extends StatelessWidget {
             physics: const ScrollPhysics(),
             childAspectRatio: calculateChildAspectRatio(responsiveValue),
             children: List.generate(
-                landingpages.length > maxLandingPageCount ? maxLandingPageCount + 1 : landingpages.length + 1,
-                (index) {
+                landingpages.length > maxLandingPageCount
+                    ? maxLandingPageCount + 1
+                    : landingpages.length + 1, (index) {
               return AnimationConfiguration.staggeredGrid(
                 position: index,
                 duration: const Duration(milliseconds: 150),
@@ -44,7 +48,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
                   child: Center(
                       child: GridTile(
                           child: index == 0
-                              ? (landingpages.length > maxLandingPageCount
+                              ? (landingpages.length >= maxLandingPageCount
                                   ? Center(
                                       child: Text(
                                         "Max Anzahl erreicht",
@@ -66,7 +70,8 @@ class LandingPageOverviewGrid extends StatelessWidget {
                                           )))
                               : LandingPageOverviewGridTile(
                                   landingPage: landingpages[index - 1],
-                                  isDuplicationAllowed: landingpages.length <= maxLandingPageCount,
+                                  isDuplicationAllowed:
+                                      landingpages.length < maxLandingPageCount,
                                   deletePressed: deletePressed,
                                   duplicatePressed: duplicatePressed))),
                 ),
