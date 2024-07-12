@@ -11,11 +11,24 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageOverviewGridTile extends StatelessWidget {
   final LandingPage landingPage;
+  final bool isDuplicationAllowed;
   final Function(String, String) deletePressed;
   final Function(String) duplicatePressed;
 
   const LandingPageOverviewGridTile(
-      {super.key, required this.landingPage, required this.deletePressed, required this.duplicatePressed});
+      {super.key,
+      required this.landingPage,
+      required this.isDuplicationAllowed,
+      required this.deletePressed,
+      required this.duplicatePressed});
+
+  TextStyle getDuplicateButtonTextStyle(ResponsiveBreakpointsData responsiveValue, ThemeData themeData) {
+    if(responsiveValue.isMobile) {
+      return isDuplicationAllowed ? themeData.textTheme.bodySmall! : themeData.textTheme.bodySmall!.copyWith(color: Colors.grey);
+    } else {
+      return isDuplicationAllowed ? themeData.textTheme.bodyMedium! : themeData.textTheme.bodyMedium!.copyWith(color: Colors.grey);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +39,9 @@ class LandingPageOverviewGridTile extends StatelessWidget {
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
       height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
       decoration: BoxDecoration(
-          color: (landingPage.isDefaultPage ?? false) ? themeData.colorScheme.primary: themeData.colorScheme.background,
+          color: (landingPage.isDefaultPage ?? false)
+              ? themeData.colorScheme.primary
+              : themeData.colorScheme.background,
           border: Border.all(color: Colors.transparent),
           borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Padding(
@@ -63,28 +78,35 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                                 themeData.colorScheme.secondary,
                                             size: 24),
                                         const SizedBox(width: 8),
-                                        const Text("Löschen")
+                                        Text("Löschen",
+                                            style: responsiveValue.isMobile
+                                                ? themeData.textTheme.bodySmall
+                                                : themeData
+                                                    .textTheme.bodyMedium)
                                       ])),
                               PopupMenuItem(
                                   value: "duplicate",
+                                  enabled: isDuplicationAllowed,
                                   child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
                                         Icon(Icons.copy,
-                                            color:
-                                                themeData.colorScheme.secondary,
+                                            color: isDuplicationAllowed
+                                                ? themeData
+                                                    .colorScheme.secondary
+                                                : Colors.grey,
                                             size: 24),
                                         const SizedBox(width: 8),
-                                        const Text("Duplizieren")
+                                        Text("Duplizieren",
+                                            style: getDuplicateButtonTextStyle(responsiveValue, themeData))
                                       ]))
                             ],
                         onSelected: (String newValue) {
                           if (newValue == "delete") {
                             deletePressed(landingPage.id.value,
                                 landingPage.ownerID?.value ?? "");
-                          }
-                          else if (newValue == "duplicate") {
+                          } else if (newValue == "duplicate") {
                             duplicatePressed(landingPage.id.value);
                           }
                         })

@@ -91,7 +91,7 @@ class DesktopAppTheme {
           onPrimaryContainer: AppTheme.lightCardColor,
           secondary: AppTheme.lightSecondaryColor,
           error: AppTheme.lightErrorColor,
-          errorContainer: AppTheme.lightErrorContainerColor,
+          errorContainer: Color.fromARGB(163, 250, 173, 168),
           surfaceTint: AppTheme.lightTextColor),
       textTheme: _lightTextTheme,
       iconTheme: AppTheme.lightIconTheme,
