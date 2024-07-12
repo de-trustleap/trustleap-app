@@ -95,7 +95,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
     try {
       await callable.call({
         "id": landingPage.id.value,
-        "title": landingPage.name,
+        "name": landingPage.name,
         "text": landingPage.text,
         "ownerID": landingPage.ownerID?.value,
         "imageData": base64Encode(imageData),
