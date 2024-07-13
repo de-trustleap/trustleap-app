@@ -415,13 +415,14 @@ class _RegisterFormState extends State<RegisterForm> {
                                     }),
                               ),
                             ]),
-                        if (state is SignInLoadingState || userState is UserLoading) ...[
+                        if (state is SignInLoadingState ||
+                            userState is UserLoading) ...[
                           const SizedBox(height: 80),
                           const LoadingIndicator()
                         ],
                         if (errorMessage != "" &&
                             showError &&
-                            (state is SignInLoadingState) &&
+                            (state is! SignInLoadingState) &&
                             !validationHasError) ...[
                           const SizedBox(height: textFieldSpacing),
                           Row(
