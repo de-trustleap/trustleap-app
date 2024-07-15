@@ -65,6 +65,7 @@ void main() {
         "landingPageIDs": ["id"],
         "profileImageDownloadURL": "https://test.de",
         "thumbnailDownloadURL": "https://thumb.de",
+        "pendingCompanyRequestID": null,
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
         "deletesAt": null,

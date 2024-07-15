@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/second
 import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_image_section.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_register_company_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/promoters_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,6 +66,13 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                                     localization
                                         .profile_page_snackbar_contact_information_changes)
                               }),
+                      SizedBox(height: responsiveValue.isMobile ? 20 : 60),
+                      ProfileRegisterCompanySection(
+                          hasPendingCompanyRequest:
+                              (state.user.pendingCompanyRequestID?.isEmpty ??
+                                      true)
+                                  ? false
+                                  : true),
                       SizedBox(height: responsiveValue.isMobile ? 20 : 60),
                       EmailSection(
                           user: state.user,

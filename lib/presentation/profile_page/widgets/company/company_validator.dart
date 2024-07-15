@@ -24,14 +24,44 @@ class CompanyValidator {
     }
   }
 
+  String? validateAddress(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Bitte eine Adresse angeben";
+    } else {
+      return null;
+    }
+  }
+
+  String? validatePostCode(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Bitte eine PLZ angeben";
+    } else if (_isNumeric(input)){
+      return null;
+    } else {
+      return "Die PLZ ist ungültig";
+    }
+  }
+
+  String? validatePlace(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Bitte einen Ort angeben";
+    } else {
+      return null;
+    }
+  }
+
   String? validatePhoneNumber(String? input) {
     const phoneNumberRegex = r'(^(?:[+0]9)?[0-9]{10,12}$)';
     if (input == null || input.isEmpty) {
-      return null;
+      return "Bitte Telefonnummer angeben";
     } else if (RegExp(phoneNumberRegex).hasMatch(input.trim())) {
       return null;
     } else {
       return localization.profile_company_validator_invalid_phone;
     }
+  }
+
+  bool _isNumeric(String s) {
+    return int.tryParse(s) != null;
   }
 }

@@ -64,4 +64,18 @@ class CompanyRepositoryImplementation implements CompanyRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+  
+  @override
+  Future<Either<DatabaseFailure, Unit>> registerCompany(Company company) async {
+    final pendingCompanyRequestsCollection = firestore.collection("pendingCompanyRequests");
+    final companyModel = CompanyModel.fromDomain(company);
+    try {
+      await pendingCompanyRequestsCollection.doc(companyModel.id).set(companyModel.toMap());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  } //TODO: Company Registration in einen Backend Call auslagern. Hier muss zum einen der pending Request erstellt werden und zum anderen dem User der pendingCompanyRequest zugewiesen werden.
+    //TODO: Wenn dieser schon eine hat muss ein Fehler geworfen werden!
+    //TODO: Pending Request braucht auch noch einen Timestamp
 }

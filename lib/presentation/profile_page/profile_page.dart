@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/application/profile/company_observer/company_obs
 import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/profile_company_view.dart';
@@ -19,7 +20,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final String? registeredCompany;
+
+  const ProfilePage({super.key, this.registeredCompany});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -33,6 +36,12 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   void initState() {
+    if (widget.registeredCompany == "true") {
+       WidgetsBinding.instance.addPostFrameCallback((_) {
+        CustomSnackBar.of(context)
+            .showCustomSnackBar("Das Unternehmen wurde erfolgreich registriert!");
+      });
+    }
     super.initState();
   }
 

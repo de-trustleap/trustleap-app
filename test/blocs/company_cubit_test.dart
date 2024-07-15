@@ -5,15 +5,18 @@ import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import '../repositories/auth_repository_test.mocks.dart';
 import '../repositories/company_repository_test.mocks.dart';
 
 void main() {
   late CompanyCubit companyCubit;
   late MockCompanyRepository mockCompanyRepo;
+  late MockAuthRepository mockAuthRepo;
 
   setUp(() {
     mockCompanyRepo = MockCompanyRepository();
-    companyCubit = CompanyCubit(mockCompanyRepo);
+    mockAuthRepo = MockAuthRepository();
+    companyCubit = CompanyCubit(mockCompanyRepo, mockAuthRepo);
   });
 
   test("init state should be CompanyInitial", () {

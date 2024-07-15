@@ -63,3 +63,36 @@ class GetCompanySuccessState extends CompanyState with EquatableMixin {
   @override
   List<Object?> get props => [company];
 }
+
+class CompanyRegisterLoadingState extends CompanyState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+class CompanyRegisterFailureState extends CompanyState with EquatableMixin {
+  final DatabaseFailure failure;
+
+  CompanyRegisterFailureState({
+    required this.failure,
+  });
+
+  @override
+  List<Object?> get props => [failure];
+}
+
+class CompanyRegisterSuccessState extends CompanyState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+class CompanyGetCurrentUserSuccessState extends CompanyState
+    with EquatableMixin {
+  final User? user;
+
+  CompanyGetCurrentUserSuccessState({
+    required this.user,
+  });
+  
+  @override
+  List<Object?> get props => [];
+}

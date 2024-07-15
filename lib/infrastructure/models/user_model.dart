@@ -20,6 +20,7 @@ class UserModel extends Equatable {
   final String? role;
   final String? profileImageDownloadURL;
   final String? thumbnailDownloadURL;
+  final String? pendingCompanyRequestID;
   final List<String>? unregisteredPromoterIDs;
   final List<String>? registeredPromoterIDs;
   final List<String>? landingPageIDs;
@@ -42,6 +43,7 @@ class UserModel extends Equatable {
       this.role,
       this.profileImageDownloadURL,
       this.thumbnailDownloadURL,
+      this.pendingCompanyRequestID,
       this.unregisteredPromoterIDs,
       this.registeredPromoterIDs,
       this.landingPageIDs,
@@ -65,6 +67,7 @@ class UserModel extends Equatable {
       'role': role,
       'profileImageDownloadURL': profileImageDownloadURL,
       'thumbnailDownloadURL': thumbnailDownloadURL,
+      'pendingCompanyRequestID': pendingCompanyRequestID,
       'unregisteredPromoterIDs': unregisteredPromoterIDs,
       'registeredPromoterIDs': registeredPromoterIDs,
       'landingPageIDs': landingPageIDs,
@@ -94,6 +97,9 @@ class UserModel extends Equatable {
           : null,
       thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
           ? map['thumbnailDownloadURL'] as String
+          : null,
+      pendingCompanyRequestID: map['pendingCompanyRequestID'] != null
+          ? map['pendingCompanyRequestID'] as String
           : null,
       unregisteredPromoterIDs: map['unregisteredPromoterIDs'] != null
           ? List<String>.from(map['unregisteredPromoterIDs'])
@@ -129,6 +135,7 @@ class UserModel extends Equatable {
     String? role,
     String? profileImageDownloadURL,
     String? thumbnailDownloadURL,
+    String? pendingCompanyRequestID,
     List<String>? unregisteredPromoterIDs,
     List<String>? registeredPromoterIDs,
     List<String>? landingPageIDs,
@@ -152,6 +159,7 @@ class UserModel extends Equatable {
       profileImageDownloadURL:
           profileImageDownloadURL ?? this.profileImageDownloadURL,
       thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+      pendingCompanyRequestID: pendingCompanyRequestID ?? this.pendingCompanyRequestID,
       unregisteredPromoterIDs:
           unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
       registeredPromoterIDs:
@@ -187,6 +195,7 @@ class UserModel extends Equatable {
             : Role.values.firstWhere((element) => element.name == role),
         profileImageDownloadURL: profileImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL,
+        pendingCompanyRequestID: pendingCompanyRequestID,
         unregisteredPromoterIDs: unregisteredPromoterIDs,
         registeredPromoterIDs: registeredPromoterIDs,
         landingPageIDs: landingPageIDs,
@@ -211,6 +220,7 @@ class UserModel extends Equatable {
         role: user.role?.name,
         profileImageDownloadURL: user.profileImageDownloadURL,
         thumbnailDownloadURL: user.thumbnailDownloadURL,
+        pendingCompanyRequestID : user.pendingCompanyRequestID,
         unregisteredPromoterIDs: user.unregisteredPromoterIDs,
         registeredPromoterIDs: user.registeredPromoterIDs,
         landingPageIDs: user.landingPageIDs,
