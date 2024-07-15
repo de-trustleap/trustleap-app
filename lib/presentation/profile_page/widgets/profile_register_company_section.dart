@@ -48,7 +48,7 @@ class ProfileRegisterCompanySection extends StatelessWidget {
                     Text("Deine Anfrage ist in Bearbeitung.\nDie Bearbeitungsdauer liegt bei durchschnittlich 7 Tagen.",
             style: responsiveValue.isMobile
                 ? themeData.textTheme.bodySmall
-                : themeData.textTheme.bodyMedium), // TODO: Hier auch noch Timestamp von Pending Request anzeigen
+                : themeData.textTheme.bodyMedium), //TODO: Hier auch noch Timestamp von Pending Request anzeigen
         ]
       ]);
     })));
