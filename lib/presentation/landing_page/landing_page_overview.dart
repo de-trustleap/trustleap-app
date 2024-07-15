@@ -53,7 +53,7 @@ class LandingPageOverview extends StatelessWidget {
               localization.landingpage_success_delete_snackbar_message);
         } else if (state is DuplicateLandingPageSuccessState) {
           CustomSnackBar.of(context)
-              .showCustomSnackBar("Landingpage erfolgreich dupliziert!");
+              .showCustomSnackBar(localization.landingpage_snackbar_success_duplicated);
         }
       },
       builder: (context, state) {

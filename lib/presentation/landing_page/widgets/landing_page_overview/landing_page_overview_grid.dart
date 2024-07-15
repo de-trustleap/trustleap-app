@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/add_new_landing_page_grid_tile.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid_tile.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -24,6 +25,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Container(
       constraints: const BoxConstraints(maxHeight: 600),
@@ -51,7 +53,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
                               ? (landingpages.length >= maxLandingPageCount
                                   ? Center(
                                       child: Text(
-                                        "Max Anzahl erreicht",
+                                        localization.landingpage_overview_max_count_msg,
                                         style: themeData.textTheme.labelSmall!
                                             .copyWith(
                                           fontSize: responsiveValue.isMobile

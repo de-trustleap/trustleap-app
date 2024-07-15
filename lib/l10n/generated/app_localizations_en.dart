@@ -173,6 +173,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_success_delete_snackbar_message => 'Landing page successfully deleted!';
 
   @override
+  String get landingpage_snackbar_success => 'The landing page was successfully created!';
+
+  @override
+  String get landingpage_snackbar_success_changed => 'The landing page was successfully changed!';
+
+  @override
+  String get landingpage_snackbar_success_duplicated => 'The landing page was successfully duplicated!';
+
+  @override
+  String get landingpage_overview_max_count_msg => 'Maximum number of landing pages reached';
+
+  @override
   String get landingpage_create_buttontitle => 'Create Landing Page';
 
   @override

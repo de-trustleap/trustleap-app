@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/landing_page/landing_page_overview.dart';
@@ -22,15 +23,16 @@ class LandingPageView extends StatefulWidget {
 class _LandingPageViewState extends State<LandingPageView> {
   @override
   void initState() {
+    final localization = AppLocalizations.of(context);
     if (widget.createdNewPage == "true") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         CustomSnackBar.of(context)
-            .showCustomSnackBar("Neue Landingpage erfolgreich erstellt!");
+            .showCustomSnackBar(localization.landingpage_snackbar_success);
       });
     } else if (widget.editedPage == "true") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         CustomSnackBar.of(context)
-            .showCustomSnackBar("Landingpage erfolgreich geändert!");
+            .showCustomSnackBar(localization.landingpage_snackbar_success_changed);
       });
     }
     super.initState();
