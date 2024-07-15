@@ -246,7 +246,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                 FormTextfield(
                                     maxWidth: responsiveValue.isMobile
                                         ? maxWidth
-                                        : maxWidth / 2,
+                                        : maxWidth / 2 - textFieldSpacing / 2,
                                     controller: postCodeTextController,
                                     disabled: textFieldsDisabled,
                                     placeholder: "",
@@ -271,7 +271,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                 FormTextfield(
                                     maxWidth: responsiveValue.isMobile
                                         ? maxWidth
-                                        : maxWidth / 2,
+                                        : maxWidth / 2 - textFieldSpacing / 2,
                                     controller: placeTextController,
                                     disabled: textFieldsDisabled,
                                     placeholder: "",

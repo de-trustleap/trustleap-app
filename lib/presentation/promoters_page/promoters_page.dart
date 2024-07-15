@@ -1,5 +1,7 @@
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_wrapper.dart';
@@ -11,7 +13,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersPage extends StatefulWidget {
-  const PromotersPage({super.key});
+  const PromotersPage({
+    super.key,
+  });
 
   @override
   State<PromotersPage> createState() => _PromotersPageState();
@@ -64,7 +68,13 @@ class _PromotersPageState extends State<PromotersPage>
       TabbarContent(
           tab: const CustomTab(
               icon: Icons.person_add, title: "Promoter registrieren"),
-          content: const RegisterPromotersView())
+          content: RegisterPromotersView(
+              tabController: tabController,
+              newPromoterCreated: () {
+                CustomSnackBar.of(context).showCustomSnackBar(
+                    AppLocalizations.of(context)
+                        .register_promoter_snackbar_success);
+              }))
     ];
   }
 

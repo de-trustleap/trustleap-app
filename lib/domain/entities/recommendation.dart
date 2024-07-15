@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
 class Recommendation extends Equatable {
@@ -8,7 +7,7 @@ class Recommendation extends Equatable {
   final String? name;
   final String? serviceProvider;
   final String? promoter;
-  final RecommendationReason? reason;
+  final String? reason;
 
   const Recommendation({
     required this.id,
@@ -23,7 +22,7 @@ class Recommendation extends Equatable {
     String? name,
     String? serviceProvider,
     String? promoter,
-    RecommendationReason? reason,
+    String? reason,
   }) {
     return Recommendation(
       id: id ?? this.id,

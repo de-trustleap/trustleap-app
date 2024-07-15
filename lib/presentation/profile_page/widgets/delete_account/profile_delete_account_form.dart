@@ -63,7 +63,7 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
     }
   }
 
-  void showAlert(ThemeData themeData, AppLocalizations localizations) {
+  void showAlert(AppLocalizations localizations) {
     showDialog(
         context: context,
         builder: (_) {
@@ -102,7 +102,7 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
             setButtonToDisabled(false);
           } else if (state
               is ProfileReauthenticateForAccountDeletionSuccessState) {
-            showAlert(themeData, localization);
+            showAlert(localization);
             setButtonToDisabled(false);
           } else if (state is ProfileAccountDeletionSuccessState) {
             BlocProvider.of<AuthCubit>(context).signOut();

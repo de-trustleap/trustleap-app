@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/image_dropped_file.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_dropped_file.dart';
 
 part 'company_image_event.dart';
 part 'company_image_state.dart';

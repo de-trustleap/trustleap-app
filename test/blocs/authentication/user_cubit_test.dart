@@ -40,10 +40,11 @@ void main() {
       verifyNoMoreInteractions(mockUserRepo);
     });
 
-    test("should emit UserSuccess when function is called", () async {
+    test("should emit UserLoading and UserSuccess when function is called", () async {
       // Given
       final expectedResult = [
-        UserSuccess(),
+        UserLoading(),
+        UserSuccess()
       ];
       when(mockUserRepo.createUser(user: testUser))
           .thenAnswer((_) async => right(unit));
@@ -53,10 +54,11 @@ void main() {
     });
 
     test(
-        "should emit UserFailure when function is called and there was an error",
+        "should emit UserLoading and UserFailure when function is called and there was an error",
         () async {
       // Given
       final expectedResult = [
+        UserLoading(),
         UserFailure(failure: BackendFailure()),
       ];
       when(mockUserRepo.createUser(user: testUser))

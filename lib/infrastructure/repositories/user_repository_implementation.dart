@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -13,9 +14,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 class UserRepositoryImplementation implements UserRepository {
   final FirebaseFirestore firestore;
   final FirebaseAuth firebaseAuth;
+  final FirebaseFunctions firebaseFunctions;
 
   UserRepositoryImplementation(
-      {required this.firestore, required this.firebaseAuth});
+      {required this.firestore,
+      required this.firebaseAuth,
+      required this.firebaseFunctions});
 
   @override
   Stream<Either<DatabaseFailure, CustomUser>> observeUser() async* {
@@ -41,12 +45,23 @@ class UserRepositoryImplementation implements UserRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> createUser(
       {required CustomUser user}) async {
-    final userCollection = firestore.collection("users");
-    final userModel = UserModel.fromDomain(user);
+    HttpsCallable callable = firebaseFunctions.httpsCallable("createUser");
+    UserModel userModel = UserModel.fromDomain(user);
     try {
-      await userCollection.doc(userModel.id).set(userModel.toMap());
+      await callable.call({
+        "id": userModel.id,
+        "gender": userModel.gender,
+        "firstName": userModel.firstName,
+        "lastName": userModel.lastName,
+        "birthDate": userModel.birthDate,
+        "address": userModel.address,
+        "postCode": userModel.postCode,
+        "place": userModel.place,
+        "email": userModel.email,
+        "role": userModel.role
+      });
       return right(unit);
-    } on FirebaseException catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
@@ -81,7 +96,7 @@ class UserRepositoryImplementation implements UserRepository {
         });
       });
     } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+      return left(FirebaseExceptionParser.getAuthException(code: e.code));
     }
   }
 
@@ -113,7 +128,7 @@ class UserRepositoryImplementation implements UserRepository {
         return right(await user.updatePassword(password));
       });
     } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(input: e.message));
+      return left(FirebaseExceptionParser.getAuthException(code: e.code));
     }
   }
 

@@ -9,8 +9,8 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_c
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/leads_validator.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -37,7 +37,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   final leadTextController = TextEditingController();
   final serviceProviderTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  RecommendationReason? selectedReason;
+  String? selectedReason;
   FocusNode? focusNode;
   CustomUser? currentUser;
   CustomUser? parentUser;
@@ -49,6 +49,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   bool validationHasError = false;
   String? reasonValid;
   bool promoterTextFieldDisabled = false;
+  List<String> reasons = [];
 
   @override
   void initState() {
@@ -80,8 +81,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
         validationHasError = false;
         reasonValid = null;
         leads.add(LeadItem(
-            name: leadTextController.text.trim(),
-            reason: selectedReason!.value));
+            name: leadTextController.text.trim(), reason: selectedReason!));
         leadTextController.clear();
       });
     } else {
@@ -150,6 +150,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
         listener: (context, state) {
           if (state is RecommendationGetCurrentUserSuccessState) {
             setUser(state.user);
+            BlocProvider.of<RecommendationsCubit>(context)
+                .getRecommendationReasons(state.user.landingPageIDs ?? []);
             if (state.user.role == Role.promoter &&
                 state.user.parentUserID != null) {
               BlocProvider.of<RecommendationsCubit>(context)
@@ -157,11 +159,16 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
             }
           } else if (state is RecommendationGetParentUserSuccessState) {
             setParentUser(state.user);
+          } else if (state is RecommendationGetReasonsSuccessState) {
+            setState(() {
+              reasons = state.reasons;
+            });
           }
         },
         builder: (context, state) {
           if (state is RecommendationGetCurrentUserSuccessState ||
-              state is RecommendationGetParentUserSuccessState) {
+              state is RecommendationGetParentUserSuccessState ||
+              state is RecommendationGetReasonsSuccessState) {
             return Form(
                 key: formKey,
                 autovalidateMode: validationHasError
@@ -238,23 +245,27 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                           )
                       ]),
                       const SizedBox(height: textFieldSpacing),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RecommendationReaseonPicker(
-                                width: maxWidth,
-                                validate: reasonValid,
-                                initialValue: selectedReason,
-                                onSelected: (reason) {
-                                  setState(() {
-                                    reasonValid =
-                                        validator.validateReason(reason);
-                                    selectedReason = reason;
-                                  });
-                                  resetError();
-                                })
-                          ]),
-                      const SizedBox(height: textFieldSpacing * 2),
+                      if (reasons.isNotEmpty) ...[
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RecommendationReaseonPicker(
+                                  width: maxWidth,
+                                  validate: reasonValid,
+                                  reasons: reasons,
+                                  initialValue:
+                                      selectedReason ?? reasons[0],
+                                  onSelected: (reason) {
+                                    setState(() {
+                                      reasonValid =
+                                          validator.validateReason(reason);
+                                      selectedReason = reason;
+                                    });
+                                    resetError();
+                                  })
+                            ]),
+                        const SizedBox(height: textFieldSpacing * 2),
+                      ],
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,

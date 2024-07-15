@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_overview_filter.dart';
@@ -12,7 +13,6 @@ import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_ove
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_list.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_no_search_results_view.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_empty_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -132,9 +132,15 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
       builder: (context, state) {
         if (state is PromotersObserverGetElementsSuccess) {
           if (state.promoters.isEmpty && visiblePromoters.isEmpty) {
-            return PromotersOverviewEmptyPage(registerPromoterTapped: () {
-              widget.tabController.animateTo(1);
-            });
+            return EmptyPage(
+                icon: Icons.person_add,
+                title: localization.promoter_overview_empty_page_title,
+                subTitle: localization.promoter_overview_empty_page_subtitle,
+                buttonTitle:
+                    localization.promoter_overview_empty_page_button_title,
+                onTap: () {
+                  widget.tabController.animateTo(1);
+                });
           } else {
             return headerWithChildren([
               const SizedBox(height: 24),

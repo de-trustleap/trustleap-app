@@ -3,26 +3,7 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 
 class FirebaseExceptionParser {
-  static String parseFirebaseAuthExceptionMessage(
-      {String plugin = "auth", required String? input}) {
-    if (input == null) {
-      return "unknown";
-    }
-
-    // https://regexr.com/7en3h
-    String regexPattern = r'(?<=\(' + plugin + r'/)(.*?)(?=\)\.)';
-    RegExp regExp = RegExp(regexPattern);
-    Match? match = regExp.firstMatch(input);
-    if (match != null) {
-      return match.group(0)!;
-    }
-
-    return "unknown";
-  }
-
-  static AuthFailure getAuthException({required String? input}) {
-    final String code =
-        FirebaseExceptionParser.parseFirebaseAuthExceptionMessage(input: input);
+  static AuthFailure getAuthException({required String? code}) {
     if (code == "user-disabled") {
       return UserDisabledFailure();
     } else if (code == "invalid-email") {

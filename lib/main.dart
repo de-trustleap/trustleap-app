@@ -6,7 +6,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/l10n/l10n.dart';
-import 'package:finanzbegleiter/presentation/core/modules/app_module.dart';
+import 'package:finanzbegleiter/core/modules/app_module.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/themes/desktop_theme.dart';
 import 'package:finanzbegleiter/themes/mobile_theme.dart';

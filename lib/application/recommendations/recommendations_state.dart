@@ -10,7 +10,7 @@ final class RecommendationsInitial extends RecommendationsState
   List<Object?> get props => [];
 }
 
-class RecommendationGetUserLoadingState extends RecommendationsState
+class RecommendationLoadingState extends RecommendationsState
     with EquatableMixin {
   @override
   List<Object?> get props => [];
@@ -50,4 +50,32 @@ class RecommendationGetParentUserSuccessState extends RecommendationsState
 
   @override
   List<Object?> get props => [user];
+}
+
+class RecommendationGetReasonsFailureState extends RecommendationsState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+
+  const RecommendationGetReasonsFailureState({
+    required this.failure,
+  });
+
+  @override
+  List<Object?> get props => [failure];
+}
+
+class RecommendationGetReasonsSuccessState extends RecommendationsState
+    with EquatableMixin {
+  final List<String> reasons;
+
+  const RecommendationGetReasonsSuccessState({required this.reasons});
+
+  @override
+  List<Object?> get props => [reasons];
+}
+
+class RecommendationNoReasonsState extends RecommendationsState
+    with EquatableMixin {
+  @override
+  List<Object?> get props => [];
 }

@@ -43,7 +43,7 @@ void main() {
         "lastName": "Mustermann",
         "birthDate": "23.12.2023",
         "email": "tester@test.de",
-        "additionalInfo": null,
+        "landingPageIDs": null,
         "parentUserID": "2",
         "code": "1234",
         "expiresAt": date,

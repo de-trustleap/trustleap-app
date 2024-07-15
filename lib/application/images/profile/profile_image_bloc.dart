@@ -8,7 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/image_section/image_dropped_file.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_dropped_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -48,8 +48,7 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
         final file = event.files.first;
         if (file.mime.contains("image")) {
           final xFileImage = XFile.fromData(file.data);
-          add(UploadImageTriggeredEvent(
-              rawImage: xFileImage, id: event.id));
+          add(UploadImageTriggeredEvent(rawImage: xFileImage, id: event.id));
         } else {
           emit(ProfileImageIsNotValidFailureState());
         }

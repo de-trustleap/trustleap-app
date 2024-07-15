@@ -62,6 +62,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get login_login_buttontitle => 'Anmelden';
 
   @override
+  String get delete_buttontitle => 'Löschen';
+
+  @override
+  String get cancel_buttontitle => 'Abbrechen';
+
+  @override
+  String get changes_save_button_title => 'Änderungen speichern';
+
+  @override
   String get login_password_forgotten_text => 'Haben Sie ihr ';
 
   @override
@@ -137,7 +146,64 @@ class AppLocalizationsDe extends AppLocalizations {
   String get menuitems_promoters => 'Promoter';
 
   @override
+  String get landingpage_overview_title => 'Landing Pages Übersicht';
+
+  @override
   String get menuitems_landingpage => 'Landingpage';
+
+  @override
+  String get landingpage_overview_error_view_title => 'Ein Fehler beim Abruf der Daten ist aufgetreten.';
+
+  @override
+  String get landingpage_overview_empty_page_title => 'Keine Landingpage gefunden';
+
+  @override
+  String get landingpage_overview_empty_page_subtitle => 'Sie scheinen noch keine Landingpage zu haben. Erstellen Sie jetzt ihre Landingpage.';
+
+  @override
+  String get landingpage_overview_empty_page_button_title => 'Landingpage registrieren';
+
+  @override
+  String get landingpage_delete_alert_title => 'Soll die ausgewählte Landingpage wirklich gelöscht werden?';
+
+  @override
+  String get landingpage_delete_alert_msg => 'Das Löschen der Landingpage kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get landingpage_success_delete_snackbar_message => 'Landinpage erfolgriech gelöscht!';
+
+  @override
+  String get landingpage_snackbar_success => 'Die Landingpage wurde erfolgreich erstellt!';
+
+  @override
+  String get landingpage_snackbar_success_changed => 'Die Landingpage wurde erfolgreich geändert!';
+
+  @override
+  String get landingpage_snackbar_success_duplicated => 'Die Landingpage wurde erfolgreich dupliziert!';
+
+  @override
+  String get landingpage_overview_max_count_msg => 'Maximale Anzahl an Landingpages wurde erreicht';
+
+  @override
+  String get landingpage_create_buttontitle => 'Landingpage erstellen';
+
+  @override
+  String get landingpage_validate_LandingPageName => 'Bitte Namen eingeben!';
+
+  @override
+  String get landingpage_validate_LandingPageText => 'Bitte Text eingeben!';
+
+  @override
+  String get landingpage_create_txt => 'Landingpage erstellen';
+
+  @override
+  String get placeholder_title => 'Titel';
+
+  @override
+  String get placeholder_text => 'Text';
+
+  @override
+  String get error_msg_pleace_upload_picture => 'Bitte ein Bild hochladen';
 
   @override
   String get menuitems_activities => 'Aktivitäten';
