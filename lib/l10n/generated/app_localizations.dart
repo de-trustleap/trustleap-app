@@ -429,6 +429,30 @@ abstract class AppLocalizations {
   /// **'Landing page successfully deleted!'**
   String get landingpage_success_delete_snackbar_message;
 
+  /// The title of the snackbar when a new landing page is created
+  ///
+  /// In en, this message translates to:
+  /// **'The landing page was successfully created!'**
+  String get landingpage_snackbar_success;
+
+  /// The title of the snackbar when a landing page is changed
+  ///
+  /// In en, this message translates to:
+  /// **'The landing page was successfully changed!'**
+  String get landingpage_snackbar_success_changed;
+
+  /// The title of the snackbar when a landing page is duplicated
+  ///
+  /// In en, this message translates to:
+  /// **'The landing page was successfully duplicated!'**
+  String get landingpage_snackbar_success_duplicated;
+
+  /// The title when the maximum number of landing pages is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum number of landing pages reached'**
+  String get landingpage_overview_max_count_msg;
+
   /// Title of the Create Landing Page Button
   ///
   /// In en, this message translates to:

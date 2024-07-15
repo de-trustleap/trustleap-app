@@ -224,6 +224,22 @@
     "@landingpage_success_delete_snackbar_message": {
         "description": "Snackbar Nachricht wenn eine Landingpage erfolgreich gelöscht wurden"
     },
+    "landingpage_snackbar_success": "Die Landingpage wurde erfolgreich erstellt!",
+    "@landingpage_snackbar_success": {
+        "description": "Der Titel der Snackbar wenn eine neue Landingpage erstellt wurde"
+    },
+    "landingpage_snackbar_success_changed": "Die Landingpage wurde erfolgreich geändert!",
+    "@landingpage_snackbar_success_changed": {
+        "description": "Der Titel der Snackbar wenn eine Landingpage geändert wurde"
+    },
+    "landingpage_snackbar_success_duplicated": "Die Landingpage wurde erfolgreich dupliziert!",
+    "@landingpage_snackbar_success_duplicated": {
+        "description": "Der Titel der Snackbar wenn eine Landingpage dupliziert wurde"
+    },
+    "landingpage_overview_max_count_msg": "Maximale Anzahl an Landingpages wurde erreicht",
+    "@landingpage_overview_max_count_msg": {
+        "description": "Der Titel wenn die maximala Anzahl an Landingpages erreicht wurde"
+    },
     "landingpage_create_buttontitle": "Landingpage erstellen",
     "@landingpage_create_buttontitle": {
         "description": "Titel des Landingpage erstellen Button"

@@ -224,6 +224,22 @@
     "@landingpage_success_delete_snackbar_message": {
         "description": "Snackbar message when a landing page has been successfully deleted"
     },
+    "landingpage_snackbar_success": "The landing page was successfully created!",
+    "@landingpage_snackbar_success": {
+        "description": "The title of the snackbar when a new landing page is created"
+    },
+    "landingpage_snackbar_success_changed": "The landing page was successfully changed!",
+    "@landingpage_snackbar_success_changed": {
+        "description": "The title of the snackbar when a landing page is changed"
+    },
+    "landingpage_snackbar_success_duplicated": "The landing page was successfully duplicated!",
+    "@landingpage_snackbar_success_duplicated": {
+        "description": "The title of the snackbar when a landing page is duplicated"
+    },
+    "landingpage_overview_max_count_msg": "Maximum number of landing pages reached",
+    "@landingpage_overview_max_count_msg": {
+        "description": "The title when the maximum number of landing pages is reached"
+    },
     "landingpage_create_buttontitle": "Create Landing Page",
     "@landingpage_create_buttontitle": {
         "description": "Title of the Create Landing Page Button"
