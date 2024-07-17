@@ -61,17 +61,24 @@ class _ProfileRegisterCompanySectionState
                   registerRequestView(
                       themeData, responsiveValue, maxWidth, spacing)
                 ] else if (state is PendingCompanyRequestSuccessState) ...[
-                  Text(
-                      "Deine Anfrage ist in Bearbeitung.\nDie Bearbeitungsdauer liegt bei durchschnittlich 7 Tagen.",
-                      style: responsiveValue.isMobile
-                          ? themeData.textTheme.bodySmall
-                          : themeData.textTheme.bodyMedium),
-                  if (state.request.createdAt != null) ...[
-                    Text(
-                        "Eingereicht am ${DateTimeFormatter().getStringFromDate(context, state.request.createdAt!)}",
+                  SizedBox(
+                    width: maxWidth,
+                    child: Text(
+                        "Deine Anfrage ist in Bearbeitung.\nDie Bearbeitungsdauer liegt bei durchschnittlich 7 Tagen.",
                         style: responsiveValue.isMobile
                             ? themeData.textTheme.bodySmall
-                            : themeData.textTheme.bodyMedium)
+                            : themeData.textTheme.bodyMedium),
+                  ),
+                  if (state.request.createdAt != null) ...[
+                    SizedBox(height: spacing.toDouble()),
+                    SizedBox(
+                      width: maxWidth,
+                      child: Text(
+                          "Eingereicht am ${DateTimeFormatter().getStringFromDate(context, state.request.createdAt!)}",
+                          style: responsiveValue.isMobile
+                              ? themeData.textTheme.bodySmall
+                              : themeData.textTheme.bodyMedium),
+                    )
                   ]
                 ] else if (state is PendingCompanyRequestFailureState) ...[
                   FormErrorView(
