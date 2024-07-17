@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
+import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -27,7 +27,7 @@ class _ProfileRegisterCompanySectionState
   @override
   void initState() {
     if (_hasPendingCompanyRequest()) {
-      BlocProvider.of<CompanyCubit>(context)
+      BlocProvider.of<CompanyRequestCubit>(context)
           .getPendingCompanyRequest(widget.user.pendingCompanyRequestID!);
     }
     super.initState();
@@ -45,7 +45,7 @@ class _ProfileRegisterCompanySectionState
     final localization = AppLocalizations.of(context);
     const spacing = 20;
 
-    return BlocBuilder<CompanyCubit, CompanyState>(
+    return BlocBuilder<CompanyRequestCubit, CompanyRequestState>(
       builder: (context, state) {
         return CardContainer(
             child: LayoutBuilder(builder: ((context, constraints) {

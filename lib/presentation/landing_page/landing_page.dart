@@ -23,19 +23,20 @@ class LandingPageView extends StatefulWidget {
 class _LandingPageViewState extends State<LandingPageView> {
   @override
   void initState() {
-    final localization = AppLocalizations.of(context);
+    super.initState();
     if (widget.createdNewPage == "true") {
+      final localization = AppLocalizations.of(context);
       WidgetsBinding.instance.addPostFrameCallback((_) {
         CustomSnackBar.of(context)
             .showCustomSnackBar(localization.landingpage_snackbar_success);
       });
     } else if (widget.editedPage == "true") {
+      final localization = AppLocalizations.of(context);
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        CustomSnackBar.of(context)
-            .showCustomSnackBar(localization.landingpage_snackbar_success_changed);
+        CustomSnackBar.of(context).showCustomSnackBar(
+            localization.landingpage_snackbar_success_changed);
       });
     }
-    super.initState();
   }
 
   @override

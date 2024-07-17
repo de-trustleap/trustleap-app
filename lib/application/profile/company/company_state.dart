@@ -92,37 +92,7 @@ class CompanyGetCurrentUserSuccessState extends CompanyState
   CompanyGetCurrentUserSuccessState({
     required this.user,
   });
-  
+
   @override
   List<Object?> get props => [];
-}
-
-class PendingCompanyRequestLoadingState extends CompanyState
-    with EquatableMixin {
-  @override
-  List<Object?> get props => [];
-}
-
-class PendingCompanyRequestFailureState extends CompanyState
-    with EquatableMixin {
-  final DatabaseFailure failure;
-
-  PendingCompanyRequestFailureState({
-    required this.failure,
-  });
-
-  @override
-  List<Object?> get props => [failure];
-}
-
-class PendingCompanyRequestSuccessState extends CompanyState
-    with EquatableMixin {
-  final CompanyRequest request;
-
-  PendingCompanyRequestSuccessState({
-    required this.request,
-  });
-
-  @override
-  List<Object?> get props => [request];
 }

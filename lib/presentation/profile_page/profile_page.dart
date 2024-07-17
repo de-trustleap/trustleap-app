@@ -1,10 +1,11 @@
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
+import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
-import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
+import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
@@ -37,9 +38,9 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   void initState() {
     if (widget.registeredCompany == "true") {
-       WidgetsBinding.instance.addPostFrameCallback((_) {
-        CustomSnackBar.of(context)
-            .showCustomSnackBar("Das Unternehmen wurde erfolgreich registriert!");
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        CustomSnackBar.of(context).showCustomSnackBar(
+            "Das Unternehmen wurde erfolgreich registriert!");
       });
     }
     super.initState();
@@ -65,11 +66,13 @@ class _ProfilePageState extends State<ProfilePage>
               create: (context) => Modular.get<ProfileCubit>()
                 ..verifyEmail()
                 ..getCurrentUser()),
-          BlocProvider(create: (context) => Modular.get<CompanyObserverCubit>()),
+          BlocProvider(
+              create: (context) => Modular.get<CompanyObserverCubit>()),
           BlocProvider(create: (context) => Modular.get<CompanyCubit>()),
           BlocProvider(create: (context) => Modular.get<UserCubit>()),
           BlocProvider(create: (context) => Modular.get<ProfileImageBloc>()),
-          BlocProvider(create: (context) => Modular.get<CompanyImageBloc>())
+          BlocProvider(create: (context) => Modular.get<CompanyImageBloc>()),
+          BlocProvider(create: (context) => Modular.get<CompanyRequestCubit>())
         ],
         child: BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
           builder: (context, state) {
@@ -84,7 +87,8 @@ class _ProfilePageState extends State<ProfilePage>
   bool canAccessCompanyProfile(ProfileUserObserverSuccess state) {
     if (state.user.role == Role.company && state.user.companyID != null) {
       return true;
-    } else if (state.user.role == Role.serviceProvider && state.user.companyID != null) {
+    } else if (state.user.role == Role.serviceProvider &&
+        state.user.companyID != null) {
       return true;
     } else {
       return false;
@@ -96,10 +100,12 @@ class _ProfilePageState extends State<ProfilePage>
       TabbarContent(
           tab: const CustomTab(icon: Icons.person, title: "Persönliche Daten"),
           content: const ProfileGeneralView()),
-      if (state is ProfileUserObserverSuccess && canAccessCompanyProfile(state)) ...[
+      if (state is ProfileUserObserverSuccess &&
+          canAccessCompanyProfile(state)) ...[
         TabbarContent(
             tab: const CustomTab(icon: Icons.home, title: "Unternehmen"),
-            content: ProfileCompanyView(user: state.user, companyID: state.user.companyID!))
+            content: ProfileCompanyView(
+                user: state.user, companyID: state.user.companyID!))
       ],
       TabbarContent(
           tab: const CustomTab(icon: Icons.lock, title: "Passwort ändern"),

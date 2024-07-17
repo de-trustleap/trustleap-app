@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
-import 'package:finanzbegleiter/domain/entities/company_request.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -53,13 +52,5 @@ class CompanyCubit extends Cubit<CompanyState> {
     // ignore: await_only_futures
     final currentUser = await authRepo.getCurrentUser();
     emit(CompanyGetCurrentUserSuccessState(user: currentUser));
-  }
-
-  void getPendingCompanyRequest(String id) async {
-    emit(PendingCompanyRequestLoadingState());
-    final failureOrSuccess = await companyRepo.getPendingCompanyRequest(id);
-    failureOrSuccess.fold(
-        (failure) => emit(PendingCompanyRequestFailureState(failure: failure)),
-        (request) => emit(PendingCompanyRequestSuccessState(request: request)));
   }
 }
