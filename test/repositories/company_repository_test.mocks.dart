@@ -8,6 +8,7 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:finanzbegleiter/core/failures/database_failures.dart' as _i5;
 import 'package:finanzbegleiter/domain/entities/company.dart' as _i6;
+import 'package:finanzbegleiter/domain/entities/company_request.dart' as _i7;
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -111,4 +112,22 @@ class MockCompanyRepository extends _i1.Mock implements _i3.CompanyRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.DatabaseFailure, _i7.CompanyRequest>>
+      getPendingCompanyRequest(String? id) => (super.noSuchMethod(
+            Invocation.method(
+              #getPendingCompanyRequest,
+              [id],
+            ),
+            returnValue: _i4.Future<
+                    _i2.Either<_i5.DatabaseFailure, _i7.CompanyRequest>>.value(
+                _FakeEither_0<_i5.DatabaseFailure, _i7.CompanyRequest>(
+              this,
+              Invocation.method(
+                #getPendingCompanyRequest,
+                [id],
+              ),
+            )),
+          ) as _i4.Future<_i2.Either<_i5.DatabaseFailure, _i7.CompanyRequest>>);
 }

@@ -828,8 +828,32 @@
     "@profile_company_validator_invalid_phone": {
         "description": "Validation message when the phone number is invalid."
     },
+    "profile_company_validator_missing_address": "Please enter the address",
+    "@profile_company_validator_missing_address": {
+        "description": "Validation message when there is no address."
+    },
+    "profile_company_validator_missing_postCode": "Please enter a postcode",
+    "@profile_company_validator_missing_postCode": {
+        "description": "Validation message when there is no postcode."
+    },
+    "profile_company_validator_invalid_postCode": "The postcode is invalid",
+    "@profile_company_validator_invalid_postCode": {
+        "description": "Validation message when the postcode is invalid."
+    },
+    "profile_company_validator_missing_place": "Please enter a place",
+    "@profile_company_validator_missing_place": {
+        "description": "Validation message when there is no place."
+    },
+    "profile_company_validator_missing_phone": "Please enter a phone number",
+    "@profile_company_validator_missing_phone": {
+        "description": "Validation message when there is no phone number."
+    },
     "profile_company_contact_section_success_snackbar_message": "Company information changed successfully",
     "@profile_company_contact_section_success_snackbar_message": {
         "description": "Snackbar message when company information changed successfully."
+    },
+    "company_requests_overview_title": "Company Registration Requests",
+    "@company_requests_overview_title": {
+        "description": "Heading for the company registration requests in the admin module"
     }
 }

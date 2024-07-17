@@ -6,7 +6,6 @@ import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import 'auth_repository_test.mocks.dart';
 import 'mock_user_credential.dart';
 

@@ -1317,11 +1317,47 @@ abstract class AppLocalizations {
   /// **'The phone number is invalid'**
   String get profile_company_validator_invalid_phone;
 
+  /// Validation message when there is no address.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the address'**
+  String get profile_company_validator_missing_address;
+
+  /// Validation message when there is no postcode.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a postcode'**
+  String get profile_company_validator_missing_postCode;
+
+  /// Validation message when the postcode is invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'The postcode is invalid'**
+  String get profile_company_validator_invalid_postCode;
+
+  /// Validation message when there is no place.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a place'**
+  String get profile_company_validator_missing_place;
+
+  /// Validation message when there is no phone number.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a phone number'**
+  String get profile_company_validator_missing_phone;
+
   /// Snackbar message when company information changed successfully.
   ///
   /// In en, this message translates to:
   /// **'Company information changed successfully'**
   String get profile_company_contact_section_success_snackbar_message;
+
+  /// Heading for the company registration requests in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Company Registration Requests'**
+  String get company_requests_overview_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

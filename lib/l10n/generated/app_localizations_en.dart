@@ -621,5 +621,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_company_validator_invalid_phone => 'The phone number is invalid';
 
   @override
+  String get profile_company_validator_missing_address => 'Please enter the address';
+
+  @override
+  String get profile_company_validator_missing_postCode => 'Please enter a postcode';
+
+  @override
+  String get profile_company_validator_invalid_postCode => 'The postcode is invalid';
+
+  @override
+  String get profile_company_validator_missing_place => 'Please enter a place';
+
+  @override
+  String get profile_company_validator_missing_phone => 'Please enter a phone number';
+
+  @override
   String get profile_company_contact_section_success_snackbar_message => 'Company information changed successfully';
+
+  @override
+  String get company_requests_overview_title => 'Company Registration Requests';
 }

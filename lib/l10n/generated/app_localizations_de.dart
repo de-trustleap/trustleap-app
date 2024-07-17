@@ -621,5 +621,23 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profile_company_validator_invalid_phone => 'Die angegebene Telefonnummer ist ungültig';
 
   @override
+  String get profile_company_validator_missing_address => 'Bitte eine Adresse angeben';
+
+  @override
+  String get profile_company_validator_missing_postCode => 'Bitte eine PLZ angeben';
+
+  @override
+  String get profile_company_validator_invalid_postCode => 'Die PLZ ist ungültig';
+
+  @override
+  String get profile_company_validator_missing_place => 'Bitte einen Ort angeben';
+
+  @override
+  String get profile_company_validator_missing_phone => 'Bitte Telefonnummer angeben';
+
+  @override
   String get profile_company_contact_section_success_snackbar_message => 'Unternehmensinformationen erfolgreich geändert';
+
+  @override
+  String get company_requests_overview_title => 'Anfragen für Unternehmensregistrierungen';
 }

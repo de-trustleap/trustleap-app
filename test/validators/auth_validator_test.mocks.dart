@@ -544,6 +544,42 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_snackbar_success => (super.noSuchMethod(
+        Invocation.getter(#landingpage_snackbar_success),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_snackbar_success),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_snackbar_success_changed => (super.noSuchMethod(
+        Invocation.getter(#landingpage_snackbar_success_changed),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_snackbar_success_changed),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_snackbar_success_duplicated => (super.noSuchMethod(
+        Invocation.getter(#landingpage_snackbar_success_duplicated),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_snackbar_success_duplicated),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_max_count_msg => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_max_count_msg),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_max_count_msg),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_create_buttontitle => (super.noSuchMethod(
         Invocation.getter(#landingpage_create_buttontitle),
         returnValue: _i3.dummyValue<String>(
@@ -1898,6 +1934,51 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get profile_company_validator_missing_address => (super.noSuchMethod(
+        Invocation.getter(#profile_company_validator_missing_address),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_validator_missing_address),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_validator_missing_postCode => (super.noSuchMethod(
+        Invocation.getter(#profile_company_validator_missing_postCode),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_validator_missing_postCode),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_validator_invalid_postCode => (super.noSuchMethod(
+        Invocation.getter(#profile_company_validator_invalid_postCode),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_validator_invalid_postCode),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_validator_missing_place => (super.noSuchMethod(
+        Invocation.getter(#profile_company_validator_missing_place),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_validator_missing_place),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_validator_missing_phone => (super.noSuchMethod(
+        Invocation.getter(#profile_company_validator_missing_phone),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_validator_missing_phone),
+        ),
+      ) as String);
+
+  @override
   String get profile_company_contact_section_success_snackbar_message =>
       (super.noSuchMethod(
         Invocation.getter(
@@ -1906,6 +1987,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           this,
           Invocation.getter(
               #profile_company_contact_section_success_snackbar_message),
+        ),
+      ) as String);
+
+  @override
+  String get company_requests_overview_title => (super.noSuchMethod(
+        Invocation.getter(#company_requests_overview_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#company_requests_overview_title),
         ),
       ) as String);
 

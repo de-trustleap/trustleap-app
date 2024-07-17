@@ -828,8 +828,32 @@
     "@profile_company_validator_invalid_phone": {
         "description": "Validierungsnachricht wenn Telefonnummer ungültig ist"
     },
+    "profile_company_validator_missing_address": "Bitte eine Adresse angeben",
+    "@profile_company_validator_missing_address": {
+        "description": "Validierungsnachricht wenn keine Adresse angegeben ist"
+    },
+    "profile_company_validator_missing_postCode": "Bitte eine PLZ angeben",
+    "@profile_company_validator_missing_postCode": {
+        "description": "Validierungsnachricht wenn keine PLZ angegeben ist"
+    },
+    "profile_company_validator_invalid_postCode": "Die PLZ ist ungültig",
+    "@profile_company_validator_invalid_postCode": {
+        "description": "Validierungsnachricht wenn PLZ ungültig ist"
+    },
+    "profile_company_validator_missing_place": "Bitte einen Ort angeben",
+    "@profile_company_validator_missing_place": {
+        "description": "Validierungsnachricht wenn kein Ort angegeben ist"
+    },
+    "profile_company_validator_missing_phone": "Bitte Telefonnummer angeben",
+    "@profile_company_validator_missing_phone": {
+        "description": "Validierungsnachricht wenn keine Telefonnummer angegeben ist"
+    },
     "profile_company_contact_section_success_snackbar_message": "Unternehmensinformationen erfolgreich geändert",
     "@profile_company_contact_section_success_snackbar_message": {
         "description": "Snackbar Nachricht wenn Unternehmensinformationen erfolgreich geändert wurden"
+    },
+    "company_requests_overview_title": "Anfragen für Unternehmensregistrierungen",
+    "@company_requests_overview_title": {
+        "description": "Überschrift für die Unternehmensregistrierungsanfragen im Adminmodul"
     }
 }
