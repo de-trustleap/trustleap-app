@@ -1,56 +1,116 @@
+import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
+import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class ProfileRegisterCompanySection extends StatelessWidget {
-  final bool hasPendingCompanyRequest;
-  const ProfileRegisterCompanySection({super.key, required this.hasPendingCompanyRequest });
+class ProfileRegisterCompanySection extends StatefulWidget {
+  final CustomUser user;
+  const ProfileRegisterCompanySection({super.key, required this.user});
+
+  @override
+  State<ProfileRegisterCompanySection> createState() =>
+      _ProfileRegisterCompanySectionState();
+}
+
+class _ProfileRegisterCompanySectionState
+    extends State<ProfileRegisterCompanySection> {
+  @override
+  void initState() {
+    if (_hasPendingCompanyRequest()) {
+      BlocProvider.of<CompanyCubit>(context)
+          .getPendingCompanyRequest(widget.user.pendingCompanyRequestID!);
+    }
+    super.initState();
+  }
+
+  bool _hasPendingCompanyRequest() {
+    return widget.user.pendingCompanyRequestID != null &&
+        widget.user.pendingCompanyRequestID != "";
+  }
 
   @override
   Widget build(BuildContext context) {
-    print("HAS PENDING COMPANY REQUEST: $hasPendingCompanyRequest");
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
     const spacing = 20;
 
-    return CardContainer(child: LayoutBuilder(builder: ((context, constraints) {
-      final maxWidth = constraints.maxWidth;
-      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text("Unternehmensregistrierung",
-            style: themeData.textTheme.headlineLarge!
-                .copyWith(fontWeight: FontWeight.bold)),
-        const SizedBox(height: 8),
-        if (!hasPendingCompanyRequest) ... [
-          Text("Registriere jetzt dein Unternehmen, um weitere Vorteile der App nutzen zu können.",
-            style: responsiveValue.isMobile
-                ? themeData.textTheme.bodySmall
-                : themeData.textTheme.bodyMedium),
-        const SizedBox(height: spacing * 2),
-                        Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    PrimaryButton(
-                        title: "Zur Registrierung",
-                        width: responsiveValue.isMobile
-                            ? maxWidth - spacing
-                            : maxWidth / 2 - spacing,
-                        disabled: false,
-                        onTap: () {
-                          Modular.to.navigate(RoutePaths.homePath + RoutePaths.companyRegistration);
-                        })
-                  ],
-                ),
-        ] else ... [
-                    Text("Deine Anfrage ist in Bearbeitung.\nDie Bearbeitungsdauer liegt bei durchschnittlich 7 Tagen.",
-            style: responsiveValue.isMobile
-                ? themeData.textTheme.bodySmall
-                : themeData.textTheme.bodyMedium), //TODO: Hier auch noch Timestamp von Pending Request anzeigen
-        ]
-      ]);
-    })));
+    return BlocBuilder<CompanyCubit, CompanyState>(
+      builder: (context, state) {
+        return CardContainer(
+            child: LayoutBuilder(builder: ((context, constraints) {
+          final maxWidth = constraints.maxWidth;
+          return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Unternehmensregistrierung",
+                    style: themeData.textTheme.headlineLarge!
+                        .copyWith(fontWeight: FontWeight.bold)),
+                SizedBox(height: spacing.toDouble()),
+                if (!_hasPendingCompanyRequest()) ...[
+                  registerRequestView(
+                      themeData, responsiveValue, maxWidth, spacing)
+                ] else if (state is PendingCompanyRequestSuccessState) ...[
+                  Text(
+                      "Deine Anfrage ist in Bearbeitung.\nDie Bearbeitungsdauer liegt bei durchschnittlich 7 Tagen.",
+                      style: responsiveValue.isMobile
+                          ? themeData.textTheme.bodySmall
+                          : themeData.textTheme.bodyMedium),
+                  if (state.request.createdAt != null) ...[
+                    Text(
+                        "Eingereicht am ${DateTimeFormatter().getStringFromDate(context, state.request.createdAt!)}",
+                        style: responsiveValue.isMobile
+                            ? themeData.textTheme.bodySmall
+                            : themeData.textTheme.bodyMedium)
+                  ]
+                ] else if (state is PendingCompanyRequestFailureState) ...[
+                  FormErrorView(
+                      message: DatabaseFailureMapper.mapFailureMessage(
+                          state.failure, localization))
+                ] else ...[
+                  const LoadingIndicator()
+                ]
+              ]);
+        })));
+      },
+    );
+  }
+
+  Widget registerRequestView(ThemeData themeData,
+      ResponsiveBreakpointsData responsiveValue, double maxWidth, int spacing) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+          "Registriere jetzt dein Unternehmen, um weitere Vorteile der App nutzen zu können.",
+          style: responsiveValue.isMobile
+              ? themeData.textTheme.bodySmall
+              : themeData.textTheme.bodyMedium),
+      SizedBox(height: spacing * 2),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          PrimaryButton(
+              title: "Zur Registrierung",
+              width: responsiveValue.isMobile
+                  ? maxWidth - spacing
+                  : maxWidth / 2 - spacing,
+              disabled: false,
+              onTap: () {
+                Modular.to.navigate(
+                    RoutePaths.homePath + RoutePaths.companyRegistration);
+              })
+        ],
+      ),
+    ]);
   }
 }

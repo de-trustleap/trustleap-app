@@ -18,6 +18,11 @@ import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dar
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
+import 'package:finanzbegleiter/core/modules/admin_guard.dart';
+import 'package:finanzbegleiter/core/modules/admin_module.dart';
+import 'package:finanzbegleiter/core/modules/auth_guard.dart';
+import 'package:finanzbegleiter/core/modules/auth_module.dart';
+import 'package:finanzbegleiter/core/modules/home_module.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
@@ -30,9 +35,6 @@ import 'package:finanzbegleiter/infrastructure/repositories/image_repository_imp
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/promoter_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
-import 'package:finanzbegleiter/core/modules/auth_guard.dart';
-import 'package:finanzbegleiter/core/modules/auth_module.dart';
-import 'package:finanzbegleiter/core/modules/home_module.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -83,5 +85,7 @@ class AppModule extends Module {
   void routes(r) {
     r.module("/", module: AuthModule(), guards: [UnAuthGuard()]);
     r.module(RoutePaths.homePath, module: HomeModule(), guards: [AuthGuard()]);
+    r.module(RoutePaths.adminPath,
+        module: AdminModule(), guards: [AdminGuard()]);
   }
 }

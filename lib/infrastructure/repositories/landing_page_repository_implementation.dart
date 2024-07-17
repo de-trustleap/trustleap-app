@@ -92,15 +92,16 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       bool imageHasChanged) async {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("createLandingPage");
+    final landingPageModel = LandingPageModel.fromDomain(landingPage);
     try {
       await callable.call({
-        "id": landingPage.id.value,
-        "name": landingPage.name,
-        "text": landingPage.text,
-        "ownerID": landingPage.ownerID?.value,
+        "id": landingPageModel.id,
+        "name": landingPageModel.name,
+        "text": landingPageModel.text,
+        "ownerID": landingPageModel.ownerID,
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged,
-        "isDefaultPage": landingPage.isDefaultPage
+        "isDefaultPage": landingPageModel.isDefaultPage
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {

@@ -3,10 +3,10 @@ import 'package:finanzbegleiter/application/authentication/auth_observer/auth_ob
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/modules/app_module.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/l10n/l10n.dart';
-import 'package:finanzbegleiter/core/modules/app_module.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/themes/desktop_theme.dart';
 import 'package:finanzbegleiter/themes/mobile_theme.dart';
@@ -27,19 +27,29 @@ Future main() async {
   runApp(ModularApp(module: AppModule(), child: const MyApp()));
 }
 
-void routeToInitial(bool authenticated) {
-  if (!authenticated) {
-    print("NOT AUTHENTICATED");
-    Modular.to.navigate(RoutePaths.loginPath);
-  } else {
-    print("AUTHENTICATED");
-    final lastRoute =
-        WidgetsBinding.instance.platformDispatcher.defaultRouteName;
-    if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
-      Modular.to.navigate(lastRoute);
-    } else {
-      Modular.to.navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
-    }
+void routeToInitial(AuthStatus status) {
+  final lastRoute = WidgetsBinding.instance.platformDispatcher.defaultRouteName;
+  switch (status) {
+    case AuthStatus.unAuthenticated:
+      print("NOT AUTHENTICATED");
+      Modular.to.navigate(RoutePaths.loginPath);
+      break;
+    case AuthStatus.authenticated:
+      print("AUTHENTICATED");
+      if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
+        Modular.to.navigate(lastRoute);
+      } else {
+        Modular.to.navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
+      }
+      break;
+    case AuthStatus.authenticatedAsAdmin:
+      print("AUTHENTICATED AS ADMIN");
+      if (lastRoute != "/" && lastRoute.contains(RoutePaths.adminPath)) {
+        Modular.to.navigate(lastRoute);
+      } else {
+        Modular.to.navigate(RoutePaths.adminPath + RoutePaths.overviewPath);
+      }
+      break;
   }
 }
 
@@ -88,17 +98,19 @@ class MyApp extends StatelessWidget {
                 listenWhen: (previous, current) => previous != current,
                 listener: (context, state) {
                   if (state is AuthStateUnAuthenticated) {
-                    routeToInitial(false);
+                    routeToInitial(AuthStatus.unAuthenticated);
                   } else if (state is AuthStateAuthenticated) {
-                    routeToInitial(true);
+                    routeToInitial(AuthStatus.authenticated);
+                  } else if (state is AuthStateAuthenticatedAsAdmin) {
+                    routeToInitial(AuthStatus.authenticatedAsAdmin);
                   }
                 }),
             BlocListener<AuthObserverBloc, AuthObserverState>(
                 listener: (context, state) {
               if (state is AuthObserverStateUnAuthenticated) {
-                routeToInitial(false);
+                routeToInitial(AuthStatus.unAuthenticated);
               } else if (state is AuthObserverStateAuthenticated) {
-                routeToInitial(true);
+                routeToInitial(AuthStatus.authenticated);
               }
             })
           ],

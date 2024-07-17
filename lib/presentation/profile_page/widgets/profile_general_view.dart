@@ -67,12 +67,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                                         .profile_page_snackbar_contact_information_changes)
                               }),
                       SizedBox(height: responsiveValue.isMobile ? 20 : 60),
-                      ProfileRegisterCompanySection(
-                          hasPendingCompanyRequest:
-                              (state.user.pendingCompanyRequestID?.isEmpty ??
-                                      true)
-                                  ? false
-                                  : true),
+                      ProfileRegisterCompanySection(user: state.user),
                       SizedBox(height: responsiveValue.isMobile ? 20 : 60),
                       EmailSection(
                           user: state.user,

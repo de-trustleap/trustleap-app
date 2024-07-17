@@ -1,4 +1,7 @@
 class RoutePaths {
+  static const String adminPath = "/admin";
+  static const String overviewPath = "/overview";
+
   static const String homePath = "/home";
   static const String dashboardPath = "/dashboard";
   static const String profilePath = "/profile";

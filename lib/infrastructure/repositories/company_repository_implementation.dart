@@ -1,18 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
+import 'package:finanzbegleiter/domain/entities/company_request.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/infrastructure/models/company_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/company_request_model.dart';
 
 class CompanyRepositoryImplementation implements CompanyRepository {
   final FirebaseFirestore firestore;
+  final FirebaseFunctions firebaseFunctions;
 
-  CompanyRepositoryImplementation({
-    required this.firestore,
-  });
+  CompanyRepositoryImplementation(
+      {required this.firestore, required this.firebaseFunctions});
 
   @override
   Stream<Either<DatabaseFailure, Company>> observeCompany(
@@ -64,18 +67,46 @@ class CompanyRepositoryImplementation implements CompanyRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
-  
+
   @override
   Future<Either<DatabaseFailure, Unit>> registerCompany(Company company) async {
-    final pendingCompanyRequestsCollection = firestore.collection("pendingCompanyRequests");
+    HttpsCallable callable = firebaseFunctions.httpsCallable("registerCompany");
     final companyModel = CompanyModel.fromDomain(company);
     try {
-      await pendingCompanyRequestsCollection.doc(companyModel.id).set(companyModel.toMap());
+      await callable.call({
+        "id": companyModel.id,
+        "name": companyModel.name,
+        "industry": companyModel.industry,
+        "websiteURL": companyModel.websiteURL,
+        "address": companyModel.address,
+        "postCode": companyModel.postCode,
+        "place": companyModel.place,
+        "phoneNumber": companyModel.phoneNumber,
+        "ownerID": companyModel.ownerID
+      });
       return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, CompanyRequest>> getPendingCompanyRequest(
+      String id) async {
+    final pendingCompanyRequestRef =
+        firestore.collection("pendingCompanyRequests").doc(id);
+    try {
+      final snapshot = await pendingCompanyRequestRef.get();
+      if (snapshot.data() == null) {
+        return left(NotFoundFailure());
+      } else {
+        final request =
+            CompanyRequestModel.fromFirestore(snapshot.data()!, snapshot.id)
+                .toDomain();
+        return right(request);
+      }
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
-  } //TODO: Company Registration in einen Backend Call auslagern. Hier muss zum einen der pending Request erstellt werden und zum anderen dem User der pendingCompanyRequest zugewiesen werden.
-    //TODO: Wenn dieser schon eine hat muss ein Fehler geworfen werden!
-    //TODO: Pending Request braucht auch noch einen Timestamp
+  }
 }

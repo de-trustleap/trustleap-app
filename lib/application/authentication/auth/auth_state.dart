@@ -8,6 +8,11 @@ class AuthStateAuthenticated extends AuthState with EquatableMixin {
   List<Object?> get props => [];
 }
 
+class AuthStateAuthenticatedAsAdmin extends AuthState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
 class AuthStateUnAuthenticated extends AuthState with EquatableMixin {
   @override
   List<Object?> get props => [];

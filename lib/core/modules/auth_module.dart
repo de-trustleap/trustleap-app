@@ -1,8 +1,10 @@
+import 'package:finanzbegleiter/core/modules/admin_guard.dart';
+import 'package:finanzbegleiter/core/modules/admin_module.dart';
+import 'package:finanzbegleiter/core/modules/auth_guard.dart';
+import 'package:finanzbegleiter/core/modules/home_module.dart';
 import 'package:finanzbegleiter/presentation/authentication/login_page.dart';
 import 'package:finanzbegleiter/presentation/authentication/password_forgotten_page.dart';
 import 'package:finanzbegleiter/presentation/authentication/register_page.dart';
-import 'package:finanzbegleiter/core/modules/auth_guard.dart';
-import 'package:finanzbegleiter/core/modules/home_module.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -17,6 +19,8 @@ class AuthModule extends Module {
     r.child(RoutePaths.passwordReset,
         child: (_) => const SelectionArea(child: PasswordForgottenPage()));
     r.module(RoutePaths.homePath, module: HomeModule(), guards: [AuthGuard()]);
+    r.module(RoutePaths.adminPath,
+        module: AdminModule(), guards: [AdminGuard()]);
     r.wildcard(child: (_) => const LoginPage());
   }
 }

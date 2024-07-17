@@ -86,8 +86,9 @@ class LandingPageModel extends Equatable {
             ? (map['lastUpdatedAt'] as Timestamp).toDate()
             : null,
         createdAt: map['createdAt'] as dynamic,
-        isDefaultPage: map['isDefaultPage'] != null ? map['isDefaultPage'] as bool : false
-        );
+        isDefaultPage: map['isDefaultPage'] != null
+            ? map['isDefaultPage'] as bool
+            : false);
   }
 
   factory LandingPageModel.fromFirestore(Map<String, dynamic> doc, String id) {
@@ -105,8 +106,7 @@ class LandingPageModel extends Equatable {
         associatedUsersIDs: associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate(),
-        isDefaultPage: isDefaultPage ?? false
-        );
+        isDefaultPage: isDefaultPage ?? false);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -115,16 +115,22 @@ class LandingPageModel extends Equatable {
         name: landingPage.name,
         downloadImageUrl: landingPage.downloadImageUrl,
         thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
-        ownerID: landingPage.ownerID?.value ?? "",
+        ownerID: landingPage.ownerID?.value,
         text: landingPage.text,
         associatedUsersIDs: landingPage.associatedUsersIDs,
         lastUpdatedAt: landingPage.lastUpdatedAt,
         createdAt: FieldValue.serverTimestamp(),
-        isDefaultPage: landingPage.isDefaultPage
-        );
+        isDefaultPage: landingPage.isDefaultPage);
   }
 
   @override
-  List<Object?> get props =>
-      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text, isDefaultPage];
+  List<Object?> get props => [
+        id,
+        name,
+        downloadImageUrl,
+        thumbnailDownloadURL,
+        ownerID,
+        text,
+        isDefaultPage
+      ];
 }
