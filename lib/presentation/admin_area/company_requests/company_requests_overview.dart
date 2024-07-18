@@ -1,8 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/company_request.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/admin_area/company_request_overview_list_tile.dart';
+import 'package:finanzbegleiter/presentation/admin_area/company_requests/company_request_overview_list_tile.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -10,10 +12,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-class CompanyRequestsOverview extends StatelessWidget {
-  CompanyRequestsOverview({super.key});
+class CompanyRequestDetailsModel {
+  final CompanyRequest request;
+  final CustomUser user;
 
+  CompanyRequestDetailsModel({
+    required this.request,
+    required this.user,
+  });
+}
+
+class CompanyRequestsOverview extends StatefulWidget {
+  const CompanyRequestsOverview({super.key});
+
+  @override
+  State<CompanyRequestsOverview> createState() =>
+      _CompanyRequestsOverviewState();
+}
+
+class _CompanyRequestsOverviewState extends State<CompanyRequestsOverview> {
   List<CompanyRequest> requests = [];
+
+  List<CompanyRequestDetailsModel> models = [];
+
+  List<CompanyRequestDetailsModel> createModels(
+      List<CompanyRequest> requests, List<CustomUser> users) {
+    List<CompanyRequestDetailsModel> models = [];
+    for (var request in requests) {
+      final id = request.userID;
+      if (id == null || id.value.isEmpty) {
+        continue;
+      } else {
+        CustomUser user = users.firstWhere((user) => user.id == id);
+        models.add(CompanyRequestDetailsModel(request: request, user: user));
+      }
+    }
+    return models;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +60,24 @@ class CompanyRequestsOverview extends StatelessWidget {
         requests = state.requests;
         BlocProvider.of<CompanyRequestObserverCubit>(context)
             .getAllUsersForCompanyRequests(state.requests);
+      } else if (state is CompanyRequestObserverGetUsersSuccessState) {
+        setState(() {
+          models = createModels(requests, state.users);
+        });
       }
     }), builder: ((context, state) {
       return ListView(shrinkWrap: true, children: [
         CardContainer(child: LayoutBuilder(builder: ((context, constraints) {
-          final maxWidth = constraints.maxWidth;
           if (state is CompanyRequestObserverGetUsersSuccessState) {
-            print("REQUEST LENGTH: ${requests.length}");
-            print("USERS LENGTH: ${state.users.length}");
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Anfragen für Unternehmensregistrierung",
                     style: themeData.textTheme.headlineLarge!
                         .copyWith(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 40),
                 ListView.builder(
-                    itemCount: requests.length,
+                    itemCount: models.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return AnimationConfiguration.staggeredList(
@@ -51,8 +88,7 @@ class CompanyRequestsOverview extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 16),
                             child: CompanyRequestOverviewListTile(
-                                companyRequest: requests[index],
-                                user: state.users[index]),
+                                model: models[index]),
                           )));
                     })
               ],
@@ -76,7 +112,6 @@ class CompanyRequestsOverview extends StatelessWidget {
                           .observeAllPendingCompanyRequests()
                     });
           } else {
-            print("THE STATE: $state");
             return const LoadingIndicator();
           }
         })))

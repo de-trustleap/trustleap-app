@@ -1,6 +1,7 @@
 class RoutePaths {
   static const String adminPath = "/admin";
-  static const String overviewPath = "/overview";
+  static const String companyRequestsPath = "/company-requests";
+  static const String companyRequestDetails = "/company-request-details";
 
   static const String homePath = "/home";
   static const String dashboardPath = "/dashboard";

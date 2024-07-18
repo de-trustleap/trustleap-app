@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart';
-import 'package:finanzbegleiter/presentation/admin_area/company_requests_overview.dart';
+import 'package:finanzbegleiter/presentation/admin_area/company_requests/company_requests_overview.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,7 @@ class AdminArea extends StatelessWidget {
         body: BlocProvider(
             create: (context) => Modular.get<CompanyRequestObserverCubit>()
               ..observeAllPendingCompanyRequests(),
-            child:
-                CenteredConstrainedWrapper(child: CompanyRequestsOverview())));
+            child: const CenteredConstrainedWrapper(
+                child: CompanyRequestsOverview())));
   }
 }
