@@ -9,6 +9,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:finanzbegleiter/core/failures/database_failures.dart' as _i5;
 import 'package:finanzbegleiter/domain/entities/company.dart' as _i6;
 import 'package:finanzbegleiter/domain/entities/company_request.dart' as _i7;
+import 'package:finanzbegleiter/domain/entities/user.dart' as _i8;
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -55,6 +56,19 @@ class MockCompanyRepository extends _i1.Mock implements _i3.CompanyRepository {
         returnValue:
             _i4.Stream<_i2.Either<_i5.DatabaseFailure, _i6.Company>>.empty(),
       ) as _i4.Stream<_i2.Either<_i5.DatabaseFailure, _i6.Company>>);
+
+  @override
+  _i4.Stream<_i2.Either<_i5.DatabaseFailure, List<_i7.CompanyRequest>>>
+      observeCompanyRequests() => (super.noSuchMethod(
+            Invocation.method(
+              #observeCompanyRequests,
+              [],
+            ),
+            returnValue: _i4.Stream<
+                _i2
+                .Either<_i5.DatabaseFailure, List<_i7.CompanyRequest>>>.empty(),
+          ) as _i4.Stream<
+              _i2.Either<_i5.DatabaseFailure, List<_i7.CompanyRequest>>>);
 
   @override
   _i4.Future<_i2.Either<_i5.DatabaseFailure, _i2.Unit>> updateCompany(
@@ -130,4 +144,25 @@ class MockCompanyRepository extends _i1.Mock implements _i3.CompanyRepository {
               ),
             )),
           ) as _i4.Future<_i2.Either<_i5.DatabaseFailure, _i7.CompanyRequest>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.DatabaseFailure, List<_i8.CustomUser>>>
+      getAllUsersForPendingCompanyRequests(List<String>? ids) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #getAllUsersForPendingCompanyRequests,
+              [ids],
+            ),
+            returnValue: _i4.Future<
+                    _i2
+                    .Either<_i5.DatabaseFailure, List<_i8.CustomUser>>>.value(
+                _FakeEither_0<_i5.DatabaseFailure, List<_i8.CustomUser>>(
+              this,
+              Invocation.method(
+                #getAllUsersForPendingCompanyRequests,
+                [ids],
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.Either<_i5.DatabaseFailure, List<_i8.CustomUser>>>);
 }

@@ -7,6 +7,8 @@ enum MenuItems {
   promoters("Promoter"),
   landingpage("Landingpage"),
   activities("Aktivitäten"),
+
+  adminCompanyRequests("Unternehmensanfragen"),
   none("");
 
   final String value;

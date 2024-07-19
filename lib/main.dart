@@ -47,7 +47,8 @@ void routeToInitial(AuthStatus status) {
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.adminPath)) {
         Modular.to.navigate(lastRoute);
       } else {
-        Modular.to.navigate(RoutePaths.adminPath + RoutePaths.overviewPath);
+        Modular.to
+            .navigate(RoutePaths.adminPath + RoutePaths.companyRequestsPath);
       }
       break;
   }
