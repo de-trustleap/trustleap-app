@@ -16,8 +16,6 @@ class CompanyRequestOverviewListTile extends StatelessWidget {
         Modular.to.pushNamed(
             RoutePaths.adminPath + RoutePaths.companyRequestDetails,
             arguments: model);
-        //   Modular.to
-        //       .navigate(RoutePaths.adminPath + RoutePaths.companyRequestDetails);
       },
       child: Container(
           decoration: BoxDecoration(

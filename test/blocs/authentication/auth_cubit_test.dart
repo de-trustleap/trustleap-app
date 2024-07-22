@@ -2,14 +2,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import '../../mocks.mocks.dart';
 
-import '../../repositories/auth_repository_test.mocks.dart';
-
-@GenerateMocks([User])
 void main() {
   late AuthCubit authCubit;
   late MockAuthRepository mockAuthRepo;

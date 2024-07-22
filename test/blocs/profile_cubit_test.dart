@@ -7,10 +7,8 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import '../repositories/auth_repository_test.mocks.dart';
 import '../repositories/mock_user_credential.dart';
-import '../repositories/user_repository_test.mocks.dart';
-import 'authentication/auth_cubit_test.mocks.dart';
+import '../mocks.mocks.dart';
 
 void main() {
   late ProfileCubit profileCubit;

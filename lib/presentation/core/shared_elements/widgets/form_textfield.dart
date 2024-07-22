@@ -16,6 +16,7 @@ class FormTextfield extends StatelessWidget {
   final IconData? prefixIcon;
   final int? maxLines;
   final int? minLines;
+  final Key? accessibilityKey;
   final Function? onTap;
 
   const FormTextfield(
@@ -33,6 +34,7 @@ class FormTextfield extends StatelessWidget {
       this.prefixIcon,
       this.maxLines,
       this.minLines,
+      this.accessibilityKey,
       this.onTap});
 
   @override
@@ -53,6 +55,7 @@ class FormTextfield extends StatelessWidget {
               prefixIcon: prefixIcon,
               minLines: minLines,
               maxLines: maxLines,
+              key: accessibilityKey,
               onTap: onTap));
     } else {
       return RawFormTextField(
@@ -68,6 +71,7 @@ class FormTextfield extends StatelessWidget {
           prefixIcon: prefixIcon,
           minLines: minLines,
           maxLines: maxLines,
+          key: accessibilityKey,
           onTap: onTap);
     }
   }

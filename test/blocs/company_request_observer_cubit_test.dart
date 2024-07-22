@@ -6,8 +6,7 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
-import '../repositories/company_repository_test.mocks.dart';
+import '../mocks.mocks.dart';
 
 void main() {
   late CompanyRequestObserverCubit companyRequestObserverCubit;

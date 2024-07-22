@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'company_request_cubit.dart';
 
 sealed class CompanyRequestState extends Equatable {
@@ -26,3 +27,13 @@ class PendingCompanyRequestSuccessState extends CompanyRequestState {
     required this.request,
   });
 }
+
+class ProcessCompanyRequestFailureState extends CompanyRequestState {
+  final DatabaseFailure failure;
+
+  const ProcessCompanyRequestFailureState({
+    required this.failure,
+  });
+}
+
+class ProcessCompanyRequestSuccessState extends CompanyRequestState {}

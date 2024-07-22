@@ -9,7 +9,8 @@ class EmptyPage extends StatelessWidget {
   final String title;
   final String subTitle;
   final String buttonTitle;
-  final Function onTap;
+  final bool isButtonHidden;
+  final Function? onTap;
 
   const EmptyPage({
     super.key,
@@ -17,6 +18,7 @@ class EmptyPage extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.buttonTitle,
+    this.isButtonHidden = false,
     required this.onTap,
   });
 
@@ -45,19 +47,21 @@ class EmptyPage extends StatelessWidget {
             Text(subTitle,
                 style: themeData.textTheme.headlineLarge,
                 textAlign: TextAlign.center),
-            const SizedBox(height: 24),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                PrimaryButton(
-                    title: buttonTitle,
-                    width: responsiveValue.isMobile
-                        ? responsiveValue.screenWidth - 20
-                        : 300,
-                    onTap: () => onTap()),
-              ],
-            )
+            if (!isButtonHidden) ...[
+              const SizedBox(height: 24),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  PrimaryButton(
+                      title: buttonTitle,
+                      width: responsiveValue.isMobile
+                          ? responsiveValue.screenWidth - 20
+                          : 300,
+                      onTap: () => onTap != null ? onTap!() : {}),
+                ],
+              )
+            ]
           ],
         )));
   }

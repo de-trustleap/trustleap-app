@@ -3,14 +3,10 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/company_request.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import '../mocks.mocks.dart';
 
-import 'company_repository_test.mocks.dart';
-
-@GenerateMocks([CompanyRepository])
 void main() {
   late MockCompanyRepository mockCompanyRepo;
 

@@ -5,13 +5,10 @@ import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'user_repository_test.mocks.dart';
+import '../mocks.mocks.dart';
 
-@GenerateMocks([UserRepository])
 void main() {
   late MockUserRepository mockUserRepo;
 

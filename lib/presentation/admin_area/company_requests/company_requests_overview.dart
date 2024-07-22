@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/admin_area/company_requests/company_request_overview_list_tile.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
@@ -69,30 +70,41 @@ class _CompanyRequestsOverviewState extends State<CompanyRequestsOverview> {
       return ListView(shrinkWrap: true, children: [
         CardContainer(child: LayoutBuilder(builder: ((context, constraints) {
           if (state is CompanyRequestObserverGetUsersSuccessState) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Anfragen für Unternehmensregistrierung",
-                    style: themeData.textTheme.headlineLarge!
-                        .copyWith(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 40),
-                ListView.builder(
-                    itemCount: models.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return AnimationConfiguration.staggeredList(
-                          position: index,
-                          duration: const Duration(milliseconds: 150),
-                          child: ScaleAnimation(
-                              child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 16),
-                            child: CompanyRequestOverviewListTile(
-                                model: models[index]),
-                          )));
-                    })
-              ],
-            );
+            if (state.users.isEmpty) {
+              return const EmptyPage(
+                  icon: Icons.free_breakfast,
+                  title: "Keine Anfragen vorhanden",
+                  subTitle:
+                      "Zurzeit scheint es keine Registrierungsanfragen von Unternehmen zu geben.",
+                  buttonTitle: "",
+                  isButtonHidden: true,
+                  onTap: null);
+            } else {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Anfragen für Unternehmensregistrierung",
+                      style: themeData.textTheme.headlineLarge!
+                          .copyWith(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 40),
+                  ListView.builder(
+                      itemCount: models.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return AnimationConfiguration.staggeredList(
+                            position: index,
+                            duration: const Duration(milliseconds: 150),
+                            child: ScaleAnimation(
+                                child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 16),
+                              child: CompanyRequestOverviewListTile(
+                                  model: models[index]),
+                            )));
+                      })
+                ],
+              );
+            }
           } else if (state is CompanyRequestObserverFailure) {
             return ErrorView(
                 title: "Es ist ein Fehler aufgetreten",

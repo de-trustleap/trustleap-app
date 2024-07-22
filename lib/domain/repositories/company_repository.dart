@@ -15,4 +15,6 @@ abstract class CompanyRepository {
       String id);
   Future<Either<DatabaseFailure, List<CustomUser>>>
       getAllUsersForPendingCompanyRequests(List<String> ids);
+  Future<Either<DatabaseFailure, Unit>> processCompanyRequest(
+      String id, String userID, bool accepted);
 }

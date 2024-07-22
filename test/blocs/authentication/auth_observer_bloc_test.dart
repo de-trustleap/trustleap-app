@@ -2,9 +2,7 @@ import 'package:finanzbegleiter/application/authentication/auth_observer/auth_ob
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
-import '../../repositories/auth_repository_test.mocks.dart';
-import 'auth_cubit_test.mocks.dart';
+import '../../mocks.mocks.dart';
 
 void main() {
   late AuthObserverBloc authObserverBloc;

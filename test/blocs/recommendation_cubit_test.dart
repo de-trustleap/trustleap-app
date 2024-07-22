@@ -6,8 +6,7 @@ import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import '../repositories/landingpage_repository_test.mocks.dart';
-import '../repositories/user_repository_test.mocks.dart';
+import '../mocks.mocks.dart';
 
 void main() {
   late RecommendationsCubit recommendationCubit;

@@ -21,4 +21,13 @@ class CompanyRequestCubit extends Cubit<CompanyRequestState> {
         (failure) => emit(PendingCompanyRequestFailureState(failure: failure)),
         (request) => emit(PendingCompanyRequestSuccessState(request: request)));
   }
+
+  void processCompanyRequest(String id, String userID, bool accepted) async {
+    emit(CompanyRequestLoadingState());
+    final failureOrSuccess =
+        await companyRepo.processCompanyRequest(id, userID, accepted);
+    failureOrSuccess.fold(
+        (failure) => emit(ProcessCompanyRequestFailureState(failure: failure)),
+        (_) => emit(ProcessCompanyRequestSuccessState()));
+  }
 }

@@ -4,13 +4,10 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:mockito/annotations.dart';
-import 'promoter_repository_test.mocks.dart';
+import '../mocks.mocks.dart';
 
-@GenerateMocks([PromoterRepository])
 void main() {
   late MockPromoterRepository mockPromoterRepo;
 

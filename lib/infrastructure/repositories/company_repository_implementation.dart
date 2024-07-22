@@ -164,4 +164,17 @@ class CompanyRepositoryImplementation implements CompanyRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> processCompanyRequest(
+      String id, String userID, bool accepted) async {
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("processCompanyRequest");
+    try {
+      await callable.call({"id": id, "accepted": accepted, "userID": userID});
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }
