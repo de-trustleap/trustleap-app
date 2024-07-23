@@ -146,8 +146,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   address: streetAndNumberTextController.text.trim(),
                   postCode: plzTextController.text.trim(),
                   place: placeTextController.text.trim(),
-                  email: emailTextController.text.trim(),
-                  role: Role.promoter));
+                  email: emailTextController.text.trim()));
             } else if (state is SignInCheckCodeFailureState) {
               errorMessage = DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization);

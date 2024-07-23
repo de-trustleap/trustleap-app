@@ -87,7 +87,8 @@ class CustomUser extends Equatable {
         profileImageDownloadURL:
             profileImageDownloadURL ?? this.profileImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-        pendingCompanyRequestID: pendingCompanyRequestID ?? pendingCompanyRequestID,
+        pendingCompanyRequestID:
+            pendingCompanyRequestID ?? pendingCompanyRequestID,
         unregisteredPromoterIDs:
             unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
         registeredPromoterIDs:

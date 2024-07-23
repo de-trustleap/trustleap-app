@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
@@ -28,10 +29,12 @@ class UserRepositoryImplementation implements UserRepository {
     if (!requestedUser.exists) {
       yield left(NotFoundFailure());
     }
-
+    final role = await _getUserCustomClaims();
     yield* userDoc.snapshots().map((snapshot) {
       var document = snapshot.data() as Map<String, dynamic>;
-      var model = UserModel.fromFirestore(document, snapshot.id).toDomain();
+      var model = UserModel.fromFirestore(document, snapshot.id)
+          .toDomain()
+          .copyWith(role: role);
       return right<DatabaseFailure, CustomUser>(model);
     }).handleError((e) {
       if (e is FirebaseException) {
@@ -57,8 +60,7 @@ class UserRepositoryImplementation implements UserRepository {
         "address": userModel.address,
         "postCode": userModel.postCode,
         "place": userModel.place,
-        "email": userModel.email,
-        "role": userModel.role
+        "email": userModel.email
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
@@ -143,8 +145,10 @@ class UserRepositoryImplementation implements UserRepository {
         final userCollection = firestore.collection("users");
         final userDoc = await userCollection.doc(id).get();
         if (userDoc.data() != null) {
-          var userModel =
-              UserModel.fromFirestore(userDoc.data()!, id).toDomain();
+          final role = await _getUserCustomClaims();
+          var userModel = UserModel.fromFirestore(userDoc.data()!, id)
+              .toDomain()
+              .copyWith(role: role);
           return right(userModel);
         } else {
           return left(NotFoundFailure());
@@ -170,6 +174,25 @@ class UserRepositoryImplementation implements UserRepository {
       }
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  Future<Role> _getUserCustomClaims() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final idTokenResult = await user.getIdTokenResult(true);
+    final claims = idTokenResult.claims;
+    if (claims != null) {
+      final isAdmin = claims["admin"] ?? false;
+      final isCompany = claims["company"] ?? false;
+      if (isAdmin is bool && isAdmin) {
+        return Role.admin;
+      } else if (isCompany is bool && isCompany) {
+        return Role.company;
+      } else {
+        return Role.promoter;
+      }
+    } else {
+      return Role.promoter;
     }
   }
 }

@@ -89,9 +89,6 @@ class _ProfilePageState extends State<ProfilePage>
   bool canAccessCompanyProfile(ProfileUserObserverSuccess state) {
     if (state.user.role == Role.company && state.user.companyID != null) {
       return true;
-    } else if (state.user.role == Role.serviceProvider &&
-        state.user.companyID != null) {
-      return true;
     } else {
       return false;
     }
