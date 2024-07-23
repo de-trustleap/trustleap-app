@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/application/profile/company_observer/company_obs
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
@@ -40,7 +41,8 @@ class _ProfilePageState extends State<ProfilePage>
     if (widget.registeredCompany == "true") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         CustomSnackBar.of(context).showCustomSnackBar(
-            "Das Unternehmen wurde erfolgreich registriert!");
+            AppLocalizations.of(context)
+                .profile_page_snackbar_company_registered);
       });
     }
     super.initState();

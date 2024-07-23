@@ -387,6 +387,12 @@ abstract class AppLocalizations {
   /// **'Landingpage'**
   String get menuitems_landingpage;
 
+  /// the menu entry for the registration requests of the companies
+  ///
+  /// In en, this message translates to:
+  /// **'Requests'**
+  String get menuitems_company_requests;
+
   /// Title for the error view that appears if an error occurred while retrieving the data.
   ///
   /// In en, this message translates to:
@@ -903,6 +909,12 @@ abstract class AppLocalizations {
   /// **'A link for email verification has been sent to you.'**
   String get profile_page_snackbar_email_verification;
 
+  /// Snackbar title to send the company registration request.
+  ///
+  /// In en, this message translates to:
+  /// **'The request for the company registration has been sent succesful.'**
+  String get profile_page_snackbar_company_registered;
+
   /// Title of the logout button on the profile page.
   ///
   /// In en, this message translates to:
@@ -1358,6 +1370,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Company Registration Requests'**
   String get company_requests_overview_title;
+
+  /// Heading for the company registration request in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Request'**
+  String get admin_company_request_detail_title;
+
+  /// Text for the company name on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Company name:'**
+  String get admin_company_request_detail_name;
+
+  /// Text for the industry on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Industry:'**
+  String get admin_company_request_detail_industry;
+
+  /// Text for the address on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Address:'**
+  String get admin_company_request_detail_address;
+
+  /// Text for the postcode on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Postcode:'**
+  String get admin_company_request_detail_postcode;
+
+  /// Text for the place on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Place:'**
+  String get admin_company_request_detail_place;
+
+  /// Text for the phone on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Phone:'**
+  String get admin_company_request_detail_phone;
+
+  /// Text for the website on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Website:'**
+  String get admin_company_request_detail_website;
+
+  /// Heading for the user section of company registration request in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get admin_company_request_detail_user_title;
+
+  /// Text for the user name on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Name:'**
+  String get admin_company_request_detail_user_name;
+
+  /// Text for the email address on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Email Address:'**
+  String get admin_company_request_detail_user_email;
+
+  /// Text for the decline button on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Decline request'**
+  String get admin_company_request_detail_decline_button_title;
+
+  /// Text for the accept button on the company request detail page in the admin module
+  ///
+  /// In en, this message translates to:
+  /// **'Accept request'**
+  String get admin_company_request_detail_accept_button_title;
+
+  /// Text on the company request overview page that indicates which user the request comes from
+  ///
+  /// In en, this message translates to:
+  /// **'from: '**
+  String get admin_company_request_overview_from_user;
+
+  /// Title on the page that comes when there are no company requests
+  ///
+  /// In en, this message translates to:
+  /// **'There are no requests'**
+  String get admin_company_request_overview_empty_title;
+
+  /// Text on the page that comes when there are no company requests
+  ///
+  /// In en, this message translates to:
+  /// **'There dont appear to be any registration requests from companies at this time.'**
+  String get admin_company_request_overview_empty_body;
+
+  /// Title on the business registration requests overview page
+  ///
+  /// In en, this message translates to:
+  /// **'Requests for company registrations'**
+  String get admin_company_request_overview_title;
+
+  /// Error text on the business registration requests overview page
+  ///
+  /// In en, this message translates to:
+  /// **'There was an error'**
+  String get admin_company_request_overview_error;
+
+  /// Title of the form in the company registration page
+  ///
+  /// In en, this message translates to:
+  /// **'Register company'**
+  String get company_registration_form_title;
+
+  /// Placeholder for the company name textfield in the registration form
+  ///
+  /// In en, this message translates to:
+  /// **'Company name'**
+  String get company_registration_form_name_textfield_placeholder;
+
+  /// Placeholder for the industry textfield in the registration form
+  ///
+  /// In en, this message translates to:
+  /// **'Industry'**
+  String get company_registration_form_industry_textfield_placeholder;
+
+  /// Placeholder for the website textfield in the registration form
+  ///
+  /// In en, this message translates to:
+  /// **'Website (optional)'**
+  String get company_registration_form_website_textfield_placeholder;
+
+  /// Placeholder for the address textfield in the registration form
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get company_registration_form_address_textfield_placeholder;
+
+  /// Placeholder for the postcode textfield in the registration form
+  ///
+  /// In en, this message translates to:
+  /// **'Postcode'**
+  String get company_registration_form_postcode_textfield_placeholder;
+
+  /// Placeholder for the place textfield in the registration form
+  ///
+  /// In en, this message translates to:
+  /// **'Place'**
+  String get company_registration_form_place_textfield_placeholder;
+
+  /// Placeholder for the phone textfield in the registration form
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get company_registration_form_phone_textfield_placeholder;
+
+  /// Text on the register button in the company registration form
+  ///
+  /// In en, this message translates to:
+  /// **'Register now'**
+  String get company_registration_form_register_button_title;
+
+  /// Title for the company registration section on the profile page
+  ///
+  /// In en, this message translates to:
+  /// **'Company registration'**
+  String get profile_register_company_section_title;
+
+  /// Text for the company registration section on the profile page when the registration is in progress
+  ///
+  /// In en, this message translates to:
+  /// **'Your request is being processed.\nThe processing time is on average 7 days.'**
+  String get profile_register_company_section_subtitle_in_progress;
+
+  /// Text for the company registration section on the profile page for the date
+  ///
+  /// In en, this message translates to:
+  /// **'Requested at '**
+  String get profile_register_company_section_subtitle_requested_at;
+
+  /// Text for the company registration section on the profile page
+  ///
+  /// In en, this message translates to:
+  /// **'Register your company now to take advantage of the apps additional benefits.'**
+  String get profile_register_company_section_subtitle;
+
+  /// Button text for the company registration section on the profile page
+  ///
+  /// In en, this message translates to:
+  /// **'Go to registration'**
+  String get profile_register_company_section_button_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

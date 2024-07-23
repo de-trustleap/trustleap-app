@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/admin_area/company_requests/company_requests_overview.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class CompanyRequestOverviewListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return InkWell(
       onTap: () {
@@ -41,7 +43,7 @@ class CompanyRequestOverviewListTile extends StatelessWidget {
                           const SizedBox(width: 8),
                           Expanded(
                               child: Text(
-                                  "von: ${model.user.firstName} ${model.user.lastName}",
+                                  "${localizations.admin_company_request_overview_from_user}${model.user.firstName} ${model.user.lastName}",
                                   style: themeData.textTheme.bodySmall,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis))

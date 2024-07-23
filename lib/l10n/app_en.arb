@@ -196,6 +196,10 @@
     "@menuitems_landingpage": {
         "description": "the menu entry for the landingpage"
     },
+    "menuitems_company_requests": "Requests",
+    "@menuitems_company_requests": {
+        "description": "the menu entry for the registration requests of the companies"
+    },
     "landingpage_overview_error_view_title": "An error occurred while retrieving the data.",
     "@landingpage_overview_error_view_title": {
         "description": "Title for the error view that appears if an error occurred while retrieving the data."
@@ -540,6 +544,10 @@
     "@profile_page_snackbar_email_verification": {
         "description": "Snackbar title to send the email for verification."
     },
+    "profile_page_snackbar_company_registered": "The request for the company registration has been sent succesful.",
+    "@profile_page_snackbar_company_registered": {
+        "description": "Snackbar title to send the company registration request."
+    },
     "profile_page_logout_button_title": "Logout",
     "@profile_page_logout_button_title": {
         "description": "Title of the logout button on the profile page."
@@ -855,5 +863,133 @@
     "company_requests_overview_title": "Company Registration Requests",
     "@company_requests_overview_title": {
         "description": "Heading for the company registration requests in the admin module"
+    },
+    "admin_company_request_detail_title": "Request",
+    "@admin_company_request_detail_title": {
+        "description": "Heading for the company registration request in the admin module"
+    },
+    "admin_company_request_detail_name": "Company name:",
+    "@admin_company_request_detail_name": {
+        "description": "Text for the company name on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_industry": "Industry:",
+    "@admin_company_request_detail_industry": {
+        "description": "Text for the industry on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_address": "Address:",
+    "@admin_company_request_detail_address": {
+        "description": "Text for the address on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_postcode": "Postcode:",
+    "@admin_company_request_detail_postcode": {
+        "description": "Text for the postcode on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_place": "Place:",
+    "@admin_company_request_detail_place": {
+        "description": "Text for the place on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_phone": "Phone:",
+    "@admin_company_request_detail_phone": {
+        "description": "Text for the phone on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_website": "Website:",
+    "@admin_company_request_detail_website": {
+        "description": "Text for the website on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_user_title": "User",
+    "@admin_company_request_detail_user_title": {
+        "description": "Heading for the user section of company registration request in the admin module"
+    },
+    "admin_company_request_detail_user_name": "Name:",
+    "@admin_company_request_detail_user_name": {
+        "description": "Text for the user name on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_user_email": "Email Address:",
+    "@admin_company_request_detail_user_email": {
+        "description": "Text for the email address on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_decline_button_title": "Decline request",
+    "@admin_company_request_detail_decline_button_title": {
+        "description": "Text for the decline button on the company request detail page in the admin module"
+    },
+    "admin_company_request_detail_accept_button_title": "Accept request",
+    "@admin_company_request_detail_accept_button_title": {
+        "description": "Text for the accept button on the company request detail page in the admin module"
+    },
+    "admin_company_request_overview_from_user": "from: ",
+    "@admin_company_request_overview_from_user": {
+        "description": "Text on the company request overview page that indicates which user the request comes from"
+    },
+    "admin_company_request_overview_empty_title": "There are no requests",
+    "@admin_company_request_overview_empty_title": {
+        "description": "Title on the page that comes when there are no company requests"
+    },
+    "admin_company_request_overview_empty_body": "There dont appear to be any registration requests from companies at this time.",
+    "@admin_company_request_overview_empty_body": {
+        "description": "Text on the page that comes when there are no company requests"
+    },
+    "admin_company_request_overview_title": "Requests for company registrations",
+    "@admin_company_request_overview_title": {
+        "description": "Title on the business registration requests overview page"
+    },
+    "admin_company_request_overview_error": "There was an error",
+    "@admin_company_request_overview_error": {
+        "description": "Error text on the business registration requests overview page"
+    },
+    "company_registration_form_title": "Register company",
+    "@company_registration_form_title": {
+        "description": "Title of the form in the company registration page"
+    },
+    "company_registration_form_name_textfield_placeholder": "Company name",
+    "@company_registration_form_name_textfield_placeholder": {
+        "description": "Placeholder for the company name textfield in the registration form"
+    },
+    "company_registration_form_industry_textfield_placeholder": "Industry",
+    "@company_registration_form_industry_textfield_placeholder": {
+        "description": "Placeholder for the industry textfield in the registration form"
+    },
+    "company_registration_form_website_textfield_placeholder": "Website (optional)",
+    "@company_registration_form_website_textfield_placeholder": {
+        "description": "Placeholder for the website textfield in the registration form"
+    },
+    "company_registration_form_address_textfield_placeholder": "Address",
+    "@company_registration_form_address_textfield_placeholder": {
+        "description": "Placeholder for the address textfield in the registration form"
+    },
+    "company_registration_form_postcode_textfield_placeholder": "Postcode",
+    "@company_registration_form_postcode_textfield_placeholder": {
+        "description": "Placeholder for the postcode textfield in the registration form"
+    },
+    "company_registration_form_place_textfield_placeholder": "Place",
+    "@company_registration_form_place_textfield_placeholder": {
+        "description": "Placeholder for the place textfield in the registration form"
+    },
+    "company_registration_form_phone_textfield_placeholder": "Phone",
+    "@company_registration_form_phone_textfield_placeholder": {
+        "description": "Placeholder for the phone textfield in the registration form"
+    },
+    "company_registration_form_register_button_title": "Register now",
+    "@company_registration_form_register_button_title": {
+        "description": "Text on the register button in the company registration form"
+    },
+    "profile_register_company_section_title": "Company registration",
+    "@profile_register_company_section_title": {
+        "description": "Title for the company registration section on the profile page"
+    },
+    "profile_register_company_section_subtitle_in_progress": "Your request is being processed.\nThe processing time is on average 7 days.",
+    "@profile_register_company_section_subtitle_in_progress": {
+        "description": "Text for the company registration section on the profile page when the registration is in progress"
+    },
+    "profile_register_company_section_subtitle_requested_at": "Requested at ",
+    "@profile_register_company_section_subtitle_requested_at": {
+        "description": "Text for the company registration section on the profile page for the date"
+    },
+    "profile_register_company_section_subtitle": "Register your company now to take advantage of the apps additional benefits.",
+    "@profile_register_company_section_subtitle": {
+        "description": "Text for the company registration section on the profile page"
+    },
+    "profile_register_company_section_button_title": "Go to registration",
+    "@profile_register_company_section_button_title": {
+        "description": "Button text for the company registration section on the profile page"
     }
 }

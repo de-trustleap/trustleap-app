@@ -71,11 +71,12 @@ class _CompanyRequestsOverviewState extends State<CompanyRequestsOverview> {
         CardContainer(child: LayoutBuilder(builder: ((context, constraints) {
           if (state is CompanyRequestObserverGetUsersSuccessState) {
             if (state.users.isEmpty) {
-              return const EmptyPage(
+              return EmptyPage(
                   icon: Icons.free_breakfast,
-                  title: "Keine Anfragen vorhanden",
+                  title:
+                      localization.admin_company_request_overview_empty_title,
                   subTitle:
-                      "Zurzeit scheint es keine Registrierungsanfragen von Unternehmen zu geben.",
+                      localization.admin_company_request_overview_empty_body,
                   buttonTitle: "",
                   isButtonHidden: true,
                   onTap: null);
@@ -83,7 +84,7 @@ class _CompanyRequestsOverviewState extends State<CompanyRequestsOverview> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Anfragen für Unternehmensregistrierung",
+                  Text(localization.admin_company_request_overview_title,
                       style: themeData.textTheme.headlineLarge!
                           .copyWith(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 40),
@@ -107,7 +108,7 @@ class _CompanyRequestsOverviewState extends State<CompanyRequestsOverview> {
             }
           } else if (state is CompanyRequestObserverFailure) {
             return ErrorView(
-                title: "Es ist ein Fehler aufgetreten",
+                title: localization.admin_company_request_overview_error,
                 message: DatabaseFailureMapper.mapFailureMessage(
                     state.failure, localization),
                 callback: () => {
@@ -116,7 +117,7 @@ class _CompanyRequestsOverviewState extends State<CompanyRequestsOverview> {
                     });
           } else if (state is CompanyRequestObserverGetUsersFailureState) {
             return ErrorView(
-                title: "Es ist ein Fehler aufgetreten",
+                title: localization.admin_company_request_overview_error,
                 message: DatabaseFailureMapper.mapFailureMessage(
                     state.failure, localization),
                 callback: () => {

@@ -196,6 +196,10 @@
     "@menuitems_landingpage": {
         "description": "Der Menüpunkt für die Landingpage"
     },
+    "menuitems_company_requests": "Anfragen",
+    "@menuitems_company_requests": {
+        "description": "Der Menüpunkt für die Registrierungsanfragen von Unternehmen"
+    },
     "landingpage_overview_error_view_title": "Ein Fehler beim Abruf der Daten ist aufgetreten.",
     "@landingpage_overview_error_view_title": {
         "description": "Titel für die Error View die erscheint wenn ein Fehler beim Abruf der Daten aufgetreten ist"
@@ -540,6 +544,10 @@
     "@profile_page_snackbar_email_verification": {
         "description": "Snackbar Titel zur Sendung der E-Mail für die Verifizierung."
     },
+    "profile_page_snackbar_company_registered": "Die Anfrage zur Unternehmensregistrierung wurde erfolgreich versendet.",
+    "@profile_page_snackbar_company_registered": {
+        "description": "Snackbar Titel zur Sendung der Unternehmensregistrierung"
+    },
     "profile_page_logout_button_title": "Abmelden",
     "@profile_page_logout_button_title": {
         "description": "Titel des Logout Buttons auf der Profil Seite."
@@ -855,5 +863,133 @@
     "company_requests_overview_title": "Anfragen für Unternehmensregistrierungen",
     "@company_requests_overview_title": {
         "description": "Überschrift für die Unternehmensregistrierungsanfragen im Adminmodul"
+    },
+    "admin_company_request_detail_title": "Anfrage",
+    "@admin_company_request_detail_title": {
+        "description": "Überschrift für die Unternehmensregistrierungsanfrage im Adminmodul"
+    },
+    "admin_company_request_detail_name": "Unternehmensbezeichnung:",
+    "@admin_company_request_detail_name": {
+        "description": "Text für die Unternehmensbezeichnung auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_industry": "Branche:",
+    "@admin_company_request_detail_industry": {
+        "description": "Text für die Branche auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_address": "Adresse:",
+    "@admin_company_request_detail_address": {
+        "description": "Text für die Adresse auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_postcode": "Postleitzahl:",
+    "@admin_company_request_detail_postcode": {
+        "description": "Text für die Postleitzahl auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_place": "Ort:",
+    "@admin_company_request_detail_place": {
+        "description": "Text für die Ort auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_phone": "Telefonnummer:",
+    "@admin_company_request_detail_phone": {
+        "description": "Text für die Telefonnummer auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_website": "Webseite:",
+    "@admin_company_request_detail_website": {
+        "description": "Text für die Webseite auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_user_title": "Nutzer",
+    "@admin_company_request_detail_user_title": {
+        "description": "Überschrift für die Nutzer Sektion der Unternehmensregistrierungsanfrage im Adminmodul"
+    },
+    "admin_company_request_detail_user_name": "Name:",
+    "@admin_company_request_detail_user_name": {
+        "description": "Text für den Nutzernamen auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_user_email": "E-Mail Adresse:",
+    "@admin_company_request_detail_user_email": {
+        "description": "Text für die E-Mail Adresse auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_decline_button_title": "Anfrage ablehnen",
+    "@admin_company_request_detail_decline_button_title": {
+        "description": "Text für den Ablehnen Button auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_detail_accept_button_title": "Anfrage annehmen",
+    "@admin_company_request_detail_accept_button_title": {
+        "description": "Text für den Annehmen Button auf der Unternehmensanfrage Detailseite im Adminmodul"
+    },
+    "admin_company_request_overview_from_user": "von: ",
+    "@admin_company_request_overview_from_user": {
+        "description": "Text auf der Unternehmensanfragen Übersichtsseite der angibt von welchem User die Anfrage kommt"
+    },
+    "admin_company_request_overview_empty_title": "Keine Anfragen vorhanden",
+    "@admin_company_request_overview_empty_title": {
+        "description": "Titel auf der Seite die kommt wenn es keine Unternehmensanfargen gibt"
+    },
+    "admin_company_request_overview_empty_body": "Zurzeit scheint es keine Registrierungsanfragen von Unternehmen zu geben.",
+    "@admin_company_request_overview_empty_body": {
+        "description": "Text auf der Seite die kommt wenn es keine Unternehmensanfargen gibt"
+    },
+    "admin_company_request_overview_title": "Anfragen für Unternehmensregistrierungen",
+    "@admin_company_request_overview_title": {
+        "description": "Titel auf der Unternehmensregistrierungsanfragen Übersichtsseite"
+    },
+    "admin_company_request_overview_error": "Es ist ein Fehler aufgetreten",
+    "@admin_company_request_overview_error": {
+        "description": "Fehler Text auf der Unternehmensregistrierungsanfragen Übersichtsseite"
+    },
+    "company_registration_form_title": "Unternehmen registrieren",
+    "@company_registration_form_title": {
+        "description": "Titel für das Formular der Unternehmensregistrierung"
+    },
+    "company_registration_form_name_textfield_placeholder": "Unternehmensbezeichnung",
+    "@company_registration_form_name_textfield_placeholder": {
+        "description": "Platzhalter für das Unternehmensbezeichnung Textfeld im Unternehmensregistrierungsformular"
+    },
+    "company_registration_form_industry_textfield_placeholder": "Branche",
+    "@company_registration_form_industry_textfield_placeholder": {
+        "description": "Platzhalter für das Branche Textfeld im Unternehmensregistrierungsformular"
+    },
+    "company_registration_form_website_textfield_placeholder": "Webseite (optional)",
+    "@company_registration_form_website_textfield_placeholder": {
+        "description": "Platzhalter für das Webseite Textfeld im Unternehmensregistrierungsformular"
+    },
+    "company_registration_form_address_textfield_placeholder": "Straße und Hausnummer",
+    "@company_registration_form_address_textfield_placeholder": {
+        "description": "Platzhalter für das Adresse Textfeld im Unternehmensregistrierungsformular"
+    },
+    "company_registration_form_postcode_textfield_placeholder": "PLZ",
+    "@company_registration_form_postcode_textfield_placeholder": {
+        "description": "Platzhalter für das PLZ Textfeld im Unternehmensregistrierungsformular"
+    },
+    "company_registration_form_place_textfield_placeholder": "Ort",
+    "@company_registration_form_place_textfield_placeholder": {
+        "description": "Platzhalter für das Ort Textfeld im Unternehmensregistrierungsformular"
+    },
+    "company_registration_form_phone_textfield_placeholder": "Telefonnummer",
+    "@company_registration_form_phone_textfield_placeholder": {
+        "description": "Platzhalter für das Telefonnummer Textfeld im Unternehmensregistrierungsformular"
+    },
+    "company_registration_form_register_button_title": "Jetzt registrieren",
+    "@company_registration_form_register_button_title": {
+        "description": "Text auf dem Registrierungsbutton im Unternehmensregistrierungsformular"
+    },
+    "profile_register_company_section_title": "Unternehmensregistrierung",
+    "@profile_register_company_section_title": {
+        "description": "Titel für die Unternehmensregistrierungs Sektion auf der Profilseite"
+    },
+    "profile_register_company_section_subtitle_in_progress": "Deine Anfrage ist in Bearbeitung.\nDie Bearbeitungsdauer liegt bei durchschnittlich 7 Tagen.",
+    "@profile_register_company_section_subtitle_in_progress": {
+        "description": "Text für die Unternehmensregistrierungs Sektion auf der Profilseite wenn die Registrierung in Bearbeitung ist"
+    },
+    "profile_register_company_section_subtitle_requested_at": "Eingereicht am ",
+    "@profile_register_company_section_subtitle_requested_at": {
+        "description": "Text für die Unternehmensregistrierungs Sektion auf der Profilseite für die Datumsangabe"
+    },
+    "profile_register_company_section_subtitle": "Registriere jetzt dein Unternehmen, um weitere Vorteile der App nutzen zu können.",
+    "@profile_register_company_section_subtitle": {
+        "description": "Text für die Unternehmensregistrierungs Sektion auf der Profilseite"
+    },
+    "profile_register_company_section_button_title": "Zur Registrierung",
+    "@profile_register_company_section_button_title": {
+        "description": "Button Text für die Unternehmensregistrierungs Sektion auf der Profilseite"
     }
 }

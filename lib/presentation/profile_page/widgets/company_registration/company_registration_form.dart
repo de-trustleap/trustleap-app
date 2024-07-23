@@ -107,8 +107,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
         } else if (state is CompanyRegisterSuccessState) {
           resetError();
           const params = "?registeredCompany=true";
-          Modular.to.navigate(
-              RoutePaths.homePath + RoutePaths.profilePath + params);
+          Modular.to
+              .navigate(RoutePaths.homePath + RoutePaths.profilePath + params);
         }
       },
       builder: (context, state) {
@@ -124,7 +124,7 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Unternehmen registrieren",
+                    Text(localization.company_registration_form_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
@@ -133,7 +133,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                           maxWidth: maxWidth,
                           controller: nameTextController,
                           disabled: false,
-                          placeholder: "Unternehmensbezeichnung",
+                          placeholder: localization
+                              .company_registration_form_name_textfield_placeholder,
                           onChanged: resetError,
                           onFieldSubmitted: () => submit(validator),
                           validator: validator.validateName)
@@ -144,7 +145,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                           maxWidth: maxWidth,
                           controller: industryTextController,
                           disabled: false,
-                          placeholder: "Branche",
+                          placeholder: localization
+                              .company_registration_form_industry_textfield_placeholder,
                           onChanged: resetError,
                           onFieldSubmitted: () => submit(validator),
                           validator: validator.validateIndustry)
@@ -155,7 +157,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                           maxWidth: maxWidth,
                           controller: websiteTextController,
                           disabled: false,
-                          placeholder: "Webseite (optional)",
+                          placeholder: localization
+                              .company_registration_form_website_textfield_placeholder,
                           onChanged: resetError,
                           onFieldSubmitted: () => submit(validator))
                     ]),
@@ -165,7 +168,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                           maxWidth: maxWidth,
                           controller: addressTextController,
                           disabled: false,
-                          placeholder: "Straße und Hausnummer",
+                          placeholder: localization
+                              .company_registration_form_address_textfield_placeholder,
                           onChanged: resetError,
                           onFieldSubmitted: () => submit(validator),
                           validator: validator.validateAddress)
@@ -184,7 +188,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                                       : maxWidth / 2 - textFieldSpacing / 2,
                                   controller: postCodeTextController,
                                   disabled: false,
-                                  placeholder: "PLZ",
+                                  placeholder: localization
+                                      .company_registration_form_postcode_textfield_placeholder,
                                   onChanged: resetError,
                                   onFieldSubmitted: () => submit(validator),
                                   validator: validator.validatePostCode)),
@@ -199,7 +204,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                                       : maxWidth / 2 - textFieldSpacing / 2,
                                   controller: placeTextController,
                                   disabled: false,
-                                  placeholder: "Ort",
+                                  placeholder: localization
+                                      .company_registration_form_place_textfield_placeholder,
                                   onChanged: resetError,
                                   onFieldSubmitted: () => submit(validator),
                                   validator: validator.validatePlace))
@@ -210,7 +216,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                           maxWidth: maxWidth,
                           controller: phoneNumberTextController,
                           disabled: false,
-                          placeholder: "Telefonnummer",
+                          placeholder: localization
+                              .company_registration_form_phone_textfield_placeholder,
                           onChanged: resetError,
                           onFieldSubmitted: () => submit(validator))
                     ]),
@@ -220,7 +227,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         PrimaryButton(
-                            title: "Jetzt registrieren",
+                            title: localization
+                                .company_registration_form_register_button_title,
                             width: responsiveValue.isMobile
                                 ? maxWidth - textFieldSpacing
                                 : maxWidth / 2 - textFieldSpacing,

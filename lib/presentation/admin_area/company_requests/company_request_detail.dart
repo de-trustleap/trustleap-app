@@ -25,7 +25,8 @@ class CompanyRequestDetail extends StatelessWidget {
     return BlocConsumer<CompanyRequestCubit, CompanyRequestState>(
       listener: (context, state) {
         if (state is ProcessCompanyRequestSuccessState) {
-          Modular.to.navigate(RoutePaths.adminPath + RoutePaths.companyRequestsPath);
+          Modular.to
+              .navigate(RoutePaths.adminPath + RoutePaths.companyRequestsPath);
         }
       },
       builder: (context, state) {
@@ -36,14 +37,14 @@ class CompanyRequestDetail extends StatelessWidget {
               return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Anfrage",
+                    Text(localizations.admin_company_request_detail_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Unternehmensbezeichnung:",
+                        Text(localizations.admin_company_request_detail_name,
                             style: themeData.textTheme.bodyMedium),
                         const SizedBox(width: 16),
                         Text(model.request.company?.name ?? "",
@@ -53,7 +54,8 @@ class CompanyRequestDetail extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text("Branche:", style: themeData.textTheme.bodyMedium),
+                      Text(localizations.admin_company_request_detail_industry,
+                          style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
                       Text(model.request.company?.industry ?? "",
                           style: themeData.textTheme.bodyMedium!
@@ -61,7 +63,8 @@ class CompanyRequestDetail extends StatelessWidget {
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text("Adresse:", style: themeData.textTheme.bodyMedium),
+                      Text(localizations.admin_company_request_detail_address,
+                          style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
                       Text(model.request.company?.address ?? "",
                           style: themeData.textTheme.bodyMedium!
@@ -69,7 +72,7 @@ class CompanyRequestDetail extends StatelessWidget {
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text("Postleitzahl:",
+                      Text(localizations.admin_company_request_detail_postcode,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
                       Text(model.request.company?.postCode ?? "",
@@ -78,7 +81,8 @@ class CompanyRequestDetail extends StatelessWidget {
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text("Ort:", style: themeData.textTheme.bodyMedium),
+                      Text(localizations.admin_company_request_detail_place,
+                          style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
                       Text(model.request.company?.place ?? "",
                           style: themeData.textTheme.bodyMedium!
@@ -86,7 +90,7 @@ class CompanyRequestDetail extends StatelessWidget {
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text("Telefonnummer:",
+                      Text(localizations.admin_company_request_detail_phone,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
                       Text(model.request.company?.phoneNumber ?? "",
@@ -95,21 +99,25 @@ class CompanyRequestDetail extends StatelessWidget {
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text("Webseite:", style: themeData.textTheme.bodyMedium),
+                      Text(localizations.admin_company_request_detail_website,
+                          style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
                       Text(model.request.company?.websiteURL ?? "",
                           style: themeData.textTheme.bodyMedium!
                               .copyWith(fontWeight: FontWeight.bold))
                     ]),
                     const SizedBox(height: 40),
-                    Text("Nutzer",
+                    Text(localizations.admin_company_request_detail_user_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Name:", style: themeData.textTheme.bodyMedium),
+                        Text(
+                            localizations
+                                .admin_company_request_detail_user_name,
+                            style: themeData.textTheme.bodyMedium),
                         const SizedBox(width: 8),
                         Text(
                             "${model.user.firstName ?? ""} ${model.user.lastName ?? ""}",
@@ -119,7 +127,8 @@ class CompanyRequestDetail extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text("E-Mail Adresse:",
+                      Text(
+                          localizations.admin_company_request_detail_user_email,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
                       Text(model.user.email ?? "",
@@ -130,7 +139,8 @@ class CompanyRequestDetail extends StatelessWidget {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       const Spacer(),
                       SecondaryButton(
-                          title: "Anfrage ablehnen",
+                          title: localizations
+                              .admin_company_request_detail_decline_button_title,
                           width: maxWidth / 3,
                           onTap: () {
                             BlocProvider.of<CompanyRequestCubit>(context)
@@ -139,7 +149,8 @@ class CompanyRequestDetail extends StatelessWidget {
                           }),
                       const Spacer(),
                       PrimaryButton(
-                          title: "Anfrage annehmen",
+                          title: localizations
+                              .admin_company_request_detail_accept_button_title,
                           width: maxWidth / 3,
                           onTap: () {
                             BlocProvider.of<CompanyRequestCubit>(context)

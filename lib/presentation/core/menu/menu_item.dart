@@ -46,7 +46,7 @@ class _MenuItemState extends State<MenuItem> {
       case MenuItems.activities:
         return localization.menuitems_activities;
       case MenuItems.adminCompanyRequests:
-        return "Anfragen";
+        return localization.menuitems_company_requests;
       case MenuItems.none:
         return "";
     }

@@ -53,18 +53,19 @@ class _ProfileRegisterCompanySectionState
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Unternehmensregistrierung",
+                Text(localization.profile_register_company_section_title,
                     style: themeData.textTheme.headlineLarge!
                         .copyWith(fontWeight: FontWeight.bold)),
                 SizedBox(height: spacing.toDouble()),
                 if (!_hasPendingCompanyRequest()) ...[
-                  registerRequestView(
-                      themeData, responsiveValue, maxWidth, spacing)
+                  registerRequestView(themeData, responsiveValue, localization,
+                      maxWidth, spacing)
                 ] else if (state is PendingCompanyRequestSuccessState) ...[
                   SizedBox(
                     width: maxWidth,
                     child: Text(
-                        "Deine Anfrage ist in Bearbeitung.\nDie Bearbeitungsdauer liegt bei durchschnittlich 7 Tagen.",
+                        localization
+                            .profile_register_company_section_subtitle_in_progress,
                         style: responsiveValue.isMobile
                             ? themeData.textTheme.bodySmall
                             : themeData.textTheme.bodyMedium),
@@ -74,7 +75,7 @@ class _ProfileRegisterCompanySectionState
                     SizedBox(
                       width: maxWidth,
                       child: Text(
-                          "Eingereicht am ${DateTimeFormatter().getStringFromDate(context, state.request.createdAt!)}",
+                          "${localization.profile_register_company_section_subtitle_requested_at}${DateTimeFormatter().getStringFromDate(context, state.request.createdAt!)}",
                           style: responsiveValue.isMobile
                               ? themeData.textTheme.bodySmall
                               : themeData.textTheme.bodyMedium),
@@ -93,11 +94,14 @@ class _ProfileRegisterCompanySectionState
     );
   }
 
-  Widget registerRequestView(ThemeData themeData,
-      ResponsiveBreakpointsData responsiveValue, double maxWidth, int spacing) {
+  Widget registerRequestView(
+      ThemeData themeData,
+      ResponsiveBreakpointsData responsiveValue,
+      AppLocalizations localization,
+      double maxWidth,
+      int spacing) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-          "Registriere jetzt dein Unternehmen, um weitere Vorteile der App nutzen zu können.",
+      Text(localization.profile_register_company_section_subtitle,
           style: responsiveValue.isMobile
               ? themeData.textTheme.bodySmall
               : themeData.textTheme.bodyMedium),
@@ -107,7 +111,7 @@ class _ProfileRegisterCompanySectionState
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           PrimaryButton(
-              title: "Zur Registrierung",
+              title: localization.profile_register_company_section_button_title,
               width: responsiveValue.isMobile
                   ? maxWidth - spacing
                   : maxWidth / 2 - spacing,
