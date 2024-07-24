@@ -68,6 +68,7 @@ class _LoginFormState extends State<LoginForm> {
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state is SignInFailureState) {
+          print("FAILED!");
           errorMessage =
               AuthFailureMapper.mapFailureMessage(state.failure, localization);
           showError = true;
@@ -133,15 +134,17 @@ class _LoginFormState extends State<LoginForm> {
                       onTap: () =>
                           {Modular.to.pushNamed(RoutePaths.registerPath)}),
                   if (state is SignInLoadingState) ...[
-                    const SizedBox(height: 80),
+                    const SizedBox(
+                        height: 80, key: Key("loadingIndicatorSpacing")),
                     const LoadingIndicator()
                   ],
                   if (errorMessage != "" &&
                       showError &&
-                      (state is! SignInLoadingState) &&
+                      (state is SignInFailureState) &&
                       !validationHasError) ...[
                     const SizedBox(height: 20),
-                    FormErrorView(message: errorMessage, key: const Key("formErrorView"))
+                    FormErrorView(
+                        message: errorMessage, key: const Key("formErrorView"))
                   ]
                 ]));
       },
