@@ -68,7 +68,6 @@ class _LoginFormState extends State<LoginForm> {
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state is SignInFailureState) {
-          print("FAILED!");
           errorMessage =
               AuthFailureMapper.mapFailureMessage(state.failure, localization);
           showError = true;
