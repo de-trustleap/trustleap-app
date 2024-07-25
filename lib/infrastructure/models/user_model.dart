@@ -17,9 +17,9 @@ class UserModel extends Equatable {
   final String? email;
   final String? parentUserID;
   final String? companyID;
-  final String? role;
   final String? profileImageDownloadURL;
   final String? thumbnailDownloadURL;
+  final String? pendingCompanyRequestID;
   final List<String>? unregisteredPromoterIDs;
   final List<String>? registeredPromoterIDs;
   final List<String>? landingPageIDs;
@@ -39,9 +39,9 @@ class UserModel extends Equatable {
       this.email,
       this.parentUserID,
       this.companyID,
-      this.role,
       this.profileImageDownloadURL,
       this.thumbnailDownloadURL,
+      this.pendingCompanyRequestID,
       this.unregisteredPromoterIDs,
       this.registeredPromoterIDs,
       this.landingPageIDs,
@@ -62,9 +62,9 @@ class UserModel extends Equatable {
       'email': email,
       'parentUserID': parentUserID,
       'companyID': companyID,
-      'role': role,
       'profileImageDownloadURL': profileImageDownloadURL,
       'thumbnailDownloadURL': thumbnailDownloadURL,
+      'pendingCompanyRequestID': pendingCompanyRequestID,
       'unregisteredPromoterIDs': unregisteredPromoterIDs,
       'registeredPromoterIDs': registeredPromoterIDs,
       'landingPageIDs': landingPageIDs,
@@ -88,12 +88,14 @@ class UserModel extends Equatable {
       parentUserID:
           map['parentUserID'] != null ? map['parentUserID'] as String : null,
       companyID: map['companyID'] != null ? map['companyID'] as String : null,
-      role: map['role'] != null ? map['role'] as String : "none",
       profileImageDownloadURL: map['profileImageDownloadURL'] != null
           ? map['profileImageDownloadURL'] as String
           : null,
       thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
           ? map['thumbnailDownloadURL'] as String
+          : null,
+      pendingCompanyRequestID: map['pendingCompanyRequestID'] != null
+          ? map['pendingCompanyRequestID'] as String
           : null,
       unregisteredPromoterIDs: map['unregisteredPromoterIDs'] != null
           ? List<String>.from(map['unregisteredPromoterIDs'])
@@ -126,9 +128,9 @@ class UserModel extends Equatable {
     String? email,
     String? parentUserID,
     String? companyID,
-    String? role,
     String? profileImageDownloadURL,
     String? thumbnailDownloadURL,
+    String? pendingCompanyRequestID,
     List<String>? unregisteredPromoterIDs,
     List<String>? registeredPromoterIDs,
     List<String>? landingPageIDs,
@@ -148,10 +150,11 @@ class UserModel extends Equatable {
       email: email ?? this.email,
       parentUserID: parentUserID ?? this.parentUserID,
       companyID: companyID ?? this.companyID,
-      role: role ?? this.role,
       profileImageDownloadURL:
           profileImageDownloadURL ?? this.profileImageDownloadURL,
       thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+      pendingCompanyRequestID:
+          pendingCompanyRequestID ?? this.pendingCompanyRequestID,
       unregisteredPromoterIDs:
           unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
       registeredPromoterIDs:
@@ -182,11 +185,9 @@ class UserModel extends Equatable {
         email: email,
         parentUserID: parentUserID,
         companyID: companyID,
-        role: role == null
-            ? Role.none
-            : Role.values.firstWhere((element) => element.name == role),
         profileImageDownloadURL: profileImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL,
+        pendingCompanyRequestID: pendingCompanyRequestID,
         unregisteredPromoterIDs: unregisteredPromoterIDs,
         registeredPromoterIDs: registeredPromoterIDs,
         landingPageIDs: landingPageIDs,
@@ -208,9 +209,9 @@ class UserModel extends Equatable {
         email: user.email,
         parentUserID: user.parentUserID,
         companyID: user.companyID,
-        role: user.role?.name,
         profileImageDownloadURL: user.profileImageDownloadURL,
         thumbnailDownloadURL: user.thumbnailDownloadURL,
+        pendingCompanyRequestID: user.pendingCompanyRequestID,
         unregisteredPromoterIDs: user.unregisteredPromoterIDs,
         registeredPromoterIDs: user.registeredPromoterIDs,
         landingPageIDs: user.landingPageIDs,
@@ -232,7 +233,6 @@ class UserModel extends Equatable {
         email,
         parentUserID,
         companyID,
-        role,
         profileImageDownloadURL,
         thumbnailDownloadURL,
         unregisteredPromoterIDs,

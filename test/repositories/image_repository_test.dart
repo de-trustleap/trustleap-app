@@ -1,14 +1,11 @@
 import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/storage_failures.dart';
-import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'image_repository_test.mocks.dart';
 import 'package:finanzbegleiter/constants.dart';
+import '../mocks.mocks.dart';
 
-@GenerateMocks([ImageRepository])
 void main() {
   late MockImageRepository mockImageRepo;
 

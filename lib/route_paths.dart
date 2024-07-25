@@ -1,7 +1,12 @@
 class RoutePaths {
+  static const String adminPath = "/admin";
+  static const String companyRequestsPath = "/company-requests";
+  static const String companyRequestDetails = "/company-request-details";
+
   static const String homePath = "/home";
   static const String dashboardPath = "/dashboard";
   static const String profilePath = "/profile";
+  static const String companyRegistration = "/company-registration";
   static const String recommendationsPath = "/recommendations";
   static const String promotersPath = "/promoters";
   static const String landingPagePath = "/landingpage";

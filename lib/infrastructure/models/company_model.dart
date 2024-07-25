@@ -15,6 +15,7 @@ class CompanyModel extends Equatable {
   final String? websiteURL;
   final String? companyImageDownloadURL;
   final String? thumbnailDownloadURL;
+  final String? ownerID;
   final List<String>? employeeIDs;
   final dynamic createdAt;
 
@@ -29,6 +30,7 @@ class CompanyModel extends Equatable {
     this.websiteURL,
     this.companyImageDownloadURL,
     this.thumbnailDownloadURL,
+    this.ownerID,
     this.employeeIDs,
     this.createdAt,
   });
@@ -45,6 +47,7 @@ class CompanyModel extends Equatable {
       'websiteURL': websiteURL,
       'companyImageDownloadURL': companyImageDownloadURL,
       'thumbnailDownloadURL': thumbnailDownloadURL,
+      'ownerID': ownerID,
       'employeeIDs': employeeIDs,
       'createdAt': createdAt,
     };
@@ -64,6 +67,7 @@ class CompanyModel extends Equatable {
           map['websiteURL'] != null ? map['websiteURL'] as String : null,
       companyImageDownloadURL: map['thumbnailDownloadURL'] != null ? map['thumbnailDownloadURL'] as String : null,
       thumbnailDownloadURL: map['thumbnailDownloadURL'] != null ? map['thumbnailDownloadURL'] as String : null,
+      ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
       employeeIDs: map['employeeIDs'] != null
           ? List<String>.from(map['employeeIDs'] as List<String>)
           : null,
@@ -82,6 +86,7 @@ class CompanyModel extends Equatable {
     String? websiteURL,
     String? companyImageDownloadURL,
     String? thumbnailDownloadURL,
+    String? ownerID,
     List<String>? employeeIDs,
     dynamic createdAt,
   }) {
@@ -96,6 +101,7 @@ class CompanyModel extends Equatable {
       websiteURL: websiteURL ?? this.websiteURL,
       companyImageDownloadURL: companyImageDownloadURL ?? this.companyImageDownloadURL,
       thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+      ownerID: ownerID ?? this.ownerID,
       employeeIDs: employeeIDs ?? this.employeeIDs,
       createdAt: createdAt ?? this.createdAt,
     );
@@ -117,6 +123,7 @@ class CompanyModel extends Equatable {
         websiteURL: websiteURL,
         companyImageDownloadURL: companyImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL,
+        ownerID: ownerID,
         employeeIDs: employeeIDs,
         createdAt: (createdAt as Timestamp).toDate());
   }
@@ -133,6 +140,7 @@ class CompanyModel extends Equatable {
         websiteURL: company.websiteURL,
         companyImageDownloadURL: company.companyImageDownloadURL,
         thumbnailDownloadURL: company.thumbnailDownloadURL,
+        ownerID: company.ownerID,
         employeeIDs: company.employeeIDs,
         createdAt: FieldValue.serverTimestamp());
   }
@@ -149,6 +157,7 @@ class CompanyModel extends Equatable {
         websiteURL,
         companyImageDownloadURL,
         thumbnailDownloadURL,
+        ownerID,
         employeeIDs
       ];
 }

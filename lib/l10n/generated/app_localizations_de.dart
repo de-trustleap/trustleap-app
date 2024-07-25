@@ -152,6 +152,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get menuitems_landingpage => 'Landingpage';
 
   @override
+  String get menuitems_company_requests => 'Anfragen';
+
+  @override
   String get landingpage_overview_error_view_title => 'Ein Fehler beim Abruf der Daten ist aufgetreten.';
 
   @override
@@ -410,6 +413,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profile_page_snackbar_email_verification => 'Es wurde ein Link zur E-Mail Verifikation an dich versendet.';
 
   @override
+  String get profile_page_snackbar_company_registered => 'Die Anfrage zur Unternehmensregistrierung wurde erfolgreich versendet.';
+
+  @override
   String get profile_page_logout_button_title => 'Abmelden';
 
   @override
@@ -621,5 +627,119 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profile_company_validator_invalid_phone => 'Die angegebene Telefonnummer ist ungültig';
 
   @override
+  String get profile_company_validator_missing_address => 'Bitte eine Adresse angeben';
+
+  @override
+  String get profile_company_validator_missing_postCode => 'Bitte eine PLZ angeben';
+
+  @override
+  String get profile_company_validator_invalid_postCode => 'Die PLZ ist ungültig';
+
+  @override
+  String get profile_company_validator_missing_place => 'Bitte einen Ort angeben';
+
+  @override
+  String get profile_company_validator_missing_phone => 'Bitte Telefonnummer angeben';
+
+  @override
   String get profile_company_contact_section_success_snackbar_message => 'Unternehmensinformationen erfolgreich geändert';
+
+  @override
+  String get company_requests_overview_title => 'Anfragen für Unternehmensregistrierungen';
+
+  @override
+  String get admin_company_request_detail_title => 'Anfrage';
+
+  @override
+  String get admin_company_request_detail_name => 'Unternehmensbezeichnung:';
+
+  @override
+  String get admin_company_request_detail_industry => 'Branche:';
+
+  @override
+  String get admin_company_request_detail_address => 'Adresse:';
+
+  @override
+  String get admin_company_request_detail_postcode => 'Postleitzahl:';
+
+  @override
+  String get admin_company_request_detail_place => 'Ort:';
+
+  @override
+  String get admin_company_request_detail_phone => 'Telefonnummer:';
+
+  @override
+  String get admin_company_request_detail_website => 'Webseite:';
+
+  @override
+  String get admin_company_request_detail_user_title => 'Nutzer';
+
+  @override
+  String get admin_company_request_detail_user_name => 'Name:';
+
+  @override
+  String get admin_company_request_detail_user_email => 'E-Mail Adresse:';
+
+  @override
+  String get admin_company_request_detail_decline_button_title => 'Anfrage ablehnen';
+
+  @override
+  String get admin_company_request_detail_accept_button_title => 'Anfrage annehmen';
+
+  @override
+  String get admin_company_request_overview_from_user => 'von: ';
+
+  @override
+  String get admin_company_request_overview_empty_title => 'Keine Anfragen vorhanden';
+
+  @override
+  String get admin_company_request_overview_empty_body => 'Zurzeit scheint es keine Registrierungsanfragen von Unternehmen zu geben.';
+
+  @override
+  String get admin_company_request_overview_title => 'Anfragen für Unternehmensregistrierungen';
+
+  @override
+  String get admin_company_request_overview_error => 'Es ist ein Fehler aufgetreten';
+
+  @override
+  String get company_registration_form_title => 'Unternehmen registrieren';
+
+  @override
+  String get company_registration_form_name_textfield_placeholder => 'Unternehmensbezeichnung';
+
+  @override
+  String get company_registration_form_industry_textfield_placeholder => 'Branche';
+
+  @override
+  String get company_registration_form_website_textfield_placeholder => 'Webseite (optional)';
+
+  @override
+  String get company_registration_form_address_textfield_placeholder => 'Straße und Hausnummer';
+
+  @override
+  String get company_registration_form_postcode_textfield_placeholder => 'PLZ';
+
+  @override
+  String get company_registration_form_place_textfield_placeholder => 'Ort';
+
+  @override
+  String get company_registration_form_phone_textfield_placeholder => 'Telefonnummer';
+
+  @override
+  String get company_registration_form_register_button_title => 'Jetzt registrieren';
+
+  @override
+  String get profile_register_company_section_title => 'Unternehmensregistrierung';
+
+  @override
+  String get profile_register_company_section_subtitle_in_progress => 'Deine Anfrage ist in Bearbeitung.\nDie Bearbeitungsdauer liegt bei durchschnittlich 7 Tagen.';
+
+  @override
+  String get profile_register_company_section_subtitle_requested_at => 'Eingereicht am ';
+
+  @override
+  String get profile_register_company_section_subtitle => 'Registriere jetzt dein Unternehmen, um weitere Vorteile der App nutzen zu können.';
+
+  @override
+  String get profile_register_company_section_button_title => 'Zur Registrierung';
 }

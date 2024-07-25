@@ -4,14 +4,10 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
-import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import '../mocks.mocks.dart';
 
-import 'landingpage_repository_test.mocks.dart';
-
-@GenerateMocks([LandingPageRepository])
 void main() {
   late MockLandingPageRepository mockLandingPageRepo;
 

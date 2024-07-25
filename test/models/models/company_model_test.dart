@@ -42,6 +42,7 @@ void main() {
           companyImageDownloadURL: "testURL",
           thumbnailDownloadURL: "testURL",
           employeeIDs: const ["5"],
+          ownerID: "5",
           createdAt: Timestamp(100000, 0));
 
       final expectedResult = {
@@ -56,6 +57,7 @@ void main() {
         "companyImageDownloadURL": "testURL",
         "thumbnailDownloadURL": "testURL",
         "employeeIDs": ["5"],
+        "ownerID": "5",
         "createdAt": Timestamp(100000, 0)
       };
       // When

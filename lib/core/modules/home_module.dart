@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/presentation/dashboard_page/dashboard_page.dart'
 import 'package:finanzbegleiter/presentation/landing_page/landing_page.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator.dart';
 import 'package:finanzbegleiter/presentation/profile_page/profile_page.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/company_registration/company_registration_page.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoters_page.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendations_page.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -18,7 +19,11 @@ class HomeModule extends Module {
         children: [
           ChildRoute(RoutePaths.dashboardPath,
               child: (_) => const DashboardPage()),
-          ChildRoute(RoutePaths.profilePath, child: (_) => const ProfilePage()),
+          ChildRoute(RoutePaths.profilePath,
+              child: (_) => ProfilePage(
+                  registeredCompany: r.args.queryParams["registeredCompany"])),
+          ChildRoute(RoutePaths.companyRegistration,
+              child: (_) => const CompanyRegistrationPage()),
           ChildRoute(RoutePaths.recommendationsPath,
               child: (_) => const RecommendationsPage()),
           ChildRoute(RoutePaths.promotersPath,
@@ -33,7 +38,6 @@ class HomeModule extends Module {
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),
         ]);
-
     r.wildcard(child: (_) => const DashboardPage());
   }
 }

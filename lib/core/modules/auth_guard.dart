@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthGuard extends RouteGuard {

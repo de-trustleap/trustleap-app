@@ -103,7 +103,8 @@ class _LoginFormState extends State<LoginForm> {
                       onChanged: resetError,
                       onFieldSubmitted: submit,
                       validator: validator.validateEmail,
-                      keyboardType: TextInputType.emailAddress),
+                      keyboardType: TextInputType.emailAddress,
+                      accessibilityKey: const Key("loginTextField")),
                   const SizedBox(height: 20),
                   FormTextfield(
                       controller: passwordTextController,
@@ -112,31 +113,37 @@ class _LoginFormState extends State<LoginForm> {
                       onChanged: resetError,
                       onFieldSubmitted: submit,
                       validator: validator.validatePassword,
-                      obscureText: true),
+                      obscureText: true,
+                      accessibilityKey: const Key("passwordTextField")),
                   const SizedBox(height: 16),
                   PasswordForgottenButton(
+                      key: const Key("passwordForgottenButton"),
                       onTap: () =>
                           {Modular.to.pushNamed(RoutePaths.passwordReset)}),
                   const SizedBox(height: 24),
                   PrimaryButton(
                       title: localization.login_login_buttontitle,
+                      key: const Key("loginButton"),
                       onTap: () {
                         submit();
                       }),
                   const SizedBox(height: 24),
                   RegisterButton(
+                      key: const Key("registerButton"),
                       onTap: () =>
                           {Modular.to.pushNamed(RoutePaths.registerPath)}),
                   if (state is SignInLoadingState) ...[
-                    const SizedBox(height: 80),
+                    const SizedBox(
+                        height: 80, key: Key("loadingIndicatorSpacing")),
                     const LoadingIndicator()
                   ],
                   if (errorMessage != "" &&
                       showError &&
-                      (state is! SignInLoadingState) &&
+                      (state is SignInFailureState) &&
                       !validationHasError) ...[
                     const SizedBox(height: 20),
-                    FormErrorView(message: errorMessage)
+                    FormErrorView(
+                        message: errorMessage, key: const Key("formErrorView"))
                   ]
                 ]));
       },

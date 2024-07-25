@@ -7,9 +7,7 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
-import '../repositories/landingpage_repository_test.mocks.dart';
-import '../repositories/user_repository_test.mocks.dart';
+import '../mocks.mocks.dart';
 
 void main() {
   late LandingPageCubit landingPageCubit;

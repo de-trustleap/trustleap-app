@@ -4,9 +4,8 @@ import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
-import '../../repositories/auth_repository_test.mocks.dart';
 import '../../repositories/mock_user_credential.dart';
+import '../../mocks.mocks.dart';
 
 void main() {
   late SignInCubit signInCubit;

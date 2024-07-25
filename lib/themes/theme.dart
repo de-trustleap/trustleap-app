@@ -321,7 +321,3 @@ class AppTheme {
         (states) => const BorderSide(width: 1, color: darkTextColor),
       ));
 }
-
-// TODO: Kaskadiertes Löschen von Landingpages im Backend ermöglichen
-// TODO: Duplizieren Funktion implementieren
-// TODO: Wöchentliche Cloud Function die alle Landingpages löscht, deren ID kein User mehr hat.

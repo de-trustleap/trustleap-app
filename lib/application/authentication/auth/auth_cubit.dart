@@ -19,11 +19,19 @@ class AuthCubit extends Cubit<AuthState> {
     checkForAuthState();
   }
 
-  void checkForAuthState() {
-    final userOption = authRepo.getSignedInUser();
-    userOption.fold(() => emit(AuthStateUnAuthenticated()), (a) {
-      emit(AuthStateAuthenticated());
-    });
+  void checkForAuthState() async {
+    final user = authRepo.getCurrentUser();
+    if (user != null) {
+      final idTokenResult = await user.getIdTokenResult(true);
+      final isAdmin = idTokenResult.claims?["admin"] == true;
+      if (isAdmin) {
+        emit(AuthStateAuthenticatedAsAdmin());
+      } else {
+        emit(AuthStateAuthenticated());
+      }
+    } else {
+      emit(AuthStateUnAuthenticated());
+    }
   }
 
   void resetPassword(String? email) async {

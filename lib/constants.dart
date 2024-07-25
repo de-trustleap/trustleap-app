@@ -7,10 +7,21 @@ enum MenuItems {
   promoters("Promoter"),
   landingpage("Landingpage"),
   activities("Aktivitäten"),
+
+  adminCompanyRequests("Unternehmensanfragen"),
   none("");
 
   final String value;
   const MenuItems(this.value);
+}
+
+enum AuthStatus {
+  authenticated("Authentifiziert"),
+  unAuthenticated("Nicht authentifiziert"),
+  authenticatedAsAdmin("Authentifiziert als Admin");
+
+  final String value;
+  const AuthStatus(this.value);
 }
 
 enum EmailVerificationState {

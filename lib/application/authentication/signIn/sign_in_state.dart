@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'sign_in_cubit.dart';
 
-sealed class SignInState {}
+class SignInState {}
 
 final class SignInInitial extends SignInState with EquatableMixin {
   @override

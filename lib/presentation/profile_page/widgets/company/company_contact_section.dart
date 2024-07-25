@@ -223,7 +223,8 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                               disabled: textFieldsDisabled,
                               placeholder: "",
                               onChanged: resetError,
-                              onFieldSubmitted: () => submit(validator))
+                              onFieldSubmitted: () => submit(validator),
+                              validator: validator.validateAddress)
                         ]),
                     const SizedBox(height: textFieldSpacing),
                     ResponsiveRowColumn(
@@ -251,7 +252,8 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                     disabled: textFieldsDisabled,
                                     placeholder: "",
                                     onChanged: resetError,
-                                    onFieldSubmitted: () => submit(validator))
+                                    onFieldSubmitted: () => submit(validator),
+                                    validator: validator.validatePostCode)
                               ])),
                           const ResponsiveRowColumnItem(
                               child: SizedBox(
@@ -276,7 +278,8 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                     disabled: textFieldsDisabled,
                                     placeholder: "",
                                     onChanged: resetError,
-                                    onFieldSubmitted: () => submit(validator))
+                                    onFieldSubmitted: () => submit(validator),
+                                    validator: validator.validatePlace)
                               ]))
                         ]),
                     const SizedBox(height: textFieldSpacing),

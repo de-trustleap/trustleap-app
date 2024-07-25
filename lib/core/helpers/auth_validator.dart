@@ -76,7 +76,7 @@ class AuthValidator {
   String? validatePostcode(String? input) {
     if (input == null || input.isEmpty) {
       return null;
-    } else if (isNumeric(input)) {
+    } else if (_isNumeric(input)) {
       return null;
     } else {
       return localization.auth_validation_invalid_postcode;
@@ -109,7 +109,7 @@ class AuthValidator {
     return adultDate.isBefore(today);
   }
 
-  bool isNumeric(String s) {
+  bool _isNumeric(String s) {
     return int.tryParse(s) != null;
   }
 }
