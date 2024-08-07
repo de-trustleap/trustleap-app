@@ -52,8 +52,7 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
         if (state is CompanyObserverSuccess) {
           return Container(
               width: double.infinity,
-              decoration:
-                  BoxDecoration(color: themeData.colorScheme.background),
+              decoration: BoxDecoration(color: themeData.colorScheme.surface),
               child: ListView(children: [
                 SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                 CenteredConstrainedWrapper(

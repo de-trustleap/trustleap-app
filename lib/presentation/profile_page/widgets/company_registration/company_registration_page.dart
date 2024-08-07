@@ -18,7 +18,7 @@ class CompanyRegistrationPage extends StatelessWidget {
       create: (context) => Modular.get<CompanyCubit>()..getCurrentUser(),
       child: Container(
           width: double.infinity,
-          decoration: BoxDecoration(color: themeData.colorScheme.background),
+          decoration: BoxDecoration(color: themeData.colorScheme.surface),
           child: ListView(children: [
             SizedBox(height: responsiveValue.isMobile ? 40 : 80),
             const CenteredConstrainedWrapper(

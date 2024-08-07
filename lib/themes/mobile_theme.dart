@@ -70,13 +70,13 @@ class MobileAppTheme {
 
   static final SearchBarThemeData _lightSearchBarTheme =
       AppTheme.lightSearchBarTheme.copyWith(
-          hintStyle: MaterialStatePropertyAll(_lightBodySmallText),
-          textStyle: MaterialStatePropertyAll(_lightBodySmallText));
+          hintStyle: WidgetStatePropertyAll(_lightBodySmallText),
+          textStyle: WidgetStatePropertyAll(_lightBodySmallText));
 
   static final SearchBarThemeData _darkSearchBarTheme =
       AppTheme.darkSearchBarTheme.copyWith(
-          hintStyle: MaterialStatePropertyAll(_darkBodySmallText),
-          textStyle: MaterialStatePropertyAll(_darkBodySmallText));
+          hintStyle: WidgetStatePropertyAll(_darkBodySmallText),
+          textStyle: WidgetStatePropertyAll(_darkBodySmallText));
 
   static final ChipThemeData _lightChipTheme =
       AppTheme.lightChipTheme.copyWith(labelStyle: _lightBodySmallText);
@@ -87,7 +87,7 @@ class MobileAppTheme {
   static final ThemeData lightTheme = ThemeData(
       colorScheme: const ColorScheme.light(
           primary: AppTheme.lightPrimaryColor,
-          background: AppTheme.lightBackgroundColor,
+          surface: AppTheme.lightBackgroundColor,
           onPrimaryContainer: AppTheme.lightCardColor,
           secondary: AppTheme.lightSecondaryColor,
           error: AppTheme.lightErrorColor,
@@ -111,7 +111,7 @@ class MobileAppTheme {
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
           primary: AppTheme.darkPrimaryColor,
-          background: AppTheme.darkBackgroundColor,
+          surface: AppTheme.darkBackgroundColor,
           onPrimaryContainer: AppTheme.darkCardColor,
           secondary: AppTheme.darkSecondaryColor,
           error: AppTheme.darkErrorColor,

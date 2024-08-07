@@ -31,7 +31,7 @@ class _PromotersOverviewWrapperState extends State<PromotersOverviewWrapper>
 
     return Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: themeData.colorScheme.background),
+        decoration: BoxDecoration(color: themeData.colorScheme.surface),
         child: ListView(children: [
           SizedBox(height: responsiveValue.isMobile ? 20 : 80),
           CenteredConstrainedWrapper(

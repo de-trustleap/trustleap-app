@@ -24,7 +24,7 @@ class AdminPage extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: const PreferredSize(
               preferredSize: Size(double.infinity, 44), child: CustomAppBar()),
-          backgroundColor: themeData.colorScheme.background,
+          backgroundColor: themeData.colorScheme.surface,
           body: const RouterOutlet(),
           endDrawer: const SizedBox(
               width: 240, child: Drawer(child: AdminSideMenu())));

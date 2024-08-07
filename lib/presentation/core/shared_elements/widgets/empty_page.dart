@@ -29,7 +29,7 @@ class EmptyPage extends StatelessWidget {
 
     return Container(
         constraints: const BoxConstraints(maxWidth: 600),
-        decoration: BoxDecoration(color: themeData.colorScheme.background),
+        decoration: BoxDecoration(color: themeData.colorScheme.surface),
         child: CenteredConstrainedWrapper(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
