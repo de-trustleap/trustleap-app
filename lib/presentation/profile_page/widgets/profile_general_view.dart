@@ -13,7 +13,6 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_regist
 import 'package:finanzbegleiter/presentation/profile_page/widgets/promoters_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileGeneralView extends StatefulWidget {
@@ -35,14 +34,14 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
-    final profileObserverBloc = Modular.get<ProfileObserverBloc>();
 
     return BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
       builder: (context, state) {
         if (state is ProfileUserObserverSuccess) {
           return Container(
               width: double.infinity,
-              decoration: BoxDecoration(color: themeData.colorScheme.surface),
+              decoration:
+                  BoxDecoration(color: themeData.colorScheme.surface),
               child: ListView(children: [
                 SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                 CenteredConstrainedWrapper(
@@ -98,7 +97,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                   message: DatabaseFailureMapper.mapFailureMessage(
                       state.failure, localization),
                   callback: () =>
-                      {profileObserverBloc.add(ProfileObserveUserEvent())}));
+                      {BlocProvider.of<ProfileObserverBloc>(context).add(ProfileObserveUserEvent())}));
         } else {
           return CenteredConstrainedWrapper(
               child: CircularProgressIndicator(

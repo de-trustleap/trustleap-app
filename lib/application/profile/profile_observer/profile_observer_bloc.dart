@@ -20,14 +20,26 @@ class ProfileObserverBloc
     on<ProfileObserveUserEvent>((event, emit) async {
       emit(ProfileUserObserverLoading());
       await _userStreamSub?.cancel();
-      _userStreamSub = userRepo.observeUser().listen((failureOrSuccess) =>
-          add(ProfileObserveUserUpdatedEvent(failureOrUser: failureOrSuccess)));
+      if (!isClosed) {
+        _userStreamSub = userRepo.observeUser().listen((failureOrSuccess) {
+          try {
+            add(ProfileObserveUserUpdatedEvent(
+                failureOrUser: failureOrSuccess));
+          } catch (e) {
+            emit(ProfileUserObserverFailure(failure: BackendFailure()));
+          }
+        }, onError: (error) {
+          emit(ProfileUserObserverFailure(failure: BackendFailure()));
+        });
+      }
     });
 
     on<ProfileObserveUserUpdatedEvent>((event, emit) {
-      event.failureOrUser.fold(
-          (failure) => emit(ProfileUserObserverFailure(failure: failure)),
-          (user) => emit(ProfileUserObserverSuccess(user: user)));
+      if (!isClosed) {
+        event.failureOrUser.fold(
+            (failure) => emit(ProfileUserObserverFailure(failure: failure)),
+            (user) => emit(ProfileUserObserverSuccess(user: user)));
+      }
     });
 
     @override

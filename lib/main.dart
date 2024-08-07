@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
+import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/modules/app_module.dart';
@@ -91,7 +92,8 @@ class MyApp extends StatelessWidget {
             create: (context) => Modular.get<AuthObserverBloc>()
               ..add(AuthObserverStartedEvent())),
         BlocProvider(create: (context) => Modular.get<MenuCubit>()),
-        BlocProvider(create: (context) => Modular.get<ThemeCubit>())
+        BlocProvider(create: (context) => Modular.get<ThemeCubit>()),
+        BlocProvider(create: (context) => Modular.get<ProfileObserverBloc>())
       ],
       child: MultiBlocListener(
           listeners: [

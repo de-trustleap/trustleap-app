@@ -51,6 +51,21 @@ class AppModule extends Module {
     final firebaseFunctions = FirebaseFunctions.instance;
 
     i
+      ..addLazySingleton(() => firebaseAuth)
+      ..addLazySingleton(() => firestore)
+      ..addLazySingleton(() => storage)
+      ..addLazySingleton(() => firebaseFunctions)
+      
+      ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
+      ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
+      ..addLazySingleton<ImageRepository>(ImageRepositoryImplementation.new)
+      ..addLazySingleton<PromoterRepository>(
+          PromoterRepositoryImplementation.new)
+      ..addLazySingleton<CompanyRepository>(CompanyRepositoryImplementation.new)
+      ..addLazySingleton<LandingPageRepository>(
+          LandingPageRepositoryImplementation.new)
+
+      ..addLazySingleton(ProfileObserverBloc.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
@@ -61,7 +76,6 @@ class AppModule extends Module {
       ..add(ProfileImageBloc.new)
       ..add(CompanyImageBloc.new)
       ..add(LandingPageImageBloc.new)
-      ..add(ProfileObserverBloc.new)
       ..add(CompanyObserverCubit.new)
       ..add(CompanyCubit.new)
       ..add(PromoterCubit.new)
@@ -70,19 +84,7 @@ class AppModule extends Module {
       ..add(LandingPageObserverCubit.new)
       ..add(LandingPageCubit.new)
       ..add(CompanyRequestCubit.new)
-      ..add(CompanyRequestObserverCubit.new)
-      ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
-      ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
-      ..addLazySingleton<ImageRepository>(ImageRepositoryImplementation.new)
-      ..addLazySingleton<PromoterRepository>(
-          PromoterRepositoryImplementation.new)
-      ..addLazySingleton<CompanyRepository>(CompanyRepositoryImplementation.new)
-      ..addLazySingleton<LandingPageRepository>(
-          LandingPageRepositoryImplementation.new)
-      ..addLazySingleton(() => firebaseAuth)
-      ..addLazySingleton(() => firestore)
-      ..addLazySingleton(() => storage)
-      ..addLazySingleton(() => firebaseFunctions);
+      ..add(CompanyRequestObserverCubit.new);
   }
 
   @override
