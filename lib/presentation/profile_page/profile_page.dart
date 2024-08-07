@@ -38,6 +38,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   void initState() {
+    BlocProvider.of<ProfileObserverBloc>(context).add(ProfileObserveUserEvent());
     if (widget.registeredCompany == "true") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         CustomSnackBar.of(context).showCustomSnackBar(
@@ -59,11 +60,8 @@ class _ProfilePageState extends State<ProfilePage>
     final responsiveValue = ResponsiveBreakpoints.of(context);
     screenHeight = responsiveValue.screenHeight;
     topPadding = responsiveValue.screenHeight * 0.02;
-    final profileObserverBloc = Modular.get<ProfileObserverBloc>()
-      ..add(ProfileObserveUserEvent());
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => profileObserverBloc),
           BlocProvider(
               create: (context) => Modular.get<ProfileCubit>()
                 ..verifyEmail()
