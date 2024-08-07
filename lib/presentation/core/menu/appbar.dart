@@ -6,8 +6,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      title: const Text("Finanzwegbegleiter")
-    );
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        title: const Text("Finanzwegbegleiter"));
   }
 }

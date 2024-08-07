@@ -90,7 +90,7 @@ class _MenuItemState extends State<MenuItem> {
                           borderRadius: BorderRadius.circular(15),
                           color: widget.isURLMatching
                               ? themeData.colorScheme.primary
-                              : themeData.colorScheme.background),
+                              : themeData.colorScheme.surface),
                     ),
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
@@ -102,13 +102,13 @@ class _MenuItemState extends State<MenuItem> {
                       child: Row(children: [
                         Icon(widget.icon,
                             color: widget.isURLMatching
-                                ? themeData.colorScheme.background
+                                ? themeData.colorScheme.surface
                                 : themeData.iconTheme.color),
                         const SizedBox(width: 12),
                         Text(getLocalizedMenuItem(localization),
                             style: widget.isURLMatching
                                 ? themeData.textTheme.bodyMedium!.copyWith(
-                                    color: themeData.colorScheme.background)
+                                    color: themeData.colorScheme.surface)
                                 : themeData.textTheme.bodyMedium)
                       ]),
                     ),

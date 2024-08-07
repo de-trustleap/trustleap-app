@@ -61,7 +61,7 @@ class RawFormTextField extends StatelessWidget {
           labelText: placeholder,
           hoverColor: Colors.transparent,
           filled: disabled ? true : false,
-          fillColor: themeData.colorScheme.background),
+          fillColor: themeData.colorScheme.surface),
     );
   }
 }

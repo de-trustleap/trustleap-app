@@ -22,11 +22,16 @@ class LandingPageOverviewGridTile extends StatelessWidget {
       required this.deletePressed,
       required this.duplicatePressed});
 
-  TextStyle getDuplicateButtonTextStyle(ResponsiveBreakpointsData responsiveValue, ThemeData themeData) {
-    if(responsiveValue.isMobile) {
-      return isDuplicationAllowed ? themeData.textTheme.bodySmall! : themeData.textTheme.bodySmall!.copyWith(color: Colors.grey);
+  TextStyle getDuplicateButtonTextStyle(
+      ResponsiveBreakpointsData responsiveValue, ThemeData themeData) {
+    if (responsiveValue.isMobile) {
+      return isDuplicationAllowed
+          ? themeData.textTheme.bodySmall!
+          : themeData.textTheme.bodySmall!.copyWith(color: Colors.grey);
     } else {
-      return isDuplicationAllowed ? themeData.textTheme.bodyMedium! : themeData.textTheme.bodyMedium!.copyWith(color: Colors.grey);
+      return isDuplicationAllowed
+          ? themeData.textTheme.bodyMedium!
+          : themeData.textTheme.bodyMedium!.copyWith(color: Colors.grey);
     }
   }
 
@@ -41,7 +46,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
       decoration: BoxDecoration(
           color: (landingPage.isDefaultPage ?? false)
               ? themeData.colorScheme.primary
-              : themeData.colorScheme.background,
+              : themeData.colorScheme.surface,
           border: Border.all(color: Colors.transparent),
           borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Padding(
@@ -99,7 +104,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                             size: 24),
                                         const SizedBox(width: 8),
                                         Text("Duplizieren",
-                                            style: getDuplicateButtonTextStyle(responsiveValue, themeData))
+                                            style: getDuplicateButtonTextStyle(
+                                                responsiveValue, themeData))
                                       ]))
                             ],
                         onSelected: (String newValue) {

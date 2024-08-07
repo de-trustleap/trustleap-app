@@ -152,7 +152,7 @@ class AppTheme {
       labelColor: AppTheme.lightTextColor,
       labelStyle:
           AppTheme.lightBodySmallText.copyWith(color: AppTheme.darkTextColor),
-      overlayColor: const MaterialStatePropertyAll(Colors.transparent));
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent));
 
   static final TabBarTheme darkTabbarTheme = TabBarTheme(
       indicatorColor: AppTheme.darkSecondaryColor,
@@ -161,18 +161,18 @@ class AppTheme {
       dividerColor: Colors.transparent,
       labelStyle:
           AppTheme.darkBodySmallText.copyWith(color: AppTheme.darkTextColor),
-      overlayColor: const MaterialStatePropertyAll(Colors.transparent));
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent));
 
   static const DropdownMenuThemeData lightDropDownMenuTheme =
       DropdownMenuThemeData(
           textStyle: AppTheme.lightBodyMediumText,
           menuStyle: MenuStyle(
               backgroundColor:
-                  MaterialStatePropertyAll(AppTheme.lightBackgroundColor),
+                  WidgetStatePropertyAll(AppTheme.lightBackgroundColor),
               shadowColor:
-                  MaterialStatePropertyAll(AppTheme.lightBackgroundColor),
+                  WidgetStatePropertyAll(AppTheme.lightBackgroundColor),
               surfaceTintColor:
-                  MaterialStatePropertyAll(AppTheme.lightBackgroundColor),
+                  WidgetStatePropertyAll(AppTheme.lightBackgroundColor),
               visualDensity: VisualDensity.comfortable));
 
   static final DropdownMenuThemeData darkDropDownMenuTheme =
@@ -180,32 +180,30 @@ class AppTheme {
           textStyle: AppTheme.darkBodyMediumText,
           menuStyle: const MenuStyle(
               backgroundColor:
-                  MaterialStatePropertyAll(AppTheme.darkBackgroundColor),
-              shadowColor:
-                  MaterialStatePropertyAll(AppTheme.darkBackgroundColor),
+                  WidgetStatePropertyAll(AppTheme.darkBackgroundColor),
+              shadowColor: WidgetStatePropertyAll(AppTheme.darkBackgroundColor),
               surfaceTintColor:
-                  MaterialStatePropertyAll(AppTheme.darkBackgroundColor),
+                  WidgetStatePropertyAll(AppTheme.darkBackgroundColor),
               visualDensity: VisualDensity.comfortable));
 
   static final SegmentedButtonThemeData lightSegmentedButtonTheme =
       SegmentedButtonThemeData(
           style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.resolveWith<Color>((states) {
-                if (states.contains(MaterialState.selected)) {
+              backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+                if (states.contains(WidgetState.selected)) {
                   return AppTheme.lightSecondaryColor;
                 } else {
                   return Colors.transparent;
                 }
               }),
-              iconColor: MaterialStateProperty.resolveWith<Color>((states) {
-                if (states.contains(MaterialState.selected)) {
+              iconColor: WidgetStateProperty.resolveWith<Color>((states) {
+                if (states.contains(WidgetState.selected)) {
                   return AppTheme.lightBackgroundColor;
                 } else {
                   return AppTheme.lightTextColor;
                 }
               }),
-              side: MaterialStateProperty.all(BorderSide(
+              side: WidgetStateProperty.all(BorderSide(
                   color: AppTheme.lightTextColor.withOpacity(0.3),
                   width: 1.0,
                   style: BorderStyle.solid))));
@@ -213,61 +211,60 @@ class AppTheme {
   static final SegmentedButtonThemeData darkSegmentedButtonTheme =
       SegmentedButtonThemeData(
           style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.resolveWith<Color>((states) {
-                if (states.contains(MaterialState.selected)) {
+              backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+                if (states.contains(WidgetState.selected)) {
                   return AppTheme.darkSecondaryColor;
                 } else {
                   return Colors.transparent;
                 }
               }),
-              iconColor: MaterialStateProperty.resolveWith<Color>((states) {
-                if (states.contains(MaterialState.selected)) {
+              iconColor: WidgetStateProperty.resolveWith<Color>((states) {
+                if (states.contains(WidgetState.selected)) {
                   return AppTheme.darkBackgroundColor;
                 } else {
                   return AppTheme.darkTextColor;
                 }
               }),
-              side: MaterialStateProperty.all(BorderSide(
+              side: WidgetStateProperty.all(BorderSide(
                   color: AppTheme.darkTextColor.withOpacity(0.3),
                   width: 1.0,
                   style: BorderStyle.solid))));
 
   static const SearchBarThemeData lightSearchBarTheme = SearchBarThemeData(
-      elevation: MaterialStatePropertyAll(1),
-      backgroundColor: MaterialStatePropertyAll(AppTheme.lightCardColor),
-      overlayColor: MaterialStatePropertyAll(Colors.transparent),
-      hintStyle: MaterialStatePropertyAll(AppTheme.lightBodySmallText),
-      textStyle: MaterialStatePropertyAll(AppTheme.lightBodySmallText));
+      elevation: WidgetStatePropertyAll(1),
+      backgroundColor: WidgetStatePropertyAll(AppTheme.lightCardColor),
+      overlayColor: WidgetStatePropertyAll(Colors.transparent),
+      hintStyle: WidgetStatePropertyAll(AppTheme.lightBodySmallText),
+      textStyle: WidgetStatePropertyAll(AppTheme.lightBodySmallText));
 
   static final SearchBarThemeData darkSearchBarTheme = SearchBarThemeData(
-      elevation: const MaterialStatePropertyAll(1),
-      backgroundColor: const MaterialStatePropertyAll(AppTheme.darkCardColor),
-      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-      hintStyle: MaterialStatePropertyAll(AppTheme.darkBodySmallText),
-      textStyle: MaterialStatePropertyAll(AppTheme.darkBodySmallText));
+      elevation: const WidgetStatePropertyAll(1),
+      backgroundColor: const WidgetStatePropertyAll(AppTheme.darkCardColor),
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+      hintStyle: WidgetStatePropertyAll(AppTheme.darkBodySmallText),
+      textStyle: WidgetStatePropertyAll(AppTheme.darkBodySmallText));
 
   static final RadioThemeData lightRadioTheme = RadioThemeData(
-      fillColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      fillColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return AppTheme.lightSecondaryColor;
         } else {
           return AppTheme.lightTextColor.withOpacity(0.7);
         }
       }),
       splashRadius: 0,
-      overlayColor: const MaterialStatePropertyAll(AppTheme.lightPrimaryColor));
+      overlayColor: const WidgetStatePropertyAll(AppTheme.lightPrimaryColor));
 
   static final RadioThemeData darkRadioTheme = RadioThemeData(
-      fillColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      fillColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return AppTheme.darkSecondaryColor;
         } else {
           return AppTheme.darkTextColor.withOpacity(0.7);
         }
       }),
       splashRadius: 0,
-      overlayColor: const MaterialStatePropertyAll(AppTheme.darkPrimaryColor));
+      overlayColor: const WidgetStatePropertyAll(AppTheme.darkPrimaryColor));
 
   static const ChipThemeData lightChipTheme = ChipThemeData(
       iconTheme: lightIconTheme,
@@ -283,7 +280,7 @@ class AppTheme {
 
   static final PopupMenuThemeData lightPopupMenuTheme = PopupMenuThemeData(
       textStyle: lightBodyMediumText.copyWith(color: lightSecondaryColor),
-      labelTextStyle: MaterialStatePropertyAll(
+      labelTextStyle: WidgetStatePropertyAll(
           lightBodyMediumText.copyWith(color: lightSecondaryColor)),
       iconColor: lightSecondaryColor,
       iconSize: 24,
@@ -291,33 +288,33 @@ class AppTheme {
 
   static final PopupMenuThemeData darkPopupMenuTheme = PopupMenuThemeData(
       textStyle: darkBodyMediumText.copyWith(color: darkSecondaryColor),
-      labelTextStyle: MaterialStatePropertyAll(
+      labelTextStyle: WidgetStatePropertyAll(
           darkBodyMediumText.copyWith(color: darkSecondaryColor)),
       iconColor: darkSecondaryColor,
       iconSize: 24,
       enableFeedback: false);
 
   static final CheckboxThemeData lightCheckboxTheme = CheckboxThemeData(
-      fillColor: const MaterialStatePropertyAll(Colors.transparent),
-      checkColor: const MaterialStatePropertyAll(lightSecondaryColor),
+      fillColor: const WidgetStatePropertyAll(Colors.transparent),
+      checkColor: const WidgetStatePropertyAll(lightSecondaryColor),
       visualDensity: VisualDensity.comfortable,
       splashRadius: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
       ),
-      side: MaterialStateBorderSide.resolveWith(
+      side: WidgetStateBorderSide.resolveWith(
         (states) => const BorderSide(width: 1, color: lightTextColor),
       ));
 
   static final CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
-      fillColor: const MaterialStatePropertyAll(Colors.transparent),
-      checkColor: const MaterialStatePropertyAll(darkSecondaryColor),
+      fillColor: const WidgetStatePropertyAll(Colors.transparent),
+      checkColor: const WidgetStatePropertyAll(darkSecondaryColor),
       visualDensity: VisualDensity.comfortable,
       splashRadius: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
       ),
-      side: MaterialStateBorderSide.resolveWith(
+      side: WidgetStateBorderSide.resolveWith(
         (states) => const BorderSide(width: 1, color: darkTextColor),
       ));
 }

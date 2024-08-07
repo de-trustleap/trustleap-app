@@ -23,7 +23,7 @@ class PromoterOverviewListTile extends StatelessWidget {
 
     return Container(
         decoration: BoxDecoration(
-            color: themeData.colorScheme.background,
+            color: themeData.colorScheme.surface,
             border: Border.all(color: Colors.transparent),
             borderRadius: const BorderRadius.all(Radius.circular(5))),
         child: Padding(
