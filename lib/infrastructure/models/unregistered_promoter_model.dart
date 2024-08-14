@@ -13,7 +13,9 @@ class UnregisteredPromoterModel extends Equatable {
   final String? birthDate;
   final String? email;
   final List<String>? landingPageIDs;
+  final String? defaultLandingPageID;
   final String? parentUserID;
+  final String? companyID;
   final String? code;
   final DateTime expiresAt;
   final dynamic createdAt;
@@ -26,7 +28,9 @@ class UnregisteredPromoterModel extends Equatable {
       this.birthDate,
       this.email,
       this.landingPageIDs,
+      this.defaultLandingPageID,
       this.parentUserID,
+      this.companyID,
       this.code,
       required this.expiresAt,
       this.createdAt});
@@ -40,7 +44,9 @@ class UnregisteredPromoterModel extends Equatable {
       'birthDate': birthDate,
       'email': email,
       'landingPageIDs': landingPageIDs,
+      'defaultLandingPageID': defaultLandingPageID,
       'parentUserID': parentUserID,
+      'companyID': companyID,
       'code': code,
       'expiresAt': expiresAt,
       'createdAt': createdAt
@@ -58,8 +64,12 @@ class UnregisteredPromoterModel extends Equatable {
         landingPageIDs: map['landingPageIDs'] != null
             ? List<String>.from(map['landingPageIDs'])
             : null,
+        defaultLandingPageID: map['defaultLandingPageID'] != null
+            ? map['defaultLandingPageID'] as String
+            : null,
         parentUserID:
             map['parentUserID'] != null ? map['parentUserID'] as String : null,
+        companyID: map['companyID'] != null ? map['companyID'] as String : null,
         code: map['code'] != null ? map['code'] as String : null,
         expiresAt: (map['expiresAt'] as Timestamp).toDate(),
         createdAt: map['createdAt'] as dynamic);
@@ -73,7 +83,9 @@ class UnregisteredPromoterModel extends Equatable {
     String? birthDate,
     String? email,
     List<String>? landingPageIDs,
+    String? defaultLandingPageID,
     String? parentUserID,
+    String? companyID,
     String? code,
     DateTime? expiresAt,
     dynamic createdAt,
@@ -86,7 +98,9 @@ class UnregisteredPromoterModel extends Equatable {
       birthDate: birthDate ?? this.birthDate,
       email: email ?? this.email,
       landingPageIDs: landingPageIDs ?? this.landingPageIDs,
+      defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
       parentUserID: parentUserID ?? this.parentUserID,
+      companyID: companyID ?? this.companyID,
       code: code ?? this.code,
       expiresAt: expiresAt ?? this.expiresAt,
       createdAt: createdAt ?? this.createdAt,
@@ -109,7 +123,10 @@ class UnregisteredPromoterModel extends Equatable {
         birthDate: birthDate,
         email: email,
         landingPageIDs: landingPageIDs,
+        defaultLandingPageID:
+            UniqueID.fromUniqueString(defaultLandingPageID ?? ""),
         parentUserID: UniqueID.fromUniqueString(parentUserID ?? ""),
+        companyID: UniqueID.fromUniqueString(companyID ?? ""),
         code: UniqueID.fromUniqueString(code ?? ""),
         expiresAt: expiresAt);
   }
@@ -123,7 +140,9 @@ class UnregisteredPromoterModel extends Equatable {
         birthDate: promoter.birthDate,
         email: promoter.email,
         landingPageIDs: promoter.landingPageIDs,
+        defaultLandingPageID: promoter.defaultLandingPageID?.value ?? "",
         parentUserID: promoter.parentUserID?.value ?? "",
+        companyID: promoter.companyID?.value ?? "",
         code: promoter.code?.value,
         expiresAt: promoter.expiresAt,
         createdAt: FieldValue.serverTimestamp());
@@ -138,7 +157,9 @@ class UnregisteredPromoterModel extends Equatable {
         email,
         birthDate,
         parentUserID,
+        companyID,
         code,
-        landingPageIDs
+        landingPageIDs,
+        defaultLandingPageID
       ];
 }

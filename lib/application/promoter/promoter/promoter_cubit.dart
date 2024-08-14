@@ -26,6 +26,9 @@ class PromoterCubit extends Cubit<PromoterState> {
             promoter.landingPageIDs!.isEmpty) ||
         promoter.landingPageIDs == null) {
       emit(PromoterLandingPagesMissingState());
+    } else if (promoter.companyID != null &&
+        promoter.companyID!.value.isEmpty) {
+      emit(PromoterCompanyMissingState());
     } else {
       emit(PromoterRegisterLoadingState());
       if (promoter.email == null) {

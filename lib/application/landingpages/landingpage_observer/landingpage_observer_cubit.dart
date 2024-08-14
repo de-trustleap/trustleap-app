@@ -33,7 +33,10 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
     failureOrUser
         .fold((failure) => emit(LandingPageObserverFailure(failure: failure)),
             (user) async {
-      final landingPagesIDs = user.landingPageIDs;
+      var landingPagesIDs = user.landingPageIDs;
+      if (user.defaultLandingPageID != null) {
+        landingPagesIDs?.add(user.defaultLandingPageID!);
+      }
       if (landingPagesIDs != null && landingPagesIDs.isNotEmpty) {
         final failureOrSuccess =
             await landingPagesRepo.getAllLandingPages(landingPagesIDs);

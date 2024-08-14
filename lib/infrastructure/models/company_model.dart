@@ -16,6 +16,7 @@ class CompanyModel extends Equatable {
   final String? companyImageDownloadURL;
   final String? thumbnailDownloadURL;
   final String? ownerID;
+  final String? defaultLandingPageID;
   final List<String>? employeeIDs;
   final dynamic createdAt;
 
@@ -31,6 +32,7 @@ class CompanyModel extends Equatable {
     this.companyImageDownloadURL,
     this.thumbnailDownloadURL,
     this.ownerID,
+    this.defaultLandingPageID,
     this.employeeIDs,
     this.createdAt,
   });
@@ -48,6 +50,7 @@ class CompanyModel extends Equatable {
       'companyImageDownloadURL': companyImageDownloadURL,
       'thumbnailDownloadURL': thumbnailDownloadURL,
       'ownerID': ownerID,
+      'defaultLandingPageID': defaultLandingPageID,
       'employeeIDs': employeeIDs,
       'createdAt': createdAt,
     };
@@ -65,9 +68,16 @@ class CompanyModel extends Equatable {
           map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
       websiteURL:
           map['websiteURL'] != null ? map['websiteURL'] as String : null,
-      companyImageDownloadURL: map['thumbnailDownloadURL'] != null ? map['thumbnailDownloadURL'] as String : null,
-      thumbnailDownloadURL: map['thumbnailDownloadURL'] != null ? map['thumbnailDownloadURL'] as String : null,
+      companyImageDownloadURL: map['thumbnailDownloadURL'] != null
+          ? map['thumbnailDownloadURL'] as String
+          : null,
+      thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
+          ? map['thumbnailDownloadURL'] as String
+          : null,
       ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
+      defaultLandingPageID: map['defaultLandingPageID'] != null
+          ? map['defaultLandingPageID'] as String
+          : null,
       employeeIDs: map['employeeIDs'] != null
           ? List<String>.from(map['employeeIDs'] as List<String>)
           : null,
@@ -87,6 +97,7 @@ class CompanyModel extends Equatable {
     String? companyImageDownloadURL,
     String? thumbnailDownloadURL,
     String? ownerID,
+    String? defaultLandingPageID,
     List<String>? employeeIDs,
     dynamic createdAt,
   }) {
@@ -99,9 +110,11 @@ class CompanyModel extends Equatable {
       place: place ?? this.place,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       websiteURL: websiteURL ?? this.websiteURL,
-      companyImageDownloadURL: companyImageDownloadURL ?? this.companyImageDownloadURL,
+      companyImageDownloadURL:
+          companyImageDownloadURL ?? this.companyImageDownloadURL,
       thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
       ownerID: ownerID ?? this.ownerID,
+      defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
       employeeIDs: employeeIDs ?? this.employeeIDs,
       createdAt: createdAt ?? this.createdAt,
     );
@@ -124,6 +137,7 @@ class CompanyModel extends Equatable {
         companyImageDownloadURL: companyImageDownloadURL,
         thumbnailDownloadURL: thumbnailDownloadURL,
         ownerID: ownerID,
+        defaultLandingPageID: defaultLandingPageID,
         employeeIDs: employeeIDs,
         createdAt: (createdAt as Timestamp).toDate());
   }
@@ -141,6 +155,7 @@ class CompanyModel extends Equatable {
         companyImageDownloadURL: company.companyImageDownloadURL,
         thumbnailDownloadURL: company.thumbnailDownloadURL,
         ownerID: company.ownerID,
+        defaultLandingPageID: company.defaultLandingPageID,
         employeeIDs: company.employeeIDs,
         createdAt: FieldValue.serverTimestamp());
   }
@@ -158,6 +173,7 @@ class CompanyModel extends Equatable {
         companyImageDownloadURL,
         thumbnailDownloadURL,
         ownerID,
+        defaultLandingPageID,
         employeeIDs
       ];
 }

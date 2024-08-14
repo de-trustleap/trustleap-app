@@ -106,8 +106,12 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                 birthDate: birthDateTextController.text.trim(),
                 email: emailTextController.text.trim(),
                 landingPageIDs: getSelectedLandingPagesIDs(),
+                defaultLandingPageID: UniqueID.fromUniqueString(
+                    currentUser?.defaultLandingPageID ?? ""),
                 parentUserID:
                     UniqueID.fromUniqueString(currentUser?.id.value ?? ""),
+                companyID:
+                    UniqueID.fromUniqueString(currentUser?.companyID ?? ""),
                 code: UniqueID()));
       }
     } else {
@@ -347,6 +351,11 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                         const FormErrorView(
                             message:
                                 "Dem Promoter wurde noch keine Landingpage zugewiesen")
+                      ] else if (state is PromoterCompanyMissingState) ...[
+                        const SizedBox(height: 20),
+                        const FormErrorView(
+                            message:
+                                "Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist")
                       ] else if (errorMessage != "" &&
                           showError &&
                           (state is PromoterRegisterFailureState ||

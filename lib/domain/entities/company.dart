@@ -14,6 +14,7 @@ class Company extends Equatable {
   final String? companyImageDownloadURL;
   final String? thumbnailDownloadURL;
   final String? ownerID;
+  final String? defaultLandingPageID;
   final List<String>? employeeIDs;
   final DateTime? createdAt;
 
@@ -29,6 +30,7 @@ class Company extends Equatable {
     this.companyImageDownloadURL,
     this.thumbnailDownloadURL,
     this.ownerID,
+    this.defaultLandingPageID,
     this.employeeIDs,
     this.createdAt,
   });
@@ -45,6 +47,7 @@ class Company extends Equatable {
     String? companyImageDownloadURL,
     String? thumbnailDownloadURL,
     String? ownerID,
+    String? defaultLandingPageID,
     List<String>? employeeIDs,
     DateTime? createdAt,
   }) {
@@ -57,14 +60,30 @@ class Company extends Equatable {
       place: place ?? this.place,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       websiteURL: websiteURL ?? this.websiteURL,
-      companyImageDownloadURL: companyImageDownloadURL ?? this.companyImageDownloadURL,
+      companyImageDownloadURL:
+          companyImageDownloadURL ?? this.companyImageDownloadURL,
       thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
       ownerID: ownerID ?? this.ownerID,
+      defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
       employeeIDs: employeeIDs ?? this.employeeIDs,
       createdAt: createdAt ?? this.createdAt,
     );
   }
-  
+
   @override
-  List<Object?> get props => [id, name, industry, address, postCode, place, phoneNumber, websiteURL, companyImageDownloadURL, thumbnailDownloadURL, employeeIDs, ownerID];
+  List<Object?> get props => [
+        id,
+        name,
+        industry,
+        address,
+        postCode,
+        place,
+        phoneNumber,
+        websiteURL,
+        companyImageDownloadURL,
+        thumbnailDownloadURL,
+        employeeIDs,
+        ownerID,
+        defaultLandingPageID
+      ];
 }
