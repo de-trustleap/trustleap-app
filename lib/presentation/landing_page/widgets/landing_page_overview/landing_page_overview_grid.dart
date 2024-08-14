@@ -53,7 +53,8 @@ class LandingPageOverviewGrid extends StatelessWidget {
                               ? (landingpages.length >= maxLandingPageCount
                                   ? Center(
                                       child: Text(
-                                        localization.landingpage_overview_max_count_msg,
+                                        localization
+                                            .landingpage_overview_max_count_msg,
                                         style: themeData.textTheme.labelSmall!
                                             .copyWith(
                                           fontSize: responsiveValue.isMobile

@@ -55,68 +55,78 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Modular.to.navigate(
-                              RoutePaths.homePath +
-                                  RoutePaths.landingPageCreatorPath,
-                              arguments: landingPage);
-                        },
-                        iconSize: 24,
-                        icon: Icon(Icons.edit,
-                            color: themeData.colorScheme.secondary, size: 24)),
-                    const Spacer(),
-                    PopupMenuButton(
-                        itemBuilder: (context) => [
-                              PopupMenuItem(
-                                  value: "delete",
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Icon(Icons.delete,
-                                            color:
-                                                themeData.colorScheme.secondary,
-                                            size: 24),
-                                        const SizedBox(width: 8),
-                                        Text("Löschen",
-                                            style: responsiveValue.isMobile
-                                                ? themeData.textTheme.bodySmall
-                                                : themeData
-                                                    .textTheme.bodyMedium)
-                                      ])),
-                              PopupMenuItem(
-                                  value: "duplicate",
-                                  enabled: isDuplicationAllowed,
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Icon(Icons.copy,
-                                            color: isDuplicationAllowed
-                                                ? themeData
-                                                    .colorScheme.secondary
-                                                : Colors.grey,
-                                            size: 24),
-                                        const SizedBox(width: 8),
-                                        Text("Duplizieren",
-                                            style: getDuplicateButtonTextStyle(
-                                                responsiveValue, themeData))
-                                      ]))
-                            ],
-                        onSelected: (String newValue) {
-                          if (newValue == "delete") {
-                            deletePressed(landingPage.id.value,
-                                landingPage.ownerID?.value ?? "");
-                          } else if (newValue == "duplicate") {
-                            duplicatePressed(landingPage.id.value);
-                          }
-                        })
-                  ]),
+              if (landingPage.isDefaultPage == null ||
+                  (landingPage.isDefaultPage != null &&
+                      landingPage.isDefaultPage! == false)) ...[
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Modular.to.navigate(
+                                RoutePaths.homePath +
+                                    RoutePaths.landingPageCreatorPath,
+                                arguments: landingPage);
+                          },
+                          iconSize: 24,
+                          icon: Icon(Icons.edit,
+                              color: themeData.colorScheme.secondary,
+                              size: 24)),
+                      const Spacer(),
+                      PopupMenuButton(
+                          itemBuilder: (context) => [
+                                PopupMenuItem(
+                                    value: "delete",
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.delete,
+                                              color: themeData
+                                                  .colorScheme.secondary,
+                                              size: 24),
+                                          const SizedBox(width: 8),
+                                          Text("Löschen",
+                                              style: responsiveValue.isMobile
+                                                  ? themeData
+                                                      .textTheme.bodySmall
+                                                  : themeData
+                                                      .textTheme.bodyMedium)
+                                        ])),
+                                PopupMenuItem(
+                                    value: "duplicate",
+                                    enabled: isDuplicationAllowed,
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.copy,
+                                              color: isDuplicationAllowed
+                                                  ? themeData
+                                                      .colorScheme.secondary
+                                                  : Colors.grey,
+                                              size: 24),
+                                          const SizedBox(width: 8),
+                                          Text("Duplizieren",
+                                              style:
+                                                  getDuplicateButtonTextStyle(
+                                                      responsiveValue,
+                                                      themeData))
+                                        ]))
+                              ],
+                          onSelected: (String newValue) {
+                            if (newValue == "delete") {
+                              deletePressed(landingPage.id.value,
+                                  landingPage.ownerID?.value ?? "");
+                            } else if (newValue == "duplicate") {
+                              duplicatePressed(landingPage.id.value);
+                            }
+                          })
+                    ]),
+              ] else ...[
+                const Spacer()
+              ],
               CachedNetworkImage(
                 width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
                 height: responsiveValue.largerThan(MOBILE) ? 120 : 140,
@@ -147,7 +157,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                   overflow: TextOverflow.ellipsis),
               if (landingPage.createdAt != null &&
                   landingPage.lastUpdatedAt == null) ...[
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
                 Text(
                     "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
@@ -164,7 +174,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                         color:
                             themeData.colorScheme.surfaceTint.withOpacity(0.6)),
                     maxLines: 1)
-              ]
+              ],
+              const Spacer()
             ],
           )),
     );

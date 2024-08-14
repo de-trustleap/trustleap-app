@@ -40,8 +40,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
         if (state is ProfileUserObserverSuccess) {
           return Container(
               width: double.infinity,
-              decoration:
-                  BoxDecoration(color: themeData.colorScheme.surface),
+              decoration: BoxDecoration(color: themeData.colorScheme.surface),
               child: ListView(children: [
                 SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                 CenteredConstrainedWrapper(
@@ -96,8 +95,10 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                   title: localization.profile_page_request_failure_message,
                   message: DatabaseFailureMapper.mapFailureMessage(
                       state.failure, localization),
-                  callback: () =>
-                      {BlocProvider.of<ProfileObserverBloc>(context).add(ProfileObserveUserEvent())}));
+                  callback: () => {
+                        BlocProvider.of<ProfileObserverBloc>(context)
+                            .add(ProfileObserveUserEvent())
+                      }));
         } else {
           return CenteredConstrainedWrapper(
               child: CircularProgressIndicator(

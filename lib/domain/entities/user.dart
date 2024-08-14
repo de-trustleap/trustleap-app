@@ -19,6 +19,7 @@ class CustomUser extends Equatable {
   final String? profileImageDownloadURL;
   final String? thumbnailDownloadURL;
   final String? pendingCompanyRequestID;
+  final String? defaultLandingPageID;
   final List<String>? unregisteredPromoterIDs;
   final List<String>? registeredPromoterIDs;
   final List<String>? landingPageIDs;
@@ -42,6 +43,7 @@ class CustomUser extends Equatable {
       this.profileImageDownloadURL,
       this.thumbnailDownloadURL,
       this.pendingCompanyRequestID,
+      this.defaultLandingPageID,
       this.unregisteredPromoterIDs,
       this.registeredPromoterIDs,
       this.landingPageIDs,
@@ -65,6 +67,7 @@ class CustomUser extends Equatable {
       String? profileImageDownloadURL,
       String? thumbnailDownloadURL,
       String? pendingCompanyRequestID,
+      String? defaultLandingPageID,
       List<String>? unregisteredPromoterIDs,
       List<String>? registeredPromoterIDs,
       List<String>? landingPageIDs,
@@ -89,6 +92,7 @@ class CustomUser extends Equatable {
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         pendingCompanyRequestID:
             pendingCompanyRequestID ?? this.pendingCompanyRequestID,
+        defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
         unregisteredPromoterIDs:
             unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
         registeredPromoterIDs:

@@ -13,6 +13,8 @@ final class PromoterShowValidationState extends PromoterState {}
 
 final class PromoterLandingPagesMissingState extends PromoterState {}
 
+final class PromoterCompanyMissingState extends PromoterState {}
+
 final class PromoterRegisterLoadingState extends PromoterState {}
 
 final class PromoterRegisterFailureState extends PromoterState {
