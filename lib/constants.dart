@@ -15,6 +15,11 @@ enum MenuItems {
   const MenuItems(this.value);
 }
 
+class MenuDimensions {
+  static const menuOpenWidth = 250.0;
+  static const menuCollapsedWidth = 80.0;
+}
+
 enum AuthStatus {
   authenticated("Authentifiziert"),
   unAuthenticated("Nicht authentifiziert"),

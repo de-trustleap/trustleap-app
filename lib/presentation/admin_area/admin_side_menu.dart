@@ -22,7 +22,8 @@ class AdminSideMenu extends StatelessWidget {
                   icon: Icons.person,
                   type: MenuItems.adminCompanyRequests,
                   isURLMatching:
-                      Modular.to.path.endsWith(RoutePaths.companyRequestsPath)),
+                      Modular.to.path.endsWith(RoutePaths.companyRequestsPath),
+                  isCollapsed: false),
             ])
           ]);
         })));
