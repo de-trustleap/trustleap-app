@@ -260,6 +260,14 @@
     "@landingpage_create_txt": {
         "description": "Text Landingpage erstellen"
     },
+    "landingpage_overview_context_menu_delete": "Löschen",
+    "@landingpage_overview_context_menu_delete": {
+        "description": "Löschen Button im Kontextmenü auf der Landingpage Übersichtsseite"
+    },
+    "landingpage_overview_context_menu_duplicate": "Duplizieren",
+    "@landingpage_overview_context_menu_duplicate": {
+        "description": "Duplizieren Button im Kontextmenü auf der Landingpage Übersichtsseite"
+    },
     "placeholder_title": "Titel",
     "@placeholder_title": {
         "description": "Platzhalter textbox für Titel"
@@ -615,6 +623,14 @@
     "register_promoter_snackbar_success": "Der neue Promoter wurde erfolgreich registriert!",
     "@register_promoter_snackbar_success": {
         "description": "Der Titel der Snackbar wenn neuer Promoter registriert wurde"
+    },
+    "register_promoter_missing_landingpage_error_message": "Dem Promoter wurde noch keine Landingpage zugewiesen",
+    "@register_promoter_missing_landingpage_error_message": {
+        "description": "Fehlermeldung die erscheint, wenn bei der Promoter Registrierung keine Landing Page zugewiesen wurde."
+    },
+    "register_promoter_missing_company_error_message": "Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist",
+    "@register_promoter_missing_company_error_message": {
+        "description": "Fehlermeldung die erscheint, wenn bei der Promoter Registrierung kein Unternehmen existiert."
     },
     "promoter_overview_title": "Meine Promoter",
     "@promoter_overview_title": {
@@ -993,3 +1009,4 @@
         "description": "Button Text für die Unternehmensregistrierungs Sektion auf der Profilseite"
     }
 }
+//TODO: Hier müssen noch alle Tooltip Localizations hinzugefügt werden!!!

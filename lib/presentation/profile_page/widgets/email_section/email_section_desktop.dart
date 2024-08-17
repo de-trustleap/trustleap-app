@@ -54,6 +54,7 @@ class EmailSectionDesktop extends StatelessWidget {
                         : EmailVerificationState.unverified)),
             IconButton(
                 onPressed: () => {editEmailPressed()},
+                tooltip: "E-Mail Adresse ändern",
                 icon: Icon(Icons.edit,
                     color: themeData.colorScheme.secondary, size: 22)),
           ])

@@ -24,9 +24,11 @@ class _PromoterOverviewViewStateButtonState
         segments: const [
           ButtonSegment<PromotersOverviewViewState>(
               value: PromotersOverviewViewState.grid,
+              tooltip: "Gridansicht",
               icon: Icon(Icons.grid_on)),
           ButtonSegment<PromotersOverviewViewState>(
               value: PromotersOverviewViewState.list,
+              tooltip: "Tabellenansicht",
               icon: Icon(Icons.format_list_bulleted))
         ],
         showSelectedIcon: false,

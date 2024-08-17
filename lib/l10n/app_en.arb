@@ -260,6 +260,14 @@
     "@landingpage_create_txt": {
         "description": "Text for Creating Landing Page"
     },
+    "landingpage_overview_context_menu_delete": "Delete",
+    "@landingpage_overview_context_menu_delete": {
+        "description": "Delete button in the context menu on the landing page overview page."
+    },
+    "landingpage_overview_context_menu_duplicate": "Duplicate",
+    "@landingpage_overview_context_menu_duplicate": {
+        "description": "Duplicate button in the context menu on the landing page overview page."
+    },
     "placeholder_title": "Title",
     "@placeholder_title": {
         "description": "Platzhalter textbox for Title"
@@ -615,6 +623,14 @@
     "register_promoter_snackbar_success": "The new promoter has been successfully registered!",
     "@register_promoter_snackbar_success": {
         "description": "The title of the snack bar when a new promoter is registered"
+    },
+    "register_promoter_missing_landingpage_error_message": "The promoter has not yet been assigned a landing page",
+    "@register_promoter_missing_landingpage_error_message": {
+        "description": "Error message that appears if no landing page was assigned during promoter registration."
+    },
+    "register_promoter_missing_company_error_message": "You cannot register a promoter because you are not affiliated with any company",
+    "@register_promoter_missing_company_error_message": {
+        "description": "Error message that appears if no company exists during promoter registration."
     },
     "promoter_overview_title": "My promoter",
     "@promoter_overview_title": {

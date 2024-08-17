@@ -483,6 +483,18 @@ abstract class AppLocalizations {
   /// **'Create Landing Page'**
   String get landingpage_create_txt;
 
+  /// Delete button in the context menu on the landing page overview page.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get landingpage_overview_context_menu_delete;
+
+  /// Duplicate button in the context menu on the landing page overview page.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get landingpage_overview_context_menu_duplicate;
+
   /// Platzhalter textbox for Title
   ///
   /// In en, this message translates to:
@@ -1016,6 +1028,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The new promoter has been successfully registered!'**
   String get register_promoter_snackbar_success;
+
+  /// Error message that appears if no landing page was assigned during promoter registration.
+  ///
+  /// In en, this message translates to:
+  /// **'The promoter has not yet been assigned a landing page'**
+  String get register_promoter_missing_landingpage_error_message;
+
+  /// Error message that appears if no company exists during promoter registration.
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot register a promoter because you are not affiliated with any company'**
+  String get register_promoter_missing_company_error_message;
 
   /// The title of the promoter overview
   ///

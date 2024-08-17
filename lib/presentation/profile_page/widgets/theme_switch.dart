@@ -17,9 +17,13 @@ class _ThemeSwitchState extends State<ThemeSwitch> {
     return SegmentedButton<ThemeStatus>(
       segments: const [
         ButtonSegment<ThemeStatus>(
-            value: ThemeStatus.light, icon: Icon(Icons.wb_sunny)),
+            value: ThemeStatus.light,
+            tooltip: "Heller Modus",
+            icon: Icon(Icons.wb_sunny)),
         ButtonSegment<ThemeStatus>(
-            value: ThemeStatus.dark, icon: Icon(Icons.wb_cloudy))
+            value: ThemeStatus.dark,
+            tooltip: "Dunkler Modus",
+            icon: Icon(Icons.wb_cloudy))
       ],
       showSelectedIcon: false,
       selected: selected,

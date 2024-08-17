@@ -200,6 +200,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_create_txt => 'Landingpage erstellen';
 
   @override
+  String get landingpage_overview_context_menu_delete => 'Löschen';
+
+  @override
+  String get landingpage_overview_context_menu_duplicate => 'Duplizieren';
+
+  @override
   String get placeholder_title => 'Titel';
 
   @override
@@ -465,6 +471,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get register_promoter_snackbar_success => 'Der neue Promoter wurde erfolgreich registriert!';
+
+  @override
+  String get register_promoter_missing_landingpage_error_message => 'Dem Promoter wurde noch keine Landingpage zugewiesen';
+
+  @override
+  String get register_promoter_missing_company_error_message => 'Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist';
 
   @override
   String get promoter_overview_title => 'Meine Promoter';

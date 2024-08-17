@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -39,6 +40,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return Container(
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
@@ -70,6 +72,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                 arguments: landingPage);
                           },
                           iconSize: 24,
+                          tooltip: "Landingpage bearbeiten",
                           icon: Icon(Icons.edit,
                               color: themeData.colorScheme.secondary,
                               size: 24)),
@@ -87,7 +90,9 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                                   .colorScheme.secondary,
                                               size: 24),
                                           const SizedBox(width: 8),
-                                          Text("Löschen",
+                                          Text(
+                                              localizations
+                                                  .landingpage_overview_context_menu_delete,
                                               style: responsiveValue.isMobile
                                                   ? themeData
                                                       .textTheme.bodySmall
@@ -108,7 +113,9 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                                   : Colors.grey,
                                               size: 24),
                                           const SizedBox(width: 8),
-                                          Text("Duplizieren",
+                                          Text(
+                                              localizations
+                                                  .landingpage_overview_context_menu_duplicate,
                                               style:
                                                   getDuplicateButtonTextStyle(
                                                       responsiveValue,

@@ -226,6 +226,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                             const Spacer(),
                             IconButton(
                                 onPressed: () => addLead(validator),
+                                tooltip: "Empfehlung hinzufügen",
                                 icon: const Icon(Icons.add_circle),
                                 iconSize: 48,
                                 color: themeData.colorScheme.secondary)
@@ -253,8 +254,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                   width: maxWidth,
                                   validate: reasonValid,
                                   reasons: reasons,
-                                  initialValue:
-                                      selectedReason ?? reasons[0],
+                                  initialValue: selectedReason ?? reasons[0],
                                   onSelected: (reason) {
                                     setState(() {
                                       reasonValid =
