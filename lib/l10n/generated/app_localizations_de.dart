@@ -1,5 +1,7 @@
 import 'app_localizations.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for German (`de`).
 class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
@@ -754,4 +756,34 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get profile_register_company_section_button_title => 'Zur Registrierung';
+
+  @override
+  String get profile_image_upload_tooltip => 'Bild hochladen';
+
+  @override
+  String get landingpage_overview_edit_tooltip => 'Landingpage bearbeiten';
+
+  @override
+  String get profile_edit_email_tooltip => 'E-Mail Adresse ändern';
+
+  @override
+  String get theme_switch_lightmode_tooltip => 'Heller Modus';
+
+  @override
+  String get theme_switch_darkmode_tooltip => 'Dunkler Modus';
+
+  @override
+  String get promoter_overview_reset_search_tooltip => 'Suche zurücksetzen';
+
+  @override
+  String get promoter_overview_filter_tooltip => 'Promoter filtern';
+
+  @override
+  String get promoter_overview_view_switch_grid_tooltip => 'Gridansicht';
+
+  @override
+  String get promoter_overview_view_switch_table_tooltip => 'Listenansicht';
+
+  @override
+  String get recommendations_form_add_button_tooltip => 'Empfehlung hinzufügen';
 }

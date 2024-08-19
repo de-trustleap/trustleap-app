@@ -226,7 +226,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                             const Spacer(),
                             IconButton(
                                 onPressed: () => addLead(validator),
-                                tooltip: "Empfehlung hinzufügen",
+                                tooltip: localization.recommendations_form_add_button_tooltip,
                                 icon: const Icon(Icons.add_circle),
                                 iconSize: 48,
                                 color: themeData.colorScheme.secondary)

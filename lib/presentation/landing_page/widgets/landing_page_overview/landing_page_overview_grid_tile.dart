@@ -72,7 +72,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                 arguments: landingPage);
                           },
                           iconSize: 24,
-                          tooltip: "Landingpage bearbeiten",
+                          tooltip:
+                              localizations.landingpage_overview_edit_tooltip,
                           icon: Icon(Icons.edit,
                               color: themeData.colorScheme.secondary,
                               size: 24)),
