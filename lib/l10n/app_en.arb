@@ -260,6 +260,14 @@
     "@landingpage_create_txt": {
         "description": "Text for Creating Landing Page"
     },
+    "landingpage_overview_context_menu_delete": "Delete",
+    "@landingpage_overview_context_menu_delete": {
+        "description": "Delete button in the context menu on the landing page overview page."
+    },
+    "landingpage_overview_context_menu_duplicate": "Duplicate",
+    "@landingpage_overview_context_menu_duplicate": {
+        "description": "Duplicate button in the context menu on the landing page overview page."
+    },
     "placeholder_title": "Title",
     "@placeholder_title": {
         "description": "Platzhalter textbox for Title"
@@ -623,6 +631,13 @@
     "register_promoter_no_landingpage_subtitle": "In order to create a new promoter it is necessary to have an active landing page.",
     "@register_promoter_no_landingpage_subtitle": {
         "description": "The subtitle of the page that appears if you don't have a landing page yet and still want to register a promoter"
+    "register_promoter_missing_landingpage_error_message": "The promoter has not yet been assigned a landing page",
+    "@register_promoter_missing_landingpage_error_message": {
+        "description": "Error message that appears if no landing page was assigned during promoter registration."
+    },
+    "register_promoter_missing_company_error_message": "You cannot register a promoter because you are not affiliated with any company",
+    "@register_promoter_missing_company_error_message": {
+        "description": "Error message that appears if no company exists during promoter registration."
     },
     "promoter_overview_title": "My promoter",
     "@promoter_overview_title": {
@@ -999,5 +1014,45 @@
     "profile_register_company_section_button_title": "Go to registration",
     "@profile_register_company_section_button_title": {
         "description": "Button text for the company registration section on the profile page"
+    },
+    "profile_image_upload_tooltip": "Upload image",
+    "@profile_image_upload_tooltip": {
+        "description": "Tooltip for the image upload on the profile page"
+    },
+    "landingpage_overview_edit_tooltip": "Edit landingpage",
+    "@landingpage_overview_edit_tooltip": {
+        "description": "Tooltip for landingpage edit button on the landingpage overview"
+    },
+    "profile_edit_email_tooltip": "Change email address",
+    "@profile_edit_email_tooltip": {
+        "description": "Tooltip for the button for changing the email address on the profile page"
+    },
+    "theme_switch_lightmode_tooltip": "Lightmode",
+    "@theme_switch_lightmode_tooltip": {
+        "description": "Tooltip for the Theme Switcher Light Mode button in the menu"
+    },
+    "theme_switch_darkmode_tooltip": "Darkmode",
+    "@theme_switch_darkmode_tooltip": {
+        "description": "Tooltip for the Theme Switcher Light Mode button in the menu"
+    },
+    "promoter_overview_reset_search_tooltip": "Reset search",
+    "@promoter_overview_reset_search_tooltip": {
+        "description": "Tooltip for the reset search button on the promoter overview page"
+    },
+    "promoter_overview_filter_tooltip": "Filter promoters",
+    "@promoter_overview_filter_tooltip": {
+        "description": "Tooltip for the filter button on the promoter overview page"
+    },
+    "promoter_overview_view_switch_grid_tooltip": "Grid view",
+    "@promoter_overview_view_switch_grid_tooltip": {
+        "description": "Tooltip for the grid button on the promoter overview page"
+    },
+    "promoter_overview_view_switch_table_tooltip": "List view",
+    "@promoter_overview_view_switch_table_tooltip": {
+        "description": "Tooltip for the table button on the promoter overview page"
+    },
+    "recommendations_form_add_button_tooltip": "Add recommendation",
+    "@recommendations_form_add_button_tooltip": {
+        "description": "Tooltip for the add recommendation button in the recommendations form"
     }
 }

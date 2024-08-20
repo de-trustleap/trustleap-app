@@ -4,7 +4,6 @@ import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_new.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_reauth.dart';
 import 'package:flutter/material.dart';
@@ -119,6 +118,7 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
                           passwordTextController: oldPasswordTextController,
                           maxWidth: maxWidth,
                           buttonDisabled: buttonDisabled,
+                          isLoading: state is ProfilePasswordUpdateLoadingState,
                           resetError: resetError,
                           submit: submitOldPassword)
                     ] else ...[
@@ -128,12 +128,9 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
                               passwordRepeatTextController,
                           maxWidth: maxWidth,
                           buttonDisabled: buttonDisabled,
+                          isLoading: state is ProfilePasswordUpdateLoadingState,
                           resetError: resetError,
                           submit: submitNewPassword)
-                    ],
-                    if (state is ProfilePasswordUpdateLoadingState) ...[
-                      const SizedBox(height: 80),
-                      const LoadingIndicator()
                     ],
                     if (errorMessage != "" &&
                         showError &&

@@ -197,6 +197,9 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                         .landingpage_create_buttontitle
                                     : localization.changes_save_button_title,
                                 disabled: buttonDisabled,
+                                isLoading:
+                                    state is CreateLandingPageLoadingState ||
+                                        state is EditLandingPageLoadingState,
                                 width: responsiveValue.isMobile
                                     ? maxWidth - textFieldSpacing
                                     : maxWidth / 2 - textFieldSpacing,
@@ -205,11 +208,6 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                 })
                           ],
                         ),
-                        if (state is CreateLandingPageLoadingState ||
-                            state is EditLandingPageLoadingState) ...[
-                          const SizedBox(height: 80),
-                          const LoadingIndicator()
-                        ],
                         if (errorMessage != "" &&
                             showError &&
                             (state is CreateLandingPageFailureState ||

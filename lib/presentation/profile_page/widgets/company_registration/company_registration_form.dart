@@ -6,7 +6,6 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_validator.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -233,15 +232,12 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                                 ? maxWidth - textFieldSpacing
                                 : maxWidth / 2 - textFieldSpacing,
                             disabled: buttonDisabled,
+                            isLoading: state is CompanyRegisterLoadingState,
                             onTap: () {
                               submit(validator);
                             })
                       ],
                     ),
-                    if (state is CompanyRegisterLoadingState) ...[
-                      const SizedBox(height: 80),
-                      const LoadingIndicator()
-                    ],
                     if (errorMessage != "" &&
                         showError &&
                         state is CompanyRegisterFailureState &&

@@ -10,6 +10,7 @@ class EmailSectionExpandablePassword extends StatelessWidget {
   final TextEditingController passwordTextController;
   final double maxWidth;
   final bool buttonDisabled;
+  final bool isLoading;
   final Function resetError;
   final Function submit;
 
@@ -18,6 +19,7 @@ class EmailSectionExpandablePassword extends StatelessWidget {
     required this.passwordTextController,
     required this.maxWidth,
     required this.buttonDisabled,
+    required this.isLoading,
     required this.resetError,
     required this.submit,
   });
@@ -56,6 +58,7 @@ class EmailSectionExpandablePassword extends StatelessWidget {
               width:
                   responsiveValue.isMobile ? maxWidth - 20 : maxWidth / 2 - 20,
               disabled: buttonDisabled,
+              isLoading: isLoading,
               onTap: () {
                 submit();
               })

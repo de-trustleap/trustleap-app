@@ -10,6 +10,7 @@ class EmailSectionExpandableEmail extends StatelessWidget {
   final TextEditingController emailTextController;
   final double maxWidth;
   final bool buttonDisabled;
+  final bool isLoading;
   final Function resetError;
   final Function submit;
 
@@ -18,6 +19,7 @@ class EmailSectionExpandableEmail extends StatelessWidget {
     required this.emailTextController,
     required this.maxWidth,
     required this.buttonDisabled,
+    required this.isLoading,
     required this.resetError,
     required this.submit,
   });
@@ -54,6 +56,7 @@ class EmailSectionExpandableEmail extends StatelessWidget {
               width:
                   responsiveValue.isMobile ? maxWidth - 20 : maxWidth / 2 - 20,
               disabled: buttonDisabled,
+              isLoading: isLoading,
               onTap: () {
                 submit();
               })

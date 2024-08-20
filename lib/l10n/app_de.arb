@@ -260,6 +260,14 @@
     "@landingpage_create_txt": {
         "description": "Text Landingpage erstellen"
     },
+    "landingpage_overview_context_menu_delete": "Löschen",
+    "@landingpage_overview_context_menu_delete": {
+        "description": "Löschen Button im Kontextmenü auf der Landingpage Übersichtsseite"
+    },
+    "landingpage_overview_context_menu_duplicate": "Duplizieren",
+    "@landingpage_overview_context_menu_duplicate": {
+        "description": "Duplizieren Button im Kontextmenü auf der Landingpage Übersichtsseite"
+    },
     "placeholder_title": "Titel",
     "@placeholder_title": {
         "description": "Platzhalter textbox für Titel"
@@ -623,6 +631,13 @@
     "register_promoter_no_landingpage_subtitle": "Um einen neuen Promoter erstellen zu können ist es nötig, eine aktive Landingpage zu haben.",
     "@register_promoter_no_landingpage_subtitle": {
         "description": "Der Subtitle der Seite die erscheint, wenn du noch keine Landingpage hast und trotzdem einen Promoter registrieren willst"
+    "register_promoter_missing_landingpage_error_message": "Dem Promoter wurde noch keine Landingpage zugewiesen",
+    "@register_promoter_missing_landingpage_error_message": {
+        "description": "Fehlermeldung die erscheint, wenn bei der Promoter Registrierung keine Landing Page zugewiesen wurde."
+    },
+    "register_promoter_missing_company_error_message": "Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist",
+    "@register_promoter_missing_company_error_message": {
+        "description": "Fehlermeldung die erscheint, wenn bei der Promoter Registrierung kein Unternehmen existiert."
     },
     "promoter_overview_title": "Meine Promoter",
     "@promoter_overview_title": {
@@ -999,5 +1014,45 @@
     "profile_register_company_section_button_title": "Zur Registrierung",
     "@profile_register_company_section_button_title": {
         "description": "Button Text für die Unternehmensregistrierungs Sektion auf der Profilseite"
+    },
+    "profile_image_upload_tooltip": "Bild hochladen",
+    "@profile_image_upload_tooltip": {
+        "description": "Tooltip für Bilder Upload auf der Profilseite"
+    },
+    "landingpage_overview_edit_tooltip": "Landingpage bearbeiten",
+    "@landingpage_overview_edit_tooltip": {
+        "description": "Tooltip für das Bearbeiten einer Landingpage auf der Übersichtsseite"
+    },
+    "profile_edit_email_tooltip": "E-Mail Adresse ändern",
+    "@profile_edit_email_tooltip": {
+        "description": "Tooltip für den Button für das Ändern der E-Mail Adresse auf der Profilseite"
+    },
+    "theme_switch_lightmode_tooltip": "Heller Modus",
+    "@theme_switch_lightmode_tooltip": {
+        "description": "Tooltip für den Theme Switcher Light Mode Button im Menü"
+    },
+    "theme_switch_darkmode_tooltip": "Dunkler Modus",
+    "@theme_switch_darkmode_tooltip": {
+        "description": "Tooltip für den Theme Switcher Dark Mode Button im Menü"
+    },
+    "promoter_overview_reset_search_tooltip": "Suche zurücksetzen",
+    "@promoter_overview_reset_search_tooltip": {
+        "description": "Tooltip für den Suche zurücksetzen Button in der Promoter Übersicht"
+    },
+    "promoter_overview_filter_tooltip": "Promoter filtern",
+    "@promoter_overview_filter_tooltip": {
+        "description": "Tooltip für den Filter Button in der Promoter Übersicht"
+    },
+    "promoter_overview_view_switch_grid_tooltip": "Gridansicht",
+    "@promoter_overview_view_switch_grid_tooltip": {
+        "description": "Tooltip für den Grid Button in der Promoter Übersicht"
+    },
+    "promoter_overview_view_switch_table_tooltip": "Listenansicht",
+    "@promoter_overview_view_switch_table_tooltip": {
+        "description": "Tooltip für den Listen Button in der Promoter Übersicht"
+    },
+    "recommendations_form_add_button_tooltip": "Empfehlung hinzufügen",
+    "@recommendations_form_add_button_tooltip": {
+        "description": "Tooltip für den Empfehlung hinzufügen Button im Empfehlungsformular"
     }
 }

@@ -8,7 +8,6 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_validator.dart';
 import 'package:flutter/material.dart';
@@ -315,16 +314,13 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                                   ? maxWidth - textFieldSpacing
                                   : maxWidth / 2 - textFieldSpacing,
                               disabled: buttonDisabled,
+                              isLoading: state
+                                  is CompanyUpdateContactInformationLoadingState,
                               onTap: () {
                                 submit(validator);
                               })
                         ],
                       ),
-                    ],
-                    if (state
-                        is CompanyUpdateContactInformationLoadingState) ...[
-                      const SizedBox(height: 80),
-                      const LoadingIndicator()
                     ],
                     if (errorMessage != "" &&
                         showError &&

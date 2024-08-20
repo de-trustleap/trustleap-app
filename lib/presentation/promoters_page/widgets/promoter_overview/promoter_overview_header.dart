@@ -61,6 +61,7 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
                   trailing: [
                     IconButton(
                         onPressed: () => widget.clearSearch(),
+                        tooltip: localization.promoter_overview_reset_search_tooltip,
                         icon: const Icon(Icons.close))
                   ],
                   hintText: localization.promoter_overview_search_placeholder,
@@ -71,6 +72,7 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
               height: 48,
               child: IconButton(
                   onPressed: () => onFilterPressed(),
+                  tooltip: localization.promoter_overview_filter_tooltip,
                   icon: Icon(Icons.filter_list,
                       color: themeData.colorScheme.secondary, size: 32)),
             ),

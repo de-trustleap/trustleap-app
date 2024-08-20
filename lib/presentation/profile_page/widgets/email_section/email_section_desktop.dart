@@ -55,6 +55,7 @@ class EmailSectionDesktop extends StatelessWidget {
                         : EmailVerificationState.unverified)),
             IconButton(
                 onPressed: () => {editEmailPressed()},
+                tooltip: localization.profile_edit_email_tooltip,
                 icon: Icon(Icons.edit,
                     color: themeData.colorScheme.secondary, size: 22)),
           ])

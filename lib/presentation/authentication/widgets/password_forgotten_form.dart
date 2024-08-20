@@ -6,7 +6,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_c
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
@@ -134,15 +133,13 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                               width: responsiveValue.isMobile
                                   ? maxWidth - padding
                                   : maxWidth / 2 - padding,
+                              disabled: state is AuthPasswordResetLoadingState,
+                              isLoading: state is AuthPasswordResetLoadingState,
                               onTap: () {
                                 submit();
                               })
                         ],
                       ),
-                      if (state is AuthPasswordResetLoadingState) ...[
-                        const SizedBox(height: 80),
-                        const LoadingIndicator()
-                      ],
                       if (errorMessage != "" &&
                           showError &&
                           state is AuthPasswordResetFailureState &&

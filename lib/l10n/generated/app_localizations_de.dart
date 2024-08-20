@@ -1,5 +1,7 @@
 import 'app_localizations.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for German (`de`).
 class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
@@ -198,6 +200,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_create_txt => 'Landingpage erstellen';
+
+  @override
+  String get landingpage_overview_context_menu_delete => 'Löschen';
+
+  @override
+  String get landingpage_overview_context_menu_duplicate => 'Duplizieren';
 
   @override
   String get placeholder_title => 'Titel';
@@ -471,6 +479,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get register_promoter_no_landingpage_subtitle => 'Um einen neuen Promoter erstellen zu können ist es nötig, eine aktive Landingpage zu haben.';
+
+  @override
+  String get register_promoter_missing_landingpage_error_message => 'Dem Promoter wurde noch keine Landingpage zugewiesen';
+
+  @override
+  String get register_promoter_missing_company_error_message => 'Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist';
 
   @override
   String get promoter_overview_title => 'Meine Promoter';
@@ -748,4 +762,34 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get profile_register_company_section_button_title => 'Zur Registrierung';
+
+  @override
+  String get profile_image_upload_tooltip => 'Bild hochladen';
+
+  @override
+  String get landingpage_overview_edit_tooltip => 'Landingpage bearbeiten';
+
+  @override
+  String get profile_edit_email_tooltip => 'E-Mail Adresse ändern';
+
+  @override
+  String get theme_switch_lightmode_tooltip => 'Heller Modus';
+
+  @override
+  String get theme_switch_darkmode_tooltip => 'Dunkler Modus';
+
+  @override
+  String get promoter_overview_reset_search_tooltip => 'Suche zurücksetzen';
+
+  @override
+  String get promoter_overview_filter_tooltip => 'Promoter filtern';
+
+  @override
+  String get promoter_overview_view_switch_grid_tooltip => 'Gridansicht';
+
+  @override
+  String get promoter_overview_view_switch_table_tooltip => 'Listenansicht';
+
+  @override
+  String get recommendations_form_add_button_tooltip => 'Empfehlung hinzufügen';
 }
