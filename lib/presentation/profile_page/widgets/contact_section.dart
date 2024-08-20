@@ -8,7 +8,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_c
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -292,15 +291,12 @@ class _ContactSectionState extends State<ContactSection> {
                             ? maxWidth - textFieldSpacing
                             : maxWidth / 2 - textFieldSpacing,
                         disabled: buttonDisabled,
+                        isLoading: state is ProfileUpdateContactInformationLoadingState,
                         onTap: () {
                           submit(validator);
                         })
                   ],
                 ),
-                if (state is ProfileUpdateContactInformationLoadingState) ...[
-                  const SizedBox(height: 80),
-                  const LoadingIndicator()
-                ],
                 if (errorMessage != "" &&
                     showError &&
                     state is ProfileUpdateContactInformationFailureState &&

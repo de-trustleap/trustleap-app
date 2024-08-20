@@ -338,15 +338,13 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                   ? maxWidth - textFieldSpacing
                                   : maxWidth / 2 - textFieldSpacing,
                               disabled: buttonDisabled,
+                              isLoading: state is PromoterRegisterLoadingState,
                               onTap: () {
                                 submit(validator);
                               })
                         ],
                       ),
-                      if (state is PromoterRegisterLoadingState) ...[
-                        const SizedBox(height: 80),
-                        const LoadingIndicator()
-                      ] else if (state is PromoterLandingPagesMissingState) ...[
+                      if (state is PromoterLandingPagesMissingState) ...[
                         const SizedBox(height: 20),
                         const FormErrorView(
                             message:

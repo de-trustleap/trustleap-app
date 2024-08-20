@@ -10,6 +10,7 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
   final TextEditingController passwordTextController;
   final double maxWidth;
   final bool buttonDisabled;
+  final bool isLoading;
   final Function resetError;
   final Function submit;
 
@@ -18,6 +19,7 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
     required this.passwordTextController,
     required this.maxWidth,
     required this.buttonDisabled,
+    required this.isLoading,
     required this.resetError,
     required this.submit,
   });
@@ -57,6 +59,7 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
                   ? maxWidth - textFieldSpacing
                   : maxWidth / 2 - textFieldSpacing,
               disabled: buttonDisabled,
+              isLoading: isLoading,
               onTap: () {
                 submit();
               })
