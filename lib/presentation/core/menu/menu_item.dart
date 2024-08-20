@@ -12,13 +12,17 @@ class MenuItem extends StatefulWidget {
   final IconData icon;
   final MenuItems type;
   final bool isURLMatching;
+  final bool isCollapsed;
+  final AnimationController? animationController;
 
   const MenuItem(
       {super.key,
       required this.path,
       required this.icon,
       required this.type,
-      required this.isURLMatching});
+      required this.isURLMatching,
+      required this.isCollapsed,
+      this.animationController});
 
   @override
   State<MenuItem> createState() => _MenuItemState();
@@ -26,6 +30,18 @@ class MenuItem extends StatefulWidget {
 
 class _MenuItemState extends State<MenuItem> {
   bool itemIsHovered = false;
+  Animation<double>? _widthAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.animationController != null) {
+      _widthAnimation = Tween<double>(
+              begin: MenuDimensions.menuOpenWidth,
+              end: MenuDimensions.menuCollapsedWidth)
+          .animate(widget.animationController!);
+    }
+  }
 
   void hoverOnItem(bool isHovering) => setState(() {
         itemIsHovered = isHovering;
@@ -79,11 +95,13 @@ class _MenuItemState extends State<MenuItem> {
                   Modular.to.navigate(RoutePaths.homePath + widget.path);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Stack(children: [
                     AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      width: widget.isURLMatching ? width - padding * 2 : 0,
+                      duration: const Duration(milliseconds: 200),
+                      width: widget.isURLMatching
+                          ? _widthAnimation?.value ?? width
+                          : 0,
                       height: height,
                       curve: const Cubic(0.5, 0.8, 0.4, 1),
                       decoration: BoxDecoration(
@@ -95,8 +113,9 @@ class _MenuItemState extends State<MenuItem> {
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
                       transform: transform,
-                      width: width - padding * 2,
+                      width: _widthAnimation?.value ?? width,
                       height: height,
+                      curve: const Cubic(0.5, 0.8, 0.4, 1),
                       padding: const EdgeInsets.symmetric(
                           horizontal: padding, vertical: 16),
                       child: Row(children: [
@@ -104,12 +123,28 @@ class _MenuItemState extends State<MenuItem> {
                             color: widget.isURLMatching
                                 ? themeData.colorScheme.surface
                                 : themeData.iconTheme.color),
-                        const SizedBox(width: 12),
-                        Text(getLocalizedMenuItem(localization),
-                            style: widget.isURLMatching
-                                ? themeData.textTheme.bodyMedium!.copyWith(
-                                    color: themeData.colorScheme.surface)
-                                : themeData.textTheme.bodyMedium)
+                        // when animation controller is given then it should be desktop size and the
+                        // text is shown depending on animation value. If it is null then the text should
+                        // show up normally.
+                        if (widget.animationController != null) ...[
+                          if (_widthAnimation != null &&
+                              _widthAnimation!.value >=
+                                  MenuDimensions.menuOpenWidth) ...[
+                            const SizedBox(width: 12),
+                            Text(getLocalizedMenuItem(localization),
+                                style: widget.isURLMatching
+                                    ? themeData.textTheme.bodyMedium!.copyWith(
+                                        color: themeData.colorScheme.surface)
+                                    : themeData.textTheme.bodyMedium),
+                          ]
+                        ] else ...[
+                          const SizedBox(width: 12),
+                          Text(getLocalizedMenuItem(localization),
+                              style: widget.isURLMatching
+                                  ? themeData.textTheme.bodyMedium!.copyWith(
+                                      color: themeData.colorScheme.surface)
+                                  : themeData.textTheme.bodyMedium)
+                        ]
                       ]),
                     ),
                   ]),

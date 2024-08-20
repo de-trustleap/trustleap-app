@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/presentation/core/menu/appbar.dart';
+import 'package:finanzbegleiter/presentation/core/menu/collapsible_side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/menu/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,11 +19,10 @@ class PageTemplate extends StatelessWidget {
     final themeData = Theme.of(context);
 
     if (responsiveValue.largerThan(TABLET)) {
-      return Scaffold(
+      return const Scaffold(
           body: Row(children: [
-        const SizedBox(width: 240, child: SideMenu()),
-        Container(width: 0.5, color: themeData.textTheme.bodyMedium!.color),
-        const Expanded(child: RouterOutlet())
+        CollapsibleSideMenu(),
+        Expanded(child: RouterOutlet())
       ]));
     } else {
       return Scaffold(
@@ -30,8 +31,9 @@ class PageTemplate extends StatelessWidget {
               preferredSize: Size(double.infinity, 44), child: CustomAppBar()),
           backgroundColor: themeData.colorScheme.surface,
           body: const RouterOutlet(),
-          endDrawer:
-              const SizedBox(width: 240, child: Drawer(child: SideMenu())));
+          endDrawer: const SizedBox(
+              width: MenuDimensions.menuOpenWidth,
+              child: Drawer(child: SideMenu())));
     }
   }
 
