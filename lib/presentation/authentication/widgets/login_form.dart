@@ -7,7 +7,6 @@ import 'package:finanzbegleiter/presentation/authentication/widgets/password_for
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
@@ -124,6 +123,8 @@ class _LoginFormState extends State<LoginForm> {
                   PrimaryButton(
                       title: localization.login_login_buttontitle,
                       key: const Key("loginButton"),
+                      disabled: state is SignInLoadingState,
+                      isLoading: state is SignInLoadingState,
                       onTap: () {
                         submit();
                       }),
@@ -132,11 +133,6 @@ class _LoginFormState extends State<LoginForm> {
                       key: const Key("registerButton"),
                       onTap: () =>
                           {Modular.to.pushNamed(RoutePaths.registerPath)}),
-                  if (state is SignInLoadingState) ...[
-                    const SizedBox(
-                        height: 80, key: Key("loadingIndicatorSpacing")),
-                    const LoadingIndicator()
-                  ],
                   if (errorMessage != "" &&
                       showError &&
                       (state is SignInFailureState) &&

@@ -189,6 +189,7 @@ class _EmailSectionState extends State<EmailSection> {
                           passwordTextController: passwordTextController,
                           maxWidth: maxWidth,
                           buttonDisabled: buttonDisabled,
+                          isLoading: state is ProfileEmailLoadingState,
                           resetError: resetError,
                           submit: submitPassword)
                     ] else if (visibleField ==
@@ -197,12 +198,9 @@ class _EmailSectionState extends State<EmailSection> {
                           emailTextController: emailTextController,
                           maxWidth: maxWidth,
                           buttonDisabled: buttonDisabled,
+                          isLoading: state is ProfileEmailLoadingState,
                           resetError: resetError,
                           submit: submitEmail)
-                    ],
-                    if (state is ProfileEmailLoadingState) ...[
-                      const SizedBox(height: 80),
-                      const LoadingIndicator()
                     ],
                     if (errorMessage != "" &&
                         showError &&

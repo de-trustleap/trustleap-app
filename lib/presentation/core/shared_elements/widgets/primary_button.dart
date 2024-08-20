@@ -5,6 +5,7 @@ class PrimaryButton extends StatelessWidget {
   final String title;
   final double width;
   final bool disabled;
+  final bool isLoading;
   final Function onTap;
 
   const PrimaryButton(
@@ -12,6 +13,7 @@ class PrimaryButton extends StatelessWidget {
       required this.title,
       required this.onTap,
       this.disabled = false,
+      this.isLoading = false,
       this.width = double.infinity});
 
   @override
@@ -25,17 +27,22 @@ class PrimaryButton extends StatelessWidget {
               height: 40,
               width: width,
               decoration: BoxDecoration(
-                  color: disabled
+                  color: disabled && !isLoading
                       ? Colors.grey[400]
                       : themeData.colorScheme.primary,
                   borderRadius: BorderRadius.circular(8)),
               child: Center(
-                  child: Text(title,
-                      textAlign: TextAlign.center,
-                      style: themeData.textTheme.bodySmall!.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1))))),
+                  child: isLoading
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(color: Colors.white))
+                      : Text(title,
+                          textAlign: TextAlign.center,
+                          style: themeData.textTheme.bodySmall!.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1))))),
     );
   }
 }

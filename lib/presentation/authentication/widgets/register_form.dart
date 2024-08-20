@@ -409,13 +409,13 @@ class _RegisterFormState extends State<RegisterForm> {
                                     title:
                                         localization.register_now_buttontitle,
                                     disabled: buttonDisabled,
+                                    isLoading: state is SignInLoadingState,
                                     onTap: () {
                                       submit(validator);
                                     }),
                               ),
                             ]),
-                        if (state is SignInLoadingState ||
-                            userState is UserLoading) ...[
+                        if (userState is UserLoading) ...[
                           const SizedBox(height: 80),
                           const LoadingIndicator()
                         ],
