@@ -1,5 +1,7 @@
 import 'app_localizations.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for English (`en`).
 class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
@@ -198,6 +200,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_create_txt => 'Create Landing Page';
+
+  @override
+  String get landingpage_overview_context_menu_delete => 'Delete';
+
+  @override
+  String get landingpage_overview_context_menu_duplicate => 'Duplicate';
 
   @override
   String get placeholder_title => 'Title';
@@ -465,6 +473,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register_promoter_snackbar_success => 'The new promoter has been successfully registered!';
+
+  @override
+  String get register_promoter_missing_landingpage_error_message => 'The promoter has not yet been assigned a landing page';
+
+  @override
+  String get register_promoter_missing_company_error_message => 'You cannot register a promoter because you are not affiliated with any company';
 
   @override
   String get promoter_overview_title => 'My promoter';
@@ -742,4 +756,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_register_company_section_button_title => 'Go to registration';
+
+  @override
+  String get profile_image_upload_tooltip => 'Upload image';
+
+  @override
+  String get landingpage_overview_edit_tooltip => 'Edit landingpage';
+
+  @override
+  String get profile_edit_email_tooltip => 'Change email address';
+
+  @override
+  String get theme_switch_lightmode_tooltip => 'Lightmode';
+
+  @override
+  String get theme_switch_darkmode_tooltip => 'Darkmode';
+
+  @override
+  String get promoter_overview_reset_search_tooltip => 'Reset search';
+
+  @override
+  String get promoter_overview_filter_tooltip => 'Filter promoters';
+
+  @override
+  String get promoter_overview_view_switch_grid_tooltip => 'Grid view';
+
+  @override
+  String get promoter_overview_view_switch_table_tooltip => 'List view';
+
+  @override
+  String get recommendations_form_add_button_tooltip => 'Add recommendation';
 }

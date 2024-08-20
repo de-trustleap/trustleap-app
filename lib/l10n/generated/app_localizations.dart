@@ -8,6 +8,8 @@ import 'package:intl/intl.dart' as intl;
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
 ///
@@ -482,6 +484,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create Landing Page'**
   String get landingpage_create_txt;
+
+  /// Delete button in the context menu on the landing page overview page.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get landingpage_overview_context_menu_delete;
+
+  /// Duplicate button in the context menu on the landing page overview page.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get landingpage_overview_context_menu_duplicate;
 
   /// Platzhalter textbox for Title
   ///
@@ -1016,6 +1030,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The new promoter has been successfully registered!'**
   String get register_promoter_snackbar_success;
+
+  /// Error message that appears if no landing page was assigned during promoter registration.
+  ///
+  /// In en, this message translates to:
+  /// **'The promoter has not yet been assigned a landing page'**
+  String get register_promoter_missing_landingpage_error_message;
+
+  /// Error message that appears if no company exists during promoter registration.
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot register a promoter because you are not affiliated with any company'**
+  String get register_promoter_missing_company_error_message;
 
   /// The title of the promoter overview
   ///
@@ -1562,6 +1588,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Go to registration'**
   String get profile_register_company_section_button_title;
+
+  /// Tooltip for the image upload on the profile page
+  ///
+  /// In en, this message translates to:
+  /// **'Upload image'**
+  String get profile_image_upload_tooltip;
+
+  /// Tooltip for landingpage edit button on the landingpage overview
+  ///
+  /// In en, this message translates to:
+  /// **'Edit landingpage'**
+  String get landingpage_overview_edit_tooltip;
+
+  /// Tooltip for the button for changing the email address on the profile page
+  ///
+  /// In en, this message translates to:
+  /// **'Change email address'**
+  String get profile_edit_email_tooltip;
+
+  /// Tooltip for the Theme Switcher Light Mode button in the menu
+  ///
+  /// In en, this message translates to:
+  /// **'Lightmode'**
+  String get theme_switch_lightmode_tooltip;
+
+  /// Tooltip for the Theme Switcher Light Mode button in the menu
+  ///
+  /// In en, this message translates to:
+  /// **'Darkmode'**
+  String get theme_switch_darkmode_tooltip;
+
+  /// Tooltip for the reset search button on the promoter overview page
+  ///
+  /// In en, this message translates to:
+  /// **'Reset search'**
+  String get promoter_overview_reset_search_tooltip;
+
+  /// Tooltip for the filter button on the promoter overview page
+  ///
+  /// In en, this message translates to:
+  /// **'Filter promoters'**
+  String get promoter_overview_filter_tooltip;
+
+  /// Tooltip for the grid button on the promoter overview page
+  ///
+  /// In en, this message translates to:
+  /// **'Grid view'**
+  String get promoter_overview_view_switch_grid_tooltip;
+
+  /// Tooltip for the table button on the promoter overview page
+  ///
+  /// In en, this message translates to:
+  /// **'List view'**
+  String get promoter_overview_view_switch_table_tooltip;
+
+  /// Tooltip for the add recommendation button in the recommendations form
+  ///
+  /// In en, this message translates to:
+  /// **'Add recommendation'**
+  String get recommendations_form_add_button_tooltip;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
