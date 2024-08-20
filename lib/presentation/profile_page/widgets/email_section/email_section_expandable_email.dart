@@ -30,7 +30,7 @@ class EmailSectionExpandableEmail extends StatelessWidget {
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(localization.profile_page_email_section_description,
+      SelectableText(localization.profile_page_email_section_description,
           style: responsiveValue.isMobile
               ? themeData.textTheme.bodySmall
               : themeData.textTheme.bodyMedium),

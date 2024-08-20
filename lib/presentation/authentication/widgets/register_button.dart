@@ -19,7 +19,7 @@ class RegisterButton extends StatelessWidget {
 
     return Row(
       children: [
-        Text(localization.login_register_text,
+        SelectableText(localization.login_register_text,
             style: responsiveValue.isMobile
                 ? themeData.textTheme.bodySmall
                 : themeData.textTheme.bodyMedium),

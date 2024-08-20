@@ -145,14 +145,15 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(localization.profile_company_contact_section_title,
+                    SelectableText(
+                        localization.profile_company_contact_section_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          SelectableText(
                               localization.profile_company_contact_section_name,
                               style: responsiveValue.isMobile
                                   ? themeData.textTheme.bodySmall
@@ -171,7 +172,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          SelectableText(
                               localization
                                   .profile_company_contact_section_industry,
                               style: responsiveValue.isMobile
@@ -191,7 +192,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          SelectableText(
                               localization
                                   .profile_company_contact_section_website,
                               style: responsiveValue.isMobile
@@ -210,7 +211,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          SelectableText(
                               localization
                                   .profile_company_contact_section_address,
                               style: responsiveValue.isMobile
@@ -237,7 +238,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                Text(
+                                SelectableText(
                                     localization
                                         .profile_company_contact_section_postcode,
                                     style: responsiveValue.isMobile
@@ -263,7 +264,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                Text(
+                                SelectableText(
                                     localization
                                         .profile_company_contact_section_place,
                                     style: responsiveValue.isMobile
@@ -286,7 +287,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          SelectableText(
                               localization
                                   .profile_company_contact_section_phone,
                               style: responsiveValue.isMobile

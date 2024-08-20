@@ -616,6 +616,14 @@
     "@register_promoter_snackbar_success": {
         "description": "The title of the snack bar when a new promoter is registered"
     },
+    "register_promoter_no_landingpage_title": "You have not created a landing page yet",
+    "@register_promoter_no_landingpage_title": {
+        "description": "The title of the page that appears if you do not have a landing page yet and still want to register a promoter"
+    },
+    "register_promoter_no_landingpage_subtitle": "In order to create a new promoter it is necessary to have an active landing page.",
+    "@register_promoter_no_landingpage_subtitle": {
+        "description": "The subtitle of the page that appears if you don't have a landing page yet and still want to register a promoter"
+    },
     "promoter_overview_title": "My promoter",
     "@promoter_overview_title": {
         "description": "The title of the promoter overview"

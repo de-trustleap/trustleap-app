@@ -22,11 +22,11 @@ class EmailSectionMobile extends StatelessWidget {
     final localization = AppLocalizations.of(context);
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(localization.profile_page_email_section_email,
+      SelectableText(localization.profile_page_email_section_email,
           style: themeData.textTheme.bodySmall),
       const SizedBox(height: 8),
       Row(children: [
-        Text(email ?? "", style: themeData.textTheme.bodySmall),
+        SelectableText(email ?? "", style: themeData.textTheme.bodySmall),
         const SizedBox(width: 8),
         IconButton(
             onPressed: () => {editEmailPressed()},
@@ -34,7 +34,7 @@ class EmailSectionMobile extends StatelessWidget {
                 color: themeData.colorScheme.secondary, size: 22))
       ]),
       const SizedBox(height: 16),
-      Text(localization.profile_page_email_section_status,
+      SelectableText(localization.profile_page_email_section_status,
           style: themeData.textTheme.bodySmall),
       const SizedBox(height: 8),
       EmailVerificationBadge(

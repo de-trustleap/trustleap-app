@@ -45,11 +45,12 @@ class CustomAlertDialog extends StatelessWidget {
                             .copyWith(color: themeData.colorScheme.secondary)))
           ]
         ],
-        title: Text(title,
+        title: SelectableText(title,
             style: themeData.textTheme.headlineLarge!.copyWith(
                 fontSize: responsiveValue.isMobile ? 18 : 22,
                 fontWeight: FontWeight.bold)),
         contentPadding: const EdgeInsets.all(20),
-        content: Text(message, style: themeData.textTheme.bodyMedium));
+        content:
+            SelectableText(message, style: themeData.textTheme.bodyMedium));
   }
 }

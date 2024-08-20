@@ -193,7 +193,8 @@ class _RegisterFormState extends State<RegisterForm> {
                             children: [
                               SizedBox(
                                 width: getResponsiveWidth(1),
-                                child: Text(localization.register_title,
+                                child: SelectableText(
+                                    localization.register_title,
                                     style: themeData.textTheme.headlineLarge!
                                         .copyWith(
                                             fontSize: responsiveValue.isMobile
@@ -209,7 +210,8 @@ class _RegisterFormState extends State<RegisterForm> {
                             children: [
                               SizedBox(
                                 width: getResponsiveWidth(1),
-                                child: Text(localization.register_subtitle,
+                                child: SelectableText(
+                                    localization.register_subtitle,
                                     style: themeData.textTheme.bodySmall!
                                         .copyWith(
                                             fontWeight: FontWeight.w500,

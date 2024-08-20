@@ -148,7 +148,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
               }
             })),
         const SizedBox(width: 8),
-        Text(landingPageItems[index].landingPage.name ?? "")
+        SelectableText(landingPageItems[index].landingPage.name ?? "")
       ]));
     });
     return checkboxes;
@@ -224,7 +224,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(localization.register_promoter_title,
+                      SelectableText(localization.register_promoter_title,
                           style: themeData.textTheme.headlineLarge!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: textFieldSpacing + 4),

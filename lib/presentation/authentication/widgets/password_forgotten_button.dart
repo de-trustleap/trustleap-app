@@ -18,7 +18,7 @@ class PasswordForgottenButton extends StatelessWidget {
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return Row(children: [
-      Text(localization.login_password_forgotten_text,
+      SelectableText(localization.login_password_forgotten_text,
           style: responsiveValue.isMobile
               ? themeData.textTheme.bodySmall
               : themeData.textTheme.bodyMedium),

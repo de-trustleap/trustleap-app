@@ -19,15 +19,16 @@ class PromotersSection extends StatelessWidget {
 
     return CardContainer(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(localization.profile_page_promoters_section_title,
+      SelectableText(localization.profile_page_promoters_section_title,
           style: themeData.textTheme.headlineLarge!
               .copyWith(fontWeight: FontWeight.bold)),
       const SizedBox(height: 16),
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Text(localization.profile_page_promoters_section_recommender_count,
+        SelectableText(
+            localization.profile_page_promoters_section_recommender_count,
             style: themeData.textTheme.bodyMedium),
         const SizedBox(width: 16),
-        Text(user.registeredPromoterIDs?.length.toString() ?? "0",
+        SelectableText(user.registeredPromoterIDs?.length.toString() ?? "0",
             style: themeData.textTheme.bodyMedium!
                 .copyWith(fontWeight: FontWeight.bold)),
         const Spacer()

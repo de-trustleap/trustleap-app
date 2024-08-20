@@ -30,7 +30,7 @@ class EmailSectionExpandablePassword extends StatelessWidget {
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
+      SelectableText(
           localization
               .profile_page_email_section_change_email_password_description,
           style: responsiveValue.isMobile

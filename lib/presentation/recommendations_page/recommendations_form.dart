@@ -177,7 +177,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(localization.recommendations_title,
+                      SelectableText(localization.recommendations_title,
                           style: themeData.textTheme.headlineLarge!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 16),
@@ -253,8 +253,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                   width: maxWidth,
                                   validate: reasonValid,
                                   reasons: reasons,
-                                  initialValue:
-                                      selectedReason ?? reasons[0],
+                                  initialValue: selectedReason ?? reasons[0],
                                   onSelected: (reason) {
                                     setState(() {
                                       reasonValid =

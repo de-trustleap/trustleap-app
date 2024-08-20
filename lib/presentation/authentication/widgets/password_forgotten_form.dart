@@ -104,11 +104,12 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 80),
-                      Text(localization.password_forgotten_title,
+                      SelectableText(localization.password_forgotten_title,
                           style: themeData.textTheme.headlineLarge!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: padding),
-                      Text(localization.password_forgotten_description,
+                      SelectableText(
+                          localization.password_forgotten_description,
                           style: responsiveValue.isMobile
                               ? themeData.textTheme.bodySmall
                               : themeData.textTheme.bodyMedium),

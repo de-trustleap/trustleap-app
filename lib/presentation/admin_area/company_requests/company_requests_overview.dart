@@ -84,7 +84,8 @@ class _CompanyRequestsOverviewState extends State<CompanyRequestsOverview> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(localization.admin_company_request_overview_title,
+                  SelectableText(
+                      localization.admin_company_request_overview_title,
                       style: themeData.textTheme.headlineLarge!
                           .copyWith(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 40),
