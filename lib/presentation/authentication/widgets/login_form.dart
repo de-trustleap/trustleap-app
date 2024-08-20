@@ -85,13 +85,13 @@ class _LoginFormState extends State<LoginForm> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: [
                   SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-                  Text(localization.login_title,
+                  SelectableText(localization.login_title,
                       style: themeData.textTheme.headlineLarge!.copyWith(
                           fontSize: responsiveValue.isMobile ? 20 : 50,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 4)),
                   const SizedBox(height: 20),
-                  Text(localization.login_subtitle,
+                  SelectableText(localization.login_subtitle,
                       style: themeData.textTheme.bodySmall!.copyWith(
                           fontWeight: FontWeight.w500, letterSpacing: 4)),
                   const SizedBox(height: 80),

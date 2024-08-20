@@ -116,11 +116,11 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(localization.delete_account_title,
+                    SelectableText(localization.delete_account_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
-                    Text(localization.delete_account_subtitle,
+                    SelectableText(localization.delete_account_subtitle,
                         style: responsiveValue.isMobile
                             ? themeData.textTheme.bodySmall
                             : themeData.textTheme.bodyMedium),

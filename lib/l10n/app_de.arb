@@ -624,6 +624,13 @@
     "@register_promoter_snackbar_success": {
         "description": "Der Titel der Snackbar wenn neuer Promoter registriert wurde"
     },
+    "register_promoter_no_landingpage_title": "Du hast noch keine Landingpage erstellt",
+    "@register_promoter_no_landingpage_title": {
+        "description": "Der Titel der Seite die erscheint, wenn du noch keine Landingpage hast und trotzdem einen Promoter registrieren willst"
+    },
+    "register_promoter_no_landingpage_subtitle": "Um einen neuen Promoter erstellen zu können ist es nötig, eine aktive Landingpage zu haben.",
+    "@register_promoter_no_landingpage_subtitle": {
+        "description": "Der Subtitle der Seite die erscheint, wenn du noch keine Landingpage hast und trotzdem einen Promoter registrieren willst"
     "register_promoter_missing_landingpage_error_message": "Dem Promoter wurde noch keine Landingpage zugewiesen",
     "@register_promoter_missing_landingpage_error_message": {
         "description": "Fehlermeldung die erscheint, wenn bei der Promoter Registrierung keine Landing Page zugewiesen wurde."

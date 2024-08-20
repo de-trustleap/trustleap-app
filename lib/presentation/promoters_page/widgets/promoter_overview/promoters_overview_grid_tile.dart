@@ -64,19 +64,20 @@ class PromotersOverviewGridTile extends StatelessWidget {
                 placeHolderImage(responsiveValue)
               ],
               const SizedBox(height: 4),
-              Text("${promoter.firstName ?? ""} ${promoter.lastName ?? ""}",
-                  style: themeData.textTheme.bodySmall,
+              SelectableText(
+                  "${promoter.firstName ?? ""} ${promoter.lastName ?? ""}",
+                  style: themeData.textTheme.bodySmall!
+                      .copyWith(overflow: TextOverflow.ellipsis),
                   textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis),
+                  maxLines: 2),
               const SizedBox(height: 4),
-              Text(promoter.email ?? "",
+              SelectableText(promoter.email ?? "",
                   style: themeData.textTheme.bodySmall!.copyWith(
                       fontSize: 12,
+                      overflow: TextOverflow.ellipsis,
                       color:
                           themeData.colorScheme.surfaceTint.withOpacity(0.6)),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis),
+                  maxLines: 1),
               if (promoter.registered != null) ...[
                 const SizedBox(height: 8),
                 PromoterRegistrationBadge(
@@ -88,7 +89,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
                       .getPromoterDateText(context, promoter) !=
                   null) ...[
                 const SizedBox(height: 8),
-                Text(
+                SelectableText(
                     PromoterHelper(localization: localization)
                         .getPromoterDateText(context, promoter)!,
                     style: themeData.textTheme.bodySmall!.copyWith(

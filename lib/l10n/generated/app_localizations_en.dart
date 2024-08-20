@@ -475,6 +475,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_promoter_snackbar_success => 'The new promoter has been successfully registered!';
 
   @override
+  String get register_promoter_no_landingpage_title => 'You have not created a landing page yet';
+
+  @override
+  String get register_promoter_no_landingpage_subtitle => 'In order to create a new promoter it is necessary to have an active landing page.';
+
+  @override
   String get register_promoter_missing_landingpage_error_message => 'The promoter has not yet been assigned a landing page';
 
   @override

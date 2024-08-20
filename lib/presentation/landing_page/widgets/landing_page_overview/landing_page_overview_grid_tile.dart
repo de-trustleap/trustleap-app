@@ -158,15 +158,15 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 8),
-              Text(landingPage.name ?? "",
-                  style: themeData.textTheme.bodySmall,
+              SelectableText(landingPage.name ?? "",
+                  style: themeData.textTheme.bodySmall!
+                      .copyWith(overflow: TextOverflow.ellipsis),
                   textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis),
+                  maxLines: 2),
               if (landingPage.createdAt != null &&
                   landingPage.lastUpdatedAt == null) ...[
                 const SizedBox(height: 16),
-                Text(
+                SelectableText(
                     "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
@@ -175,7 +175,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     maxLines: 1)
               ] else if (landingPage.lastUpdatedAt != null) ...[
                 const SizedBox(height: 8),
-                Text(
+                SelectableText(
                     "Geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,

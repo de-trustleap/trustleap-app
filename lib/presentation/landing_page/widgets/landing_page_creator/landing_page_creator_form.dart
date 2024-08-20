@@ -156,7 +156,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(localization.landingpage_create_txt,
+                        SelectableText(localization.landingpage_create_txt,
                             style: themeData.textTheme.headlineLarge!
                                 .copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 16),

@@ -145,7 +145,7 @@ class _EmailSectionState extends State<EmailSection> {
         }
       }, builder: (context, state) {
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(localization.profile_page_email_section_title,
+          SelectableText(localization.profile_page_email_section_title,
               style: themeData.textTheme.headlineLarge!
                   .copyWith(fontWeight: FontWeight.bold)),
           const SizedBox(height: 16),

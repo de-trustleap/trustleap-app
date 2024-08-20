@@ -135,7 +135,7 @@ class _ContactSectionState extends State<ContactSection> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(localization.profile_page_contact_section_title,
+                SelectableText(localization.profile_page_contact_section_title,
                     style: themeData.textTheme.headlineLarge!
                         .copyWith(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
@@ -163,7 +163,7 @@ class _ContactSectionState extends State<ContactSection> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            Text(
+                            SelectableText(
                                 localization
                                     .profile_page_contact_section_form_firstname,
                                 style: responsiveValue.isMobile
@@ -189,7 +189,7 @@ class _ContactSectionState extends State<ContactSection> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            Text(
+                            SelectableText(
                                 localization
                                     .profile_page_contact_section_form_lastname,
                                 style: responsiveValue.isMobile
@@ -210,7 +210,8 @@ class _ContactSectionState extends State<ContactSection> {
                     ]),
                 const SizedBox(height: textFieldSpacing),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(localization.profile_page_contact_section_form_address,
+                  SelectableText(
+                      localization.profile_page_contact_section_form_address,
                       style: responsiveValue.isMobile
                           ? themeData.textTheme.bodySmall
                           : themeData.textTheme.bodyMedium),
@@ -234,7 +235,7 @@ class _ContactSectionState extends State<ContactSection> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            Text(
+                            SelectableText(
                                 localization
                                     .profile_page_contact_section_form_postcode,
                                 style: responsiveValue.isMobile
@@ -261,7 +262,7 @@ class _ContactSectionState extends State<ContactSection> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            Text(
+                            SelectableText(
                                 localization
                                     .profile_page_contact_section_form_place,
                                 style: responsiveValue.isMobile

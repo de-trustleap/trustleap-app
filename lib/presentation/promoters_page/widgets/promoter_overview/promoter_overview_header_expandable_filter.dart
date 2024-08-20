@@ -49,7 +49,8 @@ class _PromoterOverviewHeaderExpandableFilterState
             mainAxisSize: MainAxisSize.min,
             children: [
               RadioListTile(
-                  title: Text(localization.promoter_overview_filter_show_all,
+                  title: SelectableText(
+                      localization.promoter_overview_filter_show_all,
                       style: themeData.textTheme.bodySmall),
                   value: PromoterRegistrationFilterState.all,
                   groupValue: filterStates.registrationFilterState,
@@ -62,7 +63,7 @@ class _PromoterOverviewHeaderExpandableFilterState
                   }),
               const SizedBox(height: 8),
               RadioListTile(
-                  title: Text(
+                  title: SelectableText(
                       localization.promoter_overview_filter_show_registered,
                       style: themeData.textTheme.bodySmall),
                   value: PromoterRegistrationFilterState.registered,
@@ -76,7 +77,7 @@ class _PromoterOverviewHeaderExpandableFilterState
                   }),
               const SizedBox(height: 8),
               RadioListTile(
-                  title: Text(
+                  title: SelectableText(
                       localization.promoter_overview_filter_show_unregistered,
                       style: themeData.textTheme.bodySmall),
                   value: PromoterRegistrationFilterState.unregistered,
@@ -130,7 +131,7 @@ class _PromoterOverviewHeaderExpandableFilterState
                     widget.onFilterChanged(filterStates);
                   }),
               RadioListTile(
-                  title: Text(
+                  title: SelectableText(
                       localization.promoter_overview_filter_sortorder_desc,
                       style: themeData.textTheme.bodySmall),
                   value: PromoterSortOrderFilterState.desc,
@@ -143,7 +144,7 @@ class _PromoterOverviewHeaderExpandableFilterState
                     });
                   }),
               RadioListTile(
-                  title: Text(
+                  title: SelectableText(
                       localization.promoter_overview_filter_sortorder_asc,
                       style: themeData.textTheme.bodySmall),
                   value: PromoterSortOrderFilterState.asc,

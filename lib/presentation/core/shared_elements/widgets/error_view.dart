@@ -31,12 +31,12 @@ class ErrorView extends StatelessWidget {
                 size: responsiveValue.isMobile ? 40 : 60,
                 color: themeData.colorScheme.error),
             const SizedBox(height: 16),
-            Text(title,
+            SelectableText(title,
                 style: themeData.textTheme.headlineLarge!.copyWith(
                     fontSize: responsiveValue.isMobile ? 20 : 24,
                     fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
-            Text(message, style: themeData.textTheme.headlineLarge),
+            SelectableText(message, style: themeData.textTheme.headlineLarge),
             const SizedBox(height: 32),
             PrimaryButton(
                 title: localization.general_error_view_refresh_button_title,

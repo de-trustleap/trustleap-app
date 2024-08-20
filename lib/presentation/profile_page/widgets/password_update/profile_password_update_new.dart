@@ -35,7 +35,7 @@ class ProfilePasswordUpdateNew extends StatelessWidget {
     const double textFieldSpacing = 20;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
+      SelectableText(
           localization
               .profile_page_password_update_section_new_password_description,
           style: responsiveValue.isMobile

@@ -52,7 +52,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
                           child: index == 0
                               ? (landingpages.length >= maxLandingPageCount
                                   ? Center(
-                                      child: Text(
+                                      child: SelectableText(
                                         localization
                                             .landingpage_overview_max_count_msg,
                                         style: themeData.textTheme.labelSmall!

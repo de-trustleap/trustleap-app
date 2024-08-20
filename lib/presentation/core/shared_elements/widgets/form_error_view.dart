@@ -19,7 +19,7 @@ class FormErrorView extends StatelessWidget {
             borderRadius: BorderRadius.circular(8)),
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Text(message,
+          child: SelectableText(message,
               style: themeData.textTheme.bodyLarge!.copyWith(
                   color: themeData.colorScheme.error,
                   fontSize: 14,

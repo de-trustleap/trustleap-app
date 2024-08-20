@@ -37,26 +37,28 @@ class PromoterOverviewListTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
-                          child: Text(
+                          child: SelectableText(
                               "${promoter.firstName ?? ""} ${promoter.lastName ?? ""}",
-                              style: themeData.textTheme.bodySmall,
+                              style: themeData.textTheme.bodySmall!
+                                  .copyWith(overflow: TextOverflow.ellipsis),
                               textAlign: TextAlign.start,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis)),
+                              maxLines: 2)),
                       const SizedBox(width: 8),
                       Expanded(
-                          child: Text(promoter.email ?? "",
+                          child: SelectableText(promoter.email ?? "",
                               style: themeData.textTheme.bodySmall!.copyWith(
                                   fontSize: 12,
+                                  overflow: TextOverflow.ellipsis,
                                   color: themeData.colorScheme.surfaceTint
                                       .withOpacity(0.6)),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis))
+                              maxLines: 2))
                     ]),
                 if (promoter.registered != null) ...[
                   const SizedBox(height: 8),
                   Row(
-                      mainAxisAlignment: responsiveValue.isMobile ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
+                      mainAxisAlignment: responsiveValue.isMobile
+                          ? MainAxisAlignment.spaceBetween
+                          : MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         if (promoter.registered == true) ...[
@@ -66,20 +68,23 @@ class PromoterOverviewListTile extends StatelessWidget {
                         ] else ...[
                           const PromoterRegistrationBadge(
                               state: PromoterRegistrationState.unregistered),
-                            Spacer(flex: responsiveValue.isMobile ? 1 : 10)
+                          Spacer(flex: responsiveValue.isMobile ? 1 : 10)
                         ],
                         Expanded(
-                            flex: responsiveValue.isMobile ? 0 : (promoter.registered == true ? 4 : 15),
-                            child: Text(
-                                PromoterHelper(localization: localization).getPromoterDateText(
-                                        context, promoter) ??
+                            flex: responsiveValue.isMobile
+                                ? 0
+                                : (promoter.registered == true ? 4 : 15),
+                            child: SelectableText(
+                                PromoterHelper(localization: localization)
+                                        .getPromoterDateText(
+                                            context, promoter) ??
                                     "",
                                 style: themeData.textTheme.bodySmall!.copyWith(
                                     fontSize: 12,
+                                    overflow: TextOverflow.ellipsis,
                                     color: themeData.colorScheme.surfaceTint
                                         .withOpacity(0.6)),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis))
+                                maxLines: 1))
                       ])
                 ]
               ],

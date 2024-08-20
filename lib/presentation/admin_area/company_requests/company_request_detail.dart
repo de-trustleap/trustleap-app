@@ -37,89 +37,98 @@ class CompanyRequestDetail extends StatelessWidget {
               return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(localizations.admin_company_request_detail_title,
+                    SelectableText(
+                        localizations.admin_company_request_detail_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(localizations.admin_company_request_detail_name,
+                        SelectableText(
+                            localizations.admin_company_request_detail_name,
                             style: themeData.textTheme.bodyMedium),
                         const SizedBox(width: 16),
-                        Text(model.request.company?.name ?? "",
+                        SelectableText(model.request.company?.name ?? "",
                             style: themeData.textTheme.bodyMedium!
                                 .copyWith(fontWeight: FontWeight.bold)),
                       ],
                     ),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text(localizations.admin_company_request_detail_industry,
+                      SelectableText(
+                          localizations.admin_company_request_detail_industry,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
-                      Text(model.request.company?.industry ?? "",
+                      SelectableText(model.request.company?.industry ?? "",
                           style: themeData.textTheme.bodyMedium!
                               .copyWith(fontWeight: FontWeight.bold))
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text(localizations.admin_company_request_detail_address,
+                      SelectableText(
+                          localizations.admin_company_request_detail_address,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
-                      Text(model.request.company?.address ?? "",
+                      SelectableText(model.request.company?.address ?? "",
                           style: themeData.textTheme.bodyMedium!
                               .copyWith(fontWeight: FontWeight.bold))
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text(localizations.admin_company_request_detail_postcode,
+                      SelectableText(
+                          localizations.admin_company_request_detail_postcode,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
-                      Text(model.request.company?.postCode ?? "",
+                      SelectableText(model.request.company?.postCode ?? "",
                           style: themeData.textTheme.bodyMedium!
                               .copyWith(fontWeight: FontWeight.bold))
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text(localizations.admin_company_request_detail_place,
+                      SelectableText(
+                          localizations.admin_company_request_detail_place,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
-                      Text(model.request.company?.place ?? "",
+                      SelectableText(model.request.company?.place ?? "",
                           style: themeData.textTheme.bodyMedium!
                               .copyWith(fontWeight: FontWeight.bold))
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text(localizations.admin_company_request_detail_phone,
+                      SelectableText(
+                          localizations.admin_company_request_detail_phone,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
-                      Text(model.request.company?.phoneNumber ?? "",
+                      SelectableText(model.request.company?.phoneNumber ?? "",
                           style: themeData.textTheme.bodyMedium!
                               .copyWith(fontWeight: FontWeight.bold))
                     ]),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text(localizations.admin_company_request_detail_website,
+                      SelectableText(
+                          localizations.admin_company_request_detail_website,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
-                      Text(model.request.company?.websiteURL ?? "",
+                      SelectableText(model.request.company?.websiteURL ?? "",
                           style: themeData.textTheme.bodyMedium!
                               .copyWith(fontWeight: FontWeight.bold))
                     ]),
                     const SizedBox(height: 40),
-                    Text(localizations.admin_company_request_detail_user_title,
+                    SelectableText(
+                        localizations.admin_company_request_detail_user_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
+                        SelectableText(
                             localizations
                                 .admin_company_request_detail_user_name,
                             style: themeData.textTheme.bodyMedium),
                         const SizedBox(width: 8),
-                        Text(
+                        SelectableText(
                             "${model.user.firstName ?? ""} ${model.user.lastName ?? ""}",
                             style: themeData.textTheme.bodyMedium!
                                 .copyWith(fontWeight: FontWeight.bold)),
@@ -127,11 +136,11 @@ class CompanyRequestDetail extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text(
+                      SelectableText(
                           localizations.admin_company_request_detail_user_email,
                           style: themeData.textTheme.bodyMedium),
                       const SizedBox(width: 8),
-                      Text(model.user.email ?? "",
+                      SelectableText(model.user.email ?? "",
                           style: themeData.textTheme.bodyMedium!
                               .copyWith(fontWeight: FontWeight.bold))
                     ]),

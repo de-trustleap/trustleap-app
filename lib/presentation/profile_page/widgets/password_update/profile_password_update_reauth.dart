@@ -33,7 +33,8 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
     const double textFieldSpacing = 20;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(localization.profile_page_password_update_section_reauth_description,
+      SelectableText(
+          localization.profile_page_password_update_section_reauth_description,
           style: responsiveValue.isMobile
               ? themeData.textTheme.bodySmall
               : themeData.textTheme.bodyMedium),

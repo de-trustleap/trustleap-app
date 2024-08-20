@@ -1031,6 +1031,17 @@ abstract class AppLocalizations {
   /// **'The new promoter has been successfully registered!'**
   String get register_promoter_snackbar_success;
 
+  /// The title of the page that appears if you do not have a landing page yet and still want to register a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'You have not created a landing page yet'**
+  String get register_promoter_no_landingpage_title;
+
+  /// The subtitle of the page that appears if you don't have a landing page yet and still want to register a promoter
+  ///
+  /// In en, this message translates to:
+  /// **'In order to create a new promoter it is necessary to have an active landing page.'**
+  String get register_promoter_no_landingpage_subtitle;
   /// Error message that appears if no landing page was assigned during promoter registration.
   ///
   /// In en, this message translates to:

@@ -123,7 +123,7 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(localization.company_registration_form_title,
+                    SelectableText(localization.company_registration_form_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),

@@ -46,7 +46,7 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
         Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Flexible(
             flex: responsiveValue.isDesktop ? 2 : 0,
-            child: Text(localization.promoter_overview_title,
+            child: SelectableText(localization.promoter_overview_title,
                 style: themeData.textTheme.headlineLarge!
                     .copyWith(fontWeight: FontWeight.bold)),
           ),

@@ -52,8 +52,8 @@ class LandingPageOverview extends StatelessWidget {
           CustomSnackBar.of(context).showCustomSnackBar(
               localization.landingpage_success_delete_snackbar_message);
         } else if (state is DuplicateLandingPageSuccessState) {
-          CustomSnackBar.of(context)
-              .showCustomSnackBar(localization.landingpage_snackbar_success_duplicated);
+          CustomSnackBar.of(context).showCustomSnackBar(
+              localization.landingpage_snackbar_success_duplicated);
         }
       },
       builder: (context, state) {
@@ -79,7 +79,7 @@ class LandingPageOverview extends StatelessWidget {
                     maxWidth: 800,
                     child: Column(
                       children: [
-                        Text(localization.landingpage_overview_title,
+                        SelectableText(localization.landingpage_overview_title,
                             style: themeData.textTheme.headlineLarge!
                                 .copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 24),

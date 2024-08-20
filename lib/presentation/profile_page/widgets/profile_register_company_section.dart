@@ -53,7 +53,8 @@ class _ProfileRegisterCompanySectionState
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(localization.profile_register_company_section_title,
+                SelectableText(
+                    localization.profile_register_company_section_title,
                     style: themeData.textTheme.headlineLarge!
                         .copyWith(fontWeight: FontWeight.bold)),
                 SizedBox(height: spacing.toDouble()),
@@ -63,7 +64,7 @@ class _ProfileRegisterCompanySectionState
                 ] else if (state is PendingCompanyRequestSuccessState) ...[
                   SizedBox(
                     width: maxWidth,
-                    child: Text(
+                    child: SelectableText(
                         localization
                             .profile_register_company_section_subtitle_in_progress,
                         style: responsiveValue.isMobile
@@ -74,7 +75,7 @@ class _ProfileRegisterCompanySectionState
                     SizedBox(height: spacing.toDouble()),
                     SizedBox(
                       width: maxWidth,
-                      child: Text(
+                      child: SelectableText(
                           "${localization.profile_register_company_section_subtitle_requested_at}${DateTimeFormatter().getStringFromDate(context, state.request.createdAt!)}",
                           style: responsiveValue.isMobile
                               ? themeData.textTheme.bodySmall
@@ -101,7 +102,7 @@ class _ProfileRegisterCompanySectionState
       double maxWidth,
       int spacing) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(localization.profile_register_company_section_subtitle,
+      SelectableText(localization.profile_register_company_section_subtitle,
           style: responsiveValue.isMobile
               ? themeData.textTheme.bodySmall
               : themeData.textTheme.bodyMedium),

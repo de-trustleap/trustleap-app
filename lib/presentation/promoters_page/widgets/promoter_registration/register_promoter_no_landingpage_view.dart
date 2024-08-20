@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -8,6 +9,7 @@ class RegisterPromoterNoLandingPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -18,13 +20,13 @@ class RegisterPromoterNoLandingPageView extends StatelessWidget {
                 size: responsiveValue.isMobile ? 40 : 60,
                 color: themeData.colorScheme.error),
             const SizedBox(height: 16),
-            Text("Du kannst noch keine Landingpage erstellt",
+            SelectableText(localization.register_promoter_no_landingpage_title,
                 style: themeData.textTheme.headlineLarge!.copyWith(
                     fontSize: responsiveValue.isMobile ? 20 : 24,
                     fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
-            Text(
-                "Um einen neuen Promoter erstellen zu können ist es nötig, eine aktive Landingpage zu haben.",
+            SelectableText(
+                localization.register_promoter_no_landingpage_subtitle,
                 style: themeData.textTheme.headlineLarge),
           ]),
     );

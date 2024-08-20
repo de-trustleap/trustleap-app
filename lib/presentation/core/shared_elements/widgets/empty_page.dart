@@ -39,12 +39,12 @@ class EmptyPage extends StatelessWidget {
                 size: responsiveValue.isMobile ? 40 : 60,
                 color: themeData.colorScheme.secondary),
             const SizedBox(height: 16),
-            Text(title,
+            SelectableText(title,
                 style: themeData.textTheme.headlineLarge!.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: responsiveValue.isMobile ? 20 : 24)),
             const SizedBox(height: 16),
-            Text(subTitle,
+            SelectableText(subTitle,
                 style: themeData.textTheme.headlineLarge,
                 textAlign: TextAlign.center),
             if (!isButtonHidden) ...[
