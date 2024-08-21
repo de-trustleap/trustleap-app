@@ -67,8 +67,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                       IconButton(
                           onPressed: () {
                             Modular.to.navigate(
-                                RoutePaths.homePath +
-                                    RoutePaths.landingPageCreatorPath,
+                                "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}/asdad",
                                 arguments: landingPage);
                           },
                           iconSize: 24,
