@@ -97,7 +97,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       await callable.call({
         "id": landingPageModel.id,
         "name": landingPageModel.name,
-        "text": landingPageModel.text,
+        "description": landingPageModel.description,
         "ownerID": landingPageModel.ownerID,
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged,
@@ -130,7 +130,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       await callable.call({
         "id": landingPage.id.value,
         "title": landingPage.name,
-        "text": landingPage.text,
+        "description": landingPage.description,
         "ownerID": landingPage.ownerID?.value,
         "imageData": imageData != null ? base64Encode(imageData) : null,
         "imageHasChanged": imageHasChanged,

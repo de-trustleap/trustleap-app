@@ -36,7 +36,7 @@ class LandingPageCreatorForm extends StatefulWidget {
 
 class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
   final nameTextController = TextEditingController();
-  final textTextController = TextEditingController();
+  final descriptionTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   CustomUser? user;
 
@@ -52,14 +52,14 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
 
     if (widget.landingPage != null) {
       nameTextController.text = widget.landingPage?.name ?? "";
-      textTextController.text = widget.landingPage?.text ?? "";
+      descriptionTextController.text = widget.landingPage?.description ?? "";
     }
   }
 
   @override
   void dispose() {
     nameTextController.dispose();
-    textTextController.dispose();
+    descriptionTextController.dispose();
 
     super.dispose();
   }
@@ -84,12 +84,12 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
         widget.onSaveTap(LandingPage(
             id: widget.id,
             name: nameTextController.text.trim(),
-            text: textTextController.text.trim(),
+            description: descriptionTextController.text.trim(),
             ownerID: user!.id));
       } else {
         widget.onEditTapped(widget.landingPage!.copyWith(
             name: nameTextController.text.trim(),
-            text: textTextController.text.trim()));
+            description: descriptionTextController.text.trim()));
       }
     } else {
       validationHasError = true;
@@ -177,7 +177,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                             children: [
                               FormTextfield(
                                   maxWidth: maxWidth,
-                                  controller: textTextController,
+                                  controller: descriptionTextController,
                                   disabled: false,
                                   placeholder: localization.placeholder_text,
                                   onChanged: resetError,

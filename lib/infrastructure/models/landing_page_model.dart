@@ -10,7 +10,7 @@ class LandingPageModel extends Equatable {
   final String? downloadImageUrl;
   final String? thumbnailDownloadURL;
   final String? ownerID;
-  final String? text;
+  final String? description;
   final List<String>? associatedUsersIDs;
   final DateTime? lastUpdatedAt;
   final dynamic createdAt;
@@ -22,7 +22,7 @@ class LandingPageModel extends Equatable {
       this.downloadImageUrl,
       this.thumbnailDownloadURL,
       this.ownerID,
-      this.text,
+      this.description,
       this.associatedUsersIDs,
       this.lastUpdatedAt,
       required this.createdAt,
@@ -34,7 +34,7 @@ class LandingPageModel extends Equatable {
       String? downloadImageUrl,
       String? thumbnailDownloadURL,
       String? ownerID,
-      String? text,
+      String? description,
       List<String>? associatedUsersIDs,
       DateTime? lastUpdatedAt,
       dynamic createdAt,
@@ -45,7 +45,7 @@ class LandingPageModel extends Equatable {
         downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         ownerID: ownerID ?? this.ownerID,
-        text: text ?? this.text,
+        description: description ?? this.description,
         associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
         createdAt: createdAt ?? this.createdAt,
@@ -59,7 +59,7 @@ class LandingPageModel extends Equatable {
       'downloadImageUrl': downloadImageUrl,
       'thumbnailDownloadURL': thumbnailDownloadURL,
       'ownerID': ownerID,
-      'text': text,
+      'text': description,
       'associatedUsersIDs': associatedUsersIDs,
       'lastUpdatedAt': lastUpdatedAt,
       'createdAt': createdAt,
@@ -78,7 +78,8 @@ class LandingPageModel extends Equatable {
             ? map['thumbnailDownloadURL'] as String
             : null,
         ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
-        text: map['text'] != null ? map['text'] as String : null,
+        description:
+            map['description'] != null ? map['description'] as String : null,
         associatedUsersIDs: map['associatedUsersIDs'] != null
             ? List<String>.from(map['associatedUsersIDs'])
             : null,
@@ -102,7 +103,7 @@ class LandingPageModel extends Equatable {
         downloadImageUrl: downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL,
         ownerID: UniqueID.fromUniqueString(ownerID ?? ""),
-        text: text,
+        description: description,
         associatedUsersIDs: associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate(),
@@ -116,7 +117,7 @@ class LandingPageModel extends Equatable {
         downloadImageUrl: landingPage.downloadImageUrl,
         thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
         ownerID: landingPage.ownerID?.value,
-        text: landingPage.text,
+        description: landingPage.description,
         associatedUsersIDs: landingPage.associatedUsersIDs,
         lastUpdatedAt: landingPage.lastUpdatedAt,
         createdAt: FieldValue.serverTimestamp(),
@@ -130,7 +131,7 @@ class LandingPageModel extends Equatable {
         downloadImageUrl,
         thumbnailDownloadURL,
         ownerID,
-        text,
+        description,
         isDefaultPage
       ];
 }
