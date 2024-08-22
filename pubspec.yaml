@@ -32,13 +32,14 @@ dependencies:
   bloc_concurrency: ^0.2.5
   easy_image_viewer: ^1.4.1
   mockito: ^5.4.4
+  bloc_test: ^9.1.7
+  mocktail: ^1.0.4
   build_runner: ^2.4.9
   collection: ^1.18.0
   flutter_staggered_animations: ^1.1.1
   cloud_functions: ^4.6.8
   http: ^1.2.0
-  bloc_test: ^9.1.7
-  mocktail: ^1.0.4
+  emoji_picker_flutter: ^2.2.0
 
 dev_dependencies:
   flutter_test:

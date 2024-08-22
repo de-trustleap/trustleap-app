@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_emoji_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
@@ -198,6 +199,8 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                         SelectableText(
                             "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter \$name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.",
                             style: themeData.textTheme.bodyMedium),
+                        CustomEmojiPicker(
+                            controller: promotionTemplateTextController),
                         const SizedBox(height: textFieldSpacing),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
