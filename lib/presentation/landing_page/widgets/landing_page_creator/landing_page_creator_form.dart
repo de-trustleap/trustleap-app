@@ -37,6 +37,7 @@ class LandingPageCreatorForm extends StatefulWidget {
 class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
   final nameTextController = TextEditingController();
   final descriptionTextController = TextEditingController();
+  final promotionTemplateTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   CustomUser? user;
 
@@ -53,6 +54,8 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
     if (widget.landingPage != null) {
       nameTextController.text = widget.landingPage?.name ?? "";
       descriptionTextController.text = widget.landingPage?.description ?? "";
+      promotionTemplateTextController.text =
+          widget.landingPage?.promotionTemplate ?? "";
     }
   }
 
@@ -60,6 +63,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
   void dispose() {
     nameTextController.dispose();
     descriptionTextController.dispose();
+    promotionTemplateTextController.dispose();
 
     super.dispose();
   }
@@ -85,11 +89,14 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
             id: widget.id,
             name: nameTextController.text.trim(),
             description: descriptionTextController.text.trim(),
+            promotionTemplate: promotionTemplateTextController.text.trim(),
             ownerID: user!.id));
       } else {
         widget.onEditTapped(widget.landingPage!.copyWith(
-            name: nameTextController.text.trim(),
-            description: descriptionTextController.text.trim()));
+          name: nameTextController.text.trim(),
+          description: descriptionTextController.text.trim(),
+          promotionTemplate: promotionTemplateTextController.text.trim(),
+        ));
       }
     } else {
       validationHasError = true;
@@ -179,11 +186,31 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                   maxWidth: maxWidth,
                                   controller: descriptionTextController,
                                   disabled: false,
-                                  placeholder: localization.placeholder_text,
+                                  placeholder:
+                                      localization.placeholder_description,
                                   onChanged: resetError,
                                   validator: validator.validateLandingPageText,
                                   minLines: 2,
                                   maxLines: 5,
+                                  keyboardType: TextInputType.multiline)
+                            ]),
+                        const SizedBox(height: textFieldSpacing * 2),
+                        SelectableText(
+                            "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter \$name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.",
+                            style: themeData.textTheme.bodyMedium),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FormTextfield(
+                                  maxWidth: maxWidth,
+                                  controller: promotionTemplateTextController,
+                                  disabled: false,
+                                  placeholder:
+                                      "Vorlage für Promoter (optional)",
+                                  onChanged: resetError,
+                                  minLines: 4,
+                                  maxLines: 10,
                                   keyboardType: TextInputType.multiline)
                             ]),
                         const SizedBox(height: textFieldSpacing * 2),

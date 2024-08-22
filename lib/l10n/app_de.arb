@@ -272,9 +272,9 @@
     "@placeholder_title": {
         "description": "Platzhalter textbox für Titel"
     },
-    "placeholder_text": "Text",
-    "@placeholder_text": {
-        "description": "Platzhalter textbox für Text"
+    "placeholder_description": "Beschreibung",
+    "@placeholder_description": {
+        "description": "Platzhalter textbox für Beschreibung"
     },
     "error_msg_pleace_upload_picture": "Bitte ein Bild hochladen",
     "@error_msg_pleace_upload_picture": {

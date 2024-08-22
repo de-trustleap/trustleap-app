@@ -209,7 +209,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get placeholder_title => 'Title';
 
   @override
-  String get placeholder_text => 'Text';
+  String get placeholder_description => 'Description';
 
   @override
   String get error_msg_pleace_upload_picture => 'Please upload an image';

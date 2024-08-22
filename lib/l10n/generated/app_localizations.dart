@@ -501,11 +501,11 @@ abstract class AppLocalizations {
   /// **'Title'**
   String get placeholder_title;
 
-  /// Platzhalter textbox for Text
+  /// Placeholder textbox for description
   ///
   /// In en, this message translates to:
-  /// **'Text'**
-  String get placeholder_text;
+  /// **'Description'**
+  String get placeholder_description;
 
   /// Error message when no image has been uploaded.
   ///
