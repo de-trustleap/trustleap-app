@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CustomEmojiPicker extends StatelessWidget {
@@ -13,6 +14,7 @@ class CustomEmojiPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return EmojiPicker(
         textEditingController: controller,
@@ -38,7 +40,7 @@ class CustomEmojiPicker extends StatelessWidget {
               backgroundColor: Colors.transparent,
               buttonColor: Colors.transparent,
               buttonIconColor: themeData.colorScheme.secondary,
-              hintText: "Suche Emoji"),
+              hintText: localization.emoji_search_placeholder),
         ));
   }
 }

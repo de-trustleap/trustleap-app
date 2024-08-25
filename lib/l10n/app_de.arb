@@ -260,6 +260,18 @@
     "@landingpage_create_txt": {
         "description": "Text Landingpage erstellen"
     },
+    "landingpage_create_promotion_template_description": "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter $name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.",
+    "@landingpage_create_promotion_template_description": {
+        "description": "Beschreibung für das Promotion Template Textfeld auf der Landingpage erstellen Seite"
+    },
+    "landingpage_create_promotion_template_placeholder": "Vorlage für Promoter (optional)",
+    "@landingpage_create_promotion_template_placeholder": {
+        "description": "Platzhalter für das Promotion Template Textfeld"
+    },
+    "emoji_search_placeholder": "Suche Emoji",
+    "@emoji_search_placeholder": {
+        "description": "Platzhalter für die Suchleiste für die Emoji Suche"
+    },
     "landingpage_overview_context_menu_delete": "Löschen",
     "@landingpage_overview_context_menu_delete": {
         "description": "Löschen Button im Kontextmenü auf der Landingpage Übersichtsseite"

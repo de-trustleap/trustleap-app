@@ -197,7 +197,8 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                             ]),
                         const SizedBox(height: textFieldSpacing * 2),
                         SelectableText(
-                            "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter \$name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.",
+                            localization
+                                .landingpage_create_promotion_template_description,
                             style: themeData.textTheme.bodyMedium),
                         CustomEmojiPicker(
                             controller: promotionTemplateTextController),
@@ -209,8 +210,8 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                   maxWidth: maxWidth,
                                   controller: promotionTemplateTextController,
                                   disabled: false,
-                                  placeholder:
-                                      "Vorlage für Promoter (optional)",
+                                  placeholder: localization
+                                      .landingpage_create_promotion_template_placeholder,
                                   onChanged: resetError,
                                   minLines: 4,
                                   maxLines: 10,
@@ -254,3 +255,4 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
     );
   }
 }
+// TODO: Localizations müssen noch ergänzt werden und Tests müssen gefixt werden!

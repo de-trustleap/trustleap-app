@@ -260,6 +260,18 @@
     "@landingpage_create_txt": {
         "description": "Text for Creating Landing Page"
     },
+    "landingpage_create_promotion_template_description": "Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use the placeholder $name to display the name of the recommendation recipient.",
+    "@landingpage_create_promotion_template_description": {
+        "description": "Description for the promotion template textfield on the create landingpage form"
+    },
+    "landingpage_create_promotion_template_placeholder": "Template for promoter (optional)",
+    "@landingpage_create_promotion_template_placeholder": {
+        "description": "Placeholder for the promotion template textfield"
+    },
+    "emoji_search_placeholder": "Search Emoji",
+    "@emoji_search_placeholder": {
+        "description": "Placeholder for the search bar for the emoji search"
+    },
     "landingpage_overview_context_menu_delete": "Delete",
     "@landingpage_overview_context_menu_delete": {
         "description": "Delete button in the context menu on the landing page overview page."

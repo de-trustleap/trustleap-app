@@ -483,6 +483,24 @@ abstract class AppLocalizations {
   /// **'Create Landing Page'**
   String get landingpage_create_txt;
 
+  /// Description for the promotion template textfield on the create landingpage form
+  ///
+  /// In en, this message translates to:
+  /// **'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use the placeholder \$name to display the name of the recommendation recipient.'**
+  String get landingpage_create_promotion_template_description;
+
+  /// Placeholder for the promotion template textfield
+  ///
+  /// In en, this message translates to:
+  /// **'Template for promoter (optional)'**
+  String get landingpage_create_promotion_template_placeholder;
+
+  /// Placeholder for the search bar for the emoji search
+  ///
+  /// In en, this message translates to:
+  /// **'Search Emoji'**
+  String get emoji_search_placeholder;
+
   /// Delete button in the context menu on the landing page overview page.
   ///
   /// In en, this message translates to:
