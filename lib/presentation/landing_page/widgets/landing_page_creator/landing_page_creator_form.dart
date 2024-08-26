@@ -82,15 +82,21 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
     });
   }
 
-  void submit(LandingPageCreatorFormValidator validator) {
+  void submit(LandingPageCreatorFormValidator validator,
+      AppLocalizations localization) {
     if (formKey.currentState!.validate() && user != null) {
       validationHasError = false;
+      var promotionTemplateText = promotionTemplateTextController.text.trim();
+      if (promotionTemplateText == "") {
+        promotionTemplateText =
+            localization.landingpage_create_promotion_template_default_text;
+      }
       if (widget.landingPage == null) {
         widget.onSaveTap(LandingPage(
             id: widget.id,
             name: nameTextController.text.trim(),
             description: descriptionTextController.text.trim(),
-            promotionTemplate: promotionTemplateTextController.text.trim(),
+            promotionTemplate: promotionTemplateText,
             ownerID: user!.id));
       } else {
         widget.onEditTapped(widget.landingPage!.copyWith(
@@ -235,7 +241,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                     ? maxWidth - textFieldSpacing
                                     : maxWidth / 2 - textFieldSpacing,
                                 onTap: () {
-                                  submit(validator);
+                                  submit(validator, localization);
                                 })
                           ],
                         ),

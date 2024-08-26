@@ -206,6 +206,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_create_promotion_template_placeholder => 'Template for promoter (optional)';
 
   @override
+  String get landingpage_create_promotion_template_default_text => 'This is the promotion template.';
+
+  @override
   String get emoji_search_placeholder => 'Search Emoji';
 
   @override

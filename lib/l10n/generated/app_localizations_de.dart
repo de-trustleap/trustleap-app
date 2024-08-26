@@ -206,6 +206,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_create_promotion_template_placeholder => 'Vorlage für Promoter (optional)';
 
   @override
+  String get landingpage_create_promotion_template_default_text => 'Das ist eine Vorlage für Empfehlungen.';
+
+  @override
   String get emoji_search_placeholder => 'Suche Emoji';
 
   @override

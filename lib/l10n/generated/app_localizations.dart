@@ -495,6 +495,12 @@ abstract class AppLocalizations {
   /// **'Template for promoter (optional)'**
   String get landingpage_create_promotion_template_placeholder;
 
+  /// The promotion template text will be replaced with this text if it is not set
+  ///
+  /// In en, this message translates to:
+  /// **'This is the promotion template.'**
+  String get landingpage_create_promotion_template_default_text;
+
   /// Placeholder for the search bar for the emoji search
   ///
   /// In en, this message translates to:
