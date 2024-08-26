@@ -123,11 +123,10 @@ class UnregisteredPromoterModel extends Equatable {
         birthDate: birthDate,
         email: email,
         landingPageIDs: landingPageIDs,
-        defaultLandingPageID:
-            UniqueID.fromUniqueString(defaultLandingPageID ?? ""),
-        parentUserID: UniqueID.fromUniqueString(parentUserID ?? ""),
-        companyID: UniqueID.fromUniqueString(companyID ?? ""),
-        code: UniqueID.fromUniqueString(code ?? ""),
+        defaultLandingPageID: defaultLandingPageID != null ? UniqueID.fromUniqueString(defaultLandingPageID ?? "") : null,
+        parentUserID: parentUserID != null ? UniqueID.fromUniqueString(parentUserID ?? "") : null,
+        companyID: companyID != null ? UniqueID.fromUniqueString(companyID ?? "") : null,
+        code: code != null ? UniqueID.fromUniqueString(code ?? "") : null,
         expiresAt: expiresAt);
   }
 

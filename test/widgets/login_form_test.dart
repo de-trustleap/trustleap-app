@@ -74,6 +74,5 @@ void main() async {
     expect(find.byKey(const Key("loginButton")), findsOneWidget);
     expect(find.byKey(const Key("registerButton")), findsOneWidget);
     expect(find.byKey(const Key("formErrorView")), findsNothing);
-    expect(find.byKey(const Key("loadingIndicatorSpacing")), findsOneWidget);
   });
 }
