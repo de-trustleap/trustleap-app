@@ -8,8 +8,6 @@ import 'package:intl/intl.dart' as intl;
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 
-// ignore_for_file: type=lint
-
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
 ///
@@ -1042,6 +1040,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'In order to create a new promoter it is necessary to have an active landing page.'**
   String get register_promoter_no_landingpage_subtitle;
+
   /// Error message that appears if no landing page was assigned during promoter registration.
   ///
   /// In en, this message translates to:
