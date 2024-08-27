@@ -32,7 +32,9 @@ void main() {
           lastName: "Mustermann",
           birthDate: "23.12.2023",
           email: "tester@test.de",
+          defaultLandingPageID: "4",
           parentUserID: "2",
+          companyID: "3",
           code: "1234",
           expiresAt: date,
           createdAt: Timestamp(1000000, 0));
@@ -44,7 +46,9 @@ void main() {
         "birthDate": "23.12.2023",
         "email": "tester@test.de",
         "landingPageIDs": null,
+        "defaultLandingPageID": "4",
         "parentUserID": "2",
+        "companyID": "3",
         "code": "1234",
         "expiresAt": date,
         "createdAt": Timestamp(1000000, 0)
@@ -134,6 +138,8 @@ void main() {
           lastName: "Mustermann",
           birthDate: "23.12.2023",
           parentUserID: UniqueID.fromUniqueString("2"),
+          companyID: UniqueID.fromUniqueString("3"),
+          defaultLandingPageID: UniqueID.fromUniqueString("4"),
           code: UniqueID.fromUniqueString("1234"),
           expiresAt: date);
       final expectedResult = UnregisteredPromoterModel(
@@ -143,6 +149,8 @@ void main() {
           lastName: "Mustermann",
           birthDate: "23.12.2023",
           parentUserID: "2",
+          companyID: "3",
+          defaultLandingPageID: "4",
           code: "1234",
           expiresAt: date);
       // When

@@ -260,6 +260,26 @@
     "@landingpage_create_txt": {
         "description": "Text Landingpage erstellen"
     },
+    "landingpage_create_promotion_template_description": "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter $name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.",
+    "@landingpage_create_promotion_template_description": {
+        "description": "Beschreibung für das Promotion Template Textfeld auf der Landingpage erstellen Seite"
+    },
+    "landingpage_create_promotion_template_placeholder": "Vorlage für Promoter (optional)",
+    "@landingpage_create_promotion_template_placeholder": {
+        "description": "Platzhalter für das Promotion Template Textfeld"
+    },
+    "landingpage_create_promotion_template_default_text": "Das ist eine Vorlage für Empfehlungen.",
+    "@landingpage_create_promotion_template_default_text": {
+        "description": "Der Promotion Template Text wird durch diesen Text ersetzt, wenn er nicht gesetzt wurde"
+    },
+    "emoji_search_placeholder": "Suche Emoji",
+    "@emoji_search_placeholder": {
+        "description": "Platzhalter für die Suchleiste für die Emoji Suche"
+    },
+    "open_emoji_picker_tooltip": "Emoji Picker öffnen",
+    "@open_emoji_picker_tooltip": {
+        "description": "Tooltip für den Button der den Emoji Picker öffnet"
+    },
     "landingpage_overview_context_menu_delete": "Löschen",
     "@landingpage_overview_context_menu_delete": {
         "description": "Löschen Button im Kontextmenü auf der Landingpage Übersichtsseite"
@@ -272,9 +292,9 @@
     "@placeholder_title": {
         "description": "Platzhalter textbox für Titel"
     },
-    "placeholder_text": "Text",
-    "@placeholder_text": {
-        "description": "Platzhalter textbox für Text"
+    "placeholder_description": "Beschreibung",
+    "@placeholder_description": {
+        "description": "Platzhalter textbox für Beschreibung"
     },
     "error_msg_pleace_upload_picture": "Bitte ein Bild hochladen",
     "@error_msg_pleace_upload_picture": {

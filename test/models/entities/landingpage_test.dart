@@ -11,17 +11,17 @@ void main() {
       final landingPage = LandingPage(
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
-          text: "TestText",
+          description: "TestText",
           downloadImageUrl: "www.downloadImageUrl.de");
 
       final expectedResult = LandingPage(
           id: UniqueID.fromUniqueString("1"),
           name: "TestNew",
-          text: "TestTextNew",
+          description: "TestTextNew",
           downloadImageUrl: "https://trust-leap.de");
       // When
       final result =
-          landingPage.copyWith(name: "TestNew", text: "TestTextNew", downloadImageUrl: "https://trust-leap.de");
+          landingPage.copyWith(name: "TestNew", description: "TestTextNew", downloadImageUrl: "https://trust-leap.de");
       // Then
       expect(result, expectedResult);
     });
@@ -33,7 +33,7 @@ void main() {
       final landingPage1 = LandingPage(
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
-          text: "TestText",
+          description: "TestText",
           downloadImageUrl: "https://trust-leap.de",
           thumbnailDownloadURL: "TestThumbnailDownloadURL",
           ownerID: UniqueID.fromUniqueString("1"),
@@ -43,7 +43,7 @@ void main() {
       final landingPage2 = LandingPage(
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
-          text: "TestText",
+          description: "TestText",
           downloadImageUrl: "https://trust-leap.de",
           thumbnailDownloadURL: "TestThumbnailDownloadURL",
           ownerID: UniqueID.fromUniqueString("1"),

@@ -22,6 +22,8 @@ class SideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool shouldShowThemeSwitcher = widthAnimation != null &&
+        widthAnimation!.value >= MenuDimensions.menuOpenWidth;
     return BlocProvider.value(
       value: BlocProvider.of<MenuCubit>(context),
       child: BlocBuilder<MenuCubit, MenuState>(
@@ -84,14 +86,14 @@ class SideMenu extends StatelessWidget {
                   animationController: animationController),
               const SizedBox(height: 56),
               AnimatedOpacity(
-                  opacity: (widthAnimation != null &&
-                          widthAnimation!.value >= MenuDimensions.menuOpenWidth)
-                      ? 1.0
-                      : 0,
+                  opacity: shouldShowThemeSwitcher ? 1.0 : 0,
                   duration: const Duration(milliseconds: 100),
-                  child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [ThemeSwitch()])),
+                  child: IgnorePointer(
+                    ignoring: !shouldShowThemeSwitcher,
+                    child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [ThemeSwitch()]),
+                  )),
             ]),
           ]);
         },
