@@ -276,6 +276,10 @@
     "@emoji_search_placeholder": {
         "description": "Platzhalter für die Suchleiste für die Emoji Suche"
     },
+    "open_emoji_picker_tooltip": "Emoji Picker öffnen",
+    "@open_emoji_picker_tooltip": {
+        "description": "Tooltip für den Button der den Emoji Picker öffnet"
+    },
     "landingpage_overview_context_menu_delete": "Löschen",
     "@landingpage_overview_context_menu_delete": {
         "description": "Löschen Button im Kontextmenü auf der Landingpage Übersichtsseite"

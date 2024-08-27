@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_emoji_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -46,6 +47,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
   String errorMessage = "";
   bool validationHasError = false;
   bool buttonDisabled = false;
+  bool _isEmojiPickerExpanded = false;
 
   @override
   void initState() {
@@ -206,9 +208,29 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                             localization
                                 .landingpage_create_promotion_template_description,
                             style: themeData.textTheme.bodyMedium),
-                        CustomEmojiPicker(
-                            controller: promotionTemplateTextController),
                         const SizedBox(height: textFieldSpacing),
+                        InkWell(
+                            onTap: () {
+                              setState(() {
+                                _isEmojiPickerExpanded =
+                                    !_isEmojiPickerExpanded;
+                              });
+                            },
+                            child: Tooltip(
+                              message: localization.open_emoji_picker_tooltip,
+                              child: Text("😃",
+                                  style: themeData.textTheme.bodyLarge),
+                            )),
+                        ExpandedSection(
+                            expand: _isEmojiPickerExpanded,
+                            child: Column(
+                              children: [
+                                CustomEmojiPicker(
+                                    controller:
+                                        promotionTemplateTextController),
+                                const SizedBox(height: textFieldSpacing),
+                              ],
+                            )),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

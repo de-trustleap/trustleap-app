@@ -276,6 +276,10 @@
     "@emoji_search_placeholder": {
         "description": "Placeholder for the search bar for the emoji search"
     },
+    "open_emoji_picker_tooltip": "Open emoji picker",
+    "@open_emoji_picker_tooltip": {
+        "description": "Tooltip for the button that can open and close the emoji picker"
+    },
     "landingpage_overview_context_menu_delete": "Delete",
     "@landingpage_overview_context_menu_delete": {
         "description": "Delete button in the context menu on the landing page overview page."

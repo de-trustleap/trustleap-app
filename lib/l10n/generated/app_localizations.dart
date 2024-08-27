@@ -507,6 +507,12 @@ abstract class AppLocalizations {
   /// **'Search Emoji'**
   String get emoji_search_placeholder;
 
+  /// Tooltip for the button that can open and close the emoji picker
+  ///
+  /// In en, this message translates to:
+  /// **'Open emoji picker'**
+  String get open_emoji_picker_tooltip;
+
   /// Delete button in the context menu on the landing page overview page.
   ///
   /// In en, this message translates to:

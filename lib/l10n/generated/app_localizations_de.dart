@@ -212,6 +212,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get emoji_search_placeholder => 'Suche Emoji';
 
   @override
+  String get open_emoji_picker_tooltip => 'Emoji Picker öffnen';
+
+  @override
   String get landingpage_overview_context_menu_delete => 'Löschen';
 
   @override
