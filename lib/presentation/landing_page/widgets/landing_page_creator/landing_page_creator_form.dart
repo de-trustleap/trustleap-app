@@ -209,28 +209,30 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                 .landingpage_create_promotion_template_description,
                             style: themeData.textTheme.bodyMedium),
                         const SizedBox(height: textFieldSpacing),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                _isEmojiPickerExpanded =
-                                    !_isEmojiPickerExpanded;
-                              });
-                            },
-                            child: Tooltip(
-                              message: localization.open_emoji_picker_tooltip,
-                              child: Text("😃",
-                                  style: themeData.textTheme.bodyLarge),
-                            )),
-                        ExpandedSection(
-                            expand: _isEmojiPickerExpanded,
-                            child: Column(
-                              children: [
-                                CustomEmojiPicker(
-                                    controller:
-                                        promotionTemplateTextController),
-                                const SizedBox(height: textFieldSpacing),
-                              ],
-                            )),
+                        if (responsiveValue.isDesktop) ...[
+                          InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _isEmojiPickerExpanded =
+                                      !_isEmojiPickerExpanded;
+                                });
+                              },
+                              child: Tooltip(
+                                message: localization.open_emoji_picker_tooltip,
+                                child: Text("😃",
+                                    style: themeData.textTheme.bodyLarge),
+                              )),
+                          ExpandedSection(
+                              expand: _isEmojiPickerExpanded,
+                              child: Column(
+                                children: [
+                                  CustomEmojiPicker(
+                                      controller:
+                                          promotionTemplateTextController),
+                                  const SizedBox(height: textFieldSpacing),
+                                ],
+                              )),
+                        ],
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
