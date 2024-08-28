@@ -67,13 +67,26 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                       IconButton(
                           onPressed: () {
                             Modular.to.navigate(
-                                "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}/asdad",
+                                "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
                                 arguments: landingPage);
                           },
                           iconSize: 24,
                           tooltip:
                               localizations.landingpage_overview_edit_tooltip,
                           icon: Icon(Icons.edit,
+                              color: themeData.colorScheme.secondary,
+                              size: 24)),
+                      const Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            Modular.to.navigate(
+                                "${RoutePaths.homePath}${RoutePaths.landingPagePath}/${landingPage.id.value}",
+                                arguments: landingPage);
+                          },
+                          iconSize: 24,
+                          tooltip:
+                              localizations.landingpage_overview_edit_tooltip,
+                          icon: Icon(Icons.remove_red_eye,
                               color: themeData.colorScheme.secondary,
                               size: 24)),
                       const Spacer(),
