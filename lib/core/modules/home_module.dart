@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/presentation/activity_page/activity_page.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/home_page.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/dashboard_page.dart';
 import 'package:finanzbegleiter/presentation/landing_page/landing_page.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_view.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator.dart';
 import 'package:finanzbegleiter/presentation/profile_page/profile_page.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company_registration/company_registration_page.dart';
@@ -35,6 +36,8 @@ class HomeModule extends Module {
                   )),
           ChildRoute(RoutePaths.landingPageCreatorPath,
               child: (_) => LandingPageCreator(landingPage: r.args.data)),
+          ChildRoute(RoutePaths.landingPageBuilderPath,
+              child: (_) => const LandingPageBuilderView()),
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),
         ]);
