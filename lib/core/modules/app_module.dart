@@ -11,6 +11,7 @@ import 'package:finanzbegleiter/application/images/landing_page/landing_page_ima
 import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
+import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
@@ -66,6 +67,7 @@ class AppModule extends Module {
           LandingPageRepositoryImplementation.new)
 
       ..addLazySingleton(ProfileObserverBloc.new)
+      ..addLazySingleton(PagebuilderCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)

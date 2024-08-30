@@ -805,4 +805,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recommendations_form_add_button_tooltip => 'Empfehlung hinzufügen';
+
+  @override
+  String get landingpage_pagebuilder_container_request_error => 'Beim Abruf der Daten ist ein Fehler aufgetreten';
 }

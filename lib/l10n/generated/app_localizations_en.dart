@@ -805,4 +805,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendations_form_add_button_tooltip => 'Add recommendation';
+
+  @override
+  String get landingpage_pagebuilder_container_request_error => 'An error occurred while retrieving the data';
 }

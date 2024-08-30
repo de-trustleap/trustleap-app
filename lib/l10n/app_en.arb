@@ -1075,5 +1075,9 @@
     "recommendations_form_add_button_tooltip": "Add recommendation",
     "@recommendations_form_add_button_tooltip": {
         "description": "Tooltip for the add recommendation button in the recommendations form"
+    },
+    "landingpage_pagebuilder_container_request_error": "An error occurred while retrieving the data",
+    "@landingpage_pagebuilder_container_request_error": {
+        "description": "Error message on the page builder page if request fails"
     }
 }

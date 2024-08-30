@@ -44,7 +44,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
 
     return InkWell(
       onTap: () => Modular.to
-          .navigate(RoutePaths.homePath + RoutePaths.landingPageBuilderPath),
+          .navigate("${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
       child: Container(
         width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
         height: responsiveValue.largerThan(MOBILE) ? 300 : 300,

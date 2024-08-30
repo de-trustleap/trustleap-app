@@ -36,7 +36,7 @@ class HomeModule extends Module {
                   )),
           ChildRoute(RoutePaths.landingPageCreatorPath,
               child: (_) => LandingPageCreator(landingPage: r.args.data)),
-          ChildRoute(RoutePaths.landingPageBuilderPath,
+          ChildRoute("${RoutePaths.landingPageBuilderPath}/:id",
               child: (_) => const LandingPageBuilderView()),
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),

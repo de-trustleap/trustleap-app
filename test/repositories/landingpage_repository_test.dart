@@ -201,4 +201,35 @@ void main() {
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
   });
+
+  group("LandingPageRepositoryImplementation_getLandingPage", () {
+    const landingPageID = "1";
+    final testLandingPage = LandingPage(id: UniqueID.fromUniqueString("1"));
+
+    test("should return landing page when the call was successful", () async {
+      // Given
+      final expectedResult = right(testLandingPage);
+      when(mockLandingPageRepo.getLandingPage(landingPageID))
+          .thenAnswer((_) async => right(testLandingPage));
+      // When
+      final result = await mockLandingPageRepo.getLandingPage(landingPageID);
+      // Then
+      verify(mockLandingPageRepo.getLandingPage(landingPageID));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.getLandingPage(landingPageID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockLandingPageRepo.getLandingPage(landingPageID);
+      // Then
+      verify(mockLandingPageRepo.getLandingPage(landingPageID));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+  });
 }
