@@ -28,7 +28,7 @@ void main() {
     final testLandingPage = LandingPage(
         id: UniqueID.fromUniqueString("1"),
         name: "Test",
-        text: "Test",
+        description: "Test",
         ownerID: UniqueID.fromUniqueString("1"));
     final testImageData = Uint8List(1);
     const imageHasChanged = false;
@@ -89,7 +89,7 @@ void main() {
     final testLandingPage = LandingPage(
         id: UniqueID.fromUniqueString("2"),
         name: "Test",
-        text: "Test",
+        description: "Test",
         ownerID: UniqueID.fromUniqueString("2"));
     final testImageData = Uint8List(2);
     const imageHasChanged = true;

@@ -23,5 +23,4 @@ class LandingPageCreatorFormValidator {
       return null;
     }
   }
-
 }
