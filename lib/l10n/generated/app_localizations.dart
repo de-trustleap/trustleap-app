@@ -1641,6 +1641,12 @@ abstract class AppLocalizations {
   /// **'Edit landingpage'**
   String get landingpage_overview_edit_tooltip;
 
+  /// Tooltip for landingpage show button on the landingpage overview
+  ///
+  /// In en, this message translates to:
+  /// **'Show Landingpage'**
+  String get landingpage_overview_show_tooltip;
+
   /// Tooltip for the button for changing the email address on the profile page
   ///
   /// In en, this message translates to:

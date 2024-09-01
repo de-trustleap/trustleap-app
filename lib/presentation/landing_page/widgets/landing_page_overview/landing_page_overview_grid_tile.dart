@@ -85,7 +85,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                           },
                           iconSize: 24,
                           tooltip:
-                              localizations.landingpage_overview_edit_tooltip,
+                              localizations.landingpage_overview_show_tooltip,
                           icon: Icon(Icons.remove_red_eye,
                               color: themeData.colorScheme.secondary,
                               size: 24)),
