@@ -6,7 +6,6 @@ class LandingPage extends Equatable {
   final UniqueID id;
   final String? name;
   final String? downloadImageUrl;
-  final String? url;
   final String? thumbnailDownloadURL;
   final UniqueID? ownerID;
   final String? text;
@@ -19,7 +18,6 @@ class LandingPage extends Equatable {
       {required this.id,
       this.name,
       this.downloadImageUrl,
-      this.url,
       this.thumbnailDownloadURL,
       this.ownerID,
       this.text,
@@ -32,7 +30,6 @@ class LandingPage extends Equatable {
       {UniqueID? id,
       String? name,
       String? downloadImageUrl,
-      String? url,
       String? thumbnailDownloadURL,
       UniqueID? ownerID,
       String? text,
@@ -44,7 +41,6 @@ class LandingPage extends Equatable {
         id: id ?? this.id,
         name: name ?? this.name,
         downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
-        url: url ?? this.url,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         ownerID: ownerID ?? this.ownerID,
         text: text ?? this.text,
@@ -56,5 +52,5 @@ class LandingPage extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, downloadImageUrl, url, thumbnailDownloadURL, ownerID, text, isDefaultPage];
+      [id, name, downloadImageUrl, thumbnailDownloadURL, ownerID, text, isDefaultPage];
 }

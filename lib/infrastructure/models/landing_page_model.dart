@@ -8,7 +8,6 @@ class LandingPageModel extends Equatable {
   final String id;
   final String? name;
   final String? downloadImageUrl;
-  final String? url;
   final String? thumbnailDownloadURL;
   final String? ownerID;
   final String? text;
@@ -21,7 +20,6 @@ class LandingPageModel extends Equatable {
       {required this.id,
       this.name,
       this.downloadImageUrl,
-      this.url,
       this.thumbnailDownloadURL,
       this.ownerID,
       this.text,
@@ -34,7 +32,6 @@ class LandingPageModel extends Equatable {
       {String? id,
       String? name,
       String? downloadImageUrl,
-      String? url,
       String? thumbnailDownloadURL,
       String? ownerID,
       String? text,
@@ -46,7 +43,6 @@ class LandingPageModel extends Equatable {
         id: id ?? this.id,
         name: name ?? this.name,
         downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
-        url: url ?? this.url,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         ownerID: ownerID ?? this.ownerID,
         text: text ?? this.text,
@@ -61,7 +57,6 @@ class LandingPageModel extends Equatable {
       'id': id,
       'name': name,
       'downloadImageUrl': downloadImageUrl,
-      'url': url,
       'thumbnailDownloadURL': thumbnailDownloadURL,
       'ownerID': ownerID,
       'text': text,
@@ -78,9 +73,6 @@ class LandingPageModel extends Equatable {
         name: map['name'] != null ? map['name'] as String : null,
         downloadImageUrl: map['downloadImageUrl'] != null
             ? map['downloadImageUrl'] as String
-            : null,
-        url: map['url'] != null
-            ? map['url'] as String
             : null,
         thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
             ? map['thumbnailDownloadURL'] as String
@@ -108,7 +100,6 @@ class LandingPageModel extends Equatable {
         id: UniqueID.fromUniqueString(id),
         name: name,
         downloadImageUrl: downloadImageUrl,
-        url: url,
         thumbnailDownloadURL: thumbnailDownloadURL,
         ownerID: UniqueID.fromUniqueString(ownerID ?? ""),
         text: text,
@@ -123,7 +114,6 @@ class LandingPageModel extends Equatable {
         id: landingPage.id.value,
         name: landingPage.name,
         downloadImageUrl: landingPage.downloadImageUrl,
-        url: landingPage.url,
         thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
         ownerID: landingPage.ownerID?.value,
         text: landingPage.text,
@@ -138,7 +128,6 @@ class LandingPageModel extends Equatable {
         id,
         name,
         downloadImageUrl,
-        url,
         thumbnailDownloadURL,
         ownerID,
         text,

@@ -99,7 +99,6 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "id": landingPageModel.id,
         "name": landingPageModel.name,
         "text": landingPageModel.text,
-        "url":   "${Uri.base.origin}${RoutePaths.homePath}/${landingPageModel.id}",
         "ownerID": landingPageModel.ownerID,
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged,
