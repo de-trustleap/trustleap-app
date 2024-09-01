@@ -14,7 +14,6 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
-import 'package:finanzbegleiter/route_paths.dart';
 
 class LandingPageRepositoryImplementation implements LandingPageRepository {
   final FirebaseFirestore firestore;
