@@ -148,6 +148,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
                   }, localization);
                 },
               )),
+              SizedBox(height: responsiveValue.isMobile ? 50 : 100),
               if (showError && errorMessage != "") ...[
                 const SizedBox(height: 20),
                 CenteredConstrainedWrapper(

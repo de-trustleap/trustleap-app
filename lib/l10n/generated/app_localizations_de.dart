@@ -200,6 +200,21 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_create_txt => 'Landingpage erstellen';
 
   @override
+  String get landingpage_create_promotion_template_description => 'Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter \$name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.';
+
+  @override
+  String get landingpage_create_promotion_template_placeholder => 'Vorlage für Promoter (optional)';
+
+  @override
+  String get landingpage_create_promotion_template_default_text => 'Das ist eine Vorlage für Empfehlungen.';
+
+  @override
+  String get emoji_search_placeholder => 'Suche Emoji';
+
+  @override
+  String get open_emoji_picker_tooltip => 'Emoji Picker öffnen';
+
+  @override
   String get landingpage_overview_context_menu_delete => 'Löschen';
 
   @override
@@ -209,7 +224,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get placeholder_title => 'Titel';
 
   @override
-  String get placeholder_text => 'Text';
+  String get placeholder_description => 'Beschreibung';
 
   @override
   String get error_msg_pleace_upload_picture => 'Bitte ein Bild hochladen';

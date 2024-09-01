@@ -26,7 +26,8 @@ void main() {
       final model = LandingPageModel(
           id: "1",
           name: "Test",
-          text: "TestX",
+          description: "TestX",
+          promotionTemplate: "Template Test",
           downloadImageUrl: "url",
           thumbnailDownloadURL: "thumb_url",
           ownerID: "2",
@@ -38,7 +39,8 @@ void main() {
       final expectedResult = {
         "id": "1",
         "name": "Test",
-        "text": "TestX",
+        "description": "TestX",
+        "promotionTemplate": "Template Test",
         "downloadImageUrl": "url",
         "thumbnailDownloadURL": "thumb_url",
         "ownerID": "2",
@@ -60,7 +62,7 @@ void main() {
       final map = {
         "id": "1",
         "name": "Test",
-        "text": "TestX",
+        "description": "TestX",
         "downloadImageUrl": "url",
         "thumbnailDownloadURL": "thumb_url",
         "ownerID": "2",
@@ -72,7 +74,7 @@ void main() {
       final expectedResult = LandingPageModel(
           id: "",
           name: "Test",
-          text: "TestX",
+          description: "TestX",
           downloadImageUrl: "url",
           thumbnailDownloadURL: "thumb_url",
           ownerID: "2",
@@ -93,7 +95,7 @@ void main() {
       final map = {
         "id": "",
         "name": "Test",
-        "text": "TestX",
+        "description": "TestX",
         "downloadImageUrl": "url",
         "thumbnailDownloadURL": "thumb_url",
         "ownerID": "2",
@@ -105,7 +107,7 @@ void main() {
       final expectedResult = LandingPageModel(
           id: "1",
           name: "Test",
-          text: "TestX",
+          description: "TestX",
           downloadImageUrl: "url",
           thumbnailDownloadURL: "thumb_url",
           ownerID: "2",
@@ -126,7 +128,7 @@ void main() {
       final model = LandingPageModel(
           id: "1",
           name: "Test",
-          text: "TestX",
+          description: "TestX",
           downloadImageUrl: "url",
           thumbnailDownloadURL: "thumb_url",
           ownerID: "2",
@@ -137,7 +139,7 @@ void main() {
       final exoectedResult = LandingPage(
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
-          text: "TestX",
+          description: "TestX",
           downloadImageUrl: "url",
           thumbnailDownloadURL: "thumb_url",
           ownerID: UniqueID.fromUniqueString("2"),
@@ -157,7 +159,7 @@ void main() {
       final model = LandingPage(
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
-          text: "TestX",
+          description: "TestX",
           downloadImageUrl: "url",
           thumbnailDownloadURL: "thumb_url",
           ownerID: UniqueID.fromUniqueString("2"),
@@ -168,7 +170,7 @@ void main() {
       final expectedResult = LandingPageModel(
           id: "1",
           name: "Test",
-          text: "TestX",
+          description: "TestX",
           downloadImageUrl: "url",
           thumbnailDownloadURL: "thumb_url",
           ownerID: "2",
@@ -189,7 +191,7 @@ void main() {
       final model = LandingPageModel(
           id: "1",
           name: "Test",
-          text: "TestX",
+          description: "TestX",
           downloadImageUrl: "url",
           thumbnailDownloadURL: "thumb_url",
           ownerID: "2",
@@ -200,7 +202,7 @@ void main() {
       final model2 = LandingPageModel(
           id: "1",
           name: "Test",
-          text: "TestX",
+          description: "TestX",
           downloadImageUrl: "url",
           thumbnailDownloadURL: "thumb_url",
           ownerID: "2",

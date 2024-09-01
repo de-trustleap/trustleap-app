@@ -260,6 +260,26 @@
     "@landingpage_create_txt": {
         "description": "Text for Creating Landing Page"
     },
+    "landingpage_create_promotion_template_description": "Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use the placeholder $name to display the name of the recommendation recipient.",
+    "@landingpage_create_promotion_template_description": {
+        "description": "Description for the promotion template textfield on the create landingpage form"
+    },
+    "landingpage_create_promotion_template_placeholder": "Template for promoter (optional)",
+    "@landingpage_create_promotion_template_placeholder": {
+        "description": "Placeholder for the promotion template textfield"
+    },
+    "landingpage_create_promotion_template_default_text": "This is the promotion template.",
+    "@landingpage_create_promotion_template_default_text": {
+        "description": "The promotion template text will be replaced with this text if it is not set"
+    },
+    "emoji_search_placeholder": "Search Emoji",
+    "@emoji_search_placeholder": {
+        "description": "Placeholder for the search bar for the emoji search"
+    },
+    "open_emoji_picker_tooltip": "Open emoji picker",
+    "@open_emoji_picker_tooltip": {
+        "description": "Tooltip for the button that can open and close the emoji picker"
+    },
     "landingpage_overview_context_menu_delete": "Delete",
     "@landingpage_overview_context_menu_delete": {
         "description": "Delete button in the context menu on the landing page overview page."
@@ -272,9 +292,9 @@
     "@placeholder_title": {
         "description": "Platzhalter textbox for Title"
     },
-    "placeholder_text": "Text",
-    "@placeholder_text": {
-        "description": "Platzhalter textbox for Text"
+    "placeholder_description": "Description",
+    "@placeholder_description": {
+        "description": "Placeholder textbox for description"
     },
     "error_msg_pleace_upload_picture": "Please upload an image",
     "@error_msg_pleace_upload_picture": {

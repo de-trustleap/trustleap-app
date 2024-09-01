@@ -32,11 +32,11 @@ void routeToInitial(AuthStatus status) {
   final lastRoute = WidgetsBinding.instance.platformDispatcher.defaultRouteName;
   switch (status) {
     case AuthStatus.unAuthenticated:
-      print("NOT AUTHENTICATED");
+      debugPrint("NOT AUTHENTICATED");
       Modular.to.navigate(RoutePaths.loginPath);
       break;
     case AuthStatus.authenticated:
-      print("AUTHENTICATED");
+      debugPrint("AUTHENTICATED");
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
         Modular.to.navigate(lastRoute);
       } else {
@@ -44,7 +44,7 @@ void routeToInitial(AuthStatus status) {
       }
       break;
     case AuthStatus.authenticatedAsAdmin:
-      print("AUTHENTICATED AS ADMIN");
+      debugPrint("AUTHENTICATED AS ADMIN");
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.adminPath)) {
         Modular.to.navigate(lastRoute);
       } else {
