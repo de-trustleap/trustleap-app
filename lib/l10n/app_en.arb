@@ -1044,6 +1044,10 @@
     "@landingpage_overview_edit_tooltip": {
         "description": "Tooltip for landingpage edit button on the landingpage overview"
     },
+    "landingpage_overview_show_tooltip": "Show Landingpage",
+    "@landingpage_overview_show_tooltip": {
+        "description": "Tooltip for landingpage show button on the landingpage overview"
+    },
     "profile_edit_email_tooltip": "Change email address",
     "@profile_edit_email_tooltip": {
         "description": "Tooltip for the button for changing the email address on the profile page"

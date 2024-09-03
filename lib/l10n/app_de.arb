@@ -1044,6 +1044,10 @@
     "@landingpage_overview_edit_tooltip": {
         "description": "Tooltip für das Bearbeiten einer Landingpage auf der Übersichtsseite"
     },
+    "landingpage_overview_show_tooltip": "Landingpage anzeigen",
+    "@landingpage_overview_show_tooltip": {
+        "description": "Tooltip für die Vorschau ein Landingpage"
+    },
     "profile_edit_email_tooltip": "E-Mail Adresse ändern",
     "@profile_edit_email_tooltip": {
         "description": "Tooltip für den Button für das Ändern der E-Mail Adresse auf der Profilseite"

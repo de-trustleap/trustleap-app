@@ -43,154 +43,166 @@ class LandingPageOverviewGridTile extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return InkWell(
-      onTap: () => Modular.to
-          .navigate("${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
-      child: Container(
-        width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-        height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
-        decoration: BoxDecoration(
-            color: (landingPage.isDefaultPage ?? false)
-                ? themeData.colorScheme.primary
-                : themeData.colorScheme.surface,
-            border: Border.all(color: Colors.transparent),
-            borderRadius: const BorderRadius.all(Radius.circular(20))),
-        child: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                if (landingPage.isDefaultPage == null ||
-                    (landingPage.isDefaultPage != null &&
-                        landingPage.isDefaultPage! == false)) ...[
-                  Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Modular.to.navigate(
-                                  RoutePaths.homePath +
-                                      RoutePaths.landingPageCreatorPath,
-                                  arguments: landingPage);
-                            },
-                            iconSize: 24,
-                            tooltip:
-                                localizations.landingpage_overview_edit_tooltip,
-                            icon: Icon(Icons.edit,
-                                color: themeData.colorScheme.secondary,
-                                size: 24)),
-                        const Spacer(),
-                        PopupMenuButton(
-                            itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                      value: "delete",
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Icon(Icons.delete,
-                                                color: themeData
-                                                    .colorScheme.secondary,
-                                                size: 24),
-                                            const SizedBox(width: 8),
-                                            Text(
-                                                localizations
-                                                    .landingpage_overview_context_menu_delete,
-                                                style: responsiveValue.isMobile
-                                                    ? themeData
-                                                        .textTheme.bodySmall
-                                                    : themeData
-                                                        .textTheme.bodyMedium)
-                                          ])),
-                                  PopupMenuItem(
-                                      value: "duplicate",
-                                      enabled: isDuplicationAllowed,
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Icon(Icons.copy,
-                                                color: isDuplicationAllowed
-                                                    ? themeData
-                                                        .colorScheme.secondary
-                                                    : Colors.grey,
-                                                size: 24),
-                                            const SizedBox(width: 8),
-                                            Text(
-                                                localizations
-                                                    .landingpage_overview_context_menu_duplicate,
-                                                style:
-                                                    getDuplicateButtonTextStyle(
-                                                        responsiveValue,
-                                                        themeData))
-                                          ]))
-                                ],
-                            onSelected: (String newValue) {
-                              if (newValue == "delete") {
-                                deletePressed(landingPage.id.value,
-                                    landingPage.ownerID?.value ?? "");
-                              } else if (newValue == "duplicate") {
-                                duplicatePressed(landingPage.id.value);
-                              }
-                            })
-                      ]),
-                ] else ...[
-                  const Spacer()
-                ],
-                CachedNetworkImage(
-                  width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
-                  height: responsiveValue.largerThan(MOBILE) ? 120 : 140,
-                  imageUrl: landingPage.thumbnailDownloadURL ?? "",
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                        decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: imageProvider, fit: BoxFit.cover),
-                    ));
-                  },
-                  placeholder: (context, url) {
-                    return Stack(children: [
-                      placeHolderImage(responsiveValue),
-                      const LoadingIndicator()
-                    ]);
-                  },
-                  errorWidget: (context, url, error) {
-                    return placeHolderImage(responsiveValue);
-                  },
-                ),
-                const SizedBox(height: 8),
-                SelectableText(landingPage.name ?? "",
-                    style: themeData.textTheme.bodySmall!
-                        .copyWith(overflow: TextOverflow.ellipsis),
-                    textAlign: TextAlign.center,
-                    maxLines: 2),
-                if (landingPage.createdAt != null &&
-                    landingPage.lastUpdatedAt == null) ...[
-                  const SizedBox(height: 16),
-                  SelectableText(
-                      "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
-                      style: themeData.textTheme.bodySmall!.copyWith(
-                          fontSize: 12,
-                          color: themeData.colorScheme.surfaceTint
-                              .withOpacity(0.6)),
-                      maxLines: 1)
-                ] else if (landingPage.lastUpdatedAt != null) ...[
-                  const SizedBox(height: 8),
-                  SelectableText(
-                      "Geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
-                      style: themeData.textTheme.bodySmall!.copyWith(
-                          fontSize: 12,
-                          color: themeData.colorScheme.surfaceTint
-                              .withOpacity(0.6)),
-                      maxLines: 1)
-                ],
-                const Spacer()
-              ],
-            )),
-      ),
-    );
+        onTap: () => Modular.to.navigate(
+            "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
+        child: Container(
+            width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
+            height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
+            decoration: BoxDecoration(
+                color: (landingPage.isDefaultPage ?? false)
+                    ? themeData.colorScheme.primary
+                    : themeData.colorScheme.surface,
+                border: Border.all(color: Colors.transparent),
+                borderRadius: const BorderRadius.all(Radius.circular(20))),
+            child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      if (landingPage.isDefaultPage == null ||
+                          (landingPage.isDefaultPage != null &&
+                              landingPage.isDefaultPage! == false)) ...[
+                        Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    Modular.to.navigate(
+                                        "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
+                                        arguments: landingPage);
+                                  },
+                                  iconSize: 24,
+                                  tooltip: localizations
+                                      .landingpage_overview_edit_tooltip,
+                                  icon: Icon(Icons.edit,
+                                      color: themeData.colorScheme.secondary,
+                                      size: 24)),
+                              const Spacer(),
+                              IconButton(
+                                  onPressed: () {
+                                    Modular.to.navigate(
+                                        "${RoutePaths.homePath}${RoutePaths.landingPagePath}/${landingPage.id.value}",
+                                        arguments: landingPage);
+                                  },
+                                  iconSize: 24,
+                                  tooltip: localizations
+                                      .landingpage_overview_show_tooltip,
+                                  icon: Icon(Icons.remove_red_eye,
+                                      color: themeData.colorScheme.secondary,
+                                      size: 24)),
+                              const Spacer(),
+                              PopupMenuButton(
+                                  itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                            value: "delete",
+                                            child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Icon(Icons.delete,
+                                                      color: themeData
+                                                          .colorScheme
+                                                          .secondary,
+                                                      size: 24),
+                                                  const SizedBox(width: 8),
+                                                  Text(
+                                                      localizations
+                                                          .landingpage_overview_context_menu_delete,
+                                                      style: responsiveValue
+                                                              .isMobile
+                                                          ? themeData.textTheme
+                                                              .bodySmall
+                                                          : themeData.textTheme
+                                                              .bodyMedium)
+                                                ])),
+                                        PopupMenuItem(
+                                            value: "duplicate",
+                                            enabled: isDuplicationAllowed,
+                                            child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Icon(Icons.copy,
+                                                      color:
+                                                          isDuplicationAllowed
+                                                              ? themeData
+                                                                  .colorScheme
+                                                                  .secondary
+                                                              : Colors.grey,
+                                                      size: 24),
+                                                  const SizedBox(width: 8),
+                                                  Text(
+                                                      localizations
+                                                          .landingpage_overview_context_menu_duplicate,
+                                                      style:
+                                                          getDuplicateButtonTextStyle(
+                                                              responsiveValue,
+                                                              themeData))
+                                                ]))
+                                      ],
+                                  onSelected: (String newValue) {
+                                    if (newValue == "delete") {
+                                      deletePressed(landingPage.id.value,
+                                          landingPage.ownerID?.value ?? "");
+                                    } else if (newValue == "duplicate") {
+                                      duplicatePressed(landingPage.id.value);
+                                    }
+                                  })
+                            ]),
+                      ] else ...[
+                        const Spacer()
+                      ],
+                      CachedNetworkImage(
+                        width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
+                        height: responsiveValue.largerThan(MOBILE) ? 120 : 140,
+                        imageUrl: landingPage.thumbnailDownloadURL ?? "",
+                        imageBuilder: (context, imageProvider) {
+                          return Container(
+                              decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                          ));
+                        },
+                        placeholder: (context, url) {
+                          return Stack(children: [
+                            placeHolderImage(responsiveValue),
+                            const LoadingIndicator()
+                          ]);
+                        },
+                        errorWidget: (context, url, error) {
+                          return placeHolderImage(responsiveValue);
+                        },
+                      ),
+                      const SizedBox(height: 8),
+                      SelectableText(landingPage.name ?? "",
+                          style: themeData.textTheme.bodySmall!
+                              .copyWith(overflow: TextOverflow.ellipsis),
+                          textAlign: TextAlign.center,
+                          maxLines: 2),
+                      if (landingPage.createdAt != null &&
+                          landingPage.lastUpdatedAt == null) ...[
+                        const SizedBox(height: 16),
+                        SelectableText(
+                            "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
+                            style: themeData.textTheme.bodySmall!.copyWith(
+                                fontSize: 12,
+                                color: themeData.colorScheme.surfaceTint
+                                    .withOpacity(0.6)),
+                            maxLines: 1)
+                      ] else if (landingPage.lastUpdatedAt != null) ...[
+                        const SizedBox(height: 8),
+                        SelectableText(
+                            "Geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
+                            style: themeData.textTheme.bodySmall!.copyWith(
+                                fontSize: 12,
+                                color: themeData.colorScheme.surfaceTint
+                                    .withOpacity(0.6)),
+                            maxLines: 1)
+                      ],
+                    ]))));
   }
 
   Widget placeHolderImage(ResponsiveBreakpointsData responsiveValue) {

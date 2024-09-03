@@ -783,6 +783,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_overview_edit_tooltip => 'Landingpage bearbeiten';
 
   @override
+  String get landingpage_overview_show_tooltip => 'Landingpage anzeigen';
+
+  @override
   String get profile_edit_email_tooltip => 'E-Mail Adresse ändern';
 
   @override
