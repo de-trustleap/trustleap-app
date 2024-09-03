@@ -102,7 +102,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "ownerID": landingPageModel.ownerID,
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged,
-        "isDefaultPage": landingPageModel.isDefaultPage
+        "isDefaultPage": landingPageModel.isDefaultPage,
+        "isActive": landingPageModel.isActive
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
@@ -136,7 +137,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "ownerID": landingPage.ownerID?.value,
         "imageData": imageData != null ? base64Encode(imageData) : null,
         "imageHasChanged": imageHasChanged,
-        "isDefaultPage": landingPage.isDefaultPage
+        "isDefaultPage": landingPage.isDefaultPage,
+        "isActive": landingPage.isActive
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
@@ -150,6 +152,18 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         firebaseFunctions.httpsCallable("duplicateLandingPage");
     try {
       await callable.call({"id": id});
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> troggleLandingPageActivity(String id, bool isActive) async {
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("troggleLandingPageActivity");
+    try {
+      await callable.call({"id": id, "isActive": isActive});
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));

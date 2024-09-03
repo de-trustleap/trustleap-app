@@ -32,6 +32,10 @@ class LandingPageOverview extends StatelessWidget {
       BlocProvider.of<LandingPageCubit>(context).duplicateLandingPage(id);
     }
 
+    void submitIsActive(String id, bool isActive) {
+      BlocProvider.of<LandingPageCubit>(context).troggleLandingPageActivity(id, isActive);
+    }
+
     void showDeleteAlert(String id, parentUserID) {
       showDialog(
           context: context,
@@ -54,13 +58,16 @@ class LandingPageOverview extends StatelessWidget {
         } else if (state is DuplicateLandingPageSuccessState) {
           CustomSnackBar.of(context).showCustomSnackBar(
               localization.landingpage_snackbar_success_duplicated);
-        }
+        } else if (state is TroggleLandingPageActivitySuccessState) {
+          CustomSnackBar.of(context).showCustomSnackBar("LALALA");
+        } 
       },
       builder: (context, state) {
         return BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(
           builder: (context, observerState) {
             if (state is DeleteLandingPageLoadingState ||
-                state is DuplicateLandingPageLoadingState) {
+                state is DuplicateLandingPageLoadingState ||
+                state is TroggleLandingPageActivityLoadingState) {
               return const LoadingIndicator();
             } else if (observerState is LandingPageObserverSuccess) {
               if (observerState.landingPages.isEmpty) {
@@ -88,7 +95,9 @@ class LandingPageOverview extends StatelessWidget {
                             deletePressed: (landingPageID, parentUserID) =>
                                 showDeleteAlert(landingPageID, parentUserID),
                             duplicatePressed: (landinPageID) =>
-                                submitDuplication(landinPageID))
+                                submitDuplication(landinPageID),
+                            isActivePressed: (landinPageID, landingPageIsActive) =>
+                                submitIsActive(landinPageID, landingPageIsActive))
                       ],
                     ));
               }

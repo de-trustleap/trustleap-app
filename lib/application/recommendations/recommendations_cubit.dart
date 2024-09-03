@@ -52,7 +52,7 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
           (failure) =>
               emit(RecommendationGetReasonsFailureState(failure: failure)),
           (landingPages) {
-        final reasons = landingPages.map((e) => e.name).toList();
+        final reasons = landingPages.where((e) => e.isActive ?? false).map((e) => e.name).toList();
         final reasonsWithoutNullValues = reasons.whereType<String>().toList();
         emit(RecommendationGetReasonsSuccessState(
             reasons: reasonsWithoutNullValues));

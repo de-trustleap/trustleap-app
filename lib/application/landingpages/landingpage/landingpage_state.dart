@@ -76,3 +76,14 @@ final class DuplicateLandingPageFailureState extends LandingPageState {
 }
 
 final class DuplicateLandingPageSuccessState extends LandingPageState {}
+
+final class TroggleLandingPageActivityLoadingState extends LandingPageState {}
+
+final class TroggleLandingPageActivityFailureState extends LandingPageState {
+  final DatabaseFailure failure;
+  const TroggleLandingPageActivityFailureState({
+    required this.failure,
+  });
+}
+
+final class TroggleLandingPageActivitySuccessState extends LandingPageState {}

@@ -16,6 +16,7 @@ class LandingPageModel extends Equatable {
   final DateTime? lastUpdatedAt;
   final dynamic createdAt;
   final bool? isDefaultPage;
+  final bool? isActive;
 
   const LandingPageModel(
       {required this.id,
@@ -28,7 +29,8 @@ class LandingPageModel extends Equatable {
       this.associatedUsersIDs,
       this.lastUpdatedAt,
       required this.createdAt,
-      this.isDefaultPage});
+      this.isDefaultPage,
+      this.isActive});
 
   LandingPageModel copyWith(
       {String? id,
@@ -41,7 +43,8 @@ class LandingPageModel extends Equatable {
       List<String>? associatedUsersIDs,
       DateTime? lastUpdatedAt,
       dynamic createdAt,
-      bool? isDefaultPage}) {
+      bool? isDefaultPage,
+      bool? isActive}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -53,7 +56,8 @@ class LandingPageModel extends Equatable {
         associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
         createdAt: createdAt ?? this.createdAt,
-        isDefaultPage: isDefaultPage ?? this.isDefaultPage);
+        isDefaultPage: isDefaultPage ?? this.isDefaultPage,
+        isActive: isActive ?? this.isActive);
   }
 
   Map<String, dynamic> toMap() {
@@ -68,7 +72,8 @@ class LandingPageModel extends Equatable {
       'associatedUsersIDs': associatedUsersIDs,
       'lastUpdatedAt': lastUpdatedAt,
       'createdAt': createdAt,
-      'isDefaultPage': isDefaultPage
+      'isDefaultPage': isDefaultPage,
+      'isActive': isActive
     };
   }
 
@@ -97,6 +102,9 @@ class LandingPageModel extends Equatable {
         createdAt: map['createdAt'] as dynamic,
         isDefaultPage: map['isDefaultPage'] != null
             ? map['isDefaultPage'] as bool
+            : false,
+        isActive: map['isActive'] != null
+            ? map['isActive'] as bool
             : false);
   }
 
@@ -116,7 +124,8 @@ class LandingPageModel extends Equatable {
         associatedUsersIDs: associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate(),
-        isDefaultPage: isDefaultPage ?? false);
+        isDefaultPage: isDefaultPage ?? false,
+        isActive: isActive ?? false);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -131,7 +140,8 @@ class LandingPageModel extends Equatable {
         associatedUsersIDs: landingPage.associatedUsersIDs,
         lastUpdatedAt: landingPage.lastUpdatedAt,
         createdAt: FieldValue.serverTimestamp(),
-        isDefaultPage: landingPage.isDefaultPage);
+        isDefaultPage: landingPage.isDefaultPage,
+        isActive: landingPage.isActive);
   }
 
   @override
@@ -143,6 +153,7 @@ class LandingPageModel extends Equatable {
         ownerID,
         description,
         promotionTemplate,
-        isDefaultPage
+        isDefaultPage,
+        isActive
       ];
 }

@@ -15,13 +15,15 @@ class LandingPageOverviewGridTile extends StatelessWidget {
   final bool isDuplicationAllowed;
   final Function(String, String) deletePressed;
   final Function(String) duplicatePressed;
+  final Function(String, bool) isActivePressed;
 
   const LandingPageOverviewGridTile(
       {super.key,
       required this.landingPage,
       required this.isDuplicationAllowed,
       required this.deletePressed,
-      required this.duplicatePressed});
+      required this.duplicatePressed,
+      required this.isActivePressed});
 
   TextStyle getDuplicateButtonTextStyle(
       ResponsiveBreakpointsData responsiveValue, ThemeData themeData) {
@@ -41,6 +43,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localizations = AppLocalizations.of(context);
+    //final isTroggleEnabled = landingPage.ownerID == ;
 
     return Container(
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
@@ -49,7 +52,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
           color: (landingPage.isDefaultPage ?? false)
               ? themeData.colorScheme.primary
               : themeData.colorScheme.surface,
-          border: Border.all(color: Colors.transparent),
+          border: Border.all(color: const Color.fromARGB(0, 255, 0, 0)),
           borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Padding(
           padding: const EdgeInsets.all(4),
@@ -86,7 +89,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                           iconSize: 24,
                           tooltip:
                               localizations.landingpage_overview_show_tooltip,
-                          icon: Icon(Icons.remove_red_eye,
+                          icon: Icon(Icons.preview,
                               color: themeData.colorScheme.secondary,
                               size: 24)),
                       const Spacer(),
@@ -133,6 +136,27 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                                   getDuplicateButtonTextStyle(
                                                       responsiveValue,
                                                       themeData))
+                                        ])),
+                                PopupMenuItem(
+                                    value: "troggelActiveDeaktive",
+                                    //enabled: ,
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                              (landingPage.isActive ?? false) ? Icons.visibility_off : Icons.visibility,
+                                              color: themeData
+                                                  .colorScheme.secondary,
+                                              size: 24),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                              (landingPage.isActive ?? false) ? "deaktivieren": "aktivieren" ,
+                                              style: responsiveValue.isMobile
+                                                  ? themeData
+                                                      .textTheme.bodySmall
+                                                  : themeData
+                                                      .textTheme.bodyMedium)
                                         ]))
                               ],
                           onSelected: (String newValue) {
@@ -141,6 +165,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                   landingPage.ownerID?.value ?? "");
                             } else if (newValue == "duplicate") {
                               duplicatePressed(landingPage.id.value);
+                            } else if (newValue == "troggelActiveDeaktive") {
+                              isActivePressed(landingPage.id.value, !(landingPage.isActive ?? false));
                             }
                           })
                     ]),
@@ -184,7 +210,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                         fontSize: 12,
                         color:
                             themeData.colorScheme.surfaceTint.withOpacity(0.6)),
-                    maxLines: 1)
+                    maxLines: 1),
               ] else if (landingPage.lastUpdatedAt != null) ...[
                 const SizedBox(height: 8),
                 SelectableText(
@@ -194,6 +220,16 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                         color:
                             themeData.colorScheme.surfaceTint.withOpacity(0.6)),
                     maxLines: 1)
+              ],
+              if (!(landingPage.isActive ?? false) && !(landingPage.isDefaultPage ?? false)) ...[
+                //const SizedBox(height: 16),
+                SelectableText(
+                    "DEAKTIVIERT",
+                    style: themeData.textTheme.bodySmall!.copyWith(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color:Color.fromARGB(255, 255, 0, 0)),
+                    maxLines: 1),
               ],
               const Spacer()
             ],
