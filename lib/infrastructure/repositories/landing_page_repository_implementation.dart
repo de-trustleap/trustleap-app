@@ -160,13 +160,13 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   Future<Either<DatabaseFailure, LandingPage>> getLandingPage(String id) async {
     final landingPagesCollection = firestore.collection("landingPages");
     try {
-      var document = await landingPagesCollection.doc(id).get();
+      final document = await landingPagesCollection.doc(id).get();
       if (!document.exists && document.data() != null) {
         return left(NotFoundFailure());
       }
       var model = LandingPageModel.fromFirestore(document.data()!, id).toDomain();
       return right(model);
-    } on FirebaseFunctionsException catch (e) {
+    } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

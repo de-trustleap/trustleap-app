@@ -20,11 +20,9 @@ final class GetLandingPageFailureState extends PagebuilderState {
 }
 
 final class GetLandingPageAndUserSuccessState extends PagebuilderState {
-  final LandingPage landingPage;
-  final CustomUser user;
+  final PagebuilderContent content;
 
   const GetLandingPageAndUserSuccessState({
-    required this.landingPage,
-    required this.user
+    required this.content
   });
 }

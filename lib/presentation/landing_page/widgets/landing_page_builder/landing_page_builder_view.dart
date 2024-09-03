@@ -1,11 +1,11 @@
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/landing_page.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_page_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -18,8 +18,7 @@ class LandingPageBuilderView extends StatefulWidget {
 }
 
 class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
-  late LandingPage landingPage;
-  late CustomUser user;
+  late PagebuilderContent pageBuilderContent;
   late String id;
 
   @override
@@ -41,8 +40,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
       bloc: pageBuilderCubit,
       listener: (context, state) {
         if (state is GetLandingPageAndUserSuccessState) {
-          landingPage = state.landingPage;
-          user = state.user;
+          pageBuilderContent = state.content;
         }
       },
       builder: (context, state) {
@@ -56,12 +54,10 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
         } else if (state is GetLandingPageAndUserSuccessState) {
           return Scaffold(
               appBar:
-                  AppBar(title: Text(state.landingPage.name ?? "", style: themeData.textTheme.bodyLarge)),
-              body: ListView.builder(
-                  itemCount: 2,
-                  itemBuilder: (context, index) {
-                    return const Text("Test");
-                  }));
+                  AppBar(title: Text(state.content.landingPage?.name ?? "", style: themeData.textTheme.bodyLarge)),
+              body: 
+                state.content.content != null ?
+                  LandingPageBuilderPageBuilder().buildPage(state.content.content!) : const Text("FEHLER!"));
         } else {
           return const LoadingIndicator();
         }

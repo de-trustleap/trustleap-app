@@ -30,12 +30,14 @@ import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/company_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/image_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_implementation.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/pagebuilder_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/promoter_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -65,6 +67,7 @@ class AppModule extends Module {
       ..addLazySingleton<CompanyRepository>(CompanyRepositoryImplementation.new)
       ..addLazySingleton<LandingPageRepository>(
           LandingPageRepositoryImplementation.new)
+      ..addLazySingleton<PagebuilderRepository>(PageBuilderRepositoryImplementation.new)
 
       ..addLazySingleton(ProfileObserverBloc.new)
       ..addLazySingleton(PagebuilderCubit.new)
