@@ -16,6 +16,7 @@ class LandingPageBuilderWidgetBuilder {
 
   Widget buildTextWidget(PageBuilderTextProperties properties) {
     return PageBuilderEditableText(
-        properties: properties, onTextChanged: (newText) => print(newText));
+        properties: properties,
+        onTextChanged: (newProperties) => print(newProperties.text));
   }
 }

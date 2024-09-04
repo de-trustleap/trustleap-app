@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class PageBuilderEditableText extends StatefulWidget {
   final PageBuilderTextProperties properties;
-  final Function(String) onTextChanged;
+  final Function(PageBuilderTextProperties) onTextChanged;
 
   const PageBuilderEditableText({
     super.key,
@@ -77,7 +77,8 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
                 disabledBorder: InputBorder.none,
                 isDense: true,
               ),
-              onChanged: (newText) => widget.onTextChanged(newText)),
+              onChanged: (newText) => widget
+                  .onTextChanged(widget.properties.copyWith(text: newText))),
         ),
       ),
     );
