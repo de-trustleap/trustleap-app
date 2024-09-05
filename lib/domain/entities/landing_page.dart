@@ -8,6 +8,7 @@ class LandingPage extends Equatable {
   final String? downloadImageUrl;
   final String? thumbnailDownloadURL;
   final UniqueID? ownerID;
+  final UniqueID? contentID;
   final String? description;
   final String? promotionTemplate;
   final List<String>? associatedUsersIDs;
@@ -21,6 +22,7 @@ class LandingPage extends Equatable {
       this.downloadImageUrl,
       this.thumbnailDownloadURL,
       this.ownerID,
+      this.contentID,
       this.description,
       this.promotionTemplate,
       this.associatedUsersIDs,
@@ -34,6 +36,7 @@ class LandingPage extends Equatable {
       String? downloadImageUrl,
       String? thumbnailDownloadURL,
       UniqueID? ownerID,
+      UniqueID? contentID,
       String? description,
       String? promotionTemplate,
       List<String>? associatedUsersIDs,
@@ -46,6 +49,7 @@ class LandingPage extends Equatable {
         downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         ownerID: ownerID ?? this.ownerID,
+        contentID: contentID ?? this.contentID,
         description: description ?? this.description,
         promotionTemplate: promotionTemplate ?? this.promotionTemplate,
         associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
@@ -61,6 +65,7 @@ class LandingPage extends Equatable {
         downloadImageUrl,
         thumbnailDownloadURL,
         ownerID,
+        contentID,
         description,
         promotionTemplate,
         isDefaultPage

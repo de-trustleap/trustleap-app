@@ -1,5 +1,7 @@
 import 'app_localizations.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for English (`en`).
 class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
@@ -808,4 +810,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendations_form_add_button_tooltip => 'Add recommendation';
+
+  @override
+  String get landingpage_pagebuilder_container_request_error => 'An error occurred while retrieving the data';
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_title => 'You are not authorized to access this page';
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_message => 'You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.';
 }

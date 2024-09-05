@@ -21,4 +21,6 @@ abstract class LandingPageRepository {
       LandingPage landingPage, Uint8List? imageData, bool imageHasChanged);
 
   Future<Either<DatabaseFailure, Unit>> duplicateLandingPage(String id);
+
+  Future<Either<DatabaseFailure, LandingPage>> getLandingPage(String id);
 }

@@ -10,6 +10,7 @@ class LandingPageModel extends Equatable {
   final String? downloadImageUrl;
   final String? thumbnailDownloadURL;
   final String? ownerID;
+  final String? contentID;
   final String? description;
   final String? promotionTemplate;
   final List<String>? associatedUsersIDs;
@@ -23,6 +24,7 @@ class LandingPageModel extends Equatable {
       this.downloadImageUrl,
       this.thumbnailDownloadURL,
       this.ownerID,
+      this.contentID,
       this.description,
       this.promotionTemplate,
       this.associatedUsersIDs,
@@ -36,6 +38,7 @@ class LandingPageModel extends Equatable {
       String? downloadImageUrl,
       String? thumbnailDownloadURL,
       String? ownerID,
+      String? contentID,
       String? description,
       String? promotionTemplate,
       List<String>? associatedUsersIDs,
@@ -48,6 +51,7 @@ class LandingPageModel extends Equatable {
         downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
         ownerID: ownerID ?? this.ownerID,
+        contentID: contentID ?? this.contentID,
         description: description ?? this.description,
         promotionTemplate: promotionTemplate ?? this.promotionTemplate,
         associatedUsersIDs: associatedUsersIDs ?? this.associatedUsersIDs,
@@ -63,6 +67,7 @@ class LandingPageModel extends Equatable {
       'downloadImageUrl': downloadImageUrl,
       'thumbnailDownloadURL': thumbnailDownloadURL,
       'ownerID': ownerID,
+      'contentID': contentID,
       'description': description,
       'promotionTemplate': promotionTemplate,
       'associatedUsersIDs': associatedUsersIDs,
@@ -83,6 +88,7 @@ class LandingPageModel extends Equatable {
             ? map['thumbnailDownloadURL'] as String
             : null,
         ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
+        contentID: map['contentID'] != null ? map['contentID'] as String : null,
         description:
             map['description'] != null ? map['description'] as String : null,
         promotionTemplate: map['promotionTemplate'] != null
@@ -110,7 +116,8 @@ class LandingPageModel extends Equatable {
         name: name,
         downloadImageUrl: downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL,
-        ownerID: UniqueID.fromUniqueString(ownerID ?? ""),
+        ownerID: ownerID != null ? UniqueID.fromUniqueString(ownerID!) : null,
+        contentID: contentID != null ? UniqueID.fromUniqueString(contentID!) : null,
         description: description,
         promotionTemplate: promotionTemplate,
         associatedUsersIDs: associatedUsersIDs,
@@ -126,6 +133,7 @@ class LandingPageModel extends Equatable {
         downloadImageUrl: landingPage.downloadImageUrl,
         thumbnailDownloadURL: landingPage.thumbnailDownloadURL,
         ownerID: landingPage.ownerID?.value,
+        contentID: landingPage.contentID?.value,
         description: landingPage.description,
         promotionTemplate: landingPage.promotionTemplate,
         associatedUsersIDs: landingPage.associatedUsersIDs,
@@ -141,6 +149,7 @@ class LandingPageModel extends Equatable {
         downloadImageUrl,
         thumbnailDownloadURL,
         ownerID,
+        contentID,
         description,
         promotionTemplate,
         isDefaultPage

@@ -26,6 +26,7 @@ import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -58,11 +59,12 @@ import 'package:mockito/annotations.dart';
   RecommendationsCubit,
   LandingPageObserverCubit,
   LandingPageCubit,
+  PagebuilderRepository,
   CompanyRequestCubit,
   CompanyRequestObserverCubit,
   FirebaseAuth,
   FirebaseFirestore,
   FirebaseStorage,
   FirebaseFunctions
-  ])
+])
 void main() {}

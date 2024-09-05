@@ -1079,5 +1079,17 @@
     "recommendations_form_add_button_tooltip": "Empfehlung hinzufügen",
     "@recommendations_form_add_button_tooltip": {
         "description": "Tooltip für den Empfehlung hinzufügen Button im Empfehlungsformular"
+    },
+    "landingpage_pagebuilder_container_request_error": "Beim Abruf der Daten ist ein Fehler aufgetreten",
+    "@landingpage_pagebuilder_container_request_error": {
+        "description": "Fehlermeldung auf der Pagebuilder Seite wenn Request fehlschlägt"
+    },
+    "landingpage_pagebuilder_container_permission_error_title": "Du bist nicht berechtigt diese Seite aufzurufen",
+    "@landingpage_pagebuilder_container_permission_error_title": {
+        "description": "Fehlermeldung Titel auf der Pagebuilder Seite wenn Berechtigung nicht da ist"
+    },
+    "landingpage_pagebuilder_container_permission_error_message": "Du hast nicht die entsprechende Berechtigung um diese Seite zu aufzurufen. Melde dich bitte mit einem Account an der dazu berechtigt ist.",
+    "@landingpage_pagebuilder_container_permission_error_message": {
+        "description": "Fehlermeldung Text auf der Pagebuilder Seite wenn Berechtigung nicht da ist"
     }
 }

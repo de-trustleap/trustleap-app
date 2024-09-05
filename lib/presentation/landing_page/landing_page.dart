@@ -4,7 +4,7 @@ import 'package:finanzbegleiter/application/landingpages/landingpage_observer/la
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
-import 'package:finanzbegleiter/presentation/landing_page/landing_page_overview.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';

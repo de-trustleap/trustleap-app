@@ -1,12 +1,17 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 
 part 'menu_state.dart';
 
 class MenuCubit extends Cubit<MenuState> {
-  MenuCubit() : super(const MenuInitial(selectedMenuItem: MenuItems.none));
+  MenuCubit() : super(MenuInitial());
 
   void selectMenu(MenuItems selectedMenuItem) {
-    emit(MenuInitial(selectedMenuItem: selectedMenuItem));
+    emit(MenuItemSelectedState(selectedMenuItem: selectedMenuItem));
+  }
+
+  void collapseMenu(bool collapsed) {
+    emit(MenuIsCollapsedState(collapsed: collapsed));
   }
 }

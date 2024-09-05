@@ -44,10 +44,11 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
           emit(LandingPageObserverFailure(failure: failure));
         }, (landingPages) {
           PaintingBinding.instance.imageCache.clear();
-          emit(LandingPageObserverSuccess(landingPages: landingPages));
+          emit(LandingPageObserverSuccess(
+              landingPages: landingPages, user: user));
         });
       } else {
-        emit(const LandingPageObserverSuccess(landingPages: []));
+        emit(LandingPageObserverSuccess(landingPages: const [], user: user));
       }
     });
   }

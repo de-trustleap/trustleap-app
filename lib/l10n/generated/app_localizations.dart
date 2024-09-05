@@ -8,6 +8,8 @@ import 'package:intl/intl.dart' as intl;
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
 ///
@@ -1694,6 +1696,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add recommendation'**
   String get recommendations_form_add_button_tooltip;
+
+  /// Error title on the page builder page if request fails
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while retrieving the data'**
+  String get landingpage_pagebuilder_container_request_error;
+
+  /// Error title on the page builder page if permission denied
+  ///
+  /// In en, this message translates to:
+  /// **'You are not authorized to access this page'**
+  String get landingpage_pagebuilder_container_permission_error_title;
+
+  /// Error message on the page builder page if permission denied
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.'**
+  String get landingpage_pagebuilder_container_permission_error_message;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

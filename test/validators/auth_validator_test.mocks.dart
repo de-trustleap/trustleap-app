@@ -480,6 +480,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get menuitems_company_requests => (super.noSuchMethod(
+        Invocation.getter(#menuitems_company_requests),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#menuitems_company_requests),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_error_view_title => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_error_view_title),
         returnValue: _i3.dummyValue<String>(
@@ -616,6 +625,73 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_create_promotion_template_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_promotion_template_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_create_promotion_template_description),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_template_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_promotion_template_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_create_promotion_template_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_template_default_text =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_promotion_template_default_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_template_default_text),
+        ),
+      ) as String);
+
+  @override
+  String get emoji_search_placeholder => (super.noSuchMethod(
+        Invocation.getter(#emoji_search_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#emoji_search_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get open_emoji_picker_tooltip => (super.noSuchMethod(
+        Invocation.getter(#open_emoji_picker_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#open_emoji_picker_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_context_menu_delete => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_context_menu_delete),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_context_menu_delete),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_context_menu_duplicate => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_context_menu_duplicate),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_context_menu_duplicate),
+        ),
+      ) as String);
+
+  @override
   String get placeholder_title => (super.noSuchMethod(
         Invocation.getter(#placeholder_title),
         returnValue: _i3.dummyValue<String>(
@@ -625,11 +701,11 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
-  String get placeholder_text => (super.noSuchMethod(
-        Invocation.getter(#placeholder_text),
+  String get placeholder_description => (super.noSuchMethod(
+        Invocation.getter(#placeholder_description),
         returnValue: _i3.dummyValue<String>(
           this,
-          Invocation.getter(#placeholder_text),
+          Invocation.getter(#placeholder_description),
         ),
       ) as String);
 
@@ -1314,6 +1390,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get profile_page_snackbar_company_registered => (super.noSuchMethod(
+        Invocation.getter(#profile_page_snackbar_company_registered),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_page_snackbar_company_registered),
+        ),
+      ) as String);
+
+  @override
   String get profile_page_logout_button_title => (super.noSuchMethod(
         Invocation.getter(#profile_page_logout_button_title),
         returnValue: _i3.dummyValue<String>(
@@ -1464,6 +1549,45 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#register_promoter_snackbar_success),
+        ),
+      ) as String);
+
+  @override
+  String get register_promoter_no_landingpage_title => (super.noSuchMethod(
+        Invocation.getter(#register_promoter_no_landingpage_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#register_promoter_no_landingpage_title),
+        ),
+      ) as String);
+
+  @override
+  String get register_promoter_no_landingpage_subtitle => (super.noSuchMethod(
+        Invocation.getter(#register_promoter_no_landingpage_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#register_promoter_no_landingpage_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get register_promoter_missing_landingpage_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#register_promoter_missing_landingpage_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #register_promoter_missing_landingpage_error_message),
+        ),
+      ) as String);
+
+  @override
+  String get register_promoter_missing_company_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#register_promoter_missing_company_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#register_promoter_missing_company_error_message),
         ),
       ) as String);
 
@@ -1996,6 +2120,458 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#company_requests_overview_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_title => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_name => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_name),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_industry => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_industry),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_industry),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_address => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_address),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_address),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_postcode => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_postcode),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_postcode),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_place => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_place),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_place),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_phone => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_phone),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_phone),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_website => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_website),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_website),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_user_title => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_user_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_user_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_user_name => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_user_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_user_name),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_user_email => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_user_email),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_user_email),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_decline_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_decline_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_decline_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_accept_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_accept_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_accept_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_from_user => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_from_user),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_from_user),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_empty_title => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_empty_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_empty_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_empty_body => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_empty_body),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_empty_body),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_title => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_error => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_error),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_error),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_title => (super.noSuchMethod(
+        Invocation.getter(#company_registration_form_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#company_registration_form_title),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_name_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_name_textfield_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_name_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_industry_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_industry_textfield_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_industry_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_website_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_website_textfield_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_website_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_address_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_address_textfield_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_address_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_postcode_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_postcode_textfield_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_postcode_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_place_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_place_textfield_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_place_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_phone_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_phone_textfield_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_phone_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_register_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#company_registration_form_register_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#company_registration_form_register_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_title => (super.noSuchMethod(
+        Invocation.getter(#profile_register_company_section_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_register_company_section_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_subtitle_in_progress =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #profile_register_company_section_subtitle_in_progress),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #profile_register_company_section_subtitle_in_progress),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_subtitle_requested_at =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #profile_register_company_section_subtitle_requested_at),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #profile_register_company_section_subtitle_requested_at),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_subtitle => (super.noSuchMethod(
+        Invocation.getter(#profile_register_company_section_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_register_company_section_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#profile_register_company_section_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_register_company_section_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_image_upload_tooltip => (super.noSuchMethod(
+        Invocation.getter(#profile_image_upload_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_image_upload_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_edit_tooltip => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_edit_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_edit_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_show_tooltip => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_show_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_show_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get profile_edit_email_tooltip => (super.noSuchMethod(
+        Invocation.getter(#profile_edit_email_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_edit_email_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get theme_switch_lightmode_tooltip => (super.noSuchMethod(
+        Invocation.getter(#theme_switch_lightmode_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#theme_switch_lightmode_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get theme_switch_darkmode_tooltip => (super.noSuchMethod(
+        Invocation.getter(#theme_switch_darkmode_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#theme_switch_darkmode_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_reset_search_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_reset_search_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_reset_search_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_filter_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_filter_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_filter_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_view_switch_grid_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_view_switch_grid_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_view_switch_grid_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_view_switch_table_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_view_switch_table_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_view_switch_table_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendations_form_add_button_tooltip => (super.noSuchMethod(
+        Invocation.getter(#recommendations_form_add_button_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendations_form_add_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_request_error =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_container_request_error),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_container_request_error),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_permission_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_permission_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_permission_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_permission_error_message),
         ),
       ) as String);
 
