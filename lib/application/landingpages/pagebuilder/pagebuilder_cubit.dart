@@ -29,7 +29,9 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
         failureOrSuccess.fold(
             (failure) => emit(GetLandingPageFailureState(failure: failure)),
             (user) => getLandingPageContent(
-                landingPage.contentID?.value ?? "", PagebuilderContent(landingPage: landingPage, content: null, user: user)));
+                landingPage.contentID?.value ?? "",
+                PagebuilderContent(
+                    landingPage: landingPage, content: null, user: user)));
       });
     }
   }
@@ -39,7 +41,9 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
       emit(GetLandingPageFailureState(failure: NotFoundFailure()));
     } else {
       final failureOrSuccess = await pageBuilderRepo.getLandingPageContent(id);
-      failureOrSuccess.fold((failure) => emit(GetLandingPageFailureState(failure: failure)), (content) {
+      failureOrSuccess
+          .fold((failure) => emit(GetLandingPageFailureState(failure: failure)),
+              (content) {
         final pageBuilderContent = pageContent.copyWith(content: content);
         emit(GetLandingPageAndUserSuccessState(content: pageBuilderContent));
       });

@@ -2,7 +2,9 @@ import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import '../mocks.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -12,11 +14,14 @@ void main() {
   late PagebuilderCubit pageBuilderCubit;
   late MockLandingPageRepository mockLandingPageRepo;
   late MockUserRepository mockUserRepo;
+  late MockPagebuilderRepository mockPageBuilderRepo;
 
   setUp(() {
     mockLandingPageRepo = MockLandingPageRepository();
     mockUserRepo = MockUserRepository();
-    pageBuilderCubit = PagebuilderCubit(mockLandingPageRepo, mockUserRepo);
+    mockPageBuilderRepo = MockPagebuilderRepository();
+    pageBuilderCubit = PagebuilderCubit(
+        mockLandingPageRepo, mockPageBuilderRepo, mockUserRepo);
   });
 
   test("init state should be PagebuilderInitial", () {
@@ -25,14 +30,21 @@ void main() {
 
   group("PagebuilderCubit_getLandingPage", () {
     const String landingPageID = "1";
-    final testLandingPage = LandingPage(id: UniqueID.fromUniqueString("1"));
+    const contentID = "5";
+    final testLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("1"),
+        contentID: UniqueID.fromUniqueString(contentID));
     final testUser = CustomUser(id: UniqueID.fromUniqueString("2"));
-
+    final testContent = PageBuilderPage(
+        id: UniqueID.fromUniqueString(contentID), sections: null);
     test("should call landingpage repo if function is called", () async {
       // Given
       when(mockLandingPageRepo.getLandingPage(landingPageID))
           .thenAnswer((_) async => right(testLandingPage));
       when(mockUserRepo.getUser()).thenAnswer((_) async => right(testUser));
+      when(mockPageBuilderRepo.getLandingPageContent(contentID))
+          .thenAnswer((_) async => right(testContent));
+
       // When
       pageBuilderCubit.getLandingPage(landingPageID);
       await untilCalled(mockLandingPageRepo.getLandingPage(landingPageID));
@@ -48,11 +60,16 @@ void main() {
       final expectedResult = [
         GetLandingPageLoadingState(),
         GetLandingPageAndUserSuccessState(
-            landingPage: testLandingPage, user: testUser)
+            content: PagebuilderContent(
+                landingPage: testLandingPage,
+                content: testContent,
+                user: testUser))
       ];
       when(mockLandingPageRepo.getLandingPage(landingPageID))
           .thenAnswer((_) async => right(testLandingPage));
       when(mockUserRepo.getUser()).thenAnswer((_) async => right(testUser));
+      when(mockPageBuilderRepo.getLandingPageContent(contentID))
+          .thenAnswer((_) async => right(testContent));
       // Then
       expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
       pageBuilderCubit.getLandingPage(landingPageID);
@@ -70,6 +87,27 @@ void main() {
           .thenAnswer((_) async => left(BackendFailure()));
       when(mockUserRepo.getUser())
           .thenAnswer((_) async => left(BackendFailure()));
+      when(mockPageBuilderRepo.getLandingPageContent(contentID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
+      pageBuilderCubit.getLandingPage(landingPageID);
+    });
+
+    test(
+        "should emit GetLandingPageLoadingState and GetLandingPageFailureState when function is called and there was no contentID",
+        () async {
+      // Given
+      final testLandingPage2 = LandingPage(id: UniqueID.fromUniqueString("1"));
+      final expectedResult = [
+        GetLandingPageLoadingState(),
+        GetLandingPageFailureState(failure: BackendFailure())
+      ];
+      when(mockLandingPageRepo.getLandingPage(landingPageID))
+          .thenAnswer((_) async => right(testLandingPage2));
+      when(mockUserRepo.getUser()).thenAnswer((_) async => right(testUser));
+      when(mockPageBuilderRepo.getLandingPageContent(contentID))
+          .thenAnswer((_) async => right(testContent));
       // Then
       expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
       pageBuilderCubit.getLandingPage(landingPageID);

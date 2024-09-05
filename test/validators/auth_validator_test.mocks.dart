@@ -2461,6 +2461,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_overview_show_tooltip => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_show_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_show_tooltip),
+        ),
+      ) as String);
+
+  @override
   String get profile_edit_email_tooltip => (super.noSuchMethod(
         Invocation.getter(#profile_edit_email_tooltip),
         returnValue: _i3.dummyValue<String>(
@@ -2539,6 +2548,30 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_pagebuilder_container_request_error),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_permission_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_permission_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_permission_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_permission_error_message),
         ),
       ) as String);
 

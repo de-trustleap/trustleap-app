@@ -11,7 +11,6 @@ import '../mocks.mocks.dart';
 void main() {
   late LandingPageObserverCubit landingPageObserverCubit;
   late MockLandingPageRepository mockLandingPageRepo;
- 
 
   setUp(() {
     mockLandingPageRepo = MockLandingPageRepository();
@@ -25,14 +24,10 @@ void main() {
   group("CompanyObserverCubit_observeCompany", () {
     const userId = "1";
     const landingpageId1 = "1";
-    final testUser = CustomUser(
-        id: UniqueID.fromUniqueString(userId)
-        );
+    final testUser = CustomUser(id: UniqueID.fromUniqueString(userId));
     final List<LandingPage> landingPages = [
-    LandingPage(
-      id: UniqueID.fromUniqueString(landingpageId1)
-    )
-  ];
+      LandingPage(id: UniqueID.fromUniqueString(landingpageId1))
+    ];
     test("should call repo if function is called", () async {
       // Given
       when(mockLandingPageRepo.observeAllLandingPages()).thenAnswer((_) =>
@@ -52,13 +47,14 @@ void main() {
       // Given
       final expectedResult = [
         LandingPageObserverLoading(),
-        LandingPageObserverSuccess(landingPages: landingPages)
+        LandingPageObserverSuccess(landingPages: landingPages, user: testUser)
       ];
       when(mockLandingPageRepo.observeAllLandingPages()).thenAnswer((_) =>
           Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
               [right(testUser)]));
       // Then
-      expectLater(landingPageObserverCubit.stream, emitsInOrder(expectedResult));
+      expectLater(
+          landingPageObserverCubit.stream, emitsInOrder(expectedResult));
       landingPageObserverCubit.observeAllLandingPages();
     });
 
@@ -74,7 +70,8 @@ void main() {
           Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
               [left(BackendFailure())]));
       // Then
-      expectLater(landingPageObserverCubit.stream, emitsInOrder(expectedResult));
+      expectLater(
+          landingPageObserverCubit.stream, emitsInOrder(expectedResult));
       landingPageObserverCubit.observeAllLandingPages();
     });
   });
