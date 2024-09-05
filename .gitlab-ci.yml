@@ -1,23 +1,23 @@
-image: ghcr.io/cirruslabs/flutter:3.24.1
+#image: ghcr.io/cirruslabs/flutter:3.24.1
 
-stages:
-  - build
+#stages:
+#  - build
 
-before_script:
+#before_script:
   # Cache-Verzeichnis definieren
-  - flutter config --enable-web
-  - flutter pub get
+#  - flutter config --enable-web
+##  - flutter pub get
 
 cache:
-  key: ${CI_PROJECT_NAME}
-  paths:
-    - .pub-cache/
-    - build/
+  #key: ${CI_PROJECT_NAME}
+  #paths:
+  #  - .pub-cache/
+  #  - build/
 
-build:
-  stage: build
-  script:
-    - flutter build web --web-renderer canvaskit --release
-  artifacts:
-    paths:
-      - build/web/
+#build:
+ # stage: build
+ # script:
+ #   - flutter build web --web-renderer canvaskit --release
+ # artifacts:
+  #  paths:
+  #    - build/web/
