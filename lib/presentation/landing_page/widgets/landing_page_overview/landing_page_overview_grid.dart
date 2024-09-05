@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/add_new_landing_page_grid_tile.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid_tile.dart';
@@ -11,11 +12,13 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageOverviewGrid extends StatelessWidget {
   final List<LandingPage> landingpages;
+  final CustomUser user;
   final Function(String, String) deletePressed;
   final Function(String) duplicatePressed;
   const LandingPageOverviewGrid(
       {super.key,
       required this.landingpages,
+      required this.user,
       required this.deletePressed,
       required this.duplicatePressed});
 
@@ -73,6 +76,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
                                           )))
                               : LandingPageOverviewGridTile(
                                   landingPage: landingpages[index - 1],
+                                  user: user,
                                   isDuplicationAllowed:
                                       landingpages.length < maxLandingPageCount,
                                   deletePressed: deletePressed,

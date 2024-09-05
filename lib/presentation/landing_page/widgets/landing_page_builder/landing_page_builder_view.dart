@@ -46,18 +46,31 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
       builder: (context, state) {
         if (state is GetLandingPageFailureState) {
           return ErrorView(
-              title: localization.landingpage_pagebuilder_container_request_error,
+              title:
+                  localization.landingpage_pagebuilder_container_request_error,
               message: DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization),
               callback: () =>
                   {Modular.get<PagebuilderCubit>().getLandingPage(id)});
         } else if (state is GetLandingPageAndUserSuccessState) {
-          return Scaffold(
-              appBar:
-                  AppBar(title: Text(state.content.landingPage?.name ?? "", style: themeData.textTheme.bodyLarge)),
-              body: 
-                state.content.content != null ?
-                  LandingPageBuilderPageBuilder().buildPage(state.content.content!) : const Text("FEHLER!"));
+          if (state.content.user?.id != state.content.landingPage?.ownerID) {
+            return ErrorView(
+                title: localization
+                    .landingpage_pagebuilder_container_permission_error_title,
+                message: localization
+                    .landingpage_pagebuilder_container_permission_error_message,
+                callback: () =>
+                    {Modular.get<PagebuilderCubit>().getLandingPage(id)});
+          } else {
+            return Scaffold(
+                appBar: AppBar(
+                    title: Text(state.content.landingPage?.name ?? "",
+                        style: themeData.textTheme.bodyLarge)),
+                body: state.content.content != null
+                    ? LandingPageBuilderPageBuilder()
+                        .buildPage(state.content.content!)
+                    : const Text("FEHLER!"));
+          }
         } else {
           return const LoadingIndicator();
         }

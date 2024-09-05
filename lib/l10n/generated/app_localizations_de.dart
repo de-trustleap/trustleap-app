@@ -813,4 +813,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_container_request_error => 'Beim Abruf der Daten ist ein Fehler aufgetreten';
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_title => 'Du bist nicht berechtigt diese Seite aufzurufen';
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_message => 'Du hast nicht die entsprechende Berechtigung um diese Seite zu aufzurufen. Melde dich bitte mit einem Account an der dazu berechtigt ist.';
 }
