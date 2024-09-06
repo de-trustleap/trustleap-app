@@ -5,7 +5,6 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 part 'profile_state.dart';
@@ -85,6 +84,8 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void verifyEmail() async {
     final isEmailVerified = await userRepo.isEmailVerified();
+    // delay here is needed to trigger reload of the profile email section
+    await Future.delayed(const Duration(milliseconds: 300));
     emit(ProfileEmailVerifySuccessState(isEmailVerified: isEmailVerified));
   }
 
@@ -106,12 +107,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileResendEmailVerificationLoadingState());
     await authRepo.resendEmailVerification();
     emit(ProfileResendEmailVerificationSuccessState());
-  }
-
-  void getCurrentUser() async {
-    // ignore: await_only_futures
-    final currentUser = await authRepo.getCurrentUser();
-    emit(ProfileGetCurrentUserSuccessState(user: currentUser));
   }
 
   void deleteAccount() async {
