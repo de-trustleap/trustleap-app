@@ -118,18 +118,6 @@ class ProfilePasswordUpdateFailureState extends ProfileState
   List<Object?> get props => [failure];
 }
 
-class ProfileGetCurrentUserSuccessState extends ProfileState
-    with EquatableMixin {
-  final User? user;
-
-  ProfileGetCurrentUserSuccessState({
-    required this.user,
-  });
-
-  @override
-  List<Object?> get props => [user];
-}
-
 class ProfileAccountDeletionLoadingState extends ProfileState
     with EquatableMixin {
   @override

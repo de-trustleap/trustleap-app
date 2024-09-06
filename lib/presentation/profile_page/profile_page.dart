@@ -63,9 +63,7 @@ class _ProfilePageState extends State<ProfilePage>
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => Modular.get<ProfileCubit>()
-                ..verifyEmail()
-                ..getCurrentUser()),
+              create: (context) => Modular.get<ProfileCubit>()),
           BlocProvider(
               create: (context) => Modular.get<CompanyObserverCubit>()),
           BlocProvider(create: (context) => Modular.get<CompanyCubit>()),
