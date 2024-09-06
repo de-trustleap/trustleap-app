@@ -1,27 +1,31 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'menu_cubit.dart';
 
-sealed class MenuState extends Equatable {
-  const MenuState();
+sealed class MenuState {}
 
+class MenuInitial extends MenuState with EquatableMixin {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-class MenuInitial extends MenuState {}
-
-class MenuItemSelectedState extends MenuState {
+class MenuItemSelectedState extends MenuState with EquatableMixin {
   final MenuItems selectedMenuItem;
 
-  const MenuItemSelectedState({
+  MenuItemSelectedState({
     required this.selectedMenuItem,
   });
+  
+  @override
+  List<Object?> get props => [selectedMenuItem];
 }
 
-final class MenuIsCollapsedState extends MenuState {
+final class MenuIsCollapsedState extends MenuState with EquatableMixin {
   final bool collapsed;
 
-  const MenuIsCollapsedState({
+  MenuIsCollapsedState({
     required this.collapsed,
   });
+  
+  @override
+  List<Object?> get props => [collapsed];
 }
