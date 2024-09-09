@@ -1091,5 +1091,9 @@
     "landingpage_pagebuilder_container_permission_error_message": "You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.",
     "@landingpage_pagebuilder_container_permission_error_message": {
         "description": "Error message on the page builder page if permission denied"
+    },
+    "landingpage_pagebuilder_appbar_save_button_title": "Save",
+    "@landingpage_pagebuilder_appbar_save_button_title": {
+        "description": "Text of the save button in the page builder"
     }
 }

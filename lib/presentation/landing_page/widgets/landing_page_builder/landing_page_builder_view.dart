@@ -53,7 +53,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
               callback: () =>
                   {Modular.get<PagebuilderCubit>().getLandingPage(id)});
         } else if (state is GetLandingPageAndUserSuccessState) {
-          print("RELOAD!!!");
+          debugPrint("RELOAD!!!");
           if (state.content.user?.id != state.content.landingPage?.ownerID) {
             return ErrorView(
                 title: localization
@@ -63,9 +63,9 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                 callback: () =>
                     {Modular.get<PagebuilderCubit>().getLandingPage(id)});
           } else {
-            print("ISLOADING: ${state.saveLoading}");
             return Scaffold(
-                appBar: LandingPageBuilderAppBar(content: state.content, isLoading: state.saveLoading),
+                appBar: LandingPageBuilderAppBar(
+                    content: state.content, isLoading: state.saveLoading),
                 body: state.content.content != null
                     ? LandingPageBuilderPageBuilder()
                         .buildPage(state.content.content!)

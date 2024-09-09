@@ -819,4 +819,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_container_permission_error_message => 'You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.';
+
+  @override
+  String get landingpage_pagebuilder_appbar_save_button_title => 'Save';
 }

@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -8,11 +9,14 @@ class LandingPageBuilderAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final PagebuilderContent content;
   final bool isLoading;
-  const LandingPageBuilderAppBar({super.key, required this.content, required this.isLoading});
+  const LandingPageBuilderAppBar(
+      {super.key, required this.content, required this.isLoading});
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+
     return AppBar(
         title: Text(content.landingPage?.name ?? "",
             style: themeData.textTheme.bodyLarge),
@@ -20,11 +24,13 @@ class LandingPageBuilderAppBar extends StatelessWidget
           Padding(
             padding: const EdgeInsets.only(right: 24),
             child: PrimaryButton(
-                title: "Speichern",
+                title: localization
+                    .landingpage_pagebuilder_appbar_save_button_title,
                 isLoading: isLoading,
                 width: 180,
                 onTap: () {
-                  Modular.get<PagebuilderCubit>().saveLandingPageContent(content.content);
+                  Modular.get<PagebuilderCubit>()
+                      .saveLandingPageContent(content.content);
                 }),
           )
         ]);

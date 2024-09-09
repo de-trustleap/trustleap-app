@@ -1714,6 +1714,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.'**
   String get landingpage_pagebuilder_container_permission_error_message;
+
+  /// Text of the save button in the page builder
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get landingpage_pagebuilder_appbar_save_button_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
