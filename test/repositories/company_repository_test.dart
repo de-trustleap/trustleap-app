@@ -135,4 +135,3 @@ void main() {
     });
   });
 }
-// TODO: Es fehlen noch die Tests für CompanyRequest und CompanyRequestModel!

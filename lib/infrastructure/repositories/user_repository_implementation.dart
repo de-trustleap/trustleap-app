@@ -116,7 +116,6 @@ class UserRepositoryImplementation implements UserRepository {
   Future<bool> isEmailVerified() async {
     await firebaseAuth.currentUser?.reload();
     final user = firebaseAuth.currentUser;
-    print("VERIFIED: ${user?.emailVerified}");
     return user?.emailVerified ?? false;
   }
 

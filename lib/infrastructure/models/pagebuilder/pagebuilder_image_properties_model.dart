@@ -14,7 +14,10 @@ class PageBuilderImagePropertiesModel extends Equatable
   });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'url': url, 'borderRadius': borderRadius};
+    Map<String, dynamic> map = {};
+    if (url != null) map['url'] = url;
+    if (borderRadius != null) map['borderRadius'] = borderRadius;
+    return map;
   }
 
   factory PageBuilderImagePropertiesModel.fromMap(Map<String, dynamic> map) {

@@ -28,5 +28,5 @@ class PageBuilderSection extends Equatable {
   }
   
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, layout, widgets];
 }

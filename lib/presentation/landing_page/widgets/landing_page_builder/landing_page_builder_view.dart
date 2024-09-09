@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_appbar.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_page_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,6 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final pageBuilderCubit = Modular.get<PagebuilderCubit>();
 
@@ -53,6 +53,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
               callback: () =>
                   {Modular.get<PagebuilderCubit>().getLandingPage(id)});
         } else if (state is GetLandingPageAndUserSuccessState) {
+          print("RELOAD!!!");
           if (state.content.user?.id != state.content.landingPage?.ownerID) {
             return ErrorView(
                 title: localization
@@ -62,10 +63,9 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                 callback: () =>
                     {Modular.get<PagebuilderCubit>().getLandingPage(id)});
           } else {
+            print("ISLOADING: ${state.saveLoading}");
             return Scaffold(
-                appBar: AppBar(
-                    title: Text(state.content.landingPage?.name ?? "",
-                        style: themeData.textTheme.bodyLarge)),
+                appBar: LandingPageBuilderAppBar(content: state.content, isLoading: state.saveLoading),
                 body: state.content.content != null
                     ? LandingPageBuilderPageBuilder()
                         .buildPage(state.content.content!)

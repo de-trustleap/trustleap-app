@@ -63,7 +63,9 @@ void main() {
             content: PagebuilderContent(
                 landingPage: testLandingPage,
                 content: testContent,
-                user: testUser))
+                user: testUser),
+            saveLoading: false,
+            saveFailure: null)
       ];
       when(mockLandingPageRepo.getLandingPage(landingPageID))
           .thenAnswer((_) async => right(testLandingPage));
@@ -101,7 +103,7 @@ void main() {
       final testLandingPage2 = LandingPage(id: UniqueID.fromUniqueString("1"));
       final expectedResult = [
         GetLandingPageLoadingState(),
-        GetLandingPageFailureState(failure: BackendFailure())
+        GetLandingPageFailureState(failure: NotFoundFailure())
       ];
       when(mockLandingPageRepo.getLandingPage(landingPageID))
           .thenAnswer((_) async => right(testLandingPage2));

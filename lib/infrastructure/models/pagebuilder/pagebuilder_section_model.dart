@@ -18,7 +18,10 @@ class PageBuilderSectionModel extends Equatable {
   });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'id': id, 'layout': layout, 'widgets': widgets};
+    Map<String, dynamic> map = {'id': id};
+    if (layout != null) map['layout'] = layout;
+    if (widgets != null) map['widgets'] = widgets;
+    return map;
   }
 
   factory PageBuilderSectionModel.fromMap(Map<String, dynamic> map) {

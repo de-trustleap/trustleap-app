@@ -4,4 +4,5 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dar
 
 abstract class PagebuilderRepository {
   Future<Either<DatabaseFailure, PageBuilderPage>> getLandingPageContent(String id);
+  Future<Either<DatabaseFailure, Unit>> saveLandingPageContent(PageBuilderPage page);
 }
