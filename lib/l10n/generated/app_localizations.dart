@@ -1720,6 +1720,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get landingpage_pagebuilder_appbar_save_button_title;
+
+  /// Title of the error alert that appears if saving in the Page Builder failed
+  ///
+  /// In en, this message translates to:
+  /// **'Save failed'**
+  String get landingpage_pagebuilder_save_error_alert_title;
+
+  /// Text of the error alert that appears if saving in the Page Builder failed
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while saving your new landing page content. Please try again later.'**
+  String get landingpage_pagebuilder_save_error_alert_message;
+
+  /// Button text of the error alert that appears if saving in the Page Builder failed
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get landingpage_pagebuilder_save_error_alert_button;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

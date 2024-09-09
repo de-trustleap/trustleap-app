@@ -822,4 +822,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_appbar_save_button_title => 'Save';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_title => 'Save failed';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_message => 'An error occurred while saving your new landing page content. Please try again later.';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_button => 'OK';
 }

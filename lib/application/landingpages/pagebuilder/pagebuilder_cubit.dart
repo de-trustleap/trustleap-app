@@ -47,7 +47,10 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
           .fold((failure) => emit(GetLandingPageFailureState(failure: failure)),
               (content) {
         final pageBuilderContent = pageContent.copyWith(content: content);
-        emit(GetLandingPageAndUserSuccessState(content: pageBuilderContent, saveLoading: false, saveFailure: null));
+        emit(GetLandingPageAndUserSuccessState(
+            content: pageBuilderContent,
+            saveLoading: false,
+            saveFailure: null));
       });
     }
   }
@@ -68,7 +71,9 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
       final updatedPageBuilderContent =
           currentState.content.copyWith(content: updatedContent);
       emit(GetLandingPageAndUserSuccessState(
-          content: updatedPageBuilderContent, saveLoading: false, saveFailure: null));
+          content: updatedPageBuilderContent,
+          saveLoading: false,
+          saveFailure: null));
     }
   }
 
@@ -77,11 +82,19 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
       emit(PageBuilderUnexpectedFailureState());
     } else if (state is GetLandingPageAndUserSuccessState) {
       final currentState = state as GetLandingPageAndUserSuccessState;
-      emit(GetLandingPageAndUserSuccessState(content: currentState.content, saveLoading: true, saveFailure: null));
-      final failureOrSuccess = await pageBuilderRepo.saveLandingPageContent(page);
+      emit(GetLandingPageAndUserSuccessState(
+          content: currentState.content, saveLoading: true, saveFailure: null));
+      final failureOrSuccess =
+          await pageBuilderRepo.saveLandingPageContent(page);
       failureOrSuccess.fold(
-        (failure) => emit(GetLandingPageAndUserSuccessState(content: currentState.content, saveLoading: false, saveFailure: failure)),
-        (_) => emit(GetLandingPageAndUserSuccessState(content: currentState.content, saveLoading: false, saveFailure: null)));
+          (failure) => emit(GetLandingPageAndUserSuccessState(
+              content: currentState.content,
+              saveLoading: false,
+              saveFailure: failure)),
+          (_) => emit(GetLandingPageAndUserSuccessState(
+              content: currentState.content,
+              saveLoading: false,
+              saveFailure: null)));
     } else {
       emit(PageBuilderUnexpectedFailureState());
     }

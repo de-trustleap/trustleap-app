@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_appbar.dart';
@@ -31,6 +32,21 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
     Modular.get<PagebuilderCubit>().getLandingPage(id);
   }
 
+  void showSaveFailureDialog(AppLocalizations localizations) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return CustomAlertDialog(
+              title:
+                  localizations.landingpage_pagebuilder_save_error_alert_title,
+              message: localizations
+                  .landingpage_pagebuilder_save_error_alert_message,
+              actionButtonTitle:
+                  localizations.landingpage_pagebuilder_save_error_alert_button,
+              actionButtonAction: () => Modular.to.pop());
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
@@ -41,6 +57,9 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
       listener: (context, state) {
         if (state is GetLandingPageAndUserSuccessState) {
           pageBuilderContent = state.content;
+          if (!state.saveLoading && state.saveFailure != null) {
+            showSaveFailureDialog(localization);
+          }
         }
       },
       builder: (context, state) {

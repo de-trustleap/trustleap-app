@@ -822,4 +822,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_appbar_save_button_title => 'Speichern';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_title => 'Speichern fehlgeschlagen';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_message => 'Beim Speichern deiner neuen Landingpage Inhalte ist ein Fehler aufgetreten. Bitte versuche es später noch einmal.';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_button => 'OK';
 }

@@ -1095,5 +1095,17 @@
     "landingpage_pagebuilder_appbar_save_button_title": "Save",
     "@landingpage_pagebuilder_appbar_save_button_title": {
         "description": "Text of the save button in the page builder"
+    },
+    "landingpage_pagebuilder_save_error_alert_title": "Save failed",
+    "@landingpage_pagebuilder_save_error_alert_title": {
+        "description": "Title of the error alert that appears if saving in the Page Builder failed"
+    },
+    "landingpage_pagebuilder_save_error_alert_message": "An error occurred while saving your new landing page content. Please try again later.",
+    "@landingpage_pagebuilder_save_error_alert_message": {
+        "description": "Text of the error alert that appears if saving in the Page Builder failed"
+    },
+    "landingpage_pagebuilder_save_error_alert_button": "OK",
+    "@landingpage_pagebuilder_save_error_alert_button": {
+        "description": "Button text of the error alert that appears if saving in the Page Builder failed"
     }
 }
