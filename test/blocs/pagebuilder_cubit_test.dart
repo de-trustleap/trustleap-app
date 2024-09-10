@@ -65,7 +65,8 @@ void main() {
                 content: testContent,
                 user: testUser),
             saveLoading: false,
-            saveFailure: null)
+            saveFailure: null,
+            saveSuccessful: null)
       ];
       when(mockLandingPageRepo.getLandingPage(landingPageID))
           .thenAnswer((_) async => right(testLandingPage));
