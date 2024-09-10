@@ -3,8 +3,11 @@ import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_appbar.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_page_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,9 +33,23 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
     Modular.get<PagebuilderCubit>().getLandingPage(id);
   }
 
+  void showSaveFailureDialog(AppLocalizations localizations) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return CustomAlertDialog(
+              title:
+                  localizations.landingpage_pagebuilder_save_error_alert_title,
+              message: localizations
+                  .landingpage_pagebuilder_save_error_alert_message,
+              actionButtonTitle:
+                  localizations.landingpage_pagebuilder_save_error_alert_button,
+              actionButtonAction: () => Modular.to.pop());
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final pageBuilderCubit = Modular.get<PagebuilderCubit>();
 
@@ -41,6 +58,12 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
       listener: (context, state) {
         if (state is GetLandingPageAndUserSuccessState) {
           pageBuilderContent = state.content;
+          if (!state.saveLoading && state.saveFailure != null) {
+            showSaveFailureDialog(localization);
+          } else if (!state.saveLoading && state.saveSuccessful != null) {
+            CustomSnackBar.of(context).showCustomSnackBar(
+                localization.landingpage_pagebuilder_save_success_snackbar);
+          }
         }
       },
       builder: (context, state) {
@@ -53,6 +76,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
               callback: () =>
                   {Modular.get<PagebuilderCubit>().getLandingPage(id)});
         } else if (state is GetLandingPageAndUserSuccessState) {
+          debugPrint("RELOAD!!!");
           if (state.content.user?.id != state.content.landingPage?.ownerID) {
             return ErrorView(
                 title: localization
@@ -63,9 +87,8 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                     {Modular.get<PagebuilderCubit>().getLandingPage(id)});
           } else {
             return Scaffold(
-                appBar: AppBar(
-                    title: Text(state.content.landingPage?.name ?? "",
-                        style: themeData.textTheme.bodyLarge)),
+                appBar: LandingPageBuilderAppBar(
+                    content: state.content, isLoading: state.saveLoading),
                 body: state.content.content != null
                     ? LandingPageBuilderPageBuilder()
                         .buildPage(state.content.content!)

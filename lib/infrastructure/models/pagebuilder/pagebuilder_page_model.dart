@@ -15,7 +15,9 @@ class PageBuilderPageModel extends Equatable {
   });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'id': id, 'sections': sections};
+    Map<String, dynamic> map = {'id': id};
+    if (sections != null) map['sections'] = sections;
+    return map;
   }
 
   factory PageBuilderPageModel.fromMap(Map<String, dynamic> map) {

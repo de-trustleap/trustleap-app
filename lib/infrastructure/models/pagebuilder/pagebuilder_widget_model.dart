@@ -2,6 +2,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
@@ -19,7 +21,10 @@ class PageBuilderWidgetModel extends Equatable {
   });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'id': id, 'elementType': elementType, 'properties': properties};
+    Map<String, dynamic> map = {'id': id};
+    if (elementType != null) map['elementType'] = elementType;
+    if (properties != null) map['properties'] = properties;
+    return map;
   }
 
   factory PageBuilderWidgetModel.fromMap(Map<String, dynamic> map) {
@@ -88,10 +93,10 @@ class PageBuilderWidgetModel extends Equatable {
     if (properties == null) {
       return null;
     }
-    if (properties is PageBuilderTextPropertiesModel) {
-      return properties.toMap();
-    } else if (properties is PageBuilderImagePropertiesModel) {
-      return properties.toMap();
+    if (properties is PageBuilderTextProperties) {
+      return PageBuilderTextPropertiesModel.fromDomain(properties).toMap();
+    } else if (properties is PageBuilderImageProperties) {
+      return PageBuilderImagePropertiesModel.fromDomain(properties).toMap();
     } else {
       return null;
     }

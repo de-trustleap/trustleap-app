@@ -1714,6 +1714,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.'**
   String get landingpage_pagebuilder_container_permission_error_message;
+
+  /// Text of the save button in the page builder
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get landingpage_pagebuilder_appbar_save_button_title;
+
+  /// Title of the error alert that appears if saving in the Page Builder failed
+  ///
+  /// In en, this message translates to:
+  /// **'Save failed'**
+  String get landingpage_pagebuilder_save_error_alert_title;
+
+  /// Text of the error alert that appears if saving in the Page Builder failed
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while saving your new landing page content. Please try again later.'**
+  String get landingpage_pagebuilder_save_error_alert_message;
+
+  /// Button text of the error alert that appears if saving in the Page Builder failed
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get landingpage_pagebuilder_save_error_alert_button;
+
+  /// Text for the snack bar that will be displayed in the page builder if the save was successful
+  ///
+  /// In en, this message translates to:
+  /// **'The changes were saved successfully.'**
+  String get landingpage_pagebuilder_save_success_snackbar;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

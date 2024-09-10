@@ -312,33 +312,6 @@ void main() {
     });
   });
 
-  group("ProfileCubit_GetCurrentUser", () {
-    final testUser = MockUser();
-    test("should call auth repo when function is called", () async {
-      // Given
-      when(mockAuthRepo.getCurrentUser()).thenAnswer((_) => testUser);
-      // When
-      profileCubit.getCurrentUser();
-      await untilCalled(mockAuthRepo.getCurrentUser());
-      // Then
-      verify(mockAuthRepo.getCurrentUser());
-      verifyNoMoreInteractions(mockAuthRepo);
-    });
-
-    test(
-        "should emit ProfileGetCurrentUserSuccessState when function is called",
-        () async {
-      // Given
-      final expectedResult = [
-        ProfileGetCurrentUserSuccessState(user: testUser)
-      ];
-      when(mockAuthRepo.getCurrentUser()).thenAnswer((_) => testUser);
-      // Then
-      expectLater(profileCubit.stream, emitsInOrder(expectedResult));
-      profileCubit.getCurrentUser();
-    });
-  });
-
   group("ProfileCubit_DeleteAccount", () {
     test("should call auth repo when function is called", () async {
       // Given

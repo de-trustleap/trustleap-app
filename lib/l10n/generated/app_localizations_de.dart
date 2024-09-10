@@ -819,4 +819,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_container_permission_error_message => 'Du hast nicht die entsprechende Berechtigung um diese Seite zu aufzurufen. Melde dich bitte mit einem Account an der dazu berechtigt ist.';
+
+  @override
+  String get landingpage_pagebuilder_appbar_save_button_title => 'Speichern';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_title => 'Speichern fehlgeschlagen';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_message => 'Beim Speichern deiner neuen Landingpage Inhalte ist ein Fehler aufgetreten. Bitte versuche es später noch einmal.';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_button => 'OK';
+
+  @override
+  String get landingpage_pagebuilder_save_success_snackbar => 'Die Änderungen wurden erfolgreich gespeichert.';
 }

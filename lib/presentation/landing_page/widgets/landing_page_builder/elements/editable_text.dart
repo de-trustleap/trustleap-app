@@ -1,15 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PageBuilderEditableText extends StatefulWidget {
   final PageBuilderTextProperties properties;
-  final Function(PageBuilderTextProperties) onTextChanged;
+  final PageBuilderWidget widgetModel;
 
   const PageBuilderEditableText({
     super.key,
     required this.properties,
-    required this.onTextChanged,
+    required this.widgetModel,
   });
 
   @override
@@ -77,8 +80,11 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
                 disabledBorder: InputBorder.none,
                 isDense: true,
               ),
-              onChanged: (newText) => widget
-                  .onTextChanged(widget.properties.copyWith(text: newText))),
+              onChanged: (newText) {
+                final updatedProperties = widget.properties.copyWith(text: newText);
+                final updatedWidget = widget.widgetModel.copyWith(properties: updatedProperties);
+                Modular.get<PagebuilderCubit>().updateWidget(updatedWidget);
+              }),
         ),
       ),
     );

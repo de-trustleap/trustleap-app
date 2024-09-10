@@ -1091,5 +1091,25 @@
     "landingpage_pagebuilder_container_permission_error_message": "Du hast nicht die entsprechende Berechtigung um diese Seite zu aufzurufen. Melde dich bitte mit einem Account an der dazu berechtigt ist.",
     "@landingpage_pagebuilder_container_permission_error_message": {
         "description": "Fehlermeldung Text auf der Pagebuilder Seite wenn Berechtigung nicht da ist"
+    },
+    "landingpage_pagebuilder_appbar_save_button_title": "Speichern",
+    "@landingpage_pagebuilder_appbar_save_button_title": {
+        "description": "Text des Speichern Buttons im Page Builder"
+    },
+    "landingpage_pagebuilder_save_error_alert_title": "Speichern fehlgeschlagen",
+    "@landingpage_pagebuilder_save_error_alert_title": {
+        "description": "Titel des Fehler Alerts der erscheint wenn das Speichern im Page Builder fehlgeschlagen ist"
+    },
+    "landingpage_pagebuilder_save_error_alert_message": "Beim Speichern deiner neuen Landingpage Inhalte ist ein Fehler aufgetreten. Bitte versuche es später noch einmal.",
+    "@landingpage_pagebuilder_save_error_alert_message": {
+        "description": "Text des Fehler Alerts der erscheint wenn das Speichern im Page Builder fehlgeschlagen ist"
+    },
+    "landingpage_pagebuilder_save_error_alert_button": "OK",
+    "@landingpage_pagebuilder_save_error_alert_button": {
+        "description": "Button Text des Fehler Alerts der erscheint wenn das Speichern im Page Builder fehlgeschlagen ist"
+    },
+    "landingpage_pagebuilder_save_success_snackbar": "Die Änderungen wurden erfolgreich gespeichert.",
+    "@landingpage_pagebuilder_save_success_snackbar": {
+        "description": "Text für die Snackbar die im Pagebuilder angezeigt wird, wenn das Speichern erfolgreich war"
     }
 }

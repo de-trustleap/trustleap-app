@@ -17,13 +17,13 @@ class PageBuilderTextPropertiesModel extends Equatable
       {this.text, this.fontSize, this.color, this.alignment, this.padding});
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'text': text,
-      'fontSize': fontSize,
-      'color': color,
-      'alignment': alignment,
-      'padding': padding
-    };
+    Map<String, dynamic> map = {};
+    if (text != null) map['text'] = text;
+    if (fontSize != null) map['fontSize'] = fontSize;
+    if (color != null) map['color'] = color;
+    if (alignment != null) map['alignment'] = alignment;
+    if (padding != null) map['padding'] = padding;
+    return map;
   }
 
   factory PageBuilderTextPropertiesModel.fromMap(Map<String, dynamic> map) {
@@ -73,6 +73,7 @@ class PageBuilderTextPropertiesModel extends Equatable
         color: properties.color?.value != null
             ? properties.color!.value.toString()
             : null,
+        alignment: properties.alignment?.name,
         padding: _getMapFromPadding(properties.padding));
   }
 
@@ -97,12 +98,16 @@ class PageBuilderTextPropertiesModel extends Equatable
     if (padding == null) {
       return null;
     }
-    return {
-      'top': padding.top != null ? padding.top! : 0.0,
-      'bottom': padding.bottom != null ? padding.bottom! : 0.0,
-      'left': padding.left != null ? padding.left! : 0.0,
-      'right': padding.right != null ? padding.right! : 0.0
-    };
+    Map<String, dynamic> map = {};
+    if (padding.top != null && padding.top != 0) map['top'] = padding.top;
+    if (padding.bottom != null && padding.top != 0) map['bottom'] = padding.bottom;
+    if (padding.left != null && padding.top != 0) map['left'] = padding.left;
+    if (padding.right != null && padding.top != 0) map['right'] = padding.right;
+    if (map.isEmpty) {
+      return null;
+    } else {
+      return map;
+    }
   }
 
   @override

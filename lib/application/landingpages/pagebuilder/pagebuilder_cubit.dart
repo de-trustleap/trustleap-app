@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
@@ -45,8 +47,63 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
           .fold((failure) => emit(GetLandingPageFailureState(failure: failure)),
               (content) {
         final pageBuilderContent = pageContent.copyWith(content: content);
-        emit(GetLandingPageAndUserSuccessState(content: pageBuilderContent));
+        emit(GetLandingPageAndUserSuccessState(
+            content: pageBuilderContent,
+            saveLoading: false,
+            saveFailure: null,
+            saveSuccessful: null));
       });
+    }
+  }
+
+  void updateWidget(PageBuilderWidget updatedWidget) {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final updatedSections =
+          currentState.content.content?.sections?.map((section) {
+        final updatedWidgets = section.widgets?.map((widget) {
+          return widget.id == updatedWidget.id ? updatedWidget : widget;
+        }).toList();
+        return section.copyWith(widgets: updatedWidgets);
+      }).toList();
+
+      final updatedContent =
+          currentState.content.content?.copyWith(sections: updatedSections);
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: updatedContent);
+      emit(GetLandingPageAndUserSuccessState(
+          content: updatedPageBuilderContent,
+          saveLoading: false,
+          saveFailure: null,
+          saveSuccessful: null));
+    }
+  }
+
+  void saveLandingPageContent(PageBuilderPage? page) async {
+    if (page == null) {
+      emit(PageBuilderUnexpectedFailureState());
+    } else if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      emit(GetLandingPageAndUserSuccessState(
+          content: currentState.content,
+          saveLoading: true,
+          saveFailure: null,
+          saveSuccessful: null));
+      final failureOrSuccess =
+          await pageBuilderRepo.saveLandingPageContent(page);
+      failureOrSuccess.fold(
+          (failure) => emit(GetLandingPageAndUserSuccessState(
+              content: currentState.content,
+              saveLoading: false,
+              saveFailure: failure,
+              saveSuccessful: null)),
+          (_) => emit(GetLandingPageAndUserSuccessState(
+              content: currentState.content,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: true)));
+    } else {
+      emit(PageBuilderUnexpectedFailureState());
     }
   }
 }
