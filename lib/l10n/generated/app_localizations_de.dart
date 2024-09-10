@@ -831,4 +831,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_save_error_alert_button => 'OK';
+
+  @override
+  String get landingpage_pagebuilder_save_success_snackbar => 'Die Änderungen wurden erfolgreich gespeichert.';
 }

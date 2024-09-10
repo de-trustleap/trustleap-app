@@ -50,7 +50,8 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
         emit(GetLandingPageAndUserSuccessState(
             content: pageBuilderContent,
             saveLoading: false,
-            saveFailure: null));
+            saveFailure: null,
+            saveSuccessful: null));
       });
     }
   }
@@ -73,7 +74,8 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
       emit(GetLandingPageAndUserSuccessState(
           content: updatedPageBuilderContent,
           saveLoading: false,
-          saveFailure: null));
+          saveFailure: null,
+          saveSuccessful: null));
     }
   }
 
@@ -83,18 +85,23 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
     } else if (state is GetLandingPageAndUserSuccessState) {
       final currentState = state as GetLandingPageAndUserSuccessState;
       emit(GetLandingPageAndUserSuccessState(
-          content: currentState.content, saveLoading: true, saveFailure: null));
+          content: currentState.content,
+          saveLoading: true,
+          saveFailure: null,
+          saveSuccessful: null));
       final failureOrSuccess =
           await pageBuilderRepo.saveLandingPageContent(page);
       failureOrSuccess.fold(
           (failure) => emit(GetLandingPageAndUserSuccessState(
               content: currentState.content,
               saveLoading: false,
-              saveFailure: failure)),
+              saveFailure: failure,
+              saveSuccessful: null)),
           (_) => emit(GetLandingPageAndUserSuccessState(
               content: currentState.content,
               saveLoading: false,
-              saveFailure: null)));
+              saveFailure: null,
+              saveSuccessful: true)));
     } else {
       emit(PageBuilderUnexpectedFailureState());
     }

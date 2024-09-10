@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -59,6 +60,9 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
           pageBuilderContent = state.content;
           if (!state.saveLoading && state.saveFailure != null) {
             showSaveFailureDialog(localization);
+          } else if (!state.saveLoading && state.saveSuccessful != null) {
+            CustomSnackBar.of(context).showCustomSnackBar(
+                localization.landingpage_pagebuilder_save_success_snackbar);
           }
         }
       },

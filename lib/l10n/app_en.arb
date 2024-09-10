@@ -1107,5 +1107,9 @@
     "landingpage_pagebuilder_save_error_alert_button": "OK",
     "@landingpage_pagebuilder_save_error_alert_button": {
         "description": "Button text of the error alert that appears if saving in the Page Builder failed"
+    },
+    "landingpage_pagebuilder_save_success_snackbar": "The changes were saved successfully.",
+    "@landingpage_pagebuilder_save_success_snackbar": {
+        "description": "Text for the snack bar that will be displayed in the page builder if the save was successful"
     }
 }

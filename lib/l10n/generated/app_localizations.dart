@@ -1738,6 +1738,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'OK'**
   String get landingpage_pagebuilder_save_error_alert_button;
+
+  /// Text for the snack bar that will be displayed in the page builder if the save was successful
+  ///
+  /// In en, this message translates to:
+  /// **'The changes were saved successfully.'**
+  String get landingpage_pagebuilder_save_success_snackbar;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
