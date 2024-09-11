@@ -31,6 +31,8 @@ class LandingPageBuilderWidgetBuilder {
 
   Widget buildImageWidget(
       PageBuilderImageProperties properties, PageBuilderWidget model) {
-    return PageBuilderImageView(properties: properties, widgetModel: model);
+    return PageBuilderImageView(
+        properties: properties,
+        widgetModel: model);
   }
 }
