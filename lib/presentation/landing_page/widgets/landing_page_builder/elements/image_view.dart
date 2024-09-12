@@ -12,9 +12,7 @@ class PageBuilderImageView extends StatefulWidget {
   final PageBuilderWidget widgetModel;
 
   const PageBuilderImageView(
-      {super.key,
-      required this.properties,
-      required this.widgetModel});
+      {super.key, required this.properties, required this.widgetModel});
 
   @override
   State<PageBuilderImageView> createState() => _PageBuilderImageViewState();
@@ -34,8 +32,12 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
         _selectedImage = convertedTempImage;
       });
       final updatedProperties = widget.properties
-            .copyWith(localImage: _selectedImage, hasChanged: true);
-      final updatedWidget = widget.widgetModel.copyWith(properties: updatedProperties);
+          .copyWith(localImage: convertedTempImage, hasChanged: true);
+      print("UPDATEDPROPERTIES: ${updatedProperties.localImage?.first}");
+      final updatedWidget =
+          widget.widgetModel.copyWith(properties: updatedProperties);
+      print(
+          "UPDATEDWIDGET: ${(updatedWidget.properties as PageBuilderImageProperties).localImage?.first}");
       Modular.get<PagebuilderCubit>().updateWidget(updatedWidget);
     }
   }
@@ -53,7 +55,7 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
         decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(widget.properties.borderRadius ?? 0),
-            image: DecorationImage(image: child)));
+            image: DecorationImage(fit: BoxFit.cover, image: child)));
   }
 
   @override

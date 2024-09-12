@@ -23,7 +23,12 @@ class PageBuilderImageProperties extends Equatable
       this.hasChanged = false});
 
   PageBuilderImageProperties copyWith(
-      {String? url, double? borderRadius, double? width, double? height, Uint8List? localImage, bool? hasChanged}) {
+      {String? url,
+      double? borderRadius,
+      double? width,
+      double? height,
+      Uint8List? localImage,
+      bool? hasChanged}) {
     return PageBuilderImageProperties(
         url: url ?? this.url,
         borderRadius: borderRadius ?? this.borderRadius,
@@ -34,5 +39,5 @@ class PageBuilderImageProperties extends Equatable
   }
 
   @override
-  List<Object?> get props => [url, borderRadius, width, height];
+  List<Object?> get props => [url, borderRadius, width, height, localImage];
 }

@@ -84,11 +84,6 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
       emit(PageBuilderUnexpectedFailureState());
     } else if (state is GetLandingPageAndUserSuccessState) {
       final currentState = state as GetLandingPageAndUserSuccessState;
-      emit(GetLandingPageAndUserSuccessState(
-          content: currentState.content,
-          saveLoading: true,
-          saveFailure: null,
-          saveSuccessful: null));
       final failureOrSuccess =
           await pageBuilderRepo.saveLandingPageContent(page);
       failureOrSuccess.fold(
@@ -107,3 +102,4 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
     }
   }
 }
+//TODO: Wenn ein Bild gespeichert wird muss auch der ImagePath in die JSON Struktur gespeichert werden, damit das Bild beim Ändern der URL wieder gelöscht werden kann.
