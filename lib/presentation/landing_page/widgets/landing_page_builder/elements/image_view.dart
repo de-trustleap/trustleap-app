@@ -33,11 +33,8 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
       });
       final updatedProperties = widget.properties
           .copyWith(localImage: convertedTempImage, hasChanged: true);
-      print("UPDATEDPROPERTIES: ${updatedProperties.localImage?.first}");
       final updatedWidget =
           widget.widgetModel.copyWith(properties: updatedProperties);
-      print(
-          "UPDATEDWIDGET: ${(updatedWidget.properties as PageBuilderImageProperties).localImage?.first}");
       Modular.get<PagebuilderCubit>().updateWidget(updatedWidget);
     }
   }
