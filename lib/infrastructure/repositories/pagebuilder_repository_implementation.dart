@@ -18,7 +18,6 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
   @override
   Future<Either<DatabaseFailure, PageBuilderPage>> getLandingPageContent(
       String id) async {
-    print("GET MODEL");
     final landingPageContentCollection =
         firestore.collection("landingPagesContent");
     try {
@@ -34,25 +33,9 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
     }
   }
 
-  /*@override
-  Future<Either<DatabaseFailure, Unit>> saveLandingPageContent(
-      PageBuilderPage page) async {
-    final landingPageContentCollection =
-        firestore.collection("landingPagesContent");
-    try {
-      await landingPageContentCollection
-          .doc(page.id.value)
-          .update(PageBuilderPageModel.fromDomain(page).toMap());
-      return right(unit);
-    } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
-  }*/
-
   @override
   Future<Either<DatabaseFailure, Unit>> saveLandingPageContent(
       PageBuilderPage page) async {
-    print("IMAGE: ${page.sections?.first?.widgets?.last?.properties}");
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("updatePageContent");
     final pageModel = PageBuilderPageModel.fromDomain(page);

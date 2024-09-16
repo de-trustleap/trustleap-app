@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,26 +20,34 @@ class PageBuilderImageView extends StatefulWidget {
 }
 
 class _PageBuilderImageViewState extends State<PageBuilderImageView> {
+  final GlobalKey<_PageBuilderImageViewState> myWidgetKey = GlobalKey();
+  final fileSizeLimit = 5000000;
   Uint8List? _selectedImage;
   bool _hovered = false;
 
   Future<void> _pickImage() async {
+    final context = myWidgetKey.currentContext;
     final ImagePicker picker = ImagePicker();
     final XFile? image =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
     if (image != null) {
       final convertedTempImage = await image.readAsBytes();
-      setState(() {
-        _selectedImage = convertedTempImage;
-      });
-      final updatedProperties = widget.properties
-          .copyWith(localImage: convertedTempImage, hasChanged: true);
-      print("UPDATEDPROPERTIES: ${updatedProperties.localImage?.first}");
-      final updatedWidget =
-          widget.widgetModel.copyWith(properties: updatedProperties);
-      print(
-          "UPDATEDWIDGET: ${(updatedWidget.properties as PageBuilderImageProperties).localImage?.first}");
-      Modular.get<PagebuilderCubit>().updateWidget(updatedWidget);
+      if (convertedTempImage.lengthInBytes > fileSizeLimit) {
+        if (context != null && context.mounted) {
+          CustomSnackBar.of(context).showCustomSnackBar(
+              "Das Bild überschreitet die 5 MB Grenze und kann nicht hochgeladen werden!",
+              SnackBarType.failure);
+        }
+      } else {
+        setState(() {
+          _selectedImage = convertedTempImage;
+        });
+        final updatedProperties = widget.properties
+            .copyWith(localImage: convertedTempImage, hasChanged: true);
+        final updatedWidget =
+            widget.widgetModel.copyWith(properties: updatedProperties);
+        Modular.get<PagebuilderCubit>().updateWidget(updatedWidget);
+      }
     }
   }
 
@@ -69,7 +78,8 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
       child: MouseRegion(
           onEnter: (event) => setHovered(true),
           onExit: (event) => setHovered(false),
-          child: Stack(alignment: Alignment.center, children: [
+          child:
+              Stack(key: myWidgetKey, alignment: Alignment.center, children: [
             if (_selectedImage != null) ...[
               _imageContainer(MemoryImage(_selectedImage!))
             ] else if (widget.properties.url != null) ...[
