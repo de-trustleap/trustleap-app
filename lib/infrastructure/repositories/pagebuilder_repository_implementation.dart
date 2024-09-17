@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
@@ -9,10 +10,10 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_pa
 
 class PageBuilderRepositoryImplementation implements PagebuilderRepository {
   final FirebaseFirestore firestore;
+  final FirebaseFunctions firebaseFunctions;
 
-  PageBuilderRepositoryImplementation({
-    required this.firestore,
-  });
+  PageBuilderRepositoryImplementation(
+      {required this.firestore, required this.firebaseFunctions});
 
   @override
   Future<Either<DatabaseFailure, PageBuilderPage>> getLandingPageContent(
@@ -35,14 +36,13 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> saveLandingPageContent(
       PageBuilderPage page) async {
-    final landingPageContentCollection =
-        firestore.collection("landingPagesContent");
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("updatePageContent");
+    final pageModel = PageBuilderPageModel.fromDomain(page);
     try {
-      await landingPageContentCollection
-          .doc(page.id.value)
-          .update(PageBuilderPageModel.fromDomain(page).toMap());
+      await callable.call({"page": pageModel.toMap()});
       return right(unit);
-    } on FirebaseException catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

@@ -1,26 +1,43 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 
-class PageBuilderImageProperties extends Equatable implements PageBuilderProperties {
+class PageBuilderImageProperties extends Equatable
+    implements PageBuilderProperties {
   final String? url;
   final double? borderRadius;
+  final double? width;
+  final double? height;
 
-  const PageBuilderImageProperties({
-    required this.url,
-    required this.borderRadius,
-  });
+  final Uint8List? localImage;
+  final bool hasChanged;
 
-  PageBuilderImageProperties copyWith({
-    String? url,
-    double? borderRadius,
-  }) {
+  const PageBuilderImageProperties(
+      {required this.url,
+      required this.borderRadius,
+      required this.width,
+      required this.height,
+      this.localImage,
+      this.hasChanged = false});
+
+  PageBuilderImageProperties copyWith(
+      {String? url,
+      double? borderRadius,
+      double? width,
+      double? height,
+      Uint8List? localImage,
+      bool? hasChanged}) {
     return PageBuilderImageProperties(
-      url: url ?? this.url,
-      borderRadius: borderRadius ?? this.borderRadius,
-    );
+        url: url ?? this.url,
+        borderRadius: borderRadius ?? this.borderRadius,
+        width: width ?? this.width,
+        height: height ?? this.height,
+        localImage: localImage ?? this.localImage,
+        hasChanged: hasChanged ?? this.hasChanged);
   }
-  
+
   @override
-  List<Object?> get props => [url, borderRadius];
+  List<Object?> get props => [url, borderRadius, width, height, localImage];
 }

@@ -1111,5 +1111,9 @@
     "landingpage_pagebuilder_save_success_snackbar": "The changes were saved successfully.",
     "@landingpage_pagebuilder_save_success_snackbar": {
         "description": "Text for the snack bar that will be displayed in the page builder if the save was successful"
+    },
+    "landingpage_pagebuilder_image_upload_exceeds_file_size_error": "The image exceeds the 5 MB limit and cannot be uploaded!",
+    "@landingpage_pagebuilder_image_upload_exceeds_file_size_error": {
+        "description": "Error message that appears in the page builder when you want to upload an image that is larger than 5 MB"
     }
 }

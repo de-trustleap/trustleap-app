@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
@@ -79,31 +78,28 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
     }
   }
 
-  void saveLandingPageContent(PageBuilderPage? page) async {
-    if (page == null) {
+  void saveLandingPageContent(PagebuilderContent? content) async {
+    if (content?.content == null) {
       emit(PageBuilderUnexpectedFailureState());
-    } else if (state is GetLandingPageAndUserSuccessState) {
-      final currentState = state as GetLandingPageAndUserSuccessState;
+    } else {
       emit(GetLandingPageAndUserSuccessState(
-          content: currentState.content,
+          content: content!,
           saveLoading: true,
           saveFailure: null,
           saveSuccessful: null));
       final failureOrSuccess =
-          await pageBuilderRepo.saveLandingPageContent(page);
+          await pageBuilderRepo.saveLandingPageContent(content.content!);
       failureOrSuccess.fold(
           (failure) => emit(GetLandingPageAndUserSuccessState(
-              content: currentState.content,
+              content: content,
               saveLoading: false,
               saveFailure: failure,
               saveSuccessful: null)),
           (_) => emit(GetLandingPageAndUserSuccessState(
-              content: currentState.content,
+              content: content,
               saveLoading: false,
               saveFailure: null,
               saveSuccessful: true)));
-    } else {
-      emit(PageBuilderUnexpectedFailureState());
     }
   }
 }

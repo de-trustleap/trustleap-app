@@ -1744,6 +1744,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The changes were saved successfully.'**
   String get landingpage_pagebuilder_save_success_snackbar;
+
+  /// Error message that appears in the page builder when you want to upload an image that is larger than 5 MB
+  ///
+  /// In en, this message translates to:
+  /// **'The image exceeds the 5 MB limit and cannot be uploaded!'**
+  String get landingpage_pagebuilder_image_upload_exceeds_file_size_error;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

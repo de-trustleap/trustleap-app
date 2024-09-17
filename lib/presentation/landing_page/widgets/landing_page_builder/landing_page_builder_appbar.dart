@@ -27,10 +27,11 @@ class LandingPageBuilderAppBar extends StatelessWidget
                 title: localization
                     .landingpage_pagebuilder_appbar_save_button_title,
                 isLoading: isLoading,
+                disabled: isLoading,
                 width: 180,
                 onTap: () {
                   Modular.get<PagebuilderCubit>()
-                      .saveLandingPageContent(content.content);
+                      .saveLandingPageContent(content);
                 }),
           )
         ]);

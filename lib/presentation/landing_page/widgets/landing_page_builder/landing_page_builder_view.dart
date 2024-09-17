@@ -76,7 +76,6 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
               callback: () =>
                   {Modular.get<PagebuilderCubit>().getLandingPage(id)});
         } else if (state is GetLandingPageAndUserSuccessState) {
-          debugPrint("RELOAD!!!");
           if (state.content.user?.id != state.content.landingPage?.ownerID) {
             return ErrorView(
                 title: localization
