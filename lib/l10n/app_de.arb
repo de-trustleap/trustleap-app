@@ -1111,5 +1111,9 @@
     "landingpage_pagebuilder_save_success_snackbar": "Die Änderungen wurden erfolgreich gespeichert.",
     "@landingpage_pagebuilder_save_success_snackbar": {
         "description": "Text für die Snackbar die im Pagebuilder angezeigt wird, wenn das Speichern erfolgreich war"
+    },
+    "landingpage_pagebuilder_image_upload_exceeds_file_size_error": "Das Bild überschreitet die 5 MB Grenze und kann nicht hochgeladen werden!",
+    "@landingpage_pagebuilder_image_upload_exceeds_file_size_error": {
+        "description": "Fehlermeldung die im Pagebuilder erscheint, wenn man ein Bild hochladen möchte das größer als 5 MB ist"
     }
 }

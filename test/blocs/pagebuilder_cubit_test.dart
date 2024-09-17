@@ -9,6 +9,11 @@ import '../mocks.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/constants.dart';
 
 void main() {
   late PagebuilderCubit pageBuilderCubit;
@@ -114,6 +119,89 @@ void main() {
       // Then
       expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
       pageBuilderCubit.getLandingPage(landingPageID);
+    });
+  });
+
+  group("PagebuilderCubit_saveLandingPage", () {
+    final testLandingPage = LandingPage(id: UniqueID.fromUniqueString("1"));
+    final testPage =
+        PageBuilderPage(id: UniqueID.fromUniqueString("1"), sections: [
+      PageBuilderSection(
+          id: UniqueID.fromUniqueString("2"),
+          layout: PageBuilderSectionLayout.column,
+          widgets: [
+            PageBuilderWidget(
+                id: UniqueID.fromUniqueString("3"),
+                elementType: PageBuilderWidgetType.text,
+                properties: PageBuilderTextProperties(
+                    text: "Test",
+                    fontSize: 16,
+                    color: Colors.black,
+                    alignment: TextAlign.center,
+                    padding: null))
+          ])
+    ]);
+    final testUser = CustomUser(id: UniqueID.fromUniqueString("2"));
+    final testContent = PagebuilderContent(
+        landingPage: testLandingPage, content: testPage, user: testUser);
+
+    test("should call pagebuilder repo if function is called", () async {
+      // Given
+      when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
+          .thenAnswer((_) async => right(unit));
+      // When
+      pageBuilderCubit.saveLandingPageContent(testContent);
+      await untilCalled(
+          mockPageBuilderRepo.saveLandingPageContent(testContent.content));
+      // Then
+      verify(mockPageBuilderRepo.saveLandingPageContent(testContent.content));
+      verifyNoMoreInteractions(mockPageBuilderRepo);
+    });
+
+    test(
+        "should emit GetLandingPageAndUserSuccessState with loading and GetLandingPageAndUserSuccessState without loading when function is called",
+        () async {
+      // Given
+      final expectedResult = [
+        GetLandingPageAndUserSuccessState(
+            content: testContent!,
+            saveLoading: true,
+            saveFailure: null,
+            saveSuccessful: null),
+        GetLandingPageAndUserSuccessState(
+            content: testContent,
+            saveLoading: false,
+            saveFailure: null,
+            saveSuccessful: true)
+      ];
+      when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
+          .thenAnswer((_) async => right(unit));
+      // Then
+      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
+      pageBuilderCubit.saveLandingPageContent(testContent);
+    });
+
+    test(
+        "should emit GetLandingPageAndUserSuccessState with loading and GetLandingPageAndUserSuccessState with failre when function is called and failed",
+        () async {
+      // Given
+      final expectedResult = [
+        GetLandingPageAndUserSuccessState(
+            content: testContent!,
+            saveLoading: true,
+            saveFailure: null,
+            saveSuccessful: null),
+        GetLandingPageAndUserSuccessState(
+            content: testContent,
+            saveLoading: false,
+            saveFailure: BackendFailure(),
+            saveSuccessful: null)
+      ];
+      when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
+      pageBuilderCubit.saveLandingPageContent(testContent);
     });
   });
 }

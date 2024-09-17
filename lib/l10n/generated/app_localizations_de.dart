@@ -834,4 +834,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_save_success_snackbar => 'Die Änderungen wurden erfolgreich gespeichert.';
+
+  @override
+  String get landingpage_pagebuilder_image_upload_exceeds_file_size_error => 'Das Bild überschreitet die 5 MB Grenze und kann nicht hochgeladen werden!';
 }

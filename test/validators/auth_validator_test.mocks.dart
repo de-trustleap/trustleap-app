@@ -2576,6 +2576,68 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_appbar_save_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_appbar_save_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_appbar_save_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_save_error_alert_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_save_error_alert_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_save_error_alert_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_save_error_alert_message),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_button =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_save_error_alert_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_save_error_alert_button),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_save_success_snackbar =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_save_success_snackbar),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_save_success_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_image_upload_exceeds_file_size_error =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_image_upload_exceeds_file_size_error),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_image_upload_exceeds_file_size_error),
+        ),
+      ) as String);
+
+  @override
   String promoter_overview_expiration_date(String? date) => (super.noSuchMethod(
         Invocation.method(
           #promoter_overview_expiration_date,

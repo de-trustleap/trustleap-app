@@ -35,7 +35,8 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
       if (convertedTempImage.lengthInBytes > fileSizeLimit) {
         if (context != null && context.mounted) {
           CustomSnackBar.of(context).showCustomSnackBar(
-              "Das Bild überschreitet die 5 MB Grenze und kann nicht hochgeladen werden!",
+              AppLocalizations.of(context)
+                  .landingpage_pagebuilder_image_upload_exceeds_file_size_error,
               SnackBarType.failure);
         }
       } else {
