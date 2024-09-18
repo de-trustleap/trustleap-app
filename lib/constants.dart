@@ -72,6 +72,7 @@ enum ThemeStatus { light, dark }
 enum PageBuilderWidgetType {
   container,
   column,
+  row,
   text,
   image,
   button,
