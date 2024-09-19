@@ -24,7 +24,9 @@ class PageBuilderWidgetModel extends Equatable {
     Map<String, dynamic> map = {'id': id};
     if (elementType != null) map['elementType'] = elementType;
     if (properties != null) map['properties'] = properties;
-    if (children != null) map['children'] = children;
+    if (children != null) {
+      map['children'] = children!.map((child) => child.toMap()).toList();
+    }
     return map;
   }
 
@@ -37,7 +39,10 @@ class PageBuilderWidgetModel extends Equatable {
             ? map['properties'] as Map<String, dynamic>
             : null,
         children: map['children'] != null
-            ? map['children'] as List<PageBuilderWidgetModel>
+            ? List<PageBuilderWidgetModel>.from(
+                (map['children'] as List<dynamic>).map((child) =>
+                    PageBuilderWidgetModel.fromMap(
+                        child as Map<String, dynamic>)))
             : null);
   }
 

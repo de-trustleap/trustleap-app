@@ -8,20 +8,36 @@ import 'package:flutter/material.dart';
 
 class LandingPageBuilderWidgetBuilder {
   Widget build(PageBuilderWidget model) {
-    if (model.properties == null) {
-      return const SizedBox.shrink();
-    } else {
-      switch (model.elementType) {
-        case PageBuilderWidgetType.text:
-          return buildTextWidget(
-              model.properties as PageBuilderTextProperties, model);
-        case PageBuilderWidgetType.image:
-          return buildImageWidget(
-              model.properties as PageBuilderImageProperties, model);
-        default:
-          return const SizedBox.shrink();
-      }
+    switch (model.elementType) {
+      case PageBuilderWidgetType.column:
+        return buildColumnWidget(model);
+      case PageBuilderWidgetType.row:
+        return buildRowWidget(model);
+      case PageBuilderWidgetType.text:
+        return buildTextWidget(
+            model.properties as PageBuilderTextProperties, model);
+      case PageBuilderWidgetType.image:
+        return buildImageWidget(
+            model.properties as PageBuilderImageProperties, model);
+      default:
+        return const SizedBox.shrink();
     }
+  }
+
+  Widget buildColumnWidget(PageBuilderWidget model) {
+    return Column(
+        children: model.children?.map((child) {
+              return build(child);
+            }).toList() ??
+            []);
+  }
+
+  Widget buildRowWidget(PageBuilderWidget model) {
+    return Row(
+        children: model.children?.map((child) {
+              return Expanded(child: build(child));
+            }).toList() ??
+            []);
   }
 
   Widget buildTextWidget(
@@ -31,8 +47,6 @@ class LandingPageBuilderWidgetBuilder {
 
   Widget buildImageWidget(
       PageBuilderImageProperties properties, PageBuilderWidget model) {
-    return PageBuilderImageView(
-        properties: properties,
-        widgetModel: model);
+    return PageBuilderImageView(properties: properties, widgetModel: model);
   }
 }
