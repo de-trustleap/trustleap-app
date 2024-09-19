@@ -25,17 +25,45 @@ class LandingPageBuilderWidgetBuilder {
   }
 
   Widget buildColumnWidget(PageBuilderWidget model) {
+    if (model.children == null || model.children!.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    // Berechne die Summe der heightPercentage aller Kinder
+    final totalHeightPercentage = model.children!
+        .fold<double>(0, (sum, child) => sum + (child.heightPercentage ?? 0));
+    // Falls die Gesamthöhe über 100% liegt, passe die Werte an
+    final scaleFactor =
+        totalHeightPercentage > 100 ? 100 / totalHeightPercentage : 1.0;
+
     return Column(
+        mainAxisSize: MainAxisSize.min,
         children: model.children?.map((child) {
-              return build(child);
+              final flexValue = (child.heightPercentage ?? 0) * scaleFactor;
+              print(
+                  'Child Height Percentage: ${child.heightPercentage}, Scale Factor: $scaleFactor, Flex Value: $flexValue');
+              return Flexible(
+                  fit: FlexFit.loose,
+                  flex: flexValue.toInt(),
+                  child: build(child));
             }).toList() ??
             []);
   }
 
   Widget buildRowWidget(PageBuilderWidget model) {
+    if (model.children == null || model.children!.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    // Berechne den Gesamtwert der definierten widthPercentage Werte
+    final totalWidthPercentage = model.children!
+        .fold<double>(0, (sum, child) => sum + (child.widthPercentage ?? 0));
+    // Falls die Gesamtbreite über 100% liegt, passe die Werte an
+    final scaleFactor =
+        totalWidthPercentage > 100 ? 100 / totalWidthPercentage : 1.0;
     return Row(
         children: model.children?.map((child) {
-              return Expanded(child: build(child));
+              final flexValue = (child.widthPercentage ?? 0) * scaleFactor;
+              return Expanded(
+                  flex: (flexValue * 100).toInt(), child: build(child));
             }).toList() ??
             []);
   }

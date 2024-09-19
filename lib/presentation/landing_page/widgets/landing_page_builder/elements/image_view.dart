@@ -87,7 +87,9 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
             ] else if (widget.properties.url != null) ...[
               NetworkImageView(
                   imageURL: widget.properties.url!,
-                  cornerRadius: widget.properties.borderRadius)
+                  cornerRadius: widget.properties.borderRadius,
+                  width: widget.properties.width,
+                  height: widget.properties.height)
             ] else ...[
               Container(
                 width: widget.properties.width,

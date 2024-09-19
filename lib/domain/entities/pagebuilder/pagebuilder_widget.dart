@@ -10,25 +10,40 @@ class PageBuilderWidget extends Equatable {
   final PageBuilderWidgetType? elementType;
   final PageBuilderProperties? properties;
   final List<PageBuilderWidget>? children;
+  final double? widthPercentage;
+  final double? heightPercentage;
 
   const PageBuilderWidget(
       {required this.id,
       required this.elementType,
       required this.properties,
-      required this.children});
+      required this.children,
+      required this.widthPercentage,
+      required this.heightPercentage});
 
   PageBuilderWidget copyWith(
       {UniqueID? id,
       PageBuilderWidgetType? elementType,
       PageBuilderProperties? properties,
-      List<PageBuilderWidget>? children}) {
+      List<PageBuilderWidget>? children,
+      double? widthPercentage,
+      double? heightPercentage}) {
     return PageBuilderWidget(
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
         properties: properties ?? this.properties,
-        children: children ?? this.children);
+        children: children ?? this.children,
+        widthPercentage: widthPercentage ?? this.widthPercentage,
+        heightPercentage: heightPercentage ?? this.heightPercentage);
   }
 
   @override
-  List<Object?> get props => [id, elementType, properties, children];
+  List<Object?> get props => [
+        id,
+        elementType,
+        properties,
+        children,
+        widthPercentage,
+        heightPercentage
+      ];
 }
