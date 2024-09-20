@@ -14,15 +14,13 @@ class PageBuilderWidgetModel extends Equatable {
   final Map<String, dynamic>? properties;
   final List<PageBuilderWidgetModel>? children;
   final double? widthPercentage;
-  final double? heightPercentage;
 
   const PageBuilderWidgetModel(
       {required this.id,
       required this.elementType,
       required this.properties,
       required this.children,
-      required this.widthPercentage,
-      required this.heightPercentage});
+      required this.widthPercentage});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'id': id};
@@ -32,7 +30,6 @@ class PageBuilderWidgetModel extends Equatable {
       map['children'] = children!.map((child) => child.toMap()).toList();
     }
     if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
-    if (heightPercentage != null) map['heightPercentage'] = heightPercentage;
     return map;
   }
 
@@ -52,9 +49,6 @@ class PageBuilderWidgetModel extends Equatable {
             : null,
         widthPercentage: map['widthPercentage'] != null
             ? map['widthPercentage'] as double
-            : null,
-        heightPercentage: map['heightPercentage'] != null
-            ? map['heightPercentage'] as double
             : null);
   }
 
@@ -63,15 +57,13 @@ class PageBuilderWidgetModel extends Equatable {
       String? elementType,
       Map<String, dynamic>? properties,
       List<PageBuilderWidgetModel>? children,
-      double? widthPercentage,
-      double? heightPercentage}) {
+      double? widthPercentage}) {
     return PageBuilderWidgetModel(
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
         properties: properties ?? this.properties,
         children: children ?? this.children,
-        widthPercentage: widthPercentage ?? this.widthPercentage,
-        heightPercentage: heightPercentage ?? this.heightPercentage);
+        widthPercentage: widthPercentage ?? this.widthPercentage);
   }
 
   factory PageBuilderWidgetModel.fromFirestore(
@@ -88,8 +80,7 @@ class PageBuilderWidgetModel extends Equatable {
                 .firstWhere((element) => element.name == elementType),
         properties: _getPropertiesByType(elementType),
         children: children?.map((child) => child.toDomain()).toList(),
-        widthPercentage: widthPercentage,
-        heightPercentage: heightPercentage);
+        widthPercentage: widthPercentage);
   }
 
   factory PageBuilderWidgetModel.fromDomain(PageBuilderWidget widget) {
@@ -100,8 +91,7 @@ class PageBuilderWidgetModel extends Equatable {
         children: widget.children
             ?.map((child) => PageBuilderWidgetModel.fromDomain(child))
             .toList(),
-        widthPercentage: widget.widthPercentage,
-        heightPercentage: widget.heightPercentage);
+        widthPercentage: widget.widthPercentage);
   }
 
   PageBuilderProperties? _getPropertiesByType(String? type) {
@@ -137,12 +127,6 @@ class PageBuilderWidgetModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        id,
-        elementType,
-        properties,
-        children,
-        widthPercentage,
-        heightPercentage
-      ];
+  List<Object?> get props =>
+      [id, elementType, properties, children, widthPercentage];
 }
