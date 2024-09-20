@@ -28,23 +28,10 @@ class LandingPageBuilderWidgetBuilder {
     if (model.children == null || model.children!.isEmpty) {
       return const SizedBox.shrink();
     }
-    // Berechne die Summe der heightPercentage aller Kinder
-    final totalHeightPercentage = model.children!
-        .fold<double>(0, (sum, child) => sum + (child.heightPercentage ?? 0));
-    // Falls die Gesamthöhe über 100% liegt, passe die Werte an
-    final scaleFactor =
-        totalHeightPercentage > 100 ? 100 / totalHeightPercentage : 1.0;
 
     return Column(
-        mainAxisSize: MainAxisSize.min,
         children: model.children?.map((child) {
-              final flexValue = (child.heightPercentage ?? 0) * scaleFactor;
-              print(
-                  'Child Height Percentage: ${child.heightPercentage}, Scale Factor: $scaleFactor, Flex Value: $flexValue');
-              return Flexible(
-                  fit: FlexFit.loose,
-                  flex: flexValue.toInt(),
-                  child: build(child));
+              return build(child);
             }).toList() ??
             []);
   }
