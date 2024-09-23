@@ -11,41 +11,59 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_te
 class PageBuilderWidgetModel extends Equatable {
   final String id;
   final String? elementType;
-  //final List<PageBuilderWidget>? children;
   final Map<String, dynamic>? properties;
+  final List<PageBuilderWidgetModel>? children;
+  final double? widthPercentage;
 
-  const PageBuilderWidgetModel({
-    required this.id,
-    required this.elementType,
-    required this.properties,
-  });
+  const PageBuilderWidgetModel(
+      {required this.id,
+      required this.elementType,
+      required this.properties,
+      required this.children,
+      required this.widthPercentage});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'id': id};
     if (elementType != null) map['elementType'] = elementType;
     if (properties != null) map['properties'] = properties;
+    if (children != null) {
+      map['children'] = children!.map((child) => child.toMap()).toList();
+    }
+    if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
     return map;
   }
 
   factory PageBuilderWidgetModel.fromMap(Map<String, dynamic> map) {
     return PageBuilderWidgetModel(
         id: map['id'] != null ? map['id'] as String : "",
-        elementType: map['elementType'] != null ? map['elementType'] as String : "none",
+        elementType:
+            map['elementType'] != null ? map['elementType'] as String : "none",
         properties: map['properties'] != null
             ? map['properties'] as Map<String, dynamic>
+            : null,
+        children: map['children'] != null
+            ? List<PageBuilderWidgetModel>.from(
+                (map['children'] as List<dynamic>).map((child) =>
+                    PageBuilderWidgetModel.fromMap(
+                        child as Map<String, dynamic>)))
+            : null,
+        widthPercentage: map['widthPercentage'] != null
+            ? map['widthPercentage'] as double
             : null);
   }
 
-  PageBuilderWidgetModel copyWith({
-    String? id,
-    String? elementType,
-    Map<String, dynamic>? properties,
-  }) {
+  PageBuilderWidgetModel copyWith(
+      {String? id,
+      String? elementType,
+      Map<String, dynamic>? properties,
+      List<PageBuilderWidgetModel>? children,
+      double? widthPercentage}) {
     return PageBuilderWidgetModel(
-      id: id ?? this.id,
-      elementType: elementType ?? this.elementType,
-      properties: properties ?? this.properties,
-    );
+        id: id ?? this.id,
+        elementType: elementType ?? this.elementType,
+        properties: properties ?? this.properties,
+        children: children ?? this.children,
+        widthPercentage: widthPercentage ?? this.widthPercentage);
   }
 
   factory PageBuilderWidgetModel.fromFirestore(
@@ -60,14 +78,20 @@ class PageBuilderWidgetModel extends Equatable {
             ? PageBuilderWidgetType.none
             : PageBuilderWidgetType.values
                 .firstWhere((element) => element.name == elementType),
-        properties: _getPropertiesByType(elementType));
+        properties: _getPropertiesByType(elementType),
+        children: children?.map((child) => child.toDomain()).toList(),
+        widthPercentage: widthPercentage);
   }
 
   factory PageBuilderWidgetModel.fromDomain(PageBuilderWidget widget) {
     return PageBuilderWidgetModel(
         id: widget.id.value,
         elementType: widget.elementType?.name,
-        properties: _getMapFromProperties(widget.properties));
+        properties: _getMapFromProperties(widget.properties),
+        children: widget.children
+            ?.map((child) => PageBuilderWidgetModel.fromDomain(child))
+            .toList(),
+        widthPercentage: widget.widthPercentage);
   }
 
   PageBuilderProperties? _getPropertiesByType(String? type) {
@@ -103,5 +127,6 @@ class PageBuilderWidgetModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, elementType, properties];
+  List<Object?> get props =>
+      [id, elementType, properties, children, widthPercentage];
 }

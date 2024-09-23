@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_pr
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/network_image_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -84,7 +85,11 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
             if (_selectedImage != null) ...[
               _imageContainer(MemoryImage(_selectedImage!))
             ] else if (widget.properties.url != null) ...[
-              _imageContainer(NetworkImage(widget.properties.url!))
+              NetworkImageView(
+                  imageURL: widget.properties.url!,
+                  cornerRadius: widget.properties.borderRadius,
+                  width: widget.properties.width,
+                  height: widget.properties.height)
             ] else ...[
               Container(
                 width: widget.properties.width,

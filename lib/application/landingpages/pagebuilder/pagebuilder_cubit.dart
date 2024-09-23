@@ -61,7 +61,7 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
       final updatedSections =
           currentState.content.content?.sections?.map((section) {
         final updatedWidgets = section.widgets?.map((widget) {
-          return widget.id == updatedWidget.id ? updatedWidget : widget;
+          return _updateChildWidgets(widget, updatedWidget);
         }).toList();
         return section.copyWith(widgets: updatedWidgets);
       }).toList();
@@ -76,6 +76,21 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
           saveFailure: null,
           saveSuccessful: null));
     }
+  }
+
+  PageBuilderWidget _updateChildWidgets(
+      PageBuilderWidget currentWidget, PageBuilderWidget updatedWidget) {
+    if (currentWidget.id == updatedWidget.id) {
+      return updatedWidget;
+    }
+    if (currentWidget.children != null && currentWidget.children!.isNotEmpty) {
+      final updatedChildren = currentWidget.children!.map((child) {
+        return _updateChildWidgets(child, updatedWidget);
+      }).toList();
+
+      return currentWidget.copyWith(children: updatedChildren);
+    }
+    return currentWidget;
   }
 
   void saveLandingPageContent(PagebuilderContent? content) async {
