@@ -71,7 +71,8 @@ void main() {
                 user: testUser),
             saveLoading: false,
             saveFailure: null,
-            saveSuccessful: null)
+            saveSuccessful: null,
+            isUpdated: null)
       ];
       when(mockLandingPageRepo.getLandingPage(landingPageID))
           .thenAnswer((_) async => right(testLandingPage));
@@ -133,6 +134,8 @@ void main() {
             PageBuilderWidget(
                 id: UniqueID.fromUniqueString("3"),
                 elementType: PageBuilderWidgetType.text,
+                children: [],
+                widthPercentage: null,
                 properties: PageBuilderTextProperties(
                     text: "Test",
                     fontSize: 16,
@@ -167,12 +170,14 @@ void main() {
             content: testContent!,
             saveLoading: true,
             saveFailure: null,
-            saveSuccessful: null),
+            saveSuccessful: null,
+            isUpdated: null),
         GetLandingPageAndUserSuccessState(
             content: testContent,
             saveLoading: false,
             saveFailure: null,
-            saveSuccessful: true)
+            saveSuccessful: true,
+            isUpdated: false)
       ];
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => right(unit));
@@ -190,12 +195,14 @@ void main() {
             content: testContent!,
             saveLoading: true,
             saveFailure: null,
-            saveSuccessful: null),
+            saveSuccessful: null,
+            isUpdated: null),
         GetLandingPageAndUserSuccessState(
             content: testContent,
             saveLoading: false,
             saveFailure: BackendFailure(),
-            saveSuccessful: null)
+            saveSuccessful: null,
+            isUpdated: null)
       ];
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => left(BackendFailure()));
