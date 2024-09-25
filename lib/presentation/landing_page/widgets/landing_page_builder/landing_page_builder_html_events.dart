@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -9,20 +10,20 @@ class LandingPageBuilderHtmlEvents {
     html.window.removeEventListener('beforeunload', beforeUnloadListener);
   }
 
-  void enableLeavePageListeners() {
-    _enableBeforeUnloadListener();
+  void enableLeavePageListeners(AppLocalizations localization) {
+    _enableBeforeUnloadListener(localization);
   }
 
   void disableLeavePageListeners() {
     _disableBeforeUnloadListener();
   }
 
-  void _enableBeforeUnloadListener() {
+  void _enableBeforeUnloadListener(AppLocalizations localization) {
     if (kIsWeb && !_isBeforeUnloadListenerEnabled) {
       beforeUnloadListener = (html.Event event) {
         event.preventDefault();
         (event as html.BeforeUnloadEvent).returnValue =
-            "Willst du die Seite wirklich verlassen? Nicht gespeicherte Änderungen gehen verloren.";
+            localization.landingpage_pagebuilder_unload_alert_message;
       };
       html.window.addEventListener("beforeunload", beforeUnloadListener!);
       _isBeforeUnloadListenerEnabled = true;

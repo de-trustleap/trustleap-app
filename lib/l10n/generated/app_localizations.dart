@@ -1750,6 +1750,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The image exceeds the 5 MB limit and cannot be uploaded!'**
   String get landingpage_pagebuilder_image_upload_exceeds_file_size_error;
+
+  /// Error message for the alert on the page builder page, which is called when you want to leave the page and have not saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to leave the site? Changes that are not saved will be lost.'**
+  String get landingpage_pagebuilder_unload_alert_message;
+
+  /// Error title for the alert on the page builder page, which is called when you want to leave the page and have not saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave page?'**
+  String get landingpage_pagebuilder_leave_alert_title;
+
+  /// Error message for the alert on the page builder page, which is called when you want to leave the page and have not saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to leave the page?\nUnsaved changes will be lost.'**
+  String get landingpage_pagebuilder_leave_alert_message;
+
+  /// Button title for the alert on the page builder page, which is called when you want to leave the page and have not saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get landingpage_pagebuilder_leave_alert_button_title;
+
+  /// Cancel button title for the alert on the page builder page, which is called when you want to leave the page and have not saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get landingpage_pagebuilder_leave_alert_cancel_button_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

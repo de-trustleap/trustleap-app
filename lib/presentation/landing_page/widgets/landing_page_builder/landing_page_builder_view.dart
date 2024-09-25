@@ -35,7 +35,6 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
 
     id = Modular.args.params["id"] ?? "";
     htmlEvents = LandingPageBuilderHtmlEvents();
-    print("COLLAPSE MENU");
     BlocProvider.of<MenuCubit>(context).collapseMenu(true);
     Modular.get<PagebuilderCubit>().getLandingPage(id);
   }
@@ -63,21 +62,23 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
         });
   }
 
-  void _showNavigationDialog(BuildContext context, String route) {
+  void _showNavigationDialog(
+      BuildContext context, String route, AppLocalizations localization) {
     showDialog(
         context: context,
         builder: (_) {
           return CustomAlertDialog(
-              title: "Seite verlassen?",
-              message:
-                  "Möchtest du die Seite wirklich verlassen?\nNicht gespeicherte Änderungen gehen verloren",
-              actionButtonTitle: "Verlassen",
+              title: localization.landingpage_pagebuilder_leave_alert_title,
+              message: localization.landingpage_pagebuilder_leave_alert_message,
+              actionButtonTitle:
+                  localization.landingpage_pagebuilder_leave_alert_button_title,
               actionButtonAction: () async {
                 Modular.to.pop();
                 await Future.delayed(const Duration(milliseconds: 100));
                 Modular.to.navigate(route);
               },
-              cancelButtonTitle: "Abbrechen",
+              cancelButtonTitle: localization
+                  .landingpage_pagebuilder_leave_alert_cancel_button_title,
               cancelButtonAction: () {
                 Modular.to.pop();
               });
@@ -107,7 +108,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                     htmlEvents.disableLeavePageListeners();
                     isUpdated = false;
                   } else if (state.isUpdated != null && state.isUpdated!) {
-                    htmlEvents.enableLeavePageListeners();
+                    htmlEvents.enableLeavePageListeners(localization);
                     isUpdated = true;
                   }
                 }
@@ -116,7 +117,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
               listener: (context, state) {
             if (state is NavigationCheckState) {
               if (isUpdated) {
-                _showNavigationDialog(context, state.route);
+                _showNavigationDialog(context, state.route, localization);
               } else {
                 Modular.to.navigate(state.route);
               }
