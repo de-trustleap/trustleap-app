@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
+import 'package:finanzbegleiter/application/navigation/navigation_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class MenuItem extends StatefulWidget {
   final String path;
@@ -90,7 +90,8 @@ class _MenuItemState extends State<MenuItem> {
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 BlocProvider.of<MenuCubit>(context).selectMenu(widget.type);
-                Modular.to.navigate(RoutePaths.homePath + widget.path);
+                BlocProvider.of<NavigationCubit>(context)
+                    .navigate(RoutePaths.homePath + widget.path);
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -13,6 +13,7 @@ import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
+import 'package:finanzbegleiter/application/navigation/navigation_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
@@ -58,7 +59,6 @@ class AppModule extends Module {
       ..addLazySingleton(() => firestore)
       ..addLazySingleton(() => storage)
       ..addLazySingleton(() => firebaseFunctions)
-      
       ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
       ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
       ..addLazySingleton<ImageRepository>(ImageRepositoryImplementation.new)
@@ -67,10 +67,11 @@ class AppModule extends Module {
       ..addLazySingleton<CompanyRepository>(CompanyRepositoryImplementation.new)
       ..addLazySingleton<LandingPageRepository>(
           LandingPageRepositoryImplementation.new)
-      ..addLazySingleton<PagebuilderRepository>(PageBuilderRepositoryImplementation.new)
-
+      ..addLazySingleton<PagebuilderRepository>(
+          PageBuilderRepositoryImplementation.new)
       ..addLazySingleton(ProfileObserverBloc.new)
       ..addLazySingleton(PagebuilderCubit.new)
+      ..add(NavigationCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
