@@ -5,6 +5,8 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import '../mocks.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -14,6 +16,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:flutter/foundation.dart';
 
 void main() {
   late PagebuilderCubit pageBuilderCubit;
@@ -71,7 +74,8 @@ void main() {
                 user: testUser),
             saveLoading: false,
             saveFailure: null,
-            saveSuccessful: null)
+            saveSuccessful: null,
+            isUpdated: null)
       ];
       when(mockLandingPageRepo.getLandingPage(landingPageID))
           .thenAnswer((_) async => right(testLandingPage));
@@ -133,6 +137,8 @@ void main() {
             PageBuilderWidget(
                 id: UniqueID.fromUniqueString("3"),
                 elementType: PageBuilderWidgetType.text,
+                children: [],
+                widthPercentage: null,
                 properties: PageBuilderTextProperties(
                     text: "Test",
                     fontSize: 16,
@@ -167,12 +173,14 @@ void main() {
             content: testContent!,
             saveLoading: true,
             saveFailure: null,
-            saveSuccessful: null),
+            saveSuccessful: null,
+            isUpdated: null),
         GetLandingPageAndUserSuccessState(
             content: testContent,
             saveLoading: false,
             saveFailure: null,
-            saveSuccessful: true)
+            saveSuccessful: true,
+            isUpdated: false)
       ];
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => right(unit));
@@ -190,18 +198,174 @@ void main() {
             content: testContent!,
             saveLoading: true,
             saveFailure: null,
-            saveSuccessful: null),
+            saveSuccessful: null,
+            isUpdated: null),
         GetLandingPageAndUserSuccessState(
             content: testContent,
             saveLoading: false,
             saveFailure: BackendFailure(),
-            saveSuccessful: null)
+            saveSuccessful: null,
+            isUpdated: null)
       ];
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
       pageBuilderCubit.saveLandingPageContent(testContent);
+    });
+  });
+
+  group("PagebuilderCubit_updateWidgets", () {
+    final mockTextProperties1 = PageBuilderTextProperties(
+      text: "Text 1",
+      fontSize: 16.0,
+      color: Colors.black,
+      alignment: TextAlign.left,
+      padding:
+          PageBuilderPadding(top: 10.0, bottom: 10.0, left: 5.0, right: 5.0),
+    );
+
+    final mockTextProperties2 = PageBuilderTextProperties(
+      text: "Text 2",
+      fontSize: 18.0,
+      color: Colors.red,
+      alignment: TextAlign.center,
+      padding: PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0),
+    );
+
+    final mockImageProperties = PageBuilderImageProperties(
+      url: "https://example.com/image.png",
+      borderRadius: 10.0,
+      width: 100.0,
+      height: 150.0,
+      localImage: Uint8List(0),
+    );
+
+    final mockTextWidget1 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget1"),
+      elementType: PageBuilderWidgetType.text,
+      properties: mockTextProperties1,
+      children: [],
+      widthPercentage: 100.0,
+    );
+
+    final mockTextWidget2 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget2"),
+      elementType: PageBuilderWidgetType.text,
+      properties: mockTextProperties2,
+      children: [],
+      widthPercentage: 100.0,
+    );
+
+    final mockImageWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget3"),
+      elementType: PageBuilderWidgetType.image,
+      properties: mockImageProperties,
+      children: [],
+      widthPercentage: 100.0,
+    );
+
+    final mockColumnWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("columnWidget"),
+      elementType: PageBuilderWidgetType.column,
+      properties: null,
+      children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
+      widthPercentage: 100.0,
+    );
+
+    final mockRowWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("rowWidget"),
+      elementType: PageBuilderWidgetType.row,
+      properties: null,
+      children: [mockTextWidget1, mockImageWidget],
+      widthPercentage: 100.0,
+    );
+
+    final mockSection = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      layout: PageBuilderSectionLayout.column,
+      widgets: [mockColumnWidget, mockRowWidget],
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      sections: [mockSection],
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("landingPage1"),
+      contentID: UniqueID.fromUniqueString("content1"),
+    );
+
+    final mockUser = CustomUser(
+      id: UniqueID.fromUniqueString("user1"),
+    );
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should emit GetLandingPageAndUserSuccessState with updated widget",
+        () async {
+      // Given
+      final updatedWidget = mockTextWidget1.copyWith(
+        widthPercentage: 80,
+        properties: mockTextProperties1.copyWith(text: "Text3", fontSize: 30),
+      );
+
+      final updatedColumnWidget = mockColumnWidget.copyWith(children: [
+        updatedWidget,
+        mockTextWidget2,
+        mockImageWidget,
+      ]);
+
+      final updatedRowWidget = mockRowWidget.copyWith(children: [
+        updatedWidget,
+        mockImageWidget,
+      ]);
+
+      final updatedSection = mockSection
+          .copyWith(widgets: [updatedColumnWidget, updatedRowWidget]);
+
+      final updatedPageBuilderPage =
+          mockPageBuilderPage.copyWith(sections: [updatedSection]);
+
+      final updatedContent =
+          mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
+
+      final expectedResult = GetLandingPageAndUserSuccessState(
+        content: updatedContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderCubit.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            expectedResult,
+          ]));
+
+      pageBuilderCubit.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderCubit.updateWidget(updatedWidget);
     });
   });
 }

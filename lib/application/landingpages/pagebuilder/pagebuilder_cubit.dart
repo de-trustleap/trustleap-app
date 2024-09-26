@@ -50,7 +50,8 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
             content: pageBuilderContent,
             saveLoading: false,
             saveFailure: null,
-            saveSuccessful: null));
+            saveSuccessful: null,
+            isUpdated: null));
       });
     }
   }
@@ -74,7 +75,8 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
           content: updatedPageBuilderContent,
           saveLoading: false,
           saveFailure: null,
-          saveSuccessful: null));
+          saveSuccessful: null,
+          isUpdated: true));
     }
   }
 
@@ -101,7 +103,8 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
           content: content!,
           saveLoading: true,
           saveFailure: null,
-          saveSuccessful: null));
+          saveSuccessful: null,
+          isUpdated: null));
       final failureOrSuccess =
           await pageBuilderRepo.saveLandingPageContent(content.content!);
       failureOrSuccess.fold(
@@ -109,12 +112,14 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
               content: content,
               saveLoading: false,
               saveFailure: failure,
-              saveSuccessful: null)),
+              saveSuccessful: null,
+              isUpdated: null)),
           (_) => emit(GetLandingPageAndUserSuccessState(
               content: content,
               saveLoading: false,
               saveFailure: null,
-              saveSuccessful: true)));
+              saveSuccessful: true,
+              isUpdated: false)));
     }
   }
 }

@@ -62,6 +62,8 @@ void main() {
             PageBuilderWidget(
                 id: UniqueID.fromUniqueString("3"),
                 elementType: PageBuilderWidgetType.text,
+                children: [],
+                widthPercentage: null,
                 properties: PageBuilderTextProperties(
                     text: "Test",
                     fontSize: 16,

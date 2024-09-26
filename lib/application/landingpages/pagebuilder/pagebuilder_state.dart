@@ -29,16 +29,18 @@ final class GetLandingPageAndUserSuccessState extends PagebuilderState
   final bool saveLoading;
   final DatabaseFailure? saveFailure;
   final bool? saveSuccessful;
+  final bool? isUpdated;
 
   GetLandingPageAndUserSuccessState(
       {required this.content,
       required this.saveLoading,
       required this.saveFailure,
-      required this.saveSuccessful});
+      required this.saveSuccessful,
+      required this.isUpdated});
 
   @override
   List<Object?> get props =>
-      [content, saveLoading, saveFailure, saveSuccessful];
+      [content, saveLoading, saveFailure, saveSuccessful, isUpdated];
 }
 
 final class SavePageSuccessState extends PagebuilderState with EquatableMixin {

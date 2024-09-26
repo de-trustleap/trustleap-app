@@ -2638,6 +2638,56 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_unload_alert_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_unload_alert_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_unload_alert_message),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_leave_alert_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_leave_alert_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_message => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_leave_alert_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_leave_alert_message),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_leave_alert_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_leave_alert_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_cancel_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_leave_alert_cancel_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_leave_alert_cancel_button_title),
+        ),
+      ) as String);
+
+  @override
   String promoter_overview_expiration_date(String? date) => (super.noSuchMethod(
         Invocation.method(
           #promoter_overview_expiration_date,
