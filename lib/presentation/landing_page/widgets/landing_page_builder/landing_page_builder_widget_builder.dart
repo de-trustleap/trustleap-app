@@ -1,8 +1,10 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/editable_text.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/icon_view.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/image_view.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +21,8 @@ class LandingPageBuilderWidgetBuilder {
       case PageBuilderWidgetType.image:
         return buildImageWidget(
             model.properties as PageBuilderImageProperties, model);
+      case PageBuilderWidgetType.icon:
+        return buildIconWidget(model.properties as PageBuilderIconProperties, model);
       default:
         return const SizedBox.shrink();
     }
@@ -47,6 +51,7 @@ class LandingPageBuilderWidgetBuilder {
     final scaleFactor =
         totalWidthPercentage > 100 ? 100 / totalWidthPercentage : 1.0;
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
         children: model.children?.map((child) {
               final flexValue = (child.widthPercentage ?? 0) * scaleFactor;
               return Expanded(
@@ -63,5 +68,9 @@ class LandingPageBuilderWidgetBuilder {
   Widget buildImageWidget(
       PageBuilderImageProperties properties, PageBuilderWidget model) {
     return PageBuilderImageView(properties: properties, widgetModel: model);
+  }
+
+  Widget buildIconWidget(PageBuilderIconProperties properties, PageBuilderWidget model) {
+    return PageBuilderIconView(properties: properties, widgetModel: model);
   }
 }

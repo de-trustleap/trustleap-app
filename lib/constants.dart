@@ -75,6 +75,7 @@ enum PageBuilderWidgetType {
   row,
   text,
   image,
+  icon,
   button,
   contactForm,
   none
