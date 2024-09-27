@@ -2,7 +2,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
-
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +59,7 @@ class PageBuilderIconPropertiesModel extends Equatable
         code: properties.code,
         size: properties.size,
         color: properties.color?.value != null
-            ? properties.color!.value.toString()
+            ? properties.color!.value.toRadixString(16)
             : null);
   }
 

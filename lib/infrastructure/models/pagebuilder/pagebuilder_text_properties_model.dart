@@ -56,7 +56,9 @@ class PageBuilderTextPropertiesModel extends Equatable
     return PageBuilderTextProperties(
         text: text,
         fontSize: fontSize,
-        color: color != null ? Color(ColorUtility.getHexIntFromString(color!)) : null,
+        color: color != null
+            ? Color(ColorUtility.getHexIntFromString(color!))
+            : null,
         alignment: _getTextAlignFromString(alignment),
         padding: PageBuilderPadding.fromMap(padding));
   }
@@ -67,7 +69,7 @@ class PageBuilderTextPropertiesModel extends Equatable
         text: properties.text,
         fontSize: properties.fontSize,
         color: properties.color?.value != null
-            ? properties.color!.value.toString()
+            ? properties.color!.value.toRadixString(16)
             : null,
         alignment: properties.alignment?.name,
         padding: _getMapFromPadding(properties.padding));
@@ -91,7 +93,8 @@ class PageBuilderTextPropertiesModel extends Equatable
     }
     Map<String, dynamic> map = {};
     if (padding.top != null && padding.top != 0) map['top'] = padding.top;
-    if (padding.bottom != null && padding.top != 0) map['bottom'] = padding.bottom;
+    if (padding.bottom != null && padding.top != 0)
+      map['bottom'] = padding.bottom;
     if (padding.left != null && padding.top != 0) map['left'] = padding.left;
     if (padding.right != null && padding.top != 0) map['right'] = padding.right;
     if (map.isEmpty) {
