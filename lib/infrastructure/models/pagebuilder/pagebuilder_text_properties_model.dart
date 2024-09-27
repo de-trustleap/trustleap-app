@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -51,16 +52,13 @@ class PageBuilderTextPropertiesModel extends Equatable
         padding: padding ?? this.padding);
   }
 
-  factory PageBuilderTextPropertiesModel.fromFirestore(
-      Map<String, dynamic> doc) {
-    return PageBuilderTextPropertiesModel.fromMap(doc);
-  }
-
   PageBuilderTextProperties toDomain() {
     return PageBuilderTextProperties(
         text: text,
         fontSize: fontSize,
-        color: color != null ? Color(_getHexIntFromString(color!)) : null,
+        color: color != null
+            ? Color(ColorUtility.getHexIntFromString(color!))
+            : null,
         alignment: _getTextAlignFromString(alignment),
         padding: PageBuilderPadding.fromMap(padding));
   }
@@ -71,15 +69,10 @@ class PageBuilderTextPropertiesModel extends Equatable
         text: properties.text,
         fontSize: properties.fontSize,
         color: properties.color?.value != null
-            ? properties.color!.value.toString()
+            ? properties.color!.value.toRadixString(16)
             : null,
         alignment: properties.alignment?.name,
         padding: _getMapFromPadding(properties.padding));
-  }
-
-  int _getHexIntFromString(String hexCode) {
-    final colorCode = int.tryParse(hexCode, radix: 16);
-    return colorCode ?? 00000;
   }
 
   TextAlign _getTextAlignFromString(String? alignment) {
@@ -100,7 +93,8 @@ class PageBuilderTextPropertiesModel extends Equatable
     }
     Map<String, dynamic> map = {};
     if (padding.top != null && padding.top != 0) map['top'] = padding.top;
-    if (padding.bottom != null && padding.top != 0) map['bottom'] = padding.bottom;
+    if (padding.bottom != null && padding.top != 0)
+      map['bottom'] = padding.bottom;
     if (padding.left != null && padding.top != 0) map['left'] = padding.left;
     if (padding.right != null && padding.top != 0) map['right'] = padding.right;
     if (map.isEmpty) {
@@ -111,5 +105,5 @@ class PageBuilderTextPropertiesModel extends Equatable
   }
 
   @override
-  List<Object?> get props => [text, fontSize, color];
+  List<Object?> get props => [text, fontSize, color, alignment, padding];
 }

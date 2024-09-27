@@ -56,11 +56,6 @@ class PageBuilderImagePropertiesModel extends Equatable
         newImageBase64: newImageBase64 ?? this.newImageBase64);
   }
 
-  factory PageBuilderImagePropertiesModel.fromFirestore(
-      Map<String, dynamic> doc) {
-    return PageBuilderImagePropertiesModel.fromMap(doc);
-  }
-
   PageBuilderImageProperties toDomain() {
     return PageBuilderImageProperties(
         url: url, borderRadius: borderRadius, width: width, height: height);

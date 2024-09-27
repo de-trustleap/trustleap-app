@@ -46,11 +46,6 @@ class PageBuilderSectionModel extends Equatable {
     );
   }
 
-  factory PageBuilderSectionModel.fromFirestore(
-      Map<String, dynamic> doc, String id) {
-    return PageBuilderSectionModel.fromMap(doc).copyWith(id: id);
-  }
-
   PageBuilderSection toDomain() {
     return PageBuilderSection(
         id: UniqueID.fromUniqueString(id),

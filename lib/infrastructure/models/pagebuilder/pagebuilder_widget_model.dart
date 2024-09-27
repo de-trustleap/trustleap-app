@@ -2,9 +2,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
 
@@ -66,11 +68,6 @@ class PageBuilderWidgetModel extends Equatable {
         widthPercentage: widthPercentage ?? this.widthPercentage);
   }
 
-  factory PageBuilderWidgetModel.fromFirestore(
-      Map<String, dynamic> doc, String id) {
-    return PageBuilderWidgetModel.fromMap(doc).copyWith(id: id);
-  }
-
   PageBuilderWidget toDomain() {
     return PageBuilderWidget(
         id: UniqueID.fromUniqueString(id),
@@ -107,6 +104,8 @@ class PageBuilderWidgetModel extends Equatable {
         return PageBuilderTextPropertiesModel.fromMap(properties!).toDomain();
       case PageBuilderWidgetType.image:
         return PageBuilderImagePropertiesModel.fromMap(properties!).toDomain();
+      case PageBuilderWidgetType.icon:
+        return PageBuilderIconPropertiesModel.fromMap(properties!).toDomain();
       default:
         return null;
     }
@@ -121,6 +120,8 @@ class PageBuilderWidgetModel extends Equatable {
       return PageBuilderTextPropertiesModel.fromDomain(properties).toMap();
     } else if (properties is PageBuilderImageProperties) {
       return PageBuilderImagePropertiesModel.fromDomain(properties).toMap();
+    } else if (properties is PageBuilderIconProperties) {
+      return PageBuilderIconPropertiesModel.fromDomain(properties).toMap();
     } else {
       return null;
     }
