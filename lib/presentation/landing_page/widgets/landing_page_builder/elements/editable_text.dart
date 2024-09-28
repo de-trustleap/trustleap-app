@@ -54,9 +54,10 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
         width: double.infinity,
         decoration: _focusNode.hasFocus
             ? BoxDecoration(
+                color: widget.widgetModel.backgroundColor,
                 border: Border.all(color: Colors.black, width: 1.0),
                 borderRadius: const BorderRadius.all(Radius.circular(8)))
-            : null,
+            : BoxDecoration(color: widget.widgetModel.backgroundColor),
         child: Padding(
           padding: EdgeInsets.fromLTRB(
               widget.properties.padding?.left ?? 0,
@@ -81,8 +82,10 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
                 isDense: true,
               ),
               onChanged: (newText) {
-                final updatedProperties = widget.properties.copyWith(text: newText);
-                final updatedWidget = widget.widgetModel.copyWith(properties: updatedProperties);
+                final updatedProperties =
+                    widget.properties.copyWith(text: newText);
+                final updatedWidget =
+                    widget.widgetModel.copyWith(properties: updatedProperties);
                 Modular.get<PagebuilderCubit>().updateWidget(updatedWidget);
               }),
         ),

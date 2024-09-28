@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
@@ -9,6 +10,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
+import 'package:flutter/material.dart';
 
 class PageBuilderWidgetModel extends Equatable {
   final String id;
@@ -16,13 +18,15 @@ class PageBuilderWidgetModel extends Equatable {
   final Map<String, dynamic>? properties;
   final List<PageBuilderWidgetModel>? children;
   final double? widthPercentage;
+  final String? backgroundColor;
 
   const PageBuilderWidgetModel(
       {required this.id,
       required this.elementType,
       required this.properties,
       required this.children,
-      required this.widthPercentage});
+      required this.widthPercentage,
+      required this.backgroundColor});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'id': id};
@@ -32,6 +36,7 @@ class PageBuilderWidgetModel extends Equatable {
       map['children'] = children!.map((child) => child.toMap()).toList();
     }
     if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
+    if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
     return map;
   }
 
@@ -51,6 +56,9 @@ class PageBuilderWidgetModel extends Equatable {
             : null,
         widthPercentage: map['widthPercentage'] != null
             ? map['widthPercentage'] as double
+            : null,
+        backgroundColor: map['backgroundColor'] != null
+            ? map['backgroundColor'] as String
             : null);
   }
 
@@ -59,13 +67,15 @@ class PageBuilderWidgetModel extends Equatable {
       String? elementType,
       Map<String, dynamic>? properties,
       List<PageBuilderWidgetModel>? children,
-      double? widthPercentage}) {
+      double? widthPercentage,
+      String? backgroundColor}) {
     return PageBuilderWidgetModel(
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
         properties: properties ?? this.properties,
         children: children ?? this.children,
-        widthPercentage: widthPercentage ?? this.widthPercentage);
+        widthPercentage: widthPercentage ?? this.widthPercentage,
+        backgroundColor: backgroundColor ?? this.backgroundColor);
   }
 
   PageBuilderWidget toDomain() {
@@ -77,7 +87,10 @@ class PageBuilderWidgetModel extends Equatable {
                 .firstWhere((element) => element.name == elementType),
         properties: _getPropertiesByType(elementType),
         children: children?.map((child) => child.toDomain()).toList(),
-        widthPercentage: widthPercentage);
+        widthPercentage: widthPercentage,
+        backgroundColor: backgroundColor != null
+            ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
+            : null);
   }
 
   factory PageBuilderWidgetModel.fromDomain(PageBuilderWidget widget) {
@@ -88,7 +101,10 @@ class PageBuilderWidgetModel extends Equatable {
         children: widget.children
             ?.map((child) => PageBuilderWidgetModel.fromDomain(child))
             .toList(),
-        widthPercentage: widget.widthPercentage);
+        widthPercentage: widget.widthPercentage,
+        backgroundColor: widget.backgroundColor?.value != null
+            ? widget.backgroundColor!.value.toRadixString(16)
+            : null);
   }
 
   PageBuilderProperties? _getPropertiesByType(String? type) {
@@ -129,5 +145,5 @@ class PageBuilderWidgetModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, elementType, properties, children, widthPercentage];
+      [id, elementType, properties, children, widthPercentage, backgroundColor];
 }
