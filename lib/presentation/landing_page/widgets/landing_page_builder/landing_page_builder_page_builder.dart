@@ -7,14 +7,17 @@ class LandingPageBuilderPageBuilder {
       LandingPageBuilderSectionBuilder();
 
   Widget buildPage(PageBuilderPage model) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: ListView(
-          children: model.sections != null
-              ? model.sections!
-                  .map((section) => sectionBuilder.buildSection(section))
-                  .toList()
-              : []),
+    return Container(
+      color: model.backgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: ListView(
+            children: model.sections != null
+                ? model.sections!
+                    .map((section) => sectionBuilder.buildSection(section))
+                    .toList()
+                : []),
+      ),
     );
   }
 }

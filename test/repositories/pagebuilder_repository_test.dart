@@ -22,8 +22,10 @@ void main() {
   });
 
   group("PageBuilderRepositoryImplementation_getLandingPageContent", () {
-    final testPage =
-        PageBuilderPage(id: UniqueID.fromUniqueString("2"), sections: null);
+    final testPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("2"),
+        sections: null,
+        backgroundColor: null);
     final testID = "1";
     test("should return content when call was successful", () async {
       // Given
@@ -53,25 +55,29 @@ void main() {
   });
 
   group("PageBuilderRepositoryImplementation_saveLandingPageContent", () {
-    final testPage =
-        PageBuilderPage(id: UniqueID.fromUniqueString("1"), sections: [
-      PageBuilderSection(
-          id: UniqueID.fromUniqueString("2"),
-          layout: PageBuilderSectionLayout.column,
-          widgets: [
-            PageBuilderWidget(
-                id: UniqueID.fromUniqueString("3"),
-                elementType: PageBuilderWidgetType.text,
-                children: [],
-                widthPercentage: null,
-                properties: PageBuilderTextProperties(
-                    text: "Test",
-                    fontSize: 16,
-                    color: Colors.black,
-                    alignment: TextAlign.center,
-                    padding: null))
-          ])
-    ]);
+    final testPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("1"),
+        sections: [
+          PageBuilderSection(
+              id: UniqueID.fromUniqueString("2"),
+              layout: PageBuilderSectionLayout.column,
+              backgroundColor: null,
+              widgets: [
+                PageBuilderWidget(
+                    id: UniqueID.fromUniqueString("3"),
+                    elementType: PageBuilderWidgetType.text,
+                    children: [],
+                    widthPercentage: null,
+                    backgroundColor: null,
+                    properties: PageBuilderTextProperties(
+                        text: "Test",
+                        fontSize: 16,
+                        color: Colors.black,
+                        alignment: TextAlign.center,
+                        padding: null))
+              ])
+        ],
+        backgroundColor: null);
     test(
         "should return unit when content has been saved and call was successful",
         () async {

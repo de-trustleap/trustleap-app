@@ -53,7 +53,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
     } else {
       return buildTile(themeData, responsiveValue, localizations, context);
     }
-  } // TODO: Localizations und ggf Tests hinzufügen
+  }
 
   Widget buildTile(
       ThemeData themeData,

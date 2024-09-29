@@ -28,4 +28,3 @@ class PageBuilderIconView extends StatelessWidget {
     );
   }
 }
-//TODO: Background Colors für Widgets gehen jetzt. Muss noch für Sections und Page gemacht werden. Anschließend den weißen Rand entfernen und die Sachen im Backend hinzufügen.

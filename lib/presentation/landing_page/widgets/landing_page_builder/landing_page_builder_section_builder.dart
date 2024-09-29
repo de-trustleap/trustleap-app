@@ -11,12 +11,15 @@ class LandingPageBuilderSectionBuilder {
     switch (model.layout) {
       case PageBuilderSectionLayout.column:
       default:
-        return Column(
-            children: model.widgets != null
-                ? model.widgets!
-                    .map((widget) => widgetBuilder.build(widget))
-                    .toList()
-                : []);
+        return Container(
+          color: model.backgroundColor,
+          child: Column(
+              children: model.widgets != null
+                  ? model.widgets!
+                      .map((widget) => widgetBuilder.build(widget))
+                      .toList()
+                  : []),
+        );
     }
   }
 }

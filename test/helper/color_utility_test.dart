@@ -3,29 +3,44 @@ import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 
 void main() {
   group("ColorUtility getHexIntFromString", () {
-    test('should return color with full opacity for valid hex code', () {
-      final result = ColorUtility.getHexIntFromString('cf2bae');
-      expect(result, 0xFFcf2bae);
+    test(
+        "should return the correct integer for a valid hex string without alpha",
+        () {
+      const hexString = "c133f5";
+      final result = ColorUtility.getHexIntFromString(hexString);
+      expect(result, equals(0xc133f5));
     });
 
-    test('should return black color for invalid hex code', () {
-      final result = ColorUtility.getHexIntFromString('invalid_hex');
-      expect(result, 0x00000000);
+    test("should return the correct integer for a valid hex string with alpha",
+        () {
+      const hexString = "ffc133f5";
+      final result = ColorUtility.getHexIntFromString(hexString);
+      expect(result, equals(0xffc133f5));
     });
 
-    test('should handle empty string input and return black color', () {
-      final result = ColorUtility.getHexIntFromString('');
-      expect(result, 0x00000000);
+    test("should return the correct integer for a fully transparent hex string",
+        () {
+      const hexString = "00c133f5";
+      final result = ColorUtility.getHexIntFromString(hexString);
+      expect(result, equals(0x00c133f5));
     });
 
-    test('should add full opacity to hex code with alpha missing', () {
-      final result = ColorUtility.getHexIntFromString('00ff00');
-      expect(result, 0xFF00ff00);
+    test("should return 0x00000000 when given an invalid hex string", () {
+      const hexString = "invalid_hex";
+      final result = ColorUtility.getHexIntFromString(hexString);
+      expect(result, equals(0x00000000));
     });
 
-    test('should not modify alpha value if already present', () {
-      final result = ColorUtility.getHexIntFromString('80ff00');
-      expect(result, 0xFF80ff00);
+    test("should return 0x00000000 when given an empty string", () {
+      const hexString = "";
+      final result = ColorUtility.getHexIntFromString(hexString);
+      expect(result, equals(0x00000000));
+    });
+
+    test("should return 0x00000000 when given a null string", () {
+      const String? hexString = null;
+      final result = ColorUtility.getHexIntFromString(hexString ?? "");
+      expect(result, equals(0x00000000));
     });
   });
 }
