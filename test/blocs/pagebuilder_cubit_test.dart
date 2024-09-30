@@ -44,7 +44,9 @@ void main() {
         contentID: UniqueID.fromUniqueString(contentID));
     final testUser = CustomUser(id: UniqueID.fromUniqueString("2"));
     final testContent = PageBuilderPage(
-        id: UniqueID.fromUniqueString(contentID), sections: null);
+        id: UniqueID.fromUniqueString(contentID),
+        sections: null,
+        backgroundColor: null);
     test("should call landingpage repo if function is called", () async {
       // Given
       when(mockLandingPageRepo.getLandingPage(landingPageID))
@@ -128,25 +130,29 @@ void main() {
 
   group("PagebuilderCubit_saveLandingPage", () {
     final testLandingPage = LandingPage(id: UniqueID.fromUniqueString("1"));
-    final testPage =
-        PageBuilderPage(id: UniqueID.fromUniqueString("1"), sections: [
-      PageBuilderSection(
-          id: UniqueID.fromUniqueString("2"),
-          layout: PageBuilderSectionLayout.column,
-          widgets: [
-            PageBuilderWidget(
-                id: UniqueID.fromUniqueString("3"),
-                elementType: PageBuilderWidgetType.text,
-                children: [],
-                widthPercentage: null,
-                properties: PageBuilderTextProperties(
-                    text: "Test",
-                    fontSize: 16,
-                    color: Colors.black,
-                    alignment: TextAlign.center,
-                    padding: null))
-          ])
-    ]);
+    final testPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("1"),
+        backgroundColor: null,
+        sections: [
+          PageBuilderSection(
+              id: UniqueID.fromUniqueString("2"),
+              layout: PageBuilderSectionLayout.column,
+              backgroundColor: null,
+              widgets: [
+                PageBuilderWidget(
+                    id: UniqueID.fromUniqueString("3"),
+                    elementType: PageBuilderWidgetType.text,
+                    children: [],
+                    widthPercentage: null,
+                    backgroundColor: null,
+                    properties: PageBuilderTextProperties(
+                        text: "Test",
+                        fontSize: 16,
+                        color: Colors.black,
+                        alignment: TextAlign.center,
+                        padding: null))
+              ])
+        ]);
     final testUser = CustomUser(id: UniqueID.fromUniqueString("2"));
     final testContent = PagebuilderContent(
         landingPage: testLandingPage, content: testPage, user: testUser);
@@ -244,6 +250,7 @@ void main() {
     final mockTextWidget1 = PageBuilderWidget(
       id: UniqueID.fromUniqueString("widget1"),
       elementType: PageBuilderWidgetType.text,
+      backgroundColor: null,
       properties: mockTextProperties1,
       children: [],
       widthPercentage: 100.0,
@@ -252,6 +259,7 @@ void main() {
     final mockTextWidget2 = PageBuilderWidget(
       id: UniqueID.fromUniqueString("widget2"),
       elementType: PageBuilderWidgetType.text,
+      backgroundColor: null,
       properties: mockTextProperties2,
       children: [],
       widthPercentage: 100.0,
@@ -260,6 +268,7 @@ void main() {
     final mockImageWidget = PageBuilderWidget(
       id: UniqueID.fromUniqueString("widget3"),
       elementType: PageBuilderWidgetType.image,
+      backgroundColor: null,
       properties: mockImageProperties,
       children: [],
       widthPercentage: 100.0,
@@ -268,6 +277,7 @@ void main() {
     final mockColumnWidget = PageBuilderWidget(
       id: UniqueID.fromUniqueString("columnWidget"),
       elementType: PageBuilderWidgetType.column,
+      backgroundColor: null,
       properties: null,
       children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
       widthPercentage: 100.0,
@@ -276,6 +286,7 @@ void main() {
     final mockRowWidget = PageBuilderWidget(
       id: UniqueID.fromUniqueString("rowWidget"),
       elementType: PageBuilderWidgetType.row,
+      backgroundColor: null,
       properties: null,
       children: [mockTextWidget1, mockImageWidget],
       widthPercentage: 100.0,
@@ -284,11 +295,13 @@ void main() {
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       layout: PageBuilderSectionLayout.column,
+      backgroundColor: null,
       widgets: [mockColumnWidget, mockRowWidget],
     );
 
     final mockPageBuilderPage = PageBuilderPage(
       id: UniqueID.fromUniqueString("page1"),
+      backgroundColor: null,
       sections: [mockSection],
     );
 

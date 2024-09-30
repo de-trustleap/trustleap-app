@@ -74,9 +74,10 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
     final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
 
-    return SizedBox(
+    return Container(
       width: widget.properties.width,
       height: widget.properties.height,
+      color: widget.widgetModel.backgroundColor,
       child: MouseRegion(
           onEnter: (event) => setHovered(true),
           onExit: (event) => setHovered(false),

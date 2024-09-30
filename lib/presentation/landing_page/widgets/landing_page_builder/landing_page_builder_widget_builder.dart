@@ -22,7 +22,8 @@ class LandingPageBuilderWidgetBuilder {
         return buildImageWidget(
             model.properties as PageBuilderImageProperties, model);
       case PageBuilderWidgetType.icon:
-        return buildIconWidget(model.properties as PageBuilderIconProperties, model);
+        return buildIconWidget(
+            model.properties as PageBuilderIconProperties, model);
       default:
         return const SizedBox.shrink();
     }
@@ -33,11 +34,14 @@ class LandingPageBuilderWidgetBuilder {
       return const SizedBox.shrink();
     }
 
-    return Column(
-        children: model.children?.map((child) {
-              return build(child);
-            }).toList() ??
-            []);
+    return Container(
+      color: model.backgroundColor,
+      child: Column(
+          children: model.children?.map((child) {
+                return build(child);
+              }).toList() ??
+              []),
+    );
   }
 
   Widget buildRowWidget(PageBuilderWidget model) {
@@ -50,14 +54,17 @@ class LandingPageBuilderWidgetBuilder {
     // Falls die Gesamtbreite über 100% liegt, passe die Werte an
     final scaleFactor =
         totalWidthPercentage > 100 ? 100 / totalWidthPercentage : 1.0;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-        children: model.children?.map((child) {
-              final flexValue = (child.widthPercentage ?? 0) * scaleFactor;
-              return Expanded(
-                  flex: (flexValue * 100).toInt(), child: build(child));
-            }).toList() ??
-            []);
+    return Container(
+      color: model.backgroundColor,
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: model.children?.map((child) {
+                final flexValue = (child.widthPercentage ?? 0) * scaleFactor;
+                return Expanded(
+                    flex: (flexValue * 100).toInt(), child: build(child));
+              }).toList() ??
+              []),
+    );
   }
 
   Widget buildTextWidget(
@@ -70,7 +77,8 @@ class LandingPageBuilderWidgetBuilder {
     return PageBuilderImageView(properties: properties, widgetModel: model);
   }
 
-  Widget buildIconWidget(PageBuilderIconProperties properties, PageBuilderWidget model) {
+  Widget buildIconWidget(
+      PageBuilderIconProperties properties, PageBuilderWidget model) {
     return PageBuilderIconView(properties: properties, widgetModel: model);
   }
 }
