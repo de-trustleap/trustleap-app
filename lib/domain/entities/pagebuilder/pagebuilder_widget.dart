@@ -16,8 +16,6 @@ class PageBuilderWidget extends Equatable {
   final Color? backgroundColor;
   final PageBuilderPadding? padding;
 
-  //TODO: Padding bei Text Properties rausnehmen und hier hin packen! Zusätzlich im Backend anpassen! 
-
   const PageBuilderWidget(
       {required this.id,
       required this.elementType,
@@ -46,6 +44,13 @@ class PageBuilderWidget extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [id, elementType, properties, children, widthPercentage, backgroundColor, padding];
+  List<Object?> get props => [
+        id,
+        elementType,
+        properties,
+        children,
+        widthPercentage,
+        backgroundColor,
+        padding
+      ];
 }
