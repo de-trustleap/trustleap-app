@@ -69,12 +69,12 @@ void main() {
                     children: [],
                     widthPercentage: null,
                     backgroundColor: null,
+                    padding: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,
                         color: Colors.black,
-                        alignment: TextAlign.center,
-                        padding: null))
+                        alignment: TextAlign.center))
               ])
         ],
         backgroundColor: null);
