@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:flutter/material.dart';
 
 class PageBuilderImagePropertiesModel extends Equatable
     implements PageBuilderProperties {
@@ -11,6 +12,7 @@ class PageBuilderImagePropertiesModel extends Equatable
   final double? borderRadius;
   final double? width;
   final double? height;
+  final String? alignment;
   final String? newImageBase64;
 
   const PageBuilderImagePropertiesModel(
@@ -18,6 +20,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       required this.borderRadius,
       required this.width,
       required this.height,
+      required this.alignment,
       required this.newImageBase64});
 
   Map<String, dynamic> toMap() {
@@ -26,6 +29,7 @@ class PageBuilderImagePropertiesModel extends Equatable
     if (borderRadius != null) map['borderRadius'] = borderRadius;
     if (width != null) map['width'] = width;
     if (height != null) map['height'] = height;
+    if (alignment != null) map['alignment'] = alignment;
     if (newImageBase64 != null) map['newImageBase64'] = newImageBase64;
     return map;
   }
@@ -37,6 +41,7 @@ class PageBuilderImagePropertiesModel extends Equatable
             map['borderRadius'] != null ? map['borderRadius'] as double : null,
         width: map['width'] != null ? map['width'] as double : null,
         height: map['height'] != null ? map['height'] as double : null,
+        alignment: map['alignment'] != null ? map['alignment'] as String : null,
         newImageBase64: map['newImageBase64'] != null
             ? map['newImageBase64'] as String
             : null);
@@ -47,18 +52,24 @@ class PageBuilderImagePropertiesModel extends Equatable
       double? borderRadius,
       double? width,
       double? height,
+      String? alignment,
       String? newImageBase64}) {
     return PageBuilderImagePropertiesModel(
         url: url ?? this.url,
         borderRadius: borderRadius ?? this.borderRadius,
         width: width ?? this.width,
         height: height ?? this.height,
+        alignment: alignment ?? this.alignment,
         newImageBase64: newImageBase64 ?? this.newImageBase64);
   }
 
   PageBuilderImageProperties toDomain() {
     return PageBuilderImageProperties(
-        url: url, borderRadius: borderRadius, width: width, height: height);
+        url: url,
+        borderRadius: borderRadius,
+        width: width,
+        height: height,
+        alignment: _getAlignmentFromString(alignment));
   }
 
   factory PageBuilderImagePropertiesModel.fromDomain(
@@ -68,9 +79,66 @@ class PageBuilderImagePropertiesModel extends Equatable
         borderRadius: properties.borderRadius,
         width: properties.width,
         height: properties.height,
+        alignment: _getStringFromAlignment(properties.alignment),
         newImageBase64: properties.localImage != null
             ? base64Encode(properties.localImage!)
             : null);
+  }
+
+  Alignment? _getAlignmentFromString(String? alignment) {
+    if (alignment == null) {
+      return null;
+    }
+    switch (alignment) {
+      case "topLeft":
+        return Alignment.topLeft;
+      case "topCenter":
+        return Alignment.topCenter;
+      case "topRight":
+        return Alignment.topRight;
+      case "centerLeft":
+        return Alignment.centerLeft;
+      case "center":
+        return Alignment.center;
+      case "centerRight":
+        return Alignment.centerRight;
+      case "bottomLeft":
+        return Alignment.bottomLeft;
+      case "bottomCenter":
+        return Alignment.bottomCenter;
+      case "bottomRight":
+        return Alignment.bottomRight;
+      default:
+        return Alignment.center;
+    }
+  }
+
+  static String? _getStringFromAlignment(Alignment? alignment) {
+    if (alignment == null) {
+      return null;
+    }
+    switch (alignment) {
+      case Alignment.topLeft:
+        return "topLeft";
+      case Alignment.topCenter:
+        return "topCenter";
+      case Alignment.topRight:
+        return "topRight";
+      case Alignment.centerLeft:
+        return "centerLeft";
+      case Alignment.center:
+        return "center";
+      case Alignment.centerRight:
+        return "centerRight";
+      case Alignment.bottomLeft:
+        return "bottomLeft";
+      case Alignment.bottomCenter:
+        return "bottomCenter";
+      case Alignment.bottomRight:
+        return "bottomRight";
+      default:
+        return "center";
+    }
   }
 
   @override

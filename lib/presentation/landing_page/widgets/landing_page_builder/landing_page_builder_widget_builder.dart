@@ -54,16 +54,23 @@ class LandingPageBuilderWidgetBuilder {
     // Falls die Gesamtbreite über 100% liegt, passe die Werte an
     final scaleFactor =
         totalWidthPercentage > 100 ? 100 / totalWidthPercentage : 1.0;
-    return Container(
-      color: model.backgroundColor,
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: model.children?.map((child) {
-                final flexValue = (child.widthPercentage ?? 0) * scaleFactor;
-                return Expanded(
-                    flex: (flexValue * 100).toInt(), child: build(child));
-              }).toList() ??
-              []),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+                model.padding?.left ?? 0,
+                model.padding?.top ?? 0,
+                model.padding?.right ?? 0,
+                model.padding?.bottom ?? 0),
+      child: Container(
+        color: model.backgroundColor,
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: model.children?.map((child) {
+                  final flexValue = (child.widthPercentage ?? 0) * scaleFactor;
+                  return Expanded(
+                      flex: (flexValue * 100).toInt(), child: build(child));
+                }).toList() ??
+                []),
+      ),
     );
   }
 

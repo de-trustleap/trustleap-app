@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
@@ -19,6 +20,7 @@ class PageBuilderWidgetModel extends Equatable {
   final List<PageBuilderWidgetModel>? children;
   final double? widthPercentage;
   final String? backgroundColor;
+  final Map<String, dynamic>? padding;
 
   const PageBuilderWidgetModel(
       {required this.id,
@@ -26,7 +28,8 @@ class PageBuilderWidgetModel extends Equatable {
       required this.properties,
       required this.children,
       required this.widthPercentage,
-      required this.backgroundColor});
+      required this.backgroundColor,
+      required this.padding});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'id': id};
@@ -37,6 +40,7 @@ class PageBuilderWidgetModel extends Equatable {
     }
     if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
     if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
+    if (padding != null) map['padding'] = padding;
     return map;
   }
 
@@ -59,6 +63,9 @@ class PageBuilderWidgetModel extends Equatable {
             : null,
         backgroundColor: map['backgroundColor'] != null
             ? map['backgroundColor'] as String
+            : null,
+        padding: map['padding'] != null
+            ? map['padding'] as Map<String, dynamic>
             : null);
   }
 
@@ -68,14 +75,16 @@ class PageBuilderWidgetModel extends Equatable {
       Map<String, dynamic>? properties,
       List<PageBuilderWidgetModel>? children,
       double? widthPercentage,
-      String? backgroundColor}) {
+      String? backgroundColor,
+      Map<String, dynamic>? padding}) {
     return PageBuilderWidgetModel(
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
         properties: properties ?? this.properties,
         children: children ?? this.children,
         widthPercentage: widthPercentage ?? this.widthPercentage,
-        backgroundColor: backgroundColor ?? this.backgroundColor);
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        padding: padding ?? this.padding);
   }
 
   PageBuilderWidget toDomain() {
@@ -90,7 +99,8 @@ class PageBuilderWidgetModel extends Equatable {
         widthPercentage: widthPercentage,
         backgroundColor: backgroundColor != null
             ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
-            : null);
+            : null,
+        padding: PageBuilderPadding.fromMap(padding));
   }
 
   factory PageBuilderWidgetModel.fromDomain(PageBuilderWidget widget) {
@@ -104,7 +114,8 @@ class PageBuilderWidgetModel extends Equatable {
         widthPercentage: widget.widthPercentage,
         backgroundColor: widget.backgroundColor?.value != null
             ? widget.backgroundColor!.value.toRadixString(16)
-            : null);
+            : null,
+        padding: _getMapFromPadding(widget.padding));
   }
 
   PageBuilderProperties? _getPropertiesByType(String? type) {
@@ -143,7 +154,32 @@ class PageBuilderWidgetModel extends Equatable {
     }
   }
 
+  static Map<String, dynamic>? _getMapFromPadding(PageBuilderPadding? padding) {
+    if (padding == null) {
+      return null;
+    }
+    Map<String, dynamic> map = {};
+    if (padding.top != null && padding.top != 0) map['top'] = padding.top;
+    if (padding.bottom != null && padding.top != 0) {
+      map['bottom'] = padding.bottom;
+    }
+    if (padding.left != null && padding.top != 0) map['left'] = padding.left;
+    if (padding.right != null && padding.top != 0) map['right'] = padding.right;
+    if (map.isEmpty) {
+      return null;
+    } else {
+      return map;
+    }
+  }
+
   @override
-  List<Object?> get props =>
-      [id, elementType, properties, children, widthPercentage, backgroundColor];
+  List<Object?> get props => [
+        id,
+        elementType,
+        properties,
+        children,
+        widthPercentage,
+        backgroundColor,
+        padding
+      ];
 }
