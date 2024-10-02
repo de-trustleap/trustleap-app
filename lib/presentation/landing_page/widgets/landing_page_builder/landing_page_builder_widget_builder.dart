@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/editable_text.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/icon_view.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/image_view.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_widget_container.dart';
 import 'package:flutter/material.dart';
 
 class LandingPageBuilderWidgetBuilder {
@@ -34,8 +35,8 @@ class LandingPageBuilderWidgetBuilder {
       return const SizedBox.shrink();
     }
 
-    return Container(
-      color: model.backgroundColor,
+    return LandingPageBuilderWidgetContainer(
+      model: model,
       child: Column(
           children: model.children?.map((child) {
                 return build(child);
@@ -54,8 +55,8 @@ class LandingPageBuilderWidgetBuilder {
     // Falls die Gesamtbreite über 100% liegt, passe die Werte an
     final scaleFactor =
         totalWidthPercentage > 100 ? 100 / totalWidthPercentage : 1.0;
-    return Container(
-      color: model.backgroundColor,
+    return LandingPageBuilderWidgetContainer(
+      model: model,
       child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: model.children?.map((child) {

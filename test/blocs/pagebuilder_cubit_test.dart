@@ -145,12 +145,12 @@ void main() {
                     children: [],
                     widthPercentage: null,
                     backgroundColor: null,
+                    padding: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,
                         color: Colors.black,
-                        alignment: TextAlign.center,
-                        padding: null))
+                        alignment: TextAlign.center))
               ])
         ]);
     final testUser = CustomUser(id: UniqueID.fromUniqueString("2"));
@@ -223,74 +223,72 @@ void main() {
 
   group("PagebuilderCubit_updateWidgets", () {
     final mockTextProperties1 = PageBuilderTextProperties(
-      text: "Text 1",
-      fontSize: 16.0,
-      color: Colors.black,
-      alignment: TextAlign.left,
-      padding:
-          PageBuilderPadding(top: 10.0, bottom: 10.0, left: 5.0, right: 5.0),
-    );
+        text: "Text 1",
+        fontSize: 16.0,
+        color: Colors.black,
+        alignment: TextAlign.left);
 
     final mockTextProperties2 = PageBuilderTextProperties(
       text: "Text 2",
       fontSize: 18.0,
       color: Colors.red,
       alignment: TextAlign.center,
-      padding: PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0),
     );
 
     final mockImageProperties = PageBuilderImageProperties(
-      url: "https://example.com/image.png",
-      borderRadius: 10.0,
-      width: 100.0,
-      height: 150.0,
-      localImage: Uint8List(0),
-    );
+        url: "https://example.com/image.png",
+        borderRadius: 10.0,
+        width: 100.0,
+        height: 150.0,
+        localImage: Uint8List(0),
+        alignment: Alignment.center);
 
     final mockTextWidget1 = PageBuilderWidget(
-      id: UniqueID.fromUniqueString("widget1"),
-      elementType: PageBuilderWidgetType.text,
-      backgroundColor: null,
-      properties: mockTextProperties1,
-      children: [],
-      widthPercentage: 100.0,
-    );
+        id: UniqueID.fromUniqueString("widget1"),
+        elementType: PageBuilderWidgetType.text,
+        backgroundColor: null,
+        properties: mockTextProperties1,
+        children: [],
+        widthPercentage: 100.0,
+        padding:
+            PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
     final mockTextWidget2 = PageBuilderWidget(
-      id: UniqueID.fromUniqueString("widget2"),
-      elementType: PageBuilderWidgetType.text,
-      backgroundColor: null,
-      properties: mockTextProperties2,
-      children: [],
-      widthPercentage: 100.0,
-    );
+        id: UniqueID.fromUniqueString("widget2"),
+        elementType: PageBuilderWidgetType.text,
+        backgroundColor: null,
+        properties: mockTextProperties2,
+        children: [],
+        widthPercentage: 100.0,
+        padding:
+            PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
     final mockImageWidget = PageBuilderWidget(
-      id: UniqueID.fromUniqueString("widget3"),
-      elementType: PageBuilderWidgetType.image,
-      backgroundColor: null,
-      properties: mockImageProperties,
-      children: [],
-      widthPercentage: 100.0,
-    );
+        id: UniqueID.fromUniqueString("widget3"),
+        elementType: PageBuilderWidgetType.image,
+        backgroundColor: null,
+        properties: mockImageProperties,
+        children: [],
+        widthPercentage: 100.0,
+        padding: null);
 
     final mockColumnWidget = PageBuilderWidget(
-      id: UniqueID.fromUniqueString("columnWidget"),
-      elementType: PageBuilderWidgetType.column,
-      backgroundColor: null,
-      properties: null,
-      children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
-      widthPercentage: 100.0,
-    );
+        id: UniqueID.fromUniqueString("columnWidget"),
+        elementType: PageBuilderWidgetType.column,
+        backgroundColor: null,
+        properties: null,
+        children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
+        widthPercentage: 100.0,
+        padding: null);
 
     final mockRowWidget = PageBuilderWidget(
-      id: UniqueID.fromUniqueString("rowWidget"),
-      elementType: PageBuilderWidgetType.row,
-      backgroundColor: null,
-      properties: null,
-      children: [mockTextWidget1, mockImageWidget],
-      widthPercentage: 100.0,
-    );
+        id: UniqueID.fromUniqueString("rowWidget"),
+        elementType: PageBuilderWidgetType.row,
+        backgroundColor: null,
+        properties: null,
+        children: [mockTextWidget1, mockImageWidget],
+        widthPercentage: 100.0,
+        padding: null);
 
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
