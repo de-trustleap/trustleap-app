@@ -12,6 +12,7 @@ class PageBuilderWidget extends Equatable {
   final PageBuilderWidgetType? elementType;
   final PageBuilderProperties? properties;
   final List<PageBuilderWidget>? children;
+  final PageBuilderWidget? containerChild;
   final double? widthPercentage;
   final Color? backgroundColor;
   final PageBuilderPadding? padding;
@@ -21,6 +22,7 @@ class PageBuilderWidget extends Equatable {
       required this.elementType,
       required this.properties,
       required this.children,
+      required this.containerChild,
       required this.widthPercentage,
       required this.backgroundColor,
       required this.padding});
@@ -30,6 +32,7 @@ class PageBuilderWidget extends Equatable {
       PageBuilderWidgetType? elementType,
       PageBuilderProperties? properties,
       List<PageBuilderWidget>? children,
+      PageBuilderWidget? containerChild,
       double? widthPercentage,
       Color? backgroundColor,
       PageBuilderPadding? padding}) {
@@ -38,6 +41,7 @@ class PageBuilderWidget extends Equatable {
         elementType: elementType ?? this.elementType,
         properties: properties ?? this.properties,
         children: children ?? this.children,
+        containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
         backgroundColor: backgroundColor ?? this.backgroundColor,
         padding: padding ?? this.padding);
@@ -49,6 +53,7 @@ class PageBuilderWidget extends Equatable {
         elementType,
         properties,
         children,
+        containerChild,
         widthPercentage,
         backgroundColor,
         padding
