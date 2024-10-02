@@ -149,7 +149,8 @@ class PageBuilderWidgetModel extends Equatable {
       case PageBuilderWidgetType.icon:
         return PageBuilderIconPropertiesModel.fromMap(properties!).toDomain();
       case PageBuilderWidgetType.container:
-        return PageBuilderContainerPropertiesModel.fromMap(properties!).toDomain();
+        return PageBuilderContainerPropertiesModel.fromMap(properties!)
+            .toDomain();
       default:
         return null;
     }
@@ -179,11 +180,13 @@ class PageBuilderWidgetModel extends Equatable {
     }
     Map<String, dynamic> map = {};
     if (padding.top != null && padding.top != 0) map['top'] = padding.top;
-    if (padding.bottom != null && padding.top != 0) {
+    if (padding.bottom != null && padding.bottom != 0) {
       map['bottom'] = padding.bottom;
     }
-    if (padding.left != null && padding.top != 0) map['left'] = padding.left;
-    if (padding.right != null && padding.top != 0) map['right'] = padding.right;
+    if (padding.left != null && padding.left != 0) map['left'] = padding.left;
+    if (padding.right != null && padding.right != 0) {
+      map['right'] = padding.right;
+    }
     if (map.isEmpty) {
       return null;
     } else {
