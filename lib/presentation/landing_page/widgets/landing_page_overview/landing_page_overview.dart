@@ -92,6 +92,7 @@ class LandingPageOverview extends StatelessWidget {
                         const SizedBox(height: 24),
                         LandingPageOverviewGrid(
                             landingpages: observerState.landingPages,
+                            user: observerState.user,
                             deletePressed: (landingPageID, parentUserID) =>
                                 showDeleteAlert(landingPageID, parentUserID),
                             duplicatePressed: (landinPageID) =>

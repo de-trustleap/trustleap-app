@@ -68,3 +68,17 @@ enum PromoterRegistrationState {
 enum ImageUploader { user, company, landingPage }
 
 enum ThemeStatus { light, dark }
+
+enum PageBuilderWidgetType {
+  container,
+  column,
+  row,
+  text,
+  image,
+  icon,
+  button,
+  contactForm,
+  none
+}
+
+enum PageBuilderSectionLayout { row, column, none }

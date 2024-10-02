@@ -13,7 +13,6 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_expandable_password.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_mobile.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_verification_link.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -48,7 +47,12 @@ class _EmailSectionState extends State<EmailSection> {
   bool _isExpanded = false;
 
   bool isEmailVerified = false;
-  User? currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ProfileCubit>(context).verifyEmail();
+  }
 
   @override
   void dispose() {
@@ -124,7 +128,9 @@ class _EmailSectionState extends State<EmailSection> {
       return BlocConsumer<ProfileCubit, ProfileState>(
           listener: (context, state) {
         if (state is ProfileEmailVerifySuccessState) {
-          isEmailVerified = state.isEmailVerified;
+          setState(() {
+            isEmailVerified = state.isEmailVerified;
+          });
         } else if (state is ProfileEmailUpdateFailureState) {
           errorMessage =
               AuthFailureMapper.mapFailureMessage(state.failure, localization);
@@ -136,8 +142,6 @@ class _EmailSectionState extends State<EmailSection> {
         } else if (state is ProfileEmailUpdateSuccessState) {
           BlocProvider.of<AuthCubit>(context).signOut();
           setButtonToDisabled(false);
-        } else if (state is ProfileGetCurrentUserSuccessState) {
-          currentUser = state.user;
         } else if (state is ProfileResendEmailVerificationSuccessState) {
           widget.sendEmailVerificationCallback();
         } else if (state is ProfileEmailLoadingState) {
@@ -151,12 +155,12 @@ class _EmailSectionState extends State<EmailSection> {
           const SizedBox(height: 16),
           if (responsiveValue.largerThan(MOBILE)) ...[
             EmailSectionDesktop(
-                email: currentUser?.email,
+                email: widget.user.email,
                 isEmailVerified: isEmailVerified,
                 editEmailPressed: editEmailPressed)
           ] else ...[
             EmailSectionMobile(
-                email: currentUser?.email,
+                email: widget.user.email,
                 isEmailVerified: isEmailVerified,
                 editEmailPressed: editEmailPressed)
           ],

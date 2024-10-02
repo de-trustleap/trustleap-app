@@ -18,10 +18,11 @@ final class LandingPageObserverFailure extends LandingPageObserverState {
     required this.failure,
   });
 }
+
 final class LandingPageObserverSuccess extends LandingPageObserverState {
   final List<LandingPage> landingPages;
+  final CustomUser user;
 
-  const LandingPageObserverSuccess({
-    required this.landingPages,
-  });
+  const LandingPageObserverSuccess(
+      {required this.landingPages, required this.user});
 }

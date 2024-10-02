@@ -85,7 +85,6 @@ void main() {
       companyCubit.getCompany(companyID);
       await untilCalled(mockCompanyRepo.getCompany(companyID));
       // Then
-      // Then
       verify(mockCompanyRepo.getCompany(companyID));
       verifyNoMoreInteractions(mockCompanyRepo);
     });

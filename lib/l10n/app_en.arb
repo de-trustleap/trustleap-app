@@ -1079,5 +1079,61 @@
     "recommendations_form_add_button_tooltip": "Add recommendation",
     "@recommendations_form_add_button_tooltip": {
         "description": "Tooltip for the add recommendation button in the recommendations form"
+    },
+    "landingpage_pagebuilder_container_request_error": "An error occurred while retrieving the data",
+    "@landingpage_pagebuilder_container_request_error": {
+        "description": "Error title on the page builder page if request fails"
+    },
+    "landingpage_pagebuilder_container_permission_error_title": "You are not authorized to access this page",
+    "@landingpage_pagebuilder_container_permission_error_title": {
+        "description": "Error title on the page builder page if permission denied"
+    },
+    "landingpage_pagebuilder_container_permission_error_message": "You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.",
+    "@landingpage_pagebuilder_container_permission_error_message": {
+        "description": "Error message on the page builder page if permission denied"
+    },
+    "landingpage_pagebuilder_appbar_save_button_title": "Save",
+    "@landingpage_pagebuilder_appbar_save_button_title": {
+        "description": "Text of the save button in the page builder"
+    },
+    "landingpage_pagebuilder_save_error_alert_title": "Save failed",
+    "@landingpage_pagebuilder_save_error_alert_title": {
+        "description": "Title of the error alert that appears if saving in the Page Builder failed"
+    },
+    "landingpage_pagebuilder_save_error_alert_message": "An error occurred while saving your new landing page content. Please try again later.",
+    "@landingpage_pagebuilder_save_error_alert_message": {
+        "description": "Text of the error alert that appears if saving in the Page Builder failed"
+    },
+    "landingpage_pagebuilder_save_error_alert_button": "OK",
+    "@landingpage_pagebuilder_save_error_alert_button": {
+        "description": "Button text of the error alert that appears if saving in the Page Builder failed"
+    },
+    "landingpage_pagebuilder_save_success_snackbar": "The changes were saved successfully.",
+    "@landingpage_pagebuilder_save_success_snackbar": {
+        "description": "Text for the snack bar that will be displayed in the page builder if the save was successful"
+    },
+    "landingpage_pagebuilder_image_upload_exceeds_file_size_error": "The image exceeds the 5 MB limit and cannot be uploaded!",
+    "@landingpage_pagebuilder_image_upload_exceeds_file_size_error": {
+        "description": "Error message that appears in the page builder when you want to upload an image that is larger than 5 MB"
+    },
+    "landingpage_pagebuilder_unload_alert_message": "Do you really want to leave the site? Changes that are not saved will be lost.",
+    "@landingpage_pagebuilder_unload_alert_message": {
+        "description": "Error message for the alert on the page builder page, which is called when you want to leave the page and have not saved."
+    },
+    "landingpage_pagebuilder_leave_alert_title": "Leave page?",
+    "@landingpage_pagebuilder_leave_alert_title": {
+        "description": "Error title for the alert on the page builder page, which is called when you want to leave the page and have not saved."
+    },
+    "landingpage_pagebuilder_leave_alert_message": "Are you sure you want to leave the page?\nUnsaved changes will be lost.",
+    "@landingpage_pagebuilder_leave_alert_message": {
+        "description": "Error message for the alert on the page builder page, which is called when you want to leave the page and have not saved."
+    },
+    "landingpage_pagebuilder_leave_alert_button_title": "Leave",
+    "@landingpage_pagebuilder_leave_alert_button_title": {
+        "description": "Button title for the alert on the page builder page, which is called when you want to leave the page and have not saved."
+    },
+    "landingpage_pagebuilder_leave_alert_cancel_button_title": "Cancel",
+    "@landingpage_pagebuilder_leave_alert_cancel_button_title": {
+        "description": "Cancel button title for the alert on the page builder page, which is called when you want to leave the page and have not saved."
     }
 }

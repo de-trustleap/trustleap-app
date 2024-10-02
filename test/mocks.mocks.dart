@@ -7,7 +7,7 @@ import 'dart:async' as _i14;
 import 'dart:io' as _i28;
 import 'dart:typed_data' as _i26;
 
-import 'package:bloc/bloc.dart' as _i32;
+import 'package:bloc/bloc.dart' as _i31;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i13;
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart'
     as _i12;
@@ -16,17 +16,17 @@ import 'package:cloud_functions_platform_interface/cloud_functions_platform_inte
     as _i16;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart'
-    as _i33;
+    as _i32;
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart'
-    as _i34;
+    as _i33;
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart'
-    as _i31;
+    as _i5;
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart'
     as _i36;
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart'
-    as _i50;
+    as _i52;
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart'
-    as _i51;
+    as _i53;
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart'
     as _i39;
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart'
@@ -37,7 +37,7 @@ import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage
     as _i49;
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart'
     as _i48;
-import 'package:finanzbegleiter/application/menu/menu_cubit.dart' as _i5;
+import 'package:finanzbegleiter/application/menu/menu_cubit.dart' as _i34;
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart'
     as _i43;
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart'
@@ -60,6 +60,8 @@ import 'package:finanzbegleiter/core/failures/storage_failures.dart' as _i25;
 import 'package:finanzbegleiter/domain/entities/company.dart' as _i23;
 import 'package:finanzbegleiter/domain/entities/company_request.dart' as _i24;
 import 'package:finanzbegleiter/domain/entities/landing_page.dart' as _i29;
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart'
+    as _i51;
 import 'package:finanzbegleiter/domain/entities/promoter.dart' as _i46;
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart'
     as _i30;
@@ -72,6 +74,8 @@ import 'package:finanzbegleiter/domain/repositories/image_repository.dart'
     as _i7;
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart'
     as _i10;
+import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart'
+    as _i50;
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart'
     as _i9;
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart'
@@ -189,8 +193,8 @@ class _FakeAuthRepository_8 extends _i1.SmartFake
         );
 }
 
-class _FakeMenuState_9 extends _i1.SmartFake implements _i5.MenuState {
-  _FakeMenuState_9(
+class _FakeSignInState_9 extends _i1.SmartFake implements _i5.SignInState {
+  _FakeSignInState_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -862,6 +866,15 @@ class MockAppLocalizations extends _i1.Mock implements _i18.AppLocalizations {
       ) as String);
 
   @override
+  String get menuitems_company_requests => (super.noSuchMethod(
+        Invocation.getter(#menuitems_company_requests),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#menuitems_company_requests),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_error_view_title => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_error_view_title),
         returnValue: _i19.dummyValue<String>(
@@ -998,6 +1011,73 @@ class MockAppLocalizations extends _i1.Mock implements _i18.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_create_promotion_template_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_promotion_template_description),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_create_promotion_template_description),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_template_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_promotion_template_placeholder),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_create_promotion_template_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_template_default_text =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_promotion_template_default_text),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_template_default_text),
+        ),
+      ) as String);
+
+  @override
+  String get emoji_search_placeholder => (super.noSuchMethod(
+        Invocation.getter(#emoji_search_placeholder),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#emoji_search_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get open_emoji_picker_tooltip => (super.noSuchMethod(
+        Invocation.getter(#open_emoji_picker_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#open_emoji_picker_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_context_menu_delete => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_context_menu_delete),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_context_menu_delete),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_context_menu_duplicate => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_context_menu_duplicate),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_context_menu_duplicate),
+        ),
+      ) as String);
+
+  @override
   String get placeholder_title => (super.noSuchMethod(
         Invocation.getter(#placeholder_title),
         returnValue: _i19.dummyValue<String>(
@@ -1007,11 +1087,11 @@ class MockAppLocalizations extends _i1.Mock implements _i18.AppLocalizations {
       ) as String);
 
   @override
-  String get placeholder_text => (super.noSuchMethod(
-        Invocation.getter(#placeholder_text),
+  String get placeholder_description => (super.noSuchMethod(
+        Invocation.getter(#placeholder_description),
         returnValue: _i19.dummyValue<String>(
           this,
-          Invocation.getter(#placeholder_text),
+          Invocation.getter(#placeholder_description),
         ),
       ) as String);
 
@@ -1696,6 +1776,15 @@ class MockAppLocalizations extends _i1.Mock implements _i18.AppLocalizations {
       ) as String);
 
   @override
+  String get profile_page_snackbar_company_registered => (super.noSuchMethod(
+        Invocation.getter(#profile_page_snackbar_company_registered),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_page_snackbar_company_registered),
+        ),
+      ) as String);
+
+  @override
   String get profile_page_logout_button_title => (super.noSuchMethod(
         Invocation.getter(#profile_page_logout_button_title),
         returnValue: _i19.dummyValue<String>(
@@ -1846,6 +1935,45 @@ class MockAppLocalizations extends _i1.Mock implements _i18.AppLocalizations {
         returnValue: _i19.dummyValue<String>(
           this,
           Invocation.getter(#register_promoter_snackbar_success),
+        ),
+      ) as String);
+
+  @override
+  String get register_promoter_no_landingpage_title => (super.noSuchMethod(
+        Invocation.getter(#register_promoter_no_landingpage_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#register_promoter_no_landingpage_title),
+        ),
+      ) as String);
+
+  @override
+  String get register_promoter_no_landingpage_subtitle => (super.noSuchMethod(
+        Invocation.getter(#register_promoter_no_landingpage_subtitle),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#register_promoter_no_landingpage_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get register_promoter_missing_landingpage_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#register_promoter_missing_landingpage_error_message),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #register_promoter_missing_landingpage_error_message),
+        ),
+      ) as String);
+
+  @override
+  String get register_promoter_missing_company_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#register_promoter_missing_company_error_message),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#register_promoter_missing_company_error_message),
         ),
       ) as String);
 
@@ -2378,6 +2506,570 @@ class MockAppLocalizations extends _i1.Mock implements _i18.AppLocalizations {
         returnValue: _i19.dummyValue<String>(
           this,
           Invocation.getter(#company_requests_overview_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_title => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_name => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_name),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_name),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_industry => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_industry),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_industry),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_address => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_address),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_address),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_postcode => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_postcode),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_postcode),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_place => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_place),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_place),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_phone => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_phone),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_phone),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_website => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_website),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_website),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_user_title => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_user_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_user_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_user_name => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_user_name),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_user_name),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_user_email => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_user_email),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_user_email),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_decline_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_decline_button_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_decline_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_detail_accept_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_detail_accept_button_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_detail_accept_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_from_user => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_from_user),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_from_user),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_empty_title => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_empty_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_empty_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_empty_body => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_empty_body),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_empty_body),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_title => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_company_request_overview_error => (super.noSuchMethod(
+        Invocation.getter(#admin_company_request_overview_error),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_company_request_overview_error),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_title => (super.noSuchMethod(
+        Invocation.getter(#company_registration_form_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#company_registration_form_title),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_name_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_name_textfield_placeholder),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_name_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_industry_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_industry_textfield_placeholder),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_industry_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_website_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_website_textfield_placeholder),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_website_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_address_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_address_textfield_placeholder),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_address_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_postcode_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_postcode_textfield_placeholder),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_postcode_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_place_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_place_textfield_placeholder),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_place_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_phone_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #company_registration_form_phone_textfield_placeholder),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #company_registration_form_phone_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get company_registration_form_register_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#company_registration_form_register_button_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#company_registration_form_register_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_title => (super.noSuchMethod(
+        Invocation.getter(#profile_register_company_section_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_register_company_section_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_subtitle_in_progress =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #profile_register_company_section_subtitle_in_progress),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #profile_register_company_section_subtitle_in_progress),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_subtitle_requested_at =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #profile_register_company_section_subtitle_requested_at),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #profile_register_company_section_subtitle_requested_at),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_subtitle => (super.noSuchMethod(
+        Invocation.getter(#profile_register_company_section_subtitle),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_register_company_section_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get profile_register_company_section_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#profile_register_company_section_button_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_register_company_section_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_image_upload_tooltip => (super.noSuchMethod(
+        Invocation.getter(#profile_image_upload_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_image_upload_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_edit_tooltip => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_edit_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_edit_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_show_tooltip => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_show_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_show_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get profile_edit_email_tooltip => (super.noSuchMethod(
+        Invocation.getter(#profile_edit_email_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_edit_email_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get theme_switch_lightmode_tooltip => (super.noSuchMethod(
+        Invocation.getter(#theme_switch_lightmode_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#theme_switch_lightmode_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get theme_switch_darkmode_tooltip => (super.noSuchMethod(
+        Invocation.getter(#theme_switch_darkmode_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#theme_switch_darkmode_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_reset_search_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_reset_search_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_reset_search_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_filter_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_filter_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_filter_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_view_switch_grid_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_view_switch_grid_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_view_switch_grid_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_view_switch_table_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_view_switch_table_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_view_switch_table_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendations_form_add_button_tooltip => (super.noSuchMethod(
+        Invocation.getter(#recommendations_form_add_button_tooltip),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendations_form_add_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_request_error =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_container_request_error),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_container_request_error),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_permission_error_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_permission_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_permission_error_message),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_permission_error_message),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_appbar_save_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_appbar_save_button_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_appbar_save_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_save_error_alert_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_save_error_alert_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_save_error_alert_message),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_save_error_alert_message),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_button =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_save_error_alert_button),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_save_error_alert_button),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_save_success_snackbar =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_save_success_snackbar),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_save_success_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_image_upload_exceeds_file_size_error =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_image_upload_exceeds_file_size_error),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_image_upload_exceeds_file_size_error),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_unload_alert_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_unload_alert_message),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_unload_alert_message),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_leave_alert_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_leave_alert_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_message => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_leave_alert_message),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_leave_alert_message),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_leave_alert_button_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_leave_alert_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_cancel_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_leave_alert_cancel_button_title),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_leave_alert_cancel_button_title),
         ),
       ) as String);
 
@@ -2987,6 +3679,24 @@ class MockLandingPageRepository extends _i1.Mock
           ),
         )),
       ) as _i14.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i14.Future<_i2.Either<_i22.DatabaseFailure, _i29.LandingPage>>
+      getLandingPage(String? id) => (super.noSuchMethod(
+            Invocation.method(
+              #getLandingPage,
+              [id],
+            ),
+            returnValue: _i14.Future<
+                    _i2.Either<_i22.DatabaseFailure, _i29.LandingPage>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i29.LandingPage>(
+              this,
+              Invocation.method(
+                #getLandingPage,
+                [id],
+              ),
+            )),
+          ) as _i14.Future<_i2.Either<_i22.DatabaseFailure, _i29.LandingPage>>);
 }
 
 /// A class which mocks [PromoterRepository].
@@ -3617,7 +4327,7 @@ class MockUser extends _i1.Mock implements _i3.User {
 /// A class which mocks [SignInCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInCubit extends _i1.Mock implements _i31.SignInCubit {
+class MockSignInCubit extends _i1.Mock implements _i5.SignInCubit {
   MockSignInCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -3632,19 +4342,19 @@ class MockSignInCubit extends _i1.Mock implements _i31.SignInCubit {
       ) as _i4.AuthRepository);
 
   @override
-  _i31.SignInState get state => (super.noSuchMethod(
+  _i5.SignInState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i19.dummyValue<_i31.SignInState>(
+        returnValue: _FakeSignInState_9(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i31.SignInState);
+      ) as _i5.SignInState);
 
   @override
-  _i14.Stream<_i31.SignInState> get stream => (super.noSuchMethod(
+  _i14.Stream<_i5.SignInState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i14.Stream<_i31.SignInState>.empty(),
-      ) as _i14.Stream<_i31.SignInState>);
+        returnValue: _i14.Stream<_i5.SignInState>.empty(),
+      ) as _i14.Stream<_i5.SignInState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -3701,7 +4411,7 @@ class MockSignInCubit extends _i1.Mock implements _i31.SignInCubit {
       );
 
   @override
-  void emit(_i31.SignInState? state) => super.noSuchMethod(
+  void emit(_i5.SignInState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -3710,7 +4420,7 @@ class MockSignInCubit extends _i1.Mock implements _i31.SignInCubit {
       );
 
   @override
-  void onChange(_i32.Change<_i31.SignInState>? change) => super.noSuchMethod(
+  void onChange(_i31.Change<_i5.SignInState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -3764,7 +4474,7 @@ class MockSignInCubit extends _i1.Mock implements _i31.SignInCubit {
 /// A class which mocks [AuthCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthCubit extends _i1.Mock implements _i33.AuthCubit {
+class MockAuthCubit extends _i1.Mock implements _i32.AuthCubit {
   MockAuthCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -3779,19 +4489,19 @@ class MockAuthCubit extends _i1.Mock implements _i33.AuthCubit {
       ) as _i4.AuthRepository);
 
   @override
-  _i33.AuthState get state => (super.noSuchMethod(
+  _i32.AuthState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i19.dummyValue<_i33.AuthState>(
+        returnValue: _i19.dummyValue<_i32.AuthState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i33.AuthState);
+      ) as _i32.AuthState);
 
   @override
-  _i14.Stream<_i33.AuthState> get stream => (super.noSuchMethod(
+  _i14.Stream<_i32.AuthState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i14.Stream<_i33.AuthState>.empty(),
-      ) as _i14.Stream<_i33.AuthState>);
+        returnValue: _i14.Stream<_i32.AuthState>.empty(),
+      ) as _i14.Stream<_i32.AuthState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -3827,7 +4537,7 @@ class MockAuthCubit extends _i1.Mock implements _i33.AuthCubit {
       );
 
   @override
-  void emit(_i33.AuthState? state) => super.noSuchMethod(
+  void emit(_i32.AuthState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -3836,7 +4546,7 @@ class MockAuthCubit extends _i1.Mock implements _i33.AuthCubit {
       );
 
   @override
-  void onChange(_i32.Change<_i33.AuthState>? change) => super.noSuchMethod(
+  void onChange(_i31.Change<_i32.AuthState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -3890,7 +4600,7 @@ class MockAuthCubit extends _i1.Mock implements _i33.AuthCubit {
 /// A class which mocks [AuthObserverBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthObserverBloc extends _i1.Mock implements _i34.AuthObserverBloc {
+class MockAuthObserverBloc extends _i1.Mock implements _i33.AuthObserverBloc {
   MockAuthObserverBloc() {
     _i1.throwOnMissingStub(this);
   }
@@ -3905,19 +4615,19 @@ class MockAuthObserverBloc extends _i1.Mock implements _i34.AuthObserverBloc {
       ) as _i4.AuthRepository);
 
   @override
-  _i34.AuthObserverState get state => (super.noSuchMethod(
+  _i33.AuthObserverState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i19.dummyValue<_i34.AuthObserverState>(
+        returnValue: _i19.dummyValue<_i33.AuthObserverState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i34.AuthObserverState);
+      ) as _i33.AuthObserverState);
 
   @override
-  _i14.Stream<_i34.AuthObserverState> get stream => (super.noSuchMethod(
+  _i14.Stream<_i33.AuthObserverState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i14.Stream<_i34.AuthObserverState>.empty(),
-      ) as _i14.Stream<_i34.AuthObserverState>);
+        returnValue: _i14.Stream<_i33.AuthObserverState>.empty(),
+      ) as _i14.Stream<_i33.AuthObserverState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -3936,7 +4646,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i34.AuthObserverBloc {
       ) as _i14.Future<void>);
 
   @override
-  void add(_i34.AuthObserverEvent? event) => super.noSuchMethod(
+  void add(_i33.AuthObserverEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -3945,7 +4655,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i34.AuthObserverBloc {
       );
 
   @override
-  void onEvent(_i34.AuthObserverEvent? event) => super.noSuchMethod(
+  void onEvent(_i33.AuthObserverEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -3954,7 +4664,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i34.AuthObserverBloc {
       );
 
   @override
-  void emit(_i34.AuthObserverState? state) => super.noSuchMethod(
+  void emit(_i33.AuthObserverState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -3963,9 +4673,9 @@ class MockAuthObserverBloc extends _i1.Mock implements _i34.AuthObserverBloc {
       );
 
   @override
-  void on<E extends _i34.AuthObserverEvent>(
-    _i32.EventHandler<E, _i34.AuthObserverState>? handler, {
-    _i32.EventTransformer<E>? transformer,
+  void on<E extends _i33.AuthObserverEvent>(
+    _i31.EventHandler<E, _i33.AuthObserverState>? handler, {
+    _i31.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -3978,7 +4688,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i34.AuthObserverBloc {
 
   @override
   void onTransition(
-          _i32.Transition<_i34.AuthObserverEvent, _i34.AuthObserverState>?
+          _i31.Transition<_i33.AuthObserverEvent, _i33.AuthObserverState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -3989,7 +4699,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i34.AuthObserverBloc {
       );
 
   @override
-  void onChange(_i32.Change<_i34.AuthObserverState>? change) =>
+  void onChange(_i31.Change<_i33.AuthObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -4034,25 +4744,25 @@ class MockAuthObserverBloc extends _i1.Mock implements _i34.AuthObserverBloc {
 /// A class which mocks [MenuCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMenuCubit extends _i1.Mock implements _i5.MenuCubit {
+class MockMenuCubit extends _i1.Mock implements _i34.MenuCubit {
   MockMenuCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.MenuState get state => (super.noSuchMethod(
+  _i34.MenuState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeMenuState_9(
+        returnValue: _i19.dummyValue<_i34.MenuState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i5.MenuState);
+      ) as _i34.MenuState);
 
   @override
-  _i14.Stream<_i5.MenuState> get stream => (super.noSuchMethod(
+  _i14.Stream<_i34.MenuState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i14.Stream<_i5.MenuState>.empty(),
-      ) as _i14.Stream<_i5.MenuState>);
+        returnValue: _i14.Stream<_i34.MenuState>.empty(),
+      ) as _i14.Stream<_i34.MenuState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -4070,7 +4780,16 @@ class MockMenuCubit extends _i1.Mock implements _i5.MenuCubit {
       );
 
   @override
-  void emit(_i5.MenuState? state) => super.noSuchMethod(
+  void collapseMenu(bool? collapsed) => super.noSuchMethod(
+        Invocation.method(
+          #collapseMenu,
+          [collapsed],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i34.MenuState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -4079,7 +4798,7 @@ class MockMenuCubit extends _i1.Mock implements _i5.MenuCubit {
       );
 
   @override
-  void onChange(_i32.Change<_i5.MenuState>? change) => super.noSuchMethod(
+  void onChange(_i31.Change<_i34.MenuState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -4178,7 +4897,7 @@ class MockThemeCubit extends _i1.Mock implements _i35.ThemeCubit {
       );
 
   @override
-  void onChange(_i32.Change<_i35.ThemeState>? change) => super.noSuchMethod(
+  void onChange(_i31.Change<_i35.ThemeState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -4286,7 +5005,7 @@ class MockUserCubit extends _i1.Mock implements _i36.UserCubit {
       );
 
   @override
-  void onChange(_i32.Change<_i36.UserState>? change) => super.noSuchMethod(
+  void onChange(_i31.Change<_i36.UserState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -4460,15 +5179,6 @@ class MockProfileCubit extends _i1.Mock implements _i37.ProfileCubit {
       );
 
   @override
-  void getCurrentUser() => super.noSuchMethod(
-        Invocation.method(
-          #getCurrentUser,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   void deleteAccount() => super.noSuchMethod(
         Invocation.method(
           #deleteAccount,
@@ -4487,7 +5197,7 @@ class MockProfileCubit extends _i1.Mock implements _i37.ProfileCubit {
       );
 
   @override
-  void onChange(_i32.Change<_i37.ProfileState>? change) => super.noSuchMethod(
+  void onChange(_i31.Change<_i37.ProfileState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -4611,8 +5321,8 @@ class MockProfileImageBloc extends _i1.Mock implements _i38.ProfileImageBloc {
 
   @override
   void on<E extends _i38.ProfileImageEvent>(
-    _i32.EventHandler<E, _i38.ProfileImageState>? handler, {
-    _i32.EventTransformer<E>? transformer,
+    _i31.EventHandler<E, _i38.ProfileImageState>? handler, {
+    _i31.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -4625,7 +5335,7 @@ class MockProfileImageBloc extends _i1.Mock implements _i38.ProfileImageBloc {
 
   @override
   void onTransition(
-          _i32.Transition<_i38.ProfileImageEvent, _i38.ProfileImageState>?
+          _i31.Transition<_i38.ProfileImageEvent, _i38.ProfileImageState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -4646,7 +5356,7 @@ class MockProfileImageBloc extends _i1.Mock implements _i38.ProfileImageBloc {
       ) as _i14.Future<void>);
 
   @override
-  void onChange(_i32.Change<_i38.ProfileImageState>? change) =>
+  void onChange(_i31.Change<_i38.ProfileImageState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -4761,8 +5471,8 @@ class MockCompanyImageBloc extends _i1.Mock implements _i39.CompanyImageBloc {
 
   @override
   void on<E extends _i39.CompanyImageEvent>(
-    _i32.EventHandler<E, _i39.CompanyImageState>? handler, {
-    _i32.EventTransformer<E>? transformer,
+    _i31.EventHandler<E, _i39.CompanyImageState>? handler, {
+    _i31.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -4775,7 +5485,7 @@ class MockCompanyImageBloc extends _i1.Mock implements _i39.CompanyImageBloc {
 
   @override
   void onTransition(
-          _i32.Transition<_i39.CompanyImageEvent, _i39.CompanyImageState>?
+          _i31.Transition<_i39.CompanyImageEvent, _i39.CompanyImageState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -4796,7 +5506,7 @@ class MockCompanyImageBloc extends _i1.Mock implements _i39.CompanyImageBloc {
       ) as _i14.Future<void>);
 
   @override
-  void onChange(_i32.Change<_i39.CompanyImageState>? change) =>
+  void onChange(_i31.Change<_i39.CompanyImageState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -4912,8 +5622,8 @@ class MockLandingPageImageBloc extends _i1.Mock
 
   @override
   void on<E extends _i40.LandingPageImageEvent>(
-    _i32.EventHandler<E, _i40.LandingPageImageState>? handler, {
-    _i32.EventTransformer<E>? transformer,
+    _i31.EventHandler<E, _i40.LandingPageImageState>? handler, {
+    _i31.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -4926,7 +5636,7 @@ class MockLandingPageImageBloc extends _i1.Mock
 
   @override
   void onTransition(
-          _i32.Transition<_i40.LandingPageImageEvent,
+          _i31.Transition<_i40.LandingPageImageEvent,
                   _i40.LandingPageImageState>?
               transition) =>
       super.noSuchMethod(
@@ -4948,7 +5658,7 @@ class MockLandingPageImageBloc extends _i1.Mock
       ) as _i14.Future<void>);
 
   @override
-  void onChange(_i32.Change<_i40.LandingPageImageState>? change) =>
+  void onChange(_i31.Change<_i40.LandingPageImageState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -5058,8 +5768,8 @@ class MockProfileObserverBloc extends _i1.Mock
 
   @override
   void on<E extends _i41.ProfileObserverEvent>(
-    _i32.EventHandler<E, _i41.ProfileObserverState>? handler, {
-    _i32.EventTransformer<E>? transformer,
+    _i31.EventHandler<E, _i41.ProfileObserverState>? handler, {
+    _i31.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -5072,7 +5782,7 @@ class MockProfileObserverBloc extends _i1.Mock
 
   @override
   void onTransition(
-          _i32.Transition<_i41.ProfileObserverEvent, _i41.ProfileObserverState>?
+          _i31.Transition<_i41.ProfileObserverEvent, _i41.ProfileObserverState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -5093,7 +5803,7 @@ class MockProfileObserverBloc extends _i1.Mock
       ) as _i14.Future<void>);
 
   @override
-  void onChange(_i32.Change<_i41.ProfileObserverState>? change) =>
+  void onChange(_i31.Change<_i41.ProfileObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -5214,7 +5924,7 @@ class MockCompanyObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i32.Change<_i42.CompanyObserverState>? change) =>
+  void onChange(_i31.Change<_i42.CompanyObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -5349,7 +6059,7 @@ class MockCompanyCubit extends _i1.Mock implements _i43.CompanyCubit {
       );
 
   @override
-  void onChange(_i32.Change<_i43.CompanyState>? change) => super.noSuchMethod(
+  void onChange(_i31.Change<_i43.CompanyState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -5495,7 +6205,7 @@ class MockPromoterCubit extends _i1.Mock implements _i44.PromoterCubit {
       );
 
   @override
-  void onChange(_i32.Change<_i44.PromoterState>? change) => super.noSuchMethod(
+  void onChange(_i31.Change<_i44.PromoterState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -5657,7 +6367,7 @@ class MockPromoterObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i32.Change<_i45.PromoterObserverState>? change) =>
+  void onChange(_i31.Change<_i45.PromoterObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -5785,7 +6495,7 @@ class MockRecommendationsCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i32.Change<_i47.RecommendationsState>? change) =>
+  void onChange(_i31.Change<_i47.RecommendationsState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -5916,7 +6626,7 @@ class MockLandingPageObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i32.Change<_i48.LandingPageObserverState>? change) =>
+  void onChange(_i31.Change<_i48.LandingPageObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -6091,7 +6801,7 @@ class MockLandingPageCubit extends _i1.Mock implements _i49.LandingPageCubit {
       );
 
   @override
-  void onChange(_i32.Change<_i49.LandingPageState>? change) =>
+  void onChange(_i31.Change<_i49.LandingPageState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -6143,11 +6853,59 @@ class MockLandingPageCubit extends _i1.Mock implements _i49.LandingPageCubit {
       ) as _i14.Future<void>);
 }
 
+/// A class which mocks [PagebuilderRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPagebuilderRepository extends _i1.Mock
+    implements _i50.PagebuilderRepository {
+  MockPagebuilderRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i14.Future<_i2.Either<_i22.DatabaseFailure, _i51.PageBuilderPage>>
+      getLandingPageContent(String? id) => (super.noSuchMethod(
+            Invocation.method(
+              #getLandingPageContent,
+              [id],
+            ),
+            returnValue: _i14.Future<
+                    _i2
+                    .Either<_i22.DatabaseFailure, _i51.PageBuilderPage>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i51.PageBuilderPage>(
+              this,
+              Invocation.method(
+                #getLandingPageContent,
+                [id],
+              ),
+            )),
+          ) as _i14
+              .Future<_i2.Either<_i22.DatabaseFailure, _i51.PageBuilderPage>>);
+
+  @override
+  _i14.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>
+      saveLandingPageContent(_i51.PageBuilderPage? page) => (super.noSuchMethod(
+            Invocation.method(
+              #saveLandingPageContent,
+              [page],
+            ),
+            returnValue:
+                _i14.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>.value(
+                    _FakeEither_0<_i22.DatabaseFailure, _i2.Unit>(
+              this,
+              Invocation.method(
+                #saveLandingPageContent,
+                [page],
+              ),
+            )),
+          ) as _i14.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
+}
+
 /// A class which mocks [CompanyRequestCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCompanyRequestCubit extends _i1.Mock
-    implements _i50.CompanyRequestCubit {
+    implements _i52.CompanyRequestCubit {
   MockCompanyRequestCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -6171,19 +6929,19 @@ class MockCompanyRequestCubit extends _i1.Mock
       ) as _i6.UserRepository);
 
   @override
-  _i50.CompanyRequestState get state => (super.noSuchMethod(
+  _i52.CompanyRequestState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i19.dummyValue<_i50.CompanyRequestState>(
+        returnValue: _i19.dummyValue<_i52.CompanyRequestState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i50.CompanyRequestState);
+      ) as _i52.CompanyRequestState);
 
   @override
-  _i14.Stream<_i50.CompanyRequestState> get stream => (super.noSuchMethod(
+  _i14.Stream<_i52.CompanyRequestState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i14.Stream<_i50.CompanyRequestState>.empty(),
-      ) as _i14.Stream<_i50.CompanyRequestState>);
+        returnValue: _i14.Stream<_i52.CompanyRequestState>.empty(),
+      ) as _i14.Stream<_i52.CompanyRequestState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -6219,7 +6977,7 @@ class MockCompanyRequestCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i50.CompanyRequestState? state) => super.noSuchMethod(
+  void emit(_i52.CompanyRequestState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -6228,7 +6986,7 @@ class MockCompanyRequestCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i32.Change<_i50.CompanyRequestState>? change) =>
+  void onChange(_i31.Change<_i52.CompanyRequestState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -6284,7 +7042,7 @@ class MockCompanyRequestCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCompanyRequestObserverCubit extends _i1.Mock
-    implements _i51.CompanyRequestObserverCubit {
+    implements _i53.CompanyRequestObserverCubit {
   MockCompanyRequestObserverCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -6299,20 +7057,20 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
       ) as _i8.CompanyRepository);
 
   @override
-  _i51.CompanyRequestObserverState get state => (super.noSuchMethod(
+  _i53.CompanyRequestObserverState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i19.dummyValue<_i51.CompanyRequestObserverState>(
+        returnValue: _i19.dummyValue<_i53.CompanyRequestObserverState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i51.CompanyRequestObserverState);
+      ) as _i53.CompanyRequestObserverState);
 
   @override
-  _i14.Stream<_i51.CompanyRequestObserverState> get stream =>
+  _i14.Stream<_i53.CompanyRequestObserverState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i14.Stream<_i51.CompanyRequestObserverState>.empty(),
-      ) as _i14.Stream<_i51.CompanyRequestObserverState>);
+        returnValue: _i14.Stream<_i53.CompanyRequestObserverState>.empty(),
+      ) as _i14.Stream<_i53.CompanyRequestObserverState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -6362,7 +7120,7 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
       ) as _i14.Future<void>);
 
   @override
-  void emit(_i51.CompanyRequestObserverState? state) => super.noSuchMethod(
+  void emit(_i53.CompanyRequestObserverState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -6371,7 +7129,7 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i32.Change<_i51.CompanyRequestObserverState>? change) =>
+  void onChange(_i31.Change<_i53.CompanyRequestObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -6444,6 +7202,15 @@ class MockFirebaseAuth extends _i1.Mock implements _i3.FirebaseAuth {
         Invocation.setter(
           #tenantId,
           tenantId,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set customAuthDomain(String? customAuthDomain) => super.noSuchMethod(
+        Invocation.setter(
+          #customAuthDomain,
+          customAuthDomain,
         ),
         returnValueForMissingStub: null,
       );
@@ -7011,6 +7778,24 @@ class MockFirebaseFirestore extends _i1.Mock implements _i13.FirebaseFirestore {
         Invocation.setter(
           #databaseURL,
           _databaseURL,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  String get databaseId => (super.noSuchMethod(
+        Invocation.getter(#databaseId),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#databaseId),
+        ),
+      ) as String);
+
+  @override
+  set databaseId(String? _databaseId) => super.noSuchMethod(
+        Invocation.setter(
+          #databaseId,
+          _databaseId,
         ),
         returnValueForMissingStub: null,
       );

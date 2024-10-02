@@ -810,4 +810,46 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recommendations_form_add_button_tooltip => 'Empfehlung hinzufügen';
+
+  @override
+  String get landingpage_pagebuilder_container_request_error => 'Beim Abruf der Daten ist ein Fehler aufgetreten';
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_title => 'Du bist nicht berechtigt diese Seite aufzurufen';
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_message => 'Du hast nicht die entsprechende Berechtigung um diese Seite zu aufzurufen. Melde dich bitte mit einem Account an der dazu berechtigt ist.';
+
+  @override
+  String get landingpage_pagebuilder_appbar_save_button_title => 'Speichern';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_title => 'Speichern fehlgeschlagen';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_message => 'Beim Speichern deiner neuen Landingpage Inhalte ist ein Fehler aufgetreten. Bitte versuche es später noch einmal.';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_button => 'OK';
+
+  @override
+  String get landingpage_pagebuilder_save_success_snackbar => 'Die Änderungen wurden erfolgreich gespeichert.';
+
+  @override
+  String get landingpage_pagebuilder_image_upload_exceeds_file_size_error => 'Das Bild überschreitet die 5 MB Grenze und kann nicht hochgeladen werden!';
+
+  @override
+  String get landingpage_pagebuilder_unload_alert_message => 'Willst du die Seite wirklich verlassen? Nicht gespeicherte Änderungen gehen verloren.';
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_title => 'Seite verlassen?';
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_message => 'Möchtest du die Seite wirklich verlassen?\nNicht gespeicherte Änderungen gehen verloren.';
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_button_title => 'Verlassen';
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_cancel_button_title => 'Abbrechen';
 }

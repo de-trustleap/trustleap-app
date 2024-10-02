@@ -24,80 +24,76 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     bool shouldShowThemeSwitcher = widthAnimation != null &&
         widthAnimation!.value >= MenuDimensions.menuOpenWidth;
-    return BlocProvider.value(
-      value: BlocProvider.of<MenuCubit>(context),
-      child: BlocBuilder<MenuCubit, MenuState>(
-        builder: (context, state) {
-          return ListView(children: [
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const SizedBox(height: 40),
-              MenuItem(
-                  path: RoutePaths.profilePath,
-                  icon: Icons.person,
-                  type: MenuItems.profile,
-                  isURLMatching:
-                      Modular.to.path.endsWith(RoutePaths.profilePath),
-                  isCollapsed: collapsed,
-                  animationController: animationController),
-              const SizedBox(height: 52),
-              MenuItem(
-                  path: RoutePaths.dashboardPath,
-                  icon: Icons.dashboard,
-                  type: MenuItems.dashboard,
-                  isURLMatching:
-                      Modular.to.path.endsWith(RoutePaths.dashboardPath),
-                  isCollapsed: collapsed,
-                  animationController: animationController),
-              const SizedBox(height: 28),
-              MenuItem(
-                  path: RoutePaths.recommendationsPath,
-                  icon: Icons.thumb_up,
-                  type: MenuItems.recommendations,
-                  isURLMatching:
-                      Modular.to.path.endsWith(RoutePaths.recommendationsPath),
-                  isCollapsed: collapsed,
-                  animationController: animationController),
-              const SizedBox(height: 28),
-              MenuItem(
-                  path: RoutePaths.promotersPath,
-                  icon: Icons.phone_bluetooth_speaker,
-                  type: MenuItems.promoters,
-                  isURLMatching:
-                      Modular.to.path.endsWith(RoutePaths.promotersPath),
-                  isCollapsed: collapsed,
-                  animationController: animationController),
-              const SizedBox(height: 28),
-              MenuItem(
-                  path: RoutePaths.landingPagePath,
-                  icon: Icons.airplanemode_active,
-                  type: MenuItems.landingpage,
-                  isURLMatching:
-                      Modular.to.path.endsWith(RoutePaths.landingPagePath),
-                  isCollapsed: collapsed,
-                  animationController: animationController),
-              const SizedBox(height: 28),
-              MenuItem(
-                  path: RoutePaths.activitiesPath,
-                  icon: Icons.history,
-                  type: MenuItems.activities,
-                  isURLMatching:
-                      Modular.to.path.endsWith(RoutePaths.activitiesPath),
-                  isCollapsed: collapsed,
-                  animationController: animationController),
-              const SizedBox(height: 56),
-              AnimatedOpacity(
-                  opacity: shouldShowThemeSwitcher ? 1.0 : 0,
-                  duration: const Duration(milliseconds: 100),
-                  child: IgnorePointer(
-                    ignoring: !shouldShowThemeSwitcher,
-                    child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [ThemeSwitch()]),
-                  )),
-            ]),
-          ]);
-        },
-      ),
+    return BlocBuilder<MenuCubit, MenuState>(
+      builder: (context, state) {
+        return ListView(children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const SizedBox(height: 40),
+            MenuItem(
+                path: RoutePaths.profilePath,
+                icon: Icons.person,
+                type: MenuItems.profile,
+                isURLMatching: Modular.to.path.endsWith(RoutePaths.profilePath),
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 52),
+            MenuItem(
+                path: RoutePaths.dashboardPath,
+                icon: Icons.dashboard,
+                type: MenuItems.dashboard,
+                isURLMatching:
+                    Modular.to.path.endsWith(RoutePaths.dashboardPath),
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 28),
+            MenuItem(
+                path: RoutePaths.recommendationsPath,
+                icon: Icons.thumb_up,
+                type: MenuItems.recommendations,
+                isURLMatching:
+                    Modular.to.path.endsWith(RoutePaths.recommendationsPath),
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 28),
+            MenuItem(
+                path: RoutePaths.promotersPath,
+                icon: Icons.phone_bluetooth_speaker,
+                type: MenuItems.promoters,
+                isURLMatching:
+                    Modular.to.path.endsWith(RoutePaths.promotersPath),
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 28),
+            MenuItem(
+                path: RoutePaths.landingPagePath,
+                icon: Icons.airplanemode_active,
+                type: MenuItems.landingpage,
+                isURLMatching:
+                    Modular.to.path.endsWith(RoutePaths.landingPagePath),
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 28),
+            MenuItem(
+                path: RoutePaths.activitiesPath,
+                icon: Icons.history,
+                type: MenuItems.activities,
+                isURLMatching:
+                    Modular.to.path.endsWith(RoutePaths.activitiesPath),
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 56),
+            AnimatedOpacity(
+                opacity: shouldShowThemeSwitcher ? 1.0 : 0,
+                duration: const Duration(milliseconds: 100),
+                child: IgnorePointer(
+                  ignoring: !shouldShowThemeSwitcher,
+                  child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [ThemeSwitch()]),
+                )),
+          ]),
+        ]);
+      },
     );
   }
 }

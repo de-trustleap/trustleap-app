@@ -810,4 +810,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendations_form_add_button_tooltip => 'Add recommendation';
+
+  @override
+  String get landingpage_pagebuilder_container_request_error => 'An error occurred while retrieving the data';
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_title => 'You are not authorized to access this page';
+
+  @override
+  String get landingpage_pagebuilder_container_permission_error_message => 'You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.';
+
+  @override
+  String get landingpage_pagebuilder_appbar_save_button_title => 'Save';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_title => 'Save failed';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_message => 'An error occurred while saving your new landing page content. Please try again later.';
+
+  @override
+  String get landingpage_pagebuilder_save_error_alert_button => 'OK';
+
+  @override
+  String get landingpage_pagebuilder_save_success_snackbar => 'The changes were saved successfully.';
+
+  @override
+  String get landingpage_pagebuilder_image_upload_exceeds_file_size_error => 'The image exceeds the 5 MB limit and cannot be uploaded!';
+
+  @override
+  String get landingpage_pagebuilder_unload_alert_message => 'Do you really want to leave the site? Changes that are not saved will be lost.';
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_title => 'Leave page?';
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_message => 'Are you sure you want to leave the page?\nUnsaved changes will be lost.';
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_button_title => 'Leave';
+
+  @override
+  String get landingpage_pagebuilder_leave_alert_cancel_button_title => 'Cancel';
 }

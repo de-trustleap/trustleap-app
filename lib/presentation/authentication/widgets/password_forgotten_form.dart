@@ -58,7 +58,7 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
     Modular.to.navigate(RoutePaths.loginPath);
   }
 
-  void showSuccessDialog(ThemeData themeData, AppLocalizations localizations) {
+  void showSuccessDialog(AppLocalizations localizations) {
     showDialog(
         context: context,
         builder: (_) {
@@ -85,7 +85,7 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
             AuthFailureMapper.mapFailureMessage(state.failure, localization);
         showError = true;
       } else if (state is AuthPasswordResetSuccessState) {
-        showSuccessDialog(themeData, localization);
+        showSuccessDialog(localization);
       }
     }), builder: (context, state) {
       return CardContainer(
