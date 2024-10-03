@@ -35,6 +35,10 @@ coverage:
     - apt-get install -y lcov
   script:
     - genhtml coverage/lcov.info -o coverage/html
+  rules:
+    - if: '$CI_MERGE_REQUEST_ID || $CI_COMMIT_BRANCH != "main"'
+      when: always
+    - when: never
   artifacts:
     paths:
       - coverage/html/
