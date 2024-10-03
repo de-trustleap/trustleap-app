@@ -3,6 +3,7 @@ image: ghcr.io/cirruslabs/flutter:3.24.1
 stages:
   - build
   - test
+  - coverage
 
 before_script:
   # Cache-Verzeichnis definieren
@@ -25,11 +26,14 @@ build:
 
 test:
   stage: test
+  script:
+    - flutter test --coverage
+
+coverage:
+  stage: coverage
   before_script:
     - apt-get install -y lcov
   script:
-    - flutter test --coverage
-  after_script:
     - genhtml coverage/lcov.info -o coverage/html
   artifacts:
     paths:
