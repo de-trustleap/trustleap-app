@@ -2,6 +2,7 @@ image: ghcr.io/cirruslabs/flutter:3.24.1
 
 stages:
   - build
+  - test
 
 before_script:
   # Cache-Verzeichnis definieren
@@ -21,3 +22,11 @@ build:
   artifacts:
     paths:
      - build/web/
+
+test:
+  stage: test
+  script:
+    - flutter test --coverage
+  artifacts:
+    paths:
+      - coverage/
