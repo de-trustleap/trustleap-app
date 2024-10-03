@@ -20,6 +20,8 @@ build:
   stage: build
   script:
     - flutter build web --web-renderer canvaskit --release --no-tree-shake-icons
+  rules:
+    - when: always
   artifacts:
     paths:
      - build/web/
@@ -28,6 +30,8 @@ test:
   stage: test
   script:
     - flutter test --coverage
+  rules:
+    - when: always
 
 coverage:
   stage: coverage
