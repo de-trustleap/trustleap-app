@@ -70,6 +70,7 @@ void main() {
                     widthPercentage: null,
                     backgroundColor: null,
                     padding: null,
+                    containerChild: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,
