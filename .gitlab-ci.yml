@@ -34,5 +34,3 @@ test:
   artifacts:
     paths:
       - coverage/html/
-    reports:
-      junit: coverage/html/index.html
