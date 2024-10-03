@@ -41,7 +41,35 @@ coverage:
   before_script:
     - apt-get install -y lcov
   script:
-    - genhtml coverage/lcov.info -o coverage/html
+    - lcov --capture --directory coverage --output-file coverage/lcov.info
+    
+    # Ermittle die geänderten Dateien im aktuellen Merge Request
+    - |
+      # Ersetze <SOURCE_BRANCH> und <TARGET_BRANCH> durch deine Branch-Namen
+      SOURCE_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+      TARGET_BRANCH="main"  # oder der Basis-Branch des MRs
+
+      # Get modified files
+      modified_files=$(git diff --name-only origin/$TARGET_BRANCH...$SOURCE_BRANCH)
+
+      # Filtere die lcov.info nur für die geänderten Dateien
+      lcov --extract coverage/lcov.info "$modified_files" --output-file coverage/filtered_lcov.info
+
+      # Generiere den HTML-Report
+      genhtml coverage/filtered_lcov.info --output-directory coverage/html
+      echo "Coverage for changed files generated."
+
+      # Überprüfe die Coverage
+      coverage_percent=$(lcov --list coverage/filtered_lcov.info | grep -oP "\d+\.\d+(?=%)" | head -n 1)
+      echo "Coverage: $coverage_percent%"
+
+      # Fails the pipeline if coverage is below 50%
+      if (( $(echo "$coverage_percent < 50" | bc -l) )); then
+        echo "Coverage is below 50%. Failing the pipeline."
+        exit 1
+      else
+        echo "Coverage is acceptable."
+      fi
   rules:
     - if: '$CI_MERGE_REQUEST_ID || $CI_COMMIT_BRANCH != "main"'
       when: always
