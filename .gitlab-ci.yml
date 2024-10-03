@@ -32,7 +32,7 @@ test:
   after_script:
     - genhtml coverage/lcov.info -o coverage/html
   artifacts:
-    when: always
+    paths:
+      - coverage/html/
     reports:
-      junit:
-        - junit-report.xml
+      junit: coverage/html/index.html
