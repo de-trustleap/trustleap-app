@@ -1,23 +1,44 @@
-#image: ghcr.io/cirruslabs/flutter:3.24.1
+image: ghcr.io/cirruslabs/flutter:3.24.1
 
-#stages:
-#  - build
+stages:
+  - build
+  - test
+  - coverage
 
-#before_script:
+before_script:
   # Cache-Verzeichnis definieren
-#  - flutter config --enable-web
-##  - flutter pub get
+  - flutter config --enable-web
+  - flutter pub get
 
 cache:
-  #key: ${CI_PROJECT_NAME}
-  #paths:
-  #  - .pub-cache/
-  #  - build/
+  key: ${CI_PROJECT_NAME}
+  paths:
+    - .pub-cache/
+    - build/
 
-#build:
- # stage: build
- # script:
- #   - flutter build web --web-renderer canvaskit --release
- # artifacts:
-  #  paths:
-  #    - build/web/
+build:
+  stage: build
+  script:
+    - flutter build web --web-renderer canvaskit --release --no-tree-shake-icons
+  artifacts:
+    paths:
+     - build/web/
+
+test:
+  stage: test
+  script:
+    - flutter test --coverage
+
+coverage:
+  stage: coverage
+  before_script:
+    - apt-get install -y lcov
+  script:
+    - genhtml coverage/lcov.info -o coverage/html
+  rules:
+    - if: '$CI_MERGE_REQUEST_ID || $CI_COMMIT_BRANCH != "main"'
+      when: always
+    - when: never
+  artifacts:
+    paths:
+      - coverage/html/
