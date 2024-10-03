@@ -32,6 +32,9 @@ test:
     - flutter test --coverage
   rules:
     - when: always
+  artifacts:
+    paths:
+      - coverage/lcov.info
 
 coverage:
   stage: coverage
