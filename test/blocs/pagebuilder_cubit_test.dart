@@ -145,6 +145,7 @@ void main() {
                     children: [],
                     widthPercentage: null,
                     backgroundColor: null,
+                    containerChild: null,
                     padding: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
@@ -250,6 +251,7 @@ void main() {
         properties: mockTextProperties1,
         children: [],
         widthPercentage: 100.0,
+        containerChild: null,
         padding:
             PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
@@ -260,6 +262,7 @@ void main() {
         properties: mockTextProperties2,
         children: [],
         widthPercentage: 100.0,
+        containerChild: null,
         padding:
             PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
@@ -269,6 +272,7 @@ void main() {
         backgroundColor: null,
         properties: mockImageProperties,
         children: [],
+        containerChild: null,
         widthPercentage: 100.0,
         padding: null);
 
@@ -278,6 +282,7 @@ void main() {
         backgroundColor: null,
         properties: null,
         children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
+        containerChild: null,
         widthPercentage: 100.0,
         padding: null);
 
@@ -287,6 +292,7 @@ void main() {
         backgroundColor: null,
         properties: null,
         children: [mockTextWidget1, mockImageWidget],
+        containerChild: null,
         widthPercentage: 100.0,
         padding: null);
 
@@ -380,3 +386,4 @@ void main() {
     });
   });
 }
+//TODO: Jetzt mit JSON weitermachen!
