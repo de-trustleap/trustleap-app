@@ -11,6 +11,8 @@ class PageBuilderTextProperties extends Equatable
   final double? lineHeight;
   final Color? color;
   final TextAlign? alignment;
+  final bool? isBold;
+  final bool? isItalic;
 
   const PageBuilderTextProperties(
       {required this.text,
@@ -18,7 +20,9 @@ class PageBuilderTextProperties extends Equatable
       required this.fontFamily,
       required this.lineHeight,
       required this.color,
-      required this.alignment});
+      required this.alignment,
+      required this.isBold,
+      required this.isItalic});
 
   PageBuilderTextProperties copyWith(
       {String? text,
@@ -26,19 +30,29 @@ class PageBuilderTextProperties extends Equatable
       String? fontFamily,
       double? lineHeight,
       Color? color,
-      TextAlign? alignment}) {
+      TextAlign? alignment,
+      bool? isBold,
+      bool? isItalic}) {
     return PageBuilderTextProperties(
         text: text ?? this.text,
         fontSize: fontSize ?? this.fontSize,
         fontFamily: fontFamily ?? this.fontFamily,
         lineHeight: lineHeight ?? this.lineHeight,
         color: color ?? this.color,
-        alignment: alignment ?? this.alignment);
+        alignment: alignment ?? this.alignment,
+        isBold: isBold ?? this.isBold,
+        isItalic: isItalic ?? this.isItalic);
   }
 
   @override
-  List<Object?> get props =>
-      [text, fontSize, fontFamily, lineHeight, color, alignment];
+  List<Object?> get props => [
+        text,
+        fontSize,
+        fontFamily,
+        lineHeight,
+        color,
+        alignment,
+        isBold,
+        isItalic
+      ];
 }
-
-//TODO: style front und backend.

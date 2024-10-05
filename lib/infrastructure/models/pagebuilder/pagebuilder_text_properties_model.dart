@@ -13,6 +13,8 @@ class PageBuilderTextPropertiesModel extends Equatable
   final double? lineHeight;
   final String? color;
   final String? alignment;
+  final bool? isBold;
+  final bool? isItalic;
 
   const PageBuilderTextPropertiesModel(
       {this.text,
@@ -20,7 +22,9 @@ class PageBuilderTextPropertiesModel extends Equatable
       this.fontFamily,
       this.lineHeight,
       this.color,
-      this.alignment});
+      this.alignment,
+      this.isBold,
+      this.isItalic});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -30,6 +34,8 @@ class PageBuilderTextPropertiesModel extends Equatable
     if (lineHeight != null) map['lineHeight'] = lineHeight;
     if (color != null) map['color'] = color;
     if (alignment != null) map['alignment'] = alignment;
+    if (isBold != null) map['isBold'] = isBold;
+    if (isItalic != null) map['isItalic'] = isItalic;
     return map;
   }
 
@@ -42,8 +48,9 @@ class PageBuilderTextPropertiesModel extends Equatable
         lineHeight:
             map['lineHeight'] != null ? map['lineHeight'] as double : null,
         color: map['color'] != null ? map['color'] as String : null,
-        alignment:
-            map['alignment'] != null ? map['alignment'] as String : null);
+        alignment: map['alignment'] != null ? map['alignment'] as String : null,
+        isBold: map['isBold'] != null ? map['isBold'] as bool : null,
+        isItalic: map['isItalic'] != null ? map['isItalic'] as bool : null);
   }
 
   PageBuilderTextPropertiesModel copyWith(
@@ -52,14 +59,18 @@ class PageBuilderTextPropertiesModel extends Equatable
       String? fontFamily,
       double? lineHeight,
       String? color,
-      String? alignment}) {
+      String? alignment,
+      bool? isBold,
+      bool? isItalic}) {
     return PageBuilderTextPropertiesModel(
         text: text ?? this.text,
         fontSize: fontSize ?? this.fontSize,
         fontFamily: fontFamily ?? this.fontFamily,
         lineHeight: lineHeight ?? this.lineHeight,
         color: color ?? this.color,
-        alignment: alignment ?? this.alignment);
+        alignment: alignment ?? this.alignment,
+        isBold: isBold ?? this.isBold,
+        isItalic: isItalic ?? this.isItalic);
   }
 
   PageBuilderTextProperties toDomain() {
@@ -71,7 +82,9 @@ class PageBuilderTextPropertiesModel extends Equatable
         color: color != null
             ? Color(ColorUtility.getHexIntFromString(color!))
             : null,
-        alignment: _getTextAlignFromString(alignment));
+        alignment: _getTextAlignFromString(alignment),
+        isBold: isBold,
+        isItalic: isItalic);
   }
 
   factory PageBuilderTextPropertiesModel.fromDomain(
@@ -84,7 +97,9 @@ class PageBuilderTextPropertiesModel extends Equatable
         color: properties.color?.value != null
             ? properties.color!.value.toRadixString(16)
             : null,
-        alignment: properties.alignment?.name);
+        alignment: properties.alignment?.name,
+        isBold: properties.isBold,
+        isItalic: properties.isItalic);
   }
 
   TextAlign _getTextAlignFromString(String? alignment) {
@@ -100,6 +115,14 @@ class PageBuilderTextPropertiesModel extends Equatable
   }
 
   @override
-  List<Object?> get props =>
-      [text, fontSize, fontFamily, lineHeight, color, alignment];
+  List<Object?> get props => [
+        text,
+        fontSize,
+        fontFamily,
+        lineHeight,
+        color,
+        alignment,
+        isBold,
+        isItalic
+      ];
 }
