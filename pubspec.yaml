@@ -73,12 +73,18 @@ flutter:
           weight: 700
         - asset: assets/fonts/Merriweather/Merriweather-Italic.ttf
           style: italic
+        - asset: assets/fonts/Merriweather/Merriweather-BoldItalic.ttf
+          weight: 700
+          style: italic
     - family: Roboto
       fonts:
         - asset: assets/fonts/Roboto/Roboto-Regular.ttf
         - asset: assets/fonts/Roboto/Roboto-Bold.ttf
           weight: 700
         - asset: assets/fonts/Roboto/Roboto-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-BoldItalic.ttf
+          weight: 700
           style: italic
 
 

@@ -70,6 +70,7 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
               style: TextStyle(
                   fontSize: widget.properties.fontSize,
                   fontFamily: widget.properties.fontFamily,
+                  height: widget.properties.lineHeight,
                   fontFamilyFallback: const ["Poppins"],
                   color: widget.properties.color),
               decoration: const InputDecoration(
