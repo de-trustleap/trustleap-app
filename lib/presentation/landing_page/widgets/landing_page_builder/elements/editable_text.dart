@@ -69,6 +69,8 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
               keyboardType: TextInputType.multiline,
               style: TextStyle(
                   fontSize: widget.properties.fontSize,
+                  fontFamily: widget.properties.fontFamily,
+                  fontFamilyFallback: const ["Poppins"],
                   color: widget.properties.color),
               decoration: const InputDecoration(
                 border: InputBorder.none,

@@ -9,16 +9,18 @@ class PageBuilderTextPropertiesModel extends Equatable
     implements PageBuilderProperties {
   final String? text;
   final double? fontSize;
+  final String? fontFamily;
   final String? color;
   final String? alignment;
 
   const PageBuilderTextPropertiesModel(
-      {this.text, this.fontSize, this.color, this.alignment});
+      {this.text, this.fontSize, this.fontFamily, this.color, this.alignment});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
     if (text != null) map['text'] = text;
     if (fontSize != null) map['fontSize'] = fontSize;
+    if (fontFamily != null) map['fontFamily'] = fontFamily;
     if (color != null) map['color'] = color;
     if (alignment != null) map['alignment'] = alignment;
     return map;
@@ -28,18 +30,23 @@ class PageBuilderTextPropertiesModel extends Equatable
     return PageBuilderTextPropertiesModel(
         text: map['text'] != null ? map['text'] as String : null,
         fontSize: map['fontSize'] != null ? map['fontSize'] as double : null,
+        fontFamily:
+            map['fontFamily'] != null ? map['fontFamily'] as String : null,
         color: map['color'] != null ? map['color'] as String : null,
-        alignment: map['alignment'] != null ? map['alignment'] as String : null);
+        alignment:
+            map['alignment'] != null ? map['alignment'] as String : null);
   }
 
   PageBuilderTextPropertiesModel copyWith(
       {String? text,
       double? fontSize,
+      String? fontFamily,
       String? color,
       String? alignment}) {
     return PageBuilderTextPropertiesModel(
         text: text ?? this.text,
         fontSize: fontSize ?? this.fontSize,
+        fontFamily: fontFamily ?? this.fontFamily,
         color: color ?? this.color,
         alignment: alignment ?? this.alignment);
   }
@@ -48,6 +55,7 @@ class PageBuilderTextPropertiesModel extends Equatable
     return PageBuilderTextProperties(
         text: text,
         fontSize: fontSize,
+        fontFamily: fontFamily,
         color: color != null
             ? Color(ColorUtility.getHexIntFromString(color!))
             : null,
@@ -59,6 +67,7 @@ class PageBuilderTextPropertiesModel extends Equatable
     return PageBuilderTextPropertiesModel(
         text: properties.text,
         fontSize: properties.fontSize,
+        fontFamily: properties.fontFamily,
         color: properties.color?.value != null
             ? properties.color!.value.toRadixString(16)
             : null,
@@ -78,5 +87,5 @@ class PageBuilderTextPropertiesModel extends Equatable
   }
 
   @override
-  List<Object?> get props => [text, fontSize, color, alignment];
+  List<Object?> get props => [text, fontSize, fontFamily, color, alignment];
 }
