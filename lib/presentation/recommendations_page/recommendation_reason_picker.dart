@@ -6,7 +6,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 class RecommendationReaseonPicker extends StatefulWidget {
   final double width;
   final String? validate;
-  final List<String> reasons;
+  final List<Map<String, Object?>> reasons;
   final String initialValue;
   final Function onSelected;
 
@@ -35,10 +35,15 @@ class _RecommendationReaseonPickerState
     dropdownItems = createDropdownEntries(widget.reasons);
   }
 
-  List<DropdownMenuEntry<String>> createDropdownEntries(List<String> reasons) {
+  List<DropdownMenuEntry<String>> createDropdownEntries(
+      List<Map<String, Object?>> reasons) {
     List<DropdownMenuEntry<String>> entries = [];
     for (var reason in reasons) {
-      var entry = DropdownMenuEntry<String>(value: reason, label: reason);
+      var entry = DropdownMenuEntry<String>(
+          value: reason['name'] as String,
+          label: (reason['isActive'] == true ? '' : 'DEAKTIVIERT: ') +
+              (reason['name'] as String),
+          enabled: reason['isActive'] == true);
       entries.add(entry);
     }
     return entries;

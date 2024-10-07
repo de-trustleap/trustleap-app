@@ -64,7 +64,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
       AppLocalizations localizations,
       BuildContext context) {
     return Container(
-        width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
+      width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
       height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
       decoration: BoxDecoration(
           color: (landingPage.isDefaultPage ?? false)
@@ -92,8 +92,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                 arguments: landingPage);
                           },
                           iconSize: 24,
-                          tooltip: localizations
-                            .landingpage_overview_edit_tooltip,
+                          tooltip:
+                              localizations.landingpage_overview_edit_tooltip,
                           icon: Icon(Icons.edit,
                               color: themeData.colorScheme.secondary,
                               size: 24)),
@@ -105,8 +105,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                 arguments: landingPage);
                           },
                           iconSize: 24,
-                          tooltip: localizations
-                            .landingpage_overview_show_tooltip,
+                          tooltip:
+                              localizations.landingpage_overview_show_tooltip,
                           icon: Icon(Icons.preview,
                               color: themeData.colorScheme.secondary,
                               size: 24)),
@@ -127,12 +127,11 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                           Text(
                                               localizations
                                                   .landingpage_overview_context_menu_delete,
-                                              style:
-                                                responsiveValue.isMobile
-                                                  ? themeData.textTheme
-                                                  .bodySmall
-                                                  : themeData.textTheme
-                                                  .bodyMedium)
+                                              style: responsiveValue.isMobile
+                                                  ? themeData
+                                                      .textTheme.bodySmall
+                                                  : themeData
+                                                      .textTheme.bodyMedium)
                                         ])),
                                 PopupMenuItem(
                                     value: "duplicate",
@@ -156,27 +155,31 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                                       responsiveValue,
                                                       themeData))
                                         ])),
-                                PopupMenuItem(
-                                    value: "troggelActiveDeaktive",
-                                    //enabled: ,
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Icon(
-                                              (landingPage.isActive ?? false) ? Icons.visibility_off : Icons.visibility,
-                                              color: themeData
-                                                  .colorScheme.secondary,
-                                              size: 24),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                              (landingPage.isActive ?? false) ? "deaktivieren": "aktivieren" ,
-                                              style: responsiveValue.isMobile
-                                                  ? themeData
-                                                      .textTheme.bodySmall
-                                                  : themeData
-                                                      .textTheme.bodyMedium)
-                                        ]))
+                                if (landingPage.ownerID == user.id)
+                                  PopupMenuItem(
+                                      value: "troggelActiveDeaktive",
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                                (landingPage.isActive ?? false)
+                                                    ? Icons.visibility_off
+                                                    : Icons.visibility,
+                                                color: themeData
+                                                    .colorScheme.secondary,
+                                                size: 24),
+                                            const SizedBox(width: 8),
+                                            Text(
+                                                (landingPage.isActive ?? false)
+                                                    ? "deaktivieren"
+                                                    : "aktivieren",
+                                                style: responsiveValue.isMobile
+                                                    ? themeData
+                                                        .textTheme.bodySmall
+                                                    : themeData
+                                                        .textTheme.bodyMedium)
+                                          ]))
                               ],
                           onSelected: (String newValue) {
                             if (newValue == "delete") {
@@ -185,7 +188,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                             } else if (newValue == "duplicate") {
                               duplicatePressed(landingPage.id.value);
                             } else if (newValue == "troggelActiveDeaktive") {
-                              isActivePressed(landingPage.id.value, !(landingPage.isActive ?? false));
+                              isActivePressed(landingPage.id.value,
+                                  !(landingPage.isActive ?? false));
                             }
                           })
                     ]),
@@ -227,8 +231,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
-                        color: themeData.colorScheme.surfaceTint
-                        .withOpacity(0.6)),
+                        color:
+                            themeData.colorScheme.surfaceTint.withOpacity(0.6)),
                     maxLines: 1),
               ] else if (landingPage.lastUpdatedAt != null) ...[
                 const SizedBox(height: 8),
@@ -236,18 +240,18 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     "Geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
-                        color: themeData.colorScheme.surfaceTint
-                        .withOpacity(0.6)),
+                        color:
+                            themeData.colorScheme.surfaceTint.withOpacity(0.6)),
                     maxLines: 1)
               ],
-              if (!(landingPage.isActive ?? false) && !(landingPage.isDefaultPage ?? false)) ...[
+              if (!(landingPage.isActive ?? false) &&
+                  !(landingPage.isDefaultPage ?? false)) ...[
                 //const SizedBox(height: 16),
-                SelectableText(
-                    "DEAKTIVIERT",
+                SelectableText("DEAKTIVIERT",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color:Color.fromARGB(255, 255, 0, 0)),
+                        color: Color.fromARGB(255, 255, 0, 0)),
                     maxLines: 1),
               ],
               const Spacer()
@@ -255,6 +259,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
           )),
     );
   }
+
   Widget placeHolderImage(ResponsiveBreakpointsData responsiveValue) {
     return PlaceholderImage(
         imageSize: Size(responsiveValue.largerThan(MOBILE) ? 120 : 140,

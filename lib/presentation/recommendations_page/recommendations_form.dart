@@ -49,7 +49,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   bool validationHasError = false;
   String? reasonValid;
   bool promoterTextFieldDisabled = false;
-  List<String> reasons = [];
+  List<Map<String, Object?>> reasons = [];
 
   @override
   void initState() {
@@ -226,7 +226,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                             const Spacer(),
                             IconButton(
                                 onPressed: () => addLead(validator),
-                                tooltip: localization.recommendations_form_add_button_tooltip,
+                                tooltip: localization
+                                    .recommendations_form_add_button_tooltip,
                                 icon: const Icon(Icons.add_circle),
                                 iconSize: 48,
                                 color: themeData.colorScheme.secondary)
@@ -254,7 +255,13 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                   width: maxWidth,
                                   validate: reasonValid,
                                   reasons: reasons,
-                                  initialValue: selectedReason ?? reasons[0],
+                                  initialValue: selectedReason ??
+                                      reasons.firstWhere(
+                                        (element) {
+                                          return element['isActive'] == true;
+                                        },
+                                        orElse: () => {'name': "null"},
+                                      )['name'] as String,
                                   onSelected: (reason) {
                                     setState(() {
                                       reasonValid =
