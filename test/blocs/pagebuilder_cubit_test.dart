@@ -150,8 +150,12 @@ void main() {
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,
+                        fontFamily: "TestFont",
                         color: Colors.black,
-                        alignment: TextAlign.center))
+                        alignment: TextAlign.center,
+                        lineHeight: 1.5,
+                        isBold: null,
+                        isItalic: null))
               ])
         ]);
     final testUser = CustomUser(id: UniqueID.fromUniqueString("2"));
@@ -226,14 +230,22 @@ void main() {
     final mockTextProperties1 = PageBuilderTextProperties(
         text: "Text 1",
         fontSize: 16.0,
+        fontFamily: "TestFont",
         color: Colors.black,
-        alignment: TextAlign.left);
+        alignment: TextAlign.left,
+        lineHeight: 1.5,
+        isBold: null,
+        isItalic: null);
 
     final mockTextProperties2 = PageBuilderTextProperties(
       text: "Text 2",
       fontSize: 18.0,
+      fontFamily: "TestFont",
       color: Colors.red,
       alignment: TextAlign.center,
+      lineHeight: 1.5,
+      isBold: null,
+      isItalic: null
     );
 
     final mockImageProperties = PageBuilderImageProperties(
