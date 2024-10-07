@@ -85,6 +85,12 @@ class PagebuilderCubit extends Cubit<PagebuilderState> {
     if (currentWidget.id == updatedWidget.id) {
       return updatedWidget;
     }
+
+    if (currentWidget.containerChild != null) {
+      final updatedContainerChild =
+          _updateChildWidgets(currentWidget.containerChild!, updatedWidget);
+      return currentWidget.copyWith(containerChild: updatedContainerChild);
+    }
     if (currentWidget.children != null && currentWidget.children!.isNotEmpty) {
       final updatedChildren = currentWidget.children!.map((child) {
         return _updateChildWidgets(child, updatedWidget);
