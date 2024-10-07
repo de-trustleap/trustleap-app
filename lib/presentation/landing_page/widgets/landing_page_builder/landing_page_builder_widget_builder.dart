@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/editable_text.dart';
@@ -23,7 +24,12 @@ class LandingPageBuilderWidgetBuilder {
       case PageBuilderWidgetType.column:
         return buildColumnWidget(model);
       case PageBuilderWidgetType.row:
-        return buildRowWidget(model);
+        if (model.properties != null) {
+          return buildRowWidget(
+              model.properties as PagebuilderRowProperties, model);
+        } else {
+          return buildRowWidget(null, model);
+        }
       case PageBuilderWidgetType.text:
         return buildTextWidget(
             model.properties as PageBuilderTextProperties, model);
@@ -63,7 +69,8 @@ class LandingPageBuilderWidgetBuilder {
     );
   }
 
-  Widget buildRowWidget(PageBuilderWidget model) {
+  Widget buildRowWidget(
+      PagebuilderRowProperties? properties, PageBuilderWidget model) {
     if (model.children == null || model.children!.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -101,10 +108,17 @@ class LandingPageBuilderWidgetBuilder {
     }
     return LandingPageBuilderWidgetContainer(
       model: model,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: rowChildren,
-      ),
+      child: properties?.equalWidths == true
+          ? IntrinsicHeight(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: rowChildren,
+              ),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: rowChildren,
+            ),
     );
   }
 
