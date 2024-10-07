@@ -74,8 +74,12 @@ void main() {
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,
+                        fontFamily: "TestFont",
                         color: Colors.black,
-                        alignment: TextAlign.center))
+                        alignment: TextAlign.center,
+                        lineHeight: 1.5,
+                        isBold: null,
+                        isItalic: null))
               ])
         ],
         backgroundColor: null);

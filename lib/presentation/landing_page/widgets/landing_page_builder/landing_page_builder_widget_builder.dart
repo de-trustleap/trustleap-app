@@ -73,16 +73,38 @@ class LandingPageBuilderWidgetBuilder {
     // Falls die Gesamtbreite über 100% liegt, passe die Werte an
     final scaleFactor =
         totalWidthPercentage > 100 ? 100 / totalWidthPercentage : 1.0;
+    // Restliche Breite berechnen, falls die Gesamtbreite unter 100% liegt
+    final remainingWidthPercentage = 100 - totalWidthPercentage * scaleFactor;
+
+    // Erstelle eine Liste für die Kinder der Row
+    List<Widget> rowChildren = [];
+
+    // Füge die Expanded-Widgets für jedes Kind hinzu
+    for (var child in model.children!) {
+      final flexValue = (child.widthPercentage ?? 0) * scaleFactor;
+      rowChildren.add(
+        Expanded(
+          flex: (flexValue * 100).toInt(),
+          child: build(child),
+        ),
+      );
+    }
+
+    // Füge eine SizedBox am Ende hinzu, falls restliche Breite vorhanden ist
+    if (remainingWidthPercentage > 0) {
+      rowChildren.add(
+        Expanded(
+          flex: (remainingWidthPercentage * 100).toInt(),
+          child: const SizedBox.shrink(),
+        ),
+      );
+    }
     return LandingPageBuilderWidgetContainer(
       model: model,
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: model.children?.map((child) {
-                final flexValue = (child.widthPercentage ?? 0) * scaleFactor;
-                return Expanded(
-                    flex: (flexValue * 100).toInt(), child: build(child));
-              }).toList() ??
-              []),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: rowChildren,
+      ),
     );
   }
 
