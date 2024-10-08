@@ -43,4 +43,3 @@ class LandingPageBuilderWidgetContainer extends StatelessWidget {
     );
   }
 }
-// TODO: Row braucht auch properties. zB. eine die sagt dass alle Widgets die gleiche Höhe haben sollen.

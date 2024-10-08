@@ -7,11 +7,13 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_containe
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_container_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_row_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
 import 'package:flutter/material.dart';
 
@@ -151,6 +153,8 @@ class PageBuilderWidgetModel extends Equatable {
       case PageBuilderWidgetType.container:
         return PageBuilderContainerPropertiesModel.fromMap(properties!)
             .toDomain();
+      case PageBuilderWidgetType.row:
+        return PagebuilderRowPropertiesModel.fromMap(properties!).toDomain();
       default:
         return null;
     }
@@ -169,6 +173,8 @@ class PageBuilderWidgetModel extends Equatable {
       return PageBuilderIconPropertiesModel.fromDomain(properties).toMap();
     } else if (properties is PageBuilderContainerProperties) {
       return PageBuilderContainerPropertiesModel.fromDomain(properties).toMap();
+    } else if (properties is PagebuilderRowProperties) {
+      return PagebuilderRowPropertiesModel.fromDomain(properties).toMap();
     } else {
       return null;
     }
