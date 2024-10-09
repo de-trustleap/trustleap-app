@@ -79,6 +79,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
           return a.id.value.compareTo(b.id.value);
         }
       });
+      print("Hier: ${landingPages[2].isActive}");
       return right(landingPages);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));

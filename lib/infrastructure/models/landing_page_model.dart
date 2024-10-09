@@ -111,7 +111,7 @@ class LandingPageModel extends Equatable {
             : false,
         isActive: map['isActive'] != null
             ? map['isActive'] as bool
-            : false);
+            : null);
   }
 
   factory LandingPageModel.fromFirestore(Map<String, dynamic> doc, String id) {
@@ -132,7 +132,7 @@ class LandingPageModel extends Equatable {
         lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate(),
         isDefaultPage: isDefaultPage ?? false,
-        isActive: isActive ?? false);
+        isActive: isActive);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {

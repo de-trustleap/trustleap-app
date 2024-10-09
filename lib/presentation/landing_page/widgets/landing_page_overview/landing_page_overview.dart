@@ -59,7 +59,7 @@ class LandingPageOverview extends StatelessWidget {
           CustomSnackBar.of(context).showCustomSnackBar(
               localization.landingpage_snackbar_success_duplicated);
         } else if (state is TroggleLandingPageActivitySuccessState) {
-          CustomSnackBar.of(context).showCustomSnackBar("LALALA");
+            CustomSnackBar.of(context).showCustomSnackBar("LALALA");
         } 
       },
       builder: (context, state) {
@@ -82,6 +82,7 @@ class LandingPageOverview extends StatelessWidget {
                           RoutePaths.landingPageCreatorPath);
                     });
               } else {
+                print(observerState.landingPages[2].isActive);
                 return CardContainer(
                     maxWidth: 800,
                     child: Column(
