@@ -2,6 +2,7 @@
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/textstyle_parser.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_widget_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -24,6 +25,7 @@ class PageBuilderEditableText extends StatefulWidget {
 class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
   late TextEditingController _controller;
   late FocusNode _focusNode;
+  final TextStyleParser parser = TextStyleParser();
 
   @override
   void initState() {
@@ -67,18 +69,7 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
               focusNode: _focusNode,
               maxLines: null,
               keyboardType: TextInputType.multiline,
-              style: TextStyle(
-                  fontSize: widget.properties.fontSize,
-                  fontFamily: widget.properties.fontFamily,
-                  height: widget.properties.lineHeight,
-                  fontFamilyFallback: const ["Poppins"],
-                  color: widget.properties.color,
-                  fontWeight: widget.properties.isBold == true
-                      ? FontWeight.bold
-                      : FontWeight.normal,
-                  fontStyle: widget.properties.isItalic == true
-                      ? FontStyle.italic
-                      : FontStyle.normal),
+              style: parser.getTextStyleFromProperties(widget.properties),
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,

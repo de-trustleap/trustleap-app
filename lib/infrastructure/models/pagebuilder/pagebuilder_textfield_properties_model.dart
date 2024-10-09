@@ -6,13 +6,15 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_te
 class PageBuilderTextFieldPropertiesModel extends Equatable
     implements PageBuilderProperties {
   final double? width;
-  final double? height;
+  final int? maxLines;
+  final bool? isRequired;
   final Map<String, dynamic>? placeHolderTextProperties;
   final Map<String, dynamic>? textProperties;
 
   const PageBuilderTextFieldPropertiesModel({
     required this.width,
-    required this.height,
+    required this.maxLines,
+    required this.isRequired,
     required this.placeHolderTextProperties,
     required this.textProperties,
   });
@@ -20,7 +22,8 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
     if (width != null) map['width'] = width;
-    if (height != null) map['height'] = height;
+    if (maxLines != null) map['maxLines'] = maxLines;
+    if (isRequired != null) map['isRequired'] = isRequired;
     if (placeHolderTextProperties != null) {
       map['placeHolderTextProperties'] = placeHolderTextProperties;
     }
@@ -32,7 +35,9 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
       Map<String, dynamic> map) {
     return PageBuilderTextFieldPropertiesModel(
         width: map['width'] != null ? map['width'] as double : null,
-        height: map['height'] != null ? map['height'] as double : null,
+        maxLines: map['maxLines'] != null ? map['maxLines'] as int : null,
+        isRequired:
+            map['isRequired'] != null ? map['isRequired'] as bool : null,
         placeHolderTextProperties: map['placeHolderTextProperties'] != null
             ? map['placeHolderTextProperties'] as Map<String, dynamic>
             : null,
@@ -43,13 +48,15 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
 
   PageBuilderTextFieldPropertiesModel copyWith({
     double? width,
-    double? height,
+    int? maxLines,
+    bool? isRequired,
     Map<String, dynamic>? placeHolderTextProperties,
     Map<String, dynamic>? textProperties,
   }) {
     return PageBuilderTextFieldPropertiesModel(
       width: width ?? this.width,
-      height: height ?? this.height,
+      maxLines: maxLines ?? this.maxLines,
+      isRequired: isRequired ?? this.isRequired,
       placeHolderTextProperties:
           placeHolderTextProperties ?? this.placeHolderTextProperties,
       textProperties: textProperties ?? this.textProperties,
@@ -59,7 +66,8 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
   PageBuilderTextFieldProperties toDomain() {
     return PageBuilderTextFieldProperties(
         width: width,
-        height: height,
+        maxLines: maxLines,
+        isRequired: isRequired,
         placeHolderTextProperties: placeHolderTextProperties != null
             ? PageBuilderTextPropertiesModel.fromMap(placeHolderTextProperties!)
                 .toDomain()
@@ -73,7 +81,8 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
       PageBuilderTextFieldProperties properties) {
     return PageBuilderTextFieldPropertiesModel(
         width: properties.width,
-        height: properties.height,
+        maxLines: properties.maxLines,
+        isRequired: properties.isRequired,
         placeHolderTextProperties: properties.placeHolderTextProperties != null
             ? PageBuilderTextPropertiesModel.fromDomain(
                     properties.placeHolderTextProperties!)
@@ -88,5 +97,5 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
 
   @override
   List<Object?> get props =>
-      [width, height, placeHolderTextProperties, textProperties];
+      [width, maxLines, isRequired, placeHolderTextProperties, textProperties];
 }

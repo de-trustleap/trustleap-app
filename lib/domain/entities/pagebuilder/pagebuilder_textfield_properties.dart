@@ -6,25 +6,29 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 class PageBuilderTextFieldProperties extends Equatable
     implements PageBuilderProperties {
   final double? width;
-  final double? height;
+  final int? maxLines;
+  final bool? isRequired;
   final PageBuilderTextProperties? placeHolderTextProperties;
   final PageBuilderTextProperties? textProperties;
 
   const PageBuilderTextFieldProperties({
     required this.width,
-    required this.height,
+    required this.maxLines,
+    required this.isRequired,
     required this.placeHolderTextProperties,
     required this.textProperties,
   });
 
   PageBuilderTextFieldProperties copyWith(
       {double? width,
-      double? height,
+      int? maxLines,
+      bool? isRequired,
       PageBuilderTextProperties? placeHolderTextProperties,
       PageBuilderTextProperties? textProperties}) {
     return PageBuilderTextFieldProperties(
       width: width ?? this.width,
-      height: height ?? this.height,
+      maxLines: maxLines ?? this.maxLines,
+      isRequired: isRequired ?? this.isRequired,
       placeHolderTextProperties:
           placeHolderTextProperties ?? this.placeHolderTextProperties,
       textProperties: textProperties ?? this.textProperties,
@@ -33,7 +37,5 @@ class PageBuilderTextFieldProperties extends Equatable
 
   @override
   List<Object?> get props =>
-      [width, height, placeHolderTextProperties, textProperties];
+      [width, maxLines, isRequired, placeHolderTextProperties, textProperties];
 }
-
-//TODO: Alle Properties wurden angelegt. Jetzt Kontaktformular bauen.
