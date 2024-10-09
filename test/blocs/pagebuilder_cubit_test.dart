@@ -238,15 +238,14 @@ void main() {
         isItalic: null);
 
     final mockTextProperties2 = PageBuilderTextProperties(
-      text: "Text 2",
-      fontSize: 18.0,
-      fontFamily: "TestFont",
-      color: Colors.red,
-      alignment: TextAlign.center,
-      lineHeight: 1.5,
-      isBold: null,
-      isItalic: null
-    );
+        text: "Text 2",
+        fontSize: 18.0,
+        fontFamily: "TestFont",
+        color: Colors.red,
+        alignment: TextAlign.center,
+        lineHeight: 1.5,
+        isBold: null,
+        isItalic: null);
 
     final mockImageProperties = PageBuilderImageProperties(
         url: "https://example.com/image.png",
@@ -398,4 +397,3 @@ void main() {
     });
   });
 }
-//TODO: Jetzt mit JSON weitermachen!
