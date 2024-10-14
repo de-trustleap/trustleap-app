@@ -62,6 +62,7 @@ void main() {
               id: UniqueID.fromUniqueString("2"),
               layout: PageBuilderSectionLayout.column,
               backgroundColor: null,
+              maxWidth: null,
               widgets: [
                 PageBuilderWidget(
                     id: UniqueID.fromUniqueString("3"),
@@ -71,6 +72,7 @@ void main() {
                     backgroundColor: null,
                     padding: null,
                     containerChild: null,
+                    maxWidth: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,
