@@ -15,4 +15,3 @@ class TextStyleParser {
             properties?.isItalic == true ? FontStyle.italic : FontStyle.normal);
   }
 }
-//TODO: Tests schreiben!

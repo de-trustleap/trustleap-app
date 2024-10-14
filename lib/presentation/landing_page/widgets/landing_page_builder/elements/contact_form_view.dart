@@ -1,13 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/button_view.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/textfield_view.dart';
 import 'package:flutter/material.dart';
 
-class ContactFormView extends StatelessWidget {
+class PageBuilderContactFormView extends StatelessWidget {
   final PageBuilderContactFormProperties properties;
   final PageBuilderWidget widgetModel;
-  const ContactFormView({
+  const PageBuilderContactFormView({
     super.key,
     required this.properties,
     required this.widgetModel,
@@ -20,18 +21,26 @@ class ContactFormView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (properties.nameTextFieldProperties != null) ...[
-            TextFieldView(
+            PageBuilderTextFieldView(
                 properties: properties.nameTextFieldProperties!,
                 widgetModel: widgetModel)
           ],
+          const SizedBox(height: 16),
           if (properties.emailTextFieldProperties != null) ...[
-            TextFieldView(
+            PageBuilderTextFieldView(
                 properties: properties.emailTextFieldProperties!,
                 widgetModel: widgetModel)
           ],
+          const SizedBox(height: 16),
           if (properties.messageTextFieldProperties != null) ...[
-            TextFieldView(
+            PageBuilderTextFieldView(
                 properties: properties.messageTextFieldProperties!,
+                widgetModel: widgetModel)
+          ],
+          const SizedBox(height: 16),
+          if (properties.buttonProperties != null) ...[
+            PageBuilderButtonView(
+                properties: properties.buttonProperties!,
                 widgetModel: widgetModel)
           ]
         ]);

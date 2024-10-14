@@ -2,33 +2,42 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:flutter/material.dart';
 
 class PageBuilderTextFieldProperties extends Equatable
     implements PageBuilderProperties {
   final double? width;
-  final int? maxLines;
+  final int? minLines;
   final bool? isRequired;
+  final Color? backgroundColor;
+  final Color? borderColor;
   final PageBuilderTextProperties? placeHolderTextProperties;
   final PageBuilderTextProperties? textProperties;
 
   const PageBuilderTextFieldProperties({
     required this.width,
-    required this.maxLines,
+    required this.minLines,
     required this.isRequired,
+    required this.backgroundColor,
+    required this.borderColor,
     required this.placeHolderTextProperties,
     required this.textProperties,
   });
 
   PageBuilderTextFieldProperties copyWith(
       {double? width,
-      int? maxLines,
+      int? minLines,
       bool? isRequired,
+      Color? backgroundColor,
+      Color? borderColor,
       PageBuilderTextProperties? placeHolderTextProperties,
       PageBuilderTextProperties? textProperties}) {
     return PageBuilderTextFieldProperties(
       width: width ?? this.width,
-      maxLines: maxLines ?? this.maxLines,
+      minLines: minLines ?? this.minLines,
       isRequired: isRequired ?? this.isRequired,
+      borderColor: borderColor ?? this.borderColor,
+      backgroundColor: backgroundColor ?? this.backgroundColor,
       placeHolderTextProperties:
           placeHolderTextProperties ?? this.placeHolderTextProperties,
       textProperties: textProperties ?? this.textProperties,
@@ -36,6 +45,13 @@ class PageBuilderTextFieldProperties extends Equatable
   }
 
   @override
-  List<Object?> get props =>
-      [width, maxLines, isRequired, placeHolderTextProperties, textProperties];
+  List<Object?> get props => [
+        width,
+        minLines,
+        isRequired,
+        backgroundColor,
+        borderColor,
+        placeHolderTextProperties,
+        textProperties
+      ];
 }

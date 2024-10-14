@@ -4,32 +4,41 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/textstyle_parser.dart';
 import 'package:flutter/material.dart';
 
-class TextFieldView extends StatelessWidget {
+class PageBuilderTextFieldView extends StatelessWidget {
   final PageBuilderTextFieldProperties properties;
   final PageBuilderWidget widgetModel;
   final TextStyleParser parser = TextStyleParser();
 
-  TextFieldView({
+  PageBuilderTextFieldView({
     super.key,
     required this.properties,
     required this.widgetModel,
   });
 
+  double _calculateContainerMinHeight() {
+    if (properties.minLines == null || properties.minLines == 1) {
+      return 0;
+    }
+    return (properties.textProperties?.fontSize ?? 16) *
+        (properties.textProperties?.lineHeight ?? 1) *
+        (properties.minLines ?? 1) *
+        2;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
         width: properties.width,
-        child: TextField(
-            readOnly: true,
-            minLines: 1,
-            maxLines: properties.maxLines,
-            style: parser.getTextStyleFromProperties(properties.textProperties),
-            decoration: InputDecoration(
-                hintText: properties.placeHolderTextProperties?.text,
-                hintStyle: parser.getTextStyleFromProperties(
-                    properties.placeHolderTextProperties),
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                ))));
+        constraints: BoxConstraints(
+          minHeight: _calculateContainerMinHeight(),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+            border: Border.all(color: properties.borderColor ?? Colors.black),
+            borderRadius: BorderRadius.circular(4),
+            color: properties.backgroundColor),
+        child: Text(properties.placeHolderTextProperties?.text ?? "",
+            style: parser.getTextStyleFromProperties(
+                properties.placeHolderTextProperties)));
   }
 }
