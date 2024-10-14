@@ -12,12 +12,14 @@ class PageBuilderSectionModel extends Equatable {
   final String id;
   final String? layout;
   final String? backgroundColor;
+  final double? maxWidth;
   final List<Map<String, dynamic>>? widgets;
 
   const PageBuilderSectionModel({
     required this.id,
     required this.layout,
     required this.backgroundColor,
+    required this.maxWidth,
     required this.widgets,
   });
 
@@ -25,6 +27,7 @@ class PageBuilderSectionModel extends Equatable {
     Map<String, dynamic> map = {'id': id};
     if (layout != null) map['layout'] = layout;
     if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
+    if (maxWidth != null) map['maxWidth'] = maxWidth;
     if (widgets != null) map['widgets'] = widgets;
     return map;
   }
@@ -36,6 +39,7 @@ class PageBuilderSectionModel extends Equatable {
         backgroundColor: map['backgroundColor'] != null
             ? map['backgroundColor'] as String
             : null,
+        maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
         widgets: map['widgets'] != null
             ? List<Map<String, dynamic>>.from((map['widgets'] as List)
                 .map((item) => item as Map<String, dynamic>))
@@ -46,12 +50,14 @@ class PageBuilderSectionModel extends Equatable {
     String? id,
     String? layout,
     String? backgroundColor,
+    double? maxWidth,
     List<Map<String, dynamic>>? widgets,
   }) {
     return PageBuilderSectionModel(
       id: id ?? this.id,
       layout: layout ?? this.layout,
       backgroundColor: backgroundColor ?? this.backgroundColor,
+      maxWidth: maxWidth ?? this.maxWidth,
       widgets: widgets ?? this.widgets,
     );
   }
@@ -66,6 +72,7 @@ class PageBuilderSectionModel extends Equatable {
         backgroundColor: backgroundColor != null
             ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
             : null,
+        maxWidth: maxWidth,
         widgets: _getPageBuilderWidgetList(widgets));
   }
 
@@ -76,6 +83,7 @@ class PageBuilderSectionModel extends Equatable {
         backgroundColor: section.backgroundColor?.value != null
             ? section.backgroundColor!.value.toRadixString(16)
             : null,
+        maxWidth: section.maxWidth,
         widgets: _getMapFromPageBuilderWidgetList(section.widgets));
   }
 
@@ -101,5 +109,5 @@ class PageBuilderSectionModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, layout, backgroundColor, widgets];
+  List<Object?> get props => [id, layout, backgroundColor, maxWidth, widgets];
 }

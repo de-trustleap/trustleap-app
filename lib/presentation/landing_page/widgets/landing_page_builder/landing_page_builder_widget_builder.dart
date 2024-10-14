@@ -144,9 +144,7 @@ class LandingPageBuilderWidgetBuilder {
 
   Widget buildContactFormWidget(
       PageBuilderContactFormProperties properties, PageBuilderWidget model) {
-    return LandingPageBuilderWidgetContainer(
-        model: model,
-        child: PageBuilderContactFormView(
-            properties: properties, widgetModel: model));
+    return PageBuilderContactFormView(
+        properties: properties, widgetModel: model);
   }
 }

@@ -138,6 +138,7 @@ void main() {
               id: UniqueID.fromUniqueString("2"),
               layout: PageBuilderSectionLayout.column,
               backgroundColor: null,
+              maxWidth: null,
               widgets: [
                 PageBuilderWidget(
                     id: UniqueID.fromUniqueString("3"),
@@ -147,6 +148,7 @@ void main() {
                     backgroundColor: null,
                     containerChild: null,
                     padding: null,
+                    maxWidth: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,
@@ -263,6 +265,7 @@ void main() {
         children: [],
         widthPercentage: 100.0,
         containerChild: null,
+        maxWidth: null,
         padding:
             PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
@@ -273,6 +276,7 @@ void main() {
         properties: mockTextProperties2,
         children: [],
         widthPercentage: 100.0,
+        maxWidth: null,
         containerChild: null,
         padding:
             PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
@@ -285,6 +289,7 @@ void main() {
         children: [],
         containerChild: null,
         widthPercentage: 100.0,
+        maxWidth: null,
         padding: null);
 
     final mockColumnWidget = PageBuilderWidget(
@@ -295,6 +300,7 @@ void main() {
         children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
         containerChild: null,
         widthPercentage: 100.0,
+        maxWidth: null,
         padding: null);
 
     final mockRowWidget = PageBuilderWidget(
@@ -305,12 +311,14 @@ void main() {
         children: [mockTextWidget1, mockImageWidget],
         containerChild: null,
         widthPercentage: 100.0,
+        maxWidth: null,
         padding: null);
 
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       layout: PageBuilderSectionLayout.column,
       backgroundColor: null,
+      maxWidth: null,
       widgets: [mockColumnWidget, mockRowWidget],
     );
 

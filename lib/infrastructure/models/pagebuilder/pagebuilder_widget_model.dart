@@ -28,6 +28,7 @@ class PageBuilderWidgetModel extends Equatable {
   final double? widthPercentage;
   final String? backgroundColor;
   final Map<String, dynamic>? padding;
+  final double? maxWidth;
 
   const PageBuilderWidgetModel(
       {required this.id,
@@ -37,7 +38,8 @@ class PageBuilderWidgetModel extends Equatable {
       required this.containerChild,
       required this.widthPercentage,
       required this.backgroundColor,
-      required this.padding});
+      required this.padding,
+      required this.maxWidth});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'id': id};
@@ -50,6 +52,7 @@ class PageBuilderWidgetModel extends Equatable {
     if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
     if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
     if (padding != null) map['padding'] = padding;
+    if (maxWidth != null) map['maxWidth'] = maxWidth;
     return map;
   }
 
@@ -79,7 +82,8 @@ class PageBuilderWidgetModel extends Equatable {
             : null,
         padding: map['padding'] != null
             ? map['padding'] as Map<String, dynamic>
-            : null);
+            : null,
+        maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null);
   }
 
   PageBuilderWidgetModel copyWith(
@@ -90,7 +94,8 @@ class PageBuilderWidgetModel extends Equatable {
       PageBuilderWidgetModel? containerChild,
       double? widthPercentage,
       String? backgroundColor,
-      Map<String, dynamic>? padding}) {
+      Map<String, dynamic>? padding,
+      double? maxWidth}) {
     return PageBuilderWidgetModel(
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
@@ -99,7 +104,8 @@ class PageBuilderWidgetModel extends Equatable {
         containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
         backgroundColor: backgroundColor ?? this.backgroundColor,
-        padding: padding ?? this.padding);
+        padding: padding ?? this.padding,
+        maxWidth: maxWidth ?? this.maxWidth);
   }
 
   PageBuilderWidget toDomain() {
@@ -116,7 +122,8 @@ class PageBuilderWidgetModel extends Equatable {
         backgroundColor: backgroundColor != null
             ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
             : null,
-        padding: PageBuilderPadding.fromMap(padding));
+        padding: PageBuilderPadding.fromMap(padding),
+        maxWidth: maxWidth);
   }
 
   factory PageBuilderWidgetModel.fromDomain(PageBuilderWidget widget) {
@@ -134,7 +141,8 @@ class PageBuilderWidgetModel extends Equatable {
         backgroundColor: widget.backgroundColor?.value != null
             ? widget.backgroundColor!.value.toRadixString(16)
             : null,
-        padding: _getMapFromPadding(widget.padding));
+        padding: _getMapFromPadding(widget.padding),
+        maxWidth: widget.maxWidth);
   }
 
   PageBuilderProperties? _getPropertiesByType(String? type) {
@@ -217,6 +225,7 @@ class PageBuilderWidgetModel extends Equatable {
         containerChild,
         widthPercentage,
         backgroundColor,
-        padding
+        padding,
+        maxWidth
       ];
 }

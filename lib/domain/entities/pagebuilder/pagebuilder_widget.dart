@@ -16,6 +16,7 @@ class PageBuilderWidget extends Equatable {
   final double? widthPercentage;
   final Color? backgroundColor;
   final PageBuilderPadding? padding;
+  final double? maxWidth;
 
   const PageBuilderWidget(
       {required this.id,
@@ -25,7 +26,8 @@ class PageBuilderWidget extends Equatable {
       required this.containerChild,
       required this.widthPercentage,
       required this.backgroundColor,
-      required this.padding});
+      required this.padding,
+      required this.maxWidth});
 
   PageBuilderWidget copyWith(
       {UniqueID? id,
@@ -35,7 +37,8 @@ class PageBuilderWidget extends Equatable {
       PageBuilderWidget? containerChild,
       double? widthPercentage,
       Color? backgroundColor,
-      PageBuilderPadding? padding}) {
+      PageBuilderPadding? padding,
+      double? maxWidth}) {
     return PageBuilderWidget(
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
@@ -44,7 +47,8 @@ class PageBuilderWidget extends Equatable {
         containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
         backgroundColor: backgroundColor ?? this.backgroundColor,
-        padding: padding ?? this.padding);
+        padding: padding ?? this.padding,
+        maxWidth: maxWidth ?? this.maxWidth);
   }
 
   @override
@@ -56,6 +60,7 @@ class PageBuilderWidget extends Equatable {
         containerChild,
         widthPercentage,
         backgroundColor,
-        padding
+        padding,
+        maxWidth
       ];
 }

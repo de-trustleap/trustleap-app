@@ -17,29 +17,32 @@ class LandingPageBuilderWidgetContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-          model.padding?.left ?? 0,
-          model.padding?.top ?? 0,
-          model.padding?.right ?? 0,
-          model.padding?.bottom ?? 0),
-      child: Container(
-          decoration: BoxDecoration(
-              color: model.backgroundColor,
-              borderRadius: properties?.borderRadius != null
-                  ? BorderRadius.circular(properties!.borderRadius!)
-                  : null,
-              boxShadow: properties?.shadow != null
-                  ? [
-                      BoxShadow(
-                          color: properties!.shadow!.color ?? Colors.black,
-                          spreadRadius: properties!.shadow!.spreadRadius ?? 0,
-                          blurRadius: properties!.shadow!.blurRadius ?? 0,
-                          offset:
-                              properties!.shadow!.offset ?? const Offset(0, 0))
-                    ]
-                  : null),
-          child: child),
+    return Container(
+      constraints: BoxConstraints(maxWidth: model.maxWidth ?? double.infinity),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+            model.padding?.left ?? 0,
+            model.padding?.top ?? 0,
+            model.padding?.right ?? 0,
+            model.padding?.bottom ?? 0),
+        child: Container(
+            decoration: BoxDecoration(
+                color: model.backgroundColor,
+                borderRadius: properties?.borderRadius != null
+                    ? BorderRadius.circular(properties!.borderRadius!)
+                    : null,
+                boxShadow: properties?.shadow != null
+                    ? [
+                        BoxShadow(
+                            color: properties!.shadow!.color ?? Colors.black,
+                            spreadRadius: properties!.shadow!.spreadRadius ?? 0,
+                            blurRadius: properties!.shadow!.blurRadius ?? 0,
+                            offset: properties!.shadow!.offset ??
+                                const Offset(0, 0))
+                      ]
+                    : null),
+            child: child),
+      ),
     );
   }
 }
