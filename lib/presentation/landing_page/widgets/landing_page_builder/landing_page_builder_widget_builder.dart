@@ -1,10 +1,12 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/contact_form_view.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/editable_text.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/icon_view.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/image_view.dart';
@@ -39,6 +41,9 @@ class LandingPageBuilderWidgetBuilder {
       case PageBuilderWidgetType.icon:
         return buildIconWidget(
             model.properties as PageBuilderIconProperties, model);
+      case PageBuilderWidgetType.contactForm:
+        return buildContactFormWidget(
+            model.properties as PageBuilderContactFormProperties, model);
       default:
         return const SizedBox.shrink();
     }
@@ -135,5 +140,13 @@ class LandingPageBuilderWidgetBuilder {
   Widget buildIconWidget(
       PageBuilderIconProperties properties, PageBuilderWidget model) {
     return PageBuilderIconView(properties: properties, widgetModel: model);
+  }
+
+  Widget buildContactFormWidget(
+      PageBuilderContactFormProperties properties, PageBuilderWidget model) {
+    return LandingPageBuilderWidgetContainer(
+        model: model,
+        child: PageBuilderContactFormView(
+            properties: properties, widgetModel: model));
   }
 }
