@@ -12,6 +12,8 @@ class LandingPageBuilderSectionBuilder {
       case PageBuilderSectionLayout.column:
       default:
         return Container(
+          constraints:
+              BoxConstraints(maxWidth: model.maxWidth ?? double.infinity),
           color: model.backgroundColor,
           child: Column(
               children: model.widgets != null

@@ -9,26 +9,30 @@ class PageBuilderSection extends Equatable {
   final UniqueID id;
   final PageBuilderSectionLayout? layout;
   final Color? backgroundColor;
+  final double? maxWidth;
   final List<PageBuilderWidget>? widgets;
 
   const PageBuilderSection(
       {required this.id,
       required this.layout,
       required this.widgets,
-      required this.backgroundColor});
+      required this.backgroundColor,
+      required this.maxWidth});
 
   PageBuilderSection copyWith(
       {UniqueID? id,
       PageBuilderSectionLayout? layout,
       List<PageBuilderWidget>? widgets,
-      Color? backgroundColor}) {
+      Color? backgroundColor,
+      double? maxWidth}) {
     return PageBuilderSection(
         id: id ?? this.id,
         layout: layout ?? this.layout,
         widgets: widgets ?? this.widgets,
-        backgroundColor: backgroundColor ?? this.backgroundColor);
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        maxWidth: maxWidth ?? this.maxWidth);
   }
 
   @override
-  List<Object?> get props => [id, layout, backgroundColor, widgets];
+  List<Object?> get props => [id, layout, backgroundColor, maxWidth, widgets];
 }
