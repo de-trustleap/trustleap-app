@@ -3,16 +3,14 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_b
 import 'package:flutter/material.dart';
 
 class LandingPageBuilderPageBuilder {
-  final LandingPageBuilderSectionBuilder sectionBuilder =
-      LandingPageBuilderSectionBuilder();
-
   Widget buildPage(PageBuilderPage model) {
     return Container(
       color: model.backgroundColor,
       child: ListView(
           children: model.sections != null
               ? model.sections!
-                  .map((section) => sectionBuilder.buildSection(section))
+                  .map((section) =>
+                      LandingPageBuilderSectionView(model: section))
                   .toList()
               : []),
     );
