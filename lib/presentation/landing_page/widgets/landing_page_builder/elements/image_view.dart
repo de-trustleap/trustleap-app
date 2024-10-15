@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/network_image_view.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_widget_container.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -73,55 +74,62 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
-
-    return Container(
-      width: widget.properties.width,
-      height: widget.properties.height,
-      color: widget.widgetModel.backgroundColor,
-      child: MouseRegion(
-          onEnter: (event) => setHovered(true),
-          onExit: (event) => setHovered(false),
-          child:
-              Stack(key: myWidgetKey, alignment: Alignment.center, children: [
-            if (_selectedImage != null) ...[
-              _imageContainer(MemoryImage(_selectedImage!))
-            ] else if (widget.properties.url != null) ...[
-              NetworkImageView(
-                  imageURL: widget.properties.url!,
-                  cornerRadius: widget.properties.borderRadius,
-                  width: widget.properties.width,
-                  height: widget.properties.height)
-            ] else ...[
-              Container(
-                width: widget.properties.width,
-                height: widget.properties.height,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(kDebugMode
-                            ? "images/placeholder.png"
-                            : "assets/images/placeholder.png"))),
-              )
-            ],
-            if (_hovered) ...[
-              Container(
-                  width: widget.properties.width,
-                  height: widget.properties.height,
-                  color: Colors.black.withOpacity(0.5)),
-              Center(
-                  child: Tooltip(
-                message: localization.profile_image_upload_tooltip,
-                child: ElevatedButton(
-                    onPressed: () {
-                      _pickImage();
-                    },
-                    style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        padding: const EdgeInsets.all(20),
-                        backgroundColor: themeData.colorScheme.secondary),
-                    child: const Icon(Icons.add_a_photo, color: Colors.white)),
-              ))
-            ]
-          ])),
+    return LandingPageBuilderWidgetContainer(
+      model: widget.widgetModel,
+      child: SizedBox(
+        width: widget.properties.width,
+        height: widget.properties.height,
+        child: MouseRegion(
+            onEnter: (event) => setHovered(true),
+            onExit: (event) => setHovered(false),
+            child: Stack(
+                key: myWidgetKey,
+                alignment: widget.properties.alignment ?? Alignment.center,
+                children: [
+                  if (_selectedImage != null) ...[
+                    _imageContainer(MemoryImage(_selectedImage!))
+                  ] else if (widget.properties.url != null) ...[
+                    NetworkImageView(
+                        imageURL: widget.properties.url!,
+                        cornerRadius: widget.properties.borderRadius,
+                        width: widget.properties.width,
+                        height: widget.properties.height)
+                  ] else ...[
+                    Container(
+                      width: widget.properties.width,
+                      height: widget.properties.height,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(kDebugMode
+                                  ? "images/placeholder.png"
+                                  : "assets/images/placeholder.png"))),
+                    )
+                  ],
+                  if (_hovered) ...[
+                    Container(
+                        width: widget.properties.width,
+                        height: widget.properties.height,
+                        alignment:
+                            widget.properties.alignment ?? Alignment.center,
+                        color: Colors.black.withOpacity(0.5),
+                        child: Center(
+                            child: Tooltip(
+                          message: localization.profile_image_upload_tooltip,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                _pickImage();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  shape: const CircleBorder(),
+                                  padding: const EdgeInsets.all(20),
+                                  backgroundColor:
+                                      themeData.colorScheme.secondary),
+                              child: const Icon(Icons.add_a_photo,
+                                  color: Colors.white)),
+                        ))),
+                  ]
+                ])),
+      ),
     );
   }
 }

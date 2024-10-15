@@ -62,6 +62,7 @@ void main() {
               id: UniqueID.fromUniqueString("2"),
               layout: PageBuilderSectionLayout.column,
               backgroundColor: null,
+              maxWidth: null,
               widgets: [
                 PageBuilderWidget(
                     id: UniqueID.fromUniqueString("3"),
@@ -69,12 +70,18 @@ void main() {
                     children: [],
                     widthPercentage: null,
                     backgroundColor: null,
+                    padding: null,
+                    containerChild: null,
+                    maxWidth: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,
+                        fontFamily: "TestFont",
                         color: Colors.black,
                         alignment: TextAlign.center,
-                        padding: null))
+                        lineHeight: 1.5,
+                        isBold: null,
+                        isItalic: null))
               ])
         ],
         backgroundColor: null);

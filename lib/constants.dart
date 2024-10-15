@@ -1,5 +1,3 @@
-const String fontFamily = "Poppins";
-
 enum MenuItems {
   profile("Profil"),
   dashboard("Dashboard"),

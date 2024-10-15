@@ -2,6 +2,8 @@
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/textstyle_parser.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_widget_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -23,6 +25,7 @@ class PageBuilderEditableText extends StatefulWidget {
 class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
   late TextEditingController _controller;
   late FocusNode _focusNode;
+  final TextStyleParser parser = TextStyleParser();
 
   @override
   void initState() {
@@ -44,35 +47,29 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (!_focusNode.hasFocus) {
-          FocusScope.of(context).requestFocus(_focusNode);
-        }
-      },
-      child: Container(
-        width: double.infinity,
-        decoration: _focusNode.hasFocus
-            ? BoxDecoration(
-                color: widget.widgetModel.backgroundColor,
-                border: Border.all(color: Colors.black, width: 1.0),
-                borderRadius: const BorderRadius.all(Radius.circular(8)))
-            : BoxDecoration(color: widget.widgetModel.backgroundColor),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(
-              widget.properties.padding?.left ?? 0,
-              widget.properties.padding?.top ?? 0,
-              widget.properties.padding?.right ?? 0,
-              widget.properties.padding?.bottom ?? 0),
+    return LandingPageBuilderWidgetContainer(
+      model: widget.widgetModel,
+      child: GestureDetector(
+        onTap: () {
+          if (!_focusNode.hasFocus) {
+            FocusScope.of(context).requestFocus(_focusNode);
+          }
+        },
+        child: Container(
+          width: double.infinity,
+          decoration: _focusNode.hasFocus
+              ? BoxDecoration(
+                  color: widget.widgetModel.backgroundColor,
+                  border: Border.all(color: Colors.black, width: 1.0),
+                  borderRadius: const BorderRadius.all(Radius.circular(8)))
+              : BoxDecoration(color: widget.widgetModel.backgroundColor),
           child: TextField(
               controller: _controller,
               textAlign: widget.properties.alignment ?? TextAlign.left,
               focusNode: _focusNode,
               maxLines: null,
               keyboardType: TextInputType.multiline,
-              style: TextStyle(
-                  fontSize: widget.properties.fontSize,
-                  color: widget.properties.color),
+              style: parser.getTextStyleFromProperties(widget.properties),
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
