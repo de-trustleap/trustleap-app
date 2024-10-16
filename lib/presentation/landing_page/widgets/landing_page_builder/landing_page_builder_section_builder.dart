@@ -33,24 +33,43 @@ class _LandingPageBuilderSectionViewState
           onExit: (_) => setState(() {
             _isHovered = false;
           }),
-          child: Container(
-            constraints: BoxConstraints(
-                maxWidth: widget.model.maxWidth ?? double.infinity),
-            decoration: BoxDecoration(
-              color: widget.model.backgroundColor,
-              border: Border.all(
-                color: _isHovered
-                    ? themeData.colorScheme.primary
-                    : Colors.transparent,
-                width: 2.0,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: widget.model.backgroundColor,
+                  border: Border.all(
+                    color: _isHovered
+                        ? themeData.colorScheme.primary
+                        : Colors.transparent,
+                    width: 2.0,
+                  ),
+                ),
+                child: Container(
+                  constraints: BoxConstraints(
+                      maxWidth: widget.model.maxWidth ?? double.infinity),
+                  child: Column(
+                      children: widget.model.widgets != null
+                          ? widget.model.widgets!
+                              .map((widget) => widgetBuilder.build(widget))
+                              .toList()
+                          : []),
+                ),
               ),
-            ),
-            child: Column(
-                children: widget.model.widgets != null
-                    ? widget.model.widgets!
-                        .map((widget) => widgetBuilder.build(widget))
-                        .toList()
-                    : []),
+              if (_isHovered) ...[
+                Positioned(
+                    top: 0,
+                    left: 0,
+                    child: IconButton(
+                        onPressed: () {
+                          print("PRESSED");
+                        },
+                        icon: Icon(Icons.edit,
+                            color: themeData.colorScheme.secondary, size: 24)))
+              ]
+            ],
           ),
         );
     }
