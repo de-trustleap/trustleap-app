@@ -8,17 +8,20 @@ import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_user_mapper.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepositoryImplementation implements AuthRepository {
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firestore;
   final FirebaseFunctions firebaseFunctions;
+  final FirebaseAppCheck appCheck;
 
   AuthRepositoryImplementation(
       {required this.firebaseAuth,
       required this.firestore,
-      required this.firebaseFunctions});
+      required this.firebaseFunctions,
+      required this.appCheck});
 
   @override
   Future<Either<AuthFailure, UserCredential>> loginWithEmailAndPassword(
@@ -120,10 +123,11 @@ class AuthRepositoryImplementation implements AuthRepository {
 
   @override
   Future<Either<AuthFailure, Unit>> deleteAccount() async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("deactivateAccount");
     try {
-      await callable.call();
+      await callable.call({"appCheckToken": appCheckToken});
       return right(unit);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getAuthException(code: e.code));
