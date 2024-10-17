@@ -10,17 +10,20 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserRepositoryImplementation implements UserRepository {
   final FirebaseFirestore firestore;
   final FirebaseAuth firebaseAuth;
   final FirebaseFunctions firebaseFunctions;
+  final FirebaseAppCheck appCheck;
 
   UserRepositoryImplementation(
       {required this.firestore,
       required this.firebaseAuth,
-      required this.firebaseFunctions});
+      required this.firebaseFunctions,
+      required this.appCheck});
 
   @override
   Stream<Either<DatabaseFailure, CustomUser>> observeUser() async* {
@@ -48,10 +51,12 @@ class UserRepositoryImplementation implements UserRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> createUser(
       {required CustomUser user}) async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("createUser");
     UserModel userModel = UserModel.fromDomain(user);
     try {
       await callable.call({
+        "appCheckToken": appCheckToken,
         "id": userModel.id,
         "gender": userModel.gender,
         "firstName": userModel.firstName,

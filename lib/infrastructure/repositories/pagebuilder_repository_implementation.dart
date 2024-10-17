@@ -7,13 +7,17 @@ import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_page_model.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 
 class PageBuilderRepositoryImplementation implements PagebuilderRepository {
   final FirebaseFirestore firestore;
   final FirebaseFunctions firebaseFunctions;
+  final FirebaseAppCheck appCheck;
 
   PageBuilderRepositoryImplementation(
-      {required this.firestore, required this.firebaseFunctions});
+      {required this.firestore,
+      required this.firebaseFunctions,
+      required this.appCheck});
 
   @override
   Future<Either<DatabaseFailure, PageBuilderPage>> getLandingPageContent(
@@ -36,11 +40,13 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> saveLandingPageContent(
       PageBuilderPage page) async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("updatePageContent");
     final pageModel = PageBuilderPageModel.fromDomain(page);
     try {
-      await callable.call({"page": pageModel.toMap()});
+      await callable
+          .call({"appCheckToken": appCheckToken, "page": pageModel.toMap()});
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));

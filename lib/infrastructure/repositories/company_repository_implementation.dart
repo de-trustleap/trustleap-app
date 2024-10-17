@@ -12,13 +12,17 @@ import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/infrastructure/models/company_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/company_request_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 
 class CompanyRepositoryImplementation implements CompanyRepository {
   final FirebaseFirestore firestore;
   final FirebaseFunctions firebaseFunctions;
+  final FirebaseAppCheck appCheck;
 
   CompanyRepositoryImplementation(
-      {required this.firestore, required this.firebaseFunctions});
+      {required this.firestore,
+      required this.firebaseFunctions,
+      required this.appCheck});
 
   @override
   Stream<Either<DatabaseFailure, Company>> observeCompany(
@@ -73,10 +77,12 @@ class CompanyRepositoryImplementation implements CompanyRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> registerCompany(Company company) async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("registerCompany");
     final companyModel = CompanyModel.fromDomain(company);
     try {
       await callable.call({
+        "appCheckToken": appCheckToken,
         "id": companyModel.id,
         "name": companyModel.name,
         "industry": companyModel.industry,
@@ -168,10 +174,16 @@ class CompanyRepositoryImplementation implements CompanyRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> processCompanyRequest(
       String id, String userID, bool accepted) async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("processCompanyRequest");
     try {
-      await callable.call({"id": id, "accepted": accepted, "userID": userID});
+      await callable.call({
+        "appCheckToken": appCheckToken,
+        "id": id,
+        "accepted": accepted,
+        "userID": userID
+      });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
