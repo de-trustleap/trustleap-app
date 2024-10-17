@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.da
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
+import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/navigation/navigation_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
@@ -90,7 +91,8 @@ class AppModule extends Module {
       ..add(LandingPageObserverCubit.new)
       ..add(LandingPageCubit.new)
       ..add(CompanyRequestCubit.new)
-      ..add(CompanyRequestObserverCubit.new);
+      ..add(CompanyRequestObserverCubit.new)
+      ..add(PagebuilderHoverCubit.new);
   }
 
   @override
