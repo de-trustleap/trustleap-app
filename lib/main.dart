@@ -156,4 +156,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-//TODO: App Check funktioniert jetzt. Bei allen HTTP Calls einbinden!
