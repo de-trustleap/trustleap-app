@@ -32,8 +32,8 @@ class LandingPageOverview extends StatelessWidget {
       BlocProvider.of<LandingPageCubit>(context).duplicateLandingPage(id);
     }
 
-    void submitIsActive(String id, bool isActive) {
-      BlocProvider.of<LandingPageCubit>(context).troggleLandingPageActivity(id, isActive);
+    void submitIsActive(String id, bool isActive, String userId) {
+      BlocProvider.of<LandingPageCubit>(context).troggleLandingPageActivity(id, isActive, userId);
     }
 
     void showDeleteAlert(String id, parentUserID) {
@@ -59,7 +59,7 @@ class LandingPageOverview extends StatelessWidget {
           CustomSnackBar.of(context).showCustomSnackBar(
               localization.landingpage_snackbar_success_duplicated);
         } else if (state is TroggleLandingPageActivitySuccessState) {
-            CustomSnackBar.of(context).showCustomSnackBar("LALALA");
+            CustomSnackBar.of(context).showCustomSnackBar(localization.landingpage_snackbar_success_troggled);
         } 
       },
       builder: (context, state) {
@@ -82,7 +82,6 @@ class LandingPageOverview extends StatelessWidget {
                           RoutePaths.landingPageCreatorPath);
                     });
               } else {
-                print(observerState.landingPages[2].isActive);
                 return CardContainer(
                     maxWidth: 800,
                     child: Column(
@@ -99,7 +98,7 @@ class LandingPageOverview extends StatelessWidget {
                             duplicatePressed: (landinPageID) =>
                                 submitDuplication(landinPageID),
                             isActivePressed: (landinPageID, landingPageIsActive) =>
-                                submitIsActive(landinPageID, landingPageIsActive))
+                                submitIsActive(landinPageID, landingPageIsActive, observerState.user.id.value))
                       ],
                     ));
               }

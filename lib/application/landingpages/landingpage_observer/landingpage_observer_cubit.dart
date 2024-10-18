@@ -29,7 +29,6 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
 
   void landingPageObserverUpdated(
       Either<DatabaseFailure, CustomUser> failureOrUser) async {
-        print("XXX");
     emit(LandingPageObserverLoading());
     failureOrUser
         .fold((failure) => emit(LandingPageObserverFailure(failure: failure)),
@@ -45,12 +44,10 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
           emit(LandingPageObserverFailure(failure: failure));
         }, (landingPages) {
           PaintingBinding.instance.imageCache.clear();
-          print("Emit1");
           emit(LandingPageObserverSuccess(
               landingPages: landingPages, user: user));
         });
       } else {
-        print("Emit2");
         emit(LandingPageObserverSuccess(landingPages: const [], user: user));
       }
     });

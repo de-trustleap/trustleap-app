@@ -79,7 +79,6 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
           return a.id.value.compareTo(b.id.value);
         }
       });
-      print("Hier: ${landingPages[2].isActive}");
       return right(landingPages);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
@@ -160,11 +159,11 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> troggleLandingPageActivity(String id, bool isActive) async {
+  Future<Either<DatabaseFailure, Unit>> troggleLandingPageActivity(String id, bool isActive, String userId) async {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("troggleLandingPageActivity");
     try {
-      await callable.call({"id": id, "isActive": isActive});
+      await callable.call({"id": id, "isActive": isActive, "userId": userId});
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));

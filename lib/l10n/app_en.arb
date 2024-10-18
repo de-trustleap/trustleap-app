@@ -240,6 +240,18 @@
     "@landingpage_snackbar_success_duplicated": {
         "description": "The title of the snackbar when a landing page is duplicated"
     },
+    "landingpage_snackbar_success_troggled": "The landing page was successfully toggled!",
+    "@landingpage_snackbar_success_troggled": {
+        "description": "The title of the snackbar when a landing page has been activated/deactivated"
+    },
+    "landingpage_overview_context_menu_disable": "disable",
+    "@landingpage_overview_context_menu_disable": {
+        "description": "Toggle disable button in the context menu on the landing page overview page"
+    },
+    "landingpage_overview_context_menu_enable": "enable",
+    "@landingpage_overview_context_menu_enable": {
+        "description": "Toggle enable button in the context menu on the landing page overview page"
+    },
     "landingpage_overview_max_count_msg": "Maximum number of landing pages reached",
     "@landingpage_overview_max_count_msg": {
         "description": "The title when the maximum number of landing pages is reached"

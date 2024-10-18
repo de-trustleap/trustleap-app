@@ -172,8 +172,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                             const SizedBox(width: 8),
                                             Text(
                                                 (landingPage.isActive ?? false)
-                                                    ? "deaktivieren"
-                                                    : "aktivieren",
+                                                    ? localizations.landingpage_overview_context_menu_disable
+                                                    : localizations.landingpage_overview_context_menu_enabale,
                                                 style: responsiveValue.isMobile
                                                     ? themeData
                                                         .textTheme.bodySmall

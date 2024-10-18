@@ -72,9 +72,9 @@ class LandingPageCubit extends Cubit<LandingPageState> {
         (_) => emit(DuplicateLandingPageSuccessState()));
   }
 
-  void troggleLandingPageActivity(String id, bool isActive) async {
+  void troggleLandingPageActivity(String id, bool isActive, String userId) async {
     emit(TroggleLandingPageActivityLoadingState());
-    final failureOrSuccess = await landingPageRepo.troggleLandingPageActivity(id, isActive);
+    final failureOrSuccess = await landingPageRepo.troggleLandingPageActivity(id, isActive, userId);
     failureOrSuccess.fold(
         (failure) => emit(TroggleLandingPageActivityFailureState(failure: failure)),
         (_) => emit(TroggleLandingPageActivitySuccessState()));
