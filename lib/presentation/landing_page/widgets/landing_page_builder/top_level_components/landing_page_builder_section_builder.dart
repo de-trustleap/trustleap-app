@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_widget_builder.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/top_level_components/landing_page_builder_section_edit_button.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/top_level_components/landing_page_builder_widget_builder.dart';
 import 'package:flutter/material.dart';
 
 class LandingPageBuilderSectionView extends StatefulWidget {
@@ -27,13 +28,18 @@ class _LandingPageBuilderSectionViewState
       case PageBuilderSectionLayout.column:
       default:
         return MouseRegion(
-          onEnter: (_) => setState(() {
-            _isHovered = true;
-          }),
-          onExit: (_) => setState(() {
-            _isHovered = false;
-          }),
+          onEnter: (_) {
+            setState(() {
+              _isHovered = true;
+            });
+          },
+          onExit: (_) {
+            setState(() {
+              _isHovered = false;
+            });
+          },
           child: Stack(
+            clipBehavior: Clip.none,
             alignment: Alignment.center,
             children: [
               Container(
@@ -58,17 +64,7 @@ class _LandingPageBuilderSectionViewState
                           : []),
                 ),
               ),
-              if (_isHovered) ...[
-                Positioned(
-                    top: 0,
-                    left: 0,
-                    child: IconButton(
-                        onPressed: () {
-                          print("PRESSED");
-                        },
-                        icon: Icon(Icons.edit,
-                            color: themeData.colorScheme.secondary, size: 24)))
-              ]
+              if (_isHovered) ...[const LandingPageBuilderSectionEditButton()]
             ],
           ),
         );

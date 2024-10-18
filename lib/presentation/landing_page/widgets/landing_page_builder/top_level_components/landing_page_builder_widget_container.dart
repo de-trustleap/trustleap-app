@@ -2,6 +2,7 @@
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/top_level_components/landing_page_builder_widget_edit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -93,20 +94,7 @@ class _LandingPageBuilderWidgetContainerState
                     ),
                   ),
                   if (isHovered) ...[
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: IconButton(
-                        onPressed: () {
-                          print("PRESSED");
-                        },
-                        icon: Icon(
-                          Icons.edit,
-                          color: themeData.colorScheme.secondary,
-                          size: 20,
-                        ),
-                      ),
-                    ),
+                    const LandingPageBuilderWidgetEditButton()
                   ],
                 ],
               ),

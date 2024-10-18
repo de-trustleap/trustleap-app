@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/button_view.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/elements/textfield_view.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_widget_container.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/page_elements/button_view.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/page_elements/textfield_view.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:flutter/material.dart';
 
 class PageBuilderContactFormView extends StatelessWidget {
