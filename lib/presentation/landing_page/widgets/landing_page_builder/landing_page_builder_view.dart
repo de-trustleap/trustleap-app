@@ -10,7 +10,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_appbar.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_html_events.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_page_builder.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/top_level_components/landing_page_builder_page_builder.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

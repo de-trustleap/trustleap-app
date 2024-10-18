@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/landing_page_builder_widget_container.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:flutter/material.dart';
 
 class PageBuilderIconView extends StatelessWidget {
