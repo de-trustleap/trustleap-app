@@ -42,6 +42,7 @@ import 'package:finanzbegleiter/infrastructure/repositories/pagebuilder_reposito
 import 'package:finanzbegleiter/infrastructure/repositories/promoter_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
 import 'package:finanzbegleiter/route_paths.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -53,12 +54,14 @@ class AppModule extends Module {
     final firestore = FirebaseFirestore.instance;
     final storage = FirebaseStorage.instance;
     final firebaseFunctions = FirebaseFunctions.instance;
+    final appCheck = FirebaseAppCheck.instance;
 
     i
       ..addLazySingleton(() => firebaseAuth)
       ..addLazySingleton(() => firestore)
       ..addLazySingleton(() => storage)
       ..addLazySingleton(() => firebaseFunctions)
+      ..addLazySingleton(() => appCheck)
       ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
       ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
       ..addLazySingleton<ImageRepository>(ImageRepositoryImplementation.new)
