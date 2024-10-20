@@ -73,6 +73,7 @@ void main() {
                     padding: null,
                     containerChild: null,
                     maxWidth: null,
+                    alignment: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,

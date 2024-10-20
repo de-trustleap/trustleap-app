@@ -73,8 +73,4 @@ class PagebuilderRowPropertiesModel extends Equatable
       [equalHeights, mainAxisAlignment, crossAxisAlignment];
 }
 
-// TODO: Nutze die neuen Properties in der PageBuilderRow und packe sie ins JSON File (TESTEN!)
-// TODO: Das gleiche dann noch für Column Properties (TESTEN!)
-// TODO: Auch im Backend hinzufügen
-// TODO: equalWidths in equalHeights umbenennen (NOCH IM BACKEND MACHEN!)
-// TODO: Alignment ins Backend
+// TODO: Tests für AlignmentMapper

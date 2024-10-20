@@ -149,6 +149,7 @@ void main() {
                     containerChild: null,
                     padding: null,
                     maxWidth: null,
+                    alignment: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: 16,
@@ -266,6 +267,7 @@ void main() {
         widthPercentage: 100.0,
         containerChild: null,
         maxWidth: null,
+        alignment: null,
         padding:
             PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
@@ -278,6 +280,7 @@ void main() {
         widthPercentage: 100.0,
         maxWidth: null,
         containerChild: null,
+        alignment: null,
         padding:
             PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
@@ -290,6 +293,7 @@ void main() {
         containerChild: null,
         widthPercentage: 100.0,
         maxWidth: null,
+        alignment: null,
         padding: null);
 
     final mockColumnWidget = PageBuilderWidget(
@@ -301,6 +305,7 @@ void main() {
         containerChild: null,
         widthPercentage: 100.0,
         maxWidth: null,
+        alignment: null,
         padding: null);
 
     final mockRowWidget = PageBuilderWidget(
@@ -312,6 +317,7 @@ void main() {
         containerChild: null,
         widthPercentage: 100.0,
         maxWidth: null,
+        alignment: null,
         padding: null);
 
     final mockSection = PageBuilderSection(
