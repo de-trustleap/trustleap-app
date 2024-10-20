@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
@@ -11,6 +12,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_column_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_contact_form_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_container_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
@@ -165,6 +167,8 @@ class PageBuilderWidgetModel extends Equatable {
             .toDomain();
       case PageBuilderWidgetType.row:
         return PagebuilderRowPropertiesModel.fromMap(properties!).toDomain();
+      case PageBuilderWidgetType.column:
+        return PagebuilderColumnPropertiesModel.fromMap(properties!).toDomain();
       case PageBuilderWidgetType.contactForm:
         return PageBuilderContactFormPropertiesModel.fromMap(properties!)
             .toDomain();
@@ -188,6 +192,8 @@ class PageBuilderWidgetModel extends Equatable {
       return PageBuilderContainerPropertiesModel.fromDomain(properties).toMap();
     } else if (properties is PagebuilderRowProperties) {
       return PagebuilderRowPropertiesModel.fromDomain(properties).toMap();
+    } else if (properties is PagebuilderColumnProperties) {
+      return PagebuilderColumnPropertiesModel.fromDomain(properties).toMap();
     } else if (properties is PageBuilderContactFormProperties) {
       return PageBuilderContactFormPropertiesModel.fromDomain(properties)
           .toMap();
