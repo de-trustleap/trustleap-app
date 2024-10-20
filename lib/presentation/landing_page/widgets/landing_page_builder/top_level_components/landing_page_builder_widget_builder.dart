@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
@@ -24,7 +25,12 @@ class LandingPageBuilderWidgetBuilder {
           return buildContainerWidget(null, model);
         }
       case PageBuilderWidgetType.column:
-        return buildColumnWidget(model);
+        if (model.properties != null) {
+          return buildColumnWidget(
+              model.properties as PagebuilderColumnProperties, model);
+        } else {
+          return buildColumnWidget(null, model);
+        }
       case PageBuilderWidgetType.row:
         if (model.properties != null) {
           return buildRowWidget(
@@ -59,7 +65,8 @@ class LandingPageBuilderWidgetBuilder {
             : const SizedBox.shrink());
   }
 
-  Widget buildColumnWidget(PageBuilderWidget model) {
+  Widget buildColumnWidget(
+      PagebuilderColumnProperties? properties, PageBuilderWidget model) {
     if (model.children == null || model.children!.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -67,6 +74,10 @@ class LandingPageBuilderWidgetBuilder {
     return LandingPageBuilderWidgetContainer(
       model: model,
       child: Column(
+          mainAxisAlignment:
+              properties?.mainAxisAlignment ?? MainAxisAlignment.center,
+          crossAxisAlignment:
+              properties?.crossAxisAlignment ?? CrossAxisAlignment.center,
           children: model.children?.map((child) {
                 return build(child);
               }).toList() ??
@@ -113,10 +124,13 @@ class LandingPageBuilderWidgetBuilder {
     }
     return LandingPageBuilderWidgetContainer(
       model: model,
-      child: properties?.equalWidths == true
+      child: properties?.equalHeights == true
           ? IntrinsicHeight(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment:
+                    properties?.mainAxisAlignment ?? MainAxisAlignment.center,
+                crossAxisAlignment:
+                    properties?.crossAxisAlignment ?? CrossAxisAlignment.center,
                 children: rowChildren,
               ),
             )

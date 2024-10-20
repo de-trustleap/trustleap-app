@@ -1,25 +1,20 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/axis_alignment_mapper.dart';
 
-class PagebuilderRowPropertiesModel extends Equatable
+class PagebuilderColumnPropertiesModel extends Equatable
     implements PageBuilderProperties {
-  final bool? equalHeights;
   final String? mainAxisAlignment;
   final String? crossAxisAlignment;
 
   final AxisAlignmentMapper alignmentMapper = AxisAlignmentMapper();
 
-  PagebuilderRowPropertiesModel(
-      {required this.equalHeights,
-      required this.mainAxisAlignment,
-      required this.crossAxisAlignment});
+  PagebuilderColumnPropertiesModel(
+      {required this.mainAxisAlignment, required this.crossAxisAlignment});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
-    if (equalHeights != null) map['equalHeights'] = equalHeights;
     if (mainAxisAlignment != null) map['mainAxisAlignment'] = mainAxisAlignment;
     if (crossAxisAlignment != null) {
       map['crossAxisAlignment'] = crossAxisAlignment;
@@ -27,10 +22,8 @@ class PagebuilderRowPropertiesModel extends Equatable
     return map;
   }
 
-  factory PagebuilderRowPropertiesModel.fromMap(Map<String, dynamic> map) {
-    return PagebuilderRowPropertiesModel(
-        equalHeights:
-            map['equalHeights'] != null ? map['equalHeights'] as bool : null,
+  factory PagebuilderColumnPropertiesModel.fromMap(Map<String, dynamic> map) {
+    return PagebuilderColumnPropertiesModel(
         mainAxisAlignment: map['mainAxisAlignment'] != null
             ? map['mainAxisAlignment'] as String
             : null,
@@ -39,29 +32,24 @@ class PagebuilderRowPropertiesModel extends Equatable
             : null);
   }
 
-  PagebuilderRowPropertiesModel copyWith(
-      {bool? equalHeights,
-      String? mainAxisAlignment,
-      String? crossAxisAlignment}) {
-    return PagebuilderRowPropertiesModel(
-        equalHeights: equalHeights ?? this.equalHeights,
+  PagebuilderColumnPropertiesModel copyWith(
+      {String? mainAxisAlignment, String? crossAxisAlignment}) {
+    return PagebuilderColumnPropertiesModel(
         mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment);
   }
 
-  PagebuilderRowProperties toDomain() {
-    return PagebuilderRowProperties(
-        equalHeights: equalHeights,
+  PagebuilderColumnProperties toDomain() {
+    return PagebuilderColumnProperties(
         mainAxisAlignment:
             alignmentMapper.getMainAxisAlignmentFromString(mainAxisAlignment),
         crossAxisAlignment: alignmentMapper
             .getCrossAxisAlignmentFromString(crossAxisAlignment));
   }
 
-  factory PagebuilderRowPropertiesModel.fromDomain(
-      PagebuilderRowProperties properties) {
-    return PagebuilderRowPropertiesModel(
-        equalHeights: properties.equalHeights,
+  factory PagebuilderColumnPropertiesModel.fromDomain(
+      PagebuilderColumnProperties properties) {
+    return PagebuilderColumnPropertiesModel(
         mainAxisAlignment: AxisAlignmentMapper.getStringFromMainAxisAlignment(
             properties.mainAxisAlignment),
         crossAxisAlignment: AxisAlignmentMapper.getStringFromCrossAxisAlignment(
@@ -69,8 +57,5 @@ class PagebuilderRowPropertiesModel extends Equatable
   }
 
   @override
-  List<Object?> get props =>
-      [equalHeights, mainAxisAlignment, crossAxisAlignment];
+  List<Object?> get props => [mainAxisAlignment, crossAxisAlignment];
 }
-
-// TODO: Tests für AlignmentMapper

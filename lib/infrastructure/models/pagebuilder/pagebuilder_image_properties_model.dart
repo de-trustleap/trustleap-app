@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
 
 class PageBuilderImagePropertiesModel extends Equatable
     implements PageBuilderProperties {
@@ -69,7 +69,7 @@ class PageBuilderImagePropertiesModel extends Equatable
         borderRadius: borderRadius,
         width: width,
         height: height,
-        alignment: _getAlignmentFromString(alignment));
+        alignment: AlignmentMapper.getAlignmentFromString(alignment));
   }
 
   factory PageBuilderImagePropertiesModel.fromDomain(
@@ -79,66 +79,10 @@ class PageBuilderImagePropertiesModel extends Equatable
         borderRadius: properties.borderRadius,
         width: properties.width,
         height: properties.height,
-        alignment: _getStringFromAlignment(properties.alignment),
+        alignment: AlignmentMapper.getStringFromAlignment(properties.alignment),
         newImageBase64: properties.localImage != null
             ? base64Encode(properties.localImage!)
             : null);
-  }
-
-  Alignment? _getAlignmentFromString(String? alignment) {
-    if (alignment == null) {
-      return null;
-    }
-    switch (alignment) {
-      case "topLeft":
-        return Alignment.topLeft;
-      case "topCenter":
-        return Alignment.topCenter;
-      case "topRight":
-        return Alignment.topRight;
-      case "centerLeft":
-        return Alignment.centerLeft;
-      case "center":
-        return Alignment.center;
-      case "centerRight":
-        return Alignment.centerRight;
-      case "bottomLeft":
-        return Alignment.bottomLeft;
-      case "bottomCenter":
-        return Alignment.bottomCenter;
-      case "bottomRight":
-        return Alignment.bottomRight;
-      default:
-        return Alignment.center;
-    }
-  }
-
-  static String? _getStringFromAlignment(Alignment? alignment) {
-    if (alignment == null) {
-      return null;
-    }
-    switch (alignment) {
-      case Alignment.topLeft:
-        return "topLeft";
-      case Alignment.topCenter:
-        return "topCenter";
-      case Alignment.topRight:
-        return "topRight";
-      case Alignment.centerLeft:
-        return "centerLeft";
-      case Alignment.center:
-        return "center";
-      case Alignment.centerRight:
-        return "centerRight";
-      case Alignment.bottomLeft:
-        return "bottomLeft";
-      case Alignment.bottomCenter:
-        return "bottomCenter";
-      case Alignment.bottomRight:
-        return "bottomRight";
-      default:
-        return "center";
-    }
   }
 
   @override

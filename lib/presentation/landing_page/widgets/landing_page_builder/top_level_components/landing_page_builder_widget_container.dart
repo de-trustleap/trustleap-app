@@ -90,6 +90,7 @@ class _LandingPageBuilderWidgetContainerState
                               ]
                             : null,
                       ),
+                      alignment: widget.model.alignment ?? Alignment.center,
                       child: widget.child,
                     ),
                   ),
