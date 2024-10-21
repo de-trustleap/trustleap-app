@@ -11,9 +11,12 @@ class RoutePaths {
   static const String promotersPath = "/promoters";
   static const String landingPagePath = "/landingpage";
   static const String landingPageCreatorPath = "/landingpage-creator";
-  static const String landingPageBuilderPath = "/landingpage-builder";
   static const String activitiesPath = "/activities";
+
   static const String loginPath = "/";
   static const String registerPath = "/register";
   static const String passwordReset = "/password-reset";
+
+  static const String landingPageBuilderPath = "/landingpage-builder";
+  static const String builderPath = "/builder";
 }

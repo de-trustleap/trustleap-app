@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -12,7 +13,6 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_o
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageOverview extends StatelessWidget {
   const LandingPageOverview({super.key});
@@ -23,7 +23,7 @@ class LandingPageOverview extends StatelessWidget {
     final localization = AppLocalizations.of(context);
 
     void submitDeletion(String id, String parentUserID) {
-      Modular.to.pop();
+      CustomNavigator.pop();
       BlocProvider.of<LandingPageCubit>(context)
           .deleteLandingPage(id, parentUserID);
     }
@@ -42,7 +42,7 @@ class LandingPageOverview extends StatelessWidget {
                 actionButtonTitle: localization.delete_buttontitle,
                 cancelButtonTitle: localization.cancel_buttontitle,
                 actionButtonAction: () => submitDeletion(id, parentUserID),
-                cancelButtonAction: () => Modular.to.pop());
+                cancelButtonAction: () => CustomNavigator.pop());
           });
     }
 
@@ -71,7 +71,7 @@ class LandingPageOverview extends StatelessWidget {
                         localization.landingpage_overview_empty_page_subtitle,
                     buttonTitle: localization.landingpage_create_buttontitle,
                     onTap: () {
-                      Modular.to.navigate(RoutePaths.homePath +
+                      CustomNavigator.navigate(RoutePaths.homePath +
                           RoutePaths.landingPageCreatorPath);
                     });
               } else {

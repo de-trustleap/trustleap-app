@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/presentation/core/menu/menu_item.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/theme_switch.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class SideMenu extends StatelessWidget {
   final bool collapsed;
@@ -33,7 +33,7 @@ class SideMenu extends StatelessWidget {
                 path: RoutePaths.profilePath,
                 icon: Icons.person,
                 type: MenuItems.profile,
-                isURLMatching: Modular.to.path.endsWith(RoutePaths.profilePath),
+                isURLMatching: CustomNavigator.currentPath.endsWith(RoutePaths.profilePath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 52),
@@ -42,7 +42,7 @@ class SideMenu extends StatelessWidget {
                 icon: Icons.dashboard,
                 type: MenuItems.dashboard,
                 isURLMatching:
-                    Modular.to.path.endsWith(RoutePaths.dashboardPath),
+                    CustomNavigator.currentPath.endsWith(RoutePaths.dashboardPath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 28),
@@ -51,7 +51,7 @@ class SideMenu extends StatelessWidget {
                 icon: Icons.thumb_up,
                 type: MenuItems.recommendations,
                 isURLMatching:
-                    Modular.to.path.endsWith(RoutePaths.recommendationsPath),
+                    CustomNavigator.currentPath.endsWith(RoutePaths.recommendationsPath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 28),
@@ -60,7 +60,7 @@ class SideMenu extends StatelessWidget {
                 icon: Icons.phone_bluetooth_speaker,
                 type: MenuItems.promoters,
                 isURLMatching:
-                    Modular.to.path.endsWith(RoutePaths.promotersPath),
+                    CustomNavigator.currentPath.endsWith(RoutePaths.promotersPath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 28),
@@ -69,7 +69,7 @@ class SideMenu extends StatelessWidget {
                 icon: Icons.airplanemode_active,
                 type: MenuItems.landingpage,
                 isURLMatching:
-                    Modular.to.path.endsWith(RoutePaths.landingPagePath),
+                    CustomNavigator.currentPath.endsWith(RoutePaths.landingPagePath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 28),
@@ -78,7 +78,7 @@ class SideMenu extends StatelessWidget {
                 icon: Icons.history,
                 type: MenuItems.activities,
                 isURLMatching:
-                    Modular.to.path.endsWith(RoutePaths.activitiesPath),
+                    CustomNavigator.currentPath.endsWith(RoutePaths.activitiesPath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 56),

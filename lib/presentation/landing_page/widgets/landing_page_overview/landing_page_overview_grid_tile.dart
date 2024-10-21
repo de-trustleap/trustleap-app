@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -8,7 +9,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageOverviewGridTile extends StatelessWidget {
@@ -47,8 +47,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
 
     if (landingPage.ownerID == user.id) {
       return InkWell(
-          onTap: () => Modular.to.navigate(
-              "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
+          onTap: () => CustomNavigator.openInNewTab(
+              "${RoutePaths.landingPageBuilderPath}${RoutePaths.builderPath}/${landingPage.id.value}"),
           child: buildTile(themeData, responsiveValue, localizations, context));
     } else {
       return buildTile(themeData, responsiveValue, localizations, context);
@@ -84,7 +84,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                         children: [
                           IconButton(
                               onPressed: () {
-                                Modular.to.navigate(
+                                CustomNavigator.navigate(
                                     "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
                                     arguments: landingPage);
                               },
@@ -97,7 +97,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                           const Spacer(),
                           IconButton(
                               onPressed: () {
-                                Modular.to.navigate(
+                                CustomNavigator.navigate(
                                     "${RoutePaths.homePath}${RoutePaths.landingPagePath}/${landingPage.id.value}",
                                     arguments: landingPage);
                               },

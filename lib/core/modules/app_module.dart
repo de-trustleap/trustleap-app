@@ -14,7 +14,6 @@ import 'package:finanzbegleiter/application/landingpages/landingpage_observer/la
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
-import 'package:finanzbegleiter/application/navigation/navigation_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
@@ -28,6 +27,7 @@ import 'package:finanzbegleiter/core/modules/admin_module.dart';
 import 'package:finanzbegleiter/core/modules/auth_guard.dart';
 import 'package:finanzbegleiter/core/modules/auth_module.dart';
 import 'package:finanzbegleiter/core/modules/home_module.dart';
+import 'package:finanzbegleiter/core/modules/pagebuilder_module.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
@@ -75,7 +75,6 @@ class AppModule extends Module {
           PageBuilderRepositoryImplementation.new)
       ..addLazySingleton(ProfileObserverBloc.new)
       ..addLazySingleton(PagebuilderCubit.new)
-      ..add(NavigationCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
@@ -104,5 +103,7 @@ class AppModule extends Module {
     r.module(RoutePaths.homePath, module: HomeModule(), guards: [AuthGuard()]);
     r.module(RoutePaths.adminPath,
         module: AdminModule(), guards: [AdminGuard()]);
+    r.module(RoutePaths.landingPageBuilderPath,
+        module: PagebuilderModule(), guards: [AuthGuard()]);
   }
 }
