@@ -1,10 +1,10 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
-import 'package:finanzbegleiter/application/navigation/navigation_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/modules/app_module.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -42,20 +42,21 @@ void routeToInitial(AuthStatus status) {
   switch (status) {
     case AuthStatus.unAuthenticated:
       debugPrint("NOT AUTHENTICATED");
-      Modular.to.navigate(RoutePaths.loginPath);
+      CustomNavigator.navigate(RoutePaths.loginPath);
       break;
     case AuthStatus.authenticated:
       debugPrint("AUTHENTICATED");
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
-        Modular.to.navigate(lastRoute);
+        CustomNavigator.navigate(lastRoute);
       } else {
-        Modular.to.navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
+        CustomNavigator.navigate(
+            RoutePaths.homePath + RoutePaths.dashboardPath);
       }
       break;
     case AuthStatus.authenticatedAsAdmin:
       debugPrint("AUTHENTICATED AS ADMIN");
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.adminPath)) {
-        Modular.to.navigate(lastRoute);
+        CustomNavigator.navigate(lastRoute);
       } else {
         Modular.to
             .navigate(RoutePaths.adminPath + RoutePaths.companyRequestsPath);
@@ -102,8 +103,7 @@ class MyApp extends StatelessWidget {
               ..add(AuthObserverStartedEvent())),
         BlocProvider(create: (context) => Modular.get<MenuCubit>()),
         BlocProvider(create: (context) => Modular.get<ThemeCubit>()),
-        BlocProvider(create: (context) => Modular.get<ProfileObserverBloc>()),
-        BlocProvider(create: (context) => Modular.get<NavigationCubit>())
+        BlocProvider(create: (context) => Modular.get<ProfileObserverBloc>())
       ],
       child: MultiBlocListener(
           listeners: [

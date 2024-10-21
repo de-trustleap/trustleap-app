@@ -72,5 +72,3 @@ class PagebuilderRowPropertiesModel extends Equatable
   List<Object?> get props =>
       [equalHeights, mainAxisAlignment, crossAxisAlignment];
 }
-
-// TODO: Tests für AlignmentMapper

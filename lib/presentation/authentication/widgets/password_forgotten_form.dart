@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -10,7 +11,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primar
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PasswordForgottenForm extends StatefulWidget {
@@ -54,8 +54,8 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
   }
 
   void alertAction() {
-    Modular.to.pop();
-    Modular.to.navigate(RoutePaths.loginPath);
+    CustomNavigator.pop();
+    CustomNavigator.navigate(RoutePaths.loginPath);
   }
 
   void showSuccessDialog(AppLocalizations localizations) {

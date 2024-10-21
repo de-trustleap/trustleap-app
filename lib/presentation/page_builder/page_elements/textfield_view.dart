@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfield_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_builder/page_elements/textstyle_parser.dart';
+import 'package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart';
 import 'package:flutter/material.dart';
 
 class PageBuilderTextFieldView extends StatelessWidget {

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -6,7 +7,6 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_o
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_overview/landing_page_overview_grid_tile.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -69,7 +69,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
                                       ),
                                     )
                                   : AddNewLandingPageGridTile(
-                                      onPressed: () => Modular.to.navigate(
+                                      onPressed: () => CustomNavigator.navigate(
                                             RoutePaths.homePath +
                                                 RoutePaths
                                                     .landingPageCreatorPath,

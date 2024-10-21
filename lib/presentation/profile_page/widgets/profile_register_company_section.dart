@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -10,7 +11,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primar
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileRegisterCompanySection extends StatefulWidget {
@@ -118,7 +118,7 @@ class _ProfileRegisterCompanySectionState
                   : maxWidth / 2 - spacing,
               disabled: false,
               onTap: () {
-                Modular.to.navigate(
+                CustomNavigator.navigate(
                     RoutePaths.homePath + RoutePaths.companyRegistration);
               })
         ],

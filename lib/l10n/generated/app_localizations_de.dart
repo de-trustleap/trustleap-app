@@ -840,16 +840,4 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_unload_alert_message => 'Willst du die Seite wirklich verlassen? Nicht gespeicherte Änderungen gehen verloren.';
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_title => 'Seite verlassen?';
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_message => 'Möchtest du die Seite wirklich verlassen?\nNicht gespeicherte Änderungen gehen verloren.';
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_button_title => 'Verlassen';
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_cancel_button_title => 'Abbrechen';
 }
