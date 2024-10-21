@@ -30,7 +30,7 @@ Future main() async {
   if (kIsWeb) {
     await FirebaseAppCheck.instance.activate(
         webProvider: ReCaptchaV3Provider(kDebugMode
-            ? "69d98016-1820-4508-a43a-b853cb27ccb8"
+            ? "A0791EC5-107E-4C90-BF82-34E5FE2EA2DF"
             : "6LcVOGMqAAAAAAzRRZjRjkO5o-xtO4H2X_ZbN9r2"));
   }
   setPathUrlStrategy();
