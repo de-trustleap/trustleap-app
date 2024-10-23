@@ -187,7 +187,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_snackbar_success_duplicated => 'The landing page was successfully duplicated!';
 
   @override
-  String get landingpage_snackbar_success_troggled => 'The landing page was successfully toggled!';
+  String get landingpage_snackbar_success_troggled_enabled => 'The landing page was successfully enabled!';
+
+  @override
+  String get landingpage_snackbar_success_troggled_disabled => 'The landing page was successfully disabled!';
 
   @override
   String get landingpage_overview_context_menu_disable => 'disable';

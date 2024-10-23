@@ -58,8 +58,10 @@ class LandingPageOverview extends StatelessWidget {
         } else if (state is DuplicateLandingPageSuccessState) {
           CustomSnackBar.of(context).showCustomSnackBar(
               localization.landingpage_snackbar_success_duplicated);
-        } else if (state is toggleLandingPageActivitySuccessState) {
-            CustomSnackBar.of(context).showCustomSnackBar(localization.landingpage_snackbar_success_troggled);
+        } else if (state is ToggleLandingPageActivitySuccessState) {
+            CustomSnackBar.of(context).showCustomSnackBar(
+              state.isActive == true ? localization.landingpage_snackbar_success_troggled_enabled : localization.landingpage_snackbar_success_troggled_disabled
+            );
         } 
       },
       builder: (context, state) {
@@ -67,7 +69,7 @@ class LandingPageOverview extends StatelessWidget {
           builder: (context, observerState) {
             if (state is DeleteLandingPageLoadingState ||
                 state is DuplicateLandingPageLoadingState ||
-                state is toggleLandingPageActivityLoadingState) {
+                state is ToggleLandingPageActivityLoadingState) {
               return const LoadingIndicator();
             } else if (observerState is LandingPageObserverSuccess) {
               if (observerState.landingPages.isEmpty) {

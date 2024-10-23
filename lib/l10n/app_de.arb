@@ -240,9 +240,13 @@
     "@landingpage_snackbar_success_duplicated": {
         "description": "Der Titel der Snackbar wenn eine Landingpage dupliziert wurde"
     },
-    "landingpage_snackbar_success_troggled": "Die Landingpage wurde erfolgreich umgestellt!",
-    "@landingpage_snackbar_success_troggled": {
-        "description": "Der Titel der Snackbar wenn eine Landingpage aktiviert/deaktivert wurde"
+    "landingpage_snackbar_success_troggled_enabled": "Die Landingpage wurde erfolgreich aktiviert!",
+    "@landingpage_snackbar_success_troggled_enabled": {
+        "description": "Der Titel der Snackbar wenn eine Landingpage aktiviert wurde"
+    },
+    "landingpage_snackbar_success_troggled_disabled": "Die Landingpage wurde erfolgreich deaktiviert!",
+    "@landingpage_snackbar_success_troggled_disabled": {
+        "description": "Der Titel der Snackbar wenn eine Landingpage aktiviert wurde"
     },
     "landingpage_overview_context_menu_disable": "deaktivieren",
     "@landingpage_overview_context_menu_disable": {
