@@ -159,9 +159,9 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> troggleLandingPageActivity(String id, bool isActive, String userId) async {
+  Future<Either<DatabaseFailure, Unit>> toggleLandingPageActivity(String id, bool isActive, String userId) async {
     HttpsCallable callable =
-        firebaseFunctions.httpsCallable("troggleLandingPageActivity");
+        firebaseFunctions.httpsCallable("toggleLandingPageActivity");
     try {
       await callable.call({"id": id, "isActive": isActive, "userId": userId});
       return right(unit);

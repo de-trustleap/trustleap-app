@@ -173,7 +173,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                             Text(
                                                 (landingPage.isActive ?? false)
                                                     ? localizations.landingpage_overview_context_menu_disable
-                                                    : localizations.landingpage_overview_context_menu_enabale,
+                                                    : localizations.landingpage_overview_context_menu_enable,
                                                 style: responsiveValue.isMobile
                                                     ? themeData
                                                         .textTheme.bodySmall

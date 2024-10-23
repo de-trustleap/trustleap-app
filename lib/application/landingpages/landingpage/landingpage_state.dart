@@ -77,13 +77,18 @@ final class DuplicateLandingPageFailureState extends LandingPageState {
 
 final class DuplicateLandingPageSuccessState extends LandingPageState {}
 
-final class TroggleLandingPageActivityLoadingState extends LandingPageState {}
+final class toggleLandingPageActivityLoadingState extends LandingPageState {}
 
-final class TroggleLandingPageActivityFailureState extends LandingPageState {
+final class toggleLandingPageActivityFailureState extends LandingPageState {
   final DatabaseFailure failure;
-  const TroggleLandingPageActivityFailureState({
+  const toggleLandingPageActivityFailureState({
     required this.failure,
   });
 }
 
-final class TroggleLandingPageActivitySuccessState extends LandingPageState {}
+final class toggleLandingPageActivitySuccessState extends LandingPageState {
+  final bool isActive;
+   const toggleLandingPageActivitySuccessState({
+    required this.isActive,
+  });
+}

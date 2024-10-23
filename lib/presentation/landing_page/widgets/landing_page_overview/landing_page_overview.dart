@@ -33,7 +33,7 @@ class LandingPageOverview extends StatelessWidget {
     }
 
     void submitIsActive(String id, bool isActive, String userId) {
-      BlocProvider.of<LandingPageCubit>(context).troggleLandingPageActivity(id, isActive, userId);
+      BlocProvider.of<LandingPageCubit>(context).toggleLandingPageActivity(id, isActive, userId);
     }
 
     void showDeleteAlert(String id, parentUserID) {
@@ -58,7 +58,7 @@ class LandingPageOverview extends StatelessWidget {
         } else if (state is DuplicateLandingPageSuccessState) {
           CustomSnackBar.of(context).showCustomSnackBar(
               localization.landingpage_snackbar_success_duplicated);
-        } else if (state is TroggleLandingPageActivitySuccessState) {
+        } else if (state is toggleLandingPageActivitySuccessState) {
             CustomSnackBar.of(context).showCustomSnackBar(localization.landingpage_snackbar_success_troggled);
         } 
       },
@@ -67,7 +67,7 @@ class LandingPageOverview extends StatelessWidget {
           builder: (context, observerState) {
             if (state is DeleteLandingPageLoadingState ||
                 state is DuplicateLandingPageLoadingState ||
-                state is TroggleLandingPageActivityLoadingState) {
+                state is toggleLandingPageActivityLoadingState) {
               return const LoadingIndicator();
             } else if (observerState is LandingPageObserverSuccess) {
               if (observerState.landingPages.isEmpty) {
