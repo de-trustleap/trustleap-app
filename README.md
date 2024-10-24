@@ -8,11 +8,11 @@
 - Dart 3.5.1
 - Visual Studio Code
 - Firebase
-- Bloc
+- BLoC
 
 ### Architecture
 
-- Bloc State Management
+- BLoC State Management
 - Repositories, Models, Widgets
 - Modular
 
