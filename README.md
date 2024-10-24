@@ -23,4 +23,6 @@
 To deploy the Flutter Web App you have to do the following steps:
 
 - navigate to the scripts directory in the project by 'cd scripts'
-- execute the build_web script by using './'
+- execute the build_web script by using './build_web.sh'
+- test your changes locally by using 'firebase serve'
+- finally deploy the app by using 'firebase deploy'
