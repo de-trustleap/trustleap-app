@@ -21,7 +21,6 @@ class CustomEmojiPicker extends StatelessWidget {
         config: Config(
           height: 256,
           checkPlatformCompatibility: true,
-          swapCategoryAndBottomBar: false,
           skinToneConfig: const SkinToneConfig(enabled: true),
           categoryViewConfig: CategoryViewConfig(
               initCategory: Category.SMILEYS,
@@ -38,7 +37,6 @@ class CustomEmojiPicker extends StatelessWidget {
               buttonIconColor: themeData.colorScheme.secondary),
           searchViewConfig: SearchViewConfig(
               backgroundColor: Colors.transparent,
-              buttonColor: Colors.transparent,
               buttonIconColor: themeData.colorScheme.secondary,
               hintText: localization.emoji_search_placeholder),
         ));

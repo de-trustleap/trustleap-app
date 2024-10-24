@@ -224,7 +224,7 @@
     "@landingpage_delete_alert_msg": {
         "description": "Message zum Landingpage Löschdialog"
     },
-    "landingpage_success_delete_snackbar_message": "Landinpage erfolgriech gelöscht!",
+    "landingpage_success_delete_snackbar_message": "Landinpage erfolgreich gelöscht!",
     "@landingpage_success_delete_snackbar_message": {
         "description": "Snackbar Nachricht wenn eine Landingpage erfolgreich gelöscht wurden"
     },
