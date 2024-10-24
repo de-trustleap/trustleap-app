@@ -131,7 +131,7 @@ class MyApp extends StatelessWidget {
             builder: (context, state) {
               return MaterialApp.router(
                 routerConfig: Modular.routerConfig,
-                title: 'Finanzbegleiter',
+                title: "Trust Leap",
                 theme: getTheme(context, state),
                 supportedLocales: L10n.all,
                 locale: const Locale("de"),

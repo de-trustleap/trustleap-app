@@ -1,0 +1,13 @@
+{
+  "projects": {},
+  "targets": {
+    "finanzwegbegleiter": {
+      "hosting": {
+        "frontend": [
+          "finanzwegbegleiter"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
