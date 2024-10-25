@@ -18,5 +18,4 @@ class RoutePaths {
   static const String passwordReset = "/password-reset";
 
   static const String landingPageBuilderPath = "/landingpage-builder";
-  static const String builderPath = "/builder";
 }

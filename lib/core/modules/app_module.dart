@@ -27,7 +27,6 @@ import 'package:finanzbegleiter/core/modules/admin_module.dart';
 import 'package:finanzbegleiter/core/modules/auth_guard.dart';
 import 'package:finanzbegleiter/core/modules/auth_module.dart';
 import 'package:finanzbegleiter/core/modules/home_module.dart';
-import 'package:finanzbegleiter/core/modules/pagebuilder_module.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
@@ -103,7 +102,5 @@ class AppModule extends Module {
     r.module(RoutePaths.homePath, module: HomeModule(), guards: [AuthGuard()]);
     r.module(RoutePaths.adminPath,
         module: AdminModule(), guards: [AdminGuard()]);
-    r.module(RoutePaths.landingPageBuilderPath,
-        module: PagebuilderModule(), guards: [AuthGuard()]);
   }
 }
