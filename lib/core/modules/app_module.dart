@@ -53,7 +53,8 @@ class AppModule extends Module {
     final firebaseAuth = FirebaseAuth.instance;
     final firestore = FirebaseFirestore.instance;
     final storage = FirebaseStorage.instance;
-    final firebaseFunctions = FirebaseFunctions.instance;
+    final firebaseFunctions =
+        FirebaseFunctions.instanceFor(region: "europe-west3");
     final appCheck = FirebaseAppCheck.instance;
 
     i
