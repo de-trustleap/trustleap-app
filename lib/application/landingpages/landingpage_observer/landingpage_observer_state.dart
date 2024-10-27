@@ -1,35 +1,28 @@
 part of 'landingpage_observer_cubit.dart';
 
-sealed class LandingPageObserverState {}
+sealed class LandingPageObserverState extends Equatable {
+  const LandingPageObserverState();
 
-final class LandingPageObserverInitial extends LandingPageObserverState with EquatableMixin {
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
-final class LandingPageObserverLoading extends LandingPageObserverState with EquatableMixin {
-  @override
-  List<Object?> get props => [];
-}
+final class LandingPageObserverInitial extends LandingPageObserverState {}
 
-final class LandingPageObserverFailure extends LandingPageObserverState with EquatableMixin {
+final class LandingPageObserverLoading extends LandingPageObserverState {}
+
+final class LandingPageObserverFailure extends LandingPageObserverState {
   final DatabaseFailure failure;
 
-  LandingPageObserverFailure({
+  const LandingPageObserverFailure({
     required this.failure,
   });
-
-  @override
-  List<Object?> get props => [failure];
 }
 
-final class LandingPageObserverSuccess extends LandingPageObserverState with EquatableMixin {
+final class LandingPageObserverSuccess extends LandingPageObserverState {
   final List<LandingPage> landingPages;
   final CustomUser user;
 
-  LandingPageObserverSuccess(
+  const LandingPageObserverSuccess(
       {required this.landingPages, required this.user});
-
-  @override
-  List<Object?> get props => [landingPages, user];
 }

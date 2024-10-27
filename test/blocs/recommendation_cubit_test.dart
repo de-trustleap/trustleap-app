@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
@@ -120,7 +121,7 @@ void main() {
       LandingPage(id: UniqueID.fromUniqueString("2"), name: "Page2"),
       LandingPage(id: UniqueID.fromUniqueString("3"), name: "Page3")
     ];
-    const names = ["Page1", "Page2", "Page3"];
+    const names = [RecommendationReason(reason: "Page1", isActive: true), RecommendationReason(reason: "Page2", isActive: false), RecommendationReason(reason: "Page3", isActive: true)];
 
     test("should call landingpages repo when function is called", () async {
       // Given

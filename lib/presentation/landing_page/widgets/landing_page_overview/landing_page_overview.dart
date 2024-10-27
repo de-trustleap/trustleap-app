@@ -60,9 +60,13 @@ class LandingPageOverview extends StatelessWidget {
               localization.landingpage_snackbar_success_duplicated);
         } else if (state is ToggleLandingPageActivitySuccessState) {
             CustomSnackBar.of(context).showCustomSnackBar(
-              state.isActive == true ? localization.landingpage_snackbar_success_troggled_enabled : localization.landingpage_snackbar_success_troggled_disabled
+              state.isActive == true ? localization.landingpage_snackbar_success_toggled_enabled : localization.landingpage_snackbar_success_toggled_disabled
             );
-        } 
+        } else if (state is ToggleLandingPageActivityFailureState) {
+            CustomSnackBar.of(context).showCustomSnackBar(
+              localization.landingpage_snackbar_failure_toggled, SnackBarType.failure
+            );
+        }
       },
       builder: (context, state) {
         return BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(

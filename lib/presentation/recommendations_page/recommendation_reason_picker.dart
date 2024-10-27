@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -6,7 +7,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 class RecommendationReaseonPicker extends StatefulWidget {
   final double width;
   final String? validate;
-  final List<Map<String, Object?>> reasons;
+  final List<RecommendationReason> reasons;
   final String initialValue;
   final Function onSelected;
 
@@ -36,14 +37,14 @@ class _RecommendationReaseonPickerState
   }
 
   List<DropdownMenuEntry<String>> createDropdownEntries(
-      List<Map<String, Object?>> reasons) {
+      List<RecommendationReason> reasons) {
     List<DropdownMenuEntry<String>> entries = [];
     for (var reason in reasons) {
       var entry = DropdownMenuEntry<String>(
-          value: reason['name'] as String,
-          label: (reason['isActive'] == true ? '' : 'DEAKTIVIERT: ') +
-              (reason['name'] as String),
-          enabled: reason['isActive'] == true);
+          value: reason.reason as String,
+          label: (reason.isActive == true ? '' : 'DEAKTIVIERT: ') +
+              (reason.reason as String),
+          enabled: reason.isActive == true);
       entries.add(entry);
     }
     return entries;

@@ -35,7 +35,8 @@ void main() {
           associatedUsersIDs: const ["1", "2"],
           lastUpdatedAt: lastUpdated,
           isDefaultPage: false,
-          createdAt: Timestamp(100000, 0));
+          createdAt: Timestamp(100000, 0),
+          isActive: true);
 
       final expectedResult = {
         "id": "1",
@@ -49,7 +50,8 @@ void main() {
         "associatedUsersIDs": ["1", "2"],
         "lastUpdatedAt": lastUpdated,
         "isDefaultPage": false,
-        "createdAt": Timestamp(100000, 0)
+        "createdAt": Timestamp(100000, 0),
+        "isActive": true
       };
       // When
       final result = model.toMap();
@@ -71,7 +73,8 @@ void main() {
         "associatedUsersIDs": ["1", "2"],
         "lastUpdatedAt": Timestamp(100000, 0),
         "isDefaultPage": false,
-        "createdAt": Timestamp(100000, 0)
+        "createdAt": Timestamp(100000, 0),
+        "isActive": true
       };
       final expectedResult = LandingPageModel(
           id: "",
@@ -83,7 +86,8 @@ void main() {
           associatedUsersIDs: const ["1", "2"],
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
-          createdAt: Timestamp(100000, 0));
+          createdAt: Timestamp(100000, 0),
+          isActive: true);
       // When
       final result = LandingPageModel.fromMap(map);
       // Then
