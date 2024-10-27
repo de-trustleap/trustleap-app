@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -11,7 +12,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileDeleteAccountForm extends StatefulWidget {
@@ -75,12 +75,12 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
               cancelButtonTitle: localizations
                   .delete_account_confirmation_alert_cancel_button_title,
               actionButtonAction: submitAccountDeletion,
-              cancelButtonAction: () => Modular.to.pop());
+              cancelButtonAction: () => CustomNavigator.pop());
         });
   }
 
   void submitAccountDeletion() {
-    Modular.to.pop();
+    CustomNavigator.pop();
     BlocProvider.of<ProfileCubit>(context).deleteAccount();
   }
 

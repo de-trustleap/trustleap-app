@@ -1,10 +1,10 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
-import 'package:finanzbegleiter/application/navigation/navigation_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/modules/app_module.dart';
 import 'package:finanzbegleiter/firebase_options.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -12,7 +12,9 @@ import 'package:finanzbegleiter/l10n/l10n.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/themes/desktop_theme.dart';
 import 'package:finanzbegleiter/themes/mobile_theme.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,6 +27,12 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  if (kIsWeb) {
+    await FirebaseAppCheck.instance.activate(
+        webProvider: ReCaptchaV3Provider(kDebugMode
+            ? "A0791EC5-107E-4C90-BF82-34E5FE2EA2DF"
+            : "6LcVOGMqAAAAAAzRRZjRjkO5o-xtO4H2X_ZbN9r2"));
+  }
   setPathUrlStrategy();
   runApp(ModularApp(module: AppModule(), child: const MyApp()));
 }
@@ -34,20 +42,21 @@ void routeToInitial(AuthStatus status) {
   switch (status) {
     case AuthStatus.unAuthenticated:
       debugPrint("NOT AUTHENTICATED");
-      Modular.to.navigate(RoutePaths.loginPath);
+      CustomNavigator.navigate(RoutePaths.loginPath);
       break;
     case AuthStatus.authenticated:
       debugPrint("AUTHENTICATED");
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
-        Modular.to.navigate(lastRoute);
+        CustomNavigator.navigate(lastRoute);
       } else {
-        Modular.to.navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
+        CustomNavigator.navigate(
+            RoutePaths.homePath + RoutePaths.dashboardPath);
       }
       break;
     case AuthStatus.authenticatedAsAdmin:
       debugPrint("AUTHENTICATED AS ADMIN");
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.adminPath)) {
-        Modular.to.navigate(lastRoute);
+        CustomNavigator.navigate(lastRoute);
       } else {
         Modular.to
             .navigate(RoutePaths.adminPath + RoutePaths.companyRequestsPath);
@@ -94,8 +103,7 @@ class MyApp extends StatelessWidget {
               ..add(AuthObserverStartedEvent())),
         BlocProvider(create: (context) => Modular.get<MenuCubit>()),
         BlocProvider(create: (context) => Modular.get<ThemeCubit>()),
-        BlocProvider(create: (context) => Modular.get<ProfileObserverBloc>()),
-        BlocProvider(create: (context) => Modular.get<NavigationCubit>())
+        BlocProvider(create: (context) => Modular.get<ProfileObserverBloc>())
       ],
       child: MultiBlocListener(
           listeners: [
@@ -123,7 +131,7 @@ class MyApp extends StatelessWidget {
             builder: (context, state) {
               return MaterialApp.router(
                 routerConfig: Modular.routerConfig,
-                title: 'Finanzbegleiter',
+                title: "Trust Leap",
                 theme: getTheme(context, state),
                 supportedLocales: L10n.all,
                 locale: const Locale("de"),

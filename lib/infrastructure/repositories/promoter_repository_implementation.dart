@@ -11,21 +11,27 @@ import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 
 class PromoterRepositoryImplementation implements PromoterRepository {
   final FirebaseFirestore firestore;
   final FirebaseFunctions firebaseFunctions;
+  final FirebaseAppCheck appCheck;
 
   PromoterRepositoryImplementation(
-      {required this.firestore, required this.firebaseFunctions});
+      {required this.firestore,
+      required this.firebaseFunctions,
+      required this.appCheck});
 
   @override
   Future<Either<DatabaseFailure, Unit>> registerPromoter(
       {required UnregisteredPromoter promoter}) async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("createPromoter");
     final promoterMap = UnregisteredPromoterModel.fromDomain(promoter).toMap();
     promoterMap.remove("createdAt");
     promoterMap.remove("expiresAt");
+    promoterMap["appCheckToken"] = appCheckToken;
     try {
       await callable.call(promoterMap);
       return right(unit);

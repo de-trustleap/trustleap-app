@@ -175,7 +175,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_delete_alert_msg => 'Das Löschen der Landingpage kann nicht rückgängig gemacht werden.';
 
   @override
-  String get landingpage_success_delete_snackbar_message => 'Landinpage erfolgriech gelöscht!';
+  String get landingpage_success_delete_snackbar_message => 'Landinpage erfolgreich gelöscht!';
 
   @override
   String get landingpage_snackbar_success => 'Die Landingpage wurde erfolgreich erstellt!';
@@ -855,16 +855,4 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_unload_alert_message => 'Willst du die Seite wirklich verlassen? Nicht gespeicherte Änderungen gehen verloren.';
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_title => 'Seite verlassen?';
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_message => 'Möchtest du die Seite wirklich verlassen?\nNicht gespeicherte Änderungen gehen verloren.';
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_button_title => 'Verlassen';
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_cancel_button_title => 'Abbrechen';
 }

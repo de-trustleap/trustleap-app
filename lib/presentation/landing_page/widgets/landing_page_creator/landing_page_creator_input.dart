@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
@@ -12,7 +13,6 @@ import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorInput extends StatefulWidget {
@@ -82,12 +82,12 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorInput> {
             if (state is CreatedLandingPageSuccessState) {
               showError = false;
               const params = "?createdNewPage=true";
-              Modular.to.navigate(
+              CustomNavigator.navigate(
                   RoutePaths.homePath + RoutePaths.landingPagePath + params);
             } else if (state is EditLandingPageSuccessState) {
               showError = false;
               const params = "?editedPage=true";
-              Modular.to.navigate(
+              CustomNavigator.navigate(
                   RoutePaths.homePath + RoutePaths.landingPagePath + params);
             } else if (state is GetUserSuccessState) {
               showError = false;

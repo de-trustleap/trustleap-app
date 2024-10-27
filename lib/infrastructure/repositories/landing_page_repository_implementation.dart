@@ -14,13 +14,17 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 
 class LandingPageRepositoryImplementation implements LandingPageRepository {
   final FirebaseFirestore firestore;
   final FirebaseFunctions firebaseFunctions;
+  final FirebaseAppCheck appCheck;
 
   LandingPageRepositoryImplementation(
-      {required this.firestore, required this.firebaseFunctions});
+      {required this.firestore,
+      required this.firebaseFunctions,
+      required this.appCheck});
 
   @override
   Stream<Either<DatabaseFailure, CustomUser>> observeAllLandingPages() async* {
@@ -90,11 +94,13 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       LandingPage landingPage,
       Uint8List imageData,
       bool imageHasChanged) async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("createLandingPage");
     final landingPageModel = LandingPageModel.fromDomain(landingPage);
     try {
       await callable.call({
+        "appCheckToken": appCheckToken,
         "id": landingPageModel.id,
         "name": landingPageModel.name,
         "description": landingPageModel.description,
@@ -114,10 +120,12 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> deleteLandingPage(
       String id, String ownerID) async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("deleteLandingPage");
     try {
-      await callable.call({"id": id, "ownerID": ownerID});
+      await callable
+          .call({"appCheckToken": appCheckToken, "id": id, "ownerID": ownerID});
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
@@ -127,9 +135,11 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   @override
   Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage,
       Uint8List? imageData, bool imageHasChanged) async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("editLandingPage");
     try {
       await callable.call({
+        "appCheckToken": appCheckToken,
         "id": landingPage.id.value,
         "title": landingPage.name,
         "description": landingPage.description,
@@ -148,10 +158,11 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> duplicateLandingPage(String id) async {
+    final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("duplicateLandingPage");
     try {
-      await callable.call({"id": id});
+      await callable.call({"appCheckToken": appCheckToken, "id": id});
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
@@ -177,7 +188,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       if (!document.exists && document.data() != null) {
         return left(NotFoundFailure());
       }
-      var model = LandingPageModel.fromFirestore(document.data()!, id).toDomain();
+      var model =
+          LandingPageModel.fromFirestore(document.data()!, id).toDomain();
       return right(model);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));

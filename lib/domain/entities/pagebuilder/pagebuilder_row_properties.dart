@@ -1,17 +1,29 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:flutter/material.dart';
 
 class PagebuilderRowProperties extends Equatable
     implements PageBuilderProperties {
-  final bool? equalWidths;
+  final bool? equalHeights;
+  final MainAxisAlignment? mainAxisAlignment;
+  final CrossAxisAlignment? crossAxisAlignment;
 
-  const PagebuilderRowProperties({required this.equalWidths});
+  const PagebuilderRowProperties(
+      {required this.equalHeights,
+      required this.mainAxisAlignment,
+      required this.crossAxisAlignment});
 
-  PagebuilderRowProperties copyWith({bool? equalWidths}) {
+  PagebuilderRowProperties copyWith(
+      {bool? equalHeights,
+      MainAxisAlignment? mainAxisAlignment,
+      CrossAxisAlignment? crossAxisAlignment}) {
     return PagebuilderRowProperties(
-        equalWidths: equalWidths ?? this.equalWidths);
+        equalHeights: equalHeights ?? this.equalHeights,
+        mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment);
   }
 
   @override
-  List<Object?> get props => [equalWidths];
+  List<Object?> get props =>
+      [equalHeights, mainAxisAlignment, crossAxisAlignment];
 }

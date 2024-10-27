@@ -12,8 +12,8 @@ import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.da
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_cubit.dart';
+import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
-import 'package:finanzbegleiter/application/navigation/navigation_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
@@ -42,6 +42,7 @@ import 'package:finanzbegleiter/infrastructure/repositories/pagebuilder_reposito
 import 'package:finanzbegleiter/infrastructure/repositories/promoter_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
 import 'package:finanzbegleiter/route_paths.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -52,13 +53,16 @@ class AppModule extends Module {
     final firebaseAuth = FirebaseAuth.instance;
     final firestore = FirebaseFirestore.instance;
     final storage = FirebaseStorage.instance;
-    final firebaseFunctions = FirebaseFunctions.instance;
+    final firebaseFunctions =
+        FirebaseFunctions.instanceFor(region: "europe-west3");
+    final appCheck = FirebaseAppCheck.instance;
 
     i
       ..addLazySingleton(() => firebaseAuth)
       ..addLazySingleton(() => firestore)
       ..addLazySingleton(() => storage)
       ..addLazySingleton(() => firebaseFunctions)
+      ..addLazySingleton(() => appCheck)
       ..addLazySingleton<AuthRepository>(AuthRepositoryImplementation.new)
       ..addLazySingleton<UserRepository>(UserRepositoryImplementation.new)
       ..addLazySingleton<ImageRepository>(ImageRepositoryImplementation.new)
@@ -71,7 +75,6 @@ class AppModule extends Module {
           PageBuilderRepositoryImplementation.new)
       ..addLazySingleton(ProfileObserverBloc.new)
       ..addLazySingleton(PagebuilderCubit.new)
-      ..add(NavigationCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
@@ -90,7 +93,8 @@ class AppModule extends Module {
       ..add(LandingPageObserverCubit.new)
       ..add(LandingPageCubit.new)
       ..add(CompanyRequestCubit.new)
-      ..add(CompanyRequestObserverCubit.new);
+      ..add(CompanyRequestObserverCubit.new)
+      ..add(PagebuilderHoverCubit.new);
   }
 
   @override
