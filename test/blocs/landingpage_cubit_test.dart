@@ -146,6 +146,56 @@ void main() {
     });
   });
 
+  group("LandingPageCubit_ToggleLandingPageActivity", () {
+    const testId = "1";
+    const testIsActive = true;
+    const testUserId = "1";
+    test("should call landingpage repo if function is called", () async {
+      // Given
+      when(mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId))
+          .thenAnswer((_) async => right(unit));
+      // When
+      landingPageCubit.toggleLandingPageActivity(testId, testIsActive, testUserId);
+      await untilCalled(
+          mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId));
+      // Then
+      verify(mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId));
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test(
+        "should emit ToggleLandingPageActivityLoadingState and then ToggleLandingPageActivitySuccessState when function is called",
+        () async {
+      // Given
+      final expectedResult = [
+        ToggleLandingPageActivityLoadingState(),
+        ToggleLandingPageActivitySuccessState(isActive: testIsActive)
+      ];
+      // When
+      when(mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId))
+          .thenAnswer((_) async => right(unit));
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.toggleLandingPageActivity(testId, testIsActive, testUserId);
+    });
+
+    test(
+        "should emit ToggleLandingPageActivityLoadingState and then ToggleLandingPageActivitySuccessState when function is called and there was an error",
+        () async {
+      // Given
+      final expectedResult = [
+        ToggleLandingPageActivityLoadingState(),
+        ToggleLandingPageActivityFailureState(failure: BackendFailure())
+      ];
+      // When
+      when(mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.toggleLandingPageActivity(testId, testIsActive, testUserId);
+    });
+  });
+
   group("LandingPageCubit_DeleteLandingPage", () {
     const testId = "1";
     const testParentUserID = "1";

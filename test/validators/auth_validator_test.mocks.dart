@@ -580,6 +580,53 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_snackbar_success_toggled_enabled =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_snackbar_success_toggled_enabled),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_snackbar_success_toggled_enabled),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_snackbar_success_toggled_disabled =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_snackbar_success_toggled_disabled),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_snackbar_success_toggled_disabled),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_snackbar_failure_toggled => (super.noSuchMethod(
+        Invocation.getter(#landingpage_snackbar_failure_toggled),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_snackbar_failure_toggled),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_context_menu_disable => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_context_menu_disable),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_context_menu_disable),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_context_menu_enable => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_context_menu_enable),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_context_menu_enable),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_max_count_msg => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_max_count_msg),
         returnValue: _i3.dummyValue<String>(
@@ -2644,46 +2691,6 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_pagebuilder_unload_alert_message),
-        ),
-      ) as String);
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_title => (super.noSuchMethod(
-        Invocation.getter(#landingpage_pagebuilder_leave_alert_title),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#landingpage_pagebuilder_leave_alert_title),
-        ),
-      ) as String);
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_message => (super.noSuchMethod(
-        Invocation.getter(#landingpage_pagebuilder_leave_alert_message),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#landingpage_pagebuilder_leave_alert_message),
-        ),
-      ) as String);
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_button_title =>
-      (super.noSuchMethod(
-        Invocation.getter(#landingpage_pagebuilder_leave_alert_button_title),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#landingpage_pagebuilder_leave_alert_button_title),
-        ),
-      ) as String);
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_cancel_button_title =>
-      (super.noSuchMethod(
-        Invocation.getter(
-            #landingpage_pagebuilder_leave_alert_cancel_button_title),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(
-              #landingpage_pagebuilder_leave_alert_cancel_button_title),
         ),
       ) as String);
 
