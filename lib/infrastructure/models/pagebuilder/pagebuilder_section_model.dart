@@ -73,7 +73,7 @@ class PageBuilderSectionModel extends Equatable {
             ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
             : null,
         maxWidth: maxWidth,
-        widgets: _getPageBuilderWidgetList(widgets));
+        widgets: getPageBuilderWidgetList(widgets));
   }
 
   factory PageBuilderSectionModel.fromDomain(PageBuilderSection section) {
@@ -84,10 +84,10 @@ class PageBuilderSectionModel extends Equatable {
             ? section.backgroundColor!.value.toRadixString(16)
             : null,
         maxWidth: section.maxWidth,
-        widgets: _getMapFromPageBuilderWidgetList(section.widgets));
+        widgets: getMapFromPageBuilderWidgetList(section.widgets));
   }
 
-  List<PageBuilderWidget>? _getPageBuilderWidgetList(
+  List<PageBuilderWidget>? getPageBuilderWidgetList(
       List<Map<String, dynamic>>? widgets) {
     if (widgets == null) {
       return null;
@@ -97,7 +97,7 @@ class PageBuilderSectionModel extends Equatable {
     return widgetModels.map((model) => model.toDomain()).toList();
   }
 
-  static List<Map<String, dynamic>>? _getMapFromPageBuilderWidgetList(
+  static List<Map<String, dynamic>>? getMapFromPageBuilderWidgetList(
       List<PageBuilderWidget>? widgets) {
     if (widgets == null) {
       return null;

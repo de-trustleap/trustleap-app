@@ -125,7 +125,7 @@ class PageBuilderWidgetModel extends Equatable {
             ? PageBuilderWidgetType.none
             : PageBuilderWidgetType.values
                 .firstWhere((element) => element.name == elementType),
-        properties: _getPropertiesByType(elementType),
+        properties: getPropertiesByType(elementType),
         children: children?.map((child) => child.toDomain()).toList(),
         containerChild: containerChild?.toDomain(),
         widthPercentage: widthPercentage,
@@ -141,7 +141,7 @@ class PageBuilderWidgetModel extends Equatable {
     return PageBuilderWidgetModel(
         id: widget.id.value,
         elementType: widget.elementType?.name,
-        properties: _getMapFromProperties(widget.properties),
+        properties: getMapFromProperties(widget.properties),
         children: widget.children
             ?.map((child) => PageBuilderWidgetModel.fromDomain(child))
             .toList(),
@@ -152,12 +152,12 @@ class PageBuilderWidgetModel extends Equatable {
         backgroundColor: widget.backgroundColor?.value != null
             ? widget.backgroundColor!.value.toRadixString(16)
             : null,
-        padding: _getMapFromPadding(widget.padding),
+        padding: getMapFromPadding(widget.padding),
         maxWidth: widget.maxWidth,
         alignment: AlignmentMapper.getStringFromAlignment(widget.alignment));
   }
 
-  PageBuilderProperties? _getPropertiesByType(String? type) {
+  PageBuilderProperties? getPropertiesByType(String? type) {
     if (properties == null) {
       return null;
     }
@@ -187,7 +187,7 @@ class PageBuilderWidgetModel extends Equatable {
     }
   }
 
-  static Map<String, dynamic>? _getMapFromProperties(
+  static Map<String, dynamic>? getMapFromProperties(
       PageBuilderProperties? properties) {
     if (properties == null) {
       return null;
@@ -212,7 +212,7 @@ class PageBuilderWidgetModel extends Equatable {
     }
   }
 
-  static Map<String, dynamic>? _getMapFromPadding(PageBuilderPadding? padding) {
+  static Map<String, dynamic>? getMapFromPadding(PageBuilderPadding? padding) {
     if (padding == null) {
       return null;
     }

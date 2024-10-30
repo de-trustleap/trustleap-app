@@ -19,6 +19,7 @@ class PageBuilderButtonView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: properties.width,
+        height: properties.height,
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
             color: properties.backgroundColor,

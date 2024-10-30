@@ -57,7 +57,7 @@ class PageBuilderPageModel extends Equatable {
         backgroundColor: backgroundColor != null
             ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
             : null,
-        sections: _getPageBuilderSectionList(sections));
+        sections: getPageBuilderSectionList(sections));
   }
 
   factory PageBuilderPageModel.fromDomain(PageBuilderPage page) {
@@ -66,10 +66,10 @@ class PageBuilderPageModel extends Equatable {
         backgroundColor: page.backgroundColor?.value != null
             ? page.backgroundColor!.value.toRadixString(16)
             : null,
-        sections: _getMapFromPageBuilderSectionList(page.sections));
+        sections: getMapFromPageBuilderSectionList(page.sections));
   }
 
-  List<PageBuilderSection>? _getPageBuilderSectionList(
+  List<PageBuilderSection>? getPageBuilderSectionList(
       List<Map<String, dynamic>>? sections) {
     if (sections == null) {
       return null;
@@ -79,7 +79,7 @@ class PageBuilderPageModel extends Equatable {
     return sectionModels.map((model) => model.toDomain()).toList();
   }
 
-  static List<Map<String, dynamic>>? _getMapFromPageBuilderSectionList(
+  static List<Map<String, dynamic>>? getMapFromPageBuilderSectionList(
       List<PageBuilderSection>? sections) {
     if (sections == null) {
       return null;
