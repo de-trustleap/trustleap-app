@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   group("PagebuilderContainerPropertiesModel_CopyWith", () {
-    test("set shadow with copyWith should set height for resulting object", () {
+    test("set shadow with copyWith should set shadow for resulting object", () {
       // Given
       final model =
           PageBuilderContainerPropertiesModel(borderRadius: 12.0, shadow: {

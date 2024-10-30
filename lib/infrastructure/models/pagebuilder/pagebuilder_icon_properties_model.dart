@@ -12,9 +12,9 @@ class PageBuilderIconPropertiesModel extends Equatable
   final String? color;
 
   const PageBuilderIconPropertiesModel({
-    this.code,
-    this.size,
-    this.color,
+    required this.code,
+    required this.size,
+    required this.color,
   });
 
   Map<String, dynamic> toMap() {

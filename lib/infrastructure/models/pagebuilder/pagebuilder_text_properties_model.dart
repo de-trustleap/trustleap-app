@@ -17,14 +17,14 @@ class PageBuilderTextPropertiesModel extends Equatable
   final bool? isItalic;
 
   const PageBuilderTextPropertiesModel(
-      {this.text,
-      this.fontSize,
-      this.fontFamily,
-      this.lineHeight,
-      this.color,
-      this.alignment,
-      this.isBold,
-      this.isItalic});
+      {required this.text,
+      required this.fontSize,
+      required this.fontFamily,
+      required this.lineHeight,
+      required this.color,
+      required this.alignment,
+      required this.isBold,
+      required this.isItalic});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -82,7 +82,7 @@ class PageBuilderTextPropertiesModel extends Equatable
         color: color != null
             ? Color(ColorUtility.getHexIntFromString(color!))
             : null,
-        alignment: _getTextAlignFromString(alignment),
+        alignment: getTextAlignFromString(alignment),
         isBold: isBold,
         isItalic: isItalic);
   }
@@ -102,7 +102,7 @@ class PageBuilderTextPropertiesModel extends Equatable
         isItalic: properties.isItalic);
   }
 
-  TextAlign _getTextAlignFromString(String? alignment) {
+  TextAlign getTextAlignFromString(String? alignment) {
     switch (alignment) {
       case "center":
         return TextAlign.center;

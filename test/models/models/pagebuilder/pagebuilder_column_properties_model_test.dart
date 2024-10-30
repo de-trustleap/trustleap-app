@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 void main() {
   group("PagebuilderColumnPropertiesModel_CopyWith", () {
     test(
-        "set mainAxisAlignment with copyWith should set height for resulting object",
+        "set mainAxisAlignment with copyWith should set mainAxisAlignment for resulting object",
         () {
       // Given
       final model = PagebuilderColumnPropertiesModel(

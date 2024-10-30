@@ -924,7 +924,3 @@ void main() {
     });
   });
 }
-
-
-
-// TODO: JSON überprüfen wegen required statt isRequired und minLines statt maxLines und maxLines hinzufügen

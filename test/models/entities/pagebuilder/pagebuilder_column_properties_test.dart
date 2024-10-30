@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 void main() {
   group("PagebuilderColumnProperties_CopyWith", () {
     test(
-        "set mainAxisAlignment with copyWith should set width and borderRadius for resulting object",
+        "set mainAxisAlignment with copyWith should set mainAxisAlignment for resulting object",
         () {
       // Given
       final model = PagebuilderColumnProperties(
