@@ -455,6 +455,36 @@ abstract class AppLocalizations {
   /// **'The landing page was successfully duplicated!'**
   String get landingpage_snackbar_success_duplicated;
 
+  /// The title of the snackbar when a landing page has been deactivated
+  ///
+  /// In en, this message translates to:
+  /// **'The landing page was successfully enabled!'**
+  String get landingpage_snackbar_success_toggled_enabled;
+
+  /// The title of the snackbar when a landing page has been activated
+  ///
+  /// In en, this message translates to:
+  /// **'The landing page was successfully disabled!'**
+  String get landingpage_snackbar_success_toggled_disabled;
+
+  /// The title of the snackbar when an error occurs while toggle the landingpage
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while toggle the landing page'**
+  String get landingpage_snackbar_failure_toggled;
+
+  /// Toggle disable button in the context menu on the landing page overview page
+  ///
+  /// In en, this message translates to:
+  /// **'disable'**
+  String get landingpage_overview_context_menu_disable;
+
+  /// Toggle enable button in the context menu on the landing page overview page
+  ///
+  /// In en, this message translates to:
+  /// **'enable'**
+  String get landingpage_overview_context_menu_enable;
+
   /// The title when the maximum number of landing pages is reached
   ///
   /// In en, this message translates to:

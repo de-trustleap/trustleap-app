@@ -240,6 +240,26 @@
     "@landingpage_snackbar_success_duplicated": {
         "description": "Der Titel der Snackbar wenn eine Landingpage dupliziert wurde"
     },
+    "landingpage_snackbar_success_toggled_enabled": "Die Landingpage wurde erfolgreich aktiviert!",
+    "@landingpage_snackbar_success_toggled_enabled": {
+        "description": "Der Titel der Snackbar wenn eine Landingpage aktiviert wurde"
+    },
+    "landingpage_snackbar_success_toggled_disabled": "Die Landingpage wurde erfolgreich deaktiviert!",
+    "@landingpage_snackbar_success_toggled_disabled": {
+        "description": "Der Titel der Snackbar wenn eine Landingpage aktiviert wurde"
+    },
+    "landingpage_snackbar_failure_toggled": "Beim umstellen der Landingpage ist ein Fehler aufgetreten",
+    "@landingpage_snackbar_failure_toggled": {
+        "description": "Der Titel der Snackbar wenn ein Fehler bei der Umstellung (aktivieren/deaktivieren) der Landingpage auftritt"
+    },
+    "landingpage_overview_context_menu_disable": "deaktivieren",
+    "@landingpage_overview_context_menu_disable": {
+        "description": "Troggle deaktivieren Button im Kontextmenü auf der Landingpage Übersichtsseite"
+    },
+    "landingpage_overview_context_menu_enable": "aktivieren",
+    "@landingpage_overview_context_menu_enable": {
+        "description": "Troggle aktivieren Button im Kontextmenü auf der Landingpage Übersichtsseite"
+    },
     "landingpage_overview_max_count_msg": "Maximale Anzahl an Landingpages wurde erreicht",
     "@landingpage_overview_max_count_msg": {
         "description": "Der Titel wenn die maximala Anzahl an Landingpages erreicht wurde"

@@ -966,6 +966,53 @@ class MockAppLocalizations extends _i1.Mock implements _i18.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_snackbar_success_toggled_enabled =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_snackbar_success_toggled_enabled),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_snackbar_success_toggled_enabled),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_snackbar_success_toggled_disabled =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_snackbar_success_toggled_disabled),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_snackbar_success_toggled_disabled),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_snackbar_failure_toggled => (super.noSuchMethod(
+        Invocation.getter(#landingpage_snackbar_failure_toggled),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_snackbar_failure_toggled),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_context_menu_disable => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_context_menu_disable),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_context_menu_disable),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_context_menu_enable => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_context_menu_enable),
+        returnValue: _i19.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_context_menu_enable),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_max_count_msg => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_max_count_msg),
         returnValue: _i19.dummyValue<String>(
@@ -3034,46 +3081,6 @@ class MockAppLocalizations extends _i1.Mock implements _i18.AppLocalizations {
       ) as String);
 
   @override
-  String get landingpage_pagebuilder_leave_alert_title => (super.noSuchMethod(
-        Invocation.getter(#landingpage_pagebuilder_leave_alert_title),
-        returnValue: _i19.dummyValue<String>(
-          this,
-          Invocation.getter(#landingpage_pagebuilder_leave_alert_title),
-        ),
-      ) as String);
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_message => (super.noSuchMethod(
-        Invocation.getter(#landingpage_pagebuilder_leave_alert_message),
-        returnValue: _i19.dummyValue<String>(
-          this,
-          Invocation.getter(#landingpage_pagebuilder_leave_alert_message),
-        ),
-      ) as String);
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_button_title =>
-      (super.noSuchMethod(
-        Invocation.getter(#landingpage_pagebuilder_leave_alert_button_title),
-        returnValue: _i19.dummyValue<String>(
-          this,
-          Invocation.getter(#landingpage_pagebuilder_leave_alert_button_title),
-        ),
-      ) as String);
-
-  @override
-  String get landingpage_pagebuilder_leave_alert_cancel_button_title =>
-      (super.noSuchMethod(
-        Invocation.getter(
-            #landingpage_pagebuilder_leave_alert_cancel_button_title),
-        returnValue: _i19.dummyValue<String>(
-          this,
-          Invocation.getter(
-              #landingpage_pagebuilder_leave_alert_cancel_button_title),
-        ),
-      ) as String);
-
-  @override
   String promoter_overview_expiration_date(String? date) => (super.noSuchMethod(
         Invocation.method(
           #promoter_overview_expiration_date,
@@ -3679,6 +3686,37 @@ class MockLandingPageRepository extends _i1.Mock
           ),
         )),
       ) as _i14.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i14.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>
+      toggleLandingPageActivity(
+    String? id,
+    bool? isActive,
+    String? userId,
+  ) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #toggleLandingPageActivity,
+              [
+                id,
+                isActive,
+                userId,
+              ],
+            ),
+            returnValue:
+                _i14.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>.value(
+                    _FakeEither_0<_i22.DatabaseFailure, _i2.Unit>(
+              this,
+              Invocation.method(
+                #toggleLandingPageActivity,
+                [
+                  id,
+                  isActive,
+                  userId,
+                ],
+              ),
+            )),
+          ) as _i14.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
 
   @override
   _i14.Future<_i2.Either<_i22.DatabaseFailure, _i29.LandingPage>>
@@ -6783,6 +6821,24 @@ class MockLandingPageCubit extends _i1.Mock implements _i49.LandingPageCubit {
       );
 
   @override
+  void toggleLandingPageActivity(
+    String? id,
+    bool? isActive,
+    String? userId,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #toggleLandingPageActivity,
+          [
+            id,
+            isActive,
+            userId,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void getUser() => super.noSuchMethod(
         Invocation.method(
           #getUser,
@@ -7222,16 +7278,6 @@ class MockFirebaseAuth extends _i1.Mock implements _i3.FirebaseAuth {
       ) as Map<dynamic, dynamic>);
 
   @override
-  _i14.Future<void> useEmulator(String? origin) => (super.noSuchMethod(
-        Invocation.method(
-          #useEmulator,
-          [origin],
-        ),
-        returnValue: _i14.Future<void>.value(),
-        returnValueForMissingStub: _i14.Future<void>.value(),
-      ) as _i14.Future<void>);
-
-  @override
   _i14.Future<void> useAuthEmulator(
     String? host,
     int? port, {
@@ -7571,24 +7617,6 @@ class MockFirebaseAuth extends _i1.Mock implements _i3.FirebaseAuth {
               #email: email,
               #emailLink: emailLink,
             },
-          ),
-        )),
-      ) as _i14.Future<_i3.UserCredential>);
-
-  @override
-  _i14.Future<_i3.UserCredential> signInWithAuthProvider(
-          _i3.AuthProvider? provider) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #signInWithAuthProvider,
-          [provider],
-        ),
-        returnValue:
-            _i14.Future<_i3.UserCredential>.value(_FakeUserCredential_5(
-          this,
-          Invocation.method(
-            #signInWithAuthProvider,
-            [provider],
           ),
         )),
       ) as _i14.Future<_i3.UserCredential>);
@@ -8256,24 +8284,6 @@ class MockFirebaseStorage extends _i1.Mock implements _i15.FirebaseStorage {
         ),
         returnValueForMissingStub: null,
       );
-
-  @override
-  _i14.Future<void> useEmulator({
-    required String? host,
-    required int? port,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #useEmulator,
-          [],
-          {
-            #host: host,
-            #port: port,
-          },
-        ),
-        returnValue: _i14.Future<void>.value(),
-        returnValueForMissingStub: _i14.Future<void>.value(),
-      ) as _i14.Future<void>);
 
   @override
   _i14.Future<void> useStorageEmulator(

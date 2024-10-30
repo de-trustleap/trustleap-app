@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
@@ -49,7 +50,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   bool validationHasError = false;
   String? reasonValid;
   bool promoterTextFieldDisabled = false;
-  List<String> reasons = [];
+  List<RecommendationReason> reasons = [];
 
   @override
   void initState() {
@@ -121,6 +122,16 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
             "${parentUser!.firstName} ${parentUser!.lastName}";
       });
     }
+  }
+
+  String _getReasonValues() {
+    return selectedReason ??
+    reasons.firstWhere(
+      (element) {
+        return element.isActive == true;
+      },
+      orElse: () => const RecommendationReason(reason: "null", isActive: null),
+    ).reason as String;
   }
 
   void generateRecommendation() {
@@ -226,7 +237,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                             const Spacer(),
                             IconButton(
                                 onPressed: () => addLead(validator),
-                                tooltip: localization.recommendations_form_add_button_tooltip,
+                                tooltip: localization
+                                    .recommendations_form_add_button_tooltip,
                                 icon: const Icon(Icons.add_circle),
                                 iconSize: 48,
                                 color: themeData.colorScheme.secondary)
@@ -254,7 +266,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                   width: maxWidth,
                                   validate: reasonValid,
                                   reasons: reasons,
-                                  initialValue: selectedReason ?? reasons[0],
+                                  initialValue: _getReasonValues(),
                                   onSelected: (reason) {
                                     setState(() {
                                       reasonValid =

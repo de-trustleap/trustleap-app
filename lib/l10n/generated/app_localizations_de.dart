@@ -187,6 +187,21 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_snackbar_success_duplicated => 'Die Landingpage wurde erfolgreich dupliziert!';
 
   @override
+  String get landingpage_snackbar_success_toggled_enabled => 'Die Landingpage wurde erfolgreich aktiviert!';
+
+  @override
+  String get landingpage_snackbar_success_toggled_disabled => 'Die Landingpage wurde erfolgreich deaktiviert!';
+
+  @override
+  String get landingpage_snackbar_failure_toggled => 'Beim umstellen der Landingpage ist ein Fehler aufgetreten';
+
+  @override
+  String get landingpage_overview_context_menu_disable => 'deaktivieren';
+
+  @override
+  String get landingpage_overview_context_menu_enable => 'aktivieren';
+
+  @override
   String get landingpage_overview_max_count_msg => 'Maximale Anzahl an Landingpages wurde erreicht';
 
   @override

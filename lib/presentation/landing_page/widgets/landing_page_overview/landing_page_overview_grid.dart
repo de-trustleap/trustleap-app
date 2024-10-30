@@ -15,12 +15,14 @@ class LandingPageOverviewGrid extends StatelessWidget {
   final CustomUser user;
   final Function(String, String) deletePressed;
   final Function(String) duplicatePressed;
+  final Function(String, bool) isActivePressed;
   const LandingPageOverviewGrid(
       {super.key,
       required this.landingpages,
       required this.user,
       required this.deletePressed,
-      required this.duplicatePressed});
+      required this.duplicatePressed,
+      required this.isActivePressed});
 
   final maxLandingPageCount = 11;
 
@@ -80,7 +82,8 @@ class LandingPageOverviewGrid extends StatelessWidget {
                                   isDuplicationAllowed:
                                       landingpages.length < maxLandingPageCount,
                                   deletePressed: deletePressed,
-                                  duplicatePressed: duplicatePressed))),
+                                  duplicatePressed: duplicatePressed,
+                                  isActivePressed: isActivePressed))),
                 ),
               );
             })),

@@ -22,5 +22,7 @@ abstract class LandingPageRepository {
 
   Future<Either<DatabaseFailure, Unit>> duplicateLandingPage(String id);
 
+  Future<Either<DatabaseFailure, Unit>> toggleLandingPageActivity(String id, bool isActive, String userId);
+      
   Future<Either<DatabaseFailure, LandingPage>> getLandingPage(String id);
 }

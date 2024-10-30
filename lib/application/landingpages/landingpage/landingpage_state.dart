@@ -1,78 +1,159 @@
 part of 'landingpage_cubit.dart';
 
-sealed class LandingPageState extends Equatable {
-  const LandingPageState();
+sealed class LandingPageState {}
 
+final class LandingPageInitial extends LandingPageState with EquatableMixin {
   @override
   List<Object> get props => [];
 }
 
-final class LandingPageInitial extends LandingPageState {}
-
-final class LandingPageShowValidationState extends LandingPageState {}
-
-final class CreateLandingPageLoadingState extends LandingPageState {}
-
-final class CreateLandingPageFailureState extends LandingPageState {
-  final DatabaseFailure failure;
-
-  const CreateLandingPageFailureState({
-    required this.failure,
-  });
+class LandingPageShowValidationState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
 }
 
-final class CreatedLandingPageSuccessState extends LandingPageState {}
+class CreateLandingPageLoadingState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
 
-final class GetUserSuccessState extends LandingPageState {
+class CreateLandingPageFailureState extends LandingPageState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+
+  CreateLandingPageFailureState({
+    required this.failure,
+  });
+
+  @override
+  List<Object> get props => [failure];
+}
+
+class CreatedLandingPageSuccessState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
+class GetUserSuccessState extends LandingPageState with EquatableMixin {
   final CustomUser user;
-  const GetUserSuccessState({
+  GetUserSuccessState({
     required this.user,
   });
+  @override
+  List<Object> get props => [user];
 }
 
-final class GetUserLoadingState extends LandingPageState {}
+class GetUserLoadingState extends LandingPageState with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
 
-final class GetUserFailureState extends LandingPageState {
+class GetUserFailureState extends LandingPageState with EquatableMixin {
   final DatabaseFailure failure;
-  const GetUserFailureState({
+  GetUserFailureState({
     required this.failure,
   });
+  @override
+  List<Object> get props => [failure];
 }
 
-final class DeleteLandingPageLoadingState extends LandingPageState {}
+class DeleteLandingPageLoadingState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
 
-final class DeleteLandingPageFailureState extends LandingPageState {
+class DeleteLandingPageFailureState extends LandingPageState
+    with EquatableMixin {
   final DatabaseFailure failure;
-  const DeleteLandingPageFailureState({
+  DeleteLandingPageFailureState({
     required this.failure,
   });
+  @override
+  List<Object> get props => [failure];
 }
 
-final class DeleteLandingPageSuccessState extends LandingPageState {}
+class DeleteLandingPageSuccessState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
 
-final class EditLandingPageLoadingState extends LandingPageState {}
+class EditLandingPageLoadingState extends LandingPageState with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
 
-final class EditLandingPageFailureState extends LandingPageState {
+class EditLandingPageFailureState extends LandingPageState with EquatableMixin {
   final DatabaseFailure failure;
-  const EditLandingPageFailureState({
+  EditLandingPageFailureState({
     required this.failure,
   });
+  @override
+  List<Object> get props => [failure];
 }
 
-final class EditLandingPageSuccessState extends LandingPageState {}
+class EditLandingPageSuccessState extends LandingPageState with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
 
-final class LandingPageImageExceedsFileSizeLimitFailureState
+class LandingPageImageExceedsFileSizeLimitFailureState
     extends LandingPageState {}
 
-final class LandingPageNoImageFailureState extends LandingPageState {}
-
-final class DuplicateLandingPageLoadingState extends LandingPageState {}
-
-final class DuplicateLandingPageFailureState extends LandingPageState {
-  final DatabaseFailure failure;
-  const DuplicateLandingPageFailureState({
-    required this.failure,
-  });
+class LandingPageNoImageFailureState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
 }
 
-final class DuplicateLandingPageSuccessState extends LandingPageState {}
+class DuplicateLandingPageLoadingState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
+class DuplicateLandingPageFailureState extends LandingPageState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+  DuplicateLandingPageFailureState({
+    required this.failure,
+  });
+  @override
+  List<Object> get props => [failure];
+}
+
+class DuplicateLandingPageSuccessState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
+class ToggleLandingPageActivityLoadingState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
+class ToggleLandingPageActivityFailureState extends LandingPageState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+  ToggleLandingPageActivityFailureState({
+    required this.failure,
+  });
+  @override
+  List<Object> get props => [failure];
+}
+
+class ToggleLandingPageActivitySuccessState extends LandingPageState
+    with EquatableMixin {
+  final bool isActive;
+  ToggleLandingPageActivitySuccessState({
+    required this.isActive,
+  });
+  @override
+  List<Object> get props => [isActive];
+}

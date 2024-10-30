@@ -32,6 +32,10 @@ class LandingPageOverview extends StatelessWidget {
       BlocProvider.of<LandingPageCubit>(context).duplicateLandingPage(id);
     }
 
+    void submitIsActive(String id, bool isActive, String userId) {
+      BlocProvider.of<LandingPageCubit>(context).toggleLandingPageActivity(id, isActive, userId);
+    }
+
     void showDeleteAlert(String id, parentUserID) {
       showDialog(
           context: context,
@@ -54,13 +58,22 @@ class LandingPageOverview extends StatelessWidget {
         } else if (state is DuplicateLandingPageSuccessState) {
           CustomSnackBar.of(context).showCustomSnackBar(
               localization.landingpage_snackbar_success_duplicated);
+        } else if (state is ToggleLandingPageActivitySuccessState) {
+            CustomSnackBar.of(context).showCustomSnackBar(
+              state.isActive == true ? localization.landingpage_snackbar_success_toggled_enabled : localization.landingpage_snackbar_success_toggled_disabled
+            );
+        } else if (state is ToggleLandingPageActivityFailureState) {
+            CustomSnackBar.of(context).showCustomSnackBar(
+              localization.landingpage_snackbar_failure_toggled, SnackBarType.failure
+            );
         }
       },
       builder: (context, state) {
         return BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(
           builder: (context, observerState) {
             if (state is DeleteLandingPageLoadingState ||
-                state is DuplicateLandingPageLoadingState) {
+                state is DuplicateLandingPageLoadingState ||
+                state is ToggleLandingPageActivityLoadingState) {
               return const LoadingIndicator();
             } else if (observerState is LandingPageObserverSuccess) {
               if (observerState.landingPages.isEmpty) {
@@ -89,7 +102,9 @@ class LandingPageOverview extends StatelessWidget {
                             deletePressed: (landingPageID, parentUserID) =>
                                 showDeleteAlert(landingPageID, parentUserID),
                             duplicatePressed: (landinPageID) =>
-                                submitDuplication(landinPageID))
+                                submitDuplication(landinPageID),
+                            isActivePressed: (landinPageID, landingPageIsActive) =>
+                                submitIsActive(landinPageID, landingPageIsActive, observerState.user.id.value))
                       ],
                     ));
               }

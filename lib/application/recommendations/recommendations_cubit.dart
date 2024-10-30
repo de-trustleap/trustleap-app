@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
@@ -52,8 +53,11 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
           (failure) =>
               emit(RecommendationGetReasonsFailureState(failure: failure)),
           (landingPages) {
-        final reasons = landingPages.map((e) => e.name).toList();
-        final reasonsWithoutNullValues = reasons.whereType<String>().toList();
+        final reasons = landingPages
+            .map((e) =>
+                RecommendationReason(reason: e.name, isActive: e.isActive))
+            .toList();
+        final reasonsWithoutNullValues = reasons.toList();
         emit(RecommendationGetReasonsSuccessState(
             reasons: reasonsWithoutNullValues));
       });
