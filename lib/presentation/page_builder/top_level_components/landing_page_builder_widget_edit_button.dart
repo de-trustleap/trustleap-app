@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class LandingPageBuilderWidgetEditButton extends StatelessWidget {
-  const LandingPageBuilderWidgetEditButton({super.key});
+  final Function onPressed;
+  const LandingPageBuilderWidgetEditButton(
+      {super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class LandingPageBuilderWidgetEditButton extends StatelessWidget {
         child: Center(
           child: IconButton(
             onPressed: () {
-              print("PRESSED WIDGET");
+              onPressed();
             },
             padding: EdgeInsets.zero,
             icon: const Icon(Icons.edit, color: Colors.white, size: 16),

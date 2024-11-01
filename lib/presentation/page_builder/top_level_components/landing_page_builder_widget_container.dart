@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_edit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageBuilderWidgetContainer extends StatefulWidget {
   final PageBuilderContainerProperties? properties;
@@ -29,7 +31,6 @@ class _LandingPageBuilderWidgetContainerState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final widgetID = widget.model.id.value;
-
     return BlocBuilder<PagebuilderHoverCubit, String?>(
       builder: (context, hoveredWidgetId) {
         final isHovered = hoveredWidgetId == widgetID;
@@ -95,7 +96,10 @@ class _LandingPageBuilderWidgetContainerState
                     ),
                   ),
                   if (isHovered) ...[
-                    const LandingPageBuilderWidgetEditButton()
+                    LandingPageBuilderWidgetEditButton(onPressed: () {
+                      Modular.get<PagebuilderConfigMenuCubit>()
+                          .openConfigMenu(widget.model);
+                    })
                   ],
                 ],
               ),

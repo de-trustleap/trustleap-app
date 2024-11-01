@@ -110,8 +110,8 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                   appBar: LandingPageBuilderAppBar(
                       content: state.content, isLoading: state.saveLoading),
                   body: state.content.content != null
-                      ? LandingPageBuilderPageBuilder()
-                          .buildPage(state.content.content!)
+                      ? LandingPageBuilderPageBuilder(
+                          model: state.content.content!)
                       : const Text("FEHLER!"));
             }
           } else {
