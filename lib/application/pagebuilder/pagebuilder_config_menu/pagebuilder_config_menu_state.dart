@@ -10,10 +10,12 @@ final class PagebuilderConfigMenuInitial extends PagebuilderConfigMenuState
 
 final class PageBuilderConfigMenuOpenedState extends PagebuilderConfigMenuState
     with EquatableMixin {
+  // id is needed here to make sure that the blocbuilder reloads when models are the same.
+  final UniqueID id;
   final PageBuilderWidget model;
 
-  PageBuilderConfigMenuOpenedState({required this.model});
+  PageBuilderConfigMenuOpenedState({required this.id, required this.model});
 
   @override
-  List<Object?> get props => [model];
+  List<Object?> get props => [id, model];
 }

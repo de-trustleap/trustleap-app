@@ -1786,6 +1786,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Do you really want to leave the site? Changes that are not saved will be lost.'**
   String get landingpage_pagebuilder_unload_alert_message;
+
+  /// Container title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Container'**
+  String get landingpage_pagebuilder_config_menu_container_type;
+
+  /// Column title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Column'**
+  String get landingpage_pagebuilder_config_menu_column_type;
+
+  /// Row title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Row'**
+  String get landingpage_pagebuilder_config_menu_row_type;
+
+  /// Text title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get landingpage_pagebuilder_config_menu_text_type;
+
+  /// Image title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Image'**
+  String get landingpage_pagebuilder_config_menu_image_type;
+
+  /// Icon title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Icon'**
+  String get landingpage_pagebuilder_config_menu_icon_type;
+
+  /// Button title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Button'**
+  String get landingpage_pagebuilder_config_menu_button_type;
+
+  /// Contact form title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Form'**
+  String get landingpage_pagebuilder_config_menu_contact_form_type;
+
+  /// Unknown title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get landingpage_pagebuilder_config_menu_unknown_type;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

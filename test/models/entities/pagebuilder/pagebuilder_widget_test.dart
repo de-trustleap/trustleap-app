@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
 
@@ -47,6 +48,72 @@ void main() {
               equalHeights: null,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center));
+      // Then
+      expect(result, expectedResult);
+    });
+  });
+
+  group("PagebuilderWidget_GetWidgetTitle", () {
+    test("test if column type returns column string", () {
+      // Given
+      final model = PageBuilderWidget(
+          id: UniqueID.fromUniqueString("1"),
+          elementType: PageBuilderWidgetType.column,
+          properties: PagebuilderColumnProperties(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center),
+          children: [],
+          containerChild: null,
+          widthPercentage: null,
+          backgroundColor: null,
+          padding: null,
+          maxWidth: null,
+          alignment: null);
+      final expectedResult = "Spalte";
+      // When
+      final result = model.getWidgetTitle();
+      // Then
+      expect(result, expectedResult);
+    });
+
+    test("test if icon type returns icon string", () {
+      // Given
+      final model = PageBuilderWidget(
+          id: UniqueID.fromUniqueString("1"),
+          elementType: PageBuilderWidgetType.icon,
+          properties: PageBuilderIconProperties(
+              code: "55", size: 24, color: Colors.black),
+          children: [],
+          containerChild: null,
+          widthPercentage: null,
+          backgroundColor: null,
+          padding: null,
+          maxWidth: null,
+          alignment: null);
+      final expectedResult = "Icon";
+      // When
+      final result = model.getWidgetTitle();
+      // Then
+      expect(result, expectedResult);
+    });
+
+    test("test if unkown type returns unknown string", () {
+      // Given
+      final model = PageBuilderWidget(
+          id: UniqueID.fromUniqueString("1"),
+          elementType: PageBuilderWidgetType.none,
+          properties: PageBuilderIconProperties(
+              code: "55", size: 24, color: Colors.black),
+          children: [],
+          containerChild: null,
+          widthPercentage: null,
+          backgroundColor: null,
+          padding: null,
+          maxWidth: null,
+          alignment: null);
+      final expectedResult = "Unbekannt";
+      // When
+      final result = model.getWidgetTitle();
       // Then
       expect(result, expectedResult);
     });
