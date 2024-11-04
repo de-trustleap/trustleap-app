@@ -6,8 +6,16 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_prop
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:mockito/mockito.dart';
+import '../../../mocks.mocks.dart';
 
 void main() {
+  late MockAppLocalizations mockLocalizations;
+
+  setUp(() {
+    mockLocalizations = MockAppLocalizations();
+  });
+
   group("PagebuilderWidget_CopyWith", () {
     test(
         "set elementType and properties with copyWith should set elementType and properties for resulting object",
@@ -70,8 +78,10 @@ void main() {
           maxWidth: null,
           alignment: null);
       final expectedResult = "Spalte";
+      when(mockLocalizations.landingpage_pagebuilder_config_menu_column_type)
+          .thenReturn("Spalte");
       // When
-      final result = model.getWidgetTitle();
+      final result = model.getWidgetTitle(mockLocalizations);
       // Then
       expect(result, expectedResult);
     });
@@ -91,8 +101,10 @@ void main() {
           maxWidth: null,
           alignment: null);
       final expectedResult = "Icon";
+      when(mockLocalizations.landingpage_pagebuilder_config_menu_icon_type)
+          .thenReturn("Icon");
       // When
-      final result = model.getWidgetTitle();
+      final result = model.getWidgetTitle(mockLocalizations);
       // Then
       expect(result, expectedResult);
     });
@@ -112,8 +124,10 @@ void main() {
           maxWidth: null,
           alignment: null);
       final expectedResult = "Unbekannt";
+      when(mockLocalizations.landingpage_pagebuilder_config_menu_unknown_type)
+          .thenReturn("Unbekannt");
       // When
-      final result = model.getWidgetTitle();
+      final result = model.getWidgetTitle(mockLocalizations);
       // Then
       expect(result, expectedResult);
     });

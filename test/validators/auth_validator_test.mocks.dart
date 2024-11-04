@@ -2695,6 +2695,99 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_config_menu_container_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_container_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_config_menu_container_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_column_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_column_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_column_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_row_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_row_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_row_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_text_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_text_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_text_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_image_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_image_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_image_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_icon_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_icon_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_icon_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_button_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_button_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_button_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_contact_form_type =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_config_menu_contact_form_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_config_menu_contact_form_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_unknown_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_unknown_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_unknown_type),
+        ),
+      ) as String);
+
+  @override
   String promoter_overview_expiration_date(String? date) => (super.noSuchMethod(
         Invocation.method(
           #promoter_overview_expiration_date,
