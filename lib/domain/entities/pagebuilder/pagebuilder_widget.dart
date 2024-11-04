@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 abstract class PageBuilderProperties {}
@@ -53,6 +54,28 @@ class PageBuilderWidget extends Equatable {
         padding: padding ?? this.padding,
         maxWidth: maxWidth ?? this.maxWidth,
         alignment: alignment ?? this.alignment);
+  }
+
+  String getWidgetTitle(AppLocalizations localization) {
+    switch (elementType) {
+      case == PageBuilderWidgetType.container:
+        return localization.landingpage_pagebuilder_config_menu_container_type;
+      case == PageBuilderWidgetType.column:
+        return localization.landingpage_pagebuilder_config_menu_column_type;
+      case == PageBuilderWidgetType.row:
+        return localization.landingpage_pagebuilder_config_menu_row_type;
+      case == PageBuilderWidgetType.text:
+        return localization.landingpage_pagebuilder_config_menu_text_type;
+      case == PageBuilderWidgetType.image:
+        return localization.landingpage_pagebuilder_config_menu_image_type;
+      case == PageBuilderWidgetType.icon:
+        return localization.landingpage_pagebuilder_config_menu_icon_type;
+      case == PageBuilderWidgetType.button:
+        return localization.landingpage_pagebuilder_config_menu_button_type;
+      case == PageBuilderWidgetType.contactForm:
+        return localization.landingpage_pagebuilder_config_menu_contact_form_type;
+      default: return localization.landingpage_pagebuilder_config_menu_unknown_type;
+    }
   }
 
   @override

@@ -1139,5 +1139,41 @@
     "landingpage_pagebuilder_unload_alert_message": "Do you really want to leave the site? Changes that are not saved will be lost.",
     "@landingpage_pagebuilder_unload_alert_message": {
         "description": "Error message for the alert on the page builder page, which is called when you want to leave the page and have not saved."
+    },
+    "landingpage_pagebuilder_config_menu_container_type": "Container",
+    "@landingpage_pagebuilder_config_menu_container_type": {
+        "description": "Container title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_column_type": "Column",
+    "@landingpage_pagebuilder_config_menu_column_type": {
+        "description": "Column title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_row_type": "Row",
+    "@landingpage_pagebuilder_config_menu_row_type": {
+        "description": "Row title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_text_type": "Text",
+    "@landingpage_pagebuilder_config_menu_text_type": {
+        "description": "Text title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_image_type": "Image",
+    "@landingpage_pagebuilder_config_menu_image_type": {
+        "description": "Image title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_icon_type": "Icon",
+    "@landingpage_pagebuilder_config_menu_icon_type": {
+        "description": "Icon title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_button_type": "Button",
+    "@landingpage_pagebuilder_config_menu_button_type": {
+        "description": "Button title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_contact_form_type": "Contact Form",
+    "@landingpage_pagebuilder_config_menu_contact_form_type": {
+        "description": "Contact form title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_unknown_type": "Unknown",
+    "@landingpage_pagebuilder_config_menu_unknown_type": {
+        "description": "Unknown title in the pagebuilder config menu"
     }
 }

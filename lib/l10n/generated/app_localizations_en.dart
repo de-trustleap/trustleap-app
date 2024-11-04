@@ -855,4 +855,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_unload_alert_message => 'Do you really want to leave the site? Changes that are not saved will be lost.';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_container_type => 'Container';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_column_type => 'Column';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_row_type => 'Row';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_text_type => 'Text';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_image_type => 'Image';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_icon_type => 'Icon';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_button_type => 'Button';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_contact_form_type => 'Contact Form';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_unknown_type => 'Unknown';
 }

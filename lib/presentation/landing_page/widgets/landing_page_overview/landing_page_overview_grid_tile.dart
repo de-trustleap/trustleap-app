@@ -46,7 +46,6 @@ class LandingPageOverviewGridTile extends StatelessWidget {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localizations = AppLocalizations.of(context);
-    //final isTroggleEnabled = landingPage.ownerID == ;
 
     if (landingPage.ownerID == user.id) {
       return InkWell(
@@ -70,8 +69,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
           color: (landingPage.isDefaultPage ?? false)
               ? themeData.colorScheme.primary
               : themeData.colorScheme.surface,
-          border: Border.all(color: const Color.fromARGB(0, 255, 0, 0)),
-          //border: Border.all(color: Colors.transparent),
+          border: Border.all(color: Colors.transparent),
           borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Padding(
           padding: const EdgeInsets.all(4),
@@ -101,7 +99,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                       const Spacer(),
                       IconButton(
                           onPressed: () {
-                           CustomNavigator.navigate(
+                            CustomNavigator.navigate(
                                 "${RoutePaths.homePath}${RoutePaths.landingPagePath}/${landingPage.id.value}",
                                 arguments: landingPage);
                           },
@@ -173,8 +171,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                             const SizedBox(width: 8),
                                             Text(
                                                 (landingPage.isActive ?? false)
-                                                    ? localizations.landingpage_overview_context_menu_disable
-                                                    : localizations.landingpage_overview_context_menu_enable,
+                                                    ? localizations
+                                                        .landingpage_overview_context_menu_disable
+                                                    : localizations
+                                                        .landingpage_overview_context_menu_enable,
                                                 style: responsiveValue.isMobile
                                                     ? themeData
                                                         .textTheme.bodySmall

@@ -1139,5 +1139,41 @@
     "landingpage_pagebuilder_unload_alert_message": "Willst du die Seite wirklich verlassen? Nicht gespeicherte Änderungen gehen verloren.",
     "@landingpage_pagebuilder_unload_alert_message": {
         "description": "Fehlermeldung für den Alert auf der Pagebuilder Seite, der aufgerufen wird wenn man die Seite verlassen möchte und nicht gespeichert hat."
+    },
+    "landingpage_pagebuilder_config_menu_container_type": "Container",
+    "@landingpage_pagebuilder_config_menu_container_type": {
+        "description": "Container Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_column_type": "Spalte",
+    "@landingpage_pagebuilder_config_menu_column_type": {
+        "description": "Spalte Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_row_type": "Reihe",
+    "@landingpage_pagebuilder_config_menu_row_type": {
+        "description": "Reihe Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_text_type": "Text",
+    "@landingpage_pagebuilder_config_menu_text_type": {
+        "description": "Text Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_image_type": "Bild",
+    "@landingpage_pagebuilder_config_menu_image_type": {
+        "description": "Bild Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_icon_type": "Icon",
+    "@landingpage_pagebuilder_config_menu_icon_type": {
+        "description": "Icon Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_button_type": "Button",
+    "@landingpage_pagebuilder_config_menu_button_type": {
+        "description": "Button Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_contact_form_type": "Kontaktformular",
+    "@landingpage_pagebuilder_config_menu_contact_form_type": {
+        "description": "Kontaktformular Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_unknown_type": "Unbekannt",
+    "@landingpage_pagebuilder_config_menu_unknown_type": {
+        "description": "Unbekannt Titel im Pagebuilder Config Menü"
     }
 }
