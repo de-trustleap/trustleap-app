@@ -25,6 +25,10 @@ class CollapsibleTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          Container(
+                              height: 0.8,
+                              color: themeData.textTheme.bodyMedium!.color),
+                          SizedBox(height: 16),
                           Text("Das hier ist der zugehörige Text",
                               style: themeData.textTheme.bodySmall),
                           SizedBox(height: 50),
