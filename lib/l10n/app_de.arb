@@ -1175,5 +1175,25 @@
     "landingpage_pagebuilder_config_menu_unknown_type": "Unbekannt",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unbekannt Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_text_config_alignment": "Ausrichtung",
+    "@landingpage_pagebuilder_text_config_alignment": {
+        "description": "Menüpunkt in der Pagebuilder Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_left": "linksbündig",
+    "@landingpage_pagebuilder_text_config_alignment_left": {
+        "description": "Tooltip für left alignment Button in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_center": "zentriert",
+    "@landingpage_pagebuilder_text_config_alignment_center": {
+        "description": "Tooltip für center alignment Button in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_right": "rechtsbündig",
+    "@landingpage_pagebuilder_text_config_alignment_right": {
+        "description": "Tooltip für right alignment Button in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_justify": "Blocksatz",
+    "@landingpage_pagebuilder_text_config_alignment_justify": {
+        "description": "Tooltip für Blocksatz alignment Button in der Text Konfiguration"
     }
 }

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class LandingPageBuilderConfigMenuHeader extends StatelessWidget {
   final String title;
+  final String id;
   final Function closePressed;
   const LandingPageBuilderConfigMenuHeader(
-      {super.key, required this.title, required this.closePressed});
+      {super.key, required this.title, required this.id, required this.closePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class LandingPageBuilderConfigMenuHeader extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-              child: Text(title, style: themeData.textTheme.bodyLarge, overflow: TextOverflow.ellipsis)),
+              child: Text("$title $id", style: themeData.textTheme.bodyLarge, overflow: TextOverflow.ellipsis)),
           SizedBox(
             width: 36,
             height: 36,

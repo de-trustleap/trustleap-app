@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class CollapsibleTile extends StatelessWidget {
   final String title;
-  const CollapsibleTile({super.key, required this.title});
+  final List<Widget> children;
+  const CollapsibleTile(
+      {super.key, required this.title, required this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +31,8 @@ class CollapsibleTile extends StatelessWidget {
                               height: 0.8,
                               color: themeData.textTheme.bodyMedium!.color),
                           SizedBox(height: 16),
-                          Text("Das hier ist der zugehörige Text",
-                              style: themeData.textTheme.bodySmall),
-                          SizedBox(height: 50),
-                          Text(
-                              "Noch ein Text mit noch mehr Inhalt als der Text davor..",
-                              style: themeData.textTheme.bodySmall)
+                          ...children,
+                          SizedBox(height: 16),
                         ]))
               ],
             )));

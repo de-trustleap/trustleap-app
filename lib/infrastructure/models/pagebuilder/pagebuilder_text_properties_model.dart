@@ -108,6 +108,8 @@ class PageBuilderTextPropertiesModel extends Equatable
         return TextAlign.center;
       case "right":
         return TextAlign.right;
+      case "justify":
+        return TextAlign.justify;
       case "left":
       default:
         return TextAlign.left;

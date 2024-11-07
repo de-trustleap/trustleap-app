@@ -19,7 +19,7 @@ class LandingPageBuilderConfigMenu extends StatefulWidget {
 
 class _LandingPageBuilderConfigMenuState
     extends State<LandingPageBuilderConfigMenu> {
-  final menuWidth = 300.0;
+  final menuWidth = 400.0;
   final animationDuration = 100;
 
   @override
