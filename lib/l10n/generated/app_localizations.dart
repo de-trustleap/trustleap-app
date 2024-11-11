@@ -1840,6 +1840,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown'**
   String get landingpage_pagebuilder_config_menu_unknown_type;
+
+  /// menu entry in the pagebuilder text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment'**
+  String get landingpage_pagebuilder_text_config_alignment;
+
+  /// Tooltip for left alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'left-align'**
+  String get landingpage_pagebuilder_text_config_alignment_left;
+
+  /// Tooltip for center alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'center'**
+  String get landingpage_pagebuilder_text_config_alignment_center;
+
+  /// Tooltip for right alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'right-align'**
+  String get landingpage_pagebuilder_text_config_alignment_right;
+
+  /// Tooltip for justify alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'justify'**
+  String get landingpage_pagebuilder_text_config_alignment_justify;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

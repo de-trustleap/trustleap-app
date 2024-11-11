@@ -15,3 +15,4 @@ class TextStyleParser {
             properties?.isItalic == true ? FontStyle.italic : FontStyle.normal);
   }
 }
+// TODO: Hier height Fallback auf 1.0 setzen und dann in der JSON überall 1.5 eintragen.

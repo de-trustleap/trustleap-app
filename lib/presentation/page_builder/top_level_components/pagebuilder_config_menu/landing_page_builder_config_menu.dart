@@ -6,11 +6,13 @@ class LandingPageBuilderConfigMenu extends StatefulWidget {
   final bool isOpen;
   final PageBuilderWidget model;
   final Function closeMenu;
-  const LandingPageBuilderConfigMenu(
-      {super.key,
-      required this.isOpen,
-      required this.model,
-      required this.closeMenu});
+
+  const LandingPageBuilderConfigMenu({
+    super.key,
+    required this.isOpen,
+    required this.model,
+    required this.closeMenu,
+  });
 
   @override
   State<LandingPageBuilderConfigMenu> createState() =>
@@ -19,22 +21,37 @@ class LandingPageBuilderConfigMenu extends StatefulWidget {
 
 class _LandingPageBuilderConfigMenuState
     extends State<LandingPageBuilderConfigMenu> {
-  final menuWidth = 300.0;
+  final menuWidth = 400.0;
   final animationDuration = 100;
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    return AnimatedContainer(
-        duration: Duration(milliseconds: animationDuration),
-        width: widget.isOpen ? menuWidth : 0,
-        color: themeData.colorScheme.surface,
-        child: widget.isOpen
-            ? LandingPageBuilderConfigMenuContent(
+
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: animationDuration),
+      transitionBuilder: (Widget child, Animation<double> animation) {
+        return SizeTransition(
+          axis: Axis.horizontal,
+          sizeFactor: animation,
+          child: child,
+        );
+      },
+      child: widget.isOpen
+          ? Container(
+              key: ValueKey<bool>(widget.isOpen),
+              width: menuWidth,
+              color: themeData.colorScheme.surface,
+              child: LandingPageBuilderConfigMenuContent(
                 animationDuration: animationDuration,
                 menuWidth: menuWidth,
                 model: widget.model,
-                closeMenu: widget.closeMenu)
-            : SizedBox.shrink());
+                closeMenu: widget.closeMenu,
+              ),
+            )
+          : SizedBox.shrink(
+              key: ValueKey<bool>(widget.isOpen),
+            ),
+    );
   }
 }

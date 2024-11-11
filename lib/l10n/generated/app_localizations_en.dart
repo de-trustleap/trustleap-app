@@ -882,4 +882,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unknown';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment => 'Alignment';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_left => 'left-align';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_center => 'center';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_right => 'right-align';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_justify => 'justify';
 }
