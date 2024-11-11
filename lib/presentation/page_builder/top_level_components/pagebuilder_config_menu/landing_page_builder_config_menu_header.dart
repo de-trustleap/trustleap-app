@@ -17,7 +17,9 @@ class LandingPageBuilderConfigMenuHeader extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-              child: Text(title, style: themeData.textTheme.bodyLarge, overflow: TextOverflow.ellipsis)),
+              child: Text(title,
+                  style: themeData.textTheme.bodyLarge,
+                  overflow: TextOverflow.ellipsis)),
           SizedBox(
             width: 36,
             height: 36,
