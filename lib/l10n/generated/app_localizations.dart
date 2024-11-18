@@ -1870,6 +1870,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'justify'**
   String get landingpage_pagebuilder_text_config_alignment_justify;
+
+  /// Text for line height in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Line height'**
+  String get landingpage_pagebuilder_text_config_lineheight;
+
+  /// Text for letter spacing in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Letter spacing'**
+  String get landingpage_pagebuilder_text_config_letterspacing;
+
+  /// Text for color in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text color'**
+  String get landingpage_pagebuilder_text_config_color;
+
+  /// Text for font family in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Font family'**
+  String get landingpage_pagebuilder_text_config_font_family;
+
+  /// Text for text shadow in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text shadow'**
+  String get landingpage_pagebuilder_text_config_shadow;
+
+  /// Title for text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Configure shadow'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_title;
+
+  /// Text for blur radius in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Blur radius'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius;
+
+  /// Text for x offset in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'X offset'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_x_offset;
+
+  /// Text for y offset in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Y offset'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_y_offset;
+
+  /// Text for apply button in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_apply;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

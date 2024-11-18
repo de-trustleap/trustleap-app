@@ -897,4 +897,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_text_config_alignment_justify => 'justify';
+
+  @override
+  String get landingpage_pagebuilder_text_config_lineheight => 'Line height';
+
+  @override
+  String get landingpage_pagebuilder_text_config_letterspacing => 'Letter spacing';
+
+  @override
+  String get landingpage_pagebuilder_text_config_color => 'Text color';
+
+  @override
+  String get landingpage_pagebuilder_text_config_font_family => 'Font family';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow => 'Text shadow';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_title => 'Configure shadow';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius => 'Blur radius';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_x_offset => 'X offset';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_y_offset => 'Y offset';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_apply => 'Apply';
 }

@@ -8,11 +8,24 @@ class TextStyleParser {
         fontFamily: properties?.fontFamily,
         fontFamilyFallback: const ["Poppins"],
         height: properties?.lineHeight,
+        letterSpacing: properties?.letterSpacing,
         color: properties?.color,
+        shadows: properties?.textShadow != null
+            ? [
+                Shadow(
+                    color: properties?.textShadow?.color ?? Colors.black,
+                    blurRadius: properties?.textShadow?.blurRadius ?? 0,
+                    offset: properties?.textShadow?.offset ?? Offset(0, 0))
+              ]
+            : null,
         fontWeight:
             properties?.isBold == true ? FontWeight.bold : FontWeight.normal,
         fontStyle:
             properties?.isItalic == true ? FontStyle.italic : FontStyle.normal);
   }
 }
+
+// TODO: Text Shadow Backend Parsing.
+// TODO: Letter Spacing Backend Parsing.
 // TODO: Hier height Fallback auf 1.0 setzen und dann in der JSON überall 1.5 eintragen.
+// TODO: Fontsize einstellbar machen.

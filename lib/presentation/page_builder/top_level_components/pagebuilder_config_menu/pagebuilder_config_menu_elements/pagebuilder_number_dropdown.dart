@@ -27,19 +27,20 @@ class PagebuilderNumberDropdown extends StatelessWidget {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(title, style: themeData.textTheme.bodySmall),
       DropdownMenu<double>(
-          width: 100,
-          initialSelection: initialValue,
-          enableSearch: false,
-          requestFocusOnTap: false,
-          dropdownMenuEntries: createDropdownEntries(),
-          onSelected: (number) {
-            onSelected(number ?? 0.0);
-          },
-                    menuStyle: MenuStyle(
-            elevation: WidgetStateProperty.all(4), // Optional für Schatten
-            fixedSize: WidgetStateProperty.all(const Size(100, 200)), // Größe festlegen
-            alignment: AlignmentDirectional.topStart, // Dropdown-Ausrichtung
-          ),),
+        width: 100,
+        initialSelection: initialValue,
+        enableSearch: false,
+        requestFocusOnTap: false,
+        dropdownMenuEntries: createDropdownEntries(),
+        onSelected: (number) {
+          onSelected(number ?? 0.0);
+        },
+        menuStyle: MenuStyle(
+          elevation: WidgetStateProperty.all(4),
+          fixedSize: WidgetStateProperty.all(const Size(100, 200)),
+          alignment: AlignmentDirectional.topStart,
+        ),
+      ),
     ]);
   }
 }

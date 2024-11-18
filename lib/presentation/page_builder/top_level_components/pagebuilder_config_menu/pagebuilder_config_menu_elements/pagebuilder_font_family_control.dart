@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderFontFamilyControl extends StatelessWidget {
@@ -14,8 +15,10 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
       DropdownMenuEntry<String>(value: "Roboto", label: "Roboto")
     ];
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text("Schriftart", style: themeData.textTheme.bodySmall),
+      Text(localization.landingpage_pagebuilder_text_config_font_family,
+          style: themeData.textTheme.bodySmall),
       DropdownMenu<String>(
           width: 200,
           initialSelection: initialValue,

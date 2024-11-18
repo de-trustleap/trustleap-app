@@ -1195,5 +1195,45 @@
     "landingpage_pagebuilder_text_config_alignment_justify": "justify",
     "@landingpage_pagebuilder_text_config_alignment_justify": {
         "description": "Tooltip for justify alignment Button in text configuration"
+    },
+    "landingpage_pagebuilder_text_config_lineheight": "Line height",
+    "@landingpage_pagebuilder_text_config_lineheight": {
+        "description": "Text for line height in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_letterspacing": "Letter spacing",
+    "@landingpage_pagebuilder_text_config_letterspacing": {
+        "description": "Text for letter spacing in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_color": "Text color",
+    "@landingpage_pagebuilder_text_config_color": {
+        "description": "Text for color in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_font_family": "Font family",
+    "@landingpage_pagebuilder_text_config_font_family": {
+        "description": "Text for font family in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow": "Text shadow",
+    "@landingpage_pagebuilder_text_config_shadow": {
+        "description": "Text for text shadow in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_title": "Configure shadow",
+    "@landingpage_pagebuilder_text_config_shadow_alert_title": {
+        "description": "Title for text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_blur_radius": "Blur radius",
+    "@landingpage_pagebuilder_text_config_shadow_alert_blur_radius": {
+        "description": "Text for blur radius in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_x_offset": "X offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_x_offset": {
+        "description": "Text for x offset in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_y_offset": "Y offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_y_offset": {
+        "description": "Text for y offset in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_apply": "Apply",
+    "@landingpage_pagebuilder_text_config_shadow_alert_apply": {
+        "description": "Text for apply button in the text shadow alert in the text configuration"
     }
 }

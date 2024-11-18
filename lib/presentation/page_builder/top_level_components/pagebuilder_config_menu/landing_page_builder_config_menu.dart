@@ -43,6 +43,7 @@ class _LandingPageBuilderConfigMenuState
               width: menuWidth,
               color: themeData.colorScheme.surface,
               child: LandingPageBuilderConfigMenuContent(
+                key: ValueKey("${widget.model.id}+1"),
                 animationDuration: animationDuration,
                 menuWidth: menuWidth,
                 model: widget.model,

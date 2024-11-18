@@ -1195,5 +1195,45 @@
     "landingpage_pagebuilder_text_config_alignment_justify": "Blocksatz",
     "@landingpage_pagebuilder_text_config_alignment_justify": {
         "description": "Tooltip für Blocksatz alignment Button in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_lineheight": "Zeilenhöhe",
+    "@landingpage_pagebuilder_text_config_lineheight": {
+        "description": "Text für Zeilenhöhe in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_letterspacing": "Zeichenabstand",
+    "@landingpage_pagebuilder_text_config_letterspacing": {
+        "description": "Text für Zeichenabstand in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_color": "Schriftfarbe",
+    "@landingpage_pagebuilder_text_config_color": {
+        "description": "Text für Schriftfarbe in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_font_family": "Schriftart",
+    "@landingpage_pagebuilder_text_config_font_family": {
+        "description": "Text für Schriftart in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow": "Textschatten",
+    "@landingpage_pagebuilder_text_config_shadow": {
+        "description": "Text für Textschatten in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_title": "Schatten konfigurieren",
+    "@landingpage_pagebuilder_text_config_shadow_alert_title": {
+        "description": "Titel für Textschatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_blur_radius": "Blur Radius",
+    "@landingpage_pagebuilder_text_config_shadow_alert_blur_radius": {
+        "description": "Text für Blur Radius im Schatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_x_offset": "X Offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_x_offset": {
+        "description": "Text für X Offset im Schatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_y_offset": "Y Offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_y_offset": {
+        "description": "Text für Y Offset im Schatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_apply": "Übernehmen",
+    "@landingpage_pagebuilder_text_config_shadow_alert_apply": {
+        "description": "Text für Übernehmen Button im Schatten Alert in der Text Konfiguration"
     }
 }

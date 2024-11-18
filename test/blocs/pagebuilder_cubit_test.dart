@@ -157,6 +157,8 @@ void main() {
                         color: Colors.black,
                         alignment: TextAlign.center,
                         lineHeight: 1.5,
+                        letterSpacing: null,
+                        textShadow: null,
                         isBold: null,
                         isItalic: null))
               ])
@@ -237,6 +239,8 @@ void main() {
         color: Colors.black,
         alignment: TextAlign.left,
         lineHeight: 1.5,
+        letterSpacing: null,
+        textShadow: null,
         isBold: null,
         isItalic: null);
 
@@ -247,6 +251,8 @@ void main() {
         color: Colors.red,
         alignment: TextAlign.center,
         lineHeight: 1.5,
+        letterSpacing: null,
+        textShadow: null,
         isBold: null,
         isItalic: null);
 

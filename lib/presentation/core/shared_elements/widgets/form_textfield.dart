@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/raw_form_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FormTextfield extends StatelessWidget {
   final double? maxWidth;
@@ -10,12 +11,14 @@ class FormTextfield extends StatelessWidget {
   final String placeholder;
   final bool? obscureText;
   final FocusNode? focusNode;
-  final Function onChanged;
+  final Function? onChanged;
   final Function? onFieldSubmitted;
   final String? Function(String?)? validator;
   final IconData? prefixIcon;
   final int? maxLines;
   final int? minLines;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextStyle? desktopStyle;
   final Key? accessibilityKey;
   final Function? onTap;
 
@@ -25,7 +28,7 @@ class FormTextfield extends StatelessWidget {
       required this.controller,
       required this.disabled,
       required this.placeholder,
-      required this.onChanged,
+      this.onChanged,
       this.validator,
       this.focusNode,
       this.obscureText,
@@ -34,6 +37,8 @@ class FormTextfield extends StatelessWidget {
       this.prefixIcon,
       this.maxLines,
       this.minLines,
+      this.inputFormatters,
+      this.desktopStyle,
       this.accessibilityKey,
       this.onTap});
 
@@ -55,6 +60,8 @@ class FormTextfield extends StatelessWidget {
               prefixIcon: prefixIcon,
               minLines: minLines,
               maxLines: maxLines,
+              inputFormatters: inputFormatters,
+              desktopStyle: desktopStyle,
               key: accessibilityKey,
               onTap: onTap));
     } else {
@@ -71,6 +78,8 @@ class FormTextfield extends StatelessWidget {
           prefixIcon: prefixIcon,
           minLines: minLines,
           maxLines: maxLines,
+          inputFormatters: inputFormatters,
+          desktopStyle: desktopStyle,
           key: accessibilityKey,
           onTap: onTap);
     }

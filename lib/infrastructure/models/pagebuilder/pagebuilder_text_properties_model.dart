@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/infrastructure/models/model_helper/shadow_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_shadow_model.dart';
 import 'package:flutter/material.dart';
 
 class PageBuilderTextPropertiesModel extends Equatable
@@ -11,8 +13,10 @@ class PageBuilderTextPropertiesModel extends Equatable
   final double? fontSize;
   final String? fontFamily;
   final double? lineHeight;
+  final double? letterSpacing;
   final String? color;
   final String? alignment;
+  final Map<String, dynamic>? textShadow;
   final bool? isBold;
   final bool? isItalic;
 
@@ -21,8 +25,10 @@ class PageBuilderTextPropertiesModel extends Equatable
       required this.fontSize,
       required this.fontFamily,
       required this.lineHeight,
+      required this.letterSpacing,
       required this.color,
       required this.alignment,
+      required this.textShadow,
       required this.isBold,
       required this.isItalic});
 
@@ -32,8 +38,10 @@ class PageBuilderTextPropertiesModel extends Equatable
     if (fontSize != null) map['fontSize'] = fontSize;
     if (fontFamily != null) map['fontFamily'] = fontFamily;
     if (lineHeight != null) map['lineHeight'] = lineHeight;
+    if (letterSpacing != null) map['letterSpacing'] = letterSpacing;
     if (color != null) map['color'] = color;
     if (alignment != null) map['alignment'] = alignment;
+    if (textShadow != null) map['textShadow'] = textShadow;
     if (isBold != null) map['isBold'] = isBold;
     if (isItalic != null) map['isItalic'] = isItalic;
     return map;
@@ -47,8 +55,10 @@ class PageBuilderTextPropertiesModel extends Equatable
             map['fontFamily'] != null ? map['fontFamily'] as String : null,
         lineHeight:
             map['lineHeight'] != null ? map['lineHeight'] as double : null,
+        letterSpacing: map['letterSpacing'] != null ? map['letterSpacing'] as double : null,
         color: map['color'] != null ? map['color'] as String : null,
         alignment: map['alignment'] != null ? map['alignment'] as String : null,
+        textShadow: map['textShadow'] != null ? map['textShadow'] as Map<String, dynamic> : null,
         isBold: map['isBold'] != null ? map['isBold'] as bool : null,
         isItalic: map['isItalic'] != null ? map['isItalic'] as bool : null);
   }
@@ -58,8 +68,10 @@ class PageBuilderTextPropertiesModel extends Equatable
       double? fontSize,
       String? fontFamily,
       double? lineHeight,
+      double? letterSpacing,
       String? color,
       String? alignment,
+      Map<String,dynamic>? textShadow,
       bool? isBold,
       bool? isItalic}) {
     return PageBuilderTextPropertiesModel(
@@ -67,8 +79,10 @@ class PageBuilderTextPropertiesModel extends Equatable
         fontSize: fontSize ?? this.fontSize,
         fontFamily: fontFamily ?? this.fontFamily,
         lineHeight: lineHeight ?? this.lineHeight,
+        letterSpacing: letterSpacing ?? this.letterSpacing,
         color: color ?? this.color,
         alignment: alignment ?? this.alignment,
+        textShadow: textShadow ?? this.textShadow,
         isBold: isBold ?? this.isBold,
         isItalic: isItalic ?? this.isItalic);
   }
@@ -79,10 +93,14 @@ class PageBuilderTextPropertiesModel extends Equatable
         fontSize: fontSize,
         fontFamily: fontFamily,
         lineHeight: lineHeight,
+        letterSpacing: letterSpacing,
         color: color != null
             ? Color(ColorUtility.getHexIntFromString(color!))
             : null,
         alignment: getTextAlignFromString(alignment),
+        textShadow: textShadow != null
+            ? PageBuilderShadowModel.fromMap(textShadow!).toDomain()
+            : null,
         isBold: isBold,
         isItalic: isItalic);
   }
@@ -94,10 +112,12 @@ class PageBuilderTextPropertiesModel extends Equatable
         fontSize: properties.fontSize,
         fontFamily: properties.fontFamily,
         lineHeight: properties.lineHeight,
+        letterSpacing: properties.letterSpacing,
         color: properties.color?.value != null
             ? properties.color!.value.toRadixString(16)
             : null,
         alignment: properties.alignment?.name,
+        textShadow: ShadowMapper.getMapFromShadow(properties.textShadow),
         isBold: properties.isBold,
         isItalic: properties.isItalic);
   }
@@ -122,8 +142,10 @@ class PageBuilderTextPropertiesModel extends Equatable
         fontSize,
         fontFamily,
         lineHeight,
+        letterSpacing,
         color,
         alignment,
+        textShadow,
         isBold,
         isItalic
       ];

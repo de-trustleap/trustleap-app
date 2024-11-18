@@ -37,6 +37,7 @@ class _LandingPageBuilderPageBuilderState
             builder: (context, state) {
               if (state is PageBuilderConfigMenuOpenedState) {
                 return LandingPageBuilderConfigMenu(
+                    key: ValueKey(state.model.id),
                     isOpen: _isConfigMenuOpen,
                     model: state.model,
                     closeMenu: () {
