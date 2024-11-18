@@ -7,7 +7,7 @@ class TextStyleParser {
         fontSize: properties?.fontSize,
         fontFamily: properties?.fontFamily,
         fontFamilyFallback: const ["Poppins"],
-        height: properties?.lineHeight,
+        height: properties?.lineHeight ?? 1.0,
         letterSpacing: properties?.letterSpacing,
         color: properties?.color,
         shadows: properties?.textShadow != null
@@ -25,7 +25,5 @@ class TextStyleParser {
   }
 }
 
-// TODO: Text Shadow Backend Parsing.
-// TODO: Letter Spacing Backend Parsing.
-// TODO: Hier height Fallback auf 1.0 setzen und dann in der JSON überall 1.5 eintragen.
 // TODO: Fontsize einstellbar machen.
+// TODO; Collapsible Tile für Text Inhalt und darin dann TextField. 5 Zeilen am Anfang. Wächst bis 10 Zeilen dann scrollable.
