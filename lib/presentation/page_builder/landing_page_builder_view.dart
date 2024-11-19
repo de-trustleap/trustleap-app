@@ -1,5 +1,5 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -41,7 +41,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
     id = Modular.args.params["id"] ?? "";
     htmlEvents = LandingPageBuilderHtmlEvents();
     BlocProvider.of<MenuCubit>(context).collapseMenu(true);
-    Modular.get<PagebuilderCubit>().getLandingPage(id);
+    Modular.get<PagebuilderBloc>().add(GetLandingPageEvent(id));
   }
 
   @override
@@ -91,9 +91,9 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
-    final pageBuilderCubit = Modular.get<PagebuilderCubit>();
+    final pageBuilderCubit = Modular.get<PagebuilderBloc>();
 
-    return BlocConsumer<PagebuilderCubit, PagebuilderState>(
+    return BlocConsumer<PagebuilderBloc, PagebuilderState>(
         bloc: pageBuilderCubit,
         listener: (context, state) {
           if (state is GetLandingPageAndUserSuccessState) {
@@ -130,8 +130,10 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                     .landingpage_pagebuilder_container_request_error,
                 message: DatabaseFailureMapper.mapFailureMessage(
                     state.failure, localization),
-                callback: () =>
-                    {Modular.get<PagebuilderCubit>().getLandingPage(id)});
+                callback: () => {
+                      Modular.get<PagebuilderBloc>()
+                        ..add(GetLandingPageEvent(id))
+                    });
           } else if (state is GetLandingPageAndUserSuccessState) {
             if (state.content.user?.id != state.content.landingPage?.ownerID) {
               return ErrorView(
@@ -139,8 +141,10 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                       .landingpage_pagebuilder_container_permission_error_title,
                   message: localization
                       .landingpage_pagebuilder_container_permission_error_message,
-                  callback: () =>
-                      {Modular.get<PagebuilderCubit>().getLandingPage(id)});
+                  callback: () => {
+                        Modular.get<PagebuilderBloc>()
+                          ..add(GetLandingPageEvent(id))
+                      });
             } else {
               return Scaffold(
                   appBar: LandingPageBuilderAppBar(

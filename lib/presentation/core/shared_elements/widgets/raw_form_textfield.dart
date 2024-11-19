@@ -16,6 +16,7 @@ class RawFormTextField extends StatelessWidget {
   final IconData? prefixIcon;
   final int? minLines;
   final int? maxLines;
+  final EdgeInsets? contentPadding;
   final List<TextInputFormatter>? inputFormatters;
   final TextStyle? desktopStyle;
   final Function? onTap;
@@ -34,6 +35,7 @@ class RawFormTextField extends StatelessWidget {
       this.prefixIcon,
       this.minLines,
       this.maxLines,
+      this.contentPadding,
       this.inputFormatters,
       this.desktopStyle,
       this.onTap});
@@ -70,6 +72,7 @@ class RawFormTextField extends StatelessWidget {
           hoverColor: Colors.transparent,
           filled: disabled ? true : false,
           fillColor: themeData.colorScheme.surface,
+          contentPadding: contentPadding,
           counterText: ""),
     );
   }

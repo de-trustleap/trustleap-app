@@ -1841,6 +1841,12 @@ abstract class AppLocalizations {
   /// **'Unknown'**
   String get landingpage_pagebuilder_config_menu_unknown_type;
 
+  /// Title for the collapsible view for the text configuration in the pagebuilder text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text configuration'**
+  String get landingpage_pagebuilder_text_config_text_title;
+
   /// menu entry in the pagebuilder text configuration
   ///
   /// In en, this message translates to:
@@ -1930,6 +1936,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Apply'**
   String get landingpage_pagebuilder_text_config_shadow_alert_apply;
+
+  /// Text for font size in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Font size'**
+  String get landingpage_pagebuilder_text_config_fontsize;
+
+  /// Placeholder for the textfield in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Type text here...'**
+  String get landingpage_pagebuilder_text_config_text_placeholder;
+
+  /// Title for the collapsible view for the text content in the pagebuilder text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text content'**
+  String get landingpage_pagebuilder_text_config_content_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

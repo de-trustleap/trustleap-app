@@ -884,6 +884,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unknown';
 
   @override
+  String get landingpage_pagebuilder_text_config_text_title => 'Text configuration';
+
+  @override
   String get landingpage_pagebuilder_text_config_alignment => 'Alignment';
 
   @override
@@ -927,4 +930,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_text_config_shadow_alert_apply => 'Apply';
+
+  @override
+  String get landingpage_pagebuilder_text_config_fontsize => 'Font size';
+
+  @override
+  String get landingpage_pagebuilder_text_config_text_placeholder => 'Type text here...';
+
+  @override
+  String get landingpage_pagebuilder_text_config_content_title => 'Text content';
 }

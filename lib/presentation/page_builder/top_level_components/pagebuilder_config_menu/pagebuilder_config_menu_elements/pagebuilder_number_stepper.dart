@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -66,10 +67,12 @@ class _NumberInputWithArrowsState extends State<PagebuilderNumberStepper> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Schriftgröße", style: themeData.textTheme.bodySmall),
+        Text(localization.landingpage_pagebuilder_text_config_fontsize,
+            style: themeData.textTheme.bodySmall),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -18,19 +18,19 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
   const PagebuilderConfigMenuTextConfig({super.key, required this.model});
 
   void updateTextProperties(
-      PageBuilderTextProperties properties, PagebuilderCubit pagebuilderCubit) {
+      PageBuilderTextProperties properties, PagebuilderBloc pagebuilderCubit) {
     final updatedWidget = model.copyWith(properties: properties);
-    pagebuilderCubit.updateWidget(updatedWidget);
+    pagebuilderCubit.add(UpdateWidgetEvent(updatedWidget));
   }
 
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
-    final pagebuilderCubit = Modular.get<PagebuilderCubit>();
+    final pagebuilderCubit = Modular.get<PagebuilderBloc>();
     if (model.elementType == PageBuilderWidgetType.text &&
         model.properties is PageBuilderTextProperties) {
       return CollapsibleTile(
-          title: localization.landingpage_pagebuilder_config_menu_text_type,
+          title: localization.landingpage_pagebuilder_text_config_text_title,
           children: [
             PagebuilderTextAlignmentControl(
                 initialAlignment:

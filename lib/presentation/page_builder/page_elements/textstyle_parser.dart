@@ -25,5 +25,6 @@ class TextStyleParser {
   }
 }
 
-// TODO: Fontsize einstellbar machen.
-// TODO; Collapsible Tile für Text Inhalt und darin dann TextField. 5 Zeilen am Anfang. Wächst bis 10 Zeilen dann scrollable.
+// TODO: Pagebuilder Cubit zu Bloc umwandeln und debouce Verhalten für updateWidget implementieren.
+// TODO: Localizations
+// TODO: Tests

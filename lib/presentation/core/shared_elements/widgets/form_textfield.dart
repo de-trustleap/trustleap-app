@@ -17,6 +17,7 @@ class FormTextfield extends StatelessWidget {
   final IconData? prefixIcon;
   final int? maxLines;
   final int? minLines;
+  final EdgeInsets? contentPadding;
   final List<TextInputFormatter>? inputFormatters;
   final TextStyle? desktopStyle;
   final Key? accessibilityKey;
@@ -37,6 +38,7 @@ class FormTextfield extends StatelessWidget {
       this.prefixIcon,
       this.maxLines,
       this.minLines,
+      this.contentPadding,
       this.inputFormatters,
       this.desktopStyle,
       this.accessibilityKey,

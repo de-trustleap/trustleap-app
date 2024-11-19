@@ -1176,6 +1176,10 @@
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unbekannt Titel im Pagebuilder Config Menü"
     },
+    "landingpage_pagebuilder_text_config_text_title": "Text Konfiguration",
+    "@landingpage_pagebuilder_text_config_text_title": {
+        "description": "Titel der ausklappabren View für die Text Konfiguration in der Pagebuilder Text Konfiguration"
+    },
     "landingpage_pagebuilder_text_config_alignment": "Ausrichtung",
     "@landingpage_pagebuilder_text_config_alignment": {
         "description": "Menüpunkt in der Pagebuilder Text Konfiguration"
@@ -1235,5 +1239,17 @@
     "landingpage_pagebuilder_text_config_shadow_alert_apply": "Übernehmen",
     "@landingpage_pagebuilder_text_config_shadow_alert_apply": {
         "description": "Text für Übernehmen Button im Schatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_fontsize": "Schriftgröße",
+    "@landingpage_pagebuilder_text_config_fontsize": {
+        "description": "Text für die Schriftgröße in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_text_placeholder": "Hier Text eingeben...",
+    "@landingpage_pagebuilder_text_config_text_placeholder": {
+        "description": "Platzhalter für das Textfeld in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_content_title": "Text Inhalt",
+    "@landingpage_pagebuilder_text_config_content_title": {
+        "description": "Titel der ausklappabren View für den Text Inhalt in der Pagebuilder Text Konfiguration"
     }
 }

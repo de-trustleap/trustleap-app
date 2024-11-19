@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_text_config.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_text_content.dart';
 import 'package:flutter/material.dart';
 
 class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
@@ -12,7 +13,9 @@ class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
     return ListView(
       children: [
         SizedBox(height: 16),
-        PagebuilderConfigMenuTextConfig(model: model)
+        PagebuilderConfigMenuTextConfig(model: model),
+        SizedBox(height: 8),
+        PagebuilderConfigMenuTextContent(model: model)
       ],
     );
   }
