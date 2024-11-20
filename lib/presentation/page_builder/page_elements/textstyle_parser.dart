@@ -24,7 +24,3 @@ class TextStyleParser {
             properties?.isItalic == true ? FontStyle.italic : FontStyle.normal);
   }
 }
-
-// TODO: Pagebuilder Cubit zu Bloc umwandeln und debouce Verhalten für updateWidget implementieren.
-// TODO: Localizations
-// TODO: Tests
