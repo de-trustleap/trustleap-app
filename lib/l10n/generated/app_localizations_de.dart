@@ -935,6 +935,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_text_config_fontsize => 'Schriftgröße';
 
   @override
+  String get landingpage_pagebuilder_color_picker_title => 'Farbe auswählen';
+
+  @override
+  String get landingpage_pagebuilder_color_picker_hex_textfield => 'Hex Code';
+
+  @override
   String get landingpage_pagebuilder_text_config_text_placeholder => 'Hier Text eingeben...';
 
   @override

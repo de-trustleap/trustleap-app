@@ -1244,6 +1244,14 @@
     "@landingpage_pagebuilder_text_config_fontsize": {
         "description": "Text für die Schriftgröße in der Text Konfiguration"
     },
+    "landingpage_pagebuilder_color_picker_title": "Farbe auswählen",
+    "@landingpage_pagebuilder_color_picker_title": {
+        "description": "Titel für den Color Picker in der Pagebuilder Konfiguration"
+    },
+    "landingpage_pagebuilder_color_picker_hex_textfield": "Hex Code",
+    "@landingpage_pagebuilder_color_picker_hex_textfield": {
+        "description": "Titel für das Hex Code Textfeld im Color Picker in der Pagebuilder Konfiguration"
+    },
     "landingpage_pagebuilder_text_config_text_placeholder": "Hier Text eingeben...",
     "@landingpage_pagebuilder_text_config_text_placeholder": {
         "description": "Platzhalter für das Textfeld in der Text Konfiguration"

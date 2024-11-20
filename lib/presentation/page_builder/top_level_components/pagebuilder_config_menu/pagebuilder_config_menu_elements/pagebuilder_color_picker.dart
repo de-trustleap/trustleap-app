@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,8 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
     return Color(int.parse("0x$hex"));
   }
 
-  void _showColorPickerDialog(context, ThemeData themeData) {
+  void _showColorPickerDialog(
+      context, ThemeData themeData, AppLocalizations localization) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -64,7 +66,9 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Farbe auswählen",
+                      Text(
+                          localization
+                              .landingpage_pagebuilder_color_picker_title,
                           style: themeData.textTheme.bodyLarge),
                       IconButton(
                           onPressed: () => CustomNavigator.pop(),
@@ -119,7 +123,8 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
                           }
                         },
                         decoration: InputDecoration(
-                          labelText: "Hex-Code",
+                          labelText: localization
+                              .landingpage_pagebuilder_color_picker_hex_textfield,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -155,10 +160,11 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return InkWell(
         onTap: () {
-          _showColorPickerDialog(context, themeData);
+          _showColorPickerDialog(context, themeData, localization);
         },
         child: Container(
           width: 36,

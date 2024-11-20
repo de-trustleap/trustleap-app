@@ -1943,6 +1943,18 @@ abstract class AppLocalizations {
   /// **'Font size'**
   String get landingpage_pagebuilder_text_config_fontsize;
 
+  /// Title for the Color Picker in the pagebuilder configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Select color'**
+  String get landingpage_pagebuilder_color_picker_title;
+
+  /// Title for the hex code textfield in the Color Picker in the pagebuilder configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Hex code'**
+  String get landingpage_pagebuilder_color_picker_hex_textfield;
+
   /// Placeholder for the textfield in the text configuration
   ///
   /// In en, this message translates to:
