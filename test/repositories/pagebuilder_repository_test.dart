@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:finanzbegleiter/constants.dart';
 
 void main() {
@@ -81,6 +82,8 @@ void main() {
                         color: Colors.black,
                         alignment: TextAlign.center,
                         lineHeight: 1.5,
+                        letterSpacing: 1.0,
+                        textShadow: PageBuilderShadow(color: Colors.black, spreadRadius: 1.0, blurRadius: 1.0, offset: Offset(1, 1)),
                         isBold: null,
                         isItalic: null))
               ])

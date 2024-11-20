@@ -1840,6 +1840,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown'**
   String get landingpage_pagebuilder_config_menu_unknown_type;
+
+  /// Title for the collapsible view for the text configuration in the pagebuilder text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text configuration'**
+  String get landingpage_pagebuilder_text_config_text_title;
+
+  /// menu entry in the pagebuilder text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment'**
+  String get landingpage_pagebuilder_text_config_alignment;
+
+  /// Tooltip for left alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'left-align'**
+  String get landingpage_pagebuilder_text_config_alignment_left;
+
+  /// Tooltip for center alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'center'**
+  String get landingpage_pagebuilder_text_config_alignment_center;
+
+  /// Tooltip for right alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'right-align'**
+  String get landingpage_pagebuilder_text_config_alignment_right;
+
+  /// Tooltip for justify alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'justify'**
+  String get landingpage_pagebuilder_text_config_alignment_justify;
+
+  /// Text for line height in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Line height'**
+  String get landingpage_pagebuilder_text_config_lineheight;
+
+  /// Text for letter spacing in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Letter spacing'**
+  String get landingpage_pagebuilder_text_config_letterspacing;
+
+  /// Text for color in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text color'**
+  String get landingpage_pagebuilder_text_config_color;
+
+  /// Text for font family in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Font family'**
+  String get landingpage_pagebuilder_text_config_font_family;
+
+  /// Text for text shadow in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text shadow'**
+  String get landingpage_pagebuilder_text_config_shadow;
+
+  /// Title for text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Configure shadow'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_title;
+
+  /// Text for blur radius in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Blur radius'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius;
+
+  /// Text for x offset in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'X offset'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_x_offset;
+
+  /// Text for y offset in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Y offset'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_y_offset;
+
+  /// Text for apply button in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_apply;
+
+  /// Text for font size in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Font size'**
+  String get landingpage_pagebuilder_text_config_fontsize;
+
+  /// Title for the Color Picker in the pagebuilder configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Select color'**
+  String get landingpage_pagebuilder_color_picker_title;
+
+  /// Title for the hex code textfield in the Color Picker in the pagebuilder configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Hex code'**
+  String get landingpage_pagebuilder_color_picker_hex_textfield;
+
+  /// Placeholder for the textfield in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Type text here...'**
+  String get landingpage_pagebuilder_text_config_text_placeholder;
+
+  /// Title for the collapsible view for the text content in the pagebuilder text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text content'**
+  String get landingpage_pagebuilder_text_config_content_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

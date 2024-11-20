@@ -7,8 +7,17 @@ class TextStyleParser {
         fontSize: properties?.fontSize,
         fontFamily: properties?.fontFamily,
         fontFamilyFallback: const ["Poppins"],
-        height: properties?.lineHeight,
+        height: properties?.lineHeight ?? 1.0,
+        letterSpacing: properties?.letterSpacing,
         color: properties?.color,
+        shadows: properties?.textShadow != null
+            ? [
+                Shadow(
+                    color: properties?.textShadow?.color ?? Colors.black,
+                    blurRadius: properties?.textShadow?.blurRadius ?? 0,
+                    offset: properties?.textShadow?.offset ?? Offset(0, 0))
+              ]
+            : null,
         fontWeight:
             properties?.isBold == true ? FontWeight.bold : FontWeight.normal,
         fontStyle:

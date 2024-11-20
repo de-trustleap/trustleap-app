@@ -1175,5 +1175,89 @@
     "landingpage_pagebuilder_config_menu_unknown_type": "Unknown",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unknown title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_text_config_text_title": "Text configuration",
+    "@landingpage_pagebuilder_text_config_text_title": {
+        "description": "Title for the collapsible view for the text configuration in the pagebuilder text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment": "Alignment",
+    "@landingpage_pagebuilder_text_config_alignment": {
+        "description": "menu entry in the pagebuilder text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_left": "left-align",
+    "@landingpage_pagebuilder_text_config_alignment_left": {
+        "description": "Tooltip for left alignment Button in text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_center": "center",
+    "@landingpage_pagebuilder_text_config_alignment_center": {
+        "description": "Tooltip for center alignment Button in text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_right": "right-align",
+    "@landingpage_pagebuilder_text_config_alignment_right": {
+        "description": "Tooltip for right alignment Button in text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_justify": "justify",
+    "@landingpage_pagebuilder_text_config_alignment_justify": {
+        "description": "Tooltip for justify alignment Button in text configuration"
+    },
+    "landingpage_pagebuilder_text_config_lineheight": "Line height",
+    "@landingpage_pagebuilder_text_config_lineheight": {
+        "description": "Text for line height in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_letterspacing": "Letter spacing",
+    "@landingpage_pagebuilder_text_config_letterspacing": {
+        "description": "Text for letter spacing in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_color": "Text color",
+    "@landingpage_pagebuilder_text_config_color": {
+        "description": "Text for color in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_font_family": "Font family",
+    "@landingpage_pagebuilder_text_config_font_family": {
+        "description": "Text for font family in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow": "Text shadow",
+    "@landingpage_pagebuilder_text_config_shadow": {
+        "description": "Text for text shadow in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_title": "Configure shadow",
+    "@landingpage_pagebuilder_text_config_shadow_alert_title": {
+        "description": "Title for text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_blur_radius": "Blur radius",
+    "@landingpage_pagebuilder_text_config_shadow_alert_blur_radius": {
+        "description": "Text for blur radius in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_x_offset": "X offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_x_offset": {
+        "description": "Text for x offset in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_y_offset": "Y offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_y_offset": {
+        "description": "Text for y offset in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_apply": "Apply",
+    "@landingpage_pagebuilder_text_config_shadow_alert_apply": {
+        "description": "Text for apply button in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_fontsize": "Font size",
+    "@landingpage_pagebuilder_text_config_fontsize": {
+        "description": "Text for font size in the text configuration"
+    },
+    "landingpage_pagebuilder_color_picker_title": "Select color",
+    "@landingpage_pagebuilder_color_picker_title": {
+        "description": "Title for the Color Picker in the pagebuilder configuration"
+    },
+    "landingpage_pagebuilder_color_picker_hex_textfield": "Hex code",
+    "@landingpage_pagebuilder_color_picker_hex_textfield": {
+        "description": "Title for the hex code textfield in the Color Picker in the pagebuilder configuration"
+    },
+    "landingpage_pagebuilder_text_config_text_placeholder": "Type text here...",
+    "@landingpage_pagebuilder_text_config_text_placeholder": {
+        "description": "Placeholder for the textfield in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_content_title": "Text content",
+    "@landingpage_pagebuilder_text_config_content_title": {
+        "description": "Title for the collapsible view for the text content in the pagebuilder text configuration"
     }
 }

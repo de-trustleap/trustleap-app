@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart';
@@ -30,12 +30,22 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
   @override
   void initState() {
     super.initState();
+
     _controller = TextEditingController(text: widget.properties.text ?? "");
     _focusNode = FocusNode();
 
     _focusNode.addListener(() {
       setState(() {}); // Aktualisiert die UI, wenn sich der Fokus ändert
     });
+  }
+
+  @override
+  void didUpdateWidget(covariant PageBuilderEditableText oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.properties.text != widget.properties.text) {
+      _controller.text = widget.properties.text ?? "";
+    }
   }
 
   @override
@@ -83,7 +93,8 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
                     widget.properties.copyWith(text: newText);
                 final updatedWidget =
                     widget.widgetModel.copyWith(properties: updatedProperties);
-                Modular.get<PagebuilderCubit>().updateWidget(updatedWidget);
+                Modular.get<PagebuilderBloc>()
+                    .add(UpdateWidgetEvent(updatedWidget));
               }),
         ),
       ),

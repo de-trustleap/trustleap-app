@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -49,7 +49,7 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
             .copyWith(localImage: convertedTempImage, hasChanged: true);
         final updatedWidget =
             widget.widgetModel.copyWith(properties: updatedProperties);
-        Modular.get<PagebuilderCubit>().updateWidget(updatedWidget);
+        Modular.get<PagebuilderBloc>().add(UpdateWidgetEvent(updatedWidget));
       }
     }
   }

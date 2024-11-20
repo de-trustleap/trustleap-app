@@ -882,4 +882,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unknown';
+
+  @override
+  String get landingpage_pagebuilder_text_config_text_title => 'Text configuration';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment => 'Alignment';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_left => 'left-align';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_center => 'center';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_right => 'right-align';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_justify => 'justify';
+
+  @override
+  String get landingpage_pagebuilder_text_config_lineheight => 'Line height';
+
+  @override
+  String get landingpage_pagebuilder_text_config_letterspacing => 'Letter spacing';
+
+  @override
+  String get landingpage_pagebuilder_text_config_color => 'Text color';
+
+  @override
+  String get landingpage_pagebuilder_text_config_font_family => 'Font family';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow => 'Text shadow';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_title => 'Configure shadow';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius => 'Blur radius';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_x_offset => 'X offset';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_y_offset => 'Y offset';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_apply => 'Apply';
+
+  @override
+  String get landingpage_pagebuilder_text_config_fontsize => 'Font size';
+
+  @override
+  String get landingpage_pagebuilder_color_picker_title => 'Select color';
+
+  @override
+  String get landingpage_pagebuilder_color_picker_hex_textfield => 'Hex code';
+
+  @override
+  String get landingpage_pagebuilder_text_config_text_placeholder => 'Type text here...';
+
+  @override
+  String get landingpage_pagebuilder_text_config_content_title => 'Text content';
 }

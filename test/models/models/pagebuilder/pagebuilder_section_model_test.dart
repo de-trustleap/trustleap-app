@@ -224,6 +224,8 @@ void main() {
                           fontSize: 18,
                           fontFamily: "Merriweather",
                           lineHeight: null,
+                          letterSpacing: null,
+                          textShadow: null,
                           color: Color(0xFFFFFFFF),
                           alignment: TextAlign.left,
                           isBold: null,
@@ -312,6 +314,8 @@ void main() {
                           fontSize: 18,
                           fontFamily: "Merriweather",
                           lineHeight: null,
+                          letterSpacing: null,
+                          textShadow: null,
                           color: Color(0xFFFFFFFF),
                           alignment: TextAlign.left,
                           isBold: null,
@@ -390,7 +394,8 @@ void main() {
         }
       ];
       // When
-      final result = PageBuilderSectionModel.getMapFromPageBuilderWidgetList(widgets);
+      final result =
+          PageBuilderSectionModel.getMapFromPageBuilderWidgetList(widgets);
       // Then
       expect(result, expectedResult);
     });

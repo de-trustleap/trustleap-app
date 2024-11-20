@@ -1,4 +1,4 @@
-part of 'pagebuilder_cubit.dart';
+part of 'pagebuilder_bloc.dart';
 
 sealed class PagebuilderState {}
 

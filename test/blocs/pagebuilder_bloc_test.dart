@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -19,7 +19,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/foundation.dart';
 
 void main() {
-  late PagebuilderCubit pageBuilderCubit;
+  late PagebuilderBloc pageBuilderBloc;
   late MockLandingPageRepository mockLandingPageRepo;
   late MockUserRepository mockUserRepo;
   late MockPagebuilderRepository mockPageBuilderRepo;
@@ -28,15 +28,17 @@ void main() {
     mockLandingPageRepo = MockLandingPageRepository();
     mockUserRepo = MockUserRepository();
     mockPageBuilderRepo = MockPagebuilderRepository();
-    pageBuilderCubit = PagebuilderCubit(
-        mockLandingPageRepo, mockPageBuilderRepo, mockUserRepo);
+    pageBuilderBloc = PagebuilderBloc(
+        landingPageRepo: mockLandingPageRepo,
+        pageBuilderRepo: mockPageBuilderRepo,
+        userRepo: mockUserRepo);
   });
 
   test("init state should be PagebuilderInitial", () {
-    expect(pageBuilderCubit.state, PagebuilderInitial());
+    expect(pageBuilderBloc.state, PagebuilderInitial());
   });
 
-  group("PagebuilderCubit_getLandingPage", () {
+  group("PagebuilderBloc_getLandingPage", () {
     const String landingPageID = "1";
     const contentID = "5";
     final testLandingPage = LandingPage(
@@ -56,7 +58,7 @@ void main() {
           .thenAnswer((_) async => right(testContent));
 
       // When
-      pageBuilderCubit.getLandingPage(landingPageID);
+      pageBuilderBloc.add(GetLandingPageEvent(landingPageID));
       await untilCalled(mockLandingPageRepo.getLandingPage(landingPageID));
       // Then
       verify(mockLandingPageRepo.getLandingPage(landingPageID));
@@ -85,8 +87,8 @@ void main() {
       when(mockPageBuilderRepo.getLandingPageContent(contentID))
           .thenAnswer((_) async => right(testContent));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.getLandingPage(landingPageID);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(GetLandingPageEvent(landingPageID));
     });
 
     test(
@@ -104,8 +106,8 @@ void main() {
       when(mockPageBuilderRepo.getLandingPageContent(contentID))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.getLandingPage(landingPageID);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(GetLandingPageEvent(landingPageID));
     });
 
     test(
@@ -123,8 +125,8 @@ void main() {
       when(mockPageBuilderRepo.getLandingPageContent(contentID))
           .thenAnswer((_) async => right(testContent));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.getLandingPage(landingPageID);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(GetLandingPageEvent(landingPageID));
     });
   });
 
@@ -157,6 +159,8 @@ void main() {
                         color: Colors.black,
                         alignment: TextAlign.center,
                         lineHeight: 1.5,
+                        letterSpacing: null,
+                        textShadow: null,
                         isBold: null,
                         isItalic: null))
               ])
@@ -170,7 +174,7 @@ void main() {
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => right(unit));
       // When
-      pageBuilderCubit.saveLandingPageContent(testContent);
+      pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
       await untilCalled(
           mockPageBuilderRepo.saveLandingPageContent(testContent.content));
       // Then
@@ -199,8 +203,8 @@ void main() {
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => right(unit));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.saveLandingPageContent(testContent);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
     });
 
     test(
@@ -224,8 +228,8 @@ void main() {
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.saveLandingPageContent(testContent);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
     });
   });
 
@@ -237,6 +241,8 @@ void main() {
         color: Colors.black,
         alignment: TextAlign.left,
         lineHeight: 1.5,
+        letterSpacing: null,
+        textShadow: null,
         isBold: null,
         isItalic: null);
 
@@ -247,6 +253,8 @@ void main() {
         color: Colors.red,
         alignment: TextAlign.center,
         lineHeight: 1.5,
+        letterSpacing: null,
+        textShadow: null,
         isBold: null,
         isItalic: null);
 
@@ -387,7 +395,7 @@ void main() {
 
       // Then
       expectLater(
-          pageBuilderCubit.stream,
+          pageBuilderBloc.stream,
           emitsInOrder([
             GetLandingPageAndUserSuccessState(
               content: mockPagebuilderContent,
@@ -399,7 +407,7 @@ void main() {
             expectedResult,
           ]));
 
-      pageBuilderCubit.emit(GetLandingPageAndUserSuccessState(
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
         content: mockPagebuilderContent,
         saveLoading: false,
         saveFailure: null,
@@ -407,7 +415,7 @@ void main() {
         isUpdated: false,
       ));
 
-      pageBuilderCubit.updateWidget(updatedWidget);
+      pageBuilderBloc.add(UpdateWidgetEvent(updatedWidget));
     });
   });
 }
