@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu_content_tab.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu_design_tab.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu_header.dart';
 import 'package:flutter/material.dart';
 
@@ -25,16 +26,10 @@ class _LandingPageBuilderConfigMenuContentState
     extends State<LandingPageBuilderConfigMenuContent> {
   final dividerWidth = 0.5;
   int _selectedTabIndex = 0;
-  double _opacity = 1.0;
 
   void _selectTab(int index) async {
     setState(() {
-      _opacity = 0.0;
-    });
-    await Future.delayed(Duration(milliseconds: widget.animationDuration));
-    setState(() {
       _selectedTabIndex = index;
-      _opacity = 1.0;
     });
   }
 
@@ -93,22 +88,14 @@ class _LandingPageBuilderConfigMenuContentState
               ],
             ),
             Expanded(
-                child: Stack(children: [
-              // AnimatedOpacity for the Tab Content
-              AnimatedOpacity(
-                duration: Duration(milliseconds: widget.animationDuration),
-                opacity: _selectedTabIndex == 0 ? _opacity : 0.0,
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: LandingPageBuilderConfigMenuContentTab(
-                            model: widget.model)),
-              ),
-              AnimatedOpacity(
-                duration: Duration(milliseconds: widget.animationDuration),
-                opacity: _selectedTabIndex == 1 ? _opacity : 0.0,
-                child: Center(child: Text("Design")),
-              ),
-            ])),
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: _selectedTabIndex == 0
+                      ? LandingPageBuilderConfigMenuContentTab(
+                          model: widget.model)
+                      : LandingPageBuilderConfigMenuDesignTab(
+                          model: widget.model)),
+            ),
           ]),
         ),
         Container(
