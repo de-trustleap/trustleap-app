@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,7 @@ class PagebuilderSpacingControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -30,32 +32,33 @@ class PagebuilderSpacingControl extends StatelessWidget {
       children: [
         Text(title, style: themeData.textTheme.bodySmall),
         const SizedBox(height: 16),
-        _buildStepperRow([
-          PageBuilderSpacingDirection.top,
-          PageBuilderSpacingDirection.left
-        ]),
+        _buildStepperRow(
+            [PageBuilderSpacingDirection.top, PageBuilderSpacingDirection.left],
+            localization),
         const SizedBox(height: 16),
         _buildStepperRow([
           PageBuilderSpacingDirection.bottom,
           PageBuilderSpacingDirection.right
-        ]),
+        ], localization),
       ],
     );
   }
 
-  Widget _buildStepperRow(List<PageBuilderSpacingDirection> directions) {
+  Widget _buildStepperRow(List<PageBuilderSpacingDirection> directions,
+      AppLocalizations localization) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: directions
           .map((direction) => Padding(
                 padding: const EdgeInsets.only(right: 40.0),
-                child: _buildStepper(direction),
+                child: _buildStepper(direction, localization),
               ))
           .toList(),
     );
   }
 
-  Widget _buildStepper(PageBuilderSpacingDirection direction) {
+  Widget _buildStepper(
+      PageBuilderSpacingDirection direction, AppLocalizations localization) {
     double getValue() {
       final spacing = _getSpacing();
       switch (direction) {
@@ -92,7 +95,7 @@ class PagebuilderSpacingControl extends StatelessWidget {
       initialValue: getValue().toInt(),
       minValue: 0,
       maxValue: 1000,
-      placeholder: _getLabel(direction),
+      placeholder: _getLabel(direction, localization),
       onSelected: (value) => updateValue(value.toDouble()),
     );
   }
@@ -103,16 +106,17 @@ class PagebuilderSpacingControl extends StatelessWidget {
         : model.margin;
   }
 
-  String _getLabel(PageBuilderSpacingDirection direction) {
+  String _getLabel(
+      PageBuilderSpacingDirection direction, AppLocalizations localization) {
     switch (direction) {
       case PageBuilderSpacingDirection.top:
-        return "Oben";
+        return localization.landingpage_pagebuilder_layout_spacing_top;
       case PageBuilderSpacingDirection.left:
-        return "Links";
+        return localization.landingpage_pagebuilder_layout_spacing_left;
       case PageBuilderSpacingDirection.bottom:
-        return "Unten";
+        return localization.landingpage_pagebuilder_layout_spacing_bottom;
       case PageBuilderSpacingDirection.right:
-        return "Rechts";
+        return localization.landingpage_pagebuilder_layout_spacing_right;
     }
   }
 }

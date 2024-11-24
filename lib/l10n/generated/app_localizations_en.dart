@@ -945,4 +945,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_text_config_content_title => 'Text content';
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_top => 'Top';
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_bottom => 'Bottom';
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_left => 'Left';
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_right => 'Right';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_title => 'Layout';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_padding => 'Padding';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_margin => 'Margin';
 }
