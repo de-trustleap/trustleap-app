@@ -72,6 +72,7 @@ void main() {
                     widthPercentage: null,
                     backgroundColor: null,
                     padding: null,
+                    margin: null,
                     containerChild: null,
                     maxWidth: null,
                     alignment: null,
@@ -83,7 +84,11 @@ void main() {
                         alignment: TextAlign.center,
                         lineHeight: 1.5,
                         letterSpacing: 1.0,
-                        textShadow: PageBuilderShadow(color: Colors.black, spreadRadius: 1.0, blurRadius: 1.0, offset: Offset(1, 1)),
+                        textShadow: PageBuilderShadow(
+                            color: Colors.black,
+                            spreadRadius: 1.0,
+                            blurRadius: 1.0,
+                            offset: Offset(1, 1)),
                         isBold: null,
                         isItalic: null))
               ])

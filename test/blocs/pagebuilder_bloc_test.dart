@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import '../mocks.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -277,7 +277,7 @@ void main() {
         maxWidth: null,
         alignment: null,
         padding:
-            PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+            PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
     final mockTextWidget2 = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget2"),
@@ -290,7 +290,7 @@ void main() {
         containerChild: null,
         alignment: null,
         padding:
-            PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+            PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
     final mockImageWidget = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget3"),

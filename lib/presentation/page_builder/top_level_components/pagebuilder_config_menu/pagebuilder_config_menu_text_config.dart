@@ -18,15 +18,16 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
   const PagebuilderConfigMenuTextConfig({super.key, required this.model});
 
   void updateTextProperties(
-      PageBuilderTextProperties properties, PagebuilderBloc pagebuilderCubit) {
+      PageBuilderTextProperties properties, PagebuilderBloc pagebuilderBloc) {
     final updatedWidget = model.copyWith(properties: properties);
-    pagebuilderCubit.add(UpdateWidgetEvent(updatedWidget));
+    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
   }
 
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
-    final pagebuilderCubit = Modular.get<PagebuilderBloc>();
+    final themeData = Theme.of(context);
+    final pagebuilderBloc = Modular.get<PagebuilderBloc>();
     if (model.elementType == PageBuilderWidgetType.text &&
         model.properties is PageBuilderTextProperties) {
       return CollapsibleTile(
@@ -40,7 +41,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                   final updatedProperties =
                       (model.properties as PageBuilderTextProperties)
                           .copyWith(alignment: alignment);
-                  updateTextProperties(updatedProperties, pagebuilderCubit);
+                  updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
             SizedBox(height: 20),
             PagebuilderColorControl(
@@ -51,7 +52,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                   final updatedProperties =
                       (model.properties as PageBuilderTextProperties)
                           .copyWith(color: color);
-                  updateTextProperties(updatedProperties, pagebuilderCubit);
+                  updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
             SizedBox(height: 20),
             PagebuilderFontFamilyControl(
@@ -62,10 +63,13 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                   final updatedProperties =
                       (model.properties as PageBuilderTextProperties)
                           .copyWith(fontFamily: fontFamily);
-                  updateTextProperties(updatedProperties, pagebuilderCubit);
+                  updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
             SizedBox(height: 20),
-            PagebuilderNumberStepper(
+            Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
+                      Text(localization.landingpage_pagebuilder_text_config_fontsize,
+            style: themeData.textTheme.bodySmall),
+                        PagebuilderNumberStepper(
                 initialValue: (model.properties as PageBuilderTextProperties)
                         .fontSize
                         ?.round() ??
@@ -76,8 +80,9 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                   final updatedProperties =
                       (model.properties as PageBuilderTextProperties)
                           .copyWith(fontSize: fontSize.toDouble());
-                  updateTextProperties(updatedProperties, pagebuilderCubit);
+                  updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
+            ]),
             SizedBox(height: 20),
             PagebuilderNumberDropdown(
                 title:
@@ -91,7 +96,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                   final updatedProperties =
                       (model.properties as PageBuilderTextProperties)
                           .copyWith(lineHeight: lineHeight);
-                  updateTextProperties(updatedProperties, pagebuilderCubit);
+                  updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
             SizedBox(height: 20),
             PagebuilderNumberDropdown(
@@ -106,7 +111,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                   final updatedProperties =
                       (model.properties as PageBuilderTextProperties)
                           .copyWith(letterSpacing: letterSpacing);
-                  updateTextProperties(updatedProperties, pagebuilderCubit);
+                  updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
             SizedBox(height: 20),
             PagebuilderTextShadowControl(
@@ -116,7 +121,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                   final updatedProperties =
                       (model.properties as PageBuilderTextProperties)
                           .copyWith(textShadow: shadow);
-                  updateTextProperties(updatedProperties, pagebuilderCubit);
+                  updateTextProperties(updatedProperties, pagebuilderBloc);
                 })
           ]);
     } else {

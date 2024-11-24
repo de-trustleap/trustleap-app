@@ -2,7 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,8 @@ class PageBuilderWidget extends Equatable {
   final PageBuilderWidget? containerChild;
   final double? widthPercentage;
   final Color? backgroundColor;
-  final PageBuilderPadding? padding;
+  final PageBuilderSpacing? padding;
+  final PageBuilderSpacing? margin;
   final double? maxWidth;
   final Alignment? alignment;
 
@@ -29,6 +30,7 @@ class PageBuilderWidget extends Equatable {
       required this.widthPercentage,
       required this.backgroundColor,
       required this.padding,
+      required this.margin,
       required this.maxWidth,
       required this.alignment});
 
@@ -40,7 +42,8 @@ class PageBuilderWidget extends Equatable {
       PageBuilderWidget? containerChild,
       double? widthPercentage,
       Color? backgroundColor,
-      PageBuilderPadding? padding,
+      PageBuilderSpacing? padding,
+      PageBuilderSpacing? margin,
       double? maxWidth,
       Alignment? alignment}) {
     return PageBuilderWidget(
@@ -52,6 +55,7 @@ class PageBuilderWidget extends Equatable {
         widthPercentage: widthPercentage ?? this.widthPercentage,
         backgroundColor: backgroundColor ?? this.backgroundColor,
         padding: padding ?? this.padding,
+        margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
         alignment: alignment ?? this.alignment);
   }
@@ -90,6 +94,7 @@ class PageBuilderWidget extends Equatable {
         widthPercentage,
         backgroundColor,
         padding,
+        margin,
         maxWidth,
         alignment
       ];

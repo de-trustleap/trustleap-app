@@ -1,26 +1,26 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
-class PageBuilderPadding extends Equatable {
+class PageBuilderSpacing extends Equatable {
   final double? top;
   final double? bottom;
   final double? left;
   final double? right;
 
-  const PageBuilderPadding({
+  const PageBuilderSpacing({
     required this.top,
     required this.bottom,
     required this.left,
     required this.right,
   });
 
-  PageBuilderPadding copyWith({
+  PageBuilderSpacing copyWith({
     double? top,
     double? bottom,
     double? left,
     double? right,
   }) {
-    return PageBuilderPadding(
+    return PageBuilderSpacing(
       top: top ?? this.top,
       bottom: bottom ?? this.bottom,
       left: left ?? this.left,
@@ -28,14 +28,14 @@ class PageBuilderPadding extends Equatable {
     );
   }
 
-  factory PageBuilderPadding.fromMap(Map<String, dynamic>? map) {
+  factory PageBuilderSpacing.fromMap(Map<String, dynamic>? map) {
     final paddingTop = map?['top'] != null ? map!['top'] as double : 0.0;
     final paddingBottom =
         map?['bottom'] != null ? map!['bottom'] as double : 0.0;
     final paddingLeft = map?['left'] != null ? map!['left'] as double : 0.0;
     final paddingRight = map?['right'] != null ? map!['right'] as double : 0.0;
 
-    return PageBuilderPadding(
+    return PageBuilderSpacing(
         top: paddingTop,
         bottom: paddingBottom,
         left: paddingLeft,

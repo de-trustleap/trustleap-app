@@ -32,6 +32,7 @@ void main() {
           widthPercentage: null,
           backgroundColor: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
 
@@ -47,6 +48,7 @@ void main() {
           widthPercentage: null,
           backgroundColor: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       // When
@@ -75,6 +77,7 @@ void main() {
           widthPercentage: null,
           backgroundColor: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final expectedResult = "Spalte";
@@ -98,6 +101,7 @@ void main() {
           widthPercentage: null,
           backgroundColor: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final expectedResult = "Icon";
@@ -121,6 +125,7 @@ void main() {
           widthPercentage: null,
           backgroundColor: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final expectedResult = "Unbekannt";
@@ -147,6 +152,7 @@ void main() {
           widthPercentage: null,
           backgroundColor: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final widget2 = PageBuilderWidget(
@@ -160,6 +166,7 @@ void main() {
           widthPercentage: null,
           backgroundColor: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       // Then

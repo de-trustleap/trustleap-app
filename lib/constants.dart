@@ -80,3 +80,5 @@ enum PageBuilderWidgetType {
 }
 
 enum PageBuilderSectionLayout { row, column, none }
+
+enum PageBuilderSpacingType { padding, margin }
