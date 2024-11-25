@@ -1259,5 +1259,33 @@
     "landingpage_pagebuilder_text_config_content_title": "Text Inhalt",
     "@landingpage_pagebuilder_text_config_content_title": {
         "description": "Titel der ausklappabren View für den Text Inhalt in der Pagebuilder Text Konfiguration"
+    },
+    "landingpage_pagebuilder_layout_spacing_top": "Oben",
+    "@landingpage_pagebuilder_layout_spacing_top": {
+        "description": "Platzhalter für Spacing Oben Textfeld im Layout Menü des Pagebuilder Config Menüs"
+    },
+    "landingpage_pagebuilder_layout_spacing_bottom": "Unten",
+    "@landingpage_pagebuilder_layout_spacing_bottom": {
+        "description": "Platzhalter für Spacing Unten Textfeld im Layout Menü des Pagebuilder Config Menüs"
+    },
+    "landingpage_pagebuilder_layout_spacing_left": "Links",
+    "@landingpage_pagebuilder_layout_spacing_left": {
+        "description": "Platzhalter für Spacing Links Textfeld im Layout Menü des Pagebuilder Config Menüs"
+    },
+    "landingpage_pagebuilder_layout_spacing_right": "Rechts",
+    "@landingpage_pagebuilder_layout_spacing_right": {
+        "description": "Platzhalter für Spacing Rechts Textfeld im Layout Menü des Pagebuilder Config Menüs"
+    },
+    "landingpage_pagebuilder_layout_menu_title": "Layout",
+    "@landingpage_pagebuilder_layout_menu_title": {
+        "description": "Titel für das Layout Collapsible im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_layout_menu_padding": "Innenabstand",
+    "@landingpage_pagebuilder_layout_menu_padding": {
+        "description": "Titel Innenabstand Menüpunkt im Pagebuilder Config Menü im Layout Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_margin": "Außenabstand",
+    "@landingpage_pagebuilder_layout_menu_margin": {
+        "description": "Titel Außenabstand Menüpunkt im Pagebuilder Config Menü im Layout Bereich"
     }
 }

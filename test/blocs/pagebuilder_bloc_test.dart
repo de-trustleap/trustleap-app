@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import '../mocks.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -150,6 +150,7 @@ void main() {
                     backgroundColor: null,
                     containerChild: null,
                     padding: null,
+                    margin: null,
                     maxWidth: null,
                     alignment: null,
                     properties: PageBuilderTextProperties(
@@ -276,8 +277,9 @@ void main() {
         containerChild: null,
         maxWidth: null,
         alignment: null,
+        margin: null,
         padding:
-            PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+            PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
     final mockTextWidget2 = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget2"),
@@ -289,8 +291,9 @@ void main() {
         maxWidth: null,
         containerChild: null,
         alignment: null,
+        margin: null,
         padding:
-            PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+            PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
     final mockImageWidget = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget3"),
@@ -302,6 +305,7 @@ void main() {
         widthPercentage: 100.0,
         maxWidth: null,
         alignment: null,
+        margin: null,
         padding: null);
 
     final mockColumnWidget = PageBuilderWidget(
@@ -314,6 +318,7 @@ void main() {
         widthPercentage: 100.0,
         maxWidth: null,
         alignment: null,
+        margin: null,
         padding: null);
 
     final mockRowWidget = PageBuilderWidget(
@@ -326,6 +331,7 @@ void main() {
         widthPercentage: 100.0,
         maxWidth: null,
         alignment: null,
+        margin: null,
         padding: null);
 
     final mockSection = PageBuilderSection(

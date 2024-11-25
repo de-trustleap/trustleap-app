@@ -39,10 +39,10 @@ class _LandingPageBuilderWidgetContainerState
               maxWidth: widget.model.maxWidth ?? double.infinity),
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-                widget.model.padding?.left ?? 0,
-                widget.model.padding?.top ?? 0,
-                widget.model.padding?.right ?? 0,
-                widget.model.padding?.bottom ?? 0),
+                widget.model.margin?.left ?? 0,
+                widget.model.margin?.top ?? 0,
+                widget.model.margin?.right ?? 0,
+                widget.model.margin?.bottom ?? 0),
             child: MouseRegion(
               onEnter: (_) {
                 BlocProvider.of<PagebuilderHoverCubit>(context)
@@ -92,7 +92,14 @@ class _LandingPageBuilderWidgetContainerState
                             : null,
                       ),
                       alignment: widget.model.alignment ?? Alignment.center,
-                      child: widget.child,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            widget.model.padding?.left ?? 0,
+                            widget.model.padding?.top ?? 0,
+                            widget.model.padding?.right ?? 0,
+                            widget.model.padding?.bottom ?? 0),
+                        child: widget.child,
+                      ),
                     ),
                   ),
                   if (isHovered) ...[

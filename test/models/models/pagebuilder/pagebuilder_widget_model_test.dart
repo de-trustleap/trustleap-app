@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_widget_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 
@@ -22,6 +22,7 @@ void main() {
           widthPercentage: 30,
           backgroundColor: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final expectedResult = PageBuilderWidgetModel(
@@ -33,6 +34,7 @@ void main() {
           widthPercentage: 30,
           backgroundColor: null,
           padding: {"top": 16, "bottom": 16, "left": 0, "right": 0},
+          margin: null,
           maxWidth: null,
           alignment: null);
       // When
@@ -55,6 +57,7 @@ void main() {
           widthPercentage: 30,
           backgroundColor: "ffffffff",
           padding: null,
+          margin: null,
           maxWidth: 300.0,
           alignment: null);
       final expectedResult = {
@@ -94,6 +97,7 @@ void main() {
           widthPercentage: 30.0,
           backgroundColor: "ffffffff",
           padding: null,
+          margin: null,
           maxWidth: 300.0,
           alignment: null);
       // When
@@ -117,6 +121,7 @@ void main() {
           widthPercentage: 30.0,
           backgroundColor: "ffffffff",
           padding: null,
+          margin: null,
           maxWidth: 300.0,
           alignment: null);
       final expectedResult = PageBuilderWidget(
@@ -128,7 +133,8 @@ void main() {
           containerChild: null,
           widthPercentage: 30,
           backgroundColor: Color(0xffffffff),
-          padding: PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 0),
+          padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+          margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
           maxWidth: 300,
           alignment: null);
       // When
@@ -152,7 +158,8 @@ void main() {
           containerChild: null,
           widthPercentage: 30,
           backgroundColor: Color(0xffffffff),
-          padding: PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 0),
+          padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+          margin: null,
           maxWidth: 300,
           alignment: null);
       final expectedResult = PageBuilderWidgetModel(
@@ -164,6 +171,7 @@ void main() {
           widthPercentage: 30.0,
           backgroundColor: "ffffffff",
           padding: null,
+          margin: null,
           maxWidth: 300.0,
           alignment: null);
       // When
@@ -193,6 +201,7 @@ void main() {
           widthPercentage: null,
           backgroundColor: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final expectedResult = PageBuilderTextProperties(
@@ -246,7 +255,7 @@ void main() {
     test("check if returns correct map from padding", () {
       // Given
       final padding =
-          PageBuilderPadding(top: 12.0, bottom: 12.0, left: 12.0, right: 16.0);
+          PageBuilderSpacing(top: 12.0, bottom: 12.0, left: 12.0, right: 16.0);
       final expectedResult = {"top": 12, "bottom": 12, "left": 12, "right": 16};
       // When
       final result = PageBuilderWidgetModel.getMapFromPadding(padding);
@@ -267,6 +276,7 @@ void main() {
           widthPercentage: 30.0,
           backgroundColor: "ffffffff",
           padding: null,
+          margin: null,
           maxWidth: 300.0,
           alignment: null);
       final widget2 = PageBuilderWidgetModel(
@@ -278,6 +288,7 @@ void main() {
           widthPercentage: 30.0,
           backgroundColor: "ffffffff",
           padding: null,
+          margin: null,
           maxWidth: 300.0,
           alignment: null);
       // Then

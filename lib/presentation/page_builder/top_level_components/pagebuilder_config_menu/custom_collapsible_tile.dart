@@ -108,7 +108,8 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
                   child: child,
                 );
               },
-              child: _isExpanded || _controller.status != AnimationStatus.dismissed
+              child: _isExpanded ||
+                      _controller.status != AnimationStatus.dismissed
                   ? FadeTransition(
                       opacity: _opacity,
                       child: Column(
@@ -117,7 +118,8 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
                         children: [
                           Container(
                             height: 0.8,
-                            color: themeData.textTheme.bodyMedium?.color?.withOpacity(0.5),
+                            color: themeData.textTheme.bodyMedium?.color
+                                ?.withOpacity(0.5),
                           ),
                           const SizedBox(height: 16),
                           Padding(

@@ -27,6 +27,7 @@ void main() {
                 widthPercentage: 30,
                 backgroundColor: Colors.white,
                 padding: null,
+                margin: null,
                 maxWidth: 300,
                 alignment: null)
           ],
@@ -47,6 +48,7 @@ void main() {
                 widthPercentage: 30,
                 backgroundColor: Colors.white,
                 padding: null,
+                margin: null,
                 maxWidth: 300,
                 alignment: Alignment.center)
           ],
@@ -65,6 +67,7 @@ void main() {
             widthPercentage: 30,
             backgroundColor: Colors.white,
             padding: null,
+            margin: null,
             maxWidth: 300,
             alignment: Alignment.center)
       ]);
@@ -91,6 +94,7 @@ void main() {
                 widthPercentage: 30,
                 backgroundColor: Colors.white,
                 padding: null,
+                margin: null,
                 maxWidth: 300,
                 alignment: null)
           ],
@@ -111,6 +115,7 @@ void main() {
                 widthPercentage: 30,
                 backgroundColor: Colors.white,
                 padding: null,
+                margin: null,
                 maxWidth: 300,
                 alignment: null)
           ],

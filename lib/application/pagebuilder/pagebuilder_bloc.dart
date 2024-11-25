@@ -176,3 +176,5 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     return currentWidget;
   }
 }
+
+// TODO: Im Design Tab neue Tile namens Layout implementieren.

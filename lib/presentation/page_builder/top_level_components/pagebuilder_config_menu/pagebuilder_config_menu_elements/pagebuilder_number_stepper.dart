@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/core/helpers/textfield_decimal_number_formatter.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -6,15 +6,16 @@ class PagebuilderNumberStepper extends StatefulWidget {
   final int initialValue;
   final int minValue;
   final int maxValue;
+  final String placeholder;
   final Function(int) onSelected;
 
-  const PagebuilderNumberStepper({
-    super.key,
-    required this.initialValue,
-    required this.minValue,
-    required this.maxValue,
-    required this.onSelected,
-  });
+  const PagebuilderNumberStepper(
+      {super.key,
+      required this.initialValue,
+      required this.minValue,
+      required this.maxValue,
+      required this.onSelected,
+      this.placeholder = ""});
 
   @override
   State<PagebuilderNumberStepper> createState() =>
@@ -52,8 +53,8 @@ class _NumberInputWithArrowsState extends State<PagebuilderNumberStepper> {
     }
   }
 
-  void _onInputChanged(String input) {
-    final value = int.tryParse(input);
+  void _onInputChanged() {
+    final value = int.tryParse(_controller.text);
     if (value != null && value >= widget.minValue && value <= widget.maxValue) {
       setState(() {
         _currentValue = value;
@@ -66,42 +67,36 @@ class _NumberInputWithArrowsState extends State<PagebuilderNumberStepper> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-    final localization = AppLocalizations.of(context);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Text(localization.landingpage_pagebuilder_text_config_fontsize,
-            style: themeData.textTheme.bodySmall),
-        Row(
+        SizedBox(
+          width: 75,
+          child: FormTextfield(
+            controller: _controller,
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              DecimalNumberFormatter(maxIntegerDigits: 3, maxDecimalDigits: 0)
+            ],
+            disabled: false,
+            placeholder: widget.placeholder,
+            onChanged: _onInputChanged,
+          ),
+        ),
+        Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
-              width: 75,
-              child: FormTextfield(
-                controller: _controller,
-                keyboardType: TextInputType.number,
-                disabled: false,
-                placeholder: "",
-                onChanged: _onInputChanged,
-              ),
+            IconButton(
+              onPressed: _increment,
+              icon: const Icon(Icons.arrow_drop_up),
+              constraints: const BoxConstraints(),
+              padding: const EdgeInsets.all(0),
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  onPressed: _increment,
-                  icon: const Icon(Icons.arrow_drop_up),
-                  constraints: const BoxConstraints(),
-                  padding: const EdgeInsets.all(0),
-                ),
-                IconButton(
-                  onPressed: _decrement,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  constraints: const BoxConstraints(),
-                  padding: const EdgeInsets.all(0),
-                ),
-              ],
+            IconButton(
+              onPressed: _decrement,
+              icon: const Icon(Icons.arrow_drop_down),
+              constraints: const BoxConstraints(),
+              padding: const EdgeInsets.all(0),
             ),
           ],
         ),

@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_section_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
@@ -204,7 +204,8 @@ void main() {
                   widthPercentage: 50,
                   backgroundColor: null,
                   padding:
-                      PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 16),
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
+                  margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   maxWidth: null,
                   alignment: null),
               PageBuilderWidget(
@@ -234,14 +235,16 @@ void main() {
                       containerChild: null,
                       widthPercentage: null,
                       backgroundColor: null,
-                      padding: PageBuilderPadding(
+                      padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
+                      margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                       maxWidth: null,
                       alignment: null),
                   widthPercentage: 50,
                   backgroundColor: Color(0xFF333a56),
                   padding:
-                      PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 0),
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                  margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   maxWidth: null,
                   alignment: null)
             ],
@@ -249,7 +252,8 @@ void main() {
             widthPercentage: null,
             backgroundColor: null,
             padding:
-                PageBuilderPadding(top: 40, bottom: 20, left: 20, right: 20),
+                PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
+            margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
             maxWidth: 950,
             alignment: null)
       ];
@@ -294,7 +298,8 @@ void main() {
                   widthPercentage: 50,
                   backgroundColor: null,
                   padding:
-                      PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 16),
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
+                  margin: null,
                   maxWidth: null,
                   alignment: null),
               PageBuilderWidget(
@@ -324,14 +329,16 @@ void main() {
                       containerChild: null,
                       widthPercentage: null,
                       backgroundColor: null,
-                      padding: PageBuilderPadding(
+                      padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
+                      margin: null,
                       maxWidth: null,
                       alignment: null),
                   widthPercentage: 50,
                   backgroundColor: Color(0xFF333a56),
                   padding:
-                      PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 0),
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                  margin: null,
                   maxWidth: null,
                   alignment: null)
             ],
@@ -339,7 +346,8 @@ void main() {
             widthPercentage: null,
             backgroundColor: null,
             padding:
-                PageBuilderPadding(top: 40, bottom: 20, left: 20, right: 20),
+                PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
+            margin: null,
             maxWidth: 950,
             alignment: null)
       ];

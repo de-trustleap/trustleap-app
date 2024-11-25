@@ -1966,6 +1966,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Text content'**
   String get landingpage_pagebuilder_text_config_content_title;
+
+  /// Placeholder for Spacing top textfield in the layout menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Top'**
+  String get landingpage_pagebuilder_layout_spacing_top;
+
+  /// Placeholder for Spacing bottom textfield in the layout menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom'**
+  String get landingpage_pagebuilder_layout_spacing_bottom;
+
+  /// Placeholder for Spacing left textfield in the layout menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Left'**
+  String get landingpage_pagebuilder_layout_spacing_left;
+
+  /// Placeholder for Spacing right textfield in the layout menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Right'**
+  String get landingpage_pagebuilder_layout_spacing_right;
+
+  /// Title for the layout Collapsible in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Layout'**
+  String get landingpage_pagebuilder_layout_menu_title;
+
+  /// Title padding menu in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Padding'**
+  String get landingpage_pagebuilder_layout_menu_padding;
+
+  /// Title margin menu in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Margin'**
+  String get landingpage_pagebuilder_layout_menu_margin;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

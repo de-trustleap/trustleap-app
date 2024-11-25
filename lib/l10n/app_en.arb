@@ -1259,5 +1259,33 @@
     "landingpage_pagebuilder_text_config_content_title": "Text content",
     "@landingpage_pagebuilder_text_config_content_title": {
         "description": "Title for the collapsible view for the text content in the pagebuilder text configuration"
+    },
+    "landingpage_pagebuilder_layout_spacing_top": "Top",
+    "@landingpage_pagebuilder_layout_spacing_top": {
+        "description": "Placeholder for Spacing top textfield in the layout menu in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_layout_spacing_bottom": "Bottom",
+    "@landingpage_pagebuilder_layout_spacing_bottom": {
+        "description": "Placeholder for Spacing bottom textfield in the layout menu in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_layout_spacing_left": "Left",
+    "@landingpage_pagebuilder_layout_spacing_left": {
+        "description": "Placeholder for Spacing left textfield in the layout menu in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_layout_spacing_right": "Right",
+    "@landingpage_pagebuilder_layout_spacing_right": {
+        "description": "Placeholder for Spacing right textfield in the layout menu in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_layout_menu_title": "Layout",
+    "@landingpage_pagebuilder_layout_menu_title": {
+        "description": "Title for the layout Collapsible in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_layout_menu_padding": "Padding",
+    "@landingpage_pagebuilder_layout_menu_padding": {
+        "description": "Title padding menu in the Pagebuilder Config Menu in the layout area"
+    },
+    "landingpage_pagebuilder_layout_menu_margin": "Margin",
+    "@landingpage_pagebuilder_layout_menu_margin": {
+        "description": "Title margin menu in the Pagebuilder Config Menu in the layout area"
     }
 }

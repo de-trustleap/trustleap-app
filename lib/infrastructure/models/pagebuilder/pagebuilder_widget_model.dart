@@ -8,7 +8,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -31,6 +31,7 @@ class PageBuilderWidgetModel extends Equatable {
   final double? widthPercentage;
   final String? backgroundColor;
   final Map<String, dynamic>? padding;
+  final Map<String, dynamic>? margin;
   final double? maxWidth;
   final String? alignment;
 
@@ -43,6 +44,7 @@ class PageBuilderWidgetModel extends Equatable {
       required this.widthPercentage,
       required this.backgroundColor,
       required this.padding,
+      required this.margin,
       required this.maxWidth,
       required this.alignment});
 
@@ -57,6 +59,7 @@ class PageBuilderWidgetModel extends Equatable {
     if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
     if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
     if (padding != null) map['padding'] = padding;
+    if (margin != null) map['margin'] = margin;
     if (maxWidth != null) map['maxWidth'] = maxWidth;
     if (alignment != null) map['alignment'] = alignment;
     return map;
@@ -89,9 +92,11 @@ class PageBuilderWidgetModel extends Equatable {
         padding: map['padding'] != null
             ? map['padding'] as Map<String, dynamic>
             : null,
+        margin: map['margin'] != null
+            ? map['margin'] as Map<String, dynamic>
+            : null,
         maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
-        alignment:
-            map['alignment'] != null ? map['alignment'] as String : null);
+        alignment: map['alignment'] != null ? map['alignment'] as String : null);
   }
 
   PageBuilderWidgetModel copyWith(
@@ -103,6 +108,7 @@ class PageBuilderWidgetModel extends Equatable {
       double? widthPercentage,
       String? backgroundColor,
       Map<String, dynamic>? padding,
+      Map<String, dynamic>? margin,
       double? maxWidth,
       String? alignment}) {
     return PageBuilderWidgetModel(
@@ -114,6 +120,7 @@ class PageBuilderWidgetModel extends Equatable {
         widthPercentage: widthPercentage ?? this.widthPercentage,
         backgroundColor: backgroundColor ?? this.backgroundColor,
         padding: padding ?? this.padding,
+        margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
         alignment: alignment ?? this.alignment);
   }
@@ -132,7 +139,8 @@ class PageBuilderWidgetModel extends Equatable {
         backgroundColor: backgroundColor != null
             ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
             : null,
-        padding: PageBuilderPadding.fromMap(padding),
+        padding: PageBuilderSpacing.fromMap(padding),
+        margin: PageBuilderSpacing.fromMap(margin),
         maxWidth: maxWidth,
         alignment: AlignmentMapper.getAlignmentFromString(alignment));
   }
@@ -153,6 +161,7 @@ class PageBuilderWidgetModel extends Equatable {
             ? widget.backgroundColor!.value.toRadixString(16)
             : null,
         padding: getMapFromPadding(widget.padding),
+        margin: getMapFromPadding(widget.margin),
         maxWidth: widget.maxWidth,
         alignment: AlignmentMapper.getStringFromAlignment(widget.alignment));
   }
@@ -212,7 +221,7 @@ class PageBuilderWidgetModel extends Equatable {
     }
   }
 
-  static Map<String, dynamic>? getMapFromPadding(PageBuilderPadding? padding) {
+  static Map<String, dynamic>? getMapFromPadding(PageBuilderSpacing? padding) {
     if (padding == null) {
       return null;
     }
@@ -242,6 +251,7 @@ class PageBuilderWidgetModel extends Equatable {
         widthPercentage,
         backgroundColor,
         padding,
+        margin,
         maxWidth,
         alignment
       ];
