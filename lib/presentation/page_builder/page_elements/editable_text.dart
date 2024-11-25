@@ -69,10 +69,9 @@ class _PageBuilderEditableTextViewState extends State<PageBuilderEditableText> {
           width: double.infinity,
           decoration: _focusNode.hasFocus
               ? BoxDecoration(
-                  color: widget.widgetModel.backgroundColor,
                   border: Border.all(color: Colors.black, width: 1.0),
                   borderRadius: const BorderRadius.all(Radius.circular(8)))
-              : BoxDecoration(color: widget.widgetModel.backgroundColor),
+              : null,
           child: TextField(
               controller: _controller,
               textAlign: widget.properties.alignment ?? TextAlign.left,
