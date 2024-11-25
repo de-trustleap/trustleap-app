@@ -205,7 +205,7 @@ void main() {
                   backgroundColor: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
-                  margin: null,
+                  margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   maxWidth: null,
                   alignment: null),
               PageBuilderWidget(
@@ -237,14 +237,14 @@ void main() {
                       backgroundColor: null,
                       padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
-                      margin: null,
+                      margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                       maxWidth: null,
                       alignment: null),
                   widthPercentage: 50,
                   backgroundColor: Color(0xFF333a56),
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
-                  margin: null,
+                  margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   maxWidth: null,
                   alignment: null)
             ],
@@ -253,7 +253,7 @@ void main() {
             backgroundColor: null,
             padding:
                 PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
-            margin: null,
+            margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
             maxWidth: 950,
             alignment: null)
       ];
