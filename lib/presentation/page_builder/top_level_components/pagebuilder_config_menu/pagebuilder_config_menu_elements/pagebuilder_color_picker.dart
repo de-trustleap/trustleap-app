@@ -36,17 +36,29 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
     }
   }
 
-  String _colorToHex(Color color) {
-    return '#${color.value.toRadixString(16).substring(2).toUpperCase()}';
+String _colorToHex(Color color) {
+  try {
+    String hex = color.value.toRadixString(16).toUpperCase();
+    return "#${hex.padLeft(8, '0')}";
+  } catch (e) {
+    return "#00000000";
   }
+}
 
-  Color _hexToColor(String hex) {
+Color _hexToColor(String hex) {
+  try {
     hex = hex.replaceAll("#", "");
+    if (hex.isEmpty || (hex.length != 6 && hex.length != 8)) {
+      return Colors.transparent;
+    }
     if (hex.length == 6) {
       hex = "FF$hex";
     }
     return Color(int.parse("0x$hex"));
+  } catch (e) {
+    return Colors.transparent;
   }
+}
 
   void _showColorPickerDialog(
       context, ThemeData themeData, AppLocalizations localization) {

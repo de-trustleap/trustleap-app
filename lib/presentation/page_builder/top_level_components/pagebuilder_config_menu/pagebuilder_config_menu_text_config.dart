@@ -45,6 +45,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                 }),
             SizedBox(height: 20),
             PagebuilderColorControl(
+                title: localization.landingpage_pagebuilder_text_config_color,
                 initialColor:
                     (model.properties as PageBuilderTextProperties).color ??
                         Colors.black,
@@ -66,22 +67,22 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                   updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
             SizedBox(height: 20),
-            Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
-                      Text(localization.landingpage_pagebuilder_text_config_fontsize,
-            style: themeData.textTheme.bodySmall),
-                        PagebuilderNumberStepper(
-                initialValue: (model.properties as PageBuilderTextProperties)
-                        .fontSize
-                        ?.round() ??
-                    0,
-                minValue: 0,
-                maxValue: 1000,
-                onSelected: (fontSize) {
-                  final updatedProperties =
-                      (model.properties as PageBuilderTextProperties)
-                          .copyWith(fontSize: fontSize.toDouble());
-                  updateTextProperties(updatedProperties, pagebuilderBloc);
-                }),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Text(localization.landingpage_pagebuilder_text_config_fontsize,
+                  style: themeData.textTheme.bodySmall),
+              PagebuilderNumberStepper(
+                  initialValue: (model.properties as PageBuilderTextProperties)
+                          .fontSize
+                          ?.round() ??
+                      0,
+                  minValue: 0,
+                  maxValue: 1000,
+                  onSelected: (fontSize) {
+                    final updatedProperties =
+                        (model.properties as PageBuilderTextProperties)
+                            .copyWith(fontSize: fontSize.toDouble());
+                    updateTextProperties(updatedProperties, pagebuilderBloc);
+                  }),
             ]),
             SizedBox(height: 20),
             PagebuilderNumberDropdown(
