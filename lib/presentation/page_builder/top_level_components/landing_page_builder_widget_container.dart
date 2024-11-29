@@ -69,7 +69,15 @@ class _LandingPageBuilderWidgetContainerState
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: widget.model.backgroundColor,
+                        color: widget.model.background?.backgroundColor,
+                        image: widget.model.background?.imageProperties
+                                    ?.localImage !=
+                                null
+                            ? DecorationImage(
+                                fit: BoxFit.cover,
+                                image: MemoryImage(widget.model.background!
+                                    .imageProperties!.localImage!))
+                            : null,
                         borderRadius: widget.properties?.borderRadius != null
                             ? BorderRadius.circular(
                                 widget.properties!.borderRadius!)
@@ -92,14 +100,27 @@ class _LandingPageBuilderWidgetContainerState
                             : null,
                       ),
                       alignment: widget.model.alignment ?? Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            widget.model.padding?.left ?? 0,
-                            widget.model.padding?.top ?? 0,
-                            widget.model.padding?.right ?? 0,
-                            widget.model.padding?.bottom ?? 0),
-                        child: widget.child,
-                      ),
+                      child: Stack(children: [
+                        if (widget.model.background?.imageProperties
+                                    ?.localImage ==
+                                null &&
+                            widget.model.background?.imageProperties?.url !=
+                                null) ...[
+                          Positioned.fill(
+                              child: Image.network(
+                                  widget
+                                      .model.background!.imageProperties!.url!,
+                                  fit: BoxFit.cover))
+                        ],
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              widget.model.padding?.left ?? 0,
+                              widget.model.padding?.top ?? 0,
+                              widget.model.padding?.right ?? 0,
+                              widget.model.padding?.bottom ?? 0),
+                          child: widget.child,
+                        )
+                      ]),
                     ),
                   ),
                   if (isHovered) ...[
@@ -117,3 +138,7 @@ class _LandingPageBuilderWidgetContainerState
     );
   }
 }
+
+// TODO: Bild löschen ermöglichen
+// TODO: contentMode anpassbar machen
+// TODO: Overlay ermöglichen

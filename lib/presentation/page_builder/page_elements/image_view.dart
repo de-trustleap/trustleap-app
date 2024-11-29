@@ -13,9 +13,15 @@ import 'package:image_picker/image_picker.dart';
 class PageBuilderImageView extends StatefulWidget {
   final PageBuilderImageProperties properties;
   final PageBuilderWidget widgetModel;
+  final bool isConfigMenu;
+  final Function(PageBuilderImageProperties)? onSelectedInConfigMenu;
 
   const PageBuilderImageView(
-      {super.key, required this.properties, required this.widgetModel});
+      {super.key,
+      required this.properties,
+      required this.widgetModel,
+      this.isConfigMenu = false,
+      this.onSelectedInConfigMenu});
 
   @override
   State<PageBuilderImageView> createState() => _PageBuilderImageViewState();
@@ -45,11 +51,16 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
         setState(() {
           _selectedImage = convertedTempImage;
         });
-        final updatedProperties = widget.properties
-            .copyWith(localImage: convertedTempImage, hasChanged: true);
-        final updatedWidget =
-            widget.widgetModel.copyWith(properties: updatedProperties);
-        Modular.get<PagebuilderBloc>().add(UpdateWidgetEvent(updatedWidget));
+        if (widget.isConfigMenu && widget.onSelectedInConfigMenu != null) {
+          widget.onSelectedInConfigMenu!(
+              widget.properties.copyWith(localImage: convertedTempImage));
+        } else {
+          final updatedProperties = widget.properties
+              .copyWith(localImage: convertedTempImage, hasChanged: true);
+          final updatedWidget =
+              widget.widgetModel.copyWith(properties: updatedProperties);
+          Modular.get<PagebuilderBloc>().add(UpdateWidgetEvent(updatedWidget));
+        }
       }
     }
   }
@@ -62,74 +73,89 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
 
   Widget _imageContainer(ImageProvider child) {
     return Container(
-        width: widget.properties.width,
-        height: widget.properties.height,
+        width: widget.isConfigMenu ? 200 : widget.properties.width,
+        height: widget.isConfigMenu ? 200 : widget.properties.height,
         decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(widget.properties.borderRadius ?? 0),
             image: DecorationImage(fit: BoxFit.cover, image: child)));
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _imageElement(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
-    return LandingPageBuilderWidgetContainer(
-      model: widget.widgetModel,
-      child: SizedBox(
-        width: widget.properties.width,
-        height: widget.properties.height,
-        child: MouseRegion(
-            onEnter: (event) => setHovered(true),
-            onExit: (event) => setHovered(false),
-            child: Stack(
-                key: myWidgetKey,
+
+    return SizedBox(
+      width: widget.isConfigMenu ? 200 : widget.properties.width,
+      height: widget.isConfigMenu ? 200 : widget.properties.height,
+      child: MouseRegion(
+        onEnter: (event) => setHovered(true),
+        onExit: (event) => setHovered(false),
+        child: Stack(
+          key: myWidgetKey,
+          alignment: widget.isConfigMenu
+              ? Alignment.center
+              : widget.properties.alignment ?? Alignment.center,
+          children: [
+            if (_selectedImage != null) ...[
+              _imageContainer(MemoryImage(_selectedImage!))
+            ] else if (widget.properties.url != null) ...[
+              NetworkImageView(
+                imageURL: widget.properties.url!,
+                cornerRadius:
+                    widget.isConfigMenu ? 0 : widget.properties.borderRadius,
+                width: widget.isConfigMenu ? 200 : widget.properties.width,
+                height: widget.isConfigMenu ? 200 : widget.properties.height,
+              )
+            ] else ...[
+              Container(
+                width: widget.isConfigMenu ? 200 : widget.properties.width,
+                height: widget.isConfigMenu ? 200 : widget.properties.height,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(kDebugMode
+                        ? "images/placeholder.png"
+                        : "assets/images/placeholder.png"),
+                  ),
+                ),
+              )
+            ],
+            if (_hovered) ...[
+              Container(
+                width: widget.isConfigMenu ? 200 : widget.properties.width,
+                height: widget.isConfigMenu ? 200 : widget.properties.height,
                 alignment: widget.properties.alignment ?? Alignment.center,
-                children: [
-                  if (_selectedImage != null) ...[
-                    _imageContainer(MemoryImage(_selectedImage!))
-                  ] else if (widget.properties.url != null) ...[
-                    NetworkImageView(
-                        imageURL: widget.properties.url!,
-                        cornerRadius: widget.properties.borderRadius,
-                        width: widget.properties.width,
-                        height: widget.properties.height)
-                  ] else ...[
-                    Container(
-                      width: widget.properties.width,
-                      height: widget.properties.height,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(kDebugMode
-                                  ? "images/placeholder.png"
-                                  : "assets/images/placeholder.png"))),
-                    )
-                  ],
-                  if (_hovered) ...[
-                    Container(
-                        width: widget.properties.width,
-                        height: widget.properties.height,
-                        alignment:
-                            widget.properties.alignment ?? Alignment.center,
-                        color: Colors.black.withOpacity(0.5),
-                        child: Center(
-                            child: Tooltip(
-                          message: localization.profile_image_upload_tooltip,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                _pickImage();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  shape: const CircleBorder(),
-                                  padding: const EdgeInsets.all(20),
-                                  backgroundColor:
-                                      themeData.colorScheme.secondary),
-                              child: const Icon(Icons.add_a_photo,
-                                  color: Colors.white)),
-                        ))),
-                  ]
-                ])),
+                color: Colors.black.withOpacity(0.5),
+                child: Center(
+                  child: Tooltip(
+                    message: localization.profile_image_upload_tooltip,
+                    child: ElevatedButton(
+                      onPressed: _pickImage,
+                      style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(20),
+                        backgroundColor: themeData.colorScheme.secondary,
+                      ),
+                      child: const Icon(
+                        Icons.add_a_photo,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ]
+          ],
+        ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.isConfigMenu
+        ? _imageElement(context)
+        : LandingPageBuilderWidgetContainer(
+            model: widget.widgetModel, child: _imageElement(context));
   }
 }
