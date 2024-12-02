@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/model_helper/boxfit_mapper.dart';
 
 class PageBuilderImagePropertiesModel extends Equatable
     implements PageBuilderProperties {
@@ -13,6 +14,7 @@ class PageBuilderImagePropertiesModel extends Equatable
   final double? width;
   final double? height;
   final String? alignment;
+  final String? contentMode;
   final String? newImageBase64;
 
   const PageBuilderImagePropertiesModel(
@@ -21,6 +23,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       required this.width,
       required this.height,
       required this.alignment,
+      required this.contentMode,
       required this.newImageBase64});
 
   Map<String, dynamic> toMap() {
@@ -30,6 +33,7 @@ class PageBuilderImagePropertiesModel extends Equatable
     if (width != null) map['width'] = width;
     if (height != null) map['height'] = height;
     if (alignment != null) map['alignment'] = alignment;
+    if (contentMode != null) map['contentMode'] = contentMode;
     if (newImageBase64 != null) map['newImageBase64'] = newImageBase64;
     return map;
   }
@@ -42,6 +46,8 @@ class PageBuilderImagePropertiesModel extends Equatable
         width: map['width'] != null ? map['width'] as double : null,
         height: map['height'] != null ? map['height'] as double : null,
         alignment: map['alignment'] != null ? map['alignment'] as String : null,
+        contentMode:
+            map['contentMode'] != null ? map['contentMode'] as String : null,
         newImageBase64: map['newImageBase64'] != null
             ? map['newImageBase64'] as String
             : null);
@@ -53,6 +59,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       double? width,
       double? height,
       String? alignment,
+      String? contentMode,
       String? newImageBase64}) {
     return PageBuilderImagePropertiesModel(
         url: url ?? this.url,
@@ -60,6 +67,7 @@ class PageBuilderImagePropertiesModel extends Equatable
         width: width ?? this.width,
         height: height ?? this.height,
         alignment: alignment ?? this.alignment,
+        contentMode: contentMode ?? this.contentMode,
         newImageBase64: newImageBase64 ?? this.newImageBase64);
   }
 
@@ -69,7 +77,8 @@ class PageBuilderImagePropertiesModel extends Equatable
         borderRadius: borderRadius,
         width: width,
         height: height,
-        alignment: AlignmentMapper.getAlignmentFromString(alignment));
+        alignment: AlignmentMapper.getAlignmentFromString(alignment),
+        contentMode: BoxFitMapper.getBoxFitFromString(contentMode));
   }
 
   factory PageBuilderImagePropertiesModel.fromDomain(
@@ -80,11 +89,20 @@ class PageBuilderImagePropertiesModel extends Equatable
         width: properties.width,
         height: properties.height,
         alignment: AlignmentMapper.getStringFromAlignment(properties.alignment),
+        contentMode: BoxFitMapper.getStringFromBoxFit(properties.contentMode),
         newImageBase64: properties.localImage != null
             ? base64Encode(properties.localImage!)
             : null);
   }
 
   @override
-  List<Object?> get props => [url, borderRadius, width, height, newImageBase64];
+  List<Object?> get props => [
+        url,
+        borderRadius,
+        width,
+        height,
+        alignment,
+        contentMode,
+        newImageBase64
+      ];
 }

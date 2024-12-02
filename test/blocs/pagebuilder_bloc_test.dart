@@ -147,7 +147,7 @@ void main() {
                     elementType: PageBuilderWidgetType.text,
                     children: [],
                     widthPercentage: null,
-                    backgroundColor: null,
+                    background: null,
                     containerChild: null,
                     padding: null,
                     margin: null,
@@ -265,12 +265,13 @@ void main() {
         width: 100.0,
         height: 150.0,
         localImage: Uint8List(0),
-        alignment: Alignment.center);
+        alignment: Alignment.center,
+        contentMode: BoxFit.cover);
 
     final mockTextWidget1 = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget1"),
         elementType: PageBuilderWidgetType.text,
-        backgroundColor: null,
+        background: null,
         properties: mockTextProperties1,
         children: [],
         widthPercentage: 100.0,
@@ -284,7 +285,7 @@ void main() {
     final mockTextWidget2 = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget2"),
         elementType: PageBuilderWidgetType.text,
-        backgroundColor: null,
+        background: null,
         properties: mockTextProperties2,
         children: [],
         widthPercentage: 100.0,
@@ -298,7 +299,7 @@ void main() {
     final mockImageWidget = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget3"),
         elementType: PageBuilderWidgetType.image,
-        backgroundColor: null,
+        background: null,
         properties: mockImageProperties,
         children: [],
         containerChild: null,
@@ -311,7 +312,7 @@ void main() {
     final mockColumnWidget = PageBuilderWidget(
         id: UniqueID.fromUniqueString("columnWidget"),
         elementType: PageBuilderWidgetType.column,
-        backgroundColor: null,
+        background: null,
         properties: null,
         children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
         containerChild: null,
@@ -324,7 +325,7 @@ void main() {
     final mockRowWidget = PageBuilderWidget(
         id: UniqueID.fromUniqueString("rowWidget"),
         elementType: PageBuilderWidgetType.row,
-        backgroundColor: null,
+        background: null,
         properties: null,
         children: [mockTextWidget1, mockImageWidget],
         containerChild: null,

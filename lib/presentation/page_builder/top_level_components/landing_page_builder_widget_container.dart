@@ -110,7 +110,19 @@ class _LandingPageBuilderWidgetContainerState
                               child: Image.network(
                                   widget
                                       .model.background!.imageProperties!.url!,
-                                  fit: BoxFit.cover))
+                                  fit: widget.model.background?.imageProperties
+                                          ?.contentMode ??
+                                      BoxFit.cover))
+                        ],
+                        if (widget.model.background?.overlayColor != null &&
+                            (widget.model.background?.imageProperties
+                                        ?.localImage !=
+                                    null ||
+                                widget.model.background?.imageProperties?.url !=
+                                    null)) ...[
+                          Positioned.fill(
+                              child: Container(
+                                  color: widget.model.background!.overlayColor))
                         ],
                         Padding(
                           padding: EdgeInsets.fromLTRB(
@@ -140,5 +152,3 @@ class _LandingPageBuilderWidgetContainerState
 }
 
 // TODO: Bild löschen ermöglichen
-// TODO: contentMode anpassbar machen
-// TODO: Overlay ermöglichen

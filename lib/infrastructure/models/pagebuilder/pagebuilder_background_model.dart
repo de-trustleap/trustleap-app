@@ -8,16 +8,18 @@ import 'package:flutter/material.dart';
 class PagebuilderBackgroundModel extends Equatable {
   final String? backgroundColor;
   final Map<String, dynamic>? imageProperties;
+  final String? overlayColor;
 
-  const PagebuilderBackgroundModel({
-    required this.backgroundColor,
-    required this.imageProperties,
-  });
+  const PagebuilderBackgroundModel(
+      {required this.backgroundColor,
+      required this.imageProperties,
+      required this.overlayColor});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
     if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
     if (imageProperties != null) map['imageProperties'] = imageProperties;
+    if (overlayColor != null) map['overlayColor'] = overlayColor;
     return map;
   }
 
@@ -28,17 +30,19 @@ class PagebuilderBackgroundModel extends Equatable {
             : null,
         imageProperties: map['imageProperties'] != null
             ? map['imageProperties'] as Map<String, dynamic>
-            : null);
+            : null,
+        overlayColor:
+            map['overlayColor'] != null ? map['overlayColor'] as String : null);
   }
 
-  PagebuilderBackgroundModel copyWith({
-    String? backgroundColor,
-    Map<String, dynamic>? imageProperties,
-  }) {
+  PagebuilderBackgroundModel copyWith(
+      {String? backgroundColor,
+      Map<String, dynamic>? imageProperties,
+      String? overlayColor}) {
     return PagebuilderBackgroundModel(
-      backgroundColor: backgroundColor ?? this.backgroundColor,
-      imageProperties: imageProperties ?? this.imageProperties,
-    );
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        imageProperties: imageProperties ?? this.imageProperties,
+        overlayColor: overlayColor ?? this.overlayColor);
   }
 
   PagebuilderBackground toDomain() {
@@ -49,6 +53,9 @@ class PagebuilderBackgroundModel extends Equatable {
         imageProperties: imageProperties != null
             ? PageBuilderImagePropertiesModel.fromMap(imageProperties!)
                 .toDomain()
+            : null,
+        overlayColor: overlayColor != null
+            ? Color(ColorUtility.getHexIntFromString(overlayColor!))
             : null);
   }
 
@@ -62,9 +69,12 @@ class PagebuilderBackgroundModel extends Equatable {
             ? PageBuilderImagePropertiesModel.fromDomain(
                     properties.imageProperties!)
                 .toMap()
+            : null,
+        overlayColor: properties.overlayColor?.value != null
+            ? properties.overlayColor!.value.toRadixString(16)
             : null);
   }
 
   @override
-  List<Object?> get props => [backgroundColor, imageProperties];
+  List<Object?> get props => [backgroundColor, imageProperties, overlayColor];
 }

@@ -7,22 +7,26 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_pr
 class PagebuilderBackground extends Equatable {
   final Color? backgroundColor;
   final PageBuilderImageProperties? imageProperties;
+  final Color? overlayColor;
 
   const PagebuilderBackground({
     required this.backgroundColor,
     required this.imageProperties,
+    required this.overlayColor
   });
 
   PagebuilderBackground copyWith({
     Color? backgroundColor,
     PageBuilderImageProperties? imageProperties,
+    Color? overlayColor
   }) {
     return PagebuilderBackground(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       imageProperties: imageProperties ?? this.imageProperties,
+      overlayColor: overlayColor ?? this.overlayColor
     );
   }
 
   @override
-  List<Object?> get props => [backgroundColor, imageProperties];
+  List<Object?> get props => [backgroundColor, imageProperties, overlayColor];
 }

@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_pr
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_control.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_contentmode_dropdown.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_image_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -23,7 +24,9 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
           onSelected: (color) {
             final backgroundModel = model.background ??
                 PagebuilderBackground(
-                    backgroundColor: null, imageProperties: null);
+                    backgroundColor: null,
+                    imageProperties: null,
+                    overlayColor: null);
             final updatedBackground =
                 backgroundModel.copyWith(backgroundColor: color);
             final updatedWidget = model.copyWith(background: updatedBackground);
@@ -37,18 +40,59 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                   borderRadius: null,
                   width: null,
                   height: null,
-                  alignment: null),
+                  alignment: null,
+                  contentMode: null),
           widgetModel: model,
           onSelected: (properties) {
             final backgroundModel = model.background ??
                 PagebuilderBackground(
-                    backgroundColor: null, imageProperties: null);
+                    backgroundColor: null,
+                    imageProperties: null,
+                    overlayColor: null);
             final updatedBackground =
                 backgroundModel.copyWith(imageProperties: properties);
             final updatedWidget = model.copyWith(background: updatedBackground);
-            print("UPDATE");
             pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-          })
+          },
+          onDelete: () {
+            final properties = model.background?.imageProperties;
+            if (properties != null) {
+              print("DELETE");
+              final updatedBackground =
+                  model.background!.copyWith(imageProperties: null);
+              final updatedWidget =
+                  model.copyWith(background: updatedBackground);
+              pagebuilderBloc.add(UpdateWidgetEvent(
+                  updatedWidget)); // TODO: ImageProperties scheint nicht richtig zurückgesetzt zu werden. Hier nochmal schauen.
+            }
+          }),
+      if (model.background?.imageProperties != null) ...[
+        SizedBox(height: 20),
+        PagebuilderContentModeDrowdown(
+            title: "Anzeigemodus",
+            initialValue:
+                model.background?.imageProperties?.contentMode ?? BoxFit.cover,
+            values: [BoxFit.cover, BoxFit.fill, BoxFit.contain],
+            onSelected: (contentMode) {
+              final properties = model.background!.imageProperties!
+                  .copyWith(contentMode: contentMode);
+              final updatedWidget = model.copyWith(
+                  background:
+                      model.background!.copyWith(imageProperties: properties));
+              pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+            }),
+        SizedBox(height: 20),
+        PagebuilderColorControl(
+            title: "Bild Overlay",
+            initialColor: model.background?.overlayColor ?? Colors.transparent,
+            onSelected: (color) {
+              final updatedBackground =
+                  model.background!.copyWith(overlayColor: color);
+              final updatedWidget =
+                  model.copyWith(background: updatedBackground);
+              pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+            }),
+      ]
     ]);
   }
 }

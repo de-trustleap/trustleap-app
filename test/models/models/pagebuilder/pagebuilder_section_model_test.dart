@@ -146,6 +146,7 @@ void main() {
               "properties": {
                 "borderRadius": 100.0,
                 "alignment": "centerRight",
+                "contentMode": "cover",
                 "width": 200.0,
                 "height": 200.0,
                 "url":
@@ -155,7 +156,6 @@ void main() {
             {
               "id": "660d39c1-70f7-4eb7-ba8b-41580a17d9a6",
               "elementType": "container",
-              "backgroundColor": "FF333a56",
               "widthPercentage": 50.0,
               "properties": {"borderRadius": 10.0},
               "containerChild": {
@@ -198,11 +198,12 @@ void main() {
                       borderRadius: 100,
                       width: 200,
                       height: 200,
-                      alignment: Alignment.centerRight),
+                      alignment: Alignment.centerRight,
+                      contentMode: BoxFit.cover),
                   children: null,
                   containerChild: null,
                   widthPercentage: 50,
-                  backgroundColor: null,
+                  background: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
                   margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
@@ -234,14 +235,14 @@ void main() {
                       children: null,
                       containerChild: null,
                       widthPercentage: null,
-                      backgroundColor: null,
+                      background: null,
                       padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
                       margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                       maxWidth: null,
                       alignment: null),
                   widthPercentage: 50,
-                  backgroundColor: Color(0xFF333a56),
+                  background: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
@@ -250,7 +251,7 @@ void main() {
             ],
             containerChild: null,
             widthPercentage: null,
-            backgroundColor: null,
+            background: null,
             padding:
                 PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
             margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
@@ -292,11 +293,12 @@ void main() {
                       borderRadius: 100,
                       width: 200,
                       height: 200,
-                      alignment: Alignment.centerRight),
+                      alignment: Alignment.centerRight,
+                      contentMode: BoxFit.cover),
                   children: null,
                   containerChild: null,
                   widthPercentage: 50,
-                  backgroundColor: null,
+                  background: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
                   margin: null,
@@ -328,14 +330,14 @@ void main() {
                       children: null,
                       containerChild: null,
                       widthPercentage: null,
-                      backgroundColor: null,
+                      background: null,
                       padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
                       margin: null,
                       maxWidth: null,
                       alignment: null),
                   widthPercentage: 50,
-                  backgroundColor: Color(0xFF333a56),
+                  background: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   margin: null,
@@ -344,7 +346,7 @@ void main() {
             ],
             containerChild: null,
             widthPercentage: null,
-            backgroundColor: null,
+            background: null,
             padding:
                 PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
             margin: null,
@@ -368,6 +370,7 @@ void main() {
                 "alignment": "centerRight",
                 "width": 200.0,
                 "height": 200.0,
+                "contentMode": "cover",
                 "url":
                     "https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/landingPageContentImages%2FL9SPWUuY7mJKWUaX16Xt%2F4ce25fce-242b-471b-8a25-83e920e95e8d?alt=media&token=3c7bdc32-f607-4eee-923f-41410591d1d0"
               }
@@ -375,7 +378,6 @@ void main() {
             {
               "id": "660d39c1-70f7-4eb7-ba8b-41580a17d9a6",
               "elementType": "container",
-              "backgroundColor": "ff333a56",
               "widthPercentage": 50.0,
               "properties": {"borderRadius": 10.0},
               "containerChild": {

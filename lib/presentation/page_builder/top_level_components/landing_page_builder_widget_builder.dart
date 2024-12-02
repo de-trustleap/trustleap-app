@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 
 class LandingPageBuilderWidgetBuilder {
   Widget build(PageBuilderWidget model) {
+    print("REBUILD!");
     switch (model.elementType) {
       case PageBuilderWidgetType.container:
         if (model.properties != null) {

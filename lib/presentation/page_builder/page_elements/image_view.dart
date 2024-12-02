@@ -78,7 +78,11 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
         decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(widget.properties.borderRadius ?? 0),
-            image: DecorationImage(fit: BoxFit.cover, image: child)));
+            image: DecorationImage(
+                fit: widget.isConfigMenu
+                    ? BoxFit.cover
+                    : widget.properties.contentMode,
+                image: child)));
   }
 
   Widget _imageElement(BuildContext context) {
@@ -106,6 +110,9 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
                     widget.isConfigMenu ? 0 : widget.properties.borderRadius,
                 width: widget.isConfigMenu ? 200 : widget.properties.width,
                 height: widget.isConfigMenu ? 200 : widget.properties.height,
+                contentMode: widget.isConfigMenu
+                    ? BoxFit.cover
+                    : widget.properties.contentMode,
               )
             ] else ...[
               Container(
