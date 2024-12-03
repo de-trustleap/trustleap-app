@@ -150,5 +150,3 @@ class _LandingPageBuilderWidgetContainerState
     );
   }
 }
-
-// TODO: Bild löschen ermöglichen

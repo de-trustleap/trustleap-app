@@ -105,4 +105,3 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
         ]);
   }
 }
-// TODO: Hintergrundbild löschen Backend

@@ -133,7 +133,10 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30,
-          background: PagebuilderBackground(backgroundColor: Colors.white, imageProperties: null),
+          background: PagebuilderBackground(
+              backgroundColor: Colors.white,
+              imageProperties: null,
+              overlayColor: null),
           padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
           margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
           maxWidth: 300,
@@ -158,7 +161,10 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30,
-          background: PagebuilderBackground(backgroundColor: Colors.white, imageProperties: null),
+          background: PagebuilderBackground(
+              backgroundColor: Colors.white,
+              imageProperties: null,
+              overlayColor: null),
           padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
           margin: null,
           maxWidth: 300,
