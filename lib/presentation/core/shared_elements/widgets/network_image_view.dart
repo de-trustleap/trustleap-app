@@ -8,13 +8,15 @@ class NetworkImageView extends StatefulWidget {
   final double? cornerRadius;
   final double? width;
   final double? height;
+  final BoxFit? contentMode;
 
   const NetworkImageView(
       {super.key,
       required this.imageURL,
       this.cornerRadius,
       required this.width,
-      required this.height});
+      required this.height,
+      required this.contentMode});
 
   @override
   State<NetworkImageView> createState() => _NetworkImageViewState();
@@ -28,7 +30,8 @@ class _NetworkImageViewState extends State<NetworkImageView> {
       height: widget.height,
       child: ClipRRect(
           borderRadius: BorderRadius.circular(widget.cornerRadius ?? 0),
-          child: Image.network(widget.imageURL, fit: BoxFit.cover,
+          child: Image.network(widget.imageURL,
+              fit: widget.contentMode ?? BoxFit.cover,
               loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) {
               return child;

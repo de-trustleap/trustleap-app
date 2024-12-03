@@ -13,13 +13,15 @@ void main() {
           borderRadius: 30.0,
           width: 200.0,
           height: 200.0,
-          alignment: Alignment.center);
+          alignment: Alignment.center,
+          contentMode: BoxFit.cover);
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 30.0,
           width: 250.0,
           height: 200.0,
-          alignment: Alignment.centerLeft);
+          alignment: Alignment.centerLeft,
+          contentMode: BoxFit.cover);
       // When
       final result =
           model.copyWith(width: 250.0, alignment: Alignment.centerLeft);
@@ -36,13 +38,15 @@ void main() {
           borderRadius: 30.0,
           width: 200.0,
           height: 200.0,
-          alignment: Alignment.center);
+          alignment: Alignment.center,
+          contentMode: BoxFit.cover);
       final properties2 = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 30.0,
           width: 200.0,
           height: 200.0,
-          alignment: Alignment.center);
+          alignment: Alignment.center,
+          contentMode: BoxFit.cover);
       // Then
       expect(properties1, properties2);
     });

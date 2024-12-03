@@ -1140,6 +1140,14 @@
     "@landingpage_pagebuilder_unload_alert_message": {
         "description": "Error message for the alert on the page builder page, which is called when you want to leave the page and have not saved."
     },
+    "landingpage_pagebuilder_config_menu_content_tab": "Content",
+    "@landingpage_pagebuilder_config_menu_content_tab": {
+        "description": "Content tab title in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_config_menu_design_tab": "Design",
+    "@landingpage_pagebuilder_config_menu_design_tab": {
+        "description": "Design tab title in the Pagebuilder Config Menu"
+    },
     "landingpage_pagebuilder_config_menu_container_type": "Container",
     "@landingpage_pagebuilder_config_menu_container_type": {
         "description": "Container title in the pagebuilder config menu"
@@ -1287,5 +1295,25 @@
     "landingpage_pagebuilder_layout_menu_margin": "Margin",
     "@landingpage_pagebuilder_layout_menu_margin": {
         "description": "Title margin menu in the Pagebuilder Config Menu in the layout area"
+    },
+    "landingpage_pagebuilder_layout_menu_image_control_title": "Background image",
+    "@landingpage_pagebuilder_layout_menu_image_control_title": {
+        "description": "Title background image menu in the Pagebuilder Config Menu in the background area"
+    },
+    "landingpage_pagebuilder_layout_menu_background_contentmode": "Content mode",
+    "@landingpage_pagebuilder_layout_menu_background_contentmode": {
+        "description": "Title contentmode menu in the Pagebuilder Config Menu in the background area"
+    },
+    "landingpage_pagebuilder_layout_menu_background_overlay": "Image overlay",
+    "@landingpage_pagebuilder_layout_menu_background_overlay": {
+        "description": "Title image overlay image menu in the Pagebuilder Config Menu in the background area"
+    },
+    "landingpage_pagebuilder_layout_menu_background": "Background",
+    "@landingpage_pagebuilder_layout_menu_background": {
+        "description": "Title background menu in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_layout_menu_background_color": "Background color",
+    "@landingpage_pagebuilder_layout_menu_background_color": {
+        "description": "Title background color image menu in the Pagebuilder Config Menu in the background area"
     }
 }

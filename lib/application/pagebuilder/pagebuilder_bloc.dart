@@ -104,7 +104,6 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
 
       final updatedPageBuilderContent =
           currentState.content.copyWith(content: updatedContent);
-
       emit(GetLandingPageAndUserSuccessState(
         content: updatedPageBuilderContent,
         saveLoading: false,
@@ -176,5 +175,3 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     return currentWidget;
   }
 }
-
-// TODO: Im Design Tab neue Tile namens Layout implementieren.

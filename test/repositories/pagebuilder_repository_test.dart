@@ -70,7 +70,7 @@ void main() {
                     elementType: PageBuilderWidgetType.text,
                     children: [],
                     widthPercentage: null,
-                    backgroundColor: null,
+                    background: null,
                     padding: null,
                     margin: null,
                     containerChild: null,

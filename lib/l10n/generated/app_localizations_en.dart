@@ -857,6 +857,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_unload_alert_message => 'Do you really want to leave the site? Changes that are not saved will be lost.';
 
   @override
+  String get landingpage_pagebuilder_config_menu_content_tab => 'Content';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_design_tab => 'Design';
+
+  @override
   String get landingpage_pagebuilder_config_menu_container_type => 'Container';
 
   @override
@@ -966,4 +972,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_layout_menu_margin => 'Margin';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_image_control_title => 'Background image';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_contentmode => 'Content mode';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_overlay => 'Image overlay';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background => 'Background';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_color => 'Background color';
 }

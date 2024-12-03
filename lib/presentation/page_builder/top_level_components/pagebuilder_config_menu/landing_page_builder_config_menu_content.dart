@@ -69,8 +69,14 @@ class _LandingPageBuilderConfigMenuContentState
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _tabButton("Inhalt", 0),
-                    _tabButton("Design", 1),
+                    _tabButton(
+                        localization
+                            .landingpage_pagebuilder_config_menu_content_tab,
+                        0),
+                    _tabButton(
+                        localization
+                            .landingpage_pagebuilder_config_menu_design_tab,
+                        1),
                   ],
                 ),
                 // Animated Indicator

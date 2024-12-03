@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class PageBuilderWidget extends Equatable {
   final List<PageBuilderWidget>? children;
   final PageBuilderWidget? containerChild;
   final double? widthPercentage;
-  final Color? backgroundColor;
+  final PagebuilderBackground? background;
   final PageBuilderSpacing? padding;
   final PageBuilderSpacing? margin;
   final double? maxWidth;
@@ -28,7 +29,7 @@ class PageBuilderWidget extends Equatable {
       required this.children,
       required this.containerChild,
       required this.widthPercentage,
-      required this.backgroundColor,
+      required this.background,
       required this.padding,
       required this.margin,
       required this.maxWidth,
@@ -41,7 +42,7 @@ class PageBuilderWidget extends Equatable {
       List<PageBuilderWidget>? children,
       PageBuilderWidget? containerChild,
       double? widthPercentage,
-      Color? backgroundColor,
+      PagebuilderBackground? background,
       PageBuilderSpacing? padding,
       PageBuilderSpacing? margin,
       double? maxWidth,
@@ -53,7 +54,7 @@ class PageBuilderWidget extends Equatable {
         children: children ?? this.children,
         containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
-        backgroundColor: backgroundColor ?? this.backgroundColor,
+        background: background ?? this.background,
         padding: padding ?? this.padding,
         margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
@@ -92,7 +93,7 @@ class PageBuilderWidget extends Equatable {
         children,
         containerChild,
         widthPercentage,
-        backgroundColor,
+        background,
         padding,
         margin,
         maxWidth,

@@ -13,6 +13,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           alignment: "center",
+          contentMode: "cover",
           newImageBase64: "image");
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
@@ -20,6 +21,7 @@ void main() {
           width: 300.0,
           height: 400.0,
           alignment: "center",
+          contentMode: "cover",
           newImageBase64: "image");
       // When
       final result = model.copyWith(height: 400.0);
@@ -37,6 +39,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           alignment: "center",
+          contentMode: "cover",
           newImageBase64: "image");
       final expectedResult = {
         "url": "https://test.de",
@@ -44,6 +47,7 @@ void main() {
         "width": 300.0,
         "height": 300.0,
         "alignment": "center",
+        "contentMode": "cover",
         "newImageBase64": "image"
       };
       // When
@@ -62,6 +66,7 @@ void main() {
         "width": 300.0,
         "height": 300.0,
         "alignment": "center",
+        "contentMode": "cover",
         "newImageBase64": "image"
       };
       final expectedResult = PageBuilderImagePropertiesModel(
@@ -70,6 +75,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           alignment: "center",
+          contentMode: "cover",
           newImageBase64: "image");
       // When
       final result = PageBuilderImagePropertiesModel.fromMap(map);
@@ -89,13 +95,15 @@ void main() {
           width: 300.0,
           height: 300.0,
           alignment: "center",
+          contentMode: "cover",
           newImageBase64: "image");
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: Alignment.center);
+          alignment: Alignment.center,
+          contentMode: BoxFit.cover);
       // When
       final result = model.toDomain();
       // Then
@@ -113,13 +121,15 @@ void main() {
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: Alignment.center);
+          alignment: Alignment.center,
+          contentMode: BoxFit.cover);
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
           alignment: "center",
+          contentMode: "cover",
           newImageBase64: null);
       // When
       final result = PageBuilderImagePropertiesModel.fromDomain(model);
@@ -137,6 +147,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           alignment: "center",
+          contentMode: "cover",
           newImageBase64: null);
       final properties2 = PageBuilderImagePropertiesModel(
           url: "https://test.de",
@@ -144,6 +155,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           alignment: "center",
+          contentMode: "cover",
           newImageBase64: null);
       // Then
       expect(properties1, properties2);

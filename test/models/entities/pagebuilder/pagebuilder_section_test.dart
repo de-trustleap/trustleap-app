@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
 
@@ -25,7 +26,10 @@ void main() {
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
-                backgroundColor: Colors.white,
+                background: PagebuilderBackground(
+                    backgroundColor: Colors.white,
+                    imageProperties: null,
+                    overlayColor: null),
                 padding: null,
                 margin: null,
                 maxWidth: 300,
@@ -46,7 +50,10 @@ void main() {
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
-                backgroundColor: Colors.white,
+                background: PagebuilderBackground(
+                    backgroundColor: Colors.white,
+                    imageProperties: null,
+                    overlayColor: null),
                 padding: null,
                 margin: null,
                 maxWidth: 300,
@@ -65,7 +72,10 @@ void main() {
             children: [],
             containerChild: null,
             widthPercentage: 30,
-            backgroundColor: Colors.white,
+            background: PagebuilderBackground(
+                backgroundColor: Colors.white,
+                imageProperties: null,
+                overlayColor: null),
             padding: null,
             margin: null,
             maxWidth: 300,
@@ -92,7 +102,10 @@ void main() {
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
-                backgroundColor: Colors.white,
+                background: PagebuilderBackground(
+                    backgroundColor: Colors.white,
+                    imageProperties: null,
+                    overlayColor: null),
                 padding: null,
                 margin: null,
                 maxWidth: 300,
@@ -113,7 +126,10 @@ void main() {
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
-                backgroundColor: Colors.white,
+                background: PagebuilderBackground(
+                    backgroundColor: Colors.white,
+                    imageProperties: null,
+                    overlayColor: null),
                 padding: null,
                 margin: null,
                 maxWidth: 300,
