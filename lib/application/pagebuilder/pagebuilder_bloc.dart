@@ -104,7 +104,6 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
 
       final updatedPageBuilderContent =
           currentState.content.copyWith(content: updatedContent);
-
       emit(GetLandingPageAndUserSuccessState(
         content: updatedPageBuilderContent,
         saveLoading: false,

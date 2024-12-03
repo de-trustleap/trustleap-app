@@ -57,13 +57,11 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
           onDelete: () {
             final properties = model.background?.imageProperties;
             if (properties != null) {
-              print("DELETE");
               final updatedBackground =
-                  model.background!.copyWith(imageProperties: null);
+                  model.background!.copyWith(setImagePropertiesNull: true);
               final updatedWidget =
                   model.copyWith(background: updatedBackground);
-              pagebuilderBloc.add(UpdateWidgetEvent(
-                  updatedWidget)); // TODO: ImageProperties scheint nicht richtig zurückgesetzt zu werden. Hier nochmal schauen.
+              pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
             }
           }),
       if (model.background?.imageProperties != null) ...[
@@ -96,3 +94,4 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
     ]);
   }
 }
+// TODO: Hintergrundbild löschen Backend
