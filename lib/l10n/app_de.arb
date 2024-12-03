@@ -1287,5 +1287,25 @@
     "landingpage_pagebuilder_layout_menu_margin": "Außenabstand",
     "@landingpage_pagebuilder_layout_menu_margin": {
         "description": "Titel Außenabstand Menüpunkt im Pagebuilder Config Menü im Layout Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_image_control_title": "Hintergrundbild",
+    "@landingpage_pagebuilder_layout_menu_image_control_title": {
+        "description": "Titel Hintergrundbild Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_background_contentmode": "Anzeigemodus",
+    "@landingpage_pagebuilder_layout_menu_background_contentmode": {
+        "description": "Titel Anzeigemodus Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_background_overlay": "Bild Overlay",
+    "@landingpage_pagebuilder_layout_menu_background_overlay": {
+        "description": "Titel Bild Overlay Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_background": "Hintergrund",
+    "@landingpage_pagebuilder_layout_menu_background": {
+        "description": "Titel Hintergrund Menüpunkt für Bild im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_layout_menu_background_color": "Hintergrundfarbe",
+    "@landingpage_pagebuilder_layout_menu_background_color": {
+        "description": "Titel Hintergrundfarbe Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
     }
 }

@@ -2008,6 +2008,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Margin'**
   String get landingpage_pagebuilder_layout_menu_margin;
+
+  /// Title background image menu in the Pagebuilder Config Menu in the background area
+  ///
+  /// In en, this message translates to:
+  /// **'Background image'**
+  String get landingpage_pagebuilder_layout_menu_image_control_title;
+
+  /// Title contentmode menu in the Pagebuilder Config Menu in the background area
+  ///
+  /// In en, this message translates to:
+  /// **'Content mode'**
+  String get landingpage_pagebuilder_layout_menu_background_contentmode;
+
+  /// Title image overlay image menu in the Pagebuilder Config Menu in the background area
+  ///
+  /// In en, this message translates to:
+  /// **'Image overlay'**
+  String get landingpage_pagebuilder_layout_menu_background_overlay;
+
+  /// Title background menu in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get landingpage_pagebuilder_layout_menu_background;
+
+  /// Title background color image menu in the Pagebuilder Config Menu in the background area
+  ///
+  /// In en, this message translates to:
+  /// **'Background color'**
+  String get landingpage_pagebuilder_layout_menu_background_color;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

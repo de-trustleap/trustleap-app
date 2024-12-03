@@ -966,4 +966,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_layout_menu_margin => 'Margin';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_image_control_title => 'Background image';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_contentmode => 'Content mode';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_overlay => 'Image overlay';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background => 'Background';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_color => 'Background color';
 }
