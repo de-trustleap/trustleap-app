@@ -1787,6 +1787,18 @@ abstract class AppLocalizations {
   /// **'Do you really want to leave the site? Changes that are not saved will be lost.'**
   String get landingpage_pagebuilder_unload_alert_message;
 
+  /// Content tab title in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get landingpage_pagebuilder_config_menu_content_tab;
+
+  /// Design tab title in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Design'**
+  String get landingpage_pagebuilder_config_menu_design_tab;
+
   /// Container title in the pagebuilder config menu
   ///
   /// In en, this message translates to:

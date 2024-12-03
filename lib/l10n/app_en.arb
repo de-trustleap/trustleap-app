@@ -1140,6 +1140,14 @@
     "@landingpage_pagebuilder_unload_alert_message": {
         "description": "Error message for the alert on the page builder page, which is called when you want to leave the page and have not saved."
     },
+    "landingpage_pagebuilder_config_menu_content_tab": "Content",
+    "@landingpage_pagebuilder_config_menu_content_tab": {
+        "description": "Content tab title in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_config_menu_design_tab": "Design",
+    "@landingpage_pagebuilder_config_menu_design_tab": {
+        "description": "Design tab title in the Pagebuilder Config Menu"
+    },
     "landingpage_pagebuilder_config_menu_container_type": "Container",
     "@landingpage_pagebuilder_config_menu_container_type": {
         "description": "Container title in the pagebuilder config menu"

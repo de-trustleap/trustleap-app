@@ -857,6 +857,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_unload_alert_message => 'Do you really want to leave the site? Changes that are not saved will be lost.';
 
   @override
+  String get landingpage_pagebuilder_config_menu_content_tab => 'Content';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_design_tab => 'Design';
+
+  @override
   String get landingpage_pagebuilder_config_menu_container_type => 'Container';
 
   @override
