@@ -8,13 +8,13 @@ class PagebuilderImageControl extends StatelessWidget {
   final PageBuilderImageProperties properties;
   final PageBuilderWidget widgetModel;
   final Function(PageBuilderImageProperties) onSelected;
-  final Function onDelete;
+  final Function? onDelete;
   const PagebuilderImageControl(
       {super.key,
       required this.properties,
       required this.widgetModel,
       required this.onSelected,
-      required this.onDelete});
+      this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +40,13 @@ class PagebuilderImageControl extends StatelessWidget {
                     isConfigMenu: true,
                     onSelectedInConfigMenu: (properties) =>
                         onSelected(properties)),
-                SizedBox(width: 16),
-                IconButton(
-                    onPressed: () => onDelete(),
-                    icon: Icon(Icons.delete,
-                        size: 24, color: themeData.colorScheme.secondary))
+                if (onDelete != null) ...[
+                  SizedBox(width: 16),
+                  IconButton(
+                      onPressed: () => onDelete != null ? onDelete!() : {},
+                      icon: Icon(Icons.delete,
+                          size: 24, color: themeData.colorScheme.secondary))
+                ]
               ])
         ]);
   }

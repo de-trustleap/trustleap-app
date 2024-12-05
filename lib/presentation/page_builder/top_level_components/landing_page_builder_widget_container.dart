@@ -74,7 +74,9 @@ class _LandingPageBuilderWidgetContainerState
                                     ?.localImage !=
                                 null
                             ? DecorationImage(
-                                fit: BoxFit.cover,
+                                fit: widget.model.background!.imageProperties!
+                                        .contentMode ??
+                                    BoxFit.cover,
                                 image: MemoryImage(widget.model.background!
                                     .imageProperties!.localImage!))
                             : null,
