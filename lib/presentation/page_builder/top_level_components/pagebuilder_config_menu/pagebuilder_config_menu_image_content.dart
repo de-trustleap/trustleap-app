@@ -32,6 +32,6 @@ class PagebuilderConfigMenuImageContent extends StatelessWidget {
   }
 }
 
-// TODO: Fehler beheben: Alignment Einstellungen werden nicht übernommen. (Liegt daran dass das Alignment auf Image Ebene gemacht wird. Alignment aus Image Properties löschen und Alignment für Image und Text in Layout Tile machen.)
-// TODO: OverlayColor für Image Properties im Backend.
+// TODO: Alignment im Backend aus ImageProperties entfernen.
+// TODO: OverlayColor für Image Properties im Backend hinzufügen.
 // TODO: Fehler beheben: Overlay bei Image Properties für Hintergrundbild hat falsche Größe bzw. Hintergrundbild hat falsche Größe.

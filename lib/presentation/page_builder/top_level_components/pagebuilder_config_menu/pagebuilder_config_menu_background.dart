@@ -47,7 +47,6 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                       borderRadius: null,
                       width: null,
                       height: null,
-                      alignment: null,
                       contentMode: null,
                       overlayColor: null),
               widgetModel: model,

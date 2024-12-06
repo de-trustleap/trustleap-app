@@ -98,9 +98,7 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
         onExit: (event) => setHovered(false),
         child: Stack(
           key: myWidgetKey,
-          alignment: widget.isConfigMenu
-              ? Alignment.center
-              : widget.properties.alignment ?? Alignment.center,
+          alignment: Alignment.center,
           children: [
             if (widget.properties.localImage != null) ...[
               _imageContainer(MemoryImage(widget.properties.localImage!))
@@ -140,7 +138,7 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
               Container(
                 width: widget.isConfigMenu ? 200 : widget.properties.width,
                 height: widget.isConfigMenu ? 200 : widget.properties.height,
-                alignment: widget.properties.alignment ?? Alignment.center,
+                alignment: Alignment.center,
                 color: Colors.black.withOpacity(0.5),
                 child: Center(
                   child: Tooltip(

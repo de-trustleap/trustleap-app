@@ -1,7 +1,7 @@
-import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_config_menu_dropdown.dart';
@@ -73,19 +73,6 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
               final updatedProperties =
                   (model.properties as PageBuilderImageProperties)
                       .copyWith(width: size.width, height: size.height);
-              updateImageProperties(updatedProperties, pagebuilderBloc);
-            }),
-        SizedBox(height: 20),
-        PagebuilderConfigMenuDrowdown(
-            title: "Ausrichtung",
-            initialValue:
-                (model.properties as PageBuilderImageProperties).alignment ??
-                    Alignment.center,
-            type: PagebuilderDropdownType.alignment,
-            onSelected: (alignment) {
-              final updatedProperties =
-                  (model.properties as PageBuilderImageProperties)
-                      .copyWith(alignment: alignment);
               updateImageProperties(updatedProperties, pagebuilderBloc);
             }),
       ]);
