@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class AlignmentMapper {
@@ -54,6 +55,34 @@ class AlignmentMapper {
         return "bottomRight";
       default:
         return "center";
+    }
+  }
+
+  static String? getLocalizedStringFromAlignment(Alignment? alignment, AppLocalizations localization) {
+    if (alignment == null) {
+      return null;
+    }
+    switch (alignment) {
+      case Alignment.topLeft:
+        return "Oben links";
+      case Alignment.topCenter:
+        return "Oben zentriert";
+      case Alignment.topRight:
+        return "Oben rechts";
+      case Alignment.centerLeft:
+        return "Mitte links";
+      case Alignment.center:
+        return "Mitte";
+      case Alignment.centerRight:
+        return "Mitte rechts";
+      case Alignment.bottomLeft:
+        return "Unten links";
+      case Alignment.bottomCenter:
+        return "Unten zentriert";
+      case Alignment.bottomRight:
+        return "Unten rechts";
+      default:
+        return "Mitte";
     }
   }
 }

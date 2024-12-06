@@ -1,7 +1,6 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_image_control.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,6 @@ class PagebuilderConfigMenuImageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
     final pagebuilderCubit = Modular.get<PagebuilderBloc>();
     return CollapsibleTile(title: "Bild Inhalt", children: [
       if (model.properties is PageBuilderImageProperties) ...[
@@ -34,5 +32,6 @@ class PagebuilderConfigMenuImageContent extends StatelessWidget {
   }
 }
 
-// TODO: Image Configuration mit Contentmode, corner radius und overlay
+// TODO: Fehler beheben: Alignment Einstellungen werden nicht übernommen. (Liegt daran dass das Alignment auf Image Ebene gemacht wird. Alignment aus Image Properties löschen und Alignment für Image und Text in Layout Tile machen.)
+// TODO: OverlayColor für Image Properties im Backend.
 // TODO: Fehler beheben: Overlay bei Image Properties für Hintergrundbild hat falsche Größe bzw. Hintergrundbild hat falsche Größe.

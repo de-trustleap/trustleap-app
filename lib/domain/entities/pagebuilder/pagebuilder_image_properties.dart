@@ -13,6 +13,7 @@ class PageBuilderImageProperties extends Equatable
   final double? height;
   final Alignment? alignment;
   final BoxFit? contentMode;
+  final Color? overlayColor;
 
   final Uint8List? localImage;
   final bool hasChanged;
@@ -24,6 +25,7 @@ class PageBuilderImageProperties extends Equatable
       required this.height,
       required this.alignment,
       required this.contentMode,
+      required this.overlayColor,
       this.localImage,
       this.hasChanged = false});
 
@@ -34,6 +36,7 @@ class PageBuilderImageProperties extends Equatable
       double? height,
       Alignment? alignment,
       BoxFit? contentMode,
+      Color? overlayColor,
       Uint8List? localImage,
       bool? hasChanged}) {
     return PageBuilderImageProperties(
@@ -43,11 +46,12 @@ class PageBuilderImageProperties extends Equatable
         height: height ?? this.height,
         alignment: alignment ?? this.alignment,
         contentMode: contentMode ?? this.contentMode,
+        overlayColor: overlayColor ?? this.overlayColor,
         localImage: localImage ?? this.localImage,
         hasChanged: hasChanged ?? this.hasChanged);
   }
 
   @override
   List<Object?> get props =>
-      [url, borderRadius, width, height, alignment, contentMode, localImage];
+      [url, borderRadius, width, height, alignment, contentMode, overlayColor, localImage];
 }
