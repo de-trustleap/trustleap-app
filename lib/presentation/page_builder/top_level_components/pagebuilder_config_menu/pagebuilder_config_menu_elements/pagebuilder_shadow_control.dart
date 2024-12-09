@@ -7,19 +7,24 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primar
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker.dart';
 import 'package:flutter/material.dart';
 
-class PagebuilderTextShadowControl extends StatefulWidget {
+class PagebuilderShadowControl extends StatefulWidget {
   final PageBuilderShadow? initialShadow;
+  final bool showSpreadRadius;
   final Function(PageBuilderShadow?) onSelected;
-  const PagebuilderTextShadowControl(
-      {super.key, required this.initialShadow, required this.onSelected});
+  const PagebuilderShadowControl(
+      {super.key,
+      required this.initialShadow,
+      required this.showSpreadRadius,
+      required this.onSelected});
 
   @override
-  State<PagebuilderTextShadowControl> createState() =>
+  State<PagebuilderShadowControl> createState() =>
       _PagebuilderTextShadowControlState();
 }
 
 class _PagebuilderTextShadowControlState
-    extends State<PagebuilderTextShadowControl> {
+    extends State<PagebuilderShadowControl> {
+  final TextEditingController spreadRadiusController = TextEditingController();
   final TextEditingController blurRadiusController = TextEditingController();
   final TextEditingController xOffsetController = TextEditingController();
   final TextEditingController yOffsetController = TextEditingController();
@@ -32,6 +37,7 @@ class _PagebuilderTextShadowControlState
 
   @override
   void dispose() {
+    spreadRadiusController.dispose();
     blurRadiusController.dispose();
     xOffsetController.dispose();
     yOffsetController.dispose();
@@ -39,6 +45,8 @@ class _PagebuilderTextShadowControlState
   }
 
   void _setInitialShadowTexts() {
+    spreadRadiusController.text =
+        "${widget.initialShadow?.spreadRadius ?? "0"}";
     blurRadiusController.text = "${widget.initialShadow?.blurRadius ?? "0"}";
     xOffsetController.text = "${widget.initialShadow?.offset?.dx ?? "0"}";
     yOffsetController.text = "${widget.initialShadow?.offset?.dy ?? "0"}";
@@ -50,6 +58,11 @@ class _PagebuilderTextShadowControlState
         spreadRadius: null,
         blurRadius: null,
         offset: null);
+    if (spreadRadiusController.text != "0" &&
+        spreadRadiusController.text != "") {
+      shadow = shadow.copyWith(
+          spreadRadius: double.tryParse(spreadRadiusController.text));
+    }
     if (blurRadiusController.text != "0" && blurRadiusController.text != "") {
       shadow = shadow.copyWith(
           blurRadius: double.tryParse(blurRadiusController.text));
@@ -63,7 +76,7 @@ class _PagebuilderTextShadowControlState
           offset: Offset(double.tryParse(xOffsetController.text) ?? 0,
               double.tryParse(yOffsetController.text) ?? 0));
     }
-    if (shadow.blurRadius != null || shadow.offset != null) {
+    if (shadow.spreadRadius != null || shadow.blurRadius != null || shadow.offset != null) {
       return shadow;
     } else {
       return null;
@@ -96,6 +109,28 @@ class _PagebuilderTextShadowControlState
                               color: themeData.colorScheme.surfaceTint))
                     ]),
                 SizedBox(height: 20),
+                if (widget.showSpreadRadius) ...[
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Spread Radius",
+                            style: themeData.textTheme.bodySmall),
+                        SizedBox(width: 20),
+                      ]),
+                  SizedBox(height: 20),
+                  FormTextfield(
+                          maxWidth: 200,
+                          controller: spreadRadiusController,
+                          disabled: false,
+                          desktopStyle: themeData.textTheme.bodySmall,
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [
+                            DecimalNumberFormatter(
+                                maxIntegerDigits: 3, maxDecimalDigits: 2)
+                          ],
+                          placeholder: "")
+                ],
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

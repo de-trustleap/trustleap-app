@@ -44,7 +44,7 @@ class PagebuilderConfigMenuLayout extends StatelessWidget {
               onSelected: (alignment) {
                 final updatedWidget = model.copyWith(alignment: alignment);
                 pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-              })
+              }),
         ]);
   }
 }

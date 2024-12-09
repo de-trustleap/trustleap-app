@@ -32,6 +32,4 @@ class PagebuilderConfigMenuImageContent extends StatelessWidget {
   }
 }
 
-// TODO: Alignment im Backend aus ImageProperties entfernen.
-// TODO: OverlayColor für Image Properties im Backend hinzufügen.
-// TODO: Fehler beheben: Overlay bei Image Properties für Hintergrundbild hat falsche Größe bzw. Hintergrundbild hat falsche Größe.
+// TODO: Fehler beheben: Das Speichern eines Bildes mit Hintergrundbild funktioniert nicht. Dann ist nur das Hintergrundbild gespeichert worden und das Bild zeigt ebenfalls das Hintergrundbild an.

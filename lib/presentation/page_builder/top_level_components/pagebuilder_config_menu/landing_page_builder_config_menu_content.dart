@@ -9,12 +9,14 @@ class LandingPageBuilderConfigMenuContent extends StatefulWidget {
   final int animationDuration;
   final double menuWidth;
   final PageBuilderWidget model;
+  final bool showOnlyDesignTab;
   final Function closeMenu;
   const LandingPageBuilderConfigMenuContent(
       {super.key,
       required this.animationDuration,
       required this.menuWidth,
       required this.model,
+      required this.showOnlyDesignTab,
       required this.closeMenu});
 
   @override
@@ -51,6 +53,21 @@ class _LandingPageBuilderConfigMenuContentState
     );
   }
 
+  Widget _getContent() {
+    if (widget.showOnlyDesignTab) {
+      return LandingPageBuilderConfigMenuDesignTab(
+                          model: widget.model);
+    } else {
+      if (_selectedTabIndex == 0) {
+        return LandingPageBuilderConfigMenuContentTab(
+                          model: widget.model);
+      } else {
+        return LandingPageBuilderConfigMenuDesignTab(
+                          model: widget.model);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -63,44 +80,42 @@ class _LandingPageBuilderConfigMenuContentState
             LandingPageBuilderConfigMenuHeader(
                 title: widget.model.getWidgetTitle(localization),
                 closePressed: () => widget.closeMenu()),
-            Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _tabButton(
-                        localization
-                            .landingpage_pagebuilder_config_menu_content_tab,
-                        0),
-                    _tabButton(
-                        localization
-                            .landingpage_pagebuilder_config_menu_design_tab,
-                        1),
-                  ],
-                ),
-                // Animated Indicator
-                AnimatedPositioned(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  left: _selectedTabIndex == 0 ? 0 : widget.menuWidth / 2,
-                  bottom: 0,
-                  child: Container(
-                    height: 2,
-                    width: widget.menuWidth / 2,
-                    color: themeData.colorScheme.secondary,
+            if (!widget.showOnlyDesignTab) ...[
+              Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _tabButton(
+                          localization
+                              .landingpage_pagebuilder_config_menu_content_tab,
+                          0),
+                      _tabButton(
+                          localization
+                              .landingpage_pagebuilder_config_menu_design_tab,
+                          1),
+                    ],
                   ),
-                ),
-              ],
-            ),
+                  // Animated Indicator
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeInOut,
+                    left: _selectedTabIndex == 0 ? 0 : widget.menuWidth / 2,
+                    bottom: 0,
+                    child: Container(
+                      height: 2,
+                      width: widget.menuWidth / 2,
+                      color: themeData.colorScheme.secondary,
+                    ),
+                  ),
+                ],
+              ),
+            ],
             Expanded(
               child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: _selectedTabIndex == 0
-                      ? LandingPageBuilderConfigMenuContentTab(
-                          model: widget.model)
-                      : LandingPageBuilderConfigMenuDesignTab(
-                          model: widget.model)),
+                  child: _getContent()),
             ),
           ]),
         ),
