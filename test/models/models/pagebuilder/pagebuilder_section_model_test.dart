@@ -145,7 +145,6 @@ void main() {
               "padding": {"right": 16.0},
               "properties": {
                 "borderRadius": 100.0,
-                "alignment": "centerRight",
                 "contentMode": "cover",
                 "width": 200.0,
                 "height": 200.0,
@@ -198,15 +197,16 @@ void main() {
                       borderRadius: 100,
                       width: 200,
                       height: 200,
-                      alignment: Alignment.centerRight,
-                      contentMode: BoxFit.cover),
+                      contentMode: BoxFit.cover,
+                      overlayColor: null),
                   children: null,
                   containerChild: null,
                   widthPercentage: 50,
                   background: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
-                  margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                  margin:
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   maxWidth: null,
                   alignment: null),
               PageBuilderWidget(
@@ -238,14 +238,16 @@ void main() {
                       background: null,
                       padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
-                      margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                      margin: PageBuilderSpacing(
+                          top: 0, bottom: 0, left: 0, right: 0),
                       maxWidth: null,
                       alignment: null),
                   widthPercentage: 50,
                   background: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
-                  margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                  margin:
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   maxWidth: null,
                   alignment: null)
             ],
@@ -293,8 +295,8 @@ void main() {
                       borderRadius: 100,
                       width: 200,
                       height: 200,
-                      alignment: Alignment.centerRight,
-                      contentMode: BoxFit.cover),
+                      contentMode: BoxFit.cover,
+                      overlayColor: null),
                   children: null,
                   containerChild: null,
                   widthPercentage: 50,
@@ -367,7 +369,6 @@ void main() {
               "padding": {"right": 16.0},
               "properties": {
                 "borderRadius": 100.0,
-                "alignment": "centerRight",
                 "width": 200.0,
                 "height": 200.0,
                 "contentMode": "cover",

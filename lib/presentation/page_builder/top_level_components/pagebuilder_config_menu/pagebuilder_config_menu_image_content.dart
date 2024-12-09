@@ -32,4 +32,4 @@ class PagebuilderConfigMenuImageContent extends StatelessWidget {
   }
 }
 
-// TODO: Fehler beheben: Das Speichern eines Bildes mit Hintergrundbild funktioniert nicht. Dann ist nur das Hintergrundbild gespeichert worden und das Bild zeigt ebenfalls das Hintergrundbild an.
+// TODO: Localizations

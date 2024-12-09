@@ -265,8 +265,8 @@ void main() {
         width: 100.0,
         height: 150.0,
         localImage: Uint8List(0),
-        alignment: Alignment.center,
-        contentMode: BoxFit.cover);
+        contentMode: BoxFit.cover,
+        overlayColor: null);
 
     final mockTextWidget1 = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget1"),
