@@ -76,7 +76,9 @@ class _PagebuilderTextShadowControlState
           offset: Offset(double.tryParse(xOffsetController.text) ?? 0,
               double.tryParse(yOffsetController.text) ?? 0));
     }
-    if (shadow.spreadRadius != null || shadow.blurRadius != null || shadow.offset != null) {
+    if (shadow.spreadRadius != null ||
+        shadow.blurRadius != null ||
+        shadow.offset != null) {
       return shadow;
     } else {
       return null;
@@ -113,23 +115,25 @@ class _PagebuilderTextShadowControlState
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Spread Radius",
+                        Text(
+                            localization
+                                .landingpage_pagebuilder_text_config_shadow_alert_spread_radius,
                             style: themeData.textTheme.bodySmall),
                         SizedBox(width: 20),
                       ]),
                   SizedBox(height: 20),
                   FormTextfield(
-                          maxWidth: 200,
-                          controller: spreadRadiusController,
-                          disabled: false,
-                          desktopStyle: themeData.textTheme.bodySmall,
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          inputFormatters: [
-                            DecimalNumberFormatter(
-                                maxIntegerDigits: 3, maxDecimalDigits: 2)
-                          ],
-                          placeholder: "")
+                      maxWidth: 200,
+                      controller: spreadRadiusController,
+                      disabled: false,
+                      desktopStyle: themeData.textTheme.bodySmall,
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        DecimalNumberFormatter(
+                            maxIntegerDigits: 3, maxDecimalDigits: 2)
+                      ],
+                      placeholder: "")
                 ],
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

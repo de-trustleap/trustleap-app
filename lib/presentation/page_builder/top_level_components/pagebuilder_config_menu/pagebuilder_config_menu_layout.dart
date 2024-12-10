@@ -38,7 +38,7 @@ class PagebuilderConfigMenuLayout extends StatelessWidget {
               }),
           SizedBox(height: 24),
           PagebuilderConfigMenuDrowdown(
-              title: "Ausrichtung",
+              title: localization.landingpage_pagebuilder_layout_menu_alignment,
               initialValue: model.alignment ?? Alignment.center,
               type: PagebuilderDropdownType.alignment,
               onSelected: (alignment) {

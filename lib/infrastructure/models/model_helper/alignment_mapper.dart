@@ -58,31 +58,32 @@ class AlignmentMapper {
     }
   }
 
-  static String? getLocalizedStringFromAlignment(Alignment? alignment, AppLocalizations localization) {
+  static String? getLocalizedStringFromAlignment(
+      Alignment? alignment, AppLocalizations localization) {
     if (alignment == null) {
       return null;
     }
     switch (alignment) {
       case Alignment.topLeft:
-        return "Oben links";
+        return localization.pagebuilder_layout_menu_alignment_top_left;
       case Alignment.topCenter:
-        return "Oben zentriert";
+        return localization.pagebuilder_layout_menu_alignment_top_center;
       case Alignment.topRight:
-        return "Oben rechts";
+        return localization.pagebuilder_layout_menu_alignment_top_right;
       case Alignment.centerLeft:
-        return "Mitte links";
+        return localization.pagebuilder_layout_menu_alignment_center_left;
       case Alignment.center:
-        return "Mitte";
+        return localization.pagebuilder_layout_menu_alignment_center;
       case Alignment.centerRight:
-        return "Mitte rechts";
+        return localization.pagebuilder_layout_menu_alignment_center_right;
       case Alignment.bottomLeft:
-        return "Unten links";
+        return localization.pagebuilder_layout_menu_alignment_bottom_left;
       case Alignment.bottomCenter:
-        return "Unten zentriert";
+        return localization.pagebuilder_layout_menu_alignment_bottom_center;
       case Alignment.bottomRight:
-        return "Unten rechts";
+        return localization.pagebuilder_layout_menu_alignment_bottom_right;
       default:
-        return "Mitte";
+        return localization.pagebuilder_layout_menu_alignment_center;
     }
   }
 }
