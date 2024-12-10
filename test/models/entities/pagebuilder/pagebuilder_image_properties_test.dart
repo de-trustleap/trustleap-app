@@ -4,27 +4,24 @@ import 'package:flutter/material.dart';
 
 void main() {
   group("PagebuilderImageProperties_CopyWith", () {
-    test(
-        "set width and alignment with copyWith should set width and alignment for resulting object",
-        () {
+    test("set width with copyWith should set width for resulting object", () {
       // Given
       final model = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 30.0,
           width: 200.0,
           height: 200.0,
-          alignment: Alignment.center,
-          contentMode: BoxFit.cover);
+          contentMode: BoxFit.cover,
+          overlayColor: null);
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 30.0,
           width: 250.0,
           height: 200.0,
-          alignment: Alignment.centerLeft,
-          contentMode: BoxFit.cover);
+          contentMode: BoxFit.cover,
+          overlayColor: null);
       // When
-      final result =
-          model.copyWith(width: 250.0, alignment: Alignment.centerLeft);
+      final result = model.copyWith(width: 250.0);
       // Then
       expect(result, expectedResult);
     });
@@ -38,15 +35,15 @@ void main() {
           borderRadius: 30.0,
           width: 200.0,
           height: 200.0,
-          alignment: Alignment.center,
-          contentMode: BoxFit.cover);
+          contentMode: BoxFit.cover,
+          overlayColor: null);
       final properties2 = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 30.0,
           width: 200.0,
           height: 200.0,
-          alignment: Alignment.center,
-          contentMode: BoxFit.cover);
+          contentMode: BoxFit.cover,
+          overlayColor: null);
       // Then
       expect(properties1, properties2);
     });

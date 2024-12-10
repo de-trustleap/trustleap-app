@@ -926,6 +926,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_text_config_shadow_alert_title => 'Schatten konfigurieren';
 
   @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_spread_radius => 'Spread Radius';
+
+  @override
   String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius => 'Blur Radius';
 
   @override
@@ -974,6 +977,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_layout_menu_margin => 'Außenabstand';
 
   @override
+  String get landingpage_pagebuilder_layout_menu_alignment => 'Ausrichtung';
+
+  @override
   String get landingpage_pagebuilder_layout_menu_image_control_title => 'Hintergrundbild';
 
   @override
@@ -987,4 +993,55 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_layout_menu_background_color => 'Hintergrundfarbe';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_top_left => 'Oben links';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_top_center => 'Oben zentriert';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_top_right => 'Oben rechts';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_center_left => 'Mitte links';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_center => 'Mitte';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_center_right => 'Mitte rechts';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_bottom_left => 'Unten links';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_bottom_center => 'Unten zentriert';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_bottom_right => 'Unten rechts';
+
+  @override
+  String get pagebuilder_layout_menu_size_control_size => 'Größe';
+
+  @override
+  String get pagebuilder_layout_menu_size_control_width => 'Breite';
+
+  @override
+  String get pagebuilder_layout_menu_size_control_height => 'Höhe';
+
+  @override
+  String get pagebuilder_image_config_title => 'Bild Konfiguration';
+
+  @override
+  String get pagebuilder_image_config_content_mode => 'Bildmodus';
+
+  @override
+  String get pagebuilder_image_config_image_overlay => 'Bild Overlay';
+
+  @override
+  String get pagebuilder_image_config_border_radius => 'Radius';
+
+  @override
+  String get pagebuilder_image_config_image_content => 'Bild Inhalt';
 }

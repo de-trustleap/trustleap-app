@@ -1925,6 +1925,12 @@ abstract class AppLocalizations {
   /// **'Configure shadow'**
   String get landingpage_pagebuilder_text_config_shadow_alert_title;
 
+  /// Text for spread radius in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Spread radius'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_spread_radius;
+
   /// Text for blur radius in the text shadow alert in the text configuration
   ///
   /// In en, this message translates to:
@@ -2021,6 +2027,12 @@ abstract class AppLocalizations {
   /// **'Margin'**
   String get landingpage_pagebuilder_layout_menu_margin;
 
+  /// Title alignment menu in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment'**
+  String get landingpage_pagebuilder_layout_menu_alignment;
+
   /// Title background image menu in the Pagebuilder Config Menu in the background area
   ///
   /// In en, this message translates to:
@@ -2050,6 +2062,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Background color'**
   String get landingpage_pagebuilder_layout_menu_background_color;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'top left'**
+  String get pagebuilder_layout_menu_alignment_top_left;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'top center'**
+  String get pagebuilder_layout_menu_alignment_top_center;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'top right'**
+  String get pagebuilder_layout_menu_alignment_top_right;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'center left'**
+  String get pagebuilder_layout_menu_alignment_center_left;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'center'**
+  String get pagebuilder_layout_menu_alignment_center;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'center right'**
+  String get pagebuilder_layout_menu_alignment_center_right;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'bottom left'**
+  String get pagebuilder_layout_menu_alignment_bottom_left;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'bottom center'**
+  String get pagebuilder_layout_menu_alignment_bottom_center;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'bottom right'**
+  String get pagebuilder_layout_menu_alignment_bottom_right;
+
+  /// Title for size menu in pagebuilder layout menu
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get pagebuilder_layout_menu_size_control_size;
+
+  /// Width for size menu in pagebuilder layout menu
+  ///
+  /// In en, this message translates to:
+  /// **'Width'**
+  String get pagebuilder_layout_menu_size_control_width;
+
+  /// Height for size menu in pagebuilder layout menu
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get pagebuilder_layout_menu_size_control_height;
+
+  /// Title for image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Image configuration'**
+  String get pagebuilder_image_config_title;
+
+  /// title for content mode in image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Content mode'**
+  String get pagebuilder_image_config_content_mode;
+
+  /// title for image overlay in image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Image overlay'**
+  String get pagebuilder_image_config_image_overlay;
+
+  /// Title for radius in image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Radius'**
+  String get pagebuilder_image_config_border_radius;
+
+  /// Title for image content menu in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Image content'**
+  String get pagebuilder_image_config_image_content;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

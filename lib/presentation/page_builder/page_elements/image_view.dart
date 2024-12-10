@@ -30,7 +30,6 @@ class PageBuilderImageView extends StatefulWidget {
 class _PageBuilderImageViewState extends State<PageBuilderImageView> {
   final GlobalKey<_PageBuilderImageViewState> myWidgetKey = GlobalKey();
   final fileSizeLimit = 5000000;
-  Uint8List? _selectedImage;
   bool _hovered = false;
 
   Future<void> _pickImage() async {
@@ -48,9 +47,6 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
               SnackBarType.failure);
         }
       } else {
-        setState(() {
-          _selectedImage = convertedTempImage;
-        });
         if (widget.isConfigMenu && widget.onSelectedInConfigMenu != null) {
           widget.onSelectedInConfigMenu!(
               widget.properties.copyWith(localImage: convertedTempImage));
@@ -71,6 +67,16 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
     });
   }
 
+  BoxFit _getBoxFit() {
+    if (widget.isConfigMenu) {
+      return BoxFit.cover;
+    } else if (widget.properties.contentMode != null) {
+      return widget.properties.contentMode!;
+    } else {
+      return BoxFit.cover;
+    }
+  }
+
   Widget _imageContainer(ImageProvider child) {
     return Container(
         width: widget.isConfigMenu ? 200 : widget.properties.width,
@@ -78,17 +84,12 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
         decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(widget.properties.borderRadius ?? 0),
-            image: DecorationImage(
-                fit: widget.isConfigMenu
-                    ? BoxFit.cover
-                    : widget.properties.contentMode,
-                image: child)));
+            image: DecorationImage(fit: _getBoxFit(), image: child)));
   }
 
   Widget _imageElement(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
-
     return SizedBox(
       width: widget.isConfigMenu ? 200 : widget.properties.width,
       height: widget.isConfigMenu ? 200 : widget.properties.height,
@@ -97,12 +98,10 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
         onExit: (event) => setHovered(false),
         child: Stack(
           key: myWidgetKey,
-          alignment: widget.isConfigMenu
-              ? Alignment.center
-              : widget.properties.alignment ?? Alignment.center,
+          alignment: Alignment.center,
           children: [
-            if (_selectedImage != null) ...[
-              _imageContainer(MemoryImage(_selectedImage!))
+            if (widget.properties.localImage != null) ...[
+              _imageContainer(MemoryImage(widget.properties.localImage!))
             ] else if (widget.properties.url != null) ...[
               NetworkImageView(
                 imageURL: widget.properties.url!,
@@ -110,9 +109,7 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
                     widget.isConfigMenu ? 0 : widget.properties.borderRadius,
                 width: widget.isConfigMenu ? 200 : widget.properties.width,
                 height: widget.isConfigMenu ? 200 : widget.properties.height,
-                contentMode: widget.isConfigMenu
-                    ? BoxFit.cover
-                    : widget.properties.contentMode,
+                contentMode: _getBoxFit(),
               )
             ] else ...[
               Container(
@@ -127,11 +124,21 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
                 ),
               )
             ],
+            if (!widget.isConfigMenu &&
+                widget.properties.overlayColor != null) ...[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                      widget.properties.borderRadius ?? 0),
+                  child: Container(
+                      color: widget.properties.overlayColor,
+                      width: widget.properties.width,
+                      height: widget.properties.height))
+            ],
             if (_hovered) ...[
               Container(
                 width: widget.isConfigMenu ? 200 : widget.properties.width,
                 height: widget.isConfigMenu ? 200 : widget.properties.height,
-                alignment: widget.properties.alignment ?? Alignment.center,
+                alignment: Alignment.center,
                 color: Colors.black.withOpacity(0.5),
                 child: Center(
                   child: Tooltip(

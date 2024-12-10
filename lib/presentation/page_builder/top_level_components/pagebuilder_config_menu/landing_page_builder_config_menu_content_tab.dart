@@ -1,4 +1,6 @@
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_image_content.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_text_content.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +14,11 @@ class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
     return ListView(
       children: [
         SizedBox(height: 16),
-        PagebuilderConfigMenuTextContent(model: model)
+        if (model.elementType == PageBuilderWidgetType.text) ...[
+          PagebuilderConfigMenuTextContent(model: model)
+        ] else if (model.elementType == PageBuilderWidgetType.image) ...[
+          PagebuilderConfigMenuImageContent(model: model)
+        ]
       ],
     );
   }

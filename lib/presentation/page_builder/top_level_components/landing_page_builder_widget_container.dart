@@ -57,9 +57,31 @@ class _LandingPageBuilderWidgetContainerState
               },
               child: Stack(
                 children: [
+                  if (widget.model.background?.imageProperties?.localImage ==
+                          null &&
+                      widget.model.background?.imageProperties?.url !=
+                          null) ...[
+                    Positioned.fill(
+                        child: Image.network(
+                            widget.model.background!.imageProperties!.url!,
+                            fit: widget.model.background?.imageProperties
+                                    ?.contentMode ??
+                                BoxFit.cover))
+                  ],
+                  if (widget.model.background?.overlayColor != null &&
+                      (widget.model.background?.imageProperties?.localImage !=
+                              null ||
+                          widget.model.background?.imageProperties?.url !=
+                              null)) ...[
+                    Positioned.fill(
+                        child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                color: widget.model.background!.overlayColor)))
+                  ],
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
+                      color: Colors.transparent,
                       border: Border.all(
                         color: isHovered
                             ? themeData.colorScheme.primary
@@ -70,14 +92,6 @@ class _LandingPageBuilderWidgetContainerState
                     child: Container(
                       decoration: BoxDecoration(
                         color: widget.model.background?.backgroundColor,
-                        image: widget.model.background?.imageProperties
-                                    ?.localImage !=
-                                null
-                            ? DecorationImage(
-                                fit: BoxFit.cover,
-                                image: MemoryImage(widget.model.background!
-                                    .imageProperties!.localImage!))
-                            : null,
                         borderRadius: widget.properties?.borderRadius != null
                             ? BorderRadius.circular(
                                 widget.properties!.borderRadius!)
@@ -99,40 +113,57 @@ class _LandingPageBuilderWidgetContainerState
                               ]
                             : null,
                       ),
-                      alignment: widget.model.alignment ?? Alignment.center,
-                      child: Stack(children: [
-                        if (widget.model.background?.imageProperties
-                                    ?.localImage ==
-                                null &&
-                            widget.model.background?.imageProperties?.url !=
-                                null) ...[
-                          Positioned.fill(
-                              child: Image.network(
-                                  widget
-                                      .model.background!.imageProperties!.url!,
-                                  fit: widget.model.background?.imageProperties
-                                          ?.contentMode ??
-                                      BoxFit.cover))
-                        ],
-                        if (widget.model.background?.overlayColor != null &&
-                            (widget.model.background?.imageProperties
-                                        ?.localImage !=
-                                    null ||
-                                widget.model.background?.imageProperties?.url !=
-                                    null)) ...[
-                          Positioned.fill(
+                      child: Stack(
+                        children: [
+                          if (widget.model.background?.imageProperties
+                                  ?.localImage !=
+                              null)
+                            Positioned.fill(
                               child: Container(
-                                  color: widget.model.background!.overlayColor))
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: widget.model.background!
+                                            .imageProperties!.contentMode ??
+                                        BoxFit.cover,
+                                    image: MemoryImage(widget.model.background!
+                                        .imageProperties!.localImage!),
+                                  ),
+                                  borderRadius:
+                                      widget.properties?.borderRadius != null
+                                          ? BorderRadius.circular(
+                                              widget.properties!.borderRadius!)
+                                          : null,
+                                ),
+                              ),
+                            ),
+                          if (widget.model.background?.overlayColor != null &&
+                              (widget.model.background?.imageProperties
+                                          ?.localImage !=
+                                      null ||
+                                  widget.model.background?.imageProperties
+                                          ?.url !=
+                                      null)) ...[
+                            Positioned.fill(
+                                child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                        color: widget
+                                            .model.background!.overlayColor)))
+                          ],
+                          Align(
+                            alignment:
+                                widget.model.alignment ?? Alignment.center,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                widget.model.padding?.left ?? 0,
+                                widget.model.padding?.top ?? 0,
+                                widget.model.padding?.right ?? 0,
+                                widget.model.padding?.bottom ?? 0,
+                              ),
+                              child: widget.child,
+                            ),
+                          ),
                         ],
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(
-                              widget.model.padding?.left ?? 0,
-                              widget.model.padding?.top ?? 0,
-                              widget.model.padding?.right ?? 0,
-                              widget.model.padding?.bottom ?? 0),
-                          child: widget.child,
-                        )
-                      ]),
+                      ),
                     ),
                   ),
                   if (isHovered) ...[

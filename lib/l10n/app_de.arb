@@ -1232,6 +1232,10 @@
     "@landingpage_pagebuilder_text_config_shadow_alert_title": {
         "description": "Titel für Textschatten Alert in der Text Konfiguration"
     },
+    "landingpage_pagebuilder_text_config_shadow_alert_spread_radius": "Spread Radius",
+    "@landingpage_pagebuilder_text_config_shadow_alert_spread_radius": {
+        "description": "Text für Spread Radius im Schatten Alert in der Text Konfiguration"
+    },
     "landingpage_pagebuilder_text_config_shadow_alert_blur_radius": "Blur Radius",
     "@landingpage_pagebuilder_text_config_shadow_alert_blur_radius": {
         "description": "Text für Blur Radius im Schatten Alert in der Text Konfiguration"
@@ -1296,6 +1300,10 @@
     "@landingpage_pagebuilder_layout_menu_margin": {
         "description": "Titel Außenabstand Menüpunkt im Pagebuilder Config Menü im Layout Bereich"
     },
+    "landingpage_pagebuilder_layout_menu_alignment": "Ausrichtung",
+    "@landingpage_pagebuilder_layout_menu_alignment": {
+        "description": "Titel Ausrichtung Menüpunkt im Pagebuilder Config Menü im Layout Bereich"
+    },
     "landingpage_pagebuilder_layout_menu_image_control_title": "Hintergrundbild",
     "@landingpage_pagebuilder_layout_menu_image_control_title": {
         "description": "Titel Hintergrundbild Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
@@ -1315,5 +1323,73 @@
     "landingpage_pagebuilder_layout_menu_background_color": "Hintergrundfarbe",
     "@landingpage_pagebuilder_layout_menu_background_color": {
         "description": "Titel Hintergrundfarbe Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
+    "pagebuilder_layout_menu_alignment_top_left": "Oben links",
+    "@pagebuilder_layout_menu_alignment_top_left": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_top_center": "Oben zentriert",
+    "@pagebuilder_layout_menu_alignment_top_center": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_top_right": "Oben rechts",
+    "@pagebuilder_layout_menu_alignment_top_right": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_center_left": "Mitte links",
+    "@pagebuilder_layout_menu_alignment_center_left": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_center": "Mitte",
+    "@pagebuilder_layout_menu_alignment_center": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_center_right": "Mitte rechts",
+    "@pagebuilder_layout_menu_alignment_center_right": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_bottom_left": "Unten links",
+    "@pagebuilder_layout_menu_alignment_bottom_left": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_bottom_center": "Unten zentriert",
+    "@pagebuilder_layout_menu_alignment_bottom_center": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_bottom_right": "Unten rechts",
+    "@pagebuilder_layout_menu_alignment_bottom_right": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_size_control_size": "Größe",
+    "@pagebuilder_layout_menu_size_control_size": {
+        "description": "Titel für Größen Menü im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_size_control_width": "Breite",
+    "@pagebuilder_layout_menu_size_control_width": {
+        "description": "Breite für Größen Menü im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_size_control_height": "Höhe",
+    "@pagebuilder_layout_menu_size_control_height": {
+        "description": "Höhe für Größen Menü im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_title": "Bild Konfiguration",
+    "@pagebuilder_image_config_title": {
+        "description": "Titel für Bild Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_content_mode": "Bildmodus",
+    "@pagebuilder_image_config_content_mode": {
+        "description": "Titel für Bildmodus Menüpunkt in Bild Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_image_overlay": "Bild Overlay",
+    "@pagebuilder_image_config_image_overlay": {
+        "description": "Titel für Bild Overlay Menüpunkt in Bild Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_border_radius": "Radius",
+    "@pagebuilder_image_config_border_radius": {
+        "description": "Titel für Radius Menüpunkt in Bild Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_image_content": "Bild Inhalt",
+    "@pagebuilder_image_config_image_content": {
+        "description": "Titel für Bild Inhalt Menü im Pagebuilder Config Menü"
     }
 }

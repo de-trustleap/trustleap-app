@@ -12,17 +12,17 @@ void main() {
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: "center",
           contentMode: "cover",
-          newImageBase64: "image");
+          newImageBase64: "image",
+          overlayColor: "ff000000");
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
           width: 300.0,
           height: 400.0,
-          alignment: "center",
           contentMode: "cover",
-          newImageBase64: "image");
+          newImageBase64: "image",
+          overlayColor: "ff000000");
       // When
       final result = model.copyWith(height: 400.0);
       // Then
@@ -38,17 +38,17 @@ void main() {
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: "center",
           contentMode: "cover",
-          newImageBase64: "image");
+          newImageBase64: "image",
+          overlayColor: "ff000000");
       final expectedResult = {
         "url": "https://test.de",
         "borderRadius": 12.0,
         "width": 300.0,
         "height": 300.0,
-        "alignment": "center",
         "contentMode": "cover",
-        "newImageBase64": "image"
+        "newImageBase64": "image",
+        "overlayColor": "ff000000"
       };
       // When
       final result = model.toMap();
@@ -65,18 +65,18 @@ void main() {
         "borderRadius": 12.0,
         "width": 300.0,
         "height": 300.0,
-        "alignment": "center",
         "contentMode": "cover",
-        "newImageBase64": "image"
+        "newImageBase64": "image",
+        "overlayColor": "ff000000"
       };
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: "center",
           contentMode: "cover",
-          newImageBase64: "image");
+          newImageBase64: "image",
+          overlayColor: "ff000000");
       // When
       final result = PageBuilderImagePropertiesModel.fromMap(map);
       // Then
@@ -94,16 +94,16 @@ void main() {
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: "center",
           contentMode: "cover",
-          newImageBase64: "image");
+          newImageBase64: "image",
+          overlayColor: "ff000000");
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: Alignment.center,
-          contentMode: BoxFit.cover);
+          contentMode: BoxFit.cover,
+          overlayColor: Colors.black);
       // When
       final result = model.toDomain();
       // Then
@@ -121,16 +121,16 @@ void main() {
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: Alignment.center,
-          contentMode: BoxFit.cover);
+          contentMode: BoxFit.cover,
+          overlayColor: Colors.black);
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: "center",
           contentMode: "cover",
-          newImageBase64: null);
+          newImageBase64: null,
+          overlayColor: "ff000000");
       // When
       final result = PageBuilderImagePropertiesModel.fromDomain(model);
       // Then
@@ -146,17 +146,17 @@ void main() {
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: "center",
           contentMode: "cover",
-          newImageBase64: null);
+          newImageBase64: null,
+          overlayColor: "ff000000");
       final properties2 = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
           width: 300.0,
           height: 300.0,
-          alignment: "center",
           contentMode: "cover",
-          newImageBase64: null);
+          newImageBase64: null,
+          overlayColor: "ff000000");
       // Then
       expect(properties1, properties2);
     });

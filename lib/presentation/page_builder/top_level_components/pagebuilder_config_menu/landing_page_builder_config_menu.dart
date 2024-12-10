@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu_content.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,17 @@ class _LandingPageBuilderConfigMenuState
   final menuWidth = 400.0;
   final animationDuration = 100;
 
+  bool _shouldShowOnlyDesignTab() {
+    switch (widget.model.elementType) {
+      case PageBuilderWidgetType.container ||
+            PageBuilderWidgetType.column ||
+            PageBuilderWidgetType.row:
+        return true;
+      default:
+        return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -47,6 +59,7 @@ class _LandingPageBuilderConfigMenuState
                 animationDuration: animationDuration,
                 menuWidth: menuWidth,
                 model: widget.model,
+                showOnlyDesignTab: _shouldShowOnlyDesignTab(),
                 closeMenu: widget.closeMenu,
               ),
             )
