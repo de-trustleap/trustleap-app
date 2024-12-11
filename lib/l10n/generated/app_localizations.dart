@@ -2164,6 +2164,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Image content'**
   String get pagebuilder_image_config_image_content;
+
+  /// Title for the collapsible view for the container configuration in the pagebuilder container configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Container configuration'**
+  String get landingpage_pagebuilder_container_config_container_title;
+
+  /// Title for the shadow configuration in the pagebuilder container configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Shadow'**
+  String get landingpage_pagebuilder_container_config_container_shadow;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

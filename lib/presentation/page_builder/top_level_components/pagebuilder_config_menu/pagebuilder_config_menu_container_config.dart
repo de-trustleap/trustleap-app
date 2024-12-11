@@ -26,37 +26,41 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
 
     if (model.elementType == PageBuilderWidgetType.container &&
         model.properties is PageBuilderContainerProperties) {
-      return CollapsibleTile(title: "Container Konfiguration", children: [
-        PagebuilderNumberStepperControl(
-            title: localization.pagebuilder_image_config_border_radius,
-            initialValue: (model.properties as PageBuilderContainerProperties)
-                    .borderRadius
-                    ?.toInt() ??
-                0,
-            minValue: 0,
-            maxValue: 1000,
-            onSelected: (radius) {
-              final updatedProperties =
-                  (model.properties as PageBuilderContainerProperties)
-                      .copyWith(borderRadius: radius.toDouble());
-              updateContainerProperties(updatedProperties, pagebuilderBloc);
-            }),
-        SizedBox(height: 20),
-        PagebuilderShadowControl(
-            title: "Schatten",
-            initialShadow:
-                (model.properties as PageBuilderContainerProperties).shadow,
-            showSpreadRadius: true,
-            onSelected: (shadow) {
-              final updatedProperties =
-                  (model.properties as PageBuilderContainerProperties)
-                      .copyWith(shadow: shadow);
-              updateContainerProperties(updatedProperties, pagebuilderBloc);
-            })
-      ]);
+      return CollapsibleTile(
+          title: localization
+              .landingpage_pagebuilder_container_config_container_title,
+          children: [
+            PagebuilderNumberStepperControl(
+                title: localization.pagebuilder_image_config_border_radius,
+                initialValue:
+                    (model.properties as PageBuilderContainerProperties)
+                            .borderRadius
+                            ?.toInt() ??
+                        0,
+                minValue: 0,
+                maxValue: 1000,
+                onSelected: (radius) {
+                  final updatedProperties =
+                      (model.properties as PageBuilderContainerProperties)
+                          .copyWith(borderRadius: radius.toDouble());
+                  updateContainerProperties(updatedProperties, pagebuilderBloc);
+                }),
+            SizedBox(height: 20),
+            PagebuilderShadowControl(
+                title: localization
+                    .landingpage_pagebuilder_container_config_container_shadow,
+                initialShadow:
+                    (model.properties as PageBuilderContainerProperties).shadow,
+                showSpreadRadius: true,
+                onSelected: (shadow) {
+                  final updatedProperties =
+                      (model.properties as PageBuilderContainerProperties)
+                          .copyWith(shadow: shadow);
+                  updateContainerProperties(updatedProperties, pagebuilderBloc);
+                })
+          ]);
     } else {
       return SizedBox.shrink();
     }
   }
 }
-// TODO: Tests anpassen und Localizations einfügen.

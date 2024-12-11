@@ -1391,5 +1391,13 @@
     "pagebuilder_image_config_image_content": "Image content",
     "@pagebuilder_image_config_image_content": {
         "description": "Title for image content menu in pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_container_config_container_title": "Container configuration",
+    "@landingpage_pagebuilder_container_config_container_title": {
+        "description": "Title for the collapsible view for the container configuration in the pagebuilder container configuration."
+    },
+    "landingpage_pagebuilder_container_config_container_shadow": "Shadow",
+    "@landingpage_pagebuilder_container_config_container_shadow": {
+        "description": "Title for the shadow configuration in the pagebuilder container configuration."
     }
 }

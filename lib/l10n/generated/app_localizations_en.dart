@@ -1044,4 +1044,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_image_config_image_content => 'Image content';
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_title => 'Container configuration';
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_shadow => 'Shadow';
 }
