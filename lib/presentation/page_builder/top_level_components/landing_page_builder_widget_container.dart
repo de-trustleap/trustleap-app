@@ -57,27 +57,6 @@ class _LandingPageBuilderWidgetContainerState
               },
               child: Stack(
                 children: [
-                  if (widget.model.background?.imageProperties?.localImage ==
-                          null &&
-                      widget.model.background?.imageProperties?.url !=
-                          null) ...[
-                    Positioned.fill(
-                        child: Image.network(
-                            widget.model.background!.imageProperties!.url!,
-                            fit: widget.model.background?.imageProperties
-                                    ?.contentMode ??
-                                BoxFit.cover))
-                  ],
-                  if (widget.model.background?.overlayColor != null &&
-                      (widget.model.background?.imageProperties?.localImage !=
-                              null ||
-                          widget.model.background?.imageProperties?.url !=
-                              null)) ...[
-                    Positioned.fill(
-                        child: DecoratedBox(
-                            decoration: BoxDecoration(
-                                color: widget.model.background!.overlayColor)))
-                  ],
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -116,6 +95,25 @@ class _LandingPageBuilderWidgetContainerState
                       child: Stack(
                         children: [
                           if (widget.model.background?.imageProperties
+                                      ?.localImage ==
+                                  null &&
+                              widget.model.background?.imageProperties?.url !=
+                                  null) ...[
+                            Positioned.fill(
+                                child: ClipRRect(
+                                  borderRadius: widget.properties?.borderRadius != null
+                                          ? BorderRadius.circular(
+                                              widget.properties!.borderRadius!)
+                                          : BorderRadius.circular(0),
+                                  child: Image.network(
+                                      widget.model.background!.imageProperties!
+                                          .url!,
+                                      fit: widget.model.background
+                                              ?.imageProperties?.contentMode ??
+                                          BoxFit.cover),
+                                ))
+                          ],
+                          if (widget.model.background?.imageProperties
                                   ?.localImage !=
                               null)
                             Positioned.fill(
@@ -146,6 +144,10 @@ class _LandingPageBuilderWidgetContainerState
                             Positioned.fill(
                                 child: DecoratedBox(
                                     decoration: BoxDecoration(
+                                        borderRadius: widget.properties?.borderRadius != null
+                                          ? BorderRadius.circular(
+                                              widget.properties!.borderRadius!)
+                                          : null,
                                         color: widget
                                             .model.background!.overlayColor)))
                           ],

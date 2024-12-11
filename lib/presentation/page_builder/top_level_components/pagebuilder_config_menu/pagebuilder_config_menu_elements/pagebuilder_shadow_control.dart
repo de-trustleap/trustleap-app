@@ -8,11 +8,13 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:flutter/material.dart';
 
 class PagebuilderShadowControl extends StatefulWidget {
+  final String title;
   final PageBuilderShadow? initialShadow;
   final bool showSpreadRadius;
   final Function(PageBuilderShadow?) onSelected;
   const PagebuilderShadowControl(
       {super.key,
+      required this.title,
       required this.initialShadow,
       required this.showSpreadRadius,
       required this.onSelected});
@@ -218,8 +220,7 @@ class _PagebuilderTextShadowControlState
     final localization = AppLocalizations.of(context);
 
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(localization.landingpage_pagebuilder_text_config_shadow,
-          style: themeData.textTheme.bodySmall),
+      Text(widget.title, style: themeData.textTheme.bodySmall),
       Row(children: [
         PagebuilderColorPicker(
             initialColor: widget.initialShadow?.color ?? Colors.black,
