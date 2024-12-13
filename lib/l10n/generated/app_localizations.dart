@@ -2200,6 +2200,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Alignment y-axis'**
   String get landingpage_pagebuilder_row_config_row_cross_axis_alignment;
+
+  /// Title for the collapsible view for the column configuration in the pagebuilder column configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Column configuration'**
+  String get landingpage_pagebuilder_column_config_column_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

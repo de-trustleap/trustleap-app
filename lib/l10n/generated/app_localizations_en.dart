@@ -1062,4 +1062,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_row_config_row_cross_axis_alignment => 'Alignment y-axis';
+
+  @override
+  String get landingpage_pagebuilder_column_config_column_title => 'Column configuration';
 }

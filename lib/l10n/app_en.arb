@@ -1415,5 +1415,9 @@
     "landingpage_pagebuilder_row_config_row_cross_axis_alignment": "Alignment y-axis",
     "@landingpage_pagebuilder_row_config_row_cross_axis_alignment": {
         "description": "Title for the cross axis alignment configuration in the pagebuilder row configuration."
+    },
+    "landingpage_pagebuilder_column_config_column_title": "Column configuration",
+    "@landingpage_pagebuilder_column_config_column_title": {
+        "description": "Title for the collapsible view for the column configuration in the pagebuilder column configuration."
     }
 }

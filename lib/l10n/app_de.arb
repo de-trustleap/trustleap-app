@@ -1415,5 +1415,9 @@
     "landingpage_pagebuilder_row_config_row_cross_axis_alignment": "Ausrichtung Y-Achse",
     "@landingpage_pagebuilder_row_config_row_cross_axis_alignment": {
         "description": "Titel für die Ausrichtung Y-Achse Konfiguration in der Pagebuilder Reihe Konfiguration"
+    },
+    "landingpage_pagebuilder_column_config_column_title": "Spalte Konfiguration",
+    "@landingpage_pagebuilder_column_config_column_title": {
+        "description": "Titel der ausklappabren View für die Spalte Konfiguration in der Pagebuilder Spalte Konfiguration"
     }
 }
