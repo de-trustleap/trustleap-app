@@ -1399,5 +1399,21 @@
     "landingpage_pagebuilder_container_config_container_shadow": "Schatten",
     "@landingpage_pagebuilder_container_config_container_shadow": {
         "description": "Titel für die Schatten Konfiguration in der Pagebuilder Container Konfiguration"
+    },
+    "landingpage_pagebuilder_row_config_row_title": "Reihe Konfiguration",
+    "@landingpage_pagebuilder_row_config_row_title": {
+        "description": "Titel der ausklappabren View für die Reihe Konfiguration in der Pagebuilder Reihe Konfiguration"
+    },
+    "landingpage_pagebuilder_row_config_row_equal_heights": "Gleiche Höhen",
+    "@landingpage_pagebuilder_row_config_row_equal_heights": {
+        "description": "Titel für die Gleiche Höhen Konfiguration in der Pagebuilder Reihe Konfiguration"
+    },
+    "landingpage_pagebuilder_row_config_row_main_axis_alignment": "Ausrichtung X-Achse",
+    "@landingpage_pagebuilder_row_config_row_main_axis_alignment": {
+        "description": "Titel für die Ausrichtung X-Achse Konfiguration in der Pagebuilder Reihe Konfiguration"
+    },
+    "landingpage_pagebuilder_row_config_row_cross_axis_alignment": "Ausrichtung Y-Achse",
+    "@landingpage_pagebuilder_row_config_row_cross_axis_alignment": {
+        "description": "Titel für die Ausrichtung Y-Achse Konfiguration in der Pagebuilder Reihe Konfiguration"
     }
 }

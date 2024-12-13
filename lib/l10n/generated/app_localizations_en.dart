@@ -1050,4 +1050,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_container_config_container_shadow => 'Shadow';
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_title => 'Row configuration';
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_equal_heights => 'Equal heights';
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_main_axis_alignment => 'Alignment x-axis';
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_cross_axis_alignment => 'Alignment y-axis';
 }

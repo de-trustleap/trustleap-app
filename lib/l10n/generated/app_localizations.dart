@@ -2176,6 +2176,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shadow'**
   String get landingpage_pagebuilder_container_config_container_shadow;
+
+  /// Title for the collapsible view for the row configuration in the pagebuilder row configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Row configuration'**
+  String get landingpage_pagebuilder_row_config_row_title;
+
+  /// Title for the equal heights configuration in the pagebuilder row configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Equal heights'**
+  String get landingpage_pagebuilder_row_config_row_equal_heights;
+
+  /// Title for the main axis alignment configuration in the pagebuilder row configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment x-axis'**
+  String get landingpage_pagebuilder_row_config_row_main_axis_alignment;
+
+  /// Title for the cross axis alignment configuration in the pagebuilder row configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment y-axis'**
+  String get landingpage_pagebuilder_row_config_row_cross_axis_alignment;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

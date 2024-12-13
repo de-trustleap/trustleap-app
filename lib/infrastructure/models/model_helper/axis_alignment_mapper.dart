@@ -13,6 +13,12 @@ class AxisAlignmentMapper {
         return "center";
       case == MainAxisAlignment.end:
         return "end";
+      case == MainAxisAlignment.spaceAround:
+        return "spaceAround";
+      case == MainAxisAlignment.spaceBetween:
+        return "spaceBetween";
+      case == MainAxisAlignment.spaceEvenly:
+        return "spaceEvenly";
       default:
         return null;
     }
@@ -30,6 +36,8 @@ class AxisAlignmentMapper {
         return "center";
       case == CrossAxisAlignment.end:
         return "end";
+      case == CrossAxisAlignment.stretch:
+        return "stretch";
       default:
         return null;
     }
@@ -39,6 +47,9 @@ class AxisAlignmentMapper {
     if (mainAxisAlignment == "start") return MainAxisAlignment.start;
     if (mainAxisAlignment == "center") return MainAxisAlignment.center;
     if (mainAxisAlignment == "end") return MainAxisAlignment.end;
+    if (mainAxisAlignment == "spaceAround") return MainAxisAlignment.spaceAround;
+    if (mainAxisAlignment == "spaceBetween") return MainAxisAlignment.spaceBetween;
+    if (mainAxisAlignment == "spaceEvenly") return MainAxisAlignment.spaceEvenly;
     return null;
   }
 
@@ -47,6 +58,7 @@ class AxisAlignmentMapper {
     if (crossAxisAlignment == "start") return CrossAxisAlignment.start;
     if (crossAxisAlignment == "center") return CrossAxisAlignment.center;
     if (crossAxisAlignment == "end") return CrossAxisAlignment.end;
+    if (crossAxisAlignment == "stretch") return CrossAxisAlignment.stretch;
     return null;
   }
 }
