@@ -106,7 +106,8 @@ class MobileAppTheme {
       radioTheme: AppTheme.lightRadioTheme,
       chipTheme: _lightChipTheme,
       popupMenuTheme: AppTheme.lightPopupMenuTheme,
-      checkboxTheme: AppTheme.lightCheckboxTheme);
+      checkboxTheme: AppTheme.lightCheckboxTheme,
+      switchTheme: AppTheme.lightSwitchTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -130,5 +131,6 @@ class MobileAppTheme {
       radioTheme: AppTheme.darkRadioTheme,
       chipTheme: _darkChipTheme,
       popupMenuTheme: AppTheme.darkPopupMenuTheme,
-      checkboxTheme: AppTheme.darkCheckboxTheme);
+      checkboxTheme: AppTheme.darkCheckboxTheme,
+      switchTheme: AppTheme.darkSwitchTheme);
 }

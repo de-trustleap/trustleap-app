@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_container_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_image_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_layout.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_row_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_text_config.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,8 @@ class LandingPageBuilderConfigMenuDesignTab extends StatelessWidget {
           PagebuilderConfigMenuImageConfig(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.container) ...[
           PagebuilderConfigMenuContainerConfig(model: model)
+        ] else if (model.elementType == PageBuilderWidgetType.row) ...[
+          PagebuilderConfigMenuRowConfig(model: model)
         ],
         SizedBox(height: 8),
         PagebuilderConfigMenuLayout(model: model),

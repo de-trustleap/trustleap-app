@@ -1,9 +1,15 @@
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/model_helper/axis_alignment_mapper.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/boxfit_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
-enum PagebuilderDropdownType { contentMode, alignment }
+enum PagebuilderDropdownType {
+  contentMode,
+  alignment,
+  mainAxisAlignment,
+  crossAxisAlignment
+}
 
 class PagebuilderConfigMenuDrowdown<T> extends StatelessWidget {
   final String title;
@@ -29,8 +35,24 @@ class PagebuilderConfigMenuDrowdown<T> extends StatelessWidget {
     Alignment.bottomLeft,
     Alignment.bottomRight
   ];
+  final mainAxisAlignmentValues = [
+    MainAxisAlignment.start,
+    MainAxisAlignment.center,
+    MainAxisAlignment.end,
+    MainAxisAlignment.spaceBetween,
+    MainAxisAlignment.spaceEvenly,
+    MainAxisAlignment.spaceAround
+  ];
+  final crossAxisAlignmentValues = [
+    CrossAxisAlignment.start,
+    CrossAxisAlignment.center,
+    CrossAxisAlignment.end,
+    CrossAxisAlignment.stretch,
+    CrossAxisAlignment.baseline
+  ];
 
-  List<DropdownMenuEntry<T>> createDropdownEntries(AppLocalizations localization) {
+  List<DropdownMenuEntry<T>> createDropdownEntries(
+      AppLocalizations localization) {
     List<DropdownMenuEntry<T>> entries = [];
     var values = [];
     switch (type) {
@@ -38,10 +60,14 @@ class PagebuilderConfigMenuDrowdown<T> extends StatelessWidget {
         values = contentModeValues;
       case PagebuilderDropdownType.alignment:
         values = alignmentValues;
+      case PagebuilderDropdownType.mainAxisAlignment:
+        values = mainAxisAlignmentValues;
+      case PagebuilderDropdownType.crossAxisAlignment:
+        values = crossAxisAlignmentValues;
     }
     for (var value in values) {
-      var entry =
-          DropdownMenuEntry<T>(value: value, label: _getLabel(value, localization) ?? "");
+      var entry = DropdownMenuEntry<T>(
+          value: value, label: _getLabel(value, localization) ?? "");
       entries.add(entry);
     }
     return entries;
@@ -57,7 +83,20 @@ class PagebuilderConfigMenuDrowdown<T> extends StatelessWidget {
         }
       case PagebuilderDropdownType.alignment:
         if (value is Alignment) {
-          return AlignmentMapper.getLocalizedStringFromAlignment(value, localization);
+          return AlignmentMapper.getLocalizedStringFromAlignment(
+              value, localization);
+        } else {
+          return null;
+        }
+      case PagebuilderDropdownType.mainAxisAlignment:
+        if (value is MainAxisAlignment) {
+          return AxisAlignmentMapper.getStringFromMainAxisAlignment(value);
+        } else {
+          return null;
+        }
+      case PagebuilderDropdownType.crossAxisAlignment:
+        if (value is CrossAxisAlignment) {
+          return AxisAlignmentMapper.getStringFromCrossAxisAlignment(value);
         } else {
           return null;
         }

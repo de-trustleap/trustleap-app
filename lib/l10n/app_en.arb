@@ -1399,5 +1399,21 @@
     "landingpage_pagebuilder_container_config_container_shadow": "Shadow",
     "@landingpage_pagebuilder_container_config_container_shadow": {
         "description": "Title for the shadow configuration in the pagebuilder container configuration."
+    },
+    "landingpage_pagebuilder_row_config_row_title": "Row configuration",
+    "@landingpage_pagebuilder_row_config_row_title": {
+        "description": "Title for the collapsible view for the row configuration in the pagebuilder row configuration."
+    },
+    "landingpage_pagebuilder_row_config_row_equal_heights": "Equal heights",
+    "@landingpage_pagebuilder_row_config_row_equal_heights": {
+        "description": "Title for the equal heights configuration in the pagebuilder row configuration."
+    },
+    "landingpage_pagebuilder_row_config_row_main_axis_alignment": "Alignment x-axis",
+    "@landingpage_pagebuilder_row_config_row_main_axis_alignment": {
+        "description": "Title for the main axis alignment configuration in the pagebuilder row configuration."
+    },
+    "landingpage_pagebuilder_row_config_row_cross_axis_alignment": "Alignment y-axis",
+    "@landingpage_pagebuilder_row_config_row_cross_axis_alignment": {
+        "description": "Title for the cross axis alignment configuration in the pagebuilder row configuration."
     }
 }
