@@ -25,7 +25,7 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     on<GetLandingPageContentEvent>(_onGetLandingPageContent);
     on<UpdateWidgetEvent>(_onUpdateWidget,
         transformer: (events, mapper) =>
-            events.debounceTime(Duration(milliseconds: 100)).switchMap(mapper));
+            events.debounceTime(const Duration(milliseconds: 100)).switchMap(mapper));
     on<SaveLandingPageContentEvent>(_onSaveLandingPageContent);
   }
 

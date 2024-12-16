@@ -112,7 +112,7 @@ class _PagebuilderTextShadowControlState
                               size: 24,
                               color: themeData.colorScheme.surfaceTint))
                     ]),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 if (widget.showSpreadRadius) ...[
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,16 +121,16 @@ class _PagebuilderTextShadowControlState
                             localization
                                 .landingpage_pagebuilder_text_config_shadow_alert_spread_radius,
                             style: themeData.textTheme.bodySmall),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                       ]),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   FormTextfield(
                       maxWidth: 200,
                       controller: spreadRadiusController,
                       disabled: false,
                       desktopStyle: themeData.textTheme.bodySmall,
                       keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
+                          const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [
                         DecimalNumberFormatter(
                             maxIntegerDigits: 3, maxDecimalDigits: 2)
@@ -144,21 +144,21 @@ class _PagebuilderTextShadowControlState
                           localization
                               .landingpage_pagebuilder_text_config_shadow_alert_blur_radius,
                           style: themeData.textTheme.bodySmall),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       FormTextfield(
                           maxWidth: 200,
                           controller: blurRadiusController,
                           disabled: false,
                           desktopStyle: themeData.textTheme.bodySmall,
                           keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
+                              const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: [
                             DecimalNumberFormatter(
                                 maxIntegerDigits: 3, maxDecimalDigits: 2)
                           ],
                           placeholder: "")
                     ]),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -166,21 +166,21 @@ class _PagebuilderTextShadowControlState
                           localization
                               .landingpage_pagebuilder_text_config_shadow_alert_x_offset,
                           style: themeData.textTheme.bodySmall),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       FormTextfield(
                           maxWidth: 200,
                           controller: xOffsetController,
                           disabled: false,
                           desktopStyle: themeData.textTheme.bodySmall,
                           keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
+                              const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: [
                             DecimalNumberFormatter(
                                 maxIntegerDigits: 3, maxDecimalDigits: 2)
                           ],
                           placeholder: "")
                     ]),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -188,21 +188,21 @@ class _PagebuilderTextShadowControlState
                           localization
                               .landingpage_pagebuilder_text_config_shadow_alert_y_offset,
                           style: themeData.textTheme.bodySmall),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       FormTextfield(
                           maxWidth: 200,
                           controller: yOffsetController,
                           disabled: false,
                           desktopStyle: themeData.textTheme.bodySmall,
                           keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
+                              const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: [
                             DecimalNumberFormatter(
                                 maxIntegerDigits: 3, maxDecimalDigits: 2)
                           ],
                           placeholder: "")
                     ]),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 PrimaryButton(
                     title: localization
                         .landingpage_pagebuilder_text_config_shadow_alert_apply,
@@ -227,7 +227,7 @@ class _PagebuilderTextShadowControlState
             onSelected: (color) {
               widget.onSelected(widget.initialShadow?.copyWith(color: color));
             }),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         IconButton(
           onPressed: () {
             _showShadowConfigDialog(context, themeData, localization);

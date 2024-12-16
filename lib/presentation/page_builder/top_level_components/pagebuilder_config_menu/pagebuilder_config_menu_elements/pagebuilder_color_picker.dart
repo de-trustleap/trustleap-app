@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -36,29 +37,29 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
     }
   }
 
-String _colorToHex(Color color) {
-  try {
-    String hex = color.value.toRadixString(16).toUpperCase();
-    return "#${hex.padLeft(8, '0')}";
-  } catch (e) {
-    return "#00000000";
+  String _colorToHex(Color color) {
+    try {
+      String hex = color.value.toRadixString(16).toUpperCase();
+      return "#${hex.padLeft(8, '0')}";
+    } catch (e) {
+      return "#00000000";
+    }
   }
-}
 
-Color _hexToColor(String hex) {
-  try {
-    hex = hex.replaceAll("#", "");
-    if (hex.isEmpty || (hex.length != 6 && hex.length != 8)) {
+  Color _hexToColor(String hex) {
+    try {
+      hex = hex.replaceAll("#", "");
+      if (hex.isEmpty || (hex.length != 6 && hex.length != 8)) {
+        return Colors.transparent;
+      }
+      if (hex.length == 6) {
+        hex = "FF$hex";
+      }
+      return Color(int.parse("0x$hex"));
+    } catch (e) {
       return Colors.transparent;
     }
-    if (hex.length == 6) {
-      hex = "FF$hex";
-    }
-    return Color(int.parse("0x$hex"));
-  } catch (e) {
-    return Colors.transparent;
   }
-}
 
   void _showColorPickerDialog(
       context, ThemeData themeData, AppLocalizations localization) {
@@ -142,16 +143,16 @@ Color _hexToColor(String hex) {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
+                            borderSide: const BorderSide(
+                                color: Colors.black, width: 2.0),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
+                            borderSide: const BorderSide(
+                                color: Colors.grey, width: 1.0),
                           ),
                           suffixIcon: IconButton(
-                            icon: Icon(Icons.copy),
+                            icon: const Icon(Icons.copy),
                             onPressed: () {
                               // Handle Copy
                             },
@@ -161,6 +162,10 @@ Color _hexToColor(String hex) {
                     ),
                   ),
                 ),
+                PrimaryButton(
+                    title: localization
+                        .landingpage_pagebuilder_color_picker_ok_button,
+                    onTap: () => CustomNavigator.pop())
               ],
             );
           }),

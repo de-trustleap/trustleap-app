@@ -29,7 +29,7 @@ class PagebuilderImageControl extends StatelessWidget {
               localization
                   .landingpage_pagebuilder_layout_menu_image_control_title,
               style: themeData.textTheme.bodySmall),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,7 +41,7 @@ class PagebuilderImageControl extends StatelessWidget {
                     onSelectedInConfigMenu: (properties) =>
                         onSelected(properties)),
                 if (onDelete != null) ...[
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   IconButton(
                       onPressed: () => onDelete != null ? onDelete!() : {},
                       icon: Icon(Icons.delete,

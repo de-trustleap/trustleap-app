@@ -950,6 +950,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_color_picker_hex_textfield => 'Hex Code';
 
   @override
+  String get landingpage_pagebuilder_color_picker_ok_button => 'OK';
+
+  @override
   String get landingpage_pagebuilder_text_config_text_placeholder => 'Hier Text eingeben...';
 
   @override
@@ -1065,4 +1068,31 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_column_config_column_title => 'Spalte Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_icon_content => 'Icon Inhalt';
+
+  @override
+  String get landingpage_pagebuilder_icon_content_change_icon => 'Icon ändern';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_title => 'Icon Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_color => 'Farbe';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_size => 'Größe';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_title => 'Wähle ein Icon';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_close => 'Schließen';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_search => 'Suche';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_search_no_results => 'Keine Ergebnisse für:';
 }

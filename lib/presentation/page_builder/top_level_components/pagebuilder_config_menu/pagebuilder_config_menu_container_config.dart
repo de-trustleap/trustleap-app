@@ -45,7 +45,7 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
                           .copyWith(borderRadius: radius.toDouble());
                   updateContainerProperties(updatedProperties, pagebuilderBloc);
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderShadowControl(
                 title: localization
                     .landingpage_pagebuilder_container_config_container_shadow,
@@ -60,7 +60,7 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
                 })
           ]);
     } else {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
   }
 }

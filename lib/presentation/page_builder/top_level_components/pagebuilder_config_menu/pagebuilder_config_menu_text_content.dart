@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -21,17 +22,22 @@ class PagebuilderConfigMenuTextContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final pagebuilderCubit = Modular.get<PagebuilderBloc>();
-    return CollapsibleTile(
-        title: localization.landingpage_pagebuilder_text_config_content_title,
-        children: [
-          PagebuilderTextField(
-              model: model,
-              onChanged: (text) {
-                final updatedProperties =
-                    (model.properties as PageBuilderTextProperties)
-                        .copyWith(text: text);
-                updateTextProperties(updatedProperties, pagebuilderCubit);
-              })
-        ]);
+    if (model.elementType == PageBuilderWidgetType.text &&
+        model.properties is PageBuilderTextProperties) {
+      return CollapsibleTile(
+          title: localization.landingpage_pagebuilder_text_config_content_title,
+          children: [
+            PagebuilderTextField(
+                model: model,
+                onChanged: (text) {
+                  final updatedProperties =
+                      (model.properties as PageBuilderTextProperties)
+                          .copyWith(text: text);
+                  updateTextProperties(updatedProperties, pagebuilderCubit);
+                })
+          ]);
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 }

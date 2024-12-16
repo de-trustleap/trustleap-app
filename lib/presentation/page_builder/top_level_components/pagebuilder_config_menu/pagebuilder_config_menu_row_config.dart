@@ -54,7 +54,7 @@ class PagebuilderConfigMenuRowConfig extends StatelessWidget {
                         updatedProperties, pagebuilderBloc);
                   }
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderConfigMenuDrowdown(
                 title: localization
                     .landingpage_pagebuilder_row_config_row_main_axis_alignment,
@@ -80,7 +80,7 @@ class PagebuilderConfigMenuRowConfig extends StatelessWidget {
                         updatedProperties, pagebuilderBloc);
                   }
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderConfigMenuDrowdown(
                 title: localization
                     .landingpage_pagebuilder_row_config_row_cross_axis_alignment,
@@ -108,7 +108,7 @@ class PagebuilderConfigMenuRowConfig extends StatelessWidget {
                 }),
           ]);
     } else {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
   }
 }

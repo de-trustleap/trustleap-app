@@ -43,7 +43,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                           .copyWith(alignment: alignment);
                   updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderColorControl(
                 title: localization.landingpage_pagebuilder_text_config_color,
                 initialColor:
@@ -55,7 +55,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                           .copyWith(color: color);
                   updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderFontFamilyControl(
                 initialValue: (model.properties as PageBuilderTextProperties)
                         .fontFamily ??
@@ -66,7 +66,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                           .copyWith(fontFamily: fontFamily);
                   updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(localization.landingpage_pagebuilder_text_config_fontsize,
                   style: themeData.textTheme.bodySmall),
@@ -84,7 +84,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                     updateTextProperties(updatedProperties, pagebuilderBloc);
                   }),
             ]),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderNumberDropdown(
                 title:
                     localization.landingpage_pagebuilder_text_config_lineheight,
@@ -99,7 +99,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                           .copyWith(lineHeight: lineHeight);
                   updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderNumberDropdown(
                 title: localization
                     .landingpage_pagebuilder_text_config_letterspacing,
@@ -114,7 +114,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                           .copyWith(letterSpacing: letterSpacing);
                   updateTextProperties(updatedProperties, pagebuilderBloc);
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderShadowControl(
                 title: localization.landingpage_pagebuilder_text_config_shadow,
                 initialShadow:
@@ -128,7 +128,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
                 })
           ]);
     } else {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
   }
 }

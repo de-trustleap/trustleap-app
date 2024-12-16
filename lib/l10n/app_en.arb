@@ -1264,6 +1264,10 @@
     "@landingpage_pagebuilder_color_picker_hex_textfield": {
         "description": "Title for the hex code textfield in the Color Picker in the pagebuilder configuration"
     },
+    "landingpage_pagebuilder_color_picker_ok_button": "OK",
+    "@landingpage_pagebuilder_color_picker_ok_button": {
+        "description": "Titel für den Button im Color Picker in der Pagebuilder Konfiguration"
+    },
     "landingpage_pagebuilder_text_config_text_placeholder": "Type text here...",
     "@landingpage_pagebuilder_text_config_text_placeholder": {
         "description": "Placeholder for the textfield in the text configuration"
@@ -1419,5 +1423,41 @@
     "landingpage_pagebuilder_column_config_column_title": "Column configuration",
     "@landingpage_pagebuilder_column_config_column_title": {
         "description": "Title for the collapsible view for the column configuration in the pagebuilder column configuration."
+    },
+    "landingpage_pagebuilder_icon_content": "Icon content",
+    "@landingpage_pagebuilder_icon_content": {
+        "description": "Title for the collapsible view for the icon content in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_content_change_icon": "Change icon",
+    "@landingpage_pagebuilder_icon_content_change_icon": {
+        "description": "Title for the change icon menu in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_title": "Icon configuration",
+    "@landingpage_pagebuilder_icon_config_icon_title": {
+        "description": "Title for the collapsible view for the icon configuration in the pagebuilder icon configuration."
+    },
+    "landingpage_pagebuilder_icon_config_color": "Color",
+    "@landingpage_pagebuilder_icon_config_color": {
+        "description": "Title for the color menu in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_size": "Size",
+    "@landingpage_pagebuilder_icon_config_size": {
+        "description": "Title for the size menu in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_title": "Choose an icon",
+    "@landingpage_pagebuilder_icon_config_icon_picker_title": {
+        "description": "Title for the icon picker in the icon content tab in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_close": "Close",
+    "@landingpage_pagebuilder_icon_config_icon_picker_close": {
+        "description": "Title for the close button in the icon picker in the icon content tab in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_search": "Search",
+    "@landingpage_pagebuilder_icon_config_icon_picker_search": {
+        "description": "Search placeholder in the icon picker in the icon content tab in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_search_no_results": "No results for:",
+    "@landingpage_pagebuilder_icon_config_icon_picker_search_no_results": {
+        "description": "Text that is shown when the search have no results in the icon picker in the icon content tab in the pagebuilder icon configuration"
     }
 }

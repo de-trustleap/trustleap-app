@@ -26,7 +26,7 @@ class LandingPageBuilderConfigMenuHeader extends StatelessWidget {
             child: IconButton(
                 onPressed: () => closePressed(),
                 padding: EdgeInsets.zero,
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 iconSize: 24),
           )
         ],

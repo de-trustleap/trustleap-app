@@ -38,7 +38,7 @@ class _PagebuilderTextFieldState extends State<PagebuilderTextField> {
       disabled: false,
       minLines: 5,
       maxLines: 10,
-      contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
       placeholder:
           localization.landingpage_pagebuilder_text_config_text_placeholder,
       desktopStyle: themeData.textTheme.bodySmall,

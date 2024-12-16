@@ -46,7 +46,7 @@ class _LandingPageBuilderPageBuilderState
                       });
                     });
               } else {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
             }),
         Expanded(

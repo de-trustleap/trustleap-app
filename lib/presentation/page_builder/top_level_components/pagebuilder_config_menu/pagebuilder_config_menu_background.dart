@@ -29,7 +29,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                   model.background?.backgroundColor ?? Colors.transparent,
               onSelected: (color) {
                 final backgroundModel = model.background ??
-                    PagebuilderBackground(
+                    const PagebuilderBackground(
                         backgroundColor: null,
                         imageProperties: null,
                         overlayColor: null);
@@ -39,10 +39,10 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                     model.copyWith(background: updatedBackground);
                 pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
               }),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           PagebuilderImageControl(
               properties: model.background?.imageProperties ??
-                  PageBuilderImageProperties(
+                  const PageBuilderImageProperties(
                       url: null,
                       borderRadius: null,
                       width: null,
@@ -52,7 +52,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
               widgetModel: model,
               onSelected: (properties) {
                 final backgroundModel = model.background ??
-                    PagebuilderBackground(
+                    const PagebuilderBackground(
                         backgroundColor: null,
                         imageProperties: null,
                         overlayColor: null);
@@ -73,7 +73,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                 }
               }),
           if (model.background?.imageProperties != null) ...[
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderConfigMenuDrowdown(
                 title: localization
                     .landingpage_pagebuilder_layout_menu_background_contentmode,
@@ -88,7 +88,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                           .copyWith(imageProperties: properties));
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderColorControl(
                 title: localization
                     .landingpage_pagebuilder_layout_menu_background_overlay,

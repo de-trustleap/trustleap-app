@@ -43,7 +43,7 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
                           .copyWith(contentMode: contentMode);
                   updateImageProperties(updatedProperties, pagebuilderBloc);
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderColorControl(
                 title: localization.pagebuilder_image_config_image_overlay,
                 initialColor: (model.properties as PageBuilderImageProperties)
@@ -55,7 +55,7 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
                           .copyWith(overlayColor: color);
                   updateImageProperties(updatedProperties, pagebuilderBloc);
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderNumberStepperControl(
                 title: localization.pagebuilder_image_config_border_radius,
                 initialValue: (model.properties as PageBuilderImageProperties)
@@ -70,7 +70,7 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
                           .copyWith(borderRadius: radius.toDouble());
                   updateImageProperties(updatedProperties, pagebuilderBloc);
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             PagebuilderSizeControl(
                 model: model,
                 onChanged: (size) {
@@ -81,7 +81,7 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
                 }),
           ]);
     } else {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
   }
 }

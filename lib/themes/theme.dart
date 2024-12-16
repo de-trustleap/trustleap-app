@@ -327,7 +327,7 @@ class AppTheme {
           return lightBackgroundColor;
         }
       }),
-      overlayColor: WidgetStatePropertyAll(Colors.transparent),
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       splashRadius: 0);
 
   static final SwitchThemeData darkSwitchTheme = SwitchThemeData(
@@ -339,8 +339,8 @@ class AppTheme {
           return lightBackgroundColor;
         }
       }),
-      trackOutlineColor: WidgetStatePropertyAll(Colors.transparent),
-      trackOutlineWidth: WidgetStatePropertyAll(0),
-      overlayColor: WidgetStatePropertyAll(Colors.transparent),
+      trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
+      trackOutlineWidth: const WidgetStatePropertyAll(0),
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       splashRadius: 0);
 }

@@ -15,7 +15,7 @@ class TextStyleParser {
                 Shadow(
                     color: properties?.textShadow?.color ?? Colors.black,
                     blurRadius: properties?.textShadow?.blurRadius ?? 0,
-                    offset: properties?.textShadow?.offset ?? Offset(0, 0))
+                    offset: properties?.textShadow?.offset ?? const Offset(0, 0))
               ]
             : null,
         fontWeight:
