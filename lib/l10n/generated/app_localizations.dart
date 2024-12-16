@@ -1973,6 +1973,12 @@ abstract class AppLocalizations {
   /// **'Hex code'**
   String get landingpage_pagebuilder_color_picker_hex_textfield;
 
+  /// Titel für den Button im Color Picker in der Pagebuilder Konfiguration
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get landingpage_pagebuilder_color_picker_ok_button;
+
   /// Placeholder for the textfield in the text configuration
   ///
   /// In en, this message translates to:
@@ -2206,6 +2212,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Column configuration'**
   String get landingpage_pagebuilder_column_config_column_title;
+
+  /// Title for the collapsible view for the icon content in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Icon content'**
+  String get landingpage_pagebuilder_icon_content;
+
+  /// Title for the change icon menu in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Change icon'**
+  String get landingpage_pagebuilder_icon_content_change_icon;
+
+  /// Title for the collapsible view for the icon configuration in the pagebuilder icon configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Icon configuration'**
+  String get landingpage_pagebuilder_icon_config_icon_title;
+
+  /// Title for the color menu in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get landingpage_pagebuilder_icon_config_color;
+
+  /// Title for the size menu in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get landingpage_pagebuilder_icon_config_size;
+
+  /// Title for the icon picker in the icon content tab in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an icon'**
+  String get landingpage_pagebuilder_icon_config_icon_picker_title;
+
+  /// Title for the close button in the icon picker in the icon content tab in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get landingpage_pagebuilder_icon_config_icon_picker_close;
+
+  /// Search placeholder in the icon picker in the icon content tab in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get landingpage_pagebuilder_icon_config_icon_picker_search;
+
+  /// Text that is shown when the search have no results in the icon picker in the icon content tab in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'No results for:'**
+  String get landingpage_pagebuilder_icon_config_icon_picker_search_no_results;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

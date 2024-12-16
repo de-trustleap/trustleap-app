@@ -38,7 +38,7 @@ class PagebuilderSizeControl extends StatelessWidget {
                           0);
                   onChanged(size);
                 }),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             PagebuilderNumberStepper(
                 initialValue: (model.properties as PageBuilderImageProperties)
                         .height

@@ -1264,6 +1264,10 @@
     "@landingpage_pagebuilder_color_picker_hex_textfield": {
         "description": "Titel für das Hex Code Textfeld im Color Picker in der Pagebuilder Konfiguration"
     },
+    "landingpage_pagebuilder_color_picker_ok_button": "OK",
+    "@landingpage_pagebuilder_color_picker_ok_button": {
+        "description": "Titel für den Button im Color Picker in der Pagebuilder Konfiguration"
+    },
     "landingpage_pagebuilder_text_config_text_placeholder": "Hier Text eingeben...",
     "@landingpage_pagebuilder_text_config_text_placeholder": {
         "description": "Platzhalter für das Textfeld in der Text Konfiguration"
@@ -1419,5 +1423,41 @@
     "landingpage_pagebuilder_column_config_column_title": "Spalte Konfiguration",
     "@landingpage_pagebuilder_column_config_column_title": {
         "description": "Titel der ausklappabren View für die Spalte Konfiguration in der Pagebuilder Spalte Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_content": "Icon Inhalt",
+    "@landingpage_pagebuilder_icon_content": {
+        "description": "Titel der ausklappabren View für den Icon Inhalt in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_content_change_icon": "Icon ändern",
+    "@landingpage_pagebuilder_icon_content_change_icon": {
+        "description": "Titel des Icon ändern Menüs in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_title": "Icon Konfiguration",
+    "@landingpage_pagebuilder_icon_config_icon_title": {
+        "description": "Titel der ausklappabren View für die Icon Konfiguration in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_color": "Farbe",
+    "@landingpage_pagebuilder_icon_config_color": {
+        "description": "Titel des Farbe Menüs in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_size": "Größe",
+    "@landingpage_pagebuilder_icon_config_size": {
+        "description": "Titel des Größe Menüs in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_title": "Wähle ein Icon",
+    "@landingpage_pagebuilder_icon_config_icon_picker_title": {
+        "description": "Titel des Icon Pickers im Icon Inhalt Tab in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_close": "Schließen",
+    "@landingpage_pagebuilder_icon_config_icon_picker_close": {
+        "description": "Titel des Schließen Buttons im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_search": "Suche",
+    "@landingpage_pagebuilder_icon_config_icon_picker_search": {
+        "description": "Suche Placeholder im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_search_no_results": "Keine Ergebnisse für:",
+    "@landingpage_pagebuilder_icon_config_icon_picker_search_no_results": {
+        "description": "Text der angezeigt wird wenn Suche keine Ergebnisse liefert im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Icon Konfiguration"
     }
 }

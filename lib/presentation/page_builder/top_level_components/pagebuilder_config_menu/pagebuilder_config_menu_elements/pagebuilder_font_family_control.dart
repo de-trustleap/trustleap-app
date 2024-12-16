@@ -10,9 +10,9 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dropDownEntries = [
-      DropdownMenuEntry<String>(value: "Poppins", label: "Poppins"),
-      DropdownMenuEntry<String>(value: "Merriweather", label: "Merriweather"),
-      DropdownMenuEntry<String>(value: "Roboto", label: "Roboto")
+      const DropdownMenuEntry<String>(value: "Poppins", label: "Poppins"),
+      const DropdownMenuEntry<String>(value: "Merriweather", label: "Merriweather"),
+      const DropdownMenuEntry<String>(value: "Roboto", label: "Roboto")
     ];
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);

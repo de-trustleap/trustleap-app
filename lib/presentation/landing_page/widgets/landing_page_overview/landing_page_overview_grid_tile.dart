@@ -252,7 +252,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 255, 0, 0)),
+                        color: const Color.fromARGB(255, 255, 0, 0)),
                     maxLines: 1),
               ],
               const Spacer()

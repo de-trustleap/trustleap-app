@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_icon_content.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_image_content.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_text_content.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,13 @@ class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         if (model.elementType == PageBuilderWidgetType.text) ...[
           PagebuilderConfigMenuTextContent(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.image) ...[
           PagebuilderConfigMenuImageContent(model: model)
+        ] else if (model.elementType == PageBuilderWidgetType.icon) ... [
+          PagebuilderConfigMenuIconContent(model: model)
         ]
       ],
     );
