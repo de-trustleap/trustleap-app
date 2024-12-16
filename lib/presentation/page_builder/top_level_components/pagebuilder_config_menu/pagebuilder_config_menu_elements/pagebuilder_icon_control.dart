@@ -73,5 +73,3 @@ class _PagebuilderIconControlState extends State<PagebuilderIconControl> {
     );
   }
 }
-// TODO: Localizations nachziehen.
-// TODO: Aufbau für Contactform Properties skizzieren.
