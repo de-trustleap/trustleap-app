@@ -1,25 +1,32 @@
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderTextField extends StatefulWidget {
-  final PageBuilderWidget model;
+  final String? initialText;
+  final int minLines;
+  final int maxLines;
+  final String? placeholder;
   final Function(String) onChanged;
   const PagebuilderTextField(
-      {super.key, required this.model, required this.onChanged});
+      {super.key,
+      required this.initialText,
+      required this.onChanged,
+      this.placeholder,
+      this.minLines = 1,
+      this.maxLines = 1});
 
   @override
   State<PagebuilderTextField> createState() => _PagebuilderTextFieldState();
 }
 
 class _PagebuilderTextFieldState extends State<PagebuilderTextField> {
+  final _controller = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    _controller.text =
-        (widget.model.properties as PageBuilderTextProperties).text ?? "";
+    _controller.text = widget.initialText ?? "";
   }
 
   @override
@@ -28,7 +35,6 @@ class _PagebuilderTextFieldState extends State<PagebuilderTextField> {
     super.dispose();
   }
 
-  final _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -36,10 +42,10 @@ class _PagebuilderTextFieldState extends State<PagebuilderTextField> {
     return FormTextfield(
       controller: _controller,
       disabled: false,
-      minLines: 5,
-      maxLines: 10,
+      minLines: widget.minLines,
+      maxLines: widget.maxLines,
       contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-      placeholder:
+      placeholder: widget.placeholder ??
           localization.landingpage_pagebuilder_text_config_text_placeholder,
       desktopStyle: themeData.textTheme.bodySmall,
       onChanged: () => widget.onChanged(_controller.text),

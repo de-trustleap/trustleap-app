@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_background.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_column_config.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_contactform_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_container_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_icon_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_image_config.dart';
@@ -31,6 +32,8 @@ class LandingPageBuilderConfigMenuDesignTab extends StatelessWidget {
           PagebuilderConfigMenuColumnConfig(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.icon) ...[
           PagebuilderConfigMenuIconConfig(model: model)
+        ] else if (model.elementType == PageBuilderWidgetType.contactForm) ...[
+          PagebuilderConfigMenuContactFormConfig(model: model)
         ],
         const SizedBox(height: 8),
         PagebuilderConfigMenuLayout(model: model),

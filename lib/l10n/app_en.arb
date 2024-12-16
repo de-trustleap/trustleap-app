@@ -1459,5 +1459,17 @@
     "landingpage_pagebuilder_icon_config_icon_picker_search_no_results": "No results for:",
     "@landingpage_pagebuilder_icon_config_icon_picker_search_no_results": {
         "description": "Text that is shown when the search have no results in the icon picker in the icon content tab in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_contactform_content_email": "Contactform email",
+    "@landingpage_pagebuilder_contactform_content_email": {
+        "description": "Title for the collapsible view for the contact form email adress in the pagebuilder contact form configuration."
+    },
+    "landingpage_pagebuilder_contactform_content_email_subtitle": "Please enter the recipient email address to which the contact request will be sent.",
+    "@landingpage_pagebuilder_contactform_content_email_subtitle": {
+        "description": "Text describing the email address input for the contact form email address in the Pagebuilder contact form configuration."
+    },
+    "landingpage_pagebuilder_contactform_content_email_placeholder": "Email address",
+    "@landingpage_pagebuilder_contactform_content_email_placeholder": {
+        "description": "Placeholder for the contact form email address in the Pagebuilder contact form configuration."
     }
 }

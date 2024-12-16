@@ -1458,6 +1458,18 @@
     },
     "landingpage_pagebuilder_icon_config_icon_picker_search_no_results": "Keine Ergebnisse für:",
     "@landingpage_pagebuilder_icon_config_icon_picker_search_no_results": {
-        "description": "Text der angezeigt wird wenn Suche keine Ergebnisse liefert im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Icon Konfiguration"
+        "description": "Text der angezeigt wird wenn Suche keine Ergebnisse liefert im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "landingpage_pagebuilder_contactform_content_email": "Kontaktformular E-Mail",
+    "@landingpage_pagebuilder_contactform_content_email": {
+        "description": "Titel der ausklappabren View für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "landingpage_pagebuilder_contactform_content_email_subtitle": "Gib hier bitte die Empfänger E-Mail Adresse an, an welche die Kontaktanfrage versendet wird.",
+    "@landingpage_pagebuilder_contactform_content_email_subtitle": {
+        "description": "Text der die E-Mail Adresse Eingabe beschreibt für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "landingpage_pagebuilder_contactform_content_email_placeholder": "E-Mail Adresse",
+    "@landingpage_pagebuilder_contactform_content_email_placeholder": {
+        "description": "Platzhalter für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
     }
 }

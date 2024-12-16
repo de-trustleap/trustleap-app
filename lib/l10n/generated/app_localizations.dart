@@ -2266,6 +2266,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No results for:'**
   String get landingpage_pagebuilder_icon_config_icon_picker_search_no_results;
+
+  /// Title for the collapsible view for the contact form email adress in the pagebuilder contact form configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Contactform email'**
+  String get landingpage_pagebuilder_contactform_content_email;
+
+  /// Text describing the email address input for the contact form email address in the Pagebuilder contact form configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the recipient email address to which the contact request will be sent.'**
+  String get landingpage_pagebuilder_contactform_content_email_subtitle;
+
+  /// Placeholder for the contact form email address in the Pagebuilder contact form configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address'**
+  String get landingpage_pagebuilder_contactform_content_email_placeholder;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

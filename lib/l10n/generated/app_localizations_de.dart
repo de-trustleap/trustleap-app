@@ -1095,4 +1095,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_icon_config_icon_picker_search_no_results => 'Keine Ergebnisse für:';
+
+  @override
+  String get landingpage_pagebuilder_contactform_content_email => 'Kontaktformular E-Mail';
+
+  @override
+  String get landingpage_pagebuilder_contactform_content_email_subtitle => 'Gib hier bitte die Empfänger E-Mail Adresse an, an welche die Kontaktanfrage versendet wird.';
+
+  @override
+  String get landingpage_pagebuilder_contactform_content_email_placeholder => 'E-Mail Adresse';
 }
