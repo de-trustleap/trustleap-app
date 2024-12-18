@@ -24,7 +24,8 @@ class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
           PagebuilderConfigMenuIconContent(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.contactForm) ...[
           PagebuilderConfigMenuContactFormContent(model: model)
-        ]
+        ],
+        const SizedBox(height: 40)
       ],
     );
   }

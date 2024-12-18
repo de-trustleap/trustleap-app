@@ -8,6 +8,7 @@ class PageBuilderTextFieldProperties extends Equatable
     implements PageBuilderProperties {
   final double? width;
   final int? minLines;
+  final int? maxLines;
   final bool? isRequired;
   final Color? backgroundColor;
   final Color? borderColor;
@@ -17,6 +18,7 @@ class PageBuilderTextFieldProperties extends Equatable
   const PageBuilderTextFieldProperties({
     required this.width,
     required this.minLines,
+    required this.maxLines,
     required this.isRequired,
     required this.backgroundColor,
     required this.borderColor,
@@ -27,6 +29,7 @@ class PageBuilderTextFieldProperties extends Equatable
   PageBuilderTextFieldProperties copyWith(
       {double? width,
       int? minLines,
+      int? maxLines,
       bool? isRequired,
       Color? backgroundColor,
       Color? borderColor,
@@ -35,6 +38,7 @@ class PageBuilderTextFieldProperties extends Equatable
     return PageBuilderTextFieldProperties(
       width: width ?? this.width,
       minLines: minLines ?? this.minLines,
+      maxLines: maxLines ?? this.maxLines,
       isRequired: isRequired ?? this.isRequired,
       borderColor: borderColor ?? this.borderColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -48,6 +52,7 @@ class PageBuilderTextFieldProperties extends Equatable
   List<Object?> get props => [
         width,
         minLines,
+        maxLines,
         isRequired,
         backgroundColor,
         borderColor,

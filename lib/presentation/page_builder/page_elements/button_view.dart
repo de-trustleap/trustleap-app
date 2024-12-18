@@ -15,6 +15,19 @@ class PageBuilderButtonView extends StatelessWidget {
     required this.widgetModel,
   });
 
+  Alignment _getAlignment(TextAlign? textAlign) {
+    switch (textAlign) {
+      case TextAlign.left:
+        return Alignment.centerLeft;
+      case TextAlign.right:
+        return Alignment.centerRight;
+      case TextAlign.center:
+        return Alignment.center;
+      default:
+        return Alignment.center;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +37,7 @@ class PageBuilderButtonView extends StatelessWidget {
         decoration: BoxDecoration(
             color: properties.backgroundColor,
             borderRadius: BorderRadius.circular(properties.borderRadius ?? 0)),
-        alignment: Alignment.center,
+        alignment: _getAlignment(properties.textProperties?.alignment),
         child: Text(properties.textProperties?.text ?? "",
             style:
                 parser.getTextStyleFromProperties(properties.textProperties)));
