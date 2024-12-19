@@ -12,6 +12,7 @@ void main() {
       final model = PageBuilderTextFieldProperties(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: true,
           backgroundColor: null,
           borderColor: Colors.black,
@@ -40,6 +41,7 @@ void main() {
       final expectedResult = PageBuilderTextFieldProperties(
           width: 200.0,
           minLines: 2,
+          maxLines: 1,
           isRequired: true,
           backgroundColor: null,
           borderColor: Colors.black,
@@ -90,6 +92,7 @@ void main() {
       final properties1 = PageBuilderTextFieldProperties(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: true,
           backgroundColor: null,
           borderColor: Colors.black,
@@ -118,6 +121,7 @@ void main() {
       final properties2 = PageBuilderTextFieldProperties(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: true,
           backgroundColor: null,
           borderColor: Colors.black,

@@ -1104,4 +1104,58 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_contactform_content_email_placeholder => 'E-Mail Adresse';
+
+  @override
+  String get pagebuilder_button_config_button_width => 'Breite';
+
+  @override
+  String get pagebuilder_button_config_button_height => 'Höhe';
+
+  @override
+  String get pagebuilder_button_config_button_border_radius => 'Radius';
+
+  @override
+  String get pagebuilder_button_config_button_background_color => 'Hintergrundfarbe';
+
+  @override
+  String get pagebuilder_button_config_button_text_configuration => 'Button Text Konfiguration';
+
+  @override
+  String get pagebuilder_contact_form_config_name_textfield_title => 'Name Textfeld';
+
+  @override
+  String get pagebuilder_contact_form_config_email_textfield_title => 'E-Mail Textfeld';
+
+  @override
+  String get pagebuilder_contact_form_config_message_textfield_title => 'Nachricht Textfeld';
+
+  @override
+  String get pagebuilder_contact_form_config_button_title => 'Button Konfiguration';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_width => 'Breite';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_min_lines => 'Zeilenanzahl Minimum';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_max_lines => 'Zeilenanzahl Maximum';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_required => 'Pflichtfeld';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_background_color => 'Hintergrundfarbe';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_border_color => 'Rahmenfarbe';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_placeholder => 'Platzhalter';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_text_configuration => 'Textfeld Text Konfiguration';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_placeholder_text_configuration => 'Textfeld Platzhalter Konfiguration';
 }

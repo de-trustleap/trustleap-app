@@ -12,9 +12,11 @@ void main() {
         () {
       // Given
       final model = PageBuilderContactFormProperties(
+          email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
               width: 200.0,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -43,6 +45,7 @@ void main() {
           emailTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -71,6 +74,7 @@ void main() {
           messageTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -103,9 +107,11 @@ void main() {
               backgroundColor: null,
               textProperties: null));
       final expectedResult = PageBuilderContactFormProperties(
+          email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -134,6 +140,7 @@ void main() {
           emailTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -162,6 +169,7 @@ void main() {
           messageTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -198,6 +206,7 @@ void main() {
           nameTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300.0,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -238,9 +247,11 @@ void main() {
     test("check if value equality works", () {
       // Given
       final properties1 = PageBuilderContactFormProperties(
+          email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
               width: 200.0,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -269,6 +280,7 @@ void main() {
           emailTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -297,6 +309,7 @@ void main() {
           messageTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -329,9 +342,11 @@ void main() {
               backgroundColor: null,
               textProperties: null));
       final properties2 = PageBuilderContactFormProperties(
+          email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
               width: 200.0,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -360,6 +375,7 @@ void main() {
           emailTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -388,6 +404,7 @@ void main() {
           messageTextFieldProperties: PageBuilderTextFieldProperties(
               width: 300,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,

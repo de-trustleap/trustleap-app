@@ -1471,5 +1471,77 @@
     "landingpage_pagebuilder_contactform_content_email_placeholder": "Email address",
     "@landingpage_pagebuilder_contactform_content_email_placeholder": {
         "description": "Placeholder for the contact form email address in the Pagebuilder contact form configuration."
+    },
+    "pagebuilder_button_config_button_width": "Width",
+    "@pagebuilder_button_config_button_width": {
+        "description": "Menu for button width in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_height": "Height",
+    "@pagebuilder_button_config_button_height": {
+        "description": "Menu for button height in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_border_radius": "Radius",
+    "@pagebuilder_button_config_button_border_radius": {
+        "description": "Menu for button border radius in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_background_color": "Background color",
+    "@pagebuilder_button_config_button_background_color": {
+        "description": "Menu for button background color in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_text_configuration": "Button text configuration",
+    "@pagebuilder_button_config_button_text_configuration": {
+        "description": "Title for button text configuration in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_name_textfield_title": "Name textfield",
+    "@pagebuilder_contact_form_config_name_textfield_title": {
+        "description": "Title for collapsible menu for the name textfield configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_email_textfield_title": "E-Mail textfield",
+    "@pagebuilder_contact_form_config_email_textfield_title": {
+        "description": "Title for collapsible menu for the email textfield configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_message_textfield_title": "Nachricht textfield",
+    "@pagebuilder_contact_form_config_message_textfield_title": {
+        "description": "Title for collapsible menu for the message textfield configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_button_title": "Button configuration",
+    "@pagebuilder_contact_form_config_button_title": {
+        "description": "Title for collapsible menu for the button configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_width": "Width",
+    "@pagebuilder_textfield_config_textfield_width": {
+        "description": "Menu for textfield width in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_min_lines": "Number of lines min",
+    "@pagebuilder_textfield_config_textfield_min_lines": {
+        "description": "Menu for textfield number of lines minimum in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_max_lines": "Number of lines max",
+    "@pagebuilder_textfield_config_textfield_max_lines": {
+        "description": "Menu for textfield number of lines maximum in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_required": "Required field",
+    "@pagebuilder_textfield_config_textfield_required": {
+        "description": "Menu for textfield is required in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_background_color": "Background color",
+    "@pagebuilder_textfield_config_textfield_background_color": {
+        "description": "Menu for textfield background color in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_border_color": "Border color",
+    "@pagebuilder_textfield_config_textfield_border_color": {
+        "description": "Menu for textfield border color in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_placeholder": "Placeholder",
+    "@pagebuilder_textfield_config_textfield_placeholder": {
+        "description": "Menu for textfield placeholder color in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_text_configuration": "Textfield text configuration",
+    "@pagebuilder_textfield_config_textfield_text_configuration": {
+        "description": "Title for textfield text configuration in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_placeholder_text_configuration": "Textfield placeholder configuration",
+    "@pagebuilder_textfield_config_textfield_placeholder_text_configuration": {
+        "description": "Title for textfield placeholder configuration in the textfield configuration in the pagebuilder config menu"
     }
 }

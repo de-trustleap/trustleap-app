@@ -86,4 +86,17 @@ class AlignmentMapper {
         return localization.pagebuilder_layout_menu_alignment_center;
     }
   }
+
+  static Alignment getAlignmentFromTextAlignment(TextAlign? textAlign) {
+    switch (textAlign) {
+      case TextAlign.left:
+        return Alignment.centerLeft;
+      case TextAlign.right:
+        return Alignment.centerRight;
+      case TextAlign.center:
+        return Alignment.center;
+      default:
+        return Alignment.center;
+    }
+  }
 }

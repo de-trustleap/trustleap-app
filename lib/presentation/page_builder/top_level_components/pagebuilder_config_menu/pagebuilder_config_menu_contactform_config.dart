@@ -23,73 +23,88 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
         model.properties is PageBuilderContactFormProperties) {
       return Column(
         children: [
-          CollapsibleTile(title: "Name Textfeld", children: [
-            PagebuilderConfigMenuTextfieldConfig(
-                properties:
-                    (model.properties as PageBuilderContactFormProperties)
-                        .nameTextFieldProperties,
-                onChanged: (properties) {
-                  if (model.properties is PageBuilderContactFormProperties) {
-                    final updatedProperties =
+          CollapsibleTile(
+              title: localization
+                  .pagebuilder_contact_form_config_name_textfield_title,
+              children: [
+                PagebuilderConfigMenuTextfieldConfig(
+                    properties:
                         (model.properties as PageBuilderContactFormProperties)
+                            .nameTextFieldProperties,
+                    onChanged: (properties) {
+                      if (model.properties
+                          is PageBuilderContactFormProperties) {
+                        final updatedProperties = (model.properties
+                                as PageBuilderContactFormProperties)
                             .copyWith(nameTextFieldProperties: properties);
-                    final updatedWidget =
-                        model.copyWith(properties: updatedProperties);
-                    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                  }
-                })
-          ]),
+                        final updatedWidget =
+                            model.copyWith(properties: updatedProperties);
+                        pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                      }
+                    })
+              ]),
           const SizedBox(height: 8),
-          CollapsibleTile(title: "E-Mail Textfeld", children: [
-            PagebuilderConfigMenuTextfieldConfig(
-                properties:
-                    (model.properties as PageBuilderContactFormProperties)
-                        .emailTextFieldProperties,
-                onChanged: (properties) {
-                  if (model.properties is PageBuilderContactFormProperties) {
-                    final updatedProperties =
+          CollapsibleTile(
+              title: localization
+                  .pagebuilder_contact_form_config_email_textfield_title,
+              children: [
+                PagebuilderConfigMenuTextfieldConfig(
+                    properties:
                         (model.properties as PageBuilderContactFormProperties)
+                            .emailTextFieldProperties,
+                    onChanged: (properties) {
+                      if (model.properties
+                          is PageBuilderContactFormProperties) {
+                        final updatedProperties = (model.properties
+                                as PageBuilderContactFormProperties)
                             .copyWith(emailTextFieldProperties: properties);
-                    final updatedWidget =
-                        model.copyWith(properties: updatedProperties);
-                    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                  }
-                })
-          ]),
+                        final updatedWidget =
+                            model.copyWith(properties: updatedProperties);
+                        pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                      }
+                    })
+              ]),
           const SizedBox(height: 8),
-          CollapsibleTile(title: "Nachricht Textfeld", children: [
-            PagebuilderConfigMenuTextfieldConfig(
-                properties:
-                    (model.properties as PageBuilderContactFormProperties)
-                        .messageTextFieldProperties,
-                onChanged: (properties) {
-                  if (model.properties is PageBuilderContactFormProperties) {
-                    final updatedProperties =
+          CollapsibleTile(
+              title: localization
+                  .pagebuilder_contact_form_config_message_textfield_title,
+              children: [
+                PagebuilderConfigMenuTextfieldConfig(
+                    properties:
                         (model.properties as PageBuilderContactFormProperties)
+                            .messageTextFieldProperties,
+                    onChanged: (properties) {
+                      if (model.properties
+                          is PageBuilderContactFormProperties) {
+                        final updatedProperties = (model.properties
+                                as PageBuilderContactFormProperties)
                             .copyWith(messageTextFieldProperties: properties);
-                    final updatedWidget =
-                        model.copyWith(properties: updatedProperties);
-                    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                  }
-                })
-          ]),
+                        final updatedWidget =
+                            model.copyWith(properties: updatedProperties);
+                        pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                      }
+                    })
+              ]),
           const SizedBox(height: 8),
-          CollapsibleTile(title: "Button Konfiguration", children: [
-            PagebuilderConfigMenuButtonConfig(
-                properties:
-                    (model.properties as PageBuilderContactFormProperties)
-                        .buttonProperties,
-                onChanged: (buttonProperties) {
-                  if (model.properties is PageBuilderContactFormProperties) {
-                    final updatedProperties =
+          CollapsibleTile(
+              title: localization.pagebuilder_contact_form_config_button_title,
+              children: [
+                PagebuilderConfigMenuButtonConfig(
+                    properties:
                         (model.properties as PageBuilderContactFormProperties)
+                            .buttonProperties,
+                    onChanged: (buttonProperties) {
+                      if (model.properties
+                          is PageBuilderContactFormProperties) {
+                        final updatedProperties = (model.properties
+                                as PageBuilderContactFormProperties)
                             .copyWith(buttonProperties: buttonProperties);
-                    final updatedWidget =
-                        model.copyWith(properties: updatedProperties);
-                    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                  }
-                })
-          ])
+                        final updatedWidget =
+                            model.copyWith(properties: updatedProperties);
+                        pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                      }
+                    })
+              ])
         ],
       );
     } else {
