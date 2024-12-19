@@ -39,6 +39,6 @@ class PageBuilderTextFieldView extends StatelessWidget {
             color: properties.backgroundColor),
         child: Text(properties.placeHolderTextProperties?.text ?? "",
             style: parser.getTextStyleFromProperties(
-                properties.placeHolderTextProperties)));
+                properties.placeHolderTextProperties), textAlign: properties.textProperties?.alignment ?? TextAlign.start));
   }
 }

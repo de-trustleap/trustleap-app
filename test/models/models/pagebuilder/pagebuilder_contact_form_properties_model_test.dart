@@ -12,142 +12,152 @@ void main() {
         "set emailTextFieldProperties with copyWith should set emailTextFieldProperties for resulting object",
         () {
       // Given
-      final model =
-          PageBuilderContactFormPropertiesModel(nameTextFieldProperties: {
-        "width": 400,
-        "maxLines": 1,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihr Name"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, emailTextFieldProperties: {
-        "width": 400.0,
-        "maxLines": 1,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihre E-Mail"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, messageTextFieldProperties: {
-        "width": 400,
-        "minLines": 4,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihre Nachricht"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, buttonProperties: {
-        "width": 200,
-        "height": 70,
-        "borderRadius": 4,
-        "backgroundColor": "FF333a56",
-        "textProperties": {
-          "alignment": "center",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FFFFFFFF",
-          "text": "NACHRICHT SENDEN"
-        }
-      });
-      final expectedResult =
-          PageBuilderContactFormPropertiesModel(nameTextFieldProperties: {
-        "width": 400,
-        "maxLines": 1,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihr Name"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, emailTextFieldProperties: {
-        "width": 200,
-        "maxLines": 1,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": null,
-          "text": "Ihre E-Mail"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, messageTextFieldProperties: {
-        "width": 400,
-        "minLines": 4,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihre Nachricht"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, buttonProperties: {
-        "width": 200,
-        "height": 70,
-        "borderRadius": 4,
-        "backgroundColor": "FF333a56",
-        "textProperties": {
-          "alignment": "center",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FFFFFFFF",
-          "text": "NACHRICHT SENDEN"
-        }
-      });
+      final model = PageBuilderContactFormPropertiesModel(
+          email: "test@test.de",
+          nameTextFieldProperties: {
+            "width": 400,
+            "maxLines": 1,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihr Name"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          emailTextFieldProperties: {
+            "width": 400.0,
+            "maxLines": 1,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          messageTextFieldProperties: {
+            "width": 400,
+            "minLines": 4,
+            "maxLines": 5,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre Nachricht"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          buttonProperties: {
+            "width": 200,
+            "height": 70,
+            "borderRadius": 4,
+            "backgroundColor": "FF333a56",
+            "textProperties": {
+              "alignment": "center",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FFFFFFFF",
+              "text": "NACHRICHT SENDEN"
+            }
+          });
+      final expectedResult = PageBuilderContactFormPropertiesModel(
+          email: "test@test.de",
+          nameTextFieldProperties: {
+            "width": 400,
+            "maxLines": 1,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihr Name"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          emailTextFieldProperties: {
+            "width": 200,
+            "maxLines": 1,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": null,
+              "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          messageTextFieldProperties: {
+            "width": 400,
+            "minLines": 4,
+            "maxLines": 5,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre Nachricht"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          buttonProperties: {
+            "width": 200,
+            "height": 70,
+            "borderRadius": 4,
+            "backgroundColor": "FF333a56",
+            "textProperties": {
+              "alignment": "center",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FFFFFFFF",
+              "text": "NACHRICHT SENDEN"
+            }
+          });
       // When
       final result = model.copyWith(emailTextFieldProperties: {
         "width": 200,
@@ -176,75 +186,81 @@ void main() {
   group("PagebuilderContactFormPropertiesModel_ToMap", () {
     test("check if model is successfully converted to a map", () {
       // Given
-      final model =
-          PageBuilderContactFormPropertiesModel(nameTextFieldProperties: {
-        "width": 400,
-        "maxLines": 1,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihr Name"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, emailTextFieldProperties: {
-        "width": 400.0,
-        "maxLines": 1,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihre E-Mail"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, messageTextFieldProperties: {
-        "width": 400,
-        "minLines": 4,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihre Nachricht"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, buttonProperties: {
-        "width": 200,
-        "height": 70,
-        "borderRadius": 4,
-        "backgroundColor": "FF333a56",
-        "textProperties": {
-          "alignment": "center",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FFFFFFFF",
-          "text": "NACHRICHT SENDEN"
-        }
-      });
+      final model = PageBuilderContactFormPropertiesModel(
+          email: "test@test.de",
+          nameTextFieldProperties: {
+            "width": 400,
+            "maxLines": 1,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihr Name"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          emailTextFieldProperties: {
+            "width": 400.0,
+            "maxLines": 1,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          messageTextFieldProperties: {
+            "width": 400,
+            "minLines": 4,
+            "maxLines": 5,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre Nachricht"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          buttonProperties: {
+            "width": 200,
+            "height": 70,
+            "borderRadius": 4,
+            "backgroundColor": "FF333a56",
+            "textProperties": {
+              "alignment": "center",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FFFFFFFF",
+              "text": "NACHRICHT SENDEN"
+            }
+          });
       final expectedResult = {
+        "email": "test@test.de",
         "nameTextFieldProperties": {
           "width": 400,
           "maxLines": 1,
@@ -286,6 +302,7 @@ void main() {
         "messageTextFieldProperties": {
           "width": 400,
           "minLines": 4,
+          "maxLines": 5,
           "required": true,
           "backgroundColor": "FFF9F9F9",
           "borderColor": "FFDBDBDB",
@@ -327,6 +344,7 @@ void main() {
     test("check if map is successfully converted to model", () {
       // Given
       final map = {
+        "email": "test@test.de",
         "nameTextFieldProperties": {
           "width": 400,
           "maxLines": 1,
@@ -368,6 +386,7 @@ void main() {
         "messageTextFieldProperties": {
           "width": 400,
           "minLines": 4,
+          "maxLines": 5,
           "required": true,
           "backgroundColor": "FFF9F9F9",
           "borderColor": "FFDBDBDB",
@@ -398,74 +417,79 @@ void main() {
           }
         }
       };
-      final expectedResult =
-          PageBuilderContactFormPropertiesModel(nameTextFieldProperties: {
-        "width": 400,
-        "maxLines": 1,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihr Name"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, emailTextFieldProperties: {
-        "width": 400.0,
-        "maxLines": 1,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihre E-Mail"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, messageTextFieldProperties: {
-        "width": 400,
-        "minLines": 4,
-        "required": true,
-        "backgroundColor": "FFF9F9F9",
-        "borderColor": "FFDBDBDB",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihre Nachricht"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16,
-          "fontFamily": "Roboto"
-        }
-      }, buttonProperties: {
-        "width": 200,
-        "height": 70,
-        "borderRadius": 4,
-        "backgroundColor": "FF333a56",
-        "textProperties": {
-          "alignment": "center",
-          "fontSize": 16,
-          "fontFamily": "Roboto",
-          "color": "FFFFFFFF",
-          "text": "NACHRICHT SENDEN"
-        }
-      });
+      final expectedResult = PageBuilderContactFormPropertiesModel(
+          email: "test@test.de",
+          nameTextFieldProperties: {
+            "width": 400,
+            "maxLines": 1,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihr Name"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          emailTextFieldProperties: {
+            "width": 400.0,
+            "maxLines": 1,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          messageTextFieldProperties: {
+            "width": 400,
+            "minLines": 4,
+            "maxLines": 5,
+            "required": true,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre Nachricht"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16,
+              "fontFamily": "Roboto"
+            }
+          },
+          buttonProperties: {
+            "width": 200,
+            "height": 70,
+            "borderRadius": 4,
+            "backgroundColor": "FF333a56",
+            "textProperties": {
+              "alignment": "center",
+              "fontSize": 16,
+              "fontFamily": "Roboto",
+              "color": "FFFFFFFF",
+              "text": "NACHRICHT SENDEN"
+            }
+          });
       // When
       final result = PageBuilderContactFormPropertiesModel.fromMap(map);
       // Then
@@ -478,72 +502,81 @@ void main() {
         "check if conversion from PagebuilderContactFormPropertiesModel to PagebuilderContactFormProperties works",
         () {
       // Given
-      final model =
-          PageBuilderContactFormPropertiesModel(nameTextFieldProperties: {
-        "width": 200.0,
-        "minLines": 1,
-        "isRequired": true,
-        "backgroundColor": null,
-        "borderColor": "FFF9F9F9",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "color": "FF9A9A9C",
-          "text": "Ihr Name"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, emailTextFieldProperties: {
-        "width": 400.0,
-        "minLines": 1,
-        "isRequired": true,
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "text": "Ihre E-Mail"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, messageTextFieldProperties: {
-        "width": 400.0,
-        "minLines": 4,
-        "isRequired": true,
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "text": "Ihre Nachricht"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, buttonProperties: {
-        "width": 200.0,
-        "height": 70.0,
-        "borderRadius": 4.0,
-        "backgroundColor": "FF333a56",
-        "textProperties": {
-          "alignment": "center",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "color": "FFFFFFFF",
-          "text": "NACHRICHT SENDEN"
-        }
-      });
+      final model = PageBuilderContactFormPropertiesModel(
+          email: "test@test.de",
+          nameTextFieldProperties: {
+            "width": 200.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": true,
+            "backgroundColor": null,
+            "borderColor": "FFF9F9F9",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihr Name"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          emailTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": true,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          messageTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 4,
+            "maxLines": 5,
+            "isRequired": true,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre Nachricht"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          buttonProperties: {
+            "width": 200.0,
+            "height": 70.0,
+            "borderRadius": 4.0,
+            "backgroundColor": "FF333a56",
+            "textProperties": {
+              "alignment": "center",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "FFFFFFFF",
+              "text": "NACHRICHT SENDEN"
+            }
+          });
       final expectedResult = PageBuilderContactFormProperties(
+          email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
               width: 200.0,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: Color(0xFFF9F9F9),
@@ -572,6 +605,7 @@ void main() {
           emailTextFieldProperties: PageBuilderTextFieldProperties(
               width: 400.0,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -600,6 +634,7 @@ void main() {
           messageTextFieldProperties: PageBuilderTextFieldProperties(
               width: 400.0,
               minLines: 4,
+              maxLines: 5,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -654,9 +689,11 @@ void main() {
         () {
       // Given
       final model = PageBuilderContactFormProperties(
+          email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
               width: 200.0,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: Color(0xFFF9F9F9),
@@ -685,6 +722,7 @@ void main() {
           emailTextFieldProperties: PageBuilderTextFieldProperties(
               width: 400.0,
               minLines: 1,
+              maxLines: 1,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -713,6 +751,7 @@ void main() {
           messageTextFieldProperties: PageBuilderTextFieldProperties(
               width: 400.0,
               minLines: 4,
+              maxLines: 5,
               isRequired: true,
               backgroundColor: null,
               borderColor: null,
@@ -754,67 +793,74 @@ void main() {
                   alignment: TextAlign.center,
                   isBold: null,
                   isItalic: null)));
-      final expectedResult =
-          PageBuilderContactFormPropertiesModel(nameTextFieldProperties: {
-        "width": 200.0,
-        "minLines": 1,
-        "isRequired": true,
-        "borderColor": "fff9f9f9",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "color": "ff9a9a9c",
-          "text": "Ihr Name"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, emailTextFieldProperties: {
-        "width": 400.0,
-        "minLines": 1,
-        "isRequired": true,
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "text": "Ihre E-Mail"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, messageTextFieldProperties: {
-        "width": 400.0,
-        "minLines": 4,
-        "isRequired": true,
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "text": "Ihre Nachricht"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, buttonProperties: {
-        "width": 200.0,
-        "height": 70.0,
-        "borderRadius": 4.0,
-        "backgroundColor": "ff333a56",
-        "textProperties": {
-          "alignment": "center",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "color": "ffffffff",
-          "text": "NACHRICHT SENDEN"
-        }
-      });
+      final expectedResult = PageBuilderContactFormPropertiesModel(
+          email: "test@test.de",
+          nameTextFieldProperties: {
+            "width": 200.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": true,
+            "borderColor": "fff9f9f9",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "ff9a9a9c",
+              "text": "Ihr Name"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          emailTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": true,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          messageTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 4,
+            "maxLines": 5,
+            "isRequired": true,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre Nachricht"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          buttonProperties: {
+            "width": 200.0,
+            "height": 70.0,
+            "borderRadius": 4.0,
+            "backgroundColor": "ff333a56",
+            "textProperties": {
+              "alignment": "center",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "ffffffff",
+              "text": "NACHRICHT SENDEN"
+            }
+          });
       // When
       final result = PageBuilderContactFormPropertiesModel.fromDomain(model);
       // Then
@@ -825,128 +871,142 @@ void main() {
   group("PagebuilderContactFormPropertiesModel_Props", () {
     test("check if value equality works", () {
       // Given
-      final properties1 =
-          PageBuilderContactFormPropertiesModel(nameTextFieldProperties: {
-        "width": 200.0,
-        "minLines": 1,
-        "isRequired": true,
-        "borderColor": "fff9f9f9",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "color": "ff9a9a9c",
-          "text": "Ihr Name"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, emailTextFieldProperties: {
-        "width": 400.0,
-        "minLines": 1,
-        "isRequired": true,
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "text": "Ihre E-Mail"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, messageTextFieldProperties: {
-        "width": 400.0,
-        "minLines": 4,
-        "isRequired": true,
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "text": "Ihre Nachricht"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, buttonProperties: {
-        "width": 200.0,
-        "height": 70.0,
-        "borderRadius": 4.0,
-        "backgroundColor": "ff333a56",
-        "textProperties": {
-          "alignment": "center",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "color": "ffffffff",
-          "text": "NACHRICHT SENDEN"
-        }
-      });
-      final properties2 =
-          PageBuilderContactFormPropertiesModel(nameTextFieldProperties: {
-        "width": 200.0,
-        "minLines": 1,
-        "isRequired": true,
-        "borderColor": "fff9f9f9",
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "color": "ff9a9a9c",
-          "text": "Ihr Name"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, emailTextFieldProperties: {
-        "width": 400.0,
-        "minLines": 1,
-        "isRequired": true,
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "text": "Ihre E-Mail"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, messageTextFieldProperties: {
-        "width": 400.0,
-        "minLines": 4,
-        "isRequired": true,
-        "placeHolderTextProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "text": "Ihre Nachricht"
-        },
-        "textProperties": {
-          "alignment": "left",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto"
-        }
-      }, buttonProperties: {
-        "width": 200.0,
-        "height": 70.0,
-        "borderRadius": 4.0,
-        "backgroundColor": "ff333a56",
-        "textProperties": {
-          "alignment": "center",
-          "fontSize": 16.0,
-          "fontFamily": "Roboto",
-          "color": "ffffffff",
-          "text": "NACHRICHT SENDEN"
-        }
-      });
+      final properties1 = PageBuilderContactFormPropertiesModel(
+          email: "test@test.de",
+          nameTextFieldProperties: {
+            "width": 200.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": true,
+            "borderColor": "fff9f9f9",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "ff9a9a9c",
+              "text": "Ihr Name"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          emailTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": true,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          messageTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 4,
+            "maxLines": 5,
+            "isRequired": true,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre Nachricht"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          buttonProperties: {
+            "width": 200.0,
+            "height": 70.0,
+            "borderRadius": 4.0,
+            "backgroundColor": "ff333a56",
+            "textProperties": {
+              "alignment": "center",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "ffffffff",
+              "text": "NACHRICHT SENDEN"
+            }
+          });
+      final properties2 = PageBuilderContactFormPropertiesModel(
+          email: "test@test.de",
+          nameTextFieldProperties: {
+            "width": 200.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": true,
+            "borderColor": "fff9f9f9",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "ff9a9a9c",
+              "text": "Ihr Name"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          emailTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": true,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          messageTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 4,
+            "maxLines": 5,
+            "isRequired": true,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre Nachricht"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          buttonProperties: {
+            "width": 200.0,
+            "height": 70.0,
+            "borderRadius": 4.0,
+            "backgroundColor": "ff333a56",
+            "textProperties": {
+              "alignment": "center",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "ffffffff",
+              "text": "NACHRICHT SENDEN"
+            }
+          });
       // Then
       expect(properties1, properties2);
     });

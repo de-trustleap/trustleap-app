@@ -1458,6 +1458,90 @@
     },
     "landingpage_pagebuilder_icon_config_icon_picker_search_no_results": "Keine Ergebnisse für:",
     "@landingpage_pagebuilder_icon_config_icon_picker_search_no_results": {
-        "description": "Text der angezeigt wird wenn Suche keine Ergebnisse liefert im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Icon Konfiguration"
+        "description": "Text der angezeigt wird wenn Suche keine Ergebnisse liefert im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "landingpage_pagebuilder_contactform_content_email": "Kontaktformular E-Mail",
+    "@landingpage_pagebuilder_contactform_content_email": {
+        "description": "Titel der ausklappabren View für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "landingpage_pagebuilder_contactform_content_email_subtitle": "Gib hier bitte die Empfänger E-Mail Adresse an, an welche die Kontaktanfrage versendet wird.",
+    "@landingpage_pagebuilder_contactform_content_email_subtitle": {
+        "description": "Text der die E-Mail Adresse Eingabe beschreibt für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "landingpage_pagebuilder_contactform_content_email_placeholder": "E-Mail Adresse",
+    "@landingpage_pagebuilder_contactform_content_email_placeholder": {
+        "description": "Platzhalter für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "pagebuilder_button_config_button_width": "Breite",
+    "@pagebuilder_button_config_button_width": {
+        "description": "Menüpunkt für Button Breite in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_button_config_button_height": "Höhe",
+    "@pagebuilder_button_config_button_height": {
+        "description": "Menüpunkt für Button Höhe in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_button_config_button_border_radius": "Radius",
+    "@pagebuilder_button_config_button_border_radius": {
+        "description": "Menüpunkt für Button Radius in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_button_config_button_background_color": "Hintergrundfarbe",
+    "@pagebuilder_button_config_button_background_color": {
+        "description": "Menüpunkt für Button Hintergrundfarbe in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_button_config_button_text_configuration": "Button Text Konfiguration",
+    "@pagebuilder_button_config_button_text_configuration": {
+        "description": "Überschrift für Button Text Konfiguration in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_contact_form_config_name_textfield_title": "Name Textfeld",
+    "@pagebuilder_contact_form_config_name_textfield_title": {
+        "description": "Titel für ausklappbares Menü für die Name Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_contact_form_config_email_textfield_title": "E-Mail Textfeld",
+    "@pagebuilder_contact_form_config_email_textfield_title": {
+        "description": "Titel für ausklappbares Menü für die E-Mail Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_contact_form_config_message_textfield_title": "Nachricht Textfeld",
+    "@pagebuilder_contact_form_config_message_textfield_title": {
+        "description": "Titel für ausklappbares Menü für die Nachricht Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_contact_form_config_button_title": "Button Konfiguration",
+    "@pagebuilder_contact_form_config_button_title": {
+        "description": "Titel für ausklappbares Menü für die Button Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_width": "Breite",
+    "@pagebuilder_textfield_config_textfield_width": {
+        "description": "Menüpunkt für Textfeld Breite in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_min_lines": "Zeilenanzahl Minimum",
+    "@pagebuilder_textfield_config_textfield_min_lines": {
+        "description": "Menüpunkt für Textfeld Zeilenanzahl Minimum in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_max_lines": "Zeilenanzahl Maximum",
+    "@pagebuilder_textfield_config_textfield_max_lines": {
+        "description": "Menüpunkt für Textfeld Zeilenanzahl Maximum in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_required": "Pflichtfeld",
+    "@pagebuilder_textfield_config_textfield_required": {
+        "description": "Menüpunkt für Textfeld Pflichtfeld in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_background_color": "Hintergrundfarbe",
+    "@pagebuilder_textfield_config_textfield_background_color": {
+        "description": "Menüpunkt für Textfeld Hintergrundfarbe in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_border_color": "Rahmenfarbe",
+    "@pagebuilder_textfield_config_textfield_border_color": {
+        "description": "Menüpunkt für Textfeld Rahmenfarbe in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_placeholder": "Platzhalter",
+    "@pagebuilder_textfield_config_textfield_placeholder": {
+        "description": "Menüpunkt für Textfeld Platzhalter in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_text_configuration": "Textfeld Text Konfiguration",
+    "@pagebuilder_textfield_config_textfield_text_configuration": {
+        "description": "Überschrift für Textfeld Text Konfiguration in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_placeholder_text_configuration": "Textfeld Platzhalter Konfiguration",
+    "@pagebuilder_textfield_config_textfield_placeholder_text_configuration": {
+        "description": "Überschrift für Textfeld Platzhalter Konfiguration in der Textfeld Konfiguration im Pagebuilder Config Menü"
     }
 }

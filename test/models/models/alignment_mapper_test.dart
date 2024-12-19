@@ -69,5 +69,36 @@ void main() {
         () {
       expect(AlignmentMapper.getStringFromAlignment(Alignment(2, 2)), "center");
     });
+
+    // Test für getAlignmentFromTextAlignment
+    test('should return Alignment.centerLeft for TextAlign.left', () {
+      final alignment =
+          AlignmentMapper.getAlignmentFromTextAlignment(TextAlign.left);
+      expect(alignment, Alignment.centerLeft);
+    });
+
+    test('should return Alignment.centerRight for TextAlign.right', () {
+      final alignment =
+          AlignmentMapper.getAlignmentFromTextAlignment(TextAlign.right);
+      expect(alignment, Alignment.centerRight);
+    });
+
+    test('should return Alignment.center for TextAlign.center', () {
+      final alignment =
+          AlignmentMapper.getAlignmentFromTextAlignment(TextAlign.center);
+      expect(alignment, Alignment.center);
+    });
+
+    test('should return Alignment.center for null', () {
+      final alignment = AlignmentMapper.getAlignmentFromTextAlignment(null);
+      expect(alignment, Alignment.center);
+    });
+
+    test('should return Alignment.center for an unsupported TextAlign value',
+        () {
+      final alignment =
+          AlignmentMapper.getAlignmentFromTextAlignment(TextAlign.justify);
+      expect(alignment, Alignment.center);
+    });
   });
 }

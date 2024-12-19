@@ -2266,6 +2266,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No results for:'**
   String get landingpage_pagebuilder_icon_config_icon_picker_search_no_results;
+
+  /// Title for the collapsible view for the contact form email adress in the pagebuilder contact form configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Contactform email'**
+  String get landingpage_pagebuilder_contactform_content_email;
+
+  /// Text describing the email address input for the contact form email address in the Pagebuilder contact form configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the recipient email address to which the contact request will be sent.'**
+  String get landingpage_pagebuilder_contactform_content_email_subtitle;
+
+  /// Placeholder for the contact form email address in the Pagebuilder contact form configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address'**
+  String get landingpage_pagebuilder_contactform_content_email_placeholder;
+
+  /// Menu for button width in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Width'**
+  String get pagebuilder_button_config_button_width;
+
+  /// Menu for button height in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get pagebuilder_button_config_button_height;
+
+  /// Menu for button border radius in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Radius'**
+  String get pagebuilder_button_config_button_border_radius;
+
+  /// Menu for button background color in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Background color'**
+  String get pagebuilder_button_config_button_background_color;
+
+  /// Title for button text configuration in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Button text configuration'**
+  String get pagebuilder_button_config_button_text_configuration;
+
+  /// Title for collapsible menu for the name textfield configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Name textfield'**
+  String get pagebuilder_contact_form_config_name_textfield_title;
+
+  /// Title for collapsible menu for the email textfield configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'E-Mail textfield'**
+  String get pagebuilder_contact_form_config_email_textfield_title;
+
+  /// Title for collapsible menu for the message textfield configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Nachricht textfield'**
+  String get pagebuilder_contact_form_config_message_textfield_title;
+
+  /// Title for collapsible menu for the button configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Button configuration'**
+  String get pagebuilder_contact_form_config_button_title;
+
+  /// Menu for textfield width in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Width'**
+  String get pagebuilder_textfield_config_textfield_width;
+
+  /// Menu for textfield number of lines minimum in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Number of lines min'**
+  String get pagebuilder_textfield_config_textfield_min_lines;
+
+  /// Menu for textfield number of lines maximum in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Number of lines max'**
+  String get pagebuilder_textfield_config_textfield_max_lines;
+
+  /// Menu for textfield is required in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Required field'**
+  String get pagebuilder_textfield_config_textfield_required;
+
+  /// Menu for textfield background color in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Background color'**
+  String get pagebuilder_textfield_config_textfield_background_color;
+
+  /// Menu for textfield border color in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border color'**
+  String get pagebuilder_textfield_config_textfield_border_color;
+
+  /// Menu for textfield placeholder color in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Placeholder'**
+  String get pagebuilder_textfield_config_textfield_placeholder;
+
+  /// Title for textfield text configuration in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Textfield text configuration'**
+  String get pagebuilder_textfield_config_textfield_text_configuration;
+
+  /// Title for textfield placeholder configuration in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Textfield placeholder configuration'**
+  String get pagebuilder_textfield_config_textfield_placeholder_text_configuration;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
