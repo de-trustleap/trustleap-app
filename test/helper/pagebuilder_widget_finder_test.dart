@@ -129,7 +129,7 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         layout: PageBuilderSectionLayout.column,
-        backgroundColor: null,
+        background: null,
         maxWidth: null,
         widgets: [mockColumnWidget, mockRowWidget],
       );

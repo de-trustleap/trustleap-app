@@ -18,13 +18,13 @@ void main() {
       final section = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FF35AA55",
+          background: null,
           maxWidth: 300,
           widgets: []);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FF35AA55",
+          background: null,
           maxWidth: 500,
           widgets: []);
       // When
@@ -40,13 +40,12 @@ void main() {
       final model = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FFFFFFFF",
+          background: null,
           maxWidth: 300,
           widgets: []);
       final expectedResult = {
         "id": "1",
         "layout": "column",
-        "backgroundColor": "FFFFFFFF",
         "maxWidth": 300,
         "widgets": []
       };
@@ -63,14 +62,13 @@ void main() {
       final map = {
         "id": "1",
         "layout": "column",
-        "backgroundColor": "FFFFFFFF",
         "maxWidth": 300.0,
         "widgets": []
       };
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FFFFFFFF",
+          background: null,
           maxWidth: 300,
           widgets: []);
       // When
@@ -88,14 +86,14 @@ void main() {
       final model = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FFFFFFFF",
+          background: null,
           maxWidth: 800,
           widgets: []);
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
-          backgroundColor: Color(0xFFFFFFFF),
+          background: null,
           maxWidth: 800);
       // When
       final result = model.toDomain();
@@ -113,12 +111,12 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
-          backgroundColor: Color(0xFFFFFFFF),
+          background: null,
           maxWidth: 800);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "ffffffff",
+          background: null,
           maxWidth: 800,
           widgets: []);
       // When
@@ -263,7 +261,7 @@ void main() {
       final model = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "ffffffff",
+          background: null,
           maxWidth: 800,
           widgets: widgets);
       // When
@@ -419,13 +417,13 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
-          backgroundColor: Color(0xFFFFFFFF),
+          background: null,
           maxWidth: 800);
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
-          backgroundColor: Color(0xFFFFFFFF),
+          background: null,
           maxWidth: 800);
       // Then
       expect(section1, section2);

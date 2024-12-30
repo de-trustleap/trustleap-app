@@ -18,7 +18,7 @@ void main() {
                 id: UniqueID.fromUniqueString("2"),
                 layout: PageBuilderSectionLayout.column,
                 widgets: [],
-                backgroundColor: null,
+                background: null,
                 maxWidth: 300)
           ],
           backgroundColor: Colors.red);
@@ -43,7 +43,7 @@ void main() {
                 id: UniqueID.fromUniqueString("2"),
                 layout: PageBuilderSectionLayout.column,
                 widgets: [],
-                backgroundColor: null,
+                background: null,
                 maxWidth: 300)
           ],
           backgroundColor: Colors.red);
@@ -55,7 +55,7 @@ void main() {
                 id: UniqueID.fromUniqueString("2"),
                 layout: PageBuilderSectionLayout.column,
                 widgets: [],
-                backgroundColor: null,
+                background: null,
                 maxWidth: 300)
           ],
           backgroundColor: Colors.red);
