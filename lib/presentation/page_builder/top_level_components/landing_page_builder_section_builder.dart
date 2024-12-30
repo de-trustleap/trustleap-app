@@ -47,15 +47,13 @@ class _LandingPageBuilderSectionViewState
               Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: widget.model.background
-                        ?.backgroundColor,
-                    border: Border.all(
-                      color: _isHovered
-                          ? themeData.colorScheme.primary
-                          : Colors.transparent,
-                      width: 2.0,
-                    ),
-                  ),
+                      color: widget.model.background?.backgroundColor,
+                      border: _isHovered
+                          ? Border.all(
+                              color: themeData.colorScheme.primary,
+                              width: 2.0,
+                            )
+                          : null),
                   child: Stack(
                     children: [
                       if (widget.model.background?.imageProperties
