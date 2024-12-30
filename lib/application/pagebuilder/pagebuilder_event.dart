@@ -30,6 +30,15 @@ class UpdateWidgetEvent extends PagebuilderEvent with EquatableMixin {
   List<Object?> get props => [updatedWidget];
 }
 
+class UpdateSectionEvent extends PagebuilderEvent with EquatableMixin {
+  final PageBuilderSection updatedSection;
+
+  UpdateSectionEvent(this.updatedSection);
+
+  @override
+  List<Object?> get props => [updatedSection];
+}
+
 class SaveLandingPageContentEvent extends PagebuilderEvent with EquatableMixin {
   final PagebuilderContent? content;
 

@@ -38,7 +38,7 @@ class LandingPageBuilderConfigMenuDesignTab extends StatelessWidget {
         const SizedBox(height: 8),
         PagebuilderConfigMenuLayout(model: model),
         const SizedBox(height: 8),
-        PagebuilderConfigMenuBackground(model: model),
+        PagebuilderConfigMenuBackground(model: model, section: null),
         const SizedBox(height: 40)
       ],
     );

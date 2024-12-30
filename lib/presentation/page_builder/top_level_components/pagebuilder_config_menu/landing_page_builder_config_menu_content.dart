@@ -1,14 +1,17 @@
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu_content_tab.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu_design_tab.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu_header.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu_section.dart';
 import 'package:flutter/material.dart';
 
 class LandingPageBuilderConfigMenuContent extends StatefulWidget {
   final int animationDuration;
   final double menuWidth;
-  final PageBuilderWidget model;
+  final PageBuilderWidget? model;
+  final PageBuilderSection? section;
   final bool showOnlyDesignTab;
   final Function closeMenu;
   const LandingPageBuilderConfigMenuContent(
@@ -16,6 +19,7 @@ class LandingPageBuilderConfigMenuContent extends StatefulWidget {
       required this.animationDuration,
       required this.menuWidth,
       required this.model,
+      required this.section,
       required this.showOnlyDesignTab,
       required this.closeMenu});
 
@@ -54,17 +58,28 @@ class _LandingPageBuilderConfigMenuContentState
   }
 
   Widget _getContent() {
-    if (widget.showOnlyDesignTab) {
-      return LandingPageBuilderConfigMenuDesignTab(
-                          model: widget.model);
-    } else {
+    if (widget.section != null) {
+      return LandingPageBuilderConfigMenuSection(section: widget.section!);
+    } else if (widget.showOnlyDesignTab && widget.model != null) {
+      return LandingPageBuilderConfigMenuDesignTab(model: widget.model!);
+    } else if (widget.model != null) {
       if (_selectedTabIndex == 0) {
-        return LandingPageBuilderConfigMenuContentTab(
-                          model: widget.model);
+        return LandingPageBuilderConfigMenuContentTab(model: widget.model!);
       } else {
-        return LandingPageBuilderConfigMenuDesignTab(
-                          model: widget.model);
+        return LandingPageBuilderConfigMenuDesignTab(model: widget.model!);
       }
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
+  String _getHeaderTitle(AppLocalizations localization) {
+    if (widget.model != null) {
+      return widget.model?.getWidgetTitle(localization) ?? "";
+    } else if (widget.section != null) {
+      return "Section";
+    } else {
+      return "";
     }
   }
 
@@ -72,15 +87,16 @@ class _LandingPageBuilderConfigMenuContentState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+
     return Row(
       children: [
         SizedBox(
           width: widget.menuWidth - dividerWidth,
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             LandingPageBuilderConfigMenuHeader(
-                title: widget.model.getWidgetTitle(localization),
+                title: _getHeaderTitle(localization),
                 closePressed: () => widget.closeMenu()),
-            if (!widget.showOnlyDesignTab) ...[
+            if (!widget.showOnlyDesignTab && widget.section == null) ...[
               Stack(
                 alignment: Alignment.bottomCenter,
                 children: [

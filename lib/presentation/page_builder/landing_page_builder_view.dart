@@ -119,6 +119,14 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                 if (updatedModel != null) {
                   configMenuCubit.openConfigMenu(updatedModel);
                 }
+              } else if (currentState
+                      is PageBuilderSectionConfigMenuOpenedState &&
+                  state.content.content != null) {
+                final updatedSection = widgetFinder.findSectionById(
+                    state.content.content!, currentState.model.id);
+                if (updatedSection != null) {
+                  configMenuCubit.openSectionConfigMenu(updatedSection);
+                }
               }
             }
           }

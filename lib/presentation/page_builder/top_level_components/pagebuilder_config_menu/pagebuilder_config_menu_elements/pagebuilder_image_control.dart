@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class PagebuilderImageControl extends StatelessWidget {
   final PageBuilderImageProperties properties;
-  final PageBuilderWidget widgetModel;
+  final PageBuilderWidget? widgetModel;
   final Function(PageBuilderImageProperties) onSelected;
   final Function? onDelete;
   const PagebuilderImageControl(
