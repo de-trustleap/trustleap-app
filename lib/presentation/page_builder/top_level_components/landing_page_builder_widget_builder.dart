@@ -8,9 +8,9 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_prop
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/contact_form_view.dart';
-import 'package:finanzbegleiter/presentation/page_builder/page_elements/editable_text.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/icon_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/image_view.dart';
+import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_text.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:flutter/material.dart';
 
@@ -143,7 +143,7 @@ class LandingPageBuilderWidgetBuilder {
 
   Widget buildTextWidget(
       PageBuilderTextProperties properties, PageBuilderWidget model) {
-    return PageBuilderEditableText(properties: properties, widgetModel: model);
+    return PagebuilderText(properties: properties, widgetModel: model);
   }
 
   Widget buildImageWidget(
