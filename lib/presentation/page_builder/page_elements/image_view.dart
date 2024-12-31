@@ -12,7 +12,7 @@ import 'package:image_picker/image_picker.dart';
 
 class PageBuilderImageView extends StatefulWidget {
   final PageBuilderImageProperties properties;
-  final PageBuilderWidget widgetModel;
+  final PageBuilderWidget? widgetModel;
   final bool isConfigMenu;
   final Function(PageBuilderImageProperties)? onSelectedInConfigMenu;
 
@@ -51,11 +51,14 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
           widget.onSelectedInConfigMenu!(
               widget.properties.copyWith(localImage: convertedTempImage));
         } else {
-          final updatedProperties = widget.properties
-              .copyWith(localImage: convertedTempImage, hasChanged: true);
-          final updatedWidget =
-              widget.widgetModel.copyWith(properties: updatedProperties);
-          Modular.get<PagebuilderBloc>().add(UpdateWidgetEvent(updatedWidget));
+          if (widget.widgetModel != null) {
+            final updatedProperties = widget.properties
+                .copyWith(localImage: convertedTempImage, hasChanged: true);
+            final updatedWidget =
+                widget.widgetModel!.copyWith(properties: updatedProperties);
+            Modular.get<PagebuilderBloc>()
+                .add(UpdateWidgetEvent(updatedWidget));
+          }
         }
       }
     }
@@ -167,9 +170,13 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.isConfigMenu
+    if (widget.widgetModel != null) {
+       return widget.isConfigMenu
         ? _imageElement(context)
         : LandingPageBuilderWidgetContainer(
-            model: widget.widgetModel, child: _imageElement(context));
+            model: widget.widgetModel!, child: _imageElement(context));
+    } else {
+      return _imageElement(context);
+    }
   }
 }

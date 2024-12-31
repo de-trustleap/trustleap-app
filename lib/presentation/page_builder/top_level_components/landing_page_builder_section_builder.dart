@@ -1,8 +1,10 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_edit_button.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageBuilderSectionView extends StatefulWidget {
   final PageBuilderSection model;
@@ -43,28 +45,78 @@ class _LandingPageBuilderSectionViewState
             alignment: Alignment.center,
             children: [
               Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: widget.model.backgroundColor,
-                  border: Border.all(
-                    color: _isHovered
-                        ? themeData.colorScheme.primary
-                        : Colors.transparent,
-                    width: 2.0,
-                  ),
-                ),
-                child: Container(
-                  constraints: BoxConstraints(
-                      maxWidth: widget.model.maxWidth ?? double.infinity),
-                  child: Column(
-                      children: widget.model.widgets != null
-                          ? widget.model.widgets!
-                              .map((widget) => widgetBuilder.build(widget))
-                              .toList()
-                          : []),
-                ),
-              ),
-              if (_isHovered) ...[const LandingPageBuilderSectionEditButton()]
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: widget.model.background?.backgroundColor,
+                      border: _isHovered
+                          ? Border.all(
+                              color: themeData.colorScheme.primary,
+                              width: 2.0,
+                            )
+                          : null),
+                  child: Stack(
+                    children: [
+                      if (widget.model.background?.imageProperties
+                                  ?.localImage ==
+                              null &&
+                          widget.model.background?.imageProperties?.url !=
+                              null) ...[
+                        Positioned.fill(
+                          child: Image.network(
+                              widget.model.background!.imageProperties!.url!,
+                              fit: widget.model.background?.imageProperties
+                                      ?.contentMode ??
+                                  BoxFit.cover),
+                        )
+                      ],
+                      if (widget
+                              .model.background?.imageProperties?.localImage !=
+                          null)
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: widget.model.background!.imageProperties!
+                                        .contentMode ??
+                                    BoxFit.cover,
+                                image: MemoryImage(widget.model.background!
+                                    .imageProperties!.localImage!),
+                              ),
+                            ),
+                          ),
+                        ),
+                      if (widget.model.background?.overlayColor != null &&
+                          (widget.model.background?.imageProperties
+                                      ?.localImage !=
+                                  null ||
+                              widget.model.background?.imageProperties?.url !=
+                                  null)) ...[
+                        Positioned.fill(
+                            child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                    color:
+                                        widget.model.background!.overlayColor)))
+                      ],
+                      Container(
+                        alignment: Alignment.center,
+                        constraints: BoxConstraints(
+                            maxWidth: widget.model.maxWidth ?? double.infinity),
+                        child: Column(
+                            children: widget.model.widgets != null
+                                ? widget.model.widgets!
+                                    .map(
+                                        (widget) => widgetBuilder.build(widget))
+                                    .toList()
+                                : []),
+                      )
+                    ],
+                  )),
+              if (_isHovered) ...[
+                LandingPageBuilderSectionEditButton(onPressed: () {
+                  Modular.get<PagebuilderConfigMenuCubit>()
+                      .openSectionConfigMenu(widget.model);
+                })
+              ]
             ],
           ),
         );

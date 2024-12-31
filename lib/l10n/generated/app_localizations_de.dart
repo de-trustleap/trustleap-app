@@ -1158,4 +1158,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_textfield_config_textfield_placeholder_text_configuration => 'Textfeld Platzhalter Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_section_type => 'Section';
 }

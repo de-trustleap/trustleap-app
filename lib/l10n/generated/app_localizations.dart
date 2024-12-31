@@ -2392,6 +2392,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Textfield placeholder configuration'**
   String get pagebuilder_textfield_config_textfield_placeholder_text_configuration;
+
+  /// Section Title in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Section'**
+  String get landingpage_pagebuilder_config_menu_section_type;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

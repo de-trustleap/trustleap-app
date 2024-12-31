@@ -28,7 +28,8 @@ class _LandingPageBuilderPageBuilderState
         BlocConsumer<PagebuilderConfigMenuCubit, PagebuilderConfigMenuState>(
             bloc: pageBuilderMenuCubit,
             listener: (context, state) {
-              if (state is PageBuilderConfigMenuOpenedState) {
+              if (state is PageBuilderConfigMenuOpenedState ||
+                  state is PageBuilderSectionConfigMenuOpenedState) {
                 setState(() {
                   _isConfigMenuOpen = true;
                 });
@@ -40,6 +41,18 @@ class _LandingPageBuilderPageBuilderState
                     key: ValueKey(state.model.id),
                     isOpen: _isConfigMenuOpen,
                     model: state.model,
+                    section: null,
+                    closeMenu: () {
+                      setState(() {
+                        _isConfigMenuOpen = false;
+                      });
+                    });
+              } else if (state is PageBuilderSectionConfigMenuOpenedState) {
+                return LandingPageBuilderConfigMenu(
+                    key: ValueKey(state.model.id),
+                    isOpen: _isConfigMenuOpen,
+                    model: null,
+                    section: state.model,
                     closeMenu: () {
                       setState(() {
                         _isConfigMenuOpen = false;

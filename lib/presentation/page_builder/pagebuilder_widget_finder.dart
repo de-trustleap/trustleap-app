@@ -1,8 +1,19 @@
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 
 class PagebuilderWidgetFinder {
+  PageBuilderSection? findSectionById(
+      PageBuilderPage page, UniqueID sectionId) {
+    for (var section in page.sections ?? []) {
+      if (section.id == sectionId) {
+        return section;
+      }
+    }
+    return null;
+  }
+
   PageBuilderWidget? findWidgetById(PageBuilderPage page, UniqueID widgetId) {
     // Durchsuche alle Sections im PageBuilderPage
     for (var section in page.sections ?? []) {

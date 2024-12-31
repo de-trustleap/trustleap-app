@@ -62,7 +62,7 @@ void main() {
           PageBuilderSection(
               id: UniqueID.fromUniqueString("2"),
               layout: PageBuilderSectionLayout.column,
-              backgroundColor: null,
+              background: null,
               maxWidth: null,
               widgets: [
                 PageBuilderWidget(

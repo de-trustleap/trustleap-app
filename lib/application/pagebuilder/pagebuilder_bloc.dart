@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
@@ -24,8 +25,13 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     on<GetLandingPageEvent>(_onGetLandingPage);
     on<GetLandingPageContentEvent>(_onGetLandingPageContent);
     on<UpdateWidgetEvent>(_onUpdateWidget,
-        transformer: (events, mapper) =>
-            events.debounceTime(const Duration(milliseconds: 100)).switchMap(mapper));
+        transformer: (events, mapper) => events
+            .debounceTime(const Duration(milliseconds: 100))
+            .switchMap(mapper));
+    on<UpdateSectionEvent>(_onUpdateSection,
+        transformer: (events, mapper) => events
+            .debounceTime(const Duration(milliseconds: 100))
+            .switchMap(mapper));
     on<SaveLandingPageContentEvent>(_onSaveLandingPageContent);
   }
 
@@ -81,6 +87,35 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
         ));
       },
     );
+  }
+
+  void _onUpdateSection(
+      UpdateSectionEvent event, Emitter<PagebuilderState> emit) {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final updatedSections =
+          currentState.content.content?.sections?.map((section) {
+        if (section.id == event.updatedSection.id) {
+          return event.updatedSection;
+        } else {
+          return section;
+        }
+      }).toList();
+
+      final updatedContent =
+          currentState.content.content?.copyWith(sections: updatedSections);
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: updatedContent);
+      updatedPageBuilderContent.content?.sections?.map((section) {
+      });
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
   }
 
   void _onUpdateWidget(

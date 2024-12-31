@@ -1,24 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_background_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_widget_model.dart';
-import 'package:flutter/material.dart';
 
 class PageBuilderSectionModel extends Equatable {
   final String id;
   final String? layout;
-  final String? backgroundColor;
+  final Map<String, dynamic>? background;
   final double? maxWidth;
   final List<Map<String, dynamic>>? widgets;
 
   const PageBuilderSectionModel({
     required this.id,
     required this.layout,
-    required this.backgroundColor,
+    required this.background,
     required this.maxWidth,
     required this.widgets,
   });
@@ -26,7 +25,7 @@ class PageBuilderSectionModel extends Equatable {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'id': id};
     if (layout != null) map['layout'] = layout;
-    if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
+    if (background != null) map['background'] = background;
     if (maxWidth != null) map['maxWidth'] = maxWidth;
     if (widgets != null) map['widgets'] = widgets;
     return map;
@@ -36,8 +35,8 @@ class PageBuilderSectionModel extends Equatable {
     return PageBuilderSectionModel(
         id: map['id'] != null ? map['id'] as String : "",
         layout: map['layout'] != null ? map['layout'] as String : "none",
-        backgroundColor: map['backgroundColor'] != null
-            ? map['backgroundColor'] as String
+        background: map['background'] != null
+            ? map['background'] as Map<String, dynamic>
             : null,
         maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
         widgets: map['widgets'] != null
@@ -49,14 +48,14 @@ class PageBuilderSectionModel extends Equatable {
   PageBuilderSectionModel copyWith({
     String? id,
     String? layout,
-    String? backgroundColor,
+    Map<String, dynamic>? background,
     double? maxWidth,
     List<Map<String, dynamic>>? widgets,
   }) {
     return PageBuilderSectionModel(
       id: id ?? this.id,
       layout: layout ?? this.layout,
-      backgroundColor: backgroundColor ?? this.backgroundColor,
+      background: background ?? this.background,
       maxWidth: maxWidth ?? this.maxWidth,
       widgets: widgets ?? this.widgets,
     );
@@ -69,8 +68,8 @@ class PageBuilderSectionModel extends Equatable {
             ? PageBuilderSectionLayout.none
             : PageBuilderSectionLayout.values
                 .firstWhere((element) => element.name == layout),
-        backgroundColor: backgroundColor != null
-            ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
+        background: background != null
+            ? PagebuilderBackgroundModel.fromMap(background!).toDomain()
             : null,
         maxWidth: maxWidth,
         widgets: getPageBuilderWidgetList(widgets));
@@ -80,8 +79,8 @@ class PageBuilderSectionModel extends Equatable {
     return PageBuilderSectionModel(
         id: section.id.value,
         layout: section.layout?.name,
-        backgroundColor: section.backgroundColor?.value != null
-            ? section.backgroundColor!.value.toRadixString(16)
+        background: section.background != null
+            ? PagebuilderBackgroundModel.fromDomain(section.background!).toMap()
             : null,
         maxWidth: section.maxWidth,
         widgets: getMapFromPageBuilderWidgetList(section.widgets));
@@ -109,5 +108,7 @@ class PageBuilderSectionModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, layout, backgroundColor, maxWidth, widgets];
+  List<Object?> get props => [id, layout, background, maxWidth, widgets];
 }
+// TODO: Backend anpassen bzgl Background bei Section!
+// TODO: Backend speichern von Section Bildern ermöglichen!
