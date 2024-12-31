@@ -1543,5 +1543,9 @@
     "pagebuilder_textfield_config_textfield_placeholder_text_configuration": "Textfield placeholder configuration",
     "@pagebuilder_textfield_config_textfield_placeholder_text_configuration": {
         "description": "Title for textfield placeholder configuration in the textfield configuration in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_section_type": "Section",
+    "@landingpage_pagebuilder_config_menu_section_type": {
+        "description": "Section Title in the Pagebuilder Config Menu"
     }
 }

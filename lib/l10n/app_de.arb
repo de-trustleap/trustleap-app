@@ -1543,5 +1543,9 @@
     "pagebuilder_textfield_config_textfield_placeholder_text_configuration": "Textfeld Platzhalter Konfiguration",
     "@pagebuilder_textfield_config_textfield_placeholder_text_configuration": {
         "description": "Überschrift für Textfeld Platzhalter Konfiguration in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_section_type": "Section",
+    "@landingpage_pagebuilder_config_menu_section_type": {
+        "description": "Section Titel im Pagebuilder Config Menü"
     }
 }

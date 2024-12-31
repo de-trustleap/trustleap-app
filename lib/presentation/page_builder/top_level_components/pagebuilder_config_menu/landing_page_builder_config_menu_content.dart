@@ -77,7 +77,7 @@ class _LandingPageBuilderConfigMenuContentState
     if (widget.model != null) {
       return widget.model?.getWidgetTitle(localization) ?? "";
     } else if (widget.section != null) {
-      return "Section";
+      return localization.landingpage_pagebuilder_config_menu_section_type;
     } else {
       return "";
     }
