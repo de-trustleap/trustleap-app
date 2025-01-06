@@ -59,6 +59,8 @@ class _LandingPageBuilderPageBuilderState
                       model: null,
                       section: state.model,
                       closeMenu: () {
+                        BlocProvider.of<PagebuilderSelectionCubit>(context)
+                            .selectWidget(null);
                         setState(() {
                           _isConfigMenuOpen = false;
                         });
