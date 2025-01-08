@@ -49,7 +49,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
 
     if (landingPage.ownerID == user.id) {
       return InkWell(
-          onTap: () => CustomNavigator.openInNewTab(
+          onTap: () => CustomNavigator.navigate(
               "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
           child: buildTile(themeData, responsiveValue, localizations, context));
     } else {
@@ -252,7 +252,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 255, 0, 0)),
+                        color: const Color.fromARGB(255, 255, 0, 0)),
                     maxLines: 1),
               ],
               const Spacer()

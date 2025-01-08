@@ -2,13 +2,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:flutter/material.dart';
 
 class PageBuilderSection extends Equatable {
   final UniqueID id;
   final PageBuilderSectionLayout? layout;
-  final Color? backgroundColor;
+  final PagebuilderBackground? background;
   final double? maxWidth;
   final List<PageBuilderWidget>? widgets;
 
@@ -16,23 +16,23 @@ class PageBuilderSection extends Equatable {
       {required this.id,
       required this.layout,
       required this.widgets,
-      required this.backgroundColor,
+      required this.background,
       required this.maxWidth});
 
   PageBuilderSection copyWith(
       {UniqueID? id,
       PageBuilderSectionLayout? layout,
       List<PageBuilderWidget>? widgets,
-      Color? backgroundColor,
+      PagebuilderBackground? background,
       double? maxWidth}) {
     return PageBuilderSection(
         id: id ?? this.id,
         layout: layout ?? this.layout,
         widgets: widgets ?? this.widgets,
-        backgroundColor: backgroundColor ?? this.backgroundColor,
+        background: background ?? this.background,
         maxWidth: maxWidth ?? this.maxWidth);
   }
 
   @override
-  List<Object?> get props => [id, layout, backgroundColor, maxWidth, widgets];
+  List<Object?> get props => [id, layout, background, maxWidth, widgets];
 }

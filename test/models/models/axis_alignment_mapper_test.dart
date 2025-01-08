@@ -19,19 +19,22 @@ void main() {
           AxisAlignmentMapper.getStringFromMainAxisAlignment(
               MainAxisAlignment.end),
           "end");
+      expect(
+          AxisAlignmentMapper.getStringFromMainAxisAlignment(
+              MainAxisAlignment.spaceAround),
+          "spaceAround");
+      expect(
+          AxisAlignmentMapper.getStringFromMainAxisAlignment(
+              MainAxisAlignment.spaceBetween),
+          "spaceBetween");
+      expect(
+          AxisAlignmentMapper.getStringFromMainAxisAlignment(
+              MainAxisAlignment.spaceEvenly),
+          "spaceEvenly");
     });
 
     test("getStringFromMainAxisAlignment returns null for null input", () {
       expect(AxisAlignmentMapper.getStringFromMainAxisAlignment(null), isNull);
-    });
-
-    test(
-        "getStringFromMainAxisAlignment returns null for invalid MainAxisAlignment",
-        () {
-      expect(
-          AxisAlignmentMapper.getStringFromMainAxisAlignment(
-              MainAxisAlignment.spaceBetween),
-          isNull);
     });
 
     test(
@@ -49,19 +52,14 @@ void main() {
           AxisAlignmentMapper.getStringFromCrossAxisAlignment(
               CrossAxisAlignment.end),
           "end");
+      expect(
+          AxisAlignmentMapper.getStringFromCrossAxisAlignment(
+              CrossAxisAlignment.stretch),
+          "stretch");
     });
 
     test("getStringFromCrossAxisAlignment returns null for null input", () {
       expect(AxisAlignmentMapper.getStringFromCrossAxisAlignment(null), isNull);
-    });
-
-    test(
-        "getStringFromCrossAxisAlignment returns null for invalid CrossAxisAlignment",
-        () {
-      expect(
-          AxisAlignmentMapper.getStringFromCrossAxisAlignment(
-              CrossAxisAlignment.stretch),
-          isNull);
     });
 
     // Tests für getMainAxisAlignmentFromString
@@ -75,6 +73,12 @@ void main() {
           MainAxisAlignment.center);
       expect(
           mapper.getMainAxisAlignmentFromString("end"), MainAxisAlignment.end);
+      expect(mapper.getMainAxisAlignmentFromString("spaceAround"),
+          MainAxisAlignment.spaceAround);
+      expect(mapper.getMainAxisAlignmentFromString("spaceBetween"),
+          MainAxisAlignment.spaceBetween);
+      expect(mapper.getMainAxisAlignmentFromString("spaceEvenly"),
+          MainAxisAlignment.spaceEvenly);
     });
 
     test("getMainAxisAlignmentFromString returns null for invalid string", () {
@@ -97,6 +101,8 @@ void main() {
           CrossAxisAlignment.center);
       expect(mapper.getCrossAxisAlignmentFromString("end"),
           CrossAxisAlignment.end);
+      expect(mapper.getCrossAxisAlignmentFromString("stretch"),
+          CrossAxisAlignment.stretch);
     });
 
     test("getCrossAxisAlignmentFromString returns null for invalid string", () {

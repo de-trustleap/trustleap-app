@@ -9,6 +9,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
     implements PageBuilderProperties {
   final double? width;
   final int? minLines;
+  final int? maxLines;
   final bool? isRequired;
   final String? backgroundColor;
   final String? borderColor;
@@ -18,6 +19,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
   const PageBuilderTextFieldPropertiesModel({
     required this.width,
     required this.minLines,
+    required this.maxLines,
     required this.isRequired,
     required this.backgroundColor,
     required this.borderColor,
@@ -29,6 +31,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
     Map<String, dynamic> map = {};
     if (width != null) map['width'] = width;
     if (minLines != null) map['minLines'] = minLines;
+    if (maxLines != null) map['maxLines'] = maxLines;
     if (isRequired != null) map['isRequired'] = isRequired;
     if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
     if (borderColor != null) map['borderColor'] = borderColor;
@@ -44,6 +47,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
     return PageBuilderTextFieldPropertiesModel(
         width: map['width'] != null ? map['width'] as double : null,
         minLines: map['minLines'] != null ? map['minLines'] as int : null,
+        maxLines: map['maxLines'] != null ? map['maxLines'] as int : null,
         isRequired:
             map['isRequired'] != null ? map['isRequired'] as bool : null,
         backgroundColor: map['backgroundColor'] != null
@@ -62,6 +66,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
   PageBuilderTextFieldPropertiesModel copyWith({
     double? width,
     int? minLines,
+    int? maxLines,
     bool? isRequired,
     String? backgroundColor,
     String? borderColor,
@@ -71,6 +76,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
     return PageBuilderTextFieldPropertiesModel(
       width: width ?? this.width,
       minLines: minLines ?? this.minLines,
+      maxLines: maxLines ?? this.maxLines,
       isRequired: isRequired ?? this.isRequired,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       borderColor: borderColor ?? this.borderColor,
@@ -84,6 +90,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
     return PageBuilderTextFieldProperties(
         width: width,
         minLines: minLines,
+        maxLines: maxLines,
         isRequired: isRequired,
         backgroundColor: backgroundColor != null
             ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
@@ -105,6 +112,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
     return PageBuilderTextFieldPropertiesModel(
         width: properties.width,
         minLines: properties.minLines,
+        maxLines: properties.maxLines,
         isRequired: properties.isRequired,
         backgroundColor: properties.backgroundColor?.value != null
             ? properties.backgroundColor!.value.toRadixString(16)
@@ -128,6 +136,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
   List<Object?> get props => [
         width,
         minLines,
+        maxLines,
         isRequired,
         backgroundColor,
         borderColor,

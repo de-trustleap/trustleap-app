@@ -1140,6 +1140,14 @@
     "@landingpage_pagebuilder_unload_alert_message": {
         "description": "Error message for the alert on the page builder page, which is called when you want to leave the page and have not saved."
     },
+    "landingpage_pagebuilder_config_menu_content_tab": "Content",
+    "@landingpage_pagebuilder_config_menu_content_tab": {
+        "description": "Content tab title in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_config_menu_design_tab": "Design",
+    "@landingpage_pagebuilder_config_menu_design_tab": {
+        "description": "Design tab title in the Pagebuilder Config Menu"
+    },
     "landingpage_pagebuilder_config_menu_container_type": "Container",
     "@landingpage_pagebuilder_config_menu_container_type": {
         "description": "Container title in the pagebuilder config menu"
@@ -1175,5 +1183,369 @@
     "landingpage_pagebuilder_config_menu_unknown_type": "Unknown",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unknown title in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_text_config_text_title": "Text configuration",
+    "@landingpage_pagebuilder_text_config_text_title": {
+        "description": "Title for the collapsible view for the text configuration in the pagebuilder text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment": "Alignment",
+    "@landingpage_pagebuilder_text_config_alignment": {
+        "description": "menu entry in the pagebuilder text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_left": "left-align",
+    "@landingpage_pagebuilder_text_config_alignment_left": {
+        "description": "Tooltip for left alignment Button in text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_center": "center",
+    "@landingpage_pagebuilder_text_config_alignment_center": {
+        "description": "Tooltip for center alignment Button in text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_right": "right-align",
+    "@landingpage_pagebuilder_text_config_alignment_right": {
+        "description": "Tooltip for right alignment Button in text configuration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_justify": "justify",
+    "@landingpage_pagebuilder_text_config_alignment_justify": {
+        "description": "Tooltip for justify alignment Button in text configuration"
+    },
+    "landingpage_pagebuilder_text_config_lineheight": "Line height",
+    "@landingpage_pagebuilder_text_config_lineheight": {
+        "description": "Text for line height in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_letterspacing": "Letter spacing",
+    "@landingpage_pagebuilder_text_config_letterspacing": {
+        "description": "Text for letter spacing in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_color": "Text color",
+    "@landingpage_pagebuilder_text_config_color": {
+        "description": "Text for color in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_font_family": "Font family",
+    "@landingpage_pagebuilder_text_config_font_family": {
+        "description": "Text for font family in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow": "Text shadow",
+    "@landingpage_pagebuilder_text_config_shadow": {
+        "description": "Text for text shadow in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_title": "Configure shadow",
+    "@landingpage_pagebuilder_text_config_shadow_alert_title": {
+        "description": "Title for text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_spread_radius": "Spread radius",
+    "@landingpage_pagebuilder_text_config_shadow_alert_spread_radius": {
+        "description": "Text for spread radius in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_blur_radius": "Blur radius",
+    "@landingpage_pagebuilder_text_config_shadow_alert_blur_radius": {
+        "description": "Text for blur radius in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_x_offset": "X offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_x_offset": {
+        "description": "Text for x offset in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_y_offset": "Y offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_y_offset": {
+        "description": "Text for y offset in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_apply": "Apply",
+    "@landingpage_pagebuilder_text_config_shadow_alert_apply": {
+        "description": "Text for apply button in the text shadow alert in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_fontsize": "Font size",
+    "@landingpage_pagebuilder_text_config_fontsize": {
+        "description": "Text for font size in the text configuration"
+    },
+    "landingpage_pagebuilder_color_picker_title": "Select color",
+    "@landingpage_pagebuilder_color_picker_title": {
+        "description": "Title for the Color Picker in the pagebuilder configuration"
+    },
+    "landingpage_pagebuilder_color_picker_hex_textfield": "Hex code",
+    "@landingpage_pagebuilder_color_picker_hex_textfield": {
+        "description": "Title for the hex code textfield in the Color Picker in the pagebuilder configuration"
+    },
+    "landingpage_pagebuilder_color_picker_ok_button": "OK",
+    "@landingpage_pagebuilder_color_picker_ok_button": {
+        "description": "Titel für den Button im Color Picker in der Pagebuilder Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_text_placeholder": "Type text here...",
+    "@landingpage_pagebuilder_text_config_text_placeholder": {
+        "description": "Placeholder for the textfield in the text configuration"
+    },
+    "landingpage_pagebuilder_text_config_content_title": "Text content",
+    "@landingpage_pagebuilder_text_config_content_title": {
+        "description": "Title for the collapsible view for the text content in the pagebuilder text configuration"
+    },
+    "landingpage_pagebuilder_layout_spacing_top": "Top",
+    "@landingpage_pagebuilder_layout_spacing_top": {
+        "description": "Placeholder for Spacing top textfield in the layout menu in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_layout_spacing_bottom": "Bottom",
+    "@landingpage_pagebuilder_layout_spacing_bottom": {
+        "description": "Placeholder for Spacing bottom textfield in the layout menu in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_layout_spacing_left": "Left",
+    "@landingpage_pagebuilder_layout_spacing_left": {
+        "description": "Placeholder for Spacing left textfield in the layout menu in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_layout_spacing_right": "Right",
+    "@landingpage_pagebuilder_layout_spacing_right": {
+        "description": "Placeholder for Spacing right textfield in the layout menu in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_layout_menu_title": "Layout",
+    "@landingpage_pagebuilder_layout_menu_title": {
+        "description": "Title for the layout Collapsible in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_layout_menu_padding": "Padding",
+    "@landingpage_pagebuilder_layout_menu_padding": {
+        "description": "Title padding menu in the Pagebuilder Config Menu in the layout area"
+    },
+    "landingpage_pagebuilder_layout_menu_margin": "Margin",
+    "@landingpage_pagebuilder_layout_menu_margin": {
+        "description": "Title margin menu in the Pagebuilder Config Menu in the layout area"
+    },
+    "landingpage_pagebuilder_layout_menu_alignment": "Alignment",
+    "@landingpage_pagebuilder_layout_menu_alignment": {
+        "description": "Title alignment menu in the Pagebuilder Config Menu in the layout area"
+    },
+    "landingpage_pagebuilder_layout_menu_image_control_title": "Background image",
+    "@landingpage_pagebuilder_layout_menu_image_control_title": {
+        "description": "Title background image menu in the Pagebuilder Config Menu in the background area"
+    },
+    "landingpage_pagebuilder_layout_menu_background_contentmode": "Content mode",
+    "@landingpage_pagebuilder_layout_menu_background_contentmode": {
+        "description": "Title contentmode menu in the Pagebuilder Config Menu in the background area"
+    },
+    "landingpage_pagebuilder_layout_menu_background_overlay": "Image overlay",
+    "@landingpage_pagebuilder_layout_menu_background_overlay": {
+        "description": "Title image overlay image menu in the Pagebuilder Config Menu in the background area"
+    },
+    "landingpage_pagebuilder_layout_menu_background": "Background",
+    "@landingpage_pagebuilder_layout_menu_background": {
+        "description": "Title background menu in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_layout_menu_background_color": "Background color",
+    "@landingpage_pagebuilder_layout_menu_background_color": {
+        "description": "Title background color image menu in the Pagebuilder Config Menu in the background area"
+    },
+    "pagebuilder_layout_menu_alignment_top_left": "top left",
+    "@pagebuilder_layout_menu_alignment_top_left": {
+        "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"
+    },
+    "pagebuilder_layout_menu_alignment_top_center": "top center",
+    "@pagebuilder_layout_menu_alignment_top_center": {
+        "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"
+    },
+    "pagebuilder_layout_menu_alignment_top_right": "top right",
+    "@pagebuilder_layout_menu_alignment_top_right": {
+        "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"
+    },
+    "pagebuilder_layout_menu_alignment_center_left": "center left",
+    "@pagebuilder_layout_menu_alignment_center_left": {
+        "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"
+    },
+    "pagebuilder_layout_menu_alignment_center": "center",
+    "@pagebuilder_layout_menu_alignment_center": {
+        "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"
+    },
+    "pagebuilder_layout_menu_alignment_center_right": "center right",
+    "@pagebuilder_layout_menu_alignment_center_right": {
+        "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"
+    },
+    "pagebuilder_layout_menu_alignment_bottom_left": "bottom left",
+    "@pagebuilder_layout_menu_alignment_bottom_left": {
+        "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"
+    },
+    "pagebuilder_layout_menu_alignment_bottom_center": "bottom center",
+    "@pagebuilder_layout_menu_alignment_bottom_center": {
+        "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"
+    },
+    "pagebuilder_layout_menu_alignment_bottom_right": "bottom right",
+    "@pagebuilder_layout_menu_alignment_bottom_right": {
+        "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"
+    },
+    "pagebuilder_layout_menu_size_control_size": "Size",
+    "@pagebuilder_layout_menu_size_control_size": {
+        "description": "Title for size menu in pagebuilder layout menu"
+    },
+    "pagebuilder_layout_menu_size_control_width": "Width",
+    "@pagebuilder_layout_menu_size_control_width": {
+        "description": "Width for size menu in pagebuilder layout menu"
+    },
+    "pagebuilder_layout_menu_size_control_height": "Height",
+    "@pagebuilder_layout_menu_size_control_height": {
+        "description": "Height for size menu in pagebuilder layout menu"
+    },
+    "pagebuilder_image_config_title": "Image configuration",
+    "@pagebuilder_image_config_title": {
+        "description": "Title for image configuration in pagebuilder config menu"
+    },
+    "pagebuilder_image_config_content_mode": "Content mode",
+    "@pagebuilder_image_config_content_mode": {
+        "description": "title for content mode in image configuration in pagebuilder config menu"
+    },
+    "pagebuilder_image_config_image_overlay": "Image overlay",
+    "@pagebuilder_image_config_image_overlay": {
+        "description": "title for image overlay in image configuration in pagebuilder config menu"
+    },
+    "pagebuilder_image_config_border_radius": "Radius",
+    "@pagebuilder_image_config_border_radius": {
+        "description": "Title for radius in image configuration in pagebuilder config menu"
+    },
+    "pagebuilder_image_config_image_content": "Image content",
+    "@pagebuilder_image_config_image_content": {
+        "description": "Title for image content menu in pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_container_config_container_title": "Container configuration",
+    "@landingpage_pagebuilder_container_config_container_title": {
+        "description": "Title for the collapsible view for the container configuration in the pagebuilder container configuration."
+    },
+    "landingpage_pagebuilder_container_config_container_shadow": "Shadow",
+    "@landingpage_pagebuilder_container_config_container_shadow": {
+        "description": "Title for the shadow configuration in the pagebuilder container configuration."
+    },
+    "landingpage_pagebuilder_row_config_row_title": "Row configuration",
+    "@landingpage_pagebuilder_row_config_row_title": {
+        "description": "Title for the collapsible view for the row configuration in the pagebuilder row configuration."
+    },
+    "landingpage_pagebuilder_row_config_row_equal_heights": "Equal heights",
+    "@landingpage_pagebuilder_row_config_row_equal_heights": {
+        "description": "Title for the equal heights configuration in the pagebuilder row configuration."
+    },
+    "landingpage_pagebuilder_row_config_row_main_axis_alignment": "Alignment x-axis",
+    "@landingpage_pagebuilder_row_config_row_main_axis_alignment": {
+        "description": "Title for the main axis alignment configuration in the pagebuilder row configuration."
+    },
+    "landingpage_pagebuilder_row_config_row_cross_axis_alignment": "Alignment y-axis",
+    "@landingpage_pagebuilder_row_config_row_cross_axis_alignment": {
+        "description": "Title for the cross axis alignment configuration in the pagebuilder row configuration."
+    },
+    "landingpage_pagebuilder_column_config_column_title": "Column configuration",
+    "@landingpage_pagebuilder_column_config_column_title": {
+        "description": "Title for the collapsible view for the column configuration in the pagebuilder column configuration."
+    },
+    "landingpage_pagebuilder_icon_content": "Icon content",
+    "@landingpage_pagebuilder_icon_content": {
+        "description": "Title for the collapsible view for the icon content in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_content_change_icon": "Change icon",
+    "@landingpage_pagebuilder_icon_content_change_icon": {
+        "description": "Title for the change icon menu in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_title": "Icon configuration",
+    "@landingpage_pagebuilder_icon_config_icon_title": {
+        "description": "Title for the collapsible view for the icon configuration in the pagebuilder icon configuration."
+    },
+    "landingpage_pagebuilder_icon_config_color": "Color",
+    "@landingpage_pagebuilder_icon_config_color": {
+        "description": "Title for the color menu in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_size": "Size",
+    "@landingpage_pagebuilder_icon_config_size": {
+        "description": "Title for the size menu in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_title": "Choose an icon",
+    "@landingpage_pagebuilder_icon_config_icon_picker_title": {
+        "description": "Title for the icon picker in the icon content tab in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_close": "Close",
+    "@landingpage_pagebuilder_icon_config_icon_picker_close": {
+        "description": "Title for the close button in the icon picker in the icon content tab in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_search": "Search",
+    "@landingpage_pagebuilder_icon_config_icon_picker_search": {
+        "description": "Search placeholder in the icon picker in the icon content tab in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_search_no_results": "No results for:",
+    "@landingpage_pagebuilder_icon_config_icon_picker_search_no_results": {
+        "description": "Text that is shown when the search have no results in the icon picker in the icon content tab in the pagebuilder icon configuration"
+    },
+    "landingpage_pagebuilder_contactform_content_email": "Contactform email",
+    "@landingpage_pagebuilder_contactform_content_email": {
+        "description": "Title for the collapsible view for the contact form email adress in the pagebuilder contact form configuration."
+    },
+    "landingpage_pagebuilder_contactform_content_email_subtitle": "Please enter the recipient email address to which the contact request will be sent.",
+    "@landingpage_pagebuilder_contactform_content_email_subtitle": {
+        "description": "Text describing the email address input for the contact form email address in the Pagebuilder contact form configuration."
+    },
+    "landingpage_pagebuilder_contactform_content_email_placeholder": "Email address",
+    "@landingpage_pagebuilder_contactform_content_email_placeholder": {
+        "description": "Placeholder for the contact form email address in the Pagebuilder contact form configuration."
+    },
+    "pagebuilder_button_config_button_width": "Width",
+    "@pagebuilder_button_config_button_width": {
+        "description": "Menu for button width in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_height": "Height",
+    "@pagebuilder_button_config_button_height": {
+        "description": "Menu for button height in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_border_radius": "Radius",
+    "@pagebuilder_button_config_button_border_radius": {
+        "description": "Menu for button border radius in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_background_color": "Background color",
+    "@pagebuilder_button_config_button_background_color": {
+        "description": "Menu for button background color in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_text_configuration": "Button text configuration",
+    "@pagebuilder_button_config_button_text_configuration": {
+        "description": "Title for button text configuration in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_name_textfield_title": "Name textfield",
+    "@pagebuilder_contact_form_config_name_textfield_title": {
+        "description": "Title for collapsible menu for the name textfield configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_email_textfield_title": "E-Mail textfield",
+    "@pagebuilder_contact_form_config_email_textfield_title": {
+        "description": "Title for collapsible menu for the email textfield configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_message_textfield_title": "Nachricht textfield",
+    "@pagebuilder_contact_form_config_message_textfield_title": {
+        "description": "Title for collapsible menu for the message textfield configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_button_title": "Button configuration",
+    "@pagebuilder_contact_form_config_button_title": {
+        "description": "Title for collapsible menu for the button configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_width": "Width",
+    "@pagebuilder_textfield_config_textfield_width": {
+        "description": "Menu for textfield width in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_min_lines": "Number of lines min",
+    "@pagebuilder_textfield_config_textfield_min_lines": {
+        "description": "Menu for textfield number of lines minimum in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_max_lines": "Number of lines max",
+    "@pagebuilder_textfield_config_textfield_max_lines": {
+        "description": "Menu for textfield number of lines maximum in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_required": "Required field",
+    "@pagebuilder_textfield_config_textfield_required": {
+        "description": "Menu for textfield is required in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_background_color": "Background color",
+    "@pagebuilder_textfield_config_textfield_background_color": {
+        "description": "Menu for textfield background color in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_border_color": "Border color",
+    "@pagebuilder_textfield_config_textfield_border_color": {
+        "description": "Menu for textfield border color in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_placeholder": "Placeholder",
+    "@pagebuilder_textfield_config_textfield_placeholder": {
+        "description": "Menu for textfield placeholder color in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_text_configuration": "Textfield text configuration",
+    "@pagebuilder_textfield_config_textfield_text_configuration": {
+        "description": "Title for textfield text configuration in the textfield configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_textfield_config_textfield_placeholder_text_configuration": "Textfield placeholder configuration",
+    "@pagebuilder_textfield_config_textfield_placeholder_text_configuration": {
+        "description": "Title for textfield placeholder configuration in the textfield configuration in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_config_menu_section_type": "Section",
+    "@landingpage_pagebuilder_config_menu_section_type": {
+        "description": "Section Title in the Pagebuilder Config Menu"
     }
 }

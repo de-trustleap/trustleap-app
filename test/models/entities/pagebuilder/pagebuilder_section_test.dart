@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
 
@@ -25,12 +26,16 @@ void main() {
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
-                backgroundColor: Colors.white,
+                background: PagebuilderBackground(
+                    backgroundColor: Colors.white,
+                    imageProperties: null,
+                    overlayColor: null),
                 padding: null,
+                margin: null,
                 maxWidth: 300,
                 alignment: null)
           ],
-          backgroundColor: null,
+          background: null,
           maxWidth: 300);
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
@@ -45,12 +50,16 @@ void main() {
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
-                backgroundColor: Colors.white,
+                background: PagebuilderBackground(
+                    backgroundColor: Colors.white,
+                    imageProperties: null,
+                    overlayColor: null),
                 padding: null,
+                margin: null,
                 maxWidth: 300,
                 alignment: Alignment.center)
           ],
-          backgroundColor: null,
+          background: null,
           maxWidth: 400);
       // When
       final result = section.copyWith(maxWidth: 400, widgets: [
@@ -63,8 +72,12 @@ void main() {
             children: [],
             containerChild: null,
             widthPercentage: 30,
-            backgroundColor: Colors.white,
+            background: PagebuilderBackground(
+                backgroundColor: Colors.white,
+                imageProperties: null,
+                overlayColor: null),
             padding: null,
+            margin: null,
             maxWidth: 300,
             alignment: Alignment.center)
       ]);
@@ -89,12 +102,16 @@ void main() {
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
-                backgroundColor: Colors.white,
+                background: PagebuilderBackground(
+                    backgroundColor: Colors.white,
+                    imageProperties: null,
+                    overlayColor: null),
                 padding: null,
+                margin: null,
                 maxWidth: 300,
                 alignment: null)
           ],
-          backgroundColor: null,
+          background: null,
           maxWidth: 300);
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
@@ -109,12 +126,16 @@ void main() {
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
-                backgroundColor: Colors.white,
+                background: PagebuilderBackground(
+                    backgroundColor: Colors.white,
+                    imageProperties: null,
+                    overlayColor: null),
                 padding: null,
+                margin: null,
                 maxWidth: 300,
                 alignment: null)
           ],
-          backgroundColor: null,
+          background: null,
           maxWidth: 300);
       // Then
       expect(section1, section2);

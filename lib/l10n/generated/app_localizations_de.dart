@@ -857,6 +857,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_unload_alert_message => 'Willst du die Seite wirklich verlassen? Nicht gespeicherte Änderungen gehen verloren.';
 
   @override
+  String get landingpage_pagebuilder_config_menu_content_tab => 'Inhalt';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_design_tab => 'Design';
+
+  @override
   String get landingpage_pagebuilder_config_menu_container_type => 'Container';
 
   @override
@@ -882,4 +888,277 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unbekannt';
+
+  @override
+  String get landingpage_pagebuilder_text_config_text_title => 'Text Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment => 'Ausrichtung';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_left => 'linksbündig';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_center => 'zentriert';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_right => 'rechtsbündig';
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_justify => 'Blocksatz';
+
+  @override
+  String get landingpage_pagebuilder_text_config_lineheight => 'Zeilenhöhe';
+
+  @override
+  String get landingpage_pagebuilder_text_config_letterspacing => 'Zeichenabstand';
+
+  @override
+  String get landingpage_pagebuilder_text_config_color => 'Schriftfarbe';
+
+  @override
+  String get landingpage_pagebuilder_text_config_font_family => 'Schriftart';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow => 'Textschatten';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_title => 'Schatten konfigurieren';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_spread_radius => 'Spread Radius';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius => 'Blur Radius';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_x_offset => 'X Offset';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_y_offset => 'Y Offset';
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_apply => 'Übernehmen';
+
+  @override
+  String get landingpage_pagebuilder_text_config_fontsize => 'Schriftgröße';
+
+  @override
+  String get landingpage_pagebuilder_color_picker_title => 'Farbe auswählen';
+
+  @override
+  String get landingpage_pagebuilder_color_picker_hex_textfield => 'Hex Code';
+
+  @override
+  String get landingpage_pagebuilder_color_picker_ok_button => 'OK';
+
+  @override
+  String get landingpage_pagebuilder_text_config_text_placeholder => 'Hier Text eingeben...';
+
+  @override
+  String get landingpage_pagebuilder_text_config_content_title => 'Text Inhalt';
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_top => 'Oben';
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_bottom => 'Unten';
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_left => 'Links';
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_right => 'Rechts';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_title => 'Layout';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_padding => 'Innenabstand';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_margin => 'Außenabstand';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_alignment => 'Ausrichtung';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_image_control_title => 'Hintergrundbild';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_contentmode => 'Anzeigemodus';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_overlay => 'Bild Overlay';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background => 'Hintergrund';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_color => 'Hintergrundfarbe';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_top_left => 'Oben links';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_top_center => 'Oben zentriert';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_top_right => 'Oben rechts';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_center_left => 'Mitte links';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_center => 'Mitte';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_center_right => 'Mitte rechts';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_bottom_left => 'Unten links';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_bottom_center => 'Unten zentriert';
+
+  @override
+  String get pagebuilder_layout_menu_alignment_bottom_right => 'Unten rechts';
+
+  @override
+  String get pagebuilder_layout_menu_size_control_size => 'Größe';
+
+  @override
+  String get pagebuilder_layout_menu_size_control_width => 'Breite';
+
+  @override
+  String get pagebuilder_layout_menu_size_control_height => 'Höhe';
+
+  @override
+  String get pagebuilder_image_config_title => 'Bild Konfiguration';
+
+  @override
+  String get pagebuilder_image_config_content_mode => 'Bildmodus';
+
+  @override
+  String get pagebuilder_image_config_image_overlay => 'Bild Overlay';
+
+  @override
+  String get pagebuilder_image_config_border_radius => 'Radius';
+
+  @override
+  String get pagebuilder_image_config_image_content => 'Bild Inhalt';
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_title => 'Container Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_shadow => 'Schatten';
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_title => 'Reihe Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_equal_heights => 'Gleiche Höhen';
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_main_axis_alignment => 'Ausrichtung X-Achse';
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_cross_axis_alignment => 'Ausrichtung Y-Achse';
+
+  @override
+  String get landingpage_pagebuilder_column_config_column_title => 'Spalte Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_icon_content => 'Icon Inhalt';
+
+  @override
+  String get landingpage_pagebuilder_icon_content_change_icon => 'Icon ändern';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_title => 'Icon Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_color => 'Farbe';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_size => 'Größe';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_title => 'Wähle ein Icon';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_close => 'Schließen';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_search => 'Suche';
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_search_no_results => 'Keine Ergebnisse für:';
+
+  @override
+  String get landingpage_pagebuilder_contactform_content_email => 'Kontaktformular E-Mail';
+
+  @override
+  String get landingpage_pagebuilder_contactform_content_email_subtitle => 'Gib hier bitte die Empfänger E-Mail Adresse an, an welche die Kontaktanfrage versendet wird.';
+
+  @override
+  String get landingpage_pagebuilder_contactform_content_email_placeholder => 'E-Mail Adresse';
+
+  @override
+  String get pagebuilder_button_config_button_width => 'Breite';
+
+  @override
+  String get pagebuilder_button_config_button_height => 'Höhe';
+
+  @override
+  String get pagebuilder_button_config_button_border_radius => 'Radius';
+
+  @override
+  String get pagebuilder_button_config_button_background_color => 'Hintergrundfarbe';
+
+  @override
+  String get pagebuilder_button_config_button_text_configuration => 'Button Text Konfiguration';
+
+  @override
+  String get pagebuilder_contact_form_config_name_textfield_title => 'Name Textfeld';
+
+  @override
+  String get pagebuilder_contact_form_config_email_textfield_title => 'E-Mail Textfeld';
+
+  @override
+  String get pagebuilder_contact_form_config_message_textfield_title => 'Nachricht Textfeld';
+
+  @override
+  String get pagebuilder_contact_form_config_button_title => 'Button Konfiguration';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_width => 'Breite';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_min_lines => 'Zeilenanzahl Minimum';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_max_lines => 'Zeilenanzahl Maximum';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_required => 'Pflichtfeld';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_background_color => 'Hintergrundfarbe';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_border_color => 'Rahmenfarbe';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_placeholder => 'Platzhalter';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_text_configuration => 'Textfeld Text Konfiguration';
+
+  @override
+  String get pagebuilder_textfield_config_textfield_placeholder_text_configuration => 'Textfeld Platzhalter Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_section_type => 'Section';
 }

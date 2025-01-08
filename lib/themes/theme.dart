@@ -317,4 +317,30 @@ class AppTheme {
       side: WidgetStateBorderSide.resolveWith(
         (states) => const BorderSide(width: 1, color: darkTextColor),
       ));
+
+  static final SwitchThemeData lightSwitchTheme = SwitchThemeData(
+      thumbColor: const WidgetStatePropertyAll(lightCardColor),
+      trackColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return lightSecondaryColor;
+        } else {
+          return lightBackgroundColor;
+        }
+      }),
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+      splashRadius: 0);
+
+  static final SwitchThemeData darkSwitchTheme = SwitchThemeData(
+      thumbColor: const WidgetStatePropertyAll(darkCardColor),
+      trackColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return lightSecondaryColor;
+        } else {
+          return lightBackgroundColor;
+        }
+      }),
+      trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
+      trackOutlineWidth: const WidgetStatePropertyAll(0),
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+      splashRadius: 0);
 }

@@ -1140,6 +1140,14 @@
     "@landingpage_pagebuilder_unload_alert_message": {
         "description": "Fehlermeldung für den Alert auf der Pagebuilder Seite, der aufgerufen wird wenn man die Seite verlassen möchte und nicht gespeichert hat."
     },
+    "landingpage_pagebuilder_config_menu_content_tab": "Inhalt",
+    "@landingpage_pagebuilder_config_menu_content_tab": {
+        "description": "Inhalt Tab Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_design_tab": "Design",
+    "@landingpage_pagebuilder_config_menu_design_tab": {
+        "description": "Design Tab Titel im Pagebuilder Config Menü"
+    },
     "landingpage_pagebuilder_config_menu_container_type": "Container",
     "@landingpage_pagebuilder_config_menu_container_type": {
         "description": "Container Titel im Pagebuilder Config Menü"
@@ -1175,5 +1183,369 @@
     "landingpage_pagebuilder_config_menu_unknown_type": "Unbekannt",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unbekannt Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_text_config_text_title": "Text Konfiguration",
+    "@landingpage_pagebuilder_text_config_text_title": {
+        "description": "Titel der ausklappabren View für die Text Konfiguration in der Pagebuilder Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_alignment": "Ausrichtung",
+    "@landingpage_pagebuilder_text_config_alignment": {
+        "description": "Menüpunkt in der Pagebuilder Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_left": "linksbündig",
+    "@landingpage_pagebuilder_text_config_alignment_left": {
+        "description": "Tooltip für left alignment Button in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_center": "zentriert",
+    "@landingpage_pagebuilder_text_config_alignment_center": {
+        "description": "Tooltip für center alignment Button in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_right": "rechtsbündig",
+    "@landingpage_pagebuilder_text_config_alignment_right": {
+        "description": "Tooltip für right alignment Button in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_alignment_justify": "Blocksatz",
+    "@landingpage_pagebuilder_text_config_alignment_justify": {
+        "description": "Tooltip für Blocksatz alignment Button in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_lineheight": "Zeilenhöhe",
+    "@landingpage_pagebuilder_text_config_lineheight": {
+        "description": "Text für Zeilenhöhe in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_letterspacing": "Zeichenabstand",
+    "@landingpage_pagebuilder_text_config_letterspacing": {
+        "description": "Text für Zeichenabstand in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_color": "Schriftfarbe",
+    "@landingpage_pagebuilder_text_config_color": {
+        "description": "Text für Schriftfarbe in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_font_family": "Schriftart",
+    "@landingpage_pagebuilder_text_config_font_family": {
+        "description": "Text für Schriftart in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow": "Textschatten",
+    "@landingpage_pagebuilder_text_config_shadow": {
+        "description": "Text für Textschatten in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_title": "Schatten konfigurieren",
+    "@landingpage_pagebuilder_text_config_shadow_alert_title": {
+        "description": "Titel für Textschatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_spread_radius": "Spread Radius",
+    "@landingpage_pagebuilder_text_config_shadow_alert_spread_radius": {
+        "description": "Text für Spread Radius im Schatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_blur_radius": "Blur Radius",
+    "@landingpage_pagebuilder_text_config_shadow_alert_blur_radius": {
+        "description": "Text für Blur Radius im Schatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_x_offset": "X Offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_x_offset": {
+        "description": "Text für X Offset im Schatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_y_offset": "Y Offset",
+    "@landingpage_pagebuilder_text_config_shadow_alert_y_offset": {
+        "description": "Text für Y Offset im Schatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_shadow_alert_apply": "Übernehmen",
+    "@landingpage_pagebuilder_text_config_shadow_alert_apply": {
+        "description": "Text für Übernehmen Button im Schatten Alert in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_fontsize": "Schriftgröße",
+    "@landingpage_pagebuilder_text_config_fontsize": {
+        "description": "Text für die Schriftgröße in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_color_picker_title": "Farbe auswählen",
+    "@landingpage_pagebuilder_color_picker_title": {
+        "description": "Titel für den Color Picker in der Pagebuilder Konfiguration"
+    },
+    "landingpage_pagebuilder_color_picker_hex_textfield": "Hex Code",
+    "@landingpage_pagebuilder_color_picker_hex_textfield": {
+        "description": "Titel für das Hex Code Textfeld im Color Picker in der Pagebuilder Konfiguration"
+    },
+    "landingpage_pagebuilder_color_picker_ok_button": "OK",
+    "@landingpage_pagebuilder_color_picker_ok_button": {
+        "description": "Titel für den Button im Color Picker in der Pagebuilder Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_text_placeholder": "Hier Text eingeben...",
+    "@landingpage_pagebuilder_text_config_text_placeholder": {
+        "description": "Platzhalter für das Textfeld in der Text Konfiguration"
+    },
+    "landingpage_pagebuilder_text_config_content_title": "Text Inhalt",
+    "@landingpage_pagebuilder_text_config_content_title": {
+        "description": "Titel der ausklappabren View für den Text Inhalt in der Pagebuilder Text Konfiguration"
+    },
+    "landingpage_pagebuilder_layout_spacing_top": "Oben",
+    "@landingpage_pagebuilder_layout_spacing_top": {
+        "description": "Platzhalter für Spacing Oben Textfeld im Layout Menü des Pagebuilder Config Menüs"
+    },
+    "landingpage_pagebuilder_layout_spacing_bottom": "Unten",
+    "@landingpage_pagebuilder_layout_spacing_bottom": {
+        "description": "Platzhalter für Spacing Unten Textfeld im Layout Menü des Pagebuilder Config Menüs"
+    },
+    "landingpage_pagebuilder_layout_spacing_left": "Links",
+    "@landingpage_pagebuilder_layout_spacing_left": {
+        "description": "Platzhalter für Spacing Links Textfeld im Layout Menü des Pagebuilder Config Menüs"
+    },
+    "landingpage_pagebuilder_layout_spacing_right": "Rechts",
+    "@landingpage_pagebuilder_layout_spacing_right": {
+        "description": "Platzhalter für Spacing Rechts Textfeld im Layout Menü des Pagebuilder Config Menüs"
+    },
+    "landingpage_pagebuilder_layout_menu_title": "Layout",
+    "@landingpage_pagebuilder_layout_menu_title": {
+        "description": "Titel für das Layout Collapsible im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_layout_menu_padding": "Innenabstand",
+    "@landingpage_pagebuilder_layout_menu_padding": {
+        "description": "Titel Innenabstand Menüpunkt im Pagebuilder Config Menü im Layout Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_margin": "Außenabstand",
+    "@landingpage_pagebuilder_layout_menu_margin": {
+        "description": "Titel Außenabstand Menüpunkt im Pagebuilder Config Menü im Layout Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_alignment": "Ausrichtung",
+    "@landingpage_pagebuilder_layout_menu_alignment": {
+        "description": "Titel Ausrichtung Menüpunkt im Pagebuilder Config Menü im Layout Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_image_control_title": "Hintergrundbild",
+    "@landingpage_pagebuilder_layout_menu_image_control_title": {
+        "description": "Titel Hintergrundbild Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_background_contentmode": "Anzeigemodus",
+    "@landingpage_pagebuilder_layout_menu_background_contentmode": {
+        "description": "Titel Anzeigemodus Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_background_overlay": "Bild Overlay",
+    "@landingpage_pagebuilder_layout_menu_background_overlay": {
+        "description": "Titel Bild Overlay Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_background": "Hintergrund",
+    "@landingpage_pagebuilder_layout_menu_background": {
+        "description": "Titel Hintergrund Menüpunkt für Bild im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_layout_menu_background_color": "Hintergrundfarbe",
+    "@landingpage_pagebuilder_layout_menu_background_color": {
+        "description": "Titel Hintergrundfarbe Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
+    "pagebuilder_layout_menu_alignment_top_left": "Oben links",
+    "@pagebuilder_layout_menu_alignment_top_left": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_top_center": "Oben zentriert",
+    "@pagebuilder_layout_menu_alignment_top_center": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_top_right": "Oben rechts",
+    "@pagebuilder_layout_menu_alignment_top_right": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_center_left": "Mitte links",
+    "@pagebuilder_layout_menu_alignment_center_left": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_center": "Mitte",
+    "@pagebuilder_layout_menu_alignment_center": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_center_right": "Mitte rechts",
+    "@pagebuilder_layout_menu_alignment_center_right": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_bottom_left": "Unten links",
+    "@pagebuilder_layout_menu_alignment_bottom_left": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_bottom_center": "Unten zentriert",
+    "@pagebuilder_layout_menu_alignment_bottom_center": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_alignment_bottom_right": "Unten rechts",
+    "@pagebuilder_layout_menu_alignment_bottom_right": {
+        "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_size_control_size": "Größe",
+    "@pagebuilder_layout_menu_size_control_size": {
+        "description": "Titel für Größen Menü im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_size_control_width": "Breite",
+    "@pagebuilder_layout_menu_size_control_width": {
+        "description": "Breite für Größen Menü im Pagebuilder Config Menü"
+    },
+    "pagebuilder_layout_menu_size_control_height": "Höhe",
+    "@pagebuilder_layout_menu_size_control_height": {
+        "description": "Höhe für Größen Menü im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_title": "Bild Konfiguration",
+    "@pagebuilder_image_config_title": {
+        "description": "Titel für Bild Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_content_mode": "Bildmodus",
+    "@pagebuilder_image_config_content_mode": {
+        "description": "Titel für Bildmodus Menüpunkt in Bild Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_image_overlay": "Bild Overlay",
+    "@pagebuilder_image_config_image_overlay": {
+        "description": "Titel für Bild Overlay Menüpunkt in Bild Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_border_radius": "Radius",
+    "@pagebuilder_image_config_border_radius": {
+        "description": "Titel für Radius Menüpunkt in Bild Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_image_config_image_content": "Bild Inhalt",
+    "@pagebuilder_image_config_image_content": {
+        "description": "Titel für Bild Inhalt Menü im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_container_config_container_title": "Container Konfiguration",
+    "@landingpage_pagebuilder_container_config_container_title": {
+        "description": "Titel der ausklappabren View für die Container Konfiguration in der Pagebuilder Container Konfiguration"
+    },
+    "landingpage_pagebuilder_container_config_container_shadow": "Schatten",
+    "@landingpage_pagebuilder_container_config_container_shadow": {
+        "description": "Titel für die Schatten Konfiguration in der Pagebuilder Container Konfiguration"
+    },
+    "landingpage_pagebuilder_row_config_row_title": "Reihe Konfiguration",
+    "@landingpage_pagebuilder_row_config_row_title": {
+        "description": "Titel der ausklappabren View für die Reihe Konfiguration in der Pagebuilder Reihe Konfiguration"
+    },
+    "landingpage_pagebuilder_row_config_row_equal_heights": "Gleiche Höhen",
+    "@landingpage_pagebuilder_row_config_row_equal_heights": {
+        "description": "Titel für die Gleiche Höhen Konfiguration in der Pagebuilder Reihe Konfiguration"
+    },
+    "landingpage_pagebuilder_row_config_row_main_axis_alignment": "Ausrichtung X-Achse",
+    "@landingpage_pagebuilder_row_config_row_main_axis_alignment": {
+        "description": "Titel für die Ausrichtung X-Achse Konfiguration in der Pagebuilder Reihe Konfiguration"
+    },
+    "landingpage_pagebuilder_row_config_row_cross_axis_alignment": "Ausrichtung Y-Achse",
+    "@landingpage_pagebuilder_row_config_row_cross_axis_alignment": {
+        "description": "Titel für die Ausrichtung Y-Achse Konfiguration in der Pagebuilder Reihe Konfiguration"
+    },
+    "landingpage_pagebuilder_column_config_column_title": "Spalte Konfiguration",
+    "@landingpage_pagebuilder_column_config_column_title": {
+        "description": "Titel der ausklappabren View für die Spalte Konfiguration in der Pagebuilder Spalte Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_content": "Icon Inhalt",
+    "@landingpage_pagebuilder_icon_content": {
+        "description": "Titel der ausklappabren View für den Icon Inhalt in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_content_change_icon": "Icon ändern",
+    "@landingpage_pagebuilder_icon_content_change_icon": {
+        "description": "Titel des Icon ändern Menüs in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_title": "Icon Konfiguration",
+    "@landingpage_pagebuilder_icon_config_icon_title": {
+        "description": "Titel der ausklappabren View für die Icon Konfiguration in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_color": "Farbe",
+    "@landingpage_pagebuilder_icon_config_color": {
+        "description": "Titel des Farbe Menüs in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_size": "Größe",
+    "@landingpage_pagebuilder_icon_config_size": {
+        "description": "Titel des Größe Menüs in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_title": "Wähle ein Icon",
+    "@landingpage_pagebuilder_icon_config_icon_picker_title": {
+        "description": "Titel des Icon Pickers im Icon Inhalt Tab in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_close": "Schließen",
+    "@landingpage_pagebuilder_icon_config_icon_picker_close": {
+        "description": "Titel des Schließen Buttons im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_search": "Suche",
+    "@landingpage_pagebuilder_icon_config_icon_picker_search": {
+        "description": "Suche Placeholder im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Icon Konfiguration"
+    },
+    "landingpage_pagebuilder_icon_config_icon_picker_search_no_results": "Keine Ergebnisse für:",
+    "@landingpage_pagebuilder_icon_config_icon_picker_search_no_results": {
+        "description": "Text der angezeigt wird wenn Suche keine Ergebnisse liefert im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "landingpage_pagebuilder_contactform_content_email": "Kontaktformular E-Mail",
+    "@landingpage_pagebuilder_contactform_content_email": {
+        "description": "Titel der ausklappabren View für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "landingpage_pagebuilder_contactform_content_email_subtitle": "Gib hier bitte die Empfänger E-Mail Adresse an, an welche die Kontaktanfrage versendet wird.",
+    "@landingpage_pagebuilder_contactform_content_email_subtitle": {
+        "description": "Text der die E-Mail Adresse Eingabe beschreibt für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "landingpage_pagebuilder_contactform_content_email_placeholder": "E-Mail Adresse",
+    "@landingpage_pagebuilder_contactform_content_email_placeholder": {
+        "description": "Platzhalter für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
+    },
+    "pagebuilder_button_config_button_width": "Breite",
+    "@pagebuilder_button_config_button_width": {
+        "description": "Menüpunkt für Button Breite in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_button_config_button_height": "Höhe",
+    "@pagebuilder_button_config_button_height": {
+        "description": "Menüpunkt für Button Höhe in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_button_config_button_border_radius": "Radius",
+    "@pagebuilder_button_config_button_border_radius": {
+        "description": "Menüpunkt für Button Radius in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_button_config_button_background_color": "Hintergrundfarbe",
+    "@pagebuilder_button_config_button_background_color": {
+        "description": "Menüpunkt für Button Hintergrundfarbe in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_button_config_button_text_configuration": "Button Text Konfiguration",
+    "@pagebuilder_button_config_button_text_configuration": {
+        "description": "Überschrift für Button Text Konfiguration in der Button Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_contact_form_config_name_textfield_title": "Name Textfeld",
+    "@pagebuilder_contact_form_config_name_textfield_title": {
+        "description": "Titel für ausklappbares Menü für die Name Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_contact_form_config_email_textfield_title": "E-Mail Textfeld",
+    "@pagebuilder_contact_form_config_email_textfield_title": {
+        "description": "Titel für ausklappbares Menü für die E-Mail Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_contact_form_config_message_textfield_title": "Nachricht Textfeld",
+    "@pagebuilder_contact_form_config_message_textfield_title": {
+        "description": "Titel für ausklappbares Menü für die Nachricht Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_contact_form_config_button_title": "Button Konfiguration",
+    "@pagebuilder_contact_form_config_button_title": {
+        "description": "Titel für ausklappbares Menü für die Button Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_width": "Breite",
+    "@pagebuilder_textfield_config_textfield_width": {
+        "description": "Menüpunkt für Textfeld Breite in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_min_lines": "Zeilenanzahl Minimum",
+    "@pagebuilder_textfield_config_textfield_min_lines": {
+        "description": "Menüpunkt für Textfeld Zeilenanzahl Minimum in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_max_lines": "Zeilenanzahl Maximum",
+    "@pagebuilder_textfield_config_textfield_max_lines": {
+        "description": "Menüpunkt für Textfeld Zeilenanzahl Maximum in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_required": "Pflichtfeld",
+    "@pagebuilder_textfield_config_textfield_required": {
+        "description": "Menüpunkt für Textfeld Pflichtfeld in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_background_color": "Hintergrundfarbe",
+    "@pagebuilder_textfield_config_textfield_background_color": {
+        "description": "Menüpunkt für Textfeld Hintergrundfarbe in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_border_color": "Rahmenfarbe",
+    "@pagebuilder_textfield_config_textfield_border_color": {
+        "description": "Menüpunkt für Textfeld Rahmenfarbe in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_placeholder": "Platzhalter",
+    "@pagebuilder_textfield_config_textfield_placeholder": {
+        "description": "Menüpunkt für Textfeld Platzhalter in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_text_configuration": "Textfeld Text Konfiguration",
+    "@pagebuilder_textfield_config_textfield_text_configuration": {
+        "description": "Überschrift für Textfeld Text Konfiguration in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_textfield_config_textfield_placeholder_text_configuration": "Textfeld Platzhalter Konfiguration",
+    "@pagebuilder_textfield_config_textfield_placeholder_text_configuration": {
+        "description": "Überschrift für Textfeld Platzhalter Konfiguration in der Textfeld Konfiguration im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_config_menu_section_type": "Section",
+    "@landingpage_pagebuilder_config_menu_section_type": {
+        "description": "Section Titel im Pagebuilder Config Menü"
     }
 }

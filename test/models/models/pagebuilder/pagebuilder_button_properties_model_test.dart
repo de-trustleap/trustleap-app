@@ -94,6 +94,8 @@ void main() {
               fontSize: 16,
               fontFamily: null,
               lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
               color: null,
               alignment: TextAlign.left,
               isBold: null,
@@ -106,7 +108,9 @@ void main() {
   });
 
   group("PagebuilderButtonPropertiesModel_FromDomain", () {
-    test("check if conversion from PagebuilderButtonProperties to PagebuilderButtonPropertiesModel works", () {
+    test(
+        "check if conversion from PagebuilderButtonProperties to PagebuilderButtonPropertiesModel works",
+        () {
       // Given
       final model = PageBuilderButtonProperties(
           width: 200,
@@ -118,6 +122,8 @@ void main() {
               fontSize: 16,
               fontFamily: null,
               lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
               color: null,
               alignment: TextAlign.left,
               isBold: null,
@@ -127,7 +133,11 @@ void main() {
           height: 60.0,
           borderRadius: 12.0,
           backgroundColor: "ffffffff",
-          textProperties: {"text": "Test", "fontSize": 16.0, "alignment": "left"});
+          textProperties: {
+            "text": "Test",
+            "fontSize": 16.0,
+            "alignment": "left"
+          });
       // When
       final result = PageBuilderButtonPropertiesModel.fromDomain(model);
       // Then
@@ -143,13 +153,21 @@ void main() {
           height: 60.0,
           borderRadius: 12.0,
           backgroundColor: "ffffffff",
-          textProperties: {"text": "Test", "fontSize": 16.0, "alignment": "left"});
+          textProperties: {
+            "text": "Test",
+            "fontSize": 16.0,
+            "alignment": "left"
+          });
       final properties2 = PageBuilderButtonPropertiesModel(
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
           backgroundColor: "ffffffff",
-          textProperties: {"text": "Test", "fontSize": 16.0, "alignment": "left"});
+          textProperties: {
+            "text": "Test",
+            "fontSize": 16.0,
+            "alignment": "left"
+          });
       // Then
       expect(properties1, properties2);
     });

@@ -45,7 +45,7 @@ class HomeModule extends Module {
         child: (_) =>
             LandingPageSite(landingPageId: r.args.params['landingPageId']));
     r.child("${Modular.initialRoute}${RoutePaths.landingPageBuilderPath}/:id",
-        child: (_) => LandingPageBuilderView());
+        child: (_) => const LandingPageBuilderView());
     r.wildcard(child: (_) => const DashboardPage());
   }
 }

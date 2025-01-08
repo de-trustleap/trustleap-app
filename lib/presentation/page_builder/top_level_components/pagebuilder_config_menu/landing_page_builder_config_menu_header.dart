@@ -17,14 +17,16 @@ class LandingPageBuilderConfigMenuHeader extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-              child: Text(title, style: themeData.textTheme.bodyLarge, overflow: TextOverflow.ellipsis)),
+              child: Text(title,
+                  style: themeData.textTheme.bodyLarge,
+                  overflow: TextOverflow.ellipsis)),
           SizedBox(
             width: 36,
             height: 36,
             child: IconButton(
                 onPressed: () => closePressed(),
                 padding: EdgeInsets.zero,
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 iconSize: 24),
           )
         ],

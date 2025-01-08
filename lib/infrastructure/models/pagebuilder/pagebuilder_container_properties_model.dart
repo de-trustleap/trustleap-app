@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/infrastructure/models/model_helper/shadow_mapper.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_shadow_model.dart';
 
 class PageBuilderContainerPropertiesModel extends Equatable
@@ -54,28 +54,7 @@ class PageBuilderContainerPropertiesModel extends Equatable
       PageBuilderContainerProperties properties) {
     return PageBuilderContainerPropertiesModel(
         borderRadius: properties.borderRadius,
-        shadow: _getMapFromShadow(properties.shadow));
-  }
-
-  static Map<String, dynamic>? _getMapFromShadow(PageBuilderShadow? shadow) {
-    if (shadow == null) {
-      return null;
-    }
-    final shadowModel = PageBuilderShadowModel.fromDomain(shadow);
-    Map<String, dynamic> map = {};
-    if (shadowModel.color != null) map['color'] = shadowModel.color;
-    if (shadowModel.spreadRadius != null && shadowModel.spreadRadius != 0) {
-      map['spreadRadius'] = shadowModel.spreadRadius;
-    }
-    if (shadowModel.blurRadius != null && shadowModel.blurRadius != 0) {
-      map['blurRadius'] = shadowModel.blurRadius;
-    }
-    if (shadowModel.offset != null) map['offset'] = shadowModel.offset;
-    if (map.isEmpty) {
-      return null;
-    } else {
-      return map;
-    }
+        shadow: ShadowMapper.getMapFromShadow(properties.shadow));
   }
 
   @override

@@ -13,6 +13,8 @@ void main() {
           fontSize: 16.0,
           fontFamily: "Poppins",
           lineHeight: null,
+          letterSpacing: null,
+          textShadow: null,
           color: Colors.black,
           alignment: TextAlign.left,
           isBold: false,
@@ -22,6 +24,8 @@ void main() {
           fontSize: 18.0,
           fontFamily: "Poppins",
           lineHeight: null,
+          letterSpacing: null,
+          textShadow: null,
           color: Colors.black,
           alignment: TextAlign.left,
           isBold: false,
@@ -33,16 +37,16 @@ void main() {
     });
   });
 
-    group("PagebuilderTextProperties_Props", () {
-    test(
-        "check if value equality works",
-        () {
+  group("PagebuilderTextProperties_Props", () {
+    test("check if value equality works", () {
       // Given
       final properties1 = PageBuilderTextProperties(
           text: "Test",
           fontSize: 16.0,
           fontFamily: "Poppins",
           lineHeight: null,
+          letterSpacing: null,
+          textShadow: null,
           color: Colors.black,
           alignment: TextAlign.left,
           isBold: false,
@@ -52,6 +56,8 @@ void main() {
           fontSize: 16.0,
           fontFamily: "Poppins",
           lineHeight: null,
+          letterSpacing: null,
+          textShadow: null,
           color: Colors.black,
           alignment: TextAlign.left,
           isBold: false,

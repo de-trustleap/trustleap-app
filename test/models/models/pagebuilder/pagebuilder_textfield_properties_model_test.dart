@@ -13,6 +13,7 @@ void main() {
       final model = PageBuilderTextFieldPropertiesModel(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: "ff000000",
           borderColor: null,
@@ -29,6 +30,7 @@ void main() {
       final expectedResult = PageBuilderTextFieldPropertiesModel(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: "fff00000",
           borderColor: null,
@@ -55,6 +57,7 @@ void main() {
       final model = PageBuilderTextFieldPropertiesModel(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: "ff000000",
           borderColor: null,
@@ -71,6 +74,7 @@ void main() {
       final expectedResult = {
         "width": 200.0,
         "minLines": 1,
+        "maxLines": 1,
         "isRequired": false,
         "backgroundColor": "ff000000",
         "placeHolderTextProperties": {
@@ -97,6 +101,7 @@ void main() {
       final map = {
         "width": 200.0,
         "minLines": 1,
+        "maxLines": 1,
         "isRequired": false,
         "backgroundColor": "ff000000",
         "placeHolderTextProperties": {
@@ -113,6 +118,7 @@ void main() {
       final expectedResult = PageBuilderTextFieldPropertiesModel(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: "ff000000",
           borderColor: null,
@@ -141,6 +147,7 @@ void main() {
       final model = PageBuilderTextFieldPropertiesModel(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: "ff000000",
           borderColor: null,
@@ -157,6 +164,7 @@ void main() {
       final expectedResult = PageBuilderTextFieldProperties(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: Colors.black,
           borderColor: null,
@@ -165,6 +173,8 @@ void main() {
               fontSize: 14.0,
               fontFamily: "Poppins",
               lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
               color: null,
               alignment: TextAlign.left,
               isBold: null,
@@ -174,6 +184,8 @@ void main() {
               fontSize: 14.0,
               fontFamily: "Poppins",
               lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
               color: null,
               alignment: TextAlign.left,
               isBold: null,
@@ -193,6 +205,7 @@ void main() {
       final model = PageBuilderTextFieldProperties(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: Colors.black,
           borderColor: null,
@@ -201,6 +214,8 @@ void main() {
               fontSize: 14.0,
               fontFamily: "Poppins",
               lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
               color: null,
               alignment: TextAlign.left,
               isBold: null,
@@ -210,6 +225,8 @@ void main() {
               fontSize: 14.0,
               fontFamily: "Poppins",
               lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
               color: null,
               alignment: TextAlign.left,
               isBold: null,
@@ -217,6 +234,7 @@ void main() {
       final expectedResult = PageBuilderTextFieldPropertiesModel(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: "ff000000",
           borderColor: null,
@@ -245,6 +263,7 @@ void main() {
       final properties1 = PageBuilderTextFieldPropertiesModel(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: "ff000000",
           borderColor: null,
@@ -263,6 +282,7 @@ void main() {
       final properties2 = PageBuilderTextFieldPropertiesModel(
           width: 200.0,
           minLines: 1,
+          maxLines: 1,
           isRequired: false,
           backgroundColor: "ff000000",
           borderColor: null,

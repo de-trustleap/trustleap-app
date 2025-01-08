@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class RawFormTextField extends StatelessWidget {
@@ -9,12 +10,15 @@ class RawFormTextField extends StatelessWidget {
   final String placeholder;
   final FocusNode? focusNode;
   final bool? obscureText;
-  final Function onChanged;
+  final Function? onChanged;
   final Function? onFieldSubmitted;
   final String? Function(String?)? validator;
   final IconData? prefixIcon;
   final int? minLines;
   final int? maxLines;
+  final EdgeInsets? contentPadding;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextStyle? desktopStyle;
   final Function? onTap;
 
   const RawFormTextField(
@@ -31,6 +35,9 @@ class RawFormTextField extends StatelessWidget {
       this.prefixIcon,
       this.minLines,
       this.maxLines,
+      this.contentPadding,
+      this.inputFormatters,
+      this.desktopStyle,
       this.onTap});
 
   @override
@@ -42,7 +49,9 @@ class RawFormTextField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       onChanged: (_) {
-        onChanged();
+        if (onChanged != null) {
+          onChanged!();
+        }
       },
       onFieldSubmitted: (_) =>
           onFieldSubmitted != null ? onFieldSubmitted!() : (),
@@ -54,14 +63,17 @@ class RawFormTextField extends StatelessWidget {
       maxLines: maxLines ?? 1,
       style: responsiveValue.isMobile
           ? themeData.textTheme.bodySmall
-          : themeData.textTheme.bodyMedium,
+          : desktopStyle,
+      inputFormatters: inputFormatters,
       onTap: () => onTap != null ? onTap!() : (),
       decoration: InputDecoration(
           prefixIcon: prefixIcon != null ? Icon(prefixIcon!) : null,
           labelText: placeholder,
           hoverColor: Colors.transparent,
           filled: disabled ? true : false,
-          fillColor: themeData.colorScheme.surface),
+          fillColor: themeData.colorScheme.surface,
+          contentPadding: contentPadding,
+          counterText: ""),
     );
   }
 }

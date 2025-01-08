@@ -1,11 +1,11 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import '../mocks.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,7 +19,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/foundation.dart';
 
 void main() {
-  late PagebuilderCubit pageBuilderCubit;
+  late PagebuilderBloc pageBuilderBloc;
   late MockLandingPageRepository mockLandingPageRepo;
   late MockUserRepository mockUserRepo;
   late MockPagebuilderRepository mockPageBuilderRepo;
@@ -28,15 +28,17 @@ void main() {
     mockLandingPageRepo = MockLandingPageRepository();
     mockUserRepo = MockUserRepository();
     mockPageBuilderRepo = MockPagebuilderRepository();
-    pageBuilderCubit = PagebuilderCubit(
-        mockLandingPageRepo, mockPageBuilderRepo, mockUserRepo);
+    pageBuilderBloc = PagebuilderBloc(
+        landingPageRepo: mockLandingPageRepo,
+        pageBuilderRepo: mockPageBuilderRepo,
+        userRepo: mockUserRepo);
   });
 
   test("init state should be PagebuilderInitial", () {
-    expect(pageBuilderCubit.state, PagebuilderInitial());
+    expect(pageBuilderBloc.state, PagebuilderInitial());
   });
 
-  group("PagebuilderCubit_getLandingPage", () {
+  group("PagebuilderBloc_getLandingPage", () {
     const String landingPageID = "1";
     const contentID = "5";
     final testLandingPage = LandingPage(
@@ -56,7 +58,7 @@ void main() {
           .thenAnswer((_) async => right(testContent));
 
       // When
-      pageBuilderCubit.getLandingPage(landingPageID);
+      pageBuilderBloc.add(GetLandingPageEvent(landingPageID));
       await untilCalled(mockLandingPageRepo.getLandingPage(landingPageID));
       // Then
       verify(mockLandingPageRepo.getLandingPage(landingPageID));
@@ -85,8 +87,8 @@ void main() {
       when(mockPageBuilderRepo.getLandingPageContent(contentID))
           .thenAnswer((_) async => right(testContent));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.getLandingPage(landingPageID);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(GetLandingPageEvent(landingPageID));
     });
 
     test(
@@ -104,8 +106,8 @@ void main() {
       when(mockPageBuilderRepo.getLandingPageContent(contentID))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.getLandingPage(landingPageID);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(GetLandingPageEvent(landingPageID));
     });
 
     test(
@@ -123,8 +125,8 @@ void main() {
       when(mockPageBuilderRepo.getLandingPageContent(contentID))
           .thenAnswer((_) async => right(testContent));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.getLandingPage(landingPageID);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(GetLandingPageEvent(landingPageID));
     });
   });
 
@@ -137,7 +139,7 @@ void main() {
           PageBuilderSection(
               id: UniqueID.fromUniqueString("2"),
               layout: PageBuilderSectionLayout.column,
-              backgroundColor: null,
+              background: null,
               maxWidth: null,
               widgets: [
                 PageBuilderWidget(
@@ -145,9 +147,10 @@ void main() {
                     elementType: PageBuilderWidgetType.text,
                     children: [],
                     widthPercentage: null,
-                    backgroundColor: null,
+                    background: null,
                     containerChild: null,
                     padding: null,
+                    margin: null,
                     maxWidth: null,
                     alignment: null,
                     properties: PageBuilderTextProperties(
@@ -157,6 +160,8 @@ void main() {
                         color: Colors.black,
                         alignment: TextAlign.center,
                         lineHeight: 1.5,
+                        letterSpacing: null,
+                        textShadow: null,
                         isBold: null,
                         isItalic: null))
               ])
@@ -170,7 +175,7 @@ void main() {
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => right(unit));
       // When
-      pageBuilderCubit.saveLandingPageContent(testContent);
+      pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
       await untilCalled(
           mockPageBuilderRepo.saveLandingPageContent(testContent.content));
       // Then
@@ -199,8 +204,8 @@ void main() {
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => right(unit));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.saveLandingPageContent(testContent);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
     });
 
     test(
@@ -224,8 +229,8 @@ void main() {
       when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
-      expectLater(pageBuilderCubit.stream, emitsInOrder(expectedResult));
-      pageBuilderCubit.saveLandingPageContent(testContent);
+      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
     });
   });
 
@@ -237,6 +242,8 @@ void main() {
         color: Colors.black,
         alignment: TextAlign.left,
         lineHeight: 1.5,
+        letterSpacing: null,
+        textShadow: null,
         isBold: null,
         isItalic: null);
 
@@ -247,6 +254,8 @@ void main() {
         color: Colors.red,
         alignment: TextAlign.center,
         lineHeight: 1.5,
+        letterSpacing: null,
+        textShadow: null,
         isBold: null,
         isItalic: null);
 
@@ -256,74 +265,80 @@ void main() {
         width: 100.0,
         height: 150.0,
         localImage: Uint8List(0),
-        alignment: Alignment.center);
+        contentMode: BoxFit.cover,
+        overlayColor: null);
 
     final mockTextWidget1 = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget1"),
         elementType: PageBuilderWidgetType.text,
-        backgroundColor: null,
+        background: null,
         properties: mockTextProperties1,
         children: [],
         widthPercentage: 100.0,
         containerChild: null,
         maxWidth: null,
         alignment: null,
+        margin: null,
         padding:
-            PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+            PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
     final mockTextWidget2 = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget2"),
         elementType: PageBuilderWidgetType.text,
-        backgroundColor: null,
+        background: null,
         properties: mockTextProperties2,
         children: [],
         widthPercentage: 100.0,
         maxWidth: null,
         containerChild: null,
         alignment: null,
+        margin: null,
         padding:
-            PageBuilderPadding(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+            PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
 
     final mockImageWidget = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget3"),
         elementType: PageBuilderWidgetType.image,
-        backgroundColor: null,
+        background: null,
         properties: mockImageProperties,
         children: [],
         containerChild: null,
         widthPercentage: 100.0,
         maxWidth: null,
         alignment: null,
+        margin: null,
         padding: null);
 
     final mockColumnWidget = PageBuilderWidget(
         id: UniqueID.fromUniqueString("columnWidget"),
         elementType: PageBuilderWidgetType.column,
-        backgroundColor: null,
+        background: null,
         properties: null,
         children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
         containerChild: null,
         widthPercentage: 100.0,
         maxWidth: null,
         alignment: null,
+        margin: null,
         padding: null);
 
     final mockRowWidget = PageBuilderWidget(
         id: UniqueID.fromUniqueString("rowWidget"),
         elementType: PageBuilderWidgetType.row,
-        backgroundColor: null,
+        background: null,
         properties: null,
         children: [mockTextWidget1, mockImageWidget],
         containerChild: null,
         widthPercentage: 100.0,
         maxWidth: null,
         alignment: null,
+        margin: null,
         padding: null);
 
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       layout: PageBuilderSectionLayout.column,
-      backgroundColor: null,
+      background: null,
       maxWidth: null,
       widgets: [mockColumnWidget, mockRowWidget],
     );
@@ -387,7 +402,7 @@ void main() {
 
       // Then
       expectLater(
-          pageBuilderCubit.stream,
+          pageBuilderBloc.stream,
           emitsInOrder([
             GetLandingPageAndUserSuccessState(
               content: mockPagebuilderContent,
@@ -399,7 +414,7 @@ void main() {
             expectedResult,
           ]));
 
-      pageBuilderCubit.emit(GetLandingPageAndUserSuccessState(
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
         content: mockPagebuilderContent,
         saveLoading: false,
         saveFailure: null,
@@ -407,7 +422,7 @@ void main() {
         isUpdated: false,
       ));
 
-      pageBuilderCubit.updateWidget(updatedWidget);
+      pageBuilderBloc.add(UpdateWidgetEvent(updatedWidget));
     });
   });
 }
