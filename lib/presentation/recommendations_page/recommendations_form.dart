@@ -1,7 +1,9 @@
-import 'package:equatable/equatable.dart';
+import 'dart:math';
+
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/leadItem.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -11,20 +13,11 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/leads_validator.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_preview.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
-class LeadItem extends Equatable {
-  final String name;
-  final String reason;
-
-  const LeadItem({required this.name, required this.reason});
-
-  @override
-  List<Object?> get props => [name, reason];
-}
 
 class RecommendationsForm extends StatefulWidget {
   const RecommendationsForm({super.key});
@@ -38,6 +31,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   final leadTextController = TextEditingController();
   final serviceProviderTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  bool showRecommendation = false;
   String? selectedReason;
   FocusNode? focusNode;
   CustomUser? currentUser;
@@ -64,7 +59,6 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     leadTextController.dispose();
     serviceProviderTextController.dispose();
     focusNode!.dispose();
-
     super.dispose();
   }
 
@@ -72,24 +66,39 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     setState(() {
       showError = false;
       errorMessage = "";
+      
     });
   }
 
   void addLead(LeadsValidator validator) {
-    if (formKey.currentState!.validate() &&
-        validator.validateReason(selectedReason) == null) {
-      setState(() {
-        validationHasError = false;
-        reasonValid = null;
-        leads.add(LeadItem(
-            name: leadTextController.text.trim(), reason: selectedReason!));
-        leadTextController.clear();
-      });
+    if (leads.length < 6) {
+      if (formKey.currentState!.validate() &&
+          validator.validateReason(selectedReason) == null) {
+        setState(() {
+          validationHasError = false;
+          reasonValid = null;
+          leads.add(LeadItem(
+              name: leadTextController.text.trim(),
+              reason: selectedReason!,
+              promotionTemplate: reasons.firstWhere((e) {
+                return e.reason == selectedReason;
+              }).promotionTemplate!));
+          leadTextController.clear();
+          generateRecommendation();
+        });
+      } else {
+        setState(() {
+          validationHasError = true;
+          reasonValid = validator.validateReason(selectedReason);
+        });
+      }
     } else {
-      setState(() {
-        validationHasError = true;
-        reasonValid = validator.validateReason(selectedReason);
-      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Es dürfen maximal 6 Items hinzugefügt werden.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
     }
   }
 
@@ -124,19 +133,30 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     }
   }
 
-  String _getReasonValues() {
-    return selectedReason ??
-    reasons.firstWhere(
-      (element) {
-        return element.isActive == true;
-      },
-      orElse: () => const RecommendationReason(reason: "null", isActive: null),
-    ).reason as String;
+  String getReasonValues() {
+    selectedReason = selectedReason ??
+        reasons.firstWhere(
+          (e) {
+            return e.isActive == true;
+          },
+          orElse: () => const RecommendationReason(
+              id: null,
+              reason: "null",
+              isActive: null,
+              promotionTemplate: null),
+        ).reason;
+    return selectedReason as String;
   }
 
   void generateRecommendation() {
+    setState(() {
+      showRecommendation = true;
+    });
+
     sendMessageViaWhatsApp();
   }
+  
+//https://api.whatsapp.com/send/?phone=01711210196&text=I%27m+interested+in+your+car+for+sale
 
   void sendMessageViaWhatsApp() async {
     /*   String url = "https://api.whatsapp.com/send?text=iwanttotestit";
@@ -154,6 +174,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final validator = LeadsValidator(localization: localization);
     const double textFieldSpacing = 20;
+    const double tabFieldSpacing = 20;
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
@@ -266,7 +287,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                   width: maxWidth,
                                   validate: reasonValid,
                                   reasons: reasons,
-                                  initialValue: _getReasonValues(),
+                                  initialValue: getReasonValues(),
                                   onSelected: (reason) {
                                     setState(() {
                                       reasonValid =
@@ -278,21 +299,12 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                             ]),
                         const SizedBox(height: textFieldSpacing * 2),
                       ],
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          PrimaryButton(
-                              title: localization
-                                  .recommendations_form_generate_recommendation_button_title,
-                              width: responsiveValue.isMobile
-                                  ? maxWidth - textFieldSpacing
-                                  : maxWidth / 2 - textFieldSpacing,
-                              onTap: () {
-                                generateRecommendation();
-                              })
+                      if (showRecommendation && leads.isNotEmpty) ...[
+                       SizedBox(height: tabFieldSpacing),
+                        RecommendationPreview(
+                          leads: leads,
+                        ),
                         ],
-                      ),
                     ]));
           } else if (state is RecommendationGetUserFailureState) {
             return CenteredConstrainedWrapper(

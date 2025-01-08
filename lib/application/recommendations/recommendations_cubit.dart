@@ -55,7 +55,7 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
           (landingPages) {
         final reasons = landingPages
             .map((e) =>
-                RecommendationReason(reason: e.name, isActive: e.isActive))
+                RecommendationReason(id: e.id, reason: e.name, isActive: e.isActive, promotionTemplate: e.promotionTemplate))
             .toList();
         final reasonsWithoutNullValues = reasons.toList();
         emit(RecommendationGetReasonsSuccessState(
