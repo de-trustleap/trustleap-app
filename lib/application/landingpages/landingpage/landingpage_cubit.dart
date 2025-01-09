@@ -55,6 +55,18 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     }
   }
 
+  void checkLandingPageImage(LandingPage? landingPage, Uint8List? imageData) {
+    if (landingPage != null && landingPage.thumbnailDownloadURL != null) {
+      emit(LandingPageImageValid());
+    } else if (imageData == null || imageData == [0]) {
+      emit(LandingPageNoImageFailureState());
+    } else if (imageData.lengthInBytes > fileSizeLimit) {
+      emit(LandingPageImageExceedsFileSizeLimitFailureState());
+    } else {
+      emit(LandingPageImageValid());
+    }
+  }
+
   void deleteLandingPage(String id, String parentUserID) async {
     emit(DeleteLandingPageLoadingState());
     final failureOrSuccess =
@@ -72,11 +84,14 @@ class LandingPageCubit extends Cubit<LandingPageState> {
         (_) => emit(DuplicateLandingPageSuccessState()));
   }
 
-  void toggleLandingPageActivity(String id, bool isActive, String userId) async {
+  void toggleLandingPageActivity(
+      String id, bool isActive, String userId) async {
     emit(ToggleLandingPageActivityLoadingState());
-    final failureOrSuccess = await landingPageRepo.toggleLandingPageActivity(id, isActive, userId);
+    final failureOrSuccess =
+        await landingPageRepo.toggleLandingPageActivity(id, isActive, userId);
     failureOrSuccess.fold(
-        (failure) => emit(ToggleLandingPageActivityFailureState(failure: failure)),
+        (failure) =>
+            emit(ToggleLandingPageActivityFailureState(failure: failure)),
         (_) => emit(ToggleLandingPageActivitySuccessState(isActive: isActive)));
   }
 

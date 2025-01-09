@@ -11,7 +11,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_c
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_emoji_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
@@ -20,23 +19,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class LandingPageCreatorForm extends StatefulWidget {
+class LandingPageCreatorFirstStepForm extends StatefulWidget {
   final UniqueID id;
   final LandingPage? landingPage;
-  final Function(LandingPage) onSaveTap;
-  final Function(LandingPage) onEditTapped;
-  const LandingPageCreatorForm(
+  final Function(LandingPage) onContinueTap;
+  const LandingPageCreatorFirstStepForm(
       {super.key,
       required this.id,
       this.landingPage,
-      required this.onSaveTap,
-      required this.onEditTapped});
+      required this.onContinueTap});
 
   @override
-  State<LandingPageCreatorForm> createState() => _LandingPageCreatorFormState();
+  State<LandingPageCreatorFirstStepForm> createState() =>
+      _LandingPageCreatorFormState();
 }
 
-class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
+class _LandingPageCreatorFormState
+    extends State<LandingPageCreatorFirstStepForm> {
   final nameTextController = TextEditingController();
   final descriptionTextController = TextEditingController();
   final promotionTemplateTextController = TextEditingController();
@@ -93,20 +92,12 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
         promotionTemplateText =
             localization.landingpage_create_promotion_template_default_text;
       }
-      if (widget.landingPage == null) {
-        widget.onSaveTap(LandingPage(
-            id: widget.id,
-            name: nameTextController.text.trim(),
-            description: descriptionTextController.text.trim(),
-            promotionTemplate: promotionTemplateText,
-            ownerID: user!.id));
-      } else {
-        widget.onEditTapped(widget.landingPage!.copyWith(
+      widget.onContinueTap(LandingPage(
+          id: widget.id,
           name: nameTextController.text.trim(),
           description: descriptionTextController.text.trim(),
-          promotionTemplate: promotionTemplateTextController.text.trim(),
-        ));
-      }
+          promotionTemplate: promotionTemplateText,
+          ownerID: user!.id));
     } else {
       validationHasError = true;
       BlocProvider.of<LandingPageCubit>(context)
@@ -127,7 +118,8 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
       listener: (context, state) {
         if (state is GetUserSuccessState) {
           user = state.user;
-        } else if (state is CreateLandingPageFailureState) {
+        } else if (state
+            is LandingPageImageValid) {} /*else if (state is CreateLandingPageFailureState) {
           setState(() {
             showError = true;
             errorMessage = DatabaseFailureMapper.mapFailureMessage(
@@ -147,7 +139,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
         } else if (state is CreateLandingPageLoadingState ||
             state is EditLandingPageLoadingState) {
           setButtonToDisabled(true);
-        }
+        } */
       },
       builder: (context, state) {
         if (state is GetUserFailureState) {
@@ -253,10 +245,7 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             PrimaryButton(
-                                title: widget.landingPage == null
-                                    ? localization
-                                        .landingpage_create_buttontitle
-                                    : localization.changes_save_button_title,
+                                title: "Weiter",
                                 disabled: buttonDisabled,
                                 isLoading:
                                     state is CreateLandingPageLoadingState ||
@@ -269,14 +258,6 @@ class _LandingPageCreatorFormState extends State<LandingPageCreatorForm> {
                                 })
                           ],
                         ),
-                        if (errorMessage != "" &&
-                            showError &&
-                            (state is CreateLandingPageFailureState ||
-                                state is EditLandingPageFailureState) &&
-                            !validationHasError) ...[
-                          const SizedBox(height: 20),
-                          FormErrorView(message: errorMessage)
-                        ]
                       ]));
             }
           }));

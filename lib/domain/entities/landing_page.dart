@@ -16,6 +16,8 @@ class LandingPage extends Equatable {
   final DateTime? lastUpdatedAt;
   final bool? isDefaultPage;
   final bool? isActive;
+  final String? impressum;
+  final String? privacyPolicy;
 
   const LandingPage(
       {required this.id,
@@ -30,7 +32,9 @@ class LandingPage extends Equatable {
       this.createdAt,
       this.lastUpdatedAt,
       this.isDefaultPage,
-      this.isActive});
+      this.isActive,
+      this.impressum,
+      this.privacyPolicy});
 
   LandingPage copyWith(
       {UniqueID? id,
@@ -45,7 +49,9 @@ class LandingPage extends Equatable {
       DateTime? createdAt,
       DateTime? lastUpdatedAt,
       bool? isDefaultPage,
-      bool? isActive}) {
+      bool? isActive,
+      String? impressum,
+      String? privacyPolicy}) {
     return LandingPage(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -59,7 +65,9 @@ class LandingPage extends Equatable {
         createdAt: createdAt ?? this.createdAt,
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
         isDefaultPage: isDefaultPage ?? this.isDefaultPage,
-        isActive: isActive ?? this.isActive);
+        isActive: isActive ?? this.isActive,
+        impressum: impressum ?? this.impressum,
+        privacyPolicy: privacyPolicy ?? this.privacyPolicy);
   }
 
   @override
@@ -73,6 +81,8 @@ class LandingPage extends Equatable {
         description,
         promotionTemplate,
         isDefaultPage,
-        isActive
+        isActive,
+        impressum,
+        privacyPolicy
       ];
 }

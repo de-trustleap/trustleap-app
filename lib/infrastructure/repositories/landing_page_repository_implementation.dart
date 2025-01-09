@@ -152,6 +152,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
+      print("THE ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
@@ -170,7 +171,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> toggleLandingPageActivity(String id, bool isActive, String userId) async {
+  Future<Either<DatabaseFailure, Unit>> toggleLandingPageActivity(
+      String id, bool isActive, String userId) async {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("toggleLandingPageActivity");
     try {
@@ -180,6 +182,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+
   @override
   Future<Either<DatabaseFailure, LandingPage>> getLandingPage(String id) async {
     final landingPagesCollection = firestore.collection("landingPages");

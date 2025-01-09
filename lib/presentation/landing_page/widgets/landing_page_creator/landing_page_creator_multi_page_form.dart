@@ -1,0 +1,174 @@
+import 'dart:typed_data';
+
+import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
+import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/company.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_first_step.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_second_step.dart';
+import 'package:finanzbegleiter/route_paths.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class LandingPageCreatorMultiPageForm extends StatefulWidget {
+  final LandingPage? landingPage;
+  const LandingPageCreatorMultiPageForm({super.key, required this.landingPage});
+
+  @override
+  State<LandingPageCreatorMultiPageForm> createState() =>
+      _LandingPageCreatorMultiPageFormState();
+}
+
+class _LandingPageCreatorMultiPageFormState
+    extends State<LandingPageCreatorMultiPageForm> {
+  int _currentStep = 0;
+  late UniqueID id;
+  Company? company;
+  Uint8List? image;
+  bool imageHasChanged = false;
+  bool showError = false;
+  bool isEditMode = false;
+  bool imageValid = false;
+  String errorMessage = "";
+  LandingPage? landingPage;
+
+  late List<Widget> _steps;
+
+  @override
+  void initState() {
+    super.initState();
+    id = UniqueID();
+
+    isEditMode = widget.landingPage != null;
+    landingPage = widget.landingPage;
+
+    BlocProvider.of<LandingPageCubit>(context).getUser();
+  }
+
+  void _initializeSteps() {
+    _steps = [
+      LandingPageCreatorFirstStep(
+          landingPage: landingPage,
+          onContinue: (landingPage, image) {
+            if (imageValid) {
+              setState(() {
+                this.image = image;
+                this.landingPage = landingPage;
+                _currentStep += 1;
+              });
+            }
+          }),
+      LandingPageCreatorSecondStep(
+          id: id,
+          landingPage: landingPage,
+          image: image,
+          imageHasChanged: imageHasChanged,
+          isEditMode: isEditMode,
+          onSaveTap: (landingPage, image, imageHasChanged, isEditMode) {
+            if (isEditMode) {
+              BlocProvider.of<LandingPageCubit>(context)
+                  .editLandingPage(landingPage, image, imageHasChanged);
+            } else if (image != null) {
+              BlocProvider.of<LandingPageCubit>(context)
+                  .createLandingPage(landingPage, image, imageHasChanged);
+            }
+          },
+          onBack: (landingPage) {
+            setState(() {
+              this.landingPage = landingPage;
+              _currentStep -= 1;
+            });
+          })
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context);
+    _initializeSteps();
+    return MultiBlocListener(
+        listeners: [
+          BlocListener<LandingPageCubit, LandingPageState>(
+              listener: (context, state) {
+            if (state is CreatedLandingPageSuccessState) {
+              showError = false;
+              const params = "?createdNewPage=true";
+              CustomNavigator.navigate(
+                  RoutePaths.homePath + RoutePaths.landingPagePath + params);
+            } else if (state is EditLandingPageSuccessState) {
+              showError = false;
+              const params = "?editedPage=true";
+              CustomNavigator.navigate(
+                  RoutePaths.homePath + RoutePaths.landingPagePath + params);
+            } else if (state is GetUserSuccessState) {
+              showError = false;
+              if (state.user.companyID != null) {
+                BlocProvider.of<CompanyCubit>(context)
+                    .getCompany(state.user.companyID!);
+              }
+            } else if (state is LandingPageNoImageFailureState) {
+              setState(() {
+                imageValid = false;
+              });
+            } else if (state
+                is LandingPageImageExceedsFileSizeLimitFailureState) {
+              setState(() {
+                imageValid = false;
+              });
+            } else if (state is LandingPageImageValid) {
+              setState(() {
+                imageValid = true;
+              });
+            } else if (state is CreateLandingPageFailureState) {
+              setState(() {
+                showError = true;
+                errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                    state.failure, localization);
+              });
+            } else if (state is EditLandingPageFailureState) {
+              setState(() {
+                showError = true;
+                errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                    state.failure, localization);
+              });
+            } else {
+              showError = false;
+            }
+          }),
+          BlocListener<CompanyCubit, CompanyState>(listener: (context, state) {
+            if (state is GetCompanySuccessState) {
+              setState(() {
+                company = state.company;
+              });
+            }
+          })
+        ],
+        child: BlocBuilder<LandingPageCubit, LandingPageState>(
+          builder: (context, state) {
+            print("THE STATE: $state");
+            return ListView(children: [
+              _steps[_currentStep],
+              if (state is EditLandingPageLoadingState ||
+                  state is CreateLandingPageLoadingState) ...[
+                const SizedBox(height: 20),
+                const LoadingIndicator()
+              ],
+              if (errorMessage.isNotEmpty && showError == true) ...[
+                const SizedBox(height: 20),
+                CenteredConstrainedWrapper(
+                    child: FormErrorView(message: errorMessage))
+              ]
+            ]);
+          },
+        ));
+  }
+}
+// TODO: EDIT FUNKTIONIERT NICHT!
+// TODO: COMPANY IMAGE WIRD NICHT BERÜCKSICHTIGT!

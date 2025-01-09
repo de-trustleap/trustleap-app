@@ -23,4 +23,20 @@ class LandingPageCreatorFormValidator {
       return null;
     }
   }
+
+  String? validateLandingPageImpressum(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Bitte Impressum angeben";
+    } else {
+      return null;
+    }
+  }
+
+  String? validateLandingPagePrivacyPolicy(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Bitte Datenschutzerklärung angeben";
+    } else {
+      return null;
+    }
+  }
 }
