@@ -39,4 +39,12 @@ class LandingPageCreatorFormValidator {
       return null;
     }
   }
+
+  String? validateLandingPageInitialInformation(String? input) {
+    if (input == null || input.isEmpty) {
+      return "Bitte Erstinformation angeben";
+    } else {
+      return null;
+    }
+  }
 }

@@ -98,6 +98,7 @@ class _LandingPageCreatorFormState
           promotionTemplate: promotionTemplateText,
           impressum: widget.landingPage?.impressum,
           privacyPolicy: widget.landingPage?.privacyPolicy,
+          initialInformation: widget.landingPage?.initialInformation,
           ownerID: user!.id));
     } else {
       validationHasError = true;

@@ -107,6 +107,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "promotionTemplate": landingPageModel.promotionTemplate,
         "impressum": landingPage.impressum,
         "privacyPolicy": landingPage.privacyPolicy,
+        "initialInformation": landingPage.initialInformation,
         "ownerID": landingPageModel.ownerID,
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged,
@@ -148,7 +149,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "promotionTemplate": landingPage.promotionTemplate,
         "impressum": landingPage.impressum,
         "privacyPolicy": landingPage.privacyPolicy,
-        //     "initialInformation":
+        "initialInformation": landingPage.initialInformation,
         "ownerID": landingPage.ownerID?.value,
         "imageData": imageData != null ? base64Encode(imageData) : null,
         "imageHasChanged": imageHasChanged,

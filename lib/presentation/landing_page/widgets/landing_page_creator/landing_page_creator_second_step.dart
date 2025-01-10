@@ -43,6 +43,7 @@ class _LandingPageCreatorSecondStepState
     extends State<LandingPageCreatorSecondStep> {
   final impressumTextController = TextEditingController();
   final privacyPolicyTextController = TextEditingController();
+  final initialInformationTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool validationHasError = false;
@@ -53,12 +54,16 @@ class _LandingPageCreatorSecondStepState
 
     impressumTextController.text = widget.landingPage?.impressum ?? "";
     privacyPolicyTextController.text = widget.landingPage?.privacyPolicy ?? "";
+    initialInformationTextController.text =
+        widget.landingPage?.initialInformation ?? "";
   }
 
   @override
   void didUpdateWidget(covariant LandingPageCreatorSecondStep oldWidget) {
     impressumTextController.text = widget.landingPage?.impressum ?? "";
     privacyPolicyTextController.text = widget.landingPage?.privacyPolicy ?? "";
+    initialInformationTextController.text =
+        widget.landingPage?.initialInformation ?? "";
 
     super.didUpdateWidget(oldWidget);
   }
@@ -67,6 +72,7 @@ class _LandingPageCreatorSecondStepState
   void dispose() {
     impressumTextController.dispose();
     privacyPolicyTextController.dispose();
+    initialInformationTextController.dispose();
 
     super.dispose();
   }
@@ -78,7 +84,8 @@ class _LandingPageCreatorSecondStepState
           widget.landingPage!.copyWith(
               id: widget.id,
               impressum: impressumTextController.text.trim(),
-              privacyPolicy: privacyPolicyTextController.text.trim()),
+              privacyPolicy: privacyPolicyTextController.text.trim(),
+              initialInformation: initialInformationTextController.text.trim()),
           widget.image,
           widget.imageHasChanged,
           widget.isEditMode);
@@ -143,6 +150,21 @@ class _LandingPageCreatorSecondStepState
                                   placeholder: "Datenschutzerklärung",
                                   validator: validator
                                       .validateLandingPagePrivacyPolicy,
+                                  minLines: 5,
+                                  maxLines: 10,
+                                  keyboardType: TextInputType.multiline)
+                            ]),
+                        const SizedBox(height: textFieldSpacing),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FormTextfield(
+                                  maxWidth: maxWidth,
+                                  controller: initialInformationTextController,
+                                  disabled: false,
+                                  placeholder: "Erstinformation",
+                                  validator: validator
+                                      .validateLandingPageInitialInformation,
                                   minLines: 5,
                                   maxLines: 10,
                                   keyboardType: TextInputType.multiline)
