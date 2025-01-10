@@ -20,6 +20,7 @@ class LandingPageCreatorSecondStep extends StatefulWidget {
   final bool isEditMode;
   final Uint8List? image;
   final bool imageHasChanged;
+  final bool buttonsDisabled;
   final Function(LandingPage, Uint8List?, bool, bool) onSaveTap;
   final Function(LandingPage) onBack;
   const LandingPageCreatorSecondStep(
@@ -29,6 +30,7 @@ class LandingPageCreatorSecondStep extends StatefulWidget {
       required this.isEditMode,
       required this.image,
       required this.imageHasChanged,
+      required this.buttonsDisabled,
       required this.onSaveTap,
       required this.onBack});
 
@@ -54,6 +56,14 @@ class _LandingPageCreatorSecondStepState
   }
 
   @override
+  void didUpdateWidget(covariant LandingPageCreatorSecondStep oldWidget) {
+    impressumTextController.text = widget.landingPage?.impressum ?? "";
+    privacyPolicyTextController.text = widget.landingPage?.privacyPolicy ?? "";
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     impressumTextController.dispose();
     privacyPolicyTextController.dispose();
@@ -66,6 +76,7 @@ class _LandingPageCreatorSecondStepState
       validationHasError = false;
       widget.onSaveTap(
           widget.landingPage!.copyWith(
+              id: widget.id,
               impressum: impressumTextController.text.trim(),
               privacyPolicy: privacyPolicyTextController.text.trim()),
           widget.image,
@@ -146,6 +157,7 @@ class _LandingPageCreatorSecondStepState
                               ResponsiveRowColumnItem(
                                 child: SecondaryButton(
                                     title: "Zurück",
+                                    disabled: widget.buttonsDisabled,
                                     width: responsiveValue.isMobile
                                         ? maxWidth - textFieldSpacing
                                         : maxWidth / 2 - textFieldSpacing,
@@ -163,6 +175,7 @@ class _LandingPageCreatorSecondStepState
                                           ? "Landingpage anpassen"
                                           : localization
                                               .landingpage_create_buttontitle,
+                                      disabled: widget.buttonsDisabled,
                                       width: responsiveValue.isMobile
                                           ? maxWidth - textFieldSpacing
                                           : maxWidth / 2 - textFieldSpacing,

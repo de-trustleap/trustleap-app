@@ -52,7 +52,6 @@ class _LandingPageCreatorFormState
   void initState() {
     super.initState();
     BlocProvider.of<LandingPageCubit>(context).getUser();
-
     if (widget.landingPage != null) {
       nameTextController.text = widget.landingPage?.name ?? "";
       descriptionTextController.text = widget.landingPage?.description ?? "";
@@ -97,6 +96,8 @@ class _LandingPageCreatorFormState
           name: nameTextController.text.trim(),
           description: descriptionTextController.text.trim(),
           promotionTemplate: promotionTemplateText,
+          impressum: widget.landingPage?.impressum,
+          privacyPolicy: widget.landingPage?.privacyPolicy,
           ownerID: user!.id));
     } else {
       validationHasError = true;

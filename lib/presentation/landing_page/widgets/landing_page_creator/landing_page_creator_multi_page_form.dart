@@ -36,6 +36,7 @@ class _LandingPageCreatorMultiPageFormState
   bool showError = false;
   bool isEditMode = false;
   bool imageValid = false;
+  bool lastFormButtonsDisabled = false;
   String errorMessage = "";
   LandingPage? landingPage;
 
@@ -66,10 +67,11 @@ class _LandingPageCreatorMultiPageFormState
             }
           }),
       LandingPageCreatorSecondStep(
-          id: id,
+          id: isEditMode ? (widget.landingPage?.id ?? UniqueID()) : id,
           landingPage: landingPage,
           image: image,
           imageHasChanged: imageHasChanged,
+          buttonsDisabled: lastFormButtonsDisabled,
           isEditMode: isEditMode,
           onSaveTap: (landingPage, image, imageHasChanged, isEditMode) {
             if (isEditMode) {
@@ -131,12 +133,19 @@ class _LandingPageCreatorMultiPageFormState
                 showError = true;
                 errorMessage = DatabaseFailureMapper.mapFailureMessage(
                     state.failure, localization);
+                lastFormButtonsDisabled = false;
               });
             } else if (state is EditLandingPageFailureState) {
               setState(() {
                 showError = true;
                 errorMessage = DatabaseFailureMapper.mapFailureMessage(
                     state.failure, localization);
+                lastFormButtonsDisabled = false;
+              });
+            } else if (state is CreateLandingPageLoadingState ||
+                state is EditLandingPageLoadingState) {
+              setState(() {
+                lastFormButtonsDisabled = true;
               });
             } else {
               showError = false;
@@ -152,7 +161,6 @@ class _LandingPageCreatorMultiPageFormState
         ],
         child: BlocBuilder<LandingPageCubit, LandingPageState>(
           builder: (context, state) {
-            print("THE STATE: $state");
             return ListView(children: [
               _steps[_currentStep],
               if (state is EditLandingPageLoadingState ||
@@ -170,5 +178,5 @@ class _LandingPageCreatorMultiPageFormState
         ));
   }
 }
-// TODO: EDIT FUNKTIONIERT NICHT!
 // TODO: COMPANY IMAGE WIRD NICHT BERÜCKSICHTIGT!
+// TODO: INITIALINFORMATION FELD HINZUFÜGEN!

@@ -105,6 +105,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "name": landingPageModel.name,
         "description": landingPageModel.description,
         "promotionTemplate": landingPageModel.promotionTemplate,
+        "impressum": landingPage.impressum,
+        "privacyPolicy": landingPage.privacyPolicy,
         "ownerID": landingPageModel.ownerID,
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged,
@@ -144,6 +146,9 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "title": landingPage.name,
         "description": landingPage.description,
         "promotionTemplate": landingPage.promotionTemplate,
+        "impressum": landingPage.impressum,
+        "privacyPolicy": landingPage.privacyPolicy,
+        //     "initialInformation":
         "ownerID": landingPage.ownerID?.value,
         "imageData": imageData != null ? base64Encode(imageData) : null,
         "imageHasChanged": imageHasChanged,
@@ -152,7 +157,6 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
-      print("THE ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

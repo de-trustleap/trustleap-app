@@ -78,7 +78,6 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
 
