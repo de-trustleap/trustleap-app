@@ -11,6 +11,7 @@ class AppTheme {
   static const Color lightSecondaryColor = Color(0xfff07f5e);
   static const Color lightErrorColor = Colors.red;
   static const Color lightErrorContainerColor = Color(0xffFAADA8);
+  static const Color lightBackgroundContrastColor = Color(0xffebebeb);
 
   static const Color darkPrimaryColor = Color(0xff3fb488);
   static const Color darkBackgroundColor = Color(0xff252E42);
@@ -20,6 +21,7 @@ class AppTheme {
   static const Color darkSecondaryColor = Color(0xfff07f5e);
   static const Color darkErrorColor = Color(0xffFF8D8E);
   static const Color darkErrorContainerColor = Color(0xff503035);
+  static const Color darkBackgroundContrastColor = Color(0xffebebeb);
   static const String fontFamily = "Poppins";
 
   static const TextStyle lightHeadlineLargeText = TextStyle(
@@ -343,4 +345,14 @@ class AppTheme {
       trackOutlineWidth: const WidgetStatePropertyAll(0),
       overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       splashRadius: 0);
+
+  static final ProgressIndicatorThemeData lightProgressIndicatorTheme =
+      const ProgressIndicatorThemeData(
+          color: lightSecondaryColor,
+          linearTrackColor: lightBackgroundContrastColor);
+
+  static final ProgressIndicatorThemeData darkProgressIndicatorTheme =
+      const ProgressIndicatorThemeData(
+          color: darkSecondaryColor,
+          linearTrackColor: darkBackgroundContrastColor);
 }

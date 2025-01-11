@@ -12,10 +12,12 @@ import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrai
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_first_step.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_progress_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_second_step.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorMultiPageForm extends StatefulWidget {
   final LandingPage? landingPage;
@@ -37,6 +39,7 @@ class _LandingPageCreatorMultiPageFormState
   bool isEditMode = false;
   bool imageValid = false;
   bool lastFormButtonsDisabled = false;
+  double progress = 0.0;
   String errorMessage = "";
   LandingPage? landingPage;
 
@@ -57,12 +60,14 @@ class _LandingPageCreatorMultiPageFormState
     _steps = [
       LandingPageCreatorFirstStep(
           landingPage: landingPage,
+          company: company,
           onContinue: (landingPage, image) {
             if (imageValid) {
               setState(() {
                 this.image = image;
                 this.landingPage = landingPage;
                 _currentStep += 1;
+                progress = 1 / _steps.length;
               });
             }
           }),
@@ -86,6 +91,7 @@ class _LandingPageCreatorMultiPageFormState
             setState(() {
               this.landingPage = landingPage;
               _currentStep -= 1;
+              progress = 0 / _steps.length;
             });
           })
     ];
@@ -94,6 +100,7 @@ class _LandingPageCreatorMultiPageFormState
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
     _initializeSteps();
     return MultiBlocListener(
         listeners: [
@@ -163,6 +170,10 @@ class _LandingPageCreatorMultiPageFormState
           builder: (context, state) {
             return ListView(children: [
               _steps[_currentStep],
+              const SizedBox(height: 20),
+              LandingPageCreatorProgressIndicator(
+                  progress: progress, elementsTotal: _steps.length),
+              SizedBox(height: responsiveValue.isMobile ? 50 : 100),
               if (state is EditLandingPageLoadingState ||
                   state is CreateLandingPageLoadingState) ...[
                 const SizedBox(height: 20),
@@ -178,4 +189,5 @@ class _LandingPageCreatorMultiPageFormState
         ));
   }
 }
-// TODO: COMPANY IMAGE WIRD NICHT BERÜCKSICHTIGT!
+// TODO: WENN ICH VON SCHRITT 2 ZU 1 ZURÜCKGEHE UND DAS COMPANY IMAGE HABE UND DANN WEITER GEHEN WILL BEKOMME ICH DEN NO IMAGE FEHLER!
+// TODO: TRANSITION ANIMATIONEN HINZUFÜGEN

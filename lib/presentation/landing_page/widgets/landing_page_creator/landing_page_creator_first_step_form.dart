@@ -120,28 +120,7 @@ class _LandingPageCreatorFormState
       listener: (context, state) {
         if (state is GetUserSuccessState) {
           user = state.user;
-        } else if (state
-            is LandingPageImageValid) {} /*else if (state is CreateLandingPageFailureState) {
-          setState(() {
-            showError = true;
-            errorMessage = DatabaseFailureMapper.mapFailureMessage(
-                state.failure, localization);
-          });
-          setButtonToDisabled(false);
-        } else if (state is EditLandingPageFailureState) {
-          setState(() {
-            showError = true;
-            errorMessage = DatabaseFailureMapper.mapFailureMessage(
-                state.failure, localization);
-          });
-          setButtonToDisabled(false);
-        } else if (state is CreatedLandingPageSuccessState ||
-            state is EditLandingPageSuccessState) {
-          setButtonToDisabled(false);
-        } else if (state is CreateLandingPageLoadingState ||
-            state is EditLandingPageLoadingState) {
-          setButtonToDisabled(true);
-        } */
+        }
       },
       builder: (context, state) {
         if (state is GetUserFailureState) {

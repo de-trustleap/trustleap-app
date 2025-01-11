@@ -60,10 +60,17 @@ class _LandingPageCreatorSecondStepState
 
   @override
   void didUpdateWidget(covariant LandingPageCreatorSecondStep oldWidget) {
-    impressumTextController.text = widget.landingPage?.impressum ?? "";
-    privacyPolicyTextController.text = widget.landingPage?.privacyPolicy ?? "";
-    initialInformationTextController.text =
-        widget.landingPage?.initialInformation ?? "";
+    if (impressumTextController.text == "") {
+      impressumTextController.text = widget.landingPage?.impressum ?? "";
+    }
+    if (privacyPolicyTextController.text == "") {
+      privacyPolicyTextController.text =
+          widget.landingPage?.privacyPolicy ?? "";
+    }
+    if (initialInformationTextController.text == "") {
+      initialInformationTextController.text =
+          widget.landingPage?.initialInformation ?? "";
+    }
 
     super.didUpdateWidget(oldWidget);
   }

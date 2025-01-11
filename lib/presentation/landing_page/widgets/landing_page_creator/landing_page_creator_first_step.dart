@@ -14,9 +14,10 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorFirstStep extends StatefulWidget {
   final LandingPage? landingPage;
+  final Company? company;
   final Function(LandingPage, Uint8List?) onContinue;
   const LandingPageCreatorFirstStep(
-      {super.key, this.landingPage, required this.onContinue});
+      {super.key, this.company, this.landingPage, required this.onContinue});
 
   @override
   State<LandingPageCreatorFirstStep> createState() =>
@@ -25,7 +26,6 @@ class LandingPageCreatorFirstStep extends StatefulWidget {
 
 class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
   late UniqueID id;
-  Company? company;
   Uint8List? image;
   bool imageHasChanged = false;
   bool showError = false;
@@ -48,7 +48,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
 
   void onSubmitCreate(LandingPage? landingPage, Function completion,
       AppLocalizations localization) {
-    if (image != null || company?.companyImageDownloadURL != null) {
+    if (image != null || widget.company?.companyImageDownloadURL != null) {
       setState(() {
         showError = false;
       });
@@ -108,7 +108,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
           LandingPageCreatorImageSection(
               id: id,
               landingPage: widget.landingPage,
-              company: company,
+              company: widget.company,
               imageSelected: (tempImage) {
                 image = tempImage;
                 imageHasChanged = true;
@@ -127,7 +127,6 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
             CenteredConstrainedWrapper(
                 child: FormErrorView(message: errorMessage))
           ],
-          SizedBox(height: responsiveValue.isMobile ? 50 : 100)
         ]));
   }
 }
