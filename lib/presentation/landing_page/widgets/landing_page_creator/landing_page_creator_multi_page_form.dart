@@ -10,7 +10,6 @@ import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_first_step.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_progress_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_second_step.dart';
@@ -39,6 +38,7 @@ class _LandingPageCreatorMultiPageFormState
   bool isEditMode = false;
   bool imageValid = false;
   bool lastFormButtonsDisabled = false;
+  bool isLoading = false;
   double progress = 0.0;
   String errorMessage = "";
   LandingPage? landingPage;
@@ -60,6 +60,7 @@ class _LandingPageCreatorMultiPageFormState
     _steps = [
       LandingPageCreatorFirstStep(
           landingPage: landingPage,
+          isEditMode: isEditMode,
           company: company,
           onContinue: (landingPage, image) {
             if (imageValid) {
@@ -77,6 +78,7 @@ class _LandingPageCreatorMultiPageFormState
           image: image,
           imageHasChanged: imageHasChanged,
           buttonsDisabled: lastFormButtonsDisabled,
+          isLoading: isLoading,
           isEditMode: isEditMode,
           onSaveTap: (landingPage, image, imageHasChanged, isEditMode) {
             if (isEditMode) {
@@ -153,6 +155,7 @@ class _LandingPageCreatorMultiPageFormState
                 state is EditLandingPageLoadingState) {
               setState(() {
                 lastFormButtonsDisabled = true;
+                isLoading = true;
               });
             } else {
               showError = false;
@@ -174,11 +177,6 @@ class _LandingPageCreatorMultiPageFormState
               LandingPageCreatorProgressIndicator(
                   progress: progress, elementsTotal: _steps.length),
               SizedBox(height: responsiveValue.isMobile ? 50 : 100),
-              if (state is EditLandingPageLoadingState ||
-                  state is CreateLandingPageLoadingState) ...[
-                const SizedBox(height: 20),
-                const LoadingIndicator()
-              ],
               if (errorMessage.isNotEmpty && showError == true) ...[
                 const SizedBox(height: 20),
                 CenteredConstrainedWrapper(
@@ -189,5 +187,5 @@ class _LandingPageCreatorMultiPageFormState
         ));
   }
 }
-// TODO: WENN ICH VON SCHRITT 2 ZU 1 ZURÜCKGEHE UND DAS COMPANY IMAGE HABE UND DANN WEITER GEHEN WILL BEKOMME ICH DEN NO IMAGE FEHLER!
-// TODO: TRANSITION ANIMATIONEN HINZUFÜGEN
+// TODO: LOCALIZATIONS
+// TODO: TESTS

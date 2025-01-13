@@ -15,9 +15,14 @@ import 'package:responsive_framework/responsive_framework.dart';
 class LandingPageCreatorFirstStep extends StatefulWidget {
   final LandingPage? landingPage;
   final Company? company;
+  final bool isEditMode;
   final Function(LandingPage, Uint8List?) onContinue;
   const LandingPageCreatorFirstStep(
-      {super.key, this.company, this.landingPage, required this.onContinue});
+      {super.key,
+      this.company,
+      this.landingPage,
+      required this.isEditMode,
+      required this.onContinue});
 
   @override
   State<LandingPageCreatorFirstStep> createState() =>
@@ -108,6 +113,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
           LandingPageCreatorImageSection(
               id: id,
               landingPage: widget.landingPage,
+              isEditMode: widget.isEditMode,
               company: widget.company,
               imageSelected: (tempImage) {
                 image = tempImage;

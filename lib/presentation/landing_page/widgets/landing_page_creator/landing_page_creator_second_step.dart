@@ -21,6 +21,7 @@ class LandingPageCreatorSecondStep extends StatefulWidget {
   final Uint8List? image;
   final bool imageHasChanged;
   final bool buttonsDisabled;
+  final bool isLoading;
   final Function(LandingPage, Uint8List?, bool, bool) onSaveTap;
   final Function(LandingPage) onBack;
   const LandingPageCreatorSecondStep(
@@ -31,6 +32,7 @@ class LandingPageCreatorSecondStep extends StatefulWidget {
       required this.image,
       required this.imageHasChanged,
       required this.buttonsDisabled,
+      required this.isLoading,
       required this.onSaveTap,
       required this.onBack});
 
@@ -205,6 +207,7 @@ class _LandingPageCreatorSecondStepState
                                           : localization
                                               .landingpage_create_buttontitle,
                                       disabled: widget.buttonsDisabled,
+                                      isLoading: widget.isLoading,
                                       width: responsiveValue.isMobile
                                           ? maxWidth - textFieldSpacing
                                           : maxWidth / 2 - textFieldSpacing,
