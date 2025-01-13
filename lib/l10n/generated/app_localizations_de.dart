@@ -214,7 +214,39 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_validate_LandingPageText => 'Bitte Text eingeben!';
 
   @override
+  String get landingpage_validate_impressum => 'Bitte Impressum angeben';
+
+  @override
+  String get landingpage_validate_privacy_policy => 'Bitte Datenschutzerklärung angeben';
+
+  @override
+  String get landingpage_validate_initial_information => 'Bitte Erstinformation angeben';
+
+  @override
+  String landingpage_creation_progress_indicator_text(int currentStep, int elementsTotal) {
+    return 'Schritt $currentStep von $elementsTotal';
+  }
+
+  @override
+  String get landingpage_creation_impressum_placeholder => 'Impressum';
+
+  @override
+  String get landingpage_creation_privacy_policy_placeholder => 'Datenschutzerklärung';
+
+  @override
+  String get landingpage_creation_initial_information_placeholder => 'Erstinformation';
+
+  @override
+  String get landingpage_creation_back_button_text => 'Zurück';
+
+  @override
+  String get landingpage_creation_edit_button_text => 'Landingpage anpassen';
+
+  @override
   String get landingpage_create_txt => 'Landingpage erstellen';
+
+  @override
+  String get landingpage_creation_continue => 'Weiter';
 
   @override
   String get landingpage_create_promotion_template_description => 'Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter \$name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.';

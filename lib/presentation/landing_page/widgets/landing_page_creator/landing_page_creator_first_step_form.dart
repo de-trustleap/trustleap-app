@@ -226,7 +226,8 @@ class _LandingPageCreatorFormState
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             PrimaryButton(
-                                title: "Weiter",
+                                title:
+                                    localization.landingpage_creation_continue,
                                 disabled: buttonDisabled,
                                 isLoading:
                                     state is CreateLandingPageLoadingState ||

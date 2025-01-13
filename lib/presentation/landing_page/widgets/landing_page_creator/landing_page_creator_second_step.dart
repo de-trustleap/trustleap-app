@@ -141,7 +141,8 @@ class _LandingPageCreatorSecondStepState
                                   maxWidth: maxWidth,
                                   controller: impressumTextController,
                                   disabled: false,
-                                  placeholder: "Impressum",
+                                  placeholder: localization
+                                      .landingpage_creation_impressum_placeholder,
                                   validator:
                                       validator.validateLandingPageImpressum,
                                   minLines: 5,
@@ -156,7 +157,8 @@ class _LandingPageCreatorSecondStepState
                                   maxWidth: maxWidth,
                                   controller: privacyPolicyTextController,
                                   disabled: false,
-                                  placeholder: "Datenschutzerklärung",
+                                  placeholder: localization
+                                      .landingpage_creation_privacy_policy_placeholder,
                                   validator: validator
                                       .validateLandingPagePrivacyPolicy,
                                   minLines: 5,
@@ -171,7 +173,8 @@ class _LandingPageCreatorSecondStepState
                                   maxWidth: maxWidth,
                                   controller: initialInformationTextController,
                                   disabled: false,
-                                  placeholder: "Erstinformation",
+                                  placeholder: localization
+                                      .landingpage_creation_initial_information_placeholder,
                                   validator: validator
                                       .validateLandingPageInitialInformation,
                                   minLines: 5,
@@ -187,7 +190,8 @@ class _LandingPageCreatorSecondStepState
                             children: [
                               ResponsiveRowColumnItem(
                                 child: SecondaryButton(
-                                    title: "Zurück",
+                                    title: localization
+                                        .landingpage_creation_back_button_text,
                                     disabled: widget.buttonsDisabled,
                                     width: responsiveValue.isMobile
                                         ? maxWidth - textFieldSpacing
@@ -203,7 +207,8 @@ class _LandingPageCreatorSecondStepState
                               ResponsiveRowColumnItem(
                                   child: PrimaryButton(
                                       title: widget.isEditMode
-                                          ? "Landingpage anpassen"
+                                          ? localization
+                                              .landingpage_creation_edit_button_text
                                           : localization
                                               .landingpage_create_buttontitle,
                                       disabled: widget.buttonsDisabled,

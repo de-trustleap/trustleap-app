@@ -26,7 +26,7 @@ class LandingPageCreatorFormValidator {
 
   String? validateLandingPageImpressum(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte Impressum angeben";
+      return localization.landingpage_validate_impressum;
     } else {
       return null;
     }
@@ -34,7 +34,7 @@ class LandingPageCreatorFormValidator {
 
   String? validateLandingPagePrivacyPolicy(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte Datenschutzerklärung angeben";
+      return localization.landingpage_validate_privacy_policy;
     } else {
       return null;
     }
@@ -42,9 +42,10 @@ class LandingPageCreatorFormValidator {
 
   String? validateLandingPageInitialInformation(String? input) {
     if (input == null || input.isEmpty) {
-      return "Bitte Erstinformation angeben";
+      return localization.landingpage_validate_initial_information;
     } else {
       return null;
     }
   }
 }
+// TODO: TESTS HINZUFÜGEN

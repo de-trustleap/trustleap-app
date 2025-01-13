@@ -509,11 +509,71 @@ abstract class AppLocalizations {
   /// **'Please enter text!'**
   String get landingpage_validate_LandingPageText;
 
+  /// Validation message for landingpage impressum
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter impressum'**
+  String get landingpage_validate_impressum;
+
+  /// Validation message for Llandingpage privacy policy
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter privacy policy'**
+  String get landingpage_validate_privacy_policy;
+
+  /// Validation message for Llandingpage inital information
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter initial information'**
+  String get landingpage_validate_initial_information;
+
+  /// Text under the Progress Indicator in Landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Step {currentStep} of {elementsTotal}'**
+  String landingpage_creation_progress_indicator_text(int currentStep, int elementsTotal);
+
+  /// Placeholder for impressum in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Impressum'**
+  String get landingpage_creation_impressum_placeholder;
+
+  /// Placeholder for privacy policy in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get landingpage_creation_privacy_policy_placeholder;
+
+  /// Placeholder for initial information in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Initial information'**
+  String get landingpage_creation_initial_information_placeholder;
+
+  /// Title for Back Button in Landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get landingpage_creation_back_button_text;
+
+  /// Title for Landingpage edit Button in Landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Landingpage'**
+  String get landingpage_creation_edit_button_text;
+
   /// Text for Creating Landing Page
   ///
   /// In en, this message translates to:
   /// **'Create Landing Page'**
   String get landingpage_create_txt;
+
+  /// Text for continue Button in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get landingpage_creation_continue;
 
   /// Description for the promotion template textfield on the create landingpage form
   ///

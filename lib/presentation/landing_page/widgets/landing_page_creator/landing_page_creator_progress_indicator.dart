@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class LandingPageCreatorProgressIndicator extends StatelessWidget {
@@ -9,6 +10,7 @@ class LandingPageCreatorProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     final int currentStep = (progress * elementsTotal).ceil() + 1;
 
     return Container(
@@ -22,7 +24,9 @@ class LandingPageCreatorProgressIndicator extends StatelessWidget {
                   width: 600, child: LinearProgressIndicator(value: progress)),
             ),
             const SizedBox(height: 8),
-            Text("Schritt $currentStep von $elementsTotal",
+            Text(
+                localization.landingpage_creation_progress_indicator_text(
+                    currentStep, elementsTotal),
                 style: themeData.textTheme.bodyMedium)
           ],
         ));

@@ -91,7 +91,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
           if (state is LandingPageNoImageFailureState) {
             setState(() {
               showError = true;
-              errorMessage = "Bitte ein Bild hochladen";
+              errorMessage = localization.error_msg_pleace_upload_picture;
             });
           } else if (state
               is LandingPageImageExceedsFileSizeLimitFailureState) {
