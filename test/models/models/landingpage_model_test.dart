@@ -36,7 +36,10 @@ void main() {
           lastUpdatedAt: lastUpdated,
           isDefaultPage: false,
           createdAt: Timestamp(100000, 0),
-          isActive: true);
+          isActive: true,
+          impressum: "Test",
+          privacyPolicy: "Test",
+          initialInformation: "Test");
 
       final expectedResult = {
         "id": "1",
@@ -51,7 +54,10 @@ void main() {
         "lastUpdatedAt": lastUpdated,
         "isDefaultPage": false,
         "createdAt": Timestamp(100000, 0),
-        "isActive": true
+        "isActive": true,
+        "impressum": "Test",
+        "privacyPolicy": "Test",
+        "initialInformation": "Test"
       };
       // When
       final result = model.toMap();

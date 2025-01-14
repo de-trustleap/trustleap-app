@@ -105,6 +105,9 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "name": landingPageModel.name,
         "description": landingPageModel.description,
         "promotionTemplate": landingPageModel.promotionTemplate,
+        "impressum": landingPage.impressum,
+        "privacyPolicy": landingPage.privacyPolicy,
+        "initialInformation": landingPage.initialInformation,
         "ownerID": landingPageModel.ownerID,
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged,
@@ -144,6 +147,9 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "title": landingPage.name,
         "description": landingPage.description,
         "promotionTemplate": landingPage.promotionTemplate,
+        "impressum": landingPage.impressum,
+        "privacyPolicy": landingPage.privacyPolicy,
+        "initialInformation": landingPage.initialInformation,
         "ownerID": landingPage.ownerID?.value,
         "imageData": imageData != null ? base64Encode(imageData) : null,
         "imageHasChanged": imageHasChanged,
@@ -170,7 +176,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> toggleLandingPageActivity(String id, bool isActive, String userId) async {
+  Future<Either<DatabaseFailure, Unit>> toggleLandingPageActivity(
+      String id, bool isActive, String userId) async {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("toggleLandingPageActivity");
     try {
@@ -180,6 +187,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+
   @override
   Future<Either<DatabaseFailure, LandingPage>> getLandingPage(String id) async {
     final landingPagesCollection = firestore.collection("landingPages");

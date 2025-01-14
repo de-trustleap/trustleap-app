@@ -276,9 +276,59 @@
     "@landingpage_validate_LandingPageText": {
         "description": "Validierungsnachricht für LandingPageText"
     },
+    "landingpage_validate_impressum": "Bitte Impressum angeben",
+    "@landingpage_validate_impressum": {
+        "description": "Validierungsnachricht für Landingpage Impressum"
+    },
+    "landingpage_validate_privacy_policy": "Bitte Datenschutzerklärung angeben",
+    "@landingpage_validate_privacy_policy": {
+        "description": "Validierungsnachricht für Landingpage Datenschutzerklärung"
+    },
+    "landingpage_validate_initial_information": "Bitte Erstinformation angeben",
+    "@landingpage_validate_initial_information": {
+        "description": "Validierungsnachricht für Landingpage Erstinformation"
+    },
+    "landingpage_creation_progress_indicator_text": "Schritt {currentStep} von {elementsTotal}",
+    "@landingpage_creation_progress_indicator_text": {
+        "description": "Text unter dem Progress Indicator beim Landingpage Erstellen Formular",
+        "placeholders": {
+            "currentStep": {
+                "type": "int",
+                "example": "1"
+            },
+            "elementsTotal": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "landingpage_creation_impressum_placeholder": "Impressum",
+    "@landingpage_creation_impressum_placeholder": {
+        "description": "Platzhalter für Impressum im Landingpage Erstellen Formular"
+    },
+    "landingpage_creation_privacy_policy_placeholder": "Datenschutzerklärung",
+    "@landingpage_creation_privacy_policy_placeholder": {
+        "description": "Platzhalter für Datenschutzerklärung im Landingpage Erstellen Formular"
+    },
+    "landingpage_creation_initial_information_placeholder": "Erstinformation",
+    "@landingpage_creation_initial_information_placeholder": {
+        "description": "Platzhalter für Erstinformation im Landingpage Erstellen Formular"
+    },
+    "landingpage_creation_back_button_text": "Zurück",
+    "@landingpage_creation_back_button_text": {
+        "description": "Titel für Zurück Button im Landingpage Erstellen Formular"
+    },
+    "landingpage_creation_edit_button_text": "Landingpage anpassen",
+    "@landingpage_creation_edit_button_text": {
+        "description": "Titel für Landingpage anpassen Button im Landingpage Erstellen Formular"
+    },
     "landingpage_create_txt": "Landingpage erstellen",
     "@landingpage_create_txt": {
         "description": "Text Landingpage erstellen"
+    },
+    "landingpage_creation_continue": "Weiter",
+    "@landingpage_creation_continue": {
+        "description": "Text für Weiter Button in Landingpage Erstellen Formular"
     },
     "landingpage_create_promotion_template_description": "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter $name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.",
     "@landingpage_create_promotion_template_description": {

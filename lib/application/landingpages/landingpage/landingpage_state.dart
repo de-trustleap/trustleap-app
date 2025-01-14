@@ -104,6 +104,11 @@ class EditLandingPageSuccessState extends LandingPageState with EquatableMixin {
 class LandingPageImageExceedsFileSizeLimitFailureState
     extends LandingPageState {}
 
+class LandingPageImageValid extends LandingPageState with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
 class LandingPageNoImageFailureState extends LandingPageState
     with EquatableMixin {
   @override

@@ -15,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 
 class LandingPageCreatorImageSection extends StatefulWidget {
   final LandingPage? landingPage;
+  final bool isEditMode;
   final UniqueID id;
   final Company? company;
   final Function(Uint8List?) imageSelected;
@@ -22,6 +23,7 @@ class LandingPageCreatorImageSection extends StatefulWidget {
   const LandingPageCreatorImageSection(
       {super.key,
       this.landingPage,
+      required this.isEditMode,
       required this.id,
       this.company,
       required this.imageSelected});
@@ -40,7 +42,7 @@ class _LandingPageCreatorImageSectionState
 
   @override
   void didUpdateWidget(covariant LandingPageCreatorImageSection oldWidget) {
-    if (widget.landingPage == null) {
+    if (!widget.isEditMode) {
       _downloadCompanyImageFromURL();
     }
     super.didUpdateWidget(oldWidget);

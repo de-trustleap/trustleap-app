@@ -86,7 +86,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            CustomNavigator.navigate(
+                            CustomNavigator.pushNamed(
                                 "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
                                 arguments: landingPage);
                           },
