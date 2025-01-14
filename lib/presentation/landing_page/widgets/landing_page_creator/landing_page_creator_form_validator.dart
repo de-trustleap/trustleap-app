@@ -48,4 +48,3 @@ class LandingPageCreatorFormValidator {
     }
   }
 }
-// TODO: TESTS HINZUFÜGEN

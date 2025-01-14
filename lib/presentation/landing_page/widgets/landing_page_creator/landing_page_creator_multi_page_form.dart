@@ -187,5 +187,3 @@ class _LandingPageCreatorMultiPageFormState
         ));
   }
 }
-// TODO: LOCALIZATIONS
-// TODO: TESTS
