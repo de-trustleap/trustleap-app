@@ -13,6 +13,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_e
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_first_step.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_progress_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_second_step.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_third_step.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,13 +81,17 @@ class _LandingPageCreatorMultiPageFormState
           buttonsDisabled: lastFormButtonsDisabled,
           isLoading: isLoading,
           isEditMode: isEditMode,
-          onSaveTap: (landingPage, image, imageHasChanged, isEditMode) {
+          onContinueTapped: (landingPage, image, imageHasChanged, isEditMode) {
             if (isEditMode) {
               BlocProvider.of<LandingPageCubit>(context)
                   .editLandingPage(landingPage, image, imageHasChanged);
             } else if (image != null) {
-              BlocProvider.of<LandingPageCubit>(context)
-                  .createLandingPage(landingPage, image, imageHasChanged);
+              setState(() {
+                this.image = image;
+                this.landingPage = landingPage;
+                _currentStep += 1;
+                progress = 2 / _steps.length;
+              });
             }
           },
           onBack: (landingPage) {
@@ -95,6 +100,25 @@ class _LandingPageCreatorMultiPageFormState
               _currentStep -= 1;
               progress = 0 / _steps.length;
             });
+          }),
+      LandingPageCreatorThirdStep(
+          landingPage: landingPage,
+          image: image,
+          imageHasChanged: imageHasChanged,
+          buttonsDisabled: lastFormButtonsDisabled,
+          isLoading: isLoading,
+          onBack: (landingPage) {
+            setState(() {
+              this.landingPage = landingPage;
+              _currentStep -= 1;
+              progress = 0 / _steps.length;
+            });
+          },
+          onSaveTapped: (landingPage, image, imageHasChanged, templateID) {
+            if (image != null) {
+              BlocProvider.of<LandingPageCubit>(context).createLandingPage(
+                  landingPage, image, imageHasChanged, templateID);
+            }
           })
     ];
   }
@@ -111,6 +135,8 @@ class _LandingPageCreatorMultiPageFormState
             if (state is CreatedLandingPageSuccessState) {
               showError = false;
               const params = "?createdNewPage=true";
+              CustomNavigator.openInNewTab(
+                  "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage?.id.value}");
               CustomNavigator.navigate(
                   RoutePaths.homePath + RoutePaths.landingPagePath + params);
             } else if (state is EditLandingPageSuccessState) {
@@ -156,6 +182,13 @@ class _LandingPageCreatorMultiPageFormState
               setState(() {
                 lastFormButtonsDisabled = true;
                 isLoading = true;
+              });
+            } else if (state is GetLandingPageTemplatesFailureState) {
+              setState(() {
+                showError = true;
+                errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                    state.failure, localization);
+                lastFormButtonsDisabled = false;
               });
             } else {
               showError = false;

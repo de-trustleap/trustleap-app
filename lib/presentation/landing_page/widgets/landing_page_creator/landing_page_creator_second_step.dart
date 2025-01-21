@@ -22,7 +22,7 @@ class LandingPageCreatorSecondStep extends StatefulWidget {
   final bool imageHasChanged;
   final bool buttonsDisabled;
   final bool isLoading;
-  final Function(LandingPage, Uint8List?, bool, bool) onSaveTap;
+  final Function(LandingPage, Uint8List?, bool, bool) onContinueTapped;
   final Function(LandingPage) onBack;
   const LandingPageCreatorSecondStep(
       {super.key,
@@ -33,7 +33,7 @@ class LandingPageCreatorSecondStep extends StatefulWidget {
       required this.imageHasChanged,
       required this.buttonsDisabled,
       required this.isLoading,
-      required this.onSaveTap,
+      required this.onContinueTapped,
       required this.onBack});
 
   @override
@@ -89,7 +89,7 @@ class _LandingPageCreatorSecondStepState
   void submitContinue() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      widget.onSaveTap(
+      widget.onContinueTapped(
           widget.landingPage!.copyWith(
               id: widget.id,
               impressum: impressumTextController.text.trim(),
@@ -101,7 +101,7 @@ class _LandingPageCreatorSecondStepState
     } else {
       validationHasError = true;
       BlocProvider.of<LandingPageCubit>(context)
-          .createLandingPage(null, Uint8List(0), false);
+          .createLandingPage(null, Uint8List(0), false, "");
     }
   }
 
@@ -210,7 +210,7 @@ class _LandingPageCreatorSecondStepState
                                           ? localization
                                               .landingpage_creation_edit_button_text
                                           : localization
-                                              .landingpage_create_buttontitle,
+                                              .landingpage_creation_continue,
                                       disabled: widget.buttonsDisabled,
                                       isLoading: widget.isLoading,
                                       width: responsiveValue.isMobile

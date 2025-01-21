@@ -103,7 +103,7 @@ class _LandingPageCreatorFormState
     } else {
       validationHasError = true;
       BlocProvider.of<LandingPageCubit>(context)
-          .createLandingPage(null, Uint8List(0), false);
+          .createLandingPage(null, Uint8List(0), false, "");
     }
   }
 
@@ -183,7 +183,7 @@ class _LandingPageCreatorFormState
                             style: themeData.textTheme.bodyMedium),
                         const SizedBox(height: textFieldSpacing),
                         if (responsiveValue.isDesktop) ...[
-                          InkWell(
+                          GestureDetector(
                               onTap: () {
                                 setState(() {
                                   _isEmojiPickerExpanded =
