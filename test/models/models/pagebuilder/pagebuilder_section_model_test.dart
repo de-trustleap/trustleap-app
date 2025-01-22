@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_section_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
@@ -18,13 +18,13 @@ void main() {
       final section = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FF35AA55",
+          background: null,
           maxWidth: 300,
           widgets: []);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FF35AA55",
+          background: null,
           maxWidth: 500,
           widgets: []);
       // When
@@ -40,13 +40,12 @@ void main() {
       final model = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FFFFFFFF",
+          background: null,
           maxWidth: 300,
           widgets: []);
       final expectedResult = {
         "id": "1",
         "layout": "column",
-        "backgroundColor": "FFFFFFFF",
         "maxWidth": 300,
         "widgets": []
       };
@@ -63,14 +62,13 @@ void main() {
       final map = {
         "id": "1",
         "layout": "column",
-        "backgroundColor": "FFFFFFFF",
         "maxWidth": 300.0,
         "widgets": []
       };
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FFFFFFFF",
+          background: null,
           maxWidth: 300,
           widgets: []);
       // When
@@ -88,14 +86,14 @@ void main() {
       final model = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "FFFFFFFF",
+          background: null,
           maxWidth: 800,
           widgets: []);
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
-          backgroundColor: Color(0xFFFFFFFF),
+          background: null,
           maxWidth: 800);
       // When
       final result = model.toDomain();
@@ -113,12 +111,12 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
-          backgroundColor: Color(0xFFFFFFFF),
+          background: null,
           maxWidth: 800);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "ffffffff",
+          background: null,
           maxWidth: 800,
           widgets: []);
       // When
@@ -145,7 +143,7 @@ void main() {
               "padding": {"right": 16.0},
               "properties": {
                 "borderRadius": 100.0,
-                "alignment": "centerRight",
+                "contentMode": "cover",
                 "width": 200.0,
                 "height": 200.0,
                 "url":
@@ -155,7 +153,6 @@ void main() {
             {
               "id": "660d39c1-70f7-4eb7-ba8b-41580a17d9a6",
               "elementType": "container",
-              "backgroundColor": "FF333a56",
               "widthPercentage": 50.0,
               "properties": {"borderRadius": 10.0},
               "containerChild": {
@@ -198,13 +195,16 @@ void main() {
                       borderRadius: 100,
                       width: 200,
                       height: 200,
-                      alignment: Alignment.centerRight),
+                      contentMode: BoxFit.cover,
+                      overlayColor: null),
                   children: null,
                   containerChild: null,
                   widthPercentage: 50,
-                  backgroundColor: null,
+                  background: null,
                   padding:
-                      PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 16),
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
+                  margin:
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   maxWidth: null,
                   alignment: null),
               PageBuilderWidget(
@@ -224,6 +224,8 @@ void main() {
                           fontSize: 18,
                           fontFamily: "Merriweather",
                           lineHeight: null,
+                          letterSpacing: null,
+                          textShadow: null,
                           color: Color(0xFFFFFFFF),
                           alignment: TextAlign.left,
                           isBold: null,
@@ -231,30 +233,35 @@ void main() {
                       children: null,
                       containerChild: null,
                       widthPercentage: null,
-                      backgroundColor: null,
-                      padding: PageBuilderPadding(
+                      background: null,
+                      padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
+                      margin: PageBuilderSpacing(
+                          top: 0, bottom: 0, left: 0, right: 0),
                       maxWidth: null,
                       alignment: null),
                   widthPercentage: 50,
-                  backgroundColor: Color(0xFF333a56),
+                  background: null,
                   padding:
-                      PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 0),
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                  margin:
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   maxWidth: null,
                   alignment: null)
             ],
             containerChild: null,
             widthPercentage: null,
-            backgroundColor: null,
+            background: null,
             padding:
-                PageBuilderPadding(top: 40, bottom: 20, left: 20, right: 20),
+                PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
+            margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
             maxWidth: 950,
             alignment: null)
       ];
       final model = PageBuilderSectionModel(
           id: "1",
           layout: "column",
-          backgroundColor: "ffffffff",
+          background: null,
           maxWidth: 800,
           widgets: widgets);
       // When
@@ -286,13 +293,15 @@ void main() {
                       borderRadius: 100,
                       width: 200,
                       height: 200,
-                      alignment: Alignment.centerRight),
+                      contentMode: BoxFit.cover,
+                      overlayColor: null),
                   children: null,
                   containerChild: null,
                   widthPercentage: 50,
-                  backgroundColor: null,
+                  background: null,
                   padding:
-                      PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 16),
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
+                  margin: null,
                   maxWidth: null,
                   alignment: null),
               PageBuilderWidget(
@@ -312,6 +321,8 @@ void main() {
                           fontSize: 18,
                           fontFamily: "Merriweather",
                           lineHeight: null,
+                          letterSpacing: null,
+                          textShadow: null,
                           color: Color(0xFFFFFFFF),
                           alignment: TextAlign.left,
                           isBold: null,
@@ -319,23 +330,26 @@ void main() {
                       children: null,
                       containerChild: null,
                       widthPercentage: null,
-                      backgroundColor: null,
-                      padding: PageBuilderPadding(
+                      background: null,
+                      padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
+                      margin: null,
                       maxWidth: null,
                       alignment: null),
                   widthPercentage: 50,
-                  backgroundColor: Color(0xFF333a56),
+                  background: null,
                   padding:
-                      PageBuilderPadding(top: 0, bottom: 0, left: 0, right: 0),
+                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                  margin: null,
                   maxWidth: null,
                   alignment: null)
             ],
             containerChild: null,
             widthPercentage: null,
-            backgroundColor: null,
+            background: null,
             padding:
-                PageBuilderPadding(top: 40, bottom: 20, left: 20, right: 20),
+                PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
+            margin: null,
             maxWidth: 950,
             alignment: null)
       ];
@@ -353,9 +367,9 @@ void main() {
               "padding": {"right": 16.0},
               "properties": {
                 "borderRadius": 100.0,
-                "alignment": "centerRight",
                 "width": 200.0,
                 "height": 200.0,
+                "contentMode": "cover",
                 "url":
                     "https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/landingPageContentImages%2FL9SPWUuY7mJKWUaX16Xt%2F4ce25fce-242b-471b-8a25-83e920e95e8d?alt=media&token=3c7bdc32-f607-4eee-923f-41410591d1d0"
               }
@@ -363,7 +377,6 @@ void main() {
             {
               "id": "660d39c1-70f7-4eb7-ba8b-41580a17d9a6",
               "elementType": "container",
-              "backgroundColor": "ff333a56",
               "widthPercentage": 50.0,
               "properties": {"borderRadius": 10.0},
               "containerChild": {
@@ -390,7 +403,8 @@ void main() {
         }
       ];
       // When
-      final result = PageBuilderSectionModel.getMapFromPageBuilderWidgetList(widgets);
+      final result =
+          PageBuilderSectionModel.getMapFromPageBuilderWidgetList(widgets);
       // Then
       expect(result, expectedResult);
     });
@@ -403,13 +417,13 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
-          backgroundColor: Color(0xFFFFFFFF),
+          background: null,
           maxWidth: 800);
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
-          backgroundColor: Color(0xFFFFFFFF),
+          background: null,
           maxWidth: 800);
       // Then
       expect(section1, section2);

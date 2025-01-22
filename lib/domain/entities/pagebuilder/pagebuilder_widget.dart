@@ -2,7 +2,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,9 @@ class PageBuilderWidget extends Equatable {
   final List<PageBuilderWidget>? children;
   final PageBuilderWidget? containerChild;
   final double? widthPercentage;
-  final Color? backgroundColor;
-  final PageBuilderPadding? padding;
+  final PagebuilderBackground? background;
+  final PageBuilderSpacing? padding;
+  final PageBuilderSpacing? margin;
   final double? maxWidth;
   final Alignment? alignment;
 
@@ -27,8 +29,9 @@ class PageBuilderWidget extends Equatable {
       required this.children,
       required this.containerChild,
       required this.widthPercentage,
-      required this.backgroundColor,
+      required this.background,
       required this.padding,
+      required this.margin,
       required this.maxWidth,
       required this.alignment});
 
@@ -39,8 +42,9 @@ class PageBuilderWidget extends Equatable {
       List<PageBuilderWidget>? children,
       PageBuilderWidget? containerChild,
       double? widthPercentage,
-      Color? backgroundColor,
-      PageBuilderPadding? padding,
+      PagebuilderBackground? background,
+      PageBuilderSpacing? padding,
+      PageBuilderSpacing? margin,
       double? maxWidth,
       Alignment? alignment}) {
     return PageBuilderWidget(
@@ -50,8 +54,9 @@ class PageBuilderWidget extends Equatable {
         children: children ?? this.children,
         containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
-        backgroundColor: backgroundColor ?? this.backgroundColor,
+        background: background ?? this.background,
         padding: padding ?? this.padding,
+        margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
         alignment: alignment ?? this.alignment);
   }
@@ -73,8 +78,10 @@ class PageBuilderWidget extends Equatable {
       case == PageBuilderWidgetType.button:
         return localization.landingpage_pagebuilder_config_menu_button_type;
       case == PageBuilderWidgetType.contactForm:
-        return localization.landingpage_pagebuilder_config_menu_contact_form_type;
-      default: return localization.landingpage_pagebuilder_config_menu_unknown_type;
+        return localization
+            .landingpage_pagebuilder_config_menu_contact_form_type;
+      default:
+        return localization.landingpage_pagebuilder_config_menu_unknown_type;
     }
   }
 
@@ -86,8 +93,9 @@ class PageBuilderWidget extends Equatable {
         children,
         containerChild,
         widthPercentage,
-        backgroundColor,
+        background,
         padding,
+        margin,
         maxWidth,
         alignment
       ];

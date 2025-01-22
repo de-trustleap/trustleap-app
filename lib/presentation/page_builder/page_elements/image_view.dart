@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -12,10 +12,16 @@ import 'package:image_picker/image_picker.dart';
 
 class PageBuilderImageView extends StatefulWidget {
   final PageBuilderImageProperties properties;
-  final PageBuilderWidget widgetModel;
+  final PageBuilderWidget? widgetModel;
+  final bool isConfigMenu;
+  final Function(PageBuilderImageProperties)? onSelectedInConfigMenu;
 
   const PageBuilderImageView(
-      {super.key, required this.properties, required this.widgetModel});
+      {super.key,
+      required this.properties,
+      required this.widgetModel,
+      this.isConfigMenu = false,
+      this.onSelectedInConfigMenu});
 
   @override
   State<PageBuilderImageView> createState() => _PageBuilderImageViewState();
@@ -24,7 +30,6 @@ class PageBuilderImageView extends StatefulWidget {
 class _PageBuilderImageViewState extends State<PageBuilderImageView> {
   final GlobalKey<_PageBuilderImageViewState> myWidgetKey = GlobalKey();
   final fileSizeLimit = 5000000;
-  Uint8List? _selectedImage;
   bool _hovered = false;
 
   Future<void> _pickImage() async {
@@ -42,14 +47,19 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
               SnackBarType.failure);
         }
       } else {
-        setState(() {
-          _selectedImage = convertedTempImage;
-        });
-        final updatedProperties = widget.properties
-            .copyWith(localImage: convertedTempImage, hasChanged: true);
-        final updatedWidget =
-            widget.widgetModel.copyWith(properties: updatedProperties);
-        Modular.get<PagebuilderCubit>().updateWidget(updatedWidget);
+        if (widget.isConfigMenu && widget.onSelectedInConfigMenu != null) {
+          widget.onSelectedInConfigMenu!(
+              widget.properties.copyWith(localImage: convertedTempImage));
+        } else {
+          if (widget.widgetModel != null) {
+            final updatedProperties = widget.properties
+                .copyWith(localImage: convertedTempImage, hasChanged: true);
+            final updatedWidget =
+                widget.widgetModel!.copyWith(properties: updatedProperties);
+            Modular.get<PagebuilderBloc>()
+                .add(UpdateWidgetEvent(updatedWidget));
+          }
+        }
       }
     }
   }
@@ -60,76 +70,113 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
     });
   }
 
+  BoxFit _getBoxFit() {
+    if (widget.isConfigMenu) {
+      return BoxFit.cover;
+    } else if (widget.properties.contentMode != null) {
+      return widget.properties.contentMode!;
+    } else {
+      return BoxFit.cover;
+    }
+  }
+
   Widget _imageContainer(ImageProvider child) {
     return Container(
-        width: widget.properties.width,
-        height: widget.properties.height,
+        width: widget.isConfigMenu ? 200 : widget.properties.width,
+        height: widget.isConfigMenu ? 200 : widget.properties.height,
         decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(widget.properties.borderRadius ?? 0),
-            image: DecorationImage(fit: BoxFit.cover, image: child)));
+            image: DecorationImage(fit: _getBoxFit(), image: child)));
+  }
+
+  Widget _imageElement(BuildContext context) {
+    final localization = AppLocalizations.of(context);
+    final themeData = Theme.of(context);
+    return SizedBox(
+      width: widget.isConfigMenu ? 200 : widget.properties.width,
+      height: widget.isConfigMenu ? 200 : widget.properties.height,
+      child: MouseRegion(
+        onEnter: (event) => setHovered(true),
+        onExit: (event) => setHovered(false),
+        child: Stack(
+          key: myWidgetKey,
+          alignment: Alignment.center,
+          children: [
+            if (widget.properties.localImage != null) ...[
+              _imageContainer(MemoryImage(widget.properties.localImage!))
+            ] else if (widget.properties.url != null) ...[
+              NetworkImageView(
+                imageURL: widget.properties.url!,
+                cornerRadius:
+                    widget.isConfigMenu ? 0 : widget.properties.borderRadius,
+                width: widget.isConfigMenu ? 200 : widget.properties.width,
+                height: widget.isConfigMenu ? 200 : widget.properties.height,
+                contentMode: _getBoxFit(),
+              )
+            ] else ...[
+              Container(
+                width: widget.isConfigMenu ? 200 : widget.properties.width,
+                height: widget.isConfigMenu ? 200 : widget.properties.height,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(kDebugMode
+                        ? "images/placeholder.png"
+                        : "assets/images/placeholder.png"),
+                  ),
+                ),
+              )
+            ],
+            if (!widget.isConfigMenu &&
+                widget.properties.overlayColor != null) ...[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                      widget.properties.borderRadius ?? 0),
+                  child: Container(
+                      color: widget.properties.overlayColor,
+                      width: widget.properties.width,
+                      height: widget.properties.height))
+            ],
+            if (_hovered) ...[
+              Container(
+                width: widget.isConfigMenu ? 200 : widget.properties.width,
+                height: widget.isConfigMenu ? 200 : widget.properties.height,
+                alignment: Alignment.center,
+                color: Colors.black.withOpacity(0.5),
+                child: Center(
+                  child: Tooltip(
+                    message: localization.profile_image_upload_tooltip,
+                    child: ElevatedButton(
+                      onPressed: _pickImage,
+                      style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(20),
+                        backgroundColor: themeData.colorScheme.secondary,
+                      ),
+                      child: const Icon(
+                        Icons.add_a_photo,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ]
+          ],
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
-    final themeData = Theme.of(context);
-    return LandingPageBuilderWidgetContainer(
-      model: widget.widgetModel,
-      child: SizedBox(
-        width: widget.properties.width,
-        height: widget.properties.height,
-        child: MouseRegion(
-            onEnter: (event) => setHovered(true),
-            onExit: (event) => setHovered(false),
-            child: Stack(
-                key: myWidgetKey,
-                alignment: widget.properties.alignment ?? Alignment.center,
-                children: [
-                  if (_selectedImage != null) ...[
-                    _imageContainer(MemoryImage(_selectedImage!))
-                  ] else if (widget.properties.url != null) ...[
-                    NetworkImageView(
-                        imageURL: widget.properties.url!,
-                        cornerRadius: widget.properties.borderRadius,
-                        width: widget.properties.width,
-                        height: widget.properties.height)
-                  ] else ...[
-                    Container(
-                      width: widget.properties.width,
-                      height: widget.properties.height,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(kDebugMode
-                                  ? "images/placeholder.png"
-                                  : "assets/images/placeholder.png"))),
-                    )
-                  ],
-                  if (_hovered) ...[
-                    Container(
-                        width: widget.properties.width,
-                        height: widget.properties.height,
-                        alignment:
-                            widget.properties.alignment ?? Alignment.center,
-                        color: Colors.black.withOpacity(0.5),
-                        child: Center(
-                            child: Tooltip(
-                          message: localization.profile_image_upload_tooltip,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                _pickImage();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  shape: const CircleBorder(),
-                                  padding: const EdgeInsets.all(20),
-                                  backgroundColor:
-                                      themeData.colorScheme.secondary),
-                              child: const Icon(Icons.add_a_photo,
-                                  color: Colors.white)),
-                        ))),
-                  ]
-                ])),
-      ),
-    );
+    if (widget.widgetModel != null) {
+       return widget.isConfigMenu
+        ? _imageElement(context)
+        : LandingPageBuilderWidgetContainer(
+            model: widget.widgetModel!, child: _imageElement(context));
+    } else {
+      return _imageElement(context);
+    }
   }
 }

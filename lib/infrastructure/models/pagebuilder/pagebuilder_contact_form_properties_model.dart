@@ -7,12 +7,14 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_te
 
 class PageBuilderContactFormPropertiesModel extends Equatable
     implements PageBuilderProperties {
+  final String? email;
   final Map<String, dynamic>? nameTextFieldProperties;
   final Map<String, dynamic>? emailTextFieldProperties;
   final Map<String, dynamic>? messageTextFieldProperties;
   final Map<String, dynamic>? buttonProperties;
 
   const PageBuilderContactFormPropertiesModel({
+    required this.email,
     required this.nameTextFieldProperties,
     required this.emailTextFieldProperties,
     required this.messageTextFieldProperties,
@@ -21,6 +23,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
+    if (email != null) map['email'] = email;
     if (nameTextFieldProperties != null) {
       map['nameTextFieldProperties'] = nameTextFieldProperties;
     }
@@ -37,6 +40,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
   factory PageBuilderContactFormPropertiesModel.fromMap(
       Map<String, dynamic> map) {
     return PageBuilderContactFormPropertiesModel(
+      email: map['email'] != null ? map['email'] as String : null,
       nameTextFieldProperties: map['nameTextFieldProperties'] != null
           ? map['nameTextFieldProperties'] as Map<String, dynamic>
           : null,
@@ -53,12 +57,14 @@ class PageBuilderContactFormPropertiesModel extends Equatable
   }
 
   PageBuilderContactFormPropertiesModel copyWith({
+    String? email,
     Map<String, dynamic>? nameTextFieldProperties,
     Map<String, dynamic>? emailTextFieldProperties,
     Map<String, dynamic>? messageTextFieldProperties,
     Map<String, dynamic>? buttonProperties,
   }) {
     return PageBuilderContactFormPropertiesModel(
+      email: email ?? this.email,
       nameTextFieldProperties:
           nameTextFieldProperties ?? this.nameTextFieldProperties,
       emailTextFieldProperties:
@@ -71,6 +77,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
 
   PageBuilderContactFormProperties toDomain() {
     return PageBuilderContactFormProperties(
+        email: email,
         nameTextFieldProperties: nameTextFieldProperties != null
             ? PageBuilderTextFieldPropertiesModel.fromMap(
                     nameTextFieldProperties!)
@@ -95,6 +102,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
   factory PageBuilderContactFormPropertiesModel.fromDomain(
       PageBuilderContactFormProperties properties) {
     return PageBuilderContactFormPropertiesModel(
+        email: properties.email,
         nameTextFieldProperties: properties.nameTextFieldProperties != null
             ? PageBuilderTextFieldPropertiesModel.fromDomain(
                     properties.nameTextFieldProperties!)
@@ -120,6 +128,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
 
   @override
   List<Object?> get props => [
+        email,
         nameTextFieldProperties,
         emailTextFieldProperties,
         messageTextFieldProperties,

@@ -19,3 +19,15 @@ final class PageBuilderConfigMenuOpenedState extends PagebuilderConfigMenuState
   @override
   List<Object?> get props => [id, model];
 }
+
+final class PageBuilderSectionConfigMenuOpenedState
+    extends PagebuilderConfigMenuState with EquatableMixin {
+  final UniqueID id;
+  final PageBuilderSection model;
+
+  PageBuilderSectionConfigMenuOpenedState(
+      {required this.id, required this.model});
+
+  @override
+  List<Object?> get props => [id, model];
+}

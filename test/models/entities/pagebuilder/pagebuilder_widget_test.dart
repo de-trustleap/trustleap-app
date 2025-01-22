@@ -30,8 +30,9 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: null,
-          backgroundColor: null,
+          background: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
 
@@ -45,8 +46,9 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: null,
-          backgroundColor: null,
+          background: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       // When
@@ -73,8 +75,9 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: null,
-          backgroundColor: null,
+          background: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final expectedResult = "Spalte";
@@ -96,8 +99,9 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: null,
-          backgroundColor: null,
+          background: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final expectedResult = "Icon";
@@ -119,8 +123,9 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: null,
-          backgroundColor: null,
+          background: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final expectedResult = "Unbekannt";
@@ -145,8 +150,9 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: null,
-          backgroundColor: null,
+          background: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       final widget2 = PageBuilderWidget(
@@ -158,8 +164,9 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: null,
-          backgroundColor: null,
+          background: null,
           padding: null,
+          margin: null,
           maxWidth: null,
           alignment: null);
       // Then

@@ -3,10 +3,13 @@
 # 1. Change path to project root
 cd "$(dirname "$0")/.."
 
-# 2. Build for Flutter Web
+# 2. Create Icon Packs
+dart run flutter_iconpicker:generate_packs --packs allMaterial
+
+# 3. Build for Flutter Web
 flutter build web --web-renderer canvaskit --release --no-tree-shake-icons
 
-# 3. Copy .woffs fonts into build folder
+# 4. Copy .woffs fonts into build folder
 # Check if the build web was successful
 if [ $? -eq 0 ]; then
     # Create the font folder if it doesn't exists

@@ -66,8 +66,8 @@ class _ImageUploadDropzoneState extends State<ImageUploadDropzone> {
       DropzoneView(
           operation: DragOperation.copy,
           onCreated: (controller) => this.controller = controller,
-          onDrop: fileDropped,
-          onDropMultiple: multipleFilesDropped,
+          onDropFile: fileDropped,
+          onDropFiles: multipleFilesDropped,
           onHover: hovered,
           onLeave: leaved),
       Center(child: widget.child)

@@ -5,12 +5,14 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 
 class PageBuilderContactFormProperties extends Equatable
     implements PageBuilderProperties {
+  final String? email;
   final PageBuilderTextFieldProperties? nameTextFieldProperties;
   final PageBuilderTextFieldProperties? emailTextFieldProperties;
   final PageBuilderTextFieldProperties? messageTextFieldProperties;
   final PageBuilderButtonProperties? buttonProperties;
 
   const PageBuilderContactFormProperties({
+    required this.email,
     required this.nameTextFieldProperties,
     required this.emailTextFieldProperties,
     required this.messageTextFieldProperties,
@@ -18,11 +20,13 @@ class PageBuilderContactFormProperties extends Equatable
   });
 
   PageBuilderContactFormProperties copyWith(
-      {PageBuilderTextFieldProperties? nameTextFieldProperties,
+      {String? email,
+      PageBuilderTextFieldProperties? nameTextFieldProperties,
       PageBuilderTextFieldProperties? emailTextFieldProperties,
       PageBuilderTextFieldProperties? messageTextFieldProperties,
       PageBuilderButtonProperties? buttonProperties}) {
     return PageBuilderContactFormProperties(
+      email: email ?? this.email,
       nameTextFieldProperties:
           nameTextFieldProperties ?? this.nameTextFieldProperties,
       emailTextFieldProperties:
@@ -35,6 +39,7 @@ class PageBuilderContactFormProperties extends Equatable
 
   @override
   List<Object?> get props => [
+        email,
         nameTextFieldProperties,
         emailTextFieldProperties,
         messageTextFieldProperties,

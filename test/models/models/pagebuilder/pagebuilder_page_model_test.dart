@@ -100,7 +100,6 @@ void main() {
         {
           "id": "bc3dc5e1-f43a-415c-9664-3692f3075d1c",
           "layout": "column",
-          "backgroundColor": "FFf0f0f0",
           "widgets": []
         },
       ];
@@ -112,15 +111,14 @@ void main() {
                 "23af1357-fe6f-4fbd-bc38-f8d2561c92b9"),
             layout: PageBuilderSectionLayout.column,
             widgets: [],
-            backgroundColor: null,
+            background: null,
             maxWidth: null),
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
                 "bc3dc5e1-f43a-415c-9664-3692f3075d1c"),
             layout: PageBuilderSectionLayout.column,
             widgets: [],
-            backgroundColor:
-                Color(ColorUtility.getHexIntFromString("FFf0f0f0")),
+            background: null,
             maxWidth: null)
       ];
       // When
@@ -139,15 +137,14 @@ void main() {
                 "23af1357-fe6f-4fbd-bc38-f8d2561c92b9"),
             layout: PageBuilderSectionLayout.column,
             widgets: [],
-            backgroundColor: null,
+            background: null,
             maxWidth: 500),
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
                 "bc3dc5e1-f43a-415c-9664-3692f3075d1c"),
             layout: PageBuilderSectionLayout.column,
             widgets: [],
-            backgroundColor:
-                Color(ColorUtility.getHexIntFromString("fff0f0f0")),
+            background: null,
             maxWidth: 400)
       ];
       final expectedResult = [
@@ -160,13 +157,13 @@ void main() {
         {
           "id": "bc3dc5e1-f43a-415c-9664-3692f3075d1c",
           "layout": "column",
-          "backgroundColor": "fff0f0f0",
           "widgets": [],
           "maxWidth": 400
         }
       ];
       // When
-      final result = PageBuilderPageModel.getMapFromPageBuilderSectionList(sections);
+      final result =
+          PageBuilderPageModel.getMapFromPageBuilderSectionList(sections);
       // Then
       expect(result, expectedResult);
     });
@@ -175,8 +172,10 @@ void main() {
   group("PagebuilderPageModel_Props", () {
     test("check if value equality works", () {
       // Given
-      final page1 = PageBuilderPageModel(id: "1", sections: [], backgroundColor: "fff0f0f0");
-      final page2 = PageBuilderPageModel(id: "1", sections: [], backgroundColor: "fff0f0f0");
+      final page1 = PageBuilderPageModel(
+          id: "1", sections: [], backgroundColor: "fff0f0f0");
+      final page2 = PageBuilderPageModel(
+          id: "1", sections: [], backgroundColor: "fff0f0f0");
       // Then
       expect(page1, page2);
     });

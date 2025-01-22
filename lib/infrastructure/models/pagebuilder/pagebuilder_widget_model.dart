@@ -1,18 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_padding.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_background_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_column_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_contact_form_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_container_properties_model.dart';
@@ -20,7 +20,6 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_ic
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_row_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
-import 'package:flutter/material.dart';
 
 class PageBuilderWidgetModel extends Equatable {
   final String id;
@@ -29,8 +28,9 @@ class PageBuilderWidgetModel extends Equatable {
   final List<PageBuilderWidgetModel>? children;
   final PageBuilderWidgetModel? containerChild;
   final double? widthPercentage;
-  final String? backgroundColor;
+  final Map<String, dynamic>? background;
   final Map<String, dynamic>? padding;
+  final Map<String, dynamic>? margin;
   final double? maxWidth;
   final String? alignment;
 
@@ -41,8 +41,9 @@ class PageBuilderWidgetModel extends Equatable {
       required this.children,
       required this.containerChild,
       required this.widthPercentage,
-      required this.backgroundColor,
+      required this.background,
       required this.padding,
+      required this.margin,
       required this.maxWidth,
       required this.alignment});
 
@@ -55,8 +56,9 @@ class PageBuilderWidgetModel extends Equatable {
     }
     if (containerChild != null) map['containerChild'] = containerChild!.toMap();
     if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
-    if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
+    if (background != null) map['background'] = background;
     if (padding != null) map['padding'] = padding;
+    if (margin != null) map['margin'] = margin;
     if (maxWidth != null) map['maxWidth'] = maxWidth;
     if (alignment != null) map['alignment'] = alignment;
     return map;
@@ -83,15 +85,17 @@ class PageBuilderWidgetModel extends Equatable {
         widthPercentage: map['widthPercentage'] != null
             ? map['widthPercentage'] as double
             : null,
-        backgroundColor: map['backgroundColor'] != null
-            ? map['backgroundColor'] as String
+        background: map['background'] != null
+            ? map['background'] as Map<String, dynamic>
             : null,
         padding: map['padding'] != null
             ? map['padding'] as Map<String, dynamic>
             : null,
+        margin: map['margin'] != null
+            ? map['margin'] as Map<String, dynamic>
+            : null,
         maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
-        alignment:
-            map['alignment'] != null ? map['alignment'] as String : null);
+        alignment: map['alignment'] != null ? map['alignment'] as String : null);
   }
 
   PageBuilderWidgetModel copyWith(
@@ -101,8 +105,9 @@ class PageBuilderWidgetModel extends Equatable {
       List<PageBuilderWidgetModel>? children,
       PageBuilderWidgetModel? containerChild,
       double? widthPercentage,
-      String? backgroundColor,
+      Map<String, dynamic>? background,
       Map<String, dynamic>? padding,
+      Map<String, dynamic>? margin,
       double? maxWidth,
       String? alignment}) {
     return PageBuilderWidgetModel(
@@ -112,8 +117,9 @@ class PageBuilderWidgetModel extends Equatable {
         children: children ?? this.children,
         containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
-        backgroundColor: backgroundColor ?? this.backgroundColor,
+        background: background ?? this.background,
         padding: padding ?? this.padding,
+        margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
         alignment: alignment ?? this.alignment);
   }
@@ -129,10 +135,11 @@ class PageBuilderWidgetModel extends Equatable {
         children: children?.map((child) => child.toDomain()).toList(),
         containerChild: containerChild?.toDomain(),
         widthPercentage: widthPercentage,
-        backgroundColor: backgroundColor != null
-            ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
+        background: background != null
+            ? PagebuilderBackgroundModel.fromMap(background!).toDomain()
             : null,
-        padding: PageBuilderPadding.fromMap(padding),
+        padding: PageBuilderSpacing.fromMap(padding),
+        margin: PageBuilderSpacing.fromMap(margin),
         maxWidth: maxWidth,
         alignment: AlignmentMapper.getAlignmentFromString(alignment));
   }
@@ -149,10 +156,11 @@ class PageBuilderWidgetModel extends Equatable {
             ? PageBuilderWidgetModel.fromDomain(widget.containerChild!)
             : null,
         widthPercentage: widget.widthPercentage,
-        backgroundColor: widget.backgroundColor?.value != null
-            ? widget.backgroundColor!.value.toRadixString(16)
+        background: widget.background != null
+            ? PagebuilderBackgroundModel.fromDomain(widget.background!).toMap()
             : null,
         padding: getMapFromPadding(widget.padding),
+        margin: getMapFromPadding(widget.margin),
         maxWidth: widget.maxWidth,
         alignment: AlignmentMapper.getStringFromAlignment(widget.alignment));
   }
@@ -212,7 +220,7 @@ class PageBuilderWidgetModel extends Equatable {
     }
   }
 
-  static Map<String, dynamic>? getMapFromPadding(PageBuilderPadding? padding) {
+  static Map<String, dynamic>? getMapFromPadding(PageBuilderSpacing? padding) {
     if (padding == null) {
       return null;
     }
@@ -240,8 +248,9 @@ class PageBuilderWidgetModel extends Equatable {
         children,
         containerChild,
         widthPercentage,
-        backgroundColor,
+        background,
         padding,
+        margin,
         maxWidth,
         alignment
       ];

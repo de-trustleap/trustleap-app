@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
@@ -32,12 +32,14 @@ class LandingPageBuilderAppBar extends StatelessWidget
               Padding(
                 padding: const EdgeInsets.only(right: 24),
                 child: PrimaryButton(
-                  title: localization.landingpage_pagebuilder_appbar_save_button_title,
+                  title: localization
+                      .landingpage_pagebuilder_appbar_save_button_title,
                   isLoading: isLoading,
                   disabled: isLoading,
                   width: 180,
                   onTap: () {
-                    Modular.get<PagebuilderCubit>().saveLandingPageContent(content);
+                    Modular.get<PagebuilderBloc>()
+                        .add(SaveLandingPageContentEvent(content));
                   },
                 ),
               )

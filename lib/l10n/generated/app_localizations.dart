@@ -1787,6 +1787,18 @@ abstract class AppLocalizations {
   /// **'Do you really want to leave the site? Changes that are not saved will be lost.'**
   String get landingpage_pagebuilder_unload_alert_message;
 
+  /// Content tab title in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get landingpage_pagebuilder_config_menu_content_tab;
+
+  /// Design tab title in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Design'**
+  String get landingpage_pagebuilder_config_menu_design_tab;
+
   /// Container title in the pagebuilder config menu
   ///
   /// In en, this message translates to:
@@ -1840,6 +1852,552 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown'**
   String get landingpage_pagebuilder_config_menu_unknown_type;
+
+  /// Title for the collapsible view for the text configuration in the pagebuilder text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text configuration'**
+  String get landingpage_pagebuilder_text_config_text_title;
+
+  /// menu entry in the pagebuilder text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment'**
+  String get landingpage_pagebuilder_text_config_alignment;
+
+  /// Tooltip for left alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'left-align'**
+  String get landingpage_pagebuilder_text_config_alignment_left;
+
+  /// Tooltip for center alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'center'**
+  String get landingpage_pagebuilder_text_config_alignment_center;
+
+  /// Tooltip for right alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'right-align'**
+  String get landingpage_pagebuilder_text_config_alignment_right;
+
+  /// Tooltip for justify alignment Button in text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'justify'**
+  String get landingpage_pagebuilder_text_config_alignment_justify;
+
+  /// Text for line height in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Line height'**
+  String get landingpage_pagebuilder_text_config_lineheight;
+
+  /// Text for letter spacing in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Letter spacing'**
+  String get landingpage_pagebuilder_text_config_letterspacing;
+
+  /// Text for color in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text color'**
+  String get landingpage_pagebuilder_text_config_color;
+
+  /// Text for font family in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Font family'**
+  String get landingpage_pagebuilder_text_config_font_family;
+
+  /// Text for text shadow in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text shadow'**
+  String get landingpage_pagebuilder_text_config_shadow;
+
+  /// Title for text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Configure shadow'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_title;
+
+  /// Text for spread radius in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Spread radius'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_spread_radius;
+
+  /// Text for blur radius in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Blur radius'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius;
+
+  /// Text for x offset in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'X offset'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_x_offset;
+
+  /// Text for y offset in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Y offset'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_y_offset;
+
+  /// Text for apply button in the text shadow alert in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get landingpage_pagebuilder_text_config_shadow_alert_apply;
+
+  /// Text for font size in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Font size'**
+  String get landingpage_pagebuilder_text_config_fontsize;
+
+  /// Title for the Color Picker in the pagebuilder configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Select color'**
+  String get landingpage_pagebuilder_color_picker_title;
+
+  /// Title for the hex code textfield in the Color Picker in the pagebuilder configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Hex code'**
+  String get landingpage_pagebuilder_color_picker_hex_textfield;
+
+  /// Titel für den Button im Color Picker in der Pagebuilder Konfiguration
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get landingpage_pagebuilder_color_picker_ok_button;
+
+  /// Placeholder for the textfield in the text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Type text here...'**
+  String get landingpage_pagebuilder_text_config_text_placeholder;
+
+  /// Title for the collapsible view for the text content in the pagebuilder text configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Text content'**
+  String get landingpage_pagebuilder_text_config_content_title;
+
+  /// Placeholder for Spacing top textfield in the layout menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Top'**
+  String get landingpage_pagebuilder_layout_spacing_top;
+
+  /// Placeholder for Spacing bottom textfield in the layout menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom'**
+  String get landingpage_pagebuilder_layout_spacing_bottom;
+
+  /// Placeholder for Spacing left textfield in the layout menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Left'**
+  String get landingpage_pagebuilder_layout_spacing_left;
+
+  /// Placeholder for Spacing right textfield in the layout menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Right'**
+  String get landingpage_pagebuilder_layout_spacing_right;
+
+  /// Title for the layout Collapsible in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Layout'**
+  String get landingpage_pagebuilder_layout_menu_title;
+
+  /// Title padding menu in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Padding'**
+  String get landingpage_pagebuilder_layout_menu_padding;
+
+  /// Title margin menu in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Margin'**
+  String get landingpage_pagebuilder_layout_menu_margin;
+
+  /// Title alignment menu in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment'**
+  String get landingpage_pagebuilder_layout_menu_alignment;
+
+  /// Title background image menu in the Pagebuilder Config Menu in the background area
+  ///
+  /// In en, this message translates to:
+  /// **'Background image'**
+  String get landingpage_pagebuilder_layout_menu_image_control_title;
+
+  /// Title contentmode menu in the Pagebuilder Config Menu in the background area
+  ///
+  /// In en, this message translates to:
+  /// **'Content mode'**
+  String get landingpage_pagebuilder_layout_menu_background_contentmode;
+
+  /// Title image overlay image menu in the Pagebuilder Config Menu in the background area
+  ///
+  /// In en, this message translates to:
+  /// **'Image overlay'**
+  String get landingpage_pagebuilder_layout_menu_background_overlay;
+
+  /// Title background menu in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get landingpage_pagebuilder_layout_menu_background;
+
+  /// Title background color image menu in the Pagebuilder Config Menu in the background area
+  ///
+  /// In en, this message translates to:
+  /// **'Background color'**
+  String get landingpage_pagebuilder_layout_menu_background_color;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'top left'**
+  String get pagebuilder_layout_menu_alignment_top_left;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'top center'**
+  String get pagebuilder_layout_menu_alignment_top_center;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'top right'**
+  String get pagebuilder_layout_menu_alignment_top_right;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'center left'**
+  String get pagebuilder_layout_menu_alignment_center_left;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'center'**
+  String get pagebuilder_layout_menu_alignment_center;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'center right'**
+  String get pagebuilder_layout_menu_alignment_center_right;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'bottom left'**
+  String get pagebuilder_layout_menu_alignment_bottom_left;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'bottom center'**
+  String get pagebuilder_layout_menu_alignment_bottom_center;
+
+  /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'bottom right'**
+  String get pagebuilder_layout_menu_alignment_bottom_right;
+
+  /// Title for size menu in pagebuilder layout menu
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get pagebuilder_layout_menu_size_control_size;
+
+  /// Width for size menu in pagebuilder layout menu
+  ///
+  /// In en, this message translates to:
+  /// **'Width'**
+  String get pagebuilder_layout_menu_size_control_width;
+
+  /// Height for size menu in pagebuilder layout menu
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get pagebuilder_layout_menu_size_control_height;
+
+  /// Title for image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Image configuration'**
+  String get pagebuilder_image_config_title;
+
+  /// title for content mode in image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Content mode'**
+  String get pagebuilder_image_config_content_mode;
+
+  /// title for image overlay in image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Image overlay'**
+  String get pagebuilder_image_config_image_overlay;
+
+  /// Title for radius in image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Radius'**
+  String get pagebuilder_image_config_border_radius;
+
+  /// Title for image content menu in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Image content'**
+  String get pagebuilder_image_config_image_content;
+
+  /// Title for the collapsible view for the container configuration in the pagebuilder container configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Container configuration'**
+  String get landingpage_pagebuilder_container_config_container_title;
+
+  /// Title for the shadow configuration in the pagebuilder container configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Shadow'**
+  String get landingpage_pagebuilder_container_config_container_shadow;
+
+  /// Title for the collapsible view for the row configuration in the pagebuilder row configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Row configuration'**
+  String get landingpage_pagebuilder_row_config_row_title;
+
+  /// Title for the equal heights configuration in the pagebuilder row configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Equal heights'**
+  String get landingpage_pagebuilder_row_config_row_equal_heights;
+
+  /// Title for the main axis alignment configuration in the pagebuilder row configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment x-axis'**
+  String get landingpage_pagebuilder_row_config_row_main_axis_alignment;
+
+  /// Title for the cross axis alignment configuration in the pagebuilder row configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment y-axis'**
+  String get landingpage_pagebuilder_row_config_row_cross_axis_alignment;
+
+  /// Title for the collapsible view for the column configuration in the pagebuilder column configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Column configuration'**
+  String get landingpage_pagebuilder_column_config_column_title;
+
+  /// Title for the collapsible view for the icon content in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Icon content'**
+  String get landingpage_pagebuilder_icon_content;
+
+  /// Title for the change icon menu in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Change icon'**
+  String get landingpage_pagebuilder_icon_content_change_icon;
+
+  /// Title for the collapsible view for the icon configuration in the pagebuilder icon configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Icon configuration'**
+  String get landingpage_pagebuilder_icon_config_icon_title;
+
+  /// Title for the color menu in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get landingpage_pagebuilder_icon_config_color;
+
+  /// Title for the size menu in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get landingpage_pagebuilder_icon_config_size;
+
+  /// Title for the icon picker in the icon content tab in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an icon'**
+  String get landingpage_pagebuilder_icon_config_icon_picker_title;
+
+  /// Title for the close button in the icon picker in the icon content tab in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get landingpage_pagebuilder_icon_config_icon_picker_close;
+
+  /// Search placeholder in the icon picker in the icon content tab in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get landingpage_pagebuilder_icon_config_icon_picker_search;
+
+  /// Text that is shown when the search have no results in the icon picker in the icon content tab in the pagebuilder icon configuration
+  ///
+  /// In en, this message translates to:
+  /// **'No results for:'**
+  String get landingpage_pagebuilder_icon_config_icon_picker_search_no_results;
+
+  /// Title for the collapsible view for the contact form email adress in the pagebuilder contact form configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Contactform email'**
+  String get landingpage_pagebuilder_contactform_content_email;
+
+  /// Text describing the email address input for the contact form email address in the Pagebuilder contact form configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the recipient email address to which the contact request will be sent.'**
+  String get landingpage_pagebuilder_contactform_content_email_subtitle;
+
+  /// Placeholder for the contact form email address in the Pagebuilder contact form configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address'**
+  String get landingpage_pagebuilder_contactform_content_email_placeholder;
+
+  /// Menu for button width in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Width'**
+  String get pagebuilder_button_config_button_width;
+
+  /// Menu for button height in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get pagebuilder_button_config_button_height;
+
+  /// Menu for button border radius in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Radius'**
+  String get pagebuilder_button_config_button_border_radius;
+
+  /// Menu for button background color in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Background color'**
+  String get pagebuilder_button_config_button_background_color;
+
+  /// Title for button text configuration in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Button text configuration'**
+  String get pagebuilder_button_config_button_text_configuration;
+
+  /// Title for collapsible menu for the name textfield configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Name textfield'**
+  String get pagebuilder_contact_form_config_name_textfield_title;
+
+  /// Title for collapsible menu for the email textfield configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'E-Mail textfield'**
+  String get pagebuilder_contact_form_config_email_textfield_title;
+
+  /// Title for collapsible menu for the message textfield configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Nachricht textfield'**
+  String get pagebuilder_contact_form_config_message_textfield_title;
+
+  /// Title for collapsible menu for the button configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Button configuration'**
+  String get pagebuilder_contact_form_config_button_title;
+
+  /// Menu for textfield width in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Width'**
+  String get pagebuilder_textfield_config_textfield_width;
+
+  /// Menu for textfield number of lines minimum in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Number of lines min'**
+  String get pagebuilder_textfield_config_textfield_min_lines;
+
+  /// Menu for textfield number of lines maximum in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Number of lines max'**
+  String get pagebuilder_textfield_config_textfield_max_lines;
+
+  /// Menu for textfield is required in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Required field'**
+  String get pagebuilder_textfield_config_textfield_required;
+
+  /// Menu for textfield background color in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Background color'**
+  String get pagebuilder_textfield_config_textfield_background_color;
+
+  /// Menu for textfield border color in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border color'**
+  String get pagebuilder_textfield_config_textfield_border_color;
+
+  /// Menu for textfield placeholder color in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Placeholder'**
+  String get pagebuilder_textfield_config_textfield_placeholder;
+
+  /// Title for textfield text configuration in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Textfield text configuration'**
+  String get pagebuilder_textfield_config_textfield_text_configuration;
+
+  /// Title for textfield placeholder configuration in the textfield configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Textfield placeholder configuration'**
+  String get pagebuilder_textfield_config_textfield_placeholder_text_configuration;
+
+  /// Section Title in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Section'**
+  String get landingpage_pagebuilder_config_menu_section_type;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
