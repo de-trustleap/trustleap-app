@@ -9,10 +9,12 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/landing_page_template_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 
@@ -93,7 +95,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   Future<Either<DatabaseFailure, Unit>> createLandingPage(
       LandingPage landingPage,
       Uint8List imageData,
-      bool imageHasChanged) async {
+      bool imageHasChanged,
+      String templateID) async {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("createLandingPage");
@@ -112,7 +115,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged,
         "isDefaultPage": landingPageModel.isDefaultPage,
-        "isActive": landingPageModel.isActive
+        "isActive": landingPageModel.isActive,
+        "templateID": templateID
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
@@ -199,6 +203,24 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       var model =
           LandingPageModel.fromFirestore(document.data()!, id).toDomain();
       return right(model);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, List<LandingPageTemplate>>>
+      getAllLandingPageTemplates() async {
+    try {
+      final QuerySnapshot querySnapshot =
+          await firestore.collection("landingPagesTemplates").get();
+      List<LandingPageTemplate> templates = [];
+      for (final doc in querySnapshot.docs) {
+        final map = doc.data() as Map<String, dynamic>;
+        templates.add(
+            LandingPageTemplateModel.fromFirestore(map, doc.id).toDomain());
+      }
+      return right(templates);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }

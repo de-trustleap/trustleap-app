@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
@@ -22,7 +23,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
   ) : super(LandingPageInitial());
 
   void createLandingPage(LandingPage? landingpage, Uint8List imageData,
-      bool imageHasChanged) async {
+      bool imageHasChanged, String templateID) async {
     if (landingpage == null) {
       emit(LandingPageShowValidationState());
     } else if (imageData == [0]) {
@@ -32,7 +33,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     } else {
       emit(CreateLandingPageLoadingState());
       final failureOrSuccess = await landingPageRepo.createLandingPage(
-          landingpage, imageData, imageHasChanged);
+          landingpage, imageData, imageHasChanged, templateID);
       failureOrSuccess.fold(
           (failure) => emit(CreateLandingPageFailureState(failure: failure)),
           (_) => emit(CreatedLandingPageSuccessState()));
@@ -93,6 +94,16 @@ class LandingPageCubit extends Cubit<LandingPageState> {
         (failure) =>
             emit(ToggleLandingPageActivityFailureState(failure: failure)),
         (_) => emit(ToggleLandingPageActivitySuccessState(isActive: isActive)));
+  }
+
+  void getAllLandingPageTemplates() async {
+    emit(GetLandingPageTemplatesLoadingState());
+    final failureOrSuccess = await landingPageRepo.getAllLandingPageTemplates();
+    failureOrSuccess.fold(
+        (failure) =>
+            emit(GetLandingPageTemplatesFailureState(failure: failure)),
+        (templates) =>
+            emit(GetLandingPageTemplatesSuccessState(templates: templates)));
   }
 
   void getUser() async {

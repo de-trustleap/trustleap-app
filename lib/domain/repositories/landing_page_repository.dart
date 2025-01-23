@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 
 abstract class LandingPageRepository {
@@ -12,7 +13,10 @@ abstract class LandingPageRepository {
       List<String> ids);
 
   Future<Either<DatabaseFailure, Unit>> createLandingPage(
-      LandingPage landingPage, Uint8List imageData, bool imageHasChanged);
+      LandingPage landingPage,
+      Uint8List imageData,
+      bool imageHasChanged,
+      String templateID);
 
   Future<Either<DatabaseFailure, Unit>> deleteLandingPage(
       String id, String ownerID);
@@ -22,7 +26,11 @@ abstract class LandingPageRepository {
 
   Future<Either<DatabaseFailure, Unit>> duplicateLandingPage(String id);
 
-  Future<Either<DatabaseFailure, Unit>> toggleLandingPageActivity(String id, bool isActive, String userId);
-      
+  Future<Either<DatabaseFailure, Unit>> toggleLandingPageActivity(
+      String id, bool isActive, String userId);
+
   Future<Either<DatabaseFailure, LandingPage>> getLandingPage(String id);
+
+  Future<Either<DatabaseFailure, List<LandingPageTemplate>>>
+      getAllLandingPageTemplates();
 }
