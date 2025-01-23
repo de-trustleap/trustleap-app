@@ -58,17 +58,13 @@ class LandingPageCubit extends Cubit<LandingPageState> {
 
   void checkLandingPageImage(LandingPage? landingPage, Uint8List? imageData) {
     if (landingPage != null && landingPage.thumbnailDownloadURL != null) {
-      print("VALID1");
       emit(LandingPageImageValid());
     } else if (imageData == null || imageData == [0]) {
       emit(LandingPageNoImageFailureState());
-      print("FAILURE");
     } else if (imageData.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
-      print("TOO BIG");
     } else {
       emit(LandingPageImageValid());
-      print("VALID2");
     }
   }
 
