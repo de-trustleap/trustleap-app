@@ -66,8 +66,8 @@ class _LandingPageCreatorThirdStepGridTileState
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CachedNetworkImage(
-                    width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
-                    height: responsiveValue.largerThan(MOBILE) ? 120 : 140,
+                    width: responsiveValue.largerThan(MOBILE) ? 130 : 140,
+                    height: responsiveValue.largerThan(MOBILE) ? 130 : 140,
                     imageUrl: widget.template.thumbnailDownloadURL ?? "",
                     imageBuilder: (context, imageProvider) {
                       return Container(
@@ -109,7 +109,4 @@ class _LandingPageCreatorThirdStepGridTileState
         hovered: false);
   }
 }
-// TODO: BACKEND TESTS SCHREIBEN
-// TODO: THUMBNAIL WIRD NICHT ANGEZEIGT
-// TODO: PROGRESS BAR SOLL BEI EDITMODE NUR 2 SCHRITTE HABEN
-// TODO: TESTS FÜR MODELS SCHREIBEN
+// TODO: SCHAUEN OB NOCH ANDERE TESTS GESCHRIEBEN WERDEN MÜSSEN (Z.B: BLOC ODER FUNKTIONEN)

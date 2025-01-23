@@ -57,20 +57,21 @@ void main() {
         ownerID: UniqueID.fromUniqueString("1"));
     final testImageData = Uint8List(1);
     const imageHasChanged = false;
+    const templateID = "1";
     test(
         "should return unit when landingpage has been created and the call was successful",
         () async {
       // Given
       final expectedResult = right(unit);
       when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+              testLandingPage, testImageData, imageHasChanged, templateID))
           .thenAnswer((_) async => right(unit));
       // When
       final result = await mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
+          testLandingPage, testImageData, imageHasChanged, templateID);
       // Then
       verify(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged));
+          testLandingPage, testImageData, imageHasChanged, templateID));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
@@ -79,14 +80,14 @@ void main() {
       // Given
       final expectedResult = left(BackendFailure());
       when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+              testLandingPage, testImageData, imageHasChanged, templateID))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
       final result = await mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
+          testLandingPage, testImageData, imageHasChanged, templateID);
       // Then
       verify(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged));
+          testLandingPage, testImageData, imageHasChanged, templateID));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });

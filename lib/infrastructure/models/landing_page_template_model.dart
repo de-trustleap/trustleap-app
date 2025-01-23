@@ -62,7 +62,9 @@ class LandingPageTemplateModel extends Equatable {
         id: UniqueID.fromUniqueString(id),
         name: name,
         thumbnailDownloadURL: thumbnailDownloadURL,
-        page: PageBuilderPageModel.fromMap(page ?? {}).toDomain());
+        page: page != null
+            ? PageBuilderPageModel.fromMap(page!).toDomain()
+            : null);
   }
 
   factory LandingPageTemplateModel.fromDomain(LandingPageTemplate template) {

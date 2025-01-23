@@ -40,7 +40,7 @@ class _LandingPageCreatorMultiPageFormState
   bool imageValid = false;
   bool lastFormButtonsDisabled = false;
   bool isLoading = false;
-  double progress = 0.0;
+  late double progress;
   String errorMessage = "";
   LandingPage? landingPage;
 
@@ -55,9 +55,20 @@ class _LandingPageCreatorMultiPageFormState
     landingPage = widget.landingPage;
 
     BlocProvider.of<LandingPageCubit>(context).getUser();
+    _initializeSteps();
+
+    progress = 1 / _steps.length;
   }
 
   void _initializeSteps() {
+    if (isEditMode) {
+      _initializeStepsForEditing();
+    } else {
+      _initializeStepsForCreation();
+    }
+  }
+
+  void _initializeStepsForCreation() {
     _steps = [
       LandingPageCreatorFirstStep(
           landingPage: landingPage,
@@ -69,7 +80,7 @@ class _LandingPageCreatorMultiPageFormState
                 this.image = image;
                 this.landingPage = landingPage;
                 _currentStep += 1;
-                progress = 1 / _steps.length;
+                progress = 2 / _steps.length;
               });
             }
           }),
@@ -90,7 +101,7 @@ class _LandingPageCreatorMultiPageFormState
                 this.image = image;
                 this.landingPage = landingPage;
                 _currentStep += 1;
-                progress = 2 / _steps.length;
+                progress = 3 / _steps.length;
               });
             }
           },
@@ -98,7 +109,7 @@ class _LandingPageCreatorMultiPageFormState
             setState(() {
               this.landingPage = landingPage;
               _currentStep -= 1;
-              progress = 0 / _steps.length;
+              progress = 1 / _steps.length;
             });
           }),
       LandingPageCreatorThirdStep(
@@ -111,7 +122,7 @@ class _LandingPageCreatorMultiPageFormState
             setState(() {
               this.landingPage = landingPage;
               _currentStep -= 1;
-              progress = 0 / _steps.length;
+              progress = 2 / _steps.length;
             });
           },
           onSaveTapped: (landingPage, image, imageHasChanged, templateID) {
@@ -119,6 +130,53 @@ class _LandingPageCreatorMultiPageFormState
               BlocProvider.of<LandingPageCubit>(context).createLandingPage(
                   landingPage, image, imageHasChanged, templateID);
             }
+          })
+    ];
+  }
+
+  void _initializeStepsForEditing() {
+    _steps = [
+      LandingPageCreatorFirstStep(
+          landingPage: landingPage,
+          isEditMode: isEditMode,
+          company: company,
+          onContinue: (landingPage, image) {
+            if (imageValid) {
+              setState(() {
+                this.image = image;
+                this.landingPage = landingPage;
+                _currentStep += 1;
+                progress = 2 / _steps.length;
+              });
+            }
+          }),
+      LandingPageCreatorSecondStep(
+          id: isEditMode ? (widget.landingPage?.id ?? UniqueID()) : id,
+          landingPage: landingPage,
+          image: image,
+          imageHasChanged: imageHasChanged,
+          buttonsDisabled: lastFormButtonsDisabled,
+          isLoading: isLoading,
+          isEditMode: isEditMode,
+          onContinueTapped: (landingPage, image, imageHasChanged, isEditMode) {
+            if (isEditMode) {
+              BlocProvider.of<LandingPageCubit>(context)
+                  .editLandingPage(landingPage, image, imageHasChanged);
+            } else if (image != null) {
+              setState(() {
+                this.image = image;
+                this.landingPage = landingPage;
+                _currentStep += 1;
+                progress = 3 / _steps.length;
+              });
+            }
+          },
+          onBack: (landingPage) {
+            setState(() {
+              this.landingPage = landingPage;
+              _currentStep -= 1;
+              progress = 1 / _steps.length;
+            });
           })
     ];
   }

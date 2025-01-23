@@ -26,7 +26,7 @@ class LandingPageCreatorProgressIndicator extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
                 localization.landingpage_creation_progress_indicator_text(
-                    currentStep, elementsTotal),
+                    currentStep - 1, elementsTotal),
                 style: themeData.textTheme.bodyMedium)
           ],
         ));
