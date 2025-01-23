@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';
@@ -229,6 +230,42 @@ void main() {
       final result = await mockLandingPageRepo.getLandingPage(landingPageID);
       // Then
       verify(mockLandingPageRepo.getLandingPage(landingPageID));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+  });
+
+  group("LandingPageRepositoryImplementation_getLandingPageTemplates", () {
+    final testLandingPageTemplates = [
+      LandingPageTemplate(
+          id: UniqueID.fromUniqueString("1"),
+          name: "Test",
+          thumbnailDownloadURL: "Test",
+          page: null)
+    ];
+    test("should return landing page templates when the call was successful",
+        () async {
+      // Given
+      final expectedResult = right(testLandingPageTemplates);
+      when(mockLandingPageRepo.getAllLandingPageTemplates())
+          .thenAnswer((_) async => right(testLandingPageTemplates));
+      // When
+      final result = await mockLandingPageRepo.getAllLandingPageTemplates();
+      // Then
+      verify(mockLandingPageRepo.getAllLandingPageTemplates());
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.getAllLandingPageTemplates())
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockLandingPageRepo.getAllLandingPageTemplates();
+      // Then
+      verify(mockLandingPageRepo.getAllLandingPageTemplates());
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
