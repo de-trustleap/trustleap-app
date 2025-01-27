@@ -35,6 +35,12 @@ class PageBuilderContactFormView extends StatelessWidget {
                   widgetModel: widgetModel)
             ],
             const SizedBox(height: 16),
+            if (properties.phoneTextFieldProperties != null) ...[
+              PageBuilderTextFieldView(
+                  properties: properties.phoneTextFieldProperties!,
+                  widgetModel: widgetModel)
+            ],
+            const SizedBox(height: 16),
             if (properties.messageTextFieldProperties != null) ...[
               PageBuilderTextFieldView(
                   properties: properties.messageTextFieldProperties!,

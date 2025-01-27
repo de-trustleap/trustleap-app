@@ -8,6 +8,7 @@ class PageBuilderContactFormProperties extends Equatable
   final String? email;
   final PageBuilderTextFieldProperties? nameTextFieldProperties;
   final PageBuilderTextFieldProperties? emailTextFieldProperties;
+  final PageBuilderTextFieldProperties? phoneTextFieldProperties;
   final PageBuilderTextFieldProperties? messageTextFieldProperties;
   final PageBuilderButtonProperties? buttonProperties;
 
@@ -15,6 +16,7 @@ class PageBuilderContactFormProperties extends Equatable
     required this.email,
     required this.nameTextFieldProperties,
     required this.emailTextFieldProperties,
+    required this.phoneTextFieldProperties,
     required this.messageTextFieldProperties,
     required this.buttonProperties,
   });
@@ -23,6 +25,7 @@ class PageBuilderContactFormProperties extends Equatable
       {String? email,
       PageBuilderTextFieldProperties? nameTextFieldProperties,
       PageBuilderTextFieldProperties? emailTextFieldProperties,
+      PageBuilderTextFieldProperties? phoneTextFieldProperties,
       PageBuilderTextFieldProperties? messageTextFieldProperties,
       PageBuilderButtonProperties? buttonProperties}) {
     return PageBuilderContactFormProperties(
@@ -31,6 +34,8 @@ class PageBuilderContactFormProperties extends Equatable
           nameTextFieldProperties ?? this.nameTextFieldProperties,
       emailTextFieldProperties:
           emailTextFieldProperties ?? this.emailTextFieldProperties,
+      phoneTextFieldProperties:
+          phoneTextFieldProperties ?? this.phoneTextFieldProperties,
       messageTextFieldProperties:
           messageTextFieldProperties ?? this.messageTextFieldProperties,
       buttonProperties: buttonProperties ?? this.buttonProperties,
@@ -42,6 +47,7 @@ class PageBuilderContactFormProperties extends Equatable
         email,
         nameTextFieldProperties,
         emailTextFieldProperties,
+        phoneTextFieldProperties,
         messageTextFieldProperties,
         buttonProperties
       ];
