@@ -2387,10 +2387,16 @@ abstract class AppLocalizations {
   /// **'E-Mail textfield'**
   String get pagebuilder_contact_form_config_email_textfield_title;
 
+  /// Title for collapsible menu for the phone textfield configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Phone textfield'**
+  String get pagebuilder_contact_form_config_phone_textfield_title;
+
   /// Title for collapsible menu for the message textfield configuration in the contactform configuration in the pagebuilder config menu
   ///
   /// In en, this message translates to:
-  /// **'Nachricht textfield'**
+  /// **'Message textfield'**
   String get pagebuilder_contact_form_config_message_textfield_title;
 
   /// Title for collapsible menu for the button configuration in the contactform configuration in the pagebuilder config menu

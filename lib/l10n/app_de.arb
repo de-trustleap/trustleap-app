@@ -1550,6 +1550,10 @@
     "@pagebuilder_contact_form_config_email_textfield_title": {
         "description": "Titel für ausklappbares Menü für die E-Mail Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
     },
+    "pagebuilder_contact_form_config_phone_textfield_title": "Telefon Textfeld",
+    "@pagebuilder_contact_form_config_phone_textfield_title": {
+        "description": "Titel für ausklappbares Menü für die Telefon Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
     "pagebuilder_contact_form_config_message_textfield_title": "Nachricht Textfeld",
     "@pagebuilder_contact_form_config_message_textfield_title": {
         "description": "Titel für ausklappbares Menü für die Nachricht Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"

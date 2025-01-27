@@ -1159,6 +1159,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pagebuilder_contact_form_config_email_textfield_title => 'E-Mail Textfeld';
 
   @override
+  String get pagebuilder_contact_form_config_phone_textfield_title => 'Telefon Textfeld';
+
+  @override
   String get pagebuilder_contact_form_config_message_textfield_title => 'Nachricht Textfeld';
 
   @override
