@@ -1295,6 +1295,30 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get delete_account_confirmation_alert_cancel_button_title;
 
+  /// Prefix for LeadTextField title
+  ///
+  /// In en, this message translates to:
+  /// **'Text for'**
+  String get recommendation_page_leadTextField_title_prefix;
+
+  /// Title for the send button
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get recommendation_page_leadTextField_send_button;
+
+  /// Message shown when the message cannot be sent
+  ///
+  /// In en, this message translates to:
+  /// **'WhatsApp is not installed or cannot be opened.'**
+  String get recommendation_page_send_whatsapp_error;
+
+  /// Message shown when more than 6 items are added
+  ///
+  /// In en, this message translates to:
+  /// **'A maximum of 6 items can be added.'**
+  String get recommendation_page_max_item_Message;
+
   /// Placeholder for the drop-down menu of recommendation reasons on the recommendation page.
   ///
   /// In en, this message translates to:

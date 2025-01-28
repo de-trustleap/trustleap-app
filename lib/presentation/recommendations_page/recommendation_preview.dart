@@ -1,4 +1,6 @@
 import 'package:finanzbegleiter/domain/entities/leadItem.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/LeadTextField.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +24,10 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   void initState() {
     super.initState();
 
-    // TabController initialisieren wenn mehrere leads
     if (widget.leads.length > 1) {
       tabController = TabController(length: widget.leads.length, vsync: this);
     }
 
-   // TextEditingController für jeden Lead erstellen
     textControllers = List.generate(
       widget.leads.length,
       (index) => TextEditingController(
@@ -79,18 +79,19 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   }
 
   Future<void> _sendMessage(String leadName, String message) async {
+    final localization = AppLocalizations.of(context);
     final whatsappUrl = Uri.parse("https://api.whatsapp.com/send/?text=${Uri.encodeComponent(message)}");
     if (await canLaunchUrl(whatsappUrl)) {
       await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("WhatsApp ist nicht installiert oder kann nicht geöffnet werden.")),
-      );
+      if (!mounted) return;
+      CustomSnackBar.of(context).showCustomSnackBar(localization.recommendation_page_send_whatsapp_error);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context);
     // Wenn nur ein Lead vorhanden ist, brauchen wir keine Tabs
     final isSingleLead = widget.leads.length == 1;
 
@@ -133,7 +134,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                               onSendPressed: () {
                                 _sendMessage(
                                   entry.value.name,
-                                  textControllers[entry.key].text,
+                                  textControllers[entry.key].text
                                 );
                               },
                             ),

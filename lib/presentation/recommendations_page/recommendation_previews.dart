@@ -1,10 +1,9 @@
 import 'package:finanzbegleiter/domain/entities/leadItem.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationPreviews extends StatefulWidget {
   final LeadItem lead; // Liste der Leads (Namen und Gründe)
-  
-
   const RecommendationPreviews({super.key, required this.lead});
 
   @override
@@ -13,7 +12,7 @@ class RecommendationPreviews extends StatefulWidget {
 
 class _RecommendationPreviewState extends State<RecommendationPreviews>
     with TickerProviderStateMixin {
-  TextEditingController? controller;
+  late TextEditingController controller;
   List<TextEditingController> textControllers = [];
 
   @override
@@ -24,13 +23,10 @@ class _RecommendationPreviewState extends State<RecommendationPreviews>
 
   @override
   Widget build(BuildContext context) {
-
-    return TextField(
+    return FormTextfield(
       controller: controller, // Füllung mit dem fixen Inhalt
-      decoration: InputDecoration(
-        labelText: 'Lead',
-        border: OutlineInputBorder(),
-      ),
+      placeholder: '',
+      disabled: false,
     );
   }
 }

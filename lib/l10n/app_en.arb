@@ -812,6 +812,24 @@
     "@delete_account_confirmation_alert_cancel_button_title": {
         "description": "Title for the cancel button on the confirmation alert to delete the account."
     },
+
+    "recommendation_page_leadTextField_title_prefix": "Text for",
+    "@recommendation_page_leadTextField_title_prefix": {
+        "description": "Prefix for LeadTextField title"
+    },
+    "recommendation_page_leadTextField_send_button": "Send",
+    "@recommendation_page_leadTextField_send_button": {
+        "description": "Title for the send button"
+    },
+    "recommendation_page_send_whatsapp_error": "WhatsApp is not installed or cannot be opened.",
+    "@recommendation_page_send_whatsapp_error": {
+        "description": "Message shown when the message cannot be sent"
+    },
+    "recommendation_page_max_item_Message": "A maximum of 6 items can be added.",
+    "@recommendation_page_max_item_Message": {
+        "description": "Message shown when more than 6 items are added"
+    },
+    
     "recommendations_choose_reason_placeholder": "Choose a reason",
     "@recommendations_choose_reason_placeholder": {
         "description": "Placeholder for the drop-down menu of recommendation reasons on the recommendation page."

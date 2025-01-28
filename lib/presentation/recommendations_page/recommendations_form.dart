@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
@@ -71,6 +72,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   void addLead(LeadsValidator validator) {
+    final localization = AppLocalizations.of(context);
     if (leads.length < 6) {
       if (formKey.currentState!.validate() &&
           validator.validateReason(selectedReason) == null) {
@@ -93,12 +95,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
         });
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Es dürfen maximal 6 Items hinzugefügt werden.'),
-          duration: Duration(seconds: 2),
-        ),
-      );
+      CustomSnackBar.of(context).showCustomSnackBar(localization.recommendation_page_max_item_Message);
     }
   }
 
@@ -147,24 +144,10 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
         ).reason;
     return selectedReason as String;
   }
-
   void generateRecommendation() {
     setState(() {
       showRecommendation = true;
     });
-
-    sendMessageViaWhatsApp();
-  }
-  
-//https://api.whatsapp.com/send/?phone=01711210196&text=I%27m+interested+in+your+car+for+sale
-
-  void sendMessageViaWhatsApp() async {
-    /*   String url = "https://api.whatsapp.com/send?text=iwanttotestit";
-    if (await canLaunchUrl(Uri.parse(Uri.encodeFull(url)))) {
-      await launchUrl(Uri.parse(Uri.encodeFull(url)));
-    } else {
-      throw "Could not launch";
-    } */
   }
 
   @override
