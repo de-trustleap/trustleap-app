@@ -32,19 +32,20 @@ void main() {
         ownerID: UniqueID.fromUniqueString("1"));
     final testImageData = Uint8List(1);
     const imageHasChanged = false;
+    const templateID = "1";
     test("should call landingpage repo if function is called", () async {
       // Given
       when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+              testLandingPage, testImageData, imageHasChanged, templateID))
           .thenAnswer((_) async => right(unit));
       // When
       landingPageCubit.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
+          testLandingPage, testImageData, imageHasChanged, templateID);
       await untilCalled(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged));
+          testLandingPage, testImageData, imageHasChanged, templateID));
       // Then
       verify(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged));
+          testLandingPage, testImageData, imageHasChanged, templateID));
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
 
@@ -58,12 +59,12 @@ void main() {
       ];
       // When
       when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+              testLandingPage, testImageData, imageHasChanged, templateID))
           .thenAnswer((_) async => right(unit));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
       landingPageCubit.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
+          testLandingPage, testImageData, imageHasChanged, templateID);
     });
 
     test(
@@ -76,12 +77,12 @@ void main() {
       ];
       // When
       when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged))
+              testLandingPage, testImageData, imageHasChanged, templateID))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
       landingPageCubit.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged);
+          testLandingPage, testImageData, imageHasChanged, templateID);
     });
   });
 
@@ -152,14 +153,17 @@ void main() {
     const testUserId = "1";
     test("should call landingpage repo if function is called", () async {
       // Given
-      when(mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId))
+      when(mockLandingPageRepo.toggleLandingPageActivity(
+              testId, testIsActive, testUserId))
           .thenAnswer((_) async => right(unit));
       // When
-      landingPageCubit.toggleLandingPageActivity(testId, testIsActive, testUserId);
-      await untilCalled(
-          mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId));
+      landingPageCubit.toggleLandingPageActivity(
+          testId, testIsActive, testUserId);
+      await untilCalled(mockLandingPageRepo.toggleLandingPageActivity(
+          testId, testIsActive, testUserId));
       // Then
-      verify(mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId));
+      verify(mockLandingPageRepo.toggleLandingPageActivity(
+          testId, testIsActive, testUserId));
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
 
@@ -172,11 +176,13 @@ void main() {
         ToggleLandingPageActivitySuccessState(isActive: testIsActive)
       ];
       // When
-      when(mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId))
+      when(mockLandingPageRepo.toggleLandingPageActivity(
+              testId, testIsActive, testUserId))
           .thenAnswer((_) async => right(unit));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
-      landingPageCubit.toggleLandingPageActivity(testId, testIsActive, testUserId);
+      landingPageCubit.toggleLandingPageActivity(
+          testId, testIsActive, testUserId);
     });
 
     test(
@@ -188,11 +194,13 @@ void main() {
         ToggleLandingPageActivityFailureState(failure: BackendFailure())
       ];
       // When
-      when(mockLandingPageRepo.toggleLandingPageActivity(testId, testIsActive, testUserId))
+      when(mockLandingPageRepo.toggleLandingPageActivity(
+              testId, testIsActive, testUserId))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
-      landingPageCubit.toggleLandingPageActivity(testId, testIsActive, testUserId);
+      landingPageCubit.toggleLandingPageActivity(
+          testId, testIsActive, testUserId);
     });
   });
 
@@ -252,8 +260,7 @@ void main() {
           .thenAnswer((_) async => right(unit));
       // When
       landingPageCubit.duplicateLandingPage(testId);
-      await untilCalled(
-          mockLandingPageRepo.duplicateLandingPage(testId));
+      await untilCalled(mockLandingPageRepo.duplicateLandingPage(testId));
       // Then
       verify(mockLandingPageRepo.duplicateLandingPage(testId));
       verifyNoMoreInteractions(mockLandingPageRepo);
@@ -334,6 +341,48 @@ void main() {
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
       landingPageCubit.getUser();
+    });
+  });
+
+  group("LandingPageCubit_CheckLandingPageImage", () {
+    final testLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("1"),
+        name: "Test",
+        description: "Test",
+        ownerID: UniqueID.fromUniqueString("1"));
+    final testLandingPage2 = LandingPage(
+        id: UniqueID.fromUniqueString("1"),
+        name: "Test",
+        description: "Test",
+        thumbnailDownloadURL: "Test",
+        ownerID: UniqueID.fromUniqueString("1"));
+    final testImageData = Uint8List(1);
+    test("should emit LandingPageImageValid when there is a download url", () {
+      // Given
+      final expectedResult = [LandingPageImageValid()];
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.checkLandingPageImage(testLandingPage2, testImageData);
+    });
+
+    test(
+        "should emit LandingPageImageValid when there is no download url and imageData is there",
+        () {
+      // Given
+      final expectedResult = [LandingPageImageValid()];
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.checkLandingPageImage(testLandingPage, testImageData);
+    });
+
+    test(
+        "should emit LandingPageNoImageFailureState when there is no imageData",
+        () {
+      // Given
+      final expectedResult = [LandingPageNoImageFailureState()];
+      // Then
+      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
+      landingPageCubit.checkLandingPageImage(testLandingPage, null);
     });
   });
 }

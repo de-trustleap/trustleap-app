@@ -23,4 +23,28 @@ class LandingPageCreatorFormValidator {
       return null;
     }
   }
+
+  String? validateLandingPageImpressum(String? input) {
+    if (input == null || input.isEmpty) {
+      return localization.landingpage_validate_impressum;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateLandingPagePrivacyPolicy(String? input) {
+    if (input == null || input.isEmpty) {
+      return localization.landingpage_validate_privacy_policy;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateLandingPageInitialInformation(String? input) {
+    if (input == null || input.isEmpty) {
+      return localization.landingpage_validate_initial_information;
+    } else {
+      return null;
+    }
+  }
 }

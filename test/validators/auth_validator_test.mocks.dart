@@ -663,11 +663,96 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_validate_impressum => (super.noSuchMethod(
+        Invocation.getter(#landingpage_validate_impressum),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_validate_impressum),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_validate_privacy_policy => (super.noSuchMethod(
+        Invocation.getter(#landingpage_validate_privacy_policy),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_validate_privacy_policy),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_validate_initial_information => (super.noSuchMethod(
+        Invocation.getter(#landingpage_validate_initial_information),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_validate_initial_information),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creation_impressum_placeholder => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creation_impressum_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creation_impressum_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creation_privacy_policy_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creation_privacy_policy_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creation_privacy_policy_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creation_initial_information_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_creation_initial_information_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_creation_initial_information_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creation_back_button_text => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creation_back_button_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creation_back_button_text),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creation_edit_button_text => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creation_edit_button_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creation_edit_button_text),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_create_txt => (super.noSuchMethod(
         Invocation.getter(#landingpage_create_txt),
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_create_txt),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creation_continue => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creation_continue),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creation_continue),
         ),
       ) as String);
 
@@ -2695,6 +2780,26 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_config_menu_content_tab =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_content_tab),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_content_tab),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_design_tab =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_design_tab),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_design_tab),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_config_menu_container_type =>
       (super.noSuchMethod(
         Invocation.getter(#landingpage_pagebuilder_config_menu_container_type),
@@ -2784,6 +2889,986 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_pagebuilder_config_menu_unknown_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_text_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_text_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_text_config_text_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_alignment),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_text_config_alignment),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_left =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_alignment_left),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_alignment_left),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_center =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_text_config_alignment_center),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_alignment_center),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_right =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_alignment_right),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_alignment_right),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_alignment_justify =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_text_config_alignment_justify),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_alignment_justify),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_lineheight =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_lineheight),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_text_config_lineheight),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_letterspacing =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_letterspacing),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_text_config_letterspacing),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_color => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_color),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_text_config_color),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_font_family =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_font_family),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_text_config_font_family),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_shadow),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_text_config_shadow),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_text_config_shadow_alert_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_shadow_alert_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_spread_radius =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_text_config_shadow_alert_spread_radius),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_shadow_alert_spread_radius),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_text_config_shadow_alert_blur_radius),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_shadow_alert_blur_radius),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_x_offset =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_text_config_shadow_alert_x_offset),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_shadow_alert_x_offset),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_y_offset =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_text_config_shadow_alert_y_offset),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_shadow_alert_y_offset),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_shadow_alert_apply =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_text_config_shadow_alert_apply),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_shadow_alert_apply),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_fontsize =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_fontsize),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_text_config_fontsize),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_color_picker_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_color_picker_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_color_picker_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_color_picker_hex_textfield =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_color_picker_hex_textfield),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_color_picker_hex_textfield),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_color_picker_ok_button =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_color_picker_ok_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_color_picker_ok_button),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_text_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_text_config_text_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_text_config_text_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_text_config_content_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_text_config_content_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_text_config_content_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_top => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_layout_spacing_top),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_layout_spacing_top),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_bottom =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_layout_spacing_bottom),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_layout_spacing_bottom),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_left => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_layout_spacing_left),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_layout_spacing_left),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_spacing_right =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_layout_spacing_right),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_layout_spacing_right),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_layout_menu_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_layout_menu_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_padding => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_layout_menu_padding),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_layout_menu_padding),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_margin => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_layout_menu_margin),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_layout_menu_margin),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_alignment =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_layout_menu_alignment),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_layout_menu_alignment),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_image_control_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_layout_menu_image_control_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_layout_menu_image_control_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_contentmode =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_layout_menu_background_contentmode),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_layout_menu_background_contentmode),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_overlay =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_layout_menu_background_overlay),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_layout_menu_background_overlay),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_layout_menu_background),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_layout_menu_background),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_background_color =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_layout_menu_background_color),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_layout_menu_background_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_alignment_top_left => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_alignment_top_left),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_alignment_top_left),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_alignment_top_center =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_alignment_top_center),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_alignment_top_center),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_alignment_top_right => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_alignment_top_right),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_alignment_top_right),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_alignment_center_left =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_alignment_center_left),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_alignment_center_left),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_alignment_center => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_alignment_center),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_alignment_center),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_alignment_center_right =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_alignment_center_right),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_alignment_center_right),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_alignment_bottom_left =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_alignment_bottom_left),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_alignment_bottom_left),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_alignment_bottom_center =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_alignment_bottom_center),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_alignment_bottom_center),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_alignment_bottom_right =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_alignment_bottom_right),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_alignment_bottom_right),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_size_control_size => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_size_control_size),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_size_control_size),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_size_control_width => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_size_control_width),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_size_control_width),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_layout_menu_size_control_height => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_layout_menu_size_control_height),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_layout_menu_size_control_height),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_image_config_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_image_config_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_image_config_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_image_config_content_mode => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_image_config_content_mode),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_image_config_content_mode),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_image_config_image_overlay => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_image_config_image_overlay),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_image_config_image_overlay),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_image_config_border_radius => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_image_config_border_radius),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_image_config_border_radius),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_image_config_image_content => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_image_config_image_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_image_config_image_content),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_config_container_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_config_container_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_shadow =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_config_container_shadow),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_config_container_shadow),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_row_config_row_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_row_config_row_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_equal_heights =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_row_config_row_equal_heights),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_row_config_row_equal_heights),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_main_axis_alignment =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_row_config_row_main_axis_alignment),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_row_config_row_main_axis_alignment),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_row_config_row_cross_axis_alignment =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_row_config_row_cross_axis_alignment),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_row_config_row_cross_axis_alignment),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_column_config_column_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_column_config_column_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_column_config_column_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_icon_content => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_icon_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_icon_content),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_icon_content_change_icon =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_icon_content_change_icon),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_icon_content_change_icon),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_icon_config_icon_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_icon_config_icon_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_icon_config_color => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_icon_config_color),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_icon_config_color),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_icon_config_size => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_icon_config_size),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_icon_config_size),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_icon_config_icon_picker_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_icon_config_icon_picker_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_close =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_icon_config_icon_picker_close),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_icon_config_icon_picker_close),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_icon_config_icon_picker_search =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_icon_config_icon_picker_search),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_icon_config_icon_picker_search),
+        ),
+      ) as String);
+
+  @override
+  String
+      get landingpage_pagebuilder_icon_config_icon_picker_search_no_results =>
+          (super.noSuchMethod(
+            Invocation.getter(
+                #landingpage_pagebuilder_icon_config_icon_picker_search_no_results),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(
+                  #landingpage_pagebuilder_icon_config_icon_picker_search_no_results),
+            ),
+          ) as String);
+
+  @override
+  String get landingpage_pagebuilder_contactform_content_email =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_contactform_content_email),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_contactform_content_email),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_contactform_content_email_subtitle =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_contactform_content_email_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_contactform_content_email_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_contactform_content_email_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_contactform_content_email_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_contactform_content_email_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_button_width => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_button_width),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_button_width),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_button_height => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_button_height),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_button_height),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_button_border_radius =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_button_border_radius),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_button_border_radius),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_button_background_color =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_button_background_color),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_button_background_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_button_text_configuration =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_button_text_configuration),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_button_config_button_text_configuration),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_config_name_textfield_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_contact_form_config_name_textfield_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_config_name_textfield_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_config_email_textfield_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_contact_form_config_email_textfield_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_config_email_textfield_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_config_message_textfield_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_contact_form_config_message_textfield_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_config_message_textfield_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_contact_form_config_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_contact_form_config_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_contact_form_config_button_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_textfield_config_textfield_width =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_textfield_config_textfield_width),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_textfield_config_textfield_width),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_textfield_config_textfield_min_lines =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_textfield_config_textfield_min_lines),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_textfield_config_textfield_min_lines),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_textfield_config_textfield_max_lines =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_textfield_config_textfield_max_lines),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_textfield_config_textfield_max_lines),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_textfield_config_textfield_required =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_textfield_config_textfield_required),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_textfield_config_textfield_required),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_textfield_config_textfield_background_color =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_textfield_config_textfield_background_color),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_textfield_config_textfield_background_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_textfield_config_textfield_border_color =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_textfield_config_textfield_border_color),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_textfield_config_textfield_border_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_textfield_config_textfield_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_textfield_config_textfield_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_textfield_config_textfield_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_textfield_config_textfield_text_configuration =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_textfield_config_textfield_text_configuration),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_textfield_config_textfield_text_configuration),
+        ),
+      ) as String);
+
+  @override
+  String
+      get pagebuilder_textfield_config_textfield_placeholder_text_configuration =>
+          (super.noSuchMethod(
+            Invocation.getter(
+                #pagebuilder_textfield_config_textfield_placeholder_text_configuration),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(
+                  #pagebuilder_textfield_config_textfield_placeholder_text_configuration),
+            ),
+          ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_section_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_section_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_section_type),
+        ),
+      ) as String);
+
+  @override
+  String landingpage_creation_progress_indicator_text(
+    int? currentStep,
+    int? elementsTotal,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #landingpage_creation_progress_indicator_text,
+          [
+            currentStep,
+            elementsTotal,
+          ],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #landingpage_creation_progress_indicator_text,
+            [
+              currentStep,
+              elementsTotal,
+            ],
+          ),
         ),
       ) as String);
 

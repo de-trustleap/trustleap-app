@@ -11,6 +11,7 @@ class RawFormTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final bool? obscureText;
   final Function? onChanged;
+  final Function? onEditingComplete;
   final Function? onFieldSubmitted;
   final String? Function(String?)? validator;
   final IconData? prefixIcon;
@@ -29,6 +30,7 @@ class RawFormTextField extends StatelessWidget {
       this.focusNode,
       this.obscureText,
       required this.onChanged,
+      this.onEditingComplete,
       this.onFieldSubmitted,
       this.keyboardType,
       this.validator,
@@ -53,6 +55,8 @@ class RawFormTextField extends StatelessWidget {
           onChanged!();
         }
       },
+      onEditingComplete: () =>
+          onEditingComplete != null ? onEditingComplete!() : (),
       onFieldSubmitted: (_) =>
           onFieldSubmitted != null ? onFieldSubmitted!() : (),
       readOnly: disabled ? true : false,

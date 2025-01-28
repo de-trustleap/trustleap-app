@@ -107,7 +107,8 @@ class MobileAppTheme {
       chipTheme: _lightChipTheme,
       popupMenuTheme: AppTheme.lightPopupMenuTheme,
       checkboxTheme: AppTheme.lightCheckboxTheme,
-      switchTheme: AppTheme.lightSwitchTheme);
+      switchTheme: AppTheme.lightSwitchTheme,
+      progressIndicatorTheme: AppTheme.lightProgressIndicatorTheme);
 
   static final ThemeData darkTheme = ThemeData(
       colorScheme: const ColorScheme.dark(
@@ -132,5 +133,6 @@ class MobileAppTheme {
       chipTheme: _darkChipTheme,
       popupMenuTheme: AppTheme.darkPopupMenuTheme,
       checkboxTheme: AppTheme.darkCheckboxTheme,
-      switchTheme: AppTheme.darkSwitchTheme);
+      switchTheme: AppTheme.darkSwitchTheme,
+      progressIndicatorTheme: AppTheme.darkProgressIndicatorTheme);
 }

@@ -110,5 +110,3 @@ class PageBuilderSectionModel extends Equatable {
   @override
   List<Object?> get props => [id, layout, background, maxWidth, widgets];
 }
-// TODO: Backend anpassen bzgl Background bei Section!
-// TODO: Backend speichern von Section Bildern ermöglichen!

@@ -12,6 +12,7 @@ class FormTextfield extends StatelessWidget {
   final bool? obscureText;
   final FocusNode? focusNode;
   final Function? onChanged;
+  final Function? onEditingComplete;
   final Function? onFieldSubmitted;
   final String? Function(String?)? validator;
   final IconData? prefixIcon;
@@ -30,6 +31,7 @@ class FormTextfield extends StatelessWidget {
       required this.disabled,
       required this.placeholder,
       this.onChanged,
+      this.onEditingComplete,
       this.validator,
       this.focusNode,
       this.obscureText,

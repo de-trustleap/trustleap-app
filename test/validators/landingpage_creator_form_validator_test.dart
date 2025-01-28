@@ -64,4 +64,84 @@ void main() {
       expect(result, null);
     });
   });
+
+  group("LandingPageCreatorFormValidator_validateLandingPageImpressum", () {
+    test("returns missing text error when input is null", () {
+      when(mockLocalizations.landingpage_validate_impressum)
+          .thenReturn("Missing impressum");
+
+      final result = formValidator.validateLandingPageImpressum(null);
+
+      expect(result, "Missing impressum");
+    });
+
+    test("returns missing text error when input is empty", () {
+      when(mockLocalizations.landingpage_validate_impressum)
+          .thenReturn("Missing impressum");
+
+      final result = formValidator.validateLandingPageImpressum("");
+
+      expect(result, "Missing impressum");
+    });
+
+    test("returns null when input is valid", () {
+      final result = formValidator.validateLandingPageImpressum("Test");
+
+      expect(result, null);
+    });
+  });
+
+  group("LandingPageCreatorFormValidator_validateLandingPagePrivacyPolicy", () {
+    test("returns missing text error when input is null", () {
+      when(mockLocalizations.landingpage_validate_privacy_policy)
+          .thenReturn("Missing privacy policy");
+
+      final result = formValidator.validateLandingPagePrivacyPolicy(null);
+
+      expect(result, "Missing privacy policy");
+    });
+
+    test("returns missing text error when input is empty", () {
+      when(mockLocalizations.landingpage_validate_privacy_policy)
+          .thenReturn("Missing privacy policy");
+
+      final result = formValidator.validateLandingPagePrivacyPolicy("");
+
+      expect(result, "Missing privacy policy");
+    });
+
+    test("returns null when input is valid", () {
+      final result = formValidator.validateLandingPagePrivacyPolicy("Test");
+
+      expect(result, null);
+    });
+  });
+
+  group("LandingPageCreatorFormValidator_validateLandingPageInitialInformation",
+      () {
+    test("returns missing text error when input is null", () {
+      when(mockLocalizations.landingpage_validate_initial_information)
+          .thenReturn("Missing initial information");
+
+      final result = formValidator.validateLandingPageInitialInformation(null);
+
+      expect(result, "Missing initial information");
+    });
+
+    test("returns missing text error when input is empty", () {
+      when(mockLocalizations.landingpage_validate_initial_information)
+          .thenReturn("Missing initial information");
+
+      final result = formValidator.validateLandingPageInitialInformation("");
+
+      expect(result, "Missing initial information");
+    });
+
+    test("returns null when input is valid", () {
+      final result =
+          formValidator.validateLandingPageInitialInformation("Test");
+
+      expect(result, null);
+    });
+  });
 }

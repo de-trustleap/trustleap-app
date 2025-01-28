@@ -49,7 +49,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
 
     if (landingPage.ownerID == user.id) {
       return InkWell(
-          onTap: () => CustomNavigator.navigate(
+          onTap: () => CustomNavigator.openInNewTab(
               "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
           child: buildTile(themeData, responsiveValue, localizations, context));
     } else {
@@ -86,7 +86,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            CustomNavigator.navigate(
+                            CustomNavigator.pushNamed(
                                 "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
                                 arguments: landingPage);
                           },

@@ -214,7 +214,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_validate_LandingPageText => 'Please enter text!';
 
   @override
+  String get landingpage_validate_impressum => 'Please enter impressum';
+
+  @override
+  String get landingpage_validate_privacy_policy => 'Please enter privacy policy';
+
+  @override
+  String get landingpage_validate_initial_information => 'Please enter initial information';
+
+  @override
+  String landingpage_creation_progress_indicator_text(int currentStep, int elementsTotal) {
+    return 'Step $currentStep of $elementsTotal';
+  }
+
+  @override
+  String get landingpage_creation_impressum_placeholder => 'Impressum';
+
+  @override
+  String get landingpage_creation_privacy_policy_placeholder => 'Privacy policy';
+
+  @override
+  String get landingpage_creation_initial_information_placeholder => 'Initial information';
+
+  @override
+  String get landingpage_creation_back_button_text => 'Back';
+
+  @override
+  String get landingpage_creation_edit_button_text => 'Edit Landingpage';
+
+  @override
   String get landingpage_create_txt => 'Create Landing Page';
+
+  @override
+  String get landingpage_creation_continue => 'Continue';
 
   @override
   String get landingpage_create_promotion_template_description => 'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use the placeholder \$name to display the name of the recommendation recipient.';

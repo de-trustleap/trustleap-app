@@ -104,6 +104,11 @@ class EditLandingPageSuccessState extends LandingPageState with EquatableMixin {
 class LandingPageImageExceedsFileSizeLimitFailureState
     extends LandingPageState {}
 
+class LandingPageImageValid extends LandingPageState with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
 class LandingPageNoImageFailureState extends LandingPageState
     with EquatableMixin {
   @override
@@ -156,4 +161,30 @@ class ToggleLandingPageActivitySuccessState extends LandingPageState
   });
   @override
   List<Object> get props => [isActive];
+}
+
+class GetLandingPageTemplatesLoadingState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
+class GetLandingPageTemplatesFailureState extends LandingPageState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+  GetLandingPageTemplatesFailureState({
+    required this.failure,
+  });
+  @override
+  List<Object> get props => [failure];
+}
+
+class GetLandingPageTemplatesSuccessState extends LandingPageState
+    with EquatableMixin {
+  final List<LandingPageTemplate> templates;
+  GetLandingPageTemplatesSuccessState({
+    required this.templates,
+  });
+  @override
+  List<Object> get props => [templates];
 }

@@ -18,6 +18,9 @@ class LandingPageModel extends Equatable {
   final dynamic createdAt;
   final bool? isDefaultPage;
   final bool? isActive;
+  final String? impressum;
+  final String? privacyPolicy;
+  final String? initialInformation;
 
   const LandingPageModel(
       {required this.id,
@@ -32,7 +35,10 @@ class LandingPageModel extends Equatable {
       this.lastUpdatedAt,
       required this.createdAt,
       this.isDefaultPage,
-      this.isActive});
+      this.isActive,
+      this.impressum,
+      this.privacyPolicy,
+      this.initialInformation});
 
   LandingPageModel copyWith(
       {String? id,
@@ -47,7 +53,10 @@ class LandingPageModel extends Equatable {
       DateTime? lastUpdatedAt,
       dynamic createdAt,
       bool? isDefaultPage,
-      bool? isActive}) {
+      bool? isActive,
+      String? impressum,
+      String? privacyPolicy,
+      String? initialInformation}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -61,7 +70,10 @@ class LandingPageModel extends Equatable {
         lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
         createdAt: createdAt ?? this.createdAt,
         isDefaultPage: isDefaultPage ?? this.isDefaultPage,
-        isActive: isActive ?? this.isActive);
+        isActive: isActive ?? this.isActive,
+        impressum: impressum ?? this.impressum,
+        privacyPolicy: privacyPolicy ?? this.privacyPolicy,
+        initialInformation: initialInformation ?? this.initialInformation);
   }
 
   Map<String, dynamic> toMap() {
@@ -78,7 +90,10 @@ class LandingPageModel extends Equatable {
       'lastUpdatedAt': lastUpdatedAt,
       'createdAt': createdAt,
       'isDefaultPage': isDefaultPage,
-      'isActive': isActive
+      'isActive': isActive,
+      'impressum': impressum,
+      'privacyPolicy': privacyPolicy,
+      'initialInformation': initialInformation
     };
   }
 
@@ -106,11 +121,15 @@ class LandingPageModel extends Equatable {
             ? (map['lastUpdatedAt'] as Timestamp).toDate()
             : null,
         createdAt: map['createdAt'] as dynamic,
-        isDefaultPage: map['isDefaultPage'] != null
-            ? map['isDefaultPage'] as bool
-            : false,
-        isActive: map['isActive'] != null
-            ? map['isActive'] as bool
+        isDefaultPage:
+            map['isDefaultPage'] != null ? map['isDefaultPage'] as bool : false,
+        isActive: map['isActive'] != null ? map['isActive'] as bool : null,
+        impressum: map['impressum'] != null ? map['impressum'] as String : null,
+        privacyPolicy: map['privacyPolicy'] != null
+            ? map['privacyPolicy'] as String
+            : null,
+        initialInformation: map['initialInformation'] != null
+            ? map['initialInformation'] as String
             : null);
   }
 
@@ -125,14 +144,18 @@ class LandingPageModel extends Equatable {
         downloadImageUrl: downloadImageUrl,
         thumbnailDownloadURL: thumbnailDownloadURL,
         ownerID: ownerID != null ? UniqueID.fromUniqueString(ownerID!) : null,
-        contentID: contentID != null ? UniqueID.fromUniqueString(contentID!) : null,
+        contentID:
+            contentID != null ? UniqueID.fromUniqueString(contentID!) : null,
         description: description,
         promotionTemplate: promotionTemplate,
         associatedUsersIDs: associatedUsersIDs,
         lastUpdatedAt: lastUpdatedAt,
         createdAt: (createdAt as Timestamp).toDate(),
         isDefaultPage: isDefaultPage ?? false,
-        isActive: isActive);
+        isActive: isActive,
+        impressum: impressum,
+        privacyPolicy: privacyPolicy,
+        initialInformation: initialInformation);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -149,7 +172,10 @@ class LandingPageModel extends Equatable {
         lastUpdatedAt: landingPage.lastUpdatedAt,
         createdAt: FieldValue.serverTimestamp(),
         isDefaultPage: landingPage.isDefaultPage,
-        isActive: landingPage.isActive);
+        isActive: landingPage.isActive,
+        impressum: landingPage.impressum,
+        privacyPolicy: landingPage.privacyPolicy,
+        initialInformation: landingPage.initialInformation);
   }
 
   @override
@@ -163,6 +189,9 @@ class LandingPageModel extends Equatable {
         description,
         promotionTemplate,
         isDefaultPage,
-        isActive
+        isActive,
+        impressum,
+        privacyPolicy,
+        initialInformation
       ];
 }
