@@ -1550,7 +1550,11 @@
     "@pagebuilder_contact_form_config_email_textfield_title": {
         "description": "Title for collapsible menu for the email textfield configuration in the contactform configuration in the pagebuilder config menu"
     },
-    "pagebuilder_contact_form_config_message_textfield_title": "Nachricht textfield",
+    "pagebuilder_contact_form_config_phone_textfield_title": "Phone textfield",
+    "@pagebuilder_contact_form_config_phone_textfield_title": {
+        "description": "Title for collapsible menu for the phone textfield configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_message_textfield_title": "Message textfield",
     "@pagebuilder_contact_form_config_message_textfield_title": {
         "description": "Title for collapsible menu for the message textfield configuration in the contactform configuration in the pagebuilder config menu"
     },

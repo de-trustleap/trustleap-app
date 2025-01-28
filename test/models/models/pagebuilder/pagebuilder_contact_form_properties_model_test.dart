@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfiel
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 void main() {
   group("PagebuilderContactFormPropertiesModel_CopyWith", () {
@@ -22,14 +23,14 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihr Name"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -41,14 +42,33 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihre E-Mail"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          phoneTextFieldProperties: {
+            "width": 400.0,
+            "maxLines": 1,
+            "required": false,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre Telefonnummer"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -61,14 +81,14 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihre Nachricht"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -79,7 +99,7 @@ void main() {
             "backgroundColor": "FF333a56",
             "textProperties": {
               "alignment": "center",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FFFFFFFF",
               "text": "NACHRICHT SENDEN"
@@ -95,14 +115,14 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihr Name"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -114,14 +134,33 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": null,
               "text": "Ihre E-Mail"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          phoneTextFieldProperties: {
+            "width": 400.0,
+            "maxLines": 1,
+            "required": false,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre Telefonnummer"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -134,14 +173,14 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihre Nachricht"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -152,7 +191,7 @@ void main() {
             "backgroundColor": "FF333a56",
             "textProperties": {
               "alignment": "center",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FFFFFFFF",
               "text": "NACHRICHT SENDEN"
@@ -167,14 +206,14 @@ void main() {
         "borderColor": "FFDBDBDB",
         "placeHolderTextProperties": {
           "alignment": "left",
-          "fontSize": 16,
+          "fontSize": 16.0,
           "fontFamily": "Roboto",
           "color": null,
           "text": "Ihre E-Mail"
         },
         "textProperties": {
           "alignment": "left",
-          "fontSize": 16,
+          "fontSize": 16.0,
           "fontFamily": "Roboto"
         }
       });
@@ -196,14 +235,14 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihr Name"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -215,14 +254,33 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihre E-Mail"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          phoneTextFieldProperties: {
+            "width": 400.0,
+            "maxLines": 1,
+            "required": false,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre Telefonnummer"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -235,14 +293,14 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihre Nachricht"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -253,7 +311,7 @@ void main() {
             "backgroundColor": "FF333a56",
             "textProperties": {
               "alignment": "center",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FFFFFFFF",
               "text": "NACHRICHT SENDEN"
@@ -269,14 +327,14 @@ void main() {
           "borderColor": "FFDBDBDB",
           "placeHolderTextProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto",
             "color": "FF9A9A9C",
             "text": "Ihr Name"
           },
           "textProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto"
           }
         },
@@ -288,14 +346,33 @@ void main() {
           "borderColor": "FFDBDBDB",
           "placeHolderTextProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto",
             "color": "FF9A9A9C",
             "text": "Ihre E-Mail"
           },
           "textProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
+            "fontFamily": "Roboto"
+          }
+        },
+        "phoneTextFieldProperties": {
+          "width": 400.0,
+          "maxLines": 1,
+          "required": false,
+          "backgroundColor": "FFF9F9F9",
+          "borderColor": "FFDBDBDB",
+          "placeHolderTextProperties": {
+            "alignment": "left",
+            "fontSize": 16.0,
+            "fontFamily": "Roboto",
+            "color": "FF9A9A9C",
+            "text": "Ihre Telefonnummer"
+          },
+          "textProperties": {
+            "alignment": "left",
+            "fontSize": 16.0,
             "fontFamily": "Roboto"
           }
         },
@@ -308,14 +385,14 @@ void main() {
           "borderColor": "FFDBDBDB",
           "placeHolderTextProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto",
             "color": "FF9A9A9C",
             "text": "Ihre Nachricht"
           },
           "textProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto"
           }
         },
@@ -326,7 +403,7 @@ void main() {
           "backgroundColor": "FF333a56",
           "textProperties": {
             "alignment": "center",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto",
             "color": "FFFFFFFF",
             "text": "NACHRICHT SENDEN"
@@ -353,14 +430,14 @@ void main() {
           "borderColor": "FFDBDBDB",
           "placeHolderTextProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto",
             "color": "FF9A9A9C",
             "text": "Ihr Name"
           },
           "textProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto"
           }
         },
@@ -372,14 +449,33 @@ void main() {
           "borderColor": "FFDBDBDB",
           "placeHolderTextProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto",
             "color": "FF9A9A9C",
             "text": "Ihre E-Mail"
           },
           "textProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
+            "fontFamily": "Roboto"
+          }
+        },
+        "phoneTextFieldProperties": {
+          "width": 400.0,
+          "maxLines": 1,
+          "required": false,
+          "backgroundColor": "FFF9F9F9",
+          "borderColor": "FFDBDBDB",
+          "placeHolderTextProperties": {
+            "alignment": "left",
+            "fontSize": 16.0,
+            "fontFamily": "Roboto",
+            "color": "FF9A9A9C",
+            "text": "Ihre Telefonnummer"
+          },
+          "textProperties": {
+            "alignment": "left",
+            "fontSize": 16.0,
             "fontFamily": "Roboto"
           }
         },
@@ -392,14 +488,14 @@ void main() {
           "borderColor": "FFDBDBDB",
           "placeHolderTextProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto",
             "color": "FF9A9A9C",
             "text": "Ihre Nachricht"
           },
           "textProperties": {
             "alignment": "left",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto"
           }
         },
@@ -410,7 +506,7 @@ void main() {
           "backgroundColor": "FF333a56",
           "textProperties": {
             "alignment": "center",
-            "fontSize": 16,
+            "fontSize": 16.0,
             "fontFamily": "Roboto",
             "color": "FFFFFFFF",
             "text": "NACHRICHT SENDEN"
@@ -427,14 +523,14 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihr Name"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -446,14 +542,33 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihre E-Mail"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          phoneTextFieldProperties: {
+            "width": 400.0,
+            "maxLines": 1,
+            "required": false,
+            "backgroundColor": "FFF9F9F9",
+            "borderColor": "FFDBDBDB",
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "color": "FF9A9A9C",
+              "text": "Ihre Telefonnummer"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -466,14 +581,14 @@ void main() {
             "borderColor": "FFDBDBDB",
             "placeHolderTextProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FF9A9A9C",
               "text": "Ihre Nachricht"
             },
             "textProperties": {
               "alignment": "left",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto"
             }
           },
@@ -484,7 +599,7 @@ void main() {
             "backgroundColor": "FF333a56",
             "textProperties": {
               "alignment": "center",
-              "fontSize": 16,
+              "fontSize": 16.0,
               "fontFamily": "Roboto",
               "color": "FFFFFFFF",
               "text": "NACHRICHT SENDEN"
@@ -534,6 +649,23 @@ void main() {
               "fontSize": 16.0,
               "fontFamily": "Roboto",
               "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          phoneTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": false,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre Telefonnummer"
             },
             "textProperties": {
               "alignment": "left",
@@ -611,6 +743,35 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "Ihre E-Mail",
+                  fontSize: 16.0,
+                  fontFamily: "Roboto",
+                  lineHeight: null,
+                  letterSpacing: null,
+                  textShadow: null,
+                  color: null,
+                  alignment: TextAlign.left,
+                  isBold: null,
+                  isItalic: null),
+              textProperties: PageBuilderTextProperties(
+                  text: null,
+                  fontSize: 16.0,
+                  fontFamily: "Roboto",
+                  lineHeight: null,
+                  letterSpacing: null,
+                  textShadow: null,
+                  color: null,
+                  alignment: TextAlign.left,
+                  isBold: null,
+                  isItalic: null)),
+          phoneTextFieldProperties: PageBuilderTextFieldProperties(
+              width: 400.0,
+              minLines: 1,
+              maxLines: 1,
+              isRequired: false,
+              backgroundColor: null,
+              borderColor: null,
+              placeHolderTextProperties: PageBuilderTextProperties(
+                  text: "Ihre Telefonnummer",
                   fontSize: 16.0,
                   fontFamily: "Roboto",
                   lineHeight: null,
@@ -748,6 +909,35 @@ void main() {
                   alignment: TextAlign.left,
                   isBold: null,
                   isItalic: null)),
+          phoneTextFieldProperties: PageBuilderTextFieldProperties(
+              width: 400.0,
+              minLines: 1,
+              maxLines: 1,
+              isRequired: false,
+              backgroundColor: null,
+              borderColor: null,
+              placeHolderTextProperties: PageBuilderTextProperties(
+                  text: "Ihre Telefonnummer",
+                  fontSize: 16.0,
+                  fontFamily: "Roboto",
+                  lineHeight: null,
+                  letterSpacing: null,
+                  textShadow: null,
+                  color: null,
+                  alignment: TextAlign.left,
+                  isBold: null,
+                  isItalic: null),
+              textProperties: PageBuilderTextProperties(
+                  text: null,
+                  fontSize: 16.0,
+                  fontFamily: "Roboto",
+                  lineHeight: null,
+                  letterSpacing: null,
+                  textShadow: null,
+                  color: null,
+                  alignment: TextAlign.left,
+                  isBold: null,
+                  isItalic: null)),
           messageTextFieldProperties: PageBuilderTextFieldProperties(
               width: 400.0,
               minLines: 4,
@@ -831,6 +1021,23 @@ void main() {
               "fontFamily": "Roboto"
             }
           },
+          phoneTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": false,
+            "placeHolderTextProperties": {
+              "text": "Ihre Telefonnummer",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "alignment": "left",
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
           messageTextFieldProperties: {
             "width": 400.0,
             "minLines": 4,
@@ -864,7 +1071,12 @@ void main() {
       // When
       final result = PageBuilderContactFormPropertiesModel.fromDomain(model);
       // Then
-      expect(result, expectedResult);
+      final deepEquality = DeepCollectionEquality();
+      expect(
+        deepEquality.equals(result.toMap(), expectedResult.toMap()),
+        isTrue,
+      );
+      // expect(result, expectedResult);
     });
   });
 
@@ -902,6 +1114,23 @@ void main() {
               "fontSize": 16.0,
               "fontFamily": "Roboto",
               "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          phoneTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": false,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre Telefonnummer"
             },
             "textProperties": {
               "alignment": "left",
@@ -970,6 +1199,23 @@ void main() {
               "fontSize": 16.0,
               "fontFamily": "Roboto",
               "text": "Ihre E-Mail"
+            },
+            "textProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto"
+            }
+          },
+          phoneTextFieldProperties: {
+            "width": 400.0,
+            "minLines": 1,
+            "maxLines": 1,
+            "isRequired": false,
+            "placeHolderTextProperties": {
+              "alignment": "left",
+              "fontSize": 16.0,
+              "fontFamily": "Roboto",
+              "text": "Ihre Telefonnummer"
             },
             "textProperties": {
               "alignment": "left",
