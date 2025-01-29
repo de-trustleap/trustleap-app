@@ -2,12 +2,14 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/contact_form_view.dart';
+import 'package:finanzbegleiter/presentation/page_builder/page_elements/footer_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/icon_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/image_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_text.dart';
@@ -50,6 +52,9 @@ class LandingPageBuilderWidgetBuilder {
       case PageBuilderWidgetType.contactForm:
         return buildContactFormWidget(
             model.properties as PageBuilderContactFormProperties, model);
+      case PageBuilderWidgetType.footer:
+        return buildFooterWidget(
+            model.properties as PagebuilderFooterProperties, model);
       default:
         return const SizedBox.shrink();
     }
@@ -160,5 +165,10 @@ class LandingPageBuilderWidgetBuilder {
       PageBuilderContactFormProperties properties, PageBuilderWidget model) {
     return PageBuilderContactFormView(
         properties: properties, widgetModel: model);
+  }
+
+  Widget buildFooterWidget(
+      PagebuilderFooterProperties properties, PageBuilderWidget model) {
+    return PagebuilderFooterView(properties: properties, widgetModel: model);
   }
 }

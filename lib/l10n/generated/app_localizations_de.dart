@@ -919,6 +919,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_config_menu_contact_form_type => 'Kontaktformular';
 
   @override
+  String get landingpage_pagebuilder_config_menu_footer_type => 'Footer';
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unbekannt';
 
   @override

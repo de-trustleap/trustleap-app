@@ -80,6 +80,8 @@ class PageBuilderWidget extends Equatable {
       case == PageBuilderWidgetType.contactForm:
         return localization
             .landingpage_pagebuilder_config_menu_contact_form_type;
+      case == PageBuilderWidgetType.footer:
+        return localization.landingpage_pagebuilder_config_menu_footer_type;
       default:
         return localization.landingpage_pagebuilder_config_menu_unknown_type;
     }
