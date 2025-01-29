@@ -2470,6 +2470,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Section'**
   String get landingpage_pagebuilder_config_menu_section_type;
+
+  /// Collapsible Menu for privacy policy configuration of the footer in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy Configuration'**
+  String get landingpage_pagebuilder_footer_config_privacy_policy;
+
+  /// Collapsible Menu for impressum configuration of the footer in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Impressum Configuration'**
+  String get landingpage_pagebuilder_footer_config_impressum;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

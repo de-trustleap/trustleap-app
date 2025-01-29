@@ -32,7 +32,8 @@ class _LandingPageBuilderConfigMenuState
     switch (widget.model?.elementType) {
       case PageBuilderWidgetType.container ||
             PageBuilderWidgetType.column ||
-            PageBuilderWidgetType.row:
+            PageBuilderWidgetType.row ||
+            PageBuilderWidgetType.footer:
         return true;
       default:
         return false;
@@ -58,7 +59,9 @@ class _LandingPageBuilderConfigMenuState
               width: menuWidth,
               color: themeData.colorScheme.surface,
               child: LandingPageBuilderConfigMenuContent(
-                key: widget.model != null ? ValueKey("${widget.model?.id}+1") : ValueKey("${widget.section?.id}+1"),
+                key: widget.model != null
+                    ? ValueKey("${widget.model?.id}+1")
+                    : ValueKey("${widget.section?.id}+1"),
                 animationDuration: animationDuration,
                 menuWidth: menuWidth,
                 model: widget.model,
