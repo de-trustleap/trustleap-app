@@ -1907,6 +1907,12 @@ abstract class AppLocalizations {
   /// **'Contact Form'**
   String get landingpage_pagebuilder_config_menu_contact_form_type;
 
+  /// Footer title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Footer'**
+  String get landingpage_pagebuilder_config_menu_footer_type;
+
   /// Unknown title in the pagebuilder config menu
   ///
   /// In en, this message translates to:

@@ -76,6 +76,7 @@ enum PageBuilderWidgetType {
   icon,
   button,
   contactForm,
+  footer,
   none
 }
 
