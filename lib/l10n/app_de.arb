@@ -1605,5 +1605,13 @@
     "landingpage_pagebuilder_config_menu_section_type": "Section",
     "@landingpage_pagebuilder_config_menu_section_type": {
         "description": "Section Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_footer_config_privacy_policy": "Datenschutzerklärung Konfiguration",
+    "@landingpage_pagebuilder_footer_config_privacy_policy": {
+        "description": "Ausklappares Menü für Datenschutz Konfiguration des Footers im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_footer_config_impressum": "Impressum Konfiguration",
+    "@landingpage_pagebuilder_footer_config_impressum": {
+        "description": "Ausklappares Menü für Impressum Konfiguration des Footers im Pagebuilder Config Menü"
     }
 }

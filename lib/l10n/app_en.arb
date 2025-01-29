@@ -1605,5 +1605,13 @@
     "landingpage_pagebuilder_config_menu_section_type": "Section",
     "@landingpage_pagebuilder_config_menu_section_type": {
         "description": "Section Title in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_footer_config_privacy_policy": "Privacy Policy Configuration",
+    "@landingpage_pagebuilder_footer_config_privacy_policy": {
+        "description": "Collapsible Menu for privacy policy configuration of the footer in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_footer_config_impressum": "Impressum Configuration",
+    "@landingpage_pagebuilder_footer_config_impressum": {
+        "description": "Collapsible Menu for impressum configuration of the footer in the pagebuilder config menu"
     }
 }

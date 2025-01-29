@@ -1199,4 +1199,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_config_menu_section_type => 'Section';
+
+  @override
+  String get landingpage_pagebuilder_footer_config_privacy_policy => 'Datenschutzerklärung Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_footer_config_impressum => 'Impressum Konfiguration';
 }
