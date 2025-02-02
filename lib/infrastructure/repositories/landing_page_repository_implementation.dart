@@ -101,6 +101,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("createLandingPage");
     final landingPageModel = LandingPageModel.fromDomain(landingPage);
+
     try {
       await callable.call({
         "appCheckToken": appCheckToken,

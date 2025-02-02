@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
@@ -103,7 +104,8 @@ class MyApp extends StatelessWidget {
               ..add(AuthObserverStartedEvent())),
         BlocProvider(create: (context) => Modular.get<MenuCubit>()),
         BlocProvider(create: (context) => Modular.get<ThemeCubit>()),
-        BlocProvider(create: (context) => Modular.get<ProfileObserverBloc>())
+        BlocProvider(create: (context) => Modular.get<ProfileObserverBloc>()),
+        BlocProvider(create: (context) => Modular.get<PermissionCubit>())
       ],
       child: MultiBlocListener(
           listeners: [
@@ -111,45 +113,61 @@ class MyApp extends StatelessWidget {
                 listenWhen: (previous, current) => previous != current,
                 listener: (context, state) {
                   if (state is AuthStateUnAuthenticated) {
+                    Modular.get<PermissionCubit>().permissionInitiallyLoaded =
+                        false;
                     routeToInitial(AuthStatus.unAuthenticated);
                   } else if (state is AuthStateAuthenticated) {
-                    routeToInitial(AuthStatus.authenticated);
+                    Modular.get<PermissionCubit>().observePermissions();
                   } else if (state is AuthStateAuthenticatedAsAdmin) {
+                    Modular.get<PermissionCubit>().permissionInitiallyLoaded =
+                        false;
                     routeToInitial(AuthStatus.authenticatedAsAdmin);
                   }
                 }),
             BlocListener<AuthObserverBloc, AuthObserverState>(
                 listener: (context, state) {
               if (state is AuthObserverStateUnAuthenticated) {
+                Modular.get<PermissionCubit>().permissionInitiallyLoaded =
+                    false;
                 routeToInitial(AuthStatus.unAuthenticated);
               } else if (state is AuthObserverStateAuthenticated) {
+                Modular.get<PermissionCubit>().observePermissions();
+              }
+            }),
+            BlocListener<PermissionCubit, PermissionState>(
+                listener: (context, state) {
+              if (state is PermissionSuccessState) {
                 routeToInitial(AuthStatus.authenticated);
               }
             })
           ],
-          child: BlocBuilder<ThemeCubit, ThemeState>(
+          child: BlocBuilder<PermissionCubit, PermissionState>(
             builder: (context, state) {
-              return MaterialApp.router(
-                routerConfig: Modular.routerConfig,
-                title: "Trust Leap",
-                theme: getTheme(context, state),
-                supportedLocales: L10n.all,
-                locale: const Locale("de"),
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate
-                ],
-                debugShowCheckedModeBanner: false,
-                builder: (context, widget) => ResponsiveBreakpoints.builder(
-                    child: widget!,
-                    breakpoints: const [
-                      Breakpoint(start: 0, end: 599, name: MOBILE),
-                      Breakpoint(start: 600, end: 999, name: TABLET),
-                      Breakpoint(
-                          start: 1000, end: double.infinity, name: DESKTOP)
-                    ]),
+              return BlocBuilder<ThemeCubit, ThemeState>(
+                builder: (context, themeState) {
+                  return MaterialApp.router(
+                    routerConfig: Modular.routerConfig,
+                    title: "Trust Leap",
+                    theme: getTheme(context, themeState),
+                    supportedLocales: L10n.all,
+                    locale: const Locale("de"),
+                    localizationsDelegates: const [
+                      AppLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate
+                    ],
+                    debugShowCheckedModeBanner: false,
+                    builder: (context, widget) => ResponsiveBreakpoints.builder(
+                        child: widget!,
+                        breakpoints: const [
+                          Breakpoint(start: 0, end: 599, name: MOBILE),
+                          Breakpoint(start: 600, end: 999, name: TABLET),
+                          Breakpoint(
+                              start: 1000, end: double.infinity, name: DESKTOP)
+                        ]),
+                  );
+                },
               );
             },
           )),
