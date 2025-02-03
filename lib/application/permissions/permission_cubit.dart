@@ -38,6 +38,3 @@ class PermissionCubit extends Cubit<PermissionState> {
     return super.close();
   }
 }
-
-// TODO: Test für Cubit, Repo
-// TODO: Backend Tests

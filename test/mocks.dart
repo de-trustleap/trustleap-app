@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.da
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
@@ -27,6 +28,7 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -40,6 +42,7 @@ import 'package:mockito/annotations.dart';
   LandingPageRepository,
   PromoterRepository,
   UserRepository,
+  PermissionRepository,
   User,
   SignInCubit,
   AuthCubit,
@@ -53,6 +56,7 @@ import 'package:mockito/annotations.dart';
   LandingPageImageBloc,
   ProfileObserverBloc,
   CompanyObserverCubit,
+  PermissionCubit,
   CompanyCubit,
   PromoterCubit,
   PromoterObserverCubit,
