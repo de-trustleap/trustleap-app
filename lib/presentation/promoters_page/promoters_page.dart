@@ -58,6 +58,7 @@ class _PromotersPageState extends State<PromotersPage>
   @override
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
@@ -75,22 +76,25 @@ class _PromotersPageState extends State<PromotersPage>
       child: Padding(
         padding: EdgeInsets.only(top: topPadding),
         child: tabController != null
-            ? tabbar(responsiveValue, permissions)
+            ? tabbar(responsiveValue, permissions, localization)
             : const SizedBox.shrink(),
       ),
     );
   }
 
-  List<TabbarContent> getTabbarContent(Permissions permissions) {
+  List<TabbarContent> getTabbarContent(
+      Permissions permissions, AppLocalizations localization) {
     return [
       TabbarContent(
-          tab: const CustomTab(icon: Icons.people, title: "Meine Promoter"),
+          tab: CustomTab(
+              icon: Icons.people, title: localization.my_promoters_tab_title),
           content: PromotersOverviewWrapper(tabController: tabController)),
       if (_canAccessPromoterRegistration(permissions) &&
           tabController != null) ...[
         TabbarContent(
-            tab: const CustomTab(
-                icon: Icons.person_add, title: "Promoter registrieren"),
+            tab: CustomTab(
+                icon: Icons.person_add,
+                title: localization.promoter_register_tab_title),
             content: RegisterPromotersView(
                 tabController: tabController!,
                 newPromoterCreated: () {
@@ -102,8 +106,8 @@ class _PromotersPageState extends State<PromotersPage>
     ];
   }
 
-  Widget tabbar(
-      ResponsiveBreakpointsData responsiveValue, Permissions permissions) {
+  Widget tabbar(ResponsiveBreakpointsData responsiveValue,
+      Permissions permissions, AppLocalizations localization) {
     return Column(
       children: [
         SizedBox(
@@ -112,7 +116,9 @@ class _PromotersPageState extends State<PromotersPage>
                 : responsiveValue.screenWidth * 0.9,
             child: TabBar(
                 controller: tabController,
-                tabs: getTabbarContent(permissions).map((e) => e.tab).toList(),
+                tabs: getTabbarContent(permissions, localization)
+                    .map((e) => e.tab)
+                    .toList(),
                 indicatorPadding: const EdgeInsets.only(bottom: 4))),
         Expanded(
             child: TabBarView(
@@ -120,7 +126,7 @@ class _PromotersPageState extends State<PromotersPage>
                 physics: kIsWeb
                     ? const NeverScrollableScrollPhysics()
                     : const ScrollPhysics(),
-                children: getTabbarContent(permissions)
+                children: getTabbarContent(permissions, localization)
                     .map((e) => e.content)
                     .toList()))
       ],

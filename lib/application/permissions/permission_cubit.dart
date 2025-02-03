@@ -39,11 +39,6 @@ class PermissionCubit extends Cubit<PermissionState> {
   }
 }
 
-// TODO: Permissions überall abfragen über context.watch und dann Funktionen aufrufen.
-// TODO: Wenn Permissions nicht abgefragt werden können dann wieder ausloggen und Fehler anzeigen.
-// TODO: Während Permissions Call läuft Ladeanimation anzeigen.
-// TODO: Beim Permission Observer Reload landet man auf Dashboard Seite. Das soll nicht passieren.
-// TODO: Permissions allen bestehenden Usern hinzufügen.
 // TODO: Permissions bei Erstellen von Usern anlegen.
 // TODO: Permissions bei Backend Funktionen abfragen.
 // TODO: Firestore Regeln festlegen dass Permissions nur von Admins oder Company geändert werden können

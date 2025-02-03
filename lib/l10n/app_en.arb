@@ -104,6 +104,10 @@
     "@login_register_text": {
         "description": "Register text on the login page"
     },
+    "login_permission_error_message": "An error occurred while querying the permissions",
+    "@login_permission_error_message": {
+        "description": "Error message on the login page if the permissions could not be queried"
+    },
     "auth_validation_missing_email": "Please enter an email address",
     "@auth_validation_missing_email": {
         "description": "validationmessage when no email was entered"
@@ -729,6 +733,14 @@
     "register_promoter_missing_company_error_message": "You cannot register a promoter because you are not affiliated with any company",
     "@register_promoter_missing_company_error_message": {
         "description": "Error message that appears if no company exists during promoter registration."
+    },
+    "promoter_register_tab_title": "Register promoter",
+    "@promoter_register_tab_title": {
+        "description": "Title for the register promoter tab"
+    },
+    "my_promoters_tab_title": "My promoters",
+    "@my_promoters_tab_title": {
+        "description": "Title for the my promoters tab"
     },
     "promoter_overview_title": "My promoter",
     "@promoter_overview_title": {

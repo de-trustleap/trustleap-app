@@ -136,8 +136,13 @@ class MyApp extends StatelessWidget {
             }),
             BlocListener<PermissionCubit, PermissionState>(
                 listener: (context, state) {
-              if (state is PermissionSuccessState) {
+              if (state is PermissionSuccessState &&
+                  !state.permissionInitiallyLoaded) {
                 routeToInitial(AuthStatus.authenticated);
+              } else if (state is PermissionFailureState) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Modular.get<AuthCubit>().signOut();
+                });
               }
             })
           ],
