@@ -39,7 +39,5 @@ class PermissionCubit extends Cubit<PermissionState> {
   }
 }
 
-// TODO: Permissions bei Erstellen von Usern anlegen.
-// TODO: Permissions bei Backend Funktionen abfragen.
-// TODO: Firestore Regeln festlegen dass Permissions nur von Admins oder Company geändert werden können
-// TODO: Tests
+// TODO: Test für Cubit, Repo
+// TODO: Backend Tests

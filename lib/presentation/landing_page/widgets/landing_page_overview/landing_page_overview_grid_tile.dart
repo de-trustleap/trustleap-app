@@ -94,19 +94,21 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      IconButton(
-                          onPressed: () {
-                            CustomNavigator.pushNamed(
-                                "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
-                                arguments: landingPage);
-                          },
-                          iconSize: 24,
-                          tooltip:
-                              localizations.landingpage_overview_edit_tooltip,
-                          icon: Icon(Icons.edit,
-                              color: themeData.colorScheme.secondary,
-                              size: 24)),
-                      const Spacer(),
+                      if (permissions.hasEditLandingPagePermission()) ...[
+                        IconButton(
+                            onPressed: () {
+                              CustomNavigator.pushNamed(
+                                  "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
+                                  arguments: landingPage);
+                            },
+                            iconSize: 24,
+                            tooltip:
+                                localizations.landingpage_overview_edit_tooltip,
+                            icon: Icon(Icons.edit,
+                                color: themeData.colorScheme.secondary,
+                                size: 24)),
+                        const Spacer(),
+                      ],
                       IconButton(
                           onPressed: () {
                             CustomNavigator.navigate(
