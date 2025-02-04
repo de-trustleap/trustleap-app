@@ -85,6 +85,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_register_text => 'You don\'\'t have an account? ';
 
   @override
+  String get login_permission_error_message => 'An error occurred while querying the permissions';
+
+  @override
   String get auth_validation_missing_email => 'Please enter an email address';
 
   @override
@@ -547,6 +550,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register_promoter_missing_company_error_message => 'You cannot register a promoter because you are not affiliated with any company';
+
+  @override
+  String get promoter_register_tab_title => 'Register promoter';
+
+  @override
+  String get my_promoters_tab_title => 'My promoters';
 
   @override
   String get promoter_overview_title => 'My promoter';

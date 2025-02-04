@@ -79,4 +79,3 @@ class PagebuilderFooterPropertiesModel extends Equatable
   List<Object?> get props =>
       [privacyPolicyTextProperties, impressumTextProperties];
 }
-// TODO: Da wo zB ContactForm überall benutzt wird jetzt auch Footer nutzen

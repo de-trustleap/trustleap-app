@@ -85,6 +85,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get login_register_text => 'Du hast kein Konto? ';
 
   @override
+  String get login_permission_error_message => 'Bei der Abfrage der Berechtigungen ist ein Fehler aufgetreten';
+
+  @override
   String get auth_validation_missing_email => 'Gib bitte eine E-Mail Adresse an';
 
   @override
@@ -547,6 +550,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get register_promoter_missing_company_error_message => 'Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist';
+
+  @override
+  String get promoter_register_tab_title => 'Promoter registrieren';
+
+  @override
+  String get my_promoters_tab_title => 'Meine Promoter';
 
   @override
   String get promoter_overview_title => 'Meine Promoter';

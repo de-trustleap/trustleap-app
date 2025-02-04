@@ -272,6 +272,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get login_permission_error_message => (super.noSuchMethod(
+        Invocation.getter(#login_permission_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#login_permission_error_message),
+        ),
+      ) as String);
+
+  @override
   String get auth_validation_missing_email => (super.noSuchMethod(
         Invocation.getter(#auth_validation_missing_email),
         returnValue: _i3.dummyValue<String>(
@@ -1724,6 +1733,24 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get promoter_register_tab_title => (super.noSuchMethod(
+        Invocation.getter(#promoter_register_tab_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_register_tab_title),
+        ),
+      ) as String);
+
+  @override
+  String get my_promoters_tab_title => (super.noSuchMethod(
+        Invocation.getter(#my_promoters_tab_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#my_promoters_tab_title),
+        ),
+      ) as String);
+
+  @override
   String get promoter_overview_title => (super.noSuchMethod(
         Invocation.getter(#promoter_overview_title),
         returnValue: _i3.dummyValue<String>(
@@ -2883,6 +2910,16 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_config_menu_footer_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_footer_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_footer_type),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type =>
       (super.noSuchMethod(
         Invocation.getter(#landingpage_pagebuilder_config_menu_unknown_type),
@@ -3717,6 +3754,18 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_contact_form_config_phone_textfield_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_contact_form_config_phone_textfield_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_config_phone_textfield_title),
+        ),
+      ) as String);
+
+  @override
   String get pagebuilder_contact_form_config_message_textfield_title =>
       (super.noSuchMethod(
         Invocation.getter(
@@ -3844,6 +3893,28 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_pagebuilder_config_menu_section_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_footer_config_privacy_policy =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_footer_config_privacy_policy),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_footer_config_privacy_policy),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_footer_config_impressum =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_footer_config_impressum),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_footer_config_impressum),
         ),
       ) as String);
 

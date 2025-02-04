@@ -251,6 +251,12 @@ abstract class AppLocalizations {
   /// **'You don\'\'t have an account? '**
   String get login_register_text;
 
+  /// Error message on the login page if the permissions could not be queried
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while querying the permissions'**
+  String get login_permission_error_message;
+
   /// validationmessage when no email was entered
   ///
   /// In en, this message translates to:
@@ -1174,6 +1180,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You cannot register a promoter because you are not affiliated with any company'**
   String get register_promoter_missing_company_error_message;
+
+  /// Title for the register promoter tab
+  ///
+  /// In en, this message translates to:
+  /// **'Register promoter'**
+  String get promoter_register_tab_title;
+
+  /// Title for the my promoters tab
+  ///
+  /// In en, this message translates to:
+  /// **'My promoters'**
+  String get my_promoters_tab_title;
 
   /// The title of the promoter overview
   ///

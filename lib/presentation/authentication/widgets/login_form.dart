@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
@@ -75,73 +76,93 @@ class _LoginFormState extends State<LoginForm> {
           BlocProvider.of<AuthCubit>(context).checkForAuthState();
         }
       },
-      builder: (context, state) {
-        return Form(
-            key: formKey,
-            autovalidateMode: (state is SignInShowValidationState)
-                ? AutovalidateMode.always
-                : AutovalidateMode.disabled,
-            child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                children: [
-                  SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-                  SelectableText(localization.login_title,
-                      style: themeData.textTheme.headlineLarge!.copyWith(
-                          fontSize: responsiveValue.isMobile ? 20 : 50,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 4)),
-                  const SizedBox(height: 20),
-                  SelectableText(localization.login_subtitle,
-                      style: themeData.textTheme.bodySmall!.copyWith(
-                          fontWeight: FontWeight.w500, letterSpacing: 4)),
-                  const SizedBox(height: 80),
-                  FormTextfield(
-                      controller: emailTextController,
-                      disabled: false,
-                      placeholder: localization.login_email,
-                      onChanged: resetError,
-                      onFieldSubmitted: submit,
-                      validator: validator.validateEmail,
-                      keyboardType: TextInputType.emailAddress,
-                      accessibilityKey: const Key("loginTextField")),
-                  const SizedBox(height: 20),
-                  FormTextfield(
-                      controller: passwordTextController,
-                      disabled: false,
-                      placeholder: localization.login_password,
-                      onChanged: resetError,
-                      onFieldSubmitted: submit,
-                      validator: validator.validatePassword,
-                      obscureText: true,
-                      accessibilityKey: const Key("passwordTextField")),
-                  const SizedBox(height: 16),
-                  PasswordForgottenButton(
-                      key: const Key("passwordForgottenButton"),
-                      onTap: () =>
-                          {CustomNavigator.pushNamed(RoutePaths.passwordReset)}),
-                  const SizedBox(height: 24),
-                  PrimaryButton(
-                      title: localization.login_login_buttontitle,
-                      key: const Key("loginButton"),
-                      disabled: state is SignInLoadingState,
-                      isLoading: state is SignInLoadingState,
-                      onTap: () {
-                        submit();
-                      }),
-                  const SizedBox(height: 24),
-                  RegisterButton(
-                      key: const Key("registerButton"),
-                      onTap: () =>
-                          {CustomNavigator.pushNamed(RoutePaths.registerPath)}),
-                  if (errorMessage != "" &&
-                      showError &&
-                      (state is SignInFailureState) &&
-                      !validationHasError) ...[
-                    const SizedBox(height: 20),
-                    FormErrorView(
-                        message: errorMessage, key: const Key("formErrorView"))
-                  ]
-                ]));
+      builder: (context, signInState) {
+        return BlocConsumer<PermissionCubit, PermissionState>(
+          listener: (context, state) {
+            if (state is PermissionFailureState) {
+              errorMessage = localization.login_permission_error_message;
+              showError = true;
+            } else if (state is PermissionSuccessState) {
+              showError = false;
+            }
+          },
+          builder: (context, permissionState) {
+            return Form(
+                key: formKey,
+                autovalidateMode: (signInState is SignInShowValidationState)
+                    ? AutovalidateMode.always
+                    : AutovalidateMode.disabled,
+                child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    children: [
+                      SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+                      SelectableText(localization.login_title,
+                          style: themeData.textTheme.headlineLarge!.copyWith(
+                              fontSize: responsiveValue.isMobile ? 20 : 50,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 4)),
+                      const SizedBox(height: 20),
+                      SelectableText(localization.login_subtitle,
+                          style: themeData.textTheme.bodySmall!.copyWith(
+                              fontWeight: FontWeight.w500, letterSpacing: 4)),
+                      const SizedBox(height: 80),
+                      FormTextfield(
+                          controller: emailTextController,
+                          disabled: false,
+                          placeholder: localization.login_email,
+                          onChanged: resetError,
+                          onFieldSubmitted: submit,
+                          validator: validator.validateEmail,
+                          keyboardType: TextInputType.emailAddress,
+                          accessibilityKey: const Key("loginTextField")),
+                      const SizedBox(height: 20),
+                      FormTextfield(
+                          controller: passwordTextController,
+                          disabled: false,
+                          placeholder: localization.login_password,
+                          onChanged: resetError,
+                          onFieldSubmitted: submit,
+                          validator: validator.validatePassword,
+                          obscureText: true,
+                          accessibilityKey: const Key("passwordTextField")),
+                      const SizedBox(height: 16),
+                      PasswordForgottenButton(
+                          key: const Key("passwordForgottenButton"),
+                          onTap: () => {
+                                CustomNavigator.pushNamed(
+                                    RoutePaths.passwordReset)
+                              }),
+                      const SizedBox(height: 24),
+                      PrimaryButton(
+                          title: localization.login_login_buttontitle,
+                          key: const Key("loginButton"),
+                          disabled: signInState is SignInLoadingState ||
+                              permissionState is PermissionLoadingState,
+                          isLoading: signInState is SignInLoadingState ||
+                              permissionState is PermissionLoadingState,
+                          onTap: () {
+                            submit();
+                          }),
+                      const SizedBox(height: 24),
+                      RegisterButton(
+                          key: const Key("registerButton"),
+                          onTap: () => {
+                                CustomNavigator.pushNamed(
+                                    RoutePaths.registerPath)
+                              }),
+                      if (errorMessage != "" &&
+                          showError &&
+                          ((signInState is SignInFailureState) ||
+                              (permissionState is PermissionFailureState)) &&
+                          !validationHasError) ...[
+                        const SizedBox(height: 20),
+                        FormErrorView(
+                            message: errorMessage,
+                            key: const Key("formErrorView"))
+                      ]
+                    ]));
+          },
+        );
       },
     );
   }

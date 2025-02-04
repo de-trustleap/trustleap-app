@@ -104,6 +104,10 @@
     "@login_register_text": {
         "description": "Registrieren Text auf der Login Seite"
     },
+    "login_permission_error_message": "Bei der Abfrage der Berechtigungen ist ein Fehler aufgetreten",
+    "@login_permission_error_message": {
+        "description": "Fehlermeldung auf der Login Seite wenn die Permissions nicht abgefragt werden konnten"
+    },
     "auth_validation_missing_email": "Gib bitte eine E-Mail Adresse an",
     "@auth_validation_missing_email": {
         "description": "Validierungsnachricht wenn keine E-Mail angegeben wurde"
@@ -729,6 +733,14 @@
     "register_promoter_missing_company_error_message": "Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist",
     "@register_promoter_missing_company_error_message": {
         "description": "Fehlermeldung die erscheint, wenn bei der Promoter Registrierung kein Unternehmen existiert."
+    },
+    "promoter_register_tab_title": "Promoter registrieren",
+    "@promoter_register_tab_title": {
+        "description": "Titel für den Promoter registrieren Tab"
+    },
+    "my_promoters_tab_title": "Meine Promoter",
+    "@my_promoters_tab_title": {
+        "description": "Titel für den Meine Promoter Tab"
     },
     "promoter_overview_title": "Meine Promoter",
     "@promoter_overview_title": {
