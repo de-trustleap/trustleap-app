@@ -63,7 +63,6 @@ class _LandingPageBuilderWidgetContainerState
                   child: Stack(
                     children: [
                       Container(
-                        width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.transparent,
                           border: showBorder
