@@ -31,109 +31,112 @@ class _LandingPageBuilderSectionViewState
     switch (widget.model.layout) {
       case PageBuilderSectionLayout.column:
       default:
-        return MouseRegion(
-          onEnter: (_) {
-            setState(() {
-              _isHovered = true;
-            });
-          },
-          onExit: (_) {
-            setState(() {
-              _isHovered = false;
-            });
-          },
-          child: BlocBuilder<PagebuilderSelectionCubit, String?>(
-            builder: (context, selectedSectionId) {
-              final isSelected = selectedSectionId == widget.model.id.value;
-              final showBorder = _isHovered || isSelected;
-              return Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: widget.model.background?.backgroundColor,
-                        border: showBorder
-                            ? Border.all(
-                                color: isSelected
-                                    ? themeData.colorScheme.secondary
-                                    : themeData.colorScheme.primary,
-                                width: 2.0,
+        return ConstrainedBox(
+          constraints: BoxConstraints(
+              maxWidth: widget.model.maxWidth ?? double.infinity),
+          child: MouseRegion(
+            onEnter: (_) {
+              setState(() {
+                _isHovered = true;
+              });
+            },
+            onExit: (_) {
+              setState(() {
+                _isHovered = false;
+              });
+            },
+            child: BlocBuilder<PagebuilderSelectionCubit, String?>(
+              builder: (context, selectedSectionId) {
+                final isSelected = selectedSectionId == widget.model.id.value;
+                final showBorder = _isHovered || isSelected;
+                return Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                          color: widget.model.background?.backgroundColor,
+                          border: showBorder
+                              ? Border.all(
+                                  color: isSelected
+                                      ? themeData.colorScheme.secondary
+                                      : themeData.colorScheme.primary,
+                                  width: 2.0,
+                                )
+                              : null,
+                        ),
+                        child: Stack(
+                          children: [
+                            if (widget.model.background?.imageProperties
+                                        ?.localImage ==
+                                    null &&
+                                widget.model.background?.imageProperties?.url !=
+                                    null) ...[
+                              Positioned.fill(
+                                child: Image.network(
+                                    widget.model.background!.imageProperties!
+                                        .url!,
+                                    fit: widget.model.background
+                                            ?.imageProperties?.contentMode ??
+                                        BoxFit.cover),
                               )
-                            : null,
-                      ),
-                      child: Stack(
-                        children: [
-                          if (widget.model.background?.imageProperties
-                                      ?.localImage ==
-                                  null &&
-                              widget.model.background?.imageProperties?.url !=
-                                  null) ...[
-                            Positioned.fill(
-                              child: Image.network(
-                                  widget
-                                      .model.background!.imageProperties!.url!,
-                                  fit: widget.model.background?.imageProperties
-                                          ?.contentMode ??
-                                      BoxFit.cover),
-                            )
-                          ],
-                          if (widget.model.background?.imageProperties
-                                  ?.localImage !=
-                              null)
-                            Positioned.fill(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: widget.model.background!
-                                            .imageProperties!.contentMode ??
-                                        BoxFit.cover,
-                                    image: MemoryImage(widget.model.background!
-                                        .imageProperties!.localImage!),
+                            ],
+                            if (widget.model.background?.imageProperties
+                                    ?.localImage !=
+                                null)
+                              Positioned.fill(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: widget.model.background!
+                                              .imageProperties!.contentMode ??
+                                          BoxFit.cover,
+                                      image: MemoryImage(widget
+                                          .model
+                                          .background!
+                                          .imageProperties!
+                                          .localImage!),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          if (widget.model.background?.overlayColor != null &&
-                              (widget.model.background?.imageProperties
-                                          ?.localImage !=
-                                      null ||
-                                  widget.model.background?.imageProperties
-                                          ?.url !=
-                                      null)) ...[
-                            Positioned.fill(
-                                child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                        color: widget
-                                            .model.background!.overlayColor)))
+                            if (widget.model.background?.overlayColor != null &&
+                                (widget.model.background?.imageProperties
+                                            ?.localImage !=
+                                        null ||
+                                    widget.model.background?.imageProperties
+                                            ?.url !=
+                                        null)) ...[
+                              Positioned.fill(
+                                  child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                          color: widget
+                                              .model.background!.overlayColor)))
+                            ],
+                            Container(
+                              alignment: Alignment.center,
+                              child: Column(
+                                  children: widget.model.widgets != null
+                                      ? widget.model.widgets!
+                                          .map((widget) =>
+                                              widgetBuilder.build(widget))
+                                          .toList()
+                                      : []),
+                            )
                           ],
-                          Container(
-                            alignment: Alignment.center,
-                            constraints: BoxConstraints(
-                                maxWidth:
-                                    widget.model.maxWidth ?? double.infinity),
-                            child: Column(
-                                children: widget.model.widgets != null
-                                    ? widget.model.widgets!
-                                        .map((widget) =>
-                                            widgetBuilder.build(widget))
-                                        .toList()
-                                    : []),
-                          )
-                        ],
-                      )),
-                  if (_isHovered) ...[
-                    LandingPageBuilderSectionEditButton(onPressed: () {
-                      BlocProvider.of<PagebuilderSelectionCubit>(context)
-                          .selectWidget(widget.model.id.value);
-                      Modular.get<PagebuilderConfigMenuCubit>()
-                          .openSectionConfigMenu(widget.model);
-                    })
-                  ]
-                ],
-              );
-            },
+                        )),
+                    if (_isHovered) ...[
+                      LandingPageBuilderSectionEditButton(onPressed: () {
+                        BlocProvider.of<PagebuilderSelectionCubit>(context)
+                            .selectWidget(widget.model.id.value);
+                        Modular.get<PagebuilderConfigMenuCubit>()
+                            .openSectionConfigMenu(widget.model);
+                      })
+                    ]
+                  ],
+                );
+              },
+            ),
           ),
         );
     }

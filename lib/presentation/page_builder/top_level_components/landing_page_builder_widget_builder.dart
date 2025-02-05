@@ -75,7 +75,6 @@ class LandingPageBuilderWidgetBuilder {
     if (model.children == null || model.children!.isEmpty) {
       return const SizedBox.shrink();
     }
-
     return LandingPageBuilderWidgetContainer(
       model: model,
       child: Column(
