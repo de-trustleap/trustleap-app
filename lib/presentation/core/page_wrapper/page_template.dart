@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/presentation/core/menu/appbar.dart';
 import 'package:finanzbegleiter/presentation/core/menu/collapsible_side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/menu/side_menu.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -39,10 +40,14 @@ class PageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(listeners: [
-      BlocListener<AuthCubit, AuthState>(listener: (context, state) {
-        if (state is AuthStateUnAuthenticated) {}
-      })
-    ], child: getResponsiveWidget(context));
+    return BlocBuilder<PermissionCubit, PermissionState>(
+      builder: (context, state) {
+        if (state is PermissionSuccessState) {
+          return getResponsiveWidget(context);
+        } else {
+          return const LoadingIndicator();
+        }
+      },
+    );
   }
 }

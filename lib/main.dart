@@ -98,7 +98,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => Modular.get<AuthCubit>()),
+        BlocProvider<AuthCubit>(create: (context) {
+          final authCubit = Modular.get<AuthCubit>();
+          authCubit.checkForAuthState();
+          return authCubit;
+        }),
         BlocProvider(
             create: (context) => Modular.get<AuthObserverBloc>()
               ..add(AuthObserverStartedEvent())),
