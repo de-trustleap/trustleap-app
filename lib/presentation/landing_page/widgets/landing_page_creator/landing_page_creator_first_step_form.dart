@@ -15,6 +15,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_t
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_form_validator.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_placeholder_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -107,6 +108,25 @@ class _LandingPageCreatorFormState
     }
   }
 
+  void _insertTextAtCursor(String textToInsert) {
+    int cursorIndex = promotionTemplateTextController.selection.baseOffset;
+
+    if (cursorIndex == -1) {
+      cursorIndex = 0;
+      promotionTemplateTextController.selection =
+          TextSelection.collapsed(offset: cursorIndex);
+    }
+
+    String newText = promotionTemplateTextController.text.replaceRange(
+      cursorIndex,
+      cursorIndex,
+      textToInsert,
+    );
+    promotionTemplateTextController.text = newText;
+    promotionTemplateTextController.selection =
+        TextSelection.collapsed(offset: cursorIndex + textToInsert.length);
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -183,18 +203,29 @@ class _LandingPageCreatorFormState
                             style: themeData.textTheme.bodyMedium),
                         const SizedBox(height: textFieldSpacing),
                         if (responsiveValue.isDesktop) ...[
-                          GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _isEmojiPickerExpanded =
-                                      !_isEmojiPickerExpanded;
-                                });
-                              },
-                              child: Tooltip(
-                                message: localization.open_emoji_picker_tooltip,
-                                child: Text("😃",
-                                    style: themeData.textTheme.bodyLarge),
-                              )),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _isEmojiPickerExpanded =
+                                            !_isEmojiPickerExpanded;
+                                      });
+                                    },
+                                    child: Tooltip(
+                                      message: localization
+                                          .open_emoji_picker_tooltip,
+                                      child: Text("😃",
+                                          style: themeData.textTheme.bodyLarge),
+                                    )),
+                                const Spacer(),
+                                LandingPageCreatorPlaceholderPicker(
+                                    width: 250,
+                                    onSelected: (placeholder) {
+                                      _insertTextAtCursor(placeholder);
+                                    })
+                              ]),
                           ExpandedSection(
                               expand: _isEmojiPickerExpanded,
                               child: Column(

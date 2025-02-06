@@ -334,7 +334,7 @@
     "@landingpage_creation_continue": {
         "description": "Text für Weiter Button in Landingpage Erstellen Formular"
     },
-    "landingpage_create_promotion_template_description": "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter $name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.",
+    "landingpage_create_promotion_template_description": "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst verschiedene Platzhalter nutzen welche du über das Platzhalter Menü auswählen kannst.",
     "@landingpage_create_promotion_template_description": {
         "description": "Beschreibung für das Promotion Template Textfeld auf der Landingpage erstellen Seite"
     },
@@ -353,6 +353,38 @@
     "open_emoji_picker_tooltip": "Emoji Picker öffnen",
     "@open_emoji_picker_tooltip": {
         "description": "Tooltip für den Button der den Emoji Picker öffnet"
+    },
+    "landingpage_create_promotion_placeholder_menu": "Platzhalter auswählen",
+    "@landingpage_create_promotion_placeholder_menu": {
+        "description": "Platzhalter Menü Titel"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_first_name": "Vorname des Dienstleisters",
+    "@landingpage_create_promotion_placeholder_service_provider_first_name": {
+        "description": "Platzhalter Variable für den Vornamen des Dienstleisters"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_last_name": "Nachname des Dienstleisters",
+    "@landingpage_create_promotion_placeholder_service_provider_last_name": {
+        "description": "Platzhalter Variable für den Nachnamen des Dienstleisters"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_name": "Name des Dienstleisters",
+    "@landingpage_create_promotion_placeholder_service_provider_name": {
+        "description": "Platzhalter Variable für den Namen des Dienstleisters"
+    },
+    "landingpage_create_promotion_placeholder_promoter_first_name": "Vorname des Promoters",
+    "@landingpage_create_promotion_placeholder_promoter_first_name": {
+        "description": "Platzhalter Variable für den Vornamen des Promoters"
+    },
+    "landingpage_create_promotion_placeholder_promoter_last_name": "Nachname des Promoters",
+    "@landingpage_create_promotion_placeholder_promoter_last_name": {
+        "description": "Platzhalter Variable für den Nachnamen des Promoters"
+    },
+    "landingpage_create_promotion_placeholder_promoter_name": "Name des Promoters",
+    "@landingpage_create_promotion_placeholder_promoter_name": {
+        "description": "Platzhalter Variable für den Namen des Promoters"
+    },
+    "landingpage_create_promotion_placeholder_receiver_name": "Name des Absenders",
+    "@landingpage_create_promotion_placeholder_receiver_name": {
+        "description": "Platzhalter Variable für den Namen des Absenders"
     },
     "landingpage_overview_context_menu_delete": "Löschen",
     "@landingpage_overview_context_menu_delete": {

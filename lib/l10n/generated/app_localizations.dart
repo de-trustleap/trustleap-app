@@ -584,7 +584,7 @@ abstract class AppLocalizations {
   /// Description for the promotion template textfield on the create landingpage form
   ///
   /// In en, this message translates to:
-  /// **'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use the placeholder \$name to display the name of the recommendation recipient.'**
+  /// **'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use different placeholders which you can choose from the placeholder menu.'**
   String get landingpage_create_promotion_template_description;
 
   /// Placeholder for the promotion template textfield
@@ -610,6 +610,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open emoji picker'**
   String get open_emoji_picker_tooltip;
+
+  /// Placeholder menu title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose placeholder'**
+  String get landingpage_create_promotion_placeholder_menu;
+
+  /// Placeholder variable for the first name of provider
+  ///
+  /// In en, this message translates to:
+  /// **'First name of provider'**
+  String get landingpage_create_promotion_placeholder_service_provider_first_name;
+
+  /// Placeholder variable for the last name of provider
+  ///
+  /// In en, this message translates to:
+  /// **'Last name of provider'**
+  String get landingpage_create_promotion_placeholder_service_provider_last_name;
+
+  /// Placeholder variable for the name of provider
+  ///
+  /// In en, this message translates to:
+  /// **'Name of provider'**
+  String get landingpage_create_promotion_placeholder_service_provider_name;
+
+  /// Placeholder variable for the first name of promoter
+  ///
+  /// In en, this message translates to:
+  /// **'First name of promoter'**
+  String get landingpage_create_promotion_placeholder_promoter_first_name;
+
+  /// Placeholder variable for the last name of promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Last name of promoter'**
+  String get landingpage_create_promotion_placeholder_promoter_last_name;
+
+  /// Placeholder variable for the name of promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Name of promoter'**
+  String get landingpage_create_promotion_placeholder_promoter_name;
+
+  /// Placeholder variable for the name of receiver
+  ///
+  /// In en, this message translates to:
+  /// **'Name of receiver'**
+  String get landingpage_create_promotion_placeholder_receiver_name;
 
   /// Delete button in the context menu on the landing page overview page.
   ///
