@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/clickable_link.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -12,7 +13,6 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_expandable_email.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_expandable_password.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_mobile.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section_verification_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -166,7 +166,9 @@ class _EmailSectionState extends State<EmailSection> {
           ],
           if (!isEmailVerified) ...[
             const SizedBox(height: 16),
-            EmailsectionVerificationLink(
+            ClickableLink(
+                title: localization
+                    .profile_page_email_section_resend_verify_email_button_title,
                 onTap: () => {
                       BlocProvider.of<ProfileCubit>(context)
                           .resendEmailVerification()

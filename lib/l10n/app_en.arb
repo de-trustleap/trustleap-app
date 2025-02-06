@@ -334,7 +334,7 @@
     "@landingpage_creation_continue": {
         "description": "Text for continue Button in landingpage creation form"
     },
-    "landingpage_create_promotion_template_description": "Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use the placeholder $name to display the name of the recommendation recipient.",
+    "landingpage_create_promotion_template_description": "Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use different placeholders which you can choose from the placeholder menu.",
     "@landingpage_create_promotion_template_description": {
         "description": "Description for the promotion template textfield on the create landingpage form"
     },
@@ -353,6 +353,38 @@
     "open_emoji_picker_tooltip": "Open emoji picker",
     "@open_emoji_picker_tooltip": {
         "description": "Tooltip for the button that can open and close the emoji picker"
+    },
+    "landingpage_create_promotion_placeholder_menu": "Choose placeholder",
+    "@landingpage_create_promotion_placeholder_menu": {
+        "description": "Placeholder menu title"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_first_name": "First name of provider",
+    "@landingpage_create_promotion_placeholder_service_provider_first_name": {
+        "description": "Placeholder variable for the first name of provider"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_last_name": "Last name of provider",
+    "@landingpage_create_promotion_placeholder_service_provider_last_name": {
+        "description": "Placeholder variable for the last name of provider"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_name": "Name of provider",
+    "@landingpage_create_promotion_placeholder_service_provider_name": {
+        "description": "Placeholder variable for the name of provider"
+    },
+    "landingpage_create_promotion_placeholder_promoter_first_name": "First name of promoter",
+    "@landingpage_create_promotion_placeholder_promoter_first_name": {
+        "description": "Placeholder variable for the first name of promoter"
+    },
+    "landingpage_create_promotion_placeholder_promoter_last_name": "Last name of promoter",
+    "@landingpage_create_promotion_placeholder_promoter_last_name": {
+        "description": "Placeholder variable for the last name of promoter"
+    },
+    "landingpage_create_promotion_placeholder_promoter_name": "Name of promoter",
+    "@landingpage_create_promotion_placeholder_promoter_name": {
+        "description": "Placeholder variable for the name of promoter"
+    },
+    "landingpage_create_promotion_placeholder_receiver_name": "Name of receiver",
+    "@landingpage_create_promotion_placeholder_receiver_name": {
+        "description": "Placeholder variable for the name of receiver"
     },
     "landingpage_overview_context_menu_delete": "Delete",
     "@landingpage_overview_context_menu_delete": {

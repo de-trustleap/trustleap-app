@@ -252,7 +252,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_creation_continue => 'Weiter';
 
   @override
-  String get landingpage_create_promotion_template_description => 'Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter \$name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.';
+  String get landingpage_create_promotion_template_description => 'Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst verschiedene Platzhalter nutzen welche du über das Platzhalter Menü auswählen kannst.';
 
   @override
   String get landingpage_create_promotion_template_placeholder => 'Vorlage für Promoter (optional)';
@@ -265,6 +265,30 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get open_emoji_picker_tooltip => 'Emoji Picker öffnen';
+
+  @override
+  String get landingpage_create_promotion_placeholder_menu => 'Platzhalter auswählen';
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_first_name => 'Vorname des Dienstleisters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_last_name => 'Nachname des Dienstleisters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_name => 'Name des Dienstleisters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_first_name => 'Vorname des Promoters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_last_name => 'Nachname des Promoters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_name => 'Name des Promoters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_receiver_name => 'Name des Absenders';
 
   @override
   String get landingpage_overview_context_menu_delete => 'Löschen';
