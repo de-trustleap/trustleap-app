@@ -21,6 +21,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:universal_html/html.dart' as html;
 import 'package:url_strategy/url_strategy.dart';
 
 Future main() async {
@@ -39,7 +40,12 @@ Future main() async {
 }
 
 void routeToInitial(AuthStatus status) {
-  final lastRoute = WidgetsBinding.instance.platformDispatcher.defaultRouteName;
+  late String lastRoute;
+  if (kIsWeb) {
+    lastRoute = html.window.location.pathname ?? "/";
+  } else {
+    lastRoute = WidgetsBinding.instance.platformDispatcher.defaultRouteName;
+  }
   switch (status) {
     case AuthStatus.unAuthenticated:
       debugPrint("NOT AUTHENTICATED");
