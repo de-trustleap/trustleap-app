@@ -16,6 +16,7 @@ import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart'
 import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_template_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_sorting_helper.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 
 class LandingPageRepositoryImplementation implements LandingPageRepository {
@@ -72,20 +73,9 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
           landingPages.add(model);
         }
       }
-
-      landingPages.sort((a, b) {
-        if (b.isDefaultPage ?? false) {
-          return 1;
-        } else if (a.isDefaultPage ?? false) {
-          return -1;
-        }
-        if (a.createdAt != null && b.createdAt != null) {
-          return b.createdAt!.compareTo(a.createdAt!);
-        } else {
-          return a.id.value.compareTo(b.id.value);
-        }
-      });
-      return right(landingPages);
+      final sortedPages =
+          LandingPageRepositorySortingHelper().sortLandingPages(landingPages);
+      return right(sortedPages);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }

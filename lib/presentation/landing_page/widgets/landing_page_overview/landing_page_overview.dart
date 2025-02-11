@@ -33,7 +33,8 @@ class LandingPageOverview extends StatelessWidget {
     }
 
     void submitIsActive(String id, bool isActive, String userId) {
-      BlocProvider.of<LandingPageCubit>(context).toggleLandingPageActivity(id, isActive, userId);
+      BlocProvider.of<LandingPageCubit>(context)
+          .toggleLandingPageActivity(id, isActive, userId);
     }
 
     void showDeleteAlert(String id, parentUserID) {
@@ -59,13 +60,13 @@ class LandingPageOverview extends StatelessWidget {
           CustomSnackBar.of(context).showCustomSnackBar(
               localization.landingpage_snackbar_success_duplicated);
         } else if (state is ToggleLandingPageActivitySuccessState) {
-            CustomSnackBar.of(context).showCustomSnackBar(
-              state.isActive == true ? localization.landingpage_snackbar_success_toggled_enabled : localization.landingpage_snackbar_success_toggled_disabled
-            );
+          CustomSnackBar.of(context).showCustomSnackBar(state.isActive == true
+              ? localization.landingpage_snackbar_success_toggled_enabled
+              : localization.landingpage_snackbar_success_toggled_disabled);
         } else if (state is ToggleLandingPageActivityFailureState) {
-            CustomSnackBar.of(context).showCustomSnackBar(
-              localization.landingpage_snackbar_failure_toggled, SnackBarType.failure
-            );
+          CustomSnackBar.of(context).showCustomSnackBar(
+              localization.landingpage_snackbar_failure_toggled,
+              SnackBarType.failure);
         }
       },
       builder: (context, state) {
@@ -89,7 +90,7 @@ class LandingPageOverview extends StatelessWidget {
                     });
               } else {
                 return CardContainer(
-                    maxWidth: 800,
+                    maxWidth: 1200,
                     child: Column(
                       children: [
                         SelectableText(localization.landingpage_overview_title,
@@ -103,8 +104,12 @@ class LandingPageOverview extends StatelessWidget {
                                 showDeleteAlert(landingPageID, parentUserID),
                             duplicatePressed: (landinPageID) =>
                                 submitDuplication(landinPageID),
-                            isActivePressed: (landinPageID, landingPageIsActive) =>
-                                submitIsActive(landinPageID, landingPageIsActive, observerState.user.id.value))
+                            isActivePressed:
+                                (landinPageID, landingPageIsActive) =>
+                                    submitIsActive(
+                                        landinPageID,
+                                        landingPageIsActive,
+                                        observerState.user.id.value))
                       ],
                     ));
               }
