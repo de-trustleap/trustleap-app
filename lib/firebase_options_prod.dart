@@ -14,7 +14,7 @@ import 'package:flutter/foundation.dart'
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
-class DefaultFirebaseOptions {
+class DefaultFirebaseOptionsProd {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;
@@ -47,15 +47,14 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCHxAj-YqzpN4D0RSOmtcVqesfonhAOb8s',
-    appId: '1:962239137198:web:cae5870aef9e767b44743f',
-    messagingSenderId: '962239137198',
-    projectId: 'finanzwegbegleiter',
-    authDomain: 'finanzwegbegleiter.firebaseapp.com',
-    storageBucket: 'finanzwegbegleiter.appspot.com',
-    measurementId: 'G-CQVYXTTT1Q',
-    databaseURL: ""
-  );
+      apiKey: 'AIzaSyCHxAj-YqzpN4D0RSOmtcVqesfonhAOb8s',
+      appId: '1:962239137198:web:cae5870aef9e767b44743f',
+      messagingSenderId: '962239137198',
+      projectId: 'finanzwegbegleiter',
+      authDomain: 'finanzwegbegleiter.firebaseapp.com',
+      storageBucket: 'finanzwegbegleiter.appspot.com',
+      measurementId: 'G-CQVYXTTT1Q',
+      databaseURL: "");
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDYug60Zd671UX-bT9RxV3GMYpvPH33HGk',
