@@ -7,7 +7,9 @@ import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/modules/app_module.dart';
-import 'package:finanzbegleiter/firebase_options.dart';
+import 'package:finanzbegleiter/environment.dart';
+import 'package:finanzbegleiter/firebase_options_prod.dart';
+import 'package:finanzbegleiter/firebase_options_staging.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/l10n/l10n.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -26,14 +28,14 @@ import 'package:url_strategy/url_strategy.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final environment = Environment();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+      options: environment.isStaging()
+          ? DefaultFirebaseOptionsStaging.currentPlatform
+          : DefaultFirebaseOptionsProd.currentPlatform);
   if (kIsWeb) {
     await FirebaseAppCheck.instance.activate(
-        webProvider: ReCaptchaV3Provider(kDebugMode
-            ? "A0791EC5-107E-4C90-BF82-34E5FE2EA2DF"
-            : "6LcVOGMqAAAAAAzRRZjRjkO5o-xtO4H2X_ZbN9r2"));
+        webProvider: ReCaptchaV3Provider(environment.getAppCheckToken()));
   }
   setPathUrlStrategy();
   runApp(ModularApp(module: AppModule(), child: const MyApp()));

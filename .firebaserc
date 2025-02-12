@@ -1,5 +1,7 @@
 {
-  "projects": {},
+  "projects": {
+    "trustleap-staging": "trustleap-staging"
+  },
   "targets": {
     "finanzwegbegleiter": {
       "hosting": {
