@@ -1373,6 +1373,48 @@ abstract class AppLocalizations {
   /// **'Member since {date}'**
   String promoter_overview_creation_date(String date);
 
+  /// Tooltip for the delete promoter button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete promoter'**
+  String get promoter_overview_delete_promoter_tooltip;
+
+  /// Title for the promoter deletion alert
+  ///
+  /// In en, this message translates to:
+  /// **'Should the selected promoter really be deleted?'**
+  String get promoter_overview_delete_promoter_alert_title;
+
+  /// Description for the promoter deletion alert
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting the promoter cannot be undone.'**
+  String get promoter_overview_delete_promoter_alert_description;
+
+  /// Delete button for the promoter deletion alert
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get promoter_overview_delete_promoter_alert_delete_button;
+
+  /// Cancel button for the promoter deletion alert
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get promoter_overview_delete_promoter_alert_cancel_button;
+
+  /// Snackbar title for the success case of promoter deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter successfully deleted'**
+  String get promoter_overview_delete_promoter_success_snackbar;
+
+  /// Snackbar title for the failure case of promoter deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter deletion failed!'**
+  String get promoter_overview_delete_promoter_failure_snackbar;
+
   /// Title for the page to delete the account.
   ///
   /// In en, this message translates to:

@@ -1219,6 +1219,102 @@ class MockAppLocalizations extends _i1.Mock implements _i19.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_create_promotion_placeholder_menu =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_promotion_placeholder_menu),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_create_promotion_placeholder_menu),
+        ),
+      ) as String);
+
+  @override
+  String
+      get landingpage_create_promotion_placeholder_service_provider_first_name =>
+          (super.noSuchMethod(
+            Invocation.getter(
+                #landingpage_create_promotion_placeholder_service_provider_first_name),
+            returnValue: _i20.dummyValue<String>(
+              this,
+              Invocation.getter(
+                  #landingpage_create_promotion_placeholder_service_provider_first_name),
+            ),
+          ) as String);
+
+  @override
+  String
+      get landingpage_create_promotion_placeholder_service_provider_last_name =>
+          (super.noSuchMethod(
+            Invocation.getter(
+                #landingpage_create_promotion_placeholder_service_provider_last_name),
+            returnValue: _i20.dummyValue<String>(
+              this,
+              Invocation.getter(
+                  #landingpage_create_promotion_placeholder_service_provider_last_name),
+            ),
+          ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_service_provider_name),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_service_provider_name),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_first_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_promoter_first_name),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_promoter_first_name),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_last_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_promoter_last_name),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_promoter_last_name),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_promoter_name),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_promoter_name),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_receiver_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_receiver_name),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_receiver_name),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_context_menu_delete => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_context_menu_delete),
         returnValue: _i20.dummyValue<String>(
@@ -5130,6 +5226,27 @@ class MockPromoterRepository extends _i1.Mock
           ) as _i15.Future<
               _i2
               .Either<_i23.DatabaseFailure, List<_i32.UnregisteredPromoter>>>);
+
+  @override
+  _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>> deletePromoter(
+          {required String? id}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deletePromoter,
+          [],
+          {#id: id},
+        ),
+        returnValue:
+            _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i23.DatabaseFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deletePromoter,
+            [],
+            {#id: id},
+          ),
+        )),
+      ) as _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>);
 }
 
 /// A class which mocks [UserRepository].
@@ -7666,6 +7783,15 @@ class MockPromoterCubit extends _i1.Mock implements _i48.PromoterCubit {
         Invocation.method(
           #getPromotingLandingPages,
           [landingPageIDs],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void deletePromoter(String? id) => super.noSuchMethod(
+        Invocation.method(
+          #deletePromoter,
+          [id],
         ),
         returnValueForMissingStub: null,
       );

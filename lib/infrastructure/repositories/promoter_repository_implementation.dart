@@ -158,4 +158,20 @@ class PromoterRepositoryImplementation implements PromoterRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> deletePromoter(
+      {required String id}) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable = firebaseFunctions.httpsCallable("deletePromoter");
+    try {
+      await callable.call({
+        "appCheckToken": appCheckToken,
+        "id": id,
+      });
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }

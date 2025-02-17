@@ -652,6 +652,27 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get promoter_overview_delete_promoter_tooltip => 'Delete promoter';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_title => 'Should the selected promoter really be deleted?';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_description => 'Deleting the promoter cannot be undone.';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_delete_button => 'Delete';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_cancel_button => 'Cancel';
+
+  @override
+  String get promoter_overview_delete_promoter_success_snackbar => 'Promoter successfully deleted';
+
+  @override
+  String get promoter_overview_delete_promoter_failure_snackbar => 'Promoter deletion failed!';
+
+  @override
   String get delete_account_title => 'Delete account';
 
   @override

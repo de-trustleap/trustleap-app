@@ -874,6 +874,34 @@
             }
         }
     },
+    "promoter_overview_delete_promoter_tooltip": "Delete promoter",
+    "@promoter_overview_delete_promoter_tooltip": {
+        "description": "Tooltip for the delete promoter button"
+    },
+    "promoter_overview_delete_promoter_alert_title": "Should the selected promoter really be deleted?",
+    "@promoter_overview_delete_promoter_alert_title": {
+        "description": "Title for the promoter deletion alert"
+    },
+    "promoter_overview_delete_promoter_alert_description": "Deleting the promoter cannot be undone.",
+    "@promoter_overview_delete_promoter_alert_description": {
+        "description": "Description for the promoter deletion alert"
+    },
+    "promoter_overview_delete_promoter_alert_delete_button": "Delete",
+    "@promoter_overview_delete_promoter_alert_delete_button": {
+        "description": "Delete button for the promoter deletion alert"
+    },
+    "promoter_overview_delete_promoter_alert_cancel_button": "Cancel",
+    "@promoter_overview_delete_promoter_alert_cancel_button": {
+        "description": "Cancel button for the promoter deletion alert"
+    },
+    "promoter_overview_delete_promoter_success_snackbar": "Promoter successfully deleted",
+    "@promoter_overview_delete_promoter_success_snackbar": {
+        "description": "Snackbar title for the success case of promoter deletion"
+    },
+    "promoter_overview_delete_promoter_failure_snackbar": "Promoter deletion failed!",
+    "@promoter_overview_delete_promoter_failure_snackbar": {
+        "description": "Snackbar title for the failure case of promoter deletion"
+    },
     "delete_account_title": "Delete account",
     "@delete_account_title": {
         "description": "Title for the page to delete the account."

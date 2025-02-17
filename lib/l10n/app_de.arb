@@ -874,6 +874,34 @@
             }
         }
     },
+    "promoter_overview_delete_promoter_tooltip": "Promoter löschen",
+    "@promoter_overview_delete_promoter_tooltip": {
+        "description": "Tooltip für den Promoter löschen Button"
+    },
+    "promoter_overview_delete_promoter_alert_title": "Soll der ausgewählte Promoter wirklich gelöscht werden?",
+    "@promoter_overview_delete_promoter_alert_title": {
+        "description": "Titel für den Promoter löschen Alert"
+    },
+    "promoter_overview_delete_promoter_alert_description": "Das Löschen des Promoters kann nicht rückgängig gemacht werden.",
+    "@promoter_overview_delete_promoter_alert_description": {
+        "description": "Beschreibung für den Promoter löschen Alert"
+    },
+    "promoter_overview_delete_promoter_alert_delete_button": "Löschen",
+    "@promoter_overview_delete_promoter_alert_delete_button": {
+        "description": "Löschen Button für den Promoter löschen Alert"
+    },
+    "promoter_overview_delete_promoter_alert_cancel_button": "Abbrechen",
+    "@promoter_overview_delete_promoter_alert_cancel_button": {
+        "description": "Abbrechen Button für den Promoter löschen Alert"
+    },
+    "promoter_overview_delete_promoter_success_snackbar": "Promoter erfolgreich gelöscht!",
+    "@promoter_overview_delete_promoter_success_snackbar": {
+        "description": "Snackbar Titel für den Erfolgsfall von Promoter löschen"
+    },
+    "promoter_overview_delete_promoter_failure_snackbar": "Promoter löschen fehlgeschlagen!",
+    "@promoter_overview_delete_promoter_failure_snackbar": {
+        "description": "Snackbar Titel für den Fehlerfall von Promoter löschen"
+    },
     "delete_account_title": "Account löschen",
     "@delete_account_title": {
         "description": "Titel für Seite zum Account löschen"

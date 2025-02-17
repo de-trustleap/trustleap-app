@@ -60,3 +60,11 @@ final class PromoterGetLandingPagesSuccessState extends PromoterState {
 }
 
 final class PromoterNoLandingPagesState extends PromoterState {}
+
+final class PromoterDeleteSuccessState extends PromoterState {}
+
+final class PromoterDeleteFailureState extends PromoterState {
+  final DatabaseFailure failure;
+
+  const PromoterDeleteFailureState({required this.failure});
+}

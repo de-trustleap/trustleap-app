@@ -169,4 +169,32 @@ void main() {
     });
   });
 
+  group("PromoterRepositoryImplementation_DeletePromoter", () {
+    const testID = "1";
+    test("should return nothing when call was successful", () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockPromoterRepo.deletePromoter(id: testID))
+          .thenAnswer((_) async => right(unit));
+      // When
+      final result = await mockPromoterRepo.deletePromoter(id: testID);
+      // Then
+      verify(mockPromoterRepo.deletePromoter(id: testID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockPromoterRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockPromoterRepo.deletePromoter(id: testID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockPromoterRepo.deletePromoter(id: testID);
+      // Then
+      verify(mockPromoterRepo.deletePromoter(id: testID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockPromoterRepo);
+    });
+  });
 }
