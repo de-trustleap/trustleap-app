@@ -118,16 +118,18 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
     Modular.get<PromoterCubit>().deletePromoter(id);
   }
 
-  void showDeleteAlert(String id) {
+  void showDeleteAlert(String id, AppLocalizations localization) {
     showDialog(
         context: context,
         builder: (_) {
           return CustomAlertDialog(
-              title: "Soll der ausgewählte Promoter wirklich gelöscht werden?",
-              message:
-                  "Das Löschen des Promoters kann nicht rückgängig gemacht werden.",
-              actionButtonTitle: "Löschen",
-              cancelButtonTitle: "Abbrechen",
+              title: localization.promoter_overview_delete_promoter_alert_title,
+              message: localization
+                  .promoter_overview_delete_promoter_alert_description,
+              actionButtonTitle: localization
+                  .promoter_overview_delete_promoter_alert_delete_button,
+              cancelButtonTitle: localization
+                  .promoter_overview_delete_promoter_alert_cancel_button,
               actionButtonAction: () => submitDeletion(id),
               cancelButtonAction: () => CustomNavigator.pop());
         });
@@ -158,13 +160,14 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
         return BlocConsumer<PromoterCubit, PromoterState>(
             listener: (context, promoterState) {
           if (promoterState is PromoterDeleteSuccessState) {
-            CustomSnackBar.of(context)
-                .showCustomSnackBar("Promoter erfolgreich gelöscht!");
+            CustomSnackBar.of(context).showCustomSnackBar(localization
+                .promoter_overview_delete_promoter_success_snackbar);
             BlocProvider.of<PromoterObserverCubit>(context)
                 .observeAllPromoters();
           } else if (promoterState is PromoterDeleteFailureState) {
             CustomSnackBar.of(context).showCustomSnackBar(
-                "Promoter löschen fehlgeschlagen!", SnackBarType.failure);
+                localization.promoter_overview_delete_promoter_failure_snackbar,
+                SnackBarType.failure);
           }
         }, builder: (context, promoterState) {
           if (state is PromotersObserverGetElementsSuccess) {
@@ -185,7 +188,8 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                   PromoterOverviewGrid(
                     controller: _controller,
                     promoters: visiblePromoters,
-                    deletePressed: (promoterId) => showDeleteAlert(promoterId),
+                    deletePressed: (promoterId) =>
+                        showDeleteAlert(promoterId, localization),
                   )
                 ] else ...[
                   PromoterOverviewList(

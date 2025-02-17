@@ -45,7 +45,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
                           deletePressed(promoter.id.value);
                         },
                         iconSize: 24,
-                        tooltip: "Promoter löschen",
+                        tooltip: localization
+                            .promoter_overview_delete_promoter_tooltip,
                         icon: Icon(Icons.delete,
                             color: themeData.colorScheme.secondary, size: 24)),
                     const Spacer(),

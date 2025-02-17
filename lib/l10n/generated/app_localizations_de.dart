@@ -652,6 +652,27 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get promoter_overview_delete_promoter_tooltip => 'Promoter löschen';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_title => 'Soll der ausgewählte Promoter wirklich gelöscht werden?';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_description => 'Das Löschen des Promoters kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_delete_button => 'Löschen';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_cancel_button => 'Abbrechen';
+
+  @override
+  String get promoter_overview_delete_promoter_success_snackbar => 'Promoter erfolgreich gelöscht!';
+
+  @override
+  String get promoter_overview_delete_promoter_failure_snackbar => 'Promoter löschen fehlgeschlagen!';
+
+  @override
   String get delete_account_title => 'Account löschen';
 
   @override
