@@ -13,4 +13,5 @@ abstract class PromoterRepository {
       List<String> ids);
   Future<Either<DatabaseFailure, List<UnregisteredPromoter>>>
       getUnregisteredPromoters(List<String> ids);
+  Future<Either<DatabaseFailure, Unit>> deletePromoter({required String id});
 }
