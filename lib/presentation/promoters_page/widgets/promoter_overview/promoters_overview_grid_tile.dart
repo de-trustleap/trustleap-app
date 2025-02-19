@@ -124,5 +124,3 @@ class PromotersOverviewGridTile extends StatelessWidget {
         hovered: false);
   }
 }
-
-// TODO: Localizations

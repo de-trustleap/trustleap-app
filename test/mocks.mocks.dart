@@ -2434,6 +2434,82 @@ class MockAppLocalizations extends _i1.Mock implements _i19.AppLocalizations {
       ) as String);
 
   @override
+  String get promoter_overview_delete_promoter_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_tooltip),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_delete_promoter_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_alert_title),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_delete_promoter_alert_title),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_alert_description),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_alert_description),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_delete_button =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #promoter_overview_delete_promoter_alert_delete_button),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_alert_delete_button),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_cancel_button =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #promoter_overview_delete_promoter_alert_cancel_button),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_alert_cancel_button),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_success_snackbar =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_success_snackbar),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_success_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_failure_snackbar =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_failure_snackbar),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_failure_snackbar),
+        ),
+      ) as String);
+
+  @override
   String get delete_account_title => (super.noSuchMethod(
         Invocation.getter(#delete_account_title),
         returnValue: _i20.dummyValue<String>(
@@ -4598,14 +4674,22 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
       ) as _i2.Option<_i22.CustomUser>);
 
   @override
-  _i15.Future<void> resendEmailVerification() => (super.noSuchMethod(
-        Invocation.method(
-          #resendEmailVerification,
-          [],
-        ),
-        returnValue: _i15.Future<void>.value(),
-        returnValueForMissingStub: _i15.Future<void>.value(),
-      ) as _i15.Future<void>);
+  _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>
+      resendEmailVerification() => (super.noSuchMethod(
+            Invocation.method(
+              #resendEmailVerification,
+              [],
+            ),
+            returnValue:
+                _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>.value(
+                    _FakeEither_0<_i23.DatabaseFailure, _i2.Unit>(
+              this,
+              Invocation.method(
+                #resendEmailVerification,
+                [],
+              ),
+            )),
+          ) as _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>);
 
   @override
   _i15.Future<_i2.Either<_i21.AuthFailure, void>> resetPassword(

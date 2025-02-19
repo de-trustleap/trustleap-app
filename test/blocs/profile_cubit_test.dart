@@ -288,7 +288,8 @@ void main() {
   group("ProfileCubit_ResendEmailVerification", () {
     test("should call user auth when function is called", () async {
       // Given
-      when(mockAuthRepo.resendEmailVerification()).thenAnswer((_) async => ());
+      when(mockAuthRepo.resendEmailVerification())
+          .thenAnswer((_) async => (right(unit)));
       // When
       profileCubit.resendEmailVerification();
       await untilCalled(mockAuthRepo.resendEmailVerification());
@@ -305,7 +306,23 @@ void main() {
         ProfileResendEmailVerificationLoadingState(),
         ProfileResendEmailVerificationSuccessState()
       ];
-      when(mockAuthRepo.resendEmailVerification()).thenAnswer((_) async => ());
+      when(mockAuthRepo.resendEmailVerification())
+          .thenAnswer((_) async => (right(unit)));
+      // Then
+      expectLater(profileCubit.stream, emitsInOrder(expectedResult));
+      profileCubit.resendEmailVerification();
+    });
+
+    test(
+        "should emit ProfileResendEmailVerificationLoadingState and then ProfileResendEmailVerificationFailureState when function is called",
+        () async {
+      // Given
+      final expectedResult = [
+        ProfileResendEmailVerificationLoadingState(),
+        ProfileResendEmailVerificationFailureState(failure: BackendFailure())
+      ];
+      when(mockAuthRepo.resendEmailVerification())
+          .thenAnswer((_) async => (left(BackendFailure())));
       // Then
       expectLater(profileCubit.stream, emitsInOrder(expectedResult));
       profileCubit.resendEmailVerification();
