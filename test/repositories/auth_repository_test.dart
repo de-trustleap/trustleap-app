@@ -191,8 +191,7 @@ void main() {
     test("should return unit when call was successful", () async {
       // Given
       final expectedResult = right(unit);
-      when(mockAuthRepo.deleteAccount())
-          .thenAnswer((realInvocation) async => right(unit));
+      when(mockAuthRepo.deleteAccount()).thenAnswer((_) async => right(unit));
       // When
       final result = await mockAuthRepo.deleteAccount();
       // Then
@@ -205,11 +204,39 @@ void main() {
       // Given
       final expectedResult = left(TooManyRequestsFailure());
       when(mockAuthRepo.deleteAccount())
-          .thenAnswer((realInvocation) async => left(TooManyRequestsFailure()));
+          .thenAnswer((_) async => left(TooManyRequestsFailure()));
       // When
       final result = await mockAuthRepo.deleteAccount();
       // Then
       verify(mockAuthRepo.deleteAccount());
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockAuthRepo);
+    });
+  });
+
+  group("AuthRepositoryImplementation_resendEmailVerification", () {
+    test("should return unit when call was successful", () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockAuthRepo.resendEmailVerification())
+          .thenAnswer((_) async => right(unit));
+      // When
+      final result = await mockAuthRepo.resendEmailVerification();
+      // Then
+      verify(mockAuthRepo.resendEmailVerification());
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockAuthRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockAuthRepo.resendEmailVerification())
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockAuthRepo.resendEmailVerification();
+      // Then
+      verify(mockAuthRepo.resendEmailVerification());
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockAuthRepo);
     });

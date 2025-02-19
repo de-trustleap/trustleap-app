@@ -2,6 +2,7 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
+import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -177,6 +178,11 @@ class _EmailSectionState extends State<EmailSection> {
           if (state is ProfileResendEmailVerificationLoadingState) ...[
             const SizedBox(height: 80),
             const LoadingIndicator()
+          ],
+          if (state is ProfileResendEmailVerificationFailureState) ...[
+            FormErrorView(
+                message: DatabaseFailureMapper.mapFailureMessage(
+                    state.failure, localization))
           ],
           const SizedBox(height: 32),
           ExpandedSection(

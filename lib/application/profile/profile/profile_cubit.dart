@@ -105,8 +105,11 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void resendEmailVerification() async {
     emit(ProfileResendEmailVerificationLoadingState());
-    await authRepo.resendEmailVerification();
-    emit(ProfileResendEmailVerificationSuccessState());
+    final failureOrSuccess = await authRepo.resendEmailVerification();
+    failureOrSuccess.fold(
+        (failure) =>
+            emit(ProfileResendEmailVerificationFailureState(failure: failure)),
+        (_) => emit(ProfileResendEmailVerificationSuccessState()));
   }
 
   void deleteAccount() async {

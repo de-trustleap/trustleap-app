@@ -86,8 +86,18 @@ class AuthRepositoryImplementation implements AuthRepository {
   }
 
   @override
-  Future<void> resendEmailVerification() async {
-    await firebaseAuth.currentUser?.sendEmailVerification();
+  Future<Either<DatabaseFailure, Unit>> resendEmailVerification() async {
+    final appCheckToken = await appCheck.getToken();
+    final email = firebaseAuth.currentUser?.email;
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("sendVerificationEmail");
+    try {
+      await callable
+          .call({"appCheckToken": appCheckToken, "email": email ?? ""});
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
   }
 
   @override

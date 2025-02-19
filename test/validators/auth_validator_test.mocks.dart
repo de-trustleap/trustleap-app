@@ -2030,6 +2030,82 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get promoter_overview_delete_promoter_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_delete_promoter_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_alert_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_delete_promoter_alert_title),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_alert_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_alert_description),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_delete_button =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #promoter_overview_delete_promoter_alert_delete_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_alert_delete_button),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_cancel_button =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #promoter_overview_delete_promoter_alert_cancel_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_alert_cancel_button),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_success_snackbar =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_success_snackbar),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_success_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_failure_snackbar =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_failure_snackbar),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_failure_snackbar),
+        ),
+      ) as String);
+
+  @override
   String get delete_account_title => (super.noSuchMethod(
         Invocation.getter(#delete_account_title),
         returnValue: _i3.dummyValue<String>(
