@@ -7,7 +7,7 @@ abstract class UserRepository {
   Stream<Either<DatabaseFailure, CustomUser>> observeUser();
   Future<Either<DatabaseFailure, Unit>> createUser({required CustomUser user});
   Future<Either<DatabaseFailure, Unit>> updateUser({required CustomUser user});
-  Future<Either<AuthFailure, void>> updateEmail({required String email});
+  Future<Either<DatabaseFailure, Unit>> updateEmail({required String email});
   Future<bool> isEmailVerified();
   Future<Either<AuthFailure, void>> updatePassword({required String password});
   Future<Either<DatabaseFailure, CustomUser>> getUser();

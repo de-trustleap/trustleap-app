@@ -58,8 +58,20 @@ class ProfileEmailUpdateSuccessState extends ProfileState with EquatableMixin {
   List<Object?> get props => [];
 }
 
-class ProfileEmailUpdateFailureState extends ProfileState with EquatableMixin {
+class ProfileEmailUpdateAuthFailureState extends ProfileState
+    with EquatableMixin {
   final AuthFailure failure;
+
+  ProfileEmailUpdateAuthFailureState({
+    required this.failure,
+  });
+
+  @override
+  List<Object?> get props => [failure];
+}
+
+class ProfileEmailUpdateFailureState extends ProfileState with EquatableMixin {
+  final DatabaseFailure failure;
 
   ProfileEmailUpdateFailureState({
     required this.failure,

@@ -108,12 +108,12 @@ void main() {
     });
 
     test(
-        "should emit ProfileEmailLoadingState and then ProfileEmailUpdateFailureState when function is called and there was an error",
+        "should emit ProfileEmailLoadingState and then ProfileEmailUpdateAuthFailureState when function is called and there was an error",
         () async {
       // Given
       final expectedResult = [
         ProfileEmailLoadingState(),
-        ProfileEmailUpdateFailureState(failure: WrongPasswordFailure())
+        ProfileEmailUpdateAuthFailureState(failure: WrongPasswordFailure())
       ];
       when(mockAuthRepo.reauthenticateWithPassword(password: testPassword))
           .thenAnswer((_) async => left(WrongPasswordFailure()));
@@ -175,7 +175,7 @@ void main() {
     test("should call user repo when function is called", () async {
       // Given
       when(mockUserRepo.updateEmail(email: testEmail))
-          .thenAnswer((_) async => right(()));
+          .thenAnswer((_) async => right((unit)));
       // When
       profileCubit.updateEmail(testEmail);
       await untilCalled(mockUserRepo.updateEmail(email: testEmail));
@@ -193,7 +193,7 @@ void main() {
         ProfileEmailUpdateSuccessState()
       ];
       when(mockUserRepo.updateEmail(email: testEmail))
-          .thenAnswer((_) async => right(()));
+          .thenAnswer((_) async => right((unit)));
       // Then
       expectLater(profileCubit.stream, emitsInOrder(expectedResult));
       profileCubit.updateEmail(testEmail);
@@ -205,10 +205,10 @@ void main() {
       // Given
       final expectedResult = [
         ProfileEmailLoadingState(),
-        ProfileEmailUpdateFailureState(failure: EmailAlreadyInUseFailure())
+        ProfileEmailUpdateFailureState(failure: BackendFailure())
       ];
       when(mockUserRepo.updateEmail(email: testEmail))
-          .thenAnswer((_) async => left(EmailAlreadyInUseFailure()));
+          .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(profileCubit.stream, emitsInOrder(expectedResult));
       profileCubit.updateEmail(testEmail);

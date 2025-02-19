@@ -96,9 +96,9 @@ void main() {
         "should return void when email has been updated and the call was successful",
         () async {
       // Given
-      final expectedResult = right(());
+      final expectedResult = right((unit));
       when(mockUserRepo.updateEmail(email: testEmail))
-          .thenAnswer((_) async => right(()));
+          .thenAnswer((_) async => right((unit)));
       // When
       final result = await mockUserRepo.updateEmail(email: testEmail);
       // Then
@@ -109,9 +109,9 @@ void main() {
 
     test("should return failure when the call has failed", () async {
       // Given
-      final expectedResult = left(InvalidEmailFailure());
+      final expectedResult = left(BackendFailure());
       when(mockUserRepo.updateEmail(email: testEmail))
-          .thenAnswer((_) async => left(InvalidEmailFailure()));
+          .thenAnswer((_) async => left(BackendFailure()));
       // When
       final result = await mockUserRepo.updateEmail(email: testEmail);
       // Then
