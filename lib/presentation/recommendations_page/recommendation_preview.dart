@@ -18,133 +18,159 @@ class RecommendationPreview extends StatefulWidget {
 class _RecommendationPreviewState extends State<RecommendationPreview>
     with TickerProviderStateMixin {
   TabController? tabController;
-  List<TextEditingController> textControllers = [];
+  final Map<String, TextEditingController> _textControllers = {};
 
   @override
   void initState() {
     super.initState();
 
-    if (widget.leads.length > 1) {
-      tabController = TabController(length: widget.leads.length, vsync: this);
+    // Für alle Leads, die beim ersten Aufbau vorhanden sind, Controller anlegen
+    for (final lead in widget.leads) {
+      final text = parseTemplate(lead, lead.promotionTemplate);
+      // Lead muss eine eindeutige ID haben
+      _textControllers[lead.id] = TextEditingController(text: text);
     }
 
-    textControllers = List.generate(
-      widget.leads.length,
-      (index) => TextEditingController(
-        text: parseTemplate(widget.leads[index], widget.leads[index].promotionTemplate),
-      ),
-    );
+    // Falls wir mehr als einen Lead haben, TabController initialisieren
+    if (widget.leads.length > 1) {
+      tabController = TabController(
+        length: widget.leads.length,
+        vsync: this,
+      );
+    }
   }
 
   @override
   void didUpdateWidget(covariant RecommendationPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.leads.length > 1) {
-      tabController = TabController(length: widget.leads.length, vsync: this);
-    } else {
-      tabController = null;
+    // 1) Controller entfernen, die zu Leads gehören,
+    // die jetzt nicht mehr existieren
+    final oldIds = oldWidget.leads.map((l) => l.id).toSet();
+    final newIds = widget.leads.map((l) => l.id).toSet();
+
+    // leads, die entfernt wurden
+    final removedIds = oldIds.difference(newIds);
+    for (final id in removedIds) {
+      _textControllers[id]?.dispose();
+      _textControllers.remove(id);
     }
 
-    textControllers = List.generate(
-      widget.leads.length,
-      (index) => TextEditingController(
-        text: parseTemplate(widget.leads[index], widget.leads[index].promotionTemplate),
-      ),
-    );
+    // 2) Neue Controller nur für hinzugekommene Leads anlegen
+    for (final lead in widget.leads) {
+      if (!_textControllers.containsKey(lead.id)) {
+        final text = parseTemplate(lead, lead.promotionTemplate);
+        _textControllers[lead.id] = TextEditingController(text: text);
+      }
+    }
+
+    // 3) TabController anpassen, falls sich die Länge ändert
+    if (widget.leads.length > 1) {
+      // Bei geändertem TabCount einen neuen TabController erstellen
+      if (tabController == null ||
+          tabController!.length != widget.leads.length) {
+        tabController?.dispose();
+        tabController = TabController(
+          length: widget.leads.length,
+          vsync: this,
+        );
+      }
+    } else {
+      // Bei nur einem Lead oder keinem Lead TabController entfernen
+      tabController?.dispose();
+      tabController = null;
+    }
   }
 
   @override
   void dispose() {
-    tabController?.dispose();
-    for (var controller in textControllers) {
+    // Alle Controller disposen
+    for (final controller in _textControllers.values) {
       controller.dispose();
     }
+    tabController?.dispose();
     super.dispose();
   }
 
   // Hilfsfunktion, um mehrere Platzhalter zu ersetzen
   String parseTemplate(LeadItem lead, String template) {
-    // Passen Sie diese Map auf Ihre Felder an
     final replacements = {
-      "\$name": lead.name
+      "\$name": lead.name,
     };
-
     var result = template;
     replacements.forEach((key, value) {
       result = result.replaceAll(key, value);
     });
-
     return result;
   }
 
   Future<void> _sendMessage(String leadName, String message) async {
     final localization = AppLocalizations.of(context);
-    final whatsappUrl = Uri.parse("https://api.whatsapp.com/send/?text=${Uri.encodeComponent(message)}");
+    final whatsappUrl = Uri.parse(
+        "https://api.whatsapp.com/send/?text=${Uri.encodeComponent(message)}");
     if (await canLaunchUrl(whatsappUrl)) {
       await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
     } else {
       if (!mounted) return;
-      CustomSnackBar.of(context).showCustomSnackBar(localization.recommendation_page_send_whatsapp_error);
+      CustomSnackBar.of(context).showCustomSnackBar(
+          localization.recommendation_page_send_whatsapp_error);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
-    // Wenn nur ein Lead vorhanden ist, brauchen wir keine Tabs
-    final isSingleLead = widget.leads.length == 1;
+    // Falls nur ein Lead vorhanden ist, brauchst du evtl. kein TabBar
+    if (widget.leads.length <= 1) {
+      final lead = widget.leads.isNotEmpty ? widget.leads.first : null;
+      if (lead == null) {
+        return const SizedBox();
+      }
+      // Wir verwenden hier den Controller aus der Map
+      final controller = _textControllers[lead.id]!;
+      return SizedBox(
+        height: 250,
+        child: LeadTextField(
+          controller: controller,
+          leadName: lead.name,
+          onSendPressed: () {
+            _sendMessage(
+              widget.leads.first.name,
+              controller.text,
+            );
+          },
+        ),
+      );
+    }
 
-    return CardContainer(
-      maxWidth: 800,
-      child: isSingleLead
-          ? SizedBox(
-              height: 250,
-              child: LeadTextField(
-                controller: textControllers.first,
-                leadName: widget.leads.first.name,
-                onSendPressed: () {
-                  _sendMessage(
-                    widget.leads.first.name,
-                    textControllers.first.text,
-                  );
-                },
-              ),
-            )
-          : Column(
-              children: [
-                TabBar(
-                  controller: tabController,
-                  tabs: widget.leads.map((lead) => Tab(text: lead.name)).toList(),
-                  dividerColor: Colors.transparent,
+    // Bei mehreren Leads → TabBar
+    return Column(
+      children: [
+        TabBar(
+          controller: tabController,
+          tabs: widget.leads.map((lead) => Tab(text: lead.name)).toList(),
+          dividerColor: Colors.transparent,
+        ),
+        const SizedBox(height: 30),
+        SizedBox(
+          height: 250,
+          child: TabBarView(
+            controller: tabController,
+            children: widget.leads.map((lead) {
+              final controller = _textControllers[lead.id]!;
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: LeadTextField(
+                  controller: controller,
+                  leadName: lead.name,
+                  onSendPressed: () {
+                    _sendMessage(lead.name, controller.text);
+                  },
                 ),
-                SizedBox(
-                  height: 250,
-                  child: TabBarView(
-                    controller: tabController,
-                    children: widget.leads
-                        .asMap()
-                        .entries
-                        .map(
-                          (entry) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: LeadTextField(
-                              controller: textControllers[entry.key],
-                              leadName: entry.value.name,
-                              onSendPressed: () {
-                                _sendMessage(
-                                  entry.value.name,
-                                  textControllers[entry.key].text
-                                );
-                              },
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-              ],
-            ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
     );
   }
 }

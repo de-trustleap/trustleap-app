@@ -12,13 +12,11 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackba
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/leads_validator.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_preview.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class RecommendationsForm extends StatefulWidget {
   const RecommendationsForm({super.key});
@@ -67,7 +65,6 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     setState(() {
       showError = false;
       errorMessage = "";
-      
     });
   }
 
@@ -95,7 +92,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
         });
       }
     } else {
-      CustomSnackBar.of(context).showCustomSnackBar(localization.recommendation_page_max_item_Message);
+      CustomSnackBar.of(context).showCustomSnackBar(
+          localization.recommendation_page_max_item_Message);
     }
   }
 
@@ -144,6 +142,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
         ).reason;
     return selectedReason as String;
   }
+
   void generateRecommendation() {
     setState(() {
       showRecommendation = true;
@@ -154,7 +153,6 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
     final validator = LeadsValidator(localization: localization);
     const double textFieldSpacing = 20;
     const double tabFieldSpacing = 20;
@@ -280,14 +278,13 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                     resetError();
                                   })
                             ]),
-                        const SizedBox(height: textFieldSpacing * 2),
                       ],
                       if (showRecommendation && leads.isNotEmpty) ...[
-                       SizedBox(height: tabFieldSpacing),
+                        SizedBox(height: tabFieldSpacing),
                         RecommendationPreview(
                           leads: leads,
                         ),
-                        ],
+                      ],
                     ]));
           } else if (state is RecommendationGetUserFailureState) {
             return CenteredConstrainedWrapper(

@@ -23,18 +23,25 @@ class LeadTextField extends StatelessWidget {
           child: FormTextfield(
             controller: controller,
             disabled: false,
-            placeholder: "${localization.recommendation_page_leadTextField_send_button} $leadName",
-            minLines: 4,
+            placeholder: "${localization.recommendation_page_leadTextField_title_prefix} $leadName",
+            minLines: 10,
             maxLines: 10,
             keyboardType: TextInputType.multiline
           ),
         ),
         const SizedBox(height: 10),
-        ElevatedButton.icon(
-          onPressed: onSendPressed,
-          icon: const Icon(Icons.send),
-          label: Text(localization.recommendation_page_leadTextField_send_button),
-        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(localization.recommendation_page_leadTextField_send_button),
+            const SizedBox(width: 8.0),
+            IconButton(
+              onPressed: onSendPressed,
+              icon: const Icon(Icons.send),
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ],
+        )
       ],
     );
   }
