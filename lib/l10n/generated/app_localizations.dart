@@ -1364,7 +1364,7 @@ abstract class AppLocalizations {
   /// Title for the send button
   ///
   /// In en, this message translates to:
-  /// **'Send'**
+  /// **'Send via Whatsapp'**
   String get recommendation_page_leadTextField_send_button;
 
   /// Message shown when the message cannot be sent
