@@ -104,6 +104,10 @@
     "@login_register_text": {
         "description": "Register text on the login page"
     },
+    "login_permission_error_message": "An error occurred while querying the permissions",
+    "@login_permission_error_message": {
+        "description": "Error message on the login page if the permissions could not be queried"
+    },
     "auth_validation_missing_email": "Please enter an email address",
     "@auth_validation_missing_email": {
         "description": "validationmessage when no email was entered"
@@ -330,7 +334,7 @@
     "@landingpage_creation_continue": {
         "description": "Text for continue Button in landingpage creation form"
     },
-    "landingpage_create_promotion_template_description": "Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use the placeholder $name to display the name of the recommendation recipient.",
+    "landingpage_create_promotion_template_description": "Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use different placeholders which you can choose from the placeholder menu.",
     "@landingpage_create_promotion_template_description": {
         "description": "Description for the promotion template textfield on the create landingpage form"
     },
@@ -349,6 +353,38 @@
     "open_emoji_picker_tooltip": "Open emoji picker",
     "@open_emoji_picker_tooltip": {
         "description": "Tooltip for the button that can open and close the emoji picker"
+    },
+    "landingpage_create_promotion_placeholder_menu": "Choose placeholder",
+    "@landingpage_create_promotion_placeholder_menu": {
+        "description": "Placeholder menu title"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_first_name": "First name of provider",
+    "@landingpage_create_promotion_placeholder_service_provider_first_name": {
+        "description": "Placeholder variable for the first name of provider"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_last_name": "Last name of provider",
+    "@landingpage_create_promotion_placeholder_service_provider_last_name": {
+        "description": "Placeholder variable for the last name of provider"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_name": "Name of provider",
+    "@landingpage_create_promotion_placeholder_service_provider_name": {
+        "description": "Placeholder variable for the name of provider"
+    },
+    "landingpage_create_promotion_placeholder_promoter_first_name": "First name of promoter",
+    "@landingpage_create_promotion_placeholder_promoter_first_name": {
+        "description": "Placeholder variable for the first name of promoter"
+    },
+    "landingpage_create_promotion_placeholder_promoter_last_name": "Last name of promoter",
+    "@landingpage_create_promotion_placeholder_promoter_last_name": {
+        "description": "Placeholder variable for the last name of promoter"
+    },
+    "landingpage_create_promotion_placeholder_promoter_name": "Name of promoter",
+    "@landingpage_create_promotion_placeholder_promoter_name": {
+        "description": "Placeholder variable for the name of promoter"
+    },
+    "landingpage_create_promotion_placeholder_receiver_name": "Name of receiver",
+    "@landingpage_create_promotion_placeholder_receiver_name": {
+        "description": "Placeholder variable for the name of receiver"
     },
     "landingpage_overview_context_menu_delete": "Delete",
     "@landingpage_overview_context_menu_delete": {
@@ -730,6 +766,14 @@
     "@register_promoter_missing_company_error_message": {
         "description": "Error message that appears if no company exists during promoter registration."
     },
+    "promoter_register_tab_title": "Register promoter",
+    "@promoter_register_tab_title": {
+        "description": "Title for the register promoter tab"
+    },
+    "my_promoters_tab_title": "My promoters",
+    "@my_promoters_tab_title": {
+        "description": "Title for the my promoters tab"
+    },
     "promoter_overview_title": "My promoter",
     "@promoter_overview_title": {
         "description": "The title of the promoter overview"
@@ -829,6 +873,34 @@
                 "example": "23.12.2023"
             }
         }
+    },
+    "promoter_overview_delete_promoter_tooltip": "Delete promoter",
+    "@promoter_overview_delete_promoter_tooltip": {
+        "description": "Tooltip for the delete promoter button"
+    },
+    "promoter_overview_delete_promoter_alert_title": "Should the selected promoter really be deleted?",
+    "@promoter_overview_delete_promoter_alert_title": {
+        "description": "Title for the promoter deletion alert"
+    },
+    "promoter_overview_delete_promoter_alert_description": "Deleting the promoter cannot be undone.",
+    "@promoter_overview_delete_promoter_alert_description": {
+        "description": "Description for the promoter deletion alert"
+    },
+    "promoter_overview_delete_promoter_alert_delete_button": "Delete",
+    "@promoter_overview_delete_promoter_alert_delete_button": {
+        "description": "Delete button for the promoter deletion alert"
+    },
+    "promoter_overview_delete_promoter_alert_cancel_button": "Cancel",
+    "@promoter_overview_delete_promoter_alert_cancel_button": {
+        "description": "Cancel button for the promoter deletion alert"
+    },
+    "promoter_overview_delete_promoter_success_snackbar": "Promoter successfully deleted",
+    "@promoter_overview_delete_promoter_success_snackbar": {
+        "description": "Snackbar title for the success case of promoter deletion"
+    },
+    "promoter_overview_delete_promoter_failure_snackbar": "Promoter deletion failed!",
+    "@promoter_overview_delete_promoter_failure_snackbar": {
+        "description": "Snackbar title for the failure case of promoter deletion"
     },
     "delete_account_title": "Delete account",
     "@delete_account_title": {
@@ -1248,6 +1320,10 @@
     "@landingpage_pagebuilder_config_menu_contact_form_type": {
         "description": "Contact form title in the pagebuilder config menu"
     },
+    "landingpage_pagebuilder_config_menu_footer_type": "Footer",
+    "@landingpage_pagebuilder_config_menu_footer_type": {
+        "description": "Footer title in the pagebuilder config menu"
+    },
     "landingpage_pagebuilder_config_menu_unknown_type": "Unknown",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unknown title in the pagebuilder config menu"
@@ -1568,7 +1644,11 @@
     "@pagebuilder_contact_form_config_email_textfield_title": {
         "description": "Title for collapsible menu for the email textfield configuration in the contactform configuration in the pagebuilder config menu"
     },
-    "pagebuilder_contact_form_config_message_textfield_title": "Nachricht textfield",
+    "pagebuilder_contact_form_config_phone_textfield_title": "Phone textfield",
+    "@pagebuilder_contact_form_config_phone_textfield_title": {
+        "description": "Title for collapsible menu for the phone textfield configuration in the contactform configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_contact_form_config_message_textfield_title": "Message textfield",
     "@pagebuilder_contact_form_config_message_textfield_title": {
         "description": "Title for collapsible menu for the message textfield configuration in the contactform configuration in the pagebuilder config menu"
     },
@@ -1615,5 +1695,13 @@
     "landingpage_pagebuilder_config_menu_section_type": "Section",
     "@landingpage_pagebuilder_config_menu_section_type": {
         "description": "Section Title in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_footer_config_privacy_policy": "Privacy Policy Configuration",
+    "@landingpage_pagebuilder_footer_config_privacy_policy": {
+        "description": "Collapsible Menu for privacy policy configuration of the footer in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_footer_config_impressum": "Impressum Configuration",
+    "@landingpage_pagebuilder_footer_config_impressum": {
+        "description": "Collapsible Menu for impressum configuration of the footer in the pagebuilder config menu"
     }
 }

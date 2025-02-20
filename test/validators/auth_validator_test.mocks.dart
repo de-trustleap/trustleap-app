@@ -272,6 +272,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get login_permission_error_message => (super.noSuchMethod(
+        Invocation.getter(#login_permission_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#login_permission_error_message),
+        ),
+      ) as String);
+
+  @override
   String get auth_validation_missing_email => (super.noSuchMethod(
         Invocation.getter(#auth_validation_missing_email),
         returnValue: _i3.dummyValue<String>(
@@ -802,6 +811,102 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#open_emoji_picker_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_menu =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_create_promotion_placeholder_menu),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_create_promotion_placeholder_menu),
+        ),
+      ) as String);
+
+  @override
+  String
+      get landingpage_create_promotion_placeholder_service_provider_first_name =>
+          (super.noSuchMethod(
+            Invocation.getter(
+                #landingpage_create_promotion_placeholder_service_provider_first_name),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(
+                  #landingpage_create_promotion_placeholder_service_provider_first_name),
+            ),
+          ) as String);
+
+  @override
+  String
+      get landingpage_create_promotion_placeholder_service_provider_last_name =>
+          (super.noSuchMethod(
+            Invocation.getter(
+                #landingpage_create_promotion_placeholder_service_provider_last_name),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(
+                  #landingpage_create_promotion_placeholder_service_provider_last_name),
+            ),
+          ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_service_provider_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_service_provider_name),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_first_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_promoter_first_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_promoter_first_name),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_last_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_promoter_last_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_promoter_last_name),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_promoter_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_promoter_name),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_create_promotion_placeholder_receiver_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_create_promotion_placeholder_receiver_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_create_promotion_placeholder_receiver_name),
         ),
       ) as String);
 
@@ -1724,6 +1829,24 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get promoter_register_tab_title => (super.noSuchMethod(
+        Invocation.getter(#promoter_register_tab_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_register_tab_title),
+        ),
+      ) as String);
+
+  @override
+  String get my_promoters_tab_title => (super.noSuchMethod(
+        Invocation.getter(#my_promoters_tab_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#my_promoters_tab_title),
+        ),
+      ) as String);
+
+  @override
   String get promoter_overview_title => (super.noSuchMethod(
         Invocation.getter(#promoter_overview_title),
         returnValue: _i3.dummyValue<String>(
@@ -1903,6 +2026,82 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#promoter_overview_error_view_title),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_delete_promoter_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_alert_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_delete_promoter_alert_title),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_alert_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_alert_description),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_delete_button =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #promoter_overview_delete_promoter_alert_delete_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_alert_delete_button),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_alert_cancel_button =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #promoter_overview_delete_promoter_alert_cancel_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_alert_cancel_button),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_success_snackbar =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_success_snackbar),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_success_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_delete_promoter_failure_snackbar =>
+      (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_delete_promoter_failure_snackbar),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_delete_promoter_failure_snackbar),
         ),
       ) as String);
 
@@ -2883,6 +3082,16 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_config_menu_footer_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_footer_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_footer_type),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type =>
       (super.noSuchMethod(
         Invocation.getter(#landingpage_pagebuilder_config_menu_unknown_type),
@@ -3717,6 +3926,18 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_contact_form_config_phone_textfield_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_contact_form_config_phone_textfield_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_contact_form_config_phone_textfield_title),
+        ),
+      ) as String);
+
+  @override
   String get pagebuilder_contact_form_config_message_textfield_title =>
       (super.noSuchMethod(
         Invocation.getter(
@@ -3844,6 +4065,28 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_pagebuilder_config_menu_section_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_footer_config_privacy_policy =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_footer_config_privacy_policy),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_footer_config_privacy_policy),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_footer_config_impressum =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_footer_config_impressum),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_footer_config_impressum),
         ),
       ) as String);
 

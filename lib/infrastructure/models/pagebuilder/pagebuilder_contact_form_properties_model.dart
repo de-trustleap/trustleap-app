@@ -10,6 +10,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
   final String? email;
   final Map<String, dynamic>? nameTextFieldProperties;
   final Map<String, dynamic>? emailTextFieldProperties;
+  final Map<String, dynamic>? phoneTextFieldProperties;
   final Map<String, dynamic>? messageTextFieldProperties;
   final Map<String, dynamic>? buttonProperties;
 
@@ -17,6 +18,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
     required this.email,
     required this.nameTextFieldProperties,
     required this.emailTextFieldProperties,
+    required this.phoneTextFieldProperties,
     required this.messageTextFieldProperties,
     required this.buttonProperties,
   });
@@ -29,6 +31,9 @@ class PageBuilderContactFormPropertiesModel extends Equatable
     }
     if (emailTextFieldProperties != null) {
       map['emailTextFieldProperties'] = emailTextFieldProperties;
+    }
+    if (phoneTextFieldProperties != null) {
+      map['phoneTextFieldProperties'] = phoneTextFieldProperties;
     }
     if (messageTextFieldProperties != null) {
       map['messageTextFieldProperties'] = messageTextFieldProperties;
@@ -47,6 +52,9 @@ class PageBuilderContactFormPropertiesModel extends Equatable
       emailTextFieldProperties: map['emailTextFieldProperties'] != null
           ? map['emailTextFieldProperties'] as Map<String, dynamic>
           : null,
+      phoneTextFieldProperties: map['phoneTextFieldProperties'] != null
+          ? map['phoneTextFieldProperties'] as Map<String, dynamic>
+          : null,
       messageTextFieldProperties: map['messageTextFieldProperties'] != null
           ? map['messageTextFieldProperties'] as Map<String, dynamic>
           : null,
@@ -60,6 +68,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
     String? email,
     Map<String, dynamic>? nameTextFieldProperties,
     Map<String, dynamic>? emailTextFieldProperties,
+    Map<String, dynamic>? phoneTextFieldProperties,
     Map<String, dynamic>? messageTextFieldProperties,
     Map<String, dynamic>? buttonProperties,
   }) {
@@ -69,6 +78,8 @@ class PageBuilderContactFormPropertiesModel extends Equatable
           nameTextFieldProperties ?? this.nameTextFieldProperties,
       emailTextFieldProperties:
           emailTextFieldProperties ?? this.emailTextFieldProperties,
+      phoneTextFieldProperties:
+          phoneTextFieldProperties ?? this.phoneTextFieldProperties,
       messageTextFieldProperties:
           messageTextFieldProperties ?? this.messageTextFieldProperties,
       buttonProperties: buttonProperties ?? this.buttonProperties,
@@ -86,6 +97,11 @@ class PageBuilderContactFormPropertiesModel extends Equatable
         emailTextFieldProperties: emailTextFieldProperties != null
             ? PageBuilderTextFieldPropertiesModel.fromMap(
                     emailTextFieldProperties!)
+                .toDomain()
+            : null,
+        phoneTextFieldProperties: phoneTextFieldProperties != null
+            ? PageBuilderTextFieldPropertiesModel.fromMap(
+                    phoneTextFieldProperties!)
                 .toDomain()
             : null,
         messageTextFieldProperties: messageTextFieldProperties != null
@@ -113,6 +129,11 @@ class PageBuilderContactFormPropertiesModel extends Equatable
                     properties.emailTextFieldProperties!)
                 .toMap()
             : null,
+        phoneTextFieldProperties: properties.phoneTextFieldProperties != null
+            ? PageBuilderTextFieldPropertiesModel.fromDomain(
+                    properties.phoneTextFieldProperties!)
+                .toMap()
+            : null,
         messageTextFieldProperties:
             properties.messageTextFieldProperties != null
                 ? PageBuilderTextFieldPropertiesModel.fromDomain(
@@ -120,8 +141,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
                     .toMap()
                 : null,
         buttonProperties: properties.buttonProperties != null
-            ? PageBuilderButtonPropertiesModel.fromDomain(
-                    properties.buttonProperties!)
+            ? PageBuilderButtonPropertiesModel.fromDomain(properties.buttonProperties!)
                 .toMap()
             : null);
   }
@@ -131,6 +151,7 @@ class PageBuilderContactFormPropertiesModel extends Equatable
         email,
         nameTextFieldProperties,
         emailTextFieldProperties,
+        phoneTextFieldProperties,
         messageTextFieldProperties,
         buttonProperties
       ];

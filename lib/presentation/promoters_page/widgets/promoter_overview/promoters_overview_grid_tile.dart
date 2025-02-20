@@ -12,11 +12,10 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersOverviewGridTile extends StatelessWidget {
   final Promoter promoter;
+  final Function(String) deletePressed;
 
-  const PromotersOverviewGridTile({
-    super.key,
-    required this.promoter,
-  });
+  const PromotersOverviewGridTile(
+      {super.key, required this.promoter, required this.deletePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +36,21 @@ class PromotersOverviewGridTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          deletePressed(promoter.id.value);
+                        },
+                        iconSize: 24,
+                        tooltip: localization
+                            .promoter_overview_delete_promoter_tooltip,
+                        icon: Icon(Icons.delete,
+                            color: themeData.colorScheme.secondary, size: 24)),
+                    const Spacer(),
+                  ]),
               if (promoter.registered != null && promoter.registered!) ...[
                 CachedNetworkImage(
                   width: responsiveValue.largerThan(MOBILE) ? 120 : 140,

@@ -85,6 +85,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get login_register_text => 'Du hast kein Konto? ';
 
   @override
+  String get login_permission_error_message => 'Bei der Abfrage der Berechtigungen ist ein Fehler aufgetreten';
+
+  @override
   String get auth_validation_missing_email => 'Gib bitte eine E-Mail Adresse an';
 
   @override
@@ -249,7 +252,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_creation_continue => 'Weiter';
 
   @override
-  String get landingpage_create_promotion_template_description => 'Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter \$name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.';
+  String get landingpage_create_promotion_template_description => 'Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst verschiedene Platzhalter nutzen welche du über das Platzhalter Menü auswählen kannst.';
 
   @override
   String get landingpage_create_promotion_template_placeholder => 'Vorlage für Promoter (optional)';
@@ -262,6 +265,30 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get open_emoji_picker_tooltip => 'Emoji Picker öffnen';
+
+  @override
+  String get landingpage_create_promotion_placeholder_menu => 'Platzhalter auswählen';
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_first_name => 'Vorname des Dienstleisters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_last_name => 'Nachname des Dienstleisters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_name => 'Name des Dienstleisters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_first_name => 'Vorname des Promoters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_last_name => 'Nachname des Promoters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_name => 'Name des Promoters';
+
+  @override
+  String get landingpage_create_promotion_placeholder_receiver_name => 'Name des Absenders';
 
   @override
   String get landingpage_overview_context_menu_delete => 'Löschen';
@@ -549,6 +576,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get register_promoter_missing_company_error_message => 'Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist';
 
   @override
+  String get promoter_register_tab_title => 'Promoter registrieren';
+
+  @override
+  String get my_promoters_tab_title => 'Meine Promoter';
+
+  @override
   String get promoter_overview_title => 'Meine Promoter';
 
   @override
@@ -617,6 +650,27 @@ class AppLocalizationsDe extends AppLocalizations {
   String promoter_overview_creation_date(String date) {
     return 'Mitglied seit $date';
   }
+
+  @override
+  String get promoter_overview_delete_promoter_tooltip => 'Promoter löschen';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_title => 'Soll der ausgewählte Promoter wirklich gelöscht werden?';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_description => 'Das Löschen des Promoters kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_delete_button => 'Löschen';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_cancel_button => 'Abbrechen';
+
+  @override
+  String get promoter_overview_delete_promoter_success_snackbar => 'Promoter erfolgreich gelöscht!';
+
+  @override
+  String get promoter_overview_delete_promoter_failure_snackbar => 'Promoter löschen fehlgeschlagen!';
 
   @override
   String get delete_account_title => 'Account löschen';
@@ -931,6 +985,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_config_menu_contact_form_type => 'Kontaktformular';
 
   @override
+  String get landingpage_pagebuilder_config_menu_footer_type => 'Footer';
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unbekannt';
 
   @override
@@ -1171,6 +1228,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pagebuilder_contact_form_config_email_textfield_title => 'E-Mail Textfeld';
 
   @override
+  String get pagebuilder_contact_form_config_phone_textfield_title => 'Telefon Textfeld';
+
+  @override
   String get pagebuilder_contact_form_config_message_textfield_title => 'Nachricht Textfeld';
 
   @override
@@ -1205,4 +1265,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_config_menu_section_type => 'Section';
+
+  @override
+  String get landingpage_pagebuilder_footer_config_privacy_policy => 'Datenschutzerklärung Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_footer_config_impressum => 'Impressum Konfiguration';
 }

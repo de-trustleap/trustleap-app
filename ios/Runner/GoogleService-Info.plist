@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAH3bzKrA1fRJaCvp5U5OLVxEDpKdmo1AU</string>
+	<string>AIzaSyDh8agQbVtDjB5HyRXO1iWHq0MBi0TFPMY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>962239137198</string>
+	<string>326519245330</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.finanzbegleiter</string>
 	<key>PROJECT_ID</key>
-	<string>finanzwegbegleiter</string>
+	<string>trustleap-staging</string>
 	<key>STORAGE_BUCKET</key>
-	<string>finanzwegbegleiter.appspot.com</string>
+	<string>trustleap-staging.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:962239137198:ios:b2999c070cea10ba44743f</string>
+	<string>1:326519245330:ios:176587356e92ff5224e6cb</string>
 </dict>
 </plist>

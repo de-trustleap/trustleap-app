@@ -85,6 +85,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_register_text => 'You don\'\'t have an account? ';
 
   @override
+  String get login_permission_error_message => 'An error occurred while querying the permissions';
+
+  @override
   String get auth_validation_missing_email => 'Please enter an email address';
 
   @override
@@ -249,7 +252,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_creation_continue => 'Continue';
 
   @override
-  String get landingpage_create_promotion_template_description => 'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use the placeholder \$name to display the name of the recommendation recipient.';
+  String get landingpage_create_promotion_template_description => 'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use different placeholders which you can choose from the placeholder menu.';
 
   @override
   String get landingpage_create_promotion_template_placeholder => 'Template for promoter (optional)';
@@ -262,6 +265,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get open_emoji_picker_tooltip => 'Open emoji picker';
+
+  @override
+  String get landingpage_create_promotion_placeholder_menu => 'Choose placeholder';
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_first_name => 'First name of provider';
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_last_name => 'Last name of provider';
+
+  @override
+  String get landingpage_create_promotion_placeholder_service_provider_name => 'Name of provider';
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_first_name => 'First name of promoter';
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_last_name => 'Last name of promoter';
+
+  @override
+  String get landingpage_create_promotion_placeholder_promoter_name => 'Name of promoter';
+
+  @override
+  String get landingpage_create_promotion_placeholder_receiver_name => 'Name of receiver';
 
   @override
   String get landingpage_overview_context_menu_delete => 'Delete';
@@ -549,6 +576,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_promoter_missing_company_error_message => 'You cannot register a promoter because you are not affiliated with any company';
 
   @override
+  String get promoter_register_tab_title => 'Register promoter';
+
+  @override
+  String get my_promoters_tab_title => 'My promoters';
+
+  @override
   String get promoter_overview_title => 'My promoter';
 
   @override
@@ -617,6 +650,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String promoter_overview_creation_date(String date) {
     return 'Member since $date';
   }
+
+  @override
+  String get promoter_overview_delete_promoter_tooltip => 'Delete promoter';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_title => 'Should the selected promoter really be deleted?';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_description => 'Deleting the promoter cannot be undone.';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_delete_button => 'Delete';
+
+  @override
+  String get promoter_overview_delete_promoter_alert_cancel_button => 'Cancel';
+
+  @override
+  String get promoter_overview_delete_promoter_success_snackbar => 'Promoter successfully deleted';
+
+  @override
+  String get promoter_overview_delete_promoter_failure_snackbar => 'Promoter deletion failed!';
 
   @override
   String get delete_account_title => 'Delete account';
@@ -931,6 +985,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_config_menu_contact_form_type => 'Contact Form';
 
   @override
+  String get landingpage_pagebuilder_config_menu_footer_type => 'Footer';
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unknown';
 
   @override
@@ -1171,7 +1228,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pagebuilder_contact_form_config_email_textfield_title => 'E-Mail textfield';
 
   @override
-  String get pagebuilder_contact_form_config_message_textfield_title => 'Nachricht textfield';
+  String get pagebuilder_contact_form_config_phone_textfield_title => 'Phone textfield';
+
+  @override
+  String get pagebuilder_contact_form_config_message_textfield_title => 'Message textfield';
 
   @override
   String get pagebuilder_contact_form_config_button_title => 'Button configuration';
@@ -1205,4 +1265,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_config_menu_section_type => 'Section';
+
+  @override
+  String get landingpage_pagebuilder_footer_config_privacy_policy => 'Privacy Policy Configuration';
+
+  @override
+  String get landingpage_pagebuilder_footer_config_impressum => 'Impressum Configuration';
 }

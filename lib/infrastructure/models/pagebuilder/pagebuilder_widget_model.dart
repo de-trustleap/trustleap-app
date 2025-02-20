@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
@@ -16,6 +17,7 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_ba
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_column_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_contact_form_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_container_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_footer_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_row_properties_model.dart';
@@ -190,6 +192,8 @@ class PageBuilderWidgetModel extends Equatable {
       case PageBuilderWidgetType.contactForm:
         return PageBuilderContactFormPropertiesModel.fromMap(properties!)
             .toDomain();
+      case PageBuilderWidgetType.footer:
+        return PagebuilderFooterPropertiesModel.fromMap(properties!).toDomain();
       default:
         return null;
     }
@@ -215,6 +219,8 @@ class PageBuilderWidgetModel extends Equatable {
     } else if (properties is PageBuilderContactFormProperties) {
       return PageBuilderContactFormPropertiesModel.fromDomain(properties)
           .toMap();
+    } else if (properties is PagebuilderFooterProperties) {
+      return PagebuilderFooterPropertiesModel.fromDomain(properties).toMap();
     } else {
       return null;
     }

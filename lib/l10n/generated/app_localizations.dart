@@ -251,6 +251,12 @@ abstract class AppLocalizations {
   /// **'You don\'\'t have an account? '**
   String get login_register_text;
 
+  /// Error message on the login page if the permissions could not be queried
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while querying the permissions'**
+  String get login_permission_error_message;
+
   /// validationmessage when no email was entered
   ///
   /// In en, this message translates to:
@@ -578,7 +584,7 @@ abstract class AppLocalizations {
   /// Description for the promotion template textfield on the create landingpage form
   ///
   /// In en, this message translates to:
-  /// **'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use the placeholder \$name to display the name of the recommendation recipient.'**
+  /// **'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use different placeholders which you can choose from the placeholder menu.'**
   String get landingpage_create_promotion_template_description;
 
   /// Placeholder for the promotion template textfield
@@ -604,6 +610,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open emoji picker'**
   String get open_emoji_picker_tooltip;
+
+  /// Placeholder menu title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose placeholder'**
+  String get landingpage_create_promotion_placeholder_menu;
+
+  /// Placeholder variable for the first name of provider
+  ///
+  /// In en, this message translates to:
+  /// **'First name of provider'**
+  String get landingpage_create_promotion_placeholder_service_provider_first_name;
+
+  /// Placeholder variable for the last name of provider
+  ///
+  /// In en, this message translates to:
+  /// **'Last name of provider'**
+  String get landingpage_create_promotion_placeholder_service_provider_last_name;
+
+  /// Placeholder variable for the name of provider
+  ///
+  /// In en, this message translates to:
+  /// **'Name of provider'**
+  String get landingpage_create_promotion_placeholder_service_provider_name;
+
+  /// Placeholder variable for the first name of promoter
+  ///
+  /// In en, this message translates to:
+  /// **'First name of promoter'**
+  String get landingpage_create_promotion_placeholder_promoter_first_name;
+
+  /// Placeholder variable for the last name of promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Last name of promoter'**
+  String get landingpage_create_promotion_placeholder_promoter_last_name;
+
+  /// Placeholder variable for the name of promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Name of promoter'**
+  String get landingpage_create_promotion_placeholder_promoter_name;
+
+  /// Placeholder variable for the name of receiver
+  ///
+  /// In en, this message translates to:
+  /// **'Name of receiver'**
+  String get landingpage_create_promotion_placeholder_receiver_name;
 
   /// Delete button in the context menu on the landing page overview page.
   ///
@@ -1175,6 +1229,18 @@ abstract class AppLocalizations {
   /// **'You cannot register a promoter because you are not affiliated with any company'**
   String get register_promoter_missing_company_error_message;
 
+  /// Title for the register promoter tab
+  ///
+  /// In en, this message translates to:
+  /// **'Register promoter'**
+  String get promoter_register_tab_title;
+
+  /// Title for the my promoters tab
+  ///
+  /// In en, this message translates to:
+  /// **'My promoters'**
+  String get my_promoters_tab_title;
+
   /// The title of the promoter overview
   ///
   /// In en, this message translates to:
@@ -1306,6 +1372,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Member since {date}'**
   String promoter_overview_creation_date(String date);
+
+  /// Tooltip for the delete promoter button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete promoter'**
+  String get promoter_overview_delete_promoter_tooltip;
+
+  /// Title for the promoter deletion alert
+  ///
+  /// In en, this message translates to:
+  /// **'Should the selected promoter really be deleted?'**
+  String get promoter_overview_delete_promoter_alert_title;
+
+  /// Description for the promoter deletion alert
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting the promoter cannot be undone.'**
+  String get promoter_overview_delete_promoter_alert_description;
+
+  /// Delete button for the promoter deletion alert
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get promoter_overview_delete_promoter_alert_delete_button;
+
+  /// Cancel button for the promoter deletion alert
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get promoter_overview_delete_promoter_alert_cancel_button;
+
+  /// Snackbar title for the success case of promoter deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter successfully deleted'**
+  String get promoter_overview_delete_promoter_success_snackbar;
+
+  /// Snackbar title for the failure case of promoter deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter deletion failed!'**
+  String get promoter_overview_delete_promoter_failure_snackbar;
 
   /// Title for the page to delete the account.
   ///
@@ -1931,6 +2039,12 @@ abstract class AppLocalizations {
   /// **'Contact Form'**
   String get landingpage_pagebuilder_config_menu_contact_form_type;
 
+  /// Footer title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Footer'**
+  String get landingpage_pagebuilder_config_menu_footer_type;
+
   /// Unknown title in the pagebuilder config menu
   ///
   /// In en, this message translates to:
@@ -2411,10 +2525,16 @@ abstract class AppLocalizations {
   /// **'E-Mail textfield'**
   String get pagebuilder_contact_form_config_email_textfield_title;
 
+  /// Title for collapsible menu for the phone textfield configuration in the contactform configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Phone textfield'**
+  String get pagebuilder_contact_form_config_phone_textfield_title;
+
   /// Title for collapsible menu for the message textfield configuration in the contactform configuration in the pagebuilder config menu
   ///
   /// In en, this message translates to:
-  /// **'Nachricht textfield'**
+  /// **'Message textfield'**
   String get pagebuilder_contact_form_config_message_textfield_title;
 
   /// Title for collapsible menu for the button configuration in the contactform configuration in the pagebuilder config menu
@@ -2482,6 +2602,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Section'**
   String get landingpage_pagebuilder_config_menu_section_type;
+
+  /// Collapsible Menu for privacy policy configuration of the footer in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy Configuration'**
+  String get landingpage_pagebuilder_footer_config_privacy_policy;
+
+  /// Collapsible Menu for impressum configuration of the footer in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Impressum Configuration'**
+  String get landingpage_pagebuilder_footer_config_impressum;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

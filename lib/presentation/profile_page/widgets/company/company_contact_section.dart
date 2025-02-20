@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
@@ -60,8 +61,17 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
         postCodeTextController.text = widget.company.postCode ?? "";
         placeTextController.text = widget.company.place ?? "";
         phoneNumberTextController.text = widget.company.phoneNumber ?? "";
-        if (widget.user.role == Role.company) {
-          textFieldsDisabled = false;
+        final permissions = (context.watchModular<PermissionCubit>().state
+                as PermissionSuccessState)
+            .permissions;
+        if (permissions.hasEditCompanyPermission()) {
+          setState(() {
+            textFieldsDisabled = false;
+          });
+        } else {
+          setState(() {
+            textFieldsDisabled = true;
+          });
         }
       });
     });
@@ -117,6 +127,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
     final validator = CompanyValidator(localization: localization);
+    final permissions =
+        (context.watch<PermissionCubit>().state as PermissionSuccessState)
+            .permissions;
     const double textFieldSpacing = 20;
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
@@ -301,7 +314,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                               onChanged: resetError,
                               onFieldSubmitted: () => submit(validator))
                         ]),
-                    if (widget.user.role == Role.company) ...[
+                    if (permissions.hasEditCompanyPermission()) ...[
                       const SizedBox(height: textFieldSpacing * 2),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

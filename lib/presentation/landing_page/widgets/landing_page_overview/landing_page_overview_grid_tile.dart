@@ -1,14 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageOverviewGridTile extends StatelessWidget {
@@ -46,8 +49,12 @@ class LandingPageOverviewGridTile extends StatelessWidget {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localizations = AppLocalizations.of(context);
+    final permissions = (context.watchModular<PermissionCubit>().state
+            as PermissionSuccessState)
+        .permissions;
 
-    if (landingPage.ownerID == user.id) {
+    if (landingPage.ownerID == user.id ||
+        (permissions.hasEditLandingPagePermission())) {
       return InkWell(
           onTap: () => CustomNavigator.openInNewTab(
               "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
@@ -62,6 +69,9 @@ class LandingPageOverviewGridTile extends StatelessWidget {
       ResponsiveBreakpointsData responsiveValue,
       AppLocalizations localizations,
       BuildContext context) {
+    final permissions =
+        (context.watch<PermissionCubit>().state as PermissionSuccessState)
+            .permissions;
     return Container(
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
       height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
@@ -84,19 +94,21 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      IconButton(
-                          onPressed: () {
-                            CustomNavigator.pushNamed(
-                                "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
-                                arguments: landingPage);
-                          },
-                          iconSize: 24,
-                          tooltip:
-                              localizations.landingpage_overview_edit_tooltip,
-                          icon: Icon(Icons.edit,
-                              color: themeData.colorScheme.secondary,
-                              size: 24)),
-                      const Spacer(),
+                      if (permissions.hasEditLandingPagePermission()) ...[
+                        IconButton(
+                            onPressed: () {
+                              CustomNavigator.pushNamed(
+                                  "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
+                                  arguments: landingPage);
+                            },
+                            iconSize: 24,
+                            tooltip:
+                                localizations.landingpage_overview_edit_tooltip,
+                            icon: Icon(Icons.edit,
+                                color: themeData.colorScheme.secondary,
+                                size: 24)),
+                        const Spacer(),
+                      ],
                       IconButton(
                           onPressed: () {
                             CustomNavigator.navigate(
@@ -112,48 +124,54 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                       const Spacer(),
                       PopupMenuButton(
                           itemBuilder: (context) => [
-                                PopupMenuItem(
-                                    value: "delete",
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Icon(Icons.delete,
-                                              color: themeData
-                                                  .colorScheme.secondary,
-                                              size: 24),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                              localizations
-                                                  .landingpage_overview_context_menu_delete,
-                                              style: responsiveValue.isMobile
-                                                  ? themeData
-                                                      .textTheme.bodySmall
-                                                  : themeData
-                                                      .textTheme.bodyMedium)
-                                        ])),
-                                PopupMenuItem(
-                                    value: "duplicate",
-                                    enabled: isDuplicationAllowed,
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Icon(Icons.copy,
-                                              color: isDuplicationAllowed
-                                                  ? themeData
-                                                      .colorScheme.secondary
-                                                  : Colors.grey,
-                                              size: 24),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                              localizations
-                                                  .landingpage_overview_context_menu_duplicate,
-                                              style:
-                                                  getDuplicateButtonTextStyle(
-                                                      responsiveValue,
-                                                      themeData))
-                                        ])),
+                                if (permissions
+                                    .hasDeleteLandingPagePermission()) ...[
+                                  PopupMenuItem(
+                                      value: "delete",
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Icon(Icons.delete,
+                                                color: themeData
+                                                    .colorScheme.secondary,
+                                                size: 24),
+                                            const SizedBox(width: 8),
+                                            Text(
+                                                localizations
+                                                    .landingpage_overview_context_menu_delete,
+                                                style: responsiveValue.isMobile
+                                                    ? themeData
+                                                        .textTheme.bodySmall
+                                                    : themeData
+                                                        .textTheme.bodyMedium)
+                                          ]))
+                                ],
+                                if (permissions
+                                    .hasDuplicateLandingPagePermission()) ...[
+                                  PopupMenuItem(
+                                      value: "duplicate",
+                                      enabled: isDuplicationAllowed,
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Icon(Icons.copy,
+                                                color: isDuplicationAllowed
+                                                    ? themeData
+                                                        .colorScheme.secondary
+                                                    : Colors.grey,
+                                                size: 24),
+                                            const SizedBox(width: 8),
+                                            Text(
+                                                localizations
+                                                    .landingpage_overview_context_menu_duplicate,
+                                                style:
+                                                    getDuplicateButtonTextStyle(
+                                                        responsiveValue,
+                                                        themeData))
+                                          ])),
+                                ],
                                 if (landingPage.ownerID == user.id)
                                   PopupMenuItem(
                                       value: "troggelActiveDeaktive",
@@ -247,7 +265,6 @@ class LandingPageOverviewGridTile extends StatelessWidget {
               ],
               if (!(landingPage.isActive ?? false) &&
                   !(landingPage.isDefaultPage ?? false)) ...[
-                //const SizedBox(height: 16),
                 SelectableText("DEAKTIVIERT",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 15,

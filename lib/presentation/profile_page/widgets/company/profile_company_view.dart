@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -46,6 +47,9 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final companyObserverCubit = Modular.get<CompanyObserverCubit>();
+    final permissions = (context.watchModular<PermissionCubit>().state
+            as PermissionSuccessState)
+        .permissions;
 
     return BlocBuilder<CompanyObserverCubit, CompanyObserverState>(
       builder: (context, state) {
@@ -60,7 +64,7 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (widget.user.role == Role.company) ...[
+                    if (permissions.hasEditCompanyPermission()) ...[
                       CompanyImageSection(
                           company: state.company,
                           imageUploadSuccessful: () => {

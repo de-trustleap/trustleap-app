@@ -67,6 +67,27 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
           const SizedBox(height: 8),
           CollapsibleTile(
               title: localization
+                  .pagebuilder_contact_form_config_phone_textfield_title,
+              children: [
+                PagebuilderConfigMenuTextfieldConfig(
+                    properties:
+                        (model.properties as PageBuilderContactFormProperties)
+                            .phoneTextFieldProperties,
+                    onChanged: (properties) {
+                      if (model.properties
+                          is PageBuilderContactFormProperties) {
+                        final updatedProperties = (model.properties
+                                as PageBuilderContactFormProperties)
+                            .copyWith(phoneTextFieldProperties: properties);
+                        final updatedWidget =
+                            model.copyWith(properties: updatedProperties);
+                        pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                      }
+                    })
+              ]),
+          const SizedBox(height: 8),
+          CollapsibleTile(
+              title: localization
                   .pagebuilder_contact_form_config_message_textfield_title,
               children: [
                 PagebuilderConfigMenuTextfieldConfig(

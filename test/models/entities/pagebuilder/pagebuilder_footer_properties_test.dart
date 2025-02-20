@@ -1,0 +1,130 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  group("PagebuilderFooterProperties_CopyWith", () {
+    test(
+        "set privacyPolicyTextProperties with copyWith should set minLines and privacyPolicyTextProperties for resulting object",
+        () {
+      // Given
+      final model = PagebuilderFooterProperties(
+          privacyPolicyTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 16.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: Colors.black,
+              alignment: TextAlign.left,
+              isBold: null,
+              isItalic: true),
+          impressumTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 16.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: Colors.black,
+              alignment: TextAlign.left,
+              isBold: null,
+              isItalic: true));
+      final expectedResult = PagebuilderFooterProperties(
+          privacyPolicyTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 16.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: Colors.black,
+              alignment: TextAlign.center,
+              isBold: null,
+              isItalic: true),
+          impressumTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 16.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: Colors.black,
+              alignment: TextAlign.left,
+              isBold: null,
+              isItalic: true));
+      // When
+      final result = model.copyWith(
+          privacyPolicyTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 16.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: Colors.black,
+              alignment: TextAlign.center,
+              isBold: null,
+              isItalic: true));
+      // Then
+      expect(expectedResult, result);
+    });
+  });
+
+  group("PagebuilderFooterProperties_Props", () {
+    test("check if value equality works", () {
+      // Given
+      // Given
+      final model = PagebuilderFooterProperties(
+          privacyPolicyTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 16.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: Colors.black,
+              alignment: TextAlign.left,
+              isBold: null,
+              isItalic: true),
+          impressumTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 16.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: Colors.black,
+              alignment: TextAlign.left,
+              isBold: null,
+              isItalic: true));
+      final model2 = PagebuilderFooterProperties(
+          privacyPolicyTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 16.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: Colors.black,
+              alignment: TextAlign.left,
+              isBold: null,
+              isItalic: true),
+          impressumTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 16.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              textShadow: null,
+              color: Colors.black,
+              alignment: TextAlign.left,
+              isBold: null,
+              isItalic: true));
+      // Then
+      expect(model, model2);
+    });
+  });
+}

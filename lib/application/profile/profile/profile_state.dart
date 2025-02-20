@@ -87,6 +87,18 @@ class ProfileResendEmailVerificationLoadingState extends ProfileState
   List<Object?> get props => [];
 }
 
+class ProfileResendEmailVerificationFailureState extends ProfileState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+
+  ProfileResendEmailVerificationFailureState({
+    required this.failure,
+  });
+
+  @override
+  List<Object?> get props => [];
+}
+
 class ProfileResendEmailVerificationSuccessState extends ProfileState
     with EquatableMixin {
   @override

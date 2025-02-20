@@ -8,12 +8,13 @@ import 'package:responsive_framework/responsive_framework.dart';
 class PromoterOverviewGrid extends StatelessWidget {
   final ScrollController controller;
   final List<Promoter> promoters;
+  final Function(String) deletePressed;
 
-  const PromoterOverviewGrid({
-    super.key,
-    required this.controller,
-    required this.promoters,
-  });
+  const PromoterOverviewGrid(
+      {super.key,
+      required this.controller,
+      required this.promoters,
+      required this.deletePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,8 @@ class PromoterOverviewGrid extends StatelessWidget {
                   child: Center(
                       child: GridTile(
                           child: PromotersOverviewGridTile(
-                              promoter: promoters[index]))),
+                              promoter: promoters[index],
+                              deletePressed: deletePressed))),
                 ),
               );
             })),
@@ -50,11 +52,11 @@ class PromoterOverviewGrid extends StatelessWidget {
 
   double calculateChildAspectRatio(ResponsiveBreakpointsData responsiveValue) {
     if (responsiveValue.isDesktop) {
-      return 0.85;
+      return 0.8;
     } else if (responsiveValue.isTablet) {
       return 0.67;
     } else {
-      return 0.6;
+      return 0.5;
     }
   }
 }

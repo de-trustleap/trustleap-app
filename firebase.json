@@ -1,30 +1,59 @@
 {
-  "hosting": {
-    "headers": [
-      {
-        "source": "/assets/fonts/woff2/**/*.woff2",
+    "hosting": {
         "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          }
-        ]
-      }
-    ],
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
-    "frameworksBackend": {
-      "region": "europe-west1"
+            {
+                "source": "/assets/fonts/woff2/**/*.woff2",
+                "headers": [
+                    {
+                        "key": "Access-Control-Allow-Origin",
+                        "value": "*"
+                    }
+                ]
+            }
+        ],
+        "public": "build/web",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ],
+        "frameworksBackend": {
+            "region": "europe-west1"
+        }
+    },
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "trustleap-staging",
+                    "appId": "1:326519245330:android:2bbd3db09b27755324e6cb",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "trustleap-staging",
+                    "appId": "1:326519245330:ios:176587356e92ff5224e6cb",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "trustleap-staging",
+                    "configurations": {
+                        "android": "1:326519245330:android:2bbd3db09b27755324e6cb",
+                        "ios": "1:326519245330:ios:176587356e92ff5224e6cb",
+                        "web": "1:326519245330:web:f330ea78c3a5415424e6cb"
+                    }
+                }
+            }
+        }
     }
-  }
 }

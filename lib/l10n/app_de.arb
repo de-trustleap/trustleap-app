@@ -104,6 +104,10 @@
     "@login_register_text": {
         "description": "Registrieren Text auf der Login Seite"
     },
+    "login_permission_error_message": "Bei der Abfrage der Berechtigungen ist ein Fehler aufgetreten",
+    "@login_permission_error_message": {
+        "description": "Fehlermeldung auf der Login Seite wenn die Permissions nicht abgefragt werden konnten"
+    },
     "auth_validation_missing_email": "Gib bitte eine E-Mail Adresse an",
     "@auth_validation_missing_email": {
         "description": "Validierungsnachricht wenn keine E-Mail angegeben wurde"
@@ -330,7 +334,7 @@
     "@landingpage_creation_continue": {
         "description": "Text für Weiter Button in Landingpage Erstellen Formular"
     },
-    "landingpage_create_promotion_template_description": "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst den Platzhalter $name nutzen, um den Namen des Empfehlungsempfängers anzuzeigen.",
+    "landingpage_create_promotion_template_description": "Nachfolgend kannst du eine Vorlage erstellen, die deine Promoter nutzen werden um Empfehlungen per Whatsapp zu versenden.\nDu kannst verschiedene Platzhalter nutzen welche du über das Platzhalter Menü auswählen kannst.",
     "@landingpage_create_promotion_template_description": {
         "description": "Beschreibung für das Promotion Template Textfeld auf der Landingpage erstellen Seite"
     },
@@ -349,6 +353,38 @@
     "open_emoji_picker_tooltip": "Emoji Picker öffnen",
     "@open_emoji_picker_tooltip": {
         "description": "Tooltip für den Button der den Emoji Picker öffnet"
+    },
+    "landingpage_create_promotion_placeholder_menu": "Platzhalter auswählen",
+    "@landingpage_create_promotion_placeholder_menu": {
+        "description": "Platzhalter Menü Titel"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_first_name": "Vorname des Dienstleisters",
+    "@landingpage_create_promotion_placeholder_service_provider_first_name": {
+        "description": "Platzhalter Variable für den Vornamen des Dienstleisters"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_last_name": "Nachname des Dienstleisters",
+    "@landingpage_create_promotion_placeholder_service_provider_last_name": {
+        "description": "Platzhalter Variable für den Nachnamen des Dienstleisters"
+    },
+    "landingpage_create_promotion_placeholder_service_provider_name": "Name des Dienstleisters",
+    "@landingpage_create_promotion_placeholder_service_provider_name": {
+        "description": "Platzhalter Variable für den Namen des Dienstleisters"
+    },
+    "landingpage_create_promotion_placeholder_promoter_first_name": "Vorname des Promoters",
+    "@landingpage_create_promotion_placeholder_promoter_first_name": {
+        "description": "Platzhalter Variable für den Vornamen des Promoters"
+    },
+    "landingpage_create_promotion_placeholder_promoter_last_name": "Nachname des Promoters",
+    "@landingpage_create_promotion_placeholder_promoter_last_name": {
+        "description": "Platzhalter Variable für den Nachnamen des Promoters"
+    },
+    "landingpage_create_promotion_placeholder_promoter_name": "Name des Promoters",
+    "@landingpage_create_promotion_placeholder_promoter_name": {
+        "description": "Platzhalter Variable für den Namen des Promoters"
+    },
+    "landingpage_create_promotion_placeholder_receiver_name": "Name des Absenders",
+    "@landingpage_create_promotion_placeholder_receiver_name": {
+        "description": "Platzhalter Variable für den Namen des Absenders"
     },
     "landingpage_overview_context_menu_delete": "Löschen",
     "@landingpage_overview_context_menu_delete": {
@@ -730,6 +766,14 @@
     "@register_promoter_missing_company_error_message": {
         "description": "Fehlermeldung die erscheint, wenn bei der Promoter Registrierung kein Unternehmen existiert."
     },
+    "promoter_register_tab_title": "Promoter registrieren",
+    "@promoter_register_tab_title": {
+        "description": "Titel für den Promoter registrieren Tab"
+    },
+    "my_promoters_tab_title": "Meine Promoter",
+    "@my_promoters_tab_title": {
+        "description": "Titel für den Meine Promoter Tab"
+    },
     "promoter_overview_title": "Meine Promoter",
     "@promoter_overview_title": {
         "description": "Der Titel der Promoter Übersicht"
@@ -829,6 +873,34 @@
                 "example": "23.12.2023"
             }
         }
+    },
+    "promoter_overview_delete_promoter_tooltip": "Promoter löschen",
+    "@promoter_overview_delete_promoter_tooltip": {
+        "description": "Tooltip für den Promoter löschen Button"
+    },
+    "promoter_overview_delete_promoter_alert_title": "Soll der ausgewählte Promoter wirklich gelöscht werden?",
+    "@promoter_overview_delete_promoter_alert_title": {
+        "description": "Titel für den Promoter löschen Alert"
+    },
+    "promoter_overview_delete_promoter_alert_description": "Das Löschen des Promoters kann nicht rückgängig gemacht werden.",
+    "@promoter_overview_delete_promoter_alert_description": {
+        "description": "Beschreibung für den Promoter löschen Alert"
+    },
+    "promoter_overview_delete_promoter_alert_delete_button": "Löschen",
+    "@promoter_overview_delete_promoter_alert_delete_button": {
+        "description": "Löschen Button für den Promoter löschen Alert"
+    },
+    "promoter_overview_delete_promoter_alert_cancel_button": "Abbrechen",
+    "@promoter_overview_delete_promoter_alert_cancel_button": {
+        "description": "Abbrechen Button für den Promoter löschen Alert"
+    },
+    "promoter_overview_delete_promoter_success_snackbar": "Promoter erfolgreich gelöscht!",
+    "@promoter_overview_delete_promoter_success_snackbar": {
+        "description": "Snackbar Titel für den Erfolgsfall von Promoter löschen"
+    },
+    "promoter_overview_delete_promoter_failure_snackbar": "Promoter löschen fehlgeschlagen!",
+    "@promoter_overview_delete_promoter_failure_snackbar": {
+        "description": "Snackbar Titel für den Fehlerfall von Promoter löschen"
     },
     "delete_account_title": "Account löschen",
     "@delete_account_title": {
@@ -1246,6 +1318,10 @@
     "@landingpage_pagebuilder_config_menu_contact_form_type": {
         "description": "Kontaktformular Titel im Pagebuilder Config Menü"
     },
+    "landingpage_pagebuilder_config_menu_footer_type": "Footer",
+    "@landingpage_pagebuilder_config_menu_footer_type": {
+        "description": "Footer Titel im Pagebuilder Config Menü"
+    },
     "landingpage_pagebuilder_config_menu_unknown_type": "Unbekannt",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unbekannt Titel im Pagebuilder Config Menü"
@@ -1566,6 +1642,10 @@
     "@pagebuilder_contact_form_config_email_textfield_title": {
         "description": "Titel für ausklappbares Menü für die E-Mail Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
     },
+    "pagebuilder_contact_form_config_phone_textfield_title": "Telefon Textfeld",
+    "@pagebuilder_contact_form_config_phone_textfield_title": {
+        "description": "Titel für ausklappbares Menü für die Telefon Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
+    },
     "pagebuilder_contact_form_config_message_textfield_title": "Nachricht Textfeld",
     "@pagebuilder_contact_form_config_message_textfield_title": {
         "description": "Titel für ausklappbares Menü für die Nachricht Textfeld Konfiguration in der Kontaktformular Konfiguration im Pagebuilder Config Menü"
@@ -1613,5 +1693,13 @@
     "landingpage_pagebuilder_config_menu_section_type": "Section",
     "@landingpage_pagebuilder_config_menu_section_type": {
         "description": "Section Titel im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_footer_config_privacy_policy": "Datenschutzerklärung Konfiguration",
+    "@landingpage_pagebuilder_footer_config_privacy_policy": {
+        "description": "Ausklappares Menü für Datenschutz Konfiguration des Footers im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_footer_config_impressum": "Impressum Konfiguration",
+    "@landingpage_pagebuilder_footer_config_impressum": {
+        "description": "Ausklappares Menü für Impressum Konfiguration des Footers im Pagebuilder Config Menü"
     }
 }
