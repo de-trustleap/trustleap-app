@@ -866,7 +866,7 @@
     "@recommendation_page_leadTextField_title_prefix": {
         "description": "Prefix für LeadTextField Titel"
     },
-    "recommendation_page_leadTextField_send_button": "Versenden",
+    "recommendation_page_leadTextField_send_button": "Senden per Whatsapp",
     "@recommendation_page_leadTextField_send_button": {
         "description": "Title für den Absende Button"
     },

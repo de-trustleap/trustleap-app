@@ -646,7 +646,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_page_leadTextField_title_prefix => 'Text for';
 
   @override
-  String get recommendation_page_leadTextField_send_button => 'Send';
+  String get recommendation_page_leadTextField_send_button => 'Send via Whatsapp';
 
   @override
   String get recommendation_page_send_whatsapp_error => 'WhatsApp is not installed or cannot be opened.';
