@@ -87,23 +87,31 @@ class UserRepositoryImplementation implements UserRepository {
   }
 
   @override
-  Future<Either<AuthFailure, void>> updateEmail({required String email}) async {
+  Future<Either<DatabaseFailure, Unit>> updateEmail(
+      {required String email}) async {
     try {
       final currentUser = optionOf(firebaseAuth.currentUser);
       return await currentUser.fold(() {
-        return left(UserNotFoundFailure());
+        return left(BackendFailure());
       }, (user) async {
-        await user.verifyBeforeUpdateEmail(email);
+        final appCheckToken = await appCheck.getToken();
+        HttpsCallable callable = firebaseFunctions.httpsCallable("updateEmail");
+        await callable.call({
+          "appCheckToken": appCheckToken,
+          "newEmail": email,
+        });
         final updateDatabaseFailureOrSuccess =
             await _updateEmailInDatabase(user: user, email: email);
         return updateDatabaseFailureOrSuccess.fold((failure) {
-          return left(ServerFailure());
+          return left(failure);
         }, (r) {
-          return right(r);
+          return right(unit);
         });
       });
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(code: e.code));
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
 

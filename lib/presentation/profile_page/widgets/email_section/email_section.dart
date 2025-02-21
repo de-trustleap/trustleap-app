@@ -133,6 +133,11 @@ class _EmailSectionState extends State<EmailSection> {
             isEmailVerified = state.isEmailVerified;
           });
         } else if (state is ProfileEmailUpdateFailureState) {
+          errorMessage = DatabaseFailureMapper.mapFailureMessage(
+              state.failure, localization);
+          showError = true;
+          setButtonToDisabled(false);
+        } else if (state is ProfileEmailUpdateAuthFailureState) {
           errorMessage =
               AuthFailureMapper.mapFailureMessage(state.failure, localization);
           showError = true;
@@ -216,7 +221,8 @@ class _EmailSectionState extends State<EmailSection> {
                     ],
                     if (errorMessage != "" &&
                         showError &&
-                        state is ProfileEmailUpdateFailureState &&
+                        (state is ProfileEmailUpdateFailureState ||
+                            state is ProfileEmailUpdateAuthFailureState) &&
                         !validationHasError) ...[
                       const SizedBox(height: 20),
                       FormErrorView(message: errorMessage)

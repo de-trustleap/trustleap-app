@@ -37,7 +37,8 @@ class ProfileCubit extends Cubit<ProfileState> {
       final failureOrSuccess =
           await authRepo.reauthenticateWithPassword(password: password);
       failureOrSuccess.fold(
-          (failure) => emit(ProfileEmailUpdateFailureState(failure: failure)),
+          (failure) =>
+              emit(ProfileEmailUpdateAuthFailureState(failure: failure)),
           (_) => emit(ProfileReauthenticateForEmailUpdateSuccessState()));
     }
   }
