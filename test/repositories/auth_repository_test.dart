@@ -126,9 +126,9 @@ void main() {
     const testEmail = "test@tester.de";
     test("should return void when password reset was successful", () async {
       // Given
-      final expectedResult = right(());
+      final expectedResult = right((unit));
       when(mockAuthRepo.resetPassword(email: testEmail))
-          .thenAnswer((_) async => right(()));
+          .thenAnswer((_) async => right((unit)));
       // When
       final result = await mockAuthRepo.resetPassword(email: testEmail);
       // Then
@@ -139,9 +139,9 @@ void main() {
 
     test("should return failure when call has failed", () async {
       // Given
-      final expectedResult = left(TooManyRequestsFailure());
+      final expectedResult = left(BackendFailure());
       when(mockAuthRepo.resetPassword(email: testEmail))
-          .thenAnswer((_) async => left(TooManyRequestsFailure()));
+          .thenAnswer((_) async => left(BackendFailure()));
       // When
       final result = await mockAuthRepo.resetPassword(email: testEmail);
       // Then

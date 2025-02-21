@@ -2,6 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
+import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../../mocks.mocks.dart';
@@ -24,7 +25,7 @@ void main() {
     test("should call auth repo when function is called", () async {
       // Given
       when(mockAuthRepo.resetPassword(email: testEmail))
-          .thenAnswer((_) async => right(()));
+          .thenAnswer((_) async => right((unit)));
       // When
       authCubit.resetPassword(testEmail);
       await untilCalled(mockAuthRepo.resetPassword(email: testEmail));
@@ -42,7 +43,7 @@ void main() {
         AuthPasswordResetSuccessState()
       ];
       when(mockAuthRepo.resetPassword(email: testEmail))
-          .thenAnswer((_) async => right(()));
+          .thenAnswer((_) async => right((unit)));
       // Then
       expectLater(authCubit.stream, emitsInOrder(expectedResult));
       authCubit.resetPassword(testEmail);
@@ -54,10 +55,10 @@ void main() {
       // Given
       final expectedResult = [
         AuthPasswordResetLoadingState(),
-        AuthPasswordResetFailureState(failure: InvalidEmailFailure())
+        AuthPasswordResetFailureState(failure: BackendFailure())
       ];
       when(mockAuthRepo.resetPassword(email: testEmail))
-          .thenAnswer((_) async => left(InvalidEmailFailure()));
+          .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(authCubit.stream, emitsInOrder(expectedResult));
       authCubit.resetPassword(testEmail);

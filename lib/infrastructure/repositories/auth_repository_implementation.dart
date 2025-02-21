@@ -101,13 +101,17 @@ class AuthRepositoryImplementation implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, void>> resetPassword(
+  Future<Either<DatabaseFailure, Unit>> resetPassword(
       {required String email}) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("sendPasswordResetEmail");
     try {
-      final result = await firebaseAuth.sendPasswordResetEmail(email: email);
-      return right(result);
-    } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(code: e.code));
+      await callable.call({"appCheckToken": appCheckToken, "email": email});
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      print("ERROR: $e");
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
 

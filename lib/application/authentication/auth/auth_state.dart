@@ -39,7 +39,7 @@ class AuthPasswordResetLoadingState extends AuthState with EquatableMixin {
 }
 
 class AuthPasswordResetFailureState extends AuthState with EquatableMixin {
-  final AuthFailure failure;
+  final DatabaseFailure failure;
 
   AuthPasswordResetFailureState({
     required this.failure,
