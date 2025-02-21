@@ -1,6 +1,6 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
-import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
+import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -81,8 +81,8 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
     const double padding = 20;
     return BlocConsumer<AuthCubit, AuthState>(listener: ((context, state) {
       if (state is AuthPasswordResetFailureState) {
-        errorMessage =
-            AuthFailureMapper.mapFailureMessage(state.failure, localization);
+        errorMessage = DatabaseFailureMapper.mapFailureMessage(
+            state.failure, localization);
         showError = true;
       } else if (state is AuthPasswordResetSuccessState) {
         showSuccessDialog(localization);

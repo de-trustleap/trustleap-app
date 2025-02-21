@@ -4692,7 +4692,7 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
           ) as _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i15.Future<_i2.Either<_i21.AuthFailure, void>> resetPassword(
+  _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>> resetPassword(
           {required String? email}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -4700,8 +4700,9 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
           [],
           {#email: email},
         ),
-        returnValue: _i15.Future<_i2.Either<_i21.AuthFailure, void>>.value(
-            _FakeEither_0<_i21.AuthFailure, void>(
+        returnValue:
+            _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i23.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #resetPassword,
@@ -4709,7 +4710,7 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
             {#email: email},
           ),
         )),
-      ) as _i15.Future<_i2.Either<_i21.AuthFailure, void>>);
+      ) as _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>);
 
   @override
   _i15.Future<_i2.Either<_i23.DatabaseFailure, bool>> isRegistrationCodeValid({

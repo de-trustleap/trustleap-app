@@ -16,7 +16,7 @@ abstract class AuthRepository {
   Option<CustomUser> getSignedInUser();
   User? getCurrentUser();
   Future<Either<DatabaseFailure, Unit>> resendEmailVerification();
-  Future<Either<AuthFailure, void>> resetPassword({required String email});
+  Future<Either<DatabaseFailure, Unit>> resetPassword({required String email});
   Future<Either<DatabaseFailure, bool>> isRegistrationCodeValid(
       {required String email, required String code});
   Future<Either<AuthFailure, Unit>> deleteAccount();
