@@ -53,8 +53,8 @@ class _PromotersPageState extends State<PromotersPage>
       if (widget.editedPromoter == "true") {
         final localization = AppLocalizations.of(context);
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          CustomSnackBar.of(context)
-              .showCustomSnackBar("Promoter erfolgreich angepasst");
+          CustomSnackBar.of(context).showCustomSnackBar(
+              localization.promoter_page_edit_promoter_snackbar_title);
         });
       }
       initialSnackbarAlreadyShown = true;

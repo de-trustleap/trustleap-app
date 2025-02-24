@@ -87,7 +87,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
-    const spacing = 20;
+    const spacing = 20.0;
 
     return BlocConsumer<PromoterCubit, PromoterState>(
         bloc: promoterCubit,
@@ -140,9 +140,12 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
               return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SelectableText("Promoter bearbeiten",
+                    SelectableText(localization.edit_promoter_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold)),
+                    const SizedBox(height: spacing),
+                    SelectableText(localization.edit_promoter_subtitle,
+                        style: themeData.textTheme.bodyMedium),
                     const SizedBox(height: spacing + 4),
                     Column(children: createCheckboxes()),
                     const SizedBox(height: spacing * 2),
@@ -151,7 +154,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         PrimaryButton(
-                            title: "Änderungen speichern",
+                            title: localization.edit_promoter_save_button_title,
                             width: responsiveValue.isMobile
                                 ? maxWidth - spacing
                                 : maxWidth / 2 - spacing,
@@ -174,13 +177,5 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
         });
   }
 }
-// TODO: Backend Funktion erstellen. Abschauen bei registerPromoter (FERTIG)
-// TODO: Promoter Observer muss getriggert werden nach erfolgreichem Backend Call (FERTIG)
-// TODO: Backend Funktion Tests schreiben (FERTIG)
-// TODO: Snackbar in Overview anzeigen (FERTIG)
-// TODO: Promoter Menü soll ausgewählt bleiben bei Edit Ansicht (FERTIG)
-// TODO: Tests schreiben
-// TODO: Localizations
 // TODO: LandingPages Bilder werden nicht gespeichert bei Staging
 // TODO: Es gibt keine Bilder für die Landingpage Templates
-// TODO: Delete und Edit sollen in ein ... Menü

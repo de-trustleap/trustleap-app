@@ -582,6 +582,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get my_promoters_tab_title => 'My promoters';
 
   @override
+  String get promoter_page_edit_promoter_snackbar_title => 'Successfully edited promoter!';
+
+  @override
   String get promoter_overview_title => 'My promoter';
 
   @override
@@ -650,6 +653,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String promoter_overview_creation_date(String date) {
     return 'Member since $date';
   }
+
+  @override
+  String get promoter_overview_edit_promoter_tooltip => 'Edit promoter';
 
   @override
   String get promoter_overview_delete_promoter_tooltip => 'Delete promoter';
@@ -1259,4 +1265,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_footer_config_impressum => 'Impressum Configuration';
+
+  @override
+  String get edit_promoter_title => 'Edit promoter';
+
+  @override
+  String get edit_promoter_subtitle => 'Here you can adjust the landingpage allocation.';
+
+  @override
+  String get edit_promoter_save_button_title => 'Save changes';
 }

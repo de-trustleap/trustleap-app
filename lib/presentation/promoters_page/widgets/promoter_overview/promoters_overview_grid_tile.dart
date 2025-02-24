@@ -59,7 +59,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
                               arguments: promoter);
                         },
                         iconSize: 24,
-                        tooltip: "Promoter bearbeiten",
+                        tooltip: localization
+                            .promoter_overview_edit_promoter_tooltip,
                         icon: Icon(Icons.edit,
                             color: themeData.colorScheme.secondary, size: 24)),
                     const Spacer(),

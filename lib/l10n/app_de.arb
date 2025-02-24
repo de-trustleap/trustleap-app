@@ -774,6 +774,10 @@
     "@my_promoters_tab_title": {
         "description": "Titel für den Meine Promoter Tab"
     },
+    "promoter_page_edit_promoter_snackbar_title": "Promoter erfolgreich angepasst!",
+    "@promoter_page_edit_promoter_snackbar_title": {
+        "description": "Der Titel der Snackbar die auf der Promoter Page erscheint, wenn man einen Promoter erfolgreich angepasst hat."
+    },
     "promoter_overview_title": "Meine Promoter",
     "@promoter_overview_title": {
         "description": "Der Titel der Promoter Übersicht"
@@ -873,6 +877,10 @@
                 "example": "23.12.2023"
             }
         }
+    },
+    "promoter_overview_edit_promoter_tooltip": "Promoter anpassen",
+    "@promoter_overview_edit_promoter_tooltip": {
+        "description": "Tooltip für den Promoter anpassen Button"
     },
     "promoter_overview_delete_promoter_tooltip": "Promoter löschen",
     "@promoter_overview_delete_promoter_tooltip": {
@@ -1685,5 +1693,17 @@
     "landingpage_pagebuilder_footer_config_impressum": "Impressum Konfiguration",
     "@landingpage_pagebuilder_footer_config_impressum": {
         "description": "Ausklappares Menü für Impressum Konfiguration des Footers im Pagebuilder Config Menü"
+    },
+    "edit_promoter_title": "Promoter bearbeiten",
+    "@edit_promoter_title": {
+        "description": "Titel der Promoter bearbeiten Seite"
+    },
+    "edit_promoter_subtitle": "Hier kannst du die Landingpage Zuweisungen anpassen.",
+    "@edit_promoter_subtitle": {
+        "description": "Untertitel der Promoter bearbeiten Seite"
+    },
+    "edit_promoter_save_button_title": "Änderungen speichern",
+    "@edit_promoter_save_button_title": {
+        "description": "Titel des Speichern Buttons der Promoter bearbeiten Seite"
     }
 }
