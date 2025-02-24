@@ -177,5 +177,3 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
         });
   }
 }
-// TODO: LandingPages Bilder werden nicht gespeichert bei Staging
-// TODO: Es gibt keine Bilder für die Landingpage Templates
