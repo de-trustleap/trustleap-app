@@ -67,4 +67,67 @@ void main() {
       promoterCubit.deletePromoter(testID);
     });
   });
+
+  group("PromoterCubit_EditPromoter", () {
+    const isRegistered = true;
+    const landingPageIDs = ["1", "2"];
+    const promoterID = "3";
+
+    test("should call promoter repo when function is called", () async {
+      // Given
+      when(mockPromoterRepo.editPromoter(
+              isRegistered: isRegistered,
+              landingPageIDs: landingPageIDs,
+              promoterID: promoterID))
+          .thenAnswer((_) async => right(unit));
+      // When
+      promoterCubit.editPromoter(isRegistered, landingPageIDs, promoterID);
+      await untilCalled(mockPromoterRepo.editPromoter(
+          isRegistered: isRegistered,
+          landingPageIDs: landingPageIDs,
+          promoterID: promoterID));
+      // Then
+      verify(mockPromoterRepo.editPromoter(
+          isRegistered: isRegistered,
+          landingPageIDs: landingPageIDs,
+          promoterID: promoterID));
+      verifyNoMoreInteractions(mockPromoterRepo);
+    });
+
+    test(
+        "should emit PromoterLoadingState and then PromoterEditSuccessState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        PromoterLoadingState(),
+        PromoterEditSuccessState()
+      ];
+      when(mockPromoterRepo.editPromoter(
+              isRegistered: isRegistered,
+              landingPageIDs: landingPageIDs,
+              promoterID: promoterID))
+          .thenAnswer((_) async => right(unit));
+      // Then
+      expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
+      promoterCubit.editPromoter(isRegistered, landingPageIDs, promoterID);
+    });
+
+    test(
+        "should emit PromoterLoadingState and then PromoterEditFailureState when call has failed",
+        () async {
+      // Given
+      final expectedResult = [
+        PromoterLoadingState(),
+        PromoterEditFailureState(failure: BackendFailure())
+      ];
+      when(mockPromoterRepo.editPromoter(
+              isRegistered: isRegistered,
+              landingPageIDs: landingPageIDs,
+              promoterID: promoterID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
+      promoterCubit.editPromoter(isRegistered, landingPageIDs, promoterID);
+    });
+  });
 }

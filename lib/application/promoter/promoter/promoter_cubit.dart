@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
@@ -91,6 +90,19 @@ class PromoterCubit extends Cubit<PromoterState> {
     failureOrSuccess.fold(
         (failure) => emit(PromoterDeleteFailureState(failure: failure)), (_) {
       emit(PromoterDeleteSuccessState());
+    });
+  }
+
+  void editPromoter(
+      bool isRegistered, List<String> landingPageIDs, String promoterID) async {
+    emit(PromoterLoadingState());
+    final failureOrSuccess = await recommendationsRepo.editPromoter(
+        isRegistered: isRegistered,
+        landingPageIDs: landingPageIDs,
+        promoterID: promoterID);
+    failureOrSuccess.fold(
+        (failure) => emit(PromoterEditFailureState(failure: failure)), (_) {
+      emit(PromoterEditSuccessState());
     });
   }
 }

@@ -67,7 +67,7 @@ class SideMenu extends StatelessWidget {
                   icon: Icons.phone_bluetooth_speaker,
                   type: MenuItems.promoters,
                   isURLMatching: CustomNavigator.currentPath
-                      .endsWith(RoutePaths.promotersPath),
+                      .contains(RoutePaths.promotersPath),
                   isCollapsed: collapsed,
                   animationController: animationController),
               const SizedBox(height: 28),
@@ -78,7 +78,7 @@ class SideMenu extends StatelessWidget {
                   icon: Icons.airplanemode_active,
                   type: MenuItems.landingpage,
                   isURLMatching: CustomNavigator.currentPath
-                      .endsWith(RoutePaths.landingPagePath),
+                      .contains(RoutePaths.landingPagePath),
                   isCollapsed: collapsed,
                   animationController: animationController),
               const SizedBox(height: 28),

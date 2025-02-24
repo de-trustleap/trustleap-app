@@ -174,4 +174,24 @@ class PromoterRepositoryImplementation implements PromoterRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> editPromoter(
+      {required bool isRegistered,
+      required List<String> landingPageIDs,
+      required String promoterID}) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable = firebaseFunctions.httpsCallable("editPromoter");
+    try {
+      await callable.call({
+        "appCheckToken": appCheckToken,
+        "isRegistered": isRegistered,
+        "ids": landingPageIDs,
+        "promoterID": promoterID
+      });
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }

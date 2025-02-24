@@ -150,8 +150,10 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
+    final promoterCubit = Modular.get<PromoterCubit>();
     const double textFieldSpacing = 20;
     return BlocConsumer<PromoterCubit, PromoterState>(
+      bloc: promoterCubit,
       listener: (context, state) {
         if (state is PromoterRegisterFailureState) {
           errorMessage = DatabaseFailureMapper.mapFailureMessage(

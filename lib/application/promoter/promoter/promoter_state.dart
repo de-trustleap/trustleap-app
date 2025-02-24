@@ -127,3 +127,17 @@ final class PromoterDeleteFailureState extends PromoterState
   @override
   List<Object?> get props => [failure];
 }
+
+final class PromoterEditSuccessState extends PromoterState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+final class PromoterEditFailureState extends PromoterState with EquatableMixin {
+  final DatabaseFailure failure;
+
+  const PromoterEditFailureState({required this.failure});
+
+  @override
+  List<Object?> get props => [failure];
+}

@@ -22,13 +22,7 @@ class PromoterEditPage extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                PromoterEditForm(
-                    promoter: promoter,
-                    changesSaved: () {
-                      print("SAVED!");
-                    })
-              ])),
+                  children: [PromoterEditForm(promoter: promoter)])),
         ]));
   }
 }
