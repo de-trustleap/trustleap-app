@@ -104,9 +104,10 @@ class LandingPageModel extends Equatable {
         downloadImageUrl: map['downloadImageUrl'] != null
             ? map['downloadImageUrl'] as String
             : null,
-        thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
-            ? map['thumbnailDownloadURL'] as String
-            : null,
+        thumbnailDownloadURL: (map['thumbnailDownloadURL'] != null
+                ? map['thumbnailDownloadURL'] as String
+                : null)
+            ?.replaceAll(RegExp(r'\s+'), ''),
         ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
         contentID: map['contentID'] != null ? map['contentID'] as String : null,
         description:

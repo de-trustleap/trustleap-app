@@ -5332,6 +5332,38 @@ class MockPromoterRepository extends _i1.Mock
           ),
         )),
       ) as _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>> editPromoter({
+    required bool? isRegistered,
+    required List<String>? landingPageIDs,
+    required String? promoterID,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #editPromoter,
+          [],
+          {
+            #isRegistered: isRegistered,
+            #landingPageIDs: landingPageIDs,
+            #promoterID: promoterID,
+          },
+        ),
+        returnValue:
+            _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i23.DatabaseFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #editPromoter,
+            [],
+            {
+              #isRegistered: isRegistered,
+              #landingPageIDs: landingPageIDs,
+              #promoterID: promoterID,
+            },
+          ),
+        )),
+      ) as _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>);
 }
 
 /// A class which mocks [UserRepository].
@@ -7878,6 +7910,24 @@ class MockPromoterCubit extends _i1.Mock implements _i48.PromoterCubit {
         Invocation.method(
           #deletePromoter,
           [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void editPromoter(
+    bool? isRegistered,
+    List<String>? landingPageIDs,
+    String? promoterID,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #editPromoter,
+          [
+            isRegistered,
+            landingPageIDs,
+            promoterID,
+          ],
         ),
         returnValueForMissingStub: null,
       );

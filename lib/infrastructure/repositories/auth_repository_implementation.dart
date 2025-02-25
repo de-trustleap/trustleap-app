@@ -110,7 +110,6 @@ class AuthRepositoryImplementation implements AuthRepository {
       await callable.call({"appCheckToken": appCheckToken, "email": email});
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
-      print("ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

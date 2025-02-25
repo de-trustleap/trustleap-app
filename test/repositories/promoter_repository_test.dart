@@ -197,4 +197,53 @@ void main() {
       verifyNoMoreInteractions(mockPromoterRepo);
     });
   });
+
+  group("PromoterRepositoryImplementation_EditPromoter", () {
+    const isRegistered = true;
+    const landingPageIDs = ["1", "2"];
+    const promoterID = "3";
+    test("should return nothing when call was successful", () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockPromoterRepo.editPromoter(
+              isRegistered: isRegistered,
+              landingPageIDs: landingPageIDs,
+              promoterID: promoterID))
+          .thenAnswer((_) async => right(unit));
+      // When
+      final result = await mockPromoterRepo.editPromoter(
+          isRegistered: isRegistered,
+          landingPageIDs: landingPageIDs,
+          promoterID: promoterID);
+      // Then
+      verify(mockPromoterRepo.editPromoter(
+          isRegistered: isRegistered,
+          landingPageIDs: landingPageIDs,
+          promoterID: promoterID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockPromoterRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockPromoterRepo.editPromoter(
+              isRegistered: isRegistered,
+              landingPageIDs: landingPageIDs,
+              promoterID: promoterID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockPromoterRepo.editPromoter(
+          isRegistered: isRegistered,
+          landingPageIDs: landingPageIDs,
+          promoterID: promoterID);
+      // Then
+      verify(mockPromoterRepo.editPromoter(
+          isRegistered: isRegistered,
+          landingPageIDs: landingPageIDs,
+          promoterID: promoterID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockPromoterRepo);
+    });
+  });
 }

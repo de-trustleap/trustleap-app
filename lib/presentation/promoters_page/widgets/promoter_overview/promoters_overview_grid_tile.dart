@@ -1,12 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -48,6 +50,18 @@ class PromotersOverviewGridTile extends StatelessWidget {
                         tooltip: localization
                             .promoter_overview_delete_promoter_tooltip,
                         icon: Icon(Icons.delete,
+                            color: themeData.colorScheme.secondary, size: 24)),
+                    const Spacer(),
+                    IconButton(
+                        onPressed: () {
+                          CustomNavigator.pushNamed(
+                              "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
+                              arguments: promoter);
+                        },
+                        iconSize: 24,
+                        tooltip: localization
+                            .promoter_overview_edit_promoter_tooltip,
+                        icon: Icon(Icons.edit,
                             color: themeData.colorScheme.secondary, size: 24)),
                     const Spacer(),
                   ]),

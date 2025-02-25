@@ -92,4 +92,17 @@ class PromoterCubit extends Cubit<PromoterState> {
       emit(PromoterDeleteSuccessState());
     });
   }
+
+  void editPromoter(
+      bool isRegistered, List<String> landingPageIDs, String promoterID) async {
+    emit(PromoterLoadingState());
+    final failureOrSuccess = await recommendationsRepo.editPromoter(
+        isRegistered: isRegistered,
+        landingPageIDs: landingPageIDs,
+        promoterID: promoterID);
+    failureOrSuccess.fold(
+        (failure) => emit(PromoterEditFailureState(failure: failure)), (_) {
+      emit(PromoterEditSuccessState());
+    });
+  }
 }

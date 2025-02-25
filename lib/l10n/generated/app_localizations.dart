@@ -1241,6 +1241,12 @@ abstract class AppLocalizations {
   /// **'My promoters'**
   String get my_promoters_tab_title;
 
+  /// The title of the snack bar that appears on the Promoter Page when you have successfully edited a Promoter.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully edited promoter!'**
+  String get promoter_page_edit_promoter_snackbar_title;
+
   /// The title of the promoter overview
   ///
   /// In en, this message translates to:
@@ -1372,6 +1378,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Member since {date}'**
   String promoter_overview_creation_date(String date);
+
+  /// Tooltip for the edit promoter button
+  ///
+  /// In en, this message translates to:
+  /// **'Edit promoter'**
+  String get promoter_overview_edit_promoter_tooltip;
 
   /// Tooltip for the delete promoter button
   ///
@@ -2590,6 +2602,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Impressum Configuration'**
   String get landingpage_pagebuilder_footer_config_impressum;
+
+  /// Title of the edit promoter page
+  ///
+  /// In en, this message translates to:
+  /// **'Edit promoter'**
+  String get edit_promoter_title;
+
+  /// Untertitel der Promoter bearbeiten Seite
+  ///
+  /// In en, this message translates to:
+  /// **'Here you can adjust the landingpage allocation.'**
+  String get edit_promoter_subtitle;
+
+  /// Title of the save button on the edit promoter page
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get edit_promoter_save_button_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

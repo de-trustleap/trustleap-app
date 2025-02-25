@@ -4,7 +4,6 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -15,20 +14,13 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_t
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/landingpage_checkbox_item.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoter_no_landingpage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
-class LandingPageCheckboxItem {
-  LandingPage landingPage;
-  bool isSelected;
-  LandingPageCheckboxItem({
-    required this.landingPage,
-    required this.isSelected,
-  });
-}
 
 class RegisterPromotersForm extends StatefulWidget {
   final Function changesSaved;
@@ -62,7 +54,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
 
   @override
   void initState() {
-    BlocProvider.of<PromoterCubit>(context).getCurrentUser();
+    Modular.get<PromoterCubit>().getCurrentUser();
     super.initState();
   }
 
@@ -97,29 +89,27 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
         genderValid = null;
       });
       if (currentUser != null) {
-        BlocProvider.of<PromoterCubit>(context).registerPromoter(
-            UnregisteredPromoter(
-                id: UniqueID(),
-                gender: selectedGender,
-                firstName: firstNameTextController.text.trim(),
-                lastName: lastNameTextController.text.trim(),
-                birthDate: birthDateTextController.text.trim(),
-                email: emailTextController.text.trim(),
-                landingPageIDs: getSelectedLandingPagesIDs(),
-                defaultLandingPageID: UniqueID.fromUniqueString(
-                    currentUser?.defaultLandingPageID ?? ""),
-                parentUserID:
-                    UniqueID.fromUniqueString(currentUser?.id.value ?? ""),
-                companyID:
-                    UniqueID.fromUniqueString(currentUser?.companyID ?? ""),
-                code: UniqueID()));
+        Modular.get<PromoterCubit>().registerPromoter(UnregisteredPromoter(
+            id: UniqueID(),
+            gender: selectedGender,
+            firstName: firstNameTextController.text.trim(),
+            lastName: lastNameTextController.text.trim(),
+            birthDate: birthDateTextController.text.trim(),
+            email: emailTextController.text.trim(),
+            landingPageIDs: getSelectedLandingPagesIDs(),
+            defaultLandingPageID: UniqueID.fromUniqueString(
+                currentUser?.defaultLandingPageID ?? ""),
+            parentUserID:
+                UniqueID.fromUniqueString(currentUser?.id.value ?? ""),
+            companyID: UniqueID.fromUniqueString(currentUser?.companyID ?? ""),
+            code: UniqueID()));
       }
     } else {
       validationHasError = true;
       setState(() {
         genderValid = validator.validateGender(selectedGender);
       });
-      BlocProvider.of<PromoterCubit>(context).registerPromoter(null);
+      Modular.get<PromoterCubit>().registerPromoter(null);
     }
   }
 
@@ -160,8 +150,10 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
+    final promoterCubit = Modular.get<PromoterCubit>();
     const double textFieldSpacing = 20;
     return BlocConsumer<PromoterCubit, PromoterState>(
+      bloc: promoterCubit,
       listener: (context, state) {
         if (state is PromoterRegisterFailureState) {
           errorMessage = DatabaseFailureMapper.mapFailureMessage(
@@ -177,7 +169,7 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
           setButtonToDisabled(false);
         } else if (state is PromoterGetCurrentUserSuccessState) {
           currentUser = state.user;
-          BlocProvider.of<PromoterCubit>(context)
+          Modular.get<PromoterCubit>()
               .getPromotingLandingPages(currentUser?.landingPageIDs ?? []);
         } else if (state is PromoterRegisterLoadingState) {
           setButtonToDisabled(true);
@@ -202,16 +194,15 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                 message: DatabaseFailureMapper.mapFailureMessage(
                     state.failure, localization),
                 callback: () =>
-                    {BlocProvider.of<PromoterCubit>(context).getCurrentUser()});
+                    {Modular.get<PromoterCubit>().getCurrentUser()});
           } else if (state is PromoterGetLandingPagesFailureState) {
             return ErrorView(
                 title: localization.landingpage_overview_error_view_title,
                 message: DatabaseFailureMapper.mapFailureMessage(
                     state.failure, localization),
                 callback: () => {
-                      BlocProvider.of<PromoterCubit>(context)
-                          .getPromotingLandingPages(
-                              currentUser?.landingPageIDs ?? [])
+                      Modular.get<PromoterCubit>().getPromotingLandingPages(
+                          currentUser?.landingPageIDs ?? [])
                     });
           } else if (state is PromoterNoLandingPagesState) {
             return const RegisterPromoterNoLandingPageView();

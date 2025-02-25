@@ -582,6 +582,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get my_promoters_tab_title => 'Meine Promoter';
 
   @override
+  String get promoter_page_edit_promoter_snackbar_title => 'Promoter erfolgreich angepasst!';
+
+  @override
   String get promoter_overview_title => 'Meine Promoter';
 
   @override
@@ -650,6 +653,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String promoter_overview_creation_date(String date) {
     return 'Mitglied seit $date';
   }
+
+  @override
+  String get promoter_overview_edit_promoter_tooltip => 'Promoter anpassen';
 
   @override
   String get promoter_overview_delete_promoter_tooltip => 'Promoter löschen';
@@ -1259,4 +1265,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_footer_config_impressum => 'Impressum Konfiguration';
+
+  @override
+  String get edit_promoter_title => 'Promoter bearbeiten';
+
+  @override
+  String get edit_promoter_subtitle => 'Hier kannst du die Landingpage Zuweisungen anpassen.';
+
+  @override
+  String get edit_promoter_save_button_title => 'Änderungen speichern';
 }

@@ -774,6 +774,10 @@
     "@my_promoters_tab_title": {
         "description": "Title for the my promoters tab"
     },
+    "promoter_page_edit_promoter_snackbar_title": "Successfully edited promoter!",
+    "@promoter_page_edit_promoter_snackbar_title": {
+        "description": "The title of the snack bar that appears on the Promoter Page when you have successfully edited a Promoter."
+    },
     "promoter_overview_title": "My promoter",
     "@promoter_overview_title": {
         "description": "The title of the promoter overview"
@@ -873,6 +877,10 @@
                 "example": "23.12.2023"
             }
         }
+    },
+    "promoter_overview_edit_promoter_tooltip": "Edit promoter",
+    "@promoter_overview_edit_promoter_tooltip": {
+        "description": "Tooltip for the edit promoter button"
     },
     "promoter_overview_delete_promoter_tooltip": "Delete promoter",
     "@promoter_overview_delete_promoter_tooltip": {
@@ -1685,5 +1693,17 @@
     "landingpage_pagebuilder_footer_config_impressum": "Impressum Configuration",
     "@landingpage_pagebuilder_footer_config_impressum": {
         "description": "Collapsible Menu for impressum configuration of the footer in the pagebuilder config menu"
+    },
+    "edit_promoter_title": "Edit promoter",
+    "@edit_promoter_title": {
+        "description": "Title of the edit promoter page"
+    },
+    "edit_promoter_subtitle": "Here you can adjust the landingpage allocation.",
+    "@edit_promoter_subtitle": {
+        "description": "Untertitel der Promoter bearbeiten Seite"
+    },
+    "edit_promoter_save_button_title": "Save changes",
+    "@edit_promoter_save_button_title": {
+        "description": "Title of the save button on the edit promoter page"
     }
 }

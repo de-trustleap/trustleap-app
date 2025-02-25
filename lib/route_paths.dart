@@ -9,6 +9,7 @@ class RoutePaths {
   static const String companyRegistration = "/company-registration";
   static const String recommendationsPath = "/recommendations";
   static const String promotersPath = "/promoters";
+  static const String editPromoterPath = "/edit-promoter";
   static const String landingPagePath = "/landingpage";
   static const String landingPageCreatorPath = "/landingpage-creator";
   static const String activitiesPath = "/activities";
