@@ -79,7 +79,7 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
         });
       }
       promoters = await _fetchAndAssignLandingPages(promoters);
-      promoters = _sortPromoters(promoters);
+      promoters = sortPromoters(promoters);
       emit(PromotersObserverSuccess(promoters: promoters));
     });
   }
@@ -119,7 +119,7 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
     );
   }
 
-  List<Promoter> _sortPromoters(List<Promoter> promoters) {
+  List<Promoter> sortPromoters(List<Promoter> promoters) {
     final List<Promoter> sortedPromoters = promoters;
     sortedPromoters.sort((a, b) {
       DateTime aDate = a.expiresAt ?? a.createdAt ?? DateTime(1970);
