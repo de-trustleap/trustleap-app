@@ -1379,16 +1379,16 @@ abstract class AppLocalizations {
   /// **'Member since {date}'**
   String promoter_overview_creation_date(String date);
 
-  /// Tooltip for the edit promoter button
+  /// Text for the edit promoter button in the three dots menu on the promoter overview page
   ///
   /// In en, this message translates to:
-  /// **'Edit promoter'**
+  /// **'Edit'**
   String get promoter_overview_edit_promoter_tooltip;
 
-  /// Tooltip for the delete promoter button
+  /// Text for the delete promoter button in the three dots menu on the promoter overview page
   ///
   /// In en, this message translates to:
-  /// **'Delete promoter'**
+  /// **'Delete'**
   String get promoter_overview_delete_promoter_tooltip;
 
   /// Title for the promoter deletion alert

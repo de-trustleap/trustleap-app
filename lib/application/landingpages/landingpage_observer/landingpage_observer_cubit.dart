@@ -53,6 +53,12 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
     });
   }
 
+  void stopObserving() {
+    _usersStreamSub?.cancel();
+    _usersStreamSub = null;
+    emit(LandingPageObserverInitial());
+  }
+
   @override
   Future<void> close() async {
     await _usersStreamSub?.cancel();

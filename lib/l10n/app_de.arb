@@ -878,13 +878,13 @@
             }
         }
     },
-    "promoter_overview_edit_promoter_tooltip": "Promoter anpassen",
+    "promoter_overview_edit_promoter_tooltip": "Bearbeiten",
     "@promoter_overview_edit_promoter_tooltip": {
-        "description": "Tooltip für den Promoter anpassen Button"
+        "description": "Text für den Promoter bearbeiten Button im Drei Punkte Menü auf der Promoter Übersichtsseite"
     },
-    "promoter_overview_delete_promoter_tooltip": "Promoter löschen",
+    "promoter_overview_delete_promoter_tooltip": "Löschen",
     "@promoter_overview_delete_promoter_tooltip": {
-        "description": "Tooltip für den Promoter löschen Button"
+        "description": "Text für den Promoter löschen Button im Drei Punkte Menü auf der Promoter Übersichtsseite"
     },
     "promoter_overview_delete_promoter_alert_title": "Soll der ausgewählte Promoter wirklich gelöscht werden?",
     "@promoter_overview_delete_promoter_alert_title": {

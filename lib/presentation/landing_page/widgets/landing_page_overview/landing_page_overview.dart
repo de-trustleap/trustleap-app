@@ -13,45 +13,66 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_o
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-class LandingPageOverview extends StatelessWidget {
+class LandingPageOverview extends StatefulWidget {
   const LandingPageOverview({super.key});
 
   @override
+  State<LandingPageOverview> createState() => _LandingPageOverviewState();
+}
+
+class _LandingPageOverviewState extends State<LandingPageOverview> {
+  @override
+  void initState() {
+    super.initState();
+    print("INIT STATE!");
+    Modular.get<LandingPageObserverCubit>().observeAllLandingPages();
+  }
+
+  @override
+  void dispose() {
+    Modular.get<LandingPageObserverCubit>().stopObserving();
+    super.dispose();
+  }
+
+  void submitDeletion(String id, String parentUserID) {
+    CustomNavigator.pop();
+    Modular.get<LandingPageCubit>().deleteLandingPage(id, parentUserID);
+  }
+
+  void submitDuplication(String id) {
+    Modular.get<LandingPageCubit>().duplicateLandingPage(id);
+  }
+
+  void submitIsActive(String id, bool isActive, String userId) {
+    Modular.get<LandingPageCubit>()
+        .toggleLandingPageActivity(id, isActive, userId);
+  }
+
+  void showDeleteAlert(String id, parentUserID, AppLocalizations localization) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return CustomAlertDialog(
+              title: localization.landingpage_delete_alert_title,
+              message: localization.landingpage_delete_alert_msg,
+              actionButtonTitle: localization.delete_buttontitle,
+              cancelButtonTitle: localization.cancel_buttontitle,
+              actionButtonAction: () => submitDeletion(id, parentUserID),
+              cancelButtonAction: () => CustomNavigator.pop());
+        });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final landingPageCubit = Modular.get<LandingPageCubit>();
+    final landingPageObserverCubit = Modular.get<LandingPageObserverCubit>();
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
-    void submitDeletion(String id, String parentUserID) {
-      CustomNavigator.pop();
-      BlocProvider.of<LandingPageCubit>(context)
-          .deleteLandingPage(id, parentUserID);
-    }
-
-    void submitDuplication(String id) {
-      BlocProvider.of<LandingPageCubit>(context).duplicateLandingPage(id);
-    }
-
-    void submitIsActive(String id, bool isActive, String userId) {
-      BlocProvider.of<LandingPageCubit>(context)
-          .toggleLandingPageActivity(id, isActive, userId);
-    }
-
-    void showDeleteAlert(String id, parentUserID) {
-      showDialog(
-          context: context,
-          builder: (_) {
-            return CustomAlertDialog(
-                title: localization.landingpage_delete_alert_title,
-                message: localization.landingpage_delete_alert_msg,
-                actionButtonTitle: localization.delete_buttontitle,
-                cancelButtonTitle: localization.cancel_buttontitle,
-                actionButtonAction: () => submitDeletion(id, parentUserID),
-                cancelButtonAction: () => CustomNavigator.pop());
-          });
-    }
-
     return BlocConsumer<LandingPageCubit, LandingPageState>(
+      bloc: landingPageCubit,
       listener: (context, state) {
         if (state is DeleteLandingPageSuccessState) {
           CustomSnackBar.of(context).showCustomSnackBar(
@@ -71,6 +92,7 @@ class LandingPageOverview extends StatelessWidget {
       },
       builder: (context, state) {
         return BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(
+          bloc: landingPageObserverCubit,
           builder: (context, observerState) {
             if (state is DeleteLandingPageLoadingState ||
                 state is DuplicateLandingPageLoadingState ||
@@ -101,7 +123,8 @@ class LandingPageOverview extends StatelessWidget {
                             landingpages: observerState.landingPages,
                             user: observerState.user,
                             deletePressed: (landingPageID, parentUserID) =>
-                                showDeleteAlert(landingPageID, parentUserID),
+                                showDeleteAlert(
+                                    landingPageID, parentUserID, localization),
                             duplicatePressed: (landinPageID) =>
                                 submitDuplication(landinPageID),
                             isActivePressed:
@@ -119,7 +142,7 @@ class LandingPageOverview extends StatelessWidget {
                   message: DatabaseFailureMapper.mapFailureMessage(
                       observerState.failure, localization),
                   callback: () => {
-                        BlocProvider.of<LandingPageObserverCubit>(context)
+                        Modular.get<LandingPageObserverCubit>()
                             .observeAllLandingPages()
                       });
             } else {

@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/second
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_form_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorSecondStep extends StatefulWidget {
@@ -100,13 +101,14 @@ class _LandingPageCreatorSecondStepState
           widget.isEditMode);
     } else {
       validationHasError = true;
-      BlocProvider.of<LandingPageCubit>(context)
+      Modular.get<LandingPageCubit>()
           .createLandingPage(null, Uint8List(0), false, "");
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final landingPageCubit = Modular.get<LandingPageCubit>();
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
@@ -114,117 +116,119 @@ class _LandingPageCreatorSecondStepState
         LandingPageCreatorFormValidator(localization: localization);
     const double textFieldSpacing = 20;
     return BlocBuilder<LandingPageCubit, LandingPageState>(
+        bloc: landingPageCubit,
         builder: (context, state) {
-      return Column(
-        children: [
-          SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-          CenteredConstrainedWrapper(
-            child: CardContainer(
-                child: LayoutBuilder(builder: (context, constraints) {
-              final maxWidth = constraints.maxWidth;
-              return Form(
-                  key: formKey,
-                  autovalidateMode: state is LandingPageShowValidationState
-                      ? AutovalidateMode.always
-                      : AutovalidateMode.disabled,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SelectableText(localization.landingpage_create_txt,
-                            style: themeData.textTheme.headlineLarge!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 16),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FormTextfield(
-                                  maxWidth: maxWidth,
-                                  controller: impressumTextController,
-                                  disabled: false,
-                                  placeholder: localization
-                                      .landingpage_creation_impressum_placeholder,
-                                  validator:
-                                      validator.validateLandingPageImpressum,
-                                  minLines: 5,
-                                  maxLines: 10,
-                                  keyboardType: TextInputType.multiline)
-                            ]),
-                        const SizedBox(height: textFieldSpacing),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FormTextfield(
-                                  maxWidth: maxWidth,
-                                  controller: privacyPolicyTextController,
-                                  disabled: false,
-                                  placeholder: localization
-                                      .landingpage_creation_privacy_policy_placeholder,
-                                  validator: validator
-                                      .validateLandingPagePrivacyPolicy,
-                                  minLines: 5,
-                                  maxLines: 10,
-                                  keyboardType: TextInputType.multiline)
-                            ]),
-                        const SizedBox(height: textFieldSpacing),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FormTextfield(
-                                  maxWidth: maxWidth,
-                                  controller: initialInformationTextController,
-                                  disabled: false,
-                                  placeholder: localization
-                                      .landingpage_creation_initial_information_placeholder,
-                                  validator: validator
-                                      .validateLandingPageInitialInformation,
-                                  minLines: 5,
-                                  maxLines: 10,
-                                  keyboardType: TextInputType.multiline)
-                            ]),
-                        const SizedBox(height: textFieldSpacing * 2),
-                        ResponsiveRowColumn(
-                            rowMainAxisAlignment: MainAxisAlignment.center,
-                            layout: responsiveValue.largerThan(MOBILE)
-                                ? ResponsiveRowColumnType.ROW
-                                : ResponsiveRowColumnType.COLUMN,
-                            children: [
-                              ResponsiveRowColumnItem(
-                                child: SecondaryButton(
-                                    title: localization
-                                        .landingpage_creation_back_button_text,
-                                    disabled: widget.buttonsDisabled,
-                                    width: responsiveValue.isMobile
-                                        ? maxWidth - textFieldSpacing
-                                        : maxWidth / 2 - textFieldSpacing,
-                                    onTap: () {
-                                      widget.onBack(widget.landingPage!);
-                                    }),
-                              ),
-                              const ResponsiveRowColumnItem(
-                                  child: SizedBox(
-                                      width: textFieldSpacing,
-                                      height: textFieldSpacing)),
-                              ResponsiveRowColumnItem(
-                                  child: PrimaryButton(
-                                      title: widget.isEditMode
-                                          ? localization
-                                              .landingpage_creation_edit_button_text
-                                          : localization
-                                              .landingpage_creation_continue,
-                                      disabled: widget.buttonsDisabled,
-                                      isLoading: widget.isLoading,
-                                      width: responsiveValue.isMobile
-                                          ? maxWidth - textFieldSpacing
-                                          : maxWidth / 2 - textFieldSpacing,
-                                      onTap: () {
-                                        submitContinue();
-                                      }))
-                            ]),
-                      ]));
-            })),
-          )
-        ],
-      );
-    });
+          return Column(
+            children: [
+              SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+              CenteredConstrainedWrapper(
+                child: CardContainer(
+                    child: LayoutBuilder(builder: (context, constraints) {
+                  final maxWidth = constraints.maxWidth;
+                  return Form(
+                      key: formKey,
+                      autovalidateMode: state is LandingPageShowValidationState
+                          ? AutovalidateMode.always
+                          : AutovalidateMode.disabled,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SelectableText(localization.landingpage_create_txt,
+                                style: themeData.textTheme.headlineLarge!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 16),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FormTextfield(
+                                      maxWidth: maxWidth,
+                                      controller: impressumTextController,
+                                      disabled: false,
+                                      placeholder: localization
+                                          .landingpage_creation_impressum_placeholder,
+                                      validator: validator
+                                          .validateLandingPageImpressum,
+                                      minLines: 5,
+                                      maxLines: 10,
+                                      keyboardType: TextInputType.multiline)
+                                ]),
+                            const SizedBox(height: textFieldSpacing),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FormTextfield(
+                                      maxWidth: maxWidth,
+                                      controller: privacyPolicyTextController,
+                                      disabled: false,
+                                      placeholder: localization
+                                          .landingpage_creation_privacy_policy_placeholder,
+                                      validator: validator
+                                          .validateLandingPagePrivacyPolicy,
+                                      minLines: 5,
+                                      maxLines: 10,
+                                      keyboardType: TextInputType.multiline)
+                                ]),
+                            const SizedBox(height: textFieldSpacing),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FormTextfield(
+                                      maxWidth: maxWidth,
+                                      controller:
+                                          initialInformationTextController,
+                                      disabled: false,
+                                      placeholder: localization
+                                          .landingpage_creation_initial_information_placeholder,
+                                      validator: validator
+                                          .validateLandingPageInitialInformation,
+                                      minLines: 5,
+                                      maxLines: 10,
+                                      keyboardType: TextInputType.multiline)
+                                ]),
+                            const SizedBox(height: textFieldSpacing * 2),
+                            ResponsiveRowColumn(
+                                rowMainAxisAlignment: MainAxisAlignment.center,
+                                layout: responsiveValue.largerThan(MOBILE)
+                                    ? ResponsiveRowColumnType.ROW
+                                    : ResponsiveRowColumnType.COLUMN,
+                                children: [
+                                  ResponsiveRowColumnItem(
+                                    child: SecondaryButton(
+                                        title: localization
+                                            .landingpage_creation_back_button_text,
+                                        disabled: widget.buttonsDisabled,
+                                        width: responsiveValue.isMobile
+                                            ? maxWidth - textFieldSpacing
+                                            : maxWidth / 2 - textFieldSpacing,
+                                        onTap: () {
+                                          widget.onBack(widget.landingPage!);
+                                        }),
+                                  ),
+                                  const ResponsiveRowColumnItem(
+                                      child: SizedBox(
+                                          width: textFieldSpacing,
+                                          height: textFieldSpacing)),
+                                  ResponsiveRowColumnItem(
+                                      child: PrimaryButton(
+                                          title: widget.isEditMode
+                                              ? localization
+                                                  .landingpage_creation_edit_button_text
+                                              : localization
+                                                  .landingpage_creation_continue,
+                                          disabled: widget.buttonsDisabled,
+                                          isLoading: widget.isLoading,
+                                          width: responsiveValue.isMobile
+                                              ? maxWidth - textFieldSpacing
+                                              : maxWidth / 2 - textFieldSpacing,
+                                          onTap: () {
+                                            submitContinue();
+                                          }))
+                                ]),
+                          ]));
+                })),
+              )
+            ],
+          );
+        });
   }
 }

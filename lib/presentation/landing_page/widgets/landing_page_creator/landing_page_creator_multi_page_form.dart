@@ -17,6 +17,7 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_c
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorMultiPageForm extends StatefulWidget {
@@ -54,7 +55,7 @@ class _LandingPageCreatorMultiPageFormState
     isEditMode = widget.landingPage != null;
     landingPage = widget.landingPage;
 
-    BlocProvider.of<LandingPageCubit>(context).getUser();
+    Modular.get<LandingPageCubit>().getUser();
     _initializeSteps();
 
     progress = 1 / _steps.length;
@@ -94,7 +95,7 @@ class _LandingPageCreatorMultiPageFormState
           isEditMode: isEditMode,
           onContinueTapped: (landingPage, image, imageHasChanged, isEditMode) {
             if (isEditMode) {
-              BlocProvider.of<LandingPageCubit>(context)
+              Modular.get<LandingPageCubit>()
                   .editLandingPage(landingPage, image, imageHasChanged);
             } else if (image != null) {
               setState(() {
@@ -127,7 +128,7 @@ class _LandingPageCreatorMultiPageFormState
           },
           onSaveTapped: (landingPage, image, imageHasChanged, templateID) {
             if (image != null) {
-              BlocProvider.of<LandingPageCubit>(context).createLandingPage(
+              Modular.get<LandingPageCubit>().createLandingPage(
                   landingPage, image, imageHasChanged, templateID);
             }
           })
@@ -160,7 +161,7 @@ class _LandingPageCreatorMultiPageFormState
           isEditMode: isEditMode,
           onContinueTapped: (landingPage, image, imageHasChanged, isEditMode) {
             if (isEditMode) {
-              BlocProvider.of<LandingPageCubit>(context)
+              Modular.get<LandingPageCubit>()
                   .editLandingPage(landingPage, image, imageHasChanged);
             } else if (image != null) {
               setState(() {
@@ -183,75 +184,79 @@ class _LandingPageCreatorMultiPageFormState
 
   @override
   Widget build(BuildContext context) {
+    final landingPageCubit = Modular.get<LandingPageCubit>();
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     _initializeSteps();
     return MultiBlocListener(
         listeners: [
           BlocListener<LandingPageCubit, LandingPageState>(
+              bloc: landingPageCubit,
               listener: (context, state) {
-            if (state is CreatedLandingPageSuccessState) {
-              showError = false;
-              const params = "?createdNewPage=true";
-              CustomNavigator.openInNewTab(
-                  "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage?.id.value}");
-              CustomNavigator.navigate(
-                  RoutePaths.homePath + RoutePaths.landingPagePath + params);
-            } else if (state is EditLandingPageSuccessState) {
-              showError = false;
-              const params = "?editedPage=true";
-              CustomNavigator.navigate(
-                  RoutePaths.homePath + RoutePaths.landingPagePath + params);
-            } else if (state is GetUserSuccessState) {
-              showError = false;
-              if (state.user.companyID != null) {
-                BlocProvider.of<CompanyCubit>(context)
-                    .getCompany(state.user.companyID!);
-              }
-            } else if (state is LandingPageNoImageFailureState) {
-              setState(() {
-                imageValid = false;
-              });
-            } else if (state
-                is LandingPageImageExceedsFileSizeLimitFailureState) {
-              setState(() {
-                imageValid = false;
-              });
-            } else if (state is LandingPageImageValid) {
-              setState(() {
-                imageValid = true;
-              });
-            } else if (state is CreateLandingPageFailureState) {
-              setState(() {
-                showError = true;
-                errorMessage = DatabaseFailureMapper.mapFailureMessage(
-                    state.failure, localization);
-                lastFormButtonsDisabled = false;
-              });
-            } else if (state is EditLandingPageFailureState) {
-              setState(() {
-                showError = true;
-                errorMessage = DatabaseFailureMapper.mapFailureMessage(
-                    state.failure, localization);
-                lastFormButtonsDisabled = false;
-              });
-            } else if (state is CreateLandingPageLoadingState ||
-                state is EditLandingPageLoadingState) {
-              setState(() {
-                lastFormButtonsDisabled = true;
-                isLoading = true;
-              });
-            } else if (state is GetLandingPageTemplatesFailureState) {
-              setState(() {
-                showError = true;
-                errorMessage = DatabaseFailureMapper.mapFailureMessage(
-                    state.failure, localization);
-                lastFormButtonsDisabled = false;
-              });
-            } else {
-              showError = false;
-            }
-          }),
+                if (state is CreatedLandingPageSuccessState) {
+                  showError = false;
+                  const params = "?createdNewPage=true";
+                  CustomNavigator.openInNewTab(
+                      "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage?.id.value}");
+                  CustomNavigator.navigate(RoutePaths.homePath +
+                      RoutePaths.landingPagePath +
+                      params);
+                } else if (state is EditLandingPageSuccessState) {
+                  showError = false;
+                  const params = "?editedPage=true";
+                  CustomNavigator.navigate(RoutePaths.homePath +
+                      RoutePaths.landingPagePath +
+                      params);
+                } else if (state is GetUserSuccessState) {
+                  showError = false;
+                  if (state.user.companyID != null) {
+                    BlocProvider.of<CompanyCubit>(context)
+                        .getCompany(state.user.companyID!);
+                  }
+                } else if (state is LandingPageNoImageFailureState) {
+                  setState(() {
+                    imageValid = false;
+                  });
+                } else if (state
+                    is LandingPageImageExceedsFileSizeLimitFailureState) {
+                  setState(() {
+                    imageValid = false;
+                  });
+                } else if (state is LandingPageImageValid) {
+                  setState(() {
+                    imageValid = true;
+                  });
+                } else if (state is CreateLandingPageFailureState) {
+                  setState(() {
+                    showError = true;
+                    errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                        state.failure, localization);
+                    lastFormButtonsDisabled = false;
+                  });
+                } else if (state is EditLandingPageFailureState) {
+                  setState(() {
+                    showError = true;
+                    errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                        state.failure, localization);
+                    lastFormButtonsDisabled = false;
+                  });
+                } else if (state is CreateLandingPageLoadingState ||
+                    state is EditLandingPageLoadingState) {
+                  setState(() {
+                    lastFormButtonsDisabled = true;
+                    isLoading = true;
+                  });
+                } else if (state is GetLandingPageTemplatesFailureState) {
+                  setState(() {
+                    showError = true;
+                    errorMessage = DatabaseFailureMapper.mapFailureMessage(
+                        state.failure, localization);
+                    lastFormButtonsDisabled = false;
+                  });
+                } else {
+                  showError = false;
+                }
+              }),
           BlocListener<CompanyCubit, CompanyState>(listener: (context, state) {
             if (state is GetCompanySuccessState) {
               setState(() {
@@ -261,6 +266,7 @@ class _LandingPageCreatorMultiPageFormState
           })
         ],
         child: BlocBuilder<LandingPageCubit, LandingPageState>(
+          bloc: landingPageCubit,
           builder: (context, state) {
             return ListView(children: [
               _steps[_currentStep],

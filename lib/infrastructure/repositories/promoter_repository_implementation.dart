@@ -5,10 +5,12 @@ import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
+import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -191,6 +193,36 @@ class PromoterRepositoryImplementation implements PromoterRepository {
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, List<LandingPage>>> getLandingPages(
+      List<String> ids) async {
+    final landingPageCollection = firestore.collection("landingPages");
+    // The ids needs to be sliced into chunks of 10 elements because the whereIn function can only process 10 elements at once.
+    final chunks = ids.slices(10);
+    final List<QuerySnapshot<Map<String, dynamic>>> querySnapshots = [];
+    final List<LandingPage> landingPages = [];
+
+    try {
+      await Future.forEach(chunks, (element) async {
+        final document = await landingPageCollection
+            .where(FieldPath.documentId, whereIn: element)
+            .get();
+        querySnapshots.add(document);
+      });
+      for (var document in querySnapshots) {
+        for (var snapshot in document.docs) {
+          var doc = snapshot.data();
+          var model =
+              LandingPageModel.fromFirestore(doc, snapshot.id).toDomain();
+          landingPages.add(model);
+        }
+      }
+      return right(landingPages);
+    } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

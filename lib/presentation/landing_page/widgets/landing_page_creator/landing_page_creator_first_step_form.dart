@@ -18,6 +18,7 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_c
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_placeholder_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorFirstStepForm extends StatefulWidget {
@@ -52,7 +53,7 @@ class _LandingPageCreatorFormState
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<LandingPageCubit>(context).getUser();
+    Modular.get<LandingPageCubit>().getUser();
     if (widget.landingPage != null) {
       nameTextController.text = widget.landingPage?.name ?? "";
       descriptionTextController.text = widget.landingPage?.description ?? "";
@@ -103,7 +104,7 @@ class _LandingPageCreatorFormState
           ownerID: user!.id));
     } else {
       validationHasError = true;
-      BlocProvider.of<LandingPageCubit>(context)
+      Modular.get<LandingPageCubit>()
           .createLandingPage(null, Uint8List(0), false, "");
     }
   }
@@ -129,6 +130,7 @@ class _LandingPageCreatorFormState
 
   @override
   Widget build(BuildContext context) {
+    final landingPageCubit = Modular.get<LandingPageCubit>();
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
@@ -137,6 +139,7 @@ class _LandingPageCreatorFormState
     const double textFieldSpacing = 20;
 
     return BlocConsumer<LandingPageCubit, LandingPageState>(
+      bloc: landingPageCubit,
       listener: (context, state) {
         if (state is GetUserSuccessState) {
           user = state.user;
@@ -148,8 +151,7 @@ class _LandingPageCreatorFormState
               title: localization.profile_page_request_failure_message,
               message: DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization),
-              callback: () =>
-                  {BlocProvider.of<LandingPageCubit>(context).getUser()});
+              callback: () => {Modular.get<LandingPageCubit>().getUser()});
         } else {
           return CardContainer(
               child: LayoutBuilder(builder: (context, constraints) {

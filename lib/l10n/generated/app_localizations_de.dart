@@ -655,10 +655,10 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get promoter_overview_edit_promoter_tooltip => 'Promoter anpassen';
+  String get promoter_overview_edit_promoter_tooltip => 'Bearbeiten';
 
   @override
-  String get promoter_overview_delete_promoter_tooltip => 'Promoter löschen';
+  String get promoter_overview_delete_promoter_tooltip => 'Löschen';
 
   @override
   String get promoter_overview_delete_promoter_alert_title => 'Soll der ausgewählte Promoter wirklich gelöscht werden?';

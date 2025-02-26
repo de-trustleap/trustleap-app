@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_icon.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -18,6 +19,15 @@ class PromotersOverviewGridTile extends StatelessWidget {
 
   const PromotersOverviewGridTile(
       {super.key, required this.promoter, required this.deletePressed});
+
+  bool _showLandingPageWarning() {
+    if (promoter.landingPages == null || promoter.landingPages!.isEmpty) {
+      return true;
+    } else {
+      return promoter.landingPages!.every((landingPage) =>
+          landingPage.isActive == null || landingPage.isActive == false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,30 +52,73 @@ class PromotersOverviewGridTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    IconButton(
-                        onPressed: () {
-                          deletePressed(promoter.id.value);
-                        },
-                        iconSize: 24,
-                        tooltip: localization
-                            .promoter_overview_delete_promoter_tooltip,
-                        icon: Icon(Icons.delete,
-                            color: themeData.colorScheme.secondary, size: 24)),
+                    if (_showLandingPageWarning()) ...[
+                      TooltipIcon(
+                          icon: Icons.warning,
+                          text:
+                              "Der Promoter hat keine aktiven Landingpages mehr zugewiesen",
+                          buttonText: "Landingpage zuweisen",
+                          onPressed: () => {
+                                CustomNavigator.pushNamed(
+                                    "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
+                                    arguments: promoter)
+                              }),
+                    ],
                     const Spacer(),
-                    IconButton(
-                        onPressed: () {
-                          CustomNavigator.pushNamed(
-                              "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
-                              arguments: promoter);
-                        },
-                        iconSize: 24,
-                        tooltip: localization
-                            .promoter_overview_edit_promoter_tooltip,
-                        icon: Icon(Icons.edit,
-                            color: themeData.colorScheme.secondary, size: 24)),
-                    const Spacer(),
+                    PopupMenuButton(
+                        itemBuilder: (context) => [
+                              PopupMenuItem(
+                                  value: "edit",
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Icon(Icons.delete,
+                                            color:
+                                                themeData.colorScheme.secondary,
+                                            size: 24),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                            localization
+                                                .promoter_overview_edit_promoter_tooltip,
+                                            style: responsiveValue.isMobile
+                                                ? themeData.textTheme.bodySmall
+                                                : themeData
+                                                    .textTheme.bodyMedium)
+                                      ])),
+                              PopupMenuItem(
+                                  value: "delete",
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Icon(Icons.copy,
+                                            color:
+                                                themeData.colorScheme.secondary,
+                                            size: 24),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                            localization
+                                                .promoter_overview_delete_promoter_tooltip,
+                                            style: responsiveValue.isMobile
+                                                ? themeData.textTheme.bodySmall
+                                                : themeData
+                                                    .textTheme.bodyMedium)
+                                      ])),
+                            ],
+                        onSelected: (String newValue) {
+                          if (newValue == "delete") {
+                            deletePressed(promoter.id.value);
+                          } else if (newValue == "edit") {
+                            CustomNavigator.pushNamed(
+                                "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
+                                arguments: promoter);
+                          }
+                        })
                   ]),
-              if (promoter.registered != null && promoter.registered!) ...[
+              if (promoter.registered != null &&
+                  promoter.registered! &&
+                  promoter.thumbnailDownloadURL != null) ...[
                 CachedNetworkImage(
                   width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
                   height: responsiveValue.largerThan(MOBILE) ? 120 : 140,
@@ -138,3 +191,12 @@ class PromotersOverviewGridTile extends StatelessWidget {
         hovered: false);
   }
 }
+
+// TODO: Fehler auch bei deaktivierten pages anzeigen (FERTIG)
+// TODO: Bei Edit Landingpages deaktiviert anzeigen wenn deaktiviert (FERTIG)
+// TODO: Lamdingpages sollen bei editLandingpages aktiviert werden können (FERTIG)
+// TODO: FEHLER BEI PROMOTER IMAGES (THE ERROR) (FERTIG)
+// TODO: SORTIERUNG VON PROMOTER KACHELN AUF OVERVIEW
+// TODO: LANDINGPAGE CHECKBOXES SOLLTEN ALPHABETISCH SORTIERT SEIN
+// TODO: ALLES NOCHMAL DURCHTESTEN
+// TODO: CARD SO GROß WIE BEI LANDINGPAGES

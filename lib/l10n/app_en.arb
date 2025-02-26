@@ -878,13 +878,13 @@
             }
         }
     },
-    "promoter_overview_edit_promoter_tooltip": "Edit promoter",
+    "promoter_overview_edit_promoter_tooltip": "Edit",
     "@promoter_overview_edit_promoter_tooltip": {
-        "description": "Tooltip for the edit promoter button"
+        "description": "Text for the edit promoter button in the three dots menu on the promoter overview page"
     },
-    "promoter_overview_delete_promoter_tooltip": "Delete promoter",
+    "promoter_overview_delete_promoter_tooltip": "Delete",
     "@promoter_overview_delete_promoter_tooltip": {
-        "description": "Tooltip for the delete promoter button"
+        "description": "Text for the delete promoter button in the three dots menu on the promoter overview page"
     },
     "promoter_overview_delete_promoter_alert_title": "Should the selected promoter really be deleted?",
     "@promoter_overview_delete_promoter_alert_title": {
