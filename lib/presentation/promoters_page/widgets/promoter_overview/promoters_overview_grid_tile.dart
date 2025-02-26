@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
@@ -11,6 +12,7 @@ import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersOverviewGridTile extends StatelessWidget {
@@ -19,15 +21,6 @@ class PromotersOverviewGridTile extends StatelessWidget {
 
   const PromotersOverviewGridTile(
       {super.key, required this.promoter, required this.deletePressed});
-
-  bool _showLandingPageWarning() {
-    if (promoter.landingPages == null || promoter.landingPages!.isEmpty) {
-      return true;
-    } else {
-      return promoter.landingPages!.every((landingPage) =>
-          landingPage.isActive == null || landingPage.isActive == false);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +45,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    if (_showLandingPageWarning()) ...[
+                    if (Modular.get<PromoterObserverCubit>()
+                        .showLandingPageWarning(promoter)) ...[
                       TooltipIcon(
                           icon: Icons.warning,
                           text:
@@ -196,7 +190,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
 // TODO: Bei Edit Landingpages deaktiviert anzeigen wenn deaktiviert (FERTIG)
 // TODO: Lamdingpages sollen bei editLandingpages aktiviert werden können (FERTIG)
 // TODO: FEHLER BEI PROMOTER IMAGES (THE ERROR) (FERTIG)
-// TODO: SORTIERUNG VON PROMOTER KACHELN AUF OVERVIEW
-// TODO: LANDINGPAGE CHECKBOXES SOLLTEN ALPHABETISCH SORTIERT SEIN
-// TODO: ALLES NOCHMAL DURCHTESTEN
+// TODO: SORTIERUNG VON PROMOTER KACHELN AUF OVERVIEW (FERTIG)
+// TODO: LANDINGPAGE CHECKBOXES SOLLTEN ALPHABETISCH SORTIERT SEIN (FERTIG)
+// TODO: TESTS FÜR REPO UND CUBIT (INSB. SORTING UND SHOWWARNING)
 // TODO: CARD SO GROß WIE BEI LANDINGPAGES
+// TODO: LOCALIZATIONS

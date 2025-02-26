@@ -126,6 +126,8 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
 
   List<Widget> createCheckboxes() {
     List<Widget> checkboxes = [];
+    landingPageItems.sort((a, b) =>
+        (a.landingPage.name ?? "").compareTo(b.landingPage.name ?? ""));
     landingPageItems.asMap().forEach((index, _) {
       checkboxes.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Checkbox(

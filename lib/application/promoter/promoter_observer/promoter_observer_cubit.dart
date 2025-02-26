@@ -79,6 +79,7 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
         });
       }
       promoters = await _fetchAndAssignLandingPages(promoters);
+      promoters = _sortPromoters(promoters);
       emit(PromotersObserverSuccess(promoters: promoters));
     });
   }
@@ -116,6 +117,37 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
         return Future.value(updatedPromoters);
       },
     );
+  }
+
+  List<Promoter> _sortPromoters(List<Promoter> promoters) {
+    final List<Promoter> sortedPromoters = promoters;
+    sortedPromoters.sort((a, b) {
+      DateTime aDate = a.expiresAt ?? a.createdAt ?? DateTime(1970);
+      DateTime bDate = b.expiresAt ?? b.createdAt ?? DateTime(1970);
+      return bDate.compareTo(aDate);
+    });
+    sortedPromoters.sort((a, b) {
+      bool aWarning = showLandingPageWarning(a);
+      bool bWarning = showLandingPageWarning(b);
+      if (aWarning == bWarning) return 0;
+      return aWarning ? -1 : 1;
+    });
+    sortedPromoters.sort((a, b) {
+      bool aActive = a.registered ?? false;
+      bool bActive = b.registered ?? false;
+      if (aActive == bActive) return 0;
+      return aActive ? -1 : 1;
+    });
+    return sortedPromoters;
+  }
+
+  bool showLandingPageWarning(Promoter promoter) {
+    if (promoter.landingPages == null || promoter.landingPages!.isEmpty) {
+      return true;
+    } else {
+      return promoter.landingPages!.every((landingPage) =>
+          landingPage.isActive == null || landingPage.isActive == false);
+    }
   }
 
   void stopObserving() {
