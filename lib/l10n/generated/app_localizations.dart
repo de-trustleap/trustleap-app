@@ -2620,6 +2620,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save changes'**
   String get edit_promoter_save_button_title;
+
+  /// Tooltip for inactive landingpages on the edit promoter page.
+  ///
+  /// In en, this message translates to:
+  /// **'This landingpage is not active'**
+  String get edit_promoter_inactive_landingpage_tooltip;
+
+  /// Tooltip button for landingpage activation on the edit promoter page.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate landingpage'**
+  String get edit_promoter_inactive_landingpage_tooltip_activate_action;
+
+  /// Tooltip warning for inactive landingpages on the promoter overview.
+  ///
+  /// In en, this message translates to:
+  /// **'The promoter doesnt have active assinged landingpages'**
+  String get promoter_overview_inactive_landingpage_tooltip_warning;
+
+  /// Tooltip warning button for inactive landingpages on the promoter overview.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign landingpage'**
+  String get promoter_overview_inactive_landingpage_tooltip_warning_action;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

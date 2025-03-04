@@ -59,7 +59,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
         .toList();
   }
 
-  List<Widget> createCheckboxes() {
+  List<Widget> createCheckboxes(AppLocalizations localization) {
     List<Widget> checkboxes = [];
     landingPageItems.sort((a, b) =>
         (a.landingPage.name ?? "").compareTo(b.landingPage.name ?? ""));
@@ -86,8 +86,9 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
             landingPageItems[index].landingPage.isActive == null) ...[
           TooltipIcon(
               icon: Icons.warning,
-              text: "Diese Landingpage ist inaktiv",
-              buttonText: "Landingpage aktivieren",
+              text: localization.edit_promoter_inactive_landingpage_tooltip,
+              buttonText: localization
+                  .edit_promoter_inactive_landingpage_tooltip_activate_action,
               onPressed: () => {
                     Modular.get<LandingPageCubit>().toggleLandingPageActivity(
                         landingPageItems[index].landingPage.id.value,
@@ -192,7 +193,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                             SelectableText(localization.edit_promoter_subtitle,
                                 style: themeData.textTheme.bodyMedium),
                             const SizedBox(height: spacing + 4),
-                            Column(children: createCheckboxes()),
+                            Column(children: createCheckboxes(localization)),
                             const SizedBox(height: spacing * 2),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,

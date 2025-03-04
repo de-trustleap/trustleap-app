@@ -230,7 +230,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   Widget headerWithChildren(List<Widget> children) {
     children.insert(0, header());
     return CardContainer(
-        maxWidth: 800,
+        maxWidth: 1200,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start, children: children));
   }

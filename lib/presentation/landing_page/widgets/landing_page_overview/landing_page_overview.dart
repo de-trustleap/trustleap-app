@@ -26,7 +26,6 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
   @override
   void initState() {
     super.initState();
-    print("INIT STATE!");
     Modular.get<LandingPageObserverCubit>().observeAllLandingPages();
   }
 

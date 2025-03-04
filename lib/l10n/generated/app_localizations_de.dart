@@ -1274,4 +1274,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get edit_promoter_save_button_title => 'Änderungen speichern';
+
+  @override
+  String get edit_promoter_inactive_landingpage_tooltip => 'Diese Landingpage ist inaktiv';
+
+  @override
+  String get edit_promoter_inactive_landingpage_tooltip_activate_action => 'Landingpage aktivieren';
+
+  @override
+  String get promoter_overview_inactive_landingpage_tooltip_warning => 'Der Promoter hat keine aktiven Landingpages mehr zugewiesen';
+
+  @override
+  String get promoter_overview_inactive_landingpage_tooltip_warning_action => 'Landingpage zuweisen';
 }

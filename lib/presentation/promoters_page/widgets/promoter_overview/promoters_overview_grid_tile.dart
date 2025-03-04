@@ -49,9 +49,10 @@ class PromotersOverviewGridTile extends StatelessWidget {
                         .showLandingPageWarning(promoter)) ...[
                       TooltipIcon(
                           icon: Icons.warning,
-                          text:
-                              "Der Promoter hat keine aktiven Landingpages mehr zugewiesen",
-                          buttonText: "Landingpage zuweisen",
+                          text: localization
+                              .promoter_overview_inactive_landingpage_tooltip_warning,
+                          buttonText: localization
+                              .promoter_overview_inactive_landingpage_tooltip_warning_action,
                           onPressed: () => {
                                 CustomNavigator.pushNamed(
                                     "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
@@ -186,13 +187,5 @@ class PromotersOverviewGridTile extends StatelessWidget {
   }
 }
 
-// TODO: Fehler auch bei deaktivierten pages anzeigen (FERTIG)
-// TODO: Bei Edit Landingpages deaktiviert anzeigen wenn deaktiviert (FERTIG)
-// TODO: Lamdingpages sollen bei editLandingpages aktiviert werden können (FERTIG)
-// TODO: FEHLER BEI PROMOTER IMAGES (THE ERROR) (FERTIG)
-// TODO: SORTIERUNG VON PROMOTER KACHELN AUF OVERVIEW (FERTIG)
-// TODO: LANDINGPAGE CHECKBOXES SOLLTEN ALPHABETISCH SORTIERT SEIN (FERTIG)
-// TODO: TESTS FÜR REPO UND CUBIT (INSB. SORTING UND SHOWWARNING) (FERTIG)
-// TODO: CARD SO GROß WIE BEI LANDINGPAGES
 // TODO: EDIT UND DELETE PROMOTER BERECHTIGUNGEN
-// TODO: LOCALIZATIONS
+// TODO: EDIT UND DELETE PROMOTER BERECHTIGUNGEN BACKEND
