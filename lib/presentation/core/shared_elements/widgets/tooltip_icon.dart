@@ -5,6 +5,7 @@ class TooltipIcon extends StatefulWidget {
   final IconData icon;
   final String text;
   final String buttonText;
+  final bool showButton;
   final VoidCallback onPressed;
   final double tooltipOffset;
 
@@ -14,6 +15,7 @@ class TooltipIcon extends StatefulWidget {
     required this.text,
     required this.buttonText,
     required this.onPressed,
+    this.showButton = true,
     this.tooltipOffset = 30,
   });
 
@@ -56,11 +58,13 @@ class _TooltipIconState extends State<TooltipIcon> {
                   children: [
                     Text(widget.text,
                         style: Theme.of(context).textTheme.bodySmall),
-                    const SizedBox(height: 8),
-                    ClickableLink(
-                        title: widget.buttonText,
-                        fontSize: 14,
-                        onTap: () => {widget.onPressed()})
+                    if (widget.showButton) ...[
+                      const SizedBox(height: 8),
+                      ClickableLink(
+                          title: widget.buttonText,
+                          fontSize: 14,
+                          onTap: () => {widget.onPressed()})
+                    ]
                   ],
                 ),
               ),
