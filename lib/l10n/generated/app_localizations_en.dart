@@ -655,10 +655,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get promoter_overview_edit_promoter_tooltip => 'Edit promoter';
+  String get promoter_overview_edit_promoter_tooltip => 'Edit';
 
   @override
-  String get promoter_overview_delete_promoter_tooltip => 'Delete promoter';
+  String get promoter_overview_delete_promoter_tooltip => 'Delete';
 
   @override
   String get promoter_overview_delete_promoter_alert_title => 'Should the selected promoter really be deleted?';
@@ -1274,4 +1274,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get edit_promoter_save_button_title => 'Save changes';
+
+  @override
+  String get edit_promoter_inactive_landingpage_tooltip => 'This landingpage is not active';
+
+  @override
+  String get edit_promoter_inactive_landingpage_tooltip_activate_action => 'Activate landingpage';
+
+  @override
+  String get promoter_overview_inactive_landingpage_tooltip_warning => 'The promoter doesnt have active assinged landingpages';
+
+  @override
+  String get promoter_overview_inactive_landingpage_tooltip_warning_action => 'Assign landingpage';
 }

@@ -3,11 +3,13 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class ClickableLink extends StatelessWidget {
   final String title;
+  final double? fontSize;
   final Function onTap;
 
   const ClickableLink({
     super.key,
     required this.title,
+    this.fontSize,
     required this.onTap,
   });
 
@@ -19,7 +21,11 @@ class ClickableLink extends StatelessWidget {
         onTap: () => onTap(),
         child: Text(title,
             style: themeData.textTheme.bodyMedium!.copyWith(
-                fontSize: responsiveValue.isMobile ? 14 : 16,
+                fontSize: fontSize != null
+                    ? fontSize!
+                    : responsiveValue.isMobile
+                        ? 14
+                        : 16,
                 decoration: TextDecoration.underline,
                 decorationColor: themeData.colorScheme.secondary,
                 color: themeData.colorScheme.secondary)));

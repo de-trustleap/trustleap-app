@@ -1847,6 +1847,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get promoter_page_edit_promoter_snackbar_title => (super.noSuchMethod(
+        Invocation.getter(#promoter_page_edit_promoter_snackbar_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_page_edit_promoter_snackbar_title),
+        ),
+      ) as String);
+
+  @override
   String get promoter_overview_title => (super.noSuchMethod(
         Invocation.getter(#promoter_overview_title),
         returnValue: _i3.dummyValue<String>(
@@ -2026,6 +2035,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#promoter_overview_error_view_title),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_edit_promoter_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_edit_promoter_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_edit_promoter_tooltip),
         ),
       ) as String);
 
@@ -4087,6 +4105,33 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#landingpage_pagebuilder_footer_config_impressum),
+        ),
+      ) as String);
+
+  @override
+  String get edit_promoter_title => (super.noSuchMethod(
+        Invocation.getter(#edit_promoter_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#edit_promoter_title),
+        ),
+      ) as String);
+
+  @override
+  String get edit_promoter_subtitle => (super.noSuchMethod(
+        Invocation.getter(#edit_promoter_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#edit_promoter_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get edit_promoter_save_button_title => (super.noSuchMethod(
+        Invocation.getter(#edit_promoter_save_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#edit_promoter_save_button_title),
         ),
       ) as String);
 

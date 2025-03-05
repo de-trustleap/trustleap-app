@@ -2251,6 +2251,15 @@ class MockAppLocalizations extends _i1.Mock implements _i19.AppLocalizations {
       ) as String);
 
   @override
+  String get promoter_page_edit_promoter_snackbar_title => (super.noSuchMethod(
+        Invocation.getter(#promoter_page_edit_promoter_snackbar_title),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_page_edit_promoter_snackbar_title),
+        ),
+      ) as String);
+
+  @override
   String get promoter_overview_title => (super.noSuchMethod(
         Invocation.getter(#promoter_overview_title),
         returnValue: _i20.dummyValue<String>(
@@ -2430,6 +2439,15 @@ class MockAppLocalizations extends _i1.Mock implements _i19.AppLocalizations {
         returnValue: _i20.dummyValue<String>(
           this,
           Invocation.getter(#promoter_overview_error_view_title),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_edit_promoter_tooltip => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_edit_promoter_tooltip),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_edit_promoter_tooltip),
         ),
       ) as String);
 
@@ -4495,6 +4513,33 @@ class MockAppLocalizations extends _i1.Mock implements _i19.AppLocalizations {
       ) as String);
 
   @override
+  String get edit_promoter_title => (super.noSuchMethod(
+        Invocation.getter(#edit_promoter_title),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(#edit_promoter_title),
+        ),
+      ) as String);
+
+  @override
+  String get edit_promoter_subtitle => (super.noSuchMethod(
+        Invocation.getter(#edit_promoter_subtitle),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(#edit_promoter_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get edit_promoter_save_button_title => (super.noSuchMethod(
+        Invocation.getter(#edit_promoter_save_button_title),
+        returnValue: _i20.dummyValue<String>(
+          this,
+          Invocation.getter(#edit_promoter_save_button_title),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -5364,6 +5409,27 @@ class MockPromoterRepository extends _i1.Mock
           ),
         )),
       ) as _i15.Future<_i2.Either<_i23.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i15.Future<
+      _i2.Either<_i23.DatabaseFailure, List<_i30.LandingPage>>> getLandingPages(
+          List<String>? ids) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getLandingPages,
+          [ids],
+        ),
+        returnValue: _i15.Future<
+                _i2.Either<_i23.DatabaseFailure, List<_i30.LandingPage>>>.value(
+            _FakeEither_0<_i23.DatabaseFailure, List<_i30.LandingPage>>(
+          this,
+          Invocation.method(
+            #getLandingPages,
+            [ids],
+          ),
+        )),
+      ) as _i15
+          .Future<_i2.Either<_i23.DatabaseFailure, List<_i30.LandingPage>>>);
 }
 
 /// A class which mocks [UserRepository].
@@ -8085,6 +8151,24 @@ class MockPromoterObserverCubit extends _i1.Mock
       );
 
   @override
+  bool showLandingPageWarning(_i50.Promoter? promoter) => (super.noSuchMethod(
+        Invocation.method(
+          #showLandingPageWarning,
+          [promoter],
+        ),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  void stopObserving() => super.noSuchMethod(
+        Invocation.method(
+          #stopObserving,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i15.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
@@ -8339,6 +8423,15 @@ class MockLandingPageObserverCubit extends _i1.Mock
         Invocation.method(
           #landingPageObserverUpdated,
           [failureOrUser],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void stopObserving() => super.noSuchMethod(
+        Invocation.method(
+          #stopObserving,
+          [],
         ),
         returnValueForMissingStub: null,
       );

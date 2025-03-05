@@ -1379,16 +1379,16 @@ abstract class AppLocalizations {
   /// **'Member since {date}'**
   String promoter_overview_creation_date(String date);
 
-  /// Tooltip for the edit promoter button
+  /// Text for the edit promoter button in the three dots menu on the promoter overview page
   ///
   /// In en, this message translates to:
-  /// **'Edit promoter'**
+  /// **'Edit'**
   String get promoter_overview_edit_promoter_tooltip;
 
-  /// Tooltip for the delete promoter button
+  /// Text for the delete promoter button in the three dots menu on the promoter overview page
   ///
   /// In en, this message translates to:
-  /// **'Delete promoter'**
+  /// **'Delete'**
   String get promoter_overview_delete_promoter_tooltip;
 
   /// Title for the promoter deletion alert
@@ -2620,6 +2620,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save changes'**
   String get edit_promoter_save_button_title;
+
+  /// Tooltip for inactive landingpages on the edit promoter page.
+  ///
+  /// In en, this message translates to:
+  /// **'This landingpage is not active'**
+  String get edit_promoter_inactive_landingpage_tooltip;
+
+  /// Tooltip button for landingpage activation on the edit promoter page.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate landingpage'**
+  String get edit_promoter_inactive_landingpage_tooltip_activate_action;
+
+  /// Tooltip warning for inactive landingpages on the promoter overview.
+  ///
+  /// In en, this message translates to:
+  /// **'The promoter doesnt have active assinged landingpages'**
+  String get promoter_overview_inactive_landingpage_tooltip_warning;
+
+  /// Tooltip warning button for inactive landingpages on the promoter overview.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign landingpage'**
+  String get promoter_overview_inactive_landingpage_tooltip_warning_action;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

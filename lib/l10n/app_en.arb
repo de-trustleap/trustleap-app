@@ -878,13 +878,13 @@
             }
         }
     },
-    "promoter_overview_edit_promoter_tooltip": "Edit promoter",
+    "promoter_overview_edit_promoter_tooltip": "Edit",
     "@promoter_overview_edit_promoter_tooltip": {
-        "description": "Tooltip for the edit promoter button"
+        "description": "Text for the edit promoter button in the three dots menu on the promoter overview page"
     },
-    "promoter_overview_delete_promoter_tooltip": "Delete promoter",
+    "promoter_overview_delete_promoter_tooltip": "Delete",
     "@promoter_overview_delete_promoter_tooltip": {
-        "description": "Tooltip for the delete promoter button"
+        "description": "Text for the delete promoter button in the three dots menu on the promoter overview page"
     },
     "promoter_overview_delete_promoter_alert_title": "Should the selected promoter really be deleted?",
     "@promoter_overview_delete_promoter_alert_title": {
@@ -1705,5 +1705,21 @@
     "edit_promoter_save_button_title": "Save changes",
     "@edit_promoter_save_button_title": {
         "description": "Title of the save button on the edit promoter page"
+    },
+    "edit_promoter_inactive_landingpage_tooltip": "This landingpage is not active",
+    "@edit_promoter_inactive_landingpage_tooltip": {
+        "description": "Tooltip for inactive landingpages on the edit promoter page."
+    },
+    "edit_promoter_inactive_landingpage_tooltip_activate_action": "Activate landingpage",
+    "@edit_promoter_inactive_landingpage_tooltip_activate_action": {
+        "description": "Tooltip button for landingpage activation on the edit promoter page."
+    },
+    "promoter_overview_inactive_landingpage_tooltip_warning": "The promoter doesnt have active assinged landingpages",
+    "@promoter_overview_inactive_landingpage_tooltip_warning": {
+        "description": "Tooltip warning for inactive landingpages on the promoter overview."
+    },
+    "promoter_overview_inactive_landingpage_tooltip_warning_action": "Assign landingpage",
+    "@promoter_overview_inactive_landingpage_tooltip_warning_action": {
+        "description": "Tooltip warning button for inactive landingpages on the promoter overview."
     }
 }

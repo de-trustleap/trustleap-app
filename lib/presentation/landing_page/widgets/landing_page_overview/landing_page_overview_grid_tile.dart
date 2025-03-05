@@ -174,7 +174,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                 ],
                                 if (landingPage.ownerID == user.id)
                                   PopupMenuItem(
-                                      value: "troggelActiveDeaktive",
+                                      value: "toggleActivation",
                                       child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -206,7 +206,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                   landingPage.ownerID?.value ?? "");
                             } else if (newValue == "duplicate") {
                               duplicatePressed(landingPage.id.value);
-                            } else if (newValue == "troggelActiveDeaktive") {
+                            } else if (newValue == "toggleActivation") {
                               isActivePressed(landingPage.id.value,
                                   !(landingPage.isActive ?? false));
                             }

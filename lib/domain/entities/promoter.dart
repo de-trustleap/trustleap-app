@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 
@@ -13,47 +14,52 @@ class Promoter extends Equatable {
   final String? birthDate;
   final String? email;
   final String? thumbnailDownloadURL;
+  final List<String>? landingPageIDs;
+  final List<LandingPage>? landingPages;
   final bool? registered;
   final DateTime? expiresAt;
   final DateTime? createdAt;
 
-  const Promoter({
-    required this.id,
-    this.gender,
-    this.firstName,
-    this.lastName,
-    this.birthDate,
-    this.email,
-    this.thumbnailDownloadURL,
-    this.registered,
-    this.expiresAt,
-    this.createdAt
-  });
+  const Promoter(
+      {required this.id,
+      this.gender,
+      this.firstName,
+      this.lastName,
+      this.birthDate,
+      this.email,
+      this.thumbnailDownloadURL,
+      this.landingPageIDs,
+      this.landingPages,
+      this.registered,
+      this.expiresAt,
+      this.createdAt});
 
-  Promoter copyWith({
-    UniqueID? id,
-    Gender? gender,
-    String? firstName,
-    String? lastName,
-    String? birthDate,
-    String? email,
-    String? thumbnailDownloadURL,
-    bool? registered,
-    DateTime? expiresAt,
-    DateTime? createdAt
-  }) {
+  Promoter copyWith(
+      {UniqueID? id,
+      Gender? gender,
+      String? firstName,
+      String? lastName,
+      String? birthDate,
+      String? email,
+      String? thumbnailDownloadURL,
+      List<String>? landingPageIDs,
+      List<LandingPage>? landingPages,
+      bool? registered,
+      DateTime? expiresAt,
+      DateTime? createdAt}) {
     return Promoter(
-      id: id ?? this.id,
-      gender: gender ?? this.gender,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      birthDate: birthDate ?? this.birthDate,
-      email: email ?? this.email,
-      thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-      registered: registered ?? this.registered,
-      expiresAt: expiresAt ?? this.expiresAt,
-      createdAt: createdAt ?? this.createdAt
-    );
+        id: id ?? this.id,
+        gender: gender ?? this.gender,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        birthDate: birthDate ?? this.birthDate,
+        email: email ?? this.email,
+        thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+        landingPageIDs: landingPageIDs ?? this.landingPageIDs,
+        landingPages: landingPages ?? this.landingPages,
+        registered: registered ?? this.registered,
+        expiresAt: expiresAt ?? this.expiresAt,
+        createdAt: createdAt ?? this.createdAt);
   }
 
   factory Promoter.fromUser(CustomUser user) {
@@ -65,6 +71,7 @@ class Promoter extends Equatable {
         birthDate: user.birthDate,
         email: user.email,
         thumbnailDownloadURL: user.thumbnailDownloadURL,
+        landingPageIDs: user.landingPageIDs,
         registered: true,
         expiresAt: null,
         createdAt: user.createdAt);
@@ -79,6 +86,7 @@ class Promoter extends Equatable {
         birthDate: promoter.birthDate,
         email: promoter.email,
         thumbnailDownloadURL: null,
+        landingPageIDs: promoter.landingPageIDs,
         registered: false,
         expiresAt: promoter.expiresAt);
   }
@@ -92,6 +100,8 @@ class Promoter extends Equatable {
         birthDate,
         email,
         thumbnailDownloadURL,
+        landingPageIDs,
+        landingPages,
         registered
       ];
 }

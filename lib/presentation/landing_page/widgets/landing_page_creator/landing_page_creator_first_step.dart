@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_c
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorFirstStep extends StatefulWidget {
@@ -42,12 +43,12 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
   void initState() {
     super.initState();
     id = UniqueID();
-    BlocProvider.of<LandingPageCubit>(context).getUser();
+    Modular.get<LandingPageCubit>().getUser();
   }
 
   void _onContinue(LandingPage landingPage) {
     this.landingPage = landingPage;
-    BlocProvider.of<LandingPageCubit>(context)
+    Modular.get<LandingPageCubit>()
         .checkLandingPageImage(widget.landingPage, image);
   }
 
@@ -83,10 +84,12 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
 
   @override
   Widget build(BuildContext context) {
+    final landingPageCubit = Modular.get<LandingPageCubit>();
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
 
     return BlocListener<LandingPageCubit, LandingPageState>(
+        bloc: landingPageCubit,
         listener: (context, state) {
           if (state is LandingPageNoImageFailureState) {
             setState(() {

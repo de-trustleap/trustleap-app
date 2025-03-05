@@ -878,13 +878,13 @@
             }
         }
     },
-    "promoter_overview_edit_promoter_tooltip": "Promoter anpassen",
+    "promoter_overview_edit_promoter_tooltip": "Bearbeiten",
     "@promoter_overview_edit_promoter_tooltip": {
-        "description": "Tooltip für den Promoter anpassen Button"
+        "description": "Text für den Promoter bearbeiten Button im Drei Punkte Menü auf der Promoter Übersichtsseite"
     },
-    "promoter_overview_delete_promoter_tooltip": "Promoter löschen",
+    "promoter_overview_delete_promoter_tooltip": "Löschen",
     "@promoter_overview_delete_promoter_tooltip": {
-        "description": "Tooltip für den Promoter löschen Button"
+        "description": "Text für den Promoter löschen Button im Drei Punkte Menü auf der Promoter Übersichtsseite"
     },
     "promoter_overview_delete_promoter_alert_title": "Soll der ausgewählte Promoter wirklich gelöscht werden?",
     "@promoter_overview_delete_promoter_alert_title": {
@@ -1705,5 +1705,21 @@
     "edit_promoter_save_button_title": "Änderungen speichern",
     "@edit_promoter_save_button_title": {
         "description": "Titel des Speichern Buttons der Promoter bearbeiten Seite"
+    },
+    "edit_promoter_inactive_landingpage_tooltip": "Diese Landingpage ist inaktiv",
+    "@edit_promoter_inactive_landingpage_tooltip": {
+        "description": "Tooltip für inaktive Landingpage auf der Promoter bearbeiten Seite."
+    },
+    "edit_promoter_inactive_landingpage_tooltip_activate_action": "Landingpage aktivieren",
+    "@edit_promoter_inactive_landingpage_tooltip_activate_action": {
+        "description": "Tooltip Button für inaktive Landingpage auf der Promoter bearbeiten Seite."
+    },
+    "promoter_overview_inactive_landingpage_tooltip_warning": "Der Promoter hat keine aktiven Landingpages mehr zugewiesen",
+    "@promoter_overview_inactive_landingpage_tooltip_warning": {
+        "description": "Tooltip Warnung für inaktive Landingpages auf der Promoter Übersicht."
+    },
+    "promoter_overview_inactive_landingpage_tooltip_warning_action": "Landingpage zuweisen",
+    "@promoter_overview_inactive_landingpage_tooltip_warning_action": {
+        "description": "Tooltip Warnung Button für inaktive Landingpages auf der Promoter Übersicht."
     }
 }

@@ -1,15 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
+import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_icon.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersOverviewGridTile extends StatelessWidget {
@@ -24,6 +29,9 @@ class PromotersOverviewGridTile extends StatelessWidget {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
+    final permissions = (context.watchModular<PermissionCubit>().state
+            as PermissionSuccessState)
+        .permissions;
 
     return Container(
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
@@ -42,30 +50,87 @@ class PromotersOverviewGridTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    IconButton(
-                        onPressed: () {
-                          deletePressed(promoter.id.value);
-                        },
-                        iconSize: 24,
-                        tooltip: localization
-                            .promoter_overview_delete_promoter_tooltip,
-                        icon: Icon(Icons.delete,
-                            color: themeData.colorScheme.secondary, size: 24)),
+                    if (Modular.get<PromoterObserverCubit>()
+                        .showLandingPageWarning(promoter)) ...[
+                      TooltipIcon(
+                          icon: Icons.warning,
+                          text: localization
+                              .promoter_overview_inactive_landingpage_tooltip_warning,
+                          buttonText: localization
+                              .promoter_overview_inactive_landingpage_tooltip_warning_action,
+                          showButton: permissions.hasEditPromoterPermission(),
+                          onPressed: () => {
+                                CustomNavigator.pushNamed(
+                                    "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
+                                    arguments: promoter)
+                              }),
+                    ],
                     const Spacer(),
-                    IconButton(
-                        onPressed: () {
-                          CustomNavigator.pushNamed(
-                              "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
-                              arguments: promoter);
-                        },
-                        iconSize: 24,
-                        tooltip: localization
-                            .promoter_overview_edit_promoter_tooltip,
-                        icon: Icon(Icons.edit,
-                            color: themeData.colorScheme.secondary, size: 24)),
-                    const Spacer(),
+                    if (permissions.hasEditPromoterPermission() ||
+                        permissions.hasDeletePromoterPermission()) ...[
+                      PopupMenuButton(
+                          itemBuilder: (context) => [
+                                if (permissions
+                                    .hasEditPromoterPermission()) ...[
+                                  PopupMenuItem(
+                                      value: "edit",
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Icon(Icons.delete,
+                                                color: themeData
+                                                    .colorScheme.secondary,
+                                                size: 24),
+                                            const SizedBox(width: 8),
+                                            Text(
+                                                localization
+                                                    .promoter_overview_edit_promoter_tooltip,
+                                                style: responsiveValue.isMobile
+                                                    ? themeData
+                                                        .textTheme.bodySmall
+                                                    : themeData
+                                                        .textTheme.bodyMedium)
+                                          ])),
+                                ],
+                                if (permissions
+                                    .hasDeletePromoterPermission()) ...[
+                                  PopupMenuItem(
+                                      value: "delete",
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Icon(Icons.copy,
+                                                color: themeData
+                                                    .colorScheme.secondary,
+                                                size: 24),
+                                            const SizedBox(width: 8),
+                                            Text(
+                                                localization
+                                                    .promoter_overview_delete_promoter_tooltip,
+                                                style: responsiveValue.isMobile
+                                                    ? themeData
+                                                        .textTheme.bodySmall
+                                                    : themeData
+                                                        .textTheme.bodyMedium)
+                                          ])),
+                                ]
+                              ],
+                          onSelected: (String newValue) {
+                            if (newValue == "delete") {
+                              deletePressed(promoter.id.value);
+                            } else if (newValue == "edit") {
+                              CustomNavigator.pushNamed(
+                                  "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
+                                  arguments: promoter);
+                            }
+                          })
+                    ]
                   ]),
-              if (promoter.registered != null && promoter.registered!) ...[
+              if (promoter.registered != null &&
+                  promoter.registered! &&
+                  promoter.thumbnailDownloadURL != null) ...[
                 CachedNetworkImage(
                   width: responsiveValue.largerThan(MOBILE) ? 120 : 140,
                   height: responsiveValue.largerThan(MOBILE) ? 120 : 140,
