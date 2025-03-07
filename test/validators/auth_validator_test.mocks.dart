@@ -4136,6 +4136,51 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get edit_promoter_inactive_landingpage_tooltip => (super.noSuchMethod(
+        Invocation.getter(#edit_promoter_inactive_landingpage_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#edit_promoter_inactive_landingpage_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get edit_promoter_inactive_landingpage_tooltip_activate_action =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #edit_promoter_inactive_landingpage_tooltip_activate_action),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #edit_promoter_inactive_landingpage_tooltip_activate_action),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_inactive_landingpage_tooltip_warning =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #promoter_overview_inactive_landingpage_tooltip_warning),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_inactive_landingpage_tooltip_warning),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_inactive_landingpage_tooltip_warning_action =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #promoter_overview_inactive_landingpage_tooltip_warning_action),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #promoter_overview_inactive_landingpage_tooltip_warning_action),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
