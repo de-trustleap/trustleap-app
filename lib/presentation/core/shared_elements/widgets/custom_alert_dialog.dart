@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String title;
   final String message;
+  final bool isLoading;
   final String actionButtonTitle;
   final String? cancelButtonTitle;
   final Function actionButtonAction;
@@ -14,6 +16,7 @@ class CustomAlertDialog extends StatelessWidget {
       {super.key,
       required this.title,
       required this.message,
+      this.isLoading = false,
       required this.actionButtonTitle,
       required this.actionButtonAction,
       this.cancelButtonTitle,
@@ -51,6 +54,12 @@ class CustomAlertDialog extends StatelessWidget {
                 fontWeight: FontWeight.bold)),
         contentPadding: const EdgeInsets.all(20),
         content:
-            SelectableText(message, style: themeData.textTheme.bodyMedium));
+            Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          if (isLoading) ...[
+            const LoadingIndicator()
+          ] else ...[
+            SelectableText(message, style: themeData.textTheme.bodyMedium)
+          ]
+        ]));
   }
 }

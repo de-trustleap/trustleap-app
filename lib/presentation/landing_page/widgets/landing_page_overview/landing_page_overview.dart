@@ -49,18 +49,49 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
         .toggleLandingPageActivity(id, isActive, userId);
   }
 
-  void showDeleteAlert(String id, parentUserID, AppLocalizations localization) {
+  void showDeleteAlertWithPromoterCheck(String id, String parentUserID,
+      List<String> associatedUsersIDs, AppLocalizations localization) {
+    final landingPageCubit = Modular.get<LandingPageCubit>();
+
     showDialog(
-        context: context,
-        builder: (_) {
-          return CustomAlertDialog(
-              title: localization.landingpage_delete_alert_title,
-              message: localization.landingpage_delete_alert_msg,
-              actionButtonTitle: localization.delete_buttontitle,
-              cancelButtonTitle: localization.cancel_buttontitle,
-              actionButtonAction: () => submitDeletion(id, parentUserID),
-              cancelButtonAction: () => CustomNavigator.pop());
-        });
+      context: context,
+      builder: (context) {
+        return BlocBuilder<LandingPageCubit, LandingPageState>(
+          bloc: landingPageCubit,
+          builder: (context, state) {
+            if (state is GetPromotersLoadingState) {
+              return CustomAlertDialog(
+                title: "",
+                message: "",
+                isLoading: true,
+                actionButtonTitle: localization.cancel_buttontitle,
+                actionButtonAction: () => CustomNavigator.pop(),
+              );
+            } else if (state is GetPromotersSuccessState) {
+              return CustomAlertDialog(
+                title: localization.landingpage_delete_alert_title,
+                message: "${state.promoters.length}",
+                actionButtonTitle: localization.delete_buttontitle,
+                cancelButtonTitle: localization.cancel_buttontitle,
+                actionButtonAction: () => submitDeletion(id, parentUserID),
+                cancelButtonAction: () => CustomNavigator.pop(),
+              );
+            } else {
+              return CustomAlertDialog(
+                title: localization.landingpage_delete_alert_title,
+                message: localization.landingpage_delete_alert_msg,
+                actionButtonTitle: localization.delete_buttontitle,
+                cancelButtonTitle: localization.cancel_buttontitle,
+                actionButtonAction: () => submitDeletion(id, parentUserID),
+                cancelButtonAction: () => CustomNavigator.pop(),
+              );
+            }
+          },
+        );
+      },
+    );
+
+    landingPageCubit.getPromoters(associatedUsersIDs, id);
   }
 
   @override
@@ -121,9 +152,13 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                         LandingPageOverviewGrid(
                             landingpages: observerState.landingPages,
                             user: observerState.user,
-                            deletePressed: (landingPageID, parentUserID) =>
-                                showDeleteAlert(
-                                    landingPageID, parentUserID, localization),
+                            deletePressed: (landingPageID, parentUserID,
+                                    associatedUsersIDs) =>
+                                showDeleteAlertWithPromoterCheck(
+                                    landingPageID,
+                                    parentUserID,
+                                    associatedUsersIDs,
+                                    localization),
                             duplicatePressed: (landinPageID) =>
                                 submitDuplication(landinPageID),
                             isActivePressed:

@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
+import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 
 abstract class LandingPageRepository {
@@ -33,4 +34,13 @@ abstract class LandingPageRepository {
 
   Future<Either<DatabaseFailure, List<LandingPageTemplate>>>
       getAllLandingPageTemplates();
+
+  Future<Either<DatabaseFailure, List<Promoter>>> getUnregisteredPromoters(
+      List<String> associatedUsersIDs);
+
+  Future<Either<DatabaseFailure, List<Promoter>>> getRegisteredPromoters(
+      List<String> associatedUsersIDs);
+
+  Future<Either<DatabaseFailure, List<LandingPage>>>
+      getLandingPagesForPromoters(List<Promoter> promoters);
 }
