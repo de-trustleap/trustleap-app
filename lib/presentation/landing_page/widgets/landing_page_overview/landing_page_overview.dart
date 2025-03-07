@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -49,8 +50,20 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
         .toggleLandingPageActivity(id, isActive, userId);
   }
 
-  void showDeleteAlertWithPromoterCheck(String id, String parentUserID,
-      List<String> associatedUsersIDs, AppLocalizations localization) {
+  List<String> _getPromoterNames(List<Promoter> promoters) {
+    return promoters
+        .map((promoter) =>
+            "• ${promoter.firstName ?? ''} ${promoter.lastName ?? ''}".trim())
+        .where((name) => name.isNotEmpty)
+        .toList();
+  }
+
+  void showDeleteAlertWithPromoterCheck(
+      String id,
+      String parentUserID,
+      List<String> associatedUsersIDs,
+      AppLocalizations localization,
+      ThemeData themeData) {
     final landingPageCubit = Modular.get<LandingPageCubit>();
 
     showDialog(
@@ -68,14 +81,40 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                 actionButtonAction: () => CustomNavigator.pop(),
               );
             } else if (state is GetPromotersSuccessState) {
-              return CustomAlertDialog(
-                title: localization.landingpage_delete_alert_title,
-                message: "${state.promoters.length}",
-                actionButtonTitle: localization.delete_buttontitle,
-                cancelButtonTitle: localization.cancel_buttontitle,
-                actionButtonAction: () => submitDeletion(id, parentUserID),
-                cancelButtonAction: () => CustomNavigator.pop(),
-              );
+              if (state.promoters.isEmpty) {
+                return CustomAlertDialog(
+                  title: localization.landingpage_delete_alert_title,
+                  message: localization.landingpage_delete_alert_msg,
+                  actionButtonTitle: localization.delete_buttontitle,
+                  cancelButtonTitle: localization.cancel_buttontitle,
+                  actionButtonAction: () => submitDeletion(id, parentUserID),
+                  cancelButtonAction: () => CustomNavigator.pop(),
+                );
+              } else {
+                return CustomAlertDialog(
+                  title: localization.landingpage_delete_alert_title,
+                  messageWidget: Text.rich(TextSpan(
+                      style: themeData.textTheme.bodyMedium,
+                      children: [
+                        const TextSpan(
+                            text:
+                                "Folgende Promoter haben keine aktiven Landingpages mehr zugewiesen, wenn Sie diese Seite löschen:\n\n"),
+                        TextSpan(
+                            text:
+                                "${_getPromoterNames(state.promoters).join('\n')}\n\n",
+                            style: themeData.textTheme.bodyMedium!
+                                .copyWith(color: themeData.colorScheme.error)),
+                        const TextSpan(
+                            text:
+                                "Möchten Sie trotzdem fortfahren? Die Aktion kann nicht rückgängig gemacht werden.")
+                      ])),
+                  message: "",
+                  actionButtonTitle: localization.delete_buttontitle,
+                  cancelButtonTitle: localization.cancel_buttontitle,
+                  actionButtonAction: () => submitDeletion(id, parentUserID),
+                  cancelButtonAction: () => CustomNavigator.pop(),
+                );
+              }
             } else {
               return CustomAlertDialog(
                 title: localization.landingpage_delete_alert_title,
@@ -158,7 +197,8 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                                     landingPageID,
                                     parentUserID,
                                     associatedUsersIDs,
-                                    localization),
+                                    localization,
+                                    themeData),
                             duplicatePressed: (landinPageID) =>
                                 submitDuplication(landinPageID),
                             isActivePressed:

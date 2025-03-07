@@ -186,6 +186,4 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     }).toList();
   }
 }
-// TODO: UI FERTIG MACHEN (NAMEN DER PROMOTER AUFLISTEN UND WARNUNG ANZEIGEN)
-// TODO: GRÖßE DES ALERTS ANPASSEN
 // TODO: LOCALIZATIONS
