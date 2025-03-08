@@ -231,7 +231,6 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
     try {
       await Future.forEach(chunks, (element) async {
         final document = await unregisteredCollection
-            .orderBy("name", descending: true)
             .where(FieldPath.documentId, whereIn: element)
             .get();
         querySnapshots.add(document);

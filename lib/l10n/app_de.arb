@@ -228,6 +228,14 @@
     "@landingpage_delete_alert_msg": {
         "description": "Message zum Landingpage Löschdialog"
     },
+    "landingpage_delete_alert_msg_promoter_warning": "Folgende Promoter haben keine aktiven Landingpages mehr zugewiesen, wenn Sie diese Seite löschen:\n\n",
+    "@landingpage_delete_alert_msg_promoter_warning": {
+        "description": "Message zum Landingpage Löschdialog wenn Promoter dadurch keine Landingpage mehr haben"
+    },
+    "landingpage_delete_alert_msg_promoter_warning_continue": "Möchten Sie trotzdem fortfahren? Die Aktion kann nicht rückgängig gemacht werden.",
+    "@landingpage_delete_alert_msg_promoter_warning_continue": {
+        "description": "Message zum Landingpage Löschdialog wenn Promoter dadurch keine Landingpage mehr haben fortfahren"
+    },
     "landingpage_success_delete_snackbar_message": "Landinpage erfolgreich gelöscht!",
     "@landingpage_success_delete_snackbar_message": {
         "description": "Snackbar Nachricht wenn eine Landingpage erfolgreich gelöscht wurden"

@@ -178,6 +178,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_delete_alert_msg => 'Das Löschen der Landingpage kann nicht rückgängig gemacht werden.';
 
   @override
+  String get landingpage_delete_alert_msg_promoter_warning => 'Folgende Promoter haben keine aktiven Landingpages mehr zugewiesen, wenn Sie diese Seite löschen:\n\n';
+
+  @override
+  String get landingpage_delete_alert_msg_promoter_warning_continue => 'Möchten Sie trotzdem fortfahren? Die Aktion kann nicht rückgängig gemacht werden.';
+
+  @override
   String get landingpage_success_delete_snackbar_message => 'Landinpage erfolgreich gelöscht!';
 
   @override
