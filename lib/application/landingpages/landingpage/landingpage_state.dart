@@ -188,3 +188,26 @@ class GetLandingPageTemplatesSuccessState extends LandingPageState
   @override
   List<Object> get props => [templates];
 }
+
+class GetPromotersLoadingState extends LandingPageState with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
+class GetPromotersFailureState extends LandingPageState with EquatableMixin {
+  final DatabaseFailure failure;
+  GetPromotersFailureState({
+    required this.failure,
+  });
+  @override
+  List<Object> get props => [failure];
+}
+
+class GetPromotersSuccessState extends LandingPageState with EquatableMixin {
+  final List<Promoter> promoters;
+  GetPromotersSuccessState({
+    required this.promoters,
+  });
+  @override
+  List<Object> get props => [promoters];
+}

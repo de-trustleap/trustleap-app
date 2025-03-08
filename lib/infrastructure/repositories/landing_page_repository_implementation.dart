@@ -10,11 +10,13 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
+import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_template_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_sorting_helper.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -212,6 +214,104 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
             LandingPageTemplateModel.fromFirestore(map, doc.id).toDomain());
       }
       return right(templates);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, List<Promoter>>> getUnregisteredPromoters(
+      List<String> associatedUsersIDs) async {
+    final unregisteredCollection =
+        firestore.collection("unregisteredPromoters");
+    // The ids needs to be sliced into chunks of 10 elements because the whereIn function can only process 10 elements at once.
+    final chunks = associatedUsersIDs.slices(10);
+    final List<QuerySnapshot<Map<String, dynamic>>> querySnapshots = [];
+    final List<Promoter> promoters = [];
+    try {
+      await Future.forEach(chunks, (element) async {
+        final document = await unregisteredCollection
+            .where(FieldPath.documentId, whereIn: element)
+            .get();
+        querySnapshots.add(document);
+      });
+      for (var document in querySnapshots) {
+        for (var snapshot in document.docs) {
+          var doc = snapshot.data();
+          var model = UnregisteredPromoterModel.fromFirestore(doc, snapshot.id)
+              .toDomain();
+          var promoter = Promoter.fromUnregisteredPromoter(model);
+          promoters.add(promoter);
+        }
+      }
+      return right(promoters);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, List<Promoter>>> getRegisteredPromoters(
+      List<String> associatedUsersIDs) async {
+    final registeredCollection = firestore.collection("users");
+    // The ids needs to be sliced into chunks of 10 elements because the whereIn function can only process 10 elements at once.
+    final chunks = associatedUsersIDs.slices(10);
+    final List<QuerySnapshot<Map<String, dynamic>>> querySnapshots = [];
+    final List<Promoter> promoters = [];
+    try {
+      await Future.forEach(chunks, (element) async {
+        final document = await registeredCollection
+            .where(FieldPath.documentId, whereIn: element)
+            .get();
+        querySnapshots.add(document);
+      });
+      for (var document in querySnapshots) {
+        for (var snapshot in document.docs) {
+          var doc = snapshot.data();
+          var model = UserModel.fromFirestore(doc, snapshot.id).toDomain();
+          var promoter = Promoter.fromUser(model);
+          promoters.add(promoter);
+        }
+      }
+      return right(promoters);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, List<LandingPage>>>
+      getLandingPagesForPromoters(List<Promoter> promoters) async {
+    final landingPageCollection = firestore.collection("landingPages");
+    try {
+      final Set<String> allLandingPageIDs = promoters
+          .expand((promoter) => promoter.landingPageIDs ?? [])
+          .toSet()
+          .cast<String>();
+
+      if (allLandingPageIDs.isEmpty) {
+        return right([]);
+      }
+      final List<QuerySnapshot<Map<String, dynamic>>> querySnapshots = [];
+      final List<LandingPage> landingPages = [];
+
+      final chunks = allLandingPageIDs.toList().slices(10);
+      await Future.forEach(chunks, (chunk) async {
+        final querySnapshot = await landingPageCollection
+            .where(FieldPath.documentId, whereIn: chunk)
+            .get();
+        querySnapshots.add(querySnapshot);
+      });
+      for (var snapshot in querySnapshots) {
+        for (var doc in snapshot.docs) {
+          var data = doc.data();
+          var landingPage =
+              LandingPageModel.fromFirestore(data, doc.id).toDomain();
+          landingPages.add(landingPage);
+        }
+      }
+
+      return right(landingPages);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }

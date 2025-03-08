@@ -18,7 +18,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
   final LandingPage landingPage;
   final CustomUser user;
   final bool isDuplicationAllowed;
-  final Function(String, String) deletePressed;
+  final Function(String, String, List<String>) deletePressed;
   final Function(String) duplicatePressed;
   final Function(String, bool) isActivePressed;
 
@@ -202,8 +202,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                               ],
                           onSelected: (String newValue) {
                             if (newValue == "delete") {
-                              deletePressed(landingPage.id.value,
-                                  landingPage.ownerID?.value ?? "");
+                              deletePressed(
+                                  landingPage.id.value,
+                                  landingPage.ownerID?.value ?? "",
+                                  landingPage.associatedUsersIDs ?? []);
                             } else if (newValue == "duplicate") {
                               duplicatePressed(landingPage.id.value);
                             } else if (newValue == "toggleActivation") {
