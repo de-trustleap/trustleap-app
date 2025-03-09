@@ -243,7 +243,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_creation_privacy_policy_placeholder => 'Datenschutzerklärung';
 
   @override
-  String get landingpage_creation_initial_information_placeholder => 'Erstinformation';
+  String get landingpage_creation_initial_information_placeholder => 'Erstinformation (optional)';
+
+  @override
+  String get landingpage_creation_terms_and_conditions_placeholder => 'Allgemeine Geschäftsbedingungen (optional)';
 
   @override
   String get landingpage_creation_back_button_text => 'Zurück';

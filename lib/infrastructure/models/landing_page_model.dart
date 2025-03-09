@@ -21,6 +21,7 @@ class LandingPageModel extends Equatable {
   final String? impressum;
   final String? privacyPolicy;
   final String? initialInformation;
+  final String? termsAndConditions;
 
   const LandingPageModel(
       {required this.id,
@@ -38,7 +39,8 @@ class LandingPageModel extends Equatable {
       this.isActive,
       this.impressum,
       this.privacyPolicy,
-      this.initialInformation});
+      this.initialInformation,
+      this.termsAndConditions});
 
   LandingPageModel copyWith(
       {String? id,
@@ -56,7 +58,8 @@ class LandingPageModel extends Equatable {
       bool? isActive,
       String? impressum,
       String? privacyPolicy,
-      String? initialInformation}) {
+      String? initialInformation,
+      String? termsAndConditions}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -73,7 +76,8 @@ class LandingPageModel extends Equatable {
         isActive: isActive ?? this.isActive,
         impressum: impressum ?? this.impressum,
         privacyPolicy: privacyPolicy ?? this.privacyPolicy,
-        initialInformation: initialInformation ?? this.initialInformation);
+        initialInformation: initialInformation ?? this.initialInformation,
+        termsAndConditions: termsAndConditions ?? this.termsAndConditions);
   }
 
   Map<String, dynamic> toMap() {
@@ -93,7 +97,8 @@ class LandingPageModel extends Equatable {
       'isActive': isActive,
       'impressum': impressum,
       'privacyPolicy': privacyPolicy,
-      'initialInformation': initialInformation
+      'initialInformation': initialInformation,
+      'termsAndConditions': termsAndConditions
     };
   }
 
@@ -131,6 +136,9 @@ class LandingPageModel extends Equatable {
             : null,
         initialInformation: map['initialInformation'] != null
             ? map['initialInformation'] as String
+            : null,
+        termsAndConditions: map['termsAndConditions'] != null
+            ? map['termsAndConditions'] as String
             : null);
   }
 
@@ -156,7 +164,8 @@ class LandingPageModel extends Equatable {
         isActive: isActive,
         impressum: impressum,
         privacyPolicy: privacyPolicy,
-        initialInformation: initialInformation);
+        initialInformation: initialInformation,
+        termsAndConditions: termsAndConditions);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -176,7 +185,8 @@ class LandingPageModel extends Equatable {
         isActive: landingPage.isActive,
         impressum: landingPage.impressum,
         privacyPolicy: landingPage.privacyPolicy,
-        initialInformation: landingPage.initialInformation);
+        initialInformation: landingPage.initialInformation,
+        termsAndConditions: landingPage.termsAndConditions);
   }
 
   @override
@@ -193,6 +203,7 @@ class LandingPageModel extends Equatable {
         isActive,
         impressum,
         privacyPolicy,
-        initialInformation
+        initialInformation,
+        termsAndConditions
       ];
 }

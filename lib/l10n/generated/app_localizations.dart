@@ -566,8 +566,14 @@ abstract class AppLocalizations {
   /// Placeholder for initial information in landingpage creation form
   ///
   /// In en, this message translates to:
-  /// **'Initial information'**
+  /// **'Initial information (optional)'**
   String get landingpage_creation_initial_information_placeholder;
+
+  /// Placeholder for terms and conditions in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and conditions (optional)'**
+  String get landingpage_creation_terms_and_conditions_placeholder;
 
   /// Title for Back Button in Landingpage creation form
   ///

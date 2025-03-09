@@ -39,12 +39,4 @@ class LandingPageCreatorFormValidator {
       return null;
     }
   }
-
-  String? validateLandingPageInitialInformation(String? input) {
-    if (input == null || input.isEmpty) {
-      return localization.landingpage_validate_initial_information;
-    } else {
-      return null;
-    }
-  }
 }
