@@ -322,9 +322,13 @@
     "@landingpage_creation_privacy_policy_placeholder": {
         "description": "Placeholder for privacy policy in landingpage creation form"
     },
-    "landingpage_creation_initial_information_placeholder": "Initial information",
+    "landingpage_creation_initial_information_placeholder": "Initial information (optional)",
     "@landingpage_creation_initial_information_placeholder": {
         "description": "Placeholder for initial information in landingpage creation form"
+    },
+    "landingpage_creation_terms_and_conditions_placeholder": "Terms and conditions (optional)",
+    "@landingpage_creation_terms_and_conditions_placeholder": {
+        "description": "Placeholder for terms and conditions in landingpage creation form"
     },
     "landingpage_creation_back_button_text": "Back",
     "@landingpage_creation_back_button_text": {

@@ -47,6 +47,7 @@ class _LandingPageCreatorSecondStepState
   final impressumTextController = TextEditingController();
   final privacyPolicyTextController = TextEditingController();
   final initialInformationTextController = TextEditingController();
+  final termsAndConditionsTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool validationHasError = false;
@@ -59,6 +60,8 @@ class _LandingPageCreatorSecondStepState
     privacyPolicyTextController.text = widget.landingPage?.privacyPolicy ?? "";
     initialInformationTextController.text =
         widget.landingPage?.initialInformation ?? "";
+    termsAndConditionsTextController.text =
+        widget.landingPage?.termsAndConditions ?? "";
   }
 
   @override
@@ -74,6 +77,10 @@ class _LandingPageCreatorSecondStepState
       initialInformationTextController.text =
           widget.landingPage?.initialInformation ?? "";
     }
+    if (termsAndConditionsTextController.text == "") {
+      termsAndConditionsTextController.text =
+          widget.landingPage?.termsAndConditions ?? "";
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -83,6 +90,7 @@ class _LandingPageCreatorSecondStepState
     impressumTextController.dispose();
     privacyPolicyTextController.dispose();
     initialInformationTextController.dispose();
+    termsAndConditionsTextController.dispose();
 
     super.dispose();
   }
@@ -95,7 +103,8 @@ class _LandingPageCreatorSecondStepState
               id: widget.id,
               impressum: impressumTextController.text.trim(),
               privacyPolicy: privacyPolicyTextController.text.trim(),
-              initialInformation: initialInformationTextController.text.trim()),
+              initialInformation: initialInformationTextController.text.trim(),
+              termsAndConditions: termsAndConditionsTextController.text.trim()),
           widget.image,
           widget.imageHasChanged,
           widget.isEditMode);
@@ -179,8 +188,21 @@ class _LandingPageCreatorSecondStepState
                                       disabled: false,
                                       placeholder: localization
                                           .landingpage_creation_initial_information_placeholder,
-                                      validator: validator
-                                          .validateLandingPageInitialInformation,
+                                      minLines: 5,
+                                      maxLines: 10,
+                                      keyboardType: TextInputType.multiline)
+                                ]),
+                            const SizedBox(height: textFieldSpacing),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FormTextfield(
+                                      maxWidth: maxWidth,
+                                      controller:
+                                          termsAndConditionsTextController,
+                                      disabled: false,
+                                      placeholder: localization
+                                          .landingpage_creation_terms_and_conditions_placeholder,
                                       minLines: 5,
                                       maxLines: 10,
                                       keyboardType: TextInputType.multiline)
@@ -232,3 +254,10 @@ class _LandingPageCreatorSecondStepState
         });
   }
 }
+
+// TODO: INITIAL INFORMATION OPTIONAL MACHEN (FERTIG)
+// TODO: AGS TEXTFIELD HINZUFÜGEN UND OPTIONAL MACHEN (FERTIG)
+// TODO: AGB ZU LANDINGPAGE MODELS HINZUFÜGEN (FERTIG)
+// TODO: BACKEND ANPASSEN (FERTIG)
+// TODO: LOCALIZATIONS (FERTIG)
+// TODO: ALLES TESTEN UND SCHAUEN OB AGBs IM FIRESTORE LANDEN. AUCH EDITIEREN TESTEN

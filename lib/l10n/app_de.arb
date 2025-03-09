@@ -322,9 +322,13 @@
     "@landingpage_creation_privacy_policy_placeholder": {
         "description": "Platzhalter für Datenschutzerklärung im Landingpage Erstellen Formular"
     },
-    "landingpage_creation_initial_information_placeholder": "Erstinformation",
+    "landingpage_creation_initial_information_placeholder": "Erstinformation (optional)",
     "@landingpage_creation_initial_information_placeholder": {
         "description": "Platzhalter für Erstinformation im Landingpage Erstellen Formular"
+    },
+    "landingpage_creation_terms_and_conditions_placeholder": "Allgemeine Geschäftsbedingungen (optional)",
+    "@landingpage_creation_terms_and_conditions_placeholder": {
+        "description": "Platzhalter für Allgemeine Geschäftsbedingungen im Landingpage Erstellen Formular"
     },
     "landingpage_creation_back_button_text": "Zurück",
     "@landingpage_creation_back_button_text": {
