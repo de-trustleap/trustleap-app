@@ -39,7 +39,8 @@ void main() {
           isActive: true,
           impressum: "Test",
           privacyPolicy: "Test",
-          initialInformation: "Test");
+          initialInformation: "Test",
+          termsAndConditions: "Test");
 
       final expectedResult = {
         "id": "1",
@@ -57,7 +58,8 @@ void main() {
         "isActive": true,
         "impressum": "Test",
         "privacyPolicy": "Test",
-        "initialInformation": "Test"
+        "initialInformation": "Test",
+        "termsAndConditions": "Test"
       };
       // When
       final result = model.toMap();
