@@ -101,6 +101,7 @@ class _LandingPageCreatorFormState
           impressum: widget.landingPage?.impressum,
           privacyPolicy: widget.landingPage?.privacyPolicy,
           initialInformation: widget.landingPage?.initialInformation,
+          termsAndConditions: widget.landingPage?.termsAndConditions,
           ownerID: user!.id));
     } else {
       validationHasError = true;
