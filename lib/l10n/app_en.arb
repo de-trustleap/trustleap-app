@@ -330,6 +330,14 @@
     "@landingpage_creation_terms_and_conditions_placeholder": {
         "description": "Placeholder for terms and conditions in landingpage creation form"
     },
+    "landingpage_creation_scripts_description": "Javascript <script> tags can be entered below.\nThis is used, for example, to integrate cookie banners or tracking tools into the landing page.",
+    "@landingpage_creation_scripts_description": {
+        "description": "Description for script tags in landingpage creation form"
+    },
+    "landingpage_creation_scripts_placeholder": "Script tags (optional)",
+    "@landingpage_creation_scripts_placeholder": {
+        "description": "Placeholder for script tags in landingpage creation form"
+    },
     "landingpage_creation_back_button_text": "Back",
     "@landingpage_creation_back_button_text": {
         "description": "Title for Back Button in Landingpage creation form"

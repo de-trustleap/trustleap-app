@@ -575,6 +575,18 @@ abstract class AppLocalizations {
   /// **'Terms and conditions (optional)'**
   String get landingpage_creation_terms_and_conditions_placeholder;
 
+  /// Description for script tags in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Javascript <script> tags can be entered below.\nThis is used, for example, to integrate cookie banners or tracking tools into the landing page.'**
+  String get landingpage_creation_scripts_description;
+
+  /// Placeholder for script tags in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Script tags (optional)'**
+  String get landingpage_creation_scripts_placeholder;
+
   /// Title for Back Button in Landingpage creation form
   ///
   /// In en, this message translates to:

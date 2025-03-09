@@ -249,6 +249,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_creation_terms_and_conditions_placeholder => 'Terms and conditions (optional)';
 
   @override
+  String get landingpage_creation_scripts_description => 'Javascript <script> tags can be entered below.\nThis is used, for example, to integrate cookie banners or tracking tools into the landing page.';
+
+  @override
+  String get landingpage_creation_scripts_placeholder => 'Script tags (optional)';
+
+  @override
   String get landingpage_creation_back_button_text => 'Back';
 
   @override

@@ -22,6 +22,7 @@ class LandingPageModel extends Equatable {
   final String? privacyPolicy;
   final String? initialInformation;
   final String? termsAndConditions;
+  final String? scriptTags;
 
   const LandingPageModel(
       {required this.id,
@@ -40,7 +41,8 @@ class LandingPageModel extends Equatable {
       this.impressum,
       this.privacyPolicy,
       this.initialInformation,
-      this.termsAndConditions});
+      this.termsAndConditions,
+      this.scriptTags});
 
   LandingPageModel copyWith(
       {String? id,
@@ -59,7 +61,8 @@ class LandingPageModel extends Equatable {
       String? impressum,
       String? privacyPolicy,
       String? initialInformation,
-      String? termsAndConditions}) {
+      String? termsAndConditions,
+      String? scriptTags}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -77,7 +80,8 @@ class LandingPageModel extends Equatable {
         impressum: impressum ?? this.impressum,
         privacyPolicy: privacyPolicy ?? this.privacyPolicy,
         initialInformation: initialInformation ?? this.initialInformation,
-        termsAndConditions: termsAndConditions ?? this.termsAndConditions);
+        termsAndConditions: termsAndConditions ?? this.termsAndConditions,
+        scriptTags: scriptTags ?? this.scriptTags);
   }
 
   Map<String, dynamic> toMap() {
@@ -98,7 +102,8 @@ class LandingPageModel extends Equatable {
       'impressum': impressum,
       'privacyPolicy': privacyPolicy,
       'initialInformation': initialInformation,
-      'termsAndConditions': termsAndConditions
+      'termsAndConditions': termsAndConditions,
+      'scripts': scriptTags
     };
   }
 
@@ -139,7 +144,8 @@ class LandingPageModel extends Equatable {
             : null,
         termsAndConditions: map['termsAndConditions'] != null
             ? map['termsAndConditions'] as String
-            : null);
+            : null,
+        scriptTags: map['scripts'] != null ? map['scripts'] as String : null);
   }
 
   factory LandingPageModel.fromFirestore(Map<String, dynamic> doc, String id) {
@@ -165,7 +171,8 @@ class LandingPageModel extends Equatable {
         impressum: impressum,
         privacyPolicy: privacyPolicy,
         initialInformation: initialInformation,
-        termsAndConditions: termsAndConditions);
+        termsAndConditions: termsAndConditions,
+        scriptTags: scriptTags);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -186,7 +193,8 @@ class LandingPageModel extends Equatable {
         impressum: landingPage.impressum,
         privacyPolicy: landingPage.privacyPolicy,
         initialInformation: landingPage.initialInformation,
-        termsAndConditions: landingPage.termsAndConditions);
+        termsAndConditions: landingPage.termsAndConditions,
+        scriptTags: landingPage.scriptTags);
   }
 
   @override
@@ -204,6 +212,7 @@ class LandingPageModel extends Equatable {
         impressum,
         privacyPolicy,
         initialInformation,
-        termsAndConditions
+        termsAndConditions,
+        scriptTags
       ];
 }

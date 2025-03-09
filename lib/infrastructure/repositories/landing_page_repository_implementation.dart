@@ -79,6 +79,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
           LandingPageRepositorySortingHelper().sortLandingPages(landingPages);
       return right(sortedPages);
     } on FirebaseException catch (e) {
+      print("ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
@@ -105,6 +106,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "privacyPolicy": landingPage.privacyPolicy,
         "initialInformation": landingPage.initialInformation,
         "termsAndConditions": landingPage.termsAndConditions,
+        "scripts": landingPage.scriptTags,
         "ownerID": landingPageModel.ownerID,
         "imageData": base64Encode(imageData),
         "imageHasChanged": imageHasChanged,
@@ -149,6 +151,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "privacyPolicy": landingPage.privacyPolicy,
         "initialInformation": landingPage.initialInformation,
         "termsAndConditions": landingPage.termsAndConditions,
+        "scripts": landingPage.scriptTags,
         "ownerID": landingPage.ownerID?.value,
         "imageData": imageData != null ? base64Encode(imageData) : null,
         "imageHasChanged": imageHasChanged,

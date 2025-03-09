@@ -40,7 +40,8 @@ void main() {
           impressum: "Test",
           privacyPolicy: "Test",
           initialInformation: "Test",
-          termsAndConditions: "Test");
+          termsAndConditions: "Test",
+          scriptTags: "<script> Test </script>");
 
       final expectedResult = {
         "id": "1",
@@ -59,7 +60,8 @@ void main() {
         "impressum": "Test",
         "privacyPolicy": "Test",
         "initialInformation": "Test",
-        "termsAndConditions": "Test"
+        "termsAndConditions": "Test",
+        "scripts": "<script> Test </script>"
       };
       // When
       final result = model.toMap();
