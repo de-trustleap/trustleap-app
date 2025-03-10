@@ -20,6 +20,7 @@ class LandingPage extends Equatable {
   final String? privacyPolicy;
   final String? initialInformation;
   final String? termsAndConditions;
+  final String? scriptTags;
 
   const LandingPage(
       {required this.id,
@@ -38,7 +39,8 @@ class LandingPage extends Equatable {
       this.impressum,
       this.privacyPolicy,
       this.initialInformation,
-      this.termsAndConditions});
+      this.termsAndConditions,
+      this.scriptTags});
 
   LandingPage copyWith(
       {UniqueID? id,
@@ -57,7 +59,8 @@ class LandingPage extends Equatable {
       String? impressum,
       String? privacyPolicy,
       String? initialInformation,
-      String? termsAndConditions}) {
+      String? termsAndConditions,
+      String? scriptTags}) {
     return LandingPage(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -75,7 +78,8 @@ class LandingPage extends Equatable {
         impressum: impressum ?? this.impressum,
         privacyPolicy: privacyPolicy ?? this.privacyPolicy,
         initialInformation: initialInformation ?? this.initialInformation,
-        termsAndConditions: termsAndConditions ?? this.termsAndConditions);
+        termsAndConditions: termsAndConditions ?? this.termsAndConditions,
+        scriptTags: scriptTags ?? this.scriptTags);
   }
 
   @override
@@ -93,6 +97,7 @@ class LandingPage extends Equatable {
         impressum,
         privacyPolicy,
         initialInformation,
-        termsAndConditions
+        termsAndConditions,
+        scriptTags
       ];
 }

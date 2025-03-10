@@ -30,12 +30,6 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
     Modular.get<LandingPageObserverCubit>().observeAllLandingPages();
   }
 
-  @override
-  void dispose() {
-    Modular.get<LandingPageObserverCubit>().stopObserving();
-    super.dispose();
-  }
-
   void submitDeletion(String id, String parentUserID) {
     CustomNavigator.pop();
     Modular.get<LandingPageCubit>().deleteLandingPage(id, parentUserID);
@@ -96,17 +90,17 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                   messageWidget: Text.rich(TextSpan(
                       style: themeData.textTheme.bodyMedium,
                       children: [
-                        const TextSpan(
-                            text:
-                                "Folgende Promoter haben keine aktiven Landingpages mehr zugewiesen, wenn Sie diese Seite löschen:\n\n"),
+                        TextSpan(
+                            text: localization
+                                .landingpage_delete_alert_msg_promoter_warning),
                         TextSpan(
                             text:
                                 "${_getPromoterNames(state.promoters).join('\n')}\n\n",
                             style: themeData.textTheme.bodyMedium!
                                 .copyWith(color: themeData.colorScheme.error)),
-                        const TextSpan(
-                            text:
-                                "Möchten Sie trotzdem fortfahren? Die Aktion kann nicht rückgängig gemacht werden.")
+                        TextSpan(
+                            text: localization
+                                .landingpage_delete_alert_msg_promoter_warning_continue)
                       ])),
                   message: "",
                   actionButtonTitle: localization.delete_buttontitle,

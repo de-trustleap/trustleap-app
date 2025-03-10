@@ -186,4 +186,3 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     }).toList();
   }
 }
-// TODO: LOCALIZATIONS

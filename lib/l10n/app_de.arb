@@ -330,6 +330,14 @@
     "@landingpage_creation_terms_and_conditions_placeholder": {
         "description": "Platzhalter für Allgemeine Geschäftsbedingungen im Landingpage Erstellen Formular"
     },
+    "landingpage_creation_scripts_description": "Im Folgenden können Javascript <script> Tags eingetragen werden.\nDas dient beispielsweise dazu, Cookie Banner oder Tracking Tools in die Landingpage einzubinden.",
+    "@landingpage_creation_scripts_description": {
+        "description": "Beschreibung für Script Tags im Landingpage Erstellen Formular"
+    },
+    "landingpage_creation_scripts_placeholder": "Script Tags (optional)",
+    "@landingpage_creation_scripts_placeholder": {
+        "description": "Platzhalter für Script Tags im Landingpage Erstellen Formular"
+    },
     "landingpage_creation_back_button_text": "Zurück",
     "@landingpage_creation_back_button_text": {
         "description": "Titel für Zurück Button im Landingpage Erstellen Formular"
