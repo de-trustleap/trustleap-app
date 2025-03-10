@@ -30,14 +30,6 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
     Modular.get<LandingPageObserverCubit>().observeAllLandingPages();
   }
 
-  @override
-  void dispose() {
-    if (mounted) {
-      Modular.get<LandingPageObserverCubit>().stopObserving();
-    }
-    super.dispose();
-  }
-
   void submitDeletion(String id, String parentUserID) {
     CustomNavigator.pop();
     Modular.get<LandingPageCubit>().deleteLandingPage(id, parentUserID);

@@ -79,7 +79,6 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
           LandingPageRepositorySortingHelper().sortLandingPages(landingPages);
       return right(sortedPages);
     } on FirebaseException catch (e) {
-      print("ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
