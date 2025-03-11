@@ -11,18 +11,17 @@ class MenuItem extends StatefulWidget {
   final String path;
   final IconData icon;
   final MenuItems type;
-  final bool isURLMatching;
   final bool isCollapsed;
   final AnimationController? animationController;
 
-  const MenuItem(
-      {super.key,
-      required this.path,
-      required this.icon,
-      required this.type,
-      required this.isURLMatching,
-      required this.isCollapsed,
-      this.animationController});
+  const MenuItem({
+    super.key,
+    required this.path,
+    required this.icon,
+    required this.type,
+    required this.isCollapsed,
+    this.animationController,
+  });
 
   @override
   State<MenuItem> createState() => _MenuItemState();
@@ -37,9 +36,22 @@ class _MenuItemState extends State<MenuItem> {
     super.initState();
     if (widget.animationController != null) {
       _widthAnimation = Tween<double>(
-              begin: MenuDimensions.menuOpenWidth,
-              end: MenuDimensions.menuCollapsedWidth)
-          .animate(widget.animationController!);
+        begin: MenuDimensions.menuOpenWidth,
+        end: MenuDimensions.menuCollapsedWidth,
+      ).animate(widget.animationController!);
+    }
+  }
+
+  @override
+  void didUpdateWidget(MenuItem oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.animationController != widget.animationController) {
+      if (widget.animationController != null) {
+        _widthAnimation = Tween<double>(
+          begin: MenuDimensions.menuOpenWidth,
+          end: MenuDimensions.menuCollapsedWidth,
+        ).animate(widget.animationController!);
+      }
     }
   }
 
@@ -72,85 +84,105 @@ class _MenuItemState extends State<MenuItem> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    bool isCurrentlySelected =
+        (BlocProvider.of<MenuCubit>(context).state is MenuItemSelectedState &&
+            (BlocProvider.of<MenuCubit>(context).state as MenuItemSelectedState)
+                    .selectedMenuItem ==
+                widget.type);
 
-    return LayoutBuilder(builder: (context, constraints) {
-      final hoveredTransform = Matrix4.identity()..scale(1.1);
-      final transform = itemIsHovered ? hoveredTransform : Matrix4.identity();
-      final width = constraints.maxWidth;
-      const height = 56.0;
-      const padding = 12.0;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final hoveredTransform = Matrix4.identity()..scale(1.1);
+        final transform = itemIsHovered ? hoveredTransform : Matrix4.identity();
+        final width = constraints.maxWidth;
+        const height = 56.0;
+        const padding = 12.0;
 
-      return BlocBuilder<MenuCubit, MenuState>(
-        builder: (context, state) {
-          return MouseRegion(
+        return BlocListener<MenuCubit, MenuState>(
+          listener: (context, state) {
+            if (state is MenuItemSelectedState) {
+              setState(() {});
+            }
+          },
+          child: MouseRegion(
             cursor: SystemMouseCursors.click,
             onEnter: (_) => hoverOnItem(true),
             onExit: (_) => hoverOnItem(false),
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                BlocProvider.of<MenuCubit>(context).selectMenu(widget.type);
                 CustomNavigator.navigate(RoutePaths.homePath + widget.path);
+                BlocProvider.of<MenuCubit>(context).selectMenu(widget.type);
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Stack(children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    width: widget.isURLMatching
-                        ? _widthAnimation?.value ?? width
-                        : 0,
-                    height: height,
-                    curve: const Cubic(0.5, 0.8, 0.4, 1),
-                    decoration: BoxDecoration(
+                child: Stack(
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      width: isCurrentlySelected
+                          ? (_widthAnimation?.value ?? width)
+                          : 0,
+                      height: height,
+                      curve: const Cubic(0.5, 0.8, 0.4, 1),
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: widget.isURLMatching
+                        color: isCurrentlySelected
                             ? themeData.colorScheme.primary
-                            : themeData.colorScheme.surface),
-                  ),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    transform: transform,
-                    width: _widthAnimation?.value ?? width,
-                    height: height,
-                    curve: const Cubic(0.5, 0.8, 0.4, 1),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: padding, vertical: 16),
-                    child: Row(children: [
-                      Icon(widget.icon,
-                          color: widget.isURLMatching
-                              ? themeData.colorScheme.surface
-                              : themeData.iconTheme.color),
-                      // when animation controller is given then it should be desktop size and the
-                      // text is shown depending on animation value. If it is null then the text should
-                      // show up normally.
-                      if (widget.animationController != null) ...[
-                        if (_widthAnimation != null &&
-                            _widthAnimation!.value >=
-                                MenuDimensions.menuOpenWidth) ...[
-                          const SizedBox(width: 12),
-                          Text(getLocalizedMenuItem(localization),
-                              style: widget.isURLMatching
-                                  ? themeData.textTheme.bodyMedium!.copyWith(
-                                      color: themeData.colorScheme.surface)
-                                  : themeData.textTheme.bodyMedium),
-                        ]
-                      ] else ...[
-                        const SizedBox(width: 12),
-                        Text(getLocalizedMenuItem(localization),
-                            style: widget.isURLMatching
-                                ? themeData.textTheme.bodyMedium!.copyWith(
-                                    color: themeData.colorScheme.surface)
-                                : themeData.textTheme.bodyMedium)
-                      ]
-                    ]),
-                  ),
-                ]),
+                            : themeData.colorScheme.surface,
+                      ),
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      transform: transform,
+                      width: _widthAnimation?.value ?? width,
+                      height: height,
+                      curve: const Cubic(0.5, 0.8, 0.4, 1),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: padding,
+                        vertical: 16,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            widget.icon,
+                            color: isCurrentlySelected
+                                ? themeData.colorScheme.surface
+                                : themeData.iconTheme.color,
+                          ),
+                          if (widget.animationController != null)
+                            if (_widthAnimation != null &&
+                                _widthAnimation!.value >=
+                                    MenuDimensions.menuOpenWidth) ...[
+                              const SizedBox(width: 12),
+                              Text(
+                                getLocalizedMenuItem(localization),
+                                style: isCurrentlySelected
+                                    ? themeData.textTheme.bodyMedium!.copyWith(
+                                        color: themeData.colorScheme.surface,
+                                      )
+                                    : themeData.textTheme.bodyMedium,
+                              ),
+                            ] else ...[
+                              const SizedBox(width: 12),
+                              Text(
+                                getLocalizedMenuItem(localization),
+                                style: isCurrentlySelected
+                                    ? themeData.textTheme.bodyMedium!.copyWith(
+                                        color: themeData.colorScheme.surface)
+                                    : themeData.textTheme.bodyMedium,
+                              ),
+                            ]
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          );
-        },
-      );
-    });
+          ),
+        );
+      },
+    );
   }
 }
