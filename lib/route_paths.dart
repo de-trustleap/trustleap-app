@@ -1,3 +1,5 @@
+import 'package:finanzbegleiter/constants.dart';
+
 class RoutePaths {
   static const String adminPath = "/admin";
   static const String companyRequestsPath = "/company-requests";
@@ -19,4 +21,14 @@ class RoutePaths {
   static const String passwordReset = "/password-reset";
 
   static const String landingPageBuilderPath = "/landingpage-builder";
+
+  static Map<MenuItems, String> menuItemPaths = {
+    MenuItems.profile: RoutePaths.profilePath,
+    MenuItems.dashboard: RoutePaths.dashboardPath,
+    MenuItems.recommendations: RoutePaths.recommendationsPath,
+    MenuItems.promoters: RoutePaths.promotersPath,
+    MenuItems.landingpage: RoutePaths.landingPagePath,
+    MenuItems.activities: RoutePaths.activitiesPath,
+    MenuItems.adminCompanyRequests: RoutePaths.companyRequestsPath,
+  };
 }

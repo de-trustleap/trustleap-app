@@ -2,7 +2,6 @@
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/presentation/core/menu/menu_item.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/theme_switch.dart';
@@ -38,8 +37,6 @@ class SideMenu extends StatelessWidget {
                 path: RoutePaths.profilePath,
                 icon: Icons.person,
                 type: MenuItems.profile,
-                isURLMatching: CustomNavigator.currentPath
-                    .endsWith(RoutePaths.profilePath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 52),
@@ -47,8 +44,6 @@ class SideMenu extends StatelessWidget {
                 path: RoutePaths.dashboardPath,
                 icon: Icons.dashboard,
                 type: MenuItems.dashboard,
-                isURLMatching: CustomNavigator.currentPath
-                    .endsWith(RoutePaths.dashboardPath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 28),
@@ -56,8 +51,6 @@ class SideMenu extends StatelessWidget {
                 path: RoutePaths.recommendationsPath,
                 icon: Icons.thumb_up,
                 type: MenuItems.recommendations,
-                isURLMatching: CustomNavigator.currentPath
-                    .endsWith(RoutePaths.recommendationsPath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 28),
@@ -66,8 +59,6 @@ class SideMenu extends StatelessWidget {
                   path: RoutePaths.promotersPath,
                   icon: Icons.phone_bluetooth_speaker,
                   type: MenuItems.promoters,
-                  isURLMatching: CustomNavigator.currentPath
-                      .contains(RoutePaths.promotersPath),
                   isCollapsed: collapsed,
                   animationController: animationController),
               const SizedBox(height: 28),
@@ -77,8 +68,6 @@ class SideMenu extends StatelessWidget {
                   path: RoutePaths.landingPagePath,
                   icon: Icons.airplanemode_active,
                   type: MenuItems.landingpage,
-                  isURLMatching: CustomNavigator.currentPath
-                      .contains(RoutePaths.landingPagePath),
                   isCollapsed: collapsed,
                   animationController: animationController),
               const SizedBox(height: 28),
@@ -87,8 +76,6 @@ class SideMenu extends StatelessWidget {
                 path: RoutePaths.activitiesPath,
                 icon: Icons.history,
                 type: MenuItems.activities,
-                isURLMatching: CustomNavigator.currentPath
-                    .endsWith(RoutePaths.activitiesPath),
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 56),

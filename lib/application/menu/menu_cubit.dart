@@ -5,10 +5,15 @@ import 'package:finanzbegleiter/constants.dart';
 part 'menu_state.dart';
 
 class MenuCubit extends Cubit<MenuState> {
+  MenuItems? _previousMenuItem;
+
   MenuCubit() : super(MenuInitial());
 
   void selectMenu(MenuItems selectedMenuItem) {
-    emit(MenuItemSelectedState(selectedMenuItem: selectedMenuItem));
+    if (_previousMenuItem != selectedMenuItem) {
+      emit(MenuItemSelectedState(selectedMenuItem: selectedMenuItem));
+      _previousMenuItem = selectedMenuItem;
+    }
   }
 
   void collapseMenu(bool collapsed) {
