@@ -53,6 +53,44 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
                 })
           ],
         ),
+        const SizedBox(height: 10),
+        CollapsibleTile(
+          title: localization
+              .landingpage_pagebuilder_footer_config_initial_information,
+          children: [
+            PagebuilderConfigMenuTextConfig(
+                properties: (model.properties as PagebuilderFooterProperties)
+                    .initialInformationTextProperties,
+                onChanged: (textProperties) {
+                  final updatedProperties =
+                      (model.properties as PagebuilderFooterProperties)
+                          .copyWith(
+                              initialInformationTextProperties: textProperties);
+                  final updatedWidget =
+                      model.copyWith(properties: updatedProperties);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                })
+          ],
+        ),
+        const SizedBox(height: 10),
+        CollapsibleTile(
+          title: localization
+              .landingpage_pagebuilder_footer_config_terms_and_conditions,
+          children: [
+            PagebuilderConfigMenuTextConfig(
+                properties: (model.properties as PagebuilderFooterProperties)
+                    .termsAndConditionsTextProperties,
+                onChanged: (textProperties) {
+                  final updatedProperties =
+                      (model.properties as PagebuilderFooterProperties)
+                          .copyWith(
+                              termsAndConditionsTextProperties: textProperties);
+                  final updatedWidget =
+                      model.copyWith(properties: updatedProperties);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                })
+          ],
+        ),
       ]);
     } else {
       return const SizedBox.shrink();

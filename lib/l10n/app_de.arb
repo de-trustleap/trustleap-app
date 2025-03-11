@@ -1714,6 +1714,14 @@
     "@landingpage_pagebuilder_footer_config_impressum": {
         "description": "Ausklappares Menü für Impressum Konfiguration des Footers im Pagebuilder Config Menü"
     },
+    "landingpage_pagebuilder_footer_config_initial_information": "Erstinformation Konfiguration",
+    "@landingpage_pagebuilder_footer_config_initial_information": {
+        "description": "Ausklappares Menü für Erstinformation Konfiguration des Footers im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_footer_config_terms_and_conditions": "AGB Konfiguration",
+    "@landingpage_pagebuilder_footer_config_terms_and_conditions": {
+        "description": "Ausklappares Menü für AGB Konfiguration des Footers im Pagebuilder Config Menü"
+    },
     "edit_promoter_title": "Promoter bearbeiten",
     "@edit_promoter_title": {
         "description": "Titel der Promoter bearbeiten Seite"
