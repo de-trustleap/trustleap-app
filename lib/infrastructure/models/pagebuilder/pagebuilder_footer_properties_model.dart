@@ -7,10 +7,14 @@ class PagebuilderFooterPropertiesModel extends Equatable
     implements PageBuilderProperties {
   final Map<String, dynamic>? privacyPolicyTextProperties;
   final Map<String, dynamic>? impressumTextProperties;
+  final Map<String, dynamic>? initialInformationTextProperties;
+  final Map<String, dynamic>? termsAndConditionsTextProperties;
 
   const PagebuilderFooterPropertiesModel(
       {required this.privacyPolicyTextProperties,
-      required this.impressumTextProperties});
+      required this.impressumTextProperties,
+      required this.initialInformationTextProperties,
+      required this.termsAndConditionsTextProperties});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -20,30 +24,51 @@ class PagebuilderFooterPropertiesModel extends Equatable
     if (impressumTextProperties != null) {
       map['impressumTextProperties'] = impressumTextProperties;
     }
+    if (initialInformationTextProperties != null) {
+      map['initialInformationTextProperties'] =
+          initialInformationTextProperties;
+    }
+    if (termsAndConditionsTextProperties != null) {
+      map['termsAndConditionsTextProperties'] =
+          termsAndConditionsTextProperties;
+    }
     return map;
   }
 
   factory PagebuilderFooterPropertiesModel.fromMap(Map<String, dynamic> map) {
     return PagebuilderFooterPropertiesModel(
-      privacyPolicyTextProperties: map['privacyPolicyTextProperties'] != null
-          ? map['privacyPolicyTextProperties'] as Map<String, dynamic>
-          : null,
-      impressumTextProperties: map['impressumTextProperties'] != null
-          ? map['impressumTextProperties'] as Map<String, dynamic>
-          : null,
-    );
+        privacyPolicyTextProperties: map['privacyPolicyTextProperties'] != null
+            ? map['privacyPolicyTextProperties'] as Map<String, dynamic>
+            : null,
+        impressumTextProperties: map['impressumTextProperties'] != null
+            ? map['impressumTextProperties'] as Map<String, dynamic>
+            : null,
+        initialInformationTextProperties:
+            map['initialInformationTextProperties'] != null
+                ? map['initialInformationTextProperties']
+                    as Map<String, dynamic>
+                : null,
+        termsAndConditionsTextProperties:
+            map['termsAndConditionsTextProperties'] != null
+                ? map['termsAndConditionsTextProperties']
+                    as Map<String, dynamic>
+                : null);
   }
 
-  PagebuilderFooterPropertiesModel copyWith({
-    Map<String, dynamic>? privacyPolicyTextProperties,
-    Map<String, dynamic>? impressumTextProperties,
-  }) {
+  PagebuilderFooterPropertiesModel copyWith(
+      {Map<String, dynamic>? privacyPolicyTextProperties,
+      Map<String, dynamic>? impressumTextProperties,
+      Map<String, dynamic>? initialInformationTextProperties,
+      Map<String, dynamic>? termsAndConditionsTextProperties}) {
     return PagebuilderFooterPropertiesModel(
-      privacyPolicyTextProperties:
-          privacyPolicyTextProperties ?? this.privacyPolicyTextProperties,
-      impressumTextProperties:
-          impressumTextProperties ?? this.impressumTextProperties,
-    );
+        privacyPolicyTextProperties:
+            privacyPolicyTextProperties ?? this.privacyPolicyTextProperties,
+        impressumTextProperties:
+            impressumTextProperties ?? this.impressumTextProperties,
+        initialInformationTextProperties: initialInformationTextProperties ??
+            this.initialInformationTextProperties,
+        termsAndConditionsTextProperties: termsAndConditionsTextProperties ??
+            this.termsAndConditionsTextProperties);
   }
 
   PagebuilderFooterProperties toDomain() {
@@ -55,6 +80,18 @@ class PagebuilderFooterPropertiesModel extends Equatable
             : null,
         impressumTextProperties: impressumTextProperties != null
             ? PageBuilderTextPropertiesModel.fromMap(impressumTextProperties!)
+                .toDomain()
+            : null,
+        initialInformationTextProperties: initialInformationTextProperties !=
+                null
+            ? PageBuilderTextPropertiesModel.fromMap(
+                    initialInformationTextProperties!)
+                .toDomain()
+            : null,
+        termsAndConditionsTextProperties: termsAndConditionsTextProperties !=
+                null
+            ? PageBuilderTextPropertiesModel.fromMap(
+                    termsAndConditionsTextProperties!)
                 .toDomain()
             : null);
   }
@@ -72,10 +109,26 @@ class PagebuilderFooterPropertiesModel extends Equatable
             ? PageBuilderTextPropertiesModel.fromDomain(
                     properties.impressumTextProperties!)
                 .toMap()
-            : null);
+            : null,
+        initialInformationTextProperties:
+            properties.initialInformationTextProperties != null
+                ? PageBuilderTextPropertiesModel.fromDomain(
+                        properties.initialInformationTextProperties!)
+                    .toMap()
+                : null,
+        termsAndConditionsTextProperties:
+            properties.termsAndConditionsTextProperties != null
+                ? PageBuilderTextPropertiesModel.fromDomain(
+                        properties.termsAndConditionsTextProperties!)
+                    .toMap()
+                : null);
   }
 
   @override
-  List<Object?> get props =>
-      [privacyPolicyTextProperties, impressumTextProperties];
+  List<Object?> get props => [
+        privacyPolicyTextProperties,
+        impressumTextProperties,
+        initialInformationTextProperties,
+        termsAndConditionsTextProperties
+      ];
 }

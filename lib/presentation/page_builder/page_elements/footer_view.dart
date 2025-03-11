@@ -29,20 +29,43 @@ class PagebuilderFooterView extends StatelessWidget {
                         properties.privacyPolicyTextProperties?.alignment ??
                             TextAlign.center)
               ],
-              if (properties.privacyPolicyTextProperties != null &&
-                  properties.impressumTextProperties != null) ...[
+              if (properties.impressumTextProperties != null) ...[
                 const SizedBox(width: 8),
                 Text("|",
                     style: parser.getTextStyleFromProperties(
                         properties.impressumTextProperties)),
                 const SizedBox(width: 8),
-              ],
-              if (properties.impressumTextProperties != null) ...[
                 Text(properties.impressumTextProperties?.text ?? "",
                     style: parser.getTextStyleFromProperties(
                         properties.impressumTextProperties),
                     textAlign: properties.impressumTextProperties?.alignment ??
-                        TextAlign.center)
+                        TextAlign.center),
+              ],
+              if (properties.initialInformationTextProperties != null) ...[
+                const SizedBox(width: 8),
+                Text("|",
+                    style: parser.getTextStyleFromProperties(
+                        properties.impressumTextProperties)),
+                const SizedBox(width: 8),
+                Text(properties.initialInformationTextProperties?.text ?? "",
+                    style: parser.getTextStyleFromProperties(
+                        properties.initialInformationTextProperties),
+                    textAlign: properties
+                            .initialInformationTextProperties?.alignment ??
+                        TextAlign.center),
+              ],
+              if (properties.termsAndConditionsTextProperties != null) ...[
+                const SizedBox(width: 8),
+                Text("|",
+                    style: parser.getTextStyleFromProperties(
+                        properties.impressumTextProperties)),
+                const SizedBox(width: 8),
+                Text(properties.termsAndConditionsTextProperties?.text ?? "",
+                    style: parser.getTextStyleFromProperties(
+                        properties.termsAndConditionsTextProperties),
+                    textAlign: properties
+                            .termsAndConditionsTextProperties?.alignment ??
+                        TextAlign.center),
               ]
             ]));
   }

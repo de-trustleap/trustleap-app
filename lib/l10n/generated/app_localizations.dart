@@ -2633,6 +2633,18 @@ abstract class AppLocalizations {
   /// **'Impressum Configuration'**
   String get landingpage_pagebuilder_footer_config_impressum;
 
+  /// Collapsible Menu for initial information configuration of the footer in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Initial Information Configuration '**
+  String get landingpage_pagebuilder_footer_config_initial_information;
+
+  /// Collapsible Menu for terms and conditions configuration of the footer in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions Configuration'**
+  String get landingpage_pagebuilder_footer_config_terms_and_conditions;
+
   /// Title of the edit promoter page
   ///
   /// In en, this message translates to:

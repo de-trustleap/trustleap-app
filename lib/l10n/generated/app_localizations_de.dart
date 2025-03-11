@@ -1282,6 +1282,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_footer_config_impressum => 'Impressum Konfiguration';
 
   @override
+  String get landingpage_pagebuilder_footer_config_initial_information => 'Erstinformation Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_footer_config_terms_and_conditions => 'AGB Konfiguration';
+
+  @override
   String get edit_promoter_title => 'Promoter bearbeiten';
 
   @override

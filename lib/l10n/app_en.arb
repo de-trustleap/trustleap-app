@@ -1714,6 +1714,14 @@
     "@landingpage_pagebuilder_footer_config_impressum": {
         "description": "Collapsible Menu for impressum configuration of the footer in the pagebuilder config menu"
     },
+    "landingpage_pagebuilder_footer_config_initial_information": "Initial Information Configuration ",
+    "@landingpage_pagebuilder_footer_config_initial_information": {
+        "description": "Collapsible Menu for initial information configuration of the footer in the pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_footer_config_terms_and_conditions": "Terms and Conditions Configuration",
+    "@landingpage_pagebuilder_footer_config_terms_and_conditions": {
+        "description": "Collapsible Menu for terms and conditions configuration of the footer in the pagebuilder config menu"
+    },
     "edit_promoter_title": "Edit promoter",
     "@edit_promoter_title": {
         "description": "Title of the edit promoter page"
