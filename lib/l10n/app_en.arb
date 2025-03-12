@@ -228,11 +228,11 @@
     "@landingpage_delete_alert_msg": {
         "description": "Message for the Landing Page Deletion Dialog"
     },
-    "landingpage_delete_alert_msg_promoter_warning": "The following promoters will no longer have active landing pages assigned if you delete this page:\n\n",
+    "landingpage_delete_alert_msg_promoter_warning": "The following promoters will no longer have active landing pages assigned if you delete this page:\n",
     "@landingpage_delete_alert_msg_promoter_warning": {
         "description": "Message for the landing page deletion dialog if promoters no longer have a landing page"
     },
-    "landingpage_delete_alert_msg_promoter_warning_continue": "Do you want to continue anyway? The action cannot be undone.",
+    "landingpage_delete_alert_msg_promoter_warning_continue": "\nDo you want to continue anyway? The action cannot be undone.",
     "@landingpage_delete_alert_msg_promoter_warning_continue": {
         "description": "Message to the landing page deletion dialog if promoters no longer have a landing page continue"
     },

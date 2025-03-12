@@ -6,7 +6,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 class CustomAlertDialog extends StatelessWidget {
   final String title;
   final String message;
-  final Text? messageWidget;
+  final Widget? messageWidget;
   final bool isLoading;
   final String actionButtonTitle;
   final String? cancelButtonTitle;
