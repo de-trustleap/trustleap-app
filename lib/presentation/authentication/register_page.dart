@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  final String? registrationCode;
+  const RegisterPage({super.key, this.registrationCode});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class RegisterPage extends StatelessWidget {
         BlocProvider(create: (context) => Modular.get<SignInCubit>()),
         BlocProvider(create: (context) => Modular.get<UserCubit>())
       ],
-      child: const RegisterForm(),
+      child: RegisterForm(registrationCode: registrationCode),
     )));
   }
 }

@@ -45,14 +45,24 @@ Future main() async {
 void routeToInitial(AuthStatus status) {
   late String lastRoute;
   if (kIsWeb) {
-    lastRoute = html.window.location.pathname ?? "/";
+    String path = html.window.location.pathname ?? "/";
+    String query = html.window.location.search ?? "";
+    if (path != "/") {
+      lastRoute = path + query;
+    } else {
+      lastRoute = path;
+    }
   } else {
     lastRoute = WidgetsBinding.instance.platformDispatcher.defaultRouteName;
   }
   switch (status) {
     case AuthStatus.unAuthenticated:
       debugPrint("NOT AUTHENTICATED");
-      CustomNavigator.navigate(RoutePaths.loginPath);
+      if (lastRoute != "/") {
+        CustomNavigator.navigate(lastRoute);
+      } else {
+        CustomNavigator.navigate(RoutePaths.loginPath);
+      }
       break;
     case AuthStatus.authenticated:
       debugPrint("AUTHENTICATED");

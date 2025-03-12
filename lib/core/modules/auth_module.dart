@@ -12,7 +12,9 @@ class AuthModule extends Module {
   @override
   void routes(r) {
     r.child(Modular.initialRoute, child: (_) => const LoginPage());
-    r.child(RoutePaths.registerPath, child: (_) => const RegisterPage());
+    r.child(RoutePaths.registerPath,
+        child: (_) => RegisterPage(
+            registrationCode: r.args.queryParams["registrationCode"]));
     r.child(RoutePaths.passwordReset,
         child: (_) => const PasswordForgottenPage());
     r.module(RoutePaths.homePath, module: HomeModule(), guards: [AuthGuard()]);
