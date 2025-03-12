@@ -440,13 +440,13 @@ abstract class AppLocalizations {
   /// Message for the landing page deletion dialog if promoters no longer have a landing page
   ///
   /// In en, this message translates to:
-  /// **'The following promoters will no longer have active landing pages assigned if you delete this page:\n\n'**
+  /// **'The following promoters will no longer have active landing pages assigned if you delete this page:\n'**
   String get landingpage_delete_alert_msg_promoter_warning;
 
   /// Message to the landing page deletion dialog if promoters no longer have a landing page continue
   ///
   /// In en, this message translates to:
-  /// **'Do you want to continue anyway? The action cannot be undone.'**
+  /// **'\nDo you want to continue anyway? The action cannot be undone.'**
   String get landingpage_delete_alert_msg_promoter_warning_continue;
 
   /// Snackbar message when a landing page has been successfully deleted

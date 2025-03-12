@@ -178,10 +178,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_delete_alert_msg => 'Deleting the landing page cannot be undone.';
 
   @override
-  String get landingpage_delete_alert_msg_promoter_warning => 'The following promoters will no longer have active landing pages assigned if you delete this page:\n\n';
+  String get landingpage_delete_alert_msg_promoter_warning => 'The following promoters will no longer have active landing pages assigned if you delete this page:\n';
 
   @override
-  String get landingpage_delete_alert_msg_promoter_warning_continue => 'Do you want to continue anyway? The action cannot be undone.';
+  String get landingpage_delete_alert_msg_promoter_warning_continue => '\nDo you want to continue anyway? The action cannot be undone.';
 
   @override
   String get landingpage_success_delete_snackbar_message => 'Landing page successfully deleted!';

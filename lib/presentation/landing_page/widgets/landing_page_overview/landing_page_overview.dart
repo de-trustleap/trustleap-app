@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/clickable_link.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
@@ -44,12 +45,19 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
         .toggleLandingPageActivity(id, isActive, userId);
   }
 
-  List<String> _getPromoterNames(List<Promoter> promoters) {
-    return promoters
-        .map((promoter) =>
-            "• ${promoter.firstName ?? ''} ${promoter.lastName ?? ''}".trim())
-        .where((name) => name.isNotEmpty)
-        .toList();
+  List<ClickableLink> _getPromoterLink(List<Promoter> promoters) {
+    List<ClickableLink> links = [];
+    for (Promoter promoter in promoters) {
+      links.add(ClickableLink(
+          title: "${promoter.firstName ?? ""} ${promoter.lastName ?? ""}",
+          onTap: () {
+            CustomNavigator.pop();
+            CustomNavigator.navigate(
+                "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
+                arguments: promoter);
+          }));
+    }
+    return links;
   }
 
   void showDeleteAlertWithPromoterCheck(
@@ -87,21 +95,20 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
               } else {
                 return CustomAlertDialog(
                   title: localization.landingpage_delete_alert_title,
-                  messageWidget: Text.rich(TextSpan(
-                      style: themeData.textTheme.bodyMedium,
+                  messageWidget: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        TextSpan(
-                            text: localization
-                                .landingpage_delete_alert_msg_promoter_warning),
-                        TextSpan(
-                            text:
-                                "${_getPromoterNames(state.promoters).join('\n')}\n\n",
-                            style: themeData.textTheme.bodyMedium!
-                                .copyWith(color: themeData.colorScheme.error)),
-                        TextSpan(
-                            text: localization
-                                .landingpage_delete_alert_msg_promoter_warning_continue)
-                      ])),
+                        Text(
+                            localization
+                                .landingpage_delete_alert_msg_promoter_warning,
+                            style: themeData.textTheme.bodyMedium),
+                        ..._getPromoterLink(state.promoters),
+                        Text(
+                            localization
+                                .landingpage_delete_alert_msg_promoter_warning_continue,
+                            style: themeData.textTheme.bodyMedium)
+                      ]),
                   message: "",
                   actionButtonTitle: localization.delete_buttontitle,
                   cancelButtonTitle: localization.cancel_buttontitle,
