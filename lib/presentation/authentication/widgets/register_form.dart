@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
@@ -19,7 +21,8 @@ import 'package:intl/intl.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key});
+  final String? registrationCode;
+  const RegisterForm({super.key, this.registrationCode});
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
@@ -45,6 +48,12 @@ class _RegisterFormState extends State<RegisterForm> {
   String errorMessage = "";
   bool validationHasError = false;
   String? genderValid;
+
+  @override
+  void initState() {
+    super.initState();
+    codeTextController.text = widget.registrationCode ?? "";
+  }
 
   @override
   void dispose() {
@@ -109,18 +118,24 @@ class _RegisterFormState extends State<RegisterForm> {
     /// [shouldWrapToNextLine] defines if the fieldCount > 1 wraps to the next line on mobile.
     double getResponsiveWidth(int fieldCount,
         {bool shouldWrapToNextLine = true}) {
-      double mobileWidth = (responsiveValue.screenWidth - listPadding * 2);
+      double mobileWidth =
+          max(0, (responsiveValue.screenWidth - listPadding * 2));
       if (fieldCount == 1) {
-        return responsiveValue.largerThan(MOBILE) ? maxViewWidth : mobileWidth;
+        return max(
+            0, responsiveValue.largerThan(MOBILE) ? maxViewWidth : mobileWidth);
       } else if (fieldCount == 2) {
         if (shouldWrapToNextLine) {
-          return responsiveValue.largerThan(MOBILE)
-              ? (maxViewWidth / 2 - listPadding / 2)
-              : mobileWidth;
+          return max(
+              0,
+              responsiveValue.largerThan(MOBILE)
+                  ? (maxViewWidth / 2 - listPadding / 2)
+                  : mobileWidth);
         } else {
-          return responsiveValue.largerThan(MOBILE)
-              ? (maxViewWidth / 2 - listPadding / 2)
-              : (mobileWidth / 2 - listPadding / 2);
+          return max(
+              0,
+              responsiveValue.largerThan(MOBILE)
+                  ? (maxViewWidth / 2 - listPadding / 2)
+                  : (mobileWidth / 2 - listPadding / 2));
         }
       } else {
         return 0;
