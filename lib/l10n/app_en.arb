@@ -1334,6 +1334,10 @@
     "@landingpage_pagebuilder_config_menu_footer_type": {
         "description": "Footer title in the pagebuilder config menu"
     },
+    "landingpage_pagebuilder_config_menu_video_player_type": "Video Player",
+    "@landingpage_pagebuilder_config_menu_video_player_type": {
+        "description": "Video player title in the pagebuilder config menu"
+    },
     "landingpage_pagebuilder_config_menu_unknown_type": "Unknown",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unknown title in the pagebuilder config menu"
@@ -1749,5 +1753,21 @@
     "promoter_overview_inactive_landingpage_tooltip_warning_action": "Assign landingpage",
     "@promoter_overview_inactive_landingpage_tooltip_warning_action": {
         "description": "Tooltip warning button for inactive landingpages on the promoter overview."
+    },
+    "landingpage_pagebuilder_video_player_config_title": "Video Player Configuration",
+    "@landingpage_pagebuilder_video_player_config_title": {
+        "description": "Title for the collapsible view for the video player configuration in the pagebuilder video player configuration."
+    },
+    "landingpage_pagebuilder_video_player_config_youtube_link": "Youtube link",
+    "@landingpage_pagebuilder_video_player_config_youtube_link": {
+        "description": "Title for the collapsible view for the video player youtube link in the pagebuilder video player configuration."
+    },
+    "landingpage_pagebuilder_video_player_config_youtube_link_description": "Please provide the YouTube link where your video can be accessed.",
+    "@landingpage_pagebuilder_video_player_config_youtube_link_description": {
+        "description": "Description for the video player youtube link in the pagebuilder video player configuration."
+    },
+    "landingpage_pagebuilder_video_player_config_youtube_link_placeholder": "Youtube link",
+    "@landingpage_pagebuilder_video_player_config_youtube_link_placeholder": {
+        "description": "Placeholder for the video player youtube link in the pagebuilder video player configuration."
     }
 }

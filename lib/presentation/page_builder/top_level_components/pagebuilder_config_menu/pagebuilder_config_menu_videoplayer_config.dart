@@ -26,21 +26,24 @@ class PagebuilderConfigMenuVideoPlayerConfig extends StatelessWidget {
 
     if (model.elementType == PageBuilderWidgetType.videoPlayer &&
         model.properties is PagebuilderVideoPlayerProperties) {
-      return CollapsibleTile(title: "Video Player Konfiguration", children: [
-        PagebuilderSizeControl(
-            width:
-                (model.properties as PagebuilderVideoPlayerProperties).width ??
+      return CollapsibleTile(
+          title: localization.landingpage_pagebuilder_video_player_config_title,
+          children: [
+            PagebuilderSizeControl(
+                width: (model.properties as PagebuilderVideoPlayerProperties)
+                        .width ??
                     0,
-            height:
-                (model.properties as PagebuilderVideoPlayerProperties).height ??
+                height: (model.properties as PagebuilderVideoPlayerProperties)
+                        .height ??
                     0,
-            onChanged: (size) {
-              final updatedProperties =
-                  (model.properties as PagebuilderVideoPlayerProperties)
-                      .copyWith(width: size.width, height: size.height);
-              updateVideoPlayerProperties(updatedProperties, pagebuilderBloc);
-            }),
-      ]);
+                onChanged: (size) {
+                  final updatedProperties =
+                      (model.properties as PagebuilderVideoPlayerProperties)
+                          .copyWith(width: size.width, height: size.height);
+                  updateVideoPlayerProperties(
+                      updatedProperties, pagebuilderBloc);
+                }),
+          ]);
     } else {
       return const SizedBox.shrink();
     }

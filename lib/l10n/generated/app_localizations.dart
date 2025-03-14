@@ -2063,6 +2063,12 @@ abstract class AppLocalizations {
   /// **'Footer'**
   String get landingpage_pagebuilder_config_menu_footer_type;
 
+  /// Video player title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Video Player'**
+  String get landingpage_pagebuilder_config_menu_video_player_type;
+
   /// Unknown title in the pagebuilder config menu
   ///
   /// In en, this message translates to:
@@ -2686,6 +2692,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Assign landingpage'**
   String get promoter_overview_inactive_landingpage_tooltip_warning_action;
+
+  /// Title for the collapsible view for the video player configuration in the pagebuilder video player configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Video Player Configuration'**
+  String get landingpage_pagebuilder_video_player_config_title;
+
+  /// Title for the collapsible view for the video player youtube link in the pagebuilder video player configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Youtube link'**
+  String get landingpage_pagebuilder_video_player_config_youtube_link;
+
+  /// Description for the video player youtube link in the pagebuilder video player configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Please provide the YouTube link where your video can be accessed.'**
+  String get landingpage_pagebuilder_video_player_config_youtube_link_description;
+
+  /// Placeholder for the video player youtube link in the pagebuilder video player configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Youtube link'**
+  String get landingpage_pagebuilder_video_player_config_youtube_link_placeholder;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

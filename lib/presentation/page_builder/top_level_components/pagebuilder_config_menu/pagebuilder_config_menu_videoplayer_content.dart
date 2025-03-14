@@ -26,22 +26,27 @@ class PagebuilderConfigMenuVideoPlayerContent extends StatelessWidget {
     final pagebuilderCubit = Modular.get<PagebuilderBloc>();
     if (model.elementType == PageBuilderWidgetType.videoPlayer &&
         model.properties is PagebuilderVideoPlayerProperties) {
-      return CollapsibleTile(title: "Youtube Link", children: [
-        Text(
-            "Gib hier bitte den Youtube Link an, über den dein Video erreichbar ist.",
-            style: themeData.textTheme.bodySmall),
-        const SizedBox(height: 30),
-        PagebuilderTextField(
-            initialText:
-                (model.properties as PagebuilderVideoPlayerProperties).link,
-            placeholder: "Youtube Link",
-            onChanged: (text) {
-              final updatedProperties =
-                  (model.properties as PagebuilderVideoPlayerProperties)
-                      .copyWith(link: text);
-              updateTextProperties(updatedProperties, pagebuilderCubit);
-            })
-      ]);
+      return CollapsibleTile(
+          title: localization
+              .landingpage_pagebuilder_video_player_config_youtube_link,
+          children: [
+            Text(
+                localization
+                    .landingpage_pagebuilder_video_player_config_youtube_link_description,
+                style: themeData.textTheme.bodySmall),
+            const SizedBox(height: 30),
+            PagebuilderTextField(
+                initialText:
+                    (model.properties as PagebuilderVideoPlayerProperties).link,
+                placeholder: localization
+                    .landingpage_pagebuilder_video_player_config_youtube_link_placeholder,
+                onChanged: (text) {
+                  final updatedProperties =
+                      (model.properties as PagebuilderVideoPlayerProperties)
+                          .copyWith(link: text);
+                  updateTextProperties(updatedProperties, pagebuilderCubit);
+                })
+          ]);
     } else {
       return const SizedBox.shrink();
     }
