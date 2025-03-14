@@ -11,6 +11,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_pr
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_background_model.dart';
@@ -22,6 +23,7 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_ic
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_row_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_video_player_properties_model.dart';
 
 class PageBuilderWidgetModel extends Equatable {
   final String id;
@@ -194,6 +196,9 @@ class PageBuilderWidgetModel extends Equatable {
             .toDomain();
       case PageBuilderWidgetType.footer:
         return PagebuilderFooterPropertiesModel.fromMap(properties!).toDomain();
+      case PageBuilderWidgetType.videoPlayer:
+        return PagebuilderVideoPlayerPropertiesModel.fromMap(properties!)
+            .toDomain();
       default:
         return null;
     }
@@ -221,6 +226,9 @@ class PageBuilderWidgetModel extends Equatable {
           .toMap();
     } else if (properties is PagebuilderFooterProperties) {
       return PagebuilderFooterPropertiesModel.fromDomain(properties).toMap();
+    } else if (properties is PagebuilderVideoPlayerProperties) {
+      return PagebuilderVideoPlayerPropertiesModel.fromDomain(properties)
+          .toMap();
     } else {
       return null;
     }

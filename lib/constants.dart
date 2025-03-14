@@ -77,6 +77,7 @@ enum PageBuilderWidgetType {
   button,
   contactForm,
   footer,
+  videoPlayer,
   none
 }
 

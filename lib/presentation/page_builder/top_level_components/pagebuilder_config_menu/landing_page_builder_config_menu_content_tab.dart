@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_icon_content.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_image_content.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_text_content.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_videoplayer_content.dart';
 import 'package:flutter/material.dart';
 
 class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
@@ -24,6 +25,8 @@ class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
           PagebuilderConfigMenuIconContent(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.contactForm) ...[
           PagebuilderConfigMenuContactFormContent(model: model)
+        ] else if (model.elementType == PageBuilderWidgetType.videoPlayer) ...[
+          PagebuilderConfigMenuVideoPlayerContent(model: model)
         ],
         const SizedBox(height: 40)
       ],
