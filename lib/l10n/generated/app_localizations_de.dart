@@ -997,6 +997,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_config_menu_footer_type => 'Footer';
 
   @override
+  String get landingpage_pagebuilder_config_menu_video_player_type => 'Video Player';
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unbekannt';
 
   @override
@@ -1307,4 +1310,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get promoter_overview_inactive_landingpage_tooltip_warning_action => 'Landingpage zuweisen';
+
+  @override
+  String get landingpage_pagebuilder_video_player_config_title => 'Video Player Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_video_player_config_youtube_link => 'Youtube Link';
+
+  @override
+  String get landingpage_pagebuilder_video_player_config_youtube_link_description => 'Gib hier bitte den Youtube Link an, über den dein Video erreichbar ist.';
+
+  @override
+  String get landingpage_pagebuilder_video_player_config_youtube_link_placeholder => 'Youtube Link';
 }

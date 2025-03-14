@@ -1334,6 +1334,10 @@
     "@landingpage_pagebuilder_config_menu_footer_type": {
         "description": "Footer Titel im Pagebuilder Config Menü"
     },
+    "landingpage_pagebuilder_config_menu_video_player_type": "Video Player",
+    "@landingpage_pagebuilder_config_menu_video_player_type": {
+        "description": "Video Player Titel im Pagebuilder Config Menü"
+    },
     "landingpage_pagebuilder_config_menu_unknown_type": "Unbekannt",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unbekannt Titel im Pagebuilder Config Menü"
@@ -1749,5 +1753,21 @@
     "promoter_overview_inactive_landingpage_tooltip_warning_action": "Landingpage zuweisen",
     "@promoter_overview_inactive_landingpage_tooltip_warning_action": {
         "description": "Tooltip Warnung Button für inaktive Landingpages auf der Promoter Übersicht."
+    },
+    "landingpage_pagebuilder_video_player_config_title": "Video Player Konfiguration",
+    "@landingpage_pagebuilder_video_player_config_title": {
+        "description": "Titel der ausklappabren View für die Video Player Konfiguration in der Pagebuilder Video Player Konfiguration"
+    },
+    "landingpage_pagebuilder_video_player_config_youtube_link": "Youtube Link",
+    "@landingpage_pagebuilder_video_player_config_youtube_link": {
+        "description": "Titel der ausklappabren View für den Video Player Youtube Link in der Pagebuilder Video Player Konfiguration"
+    },
+    "landingpage_pagebuilder_video_player_config_youtube_link_description": "Gib hier bitte den Youtube Link an, über den dein Video erreichbar ist.",
+    "@landingpage_pagebuilder_video_player_config_youtube_link_description": {
+        "description": "Beschreibung für den Video Player Youtube Link in der Pagebuilder Video Player Konfiguration"
+    },
+    "landingpage_pagebuilder_video_player_config_youtube_link_placeholder": "Youtube Link",
+    "@landingpage_pagebuilder_video_player_config_youtube_link_placeholder": {
+        "description": "Platzhalter für den Video Player Youtube Link in der Pagebuilder Video Player Konfiguration"
     }
 }

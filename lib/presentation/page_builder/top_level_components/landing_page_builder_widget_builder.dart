@@ -7,12 +7,14 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_pro
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/contact_form_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/footer_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/icon_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/image_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_text.dart';
+import 'package:finanzbegleiter/presentation/page_builder/page_elements/video_player_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +57,9 @@ class LandingPageBuilderWidgetBuilder {
       case PageBuilderWidgetType.footer:
         return buildFooterWidget(
             model.properties as PagebuilderFooterProperties, model);
+      case PageBuilderWidgetType.videoPlayer:
+        return buildVideoPlayerWidget(
+            model.properties as PagebuilderVideoPlayerProperties, model);
       default:
         return const SizedBox.shrink();
     }
@@ -169,5 +174,11 @@ class LandingPageBuilderWidgetBuilder {
   Widget buildFooterWidget(
       PagebuilderFooterProperties properties, PageBuilderWidget model) {
     return PagebuilderFooterView(properties: properties, widgetModel: model);
+  }
+
+  Widget buildVideoPlayerWidget(
+      PagebuilderVideoPlayerProperties properties, PageBuilderWidget model) {
+    return PagebuilderVideoPlayerView(
+        properties: properties, widgetModel: model);
   }
 }

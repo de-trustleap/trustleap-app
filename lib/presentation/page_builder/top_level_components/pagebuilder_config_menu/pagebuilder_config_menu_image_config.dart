@@ -72,7 +72,11 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
                 }),
             const SizedBox(height: 20),
             PagebuilderSizeControl(
-                model: model,
+                width:
+                    (model.properties as PageBuilderImageProperties).width ?? 0,
+                height:
+                    (model.properties as PageBuilderImageProperties).height ??
+                        0,
                 onChanged: (size) {
                   final updatedProperties =
                       (model.properties as PageBuilderImageProperties)
