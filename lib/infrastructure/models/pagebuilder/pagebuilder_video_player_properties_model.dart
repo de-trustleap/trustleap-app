@@ -52,5 +52,3 @@ class PagebuilderVideoPlayerPropertiesModel extends Equatable
   @override
   List<Object?> get props => [width, height, link];
 }
-
-// TODO: Localization
