@@ -17,7 +17,7 @@ class LandingPageCreatorFirstStep extends StatefulWidget {
   final LandingPage? landingPage;
   final Company? company;
   final bool isEditMode;
-  final Function(LandingPage, Uint8List?) onContinue;
+  final Function(LandingPage, Uint8List?, bool) onContinue;
   const LandingPageCreatorFirstStep(
       {super.key,
       this.company,
@@ -108,7 +108,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
               showError = false;
               errorMessage = "";
             });
-            widget.onContinue(landingPage, image);
+            widget.onContinue(landingPage, image, imageHasChanged);
           }
         },
         child: Column(children: [

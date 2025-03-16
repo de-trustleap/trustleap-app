@@ -44,6 +44,20 @@ class LandingPageOverviewGridTile extends StatelessWidget {
     }
   }
 
+  IconButton _getEditButton(
+      ThemeData themeData, AppLocalizations localizations) {
+    return IconButton(
+        onPressed: () {
+          CustomNavigator.pushNamed(
+              "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
+              arguments: landingPage);
+        },
+        iconSize: 24,
+        tooltip: localizations.landingpage_overview_edit_tooltip,
+        icon:
+            Icon(Icons.edit, color: themeData.colorScheme.secondary, size: 24));
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -77,7 +91,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
       height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
       decoration: BoxDecoration(
           color: (landingPage.isDefaultPage ?? false)
-              ? themeData.colorScheme.primary
+              ? themeData.colorScheme.primary.withOpacity(0.5)
               : themeData.colorScheme.surface,
           border: Border.all(color: Colors.transparent),
           borderRadius: const BorderRadius.all(Radius.circular(20))),
@@ -95,18 +109,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       if (permissions.hasEditLandingPagePermission()) ...[
-                        IconButton(
-                            onPressed: () {
-                              CustomNavigator.pushNamed(
-                                  "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
-                                  arguments: landingPage);
-                            },
-                            iconSize: 24,
-                            tooltip:
-                                localizations.landingpage_overview_edit_tooltip,
-                            icon: Icon(Icons.edit,
-                                color: themeData.colorScheme.secondary,
-                                size: 24)),
+                        _getEditButton(themeData, localizations),
                         const Spacer(),
                       ],
                       IconButton(
@@ -214,6 +217,20 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                             }
                           })
                     ]),
+              ] else if (landingPage.isDefaultPage != null &&
+                  landingPage.isDefaultPage == true) ...[
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      if (permissions
+                          .hasEditDefaultLandingPagePermission()) ...[
+                        _getEditButton(themeData, localizations),
+                      ] else ...[
+                        const SizedBox(height: 40)
+                      ],
+                      const Spacer()
+                    ])
               ] else ...[
                 const Spacer()
               ],

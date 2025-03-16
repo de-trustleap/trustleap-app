@@ -42,7 +42,9 @@ class _LandingPageCreatorImageSectionState
 
   @override
   void didUpdateWidget(covariant LandingPageCreatorImageSection oldWidget) {
-    if (!widget.isEditMode) {
+    if (!widget.isEditMode ||
+        (widget.landingPage?.isDefaultPage == true &&
+            widget.landingPage?.thumbnailDownloadURL == null)) {
       _downloadCompanyImageFromURL();
     }
     super.didUpdateWidget(oldWidget);
