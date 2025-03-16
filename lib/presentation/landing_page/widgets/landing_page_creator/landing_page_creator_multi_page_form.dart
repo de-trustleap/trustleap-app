@@ -75,11 +75,12 @@ class _LandingPageCreatorMultiPageFormState
           landingPage: landingPage,
           isEditMode: isEditMode,
           company: company,
-          onContinue: (landingPage, image) {
+          onContinue: (landingPage, image, imageHasChanged) {
             if (imageValid) {
               setState(() {
                 this.image = image;
                 this.landingPage = landingPage;
+                this.imageHasChanged = imageHasChanged;
                 _currentStep += 1;
                 progress = 2 / _steps.length;
               });
@@ -141,11 +142,12 @@ class _LandingPageCreatorMultiPageFormState
           landingPage: landingPage,
           isEditMode: isEditMode,
           company: company,
-          onContinue: (landingPage, image) {
+          onContinue: (landingPage, image, imageHasChanged) {
             if (imageValid) {
               setState(() {
                 this.image = image;
                 this.landingPage = landingPage;
+                this.imageHasChanged = imageHasChanged;
                 _currentStep += 1;
                 progress = 2 / _steps.length;
               });
@@ -232,6 +234,7 @@ class _LandingPageCreatorMultiPageFormState
                     errorMessage = DatabaseFailureMapper.mapFailureMessage(
                         state.failure, localization);
                     lastFormButtonsDisabled = false;
+                    isLoading = false;
                   });
                 } else if (state is EditLandingPageFailureState) {
                   setState(() {
@@ -239,6 +242,7 @@ class _LandingPageCreatorMultiPageFormState
                     errorMessage = DatabaseFailureMapper.mapFailureMessage(
                         state.failure, localization);
                     lastFormButtonsDisabled = false;
+                    isLoading = false;
                   });
                 } else if (state is CreateLandingPageLoadingState ||
                     state is EditLandingPageLoadingState) {
