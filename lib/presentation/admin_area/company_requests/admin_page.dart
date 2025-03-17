@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/presentation/admin_area/admin_side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/menu/appbar.dart';
+import 'package:finanzbegleiter/presentation/core/menu/collapsible_side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -13,11 +14,10 @@ class AdminPage extends StatelessWidget {
     final themeData = Theme.of(context);
 
     if (responsiveValue.largerThan(TABLET)) {
-      return Scaffold(
+      return const Scaffold(
           body: Row(children: [
-        const SizedBox(width: 240, child: AdminSideMenu()),
-        Container(width: 0.5, color: themeData.textTheme.bodyMedium!.color),
-        const Expanded(child: RouterOutlet())
+        CollapsibleSideMenu(isAdmin: true),
+        Expanded(child: RouterOutlet())
       ]));
     } else {
       return Scaffold(

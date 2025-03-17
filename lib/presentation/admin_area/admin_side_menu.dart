@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AdminSideMenu extends StatelessWidget {
-  const AdminSideMenu({super.key});
+  final bool collapsed;
+  final AnimationController? animationController;
+  const AdminSideMenu(
+      {super.key, this.collapsed = false, this.animationController});
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +17,24 @@ class AdminSideMenu extends StatelessWidget {
         value: BlocProvider.of<MenuCubit>(context),
         child: BlocBuilder<MenuCubit, MenuState>(builder: ((context, state) {
           return ListView(children: [
-            const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 40),
-                  MenuItem(
-                      path: RoutePaths.companyRequestsPath,
-                      icon: Icons.person,
-                      type: MenuItems.adminCompanyRequests,
-                      isCollapsed: false),
-                ])
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const SizedBox(height: 40),
+              MenuItem(
+                  path: RoutePaths.companyRequestsPath,
+                  icon: Icons.person,
+                  type: MenuItems.adminCompanyRequests,
+                  isCollapsed: collapsed,
+                  animationController: animationController,
+                  isAdmin: true),
+              const SizedBox(height: 20),
+              MenuItem(
+                  path: RoutePaths.registrationCodes,
+                  icon: Icons.code,
+                  type: MenuItems.registrationCodes,
+                  isCollapsed: collapsed,
+                  animationController: animationController,
+                  isAdmin: true)
+            ])
           ]);
         })));
   }

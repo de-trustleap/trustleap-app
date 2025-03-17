@@ -13,6 +13,7 @@ class MenuItem extends StatefulWidget {
   final MenuItems type;
   final bool isCollapsed;
   final AnimationController? animationController;
+  final bool isAdmin;
 
   const MenuItem({
     super.key,
@@ -20,6 +21,7 @@ class MenuItem extends StatefulWidget {
     required this.icon,
     required this.type,
     required this.isCollapsed,
+    this.isAdmin = false,
     this.animationController,
   });
 
@@ -75,6 +77,8 @@ class _MenuItemState extends State<MenuItem> {
         return localization.menuitems_activities;
       case MenuItems.adminCompanyRequests:
         return localization.menuitems_company_requests;
+      case MenuItems.registrationCodes:
+        return "Codes";
       case MenuItems.none:
         return "";
     }
@@ -111,7 +115,11 @@ class _MenuItemState extends State<MenuItem> {
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                CustomNavigator.navigate(RoutePaths.homePath + widget.path);
+                if (widget.isAdmin) {
+                  CustomNavigator.navigate(RoutePaths.adminPath + widget.path);
+                } else {
+                  CustomNavigator.navigate(RoutePaths.homePath + widget.path);
+                }
                 BlocProvider.of<MenuCubit>(context).selectMenu(widget.type);
               },
               child: Padding(
