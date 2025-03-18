@@ -80,20 +80,20 @@ class _RegistrationCodeCreatorState extends State<RegistrationCodeCreator> {
               emailTextController.text = "";
               firstNameTextController.text = "";
             });
-            CustomSnackBar.of(context)
-                .showCustomSnackBar("Code erfolgreich versendet!");
+            CustomSnackBar.of(context).showCustomSnackBar(
+                localization.admin_registration_code_creator_success_snackbar);
           }
         },
         builder: (context, state) {
           return ListView(shrinkWrap: true, children: [
             CardContainer(
                 child: Column(children: [
-              SelectableText("Registrierungscode erstellen",
+              SelectableText(localization.admin_registration_code_creator_title,
                   style: themeData.textTheme.headlineLarge!
                       .copyWith(fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
               SelectableText(
-                  "Hier kannst du einen Registrierungscode für einen Nutzer erstellen.\nDer Code wird an die angegebene E-Mail Adresse gesendet. Der Nutzer der sich mit diesem Code registriert hat ist keinem Unternehmen zugewiesen.",
+                  localization.admin_registration_code_creator_description,
                   style: themeData.textTheme.bodyLarge),
               const SizedBox(height: 40),
               Form(
@@ -106,7 +106,8 @@ class _RegistrationCodeCreatorState extends State<RegistrationCodeCreator> {
                     FormTextfield(
                         controller: emailTextController,
                         disabled: false,
-                        placeholder: "E-Mail Adresse",
+                        placeholder: localization
+                            .admin_registration_code_creator_email_placeholder,
                         onChanged: resetError,
                         onFieldSubmitted: submit,
                         validator: validator.validateEmail,
@@ -115,14 +116,16 @@ class _RegistrationCodeCreatorState extends State<RegistrationCodeCreator> {
                     FormTextfield(
                         controller: firstNameTextController,
                         disabled: false,
-                        placeholder: "Vorname",
+                        placeholder: localization
+                            .admin_registration_code_creator_firstname_placeholder,
                         onChanged: resetError,
                         onFieldSubmitted: submit,
                         validator: validator.validateFirstName,
                         keyboardType: TextInputType.text),
                     const SizedBox(height: 20),
                     PrimaryButton(
-                        title: localization.login_login_buttontitle,
+                        title: localization
+                            .admin_registration_code_creator_send_code_button,
                         disabled: state is AdminRegistrationCodeSendLoading,
                         isLoading: state is AdminRegistrationCodeSendLoading,
                         onTap: () {
@@ -143,5 +146,3 @@ class _RegistrationCodeCreatorState extends State<RegistrationCodeCreator> {
     );
   }
 }
-// TODO: Localization
-// TODO: Frontend Tests

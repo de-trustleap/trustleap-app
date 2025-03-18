@@ -1150,6 +1150,30 @@
     "@admin_company_request_overview_error": {
         "description": "Error text on the business registration requests overview page"
     },
+    "admin_registration_code_creator_success_snackbar": "Code successfully sent!",
+    "@admin_registration_code_creator_success_snackbar": {
+        "description": "Snackbar message for successfully creating a registration code in the Admin Panel"
+    },
+    "admin_registration_code_creator_title": "Create registration code",
+    "@admin_registration_code_creator_title": {
+        "description": "Title for the registration code creation in the admin panel"
+    },
+    "admin_registration_code_creator_description": "Here you can create a registration code for a user. The code will be sent to the specified email address. The user who registered with this code is not assigned to a company.",
+    "@admin_registration_code_creator_description": {
+        "description": "Description for creating registration code in the admin panel"
+    },
+    "admin_registration_code_creator_email_placeholder": "Email address",
+    "@admin_registration_code_creator_email_placeholder": {
+        "description": "Placeholder for the email address text field for the registration code creation in the admin panel"
+    },
+    "admin_registration_code_creator_firstname_placeholder": "Firstname",
+    "@admin_registration_code_creator_firstname_placeholder": {
+        "description": "Placeholder for the firstname text field for the registration code creation in the admin panel"
+    },
+    "admin_registration_code_creator_send_code_button": "Send code",
+    "@admin_registration_code_creator_send_code_button": {
+        "description": "Title for sending the code Button for creating the registration code in the admin panel"
+    },
     "company_registration_form_title": "Register company",
     "@company_registration_form_title": {
         "description": "Title of the form in the company registration page"

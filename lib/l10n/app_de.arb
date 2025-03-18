@@ -1150,6 +1150,30 @@
     "@admin_company_request_overview_error": {
         "description": "Fehler Text auf der Unternehmensregistrierungsanfragen Übersichtsseite"
     },
+    "admin_registration_code_creator_success_snackbar": "Code erfolgreich versendet!",
+    "@admin_registration_code_creator_success_snackbar": {
+        "description": "Snackbar Nachricht für das erfolgreiche Erstellen eines Registrierungscodes im Admin Panel"
+    },
+    "admin_registration_code_creator_title": "Registrierungscode erstellen",
+    "@admin_registration_code_creator_title": {
+        "description": "Titel für das Registrierungscode Erstellen im Admin Panel"
+    },
+    "admin_registration_code_creator_description": "Hier kannst du einen Registrierungscode für einen Nutzer erstellen.\nDer Code wird an die angegebene E-Mail Adresse gesendet. Der Nutzer der sich mit diesem Code registriert hat ist keinem Unternehmen zugewiesen.",
+    "@admin_registration_code_creator_description": {
+        "description": "Beschreibung für das Registrierungscode Erstellen im Admin Panel"
+    },
+    "admin_registration_code_creator_email_placeholder": "E-Mail Adresse",
+    "@admin_registration_code_creator_email_placeholder": {
+        "description": "Platzhalter für das E-Mail Adresse Textfeld für das Registrierungscode Erstellen im Admin Panel"
+    },
+    "admin_registration_code_creator_firstname_placeholder": "Vorname",
+    "@admin_registration_code_creator_firstname_placeholder": {
+        "description": "Platzhalter für das Vorname Textfeld für das Registrierungscode Erstellen im Admin Panel"
+    },
+    "admin_registration_code_creator_send_code_button": "Code versenden",
+    "@admin_registration_code_creator_send_code_button": {
+        "description": "Titel für den Code versenden Button für das Registrierungscode Erstellen im Admin Panel"
+    },
     "company_registration_form_title": "Unternehmen registrieren",
     "@company_registration_form_title": {
         "description": "Titel für das Formular der Unternehmensregistrierung"

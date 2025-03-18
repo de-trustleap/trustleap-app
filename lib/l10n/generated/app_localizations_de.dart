@@ -859,6 +859,24 @@ class AppLocalizationsDe extends AppLocalizations {
   String get admin_company_request_overview_error => 'Es ist ein Fehler aufgetreten';
 
   @override
+  String get admin_registration_code_creator_success_snackbar => 'Code erfolgreich versendet!';
+
+  @override
+  String get admin_registration_code_creator_title => 'Registrierungscode erstellen';
+
+  @override
+  String get admin_registration_code_creator_description => 'Hier kannst du einen Registrierungscode für einen Nutzer erstellen.\nDer Code wird an die angegebene E-Mail Adresse gesendet. Der Nutzer der sich mit diesem Code registriert hat ist keinem Unternehmen zugewiesen.';
+
+  @override
+  String get admin_registration_code_creator_email_placeholder => 'E-Mail Adresse';
+
+  @override
+  String get admin_registration_code_creator_firstname_placeholder => 'Vorname';
+
+  @override
+  String get admin_registration_code_creator_send_code_button => 'Code versenden';
+
+  @override
   String get company_registration_form_title => 'Unternehmen registrieren';
 
   @override

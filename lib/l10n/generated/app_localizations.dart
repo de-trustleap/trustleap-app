@@ -1787,6 +1787,42 @@ abstract class AppLocalizations {
   /// **'There was an error'**
   String get admin_company_request_overview_error;
 
+  /// Snackbar message for successfully creating a registration code in the Admin Panel
+  ///
+  /// In en, this message translates to:
+  /// **'Code successfully sent!'**
+  String get admin_registration_code_creator_success_snackbar;
+
+  /// Title for the registration code creation in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Create registration code'**
+  String get admin_registration_code_creator_title;
+
+  /// Description for creating registration code in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Here you can create a registration code for a user. The code will be sent to the specified email address. The user who registered with this code is not assigned to a company.'**
+  String get admin_registration_code_creator_description;
+
+  /// Placeholder for the email address text field for the registration code creation in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Email address'**
+  String get admin_registration_code_creator_email_placeholder;
+
+  /// Placeholder for the firstname text field for the registration code creation in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Firstname'**
+  String get admin_registration_code_creator_firstname_placeholder;
+
+  /// Title for sending the code Button for creating the registration code in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Send code'**
+  String get admin_registration_code_creator_send_code_button;
+
   /// Title of the form in the company registration page
   ///
   /// In en, this message translates to:
