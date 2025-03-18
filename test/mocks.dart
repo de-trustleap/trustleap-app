@@ -29,6 +29,8 @@ import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart';
+import 'package:finanzbegleiter/application/admin_registration_code/admin_registration_code_cubit.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -43,6 +45,7 @@ import 'package:mockito/annotations.dart';
   PromoterRepository,
   UserRepository,
   PermissionRepository,
+  AdminRegistrationCodeRepository,
   User,
   SignInCubit,
   AuthCubit,
@@ -66,6 +69,7 @@ import 'package:mockito/annotations.dart';
   PagebuilderRepository,
   CompanyRequestCubit,
   CompanyRequestObserverCubit,
+  AdminRegistrationCodeCubit,
   FirebaseAuth,
   FirebaseFirestore,
   FirebaseStorage,

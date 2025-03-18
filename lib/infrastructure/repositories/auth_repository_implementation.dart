@@ -118,13 +118,19 @@ class AuthRepositoryImplementation implements AuthRepository {
   Future<Either<DatabaseFailure, bool>> isRegistrationCodeValid(
       {required String email, required String code}) async {
     final promotersCollection = firestore.collection("unregisteredPromoters");
+    final pendingUsersCollection = firestore.collection("pendingUsers");
     try {
       final promoter = await promotersCollection
           .where("code", isEqualTo: code)
           .where("email", isEqualTo: email)
           .limit(1)
           .get();
-      if (promoter.docs.isEmpty) {
+      final user = await pendingUsersCollection
+          .where("code", isEqualTo: code)
+          .where("email", isEqualTo: email)
+          .limit(1)
+          .get();
+      if (promoter.docs.isEmpty && user.docs.isEmpty) {
         return right(false);
       } else {
         return right(true);

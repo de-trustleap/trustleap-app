@@ -7,6 +7,7 @@ enum MenuItems {
   activities("Aktivitäten"),
 
   adminCompanyRequests("Unternehmensanfragen"),
+  registrationCodes("Codes"),
   none("");
 
   final String value;

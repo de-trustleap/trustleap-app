@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:finanzbegleiter/application/admin_registration_code/admin_registration_code_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
@@ -30,6 +31,7 @@ import 'package:finanzbegleiter/core/modules/admin_module.dart';
 import 'package:finanzbegleiter/core/modules/auth_guard.dart';
 import 'package:finanzbegleiter/core/modules/auth_module.dart';
 import 'package:finanzbegleiter/core/modules/home_module.dart';
+import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
@@ -38,6 +40,7 @@ import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart'
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/admin_registration_code_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/company_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/image_repository_implementation.dart';
@@ -80,6 +83,8 @@ class AppModule extends Module {
           PageBuilderRepositoryImplementation.new)
       ..addLazySingleton<PermissionRepository>(
           PermissionRepositoryImplementation.new)
+      ..addLazySingleton<AdminRegistrationCodeRepository>(
+          AdminRegistrationCodeRepositoryImplementation.new)
       ..addLazySingleton(ProfileObserverBloc.new)
       ..addLazySingleton(PagebuilderBloc.new)
       ..addLazySingleton(PagebuilderConfigMenuCubit.new)
@@ -88,6 +93,7 @@ class AppModule extends Module {
       ..addLazySingleton(PromoterObserverCubit.new)
       ..addLazySingleton(LandingPageCubit.new)
       ..addLazySingleton(LandingPageObserverCubit.new)
+      ..addLazySingleton(AdminRegistrationCodeCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
