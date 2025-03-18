@@ -24,6 +24,18 @@ class LandingPageCreatorFormValidator {
     }
   }
 
+  String? validateLandingPageContactEmailAddress(String? input) {
+    const emailRegex =
+        r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
+    if (input == null || input.isEmpty) {
+      return "E-Mail Adresse angeben";
+    } else if (RegExp(emailRegex).hasMatch(input.trim())) {
+      return null;
+    } else {
+      return "Die angegebene E-Mail Adresse ist ungültig";
+    }
+  }
+
   String? validateLandingPageImpressum(String? input) {
     if (input == null || input.isEmpty) {
       return localization.landingpage_validate_impressum;

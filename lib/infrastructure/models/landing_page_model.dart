@@ -23,6 +23,7 @@ class LandingPageModel extends Equatable {
   final String? initialInformation;
   final String? termsAndConditions;
   final String? scriptTags;
+  final String? contactEmailAddress;
 
   const LandingPageModel(
       {required this.id,
@@ -42,7 +43,8 @@ class LandingPageModel extends Equatable {
       this.privacyPolicy,
       this.initialInformation,
       this.termsAndConditions,
-      this.scriptTags});
+      this.scriptTags,
+      this.contactEmailAddress});
 
   LandingPageModel copyWith(
       {String? id,
@@ -62,7 +64,8 @@ class LandingPageModel extends Equatable {
       String? privacyPolicy,
       String? initialInformation,
       String? termsAndConditions,
-      String? scriptTags}) {
+      String? scriptTags,
+      String? contactEmailAddress}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -81,7 +84,8 @@ class LandingPageModel extends Equatable {
         privacyPolicy: privacyPolicy ?? this.privacyPolicy,
         initialInformation: initialInformation ?? this.initialInformation,
         termsAndConditions: termsAndConditions ?? this.termsAndConditions,
-        scriptTags: scriptTags ?? this.scriptTags);
+        scriptTags: scriptTags ?? this.scriptTags,
+        contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress);
   }
 
   Map<String, dynamic> toMap() {
@@ -103,7 +107,8 @@ class LandingPageModel extends Equatable {
       'privacyPolicy': privacyPolicy,
       'initialInformation': initialInformation,
       'termsAndConditions': termsAndConditions,
-      'scripts': scriptTags
+      'scripts': scriptTags,
+      'contactEmailAddress': contactEmailAddress
     };
   }
 
@@ -145,7 +150,10 @@ class LandingPageModel extends Equatable {
         termsAndConditions: map['termsAndConditions'] != null
             ? map['termsAndConditions'] as String
             : null,
-        scriptTags: map['scripts'] != null ? map['scripts'] as String : null);
+        scriptTags: map['scripts'] != null ? map['scripts'] as String : null,
+        contactEmailAddress: map['contactEmailAddress'] != null
+            ? map['contactEmailAddress'] as String
+            : null);
   }
 
   factory LandingPageModel.fromFirestore(Map<String, dynamic> doc, String id) {
@@ -172,7 +180,8 @@ class LandingPageModel extends Equatable {
         privacyPolicy: privacyPolicy,
         initialInformation: initialInformation,
         termsAndConditions: termsAndConditions,
-        scriptTags: scriptTags);
+        scriptTags: scriptTags,
+        contactEmailAddress: contactEmailAddress);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -194,7 +203,8 @@ class LandingPageModel extends Equatable {
         privacyPolicy: landingPage.privacyPolicy,
         initialInformation: landingPage.initialInformation,
         termsAndConditions: landingPage.termsAndConditions,
-        scriptTags: landingPage.scriptTags);
+        scriptTags: landingPage.scriptTags,
+        contactEmailAddress: landingPage.contactEmailAddress);
   }
 
   @override
@@ -213,6 +223,7 @@ class LandingPageModel extends Equatable {
         privacyPolicy,
         initialInformation,
         termsAndConditions,
-        scriptTags
+        scriptTags,
+        contactEmailAddress
       ];
 }

@@ -21,6 +21,7 @@ class LandingPage extends Equatable {
   final String? initialInformation;
   final String? termsAndConditions;
   final String? scriptTags;
+  final String? contactEmailAddress;
 
   const LandingPage(
       {required this.id,
@@ -40,7 +41,8 @@ class LandingPage extends Equatable {
       this.privacyPolicy,
       this.initialInformation,
       this.termsAndConditions,
-      this.scriptTags});
+      this.scriptTags,
+      this.contactEmailAddress});
 
   LandingPage copyWith(
       {UniqueID? id,
@@ -60,7 +62,8 @@ class LandingPage extends Equatable {
       String? privacyPolicy,
       String? initialInformation,
       String? termsAndConditions,
-      String? scriptTags}) {
+      String? scriptTags,
+      String? contactEmailAddress}) {
     return LandingPage(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -79,7 +82,8 @@ class LandingPage extends Equatable {
         privacyPolicy: privacyPolicy ?? this.privacyPolicy,
         initialInformation: initialInformation ?? this.initialInformation,
         termsAndConditions: termsAndConditions ?? this.termsAndConditions,
-        scriptTags: scriptTags ?? this.scriptTags);
+        scriptTags: scriptTags ?? this.scriptTags,
+        contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress);
   }
 
   @override
@@ -98,6 +102,12 @@ class LandingPage extends Equatable {
         privacyPolicy,
         initialInformation,
         termsAndConditions,
-        scriptTags
+        scriptTags,
+        contactEmailAddress
       ];
 }
+
+// TODO: BACKEND FEHLER BEHEBEN
+// TODO: BACKEND TESTS
+// TODO: LOCALIZATIONS
+// TODO: FRONTEND TESTS
