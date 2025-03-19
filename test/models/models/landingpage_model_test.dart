@@ -41,7 +41,8 @@ void main() {
           privacyPolicy: "Test",
           initialInformation: "Test",
           termsAndConditions: "Test",
-          scriptTags: "<script> Test </script>");
+          scriptTags: "<script> Test </script>",
+          contactEmailAddress: "test@x.de");
 
       final expectedResult = {
         "id": "1",
@@ -61,7 +62,8 @@ void main() {
         "privacyPolicy": "Test",
         "initialInformation": "Test",
         "termsAndConditions": "Test",
-        "scripts": "<script> Test </script>"
+        "scripts": "<script> Test </script>",
+        "contactEmailAddress": "test@x.de"
       };
       // When
       final result = model.toMap();

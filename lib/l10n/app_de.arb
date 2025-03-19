@@ -422,6 +422,10 @@
     "@placeholder_description": {
         "description": "Platzhalter textbox für Beschreibung"
     },
+    "landingpage_creator_placeholder_contact_email": "Kontakt E-Mail Adresse",
+    "@landingpage_creator_placeholder_contact_email": {
+        "description": "Platzhalter für Kontakt Email Adresse im Landingpage Creator"
+    },
     "error_msg_pleace_upload_picture": "Bitte ein Bild hochladen",
     "@error_msg_pleace_upload_picture": {
         "description": "Fehlernachricht wenn kein Bild hochgeladen wurde."

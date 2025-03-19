@@ -111,7 +111,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "imageHasChanged": imageHasChanged,
         "isDefaultPage": landingPageModel.isDefaultPage,
         "isActive": landingPageModel.isActive,
-        "templateID": templateID
+        "templateID": templateID,
+        "contactEmailAddress": landingPageModel.contactEmailAddress
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
@@ -155,7 +156,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "imageData": imageData != null ? base64Encode(imageData) : null,
         "imageHasChanged": imageHasChanged,
         "isDefaultPage": landingPage.isDefaultPage,
-        "isActive": landingPage.isActive
+        "isActive": landingPage.isActive,
+        "contactEmailAddress": landingPage.contactEmailAddress
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
