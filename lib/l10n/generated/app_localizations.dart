@@ -2693,11 +2693,11 @@ abstract class AppLocalizations {
   /// **'Terms and Conditions Configuration'**
   String get landingpage_pagebuilder_footer_config_terms_and_conditions;
 
-  /// Title of the edit promoter page
+  /// Promoter name on the edit promoter page
   ///
   /// In en, this message translates to:
-  /// **'Edit promoter'**
-  String get edit_promoter_title;
+  /// **'Edit {firstName} {lastName}'**
+  String edit_promoter_title(String firstName, String lastName);
 
   /// Untertitel der Promoter bearbeiten Seite
   ///

@@ -1312,7 +1312,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_footer_config_terms_and_conditions => 'AGB Konfiguration';
 
   @override
-  String get edit_promoter_title => 'Promoter bearbeiten';
+  String edit_promoter_title(String firstName, String lastName) {
+    return '$firstName $lastName bearbeiten';
+  }
 
   @override
   String get edit_promoter_subtitle => 'Hier kannst du die Landingpage Zuweisungen anpassen.';

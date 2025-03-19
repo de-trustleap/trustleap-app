@@ -186,7 +186,10 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                       return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SelectableText(localization.edit_promoter_title,
+                            SelectableText(
+                                localization.edit_promoter_title(
+                                    widget.promoter.firstName ?? "",
+                                    widget.promoter.lastName ?? ""),
                                 style: themeData.textTheme.headlineLarge!
                                     .copyWith(fontWeight: FontWeight.bold)),
                             const SizedBox(height: spacing),

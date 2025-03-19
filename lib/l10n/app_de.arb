@@ -1754,9 +1754,19 @@
     "@landingpage_pagebuilder_footer_config_terms_and_conditions": {
         "description": "Ausklappares Menü für AGB Konfiguration des Footers im Pagebuilder Config Menü"
     },
-    "edit_promoter_title": "Promoter bearbeiten",
+    "edit_promoter_title": "{firstName} {lastName} bearbeiten",
     "@edit_promoter_title": {
-        "description": "Titel der Promoter bearbeiten Seite"
+        "description": "Name des Promoters auf der Promoter bearbeiten Seite",
+        "placeholders": {
+            "firstName": {
+                "type": "String",
+                "example": "Max"
+            },
+            "lastName": {
+                "type": "String",
+                "example": "Mustermann"
+            }
+        }
     },
     "edit_promoter_subtitle": "Hier kannst du die Landingpage Zuweisungen anpassen.",
     "@edit_promoter_subtitle": {

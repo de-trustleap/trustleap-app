@@ -1312,7 +1312,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_footer_config_terms_and_conditions => 'Terms and Conditions Configuration';
 
   @override
-  String get edit_promoter_title => 'Edit promoter';
+  String edit_promoter_title(String firstName, String lastName) {
+    return 'Edit $firstName $lastName';
+  }
 
   @override
   String get edit_promoter_subtitle => 'Here you can adjust the landingpage allocation.';
