@@ -422,6 +422,10 @@
     "@placeholder_description": {
         "description": "Placeholder textbox for description"
     },
+    "landingpage_creator_placeholder_contact_email": "Contact email address",
+    "@landingpage_creator_placeholder_contact_email": {
+        "description": "Placeholder for contact email address in landingpage creator"
+    },
     "error_msg_pleace_upload_picture": "Please upload an image",
     "@error_msg_pleace_upload_picture": {
         "description": "Error message when no image has been uploaded."

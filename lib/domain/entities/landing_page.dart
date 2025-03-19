@@ -107,5 +107,4 @@ class LandingPage extends Equatable {
       ];
 }
 
-// TODO: LOCALIZATIONS
 // TODO: FRONTEND TESTS

@@ -713,6 +713,12 @@ abstract class AppLocalizations {
   /// **'Description'**
   String get placeholder_description;
 
+  /// Placeholder for contact email address in landingpage creator
+  ///
+  /// In en, this message translates to:
+  /// **'Contact email address'**
+  String get landingpage_creator_placeholder_contact_email;
+
   /// Error message when no image has been uploaded.
   ///
   /// In en, this message translates to:

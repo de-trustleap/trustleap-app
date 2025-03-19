@@ -318,6 +318,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get placeholder_description => 'Beschreibung';
 
   @override
+  String get landingpage_creator_placeholder_contact_email => 'Kontakt E-Mail Adresse';
+
+  @override
   String get error_msg_pleace_upload_picture => 'Bitte ein Bild hochladen';
 
   @override

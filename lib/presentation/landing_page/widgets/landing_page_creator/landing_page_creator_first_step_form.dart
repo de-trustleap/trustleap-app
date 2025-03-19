@@ -213,7 +213,8 @@ class _LandingPageCreatorFormState
                                   maxWidth: maxWidth,
                                   controller: contactEmailAddressTextController,
                                   disabled: false,
-                                  placeholder: "Kontakt E-Mail Adresse",
+                                  placeholder: localization
+                                      .landingpage_creator_placeholder_contact_email,
                                   onChanged: resetError,
                                   validator: validator
                                       .validateLandingPageContactEmailAddress,

@@ -28,11 +28,11 @@ class LandingPageCreatorFormValidator {
     const emailRegex =
         r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
     if (input == null || input.isEmpty) {
-      return "E-Mail Adresse angeben";
+      return localization.auth_validation_missing_email;
     } else if (RegExp(emailRegex).hasMatch(input.trim())) {
       return null;
     } else {
-      return "Die angegebene E-Mail Adresse ist ungültig";
+      return localization.auth_failure_invalid_email;
     }
   }
 
