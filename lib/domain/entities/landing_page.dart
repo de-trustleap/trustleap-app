@@ -107,7 +107,5 @@ class LandingPage extends Equatable {
       ];
 }
 
-// TODO: BACKEND FEHLER BEHEBEN
-// TODO: BACKEND TESTS
 // TODO: LOCALIZATIONS
 // TODO: FRONTEND TESTS
