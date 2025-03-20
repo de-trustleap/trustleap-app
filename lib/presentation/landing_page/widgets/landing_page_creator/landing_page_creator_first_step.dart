@@ -17,12 +17,14 @@ class LandingPageCreatorFirstStep extends StatefulWidget {
   final LandingPage? landingPage;
   final Company? company;
   final bool isEditMode;
+  final bool createDefaultPage;
   final Function(LandingPage, Uint8List?, bool) onContinue;
   const LandingPageCreatorFirstStep(
       {super.key,
       this.company,
       this.landingPage,
       required this.isEditMode,
+      required this.createDefaultPage,
       required this.onContinue});
 
   @override
@@ -127,6 +129,7 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
               child: LandingPageCreatorFirstStepForm(
             id: id,
             landingPage: widget.landingPage,
+            createDefaultPage: widget.createDefaultPage,
             onContinueTap: (landingPage) {
               _onContinue(landingPage);
             },

@@ -50,7 +50,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
         onPressed: () {
           CustomNavigator.pushNamed(
               "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
-              arguments: landingPage);
+              arguments: {"landingPage": landingPage});
         },
         iconSize: 24,
         tooltip: localizations.landingpage_overview_edit_tooltip,

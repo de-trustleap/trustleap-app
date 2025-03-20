@@ -8,6 +8,7 @@ import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
+import 'package:finanzbegleiter/core/helpers/custom_claims.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
@@ -20,27 +21,33 @@ import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_mode
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_sorting_helper.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LandingPageRepositoryImplementation implements LandingPageRepository {
   final FirebaseFirestore firestore;
   final FirebaseFunctions firebaseFunctions;
+  final FirebaseAuth firebaseAuth;
   final FirebaseAppCheck appCheck;
 
   LandingPageRepositoryImplementation(
       {required this.firestore,
       required this.firebaseFunctions,
+      required this.firebaseAuth,
       required this.appCheck});
 
   @override
   Stream<Either<DatabaseFailure, CustomUser>> observeAllLandingPages() async* {
     final userDoc = await firestore.userDocument();
+
     var requestedUser = await userDoc.get();
     if (!requestedUser.exists) {
       yield left(NotFoundFailure());
     }
+    final role = await CustomClaims(auth: firebaseAuth).getUserCustomClaims();
     yield* userDoc.snapshots().map((snapshot) {
       var document = snapshot.data() as Map<String, dynamic>;
       var model = UserModel.fromFirestore(document, snapshot.id).toDomain();
+      model = model.copyWith(role: role);
       return right<DatabaseFailure, CustomUser>(model);
     }).handleError((e) {
       if (e is FirebaseException) {

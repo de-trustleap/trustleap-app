@@ -106,5 +106,3 @@ class LandingPage extends Equatable {
         contactEmailAddress
       ];
 }
-
-// TODO: FRONTEND TESTS

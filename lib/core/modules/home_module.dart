@@ -40,8 +40,12 @@ class HomeModule extends Module {
                     createdNewPage: r.args.queryParams["createdNewPage"],
                     editedPage: r.args.queryParams["editedPage"],
                   )),
-          ChildRoute(RoutePaths.landingPageCreatorPath,
-              child: (_) => LandingPageCreator(landingPage: r.args.data)),
+          ChildRoute(RoutePaths.landingPageCreatorPath, child: (_) {
+            final args = r.args.data as Map<String, dynamic>?;
+            return LandingPageCreator(
+                landingPage: args?["landingPage"],
+                createDefaultPage: args?["createDefaultPage"] ?? false);
+          }),
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),
         ]);

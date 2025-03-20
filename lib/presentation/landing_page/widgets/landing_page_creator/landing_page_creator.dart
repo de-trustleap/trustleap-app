@@ -9,14 +9,20 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageCreator extends StatelessWidget {
   final LandingPage? landingPage;
-  const LandingPageCreator({super.key, this.landingPage});
+  final bool createDefaultPage;
+  const LandingPageCreator(
+      {super.key, this.landingPage, this.createDefaultPage = false});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => Modular.get<LandingPageImageBloc>()),
-      BlocProvider(create: (context) => Modular.get<LandingPageCubit>()),
-      BlocProvider(create: (context) => Modular.get<CompanyCubit>())
-    ], child: LandingPageCreatorMultiPageForm(landingPage: landingPage));
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => Modular.get<LandingPageImageBloc>()),
+          BlocProvider(create: (context) => Modular.get<LandingPageCubit>()),
+          BlocProvider(create: (context) => Modular.get<CompanyCubit>())
+        ],
+        child: LandingPageCreatorMultiPageForm(
+            landingPage: landingPage, createDefaultPage: createDefaultPage));
   }
 }

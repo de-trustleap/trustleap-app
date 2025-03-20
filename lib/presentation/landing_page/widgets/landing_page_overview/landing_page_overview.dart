@@ -1,8 +1,11 @@
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -43,6 +46,30 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
   void submitIsActive(String id, bool isActive, String userId) {
     Modular.get<LandingPageCubit>()
         .toggleLandingPageActivity(id, isActive, userId);
+  }
+
+  bool showEmptyPage(List<LandingPage> landingPages, CustomUser user) {
+    if (landingPages.isNotEmpty) {
+      final isOnlyDefault =
+          landingPages.length == 1 && (landingPages[0].isDefaultPage ?? false);
+      return isOnlyDefault ? true : false;
+    } else {
+      return user.role == Role.company ? false : true;
+    }
+  }
+
+  bool showCreateDefaultPage(List<LandingPage> landingPages, CustomUser user) {
+    if (landingPages.isEmpty) {
+      return user.role == Role.company ? true : false;
+    } else {
+      final containsDefaultPage =
+          landingPages.any((page) => page.isDefaultPage == true);
+      if (!containsDefaultPage) {
+        return user.role == Role.company ? true : false;
+      } else {
+        return false;
+      }
+    }
   }
 
   List<ClickableLink> _getPromoterLink(List<Promoter> promoters) {
@@ -169,7 +196,8 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                 state is ToggleLandingPageActivityLoadingState) {
               return const LoadingIndicator();
             } else if (observerState is LandingPageObserverSuccess) {
-              if (observerState.landingPages.isEmpty) {
+              if (showEmptyPage(
+                  observerState.landingPages, observerState.user)) {
                 return EmptyPage(
                     icon: Icons.note_add,
                     title: localization.landingpage_overview_empty_page_title,
@@ -179,6 +207,22 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                     onTap: () {
                       CustomNavigator.navigate(RoutePaths.homePath +
                           RoutePaths.landingPageCreatorPath);
+                    });
+              } else if (showCreateDefaultPage(
+                  observerState.landingPages, observerState.user)) {
+                return EmptyPage(
+                    icon: Icons.note_add,
+                    title: "Landingpage einrichten",
+                    subTitle:
+                        "Du hast noch keine Landingpage für dein Unternehmen eingerichtet. Hier kannst du zu Beginn eine Default Landingpage erstellen.\nAuf diese Landingpage wird zurückgegriffen, falls der Link zu einer anderen Landingpage abgelaufen ist.\nAuf der Landingpage werden Unternehmensinformationen sowie ein Kontaktformular angezeigt.",
+                    buttonTitle: "Default Landingpage erstellen",
+                    onTap: () {
+                      CustomNavigator.pushNamed(
+                          "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
+                          arguments: {
+                            "landingPage": null,
+                            "createDefaultPage": true,
+                          });
                     });
               } else {
                 return CardContainer(
