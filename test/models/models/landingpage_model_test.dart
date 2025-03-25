@@ -42,7 +42,8 @@ void main() {
           initialInformation: "Test",
           termsAndConditions: "Test",
           scriptTags: "<script> Test </script>",
-          contactEmailAddress: "test@x.de");
+          contactEmailAddress: "test@x.de",
+          companyData: null);
 
       final expectedResult = {
         "id": "1",
@@ -63,7 +64,8 @@ void main() {
         "initialInformation": "Test",
         "termsAndConditions": "Test",
         "scripts": "<script> Test </script>",
-        "contactEmailAddress": "test@x.de"
+        "contactEmailAddress": "test@x.de",
+        "companyData": null
       };
       // When
       final result = model.toMap();

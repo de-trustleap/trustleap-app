@@ -3,9 +3,11 @@ import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/infrastructure/models/company_model.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_emoji_picker.dart';
@@ -24,12 +26,14 @@ import 'package:responsive_framework/responsive_framework.dart';
 class LandingPageCreatorFirstStepForm extends StatefulWidget {
   final UniqueID id;
   final LandingPage? landingPage;
+  final Company? company;
   final bool createDefaultPage;
   final Function(LandingPage) onContinueTap;
   const LandingPageCreatorFirstStepForm(
       {super.key,
       required this.id,
       this.landingPage,
+      this.company,
       required this.createDefaultPage,
       required this.onContinueTap});
 
@@ -110,7 +114,10 @@ class _LandingPageCreatorFormState
           termsAndConditions: widget.landingPage?.termsAndConditions,
           scriptTags: widget.landingPage?.scriptTags,
           contactEmailAddress: contactEmailAddressTextController.text.trim(),
-          ownerID: user!.id));
+          ownerID: user!.id,
+          companyData: widget.company != null
+              ? CompanyModel.fromDomain(widget.company!).toMap()
+              : null));
     } else {
       validationHasError = true;
       Modular.get<LandingPageCubit>()

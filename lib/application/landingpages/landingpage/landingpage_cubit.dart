@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
@@ -66,6 +67,14 @@ class LandingPageCubit extends Cubit<LandingPageState> {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
       emit(LandingPageImageValid());
+    }
+  }
+
+  void checkCompanyData(Company? company) {
+    if (company == null) {
+      emit(CheckCompanyDataMissingCompanyState());
+    } else {
+      emit(CheckCompanyValidState());
     }
   }
 

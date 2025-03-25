@@ -22,6 +22,7 @@ class LandingPage extends Equatable {
   final String? termsAndConditions;
   final String? scriptTags;
   final String? contactEmailAddress;
+  final Map<String, dynamic>? companyData;
 
   const LandingPage(
       {required this.id,
@@ -42,7 +43,8 @@ class LandingPage extends Equatable {
       this.initialInformation,
       this.termsAndConditions,
       this.scriptTags,
-      this.contactEmailAddress});
+      this.contactEmailAddress,
+      this.companyData});
 
   LandingPage copyWith(
       {UniqueID? id,
@@ -63,7 +65,8 @@ class LandingPage extends Equatable {
       String? initialInformation,
       String? termsAndConditions,
       String? scriptTags,
-      String? contactEmailAddress}) {
+      String? contactEmailAddress,
+      Map<String, dynamic>? companyData}) {
     return LandingPage(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -83,7 +86,8 @@ class LandingPage extends Equatable {
         initialInformation: initialInformation ?? this.initialInformation,
         termsAndConditions: termsAndConditions ?? this.termsAndConditions,
         scriptTags: scriptTags ?? this.scriptTags,
-        contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress);
+        contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
+        companyData: companyData ?? this.companyData);
   }
 
   @override
@@ -103,6 +107,7 @@ class LandingPage extends Equatable {
         initialInformation,
         termsAndConditions,
         scriptTags,
-        contactEmailAddress
+        contactEmailAddress,
+        companyData
       ];
 }

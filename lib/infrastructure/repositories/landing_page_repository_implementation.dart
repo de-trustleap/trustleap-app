@@ -100,7 +100,17 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("createLandingPage");
     final landingPageModel = LandingPageModel.fromDomain(landingPage);
-
+    var companyData = landingPageModel.companyData;
+    companyData = {
+      "id": companyData?["id"],
+      "name": companyData?["name"],
+      "industry": companyData?["industry"],
+      "address": companyData?["address"],
+      "postCode": companyData?["postCode"],
+      "place": companyData?["place"],
+      "phoneNumber": companyData?["phoneNumber"],
+      "websiteURL": companyData?["websiteURL"]
+    };
     try {
       await callable.call({
         "appCheckToken": appCheckToken,
@@ -119,7 +129,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "isDefaultPage": landingPageModel.isDefaultPage,
         "isActive": landingPageModel.isActive,
         "templateID": templateID,
-        "contactEmailAddress": landingPageModel.contactEmailAddress
+        "contactEmailAddress": landingPageModel.contactEmailAddress,
+        "companyData": landingPageModel.companyData != null ? companyData : null
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {

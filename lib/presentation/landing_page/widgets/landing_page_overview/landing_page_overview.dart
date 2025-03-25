@@ -52,7 +52,11 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
     if (landingPages.isNotEmpty) {
       final isOnlyDefault =
           landingPages.length == 1 && (landingPages[0].isDefaultPage ?? false);
-      return isOnlyDefault ? true : false;
+      if (isOnlyDefault) {
+        return user.role == Role.company ? false : true;
+      } else {
+        return false;
+      }
     } else {
       return user.role == Role.company ? false : true;
     }
