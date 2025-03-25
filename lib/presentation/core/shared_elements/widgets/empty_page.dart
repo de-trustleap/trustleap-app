@@ -28,7 +28,7 @@ class EmptyPage extends StatelessWidget {
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return Container(
-        constraints: const BoxConstraints(maxWidth: 600),
+        constraints: const BoxConstraints(maxWidth: 800),
         decoration: BoxDecoration(color: themeData.colorScheme.surface),
         child: CenteredConstrainedWrapper(
             child: Column(
@@ -45,7 +45,7 @@ class EmptyPage extends StatelessWidget {
                     fontSize: responsiveValue.isMobile ? 20 : 24)),
             const SizedBox(height: 16),
             SelectableText(subTitle,
-                style: themeData.textTheme.headlineLarge,
+                style: themeData.textTheme.bodyLarge!.copyWith(height: 1.5),
                 textAlign: TextAlign.center),
             if (!isButtonHidden) ...[
               const SizedBox(height: 24),

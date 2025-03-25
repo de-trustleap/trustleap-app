@@ -90,6 +90,16 @@ class _LandingPageCreatorSecondStepState
     super.didUpdateWidget(oldWidget);
   }
 
+  String _getSubmitButtonText(AppLocalizations localization) {
+    if (widget.isEditMode) {
+      return localization.landingpage_creation_edit_button_text;
+    } else if (widget.landingPage?.isDefaultPage ?? false) {
+      return localization.landingpage_create_buttontitle;
+    } else {
+      return localization.landingpage_creation_continue;
+    }
+  }
+
   @override
   void dispose() {
     impressumTextController.dispose();
@@ -258,11 +268,8 @@ class _LandingPageCreatorSecondStepState
                                           height: textFieldSpacing)),
                                   ResponsiveRowColumnItem(
                                       child: PrimaryButton(
-                                          title: widget.isEditMode
-                                              ? localization
-                                                  .landingpage_creation_edit_button_text
-                                              : localization
-                                                  .landingpage_creation_continue,
+                                          title: _getSubmitButtonText(
+                                              localization),
                                           disabled: widget.buttonsDisabled,
                                           isLoading: widget.isLoading,
                                           width: responsiveValue.isMobile

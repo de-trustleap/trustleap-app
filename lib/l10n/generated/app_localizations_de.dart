@@ -1312,7 +1312,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_footer_config_terms_and_conditions => 'AGB Konfiguration';
 
   @override
-  String get edit_promoter_title => 'Promoter bearbeiten';
+  String edit_promoter_title(String firstName, String lastName) {
+    return '$firstName $lastName bearbeiten';
+  }
 
   @override
   String get edit_promoter_subtitle => 'Hier kannst du die Landingpage Zuweisungen anpassen.';
@@ -1343,4 +1345,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_video_player_config_youtube_link_placeholder => 'Youtube Link';
+
+  @override
+  String get landingpage_creator_missing_companydata_error => 'Unternehmensdaten nicht gefunden!';
+
+  @override
+  String get landingpage_creator_default_page_info_text => 'Für das Erstellen der Default Landingpage werden die Daten aus deinem Unternehmensprofil verwendet. Diese werden auf der Default Landingpage angezeigt.\nWenn du deine Unternehmensdaten änderst, dann ändern sich auch die Daten auf deiner Default Page.';
+
+  @override
+  String get landingpage_overview_no_default_page_title => 'Landingpage einrichten';
+
+  @override
+  String get landingpage_overview_no_default_page_subtitle => 'Du hast noch keine Landingpage für dein Unternehmen eingerichtet. Hier kannst du zu Beginn eine Default Landingpage erstellen.\nAuf diese Landingpage wird zurückgegriffen, falls der Link zu einer anderen Landingpage abgelaufen ist.\nAuf der Landingpage werden Unternehmensinformationen sowie ein Kontaktformular angezeigt.';
+
+  @override
+  String get landingpage_overview_no_default_page_button_title => 'Default Landingpage erstellen';
 }

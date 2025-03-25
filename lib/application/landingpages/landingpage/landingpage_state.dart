@@ -211,3 +211,14 @@ class GetPromotersSuccessState extends LandingPageState with EquatableMixin {
   @override
   List<Object> get props => [promoters];
 }
+
+class CheckCompanyDataMissingCompanyState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
+class CheckCompanyValidState extends LandingPageState with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}

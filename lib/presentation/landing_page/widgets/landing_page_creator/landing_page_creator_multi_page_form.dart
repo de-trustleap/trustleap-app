@@ -22,7 +22,9 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorMultiPageForm extends StatefulWidget {
   final LandingPage? landingPage;
-  const LandingPageCreatorMultiPageForm({super.key, required this.landingPage});
+  final bool createDefaultPage;
+  const LandingPageCreatorMultiPageForm(
+      {super.key, required this.landingPage, required this.createDefaultPage});
 
   @override
   State<LandingPageCreatorMultiPageForm> createState() =>
@@ -62,24 +64,20 @@ class _LandingPageCreatorMultiPageFormState
   }
 
   void _initializeSteps() {
-    if (isEditMode) {
-      _initializeStepsForEditing();
-    } else {
-      _initializeStepsForCreation();
-    }
-  }
-
-  void _initializeStepsForCreation() {
     _steps = [
       LandingPageCreatorFirstStep(
           landingPage: landingPage,
           isEditMode: isEditMode,
+          createDefaultPage: widget.createDefaultPage,
           company: company,
           onContinue: (landingPage, image, imageHasChanged) {
             if (imageValid) {
               setState(() {
                 this.image = image;
                 this.landingPage = landingPage;
+                this.landingPage = widget.createDefaultPage
+                    ? landingPage.copyWith(isDefaultPage: true)
+                    : landingPage.copyWith(isDefaultPage: false);
                 this.imageHasChanged = imageHasChanged;
                 _currentStep += 1;
                 progress = 2 / _steps.length;
@@ -98,6 +96,9 @@ class _LandingPageCreatorMultiPageFormState
             if (isEditMode) {
               Modular.get<LandingPageCubit>()
                   .editLandingPage(landingPage, image, imageHasChanged);
+            } else if ((landingPage.isDefaultPage ?? false) && image != null) {
+              Modular.get<LandingPageCubit>()
+                  .createLandingPage(landingPage, image, imageHasChanged, "");
             } else if (image != null) {
               setState(() {
                 this.image = image;
@@ -114,73 +115,26 @@ class _LandingPageCreatorMultiPageFormState
               progress = 1 / _steps.length;
             });
           }),
-      LandingPageCreatorThirdStep(
-          landingPage: landingPage,
-          image: image,
-          imageHasChanged: imageHasChanged,
-          buttonsDisabled: lastFormButtonsDisabled,
-          isLoading: isLoading,
-          onBack: (landingPage) {
-            setState(() {
-              this.landingPage = landingPage;
-              _currentStep -= 1;
-              progress = 2 / _steps.length;
-            });
-          },
-          onSaveTapped: (landingPage, image, imageHasChanged, templateID) {
-            if (image != null) {
-              Modular.get<LandingPageCubit>().createLandingPage(
-                  landingPage, image, imageHasChanged, templateID);
-            }
-          })
-    ];
-  }
-
-  void _initializeStepsForEditing() {
-    _steps = [
-      LandingPageCreatorFirstStep(
-          landingPage: landingPage,
-          isEditMode: isEditMode,
-          company: company,
-          onContinue: (landingPage, image, imageHasChanged) {
-            if (imageValid) {
+      if (!widget.createDefaultPage && !isEditMode)
+        LandingPageCreatorThirdStep(
+            landingPage: landingPage,
+            image: image,
+            imageHasChanged: imageHasChanged,
+            buttonsDisabled: lastFormButtonsDisabled,
+            isLoading: isLoading,
+            onBack: (landingPage) {
               setState(() {
-                this.image = image;
                 this.landingPage = landingPage;
-                this.imageHasChanged = imageHasChanged;
-                _currentStep += 1;
+                _currentStep -= 1;
                 progress = 2 / _steps.length;
               });
-            }
-          }),
-      LandingPageCreatorSecondStep(
-          id: isEditMode ? (widget.landingPage?.id ?? UniqueID()) : id,
-          landingPage: landingPage,
-          image: image,
-          imageHasChanged: imageHasChanged,
-          buttonsDisabled: lastFormButtonsDisabled,
-          isLoading: isLoading,
-          isEditMode: isEditMode,
-          onContinueTapped: (landingPage, image, imageHasChanged, isEditMode) {
-            if (isEditMode) {
-              Modular.get<LandingPageCubit>()
-                  .editLandingPage(landingPage, image, imageHasChanged);
-            } else if (image != null) {
-              setState(() {
-                this.image = image;
-                this.landingPage = landingPage;
-                _currentStep += 1;
-                progress = 3 / _steps.length;
-              });
-            }
-          },
-          onBack: (landingPage) {
-            setState(() {
-              this.landingPage = landingPage;
-              _currentStep -= 1;
-              progress = 1 / _steps.length;
-            });
-          })
+            },
+            onSaveTapped: (landingPage, image, imageHasChanged, templateID) {
+              if (image != null) {
+                Modular.get<LandingPageCubit>().createLandingPage(
+                    landingPage, image, imageHasChanged, templateID);
+              }
+            })
     ];
   }
 

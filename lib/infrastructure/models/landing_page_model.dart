@@ -24,6 +24,7 @@ class LandingPageModel extends Equatable {
   final String? termsAndConditions;
   final String? scriptTags;
   final String? contactEmailAddress;
+  final Map<String, dynamic>? companyData;
 
   const LandingPageModel(
       {required this.id,
@@ -44,7 +45,8 @@ class LandingPageModel extends Equatable {
       this.initialInformation,
       this.termsAndConditions,
       this.scriptTags,
-      this.contactEmailAddress});
+      this.contactEmailAddress,
+      this.companyData});
 
   LandingPageModel copyWith(
       {String? id,
@@ -65,7 +67,8 @@ class LandingPageModel extends Equatable {
       String? initialInformation,
       String? termsAndConditions,
       String? scriptTags,
-      String? contactEmailAddress}) {
+      String? contactEmailAddress,
+      Map<String, dynamic>? companyData}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -85,7 +88,8 @@ class LandingPageModel extends Equatable {
         initialInformation: initialInformation ?? this.initialInformation,
         termsAndConditions: termsAndConditions ?? this.termsAndConditions,
         scriptTags: scriptTags ?? this.scriptTags,
-        contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress);
+        contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
+        companyData: companyData ?? this.companyData);
   }
 
   Map<String, dynamic> toMap() {
@@ -108,7 +112,8 @@ class LandingPageModel extends Equatable {
       'initialInformation': initialInformation,
       'termsAndConditions': termsAndConditions,
       'scripts': scriptTags,
-      'contactEmailAddress': contactEmailAddress
+      'contactEmailAddress': contactEmailAddress,
+      'companyData': companyData
     };
   }
 
@@ -153,6 +158,9 @@ class LandingPageModel extends Equatable {
         scriptTags: map['scripts'] != null ? map['scripts'] as String : null,
         contactEmailAddress: map['contactEmailAddress'] != null
             ? map['contactEmailAddress'] as String
+            : null,
+        companyData: map['companyData'] != null
+            ? map['companyData'] as Map<String, dynamic>
             : null);
   }
 
@@ -181,7 +189,8 @@ class LandingPageModel extends Equatable {
         initialInformation: initialInformation,
         termsAndConditions: termsAndConditions,
         scriptTags: scriptTags,
-        contactEmailAddress: contactEmailAddress);
+        contactEmailAddress: contactEmailAddress,
+        companyData: companyData);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -204,7 +213,8 @@ class LandingPageModel extends Equatable {
         initialInformation: landingPage.initialInformation,
         termsAndConditions: landingPage.termsAndConditions,
         scriptTags: landingPage.scriptTags,
-        contactEmailAddress: landingPage.contactEmailAddress);
+        contactEmailAddress: landingPage.contactEmailAddress,
+        companyData: landingPage.companyData);
   }
 
   @override
@@ -224,6 +234,7 @@ class LandingPageModel extends Equatable {
         initialInformation,
         termsAndConditions,
         scriptTags,
-        contactEmailAddress
+        contactEmailAddress,
+        companyData
       ];
 }

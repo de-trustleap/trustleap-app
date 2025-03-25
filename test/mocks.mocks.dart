@@ -1418,6 +1418,16 @@ class MockAppLocalizations extends _i1.Mock implements _i20.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_creator_placeholder_contact_email =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_placeholder_contact_email),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_placeholder_contact_email),
+        ),
+      ) as String);
+
+  @override
   String get error_msg_pleace_upload_picture => (super.noSuchMethod(
         Invocation.getter(#error_msg_pleace_upload_picture),
         returnValue: _i21.dummyValue<String>(
@@ -4676,15 +4686,6 @@ class MockAppLocalizations extends _i1.Mock implements _i20.AppLocalizations {
       ) as String);
 
   @override
-  String get edit_promoter_title => (super.noSuchMethod(
-        Invocation.getter(#edit_promoter_title),
-        returnValue: _i21.dummyValue<String>(
-          this,
-          Invocation.getter(#edit_promoter_title),
-        ),
-      ) as String);
-
-  @override
   String get edit_promoter_subtitle => (super.noSuchMethod(
         Invocation.getter(#edit_promoter_subtitle),
         returnValue: _i21.dummyValue<String>(
@@ -4846,6 +4847,31 @@ class MockAppLocalizations extends _i1.Mock implements _i20.AppLocalizations {
           Invocation.method(
             #promoter_overview_creation_date,
             [date],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String edit_promoter_title(
+    String? firstName,
+    String? lastName,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #edit_promoter_title,
+          [
+            firstName,
+            lastName,
+          ],
+        ),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.method(
+            #edit_promoter_title,
+            [
+              firstName,
+              lastName,
+            ],
           ),
         ),
       ) as String);
@@ -8973,6 +8999,15 @@ class MockLandingPageCubit extends _i1.Mock implements _i54.LandingPageCubit {
             landingPage,
             imageData,
           ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void checkCompanyData(_i25.Company? company) => super.noSuchMethod(
+        Invocation.method(
+          #checkCompanyData,
+          [company],
         ),
         returnValueForMissingStub: null,
       );

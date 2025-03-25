@@ -17,12 +17,14 @@ class LandingPageCreatorFirstStep extends StatefulWidget {
   final LandingPage? landingPage;
   final Company? company;
   final bool isEditMode;
+  final bool createDefaultPage;
   final Function(LandingPage, Uint8List?, bool) onContinue;
   const LandingPageCreatorFirstStep(
       {super.key,
       this.company,
       this.landingPage,
       required this.isEditMode,
+      required this.createDefaultPage,
       required this.onContinue});
 
   @override
@@ -52,36 +54,6 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
         .checkLandingPageImage(widget.landingPage, image);
   }
 
-  void onSubmitCreate(LandingPage? landingPage, Function completion,
-      AppLocalizations localization) {
-    if (image != null || widget.company?.companyImageDownloadURL != null) {
-      setState(() {
-        showError = false;
-      });
-      completion();
-    } else {
-      setState(() {
-        showError = true;
-        errorMessage = localization.error_msg_pleace_upload_picture;
-      });
-    }
-  }
-
-  void onSubmitEdit(LandingPage? landingPage, Function completion,
-      AppLocalizations localization) {
-    if (landingPage?.thumbnailDownloadURL != null) {
-      setState(() {
-        showError = false;
-      });
-      completion();
-    } else {
-      setState(() {
-        showError = true;
-        errorMessage = localization.error_msg_pleace_upload_picture;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final landingPageCubit = Modular.get<LandingPageCubit>();
@@ -108,6 +80,22 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
               showError = false;
               errorMessage = "";
             });
+            if (widget.createDefaultPage) {
+              Modular.get<LandingPageCubit>().checkCompanyData(widget.company);
+            } else {
+              widget.onContinue(landingPage, image, imageHasChanged);
+            }
+          } else if (state is CheckCompanyDataMissingCompanyState) {
+            setState(() {
+              showError = true;
+              errorMessage =
+                  localization.landingpage_creator_missing_companydata_error;
+            });
+          } else if (state is CheckCompanyValidState) {
+            setState(() {
+              showError = false;
+              errorMessage = "";
+            });
             widget.onContinue(landingPage, image, imageHasChanged);
           }
         },
@@ -127,6 +115,8 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
               child: LandingPageCreatorFirstStepForm(
             id: id,
             landingPage: widget.landingPage,
+            company: widget.company,
+            createDefaultPage: widget.createDefaultPage,
             onContinueTap: (landingPage) {
               _onContinue(landingPage);
             },
