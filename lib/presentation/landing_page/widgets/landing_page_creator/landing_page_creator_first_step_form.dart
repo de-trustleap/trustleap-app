@@ -189,7 +189,8 @@ class _LandingPageCreatorFormState
                         const SizedBox(height: 16),
                         if (widget.createDefaultPage) ...[
                           SelectableText(
-                              "Für das Erstellen der Default Landingpage werden die Daten aus deinem Unternehmensprofil verwendet. Diese werden auf der Default Landingpage angezeigt.\nWenn du deine Unternehmensdaten änderst, dann ändern sich auch die Daten auf deiner Default Page.",
+                              localization
+                                  .landingpage_creator_default_page_info_text,
                               style: themeData.textTheme.bodyLarge),
                           const SizedBox(height: 16)
                         ],

@@ -1345,4 +1345,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_video_player_config_youtube_link_placeholder => 'Youtube link';
+
+  @override
+  String get landingpage_creator_missing_companydata_error => 'Company data not found';
+
+  @override
+  String get landingpage_creator_default_page_info_text => 'The data from your company profile is used to create the default landing page. This data will be displayed on the default landing page. If you change your company data, the data on your default page will also change.';
+
+  @override
+  String get landingpage_overview_no_default_page_title => 'Setup Landingpage';
+
+  @override
+  String get landingpage_overview_no_default_page_subtitle => 'You haven\'t set up a landing page for your company yet. Here you can create a default landing page to start with. This landing page will be used if the link to another landing page expires. The landing page displays company information and a contact form.';
+
+  @override
+  String get landingpage_overview_no_default_page_button_title => 'Create default landingpage';
 }

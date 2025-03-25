@@ -88,7 +88,8 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
           } else if (state is CheckCompanyDataMissingCompanyState) {
             setState(() {
               showError = true;
-              errorMessage = "Unternehmensdaten nicht gefunden!";
+              errorMessage =
+                  localization.landingpage_creator_missing_companydata_error;
             });
           } else if (state is CheckCompanyValidState) {
             setState(() {

@@ -2758,6 +2758,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Youtube link'**
   String get landingpage_pagebuilder_video_player_config_youtube_link_placeholder;
+
+  /// Error message when company data were not found for the creation of a default landingpage
+  ///
+  /// In en, this message translates to:
+  /// **'Company data not found'**
+  String get landingpage_creator_missing_companydata_error;
+
+  /// information text for the creation of a default landingpage in the landingpage creator
+  ///
+  /// In en, this message translates to:
+  /// **'The data from your company profile is used to create the default landing page. This data will be displayed on the default landing page. If you change your company data, the data on your default page will also change.'**
+  String get landingpage_creator_default_page_info_text;
+
+  /// Title for the page that is displayed if you have not yet created a default landing page.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup Landingpage'**
+  String get landingpage_overview_no_default_page_title;
+
+  /// Text for the page that is displayed if you have not yet created a default landing page.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t set up a landing page for your company yet. Here you can create a default landing page to start with. This landing page will be used if the link to another landing page expires. The landing page displays company information and a contact form.'**
+  String get landingpage_overview_no_default_page_subtitle;
+
+  /// Button title for the page that is displayed if you have not yet created a default landing page.
+  ///
+  /// In en, this message translates to:
+  /// **'Create default landingpage'**
+  String get landingpage_overview_no_default_page_button_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

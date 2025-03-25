@@ -216,10 +216,12 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                   observerState.landingPages, observerState.user)) {
                 return EmptyPage(
                     icon: Icons.note_add,
-                    title: "Landingpage einrichten",
-                    subTitle:
-                        "Du hast noch keine Landingpage für dein Unternehmen eingerichtet. Hier kannst du zu Beginn eine Default Landingpage erstellen.\nAuf diese Landingpage wird zurückgegriffen, falls der Link zu einer anderen Landingpage abgelaufen ist.\nAuf der Landingpage werden Unternehmensinformationen sowie ein Kontaktformular angezeigt.",
-                    buttonTitle: "Default Landingpage erstellen",
+                    title:
+                        localization.landingpage_overview_no_default_page_title,
+                    subTitle: localization
+                        .landingpage_overview_no_default_page_subtitle,
+                    buttonTitle: localization
+                        .landingpage_overview_no_default_page_button_title,
                     onTap: () {
                       CustomNavigator.pushNamed(
                           "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
