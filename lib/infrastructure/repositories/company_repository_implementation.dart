@@ -47,10 +47,21 @@ class CompanyRepositoryImplementation implements CompanyRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> updateCompany(Company company) async {
-    final companyCollection = firestore.collection("companies");
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable = firebaseFunctions.httpsCallable("editCompany");
     final companyModel = CompanyModel.fromDomain(company);
     try {
-      await companyCollection.doc(companyModel.id).update(companyModel.toMap());
+      await callable.call({
+        "appCheckToken": appCheckToken,
+        "id": companyModel.id,
+        "name": company.name,
+        "industry": company.industry,
+        "address": company.address,
+        "postCode": company.postCode,
+        "place": company.place,
+        "phoneNumber": company.phoneNumber,
+        "websiteURL": company.websiteURL
+      });
       return right(unit);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
