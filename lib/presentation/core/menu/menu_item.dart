@@ -41,19 +41,10 @@ class _MenuItemState extends State<MenuItem> {
         begin: MenuDimensions.menuOpenWidth,
         end: MenuDimensions.menuCollapsedWidth,
       ).animate(widget.animationController!);
-    }
-  }
 
-  @override
-  void didUpdateWidget(MenuItem oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.animationController != widget.animationController) {
-      if (widget.animationController != null) {
-        _widthAnimation = Tween<double>(
-          begin: MenuDimensions.menuOpenWidth,
-          end: MenuDimensions.menuCollapsedWidth,
-        ).animate(widget.animationController!);
-      }
+      widget.animationController!.addListener(() {
+        setState(() {});
+      });
     }
   }
 
@@ -89,10 +80,7 @@ class _MenuItemState extends State<MenuItem> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     bool isCurrentlySelected =
-        (BlocProvider.of<MenuCubit>(context).state is MenuItemSelectedState &&
-            (BlocProvider.of<MenuCubit>(context).state as MenuItemSelectedState)
-                    .selectedMenuItem ==
-                widget.type);
+        BlocProvider.of<MenuCubit>(context).selectedItem == widget.type;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -158,29 +146,20 @@ class _MenuItemState extends State<MenuItem> {
                                 ? themeData.colorScheme.surface
                                 : themeData.iconTheme.color,
                           ),
-                          if (widget.animationController != null)
-                            if (_widthAnimation != null &&
-                                _widthAnimation!.value >=
-                                    MenuDimensions.menuOpenWidth) ...[
-                              const SizedBox(width: 12),
-                              Text(
-                                getLocalizedMenuItem(localization),
-                                style: isCurrentlySelected
-                                    ? themeData.textTheme.bodyMedium!.copyWith(
-                                        color: themeData.colorScheme.surface,
-                                      )
-                                    : themeData.textTheme.bodyMedium,
-                              ),
-                            ] else ...[
-                              const SizedBox(width: 12),
-                              Text(
-                                getLocalizedMenuItem(localization),
-                                style: isCurrentlySelected
-                                    ? themeData.textTheme.bodyMedium!.copyWith(
-                                        color: themeData.colorScheme.surface)
-                                    : themeData.textTheme.bodyMedium,
-                              ),
-                            ]
+                          if (widget.animationController != null &&
+                              _widthAnimation != null &&
+                              _widthAnimation!.value >=
+                                  MenuDimensions.menuOpenWidth) ...[
+                            const SizedBox(width: 12),
+                            Text(
+                              getLocalizedMenuItem(localization),
+                              style: isCurrentlySelected
+                                  ? themeData.textTheme.bodyMedium!.copyWith(
+                                      color: themeData.colorScheme.surface,
+                                    )
+                                  : themeData.textTheme.bodyMedium,
+                            ),
+                          ]
                         ],
                       ),
                     ),

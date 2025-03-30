@@ -33,11 +33,6 @@ class _CollapsibleSideMenuState extends State<CollapsibleSideMenu>
             end: MenuDimensions.menuCollapsedWidth)
         .animate(CurvedAnimation(
             parent: _animationController, curve: Curves.easeOut));
-    _animationController.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
-    });
   }
 
   @override
