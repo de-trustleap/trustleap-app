@@ -231,7 +231,6 @@ class CompanyRepositoryImplementation implements CompanyRepository {
         return right("");
       }
     } on FirebaseFunctionsException catch (e) {
-      print("THE ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

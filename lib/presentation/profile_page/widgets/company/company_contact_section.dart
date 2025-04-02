@@ -187,7 +187,8 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
           } else if (state is CompanyGetAVVPDFSuccessState) {
             Downloader().showFileInNewTab(state.downloadURL);
           }
-          // TODO: Frontend Tests
+          // TODO: Wenn AVV bereits zugestimmt wurde soll es ausgeblendet werden und ein Text da stehen: AVV bereits zugestimmt am: xxx. Wenn man dann ein Textfeld bearbeitet kommt die Checkbox wieder.
+          // TODO: Wenn man die AVV über den Link mit der Checkbox herunterläd dann soll im Dokument Vorschau stehen.
           // TODO: Localization
         },
         builder: (context, state) {
