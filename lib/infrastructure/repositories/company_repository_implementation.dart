@@ -46,7 +46,8 @@ class CompanyRepositoryImplementation implements CompanyRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> updateCompany(Company company) async {
+  Future<Either<DatabaseFailure, Unit>> updateCompany(
+      Company company, bool avvAccepted) async {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("editCompany");
     final companyModel = CompanyModel.fromDomain(company);
@@ -60,7 +61,8 @@ class CompanyRepositoryImplementation implements CompanyRepository {
         "postCode": company.postCode,
         "place": company.place,
         "phoneNumber": company.phoneNumber,
-        "websiteURL": company.websiteURL
+        "websiteURL": company.websiteURL,
+        "avvAccepted": avvAccepted
       });
       return right(unit);
     } on FirebaseException catch (e) {
@@ -87,7 +89,8 @@ class CompanyRepositoryImplementation implements CompanyRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> registerCompany(Company company) async {
+  Future<Either<DatabaseFailure, Unit>> registerCompany(
+      Company company, bool avvAccepted) async {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("registerCompany");
     final companyModel = CompanyModel.fromDomain(company);
@@ -102,7 +105,8 @@ class CompanyRepositoryImplementation implements CompanyRepository {
         "postCode": companyModel.postCode,
         "place": companyModel.place,
         "phoneNumber": companyModel.phoneNumber,
-        "ownerID": companyModel.ownerID
+        "ownerID": companyModel.ownerID,
+        "avvAccepted": avvAccepted
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
@@ -197,6 +201,37 @@ class CompanyRepositoryImplementation implements CompanyRepository {
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, String>> getAVVDownloadURL(
+      Company company) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("createAVVPDFFile");
+    final companyModel = CompanyModel.fromDomain(company);
+    try {
+      final result = await callable.call({
+        "appCheckToken": appCheckToken,
+        "id": companyModel.id,
+        "name": companyModel.name,
+        "industry": companyModel.industry,
+        "website": companyModel.websiteURL,
+        "address": companyModel.address,
+        "postCode": companyModel.postCode,
+        "place": companyModel.place,
+        "phoneNumber": companyModel.phoneNumber
+      });
+      if (result.data["success"] == true) {
+        String downloadURL = result.data["downloadURL"] as String;
+        return right(downloadURL);
+      } else {
+        return right("");
+      }
+    } on FirebaseFunctionsException catch (e) {
+      print("THE ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
