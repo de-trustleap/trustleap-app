@@ -136,21 +136,22 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
     }
   }
 
-  void submitPDFRequest(CompanyValidator validator) {
+  void submitPDFRequest(CompanyValidator validator, bool isPreview) {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(widget.company
-          .copyWith(
+      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(
+          widget.company.copyWith(
               name: nameTextController.text.trim(),
               industry: industryTextController.text.trim(),
               websiteURL: websiteTextController.text.trim(),
               address: addressTextController.text.trim(),
               postCode: postCodeTextController.text.trim(),
               place: placeTextController.text.trim(),
-              phoneNumber: phoneNumberTextController.text.trim()));
+              phoneNumber: phoneNumberTextController.text.trim()),
+          isPreview);
     } else {
       validationHasError = true;
-      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(null);
+      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(null, true);
     }
   }
 
@@ -385,7 +386,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                             title: localization
                                 .profile_company_contact_section_avv_link,
                             onTap: () {
-                              submitPDFRequest(validator);
+                              submitPDFRequest(validator, true);
                             }),
                         const SizedBox(width: 4),
                         Text(
@@ -397,7 +398,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                             title: localization
                                 .profile_company_contact_section_avv_link,
                             onTap: () {
-                              submitPDFRequest(validator);
+                              submitPDFRequest(validator, false);
                             }),
                         const SizedBox(width: 4),
                         Text(

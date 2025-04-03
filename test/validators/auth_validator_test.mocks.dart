@@ -2442,6 +2442,59 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get profile_company_contact_section_avv_checkbox_text =>
+      (super.noSuchMethod(
+        Invocation.getter(#profile_company_contact_section_avv_checkbox_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_contact_section_avv_checkbox_text),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_contact_section_avv_checkbox_text_part2 =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #profile_company_contact_section_avv_checkbox_text_part2),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #profile_company_contact_section_avv_checkbox_text_part2),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_contact_section_avv_link => (super.noSuchMethod(
+        Invocation.getter(#profile_company_contact_section_avv_link),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_contact_section_avv_link),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_contact_section_avv_already_approved =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #profile_company_contact_section_avv_already_approved),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #profile_company_contact_section_avv_already_approved),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_contact_section_avv_generating =>
+      (super.noSuchMethod(
+        Invocation.getter(#profile_company_contact_section_avv_generating),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_contact_section_avv_generating),
+        ),
+      ) as String);
+
+  @override
   String get profile_company_validator_missing_name => (super.noSuchMethod(
         Invocation.getter(#profile_company_validator_missing_name),
         returnValue: _i3.dummyValue<String>(

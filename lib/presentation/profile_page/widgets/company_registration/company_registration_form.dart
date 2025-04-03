@@ -101,19 +101,21 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
   void submitPDFRequest(CompanyValidator validator) {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(Company(
-          id: UniqueID(),
-          name: nameTextController.text.trim(),
-          industry: industryTextController.text.trim(),
-          websiteURL: websiteTextController.text.trim(),
-          address: addressTextController.text.trim(),
-          postCode: postCodeTextController.text.trim(),
-          place: placeTextController.text.trim(),
-          phoneNumber: phoneNumberTextController.text.trim(),
-          ownerID: currentUserID));
+      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(
+          Company(
+              id: UniqueID(),
+              name: nameTextController.text.trim(),
+              industry: industryTextController.text.trim(),
+              websiteURL: websiteTextController.text.trim(),
+              address: addressTextController.text.trim(),
+              postCode: postCodeTextController.text.trim(),
+              place: placeTextController.text.trim(),
+              phoneNumber: phoneNumberTextController.text.trim(),
+              ownerID: currentUserID),
+          true);
     } else {
       validationHasError = true;
-      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(null);
+      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(null, true);
     }
   }
 
