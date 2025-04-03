@@ -141,12 +141,12 @@ void main() {
     test("should return download url when and call was successful", () async {
       // Given
       final expectedResult = right(url);
-      when(mockCompanyRepo.getAVVDownloadURL(testCompany))
+      when(mockCompanyRepo.getAVVDownloadURL(testCompany, true))
           .thenAnswer((_) async => right(url));
       // When
-      final result = await mockCompanyRepo.getAVVDownloadURL(testCompany);
+      final result = await mockCompanyRepo.getAVVDownloadURL(testCompany, true);
       // Then
-      verify(mockCompanyRepo.getAVVDownloadURL(testCompany));
+      verify(mockCompanyRepo.getAVVDownloadURL(testCompany, true));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockCompanyRepo);
     });
@@ -154,12 +154,12 @@ void main() {
     test("should return error when and call failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockCompanyRepo.getAVVDownloadURL(testCompany))
+      when(mockCompanyRepo.getAVVDownloadURL(testCompany, true))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockCompanyRepo.getAVVDownloadURL(testCompany);
+      final result = await mockCompanyRepo.getAVVDownloadURL(testCompany, true);
       // Then
-      verify(mockCompanyRepo.getAVVDownloadURL(testCompany));
+      verify(mockCompanyRepo.getAVVDownloadURL(testCompany, true));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockCompanyRepo);
     });

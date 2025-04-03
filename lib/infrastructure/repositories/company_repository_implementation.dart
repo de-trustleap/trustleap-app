@@ -207,7 +207,7 @@ class CompanyRepositoryImplementation implements CompanyRepository {
 
   @override
   Future<Either<DatabaseFailure, String>> getAVVDownloadURL(
-      Company company) async {
+      Company company, bool isPreview) async {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("createAVVPDFFile");
@@ -222,7 +222,8 @@ class CompanyRepositoryImplementation implements CompanyRepository {
         "address": companyModel.address,
         "postCode": companyModel.postCode,
         "place": companyModel.place,
-        "phoneNumber": companyModel.phoneNumber
+        "phoneNumber": companyModel.phoneNumber,
+        "isPreview": isPreview
       });
       if (result.data["success"] == true) {
         String downloadURL = result.data["downloadURL"] as String;

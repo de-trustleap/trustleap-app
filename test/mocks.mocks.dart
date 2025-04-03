@@ -2861,6 +2861,59 @@ class MockAppLocalizations extends _i1.Mock implements _i20.AppLocalizations {
       ) as String);
 
   @override
+  String get profile_company_contact_section_avv_checkbox_text =>
+      (super.noSuchMethod(
+        Invocation.getter(#profile_company_contact_section_avv_checkbox_text),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_contact_section_avv_checkbox_text),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_contact_section_avv_checkbox_text_part2 =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #profile_company_contact_section_avv_checkbox_text_part2),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #profile_company_contact_section_avv_checkbox_text_part2),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_contact_section_avv_link => (super.noSuchMethod(
+        Invocation.getter(#profile_company_contact_section_avv_link),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_contact_section_avv_link),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_contact_section_avv_already_approved =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #profile_company_contact_section_avv_already_approved),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #profile_company_contact_section_avv_already_approved),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_contact_section_avv_generating =>
+      (super.noSuchMethod(
+        Invocation.getter(#profile_company_contact_section_avv_generating),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_contact_section_avv_generating),
+        ),
+      ) as String);
+
+  @override
   String get profile_company_validator_missing_name => (super.noSuchMethod(
         Invocation.getter(#profile_company_validator_missing_name),
         returnValue: _i21.dummyValue<String>(
@@ -5312,11 +5365,16 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
 
   @override
   _i16.Future<_i2.Either<_i24.DatabaseFailure, String>> getAVVDownloadURL(
-          _i25.Company? company) =>
+    _i25.Company? company,
+    bool? isPreview,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #getAVVDownloadURL,
-          [company],
+          [
+            company,
+            isPreview,
+          ],
         ),
         returnValue:
             _i16.Future<_i2.Either<_i24.DatabaseFailure, String>>.value(
@@ -5324,7 +5382,10 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           this,
           Invocation.method(
             #getAVVDownloadURL,
-            [company],
+            [
+              company,
+              isPreview,
+            ],
           ),
         )),
       ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, String>>);
@@ -8311,10 +8372,17 @@ class MockCompanyCubit extends _i1.Mock implements _i49.CompanyCubit {
       );
 
   @override
-  void getPDFDownloadURL(_i25.Company? company) => super.noSuchMethod(
+  void getPDFDownloadURL(
+    _i25.Company? company,
+    bool? isPreview,
+  ) =>
+      super.noSuchMethod(
         Invocation.method(
           #getPDFDownloadURL,
-          [company],
+          [
+            company,
+            isPreview,
+          ],
         ),
         returnValueForMissingStub: null,
       );

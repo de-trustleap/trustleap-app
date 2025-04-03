@@ -50,12 +50,13 @@ class CompanyCubit extends Cubit<CompanyState> {
     }
   }
 
-  void getPDFDownloadURL(Company? company) async {
+  void getPDFDownloadURL(Company? company, bool isPreview) async {
     if (company == null) {
       emit(CompanyShowValidationState());
     } else {
       emit(CompanyGetAVVPDFLoadingState());
-      final failureOrSuccess = await companyRepo.getAVVDownloadURL(company);
+      final failureOrSuccess =
+          await companyRepo.getAVVDownloadURL(company, isPreview);
       failureOrSuccess.fold(
           (failure) => emit(CompanyGetAVVPDFFailureState(failure: failure)),
           (downloadURL) =>

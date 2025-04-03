@@ -172,13 +172,13 @@ void main() {
         id: UniqueID.fromUniqueString("1"), name: "Test", industry: "Test");
     test("should call company repo if function is called", () async {
       // Given
-      when(mockCompanyRepo.getAVVDownloadURL(testCompany))
+      when(mockCompanyRepo.getAVVDownloadURL(testCompany, true))
           .thenAnswer((_) async => right(url));
       // When
-      companyCubit.getPDFDownloadURL(testCompany);
-      await untilCalled(mockCompanyRepo.getAVVDownloadURL(testCompany));
+      companyCubit.getPDFDownloadURL(testCompany, true);
+      await untilCalled(mockCompanyRepo.getAVVDownloadURL(testCompany, true));
       // Then
-      verify(mockCompanyRepo.getAVVDownloadURL(testCompany));
+      verify(mockCompanyRepo.getAVVDownloadURL(testCompany, true));
       verifyNoMoreInteractions(mockCompanyRepo);
     });
 
@@ -190,11 +190,11 @@ void main() {
         CompanyGetAVVPDFLoadingState(),
         CompanyGetAVVPDFSuccessState(downloadURL: url)
       ];
-      when(mockCompanyRepo.getAVVDownloadURL(testCompany))
+      when(mockCompanyRepo.getAVVDownloadURL(testCompany, true))
           .thenAnswer((_) async => right(url));
       // Then
       expectLater(companyCubit.stream, emitsInOrder(expectedResult));
-      companyCubit.getPDFDownloadURL(testCompany);
+      companyCubit.getPDFDownloadURL(testCompany, true);
     });
 
     test(
@@ -205,11 +205,11 @@ void main() {
         CompanyGetAVVPDFLoadingState(),
         CompanyGetAVVPDFFailureState(failure: BackendFailure())
       ];
-      when(mockCompanyRepo.getAVVDownloadURL(testCompany))
+      when(mockCompanyRepo.getAVVDownloadURL(testCompany, true))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(companyCubit.stream, emitsInOrder(expectedResult));
-      companyCubit.getPDFDownloadURL(testCompany);
+      companyCubit.getPDFDownloadURL(testCompany, true);
     });
   });
 }

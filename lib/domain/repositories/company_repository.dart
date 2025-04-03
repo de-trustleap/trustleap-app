@@ -19,5 +19,6 @@ abstract class CompanyRepository {
       getAllUsersForPendingCompanyRequests(List<String> ids);
   Future<Either<DatabaseFailure, Unit>> processCompanyRequest(
       String id, String userID, bool accepted);
-  Future<Either<DatabaseFailure, String>> getAVVDownloadURL(Company company);
+  Future<Either<DatabaseFailure, String>> getAVVDownloadURL(
+      Company company, bool isPreview);
 }
