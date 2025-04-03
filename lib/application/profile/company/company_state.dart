@@ -96,3 +96,30 @@ class CompanyGetCurrentUserSuccessState extends CompanyState
   @override
   List<Object?> get props => [];
 }
+
+class CompanyGetAVVPDFLoadingState extends CompanyState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+class CompanyGetAVVPDFFailureState extends CompanyState with EquatableMixin {
+  final DatabaseFailure failure;
+
+  CompanyGetAVVPDFFailureState({
+    required this.failure,
+  });
+
+  @override
+  List<Object?> get props => [failure];
+}
+
+class CompanyGetAVVPDFSuccessState extends CompanyState with EquatableMixin {
+  final String downloadURL;
+
+  CompanyGetAVVPDFSuccessState({
+    required this.downloadURL,
+  });
+
+  @override
+  List<Object?> get props => [downloadURL];
+}

@@ -60,7 +60,8 @@ void main() {
         "employeeIDs": ["5"],
         "ownerID": "5",
         "defaultLandingPageID": "3",
-        "createdAt": Timestamp(100000, 0)
+        "createdAt": Timestamp(100000, 0),
+        "avvData": null
       };
       // When
       final result = model.toMap();

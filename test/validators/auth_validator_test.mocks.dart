@@ -4378,6 +4378,54 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           ) as String);
 
   @override
+  String get landingpage_creator_missing_companydata_error =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_missing_companydata_error),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_missing_companydata_error),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_default_page_info_text => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_default_page_info_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_default_page_info_text),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_no_default_page_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_no_default_page_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_no_default_page_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_no_default_page_subtitle =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_no_default_page_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_no_default_page_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_no_default_page_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_no_default_page_button_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_no_default_page_button_title),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,

@@ -4797,6 +4797,54 @@ class MockAppLocalizations extends _i1.Mock implements _i20.AppLocalizations {
           ) as String);
 
   @override
+  String get landingpage_creator_missing_companydata_error =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_missing_companydata_error),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_missing_companydata_error),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_default_page_info_text => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_default_page_info_text),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_default_page_info_text),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_no_default_page_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_no_default_page_title),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_no_default_page_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_no_default_page_subtitle =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_no_default_page_subtitle),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_no_default_page_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_no_default_page_button_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_no_default_page_button_title),
+        returnValue: _i21.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_no_default_page_button_title),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -5120,11 +5168,16 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
 
   @override
   _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> updateCompany(
-          _i25.Company? company) =>
+    _i25.Company? company,
+    bool? avvAccepted,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateCompany,
-          [company],
+          [
+            company,
+            avvAccepted,
+          ],
         ),
         returnValue:
             _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
@@ -5132,7 +5185,10 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           this,
           Invocation.method(
             #updateCompany,
-            [company],
+            [
+              company,
+              avvAccepted,
+            ],
           ),
         )),
       ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
@@ -5158,11 +5214,16 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
 
   @override
   _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> registerCompany(
-          _i25.Company? company) =>
+    _i25.Company? company,
+    bool? avvAccepted,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #registerCompany,
-          [company],
+          [
+            company,
+            avvAccepted,
+          ],
         ),
         returnValue:
             _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
@@ -5170,7 +5231,10 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           this,
           Invocation.method(
             #registerCompany,
-            [company],
+            [
+              company,
+              avvAccepted,
+            ],
           ),
         )),
       ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
@@ -5245,6 +5309,25 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           ),
         )),
       ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i16.Future<_i2.Either<_i24.DatabaseFailure, String>> getAVVDownloadURL(
+          _i25.Company? company) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAVVDownloadURL,
+          [company],
+        ),
+        returnValue:
+            _i16.Future<_i2.Either<_i24.DatabaseFailure, String>>.value(
+                _FakeEither_0<_i24.DatabaseFailure, String>(
+          this,
+          Invocation.method(
+            #getAVVDownloadURL,
+            [company],
+          ),
+        )),
+      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, String>>);
 }
 
 /// A class which mocks [ImageRepository].
@@ -6789,6 +6872,15 @@ class MockMenuCubit extends _i1.Mock implements _i39.MenuCubit {
   }
 
   @override
+  set selectedItem(_i29.MenuItems? _selectedItem) => super.noSuchMethod(
+        Invocation.setter(
+          #selectedItem,
+          _selectedItem,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i39.MenuState get state => (super.noSuchMethod(
         Invocation.getter(#state),
         returnValue: _i21.dummyValue<_i39.MenuState>(
@@ -8178,10 +8270,17 @@ class MockCompanyCubit extends _i1.Mock implements _i49.CompanyCubit {
       ) as bool);
 
   @override
-  void updateCompany(_i25.Company? company) => super.noSuchMethod(
+  void updateCompany(
+    _i25.Company? company,
+    bool? avvAccepted,
+  ) =>
+      super.noSuchMethod(
         Invocation.method(
           #updateCompany,
-          [company],
+          [
+            company,
+            avvAccepted,
+          ],
         ),
         returnValueForMissingStub: null,
       );
@@ -8196,9 +8295,25 @@ class MockCompanyCubit extends _i1.Mock implements _i49.CompanyCubit {
       );
 
   @override
-  void registerCompany(_i25.Company? company) => super.noSuchMethod(
+  void registerCompany(
+    _i25.Company? company,
+    bool? avvAccepted,
+  ) =>
+      super.noSuchMethod(
         Invocation.method(
           #registerCompany,
+          [
+            company,
+            avvAccepted,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void getPDFDownloadURL(_i25.Company? company) => super.noSuchMethod(
+        Invocation.method(
+          #getPDFDownloadURL,
           [company],
         ),
         returnValueForMissingStub: null,

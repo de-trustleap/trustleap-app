@@ -15,12 +15,13 @@ class CompanyCubit extends Cubit<CompanyState> {
 
   CompanyCubit(this.companyRepo, this.authRepo) : super(CompanyInitial());
 
-  void updateCompany(Company? company) async {
+  void updateCompany(Company? company, bool avvAccepted) async {
     if (company == null) {
       emit(CompanyShowValidationState());
     } else {
       emit(CompanyUpdateContactInformationLoadingState());
-      final failureOrSuccess = await companyRepo.updateCompany(company);
+      final failureOrSuccess =
+          await companyRepo.updateCompany(company, avvAccepted);
       failureOrSuccess.fold(
           (failure) => emit(
               CompanyUpdateContactInformationFailureState(failure: failure)),
@@ -36,15 +37,29 @@ class CompanyCubit extends Cubit<CompanyState> {
         (company) => emit(GetCompanySuccessState(company: company)));
   }
 
-  void registerCompany(Company? company) async {
+  void registerCompany(Company? company, bool avvAccepted) async {
     if (company == null) {
       emit(CompanyShowValidationState());
     } else {
       emit(CompanyRegisterLoadingState());
-      final failureOrSuccess = await companyRepo.registerCompany(company);
+      final failureOrSuccess =
+          await companyRepo.registerCompany(company, avvAccepted);
       failureOrSuccess.fold(
           (failure) => emit(CompanyRegisterFailureState(failure: failure)),
           (_) => emit(CompanyRegisterSuccessState()));
+    }
+  }
+
+  void getPDFDownloadURL(Company? company) async {
+    if (company == null) {
+      emit(CompanyShowValidationState());
+    } else {
+      emit(CompanyGetAVVPDFLoadingState());
+      final failureOrSuccess = await companyRepo.getAVVDownloadURL(company);
+      failureOrSuccess.fold(
+          (failure) => emit(CompanyGetAVVPDFFailureState(failure: failure)),
+          (downloadURL) =>
+              emit(CompanyGetAVVPDFSuccessState(downloadURL: downloadURL)));
     }
   }
 

@@ -1040,7 +1040,27 @@
     },
     "profile_company_contact_section_phone": "Phone",
     "@profile_company_contact_section_phone": {
-        "description": "Bezeichnung über dem phone Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+        "description": "Name above the phone text field of the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_avv_checkbox_text": "I approve the",
+    "@profile_company_contact_section_avv_checkbox_text": {
+        "description": "First part of the OPC text of the Contact section in the Company tab on the profile page."
+    },
+    "profile_company_contact_section_avv_checkbox_text_part2": ".",
+    "@profile_company_contact_section_avv_checkbox_text_part2": {
+        "description": "Second part of the OPC text of the Contact section in the Company tab on the profile page."
+    },
+    "profile_company_contact_section_avv_link": "OPC",
+    "@profile_company_contact_section_avv_link": {
+        "description": "OPC link in the Contact section in the Company tab on the profile page."
+    },
+    "profile_company_contact_section_avv_already_approved": "already approved.",
+    "@profile_company_contact_section_avv_already_approved": {
+        "description": "OPC text if already agreed in the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_avv_generating": "OPC is being generated...",
+    "@profile_company_contact_section_avv_generating": {
+        "description": "OPC is generated text in the Contact section in the Company tab on the profile page"
     },
     "profile_company_validator_missing_name": "Please enter the company name",
     "@profile_company_validator_missing_name": {
