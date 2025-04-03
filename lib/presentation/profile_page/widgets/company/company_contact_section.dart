@@ -43,6 +43,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
   final placeTextController = TextEditingController();
   final phoneNumberTextController = TextEditingController();
   bool avvChecked = false;
+  bool showAVVCheckbox = false;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -55,7 +56,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
   @override
   void initState() {
     super.initState();
-
+    showAVVCheckbox = widget.company.avv?.approvedAt == null;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         nameTextController.text = widget.company.name ?? "";
@@ -83,7 +84,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
 
   @override
   void didChangeDependencies() {
-    if (!avvChecked) {
+    if (showAVVCheckbox && !avvChecked) {
       setButtonStateToDisabled(true);
     }
     super.didChangeDependencies();
@@ -112,6 +113,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
     setState(() {
       showError = false;
       errorMessage = "";
+      showAVVCheckbox = true;
     });
   }
 
@@ -180,6 +182,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
           } else if (state is CompanyUpdateContactInformationSuccessState) {
             widget.changesSaved();
             setButtonStateToDisabled(false);
+            setState(() {
+              showAVVCheckbox = false;
+            });
           } else if (state is CompanyUpdateContactInformationLoadingState) {
             setButtonStateToDisabled(true);
           } else if (state is CompanyGetAVVPDFLoadingState) {
@@ -187,8 +192,6 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
           } else if (state is CompanyGetAVVPDFSuccessState) {
             Downloader().showFileInNewTab(state.downloadURL);
           }
-          // TODO: Wenn AVV bereits zugestimmt wurde soll es ausgeblendet werden und ein Text da stehen: AVV bereits zugestimmt am: xxx. Wenn man dann ein Textfeld bearbeitet kommt die Checkbox wieder.
-          // TODO: Wenn man die AVV über den Link mit der Checkbox herunterläd dann soll im Dokument Vorschau stehen.
           // TODO: Localization
         },
         builder: (context, state) {
@@ -359,29 +362,40 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                         ]),
                     const SizedBox(height: textFieldSpacing),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Checkbox(
-                          value: avvChecked,
-                          onChanged: (checked) {
-                            if (checked == true) {
-                              setButtonStateToDisabled(false);
-                            } else {
-                              setButtonStateToDisabled(true);
-                            }
-                            setState(() {
-                              avvChecked = checked ?? false;
-                            });
-                          }),
-                      const SizedBox(width: 8),
-                      Text("Ich stimme der",
-                          style: themeData.textTheme.bodyMedium),
-                      const SizedBox(width: 4),
-                      ClickableLink(
-                          title: "AVV",
-                          onTap: () {
-                            submitPDFRequest(validator);
-                          }),
-                      const SizedBox(width: 4),
-                      Text("zu.", style: themeData.textTheme.bodyMedium)
+                      if (showAVVCheckbox) ...[
+                        Checkbox(
+                            value: avvChecked,
+                            onChanged: (checked) {
+                              if (checked == true) {
+                                setButtonStateToDisabled(false);
+                              } else {
+                                setButtonStateToDisabled(true);
+                              }
+                              setState(() {
+                                avvChecked = checked ?? false;
+                              });
+                            }),
+                        const SizedBox(width: 8),
+                        Text("Ich stimme der",
+                            style: themeData.textTheme.bodyMedium),
+                        const SizedBox(width: 4),
+                        ClickableLink(
+                            title: "AVV",
+                            onTap: () {
+                              submitPDFRequest(validator);
+                            }),
+                        const SizedBox(width: 4),
+                        Text("zu.", style: themeData.textTheme.bodyMedium)
+                      ] else ...[
+                        ClickableLink(
+                            title: "AVV",
+                            onTap: () {
+                              submitPDFRequest(validator);
+                            }),
+                        const SizedBox(width: 4),
+                        Text("bereits zugestimmt.",
+                            style: themeData.textTheme.bodyMedium)
+                      ]
                     ]),
                     if (state is CompanyGetAVVPDFLoadingState) ...[
                       const SizedBox(height: textFieldSpacing),

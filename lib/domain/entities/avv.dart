@@ -2,9 +2,9 @@
 import 'package:equatable/equatable.dart';
 
 class AVV extends Equatable {
-  final DateTime approvedAt;
-  final String downloadURL;
-  final String path;
+  final DateTime? approvedAt;
+  final String? downloadURL;
+  final String? path;
 
   const AVV({
     required this.approvedAt,
