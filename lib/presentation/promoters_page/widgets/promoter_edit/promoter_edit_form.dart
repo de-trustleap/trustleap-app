@@ -131,8 +131,8 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                   });
                 } else if (state is PromoterEditSuccessState) {
                   const params = "?editedPromoter=true";
-                  CustomNavigator.navigate(
-                      RoutePaths.homePath + RoutePaths.promotersPath + params);
+                  CustomNavigator.pushAndReplace(
+                      RoutePaths.homePath + RoutePaths.promotersPath, params);
                 }
               }),
           BlocListener<LandingPageCubit, LandingPageState>(

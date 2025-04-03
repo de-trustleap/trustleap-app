@@ -66,30 +66,6 @@ class _LandingPageCreatorSecondStepState
     scriptTagsTextController.text = widget.landingPage?.scriptTags ?? "";
   }
 
-  @override
-  void didUpdateWidget(covariant LandingPageCreatorSecondStep oldWidget) {
-    if (impressumTextController.text == "") {
-      impressumTextController.text = widget.landingPage?.impressum ?? "";
-    }
-    if (privacyPolicyTextController.text == "") {
-      privacyPolicyTextController.text =
-          widget.landingPage?.privacyPolicy ?? "";
-    }
-    if (initialInformationTextController.text == "") {
-      initialInformationTextController.text =
-          widget.landingPage?.initialInformation ?? "";
-    }
-    if (termsAndConditionsTextController.text == "") {
-      termsAndConditionsTextController.text =
-          widget.landingPage?.termsAndConditions ?? "";
-    }
-    if (scriptTagsTextController.text == "") {
-      scriptTagsTextController.text = widget.landingPage?.scriptTags ?? "";
-    }
-
-    super.didUpdateWidget(oldWidget);
-  }
-
   String _getSubmitButtonText(AppLocalizations localization) {
     if (widget.isEditMode) {
       return localization.landingpage_creation_edit_button_text;

@@ -163,9 +163,8 @@ class _LandingPageCreatorMultiPageFormState
                 } else if (state is EditLandingPageSuccessState) {
                   showError = false;
                   const params = "?editedPage=true";
-                  CustomNavigator.navigate(RoutePaths.homePath +
-                      RoutePaths.landingPagePath +
-                      params);
+                  CustomNavigator.pushAndReplace(
+                      RoutePaths.homePath + RoutePaths.landingPagePath, params);
                 } else if (state is GetUserSuccessState) {
                   showError = false;
                   if (state.user.companyID != null) {
