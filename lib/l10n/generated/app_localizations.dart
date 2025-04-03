@@ -1619,11 +1619,41 @@ abstract class AppLocalizations {
   /// **'Place'**
   String get profile_company_contact_section_place;
 
-  /// Bezeichnung über dem phone Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite
+  /// Name above the phone text field of the contact section in the company tab on the profile page.
   ///
   /// In en, this message translates to:
   /// **'Phone'**
   String get profile_company_contact_section_phone;
+
+  /// First part of the OPC text of the Contact section in the Company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'I approve the'**
+  String get profile_company_contact_section_avv_checkbox_text;
+
+  /// Second part of the OPC text of the Contact section in the Company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'.'**
+  String get profile_company_contact_section_avv_checkbox_text_part2;
+
+  /// OPC link in the Contact section in the Company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'OPC'**
+  String get profile_company_contact_section_avv_link;
+
+  /// OPC text if already agreed in the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'already approved.'**
+  String get profile_company_contact_section_avv_already_approved;
+
+  /// OPC is generated text in the Contact section in the Company tab on the profile page
+  ///
+  /// In en, this message translates to:
+  /// **'OPC is being generated...'**
+  String get profile_company_contact_section_avv_generating;
 
   /// Validation message when there is no company name.
   ///

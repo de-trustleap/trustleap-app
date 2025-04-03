@@ -778,6 +778,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_company_contact_section_phone => 'Phone';
 
   @override
+  String get profile_company_contact_section_avv_checkbox_text => 'I approve the';
+
+  @override
+  String get profile_company_contact_section_avv_checkbox_text_part2 => '.';
+
+  @override
+  String get profile_company_contact_section_avv_link => 'OPC';
+
+  @override
+  String get profile_company_contact_section_avv_already_approved => 'already approved.';
+
+  @override
+  String get profile_company_contact_section_avv_generating => 'OPC is being generated...';
+
+  @override
   String get profile_company_validator_missing_name => 'Please enter the company name';
 
   @override

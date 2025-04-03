@@ -376,24 +376,33 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                               });
                             }),
                         const SizedBox(width: 8),
-                        Text("Ich stimme der",
+                        Text(
+                            localization
+                                .profile_company_contact_section_avv_checkbox_text,
                             style: themeData.textTheme.bodyMedium),
                         const SizedBox(width: 4),
                         ClickableLink(
-                            title: "AVV",
+                            title: localization
+                                .profile_company_contact_section_avv_link,
                             onTap: () {
                               submitPDFRequest(validator);
                             }),
                         const SizedBox(width: 4),
-                        Text("zu.", style: themeData.textTheme.bodyMedium)
+                        Text(
+                            localization
+                                .profile_company_contact_section_avv_checkbox_text_part2,
+                            style: themeData.textTheme.bodyMedium)
                       ] else ...[
                         ClickableLink(
-                            title: "AVV",
+                            title: localization
+                                .profile_company_contact_section_avv_link,
                             onTap: () {
                               submitPDFRequest(validator);
                             }),
                         const SizedBox(width: 4),
-                        Text("bereits zugestimmt.",
+                        Text(
+                            localization
+                                .profile_company_contact_section_avv_already_approved,
                             style: themeData.textTheme.bodyMedium)
                       ]
                     ]),
@@ -404,7 +413,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                           children: [
                             const LoadingIndicator(size: 24),
                             const SizedBox(width: 8),
-                            Text("AVV wird generiert...",
+                            Text(
+                                localization
+                                    .profile_company_contact_section_avv_generating,
                                 style: themeData.textTheme.bodyMedium)
                           ])
                     ],

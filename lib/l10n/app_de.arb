@@ -1042,6 +1042,26 @@
     "@profile_company_contact_section_phone": {
         "description": "Bezeichnung über dem Telefonnummer Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
     },
+    "profile_company_contact_section_avv_checkbox_text": "Ich stimme der",
+    "@profile_company_contact_section_avv_checkbox_text": {
+        "description": "Erster Teil des AVV Textes der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_avv_checkbox_text_part2": "zu.",
+    "@profile_company_contact_section_avv_checkbox_text_part2": {
+        "description": "Zweiter Teil des AVV Textes der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_avv_link": "AVV",
+    "@profile_company_contact_section_avv_link": {
+        "description": "AVV Link in der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_avv_already_approved": "bereits zugestimmt.",
+    "@profile_company_contact_section_avv_already_approved": {
+        "description": "AVV Text wenn bereits zugestimmt wurde in der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
+    "profile_company_contact_section_avv_generating": "AVV wird generiert...",
+    "@profile_company_contact_section_avv_generating": {
+        "description": "AVV wird generiert Text in der Kontakt Sektion im Unternehmens Tab auf der Profilseite"
+    },
     "profile_company_validator_missing_name": "Bitte den Unternehmensnamen angeben",
     "@profile_company_validator_missing_name": {
         "description": "Validierungsnachricht wenn kein Unternehmensname angegeben wurde"

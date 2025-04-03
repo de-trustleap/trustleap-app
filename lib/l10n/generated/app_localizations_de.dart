@@ -778,6 +778,21 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profile_company_contact_section_phone => 'Telefonnummer';
 
   @override
+  String get profile_company_contact_section_avv_checkbox_text => 'Ich stimme der';
+
+  @override
+  String get profile_company_contact_section_avv_checkbox_text_part2 => 'zu.';
+
+  @override
+  String get profile_company_contact_section_avv_link => 'AVV';
+
+  @override
+  String get profile_company_contact_section_avv_already_approved => 'bereits zugestimmt.';
+
+  @override
+  String get profile_company_contact_section_avv_generating => 'AVV wird generiert...';
+
+  @override
   String get profile_company_validator_missing_name => 'Bitte den Unternehmensnamen angeben';
 
   @override
