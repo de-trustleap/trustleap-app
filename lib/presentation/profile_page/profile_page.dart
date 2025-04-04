@@ -1,4 +1,3 @@
-import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
@@ -72,7 +71,6 @@ class _ProfilePageState extends State<ProfilePage>
           BlocProvider(
               create: (context) => Modular.get<CompanyObserverCubit>()),
           BlocProvider(create: (context) => Modular.get<CompanyCubit>()),
-          BlocProvider(create: (context) => Modular.get<UserCubit>()),
           BlocProvider(create: (context) => Modular.get<ProfileImageBloc>()),
           BlocProvider(create: (context) => Modular.get<CompanyImageBloc>()),
           BlocProvider(create: (context) => Modular.get<CompanyRequestCubit>())

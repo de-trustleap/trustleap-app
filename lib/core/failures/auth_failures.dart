@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/core/failures/failure.dart';
 
-abstract class AuthFailure extends Equatable {}
+abstract class AuthFailure extends Failure {}
 
 class ServerFailure extends AuthFailure {
   @override
@@ -68,6 +68,11 @@ class RequiresRecentLoginFailure extends AuthFailure {
 }
 
 class MissingPasswordFailure extends AuthFailure {
+  @override
+  List<Object?> get props => [];
+}
+
+class InvalidPasswordFailure extends AuthFailure {
   @override
   List<Object?> get props => [];
 }

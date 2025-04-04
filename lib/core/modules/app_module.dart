@@ -4,7 +4,6 @@ import 'package:finanzbegleiter/application/admin_registration_code/admin_regist
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
-import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
@@ -99,7 +98,6 @@ class AppModule extends Module {
       ..add(AuthObserverBloc.new)
       ..add(MenuCubit.new)
       ..add(ThemeCubit.new)
-      ..add(UserCubit.new)
       ..add(ProfileCubit.new)
       ..add(ProfileImageBloc.new)
       ..add(CompanyImageBloc.new)

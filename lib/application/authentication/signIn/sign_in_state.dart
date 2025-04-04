@@ -18,6 +18,22 @@ class SignInLoadingState extends SignInState with EquatableMixin {
   List<Object?> get props => [];
 }
 
+class RegisterSuccessState extends SignInState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+class RegisterFailureState extends SignInState with EquatableMixin {
+  final Failure failure;
+
+  RegisterFailureState({
+    required this.failure,
+  });
+
+  @override
+  List<Object?> get props => [];
+}
+
 class SignInFailureState extends SignInState with EquatableMixin {
   final AuthFailure failure;
 

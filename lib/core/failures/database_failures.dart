@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/core/failures/failure.dart';
 
-abstract class DatabaseFailure extends Equatable {}
+abstract class DatabaseFailure extends Failure {}
 
 class BackendFailure extends DatabaseFailure {
   @override

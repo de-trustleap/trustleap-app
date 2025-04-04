@@ -49,31 +49,6 @@ class UserRepositoryImplementation implements UserRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> createUser(
-      {required CustomUser user}) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable("createUser");
-    UserModel userModel = UserModel.fromDomain(user);
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "id": userModel.id,
-        "gender": userModel.gender,
-        "firstName": userModel.firstName,
-        "lastName": userModel.lastName,
-        "birthDate": userModel.birthDate,
-        "address": userModel.address,
-        "postCode": userModel.postCode,
-        "place": userModel.place,
-        "email": userModel.email
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
-  }
-
-  @override
   Future<Either<DatabaseFailure, Unit>> updateUser(
       {required CustomUser user}) async {
     final userCollection = firestore.collection("users");
