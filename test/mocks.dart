@@ -3,7 +3,6 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
-import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
@@ -52,7 +51,6 @@ import 'package:mockito/annotations.dart';
   AuthObserverBloc,
   MenuCubit,
   ThemeCubit,
-  UserCubit,
   ProfileCubit,
   ProfileImageBloc,
   CompanyImageBloc,

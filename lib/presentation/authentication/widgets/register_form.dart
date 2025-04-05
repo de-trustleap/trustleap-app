@@ -200,6 +200,7 @@ class _RegisterFormState extends State<RegisterForm> {
         setButtonToDisabled(true);
       }
     }, builder: (context, state) {
+      print("WIDTH: ${getResponsiveWidth(1)}");
       return Form(
           key: formKey,
           autovalidateMode: (state is SignInShowValidationState)
@@ -386,57 +387,77 @@ class _RegisterFormState extends State<RegisterForm> {
                       validator: validator.validateCode)
                 ]),
                 const SizedBox(height: textFieldSpacing),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Checkbox(
-                      value: privacyPolicyChecked,
-                      onChanged: (checked) {
-                        if (checked == true &&
-                            termsAndConditionsChecked == true) {
-                          setButtonToDisabled(false);
-                        } else {
-                          setButtonToDisabled(true);
-                        }
-                        setState(() {
-                          privacyPolicyChecked = checked ?? false;
-                        });
-                      }),
-                  const SizedBox(width: 8),
-                  Text("Ich stimme der", style: themeData.textTheme.bodyMedium),
-                  const SizedBox(width: 4),
-                  ClickableLink(
-                      title: "Datenschutzerklärung",
-                      onTap: () {
-                        // TODO: DATENSCHUTZ SEITE ÖFFNEN
-                      }),
-                  const SizedBox(width: 4),
-                  Text("zu", style: themeData.textTheme.bodyMedium)
-                ]),
-                const SizedBox(height: textFieldSpacing),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Checkbox(
-                      value: termsAndConditionsChecked,
-                      onChanged: (checked) {
-                        if (checked == true && privacyPolicyChecked == true) {
-                          setButtonToDisabled(false);
-                        } else {
-                          setButtonToDisabled(true);
-                        }
-                        setState(() {
-                          termsAndConditionsChecked = checked ?? false;
-                        });
-                      }),
-                  const SizedBox(width: 8),
-                  Text("Ich stimme den", style: themeData.textTheme.bodyMedium),
-                  const SizedBox(width: 4),
-                  ClickableLink(
-                      title: "AGB",
-                      onTap: () {
-                        // TODO: AGB SEITE ÖFFNEN
-                      }),
-                  const SizedBox(width: 4),
-                  Text("zu", style: themeData.textTheme.bodyMedium)
-                ]),
-                const SizedBox(height: textFieldSpacing),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(children: [
+                      SizedBox(
+                        width: getResponsiveWidth(1),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Checkbox(
+                                  value: termsAndConditionsChecked,
+                                  onChanged: (checked) {
+                                    if (checked == true &&
+                                        privacyPolicyChecked == true) {
+                                      setButtonToDisabled(false);
+                                    } else {
+                                      setButtonToDisabled(true);
+                                    }
+                                    setState(() {
+                                      termsAndConditionsChecked =
+                                          checked ?? false;
+                                    });
+                                  }),
+                              const SizedBox(width: 8),
+                              Text("Ich stimme den",
+                                  style: themeData.textTheme.bodyMedium),
+                              const SizedBox(width: 4),
+                              ClickableLink(
+                                  title: "AGB",
+                                  onTap: () {
+                                    // TODO: AGB SEITE ÖFFNEN
+                                  }),
+                              const SizedBox(width: 4),
+                              Text("zu", style: themeData.textTheme.bodyMedium)
+                            ]),
+                      ),
+                      SizedBox(
+                        width: getResponsiveWidth(1),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Checkbox(
+                                  value: privacyPolicyChecked,
+                                  onChanged: (checked) {
+                                    if (checked == true &&
+                                        termsAndConditionsChecked == true) {
+                                      setButtonToDisabled(false);
+                                    } else {
+                                      setButtonToDisabled(true);
+                                    }
+                                    setState(() {
+                                      privacyPolicyChecked = checked ?? false;
+                                    });
+                                  }),
+                              const SizedBox(width: 8),
+                              Text("Ich stimme der",
+                                  style: themeData.textTheme.bodyMedium),
+                              const SizedBox(width: 4),
+                              ClickableLink(
+                                  title: "Datenschutzerklärung",
+                                  onTap: () {
+                                    // TODO: DATENSCHUTZ SEITE ÖFFNEN
+                                  }),
+                              const SizedBox(width: 4),
+                              Text("zu", style: themeData.textTheme.bodyMedium)
+                            ]),
+                      ),
+                    ])
+                  ],
+                ),
+                const SizedBox(height: textFieldSpacing * 2),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   SizedBox(
                     width: getResponsiveWidth(1),

@@ -4,10 +4,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i16;
-import 'dart:io' as _i30;
-import 'dart:typed_data' as _i28;
+import 'dart:io' as _i31;
+import 'dart:typed_data' as _i29;
 
-import 'package:bloc/bloc.dart' as _i36;
+import 'package:bloc/bloc.dart' as _i37;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i15;
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart'
     as _i14;
@@ -18,13 +18,11 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:finanzbegleiter/application/admin_registration_code/admin_registration_code_cubit.dart'
     as _i59;
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart'
-    as _i37;
-import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart'
     as _i38;
+import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart'
+    as _i39;
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart'
     as _i5;
-import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart'
-    as _i41;
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart'
     as _i57;
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart'
@@ -39,7 +37,7 @@ import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage
     as _i54;
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart'
     as _i53;
-import 'package:finanzbegleiter/application/menu/menu_cubit.dart' as _i39;
+import 'package:finanzbegleiter/application/menu/menu_cubit.dart' as _i40;
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart'
     as _i48;
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart'
@@ -56,22 +54,23 @@ import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_
     as _i51;
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart'
     as _i52;
-import 'package:finanzbegleiter/application/theme/theme_cubit.dart' as _i40;
-import 'package:finanzbegleiter/constants.dart' as _i29;
-import 'package:finanzbegleiter/core/failures/auth_failures.dart' as _i22;
-import 'package:finanzbegleiter/core/failures/database_failures.dart' as _i24;
-import 'package:finanzbegleiter/core/failures/storage_failures.dart' as _i27;
-import 'package:finanzbegleiter/domain/entities/company.dart' as _i25;
-import 'package:finanzbegleiter/domain/entities/company_request.dart' as _i26;
-import 'package:finanzbegleiter/domain/entities/landing_page.dart' as _i31;
+import 'package:finanzbegleiter/application/theme/theme_cubit.dart' as _i41;
+import 'package:finanzbegleiter/constants.dart' as _i30;
+import 'package:finanzbegleiter/core/failures/auth_failures.dart' as _i24;
+import 'package:finanzbegleiter/core/failures/database_failures.dart' as _i25;
+import 'package:finanzbegleiter/core/failures/failure.dart' as _i22;
+import 'package:finanzbegleiter/core/failures/storage_failures.dart' as _i28;
+import 'package:finanzbegleiter/domain/entities/company.dart' as _i26;
+import 'package:finanzbegleiter/domain/entities/company_request.dart' as _i27;
+import 'package:finanzbegleiter/domain/entities/landing_page.dart' as _i32;
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart'
-    as _i32;
+    as _i33;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart'
     as _i56;
-import 'package:finanzbegleiter/domain/entities/permissions.dart' as _i35;
-import 'package:finanzbegleiter/domain/entities/promoter.dart' as _i33;
+import 'package:finanzbegleiter/domain/entities/permissions.dart' as _i36;
+import 'package:finanzbegleiter/domain/entities/promoter.dart' as _i34;
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart'
-    as _i34;
+    as _i35;
 import 'package:finanzbegleiter/domain/entities/user.dart' as _i23;
 import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart'
     as _i12;
@@ -4996,37 +4995,44 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
       ) as _i16.Stream<_i3.User?>);
 
   @override
-  _i16.Future<_i2.Either<_i22.AuthFailure, _i3.UserCredential>>
-      registerWithEmailAndPassword({
+  _i16.Future<_i2.Either<_i22.Failure, _i2.Unit>> registerAndCreateUser({
     required String? email,
     required String? password,
+    required _i23.CustomUser? user,
+    required bool? privacyPolicyAccepted,
+    required bool? termsAndConditionsAccepted,
   }) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #registerWithEmailAndPassword,
-              [],
-              {
-                #email: email,
-                #password: password,
-              },
-            ),
-            returnValue: _i16
-                .Future<_i2.Either<_i22.AuthFailure, _i3.UserCredential>>.value(
-                _FakeEither_0<_i22.AuthFailure, _i3.UserCredential>(
-              this,
-              Invocation.method(
-                #registerWithEmailAndPassword,
-                [],
-                {
-                  #email: email,
-                  #password: password,
-                },
-              ),
-            )),
-          ) as _i16.Future<_i2.Either<_i22.AuthFailure, _i3.UserCredential>>);
+      (super.noSuchMethod(
+        Invocation.method(
+          #registerAndCreateUser,
+          [],
+          {
+            #email: email,
+            #password: password,
+            #user: user,
+            #privacyPolicyAccepted: privacyPolicyAccepted,
+            #termsAndConditionsAccepted: termsAndConditionsAccepted,
+          },
+        ),
+        returnValue: _i16.Future<_i2.Either<_i22.Failure, _i2.Unit>>.value(
+            _FakeEither_0<_i22.Failure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #registerAndCreateUser,
+            [],
+            {
+              #email: email,
+              #password: password,
+              #user: user,
+              #privacyPolicyAccepted: privacyPolicyAccepted,
+              #termsAndConditionsAccepted: termsAndConditionsAccepted,
+            },
+          ),
+        )),
+      ) as _i16.Future<_i2.Either<_i22.Failure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i22.AuthFailure, _i3.UserCredential>>
+  _i16.Future<_i2.Either<_i24.AuthFailure, _i3.UserCredential>>
       loginWithEmailAndPassword({
     required String? email,
     required String? password,
@@ -5041,8 +5047,8 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
               },
             ),
             returnValue: _i16
-                .Future<_i2.Either<_i22.AuthFailure, _i3.UserCredential>>.value(
-                _FakeEither_0<_i22.AuthFailure, _i3.UserCredential>(
+                .Future<_i2.Either<_i24.AuthFailure, _i3.UserCredential>>.value(
+                _FakeEither_0<_i24.AuthFailure, _i3.UserCredential>(
               this,
               Invocation.method(
                 #loginWithEmailAndPassword,
@@ -5053,10 +5059,10 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
                 },
               ),
             )),
-          ) as _i16.Future<_i2.Either<_i22.AuthFailure, _i3.UserCredential>>);
+          ) as _i16.Future<_i2.Either<_i24.AuthFailure, _i3.UserCredential>>);
 
   @override
-  _i16.Future<_i2.Either<_i22.AuthFailure, _i3.UserCredential>>
+  _i16.Future<_i2.Either<_i24.AuthFailure, _i3.UserCredential>>
       reauthenticateWithPassword({required String? password}) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -5065,8 +5071,8 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
               {#password: password},
             ),
             returnValue: _i16
-                .Future<_i2.Either<_i22.AuthFailure, _i3.UserCredential>>.value(
-                _FakeEither_0<_i22.AuthFailure, _i3.UserCredential>(
+                .Future<_i2.Either<_i24.AuthFailure, _i3.UserCredential>>.value(
+                _FakeEither_0<_i24.AuthFailure, _i3.UserCredential>(
               this,
               Invocation.method(
                 #reauthenticateWithPassword,
@@ -5074,7 +5080,7 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
                 {#password: password},
               ),
             )),
-          ) as _i16.Future<_i2.Either<_i22.AuthFailure, _i3.UserCredential>>);
+          ) as _i16.Future<_i2.Either<_i24.AuthFailure, _i3.UserCredential>>);
 
   @override
   _i16.Future<void> signOut() => (super.noSuchMethod(
@@ -5102,25 +5108,25 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
       ) as _i2.Option<_i23.CustomUser>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>
       resendEmailVerification() => (super.noSuchMethod(
             Invocation.method(
               #resendEmailVerification,
               [],
             ),
             returnValue:
-                _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                    _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+                _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                    _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
               this,
               Invocation.method(
                 #resendEmailVerification,
                 [],
               ),
             )),
-          ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+          ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> resetPassword(
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> resetPassword(
           {required String? email}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5129,8 +5135,8 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
           {#email: email},
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #resetPassword,
@@ -5138,10 +5144,10 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
             {#email: email},
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, bool>> isRegistrationCodeValid({
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, bool>> isRegistrationCodeValid({
     required String? email,
     required String? code,
   }) =>
@@ -5154,8 +5160,8 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
             #code: code,
           },
         ),
-        returnValue: _i16.Future<_i2.Either<_i24.DatabaseFailure, bool>>.value(
-            _FakeEither_0<_i24.DatabaseFailure, bool>(
+        returnValue: _i16.Future<_i2.Either<_i25.DatabaseFailure, bool>>.value(
+            _FakeEither_0<_i25.DatabaseFailure, bool>(
           this,
           Invocation.method(
             #isRegistrationCodeValid,
@@ -5166,24 +5172,24 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
             },
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, bool>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, bool>>);
 
   @override
-  _i16.Future<_i2.Either<_i22.AuthFailure, _i2.Unit>> deleteAccount() =>
+  _i16.Future<_i2.Either<_i24.AuthFailure, _i2.Unit>> deleteAccount() =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteAccount,
           [],
         ),
-        returnValue: _i16.Future<_i2.Either<_i22.AuthFailure, _i2.Unit>>.value(
-            _FakeEither_0<_i22.AuthFailure, _i2.Unit>(
+        returnValue: _i16.Future<_i2.Either<_i24.AuthFailure, _i2.Unit>>.value(
+            _FakeEither_0<_i24.AuthFailure, _i2.Unit>(
           this,
           Invocation.method(
             #deleteAccount,
             [],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i22.AuthFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i24.AuthFailure, _i2.Unit>>);
 }
 
 /// A class which mocks [CompanyRepository].
@@ -5195,7 +5201,7 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
   }
 
   @override
-  _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i25.Company>> observeCompany(
+  _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i26.Company>> observeCompany(
           String? companyID) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5203,25 +5209,25 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           [companyID],
         ),
         returnValue:
-            _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i25.Company>>.empty(),
-      ) as _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i25.Company>>);
+            _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i26.Company>>.empty(),
+      ) as _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i26.Company>>);
 
   @override
-  _i16.Stream<_i2.Either<_i24.DatabaseFailure, List<_i26.CompanyRequest>>>
+  _i16.Stream<_i2.Either<_i25.DatabaseFailure, List<_i27.CompanyRequest>>>
       observeCompanyRequests() => (super.noSuchMethod(
             Invocation.method(
               #observeCompanyRequests,
               [],
             ),
             returnValue: _i16.Stream<
-                _i2.Either<_i24.DatabaseFailure,
-                    List<_i26.CompanyRequest>>>.empty(),
+                _i2.Either<_i25.DatabaseFailure,
+                    List<_i27.CompanyRequest>>>.empty(),
           ) as _i16.Stream<
-              _i2.Either<_i24.DatabaseFailure, List<_i26.CompanyRequest>>>);
+              _i2.Either<_i25.DatabaseFailure, List<_i27.CompanyRequest>>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> updateCompany(
-    _i25.Company? company,
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> updateCompany(
+    _i26.Company? company,
     bool? avvAccepted,
   ) =>
       (super.noSuchMethod(
@@ -5233,8 +5239,8 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           ],
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #updateCompany,
@@ -5244,10 +5250,10 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
             ],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i25.Company>> getCompany(
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i26.Company>> getCompany(
           String? companyID) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5255,19 +5261,19 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           [companyID],
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i25.Company>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i25.Company>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i26.Company>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i26.Company>(
           this,
           Invocation.method(
             #getCompany,
             [companyID],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i25.Company>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i26.Company>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> registerCompany(
-    _i25.Company? company,
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> registerCompany(
+    _i26.Company? company,
     bool? avvAccepted,
   ) =>
       (super.noSuchMethod(
@@ -5279,8 +5285,8 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           ],
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #registerCompany,
@@ -5290,10 +5296,10 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
             ],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i26.CompanyRequest>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i27.CompanyRequest>>
       getPendingCompanyRequest(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getPendingCompanyRequest,
@@ -5301,8 +5307,8 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
             ),
             returnValue: _i16.Future<
                     _i2
-                    .Either<_i24.DatabaseFailure, _i26.CompanyRequest>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i26.CompanyRequest>(
+                    .Either<_i25.DatabaseFailure, _i27.CompanyRequest>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i27.CompanyRequest>(
               this,
               Invocation.method(
                 #getPendingCompanyRequest,
@@ -5310,10 +5316,10 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
               ),
             )),
           ) as _i16
-              .Future<_i2.Either<_i24.DatabaseFailure, _i26.CompanyRequest>>);
+              .Future<_i2.Either<_i25.DatabaseFailure, _i27.CompanyRequest>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, List<_i23.CustomUser>>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, List<_i23.CustomUser>>>
       getAllUsersForPendingCompanyRequests(List<String>? ids) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -5322,8 +5328,8 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
             ),
             returnValue: _i16.Future<
                     _i2
-                    .Either<_i24.DatabaseFailure, List<_i23.CustomUser>>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, List<_i23.CustomUser>>(
+                    .Either<_i25.DatabaseFailure, List<_i23.CustomUser>>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, List<_i23.CustomUser>>(
               this,
               Invocation.method(
                 #getAllUsersForPendingCompanyRequests,
@@ -5331,10 +5337,10 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
               ),
             )),
           ) as _i16
-              .Future<_i2.Either<_i24.DatabaseFailure, List<_i23.CustomUser>>>);
+              .Future<_i2.Either<_i25.DatabaseFailure, List<_i23.CustomUser>>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> processCompanyRequest(
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> processCompanyRequest(
     String? id,
     String? userID,
     bool? accepted,
@@ -5349,8 +5355,8 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           ],
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #processCompanyRequest,
@@ -5361,11 +5367,11 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
             ],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, String>> getAVVDownloadURL(
-    _i25.Company? company,
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, String>> getAVVDownloadURL(
+    _i26.Company? company,
     bool? isPreview,
   ) =>
       (super.noSuchMethod(
@@ -5377,8 +5383,8 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
           ],
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, String>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, String>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, String>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, String>(
           this,
           Invocation.method(
             #getAVVDownloadURL,
@@ -5388,7 +5394,7 @@ class MockCompanyRepository extends _i1.Mock implements _i8.CompanyRepository {
             ],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, String>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, String>>);
 }
 
 /// A class which mocks [ImageRepository].
@@ -5400,10 +5406,10 @@ class MockImageRepository extends _i1.Mock implements _i7.ImageRepository {
   }
 
   @override
-  _i16.Future<_i2.Either<_i27.StorageFailure, String>> uploadImageForWeb(
-    _i28.Uint8List? image,
+  _i16.Future<_i2.Either<_i28.StorageFailure, String>> uploadImageForWeb(
+    _i29.Uint8List? image,
     String? id,
-    _i29.ImageUploader? uploader,
+    _i30.ImageUploader? uploader,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5414,8 +5420,8 @@ class MockImageRepository extends _i1.Mock implements _i7.ImageRepository {
             uploader,
           ],
         ),
-        returnValue: _i16.Future<_i2.Either<_i27.StorageFailure, String>>.value(
-            _FakeEither_0<_i27.StorageFailure, String>(
+        returnValue: _i16.Future<_i2.Either<_i28.StorageFailure, String>>.value(
+            _FakeEither_0<_i28.StorageFailure, String>(
           this,
           Invocation.method(
             #uploadImageForWeb,
@@ -5426,13 +5432,13 @@ class MockImageRepository extends _i1.Mock implements _i7.ImageRepository {
             ],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i27.StorageFailure, String>>);
+      ) as _i16.Future<_i2.Either<_i28.StorageFailure, String>>);
 
   @override
-  _i16.Future<_i2.Either<_i27.StorageFailure, String>> uploadImageForApp(
-    _i30.File? image,
+  _i16.Future<_i2.Either<_i28.StorageFailure, String>> uploadImageForApp(
+    _i31.File? image,
     String? id,
-    _i29.ImageUploader? uploader,
+    _i30.ImageUploader? uploader,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5443,8 +5449,8 @@ class MockImageRepository extends _i1.Mock implements _i7.ImageRepository {
             uploader,
           ],
         ),
-        returnValue: _i16.Future<_i2.Either<_i27.StorageFailure, String>>.value(
-            _FakeEither_0<_i27.StorageFailure, String>(
+        returnValue: _i16.Future<_i2.Either<_i28.StorageFailure, String>>.value(
+            _FakeEither_0<_i28.StorageFailure, String>(
           this,
           Invocation.method(
             #uploadImageForApp,
@@ -5455,7 +5461,7 @@ class MockImageRepository extends _i1.Mock implements _i7.ImageRepository {
             ],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i27.StorageFailure, String>>);
+      ) as _i16.Future<_i2.Either<_i28.StorageFailure, String>>);
 }
 
 /// A class which mocks [LandingPageRepository].
@@ -5468,20 +5474,20 @@ class MockLandingPageRepository extends _i1.Mock
   }
 
   @override
-  _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>
+  _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>
       observeAllLandingPages() => (super.noSuchMethod(
             Invocation.method(
               #observeAllLandingPages,
               [],
             ),
             returnValue: _i16.Stream<
-                _i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>.empty(),
-          ) as _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>);
+                _i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>.empty(),
+          ) as _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>);
 
   @override
   _i16.Future<
       _i2
-      .Either<_i24.DatabaseFailure, List<_i31.LandingPage>>> getAllLandingPages(
+      .Either<_i25.DatabaseFailure, List<_i32.LandingPage>>> getAllLandingPages(
           List<String>? ids) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5489,8 +5495,8 @@ class MockLandingPageRepository extends _i1.Mock
           [ids],
         ),
         returnValue: _i16.Future<
-                _i2.Either<_i24.DatabaseFailure, List<_i31.LandingPage>>>.value(
-            _FakeEither_0<_i24.DatabaseFailure, List<_i31.LandingPage>>(
+                _i2.Either<_i25.DatabaseFailure, List<_i32.LandingPage>>>.value(
+            _FakeEither_0<_i25.DatabaseFailure, List<_i32.LandingPage>>(
           this,
           Invocation.method(
             #getAllLandingPages,
@@ -5498,12 +5504,12 @@ class MockLandingPageRepository extends _i1.Mock
           ),
         )),
       ) as _i16
-          .Future<_i2.Either<_i24.DatabaseFailure, List<_i31.LandingPage>>>);
+          .Future<_i2.Either<_i25.DatabaseFailure, List<_i32.LandingPage>>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> createLandingPage(
-    _i31.LandingPage? landingPage,
-    _i28.Uint8List? imageData,
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> createLandingPage(
+    _i32.LandingPage? landingPage,
+    _i29.Uint8List? imageData,
     bool? imageHasChanged,
     String? templateID,
   ) =>
@@ -5518,8 +5524,8 @@ class MockLandingPageRepository extends _i1.Mock
           ],
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #createLandingPage,
@@ -5531,10 +5537,10 @@ class MockLandingPageRepository extends _i1.Mock
             ],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> deleteLandingPage(
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> deleteLandingPage(
     String? id,
     String? ownerID,
   ) =>
@@ -5547,8 +5553,8 @@ class MockLandingPageRepository extends _i1.Mock
           ],
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #deleteLandingPage,
@@ -5558,12 +5564,12 @@ class MockLandingPageRepository extends _i1.Mock
             ],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> editLandingPage(
-    _i31.LandingPage? landingPage,
-    _i28.Uint8List? imageData,
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> editLandingPage(
+    _i32.LandingPage? landingPage,
+    _i29.Uint8List? imageData,
     bool? imageHasChanged,
   ) =>
       (super.noSuchMethod(
@@ -5576,8 +5582,8 @@ class MockLandingPageRepository extends _i1.Mock
           ],
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #editLandingPage,
@@ -5588,10 +5594,10 @@ class MockLandingPageRepository extends _i1.Mock
             ],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> duplicateLandingPage(
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> duplicateLandingPage(
           String? id) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5599,18 +5605,18 @@ class MockLandingPageRepository extends _i1.Mock
           [id],
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #duplicateLandingPage,
             [id],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>
       toggleLandingPageActivity(
     String? id,
     bool? isActive,
@@ -5626,8 +5632,8 @@ class MockLandingPageRepository extends _i1.Mock
               ],
             ),
             returnValue:
-                _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                    _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+                _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                    _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
               this,
               Invocation.method(
                 #toggleLandingPageActivity,
@@ -5638,37 +5644,37 @@ class MockLandingPageRepository extends _i1.Mock
                 ],
               ),
             )),
-          ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+          ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i31.LandingPage>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i32.LandingPage>>
       getLandingPage(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getLandingPage,
               [id],
             ),
             returnValue: _i16.Future<
-                    _i2.Either<_i24.DatabaseFailure, _i31.LandingPage>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i31.LandingPage>(
+                    _i2.Either<_i25.DatabaseFailure, _i32.LandingPage>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i32.LandingPage>(
               this,
               Invocation.method(
                 #getLandingPage,
                 [id],
               ),
             )),
-          ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i31.LandingPage>>);
+          ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i32.LandingPage>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, List<_i32.LandingPageTemplate>>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, List<_i33.LandingPageTemplate>>>
       getAllLandingPageTemplates() => (super.noSuchMethod(
             Invocation.method(
               #getAllLandingPageTemplates,
               [],
             ),
             returnValue: _i16.Future<
-                _i2.Either<_i24.DatabaseFailure,
-                    List<_i32.LandingPageTemplate>>>.value(_FakeEither_0<
-                _i24.DatabaseFailure, List<_i32.LandingPageTemplate>>(
+                _i2.Either<_i25.DatabaseFailure,
+                    List<_i33.LandingPageTemplate>>>.value(_FakeEither_0<
+                _i25.DatabaseFailure, List<_i33.LandingPageTemplate>>(
               this,
               Invocation.method(
                 #getAllLandingPageTemplates,
@@ -5677,10 +5683,10 @@ class MockLandingPageRepository extends _i1.Mock
             )),
           ) as _i16.Future<
               _i2
-              .Either<_i24.DatabaseFailure, List<_i32.LandingPageTemplate>>>);
+              .Either<_i25.DatabaseFailure, List<_i33.LandingPageTemplate>>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, List<_i33.Promoter>>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, List<_i34.Promoter>>>
       getUnregisteredPromoters(List<String>? associatedUsersIDs) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -5689,8 +5695,8 @@ class MockLandingPageRepository extends _i1.Mock
             ),
             returnValue: _i16.Future<
                     _i2
-                    .Either<_i24.DatabaseFailure, List<_i33.Promoter>>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, List<_i33.Promoter>>(
+                    .Either<_i25.DatabaseFailure, List<_i34.Promoter>>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, List<_i34.Promoter>>(
               this,
               Invocation.method(
                 #getUnregisteredPromoters,
@@ -5698,10 +5704,10 @@ class MockLandingPageRepository extends _i1.Mock
               ),
             )),
           ) as _i16
-              .Future<_i2.Either<_i24.DatabaseFailure, List<_i33.Promoter>>>);
+              .Future<_i2.Either<_i25.DatabaseFailure, List<_i34.Promoter>>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, List<_i33.Promoter>>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, List<_i34.Promoter>>>
       getRegisteredPromoters(List<String>? associatedUsersIDs) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -5710,8 +5716,8 @@ class MockLandingPageRepository extends _i1.Mock
             ),
             returnValue: _i16.Future<
                     _i2
-                    .Either<_i24.DatabaseFailure, List<_i33.Promoter>>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, List<_i33.Promoter>>(
+                    .Either<_i25.DatabaseFailure, List<_i34.Promoter>>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, List<_i34.Promoter>>(
               this,
               Invocation.method(
                 #getRegisteredPromoters,
@@ -5719,20 +5725,20 @@ class MockLandingPageRepository extends _i1.Mock
               ),
             )),
           ) as _i16
-              .Future<_i2.Either<_i24.DatabaseFailure, List<_i33.Promoter>>>);
+              .Future<_i2.Either<_i25.DatabaseFailure, List<_i34.Promoter>>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, List<_i31.LandingPage>>>
-      getLandingPagesForPromoters(List<_i33.Promoter>? promoters) =>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, List<_i32.LandingPage>>>
+      getLandingPagesForPromoters(List<_i34.Promoter>? promoters) =>
           (super.noSuchMethod(
             Invocation.method(
               #getLandingPagesForPromoters,
               [promoters],
             ),
             returnValue: _i16.Future<
-                    _i2.Either<_i24.DatabaseFailure,
-                        List<_i31.LandingPage>>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, List<_i31.LandingPage>>(
+                    _i2.Either<_i25.DatabaseFailure,
+                        List<_i32.LandingPage>>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, List<_i32.LandingPage>>(
               this,
               Invocation.method(
                 #getLandingPagesForPromoters,
@@ -5740,7 +5746,7 @@ class MockLandingPageRepository extends _i1.Mock
               ),
             )),
           ) as _i16.Future<
-              _i2.Either<_i24.DatabaseFailure, List<_i31.LandingPage>>>);
+              _i2.Either<_i25.DatabaseFailure, List<_i32.LandingPage>>>);
 }
 
 /// A class which mocks [PromoterRepository].
@@ -5753,8 +5759,8 @@ class MockPromoterRepository extends _i1.Mock
   }
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> registerPromoter(
-          {required _i34.UnregisteredPromoter? promoter}) =>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> registerPromoter(
+          {required _i35.UnregisteredPromoter? promoter}) =>
       (super.noSuchMethod(
         Invocation.method(
           #registerPromoter,
@@ -5762,8 +5768,8 @@ class MockPromoterRepository extends _i1.Mock
           {#promoter: promoter},
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #registerPromoter,
@@ -5771,10 +5777,10 @@ class MockPromoterRepository extends _i1.Mock
             {#promoter: promoter},
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, bool>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, bool>>
       checkIfPromoterAlreadyExists({required String? email}) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -5783,8 +5789,8 @@ class MockPromoterRepository extends _i1.Mock
               {#email: email},
             ),
             returnValue:
-                _i16.Future<_i2.Either<_i24.DatabaseFailure, bool>>.value(
-                    _FakeEither_0<_i24.DatabaseFailure, bool>(
+                _i16.Future<_i2.Either<_i25.DatabaseFailure, bool>>.value(
+                    _FakeEither_0<_i25.DatabaseFailure, bool>(
               this,
               Invocation.method(
                 #checkIfPromoterAlreadyExists,
@@ -5792,21 +5798,21 @@ class MockPromoterRepository extends _i1.Mock
                 {#email: email},
               ),
             )),
-          ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, bool>>);
+          ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, bool>>);
 
   @override
-  _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>
+  _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>
       observeAllPromoters() => (super.noSuchMethod(
             Invocation.method(
               #observeAllPromoters,
               [],
             ),
             returnValue: _i16.Stream<
-                _i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>.empty(),
-          ) as _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>);
+                _i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>.empty(),
+          ) as _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, List<_i23.CustomUser>>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, List<_i23.CustomUser>>>
       getRegisteredPromoters(List<String>? ids) => (super.noSuchMethod(
             Invocation.method(
               #getRegisteredPromoters,
@@ -5814,8 +5820,8 @@ class MockPromoterRepository extends _i1.Mock
             ),
             returnValue: _i16.Future<
                     _i2
-                    .Either<_i24.DatabaseFailure, List<_i23.CustomUser>>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, List<_i23.CustomUser>>(
+                    .Either<_i25.DatabaseFailure, List<_i23.CustomUser>>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, List<_i23.CustomUser>>(
               this,
               Invocation.method(
                 #getRegisteredPromoters,
@@ -5823,19 +5829,19 @@ class MockPromoterRepository extends _i1.Mock
               ),
             )),
           ) as _i16
-              .Future<_i2.Either<_i24.DatabaseFailure, List<_i23.CustomUser>>>);
+              .Future<_i2.Either<_i25.DatabaseFailure, List<_i23.CustomUser>>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, List<_i34.UnregisteredPromoter>>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, List<_i35.UnregisteredPromoter>>>
       getUnregisteredPromoters(List<String>? ids) => (super.noSuchMethod(
             Invocation.method(
               #getUnregisteredPromoters,
               [ids],
             ),
             returnValue: _i16.Future<
-                _i2.Either<_i24.DatabaseFailure,
-                    List<_i34.UnregisteredPromoter>>>.value(_FakeEither_0<
-                _i24.DatabaseFailure, List<_i34.UnregisteredPromoter>>(
+                _i2.Either<_i25.DatabaseFailure,
+                    List<_i35.UnregisteredPromoter>>>.value(_FakeEither_0<
+                _i25.DatabaseFailure, List<_i35.UnregisteredPromoter>>(
               this,
               Invocation.method(
                 #getUnregisteredPromoters,
@@ -5844,10 +5850,10 @@ class MockPromoterRepository extends _i1.Mock
             )),
           ) as _i16.Future<
               _i2
-              .Either<_i24.DatabaseFailure, List<_i34.UnregisteredPromoter>>>);
+              .Either<_i25.DatabaseFailure, List<_i35.UnregisteredPromoter>>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> deletePromoter(
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> deletePromoter(
           {required String? id}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5856,8 +5862,8 @@ class MockPromoterRepository extends _i1.Mock
           {#id: id},
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #deletePromoter,
@@ -5865,10 +5871,10 @@ class MockPromoterRepository extends _i1.Mock
             {#id: id},
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> editPromoter({
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> editPromoter({
     required bool? isRegistered,
     required List<String>? landingPageIDs,
     required String? promoterID,
@@ -5884,8 +5890,8 @@ class MockPromoterRepository extends _i1.Mock
           },
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #editPromoter,
@@ -5897,11 +5903,11 @@ class MockPromoterRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
   _i16.Future<
-      _i2.Either<_i24.DatabaseFailure, List<_i31.LandingPage>>> getLandingPages(
+      _i2.Either<_i25.DatabaseFailure, List<_i32.LandingPage>>> getLandingPages(
           List<String>? ids) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5909,8 +5915,8 @@ class MockPromoterRepository extends _i1.Mock
           [ids],
         ),
         returnValue: _i16.Future<
-                _i2.Either<_i24.DatabaseFailure, List<_i31.LandingPage>>>.value(
-            _FakeEither_0<_i24.DatabaseFailure, List<_i31.LandingPage>>(
+                _i2.Either<_i25.DatabaseFailure, List<_i32.LandingPage>>>.value(
+            _FakeEither_0<_i25.DatabaseFailure, List<_i32.LandingPage>>(
           this,
           Invocation.method(
             #getLandingPages,
@@ -5918,7 +5924,7 @@ class MockPromoterRepository extends _i1.Mock
           ),
         )),
       ) as _i16
-          .Future<_i2.Either<_i24.DatabaseFailure, List<_i31.LandingPage>>>);
+          .Future<_i2.Either<_i25.DatabaseFailure, List<_i32.LandingPage>>>);
 }
 
 /// A class which mocks [UserRepository].
@@ -5930,39 +5936,18 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
   }
 
   @override
-  _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>
+  _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>
       observeUser() => (super.noSuchMethod(
             Invocation.method(
               #observeUser,
               [],
             ),
             returnValue: _i16.Stream<
-                _i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>.empty(),
-          ) as _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>);
+                _i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>.empty(),
+          ) as _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> createUser(
-          {required _i23.CustomUser? user}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #createUser,
-          [],
-          {#user: user},
-        ),
-        returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
-          this,
-          Invocation.method(
-            #createUser,
-            [],
-            {#user: user},
-          ),
-        )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
-
-  @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> updateUser(
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> updateUser(
           {required _i23.CustomUser? user}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5971,8 +5956,8 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
           {#user: user},
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #updateUser,
@@ -5980,10 +5965,10 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
             {#user: user},
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>> updateEmail(
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>> updateEmail(
           {required String? email}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -5992,8 +5977,8 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
           {#email: email},
         ),
         returnValue:
-            _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+            _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
           this,
           Invocation.method(
             #updateEmail,
@@ -6001,7 +5986,7 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
             {#email: email},
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 
   @override
   _i16.Future<bool> isEmailVerified() => (super.noSuchMethod(
@@ -6013,7 +5998,7 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
       ) as _i16.Future<bool>);
 
   @override
-  _i16.Future<_i2.Either<_i22.AuthFailure, void>> updatePassword(
+  _i16.Future<_i2.Either<_i24.AuthFailure, void>> updatePassword(
           {required String? password}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -6021,8 +6006,8 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
           [],
           {#password: password},
         ),
-        returnValue: _i16.Future<_i2.Either<_i22.AuthFailure, void>>.value(
-            _FakeEither_0<_i22.AuthFailure, void>(
+        returnValue: _i16.Future<_i2.Either<_i24.AuthFailure, void>>.value(
+            _FakeEither_0<_i24.AuthFailure, void>(
           this,
           Invocation.method(
             #updatePassword,
@@ -6030,28 +6015,28 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
             {#password: password},
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i22.AuthFailure, void>>);
+      ) as _i16.Future<_i2.Either<_i24.AuthFailure, void>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>> getUser() =>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>> getUser() =>
       (super.noSuchMethod(
         Invocation.method(
           #getUser,
           [],
         ),
         returnValue: _i16
-            .Future<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>.value(
-            _FakeEither_0<_i24.DatabaseFailure, _i23.CustomUser>(
+            .Future<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>.value(
+            _FakeEither_0<_i25.DatabaseFailure, _i23.CustomUser>(
           this,
           Invocation.method(
             #getUser,
             [],
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>> getParentUser(
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>> getParentUser(
           {required String? parentID}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -6060,8 +6045,8 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
           {#parentID: parentID},
         ),
         returnValue: _i16
-            .Future<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>.value(
-            _FakeEither_0<_i24.DatabaseFailure, _i23.CustomUser>(
+            .Future<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>.value(
+            _FakeEither_0<_i25.DatabaseFailure, _i23.CustomUser>(
           this,
           Invocation.method(
             #getParentUser,
@@ -6069,7 +6054,7 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
             {#parentID: parentID},
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i23.CustomUser>>);
+      ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i23.CustomUser>>);
 }
 
 /// A class which mocks [PermissionRepository].
@@ -6082,15 +6067,15 @@ class MockPermissionRepository extends _i1.Mock
   }
 
   @override
-  _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i35.Permissions>>
+  _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i36.Permissions>>
       observeAllPermissions() => (super.noSuchMethod(
             Invocation.method(
               #observeAllPermissions,
               [],
             ),
             returnValue: _i16.Stream<
-                _i2.Either<_i24.DatabaseFailure, _i35.Permissions>>.empty(),
-          ) as _i16.Stream<_i2.Either<_i24.DatabaseFailure, _i35.Permissions>>);
+                _i2.Either<_i25.DatabaseFailure, _i36.Permissions>>.empty(),
+          ) as _i16.Stream<_i2.Either<_i25.DatabaseFailure, _i36.Permissions>>);
 }
 
 /// A class which mocks [AdminRegistrationCodeRepository].
@@ -6103,7 +6088,7 @@ class MockAdminRegistrationCodeRepository extends _i1.Mock
   }
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>
       sendRegistrationCodeFromAdmin({
     required String? email,
     required String? code,
@@ -6120,8 +6105,8 @@ class MockAdminRegistrationCodeRepository extends _i1.Mock
               },
             ),
             returnValue:
-                _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                    _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+                _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                    _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
               this,
               Invocation.method(
                 #sendRegistrationCodeFromAdmin,
@@ -6133,7 +6118,7 @@ class MockAdminRegistrationCodeRepository extends _i1.Mock
                 },
               ),
             )),
-          ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+          ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 }
 
 /// A class which mocks [User].
@@ -6562,16 +6547,22 @@ class MockSignInCubit extends _i1.Mock implements _i5.SignInCubit {
       );
 
   @override
-  void registerWithEmailAndPassword(
+  void registerAndCreateUser(
     String? email,
     String? password,
+    _i23.CustomUser? user,
+    bool? privacyPolicyAccepted,
+    bool? termsAndConditionsAccepted,
   ) =>
       super.noSuchMethod(
         Invocation.method(
-          #registerWithEmailAndPassword,
+          #registerAndCreateUser,
           [
             email,
             password,
+            user,
+            privacyPolicyAccepted,
+            termsAndConditionsAccepted,
           ],
         ),
         returnValueForMissingStub: null,
@@ -6603,7 +6594,7 @@ class MockSignInCubit extends _i1.Mock implements _i5.SignInCubit {
       );
 
   @override
-  void onChange(_i36.Change<_i5.SignInState>? change) => super.noSuchMethod(
+  void onChange(_i37.Change<_i5.SignInState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -6657,7 +6648,7 @@ class MockSignInCubit extends _i1.Mock implements _i5.SignInCubit {
 /// A class which mocks [AuthCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthCubit extends _i1.Mock implements _i37.AuthCubit {
+class MockAuthCubit extends _i1.Mock implements _i38.AuthCubit {
   MockAuthCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -6672,19 +6663,19 @@ class MockAuthCubit extends _i1.Mock implements _i37.AuthCubit {
       ) as _i4.AuthRepository);
 
   @override
-  _i37.AuthState get state => (super.noSuchMethod(
+  _i38.AuthState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i21.dummyValue<_i37.AuthState>(
+        returnValue: _i21.dummyValue<_i38.AuthState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i37.AuthState);
+      ) as _i38.AuthState);
 
   @override
-  _i16.Stream<_i37.AuthState> get stream => (super.noSuchMethod(
+  _i16.Stream<_i38.AuthState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i16.Stream<_i37.AuthState>.empty(),
-      ) as _i16.Stream<_i37.AuthState>);
+        returnValue: _i16.Stream<_i38.AuthState>.empty(),
+      ) as _i16.Stream<_i38.AuthState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -6720,7 +6711,7 @@ class MockAuthCubit extends _i1.Mock implements _i37.AuthCubit {
       );
 
   @override
-  void emit(_i37.AuthState? state) => super.noSuchMethod(
+  void emit(_i38.AuthState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -6729,7 +6720,7 @@ class MockAuthCubit extends _i1.Mock implements _i37.AuthCubit {
       );
 
   @override
-  void onChange(_i36.Change<_i37.AuthState>? change) => super.noSuchMethod(
+  void onChange(_i37.Change<_i38.AuthState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -6783,7 +6774,7 @@ class MockAuthCubit extends _i1.Mock implements _i37.AuthCubit {
 /// A class which mocks [AuthObserverBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthObserverBloc extends _i1.Mock implements _i38.AuthObserverBloc {
+class MockAuthObserverBloc extends _i1.Mock implements _i39.AuthObserverBloc {
   MockAuthObserverBloc() {
     _i1.throwOnMissingStub(this);
   }
@@ -6798,19 +6789,19 @@ class MockAuthObserverBloc extends _i1.Mock implements _i38.AuthObserverBloc {
       ) as _i4.AuthRepository);
 
   @override
-  _i38.AuthObserverState get state => (super.noSuchMethod(
+  _i39.AuthObserverState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i21.dummyValue<_i38.AuthObserverState>(
+        returnValue: _i21.dummyValue<_i39.AuthObserverState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i38.AuthObserverState);
+      ) as _i39.AuthObserverState);
 
   @override
-  _i16.Stream<_i38.AuthObserverState> get stream => (super.noSuchMethod(
+  _i16.Stream<_i39.AuthObserverState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i16.Stream<_i38.AuthObserverState>.empty(),
-      ) as _i16.Stream<_i38.AuthObserverState>);
+        returnValue: _i16.Stream<_i39.AuthObserverState>.empty(),
+      ) as _i16.Stream<_i39.AuthObserverState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -6829,7 +6820,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i38.AuthObserverBloc {
       ) as _i16.Future<void>);
 
   @override
-  void add(_i38.AuthObserverEvent? event) => super.noSuchMethod(
+  void add(_i39.AuthObserverEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -6838,7 +6829,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i38.AuthObserverBloc {
       );
 
   @override
-  void onEvent(_i38.AuthObserverEvent? event) => super.noSuchMethod(
+  void onEvent(_i39.AuthObserverEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -6847,7 +6838,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i38.AuthObserverBloc {
       );
 
   @override
-  void emit(_i38.AuthObserverState? state) => super.noSuchMethod(
+  void emit(_i39.AuthObserverState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -6856,9 +6847,9 @@ class MockAuthObserverBloc extends _i1.Mock implements _i38.AuthObserverBloc {
       );
 
   @override
-  void on<E extends _i38.AuthObserverEvent>(
-    _i36.EventHandler<E, _i38.AuthObserverState>? handler, {
-    _i36.EventTransformer<E>? transformer,
+  void on<E extends _i39.AuthObserverEvent>(
+    _i37.EventHandler<E, _i39.AuthObserverState>? handler, {
+    _i37.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -6871,7 +6862,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i38.AuthObserverBloc {
 
   @override
   void onTransition(
-          _i36.Transition<_i38.AuthObserverEvent, _i38.AuthObserverState>?
+          _i37.Transition<_i39.AuthObserverEvent, _i39.AuthObserverState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -6882,7 +6873,7 @@ class MockAuthObserverBloc extends _i1.Mock implements _i38.AuthObserverBloc {
       );
 
   @override
-  void onChange(_i36.Change<_i38.AuthObserverState>? change) =>
+  void onChange(_i37.Change<_i39.AuthObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -6927,13 +6918,13 @@ class MockAuthObserverBloc extends _i1.Mock implements _i38.AuthObserverBloc {
 /// A class which mocks [MenuCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMenuCubit extends _i1.Mock implements _i39.MenuCubit {
+class MockMenuCubit extends _i1.Mock implements _i40.MenuCubit {
   MockMenuCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set selectedItem(_i29.MenuItems? _selectedItem) => super.noSuchMethod(
+  set selectedItem(_i30.MenuItems? _selectedItem) => super.noSuchMethod(
         Invocation.setter(
           #selectedItem,
           _selectedItem,
@@ -6942,19 +6933,19 @@ class MockMenuCubit extends _i1.Mock implements _i39.MenuCubit {
       );
 
   @override
-  _i39.MenuState get state => (super.noSuchMethod(
+  _i40.MenuState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i21.dummyValue<_i39.MenuState>(
+        returnValue: _i21.dummyValue<_i40.MenuState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i39.MenuState);
+      ) as _i40.MenuState);
 
   @override
-  _i16.Stream<_i39.MenuState> get stream => (super.noSuchMethod(
+  _i16.Stream<_i40.MenuState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i16.Stream<_i39.MenuState>.empty(),
-      ) as _i16.Stream<_i39.MenuState>);
+        returnValue: _i16.Stream<_i40.MenuState>.empty(),
+      ) as _i16.Stream<_i40.MenuState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -6963,7 +6954,7 @@ class MockMenuCubit extends _i1.Mock implements _i39.MenuCubit {
       ) as bool);
 
   @override
-  void selectMenu(_i29.MenuItems? selectedMenuItem) => super.noSuchMethod(
+  void selectMenu(_i30.MenuItems? selectedMenuItem) => super.noSuchMethod(
         Invocation.method(
           #selectMenu,
           [selectedMenuItem],
@@ -6981,7 +6972,7 @@ class MockMenuCubit extends _i1.Mock implements _i39.MenuCubit {
       );
 
   @override
-  void emit(_i39.MenuState? state) => super.noSuchMethod(
+  void emit(_i40.MenuState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -6990,7 +6981,7 @@ class MockMenuCubit extends _i1.Mock implements _i39.MenuCubit {
       );
 
   @override
-  void onChange(_i36.Change<_i39.MenuState>? change) => super.noSuchMethod(
+  void onChange(_i37.Change<_i40.MenuState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -7044,25 +7035,25 @@ class MockMenuCubit extends _i1.Mock implements _i39.MenuCubit {
 /// A class which mocks [ThemeCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockThemeCubit extends _i1.Mock implements _i40.ThemeCubit {
+class MockThemeCubit extends _i1.Mock implements _i41.ThemeCubit {
   MockThemeCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i40.ThemeState get state => (super.noSuchMethod(
+  _i41.ThemeState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i21.dummyValue<_i40.ThemeState>(
+        returnValue: _i21.dummyValue<_i41.ThemeState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i40.ThemeState);
+      ) as _i41.ThemeState);
 
   @override
-  _i16.Stream<_i40.ThemeState> get stream => (super.noSuchMethod(
+  _i16.Stream<_i41.ThemeState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i16.Stream<_i40.ThemeState>.empty(),
-      ) as _i16.Stream<_i40.ThemeState>);
+        returnValue: _i16.Stream<_i41.ThemeState>.empty(),
+      ) as _i16.Stream<_i41.ThemeState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -7071,7 +7062,7 @@ class MockThemeCubit extends _i1.Mock implements _i40.ThemeCubit {
       ) as bool);
 
   @override
-  void changeTheme(_i29.ThemeStatus? status) => super.noSuchMethod(
+  void changeTheme(_i30.ThemeStatus? status) => super.noSuchMethod(
         Invocation.method(
           #changeTheme,
           [status],
@@ -7080,7 +7071,7 @@ class MockThemeCubit extends _i1.Mock implements _i40.ThemeCubit {
       );
 
   @override
-  void emit(_i40.ThemeState? state) => super.noSuchMethod(
+  void emit(_i41.ThemeState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -7089,115 +7080,7 @@ class MockThemeCubit extends _i1.Mock implements _i40.ThemeCubit {
       );
 
   @override
-  void onChange(_i36.Change<_i40.ThemeState>? change) => super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i16.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i16.Future<void>.value(),
-        returnValueForMissingStub: _i16.Future<void>.value(),
-      ) as _i16.Future<void>);
-}
-
-/// A class which mocks [UserCubit].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockUserCubit extends _i1.Mock implements _i41.UserCubit {
-  MockUserCubit() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i6.UserRepository get userRepo => (super.noSuchMethod(
-        Invocation.getter(#userRepo),
-        returnValue: _FakeUserRepository_10(
-          this,
-          Invocation.getter(#userRepo),
-        ),
-      ) as _i6.UserRepository);
-
-  @override
-  _i41.UserState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _i21.dummyValue<_i41.UserState>(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i41.UserState);
-
-  @override
-  _i16.Stream<_i41.UserState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i16.Stream<_i41.UserState>.empty(),
-      ) as _i16.Stream<_i41.UserState>);
-
-  @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  void createUser(_i23.CustomUser? user) => super.noSuchMethod(
-        Invocation.method(
-          #createUser,
-          [user],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void emit(_i41.UserState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onChange(_i36.Change<_i41.UserState>? change) => super.noSuchMethod(
+  void onChange(_i37.Change<_i41.ThemeState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -7389,7 +7272,7 @@ class MockProfileCubit extends _i1.Mock implements _i42.ProfileCubit {
       );
 
   @override
-  void onChange(_i36.Change<_i42.ProfileState>? change) => super.noSuchMethod(
+  void onChange(_i37.Change<_i42.ProfileState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -7513,8 +7396,8 @@ class MockProfileImageBloc extends _i1.Mock implements _i43.ProfileImageBloc {
 
   @override
   void on<E extends _i43.ProfileImageEvent>(
-    _i36.EventHandler<E, _i43.ProfileImageState>? handler, {
-    _i36.EventTransformer<E>? transformer,
+    _i37.EventHandler<E, _i43.ProfileImageState>? handler, {
+    _i37.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -7527,7 +7410,7 @@ class MockProfileImageBloc extends _i1.Mock implements _i43.ProfileImageBloc {
 
   @override
   void onTransition(
-          _i36.Transition<_i43.ProfileImageEvent, _i43.ProfileImageState>?
+          _i37.Transition<_i43.ProfileImageEvent, _i43.ProfileImageState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -7548,7 +7431,7 @@ class MockProfileImageBloc extends _i1.Mock implements _i43.ProfileImageBloc {
       ) as _i16.Future<void>);
 
   @override
-  void onChange(_i36.Change<_i43.ProfileImageState>? change) =>
+  void onChange(_i37.Change<_i43.ProfileImageState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -7663,8 +7546,8 @@ class MockCompanyImageBloc extends _i1.Mock implements _i44.CompanyImageBloc {
 
   @override
   void on<E extends _i44.CompanyImageEvent>(
-    _i36.EventHandler<E, _i44.CompanyImageState>? handler, {
-    _i36.EventTransformer<E>? transformer,
+    _i37.EventHandler<E, _i44.CompanyImageState>? handler, {
+    _i37.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -7677,7 +7560,7 @@ class MockCompanyImageBloc extends _i1.Mock implements _i44.CompanyImageBloc {
 
   @override
   void onTransition(
-          _i36.Transition<_i44.CompanyImageEvent, _i44.CompanyImageState>?
+          _i37.Transition<_i44.CompanyImageEvent, _i44.CompanyImageState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -7698,7 +7581,7 @@ class MockCompanyImageBloc extends _i1.Mock implements _i44.CompanyImageBloc {
       ) as _i16.Future<void>);
 
   @override
-  void onChange(_i36.Change<_i44.CompanyImageState>? change) =>
+  void onChange(_i37.Change<_i44.CompanyImageState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -7814,8 +7697,8 @@ class MockLandingPageImageBloc extends _i1.Mock
 
   @override
   void on<E extends _i45.LandingPageImageEvent>(
-    _i36.EventHandler<E, _i45.LandingPageImageState>? handler, {
-    _i36.EventTransformer<E>? transformer,
+    _i37.EventHandler<E, _i45.LandingPageImageState>? handler, {
+    _i37.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -7828,7 +7711,7 @@ class MockLandingPageImageBloc extends _i1.Mock
 
   @override
   void onTransition(
-          _i36.Transition<_i45.LandingPageImageEvent,
+          _i37.Transition<_i45.LandingPageImageEvent,
                   _i45.LandingPageImageState>?
               transition) =>
       super.noSuchMethod(
@@ -7850,7 +7733,7 @@ class MockLandingPageImageBloc extends _i1.Mock
       ) as _i16.Future<void>);
 
   @override
-  void onChange(_i36.Change<_i45.LandingPageImageState>? change) =>
+  void onChange(_i37.Change<_i45.LandingPageImageState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -7960,8 +7843,8 @@ class MockProfileObserverBloc extends _i1.Mock
 
   @override
   void on<E extends _i46.ProfileObserverEvent>(
-    _i36.EventHandler<E, _i46.ProfileObserverState>? handler, {
-    _i36.EventTransformer<E>? transformer,
+    _i37.EventHandler<E, _i46.ProfileObserverState>? handler, {
+    _i37.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -7974,7 +7857,7 @@ class MockProfileObserverBloc extends _i1.Mock
 
   @override
   void onTransition(
-          _i36.Transition<_i46.ProfileObserverEvent, _i46.ProfileObserverState>?
+          _i37.Transition<_i46.ProfileObserverEvent, _i46.ProfileObserverState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -7995,7 +7878,7 @@ class MockProfileObserverBloc extends _i1.Mock
       ) as _i16.Future<void>);
 
   @override
-  void onChange(_i36.Change<_i46.ProfileObserverState>? change) =>
+  void onChange(_i37.Change<_i46.ProfileObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -8087,7 +7970,7 @@ class MockCompanyObserverCubit extends _i1.Mock
 
   @override
   void companyObserverUpdated(
-          _i2.Either<_i24.DatabaseFailure, _i25.Company>? failureOrCompany) =>
+          _i2.Either<_i25.DatabaseFailure, _i26.Company>? failureOrCompany) =>
       super.noSuchMethod(
         Invocation.method(
           #companyObserverUpdated,
@@ -8116,7 +7999,7 @@ class MockCompanyObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i36.Change<_i47.CompanyObserverState>? change) =>
+  void onChange(_i37.Change<_i47.CompanyObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -8241,7 +8124,7 @@ class MockPermissionCubit extends _i1.Mock implements _i48.PermissionCubit {
       );
 
   @override
-  void onChange(_i36.Change<_i48.PermissionState>? change) =>
+  void onChange(_i37.Change<_i48.PermissionState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -8332,7 +8215,7 @@ class MockCompanyCubit extends _i1.Mock implements _i49.CompanyCubit {
 
   @override
   void updateCompany(
-    _i25.Company? company,
+    _i26.Company? company,
     bool? avvAccepted,
   ) =>
       super.noSuchMethod(
@@ -8357,7 +8240,7 @@ class MockCompanyCubit extends _i1.Mock implements _i49.CompanyCubit {
 
   @override
   void registerCompany(
-    _i25.Company? company,
+    _i26.Company? company,
     bool? avvAccepted,
   ) =>
       super.noSuchMethod(
@@ -8373,7 +8256,7 @@ class MockCompanyCubit extends _i1.Mock implements _i49.CompanyCubit {
 
   @override
   void getPDFDownloadURL(
-    _i25.Company? company,
+    _i26.Company? company,
     bool? isPreview,
   ) =>
       super.noSuchMethod(
@@ -8406,7 +8289,7 @@ class MockCompanyCubit extends _i1.Mock implements _i49.CompanyCubit {
       );
 
   @override
-  void onChange(_i36.Change<_i49.CompanyState>? change) => super.noSuchMethod(
+  void onChange(_i37.Change<_i49.CompanyState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -8514,7 +8397,7 @@ class MockPromoterCubit extends _i1.Mock implements _i50.PromoterCubit {
       ) as bool);
 
   @override
-  void registerPromoter(_i34.UnregisteredPromoter? promoter) =>
+  void registerPromoter(_i35.UnregisteredPromoter? promoter) =>
       super.noSuchMethod(
         Invocation.method(
           #registerPromoter,
@@ -8579,7 +8462,7 @@ class MockPromoterCubit extends _i1.Mock implements _i50.PromoterCubit {
       );
 
   @override
-  void onChange(_i36.Change<_i50.PromoterState>? change) => super.noSuchMethod(
+  void onChange(_i37.Change<_i50.PromoterState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -8680,7 +8563,7 @@ class MockPromoterObserverCubit extends _i1.Mock
 
   @override
   void getPromoters(
-    List<_i33.Promoter>? promoters,
+    List<_i34.Promoter>? promoters,
     int? last,
   ) =>
       super.noSuchMethod(
@@ -8696,7 +8579,7 @@ class MockPromoterObserverCubit extends _i1.Mock
 
   @override
   void searchForPromoter(
-    List<_i33.Promoter>? results,
+    List<_i34.Promoter>? results,
     int? last,
   ) =>
       super.noSuchMethod(
@@ -8712,7 +8595,7 @@ class MockPromoterObserverCubit extends _i1.Mock
 
   @override
   void promotersObserverUpdated(
-          _i2.Either<_i24.DatabaseFailure, _i23.CustomUser>? failureOrUser) =>
+          _i2.Either<_i25.DatabaseFailure, _i23.CustomUser>? failureOrUser) =>
       super.noSuchMethod(
         Invocation.method(
           #promotersObserverUpdated,
@@ -8722,17 +8605,17 @@ class MockPromoterObserverCubit extends _i1.Mock
       );
 
   @override
-  List<_i33.Promoter> sortPromoters(List<_i33.Promoter>? promoters) =>
+  List<_i34.Promoter> sortPromoters(List<_i34.Promoter>? promoters) =>
       (super.noSuchMethod(
         Invocation.method(
           #sortPromoters,
           [promoters],
         ),
-        returnValue: <_i33.Promoter>[],
-      ) as List<_i33.Promoter>);
+        returnValue: <_i34.Promoter>[],
+      ) as List<_i34.Promoter>);
 
   @override
-  bool showLandingPageWarning(_i33.Promoter? promoter) => (super.noSuchMethod(
+  bool showLandingPageWarning(_i34.Promoter? promoter) => (super.noSuchMethod(
         Invocation.method(
           #showLandingPageWarning,
           [promoter],
@@ -8769,7 +8652,7 @@ class MockPromoterObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i36.Change<_i51.PromoterObserverState>? change) =>
+  void onChange(_i37.Change<_i51.PromoterObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -8897,7 +8780,7 @@ class MockRecommendationsCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i36.Change<_i52.RecommendationsState>? change) =>
+  void onChange(_i37.Change<_i52.RecommendationsState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -8999,7 +8882,7 @@ class MockLandingPageObserverCubit extends _i1.Mock
 
   @override
   void landingPageObserverUpdated(
-          _i2.Either<_i24.DatabaseFailure, _i23.CustomUser>? failureOrUser) =>
+          _i2.Either<_i25.DatabaseFailure, _i23.CustomUser>? failureOrUser) =>
       super.noSuchMethod(
         Invocation.method(
           #landingPageObserverUpdated,
@@ -9037,7 +8920,7 @@ class MockLandingPageObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i36.Change<_i53.LandingPageObserverState>? change) =>
+  void onChange(_i37.Change<_i53.LandingPageObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -9134,8 +9017,8 @@ class MockLandingPageCubit extends _i1.Mock implements _i54.LandingPageCubit {
 
   @override
   void createLandingPage(
-    _i31.LandingPage? landingpage,
-    _i28.Uint8List? imageData,
+    _i32.LandingPage? landingpage,
+    _i29.Uint8List? imageData,
     bool? imageHasChanged,
     String? templateID,
   ) =>
@@ -9154,8 +9037,8 @@ class MockLandingPageCubit extends _i1.Mock implements _i54.LandingPageCubit {
 
   @override
   void editLandingPage(
-    _i31.LandingPage? landingPage,
-    _i28.Uint8List? imageData,
+    _i32.LandingPage? landingPage,
+    _i29.Uint8List? imageData,
     bool? imageHasChanged,
   ) =>
       super.noSuchMethod(
@@ -9172,8 +9055,8 @@ class MockLandingPageCubit extends _i1.Mock implements _i54.LandingPageCubit {
 
   @override
   void checkLandingPageImage(
-    _i31.LandingPage? landingPage,
-    _i28.Uint8List? imageData,
+    _i32.LandingPage? landingPage,
+    _i29.Uint8List? imageData,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -9187,7 +9070,7 @@ class MockLandingPageCubit extends _i1.Mock implements _i54.LandingPageCubit {
       );
 
   @override
-  void checkCompanyData(_i25.Company? company) => super.noSuchMethod(
+  void checkCompanyData(_i26.Company? company) => super.noSuchMethod(
         Invocation.method(
           #checkCompanyData,
           [company],
@@ -9273,9 +9156,9 @@ class MockLandingPageCubit extends _i1.Mock implements _i54.LandingPageCubit {
       );
 
   @override
-  List<_i33.Promoter> assignLandingPagesToPromoters(
-    List<_i33.Promoter>? promoters,
-    List<_i31.LandingPage>? landingPages,
+  List<_i34.Promoter> assignLandingPagesToPromoters(
+    List<_i34.Promoter>? promoters,
+    List<_i32.LandingPage>? landingPages,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -9285,13 +9168,13 @@ class MockLandingPageCubit extends _i1.Mock implements _i54.LandingPageCubit {
             landingPages,
           ],
         ),
-        returnValue: <_i33.Promoter>[],
-      ) as List<_i33.Promoter>);
+        returnValue: <_i34.Promoter>[],
+      ) as List<_i34.Promoter>);
 
   @override
-  List<_i33.Promoter> getPromotersWithoutActiveLandingPagesAfterDeletion(
+  List<_i34.Promoter> getPromotersWithoutActiveLandingPagesAfterDeletion(
     String? landingPageID,
-    List<_i33.Promoter>? promoters,
+    List<_i34.Promoter>? promoters,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -9301,8 +9184,8 @@ class MockLandingPageCubit extends _i1.Mock implements _i54.LandingPageCubit {
             promoters,
           ],
         ),
-        returnValue: <_i33.Promoter>[],
-      ) as List<_i33.Promoter>);
+        returnValue: <_i34.Promoter>[],
+      ) as List<_i34.Promoter>);
 
   @override
   void emit(_i54.LandingPageState? state) => super.noSuchMethod(
@@ -9314,7 +9197,7 @@ class MockLandingPageCubit extends _i1.Mock implements _i54.LandingPageCubit {
       );
 
   @override
-  void onChange(_i36.Change<_i54.LandingPageState>? change) =>
+  void onChange(_i37.Change<_i54.LandingPageState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -9376,7 +9259,7 @@ class MockPagebuilderRepository extends _i1.Mock
   }
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i56.PageBuilderPage>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i56.PageBuilderPage>>
       getLandingPageContent(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getLandingPageContent,
@@ -9384,8 +9267,8 @@ class MockPagebuilderRepository extends _i1.Mock
             ),
             returnValue: _i16.Future<
                     _i2
-                    .Either<_i24.DatabaseFailure, _i56.PageBuilderPage>>.value(
-                _FakeEither_0<_i24.DatabaseFailure, _i56.PageBuilderPage>(
+                    .Either<_i25.DatabaseFailure, _i56.PageBuilderPage>>.value(
+                _FakeEither_0<_i25.DatabaseFailure, _i56.PageBuilderPage>(
               this,
               Invocation.method(
                 #getLandingPageContent,
@@ -9393,25 +9276,25 @@ class MockPagebuilderRepository extends _i1.Mock
               ),
             )),
           ) as _i16
-              .Future<_i2.Either<_i24.DatabaseFailure, _i56.PageBuilderPage>>);
+              .Future<_i2.Either<_i25.DatabaseFailure, _i56.PageBuilderPage>>);
 
   @override
-  _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>
+  _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>
       saveLandingPageContent(_i56.PageBuilderPage? page) => (super.noSuchMethod(
             Invocation.method(
               #saveLandingPageContent,
               [page],
             ),
             returnValue:
-                _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>.value(
-                    _FakeEither_0<_i24.DatabaseFailure, _i2.Unit>(
+                _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>.value(
+                    _FakeEither_0<_i25.DatabaseFailure, _i2.Unit>(
               this,
               Invocation.method(
                 #saveLandingPageContent,
                 [page],
               ),
             )),
-          ) as _i16.Future<_i2.Either<_i24.DatabaseFailure, _i2.Unit>>);
+          ) as _i16.Future<_i2.Either<_i25.DatabaseFailure, _i2.Unit>>);
 }
 
 /// A class which mocks [CompanyRequestCubit].
@@ -9499,7 +9382,7 @@ class MockCompanyRequestCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i36.Change<_i57.CompanyRequestState>? change) =>
+  void onChange(_i37.Change<_i57.CompanyRequestState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -9602,7 +9485,7 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
 
   @override
   void companyRequestsObserverUpdated(
-          _i2.Either<_i24.DatabaseFailure, List<_i26.CompanyRequest>>?
+          _i2.Either<_i25.DatabaseFailure, List<_i27.CompanyRequest>>?
               failureOrSuccess) =>
       super.noSuchMethod(
         Invocation.method(
@@ -9613,7 +9496,7 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
       );
 
   @override
-  void getAllUsersForCompanyRequests(List<_i26.CompanyRequest>? requests) =>
+  void getAllUsersForCompanyRequests(List<_i27.CompanyRequest>? requests) =>
       super.noSuchMethod(
         Invocation.method(
           #getAllUsersForCompanyRequests,
@@ -9642,7 +9525,7 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i36.Change<_i58.CompanyRequestObserverState>? change) =>
+  void onChange(_i37.Change<_i58.CompanyRequestObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -9753,7 +9636,7 @@ class MockAdminRegistrationCodeCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i36.Change<_i59.AdminRegistrationCodeState>? change) =>
+  void onChange(_i37.Change<_i59.AdminRegistrationCodeState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -10485,7 +10368,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i15.FirebaseFirestore {
       ) as _i16.Future<void>);
 
   @override
-  _i15.LoadBundleTask loadBundle(_i28.Uint8List? bundle) => (super.noSuchMethod(
+  _i15.LoadBundleTask loadBundle(_i29.Uint8List? bundle) => (super.noSuchMethod(
         Invocation.method(
           #loadBundle,
           [bundle],
