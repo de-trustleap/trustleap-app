@@ -183,7 +183,5 @@ class AuthRepositoryImplementation implements AuthRepository {
   }
 }
 
-// TODO: LEGALS SEITE ERSTELLEN
-// TODO: VERLINKUNGEN
-// TODO: FRONTEND TESTS ANPASSEN
+// TODO: FRONTEND TESTS (MODELS, REPO, CUBIT)
 // TODO: LOCALIZATIONS

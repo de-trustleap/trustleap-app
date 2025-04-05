@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/failure_mapper.dart';
@@ -15,6 +16,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_e
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -200,7 +202,6 @@ class _RegisterFormState extends State<RegisterForm> {
         setButtonToDisabled(true);
       }
     }, builder: (context, state) {
-      print("WIDTH: ${getResponsiveWidth(1)}");
       return Form(
           key: formKey,
           autovalidateMode: (state is SignInShowValidationState)
@@ -417,7 +418,8 @@ class _RegisterFormState extends State<RegisterForm> {
                               ClickableLink(
                                   title: "AGB",
                                   onTap: () {
-                                    // TODO: AGB SEITE ÖFFNEN
+                                    CustomNavigator.openInNewTab(
+                                        RoutePaths.termsAndCondition);
                                   }),
                               const SizedBox(width: 4),
                               Text("zu", style: themeData.textTheme.bodyMedium)
@@ -448,7 +450,8 @@ class _RegisterFormState extends State<RegisterForm> {
                               ClickableLink(
                                   title: "Datenschutzerklärung",
                                   onTap: () {
-                                    // TODO: DATENSCHUTZ SEITE ÖFFNEN
+                                    CustomNavigator.openInNewTab(
+                                        RoutePaths.privacyPolicy);
                                   }),
                               const SizedBox(width: 4),
                               Text("zu", style: themeData.textTheme.bodyMedium)

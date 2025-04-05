@@ -58,7 +58,10 @@ void routeToInitial(AuthStatus status) {
   switch (status) {
     case AuthStatus.unAuthenticated:
       debugPrint("NOT AUTHENTICATED");
-      CustomNavigator.navigate(RoutePaths.loginPath);
+      if (lastRoute.contains(RoutePaths.homePath) ||
+          lastRoute.contains(RoutePaths.adminPath)) {
+        CustomNavigator.navigate(RoutePaths.loginPath);
+      }
       break;
     case AuthStatus.authenticated:
       debugPrint("AUTHENTICATED");
