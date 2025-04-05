@@ -16,43 +16,6 @@ void main() {
     mockUserRepo = MockUserRepository();
   });
 
-  group("UserRepositoryImplementation_CreateUser", () {
-    final testUser = CustomUser(
-        id: UniqueID.fromUniqueString("123"),
-        gender: Gender.male,
-        firstName: "Tester",
-        lastName: "Test",
-        birthDate: "23.12.23",
-        email: "tester@test.de");
-    test(
-        "should return unit when user has been created and the call was successful",
-        () async {
-      // Given
-      final expectedResult = right(unit);
-      when(mockUserRepo.createUser(user: testUser))
-          .thenAnswer((_) async => right(unit));
-      // When
-      final result = await mockUserRepo.createUser(user: testUser);
-      // Then
-      verify(mockUserRepo.createUser(user: testUser));
-      expect(result, expectedResult);
-      verifyNoMoreInteractions(mockUserRepo);
-    });
-
-    test("should return failure when the call has failed", () async {
-      // Given
-      final expectedResult = left(BackendFailure());
-      when(mockUserRepo.createUser(user: testUser))
-          .thenAnswer((_) async => left(BackendFailure()));
-      // When
-      final result = await mockUserRepo.createUser(user: testUser);
-      // Then
-      verify(mockUserRepo.createUser(user: testUser));
-      expect(result, expectedResult);
-      verifyNoMoreInteractions(mockUserRepo);
-    });
-  });
-
   group("UserRepositoryImplementation_UpdateUser", () {
     final testUser = CustomUser(
         id: UniqueID.fromUniqueString("123"),

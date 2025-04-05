@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../../repositories/mock_user_credential.dart';
@@ -87,58 +89,6 @@ void main() {
     });
   });
 
-  group("SignInCubit_RegisterWithEmailAndPassword", () {
-    const testEmail = "tester@test.de";
-    const testPassword = "12345678";
-    final mockUserCredential = MockUserCredential();
-    test("should call auth repo if event is added", () async {
-      // Given
-      when(mockAuthRepo.registerWithEmailAndPassword(
-              email: testEmail, password: testPassword))
-          .thenAnswer((_) async => right(mockUserCredential));
-      // When
-      signInCubit.registerWithEmailAndPassword(testEmail, testPassword);
-      await untilCalled(mockAuthRepo.registerWithEmailAndPassword(
-          email: testEmail, password: testPassword));
-      // Then
-      verify(mockAuthRepo.registerWithEmailAndPassword(
-          email: testEmail, password: testPassword));
-      verifyNoMoreInteractions(mockAuthRepo);
-    });
-
-    test(
-        "should emit SignInLoadingState and then SignInSuccessState when function is called",
-        () async {
-      // Given
-      final expectedResult = [
-        SignInLoadingState(),
-        SignInSuccessState(creds: mockUserCredential)
-      ];
-      when(mockAuthRepo.registerWithEmailAndPassword(
-              email: testEmail, password: testPassword))
-          .thenAnswer((_) async => right(mockUserCredential));
-      // Then
-      expectLater(signInCubit.stream, emitsInOrder(expectedResult));
-      signInCubit.registerWithEmailAndPassword(testEmail, testPassword);
-    });
-
-    test(
-        "should emit SignInLoadingState and then SignInFailureState when function is called and there was an error",
-        () async {
-      // Given
-      final expectedResult = [
-        SignInLoadingState(),
-        SignInFailureState(failure: WeakPasswordFailure())
-      ];
-      when(mockAuthRepo.registerWithEmailAndPassword(
-              email: testEmail, password: testPassword))
-          .thenAnswer((_) async => left(WeakPasswordFailure()));
-      // Then
-      expectLater(signInCubit.stream, emitsInOrder(expectedResult));
-      signInCubit.registerWithEmailAndPassword(testEmail, testPassword);
-    });
-  });
-
   group("SignInCubit_LoginWithEmailAndPassword", () {
     const testEmail = "tester@test.de";
     const testPassword = "12345678";
@@ -182,12 +132,79 @@ void main() {
         SignInLoadingState(),
         SignInFailureState(failure: WeakPasswordFailure())
       ];
-      when(mockAuthRepo.registerWithEmailAndPassword(
+      when(mockAuthRepo.loginWithEmailAndPassword(
               email: testEmail, password: testPassword))
           .thenAnswer((_) async => left(WeakPasswordFailure()));
       // Then
       expectLater(signInCubit.stream, emitsInOrder(expectedResult));
-      signInCubit.registerWithEmailAndPassword(testEmail, testPassword);
+      signInCubit.loginWithEmailAndPassword(testEmail, testPassword);
+    });
+  });
+
+  group("SignInCubit_RegisterAndCreateUser", () {
+    const email = "test@e.de";
+    const password = "xxxxxx";
+    final user = CustomUser(id: UniqueID.fromUniqueString("1"));
+    test("should call auth repo if event is added", () async {
+      // Given
+      when(mockAuthRepo.registerAndCreateUser(
+              email: email,
+              password: password,
+              user: user,
+              privacyPolicyAccepted: true,
+              termsAndConditionsAccepted: true))
+          .thenAnswer((_) async => right(unit));
+      // When
+      signInCubit.registerAndCreateUser(email, password, user, true, true);
+      await untilCalled(mockAuthRepo.registerAndCreateUser(
+          email: email,
+          password: password,
+          user: user,
+          privacyPolicyAccepted: true,
+          termsAndConditionsAccepted: true));
+      // Then
+      verify(mockAuthRepo.registerAndCreateUser(
+          email: email,
+          password: password,
+          user: user,
+          privacyPolicyAccepted: true,
+          termsAndConditionsAccepted: true));
+      verifyNoMoreInteractions(mockAuthRepo);
+    });
+    test(
+        "should emit SignInLoadingState and then RegisterSuccessState when function is called",
+        () async {
+      // Given
+      final expectedResult = [SignInLoadingState(), RegisterSuccessState()];
+      when(mockAuthRepo.registerAndCreateUser(
+              email: email,
+              password: password,
+              user: user,
+              privacyPolicyAccepted: true,
+              termsAndConditionsAccepted: true))
+          .thenAnswer((_) async => right(unit));
+      // Then
+      expectLater(signInCubit.stream, emitsInOrder(expectedResult));
+      signInCubit.registerAndCreateUser(email, password, user, true, true);
+    });
+    test(
+        "should emit SignInLoadingState and then RegisterFailureState when function is called",
+        () async {
+      // Given
+      final expectedResult = [
+        SignInLoadingState(),
+        RegisterFailureState(failure: BackendFailure())
+      ];
+      when(mockAuthRepo.registerAndCreateUser(
+              email: email,
+              password: password,
+              user: user,
+              privacyPolicyAccepted: true,
+              termsAndConditionsAccepted: true))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(signInCubit.stream, emitsInOrder(expectedResult));
+      signInCubit.registerAndCreateUser(email, password, user, true, true);
     });
   });
 }

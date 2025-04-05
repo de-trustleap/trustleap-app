@@ -48,7 +48,7 @@ class SignInCubit extends Cubit<SignInState> {
           termsAndConditionsAccepted: termsAndConditionsAccepted);
       failureOrSuccess.fold(
           (failure) => emit(RegisterFailureState(failure: failure)),
-          (creds) => emit(RegisterSuccessState()));
+          (_) => emit(RegisterSuccessState()));
     }
   }
 
