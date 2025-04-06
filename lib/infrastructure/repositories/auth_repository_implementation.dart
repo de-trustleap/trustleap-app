@@ -182,6 +182,4 @@ class AuthRepositoryImplementation implements AuthRepository {
     }
   }
 }
-
-// TODO: FRONTEND TESTS (MODELS, REPO, CUBIT)
 // TODO: LOCALIZATIONS

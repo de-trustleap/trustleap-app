@@ -17,6 +17,7 @@ import 'package:finanzbegleiter/application/profile/company_observer/company_obs
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
+import 'package:finanzbegleiter/application/legals/legals_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
@@ -24,6 +25,7 @@ import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/legals_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
@@ -45,6 +47,7 @@ import 'package:mockito/annotations.dart';
   UserRepository,
   PermissionRepository,
   AdminRegistrationCodeRepository,
+  LegalsRepository,
   User,
   SignInCubit,
   AuthCubit,
@@ -53,6 +56,7 @@ import 'package:mockito/annotations.dart';
   ThemeCubit,
   ProfileCubit,
   ProfileImageBloc,
+  LegalsCubit,
   CompanyImageBloc,
   LandingPageImageBloc,
   ProfileObserverBloc,
