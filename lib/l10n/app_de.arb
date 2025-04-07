@@ -56,6 +56,30 @@
     "@register_invalid_code_error": {
         "description": "Die Fehlermeldung auf dem Registrierungsformular wenn der Code ungültig ist."
     },
+    "register_terms_and_condition_text": "Ich stimme den",
+    "@register_terms_and_condition_text": {
+        "description": "Der erste Teil des AGB Checkbox Textes auf der Registrieren Seite"
+    },
+    "register_terms_and_condition_link": "AGB",
+    "@register_terms_and_condition_link": {
+        "description": "Der Link Teil des AGB Checkbox Textes auf der Registrieren Seite"
+    },
+    "register_terms_and_condition_text2": "zu",
+    "@register_terms_and_condition_text2": {
+        "description": "Der zweite Teil des AGB Checkbox Textes auf der Registrieren Seite"
+    },
+    "register_privacy_policy_text": "Ich stimme der",
+    "@register_privacy_policy_text": {
+        "description": "Der erste Teil des Datenschutz Checkbox Textes auf der Registrieren Seite"
+    },
+    "register_privacy_policy_link": "Datenschutzerklärung",
+    "@register_privacy_policy_link": {
+        "description": "Der Link Teil des Datenschutz Checkbox Textes auf der Registrieren Seite"
+    },
+    "register_privacy_policy_text2": "zu",
+    "@register_privacy_policy_text2": {
+        "description": "Der zweite Teil des Datenschutz Checkbox Textes auf der Registrieren Seite"
+    },
     "login_title": "Willkommen",
     "@login_title": {
         "description": "Die Überschrift der Login Seite"

@@ -49,6 +49,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_invalid_code_error => 'Registration failed. Please check whether you are using a valid code and the associated email address.';
 
   @override
+  String get register_terms_and_condition_text => 'I approve the';
+
+  @override
+  String get register_terms_and_condition_link => 'Terms and condition';
+
+  @override
+  String get register_terms_and_condition_text2 => '';
+
+  @override
+  String get register_privacy_policy_text => 'I approve the';
+
+  @override
+  String get register_privacy_policy_link => 'Privacy policy';
+
+  @override
+  String get register_privacy_policy_text2 => '';
+
+  @override
   String get login_title => 'Welcome';
 
   @override

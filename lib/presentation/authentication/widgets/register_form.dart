@@ -412,17 +412,23 @@ class _RegisterFormState extends State<RegisterForm> {
                                     });
                                   }),
                               const SizedBox(width: 8),
-                              Text("Ich stimme den",
+                              Text(
+                                  localization
+                                      .register_terms_and_condition_text,
                                   style: themeData.textTheme.bodyMedium),
                               const SizedBox(width: 4),
                               ClickableLink(
-                                  title: "AGB",
+                                  title: localization
+                                      .register_terms_and_condition_link,
                                   onTap: () {
                                     CustomNavigator.openInNewTab(
                                         RoutePaths.termsAndCondition);
                                   }),
                               const SizedBox(width: 4),
-                              Text("zu", style: themeData.textTheme.bodyMedium)
+                              Text(
+                                  localization
+                                      .register_terms_and_condition_text2,
+                                  style: themeData.textTheme.bodyMedium)
                             ]),
                       ),
                       SizedBox(
@@ -444,17 +450,19 @@ class _RegisterFormState extends State<RegisterForm> {
                                     });
                                   }),
                               const SizedBox(width: 8),
-                              Text("Ich stimme der",
+                              Text(localization.register_privacy_policy_text,
                                   style: themeData.textTheme.bodyMedium),
                               const SizedBox(width: 4),
                               ClickableLink(
-                                  title: "Datenschutzerklärung",
+                                  title:
+                                      localization.register_privacy_policy_link,
                                   onTap: () {
                                     CustomNavigator.openInNewTab(
                                         RoutePaths.privacyPolicy);
                                   }),
                               const SizedBox(width: 4),
-                              Text("zu", style: themeData.textTheme.bodyMedium)
+                              Text(localization.register_privacy_policy_text2,
+                                  style: themeData.textTheme.bodyMedium)
                             ]),
                       ),
                     ])
