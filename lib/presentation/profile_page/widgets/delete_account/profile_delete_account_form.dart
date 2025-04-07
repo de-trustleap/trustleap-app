@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileDeleteAccountForm extends StatefulWidget {
@@ -53,12 +54,11 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
   void submit() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<ProfileCubit>(context)
-          .reauthenticateWithPasswordForAccountDeletion(
-              passwordTextController.text);
+      Modular.get<ProfileCubit>().reauthenticateWithPasswordForAccountDeletion(
+          passwordTextController.text);
     } else {
       validationHasError = true;
-      BlocProvider.of<ProfileCubit>(context)
+      Modular.get<ProfileCubit>()
           .reauthenticateWithPasswordForAccountDeletion(null);
     }
   }
@@ -81,11 +81,12 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
 
   void submitAccountDeletion() {
     CustomNavigator.pop();
-    BlocProvider.of<ProfileCubit>(context).deleteAccount();
+    Modular.get<ProfileCubit>().deleteAccount();
   }
 
   @override
   Widget build(BuildContext context) {
+    final profileCubit = Modular.get<ProfileCubit>();
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
@@ -94,6 +95,7 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
       return BlocConsumer<ProfileCubit, ProfileState>(
+        bloc: profileCubit,
         listener: (context, state) {
           if (state is ProfileAccountDeletionFailureState) {
             errorMessage = AuthFailureMapper.mapFailureMessage(

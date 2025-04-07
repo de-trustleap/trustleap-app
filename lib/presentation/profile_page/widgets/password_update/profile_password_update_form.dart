@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/password_updat
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_reauth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 enum PasswordUpdateVisibleTextField { passwordReauth, passwordsNew }
 
@@ -57,31 +58,31 @@ class _ProfilePasswordUpdateFormState extends State<ProfilePasswordUpdateForm> {
   void submitOldPassword() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<ProfileCubit>(context)
-          .reauthenticateWithPasswordForPasswordUpdate(
-              oldPasswordTextController.text);
+      Modular.get<ProfileCubit>().reauthenticateWithPasswordForPasswordUpdate(
+          oldPasswordTextController.text);
     }
   }
 
   void submitNewPassword() {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<ProfileCubit>(context)
-          .updatePassword(passwordTextController.text);
+      Modular.get<ProfileCubit>().updatePassword(passwordTextController.text);
     } else {
       validationHasError = true;
-      BlocProvider.of<ProfileCubit>(context).updatePassword(null);
+      Modular.get<ProfileCubit>().updatePassword(null);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final profileCubit = Modular.get<ProfileCubit>();
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
       return BlocConsumer<ProfileCubit, ProfileState>(
+        bloc: profileCubit,
         listener: (context, state) {
           if (state is ProfileReauthenticateForPasswordUpdateSuccessState) {
             visibleField = PasswordUpdateVisibleTextField.passwordsNew;

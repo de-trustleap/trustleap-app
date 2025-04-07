@@ -11,6 +11,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ContactSection extends StatefulWidget {
@@ -86,7 +87,7 @@ class _ContactSectionState extends State<ContactSection> {
       setState(() {
         genderValid = null;
       });
-      BlocProvider.of<ProfileCubit>(context).updateProfile(widget.user.copyWith(
+      Modular.get<ProfileCubit>().updateProfile(widget.user.copyWith(
           gender: selectedGender,
           firstName: firstNameTextController.text.trim(),
           lastName: lastNameTextController.text.trim(),
@@ -98,12 +99,13 @@ class _ContactSectionState extends State<ContactSection> {
       setState(() {
         genderValid = validator.validateGender(selectedGender);
       });
-      BlocProvider.of<ProfileCubit>(context).updateProfile(null);
+      Modular.get<ProfileCubit>().updateProfile(null);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final profileCubit = Modular.get<ProfileCubit>();
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
@@ -113,6 +115,7 @@ class _ContactSectionState extends State<ContactSection> {
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
       return BlocConsumer<ProfileCubit, ProfileState>(
+        bloc: profileCubit,
         listener: (context, state) {
           if (state is ProfileUpdateContactInformationFailureState) {
             errorMessage = DatabaseFailureMapper.mapFailureMessage(
@@ -292,7 +295,8 @@ class _ContactSectionState extends State<ContactSection> {
                             ? maxWidth - textFieldSpacing
                             : maxWidth / 2 - textFieldSpacing,
                         disabled: buttonDisabled,
-                        isLoading: state is ProfileUpdateContactInformationLoadingState,
+                        isLoading: state
+                            is ProfileUpdateContactInformationLoadingState,
                         onTap: () {
                           submit(validator);
                         })

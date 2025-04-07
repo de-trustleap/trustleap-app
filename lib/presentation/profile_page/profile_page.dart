@@ -4,7 +4,6 @@ import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.da
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
-import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/permissions.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
@@ -67,7 +66,6 @@ class _ProfilePageState extends State<ProfilePage>
     topPadding = responsiveValue.screenHeight * 0.02;
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => Modular.get<ProfileCubit>()),
           BlocProvider(
               create: (context) => Modular.get<CompanyObserverCubit>()),
           BlocProvider(create: (context) => Modular.get<CompanyCubit>()),

@@ -86,7 +86,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   void verifyEmail() async {
     final isEmailVerified = await userRepo.isEmailVerified();
     // delay here is needed to trigger reload of the profile email section
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 500));
     emit(ProfileEmailVerifySuccessState(isEmailVerified: isEmailVerified));
   }
 
