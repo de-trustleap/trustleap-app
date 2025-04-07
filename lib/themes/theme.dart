@@ -206,7 +206,7 @@ class AppTheme {
                 }
               }),
               side: WidgetStateProperty.all(BorderSide(
-                  color: AppTheme.lightTextColor.withOpacity(0.3),
+                  color: AppTheme.lightTextColor.withValues(alpha: 0.3),
                   width: 1.0,
                   style: BorderStyle.solid))));
 
@@ -228,7 +228,7 @@ class AppTheme {
                 }
               }),
               side: WidgetStateProperty.all(BorderSide(
-                  color: AppTheme.darkTextColor.withOpacity(0.3),
+                  color: AppTheme.darkTextColor.withValues(alpha: 0.3),
                   width: 1.0,
                   style: BorderStyle.solid))));
 
@@ -251,7 +251,7 @@ class AppTheme {
         if (states.contains(WidgetState.selected)) {
           return AppTheme.lightSecondaryColor;
         } else {
-          return AppTheme.lightTextColor.withOpacity(0.7);
+          return AppTheme.lightTextColor.withValues(alpha: 0.7);
         }
       }),
       splashRadius: 0,
@@ -262,7 +262,7 @@ class AppTheme {
         if (states.contains(WidgetState.selected)) {
           return AppTheme.darkSecondaryColor;
         } else {
-          return AppTheme.darkTextColor.withOpacity(0.7);
+          return AppTheme.darkTextColor.withValues(alpha: 0.7);
         }
       }),
       splashRadius: 0,

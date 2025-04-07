@@ -63,8 +63,8 @@ class PageBuilderPageModel extends Equatable {
   factory PageBuilderPageModel.fromDomain(PageBuilderPage page) {
     return PageBuilderPageModel(
         id: page.id.value,
-        backgroundColor: page.backgroundColor?.value != null
-            ? page.backgroundColor!.value.toRadixString(16)
+        backgroundColor: page.backgroundColor?.toARGB32() != null
+            ? page.backgroundColor!.toARGB32().toRadixString(16)
             : null,
         sections: getMapFromPageBuilderSectionList(page.sections));
   }

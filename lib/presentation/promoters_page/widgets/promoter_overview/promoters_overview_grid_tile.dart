@@ -168,8 +168,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
                   style: themeData.textTheme.bodySmall!.copyWith(
                       fontSize: 12,
                       overflow: TextOverflow.ellipsis,
-                      color:
-                          themeData.colorScheme.surfaceTint.withOpacity(0.6)),
+                      color: themeData.colorScheme.surfaceTint
+                          .withValues(alpha: 0.6)),
                   maxLines: 1),
               if (promoter.registered != null) ...[
                 const SizedBox(height: 8),
@@ -187,8 +187,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
                         .getPromoterDateText(context, promoter)!,
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
-                        color:
-                            themeData.colorScheme.surfaceTint.withOpacity(0.6)),
+                        color: themeData.colorScheme.surfaceTint
+                            .withValues(alpha: 0.6)),
                     maxLines: 1)
               ]
             ]),

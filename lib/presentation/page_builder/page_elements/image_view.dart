@@ -142,7 +142,7 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
                 width: widget.isConfigMenu ? 200 : widget.properties.width,
                 height: widget.isConfigMenu ? 200 : widget.properties.height,
                 alignment: Alignment.center,
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withValues(alpha: 0.5),
                 child: Center(
                   child: Tooltip(
                     message: localization.profile_image_upload_tooltip,
@@ -171,10 +171,10 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
   @override
   Widget build(BuildContext context) {
     if (widget.widgetModel != null) {
-       return widget.isConfigMenu
-        ? _imageElement(context)
-        : LandingPageBuilderWidgetContainer(
-            model: widget.widgetModel!, child: _imageElement(context));
+      return widget.isConfigMenu
+          ? _imageElement(context)
+          : LandingPageBuilderWidgetContainer(
+              model: widget.widgetModel!, child: _imageElement(context));
     } else {
       return _imageElement(context);
     }

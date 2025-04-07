@@ -55,10 +55,14 @@ class PageBuilderTextPropertiesModel extends Equatable
             map['fontFamily'] != null ? map['fontFamily'] as String : null,
         lineHeight:
             map['lineHeight'] != null ? map['lineHeight'] as double : null,
-        letterSpacing: map['letterSpacing'] != null ? map['letterSpacing'] as double : null,
+        letterSpacing: map['letterSpacing'] != null
+            ? map['letterSpacing'] as double
+            : null,
         color: map['color'] != null ? map['color'] as String : null,
         alignment: map['alignment'] != null ? map['alignment'] as String : null,
-        textShadow: map['textShadow'] != null ? map['textShadow'] as Map<String, dynamic> : null,
+        textShadow: map['textShadow'] != null
+            ? map['textShadow'] as Map<String, dynamic>
+            : null,
         isBold: map['isBold'] != null ? map['isBold'] as bool : null,
         isItalic: map['isItalic'] != null ? map['isItalic'] as bool : null);
   }
@@ -71,7 +75,7 @@ class PageBuilderTextPropertiesModel extends Equatable
       double? letterSpacing,
       String? color,
       String? alignment,
-      Map<String,dynamic>? textShadow,
+      Map<String, dynamic>? textShadow,
       bool? isBold,
       bool? isItalic}) {
     return PageBuilderTextPropertiesModel(
@@ -113,8 +117,8 @@ class PageBuilderTextPropertiesModel extends Equatable
         fontFamily: properties.fontFamily,
         lineHeight: properties.lineHeight,
         letterSpacing: properties.letterSpacing,
-        color: properties.color?.value != null
-            ? properties.color!.value.toRadixString(16)
+        color: properties.color?.toARGB32() != null
+            ? properties.color!.toARGB32().toRadixString(16)
             : null,
         alignment: properties.alignment?.name,
         textShadow: ShadowMapper.getMapFromShadow(properties.textShadow),

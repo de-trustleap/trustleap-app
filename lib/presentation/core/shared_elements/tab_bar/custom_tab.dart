@@ -41,11 +41,13 @@ class _CustomTabState extends State<CustomTab> {
                   color: Theme.of(context)
                       .colorScheme
                       .surfaceTint
-                      .withOpacity(0.8)),
+                      .withValues(alpha: 0.8)),
               const SizedBox(width: 8),
               Flexible(
                 child: Text(widget.title,
-                    style: responsiveValue.isMobile ? Theme.of(context).textTheme.bodySmall : Theme.of(context).textTheme.bodyMedium,
+                    style: responsiveValue.isMobile
+                        ? Theme.of(context).textTheme.bodySmall
+                        : Theme.of(context).textTheme.bodyMedium,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis),
               )

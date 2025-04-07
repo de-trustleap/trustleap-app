@@ -93,8 +93,8 @@ class PageBuilderImagePropertiesModel extends Equatable
         width: properties.width,
         height: properties.height,
         contentMode: BoxFitMapper.getStringFromBoxFit(properties.contentMode),
-        overlayColor: properties.overlayColor?.value != null
-            ? properties.overlayColor!.value.toRadixString(16)
+        overlayColor: properties.overlayColor?.toARGB32() != null
+            ? properties.overlayColor!.toARGB32().toRadixString(16)
             : null,
         newImageBase64: properties.localImage != null
             ? base64Encode(properties.localImage!)
