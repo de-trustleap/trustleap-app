@@ -151,12 +151,6 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
                             borderSide: const BorderSide(
                                 color: Colors.grey, width: 1.0),
                           ),
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.copy),
-                            onPressed: () {
-                              // Handle Copy
-                            },
-                          ),
                         ),
                       ),
                     ),

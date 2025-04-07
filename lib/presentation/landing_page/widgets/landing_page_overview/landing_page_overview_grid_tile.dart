@@ -88,7 +88,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             .permissions;
     return Container(
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-      height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
+      height: 300,
       decoration: BoxDecoration(
           color: (landingPage.isDefaultPage ?? false)
               ? themeData.colorScheme.primary.withOpacity(0.5)

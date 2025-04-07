@@ -82,7 +82,7 @@ class CompanyModel extends Equatable {
             ? map['defaultLandingPageID'] as String
             : null,
         employeeIDs: map['employeeIDs'] != null
-            ? List<String>.from(map['employeeIDs'] as List<String>)
+            ? List<String>.of(map['employeeIDs'] as List<String>)
             : null,
         createdAt: map['createdAt'] as dynamic,
         avv: map['avvData'] != null
