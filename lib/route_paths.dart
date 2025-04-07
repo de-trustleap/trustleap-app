@@ -20,6 +20,8 @@ class RoutePaths {
   static const String loginPath = "/";
   static const String registerPath = "/register";
   static const String passwordReset = "/password-reset";
+  static const String privacyPolicy = "/privacy-policy";
+  static const String termsAndCondition = "/terms-and-condition";
 
   static const String landingPageBuilderPath = "/landingpage-builder";
 

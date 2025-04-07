@@ -4,7 +4,6 @@ import 'package:finanzbegleiter/application/admin_registration_code/admin_regist
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
-import 'package:finanzbegleiter/application/authentication/user/user_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
@@ -12,6 +11,7 @@ import 'package:finanzbegleiter/application/images/landing_page/landing_page_ima
 import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
+import 'package:finanzbegleiter/application/legals/legals_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
@@ -36,6 +36,7 @@ import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/legals_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
@@ -45,6 +46,7 @@ import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_impl
 import 'package:finanzbegleiter/infrastructure/repositories/company_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/image_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_implementation.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/legals_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/pagebuilder_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/permission_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/promoter_repository_implementation.dart';
@@ -85,6 +87,7 @@ class AppModule extends Module {
           PermissionRepositoryImplementation.new)
       ..addLazySingleton<AdminRegistrationCodeRepository>(
           AdminRegistrationCodeRepositoryImplementation.new)
+      ..addLazySingleton<LegalsRepository>(LegalsRepositoryImplementation.new)
       ..addLazySingleton(ProfileObserverBloc.new)
       ..addLazySingleton(PagebuilderBloc.new)
       ..addLazySingleton(PagebuilderConfigMenuCubit.new)
@@ -94,12 +97,12 @@ class AppModule extends Module {
       ..addLazySingleton(LandingPageCubit.new)
       ..addLazySingleton(LandingPageObserverCubit.new)
       ..addLazySingleton(AdminRegistrationCodeCubit.new)
+      ..addLazySingleton(LegalsCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
       ..add(MenuCubit.new)
       ..add(ThemeCubit.new)
-      ..add(UserCubit.new)
       ..add(ProfileCubit.new)
       ..add(ProfileImageBloc.new)
       ..add(CompanyImageBloc.new)

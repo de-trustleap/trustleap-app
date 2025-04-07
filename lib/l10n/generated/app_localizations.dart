@@ -179,6 +179,42 @@ abstract class AppLocalizations {
   /// **'Registration failed. Please check whether you are using a valid code and the associated email address.'**
   String get register_invalid_code_error;
 
+  /// The first part of the Terms and Conditions checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **'I approve the'**
+  String get register_terms_and_condition_text;
+
+  /// The link part of the Terms and Conditions checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and condition'**
+  String get register_terms_and_condition_link;
+
+  /// The second part of the Terms and Conditions checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get register_terms_and_condition_text2;
+
+  /// The first part of the privacy checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **'I approve the'**
+  String get register_privacy_policy_text;
+
+  /// The link part of the privacy checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get register_privacy_policy_link;
+
+  /// The second part of the privacy checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get register_privacy_policy_text2;
+
   /// The title of the login page
   ///
   /// In en, this message translates to:

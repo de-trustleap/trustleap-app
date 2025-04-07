@@ -4,32 +4,35 @@ import 'package:finanzbegleiter/core/failures/storage_failures.dart';
 
 class FirebaseExceptionParser {
   static AuthFailure getAuthException({required String? code}) {
-    if (code == "user-disabled") {
+    final trimmedCode = code?.replaceAll("auth/", "");
+    if (trimmedCode == "user-disabled") {
       return UserDisabledFailure();
-    } else if (code == "invalid-email") {
+    } else if (trimmedCode == "invalid-email") {
       return InvalidEmailFailure();
-    } else if (code == "user-not-found") {
+    } else if (trimmedCode == "user-not-found") {
       return UserNotFoundFailure();
-    } else if (code == "wrong-password") {
+    } else if (trimmedCode == "wrong-password") {
       return WrongPasswordFailure();
-    } else if (code == "invalid-credential") {
+    } else if (trimmedCode == "invalid-credential") {
       return InvalidCredentialsFailure();
-    } else if (code == "too-many-requests") {
+    } else if (trimmedCode == "too-many-requests") {
       return TooManyRequestsFailure();
-    } else if (code == "email-already-in-use") {
+    } else if (trimmedCode == "email-already-in-use") {
       return EmailAlreadyInUseFailure();
-    } else if (code == "weak-password") {
+    } else if (trimmedCode == "weak-password") {
       return WeakPasswordFailure();
-    } else if (code == "user-mismatch") {
+    } else if (trimmedCode == "user-mismatch") {
       return UserMisMatchFailure();
-    } else if (code == "invalid-verification-code") {
+    } else if (trimmedCode == "invalid-verification-code") {
       return InvalidVerificationCodeFailure();
-    } else if (code == "invalid-verification-id") {
+    } else if (trimmedCode == "invalid-verification-id") {
       return InvalidVerificationIdFailure();
-    } else if (code == "requires-recent-login") {
+    } else if (trimmedCode == "requires-recent-login") {
       return RequiresRecentLoginFailure();
-    } else if (code == "missing-password") {
+    } else if (trimmedCode == "missing-password") {
       return MissingPasswordFailure();
+    } else if (trimmedCode == "invalid-password") {
+      return InvalidPasswordFailure();
     } else {
       return ServerFailure();
     }

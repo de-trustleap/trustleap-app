@@ -49,6 +49,24 @@ class AppLocalizationsDe extends AppLocalizations {
   String get register_invalid_code_error => 'Die Registrierung ist fehlgeschlagen. Bitte prüfen Sie ob Sie einen gültigen Code und die zugehörige E-Mail Adresse verwenden.';
 
   @override
+  String get register_terms_and_condition_text => 'Ich stimme den';
+
+  @override
+  String get register_terms_and_condition_link => 'AGB';
+
+  @override
+  String get register_terms_and_condition_text2 => 'zu';
+
+  @override
+  String get register_privacy_policy_text => 'Ich stimme der';
+
+  @override
+  String get register_privacy_policy_link => 'Datenschutzerklärung';
+
+  @override
+  String get register_privacy_policy_text2 => 'zu';
+
+  @override
   String get login_title => 'Willkommen';
 
   @override

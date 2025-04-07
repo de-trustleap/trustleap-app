@@ -56,6 +56,30 @@
     "@register_invalid_code_error": {
         "description": "The error message on the registration form if the code is invalid."
     },
+    "register_terms_and_condition_text": "I approve the",
+    "@register_terms_and_condition_text": {
+        "description": "The first part of the Terms and Conditions checkbox text on the registration page"
+    },
+    "register_terms_and_condition_link": "Terms and condition",
+    "@register_terms_and_condition_link": {
+        "description": "The link part of the Terms and Conditions checkbox text on the registration page"
+    },
+    "register_terms_and_condition_text2": "",
+    "@register_terms_and_condition_text2": {
+        "description": "The second part of the Terms and Conditions checkbox text on the registration page"
+    },
+    "register_privacy_policy_text": "I approve the",
+    "@register_privacy_policy_text": {
+        "description": "The first part of the privacy checkbox text on the registration page"
+    },
+    "register_privacy_policy_link": "Privacy policy",
+    "@register_privacy_policy_link": {
+        "description": "The link part of the privacy checkbox text on the registration page"
+    },
+    "register_privacy_policy_text2": "",
+    "@register_privacy_policy_text2": {
+        "description": "The second part of the privacy checkbox text on the registration page"
+    },
     "login_title": "Welcome",
     "@login_title": {
         "description": "The title of the login page"

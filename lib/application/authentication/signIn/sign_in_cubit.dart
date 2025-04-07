@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/core/failures/failure.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -32,16 +34,21 @@ class SignInCubit extends Cubit<SignInState> {
     }
   }
 
-  void registerWithEmailAndPassword(String? email, String? password) async {
+  void registerAndCreateUser(String? email, String? password, CustomUser user,
+      bool privacyPolicyAccepted, bool termsAndConditionsAccepted) async {
     if (email == null || password == null) {
       emit(SignInShowValidationState());
     } else {
       emit(SignInLoadingState());
-      final failureOrSuccess = await authRepo.registerWithEmailAndPassword(
-          email: email, password: password);
+      final failureOrSuccess = await authRepo.registerAndCreateUser(
+          email: email,
+          password: password,
+          user: user,
+          privacyPolicyAccepted: privacyPolicyAccepted,
+          termsAndConditionsAccepted: termsAndConditionsAccepted);
       failureOrSuccess.fold(
-          (failure) => emit(SignInFailureState(failure: failure)),
-          (creds) => emit(SignInSuccessState(creds: creds)));
+          (failure) => emit(RegisterFailureState(failure: failure)),
+          (_) => emit(RegisterSuccessState()));
     }
   }
 

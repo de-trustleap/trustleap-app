@@ -193,7 +193,6 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
           } else if (state is CompanyGetAVVPDFSuccessState) {
             Downloader().showFileInNewTab(state.downloadURL);
           }
-          // TODO: Localization
         },
         builder: (context, state) {
           return Form(
