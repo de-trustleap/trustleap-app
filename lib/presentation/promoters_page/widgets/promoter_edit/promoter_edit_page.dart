@@ -1,12 +1,11 @@
-import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_edit/promoter_edit_form.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PromoterEditPage extends StatelessWidget {
-  final Promoter promoter;
-  const PromoterEditPage({super.key, required this.promoter});
+  final String promoterID;
+  const PromoterEditPage({super.key, required this.promoterID});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class PromoterEditPage extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
-                  children: [PromoterEditForm(promoter: promoter)])),
+                  children: [PromoterEditForm(promoterID: promoterID)])),
         ]));
   }
 }

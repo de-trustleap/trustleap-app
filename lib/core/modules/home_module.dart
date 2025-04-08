@@ -37,7 +37,8 @@ class HomeModule extends Module {
                     editedPromoter: r.args.queryParams["editedPromoter"],
                   )),
           ChildRoute(RoutePaths.editPromoterPath,
-              child: (_) => PromoterEditPage(promoter: r.args.data)),
+              child: (_) =>
+                  PromoterEditPage(promoterID: r.args.queryParams["id"] ?? "")),
           ChildRoute(RoutePaths.landingPagePath,
               child: (_) => LandingPageView(
                     createdNewPage: r.args.queryParams["createdNewPage"],

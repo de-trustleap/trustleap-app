@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
@@ -222,6 +223,35 @@ class PromoterRepositoryImplementation implements PromoterRepository {
         }
       }
       return right(landingPages);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Promoter>> getPromoter(String id) async {
+    final registeredPromotersCollection = firestore.collection("users");
+    final unregisteredPromotersCollection =
+        firestore.collection("unregisteredPromoters");
+    try {
+      final unregisteredPromoter =
+          await unregisteredPromotersCollection.doc(id).get();
+      final registeredPromoter =
+          await registeredPromotersCollection.doc(id).get();
+      if (!unregisteredPromoter.exists && !registeredPromoter.exists) {
+        return left(NotFoundFailure());
+      }
+      if (unregisteredPromoter.exists && unregisteredPromoter.data() != null) {
+        return right(Promoter.fromUnregisteredPromoter(
+            UnregisteredPromoterModel.fromMap(unregisteredPromoter.data()!)
+                .toDomain()));
+      } else if (registeredPromoter.exists &&
+          registeredPromoter.data() != null) {
+        return right(Promoter.fromUser(
+            UserModel.fromMap(registeredPromoter.data()!).toDomain()));
+      } else {
+        return left(NotFoundFailure());
+      }
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }

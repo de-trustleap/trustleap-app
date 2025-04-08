@@ -21,8 +21,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PromoterEditForm extends StatefulWidget {
-  final Promoter promoter;
-  const PromoterEditForm({super.key, required this.promoter});
+  final String promoterID;
+  const PromoterEditForm({super.key, required this.promoterID});
 
   @override
   State<PromoterEditForm> createState() => _PromoterEditFormState();
@@ -31,6 +31,7 @@ class PromoterEditForm extends StatefulWidget {
 class _PromoterEditFormState extends State<PromoterEditForm> {
   List<LandingPageCheckboxItem> landingPageItems = [];
   CustomUser? currentUser;
+  Promoter? promoter;
   bool buttonDisabled = false;
 
   @override
@@ -42,9 +43,9 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
   void submit() {
     if (currentUser != null &&
         landingPageItems.isNotEmpty &&
-        widget.promoter.registered != null) {
-      Modular.get<PromoterCubit>().editPromoter(widget.promoter.registered!,
-          getSelectedLandingPagesIDs(), widget.promoter.id.value);
+        promoter?.registered != null) {
+      Modular.get<PromoterCubit>().editPromoter(promoter!.registered!,
+          getSelectedLandingPagesIDs(), promoter!.id.value);
     }
   }
 
@@ -116,8 +117,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
               listener: (context, state) {
                 if (state is PromoterGetCurrentUserSuccessState) {
                   currentUser = state.user;
-                  Modular.get<PromoterCubit>().getPromotingLandingPages(
-                      currentUser?.landingPageIDs ?? []);
+                  Modular.get<PromoterCubit>().getPromoter(widget.promoterID);
                 } else if (state is PromoterGetLandingPagesSuccessState) {
                   setState(() {
                     landingPageItems.clear();
@@ -125,10 +125,16 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                       landingPageItems.add(LandingPageCheckboxItem(
                           landingPage: landingPage,
                           isSelected: landingPage.associatedUsersIDs
-                                  ?.contains(widget.promoter.id.value) ??
+                                  ?.contains(widget.promoterID) ??
                               false));
                     }
                   });
+                } else if (state is PromoterGetSuccessState) {
+                  setState(() {
+                    promoter = state.promoter;
+                  });
+                  Modular.get<PromoterCubit>().getPromotingLandingPages(
+                      currentUser?.landingPageIDs ?? []);
                 } else if (state is PromoterEditSuccessState) {
                   const params = "?editedPromoter=true";
                   CustomNavigator.pushAndReplace(
@@ -188,8 +194,8 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                           children: [
                             SelectableText(
                                 localization.edit_promoter_title(
-                                    widget.promoter.firstName ?? "",
-                                    widget.promoter.lastName ?? ""),
+                                    promoter?.firstName ?? "",
+                                    promoter?.lastName ?? ""),
                                 style: themeData.textTheme.headlineLarge!
                                     .copyWith(fontWeight: FontWeight.bold)),
                             const SizedBox(height: spacing),

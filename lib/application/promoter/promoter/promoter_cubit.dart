@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
@@ -12,11 +13,11 @@ import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 part 'promoter_state.dart';
 
 class PromoterCubit extends Cubit<PromoterState> {
-  final PromoterRepository recommendationsRepo;
+  final PromoterRepository promoterRepo;
   final UserRepository userRepo;
   final LandingPageRepository landingPagesRepo;
 
-  PromoterCubit(this.recommendationsRepo, this.userRepo, this.landingPagesRepo)
+  PromoterCubit(this.promoterRepo, this.userRepo, this.landingPagesRepo)
       : super(PromoterInitial());
 
   void registerPromoter(UnregisteredPromoter? promoter) async {
@@ -34,7 +35,7 @@ class PromoterCubit extends Cubit<PromoterState> {
       if (promoter.email == null) {
         emit(PromoterRegisterFailureState(failure: BackendFailure()));
       } else {
-        final failureOrSuccess = await recommendationsRepo
+        final failureOrSuccess = await promoterRepo
             .checkIfPromoterAlreadyExists(email: promoter.email!);
         failureOrSuccess.fold(
             (failure) => emit(PromoterRegisterFailureState(failure: failure)),
@@ -43,7 +44,7 @@ class PromoterCubit extends Cubit<PromoterState> {
             emit(PromoterAlreadyExistsFailureState());
           } else {
             final failureOrSuccessRegister =
-                await recommendationsRepo.registerPromoter(promoter: promoter);
+                await promoterRepo.registerPromoter(promoter: promoter);
             failureOrSuccessRegister.fold(
                 (failure) =>
                     emit(PromoterRegisterFailureState(failure: failure)),
@@ -86,7 +87,7 @@ class PromoterCubit extends Cubit<PromoterState> {
 
   void deletePromoter(String id) async {
     emit(PromoterLoadingState());
-    final failureOrSuccess = await recommendationsRepo.deletePromoter(id: id);
+    final failureOrSuccess = await promoterRepo.deletePromoter(id: id);
     failureOrSuccess.fold(
         (failure) => emit(PromoterDeleteFailureState(failure: failure)), (_) {
       emit(PromoterDeleteSuccessState());
@@ -96,7 +97,7 @@ class PromoterCubit extends Cubit<PromoterState> {
   void editPromoter(
       bool isRegistered, List<String> landingPageIDs, String promoterID) async {
     emit(PromoterLoadingState());
-    final failureOrSuccess = await recommendationsRepo.editPromoter(
+    final failureOrSuccess = await promoterRepo.editPromoter(
         isRegistered: isRegistered,
         landingPageIDs: landingPageIDs,
         promoterID: promoterID);
@@ -104,5 +105,13 @@ class PromoterCubit extends Cubit<PromoterState> {
         (failure) => emit(PromoterEditFailureState(failure: failure)), (_) {
       emit(PromoterEditSuccessState());
     });
+  }
+
+  void getPromoter(String id) async {
+    emit(PromoterLoadingState());
+    final failureOrSuccess = await promoterRepo.getPromoter(id);
+    failureOrSuccess.fold(
+        (failure) => emit(PromoterGetFailureState(failure: failure)),
+        (promoter) => emit(PromoterGetSuccessState(promoter: promoter)));
   }
 }
