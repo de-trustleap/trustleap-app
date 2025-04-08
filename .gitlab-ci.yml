@@ -25,7 +25,7 @@ cache:
 build:
   stage: build
   script:
-    - flutter build web --web-renderer canvaskit --release --no-tree-shake-icons
+    - flutter build web --release --no-tree-shake-icons
   rules:
     - when: always
   artifacts:
