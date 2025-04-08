@@ -19,7 +19,7 @@ class CardContainer extends StatelessWidget {
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.onPrimaryContainer,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.grey.withOpacity(0.3))),
+            border: Border.all(color: Colors.grey.withValues(alpha: 0.3))),
         child: child);
   }
 }

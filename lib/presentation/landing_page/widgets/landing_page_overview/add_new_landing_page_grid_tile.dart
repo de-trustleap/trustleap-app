@@ -21,7 +21,7 @@ class AddNewLandingPageGridTile extends StatelessWidget {
       onTap: () => onPressed(),
       child: Container(
           width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-          height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
+          height: 300,
           decoration: BoxDecoration(
               color: themeData.colorScheme.surface,
               border: Border.all(color: Colors.transparent),

@@ -11,6 +11,7 @@ class RoutePaths {
   static const String profilePath = "/profile";
   static const String companyRegistration = "/company-registration";
   static const String recommendationsPath = "/recommendations";
+  static const String recommendationManagerPath = "/recommendation-manager";
   static const String promotersPath = "/promoters";
   static const String editPromoterPath = "/edit-promoter";
   static const String landingPagePath = "/landingpage";

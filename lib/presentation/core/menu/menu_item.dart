@@ -41,10 +41,6 @@ class _MenuItemState extends State<MenuItem> {
         begin: MenuDimensions.menuOpenWidth,
         end: MenuDimensions.menuCollapsedWidth,
       ).animate(widget.animationController!);
-
-      widget.animationController!.addListener(() {
-        setState(() {});
-      });
     }
   }
 
@@ -60,6 +56,8 @@ class _MenuItemState extends State<MenuItem> {
         return localization.menuitems_dashboard;
       case MenuItems.recommendations:
         return localization.menuitems_recommendations;
+      case MenuItems.recommendationManager:
+        return "Empfehlungsmanager";
       case MenuItems.promoters:
         return localization.menuitems_promoters;
       case MenuItems.landingpage:
@@ -90,81 +88,81 @@ class _MenuItemState extends State<MenuItem> {
         const height = 56.0;
         const padding = 12.0;
 
-        return BlocListener<MenuCubit, MenuState>(
-          listener: (context, state) {
-            if (state is MenuItemSelectedState) {
-              setState(() {});
-            }
-          },
-          child: MouseRegion(
-            cursor: SystemMouseCursors.click,
-            onEnter: (_) => hoverOnItem(true),
-            onExit: (_) => hoverOnItem(false),
-            child: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                if (widget.isAdmin) {
-                  CustomNavigator.navigate(RoutePaths.adminPath + widget.path);
-                } else {
-                  CustomNavigator.navigate(RoutePaths.homePath + widget.path);
-                }
-                BlocProvider.of<MenuCubit>(context).selectMenu(widget.type);
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Stack(
-                  children: [
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      width: isCurrentlySelected
-                          ? (_widthAnimation?.value ?? width)
-                          : 0,
-                      height: height,
-                      curve: const Cubic(0.5, 0.8, 0.4, 1),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: isCurrentlySelected
-                            ? themeData.colorScheme.primary
-                            : themeData.colorScheme.surface,
-                      ),
+        return MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (_) => hoverOnItem(true),
+          onExit: (_) => hoverOnItem(false),
+          child: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              if (widget.isAdmin) {
+                CustomNavigator.navigate(RoutePaths.adminPath + widget.path);
+              } else {
+                CustomNavigator.navigate(RoutePaths.homePath + widget.path);
+              }
+              BlocProvider.of<MenuCubit>(context).selectMenu(widget.type);
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Stack(
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: isCurrentlySelected
+                        ? (_widthAnimation?.value ?? width)
+                        : 0,
+                    height: height,
+                    curve: const Cubic(0.5, 0.8, 0.4, 1),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: isCurrentlySelected
+                          ? themeData.colorScheme.primary
+                          : themeData.colorScheme.surface,
                     ),
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      transform: transform,
-                      width: _widthAnimation?.value ?? width,
-                      height: height,
-                      curve: const Cubic(0.5, 0.8, 0.4, 1),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: padding,
-                        vertical: 16,
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            widget.icon,
-                            color: isCurrentlySelected
-                                ? themeData.colorScheme.surface
-                                : themeData.iconTheme.color,
-                          ),
-                          if (widget.animationController != null &&
-                              _widthAnimation != null &&
-                              _widthAnimation!.value >=
-                                  MenuDimensions.menuOpenWidth) ...[
-                            const SizedBox(width: 12),
-                            Text(
-                              getLocalizedMenuItem(localization),
-                              style: isCurrentlySelected
-                                  ? themeData.textTheme.bodyMedium!.copyWith(
-                                      color: themeData.colorScheme.surface,
-                                    )
-                                  : themeData.textTheme.bodyMedium,
+                  ),
+                  // Hier ist die Änderung zu AnimatedBuilder
+                  AnimatedBuilder(
+                    animation: _widthAnimation!,
+                    builder: (context, child) {
+                      return AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        transform: transform,
+                        width: _widthAnimation?.value ?? width,
+                        height: height,
+                        curve: const Cubic(0.5, 0.8, 0.4, 1),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: padding,
+                          vertical: 16,
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              widget.icon,
+                              color: isCurrentlySelected
+                                  ? themeData.colorScheme.surface
+                                  : themeData.iconTheme.color,
                             ),
-                          ]
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                            if (_widthAnimation!.value >=
+                                MenuDimensions.menuOpenWidth) ...[
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  getLocalizedMenuItem(localization),
+                                  style: isCurrentlySelected
+                                      ? themeData.textTheme.bodyMedium!
+                                          .copyWith(
+                                          color: themeData.colorScheme.surface,
+                                        )
+                                      : themeData.textTheme.bodyMedium,
+                                ),
+                              ),
+                            ]
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ),

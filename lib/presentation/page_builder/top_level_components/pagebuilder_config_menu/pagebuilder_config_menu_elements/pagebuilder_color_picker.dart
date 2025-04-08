@@ -39,7 +39,7 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
 
   String _colorToHex(Color color) {
     try {
-      String hex = color.value.toRadixString(16).toUpperCase();
+      String hex = color.toARGB32().toRadixString(16).toUpperCase();
       return "#${hex.padLeft(8, '0')}";
     } catch (e) {
       return "#00000000";
@@ -151,12 +151,6 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
                             borderSide: const BorderSide(
                                 color: Colors.grey, width: 1.0),
                           ),
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.copy),
-                            onPressed: () {
-                              // Handle Copy
-                            },
-                          ),
                         ),
                       ),
                     ),
@@ -189,7 +183,7 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
           decoration: BoxDecoration(
             color: _selectedColor,
             borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: Colors.grey.withOpacity(0.3)),
+            border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
           ),
         ));
   }

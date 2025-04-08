@@ -7,7 +7,7 @@ class CustomNavigator {
     return Modular.to.path;
   }
 
-  static void navigate(String route, {dynamic arguments}) {
+  static void navigate(String route, {Object? arguments}) {
     Modular.to.navigate(route, arguments: arguments);
   }
 

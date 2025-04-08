@@ -54,6 +54,13 @@ class SideMenu extends StatelessWidget {
                 isCollapsed: collapsed,
                 animationController: animationController),
             const SizedBox(height: 28),
+            MenuItem(
+                path: RoutePaths.recommendationManagerPath,
+                icon: Icons.receipt,
+                type: MenuItems.recommendationManager,
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 28),
             if (permissions.hasShowPromoterMenuPermission()) ...[
               MenuItem(
                   path: RoutePaths.promotersPath,

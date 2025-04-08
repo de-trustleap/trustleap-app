@@ -26,7 +26,8 @@ class CustomEmojiPicker extends StatelessWidget {
               initCategory: Category.SMILEYS,
               backgroundColor: Colors.transparent,
               indicatorColor: themeData.colorScheme.secondary,
-              iconColor: themeData.colorScheme.surfaceTint.withOpacity(0.7),
+              iconColor:
+                  themeData.colorScheme.surfaceTint.withValues(alpha: 0.7),
               iconColorSelected: themeData.colorScheme.secondary),
           emojiViewConfig:
               const EmojiViewConfig(backgroundColor: Colors.transparent),

@@ -2,6 +2,7 @@ enum MenuItems {
   profile("Profil"),
   dashboard("Dashboard"),
   recommendations("Empfehlungen"),
+  recommendationManager("Empfehlungsmanager"),
   promoters("Promoter"),
   landingpage("Landingpage"),
   activities("Aktivitäten"),
@@ -15,7 +16,7 @@ enum MenuItems {
 }
 
 class MenuDimensions {
-  static const menuOpenWidth = 250.0;
+  static const menuOpenWidth = 300.0;
   static const menuCollapsedWidth = 80.0;
 }
 

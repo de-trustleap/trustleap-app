@@ -217,8 +217,6 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                           Modular.get<PromoterObserverCubit>()
                               .observeAllPromoters()
                         });
-              } else if (promoterState is PromoterLoadingState) {
-                return const LoadingIndicator();
               } else {
                 return const LoadingIndicator();
               }

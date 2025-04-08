@@ -88,10 +88,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             .permissions;
     return Container(
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-      height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
+      height: 300,
       decoration: BoxDecoration(
           color: (landingPage.isDefaultPage ?? false)
-              ? themeData.colorScheme.primary.withOpacity(0.5)
+              ? themeData.colorScheme.primary.withValues(alpha: 0.5)
               : themeData.colorScheme.surface,
           border: Border.all(color: Colors.transparent),
           borderRadius: const BorderRadius.all(Radius.circular(20))),
@@ -269,8 +269,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
-                        color:
-                            themeData.colorScheme.surfaceTint.withOpacity(0.6)),
+                        color: themeData.colorScheme.surfaceTint
+                            .withValues(alpha: 0.6)),
                     maxLines: 1),
               ] else if (landingPage.lastUpdatedAt != null) ...[
                 const SizedBox(height: 8),
@@ -278,8 +278,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     "Geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
-                        color:
-                            themeData.colorScheme.surfaceTint.withOpacity(0.6)),
+                        color: themeData.colorScheme.surfaceTint
+                            .withValues(alpha: 0.6)),
                     maxLines: 1)
               ],
               if (!(landingPage.isActive ?? false) &&

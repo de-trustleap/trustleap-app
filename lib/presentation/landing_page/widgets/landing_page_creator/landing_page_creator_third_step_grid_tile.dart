@@ -50,7 +50,7 @@ class _LandingPageCreatorThirdStepGridTileState
           curve: Curves.easeInOut,
           child: Container(
             width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-            height: responsiveValue.largerThan(MOBILE) ? 200 : 200,
+            height: 200,
             decoration: BoxDecoration(
                 color: themeData.colorScheme.surface,
                 border: Border.all(

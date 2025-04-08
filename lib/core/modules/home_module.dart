@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/presentation/profile_page/profile_page.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company_registration/company_registration_page.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoters_page.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_edit/promoter_edit_page.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_page.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendations_page.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -29,6 +30,8 @@ class HomeModule extends Module {
               child: (_) => const CompanyRegistrationPage()),
           ChildRoute(RoutePaths.recommendationsPath,
               child: (_) => const RecommendationsPage()),
+          ChildRoute(RoutePaths.recommendationManagerPath,
+              child: (_) => const RecommendationManagerPage()),
           ChildRoute(RoutePaths.promotersPath,
               child: (_) => PromotersPage(
                     editedPromoter: r.args.queryParams["editedPromoter"],
