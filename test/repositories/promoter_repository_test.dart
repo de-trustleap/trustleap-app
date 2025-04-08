@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -276,6 +277,36 @@ void main() {
       final result = await mockPromoterRepo.getLandingPages(ids);
       // Then
       verify(mockPromoterRepo.getLandingPages(ids));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockPromoterRepo);
+    });
+  });
+
+  group("PromoterRepositoryImplementation_GetPromoter", () {
+    final id = "1";
+    final promoter = Promoter(id: UniqueID.fromUniqueString(id));
+    test("should return promoter when call was successful", () async {
+      // Given
+      final expectedResult = right(promoter);
+      when(mockPromoterRepo.getPromoter(id))
+          .thenAnswer((_) async => right(promoter));
+      // When
+      final result = await mockPromoterRepo.getPromoter(id);
+      // Then
+      verify(mockPromoterRepo.getPromoter(id));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockPromoterRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockPromoterRepo.getPromoter(id))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockPromoterRepo.getPromoter(id);
+      // Then
+      verify(mockPromoterRepo.getPromoter(id));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockPromoterRepo);
     });
