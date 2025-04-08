@@ -53,17 +53,20 @@ class PromotersOverviewGridTile extends StatelessWidget {
                     if (Modular.get<PromoterObserverCubit>()
                         .showLandingPageWarning(promoter)) ...[
                       TooltipIcon(
-                          icon: Icons.warning,
-                          text: localization
-                              .promoter_overview_inactive_landingpage_tooltip_warning,
-                          buttonText: localization
-                              .promoter_overview_inactive_landingpage_tooltip_warning_action,
-                          showButton: permissions.hasEditPromoterPermission(),
-                          onPressed: () => {
-                                CustomNavigator.pushNamed(
-                                    "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
-                                    arguments: promoter)
-                              }),
+                        icon: Icons.warning,
+                        text: localization
+                            .promoter_overview_inactive_landingpage_tooltip_warning,
+                        buttonText: localization
+                            .promoter_overview_inactive_landingpage_tooltip_warning_action,
+                        showButton: permissions.hasEditPromoterPermission(),
+                        onPressed: () {
+                          final params = "?id=${promoter.id.value}";
+                          CustomNavigator.pushNamed2(
+                            "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
+                            params,
+                          );
+                        },
+                      ),
                     ],
                     const Spacer(),
                     if (permissions.hasEditPromoterPermission() ||
@@ -121,9 +124,11 @@ class PromotersOverviewGridTile extends StatelessWidget {
                             if (newValue == "delete") {
                               deletePressed(promoter.id.value);
                             } else if (newValue == "edit") {
-                              CustomNavigator.pushNamed(
-                                  "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
-                                  arguments: promoter);
+                              final params = "?id=${promoter.id.value}";
+                              CustomNavigator.pushNamed2(
+                                "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
+                                params,
+                              );
                             }
                           })
                     ]

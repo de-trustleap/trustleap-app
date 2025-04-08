@@ -82,10 +82,10 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
       links.add(ClickableLink(
           title: "${promoter.firstName ?? ""} ${promoter.lastName ?? ""}",
           onTap: () {
+            final params = "?id=${promoter.id.value}";
             CustomNavigator.pop();
-            CustomNavigator.navigate(
-                "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
-                arguments: promoter);
+            CustomNavigator.navigate2(
+                "${RoutePaths.homePath}${RoutePaths.editPromoterPath}", params);
           }));
     }
     return links;
