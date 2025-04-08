@@ -13,6 +13,7 @@ workflow:
 
 before_script:
   # Cache-Verzeichnis definieren
+  - flutter clean
   - flutter config --enable-web
   - flutter pub get
 
