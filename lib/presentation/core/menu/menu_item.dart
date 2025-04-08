@@ -56,6 +56,8 @@ class _MenuItemState extends State<MenuItem> {
         return localization.menuitems_dashboard;
       case MenuItems.recommendations:
         return localization.menuitems_recommendations;
+      case MenuItems.recommendationManager:
+        return "Empfehlungsmanager";
       case MenuItems.promoters:
         return localization.menuitems_promoters;
       case MenuItems.landingpage:
@@ -143,13 +145,16 @@ class _MenuItemState extends State<MenuItem> {
                             if (_widthAnimation!.value >=
                                 MenuDimensions.menuOpenWidth) ...[
                               const SizedBox(width: 12),
-                              Text(
-                                getLocalizedMenuItem(localization),
-                                style: isCurrentlySelected
-                                    ? themeData.textTheme.bodyMedium!.copyWith(
-                                        color: themeData.colorScheme.surface,
-                                      )
-                                    : themeData.textTheme.bodyMedium,
+                              Expanded(
+                                child: Text(
+                                  getLocalizedMenuItem(localization),
+                                  style: isCurrentlySelected
+                                      ? themeData.textTheme.bodyMedium!
+                                          .copyWith(
+                                          color: themeData.colorScheme.surface,
+                                        )
+                                      : themeData.textTheme.bodyMedium,
+                                ),
                               ),
                             ]
                           ],
