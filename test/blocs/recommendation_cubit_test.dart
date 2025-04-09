@@ -121,7 +121,11 @@ void main() {
       LandingPage(id: UniqueID.fromUniqueString("2"), name: "Page2"),
       LandingPage(id: UniqueID.fromUniqueString("3"), name: "Page3")
     ];
-    const names = [RecommendationReason(reason: "Page1", isActive: true), RecommendationReason(reason: "Page2", isActive: false), RecommendationReason(reason: "Page3", isActive: true)];
+    final names = [
+      RecommendationReason(id: UniqueID.fromUniqueString("1"), reason: "Page1", promotionTemplate: "PromotionTemplate1", isActive: true)
+    , RecommendationReason(id: UniqueID.fromUniqueString("2"), reason: "Page2", promotionTemplate: "PromotionTemplate2", isActive: false)
+    , RecommendationReason(id: UniqueID.fromUniqueString("3"), reason: "Page3", promotionTemplate: "PromotionTemplate3", isActive: true)
+    ];
 
     test("should call landingpages repo when function is called", () async {
       // Given
@@ -141,7 +145,7 @@ void main() {
       // Given
       final expectedResult = [
         RecommendationLoadingState(),
-        const RecommendationGetReasonsSuccessState(reasons: names)
+        RecommendationGetReasonsSuccessState(reasons: names)
       ];
       when(mockLandingPageRepo.getAllLandingPages(landingPageIDs))
           .thenAnswer((_) async => right(reasons));

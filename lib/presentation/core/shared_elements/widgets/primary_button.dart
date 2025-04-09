@@ -6,15 +6,18 @@ class PrimaryButton extends StatelessWidget {
   final double width;
   final bool disabled;
   final bool isLoading;
-  final Function onTap;
+  final Function? onTap;
+  final IconData? icon;
 
-  const PrimaryButton(
-      {super.key,
-      required this.title,
-      required this.onTap,
-      this.disabled = false,
-      this.isLoading = false,
-      this.width = double.infinity});
+  const PrimaryButton({
+    super.key,
+    required this.title,
+    this.onTap,
+    this.disabled = false,
+    this.isLoading = false,
+    this.width = double.infinity,
+    this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class PrimaryButton extends StatelessWidget {
     return IgnorePointer(
       ignoring: disabled,
       child: InkWell(
-          onTap: () => onTap(),
+          onTap: () => onTap!(),
           child: Container(
               height: 40,
               width: width,
@@ -37,12 +40,35 @@ class PrimaryButton extends StatelessWidget {
                           width: 20,
                           height: 20,
                           child: CircularProgressIndicator(color: Colors.white))
-                      : Text(title,
-                          textAlign: TextAlign.center,
-                          style: themeData.textTheme.bodySmall!.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1))))),
+                      : icon != null
+                          ? Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  icon,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  title,
+                                  textAlign: TextAlign.center,
+                                  style:
+                                      themeData.textTheme.bodySmall!.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Text(title,
+                              textAlign: TextAlign.center,
+                              style: themeData.textTheme.bodySmall!.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1))))),
     );
   }
 }

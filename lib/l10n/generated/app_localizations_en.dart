@@ -741,6 +741,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delete_account_confirmation_alert_cancel_button_title => 'Cancel';
 
   @override
+  String get recommendation_page_leadTextField_title_prefix => 'Text for';
+
+  @override
+  String get recommendation_page_leadTextField_send_button => 'Send via Whatsapp';
+
+  @override
+  String get recommendation_page_send_whatsapp_error => 'WhatsApp is not installed or cannot be opened.';
+
+  @override
+  String get recommendation_page_max_item_Message => 'A maximum of 6 items can be added.';
+
+  @override
   String get recommendations_choose_reason_placeholder => 'Choose a reason';
 
   @override
@@ -1395,4 +1407,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_overview_no_default_page_button_title => 'Create default landingpage';
+
+  @override
+  String get edit_promoter_no_data_title => 'No data found';
+
+  @override
+  String get edit_promoter_no_data_subtitle => 'No data was found for this promoter';
 }

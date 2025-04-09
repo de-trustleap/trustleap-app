@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_template_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -37,31 +38,31 @@ class _RecommendationReaseonPickerState
       AppLocalizations localization) {
     List<PopupMenuItem<String>> entries = [
       PopupMenuItem<String>(
-          value: "[providerFirstName]",
+          value: LandingPageTemplatePlaceholder.providerFirstName,
           child: Text(localization
               .landingpage_create_promotion_placeholder_service_provider_first_name)),
       PopupMenuItem<String>(
-          value: "[providerLastName]",
+          value: LandingPageTemplatePlaceholder.providerLastName,
           child: Text(localization
               .landingpage_create_promotion_placeholder_service_provider_last_name)),
       PopupMenuItem<String>(
-          value: "[providerName]",
+          value: LandingPageTemplatePlaceholder.providerName,
           child: Text(localization
               .landingpage_create_promotion_placeholder_service_provider_name)),
       PopupMenuItem<String>(
-          value: "[promoterFirstName]",
+          value: LandingPageTemplatePlaceholder.promoterFirstName,
           child: Text(localization
               .landingpage_create_promotion_placeholder_promoter_first_name)),
       PopupMenuItem<String>(
-          value: "[promoterLastName]",
+          value: LandingPageTemplatePlaceholder.promoterLastName,
           child: Text(localization
               .landingpage_create_promotion_placeholder_promoter_last_name)),
       PopupMenuItem<String>(
-          value: "[promoterName]",
+          value: LandingPageTemplatePlaceholder.promoterName,
           child: Text(localization
               .landingpage_create_promotion_placeholder_promoter_name)),
       PopupMenuItem<String>(
-          value: "[receiverName]",
+          value: LandingPageTemplatePlaceholder.receiverName,
           child: Text(localization
               .landingpage_create_promotion_placeholder_receiver_name))
     ];

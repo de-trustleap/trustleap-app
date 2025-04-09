@@ -1,30 +1,20 @@
-import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/lead_item.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/leads_validator.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_preview.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_framework/responsive_framework.dart';
-
-class LeadItem extends Equatable {
-  final String name;
-  final String reason;
-
-  const LeadItem({required this.name, required this.reason});
-
-  @override
-  List<Object?> get props => [name, reason];
-}
 
 class RecommendationsForm extends StatefulWidget {
   const RecommendationsForm({super.key});
@@ -38,6 +28,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   final leadTextController = TextEditingController();
   final serviceProviderTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  bool showRecommendation = false;
   String? selectedReason;
   FocusNode? focusNode;
   CustomUser? currentUser;
@@ -64,7 +56,6 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     leadTextController.dispose();
     serviceProviderTextController.dispose();
     focusNode!.dispose();
-
     super.dispose();
   }
 
@@ -76,35 +67,48 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   void addLead(LeadsValidator validator) {
-    if (formKey.currentState!.validate() &&
-        validator.validateReason(selectedReason) == null) {
-      setState(() {
-        validationHasError = false;
-        reasonValid = null;
-        leads.add(LeadItem(
-            name: leadTextController.text.trim(), reason: selectedReason!));
-        leadTextController.clear();
-      });
+    final localization = AppLocalizations.of(context);
+    if (leads.length < 6) {
+      if (formKey.currentState!.validate() &&
+          validator.validateReason(selectedReason) == null) {
+        setState(() {
+          validationHasError = false;
+          reasonValid = null;
+          leads.add(LeadItem(
+              name: leadTextController.text.trim(),
+              reason: selectedReason!,
+              promoterName: promoterTextController.text.trim(),
+              serviceProviderName: serviceProviderTextController.text.trim(),
+              promotionTemplate: reasons.firstWhere((e) {
+                return e.reason == selectedReason;
+              }).promotionTemplate!));
+          leadTextController.clear();
+          generateRecommendation();
+        });
+      } else {
+        setState(() {
+          validationHasError = true;
+          reasonValid = validator.validateReason(selectedReason);
+        });
+      }
     } else {
-      setState(() {
-        validationHasError = true;
-        reasonValid = validator.validateReason(selectedReason);
-      });
+      CustomSnackBar.of(context).showCustomSnackBar(
+          localization.recommendation_page_max_item_Message);
     }
   }
 
   void setUser(CustomUser user) {
     if (user.firstName != null && user.lastName != null) {
       if (user.role == Role.promoter) {
-        currentUser = user;
         setState(() {
+          currentUser = user;
           promoterTextFieldDisabled = true;
           promoterTextController.text =
               "${currentUser!.firstName} ${currentUser!.lastName}";
         });
       } else {
-        parentUser = user;
         setState(() {
+          parentUser = user;
           serviceProviderTextController.text =
               "${parentUser!.firstName} ${parentUser!.lastName}";
         });
@@ -124,36 +128,34 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     }
   }
 
-  String _getReasonValues() {
-    return selectedReason ??
-    reasons.firstWhere(
-      (element) {
-        return element.isActive == true;
-      },
-      orElse: () => const RecommendationReason(reason: "null", isActive: null),
-    ).reason as String;
+  String getReasonValues() {
+    selectedReason = selectedReason ??
+        reasons.firstWhere(
+          (e) {
+            return e.isActive == true;
+          },
+          orElse: () => const RecommendationReason(
+              id: null,
+              reason: "null",
+              isActive: null,
+              promotionTemplate: null),
+        ).reason;
+    return selectedReason as String;
   }
 
   void generateRecommendation() {
-    sendMessageViaWhatsApp();
-  }
-
-  void sendMessageViaWhatsApp() async {
-    /*   String url = "https://api.whatsapp.com/send?text=iwanttotestit";
-    if (await canLaunchUrl(Uri.parse(Uri.encodeFull(url)))) {
-      await launchUrl(Uri.parse(Uri.encodeFull(url)));
-    } else {
-      throw "Could not launch";
-    } */
+    setState(() {
+      showRecommendation = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
     final validator = LeadsValidator(localization: localization);
     const double textFieldSpacing = 20;
+    const double tabFieldSpacing = 20;
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
@@ -266,7 +268,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                   width: maxWidth,
                                   validate: reasonValid,
                                   reasons: reasons,
-                                  initialValue: _getReasonValues(),
+                                  initialValue: getReasonValues(),
                                   onSelected: (reason) {
                                     setState(() {
                                       reasonValid =
@@ -276,23 +278,11 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                     resetError();
                                   })
                             ]),
-                        const SizedBox(height: textFieldSpacing * 2),
                       ],
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          PrimaryButton(
-                              title: localization
-                                  .recommendations_form_generate_recommendation_button_title,
-                              width: responsiveValue.isMobile
-                                  ? maxWidth - textFieldSpacing
-                                  : maxWidth / 2 - textFieldSpacing,
-                              onTap: () {
-                                generateRecommendation();
-                              })
-                        ],
-                      ),
+                      if (showRecommendation && leads.isNotEmpty) ...[
+                        const SizedBox(height: tabFieldSpacing),
+                        RecommendationPreview(leads: leads),
+                      ],
                     ]));
           } else if (state is RecommendationGetUserFailureState) {
             return CenteredConstrainedWrapper(

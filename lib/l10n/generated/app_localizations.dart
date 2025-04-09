@@ -1547,6 +1547,30 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get delete_account_confirmation_alert_cancel_button_title;
 
+  /// Prefix for LeadTextField title
+  ///
+  /// In en, this message translates to:
+  /// **'Text for'**
+  String get recommendation_page_leadTextField_title_prefix;
+
+  /// Title for the send button
+  ///
+  /// In en, this message translates to:
+  /// **'Send via Whatsapp'**
+  String get recommendation_page_leadTextField_send_button;
+
+  /// Message shown when the message cannot be sent
+  ///
+  /// In en, this message translates to:
+  /// **'WhatsApp is not installed or cannot be opened.'**
+  String get recommendation_page_send_whatsapp_error;
+
+  /// Message shown when more than 6 items are added
+  ///
+  /// In en, this message translates to:
+  /// **'A maximum of 6 items can be added.'**
+  String get recommendation_page_max_item_Message;
+
   /// Placeholder for the drop-down menu of recommendation reasons on the recommendation page.
   ///
   /// In en, this message translates to:
@@ -2854,6 +2878,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create default landingpage'**
   String get landingpage_overview_no_default_page_button_title;
+
+  /// Title of the view that appears when no id is given for editing the promoter.
+  ///
+  /// In en, this message translates to:
+  /// **'No data found'**
+  String get edit_promoter_no_data_title;
+
+  /// Text of the view that appears when no id is given for editing the promoter.
+  ///
+  /// In en, this message translates to:
+  /// **'No data was found for this promoter'**
+  String get edit_promoter_no_data_subtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

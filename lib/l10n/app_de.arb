@@ -990,6 +990,22 @@
     "@delete_account_confirmation_alert_cancel_button_title": {
         "description": "Titel für den Abbrechen Button im Bestätigungs Alert auf der Seite zum Account löschen"
     },
+    "recommendation_page_leadTextField_title_prefix": "Text für",
+    "@recommendation_page_leadTextField_title_prefix": {
+        "description": "Prefix für LeadTextField Titel"
+    },
+    "recommendation_page_leadTextField_send_button": "Senden per Whatsapp",
+    "@recommendation_page_leadTextField_send_button": {
+        "description": "Title für den Absende Button"
+    },
+    "recommendation_page_send_whatsapp_error": "WhatsApp ist nicht installiert oder kann nicht geöffnet werden.",
+    "@recommendation_page_send_whatsapp_error": {
+        "description": "Nachricht wenn die Message nicht versendet werden kann"
+    },
+    "recommendation_page_max_item_Message": "Es dürfen maximal 6 Items hinzugefügt werden.",
+    "@recommendation_page_max_item_Message": {
+        "description": "Nachricht wenn mehr als 6 Items hinzugefügt werden"
+    },
     "recommendations_choose_reason_placeholder": "Wähle einen Grund",
     "@recommendations_choose_reason_placeholder": {
         "description": "Platzhalter für das Dropdown Menü der Empfehlungsgründe auf der Empfehlungsseite"
@@ -1871,5 +1887,13 @@
     "landingpage_overview_no_default_page_button_title": "Default Landingpage erstellen",
     "@landingpage_overview_no_default_page_button_title": {
         "description": "Button Titel für die Seite die angezeigt wird wenn man noch keine Default Landingpage erstellt hat."
+    },
+    "edit_promoter_no_data_title": "Keine Daten gefunden",
+    "@edit_promoter_no_data_title": {
+        "description": "Titel der View die erscheint wenn keine id für das editieren des Promoters gegeben ist."
+    },
+    "edit_promoter_no_data_subtitle": "Zu diesem Promoter wurden keine Daten gefunden",
+    "@edit_promoter_no_data_subtitle": {
+        "description": "Text der View die erscheint wenn keine id für das editieren des Promoters gegeben ist."
     }
 }
