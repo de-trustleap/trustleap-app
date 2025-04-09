@@ -1,8 +1,8 @@
-import 'package:finanzbegleiter/domain/entities/leadItem.dart';
+import 'package:finanzbegleiter/domain/entities/lead_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_template_placeholder.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/LeadTextField.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/lead_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -9,11 +9,11 @@ class LeadTextField extends StatelessWidget {
   final void Function()? onSendPressed;
 
   const LeadTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.leadName,
     this.onSendPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/domain/entities/leadItem.dart';
+import 'package:finanzbegleiter/domain/entities/lead_item.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 

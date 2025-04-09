@@ -1,7 +1,7 @@
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/leadItem.dart';
+import 'package:finanzbegleiter/domain/entities/lead_item.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
