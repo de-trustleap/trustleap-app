@@ -1407,4 +1407,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_overview_no_default_page_button_title => 'Default Landingpage erstellen';
+
+  @override
+  String get edit_promoter_no_data_title => 'Keine Daten gefunden';
+
+  @override
+  String get edit_promoter_no_data_subtitle => 'Zu diesem Promoter wurden keine Daten gefunden';
 }

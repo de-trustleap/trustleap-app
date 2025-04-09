@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PromoterEditNoDataView extends StatelessWidget {
@@ -6,13 +7,15 @@ class PromoterEditNoDataView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Keine Daten gefunden", style: themeData.textTheme.bodyLarge),
+          Text(localization.edit_promoter_no_data_title,
+              style: themeData.textTheme.bodyLarge),
           const SizedBox(height: 40),
-          Text("Zu diesem Promoter wurden keine Daten gefunden",
+          Text(localization.edit_promoter_no_data_subtitle,
               style: themeData.textTheme.bodyMedium)
         ]);
   }

@@ -115,5 +115,3 @@ class PromoterCubit extends Cubit<PromoterState> {
         (promoter) => emit(PromoterGetSuccessState(promoter: promoter)));
   }
 }
-
-// TODO: LOCALIZATION

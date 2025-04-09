@@ -2878,6 +2878,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create default landingpage'**
   String get landingpage_overview_no_default_page_button_title;
+
+  /// Title of the view that appears when no id is given for editing the promoter.
+  ///
+  /// In en, this message translates to:
+  /// **'No data found'**
+  String get edit_promoter_no_data_title;
+
+  /// Text of the view that appears when no id is given for editing the promoter.
+  ///
+  /// In en, this message translates to:
+  /// **'No data was found for this promoter'**
+  String get edit_promoter_no_data_subtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
