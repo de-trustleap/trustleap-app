@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 dart run flutter_iconpicker:generate_packs --packs allMaterial
 
 # 3. Build for Flutter Web
-flutter build web --web-renderer canvaskit --release --no-tree-shake-icons
+flutter build web --release --no-tree-shake-icons
 
 # 4. Copy .woffs fonts into build folder
 # Check if the build web was successful
