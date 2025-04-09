@@ -3,7 +3,9 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_template_placeholder.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/lead_textfield.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_html/html.dart' as html;
 import 'package:url_launcher/url_launcher.dart';
 
 class RecommendationPreview extends StatefulWidget {
@@ -119,14 +121,20 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
   Future<void> _sendMessage(String leadName, String message) async {
     final localization = AppLocalizations.of(context);
-    final whatsappUrl = Uri.parse(
-        "https://api.whatsapp.com/send/?text=${Uri.encodeComponent(message)}");
-    if (await canLaunchUrl(whatsappUrl)) {
-      await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
+    final whatsappURL =
+        "https://api.whatsapp.com/send/?text=${Uri.encodeComponent(message)}";
+    final convertedURL = Uri.parse(whatsappURL);
+    if (kIsWeb) {
+      html.window.open(whatsappURL, '_blank');
+      return;
     } else {
-      if (!mounted) return;
-      CustomSnackBar.of(context).showCustomSnackBar(
-          localization.recommendation_page_send_whatsapp_error);
+      if (await canLaunchUrl(convertedURL)) {
+        await launchUrl(convertedURL, mode: LaunchMode.externalApplication);
+      } else {
+        if (!mounted) return;
+        CustomSnackBar.of(context).showCustomSnackBar(
+            localization.recommendation_page_send_whatsapp_error);
+      }
     }
   }
 
