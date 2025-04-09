@@ -10,18 +10,21 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_c
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorFirstStep extends StatefulWidget {
   final LandingPage? landingPage;
   final Company? company;
   final bool isEditMode;
-  final Function(LandingPage, Uint8List?) onContinue;
+  final bool createDefaultPage;
+  final Function(LandingPage, Uint8List?, bool) onContinue;
   const LandingPageCreatorFirstStep(
       {super.key,
       this.company,
       this.landingPage,
       required this.isEditMode,
+      required this.createDefaultPage,
       required this.onContinue});
 
   @override
@@ -42,51 +45,23 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
   void initState() {
     super.initState();
     id = UniqueID();
-    BlocProvider.of<LandingPageCubit>(context).getUser();
+    Modular.get<LandingPageCubit>().getUser();
   }
 
   void _onContinue(LandingPage landingPage) {
     this.landingPage = landingPage;
-    BlocProvider.of<LandingPageCubit>(context)
+    Modular.get<LandingPageCubit>()
         .checkLandingPageImage(widget.landingPage, image);
-  }
-
-  void onSubmitCreate(LandingPage? landingPage, Function completion,
-      AppLocalizations localization) {
-    if (image != null || widget.company?.companyImageDownloadURL != null) {
-      setState(() {
-        showError = false;
-      });
-      completion();
-    } else {
-      setState(() {
-        showError = true;
-        errorMessage = localization.error_msg_pleace_upload_picture;
-      });
-    }
-  }
-
-  void onSubmitEdit(LandingPage? landingPage, Function completion,
-      AppLocalizations localization) {
-    if (landingPage?.thumbnailDownloadURL != null) {
-      setState(() {
-        showError = false;
-      });
-      completion();
-    } else {
-      setState(() {
-        showError = true;
-        errorMessage = localization.error_msg_pleace_upload_picture;
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final landingPageCubit = Modular.get<LandingPageCubit>();
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
 
     return BlocListener<LandingPageCubit, LandingPageState>(
+        bloc: landingPageCubit,
         listener: (context, state) {
           if (state is LandingPageNoImageFailureState) {
             setState(() {
@@ -105,7 +80,23 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
               showError = false;
               errorMessage = "";
             });
-            widget.onContinue(landingPage, image);
+            if (widget.createDefaultPage) {
+              Modular.get<LandingPageCubit>().checkCompanyData(widget.company);
+            } else {
+              widget.onContinue(landingPage, image, imageHasChanged);
+            }
+          } else if (state is CheckCompanyDataMissingCompanyState) {
+            setState(() {
+              showError = true;
+              errorMessage =
+                  localization.landingpage_creator_missing_companydata_error;
+            });
+          } else if (state is CheckCompanyValidState) {
+            setState(() {
+              showError = false;
+              errorMessage = "";
+            });
+            widget.onContinue(landingPage, image, imageHasChanged);
           }
         },
         child: Column(children: [
@@ -124,6 +115,8 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
               child: LandingPageCreatorFirstStepForm(
             id: id,
             landingPage: widget.landingPage,
+            company: widget.company,
+            createDefaultPage: widget.createDefaultPage,
             onContinueTap: (landingPage) {
               _onContinue(landingPage);
             },

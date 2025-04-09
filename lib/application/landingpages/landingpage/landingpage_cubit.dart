@@ -4,8 +4,10 @@ import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
+import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
@@ -68,6 +70,14 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     }
   }
 
+  void checkCompanyData(Company? company) {
+    if (company == null) {
+      emit(CheckCompanyDataMissingCompanyState());
+    } else {
+      emit(CheckCompanyValidState());
+    }
+  }
+
   void deleteLandingPage(String id, String parentUserID) async {
     emit(DeleteLandingPageLoadingState());
     final failureOrSuccess =
@@ -112,5 +122,76 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     failureOrSuccess.fold(
         (failure) => emit(GetUserFailureState(failure: failure)),
         (user) => emit(GetUserSuccessState(user: user)));
+  }
+
+  void getPromoters(
+      List<String>? associatedUsersIDs, String landingPageID) async {
+    emit(GetPromotersLoadingState());
+    List<Promoter> promoters = [];
+    if (associatedUsersIDs == null || associatedUsersIDs.isEmpty) {
+      emit(GetPromotersSuccessState(promoters: promoters));
+    } else {
+      final failureOrSuccess =
+          await landingPageRepo.getUnregisteredPromoters(associatedUsersIDs);
+      failureOrSuccess.fold((failure) {
+        emit(GetPromotersFailureState(failure: failure));
+      }, (unregisteredPromoters) async {
+        promoters.addAll(unregisteredPromoters);
+        final failureOrSuccessRegistered =
+            await landingPageRepo.getRegisteredPromoters(associatedUsersIDs);
+        failureOrSuccessRegistered.fold((failure) {
+          emit(GetPromotersFailureState(failure: failure));
+        }, (registeredPromoters) async {
+          promoters.addAll(registeredPromoters);
+
+          final failureOrSuccessLandingPages =
+              await landingPageRepo.getLandingPagesForPromoters(promoters);
+          failureOrSuccessLandingPages.fold(
+              (failure) => emit(GetPromotersFailureState(failure: failure)),
+              (landingPages) {
+            final updatedPromoters =
+                assignLandingPagesToPromoters(promoters, landingPages);
+            final promotersWithoutActivePage =
+                getPromotersWithoutActiveLandingPagesAfterDeletion(
+                    landingPageID, updatedPromoters);
+            emit(GetPromotersSuccessState(
+                promoters: promotersWithoutActivePage));
+          });
+        });
+      });
+    }
+  }
+
+  List<Promoter> assignLandingPagesToPromoters(
+      List<Promoter> promoters, List<LandingPage> landingPages) {
+    final Map<String, LandingPage> landingPageMap = {
+      for (var landingPage in landingPages) landingPage.id.value: landingPage,
+    };
+
+    return promoters.map((promoter) {
+      final associatedLandingPages = promoter.landingPageIDs
+              ?.map((id) => landingPageMap[id])
+              .whereType<LandingPage>()
+              .toList() ??
+          [];
+
+      return promoter.copyWith(landingPages: associatedLandingPages);
+    }).toList();
+  }
+
+  List<Promoter> getPromotersWithoutActiveLandingPagesAfterDeletion(
+      String landingPageID, List<Promoter> promoters) {
+    return promoters.where((promoter) {
+      final updatedLandingPages = (promoter.landingPages ?? [])
+          .where((page) => page.id.value != landingPageID)
+          .toList();
+
+      final hasNoLandingPages = updatedLandingPages.isEmpty;
+
+      final hasNoActiveLandingPages =
+          updatedLandingPages.where((page) => page.isActive == true).isEmpty;
+
+      return hasNoLandingPages || hasNoActiveLandingPages;
+    }).toList();
   }
 }

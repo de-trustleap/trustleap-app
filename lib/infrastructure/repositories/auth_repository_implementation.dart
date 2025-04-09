@@ -4,10 +4,12 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/core/failures/failure.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_user_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -36,14 +38,41 @@ class AuthRepositoryImplementation implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, UserCredential>> registerWithEmailAndPassword(
-      {required String email, required String password}) async {
+  Future<Either<Failure, Unit>> registerAndCreateUser(
+      {required String email,
+      required String password,
+      required CustomUser user,
+      required bool privacyPolicyAccepted,
+      required bool termsAndConditionsAccepted}) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable = firebaseFunctions.httpsCallable("createUser");
+    UserModel userModel = UserModel.fromDomain(user);
     try {
-      final creds = await firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      return right(creds);
-    } on FirebaseAuthException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(code: e.code));
+      await callable.call({
+        "appCheckToken": appCheckToken,
+        "email": email,
+        "password": password,
+        "gender": userModel.gender,
+        "firstName": userModel.firstName,
+        "lastName": userModel.lastName,
+        "birthDate": userModel.birthDate,
+        "address": userModel.address,
+        "postCode": userModel.postCode,
+        "place": userModel.place,
+        "privacyPolicyAccepted": privacyPolicyAccepted,
+        "termsAndConditionsAccepted": termsAndConditionsAccepted
+      });
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      final String? firebaseCode = e.details?['firebaseCode'];
+      final String? type = e.details?['type'];
+      if (type == "auth") {
+        return left(
+            FirebaseExceptionParser.getAuthException(code: firebaseCode));
+      } else {
+        return left(FirebaseExceptionParser.getDatabaseException(
+            code: firebaseCode ?? e.code));
+      }
     }
   }
 
@@ -101,13 +130,16 @@ class AuthRepositoryImplementation implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, void>> resetPassword(
+  Future<Either<DatabaseFailure, Unit>> resetPassword(
       {required String email}) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("sendPasswordResetEmail");
     try {
-      final result = await firebaseAuth.sendPasswordResetEmail(email: email);
-      return right(result);
-    } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(code: e.code));
+      await callable.call({"appCheckToken": appCheckToken, "email": email});
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
 
@@ -115,13 +147,19 @@ class AuthRepositoryImplementation implements AuthRepository {
   Future<Either<DatabaseFailure, bool>> isRegistrationCodeValid(
       {required String email, required String code}) async {
     final promotersCollection = firestore.collection("unregisteredPromoters");
+    final pendingUsersCollection = firestore.collection("pendingUsers");
     try {
       final promoter = await promotersCollection
           .where("code", isEqualTo: code)
           .where("email", isEqualTo: email)
           .limit(1)
           .get();
-      if (promoter.docs.isEmpty) {
+      final user = await pendingUsersCollection
+          .where("code", isEqualTo: code)
+          .where("email", isEqualTo: email)
+          .limit(1)
+          .get();
+      if (promoter.docs.isEmpty && user.docs.isEmpty) {
         return right(false);
       } else {
         return right(true);

@@ -4,6 +4,8 @@ import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/promoter.dart';
 
 void main() {
   late PromoterCubit promoterCubit;
@@ -65,6 +67,115 @@ void main() {
       // Then
       expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
       promoterCubit.deletePromoter(testID);
+    });
+  });
+
+  group("PromoterCubit_EditPromoter", () {
+    const isRegistered = true;
+    const landingPageIDs = ["1", "2"];
+    const promoterID = "3";
+
+    test("should call promoter repo when function is called", () async {
+      // Given
+      when(mockPromoterRepo.editPromoter(
+              isRegistered: isRegistered,
+              landingPageIDs: landingPageIDs,
+              promoterID: promoterID))
+          .thenAnswer((_) async => right(unit));
+      // When
+      promoterCubit.editPromoter(isRegistered, landingPageIDs, promoterID);
+      await untilCalled(mockPromoterRepo.editPromoter(
+          isRegistered: isRegistered,
+          landingPageIDs: landingPageIDs,
+          promoterID: promoterID));
+      // Then
+      verify(mockPromoterRepo.editPromoter(
+          isRegistered: isRegistered,
+          landingPageIDs: landingPageIDs,
+          promoterID: promoterID));
+      verifyNoMoreInteractions(mockPromoterRepo);
+    });
+
+    test(
+        "should emit PromoterLoadingState and then PromoterEditSuccessState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        PromoterLoadingState(),
+        PromoterEditSuccessState()
+      ];
+      when(mockPromoterRepo.editPromoter(
+              isRegistered: isRegistered,
+              landingPageIDs: landingPageIDs,
+              promoterID: promoterID))
+          .thenAnswer((_) async => right(unit));
+      // Then
+      expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
+      promoterCubit.editPromoter(isRegistered, landingPageIDs, promoterID);
+    });
+
+    test(
+        "should emit PromoterLoadingState and then PromoterEditFailureState when call has failed",
+        () async {
+      // Given
+      final expectedResult = [
+        PromoterLoadingState(),
+        PromoterEditFailureState(failure: BackendFailure())
+      ];
+      when(mockPromoterRepo.editPromoter(
+              isRegistered: isRegistered,
+              landingPageIDs: landingPageIDs,
+              promoterID: promoterID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
+      promoterCubit.editPromoter(isRegistered, landingPageIDs, promoterID);
+    });
+  });
+
+  group("PromoterCubit_GetPromoter", () {
+    const id = "1";
+    final promoter = Promoter(id: UniqueID.fromUniqueString(id));
+    test("should call promoter repo when function is called", () async {
+      // Given
+      when(mockPromoterRepo.getPromoter(id))
+          .thenAnswer((_) async => right(promoter));
+      // When
+      promoterCubit.getPromoter(id);
+      await untilCalled(mockPromoterRepo.getPromoter(id));
+      // Then
+      verify(mockPromoterRepo.getPromoter(id));
+      verifyNoMoreInteractions(mockPromoterRepo);
+    });
+
+    test(
+        "should emit PromoterLoadingState and then PromoterGetSuccessState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        PromoterLoadingState(),
+        PromoterGetSuccessState(promoter: promoter)
+      ];
+      when(mockPromoterRepo.getPromoter(id))
+          .thenAnswer((_) async => right(promoter));
+      // Then
+      expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
+      promoterCubit.getPromoter(id);
+    });
+
+    test(
+        "should emit PromoterLoadingState and then PromoterGetFailureState when call has failed",
+        () async {
+      // Given
+      final expectedResult = [
+        PromoterLoadingState(),
+        PromoterGetFailureState(failure: BackendFailure())
+      ];
+      when(mockPromoterRepo.getPromoter(id))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
+      promoterCubit.getPromoter(id);
     });
   });
 }

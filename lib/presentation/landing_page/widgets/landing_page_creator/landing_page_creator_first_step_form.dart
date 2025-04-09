@@ -3,9 +3,11 @@ import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/infrastructure/models/company_model.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_emoji_picker.dart';
@@ -18,16 +20,21 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_c
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_placeholder_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorFirstStepForm extends StatefulWidget {
   final UniqueID id;
   final LandingPage? landingPage;
+  final Company? company;
+  final bool createDefaultPage;
   final Function(LandingPage) onContinueTap;
   const LandingPageCreatorFirstStepForm(
       {super.key,
       required this.id,
       this.landingPage,
+      this.company,
+      required this.createDefaultPage,
       required this.onContinueTap});
 
   @override
@@ -39,6 +46,7 @@ class _LandingPageCreatorFormState
     extends State<LandingPageCreatorFirstStepForm> {
   final nameTextController = TextEditingController();
   final descriptionTextController = TextEditingController();
+  final contactEmailAddressTextController = TextEditingController();
   final promotionTemplateTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   CustomUser? user;
@@ -52,10 +60,12 @@ class _LandingPageCreatorFormState
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<LandingPageCubit>(context).getUser();
+    Modular.get<LandingPageCubit>().getUser();
     if (widget.landingPage != null) {
       nameTextController.text = widget.landingPage?.name ?? "";
       descriptionTextController.text = widget.landingPage?.description ?? "";
+      contactEmailAddressTextController.text =
+          widget.landingPage?.contactEmailAddress ?? "";
       promotionTemplateTextController.text =
           widget.landingPage?.promotionTemplate ?? "";
     }
@@ -65,6 +75,7 @@ class _LandingPageCreatorFormState
   void dispose() {
     nameTextController.dispose();
     descriptionTextController.dispose();
+    contactEmailAddressTextController.dispose();
     promotionTemplateTextController.dispose();
 
     super.dispose();
@@ -100,10 +111,16 @@ class _LandingPageCreatorFormState
           impressum: widget.landingPage?.impressum,
           privacyPolicy: widget.landingPage?.privacyPolicy,
           initialInformation: widget.landingPage?.initialInformation,
-          ownerID: user!.id));
+          termsAndConditions: widget.landingPage?.termsAndConditions,
+          scriptTags: widget.landingPage?.scriptTags,
+          contactEmailAddress: contactEmailAddressTextController.text.trim(),
+          ownerID: user!.id,
+          companyData: widget.company != null
+              ? CompanyModel.fromDomain(widget.company!).toMap()
+              : null));
     } else {
       validationHasError = true;
-      BlocProvider.of<LandingPageCubit>(context)
+      Modular.get<LandingPageCubit>()
           .createLandingPage(null, Uint8List(0), false, "");
     }
   }
@@ -129,6 +146,7 @@ class _LandingPageCreatorFormState
 
   @override
   Widget build(BuildContext context) {
+    final landingPageCubit = Modular.get<LandingPageCubit>();
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
@@ -137,6 +155,7 @@ class _LandingPageCreatorFormState
     const double textFieldSpacing = 20;
 
     return BlocConsumer<LandingPageCubit, LandingPageState>(
+      bloc: landingPageCubit,
       listener: (context, state) {
         if (state is GetUserSuccessState) {
           user = state.user;
@@ -148,8 +167,7 @@ class _LandingPageCreatorFormState
               title: localization.profile_page_request_failure_message,
               message: DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization),
-              callback: () =>
-                  {BlocProvider.of<LandingPageCubit>(context).getUser()});
+              callback: () => {Modular.get<LandingPageCubit>().getUser()});
         } else {
           return CardContainer(
               child: LayoutBuilder(builder: (context, constraints) {
@@ -169,6 +187,13 @@ class _LandingPageCreatorFormState
                             style: themeData.textTheme.headlineLarge!
                                 .copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 16),
+                        if (widget.createDefaultPage) ...[
+                          SelectableText(
+                              localization
+                                  .landingpage_creator_default_page_info_text,
+                              style: themeData.textTheme.bodyLarge),
+                          const SizedBox(height: 16)
+                        ],
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -196,62 +221,81 @@ class _LandingPageCreatorFormState
                                   maxLines: 5,
                                   keyboardType: TextInputType.multiline)
                             ]),
-                        const SizedBox(height: textFieldSpacing * 2),
-                        SelectableText(
-                            localization
-                                .landingpage_create_promotion_template_description,
-                            style: themeData.textTheme.bodyMedium),
                         const SizedBox(height: textFieldSpacing),
-                        if (responsiveValue.isDesktop) ...[
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        _isEmojiPickerExpanded =
-                                            !_isEmojiPickerExpanded;
-                                      });
-                                    },
-                                    child: Tooltip(
-                                      message: localization
-                                          .open_emoji_picker_tooltip,
-                                      child: Text("😃",
-                                          style: themeData.textTheme.bodyLarge),
-                                    )),
-                                const Spacer(),
-                                LandingPageCreatorPlaceholderPicker(
-                                    width: 250,
-                                    onSelected: (placeholder) {
-                                      _insertTextAtCursor(placeholder);
-                                    })
-                              ]),
-                          ExpandedSection(
-                              expand: _isEmojiPickerExpanded,
-                              child: Column(
-                                children: [
-                                  CustomEmojiPicker(
-                                      controller:
-                                          promotionTemplateTextController),
-                                  const SizedBox(height: textFieldSpacing),
-                                ],
-                              )),
-                        ],
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FormTextfield(
                                   maxWidth: maxWidth,
-                                  controller: promotionTemplateTextController,
+                                  controller: contactEmailAddressTextController,
                                   disabled: false,
                                   placeholder: localization
-                                      .landingpage_create_promotion_template_placeholder,
+                                      .landingpage_creator_placeholder_contact_email,
                                   onChanged: resetError,
-                                  minLines: 4,
-                                  maxLines: 10,
-                                  keyboardType: TextInputType.multiline)
+                                  validator: validator
+                                      .validateLandingPageContactEmailAddress,
+                                  keyboardType: TextInputType.emailAddress)
                             ]),
+                        const SizedBox(height: textFieldSpacing),
                         const SizedBox(height: textFieldSpacing * 2),
+                        if (!widget.createDefaultPage) ...[
+                          SelectableText(
+                              localization
+                                  .landingpage_create_promotion_template_description,
+                              style: themeData.textTheme.bodyMedium),
+                          const SizedBox(height: textFieldSpacing),
+                          if (responsiveValue.isDesktop) ...[
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _isEmojiPickerExpanded =
+                                              !_isEmojiPickerExpanded;
+                                        });
+                                      },
+                                      child: Tooltip(
+                                        message: localization
+                                            .open_emoji_picker_tooltip,
+                                        child: Text("😃",
+                                            style:
+                                                themeData.textTheme.bodyLarge),
+                                      )),
+                                  const Spacer(),
+                                  LandingPageCreatorPlaceholderPicker(
+                                      width: 250,
+                                      onSelected: (placeholder) {
+                                        _insertTextAtCursor(placeholder);
+                                      })
+                                ]),
+                            ExpandedSection(
+                                expand: _isEmojiPickerExpanded,
+                                child: Column(
+                                  children: [
+                                    CustomEmojiPicker(
+                                        controller:
+                                            promotionTemplateTextController),
+                                    const SizedBox(height: textFieldSpacing),
+                                  ],
+                                )),
+                          ],
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FormTextfield(
+                                    maxWidth: maxWidth,
+                                    controller: promotionTemplateTextController,
+                                    disabled: false,
+                                    placeholder: localization
+                                        .landingpage_create_promotion_template_placeholder,
+                                    onChanged: resetError,
+                                    minLines: 4,
+                                    maxLines: 10,
+                                    keyboardType: TextInputType.multiline)
+                              ]),
+                          const SizedBox(height: textFieldSpacing * 2),
+                        ],
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,

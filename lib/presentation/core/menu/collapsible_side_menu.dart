@@ -1,12 +1,16 @@
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/presentation/admin_area/admin_side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/menu/menu_toggle_button.dart';
 import 'package:finanzbegleiter/presentation/core/menu/side_menu.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CollapsibleSideMenu extends StatefulWidget {
-  const CollapsibleSideMenu({super.key});
+  final bool isAdmin;
+  const CollapsibleSideMenu({super.key, required this.isAdmin});
 
   @override
   State<CollapsibleSideMenu> createState() => _CollapsibleSideMenuState();
@@ -32,9 +36,32 @@ class _CollapsibleSideMenuState extends State<CollapsibleSideMenu>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    initializeMenuStartPoint();
+  }
+
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  void initializeMenuStartPoint() {
+    final menuCubit = BlocProvider.of<MenuCubit>(context);
+    final currentPath = CustomNavigator.currentPath;
+
+    if (menuCubit.state is! MenuItemSelectedState) {
+      for (var item in MenuItems.values) {
+        final menuItemPath = RoutePaths.menuItemPaths[item];
+
+        if (menuItemPath != null && currentPath.contains(menuItemPath)) {
+          menuCubit.selectMenu(item);
+          break;
+        }
+      }
+    }
   }
 
   void hoverOnMenu(bool isHovering) => setState(() {
@@ -44,10 +71,13 @@ class _CollapsibleSideMenuState extends State<CollapsibleSideMenu>
   Widget getAnimatedMenu() {
     return SizedBox(
         width: _widthAnimation.value,
-        child: SideMenu(
-            collapsed: collapsed,
-            animationController: _animationController,
-            widthAnimation: _widthAnimation));
+        child: widget.isAdmin
+            ? AdminSideMenu(
+                collapsed: collapsed, animationController: _animationController)
+            : SideMenu(
+                collapsed: collapsed,
+                animationController: _animationController,
+                widthAnimation: _widthAnimation));
   }
 
   @override

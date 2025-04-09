@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/second
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_third_step_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorThirdStep extends StatefulWidget {
@@ -44,18 +45,20 @@ class _LandingPageCreatorThirdStepState
 
   @override
   void initState() {
-    BlocProvider.of<LandingPageCubit>(context).getAllLandingPageTemplates();
+    Modular.get<LandingPageCubit>().getAllLandingPageTemplates();
     templates = [];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final landingPageCubit = Modular.get<LandingPageCubit>();
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return BlocConsumer<LandingPageCubit, LandingPageState>(
+      bloc: landingPageCubit,
       listener: (context, state) {
         if (state is GetLandingPageTemplatesSuccessState) {
           setState(() {

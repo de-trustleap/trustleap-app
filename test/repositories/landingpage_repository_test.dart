@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -266,6 +267,112 @@ void main() {
       final result = await mockLandingPageRepo.getAllLandingPageTemplates();
       // Then
       verify(mockLandingPageRepo.getAllLandingPageTemplates());
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+  });
+
+  group("LandingPageRepositoryImplementation_getUnregisteredPromoters", () {
+    final promoters = [
+      Promoter(id: UniqueID.fromUniqueString("1"), registered: false),
+      Promoter(id: UniqueID.fromUniqueString("2"), registered: false)
+    ];
+    final ids = ["1", "2"];
+    test("should return unregistered promoters when the call was successful",
+        () async {
+      // Given
+      final expectedResult = right(promoters);
+      when(mockLandingPageRepo.getUnregisteredPromoters(ids))
+          .thenAnswer((_) async => right(promoters));
+      // When
+      final result = await mockLandingPageRepo.getUnregisteredPromoters(ids);
+      // Then
+      verify(mockLandingPageRepo.getUnregisteredPromoters(ids));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.getUnregisteredPromoters(ids))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockLandingPageRepo.getUnregisteredPromoters(ids);
+      // Then
+      verify(mockLandingPageRepo.getUnregisteredPromoters(ids));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+  });
+
+  group("LandingPageRepositoryImplementation_getRegisteredPromoters", () {
+    final promoters = [
+      Promoter(id: UniqueID.fromUniqueString("1"), registered: true),
+      Promoter(id: UniqueID.fromUniqueString("2"), registered: true)
+    ];
+    final ids = ["1", "2"];
+    test("should return registered promoters when the call was successful",
+        () async {
+      // Given
+      final expectedResult = right(promoters);
+      when(mockLandingPageRepo.getRegisteredPromoters(ids))
+          .thenAnswer((_) async => right(promoters));
+      // When
+      final result = await mockLandingPageRepo.getRegisteredPromoters(ids);
+      // Then
+      verify(mockLandingPageRepo.getRegisteredPromoters(ids));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.getRegisteredPromoters(ids))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockLandingPageRepo.getRegisteredPromoters(ids);
+      // Then
+      verify(mockLandingPageRepo.getRegisteredPromoters(ids));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+  });
+
+  group("LandingPageRepositoryImplementation_getLandingPagesForPromoters", () {
+    final promoters = [
+      Promoter(id: UniqueID.fromUniqueString("1"), registered: true),
+      Promoter(id: UniqueID.fromUniqueString("2"), registered: true)
+    ];
+    final landingPages = [
+      LandingPage(id: UniqueID.fromUniqueString("1")),
+      LandingPage(id: UniqueID.fromUniqueString("2"))
+    ];
+    test("should return landingpages when the call was successful", () async {
+      // Given
+      final expectedResult = right(landingPages);
+      when(mockLandingPageRepo.getLandingPagesForPromoters(promoters))
+          .thenAnswer((_) async => right(landingPages));
+      // When
+      final result =
+          await mockLandingPageRepo.getLandingPagesForPromoters(promoters);
+      // Then
+      verify(mockLandingPageRepo.getLandingPagesForPromoters(promoters));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockLandingPageRepo);
+    });
+
+    test("should return failure when the call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockLandingPageRepo.getLandingPagesForPromoters(promoters))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result =
+          await mockLandingPageRepo.getLandingPagesForPromoters(promoters);
+      // Then
+      verify(mockLandingPageRepo.getLandingPagesForPromoters(promoters));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });

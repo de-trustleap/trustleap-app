@@ -20,6 +20,16 @@ void main() {
             "text": "Test",
             "fontSize": 14.0,
             "fontFamily": "Poppins"
+          },
+          initialInformationTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          termsAndConditionsTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
           });
       final expectedResult = PagebuilderFooterPropertiesModel(
           privacyPolicyTextProperties: {
@@ -28,6 +38,16 @@ void main() {
             "fontFamily": "Poppins"
           },
           impressumTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          initialInformationTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          termsAndConditionsTextProperties: {
             "text": "Test",
             "fontSize": 14.0,
             "fontFamily": "Poppins"
@@ -57,6 +77,16 @@ void main() {
             "text": "Test",
             "fontSize": 14.0,
             "fontFamily": "Poppins"
+          },
+          initialInformationTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          termsAndConditionsTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
           });
       final expectedResult = {
         "privacyPolicyTextProperties": {
@@ -65,6 +95,16 @@ void main() {
           "fontFamily": "Poppins"
         },
         "impressumTextProperties": {
+          "text": "Test",
+          "fontSize": 14.0,
+          "fontFamily": "Poppins"
+        },
+        "initialInformationTextProperties": {
+          "text": "Test",
+          "fontSize": 14.0,
+          "fontFamily": "Poppins"
+        },
+        "termsAndConditionsTextProperties": {
           "text": "Test",
           "fontSize": 14.0,
           "fontFamily": "Poppins"
@@ -90,6 +130,16 @@ void main() {
           "text": "Test",
           "fontSize": 14.0,
           "fontFamily": "Poppins"
+        },
+        "initialInformationTextProperties": {
+          "text": "Test",
+          "fontSize": 14.0,
+          "fontFamily": "Poppins"
+        },
+        "termsAndConditionsTextProperties": {
+          "text": "Test",
+          "fontSize": 14.0,
+          "fontFamily": "Poppins"
         }
       };
       final expectedResult = PagebuilderFooterPropertiesModel(
@@ -99,6 +149,16 @@ void main() {
             "fontFamily": "Poppins"
           },
           impressumTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          initialInformationTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          termsAndConditionsTextProperties: {
             "text": "Test",
             "fontSize": 14.0,
             "fontFamily": "Poppins"
@@ -125,6 +185,16 @@ void main() {
             "text": "Test",
             "fontSize": 14.0,
             "fontFamily": "Poppins"
+          },
+          initialInformationTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          termsAndConditionsTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
           });
       final expectedResult = PagebuilderFooterProperties(
           privacyPolicyTextProperties: PageBuilderTextProperties(
@@ -139,6 +209,28 @@ void main() {
               isBold: null,
               isItalic: null),
           impressumTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 14.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              color: null,
+              alignment: TextAlign.left,
+              textShadow: null,
+              isBold: null,
+              isItalic: null),
+          initialInformationTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 14.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              color: null,
+              alignment: TextAlign.left,
+              textShadow: null,
+              isBold: null,
+              isItalic: null),
+          termsAndConditionsTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: 14.0,
               fontFamily: "Poppins",
@@ -183,6 +275,28 @@ void main() {
               alignment: null,
               textShadow: null,
               isBold: null,
+              isItalic: null),
+          initialInformationTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 14.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              color: null,
+              alignment: null,
+              textShadow: null,
+              isBold: null,
+              isItalic: null),
+          termsAndConditionsTextProperties: PageBuilderTextProperties(
+              text: "Test",
+              fontSize: 14.0,
+              fontFamily: "Poppins",
+              lineHeight: null,
+              letterSpacing: null,
+              color: null,
+              alignment: null,
+              textShadow: null,
+              isBold: null,
               isItalic: null));
       final expectedResult = PagebuilderFooterPropertiesModel(
           privacyPolicyTextProperties: {
@@ -191,6 +305,16 @@ void main() {
             "fontFamily": "Poppins"
           },
           impressumTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          initialInformationTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          termsAndConditionsTextProperties: {
             "text": "Test",
             "fontSize": 14.0,
             "fontFamily": "Poppins"
@@ -215,6 +339,16 @@ void main() {
             "text": "Test",
             "fontSize": 14.0,
             "fontFamily": "Poppins"
+          },
+          initialInformationTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          termsAndConditionsTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
           });
       final properties2 = PagebuilderFooterPropertiesModel(
           privacyPolicyTextProperties: {
@@ -223,6 +357,16 @@ void main() {
             "fontFamily": "Poppins"
           },
           impressumTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          initialInformationTextProperties: {
+            "text": "Test",
+            "fontSize": 14.0,
+            "fontFamily": "Poppins"
+          },
+          termsAndConditionsTextProperties: {
             "text": "Test",
             "fontSize": 14.0,
             "fontFamily": "Poppins"

@@ -2,6 +2,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'mock_user_credential.dart';
@@ -51,44 +53,6 @@ void main() {
     });
   });
 
-  group("AuthRepositoryImplementation_RegisterWithEmailAndPassword", () {
-    const testEmail = "test@tester.de";
-    const testPassword = "12345678";
-    final mockUserCredential = MockUserCredential();
-    test("should return user credentials when registration was successful",
-        () async {
-      // Given
-      final expectedResult = right(mockUserCredential);
-      when(mockAuthRepo.registerWithEmailAndPassword(
-              email: testEmail, password: testPassword))
-          .thenAnswer((_) async => right(mockUserCredential));
-      // When
-      final result = await mockAuthRepo.registerWithEmailAndPassword(
-          email: testEmail, password: testPassword);
-      // Then
-      verify(mockAuthRepo.registerWithEmailAndPassword(
-          email: testEmail, password: testPassword));
-      expect(expectedResult, result);
-      verifyNoMoreInteractions(mockAuthRepo);
-    });
-
-    test("should return failure when call has failed", () async {
-      // Given
-      final expectedResult = left(WeakPasswordFailure());
-      when(mockAuthRepo.registerWithEmailAndPassword(
-              email: testEmail, password: testPassword))
-          .thenAnswer((_) async => left(WeakPasswordFailure()));
-      // When
-      final result = await mockAuthRepo.registerWithEmailAndPassword(
-          email: testEmail, password: testPassword);
-      // Then
-      verify(mockAuthRepo.registerWithEmailAndPassword(
-          email: testEmail, password: testPassword));
-      expect(expectedResult, result);
-      verifyNoMoreInteractions(mockAuthRepo);
-    });
-  });
-
   group("AuthRepositoryImplementation_ReauthenticateWithEmailAndPassword", () {
     const testPassword = "12345678";
     final mockUserCredential = MockUserCredential();
@@ -126,9 +90,9 @@ void main() {
     const testEmail = "test@tester.de";
     test("should return void when password reset was successful", () async {
       // Given
-      final expectedResult = right(());
+      final expectedResult = right((unit));
       when(mockAuthRepo.resetPassword(email: testEmail))
-          .thenAnswer((_) async => right(()));
+          .thenAnswer((_) async => right((unit)));
       // When
       final result = await mockAuthRepo.resetPassword(email: testEmail);
       // Then
@@ -139,9 +103,9 @@ void main() {
 
     test("should return failure when call has failed", () async {
       // Given
-      final expectedResult = left(TooManyRequestsFailure());
+      final expectedResult = left(BackendFailure());
       when(mockAuthRepo.resetPassword(email: testEmail))
-          .thenAnswer((_) async => left(TooManyRequestsFailure()));
+          .thenAnswer((_) async => left(BackendFailure()));
       // When
       final result = await mockAuthRepo.resetPassword(email: testEmail);
       // Then
@@ -237,6 +201,67 @@ void main() {
       final result = await mockAuthRepo.resendEmailVerification();
       // Then
       verify(mockAuthRepo.resendEmailVerification());
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockAuthRepo);
+    });
+  });
+
+  group("AuthRepositoryImplementation_registerAndCreateUser", () {
+    const email = "test@e.de";
+    const password = "xxxxxx";
+    final user = CustomUser(id: UniqueID.fromUniqueString("1"));
+    test("should return unit when call was successful", () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockAuthRepo.registerAndCreateUser(
+              email: email,
+              password: password,
+              user: user,
+              privacyPolicyAccepted: true,
+              termsAndConditionsAccepted: true))
+          .thenAnswer((_) async => right(unit));
+      // When
+      final result = await mockAuthRepo.registerAndCreateUser(
+          email: email,
+          password: password,
+          user: user,
+          privacyPolicyAccepted: true,
+          termsAndConditionsAccepted: true);
+      // Then
+      verify(mockAuthRepo.registerAndCreateUser(
+          email: email,
+          password: password,
+          user: user,
+          privacyPolicyAccepted: true,
+          termsAndConditionsAccepted: true));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockAuthRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockAuthRepo.registerAndCreateUser(
+              email: email,
+              password: password,
+              user: user,
+              privacyPolicyAccepted: true,
+              termsAndConditionsAccepted: true))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockAuthRepo.registerAndCreateUser(
+          email: email,
+          password: password,
+          user: user,
+          privacyPolicyAccepted: true,
+          termsAndConditionsAccepted: true);
+      // Then
+      verify(mockAuthRepo.registerAndCreateUser(
+          email: email,
+          password: password,
+          user: user,
+          privacyPolicyAccepted: true,
+          termsAndConditionsAccepted: true));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockAuthRepo);
     });

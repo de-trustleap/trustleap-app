@@ -21,6 +21,10 @@ class LandingPageModel extends Equatable {
   final String? impressum;
   final String? privacyPolicy;
   final String? initialInformation;
+  final String? termsAndConditions;
+  final String? scriptTags;
+  final String? contactEmailAddress;
+  final Map<String, dynamic>? companyData;
 
   const LandingPageModel(
       {required this.id,
@@ -38,7 +42,11 @@ class LandingPageModel extends Equatable {
       this.isActive,
       this.impressum,
       this.privacyPolicy,
-      this.initialInformation});
+      this.initialInformation,
+      this.termsAndConditions,
+      this.scriptTags,
+      this.contactEmailAddress,
+      this.companyData});
 
   LandingPageModel copyWith(
       {String? id,
@@ -56,7 +64,11 @@ class LandingPageModel extends Equatable {
       bool? isActive,
       String? impressum,
       String? privacyPolicy,
-      String? initialInformation}) {
+      String? initialInformation,
+      String? termsAndConditions,
+      String? scriptTags,
+      String? contactEmailAddress,
+      Map<String, dynamic>? companyData}) {
     return LandingPageModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -73,7 +85,11 @@ class LandingPageModel extends Equatable {
         isActive: isActive ?? this.isActive,
         impressum: impressum ?? this.impressum,
         privacyPolicy: privacyPolicy ?? this.privacyPolicy,
-        initialInformation: initialInformation ?? this.initialInformation);
+        initialInformation: initialInformation ?? this.initialInformation,
+        termsAndConditions: termsAndConditions ?? this.termsAndConditions,
+        scriptTags: scriptTags ?? this.scriptTags,
+        contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
+        companyData: companyData ?? this.companyData);
   }
 
   Map<String, dynamic> toMap() {
@@ -93,7 +109,11 @@ class LandingPageModel extends Equatable {
       'isActive': isActive,
       'impressum': impressum,
       'privacyPolicy': privacyPolicy,
-      'initialInformation': initialInformation
+      'initialInformation': initialInformation,
+      'termsAndConditions': termsAndConditions,
+      'scripts': scriptTags,
+      'contactEmailAddress': contactEmailAddress,
+      'companyData': companyData
     };
   }
 
@@ -104,9 +124,10 @@ class LandingPageModel extends Equatable {
         downloadImageUrl: map['downloadImageUrl'] != null
             ? map['downloadImageUrl'] as String
             : null,
-        thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
-            ? map['thumbnailDownloadURL'] as String
-            : null,
+        thumbnailDownloadURL: (map['thumbnailDownloadURL'] != null
+                ? map['thumbnailDownloadURL'] as String
+                : null)
+            ?.replaceAll(RegExp(r'\s+'), ''),
         ownerID: map['ownerID'] != null ? map['ownerID'] as String : null,
         contentID: map['contentID'] != null ? map['contentID'] as String : null,
         description:
@@ -130,6 +151,16 @@ class LandingPageModel extends Equatable {
             : null,
         initialInformation: map['initialInformation'] != null
             ? map['initialInformation'] as String
+            : null,
+        termsAndConditions: map['termsAndConditions'] != null
+            ? map['termsAndConditions'] as String
+            : null,
+        scriptTags: map['scripts'] != null ? map['scripts'] as String : null,
+        contactEmailAddress: map['contactEmailAddress'] != null
+            ? map['contactEmailAddress'] as String
+            : null,
+        companyData: map['companyData'] != null
+            ? map['companyData'] as Map<String, dynamic>
             : null);
   }
 
@@ -155,7 +186,11 @@ class LandingPageModel extends Equatable {
         isActive: isActive,
         impressum: impressum,
         privacyPolicy: privacyPolicy,
-        initialInformation: initialInformation);
+        initialInformation: initialInformation,
+        termsAndConditions: termsAndConditions,
+        scriptTags: scriptTags,
+        contactEmailAddress: contactEmailAddress,
+        companyData: companyData);
   }
 
   factory LandingPageModel.fromDomain(LandingPage landingPage) {
@@ -175,7 +210,11 @@ class LandingPageModel extends Equatable {
         isActive: landingPage.isActive,
         impressum: landingPage.impressum,
         privacyPolicy: landingPage.privacyPolicy,
-        initialInformation: landingPage.initialInformation);
+        initialInformation: landingPage.initialInformation,
+        termsAndConditions: landingPage.termsAndConditions,
+        scriptTags: landingPage.scriptTags,
+        contactEmailAddress: landingPage.contactEmailAddress,
+        companyData: landingPage.companyData);
   }
 
   @override
@@ -192,6 +231,10 @@ class LandingPageModel extends Equatable {
         isActive,
         impressum,
         privacyPolicy,
-        initialInformation
+        initialInformation,
+        termsAndConditions,
+        scriptTags,
+        contactEmailAddress,
+        companyData
       ];
 }

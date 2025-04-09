@@ -2,10 +2,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/auth_failures.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
+import 'package:finanzbegleiter/core/helpers/custom_claims.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
@@ -32,7 +32,7 @@ class UserRepositoryImplementation implements UserRepository {
     if (!requestedUser.exists) {
       yield left(NotFoundFailure());
     }
-    final role = await _getUserCustomClaims();
+    final role = await CustomClaims(auth: firebaseAuth).getUserCustomClaims();
     yield* userDoc.snapshots().map((snapshot) {
       var document = snapshot.data() as Map<String, dynamic>;
       var model = UserModel.fromFirestore(document, snapshot.id)
@@ -49,31 +49,6 @@ class UserRepositoryImplementation implements UserRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, Unit>> createUser(
-      {required CustomUser user}) async {
-    final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable = firebaseFunctions.httpsCallable("createUser");
-    UserModel userModel = UserModel.fromDomain(user);
-    try {
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "id": userModel.id,
-        "gender": userModel.gender,
-        "firstName": userModel.firstName,
-        "lastName": userModel.lastName,
-        "birthDate": userModel.birthDate,
-        "address": userModel.address,
-        "postCode": userModel.postCode,
-        "place": userModel.place,
-        "email": userModel.email
-      });
-      return right(unit);
-    } on FirebaseFunctionsException catch (e) {
-      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
-  }
-
-  @override
   Future<Either<DatabaseFailure, Unit>> updateUser(
       {required CustomUser user}) async {
     final userCollection = firestore.collection("users");
@@ -87,23 +62,31 @@ class UserRepositoryImplementation implements UserRepository {
   }
 
   @override
-  Future<Either<AuthFailure, void>> updateEmail({required String email}) async {
+  Future<Either<DatabaseFailure, Unit>> updateEmail(
+      {required String email}) async {
     try {
       final currentUser = optionOf(firebaseAuth.currentUser);
       return await currentUser.fold(() {
-        return left(UserNotFoundFailure());
+        return left(BackendFailure());
       }, (user) async {
-        await user.verifyBeforeUpdateEmail(email);
+        final appCheckToken = await appCheck.getToken();
+        HttpsCallable callable = firebaseFunctions.httpsCallable("updateEmail");
+        await callable.call({
+          "appCheckToken": appCheckToken,
+          "newEmail": email,
+        });
         final updateDatabaseFailureOrSuccess =
             await _updateEmailInDatabase(user: user, email: email);
         return updateDatabaseFailureOrSuccess.fold((failure) {
-          return left(ServerFailure());
+          return left(failure);
         }, (r) {
-          return right(r);
+          return right(unit);
         });
       });
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     } on FirebaseException catch (e) {
-      return left(FirebaseExceptionParser.getAuthException(code: e.code));
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
 
@@ -150,7 +133,8 @@ class UserRepositoryImplementation implements UserRepository {
         final userCollection = firestore.collection("users");
         final userDoc = await userCollection.doc(id).get();
         if (userDoc.data() != null) {
-          final role = await _getUserCustomClaims();
+          final role =
+              await CustomClaims(auth: firebaseAuth).getUserCustomClaims();
           var userModel = UserModel.fromFirestore(userDoc.data()!, id)
               .toDomain()
               .copyWith(role: role);
@@ -179,25 +163,6 @@ class UserRepositoryImplementation implements UserRepository {
       }
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-    }
-  }
-
-  Future<Role> _getUserCustomClaims() async {
-    final user = FirebaseAuth.instance.currentUser!;
-    final idTokenResult = await user.getIdTokenResult(true);
-    final claims = idTokenResult.claims;
-    if (claims != null) {
-      final isAdmin = claims["admin"] ?? false;
-      final isCompany = claims["company"] ?? false;
-      if (isAdmin is bool && isAdmin) {
-        return Role.admin;
-      } else if (isCompany is bool && isCompany) {
-        return Role.company;
-      } else {
-        return Role.promoter;
-      }
-    } else {
-      return Role.promoter;
     }
   }
 }

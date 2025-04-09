@@ -1,14 +1,19 @@
+import 'package:finanzbegleiter/constants.dart';
+
 class RoutePaths {
   static const String adminPath = "/admin";
   static const String companyRequestsPath = "/company-requests";
   static const String companyRequestDetails = "/company-request-details";
+  static const String registrationCodes = "/registration-codes";
 
   static const String homePath = "/home";
   static const String dashboardPath = "/dashboard";
   static const String profilePath = "/profile";
   static const String companyRegistration = "/company-registration";
   static const String recommendationsPath = "/recommendations";
+  static const String recommendationManagerPath = "/recommendation-manager";
   static const String promotersPath = "/promoters";
+  static const String editPromoterPath = "/edit-promoter";
   static const String landingPagePath = "/landingpage";
   static const String landingPageCreatorPath = "/landingpage-creator";
   static const String activitiesPath = "/activities";
@@ -16,6 +21,19 @@ class RoutePaths {
   static const String loginPath = "/";
   static const String registerPath = "/register";
   static const String passwordReset = "/password-reset";
+  static const String privacyPolicy = "/privacy-policy";
+  static const String termsAndCondition = "/terms-and-condition";
 
   static const String landingPageBuilderPath = "/landingpage-builder";
+
+  static Map<MenuItems, String> menuItemPaths = {
+    MenuItems.profile: RoutePaths.profilePath,
+    MenuItems.dashboard: RoutePaths.dashboardPath,
+    MenuItems.recommendations: RoutePaths.recommendationsPath,
+    MenuItems.promoters: RoutePaths.promotersPath,
+    MenuItems.landingpage: RoutePaths.landingPagePath,
+    MenuItems.activities: RoutePaths.activitiesPath,
+    MenuItems.adminCompanyRequests: RoutePaths.companyRequestsPath,
+    MenuItems.registrationCodes: RoutePaths.registrationCodes
+  };
 }

@@ -79,7 +79,7 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
       decoration: BoxDecoration(
         color: themeData.colorScheme.onPrimaryContainer,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.withOpacity(0.3)),
+        border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -119,7 +119,7 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
                           Container(
                             height: 0.8,
                             color: themeData.textTheme.bodyMedium?.color
-                                ?.withOpacity(0.5),
+                                ?.withValues(alpha: 0.5),
                           ),
                           const SizedBox(height: 16),
                           Padding(

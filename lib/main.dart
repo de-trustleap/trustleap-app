@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/authentication/auth_observer/auth_ob
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
+import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
@@ -44,14 +45,23 @@ Future main() async {
 void routeToInitial(AuthStatus status) {
   late String lastRoute;
   if (kIsWeb) {
-    lastRoute = html.window.location.pathname ?? "/";
+    String path = html.window.location.pathname ?? "/";
+    String query = html.window.location.search ?? "";
+    if (path != "/") {
+      lastRoute = path + query;
+    } else {
+      lastRoute = path;
+    }
   } else {
     lastRoute = WidgetsBinding.instance.platformDispatcher.defaultRouteName;
   }
   switch (status) {
     case AuthStatus.unAuthenticated:
       debugPrint("NOT AUTHENTICATED");
-      CustomNavigator.navigate(RoutePaths.loginPath);
+      if (lastRoute.contains(RoutePaths.homePath) ||
+          lastRoute.contains(RoutePaths.adminPath)) {
+        CustomNavigator.navigate(RoutePaths.loginPath);
+      }
       break;
     case AuthStatus.authenticated:
       debugPrint("AUTHENTICATED");
@@ -117,6 +127,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => Modular.get<MenuCubit>()),
         BlocProvider(create: (context) => Modular.get<ThemeCubit>()),
         BlocProvider(create: (context) => Modular.get<ProfileObserverBloc>()),
+        BlocProvider(create: (context) => Modular.get<PromoterObserverCubit>()),
         BlocProvider(create: (context) => Modular.get<PermissionCubit>())
       ],
       child: MultiBlocListener(

@@ -116,32 +116,4 @@ void main() {
       expect(result, null);
     });
   });
-
-  group("LandingPageCreatorFormValidator_validateLandingPageInitialInformation",
-      () {
-    test("returns missing text error when input is null", () {
-      when(mockLocalizations.landingpage_validate_initial_information)
-          .thenReturn("Missing initial information");
-
-      final result = formValidator.validateLandingPageInitialInformation(null);
-
-      expect(result, "Missing initial information");
-    });
-
-    test("returns missing text error when input is empty", () {
-      when(mockLocalizations.landingpage_validate_initial_information)
-          .thenReturn("Missing initial information");
-
-      final result = formValidator.validateLandingPageInitialInformation("");
-
-      expect(result, "Missing initial information");
-    });
-
-    test("returns null when input is valid", () {
-      final result =
-          formValidator.validateLandingPageInitialInformation("Test");
-
-      expect(result, null);
-    });
-  });
 }

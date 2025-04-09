@@ -21,32 +21,39 @@ class PromoterOverviewGrid extends StatelessWidget {
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
     return Container(
-      constraints: const BoxConstraints(maxHeight: 600),
-      child: AnimationLimiter(
-        child: GridView.count(
-            crossAxisCount: responsiveValue.largerThan(MOBILE) ? 3 : 2,
-            crossAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
-            mainAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
-            shrinkWrap: true,
-            controller: controller,
-            scrollDirection: Axis.vertical,
-            physics: const ScrollPhysics(),
-            childAspectRatio: calculateChildAspectRatio(responsiveValue),
-            children: List.generate(promoters.length, (index) {
-              return AnimationConfiguration.staggeredGrid(
-                position: index,
-                duration: const Duration(milliseconds: 150),
-                columnCount: responsiveValue.largerThan(MOBILE) ? 3 : 2,
-                child: ScaleAnimation(
-                  child: Center(
-                      child: GridTile(
-                          child: PromotersOverviewGridTile(
-                              promoter: promoters[index],
-                              deletePressed: deletePressed))),
-                ),
-              );
-            })),
-      ),
+      constraints: const BoxConstraints(maxHeight: 1000),
+      child: LayoutBuilder(builder: (context, constraints) {
+        int crossAxisCount = (constraints.maxWidth / 250).floor().clamp(2, 4);
+
+        return AnimationLimiter(
+          child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: constraints.maxWidth / crossAxisCount,
+                crossAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
+                mainAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
+                childAspectRatio: calculateChildAspectRatio(responsiveValue),
+              ),
+              itemCount: promoters.length,
+              shrinkWrap: true,
+              controller: controller,
+              scrollDirection: Axis.vertical,
+              physics: const ScrollPhysics(),
+              itemBuilder: (context, index) {
+                return AnimationConfiguration.staggeredGrid(
+                  position: index,
+                  duration: const Duration(milliseconds: 150),
+                  columnCount: responsiveValue.largerThan(MOBILE) ? 3 : 2,
+                  child: ScaleAnimation(
+                    child: Center(
+                        child: GridTile(
+                            child: PromotersOverviewGridTile(
+                                promoter: promoters[index],
+                                deletePressed: deletePressed))),
+                  ),
+                );
+              }),
+        );
+      }),
     );
   }
 

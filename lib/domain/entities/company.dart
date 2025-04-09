@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/domain/entities/avv.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
 class Company extends Equatable {
@@ -17,57 +18,58 @@ class Company extends Equatable {
   final String? defaultLandingPageID;
   final List<String>? employeeIDs;
   final DateTime? createdAt;
+  final AVV? avv;
 
-  const Company({
-    required this.id,
-    this.name,
-    this.industry,
-    this.address,
-    this.postCode,
-    this.place,
-    this.phoneNumber,
-    this.websiteURL,
-    this.companyImageDownloadURL,
-    this.thumbnailDownloadURL,
-    this.ownerID,
-    this.defaultLandingPageID,
-    this.employeeIDs,
-    this.createdAt,
-  });
+  const Company(
+      {required this.id,
+      this.name,
+      this.industry,
+      this.address,
+      this.postCode,
+      this.place,
+      this.phoneNumber,
+      this.websiteURL,
+      this.companyImageDownloadURL,
+      this.thumbnailDownloadURL,
+      this.ownerID,
+      this.defaultLandingPageID,
+      this.employeeIDs,
+      this.createdAt,
+      this.avv});
 
-  Company copyWith({
-    UniqueID? id,
-    String? name,
-    String? industry,
-    String? address,
-    String? postCode,
-    String? place,
-    String? phoneNumber,
-    String? websiteURL,
-    String? companyImageDownloadURL,
-    String? thumbnailDownloadURL,
-    String? ownerID,
-    String? defaultLandingPageID,
-    List<String>? employeeIDs,
-    DateTime? createdAt,
-  }) {
+  Company copyWith(
+      {UniqueID? id,
+      String? name,
+      String? industry,
+      String? address,
+      String? postCode,
+      String? place,
+      String? phoneNumber,
+      String? websiteURL,
+      String? companyImageDownloadURL,
+      String? thumbnailDownloadURL,
+      String? ownerID,
+      String? defaultLandingPageID,
+      List<String>? employeeIDs,
+      DateTime? createdAt,
+      AVV? avv}) {
     return Company(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      industry: industry ?? this.industry,
-      address: address ?? this.address,
-      postCode: postCode ?? this.postCode,
-      place: place ?? this.place,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
-      websiteURL: websiteURL ?? this.websiteURL,
-      companyImageDownloadURL:
-          companyImageDownloadURL ?? this.companyImageDownloadURL,
-      thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-      ownerID: ownerID ?? this.ownerID,
-      defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
-      employeeIDs: employeeIDs ?? this.employeeIDs,
-      createdAt: createdAt ?? this.createdAt,
-    );
+        id: id ?? this.id,
+        name: name ?? this.name,
+        industry: industry ?? this.industry,
+        address: address ?? this.address,
+        postCode: postCode ?? this.postCode,
+        place: place ?? this.place,
+        phoneNumber: phoneNumber ?? this.phoneNumber,
+        websiteURL: websiteURL ?? this.websiteURL,
+        companyImageDownloadURL:
+            companyImageDownloadURL ?? this.companyImageDownloadURL,
+        thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+        ownerID: ownerID ?? this.ownerID,
+        defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
+        employeeIDs: employeeIDs ?? this.employeeIDs,
+        createdAt: createdAt ?? this.createdAt,
+        avv: avv ?? this.avv);
   }
 
   @override
@@ -84,6 +86,7 @@ class Company extends Equatable {
         thumbnailDownloadURL,
         employeeIDs,
         ownerID,
-        defaultLandingPageID
+        defaultLandingPageID,
+        avv
       ];
 }

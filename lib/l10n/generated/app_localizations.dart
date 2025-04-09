@@ -179,6 +179,42 @@ abstract class AppLocalizations {
   /// **'Registration failed. Please check whether you are using a valid code and the associated email address.'**
   String get register_invalid_code_error;
 
+  /// The first part of the Terms and Conditions checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **'I approve the'**
+  String get register_terms_and_condition_text;
+
+  /// The link part of the Terms and Conditions checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and condition'**
+  String get register_terms_and_condition_link;
+
+  /// The second part of the Terms and Conditions checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get register_terms_and_condition_text2;
+
+  /// The first part of the privacy checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **'I approve the'**
+  String get register_privacy_policy_text;
+
+  /// The link part of the privacy checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get register_privacy_policy_link;
+
+  /// The second part of the privacy checkbox text on the registration page
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get register_privacy_policy_text2;
+
   /// The title of the login page
   ///
   /// In en, this message translates to:
@@ -437,6 +473,18 @@ abstract class AppLocalizations {
   /// **'Deleting the landing page cannot be undone.'**
   String get landingpage_delete_alert_msg;
 
+  /// Message for the landing page deletion dialog if promoters no longer have a landing page
+  ///
+  /// In en, this message translates to:
+  /// **'The following promoters will no longer have active landing pages assigned if you delete this page:\n'**
+  String get landingpage_delete_alert_msg_promoter_warning;
+
+  /// Message to the landing page deletion dialog if promoters no longer have a landing page continue
+  ///
+  /// In en, this message translates to:
+  /// **'\nDo you want to continue anyway? The action cannot be undone.'**
+  String get landingpage_delete_alert_msg_promoter_warning_continue;
+
   /// Snackbar message when a landing page has been successfully deleted
   ///
   /// In en, this message translates to:
@@ -554,8 +602,26 @@ abstract class AppLocalizations {
   /// Placeholder for initial information in landingpage creation form
   ///
   /// In en, this message translates to:
-  /// **'Initial information'**
+  /// **'Initial information (optional)'**
   String get landingpage_creation_initial_information_placeholder;
+
+  /// Placeholder for terms and conditions in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and conditions (optional)'**
+  String get landingpage_creation_terms_and_conditions_placeholder;
+
+  /// Description for script tags in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Javascript <script> tags can be entered below.\nThis is used, for example, to integrate cookie banners or tracking tools into the landing page.'**
+  String get landingpage_creation_scripts_description;
+
+  /// Placeholder for script tags in landingpage creation form
+  ///
+  /// In en, this message translates to:
+  /// **'Script tags (optional)'**
+  String get landingpage_creation_scripts_placeholder;
 
   /// Title for Back Button in Landingpage creation form
   ///
@@ -682,6 +748,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Description'**
   String get placeholder_description;
+
+  /// Placeholder for contact email address in landingpage creator
+  ///
+  /// In en, this message translates to:
+  /// **'Contact email address'**
+  String get landingpage_creator_placeholder_contact_email;
 
   /// Error message when no image has been uploaded.
   ///
@@ -1241,6 +1313,12 @@ abstract class AppLocalizations {
   /// **'My promoters'**
   String get my_promoters_tab_title;
 
+  /// The title of the snack bar that appears on the Promoter Page when you have successfully edited a Promoter.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully edited promoter!'**
+  String get promoter_page_edit_promoter_snackbar_title;
+
   /// The title of the promoter overview
   ///
   /// In en, this message translates to:
@@ -1373,10 +1451,16 @@ abstract class AppLocalizations {
   /// **'Member since {date}'**
   String promoter_overview_creation_date(String date);
 
-  /// Tooltip for the delete promoter button
+  /// Text for the edit promoter button in the three dots menu on the promoter overview page
   ///
   /// In en, this message translates to:
-  /// **'Delete promoter'**
+  /// **'Edit'**
+  String get promoter_overview_edit_promoter_tooltip;
+
+  /// Text for the delete promoter button in the three dots menu on the promoter overview page
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
   String get promoter_overview_delete_promoter_tooltip;
 
   /// Title for the promoter deletion alert
@@ -1595,11 +1679,41 @@ abstract class AppLocalizations {
   /// **'Place'**
   String get profile_company_contact_section_place;
 
-  /// Bezeichnung über dem phone Textfeld der Kontakt Sektion im Unternehmens Tab auf der Profilseite
+  /// Name above the phone text field of the contact section in the company tab on the profile page.
   ///
   /// In en, this message translates to:
   /// **'Phone'**
   String get profile_company_contact_section_phone;
+
+  /// First part of the OPC text of the Contact section in the Company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'I approve the'**
+  String get profile_company_contact_section_avv_checkbox_text;
+
+  /// Second part of the OPC text of the Contact section in the Company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'.'**
+  String get profile_company_contact_section_avv_checkbox_text_part2;
+
+  /// OPC link in the Contact section in the Company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'OPC'**
+  String get profile_company_contact_section_avv_link;
+
+  /// OPC text if already agreed in the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'already approved.'**
+  String get profile_company_contact_section_avv_already_approved;
+
+  /// OPC is generated text in the Contact section in the Company tab on the profile page
+  ///
+  /// In en, this message translates to:
+  /// **'OPC is being generated...'**
+  String get profile_company_contact_section_avv_generating;
 
   /// Validation message when there is no company name.
   ///
@@ -1768,6 +1882,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'There was an error'**
   String get admin_company_request_overview_error;
+
+  /// Snackbar message for successfully creating a registration code in the Admin Panel
+  ///
+  /// In en, this message translates to:
+  /// **'Code successfully sent!'**
+  String get admin_registration_code_creator_success_snackbar;
+
+  /// Title for the registration code creation in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Create registration code'**
+  String get admin_registration_code_creator_title;
+
+  /// Description for creating registration code in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Here you can create a registration code for a user. The code will be sent to the specified email address. The user who registered with this code is not assigned to a company.'**
+  String get admin_registration_code_creator_description;
+
+  /// Placeholder for the email address text field for the registration code creation in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Email address'**
+  String get admin_registration_code_creator_email_placeholder;
+
+  /// Placeholder for the firstname text field for the registration code creation in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Firstname'**
+  String get admin_registration_code_creator_firstname_placeholder;
+
+  /// Title for sending the code Button for creating the registration code in the admin panel
+  ///
+  /// In en, this message translates to:
+  /// **'Send code'**
+  String get admin_registration_code_creator_send_code_button;
 
   /// Title of the form in the company registration page
   ///
@@ -2044,6 +2194,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Footer'**
   String get landingpage_pagebuilder_config_menu_footer_type;
+
+  /// Video player title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Video Player'**
+  String get landingpage_pagebuilder_config_menu_video_player_type;
 
   /// Unknown title in the pagebuilder config menu
   ///
@@ -2614,6 +2770,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Impressum Configuration'**
   String get landingpage_pagebuilder_footer_config_impressum;
+
+  /// Collapsible Menu for initial information configuration of the footer in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Initial Information Configuration '**
+  String get landingpage_pagebuilder_footer_config_initial_information;
+
+  /// Collapsible Menu for terms and conditions configuration of the footer in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions Configuration'**
+  String get landingpage_pagebuilder_footer_config_terms_and_conditions;
+
+  /// Promoter name on the edit promoter page
+  ///
+  /// In en, this message translates to:
+  /// **'Edit {firstName} {lastName}'**
+  String edit_promoter_title(String firstName, String lastName);
+
+  /// Untertitel der Promoter bearbeiten Seite
+  ///
+  /// In en, this message translates to:
+  /// **'Here you can adjust the landingpage allocation.'**
+  String get edit_promoter_subtitle;
+
+  /// Title of the save button on the edit promoter page
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get edit_promoter_save_button_title;
+
+  /// Tooltip for inactive landingpages on the edit promoter page.
+  ///
+  /// In en, this message translates to:
+  /// **'This landingpage is not active'**
+  String get edit_promoter_inactive_landingpage_tooltip;
+
+  /// Tooltip button for landingpage activation on the edit promoter page.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate landingpage'**
+  String get edit_promoter_inactive_landingpage_tooltip_activate_action;
+
+  /// Tooltip warning for inactive landingpages on the promoter overview.
+  ///
+  /// In en, this message translates to:
+  /// **'The promoter doesnt have active assinged landingpages'**
+  String get promoter_overview_inactive_landingpage_tooltip_warning;
+
+  /// Tooltip warning button for inactive landingpages on the promoter overview.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign landingpage'**
+  String get promoter_overview_inactive_landingpage_tooltip_warning_action;
+
+  /// Title for the collapsible view for the video player configuration in the pagebuilder video player configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Video Player Configuration'**
+  String get landingpage_pagebuilder_video_player_config_title;
+
+  /// Title for the collapsible view for the video player youtube link in the pagebuilder video player configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Youtube link'**
+  String get landingpage_pagebuilder_video_player_config_youtube_link;
+
+  /// Description for the video player youtube link in the pagebuilder video player configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Please provide the YouTube link where your video can be accessed.'**
+  String get landingpage_pagebuilder_video_player_config_youtube_link_description;
+
+  /// Placeholder for the video player youtube link in the pagebuilder video player configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Youtube link'**
+  String get landingpage_pagebuilder_video_player_config_youtube_link_placeholder;
+
+  /// Error message when company data were not found for the creation of a default landingpage
+  ///
+  /// In en, this message translates to:
+  /// **'Company data not found'**
+  String get landingpage_creator_missing_companydata_error;
+
+  /// information text for the creation of a default landingpage in the landingpage creator
+  ///
+  /// In en, this message translates to:
+  /// **'The data from your company profile is used to create the default landing page. This data will be displayed on the default landing page. If you change your company data, the data on your default page will also change.'**
+  String get landingpage_creator_default_page_info_text;
+
+  /// Title for the page that is displayed if you have not yet created a default landing page.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup Landingpage'**
+  String get landingpage_overview_no_default_page_title;
+
+  /// Text for the page that is displayed if you have not yet created a default landing page.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t set up a landing page for your company yet. Here you can create a default landing page to start with. This landing page will be used if the link to another landing page expires. The landing page displays company information and a contact form.'**
+  String get landingpage_overview_no_default_page_subtitle;
+
+  /// Button title for the page that is displayed if you have not yet created a default landing page.
+  ///
+  /// In en, this message translates to:
+  /// **'Create default landingpage'**
+  String get landingpage_overview_no_default_page_button_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

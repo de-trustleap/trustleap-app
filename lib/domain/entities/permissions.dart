@@ -28,6 +28,10 @@ class Permissions extends Equatable {
 
   bool hasRegisterPromoterPermission() => _hasPermission("registerPromoter");
 
+  bool hasDeletePromoterPermission() => _hasPermission("deletePromoter");
+
+  bool hasEditPromoterPermission() => _hasPermission("editPromoter");
+
   bool hasShowLandingPageMenuPermission() =>
       _hasPermission("showLandingPageMenu");
 

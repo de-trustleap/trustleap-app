@@ -17,11 +17,11 @@ void main() {
     landingPageObserverCubit = LandingPageObserverCubit(mockLandingPageRepo);
   });
 
-  test("init state should be ProfileObserverInitial", () {
+  test("init state should be LandingPageObserverInitial", () {
     expect(landingPageObserverCubit.state, LandingPageObserverInitial());
   });
 
-  group("CompanyObserverCubit_observeCompany", () {
+  group("LandingpageObserverCubit_observeLandingpages", () {
     const userId = "1";
     const landingpageId1 = "1";
     final testUser = CustomUser(id: UniqueID.fromUniqueString(userId));
@@ -42,7 +42,7 @@ void main() {
     });
 
     test(
-        "should emit CompanyObserverLoading and then CompanyObserverSuccess when event is added",
+        "should emit LandingPageObserverLoading and then LandingPageObserverSuccess when event is added",
         () {
       // Given
       final expectedResult = [
@@ -59,7 +59,7 @@ void main() {
     });
 
     test(
-        "should emit ProfileObserverLoading and then ProfileObserverFailure when event is added and repo failed",
+        "should emit LandingPageObserverLoading and then LandingPageObserverFailure when event is added and repo failed",
         () {
       // Given
       final expectedResult = [

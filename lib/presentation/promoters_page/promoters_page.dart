@@ -1,6 +1,4 @@
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
-import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
-import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/permissions.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -11,14 +9,12 @@ import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_ove
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoters_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersPage extends StatefulWidget {
-  const PromotersPage({
-    super.key,
-  });
+  final String? editedPromoter;
+
+  const PromotersPage({super.key, this.editedPromoter});
 
   @override
   State<PromotersPage> createState() => _PromotersPageState();
@@ -27,6 +23,7 @@ class PromotersPage extends StatefulWidget {
 class _PromotersPageState extends State<PromotersPage>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
+  bool initialSnackbarAlreadyShown = false;
   late double screenHeight;
   late double topPadding;
 
@@ -50,6 +47,21 @@ class _PromotersPageState extends State<PromotersPage>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!initialSnackbarAlreadyShown) {
+      if (widget.editedPromoter == "true") {
+        final localization = AppLocalizations.of(context);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          CustomSnackBar.of(context).showCustomSnackBar(
+              localization.promoter_page_edit_promoter_snackbar_title);
+        });
+      }
+      initialSnackbarAlreadyShown = true;
+    }
+  }
+
+  @override
   void dispose() {
     tabController?.dispose();
     super.dispose();
@@ -64,21 +76,11 @@ class _PromotersPageState extends State<PromotersPage>
         .permissions;
     screenHeight = responsiveValue.screenHeight;
     topPadding = responsiveValue.screenHeight * 0.02;
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (context) =>
-                Modular.get<PromoterCubit>()..getCurrentUser()),
-        BlocProvider(
-            create: (context) =>
-                Modular.get<PromoterObserverCubit>()..observeAllPromoters())
-      ],
-      child: Padding(
-        padding: EdgeInsets.only(top: topPadding),
-        child: tabController != null
-            ? tabbar(responsiveValue, permissions, localization)
-            : const SizedBox.shrink(),
-      ),
+    return Padding(
+      padding: EdgeInsets.only(top: topPadding),
+      child: tabController != null
+          ? tabbar(responsiveValue, permissions, localization)
+          : const SizedBox.shrink(),
     );
   }
 

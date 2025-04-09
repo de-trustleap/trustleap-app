@@ -51,6 +51,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_invalid_code_error => 'Registration failed. Please check whether you are using a valid code and the associated email address.';
 
   @override
+  String get register_terms_and_condition_text => 'I approve the';
+
+  @override
+  String get register_terms_and_condition_link => 'Terms and condition';
+
+  @override
+  String get register_terms_and_condition_text2 => '';
+
+  @override
+  String get register_privacy_policy_text => 'I approve the';
+
+  @override
+  String get register_privacy_policy_link => 'Privacy policy';
+
+  @override
+  String get register_privacy_policy_text2 => '';
+
+  @override
   String get login_title => 'Welcome';
 
   @override
@@ -180,6 +198,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_delete_alert_msg => 'Deleting the landing page cannot be undone.';
 
   @override
+  String get landingpage_delete_alert_msg_promoter_warning => 'The following promoters will no longer have active landing pages assigned if you delete this page:\n';
+
+  @override
+  String get landingpage_delete_alert_msg_promoter_warning_continue => '\nDo you want to continue anyway? The action cannot be undone.';
+
+  @override
   String get landingpage_success_delete_snackbar_message => 'Landing page successfully deleted!';
 
   @override
@@ -239,7 +263,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_creation_privacy_policy_placeholder => 'Privacy policy';
 
   @override
-  String get landingpage_creation_initial_information_placeholder => 'Initial information';
+  String get landingpage_creation_initial_information_placeholder => 'Initial information (optional)';
+
+  @override
+  String get landingpage_creation_terms_and_conditions_placeholder => 'Terms and conditions (optional)';
+
+  @override
+  String get landingpage_creation_scripts_description => 'Javascript <script> tags can be entered below.\nThis is used, for example, to integrate cookie banners or tracking tools into the landing page.';
+
+  @override
+  String get landingpage_creation_scripts_placeholder => 'Script tags (optional)';
 
   @override
   String get landingpage_creation_back_button_text => 'Back';
@@ -303,6 +336,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get placeholder_description => 'Description';
+
+  @override
+  String get landingpage_creator_placeholder_contact_email => 'Contact email address';
 
   @override
   String get error_msg_pleace_upload_picture => 'Please upload an image';
@@ -584,6 +620,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get my_promoters_tab_title => 'My promoters';
 
   @override
+  String get promoter_page_edit_promoter_snackbar_title => 'Successfully edited promoter!';
+
+  @override
   String get promoter_overview_title => 'My promoter';
 
   @override
@@ -654,7 +693,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get promoter_overview_delete_promoter_tooltip => 'Delete promoter';
+  String get promoter_overview_edit_promoter_tooltip => 'Edit';
+
+  @override
+  String get promoter_overview_delete_promoter_tooltip => 'Delete';
 
   @override
   String get promoter_overview_delete_promoter_alert_title => 'Should the selected promoter really be deleted?';
@@ -768,6 +810,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_company_contact_section_phone => 'Phone';
 
   @override
+  String get profile_company_contact_section_avv_checkbox_text => 'I approve the';
+
+  @override
+  String get profile_company_contact_section_avv_checkbox_text_part2 => '.';
+
+  @override
+  String get profile_company_contact_section_avv_link => 'OPC';
+
+  @override
+  String get profile_company_contact_section_avv_already_approved => 'already approved.';
+
+  @override
+  String get profile_company_contact_section_avv_generating => 'OPC is being generated...';
+
+  @override
   String get profile_company_validator_missing_name => 'Please enter the company name';
 
   @override
@@ -850,6 +907,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get admin_company_request_overview_error => 'There was an error';
+
+  @override
+  String get admin_registration_code_creator_success_snackbar => 'Code successfully sent!';
+
+  @override
+  String get admin_registration_code_creator_title => 'Create registration code';
+
+  @override
+  String get admin_registration_code_creator_description => 'Here you can create a registration code for a user. The code will be sent to the specified email address. The user who registered with this code is not assigned to a company.';
+
+  @override
+  String get admin_registration_code_creator_email_placeholder => 'Email address';
+
+  @override
+  String get admin_registration_code_creator_firstname_placeholder => 'Firstname';
+
+  @override
+  String get admin_registration_code_creator_send_code_button => 'Send code';
 
   @override
   String get company_registration_form_title => 'Register company';
@@ -988,6 +1063,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_config_menu_footer_type => 'Footer';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_video_player_type => 'Video Player';
 
   @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unknown';
@@ -1273,4 +1351,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_pagebuilder_footer_config_impressum => 'Impressum Configuration';
+
+  @override
+  String get landingpage_pagebuilder_footer_config_initial_information => 'Initial Information Configuration ';
+
+  @override
+  String get landingpage_pagebuilder_footer_config_terms_and_conditions => 'Terms and Conditions Configuration';
+
+  @override
+  String edit_promoter_title(String firstName, String lastName) {
+    return 'Edit $firstName $lastName';
+  }
+
+  @override
+  String get edit_promoter_subtitle => 'Here you can adjust the landingpage allocation.';
+
+  @override
+  String get edit_promoter_save_button_title => 'Save changes';
+
+  @override
+  String get edit_promoter_inactive_landingpage_tooltip => 'This landingpage is not active';
+
+  @override
+  String get edit_promoter_inactive_landingpage_tooltip_activate_action => 'Activate landingpage';
+
+  @override
+  String get promoter_overview_inactive_landingpage_tooltip_warning => 'The promoter doesnt have active assinged landingpages';
+
+  @override
+  String get promoter_overview_inactive_landingpage_tooltip_warning_action => 'Assign landingpage';
+
+  @override
+  String get landingpage_pagebuilder_video_player_config_title => 'Video Player Configuration';
+
+  @override
+  String get landingpage_pagebuilder_video_player_config_youtube_link => 'Youtube link';
+
+  @override
+  String get landingpage_pagebuilder_video_player_config_youtube_link_description => 'Please provide the YouTube link where your video can be accessed.';
+
+  @override
+  String get landingpage_pagebuilder_video_player_config_youtube_link_placeholder => 'Youtube link';
+
+  @override
+  String get landingpage_creator_missing_companydata_error => 'Company data not found';
+
+  @override
+  String get landingpage_creator_default_page_info_text => 'The data from your company profile is used to create the default landing page. This data will be displayed on the default landing page. If you change your company data, the data on your default page will also change.';
+
+  @override
+  String get landingpage_overview_no_default_page_title => 'Setup Landingpage';
+
+  @override
+  String get landingpage_overview_no_default_page_subtitle => 'You haven\'t set up a landing page for your company yet. Here you can create a default landing page to start with. This landing page will be used if the link to another landing page expires. The landing page displays company information and a contact form.';
+
+  @override
+  String get landingpage_overview_no_default_page_button_title => 'Create default landingpage';
 }

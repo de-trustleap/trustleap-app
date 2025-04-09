@@ -31,6 +31,8 @@ class AuthFailureMapper {
         return localization.auth_failure_requires_recent_login;
       case == MissingPasswordFailure:
         return localization.auth_failure_missing_password;
+      case == InvalidPasswordFailure:
+        return localization.auth_failure_weak_password;
       default:
         return localization.auth_failure_unknown;
     }

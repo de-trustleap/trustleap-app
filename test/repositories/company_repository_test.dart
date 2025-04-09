@@ -21,12 +21,12 @@ void main() {
         () async {
       // Given
       final expectedResult = right(unit);
-      when(mockCompanyRepo.updateCompany(testCompany))
+      when(mockCompanyRepo.updateCompany(testCompany, true))
           .thenAnswer((_) async => right(unit));
       // When
-      final result = await mockCompanyRepo.updateCompany(testCompany);
+      final result = await mockCompanyRepo.updateCompany(testCompany, true);
       // Then
-      verify(mockCompanyRepo.updateCompany(testCompany));
+      verify(mockCompanyRepo.updateCompany(testCompany, true));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockCompanyRepo);
     });
@@ -34,12 +34,12 @@ void main() {
     test("should return failure when the call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockCompanyRepo.updateCompany(testCompany))
+      when(mockCompanyRepo.updateCompany(testCompany, true))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockCompanyRepo.updateCompany(testCompany);
+      final result = await mockCompanyRepo.updateCompany(testCompany, true);
       // Then
-      verify(mockCompanyRepo.updateCompany(testCompany));
+      verify(mockCompanyRepo.updateCompany(testCompany, true));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockCompanyRepo);
     });
@@ -80,12 +80,12 @@ void main() {
     test("should return unit when and call was successful", () async {
       // Given
       final expectedResult = right(unit);
-      when(mockCompanyRepo.registerCompany(testCompany))
+      when(mockCompanyRepo.registerCompany(testCompany, true))
           .thenAnswer((_) async => right(unit));
       // When
-      final result = await mockCompanyRepo.registerCompany(testCompany);
+      final result = await mockCompanyRepo.registerCompany(testCompany, true);
       // Then
-      verify(mockCompanyRepo.registerCompany(testCompany));
+      verify(mockCompanyRepo.registerCompany(testCompany, true));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockCompanyRepo);
     });
@@ -93,12 +93,12 @@ void main() {
     test("should return failure when and call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockCompanyRepo.registerCompany(testCompany))
+      when(mockCompanyRepo.registerCompany(testCompany, true))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockCompanyRepo.registerCompany(testCompany);
+      final result = await mockCompanyRepo.registerCompany(testCompany, true);
       // Then
-      verify(mockCompanyRepo.registerCompany(testCompany));
+      verify(mockCompanyRepo.registerCompany(testCompany, true));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockCompanyRepo);
     });
@@ -130,6 +130,36 @@ void main() {
       final result = await mockCompanyRepo.getPendingCompanyRequest(id);
       // Then
       verify(mockCompanyRepo.getPendingCompanyRequest(id));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockCompanyRepo);
+    });
+  });
+
+  group("CompanyRepositoryImplementation_GetAVVDownloadURL", () {
+    final url = "https://test.de";
+    final testCompany = Company(id: UniqueID.fromUniqueString("1"));
+    test("should return download url when and call was successful", () async {
+      // Given
+      final expectedResult = right(url);
+      when(mockCompanyRepo.getAVVDownloadURL(testCompany, true))
+          .thenAnswer((_) async => right(url));
+      // When
+      final result = await mockCompanyRepo.getAVVDownloadURL(testCompany, true);
+      // Then
+      verify(mockCompanyRepo.getAVVDownloadURL(testCompany, true));
+      expect(result, expectedResult);
+      verifyNoMoreInteractions(mockCompanyRepo);
+    });
+
+    test("should return error when and call failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockCompanyRepo.getAVVDownloadURL(testCompany, true))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockCompanyRepo.getAVVDownloadURL(testCompany, true);
+      // Then
+      verify(mockCompanyRepo.getAVVDownloadURL(testCompany, true));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockCompanyRepo);
     });

@@ -15,7 +15,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 class LandingPageOverviewGrid extends StatelessWidget {
   final List<LandingPage> landingpages;
   final CustomUser user;
-  final Function(String, String) deletePressed;
+  final Function(String, String, List<String>) deletePressed;
   final Function(String) duplicatePressed;
   final Function(String, bool) isActivePressed;
   const LandingPageOverviewGrid(

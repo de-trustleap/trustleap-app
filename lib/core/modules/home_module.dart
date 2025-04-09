@@ -8,6 +8,8 @@ import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_v
 import 'package:finanzbegleiter/presentation/profile_page/profile_page.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company_registration/company_registration_page.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoters_page.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_edit/promoter_edit_page.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_page.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendations_page.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -28,15 +30,26 @@ class HomeModule extends Module {
               child: (_) => const CompanyRegistrationPage()),
           ChildRoute(RoutePaths.recommendationsPath,
               child: (_) => const RecommendationsPage()),
+          ChildRoute(RoutePaths.recommendationManagerPath,
+              child: (_) => const RecommendationManagerPage()),
           ChildRoute(RoutePaths.promotersPath,
-              child: (_) => const PromotersPage()),
+              child: (_) => PromotersPage(
+                    editedPromoter: r.args.queryParams["editedPromoter"],
+                  )),
+          ChildRoute(RoutePaths.editPromoterPath,
+              child: (_) =>
+                  PromoterEditPage(promoterID: r.args.queryParams["id"] ?? "")),
           ChildRoute(RoutePaths.landingPagePath,
               child: (_) => LandingPageView(
                     createdNewPage: r.args.queryParams["createdNewPage"],
                     editedPage: r.args.queryParams["editedPage"],
                   )),
-          ChildRoute(RoutePaths.landingPageCreatorPath,
-              child: (_) => LandingPageCreator(landingPage: r.args.data)),
+          ChildRoute(RoutePaths.landingPageCreatorPath, child: (_) {
+            final args = r.args.data as Map<String, dynamic>?;
+            return LandingPageCreator(
+                landingPage: args?["landingPage"],
+                createDefaultPage: args?["createDefaultPage"] ?? false);
+          }),
           ChildRoute(RoutePaths.activitiesPath,
               child: (_) => const ActivityPage()),
         ]);

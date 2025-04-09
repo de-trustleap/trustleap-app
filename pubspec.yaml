@@ -12,8 +12,8 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   responsive_framework: ^1.1.1
-  bloc: ^8.1.4
-  flutter_bloc: ^8.1.5
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.0
   firebase_core: ^3.6.0
   firebase_auth: ^5.3.1
   firebase_app_check: ^0.3.1+4
@@ -30,17 +30,17 @@ dependencies:
   cached_network_image: ^3.3.1
   image_picker: ^1.0.7
   flutter_dropzone: ^4.0.3
-  bloc_concurrency: ^0.2.5
+  bloc_concurrency: ^0.3.0
   easy_image_viewer: ^1.4.1
   mockito: ^5.4.4
-  bloc_test: ^9.1.7
+  bloc_test: ^10.0.0
   mocktail: ^1.0.4
   build_runner: ^2.4.9
   collection: ^1.18.0
   flutter_staggered_animations: ^1.1.1
   cloud_functions: ^5.1.3
   http: ^1.2.0
-  emoji_picker_flutter: ^3.1.0
+  emoji_picker_flutter: ^4.3.0
   universal_html: ^2.2.4
   url_launcher: ^6.0.20
   flex_color_picker: ^3.6.0

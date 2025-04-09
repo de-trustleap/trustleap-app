@@ -18,7 +18,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
   final LandingPage landingPage;
   final CustomUser user;
   final bool isDuplicationAllowed;
-  final Function(String, String) deletePressed;
+  final Function(String, String, List<String>) deletePressed;
   final Function(String) duplicatePressed;
   final Function(String, bool) isActivePressed;
 
@@ -42,6 +42,20 @@ class LandingPageOverviewGridTile extends StatelessWidget {
           ? themeData.textTheme.bodyMedium!
           : themeData.textTheme.bodyMedium!.copyWith(color: Colors.grey);
     }
+  }
+
+  IconButton _getEditButton(
+      ThemeData themeData, AppLocalizations localizations) {
+    return IconButton(
+        onPressed: () {
+          CustomNavigator.pushNamed(
+              "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
+              arguments: {"landingPage": landingPage});
+        },
+        iconSize: 24,
+        tooltip: localizations.landingpage_overview_edit_tooltip,
+        icon:
+            Icon(Icons.edit, color: themeData.colorScheme.secondary, size: 24));
   }
 
   @override
@@ -74,10 +88,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             .permissions;
     return Container(
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-      height: responsiveValue.largerThan(MOBILE) ? 300 : 300,
+      height: 300,
       decoration: BoxDecoration(
           color: (landingPage.isDefaultPage ?? false)
-              ? themeData.colorScheme.primary
+              ? themeData.colorScheme.primary.withValues(alpha: 0.5)
               : themeData.colorScheme.surface,
           border: Border.all(color: Colors.transparent),
           borderRadius: const BorderRadius.all(Radius.circular(20))),
@@ -95,18 +109,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       if (permissions.hasEditLandingPagePermission()) ...[
-                        IconButton(
-                            onPressed: () {
-                              CustomNavigator.pushNamed(
-                                  "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
-                                  arguments: landingPage);
-                            },
-                            iconSize: 24,
-                            tooltip:
-                                localizations.landingpage_overview_edit_tooltip,
-                            icon: Icon(Icons.edit,
-                                color: themeData.colorScheme.secondary,
-                                size: 24)),
+                        _getEditButton(themeData, localizations),
                         const Spacer(),
                       ],
                       IconButton(
@@ -174,7 +177,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                                 ],
                                 if (landingPage.ownerID == user.id)
                                   PopupMenuItem(
-                                      value: "troggelActiveDeaktive",
+                                      value: "toggleActivation",
                                       child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -202,16 +205,32 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                               ],
                           onSelected: (String newValue) {
                             if (newValue == "delete") {
-                              deletePressed(landingPage.id.value,
-                                  landingPage.ownerID?.value ?? "");
+                              deletePressed(
+                                  landingPage.id.value,
+                                  landingPage.ownerID?.value ?? "",
+                                  landingPage.associatedUsersIDs ?? []);
                             } else if (newValue == "duplicate") {
                               duplicatePressed(landingPage.id.value);
-                            } else if (newValue == "troggelActiveDeaktive") {
+                            } else if (newValue == "toggleActivation") {
                               isActivePressed(landingPage.id.value,
                                   !(landingPage.isActive ?? false));
                             }
                           })
                     ]),
+              ] else if (landingPage.isDefaultPage != null &&
+                  landingPage.isDefaultPage == true) ...[
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      if (permissions
+                          .hasEditDefaultLandingPagePermission()) ...[
+                        _getEditButton(themeData, localizations),
+                      ] else ...[
+                        const SizedBox(height: 40)
+                      ],
+                      const Spacer()
+                    ])
               ] else ...[
                 const Spacer()
               ],
@@ -250,8 +269,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
-                        color:
-                            themeData.colorScheme.surfaceTint.withOpacity(0.6)),
+                        color: themeData.colorScheme.surfaceTint
+                            .withValues(alpha: 0.6)),
                     maxLines: 1),
               ] else if (landingPage.lastUpdatedAt != null) ...[
                 const SizedBox(height: 8),
@@ -259,8 +278,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                     "Geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
                     style: themeData.textTheme.bodySmall!.copyWith(
                         fontSize: 12,
-                        color:
-                            themeData.colorScheme.surfaceTint.withOpacity(0.6)),
+                        color: themeData.colorScheme.surfaceTint
+                            .withValues(alpha: 0.6)),
                     maxLines: 1)
               ],
               if (!(landingPage.isActive ?? false) &&

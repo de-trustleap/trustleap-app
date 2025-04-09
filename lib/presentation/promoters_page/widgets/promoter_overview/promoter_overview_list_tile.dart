@@ -50,7 +50,7 @@ class PromoterOverviewListTile extends StatelessWidget {
                                   fontSize: 12,
                                   overflow: TextOverflow.ellipsis,
                                   color: themeData.colorScheme.surfaceTint
-                                      .withOpacity(0.6)),
+                                      .withValues(alpha: 0.6)),
                               maxLines: 2))
                     ]),
                 if (promoter.registered != null) ...[
@@ -83,7 +83,7 @@ class PromoterOverviewListTile extends StatelessWidget {
                                     fontSize: 12,
                                     overflow: TextOverflow.ellipsis,
                                     color: themeData.colorScheme.surfaceTint
-                                        .withOpacity(0.6)),
+                                        .withValues(alpha: 0.6)),
                                 maxLines: 1))
                       ])
                 ]

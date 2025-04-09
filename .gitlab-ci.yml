@@ -1,11 +1,19 @@
-image: ghcr.io/cirruslabs/flutter:3.24.1
+image: ghcr.io/cirruslabs/flutter:3.29.2
 
 stages:
   - build
   - test
 
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    - if: '$CI_COMMIT_BRANCH || $CI_COMMIT_TAG'
+
 before_script:
   # Cache-Verzeichnis definieren
+  - flutter clean
   - flutter config --enable-web
   - flutter pub get
 
@@ -18,7 +26,7 @@ cache:
 build:
   stage: build
   script:
-    - flutter build web --web-renderer canvaskit --release --no-tree-shake-icons
+    - flutter build web --release --no-tree-shake-icons --verbose
   rules:
     - when: always
   artifacts:
@@ -34,3 +42,4 @@ test:
   artifacts:
     paths:
       - coverage/lcov.info
+#test

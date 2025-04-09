@@ -22,7 +22,7 @@ class PageTemplate extends StatelessWidget {
     if (responsiveValue.largerThan(TABLET)) {
       return const Scaffold(
           body: Row(children: [
-        CollapsibleSideMenu(),
+        CollapsibleSideMenu(isAdmin: false),
         Expanded(child: RouterOutlet())
       ]));
     } else {

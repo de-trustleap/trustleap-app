@@ -23,6 +23,7 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
   void observeAllLandingPages() async {
     emit(LandingPageObserverLoading());
     await _usersStreamSub?.cancel();
+    _usersStreamSub = null;
     _usersStreamSub = landingPagesRepo.observeAllLandingPages().listen(
         (failureOrSuccess) => landingPageObserverUpdated(failureOrSuccess));
   }
@@ -33,11 +34,11 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
     failureOrUser
         .fold((failure) => emit(LandingPageObserverFailure(failure: failure)),
             (user) async {
-      var landingPagesIDs = user.landingPageIDs;
+      var landingPagesIDs = user.landingPageIDs ?? [];
       if (user.defaultLandingPageID != null) {
-        landingPagesIDs?.add(user.defaultLandingPageID!);
+        landingPagesIDs.add(user.defaultLandingPageID!);
       }
-      if (landingPagesIDs != null && landingPagesIDs.isNotEmpty) {
+      if (landingPagesIDs.isNotEmpty) {
         final failureOrSuccess =
             await landingPagesRepo.getAllLandingPages(landingPagesIDs);
         failureOrSuccess.fold((failure) {
@@ -51,6 +52,11 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
         emit(LandingPageObserverSuccess(landingPages: const [], user: user));
       }
     });
+  }
+
+  void stopObserving() {
+    _usersStreamSub?.cancel();
+    _usersStreamSub = null;
   }
 
   @override

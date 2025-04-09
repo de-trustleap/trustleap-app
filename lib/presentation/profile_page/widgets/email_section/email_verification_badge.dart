@@ -18,7 +18,7 @@ class EmailVerificationBadge extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
             color: state == EmailVerificationState.verified
-                ? themeData.colorScheme.primary.withOpacity(0.3)
+                ? themeData.colorScheme.primary.withValues(alpha: 0.3)
                 : themeData.colorScheme.errorContainer,
             border: Border.all(
                 color: state == EmailVerificationState.verified

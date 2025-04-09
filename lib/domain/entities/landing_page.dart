@@ -19,6 +19,10 @@ class LandingPage extends Equatable {
   final String? impressum;
   final String? privacyPolicy;
   final String? initialInformation;
+  final String? termsAndConditions;
+  final String? scriptTags;
+  final String? contactEmailAddress;
+  final Map<String, dynamic>? companyData;
 
   const LandingPage(
       {required this.id,
@@ -36,7 +40,11 @@ class LandingPage extends Equatable {
       this.isActive,
       this.impressum,
       this.privacyPolicy,
-      this.initialInformation});
+      this.initialInformation,
+      this.termsAndConditions,
+      this.scriptTags,
+      this.contactEmailAddress,
+      this.companyData});
 
   LandingPage copyWith(
       {UniqueID? id,
@@ -54,7 +62,11 @@ class LandingPage extends Equatable {
       bool? isActive,
       String? impressum,
       String? privacyPolicy,
-      String? initialInformation}) {
+      String? initialInformation,
+      String? termsAndConditions,
+      String? scriptTags,
+      String? contactEmailAddress,
+      Map<String, dynamic>? companyData}) {
     return LandingPage(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -71,7 +83,11 @@ class LandingPage extends Equatable {
         isActive: isActive ?? this.isActive,
         impressum: impressum ?? this.impressum,
         privacyPolicy: privacyPolicy ?? this.privacyPolicy,
-        initialInformation: initialInformation ?? this.initialInformation);
+        initialInformation: initialInformation ?? this.initialInformation,
+        termsAndConditions: termsAndConditions ?? this.termsAndConditions,
+        scriptTags: scriptTags ?? this.scriptTags,
+        contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
+        companyData: companyData ?? this.companyData);
   }
 
   @override
@@ -88,6 +104,10 @@ class LandingPage extends Equatable {
         isActive,
         impressum,
         privacyPolicy,
-        initialInformation
+        initialInformation,
+        termsAndConditions,
+        scriptTags,
+        contactEmailAddress,
+        companyData
       ];
 }

@@ -1,11 +1,14 @@
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/helpers/downloader.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/clickable_link.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_validator.dart';
 import 'package:finanzbegleiter/route_paths.dart';
@@ -30,6 +33,7 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
   final postCodeTextController = TextEditingController();
   final placeTextController = TextEditingController();
   final phoneNumberTextController = TextEditingController();
+  bool avvChecked = false;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late String currentUserID;
@@ -52,6 +56,14 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    if (!avvChecked) {
+      setButtonStateToDisabled(true);
+    }
+    super.didChangeDependencies();
+  }
+
   void setButtonStateToDisabled(bool disabled) {
     setState(() {
       buttonDisabled = disabled;
@@ -68,19 +80,42 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
   void submit(CompanyValidator validator) {
     if (formKey.currentState!.validate()) {
       validationHasError = false;
-      BlocProvider.of<CompanyCubit>(context).registerCompany(Company(
-          id: UniqueID(),
-          name: nameTextController.text.trim(),
-          industry: industryTextController.text.trim(),
-          websiteURL: websiteTextController.text.trim(),
-          address: addressTextController.text.trim(),
-          postCode: postCodeTextController.text.trim(),
-          place: placeTextController.text.trim(),
-          phoneNumber: phoneNumberTextController.text.trim(),
-          ownerID: currentUserID));
+      BlocProvider.of<CompanyCubit>(context).registerCompany(
+          Company(
+              id: UniqueID(),
+              name: nameTextController.text.trim(),
+              industry: industryTextController.text.trim(),
+              websiteURL: websiteTextController.text.trim(),
+              address: addressTextController.text.trim(),
+              postCode: postCodeTextController.text.trim(),
+              place: placeTextController.text.trim(),
+              phoneNumber: phoneNumberTextController.text.trim(),
+              ownerID: currentUserID),
+          avvChecked);
     } else {
       validationHasError = true;
-      BlocProvider.of<CompanyCubit>(context).registerCompany(null);
+      BlocProvider.of<CompanyCubit>(context).registerCompany(null, false);
+    }
+  }
+
+  void submitPDFRequest(CompanyValidator validator) {
+    if (formKey.currentState!.validate()) {
+      validationHasError = false;
+      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(
+          Company(
+              id: UniqueID(),
+              name: nameTextController.text.trim(),
+              industry: industryTextController.text.trim(),
+              websiteURL: websiteTextController.text.trim(),
+              address: addressTextController.text.trim(),
+              postCode: postCodeTextController.text.trim(),
+              place: placeTextController.text.trim(),
+              phoneNumber: phoneNumberTextController.text.trim(),
+              ownerID: currentUserID),
+          true);
+    } else {
+      validationHasError = true;
+      BlocProvider.of<CompanyCubit>(context).getPDFDownloadURL(null, true);
     }
   }
 
@@ -99,6 +134,11 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
               state.failure, localization);
           showError = true;
           setButtonStateToDisabled(false);
+        } else if (state is CompanyGetAVVPDFFailureState) {
+          errorMessage = DatabaseFailureMapper.mapFailureMessage(
+              state.failure, localization);
+          showError = true;
+          setButtonStateToDisabled(false);
         } else if (state is CompanyRegisterLoadingState) {
           setButtonStateToDisabled(true);
         } else if (state is CompanyGetCurrentUserSuccessState) {
@@ -108,6 +148,10 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
           const params = "?registeredCompany=true";
           Modular.to
               .navigate(RoutePaths.homePath + RoutePaths.profilePath + params);
+        } else if (state is CompanyGetAVVPDFLoadingState) {
+          setButtonStateToDisabled(true);
+        } else if (state is CompanyGetAVVPDFSuccessState) {
+          Downloader().showFileInNewTab(state.downloadURL);
         }
       },
       builder: (context, state) {
@@ -220,6 +264,51 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                           onChanged: resetError,
                           onFieldSubmitted: () => submit(validator))
                     ]),
+                    const SizedBox(height: textFieldSpacing),
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      Checkbox(
+                          value: avvChecked,
+                          onChanged: (checked) {
+                            if (checked == true) {
+                              setButtonStateToDisabled(false);
+                            } else {
+                              setButtonStateToDisabled(true);
+                            }
+                            setState(() {
+                              avvChecked = checked ?? false;
+                            });
+                          }),
+                      const SizedBox(width: 8),
+                      Text(
+                          localization
+                              .profile_company_contact_section_avv_checkbox_text,
+                          style: themeData.textTheme.bodyMedium),
+                      const SizedBox(width: 4),
+                      ClickableLink(
+                          title: localization
+                              .profile_company_contact_section_avv_link,
+                          onTap: () {
+                            submitPDFRequest(validator);
+                          }),
+                      const SizedBox(width: 4),
+                      Text(
+                          localization
+                              .profile_company_contact_section_avv_checkbox_text_part2,
+                          style: themeData.textTheme.bodyMedium)
+                    ]),
+                    if (state is CompanyGetAVVPDFLoadingState) ...[
+                      const SizedBox(height: textFieldSpacing),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const LoadingIndicator(size: 24),
+                            const SizedBox(width: 8),
+                            Text(
+                                localization
+                                    .profile_company_contact_section_avv_generating,
+                                style: themeData.textTheme.bodyMedium)
+                          ])
+                    ],
                     const SizedBox(height: textFieldSpacing * 2),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -240,7 +329,8 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                     ),
                     if (errorMessage != "" &&
                         showError &&
-                        state is CompanyRegisterFailureState &&
+                        (state is CompanyRegisterFailureState ||
+                            state is CompanyGetAVVPDFFailureState) &&
                         !validationHasError) ...[
                       const SizedBox(height: 20),
                       FormErrorView(message: errorMessage)

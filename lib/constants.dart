@@ -2,11 +2,13 @@ enum MenuItems {
   profile("Profil"),
   dashboard("Dashboard"),
   recommendations("Empfehlungen"),
+  recommendationManager("Empfehlungsmanager"),
   promoters("Promoter"),
   landingpage("Landingpage"),
   activities("Aktivitäten"),
 
   adminCompanyRequests("Unternehmensanfragen"),
+  registrationCodes("Codes"),
   none("");
 
   final String value;
@@ -14,7 +16,7 @@ enum MenuItems {
 }
 
 class MenuDimensions {
-  static const menuOpenWidth = 250.0;
+  static const menuOpenWidth = 300.0;
   static const menuCollapsedWidth = 80.0;
 }
 
@@ -77,9 +79,12 @@ enum PageBuilderWidgetType {
   button,
   contactForm,
   footer,
+  videoPlayer,
   none
 }
 
 enum PageBuilderSectionLayout { row, column, none }
 
 enum PageBuilderSpacingType { padding, margin }
+
+enum LegalsType { privacyPolicy, termsAndCondition }
