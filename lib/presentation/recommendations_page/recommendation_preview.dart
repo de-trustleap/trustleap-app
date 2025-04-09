@@ -1,7 +1,7 @@
 import 'package:finanzbegleiter/domain/entities/leadItem.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_template_placeholder.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/LeadTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -84,7 +84,6 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
   @override
   void dispose() {
-    // Alle Controller disposen
     for (final controller in _textControllers.values) {
       controller.dispose();
     }
@@ -94,9 +93,23 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
   // Hilfsfunktion, um mehrere Platzhalter zu ersetzen
   String parseTemplate(LeadItem lead, String template) {
+    final serviceProviderLastName =
+        (lead.serviceProviderName.split(" ")).skip(1).join(" ");
+    final promoterLastName = (lead.promoterName.split(" ")).skip(1).join(" ");
     final replacements = {
-      "\$name": lead.name,
+      LandingPageTemplatePlaceholder.receiverName: lead.name,
+      LandingPageTemplatePlaceholder.providerFirstName:
+          lead.serviceProviderName.split(" ").first,
+      LandingPageTemplatePlaceholder.providerLastName: serviceProviderLastName,
+      LandingPageTemplatePlaceholder.providerName:
+          "${lead.serviceProviderName.split(" ").first} $serviceProviderLastName",
+      LandingPageTemplatePlaceholder.promoterFirstName:
+          lead.promoterName.split(" ").first,
+      LandingPageTemplatePlaceholder.promoterLastName: promoterLastName,
+      LandingPageTemplatePlaceholder.promoterName:
+          "${lead.promoterName.split(" ").first} $promoterLastName"
     };
+
     var result = template;
     replacements.forEach((key, value) {
       result = result.replaceAll(key, value);

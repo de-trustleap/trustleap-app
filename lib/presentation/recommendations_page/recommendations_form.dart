@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -79,6 +77,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
           leads.add(LeadItem(
               name: leadTextController.text.trim(),
               reason: selectedReason!,
+              promoterName: promoterTextController.text.trim(),
+              serviceProviderName: serviceProviderTextController.text.trim(),
               promotionTemplate: reasons.firstWhere((e) {
                 return e.reason == selectedReason;
               }).promotionTemplate!));
@@ -100,15 +100,15 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   void setUser(CustomUser user) {
     if (user.firstName != null && user.lastName != null) {
       if (user.role == Role.promoter) {
-        currentUser = user;
         setState(() {
+          currentUser = user;
           promoterTextFieldDisabled = true;
           promoterTextController.text =
               "${currentUser!.firstName} ${currentUser!.lastName}";
         });
       } else {
-        parentUser = user;
         setState(() {
+          parentUser = user;
           serviceProviderTextController.text =
               "${parentUser!.firstName} ${parentUser!.lastName}";
         });
@@ -280,10 +280,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                             ]),
                       ],
                       if (showRecommendation && leads.isNotEmpty) ...[
-                        SizedBox(height: tabFieldSpacing),
-                        RecommendationPreview(
-                          leads: leads,
-                        ),
+                        const SizedBox(height: tabFieldSpacing),
+                        RecommendationPreview(leads: leads),
                       ],
                     ]));
           } else if (state is RecommendationGetUserFailureState) {
