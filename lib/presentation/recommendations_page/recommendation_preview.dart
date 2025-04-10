@@ -1,15 +1,20 @@
+import 'dart:async';
+
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/domain/entities/lead_item.dart';
+import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_template_placeholder.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/lead_textfield.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_textfield.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:url_launcher/url_launcher.dart';
 
 class RecommendationPreview extends StatefulWidget {
-  final List<LeadItem> leads; // Liste der Leads (Namen und Gründe)
+  final List<Recommendation> leads; // Liste der Leads (Namen und Gründe)
 
   const RecommendationPreview({super.key, required this.leads});
 
@@ -21,6 +26,9 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     with TickerProviderStateMixin {
   TabController? tabController;
   final Map<String, TextEditingController> _textControllers = {};
+  StreamSubscription? _visibilitySubscription;
+  bool showMissingLinkError = false;
+  bool isAlertVisible = false;
 
   @override
   void initState() {
@@ -90,11 +98,12 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       controller.dispose();
     }
     tabController?.dispose();
+    _visibilitySubscription?.cancel();
     super.dispose();
   }
 
   // Hilfsfunktion, um mehrere Platzhalter zu ersetzen
-  String parseTemplate(LeadItem lead, String template) {
+  String parseTemplate(Recommendation lead, String template) {
     final serviceProviderLastName =
         (lead.serviceProviderName.split(" ")).skip(1).join(" ");
     final promoterLastName = (lead.promoterName.split(" ")).skip(1).join(" ");
@@ -116,16 +125,36 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     replacements.forEach((key, value) {
       result = result.replaceAll(key, value);
     });
+    result += "\n[LINK]";
     return result;
-  }
+  } // TODO: WENN BEI ALERT AUF JA GEKLICKT WIRD DANN LEAD IN BACKEND SPEICHERN!
 
-  Future<void> _sendMessage(String leadName, String message) async {
+  Future<void> _sendMessage(String leadName, String message, String id) async {
+    var link = "";
+    if (Environment().isStaging()) {
+      link = "https://landingpages-staging.trust-leap.de?id=$id";
+    } else {
+      link = "https://landingpages.trust-leap.de?id=$id";
+    }
+    var adaptedMessage = "";
+    if (!message.contains("[LINK]")) {
+      setState(() {
+        showMissingLinkError = true;
+      });
+      return;
+    }
+    setState(() {
+      showMissingLinkError = false;
+    });
+
+    adaptedMessage = message.replaceAll("[LINK]", link);
     final localization = AppLocalizations.of(context);
     final whatsappURL =
-        "https://api.whatsapp.com/send/?text=${Uri.encodeComponent(message)}";
+        "https://api.whatsapp.com/send/?text=${Uri.encodeComponent(adaptedMessage)}";
     final convertedURL = Uri.parse(whatsappURL);
     if (kIsWeb) {
       html.window.open(whatsappURL, '_blank');
+      _startComeBackToPageListener(id);
       return;
     } else {
       if (await canLaunchUrl(convertedURL)) {
@@ -136,6 +165,37 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
             localization.recommendation_page_send_whatsapp_error);
       }
     }
+  }
+
+  void _startComeBackToPageListener(String id) {
+    _visibilitySubscription?.cancel();
+    _visibilitySubscription = html.document.onVisibilityChange.listen((event) {
+      if (!html.document.hidden! && mounted && !isAlertVisible) {
+        isAlertVisible = true;
+        // App ist wieder sichtbar (zurück im Tab)
+        showDialog(
+            context: context,
+            builder: (_) {
+              return CustomAlertDialog(
+                  title: "Empfehlung verschickt?",
+                  message:
+                      "Hast du die Empfehlung erfolgreich verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
+                  actionButtonTitle: "Ja",
+                  cancelButtonTitle: "Nein",
+                  actionButtonAction: () => _onRecommendationSentSuccessful(id),
+                  cancelButtonAction: () {
+                    isAlertVisible = false;
+                    CustomNavigator.pop();
+                  });
+            });
+      }
+    });
+  }
+
+  void _onRecommendationSentSuccessful(String id) {
+    isAlertVisible = false;
+    CustomNavigator.pop();
+    print("ERFOLG!");
   }
 
   @override
@@ -150,14 +210,13 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       final controller = _textControllers[lead.id]!;
       return SizedBox(
         height: 250,
-        child: LeadTextField(
+        child: RecommendationTextField(
           controller: controller,
           leadName: lead.name,
+          showError: showMissingLinkError,
           onSendPressed: () {
-            _sendMessage(
-              widget.leads.first.name,
-              controller.text,
-            );
+            _sendMessage(widget.leads.first.name, controller.text,
+                widget.leads.first.id);
           },
         ),
       );
@@ -173,19 +232,24 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         ),
         const SizedBox(height: 30),
         SizedBox(
-          height: 250,
+          height: 400,
           child: TabBarView(
             controller: tabController,
             children: widget.leads.map((lead) {
               final controller = _textControllers[lead.id]!;
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: LeadTextField(
-                  controller: controller,
-                  leadName: lead.name,
-                  onSendPressed: () {
-                    _sendMessage(lead.name, controller.text);
-                  },
+                child: Column(
+                  children: [
+                    RecommendationTextField(
+                      controller: controller,
+                      leadName: lead.name,
+                      showError: showMissingLinkError,
+                      onSendPressed: () {
+                        _sendMessage(lead.name, controller.text, lead.id);
+                      },
+                    ),
+                  ],
                 ),
               );
             }).toList(),

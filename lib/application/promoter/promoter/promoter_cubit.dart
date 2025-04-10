@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/permissions.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -107,8 +108,20 @@ class PromoterCubit extends Cubit<PromoterState> {
     });
   }
 
-  void getPromoter(String id) async {
+  void getPromoter(String id, CustomUser? user, Permissions permission) async {
     emit(PromoterLoadingState());
+    if (user == null || !permission.hasEditPromoterPermission()) {
+      emit(PromoterGetFailureState(failure: PermissionDeniedFailure()));
+      return;
+    }
+    final isInRegistered = user.registeredPromoterIDs?.contains(id) ?? false;
+    final isInUnregistered =
+        user.unregisteredPromoterIDs?.contains(id) ?? false;
+
+    if (!isInRegistered && !isInUnregistered) {
+      emit(PromoterGetFailureState(failure: NotFoundFailure()));
+      return;
+    }
     final failureOrSuccess = await promoterRepo.getPromoter(id);
     failureOrSuccess.fold(
         (failure) => emit(PromoterGetFailureState(failure: failure)),

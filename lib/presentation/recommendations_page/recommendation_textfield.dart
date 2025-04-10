@@ -3,24 +3,29 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_t
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
-class LeadTextField extends StatelessWidget {
+class RecommendationTextField extends StatelessWidget {
   final TextEditingController controller;
   final String leadName;
+  final bool showError;
   final void Function()? onSendPressed;
 
-  const LeadTextField({
+  const RecommendationTextField({
     super.key,
     required this.controller,
     required this.leadName,
+    required this.showError,
     this.onSendPressed,
   });
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Expanded(
+        Flexible(
+          fit: FlexFit.loose,
           child: FormTextfield(
               controller: controller,
               disabled: false,
@@ -31,6 +36,12 @@ class LeadTextField extends StatelessWidget {
               keyboardType: TextInputType.multiline),
         ),
         const SizedBox(height: 10),
+        if (showError) ...[
+          Text("Der [LINK] Platzhalter darf nicht fehlen!",
+              style: themeData.textTheme.bodySmall!
+                  .copyWith(color: themeData.colorScheme.error))
+        ],
+        const SizedBox(height: 20),
         PrimaryButton(
             title: localization.recommendation_page_leadTextField_send_button,
             onTap: onSendPressed,
