@@ -66,7 +66,7 @@ class RecommendationGetReasonsFailureState extends RecommendationsState
 
 class RecommendationGetReasonsSuccessState extends RecommendationsState
     with EquatableMixin {
-  final List<RecommendationReason>reasons;
+  final List<RecommendationReason> reasons;
 
   const RecommendationGetReasonsSuccessState({required this.reasons});
 

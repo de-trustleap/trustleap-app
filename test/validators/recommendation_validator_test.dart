@@ -1,16 +1,17 @@
-import 'package:finanzbegleiter/presentation/recommendations_page/leads_validator.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_validator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import 'auth_validator_test.mocks.dart';
 
 void main() {
-  late LeadsValidator leadsValidator;
+  late RecommendationValidator recommendationValidator;
   late MockAppLocalizations mockLocalizations;
 
   setUp(() {
     mockLocalizations = MockAppLocalizations();
-    leadsValidator = LeadsValidator(localization: mockLocalizations);
+    recommendationValidator =
+        RecommendationValidator(localization: mockLocalizations);
   });
 
   group("LeadsValidator_validateLeadsName", () {
@@ -18,7 +19,7 @@ void main() {
       when(mockLocalizations.recommendations_validation_missing_lead_name)
           .thenReturn("Missing name");
 
-      final result = leadsValidator.validateLeadsName(null);
+      final result = recommendationValidator.validateLeadsName(null);
 
       expect(result, "Missing name");
     });
@@ -27,13 +28,13 @@ void main() {
       when(mockLocalizations.recommendations_validation_missing_lead_name)
           .thenReturn("Missing name");
 
-      final result = leadsValidator.validateLeadsName("");
+      final result = recommendationValidator.validateLeadsName("");
 
       expect(result, "Missing name");
     });
 
     test("returns null when input is valid", () {
-      final result = leadsValidator.validateLeadsName("Max Test");
+      final result = recommendationValidator.validateLeadsName("Max Test");
 
       expect(result, null);
     });
@@ -44,7 +45,7 @@ void main() {
       when(mockLocalizations.recommendations_validation_missing_promoter_name)
           .thenReturn("Missing name");
 
-      final result = leadsValidator.validatePromotersName(null);
+      final result = recommendationValidator.validatePromotersName(null);
 
       expect(result, "Missing name");
     });
@@ -53,13 +54,13 @@ void main() {
       when(mockLocalizations.recommendations_validation_missing_promoter_name)
           .thenReturn("Missing name");
 
-      final result = leadsValidator.validatePromotersName("");
+      final result = recommendationValidator.validatePromotersName("");
 
       expect(result, "Missing name");
     });
 
     test("returns null when input is valid", () {
-      final result = leadsValidator.validatePromotersName("Max Test");
+      final result = recommendationValidator.validatePromotersName("Max Test");
 
       expect(result, null);
     });
@@ -70,13 +71,13 @@ void main() {
       when(mockLocalizations.recommendations_validation_missing_reason)
           .thenReturn("Missing reason");
 
-      final result = leadsValidator.validateReason(null);
+      final result = recommendationValidator.validateReason(null);
 
       expect(result, "Missing reason");
     });
 
     test("returns null when input is valid", () {
-      final result = leadsValidator.validateReason("Test");
+      final result = recommendationValidator.validateReason("Test");
 
       expect(result, null);
     });

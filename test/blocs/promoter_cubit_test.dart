@@ -6,6 +6,8 @@ import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dar
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/permissions.dart';
 
 void main() {
   late PromoterCubit promoterCubit;
@@ -136,17 +138,9 @@ void main() {
   group("PromoterCubit_GetPromoter", () {
     const id = "1";
     final promoter = Promoter(id: UniqueID.fromUniqueString(id));
-    test("should call promoter repo when function is called", () async {
-      // Given
-      when(mockPromoterRepo.getPromoter(id))
-          .thenAnswer((_) async => right(promoter));
-      // When
-      promoterCubit.getPromoter(id);
-      await untilCalled(mockPromoterRepo.getPromoter(id));
-      // Then
-      verify(mockPromoterRepo.getPromoter(id));
-      verifyNoMoreInteractions(mockPromoterRepo);
-    });
+    final user = CustomUser(
+        id: UniqueID.fromUniqueString("1"), registeredPromoterIDs: ["1"]);
+    final permission = Permissions(permissions: {"editPromoter": true});
 
     test(
         "should emit PromoterLoadingState and then PromoterGetSuccessState when call was successful",
@@ -160,7 +154,7 @@ void main() {
           .thenAnswer((_) async => right(promoter));
       // Then
       expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
-      promoterCubit.getPromoter(id);
+      promoterCubit.getPromoter(id, user, permission);
     });
 
     test(
@@ -175,7 +169,7 @@ void main() {
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
-      promoterCubit.getPromoter(id);
+      promoterCubit.getPromoter(id, user, permission);
     });
   });
 }

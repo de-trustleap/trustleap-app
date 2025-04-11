@@ -2853,6 +2853,52 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           as String);
 
   @override
+  String get recommendation_page_leadTextField_title_prefix =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_page_leadTextField_title_prefix),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_page_leadTextField_title_prefix,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_page_leadTextField_send_button =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_page_leadTextField_send_button),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_page_leadTextField_send_button),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_page_send_whatsapp_error =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_page_send_whatsapp_error),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_page_send_whatsapp_error),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_page_max_item_Message =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_page_max_item_Message),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_page_max_item_Message),
+            ),
+          )
+          as String);
+
+  @override
   String get recommendations_choose_reason_placeholder =>
       (super.noSuchMethod(
             Invocation.getter(#recommendations_choose_reason_placeholder),
@@ -5641,6 +5687,28 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
               Invocation.getter(
                 #landingpage_overview_no_default_page_button_title,
               ),
+            ),
+          )
+          as String);
+
+  @override
+  String get edit_promoter_no_data_title =>
+      (super.noSuchMethod(
+            Invocation.getter(#edit_promoter_no_data_title),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#edit_promoter_no_data_title),
+            ),
+          )
+          as String);
+
+  @override
+  String get edit_promoter_no_data_subtitle =>
+      (super.noSuchMethod(
+            Invocation.getter(#edit_promoter_no_data_subtitle),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#edit_promoter_no_data_subtitle),
             ),
           )
           as String);

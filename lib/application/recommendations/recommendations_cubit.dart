@@ -11,6 +11,7 @@ part 'recommendations_state.dart';
 class RecommendationsCubit extends Cubit<RecommendationsState> {
   final UserRepository userRepo;
   final LandingPageRepository landingPagesRepo;
+
   RecommendationsCubit(this.userRepo, this.landingPagesRepo)
       : super(RecommendationsInitial());
 

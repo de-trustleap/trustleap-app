@@ -117,14 +117,38 @@ void main() {
   group("RecommendationCubit_GetRecommendationReasons", () {
     const landingPageIDs = ["1", "2", "3"];
     final reasons = [
-      LandingPage(id: UniqueID.fromUniqueString("1"), name: "Page1"),
-      LandingPage(id: UniqueID.fromUniqueString("2"), name: "Page2"),
-      LandingPage(id: UniqueID.fromUniqueString("3"), name: "Page3")
+      LandingPage(
+          id: UniqueID.fromUniqueString("1"),
+          name: "Page1",
+          isActive: true,
+          promotionTemplate: "PromotionTemplate1"),
+      LandingPage(
+          id: UniqueID.fromUniqueString("2"),
+          name: "Page2",
+          isActive: false,
+          promotionTemplate: "PromotionTemplate2"),
+      LandingPage(
+          id: UniqueID.fromUniqueString("3"),
+          name: "Page3",
+          isActive: true,
+          promotionTemplate: "PromotionTemplate3")
     ];
     final names = [
-      RecommendationReason(id: UniqueID.fromUniqueString("1"), reason: "Page1", promotionTemplate: "PromotionTemplate1", isActive: true)
-    , RecommendationReason(id: UniqueID.fromUniqueString("2"), reason: "Page2", promotionTemplate: "PromotionTemplate2", isActive: false)
-    , RecommendationReason(id: UniqueID.fromUniqueString("3"), reason: "Page3", promotionTemplate: "PromotionTemplate3", isActive: true)
+      RecommendationReason(
+          id: UniqueID.fromUniqueString("1"),
+          reason: "Page1",
+          promotionTemplate: "PromotionTemplate1",
+          isActive: true),
+      RecommendationReason(
+          id: UniqueID.fromUniqueString("2"),
+          reason: "Page2",
+          promotionTemplate: "PromotionTemplate2",
+          isActive: false),
+      RecommendationReason(
+          id: UniqueID.fromUniqueString("3"),
+          reason: "Page3",
+          promotionTemplate: "PromotionTemplate3",
+          isActive: true)
     ];
 
     test("should call landingpages repo when function is called", () async {
