@@ -196,7 +196,6 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       }
     });
   }
-  // TODO: LOCALIZATIONS
 
   void _onRecommendationSentSuccessful(RecommendationItem recommendation) {
     Modular.get<RecommendationsAlertCubit>().saveRecommendation(recommendation);
