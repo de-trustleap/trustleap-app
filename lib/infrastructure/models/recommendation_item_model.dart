@@ -9,6 +9,7 @@ class RecommendationItemModel extends Equatable {
   final String? landingPageID;
   final String? promoterName;
   final String? serviceProviderName;
+  final String? defaultLandingPageID;
   final DateTime createdAt;
   final DateTime expiresAt;
 
@@ -18,6 +19,7 @@ class RecommendationItemModel extends Equatable {
       required this.landingPageID,
       required this.promoterName,
       required this.serviceProviderName,
+      required this.defaultLandingPageID,
       required this.expiresAt,
       required this.createdAt});
 
@@ -27,6 +29,7 @@ class RecommendationItemModel extends Equatable {
       String? landingPageID,
       String? promoterName,
       String? serviceProviderName,
+      String? defaultLandingPageID,
       DateTime? expiresAt,
       DateTime? createdAt}) {
     return RecommendationItemModel(
@@ -35,6 +38,7 @@ class RecommendationItemModel extends Equatable {
         landingPageID: landingPageID ?? this.landingPageID,
         promoterName: promoterName ?? this.promoterName,
         serviceProviderName: serviceProviderName ?? this.serviceProviderName,
+        defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
         expiresAt: expiresAt ?? this.expiresAt,
         createdAt: createdAt ?? this.createdAt);
   }
@@ -46,6 +50,7 @@ class RecommendationItemModel extends Equatable {
       'landingPageID': landingPageID,
       'promoterName': promoterName,
       'serviceProviderName': serviceProviderName,
+      'defaultLandingPageID': defaultLandingPageID,
       'expiresAt': Timestamp.fromDate(expiresAt),
       'createdAt': Timestamp.fromDate(createdAt)
     };
@@ -62,6 +67,9 @@ class RecommendationItemModel extends Equatable {
             map['promoterName'] != null ? map['promoterName'] as String : null,
         serviceProviderName: map['serviceProviderName'] != null
             ? map['serviceProviderName'] as String
+            : null,
+        defaultLandingPageID: map['defaultLandingPageID'] != null
+            ? map['defaultLandingPageID'] as String
             : null,
         expiresAt: (map['expiresAt'] as Timestamp).toDate(),
         createdAt: (map['createdAt'] as Timestamp).toDate());
@@ -81,6 +89,7 @@ class RecommendationItemModel extends Equatable {
         landingPageID: landingPageID,
         promoterName: promoterName,
         serviceProviderName: serviceProviderName,
+        defaultLandingPageID: defaultLandingPageID,
         expiresAt: expiresAt);
   }
 
@@ -92,11 +101,19 @@ class RecommendationItemModel extends Equatable {
         landingPageID: recommendation.landingPageID,
         promoterName: recommendation.promoterName,
         serviceProviderName: recommendation.serviceProviderName,
+        defaultLandingPageID: recommendation.defaultLandingPageID,
         expiresAt: recommendation.expiresAt,
         createdAt: recommendation.createdAt);
   }
 
   @override
-  List<Object?> get props =>
-      [id, name, landingPageID, promoterName, serviceProviderName, expiresAt];
+  List<Object?> get props => [
+        id,
+        name,
+        landingPageID,
+        promoterName,
+        serviceProviderName,
+        expiresAt,
+        defaultLandingPageID
+      ];
 }

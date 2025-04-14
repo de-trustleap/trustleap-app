@@ -9,6 +9,7 @@ class RecommendationItem extends Equatable {
   final String? promotionTemplate;
   final String? promoterName;
   final String? serviceProviderName;
+  final String? defaultLandingPageID;
   final DateTime expiresAt;
   final DateTime createdAt;
 
@@ -20,20 +21,21 @@ class RecommendationItem extends Equatable {
       required this.promotionTemplate,
       required this.promoterName,
       required this.serviceProviderName,
+      required this.defaultLandingPageID,
       DateTime? expiresAt,
       DateTime? createdAt})
       : expiresAt = expiresAt ?? DateTime.now().add(const Duration(days: 14)),
         createdAt = createdAt ?? DateTime.now();
 
-  RecommendationItem copyWith({
-    String? id,
-    String? name,
-    String? reason,
-    String? landingPageID,
-    String? promotionTemplate,
-    String? promoterName,
-    String? serviceProviderName,
-  }) {
+  RecommendationItem copyWith(
+      {String? id,
+      String? name,
+      String? reason,
+      String? landingPageID,
+      String? promotionTemplate,
+      String? promoterName,
+      String? serviceProviderName,
+      String? defaultLandingPageID}) {
     return RecommendationItem(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -42,6 +44,7 @@ class RecommendationItem extends Equatable {
         promotionTemplate: promotionTemplate ?? this.promotionTemplate,
         promoterName: promoterName ?? this.promoterName,
         serviceProviderName: serviceProviderName ?? this.serviceProviderName,
+        defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
         expiresAt: expiresAt,
         createdAt: createdAt);
   }
@@ -54,6 +57,7 @@ class RecommendationItem extends Equatable {
         landingPageID,
         promotionTemplate,
         promoterName,
-        serviceProviderName
+        serviceProviderName,
+        defaultLandingPageID
       ];
 }

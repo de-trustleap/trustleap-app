@@ -85,6 +85,9 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
               landingPageID: selectedReason!.id!.value,
               promoterName: promoterTextController.text.trim(),
               serviceProviderName: serviceProviderTextController.text.trim(),
+              defaultLandingPageID: currentUser != null
+                  ? currentUser?.defaultLandingPageID
+                  : parentUser?.defaultLandingPageID,
               promotionTemplate: reasons.firstWhere((e) {
                 return e.reason == selectedReason?.reason;
               }).promotionTemplate!));

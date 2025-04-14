@@ -179,10 +179,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   void _startComeBackToPageListener(RecommendationItem recommendation) {
     _visibilitySubscription?.cancel();
     _visibilitySubscription = html.document.onVisibilityChange.listen((event) {
-      print("FIRED!");
-      print("ISALERTVISIBLE: $isAlertVisible");
       if (!html.document.hidden! && mounted && !isAlertVisible) {
-        print("SHOW ALERT");
         isAlertVisible = true;
         // App ist wieder sichtbar (zurück im Tab)
         showDialog(
@@ -199,13 +196,9 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       }
     });
   }
-  // TODO: CLOUD FUNCTION FÜR SAVERECOMMENDATION ERSTELLEN UND AUCH DEFAULTLANDINGPAGE ID IN RECOMMENDATION SPEICHERN
-  // TODO: MODELS TESTS
-  // TODO: REPO UND CUBIT TESTS
   // TODO: LOCALIZATIONS
 
   void _onRecommendationSentSuccessful(RecommendationItem recommendation) {
-    print("CALLED MODULAR!");
     Modular.get<RecommendationsAlertCubit>().saveRecommendation(recommendation);
   }
 
@@ -215,7 +208,6 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     return BlocListener<RecommendationsAlertCubit, RecommendationsAlertState>(
       bloc: recoCubit,
       listener: (context, state) {
-        print("THE STATE: $state");
         if (state is RecommendationSaveLoadingState) {
           if (isAlertVisible) {
             CustomNavigator.pop();
