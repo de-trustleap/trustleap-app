@@ -11,6 +11,7 @@ part 'recommendations_state.dart';
 class RecommendationsCubit extends Cubit<RecommendationsState> {
   final UserRepository userRepo;
   final LandingPageRepository landingPagesRepo;
+
   RecommendationsCubit(this.userRepo, this.landingPagesRepo)
       : super(RecommendationsInitial());
 
@@ -54,8 +55,11 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
               emit(RecommendationGetReasonsFailureState(failure: failure)),
           (landingPages) {
         final reasons = landingPages
-            .map((e) =>
-                RecommendationReason(id: e.id, reason: e.name, isActive: e.isActive, promotionTemplate: e.promotionTemplate))
+            .map((e) => RecommendationReason(
+                id: e.id,
+                reason: e.name,
+                isActive: e.isActive,
+                promotionTemplate: e.promotionTemplate))
             .toList();
         final reasonsWithoutNullValues = reasons.toList();
         emit(RecommendationGetReasonsSuccessState(

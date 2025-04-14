@@ -1,7 +1,8 @@
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/lead_item.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -10,11 +11,12 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackba
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/leads_validator.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_preview.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class RecommendationsForm extends StatefulWidget {
   const RecommendationsForm({super.key});
@@ -30,12 +32,12 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool showRecommendation = false;
-  String? selectedReason;
+  RecommendationReason? selectedReason;
   FocusNode? focusNode;
   CustomUser? currentUser;
   CustomUser? parentUser;
 
-  List<LeadItem> leads = [];
+  List<RecommendationItem> leads = [];
 
   bool showError = false;
   String errorMessage = "";
@@ -46,6 +48,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
 
   @override
   void initState() {
+    Modular.get<RecommendationsCubit>().getUser();
     focusNode = FocusNode();
     super.initState();
   }
@@ -66,21 +69,27 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
     });
   }
 
-  void addLead(LeadsValidator validator) {
+  void addLead(RecommendationValidator validator) {
     final localization = AppLocalizations.of(context);
     if (leads.length < 6) {
       if (formKey.currentState!.validate() &&
-          validator.validateReason(selectedReason) == null) {
+          validator.validateReason(selectedReason?.reason) == null &&
+          selectedReason?.id != null) {
         setState(() {
           validationHasError = false;
           reasonValid = null;
-          leads.add(LeadItem(
+          leads.add(RecommendationItem(
+              id: UniqueID().value,
               name: leadTextController.text.trim(),
-              reason: selectedReason!,
+              reason: selectedReason!.reason!,
+              landingPageID: selectedReason!.id!.value,
               promoterName: promoterTextController.text.trim(),
               serviceProviderName: serviceProviderTextController.text.trim(),
+              defaultLandingPageID: currentUser != null
+                  ? currentUser?.defaultLandingPageID
+                  : parentUser?.defaultLandingPageID,
               promotionTemplate: reasons.firstWhere((e) {
-                return e.reason == selectedReason;
+                return e.reason == selectedReason?.reason;
               }).promotionTemplate!));
           leadTextController.clear();
           generateRecommendation();
@@ -88,7 +97,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
       } else {
         setState(() {
           validationHasError = true;
-          reasonValid = validator.validateReason(selectedReason);
+          reasonValid = validator.validateReason(selectedReason?.reason);
         });
       }
     } else {
@@ -139,8 +148,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
               reason: "null",
               isActive: null,
               promotionTemplate: null),
-        ).reason;
-    return selectedReason as String;
+        );
+    return selectedReason?.reason as String;
   }
 
   void generateRecommendation() {
@@ -153,21 +162,23 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final validator = LeadsValidator(localization: localization);
+    final recoCubit = Modular.get<RecommendationsCubit>();
+    final validator = RecommendationValidator(localization: localization);
     const double textFieldSpacing = 20;
     const double tabFieldSpacing = 20;
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
       return BlocConsumer<RecommendationsCubit, RecommendationsState>(
+        bloc: recoCubit,
         listener: (context, state) {
           if (state is RecommendationGetCurrentUserSuccessState) {
             setUser(state.user);
-            BlocProvider.of<RecommendationsCubit>(context)
+            Modular.get<RecommendationsCubit>()
                 .getRecommendationReasons(state.user.landingPageIDs ?? []);
             if (state.user.role == Role.promoter &&
                 state.user.parentUserID != null) {
-              BlocProvider.of<RecommendationsCubit>(context)
+              Modular.get<RecommendationsCubit>()
                   .getParentUser(state.user.parentUserID!);
             }
           } else if (state is RecommendationGetParentUserSuccessState) {
@@ -264,15 +275,15 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              RecommendationReaseonPicker(
+                              RecommendationReasonPicker(
                                   width: maxWidth,
                                   validate: reasonValid,
                                   reasons: reasons,
                                   initialValue: getReasonValues(),
                                   onSelected: (reason) {
                                     setState(() {
-                                      reasonValid =
-                                          validator.validateReason(reason);
+                                      reasonValid = validator
+                                          .validateReason(reason?.reason);
                                       selectedReason = reason;
                                     });
                                     resetError();
@@ -281,7 +292,19 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                       ],
                       if (showRecommendation && leads.isNotEmpty) ...[
                         const SizedBox(height: tabFieldSpacing),
-                        RecommendationPreview(leads: leads),
+                        RecommendationPreview(
+                            leads: leads,
+                            onSaveSuccess: (recommendation) {
+                              setState(() {
+                                leads.removeWhere(
+                                    (lead) => lead.id == recommendation.id);
+                                if (leads.isEmpty) {
+                                  showRecommendation = false;
+                                }
+                              });
+                              CustomSnackBar.of(context).showCustomSnackBar(
+                                  "Die Empfehlung an ${recommendation.name} wurde erfolgreich versendet!");
+                            }),
                       ],
                     ]));
           } else if (state is RecommendationGetUserFailureState) {
@@ -290,10 +313,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                     title: localization.recommendations_error_view_title,
                     message: DatabaseFailureMapper.mapFailureMessage(
                         state.failure, localization),
-                    callback: () => {
-                          BlocProvider.of<RecommendationsCubit>(context)
-                              .getUser()
-                        }));
+                    callback: () =>
+                        {Modular.get<RecommendationsCubit>().getUser()}));
           } else {
             return CenteredConstrainedWrapper(
                 child: CircularProgressIndicator(

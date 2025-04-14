@@ -1,9 +1,9 @@
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 
-class LeadsValidator {
+class RecommendationValidator {
   final AppLocalizations localization;
 
-  LeadsValidator({required this.localization});
+  RecommendationValidator({required this.localization});
 
   String? validateLeadsName(String? input) {
     if (input == null || input.isEmpty) {

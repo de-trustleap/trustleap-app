@@ -4,14 +4,14 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class RecommendationReaseonPicker extends StatefulWidget {
+class RecommendationReasonPicker extends StatefulWidget {
   final double width;
   final String? validate;
   final List<RecommendationReason> reasons;
   final String initialValue;
-  final Function onSelected;
+  final Function(RecommendationReason?) onSelected;
 
-  const RecommendationReaseonPicker({
+  const RecommendationReasonPicker({
     super.key,
     required this.width,
     required this.validate,
@@ -21,12 +21,12 @@ class RecommendationReaseonPicker extends StatefulWidget {
   });
 
   @override
-  State<RecommendationReaseonPicker> createState() =>
+  State<RecommendationReasonPicker> createState() =>
       _RecommendationReaseonPickerState();
 }
 
 class _RecommendationReaseonPickerState
-    extends State<RecommendationReaseonPicker> {
+    extends State<RecommendationReasonPicker> {
   List<DropdownMenuEntry<String>> dropdownItems = [];
 
   @override
@@ -79,8 +79,10 @@ class _RecommendationReaseonPickerState
               enableSearch: false,
               requestFocusOnTap: false,
               dropdownMenuEntries: dropdownItems,
-              onSelected: (reason) {
-                widget.onSelected(reason);
+              onSelected: (selectedReason) {
+                final selectedRecommendationReason = widget.reasons
+                    .firstWhere((reason) => reason.reason == selectedReason);
+                widget.onSelected(selectedRecommendationReason);
               }),
         ),
       );

@@ -60,11 +60,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
                             .promoter_overview_inactive_landingpage_tooltip_warning_action,
                         showButton: permissions.hasEditPromoterPermission(),
                         onPressed: () {
-                          final params = "?id=${promoter.id.value}";
-                          CustomNavigator.pushNamed2(
-                            "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
-                            params,
-                          );
+                          CustomNavigator.navigate(
+                              "${RoutePaths.homePath}${RoutePaths.editPromoterPath}/${promoter.id.value}");
                         },
                       ),
                     ],
@@ -124,11 +121,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
                             if (newValue == "delete") {
                               deletePressed(promoter.id.value);
                             } else if (newValue == "edit") {
-                              final params = "?id=${promoter.id.value}";
-                              CustomNavigator.pushNamed2(
-                                "${RoutePaths.homePath}${RoutePaths.editPromoterPath}",
-                                params,
-                              );
+                              CustomNavigator.navigate(
+                                  "${RoutePaths.homePath}${RoutePaths.editPromoterPath}/${promoter.id.value}");
                             }
                           })
                     ]

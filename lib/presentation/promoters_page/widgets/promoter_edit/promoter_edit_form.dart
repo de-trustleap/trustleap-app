@@ -1,9 +1,11 @@
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -107,6 +109,9 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
   Widget build(BuildContext context) {
     final promoterCubit = Modular.get<PromoterCubit>();
     final landingPageCubit = Modular.get<LandingPageCubit>();
+    final permissions = (context.watchModular<PermissionCubit>().state
+            as PermissionSuccessState)
+        .permissions;
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
@@ -121,7 +126,8 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                 listener: (context, state) {
                   if (state is PromoterGetCurrentUserSuccessState) {
                     currentUser = state.user;
-                    Modular.get<PromoterCubit>().getPromoter(widget.promoterID);
+                    Modular.get<PromoterCubit>().getPromoter(
+                        widget.promoterID, currentUser, permissions);
                   } else if (state is PromoterGetLandingPagesSuccessState) {
                     setState(() {
                       landingPageItems.clear();
@@ -198,8 +204,10 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                             message: DatabaseFailureMapper.mapFailureMessage(
                                 promoterState.failure, localization),
                             callback: () => {
-                                  Modular.get<PromoterCubit>()
-                                      .getPromoter(widget.promoterID)
+                                  Modular.get<PromoterCubit>().getPromoter(
+                                      widget.promoterID,
+                                      currentUser,
+                                      permissions)
                                 });
                       } else if (promoterState is PromoterNoLandingPagesState) {
                         return const RegisterPromoterNoLandingPageView();

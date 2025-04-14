@@ -1413,4 +1413,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get edit_promoter_no_data_subtitle => 'No data was found for this promoter';
+
+  @override
+  String get send_recommendation_alert_title => 'Recommendation sent?';
+
+  @override
+  String get send_recommendation_alert_description => 'Did you successfully send the recommendation? The link in the recommendation will only become valid once you confirm it here.';
+
+  @override
+  String get send_recommendation_alert_yes_button => 'Yes';
+
+  @override
+  String get send_recommendation_alert_no_button => 'No';
+
+  @override
+  String get send_recommendation_missing_link_text => 'The [LINK] placeholder is missing!';
 }
