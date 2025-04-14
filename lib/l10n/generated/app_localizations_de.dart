@@ -1413,4 +1413,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get edit_promoter_no_data_subtitle => 'Zu diesem Promoter wurden keine Daten gefunden';
+
+  @override
+  String get send_recommendation_alert_title => 'Empfehlung verschickt?';
+
+  @override
+  String get send_recommendation_alert_description => 'Hast du die Empfehlung erfolgreich verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.';
+
+  @override
+  String get send_recommendation_alert_yes_button => 'Ja';
+
+  @override
+  String get send_recommendation_alert_no_button => 'Nein';
+
+  @override
+  String get send_recommendation_missing_link_text => 'Der [LINK] Platzhalter darf nicht fehlen!';
 }

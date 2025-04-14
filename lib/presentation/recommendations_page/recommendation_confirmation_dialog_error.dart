@@ -20,13 +20,12 @@ class RecommendationConfirmationDialogError extends StatelessWidget {
     final localization = AppLocalizations.of(context);
 
     return CustomAlertDialog(
-        title: "Empfehlung verschickt?",
+        title: localization.send_recommendation_alert_title,
         messageWidget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            SelectableText(
-                "Hast du die Empfehlung erfolgreich verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
+            SelectableText(localization.send_recommendation_alert_description,
                 style: themeData.textTheme.bodyMedium),
             const SizedBox(height: 16),
             SelectableText(
@@ -36,8 +35,8 @@ class RecommendationConfirmationDialogError extends StatelessWidget {
           ],
         ),
         message: "",
-        actionButtonTitle: "Ja",
-        cancelButtonTitle: "Nein",
+        actionButtonTitle: localization.send_recommendation_alert_yes_button,
+        cancelButtonTitle: localization.send_recommendation_alert_no_button,
         actionButtonAction: action,
         cancelButtonAction: cancelAction);
   }

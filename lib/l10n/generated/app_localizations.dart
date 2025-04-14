@@ -2890,6 +2890,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No data was found for this promoter'**
   String get edit_promoter_no_data_subtitle;
+
+  /// Title of the alert to confirm whether you have sent a recommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation sent?'**
+  String get send_recommendation_alert_title;
+
+  /// Description of the alert to confirm whether you have sent a recommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'Did you successfully send the recommendation? The link in the recommendation will only become valid once you confirm it here.'**
+  String get send_recommendation_alert_description;
+
+  /// Confirmation button of the alert to confirm whether you have sent a recommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get send_recommendation_alert_yes_button;
+
+  /// Cancel button of the alert to confirm whether you have sent a recommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get send_recommendation_alert_no_button;
+
+  /// Missing link warning when creating a recommendation.
+  ///
+  /// In en, this message translates to:
+  /// **'The [LINK] placeholder is missing!'**
+  String get send_recommendation_missing_link_text;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

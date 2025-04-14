@@ -37,7 +37,7 @@ class RecommendationTextField extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         if (showError) ...[
-          Text("Der [LINK] Platzhalter darf nicht fehlen!",
+          Text(localization.send_recommendation_missing_link_text,
               style: themeData.textTheme.bodySmall!
                   .copyWith(color: themeData.colorScheme.error))
         ],

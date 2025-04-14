@@ -1895,5 +1895,25 @@
     "edit_promoter_no_data_subtitle": "Zu diesem Promoter wurden keine Daten gefunden",
     "@edit_promoter_no_data_subtitle": {
         "description": "Text der View die erscheint wenn keine id für das editieren des Promoters gegeben ist."
+    },
+    "send_recommendation_alert_title": "Empfehlung verschickt?",
+    "@send_recommendation_alert_title": {
+        "description": "Titel des Alerts zum Bestätigen, ob man eine Empfehlung verschickt hat."
+    },
+    "send_recommendation_alert_description": "Hast du die Empfehlung erfolgreich verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
+    "@send_recommendation_alert_description": {
+        "description": "Beschreibung im Alert zum Bestätigen, ob man eine Empfehlung verschickt hat."
+    },
+    "send_recommendation_alert_yes_button": "Ja",
+    "@send_recommendation_alert_yes_button": {
+        "description": "Bestätigungsbutton im Alert zum Bestätigen, ob man eine Empfehlung verschickt hat."
+    },
+    "send_recommendation_alert_no_button": "Nein",
+    "@send_recommendation_alert_no_button": {
+        "description": "Abbrechen Button im Alert zum Bestätigen, ob man eine Empfehlung verschickt hat."
+    },
+    "send_recommendation_missing_link_text": "Der [LINK] Platzhalter darf nicht fehlen!",
+    "@send_recommendation_missing_link_text": {
+        "description": "Fehlender Link Warnung beim Erstellen einer Empfehlung."
     }
 }

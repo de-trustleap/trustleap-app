@@ -1895,5 +1895,25 @@
     "edit_promoter_no_data_subtitle": "No data was found for this promoter",
     "@edit_promoter_no_data_subtitle": {
         "description": "Text of the view that appears when no id is given for editing the promoter."
+    },
+    "send_recommendation_alert_title": "Recommendation sent?",
+    "@send_recommendation_alert_title": {
+        "description": "Title of the alert to confirm whether you have sent a recommendation."
+    },
+    "send_recommendation_alert_description": "Did you successfully send the recommendation? The link in the recommendation will only become valid once you confirm it here.",
+    "@send_recommendation_alert_description": {
+        "description": "Description of the alert to confirm whether you have sent a recommendation."
+    },
+    "send_recommendation_alert_yes_button": "Yes",
+    "@send_recommendation_alert_yes_button": {
+        "description": "Confirmation button of the alert to confirm whether you have sent a recommendation."
+    },
+    "send_recommendation_alert_no_button": "No",
+    "@send_recommendation_alert_no_button": {
+        "description": "Cancel button of the alert to confirm whether you have sent a recommendation."
+    },
+    "send_recommendation_missing_link_text": "The [LINK] placeholder is missing!",
+    "@send_recommendation_missing_link_text": {
+        "description": "Missing link warning when creating a recommendation."
     }
 }
