@@ -11,10 +11,11 @@ class RecommendationsAlertCubit extends Cubit<RecommendationsAlertState> {
   RecommendationsAlertCubit(this.recommendationRepo)
       : super(RecommendationsAlertInitial());
 
-  void saveRecommendation(RecommendationItem recommendation) async {
+  void saveRecommendation(
+      RecommendationItem recommendation, String userID) async {
     emit(RecommendationSaveLoadingState(recommendation: recommendation));
     final failureOrSuccess =
-        await recommendationRepo.saveRecommendation(recommendation);
+        await recommendationRepo.saveRecommendation(recommendation, userID);
     failureOrSuccess.fold(
         (failure) => emit(RecommendationSaveFailureState(
             failure: failure, recommendation: recommendation)),

@@ -294,6 +294,9 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                         const SizedBox(height: tabFieldSpacing),
                         RecommendationPreview(
                             leads: leads,
+                            userID: currentUser != null
+                                ? currentUser?.id.value ?? ""
+                                : parentUser?.id.value ?? "",
                             onSaveSuccess: (recommendation) {
                               setState(() {
                                 leads.removeWhere(

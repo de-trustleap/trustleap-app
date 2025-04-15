@@ -14,14 +14,33 @@ class RecommendationRepositoryImplementation
 
   @override
   Future<Either<DatabaseFailure, Unit>> saveRecommendation(
-      RecommendationItem recommendation) async {
+      RecommendationItem recommendation, String userID) async {
     final recoCollection = firestore.collection("recommendations");
+    final userCollection = firestore.collection("users");
     final map = RecommendationItemModel.fromDomain(recommendation).toMap();
     try {
-      recoCollection.doc(recommendation.id).set(map);
-      return right(unit);
+      await recoCollection.doc(recommendation.id).set(map);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+    try {
+      final userDoc = await userCollection.doc(userID).get();
+      final userData = userDoc.data();
+      List<String> recommendationIDs = [];
+
+      if (userData != null && userData.containsKey('recommendationIDs')) {
+        final rawList = userData['recommendationIDs'];
+        if (rawList is List) {
+          recommendationIDs = List<String>.from(rawList);
+        }
+      }
+      recommendationIDs.add(recommendation.id);
+      await userCollection.doc(userID).set(
+          {"recommendationIDs": recommendationIDs}, SetOptions(merge: true));
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(
+          code: e.code)); // TODO: TESTEN!
     }
   }
 }

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
 class CollapsibleTile extends StatefulWidget {
-  final String title;
+  final String? title;
   final List<Widget> children;
   final Duration animationDuration;
   final Curve animationCurve;
+  final Widget? titleWidget;
+  final Color? backgroundColor;
 
-  const CollapsibleTile({
-    super.key,
-    required this.title,
-    required this.children,
-    this.animationDuration = const Duration(milliseconds: 300),
-    this.animationCurve = Curves.easeInOut,
-  });
+  const CollapsibleTile(
+      {super.key,
+      this.title,
+      required this.children,
+      this.animationDuration = const Duration(milliseconds: 300),
+      this.animationCurve = Curves.easeInOut,
+      this.titleWidget,
+      this.backgroundColor});
 
   @override
   State<CollapsibleTile> createState() => _CustomExpansionTileState();
@@ -77,7 +80,8 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
 
     return Container(
       decoration: BoxDecoration(
-        color: themeData.colorScheme.onPrimaryContainer,
+        color:
+            widget.backgroundColor ?? themeData.colorScheme.onPrimaryContainer,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
       ),
@@ -85,10 +89,11 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            title: Text(
-              widget.title,
-              style: themeData.textTheme.bodyMedium,
-            ),
+            title: widget.titleWidget ??
+                Text(
+                  widget.title ?? "",
+                  style: themeData.textTheme.bodyMedium,
+                ),
             trailing: RotationTransition(
               turns: _iconRotation,
               child: Icon(

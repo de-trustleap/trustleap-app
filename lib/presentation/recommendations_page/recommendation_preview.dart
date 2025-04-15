@@ -19,11 +19,15 @@ import 'package:universal_html/html.dart' as html;
 import 'package:url_launcher/url_launcher.dart';
 
 class RecommendationPreview extends StatefulWidget {
-  final List<RecommendationItem> leads; // Liste der Leads (Namen und Gründe)
+  final String userID;
+  final List<RecommendationItem> leads;
   final Function(RecommendationItem) onSaveSuccess;
 
   const RecommendationPreview(
-      {super.key, required this.leads, required this.onSaveSuccess});
+      {super.key,
+      required this.userID,
+      required this.leads,
+      required this.onSaveSuccess});
 
   @override
   State<RecommendationPreview> createState() => _RecommendationPreviewState();
@@ -198,7 +202,8 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   }
 
   void _onRecommendationSentSuccessful(RecommendationItem recommendation) {
-    Modular.get<RecommendationsAlertCubit>().saveRecommendation(recommendation);
+    Modular.get<RecommendationsAlertCubit>()
+        .saveRecommendation(recommendation, widget.userID);
   }
 
   @override

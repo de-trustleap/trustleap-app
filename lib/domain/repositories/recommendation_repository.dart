@@ -4,5 +4,5 @@ import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 
 abstract class RecommendationRepository {
   Future<Either<DatabaseFailure, Unit>> saveRecommendation(
-      RecommendationItem recommendation);
+      RecommendationItem recommendation, String userID);
 }
