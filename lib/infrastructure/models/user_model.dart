@@ -24,6 +24,7 @@ class UserModel extends Equatable {
   final List<String>? unregisteredPromoterIDs;
   final List<String>? registeredPromoterIDs;
   final List<String>? landingPageIDs;
+  final List<String>? recommendationIDs;
   final DateTime? deletesAt;
   final DateTime? lastUpdated;
   final dynamic createdAt;
@@ -47,6 +48,7 @@ class UserModel extends Equatable {
       this.unregisteredPromoterIDs,
       this.registeredPromoterIDs,
       this.landingPageIDs,
+      this.recommendationIDs,
       this.deletesAt,
       this.lastUpdated,
       this.createdAt});
@@ -71,6 +73,7 @@ class UserModel extends Equatable {
       'unregisteredPromoterIDs': unregisteredPromoterIDs,
       'registeredPromoterIDs': registeredPromoterIDs,
       'landingPageIDs': landingPageIDs,
+      'recommendationIDs': recommendationIDs,
       'deletesAt': deletesAt,
       'lastUpdated': lastUpdated,
       'createdAt': createdAt,
@@ -112,6 +115,9 @@ class UserModel extends Equatable {
       landingPageIDs: map['landingPageIDs'] != null
           ? List<String>.from(map['landingPageIDs'])
           : null,
+      recommendationIDs: map['recommendationIDs'] != null
+          ? List<String>.from(map['recommendationIDs'])
+          : null,
       deletesAt: map['deletesAt'] != null
           ? (map['deletesAt'] as Timestamp).toDate()
           : null,
@@ -141,6 +147,7 @@ class UserModel extends Equatable {
     List<String>? unregisteredPromoterIDs,
     List<String>? registeredPromoterIDs,
     List<String>? landingPageIDs,
+    List<String>? recommendationIDs,
     DateTime? deletesAt,
     DateTime? lastUpdated,
     dynamic createdAt,
@@ -168,6 +175,7 @@ class UserModel extends Equatable {
       registeredPromoterIDs:
           registeredPromoterIDs ?? this.registeredPromoterIDs,
       landingPageIDs: landingPageIDs ?? this.landingPageIDs,
+      recommendationIDs: recommendationIDs ?? this.recommendationIDs,
       deletesAt: deletesAt ?? this.deletesAt,
       lastUpdated: lastUpdated ?? this.lastUpdated,
       createdAt: createdAt ?? this.createdAt,
@@ -200,6 +208,7 @@ class UserModel extends Equatable {
         unregisteredPromoterIDs: unregisteredPromoterIDs,
         registeredPromoterIDs: registeredPromoterIDs,
         landingPageIDs: landingPageIDs,
+        recommendationIDs: recommendationIDs,
         deletesAt: deletesAt,
         lastUpdated: lastUpdated,
         createdAt: (createdAt as Timestamp).toDate());
@@ -225,6 +234,7 @@ class UserModel extends Equatable {
         unregisteredPromoterIDs: user.unregisteredPromoterIDs,
         registeredPromoterIDs: user.registeredPromoterIDs,
         landingPageIDs: user.landingPageIDs,
+        recommendationIDs: user.recommendationIDs,
         deletesAt: user.deletesAt,
         lastUpdated: user.lastUpdated,
         createdAt: FieldValue.serverTimestamp());
@@ -248,6 +258,7 @@ class UserModel extends Equatable {
         defaultLandingPageID,
         unregisteredPromoterIDs,
         registeredPromoterIDs,
-        landingPageIDs
+        landingPageIDs,
+        recommendationIDs
       ];
 }

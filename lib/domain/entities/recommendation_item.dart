@@ -12,6 +12,7 @@ class RecommendationItem extends Equatable {
   final String? defaultLandingPageID;
   final DateTime expiresAt;
   final DateTime createdAt;
+  final DateTime? lastUpdated;
 
   RecommendationItem(
       {required this.id,
@@ -22,6 +23,7 @@ class RecommendationItem extends Equatable {
       required this.promoterName,
       required this.serviceProviderName,
       required this.defaultLandingPageID,
+      this.lastUpdated,
       DateTime? expiresAt,
       DateTime? createdAt})
       : expiresAt = expiresAt ?? DateTime.now().add(const Duration(days: 14)),
@@ -35,7 +37,8 @@ class RecommendationItem extends Equatable {
       String? promotionTemplate,
       String? promoterName,
       String? serviceProviderName,
-      String? defaultLandingPageID}) {
+      String? defaultLandingPageID,
+      DateTime? lastUpdated}) {
     return RecommendationItem(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -45,6 +48,7 @@ class RecommendationItem extends Equatable {
         promoterName: promoterName ?? this.promoterName,
         serviceProviderName: serviceProviderName ?? this.serviceProviderName,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
+        lastUpdated: lastUpdated ?? this.lastUpdated,
         expiresAt: expiresAt,
         createdAt: createdAt);
   }

@@ -8,60 +8,28 @@ class RecommendationManagerListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     return CollapsibleTile(
-      backgroundColor: themeData.colorScheme.surface,
-      titleWidget: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text.rich(
-                TextSpan(
-                  text: "Empfehlung von ",
-                  style: themeData.textTheme.bodyMedium,
-                  children: [
-                    TextSpan(
-                      text: "Hans Test",
-                      style: themeData.textTheme.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-              const Spacer(),
-              Text.rich(
-                TextSpan(
-                  text: "Letztes Update: ",
-                  style: themeData.textTheme.bodyMedium,
-                  children: [
-                    TextSpan(
-                      text: "23.03.2025",
-                      style: themeData.textTheme.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 8)
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text.rich(
-            TextSpan(
-              text: "Status: ",
-              style: themeData.textTheme.bodyMedium,
-              children: [
-                TextSpan(
-                  text: "Link geklickt",
-                  style: themeData.textTheme.bodyMedium!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ],
+        backgroundColor: themeData.colorScheme.surface,
+        showDivider: false,
+        titleWidget: Row(children: [
+          Flexible(flex: 3, child: _buildCell("Hans Test", themeData)),
+          Flexible(flex: 3, child: _buildCell("Link geklickt", themeData)),
+          Flexible(flex: 2, child: _buildCell("23.03.2025", themeData)),
+          const SizedBox(width: 8)
+        ]),
+        children: [const Text("TEST")]);
+  }
+
+  Widget _buildCell(String text, ThemeData themeData) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        text,
+        textAlign: TextAlign.left,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: themeData.textTheme.bodyMedium,
       ),
-      children: [const Text("Test")],
     );
   }
 }

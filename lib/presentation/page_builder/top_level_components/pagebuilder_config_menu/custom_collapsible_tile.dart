@@ -7,6 +7,7 @@ class CollapsibleTile extends StatefulWidget {
   final Curve animationCurve;
   final Widget? titleWidget;
   final Color? backgroundColor;
+  final bool showDivider;
 
   const CollapsibleTile(
       {super.key,
@@ -15,7 +16,8 @@ class CollapsibleTile extends StatefulWidget {
       this.animationDuration = const Duration(milliseconds: 300),
       this.animationCurve = Curves.easeInOut,
       this.titleWidget,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.showDivider = true});
 
   @override
   State<CollapsibleTile> createState() => _CustomExpansionTileState();
@@ -121,11 +123,13 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Container(
-                            height: 0.8,
-                            color: themeData.textTheme.bodyMedium?.color
-                                ?.withValues(alpha: 0.5),
-                          ),
+                          if (widget.showDivider) ...[
+                            Container(
+                              height: 0.8,
+                              color: themeData.textTheme.bodyMedium?.color
+                                  ?.withValues(alpha: 0.5),
+                            )
+                          ],
                           const SizedBox(height: 16),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),

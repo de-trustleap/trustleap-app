@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_list_tile.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_list.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationManagerOverview extends StatelessWidget {
@@ -16,7 +16,7 @@ class RecommendationManagerOverview extends StatelessWidget {
                 style: themeData.textTheme.headlineLarge!
                     .copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
-            const RecommendationManagerListTile()
+            const RecommendationManagerList()
           ],
         ));
   }

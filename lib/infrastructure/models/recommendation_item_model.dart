@@ -12,6 +12,7 @@ class RecommendationItemModel extends Equatable {
   final String? defaultLandingPageID;
   final DateTime createdAt;
   final DateTime expiresAt;
+  final DateTime? lastUpdated;
 
   const RecommendationItemModel(
       {required this.id,
@@ -21,7 +22,8 @@ class RecommendationItemModel extends Equatable {
       required this.serviceProviderName,
       required this.defaultLandingPageID,
       required this.expiresAt,
-      required this.createdAt});
+      required this.createdAt,
+      required this.lastUpdated});
 
   RecommendationItemModel copyWith(
       {String? id,
@@ -31,7 +33,8 @@ class RecommendationItemModel extends Equatable {
       String? serviceProviderName,
       String? defaultLandingPageID,
       DateTime? expiresAt,
-      DateTime? createdAt}) {
+      DateTime? createdAt,
+      DateTime? lastUpdated}) {
     return RecommendationItemModel(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -40,7 +43,8 @@ class RecommendationItemModel extends Equatable {
         serviceProviderName: serviceProviderName ?? this.serviceProviderName,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
         expiresAt: expiresAt ?? this.expiresAt,
-        createdAt: createdAt ?? this.createdAt);
+        createdAt: createdAt ?? this.createdAt,
+        lastUpdated: lastUpdated ?? this.lastUpdated);
   }
 
   Map<String, dynamic> toMap() {
@@ -52,7 +56,9 @@ class RecommendationItemModel extends Equatable {
       'serviceProviderName': serviceProviderName,
       'defaultLandingPageID': defaultLandingPageID,
       'expiresAt': Timestamp.fromDate(expiresAt),
-      'createdAt': Timestamp.fromDate(createdAt)
+      'createdAt': Timestamp.fromDate(createdAt),
+      'lastUpdated':
+          lastUpdated != null ? Timestamp.fromDate(lastUpdated!) : null
     };
   }
 
@@ -72,7 +78,10 @@ class RecommendationItemModel extends Equatable {
             ? map['defaultLandingPageID'] as String
             : null,
         expiresAt: (map['expiresAt'] as Timestamp).toDate(),
-        createdAt: (map['createdAt'] as Timestamp).toDate());
+        createdAt: (map['createdAt'] as Timestamp).toDate(),
+        lastUpdated: map['lastUpdated'] != null
+            ? (map['lastUpdated'] as Timestamp).toDate()
+            : null);
   }
 
   factory RecommendationItemModel.fromFirestore(
@@ -90,7 +99,9 @@ class RecommendationItemModel extends Equatable {
         promoterName: promoterName,
         serviceProviderName: serviceProviderName,
         defaultLandingPageID: defaultLandingPageID,
-        expiresAt: expiresAt);
+        expiresAt: expiresAt,
+        createdAt: createdAt,
+        lastUpdated: lastUpdated);
   }
 
   factory RecommendationItemModel.fromDomain(
@@ -103,7 +114,8 @@ class RecommendationItemModel extends Equatable {
         serviceProviderName: recommendation.serviceProviderName,
         defaultLandingPageID: recommendation.defaultLandingPageID,
         expiresAt: recommendation.expiresAt,
-        createdAt: recommendation.createdAt);
+        createdAt: recommendation.createdAt,
+        lastUpdated: recommendation.lastUpdated);
   }
 
   @override
