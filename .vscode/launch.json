@@ -13,6 +13,7 @@
             "name": "finanzbegleiter (profile mode)",
             "request": "launch",
             "type": "dart",
+            "deviceId": "chrome",
             "flutterMode": "profile"
         },
         {

@@ -10,7 +10,7 @@ final class RecommendationManagerInitial extends RecommendationManagerState
   List<Object?> get props => [];
 }
 
-class RecommendationGetRecosLoadingState extends RecommendationManagerState
+class RecommendationManagerLoadingState extends RecommendationManagerState
     with EquatableMixin {
   @override
   List<Object?> get props => [];
@@ -40,4 +40,24 @@ class RecommendationGetRecosNoRecosState extends RecommendationManagerState
     with EquatableMixin {
   @override
   List<Object?> get props => [];
+}
+
+class RecommendationManagerGetUserSuccessState
+    extends RecommendationManagerState with EquatableMixin {
+  final CustomUser user;
+
+  RecommendationManagerGetUserSuccessState({required this.user});
+
+  @override
+  List<Object?> get props => [user];
+}
+
+class RecommendationManagerGetUserFailureState
+    extends RecommendationManagerState with EquatableMixin {
+  final DatabaseFailure failure;
+
+  RecommendationManagerGetUserFailureState({required this.failure});
+
+  @override
+  List<Object?> get props => [failure];
 }

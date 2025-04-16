@@ -94,6 +94,7 @@ class CompanyRepositoryImplementation implements CompanyRepository {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("registerCompany");
     final companyModel = CompanyModel.fromDomain(company);
+
     try {
       await callable.call({
         "appCheckToken": appCheckToken,

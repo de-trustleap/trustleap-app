@@ -2,13 +2,16 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 
 part 'recommendation_manager_state.dart';
 
 class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
   final RecommendationRepository recommendationRepo;
-  RecommendationManagerCubit(this.recommendationRepo)
+  final UserRepository userRepo;
+  RecommendationManagerCubit(this.recommendationRepo, this.userRepo)
       : super(RecommendationManagerInitial());
 
   void getRecommendations(String? userID) async {
@@ -16,7 +19,7 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
       emit(RecommendationGetRecosFailureState(failure: NotFoundFailure()));
       return;
     }
-    emit(RecommendationGetRecosLoadingState());
+    emit(RecommendationManagerLoadingState());
     final failureOrSuccess =
         await recommendationRepo.getRecommendations(userID);
     failureOrSuccess.fold((failure) {
@@ -28,5 +31,19 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
     },
         (recommendations) => emit(
             RecommendationGetRecosSuccessState(recoItems: recommendations)));
+  }
+
+  void getUser() async {
+    emit(RecommendationManagerLoadingState());
+    final failureOrSuccess = await userRepo.getUser();
+    failureOrSuccess.fold((failure) {
+      if (!isClosed) {
+        emit(RecommendationManagerGetUserFailureState(failure: failure));
+      }
+    }, (user) {
+      if (!isClosed) {
+        emit(RecommendationManagerGetUserSuccessState(user: user));
+      }
+    });
   }
 }
