@@ -10,6 +10,8 @@ class RecommendationItem extends Equatable {
   final String? promoterName;
   final String? serviceProviderName;
   final String? defaultLandingPageID;
+  final int? statusLevel;
+  final Map<int, DateTime?>? statusTimestamps;
   final DateTime expiresAt;
   final DateTime createdAt;
   final DateTime? lastUpdated;
@@ -23,6 +25,8 @@ class RecommendationItem extends Equatable {
       required this.promoterName,
       required this.serviceProviderName,
       required this.defaultLandingPageID,
+      required this.statusLevel,
+      required this.statusTimestamps,
       this.lastUpdated,
       DateTime? expiresAt,
       DateTime? createdAt})
@@ -38,6 +42,8 @@ class RecommendationItem extends Equatable {
       String? promoterName,
       String? serviceProviderName,
       String? defaultLandingPageID,
+      int? statusLevel,
+      Map<int, DateTime?>? statusTimestamps,
       DateTime? lastUpdated}) {
     return RecommendationItem(
         id: id ?? this.id,
@@ -48,6 +54,8 @@ class RecommendationItem extends Equatable {
         promoterName: promoterName ?? this.promoterName,
         serviceProviderName: serviceProviderName ?? this.serviceProviderName,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
+        statusLevel: statusLevel ?? this.statusLevel,
+        statusTimestamps: statusTimestamps ?? this.statusTimestamps,
         lastUpdated: lastUpdated ?? this.lastUpdated,
         expiresAt: expiresAt,
         createdAt: createdAt);
@@ -62,6 +70,7 @@ class RecommendationItem extends Equatable {
         promotionTemplate,
         promoterName,
         serviceProviderName,
-        defaultLandingPageID
+        defaultLandingPageID,
+        statusLevel
       ];
 }

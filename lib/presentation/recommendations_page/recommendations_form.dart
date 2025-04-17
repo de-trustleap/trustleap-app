@@ -88,6 +88,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
               defaultLandingPageID: currentUser != null
                   ? currentUser?.defaultLandingPageID
                   : parentUser?.defaultLandingPageID,
+              statusLevel: 0,
+              statusTimestamps: {0: DateTime.now()},
               promotionTemplate: reasons.firstWhere((e) {
                 return e.reason == selectedReason?.reason;
               }).promotionTemplate!));

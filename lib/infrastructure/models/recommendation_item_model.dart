@@ -10,6 +10,8 @@ class RecommendationItemModel extends Equatable {
   final String? promoterName;
   final String? serviceProviderName;
   final String? defaultLandingPageID;
+  final int? statusLevel;
+  final Map<int, DateTime?>? statusTimestamps;
   final DateTime createdAt;
   final DateTime expiresAt;
   final DateTime? lastUpdated;
@@ -21,6 +23,8 @@ class RecommendationItemModel extends Equatable {
       required this.promoterName,
       required this.serviceProviderName,
       required this.defaultLandingPageID,
+      required this.statusLevel,
+      required this.statusTimestamps,
       required this.expiresAt,
       required this.createdAt,
       required this.lastUpdated});
@@ -32,6 +36,8 @@ class RecommendationItemModel extends Equatable {
       String? promoterName,
       String? serviceProviderName,
       String? defaultLandingPageID,
+      int? statusLevel,
+      Map<int, DateTime?>? statusTimestamps,
       DateTime? expiresAt,
       DateTime? createdAt,
       DateTime? lastUpdated}) {
@@ -42,6 +48,8 @@ class RecommendationItemModel extends Equatable {
         promoterName: promoterName ?? this.promoterName,
         serviceProviderName: serviceProviderName ?? this.serviceProviderName,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
+        statusLevel: statusLevel ?? this.statusLevel,
+        statusTimestamps: statusTimestamps ?? this.statusTimestamps,
         expiresAt: expiresAt ?? this.expiresAt,
         createdAt: createdAt ?? this.createdAt,
         lastUpdated: lastUpdated ?? this.lastUpdated);
@@ -55,6 +63,9 @@ class RecommendationItemModel extends Equatable {
       'promoterName': promoterName,
       'serviceProviderName': serviceProviderName,
       'defaultLandingPageID': defaultLandingPageID,
+      'statusLevel': statusLevel,
+      'statusTimestamps': statusTimestamps?.map(
+          (key, value) => MapEntry(key.toString(), value?.toIso8601String())),
       'expiresAt': Timestamp.fromDate(expiresAt),
       'createdAt': Timestamp.fromDate(createdAt),
       'lastUpdated':
@@ -76,6 +87,12 @@ class RecommendationItemModel extends Equatable {
             : null,
         defaultLandingPageID: map['defaultLandingPageID'] != null
             ? map['defaultLandingPageID'] as String
+            : null,
+        statusLevel:
+            map['statusLevel'] != null ? map['statusLevel'] as int : null,
+        statusTimestamps: map['statusTimestamps'] != null
+            ? (map['statusTimestamps'] as Map<String, dynamic>).map(
+                (key, value) => MapEntry(int.parse(key), DateTime.parse(value)))
             : null,
         expiresAt: (map['expiresAt'] as Timestamp).toDate(),
         createdAt: (map['createdAt'] as Timestamp).toDate(),
@@ -99,6 +116,8 @@ class RecommendationItemModel extends Equatable {
         promoterName: promoterName,
         serviceProviderName: serviceProviderName,
         defaultLandingPageID: defaultLandingPageID,
+        statusLevel: statusLevel,
+        statusTimestamps: statusTimestamps,
         expiresAt: expiresAt,
         createdAt: createdAt,
         lastUpdated: lastUpdated);
@@ -113,6 +132,8 @@ class RecommendationItemModel extends Equatable {
         promoterName: recommendation.promoterName,
         serviceProviderName: recommendation.serviceProviderName,
         defaultLandingPageID: recommendation.defaultLandingPageID,
+        statusLevel: recommendation.statusLevel,
+        statusTimestamps: recommendation.statusTimestamps,
         expiresAt: recommendation.expiresAt,
         createdAt: recommendation.createdAt,
         lastUpdated: recommendation.lastUpdated);
