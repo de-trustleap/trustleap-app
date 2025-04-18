@@ -230,6 +230,5 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
   }
 }
 
-// TODO: Empfehlungsname
-// TODO: Grund
-// TODO: Suche
+// TODO: Seite erstellen für keine Suchergebnisse
+// TODO: Filter implementieren (Sortieren nach Empfehlungsname, Promotername, Grund) (Status auswählbar via anderes Dropdown)

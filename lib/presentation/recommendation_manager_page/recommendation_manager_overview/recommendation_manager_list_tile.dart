@@ -41,7 +41,25 @@ class RecommendationManagerListTile extends StatelessWidget {
           const SizedBox(width: 8)
         ]),
         children: [
-          const Text("TEST"),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text("Empfehlungsempfänger",
+                  style: themeData.textTheme.bodyMedium),
+              const SizedBox(height: 4),
+              Text(recommendation.name ?? "",
+                  style: themeData.textTheme.bodyMedium!
+                      .copyWith(fontWeight: FontWeight.bold))
+            ]),
+            const Spacer(),
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text("Empfehlungsgrund", style: themeData.textTheme.bodyMedium),
+              const SizedBox(height: 4),
+              Text(recommendation.reason ?? "",
+                  style: themeData.textTheme.bodyMedium!
+                      .copyWith(fontWeight: FontWeight.bold))
+            ])
+          ]),
+          const SizedBox(height: 16),
           RecommendationManagerStatusProgressIndicator(
               level: recommendation.statusLevel ?? 0,
               statusTimestamps: recommendation.statusTimestamps ?? {})

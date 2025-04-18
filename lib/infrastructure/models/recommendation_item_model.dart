@@ -9,6 +9,7 @@ class RecommendationItemModel extends Equatable {
   final String? landingPageID;
   final String? promoterName;
   final String? serviceProviderName;
+  final String? reason;
   final String? defaultLandingPageID;
   final int? statusLevel;
   final Map<int, DateTime?>? statusTimestamps;
@@ -22,6 +23,7 @@ class RecommendationItemModel extends Equatable {
       required this.landingPageID,
       required this.promoterName,
       required this.serviceProviderName,
+      required this.reason,
       required this.defaultLandingPageID,
       required this.statusLevel,
       required this.statusTimestamps,
@@ -35,6 +37,7 @@ class RecommendationItemModel extends Equatable {
       String? landingPageID,
       String? promoterName,
       String? serviceProviderName,
+      String? reason,
       String? defaultLandingPageID,
       int? statusLevel,
       Map<int, DateTime?>? statusTimestamps,
@@ -47,6 +50,7 @@ class RecommendationItemModel extends Equatable {
         landingPageID: landingPageID ?? this.landingPageID,
         promoterName: promoterName ?? this.promoterName,
         serviceProviderName: serviceProviderName ?? this.serviceProviderName,
+        reason: reason ?? this.reason,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
         statusLevel: statusLevel ?? this.statusLevel,
         statusTimestamps: statusTimestamps ?? this.statusTimestamps,
@@ -62,6 +66,7 @@ class RecommendationItemModel extends Equatable {
       'landingPageID': landingPageID,
       'promoterName': promoterName,
       'serviceProviderName': serviceProviderName,
+      'reason': reason,
       'defaultLandingPageID': defaultLandingPageID,
       'statusLevel': statusLevel,
       'statusTimestamps': statusTimestamps?.map(
@@ -85,6 +90,7 @@ class RecommendationItemModel extends Equatable {
         serviceProviderName: map['serviceProviderName'] != null
             ? map['serviceProviderName'] as String
             : null,
+        reason: map['reason'] != null ? map['reason'] as String : null,
         defaultLandingPageID: map['defaultLandingPageID'] != null
             ? map['defaultLandingPageID'] as String
             : null,
@@ -110,7 +116,7 @@ class RecommendationItemModel extends Equatable {
     return RecommendationItem(
         id: id,
         name: name,
-        reason: null,
+        reason: reason,
         promotionTemplate: null,
         landingPageID: landingPageID,
         promoterName: promoterName,
@@ -131,6 +137,7 @@ class RecommendationItemModel extends Equatable {
         landingPageID: recommendation.landingPageID,
         promoterName: recommendation.promoterName,
         serviceProviderName: recommendation.serviceProviderName,
+        reason: recommendation.reason,
         defaultLandingPageID: recommendation.defaultLandingPageID,
         statusLevel: recommendation.statusLevel,
         statusTimestamps: recommendation.statusTimestamps,
@@ -146,6 +153,7 @@ class RecommendationItemModel extends Equatable {
         landingPageID,
         promoterName,
         serviceProviderName,
+        reason,
         expiresAt,
         defaultLandingPageID
       ];

@@ -29,10 +29,16 @@ class RecommendationManagerList extends StatelessWidget {
         ]),
       ),
       const Divider(height: 1),
-      ...recommendations.map((recommendation) => RecommendationManagerListTile(
-            recommendation: recommendation,
-            isPromoter: isPromoter,
-          ))
+      ListView.builder(
+          itemCount: recommendations.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return RecommendationManagerListTile(
+              recommendation: recommendations[index],
+              isPromoter: isPromoter,
+            );
+          })
     ]);
   }
 
@@ -49,7 +55,3 @@ class RecommendationManagerList extends StatelessWidget {
     );
   }
 }
-// TODO: LÄUFT AB IN -> ANZEIGEN (FERTIG)
-// TODO: JE NACH ROLLE ENTWEDER PROMOTERNAME ODER EMPFEHLUNGSNAME ANZEIGEN (FERTIG)
-// TODO: STATUS PROPERTY ANLEGEN
-// TODO: AUSGEKLAPPTE VIEW IMPLEMENTIEREN

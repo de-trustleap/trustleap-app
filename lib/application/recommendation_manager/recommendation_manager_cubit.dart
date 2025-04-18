@@ -28,9 +28,13 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
       } else {
         emit(RecommendationGetRecosFailureState(failure: failure));
       }
-    },
-        (recommendations) => emit(
-            RecommendationGetRecosSuccessState(recoItems: recommendations)));
+    }, (recommendations) {
+      if (recommendations.isEmpty) {
+        emit(RecommendationGetRecosNoRecosState());
+      } else {
+        emit(RecommendationGetRecosSuccessState(recoItems: recommendations));
+      }
+    });
   }
 
   void getUser() async {
