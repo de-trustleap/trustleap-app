@@ -30,7 +30,9 @@ class RecommendationManagerListTile extends StatelessWidget {
           Flexible(
               flex: 3,
               child: _buildCell(
-                  "Link geklickt", themeData)), // TODO: BACKEND DATEN NUTZEN
+                  helper.getStringFromStatusLevel(recommendation.statusLevel) ??
+                      "",
+                  themeData)),
           Flexible(
               flex: 2,
               child: _buildCell(

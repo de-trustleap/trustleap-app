@@ -32,4 +32,26 @@ class RecommendationManagerHelper {
       return "$daysRemaining Tagen";
     }
   }
+
+  String? getStringFromStatusLevel(int? statusLevel) {
+    if (statusLevel == null) {
+      return null;
+    }
+    switch (statusLevel) {
+      case 0:
+        return "Empfehlung ausgesprochen";
+      case 1:
+        return "Link geklickt";
+      case 2:
+        return "Kontakt aufgenommen";
+      case 3:
+        return "Empfehlung terminiert";
+      case 4:
+        return "Abgeschlossen";
+      case 5:
+        return "Nicht abgeschlossen";
+      default:
+        return null;
+    }
+  }
 }
