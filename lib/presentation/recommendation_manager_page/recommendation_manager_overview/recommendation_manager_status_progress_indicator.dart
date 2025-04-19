@@ -230,5 +230,6 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
   }
 }
 
-// TODO: Seite erstellen für keine Suchergebnisse
-// TODO: Filter implementieren (Sortieren nach Empfehlungsname, Promotername, Grund) (Status auswählbar via anderes Dropdown)
+// TODO: TESTS SCHREIBEN
+// TODO: LOCALIZATION
+// TODO: EMPFEHLUNG LÖSCHEN FUNKTION (CLOUD FUNCTION)

@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/no_search_results_view.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -29,16 +30,25 @@ class RecommendationManagerList extends StatelessWidget {
         ]),
       ),
       const Divider(height: 1),
-      ListView.builder(
-          itemCount: recommendations.length,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return RecommendationManagerListTile(
-              recommendation: recommendations[index],
-              isPromoter: isPromoter,
-            );
-          })
+      if (recommendations.isEmpty) ...[
+        const SizedBox(height: 40),
+        const NoSearchResultsView(
+            title: "Keine Suchergebnisse",
+            description:
+                "Unter deinem Suchbegriff wurden keine Empfehlungen gefunden."),
+        const SizedBox(height: 40)
+      ] else ...[
+        ListView.builder(
+            itemCount: recommendations.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return RecommendationManagerListTile(
+                recommendation: recommendations[index],
+                isPromoter: isPromoter,
+              );
+            })
+      ]
     ]);
   }
 
