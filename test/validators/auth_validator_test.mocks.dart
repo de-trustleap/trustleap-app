@@ -5714,6 +5714,61 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           as String);
 
   @override
+  String get send_recommendation_alert_title =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_title),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_title),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_alert_description =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_description),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_description),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_alert_yes_button =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_yes_button),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_yes_button),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_alert_no_button =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_no_button),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_no_button),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_missing_link_text =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_missing_link_text),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_missing_link_text),
+            ),
+          )
+          as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,

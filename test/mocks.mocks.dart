@@ -6000,6 +6000,61 @@ class MockAppLocalizations extends _i1.Mock implements _i22.AppLocalizations {
           as String);
 
   @override
+  String get send_recommendation_alert_title =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_title),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_title),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_alert_description =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_description),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_description),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_alert_yes_button =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_yes_button),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_yes_button),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_alert_no_button =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_no_button),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_no_button),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_missing_link_text =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_missing_link_text),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_missing_link_text),
+            ),
+          )
+          as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -7043,18 +7098,40 @@ class MockRecommendationRepository extends _i1.Mock
   @override
   _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>> saveRecommendation(
     _i39.RecommendationItem? recommendation,
+    String? userID,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#saveRecommendation, [recommendation]),
+            Invocation.method(#saveRecommendation, [recommendation, userID]),
             returnValue:
                 _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>>.value(
                   _FakeEither_0<_i27.DatabaseFailure, _i2.Unit>(
                     this,
-                    Invocation.method(#saveRecommendation, [recommendation]),
+                    Invocation.method(#saveRecommendation, [
+                      recommendation,
+                      userID,
+                    ]),
                   ),
                 ),
           )
           as _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i18.Future<_i2.Either<_i27.DatabaseFailure, List<_i39.RecommendationItem>>>
+  getRecommendations(String? userID) =>
+      (super.noSuchMethod(
+            Invocation.method(#getRecommendations, [userID]),
+            returnValue: _i18.Future<
+              _i2.Either<_i27.DatabaseFailure, List<_i39.RecommendationItem>>
+            >.value(
+              _FakeEither_0<
+                _i27.DatabaseFailure,
+                List<_i39.RecommendationItem>
+              >(this, Invocation.method(#getRecommendations, [userID])),
+            ),
+          )
+          as _i18.Future<
+            _i2.Either<_i27.DatabaseFailure, List<_i39.RecommendationItem>>
+          >);
 }
 
 /// A class which mocks [LegalsRepository].
@@ -7837,11 +7914,13 @@ class MockRecommendationsAlertCubit extends _i1.Mock
           as bool);
 
   @override
-  void saveRecommendation(_i39.RecommendationItem? recommendation) =>
-      super.noSuchMethod(
-        Invocation.method(#saveRecommendation, [recommendation]),
-        returnValueForMissingStub: null,
-      );
+  void saveRecommendation(
+    _i39.RecommendationItem? recommendation,
+    String? userID,
+  ) => super.noSuchMethod(
+    Invocation.method(#saveRecommendation, [recommendation, userID]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void emit(_i44.RecommendationsAlertState? state) => super.noSuchMethod(

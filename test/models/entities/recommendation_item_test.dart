@@ -13,7 +13,10 @@ void main() {
           promotionTemplate: "Test",
           promoterName: "Tester",
           serviceProviderName: "Tester",
-          defaultLandingPageID: "3");
+          statusLevel: 0,
+          statusTimestamps: null,
+          defaultLandingPageID: "3",
+          lastUpdated: null);
       final expectedResult = RecommendationItem(
           id: "1",
           name: "Test Neu",
@@ -22,7 +25,10 @@ void main() {
           promotionTemplate: "Test",
           promoterName: "Tester",
           serviceProviderName: "Tester",
-          defaultLandingPageID: "3");
+          statusLevel: 0,
+          statusTimestamps: null,
+          defaultLandingPageID: "3",
+          lastUpdated: null);
       // When
       final result = recoItem.copyWith(name: "Test Neu");
       // Then
@@ -41,7 +47,10 @@ void main() {
           promotionTemplate: "Test",
           promoterName: "Tester",
           serviceProviderName: "Tester",
-          defaultLandingPageID: "3");
+          statusLevel: 0,
+          statusTimestamps: null,
+          defaultLandingPageID: "3",
+          lastUpdated: null);
       final recoItem2 = RecommendationItem(
           id: "1",
           name: "Test",
@@ -50,7 +59,10 @@ void main() {
           promotionTemplate: "Test",
           promoterName: "Tester",
           serviceProviderName: "Tester",
-          defaultLandingPageID: "3");
+          statusLevel: 0,
+          statusTimestamps: null,
+          defaultLandingPageID: "3",
+          lastUpdated: null);
       // Then
       expect(recoItem2, recoItem1);
     });

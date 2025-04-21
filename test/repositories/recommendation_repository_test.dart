@@ -13,6 +13,7 @@ void main() {
   });
 
   group("RecommendationRepositoryImplementation_SaveRecommendation", () {
+    final userID = "1";
     final recommendation = RecommendationItem(
         id: "1",
         name: "Test",
@@ -21,18 +22,21 @@ void main() {
         promotionTemplate: "Test",
         promoterName: "Tester",
         serviceProviderName: "Tester",
-        defaultLandingPageID: "3");
+        defaultLandingPageID: "3",
+        statusLevel: 0,
+        statusTimestamps: null);
 
     test("should return unit when saving of recommendation was successful",
         () async {
       // Given
       final expectedResult = right(unit);
-      when(mockRecoRepo.saveRecommendation(recommendation))
+      when(mockRecoRepo.saveRecommendation(recommendation, userID))
           .thenAnswer((_) async => right(unit));
       // When
-      final result = await mockRecoRepo.saveRecommendation(recommendation);
+      final result =
+          await mockRecoRepo.saveRecommendation(recommendation, userID);
       // Then
-      verify(mockRecoRepo.saveRecommendation(recommendation));
+      verify(mockRecoRepo.saveRecommendation(recommendation, userID));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
@@ -40,12 +44,13 @@ void main() {
     test("should return failure when call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockRecoRepo.saveRecommendation(recommendation))
+      when(mockRecoRepo.saveRecommendation(recommendation, userID))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockRecoRepo.saveRecommendation(recommendation);
+      final result =
+          await mockRecoRepo.saveRecommendation(recommendation, userID);
       // Then
-      verify(mockRecoRepo.saveRecommendation(recommendation));
+      verify(mockRecoRepo.saveRecommendation(recommendation, userID));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });

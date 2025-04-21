@@ -17,8 +17,12 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          reason: "",
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       final expectedResult = RecommendationItemModel(
           id: "1",
           name: "Test",
@@ -26,8 +30,12 @@ void main() {
           promoterName: "Test2",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          statusLevel: 0,
+          statusTimestamps: null,
+          reason: "",
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       // When
       final result = recoModel.copyWith(promoterName: "Test2");
       // Then
@@ -46,8 +54,12 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          reason: "",
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       final expectedResult = {
         'id': "1",
         "name": "Test",
@@ -55,8 +67,12 @@ void main() {
         "promoterName": "Test",
         "serviceProviderName": "",
         "defaultLandingPageID": "",
+        "reason": "",
+        "statusLevel": 0,
+        "statusTimestamps": null,
         "expiresAt": Timestamp.fromDate(date),
-        "createdAt": Timestamp.fromDate(date)
+        "createdAt": Timestamp.fromDate(date),
+        "lastUpdated": null
       };
       // When
       final result = recoModel.toMap();
@@ -76,8 +92,11 @@ void main() {
         "promoterName": "Test",
         "serviceProviderName": "",
         "defaultLandingPageID": "",
+        "statusLevel": 0,
+        "statusTimestamps": null,
         "expiresAt": Timestamp.fromDate(date),
-        "createdAt": Timestamp.fromDate(date)
+        "createdAt": Timestamp.fromDate(date),
+        "lastUpdated": null
       };
       final expectedResult = RecommendationItemModel(
           id: "",
@@ -86,8 +105,12 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          reason: null,
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       // When
       final result = RecommendationItemModel.fromMap(map);
       // Then
@@ -102,12 +125,16 @@ void main() {
       final map = {
         'id': "1",
         "name": "Test",
-        "landingPageID": "2",
         "promoterName": "Test",
         "serviceProviderName": "",
         "defaultLandingPageID": "",
+        "landingPageID": "2",
+        "statusLevel": 0,
+        "statusTimestamps": null,
+        "reason": null,
         "expiresAt": Timestamp.fromDate(date),
-        "createdAt": Timestamp.fromDate(date)
+        "createdAt": Timestamp.fromDate(date),
+        "lastUpdated": null
       };
       final expectedResult = RecommendationItemModel(
           id: "1",
@@ -116,8 +143,12 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          reason: null,
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       // When
       final result = RecommendationItemModel.fromFirestore(map, "1");
       // Then
@@ -137,19 +168,26 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          reason: "",
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       final expectedResult = RecommendationItem(
           id: "1",
           name: "Test",
-          reason: null,
+          reason: "",
           landingPageID: "2",
           promotionTemplate: null,
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       // When
       final result = model.toDomain();
       // Then
@@ -172,8 +210,11 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       final expectedResult = RecommendationItemModel(
           id: "1",
           name: "Test",
@@ -181,8 +222,12 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          reason: null,
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       // When
       final result = RecommendationItemModel.fromDomain(model);
       // Then
@@ -201,8 +246,12 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          reason: "",
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       final reco2 = RecommendationItemModel(
           id: "1",
           name: "Test",
@@ -210,8 +259,12 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "",
           defaultLandingPageID: "",
+          reason: "",
+          statusLevel: 0,
+          statusTimestamps: null,
           expiresAt: date,
-          createdAt: date);
+          createdAt: date,
+          lastUpdated: null);
       // Then
       expect(reco1, reco2);
     });

@@ -230,6 +230,6 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
   }
 }
 
-// TODO: TESTS SCHREIBEN
+// TODO: TESTS SCHREIBEN (MODEL UND FILTER)
 // TODO: LOCALIZATION
 // TODO: EMPFEHLUNG LÖSCHEN FUNKTION (CLOUD FUNCTION)
