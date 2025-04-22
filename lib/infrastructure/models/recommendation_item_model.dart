@@ -13,6 +13,7 @@ class RecommendationItemModel extends Equatable {
   final String? defaultLandingPageID;
   final int? statusLevel;
   final Map<int, DateTime?>? statusTimestamps;
+  final String? userID;
   final DateTime createdAt;
   final DateTime expiresAt;
   final DateTime? lastUpdated;
@@ -27,6 +28,7 @@ class RecommendationItemModel extends Equatable {
       required this.defaultLandingPageID,
       required this.statusLevel,
       required this.statusTimestamps,
+      required this.userID,
       required this.expiresAt,
       required this.createdAt,
       required this.lastUpdated});
@@ -41,6 +43,7 @@ class RecommendationItemModel extends Equatable {
       String? defaultLandingPageID,
       int? statusLevel,
       Map<int, DateTime?>? statusTimestamps,
+      String? userID,
       DateTime? expiresAt,
       DateTime? createdAt,
       DateTime? lastUpdated}) {
@@ -54,6 +57,7 @@ class RecommendationItemModel extends Equatable {
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
         statusLevel: statusLevel ?? this.statusLevel,
         statusTimestamps: statusTimestamps ?? this.statusTimestamps,
+        userID: userID ?? this.userID,
         expiresAt: expiresAt ?? this.expiresAt,
         createdAt: createdAt ?? this.createdAt,
         lastUpdated: lastUpdated ?? this.lastUpdated);
@@ -71,6 +75,7 @@ class RecommendationItemModel extends Equatable {
       'statusLevel': statusLevel,
       'statusTimestamps': statusTimestamps?.map(
           (key, value) => MapEntry(key.toString(), value?.toIso8601String())),
+      'userID': userID,
       'expiresAt': Timestamp.fromDate(expiresAt),
       'createdAt': Timestamp.fromDate(createdAt),
       'lastUpdated':
@@ -100,6 +105,7 @@ class RecommendationItemModel extends Equatable {
             ? (map['statusTimestamps'] as Map<String, dynamic>).map(
                 (key, value) => MapEntry(int.parse(key), DateTime.parse(value)))
             : null,
+        userID: map['userID'] != null ? map['userID'] as String : null,
         expiresAt: (map['expiresAt'] as Timestamp).toDate(),
         createdAt: (map['createdAt'] as Timestamp).toDate(),
         lastUpdated: map['lastUpdated'] != null
@@ -124,6 +130,7 @@ class RecommendationItemModel extends Equatable {
         defaultLandingPageID: defaultLandingPageID,
         statusLevel: statusLevel,
         statusTimestamps: statusTimestamps,
+        userID: userID,
         expiresAt: expiresAt,
         createdAt: createdAt,
         lastUpdated: lastUpdated);
@@ -141,6 +148,7 @@ class RecommendationItemModel extends Equatable {
         defaultLandingPageID: recommendation.defaultLandingPageID,
         statusLevel: recommendation.statusLevel,
         statusTimestamps: recommendation.statusTimestamps,
+        userID: recommendation.userID,
         expiresAt: recommendation.expiresAt,
         createdAt: recommendation.createdAt,
         lastUpdated: recommendation.lastUpdated);
@@ -155,6 +163,7 @@ class RecommendationItemModel extends Equatable {
         serviceProviderName,
         reason,
         expiresAt,
-        defaultLandingPageID
+        defaultLandingPageID,
+        userID
       ];
 }

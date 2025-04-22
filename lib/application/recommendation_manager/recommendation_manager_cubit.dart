@@ -37,6 +37,16 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
     });
   }
 
+  void deleteRecommendation(String recoID, String userID) async {
+    emit(RecommendationManagerLoadingState());
+    final failureOrSuccess =
+        await recommendationRepo.deleteRecommendation(recoID, userID);
+    failureOrSuccess.fold(
+        (failure) =>
+            emit(RecommendationDeleteRecoFailureState(failure: failure)),
+        (_) => emit(RecommendationDeleteRecoSuccessState()));
+  }
+
   void getUser() async {
     emit(RecommendationManagerLoadingState());
     final failureOrSuccess = await userRepo.getUser();

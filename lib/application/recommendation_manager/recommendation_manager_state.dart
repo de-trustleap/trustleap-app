@@ -61,3 +61,19 @@ class RecommendationManagerGetUserFailureState
   @override
   List<Object?> get props => [failure];
 }
+
+class RecommendationDeleteRecoFailureState extends RecommendationManagerState
+    with EquatableMixin {
+  final DatabaseFailure failure;
+
+  RecommendationDeleteRecoFailureState({required this.failure});
+
+  @override
+  List<Object?> get props => [failure];
+}
+
+class RecommendationDeleteRecoSuccessState extends RecommendationManagerState
+    with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}

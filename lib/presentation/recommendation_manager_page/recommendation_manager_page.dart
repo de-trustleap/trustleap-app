@@ -6,6 +6,8 @@ import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -33,6 +35,28 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
     Modular.get<RecommendationManagerCubit>().getUser();
   }
 
+  void showAlert(AppLocalizations localizations, String recoID, String userID) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return CustomAlertDialog(
+              title: "Empfehlung löschen",
+              message:
+                  "Möchtest du die Empfehlung wirklich löschen? Der Vorgang kann nicht rückgängig gemacht werden.",
+              actionButtonTitle: "Empfehlung löschen",
+              cancelButtonTitle: "Abbrechen",
+              actionButtonAction: () =>
+                  _submitDeleteRecommendation(recoID, userID),
+              cancelButtonAction: () => CustomNavigator.pop());
+        });
+  }
+
+  void _submitDeleteRecommendation(String recoID, String userID) {
+    CustomNavigator.pop();
+    Modular.get<RecommendationManagerCubit>()
+        .deleteRecommendation(recoID, userID);
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -47,6 +71,18 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
             currentUser = state.user;
             Modular.get<RecommendationManagerCubit>()
                 .getRecommendations(state.user.id.value);
+          } else if (state is RecommendationDeleteRecoSuccessState) {
+            CustomSnackBar.of(context).showCustomSnackBar(
+                "Die Empfehlung wurde erfolgreich gelöscht!");
+            Modular.get<RecommendationManagerCubit>()
+                .getRecommendations(currentUser?.id.value);
+          } else if (state is RecommendationDeleteRecoFailureState) {
+            CustomSnackBar.of(context).showCustomSnackBar(
+                DatabaseFailureMapper.mapFailureMessage(
+                    state.failure, localization),
+                SnackBarType.failure);
+            Modular.get<RecommendationManagerCubit>()
+                .getRecommendations(currentUser?.id.value);
           }
         },
         builder: (context, state) {
@@ -69,10 +105,9 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
     if (state is RecommendationGetRecosNoRecosState) {
       return EmptyPage(
           icon: Icons.person_add,
-          title: "Keine Empfehlungen gefunden",
-          subTitle:
-              "Es wurden keine Empfehlungen gefunden. Du scheinst noch keine Empfehlung ausgesprochen zu haben. Im Empfehlungsmanager werden deine ausgesprochenen Empfehlungen angezeigt.",
-          buttonTitle: "Empfehlung aussprechen",
+          title: localization.recommendation_manager_no_data_title,
+          subTitle: localization.recommendation_manager_no_data_description,
+          buttonTitle: localization.recommendation_manager_no_data_button_title,
           onTap: () {
             CustomNavigator.navigate(
                 RoutePaths.homePath + RoutePaths.recommendationsPath);
@@ -80,7 +115,7 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
           });
     } else if (state is RecommendationGetRecosFailureState) {
       return ErrorView(
-          title: "Es ist ein Fehler aufgetreten",
+          title: localization.recommendation_manager_failure_text,
           message: DatabaseFailureMapper.mapFailureMessage(
               state.failure, localization),
           callback: () => {
@@ -93,7 +128,10 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
         CenteredConstrainedWrapper(
           child: RecommendationManagerOverview(
               recommendations: state.recoItems,
-              isPromoter: currentUser?.role == Role.promoter ? true : false),
+              isPromoter: currentUser?.role == Role.promoter ? true : false,
+              onDeletePressed: (recoID, userID) {
+                showAlert(localization, recoID, userID);
+              }),
         )
       ]);
     } else {

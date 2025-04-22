@@ -1428,4 +1428,103 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get send_recommendation_missing_link_text => 'Der [LINK] Platzhalter darf nicht fehlen!';
+
+  @override
+  String get recommendation_manager_expired_day => 'Tag';
+
+  @override
+  String get recommendation_manager_expired_days => 'Tagen';
+
+  @override
+  String get recommendation_manager_status_level_1 => 'Empfehlung ausgesprochen';
+
+  @override
+  String get recommendation_manager_status_level_2 => 'Link geklickt';
+
+  @override
+  String get recommendation_manager_status_level_3 => 'Kontakt aufgenommen';
+
+  @override
+  String get recommendation_manager_status_level_4 => 'Empfehlung terminiert';
+
+  @override
+  String get recommendation_manager_status_level_5 => 'Abgeschlossen';
+
+  @override
+  String get recommendation_manager_status_level_6 => 'Nicht abgeschlossen';
+
+  @override
+  String get recommendation_manager_filter_expires_date => 'Ablaufdatum';
+
+  @override
+  String get recommendation_manager_filter_last_updated => 'Zuletzt aktualisiert';
+
+  @override
+  String get recommendation_manager_filter_promoter => 'Promoter';
+
+  @override
+  String get recommendation_manager_filter_recommendation_receiver => 'Empfänger';
+
+  @override
+  String get recommendation_manager_filter_reason => 'Grund';
+
+  @override
+  String get recommendation_manager_filter_ascending => 'Aufsteigend';
+
+  @override
+  String get recommendation_manager_filter_descending => 'Absteigend';
+
+  @override
+  String get recommendation_manager_filter_status_all => 'Alle';
+
+  @override
+  String get recommendation_manager_list_header_receiver => 'Empfehlungsname';
+
+  @override
+  String get recommendation_manager_list_header_promoter => 'Promoter';
+
+  @override
+  String get recommendation_manager_list_header_status => 'Status';
+
+  @override
+  String get recommendation_manager_list_header_expiration_date => 'Läuft ab in';
+
+  @override
+  String get recommendation_manager_no_search_result_title => 'Keine Suchergebnisse';
+
+  @override
+  String get recommendation_manager_no_search_result_description => 'Unter deinem Suchbegriff wurden keine Empfehlungen gefunden.';
+
+  @override
+  String get recommendation_manager_list_tile_receiver => 'Empfehlungsempfänger';
+
+  @override
+  String get recommendation_manager_list_tile_reason => 'Empfehlungsgrund';
+
+  @override
+  String get recommendation_manager_list_tile_delete_button_title => 'Empfehlung löschen';
+
+  @override
+  String get recommendation_manager_title => 'Meine Empfehlungen';
+
+  @override
+  String get recommendation_manager_filter_tooltip => 'Empfehlungen filtern';
+
+  @override
+  String get recommendation_manager_search_close_tooltip => 'Suchtext löschen';
+
+  @override
+  String get recommendation_manager_search_placeholder => 'Suche...';
+
+  @override
+  String get recommendation_manager_no_data_title => 'Keine Empfehlungen gefunden';
+
+  @override
+  String get recommendation_manager_no_data_description => 'Es wurden keine Empfehlungen gefunden. Du scheinst noch keine Empfehlung ausgesprochen zu haben. Im Empfehlungsmanager werden deine ausgesprochenen Empfehlungen angezeigt.';
+
+  @override
+  String get recommendation_manager_no_data_button_title => 'Empfehlung aussprechen';
+
+  @override
+  String get recommendation_manager_failure_text => 'Es ist ein Fehler aufgetreten';
 }

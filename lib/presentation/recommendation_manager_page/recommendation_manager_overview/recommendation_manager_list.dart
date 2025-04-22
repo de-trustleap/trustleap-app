@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/no_search_results_view.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list_tile.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +7,17 @@ import 'package:flutter/material.dart';
 class RecommendationManagerList extends StatelessWidget {
   final List<RecommendationItem> recommendations;
   final bool isPromoter;
+  final Function(String, String) onDeletePressed;
   const RecommendationManagerList(
-      {super.key, required this.recommendations, required this.isPromoter});
+      {super.key,
+      required this.recommendations,
+      required this.isPromoter,
+      required this.onDeletePressed});
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Column(children: [
       SizedBox(
@@ -20,9 +26,22 @@ class RecommendationManagerList extends StatelessWidget {
           Flexible(
               flex: 3,
               child: _buildHeaderCell(
-                  isPromoter ? "Empfehlungsname" : "Promoter", themeData)),
-          Flexible(flex: 3, child: _buildHeaderCell("Status", themeData)),
-          Flexible(flex: 2, child: _buildHeaderCell("Läuft ab in", themeData)),
+                  isPromoter
+                      ? localization.recommendation_manager_list_header_receiver
+                      : localization
+                          .recommendation_manager_list_header_promoter,
+                  themeData)),
+          Flexible(
+              flex: 3,
+              child: _buildHeaderCell(
+                  localization.recommendation_manager_list_header_status,
+                  themeData)),
+          Flexible(
+              flex: 2,
+              child: _buildHeaderCell(
+                  localization
+                      .recommendation_manager_list_header_expiration_date,
+                  themeData)),
           const SizedBox(
             width: 70,
             child: Icon(Icons.expand_more, color: Colors.transparent),
@@ -32,10 +51,10 @@ class RecommendationManagerList extends StatelessWidget {
       const Divider(height: 1),
       if (recommendations.isEmpty) ...[
         const SizedBox(height: 40),
-        const NoSearchResultsView(
-            title: "Keine Suchergebnisse",
-            description:
-                "Unter deinem Suchbegriff wurden keine Empfehlungen gefunden."),
+        NoSearchResultsView(
+            title: localization.recommendation_manager_no_search_result_title,
+            description: localization
+                .recommendation_manager_no_search_result_description),
         const SizedBox(height: 40)
       ] else ...[
         ListView.builder(
@@ -46,6 +65,7 @@ class RecommendationManagerList extends StatelessWidget {
               return RecommendationManagerListTile(
                 recommendation: recommendations[index],
                 isPromoter: isPromoter,
+                onDeletePressed: onDeletePressed,
               );
             })
       ]

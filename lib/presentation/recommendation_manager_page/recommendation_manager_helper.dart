@@ -28,9 +28,9 @@ class RecommendationManagerHelper {
     final int daysRemaining = difference.inDays;
 
     if (daysRemaining == 1) {
-      return "$daysRemaining Tag";
+      return "$daysRemaining ${localization.recommendation_manager_expired_day}";
     } else {
-      return "$daysRemaining Tagen";
+      return "$daysRemaining ${localization.recommendation_manager_expired_days}";
     }
   }
 
@@ -40,17 +40,17 @@ class RecommendationManagerHelper {
     }
     switch (statusLevel) {
       case 0:
-        return "Empfehlung ausgesprochen";
+        return localization.recommendation_manager_status_level_1;
       case 1:
-        return "Link geklickt";
+        return localization.recommendation_manager_status_level_2;
       case 2:
-        return "Kontakt aufgenommen";
+        return localization.recommendation_manager_status_level_3;
       case 3:
-        return "Empfehlung terminiert";
+        return localization.recommendation_manager_status_level_4;
       case 4:
-        return "Abgeschlossen";
+        return localization.recommendation_manager_status_level_5;
       case 5:
-        return "Nicht abgeschlossen";
+        return localization.recommendation_manager_status_level_6;
       default:
         return null;
     }

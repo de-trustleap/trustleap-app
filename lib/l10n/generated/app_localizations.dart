@@ -2920,6 +2920,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The [LINK] placeholder is missing!'**
   String get send_recommendation_missing_link_text;
+
+  /// Expired date in days on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'day'**
+  String get recommendation_manager_expired_day;
+
+  /// Expired date in days on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get recommendation_manager_expired_days;
+
+  /// Text for the first status level of the progress bar on the referral manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation made'**
+  String get recommendation_manager_status_level_1;
+
+  /// Text for the second status level of the progress bar on the referral manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Link clicked'**
+  String get recommendation_manager_status_level_2;
+
+  /// Text for the third status level of the progress bar on the referral manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Contacted'**
+  String get recommendation_manager_status_level_3;
+
+  /// Text for the fourth status level of the progress bar on the referral manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment made'**
+  String get recommendation_manager_status_level_4;
+
+  /// Text for the fifth status level of the progress bar on the referral manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get recommendation_manager_status_level_5;
+
+  /// Text for the sixth status level of the progress bar on the referral manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Not completed'**
+  String get recommendation_manager_status_level_6;
+
+  /// Expiration date in the dropdown menu in the Filter View on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Expiration date'**
+  String get recommendation_manager_filter_expires_date;
+
+  /// Last updated date in the dropdown menu in the Filter View on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated'**
+  String get recommendation_manager_filter_last_updated;
+
+  /// Promoter in the dropdown menu in the Filter View on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter'**
+  String get recommendation_manager_filter_promoter;
+
+  /// Recommendation receiver in the dropdown menu in the Filter View on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Receiver'**
+  String get recommendation_manager_filter_recommendation_receiver;
+
+  /// Reason in the dropdown menu in the Filter View on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get recommendation_manager_filter_reason;
+
+  /// Ascending Radio Button in the Filter View on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Ascending'**
+  String get recommendation_manager_filter_ascending;
+
+  /// Descending Radio Button in the Filter View on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Descending'**
+  String get recommendation_manager_filter_descending;
+
+  /// All Recommendation Status dropdown menu entry in the Filter View on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get recommendation_manager_filter_status_all;
+
+  /// Recommendation name entry in the list header on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation name'**
+  String get recommendation_manager_list_header_receiver;
+
+  /// Promoter entry in the list header on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter'**
+  String get recommendation_manager_list_header_promoter;
+
+  /// Status entry in the list header on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get recommendation_manager_list_header_status;
+
+  /// Expiration date entry in the list header on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Expires in'**
+  String get recommendation_manager_list_header_expiration_date;
+
+  /// Title for the No Search Results view on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'No search results'**
+  String get recommendation_manager_no_search_result_title;
+
+  /// TitDescriptionle for the No Search Results view on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations were found for your search term.'**
+  String get recommendation_manager_no_search_result_description;
+
+  /// Recommendation receiver text in list cell on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation receiver'**
+  String get recommendation_manager_list_tile_receiver;
+
+  /// Reason text in list cell on the ReferrRecommendational Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation reason'**
+  String get recommendation_manager_list_tile_reason;
+
+  /// Button title in list cell on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Delete recommendation'**
+  String get recommendation_manager_list_tile_delete_button_title;
+
+  /// Title on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'My Recommendations'**
+  String get recommendation_manager_title;
+
+  /// Tooltip for the filter button on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Filter recommendations'**
+  String get recommendation_manager_filter_tooltip;
+
+  /// Tooltip for the close button in the search bar on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Delete search term'**
+  String get recommendation_manager_search_close_tooltip;
+
+  /// Search placeholder in the search bar on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Suche...'**
+  String get recommendation_manager_search_placeholder;
+
+  /// Title of the page that is displayed when there are no recommendations on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations found'**
+  String get recommendation_manager_no_data_title;
+
+  /// Description of the page that is displayed when there are no recommendations on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations were found. You don\'t seem to have made a recommendation yet. Your recommendations are displayed in the Recommendation Manager.'**
+  String get recommendation_manager_no_data_description;
+
+  /// Button text of the page that is displayed when there are no recommendations on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Make a recommendation'**
+  String get recommendation_manager_no_data_button_title;
+
+  /// Error text on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'An error has occurred'**
+  String get recommendation_manager_failure_text;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

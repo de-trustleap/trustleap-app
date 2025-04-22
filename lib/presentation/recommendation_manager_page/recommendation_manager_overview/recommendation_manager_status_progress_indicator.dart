@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -17,15 +18,6 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
     Icons.warning
   ];
 
-  final List<String> labels = [
-    "Empfehlung ausgesprochen",
-    "Link geklickt",
-    "Kontakt aufgenommen",
-    "Empfehlung terminiert",
-    "Abgeschlossen",
-    "Nicht abgeschlossen"
-  ];
-
   static const double circleSize = 40;
   static const double lineThickness = 2;
   static const double spacing = 16;
@@ -34,14 +26,25 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     final showVertical = responsiveValue.screenWidth > 1150 ? false : true;
 
+    final List<String> labels = [
+      localization.recommendation_manager_status_level_1,
+      localization.recommendation_manager_status_level_2,
+      localization.recommendation_manager_status_level_3,
+      localization.recommendation_manager_status_level_4,
+      localization.recommendation_manager_status_level_5,
+      localization.recommendation_manager_status_level_6
+    ];
+
     return showVertical
-        ? _buildVerticalLayout(context, themeData)
-        : _buildHorizontalLayout(context, themeData);
+        ? _buildVerticalLayout(context, themeData, labels)
+        : _buildHorizontalLayout(context, themeData, labels);
   }
 
-  Widget _buildHorizontalLayout(BuildContext context, ThemeData themeData) {
+  Widget _buildHorizontalLayout(
+      BuildContext context, ThemeData themeData, List<String> labels) {
     const double stepWidth = 120;
 
     return SizedBox(
@@ -108,7 +111,8 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
     );
   }
 
-  Widget _buildVerticalLayout(BuildContext context, ThemeData themeData) {
+  Widget _buildVerticalLayout(
+      BuildContext context, ThemeData themeData, List<String> labels) {
     return Column(
       children: List.generate(icons.length, (index) {
         final isLast = index == icons.length - 1;
@@ -230,6 +234,6 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
   }
 }
 
-// TODO: EMPFEHLUNG LÖSCHEN FUNKTION (CLOUD FUNCTION)
-// TODO: ONSCHEDULE FUNCTION ANPASSEN UND DORT AUCH RECO ID VON USER LÖSCHEN. DAFÜR MUSS USERID AUCH IN RECO ITEM GESPEICHERT WERDEN
 // TODO: LOCALIZATION
+// TODO: FRONTEND TESTS
+// TODO: LÖSCHEN BUTTON BREITE SETZEN

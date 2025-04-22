@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_filter.dart';
@@ -9,8 +10,12 @@ import 'package:flutter/material.dart';
 class RecommendationManagerOverview extends StatefulWidget {
   final List<RecommendationItem> recommendations;
   final bool isPromoter;
+  final Function(String, String) onDeletePressed;
   const RecommendationManagerOverview(
-      {super.key, required this.recommendations, required this.isPromoter});
+      {super.key,
+      required this.recommendations,
+      required this.isPromoter,
+      required this.onDeletePressed});
 
   @override
   State<RecommendationManagerOverview> createState() =>
@@ -79,6 +84,7 @@ class _RecommendationManagerOverviewState
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return CardContainer(
       maxWidth: 1200,
@@ -89,7 +95,7 @@ class _RecommendationManagerOverviewState
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Meine Empfehlungen",
+                localization.recommendation_manager_title,
                 style: themeData.textTheme.headlineLarge!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
@@ -103,10 +109,12 @@ class _RecommendationManagerOverviewState
                       onPressed: () {
                         _searchController.clear();
                       },
-                      tooltip: "",
+                      tooltip: localization
+                          .recommendation_manager_search_close_tooltip,
                       icon: const Icon(Icons.close))
                 ],
-                hintText: "Suche...",
+                hintText:
+                    localization.recommendation_manager_search_placeholder,
               )),
               const SizedBox(width: 16),
               SizedBox(
@@ -114,7 +122,7 @@ class _RecommendationManagerOverviewState
                 height: 48,
                 child: IconButton(
                     onPressed: () => onFilterPressed(),
-                    tooltip: "Empfehlungen filtern",
+                    tooltip: localization.recommendation_manager_filter_tooltip,
                     icon: Icon(Icons.filter_list,
                         color: themeData.colorScheme.secondary, size: 32)),
               ),
@@ -133,6 +141,7 @@ class _RecommendationManagerOverviewState
           RecommendationManagerList(
             recommendations: _filteredRecommendations,
             isPromoter: widget.isPromoter,
+            onDeletePressed: widget.onDeletePressed,
           ),
         ],
       ),

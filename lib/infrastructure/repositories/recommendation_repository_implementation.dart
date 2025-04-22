@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -8,12 +9,18 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
 import 'package:finanzbegleiter/infrastructure/models/recommendation_item_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 
 class RecommendationRepositoryImplementation
     implements RecommendationRepository {
   final FirebaseFirestore firestore;
+  final FirebaseFunctions firebaseFunctions;
+  final FirebaseAppCheck appCheck;
 
-  RecommendationRepositoryImplementation({required this.firestore});
+  RecommendationRepositoryImplementation(
+      {required this.firestore,
+      required this.firebaseFunctions,
+      required this.appCheck});
 
   @override
   Future<Either<DatabaseFailure, Unit>> saveRecommendation(
@@ -95,6 +102,24 @@ class RecommendationRepositoryImplementation
       });
       return right(recoItems);
     } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> deleteRecommendation(
+      String recoID, String userID) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("deleteRecommendation");
+    try {
+      await callable.call({
+        "appCheckToken": appCheckToken,
+        "recommendationID": recoID,
+        "userID": userID
+      });
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

@@ -91,23 +91,28 @@ class _RecommendationManagerExpandableFilterState
                                 DropdownMenuEntry(
                                     value: RecommendationSortByFilterState
                                         .expiresAt,
-                                    label: "Ablaufdatum"),
+                                    label: localization
+                                        .recommendation_manager_filter_expires_date),
                                 DropdownMenuEntry(
                                     value: RecommendationSortByFilterState
                                         .lastUpdated,
-                                    label: "Zuletzt aktualisiert"),
+                                    label: localization
+                                        .recommendation_manager_filter_last_updated),
                                 DropdownMenuEntry(
                                     value: RecommendationSortByFilterState
                                         .promoter,
-                                    label: "Promoter"),
+                                    label: localization
+                                        .recommendation_manager_filter_promoter),
                                 DropdownMenuEntry(
                                     value: RecommendationSortByFilterState
                                         .recommendationReceiver,
-                                    label: "Empfänger"),
+                                    label: localization
+                                        .recommendation_manager_filter_recommendation_receiver),
                                 DropdownMenuEntry(
                                     value:
                                         RecommendationSortByFilterState.reason,
-                                    label: "Grund")
+                                    label: localization
+                                        .recommendation_manager_filter_reason)
                               ],
                               onSelected: (sortBy) {
                                 filterStates.sortByFilterState = sortBy ??
@@ -115,7 +120,9 @@ class _RecommendationManagerExpandableFilterState
                                 widget.onFilterChanged(filterStates);
                               }),
                           RadioListTile(
-                              title: SelectableText("Absteigend",
+                              title: SelectableText(
+                                  localization
+                                      .recommendation_manager_filter_descending,
                                   style: themeData.textTheme.bodySmall),
                               value: RecommendationSortOrderFilterState.desc,
                               groupValue: filterStates.sortOrderFilterState,
@@ -127,7 +134,9 @@ class _RecommendationManagerExpandableFilterState
                                 });
                               }),
                           RadioListTile(
-                              title: SelectableText("Aufsteigend",
+                              title: SelectableText(
+                                  localization
+                                      .recommendation_manager_filter_ascending,
                                   style: themeData.textTheme.bodySmall),
                               value: RecommendationSortOrderFilterState.asc,
                               groupValue: filterStates.sortOrderFilterState,
@@ -161,27 +170,34 @@ class _RecommendationManagerExpandableFilterState
                     dropdownMenuEntries: [
                       DropdownMenuEntry(
                           value: RecommendationStatusFilterState.all,
-                          label: "Alle"),
+                          label: localization
+                              .recommendation_manager_filter_status_all),
                       DropdownMenuEntry(
                           value: RecommendationStatusFilterState
                               .recommendationSent,
-                          label: "Empfehlung ausgesprochen"),
+                          label: localization
+                              .recommendation_manager_status_level_1),
                       DropdownMenuEntry(
                           value: RecommendationStatusFilterState.linkClicked,
-                          label: "Link geklickt"),
+                          label: localization
+                              .recommendation_manager_status_level_2),
                       DropdownMenuEntry(
                           value:
                               RecommendationStatusFilterState.contactFormSent,
-                          label: "Kontakt aufgenommen"),
+                          label: localization
+                              .recommendation_manager_status_level_3),
                       DropdownMenuEntry(
                           value: RecommendationStatusFilterState.appointment,
-                          label: "Empfehlung terminiert"),
+                          label: localization
+                              .recommendation_manager_status_level_4),
                       DropdownMenuEntry(
                           value: RecommendationStatusFilterState.successful,
-                          label: "Abgeschlossen"),
+                          label: localization
+                              .recommendation_manager_status_level_5),
                       DropdownMenuEntry(
                           value: RecommendationStatusFilterState.failed,
-                          label: "Nicht abgeschlossen")
+                          label: localization
+                              .recommendation_manager_status_level_6)
                     ],
                     onSelected: (sortBy) {
                       filterStates.statusFilterState =
@@ -194,6 +210,3 @@ class _RecommendationManagerExpandableFilterState
         ]);
   }
 }
-
-//TODO: FILTER FUNKTION IMPLEMENTIEREN!
-//TODO: MEINE EMPFEHLUNGEN BEI MOBILE ÜBER DER SUCHE ANZEIGEN. WIE BEI PROMOTERN
