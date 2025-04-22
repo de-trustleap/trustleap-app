@@ -1,0 +1,42 @@
+name: Build and Test Flutter Web App
+run-name: running build and tests by @${{ github.actor }}
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
+          channel: 'stable'
+
+      - name: Configure Flutter Build
+        run: flutter config --enable-web
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Build Web
+        run: flutter build web --release --no-tree-shake-icons --verbose
+
+      - name: Test With Coverage
+        run: flutter test --coverage
+
+      - name: notify telegram
+        uses: de-trustleap/shared-actions/notify-telegram@v1
+        with:
+          TELEGRAM_BOT_TO: ${{ vars.TELEGRAM_BOT_TO }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+      - name: set build status
+        uses: de-trustleap/shared-actions/set-build-status@v1
