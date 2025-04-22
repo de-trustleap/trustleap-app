@@ -55,4 +55,46 @@ void main() {
       verifyNoMoreInteractions(mockRecoRepo);
     });
   });
+
+  group("RecommendationRepositoryImplementation_GetRecommendations", () {
+    final userID = "1";
+    final recommendations = [
+      RecommendationItem(
+          id: "1",
+          name: "Test",
+          reason: "Test",
+          landingPageID: "1",
+          promotionTemplate: "",
+          promoterName: "Test",
+          serviceProviderName: "Test",
+          defaultLandingPageID: "2",
+          statusLevel: 0,
+          statusTimestamps: null)
+    ];
+    test("should return recommendations when call was successful", () async {
+      // Given
+      final expectedResult = right(recommendations);
+      when(mockRecoRepo.getRecommendations(userID))
+          .thenAnswer((_) async => right(recommendations));
+      // When
+      final result = await mockRecoRepo.getRecommendations(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendations(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockRecoRepo.getRecommendations(userID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockRecoRepo.getRecommendations(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendations(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
 }

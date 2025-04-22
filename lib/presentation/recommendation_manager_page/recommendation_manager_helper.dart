@@ -22,10 +22,11 @@ class RecommendationManagerHelper {
     }
   }
 
-  String getExpiresInDaysCount(DateTime expiresAt) {
-    final now = DateTime.now();
-    final Duration difference = expiresAt.difference(now);
+  String getExpiresInDaysCount(DateTime expiresAt, {DateTime? now}) {
+    final current = now ?? DateTime.now();
+    final Duration difference = expiresAt.difference(current);
     final int daysRemaining = difference.inDays;
+
     if (daysRemaining == 1) {
       return "$daysRemaining Tag";
     } else {
