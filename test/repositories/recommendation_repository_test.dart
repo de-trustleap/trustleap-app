@@ -23,6 +23,7 @@ void main() {
         promoterName: "Tester",
         serviceProviderName: "Tester",
         defaultLandingPageID: "3",
+        userID: "1",
         statusLevel: 0,
         statusTimestamps: null);
 
@@ -68,6 +69,7 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "Test",
           defaultLandingPageID: "2",
+          userID: "1",
           statusLevel: 0,
           statusTimestamps: null)
     ];

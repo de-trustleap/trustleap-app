@@ -24,6 +24,7 @@ void main() {
         promotionTemplate: "Test",
         promoterName: "Tester",
         serviceProviderName: "Tester",
+        userID: "1",
         statusLevel: 0,
         statusTimestamps: null,
         defaultLandingPageID: "3",

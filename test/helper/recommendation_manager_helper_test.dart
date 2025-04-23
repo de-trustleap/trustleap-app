@@ -1,18 +1,36 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_helper.dart';
 import 'package:flutter/material.dart';
 import '../mocks.mocks.dart';
+import 'package:mockito/mockito.dart';
 
 void main() {
   late RecommendationManagerHelper helper;
-  late AppLocalizations mockLocalization;
+  late MockAppLocalizations mockLocalization;
+
+  void setupMockLocalizations(MockAppLocalizations mock) {
+    when(mock.recommendation_manager_expired_day).thenReturn('Tag');
+    when(mock.recommendation_manager_expired_days).thenReturn('Tagen');
+    when(mock.recommendation_manager_status_level_1)
+        .thenReturn('Empfehlung ausgesprochen');
+    when(mock.recommendation_manager_status_level_2)
+        .thenReturn('Link geklickt');
+    when(mock.recommendation_manager_status_level_3)
+        .thenReturn('Kontakt aufgenommen');
+    when(mock.recommendation_manager_status_level_4)
+        .thenReturn('Empfehlung terminiert');
+    when(mock.recommendation_manager_status_level_5)
+        .thenReturn('Abgeschlossen');
+    when(mock.recommendation_manager_status_level_6)
+        .thenReturn('Nicht abgeschlossen');
+  }
 
   setUp(() {
     mockLocalization = MockAppLocalizations();
     helper = RecommendationManagerHelper(localization: mockLocalization);
+    setupMockLocalizations(mockLocalization);
   });
 
   group('getExpiresInDaysCount', () {

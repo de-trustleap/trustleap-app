@@ -16,6 +16,7 @@ void main() {
           statusLevel: 0,
           statusTimestamps: null,
           defaultLandingPageID: "3",
+          userID: "1",
           lastUpdated: null);
       final expectedResult = RecommendationItem(
           id: "1",
@@ -28,6 +29,7 @@ void main() {
           statusLevel: 0,
           statusTimestamps: null,
           defaultLandingPageID: "3",
+          userID: "1",
           lastUpdated: null);
       // When
       final result = recoItem.copyWith(name: "Test Neu");
@@ -50,6 +52,7 @@ void main() {
           statusLevel: 0,
           statusTimestamps: null,
           defaultLandingPageID: "3",
+          userID: "1",
           lastUpdated: null);
       final recoItem2 = RecommendationItem(
           id: "1",
@@ -62,6 +65,7 @@ void main() {
           statusLevel: 0,
           statusTimestamps: null,
           defaultLandingPageID: "3",
+          userID: "1",
           lastUpdated: null);
       // Then
       expect(recoItem2, recoItem1);

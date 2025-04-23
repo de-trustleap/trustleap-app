@@ -33,6 +33,7 @@ void main() {
           promoterName: "Test",
           serviceProviderName: "Test",
           defaultLandingPageID: "2",
+          userID: "1",
           statusLevel: 0,
           statusTimestamps: null)
     ];
