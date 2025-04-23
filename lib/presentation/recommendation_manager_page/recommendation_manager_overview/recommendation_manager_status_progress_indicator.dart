@@ -30,22 +30,34 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
     final localization = AppLocalizations.of(context);
     final showVertical = responsiveValue.screenWidth > 1150 ? false : true;
 
-    final List<String> labels = [
-      localization.recommendation_manager_status_level_1,
-      localization.recommendation_manager_status_level_2,
-      localization.recommendation_manager_status_level_3,
-      localization.recommendation_manager_status_level_4,
-      localization.recommendation_manager_status_level_5,
-      localization.recommendation_manager_status_level_6
-    ];
+    final bool showWarning = level == 5;
+    final List<IconData> displayIcons =
+        showWarning ? [...icons.sublist(0, 4), icons[5]] : icons.sublist(0, 5);
+
+    final List<String> displayLabels = showWarning
+        ? [
+            localization.recommendation_manager_status_level_1,
+            localization.recommendation_manager_status_level_2,
+            localization.recommendation_manager_status_level_3,
+            localization.recommendation_manager_status_level_4,
+            localization.recommendation_manager_status_level_6, // warning
+          ]
+        : [
+            localization.recommendation_manager_status_level_1,
+            localization.recommendation_manager_status_level_2,
+            localization.recommendation_manager_status_level_3,
+            localization.recommendation_manager_status_level_4,
+            localization.recommendation_manager_status_level_5,
+          ];
 
     return showVertical
-        ? _buildVerticalLayout(context, themeData, labels)
-        : _buildHorizontalLayout(context, themeData, labels);
+        ? _buildVerticalLayout(context, themeData, displayIcons, displayLabels)
+        : _buildHorizontalLayout(
+            context, themeData, displayIcons, displayLabels);
   }
 
-  Widget _buildHorizontalLayout(
-      BuildContext context, ThemeData themeData, List<String> labels) {
+  Widget _buildHorizontalLayout(BuildContext context, ThemeData themeData,
+      List<IconData> icons, List<String> labels) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final totalWidth = constraints.maxWidth;
@@ -72,10 +84,12 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
                 Positioned(
                   top: circleSize / 2 - lineThickness / 2,
                   left: circleAreaSize / 2,
-                  width: stepSpacing * level,
+                  width: stepSpacing * level.clamp(0, 4),
                   child: Container(
                     height: lineThickness,
-                    color: level == 5 ? Colors.red : Colors.green,
+                    color: level == 5
+                        ? themeData.colorScheme.error
+                        : themeData.colorScheme.primary,
                   ),
                 ),
 
@@ -92,7 +106,7 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
                           child: SizedBox(
                             width: circleSize,
                             height: circleSize,
-                            child: _buildStepCircle(i),
+                            child: _buildStepCircle(i, icons[i], themeData),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -110,7 +124,7 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 10,
                               color: themeData.colorScheme.surfaceTint
-                                  .withOpacity(0.6),
+                                  .withValues(alpha: 0.6),
                             ),
                             textAlign: TextAlign.center,
                           )
@@ -126,8 +140,8 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
     );
   }
 
-  Widget _buildVerticalLayout(
-      BuildContext context, ThemeData themeData, List<String> labels) {
+  Widget _buildVerticalLayout(BuildContext context, ThemeData themeData,
+      List<IconData> icons, List<String> labels) {
     return Column(
       children: List.generate(icons.length, (index) {
         final isLast = index == icons.length - 1;
@@ -137,9 +151,9 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
         final isSpecialLast = index == 4 && level == 5;
 
         final circleColor = isSpecialLast
-            ? Colors.red
+            ? themeData.colorScheme.error
             : (isCompleted || (index == 4 && level >= 4))
-                ? Colors.green
+                ? themeData.colorScheme.primary
                 : isCurrent
                     ? Colors.amber
                     : Colors.grey[300]!;
@@ -168,7 +182,9 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
                     width: lineThickness,
                     height: spacing,
                     color: level > index
-                        ? (level == 5 && index == 3 ? Colors.red : Colors.green)
+                        ? (level == 5 && index == 3
+                            ? themeData.colorScheme.error
+                            : themeData.colorScheme.primary)
                         : Colors.grey[300],
                   ),
               ],
@@ -207,27 +223,21 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
     );
   }
 
-  Widget _buildStepCircle(int index) {
-    final isCompleted = level > index;
+  Widget _buildStepCircle(int index, IconData icon, ThemeData themeData) {
+    final isCompleted = level > index || level == 4;
     final isCurrent = level == index;
 
     Color bgColor;
     Color iconColor;
 
-    if (index == 4) {
-      if (level == 5) {
-        bgColor = Colors.red;
-        iconColor = Colors.white;
-      } else if (level >= 4) {
-        bgColor = Colors.green;
-        iconColor = Colors.white;
-      } else {
-        bgColor = Colors.grey[300]!;
-        iconColor = Colors.black26;
-      }
+    final isWarningStep = level == 5 && index == 4;
+
+    if (isWarningStep) {
+      bgColor = themeData.colorScheme.error;
+      iconColor = Colors.white;
     } else {
       bgColor = isCompleted
-          ? Colors.green
+          ? themeData.colorScheme.primary
           : isCurrent
               ? Colors.amber
               : Colors.grey[300]!;
@@ -241,14 +251,10 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
         color: bgColor,
         shape: BoxShape.circle,
       ),
-      child: Icon(
-        icons[index],
-        color: iconColor,
-      ),
+      child: Icon(icon, color: iconColor),
     );
   }
 }
 
 // TODO: ES SOLL EINE BUTTON REIHE GEBEN. (CALENDAR, HÄKCHEN, KREUZ, TRASH) FÜR (TERMINIEREN, ABGESCHLOSSEN, NICHT ABGESCHLOSSEN, LÖSCHEN)
-// TODO: ABGESCHLOSSEN UND NICHT ABGESCHLOSSEN STATE VEREINEN
 // TODO: FRONTEND TESTS
