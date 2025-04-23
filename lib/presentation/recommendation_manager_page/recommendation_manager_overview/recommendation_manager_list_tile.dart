@@ -1,19 +1,25 @@
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_helper.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list_tile_icon_row.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_status_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationManagerListTile extends StatelessWidget {
   final RecommendationItem recommendation;
   final bool isPromoter;
+  final Function(String) onAppointmentPressed;
+  final Function(String) onFinishedPressed;
+  final Function(String) onFailedPressed;
   final Function(String, String) onDeletePressed;
   const RecommendationManagerListTile(
       {super.key,
       required this.recommendation,
       required this.isPromoter,
+      required this.onAppointmentPressed,
+      required this.onFinishedPressed,
+      required this.onFailedPressed,
       required this.onDeletePressed});
 
   @override
@@ -70,13 +76,12 @@ class RecommendationManagerListTile extends StatelessWidget {
               level: recommendation.statusLevel ?? 0,
               statusTimestamps: recommendation.statusTimestamps ?? {}),
           const SizedBox(height: 16),
-          SecondaryButton(
-              title: localization
-                  .recommendation_manager_list_tile_delete_button_title,
-              width: 300,
-              onTap: () {
-                onDeletePressed(recommendation.id, recommendation.userID ?? "");
-              })
+          RecommendationManagerListTileIconRow(
+              recommendation: recommendation,
+              onAppointmentPressed: onAppointmentPressed,
+              onFinishedPressed: onFinishedPressed,
+              onFailedPressed: onFailedPressed,
+              onDeletePressed: onDeletePressed)
         ]);
   }
 

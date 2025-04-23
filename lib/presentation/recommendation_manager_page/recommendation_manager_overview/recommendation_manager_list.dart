@@ -7,11 +7,17 @@ import 'package:flutter/material.dart';
 class RecommendationManagerList extends StatelessWidget {
   final List<RecommendationItem> recommendations;
   final bool isPromoter;
+  final Function(String) onAppointmentPressed;
+  final Function(String) onFinishedPressed;
+  final Function(String) onFailedPressed;
   final Function(String, String) onDeletePressed;
   const RecommendationManagerList(
       {super.key,
       required this.recommendations,
       required this.isPromoter,
+      required this.onAppointmentPressed,
+      required this.onFinishedPressed,
+      required this.onFailedPressed,
       required this.onDeletePressed});
 
   @override
@@ -65,6 +71,9 @@ class RecommendationManagerList extends StatelessWidget {
               return RecommendationManagerListTile(
                 recommendation: recommendations[index],
                 isPromoter: isPromoter,
+                onAppointmentPressed: onAppointmentPressed,
+                onFinishedPressed: onFinishedPressed,
+                onFailedPressed: onFailedPressed,
                 onDeletePressed: onDeletePressed,
               );
             })

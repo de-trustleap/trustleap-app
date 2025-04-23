@@ -19,6 +19,7 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
   ];
 
   static const double circleSize = 40;
+  static const circleAreaSize = 100.0;
   static const double lineThickness = 2;
   static const double spacing = 16;
 
@@ -45,69 +46,83 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
 
   Widget _buildHorizontalLayout(
       BuildContext context, ThemeData themeData, List<String> labels) {
-    const double stepWidth = 120;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final totalWidth = constraints.maxWidth;
+        final stepCount = icons.length;
+        final stepSpacing = (totalWidth - circleAreaSize) / (stepCount - 1);
 
-    return SizedBox(
-      height: 100,
-      child: Stack(
-        alignment: Alignment.topLeft,
-        children: [
-          // Hintergrundlinie
-          Positioned(
-            top: circleSize / 2 - lineThickness / 2,
-            left: stepWidth / 2,
-            right: stepWidth / 2,
-            child: Container(
-              height: lineThickness,
-              color: Colors.grey[300],
-            ),
-          ),
-          // Fortschrittslinie
-          if (level > 0)
-            Positioned(
-              top: circleSize / 2 - lineThickness / 2,
-              left: stepWidth / 2,
-              right: stepWidth * (icons.length - level - 0.5),
-              child: Container(
-                height: lineThickness,
-                color: level == 5 ? Colors.red : Colors.green,
-              ),
-            ),
-          // Kreise + Texte
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(icons.length, (index) {
-              return SizedBox(
-                width: stepWidth,
-                child: Column(
-                  children: [
-                    _buildStepCircle(index),
-                    const SizedBox(height: 8),
-                    Text(
-                      labels[index],
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    if (statusTimestamps.containsKey(index) &&
-                        statusTimestamps[index] != null) ...[
-                      const SizedBox(height: 4),
-                      Text(
-                        DateTimeFormatter().getStringFromDate(
-                            context, statusTimestamps[index]!),
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: themeData.colorScheme.surfaceTint
-                              .withValues(alpha: 0.6),
-                        ),
-                      )
-                    ]
-                  ],
+        return SizedBox(
+          height: 100,
+          child: Stack(
+            children: [
+              // Hintergrundlinie: von Mitte des 1. bis Mitte des letzten Kreises
+              Positioned(
+                top: circleSize / 2 - lineThickness / 2,
+                left: circleAreaSize / 2,
+                width: stepSpacing * (stepCount - 1),
+                child: Container(
+                  height: lineThickness,
+                  color: Colors.grey[300],
                 ),
-              );
-            }),
+              ),
+
+              // Fortschrittslinie
+              if (level > 0)
+                Positioned(
+                  top: circleSize / 2 - lineThickness / 2,
+                  left: circleAreaSize / 2,
+                  width: stepSpacing * level,
+                  child: Container(
+                    height: lineThickness,
+                    color: level == 5 ? Colors.red : Colors.green,
+                  ),
+                ),
+
+              // Kreise + Texte absolut positioniert
+              for (int i = 0; i < stepCount; i++)
+                Positioned(
+                  left: stepSpacing * i,
+                  child: SizedBox(
+                    width: circleAreaSize,
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: SizedBox(
+                            width: circleSize,
+                            height: circleSize,
+                            child: _buildStepCircle(i),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          labels[i],
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        if (statusTimestamps.containsKey(i) &&
+                            statusTimestamps[i] != null) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            DateTimeFormatter().getStringFromDate(
+                                context, statusTimestamps[i]!),
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: themeData.colorScheme.surfaceTint
+                                  .withOpacity(0.6),
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                        ]
+                      ],
+                    ),
+                  ),
+                ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -234,6 +249,6 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
   }
 }
 
-// TODO: LOCALIZATION
+// TODO: ES SOLL EINE BUTTON REIHE GEBEN. (CALENDAR, HÄKCHEN, KREUZ, TRASH) FÜR (TERMINIEREN, ABGESCHLOSSEN, NICHT ABGESCHLOSSEN, LÖSCHEN)
+// TODO: ABGESCHLOSSEN UND NICHT ABGESCHLOSSEN STATE VEREINEN
 // TODO: FRONTEND TESTS
-// TODO: LÖSCHEN BUTTON BREITE SETZEN

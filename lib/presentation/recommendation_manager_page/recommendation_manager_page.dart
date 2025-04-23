@@ -129,6 +129,9 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
           child: RecommendationManagerOverview(
               recommendations: state.recoItems,
               isPromoter: currentUser?.role == Role.promoter ? true : false,
+              onAppointmentPressed: (recoID) {},
+              onFinishedPressed: (recoID) {},
+              onFailedPressed: (recoID) {},
               onDeletePressed: (recoID, userID) {
                 showAlert(localization, recoID, userID);
               }),

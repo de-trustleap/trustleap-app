@@ -10,11 +10,17 @@ import 'package:flutter/material.dart';
 class RecommendationManagerOverview extends StatefulWidget {
   final List<RecommendationItem> recommendations;
   final bool isPromoter;
+  final Function(String) onAppointmentPressed;
+  final Function(String) onFinishedPressed;
+  final Function(String) onFailedPressed;
   final Function(String, String) onDeletePressed;
   const RecommendationManagerOverview(
       {super.key,
       required this.recommendations,
       required this.isPromoter,
+      required this.onAppointmentPressed,
+      required this.onFinishedPressed,
+      required this.onFailedPressed,
       required this.onDeletePressed});
 
   @override
@@ -141,6 +147,9 @@ class _RecommendationManagerOverviewState
           RecommendationManagerList(
             recommendations: _filteredRecommendations,
             isPromoter: widget.isPromoter,
+            onAppointmentPressed: widget.onAppointmentPressed,
+            onFinishedPressed: widget.onFinishedPressed,
+            onFailedPressed: widget.onFailedPressed,
             onDeletePressed: widget.onDeletePressed,
           ),
         ],
