@@ -95,4 +95,50 @@ void main() {
       recoManagerCubit.getRecommendations(userID);
     });
   });
+
+  group("RecommendationManagerCubit_deleteRecommendation", () {
+    final recoID = "1";
+    final userID = "1";
+    test("should call user repo when function is called", () async {
+      // Given
+      when(mockRecoRepo.deleteRecommendation(recoID, userID))
+          .thenAnswer((_) async => right(unit));
+      // When
+      recoManagerCubit.deleteRecommendation(recoID, userID);
+      await untilCalled(mockRecoRepo.deleteRecommendation(recoID, userID));
+      // Then
+      verify(mockRecoRepo.deleteRecommendation(recoID, userID));
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test(
+        "should emit RecommendationManagerLoadingState and then RecommendationDeleteRecoSuccessState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        RecommendationManagerLoadingState(),
+        RecommendationDeleteRecoSuccessState()
+      ];
+      when(mockRecoRepo.deleteRecommendation(recoID, userID))
+          .thenAnswer((_) async => right(unit));
+      // Then
+      expectLater(recoManagerCubit.stream, emitsInOrder(expectedResult));
+      recoManagerCubit.deleteRecommendation(recoID, userID);
+    });
+
+    test(
+        "should emit RecommendationManagerLoadingState and then RecommendationDeleteRecoFailureState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        RecommendationManagerLoadingState(),
+        RecommendationDeleteRecoFailureState(failure: BackendFailure())
+      ];
+      when(mockRecoRepo.deleteRecommendation(recoID, userID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(recoManagerCubit.stream, emitsInOrder(expectedResult));
+      recoManagerCubit.deleteRecommendation(recoID, userID);
+    });
+  });
 }

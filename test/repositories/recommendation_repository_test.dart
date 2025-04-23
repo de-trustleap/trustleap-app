@@ -99,4 +99,34 @@ void main() {
       verifyNoMoreInteractions(mockRecoRepo);
     });
   });
+
+  group("RecommendationRepositoryImplementation_DeleteRecommendation", () {
+    final recoID = "1";
+    final userID = "1";
+    test("should return unit when call was successful", () async {
+      // Given
+      final expectedResult = right(unit);
+      when(mockRecoRepo.deleteRecommendation(recoID, userID))
+          .thenAnswer((_) async => right(unit));
+      // When
+      final result = await mockRecoRepo.deleteRecommendation(recoID, userID);
+      // Then
+      verify(mockRecoRepo.deleteRecommendation(recoID, userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockRecoRepo.deleteRecommendation(recoID, userID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockRecoRepo.deleteRecommendation(recoID, userID);
+      // Then
+      verify(mockRecoRepo.deleteRecommendation(recoID, userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
 }
