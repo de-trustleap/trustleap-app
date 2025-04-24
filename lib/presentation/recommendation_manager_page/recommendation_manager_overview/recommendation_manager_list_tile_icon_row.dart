@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class RecommendationManagerListTileIconRow extends StatelessWidget {
   final RecommendationItem recommendation;
-  final Function(String) onAppointmentPressed;
+  final Function(RecommendationItem) onAppointmentPressed;
   final Function(String) onFinishedPressed;
   final Function(String) onFailedPressed;
   final Function(String, String) onDeletePressed;
@@ -25,9 +25,11 @@ class RecommendationManagerListTileIconRow extends StatelessWidget {
           child: Padding(
               padding: const EdgeInsets.all(4),
               child: Tooltip(
-                message: "Termin eintragen",
+                message: "Als terminiert markieren",
                 child: ElevatedButton(
-                    onPressed: () => onAppointmentPressed(recommendation.id),
+                    onPressed: recommendation.statusLevel == 2
+                        ? () => onAppointmentPressed(recommendation)
+                        : null,
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12)),
@@ -42,7 +44,9 @@ class RecommendationManagerListTileIconRow extends StatelessWidget {
               child: Tooltip(
                 message: "Als abgeschlossen markieren",
                 child: ElevatedButton(
-                    onPressed: () => onFinishedPressed(recommendation.id),
+                    onPressed: recommendation.statusLevel == 3
+                        ? () => onFinishedPressed(recommendation.id)
+                        : null,
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12)),
@@ -56,7 +60,9 @@ class RecommendationManagerListTileIconRow extends StatelessWidget {
               child: Tooltip(
                 message: "Als nicht abgeschlossen markieren",
                 child: ElevatedButton(
-                    onPressed: () => onFailedPressed(recommendation.id),
+                    onPressed: recommendation.statusLevel == 3
+                        ? () => onFailedPressed(recommendation.id)
+                        : null,
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12)),

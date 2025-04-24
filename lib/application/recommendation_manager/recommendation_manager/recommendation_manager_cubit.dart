@@ -60,4 +60,15 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
       }
     });
   }
+
+  void updateReco(RecommendationItem updatedReco) {
+    final currentState = state;
+    if (currentState is RecommendationGetRecosSuccessState) {
+      final updatedList = currentState.recoItems.map((r) {
+        return r.id == updatedReco.id ? updatedReco : r;
+      }).toList();
+
+      emit(RecommendationGetRecosSuccessState(recoItems: updatedList));
+    }
+  }
 }

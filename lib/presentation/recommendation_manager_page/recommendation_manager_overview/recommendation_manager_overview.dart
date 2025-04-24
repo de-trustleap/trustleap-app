@@ -10,10 +10,11 @@ import 'package:flutter/material.dart';
 class RecommendationManagerOverview extends StatefulWidget {
   final List<RecommendationItem> recommendations;
   final bool isPromoter;
-  final Function(String) onAppointmentPressed;
+  final Function(RecommendationItem) onAppointmentPressed;
   final Function(String) onFinishedPressed;
   final Function(String) onFailedPressed;
   final Function(String, String) onDeletePressed;
+  final Function(RecommendationItem) onUpdate;
   const RecommendationManagerOverview(
       {super.key,
       required this.recommendations,
@@ -21,7 +22,8 @@ class RecommendationManagerOverview extends StatefulWidget {
       required this.onAppointmentPressed,
       required this.onFinishedPressed,
       required this.onFailedPressed,
-      required this.onDeletePressed});
+      required this.onDeletePressed,
+      required this.onUpdate});
 
   @override
   State<RecommendationManagerOverview> createState() =>
@@ -40,12 +42,8 @@ class _RecommendationManagerOverviewState
   @override
   void initState() {
     super.initState();
-    _searchFilteredRecommendations = widget.recommendations;
-    _filteredRecommendations = RecommendationFilter.applyFilters(
-      items: _searchFilteredRecommendations,
-      filterStates: RecommendationOverviewFilterStates(),
-    );
 
+    _setInitialFilterData();
     _searchController.addListener(() {
       final query = _searchController.text.toLowerCase();
       setState(() {
@@ -68,9 +66,28 @@ class _RecommendationManagerOverviewState
   }
 
   @override
+  void didUpdateWidget(covariant RecommendationManagerOverview oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.recommendations != oldWidget.recommendations) {
+      setState(() {
+        _setInitialFilterData();
+      });
+    }
+  }
+
+  @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  void _setInitialFilterData() {
+    _searchFilteredRecommendations = widget.recommendations;
+    _filteredRecommendations = RecommendationFilter.applyFilters(
+      items: _searchFilteredRecommendations,
+      filterStates: _currentFilterStates,
+    );
   }
 
   void onFilterPressed() {
@@ -145,12 +162,14 @@ class _RecommendationManagerOverviewState
                   ])),
           const SizedBox(height: 20),
           RecommendationManagerList(
+            key: ValueKey(_filteredRecommendations),
             recommendations: _filteredRecommendations,
             isPromoter: widget.isPromoter,
             onAppointmentPressed: widget.onAppointmentPressed,
             onFinishedPressed: widget.onFinishedPressed,
             onFailedPressed: widget.onFailedPressed,
             onDeletePressed: widget.onDeletePressed,
+            onUpdate: widget.onUpdate,
           ),
         ],
       ),

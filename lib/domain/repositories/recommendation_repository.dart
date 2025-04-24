@@ -9,4 +9,6 @@ abstract class RecommendationRepository {
       String userID);
   Future<Either<DatabaseFailure, Unit>> deleteRecommendation(
       String recoID, String userID);
+  Future<Either<DatabaseFailure, RecommendationItem>> setAppointmentState(
+      RecommendationItem recommendation);
 }

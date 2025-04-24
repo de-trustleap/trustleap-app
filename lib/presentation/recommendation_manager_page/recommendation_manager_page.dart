@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
-import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_cubit.dart';
+import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
+import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -129,11 +130,18 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
           child: RecommendationManagerOverview(
               recommendations: state.recoItems,
               isPromoter: currentUser?.role == Role.promoter ? true : false,
-              onAppointmentPressed: (recoID) {},
+              onAppointmentPressed: (recommendation) {
+                Modular.get<RecommendationManagerTileCubit>()
+                    .setAppointmentState(recommendation);
+              },
               onFinishedPressed: (recoID) {},
               onFailedPressed: (recoID) {},
               onDeletePressed: (recoID, userID) {
                 showAlert(localization, recoID, userID);
+              },
+              onUpdate: (recommendation) {
+                Modular.get<RecommendationManagerCubit>()
+                    .updateReco(recommendation);
               }),
         )
       ]);

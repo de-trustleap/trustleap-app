@@ -123,4 +123,26 @@ class RecommendationRepositoryImplementation
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, RecommendationItem>> setAppointmentState(
+      RecommendationItem recommendation) async {
+    final recoCollection = firestore.collection("recommendations");
+    final newStatusTimeStamps = recommendation.statusTimestamps;
+    final actualDate = DateTime.now();
+    newStatusTimeStamps?[3] = actualDate;
+    final newRecommendation =
+        recommendation.copyWith(statusTimestamps: newStatusTimeStamps);
+    final timeStamps = newRecommendation.statusTimestamps?.map(
+        (key, value) => MapEntry(key.toString(), value?.toIso8601String()));
+    try {
+      await recoCollection.doc(recommendation.id).set(
+          {"statusLevel": 3, "statusTimestamps": timeStamps},
+          SetOptions(merge: true));
+      return right(recommendation.copyWith(
+          statusLevel: 3, statusTimestamps: newStatusTimeStamps));
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }

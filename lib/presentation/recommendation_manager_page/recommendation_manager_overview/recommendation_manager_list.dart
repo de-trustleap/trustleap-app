@@ -7,10 +7,11 @@ import 'package:flutter/material.dart';
 class RecommendationManagerList extends StatelessWidget {
   final List<RecommendationItem> recommendations;
   final bool isPromoter;
-  final Function(String) onAppointmentPressed;
+  final Function(RecommendationItem) onAppointmentPressed;
   final Function(String) onFinishedPressed;
   final Function(String) onFailedPressed;
   final Function(String, String) onDeletePressed;
+  final Function(RecommendationItem) onUpdate;
   const RecommendationManagerList(
       {super.key,
       required this.recommendations,
@@ -18,7 +19,8 @@ class RecommendationManagerList extends StatelessWidget {
       required this.onAppointmentPressed,
       required this.onFinishedPressed,
       required this.onFailedPressed,
-      required this.onDeletePressed});
+      required this.onDeletePressed,
+      required this.onUpdate});
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +77,7 @@ class RecommendationManagerList extends StatelessWidget {
                 onFinishedPressed: onFinishedPressed,
                 onFailedPressed: onFailedPressed,
                 onDeletePressed: onDeletePressed,
+                onUpdate: onUpdate,
               );
             })
       ]

@@ -142,13 +142,9 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
   Future<void> _sendMessage(
       RecommendationItem recommendation, String message) async {
-    var link = "";
-    if (Environment().isStaging()) {
-      link =
-          "https://landingpages-staging.trust-leap.de?id=${recommendation.id}";
-    } else {
-      link = "https://landingpages.trust-leap.de?id=${recommendation.id}";
-    }
+    final baseURL = Environment().getLandingpageBaseURL();
+    final link = "$baseURL?id=${recommendation.id}";
+
     var adaptedMessage = "";
     if (!message.contains("[LINK]")) {
       setState(() {

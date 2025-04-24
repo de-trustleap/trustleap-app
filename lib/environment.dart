@@ -5,6 +5,10 @@ class Environment {
   final prodBaseURL = "app.trust-leap.de";
   final stagingBaseURL = "staging.trust-leap.de";
 
+  final landingPageProdBaseURL = "https://landingpages.trust-leap.de";
+  final landingPageStagingBaseURL =
+      "https://landingpages-staging.trust-leap.de";
+
   bool isStaging() {
     final String currentUrl = html.window.location.hostname ?? "";
     final bool isStaging = currentUrl.contains(stagingBaseURL) ||
@@ -25,6 +29,14 @@ class Environment {
       } else {
         return "6LcVOGMqAAAAAAzRRZjRjkO5o-xtO4H2X_ZbN9r2";
       }
+    }
+  }
+
+  String getLandingpageBaseURL() {
+    if (isStaging()) {
+      return landingPageStagingBaseURL;
+    } else {
+      return landingPageProdBaseURL;
     }
   }
 }
