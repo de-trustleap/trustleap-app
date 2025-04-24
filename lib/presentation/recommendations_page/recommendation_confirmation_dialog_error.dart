@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 
 class RecommendationConfirmationDialogError extends StatelessWidget {
   final DatabaseFailure failure;
+  final String? recommendationReceiverName;
   final VoidCallback cancelAction;
   final VoidCallback action;
   const RecommendationConfirmationDialogError(
       {super.key,
       required this.failure,
+      required this.recommendationReceiverName,
       required this.cancelAction,
       required this.action});
 
@@ -25,7 +27,9 @@ class RecommendationConfirmationDialogError extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            SelectableText(localization.send_recommendation_alert_description,
+            SelectableText(
+                localization.send_recommendation_alert_description(
+                    recommendationReceiverName ?? ""),
                 style: themeData.textTheme.bodyMedium),
             const SizedBox(height: 16),
             SelectableText(

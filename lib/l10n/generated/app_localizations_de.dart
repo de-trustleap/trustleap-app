@@ -1418,7 +1418,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get send_recommendation_alert_title => 'Empfehlung verschickt?';
 
   @override
-  String get send_recommendation_alert_description => 'Hast du die Empfehlung erfolgreich verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.';
+  String send_recommendation_alert_description(String receiver) {
+    return 'Hast du die Empfehlung erfolgreich an $receiver verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.';
+  }
 
   @override
   String get send_recommendation_alert_yes_button => 'Ja';

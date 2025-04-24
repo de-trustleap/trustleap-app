@@ -1900,9 +1900,15 @@
     "@send_recommendation_alert_title": {
         "description": "Titel des Alerts zum Bestätigen, ob man eine Empfehlung verschickt hat."
     },
-    "send_recommendation_alert_description": "Hast du die Empfehlung erfolgreich verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
+    "send_recommendation_alert_description": "Hast du die Empfehlung erfolgreich an {receiver} verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
     "@send_recommendation_alert_description": {
-        "description": "Beschreibung im Alert zum Bestätigen, ob man eine Empfehlung verschickt hat."
+        "description": "Beschreibung im Alert zum Bestätigen, ob man eine Empfehlung verschickt hat.",
+        "placeholders": {
+            "receiver": {
+                "type": "String",
+                "example": "Peter"
+            }
+        }
     },
     "send_recommendation_alert_yes_button": "Ja",
     "@send_recommendation_alert_yes_button": {

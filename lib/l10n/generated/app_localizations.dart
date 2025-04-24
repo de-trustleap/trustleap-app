@@ -2900,8 +2900,8 @@ abstract class AppLocalizations {
   /// Description of the alert to confirm whether you have sent a recommendation.
   ///
   /// In en, this message translates to:
-  /// **'Did you successfully send the recommendation? The link in the recommendation will only become valid once you confirm it here.'**
-  String get send_recommendation_alert_description;
+  /// **'Did you successfully send the recommendation to {receiver}? The link in the recommendation will only become valid once you confirm it here.'**
+  String send_recommendation_alert_description(String receiver);
 
   /// Confirmation button of the alert to confirm whether you have sent a recommendation.
   ///

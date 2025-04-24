@@ -1418,7 +1418,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get send_recommendation_alert_title => 'Recommendation sent?';
 
   @override
-  String get send_recommendation_alert_description => 'Did you successfully send the recommendation? The link in the recommendation will only become valid once you confirm it here.';
+  String send_recommendation_alert_description(String receiver) {
+    return 'Did you successfully send the recommendation to $receiver? The link in the recommendation will only become valid once you confirm it here.';
+  }
 
   @override
   String get send_recommendation_alert_yes_button => 'Yes';

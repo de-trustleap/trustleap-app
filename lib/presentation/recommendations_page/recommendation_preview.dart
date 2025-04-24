@@ -190,6 +190,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
             context: context,
             builder: (_) {
               return RecommendationConfirmationDialog(
+                  recommendationReceiverName: recommendation.name,
                   cancelAction: () {
                     isAlertVisible = false;
                     CustomNavigator.pop();
@@ -235,6 +236,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                 builder: (_) {
                   return RecommendationConfirmationDialogError(
                       failure: state.failure,
+                      recommendationReceiverName: state.recommendation.name,
                       cancelAction: () {
                         isAlertVisible = false;
                         CustomNavigator.pop();
