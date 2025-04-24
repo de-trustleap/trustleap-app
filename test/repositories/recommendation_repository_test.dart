@@ -129,4 +129,46 @@ void main() {
       verifyNoMoreInteractions(mockRecoRepo);
     });
   });
+
+  group("RecommendationRepositoryImplementation_SetAppointmentState", () {
+    final date = DateTime.now();
+    final recommendation = RecommendationItem(
+        id: "1",
+        name: "Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: 2,
+        statusTimestamps: {0: date, 1: date, 2: date});
+
+    test("should return item when call was successful", () async {
+      // Given
+      final expectedResult = right(recommendation);
+      when(mockRecoRepo.setAppointmentState(recommendation))
+          .thenAnswer((_) async => right(recommendation));
+      // When
+      final result = await mockRecoRepo.setAppointmentState(recommendation);
+      // Then
+      verify(mockRecoRepo.setAppointmentState(recommendation));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockRecoRepo.setAppointmentState(recommendation))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockRecoRepo.setAppointmentState(recommendation);
+      // Then
+      verify(mockRecoRepo.setAppointmentState(recommendation));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
 }

@@ -5725,17 +5725,6 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           as String);
 
   @override
-  String get send_recommendation_alert_description =>
-      (super.noSuchMethod(
-            Invocation.getter(#send_recommendation_alert_description),
-            returnValue: _i3.dummyValue<String>(
-              this,
-              Invocation.getter(#send_recommendation_alert_description),
-            ),
-          )
-          as String);
-
-  @override
   String get send_recommendation_alert_yes_button =>
       (super.noSuchMethod(
             Invocation.getter(#send_recommendation_alert_yes_button),
@@ -6196,6 +6185,21 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
             returnValue: _i3.dummyValue<String>(
               this,
               Invocation.method(#edit_promoter_title, [firstName, lastName]),
+            ),
+          )
+          as String);
+
+  @override
+  String send_recommendation_alert_description(String? receiver) =>
+      (super.noSuchMethod(
+            Invocation.method(#send_recommendation_alert_description, [
+              receiver,
+            ]),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.method(#send_recommendation_alert_description, [
+                receiver,
+              ]),
             ),
           )
           as String);

@@ -26,6 +26,4 @@ class RecommendationManagerTileCubit
         (recommendation) => emit(RecommendationSetStatusSuccessState(
             recommendation: recommendation)));
   }
-
-  void setCompleted(RecommendationItem recommendation, bool success) {}
 }
