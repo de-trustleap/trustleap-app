@@ -255,7 +255,3 @@ class RecommendationManagerStatusProgressIndicator extends StatelessWidget {
     );
   }
 }
-
-// TODO: TESTS
-// TODO: LOCALIZATIONS
-// TODO: TICKET MERGEN

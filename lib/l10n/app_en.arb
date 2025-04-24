@@ -2053,5 +2053,37 @@
     "recommendation_manager_failure_text": "An error has occurred",
     "@recommendation_manager_failure_text": {
         "description": "Error text on the recommendation manager page"
+    },
+    "recommendation_manager_tile_progress_appointment_button_tooltip": "Mark as scheduled",
+    "@recommendation_manager_tile_progress_appointment_button_tooltip": {
+        "description": "Tooltip for the Scheduled button in a cell of the Recommendation Manager"
+    },
+    "recommendation_manager_tile_progress_finish_button_tooltip": "Mark as completed",
+    "@recommendation_manager_tile_progress_finish_button_tooltip": {
+        "description": "Tooltip for the Completed button in a cell of the Recommendation Manager"
+    },
+    "recommendation_manager_tile_progress_failed_button_tooltip": "Mark as failed",
+    "@recommendation_manager_tile_progress_failed_button_tooltip": {
+        "description": "Tooltip for the Not Completed button in a cell of the Recommendation Manager"
+    },
+    "recommendation_manager_delete_alert_title": "Delete recommendation",
+    "@recommendation_manager_delete_alert_title": {
+        "description": "Title of the deletion alert on the recommendation manager page"
+    },
+    "recommendation_manager_delete_alert_description": "Are you sure you want to delete the recommendation? This action cannot be undone.",
+    "@recommendation_manager_delete_alert_description": {
+        "description": "Description of the deletion alert on the recommendation manager page"
+    },
+    "recommendation_manager_delete_alert_delete_button": "Delete recommendation",
+    "@recommendation_manager_delete_alert_delete_button": {
+        "description": "Delete button on the Delete Alert on the recommendation manager page"
+    },
+    "recommendation_manager_delete_alert_cancel_button": "Cancel",
+    "@recommendation_manager_delete_alert_cancel_button": {
+        "description": "Cancel button on the Delete Alert on the recommendation manager page"
+    },
+    "recommendation_manager_delete_snackbar": "The recommendation was successfully deleted!",
+    "@recommendation_manager_delete_snackbar": {
+        "description": "Snackbar Text for Recommendation Delete on the Recommendation Manager page"
     }
 }

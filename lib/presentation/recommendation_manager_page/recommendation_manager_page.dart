@@ -41,11 +41,13 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
         context: context,
         builder: (_) {
           return CustomAlertDialog(
-              title: "Empfehlung löschen",
+              title: localizations.recommendation_manager_delete_alert_title,
               message:
-                  "Möchtest du die Empfehlung wirklich löschen? Der Vorgang kann nicht rückgängig gemacht werden.",
-              actionButtonTitle: "Empfehlung löschen",
-              cancelButtonTitle: "Abbrechen",
+                  localizations.recommendation_manager_delete_alert_description,
+              actionButtonTitle: localizations
+                  .recommendation_manager_delete_alert_delete_button,
+              cancelButtonTitle: localizations
+                  .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
                   _submitDeleteRecommendation(recoID, userID),
               cancelButtonAction: () => CustomNavigator.pop());
@@ -74,7 +76,7 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
                 .getRecommendations(state.user.id.value);
           } else if (state is RecommendationDeleteRecoSuccessState) {
             CustomSnackBar.of(context).showCustomSnackBar(
-                "Die Empfehlung wurde erfolgreich gelöscht!");
+                localization.recommendation_manager_delete_snackbar);
             Modular.get<RecommendationManagerCubit>()
                 .getRecommendations(currentUser?.id.value);
           } else if (state is RecommendationDeleteRecoFailureState) {

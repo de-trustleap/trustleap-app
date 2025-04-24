@@ -25,7 +25,8 @@ class RecommendationManagerListTileIconRow extends StatelessWidget {
           child: Padding(
               padding: const EdgeInsets.all(4),
               child: Tooltip(
-                message: "Als terminiert markieren",
+                message: localization
+                    .recommendation_manager_tile_progress_appointment_button_tooltip,
                 child: ElevatedButton(
                     onPressed: recommendation.statusLevel == 2
                         ? () => onAppointmentPressed(recommendation)
@@ -42,7 +43,8 @@ class RecommendationManagerListTileIconRow extends StatelessWidget {
           child: Padding(
               padding: const EdgeInsets.all(4),
               child: Tooltip(
-                message: "Als abgeschlossen markieren",
+                message: localization
+                    .recommendation_manager_tile_progress_finish_button_tooltip,
                 child: ElevatedButton(
                     onPressed: recommendation.statusLevel == 3
                         ? () => onFinishedPressed(recommendation.id)
@@ -58,7 +60,8 @@ class RecommendationManagerListTileIconRow extends StatelessWidget {
           child: Padding(
               padding: const EdgeInsets.all(4),
               child: Tooltip(
-                message: "Als nicht abgeschlossen markieren",
+                message: localization
+                    .recommendation_manager_tile_progress_failed_button_tooltip,
                 child: ElevatedButton(
                     onPressed: recommendation.statusLevel == 3
                         ? () => onFailedPressed(recommendation.id)

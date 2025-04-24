@@ -3118,6 +3118,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An error has occurred'**
   String get recommendation_manager_failure_text;
+
+  /// Tooltip for the Scheduled button in a cell of the Recommendation Manager
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as scheduled'**
+  String get recommendation_manager_tile_progress_appointment_button_tooltip;
+
+  /// Tooltip for the Completed button in a cell of the Recommendation Manager
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as completed'**
+  String get recommendation_manager_tile_progress_finish_button_tooltip;
+
+  /// Tooltip for the Not Completed button in a cell of the Recommendation Manager
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as failed'**
+  String get recommendation_manager_tile_progress_failed_button_tooltip;
+
+  /// Title of the deletion alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Delete recommendation'**
+  String get recommendation_manager_delete_alert_title;
+
+  /// Description of the deletion alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete the recommendation? This action cannot be undone.'**
+  String get recommendation_manager_delete_alert_description;
+
+  /// Delete button on the Delete Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Delete recommendation'**
+  String get recommendation_manager_delete_alert_delete_button;
+
+  /// Cancel button on the Delete Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get recommendation_manager_delete_alert_cancel_button;
+
+  /// Snackbar Text for Recommendation Delete on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'The recommendation was successfully deleted!'**
+  String get recommendation_manager_delete_snackbar;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

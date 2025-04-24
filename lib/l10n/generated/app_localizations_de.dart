@@ -1529,4 +1529,28 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recommendation_manager_failure_text => 'Es ist ein Fehler aufgetreten';
+
+  @override
+  String get recommendation_manager_tile_progress_appointment_button_tooltip => 'Als terminiert markieren';
+
+  @override
+  String get recommendation_manager_tile_progress_finish_button_tooltip => 'Als abgeschlossen markieren';
+
+  @override
+  String get recommendation_manager_tile_progress_failed_button_tooltip => 'Als nicht abgeschlossen markieren';
+
+  @override
+  String get recommendation_manager_delete_alert_title => 'Empfehlung löschen';
+
+  @override
+  String get recommendation_manager_delete_alert_description => 'Möchtest du die Empfehlung wirklich löschen? Der Vorgang kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get recommendation_manager_delete_alert_delete_button => 'Empfehlung löschen';
+
+  @override
+  String get recommendation_manager_delete_alert_cancel_button => 'Abbrechen';
+
+  @override
+  String get recommendation_manager_delete_snackbar => 'Die Empfehlung wurde erfolgreich gelöscht!';
 }

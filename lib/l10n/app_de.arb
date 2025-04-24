@@ -2053,5 +2053,37 @@
     "recommendation_manager_failure_text": "Es ist ein Fehler aufgetreten",
     "@recommendation_manager_failure_text": {
         "description": "Fehler Text auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_tile_progress_appointment_button_tooltip": "Als terminiert markieren",
+    "@recommendation_manager_tile_progress_appointment_button_tooltip": {
+        "description": "Tooltip für den Terminiert Button in einer Zelle des Empfehlungsmanagers"
+    },
+    "recommendation_manager_tile_progress_finish_button_tooltip": "Als abgeschlossen markieren",
+    "@recommendation_manager_tile_progress_finish_button_tooltip": {
+        "description": "Tooltip für den Abgeschlossen Button in einer Zelle des Empfehlungsmanagers"
+    },
+    "recommendation_manager_tile_progress_failed_button_tooltip": "Als nicht abgeschlossen markieren",
+    "@recommendation_manager_tile_progress_failed_button_tooltip": {
+        "description": "Tooltip für den Nicht Abgeschlossen Button in einer Zelle des Empfehlungsmanagers"
+    },
+    "recommendation_manager_delete_alert_title": "Empfehlung löschen",
+    "@recommendation_manager_delete_alert_title": {
+        "description": "Titel des Löschen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_delete_alert_description": "Möchtest du die Empfehlung wirklich löschen? Der Vorgang kann nicht rückgängig gemacht werden.",
+    "@recommendation_manager_delete_alert_description": {
+        "description": "Beschreibung des Löschen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_delete_alert_delete_button": "Empfehlung löschen",
+    "@recommendation_manager_delete_alert_delete_button": {
+        "description": "Löschen Button auf dem Löschen Alert auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_delete_alert_cancel_button": "Abbrechen",
+    "@recommendation_manager_delete_alert_cancel_button": {
+        "description": "Abbrechen Button auf dem Löschen Alert auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_delete_snackbar": "Die Empfehlung wurde erfolgreich gelöscht!",
+    "@recommendation_manager_delete_snackbar": {
+        "description": "Snackbar Text für Empfehlung Löschen auf der Empfehlungsmanager Seite"
     }
 }
