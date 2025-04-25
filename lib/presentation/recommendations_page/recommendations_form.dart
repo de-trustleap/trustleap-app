@@ -88,6 +88,9 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
               defaultLandingPageID: currentUser != null
                   ? currentUser?.defaultLandingPageID
                   : parentUser?.defaultLandingPageID,
+              statusLevel: 0,
+              statusTimestamps: {0: DateTime.now()},
+              userID: currentUser?.id.value ?? parentUser?.id.value,
               promotionTemplate: reasons.firstWhere((e) {
                 return e.reason == selectedReason?.reason;
               }).promotionTemplate!));
@@ -294,6 +297,9 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                         const SizedBox(height: tabFieldSpacing),
                         RecommendationPreview(
                             leads: leads,
+                            userID: currentUser != null
+                                ? currentUser?.id.value ?? ""
+                                : parentUser?.id.value ?? "",
                             onSaveSuccess: (recommendation) {
                               setState(() {
                                 leads.removeWhere(

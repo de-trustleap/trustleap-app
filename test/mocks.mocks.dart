@@ -6000,6 +6000,429 @@ class MockAppLocalizations extends _i1.Mock implements _i22.AppLocalizations {
           as String);
 
   @override
+  String get send_recommendation_alert_title =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_title),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_title),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_alert_yes_button =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_yes_button),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_yes_button),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_alert_no_button =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_alert_no_button),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_alert_no_button),
+            ),
+          )
+          as String);
+
+  @override
+  String get send_recommendation_missing_link_text =>
+      (super.noSuchMethod(
+            Invocation.getter(#send_recommendation_missing_link_text),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#send_recommendation_missing_link_text),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_expired_day =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_expired_day),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_expired_day),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_expired_days =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_expired_days),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_expired_days),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_status_level_1 =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_status_level_1),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_status_level_1),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_status_level_2 =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_status_level_2),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_status_level_2),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_status_level_3 =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_status_level_3),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_status_level_3),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_status_level_4 =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_status_level_4),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_status_level_4),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_status_level_5 =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_status_level_5),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_status_level_5),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_status_level_6 =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_status_level_6),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_status_level_6),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_filter_expires_date =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_filter_expires_date),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_filter_expires_date),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_filter_last_updated =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_filter_last_updated),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_filter_last_updated),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_filter_promoter =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_filter_promoter),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_filter_promoter),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_filter_recommendation_receiver =>
+      (super.noSuchMethod(
+            Invocation.getter(
+              #recommendation_manager_filter_recommendation_receiver,
+            ),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_filter_recommendation_receiver,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_filter_reason =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_filter_reason),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_filter_reason),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_filter_ascending =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_filter_ascending),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_filter_ascending),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_filter_descending =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_filter_descending),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_filter_descending),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_filter_status_all =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_filter_status_all),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_filter_status_all),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_list_header_receiver =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_list_header_receiver),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_list_header_receiver),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_list_header_promoter =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_list_header_promoter),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_list_header_promoter),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_list_header_status =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_list_header_status),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_list_header_status),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_list_header_expiration_date =>
+      (super.noSuchMethod(
+            Invocation.getter(
+              #recommendation_manager_list_header_expiration_date,
+            ),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_list_header_expiration_date,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_no_search_result_title =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_no_search_result_title),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_no_search_result_title),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_no_search_result_description =>
+      (super.noSuchMethod(
+            Invocation.getter(
+              #recommendation_manager_no_search_result_description,
+            ),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_no_search_result_description,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_list_tile_receiver =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_list_tile_receiver),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_list_tile_receiver),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_list_tile_reason =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_list_tile_reason),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_list_tile_reason),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_list_tile_delete_button_title =>
+      (super.noSuchMethod(
+            Invocation.getter(
+              #recommendation_manager_list_tile_delete_button_title,
+            ),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_list_tile_delete_button_title,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_title =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_title),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_title),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_filter_tooltip =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_filter_tooltip),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_filter_tooltip),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_search_close_tooltip =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_search_close_tooltip),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_search_close_tooltip),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_search_placeholder =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_search_placeholder),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_search_placeholder),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_no_data_title =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_no_data_title),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_no_data_title),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_no_data_description =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_no_data_description),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_no_data_description),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_no_data_button_title =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_no_data_button_title),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_no_data_button_title),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_failure_text =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_failure_text),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_failure_text),
+            ),
+          )
+          as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -6048,6 +6471,21 @@ class MockAppLocalizations extends _i1.Mock implements _i22.AppLocalizations {
             returnValue: _i23.dummyValue<String>(
               this,
               Invocation.method(#edit_promoter_title, [firstName, lastName]),
+            ),
+          )
+          as String);
+
+  @override
+  String send_recommendation_alert_description(String? receiver) =>
+      (super.noSuchMethod(
+            Invocation.method(#send_recommendation_alert_description, [
+              receiver,
+            ]),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.method(#send_recommendation_alert_description, [
+                receiver,
+              ]),
             ),
           )
           as String);
@@ -7043,18 +7481,75 @@ class MockRecommendationRepository extends _i1.Mock
   @override
   _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>> saveRecommendation(
     _i39.RecommendationItem? recommendation,
+    String? userID,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#saveRecommendation, [recommendation]),
+            Invocation.method(#saveRecommendation, [recommendation, userID]),
             returnValue:
                 _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>>.value(
                   _FakeEither_0<_i27.DatabaseFailure, _i2.Unit>(
                     this,
-                    Invocation.method(#saveRecommendation, [recommendation]),
+                    Invocation.method(#saveRecommendation, [
+                      recommendation,
+                      userID,
+                    ]),
                   ),
                 ),
           )
           as _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i18.Future<_i2.Either<_i27.DatabaseFailure, List<_i39.RecommendationItem>>>
+  getRecommendations(String? userID) =>
+      (super.noSuchMethod(
+            Invocation.method(#getRecommendations, [userID]),
+            returnValue: _i18.Future<
+              _i2.Either<_i27.DatabaseFailure, List<_i39.RecommendationItem>>
+            >.value(
+              _FakeEither_0<
+                _i27.DatabaseFailure,
+                List<_i39.RecommendationItem>
+              >(this, Invocation.method(#getRecommendations, [userID])),
+            ),
+          )
+          as _i18.Future<
+            _i2.Either<_i27.DatabaseFailure, List<_i39.RecommendationItem>>
+          >);
+
+  @override
+  _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>> deleteRecommendation(
+    String? recoID,
+    String? userID,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteRecommendation, [recoID, userID]),
+            returnValue:
+                _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>>.value(
+                  _FakeEither_0<_i27.DatabaseFailure, _i2.Unit>(
+                    this,
+                    Invocation.method(#deleteRecommendation, [recoID, userID]),
+                  ),
+                ),
+          )
+          as _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i18.Future<_i2.Either<_i27.DatabaseFailure, _i39.RecommendationItem>>
+  setAppointmentState(_i39.RecommendationItem? recommendation) =>
+      (super.noSuchMethod(
+            Invocation.method(#setAppointmentState, [recommendation]),
+            returnValue: _i18.Future<
+              _i2.Either<_i27.DatabaseFailure, _i39.RecommendationItem>
+            >.value(
+              _FakeEither_0<_i27.DatabaseFailure, _i39.RecommendationItem>(
+                this,
+                Invocation.method(#setAppointmentState, [recommendation]),
+              ),
+            ),
+          )
+          as _i18.Future<
+            _i2.Either<_i27.DatabaseFailure, _i39.RecommendationItem>
+          >);
 }
 
 /// A class which mocks [LegalsRepository].
@@ -7837,11 +8332,13 @@ class MockRecommendationsAlertCubit extends _i1.Mock
           as bool);
 
   @override
-  void saveRecommendation(_i39.RecommendationItem? recommendation) =>
-      super.noSuchMethod(
-        Invocation.method(#saveRecommendation, [recommendation]),
-        returnValueForMissingStub: null,
-      );
+  void saveRecommendation(
+    _i39.RecommendationItem? recommendation,
+    String? userID,
+  ) => super.noSuchMethod(
+    Invocation.method(#saveRecommendation, [recommendation, userID]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void emit(_i44.RecommendationsAlertState? state) => super.noSuchMethod(

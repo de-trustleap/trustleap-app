@@ -19,11 +19,15 @@ import 'package:universal_html/html.dart' as html;
 import 'package:url_launcher/url_launcher.dart';
 
 class RecommendationPreview extends StatefulWidget {
-  final List<RecommendationItem> leads; // Liste der Leads (Namen und Gründe)
+  final String userID;
+  final List<RecommendationItem> leads;
   final Function(RecommendationItem) onSaveSuccess;
 
   const RecommendationPreview(
-      {super.key, required this.leads, required this.onSaveSuccess});
+      {super.key,
+      required this.userID,
+      required this.leads,
+      required this.onSaveSuccess});
 
   @override
   State<RecommendationPreview> createState() => _RecommendationPreviewState();
@@ -138,13 +142,9 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
   Future<void> _sendMessage(
       RecommendationItem recommendation, String message) async {
-    var link = "";
-    if (Environment().isStaging()) {
-      link =
-          "https://landingpages-staging.trust-leap.de?id=${recommendation.id}";
-    } else {
-      link = "https://landingpages.trust-leap.de?id=${recommendation.id}";
-    }
+    final baseURL = Environment().getLandingpageBaseURL();
+    final link = "$baseURL?id=${recommendation.id}";
+
     var adaptedMessage = "";
     if (!message.contains("[LINK]")) {
       setState(() {
@@ -186,6 +186,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
             context: context,
             builder: (_) {
               return RecommendationConfirmationDialog(
+                  recommendationReceiverName: recommendation.name,
                   cancelAction: () {
                     isAlertVisible = false;
                     CustomNavigator.pop();
@@ -198,7 +199,8 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   }
 
   void _onRecommendationSentSuccessful(RecommendationItem recommendation) {
-    Modular.get<RecommendationsAlertCubit>().saveRecommendation(recommendation);
+    Modular.get<RecommendationsAlertCubit>()
+        .saveRecommendation(recommendation, widget.userID);
   }
 
   @override
@@ -230,6 +232,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                 builder: (_) {
                   return RecommendationConfirmationDialogError(
                       failure: state.failure,
+                      recommendationReceiverName: state.recommendation.name,
                       cancelAction: () {
                         isAlertVisible = false;
                         CustomNavigator.pop();

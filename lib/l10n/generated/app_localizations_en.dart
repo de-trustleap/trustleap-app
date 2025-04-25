@@ -1418,7 +1418,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get send_recommendation_alert_title => 'Recommendation sent?';
 
   @override
-  String get send_recommendation_alert_description => 'Did you successfully send the recommendation? The link in the recommendation will only become valid once you confirm it here.';
+  String send_recommendation_alert_description(String receiver) {
+    return 'Did you successfully send the recommendation to $receiver? The link in the recommendation will only become valid once you confirm it here.';
+  }
 
   @override
   String get send_recommendation_alert_yes_button => 'Yes';
@@ -1428,4 +1430,127 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get send_recommendation_missing_link_text => 'The [LINK] placeholder is missing!';
+
+  @override
+  String get recommendation_manager_expired_day => 'day';
+
+  @override
+  String get recommendation_manager_expired_days => 'days';
+
+  @override
+  String get recommendation_manager_status_level_1 => 'Recommendation made';
+
+  @override
+  String get recommendation_manager_status_level_2 => 'Link clicked';
+
+  @override
+  String get recommendation_manager_status_level_3 => 'Contacted';
+
+  @override
+  String get recommendation_manager_status_level_4 => 'Appointment made';
+
+  @override
+  String get recommendation_manager_status_level_5 => 'Completed';
+
+  @override
+  String get recommendation_manager_status_level_6 => 'Not completed';
+
+  @override
+  String get recommendation_manager_filter_expires_date => 'Expiration date';
+
+  @override
+  String get recommendation_manager_filter_last_updated => 'Last updated';
+
+  @override
+  String get recommendation_manager_filter_promoter => 'Promoter';
+
+  @override
+  String get recommendation_manager_filter_recommendation_receiver => 'Receiver';
+
+  @override
+  String get recommendation_manager_filter_reason => 'Reason';
+
+  @override
+  String get recommendation_manager_filter_ascending => 'Ascending';
+
+  @override
+  String get recommendation_manager_filter_descending => 'Descending';
+
+  @override
+  String get recommendation_manager_filter_status_all => 'All';
+
+  @override
+  String get recommendation_manager_list_header_receiver => 'Recommendation name';
+
+  @override
+  String get recommendation_manager_list_header_promoter => 'Promoter';
+
+  @override
+  String get recommendation_manager_list_header_status => 'Status';
+
+  @override
+  String get recommendation_manager_list_header_expiration_date => 'Expires in';
+
+  @override
+  String get recommendation_manager_no_search_result_title => 'No search results';
+
+  @override
+  String get recommendation_manager_no_search_result_description => 'No recommendations were found for your search term.';
+
+  @override
+  String get recommendation_manager_list_tile_receiver => 'Recommendation receiver';
+
+  @override
+  String get recommendation_manager_list_tile_reason => 'Recommendation reason';
+
+  @override
+  String get recommendation_manager_list_tile_delete_button_title => 'Delete recommendation';
+
+  @override
+  String get recommendation_manager_title => 'My Recommendations';
+
+  @override
+  String get recommendation_manager_filter_tooltip => 'Filter recommendations';
+
+  @override
+  String get recommendation_manager_search_close_tooltip => 'Delete search term';
+
+  @override
+  String get recommendation_manager_search_placeholder => 'Suche...';
+
+  @override
+  String get recommendation_manager_no_data_title => 'No recommendations found';
+
+  @override
+  String get recommendation_manager_no_data_description => 'No recommendations were found. You don\'t seem to have made a recommendation yet. Your recommendations are displayed in the Recommendation Manager.';
+
+  @override
+  String get recommendation_manager_no_data_button_title => 'Make a recommendation';
+
+  @override
+  String get recommendation_manager_failure_text => 'An error has occurred';
+
+  @override
+  String get recommendation_manager_tile_progress_appointment_button_tooltip => 'Mark as scheduled';
+
+  @override
+  String get recommendation_manager_tile_progress_finish_button_tooltip => 'Mark as completed';
+
+  @override
+  String get recommendation_manager_tile_progress_failed_button_tooltip => 'Mark as failed';
+
+  @override
+  String get recommendation_manager_delete_alert_title => 'Delete recommendation';
+
+  @override
+  String get recommendation_manager_delete_alert_description => 'Are you sure you want to delete the recommendation? This action cannot be undone.';
+
+  @override
+  String get recommendation_manager_delete_alert_delete_button => 'Delete recommendation';
+
+  @override
+  String get recommendation_manager_delete_alert_cancel_button => 'Cancel';
+
+  @override
+  String get recommendation_manager_delete_snackbar => 'The recommendation was successfully deleted!';
 }

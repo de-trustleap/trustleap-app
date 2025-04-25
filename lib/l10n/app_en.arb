@@ -1900,9 +1900,15 @@
     "@send_recommendation_alert_title": {
         "description": "Title of the alert to confirm whether you have sent a recommendation."
     },
-    "send_recommendation_alert_description": "Did you successfully send the recommendation? The link in the recommendation will only become valid once you confirm it here.",
+    "send_recommendation_alert_description": "Did you successfully send the recommendation to {receiver}? The link in the recommendation will only become valid once you confirm it here.",
     "@send_recommendation_alert_description": {
-        "description": "Description of the alert to confirm whether you have sent a recommendation."
+        "description": "Description of the alert to confirm whether you have sent a recommendation.",
+        "placeholders": {
+            "receiver": {
+                "type": "String",
+                "example": "Peter"
+            }
+        }
     },
     "send_recommendation_alert_yes_button": "Yes",
     "@send_recommendation_alert_yes_button": {
@@ -1915,5 +1921,169 @@
     "send_recommendation_missing_link_text": "The [LINK] placeholder is missing!",
     "@send_recommendation_missing_link_text": {
         "description": "Missing link warning when creating a recommendation."
+    },
+    "recommendation_manager_expired_day": "day",
+    "@recommendation_manager_expired_day": {
+        "description": "Expired date in days on the recommendation manager page"
+    },
+    "recommendation_manager_expired_days": "days",
+    "@recommendation_manager_expired_days": {
+        "description": "Expired date in days on the recommendation manager page"
+    },
+    "recommendation_manager_status_level_1": "Recommendation made",
+    "@recommendation_manager_status_level_1": {
+        "description": "Text for the first status level of the progress bar on the referral manager page"
+    },
+    "recommendation_manager_status_level_2": "Link clicked",
+    "@recommendation_manager_status_level_2": {
+        "description": "Text for the second status level of the progress bar on the referral manager page"
+    },
+    "recommendation_manager_status_level_3": "Contacted",
+    "@recommendation_manager_status_level_3": {
+        "description": "Text for the third status level of the progress bar on the referral manager page"
+    },
+    "recommendation_manager_status_level_4": "Appointment made",
+    "@recommendation_manager_status_level_4": {
+        "description": "Text for the fourth status level of the progress bar on the referral manager page"
+    },
+    "recommendation_manager_status_level_5": "Completed",
+    "@recommendation_manager_status_level_5": {
+        "description": "Text for the fifth status level of the progress bar on the referral manager page"
+    },
+    "recommendation_manager_status_level_6": "Not completed",
+    "@recommendation_manager_status_level_6": {
+        "description": "Text for the sixth status level of the progress bar on the referral manager page"
+    },
+    "recommendation_manager_filter_expires_date": "Expiration date",
+    "@recommendation_manager_filter_expires_date": {
+        "description": "Expiration date in the dropdown menu in the Filter View on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_last_updated": "Last updated",
+    "@recommendation_manager_filter_last_updated": {
+        "description": "Last updated date in the dropdown menu in the Filter View on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_promoter": "Promoter",
+    "@recommendation_manager_filter_promoter": {
+        "description": "Promoter in the dropdown menu in the Filter View on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_recommendation_receiver": "Receiver",
+    "@recommendation_manager_filter_recommendation_receiver": {
+        "description": "Recommendation receiver in the dropdown menu in the Filter View on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_reason": "Reason",
+    "@recommendation_manager_filter_reason": {
+        "description": "Reason in the dropdown menu in the Filter View on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_ascending": "Ascending",
+    "@recommendation_manager_filter_ascending": {
+        "description": "Ascending Radio Button in the Filter View on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_descending": "Descending",
+    "@recommendation_manager_filter_descending": {
+        "description": "Descending Radio Button in the Filter View on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_status_all": "All",
+    "@recommendation_manager_filter_status_all": {
+        "description": "All Recommendation Status dropdown menu entry in the Filter View on the Recommendation Manager page"
+    },
+    "recommendation_manager_list_header_receiver": "Recommendation name",
+    "@recommendation_manager_list_header_receiver": {
+        "description": "Recommendation name entry in the list header on the Recommendation Manager page"
+    },
+    "recommendation_manager_list_header_promoter": "Promoter",
+    "@recommendation_manager_list_header_promoter": {
+        "description": "Promoter entry in the list header on the Recommendation Manager page"
+    },
+    "recommendation_manager_list_header_status": "Status",
+    "@recommendation_manager_list_header_status": {
+        "description": "Status entry in the list header on the Recommendation Manager page"
+    },
+    "recommendation_manager_list_header_expiration_date": "Expires in",
+    "@recommendation_manager_list_header_expiration_date": {
+        "description": "Expiration date entry in the list header on the Recommendation Manager page"
+    },
+    "recommendation_manager_no_search_result_title": "No search results",
+    "@recommendation_manager_no_search_result_title": {
+        "description": "Title for the No Search Results view on the Recommendation Manager page"
+    },
+    "recommendation_manager_no_search_result_description": "No recommendations were found for your search term.",
+    "@recommendation_manager_no_search_result_description": {
+        "description": "TitDescriptionle for the No Search Results view on the Recommendation Manager page"
+    },
+    "recommendation_manager_list_tile_receiver": "Recommendation receiver",
+    "@recommendation_manager_list_tile_receiver": {
+        "description": "Recommendation receiver text in list cell on the Recommendation Manager page"
+    },
+    "recommendation_manager_list_tile_reason": "Recommendation reason",
+    "@recommendation_manager_list_tile_reason": {
+        "description": "Reason text in list cell on the ReferrRecommendational Manager page"
+    },
+    "recommendation_manager_list_tile_delete_button_title": "Delete recommendation",
+    "@recommendation_manager_list_tile_delete_button_title": {
+        "description": "Button title in list cell on the Recommendation Manager page"
+    },
+    "recommendation_manager_title": "My Recommendations",
+    "@recommendation_manager_title": {
+        "description": "Title on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_tooltip": "Filter recommendations",
+    "@recommendation_manager_filter_tooltip": {
+        "description": "Tooltip for the filter button on the Recommendation Manager page"
+    },
+    "recommendation_manager_search_close_tooltip": "Delete search term",
+    "@recommendation_manager_search_close_tooltip": {
+        "description": "Tooltip for the close button in the search bar on the recommendation manager page"
+    },
+    "recommendation_manager_search_placeholder": "Suche...",
+    "@recommendation_manager_search_placeholder": {
+        "description": "Search placeholder in the search bar on the recommendation manager page"
+    },
+    "recommendation_manager_no_data_title": "No recommendations found",
+    "@recommendation_manager_no_data_title": {
+        "description": "Title of the page that is displayed when there are no recommendations on the Recommendation Manager page"
+    },
+    "recommendation_manager_no_data_description": "No recommendations were found. You don't seem to have made a recommendation yet. Your recommendations are displayed in the Recommendation Manager.",
+    "@recommendation_manager_no_data_description": {
+        "description": "Description of the page that is displayed when there are no recommendations on the Recommendation Manager page"
+    },
+    "recommendation_manager_no_data_button_title": "Make a recommendation",
+    "@recommendation_manager_no_data_button_title": {
+        "description": "Button text of the page that is displayed when there are no recommendations on the Recommendation Manager page"
+    },
+    "recommendation_manager_failure_text": "An error has occurred",
+    "@recommendation_manager_failure_text": {
+        "description": "Error text on the recommendation manager page"
+    },
+    "recommendation_manager_tile_progress_appointment_button_tooltip": "Mark as scheduled",
+    "@recommendation_manager_tile_progress_appointment_button_tooltip": {
+        "description": "Tooltip for the Scheduled button in a cell of the Recommendation Manager"
+    },
+    "recommendation_manager_tile_progress_finish_button_tooltip": "Mark as completed",
+    "@recommendation_manager_tile_progress_finish_button_tooltip": {
+        "description": "Tooltip for the Completed button in a cell of the Recommendation Manager"
+    },
+    "recommendation_manager_tile_progress_failed_button_tooltip": "Mark as failed",
+    "@recommendation_manager_tile_progress_failed_button_tooltip": {
+        "description": "Tooltip for the Not Completed button in a cell of the Recommendation Manager"
+    },
+    "recommendation_manager_delete_alert_title": "Delete recommendation",
+    "@recommendation_manager_delete_alert_title": {
+        "description": "Title of the deletion alert on the recommendation manager page"
+    },
+    "recommendation_manager_delete_alert_description": "Are you sure you want to delete the recommendation? This action cannot be undone.",
+    "@recommendation_manager_delete_alert_description": {
+        "description": "Description of the deletion alert on the recommendation manager page"
+    },
+    "recommendation_manager_delete_alert_delete_button": "Delete recommendation",
+    "@recommendation_manager_delete_alert_delete_button": {
+        "description": "Delete button on the Delete Alert on the recommendation manager page"
+    },
+    "recommendation_manager_delete_alert_cancel_button": "Cancel",
+    "@recommendation_manager_delete_alert_cancel_button": {
+        "description": "Cancel button on the Delete Alert on the recommendation manager page"
+    },
+    "recommendation_manager_delete_snackbar": "The recommendation was successfully deleted!",
+    "@recommendation_manager_delete_snackbar": {
+        "description": "Snackbar Text for Recommendation Delete on the Recommendation Manager page"
     }
 }

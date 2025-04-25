@@ -65,6 +65,7 @@ void main() {
         "thumbnailDownloadURL": "https://thumb.de",
         "pendingCompanyRequestID": null,
         "defaultLandingPageID": null,
+        'recommendationIDs': null,
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
         "deletesAt": null,

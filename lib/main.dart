@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/modules/app_module.dart';
+import 'package:finanzbegleiter/core/router_observer.dart';
 import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/firebase_options_prod.dart';
 import 'package:finanzbegleiter/firebase_options_staging.dart';
@@ -39,6 +40,14 @@ Future main() async {
         webProvider: ReCaptchaV3Provider(environment.getAppCheckToken()));
   }
   setPathUrlStrategy();
+
+  final observer = RouterObserver();
+  Modular.to.setObservers([observer]);
+
+  Modular.to.addListener(() {
+    observer.handleNavigation();
+  });
+
   runApp(ModularApp(module: AppModule(), child: const MyApp()));
 }
 

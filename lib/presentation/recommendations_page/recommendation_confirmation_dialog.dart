@@ -3,18 +3,23 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom
 import 'package:flutter/material.dart';
 
 class RecommendationConfirmationDialog extends StatelessWidget {
+  final String? recommendationReceiverName;
   final VoidCallback cancelAction;
   final VoidCallback action;
 
   const RecommendationConfirmationDialog(
-      {super.key, required this.cancelAction, required this.action});
+      {super.key,
+      required this.recommendationReceiverName,
+      required this.cancelAction,
+      required this.action});
 
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     return CustomAlertDialog(
         title: localization.send_recommendation_alert_title,
-        message: localization.send_recommendation_alert_description,
+        message: localization.send_recommendation_alert_description(
+            recommendationReceiverName ?? ""),
         actionButtonTitle: localization.send_recommendation_alert_yes_button,
         cancelButtonTitle: localization.send_recommendation_alert_no_button,
         actionButtonAction: action,

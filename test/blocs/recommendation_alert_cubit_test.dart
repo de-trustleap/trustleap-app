@@ -15,6 +15,7 @@ void main() {
     recommendationAlertCubit = RecommendationsAlertCubit(mockRecoRepo);
   });
   group("RecommendationCubit_SaveRecommendation", () {
+    final userID = "1";
     final recommendation = RecommendationItem(
         id: "1",
         name: "Test",
@@ -23,17 +24,22 @@ void main() {
         promotionTemplate: "Test",
         promoterName: "Tester",
         serviceProviderName: "Tester",
-        defaultLandingPageID: "3");
+        userID: "1",
+        statusLevel: 0,
+        statusTimestamps: null,
+        defaultLandingPageID: "3",
+        lastUpdated: null);
 
     test("should call recommendation repo when function is called", () async {
       // Given
-      when(mockRecoRepo.saveRecommendation(recommendation))
+      when(mockRecoRepo.saveRecommendation(recommendation, userID))
           .thenAnswer((_) async => right(unit));
       // When
-      recommendationAlertCubit.saveRecommendation(recommendation);
-      await untilCalled(mockRecoRepo.saveRecommendation(recommendation));
+      recommendationAlertCubit.saveRecommendation(recommendation, userID);
+      await untilCalled(
+          mockRecoRepo.saveRecommendation(recommendation, userID));
       // Then
-      verify(mockRecoRepo.saveRecommendation(recommendation));
+      verify(mockRecoRepo.saveRecommendation(recommendation, userID));
       verifyNoMoreInteractions(mockRecoRepo);
     });
 
@@ -45,12 +51,12 @@ void main() {
         RecommendationSaveLoadingState(recommendation: recommendation),
         RecommendationSaveSuccessState(recommendation: recommendation)
       ];
-      when(mockRecoRepo.saveRecommendation(recommendation))
+      when(mockRecoRepo.saveRecommendation(recommendation, userID))
           .thenAnswer((_) async => right(unit));
       // Then
       expectLater(
           recommendationAlertCubit.stream, emitsInOrder(expectedResult));
-      recommendationAlertCubit.saveRecommendation(recommendation);
+      recommendationAlertCubit.saveRecommendation(recommendation, userID);
     });
 
     test(
@@ -62,12 +68,12 @@ void main() {
         RecommendationSaveFailureState(
             failure: BackendFailure(), recommendation: recommendation)
       ];
-      when(mockRecoRepo.saveRecommendation(recommendation))
+      when(mockRecoRepo.saveRecommendation(recommendation, userID))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(
           recommendationAlertCubit.stream, emitsInOrder(expectedResult));
-      recommendationAlertCubit.saveRecommendation(recommendation);
+      recommendationAlertCubit.saveRecommendation(recommendation, userID);
     });
   });
 }

@@ -9,9 +9,14 @@ class RecommendationItemModel extends Equatable {
   final String? landingPageID;
   final String? promoterName;
   final String? serviceProviderName;
+  final String? reason;
   final String? defaultLandingPageID;
+  final int? statusLevel;
+  final Map<int, DateTime?>? statusTimestamps;
+  final String? userID;
   final DateTime createdAt;
   final DateTime expiresAt;
+  final DateTime? lastUpdated;
 
   const RecommendationItemModel(
       {required this.id,
@@ -19,9 +24,14 @@ class RecommendationItemModel extends Equatable {
       required this.landingPageID,
       required this.promoterName,
       required this.serviceProviderName,
+      required this.reason,
       required this.defaultLandingPageID,
+      required this.statusLevel,
+      required this.statusTimestamps,
+      required this.userID,
       required this.expiresAt,
-      required this.createdAt});
+      required this.createdAt,
+      required this.lastUpdated});
 
   RecommendationItemModel copyWith(
       {String? id,
@@ -29,18 +39,28 @@ class RecommendationItemModel extends Equatable {
       String? landingPageID,
       String? promoterName,
       String? serviceProviderName,
+      String? reason,
       String? defaultLandingPageID,
+      int? statusLevel,
+      Map<int, DateTime?>? statusTimestamps,
+      String? userID,
       DateTime? expiresAt,
-      DateTime? createdAt}) {
+      DateTime? createdAt,
+      DateTime? lastUpdated}) {
     return RecommendationItemModel(
         id: id ?? this.id,
         name: name ?? this.name,
         landingPageID: landingPageID ?? this.landingPageID,
         promoterName: promoterName ?? this.promoterName,
         serviceProviderName: serviceProviderName ?? this.serviceProviderName,
+        reason: reason ?? this.reason,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
+        statusLevel: statusLevel ?? this.statusLevel,
+        statusTimestamps: statusTimestamps ?? this.statusTimestamps,
+        userID: userID ?? this.userID,
         expiresAt: expiresAt ?? this.expiresAt,
-        createdAt: createdAt ?? this.createdAt);
+        createdAt: createdAt ?? this.createdAt,
+        lastUpdated: lastUpdated ?? this.lastUpdated);
   }
 
   Map<String, dynamic> toMap() {
@@ -50,9 +70,16 @@ class RecommendationItemModel extends Equatable {
       'landingPageID': landingPageID,
       'promoterName': promoterName,
       'serviceProviderName': serviceProviderName,
+      'reason': reason,
       'defaultLandingPageID': defaultLandingPageID,
+      'statusLevel': statusLevel,
+      'statusTimestamps': statusTimestamps?.map(
+          (key, value) => MapEntry(key.toString(), value?.toIso8601String())),
+      'userID': userID,
       'expiresAt': Timestamp.fromDate(expiresAt),
-      'createdAt': Timestamp.fromDate(createdAt)
+      'createdAt': Timestamp.fromDate(createdAt),
+      'lastUpdated':
+          lastUpdated != null ? Timestamp.fromDate(lastUpdated!) : null
     };
   }
 
@@ -68,11 +95,22 @@ class RecommendationItemModel extends Equatable {
         serviceProviderName: map['serviceProviderName'] != null
             ? map['serviceProviderName'] as String
             : null,
+        reason: map['reason'] != null ? map['reason'] as String : null,
         defaultLandingPageID: map['defaultLandingPageID'] != null
             ? map['defaultLandingPageID'] as String
             : null,
+        statusLevel:
+            map['statusLevel'] != null ? map['statusLevel'] as int : null,
+        statusTimestamps: map['statusTimestamps'] != null
+            ? (map['statusTimestamps'] as Map<String, dynamic>).map(
+                (key, value) => MapEntry(int.parse(key), DateTime.parse(value)))
+            : null,
+        userID: map['userID'] != null ? map['userID'] as String : null,
         expiresAt: (map['expiresAt'] as Timestamp).toDate(),
-        createdAt: (map['createdAt'] as Timestamp).toDate());
+        createdAt: (map['createdAt'] as Timestamp).toDate(),
+        lastUpdated: map['lastUpdated'] != null
+            ? (map['lastUpdated'] as Timestamp).toDate()
+            : null);
   }
 
   factory RecommendationItemModel.fromFirestore(
@@ -84,13 +122,18 @@ class RecommendationItemModel extends Equatable {
     return RecommendationItem(
         id: id,
         name: name,
-        reason: null,
+        reason: reason,
         promotionTemplate: null,
         landingPageID: landingPageID,
         promoterName: promoterName,
         serviceProviderName: serviceProviderName,
         defaultLandingPageID: defaultLandingPageID,
-        expiresAt: expiresAt);
+        statusLevel: statusLevel,
+        statusTimestamps: statusTimestamps,
+        userID: userID,
+        expiresAt: expiresAt,
+        createdAt: createdAt,
+        lastUpdated: lastUpdated);
   }
 
   factory RecommendationItemModel.fromDomain(
@@ -101,9 +144,14 @@ class RecommendationItemModel extends Equatable {
         landingPageID: recommendation.landingPageID,
         promoterName: recommendation.promoterName,
         serviceProviderName: recommendation.serviceProviderName,
+        reason: recommendation.reason,
         defaultLandingPageID: recommendation.defaultLandingPageID,
+        statusLevel: recommendation.statusLevel,
+        statusTimestamps: recommendation.statusTimestamps,
+        userID: recommendation.userID,
         expiresAt: recommendation.expiresAt,
-        createdAt: recommendation.createdAt);
+        createdAt: recommendation.createdAt,
+        lastUpdated: recommendation.lastUpdated);
   }
 
   @override
@@ -113,7 +161,9 @@ class RecommendationItemModel extends Equatable {
         landingPageID,
         promoterName,
         serviceProviderName,
+        reason,
         expiresAt,
-        defaultLandingPageID
+        defaultLandingPageID,
+        userID
       ];
 }

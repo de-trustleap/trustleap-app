@@ -1900,9 +1900,15 @@
     "@send_recommendation_alert_title": {
         "description": "Titel des Alerts zum Bestätigen, ob man eine Empfehlung verschickt hat."
     },
-    "send_recommendation_alert_description": "Hast du die Empfehlung erfolgreich verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
+    "send_recommendation_alert_description": "Hast du die Empfehlung erfolgreich an {receiver} verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
     "@send_recommendation_alert_description": {
-        "description": "Beschreibung im Alert zum Bestätigen, ob man eine Empfehlung verschickt hat."
+        "description": "Beschreibung im Alert zum Bestätigen, ob man eine Empfehlung verschickt hat.",
+        "placeholders": {
+            "receiver": {
+                "type": "String",
+                "example": "Peter"
+            }
+        }
     },
     "send_recommendation_alert_yes_button": "Ja",
     "@send_recommendation_alert_yes_button": {
@@ -1915,5 +1921,169 @@
     "send_recommendation_missing_link_text": "Der [LINK] Platzhalter darf nicht fehlen!",
     "@send_recommendation_missing_link_text": {
         "description": "Fehlender Link Warnung beim Erstellen einer Empfehlung."
+    },
+    "recommendation_manager_expired_day": "Tag",
+    "@recommendation_manager_expired_day": {
+        "description": "Ablaufdatum in Tagen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_expired_days": "Tagen",
+    "@recommendation_manager_expired_days": {
+        "description": "Ablaufdatum in Tagen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_status_level_1": "Empfehlung ausgesprochen",
+    "@recommendation_manager_status_level_1": {
+        "description": "Text für die erste Status Stufe der Fortschrittsanzeige auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_status_level_2": "Link geklickt",
+    "@recommendation_manager_status_level_2": {
+        "description": "Text für die zweite Status Stufe der Fortschrittsanzeige auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_status_level_3": "Kontakt aufgenommen",
+    "@recommendation_manager_status_level_3": {
+        "description": "Text für die dritte Status Stufe der Fortschrittsanzeige auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_status_level_4": "Empfehlung terminiert",
+    "@recommendation_manager_status_level_4": {
+        "description": "Text für die vierte Status Stufe der Fortschrittsanzeige auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_status_level_5": "Abgeschlossen",
+    "@recommendation_manager_status_level_5": {
+        "description": "Text für die fünfte Status Stufe der Fortschrittsanzeige auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_status_level_6": "Nicht abgeschlossen",
+    "@recommendation_manager_status_level_6": {
+        "description": "Text für die sechste Status Stufe der Fortschrittsanzeige auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_expires_date": "Ablaufdatum",
+    "@recommendation_manager_filter_expires_date": {
+        "description": "Ablaufdatum im Dropdown Menü in der Filter View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_last_updated": "Zuletzt aktualisiert",
+    "@recommendation_manager_filter_last_updated": {
+        "description": "Zuletzt aktualisiert Text im Dropdown Menü in der Filter View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_promoter": "Promoter",
+    "@recommendation_manager_filter_promoter": {
+        "description": "Promoter im Dropdown Menü in der Filter View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_recommendation_receiver": "Empfänger",
+    "@recommendation_manager_filter_recommendation_receiver": {
+        "description": "Empfänger im Dropdown Menü in der Filter View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_reason": "Grund",
+    "@recommendation_manager_filter_reason": {
+        "description": "Grund im Dropdown Menü in der Filter View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_ascending": "Aufsteigend",
+    "@recommendation_manager_filter_ascending": {
+        "description": "Aufsteigend Radio Button in der Filter View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_descending": "Absteigend",
+    "@recommendation_manager_filter_descending": {
+        "description": "Absteigend Radio Button in der Filter View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_status_all": "Alle",
+    "@recommendation_manager_filter_status_all": {
+        "description": "Alle Empfehlungsstatus Dropdown Menü Eintrag in der Filter View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_list_header_receiver": "Empfehlungsname",
+    "@recommendation_manager_list_header_receiver": {
+        "description": "Empfehlungsname Eintrag im Listen Header auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_list_header_promoter": "Promoter",
+    "@recommendation_manager_list_header_promoter": {
+        "description": "Promoter Eintrag im Listen Header auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_list_header_status": "Status",
+    "@recommendation_manager_list_header_status": {
+        "description": "Status Eintrag im Listen Header auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_list_header_expiration_date": "Läuft ab in",
+    "@recommendation_manager_list_header_expiration_date": {
+        "description": "Ablaufdatum Eintrag im Listen Header auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_no_search_result_title": "Keine Suchergebnisse",
+    "@recommendation_manager_no_search_result_title": {
+        "description": "Titel für die Keine Suchergebnisse View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_no_search_result_description": "Unter deinem Suchbegriff wurden keine Empfehlungen gefunden.",
+    "@recommendation_manager_no_search_result_description": {
+        "description": "Beschreibung für die Keine Suchergebnisse View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_list_tile_receiver": "Empfehlungsempfänger",
+    "@recommendation_manager_list_tile_receiver": {
+        "description": "Empfehlungsempfänger Text in Listen Zelle auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_list_tile_reason": "Empfehlungsgrund",
+    "@recommendation_manager_list_tile_reason": {
+        "description": "Grund Text in Listen Zelle auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_list_tile_delete_button_title": "Empfehlung löschen",
+    "@recommendation_manager_list_tile_delete_button_title": {
+        "description": "Button Titel in Listen Zelle auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_title": "Meine Empfehlungen",
+    "@recommendation_manager_title": {
+        "description": "Überschrift auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_tooltip": "Empfehlungen filtern",
+    "@recommendation_manager_filter_tooltip": {
+        "description": "Tooltip für den Filter Button auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_search_close_tooltip": "Suchtext löschen",
+    "@recommendation_manager_search_close_tooltip": {
+        "description": "Tooltip für den Schließen Button in der Suchleiste auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_search_placeholder": "Suche...",
+    "@recommendation_manager_search_placeholder": {
+        "description": "Suche Platzhalter in der Suchleiste auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_no_data_title": "Keine Empfehlungen gefunden",
+    "@recommendation_manager_no_data_title": {
+        "description": "Titel der Seite die angezeigt wird wenn es keine Empfehlungen gibt auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_no_data_description": "Es wurden keine Empfehlungen gefunden. Du scheinst noch keine Empfehlung ausgesprochen zu haben. Im Empfehlungsmanager werden deine ausgesprochenen Empfehlungen angezeigt.",
+    "@recommendation_manager_no_data_description": {
+        "description": "Beschreibung auf der Seite die angezeigt wird wenn es keine Empfehlungen gibt auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_no_data_button_title": "Empfehlung aussprechen",
+    "@recommendation_manager_no_data_button_title": {
+        "description": "Button Text auf der Seite die angezeigt wird wenn es keine Empfehlungen gibt auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_failure_text": "Es ist ein Fehler aufgetreten",
+    "@recommendation_manager_failure_text": {
+        "description": "Fehler Text auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_tile_progress_appointment_button_tooltip": "Als terminiert markieren",
+    "@recommendation_manager_tile_progress_appointment_button_tooltip": {
+        "description": "Tooltip für den Terminiert Button in einer Zelle des Empfehlungsmanagers"
+    },
+    "recommendation_manager_tile_progress_finish_button_tooltip": "Als abgeschlossen markieren",
+    "@recommendation_manager_tile_progress_finish_button_tooltip": {
+        "description": "Tooltip für den Abgeschlossen Button in einer Zelle des Empfehlungsmanagers"
+    },
+    "recommendation_manager_tile_progress_failed_button_tooltip": "Als nicht abgeschlossen markieren",
+    "@recommendation_manager_tile_progress_failed_button_tooltip": {
+        "description": "Tooltip für den Nicht Abgeschlossen Button in einer Zelle des Empfehlungsmanagers"
+    },
+    "recommendation_manager_delete_alert_title": "Empfehlung löschen",
+    "@recommendation_manager_delete_alert_title": {
+        "description": "Titel des Löschen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_delete_alert_description": "Möchtest du die Empfehlung wirklich löschen? Der Vorgang kann nicht rückgängig gemacht werden.",
+    "@recommendation_manager_delete_alert_description": {
+        "description": "Beschreibung des Löschen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_delete_alert_delete_button": "Empfehlung löschen",
+    "@recommendation_manager_delete_alert_delete_button": {
+        "description": "Löschen Button auf dem Löschen Alert auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_delete_alert_cancel_button": "Abbrechen",
+    "@recommendation_manager_delete_alert_cancel_button": {
+        "description": "Abbrechen Button auf dem Löschen Alert auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_delete_snackbar": "Die Empfehlung wurde erfolgreich gelöscht!",
+    "@recommendation_manager_delete_snackbar": {
+        "description": "Snackbar Text für Empfehlung Löschen auf der Empfehlungsmanager Seite"
     }
 }

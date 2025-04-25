@@ -1,0 +1,212 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+
+enum RecommendationStatusFilterState {
+  recommendationSent,
+  linkClicked,
+  contactFormSent,
+  appointment,
+  successful,
+  failed,
+  all
+}
+
+enum RecommendationSortByFilterState {
+  promoter,
+  recommendationReceiver,
+  reason,
+  lastUpdated,
+  expiresAt
+}
+
+enum RecommendationSortOrderFilterState { asc, desc }
+
+class RecommendationOverviewFilterStates {
+  RecommendationStatusFilterState statusFilterState =
+      RecommendationStatusFilterState.all;
+  RecommendationSortByFilterState sortByFilterState =
+      RecommendationSortByFilterState.expiresAt;
+  RecommendationSortOrderFilterState sortOrderFilterState =
+      RecommendationSortOrderFilterState.desc;
+}
+
+class RecommendationManagerExpandableFilter extends StatefulWidget {
+  final Function(RecommendationOverviewFilterStates filterStates)
+      onFilterChanged;
+  const RecommendationManagerExpandableFilter(
+      {super.key, required this.onFilterChanged});
+
+  @override
+  State<RecommendationManagerExpandableFilter> createState() =>
+      _RecommendationManagerExpandableFilterState();
+}
+
+class _RecommendationManagerExpandableFilterState
+    extends State<RecommendationManagerExpandableFilter> {
+  RecommendationOverviewFilterStates filterStates =
+      RecommendationOverviewFilterStates();
+
+  @override
+  Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
+
+    return ResponsiveRowColumn(
+        rowCrossAxisAlignment: CrossAxisAlignment.start,
+        layout: responsiveValue.largerThan(MOBILE)
+            ? ResponsiveRowColumnType.ROW
+            : ResponsiveRowColumnType.COLUMN,
+        children: [
+          ResponsiveRowColumnItem(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxWidth: responsiveValue.isMobile ? 500 : 300),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          DropdownMenu<RecommendationSortByFilterState>(
+                              textStyle: themeData.textTheme.bodySmall,
+                              width: responsiveValue.largerThan(MOBILE)
+                                  ? 250
+                                  : 400,
+                              label: Text(
+                                  localization
+                                      .promoter_overview_filter_sortby_choose,
+                                  style: themeData.textTheme.bodySmall!
+                                      .copyWith(fontSize: 12)),
+                              initialSelection:
+                                  RecommendationSortByFilterState.expiresAt,
+                              enableSearch: false,
+                              requestFocusOnTap: false,
+                              dropdownMenuEntries: [
+                                DropdownMenuEntry(
+                                    value: RecommendationSortByFilterState
+                                        .expiresAt,
+                                    label: localization
+                                        .recommendation_manager_filter_expires_date),
+                                DropdownMenuEntry(
+                                    value: RecommendationSortByFilterState
+                                        .lastUpdated,
+                                    label: localization
+                                        .recommendation_manager_filter_last_updated),
+                                DropdownMenuEntry(
+                                    value: RecommendationSortByFilterState
+                                        .promoter,
+                                    label: localization
+                                        .recommendation_manager_filter_promoter),
+                                DropdownMenuEntry(
+                                    value: RecommendationSortByFilterState
+                                        .recommendationReceiver,
+                                    label: localization
+                                        .recommendation_manager_filter_recommendation_receiver),
+                                DropdownMenuEntry(
+                                    value:
+                                        RecommendationSortByFilterState.reason,
+                                    label: localization
+                                        .recommendation_manager_filter_reason)
+                              ],
+                              onSelected: (sortBy) {
+                                filterStates.sortByFilterState = sortBy ??
+                                    RecommendationSortByFilterState.expiresAt;
+                                widget.onFilterChanged(filterStates);
+                              }),
+                          RadioListTile(
+                              title: SelectableText(
+                                  localization
+                                      .recommendation_manager_filter_descending,
+                                  style: themeData.textTheme.bodySmall),
+                              value: RecommendationSortOrderFilterState.desc,
+                              groupValue: filterStates.sortOrderFilterState,
+                              onChanged: (value) {
+                                setState(() {
+                                  filterStates.sortOrderFilterState = value ??
+                                      RecommendationSortOrderFilterState.desc;
+                                  widget.onFilterChanged(filterStates);
+                                });
+                              }),
+                          RadioListTile(
+                              title: SelectableText(
+                                  localization
+                                      .recommendation_manager_filter_ascending,
+                                  style: themeData.textTheme.bodySmall),
+                              value: RecommendationSortOrderFilterState.asc,
+                              groupValue: filterStates.sortOrderFilterState,
+                              onChanged: (value) {
+                                setState(() {
+                                  filterStates.sortOrderFilterState = value ??
+                                      RecommendationSortOrderFilterState.desc;
+                                  widget.onFilterChanged(filterStates);
+                                });
+                              }),
+                        ]),
+                  ]),
+            ),
+          ),
+          ResponsiveRowColumnItem(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DropdownMenu<RecommendationStatusFilterState>(
+                    textStyle: themeData.textTheme.bodySmall,
+                    width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
+                    label: Text(
+                        localization.promoter_overview_filter_sortby_choose,
+                        style: themeData.textTheme.bodySmall!
+                            .copyWith(fontSize: 12)),
+                    initialSelection: RecommendationStatusFilterState.all,
+                    enableSearch: false,
+                    requestFocusOnTap: false,
+                    dropdownMenuEntries: [
+                      DropdownMenuEntry(
+                          value: RecommendationStatusFilterState.all,
+                          label: localization
+                              .recommendation_manager_filter_status_all),
+                      DropdownMenuEntry(
+                          value: RecommendationStatusFilterState
+                              .recommendationSent,
+                          label: localization
+                              .recommendation_manager_status_level_1),
+                      DropdownMenuEntry(
+                          value: RecommendationStatusFilterState.linkClicked,
+                          label: localization
+                              .recommendation_manager_status_level_2),
+                      DropdownMenuEntry(
+                          value:
+                              RecommendationStatusFilterState.contactFormSent,
+                          label: localization
+                              .recommendation_manager_status_level_3),
+                      DropdownMenuEntry(
+                          value: RecommendationStatusFilterState.appointment,
+                          label: localization
+                              .recommendation_manager_status_level_4),
+                      DropdownMenuEntry(
+                          value: RecommendationStatusFilterState.successful,
+                          label: localization
+                              .recommendation_manager_status_level_5),
+                      DropdownMenuEntry(
+                          value: RecommendationStatusFilterState.failed,
+                          label: localization
+                              .recommendation_manager_status_level_6)
+                    ],
+                    onSelected: (sortBy) {
+                      filterStates.statusFilterState =
+                          sortBy ?? RecommendationStatusFilterState.all;
+                      widget.onFilterChanged(filterStates);
+                    }),
+              ],
+            ),
+          )
+        ]);
+  }
+}

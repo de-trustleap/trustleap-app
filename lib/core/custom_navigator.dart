@@ -35,6 +35,12 @@ class CustomNavigator {
     }
   }
 
+  static void openURLInNewTab(String url) {
+    if (kIsWeb) {
+      html.window.open(url, '_blank');
+    }
+  }
+
   static void pop() {
     Modular.to.pop();
   }

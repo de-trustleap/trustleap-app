@@ -13,7 +13,7 @@ class RecommendationConfirmationDialogLoading extends StatelessWidget {
     final localization = AppLocalizations.of(context);
     return CustomAlertDialog(
         title: localization.send_recommendation_alert_title,
-        message: localization.send_recommendation_alert_description,
+        message: "",
         isLoading: true,
         actionButtonTitle: localization.send_recommendation_alert_yes_button,
         cancelButtonTitle: localization.send_recommendation_alert_no_button,

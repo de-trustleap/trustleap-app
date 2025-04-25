@@ -11,12 +11,12 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/no_search_results_view.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_overview_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_grid.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_list.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_no_search_results_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -205,7 +205,11 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
               } else if (state is PromotersObserverSearchNotFound) {
                 return headerWithChildren([
                   const SizedBox(height: 24),
-                  const PromoterOverviewNoSearchResultsView(),
+                  NoSearchResultsView(
+                      title: localization
+                          .promoter_overview_no_search_results_title,
+                      description: localization
+                          .promoter_overview_no_search_results_subtitle),
                   const SizedBox(height: 24)
                 ]);
               } else if (state is PromotersObserverFailure) {
@@ -230,7 +234,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
     return CardContainer(
         maxWidth: 1200,
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, children: children));
+            crossAxisAlignment: CrossAxisAlignment.center, children: children));
   }
 
   Widget header() {

@@ -10,8 +10,12 @@ class RecommendationItem extends Equatable {
   final String? promoterName;
   final String? serviceProviderName;
   final String? defaultLandingPageID;
+  final int? statusLevel;
+  final Map<int, DateTime?>? statusTimestamps;
+  final String? userID;
   final DateTime expiresAt;
   final DateTime createdAt;
+  final DateTime? lastUpdated;
 
   RecommendationItem(
       {required this.id,
@@ -22,6 +26,10 @@ class RecommendationItem extends Equatable {
       required this.promoterName,
       required this.serviceProviderName,
       required this.defaultLandingPageID,
+      required this.statusLevel,
+      required this.statusTimestamps,
+      required this.userID,
+      this.lastUpdated,
       DateTime? expiresAt,
       DateTime? createdAt})
       : expiresAt = expiresAt ?? DateTime.now().add(const Duration(days: 14)),
@@ -35,7 +43,11 @@ class RecommendationItem extends Equatable {
       String? promotionTemplate,
       String? promoterName,
       String? serviceProviderName,
-      String? defaultLandingPageID}) {
+      String? defaultLandingPageID,
+      int? statusLevel,
+      Map<int, DateTime?>? statusTimestamps,
+      String? userID,
+      DateTime? lastUpdated}) {
     return RecommendationItem(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -45,6 +57,10 @@ class RecommendationItem extends Equatable {
         promoterName: promoterName ?? this.promoterName,
         serviceProviderName: serviceProviderName ?? this.serviceProviderName,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
+        statusLevel: statusLevel ?? this.statusLevel,
+        statusTimestamps: statusTimestamps ?? this.statusTimestamps,
+        userID: userID ?? this.userID,
+        lastUpdated: lastUpdated ?? this.lastUpdated,
         expiresAt: expiresAt,
         createdAt: createdAt);
   }
@@ -58,6 +74,8 @@ class RecommendationItem extends Equatable {
         promotionTemplate,
         promoterName,
         serviceProviderName,
-        defaultLandingPageID
+        defaultLandingPageID,
+        statusLevel,
+        userID
       ];
 }
