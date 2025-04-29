@@ -11,10 +11,10 @@ class RecommendationManagerOverview extends StatefulWidget {
   final List<RecommendationItem> recommendations;
   final bool isPromoter;
   final Function(RecommendationItem) onAppointmentPressed;
-  final Function(String) onFinishedPressed;
-  final Function(String) onFailedPressed;
+  final Function(RecommendationItem) onFinishedPressed;
+  final Function(RecommendationItem) onFailedPressed;
   final Function(String, String) onDeletePressed;
-  final Function(RecommendationItem) onUpdate;
+  final Function(RecommendationItem, bool) onUpdate;
   const RecommendationManagerOverview(
       {super.key,
       required this.recommendations,

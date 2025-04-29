@@ -19,10 +19,10 @@ class RecommendationManagerListTile extends StatefulWidget {
   final RecommendationItem recommendation;
   final bool isPromoter;
   final Function(RecommendationItem) onAppointmentPressed;
-  final Function(String) onFinishedPressed;
-  final Function(String) onFailedPressed;
+  final Function(RecommendationItem) onFinishedPressed;
+  final Function(RecommendationItem) onFailedPressed;
   final Function(String, String) onDeletePressed;
-  final Function(RecommendationItem) onUpdate;
+  final Function(RecommendationItem, bool) onUpdate;
   const RecommendationManagerListTile(
       {super.key,
       required this.recommendation,
@@ -58,14 +58,18 @@ class _RecommendationManagerListTileState
         RecommendationManagerTileState>(
       bloc: cubit,
       listenWhen: (previous, current) =>
-          current is RecommendationSetStatusSuccessState &&
-          current.recommendation.id == _recommendation.id,
+          (current is RecommendationSetStatusSuccessState &&
+              current.recommendation.id == _recommendation.id) ||
+          (current is RecommendationSetFinishedSuccessState &&
+              current.recommendation.id == _recommendation.id),
       listener: (context, state) {
         if (state is RecommendationSetStatusSuccessState) {
           setState(() {
             _recommendation = state.recommendation;
           });
-          widget.onUpdate(state.recommendation);
+          widget.onUpdate(state.recommendation, false);
+        } else if (state is RecommendationSetFinishedSuccessState) {
+          widget.onUpdate(state.recommendation, true);
         }
       },
       builder: (context, state) {

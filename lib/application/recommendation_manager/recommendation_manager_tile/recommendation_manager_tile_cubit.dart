@@ -26,4 +26,19 @@ class RecommendationManagerTileCubit
         (recommendation) => emit(RecommendationSetStatusSuccessState(
             recommendation: recommendation)));
   }
+
+  void setFinished(RecommendationItem recommendation, bool success) async {
+    emit(RecommendationSetStatusLoadingState(recommendation: recommendation));
+    if (recommendation.statusLevel != 3 ||
+        recommendation.statusTimestamps == null) {
+      return;
+    }
+    final failureOrSuccess =
+        await recommendationRepo.finishRecommendation(recommendation, success);
+    failureOrSuccess.fold(
+        (failure) => emit(RecommendationSetStatusFailureState(
+            failure: failure, recommendation: recommendation)),
+        (recommendation) => emit(RecommendationSetFinishedSuccessState(
+            recommendation: recommendation)));
+  }
 }

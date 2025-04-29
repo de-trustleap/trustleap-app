@@ -145,4 +145,24 @@ class RecommendationRepositoryImplementation
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, RecommendationItem>> finishRecommendation(
+      RecommendationItem recommendation, bool completed) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable =
+        firebaseFunctions.httpsCallable("finishRecommendation");
+    try {
+      await callable.call({
+        "appCheckToken": appCheckToken,
+        "recommendationID": recommendation.id,
+        "userID": recommendation.userID,
+        "success": completed
+      });
+      return right(recommendation);
+    } on FirebaseFunctionsException catch (e) {
+      print("THE ERROR: $e");
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }

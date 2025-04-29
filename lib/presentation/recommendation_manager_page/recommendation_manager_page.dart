@@ -136,14 +136,20 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
                 Modular.get<RecommendationManagerTileCubit>()
                     .setAppointmentState(recommendation);
               },
-              onFinishedPressed: (recoID) {},
-              onFailedPressed: (recoID) {},
+              onFinishedPressed: (recommendation) {
+                Modular.get<RecommendationManagerTileCubit>()
+                    .setFinished(recommendation, true);
+              },
+              onFailedPressed: (recommendation) {
+                Modular.get<RecommendationManagerTileCubit>()
+                    .setFinished(recommendation, false);
+              },
               onDeletePressed: (recoID, userID) {
                 showAlert(localization, recoID, userID);
               },
-              onUpdate: (recommendation) {
+              onUpdate: (recommendation, shouldBeDeleted) {
                 Modular.get<RecommendationManagerCubit>()
-                    .updateReco(recommendation);
+                    .updateReco(recommendation, shouldBeDeleted);
               }),
         )
       ]);
@@ -152,3 +158,13 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
     }
   }
 }
+
+// TODO: MODELS ERSTELLEN (FERTIG)
+// TODO: EXPIRES DATE ALS TTL IN STAGING UND PROD ANLEGEN (FERTIG)
+// TODO: CALL IMPLEMENTIEREN DER FAILED UND COMPLETED ACTIONS ABARBEITET
+// TODO: TABBAR IMPLEMENTIEREN
+// TODO: ABFRAGE NACH ARCHIVED RECOMMENDATIONS
+// TODO: EMPTY PAGE
+// TODO: LISTE IMPLEMENTIEREN
+// TODO: SUCHE IMPLEMENTIEREN
+// TODO: FILTER IMPLEMENTIEREN

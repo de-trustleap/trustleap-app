@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class RecommendationManagerListTileIconRow extends StatelessWidget {
   final RecommendationItem recommendation;
   final Function(RecommendationItem) onAppointmentPressed;
-  final Function(String) onFinishedPressed;
-  final Function(String) onFailedPressed;
+  final Function(RecommendationItem) onFinishedPressed;
+  final Function(RecommendationItem) onFailedPressed;
   final Function(String, String) onDeletePressed;
   const RecommendationManagerListTileIconRow(
       {super.key,
@@ -47,7 +47,7 @@ class RecommendationManagerListTileIconRow extends StatelessWidget {
                     .recommendation_manager_tile_progress_finish_button_tooltip,
                 child: ElevatedButton(
                     onPressed: recommendation.statusLevel == 3
-                        ? () => onFinishedPressed(recommendation.id)
+                        ? () => onFinishedPressed(recommendation)
                         : null,
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -64,7 +64,7 @@ class RecommendationManagerListTileIconRow extends StatelessWidget {
                     .recommendation_manager_tile_progress_failed_button_tooltip,
                 child: ElevatedButton(
                     onPressed: recommendation.statusLevel == 3
-                        ? () => onFailedPressed(recommendation.id)
+                        ? () => onFailedPressed(recommendation)
                         : null,
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(

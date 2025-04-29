@@ -11,4 +11,6 @@ abstract class RecommendationRepository {
       String recoID, String userID);
   Future<Either<DatabaseFailure, RecommendationItem>> setAppointmentState(
       RecommendationItem recommendation);
+  Future<Either<DatabaseFailure, RecommendationItem>> finishRecommendation(
+      RecommendationItem recommendation, bool completed);
 }

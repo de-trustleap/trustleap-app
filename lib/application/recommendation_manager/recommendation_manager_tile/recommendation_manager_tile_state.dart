@@ -41,3 +41,13 @@ class RecommendationSetStatusSuccessState extends RecommendationManagerTileState
   @override
   List<Object?> get props => [recommendation];
 }
+
+class RecommendationSetFinishedSuccessState
+    extends RecommendationManagerTileState with EquatableMixin {
+  final RecommendationItem recommendation;
+
+  RecommendationSetFinishedSuccessState({required this.recommendation});
+
+  @override
+  List<Object?> get props => [];
+}

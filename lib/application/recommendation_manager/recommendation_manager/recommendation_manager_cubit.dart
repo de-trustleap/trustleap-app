@@ -61,12 +61,14 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
     });
   }
 
-  void updateReco(RecommendationItem updatedReco) {
+  void updateReco(RecommendationItem updatedReco, bool shouldBeDeleted) {
     final currentState = state;
     if (currentState is RecommendationGetRecosSuccessState) {
-      final updatedList = currentState.recoItems.map((r) {
-        return r.id == updatedReco.id ? updatedReco : r;
-      }).toList();
+      final updatedList = shouldBeDeleted
+          ? currentState.recoItems.where((r) => r.id != updatedReco.id).toList()
+          : currentState.recoItems
+              .map((r) => r.id == updatedReco.id ? updatedReco : r)
+              .toList();
 
       emit(RecommendationGetRecosSuccessState(recoItems: updatedList));
     }
