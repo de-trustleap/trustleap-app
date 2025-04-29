@@ -6423,6 +6423,116 @@ class MockAppLocalizations extends _i1.Mock implements _i22.AppLocalizations {
           as String);
 
   @override
+  String get recommendation_manager_tile_progress_appointment_button_tooltip =>
+      (super.noSuchMethod(
+            Invocation.getter(
+              #recommendation_manager_tile_progress_appointment_button_tooltip,
+            ),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_tile_progress_appointment_button_tooltip,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_tile_progress_finish_button_tooltip =>
+      (super.noSuchMethod(
+            Invocation.getter(
+              #recommendation_manager_tile_progress_finish_button_tooltip,
+            ),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_tile_progress_finish_button_tooltip,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_tile_progress_failed_button_tooltip =>
+      (super.noSuchMethod(
+            Invocation.getter(
+              #recommendation_manager_tile_progress_failed_button_tooltip,
+            ),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_tile_progress_failed_button_tooltip,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_delete_alert_title =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_delete_alert_title),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_delete_alert_title),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_delete_alert_description =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_delete_alert_description),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_delete_alert_description,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_delete_alert_delete_button =>
+      (super.noSuchMethod(
+            Invocation.getter(
+              #recommendation_manager_delete_alert_delete_button,
+            ),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_delete_alert_delete_button,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_delete_alert_cancel_button =>
+      (super.noSuchMethod(
+            Invocation.getter(
+              #recommendation_manager_delete_alert_cancel_button,
+            ),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(
+                #recommendation_manager_delete_alert_cancel_button,
+              ),
+            ),
+          )
+          as String);
+
+  @override
+  String get recommendation_manager_delete_snackbar =>
+      (super.noSuchMethod(
+            Invocation.getter(#recommendation_manager_delete_snackbar),
+            returnValue: _i23.dummyValue<String>(
+              this,
+              Invocation.getter(#recommendation_manager_delete_snackbar),
+            ),
+          )
+          as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -7544,6 +7654,33 @@ class MockRecommendationRepository extends _i1.Mock
               _FakeEither_0<_i27.DatabaseFailure, _i39.RecommendationItem>(
                 this,
                 Invocation.method(#setAppointmentState, [recommendation]),
+              ),
+            ),
+          )
+          as _i18.Future<
+            _i2.Either<_i27.DatabaseFailure, _i39.RecommendationItem>
+          >);
+
+  @override
+  _i18.Future<_i2.Either<_i27.DatabaseFailure, _i39.RecommendationItem>>
+  finishRecommendation(
+    _i39.RecommendationItem? recommendation,
+    bool? completed,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#finishRecommendation, [
+              recommendation,
+              completed,
+            ]),
+            returnValue: _i18.Future<
+              _i2.Either<_i27.DatabaseFailure, _i39.RecommendationItem>
+            >.value(
+              _FakeEither_0<_i27.DatabaseFailure, _i39.RecommendationItem>(
+                this,
+                Invocation.method(#finishRecommendation, [
+                  recommendation,
+                  completed,
+                ]),
               ),
             ),
           )

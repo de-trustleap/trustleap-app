@@ -77,4 +77,64 @@ void main() {
       recoManagerTileCubit.setAppointmentState(recommendation);
     });
   });
+
+  group("RecommendationManagerTileCubit_setFinished", () {
+    final date = DateTime.now();
+    final recommendation = RecommendationItem(
+        id: "1",
+        name: "Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: 3,
+        statusTimestamps: {0: date, 1: date, 2: date});
+
+    test("should call recommendation repo when function is called", () async {
+      // Given
+      when(mockRecoRepo.finishRecommendation(recommendation, true))
+          .thenAnswer((_) async => right(recommendation));
+      // When
+      recoManagerTileCubit.setFinished(recommendation, true);
+      await untilCalled(
+          mockRecoRepo.finishRecommendation(recommendation, true));
+      // Then
+      verify(mockRecoRepo.finishRecommendation(recommendation, true));
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test(
+        "should emit RecommendationSetStatusLoadingState and then RecommendationSetFinishedSuccessState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        RecommendationSetStatusLoadingState(recommendation: recommendation),
+        RecommendationSetFinishedSuccessState(recommendation: recommendation)
+      ];
+      when(mockRecoRepo.finishRecommendation(recommendation, true))
+          .thenAnswer((_) async => right(recommendation));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
+      recoManagerTileCubit.setFinished(recommendation, true);
+    });
+
+    test(
+        "should emit RecommendationSetStatusLoadingState and then RecommendationSetStatusFailureState when call has failed",
+        () async {
+      // Given
+      final expectedResult = [
+        RecommendationSetStatusLoadingState(recommendation: recommendation),
+        RecommendationSetStatusFailureState(
+            failure: BackendFailure(), recommendation: recommendation)
+      ];
+      when(mockRecoRepo.finishRecommendation(recommendation, true))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
+      recoManagerTileCubit.setFinished(recommendation, true);
+    });
+  });
 }
