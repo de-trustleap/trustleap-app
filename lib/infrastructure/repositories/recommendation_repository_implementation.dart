@@ -151,7 +151,7 @@ class RecommendationRepositoryImplementation
       RecommendationItem recommendation, bool completed) async {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
-        firebaseFunctions.httpsCallable("finishRecommendation");
+        firebaseFunctions.httpsCallable("finishRecommendationX");
     try {
       await callable.call({
         "appCheckToken": appCheckToken,
@@ -161,7 +161,6 @@ class RecommendationRepositoryImplementation
       });
       return right(recommendation);
     } on FirebaseFunctionsException catch (e) {
-      print("THE ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

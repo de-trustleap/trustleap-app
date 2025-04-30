@@ -32,7 +32,10 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
       if (recommendations.isEmpty) {
         emit(RecommendationGetRecosNoRecosState());
       } else {
-        emit(RecommendationGetRecosSuccessState(recoItems: recommendations));
+        emit(RecommendationGetRecosSuccessState(
+            recoItems: recommendations,
+            showSetAppointmentSnackBar: false,
+            showFinishedSnackBar: false));
       }
     });
   }
@@ -70,7 +73,10 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
               .map((r) => r.id == updatedReco.id ? updatedReco : r)
               .toList();
 
-      emit(RecommendationGetRecosSuccessState(recoItems: updatedList));
+      emit(RecommendationGetRecosSuccessState(
+          recoItems: updatedList,
+          showSetAppointmentSnackBar: shouldBeDeleted == false,
+          showFinishedSnackBar: shouldBeDeleted == true));
     }
   }
 }

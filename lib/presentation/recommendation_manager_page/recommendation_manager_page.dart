@@ -86,6 +86,14 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
                 SnackBarType.failure);
             Modular.get<RecommendationManagerCubit>()
                 .getRecommendations(currentUser?.id.value);
+          } else if (state is RecommendationGetRecosSuccessState) {
+            if (state.showSetAppointmentSnackBar) {
+              CustomSnackBar.of(context)
+                  .showCustomSnackBar("Termin wurde erfolgreich gesetzt!");
+            } else if (state.showFinishedSnackBar) {
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  "Deine Empfehlung wurde ins Archiv verschoben!");
+            }
           }
         },
         builder: (context, state) {
@@ -162,7 +170,8 @@ class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
 // TODO: MODELS ERSTELLEN (FERTIG)
 // TODO: EXPIRES DATE ALS TTL IN STAGING UND PROD ANLEGEN (FERTIG)
 // TODO: MODELS, REPO UND CUBIT TESTS SCHREIBEN (FERTIG)
-// TODO: CALL IMPLEMENTIEREN DER FAILED UND COMPLETED ACTIONS ABARBEITET
+// TODO: CALL IMPLEMENTIEREN DER FAILED UND COMPLETED ACTIONS ABARBEITET (FERTIG)
+// TODO: SNACKBAR ANZEIGEN BEI ERFOLG
 // TODO: TABBAR IMPLEMENTIEREN
 // TODO: ABFRAGE NACH ARCHIVED RECOMMENDATIONS
 // TODO: EMPTY PAGE
