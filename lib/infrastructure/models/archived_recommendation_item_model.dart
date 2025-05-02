@@ -13,7 +13,7 @@ class ArchivedRecommendationItemModel extends Equatable {
   final bool? success;
   final String? userID;
   final DateTime? createdAt;
-  final DateTime? finishedTimeStamp;
+  final DateTime finishedTimeStamp;
   final DateTime? expiresAt;
 
   const ArchivedRecommendationItemModel({
@@ -66,9 +66,7 @@ class ArchivedRecommendationItemModel extends Equatable {
       'userID': userID,
       'expiresAt': expiresAt != null ? Timestamp.fromDate(expiresAt!) : null,
       'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
-      'finishedTimeStamp': finishedTimeStamp != null
-          ? Timestamp.fromDate(finishedTimeStamp!)
-          : null
+      'finishedTimeStamp': Timestamp.fromDate(finishedTimeStamp)
     };
   }
 

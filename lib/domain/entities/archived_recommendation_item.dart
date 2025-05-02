@@ -11,7 +11,7 @@ class ArchivedRecommendationItem extends Equatable {
   final bool? success;
   final String? userID;
   final DateTime? createdAt;
-  final DateTime? finishedTimeStamp;
+  final DateTime finishedTimeStamp;
   final DateTime? expiresAt;
 
   const ArchivedRecommendationItem({

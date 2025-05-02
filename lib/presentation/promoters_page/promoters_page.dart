@@ -24,8 +24,6 @@ class _PromotersPageState extends State<PromotersPage>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
   bool initialSnackbarAlreadyShown = false;
-  late double screenHeight;
-  late double topPadding;
 
   @override
   void initState() {
@@ -74,10 +72,9 @@ class _PromotersPageState extends State<PromotersPage>
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
-    screenHeight = responsiveValue.screenHeight;
-    topPadding = responsiveValue.screenHeight * 0.02;
+
     return Padding(
-      padding: EdgeInsets.only(top: topPadding),
+      padding: EdgeInsets.only(top: responsiveValue.screenHeight * 0.02),
       child: tabController != null
           ? tabbar(responsiveValue, permissions, localization)
           : const SizedBox.shrink(),

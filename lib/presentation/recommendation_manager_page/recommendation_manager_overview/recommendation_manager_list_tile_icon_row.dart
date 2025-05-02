@@ -68,7 +68,7 @@ class _RecommendationManagerListTileIconRowState
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12)),
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: themeData.colorScheme.secondary),
+                          backgroundColor: themeData.colorScheme.primary),
                       child: const Icon(Icons.calendar_month,
                           color: Colors.white)),
                 ))),
@@ -88,7 +88,7 @@ class _RecommendationManagerListTileIconRowState
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12)),
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: themeData.colorScheme.secondary),
+                          backgroundColor: themeData.colorScheme.primary),
                       child: const Icon(Icons.check, color: Colors.white)),
                 ))),
         Expanded(

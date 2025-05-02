@@ -1,22 +1,9 @@
-import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
-import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
-import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
-import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/custom_navigator.dart';
-import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_overview.dart';
-import 'package:finanzbegleiter/route_paths.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_overview.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_overview_wrapper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class RecommendationManagerPage extends StatefulWidget {
@@ -24,157 +11,65 @@ class RecommendationManagerPage extends StatefulWidget {
 
   @override
   State<RecommendationManagerPage> createState() =>
-      _RecommendationManagerPageState();
+      _RecommendationManagerTabBarPageState();
 }
 
-class _RecommendationManagerPageState extends State<RecommendationManagerPage> {
-  CustomUser? currentUser;
+class _RecommendationManagerTabBarPageState
+    extends State<RecommendationManagerPage>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
 
   @override
   void initState() {
     super.initState();
-    Modular.get<RecommendationManagerCubit>().getUser();
+    tabController = TabController(length: 2, vsync: this);
   }
 
-  void showAlert(AppLocalizations localizations, String recoID, String userID) {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return CustomAlertDialog(
-              title: localizations.recommendation_manager_delete_alert_title,
-              message:
-                  localizations.recommendation_manager_delete_alert_description,
-              actionButtonTitle: localizations
-                  .recommendation_manager_delete_alert_delete_button,
-              cancelButtonTitle: localizations
-                  .recommendation_manager_delete_alert_cancel_button,
-              actionButtonAction: () =>
-                  _submitDeleteRecommendation(recoID, userID),
-              cancelButtonAction: () => CustomNavigator.pop());
-        });
-  }
-
-  void _submitDeleteRecommendation(String recoID, String userID) {
-    CustomNavigator.pop();
-    Modular.get<RecommendationManagerCubit>()
-        .deleteRecommendation(recoID, userID);
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
-    final localization = AppLocalizations.of(context);
-    final recoManagerCubit = Modular.get<RecommendationManagerCubit>();
 
-    return BlocConsumer<RecommendationManagerCubit, RecommendationManagerState>(
-        bloc: recoManagerCubit,
-        listener: (context, state) {
-          if (state is RecommendationManagerGetUserSuccessState) {
-            currentUser = state.user;
-            Modular.get<RecommendationManagerCubit>()
-                .getRecommendations(state.user.id.value);
-          } else if (state is RecommendationDeleteRecoSuccessState) {
-            CustomSnackBar.of(context).showCustomSnackBar(
-                localization.recommendation_manager_delete_snackbar);
-            Modular.get<RecommendationManagerCubit>()
-                .getRecommendations(currentUser?.id.value);
-          } else if (state is RecommendationDeleteRecoFailureState) {
-            CustomSnackBar.of(context).showCustomSnackBar(
-                DatabaseFailureMapper.mapFailureMessage(
-                    state.failure, localization),
-                SnackBarType.failure);
-            Modular.get<RecommendationManagerCubit>()
-                .getRecommendations(currentUser?.id.value);
-          } else if (state is RecommendationGetRecosSuccessState) {
-            if (state.showSetAppointmentSnackBar) {
-              CustomSnackBar.of(context)
-                  .showCustomSnackBar("Termin wurde erfolgreich gesetzt!");
-            } else if (state.showFinishedSnackBar) {
-              CustomSnackBar.of(context).showCustomSnackBar(
-                  "Deine Empfehlung wurde ins Archiv verschoben!");
-            }
-          }
-        },
-        builder: (context, state) {
-          if (state is RecommendationManagerLoadingState) {
-            return const LoadingIndicator();
-          } else {
-            return Container(
-                width: double.infinity,
-                decoration: BoxDecoration(color: themeData.colorScheme.surface),
-                child: _createContainerChildWidget(
-                    state, responsiveValue, localization));
-          }
-        });
+    return Padding(
+        padding: EdgeInsets.only(top: responsiveValue.screenHeight * 0.02),
+        child: tabbar(responsiveValue));
   }
 
-  Widget _createContainerChildWidget(
-      RecommendationManagerState state,
-      ResponsiveBreakpointsData responsiveValue,
-      AppLocalizations localization) {
-    if (state is RecommendationGetRecosNoRecosState) {
-      return EmptyPage(
-          icon: Icons.person_add,
-          title: localization.recommendation_manager_no_data_title,
-          subTitle: localization.recommendation_manager_no_data_description,
-          buttonTitle: localization.recommendation_manager_no_data_button_title,
-          onTap: () {
-            CustomNavigator.navigate(
-                RoutePaths.homePath + RoutePaths.recommendationsPath);
-            Modular.get<MenuCubit>().selectMenu(MenuItems.recommendations);
-          });
-    } else if (state is RecommendationGetRecosFailureState) {
-      return ErrorView(
-          title: localization.recommendation_manager_failure_text,
-          message: DatabaseFailureMapper.mapFailureMessage(
-              state.failure, localization),
-          callback: () => {
-                Modular.get<RecommendationManagerCubit>()
-                    .getRecommendations(currentUser?.id.value)
-              });
-    } else if (state is RecommendationGetRecosSuccessState) {
-      return ListView(children: [
-        SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-        CenteredConstrainedWrapper(
-          child: RecommendationManagerOverview(
-              recommendations: state.recoItems,
-              isPromoter: currentUser?.role == Role.promoter ? true : false,
-              onAppointmentPressed: (recommendation) {
-                Modular.get<RecommendationManagerTileCubit>()
-                    .setAppointmentState(recommendation);
-              },
-              onFinishedPressed: (recommendation) {
-                Modular.get<RecommendationManagerTileCubit>()
-                    .setFinished(recommendation, true);
-              },
-              onFailedPressed: (recommendation) {
-                Modular.get<RecommendationManagerTileCubit>()
-                    .setFinished(recommendation, false);
-              },
-              onDeletePressed: (recoID, userID) {
-                showAlert(localization, recoID, userID);
-              },
-              onUpdate: (recommendation, shouldBeDeleted) {
-                Modular.get<RecommendationManagerCubit>()
-                    .updateReco(recommendation, shouldBeDeleted);
-              }),
-        )
-      ]);
-    } else {
-      return const LoadingIndicator();
-    }
+  List<TabbarContent> getTabbarContent() {
+    return [
+      TabbarContent(
+          tab: const CustomTab(
+              title: "Aktive Empfehlungen", icon: Icons.thumb_up),
+          content: const RecommendationManagerOverviewWrapper()),
+      TabbarContent(
+          tab: const CustomTab(title: "Archiv", icon: Icons.archive),
+          content: const RecommendationManagerArchiveOverview())
+    ];
+  }
+
+  Widget tabbar(ResponsiveBreakpointsData responsiveValue) {
+    return Column(children: [
+      SizedBox(
+        width: responsiveValue.largerThan(TABLET)
+            ? responsiveValue.screenWidth * 0.6
+            : responsiveValue.screenWidth * 0.9,
+        child: TabBar(
+            controller: tabController,
+            tabs: getTabbarContent().map((e) => e.tab).toList(),
+            indicatorPadding: const EdgeInsets.only(bottom: 4)),
+      ),
+      Expanded(
+          child: TabBarView(
+              controller: tabController,
+              physics: kIsWeb
+                  ? const NeverScrollableScrollPhysics()
+                  : const ScrollPhysics(),
+              children: getTabbarContent().map((e) => e.content).toList()))
+    ]);
   }
 }
-
-// TODO: MODELS ERSTELLEN (FERTIG)
-// TODO: EXPIRES DATE ALS TTL IN STAGING UND PROD ANLEGEN (FERTIG)
-// TODO: MODELS, REPO UND CUBIT TESTS SCHREIBEN (FERTIG)
-// TODO: CALL IMPLEMENTIEREN DER FAILED UND COMPLETED ACTIONS ABARBEITET (FERTIG)
-// TODO: SNACKBAR ANZEIGEN BEI ERFOLG
-// TODO: TABBAR IMPLEMENTIEREN
-// TODO: ABFRAGE NACH ARCHIVED RECOMMENDATIONS
-// TODO: EMPTY PAGE
-// TODO: LISTE IMPLEMENTIEREN
-// TODO: SUCHE IMPLEMENTIEREN
-// TODO: FILTER IMPLEMENTIEREN
