@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
+import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,23 @@ class RecommendationManagerHelper {
       return "$daysRemaining ${localization.recommendation_manager_expired_day}";
     } else {
       return "$daysRemaining ${localization.recommendation_manager_expired_days}";
+    }
+  }
+
+  String getArchivedRecommendationDateText(
+      BuildContext context, ArchivedRecommendationItem recommendation) {
+    return DateTimeFormatter()
+        .getStringFromDate(context, recommendation.finishedTimeStamp);
+  }
+
+  String? getStringFromArchivedStatus(bool? success) {
+    if (success == null) {
+      return null;
+    }
+    if (success) {
+      return localization.recommendation_manager_status_level_5;
+    } else {
+      return localization.recommendation_manager_status_level_6;
     }
   }
 

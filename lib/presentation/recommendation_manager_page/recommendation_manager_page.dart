@@ -1,6 +1,6 @@
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_overview.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_overview_wrapper.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_overview_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +48,7 @@ class _RecommendationManagerTabBarPageState
           content: const RecommendationManagerOverviewWrapper()),
       TabbarContent(
           tab: const CustomTab(title: "Archiv", icon: Icons.archive),
-          content: const RecommendationManagerArchiveOverview())
+          content: const RecommendationManagerArchiveOverviewWrapper())
     ];
   }
 

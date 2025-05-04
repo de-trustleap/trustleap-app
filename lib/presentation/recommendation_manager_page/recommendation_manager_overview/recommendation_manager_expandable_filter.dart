@@ -17,7 +17,8 @@ enum RecommendationSortByFilterState {
   recommendationReceiver,
   reason,
   lastUpdated,
-  expiresAt
+  expiresAt,
+  finishedAt
 }
 
 enum RecommendationSortOrderFilterState { asc, desc }

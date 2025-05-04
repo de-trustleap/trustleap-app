@@ -188,7 +188,7 @@ class _RecommendationManagerPageState
         CenteredConstrainedWrapper(
           child: RecommendationManagerOverview(
               recommendations: state.recoItems,
-              isPromoter: currentUser?.role == Role.promoter ? true : false,
+              isPromoter: currentUser?.role == Role.promoter,
               onAppointmentPressed: (recommendation) {
                 Modular.get<RecommendationManagerTileCubit>()
                     .setAppointmentState(recommendation);
@@ -213,18 +213,3 @@ class _RecommendationManagerPageState
     }
   }
 }
-
-// TODO: MODELS ERSTELLEN (FERTIG)
-// TODO: EXPIRES DATE ALS TTL IN STAGING UND PROD ANLEGEN (FERTIG)
-// TODO: MODELS, REPO UND CUBIT TESTS SCHREIBEN (FERTIG)
-// TODO: CALL IMPLEMENTIEREN DER FAILED UND COMPLETED ACTIONS ABARBEITET (FERTIG)
-// TODO: SNACKBAR ANZEIGEN BEI ERFOLG (FERTIG)
-// TODO: TABBAR IMPLEMENTIEREN (FERTIG)
-// TODO: ABFRAGE NACH ARCHIVED RECOMMENDATIONS (FERTIG)
-// TODO: EMPTY PAGE (FERTIG)
-// TODO: ALERT ANZEIGEN BEI FINISH (FERTIG)
-// TODO: BUTTONS DELETE UND NOT FINISHED SECONDARY UND DIE ANDEREN BEIDEN PRIMARY COLOR (FERTIG)
-// TODO: ES SOLLEN ALLE EMPFEHLUNGEN VON ALLEN PROMOTERN UNTER DEM SERVICE PROVIDER ANGEZEIGT WERDEN (FERTIG)
-// TODO: LISTE IMPLEMENTIEREN
-// TODO: SUCHE IMPLEMENTIEREN
-// TODO: FILTER IMPLEMENTIEREN
