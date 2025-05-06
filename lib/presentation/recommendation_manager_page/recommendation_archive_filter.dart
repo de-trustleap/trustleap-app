@@ -1,18 +1,17 @@
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 
-class RecommendationFilter {
-  static List<RecommendationItem> applyFilters({
-    required List<RecommendationItem> items,
+class RecommendationArchiveFilter {
+  static List<ArchivedRecommendationItem> applyFilters({
+    required List<ArchivedRecommendationItem> items,
     required RecommendationOverviewFilterStates filterStates,
   }) {
-    List<RecommendationItem> filtered = items.where((item) {
+    List<ArchivedRecommendationItem> filtered = items.where((item) {
       // filter by status
       if (filterStates.statusFilterState !=
           RecommendationStatusFilterState.all) {
-        final statusLevel = item.statusLevel ?? 0;
-        return _statusFilterMatches(
-            filterStates.statusFilterState, statusLevel);
+        final success = item.success ?? false;
+        return _statusFilterMatches(filterStates.statusFilterState, success);
       }
       return true;
     }).toList();
@@ -43,17 +42,10 @@ class RecommendationFilter {
               aValue, bValue, filterStates.sortOrderFilterState);
         });
         break;
-      case RecommendationSortByFilterState.lastUpdated:
+      case RecommendationSortByFilterState.finishedAt:
         filtered.sort((a, b) {
-          final aValue = a.lastUpdated ?? a.createdAt;
-          final bValue = b.lastUpdated ?? b.createdAt;
-          return _sortDates(aValue, bValue, filterStates.sortOrderFilterState);
-        });
-        break;
-      case RecommendationSortByFilterState.expiresAt:
-        filtered.sort((a, b) {
-          final aValue = a.expiresAt;
-          final bValue = b.expiresAt;
+          final aValue = a.finishedTimeStamp;
+          final bValue = b.finishedTimeStamp;
           return _sortDates(aValue, bValue, filterStates.sortOrderFilterState);
         });
         break;
@@ -79,22 +71,11 @@ class RecommendationFilter {
   }
 
   static bool _statusFilterMatches(
-      RecommendationStatusFilterState filter, int statusLevel) {
-    switch (filter) {
-      case RecommendationStatusFilterState.recommendationSent:
-        return statusLevel == 0;
-      case RecommendationStatusFilterState.linkClicked:
-        return statusLevel == 1;
-      case RecommendationStatusFilterState.contactFormSent:
-        return statusLevel == 2;
-      case RecommendationStatusFilterState.appointment:
-        return statusLevel == 3;
-      case RecommendationStatusFilterState.successful:
-        return statusLevel == 4;
-      case RecommendationStatusFilterState.failed:
-        return statusLevel == 5;
-      case RecommendationStatusFilterState.all:
-        return true;
+      RecommendationStatusFilterState filter, bool success) {
+    if (filter == RecommendationStatusFilterState.successful) {
+      return success == true;
+    } else {
+      return success == false;
     }
   }
 }

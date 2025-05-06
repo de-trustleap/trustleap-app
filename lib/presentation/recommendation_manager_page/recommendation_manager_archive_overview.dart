@@ -1,42 +1,30 @@
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_archive_filter.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_list.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_list_header.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_filter.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list.dart';
 import 'package:flutter/material.dart';
 
-class RecommendationManagerOverview extends StatefulWidget {
-  final List<RecommendationItem> recommendations;
+class RecommendationManagerArchiveOverview extends StatefulWidget {
+  final List<ArchivedRecommendationItem> recommendations;
   final bool isPromoter;
-  final Function(RecommendationItem) onAppointmentPressed;
-  final Function(RecommendationItem) onFinishedPressed;
-  final Function(RecommendationItem) onFailedPressed;
-  final Function(String, String) onDeletePressed;
-  final Function(RecommendationItem, bool) onUpdate;
-  const RecommendationManagerOverview(
-      {super.key,
-      required this.recommendations,
-      required this.isPromoter,
-      required this.onAppointmentPressed,
-      required this.onFinishedPressed,
-      required this.onFailedPressed,
-      required this.onDeletePressed,
-      required this.onUpdate});
+  const RecommendationManagerArchiveOverview(
+      {super.key, required this.recommendations, required this.isPromoter});
 
   @override
-  State<RecommendationManagerOverview> createState() =>
-      _RecommendationManagerOverviewState();
+  State<RecommendationManagerArchiveOverview> createState() =>
+      _RecommendationManagerArchiveOverviewState();
 }
 
-class _RecommendationManagerOverviewState
-    extends State<RecommendationManagerOverview> {
-  late List<RecommendationItem> _filteredRecommendations;
-  late List<RecommendationItem> _searchFilteredRecommendations;
+class _RecommendationManagerArchiveOverviewState
+    extends State<RecommendationManagerArchiveOverview> {
+  late List<ArchivedRecommendationItem> _filteredRecommendations;
+  late List<ArchivedRecommendationItem> _searchFilteredRecommendations;
   final TextEditingController _searchController = TextEditingController();
   RecommendationOverviewFilterStates _currentFilterStates =
-      RecommendationOverviewFilterStates(isArchive: false);
+      RecommendationOverviewFilterStates(isArchive: true);
   bool _filterIsExpanded = false;
 
   @override
@@ -57,7 +45,7 @@ class _RecommendationManagerOverviewState
               reason.contains(query);
         }).toList();
 
-        _filteredRecommendations = RecommendationFilter.applyFilters(
+        _filteredRecommendations = RecommendationArchiveFilter.applyFilters(
           items: _searchFilteredRecommendations,
           filterStates: _currentFilterStates,
         );
@@ -66,7 +54,8 @@ class _RecommendationManagerOverviewState
   }
 
   @override
-  void didUpdateWidget(covariant RecommendationManagerOverview oldWidget) {
+  void didUpdateWidget(
+      covariant RecommendationManagerArchiveOverview oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.recommendations != oldWidget.recommendations) {
@@ -84,7 +73,7 @@ class _RecommendationManagerOverviewState
 
   void _setInitialFilterData() {
     _searchFilteredRecommendations = widget.recommendations;
-    _filteredRecommendations = RecommendationFilter.applyFilters(
+    _filteredRecommendations = RecommendationArchiveFilter.applyFilters(
       items: _searchFilteredRecommendations,
       filterStates: _currentFilterStates,
     );
@@ -99,7 +88,7 @@ class _RecommendationManagerOverviewState
   void onFilterChanged(RecommendationOverviewFilterStates filterStates) {
     setState(() {
       _currentFilterStates = filterStates;
-      _filteredRecommendations = RecommendationFilter.applyFilters(
+      _filteredRecommendations = RecommendationArchiveFilter.applyFilters(
           items: _searchFilteredRecommendations, filterStates: filterStates);
     });
   }
@@ -121,19 +110,13 @@ class _RecommendationManagerOverviewState
                   children: [
                     const SizedBox(height: 16),
                     RecommendationManagerExpandableFilter(
-                        onFilterChanged: onFilterChanged, isArchive: false)
+                        onFilterChanged: onFilterChanged, isArchive: true)
                   ])),
           const SizedBox(height: 20),
-          RecommendationManagerList(
-            key: ValueKey(_filteredRecommendations),
-            recommendations: _filteredRecommendations,
-            isPromoter: widget.isPromoter,
-            onAppointmentPressed: widget.onAppointmentPressed,
-            onFinishedPressed: widget.onFinishedPressed,
-            onFailedPressed: widget.onFailedPressed,
-            onDeletePressed: widget.onDeletePressed,
-            onUpdate: widget.onUpdate,
-          ),
+          RecommendationManagerArchiveList(
+              key: ValueKey(_filteredRecommendations),
+              recommendations: _filteredRecommendations,
+              isPromoter: widget.isPromoter)
         ],
       ),
     );

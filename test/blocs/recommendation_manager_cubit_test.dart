@@ -38,7 +38,7 @@ void main() {
           statusTimestamps: null)
     ];
 
-    test("should call user repo when function is called", () async {
+    test("should call reco repo when function is called", () async {
       // Given
       when(mockRecoRepo.getRecommendations(userID))
           .thenAnswer((_) async => right(recommendations));
@@ -56,7 +56,10 @@ void main() {
       // Given
       final expectedResult = [
         RecommendationManagerLoadingState(),
-        RecommendationGetRecosSuccessState(recoItems: recommendations)
+        RecommendationGetRecosSuccessState(
+            recoItems: recommendations,
+            showSetAppointmentSnackBar: true,
+            showFinishedSnackBar: false)
       ];
       when(mockRecoRepo.getRecommendations(userID))
           .thenAnswer((_) async => right(recommendations));

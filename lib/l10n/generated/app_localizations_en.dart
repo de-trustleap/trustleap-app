@@ -1553,4 +1553,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendation_manager_delete_snackbar => 'The recommendation was successfully deleted!';
+
+  @override
+  String get recommendation_manager_finished_at_list_header => 'Finished at';
+
+  @override
+  String get recommendation_manager_archive_no_data_title => 'No archived recommendations found';
+
+  @override
+  String get recommendation_manager_archive_no_data_description => 'You don\'t appear to have archived any recommendations yet. All completed and incomplete recommendations are stored in the archive.';
+
+  @override
+  String get recommendation_manager_filter_finished_at => 'Completion date';
+
+  @override
+  String get recommendation_manager_finish_alert_title => 'Finish recommendation';
+
+  @override
+  String get recommendation_manager_finish_alert_message => 'Do you really want to mark the recommendation as completed?\nThe recommendation will then be archived.';
+
+  @override
+  String get recommendation_manager_finish_alert_archive_button => 'Archive';
+
+  @override
+  String get recommendation_manager_finish_alert_cancel_button => 'Cancel';
+
+  @override
+  String get recommendation_manager_failed_alert_title => 'Recommendation not completed';
+
+  @override
+  String get recommendation_manager_failed_alert_description => 'Are you sure you want to mark the recommendation as failed?\nThe recommendation will then be archived.';
+
+  @override
+  String get recommendation_manager_failed_alert_archive_button => 'Archive';
+
+  @override
+  String get recommendation_manager_failed_alert_cancel_button => 'Cancel';
+
+  @override
+  String get recommendation_manager_scheduled_snackbar => 'Appointment was successfully scheduled!';
+
+  @override
+  String get recommendation_manager_finished_snackbar => 'Your recommendation has been moved to the archive!';
+
+  @override
+  String get recommendation_manager_active_recommendations_tab => 'Active Recommendations';
+
+  @override
+  String get recommendation_manager_achive_tab => 'Archive';
 }

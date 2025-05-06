@@ -3166,6 +3166,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The recommendation was successfully deleted!'**
   String get recommendation_manager_delete_snackbar;
+
+  /// Finished at entry in the list header on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Finished at'**
+  String get recommendation_manager_finished_at_list_header;
+
+  /// Title of the page displayed when there are no archived recommendations on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'No archived recommendations found'**
+  String get recommendation_manager_archive_no_data_title;
+
+  /// Description of the page displayed when there are no archived recommendations on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t appear to have archived any recommendations yet. All completed and incomplete recommendations are stored in the archive.'**
+  String get recommendation_manager_archive_no_data_description;
+
+  /// Completion Date Text in the dropdown menu in the Filter View on the Referral Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Completion date'**
+  String get recommendation_manager_filter_finished_at;
+
+  /// Title of the Completion Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Finish recommendation'**
+  String get recommendation_manager_finish_alert_title;
+
+  /// Message of the Completion Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to mark the recommendation as completed?\nThe recommendation will then be archived.'**
+  String get recommendation_manager_finish_alert_message;
+
+  /// Archive button of the Complete Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get recommendation_manager_finish_alert_archive_button;
+
+  /// Cancel button of the Complete Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get recommendation_manager_finish_alert_cancel_button;
+
+  /// Title of the not completed Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation not completed'**
+  String get recommendation_manager_failed_alert_title;
+
+  /// Description of the not completed Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to mark the recommendation as failed?\nThe recommendation will then be archived.'**
+  String get recommendation_manager_failed_alert_description;
+
+  /// Archive button of the not Complete Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get recommendation_manager_failed_alert_archive_button;
+
+  /// Cancel button of the not Complete Alert on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get recommendation_manager_failed_alert_cancel_button;
+
+  /// Snackbar message when appointment was successfully set on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment was successfully scheduled!'**
+  String get recommendation_manager_scheduled_snackbar;
+
+  /// Snackbar message when recommendation has been successfully moved to the archive on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Your recommendation has been moved to the archive!'**
+  String get recommendation_manager_finished_snackbar;
+
+  /// Tab title on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Active Recommendations'**
+  String get recommendation_manager_active_recommendations_tab;
+
+  /// Tab title on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get recommendation_manager_achive_tab;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

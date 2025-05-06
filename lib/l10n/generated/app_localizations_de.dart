@@ -1553,4 +1553,52 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recommendation_manager_delete_snackbar => 'Die Empfehlung wurde erfolgreich gelöscht!';
+
+  @override
+  String get recommendation_manager_finished_at_list_header => 'Abgeschlossen am';
+
+  @override
+  String get recommendation_manager_archive_no_data_title => 'Keine archivierten Empfehlungen gefunden';
+
+  @override
+  String get recommendation_manager_archive_no_data_description => 'Du scheinst noch keine Empfehlungen archiviert zu haben. Es werden alle abgeschlossenen und nicht abgeschlossenen Empfehlungen im Archiv hinterlegt.';
+
+  @override
+  String get recommendation_manager_filter_finished_at => 'Datum des Abschlusses';
+
+  @override
+  String get recommendation_manager_finish_alert_title => 'Empfehlung abschließen';
+
+  @override
+  String get recommendation_manager_finish_alert_message => 'Möchtest du die Empfehlung wirklich als abgeschlossen markieren?\nDie Empfehlung wird dann archiviert.';
+
+  @override
+  String get recommendation_manager_finish_alert_archive_button => 'Archivieren';
+
+  @override
+  String get recommendation_manager_finish_alert_cancel_button => 'Abbrechen';
+
+  @override
+  String get recommendation_manager_failed_alert_title => 'Empfehlung fehlgeschlagen';
+
+  @override
+  String get recommendation_manager_failed_alert_description => 'Möchtest du die Empfehlung wirklich als fehlgeschlagen markieren?\nDie Empfehlung wird dann archiviert.';
+
+  @override
+  String get recommendation_manager_failed_alert_archive_button => 'Archivieren';
+
+  @override
+  String get recommendation_manager_failed_alert_cancel_button => 'Abbrechen';
+
+  @override
+  String get recommendation_manager_scheduled_snackbar => 'Termin wurde erfolgreich gesetzt!';
+
+  @override
+  String get recommendation_manager_finished_snackbar => 'Deine Empfehlung wurde ins Archiv verschoben!';
+
+  @override
+  String get recommendation_manager_active_recommendations_tab => 'Aktive Empfehlungen';
+
+  @override
+  String get recommendation_manager_achive_tab => 'Archiv';
 }

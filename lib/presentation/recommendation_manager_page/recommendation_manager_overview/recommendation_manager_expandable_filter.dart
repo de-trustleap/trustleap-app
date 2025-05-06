@@ -17,7 +17,8 @@ enum RecommendationSortByFilterState {
   recommendationReceiver,
   reason,
   lastUpdated,
-  expiresAt
+  expiresAt,
+  finishedAt
 }
 
 enum RecommendationSortOrderFilterState { asc, desc }
@@ -25,17 +26,23 @@ enum RecommendationSortOrderFilterState { asc, desc }
 class RecommendationOverviewFilterStates {
   RecommendationStatusFilterState statusFilterState =
       RecommendationStatusFilterState.all;
-  RecommendationSortByFilterState sortByFilterState =
-      RecommendationSortByFilterState.expiresAt;
+  late RecommendationSortByFilterState sortByFilterState;
   RecommendationSortOrderFilterState sortOrderFilterState =
       RecommendationSortOrderFilterState.desc;
+
+  RecommendationOverviewFilterStates({required bool isArchive}) {
+    sortByFilterState = isArchive
+        ? RecommendationSortByFilterState.finishedAt
+        : RecommendationSortByFilterState.expiresAt;
+  }
 }
 
 class RecommendationManagerExpandableFilter extends StatefulWidget {
+  final bool isArchive;
   final Function(RecommendationOverviewFilterStates filterStates)
       onFilterChanged;
   const RecommendationManagerExpandableFilter(
-      {super.key, required this.onFilterChanged});
+      {super.key, required this.onFilterChanged, required this.isArchive});
 
   @override
   State<RecommendationManagerExpandableFilter> createState() =>
@@ -44,8 +51,14 @@ class RecommendationManagerExpandableFilter extends StatefulWidget {
 
 class _RecommendationManagerExpandableFilterState
     extends State<RecommendationManagerExpandableFilter> {
-  RecommendationOverviewFilterStates filterStates =
-      RecommendationOverviewFilterStates();
+  late RecommendationOverviewFilterStates filterStates;
+
+  @override
+  void initState() {
+    super.initState();
+    filterStates =
+        RecommendationOverviewFilterStates(isArchive: widget.isArchive);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,16 +101,24 @@ class _RecommendationManagerExpandableFilterState
                               enableSearch: false,
                               requestFocusOnTap: false,
                               dropdownMenuEntries: [
-                                DropdownMenuEntry(
-                                    value: RecommendationSortByFilterState
-                                        .expiresAt,
-                                    label: localization
-                                        .recommendation_manager_filter_expires_date),
-                                DropdownMenuEntry(
-                                    value: RecommendationSortByFilterState
-                                        .lastUpdated,
-                                    label: localization
-                                        .recommendation_manager_filter_last_updated),
+                                if (widget.isArchive) ...[
+                                  DropdownMenuEntry(
+                                      value: RecommendationSortByFilterState
+                                          .finishedAt,
+                                      label: localization
+                                          .recommendation_manager_filter_finished_at),
+                                ] else ...[
+                                  DropdownMenuEntry(
+                                      value: RecommendationSortByFilterState
+                                          .expiresAt,
+                                      label: localization
+                                          .recommendation_manager_filter_expires_date),
+                                  DropdownMenuEntry(
+                                      value: RecommendationSortByFilterState
+                                          .lastUpdated,
+                                      label: localization
+                                          .recommendation_manager_filter_last_updated),
+                                ],
                                 DropdownMenuEntry(
                                     value: RecommendationSortByFilterState
                                         .promoter,
@@ -172,24 +193,26 @@ class _RecommendationManagerExpandableFilterState
                           value: RecommendationStatusFilterState.all,
                           label: localization
                               .recommendation_manager_filter_status_all),
-                      DropdownMenuEntry(
-                          value: RecommendationStatusFilterState
-                              .recommendationSent,
-                          label: localization
-                              .recommendation_manager_status_level_1),
-                      DropdownMenuEntry(
-                          value: RecommendationStatusFilterState.linkClicked,
-                          label: localization
-                              .recommendation_manager_status_level_2),
-                      DropdownMenuEntry(
-                          value:
-                              RecommendationStatusFilterState.contactFormSent,
-                          label: localization
-                              .recommendation_manager_status_level_3),
-                      DropdownMenuEntry(
-                          value: RecommendationStatusFilterState.appointment,
-                          label: localization
-                              .recommendation_manager_status_level_4),
+                      if (!widget.isArchive) ...[
+                        DropdownMenuEntry(
+                            value: RecommendationStatusFilterState
+                                .recommendationSent,
+                            label: localization
+                                .recommendation_manager_status_level_1),
+                        DropdownMenuEntry(
+                            value: RecommendationStatusFilterState.linkClicked,
+                            label: localization
+                                .recommendation_manager_status_level_2),
+                        DropdownMenuEntry(
+                            value:
+                                RecommendationStatusFilterState.contactFormSent,
+                            label: localization
+                                .recommendation_manager_status_level_3),
+                        DropdownMenuEntry(
+                            value: RecommendationStatusFilterState.appointment,
+                            label: localization
+                                .recommendation_manager_status_level_4)
+                      ],
                       DropdownMenuEntry(
                           value: RecommendationStatusFilterState.successful,
                           label: localization

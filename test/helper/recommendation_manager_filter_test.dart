@@ -56,7 +56,7 @@ void main() {
   ];
 
   test('returns unfiltered list by default', () {
-    final filterStates = RecommendationOverviewFilterStates();
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false);
     final result = RecommendationFilter.applyFilters(
       items: testItems,
       filterStates: filterStates,
@@ -66,7 +66,7 @@ void main() {
   });
 
   test('filters by statusLevel == linkClicked (1)', () {
-    final filterStates = RecommendationOverviewFilterStates()
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
       ..statusFilterState = RecommendationStatusFilterState.linkClicked;
 
     final result = RecommendationFilter.applyFilters(
@@ -79,7 +79,7 @@ void main() {
   });
 
   test('filters by statusLevel == successful (4)', () {
-    final filterStates = RecommendationOverviewFilterStates()
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
       ..statusFilterState = RecommendationStatusFilterState.successful;
 
     final result = RecommendationFilter.applyFilters(
@@ -92,7 +92,7 @@ void main() {
   });
 
   test('sorts by promoter ASC', () {
-    final filterStates = RecommendationOverviewFilterStates()
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
       ..sortByFilterState = RecommendationSortByFilterState.promoter
       ..sortOrderFilterState = RecommendationSortOrderFilterState.asc;
 
@@ -106,7 +106,7 @@ void main() {
   });
 
   test('sorts by recommendationReceiver DESC', () {
-    final filterStates = RecommendationOverviewFilterStates()
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
       ..sortByFilterState =
           RecommendationSortByFilterState.recommendationReceiver
       ..sortOrderFilterState = RecommendationSortOrderFilterState.desc;
@@ -121,7 +121,7 @@ void main() {
   });
 
   test('sorts by expiresAt ASC', () {
-    final filterStates = RecommendationOverviewFilterStates()
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
       ..sortByFilterState = RecommendationSortByFilterState.expiresAt
       ..sortOrderFilterState = RecommendationSortOrderFilterState.asc;
 
