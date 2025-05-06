@@ -1,10 +1,10 @@
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_archive_filter.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_list.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_list_header.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationManagerArchiveOverview extends StatefulWidget {
@@ -23,8 +23,8 @@ class _RecommendationManagerArchiveOverviewState
   late List<ArchivedRecommendationItem> _filteredRecommendations;
   late List<ArchivedRecommendationItem> _searchFilteredRecommendations;
   final TextEditingController _searchController = TextEditingController();
-  RecommendationArchiveFilterStates _currentFilterStates =
-      RecommendationArchiveFilterStates();
+  RecommendationOverviewFilterStates _currentFilterStates =
+      RecommendationOverviewFilterStates(isArchive: true);
   bool _filterIsExpanded = false;
 
   @override
@@ -85,7 +85,7 @@ class _RecommendationManagerArchiveOverviewState
     });
   }
 
-  void onFilterChanged(RecommendationArchiveFilterStates filterStates) {
+  void onFilterChanged(RecommendationOverviewFilterStates filterStates) {
     setState(() {
       _currentFilterStates = filterStates;
       _filteredRecommendations = RecommendationArchiveFilter.applyFilters(
@@ -95,59 +95,22 @@ class _RecommendationManagerArchiveOverviewState
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-    final localization = AppLocalizations.of(context);
-
     return CardContainer(
       maxWidth: 1200,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                localization.recommendation_manager_title,
-                style: themeData.textTheme.headlineLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                  child: SearchBar(
-                controller: _searchController,
-                leading: const Icon(Icons.search),
-                trailing: [
-                  IconButton(
-                      onPressed: () {
-                        _searchController.clear();
-                      },
-                      tooltip: localization
-                          .recommendation_manager_search_close_tooltip,
-                      icon: const Icon(Icons.close))
-                ],
-                hintText:
-                    localization.recommendation_manager_search_placeholder,
-              )),
-              const SizedBox(width: 16),
-              SizedBox(
-                width: 48,
-                height: 48,
-                child: IconButton(
-                    onPressed: () => onFilterPressed(),
-                    tooltip: localization.recommendation_manager_filter_tooltip,
-                    icon: Icon(Icons.filter_list,
-                        color: themeData.colorScheme.secondary, size: 32)),
-              ),
-            ],
-          ),
+          RecommendationManagerListHeader(
+              searchController: _searchController,
+              onFilterPressed: onFilterPressed),
           ExpandedSection(
               expand: _filterIsExpanded,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 16),
-                    RecommendationManagerArchiveExpandableFilter(
-                        onFilterChanged: onFilterChanged)
+                    RecommendationManagerExpandableFilter(
+                        onFilterChanged: onFilterChanged, isArchive: true)
                   ])),
           const SizedBox(height: 20),
           RecommendationManagerArchiveList(

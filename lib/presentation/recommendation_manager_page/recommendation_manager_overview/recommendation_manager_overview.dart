@@ -1,7 +1,7 @@
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_list_header.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_filter.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list.dart';
@@ -36,7 +36,7 @@ class _RecommendationManagerOverviewState
   late List<RecommendationItem> _searchFilteredRecommendations;
   final TextEditingController _searchController = TextEditingController();
   RecommendationOverviewFilterStates _currentFilterStates =
-      RecommendationOverviewFilterStates();
+      RecommendationOverviewFilterStates(isArchive: false);
   bool _filterIsExpanded = false;
 
   @override
@@ -106,51 +106,14 @@ class _RecommendationManagerOverviewState
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-    final localization = AppLocalizations.of(context);
-
     return CardContainer(
       maxWidth: 1200,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                localization.recommendation_manager_title,
-                style: themeData.textTheme.headlineLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                  child: SearchBar(
-                controller: _searchController,
-                leading: const Icon(Icons.search),
-                trailing: [
-                  IconButton(
-                      onPressed: () {
-                        _searchController.clear();
-                      },
-                      tooltip: localization
-                          .recommendation_manager_search_close_tooltip,
-                      icon: const Icon(Icons.close))
-                ],
-                hintText:
-                    localization.recommendation_manager_search_placeholder,
-              )),
-              const SizedBox(width: 16),
-              SizedBox(
-                width: 48,
-                height: 48,
-                child: IconButton(
-                    onPressed: () => onFilterPressed(),
-                    tooltip: localization.recommendation_manager_filter_tooltip,
-                    icon: Icon(Icons.filter_list,
-                        color: themeData.colorScheme.secondary, size: 32)),
-              ),
-            ],
-          ),
+          RecommendationManagerListHeader(
+              searchController: _searchController,
+              onFilterPressed: onFilterPressed),
           ExpandedSection(
               expand: _filterIsExpanded,
               child: Column(
@@ -158,7 +121,7 @@ class _RecommendationManagerOverviewState
                   children: [
                     const SizedBox(height: 16),
                     RecommendationManagerExpandableFilter(
-                        onFilterChanged: onFilterChanged)
+                        onFilterChanged: onFilterChanged, isArchive: false)
                   ])),
           const SizedBox(height: 20),
           RecommendationManagerList(
@@ -176,3 +139,8 @@ class _RecommendationManagerOverviewState
     );
   }
 }
+
+// TODO: SEARCH UND FILTER IN HEADER AUSLAGERN
+// TODO: TESTS ANPASSEN
+// TODO: TESTS ERWEITERN (CUBIT, MODEL, REPO, FILTER)
+// TODO: LOCALIZATIONS

@@ -1,11 +1,10 @@
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 
 class RecommendationArchiveFilter {
   static List<ArchivedRecommendationItem> applyFilters({
     required List<ArchivedRecommendationItem> items,
-    required RecommendationArchiveFilterStates filterStates,
+    required RecommendationOverviewFilterStates filterStates,
   }) {
     List<ArchivedRecommendationItem> filtered = items.where((item) {
       // filter by status
