@@ -1,4 +1,6 @@
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -211,6 +213,51 @@ void main() {
           await mockRecoRepo.finishRecommendation(recommendation, true);
       // Then
       verify(mockRecoRepo.finishRecommendation(recommendation, true));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
+
+  group("RecommendationRepositoryImplementation_getArchivedRecommendations",
+      () {
+    final userID = "1";
+    final date = DateTime.now();
+    final recommendations = [
+      ArchivedRecommendationItem(
+          id: UniqueID.fromUniqueString("1"),
+          name: "Test",
+          reason: "Test",
+          promoterName: "Test",
+          serviceProviderName: "Test",
+          success: true,
+          userID: userID,
+          createdAt: null,
+          finishedTimeStamp: date,
+          expiresAt: null)
+    ];
+
+    test("should return items when call was successful", () async {
+      // Given
+      final expectedResult = right(recommendations);
+      when(mockRecoRepo.getArchivedRecommendations(userID))
+          .thenAnswer((_) async => right(recommendations));
+      // When
+      final result = await mockRecoRepo.getArchivedRecommendations(userID);
+      // Then
+      verify(mockRecoRepo.getArchivedRecommendations(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockRecoRepo.getArchivedRecommendations(userID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockRecoRepo.getArchivedRecommendations(userID);
+      // Then
+      verify(mockRecoRepo.getArchivedRecommendations(userID));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });

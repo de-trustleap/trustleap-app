@@ -66,6 +66,7 @@ void main() {
         "pendingCompanyRequestID": null,
         "defaultLandingPageID": null,
         'recommendationIDs': null,
+        'archivedRecommendationIDs': null,
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
         "deletesAt": null,
