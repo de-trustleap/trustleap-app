@@ -2085,5 +2085,69 @@
     "recommendation_manager_delete_snackbar": "Die Empfehlung wurde erfolgreich gelöscht!",
     "@recommendation_manager_delete_snackbar": {
         "description": "Snackbar Text für Empfehlung Löschen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_finished_at_list_header": "Abgeschlossen am",
+    "@recommendation_manager_finished_at_list_header": {
+        "description": "Abgeschlossen am Eintrag im Listen Header auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_archive_no_data_title": "Keine archivierten Empfehlungen gefunden",
+    "@recommendation_manager_archive_no_data_title": {
+        "description": "Titel der Seite die angezeigt wird wenn es keine archivierten Empfehlungen gibt auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_archive_no_data_description": "Du scheinst noch keine Empfehlungen archiviert zu haben. Es werden alle abgeschlossenen und nicht abgeschlossenen Empfehlungen im Archiv hinterlegt.",
+    "@recommendation_manager_archive_no_data_description": {
+        "description": "Beschreibung der Seite die angezeigt wird wenn es keine archivierten Empfehlungen gibt auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_finished_at": "Datum des Abschlusses",
+    "@recommendation_manager_filter_finished_at": {
+        "description": "Datum des Abschlusses Text im Dropdown Menü in der Filter View auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_finish_alert_title": "Empfehlung abschließen",
+    "@recommendation_manager_finish_alert_title": {
+        "description": "Titel des Abschließen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_finish_alert_message": "Möchtest du die Empfehlung wirklich als abgeschlossen markieren?\nDie Empfehlung wird dann archiviert.",
+    "@recommendation_manager_finish_alert_message": {
+        "description": "Nachricht des Abschließen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_finish_alert_archive_button": "Archivieren",
+    "@recommendation_manager_finish_alert_archive_button": {
+        "description": "Archivieren Button des Abschließen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_finish_alert_cancel_button": "Abbrechen",
+    "@recommendation_manager_finish_alert_cancel_button": {
+        "description": "Abbrechen Button des Abschließen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_failed_alert_title": "Empfehlung fehlgeschlagen",
+    "@recommendation_manager_failed_alert_title": {
+        "description": "Titel des Nicht abgeschlossen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_failed_alert_description": "Möchtest du die Empfehlung wirklich als fehlgeschlagen markieren?\nDie Empfehlung wird dann archiviert.",
+    "@recommendation_manager_failed_alert_description": {
+        "description": "Beschreibung des Nicht abgeschlossen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_failed_alert_archive_button": "Archivieren",
+    "@recommendation_manager_failed_alert_archive_button": {
+        "description": "Archivieren Button des Nicht abgeschlossen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_failed_alert_cancel_button": "Abbrechen",
+    "@recommendation_manager_failed_alert_cancel_button": {
+        "description": "Abbrechen Button des Nicht abgeschlossen Alerts auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_scheduled_snackbar": "Termin wurde erfolgreich gesetzt!",
+    "@recommendation_manager_scheduled_snackbar": {
+        "description": "Snackbar Nachricht wenn Termin erfolgreich gesetzt wurde auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_finished_snackbar": "Deine Empfehlung wurde ins Archiv verschoben!",
+    "@recommendation_manager_finished_snackbar": {
+        "description": "Snackbar Nachricht wenn Empfehlung erfolgreich ins Archiv verschoben wurde auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_active_recommendations_tab": "Aktive Empfehlungen",
+    "@recommendation_manager_active_recommendations_tab": {
+        "description": "Titel eines Tabs auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_achive_tab": "Archiv",
+    "@recommendation_manager_achive_tab": {
+        "description": "Titel eines Tabs auf der Empfehlungsmanager Seite"
     }
 }

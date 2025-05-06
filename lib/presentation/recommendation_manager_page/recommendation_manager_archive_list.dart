@@ -35,7 +35,9 @@ class RecommendationManagerArchiveList extends StatelessWidget {
                     themeData)),
             Flexible(
                 flex: 2,
-                child: _buildHeaderCell("Abgeschlossen am", themeData)),
+                child: _buildHeaderCell(
+                    localization.recommendation_manager_finished_at_list_header,
+                    themeData)),
             const SizedBox(
               width: 70,
               child: Icon(Icons.expand_more, color: Colors.transparent),

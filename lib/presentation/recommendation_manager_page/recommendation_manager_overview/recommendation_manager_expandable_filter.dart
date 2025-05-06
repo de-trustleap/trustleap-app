@@ -102,10 +102,11 @@ class _RecommendationManagerExpandableFilterState
                               requestFocusOnTap: false,
                               dropdownMenuEntries: [
                                 if (widget.isArchive) ...[
-                                  const DropdownMenuEntry(
+                                  DropdownMenuEntry(
                                       value: RecommendationSortByFilterState
                                           .finishedAt,
-                                      label: "Datum des Abschlusses"),
+                                      label: localization
+                                          .recommendation_manager_filter_finished_at),
                                 ] else ...[
                                   DropdownMenuEntry(
                                       value: RecommendationSortByFilterState

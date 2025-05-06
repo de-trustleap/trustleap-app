@@ -2085,5 +2085,69 @@
     "recommendation_manager_delete_snackbar": "The recommendation was successfully deleted!",
     "@recommendation_manager_delete_snackbar": {
         "description": "Snackbar Text for Recommendation Delete on the Recommendation Manager page"
+    },
+    "recommendation_manager_finished_at_list_header": "Finished at",
+    "@recommendation_manager_finished_at_list_header": {
+        "description": "Finished at entry in the list header on the Recommendation Manager page"
+    },
+    "recommendation_manager_archive_no_data_title": "No archived recommendations found",
+    "@recommendation_manager_archive_no_data_title": {
+        "description": "Title of the page displayed when there are no archived recommendations on the Recommendation Manager page"
+    },
+    "recommendation_manager_archive_no_data_description": "You don't appear to have archived any recommendations yet. All completed and incomplete recommendations are stored in the archive.",
+    "@recommendation_manager_archive_no_data_description": {
+        "description": "Description of the page displayed when there are no archived recommendations on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_finished_at": "Completion date",
+    "@recommendation_manager_filter_finished_at": {
+        "description": "Completion Date Text in the dropdown menu in the Filter View on the Referral Manager page"
+    },
+    "recommendation_manager_finish_alert_title": "Finish recommendation",
+    "@recommendation_manager_finish_alert_title": {
+        "description": "Title of the Completion Alert on the recommendation manager page"
+    },
+    "recommendation_manager_finish_alert_message": "Do you really want to mark the recommendation as completed?\nThe recommendation will then be archived.",
+    "@recommendation_manager_finish_alert_message": {
+        "description": "Message of the Completion Alert on the recommendation manager page"
+    },
+    "recommendation_manager_finish_alert_archive_button": "Archive",
+    "@recommendation_manager_finish_alert_archive_button": {
+        "description": "Archive button of the Complete Alert on the recommendation manager page"
+    },
+    "recommendation_manager_finish_alert_cancel_button": "Cancel",
+    "@recommendation_manager_finish_alert_cancel_button": {
+        "description": "Cancel button of the Complete Alert on the recommendation manager page"
+    },
+    "recommendation_manager_failed_alert_title": "Recommendation not completed",
+    "@recommendation_manager_failed_alert_title": {
+        "description": "Title of the not completed Alert on the recommendation manager page"
+    },
+    "recommendation_manager_failed_alert_description": "Are you sure you want to mark the recommendation as failed?\nThe recommendation will then be archived.",
+    "@recommendation_manager_failed_alert_description": {
+        "description": "Description of the not completed Alert on the recommendation manager page"
+    },
+    "recommendation_manager_failed_alert_archive_button": "Archive",
+    "@recommendation_manager_failed_alert_archive_button": {
+        "description": "Archive button of the not Complete Alert on the recommendation manager page"
+    },
+    "recommendation_manager_failed_alert_cancel_button": "Cancel",
+    "@recommendation_manager_failed_alert_cancel_button": {
+        "description": "Cancel button of the not Complete Alert on the recommendation manager page"
+    },
+    "recommendation_manager_scheduled_snackbar": "Appointment was successfully scheduled!",
+    "@recommendation_manager_scheduled_snackbar": {
+        "description": "Snackbar message when appointment was successfully set on the recommendation manager page"
+    },
+    "recommendation_manager_finished_snackbar": "Your recommendation has been moved to the archive!",
+    "@recommendation_manager_finished_snackbar": {
+        "description": "Snackbar message when recommendation has been successfully moved to the archive on the recommendation manager page"
+    },
+    "recommendation_manager_active_recommendations_tab": "Active Recommendations",
+    "@recommendation_manager_active_recommendations_tab": {
+        "description": "Tab title on the recommendation manager page"
+    },
+    "recommendation_manager_achive_tab": "Archive",
+    "@recommendation_manager_achive_tab": {
+        "description": "Tab title on the recommendation manager page"
     }
 }

@@ -66,11 +66,13 @@ class _RecommendationManagerPageState
         context: context,
         builder: (_) {
           return CustomAlertDialog(
-              title: "Empfehlung abschließen",
+              title: localizations.recommendation_manager_finish_alert_title,
               message:
-                  "Möchtest du die Empfehlung wirklich als abgeschlossen markieren?\nDie Empfehlung wird dann archiviert.",
-              actionButtonTitle: "Archivieren",
-              cancelButtonTitle: "Abbrechen",
+                  localizations.recommendation_manager_finish_alert_message,
+              actionButtonTitle: localizations
+                  .recommendation_manager_finish_alert_archive_button,
+              cancelButtonTitle: localizations
+                  .recommendation_manager_finish_alert_cancel_button,
               actionButtonAction: () =>
                   _submitFinishRecommendation(recommendation, true),
               cancelButtonAction: () => CustomNavigator.pop());
@@ -83,11 +85,13 @@ class _RecommendationManagerPageState
         context: context,
         builder: (_) {
           return CustomAlertDialog(
-              title: "Empfehlung fehlgeschlagen?",
+              title: localizations.recommendation_manager_failed_alert_title,
               message:
-                  "Möchtest du die Empfehlung wirklich als fehlgeschlagen markieren?\nDie Empfehlung wird dann archiviert.",
-              actionButtonTitle: "Archivieren",
-              cancelButtonTitle: "Abbrechen",
+                  localizations.recommendation_manager_failed_alert_description,
+              actionButtonTitle: localizations
+                  .recommendation_manager_failed_alert_archive_button,
+              cancelButtonTitle: localizations
+                  .recommendation_manager_failed_alert_cancel_button,
               actionButtonAction: () =>
                   _submitFinishRecommendation(recommendation, false),
               cancelButtonAction: () => CustomNavigator.pop());
@@ -137,11 +141,11 @@ class _RecommendationManagerPageState
                 .getRecommendations(currentUser?.id.value);
           } else if (state is RecommendationGetRecosSuccessState) {
             if (state.showSetAppointmentSnackBar) {
-              CustomSnackBar.of(context)
-                  .showCustomSnackBar("Termin wurde erfolgreich gesetzt!");
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  localization.recommendation_manager_scheduled_snackbar);
             } else if (state.showFinishedSnackBar) {
               CustomSnackBar.of(context).showCustomSnackBar(
-                  "Deine Empfehlung wurde ins Archiv verschoben!");
+                  localization.recommendation_manager_finished_snackbar);
             }
           }
         },

@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_overview_wrapper.dart';
@@ -34,25 +35,31 @@ class _RecommendationManagerTabBarPageState
   @override
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Padding(
         padding: EdgeInsets.only(top: responsiveValue.screenHeight * 0.02),
-        child: tabbar(responsiveValue));
+        child: tabbar(responsiveValue, localization));
   }
 
-  List<TabbarContent> getTabbarContent() {
+  List<TabbarContent> getTabbarContent(AppLocalizations localization) {
     return [
       TabbarContent(
-          tab: const CustomTab(
-              title: "Aktive Empfehlungen", icon: Icons.thumb_up),
+          tab: CustomTab(
+              title: localization
+                  .recommendation_manager_active_recommendations_tab,
+              icon: Icons.thumb_up),
           content: const RecommendationManagerOverviewWrapper()),
       TabbarContent(
-          tab: const CustomTab(title: "Archiv", icon: Icons.archive),
+          tab: CustomTab(
+              title: localization.recommendation_manager_achive_tab,
+              icon: Icons.archive),
           content: const RecommendationManagerArchiveOverviewWrapper())
     ];
   }
 
-  Widget tabbar(ResponsiveBreakpointsData responsiveValue) {
+  Widget tabbar(ResponsiveBreakpointsData responsiveValue,
+      AppLocalizations localization) {
     return Column(children: [
       SizedBox(
         width: responsiveValue.largerThan(TABLET)
@@ -60,7 +67,7 @@ class _RecommendationManagerTabBarPageState
             : responsiveValue.screenWidth * 0.9,
         child: TabBar(
             controller: tabController,
-            tabs: getTabbarContent().map((e) => e.tab).toList(),
+            tabs: getTabbarContent(localization).map((e) => e.tab).toList(),
             indicatorPadding: const EdgeInsets.only(bottom: 4)),
       ),
       Expanded(
@@ -69,7 +76,9 @@ class _RecommendationManagerTabBarPageState
               physics: kIsWeb
                   ? const NeverScrollableScrollPhysics()
                   : const ScrollPhysics(),
-              children: getTabbarContent().map((e) => e.content).toList()))
+              children: getTabbarContent(localization)
+                  .map((e) => e.content)
+                  .toList()))
     ]);
   }
 }

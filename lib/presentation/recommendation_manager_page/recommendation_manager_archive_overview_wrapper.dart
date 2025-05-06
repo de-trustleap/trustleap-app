@@ -71,18 +71,18 @@ class _RecommendationManagerArchiveOverviewState
       ResponsiveBreakpointsData responsiveValue,
       AppLocalizations localization) {
     if (state is RecommendationManagerArchiveNoRecosState) {
-      return const EmptyPage(
+      return EmptyPage(
           icon: Icons.archive,
-          title: "Keine archivierten Empfehlungen gefunden",
+          title: localization.recommendation_manager_archive_no_data_title,
           subTitle:
-              "Du scheinst noch keine Empfehlungen archiviert zu haben. Es werden alle abgeschlossenen und nicht abgeschlossenen Empfehlungen im Archiv hinterlegt.",
+              localization.recommendation_manager_archive_no_data_description,
           buttonTitle: "",
           onTap: null,
           isButtonHidden: true);
     } else if (state
         is RecommendationManagerArchiveGetRecommendationsFailureState) {
       return ErrorView(
-          title: "Es ist ein Fehler aufgetreten",
+          title: localization.recommendation_manager_failure_text,
           message: DatabaseFailureMapper.mapFailureMessage(
               state.failure, localization),
           callback: () => {
