@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/modules/app_module.dart';
 import 'package:finanzbegleiter/core/router_observer.dart';
+import 'package:finanzbegleiter/core/web_crash_reporter.dart';
 import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/firebase_options_prod.dart';
 import 'package:finanzbegleiter/firebase_options_staging.dart';
@@ -49,6 +50,10 @@ Future main() async {
   });
 
   runApp(ModularApp(module: AppModule(), child: const MyApp()));
+
+  if (kIsWeb) {
+    WebCrashReporter.initialize();
+  }
 }
 
 void routeToInitial(AuthStatus status) {
