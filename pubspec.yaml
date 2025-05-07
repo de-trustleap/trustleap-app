@@ -46,6 +46,7 @@ dependencies:
   flex_color_picker: ^3.6.0
   rxdart: ^0.28.0
   flutter_iconpicker: ^4.0.1
+  web: ^1.1.1
 
 dev_dependencies:
   flutter_test:

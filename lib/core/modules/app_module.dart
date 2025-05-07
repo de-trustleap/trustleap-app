@@ -30,6 +30,7 @@ import 'package:finanzbegleiter/application/recommendation_manager/recommendatio
 import 'package:finanzbegleiter/application/recommendations/recommendations_alert/recommendations_alert_cubit.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
+import 'package:finanzbegleiter/application/web_logging/web_logging_cubit.dart';
 import 'package:finanzbegleiter/core/modules/admin_guard.dart';
 import 'package:finanzbegleiter/core/modules/admin_module.dart';
 import 'package:finanzbegleiter/core/modules/auth_guard.dart';
@@ -46,6 +47,7 @@ import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/web_logging_repository.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/admin_registration_code_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/company_repository_implementation.dart';
@@ -57,6 +59,7 @@ import 'package:finanzbegleiter/infrastructure/repositories/permission_repositor
 import 'package:finanzbegleiter/infrastructure/repositories/promoter_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/recommendation_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/user_repository_implementation.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/web_logging_repository_implementation.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -96,6 +99,8 @@ class AppModule extends Module {
       ..addLazySingleton<LegalsRepository>(LegalsRepositoryImplementation.new)
       ..addLazySingleton<RecommendationRepository>(
           RecommendationRepositoryImplementation.new)
+      ..addLazySingleton<WebLoggingRepository>(
+          WebLoggingRepositoryImplementation.new)
       ..addLazySingleton(ProfileObserverBloc.new)
       ..addLazySingleton(PagebuilderBloc.new)
       ..addLazySingleton(PagebuilderConfigMenuCubit.new)
@@ -113,6 +118,7 @@ class AppModule extends Module {
       ..addLazySingleton(MenuCubit.new)
       ..addLazySingleton(RecommendationManagerTileCubit.new)
       ..addLazySingleton(RecommendationManagerArchiveCubit.new)
+      ..addLazySingleton(WebLoggingCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
