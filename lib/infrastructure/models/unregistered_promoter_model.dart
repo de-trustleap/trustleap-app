@@ -10,7 +10,6 @@ class UnregisteredPromoterModel extends Equatable {
   final String? gender;
   final String? firstName;
   final String? lastName;
-  final String? birthDate;
   final String? email;
   final List<String>? landingPageIDs;
   final String? defaultLandingPageID;
@@ -25,7 +24,6 @@ class UnregisteredPromoterModel extends Equatable {
       this.gender,
       this.firstName,
       this.lastName,
-      this.birthDate,
       this.email,
       this.landingPageIDs,
       this.defaultLandingPageID,
@@ -41,7 +39,6 @@ class UnregisteredPromoterModel extends Equatable {
       'gender': gender,
       'firstName': firstName,
       'lastName': lastName,
-      'birthDate': birthDate,
       'email': email,
       'landingPageIDs': landingPageIDs,
       'defaultLandingPageID': defaultLandingPageID,
@@ -59,7 +56,6 @@ class UnregisteredPromoterModel extends Equatable {
         gender: map['gender'] != null ? map['gender'] as String : "none",
         firstName: map['firstName'] != null ? map['firstName'] as String : null,
         lastName: map['lastName'] != null ? map['lastName'] as String : null,
-        birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
         email: map['email'] != null ? map['email'] as String : null,
         landingPageIDs: map['landingPageIDs'] != null
             ? List<String>.from(map['landingPageIDs'])
@@ -80,7 +76,6 @@ class UnregisteredPromoterModel extends Equatable {
     String? gender,
     String? firstName,
     String? lastName,
-    String? birthDate,
     String? email,
     List<String>? landingPageIDs,
     String? defaultLandingPageID,
@@ -95,7 +90,6 @@ class UnregisteredPromoterModel extends Equatable {
       gender: gender ?? this.gender,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
-      birthDate: birthDate ?? this.birthDate,
       email: email ?? this.email,
       landingPageIDs: landingPageIDs ?? this.landingPageIDs,
       defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
@@ -120,12 +114,17 @@ class UnregisteredPromoterModel extends Equatable {
             : Gender.values.firstWhere((element) => element.name == gender),
         firstName: firstName,
         lastName: lastName,
-        birthDate: birthDate,
         email: email,
         landingPageIDs: landingPageIDs,
-        defaultLandingPageID: defaultLandingPageID != null ? UniqueID.fromUniqueString(defaultLandingPageID ?? "") : null,
-        parentUserID: parentUserID != null ? UniqueID.fromUniqueString(parentUserID ?? "") : null,
-        companyID: companyID != null ? UniqueID.fromUniqueString(companyID ?? "") : null,
+        defaultLandingPageID: defaultLandingPageID != null
+            ? UniqueID.fromUniqueString(defaultLandingPageID ?? "")
+            : null,
+        parentUserID: parentUserID != null
+            ? UniqueID.fromUniqueString(parentUserID ?? "")
+            : null,
+        companyID: companyID != null
+            ? UniqueID.fromUniqueString(companyID ?? "")
+            : null,
         code: code != null ? UniqueID.fromUniqueString(code ?? "") : null,
         expiresAt: expiresAt);
   }
@@ -136,7 +135,6 @@ class UnregisteredPromoterModel extends Equatable {
         gender: promoter.gender?.name,
         firstName: promoter.firstName,
         lastName: promoter.lastName,
-        birthDate: promoter.birthDate,
         email: promoter.email,
         landingPageIDs: promoter.landingPageIDs,
         defaultLandingPageID: promoter.defaultLandingPageID?.value ?? "",
@@ -154,7 +152,6 @@ class UnregisteredPromoterModel extends Equatable {
         lastName,
         gender,
         email,
-        birthDate,
         parentUserID,
         companyID,
         code,

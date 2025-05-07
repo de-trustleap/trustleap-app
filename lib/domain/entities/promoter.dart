@@ -83,7 +83,6 @@ class Promoter extends Equatable {
         gender: promoter.gender,
         firstName: promoter.firstName,
         lastName: promoter.lastName,
-        birthDate: promoter.birthDate,
         email: promoter.email,
         thumbnailDownloadURL: null,
         landingPageIDs: promoter.landingPageIDs,

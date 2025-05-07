@@ -1247,12 +1247,6 @@ abstract class AppLocalizations {
   /// **'lastname'**
   String get register_promoter_last_name;
 
-  /// The birthdate placeholder in the text field of the promoter register form
-  ///
-  /// In en, this message translates to:
-  /// **'birthdate'**
-  String get register_promoter_birthdate;
-
   /// The email placeholder in the text field of the promoter register form
   ///
   /// In en, this message translates to:

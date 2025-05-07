@@ -778,10 +778,6 @@
     "@register_promoter_last_name": {
         "description": "Der Nachname Platzhalter im Textfeld vom Promoter registrieren Formular"
     },
-    "register_promoter_birthdate": "Geburtsdatum",
-    "@register_promoter_birthdate": {
-        "description": "Das Geburtsdatum Platzhalter im Textfeld vom Promoter registrieren Formular"
-    },
     "register_promoter_email": "E-Mail Adresse",
     "@register_promoter_email": {
         "description": "Die E-Mail Adresse Platzhalter im Textfeld vom Promoter registrieren Formular"

@@ -12,7 +12,6 @@ void main() {
           gender: Gender.male,
           firstName: "Max",
           lastName: "Mustermann",
-          birthDate: "23.12.2023",
           parentUserID: UniqueID.fromUniqueString("2"),
           code: UniqueID.fromUniqueString("1234"));
 
@@ -21,7 +20,6 @@ void main() {
           gender: Gender.male,
           firstName: "Max",
           lastName: "Mustermann",
-          birthDate: "23.12.2023",
           email: "tester@test.de",
           parentUserID: UniqueID.fromUniqueString("2"),
           code: UniqueID.fromUniqueString("1234"));
@@ -41,7 +39,6 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           gender: Gender.male,
           lastName: "Mustermann",
-          birthDate: "23.12.2023",
           code: UniqueID.fromUniqueString("1234"));
 
       final expectedResult = UnregisteredPromoter(
@@ -49,7 +46,6 @@ void main() {
           gender: Gender.male,
           firstName: "Max",
           lastName: "Mustermann",
-          birthDate: "23.12.2023",
           email: "tester@test.de",
           parentUserID: UniqueID.fromUniqueString("2"),
           code: UniqueID.fromUniqueString("1234"));
@@ -73,7 +69,6 @@ void main() {
           gender: Gender.male,
           firstName: "Max",
           lastName: "Mustermann",
-          birthDate: "23.12.2023",
           email: "tester@test.de",
           parentUserID: UniqueID.fromUniqueString("2"),
           code: UniqueID.fromUniqueString("1234"));
@@ -83,7 +78,6 @@ void main() {
           gender: Gender.male,
           firstName: "Max",
           lastName: "Mustermann",
-          birthDate: "23.12.2023",
           email: "tester@test.de",
           parentUserID: UniqueID.fromUniqueString("2"),
           code: UniqueID.fromUniqueString("1234"));
