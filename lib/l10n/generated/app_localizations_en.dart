@@ -587,9 +587,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_promoter_last_name => 'lastname';
 
   @override
-  String get register_promoter_birthdate => 'birthdate';
-
-  @override
   String get register_promoter_email => 'email address';
 
   @override

@@ -778,10 +778,6 @@
     "@register_promoter_last_name": {
         "description": "The last name placeholder in the text field of the promoter register form"
     },
-    "register_promoter_birthdate": "birthdate",
-    "@register_promoter_birthdate": {
-        "description": "The birthdate placeholder in the text field of the promoter register form"
-    },
     "register_promoter_email": "email address",
     "@register_promoter_email": {
         "description": "The email placeholder in the text field of the promoter register form"

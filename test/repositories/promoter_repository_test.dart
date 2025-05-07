@@ -23,7 +23,6 @@ void main() {
         gender: Gender.male,
         firstName: "Max",
         lastName: "Mustermann",
-        birthDate: "23.12.2023",
         parentUserID: UniqueID.fromUniqueString("2"),
         code: UniqueID.fromUniqueString("1234"));
     test("should return unit when registration of promoter was successful",
@@ -129,7 +128,6 @@ void main() {
           gender: Gender.male,
           firstName: "Max",
           lastName: "Mustermann",
-          birthDate: "23.12.2023",
           parentUserID: UniqueID.fromUniqueString("2"),
           code: UniqueID.fromUniqueString("1234")),
       UnregisteredPromoter(
@@ -137,7 +135,6 @@ void main() {
           gender: Gender.female,
           firstName: "Maria",
           lastName: "Musterfrau",
-          birthDate: "23.12.2023",
           parentUserID: UniqueID.fromUniqueString("2"),
           code: UniqueID.fromUniqueString("1235"))
     ];

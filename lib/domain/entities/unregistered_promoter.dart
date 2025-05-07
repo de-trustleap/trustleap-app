@@ -8,7 +8,6 @@ class UnregisteredPromoter extends Equatable {
   final Gender? gender;
   final String? firstName;
   final String? lastName;
-  final String? birthDate;
   final String? email;
   final List<String>? landingPageIDs;
   final UniqueID? defaultLandingPageID;
@@ -22,7 +21,6 @@ class UnregisteredPromoter extends Equatable {
       this.gender,
       this.firstName,
       this.lastName,
-      this.birthDate,
       this.email,
       this.landingPageIDs,
       this.defaultLandingPageID,
@@ -39,27 +37,11 @@ class UnregisteredPromoter extends Equatable {
                 DateTime.now().minute,
                 DateTime.now().second);
 
-  @override
-  List<Object?> get props => [
-        id,
-        gender,
-        firstName,
-        lastName,
-        birthDate,
-        email,
-        parentUserID,
-        defaultLandingPageID,
-        companyID,
-        code,
-        landingPageIDs
-      ];
-
   UnregisteredPromoter copyWith({
     UniqueID? id,
     Gender? gender,
     String? firstName,
     String? lastName,
-    String? birthDate,
     String? email,
     List<String>? landingPageIDs,
     UniqueID? defaultLandingPageID,
@@ -72,7 +54,6 @@ class UnregisteredPromoter extends Equatable {
         gender: gender ?? this.gender,
         firstName: firstName ?? this.firstName,
         lastName: lastName ?? this.lastName,
-        birthDate: birthDate ?? this.birthDate,
         email: email ?? this.email,
         landingPageIDs: landingPageIDs ?? this.landingPageIDs,
         defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
@@ -81,4 +62,18 @@ class UnregisteredPromoter extends Equatable {
         code: code ?? this.code,
         expiresAt: expiresAt);
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        gender,
+        firstName,
+        lastName,
+        email,
+        parentUserID,
+        defaultLandingPageID,
+        companyID,
+        code,
+        landingPageIDs
+      ];
 }

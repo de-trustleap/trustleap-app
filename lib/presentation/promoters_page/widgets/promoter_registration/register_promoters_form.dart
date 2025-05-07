@@ -19,7 +19,6 @@ import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_reg
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class RegisterPromotersForm extends StatefulWidget {
@@ -37,7 +36,6 @@ class RegisterPromotersForm extends StatefulWidget {
 class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   final firstNameTextController = TextEditingController();
   final lastNameTextController = TextEditingController();
-  final birthDateTextController = TextEditingController();
   final emailTextController = TextEditingController();
 
   Gender? selectedGender;
@@ -62,7 +60,6 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   void dispose() {
     firstNameTextController.dispose();
     lastNameTextController.dispose();
-    birthDateTextController.dispose();
     emailTextController.dispose();
 
     super.dispose();
@@ -94,7 +91,6 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
             gender: selectedGender,
             firstName: firstNameTextController.text.trim(),
             lastName: lastNameTextController.text.trim(),
-            birthDate: birthDateTextController.text.trim(),
             email: emailTextController.text.trim(),
             landingPageIDs: getSelectedLandingPagesIDs(),
             defaultLandingPageID: UniqueID.fromUniqueString(
@@ -271,36 +267,6 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                     onChanged: resetError,
                                     onFieldSubmitted: (_) => submit(validator),
                                     validator: validator.validateLastName))
-                          ]),
-                      const SizedBox(height: textFieldSpacing),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FormTextfield(
-                                maxWidth: maxWidth,
-                                controller: birthDateTextController,
-                                disabled: false,
-                                placeholder:
-                                    localization.register_promoter_birthdate,
-                                onChanged: resetError,
-                                onFieldSubmitted: (_) => submit(validator),
-                                validator: validator.validateLastName,
-                                keyboardType: TextInputType.datetime,
-                                prefixIcon: Icons.calendar_today_rounded,
-                                onTap: () async {
-                                  DateTime? pickedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime.now());
-                                  if (pickedDate != null) {
-                                    setState(() {
-                                      birthDateTextController.text =
-                                          DateFormat("dd.MM.yyyy")
-                                              .format(pickedDate);
-                                    });
-                                  }
-                                })
                           ]),
                       const SizedBox(height: textFieldSpacing),
                       Row(
