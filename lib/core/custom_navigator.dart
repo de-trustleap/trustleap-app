@@ -11,16 +11,8 @@ class CustomNavigator {
     Modular.to.navigate(route, arguments: arguments);
   }
 
-  static void navigate2(String route, String params) {
-    Modular.to.navigate(route + params);
-  }
-
   static void pushNamed(String route, {Object? arguments}) {
     Modular.to.pushNamed(route, arguments: arguments);
-  }
-
-  static void pushNamed2(String route, String params) {
-    Modular.to.pushNamed(route + params);
   }
 
   static void pushAndReplace(String route, String params) {

@@ -17,6 +17,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_t
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/route_paths.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -214,22 +215,10 @@ class _RegisterFormState extends State<RegisterForm> {
                 SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   SizedBox(
-                    width: getResponsiveWidth(1),
-                    child: SelectableText(localization.register_title,
-                        style: themeData.textTheme.headlineLarge!.copyWith(
-                            fontSize: responsiveValue.isMobile ? 20 : 50,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 4)),
-                  ),
-                ]),
-                const SizedBox(height: textFieldSpacing),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  SizedBox(
-                    width: getResponsiveWidth(1),
-                    child: SelectableText(localization.register_subtitle,
-                        style: themeData.textTheme.bodySmall!.copyWith(
-                            fontWeight: FontWeight.w500, letterSpacing: 4)),
-                  ),
+                      width: getResponsiveWidth(1),
+                      child: Image.asset(kDebugMode
+                          ? "images/logo/logo_text.png"
+                          : "assets/images/logo/logo_text.png")),
                 ]),
                 SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [

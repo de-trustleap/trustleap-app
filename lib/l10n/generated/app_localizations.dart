@@ -95,18 +95,6 @@ abstract class AppLocalizations {
     Locale('en')
   ];
 
-  /// Caption of the register page
-  ///
-  /// In en, this message translates to:
-  /// **'Register'**
-  String get register_title;
-
-  /// The subtitle of the register page
-  ///
-  /// In en, this message translates to:
-  /// **'Registriere now to use our service.'**
-  String get register_subtitle;
-
   /// The firstname in the register form
   ///
   /// In en, this message translates to:
@@ -214,18 +202,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **''**
   String get register_privacy_policy_text2;
-
-  /// The title of the login page
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome'**
-  String get login_title;
-
-  /// The subtitle of the login page
-  ///
-  /// In en, this message translates to:
-  /// **'Please login or register.'**
-  String get login_subtitle;
 
   /// email address field of the login form on the login page
   ///
