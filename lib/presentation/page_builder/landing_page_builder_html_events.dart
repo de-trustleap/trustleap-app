@@ -1,13 +1,19 @@
+import 'dart:js_interop';
+
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/foundation.dart';
-import 'package:universal_html/html.dart' as html;
+import 'package:web/web.dart' as web;
 
 class LandingPageBuilderHtmlEvents {
-  html.EventListener? beforeUnloadListener;
+  web.EventListener? beforeUnloadListener;
   bool _isBeforeUnloadListenerEnabled = false;
 
   void removeListener() {
-    html.window.removeEventListener('beforeunload', beforeUnloadListener);
+    if (beforeUnloadListener != null) {
+      web.window.removeEventListener('beforeunload', beforeUnloadListener!);
+      beforeUnloadListener = null;
+      _isBeforeUnloadListenerEnabled = false;
+    }
   }
 
   void enableLeavePageListeners(AppLocalizations localization) {
@@ -20,12 +26,17 @@ class LandingPageBuilderHtmlEvents {
 
   void _enableBeforeUnloadListener(AppLocalizations localization) {
     if (kIsWeb && !_isBeforeUnloadListenerEnabled) {
-      beforeUnloadListener = (html.Event event) {
+      beforeUnloadListener = ((web.Event event) {
         event.preventDefault();
-        (event as html.BeforeUnloadEvent).returnValue =
-            localization.landingpage_pagebuilder_unload_alert_message;
-      };
-      html.window.addEventListener("beforeunload", beforeUnloadListener!);
+
+        if (event.isA<web.BeforeUnloadEvent>()) {
+          final unloadEvent = event as web.BeforeUnloadEvent;
+          unloadEvent.returnValue =
+              localization.landingpage_pagebuilder_unload_alert_message;
+        }
+      }).toJS;
+
+      web.window.addEventListener('beforeunload', beforeUnloadListener!);
       _isBeforeUnloadListenerEnabled = true;
     }
   }
@@ -33,7 +44,7 @@ class LandingPageBuilderHtmlEvents {
   void _disableBeforeUnloadListener() {
     if (kIsWeb && _isBeforeUnloadListenerEnabled) {
       if (beforeUnloadListener != null) {
-        html.window.removeEventListener('beforeunload', beforeUnloadListener!);
+        web.window.removeEventListener('beforeunload', beforeUnloadListener!);
         beforeUnloadListener = null;
       }
       _isBeforeUnloadListenerEnabled = false;

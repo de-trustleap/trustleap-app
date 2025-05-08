@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:universal_html/html.dart' as html;
+import 'package:web/web.dart' as web;
 
 class CustomNavigator {
   static String get currentPath {
@@ -30,14 +30,14 @@ class CustomNavigator {
 
   static void openInNewTab(String route) {
     if (kIsWeb) {
-      final url = '${html.window.location.origin}$route';
-      html.window.open(url, '_blank');
+      final url = '${web.window.location.origin}$route';
+      web.window.open(url, '_blank');
     }
   }
 
   static void openURLInNewTab(String url) {
     if (kIsWeb) {
-      html.window.open(url, '_blank');
+      web.window.open(url, '_blank');
     }
   }
 
