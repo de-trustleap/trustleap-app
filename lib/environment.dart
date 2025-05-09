@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:universal_html/html.dart' as html;
+import 'package:web/web.dart' as web;
 
 class Environment {
   final prodBaseURL = "app.trust-leap.de";
@@ -10,7 +10,7 @@ class Environment {
       "https://landingpages-staging.trust-leap.de";
 
   bool isStaging() {
-    final String currentUrl = html.window.location.hostname ?? "";
+    final String currentUrl = web.window.location.hostname;
     final bool isStaging = currentUrl.contains(stagingBaseURL) ||
         !const bool.fromEnvironment("dart.vm.product");
     return isStaging;
