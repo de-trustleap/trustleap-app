@@ -1,9 +1,10 @@
-import 'package:universal_html/html.dart' as html;
+import 'package:web/web.dart' as web;
 
 class Downloader {
   void showFileInNewTab(String url) {
-    html.AnchorElement(href: url)
-      ..target = '_blank'
-      ..click();
+    final anchor = web.document.createElement('a') as web.HTMLAnchorElement;
+    anchor.href = url;
+    anchor.target = '_blank';
+    anchor.click();
   }
 }

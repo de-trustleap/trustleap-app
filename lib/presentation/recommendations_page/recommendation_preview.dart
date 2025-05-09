@@ -15,8 +15,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:universal_html/html.dart' as html;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:web/web.dart' as web;
 
 class RecommendationPreview extends StatefulWidget {
   final String userID;
@@ -162,7 +162,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         "https://api.whatsapp.com/send/?text=${Uri.encodeComponent(adaptedMessage)}";
     final convertedURL = Uri.parse(whatsappURL);
     if (kIsWeb) {
-      html.window.open(whatsappURL, '_blank');
+      web.window.open(whatsappURL, '_blank');
       _startComeBackToPageListener(recommendation);
       return;
     } else {
@@ -178,8 +178,8 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
   void _startComeBackToPageListener(RecommendationItem recommendation) {
     _visibilitySubscription?.cancel();
-    _visibilitySubscription = html.document.onVisibilityChange.listen((event) {
-      if (!html.document.hidden! && mounted && !isAlertVisible) {
+    _visibilitySubscription = web.document.onVisibilityChange.listen((event) {
+      if (!web.document.hidden && mounted && !isAlertVisible) {
         isAlertVisible = true;
         // App ist wieder sichtbar (zurück im Tab)
         showDialog(

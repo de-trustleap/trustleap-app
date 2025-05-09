@@ -26,8 +26,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:universal_html/html.dart' as html;
 import 'package:url_strategy/url_strategy.dart';
+import 'package:web/web.dart' as web;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,8 +59,8 @@ Future main() async {
 void routeToInitial(AuthStatus status) {
   late String lastRoute;
   if (kIsWeb) {
-    String path = html.window.location.pathname ?? "/";
-    String query = html.window.location.search ?? "";
+    String path = web.window.location.pathname;
+    String query = web.window.location.search;
     if (path != "/") {
       lastRoute = path + query;
     } else {
