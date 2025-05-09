@@ -9,12 +9,6 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get register_title => 'Register';
-
-  @override
-  String get register_subtitle => 'Registriere now to use our service.';
-
-  @override
   String get register_firstname => 'firstname';
 
   @override
@@ -67,12 +61,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register_privacy_policy_text2 => '';
-
-  @override
-  String get login_title => 'Welcome';
-
-  @override
-  String get login_subtitle => 'Please login or register.';
 
   @override
   String get login_email => 'email address';

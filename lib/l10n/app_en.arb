@@ -1,13 +1,5 @@
 {
     "@@locale": "en",
-    "register_title": "Register",
-    "@register_title": {
-        "description": "Caption of the register page"
-    },
-    "register_subtitle": "Registriere now to use our service.",
-    "@register_subtitle": {
-        "description": "The subtitle of the register page"
-    },
     "register_firstname": "firstname",
     "@register_firstname": {
         "description": "The firstname in the register form"
@@ -79,14 +71,6 @@
     "register_privacy_policy_text2": "",
     "@register_privacy_policy_text2": {
         "description": "The second part of the privacy checkbox text on the registration page"
-    },
-    "login_title": "Welcome",
-    "@login_title": {
-        "description": "The title of the login page"
-    },
-    "login_subtitle": "Please login or register.",
-    "@login_subtitle": {
-        "description": "The subtitle of the login page"
     },
     "login_email": "email address",
     "@login_email": {

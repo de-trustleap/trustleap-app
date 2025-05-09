@@ -9,12 +9,6 @@ class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
   @override
-  String get register_title => 'Registrieren';
-
-  @override
-  String get register_subtitle => 'Registriere dich jetzt um den Service zu nutzen.';
-
-  @override
   String get register_firstname => 'Vorname';
 
   @override
@@ -67,12 +61,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get register_privacy_policy_text2 => 'zu';
-
-  @override
-  String get login_title => 'Willkommen';
-
-  @override
-  String get login_subtitle => 'Melde dich an oder registriere dich.';
 
   @override
   String get login_email => 'E-Mail';

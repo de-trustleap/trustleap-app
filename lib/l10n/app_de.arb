@@ -1,13 +1,5 @@
 {
     "@@locale": "de",
-    "register_title": "Registrieren",
-    "@register_title": {
-        "description": "Überschrift der Registrieren Seite"
-    },
-    "register_subtitle": "Registriere dich jetzt um den Service zu nutzen.",
-    "@register_subtitle": {
-        "description": "Der Untertitel der Registrieren Seite"
-    },
     "register_firstname": "Vorname",
     "@register_firstname": {
         "description": "Der Vorname im Registrierungsformular"
@@ -79,14 +71,6 @@
     "register_privacy_policy_text2": "zu",
     "@register_privacy_policy_text2": {
         "description": "Der zweite Teil des Datenschutz Checkbox Textes auf der Registrieren Seite"
-    },
-    "login_title": "Willkommen",
-    "@login_title": {
-        "description": "Die Überschrift der Login Seite"
-    },
-    "login_subtitle": "Melde dich an oder registriere dich.",
-    "@login_subtitle": {
-        "description": "Der Untertitel der Login Seite"
     },
     "login_email": "E-Mail",
     "@login_email": {

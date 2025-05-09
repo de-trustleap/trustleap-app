@@ -11,6 +11,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_e
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/route_paths.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -60,7 +61,6 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
     final responsiveValue = ResponsiveBreakpoints.of(context);
@@ -96,15 +96,9 @@ class _LoginFormState extends State<LoginForm> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     children: [
                       SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-                      SelectableText(localization.login_title,
-                          style: themeData.textTheme.headlineLarge!.copyWith(
-                              fontSize: responsiveValue.isMobile ? 20 : 50,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 4)),
-                      const SizedBox(height: 20),
-                      SelectableText(localization.login_subtitle,
-                          style: themeData.textTheme.bodySmall!.copyWith(
-                              fontWeight: FontWeight.w500, letterSpacing: 4)),
+                      Image.asset(kDebugMode
+                          ? "images/logo/logo_text.png"
+                          : "assets/images/logo/logo_text.png"),
                       const SizedBox(height: 80),
                       FormTextfield(
                           controller: emailTextController,
