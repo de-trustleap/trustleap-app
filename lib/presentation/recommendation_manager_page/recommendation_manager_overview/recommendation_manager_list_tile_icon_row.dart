@@ -1,16 +1,16 @@
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RecommendationManagerListTileIconRow extends StatefulWidget {
-  final RecommendationItem recommendation;
-  final Function(RecommendationItem) onAppointmentPressed;
-  final Function(RecommendationItem) onFinishedPressed;
-  final Function(RecommendationItem) onFailedPressed;
-  final Function(String, String) onDeletePressed;
+  final UserRecommendation recommendation;
+  final Function(UserRecommendation) onAppointmentPressed;
+  final Function(UserRecommendation) onFinishedPressed;
+  final Function(UserRecommendation) onFailedPressed;
+  final Function(String, String, String) onDeletePressed;
   const RecommendationManagerListTileIconRow(
       {super.key,
       required this.recommendation,
@@ -59,7 +59,9 @@ class _RecommendationManagerListTileIconRowState
                   message: localization
                       .recommendation_manager_tile_progress_appointment_button_tooltip,
                   child: ElevatedButton(
-                      onPressed: widget.recommendation.statusLevel == 2 &&
+                      onPressed: widget.recommendation.recommendation
+                                      ?.statusLevel ==
+                                  2 &&
                               !buttonsDisabled
                           ? () =>
                               widget.onAppointmentPressed(widget.recommendation)
@@ -79,7 +81,9 @@ class _RecommendationManagerListTileIconRowState
                   message: localization
                       .recommendation_manager_tile_progress_finish_button_tooltip,
                   child: ElevatedButton(
-                      onPressed: widget.recommendation.statusLevel == 3 &&
+                      onPressed: widget.recommendation.recommendation
+                                      ?.statusLevel ==
+                                  3 &&
                               !buttonsDisabled
                           ? () =>
                               widget.onFinishedPressed(widget.recommendation)
@@ -98,7 +102,9 @@ class _RecommendationManagerListTileIconRowState
                   message: localization
                       .recommendation_manager_tile_progress_failed_button_tooltip,
                   child: ElevatedButton(
-                      onPressed: widget.recommendation.statusLevel == 3 &&
+                      onPressed: widget.recommendation.recommendation
+                                      ?.statusLevel ==
+                                  3 &&
                               !buttonsDisabled
                           ? () => widget.onFailedPressed(widget.recommendation)
                           : null,
@@ -116,10 +122,13 @@ class _RecommendationManagerListTileIconRowState
                   message: localization
                       .recommendation_manager_list_tile_delete_button_title,
                   child: ElevatedButton(
-                      onPressed: () => !buttonsDisabled
-                          ? widget.onDeletePressed(widget.recommendation.id,
-                              widget.recommendation.userID ?? "")
-                          : null,
+                      onPressed: buttonsDisabled
+                          ? null
+                          : () => widget.onDeletePressed(
+                              widget.recommendation.recommendation?.id ?? "",
+                              widget.recommendation.recommendation?.userID ??
+                                  "",
+                              widget.recommendation.id.value),
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12)),

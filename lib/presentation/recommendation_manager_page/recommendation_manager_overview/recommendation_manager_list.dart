@@ -1,17 +1,17 @@
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/no_search_results_view.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationManagerList extends StatelessWidget {
-  final List<RecommendationItem> recommendations;
+  final List<UserRecommendation> recommendations;
   final bool isPromoter;
-  final Function(RecommendationItem) onAppointmentPressed;
-  final Function(RecommendationItem) onFinishedPressed;
-  final Function(RecommendationItem) onFailedPressed;
-  final Function(String, String) onDeletePressed;
-  final Function(RecommendationItem, bool) onUpdate;
+  final Function(UserRecommendation) onAppointmentPressed;
+  final Function(UserRecommendation) onFinishedPressed;
+  final Function(UserRecommendation) onFailedPressed;
+  final Function(String, String, String) onDeletePressed;
+  final Function(UserRecommendation, bool) onUpdate;
   const RecommendationManagerList(
       {super.key,
       required this.recommendations,
@@ -71,6 +71,7 @@ class RecommendationManagerList extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return RecommendationManagerListTile(
+                key: ValueKey(recommendations[index].id.value),
                 recommendation: recommendations[index],
                 isPromoter: isPromoter,
                 onAppointmentPressed: onAppointmentPressed,

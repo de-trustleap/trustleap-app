@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
@@ -9,11 +10,14 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_preview.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_validator.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -193,6 +197,18 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
           }
         },
         builder: (context, state) {
+          if (state is RecommendationNoReasonsState) {
+            return EmptyPage(
+                icon: Icons.person_add,
+                title: "Keine Landingpages gefunden",
+                subTitle:
+                    "Um eine Empfehlung aussprechen zu können musst du neben deiner Default Landingpage erst noch eine Landngpage anlegen.",
+                buttonTitle: "Zu den Landingpages",
+                onTap: () {
+                  CustomNavigator.navigate(
+                      RoutePaths.homePath + RoutePaths.landingPagePath);
+                });
+          }
           if (state is RecommendationGetCurrentUserSuccessState ||
               state is RecommendationGetParentUserSuccessState ||
               state is RecommendationGetReasonsSuccessState) {
@@ -322,9 +338,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                     callback: () =>
                         {Modular.get<RecommendationsCubit>().getUser()}));
           } else {
-            return CenteredConstrainedWrapper(
-                child: CircularProgressIndicator(
-                    color: themeData.colorScheme.secondary));
+            return const LoadingIndicator();
           }
         },
       );

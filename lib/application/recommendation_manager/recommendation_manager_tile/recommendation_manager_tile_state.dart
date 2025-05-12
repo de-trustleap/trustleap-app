@@ -12,7 +12,7 @@ final class RecommendationManagerTileInitial
 
 class RecommendationSetStatusLoadingState extends RecommendationManagerTileState
     with EquatableMixin {
-  final RecommendationItem recommendation;
+  final UserRecommendation recommendation;
 
   RecommendationSetStatusLoadingState({required this.recommendation});
 
@@ -23,7 +23,7 @@ class RecommendationSetStatusLoadingState extends RecommendationManagerTileState
 class RecommendationSetStatusFailureState extends RecommendationManagerTileState
     with EquatableMixin {
   final DatabaseFailure failure;
-  final RecommendationItem recommendation;
+  final UserRecommendation recommendation;
 
   RecommendationSetStatusFailureState(
       {required this.failure, required this.recommendation});
@@ -34,7 +34,7 @@ class RecommendationSetStatusFailureState extends RecommendationManagerTileState
 
 class RecommendationSetStatusSuccessState extends RecommendationManagerTileState
     with EquatableMixin {
-  final RecommendationItem recommendation;
+  final UserRecommendation recommendation;
 
   RecommendationSetStatusSuccessState({required this.recommendation});
 
@@ -44,7 +44,7 @@ class RecommendationSetStatusSuccessState extends RecommendationManagerTileState
 
 class RecommendationSetFinishedSuccessState
     extends RecommendationManagerTileState with EquatableMixin {
-  final RecommendationItem recommendation;
+  final UserRecommendation recommendation;
 
   RecommendationSetFinishedSuccessState({required this.recommendation});
 

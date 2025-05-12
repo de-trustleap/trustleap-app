@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 
@@ -40,10 +40,11 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
     });
   }
 
-  void deleteRecommendation(String recoID, String userID) async {
+  void deleteRecommendation(
+      String recoID, String userID, String userRecoID) async {
     emit(RecommendationManagerLoadingState());
-    final failureOrSuccess =
-        await recommendationRepo.deleteRecommendation(recoID, userID);
+    final failureOrSuccess = await recommendationRepo.deleteRecommendation(
+        recoID, userID, userRecoID);
     failureOrSuccess.fold(
         (failure) =>
             emit(RecommendationDeleteRecoFailureState(failure: failure)),
@@ -64,7 +65,7 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
     });
   }
 
-  void updateReco(RecommendationItem updatedReco, bool shouldBeDeleted) {
+  void updateReco(UserRecommendation updatedReco, bool shouldBeDeleted) {
     final currentState = state;
     if (currentState is RecommendationGetRecosSuccessState) {
       final updatedList = shouldBeDeleted

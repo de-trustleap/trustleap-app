@@ -1,16 +1,16 @@
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 
 class RecommendationFilter {
-  static List<RecommendationItem> applyFilters({
-    required List<RecommendationItem> items,
+  static List<UserRecommendation> applyFilters({
+    required List<UserRecommendation> items,
     required RecommendationOverviewFilterStates filterStates,
   }) {
-    List<RecommendationItem> filtered = items.where((item) {
+    List<UserRecommendation> filtered = items.where((item) {
       // filter by status
       if (filterStates.statusFilterState !=
           RecommendationStatusFilterState.all) {
-        final statusLevel = item.statusLevel ?? 0;
+        final statusLevel = item.recommendation?.statusLevel ?? 0;
         return _statusFilterMatches(
             filterStates.statusFilterState, statusLevel);
       }
@@ -21,39 +21,43 @@ class RecommendationFilter {
     switch (filterStates.sortByFilterState) {
       case RecommendationSortByFilterState.promoter:
         filtered.sort((a, b) {
-          final aValue = a.promoterName ?? '';
-          final bValue = b.promoterName ?? '';
+          final aValue = a.recommendation?.promoterName ?? '';
+          final bValue = b.recommendation?.promoterName ?? '';
           return _sortStrings(
               aValue, bValue, filterStates.sortOrderFilterState);
         });
         break;
       case RecommendationSortByFilterState.recommendationReceiver:
         filtered.sort((a, b) {
-          final aValue = a.name ?? '';
-          final bValue = b.name ?? '';
+          final aValue = a.recommendation?.name ?? '';
+          final bValue = b.recommendation?.name ?? '';
           return _sortStrings(
               aValue, bValue, filterStates.sortOrderFilterState);
         });
         break;
       case RecommendationSortByFilterState.reason:
         filtered.sort((a, b) {
-          final aValue = a.reason ?? '';
-          final bValue = b.reason ?? '';
+          final aValue = a.recommendation?.reason ?? '';
+          final bValue = b.recommendation?.reason ?? '';
           return _sortStrings(
               aValue, bValue, filterStates.sortOrderFilterState);
         });
         break;
       case RecommendationSortByFilterState.lastUpdated:
         filtered.sort((a, b) {
-          final aValue = a.lastUpdated ?? a.createdAt;
-          final bValue = b.lastUpdated ?? b.createdAt;
+          final aValue = a.recommendation?.lastUpdated ??
+              a.recommendation?.createdAt ??
+              DateTime.now();
+          final bValue = b.recommendation?.lastUpdated ??
+              b.recommendation?.createdAt ??
+              DateTime.now();
           return _sortDates(aValue, bValue, filterStates.sortOrderFilterState);
         });
         break;
       case RecommendationSortByFilterState.expiresAt:
         filtered.sort((a, b) {
-          final aValue = a.expiresAt;
-          final bValue = b.expiresAt;
+          final aValue = a.recommendation?.expiresAt ?? DateTime.now();
+          final bValue = b.recommendation?.expiresAt ?? DateTime.now();
           return _sortDates(aValue, bValue, filterStates.sortOrderFilterState);
         });
         break;

@@ -73,13 +73,16 @@ class RecommendationItemModel extends Equatable {
       'reason': reason,
       'defaultLandingPageID': defaultLandingPageID,
       'statusLevel': statusLevel,
-      'statusTimestamps': statusTimestamps?.map(
-          (key, value) => MapEntry(key.toString(), value?.toIso8601String())),
+      'statusTimestamps': statusTimestamps == null
+          ? null
+          : Map.fromEntries(
+              statusTimestamps!.entries.where((e) => e.value != null).map((e) =>
+                  MapEntry(e.key.toString(), e.value!.toIso8601String())),
+            ),
       'userID': userID,
-      'expiresAt': Timestamp.fromDate(expiresAt),
-      'createdAt': Timestamp.fromDate(createdAt),
-      'lastUpdated':
-          lastUpdated != null ? Timestamp.fromDate(lastUpdated!) : null
+      'expiresAt': expiresAt.toIso8601String(),
+      'createdAt': createdAt.toIso8601String(),
+      'lastUpdated': lastUpdated?.toIso8601String(),
     };
   }
 

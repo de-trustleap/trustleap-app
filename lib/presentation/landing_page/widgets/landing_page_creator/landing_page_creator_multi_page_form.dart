@@ -152,8 +152,8 @@ class _LandingPageCreatorMultiPageFormState
                 if (state is CreatedLandingPageSuccessState) {
                   showError = false;
                   const params = "?createdNewPage=true";
-                  if (widget.landingPage?.isDefaultPage == null ||
-                      widget.landingPage?.isDefaultPage == false) {
+                  if (landingPage?.isDefaultPage == null ||
+                      landingPage?.isDefaultPage == false) {
                     CustomNavigator.openInNewTab(
                         "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage?.id.value}");
                   }
