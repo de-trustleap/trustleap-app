@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -33,16 +35,23 @@ void main() {
         userID: "1",
         statusLevel: 2,
         statusTimestamps: {0: date, 1: date, 2: date});
+    final userRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: "1",
+        priority: 1,
+        isFavorite: false,
+        recommendation: recommendation);
 
     test("should call user repo when function is called", () async {
       // Given
-      when(mockRecoRepo.setAppointmentState(recommendation))
-          .thenAnswer((_) async => right(recommendation));
+      when(mockRecoRepo.setAppointmentState(userRecommendation))
+          .thenAnswer((_) async => right(userRecommendation));
       // When
-      recoManagerTileCubit.setAppointmentState(recommendation);
-      await untilCalled(mockRecoRepo.setAppointmentState(recommendation));
+      recoManagerTileCubit.setAppointmentState(userRecommendation);
+      await untilCalled(mockRecoRepo.setAppointmentState(userRecommendation));
       // Then
-      verify(mockRecoRepo.setAppointmentState(recommendation));
+      verify(mockRecoRepo.setAppointmentState(userRecommendation));
       verifyNoMoreInteractions(mockRecoRepo);
     });
 
@@ -51,14 +60,14 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        RecommendationSetStatusLoadingState(recommendation: recommendation),
-        RecommendationSetStatusSuccessState(recommendation: recommendation)
+        RecommendationSetStatusLoadingState(recommendation: userRecommendation),
+        RecommendationSetStatusSuccessState(recommendation: userRecommendation)
       ];
-      when(mockRecoRepo.setAppointmentState(recommendation))
-          .thenAnswer((_) async => right(recommendation));
+      when(mockRecoRepo.setAppointmentState(userRecommendation))
+          .thenAnswer((_) async => right(userRecommendation));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
-      recoManagerTileCubit.setAppointmentState(recommendation);
+      recoManagerTileCubit.setAppointmentState(userRecommendation);
     });
 
     test(
@@ -66,15 +75,15 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        RecommendationSetStatusLoadingState(recommendation: recommendation),
+        RecommendationSetStatusLoadingState(recommendation: userRecommendation),
         RecommendationSetStatusFailureState(
-            failure: BackendFailure(), recommendation: recommendation)
+            failure: BackendFailure(), recommendation: userRecommendation)
       ];
-      when(mockRecoRepo.setAppointmentState(recommendation))
+      when(mockRecoRepo.setAppointmentState(userRecommendation))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
-      recoManagerTileCubit.setAppointmentState(recommendation);
+      recoManagerTileCubit.setAppointmentState(userRecommendation);
     });
   });
 
@@ -92,17 +101,24 @@ void main() {
         userID: "1",
         statusLevel: 3,
         statusTimestamps: {0: date, 1: date, 2: date});
+    final userRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: "1",
+        priority: 1,
+        isFavorite: false,
+        recommendation: recommendation);
 
     test("should call recommendation repo when function is called", () async {
       // Given
-      when(mockRecoRepo.finishRecommendation(recommendation, true))
-          .thenAnswer((_) async => right(recommendation));
+      when(mockRecoRepo.finishRecommendation(userRecommendation, true))
+          .thenAnswer((_) async => right(userRecommendation));
       // When
-      recoManagerTileCubit.setFinished(recommendation, true);
+      recoManagerTileCubit.setFinished(userRecommendation, true);
       await untilCalled(
-          mockRecoRepo.finishRecommendation(recommendation, true));
+          mockRecoRepo.finishRecommendation(userRecommendation, true));
       // Then
-      verify(mockRecoRepo.finishRecommendation(recommendation, true));
+      verify(mockRecoRepo.finishRecommendation(userRecommendation, true));
       verifyNoMoreInteractions(mockRecoRepo);
     });
 
@@ -111,14 +127,15 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        RecommendationSetStatusLoadingState(recommendation: recommendation),
-        RecommendationSetFinishedSuccessState(recommendation: recommendation)
+        RecommendationSetStatusLoadingState(recommendation: userRecommendation),
+        RecommendationSetFinishedSuccessState(
+            recommendation: userRecommendation)
       ];
-      when(mockRecoRepo.finishRecommendation(recommendation, true))
-          .thenAnswer((_) async => right(recommendation));
+      when(mockRecoRepo.finishRecommendation(userRecommendation, true))
+          .thenAnswer((_) async => right(userRecommendation));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
-      recoManagerTileCubit.setFinished(recommendation, true);
+      recoManagerTileCubit.setFinished(userRecommendation, true);
     });
 
     test(
@@ -126,15 +143,15 @@ void main() {
         () async {
       // Given
       final expectedResult = [
-        RecommendationSetStatusLoadingState(recommendation: recommendation),
+        RecommendationSetStatusLoadingState(recommendation: userRecommendation),
         RecommendationSetStatusFailureState(
-            failure: BackendFailure(), recommendation: recommendation)
+            failure: BackendFailure(), recommendation: userRecommendation)
       ];
-      when(mockRecoRepo.finishRecommendation(recommendation, true))
+      when(mockRecoRepo.finishRecommendation(userRecommendation, true))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
-      recoManagerTileCubit.setFinished(recommendation, true);
+      recoManagerTileCubit.setFinished(userRecommendation, true);
     });
   });
 }

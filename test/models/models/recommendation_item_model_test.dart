@@ -74,8 +74,8 @@ void main() {
         "reason": "",
         "statusLevel": 0,
         "statusTimestamps": null,
-        "expiresAt": Timestamp.fromDate(date),
-        "createdAt": Timestamp.fromDate(date),
+        "expiresAt": date.toIso8601String(),
+        "createdAt": date.toIso8601String(),
         "lastUpdated": null
       };
       // When
