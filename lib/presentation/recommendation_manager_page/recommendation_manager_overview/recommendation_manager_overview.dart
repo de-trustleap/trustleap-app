@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_list_header.dart';
@@ -8,13 +8,14 @@ import 'package:finanzbegleiter/presentation/recommendation_manager_page/recomme
 import 'package:flutter/material.dart';
 
 class RecommendationManagerOverview extends StatefulWidget {
-  final List<RecommendationItem> recommendations;
+  final List<UserRecommendation> recommendations;
   final bool isPromoter;
-  final Function(RecommendationItem) onAppointmentPressed;
-  final Function(RecommendationItem) onFinishedPressed;
-  final Function(RecommendationItem) onFailedPressed;
-  final Function(String, String) onDeletePressed;
-  final Function(RecommendationItem, bool) onUpdate;
+  final Function(UserRecommendation) onAppointmentPressed;
+  final Function(UserRecommendation) onFinishedPressed;
+  final Function(UserRecommendation) onFailedPressed;
+  final Function(String, String, String) onDeletePressed;
+  final Function(UserRecommendation) onFavoritePressed;
+  final Function(UserRecommendation, bool, bool) onUpdate;
   const RecommendationManagerOverview(
       {super.key,
       required this.recommendations,
@@ -23,6 +24,7 @@ class RecommendationManagerOverview extends StatefulWidget {
       required this.onFinishedPressed,
       required this.onFailedPressed,
       required this.onDeletePressed,
+      required this.onFavoritePressed,
       required this.onUpdate});
 
   @override
@@ -32,8 +34,8 @@ class RecommendationManagerOverview extends StatefulWidget {
 
 class _RecommendationManagerOverviewState
     extends State<RecommendationManagerOverview> {
-  late List<RecommendationItem> _filteredRecommendations;
-  late List<RecommendationItem> _searchFilteredRecommendations;
+  late List<UserRecommendation> _filteredRecommendations;
+  late List<UserRecommendation> _searchFilteredRecommendations;
   final TextEditingController _searchController = TextEditingController();
   RecommendationOverviewFilterStates _currentFilterStates =
       RecommendationOverviewFilterStates(isArchive: false);
@@ -48,9 +50,10 @@ class _RecommendationManagerOverviewState
       final query = _searchController.text.toLowerCase();
       setState(() {
         _searchFilteredRecommendations = widget.recommendations.where((item) {
-          final name = item.name?.toLowerCase() ?? "";
-          final promoter = item.promoterName?.toLowerCase() ?? "";
-          final reason = item.reason?.toLowerCase() ?? "";
+          final name = item.recommendation?.name?.toLowerCase() ?? "";
+          final promoter =
+              item.recommendation?.promoterName?.toLowerCase() ?? "";
+          final reason = item.recommendation?.reason?.toLowerCase() ?? "";
 
           return name.contains(query) ||
               promoter.contains(query) ||
@@ -125,13 +128,13 @@ class _RecommendationManagerOverviewState
                   ])),
           const SizedBox(height: 20),
           RecommendationManagerList(
-            key: ValueKey(_filteredRecommendations),
             recommendations: _filteredRecommendations,
             isPromoter: widget.isPromoter,
             onAppointmentPressed: widget.onAppointmentPressed,
             onFinishedPressed: widget.onFinishedPressed,
             onFailedPressed: widget.onFailedPressed,
             onDeletePressed: widget.onDeletePressed,
+            onFavoritePressed: widget.onFavoritePressed,
             onUpdate: widget.onUpdate,
           ),
         ],

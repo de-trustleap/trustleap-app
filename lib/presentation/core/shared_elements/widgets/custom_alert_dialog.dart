@@ -10,6 +10,8 @@ class CustomAlertDialog extends StatelessWidget {
   final bool isLoading;
   final String actionButtonTitle;
   final String? cancelButtonTitle;
+  final bool cancelButtonDisabled;
+  final bool actionButtonDisabled;
   final Function actionButtonAction;
   final Function? cancelButtonAction;
 
@@ -21,6 +23,8 @@ class CustomAlertDialog extends StatelessWidget {
       this.messageWidget,
       required this.actionButtonTitle,
       required this.actionButtonAction,
+      this.cancelButtonDisabled = false,
+      this.actionButtonDisabled = false,
       this.cancelButtonTitle,
       this.cancelButtonAction});
 
@@ -32,7 +36,8 @@ class CustomAlertDialog extends StatelessWidget {
     return AlertDialog(
         actions: [
           TextButton(
-              onPressed: () => actionButtonAction(),
+              onPressed: () =>
+                  actionButtonDisabled ? null : actionButtonAction(),
               child: Text(actionButtonTitle,
                   style: responsiveValue.isMobile
                       ? themeData.textTheme.bodySmall!
@@ -41,7 +46,8 @@ class CustomAlertDialog extends StatelessWidget {
                           .copyWith(color: themeData.colorScheme.secondary))),
           if (cancelButtonAction != null && cancelButtonTitle != null) ...[
             TextButton(
-                onPressed: () => cancelButtonAction!(),
+                onPressed: () =>
+                    cancelButtonDisabled ? null : cancelButtonAction!(),
                 child: Text(cancelButtonTitle!,
                     style: responsiveValue.isMobile
                         ? themeData.textTheme.bodySmall!

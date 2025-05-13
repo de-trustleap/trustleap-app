@@ -18,17 +18,20 @@ class RecommendationManagerLoadingState extends RecommendationManagerState
 
 class RecommendationGetRecosSuccessState extends RecommendationManagerState
     with EquatableMixin {
-  final List<RecommendationItem> recoItems;
+  final List<UserRecommendation> recoItems;
   final bool showSetAppointmentSnackBar;
   final bool showFinishedSnackBar;
+  final bool showFavoriteSnackbar;
 
   RecommendationGetRecosSuccessState(
       {required this.recoItems,
       required this.showSetAppointmentSnackBar,
-      required this.showFinishedSnackBar});
+      required this.showFinishedSnackBar,
+      required this.showFavoriteSnackbar});
 
   @override
-  List<Object?> get props => [recoItems];
+  List<Object?> get props =>
+      [recoItems, showSetAppointmentSnackBar, showFinishedSnackBar];
 }
 
 class RecommendationGetRecosFailureState extends RecommendationManagerState

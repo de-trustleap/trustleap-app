@@ -21,6 +21,8 @@ enum RecommendationSortByFilterState {
   finishedAt
 }
 
+enum RecommendationFavoriteFilterState { all, isFavorite, isNotFavorite }
+
 enum RecommendationSortOrderFilterState { asc, desc }
 
 class RecommendationOverviewFilterStates {
@@ -29,6 +31,8 @@ class RecommendationOverviewFilterStates {
   late RecommendationSortByFilterState sortByFilterState;
   RecommendationSortOrderFilterState sortOrderFilterState =
       RecommendationSortOrderFilterState.desc;
+  RecommendationFavoriteFilterState favoriteFilterState =
+      RecommendationFavoriteFilterState.all;
 
   RecommendationOverviewFilterStates({required bool isArchive}) {
     sortByFilterState = isArchive
@@ -71,6 +75,8 @@ class _RecommendationManagerExpandableFilterState
         layout: responsiveValue.largerThan(MOBILE)
             ? ResponsiveRowColumnType.ROW
             : ResponsiveRowColumnType.COLUMN,
+        rowSpacing: 16.0,
+        columnSpacing: 16.0,
         children: [
           ResponsiveRowColumnItem(
             child: ConstrainedBox(
@@ -182,7 +188,8 @@ class _RecommendationManagerExpandableFilterState
                     textStyle: themeData.textTheme.bodySmall,
                     width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
                     label: Text(
-                        localization.promoter_overview_filter_sortby_choose,
+                        localization
+                            .recommendation_manager_filter_sort_by_status,
                         style: themeData.textTheme.bodySmall!
                             .copyWith(fontSize: 12)),
                     initialSelection: RecommendationStatusFilterState.all,
@@ -227,9 +234,43 @@ class _RecommendationManagerExpandableFilterState
                           sortBy ?? RecommendationStatusFilterState.all;
                       widget.onFilterChanged(filterStates);
                     }),
+                if (!widget.isArchive) ...[
+                  const SizedBox(height: 16),
+                  DropdownMenu<RecommendationFavoriteFilterState>(
+                      textStyle: themeData.textTheme.bodySmall,
+                      width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
+                      label: Text(
+                          localization
+                              .recommendation_manager_filter_sort_by_favorites,
+                          style: themeData.textTheme.bodySmall!
+                              .copyWith(fontSize: 12)),
+                      initialSelection: RecommendationFavoriteFilterState.all,
+                      enableSearch: false,
+                      requestFocusOnTap: false,
+                      dropdownMenuEntries: [
+                        DropdownMenuEntry(
+                            value: RecommendationFavoriteFilterState.all,
+                            label: localization
+                                .recommendation_manager_filter_status_all),
+                        DropdownMenuEntry(
+                            value: RecommendationFavoriteFilterState.isFavorite,
+                            label: localization
+                                .recommendation_manager_filter_favorites),
+                        DropdownMenuEntry(
+                            value:
+                                RecommendationFavoriteFilterState.isNotFavorite,
+                            label: localization
+                                .recommendation_manager_filter_no_favorites),
+                      ],
+                      onSelected: (sortBy) {
+                        filterStates.favoriteFilterState =
+                            sortBy ?? RecommendationFavoriteFilterState.all;
+                        widget.onFilterChanged(filterStates);
+                      }),
+                ]
               ],
             ),
-          )
+          ),
         ]);
   }
 }

@@ -1,11 +1,10 @@
-import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -41,8 +40,8 @@ class _RecommendationManagerPageState
     Modular.get<RecommendationManagerCubit>().getUser();
   }
 
-  void showDeleteAlert(
-      AppLocalizations localizations, String recoID, String userID) {
+  void showDeleteAlert(AppLocalizations localizations, String recoID,
+      String userID, String userRecoID) {
     showDialog(
         context: context,
         builder: (_) {
@@ -55,13 +54,13 @@ class _RecommendationManagerPageState
               cancelButtonTitle: localizations
                   .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
-                  _submitDeleteRecommendation(recoID, userID),
+                  _submitDeleteRecommendation(recoID, userID, userRecoID),
               cancelButtonAction: () => CustomNavigator.pop());
         });
   }
 
   void showFinishAlert(
-      AppLocalizations localizations, RecommendationItem recommendation) {
+      AppLocalizations localizations, UserRecommendation recommendation) {
     showDialog(
         context: context,
         builder: (_) {
@@ -80,7 +79,7 @@ class _RecommendationManagerPageState
   }
 
   void showFailedAlert(
-      AppLocalizations localizations, RecommendationItem recommendation) {
+      AppLocalizations localizations, UserRecommendation recommendation) {
     showDialog(
         context: context,
         builder: (_) {
@@ -98,14 +97,15 @@ class _RecommendationManagerPageState
         });
   }
 
-  void _submitDeleteRecommendation(String recoID, String userID) {
+  void _submitDeleteRecommendation(
+      String recoID, String userID, String userRecoID) {
     CustomNavigator.pop();
     Modular.get<RecommendationManagerCubit>()
-        .deleteRecommendation(recoID, userID);
+        .deleteRecommendation(recoID, userID, userRecoID);
   }
 
   void _submitFinishRecommendation(
-      RecommendationItem recommendation, bool success) {
+      UserRecommendation recommendation, bool success) {
     CustomNavigator.pop();
     Modular.get<RecommendationManagerTileCubit>()
         .setFinished(recommendation, success);
@@ -140,7 +140,10 @@ class _RecommendationManagerPageState
             Modular.get<RecommendationManagerCubit>()
                 .getRecommendations(currentUser?.id.value);
           } else if (state is RecommendationGetRecosSuccessState) {
-            if (state.showSetAppointmentSnackBar) {
+            if (state.showFavoriteSnackbar) {
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  localization.recommendation_manager_favorite_snackbar);
+            } else if (state.showSetAppointmentSnackBar) {
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_scheduled_snackbar);
             } else if (state.showFinishedSnackBar) {
@@ -175,7 +178,6 @@ class _RecommendationManagerPageState
           onTap: () {
             CustomNavigator.navigate(
                 RoutePaths.homePath + RoutePaths.recommendationsPath);
-            Modular.get<MenuCubit>().selectMenu(MenuItems.recommendations);
           });
     } else if (state is RecommendationGetRecosFailureState) {
       return ErrorView(
@@ -203,12 +205,16 @@ class _RecommendationManagerPageState
               onFailedPressed: (recommendation) {
                 showFailedAlert(localization, recommendation);
               },
-              onDeletePressed: (recoID, userID) {
-                showDeleteAlert(localization, recoID, userID);
+              onDeletePressed: (recoID, userID, userRecoID) {
+                showDeleteAlert(localization, recoID, userID, userRecoID);
               },
-              onUpdate: (recommendation, shouldBeDeleted) {
-                Modular.get<RecommendationManagerCubit>()
-                    .updateReco(recommendation, shouldBeDeleted);
+              onFavoritePressed: (recommendation) {
+                Modular.get<RecommendationManagerTileCubit>()
+                    .setFavorite(recommendation);
+              },
+              onUpdate: (recommendation, shouldBeDeleted, settedFavorite) {
+                Modular.get<RecommendationManagerCubit>().updateReco(
+                    recommendation, shouldBeDeleted, settedFavorite);
               }),
         )
       ]);

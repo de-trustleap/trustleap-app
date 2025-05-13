@@ -1,58 +1,78 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_filter.dart';
 
 void main() {
-  final List<RecommendationItem> testItems = [
-    RecommendationItem(
-      id: '1',
-      name: 'Anna',
-      reason: 'Finanzen',
-      landingPageID: 'lp1',
-      promotionTemplate: 'template',
-      promoterName: 'Zoe',
-      serviceProviderName: 'A',
-      defaultLandingPageID: "1",
-      userID: "1",
-      statusLevel: 0,
-      statusTimestamps: null,
-      createdAt: DateTime(2023, 1, 1),
-      lastUpdated: DateTime(2023, 1, 2),
-      expiresAt: DateTime(2024, 12, 31),
-    ),
-    RecommendationItem(
-      id: '2',
-      name: 'Ben',
-      reason: 'Versicherung',
-      landingPageID: 'lp2',
-      promotionTemplate: 'template',
-      promoterName: 'Max',
-      serviceProviderName: 'B',
-      defaultLandingPageID: "1",
-      userID: "1",
-      statusLevel: 1,
-      statusTimestamps: null,
-      createdAt: DateTime(2023, 2, 1),
-      lastUpdated: DateTime(2023, 2, 2),
-      expiresAt: DateTime(2024, 11, 30),
-    ),
-    RecommendationItem(
-      id: '3',
-      name: 'Clara',
-      reason: 'Altersvorsorge',
-      landingPageID: 'lp3',
-      promotionTemplate: 'template',
-      promoterName: 'Anna',
-      serviceProviderName: 'C',
-      defaultLandingPageID: "1",
-      userID: "1",
-      statusLevel: 4,
-      statusTimestamps: null,
-      createdAt: DateTime(2023, 3, 1),
-      lastUpdated: DateTime(2023, 3, 2),
-      expiresAt: DateTime(2024, 10, 15),
-    ),
+  final List<UserRecommendation> testItems = [
+    UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: "1",
+        priority: 1,
+        isFavorite: true,
+        recommendation: RecommendationItem(
+          id: '1',
+          name: 'Anna',
+          reason: 'Finanzen',
+          landingPageID: 'lp1',
+          promotionTemplate: 'template',
+          promoterName: 'Zoe',
+          serviceProviderName: 'A',
+          defaultLandingPageID: "1",
+          userID: "1",
+          statusLevel: StatusLevel.recommendationSend,
+          statusTimestamps: null,
+          createdAt: DateTime(2023, 1, 1),
+          lastUpdated: DateTime(2023, 1, 2),
+          expiresAt: DateTime(2024, 12, 31),
+        )),
+    UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "2",
+        userID: "1",
+        priority: 1,
+        isFavorite: false,
+        recommendation: RecommendationItem(
+          id: '2',
+          name: 'Ben',
+          reason: 'Versicherung',
+          landingPageID: 'lp2',
+          promotionTemplate: 'template',
+          promoterName: 'Max',
+          serviceProviderName: 'B',
+          defaultLandingPageID: "1",
+          userID: "1",
+          statusLevel: StatusLevel.linkClicked,
+          statusTimestamps: null,
+          createdAt: DateTime(2023, 2, 1),
+          lastUpdated: DateTime(2023, 2, 2),
+          expiresAt: DateTime(2024, 11, 30),
+        )),
+    UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "3",
+        userID: "1",
+        priority: 1,
+        isFavorite: true,
+        recommendation: RecommendationItem(
+          id: '3',
+          name: 'Clara',
+          reason: 'Altersvorsorge',
+          landingPageID: 'lp3',
+          promotionTemplate: 'template',
+          promoterName: 'Anna',
+          serviceProviderName: 'C',
+          defaultLandingPageID: "1",
+          userID: "1",
+          statusLevel: StatusLevel.successful,
+          statusTimestamps: null,
+          createdAt: DateTime(2023, 3, 1),
+          lastUpdated: DateTime(2023, 3, 2),
+          expiresAt: DateTime(2024, 10, 15),
+        ))
   ];
 
   test('returns unfiltered list by default', () {
@@ -75,7 +95,7 @@ void main() {
     );
 
     expect(result.length, 1);
-    expect(result.first.name, 'Ben');
+    expect(result.first.recommendation?.name, 'Ben');
   });
 
   test('filters by statusLevel == successful (4)', () {
@@ -88,7 +108,7 @@ void main() {
     );
 
     expect(result.length, 1);
-    expect(result.first.name, 'Clara');
+    expect(result.first.recommendation?.name, 'Clara');
   });
 
   test('sorts by promoter ASC', () {
@@ -101,7 +121,8 @@ void main() {
       filterStates: filterStates,
     );
 
-    final promoterNames = result.map((e) => e.promoterName).toList();
+    final promoterNames =
+        result.map((e) => e.recommendation?.promoterName).toList();
     expect(promoterNames, ['Anna', 'Max', 'Zoe']);
   });
 
@@ -116,7 +137,7 @@ void main() {
       filterStates: filterStates,
     );
 
-    final receiverNames = result.map((e) => e.name).toList();
+    final receiverNames = result.map((e) => e.recommendation?.name).toList();
     expect(receiverNames, ['Clara', 'Ben', 'Anna']);
   });
 
@@ -130,11 +151,39 @@ void main() {
       filterStates: filterStates,
     );
 
-    final expiresAtDates = result.map((e) => e.expiresAt).toList();
+    final expiresAtDates =
+        result.map((e) => e.recommendation?.expiresAt).toList();
     expect(expiresAtDates, [
       DateTime(2024, 10, 15),
       DateTime(2024, 11, 30),
       DateTime(2024, 12, 31),
     ]);
+  });
+
+  test('filters only favorites', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..favoriteFilterState = RecommendationFavoriteFilterState.isFavorite;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.length, 2);
+    expect(result.map((e) => e.recommendation?.name),
+        containsAll(['Anna', 'Clara']));
+  });
+
+  test('filters only non-favorites', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..favoriteFilterState = RecommendationFavoriteFilterState.isNotFavorite;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.length, 1);
+    expect(result.first.recommendation?.name, 'Ben');
   });
 }

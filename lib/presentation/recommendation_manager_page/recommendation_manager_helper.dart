@@ -52,25 +52,23 @@ class RecommendationManagerHelper {
     }
   }
 
-  String? getStringFromStatusLevel(int? statusLevel) {
+  String? getStringFromStatusLevel(StatusLevel? statusLevel) {
     if (statusLevel == null) {
       return null;
     }
     switch (statusLevel) {
-      case 0:
+      case StatusLevel.recommendationSend:
         return localization.recommendation_manager_status_level_1;
-      case 1:
+      case StatusLevel.linkClicked:
         return localization.recommendation_manager_status_level_2;
-      case 2:
+      case StatusLevel.contactFormSent:
         return localization.recommendation_manager_status_level_3;
-      case 3:
+      case StatusLevel.appointment:
         return localization.recommendation_manager_status_level_4;
-      case 4:
+      case StatusLevel.successful:
         return localization.recommendation_manager_status_level_5;
-      case 5:
+      case StatusLevel.failed:
         return localization.recommendation_manager_status_level_6;
-      default:
-        return null;
     }
   }
 }

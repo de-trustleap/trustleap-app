@@ -25,7 +25,7 @@ void main() {
         promoterName: "Tester",
         serviceProviderName: "Tester",
         userID: "1",
-        statusLevel: 0,
+        statusLevel: StatusLevel.recommendationSend,
         statusTimestamps: null,
         defaultLandingPageID: "3",
         lastUpdated: null);

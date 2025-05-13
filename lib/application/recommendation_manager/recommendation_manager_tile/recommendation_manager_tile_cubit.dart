@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
 
 part 'recommendation_manager_tile_state.dart';
@@ -12,10 +13,12 @@ class RecommendationManagerTileCubit
   RecommendationManagerTileCubit(this.recommendationRepo)
       : super(RecommendationManagerTileInitial());
 
-  void setAppointmentState(RecommendationItem recommendation) async {
+  void setAppointmentState(UserRecommendation recommendation) async {
     emit(RecommendationSetStatusLoadingState(recommendation: recommendation));
-    if (recommendation.statusLevel != 2 ||
-        recommendation.statusTimestamps == null) {
+    if (recommendation.recommendation == null ||
+        recommendation.recommendation?.statusLevel !=
+            StatusLevel.contactFormSent ||
+        recommendation.recommendation?.statusTimestamps == null) {
       return;
     }
     final failureOrSuccess =
@@ -27,10 +30,11 @@ class RecommendationManagerTileCubit
             recommendation: recommendation)));
   }
 
-  void setFinished(RecommendationItem recommendation, bool success) async {
+  void setFinished(UserRecommendation recommendation, bool success) async {
     emit(RecommendationSetStatusLoadingState(recommendation: recommendation));
-    if (recommendation.statusLevel != 3 ||
-        recommendation.statusTimestamps == null) {
+    if (recommendation.recommendation == null ||
+        recommendation.recommendation?.statusLevel != StatusLevel.appointment ||
+        recommendation.recommendation?.statusTimestamps == null) {
       return;
     }
     final failureOrSuccess =
@@ -40,5 +44,18 @@ class RecommendationManagerTileCubit
             failure: failure, recommendation: recommendation)),
         (recommendation) => emit(RecommendationSetFinishedSuccessState(
             recommendation: recommendation)));
+  }
+
+  void setFavorite(UserRecommendation recommendation) async {
+    if (recommendation.isFavorite == null) {
+      return;
+    }
+    final failureOrSuccess =
+        await recommendationRepo.setFavorite(recommendation);
+    failureOrSuccess.fold(
+        (failure) => emit(RecommendationSetStatusFailureState(
+            failure: failure, recommendation: recommendation)),
+        (recommendation) => emit(RecommendationSetStatusSuccessState(
+            recommendation: recommendation, settedFavorite: true)));
   }
 }

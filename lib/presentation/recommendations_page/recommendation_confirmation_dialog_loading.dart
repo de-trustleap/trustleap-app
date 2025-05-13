@@ -17,6 +17,8 @@ class RecommendationConfirmationDialogLoading extends StatelessWidget {
         isLoading: true,
         actionButtonTitle: localization.send_recommendation_alert_yes_button,
         cancelButtonTitle: localization.send_recommendation_alert_no_button,
+        actionButtonDisabled: true,
+        cancelButtonDisabled: true,
         actionButtonAction: action,
         cancelButtonAction: cancelAction);
   }

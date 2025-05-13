@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/recommendation_manager/recommendatio
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/clickable_link.dart';
@@ -9,6 +10,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_e
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_helper.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_favorite_button.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list_tile_icon_row.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_status_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +18,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RecommendationManagerListTile extends StatefulWidget {
-  final RecommendationItem recommendation;
+  final UserRecommendation recommendation;
   final bool isPromoter;
-  final Function(RecommendationItem) onAppointmentPressed;
-  final Function(RecommendationItem) onFinishedPressed;
-  final Function(RecommendationItem) onFailedPressed;
-  final Function(String, String) onDeletePressed;
-  final Function(RecommendationItem, bool) onUpdate;
+  final Function(UserRecommendation) onAppointmentPressed;
+  final Function(UserRecommendation) onFinishedPressed;
+  final Function(UserRecommendation) onFailedPressed;
+  final Function(String, String, String) onDeletePressed;
+  final Function(UserRecommendation) onFavoritePressed;
+  final Function(UserRecommendation, bool, bool) onUpdate;
   const RecommendationManagerListTile(
       {super.key,
       required this.recommendation,
@@ -31,6 +34,7 @@ class RecommendationManagerListTile extends StatefulWidget {
       required this.onFinishedPressed,
       required this.onFailedPressed,
       required this.onDeletePressed,
+      required this.onFavoritePressed,
       required this.onUpdate});
 
   @override
@@ -40,7 +44,7 @@ class RecommendationManagerListTile extends StatefulWidget {
 
 class _RecommendationManagerListTileState
     extends State<RecommendationManagerListTile> {
-  late RecommendationItem _recommendation;
+  late UserRecommendation _recommendation;
 
   @override
   void initState() {
@@ -67,9 +71,10 @@ class _RecommendationManagerListTileState
           setState(() {
             _recommendation = state.recommendation;
           });
-          widget.onUpdate(state.recommendation, false);
+          widget.onUpdate(
+              state.recommendation, false, state.settedFavorite ?? false);
         } else if (state is RecommendationSetFinishedSuccessState) {
-          widget.onUpdate(state.recommendation, true);
+          widget.onUpdate(state.recommendation, true, false);
         }
       },
       builder: (context, state) {
@@ -81,21 +86,33 @@ class _RecommendationManagerListTileState
                   flex: 3,
                   child: _buildCell(
                       widget.isPromoter
-                          ? _recommendation.name ?? ""
-                          : _recommendation.promoterName ?? "",
+                          ? _recommendation.recommendation?.name ?? ""
+                          : _recommendation.recommendation?.promoterName ?? "",
                       themeData)),
               Flexible(
                   flex: 3,
                   child: _buildCell(
                       helper.getStringFromStatusLevel(
-                              _recommendation.statusLevel) ??
+                              _recommendation.recommendation?.statusLevel) ??
                           "",
                       themeData)),
               Flexible(
                   flex: 2,
                   child: _buildCell(
-                      helper.getExpiresInDaysCount(_recommendation.expiresAt),
+                      helper.getExpiresInDaysCount(
+                          _recommendation.recommendation?.expiresAt ??
+                              DateTime.now()),
                       themeData)),
+              Flexible(
+                  flex: 1,
+                  child: RecommendationManagerFavoriteButton(
+                      isFavorite: _recommendation.isFavorite ?? false,
+                      onPressed: () => widget
+                              .onFavoritePressed(widget.recommendation.copyWith(
+                            isFavorite: _recommendation.isFavorite != null
+                                ? !_recommendation.isFavorite!
+                                : false,
+                          )))),
               const SizedBox(width: 8)
             ]),
             children: [
@@ -104,7 +121,7 @@ class _RecommendationManagerListTileState
                   Text(localization.recommendation_manager_list_tile_receiver,
                       style: themeData.textTheme.bodyMedium),
                   const SizedBox(height: 4),
-                  Text(_recommendation.name ?? "",
+                  Text(_recommendation.recommendation?.name ?? "",
                       style: themeData.textTheme.bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold))
                 ]),
@@ -113,17 +130,21 @@ class _RecommendationManagerListTileState
                   Text(localization.recommendation_manager_list_tile_reason,
                       style: themeData.textTheme.bodyMedium),
                   const SizedBox(height: 4),
-                  Text(_recommendation.reason ?? "",
+                  Text(_recommendation.recommendation?.reason ?? "",
                       style: themeData.textTheme.bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold))
                 ])
               ]),
               const SizedBox(height: 16),
               RecommendationManagerStatusProgressIndicator(
-                  level: _recommendation.statusLevel ?? 0,
-                  statusTimestamps: _recommendation.statusTimestamps ?? {}),
+                  level: _recommendation.recommendation?.statusLevel ??
+                      StatusLevel.recommendationSend,
+                  statusTimestamps:
+                      _recommendation.recommendation?.statusTimestamps ?? {}),
               const SizedBox(height: 16),
               RecommendationManagerListTileIconRow(
+                  key: ValueKey(
+                      "${_recommendation.id}-${_recommendation.recommendation?.statusLevel}"),
                   recommendation: _recommendation,
                   onAppointmentPressed: widget.onAppointmentPressed,
                   onFinishedPressed: widget.onFinishedPressed,
@@ -141,13 +162,15 @@ class _RecommendationManagerListTileState
                             "$baseURL?id=${_recommendation.id}");
                       }),
                   if (state is RecommendationSetStatusLoadingState &&
-                      state.recommendation.id == _recommendation.id) ...[
+                      state.recommendation.id.value ==
+                          _recommendation.id.value) ...[
                     const LoadingIndicator(size: 20)
                   ]
                 ],
               ),
               if (state is RecommendationSetStatusFailureState &&
-                  state.recommendation.id == _recommendation.id) ...[
+                  state.recommendation.id.value ==
+                      _recommendation.id.value) ...[
                 FormErrorView(
                     message: DatabaseFailureMapper.mapFailureMessage(
                         state.failure, localization))

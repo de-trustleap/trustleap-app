@@ -3232,6 +3232,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Archive'**
   String get recommendation_manager_achive_tab;
+
+  /// The text above the status dropdown menu in the filter on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by status'**
+  String get recommendation_manager_filter_sort_by_status;
+
+  /// The text above the favorite dropdown menu in the filter on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by favorites'**
+  String get recommendation_manager_filter_sort_by_favorites;
+
+  /// The Favorites dropdown menu entry in the filter on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get recommendation_manager_filter_favorites;
+
+  /// The No Favorites dropdown menu entry in the filter on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'No favorites'**
+  String get recommendation_manager_filter_no_favorites;
+
+  /// Snackbar message when favorite state of recommendation has been successfully changed on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites successfully changed!'**
+  String get recommendation_manager_favorite_snackbar;
+
+  /// Title of the page displayed on the recommendation page if no landing page was found
+  ///
+  /// In en, this message translates to:
+  /// **'No landingpage found'**
+  String get recommendation_missing_landingpage_title;
+
+  /// Text of the page displayed on the recommendation page if no landing page was found
+  ///
+  /// In en, this message translates to:
+  /// **'In order to make a recommendation, you must first create a landing page in addition to your default landing page.'**
+  String get recommendation_missing_landingpage_text;
+
+  /// Button on the page that is displayed on the recommendation page if no landing page was found, which leads to the landing page menu
+  ///
+  /// In en, this message translates to:
+  /// **'To the landingpages'**
+  String get recommendation_missing_landingpage_button;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

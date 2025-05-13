@@ -11,7 +11,7 @@ class RecommendationItemModel extends Equatable {
   final String? serviceProviderName;
   final String? reason;
   final String? defaultLandingPageID;
-  final int? statusLevel;
+  final String? statusLevel;
   final Map<int, DateTime?>? statusTimestamps;
   final String? userID;
   final DateTime createdAt;
@@ -41,7 +41,7 @@ class RecommendationItemModel extends Equatable {
       String? serviceProviderName,
       String? reason,
       String? defaultLandingPageID,
-      int? statusLevel,
+      String? statusLevel,
       Map<int, DateTime?>? statusTimestamps,
       String? userID,
       DateTime? expiresAt,
@@ -73,13 +73,16 @@ class RecommendationItemModel extends Equatable {
       'reason': reason,
       'defaultLandingPageID': defaultLandingPageID,
       'statusLevel': statusLevel,
-      'statusTimestamps': statusTimestamps?.map(
-          (key, value) => MapEntry(key.toString(), value?.toIso8601String())),
+      'statusTimestamps': statusTimestamps == null
+          ? null
+          : Map.fromEntries(
+              statusTimestamps!.entries.where((e) => e.value != null).map((e) =>
+                  MapEntry(e.key.toString(), e.value!.toIso8601String())),
+            ),
       'userID': userID,
-      'expiresAt': Timestamp.fromDate(expiresAt),
-      'createdAt': Timestamp.fromDate(createdAt),
-      'lastUpdated':
-          lastUpdated != null ? Timestamp.fromDate(lastUpdated!) : null
+      'expiresAt': expiresAt.toIso8601String(),
+      'createdAt': createdAt.toIso8601String(),
+      'lastUpdated': lastUpdated?.toIso8601String(),
     };
   }
 
@@ -100,7 +103,7 @@ class RecommendationItemModel extends Equatable {
             ? map['defaultLandingPageID'] as String
             : null,
         statusLevel:
-            map['statusLevel'] != null ? map['statusLevel'] as int : null,
+            map['statusLevel'] != null ? map['statusLevel'] as String : null,
         statusTimestamps: map['statusTimestamps'] != null
             ? (map['statusTimestamps'] as Map<String, dynamic>).map(
                 (key, value) => MapEntry(int.parse(key), DateTime.parse(value)))
@@ -128,7 +131,7 @@ class RecommendationItemModel extends Equatable {
         promoterName: promoterName,
         serviceProviderName: serviceProviderName,
         defaultLandingPageID: defaultLandingPageID,
-        statusLevel: statusLevel,
+        statusLevel: _getStatusLevelFromString(statusLevel),
         statusTimestamps: statusTimestamps,
         userID: userID,
         expiresAt: expiresAt,
@@ -146,12 +149,34 @@ class RecommendationItemModel extends Equatable {
         serviceProviderName: recommendation.serviceProviderName,
         reason: recommendation.reason,
         defaultLandingPageID: recommendation.defaultLandingPageID,
-        statusLevel: recommendation.statusLevel,
+        statusLevel: recommendation.statusLevel?.name,
         statusTimestamps: recommendation.statusTimestamps,
         userID: recommendation.userID,
         expiresAt: recommendation.expiresAt,
         createdAt: recommendation.createdAt,
         lastUpdated: recommendation.lastUpdated);
+  }
+
+  StatusLevel? _getStatusLevelFromString(String? statusLevel) {
+    if (statusLevel == null) {
+      return null;
+    }
+    switch (statusLevel) {
+      case "recommendationSend":
+        return StatusLevel.recommendationSend;
+      case "linkClicked":
+        return StatusLevel.linkClicked;
+      case "contactFormSent":
+        return StatusLevel.contactFormSent;
+      case "appointment":
+        return StatusLevel.appointment;
+      case "successful":
+        return StatusLevel.successful;
+      case "failed":
+        return StatusLevel.failed;
+      default:
+        return null;
+    }
   }
 
   @override

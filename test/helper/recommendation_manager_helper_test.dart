@@ -59,16 +59,21 @@ void main() {
 
   group('getStringFromStatusLevel', () {
     test('returns correct string for each status level', () {
-      expect(helper.getStringFromStatusLevel(0), 'Empfehlung ausgesprochen');
-      expect(helper.getStringFromStatusLevel(1), 'Link geklickt');
-      expect(helper.getStringFromStatusLevel(2), 'Kontakt aufgenommen');
-      expect(helper.getStringFromStatusLevel(3), 'Empfehlung terminiert');
-      expect(helper.getStringFromStatusLevel(4), 'Abgeschlossen');
-      expect(helper.getStringFromStatusLevel(5), 'Nicht abgeschlossen');
+      expect(helper.getStringFromStatusLevel(StatusLevel.recommendationSend),
+          'Empfehlung ausgesprochen');
+      expect(helper.getStringFromStatusLevel(StatusLevel.linkClicked),
+          'Link geklickt');
+      expect(helper.getStringFromStatusLevel(StatusLevel.contactFormSent),
+          'Kontakt aufgenommen');
+      expect(helper.getStringFromStatusLevel(StatusLevel.appointment),
+          'Empfehlung terminiert');
+      expect(helper.getStringFromStatusLevel(StatusLevel.successful),
+          'Abgeschlossen');
+      expect(helper.getStringFromStatusLevel(StatusLevel.failed),
+          'Nicht abgeschlossen');
     });
 
     test('returns null for unknown status level', () {
-      expect(helper.getStringFromStatusLevel(99), null);
       expect(helper.getStringFromStatusLevel(null), null);
     });
   });
