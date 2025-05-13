@@ -1,6 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
+enum StatusLevel {
+  recommendationSend,
+  linkClicked,
+  contactFormSent,
+  appointment,
+  successful,
+  failed,
+}
+
 class RecommendationItem extends Equatable {
   final String id;
   final String? name;
@@ -10,7 +19,7 @@ class RecommendationItem extends Equatable {
   final String? promoterName;
   final String? serviceProviderName;
   final String? defaultLandingPageID;
-  final int? statusLevel;
+  final StatusLevel? statusLevel;
   final Map<int, DateTime?>? statusTimestamps;
   final String? userID;
   final DateTime expiresAt;
@@ -44,7 +53,7 @@ class RecommendationItem extends Equatable {
       String? promoterName,
       String? serviceProviderName,
       String? defaultLandingPageID,
-      int? statusLevel,
+      StatusLevel? statusLevel,
       Map<int, DateTime?>? statusTimestamps,
       String? userID,
       DateTime? lastUpdated}) {

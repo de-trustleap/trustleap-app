@@ -35,11 +35,13 @@ class RecommendationSetStatusFailureState extends RecommendationManagerTileState
 class RecommendationSetStatusSuccessState extends RecommendationManagerTileState
     with EquatableMixin {
   final UserRecommendation recommendation;
+  final bool? settedFavorite;
 
-  RecommendationSetStatusSuccessState({required this.recommendation});
+  RecommendationSetStatusSuccessState(
+      {required this.recommendation, this.settedFavorite});
 
   @override
-  List<Object?> get props => [recommendation];
+  List<Object?> get props => [recommendation, settedFavorite];
 }
 
 class RecommendationSetFinishedSuccessState

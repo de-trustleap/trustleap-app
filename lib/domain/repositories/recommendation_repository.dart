@@ -17,4 +17,6 @@ abstract class RecommendationRepository {
       UserRecommendation recommendation, bool completed);
   Future<Either<DatabaseFailure, List<ArchivedRecommendationItem>>>
       getArchivedRecommendations(String userID);
+  Future<Either<DatabaseFailure, UserRecommendation>> setFavorite(
+      UserRecommendation recommendation);
 }

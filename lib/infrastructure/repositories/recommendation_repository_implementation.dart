@@ -160,7 +160,8 @@ class RecommendationRepositoryImplementation
           SetOptions(merge: true));
       return right(recommendation.copyWith(
           recommendation: newRecommendation?.copyWith(
-              statusLevel: 3, statusTimestamps: newStatusTimeStamps)));
+              statusLevel: StatusLevel.appointment,
+              statusTimestamps: newStatusTimeStamps)));
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
@@ -311,6 +312,19 @@ class RecommendationRepositoryImplementation
       });
 
       return right(recommendations);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, UserRecommendation>> setFavorite(
+      UserRecommendation recommendation) async {
+    final userRecoCollection = firestore.collection("usersRecommendations");
+    try {
+      await userRecoCollection.doc(recommendation.id.value).set(
+          {"isFavorite": recommendation.isFavorite}, SetOptions(merge: true));
+      return right(recommendation);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }

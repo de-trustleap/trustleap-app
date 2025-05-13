@@ -140,7 +140,10 @@ class _RecommendationManagerPageState
             Modular.get<RecommendationManagerCubit>()
                 .getRecommendations(currentUser?.id.value);
           } else if (state is RecommendationGetRecosSuccessState) {
-            if (state.showSetAppointmentSnackBar) {
+            if (state.showFavoriteSnackbar) {
+              CustomSnackBar.of(context)
+                  .showCustomSnackBar("Favoriten erfolgreich angepasst!");
+            } else if (state.showSetAppointmentSnackBar) {
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_scheduled_snackbar);
             } else if (state.showFinishedSnackBar) {
@@ -205,9 +208,13 @@ class _RecommendationManagerPageState
               onDeletePressed: (recoID, userID, userRecoID) {
                 showDeleteAlert(localization, recoID, userID, userRecoID);
               },
-              onUpdate: (recommendation, shouldBeDeleted) {
-                Modular.get<RecommendationManagerCubit>()
-                    .updateReco(recommendation, shouldBeDeleted);
+              onFavoritePressed: (recommendation) {
+                Modular.get<RecommendationManagerTileCubit>()
+                    .setFavorite(recommendation);
+              },
+              onUpdate: (recommendation, shouldBeDeleted, settedFavorite) {
+                Modular.get<RecommendationManagerCubit>().updateReco(
+                    recommendation, shouldBeDeleted, settedFavorite);
               }),
         )
       ]);
@@ -216,3 +223,11 @@ class _RecommendationManagerPageState
     }
   }
 }
+
+// TODO: TESTS UM SETFAVORITE ERWEITERN
+// TODO: STATUSLEVEL UND TIMESTAMP IN EXTRA COLLECTION AUSLAGERN IN CLOUD FUNCTIONS
+// TODO: MODELS UND PARSING ANPASSEN
+// TODO: TESTS ANPASSEN
+// TODO: FAVORITE ZU FILTER HINZUFÜGEN
+// TODO: TESTS ANPASSEN
+// TODO: LOCALIZATION

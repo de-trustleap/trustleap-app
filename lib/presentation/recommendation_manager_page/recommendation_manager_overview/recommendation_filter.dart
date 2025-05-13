@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 
@@ -10,7 +11,8 @@ class RecommendationFilter {
       // filter by status
       if (filterStates.statusFilterState !=
           RecommendationStatusFilterState.all) {
-        final statusLevel = item.recommendation?.statusLevel ?? 0;
+        final statusLevel =
+            item.recommendation?.statusLevel ?? StatusLevel.recommendationSend;
         return _statusFilterMatches(
             filterStates.statusFilterState, statusLevel);
       }
@@ -83,20 +85,20 @@ class RecommendationFilter {
   }
 
   static bool _statusFilterMatches(
-      RecommendationStatusFilterState filter, int statusLevel) {
+      RecommendationStatusFilterState filter, StatusLevel statusLevel) {
     switch (filter) {
       case RecommendationStatusFilterState.recommendationSent:
-        return statusLevel == 0;
+        return statusLevel == StatusLevel.recommendationSend;
       case RecommendationStatusFilterState.linkClicked:
-        return statusLevel == 1;
+        return statusLevel == StatusLevel.linkClicked;
       case RecommendationStatusFilterState.contactFormSent:
-        return statusLevel == 2;
+        return statusLevel == StatusLevel.contactFormSent;
       case RecommendationStatusFilterState.appointment:
-        return statusLevel == 3;
+        return statusLevel == StatusLevel.appointment;
       case RecommendationStatusFilterState.successful:
-        return statusLevel == 4;
+        return statusLevel == StatusLevel.successful;
       case RecommendationStatusFilterState.failed:
-        return statusLevel == 5;
+        return statusLevel == StatusLevel.failed;
       case RecommendationStatusFilterState.all:
         return true;
     }

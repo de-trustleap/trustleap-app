@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -9,6 +10,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_e
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_helper.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_favorite_button.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list_tile_icon_row.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_status_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,8 @@ class RecommendationManagerListTile extends StatefulWidget {
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
   final Function(String, String, String) onDeletePressed;
-  final Function(UserRecommendation, bool) onUpdate;
+  final Function(UserRecommendation) onFavoritePressed;
+  final Function(UserRecommendation, bool, bool) onUpdate;
   const RecommendationManagerListTile(
       {super.key,
       required this.recommendation,
@@ -31,6 +34,7 @@ class RecommendationManagerListTile extends StatefulWidget {
       required this.onFinishedPressed,
       required this.onFailedPressed,
       required this.onDeletePressed,
+      required this.onFavoritePressed,
       required this.onUpdate});
 
   @override
@@ -67,9 +71,10 @@ class _RecommendationManagerListTileState
           setState(() {
             _recommendation = state.recommendation;
           });
-          widget.onUpdate(state.recommendation, false);
+          widget.onUpdate(
+              state.recommendation, false, state.settedFavorite ?? false);
         } else if (state is RecommendationSetFinishedSuccessState) {
-          widget.onUpdate(state.recommendation, true);
+          widget.onUpdate(state.recommendation, true, false);
         }
       },
       builder: (context, state) {
@@ -98,6 +103,16 @@ class _RecommendationManagerListTileState
                           _recommendation.recommendation?.expiresAt ??
                               DateTime.now()),
                       themeData)),
+              Flexible(
+                  flex: 1,
+                  child: RecommendationManagerFavoriteButton(
+                      isFavorite: _recommendation.isFavorite ?? false,
+                      onPressed: () => widget
+                              .onFavoritePressed(widget.recommendation.copyWith(
+                            isFavorite: _recommendation.isFavorite != null
+                                ? !_recommendation.isFavorite!
+                                : false,
+                          )))),
               const SizedBox(width: 8)
             ]),
             children: [
@@ -122,7 +137,8 @@ class _RecommendationManagerListTileState
               ]),
               const SizedBox(height: 16),
               RecommendationManagerStatusProgressIndicator(
-                  level: _recommendation.recommendation?.statusLevel ?? 0,
+                  level: _recommendation.recommendation?.statusLevel ??
+                      StatusLevel.recommendationSend,
                   statusTimestamps:
                       _recommendation.recommendation?.statusTimestamps ?? {}),
               const SizedBox(height: 16),
@@ -178,19 +194,3 @@ class _RecommendationManagerListTileState
     );
   }
 }
-
-// TODO: SAVE RECOMMENDATION IN BACKEND VERLAGERN! (FERTIG)
-// TODO: SAVE RECOMMENDATION ERWEITERN. ES MÜSSEN USERSRECOMMENDATION DOCUMENTS ANGELEGT WERDEN FÜR USER UND PARENTUSER (FERTIG)
-// TODO: SAVE RECOMMENDATIONS FRONTEND CALL (FERTIG)
-// TODO: TESTS FÜR SAVE RECOMMENDATIONS (FERTIG)
-// TODO: ALERT BUTTONS DISABLEN (FERTIG)
-// TODO: ONRECOMMENDATIONDELETE ERWEITERN. HIER MÜSSEN AUCH ALLE USERSRECOMMENDATIONS GELÖSCHT WERDEN (FERTIG)
-// TODO: ONRECOMMENDATIONDELETE TESTS ERWEITERN (FERTIG)
-// TODO: FRONTEND NUR USERSRECOMMENDATION ANZEIGEN (FERTIG)
-// TODO: UPDATERECO FUNKTIONIERT NICHT MEHR RICHTIG. DIE GANZE TABELLE SCHEINT NEU ZU LADEN. HIER SOLL NUR DIE ZELLE NEU LADEN. (FERTIG)
-// TODO: LÖSCHEN SO ERWEITERN, DASS USERSRECOMMENDATION.RECOMMENDATION GELÖSCHT WIRD (FERTIG)
-// TODO: ARCHIVE RECOMMENDATIONS EBENFALLS UMSTELLEN (FERTIG)
-// TODO: RecommendationManagerListTileIconRow LISTENER FUNKTIONIERT NICHT MEHR RICHTIG. DELETE BUTTON WIRD NIE DISABLED
-// TODO: ALLES DURCHTESTEN
-// TODO: TESTS ANPASSEN
-// TODO: FAVORITE BUTTON EINFÜGEN
