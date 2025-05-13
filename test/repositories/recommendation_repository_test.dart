@@ -287,4 +287,52 @@ void main() {
       verifyNoMoreInteractions(mockRecoRepo);
     });
   });
+
+  group("RecommendationRepositoryImplementation_setFavorite", () {
+    final date = DateTime.now();
+    final recommendation = RecommendationItem(
+        id: "1",
+        name: "Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: StatusLevel.contactFormSent,
+        statusTimestamps: {0: date, 1: date, 2: date});
+    final userRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: "1",
+        priority: 1,
+        isFavorite: false,
+        recommendation: recommendation);
+    test("should return item when call was successful", () async {
+      // Given
+      final expectedResult = right(userRecommendation);
+      when(mockRecoRepo.setFavorite(userRecommendation))
+          .thenAnswer((_) async => right(userRecommendation));
+      // When
+      final result = await mockRecoRepo.setFavorite(userRecommendation);
+      // Then
+      verify(mockRecoRepo.setFavorite(userRecommendation));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockRecoRepo.setFavorite(userRecommendation))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockRecoRepo.setFavorite(userRecommendation);
+      // Then
+      verify(mockRecoRepo.setFavorite(userRecommendation));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
 }
