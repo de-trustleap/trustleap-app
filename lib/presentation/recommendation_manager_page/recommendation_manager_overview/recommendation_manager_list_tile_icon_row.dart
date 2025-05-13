@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
+import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,7 @@ class _RecommendationManagerListTileIconRowState
                   child: ElevatedButton(
                       onPressed: widget.recommendation.recommendation
                                       ?.statusLevel ==
-                                  2 &&
+                                  StatusLevel.linkClicked &&
                               !buttonsDisabled
                           ? () =>
                               widget.onAppointmentPressed(widget.recommendation)
@@ -83,7 +84,7 @@ class _RecommendationManagerListTileIconRowState
                   child: ElevatedButton(
                       onPressed: widget.recommendation.recommendation
                                       ?.statusLevel ==
-                                  3 &&
+                                  StatusLevel.appointment &&
                               !buttonsDisabled
                           ? () =>
                               widget.onFinishedPressed(widget.recommendation)
@@ -104,7 +105,7 @@ class _RecommendationManagerListTileIconRowState
                   child: ElevatedButton(
                       onPressed: widget.recommendation.recommendation
                                       ?.statusLevel ==
-                                  3 &&
+                                  StatusLevel.appointment &&
                               !buttonsDisabled
                           ? () => widget.onFailedPressed(widget.recommendation)
                           : null,

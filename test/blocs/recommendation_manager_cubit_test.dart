@@ -35,7 +35,7 @@ void main() {
         serviceProviderName: "Test",
         defaultLandingPageID: "2",
         userID: "1",
-        statusLevel: 0,
+        statusLevel: StatusLevel.recommendationSend,
         statusTimestamps: null);
     final recommendations = [
       UserRecommendation(
@@ -68,7 +68,8 @@ void main() {
         RecommendationGetRecosSuccessState(
             recoItems: recommendations,
             showSetAppointmentSnackBar: false,
-            showFinishedSnackBar: false)
+            showFinishedSnackBar: false,
+            showFavoriteSnackbar: false)
       ];
       when(mockRecoRepo.getRecommendations(userID))
           .thenAnswer((_) async => right(recommendations));

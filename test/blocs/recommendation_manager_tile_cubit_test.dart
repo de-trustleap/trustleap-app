@@ -33,7 +33,7 @@ void main() {
         serviceProviderName: "Test",
         defaultLandingPageID: "2",
         userID: "1",
-        statusLevel: 2,
+        statusLevel: StatusLevel.contactFormSent,
         statusTimestamps: {0: date, 1: date, 2: date});
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
@@ -99,7 +99,7 @@ void main() {
         serviceProviderName: "Test",
         defaultLandingPageID: "2",
         userID: "1",
-        statusLevel: 3,
+        statusLevel: StatusLevel.appointment,
         statusTimestamps: {0: date, 1: date, 2: date});
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),

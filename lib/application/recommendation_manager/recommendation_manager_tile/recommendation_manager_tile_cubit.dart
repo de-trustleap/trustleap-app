@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
 
@@ -15,7 +16,8 @@ class RecommendationManagerTileCubit
   void setAppointmentState(UserRecommendation recommendation) async {
     emit(RecommendationSetStatusLoadingState(recommendation: recommendation));
     if (recommendation.recommendation == null ||
-        recommendation.recommendation?.statusLevel != 2 ||
+        recommendation.recommendation?.statusLevel !=
+            StatusLevel.contactFormSent ||
         recommendation.recommendation?.statusTimestamps == null) {
       return;
     }
@@ -31,7 +33,7 @@ class RecommendationManagerTileCubit
   void setFinished(UserRecommendation recommendation, bool success) async {
     emit(RecommendationSetStatusLoadingState(recommendation: recommendation));
     if (recommendation.recommendation == null ||
-        recommendation.recommendation?.statusLevel != 3 ||
+        recommendation.recommendation?.statusLevel != StatusLevel.appointment ||
         recommendation.recommendation?.statusTimestamps == null) {
       return;
     }

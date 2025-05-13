@@ -7000,6 +7000,28 @@ class MockRecommendationRepository extends _i1.Mock
           ) as _i18.Future<
               _i2.Either<_i27.DatabaseFailure,
                   List<_i41.ArchivedRecommendationItem>>>);
+
+  @override
+  _i18.Future<
+      _i2.Either<_i27.DatabaseFailure, _i40.UserRecommendation>> setFavorite(
+          _i40.UserRecommendation? recommendation) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setFavorite,
+          [recommendation],
+        ),
+        returnValue: _i18.Future<
+                _i2
+                .Either<_i27.DatabaseFailure, _i40.UserRecommendation>>.value(
+            _FakeEither_0<_i27.DatabaseFailure, _i40.UserRecommendation>(
+          this,
+          Invocation.method(
+            #setFavorite,
+            [recommendation],
+          ),
+        )),
+      ) as _i18
+          .Future<_i2.Either<_i27.DatabaseFailure, _i40.UserRecommendation>>);
 }
 
 /// A class which mocks [LegalsRepository].
