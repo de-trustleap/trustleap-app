@@ -12,7 +12,7 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: 1,
-        isFavorite: false,
+        isFavorite: true,
         recommendation: RecommendationItem(
           id: '1',
           name: 'Anna',
@@ -56,7 +56,7 @@ void main() {
         recoID: "3",
         userID: "1",
         priority: 1,
-        isFavorite: false,
+        isFavorite: true,
         recommendation: RecommendationItem(
           id: '3',
           name: 'Clara',
@@ -158,5 +158,32 @@ void main() {
       DateTime(2024, 11, 30),
       DateTime(2024, 12, 31),
     ]);
+  });
+
+  test('filters only favorites', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..favoriteFilterState = RecommendationFavoriteFilterState.isFavorite;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.length, 2);
+    expect(result.map((e) => e.recommendation?.name),
+        containsAll(['Anna', 'Clara']));
+  });
+
+  test('filters only non-favorites', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..favoriteFilterState = RecommendationFavoriteFilterState.isNotFavorite;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.length, 1);
+    expect(result.first.recommendation?.name, 'Ben');
   });
 }

@@ -7,8 +7,8 @@ class RecommendationFilter {
     required List<UserRecommendation> items,
     required RecommendationOverviewFilterStates filterStates,
   }) {
+    // filter by status
     List<UserRecommendation> filtered = items.where((item) {
-      // filter by status
       if (filterStates.statusFilterState !=
           RecommendationStatusFilterState.all) {
         final statusLevel =
@@ -17,6 +17,18 @@ class RecommendationFilter {
             filterStates.statusFilterState, statusLevel);
       }
       return true;
+    }).toList();
+
+    // filter by favorite
+    filtered = filtered.where((item) {
+      switch (filterStates.favoriteFilterState) {
+        case RecommendationFavoriteFilterState.isFavorite:
+          return item.isFavorite == true;
+        case RecommendationFavoriteFilterState.isNotFavorite:
+          return item.isFavorite != true;
+        case RecommendationFavoriteFilterState.all:
+          return true;
+      }
     }).toList();
 
     // apply sorting
