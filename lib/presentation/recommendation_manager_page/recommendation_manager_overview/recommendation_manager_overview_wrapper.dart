@@ -141,8 +141,8 @@ class _RecommendationManagerPageState
                 .getRecommendations(currentUser?.id.value);
           } else if (state is RecommendationGetRecosSuccessState) {
             if (state.showFavoriteSnackbar) {
-              CustomSnackBar.of(context)
-                  .showCustomSnackBar("Favoriten erfolgreich angepasst!");
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  localization.recommendation_manager_favorite_snackbar);
             } else if (state.showSetAppointmentSnackBar) {
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_scheduled_snackbar);

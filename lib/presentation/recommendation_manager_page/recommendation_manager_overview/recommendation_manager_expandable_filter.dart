@@ -187,7 +187,9 @@ class _RecommendationManagerExpandableFilterState
                 DropdownMenu<RecommendationStatusFilterState>(
                     textStyle: themeData.textTheme.bodySmall,
                     width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
-                    label: Text("Sortieren nach Status",
+                    label: Text(
+                        localization
+                            .recommendation_manager_filter_sort_by_status,
                         style: themeData.textTheme.bodySmall!
                             .copyWith(fontSize: 12)),
                     initialSelection: RecommendationStatusFilterState.all,
@@ -237,7 +239,9 @@ class _RecommendationManagerExpandableFilterState
                   DropdownMenu<RecommendationFavoriteFilterState>(
                       textStyle: themeData.textTheme.bodySmall,
                       width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
-                      label: Text("Sortieren nach Favoriten",
+                      label: Text(
+                          localization
+                              .recommendation_manager_filter_sort_by_favorites,
                           style: themeData.textTheme.bodySmall!
                               .copyWith(fontSize: 12)),
                       initialSelection: RecommendationFavoriteFilterState.all,
@@ -250,11 +254,13 @@ class _RecommendationManagerExpandableFilterState
                                 .recommendation_manager_filter_status_all),
                         DropdownMenuEntry(
                             value: RecommendationFavoriteFilterState.isFavorite,
-                            label: "Favoriten"),
+                            label: localization
+                                .recommendation_manager_filter_favorites),
                         DropdownMenuEntry(
                             value:
                                 RecommendationFavoriteFilterState.isNotFavorite,
-                            label: "Keine Favoriten"),
+                            label: localization
+                                .recommendation_manager_filter_no_favorites),
                       ],
                       onSelected: (sortBy) {
                         filterStates.favoriteFilterState =

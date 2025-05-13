@@ -1586,4 +1586,28 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recommendation_manager_achive_tab => 'Archiv';
+
+  @override
+  String get recommendation_manager_filter_sort_by_status => 'Sortieren nach Status';
+
+  @override
+  String get recommendation_manager_filter_sort_by_favorites => 'Sortieren nach Favoriten';
+
+  @override
+  String get recommendation_manager_filter_favorites => 'Favoriten';
+
+  @override
+  String get recommendation_manager_filter_no_favorites => 'Keine Favoriten';
+
+  @override
+  String get recommendation_manager_favorite_snackbar => 'Favoriten erfolgreich angepasst!';
+
+  @override
+  String get recommendation_missing_landingpage_title => 'Keine Landingpage gefunden';
+
+  @override
+  String get recommendation_missing_landingpage_text => 'Um eine Empfehlung aussprechen zu können musst du neben deiner Default Landingpage erst noch eine Landngpage anlegen.';
+
+  @override
+  String get recommendation_missing_landingpage_button => 'Zu den Landingpages';
 }

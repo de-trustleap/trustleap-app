@@ -2129,5 +2129,37 @@
     "recommendation_manager_achive_tab": "Archiv",
     "@recommendation_manager_achive_tab": {
         "description": "Titel eines Tabs auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_sort_by_status": "Sortieren nach Status",
+    "@recommendation_manager_filter_sort_by_status": {
+        "description": "Der Text über dem Status Dropdown Menü im Filter auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_sort_by_favorites": "Sortieren nach Favoriten",
+    "@recommendation_manager_filter_sort_by_favorites": {
+        "description": "Der Text über dem Favoriten Dropdown Menü im Filter auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_favorites": "Favoriten",
+    "@recommendation_manager_filter_favorites": {
+        "description": "Der Favoriten Dropdown Menü Eintrag im Filter auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_filter_no_favorites": "Keine Favoriten",
+    "@recommendation_manager_filter_no_favorites": {
+        "description": "Der Keine Favoriten Dropdown Menü Eintrag im Filter auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_favorite_snackbar": "Favoriten erfolgreich angepasst!",
+    "@recommendation_manager_favorite_snackbar": {
+        "description": "Snackbar Nachricht wenn Favoritenstatus bei Empfehlung erfolgreich angepasst wurde auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_missing_landingpage_title": "Keine Landingpage gefunden",
+    "@recommendation_missing_landingpage_title": {
+        "description": "Title der Seite die auf der Empfehlungsseite angezeigt wird, wenn keine Landingpage gefunden wurde"
+    },
+    "recommendation_missing_landingpage_text": "Um eine Empfehlung aussprechen zu können musst du neben deiner Default Landingpage erst noch eine Landngpage anlegen.",
+    "@recommendation_missing_landingpage_text": {
+        "description": "Text der Seite die auf der Empfehlungsseite angezeigt wird, wenn keine Landingpage gefunden wurde"
+    },
+    "recommendation_missing_landingpage_button": "Zu den Landingpages",
+    "@recommendation_missing_landingpage_button": {
+        "description": "Button auf der Seite die auf der Empfehlungsseite angezeigt wird, wenn keine Landingpage gefunden wurde, der zum Landingpage Menü führt"
     }
 }

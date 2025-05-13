@@ -200,10 +200,10 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
           if (state is RecommendationNoReasonsState) {
             return EmptyPage(
                 icon: Icons.person_add,
-                title: "Keine Landingpages gefunden",
-                subTitle:
-                    "Um eine Empfehlung aussprechen zu können musst du neben deiner Default Landingpage erst noch eine Landngpage anlegen.",
-                buttonTitle: "Zu den Landingpages",
+                title: localization.recommendation_missing_landingpage_title,
+                subTitle: localization.recommendation_missing_landingpage_text,
+                buttonTitle:
+                    localization.recommendation_missing_landingpage_button,
                 onTap: () {
                   CustomNavigator.navigate(
                       RoutePaths.homePath + RoutePaths.landingPagePath);

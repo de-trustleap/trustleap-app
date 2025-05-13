@@ -2129,5 +2129,37 @@
     "recommendation_manager_achive_tab": "Archive",
     "@recommendation_manager_achive_tab": {
         "description": "Tab title on the recommendation manager page"
+    },
+    "recommendation_manager_filter_sort_by_status": "Sort by status",
+    "@recommendation_manager_filter_sort_by_status": {
+        "description": "The text above the status dropdown menu in the filter on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_sort_by_favorites": "Sort by favorites",
+    "@recommendation_manager_filter_sort_by_favorites": {
+        "description": "The text above the favorite dropdown menu in the filter on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_favorites": "Favorites",
+    "@recommendation_manager_filter_favorites": {
+        "description": "The Favorites dropdown menu entry in the filter on the Recommendation Manager page"
+    },
+    "recommendation_manager_filter_no_favorites": "No favorites",
+    "@recommendation_manager_filter_no_favorites": {
+        "description": "The No Favorites dropdown menu entry in the filter on the Recommendation Manager page"
+    },
+    "recommendation_manager_favorite_snackbar": "Favorites successfully changed!",
+    "@recommendation_manager_favorite_snackbar": {
+        "description": "Snackbar message when favorite state of recommendation has been successfully changed on the recommendation manager page"
+    },
+    "recommendation_missing_landingpage_title": "No landingpage found",
+    "@recommendation_missing_landingpage_title": {
+        "description": "Title of the page displayed on the recommendation page if no landing page was found"
+    },
+    "recommendation_missing_landingpage_text": "In order to make a recommendation, you must first create a landing page in addition to your default landing page.",
+    "@recommendation_missing_landingpage_text": {
+        "description": "Text of the page displayed on the recommendation page if no landing page was found"
+    },
+    "recommendation_missing_landingpage_button": "To the landingpages",
+    "@recommendation_missing_landingpage_button": {
+        "description": "Button on the page that is displayed on the recommendation page if no landing page was found, which leads to the landing page menu"
     }
 }
