@@ -1,12 +1,30 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+
+enum RecommendationPriority {
+  low,
+  medium,
+  high;
+
+  String getLocalizedLabel(AppLocalizations localizations) {
+    switch (this) {
+      case RecommendationPriority.low:
+        return localizations.recommendation_priority_low;
+      case RecommendationPriority.medium:
+        return localizations.recommendation_priority_medium;
+      case RecommendationPriority.high:
+        return localizations.recommendation_priority_high;
+    }
+  }
+}
 
 class UserRecommendation extends Equatable {
   final UniqueID id;
   final String? recoID;
   final String? userID;
-  final int? priority;
+  final RecommendationPriority? priority;
   final bool? isFavorite;
   final RecommendationItem? recommendation;
 
@@ -22,7 +40,7 @@ class UserRecommendation extends Equatable {
       {UniqueID? id,
       String? recoID,
       String? userID,
-      int? priority,
+      RecommendationPriority? priority,
       bool? isFavorite,
       RecommendationItem? recommendation}) {
     return UserRecommendation(

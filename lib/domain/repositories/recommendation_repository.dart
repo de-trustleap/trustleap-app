@@ -19,4 +19,6 @@ abstract class RecommendationRepository {
       getArchivedRecommendations(String userID);
   Future<Either<DatabaseFailure, UserRecommendation>> setFavorite(
       UserRecommendation recommendation);
+  Future<Either<DatabaseFailure, UserRecommendation>> setPriority(
+      UserRecommendation recommendation);
 }

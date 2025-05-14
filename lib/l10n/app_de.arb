@@ -1966,6 +1966,10 @@
     "@recommendation_manager_filter_status_all": {
         "description": "Alle Empfehlungsstatus Dropdown Menü Eintrag in der Filter View auf der Empfehlungsmanager Seite"
     },
+    "recommendation_manager_list_header_priority": "Priorität",
+    "@recommendation_manager_list_header_priority": {
+        "description": "Priorität Eintrag im Listen Header auf der Empfehlungsmanager Seite"
+    },
     "recommendation_manager_list_header_receiver": "Empfehlungsname",
     "@recommendation_manager_list_header_receiver": {
         "description": "Empfehlungsname Eintrag im Listen Header auf der Empfehlungsmanager Seite"
@@ -2161,5 +2165,33 @@
     "recommendation_missing_landingpage_button": "Zu den Landingpages",
     "@recommendation_missing_landingpage_button": {
         "description": "Button auf der Seite die auf der Empfehlungsseite angezeigt wird, wenn keine Landingpage gefunden wurde, der zum Landingpage Menü führt"
+    },
+    "recommendation_priority_high": "Hoch",
+    "@recommendation_priority_high": {
+        "description": "Die Priorität Hoch für eine Empfehlung"
+    },
+    "recommendation_priority_medium": "Mittel",
+    "@recommendation_priority_medium": {
+        "description": "Die Priorität Mittel für eine Empfehlung"
+    },
+    "recommendation_priority_low": "Niedrig",
+    "@recommendation_priority_low": {
+        "description": "Die Priorität Niedrig für eine Empfehlung"
+    },
+    "recommendation_manager_filter_sort_by_priorities": "Sortieren nach Priorität",
+    "@recommendation_manager_filter_sort_by_priorities": {
+        "description": "Der Text über dem Priorität Dropdown Menü im Filter auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_show_landingpage_button": "Landingpage anzeigen",
+    "@recommendation_manager_show_landingpage_button": {
+        "description": "Der Button in der Empfehlungsmanager Zelle der die Landingpage öffnet"
+    },
+    "recommendation_manager_select_priority_tooltip": "Priorität auswählen",
+    "@recommendation_manager_select_priority_tooltip": {
+        "description": "Tooltip für den Button in der Empfehlungsmanager Zelle, der das Priorität Dropdown Menü öffnet"
+    },
+    "recommendation_manager_priority_snackbar": "Priorität erfolgreich angepasst!",
+    "@recommendation_manager_priority_snackbar": {
+        "description": "Snackbar Nachricht wenn Priorität bei Empfehlung erfolgreich angepasst wurde auf der Empfehlungsmanager Seite"
     }
 }

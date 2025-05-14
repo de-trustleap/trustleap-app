@@ -2987,6 +2987,12 @@ abstract class AppLocalizations {
   /// **'All'**
   String get recommendation_manager_filter_status_all;
 
+  /// Priority name entry in the list header on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get recommendation_manager_list_header_priority;
+
   /// Recommendation name entry in the list header on the Recommendation Manager page
   ///
   /// In en, this message translates to:
@@ -3280,6 +3286,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To the landingpages'**
   String get recommendation_missing_landingpage_button;
+
+  /// The priority High for a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get recommendation_priority_high;
+
+  /// The priority Medium for a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get recommendation_priority_medium;
+
+  /// The priority Low for a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get recommendation_priority_low;
+
+  /// The text above the priority dropdown menu in the filter on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by priority'**
+  String get recommendation_manager_filter_sort_by_priorities;
+
+  /// Button in the recommendation manager cell that opens the landingpage
+  ///
+  /// In en, this message translates to:
+  /// **'Show landingpage'**
+  String get recommendation_manager_show_landingpage_button;
+
+  /// Tooltip for the button in the recommendation manager cell that opens the priority dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Select priority'**
+  String get recommendation_manager_select_priority_tooltip;
+
+  /// Snackbar message when priority of recommendation has been successfully changed on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Priority successfully changed!'**
+  String get recommendation_manager_priority_snackbar;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

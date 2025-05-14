@@ -11,7 +11,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
         userID: "1",
-        priority: 1,
+        priority: RecommendationPriority.medium,
         isFavorite: true,
         recommendation: RecommendationItem(
           id: '1',
@@ -33,7 +33,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         recoID: "2",
         userID: "1",
-        priority: 1,
+        priority: RecommendationPriority.medium,
         isFavorite: false,
         recommendation: RecommendationItem(
           id: '2',
@@ -55,7 +55,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         recoID: "3",
         userID: "1",
-        priority: 1,
+        priority: RecommendationPriority.medium,
         isFavorite: true,
         recommendation: RecommendationItem(
           id: '3',
@@ -185,5 +185,41 @@ void main() {
 
     expect(result.length, 1);
     expect(result.first.recommendation?.name, 'Ben');
+  });
+
+  test('filters only high priority items', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..priorityFilterState = RecommendationPriorityFilterState.high;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.isEmpty, true);
+  });
+
+  test('filters only medium priority items', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..priorityFilterState = RecommendationPriorityFilterState.medium;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.length, 3);
+  });
+
+  test('filters only low priority items', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..priorityFilterState = RecommendationPriorityFilterState.low;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.isEmpty, true);
   });
 }

@@ -1,8 +1,8 @@
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_archive_filter.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_list.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive/recommendation_archive_filter.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive/recommendation_manager_archive_list.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_list_header.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 import 'package:flutter/material.dart';

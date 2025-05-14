@@ -1,7 +1,7 @@
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_overview_wrapper.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive/recommendation_manager_archive_overview_wrapper.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_overview_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

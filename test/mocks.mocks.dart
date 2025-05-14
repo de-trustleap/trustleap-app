@@ -5582,6 +5582,80 @@ class MockAppLocalizations extends _i1.Mock implements _i22.AppLocalizations {
       ) as String);
 
   @override
+  String get recommendation_manager_filter_sort_by_status =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_sort_by_status),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_sort_by_status),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_filter_sort_by_favorites =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_sort_by_favorites),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_sort_by_favorites),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_filter_favorites => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_favorites),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_favorites),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_filter_no_favorites => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_no_favorites),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_no_favorites),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_favorite_snackbar => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_favorite_snackbar),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_favorite_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_missing_landingpage_title => (super.noSuchMethod(
+        Invocation.getter(#recommendation_missing_landingpage_title),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_missing_landingpage_title),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_missing_landingpage_text => (super.noSuchMethod(
+        Invocation.getter(#recommendation_missing_landingpage_text),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_missing_landingpage_text),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_missing_landingpage_button => (super.noSuchMethod(
+        Invocation.getter(#recommendation_missing_landingpage_button),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_missing_landingpage_button),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -7017,6 +7091,28 @@ class MockRecommendationRepository extends _i1.Mock
           this,
           Invocation.method(
             #setFavorite,
+            [recommendation],
+          ),
+        )),
+      ) as _i18
+          .Future<_i2.Either<_i27.DatabaseFailure, _i40.UserRecommendation>>);
+
+  @override
+  _i18.Future<
+      _i2.Either<_i27.DatabaseFailure, _i40.UserRecommendation>> setPriority(
+          _i40.UserRecommendation? recommendation) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setPriority,
+          [recommendation],
+        ),
+        returnValue: _i18.Future<
+                _i2
+                .Either<_i27.DatabaseFailure, _i40.UserRecommendation>>.value(
+            _FakeEither_0<_i27.DatabaseFailure, _i40.UserRecommendation>(
+          this,
+          Invocation.method(
+            #setPriority,
             [recommendation],
           ),
         )),

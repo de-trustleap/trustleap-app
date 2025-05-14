@@ -1,7 +1,7 @@
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/no_search_results_view.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_list_tile.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive/recommendation_manager_archive_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationManagerArchiveList extends StatelessWidget {

@@ -143,6 +143,9 @@ class _RecommendationManagerPageState
             if (state.showFavoriteSnackbar) {
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_favorite_snackbar);
+            } else if (state.showPrioritySnackbar) {
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  localization.recommendation_manager_priority_snackbar);
             } else if (state.showSetAppointmentSnackBar) {
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_scheduled_snackbar);
@@ -212,9 +215,17 @@ class _RecommendationManagerPageState
                 Modular.get<RecommendationManagerTileCubit>()
                     .setFavorite(recommendation);
               },
-              onUpdate: (recommendation, shouldBeDeleted, settedFavorite) {
+              onPriorityChanged: (recommendation) {
+                Modular.get<RecommendationManagerTileCubit>()
+                    .setPriority(recommendation);
+              },
+              onUpdate: (recommendation, shouldBeDeleted, settedFavorite,
+                  settedPriority) {
                 Modular.get<RecommendationManagerCubit>().updateReco(
-                    recommendation, shouldBeDeleted, settedFavorite);
+                    recommendation,
+                    shouldBeDeleted,
+                    settedFavorite,
+                    settedPriority);
               }),
         )
       ]);

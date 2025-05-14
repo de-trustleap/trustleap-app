@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_archive_filter.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive/recommendation_archive_filter.dart';
 
 void main() {
   group('RecommendationArchiveFilter', () {

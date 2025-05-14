@@ -58,4 +58,17 @@ class RecommendationManagerTileCubit
         (recommendation) => emit(RecommendationSetStatusSuccessState(
             recommendation: recommendation, settedFavorite: true)));
   }
+
+  void setPriority(UserRecommendation recommendation) async {
+    if (recommendation.priority == null) {
+      return;
+    }
+    final failureOrSuccess =
+        await recommendationRepo.setPriority(recommendation);
+    failureOrSuccess.fold(
+        (failure) => emit(RecommendationSetStatusFailureState(
+            failure: failure, recommendation: recommendation)),
+        (recommendation) => emit(RecommendationSetStatusSuccessState(
+            recommendation: recommendation, settedPriority: true)));
+  }
 }

@@ -7,7 +7,7 @@ import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrai
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/empty_page.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive_overview.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_archive/recommendation_manager_archive_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
