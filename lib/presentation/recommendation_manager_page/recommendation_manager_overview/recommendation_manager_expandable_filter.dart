@@ -23,6 +23,8 @@ enum RecommendationSortByFilterState {
 
 enum RecommendationFavoriteFilterState { all, isFavorite, isNotFavorite }
 
+enum RecommendationPriorityFilterState { all, high, medium, low }
+
 enum RecommendationSortOrderFilterState { asc, desc }
 
 class RecommendationOverviewFilterStates {
@@ -33,6 +35,8 @@ class RecommendationOverviewFilterStates {
       RecommendationSortOrderFilterState.desc;
   RecommendationFavoriteFilterState favoriteFilterState =
       RecommendationFavoriteFilterState.all;
+  RecommendationPriorityFilterState priorityFilterState =
+      RecommendationPriorityFilterState.all;
 
   RecommendationOverviewFilterStates({required bool isArchive}) {
     sortByFilterState = isArchive
@@ -265,6 +269,36 @@ class _RecommendationManagerExpandableFilterState
                       onSelected: (sortBy) {
                         filterStates.favoriteFilterState =
                             sortBy ?? RecommendationFavoriteFilterState.all;
+                        widget.onFilterChanged(filterStates);
+                      }),
+                  const SizedBox(height: 16),
+                  DropdownMenu<RecommendationPriorityFilterState>(
+                      textStyle: themeData.textTheme.bodySmall,
+                      width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
+                      label: Text("Sortieren nach Priorität",
+                          style: themeData.textTheme.bodySmall!
+                              .copyWith(fontSize: 12)),
+                      initialSelection: RecommendationPriorityFilterState.all,
+                      enableSearch: false,
+                      requestFocusOnTap: false,
+                      dropdownMenuEntries: [
+                        DropdownMenuEntry(
+                            value: RecommendationPriorityFilterState.all,
+                            label: localization
+                                .recommendation_manager_filter_status_all),
+                        DropdownMenuEntry(
+                            value: RecommendationPriorityFilterState.high,
+                            label: "Hoch"),
+                        DropdownMenuEntry(
+                            value: RecommendationPriorityFilterState.medium,
+                            label: "Mittel"),
+                        DropdownMenuEntry(
+                            value: RecommendationPriorityFilterState.low,
+                            label: "Niedrig"),
+                      ],
+                      onSelected: (sortBy) {
+                        filterStates.priorityFilterState =
+                            sortBy ?? RecommendationPriorityFilterState.all;
                         widget.onFilterChanged(filterStates);
                       }),
                 ]

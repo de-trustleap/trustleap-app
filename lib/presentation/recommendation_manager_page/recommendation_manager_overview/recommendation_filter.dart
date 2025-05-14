@@ -31,6 +31,20 @@ class RecommendationFilter {
       }
     }).toList();
 
+    // filter by priority
+    filtered = filtered.where((item) {
+      switch (filterStates.priorityFilterState) {
+        case RecommendationPriorityFilterState.high:
+          return item.priority == RecommendationPriority.high;
+        case RecommendationPriorityFilterState.medium:
+          return item.priority == RecommendationPriority.medium;
+        case RecommendationPriorityFilterState.low:
+          return item.priority == RecommendationPriority.low;
+        case RecommendationPriorityFilterState.all:
+          return true;
+      }
+    }).toList();
+
     // apply sorting
     switch (filterStates.sortByFilterState) {
       case RecommendationSortByFilterState.promoter:

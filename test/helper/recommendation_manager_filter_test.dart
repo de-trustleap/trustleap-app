@@ -186,4 +186,40 @@ void main() {
     expect(result.length, 1);
     expect(result.first.recommendation?.name, 'Ben');
   });
+
+  test('filters only high priority items', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..priorityFilterState = RecommendationPriorityFilterState.high;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.isEmpty, true);
+  });
+
+  test('filters only medium priority items', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..priorityFilterState = RecommendationPriorityFilterState.medium;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.length, 3);
+  });
+
+  test('filters only low priority items', () {
+    final filterStates = RecommendationOverviewFilterStates(isArchive: false)
+      ..priorityFilterState = RecommendationPriorityFilterState.low;
+
+    final result = RecommendationFilter.applyFilters(
+      items: testItems,
+      filterStates: filterStates,
+    );
+
+    expect(result.isEmpty, true);
+  });
 }
