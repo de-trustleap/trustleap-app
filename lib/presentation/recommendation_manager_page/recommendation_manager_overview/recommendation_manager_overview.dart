@@ -15,7 +15,8 @@ class RecommendationManagerOverview extends StatefulWidget {
   final Function(UserRecommendation) onFailedPressed;
   final Function(String, String, String) onDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
-  final Function(UserRecommendation, bool, bool) onUpdate;
+  final Function(UserRecommendation) onPriorityChanged;
+  final Function(UserRecommendation, bool, bool, bool) onUpdate;
   const RecommendationManagerOverview(
       {super.key,
       required this.recommendations,
@@ -25,6 +26,7 @@ class RecommendationManagerOverview extends StatefulWidget {
       required this.onFailedPressed,
       required this.onDeletePressed,
       required this.onFavoritePressed,
+      required this.onPriorityChanged,
       required this.onUpdate});
 
   @override
@@ -135,6 +137,7 @@ class _RecommendationManagerOverviewState
             onFailedPressed: widget.onFailedPressed,
             onDeletePressed: widget.onDeletePressed,
             onFavoritePressed: widget.onFavoritePressed,
+            onPriorityChanged: widget.onPriorityChanged,
             onUpdate: widget.onUpdate,
           ),
         ],

@@ -12,7 +12,8 @@ class RecommendationManagerList extends StatelessWidget {
   final Function(UserRecommendation) onFailedPressed;
   final Function(String, String, String) onDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
-  final Function(UserRecommendation, bool, bool) onUpdate;
+  final Function(UserRecommendation) onPriorityChanged;
+  final Function(UserRecommendation, bool, bool, bool) onUpdate;
   const RecommendationManagerList(
       {super.key,
       required this.recommendations,
@@ -22,6 +23,7 @@ class RecommendationManagerList extends StatelessWidget {
       required this.onFailedPressed,
       required this.onDeletePressed,
       required this.onFavoritePressed,
+      required this.onPriorityChanged,
       required this.onUpdate});
 
   @override
@@ -33,6 +35,7 @@ class RecommendationManagerList extends StatelessWidget {
       SizedBox(
         width: double.infinity,
         child: Row(children: [
+          Flexible(flex: 1, child: _buildHeaderCell("Priorität", themeData)),
           Flexible(
               flex: 3,
               child: _buildHeaderCell(
@@ -82,6 +85,7 @@ class RecommendationManagerList extends StatelessWidget {
                 onFailedPressed: onFailedPressed,
                 onDeletePressed: onDeletePressed,
                 onFavoritePressed: onFavoritePressed,
+                onPriorityChanged: onPriorityChanged,
                 onUpdate: onUpdate,
               );
             })

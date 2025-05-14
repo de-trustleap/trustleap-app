@@ -8,7 +8,7 @@ class UserRecommendationModel extends Equatable {
   final String id;
   final String? recoID;
   final String? userID;
-  final int? priority;
+  final String? priority;
   final bool? isFavorite;
   final Map<String, dynamic>? recommendation;
 
@@ -24,7 +24,7 @@ class UserRecommendationModel extends Equatable {
       {String? id,
       String? recoID,
       String? userID,
-      int? priority,
+      String? priority,
       bool? isFavorite,
       Map<String, dynamic>? recommendation}) {
     return UserRecommendationModel(
@@ -53,7 +53,7 @@ class UserRecommendationModel extends Equatable {
             ? map['recommendationID'] as String
             : null,
         userID: map['userID'] != null ? map['userID'] as String : null,
-        priority: map['priority'] != null ? map['priority'] as int : null,
+        priority: map['priority'] != null ? map['priority'] as String : null,
         isFavorite:
             map['isFavorite'] != null ? map['isFavorite'] as bool : null,
         recommendation: map['recommendation'] != null
@@ -71,7 +71,7 @@ class UserRecommendationModel extends Equatable {
         id: UniqueID.fromUniqueString(id),
         recoID: recoID,
         userID: userID,
-        priority: priority,
+        priority: _getPriorityFromString(priority),
         isFavorite: isFavorite,
         recommendation: recommendation != null
             ? RecommendationItemModel.fromMap(recommendation!).toDomain()
@@ -84,12 +84,28 @@ class UserRecommendationModel extends Equatable {
         id: recommendation.id.value,
         recoID: recommendation.recoID,
         userID: recommendation.userID,
-        priority: recommendation.priority,
+        priority: recommendation.priority?.name,
         isFavorite: recommendation.isFavorite,
         recommendation: recommendation.recommendation != null
             ? RecommendationItemModel.fromDomain(recommendation.recommendation!)
                 .toMap()
             : null);
+  }
+
+  RecommendationPriority? _getPriorityFromString(String? priority) {
+    if (priority == null) {
+      return null;
+    }
+    switch (priority) {
+      case "low":
+        return RecommendationPriority.low;
+      case "medium":
+        return RecommendationPriority.medium;
+      case "high":
+        return RecommendationPriority.high;
+      default:
+        return RecommendationPriority.medium;
+    }
   }
 
   @override

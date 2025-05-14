@@ -42,7 +42,7 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           recoID: "1",
           userID: "1",
-          priority: 1,
+          priority: RecommendationPriority.medium,
           isFavorite: false,
           recommendation: recommendation)
     ];
@@ -69,7 +69,8 @@ void main() {
             recoItems: recommendations,
             showSetAppointmentSnackBar: false,
             showFinishedSnackBar: false,
-            showFavoriteSnackbar: false)
+            showFavoriteSnackbar: false,
+            showPrioritySnackbar: false)
       ];
       when(mockRecoRepo.getRecommendations(userID))
           .thenAnswer((_) async => right(recommendations));

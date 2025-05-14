@@ -323,7 +323,23 @@ class RecommendationRepositoryImplementation
     final userRecoCollection = firestore.collection("usersRecommendations");
     try {
       await userRecoCollection.doc(recommendation.id.value).set(
-          {"isFavorite": recommendation.isFavorite}, SetOptions(merge: true));
+          {"isFavorite": recommendation.isFavorite ?? false},
+          SetOptions(merge: true));
+      return right(recommendation);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, UserRecommendation>> setPriority(
+      UserRecommendation recommendation) async {
+    final userRecoCollection = firestore.collection("usersRecommendations");
+    final userRecoModel = UserRecommendationModel.fromDomain(recommendation);
+    try {
+      await userRecoCollection.doc(recommendation.id.value).set(
+          {"priority": userRecoModel.priority ?? "medium"},
+          SetOptions(merge: true));
       return right(recommendation);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));

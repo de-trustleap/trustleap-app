@@ -5129,6 +5129,80 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get recommendation_manager_filter_sort_by_status =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_sort_by_status),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_sort_by_status),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_filter_sort_by_favorites =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_sort_by_favorites),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_sort_by_favorites),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_filter_favorites => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_favorites),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_favorites),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_filter_no_favorites => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_no_favorites),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_no_favorites),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_favorite_snackbar => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_favorite_snackbar),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_favorite_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_missing_landingpage_title => (super.noSuchMethod(
+        Invocation.getter(#recommendation_missing_landingpage_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_missing_landingpage_title),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_missing_landingpage_text => (super.noSuchMethod(
+        Invocation.getter(#recommendation_missing_landingpage_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_missing_landingpage_text),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_missing_landingpage_button => (super.noSuchMethod(
+        Invocation.getter(#recommendation_missing_landingpage_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_missing_landingpage_button),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,

@@ -11,7 +11,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
         userID: "1",
-        priority: 1,
+        priority: RecommendationPriority.medium,
         isFavorite: true,
         recommendation: RecommendationItem(
           id: '1',
@@ -33,7 +33,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         recoID: "2",
         userID: "1",
-        priority: 1,
+        priority: RecommendationPriority.medium,
         isFavorite: false,
         recommendation: RecommendationItem(
           id: '2',
@@ -55,7 +55,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         recoID: "3",
         userID: "1",
-        priority: 1,
+        priority: RecommendationPriority.medium,
         isFavorite: true,
         recommendation: RecommendationItem(
           id: '3',

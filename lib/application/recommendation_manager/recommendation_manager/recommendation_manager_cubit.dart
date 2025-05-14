@@ -36,7 +36,8 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
             recoItems: recommendations,
             showSetAppointmentSnackBar: false,
             showFinishedSnackBar: false,
-            showFavoriteSnackbar: false));
+            showFavoriteSnackbar: false,
+            showPrioritySnackbar: false));
       }
     });
   }
@@ -67,7 +68,7 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
   }
 
   void updateReco(UserRecommendation updatedReco, bool shouldBeDeleted,
-      bool settedFavorite) {
+      bool settedFavorite, bool settedPriority) {
     final currentState = state;
     if (currentState is RecommendationGetRecosSuccessState) {
       final updatedList = shouldBeDeleted
@@ -80,13 +81,22 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
             recoItems: updatedList,
             showSetAppointmentSnackBar: false,
             showFinishedSnackBar: false,
-            showFavoriteSnackbar: true));
+            showFavoriteSnackbar: true,
+            showPrioritySnackbar: false));
+      } else if (settedPriority) {
+        emit(RecommendationGetRecosSuccessState(
+            recoItems: updatedList,
+            showSetAppointmentSnackBar: false,
+            showFinishedSnackBar: false,
+            showFavoriteSnackbar: false,
+            showPrioritySnackbar: true));
       } else {
         emit(RecommendationGetRecosSuccessState(
             recoItems: updatedList,
             showSetAppointmentSnackBar: shouldBeDeleted == false,
             showFinishedSnackBar: shouldBeDeleted == true,
-            showFavoriteSnackbar: false));
+            showFavoriteSnackbar: false,
+            showPrioritySnackbar: false));
       }
     }
   }

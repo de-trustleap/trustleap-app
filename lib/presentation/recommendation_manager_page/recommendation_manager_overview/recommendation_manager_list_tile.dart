@@ -16,6 +16,7 @@ import 'package:finanzbegleiter/presentation/recommendation_manager_page/recomme
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class RecommendationManagerListTile extends StatefulWidget {
   final UserRecommendation recommendation;
@@ -25,7 +26,8 @@ class RecommendationManagerListTile extends StatefulWidget {
   final Function(UserRecommendation) onFailedPressed;
   final Function(String, String, String) onDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
-  final Function(UserRecommendation, bool, bool) onUpdate;
+  final Function(UserRecommendation) onPriorityChanged;
+  final Function(UserRecommendation, bool, bool, bool) onUpdate;
   const RecommendationManagerListTile(
       {super.key,
       required this.recommendation,
@@ -35,6 +37,7 @@ class RecommendationManagerListTile extends StatefulWidget {
       required this.onFailedPressed,
       required this.onDeletePressed,
       required this.onFavoritePressed,
+      required this.onPriorityChanged,
       required this.onUpdate});
 
   @override
@@ -56,6 +59,7 @@ class _RecommendationManagerListTileState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
     final helper = RecommendationManagerHelper(localization: localization);
     final cubit = Modular.get<RecommendationManagerTileCubit>();
     return BlocConsumer<RecommendationManagerTileCubit,
@@ -71,10 +75,10 @@ class _RecommendationManagerListTileState
           setState(() {
             _recommendation = state.recommendation;
           });
-          widget.onUpdate(
-              state.recommendation, false, state.settedFavorite ?? false);
+          widget.onUpdate(state.recommendation, false,
+              state.settedFavorite ?? false, state.settedPriority ?? false);
         } else if (state is RecommendationSetFinishedSuccessState) {
-          widget.onUpdate(state.recommendation, true, false);
+          widget.onUpdate(state.recommendation, true, false, false);
         }
       },
       builder: (context, state) {
@@ -82,6 +86,10 @@ class _RecommendationManagerListTileState
             backgroundColor: themeData.colorScheme.surface,
             showDivider: false,
             titleWidget: Row(children: [
+              Flexible(
+                  flex: 1,
+                  child:
+                      _buildPriorityCell(_recommendation.priority, themeData)),
               Flexible(
                   flex: 3,
                   child: _buildCell(
@@ -165,7 +173,23 @@ class _RecommendationManagerListTileState
                       state.recommendation.id.value ==
                           _recommendation.id.value) ...[
                     const LoadingIndicator(size: 20)
-                  ]
+                  ],
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    _getPriorityIcon(_recommendation.priority, themeData),
+                    const SizedBox(width: 8),
+                    PopupMenuButton<RecommendationPriority>(
+                        tooltip: "Priorität auswählen",
+                        itemBuilder: (context) => [
+                              _getPopupMenuItem(RecommendationPriority.high,
+                                  themeData, localization, responsiveValue),
+                              _getPopupMenuItem(RecommendationPriority.medium,
+                                  themeData, localization, responsiveValue),
+                              _getPopupMenuItem(RecommendationPriority.low,
+                                  themeData, localization, responsiveValue)
+                            ],
+                        onSelected: (value) => widget.onPriorityChanged(
+                            _recommendation.copyWith(priority: value)))
+                  ])
                 ],
               ),
               if (state is RecommendationSetStatusFailureState &&
@@ -193,4 +217,49 @@ class _RecommendationManagerListTileState
       ),
     );
   }
+
+  Widget _buildPriorityCell(
+      RecommendationPriority? priority, ThemeData themeData) {
+    return Container(
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.all(8.0),
+        child: _getPriorityIcon(priority, themeData));
+  }
+
+  Widget _getPriorityIcon(
+      RecommendationPriority? priority, ThemeData themeData) {
+    switch (priority) {
+      case RecommendationPriority.low:
+        return Icon(Icons.arrow_downward,
+            size: 24, color: themeData.colorScheme.primary);
+      case RecommendationPriority.high:
+        return Icon(Icons.arrow_upward,
+            size: 24, color: themeData.colorScheme.error);
+      default:
+        return const Icon(Icons.remove, size: 24, color: Colors.lightBlue);
+    }
+  }
+
+  PopupMenuItem<RecommendationPriority> _getPopupMenuItem(
+      RecommendationPriority priority,
+      ThemeData themeData,
+      AppLocalizations localization,
+      ResponsiveBreakpointsData responsiveValue) {
+    return PopupMenuItem(
+        value: priority,
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          _getPriorityIcon(priority, themeData),
+          const SizedBox(width: 8),
+          Text(priority.getLocalizedLabel(localization),
+              style: responsiveValue.isMobile
+                  ? themeData.textTheme.bodySmall
+                  : themeData.textTheme.bodyMedium)
+        ]));
+  }
 }
+
+// TODO: TESTS ANPASSEN (FERTIG)
+// TODO: TESTS FÜR RECO UND CUBIT SCHREIBEN (FERTIG)
+// TODO: FILTER ANPASSEN
+// TODO: TESTS FÜR FILTER ANPASSEN
+// TODO: LOCALIZATIONS

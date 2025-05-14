@@ -39,7 +39,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
         userID: "1",
-        priority: 1,
+        priority: RecommendationPriority.medium,
         isFavorite: false,
         recommendation: recommendation);
 
@@ -105,7 +105,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
         userID: "1",
-        priority: 1,
+        priority: RecommendationPriority.medium,
         isFavorite: false,
         recommendation: recommendation);
 
@@ -173,7 +173,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
         userID: "1",
-        priority: 1,
+        priority: RecommendationPriority.medium,
         isFavorite: false,
         recommendation: recommendation);
 
@@ -217,6 +217,69 @@ void main() {
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
       recoManagerTileCubit.setFavorite(userRecommendation);
+    });
+  });
+
+  group("RecommendationManagerTileCubit_setPriority", () {
+    final date = DateTime.now();
+    final recommendation = RecommendationItem(
+        id: "1",
+        name: "Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: StatusLevel.contactFormSent,
+        statusTimestamps: {0: date, 1: date, 2: date});
+    final userRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: "1",
+        priority: RecommendationPriority.medium,
+        isFavorite: false,
+        recommendation: recommendation);
+    test("should call recommendation repo when function is called", () async {
+      // Given
+      when(mockRecoRepo.setPriority(userRecommendation))
+          .thenAnswer((_) async => right(userRecommendation));
+      // When
+      recoManagerTileCubit.setPriority(userRecommendation);
+      await untilCalled(mockRecoRepo.setPriority(userRecommendation));
+      // Then
+      verify(mockRecoRepo.setPriority(userRecommendation));
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+    test(
+        "should emit RecommendationSetStatusSuccessState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        RecommendationSetStatusSuccessState(
+            recommendation: userRecommendation, settedPriority: true)
+      ];
+      when(mockRecoRepo.setPriority(userRecommendation))
+          .thenAnswer((_) async => right(userRecommendation));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
+      recoManagerTileCubit.setPriority(userRecommendation);
+    });
+
+    test(
+        "should emit RecommendationSetStatusFailureState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        RecommendationSetStatusFailureState(
+            failure: BackendFailure(), recommendation: userRecommendation)
+      ];
+      when(mockRecoRepo.setPriority(userRecommendation))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
+      recoManagerTileCubit.setPriority(userRecommendation);
     });
   });
 }
