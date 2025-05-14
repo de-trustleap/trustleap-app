@@ -275,7 +275,9 @@ class _RecommendationManagerExpandableFilterState
                   DropdownMenu<RecommendationPriorityFilterState>(
                       textStyle: themeData.textTheme.bodySmall,
                       width: responsiveValue.largerThan(MOBILE) ? 250 : 400,
-                      label: Text("Sortieren nach Priorität",
+                      label: Text(
+                          localization
+                              .recommendation_manager_filter_sort_by_priorities,
                           style: themeData.textTheme.bodySmall!
                               .copyWith(fontSize: 12)),
                       initialSelection: RecommendationPriorityFilterState.all,
@@ -288,13 +290,13 @@ class _RecommendationManagerExpandableFilterState
                                 .recommendation_manager_filter_status_all),
                         DropdownMenuEntry(
                             value: RecommendationPriorityFilterState.high,
-                            label: "Hoch"),
+                            label: localization.recommendation_priority_high),
                         DropdownMenuEntry(
                             value: RecommendationPriorityFilterState.medium,
-                            label: "Mittel"),
+                            label: localization.recommendation_priority_medium),
                         DropdownMenuEntry(
                             value: RecommendationPriorityFilterState.low,
-                            label: "Niedrig"),
+                            label: localization.recommendation_priority_low),
                       ],
                       onSelected: (sortBy) {
                         filterStates.priorityFilterState =

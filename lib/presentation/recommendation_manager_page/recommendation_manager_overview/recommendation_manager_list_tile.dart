@@ -163,7 +163,8 @@ class _RecommendationManagerListTileState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ClickableLink(
-                      title: "Landingpage anzeigen",
+                      title: localization
+                          .recommendation_manager_show_landingpage_button,
                       onTap: () {
                         final baseURL = Environment().getLandingpageBaseURL();
                         CustomNavigator.openURLInNewTab(
@@ -178,7 +179,8 @@ class _RecommendationManagerListTileState
                     _getPriorityIcon(_recommendation.priority, themeData),
                     const SizedBox(width: 8),
                     PopupMenuButton<RecommendationPriority>(
-                        tooltip: "Priorität auswählen",
+                        tooltip: localization
+                            .recommendation_manager_select_priority_tooltip,
                         itemBuilder: (context) => [
                               _getPopupMenuItem(RecommendationPriority.high,
                                   themeData, localization, responsiveValue),
@@ -257,9 +259,3 @@ class _RecommendationManagerListTileState
         ]));
   }
 }
-
-// TODO: TESTS ANPASSEN (FERTIG)
-// TODO: TESTS FÜR RECO UND CUBIT SCHREIBEN (FERTIG)
-// TODO: FILTER ANPASSEN
-// TODO: TESTS FÜR FILTER ANPASSEN
-// TODO: LOCALIZATIONS

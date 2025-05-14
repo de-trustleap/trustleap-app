@@ -35,7 +35,11 @@ class RecommendationManagerList extends StatelessWidget {
       SizedBox(
         width: double.infinity,
         child: Row(children: [
-          Flexible(flex: 1, child: _buildHeaderCell("Priorität", themeData)),
+          Flexible(
+              flex: 1,
+              child: _buildHeaderCell(
+                  localization.recommendation_manager_list_header_priority,
+                  themeData)),
           Flexible(
               flex: 3,
               child: _buildHeaderCell(

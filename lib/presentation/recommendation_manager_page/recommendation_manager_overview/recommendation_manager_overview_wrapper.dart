@@ -144,8 +144,8 @@ class _RecommendationManagerPageState
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_favorite_snackbar);
             } else if (state.showPrioritySnackbar) {
-              CustomSnackBar.of(context)
-                  .showCustomSnackBar("Priorität erfolgreich angepasst!");
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  localization.recommendation_manager_priority_snackbar);
             } else if (state.showSetAppointmentSnackBar) {
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_scheduled_snackbar);

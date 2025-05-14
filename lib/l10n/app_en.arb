@@ -1966,6 +1966,10 @@
     "@recommendation_manager_filter_status_all": {
         "description": "All Recommendation Status dropdown menu entry in the Filter View on the Recommendation Manager page"
     },
+    "recommendation_manager_list_header_priority": "Priority",
+    "@recommendation_manager_list_header_priority": {
+        "description": "Priority name entry in the list header on the Recommendation Manager page"
+    },
     "recommendation_manager_list_header_receiver": "Recommendation name",
     "@recommendation_manager_list_header_receiver": {
         "description": "Recommendation name entry in the list header on the Recommendation Manager page"
@@ -2161,5 +2165,33 @@
     "recommendation_missing_landingpage_button": "To the landingpages",
     "@recommendation_missing_landingpage_button": {
         "description": "Button on the page that is displayed on the recommendation page if no landing page was found, which leads to the landing page menu"
+    },
+    "recommendation_priority_high": "High",
+    "@recommendation_priority_high": {
+        "description": "The priority High for a recommendation"
+    },
+    "recommendation_priority_medium": "Medium",
+    "@recommendation_priority_medium": {
+        "description": "The priority Medium for a recommendation"
+    },
+    "recommendation_priority_low": "Low",
+    "@recommendation_priority_low": {
+        "description": "The priority Low for a recommendation"
+    },
+    "recommendation_manager_filter_sort_by_priorities": "Sort by priority",
+    "@recommendation_manager_filter_sort_by_priorities": {
+        "description": "The text above the priority dropdown menu in the filter on the Recommendation Manager page"
+    },
+    "recommendation_manager_show_landingpage_button": "Show landingpage",
+    "@recommendation_manager_show_landingpage_button": {
+        "description": "Button in the recommendation manager cell that opens the landingpage"
+    },
+    "recommendation_manager_select_priority_tooltip": "Select priority",
+    "@recommendation_manager_select_priority_tooltip": {
+        "description": "Tooltip for the button in the recommendation manager cell that opens the priority dropdown"
+    },
+    "recommendation_manager_priority_snackbar": "Priority successfully changed!",
+    "@recommendation_manager_priority_snackbar": {
+        "description": "Snackbar message when priority of recommendation has been successfully changed on the recommendation manager page"
     }
 }

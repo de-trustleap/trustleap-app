@@ -11,11 +11,11 @@ enum RecommendationPriority {
   String getLocalizedLabel(AppLocalizations localizations) {
     switch (this) {
       case RecommendationPriority.low:
-        return "Niedrig";
+        return localizations.recommendation_priority_low;
       case RecommendationPriority.medium:
-        return "Mittel";
+        return localizations.recommendation_priority_medium;
       case RecommendationPriority.high:
-        return "Hoch";
+        return localizations.recommendation_priority_high;
     }
   }
 }

@@ -1465,6 +1465,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_filter_status_all => 'All';
 
   @override
+  String get recommendation_manager_list_header_priority => 'Priority';
+
+  @override
   String get recommendation_manager_list_header_receiver => 'Recommendation name';
 
   @override
@@ -1610,4 +1613,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendation_missing_landingpage_button => 'To the landingpages';
+
+  @override
+  String get recommendation_priority_high => 'High';
+
+  @override
+  String get recommendation_priority_medium => 'Medium';
+
+  @override
+  String get recommendation_priority_low => 'Low';
+
+  @override
+  String get recommendation_manager_filter_sort_by_priorities => 'Sort by priority';
+
+  @override
+  String get recommendation_manager_show_landingpage_button => 'Show landingpage';
+
+  @override
+  String get recommendation_manager_select_priority_tooltip => 'Select priority';
+
+  @override
+  String get recommendation_manager_priority_snackbar => 'Priority successfully changed!';
 }
