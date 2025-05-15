@@ -26,6 +26,8 @@ class UserRecommendation extends Equatable {
   final String? userID;
   final RecommendationPriority? priority;
   final bool? isFavorite;
+  final String? notes;
+  final DateTime? notesLastEdited;
   final RecommendationItem? recommendation;
 
   const UserRecommendation(
@@ -34,6 +36,8 @@ class UserRecommendation extends Equatable {
       required this.userID,
       required this.priority,
       required this.isFavorite,
+      required this.notes,
+      required this.notesLastEdited,
       required this.recommendation});
 
   UserRecommendation copyWith(
@@ -42,6 +46,8 @@ class UserRecommendation extends Equatable {
       String? userID,
       RecommendationPriority? priority,
       bool? isFavorite,
+      String? notes,
+      DateTime? notesLastEdited,
       RecommendationItem? recommendation}) {
     return UserRecommendation(
         id: id ?? this.id,
@@ -49,10 +55,20 @@ class UserRecommendation extends Equatable {
         userID: userID ?? this.userID,
         priority: priority ?? this.priority,
         isFavorite: isFavorite ?? this.isFavorite,
+        notes: notes ?? this.notes,
+        notesLastEdited: notesLastEdited ?? this.notesLastEdited,
         recommendation: recommendation ?? this.recommendation);
   }
 
   @override
-  List<Object?> get props =>
-      [id, recoID, userID, priority, isFavorite, recommendation];
+  List<Object?> get props => [
+        id,
+        recoID,
+        userID,
+        priority,
+        isFavorite,
+        notes,
+        notesLastEdited,
+        recommendation
+      ];
 }

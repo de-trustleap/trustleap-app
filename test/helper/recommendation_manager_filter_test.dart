@@ -13,6 +13,8 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         isFavorite: true,
+        notes: "Test",
+        notesLastEdited: null,
         recommendation: RecommendationItem(
           id: '1',
           name: 'Anna',
@@ -35,6 +37,8 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         isFavorite: false,
+        notes: "Test",
+        notesLastEdited: null,
         recommendation: RecommendationItem(
           id: '2',
           name: 'Ben',
@@ -57,6 +61,8 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         isFavorite: true,
+        notes: "Test",
+        notesLastEdited: null,
         recommendation: RecommendationItem(
           id: '3',
           name: 'Clara',

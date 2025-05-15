@@ -21,4 +21,6 @@ abstract class RecommendationRepository {
       UserRecommendation recommendation);
   Future<Either<DatabaseFailure, UserRecommendation>> setPriority(
       UserRecommendation recommendation);
+  Future<Either<DatabaseFailure, UserRecommendation>> setNotes(
+      UserRecommendation recommendation);
 }

@@ -5181,6 +5181,15 @@ class MockAppLocalizations extends _i1.Mock implements _i22.AppLocalizations {
       ) as String);
 
   @override
+  String get recommendation_manager_list_header_priority => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_list_header_priority),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_list_header_priority),
+        ),
+      ) as String);
+
+  @override
   String get recommendation_manager_list_header_receiver => (super.noSuchMethod(
         Invocation.getter(#recommendation_manager_list_header_receiver),
         returnValue: _i23.dummyValue<String>(
@@ -5652,6 +5661,72 @@ class MockAppLocalizations extends _i1.Mock implements _i22.AppLocalizations {
         returnValue: _i23.dummyValue<String>(
           this,
           Invocation.getter(#recommendation_missing_landingpage_button),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_priority_high => (super.noSuchMethod(
+        Invocation.getter(#recommendation_priority_high),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_priority_high),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_priority_medium => (super.noSuchMethod(
+        Invocation.getter(#recommendation_priority_medium),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_priority_medium),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_priority_low => (super.noSuchMethod(
+        Invocation.getter(#recommendation_priority_low),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_priority_low),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_filter_sort_by_priorities =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_sort_by_priorities),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_sort_by_priorities),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_show_landingpage_button =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_show_landingpage_button),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_show_landingpage_button),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_select_priority_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_select_priority_tooltip),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_select_priority_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_priority_snackbar => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_priority_snackbar),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_priority_snackbar),
         ),
       ) as String);
 
@@ -7113,6 +7188,28 @@ class MockRecommendationRepository extends _i1.Mock
           this,
           Invocation.method(
             #setPriority,
+            [recommendation],
+          ),
+        )),
+      ) as _i18
+          .Future<_i2.Either<_i27.DatabaseFailure, _i40.UserRecommendation>>);
+
+  @override
+  _i18.Future<
+      _i2.Either<_i27.DatabaseFailure, _i40.UserRecommendation>> setNotes(
+          _i40.UserRecommendation? recommendation) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setNotes,
+          [recommendation],
+        ),
+        returnValue: _i18.Future<
+                _i2
+                .Either<_i27.DatabaseFailure, _i40.UserRecommendation>>.value(
+            _FakeEither_0<_i27.DatabaseFailure, _i40.UserRecommendation>(
+          this,
+          Invocation.method(
+            #setNotes,
             [recommendation],
           ),
         )),

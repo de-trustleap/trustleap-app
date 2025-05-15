@@ -10,6 +10,8 @@ class UserRecommendationModel extends Equatable {
   final String? userID;
   final String? priority;
   final bool? isFavorite;
+  final String? notes;
+  final DateTime? notesLastEdited;
   final Map<String, dynamic>? recommendation;
 
   const UserRecommendationModel(
@@ -18,6 +20,8 @@ class UserRecommendationModel extends Equatable {
       required this.userID,
       required this.priority,
       required this.isFavorite,
+      required this.notes,
+      required this.notesLastEdited,
       required this.recommendation});
 
   UserRecommendationModel copyWith(
@@ -26,6 +30,8 @@ class UserRecommendationModel extends Equatable {
       String? userID,
       String? priority,
       bool? isFavorite,
+      String? notes,
+      DateTime? notesLastEdited,
       Map<String, dynamic>? recommendation}) {
     return UserRecommendationModel(
         id: id ?? this.id,
@@ -33,6 +39,8 @@ class UserRecommendationModel extends Equatable {
         userID: userID ?? this.userID,
         priority: priority ?? this.priority,
         isFavorite: isFavorite ?? this.isFavorite,
+        notes: notes ?? this.notes,
+        notesLastEdited: notesLastEdited ?? this.notesLastEdited,
         recommendation: recommendation ?? this.recommendation);
   }
 
@@ -42,7 +50,9 @@ class UserRecommendationModel extends Equatable {
       'recoID': recoID,
       'userID': userID,
       'priority': priority,
-      'isFavorite': isFavorite
+      'isFavorite': isFavorite,
+      'notes': notes,
+      'notesLastEdited': notesLastEdited?.toIso8601String()
     };
   }
 
@@ -56,6 +66,10 @@ class UserRecommendationModel extends Equatable {
         priority: map['priority'] != null ? map['priority'] as String : null,
         isFavorite:
             map['isFavorite'] != null ? map['isFavorite'] as bool : null,
+        notes: map['notes'] != null ? map['notes'] as String : null,
+        notesLastEdited: map['notesLastEdited'] != null
+            ? DateTime.parse(map['notesLastEdited'])
+            : null,
         recommendation: map['recommendation'] != null
             ? map['recommendation'] as Map<String, dynamic>
             : null);
@@ -73,6 +87,8 @@ class UserRecommendationModel extends Equatable {
         userID: userID,
         priority: _getPriorityFromString(priority),
         isFavorite: isFavorite,
+        notes: notes,
+        notesLastEdited: notesLastEdited,
         recommendation: recommendation != null
             ? RecommendationItemModel.fromMap(recommendation!).toDomain()
             : null);
@@ -86,6 +102,8 @@ class UserRecommendationModel extends Equatable {
         userID: recommendation.userID,
         priority: recommendation.priority?.name,
         isFavorite: recommendation.isFavorite,
+        notes: recommendation.notes,
+        notesLastEdited: recommendation.notesLastEdited,
         recommendation: recommendation.recommendation != null
             ? RecommendationItemModel.fromDomain(recommendation.recommendation!)
                 .toMap()
@@ -109,6 +127,14 @@ class UserRecommendationModel extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [id, recoID, userID, priority, isFavorite, recommendation];
+  List<Object?> get props => [
+        id,
+        recoID,
+        userID,
+        priority,
+        isFavorite,
+        notes,
+        notesLastEdited,
+        recommendation
+      ];
 }

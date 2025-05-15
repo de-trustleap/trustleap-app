@@ -2193,5 +2193,29 @@
     "recommendation_manager_priority_snackbar": "Priorität erfolgreich angepasst!",
     "@recommendation_manager_priority_snackbar": {
         "description": "Snackbar Nachricht wenn Priorität bei Empfehlung erfolgreich angepasst wurde auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_notes_placeholder": "Hier Notizen eintragen...",
+    "@recommendation_manager_notes_placeholder": {
+        "description": "Platzhalter für das Notizen Textfeld in den Zellen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_notes_save_button_tooltip": "Notizen speichern",
+    "@recommendation_manager_notes_save_button_tooltip": {
+        "description": "Tooltip für den Notizen Speichern Button in den Zellen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_notes_edit_button_tooltip": "Notizen bearbeiten",
+    "@recommendation_manager_notes_edit_button_tooltip": {
+        "description": "Tooltip für den Notizen Bearbeiten Button in den Zellen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_notes_last_updated": "Notizen zuletzt bearbeitet am:",
+    "@recommendation_manager_notes_last_updated": {
+        "description": "Notizen Zuletzt bearbeitet Text in den Zellen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_add_note_button_tooltip": "Notiz hinzufügen",
+    "@recommendation_manager_add_note_button_tooltip": {
+        "description": "Tooltip für den Notiz hinzufügen Button in den Zellen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_notes_snackbar": "Notizen erfolgreich angepasst!",
+    "@recommendation_manager_notes_snackbar": {
+        "description": "Snackbar Nachricht wenn Notizen bei Empfehlung erfolgreich angepasst wurden auf der Empfehlungsmanager Seite"
     }
 }

@@ -37,12 +37,17 @@ class RecommendationSetStatusSuccessState extends RecommendationManagerTileState
   final UserRecommendation recommendation;
   final bool? settedFavorite;
   final bool? settedPriority;
+  final bool? settedNotes;
 
   RecommendationSetStatusSuccessState(
-      {required this.recommendation, this.settedFavorite, this.settedPriority});
+      {required this.recommendation,
+      this.settedFavorite,
+      this.settedPriority,
+      this.settedNotes});
 
   @override
-  List<Object?> get props => [recommendation, settedFavorite, settedPriority];
+  List<Object?> get props =>
+      [recommendation, settedFavorite, settedPriority, settedNotes];
 }
 
 class RecommendationSetFinishedSuccessState

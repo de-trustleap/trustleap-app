@@ -44,6 +44,8 @@ void main() {
           userID: "1",
           priority: RecommendationPriority.medium,
           isFavorite: false,
+          notes: "Test",
+          notesLastEdited: null,
           recommendation: recommendation)
     ];
 
@@ -70,7 +72,8 @@ void main() {
             showSetAppointmentSnackBar: false,
             showFinishedSnackBar: false,
             showFavoriteSnackbar: false,
-            showPrioritySnackbar: false)
+            showPrioritySnackbar: false,
+            showNotesSnackbar: false)
       ];
       when(mockRecoRepo.getRecommendations(userID))
           .thenAnswer((_) async => right(recommendations));

@@ -2193,5 +2193,29 @@
     "recommendation_manager_priority_snackbar": "Priority successfully changed!",
     "@recommendation_manager_priority_snackbar": {
         "description": "Snackbar message when priority of recommendation has been successfully changed on the recommendation manager page"
+    },
+    "recommendation_manager_notes_placeholder": "Add notes here...",
+    "@recommendation_manager_notes_placeholder": {
+        "description": "Placeholder for the Notes text field in the cells on the Recommendation Manager page"
+    },
+    "recommendation_manager_notes_save_button_tooltip": "Save notes",
+    "@recommendation_manager_notes_save_button_tooltip": {
+        "description": "Tooltip for the Save Notes button in the cells on the Recommendation Manager page"
+    },
+    "recommendation_manager_notes_edit_button_tooltip": "Edit notes",
+    "@recommendation_manager_notes_edit_button_tooltip": {
+        "description": "Tooltip for the Edit Notes button in the cells on the Recommendation Manager page"
+    },
+    "recommendation_manager_notes_last_updated": "Notes last edited at:",
+    "@recommendation_manager_notes_last_updated": {
+        "description": "Notes Last edited text in the cells on the Recommendation Manager page"
+    },
+    "recommendation_manager_add_note_button_tooltip": "Add note",
+    "@recommendation_manager_add_note_button_tooltip": {
+        "description": "Tooltip for the Add Note button in the cells on the Recommendation Manager page"
+    },
+    "recommendation_manager_notes_snackbar": "Notes successfully changed!",
+    "@recommendation_manager_notes_snackbar": {
+        "description": "Snackbar message when notes of recommendation has been successfully changed on the recommendation manager page"
     }
 }

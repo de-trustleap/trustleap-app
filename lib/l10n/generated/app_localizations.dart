@@ -3328,6 +3328,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Priority successfully changed!'**
   String get recommendation_manager_priority_snackbar;
+
+  /// Placeholder for the Notes text field in the cells on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Add notes here...'**
+  String get recommendation_manager_notes_placeholder;
+
+  /// Tooltip for the Save Notes button in the cells on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Save notes'**
+  String get recommendation_manager_notes_save_button_tooltip;
+
+  /// Tooltip for the Edit Notes button in the cells on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Edit notes'**
+  String get recommendation_manager_notes_edit_button_tooltip;
+
+  /// Notes Last edited text in the cells on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Notes last edited at:'**
+  String get recommendation_manager_notes_last_updated;
+
+  /// Tooltip for the Add Note button in the cells on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Add note'**
+  String get recommendation_manager_add_note_button_tooltip;
+
+  /// Snackbar message when notes of recommendation has been successfully changed on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Notes successfully changed!'**
+  String get recommendation_manager_notes_snackbar;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
