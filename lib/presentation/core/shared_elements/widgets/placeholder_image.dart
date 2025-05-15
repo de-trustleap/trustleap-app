@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PlaceholderImage extends StatelessWidget {
@@ -24,9 +23,7 @@ class PlaceholderImage extends StatelessWidget {
                   ? themeData.colorScheme.secondary
                   : Colors.transparent),
           image: const DecorationImage(
-              image: AssetImage(kDebugMode
-                  ? "images/placeholder.png"
-                  : "assets/images/placeholder.png"))),
+              image: AssetImage("assets/images/placeholder.png"))),
     );
   }
 }

@@ -5,7 +5,6 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/network_image_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
@@ -120,9 +119,7 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
                 height: widget.isConfigMenu ? 200 : widget.properties.height,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(kDebugMode
-                        ? "images/placeholder.png"
-                        : "assets/images/placeholder.png"),
+                    image: AssetImage("assets/images/placeholder.png"),
                   ),
                 ),
               )

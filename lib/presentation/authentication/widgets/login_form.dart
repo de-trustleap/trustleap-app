@@ -11,7 +11,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_e
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/route_paths.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -96,9 +95,7 @@ class _LoginFormState extends State<LoginForm> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     children: [
                       SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-                      Image.asset(kDebugMode
-                          ? "images/logo/logo_text.png"
-                          : "assets/images/logo/logo_text.png"),
+                      Image.asset("assets/images/logo/logo_text.png"),
                       const SizedBox(height: 80),
                       FormTextfield(
                           controller: emailTextController,

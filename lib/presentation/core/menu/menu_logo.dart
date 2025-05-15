@@ -1,6 +1,5 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/route_paths.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MenuLogo extends StatefulWidget {
@@ -44,9 +43,7 @@ class _MyWidgetState extends State<MenuLogo> {
           hoverColor: Colors.transparent,
           child: Center(
             child: Image.asset(
-              kDebugMode
-                  ? "images/logo/logo.png"
-                  : "assets/images/logo/logo.png",
+              "assets/images/logo/logo.png",
               width: 100,
               height: 100,
             ),
