@@ -1634,4 +1634,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get recommendation_manager_priority_snackbar => 'Priorität erfolgreich angepasst!';
+
+  @override
+  String get recommendation_manager_notes_placeholder => 'Hier Notizen eintragen...';
+
+  @override
+  String get recommendation_manager_notes_save_button_tooltip => 'Notizen speichern';
+
+  @override
+  String get recommendation_manager_notes_edit_button_tooltip => 'Notizen bearbeiten';
+
+  @override
+  String get recommendation_manager_notes_last_updated => 'Notizen zuletzt bearbeitet am:';
 }

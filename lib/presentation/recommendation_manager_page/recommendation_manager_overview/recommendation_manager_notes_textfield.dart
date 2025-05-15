@@ -72,7 +72,8 @@ class _RecommendationManagerNotesTextfieldState
                 child: FormTextfield(
                     controller: _controller,
                     disabled: false,
-                    placeholder: "Hier Notizen eintragen...",
+                    placeholder:
+                        localization.recommendation_manager_notes_placeholder,
                     minLines: 2,
                     maxLines: 10,
                     desktopStyle: themeData.textTheme.bodySmall,
@@ -83,14 +84,16 @@ class _RecommendationManagerNotesTextfieldState
         const SizedBox(width: 8),
         IconButton(
             onPressed: _isEditing ? _save : _toggleEdit,
-            tooltip: _isEditing ? "Notizen speichern" : "Notizen bearbeiten",
+            tooltip: _isEditing
+                ? localization.recommendation_manager_notes_save_button_tooltip
+                : localization.recommendation_manager_notes_edit_button_tooltip,
             icon: Icon(_isEditing ? Icons.save : Icons.edit,
                 size: 24, color: themeData.colorScheme.secondary))
       ]),
       if (widget.recommendation.notesLastEdited != null) ...[
         const SizedBox(height: 4),
         Text(
-            "Notizen zuletzt bearbeitet am: ${RecommendationManagerHelper(localization: localization).getDateText(context, widget.recommendation.notesLastEdited!)}",
+            "${localization.recommendation_manager_notes_last_updated} ${RecommendationManagerHelper(localization: localization).getDateText(context, widget.recommendation.notesLastEdited!)}",
             style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13))
       ]
     ]);
