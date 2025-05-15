@@ -62,7 +62,7 @@ class _RecommendationManagerListTileIconRowState
                   child: ElevatedButton(
                       onPressed: widget.recommendation.recommendation
                                       ?.statusLevel ==
-                                  StatusLevel.linkClicked &&
+                                  StatusLevel.contactFormSent &&
                               !buttonsDisabled
                           ? () =>
                               widget.onAppointmentPressed(widget.recommendation)
