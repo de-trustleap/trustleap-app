@@ -62,6 +62,8 @@ flutter:
   # Change assets/images to assets/assets/images for release build
   assets:
     - assets/images/
+    - assets/images/logo/
+    - assets/images/icons/
 
   fonts:
     - family: Poppins

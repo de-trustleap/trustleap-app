@@ -17,7 +17,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_t
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/route_paths.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -216,9 +215,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   SizedBox(
                       width: getResponsiveWidth(1),
-                      child: Image.asset(kDebugMode
-                          ? "images/logo/logo_text.png"
-                          : "assets/images/logo/logo_text.png")),
+                      child: Image.asset("assets/images/logo/logo_text.png")),
                 ]),
                 SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
