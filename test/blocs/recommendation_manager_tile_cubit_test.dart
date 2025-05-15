@@ -286,4 +286,67 @@ void main() {
       recoManagerTileCubit.setPriority(userRecommendation);
     });
   });
+
+  group("RecommendationManagerTileCubit_setNotes", () {
+    final date = DateTime.now();
+    final recommendation = RecommendationItem(
+        id: "1",
+        name: "Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: StatusLevel.contactFormSent,
+        statusTimestamps: {0: date, 1: date, 2: date});
+    final userRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: "1",
+        priority: RecommendationPriority.medium,
+        isFavorite: false,
+        notes: "Test",
+        recommendation: recommendation);
+    test("should call recommendation repo when function is called", () async {
+      // Given
+      when(mockRecoRepo.setNotes(userRecommendation))
+          .thenAnswer((_) async => right(userRecommendation));
+      // When
+      recoManagerTileCubit.setNotes(userRecommendation);
+      await untilCalled(mockRecoRepo.setNotes(userRecommendation));
+      // Then
+      verify(mockRecoRepo.setNotes(userRecommendation));
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+    test(
+        "should emit RecommendationSetStatusSuccessState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        RecommendationSetStatusSuccessState(
+            recommendation: userRecommendation, settedNotes: true)
+      ];
+      when(mockRecoRepo.setNotes(userRecommendation))
+          .thenAnswer((_) async => right(userRecommendation));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
+      recoManagerTileCubit.setNotes(userRecommendation);
+    });
+    test(
+        "should emit RecommendationSetStatusFailureState when call was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        RecommendationSetStatusFailureState(
+            failure: BackendFailure(), recommendation: userRecommendation)
+      ];
+      when(mockRecoRepo.setNotes(userRecommendation))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // Then
+      expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
+      recoManagerTileCubit.setNotes(userRecommendation);
+    });
+  });
 }

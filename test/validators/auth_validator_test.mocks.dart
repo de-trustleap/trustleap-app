@@ -4728,6 +4728,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get recommendation_manager_list_header_priority => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_list_header_priority),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_list_header_priority),
+        ),
+      ) as String);
+
+  @override
   String get recommendation_manager_list_header_receiver => (super.noSuchMethod(
         Invocation.getter(#recommendation_manager_list_header_receiver),
         returnValue: _i3.dummyValue<String>(
@@ -5199,6 +5208,72 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#recommendation_missing_landingpage_button),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_priority_high => (super.noSuchMethod(
+        Invocation.getter(#recommendation_priority_high),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_priority_high),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_priority_medium => (super.noSuchMethod(
+        Invocation.getter(#recommendation_priority_medium),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_priority_medium),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_priority_low => (super.noSuchMethod(
+        Invocation.getter(#recommendation_priority_low),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_priority_low),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_filter_sort_by_priorities =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_filter_sort_by_priorities),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_filter_sort_by_priorities),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_show_landingpage_button =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_show_landingpage_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_show_landingpage_button),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_select_priority_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_select_priority_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_select_priority_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_priority_snackbar => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_priority_snackbar),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_priority_snackbar),
         ),
       ) as String);
 
