@@ -1646,4 +1646,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendation_manager_notes_last_updated => 'Notes last edited at:';
+
+  @override
+  String get recommendation_manager_add_note_button_tooltip => 'Add note';
+
+  @override
+  String get recommendation_manager_notes_snackbar => 'Notes successfully changed!';
 }

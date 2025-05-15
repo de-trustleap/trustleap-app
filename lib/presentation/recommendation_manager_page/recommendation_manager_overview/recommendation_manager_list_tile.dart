@@ -204,7 +204,8 @@ class _RecommendationManagerListTileState
                             _recommendation.notes!.isEmpty)) ...[
                       const SizedBox(width: 16),
                       IconButton(
-                          tooltip: "Notiz hinzufügen",
+                          tooltip: localization
+                              .recommendation_manager_add_note_button_tooltip,
                           onPressed: () {
                             setState(() {
                               addNote = true;
@@ -294,9 +295,3 @@ class _RecommendationManagerListTileState
         ]));
   }
 }
-
-// TODO: SET NOTE FUNKTION IN REPO UND CUBIT IMPLEMENTIEREN (FERTIG)
-// TODO: FUNKTION BEI SAVE AUFRUFEN (FERTIG)
-// TODO: TESTS REPARIEREN (FERTIG)
-// TODO: NEUE TESTS FÜR RECO UND CUBIT (FERTIG)
-// TODO: LOCALIZATION

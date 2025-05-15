@@ -3352,6 +3352,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notes last edited at:'**
   String get recommendation_manager_notes_last_updated;
+
+  /// Tooltip for the Add Note button in the cells on the Recommendation Manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Add note'**
+  String get recommendation_manager_add_note_button_tooltip;
+
+  /// Snackbar message when notes of recommendation has been successfully changed on the recommendation manager page
+  ///
+  /// In en, this message translates to:
+  /// **'Notes successfully changed!'**
+  String get recommendation_manager_notes_snackbar;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

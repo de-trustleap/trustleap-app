@@ -2209,5 +2209,13 @@
     "recommendation_manager_notes_last_updated": "Notes last edited at:",
     "@recommendation_manager_notes_last_updated": {
         "description": "Notes Last edited text in the cells on the Recommendation Manager page"
+    },
+    "recommendation_manager_add_note_button_tooltip": "Add note",
+    "@recommendation_manager_add_note_button_tooltip": {
+        "description": "Tooltip for the Add Note button in the cells on the Recommendation Manager page"
+    },
+    "recommendation_manager_notes_snackbar": "Notes successfully changed!",
+    "@recommendation_manager_notes_snackbar": {
+        "description": "Snackbar message when notes of recommendation has been successfully changed on the recommendation manager page"
     }
 }

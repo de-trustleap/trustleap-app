@@ -2209,5 +2209,13 @@
     "recommendation_manager_notes_last_updated": "Notizen zuletzt bearbeitet am:",
     "@recommendation_manager_notes_last_updated": {
         "description": "Notizen Zuletzt bearbeitet Text in den Zellen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_add_note_button_tooltip": "Notiz hinzufügen",
+    "@recommendation_manager_add_note_button_tooltip": {
+        "description": "Tooltip für den Notiz hinzufügen Button in den Zellen auf der Empfehlungsmanager Seite"
+    },
+    "recommendation_manager_notes_snackbar": "Notizen erfolgreich angepasst!",
+    "@recommendation_manager_notes_snackbar": {
+        "description": "Snackbar Nachricht wenn Notizen bei Empfehlung erfolgreich angepasst wurden auf der Empfehlungsmanager Seite"
     }
 }

@@ -147,8 +147,8 @@ class _RecommendationManagerPageState
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_priority_snackbar);
             } else if (state.showNotesSnackbar) {
-              CustomSnackBar.of(context)
-                  .showCustomSnackBar("Notizen erfolgreich angepasst!");
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  localization.recommendation_manager_notes_snackbar);
             } else if (state.showSetAppointmentSnackBar) {
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_scheduled_snackbar);
