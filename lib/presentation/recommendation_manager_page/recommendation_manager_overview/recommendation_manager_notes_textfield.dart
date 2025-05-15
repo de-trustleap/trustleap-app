@@ -78,9 +78,11 @@ class _RecommendationManagerNotesTextfieldState
                     maxLines: 10,
                     desktopStyle: themeData.textTheme.bodySmall,
                     keyboardType: TextInputType.multiline))
-            : Expanded(
+            : Flexible(
+                fit: FlexFit.loose,
                 child: Text(_text,
-                    style: themeData.textTheme.bodyMedium, softWrap: true)),
+                    style: themeData.textTheme.bodyMedium, softWrap: true),
+              ),
         const SizedBox(width: 8),
         IconButton(
             onPressed: _isEditing ? _save : _toggleEdit,
@@ -91,7 +93,7 @@ class _RecommendationManagerNotesTextfieldState
                 size: 24, color: themeData.colorScheme.secondary))
       ]),
       if (widget.recommendation.notesLastEdited != null) ...[
-        const SizedBox(height: 4),
+        const SizedBox(height: 8),
         Text(
             "${localization.recommendation_manager_notes_last_updated} ${RecommendationManagerHelper(localization: localization).getDateText(context, widget.recommendation.notesLastEdited!)}",
             style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13))
