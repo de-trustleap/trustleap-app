@@ -81,6 +81,7 @@ void main() {
           userID: userID,
           priority: RecommendationPriority.medium,
           isFavorite: false,
+          notes: "Test",
           recommendation: recommendation)
     ];
     test("should return recommendations when call was successful", () async {
@@ -163,6 +164,7 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         isFavorite: false,
+        notes: "Test",
         recommendation: recommendation);
 
     test("should return item when call was successful", () async {
@@ -212,6 +214,7 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         isFavorite: false,
+        notes: "Test",
         recommendation: recommendation);
 
     test("should return item when call was successful", () async {
@@ -308,6 +311,7 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         isFavorite: false,
+        notes: "Test",
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
@@ -356,6 +360,7 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         isFavorite: false,
+        notes: "Test",
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given

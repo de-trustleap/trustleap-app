@@ -146,6 +146,9 @@ class _RecommendationManagerPageState
             } else if (state.showPrioritySnackbar) {
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_priority_snackbar);
+            } else if (state.showNotesSnackbar) {
+              CustomSnackBar.of(context)
+                  .showCustomSnackBar("Notizen erfolgreich angepasst!");
             } else if (state.showSetAppointmentSnackBar) {
               CustomSnackBar.of(context).showCustomSnackBar(
                   localization.recommendation_manager_scheduled_snackbar);
@@ -220,12 +223,13 @@ class _RecommendationManagerPageState
                     .setPriority(recommendation);
               },
               onUpdate: (recommendation, shouldBeDeleted, settedFavorite,
-                  settedPriority) {
+                  settedPriority, settedNotes) {
                 Modular.get<RecommendationManagerCubit>().updateReco(
                     recommendation,
                     shouldBeDeleted,
                     settedFavorite,
-                    settedPriority);
+                    settedPriority,
+                    settedNotes);
               }),
         )
       ]);

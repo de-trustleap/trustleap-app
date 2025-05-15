@@ -16,7 +16,7 @@ class RecommendationManagerOverview extends StatefulWidget {
   final Function(String, String, String) onDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
   final Function(UserRecommendation) onPriorityChanged;
-  final Function(UserRecommendation, bool, bool, bool) onUpdate;
+  final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
   const RecommendationManagerOverview(
       {super.key,
       required this.recommendations,

@@ -23,13 +23,15 @@ class RecommendationGetRecosSuccessState extends RecommendationManagerState
   final bool showFinishedSnackBar;
   final bool showFavoriteSnackbar;
   final bool showPrioritySnackbar;
+  final bool showNotesSnackbar;
 
   RecommendationGetRecosSuccessState(
       {required this.recoItems,
       required this.showSetAppointmentSnackBar,
       required this.showFinishedSnackBar,
       required this.showFavoriteSnackbar,
-      required this.showPrioritySnackbar});
+      required this.showPrioritySnackbar,
+      required this.showNotesSnackbar});
 
   @override
   List<Object?> get props => [
@@ -37,7 +39,8 @@ class RecommendationGetRecosSuccessState extends RecommendationManagerState
         showSetAppointmentSnackBar,
         showFinishedSnackBar,
         showFavoriteSnackbar,
-        showPrioritySnackbar
+        showPrioritySnackbar,
+        showNotesSnackbar
       ];
 }
 

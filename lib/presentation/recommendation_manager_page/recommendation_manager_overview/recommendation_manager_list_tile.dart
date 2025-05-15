@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_helper.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_favorite_button.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list_tile_icon_row.dart';
+import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_notes_textfield.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_status_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,7 @@ class RecommendationManagerListTile extends StatefulWidget {
   final Function(String, String, String) onDeletePressed;
   final Function(UserRecommendation) onFavoritePressed;
   final Function(UserRecommendation) onPriorityChanged;
-  final Function(UserRecommendation, bool, bool, bool) onUpdate;
+  final Function(UserRecommendation, bool, bool, bool, bool) onUpdate;
   const RecommendationManagerListTile(
       {super.key,
       required this.recommendation,
@@ -48,6 +49,7 @@ class RecommendationManagerListTile extends StatefulWidget {
 class _RecommendationManagerListTileState
     extends State<RecommendationManagerListTile> {
   late UserRecommendation _recommendation;
+  bool addNote = false;
 
   @override
   void initState() {
@@ -74,11 +76,18 @@ class _RecommendationManagerListTileState
         if (state is RecommendationSetStatusSuccessState) {
           setState(() {
             _recommendation = state.recommendation;
+            if (state.settedNotes != null && state.settedNotes!) {
+              addNote = false;
+            }
           });
-          widget.onUpdate(state.recommendation, false,
-              state.settedFavorite ?? false, state.settedPriority ?? false);
+          widget.onUpdate(
+              state.recommendation,
+              false,
+              state.settedFavorite ?? false,
+              state.settedPriority ?? false,
+              state.settedNotes ?? false);
         } else if (state is RecommendationSetFinishedSuccessState) {
-          widget.onUpdate(state.recommendation, true, false, false);
+          widget.onUpdate(state.recommendation, true, false, false, false);
         }
       },
       builder: (context, state) {
@@ -177,7 +186,6 @@ class _RecommendationManagerListTileState
                   ],
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     _getPriorityIcon(_recommendation.priority, themeData),
-                    const SizedBox(width: 8),
                     PopupMenuButton<RecommendationPriority>(
                         tooltip: localization
                             .recommendation_manager_select_priority_tooltip,
@@ -190,10 +198,36 @@ class _RecommendationManagerListTileState
                                   themeData, localization, responsiveValue)
                             ],
                         onSelected: (value) => widget.onPriorityChanged(
-                            _recommendation.copyWith(priority: value)))
+                            _recommendation.copyWith(priority: value))),
+                    if (_recommendation.notes == null ||
+                        (_recommendation.notes != null &&
+                            _recommendation.notes!.isEmpty)) ...[
+                      const SizedBox(width: 16),
+                      IconButton(
+                          tooltip: "Notiz hinzufügen",
+                          onPressed: () {
+                            setState(() {
+                              addNote = true;
+                            });
+                          },
+                          color: themeData.colorScheme.secondary,
+                          iconSize: 24,
+                          icon: const Icon(Icons.note_add))
+                    ]
                   ])
                 ],
               ),
+              if (addNote ||
+                  (_recommendation.notes != null &&
+                      _recommendation.notes!.isNotEmpty)) ...[
+                const SizedBox(height: 16),
+                RecommendationManagerNotesTextfield(
+                    initialText: _recommendation.notes ?? "",
+                    isEditing: addNote ? true : false,
+                    onSave: (notes) =>
+                        Modular.get<RecommendationManagerTileCubit>()
+                            .setNotes(_recommendation.copyWith(notes: notes)))
+              ],
               if (state is RecommendationSetStatusFailureState &&
                   state.recommendation.id.value ==
                       _recommendation.id.value) ...[
@@ -259,3 +293,9 @@ class _RecommendationManagerListTileState
         ]));
   }
 }
+
+// TODO: SET NOTE FUNKTION IN REPO UND CUBIT IMPLEMENTIEREN (FERTIG)
+// TODO: FUNKTION BEI SAVE AUFRUFEN (FERTIG)
+// TODO: TESTS REPARIEREN
+// TODO: NEUE TESTS FÜR RECO UND CUBIT
+// TODO: LOCALIZATION

@@ -321,9 +321,10 @@ class RecommendationRepositoryImplementation
   Future<Either<DatabaseFailure, UserRecommendation>> setFavorite(
       UserRecommendation recommendation) async {
     final userRecoCollection = firestore.collection("usersRecommendations");
+    final userRecoModel = UserRecommendationModel.fromDomain(recommendation);
     try {
-      await userRecoCollection.doc(recommendation.id.value).set(
-          {"isFavorite": recommendation.isFavorite ?? false},
+      await userRecoCollection.doc(userRecoModel.id).set(
+          {"isFavorite": userRecoModel.isFavorite ?? false},
           SetOptions(merge: true));
       return right(recommendation);
     } on FirebaseException catch (e) {
@@ -337,9 +338,24 @@ class RecommendationRepositoryImplementation
     final userRecoCollection = firestore.collection("usersRecommendations");
     final userRecoModel = UserRecommendationModel.fromDomain(recommendation);
     try {
-      await userRecoCollection.doc(recommendation.id.value).set(
+      await userRecoCollection.doc(userRecoModel.id).set(
           {"priority": userRecoModel.priority ?? "medium"},
           SetOptions(merge: true));
+      return right(recommendation);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, UserRecommendation>> setNotes(
+      UserRecommendation recommendation) async {
+    final userRecoCollection = firestore.collection("usersRecommendations");
+    final userRecoModel = UserRecommendationModel.fromDomain(recommendation);
+    try {
+      await userRecoCollection
+          .doc(userRecoModel.id)
+          .set({"notes": userRecoModel.notes}, SetOptions(merge: true));
       return right(recommendation);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));

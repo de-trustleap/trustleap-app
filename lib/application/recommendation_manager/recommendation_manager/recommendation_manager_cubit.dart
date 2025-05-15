@@ -37,7 +37,8 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
             showSetAppointmentSnackBar: false,
             showFinishedSnackBar: false,
             showFavoriteSnackbar: false,
-            showPrioritySnackbar: false));
+            showPrioritySnackbar: false,
+            showNotesSnackbar: false));
       }
     });
   }
@@ -68,7 +69,7 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
   }
 
   void updateReco(UserRecommendation updatedReco, bool shouldBeDeleted,
-      bool settedFavorite, bool settedPriority) {
+      bool settedFavorite, bool settedPriority, bool settedNotes) {
     final currentState = state;
     if (currentState is RecommendationGetRecosSuccessState) {
       final updatedList = shouldBeDeleted
@@ -82,21 +83,32 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
             showSetAppointmentSnackBar: false,
             showFinishedSnackBar: false,
             showFavoriteSnackbar: true,
-            showPrioritySnackbar: false));
+            showPrioritySnackbar: false,
+            showNotesSnackbar: false));
       } else if (settedPriority) {
         emit(RecommendationGetRecosSuccessState(
             recoItems: updatedList,
             showSetAppointmentSnackBar: false,
             showFinishedSnackBar: false,
             showFavoriteSnackbar: false,
-            showPrioritySnackbar: true));
+            showPrioritySnackbar: true,
+            showNotesSnackbar: false));
+      } else if (settedNotes) {
+        emit(RecommendationGetRecosSuccessState(
+            recoItems: updatedList,
+            showSetAppointmentSnackBar: false,
+            showFinishedSnackBar: false,
+            showFavoriteSnackbar: false,
+            showPrioritySnackbar: false,
+            showNotesSnackbar: true));
       } else {
         emit(RecommendationGetRecosSuccessState(
             recoItems: updatedList,
             showSetAppointmentSnackBar: shouldBeDeleted == false,
             showFinishedSnackBar: shouldBeDeleted == true,
             showFavoriteSnackbar: false,
-            showPrioritySnackbar: false));
+            showPrioritySnackbar: false,
+            showNotesSnackbar: false));
       }
     }
   }
