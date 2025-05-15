@@ -42,6 +42,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should call user repo when function is called", () async {
@@ -109,6 +110,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should call recommendation repo when function is called", () async {
@@ -178,6 +180,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should call recommendation repo when function is called", () async {
@@ -244,6 +247,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
     test("should call recommendation repo when function is called", () async {
       // Given
@@ -308,6 +312,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
     test("should call recommendation repo when function is called", () async {
       // Given

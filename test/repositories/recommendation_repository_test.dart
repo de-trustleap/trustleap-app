@@ -82,6 +82,7 @@ void main() {
           priority: RecommendationPriority.medium,
           isFavorite: false,
           notes: "Test",
+          notesLastEdited: null,
           recommendation: recommendation)
     ];
     test("should return recommendations when call was successful", () async {
@@ -165,6 +166,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should return item when call was successful", () async {
@@ -215,6 +217,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should return item when call was successful", () async {
@@ -312,6 +315,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
@@ -361,6 +365,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
@@ -409,6 +414,7 @@ void main() {
         priority: RecommendationPriority.medium,
         isFavorite: false,
         notes: "Test",
+        notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given

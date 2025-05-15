@@ -222,11 +222,12 @@ class _RecommendationManagerListTileState
                       _recommendation.notes!.isNotEmpty)) ...[
                 const SizedBox(height: 16),
                 RecommendationManagerNotesTextfield(
-                    initialText: _recommendation.notes ?? "",
+                    recommendation: _recommendation,
                     isEditing: addNote ? true : false,
                     onSave: (notes) =>
-                        Modular.get<RecommendationManagerTileCubit>()
-                            .setNotes(_recommendation.copyWith(notes: notes)))
+                        Modular.get<RecommendationManagerTileCubit>().setNotes(
+                            _recommendation.copyWith(
+                                notes: notes, notesLastEdited: DateTime.now())))
               ],
               if (state is RecommendationSetStatusFailureState &&
                   state.recommendation.id.value ==
@@ -297,5 +298,5 @@ class _RecommendationManagerListTileState
 // TODO: SET NOTE FUNKTION IN REPO UND CUBIT IMPLEMENTIEREN (FERTIG)
 // TODO: FUNKTION BEI SAVE AUFRUFEN (FERTIG)
 // TODO: TESTS REPARIEREN (FERTIG)
-// TODO: NEUE TESTS FÜR RECO UND CUBIT
+// TODO: NEUE TESTS FÜR RECO UND CUBIT (FERTIG)
 // TODO: LOCALIZATION

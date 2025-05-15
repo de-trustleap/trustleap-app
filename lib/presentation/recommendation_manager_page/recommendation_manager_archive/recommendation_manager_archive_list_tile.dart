@@ -35,8 +35,7 @@ class RecommendationManagerArchiveListTile extends StatelessWidget {
           Flexible(
               flex: 2,
               child: _buildCell(
-                  helper.getArchivedRecommendationDateText(
-                      context, recommendation),
+                  helper.getDateText(context, recommendation.finishedTimeStamp),
                   themeData)),
           const SizedBox(width: 8)
         ]),

@@ -353,9 +353,10 @@ class RecommendationRepositoryImplementation
     final userRecoCollection = firestore.collection("usersRecommendations");
     final userRecoModel = UserRecommendationModel.fromDomain(recommendation);
     try {
-      await userRecoCollection
-          .doc(userRecoModel.id)
-          .set({"notes": userRecoModel.notes}, SetOptions(merge: true));
+      await userRecoCollection.doc(userRecoModel.id).set({
+        "notes": userRecoModel.notes,
+        "notesLastEdited": userRecoModel.notesLastEdited?.toIso8601String()
+      }, SetOptions(merge: true));
       return right(recommendation);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
