@@ -29,6 +29,7 @@ class SideMenu extends StatelessWidget {
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
+
     return ListView(children: [
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         if (responsiveValue.isDesktop) ...[

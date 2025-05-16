@@ -131,7 +131,8 @@ class _MenuItemState extends State<MenuItem> {
                       ),
                       // Hier ist die Änderung zu AnimatedBuilder
                       AnimatedBuilder(
-                        animation: _widthAnimation!,
+                        animation:
+                            _widthAnimation ?? AlwaysStoppedAnimation(width),
                         builder: (context, child) {
                           return AnimatedContainer(
                             duration: const Duration(milliseconds: 200),
@@ -151,8 +152,9 @@ class _MenuItemState extends State<MenuItem> {
                                       ? themeData.colorScheme.surface
                                       : themeData.iconTheme.color,
                                 ),
-                                if (_widthAnimation!.value >=
-                                    MenuDimensions.menuOpenWidth) ...[
+                                if (_widthAnimation == null ||
+                                    _widthAnimation!.value >=
+                                        MenuDimensions.menuOpenWidth) ...[
                                   const SizedBox(width: 12),
                                   Expanded(
                                     child: Text(
