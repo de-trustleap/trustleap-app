@@ -1920,4 +1920,30 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get recommendation_manager_notes_snackbar =>
       'Notes successfully changed!';
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_first_name =>
+      'First name of recommendation';
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_last_name =>
+      'Last name of recommendation';
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_name =>
+      'Name of recommendation';
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_first_name =>
+      'First name of promoter';
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_last_name =>
+      'Last name of promoter';
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_name => 'Name of promoter';
+
+  @override
+  String get pagebuilder_text_placeholder_picker => 'Choose placeholder';
 }

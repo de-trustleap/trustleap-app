@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_t
 import 'package:flutter/material.dart';
 
 class PagebuilderTextField extends StatefulWidget {
+  final TextEditingController? controller;
   final String? initialText;
   final int minLines;
   final int maxLines;
@@ -10,6 +11,7 @@ class PagebuilderTextField extends StatefulWidget {
   final Function(String) onChanged;
   const PagebuilderTextField(
       {super.key,
+      this.controller,
       required this.initialText,
       required this.onChanged,
       this.placeholder,
@@ -21,11 +23,14 @@ class PagebuilderTextField extends StatefulWidget {
 }
 
 class _PagebuilderTextFieldState extends State<PagebuilderTextField> {
-  final _controller = TextEditingController();
+  TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    if (widget.controller != null) {
+      _controller = widget.controller!;
+    }
     _controller.text = widget.initialText ?? "";
   }
 

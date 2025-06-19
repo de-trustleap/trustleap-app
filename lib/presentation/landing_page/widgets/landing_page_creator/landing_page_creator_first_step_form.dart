@@ -264,10 +264,9 @@ class _LandingPageCreatorFormState
                                       )),
                                   const Spacer(),
                                   LandingPageCreatorPlaceholderPicker(
-                                      width: 250,
                                       onSelected: (placeholder) {
-                                        _insertTextAtCursor(placeholder);
-                                      })
+                                    _insertTextAtCursor(placeholder);
+                                  })
                                 ]),
                             ExpandedSection(
                                 expand: _isEmojiPickerExpanded,

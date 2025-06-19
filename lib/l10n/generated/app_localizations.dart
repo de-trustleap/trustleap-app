@@ -3379,6 +3379,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notes successfully changed!'**
   String get recommendation_manager_notes_snackbar;
+
+  /// Placeholder dropdown entry for first name of the recommended person in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'First name of recommendation'**
+  String get pagebuilder_text_placeholder_recommendation_first_name;
+
+  /// Placeholder dropdown entry for last name of the recommended person in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Last name of recommendation'**
+  String get pagebuilder_text_placeholder_recommendation_last_name;
+
+  /// Placeholder dropdown entry for name of the recommended person in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Name of recommendation'**
+  String get pagebuilder_text_placeholder_recommendation_name;
+
+  /// Placeholder dropdown entry for first name of the promoter in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'First name of promoter'**
+  String get pagebuilder_text_placeholder_promoter_first_name;
+
+  /// Placeholder dropdown entry for last name of the promoter in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Last name of promoter'**
+  String get pagebuilder_text_placeholder_promoter_last_name;
+
+  /// Placeholder dropdown entry for name of the promoter in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Name of promoter'**
+  String get pagebuilder_text_placeholder_promoter_name;
+
+  /// Title of dropdown menu for placeholder in text config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Choose placeholder'**
+  String get pagebuilder_text_placeholder_picker;
 }
 
 class _AppLocalizationsDelegate
