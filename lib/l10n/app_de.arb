@@ -2217,5 +2217,33 @@
     "recommendation_manager_notes_snackbar": "Notizen erfolgreich angepasst!",
     "@recommendation_manager_notes_snackbar": {
         "description": "Snackbar Nachricht wenn Notizen bei Empfehlung erfolgreich angepasst wurden auf der Empfehlungsmanager Seite"
+    },
+    "pagebuilder_text_placeholder_recommendation_first_name": "Vorname des Empfohlenen",
+    "@pagebuilder_text_placeholder_recommendation_first_name": {
+        "description": "Platzhalter Dropdown Eintrag für Vorname des Empfohlenen in Pagebuilder Text Config Menü"
+    },
+    "pagebuilder_text_placeholder_recommendation_last_name": "Nachname des Empfohlenen",
+    "@pagebuilder_text_placeholder_recommendation_last_name": {
+        "description": "Platzhalter Dropdown Eintrag für Nachname des Empfohlenen in Pagebuilder Text Config Menü"
+    },
+    "pagebuilder_text_placeholder_recommendation_name": "Name des Empfohlenen",
+    "@pagebuilder_text_placeholder_recommendation_name": {
+        "description": "Platzhalter Dropdown Eintrag für Name des Empfohlenen in Pagebuilder Text Config Menü"
+    },
+    "pagebuilder_text_placeholder_promoter_first_name": "Vorname des Promoters",
+    "@pagebuilder_text_placeholder_promoter_first_name": {
+        "description": "Platzhalter Dropdown Eintrag für Vorname des Promoters in Pagebuilder Text Config Menü"
+    },
+    "pagebuilder_text_placeholder_promoter_last_name": "Nachname des Promoters",
+    "@pagebuilder_text_placeholder_promoter_last_name": {
+        "description": "Platzhalter Dropdown Eintrag für Nachname des Promoters in Pagebuilder Text Config Menü"
+    },
+    "pagebuilder_text_placeholder_promoter_name": "Name des Promoters",
+    "@pagebuilder_text_placeholder_promoter_name": {
+        "description": "Platzhalter Dropdown Eintrag für Name des Promoters in Pagebuilder Text Config Menü"
+    },
+    "pagebuilder_text_placeholder_picker": "Platzhalter auswählen",
+    "@pagebuilder_text_placeholder_picker": {
+        "description": "Titel des Dropdown Menüs für den Platzhalter im Text Config Menü"
     }
 }

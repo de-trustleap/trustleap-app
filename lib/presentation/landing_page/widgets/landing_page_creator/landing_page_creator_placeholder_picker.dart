@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorPlaceholderPicker extends StatefulWidget {
-  final double width;
   final Function(String) onSelected;
 
   const LandingPageCreatorPlaceholderPicker({
     super.key,
-    required this.width,
     required this.onSelected,
   });
 

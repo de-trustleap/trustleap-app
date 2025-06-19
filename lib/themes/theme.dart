@@ -148,7 +148,7 @@ class AppTheme {
       contentTextStyle: AppTheme.lightHeadlineLargeText
           .copyWith(color: AppTheme.darkTextColor, fontSize: 14));
 
-  static final TabBarTheme lightTabbarTheme = TabBarTheme(
+  static final TabBarThemeData lightTabbarTheme = TabBarThemeData(
       indicatorColor: AppTheme.lightSecondaryColor,
       splashFactory: NoSplash.splashFactory,
       labelColor: AppTheme.lightTextColor,
@@ -156,7 +156,7 @@ class AppTheme {
           AppTheme.lightBodySmallText.copyWith(color: AppTheme.darkTextColor),
       overlayColor: const WidgetStatePropertyAll(Colors.transparent));
 
-  static final TabBarTheme darkTabbarTheme = TabBarTheme(
+  static final TabBarThemeData darkTabbarTheme = TabBarThemeData(
       indicatorColor: AppTheme.darkSecondaryColor,
       splashFactory: NoSplash.splashFactory,
       labelColor: AppTheme.darkTextColor,

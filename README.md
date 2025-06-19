@@ -4,7 +4,7 @@
 
 ### Stack
 
-- Flutter 3.24.1
+- Flutter 3.32.4
 - Dart 3.5.1
 - Visual Studio Code
 - Firebase

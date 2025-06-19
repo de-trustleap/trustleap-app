@@ -54,13 +54,15 @@ class DesktopAppTheme {
           contentTextStyle:
               _darkBodySmallText.copyWith(color: AppTheme.darkTextColor));
 
-  static final TabBarTheme _lightTabbarTheme = AppTheme.lightTabbarTheme
+  static final TabBarThemeData _lightTabbarTheme = AppTheme.lightTabbarTheme
       .copyWith(
           labelStyle:
               _lightBodySmallText.copyWith(color: AppTheme.darkTextColor));
 
-  static final TabBarTheme _darkTabbarTheme = AppTheme.darkTabbarTheme.copyWith(
-      labelStyle: _darkBodySmallText.copyWith(color: AppTheme.darkTextColor));
+  static final TabBarThemeData _darkTabbarTheme = AppTheme.darkTabbarTheme
+      .copyWith(
+          labelStyle:
+              _darkBodySmallText.copyWith(color: AppTheme.darkTextColor));
 
   static final DropdownMenuThemeData _lightDropDownMenuTheme =
       AppTheme.lightDropDownMenuTheme.copyWith(textStyle: _lightBodyMediumText);

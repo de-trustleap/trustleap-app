@@ -62,7 +62,8 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,7 +84,8 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -561,7 +564,8 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Step {currentStep} of {elementsTotal}'**
-  String landingpage_creation_progress_indicator_text(int currentStep, int elementsTotal);
+  String landingpage_creation_progress_indicator_text(
+      int currentStep, int elementsTotal);
 
   /// Placeholder for impressum in landingpage creation form
   ///
@@ -663,13 +667,15 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'First name of provider'**
-  String get landingpage_create_promotion_placeholder_service_provider_first_name;
+  String
+      get landingpage_create_promotion_placeholder_service_provider_first_name;
 
   /// Placeholder variable for the last name of provider
   ///
   /// In en, this message translates to:
   /// **'Last name of provider'**
-  String get landingpage_create_promotion_placeholder_service_provider_last_name;
+  String
+      get landingpage_create_promotion_placeholder_service_provider_last_name;
 
   /// Placeholder variable for the name of provider
   ///
@@ -981,7 +987,8 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Continue'**
-  String get profile_page_email_section_change_email_password_continue_button_title;
+  String
+      get profile_page_email_section_change_email_password_continue_button_title;
 
   /// button title of the resend email verification button in the email area on the profile page.
   ///
@@ -1035,7 +1042,8 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Close'**
-  String get profile_page_image_section_large_image_view_close_button_tooltip_title;
+  String
+      get profile_page_image_section_large_image_view_close_button_tooltip_title;
 
   /// title of the change password section on profile page.
   ///
@@ -1053,19 +1061,22 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'New password'**
-  String get profile_page_password_update_section_new_password_textfield_placeholder;
+  String
+      get profile_page_password_update_section_new_password_textfield_placeholder;
 
   /// placeholder for the new password repeat text field on the change password page in the profile page.
   ///
   /// In en, this message translates to:
   /// **'Repeat new password'**
-  String get profile_page_password_update_section_new_password_repeat_textfield_placeholder;
+  String
+      get profile_page_password_update_section_new_password_repeat_textfield_placeholder;
 
   /// button title for the confirm password change button on the change password page in the profile page.
   ///
   /// In en, this message translates to:
   /// **'Change password'**
-  String get profile_page_password_update_section_new_password_confirm_button_text;
+  String
+      get profile_page_password_update_section_new_password_confirm_button_text;
 
   /// Description for reauthentication on the Change Password page in the Profile page.
   ///
@@ -1077,7 +1088,8 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Password'**
-  String get profile_page_password_update_section_reauth_password_textfield_placeholder;
+  String
+      get profile_page_password_update_section_reauth_password_textfield_placeholder;
 
   /// Continue button title of reauthentication on the change password page in the profile page.
   ///
@@ -2721,7 +2733,8 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Textfield placeholder configuration'**
-  String get pagebuilder_textfield_config_textfield_placeholder_text_configuration;
+  String
+      get pagebuilder_textfield_config_textfield_placeholder_text_configuration;
 
   /// Section Title in the Pagebuilder Config Menu
   ///
@@ -2811,13 +2824,15 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Please provide the YouTube link where your video can be accessed.'**
-  String get landingpage_pagebuilder_video_player_config_youtube_link_description;
+  String
+      get landingpage_pagebuilder_video_player_config_youtube_link_description;
 
   /// Placeholder for the video player youtube link in the pagebuilder video player configuration.
   ///
   /// In en, this message translates to:
   /// **'Youtube link'**
-  String get landingpage_pagebuilder_video_player_config_youtube_link_placeholder;
+  String
+      get landingpage_pagebuilder_video_player_config_youtube_link_placeholder;
 
   /// Error message when company data were not found for the creation of a default landingpage
   ///
@@ -3364,9 +3379,52 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notes successfully changed!'**
   String get recommendation_manager_notes_snackbar;
+
+  /// Placeholder dropdown entry for first name of the recommended person in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'First name of recommendation'**
+  String get pagebuilder_text_placeholder_recommendation_first_name;
+
+  /// Placeholder dropdown entry for last name of the recommended person in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Last name of recommendation'**
+  String get pagebuilder_text_placeholder_recommendation_last_name;
+
+  /// Placeholder dropdown entry for name of the recommended person in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Name of recommendation'**
+  String get pagebuilder_text_placeholder_recommendation_name;
+
+  /// Placeholder dropdown entry for first name of the promoter in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'First name of promoter'**
+  String get pagebuilder_text_placeholder_promoter_first_name;
+
+  /// Placeholder dropdown entry for last name of the promoter in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Last name of promoter'**
+  String get pagebuilder_text_placeholder_promoter_last_name;
+
+  /// Placeholder dropdown entry for name of the promoter in Pagebuilder Text Config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Name of promoter'**
+  String get pagebuilder_text_placeholder_promoter_name;
+
+  /// Title of dropdown menu for placeholder in text config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Choose placeholder'**
+  String get pagebuilder_text_placeholder_picker;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -3375,25 +3433,25 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['de', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['de', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'de': return AppLocalizationsDe();
-    case 'en': return AppLocalizationsEn();
+    case 'de':
+      return AppLocalizationsDe();
+    case 'en':
+      return AppLocalizationsEn();
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

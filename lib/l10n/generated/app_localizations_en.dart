@@ -42,7 +42,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_now_buttontitle => 'Rgister now';
 
   @override
-  String get register_invalid_code_error => 'Registration failed. Please check whether you are using a valid code and the associated email address.';
+  String get register_invalid_code_error =>
+      'Registration failed. Please check whether you are using a valid code and the associated email address.';
 
   @override
   String get register_terms_and_condition_text => 'I approve the';
@@ -93,7 +94,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_register_text => 'You don\'\'t have an account? ';
 
   @override
-  String get login_permission_error_message => 'An error occurred while querying the permissions';
+  String get login_permission_error_message =>
+      'An error occurred while querying the permissions';
 
   @override
   String get auth_validation_missing_email => 'Please enter an email address';
@@ -108,19 +110,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_validation_confirm_password => 'Please confirm the password';
 
   @override
-  String get auth_validation_matching_passwords => 'The passwords don\'\'t match';
+  String get auth_validation_matching_passwords =>
+      'The passwords don\'\'t match';
 
   @override
   String get auth_validation_missing_firstname => 'Please enter firstname';
 
   @override
-  String get auth_validation_long_firstname => 'The entered firstname is too long';
+  String get auth_validation_long_firstname =>
+      'The entered firstname is too long';
 
   @override
   String get auth_validation_missing_lastname => 'Please enter lastname';
 
   @override
-  String get auth_validation_long_lastname => 'The entered lastname is too long';
+  String get auth_validation_long_lastname =>
+      'The entered lastname is too long';
 
   @override
   String get auth_validation_missing_birthdate => 'Please enter birthdate';
@@ -135,16 +140,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_validation_invalid_postcode => 'the postcode is invalid';
 
   @override
-  String get auth_validation_missing_code => 'Please enter your registration code';
+  String get auth_validation_missing_code =>
+      'Please enter your registration code';
 
   @override
   String get auth_validation_missing_gender => 'Please indicate your gender';
 
   @override
-  String get auth_validation_missing_additional_info => 'reason for recommendation is missing';
+  String get auth_validation_missing_additional_info =>
+      'reason for recommendation is missing';
 
   @override
-  String get auth_validation_additional_info_exceed_limit => 'You exceeded the maximal amount of 500 characters';
+  String get auth_validation_additional_info_exceed_limit =>
+      'You exceeded the maximal amount of 500 characters';
 
   @override
   String get menuitems_profile => 'Profile';
@@ -168,49 +176,63 @@ class AppLocalizationsEn extends AppLocalizations {
   String get menuitems_company_requests => 'Requests';
 
   @override
-  String get landingpage_overview_error_view_title => 'An error occurred while retrieving the data.';
+  String get landingpage_overview_error_view_title =>
+      'An error occurred while retrieving the data.';
 
   @override
   String get landingpage_overview_empty_page_title => 'No landingpage found';
 
   @override
-  String get landingpage_overview_empty_page_subtitle => 'Seems like you dont have a landing page yet. Create your landing page now.';
+  String get landingpage_overview_empty_page_subtitle =>
+      'Seems like you dont have a landing page yet. Create your landing page now.';
 
   @override
-  String get landingpage_overview_empty_page_button_title => 'Register Landing Page';
+  String get landingpage_overview_empty_page_button_title =>
+      'Register Landing Page';
 
   @override
-  String get landingpage_delete_alert_title => 'Do you really want to delete the selected landing page?';
+  String get landingpage_delete_alert_title =>
+      'Do you really want to delete the selected landing page?';
 
   @override
-  String get landingpage_delete_alert_msg => 'Deleting the landing page cannot be undone.';
+  String get landingpage_delete_alert_msg =>
+      'Deleting the landing page cannot be undone.';
 
   @override
-  String get landingpage_delete_alert_msg_promoter_warning => 'The following promoters will no longer have active landing pages assigned if you delete this page:\n';
+  String get landingpage_delete_alert_msg_promoter_warning =>
+      'The following promoters will no longer have active landing pages assigned if you delete this page:\n';
 
   @override
-  String get landingpage_delete_alert_msg_promoter_warning_continue => '\nDo you want to continue anyway? The action cannot be undone.';
+  String get landingpage_delete_alert_msg_promoter_warning_continue =>
+      '\nDo you want to continue anyway? The action cannot be undone.';
 
   @override
-  String get landingpage_success_delete_snackbar_message => 'Landing page successfully deleted!';
+  String get landingpage_success_delete_snackbar_message =>
+      'Landing page successfully deleted!';
 
   @override
-  String get landingpage_snackbar_success => 'The landing page was successfully created!';
+  String get landingpage_snackbar_success =>
+      'The landing page was successfully created!';
 
   @override
-  String get landingpage_snackbar_success_changed => 'The landing page was successfully changed!';
+  String get landingpage_snackbar_success_changed =>
+      'The landing page was successfully changed!';
 
   @override
-  String get landingpage_snackbar_success_duplicated => 'The landing page was successfully duplicated!';
+  String get landingpage_snackbar_success_duplicated =>
+      'The landing page was successfully duplicated!';
 
   @override
-  String get landingpage_snackbar_success_toggled_enabled => 'The landing page was successfully enabled!';
+  String get landingpage_snackbar_success_toggled_enabled =>
+      'The landing page was successfully enabled!';
 
   @override
-  String get landingpage_snackbar_success_toggled_disabled => 'The landing page was successfully disabled!';
+  String get landingpage_snackbar_success_toggled_disabled =>
+      'The landing page was successfully disabled!';
 
   @override
-  String get landingpage_snackbar_failure_toggled => 'An error occurred while toggle the landing page';
+  String get landingpage_snackbar_failure_toggled =>
+      'An error occurred while toggle the landing page';
 
   @override
   String get landingpage_overview_context_menu_disable => 'disable';
@@ -219,7 +241,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_overview_context_menu_enable => 'enable';
 
   @override
-  String get landingpage_overview_max_count_msg => 'Maximum number of landing pages reached';
+  String get landingpage_overview_max_count_msg =>
+      'Maximum number of landing pages reached';
 
   @override
   String get landingpage_create_buttontitle => 'Create Landing Page';
@@ -234,13 +257,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_validate_impressum => 'Please enter impressum';
 
   @override
-  String get landingpage_validate_privacy_policy => 'Please enter privacy policy';
+  String get landingpage_validate_privacy_policy =>
+      'Please enter privacy policy';
 
   @override
-  String get landingpage_validate_initial_information => 'Please enter initial information';
+  String get landingpage_validate_initial_information =>
+      'Please enter initial information';
 
   @override
-  String landingpage_creation_progress_indicator_text(int currentStep, int elementsTotal) {
+  String landingpage_creation_progress_indicator_text(
+      int currentStep, int elementsTotal) {
     return 'Step $currentStep of $elementsTotal';
   }
 
@@ -248,19 +274,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_creation_impressum_placeholder => 'Impressum';
 
   @override
-  String get landingpage_creation_privacy_policy_placeholder => 'Privacy policy';
+  String get landingpage_creation_privacy_policy_placeholder =>
+      'Privacy policy';
 
   @override
-  String get landingpage_creation_initial_information_placeholder => 'Initial information (optional)';
+  String get landingpage_creation_initial_information_placeholder =>
+      'Initial information (optional)';
 
   @override
-  String get landingpage_creation_terms_and_conditions_placeholder => 'Terms and conditions (optional)';
+  String get landingpage_creation_terms_and_conditions_placeholder =>
+      'Terms and conditions (optional)';
 
   @override
-  String get landingpage_creation_scripts_description => 'Javascript <script> tags can be entered below.\nThis is used, for example, to integrate cookie banners or tracking tools into the landing page.';
+  String get landingpage_creation_scripts_description =>
+      'Javascript <script> tags can be entered below.\nThis is used, for example, to integrate cookie banners or tracking tools into the landing page.';
 
   @override
-  String get landingpage_creation_scripts_placeholder => 'Script tags (optional)';
+  String get landingpage_creation_scripts_placeholder =>
+      'Script tags (optional)';
 
   @override
   String get landingpage_creation_back_button_text => 'Back';
@@ -275,13 +306,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_creation_continue => 'Continue';
 
   @override
-  String get landingpage_create_promotion_template_description => 'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use different placeholders which you can choose from the placeholder menu.';
+  String get landingpage_create_promotion_template_description =>
+      'Below you can create a template that your promoters will use to send recommendations via WhatsApp.\nYou can use different placeholders which you can choose from the placeholder menu.';
 
   @override
-  String get landingpage_create_promotion_template_placeholder => 'Template for promoter (optional)';
+  String get landingpage_create_promotion_template_placeholder =>
+      'Template for promoter (optional)';
 
   @override
-  String get landingpage_create_promotion_template_default_text => 'This is the promotion template.';
+  String get landingpage_create_promotion_template_default_text =>
+      'This is the promotion template.';
 
   @override
   String get emoji_search_placeholder => 'Search Emoji';
@@ -290,28 +324,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get open_emoji_picker_tooltip => 'Open emoji picker';
 
   @override
-  String get landingpage_create_promotion_placeholder_menu => 'Choose placeholder';
+  String get landingpage_create_promotion_placeholder_menu =>
+      'Choose placeholder';
 
   @override
-  String get landingpage_create_promotion_placeholder_service_provider_first_name => 'First name of provider';
+  String
+      get landingpage_create_promotion_placeholder_service_provider_first_name =>
+          'First name of provider';
 
   @override
-  String get landingpage_create_promotion_placeholder_service_provider_last_name => 'Last name of provider';
+  String
+      get landingpage_create_promotion_placeholder_service_provider_last_name =>
+          'Last name of provider';
 
   @override
-  String get landingpage_create_promotion_placeholder_service_provider_name => 'Name of provider';
+  String get landingpage_create_promotion_placeholder_service_provider_name =>
+      'Name of provider';
 
   @override
-  String get landingpage_create_promotion_placeholder_promoter_first_name => 'First name of promoter';
+  String get landingpage_create_promotion_placeholder_promoter_first_name =>
+      'First name of promoter';
 
   @override
-  String get landingpage_create_promotion_placeholder_promoter_last_name => 'Last name of promoter';
+  String get landingpage_create_promotion_placeholder_promoter_last_name =>
+      'Last name of promoter';
 
   @override
-  String get landingpage_create_promotion_placeholder_promoter_name => 'Name of promoter';
+  String get landingpage_create_promotion_placeholder_promoter_name =>
+      'Name of promoter';
 
   @override
-  String get landingpage_create_promotion_placeholder_receiver_name => 'Name of receiver';
+  String get landingpage_create_promotion_placeholder_receiver_name =>
+      'Name of receiver';
 
   @override
   String get landingpage_overview_context_menu_delete => 'Delete';
@@ -326,7 +370,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get placeholder_description => 'Description';
 
   @override
-  String get landingpage_creator_placeholder_contact_email => 'Contact email address';
+  String get landingpage_creator_placeholder_contact_email =>
+      'Contact email address';
 
   @override
   String get error_msg_pleace_upload_picture => 'Please upload an image';
@@ -335,49 +380,61 @@ class AppLocalizationsEn extends AppLocalizations {
   String get menuitems_activities => 'Activities';
 
   @override
-  String get auth_failure_email_already_in_use => 'The email adress is already taken.';
+  String get auth_failure_email_already_in_use =>
+      'The email adress is already taken.';
 
   @override
   String get auth_failure_invalid_email => 'The email address is invalid';
 
   @override
-  String get auth_failure_weak_password => 'The password is too weak. Please use at least 6 characters.';
+  String get auth_failure_weak_password =>
+      'The password is too weak. Please use at least 6 characters.';
 
   @override
-  String get auth_failure_user_disabled => 'The user does not exist anymore. Please contact our support team for further investigation.';
+  String get auth_failure_user_disabled =>
+      'The user does not exist anymore. Please contact our support team for further investigation.';
 
   @override
   String get auth_failure_user_not_found => 'The user does not exist.';
 
   @override
-  String get auth_failure_wrong_password => 'The entered password is not correct.';
+  String get auth_failure_wrong_password =>
+      'The entered password is not correct.';
 
   @override
-  String get auth_failure_invalid_credentials => 'Your entered credentials do not exist.';
+  String get auth_failure_invalid_credentials =>
+      'Your entered credentials do not exist.';
 
   @override
-  String get auth_failure_too_many_requests => 'You have entered your login details incorrectly too many times. Try again later.';
+  String get auth_failure_too_many_requests =>
+      'You have entered your login details incorrectly too many times. Try again later.';
 
   @override
-  String get auth_failure_user_mismatch => 'Your login information does not belong to the current user.';
+  String get auth_failure_user_mismatch =>
+      'Your login information does not belong to the current user.';
 
   @override
-  String get auth_failure_invalid_verification_code => 'Your verification code is invalid.';
+  String get auth_failure_invalid_verification_code =>
+      'Your verification code is invalid.';
 
   @override
-  String get auth_failure_invalid_verification_id => 'Your verification id is invalid.';
+  String get auth_failure_invalid_verification_id =>
+      'Your verification id is invalid.';
 
   @override
-  String get auth_failure_requires_recent_login => 'Its been too long since you last logged in. Sign in again.';
+  String get auth_failure_requires_recent_login =>
+      'Its been too long since you last logged in. Sign in again.';
 
   @override
-  String get auth_failure_missing_password => 'You have to type in your password.';
+  String get auth_failure_missing_password =>
+      'You have to type in your password.';
 
   @override
   String get auth_failure_unknown => 'An unknown error occured.';
 
   @override
-  String get database_failure_permission_denied => 'Permission denied to access these resources.';
+  String get database_failure_permission_denied =>
+      'Permission denied to access these resources.';
 
   @override
   String get database_failure_not_found => 'The requested data was not found.';
@@ -386,13 +443,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get database_failure_already_exists => 'the data already exists.';
 
   @override
-  String get database_failure_deadline_exceeded => 'Data retrieval takes too long. Try again later.';
+  String get database_failure_deadline_exceeded =>
+      'Data retrieval takes too long. Try again later.';
 
   @override
   String get database_failure_cancelled => 'The operation has been cancelled.';
 
   @override
-  String get database_failure_unavailable => 'The service is currently unavailable.';
+  String get database_failure_unavailable =>
+      'The service is currently unavailable.';
 
   @override
   String get database_failure_unknown => 'An unknown error occured.';
@@ -401,31 +460,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get storage_failure_object_not_found => 'Image not found.';
 
   @override
-  String get storage_failure_not_authenticated => 'You are not logged in. Please login and try again.';
+  String get storage_failure_not_authenticated =>
+      'You are not logged in. Please login and try again.';
 
   @override
-  String get storage_failure_not_authorized => 'You are not permitted to do this.';
+  String get storage_failure_not_authorized =>
+      'You are not permitted to do this.';
 
   @override
-  String get storage_failure_retry_limit_exceeded => 'There seems to be a problem. The action is taking longer than usual. Please try again later.';
+  String get storage_failure_retry_limit_exceeded =>
+      'There seems to be a problem. The action is taking longer than usual. Please try again later.';
 
   @override
-  String get storage_failure_unknown => 'An unknown error occured. Please try again later.';
+  String get storage_failure_unknown =>
+      'An unknown error occured. Please try again later.';
 
   @override
   String get password_forgotten_title => 'Reset password';
 
   @override
-  String get password_forgotten_description => 'Please enter your email address and confirm. A link will then be sent to the email address you provided. You can use this link to reset your password.';
+  String get password_forgotten_description =>
+      'Please enter your email address and confirm. A link will then be sent to the email address you provided. You can use this link to reset your password.';
 
   @override
-  String get password_forgotten_success_dialog_title => 'Password reset succeeded';
+  String get password_forgotten_success_dialog_title =>
+      'Password reset succeeded';
 
   @override
-  String get password_forgotten_success_dialog_description => 'An email has been sent to the email address provided. You can set your new password using the link in the email.';
+  String get password_forgotten_success_dialog_description =>
+      'An email has been sent to the email address provided. You can set your new password using the link in the email.';
 
   @override
-  String get password_forgotten_success_dialog_ok_button_title => 'Back to Login';
+  String get password_forgotten_success_dialog_ok_button_title =>
+      'Back to Login';
 
   @override
   String get password_forgotten_button_title => 'Reset password';
@@ -443,67 +510,93 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_page_email_section_status => 'Status';
 
   @override
-  String get profile_page_email_section_description => 'Now enter your new email address and confirm. A confirmation link will then be sent to the new email address. You can use this link to verify your new email address and log in again.';
+  String get profile_page_email_section_description =>
+      'Now enter your new email address and confirm. A confirmation link will then be sent to the new email address. You can use this link to verify your new email address and log in again.';
 
   @override
-  String get profile_page_email_section_change_email_button_title => 'Change email address';
+  String get profile_page_email_section_change_email_button_title =>
+      'Change email address';
 
   @override
-  String get profile_page_email_section_change_email_password_description => 'Please enter your password if you would like to change your email address.';
+  String get profile_page_email_section_change_email_password_description =>
+      'Please enter your password if you would like to change your email address.';
 
   @override
-  String get profile_page_email_section_change_email_password_continue_button_title => 'Continue';
+  String
+      get profile_page_email_section_change_email_password_continue_button_title =>
+          'Continue';
 
   @override
-  String get profile_page_email_section_resend_verify_email_button_title => 'Resend link for email verification';
+  String get profile_page_email_section_resend_verify_email_button_title =>
+      'Resend link for email verification';
 
   @override
   String get profile_page_email_section_title => 'E-Mail Settings';
 
   @override
-  String get profile_page_email_section_verification_badge_verified => 'Verified';
+  String get profile_page_email_section_verification_badge_verified =>
+      'Verified';
 
   @override
-  String get profile_page_email_section_verification_badge_unverified => 'Unverifiziert';
+  String get profile_page_email_section_verification_badge_unverified =>
+      'Unverifiziert';
 
   @override
-  String get profile_page_image_section_validation_exceededFileSize => 'You have exceeded the maximum allowed size of 5 MB';
+  String get profile_page_image_section_validation_exceededFileSize =>
+      'You have exceeded the maximum allowed size of 5 MB';
 
   @override
-  String get profile_page_image_section_validation_not_valid => 'The image format is invalid';
+  String get profile_page_image_section_validation_not_valid =>
+      'The image format is invalid';
 
   @override
-  String get profile_page_image_section_only_one_allowed => 'You can only upload one image at a time';
+  String get profile_page_image_section_only_one_allowed =>
+      'You can only upload one image at a time';
 
   @override
-  String get profile_page_image_section_upload_not_found => 'The image to upload was not found';
+  String get profile_page_image_section_upload_not_found =>
+      'The image to upload was not found';
 
   @override
-  String get profile_page_image_section_large_image_view_close_button_tooltip_title => 'Close';
+  String
+      get profile_page_image_section_large_image_view_close_button_tooltip_title =>
+          'Close';
 
   @override
   String get profile_page_password_update_section_title => 'Change password';
 
   @override
-  String get profile_page_password_update_section_new_password_description => 'Please enter your new password and confirm it. You will then be logged out and you can log in with the new password.';
+  String get profile_page_password_update_section_new_password_description =>
+      'Please enter your new password and confirm it. You will then be logged out and you can log in with the new password.';
 
   @override
-  String get profile_page_password_update_section_new_password_textfield_placeholder => 'New password';
+  String
+      get profile_page_password_update_section_new_password_textfield_placeholder =>
+          'New password';
 
   @override
-  String get profile_page_password_update_section_new_password_repeat_textfield_placeholder => 'Repeat new password';
+  String
+      get profile_page_password_update_section_new_password_repeat_textfield_placeholder =>
+          'Repeat new password';
 
   @override
-  String get profile_page_password_update_section_new_password_confirm_button_text => 'Change password';
+  String
+      get profile_page_password_update_section_new_password_confirm_button_text =>
+          'Change password';
 
   @override
-  String get profile_page_password_update_section_reauth_description => 'Please enter your current password so that you can create a new password.';
+  String get profile_page_password_update_section_reauth_description =>
+      'Please enter your current password so that you can create a new password.';
 
   @override
-  String get profile_page_password_update_section_reauth_password_textfield_placeholder => 'Password';
+  String
+      get profile_page_password_update_section_reauth_password_textfield_placeholder =>
+          'Password';
 
   @override
-  String get profile_page_password_update_section_reauth_continue_button_title => 'Weiter';
+  String
+      get profile_page_password_update_section_reauth_continue_button_title =>
+          'Weiter';
 
   @override
   String get profile_page_contact_section_title => 'Contact Information';
@@ -524,31 +617,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_page_contact_section_form_place => 'place';
 
   @override
-  String get profile_page_contact_section_form_save_button_title => 'Save changes';
+  String get profile_page_contact_section_form_save_button_title =>
+      'Save changes';
 
   @override
-  String get profile_page_snackbar_image_changed_message => 'You have successfully customized the profile picture.';
+  String get profile_page_snackbar_image_changed_message =>
+      'You have successfully customized the profile picture.';
 
   @override
-  String get profile_page_snackbar_contact_information_changes => 'The change to your contact information was successful.';
+  String get profile_page_snackbar_contact_information_changes =>
+      'The change to your contact information was successful.';
 
   @override
-  String get profile_page_snackbar_email_verification => 'A link for email verification has been sent to you.';
+  String get profile_page_snackbar_email_verification =>
+      'A link for email verification has been sent to you.';
 
   @override
-  String get profile_page_snackbar_company_registered => 'The request for the company registration has been sent succesful.';
+  String get profile_page_snackbar_company_registered =>
+      'The request for the company registration has been sent succesful.';
 
   @override
   String get profile_page_logout_button_title => 'Logout';
 
   @override
-  String get profile_page_request_failure_message => 'An error occurred while retrieving the data.';
+  String get profile_page_request_failure_message =>
+      'An error occurred while retrieving the data.';
 
   @override
   String get profile_page_promoters_section_title => 'Promoter';
 
   @override
-  String get profile_page_promoters_section_recommender_count => 'Number of promoters:';
+  String get profile_page_promoters_section_recommender_count =>
+      'Number of promoters:';
 
   @override
   String get gender_picker_choose => 'Choose your gender';
@@ -563,7 +663,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gender_picker_female => 'Female';
 
   @override
-  String get register_promoter_email_already_in_use => 'The email address already exists for another user.';
+  String get register_promoter_email_already_in_use =>
+      'The email address already exists for another user.';
 
   @override
   String get register_promoter_title => 'Register promoter';
@@ -578,25 +679,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register_promoter_email => 'email address';
 
   @override
-  String get register_promoter_additional_info => 'reason for the recommendation';
+  String get register_promoter_additional_info =>
+      'reason for the recommendation';
 
   @override
   String get register_promoter_register_button => 'Register';
 
   @override
-  String get register_promoter_snackbar_success => 'The new promoter has been successfully registered!';
+  String get register_promoter_snackbar_success =>
+      'The new promoter has been successfully registered!';
 
   @override
-  String get register_promoter_no_landingpage_title => 'You have not created a landing page yet';
+  String get register_promoter_no_landingpage_title =>
+      'You have not created a landing page yet';
 
   @override
-  String get register_promoter_no_landingpage_subtitle => 'In order to create a new promoter it is necessary to have an active landing page.';
+  String get register_promoter_no_landingpage_subtitle =>
+      'In order to create a new promoter it is necessary to have an active landing page.';
 
   @override
-  String get register_promoter_missing_landingpage_error_message => 'The promoter has not yet been assigned a landing page';
+  String get register_promoter_missing_landingpage_error_message =>
+      'The promoter has not yet been assigned a landing page';
 
   @override
-  String get register_promoter_missing_company_error_message => 'You cannot register a promoter because you are not affiliated with any company';
+  String get register_promoter_missing_company_error_message =>
+      'You cannot register a promoter because you are not affiliated with any company';
 
   @override
   String get promoter_register_tab_title => 'Register promoter';
@@ -605,7 +712,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get my_promoters_tab_title => 'My promoters';
 
   @override
-  String get promoter_page_edit_promoter_snackbar_title => 'Successfully edited promoter!';
+  String get promoter_page_edit_promoter_snackbar_title =>
+      'Successfully edited promoter!';
 
   @override
   String get promoter_overview_title => 'My promoter';
@@ -647,25 +755,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get promoter_overview_no_search_results_title => 'No search results';
 
   @override
-  String get promoter_overview_no_search_results_subtitle => 'You don\'t seem to have registered any promoters with the name you\'re looking for yet.\nChange your search term to search for other promoters.';
+  String get promoter_overview_no_search_results_subtitle =>
+      'You don\'t seem to have registered any promoters with the name you\'re looking for yet.\nChange your search term to search for other promoters.';
 
   @override
   String get promoter_overview_registration_badge_registered => 'Registered';
 
   @override
-  String get promoter_overview_registration_badge_unregistered => 'Not registered';
+  String get promoter_overview_registration_badge_unregistered =>
+      'Not registered';
 
   @override
   String get promoter_overview_empty_page_title => 'No promoter found';
 
   @override
-  String get promoter_overview_empty_page_subtitle => 'You dont seem to have any promoters registered yet. Register your promoters now to win your first new customers.';
+  String get promoter_overview_empty_page_subtitle =>
+      'You dont seem to have any promoters registered yet. Register your promoters now to win your first new customers.';
 
   @override
   String get promoter_overview_empty_page_button_title => 'Register promoter';
 
   @override
-  String get promoter_overview_error_view_title => 'An error occurred while retrieving the data.';
+  String get promoter_overview_error_view_title =>
+      'An error occurred while retrieving the data.';
 
   @override
   String promoter_overview_expiration_date(String date) {
@@ -684,10 +796,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get promoter_overview_delete_promoter_tooltip => 'Delete';
 
   @override
-  String get promoter_overview_delete_promoter_alert_title => 'Should the selected promoter really be deleted?';
+  String get promoter_overview_delete_promoter_alert_title =>
+      'Should the selected promoter really be deleted?';
 
   @override
-  String get promoter_overview_delete_promoter_alert_description => 'Deleting the promoter cannot be undone.';
+  String get promoter_overview_delete_promoter_alert_description =>
+      'Deleting the promoter cannot be undone.';
 
   @override
   String get promoter_overview_delete_promoter_alert_delete_button => 'Delete';
@@ -696,16 +810,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get promoter_overview_delete_promoter_alert_cancel_button => 'Cancel';
 
   @override
-  String get promoter_overview_delete_promoter_success_snackbar => 'Promoter successfully deleted';
+  String get promoter_overview_delete_promoter_success_snackbar =>
+      'Promoter successfully deleted';
 
   @override
-  String get promoter_overview_delete_promoter_failure_snackbar => 'Promoter deletion failed!';
+  String get promoter_overview_delete_promoter_failure_snackbar =>
+      'Promoter deletion failed!';
 
   @override
   String get delete_account_title => 'Delete account';
 
   @override
-  String get delete_account_subtitle => 'Once your account is deleted, your data will remain with us for 30 days. During this time you can still contact support to reverse the deletion. Your data will then be irrevocably deleted.\n\nPlease enter your password to delete the account.';
+  String get delete_account_subtitle =>
+      'Once your account is deleted, your data will remain with us for 30 days. During this time you can still contact support to reverse the deletion. Your data will then be irrevocably deleted.\n\nPlease enter your password to delete the account.';
 
   @override
   String get delete_account_password_placeholder => 'Password';
@@ -714,13 +831,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delete_account_button_title => 'Delete account';
 
   @override
-  String get delete_account_confirmation_alert_title => 'Really delete your account?';
+  String get delete_account_confirmation_alert_title =>
+      'Really delete your account?';
 
   @override
-  String get delete_account_confirmation_alert_message => 'Are you sure you want to delete your account?';
+  String get delete_account_confirmation_alert_message =>
+      'Are you sure you want to delete your account?';
 
   @override
-  String get delete_account_confirmation_alert_ok_button_title => 'Delete account';
+  String get delete_account_confirmation_alert_ok_button_title =>
+      'Delete account';
 
   @override
   String get delete_account_confirmation_alert_cancel_button_title => 'Cancel';
@@ -729,13 +849,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_page_leadTextField_title_prefix => 'Text for';
 
   @override
-  String get recommendation_page_leadTextField_send_button => 'Send via Whatsapp';
+  String get recommendation_page_leadTextField_send_button =>
+      'Send via Whatsapp';
 
   @override
-  String get recommendation_page_send_whatsapp_error => 'WhatsApp is not installed or cannot be opened.';
+  String get recommendation_page_send_whatsapp_error =>
+      'WhatsApp is not installed or cannot be opened.';
 
   @override
-  String get recommendation_page_max_item_Message => 'A maximum of 6 items can be added.';
+  String get recommendation_page_max_item_Message =>
+      'A maximum of 6 items can be added.';
 
   @override
   String get recommendations_choose_reason_placeholder => 'Choose a reason';
@@ -750,25 +873,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendations_form_promoter_placeholder => 'Promoter';
 
   @override
-  String get recommendations_form_service_provider_placeholder => 'Service provider';
+  String get recommendations_form_service_provider_placeholder =>
+      'Service provider';
 
   @override
-  String get recommendations_form_recommendation_name_placeholder => 'Recommendation name';
+  String get recommendations_form_recommendation_name_placeholder =>
+      'Recommendation name';
 
   @override
-  String get recommendations_form_generate_recommendation_button_title => 'Generate recommendations';
+  String get recommendations_form_generate_recommendation_button_title =>
+      'Generate recommendations';
 
   @override
-  String get recommendations_error_view_title => 'An error occurred while retrieving the data';
+  String get recommendations_error_view_title =>
+      'An error occurred while retrieving the data';
 
   @override
-  String get recommendations_validation_missing_lead_name => 'Please enter a name';
+  String get recommendations_validation_missing_lead_name =>
+      'Please enter a name';
 
   @override
-  String get recommendations_validation_missing_promoter_name => 'Please enter a name';
+  String get recommendations_validation_missing_promoter_name =>
+      'Please enter a name';
 
   @override
-  String get recommendations_validation_missing_reason => 'Please enter a reason';
+  String get recommendations_validation_missing_reason =>
+      'Please enter a reason';
 
   @override
   String get profile_company_contact_section_title => 'Company Information';
@@ -795,7 +925,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_company_contact_section_phone => 'Phone';
 
   @override
-  String get profile_company_contact_section_avv_checkbox_text => 'I approve the';
+  String get profile_company_contact_section_avv_checkbox_text =>
+      'I approve the';
 
   @override
   String get profile_company_contact_section_avv_checkbox_text_part2 => '.';
@@ -804,37 +935,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_company_contact_section_avv_link => 'OPC';
 
   @override
-  String get profile_company_contact_section_avv_already_approved => 'already approved.';
+  String get profile_company_contact_section_avv_already_approved =>
+      'already approved.';
 
   @override
-  String get profile_company_contact_section_avv_generating => 'OPC is being generated...';
+  String get profile_company_contact_section_avv_generating =>
+      'OPC is being generated...';
 
   @override
-  String get profile_company_validator_missing_name => 'Please enter the company name';
+  String get profile_company_validator_missing_name =>
+      'Please enter the company name';
 
   @override
-  String get profile_company_validator_missing_industry => 'Please enter the industry';
+  String get profile_company_validator_missing_industry =>
+      'Please enter the industry';
 
   @override
-  String get profile_company_validator_invalid_phone => 'The phone number is invalid';
+  String get profile_company_validator_invalid_phone =>
+      'The phone number is invalid';
 
   @override
-  String get profile_company_validator_missing_address => 'Please enter the address';
+  String get profile_company_validator_missing_address =>
+      'Please enter the address';
 
   @override
-  String get profile_company_validator_missing_postCode => 'Please enter a postcode';
+  String get profile_company_validator_missing_postCode =>
+      'Please enter a postcode';
 
   @override
-  String get profile_company_validator_invalid_postCode => 'The postcode is invalid';
+  String get profile_company_validator_invalid_postCode =>
+      'The postcode is invalid';
 
   @override
   String get profile_company_validator_missing_place => 'Please enter a place';
 
   @override
-  String get profile_company_validator_missing_phone => 'Please enter a phone number';
+  String get profile_company_validator_missing_phone =>
+      'Please enter a phone number';
 
   @override
-  String get profile_company_contact_section_success_snackbar_message => 'Company information changed successfully';
+  String get profile_company_contact_section_success_snackbar_message =>
+      'Company information changed successfully';
 
   @override
   String get company_requests_overview_title => 'Company Registration Requests';
@@ -873,40 +1014,50 @@ class AppLocalizationsEn extends AppLocalizations {
   String get admin_company_request_detail_user_email => 'Email Address:';
 
   @override
-  String get admin_company_request_detail_decline_button_title => 'Decline request';
+  String get admin_company_request_detail_decline_button_title =>
+      'Decline request';
 
   @override
-  String get admin_company_request_detail_accept_button_title => 'Accept request';
+  String get admin_company_request_detail_accept_button_title =>
+      'Accept request';
 
   @override
   String get admin_company_request_overview_from_user => 'from: ';
 
   @override
-  String get admin_company_request_overview_empty_title => 'There are no requests';
+  String get admin_company_request_overview_empty_title =>
+      'There are no requests';
 
   @override
-  String get admin_company_request_overview_empty_body => 'There dont appear to be any registration requests from companies at this time.';
+  String get admin_company_request_overview_empty_body =>
+      'There dont appear to be any registration requests from companies at this time.';
 
   @override
-  String get admin_company_request_overview_title => 'Requests for company registrations';
+  String get admin_company_request_overview_title =>
+      'Requests for company registrations';
 
   @override
   String get admin_company_request_overview_error => 'There was an error';
 
   @override
-  String get admin_registration_code_creator_success_snackbar => 'Code successfully sent!';
+  String get admin_registration_code_creator_success_snackbar =>
+      'Code successfully sent!';
 
   @override
-  String get admin_registration_code_creator_title => 'Create registration code';
+  String get admin_registration_code_creator_title =>
+      'Create registration code';
 
   @override
-  String get admin_registration_code_creator_description => 'Here you can create a registration code for a user. The code will be sent to the specified email address. The user who registered with this code is not assigned to a company.';
+  String get admin_registration_code_creator_description =>
+      'Here you can create a registration code for a user. The code will be sent to the specified email address. The user who registered with this code is not assigned to a company.';
 
   @override
-  String get admin_registration_code_creator_email_placeholder => 'Email address';
+  String get admin_registration_code_creator_email_placeholder =>
+      'Email address';
 
   @override
-  String get admin_registration_code_creator_firstname_placeholder => 'Firstname';
+  String get admin_registration_code_creator_firstname_placeholder =>
+      'Firstname';
 
   @override
   String get admin_registration_code_creator_send_code_button => 'Send code';
@@ -915,19 +1066,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get company_registration_form_title => 'Register company';
 
   @override
-  String get company_registration_form_name_textfield_placeholder => 'Company name';
+  String get company_registration_form_name_textfield_placeholder =>
+      'Company name';
 
   @override
-  String get company_registration_form_industry_textfield_placeholder => 'Industry';
+  String get company_registration_form_industry_textfield_placeholder =>
+      'Industry';
 
   @override
-  String get company_registration_form_website_textfield_placeholder => 'Website (optional)';
+  String get company_registration_form_website_textfield_placeholder =>
+      'Website (optional)';
 
   @override
-  String get company_registration_form_address_textfield_placeholder => 'Address';
+  String get company_registration_form_address_textfield_placeholder =>
+      'Address';
 
   @override
-  String get company_registration_form_postcode_textfield_placeholder => 'Postcode';
+  String get company_registration_form_postcode_textfield_placeholder =>
+      'Postcode';
 
   @override
   String get company_registration_form_place_textfield_placeholder => 'Place';
@@ -942,16 +1098,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_register_company_section_title => 'Company registration';
 
   @override
-  String get profile_register_company_section_subtitle_in_progress => 'Your request is being processed.\nThe processing time is on average 7 days.';
+  String get profile_register_company_section_subtitle_in_progress =>
+      'Your request is being processed.\nThe processing time is on average 7 days.';
 
   @override
-  String get profile_register_company_section_subtitle_requested_at => 'Requested at ';
+  String get profile_register_company_section_subtitle_requested_at =>
+      'Requested at ';
 
   @override
-  String get profile_register_company_section_subtitle => 'Register your company now to take advantage of the apps additional benefits.';
+  String get profile_register_company_section_subtitle =>
+      'Register your company now to take advantage of the apps additional benefits.';
 
   @override
-  String get profile_register_company_section_button_title => 'Go to registration';
+  String get profile_register_company_section_button_title =>
+      'Go to registration';
 
   @override
   String get profile_image_upload_tooltip => 'Upload image';
@@ -987,13 +1147,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendations_form_add_button_tooltip => 'Add recommendation';
 
   @override
-  String get landingpage_pagebuilder_container_request_error => 'An error occurred while retrieving the data';
+  String get landingpage_pagebuilder_container_request_error =>
+      'An error occurred while retrieving the data';
 
   @override
-  String get landingpage_pagebuilder_container_permission_error_title => 'You are not authorized to access this page';
+  String get landingpage_pagebuilder_container_permission_error_title =>
+      'You are not authorized to access this page';
 
   @override
-  String get landingpage_pagebuilder_container_permission_error_message => 'You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.';
+  String get landingpage_pagebuilder_container_permission_error_message =>
+      'You do not have the appropriate permission to access this page. Please log in with an account that is authorized to do so.';
 
   @override
   String get landingpage_pagebuilder_appbar_save_button_title => 'Save';
@@ -1002,19 +1165,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_save_error_alert_title => 'Save failed';
 
   @override
-  String get landingpage_pagebuilder_save_error_alert_message => 'An error occurred while saving your new landing page content. Please try again later.';
+  String get landingpage_pagebuilder_save_error_alert_message =>
+      'An error occurred while saving your new landing page content. Please try again later.';
 
   @override
   String get landingpage_pagebuilder_save_error_alert_button => 'OK';
 
   @override
-  String get landingpage_pagebuilder_save_success_snackbar => 'The changes were saved successfully.';
+  String get landingpage_pagebuilder_save_success_snackbar =>
+      'The changes were saved successfully.';
 
   @override
-  String get landingpage_pagebuilder_image_upload_exceeds_file_size_error => 'The image exceeds the 5 MB limit and cannot be uploaded!';
+  String get landingpage_pagebuilder_image_upload_exceeds_file_size_error =>
+      'The image exceeds the 5 MB limit and cannot be uploaded!';
 
   @override
-  String get landingpage_pagebuilder_unload_alert_message => 'Do you really want to leave the site? Changes that are not saved will be lost.';
+  String get landingpage_pagebuilder_unload_alert_message =>
+      'Do you really want to leave the site? Changes that are not saved will be lost.';
 
   @override
   String get landingpage_pagebuilder_config_menu_content_tab => 'Content';
@@ -1044,19 +1211,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_config_menu_button_type => 'Button';
 
   @override
-  String get landingpage_pagebuilder_config_menu_contact_form_type => 'Contact Form';
+  String get landingpage_pagebuilder_config_menu_contact_form_type =>
+      'Contact Form';
 
   @override
   String get landingpage_pagebuilder_config_menu_footer_type => 'Footer';
 
   @override
-  String get landingpage_pagebuilder_config_menu_video_player_type => 'Video Player';
+  String get landingpage_pagebuilder_config_menu_video_player_type =>
+      'Video Player';
 
   @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unknown';
 
   @override
-  String get landingpage_pagebuilder_text_config_text_title => 'Text configuration';
+  String get landingpage_pagebuilder_text_config_text_title =>
+      'Text configuration';
 
   @override
   String get landingpage_pagebuilder_text_config_alignment => 'Alignment';
@@ -1068,7 +1238,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_text_config_alignment_center => 'center';
 
   @override
-  String get landingpage_pagebuilder_text_config_alignment_right => 'right-align';
+  String get landingpage_pagebuilder_text_config_alignment_right =>
+      'right-align';
 
   @override
   String get landingpage_pagebuilder_text_config_alignment_justify => 'justify';
@@ -1077,7 +1248,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_text_config_lineheight => 'Line height';
 
   @override
-  String get landingpage_pagebuilder_text_config_letterspacing => 'Letter spacing';
+  String get landingpage_pagebuilder_text_config_letterspacing =>
+      'Letter spacing';
 
   @override
   String get landingpage_pagebuilder_text_config_color => 'Text color';
@@ -1089,19 +1261,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_text_config_shadow => 'Text shadow';
 
   @override
-  String get landingpage_pagebuilder_text_config_shadow_alert_title => 'Configure shadow';
+  String get landingpage_pagebuilder_text_config_shadow_alert_title =>
+      'Configure shadow';
 
   @override
-  String get landingpage_pagebuilder_text_config_shadow_alert_spread_radius => 'Spread radius';
+  String get landingpage_pagebuilder_text_config_shadow_alert_spread_radius =>
+      'Spread radius';
 
   @override
-  String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius => 'Blur radius';
+  String get landingpage_pagebuilder_text_config_shadow_alert_blur_radius =>
+      'Blur radius';
 
   @override
-  String get landingpage_pagebuilder_text_config_shadow_alert_x_offset => 'X offset';
+  String get landingpage_pagebuilder_text_config_shadow_alert_x_offset =>
+      'X offset';
 
   @override
-  String get landingpage_pagebuilder_text_config_shadow_alert_y_offset => 'Y offset';
+  String get landingpage_pagebuilder_text_config_shadow_alert_y_offset =>
+      'Y offset';
 
   @override
   String get landingpage_pagebuilder_text_config_shadow_alert_apply => 'Apply';
@@ -1119,10 +1296,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_color_picker_ok_button => 'OK';
 
   @override
-  String get landingpage_pagebuilder_text_config_text_placeholder => 'Type text here...';
+  String get landingpage_pagebuilder_text_config_text_placeholder =>
+      'Type text here...';
 
   @override
-  String get landingpage_pagebuilder_text_config_content_title => 'Text content';
+  String get landingpage_pagebuilder_text_config_content_title =>
+      'Text content';
 
   @override
   String get landingpage_pagebuilder_layout_spacing_top => 'Top';
@@ -1149,19 +1328,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_layout_menu_alignment => 'Alignment';
 
   @override
-  String get landingpage_pagebuilder_layout_menu_image_control_title => 'Background image';
+  String get landingpage_pagebuilder_layout_menu_image_control_title =>
+      'Background image';
 
   @override
-  String get landingpage_pagebuilder_layout_menu_background_contentmode => 'Content mode';
+  String get landingpage_pagebuilder_layout_menu_background_contentmode =>
+      'Content mode';
 
   @override
-  String get landingpage_pagebuilder_layout_menu_background_overlay => 'Image overlay';
+  String get landingpage_pagebuilder_layout_menu_background_overlay =>
+      'Image overlay';
 
   @override
   String get landingpage_pagebuilder_layout_menu_background => 'Background';
 
   @override
-  String get landingpage_pagebuilder_layout_menu_background_color => 'Background color';
+  String get landingpage_pagebuilder_layout_menu_background_color =>
+      'Background color';
 
   @override
   String get pagebuilder_layout_menu_alignment_top_left => 'top left';
@@ -1215,25 +1398,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pagebuilder_image_config_image_content => 'Image content';
 
   @override
-  String get landingpage_pagebuilder_container_config_container_title => 'Container configuration';
+  String get landingpage_pagebuilder_container_config_container_title =>
+      'Container configuration';
 
   @override
-  String get landingpage_pagebuilder_container_config_container_shadow => 'Shadow';
+  String get landingpage_pagebuilder_container_config_container_shadow =>
+      'Shadow';
 
   @override
-  String get landingpage_pagebuilder_row_config_row_title => 'Row configuration';
+  String get landingpage_pagebuilder_row_config_row_title =>
+      'Row configuration';
 
   @override
-  String get landingpage_pagebuilder_row_config_row_equal_heights => 'Equal heights';
+  String get landingpage_pagebuilder_row_config_row_equal_heights =>
+      'Equal heights';
 
   @override
-  String get landingpage_pagebuilder_row_config_row_main_axis_alignment => 'Alignment x-axis';
+  String get landingpage_pagebuilder_row_config_row_main_axis_alignment =>
+      'Alignment x-axis';
 
   @override
-  String get landingpage_pagebuilder_row_config_row_cross_axis_alignment => 'Alignment y-axis';
+  String get landingpage_pagebuilder_row_config_row_cross_axis_alignment =>
+      'Alignment y-axis';
 
   @override
-  String get landingpage_pagebuilder_column_config_column_title => 'Column configuration';
+  String get landingpage_pagebuilder_column_config_column_title =>
+      'Column configuration';
 
   @override
   String get landingpage_pagebuilder_icon_content => 'Icon content';
@@ -1242,7 +1432,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_icon_content_change_icon => 'Change icon';
 
   @override
-  String get landingpage_pagebuilder_icon_config_icon_title => 'Icon configuration';
+  String get landingpage_pagebuilder_icon_config_icon_title =>
+      'Icon configuration';
 
   @override
   String get landingpage_pagebuilder_icon_config_color => 'Color';
@@ -1251,7 +1442,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_icon_config_size => 'Size';
 
   @override
-  String get landingpage_pagebuilder_icon_config_icon_picker_title => 'Choose an icon';
+  String get landingpage_pagebuilder_icon_config_icon_picker_title =>
+      'Choose an icon';
 
   @override
   String get landingpage_pagebuilder_icon_config_icon_picker_close => 'Close';
@@ -1260,16 +1452,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_icon_config_icon_picker_search => 'Search';
 
   @override
-  String get landingpage_pagebuilder_icon_config_icon_picker_search_no_results => 'No results for:';
+  String
+      get landingpage_pagebuilder_icon_config_icon_picker_search_no_results =>
+          'No results for:';
 
   @override
-  String get landingpage_pagebuilder_contactform_content_email => 'Contactform email';
+  String get landingpage_pagebuilder_contactform_content_email =>
+      'Contactform email';
 
   @override
-  String get landingpage_pagebuilder_contactform_content_email_subtitle => 'Please enter the recipient email address to which the contact request will be sent.';
+  String get landingpage_pagebuilder_contactform_content_email_subtitle =>
+      'Please enter the recipient email address to which the contact request will be sent.';
 
   @override
-  String get landingpage_pagebuilder_contactform_content_email_placeholder => 'Email address';
+  String get landingpage_pagebuilder_contactform_content_email_placeholder =>
+      'Email address';
 
   @override
   String get pagebuilder_button_config_button_width => 'Width';
@@ -1281,67 +1478,87 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pagebuilder_button_config_button_border_radius => 'Radius';
 
   @override
-  String get pagebuilder_button_config_button_background_color => 'Background color';
+  String get pagebuilder_button_config_button_background_color =>
+      'Background color';
 
   @override
-  String get pagebuilder_button_config_button_text_configuration => 'Button text configuration';
+  String get pagebuilder_button_config_button_text_configuration =>
+      'Button text configuration';
 
   @override
-  String get pagebuilder_contact_form_config_name_textfield_title => 'Name textfield';
+  String get pagebuilder_contact_form_config_name_textfield_title =>
+      'Name textfield';
 
   @override
-  String get pagebuilder_contact_form_config_email_textfield_title => 'E-Mail textfield';
+  String get pagebuilder_contact_form_config_email_textfield_title =>
+      'E-Mail textfield';
 
   @override
-  String get pagebuilder_contact_form_config_phone_textfield_title => 'Phone textfield';
+  String get pagebuilder_contact_form_config_phone_textfield_title =>
+      'Phone textfield';
 
   @override
-  String get pagebuilder_contact_form_config_message_textfield_title => 'Message textfield';
+  String get pagebuilder_contact_form_config_message_textfield_title =>
+      'Message textfield';
 
   @override
-  String get pagebuilder_contact_form_config_button_title => 'Button configuration';
+  String get pagebuilder_contact_form_config_button_title =>
+      'Button configuration';
 
   @override
   String get pagebuilder_textfield_config_textfield_width => 'Width';
 
   @override
-  String get pagebuilder_textfield_config_textfield_min_lines => 'Number of lines min';
+  String get pagebuilder_textfield_config_textfield_min_lines =>
+      'Number of lines min';
 
   @override
-  String get pagebuilder_textfield_config_textfield_max_lines => 'Number of lines max';
+  String get pagebuilder_textfield_config_textfield_max_lines =>
+      'Number of lines max';
 
   @override
-  String get pagebuilder_textfield_config_textfield_required => 'Required field';
+  String get pagebuilder_textfield_config_textfield_required =>
+      'Required field';
 
   @override
-  String get pagebuilder_textfield_config_textfield_background_color => 'Background color';
+  String get pagebuilder_textfield_config_textfield_background_color =>
+      'Background color';
 
   @override
-  String get pagebuilder_textfield_config_textfield_border_color => 'Border color';
+  String get pagebuilder_textfield_config_textfield_border_color =>
+      'Border color';
 
   @override
-  String get pagebuilder_textfield_config_textfield_placeholder => 'Placeholder';
+  String get pagebuilder_textfield_config_textfield_placeholder =>
+      'Placeholder';
 
   @override
-  String get pagebuilder_textfield_config_textfield_text_configuration => 'Textfield text configuration';
+  String get pagebuilder_textfield_config_textfield_text_configuration =>
+      'Textfield text configuration';
 
   @override
-  String get pagebuilder_textfield_config_textfield_placeholder_text_configuration => 'Textfield placeholder configuration';
+  String
+      get pagebuilder_textfield_config_textfield_placeholder_text_configuration =>
+          'Textfield placeholder configuration';
 
   @override
   String get landingpage_pagebuilder_config_menu_section_type => 'Section';
 
   @override
-  String get landingpage_pagebuilder_footer_config_privacy_policy => 'Privacy Policy Configuration';
+  String get landingpage_pagebuilder_footer_config_privacy_policy =>
+      'Privacy Policy Configuration';
 
   @override
-  String get landingpage_pagebuilder_footer_config_impressum => 'Impressum Configuration';
+  String get landingpage_pagebuilder_footer_config_impressum =>
+      'Impressum Configuration';
 
   @override
-  String get landingpage_pagebuilder_footer_config_initial_information => 'Initial Information Configuration ';
+  String get landingpage_pagebuilder_footer_config_initial_information =>
+      'Initial Information Configuration ';
 
   @override
-  String get landingpage_pagebuilder_footer_config_terms_and_conditions => 'Terms and Conditions Configuration';
+  String get landingpage_pagebuilder_footer_config_terms_and_conditions =>
+      'Terms and Conditions Configuration';
 
   @override
   String edit_promoter_title(String firstName, String lastName) {
@@ -1349,55 +1566,71 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get edit_promoter_subtitle => 'Here you can adjust the landingpage allocation.';
+  String get edit_promoter_subtitle =>
+      'Here you can adjust the landingpage allocation.';
 
   @override
   String get edit_promoter_save_button_title => 'Save changes';
 
   @override
-  String get edit_promoter_inactive_landingpage_tooltip => 'This landingpage is not active';
+  String get edit_promoter_inactive_landingpage_tooltip =>
+      'This landingpage is not active';
 
   @override
-  String get edit_promoter_inactive_landingpage_tooltip_activate_action => 'Activate landingpage';
+  String get edit_promoter_inactive_landingpage_tooltip_activate_action =>
+      'Activate landingpage';
 
   @override
-  String get promoter_overview_inactive_landingpage_tooltip_warning => 'The promoter doesnt have active assinged landingpages';
+  String get promoter_overview_inactive_landingpage_tooltip_warning =>
+      'The promoter doesnt have active assinged landingpages';
 
   @override
-  String get promoter_overview_inactive_landingpage_tooltip_warning_action => 'Assign landingpage';
+  String get promoter_overview_inactive_landingpage_tooltip_warning_action =>
+      'Assign landingpage';
 
   @override
-  String get landingpage_pagebuilder_video_player_config_title => 'Video Player Configuration';
+  String get landingpage_pagebuilder_video_player_config_title =>
+      'Video Player Configuration';
 
   @override
-  String get landingpage_pagebuilder_video_player_config_youtube_link => 'Youtube link';
+  String get landingpage_pagebuilder_video_player_config_youtube_link =>
+      'Youtube link';
 
   @override
-  String get landingpage_pagebuilder_video_player_config_youtube_link_description => 'Please provide the YouTube link where your video can be accessed.';
+  String
+      get landingpage_pagebuilder_video_player_config_youtube_link_description =>
+          'Please provide the YouTube link where your video can be accessed.';
 
   @override
-  String get landingpage_pagebuilder_video_player_config_youtube_link_placeholder => 'Youtube link';
+  String
+      get landingpage_pagebuilder_video_player_config_youtube_link_placeholder =>
+          'Youtube link';
 
   @override
-  String get landingpage_creator_missing_companydata_error => 'Company data not found';
+  String get landingpage_creator_missing_companydata_error =>
+      'Company data not found';
 
   @override
-  String get landingpage_creator_default_page_info_text => 'The data from your company profile is used to create the default landing page. This data will be displayed on the default landing page. If you change your company data, the data on your default page will also change.';
+  String get landingpage_creator_default_page_info_text =>
+      'The data from your company profile is used to create the default landing page. This data will be displayed on the default landing page. If you change your company data, the data on your default page will also change.';
 
   @override
   String get landingpage_overview_no_default_page_title => 'Setup Landingpage';
 
   @override
-  String get landingpage_overview_no_default_page_subtitle => 'You haven\'t set up a landing page for your company yet. Here you can create a default landing page to start with. This landing page will be used if the link to another landing page expires. The landing page displays company information and a contact form.';
+  String get landingpage_overview_no_default_page_subtitle =>
+      'You haven\'t set up a landing page for your company yet. Here you can create a default landing page to start with. This landing page will be used if the link to another landing page expires. The landing page displays company information and a contact form.';
 
   @override
-  String get landingpage_overview_no_default_page_button_title => 'Create default landingpage';
+  String get landingpage_overview_no_default_page_button_title =>
+      'Create default landingpage';
 
   @override
   String get edit_promoter_no_data_title => 'No data found';
 
   @override
-  String get edit_promoter_no_data_subtitle => 'No data was found for this promoter';
+  String get edit_promoter_no_data_subtitle =>
+      'No data was found for this promoter';
 
   @override
   String get send_recommendation_alert_title => 'Recommendation sent?';
@@ -1414,7 +1647,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get send_recommendation_alert_no_button => 'No';
 
   @override
-  String get send_recommendation_missing_link_text => 'The [LINK] placeholder is missing!';
+  String get send_recommendation_missing_link_text =>
+      'The [LINK] placeholder is missing!';
 
   @override
   String get recommendation_manager_expired_day => 'day';
@@ -1450,7 +1684,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_filter_promoter => 'Promoter';
 
   @override
-  String get recommendation_manager_filter_recommendation_receiver => 'Receiver';
+  String get recommendation_manager_filter_recommendation_receiver =>
+      'Receiver';
 
   @override
   String get recommendation_manager_filter_reason => 'Reason';
@@ -1468,7 +1703,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_list_header_priority => 'Priority';
 
   @override
-  String get recommendation_manager_list_header_receiver => 'Recommendation name';
+  String get recommendation_manager_list_header_receiver =>
+      'Recommendation name';
 
   @override
   String get recommendation_manager_list_header_promoter => 'Promoter';
@@ -1480,19 +1716,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_list_header_expiration_date => 'Expires in';
 
   @override
-  String get recommendation_manager_no_search_result_title => 'No search results';
+  String get recommendation_manager_no_search_result_title =>
+      'No search results';
 
   @override
-  String get recommendation_manager_no_search_result_description => 'No recommendations were found for your search term.';
+  String get recommendation_manager_no_search_result_description =>
+      'No recommendations were found for your search term.';
 
   @override
-  String get recommendation_manager_list_tile_receiver => 'Recommendation receiver';
+  String get recommendation_manager_list_tile_receiver =>
+      'Recommendation receiver';
 
   @override
   String get recommendation_manager_list_tile_reason => 'Recommendation reason';
 
   @override
-  String get recommendation_manager_list_tile_delete_button_title => 'Delete recommendation';
+  String get recommendation_manager_list_tile_delete_button_title =>
+      'Delete recommendation';
 
   @override
   String get recommendation_manager_title => 'My Recommendations';
@@ -1501,7 +1741,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_filter_tooltip => 'Filter recommendations';
 
   @override
-  String get recommendation_manager_search_close_tooltip => 'Delete search term';
+  String get recommendation_manager_search_close_tooltip =>
+      'Delete search term';
 
   @override
   String get recommendation_manager_search_placeholder => 'Suche...';
@@ -1510,55 +1751,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_no_data_title => 'No recommendations found';
 
   @override
-  String get recommendation_manager_no_data_description => 'No recommendations were found. You don\'t seem to have made a recommendation yet. Your recommendations are displayed in the Recommendation Manager.';
+  String get recommendation_manager_no_data_description =>
+      'No recommendations were found. You don\'t seem to have made a recommendation yet. Your recommendations are displayed in the Recommendation Manager.';
 
   @override
-  String get recommendation_manager_no_data_button_title => 'Make a recommendation';
+  String get recommendation_manager_no_data_button_title =>
+      'Make a recommendation';
 
   @override
   String get recommendation_manager_failure_text => 'An error has occurred';
 
   @override
-  String get recommendation_manager_tile_progress_appointment_button_tooltip => 'Mark as scheduled';
+  String get recommendation_manager_tile_progress_appointment_button_tooltip =>
+      'Mark as scheduled';
 
   @override
-  String get recommendation_manager_tile_progress_finish_button_tooltip => 'Mark as completed';
+  String get recommendation_manager_tile_progress_finish_button_tooltip =>
+      'Mark as completed';
 
   @override
-  String get recommendation_manager_tile_progress_failed_button_tooltip => 'Mark as failed';
+  String get recommendation_manager_tile_progress_failed_button_tooltip =>
+      'Mark as failed';
 
   @override
-  String get recommendation_manager_delete_alert_title => 'Delete recommendation';
+  String get recommendation_manager_delete_alert_title =>
+      'Delete recommendation';
 
   @override
-  String get recommendation_manager_delete_alert_description => 'Are you sure you want to delete the recommendation? This action cannot be undone.';
+  String get recommendation_manager_delete_alert_description =>
+      'Are you sure you want to delete the recommendation? This action cannot be undone.';
 
   @override
-  String get recommendation_manager_delete_alert_delete_button => 'Delete recommendation';
+  String get recommendation_manager_delete_alert_delete_button =>
+      'Delete recommendation';
 
   @override
   String get recommendation_manager_delete_alert_cancel_button => 'Cancel';
 
   @override
-  String get recommendation_manager_delete_snackbar => 'The recommendation was successfully deleted!';
+  String get recommendation_manager_delete_snackbar =>
+      'The recommendation was successfully deleted!';
 
   @override
   String get recommendation_manager_finished_at_list_header => 'Finished at';
 
   @override
-  String get recommendation_manager_archive_no_data_title => 'No archived recommendations found';
+  String get recommendation_manager_archive_no_data_title =>
+      'No archived recommendations found';
 
   @override
-  String get recommendation_manager_archive_no_data_description => 'You don\'t appear to have archived any recommendations yet. All completed and incomplete recommendations are stored in the archive.';
+  String get recommendation_manager_archive_no_data_description =>
+      'You don\'t appear to have archived any recommendations yet. All completed and incomplete recommendations are stored in the archive.';
 
   @override
   String get recommendation_manager_filter_finished_at => 'Completion date';
 
   @override
-  String get recommendation_manager_finish_alert_title => 'Finish recommendation';
+  String get recommendation_manager_finish_alert_title =>
+      'Finish recommendation';
 
   @override
-  String get recommendation_manager_finish_alert_message => 'Do you really want to mark the recommendation as completed?\nThe recommendation will then be archived.';
+  String get recommendation_manager_finish_alert_message =>
+      'Do you really want to mark the recommendation as completed?\nThe recommendation will then be archived.';
 
   @override
   String get recommendation_manager_finish_alert_archive_button => 'Archive';
@@ -1567,10 +1821,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_finish_alert_cancel_button => 'Cancel';
 
   @override
-  String get recommendation_manager_failed_alert_title => 'Recommendation not completed';
+  String get recommendation_manager_failed_alert_title =>
+      'Recommendation not completed';
 
   @override
-  String get recommendation_manager_failed_alert_description => 'Are you sure you want to mark the recommendation as failed?\nThe recommendation will then be archived.';
+  String get recommendation_manager_failed_alert_description =>
+      'Are you sure you want to mark the recommendation as failed?\nThe recommendation will then be archived.';
 
   @override
   String get recommendation_manager_failed_alert_archive_button => 'Archive';
@@ -1579,13 +1835,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_failed_alert_cancel_button => 'Cancel';
 
   @override
-  String get recommendation_manager_scheduled_snackbar => 'Appointment was successfully scheduled!';
+  String get recommendation_manager_scheduled_snackbar =>
+      'Appointment was successfully scheduled!';
 
   @override
-  String get recommendation_manager_finished_snackbar => 'Your recommendation has been moved to the archive!';
+  String get recommendation_manager_finished_snackbar =>
+      'Your recommendation has been moved to the archive!';
 
   @override
-  String get recommendation_manager_active_recommendations_tab => 'Active Recommendations';
+  String get recommendation_manager_active_recommendations_tab =>
+      'Active Recommendations';
 
   @override
   String get recommendation_manager_achive_tab => 'Archive';
@@ -1594,7 +1853,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_filter_sort_by_status => 'Sort by status';
 
   @override
-  String get recommendation_manager_filter_sort_by_favorites => 'Sort by favorites';
+  String get recommendation_manager_filter_sort_by_favorites =>
+      'Sort by favorites';
 
   @override
   String get recommendation_manager_filter_favorites => 'Favorites';
@@ -1603,13 +1863,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_filter_no_favorites => 'No favorites';
 
   @override
-  String get recommendation_manager_favorite_snackbar => 'Favorites successfully changed!';
+  String get recommendation_manager_favorite_snackbar =>
+      'Favorites successfully changed!';
 
   @override
   String get recommendation_missing_landingpage_title => 'No landingpage found';
 
   @override
-  String get recommendation_missing_landingpage_text => 'In order to make a recommendation, you must first create a landing page in addition to your default landing page.';
+  String get recommendation_missing_landingpage_text =>
+      'In order to make a recommendation, you must first create a landing page in addition to your default landing page.';
 
   @override
   String get recommendation_missing_landingpage_button => 'To the landingpages';
@@ -1624,16 +1886,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_priority_low => 'Low';
 
   @override
-  String get recommendation_manager_filter_sort_by_priorities => 'Sort by priority';
+  String get recommendation_manager_filter_sort_by_priorities =>
+      'Sort by priority';
 
   @override
-  String get recommendation_manager_show_landingpage_button => 'Show landingpage';
+  String get recommendation_manager_show_landingpage_button =>
+      'Show landingpage';
 
   @override
-  String get recommendation_manager_select_priority_tooltip => 'Select priority';
+  String get recommendation_manager_select_priority_tooltip =>
+      'Select priority';
 
   @override
-  String get recommendation_manager_priority_snackbar => 'Priority successfully changed!';
+  String get recommendation_manager_priority_snackbar =>
+      'Priority successfully changed!';
 
   @override
   String get recommendation_manager_notes_placeholder => 'Add notes here...';
@@ -1645,11 +1911,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_manager_notes_edit_button_tooltip => 'Edit notes';
 
   @override
-  String get recommendation_manager_notes_last_updated => 'Notes last edited at:';
+  String get recommendation_manager_notes_last_updated =>
+      'Notes last edited at:';
 
   @override
   String get recommendation_manager_add_note_button_tooltip => 'Add note';
 
   @override
-  String get recommendation_manager_notes_snackbar => 'Notes successfully changed!';
+  String get recommendation_manager_notes_snackbar =>
+      'Notes successfully changed!';
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_first_name =>
+      'First name of recommendation';
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_last_name =>
+      'Last name of recommendation';
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_name =>
+      'Name of recommendation';
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_first_name =>
+      'First name of promoter';
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_last_name =>
+      'Last name of promoter';
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_name => 'Name of promoter';
+
+  @override
+  String get pagebuilder_text_placeholder_picker => 'Choose placeholder';
 }
