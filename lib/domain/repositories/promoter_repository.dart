@@ -15,7 +15,8 @@ abstract class PromoterRepository {
       List<String> ids);
   Future<Either<DatabaseFailure, List<UnregisteredPromoter>>>
       getUnregisteredPromoters(List<String> ids);
-  Future<Either<DatabaseFailure, Unit>> deletePromoter({required String id});
+  Future<Either<DatabaseFailure, Unit>> deletePromoter(
+      {required String id, required bool isRegistered});
   Future<Either<DatabaseFailure, Unit>> editPromoter(
       {required bool isRegistered,
       required List<String> landingPageIDs,

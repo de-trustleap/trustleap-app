@@ -86,9 +86,10 @@ class PromoterCubit extends Cubit<PromoterState> {
     }
   }
 
-  void deletePromoter(String id) async {
+  void deletePromoter(String id, bool isRegistered) async {
     emit(PromoterLoadingState());
-    final failureOrSuccess = await promoterRepo.deletePromoter(id: id);
+    final failureOrSuccess =
+        await promoterRepo.deletePromoter(id: id, isRegistered: isRegistered);
     failureOrSuccess.fold(
         (failure) => emit(PromoterDeleteFailureState(failure: failure)), (_) {
       emit(PromoterDeleteSuccessState());
