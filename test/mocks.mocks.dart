@@ -5731,6 +5731,135 @@ class MockAppLocalizations extends _i1.Mock implements _i22.AppLocalizations {
       ) as String);
 
   @override
+  String get recommendation_manager_notes_placeholder => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_placeholder),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_notes_save_button_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_save_button_tooltip),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_save_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_notes_edit_button_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_edit_button_tooltip),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_edit_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_notes_last_updated => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_last_updated),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_last_updated),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_add_note_button_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_add_note_button_tooltip),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_add_note_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_notes_snackbar => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_snackbar),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_first_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_text_placeholder_recommendation_first_name),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_text_placeholder_recommendation_first_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_last_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_text_placeholder_recommendation_last_name),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_text_placeholder_recommendation_last_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_name =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_recommendation_name),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_recommendation_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_first_name =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_promoter_first_name),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_promoter_first_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_last_name =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_promoter_last_name),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_promoter_last_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_name => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_promoter_name),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_promoter_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_picker => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_picker),
+        returnValue: _i23.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_picker),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -6703,13 +6832,18 @@ class MockPromoterRepository extends _i1.Mock
               .Either<_i27.DatabaseFailure, List<_i37.UnregisteredPromoter>>>);
 
   @override
-  _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>> deletePromoter(
-          {required String? id}) =>
+  _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>> deletePromoter({
+    required String? id,
+    required bool? isRegistered,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #deletePromoter,
           [],
-          {#id: id},
+          {
+            #id: id,
+            #isRegistered: isRegistered,
+          },
         ),
         returnValue:
             _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>>.value(
@@ -6718,7 +6852,10 @@ class MockPromoterRepository extends _i1.Mock
           Invocation.method(
             #deletePromoter,
             [],
-            {#id: id},
+            {
+              #id: id,
+              #isRegistered: isRegistered,
+            },
           ),
         )),
       ) as _i18.Future<_i2.Either<_i27.DatabaseFailure, _i2.Unit>>);
@@ -9775,10 +9912,17 @@ class MockPromoterCubit extends _i1.Mock implements _i57.PromoterCubit {
       );
 
   @override
-  void deletePromoter(String? id) => super.noSuchMethod(
+  void deletePromoter(
+    String? id,
+    bool? isRegistered,
+  ) =>
+      super.noSuchMethod(
         Invocation.method(
           #deletePromoter,
-          [id],
+          [
+            id,
+            isRegistered,
+          ],
         ),
         returnValueForMissingStub: null,
       );
@@ -11588,6 +11732,16 @@ class MockFirebaseAuth extends _i1.Mock implements _i3.FirebaseAuth {
         Invocation.method(
           #revokeTokenWithAuthorizationCode,
           [authorizationCode],
+        ),
+        returnValue: _i18.Future<void>.value(),
+        returnValueForMissingStub: _i18.Future<void>.value(),
+      ) as _i18.Future<void>);
+
+  @override
+  _i18.Future<void> initializeRecaptchaConfig() => (super.noSuchMethod(
+        Invocation.method(
+          #initializeRecaptchaConfig,
+          [],
         ),
         returnValue: _i18.Future<void>.value(),
         returnValueForMissingStub: _i18.Future<void>.value(),

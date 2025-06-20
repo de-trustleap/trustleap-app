@@ -31,13 +31,14 @@ void main() {
     final testID = "1";
     test("should call promoter repo when function is called", () async {
       // Given
-      when(mockPromoterRepo.deletePromoter(id: testID))
+      when(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false))
           .thenAnswer((_) async => right(unit));
       // When
-      promoterCubit.deletePromoter(testID);
-      await untilCalled(mockPromoterRepo.deletePromoter(id: testID));
+      promoterCubit.deletePromoter(testID, false);
+      await untilCalled(
+          mockPromoterRepo.deletePromoter(id: testID, isRegistered: false));
       // Then
-      verify(mockPromoterRepo.deletePromoter(id: testID));
+      verify(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false));
       verifyNoMoreInteractions(mockPromoterRepo);
     });
 
@@ -49,11 +50,11 @@ void main() {
         PromoterLoadingState(),
         PromoterDeleteSuccessState()
       ];
-      when(mockPromoterRepo.deletePromoter(id: testID))
+      when(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false))
           .thenAnswer((_) async => right(unit));
       // Then
       expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
-      promoterCubit.deletePromoter(testID);
+      promoterCubit.deletePromoter(testID, false);
     });
 
     test(
@@ -64,11 +65,11 @@ void main() {
         PromoterLoadingState(),
         PromoterDeleteFailureState(failure: BackendFailure())
       ];
-      when(mockPromoterRepo.deletePromoter(id: testID))
+      when(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(promoterCubit.stream, emitsInOrder(expectedResult));
-      promoterCubit.deletePromoter(testID);
+      promoterCubit.deletePromoter(testID, false);
     });
   });
 

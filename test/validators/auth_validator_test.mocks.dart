@@ -5278,6 +5278,135 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get recommendation_manager_notes_placeholder => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_notes_save_button_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_save_button_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_save_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_notes_edit_button_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_edit_button_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_edit_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_notes_last_updated => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_last_updated),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_last_updated),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_add_note_button_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_add_note_button_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_add_note_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_notes_snackbar => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_notes_snackbar),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_notes_snackbar),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_first_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_text_placeholder_recommendation_first_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_text_placeholder_recommendation_first_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_last_name =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_text_placeholder_recommendation_last_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_text_placeholder_recommendation_last_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_recommendation_name =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_recommendation_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_recommendation_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_first_name =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_promoter_first_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_promoter_first_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_last_name =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_promoter_last_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_promoter_last_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_promoter_name => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_promoter_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_promoter_name),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_text_placeholder_picker => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_text_placeholder_picker),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_text_placeholder_picker),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
