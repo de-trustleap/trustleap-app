@@ -39,7 +39,6 @@ Future<void> main() async {
       options.tracesSampleRate = 0.1;
     },
     appRunner: () async {
-      // ✅ Jetzt in derselben Zone wie runApp()
       WidgetsFlutterBinding.ensureInitialized();
 
       final environment = Environment();
