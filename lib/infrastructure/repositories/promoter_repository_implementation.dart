@@ -164,12 +164,13 @@ class PromoterRepositoryImplementation implements PromoterRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> deletePromoter(
-      {required String id}) async {
+      {required String id, required bool isRegistered}) async {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("deletePromoter");
     try {
       await callable.call({
         "appCheckToken": appCheckToken,
+        "isRegistered": isRegistered,
         "id": id,
       });
       return right(unit);

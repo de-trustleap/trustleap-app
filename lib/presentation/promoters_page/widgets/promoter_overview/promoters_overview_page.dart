@@ -112,12 +112,13 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
     _searchController.clear();
   }
 
-  void submitDeletion(String id) {
+  void submitDeletion(String id, bool isRegistered) {
     CustomNavigator.pop();
-    Modular.get<PromoterCubit>().deletePromoter(id);
+    Modular.get<PromoterCubit>().deletePromoter(id, isRegistered);
   }
 
-  void showDeleteAlert(String id, AppLocalizations localization) {
+  void showDeleteAlert(
+      String id, bool isRegistered, AppLocalizations localization) {
     showDialog(
         context: context,
         builder: (_) {
@@ -129,7 +130,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                   .promoter_overview_delete_promoter_alert_delete_button,
               cancelButtonTitle: localization
                   .promoter_overview_delete_promoter_alert_cancel_button,
-              actionButtonAction: () => submitDeletion(id),
+              actionButtonAction: () => submitDeletion(id, isRegistered),
               cancelButtonAction: () => CustomNavigator.pop());
         });
   }
@@ -174,6 +175,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
               }
             },
             builder: (context, promoterState) {
+              print("THE STATE: $state");
               if (state is PromotersObserverGetElementsSuccess) {
                 if (state.promoters.isEmpty && visiblePromoters.isEmpty) {
                   return EmptyPage(
@@ -193,8 +195,9 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                       PromoterOverviewGrid(
                         controller: _controller,
                         promoters: visiblePromoters,
-                        deletePressed: (promoterId) =>
-                            showDeleteAlert(promoterId, localization),
+                        deletePressed: (promoterId, isRegistered) =>
+                            showDeleteAlert(
+                                promoterId, isRegistered, localization),
                       )
                     ] else ...[
                       PromoterOverviewList(

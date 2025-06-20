@@ -173,12 +173,13 @@ void main() {
     test("should return nothing when call was successful", () async {
       // Given
       final expectedResult = right(unit);
-      when(mockPromoterRepo.deletePromoter(id: testID))
+      when(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false))
           .thenAnswer((_) async => right(unit));
       // When
-      final result = await mockPromoterRepo.deletePromoter(id: testID);
+      final result = await mockPromoterRepo.deletePromoter(
+          id: testID, isRegistered: false);
       // Then
-      verify(mockPromoterRepo.deletePromoter(id: testID));
+      verify(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockPromoterRepo);
     });
@@ -186,12 +187,13 @@ void main() {
     test("should return failure when call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockPromoterRepo.deletePromoter(id: testID))
+      when(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockPromoterRepo.deletePromoter(id: testID);
+      final result = await mockPromoterRepo.deletePromoter(
+          id: testID, isRegistered: false);
       // Then
-      verify(mockPromoterRepo.deletePromoter(id: testID));
+      verify(mockPromoterRepo.deletePromoter(id: testID, isRegistered: false));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockPromoterRepo);
     });

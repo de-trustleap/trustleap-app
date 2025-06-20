@@ -8,7 +8,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 class PromoterOverviewGrid extends StatelessWidget {
   final ScrollController controller;
   final List<Promoter> promoters;
-  final Function(String) deletePressed;
+  final Function(String, bool) deletePressed;
 
   const PromoterOverviewGrid(
       {super.key,

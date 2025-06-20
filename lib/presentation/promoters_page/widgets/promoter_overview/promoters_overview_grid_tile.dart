@@ -19,7 +19,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersOverviewGridTile extends StatelessWidget {
   final Promoter promoter;
-  final Function(String) deletePressed;
+  final Function(String, bool) deletePressed;
 
   const PromotersOverviewGridTile(
       {super.key, required this.promoter, required this.deletePressed});
@@ -119,7 +119,8 @@ class PromotersOverviewGridTile extends StatelessWidget {
                               ],
                           onSelected: (String newValue) {
                             if (newValue == "delete") {
-                              deletePressed(promoter.id.value);
+                              deletePressed(promoter.id.value,
+                                  promoter.registered ?? false);
                             } else if (newValue == "edit") {
                               CustomNavigator.navigate(
                                   "${RoutePaths.homePath}${RoutePaths.editPromoterPath}/${promoter.id.value}");
