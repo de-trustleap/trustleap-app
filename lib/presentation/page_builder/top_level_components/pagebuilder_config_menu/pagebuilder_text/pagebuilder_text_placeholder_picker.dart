@@ -32,14 +32,6 @@ class _PagebuilderTextPlaceholderPickerState
       AppLocalizations localization) {
     List<PopupMenuItem<String>> entries = [
       PopupMenuItem<String>(
-          value: PagebuilderTextPlaceholder.recommendationFirstName,
-          child: Text(localization
-              .pagebuilder_text_placeholder_recommendation_first_name)),
-      PopupMenuItem<String>(
-          value: PagebuilderTextPlaceholder.recommendationLastName,
-          child: Text(localization
-              .pagebuilder_text_placeholder_recommendation_last_name)),
-      PopupMenuItem<String>(
           value: PagebuilderTextPlaceholder.recommendationName,
           child: Text(
               localization.pagebuilder_text_placeholder_recommendation_name)),

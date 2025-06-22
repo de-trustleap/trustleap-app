@@ -1962,14 +1962,6 @@ class AppLocalizationsDe extends AppLocalizations {
       'Notizen erfolgreich angepasst!';
 
   @override
-  String get pagebuilder_text_placeholder_recommendation_first_name =>
-      'Vorname des Empfohlenen';
-
-  @override
-  String get pagebuilder_text_placeholder_recommendation_last_name =>
-      'Nachname des Empfohlenen';
-
-  @override
   String get pagebuilder_text_placeholder_recommendation_name =>
       'Name des Empfohlenen';
 

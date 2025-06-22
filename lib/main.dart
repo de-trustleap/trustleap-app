@@ -26,34 +26,58 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:web/web.dart' as web;
 
-Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final environment = Environment();
-  await Firebase.initializeApp(
-      options: environment.isStaging()
-          ? DefaultFirebaseOptionsStaging.currentPlatform
-          : DefaultFirebaseOptionsProd.currentPlatform);
-  if (kIsWeb) {
-    await FirebaseAppCheck.instance.activate(
-        webProvider: ReCaptchaV3Provider(environment.getAppCheckToken()));
-  }
-  setPathUrlStrategy();
+Future<void> main() async {
+  await SentryFlutter.init(
+    (options) {
+      options.dsn =
+          'https://618cb82100c49afd9b092cd092c96202@o4509530459209728.ingest.de.sentry.io/4509530460586064';
+      options.sendDefaultPii = false;
+      options.tracesSampleRate = 0.1;
+    },
+    appRunner: () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-  final observer = RouterObserver();
-  Modular.to.setObservers([observer]);
+      final environment = Environment();
 
-  Modular.to.addListener(() {
-    observer.handleNavigation();
-  });
+      await Firebase.initializeApp(
+        options: environment.isStaging()
+            ? DefaultFirebaseOptionsStaging.currentPlatform
+            : DefaultFirebaseOptionsProd.currentPlatform,
+      );
 
-  runApp(ModularApp(module: AppModule(), child: const MyApp()));
+      if (kIsWeb) {
+        await FirebaseAppCheck.instance.activate(
+          webProvider: ReCaptchaV3Provider(environment.getAppCheckToken()),
+        );
+      }
 
-  if (kIsWeb) {
-    WebCrashReporter.initialize();
-  }
+      setPathUrlStrategy();
+
+      final observer = RouterObserver();
+      Modular.to.setObservers([observer]);
+
+      Modular.to.addListener(() {
+        observer.handleNavigation();
+      });
+
+      runApp(
+        ModularApp(
+          module: AppModule(),
+          child: SentryWidget(
+            child: const MyApp(),
+          ),
+        ),
+      );
+
+      if (kIsWeb) {
+        WebCrashReporter.initialize();
+      }
+    },
+  );
 }
 
 void routeToInitial(AuthStatus status) {

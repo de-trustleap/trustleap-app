@@ -46,6 +46,7 @@ dependencies:
   rxdart: ^0.28.0
   flutter_iconpicker: ^4.0.1
   web: ^1.1.1
+  sentry_flutter: ^9.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1922,14 +1922,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Notes successfully changed!';
 
   @override
-  String get pagebuilder_text_placeholder_recommendation_first_name =>
-      'First name of recommendation';
-
-  @override
-  String get pagebuilder_text_placeholder_recommendation_last_name =>
-      'Last name of recommendation';
-
-  @override
   String get pagebuilder_text_placeholder_recommendation_name =>
       'Name of recommendation';
 
