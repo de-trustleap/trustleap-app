@@ -2218,14 +2218,6 @@
     "@recommendation_manager_notes_snackbar": {
         "description": "Snackbar Nachricht wenn Notizen bei Empfehlung erfolgreich angepasst wurden auf der Empfehlungsmanager Seite"
     },
-    "pagebuilder_text_placeholder_recommendation_first_name": "Vorname des Empfohlenen",
-    "@pagebuilder_text_placeholder_recommendation_first_name": {
-        "description": "Platzhalter Dropdown Eintrag für Vorname des Empfohlenen in Pagebuilder Text Config Menü"
-    },
-    "pagebuilder_text_placeholder_recommendation_last_name": "Nachname des Empfohlenen",
-    "@pagebuilder_text_placeholder_recommendation_last_name": {
-        "description": "Platzhalter Dropdown Eintrag für Nachname des Empfohlenen in Pagebuilder Text Config Menü"
-    },
     "pagebuilder_text_placeholder_recommendation_name": "Name des Empfohlenen",
     "@pagebuilder_text_placeholder_recommendation_name": {
         "description": "Platzhalter Dropdown Eintrag für Name des Empfohlenen in Pagebuilder Text Config Menü"

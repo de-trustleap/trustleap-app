@@ -2218,14 +2218,6 @@
     "@recommendation_manager_notes_snackbar": {
         "description": "Snackbar message when notes of recommendation has been successfully changed on the recommendation manager page"
     },
-    "pagebuilder_text_placeholder_recommendation_first_name": "First name of recommendation",
-    "@pagebuilder_text_placeholder_recommendation_first_name": {
-        "description": "Placeholder dropdown entry for first name of the recommended person in Pagebuilder Text Config menu"
-    },
-    "pagebuilder_text_placeholder_recommendation_last_name": "Last name of recommendation",
-    "@pagebuilder_text_placeholder_recommendation_last_name": {
-        "description": "Placeholder dropdown entry for last name of the recommended person in Pagebuilder Text Config menu"
-    },
     "pagebuilder_text_placeholder_recommendation_name": "Name of recommendation",
     "@pagebuilder_text_placeholder_recommendation_name": {
         "description": "Placeholder dropdown entry for name of the recommended person in Pagebuilder Text Config menu"
