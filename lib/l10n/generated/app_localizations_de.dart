@@ -1966,14 +1966,6 @@ class AppLocalizationsDe extends AppLocalizations {
       'Name des Empfohlenen';
 
   @override
-  String get pagebuilder_text_placeholder_promoter_first_name =>
-      'Vorname des Promoters';
-
-  @override
-  String get pagebuilder_text_placeholder_promoter_last_name =>
-      'Nachname des Promoters';
-
-  @override
   String get pagebuilder_text_placeholder_promoter_name => 'Name des Promoters';
 
   @override

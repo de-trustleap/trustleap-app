@@ -1926,14 +1926,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Name of recommendation';
 
   @override
-  String get pagebuilder_text_placeholder_promoter_first_name =>
-      'First name of promoter';
-
-  @override
-  String get pagebuilder_text_placeholder_promoter_last_name =>
-      'Last name of promoter';
-
-  @override
   String get pagebuilder_text_placeholder_promoter_name => 'Name of promoter';
 
   @override

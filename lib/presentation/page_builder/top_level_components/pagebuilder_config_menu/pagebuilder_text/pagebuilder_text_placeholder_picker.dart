@@ -36,14 +36,6 @@ class _PagebuilderTextPlaceholderPickerState
           child: Text(
               localization.pagebuilder_text_placeholder_recommendation_name)),
       PopupMenuItem<String>(
-          value: PagebuilderTextPlaceholder.promoterFirstName,
-          child: Text(
-              localization.pagebuilder_text_placeholder_promoter_first_name)),
-      PopupMenuItem<String>(
-          value: PagebuilderTextPlaceholder.promoterLastName,
-          child: Text(
-              localization.pagebuilder_text_placeholder_promoter_last_name)),
-      PopupMenuItem<String>(
           value: PagebuilderTextPlaceholder.promoterName,
           child: Text(localization.pagebuilder_text_placeholder_promoter_name))
     ];

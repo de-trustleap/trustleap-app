@@ -2222,14 +2222,6 @@
     "@pagebuilder_text_placeholder_recommendation_name": {
         "description": "Placeholder dropdown entry for name of the recommended person in Pagebuilder Text Config menu"
     },
-    "pagebuilder_text_placeholder_promoter_first_name": "First name of promoter",
-    "@pagebuilder_text_placeholder_promoter_first_name": {
-        "description": "Placeholder dropdown entry for first name of the promoter in Pagebuilder Text Config menu"
-    },
-    "pagebuilder_text_placeholder_promoter_last_name": "Last name of promoter",
-    "@pagebuilder_text_placeholder_promoter_last_name": {
-        "description": "Placeholder dropdown entry for last name of the promoter in Pagebuilder Text Config menu"
-    },
     "pagebuilder_text_placeholder_promoter_name": "Name of promoter",
     "@pagebuilder_text_placeholder_promoter_name": {
         "description": "Placeholder dropdown entry for name of the promoter in Pagebuilder Text Config menu"

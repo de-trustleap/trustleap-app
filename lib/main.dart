@@ -85,11 +85,8 @@ void routeToInitial(AuthStatus status) {
   if (kIsWeb) {
     String path = web.window.location.pathname;
     String query = web.window.location.search;
-    if (path != "/") {
-      lastRoute = path + query;
-    } else {
-      lastRoute = path;
-    }
+
+    lastRoute = path + query;
   } else {
     lastRoute = WidgetsBinding.instance.platformDispatcher.defaultRouteName;
   }
@@ -99,6 +96,8 @@ void routeToInitial(AuthStatus status) {
       if (lastRoute.contains(RoutePaths.homePath) ||
           lastRoute.contains(RoutePaths.adminPath)) {
         CustomNavigator.navigate(RoutePaths.loginPath);
+      } else {
+        CustomNavigator.navigate(lastRoute);
       }
       break;
     case AuthStatus.authenticated:
@@ -115,8 +114,8 @@ void routeToInitial(AuthStatus status) {
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.adminPath)) {
         CustomNavigator.navigate(lastRoute);
       } else {
-        Modular.to
-            .navigate(RoutePaths.adminPath + RoutePaths.companyRequestsPath);
+        CustomNavigator.navigate(
+            RoutePaths.adminPath + RoutePaths.companyRequestsPath);
       }
       break;
   }

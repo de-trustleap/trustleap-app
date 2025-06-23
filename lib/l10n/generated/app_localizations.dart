@@ -3386,18 +3386,6 @@ abstract class AppLocalizations {
   /// **'Name of recommendation'**
   String get pagebuilder_text_placeholder_recommendation_name;
 
-  /// Placeholder dropdown entry for first name of the promoter in Pagebuilder Text Config menu
-  ///
-  /// In en, this message translates to:
-  /// **'First name of promoter'**
-  String get pagebuilder_text_placeholder_promoter_first_name;
-
-  /// Placeholder dropdown entry for last name of the promoter in Pagebuilder Text Config menu
-  ///
-  /// In en, this message translates to:
-  /// **'Last name of promoter'**
-  String get pagebuilder_text_placeholder_promoter_last_name;
-
   /// Placeholder dropdown entry for name of the promoter in Pagebuilder Text Config menu
   ///
   /// In en, this message translates to:
