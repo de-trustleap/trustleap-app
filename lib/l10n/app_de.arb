@@ -2222,14 +2222,6 @@
     "@pagebuilder_text_placeholder_recommendation_name": {
         "description": "Platzhalter Dropdown Eintrag für Name des Empfohlenen in Pagebuilder Text Config Menü"
     },
-    "pagebuilder_text_placeholder_promoter_first_name": "Vorname des Promoters",
-    "@pagebuilder_text_placeholder_promoter_first_name": {
-        "description": "Platzhalter Dropdown Eintrag für Vorname des Promoters in Pagebuilder Text Config Menü"
-    },
-    "pagebuilder_text_placeholder_promoter_last_name": "Nachname des Promoters",
-    "@pagebuilder_text_placeholder_promoter_last_name": {
-        "description": "Platzhalter Dropdown Eintrag für Nachname des Promoters in Pagebuilder Text Config Menü"
-    },
     "pagebuilder_text_placeholder_promoter_name": "Name des Promoters",
     "@pagebuilder_text_placeholder_promoter_name": {
         "description": "Platzhalter Dropdown Eintrag für Name des Promoters in Pagebuilder Text Config Menü"
