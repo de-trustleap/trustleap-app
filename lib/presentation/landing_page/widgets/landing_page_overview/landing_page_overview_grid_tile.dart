@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -114,9 +115,10 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                       ],
                       IconButton(
                           onPressed: () {
-                            CustomNavigator.navigate(
-                                "${RoutePaths.homePath}${RoutePaths.landingPagePath}/${landingPage.id.value}",
-                                arguments: landingPage);
+                            final baseURL =
+                                Environment().getLandingpageBaseURL();
+                            CustomNavigator.openURLInNewTab(
+                                "$baseURL?preview=true&id=${landingPage.id.value}");
                           },
                           iconSize: 24,
                           tooltip:
