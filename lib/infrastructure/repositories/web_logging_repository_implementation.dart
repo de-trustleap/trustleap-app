@@ -31,4 +31,21 @@ class WebLoggingRepositoryImplementation implements WebLoggingRepository {
       return;
     }
   }
+
+  @override
+  Future<void> reportWarning(String message, String? browser) async {
+    try {
+      final appCheckToken = await appCheck.getToken();
+      HttpsCallable callable =
+          firebaseFunctions.httpsCallable("reportWebCrash");
+      await callable.call({
+        "appCheckToken": appCheckToken,
+        "message": message,
+        "browser": browser,
+        "timestamp": DateTime.now().toIso8601String()
+      });
+    } catch (e) {
+      return;
+    }
+  }
 }

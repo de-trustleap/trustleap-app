@@ -115,7 +115,7 @@ class _LandingPageCreatorFormState
           scriptTags: widget.landingPage?.scriptTags,
           contactEmailAddress: contactEmailAddressTextController.text.trim(),
           ownerID: user!.id,
-          companyData: widget.company != null
+          companyData: (widget.company != null && widget.createDefaultPage)
               ? CompanyModel.fromDomain(widget.company!).toMap()
               : null));
     } else {

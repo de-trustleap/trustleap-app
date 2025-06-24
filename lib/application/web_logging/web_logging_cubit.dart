@@ -9,4 +9,8 @@ class WebLoggingCubit extends Cubit<String?> {
       String message, StackTrace? stack, String? browser) async {
     await webLoggingRepo.reportWebCrash(message, stack, browser);
   }
+
+  void reportWarning(String message, String? browser) async {
+    await webLoggingRepo.reportWarning(message, browser);
+  }
 }
