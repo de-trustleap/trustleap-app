@@ -27,6 +27,7 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
               PagebuilderConfigMenuTextConfig(
                   properties: (model.properties as PagebuilderFooterProperties)
                       .privacyPolicyTextProperties,
+                  showHoverTabBar: false,
                   onChanged: (textProperties) {
                     final updatedProperties = (model.properties
                             as PagebuilderFooterProperties)
@@ -46,6 +47,7 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
             PagebuilderConfigMenuTextConfig(
                 properties: (model.properties as PagebuilderFooterProperties)
                     .impressumTextProperties,
+                showHoverTabBar: false,
                 onChanged: (textProperties) {
                   final updatedProperties =
                       (model.properties as PagebuilderFooterProperties)
@@ -67,6 +69,7 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
             PagebuilderConfigMenuTextConfig(
                 properties: (model.properties as PagebuilderFooterProperties)
                     .initialInformationTextProperties,
+                showHoverTabBar: false,
                 onChanged: (textProperties) {
                   final updatedProperties =
                       (model.properties as PagebuilderFooterProperties)
@@ -89,6 +92,7 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
             PagebuilderConfigMenuTextConfig(
                 properties: (model.properties as PagebuilderFooterProperties)
                     .termsAndConditionsTextProperties,
+                showHoverTabBar: false,
                 onChanged: (textProperties) {
                   final updatedProperties =
                       (model.properties as PagebuilderFooterProperties)

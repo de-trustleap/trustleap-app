@@ -58,6 +58,7 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
       const SizedBox(height: 10),
       PagebuilderConfigMenuTextConfig(
           properties: properties?.textProperties,
+          showHoverTabBar: false,
           onChanged: (textProperties) {
             onChanged(properties?.copyWith(textProperties: textProperties));
           },

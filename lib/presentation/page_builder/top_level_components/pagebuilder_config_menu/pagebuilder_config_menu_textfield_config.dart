@@ -61,7 +61,7 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       PagebuilderNumberStepperControl(
           title: localization.pagebuilder_textfield_config_textfield_width,
-          initialValue: properties?.width?.toInt() ?? 0,
+          initialValue: props?.width?.toInt() ?? 0,
           minValue: 0,
           maxValue: 1000,
           onSelected: (width) {
@@ -70,7 +70,7 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
       const SizedBox(height: 20),
       PagebuilderNumberStepperControl(
           title: localization.pagebuilder_textfield_config_textfield_min_lines,
-          initialValue: properties?.minLines ?? 1,
+          initialValue: props?.minLines ?? 1,
           minValue: 1,
           maxValue: 1000,
           onSelected: (minLines) {
@@ -79,8 +79,8 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
       const SizedBox(height: 20),
       PagebuilderNumberStepperControl(
           title: localization.pagebuilder_textfield_config_textfield_max_lines,
-          initialValue: properties?.maxLines ?? 1,
-          minValue: properties?.minLines ?? 1,
+          initialValue: props?.maxLines ?? 1,
+          minValue: props?.minLines ?? 1,
           maxValue: 1000,
           onSelected: (maxLines) {
             onChangedLocal(props?.copyWith(maxLines: maxLines));
@@ -88,7 +88,7 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
       const SizedBox(height: 20),
       PagebuilderSwitchControl(
           title: localization.pagebuilder_textfield_config_textfield_required,
-          isActive: properties?.isRequired ?? false,
+          isActive: props?.isRequired ?? false,
           onSelected: (isRequired) {
             onChangedLocal(props?.copyWith(isRequired: isRequired));
           }),
@@ -96,7 +96,7 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
       PagebuilderColorControl(
           title: localization
               .pagebuilder_textfield_config_textfield_background_color,
-          initialColor: properties?.backgroundColor ?? Colors.transparent,
+          initialColor: props?.backgroundColor ?? Colors.transparent,
           onSelected: (backgroundColor) {
             onChangedLocal(props?.copyWith(backgroundColor: backgroundColor));
           }),
@@ -104,21 +104,20 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
       PagebuilderColorControl(
           title:
               localization.pagebuilder_textfield_config_textfield_border_color,
-          initialColor: properties?.borderColor ?? Colors.transparent,
+          initialColor: props?.borderColor ?? Colors.transparent,
           onSelected: (borderColor) {
             onChangedLocal(props?.copyWith(borderColor: borderColor));
           }),
       const SizedBox(height: 20),
       PagebuilderTextField(
-          initialText: properties?.placeHolderTextProperties?.text,
-          minLines: properties?.minLines ?? 1,
-          maxLines: properties?.maxLines ?? (properties?.minLines ?? 1),
+          initialText: props?.placeHolderTextProperties?.text,
+          minLines: props?.minLines ?? 1,
+          maxLines: props?.maxLines ?? (props?.minLines ?? 1),
           placeholder:
               localization.pagebuilder_textfield_config_textfield_placeholder,
           onChanged: (placeholder) {
-            final updatedPlaceholderProperties = properties
-                ?.placeHolderTextProperties
-                ?.copyWith(text: placeholder);
+            final updatedPlaceholderProperties =
+                props?.placeHolderTextProperties?.copyWith(text: placeholder);
             onChangedLocal(props?.copyWith(
                 placeHolderTextProperties: updatedPlaceholderProperties));
           }),
@@ -130,8 +129,9 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.bold)),
       const SizedBox(height: 10),
       PagebuilderConfigMenuTextConfig(
-          // TODO: HIER FUNKTIONIEREN DIE HOVER SWITCHES NICHT!
-          properties: properties?.textProperties,
+          properties: props?.textProperties,
+          hoverProperties: hoverProperties?.textProperties,
+          showHoverTabBar: false,
           onChanged: (textProperties) {
             onChangedLocal(props?.copyWith(textProperties: textProperties));
           },
@@ -146,16 +146,19 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.bold)),
       const SizedBox(height: 10),
       PagebuilderConfigMenuTextConfig(
-          // TODO: HIER FUNKTIONIEREN DIE HOVER SWITCHES NICHT!
-          properties: properties?.placeHolderTextProperties,
+          properties: props?.placeHolderTextProperties,
+          hoverProperties: hoverProperties?.placeHolderTextProperties,
+          showHoverTabBar: false,
           onChanged: (placeholderProperties) {
             onChangedLocal(props?.copyWith(
                 placeHolderTextProperties: placeholderProperties));
           },
           onChangedHover: (placeholderProperties) {
-            onChangedLocal(
-                props?.copyWith(textProperties: placeholderProperties));
+            onChangedLocal(props?.copyWith(
+                placeHolderTextProperties: placeholderProperties));
           }),
     ]);
   }
 }
+// TODO: HOVER TABBAR FÜR VERSCHACHTELTE PROPERTIES AUSBLENDEN! (FERTIG)
+// TODO: GRÖ?ENBERECHNUNG FÜR HOVER TAB FIXEN WENN DER SWITCH ABGESCHALTET IST!

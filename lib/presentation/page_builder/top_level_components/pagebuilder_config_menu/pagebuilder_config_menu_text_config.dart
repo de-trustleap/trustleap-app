@@ -12,20 +12,30 @@ import 'package:flutter/material.dart';
 class PagebuilderConfigMenuTextConfig extends StatelessWidget {
   final PageBuilderTextProperties? properties;
   final PageBuilderTextProperties? hoverProperties;
+  final bool showHoverTabBar;
   final Function(PageBuilderTextProperties?) onChanged;
   final Function(PageBuilderTextProperties?) onChangedHover;
-  const PagebuilderConfigMenuTextConfig(
-      {super.key,
-      required this.properties,
-      this.hoverProperties,
-      required this.onChanged,
-      required this.onChangedHover});
+
+  const PagebuilderConfigMenuTextConfig({
+    super.key,
+    required this.properties,
+    this.hoverProperties,
+    this.showHoverTabBar = true,
+    required this.onChanged,
+    required this.onChangedHover,
+  });
 
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
+
     if (properties != null) {
+      if (!showHoverTabBar) {
+        return _buildConfigUI(
+            properties!, false, themeData, localization, onChanged);
+      }
+
       return PagebuilderHoverConfigTabBar<PageBuilderTextProperties>(
         properties: properties!,
         hoverProperties: hoverProperties,
@@ -63,20 +73,20 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
     } else {
       return Column(children: [
         PagebuilderTextAlignmentControl(
-            initialAlignment: properties?.alignment ?? TextAlign.center,
+            initialAlignment: props?.alignment ?? TextAlign.center,
             onSelected: (alignment) {
               onChangedLocal(props?.copyWith(alignment: alignment));
             }),
         const SizedBox(height: 20),
         PagebuilderColorControl(
             title: localization.landingpage_pagebuilder_text_config_color,
-            initialColor: properties?.color ?? Colors.black,
+            initialColor: props?.color ?? Colors.black,
             onSelected: (color) {
               onChangedLocal(props?.copyWith(color: color));
             }),
         const SizedBox(height: 20),
         PagebuilderFontFamilyControl(
-            initialValue: properties?.fontFamily ?? "",
+            initialValue: props?.fontFamily ?? "",
             onSelected: (fontFamily) {
               onChangedLocal(props?.copyWith(fontFamily: fontFamily));
             }),
@@ -85,7 +95,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
           Text(localization.landingpage_pagebuilder_text_config_fontsize,
               style: themeData.textTheme.bodySmall),
           PagebuilderNumberStepper(
-              initialValue: properties?.fontSize?.round() ?? 0,
+              initialValue: props?.fontSize?.round() ?? 0,
               minValue: 0,
               maxValue: 1000,
               onSelected: (fontSize) {
@@ -95,7 +105,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
         const SizedBox(height: 20),
         PagebuilderNumberDropdown(
             title: localization.landingpage_pagebuilder_text_config_lineheight,
-            initialValue: properties?.lineHeight ?? 1.0,
+            initialValue: props?.lineHeight ?? 1.0,
             numbers: List.generate(
                 31, (index) => double.parse((index * 0.1).toStringAsFixed(1))),
             onSelected: (lineHeight) {
@@ -105,7 +115,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
         PagebuilderNumberDropdown(
             title:
                 localization.landingpage_pagebuilder_text_config_letterspacing,
-            initialValue: properties?.letterSpacing ?? 1.0,
+            initialValue: props?.letterSpacing ?? 1.0,
             numbers: List.generate(
                 31, (index) => double.parse((index * 0.1).toStringAsFixed(1))),
             onSelected: (letterSpacing) {
@@ -114,7 +124,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
         const SizedBox(height: 20),
         PagebuilderShadowControl(
             title: localization.landingpage_pagebuilder_text_config_shadow,
-            initialShadow: properties?.textShadow,
+            initialShadow: props?.textShadow,
             showSpreadRadius: false,
             onSelected: (shadow) {
               onChangedLocal(props?.copyWith(textShadow: shadow));
@@ -123,5 +133,3 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
     }
   }
 }
-
-// TODO: TEXTFIELD PROPERTIES HOVER EFFEKTE EINFÜGEN
