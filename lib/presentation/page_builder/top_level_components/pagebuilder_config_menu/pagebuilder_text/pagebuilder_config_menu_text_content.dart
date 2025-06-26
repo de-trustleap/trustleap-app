@@ -68,7 +68,7 @@ class _PagebuilderConfigMenuTextContentState
                       .copyWith(text: controller.text);
               updateTextProperties(updatedProperties, pagebuilderCubit);
             }),
-            const SizedBox(height: 8),
+            const SizedBox(height: 16),
             PagebuilderTextField(
                 controller: controller,
                 initialText:

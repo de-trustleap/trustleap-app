@@ -61,17 +61,13 @@ class _PagebuilderHoverConfigTabBarState<T>
             ],
           ),
         const SizedBox(height: 12),
-        IndexedStack(
-          index: selectedTabIndex,
-          children: [
-            widget.configBuilder(widget.properties, false, _handleChanged),
-            if (widget.hoverProperties != null)
-              widget.configBuilder(
-                  widget.hoverProperties as T, false, _handleChanged)
-            else
-              const SizedBox.shrink(),
-          ],
-        ),
+        if (selectedTabIndex == 0)
+          widget.configBuilder(widget.properties, false, _handleChanged)
+        else if (widget.hoverProperties != null && widget.hoverEnabled)
+          widget.configBuilder(
+              widget.hoverProperties as T, false, _handleChanged)
+        else
+          const SizedBox.shrink(),
       ],
     );
   }
