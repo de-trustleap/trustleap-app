@@ -34,6 +34,9 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
                     final updatedWidget =
                         model.copyWith(properties: updatedProperties);
                     pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                  },
+                  onChangedHover: (textProperties) {
+                    // TODO: PUT INTO FOOTER HOVER
                   })
             ]),
         const SizedBox(height: 10),
@@ -50,6 +53,9 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
                   final updatedWidget =
                       model.copyWith(properties: updatedProperties);
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                },
+                onChangedHover: (textProperties) {
+                  // TODO: PUT INTO FOOTER HOVER
                 })
           ],
         ),
@@ -69,6 +75,9 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
                   final updatedWidget =
                       model.copyWith(properties: updatedProperties);
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                },
+                onChangedHover: (textProperties) {
+                  // TODO: PUT INTO FOOTER HOVER
                 })
           ],
         ),
@@ -88,6 +97,9 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
                   final updatedWidget =
                       model.copyWith(properties: updatedProperties);
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                },
+                onChangedHover: (textProperties) {
+                  // TODO: PUT INTO FOOTER HOVER
                 })
           ],
         ),

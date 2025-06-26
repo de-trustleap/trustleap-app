@@ -31,6 +31,11 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                     properties:
                         (model.properties as PageBuilderContactFormProperties)
                             .nameTextFieldProperties,
+                    hoverProperties: model.hoverProperties != null
+                        ? (model.hoverProperties
+                                as PageBuilderContactFormProperties)
+                            .nameTextFieldProperties
+                        : null,
                     onChanged: (properties) {
                       if (model.properties
                           is PageBuilderContactFormProperties) {
@@ -41,6 +46,29 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                             model.copyWith(properties: updatedProperties);
                         pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                       }
+                    },
+                    onChangedHover: (hoverProps) {
+                      final currentHoverProps = model.hoverProperties
+                          as PageBuilderContactFormProperties?;
+
+                      final updatedHoverProps = hoverProps == null
+                          ? null
+                          : (currentHoverProps ??
+                                  const PageBuilderContactFormProperties(
+                                      email: null,
+                                      nameTextFieldProperties: null,
+                                      emailTextFieldProperties: null,
+                                      phoneTextFieldProperties: null,
+                                      messageTextFieldProperties: null,
+                                      buttonProperties: null))
+                              .copyWith(nameTextFieldProperties: hoverProps);
+
+                      final updatedWidget = model.copyWith(
+                        hoverProperties: updatedHoverProps,
+                        removeHoverProperties: hoverProps == null,
+                      );
+
+                      pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                     })
               ]),
           const SizedBox(height: 8),
@@ -52,6 +80,11 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                     properties:
                         (model.properties as PageBuilderContactFormProperties)
                             .emailTextFieldProperties,
+                    hoverProperties: model.hoverProperties != null
+                        ? (model.hoverProperties
+                                as PageBuilderContactFormProperties)
+                            .emailTextFieldProperties
+                        : null,
                     onChanged: (properties) {
                       if (model.properties
                           is PageBuilderContactFormProperties) {
@@ -62,6 +95,29 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                             model.copyWith(properties: updatedProperties);
                         pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                       }
+                    },
+                    onChangedHover: (hoverProps) {
+                      final currentHoverProps = model.hoverProperties
+                          as PageBuilderContactFormProperties?;
+
+                      final updatedHoverProps = hoverProps == null
+                          ? null
+                          : (currentHoverProps ??
+                                  const PageBuilderContactFormProperties(
+                                      email: null,
+                                      nameTextFieldProperties: null,
+                                      emailTextFieldProperties: null,
+                                      phoneTextFieldProperties: null,
+                                      messageTextFieldProperties: null,
+                                      buttonProperties: null))
+                              .copyWith(emailTextFieldProperties: hoverProps);
+
+                      final updatedWidget = model.copyWith(
+                        hoverProperties: updatedHoverProps,
+                        removeHoverProperties: hoverProps == null,
+                      );
+
+                      pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                     })
               ]),
           const SizedBox(height: 8),
@@ -73,6 +129,11 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                     properties:
                         (model.properties as PageBuilderContactFormProperties)
                             .phoneTextFieldProperties,
+                    hoverProperties: model.hoverProperties != null
+                        ? (model.hoverProperties
+                                as PageBuilderContactFormProperties)
+                            .phoneTextFieldProperties
+                        : null,
                     onChanged: (properties) {
                       if (model.properties
                           is PageBuilderContactFormProperties) {
@@ -83,6 +144,29 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                             model.copyWith(properties: updatedProperties);
                         pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                       }
+                    },
+                    onChangedHover: (hoverProps) {
+                      final currentHoverProps = model.hoverProperties
+                          as PageBuilderContactFormProperties?;
+
+                      final updatedHoverProps = hoverProps == null
+                          ? null
+                          : (currentHoverProps ??
+                                  const PageBuilderContactFormProperties(
+                                      email: null,
+                                      nameTextFieldProperties: null,
+                                      emailTextFieldProperties: null,
+                                      phoneTextFieldProperties: null,
+                                      messageTextFieldProperties: null,
+                                      buttonProperties: null))
+                              .copyWith(phoneTextFieldProperties: hoverProps);
+
+                      final updatedWidget = model.copyWith(
+                        hoverProperties: updatedHoverProps,
+                        removeHoverProperties: hoverProps == null,
+                      );
+
+                      pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                     })
               ]),
           const SizedBox(height: 8),
@@ -94,6 +178,11 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                     properties:
                         (model.properties as PageBuilderContactFormProperties)
                             .messageTextFieldProperties,
+                    hoverProperties: model.hoverProperties != null
+                        ? (model.hoverProperties
+                                as PageBuilderContactFormProperties)
+                            .messageTextFieldProperties
+                        : null,
                     onChanged: (properties) {
                       if (model.properties
                           is PageBuilderContactFormProperties) {
@@ -104,6 +193,29 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                             model.copyWith(properties: updatedProperties);
                         pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                       }
+                    },
+                    onChangedHover: (hoverProps) {
+                      final currentHoverProps = model.hoverProperties
+                          as PageBuilderContactFormProperties?;
+
+                      final updatedHoverProps = hoverProps == null
+                          ? null
+                          : (currentHoverProps ??
+                                  const PageBuilderContactFormProperties(
+                                      email: null,
+                                      nameTextFieldProperties: null,
+                                      emailTextFieldProperties: null,
+                                      phoneTextFieldProperties: null,
+                                      messageTextFieldProperties: null,
+                                      buttonProperties: null))
+                              .copyWith(messageTextFieldProperties: hoverProps);
+
+                      final updatedWidget = model.copyWith(
+                        hoverProperties: updatedHoverProps,
+                        removeHoverProperties: hoverProps == null,
+                      );
+
+                      pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                     })
               ]),
           const SizedBox(height: 8),

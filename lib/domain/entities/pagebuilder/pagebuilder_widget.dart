@@ -13,6 +13,7 @@ class PageBuilderWidget extends Equatable {
   final UniqueID id;
   final PageBuilderWidgetType? elementType;
   final PageBuilderProperties? properties;
+  final PageBuilderProperties? hoverProperties;
   final List<PageBuilderWidget>? children;
   final PageBuilderWidget? containerChild;
   final double? widthPercentage;
@@ -26,6 +27,7 @@ class PageBuilderWidget extends Equatable {
       {required this.id,
       required this.elementType,
       required this.properties,
+      required this.hoverProperties,
       required this.children,
       required this.containerChild,
       required this.widthPercentage,
@@ -39,6 +41,7 @@ class PageBuilderWidget extends Equatable {
       {UniqueID? id,
       PageBuilderWidgetType? elementType,
       PageBuilderProperties? properties,
+      PageBuilderProperties? hoverProperties,
       List<PageBuilderWidget>? children,
       PageBuilderWidget? containerChild,
       double? widthPercentage,
@@ -46,11 +49,15 @@ class PageBuilderWidget extends Equatable {
       PageBuilderSpacing? padding,
       PageBuilderSpacing? margin,
       double? maxWidth,
-      Alignment? alignment}) {
+      Alignment? alignment,
+      bool removeHoverProperties = false}) {
     return PageBuilderWidget(
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
         properties: properties ?? this.properties,
+        hoverProperties: removeHoverProperties
+            ? null
+            : (hoverProperties ?? this.hoverProperties),
         children: children ?? this.children,
         containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
@@ -95,6 +102,7 @@ class PageBuilderWidget extends Equatable {
         id,
         elementType,
         properties,
+        hoverProperties,
         children,
         containerChild,
         widthPercentage,

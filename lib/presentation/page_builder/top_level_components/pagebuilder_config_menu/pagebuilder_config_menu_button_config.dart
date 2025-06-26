@@ -60,6 +60,9 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
           properties: properties?.textProperties,
           onChanged: (textProperties) {
             onChanged(properties?.copyWith(textProperties: textProperties));
+          },
+          onChangedHover: (textProperties) {
+            // TODO: PUT INTO BUTTON HOVER
           }),
     ]);
   }
