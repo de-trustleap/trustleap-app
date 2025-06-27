@@ -36,6 +36,17 @@ class PageBuilderButtonProperties extends Equatable
     );
   }
 
+  PageBuilderButtonProperties deepCopy() {
+    return PageBuilderButtonProperties(
+      width: width,
+      height: height,
+      borderRadius: borderRadius,
+      backgroundColor:
+          backgroundColor != null ? Color(backgroundColor!.toARGB32()) : null,
+      textProperties: textProperties?.deepCopy(),
+    );
+  }
+
   @override
   List<Object?> get props =>
       [width, height, borderRadius, backgroundColor, textProperties];

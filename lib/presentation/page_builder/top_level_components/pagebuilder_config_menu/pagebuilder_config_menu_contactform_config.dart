@@ -226,6 +226,11 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                     properties:
                         (model.properties as PageBuilderContactFormProperties)
                             .buttonProperties,
+                    hoverProperties: model.hoverProperties != null
+                        ? (model.hoverProperties
+                                as PageBuilderContactFormProperties)
+                            .buttonProperties
+                        : null,
                     onChanged: (buttonProperties) {
                       if (model.properties
                           is PageBuilderContactFormProperties) {
@@ -236,6 +241,29 @@ class PagebuilderConfigMenuContactFormConfig extends StatelessWidget {
                             model.copyWith(properties: updatedProperties);
                         pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                       }
+                    },
+                    onChangedHover: (hoverProps) {
+                      final currentHoverProps = model.hoverProperties
+                          as PageBuilderContactFormProperties?;
+
+                      final updatedHoverProps = hoverProps == null
+                          ? null
+                          : (currentHoverProps ??
+                                  const PageBuilderContactFormProperties(
+                                      email: null,
+                                      nameTextFieldProperties: null,
+                                      emailTextFieldProperties: null,
+                                      phoneTextFieldProperties: null,
+                                      messageTextFieldProperties: null,
+                                      buttonProperties: null))
+                              .copyWith(buttonProperties: hoverProps);
+
+                      final updatedWidget = model.copyWith(
+                        hoverProperties: updatedHoverProps,
+                        removeHoverProperties: hoverProps == null,
+                      );
+
+                      pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                     })
               ])
         ],
