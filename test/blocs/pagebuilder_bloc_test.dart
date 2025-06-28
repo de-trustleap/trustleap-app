@@ -163,7 +163,8 @@ void main() {
                         letterSpacing: null,
                         textShadow: null,
                         isBold: null,
-                        isItalic: null))
+                        isItalic: null),
+                    hoverProperties: null)
               ])
         ]);
     final testUser = CustomUser(id: UniqueID.fromUniqueString("2"));
@@ -273,6 +274,7 @@ void main() {
         elementType: PageBuilderWidgetType.text,
         background: null,
         properties: mockTextProperties1,
+        hoverProperties: null,
         children: [],
         widthPercentage: 100.0,
         containerChild: null,
@@ -287,6 +289,7 @@ void main() {
         elementType: PageBuilderWidgetType.text,
         background: null,
         properties: mockTextProperties2,
+        hoverProperties: null,
         children: [],
         widthPercentage: 100.0,
         maxWidth: null,
@@ -301,6 +304,7 @@ void main() {
         elementType: PageBuilderWidgetType.image,
         background: null,
         properties: mockImageProperties,
+        hoverProperties: null,
         children: [],
         containerChild: null,
         widthPercentage: 100.0,
@@ -314,6 +318,7 @@ void main() {
         elementType: PageBuilderWidgetType.column,
         background: null,
         properties: null,
+        hoverProperties: null,
         children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
         containerChild: null,
         widthPercentage: 100.0,
@@ -327,6 +332,7 @@ void main() {
         elementType: PageBuilderWidgetType.row,
         background: null,
         properties: null,
+        hoverProperties: null,
         children: [mockTextWidget1, mockImageWidget],
         containerChild: null,
         widthPercentage: 100.0,

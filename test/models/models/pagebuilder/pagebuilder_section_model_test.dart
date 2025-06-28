@@ -184,6 +184,7 @@ void main() {
                 "c558084f-fb4d-41ff-b320-b47596e24a0a"),
             elementType: PageBuilderWidgetType.row,
             properties: null,
+            hoverProperties: null,
             children: [
               PageBuilderWidget(
                   id: UniqueID.fromUniqueString(
@@ -197,6 +198,7 @@ void main() {
                       height: 200,
                       contentMode: BoxFit.cover,
                       overlayColor: null),
+                  hoverProperties: null,
                   children: null,
                   containerChild: null,
                   widthPercentage: 50,
@@ -213,6 +215,7 @@ void main() {
                   elementType: PageBuilderWidgetType.container,
                   properties: PageBuilderContainerProperties(
                       borderRadius: 10, shadow: null),
+                  hoverProperties: null,
                   children: null,
                   containerChild: PageBuilderWidget(
                       id: UniqueID.fromUniqueString(
@@ -230,6 +233,7 @@ void main() {
                           alignment: TextAlign.left,
                           isBold: null,
                           isItalic: true),
+                      hoverProperties: null,
                       children: null,
                       containerChild: null,
                       widthPercentage: null,
@@ -282,6 +286,7 @@ void main() {
                 "c558084f-fb4d-41ff-b320-b47596e24a0a"),
             elementType: PageBuilderWidgetType.row,
             properties: null,
+            hoverProperties: null,
             children: [
               PageBuilderWidget(
                   id: UniqueID.fromUniqueString(
@@ -295,6 +300,7 @@ void main() {
                       height: 200,
                       contentMode: BoxFit.cover,
                       overlayColor: null),
+                  hoverProperties: null,
                   children: null,
                   containerChild: null,
                   widthPercentage: 50,
@@ -310,6 +316,7 @@ void main() {
                   elementType: PageBuilderWidgetType.container,
                   properties: PageBuilderContainerProperties(
                       borderRadius: 10, shadow: null),
+                  hoverProperties: null,
                   children: null,
                   containerChild: PageBuilderWidget(
                       id: UniqueID.fromUniqueString(
@@ -327,6 +334,7 @@ void main() {
                           alignment: TextAlign.left,
                           isBold: null,
                           isItalic: true),
+                      hoverProperties: null,
                       children: null,
                       containerChild: null,
                       widthPercentage: null,

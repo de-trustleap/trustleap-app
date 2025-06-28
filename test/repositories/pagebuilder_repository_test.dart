@@ -90,7 +90,8 @@ void main() {
                             blurRadius: 1.0,
                             offset: Offset(1, 1)),
                         isBold: null,
-                        isItalic: null))
+                        isItalic: null),
+                    hoverProperties: null)
               ])
         ],
         backgroundColor: null);

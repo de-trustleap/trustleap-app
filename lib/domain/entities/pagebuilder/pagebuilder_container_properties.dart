@@ -3,14 +3,13 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 
-class PageBuilderContainerProperties extends Equatable implements PageBuilderProperties {
+class PageBuilderContainerProperties extends Equatable
+    implements PageBuilderProperties {
   final double? borderRadius;
   final PageBuilderShadow? shadow;
 
-  const PageBuilderContainerProperties({
-    required this.borderRadius,
-    required this.shadow
-  });
+  const PageBuilderContainerProperties(
+      {required this.borderRadius, required this.shadow});
 
   PageBuilderContainerProperties copyWith({
     double? borderRadius,
@@ -19,6 +18,13 @@ class PageBuilderContainerProperties extends Equatable implements PageBuilderPro
     return PageBuilderContainerProperties(
       borderRadius: borderRadius ?? this.borderRadius,
       shadow: shadow ?? this.shadow,
+    );
+  }
+
+  PageBuilderContainerProperties deepCopy() {
+    return PageBuilderContainerProperties(
+      borderRadius: borderRadius,
+      shadow: shadow?.deepCopy(),
     );
   }
 

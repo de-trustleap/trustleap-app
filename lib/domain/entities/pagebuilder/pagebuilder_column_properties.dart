@@ -18,6 +18,13 @@ class PagebuilderColumnProperties extends Equatable
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment);
   }
 
+  PagebuilderColumnProperties deepCopy() {
+    return PagebuilderColumnProperties(
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
+    );
+  }
+
   @override
   List<Object?> get props => [mainAxisAlignment, crossAxisAlignment];
 }

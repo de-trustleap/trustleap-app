@@ -23,6 +23,7 @@ void main() {
                 properties: PagebuilderColumnProperties(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start),
+                hoverProperties: null,
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
@@ -47,6 +48,7 @@ void main() {
                 properties: PagebuilderColumnProperties(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start),
+                hoverProperties: null,
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
@@ -69,6 +71,7 @@ void main() {
             properties: PagebuilderColumnProperties(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start),
+            hoverProperties: null,
             children: [],
             containerChild: null,
             widthPercentage: 30,
@@ -99,6 +102,7 @@ void main() {
                 properties: PagebuilderColumnProperties(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start),
+                hoverProperties: null,
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,
@@ -123,6 +127,7 @@ void main() {
                 properties: PagebuilderColumnProperties(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start),
+                hoverProperties: null,
                 children: [],
                 containerChild: null,
                 widthPercentage: 30,

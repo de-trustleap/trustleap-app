@@ -18,6 +18,7 @@ void main() {
           id: "1",
           elementType: "container",
           properties: {"borderRadius": 12},
+          hoverProperties: null,
           children: null,
           containerChild: null,
           widthPercentage: 30,
@@ -30,6 +31,7 @@ void main() {
           id: "1",
           elementType: "container",
           properties: {"borderRadius": 12},
+          hoverProperties: null,
           children: null,
           containerChild: null,
           widthPercentage: 30,
@@ -53,6 +55,7 @@ void main() {
           id: "1",
           elementType: "container",
           properties: {"borderRadius": 12},
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: 30,
@@ -93,6 +96,7 @@ void main() {
           id: "1",
           elementType: "container",
           properties: {"borderRadius": 12},
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
@@ -117,6 +121,7 @@ void main() {
           id: "1",
           elementType: "container",
           properties: {"borderRadius": 12.0},
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
@@ -130,6 +135,7 @@ void main() {
           elementType: PageBuilderWidgetType.container,
           properties:
               PageBuilderContainerProperties(borderRadius: 12, shadow: null),
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: 30,
@@ -158,6 +164,7 @@ void main() {
           elementType: PageBuilderWidgetType.container,
           properties:
               PageBuilderContainerProperties(borderRadius: 12, shadow: null),
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: 30,
@@ -173,6 +180,7 @@ void main() {
           id: "1",
           elementType: "container",
           properties: {"borderRadius": 12.0},
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
@@ -203,6 +211,7 @@ void main() {
           id: "1",
           elementType: "column",
           properties: properties,
+          hoverProperties: null,
           children: null,
           containerChild: null,
           widthPercentage: null,
@@ -223,7 +232,7 @@ void main() {
           isBold: true,
           isItalic: null);
       // When
-      final result = model.getPropertiesByType(type);
+      final result = model.getPropertiesByType(type, properties);
       // Then
       expect(result, expectedResult);
     });
@@ -278,6 +287,7 @@ void main() {
           id: "1",
           elementType: "container",
           properties: {"borderRadius": 12},
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
@@ -290,6 +300,7 @@ void main() {
           id: "1",
           elementType: "container",
           properties: {"borderRadius": 12},
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: 30.0,

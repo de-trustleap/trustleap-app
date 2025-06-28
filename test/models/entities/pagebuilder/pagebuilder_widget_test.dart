@@ -27,6 +27,7 @@ void main() {
           properties: PagebuilderColumnProperties(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center),
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: null,
@@ -43,6 +44,7 @@ void main() {
               equalHeights: null,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center),
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: null,
@@ -72,6 +74,7 @@ void main() {
           properties: PagebuilderColumnProperties(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center),
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: null,
@@ -96,6 +99,7 @@ void main() {
           elementType: PageBuilderWidgetType.icon,
           properties: PageBuilderIconProperties(
               code: "55", size: 24, color: Colors.black),
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: null,
@@ -120,6 +124,7 @@ void main() {
           elementType: PageBuilderWidgetType.none,
           properties: PageBuilderIconProperties(
               code: "55", size: 24, color: Colors.black),
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: null,
@@ -147,6 +152,7 @@ void main() {
           properties: PagebuilderColumnProperties(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center),
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: null,
@@ -161,6 +167,7 @@ void main() {
           properties: PagebuilderColumnProperties(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center),
+          hoverProperties: null,
           children: [],
           containerChild: null,
           widthPercentage: null,
