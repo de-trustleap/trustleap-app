@@ -71,6 +71,7 @@ void main() {
                     children: [],
                     widthPercentage: null,
                     background: null,
+                    hoverBackground: null,
                     padding: null,
                     margin: null,
                     containerChild: null,

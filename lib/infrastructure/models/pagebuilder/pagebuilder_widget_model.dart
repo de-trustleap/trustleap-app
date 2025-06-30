@@ -34,6 +34,7 @@ class PageBuilderWidgetModel extends Equatable {
   final PageBuilderWidgetModel? containerChild;
   final double? widthPercentage;
   final Map<String, dynamic>? background;
+  final Map<String, dynamic>? hoverBackground;
   final Map<String, dynamic>? padding;
   final Map<String, dynamic>? margin;
   final double? maxWidth;
@@ -48,6 +49,7 @@ class PageBuilderWidgetModel extends Equatable {
       required this.containerChild,
       required this.widthPercentage,
       required this.background,
+      required this.hoverBackground,
       required this.padding,
       required this.margin,
       required this.maxWidth,
@@ -64,6 +66,7 @@ class PageBuilderWidgetModel extends Equatable {
     if (containerChild != null) map['containerChild'] = containerChild!.toMap();
     if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
     if (background != null) map['background'] = background;
+    if (hoverBackground != null) map['hoverBackground'] = hoverBackground;
     if (padding != null) map['padding'] = padding;
     if (margin != null) map['margin'] = margin;
     if (maxWidth != null) map['maxWidth'] = maxWidth;
@@ -83,10 +86,9 @@ class PageBuilderWidgetModel extends Equatable {
             ? map['hoverProperties'] as Map<String, dynamic>
             : null,
         children: map['children'] != null
-            ? List<PageBuilderWidgetModel>.from(
-                (map['children'] as List<dynamic>).map((child) =>
-                    PageBuilderWidgetModel.fromMap(
-                        child as Map<String, dynamic>)))
+            ? List<PageBuilderWidgetModel>.from((map['children'] as List<dynamic>)
+                .map((child) => PageBuilderWidgetModel.fromMap(
+                    child as Map<String, dynamic>)))
             : null,
         containerChild: map['containerChild'] != null
             ? PageBuilderWidgetModel.fromMap(
@@ -98,11 +100,13 @@ class PageBuilderWidgetModel extends Equatable {
         background: map['background'] != null
             ? map['background'] as Map<String, dynamic>
             : null,
+        hoverBackground: map['hoverBackground'] != null
+            ? map['hoverBackground'] as Map<String, dynamic>
+            : null,
         padding: map['padding'] != null
             ? map['padding'] as Map<String, dynamic>
             : null,
-        margin:
-            map['margin'] != null ? map['margin'] as Map<String, dynamic> : null,
+        margin: map['margin'] != null ? map['margin'] as Map<String, dynamic> : null,
         maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
         alignment: map['alignment'] != null ? map['alignment'] as String : null);
   }
@@ -116,6 +120,7 @@ class PageBuilderWidgetModel extends Equatable {
       PageBuilderWidgetModel? containerChild,
       double? widthPercentage,
       Map<String, dynamic>? background,
+      Map<String, dynamic>? hoverBackground,
       Map<String, dynamic>? padding,
       Map<String, dynamic>? margin,
       double? maxWidth,
@@ -129,6 +134,7 @@ class PageBuilderWidgetModel extends Equatable {
         containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
         background: background ?? this.background,
+        hoverBackground: hoverBackground ?? this.hoverBackground,
         padding: padding ?? this.padding,
         margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
@@ -149,6 +155,9 @@ class PageBuilderWidgetModel extends Equatable {
         widthPercentage: widthPercentage,
         background: background != null
             ? PagebuilderBackgroundModel.fromMap(background!).toDomain()
+            : null,
+        hoverBackground: hoverBackground != null
+            ? PagebuilderBackgroundModel.fromMap(hoverBackground!).toDomain()
             : null,
         padding: PageBuilderSpacing.fromMap(padding),
         margin: PageBuilderSpacing.fromMap(margin),
@@ -171,6 +180,10 @@ class PageBuilderWidgetModel extends Equatable {
         widthPercentage: widget.widthPercentage,
         background: widget.background != null
             ? PagebuilderBackgroundModel.fromDomain(widget.background!).toMap()
+            : null,
+        hoverBackground: widget.hoverBackground != null
+            ? PagebuilderBackgroundModel.fromDomain(widget.hoverBackground!)
+                .toMap()
             : null,
         padding: getMapFromPadding(widget.padding),
         margin: getMapFromPadding(widget.margin),
@@ -274,6 +287,7 @@ class PageBuilderWidgetModel extends Equatable {
         containerChild,
         widthPercentage,
         background,
+        hoverBackground,
         padding,
         margin,
         maxWidth,

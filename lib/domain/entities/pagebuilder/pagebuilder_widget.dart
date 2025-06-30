@@ -18,6 +18,7 @@ class PageBuilderWidget extends Equatable {
   final PageBuilderWidget? containerChild;
   final double? widthPercentage;
   final PagebuilderBackground? background;
+  final PagebuilderBackground? hoverBackground;
   final PageBuilderSpacing? padding;
   final PageBuilderSpacing? margin;
   final double? maxWidth;
@@ -32,6 +33,7 @@ class PageBuilderWidget extends Equatable {
       required this.containerChild,
       required this.widthPercentage,
       required this.background,
+      required this.hoverBackground,
       required this.padding,
       required this.margin,
       required this.maxWidth,
@@ -46,11 +48,13 @@ class PageBuilderWidget extends Equatable {
       PageBuilderWidget? containerChild,
       double? widthPercentage,
       PagebuilderBackground? background,
+      PagebuilderBackground? hoverBackground,
       PageBuilderSpacing? padding,
       PageBuilderSpacing? margin,
       double? maxWidth,
       Alignment? alignment,
-      bool removeHoverProperties = false}) {
+      bool removeHoverProperties = false,
+      bool removeHoverBackground = false}) {
     return PageBuilderWidget(
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
@@ -62,6 +66,9 @@ class PageBuilderWidget extends Equatable {
         containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
         background: background ?? this.background,
+        hoverBackground: removeHoverProperties
+            ? null
+            : (hoverBackground ?? this.hoverBackground),
         padding: padding ?? this.padding,
         margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
@@ -107,6 +114,7 @@ class PageBuilderWidget extends Equatable {
         containerChild,
         widthPercentage,
         background,
+        hoverBackground,
         padding,
         margin,
         maxWidth,

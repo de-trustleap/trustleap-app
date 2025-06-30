@@ -203,6 +203,7 @@ void main() {
                   containerChild: null,
                   widthPercentage: 50,
                   background: null,
+                  hoverBackground: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
                   margin:
@@ -238,6 +239,7 @@ void main() {
                       containerChild: null,
                       widthPercentage: null,
                       background: null,
+                      hoverBackground: null,
                       padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
                       margin: PageBuilderSpacing(
@@ -246,6 +248,7 @@ void main() {
                       alignment: null),
                   widthPercentage: 50,
                   background: null,
+                  hoverBackground: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   margin:
@@ -256,6 +259,7 @@ void main() {
             containerChild: null,
             widthPercentage: null,
             background: null,
+            hoverBackground: null,
             padding:
                 PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
             margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
@@ -305,6 +309,7 @@ void main() {
                   containerChild: null,
                   widthPercentage: 50,
                   background: null,
+                  hoverBackground: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
                   margin: null,
@@ -339,6 +344,7 @@ void main() {
                       containerChild: null,
                       widthPercentage: null,
                       background: null,
+                      hoverBackground: null,
                       padding: PageBuilderSpacing(
                           top: 20, bottom: 20, left: 20, right: 20),
                       margin: null,
@@ -346,6 +352,7 @@ void main() {
                       alignment: null),
                   widthPercentage: 50,
                   background: null,
+                  hoverBackground: null,
                   padding:
                       PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
                   margin: null,
@@ -355,6 +362,7 @@ void main() {
             containerChild: null,
             widthPercentage: null,
             background: null,
+            hoverBackground: null,
             padding:
                 PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
             margin: null,
