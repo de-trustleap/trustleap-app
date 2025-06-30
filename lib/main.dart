@@ -74,7 +74,7 @@ Future<void> main() async {
       );
 
       if (kIsWeb) {
-        WebCrashReporter.initialize();
+        WebReporter.initialize();
       }
     },
   );

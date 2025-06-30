@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:web/web.dart';
 
-class WebCrashReporter {
+class WebReporter {
   static void initialize() {
     FlutterError.onError = (FlutterErrorDetails details) {
       _report(details.exceptionAsString(), details.stack);
@@ -17,9 +17,15 @@ class WebCrashReporter {
     };
   }
 
+  static void log(String loglevel, String message, StackTrace? stack) {
+    final cubit = Modular.get<WebLoggingCubit>();
+    cubit.log(loglevel, message, "test-1.0.0", _detectBrowser(), stack);
+  }
+
   static void _report(String message, StackTrace? stack) {
     final cubit = Modular.get<WebLoggingCubit>();
     cubit.reportWebCrash(message, stack, _detectBrowser());
+    cubit.log("error", message,"test-1.0.0", _detectBrowser(), stack);
   }
 
   static String _detectBrowser() {

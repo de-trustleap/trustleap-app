@@ -31,4 +31,23 @@ class WebLoggingRepositoryImplementation implements WebLoggingRepository {
       return;
     }
   }
+
+  @override
+  Future<void> log(String loglevel, String message, String appVersion, String userAgent, StackTrace? stack) async {
+    try {
+      final appCheckToken = await appCheck.getToken();
+      String stackTraceString = stack?.toString() ?? "";
+      HttpsCallable callable = firebaseFunctions.httpsCallable("onLog");
+      await callable.call({
+        "appCheckToken": appCheckToken,
+        "loglevel": loglevel,
+        "message": message,
+        "appVersion": appVersion,
+        "userAgent": userAgent,
+        "stacktrace": stackTraceString
+      });
+    } catch (e) {
+      return;
+    }
+  }
 }
