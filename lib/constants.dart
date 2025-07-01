@@ -88,3 +88,5 @@ enum PageBuilderSectionLayout { row, column, none }
 enum PageBuilderSpacingType { padding, margin }
 
 enum LegalsType { privacyPolicy, termsAndCondition }
+
+enum LogLevel { debug, info, warn, error }

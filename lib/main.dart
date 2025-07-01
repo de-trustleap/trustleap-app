@@ -37,6 +37,7 @@ Future<void> main() async {
           'https://618cb82100c49afd9b092cd092c96202@o4509530459209728.ingest.de.sentry.io/4509530460586064';
       options.sendDefaultPii = false;
       options.tracesSampleRate = 0.1;
+      options.profilesSampleRate = 0.1;
     },
     appRunner: () async {
       WidgetsFlutterBinding.ensureInitialized();
@@ -82,6 +83,7 @@ Future<void> main() async {
 
 void routeToInitial(AuthStatus status) {
   late String lastRoute;
+  WebCrashReporter.report("App started", null, LogLevel.info);
   if (kIsWeb) {
     String path = web.window.location.pathname;
     String query = web.window.location.search;
