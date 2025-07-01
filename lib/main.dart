@@ -83,6 +83,7 @@ Future<void> main() async {
 
 void routeToInitial(AuthStatus status) {
   late String lastRoute;
+  WebCrashReporter.report("App started", null, LogLevel.info);
   if (kIsWeb) {
     String path = web.window.location.pathname;
     String query = web.window.location.search;

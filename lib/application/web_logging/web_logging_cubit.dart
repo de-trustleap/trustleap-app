@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/repositories/web_logging_repository.dart';
 
 class WebLoggingCubit extends Cubit<String?> {
@@ -10,7 +11,9 @@ class WebLoggingCubit extends Cubit<String?> {
     await webLoggingRepo.reportWebCrash(message, stack, browser);
   }
 
-  void reportWarning(String message, String? browser) async {
-    await webLoggingRepo.reportWarning(message, browser);
+  void log(String message, String userAgent, String appVersion,
+      LogLevel logLevel, StackTrace? stackTrace) async {
+    await webLoggingRepo.log(
+        logLevel, message, appVersion, userAgent, stackTrace);
   }
 }
