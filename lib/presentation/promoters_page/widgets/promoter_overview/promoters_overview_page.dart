@@ -175,7 +175,6 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
               }
             },
             builder: (context, promoterState) {
-              print("THE STATE: $state");
               if (state is PromotersObserverGetElementsSuccess) {
                 if (state.promoters.isEmpty && visiblePromoters.isEmpty) {
                   return EmptyPage(
