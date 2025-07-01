@@ -14,26 +14,6 @@ class WebLoggingRepositoryImplementation implements WebLoggingRepository {
   });
 
   @override
-  Future<void> reportWebCrash(
-      String message, StackTrace? stack, String? browser) async {
-    try {
-      final appCheckToken = await appCheck.getToken();
-      String stackTraceString = stack?.toString() ?? "No stack trace available";
-      HttpsCallable callable =
-          firebaseFunctions.httpsCallable("reportWebCrash");
-      await callable.call({
-        "appCheckToken": appCheckToken,
-        "message": message,
-        "stack": stackTraceString,
-        "browser": browser,
-        "timestamp": DateTime.now().toIso8601String()
-      });
-    } catch (e) {
-      return;
-    }
-  }
-
-  @override
   Future<void> log(LogLevel logLevel, String message, String appVersion,
       String userAgent, StackTrace? stackTrace) async {
     try {
