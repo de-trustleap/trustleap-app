@@ -43,11 +43,6 @@ final class GetLandingPageAndUserSuccessState extends PagebuilderState
       [content, saveLoading, saveFailure, saveSuccessful, isUpdated];
 }
 
-final class SavePageSuccessState extends PagebuilderState with EquatableMixin {
-  @override
-  List<Object?> get props => [];
-}
-
 final class PageBuilderUnexpectedFailureState extends PagebuilderState
     with EquatableMixin {
   @override

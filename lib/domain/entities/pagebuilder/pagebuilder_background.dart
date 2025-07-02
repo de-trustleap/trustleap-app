@@ -26,6 +26,16 @@ class PagebuilderBackground extends Equatable {
         overlayColor: overlayColor ?? this.overlayColor);
   }
 
+  PagebuilderBackground deepCopy() {
+    return PagebuilderBackground(
+      backgroundColor:
+          backgroundColor != null ? Color(backgroundColor!.toARGB32()) : null,
+      imageProperties: imageProperties?.deepCopy(),
+      overlayColor:
+          overlayColor != null ? Color(overlayColor!.toARGB32()) : null,
+    );
+  }
+
   @override
   List<Object?> get props => [backgroundColor, imageProperties, overlayColor];
 }

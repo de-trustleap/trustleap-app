@@ -48,6 +48,20 @@ class PageBuilderTextFieldProperties extends Equatable
     );
   }
 
+  PageBuilderTextFieldProperties deepCopy() {
+    return PageBuilderTextFieldProperties(
+      width: width,
+      minLines: minLines,
+      maxLines: maxLines,
+      isRequired: isRequired,
+      backgroundColor:
+          backgroundColor != null ? Color(backgroundColor!.toARGB32()) : null,
+      borderColor: borderColor != null ? Color(borderColor!.toARGB32()) : null,
+      placeHolderTextProperties: placeHolderTextProperties?.deepCopy(),
+      textProperties: textProperties?.deepCopy(),
+    );
+  }
+
   @override
   List<Object?> get props => [
         width,

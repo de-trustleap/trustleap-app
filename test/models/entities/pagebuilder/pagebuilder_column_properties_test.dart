@@ -21,6 +21,23 @@ void main() {
     });
   });
 
+  group("PagebuilderColumnProperties deepCopy", () {
+    test("should create independent copy with all properties", () {
+      // Given
+      const original = PagebuilderColumnProperties(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+      );
+      // When
+      final copy = original.deepCopy();
+      // Then
+      expect(copy, isNot(same(original)));
+      expect(copy.mainAxisAlignment, equals(original.mainAxisAlignment));
+      expect(copy.crossAxisAlignment, equals(original.crossAxisAlignment));
+      expect(copy, equals(original));
+    });
+  });
+
   group("PagebuilderColumnProperties_Props", () {
     test("check if value equality works", () {
       // Given

@@ -27,6 +27,14 @@ class PageBuilderIconProperties extends Equatable
     );
   }
 
+  PageBuilderIconProperties deepCopy() {
+    return PageBuilderIconProperties(
+      code: code,
+      size: size,
+      color: color != null ? Color(color!.toARGB32()) : null,
+    );
+  }
+
   @override
   List<Object?> get props => [code, size, color];
 }

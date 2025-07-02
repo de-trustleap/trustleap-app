@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_config_menu_dropdown.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_image_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -22,154 +23,149 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
     final pagebuilderBloc = Modular.get<PagebuilderBloc>();
     final localization = AppLocalizations.of(context);
 
+    final isWidget = model != null;
+
     return CollapsibleTile(
         title: localization.landingpage_pagebuilder_layout_menu_background,
         children: [
-          PagebuilderColorControl(
-              title: localization
-                  .landingpage_pagebuilder_layout_menu_background_color,
-              initialColor: model != null
-                  ? (model?.background?.backgroundColor ?? Colors.transparent)
-                  : (section?.background?.backgroundColor ??
-                      Colors.transparent),
-              onSelected: (color) {
-                if (model != null) {
-                  final backgroundModel = model!.background ??
-                      const PagebuilderBackground(
-                          backgroundColor: null,
-                          imageProperties: null,
-                          overlayColor: null);
-                  final updatedBackground =
-                      backgroundModel.copyWith(backgroundColor: color);
+          if (isWidget)
+            PagebuilderHoverConfigTabBar<PagebuilderBackground>(
+              properties: model?.background ??
+                  const PagebuilderBackground(
+                      backgroundColor: null,
+                      imageProperties: null,
+                      overlayColor: null),
+              hoverProperties: model?.hoverBackground,
+              hoverEnabled: model?.hoverBackground != null,
+              onHoverEnabledChanged: (enabled) {
+                if (enabled) {
+                  final hoverBackground = (model?.background ??
+                          const PagebuilderBackground(
+                              backgroundColor: null,
+                              imageProperties: null,
+                              overlayColor: null))
+                      .deepCopy();
                   final updatedWidget =
-                      model!.copyWith(background: updatedBackground);
+                      model!.copyWith(hoverBackground: hoverBackground);
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                } else if (section != null) {
-                  final backgroundModel = section!.background ??
-                      const PagebuilderBackground(
-                          backgroundColor: null,
-                          imageProperties: null,
-                          overlayColor: null);
-                  final updatedBackground =
-                      backgroundModel.copyWith(backgroundColor: color);
-                  final updatedSection =
-                      section!.copyWith(background: updatedBackground);
-                  pagebuilderBloc.add(UpdateSectionEvent(updatedSection));
-                }
-              }),
-          const SizedBox(height: 20),
-          PagebuilderImageControl(
-              properties: model != null
-                  ? model?.background?.imageProperties ??
-                      const PageBuilderImageProperties(
-                          url: null,
-                          borderRadius: null,
-                          width: null,
-                          height: null,
-                          contentMode: null,
-                          overlayColor: null)
-                  : section?.background?.imageProperties ??
-                      const PageBuilderImageProperties(
-                          url: null,
-                          borderRadius: null,
-                          width: null,
-                          height: null,
-                          contentMode: null,
-                          overlayColor: null),
-              widgetModel: model,
-              onSelected: (properties) {
-                if (model != null) {
-                  final backgroundModel = model?.background ??
-                      const PagebuilderBackground(
-                          backgroundColor: null,
-                          imageProperties: null,
-                          overlayColor: null);
-                  final updatedBackground =
-                      backgroundModel.copyWith(imageProperties: properties);
+                } else {
                   final updatedWidget =
-                      model!.copyWith(background: updatedBackground);
+                      model!.copyWith(removeHoverBackground: true);
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                } else if (section != null) {
-                  final backgroundModel = section?.background ??
-                      const PagebuilderBackground(
-                          backgroundColor: null,
-                          imageProperties: null,
-                          overlayColor: null);
-                  final updatedBackground =
-                      backgroundModel.copyWith(imageProperties: properties);
-                  final updatedSection =
-                      section!.copyWith(background: updatedBackground);
-                  pagebuilderBloc.add(UpdateSectionEvent(updatedSection));
                 }
               },
-              onDelete: () {
-                final properties = model?.background?.imageProperties;
-                if (properties != null && model != null) {
-                  final updatedBackground =
-                      model!.background!.copyWith(setImagePropertiesNull: true);
+              onChanged: (updated, isHover) {
+                if (isHover) {
                   final updatedWidget =
-                      model!.copyWith(background: updatedBackground);
+                      model!.copyWith(hoverBackground: updated);
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                } else if (properties != null && section != null) {
-                  final updatedBackground = section!.background!
-                      .copyWith(setImagePropertiesNull: true);
-                  final updatedSection =
-                      section!.copyWith(background: updatedBackground);
-                  pagebuilderBloc.add(UpdateSectionEvent(updatedSection));
+                } else {
+                  final updatedWidget = model!.copyWith(background: updated);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                 }
-              }),
-          if (model?.background?.imageProperties != null ||
-              section?.background?.imageProperties != null) ...[
-            const SizedBox(height: 20),
-            PagebuilderConfigMenuDrowdown(
-                title: localization
-                    .landingpage_pagebuilder_layout_menu_background_contentmode,
-                initialValue: model != null
-                    ? model?.background?.imageProperties?.contentMode ??
-                        BoxFit.cover
-                    : section?.background?.imageProperties?.contentMode ??
-                        BoxFit.cover,
-                type: PagebuilderDropdownType.contentMode,
-                onSelected: (contentMode) {
-                  if (model != null) {
-                    final properties = model!.background!.imageProperties!
-                        .copyWith(contentMode: contentMode);
-                    final updatedWidget = model!.copyWith(
-                        background: model!.background!
-                            .copyWith(imageProperties: properties));
-                    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                  } else if (section != null) {
-                    final properties = section!.background!.imageProperties!
-                        .copyWith(contentMode: contentMode);
-                    final updatedSection = section!.copyWith(
-                        background: section!.background!
-                            .copyWith(imageProperties: properties));
-                    pagebuilderBloc.add(UpdateSectionEvent(updatedSection));
-                  }
-                }),
-            const SizedBox(height: 20),
-            PagebuilderColorControl(
-                title: localization
-                    .landingpage_pagebuilder_layout_menu_background_overlay,
-                initialColor: model != null
-                    ? model?.background?.overlayColor ?? Colors.transparent
-                    : section?.background?.overlayColor ?? Colors.transparent,
-                onSelected: (color) {
-                  if (model != null) {
-                    final updatedBackground =
-                        model!.background!.copyWith(overlayColor: color);
-                    final updatedWidget =
-                        model!.copyWith(background: updatedBackground);
-                    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                  } else if (section != null) {
-                    final updatedBackground =
-                        section!.background!.copyWith(overlayColor: color);
-                    final updatedSection =
-                        section!.copyWith(background: updatedBackground);
-                    pagebuilderBloc.add(UpdateSectionEvent(updatedSection));
-                  }
-                }),
-          ]
+              },
+              configBuilder: (props, disabled, onChangedLocal) =>
+                  _buildBackgroundConfigUI(props, disabled, localization,
+                      onChangedLocal, isWidget, pagebuilderBloc),
+            )
+          else
+            _buildBackgroundConfigUI(
+                section?.background ??
+                    const PagebuilderBackground(
+                        backgroundColor: null,
+                        imageProperties: null,
+                        overlayColor: null),
+                false,
+                localization,
+                (updated) => _updateSectionBackground(updated, pagebuilderBloc),
+                isWidget,
+                pagebuilderBloc),
         ]);
+  }
+
+  Widget _buildBackgroundConfigUI(
+      PagebuilderBackground? props,
+      bool disabled,
+      AppLocalizations localization,
+      Function(PagebuilderBackground?) onChangedLocal,
+      bool isWidget,
+      PagebuilderBloc pagebuilderBloc) {
+    if (disabled) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(children: [
+      PagebuilderColorControl(
+          title:
+              localization.landingpage_pagebuilder_layout_menu_background_color,
+          initialColor: props?.backgroundColor ?? Colors.transparent,
+          onSelected: (color) {
+            onChangedLocal(props?.copyWith(backgroundColor: color) ??
+                const PagebuilderBackground(
+                        backgroundColor: null,
+                        imageProperties: null,
+                        overlayColor: null)
+                    .copyWith(backgroundColor: color));
+          }),
+      const SizedBox(height: 20),
+      PagebuilderImageControl(
+          properties: props?.imageProperties ??
+              const PageBuilderImageProperties(
+                  url: null,
+                  borderRadius: null,
+                  width: null,
+                  height: null,
+                  contentMode: null,
+                  overlayColor: null),
+          widgetModel: isWidget ? model : null,
+          onSelected: (properties) {
+            onChangedLocal(props?.copyWith(imageProperties: properties) ??
+                const PagebuilderBackground(
+                        backgroundColor: null,
+                        imageProperties: null,
+                        overlayColor: null)
+                    .copyWith(imageProperties: properties));
+          },
+          onDelete: () {
+            if (props?.imageProperties != null) {
+              onChangedLocal(props!.copyWith(setImagePropertiesNull: true));
+            }
+          }),
+      if (props?.imageProperties != null) ...[
+        const SizedBox(height: 20),
+        PagebuilderConfigMenuDrowdown(
+            title: localization
+                .landingpage_pagebuilder_layout_menu_background_contentmode,
+            initialValue: props?.imageProperties?.contentMode ?? BoxFit.cover,
+            type: PagebuilderDropdownType.contentMode,
+            onSelected: (contentMode) {
+              final updatedImageProperties =
+                  props!.imageProperties!.copyWith(contentMode: contentMode);
+              onChangedLocal(
+                  props.copyWith(imageProperties: updatedImageProperties));
+            }),
+        const SizedBox(height: 20),
+        PagebuilderColorControl(
+            title: localization
+                .landingpage_pagebuilder_layout_menu_background_overlay,
+            initialColor: props?.overlayColor ?? Colors.transparent,
+            onSelected: (color) {
+              onChangedLocal(props?.copyWith(overlayColor: color) ??
+                  const PagebuilderBackground(
+                          backgroundColor: null,
+                          imageProperties: null,
+                          overlayColor: null)
+                      .copyWith(overlayColor: color));
+            }),
+      ]
+    ]);
+  }
+
+  void _updateSectionBackground(
+      PagebuilderBackground? updated, PagebuilderBloc pagebuilderBloc) {
+    if (section != null) {
+      final updatedSection = section!.copyWith(background: updated);
+      pagebuilderBloc.add(UpdateSectionEvent(updatedSection));
+    }
   }
 }
