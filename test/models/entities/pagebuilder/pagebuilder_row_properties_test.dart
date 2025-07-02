@@ -23,10 +23,27 @@ void main() {
     });
   });
 
-    group("PagebuilderRowProperties_Props", () {
-    test(
-        "check if value equality works",
-        () {
+  group("PagebuilderRowProperties deepCopy", () {
+    test("should create independent copy with all properties", () {
+      // Given
+      const original = PagebuilderRowProperties(
+        equalHeights: true,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+      );
+      // When
+      final copy = original.deepCopy();
+      // Then
+      expect(copy, isNot(same(original)));
+      expect(copy.equalHeights, equals(original.equalHeights));
+      expect(copy.mainAxisAlignment, equals(original.mainAxisAlignment));
+      expect(copy.crossAxisAlignment, equals(original.crossAxisAlignment));
+      expect(copy, equals(original));
+    });
+  });
+
+  group("PagebuilderRowProperties_Props", () {
+    test("check if value equality works", () {
       // Given
       final properties1 = PagebuilderRowProperties(
           equalHeights: true,
