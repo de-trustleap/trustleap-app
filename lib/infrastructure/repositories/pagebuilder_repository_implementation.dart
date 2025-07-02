@@ -1,6 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
@@ -46,8 +44,6 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("updatePageContent");
     final pageModel = PageBuilderPageModel.fromDomain(page);
-    String jsonString = jsonEncode(pageModel.toMap());
-    print(jsonString);
     try {
       await callable
           .call({"appCheckToken": appCheckToken, "page": pageModel.toMap()});
