@@ -1,55 +1,95 @@
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_control.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_text_config.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
   final PageBuilderButtonProperties? properties;
+  final PageBuilderButtonProperties? hoverProperties;
   final Function(PageBuilderButtonProperties?) onChanged;
+  final Function(PageBuilderButtonProperties?) onChangedHover;
   const PagebuilderConfigMenuButtonConfig(
-      {super.key, required this.properties, required this.onChanged});
+      {super.key,
+      required this.properties,
+      this.hoverProperties,
+      required this.onChanged,
+      required this.onChangedHover});
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
+    if (properties != null) {
+      return PagebuilderHoverConfigTabBar<PageBuilderButtonProperties>(
+        properties: properties!,
+        hoverProperties: hoverProperties,
+        hoverEnabled: hoverProperties != null,
+        onHoverEnabledChanged: (enabled) {
+          if (enabled) {
+            onChangedHover(properties?.deepCopy());
+          } else {
+            onChangedHover(null);
+          }
+        },
+        onChanged: (updated, isHover) {
+          if (isHover) {
+            onChangedHover(updated);
+          } else {
+            onChanged(updated);
+          }
+        },
+        configBuilder: (props, disabled, onChangedLocal) => _buildConfigUI(
+            props, disabled, themeData, localization, onChangedLocal),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
+  Widget _buildConfigUI(
+      PageBuilderButtonProperties? props,
+      bool disabled,
+      ThemeData themeData,
+      AppLocalizations localization,
+      Function(PageBuilderButtonProperties?) onChangedLocal) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       PagebuilderNumberStepperControl(
           title: localization.pagebuilder_button_config_button_width,
-          initialValue: properties?.width?.toInt() ?? 0,
+          initialValue: props?.width?.toInt() ?? 0,
           minValue: 0,
           maxValue: 1000,
           onSelected: (width) {
-            onChanged(properties?.copyWith(width: width.toDouble()));
+            onChangedLocal(props?.copyWith(width: width.toDouble()));
           }),
       const SizedBox(height: 20),
       PagebuilderNumberStepperControl(
           title: localization.pagebuilder_button_config_button_height,
-          initialValue: properties?.height?.toInt() ?? 0,
+          initialValue: props?.height?.toInt() ?? 0,
           minValue: 0,
           maxValue: 1000,
           onSelected: (height) {
-            onChanged(properties?.copyWith(height: height.toDouble()));
+            onChangedLocal(props?.copyWith(height: height.toDouble()));
           }),
       const SizedBox(height: 20),
       PagebuilderNumberStepperControl(
           title: localization.pagebuilder_button_config_button_border_radius,
-          initialValue: properties?.borderRadius?.toInt() ?? 0,
+          initialValue: props?.borderRadius?.toInt() ?? 0,
           minValue: 0,
           maxValue: 1000,
           onSelected: (borderRadius) {
-            onChanged(
-                properties?.copyWith(borderRadius: borderRadius.toDouble()));
+            onChangedLocal(
+                props?.copyWith(borderRadius: borderRadius.toDouble()));
           }),
       const SizedBox(height: 20),
       PagebuilderColorControl(
           title: localization.pagebuilder_button_config_button_background_color,
-          initialColor: properties?.backgroundColor ?? Colors.transparent,
+          initialColor: props?.backgroundColor ?? Colors.transparent,
           onSelected: (color) {
-            onChanged(properties?.copyWith(backgroundColor: color));
+            onChangedLocal(props?.copyWith(backgroundColor: color));
           }),
       const SizedBox(height: 40),
       Text(localization.pagebuilder_button_config_button_text_configuration,
@@ -57,9 +97,14 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.bold)),
       const SizedBox(height: 10),
       PagebuilderConfigMenuTextConfig(
-          properties: properties?.textProperties,
+          properties: props?.textProperties,
+          hoverProperties: hoverProperties?.textProperties,
+          showHoverTabBar: false,
           onChanged: (textProperties) {
-            onChanged(properties?.copyWith(textProperties: textProperties));
+            onChangedLocal(props?.copyWith(textProperties: textProperties));
+          },
+          onChangedHover: (textProperties) {
+            onChangedLocal(props?.copyWith(textProperties: textProperties));
           }),
     ]);
   }

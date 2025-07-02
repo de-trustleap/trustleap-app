@@ -30,6 +30,31 @@ void main() {
     });
   });
 
+  group("PageBuilderContainerProperties_DeepCopy", () {
+    test("should create independent copy with all properties", () {
+      // Given
+      const shadow = PageBuilderShadow(
+        color: Color(0xFF000000),
+        spreadRadius: 2.0,
+        blurRadius: 8.0,
+        offset: Offset(4.0, 4.0),
+      );
+
+      const original = PageBuilderContainerProperties(
+        borderRadius: 12.0,
+        shadow: shadow,
+      );
+      // When
+      final copy = original.deepCopy();
+      // Then
+      expect(copy, isNot(same(original)));
+      expect(copy.borderRadius, equals(original.borderRadius));
+      expect(copy.shadow, equals(original.shadow));
+      expect(copy.shadow, isNot(same(original.shadow)));
+      expect(copy, equals(original));
+    });
+  });
+
   group("PagebuilderContainerProperties_Props", () {
     test("check if value equality works", () {
       // Given

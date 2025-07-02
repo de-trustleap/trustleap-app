@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_config_menu_dropdown.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_switch_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,12 +13,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PagebuilderConfigMenuRowConfig extends StatelessWidget {
   final PageBuilderWidget model;
   const PagebuilderConfigMenuRowConfig({super.key, required this.model});
-
-  void updateContainerProperties(
-      PagebuilderRowProperties properties, PagebuilderBloc pagebuilderBloc) {
-    final updatedWidget = model.copyWith(properties: properties);
-    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,88 +22,102 @@ class PagebuilderConfigMenuRowConfig extends StatelessWidget {
     if (model.elementType == PageBuilderWidgetType.row &&
             model.properties is PagebuilderRowProperties ||
         model.properties == null) {
+      final currentProperties = model.properties as PagebuilderRowProperties? ??
+          const PagebuilderRowProperties(
+              equalHeights: null,
+              mainAxisAlignment: null,
+              crossAxisAlignment: null);
+
       return CollapsibleTile(
           title: localization.landingpage_pagebuilder_row_config_row_title,
           children: [
-            PagebuilderSwitchControl(
-                title: localization
-                    .landingpage_pagebuilder_row_config_row_equal_heights,
-                isActive: model.properties != null
-                    ? (model.properties as PagebuilderRowProperties)
-                            .equalHeights ??
-                        false
-                    : false,
-                onSelected: (isSelected) {
-                  if (model.properties != null) {
-                    final updatedProperties =
-                        (model.properties as PagebuilderRowProperties)
-                            .copyWith(equalHeights: isSelected);
-                    updateContainerProperties(
-                        updatedProperties, pagebuilderBloc);
-                  } else {
-                    final updatedProperties = PagebuilderRowProperties(
-                        equalHeights: isSelected,
-                        mainAxisAlignment: null,
-                        crossAxisAlignment: null);
-                    updateContainerProperties(
-                        updatedProperties, pagebuilderBloc);
-                  }
-                }),
-            const SizedBox(height: 20),
-            PagebuilderConfigMenuDrowdown(
-                title: localization
-                    .landingpage_pagebuilder_row_config_row_main_axis_alignment,
-                initialValue: model.properties != null
-                    ? (model.properties as PagebuilderRowProperties)
-                            .mainAxisAlignment ??
-                        MainAxisAlignment.center
-                    : MainAxisAlignment.center,
-                type: PagebuilderDropdownType.mainAxisAlignment,
-                onSelected: (value) {
-                  if (model.properties != null) {
-                    final updatedProperties =
-                        (model.properties as PagebuilderRowProperties)
-                            .copyWith(mainAxisAlignment: value);
-                    updateContainerProperties(
-                        updatedProperties, pagebuilderBloc);
-                  } else {
-                    final updatedProperties = PagebuilderRowProperties(
-                        equalHeights: null,
-                        mainAxisAlignment: value,
-                        crossAxisAlignment: null);
-                    updateContainerProperties(
-                        updatedProperties, pagebuilderBloc);
-                  }
-                }),
-            const SizedBox(height: 20),
-            PagebuilderConfigMenuDrowdown(
-                title: localization
-                    .landingpage_pagebuilder_row_config_row_cross_axis_alignment,
-                initialValue: model.properties != null
-                    ? (model.properties as PagebuilderRowProperties)
-                            .crossAxisAlignment ??
-                        CrossAxisAlignment.center
-                    : CrossAxisAlignment.center,
-                type: PagebuilderDropdownType.crossAxisAlignment,
-                onSelected: (value) {
-                  if (model.properties != null) {
-                    final updatedProperties =
-                        (model.properties as PagebuilderRowProperties)
-                            .copyWith(crossAxisAlignment: value);
-                    updateContainerProperties(
-                        updatedProperties, pagebuilderBloc);
-                  } else {
-                    final updatedProperties = PagebuilderRowProperties(
-                        equalHeights: null,
-                        mainAxisAlignment: null,
-                        crossAxisAlignment: value);
-                    updateContainerProperties(
-                        updatedProperties, pagebuilderBloc);
-                  }
-                }),
+            PagebuilderHoverConfigTabBar<PagebuilderRowProperties>(
+              properties: currentProperties,
+              hoverProperties: model.hoverProperties != null
+                  ? model.hoverProperties as PagebuilderRowProperties
+                  : null,
+              hoverEnabled: model.hoverProperties != null,
+              onHoverEnabledChanged: (enabled) {
+                if (enabled) {
+                  final hoverProperties = currentProperties.deepCopy();
+                  final updatedWidget = model.copyWith(
+                      properties: currentProperties,
+                      hoverProperties: hoverProperties);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                } else {
+                  final updatedWidget = model.copyWith(
+                      properties: currentProperties,
+                      removeHoverProperties: true);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                }
+              },
+              onChanged: (updated, isHover) {
+                if (isHover) {
+                  final updatedWidget =
+                      model.copyWith(hoverProperties: updated);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                } else {
+                  final updatedWidget = model.copyWith(properties: updated);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                }
+              },
+              configBuilder: (props, disabled, onChangedLocal) =>
+                  _buildRowConfigUI(
+                      props, disabled, localization, onChangedLocal),
+            )
           ]);
     } else {
       return const SizedBox.shrink();
     }
+  }
+
+  Widget _buildRowConfigUI(
+      PagebuilderRowProperties? props,
+      bool disabled,
+      AppLocalizations localization,
+      Function(PagebuilderRowProperties?) onChangedLocal) {
+    if (disabled) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(children: [
+      PagebuilderSwitchControl(
+          title:
+              localization.landingpage_pagebuilder_row_config_row_equal_heights,
+          isActive: props?.equalHeights ?? false,
+          onSelected: (isSelected) {
+            onChangedLocal(props?.copyWith(equalHeights: isSelected) ??
+                PagebuilderRowProperties(
+                    equalHeights: isSelected,
+                    mainAxisAlignment: null,
+                    crossAxisAlignment: null));
+          }),
+      const SizedBox(height: 20),
+      PagebuilderConfigMenuDrowdown(
+          title: localization
+              .landingpage_pagebuilder_row_config_row_main_axis_alignment,
+          initialValue: props?.mainAxisAlignment ?? MainAxisAlignment.center,
+          type: PagebuilderDropdownType.mainAxisAlignment,
+          onSelected: (value) {
+            onChangedLocal(props?.copyWith(mainAxisAlignment: value) ??
+                PagebuilderRowProperties(
+                    equalHeights: null,
+                    mainAxisAlignment: value,
+                    crossAxisAlignment: null));
+          }),
+      const SizedBox(height: 20),
+      PagebuilderConfigMenuDrowdown(
+          title: localization
+              .landingpage_pagebuilder_row_config_row_cross_axis_alignment,
+          initialValue: props?.crossAxisAlignment ?? CrossAxisAlignment.center,
+          type: PagebuilderDropdownType.crossAxisAlignment,
+          onSelected: (value) {
+            onChangedLocal(props?.copyWith(crossAxisAlignment: value) ??
+                PagebuilderRowProperties(
+                    equalHeights: null,
+                    mainAxisAlignment: null,
+                    crossAxisAlignment: value));
+          }),
+    ]);
   }
 }
