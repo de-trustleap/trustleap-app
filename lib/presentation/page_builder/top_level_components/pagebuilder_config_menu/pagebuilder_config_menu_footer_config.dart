@@ -27,12 +27,36 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
               PagebuilderConfigMenuTextConfig(
                   properties: (model.properties as PagebuilderFooterProperties)
                       .privacyPolicyTextProperties,
+                  hoverProperties: model.hoverProperties != null
+                      ? (model.hoverProperties as PagebuilderFooterProperties)
+                          .privacyPolicyTextProperties
+                      : null,
                   onChanged: (textProperties) {
                     final updatedProperties = (model.properties
                             as PagebuilderFooterProperties)
                         .copyWith(privacyPolicyTextProperties: textProperties);
                     final updatedWidget =
                         model.copyWith(properties: updatedProperties);
+                    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                  },
+                  onChangedHover: (hoverProps) {
+                    final currentHoverProps =
+                        model.hoverProperties as PagebuilderFooterProperties?;
+                    final updatedHoverProps = hoverProps == null
+                        ? null
+                        : (currentHoverProps ??
+                                const PagebuilderFooterProperties(
+                                    privacyPolicyTextProperties: null,
+                                    impressumTextProperties: null,
+                                    initialInformationTextProperties: null,
+                                    termsAndConditionsTextProperties: null))
+                            .copyWith(privacyPolicyTextProperties: hoverProps);
+
+                    final updatedWidget = model.copyWith(
+                      hoverProperties: updatedHoverProps,
+                      removeHoverProperties: hoverProps == null,
+                    );
+
                     pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                   })
             ]),
@@ -43,12 +67,36 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
             PagebuilderConfigMenuTextConfig(
                 properties: (model.properties as PagebuilderFooterProperties)
                     .impressumTextProperties,
+                hoverProperties: model.hoverProperties != null
+                    ? (model.hoverProperties as PagebuilderFooterProperties)
+                        .impressumTextProperties
+                    : null,
                 onChanged: (textProperties) {
                   final updatedProperties =
                       (model.properties as PagebuilderFooterProperties)
                           .copyWith(impressumTextProperties: textProperties);
                   final updatedWidget =
                       model.copyWith(properties: updatedProperties);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                },
+                onChangedHover: (hoverProps) {
+                  final currentHoverProps =
+                      model.hoverProperties as PagebuilderFooterProperties?;
+                  final updatedHoverProps = hoverProps == null
+                      ? null
+                      : (currentHoverProps ??
+                              const PagebuilderFooterProperties(
+                                  privacyPolicyTextProperties: null,
+                                  impressumTextProperties: null,
+                                  initialInformationTextProperties: null,
+                                  termsAndConditionsTextProperties: null))
+                          .copyWith(impressumTextProperties: hoverProps);
+
+                  final updatedWidget = model.copyWith(
+                    hoverProperties: updatedHoverProps,
+                    removeHoverProperties: hoverProps == null,
+                  );
+
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                 })
           ],
@@ -61,6 +109,10 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
             PagebuilderConfigMenuTextConfig(
                 properties: (model.properties as PagebuilderFooterProperties)
                     .initialInformationTextProperties,
+                hoverProperties: model.hoverProperties != null
+                    ? (model.hoverProperties as PagebuilderFooterProperties)
+                        .initialInformationTextProperties
+                    : null,
                 onChanged: (textProperties) {
                   final updatedProperties =
                       (model.properties as PagebuilderFooterProperties)
@@ -68,6 +120,27 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
                               initialInformationTextProperties: textProperties);
                   final updatedWidget =
                       model.copyWith(properties: updatedProperties);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                },
+                onChangedHover: (hoverProps) {
+                  final currentHoverProps =
+                      model.hoverProperties as PagebuilderFooterProperties?;
+                  final updatedHoverProps = hoverProps == null
+                      ? null
+                      : (currentHoverProps ??
+                              const PagebuilderFooterProperties(
+                                  privacyPolicyTextProperties: null,
+                                  impressumTextProperties: null,
+                                  initialInformationTextProperties: null,
+                                  termsAndConditionsTextProperties: null))
+                          .copyWith(
+                              initialInformationTextProperties: hoverProps);
+
+                  final updatedWidget = model.copyWith(
+                    hoverProperties: updatedHoverProps,
+                    removeHoverProperties: hoverProps == null,
+                  );
+
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                 })
           ],
@@ -80,6 +153,10 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
             PagebuilderConfigMenuTextConfig(
                 properties: (model.properties as PagebuilderFooterProperties)
                     .termsAndConditionsTextProperties,
+                hoverProperties: model.hoverProperties != null
+                    ? (model.hoverProperties as PagebuilderFooterProperties)
+                        .termsAndConditionsTextProperties
+                    : null,
                 onChanged: (textProperties) {
                   final updatedProperties =
                       (model.properties as PagebuilderFooterProperties)
@@ -87,6 +164,27 @@ class PagebuilderConfigMenuFooterConfig extends StatelessWidget {
                               termsAndConditionsTextProperties: textProperties);
                   final updatedWidget =
                       model.copyWith(properties: updatedProperties);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                },
+                onChangedHover: (hoverProps) {
+                  final currentHoverProps =
+                      model.hoverProperties as PagebuilderFooterProperties?;
+                  final updatedHoverProps = hoverProps == null
+                      ? null
+                      : (currentHoverProps ??
+                              const PagebuilderFooterProperties(
+                                  privacyPolicyTextProperties: null,
+                                  impressumTextProperties: null,
+                                  initialInformationTextProperties: null,
+                                  termsAndConditionsTextProperties: null))
+                          .copyWith(
+                              termsAndConditionsTextProperties: hoverProps);
+
+                  final updatedWidget = model.copyWith(
+                    hoverProperties: updatedHoverProps,
+                    removeHoverProperties: hoverProps == null,
+                  );
+
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                 })
           ],

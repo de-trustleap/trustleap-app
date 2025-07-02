@@ -33,6 +33,17 @@ class _NumberInputWithArrowsState extends State<PagebuilderNumberStepper> {
     _controller = TextEditingController(text: _currentValue.toString());
   }
 
+  @override
+  void didUpdateWidget(PagebuilderNumberStepper oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialValue != widget.initialValue) {
+      setState(() {
+        _currentValue = widget.initialValue;
+        _controller.text = _currentValue.toString();
+      });
+    }
+  }
+
   void _increment() {
     if (_currentValue < widget.maxValue) {
       setState(() {

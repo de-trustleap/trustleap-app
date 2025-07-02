@@ -17,6 +17,25 @@ void main() {
     });
   });
 
+  group("PageBuilderIconProperties_DeepCopy", () {
+    test("should create independent copy with all properties", () {
+      // Given
+      const original = PageBuilderIconProperties(
+        code: "e87c",
+        size: 24.0,
+        color: Color(0xFF2196F3),
+      );
+      // When
+      final copy = original.deepCopy();
+      // Then
+      expect(copy, isNot(same(original)));
+      expect(copy.code, equals(original.code));
+      expect(copy.size, equals(original.size));
+      expect(copy.color, equals(original.color));
+      expect(copy, equals(original));
+    });
+  });
+
   group("PagebuilderIconProperties_Props", () {
     test("check if value equality works", () {
       // Given

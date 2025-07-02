@@ -47,6 +47,20 @@ class PageBuilderImageProperties extends Equatable
         hasChanged: hasChanged ?? this.hasChanged);
   }
 
+  PageBuilderImageProperties deepCopy() {
+    return PageBuilderImageProperties(
+      url: url,
+      borderRadius: borderRadius,
+      width: width,
+      height: height,
+      contentMode: contentMode,
+      overlayColor:
+          overlayColor != null ? Color(overlayColor!.toARGB32()) : null,
+      localImage: localImage != null ? Uint8List.fromList(localImage!) : null,
+      hasChanged: hasChanged,
+    );
+  }
+
   @override
   List<Object?> get props =>
       [url, borderRadius, width, height, contentMode, overlayColor, localImage];

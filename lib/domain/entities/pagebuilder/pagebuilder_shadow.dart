@@ -29,6 +29,15 @@ class PageBuilderShadow extends Equatable {
     );
   }
 
+  PageBuilderShadow deepCopy() {
+    return PageBuilderShadow(
+      color: color != null ? Color(color!.toARGB32()) : null,
+      spreadRadius: spreadRadius,
+      blurRadius: blurRadius,
+      offset: offset != null ? Offset(offset!.dx, offset!.dy) : null,
+    );
+  }
+
   @override
   List<Object?> get props => [color, spreadRadius, blurRadius, offset];
 }

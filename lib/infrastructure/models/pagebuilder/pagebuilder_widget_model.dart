@@ -29,10 +29,12 @@ class PageBuilderWidgetModel extends Equatable {
   final String id;
   final String? elementType;
   final Map<String, dynamic>? properties;
+  final Map<String, dynamic>? hoverProperties;
   final List<PageBuilderWidgetModel>? children;
   final PageBuilderWidgetModel? containerChild;
   final double? widthPercentage;
   final Map<String, dynamic>? background;
+  final Map<String, dynamic>? hoverBackground;
   final Map<String, dynamic>? padding;
   final Map<String, dynamic>? margin;
   final double? maxWidth;
@@ -42,10 +44,12 @@ class PageBuilderWidgetModel extends Equatable {
       {required this.id,
       required this.elementType,
       required this.properties,
+      required this.hoverProperties,
       required this.children,
       required this.containerChild,
       required this.widthPercentage,
       required this.background,
+      required this.hoverBackground,
       required this.padding,
       required this.margin,
       required this.maxWidth,
@@ -55,12 +59,14 @@ class PageBuilderWidgetModel extends Equatable {
     Map<String, dynamic> map = {'id': id};
     if (elementType != null) map['elementType'] = elementType;
     if (properties != null) map['properties'] = properties;
+    if (hoverProperties != null) map['hoverProperties'] = hoverProperties;
     if (children != null) {
       map['children'] = children!.map((child) => child.toMap()).toList();
     }
     if (containerChild != null) map['containerChild'] = containerChild!.toMap();
     if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
     if (background != null) map['background'] = background;
+    if (hoverBackground != null) map['hoverBackground'] = hoverBackground;
     if (padding != null) map['padding'] = padding;
     if (margin != null) map['margin'] = margin;
     if (maxWidth != null) map['maxWidth'] = maxWidth;
@@ -76,11 +82,13 @@ class PageBuilderWidgetModel extends Equatable {
         properties: map['properties'] != null
             ? map['properties'] as Map<String, dynamic>
             : null,
+        hoverProperties: map['hoverProperties'] != null
+            ? map['hoverProperties'] as Map<String, dynamic>
+            : null,
         children: map['children'] != null
-            ? List<PageBuilderWidgetModel>.from(
-                (map['children'] as List<dynamic>).map((child) =>
-                    PageBuilderWidgetModel.fromMap(
-                        child as Map<String, dynamic>)))
+            ? List<PageBuilderWidgetModel>.from((map['children'] as List<dynamic>)
+                .map((child) => PageBuilderWidgetModel.fromMap(
+                    child as Map<String, dynamic>)))
             : null,
         containerChild: map['containerChild'] != null
             ? PageBuilderWidgetModel.fromMap(
@@ -92,12 +100,13 @@ class PageBuilderWidgetModel extends Equatable {
         background: map['background'] != null
             ? map['background'] as Map<String, dynamic>
             : null,
+        hoverBackground: map['hoverBackground'] != null
+            ? map['hoverBackground'] as Map<String, dynamic>
+            : null,
         padding: map['padding'] != null
             ? map['padding'] as Map<String, dynamic>
             : null,
-        margin: map['margin'] != null
-            ? map['margin'] as Map<String, dynamic>
-            : null,
+        margin: map['margin'] != null ? map['margin'] as Map<String, dynamic> : null,
         maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
         alignment: map['alignment'] != null ? map['alignment'] as String : null);
   }
@@ -106,10 +115,12 @@ class PageBuilderWidgetModel extends Equatable {
       {String? id,
       String? elementType,
       Map<String, dynamic>? properties,
+      Map<String, dynamic>? hoverProperties,
       List<PageBuilderWidgetModel>? children,
       PageBuilderWidgetModel? containerChild,
       double? widthPercentage,
       Map<String, dynamic>? background,
+      Map<String, dynamic>? hoverBackground,
       Map<String, dynamic>? padding,
       Map<String, dynamic>? margin,
       double? maxWidth,
@@ -118,10 +129,12 @@ class PageBuilderWidgetModel extends Equatable {
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
         properties: properties ?? this.properties,
+        hoverProperties: hoverProperties ?? this.hoverProperties,
         children: children ?? this.children,
         containerChild: containerChild ?? this.containerChild,
         widthPercentage: widthPercentage ?? this.widthPercentage,
         background: background ?? this.background,
+        hoverBackground: hoverBackground ?? this.hoverBackground,
         padding: padding ?? this.padding,
         margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
@@ -135,12 +148,16 @@ class PageBuilderWidgetModel extends Equatable {
             ? PageBuilderWidgetType.none
             : PageBuilderWidgetType.values
                 .firstWhere((element) => element.name == elementType),
-        properties: getPropertiesByType(elementType),
+        properties: getPropertiesByType(elementType, properties),
+        hoverProperties: getPropertiesByType(elementType, hoverProperties),
         children: children?.map((child) => child.toDomain()).toList(),
         containerChild: containerChild?.toDomain(),
         widthPercentage: widthPercentage,
         background: background != null
             ? PagebuilderBackgroundModel.fromMap(background!).toDomain()
+            : null,
+        hoverBackground: hoverBackground != null
+            ? PagebuilderBackgroundModel.fromMap(hoverBackground!).toDomain()
             : null,
         padding: PageBuilderSpacing.fromMap(padding),
         margin: PageBuilderSpacing.fromMap(margin),
@@ -153,6 +170,7 @@ class PageBuilderWidgetModel extends Equatable {
         id: widget.id.value,
         elementType: widget.elementType?.name,
         properties: getMapFromProperties(widget.properties),
+        hoverProperties: getMapFromProperties(widget.hoverProperties),
         children: widget.children
             ?.map((child) => PageBuilderWidgetModel.fromDomain(child))
             .toList(),
@@ -163,13 +181,18 @@ class PageBuilderWidgetModel extends Equatable {
         background: widget.background != null
             ? PagebuilderBackgroundModel.fromDomain(widget.background!).toMap()
             : null,
+        hoverBackground: widget.hoverBackground != null
+            ? PagebuilderBackgroundModel.fromDomain(widget.hoverBackground!)
+                .toMap()
+            : null,
         padding: getMapFromPadding(widget.padding),
         margin: getMapFromPadding(widget.margin),
         maxWidth: widget.maxWidth,
         alignment: AlignmentMapper.getStringFromAlignment(widget.alignment));
   }
 
-  PageBuilderProperties? getPropertiesByType(String? type) {
+  PageBuilderProperties? getPropertiesByType(
+      String? type, Map<String, dynamic>? properties) {
     if (properties == null) {
       return null;
     }
@@ -179,25 +202,25 @@ class PageBuilderWidgetModel extends Equatable {
             .firstWhere((element) => element.name == type);
     switch (widgetType) {
       case PageBuilderWidgetType.text:
-        return PageBuilderTextPropertiesModel.fromMap(properties!).toDomain();
+        return PageBuilderTextPropertiesModel.fromMap(properties).toDomain();
       case PageBuilderWidgetType.image:
-        return PageBuilderImagePropertiesModel.fromMap(properties!).toDomain();
+        return PageBuilderImagePropertiesModel.fromMap(properties).toDomain();
       case PageBuilderWidgetType.icon:
-        return PageBuilderIconPropertiesModel.fromMap(properties!).toDomain();
+        return PageBuilderIconPropertiesModel.fromMap(properties).toDomain();
       case PageBuilderWidgetType.container:
-        return PageBuilderContainerPropertiesModel.fromMap(properties!)
+        return PageBuilderContainerPropertiesModel.fromMap(properties)
             .toDomain();
       case PageBuilderWidgetType.row:
-        return PagebuilderRowPropertiesModel.fromMap(properties!).toDomain();
+        return PagebuilderRowPropertiesModel.fromMap(properties).toDomain();
       case PageBuilderWidgetType.column:
-        return PagebuilderColumnPropertiesModel.fromMap(properties!).toDomain();
+        return PagebuilderColumnPropertiesModel.fromMap(properties).toDomain();
       case PageBuilderWidgetType.contactForm:
-        return PageBuilderContactFormPropertiesModel.fromMap(properties!)
+        return PageBuilderContactFormPropertiesModel.fromMap(properties)
             .toDomain();
       case PageBuilderWidgetType.footer:
-        return PagebuilderFooterPropertiesModel.fromMap(properties!).toDomain();
+        return PagebuilderFooterPropertiesModel.fromMap(properties).toDomain();
       case PageBuilderWidgetType.videoPlayer:
-        return PagebuilderVideoPlayerPropertiesModel.fromMap(properties!)
+        return PagebuilderVideoPlayerPropertiesModel.fromMap(properties)
             .toDomain();
       default:
         return null;
@@ -259,10 +282,12 @@ class PageBuilderWidgetModel extends Equatable {
         id,
         elementType,
         properties,
+        hoverProperties,
         children,
         containerChild,
         widthPercentage,
         background,
+        hoverBackground,
         padding,
         margin,
         maxWidth,

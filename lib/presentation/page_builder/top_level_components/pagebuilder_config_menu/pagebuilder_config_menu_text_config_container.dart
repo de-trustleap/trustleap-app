@@ -17,7 +17,6 @@ class PagebuilderConfigMenuTextConfigContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final pagebuilderBloc = Modular.get<PagebuilderBloc>();
-
     if (model.elementType == PageBuilderWidgetType.text &&
         model.properties is PageBuilderTextProperties) {
       return CollapsibleTile(
@@ -25,8 +24,18 @@ class PagebuilderConfigMenuTextConfigContainer extends StatelessWidget {
           children: [
             PagebuilderConfigMenuTextConfig(
                 properties: model.properties as PageBuilderTextProperties,
+                hoverProperties: model.hoverProperties != null
+                    ? model.hoverProperties as PageBuilderTextProperties
+                    : null,
+                showHoverTabBar: true,
                 onChanged: (properties) {
                   final updatedWidget = model.copyWith(properties: properties);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                },
+                onChangedHover: (properties) {
+                  final updatedWidget = properties == null
+                      ? model.copyWith(removeHoverProperties: true)
+                      : model.copyWith(hoverProperties: properties);
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                 })
           ]);

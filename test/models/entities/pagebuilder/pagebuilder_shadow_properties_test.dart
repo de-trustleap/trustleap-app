@@ -26,6 +26,27 @@ void main() {
     });
   });
 
+  group("PageBuilderShadow_DeepCopy", () {
+    test("should create independent copy with all properties", () {
+      // Given
+      const original = PageBuilderShadow(
+        color: Color(0xFF000000),
+        spreadRadius: 2.0,
+        blurRadius: 8.0,
+        offset: Offset(4.0, 4.0),
+      );
+      // When
+      final copy = original.deepCopy();
+      // Then
+      expect(copy, isNot(same(original)));
+      expect(copy.color, equals(original.color));
+      expect(copy.spreadRadius, equals(original.spreadRadius));
+      expect(copy.blurRadius, equals(original.blurRadius));
+      expect(copy.offset, equals(original.offset));
+      expect(copy, equals(original));
+    });
+  });
+
   group("PagebuilderShadow_Props", () {
     test("check if value equality works", () {
       // Given

@@ -71,6 +71,7 @@ void main() {
                     children: [],
                     widthPercentage: null,
                     background: null,
+                    hoverBackground: null,
                     padding: null,
                     margin: null,
                     containerChild: null,
@@ -90,7 +91,8 @@ void main() {
                             blurRadius: 1.0,
                             offset: Offset(1, 1)),
                         isBold: null,
-                        isItalic: null))
+                        isItalic: null),
+                    hoverProperties: null)
               ])
         ],
         backgroundColor: null);

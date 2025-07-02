@@ -53,6 +53,21 @@ class PageBuilderTextProperties extends Equatable
         isItalic: isItalic ?? this.isItalic);
   }
 
+  PageBuilderTextProperties deepCopy() {
+    return PageBuilderTextProperties(
+      text: text,
+      fontSize: fontSize,
+      fontFamily: fontFamily,
+      lineHeight: lineHeight,
+      letterSpacing: letterSpacing,
+      color: color != null ? Color(color!.toARGB32()) : null,
+      alignment: alignment,
+      textShadow: textShadow?.deepCopy(),
+      isBold: isBold,
+      isItalic: isItalic,
+    );
+  }
+
   @override
   List<Object?> get props => [
         text,

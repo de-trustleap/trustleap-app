@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_containe
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_shadow_control.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +13,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
   final PageBuilderWidget model;
   const PagebuilderConfigMenuContainerConfig({super.key, required this.model});
-
-  void updateContainerProperties(PageBuilderContainerProperties properties,
-      PagebuilderBloc pagebuilderCubit) {
-    final updatedWidget = model.copyWith(properties: properties);
-    pagebuilderCubit.add(UpdateWidgetEvent(updatedWidget));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,37 +25,73 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
           title: localization
               .landingpage_pagebuilder_container_config_container_title,
           children: [
-            PagebuilderNumberStepperControl(
-                title: localization.pagebuilder_image_config_border_radius,
-                initialValue:
-                    (model.properties as PageBuilderContainerProperties)
-                            .borderRadius
-                            ?.toInt() ??
-                        0,
-                minValue: 0,
-                maxValue: 1000,
-                onSelected: (radius) {
-                  final updatedProperties =
+            PagebuilderHoverConfigTabBar<PageBuilderContainerProperties>(
+              properties: model.properties as PageBuilderContainerProperties,
+              hoverProperties: model.hoverProperties != null
+                  ? model.hoverProperties as PageBuilderContainerProperties
+                  : null,
+              hoverEnabled: model.hoverProperties != null,
+              onHoverEnabledChanged: (enabled) {
+                if (enabled) {
+                  final hoverProperties =
                       (model.properties as PageBuilderContainerProperties)
-                          .copyWith(borderRadius: radius.toDouble());
-                  updateContainerProperties(updatedProperties, pagebuilderBloc);
-                }),
-            const SizedBox(height: 20),
-            PagebuilderShadowControl(
-                title: localization
-                    .landingpage_pagebuilder_container_config_container_shadow,
-                initialShadow:
-                    (model.properties as PageBuilderContainerProperties).shadow,
-                showSpreadRadius: true,
-                onSelected: (shadow) {
-                  final updatedProperties =
-                      (model.properties as PageBuilderContainerProperties)
-                          .copyWith(shadow: shadow);
-                  updateContainerProperties(updatedProperties, pagebuilderBloc);
-                })
+                          .deepCopy();
+                  final updatedWidget =
+                      model.copyWith(hoverProperties: hoverProperties);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                } else {
+                  final updatedWidget =
+                      model.copyWith(removeHoverProperties: true);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                }
+              },
+              onChanged: (updated, isHover) {
+                if (isHover) {
+                  final updatedWidget =
+                      model.copyWith(hoverProperties: updated);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                } else {
+                  final updatedWidget = model.copyWith(properties: updated);
+                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                }
+              },
+              configBuilder: (props, disabled, onChangedLocal) =>
+                  _buildContainerConfigUI(
+                      props, disabled, localization, onChangedLocal),
+            )
           ]);
     } else {
       return const SizedBox.shrink();
     }
+  }
+
+  Widget _buildContainerConfigUI(
+      PageBuilderContainerProperties? props,
+      bool disabled,
+      AppLocalizations localization,
+      Function(PageBuilderContainerProperties?) onChangedLocal) {
+    if (disabled) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(children: [
+      PagebuilderNumberStepperControl(
+          title: localization.pagebuilder_image_config_border_radius,
+          initialValue: props?.borderRadius?.toInt() ?? 0,
+          minValue: 0,
+          maxValue: 1000,
+          onSelected: (radius) {
+            onChangedLocal(props?.copyWith(borderRadius: radius.toDouble()));
+          }),
+      const SizedBox(height: 20),
+      PagebuilderShadowControl(
+          title: localization
+              .landingpage_pagebuilder_container_config_container_shadow,
+          initialShadow: props?.shadow,
+          showSpreadRadius: true,
+          onSelected: (shadow) {
+            onChangedLocal(props?.copyWith(shadow: shadow));
+          })
+    ]);
   }
 }
