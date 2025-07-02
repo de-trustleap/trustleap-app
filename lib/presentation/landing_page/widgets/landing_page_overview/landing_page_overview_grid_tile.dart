@@ -59,6 +59,16 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             Icon(Icons.edit, color: themeData.colorScheme.secondary, size: 24));
   }
 
+  bool _isDefaultPage() {
+    if (landingPage.isDefaultPage == null ||
+        (landingPage.isDefaultPage != null &&
+            landingPage.isDefaultPage! == false)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -68,8 +78,9 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             as PermissionSuccessState)
         .permissions;
 
-    if (landingPage.ownerID == user.id ||
-        (permissions.hasEditLandingPagePermission())) {
+    if ((landingPage.ownerID == user.id ||
+            (permissions.hasEditLandingPagePermission())) &&
+        !_isDefaultPage()) {
       return InkWell(
           onTap: () => CustomNavigator.openInNewTab(
               "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
@@ -102,9 +113,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              if (landingPage.isDefaultPage == null ||
-                  (landingPage.isDefaultPage != null &&
-                      landingPage.isDefaultPage! == false)) ...[
+              if (_isDefaultPage()) ...[
                 Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,

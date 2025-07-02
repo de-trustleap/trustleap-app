@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:finanzbegleiter/application/web_logging/web_logging_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:web/web.dart';
@@ -8,18 +9,18 @@ import 'package:web/web.dart';
 class WebCrashReporter {
   static void initialize() {
     FlutterError.onError = (FlutterErrorDetails details) {
-      _report(details.exceptionAsString(), details.stack);
+      report(details.exceptionAsString(), details.stack, LogLevel.error);
     };
 
     PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
-      _report(error.toString(), stack);
+      report(error.toString(), stack, LogLevel.error);
       return true;
     };
   }
 
-  static void _report(String message, StackTrace? stack) {
+  static void report(String message, StackTrace? stack, LogLevel logLevel) {
     final cubit = Modular.get<WebLoggingCubit>();
-    cubit.reportWebCrash(message, stack, _detectBrowser());
+    cubit.log(message, _detectBrowser(), "1.0.0", logLevel, stack);
   }
 
   static String _detectBrowser() {
