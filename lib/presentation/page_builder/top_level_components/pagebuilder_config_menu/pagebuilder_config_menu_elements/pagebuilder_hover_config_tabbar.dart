@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderHoverConfigTabBar<T> extends StatefulWidget {
@@ -40,17 +41,19 @@ class _PagebuilderHoverConfigTabBarState<T>
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildCustomTabBar(themeData),
+        _buildCustomTabBar(themeData, localization),
         const SizedBox(height: 12),
         if (isHover)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Hover aktivieren"),
+              Text(localization.pagebuilder_config_menu_hover_switch,
+                  style: themeData.textTheme.bodyMedium),
               Switch(
                 value: widget.hoverEnabled,
                 onChanged: widget.onHoverEnabledChanged,
@@ -69,7 +72,8 @@ class _PagebuilderHoverConfigTabBarState<T>
     );
   }
 
-  Widget _buildCustomTabBar(ThemeData themeData) {
+  Widget _buildCustomTabBar(
+      ThemeData themeData, AppLocalizations localization) {
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -81,8 +85,10 @@ class _PagebuilderHoverConfigTabBarState<T>
       ),
       child: Row(
         children: [
-          _buildTab("Normal", 0, themeData),
-          _buildTab("Hover", 1, themeData),
+          _buildTab(
+              localization.pagebuilder_config_menu_normal_tab, 0, themeData),
+          _buildTab(
+              localization.pagebuilder_config_menu_hover_tab, 1, themeData),
         ],
       ),
     );

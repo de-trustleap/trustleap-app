@@ -3397,6 +3397,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose placeholder'**
   String get pagebuilder_text_placeholder_picker;
+
+  /// Title of the normal tab in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get pagebuilder_config_menu_normal_tab;
+
+  /// Title of the hover tab in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Hover'**
+  String get pagebuilder_config_menu_hover_tab;
+
+  /// Title of the hover switch in the hover tab in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Activate hover'**
+  String get pagebuilder_config_menu_hover_switch;
 }
 
 class _AppLocalizationsDelegate

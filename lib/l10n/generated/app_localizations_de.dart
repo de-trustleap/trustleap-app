@@ -1970,4 +1970,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_text_placeholder_picker => 'Platzhalter auswählen';
+
+  @override
+  String get pagebuilder_config_menu_normal_tab => 'Normal';
+
+  @override
+  String get pagebuilder_config_menu_hover_tab => 'Hover';
+
+  @override
+  String get pagebuilder_config_menu_hover_switch => 'Hover aktivieren';
 }

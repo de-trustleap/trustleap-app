@@ -2229,5 +2229,17 @@
     "pagebuilder_text_placeholder_picker": "Platzhalter auswählen",
     "@pagebuilder_text_placeholder_picker": {
         "description": "Titel des Dropdown Menüs für den Platzhalter im Text Config Menü"
+    },
+    "pagebuilder_config_menu_normal_tab": "Normal",
+    "@pagebuilder_config_menu_normal_tab": {
+        "description": "Titel des Normal Tabs der Tabbar im Pagebuilder Config Menü"
+    },
+    "pagebuilder_config_menu_hover_tab": "Hover",
+    "@pagebuilder_config_menu_hover_tab": {
+        "description": "Titel des Hover Tabs der Tabbar im Pagebuilder Config Menü"
+    },
+    "pagebuilder_config_menu_hover_switch": "Hover aktivieren",
+    "@pagebuilder_config_menu_hover_switch": {
+        "description": "Titel des Hover Switches im Hover Tab im Pagebuilder Config Menü"
     }
 }

@@ -2229,5 +2229,17 @@
     "pagebuilder_text_placeholder_picker": "Choose placeholder",
     "@pagebuilder_text_placeholder_picker": {
         "description": "Title of dropdown menu for placeholder in text config menu"
+    },
+    "pagebuilder_config_menu_normal_tab": "Normal",
+    "@pagebuilder_config_menu_normal_tab": {
+        "description": "Title of the normal tab in the pagebuilder config menu"
+    },
+    "pagebuilder_config_menu_hover_tab": "Hover",
+    "@pagebuilder_config_menu_hover_tab": {
+        "description": "Title of the hover tab in the pagebuilder config menu"
+    },
+    "pagebuilder_config_menu_hover_switch": "Activate hover",
+    "@pagebuilder_config_menu_hover_switch": {
+        "description": "Title of the hover switch in the hover tab in the pagebuilder config menu"
     }
 }
