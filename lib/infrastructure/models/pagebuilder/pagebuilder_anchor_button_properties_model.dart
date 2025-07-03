@@ -62,5 +62,3 @@ class PagebuilderAnchorButtonPropertiesModel extends Equatable
   @override
   List<Object?> get props => [sectionID, buttonProperties];
 }
-
-// TODO: LOCALIZATIONS (AUCH VON HOVER NACHZIEHEN)

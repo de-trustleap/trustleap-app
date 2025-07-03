@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,13 +10,15 @@ class PagebuilderConfigMenuSectionIDDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("ID:", style: themeData.textTheme.bodyLarge),
+          Text(localization.pagebuilder_section_id,
+              style: themeData.textTheme.bodyLarge),
           const SizedBox(width: 8),
           Expanded(
             child: Text.rich(
@@ -35,7 +38,7 @@ class PagebuilderConfigMenuSectionIDDisplay extends StatelessWidget {
                       icon: const Icon(Icons.copy),
                       iconSize: 20,
                       padding: const EdgeInsets.all(4),
-                      tooltip: "ID kopieren",
+                      tooltip: localization.pagebuilder_section_copy_id_tooltip,
                       color: themeData.colorScheme.secondary,
                     ),
                   ),

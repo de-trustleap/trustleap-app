@@ -1222,6 +1222,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Video Player';
 
   @override
+  String get landingpage_pagebuilder_config_menu_anchor_button_type =>
+      'Anchor Button';
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unknown';
 
   @override
@@ -1939,4 +1943,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_config_menu_hover_switch => 'Activate hover';
+
+  @override
+  String get pagebuilder_anchor_button_content_section_id => 'Section ID';
+
+  @override
+  String get pagebuilder_anchor_button_content_section_id_subtitle =>
+      'Please enter the section ID you want to scroll to. You can find this in the respective section.';
+
+  @override
+  String get pagebuilder_anchor_button_content_section_id_placeholder =>
+      'Section ID';
+
+  @override
+  String get pagebuilder_section_id => 'ID:';
+
+  @override
+  String get pagebuilder_section_copy_id_tooltip => 'Copy id';
 }

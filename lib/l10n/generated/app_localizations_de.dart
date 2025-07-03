@@ -1246,6 +1246,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Video Player';
 
   @override
+  String get landingpage_pagebuilder_config_menu_anchor_button_type =>
+      'Anker Button';
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unbekannt';
 
   @override
@@ -1979,4 +1983,21 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_config_menu_hover_switch => 'Hover aktivieren';
+
+  @override
+  String get pagebuilder_anchor_button_content_section_id => 'Section ID';
+
+  @override
+  String get pagebuilder_anchor_button_content_section_id_subtitle =>
+      'Gib bitte die Section ID ein, zu welcher gescrollt werden soll. Diese findest du in der jeweiligen Section.';
+
+  @override
+  String get pagebuilder_anchor_button_content_section_id_placeholder =>
+      'Section ID';
+
+  @override
+  String get pagebuilder_section_id => 'ID:';
+
+  @override
+  String get pagebuilder_section_copy_id_tooltip => 'ID kopieren';
 }

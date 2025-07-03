@@ -100,7 +100,8 @@ class PageBuilderWidget extends Equatable {
         return localization
             .landingpage_pagebuilder_config_menu_video_player_type;
       case == PageBuilderWidgetType.anchorButton:
-        return "Anker Button";
+        return localization
+            .landingpage_pagebuilder_config_menu_anchor_button_type;
       default:
         return localization.landingpage_pagebuilder_config_menu_unknown_type;
     }
