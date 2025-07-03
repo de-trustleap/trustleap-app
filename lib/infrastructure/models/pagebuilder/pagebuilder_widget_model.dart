@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
@@ -14,6 +15,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_pro
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_anchor_button_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_background_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_column_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_contact_form_properties_model.dart';
@@ -222,6 +224,9 @@ class PageBuilderWidgetModel extends Equatable {
       case PageBuilderWidgetType.videoPlayer:
         return PagebuilderVideoPlayerPropertiesModel.fromMap(properties)
             .toDomain();
+      case PageBuilderWidgetType.anchorButton:
+        return PagebuilderAnchorButtonPropertiesModel.fromMap(properties)
+            .toDomain();
       default:
         return null;
     }
@@ -251,6 +256,9 @@ class PageBuilderWidgetModel extends Equatable {
       return PagebuilderFooterPropertiesModel.fromDomain(properties).toMap();
     } else if (properties is PagebuilderVideoPlayerProperties) {
       return PagebuilderVideoPlayerPropertiesModel.fromDomain(properties)
+          .toMap();
+    } else if (properties is PagebuilderAnchorButtonProperties) {
+      return PagebuilderAnchorButtonPropertiesModel.fromDomain(properties)
           .toMap();
     } else {
       return null;

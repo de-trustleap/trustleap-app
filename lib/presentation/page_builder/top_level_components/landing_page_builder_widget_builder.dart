@@ -1,4 +1,6 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
@@ -9,6 +11,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_prop
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/page_builder/page_elements/button_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/contact_form_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/footer_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/icon_view.dart';
@@ -60,6 +63,11 @@ class LandingPageBuilderWidgetBuilder {
       case PageBuilderWidgetType.videoPlayer:
         return buildVideoPlayerWidget(
             model.properties as PagebuilderVideoPlayerProperties, model);
+      case PageBuilderWidgetType.anchorButton:
+        return buildButtonWidget(
+            (model.properties as PagebuilderAnchorButtonProperties)
+                .buttonProperties!,
+            model);
       default:
         return const SizedBox.shrink();
     }
@@ -180,5 +188,13 @@ class LandingPageBuilderWidgetBuilder {
       PagebuilderVideoPlayerProperties properties, PageBuilderWidget model) {
     return PagebuilderVideoPlayerView(
         properties: properties, widgetModel: model);
+  }
+
+  Widget buildButtonWidget(
+      PageBuilderButtonProperties properties, PageBuilderWidget model) {
+    return LandingPageBuilderWidgetContainer(
+      model: model,
+      child: PageBuilderButtonView(properties: properties, widgetModel: model),
+    );
   }
 }
