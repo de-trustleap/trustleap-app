@@ -99,6 +99,9 @@ class PageBuilderWidget extends Equatable {
       case == PageBuilderWidgetType.videoPlayer:
         return localization
             .landingpage_pagebuilder_config_menu_video_player_type;
+      case == PageBuilderWidgetType.anchorButton:
+        return localization
+            .landingpage_pagebuilder_config_menu_anchor_button_type;
       default:
         return localization.landingpage_pagebuilder_config_menu_unknown_type;
     }

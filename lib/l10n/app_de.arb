@@ -1406,6 +1406,10 @@
     "@landingpage_pagebuilder_config_menu_video_player_type": {
         "description": "Video Player Titel im Pagebuilder Config Menü"
     },
+    "landingpage_pagebuilder_config_menu_anchor_button_type": "Anker Button",
+    "@landingpage_pagebuilder_config_menu_anchor_button_type": {
+        "description": "Anker Button Titel im Pagebuilder Config Menü"
+    },
     "landingpage_pagebuilder_config_menu_unknown_type": "Unbekannt",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unbekannt Titel im Pagebuilder Config Menü"
@@ -2229,5 +2233,37 @@
     "pagebuilder_text_placeholder_picker": "Platzhalter auswählen",
     "@pagebuilder_text_placeholder_picker": {
         "description": "Titel des Dropdown Menüs für den Platzhalter im Text Config Menü"
+    },
+    "pagebuilder_config_menu_normal_tab": "Normal",
+    "@pagebuilder_config_menu_normal_tab": {
+        "description": "Titel des Normal Tabs der Tabbar im Pagebuilder Config Menü"
+    },
+    "pagebuilder_config_menu_hover_tab": "Hover",
+    "@pagebuilder_config_menu_hover_tab": {
+        "description": "Titel des Hover Tabs der Tabbar im Pagebuilder Config Menü"
+    },
+    "pagebuilder_config_menu_hover_switch": "Hover aktivieren",
+    "@pagebuilder_config_menu_hover_switch": {
+        "description": "Titel des Hover Switches im Hover Tab im Pagebuilder Config Menü"
+    },
+    "pagebuilder_anchor_button_content_section_id": "Section ID",
+    "@pagebuilder_anchor_button_content_section_id": {
+        "description": "Titel des aufklappbaren Menüs für die Section ID im Pagebuilder Anker Button Config Menü"
+    },
+    "pagebuilder_anchor_button_content_section_id_subtitle": "Gib bitte die Section ID ein, zu welcher gescrollt werden soll. Diese findest du in der jeweiligen Section.",
+    "@pagebuilder_anchor_button_content_section_id_subtitle": {
+        "description": "Subtitel des aufklappbaren Menüs für die Section ID im Pagebuilder Anker Button Config Menü"
+    },
+    "pagebuilder_anchor_button_content_section_id_placeholder": "Section ID",
+    "@pagebuilder_anchor_button_content_section_id_placeholder": {
+        "description": "Platzhalter des Textfeldes im aufklappbaren Menüs für die Section ID im Pagebuilder Anker Button Config Menü"
+    },
+    "pagebuilder_section_id": "ID:",
+    "@pagebuilder_section_id": {
+        "description": "Text vor der ID in der Pagebuilder Section Konfiguration"
+    },
+    "pagebuilder_section_copy_id_tooltip": "ID kopieren",
+    "@pagebuilder_section_copy_id_tooltip": {
+        "description": "Tooltip für den ID kopieren Button in der Pagebuilder Section Konfiguration"
     }
 }

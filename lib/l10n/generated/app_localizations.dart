@@ -2183,6 +2183,12 @@ abstract class AppLocalizations {
   /// **'Video Player'**
   String get landingpage_pagebuilder_config_menu_video_player_type;
 
+  /// Anchor button title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Anchor Button'**
+  String get landingpage_pagebuilder_config_menu_anchor_button_type;
+
   /// Unknown title in the pagebuilder config menu
   ///
   /// In en, this message translates to:
@@ -3397,6 +3403,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose placeholder'**
   String get pagebuilder_text_placeholder_picker;
+
+  /// Title of the normal tab in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get pagebuilder_config_menu_normal_tab;
+
+  /// Title of the hover tab in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Hover'**
+  String get pagebuilder_config_menu_hover_tab;
+
+  /// Title of the hover switch in the hover tab in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Activate hover'**
+  String get pagebuilder_config_menu_hover_switch;
+
+  /// Title for the collapsible view for the anchor button section id in the pagebuilder anchor button configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Section ID'**
+  String get pagebuilder_anchor_button_content_section_id;
+
+  /// Subtitle for the collapsible view for the anchor button section id in the pagebuilder anchor button configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the section ID you want to scroll to. You can find this in the respective section.'**
+  String get pagebuilder_anchor_button_content_section_id_subtitle;
+
+  /// Placeholder for the textfield in the collapsible view for the anchor button section id in the pagebuilder anchor button configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Section ID'**
+  String get pagebuilder_anchor_button_content_section_id_placeholder;
+
+  /// Text before the ID in the Pagebuilder Section configuration
+  ///
+  /// In en, this message translates to:
+  /// **'ID:'**
+  String get pagebuilder_section_id;
+
+  /// Tooltip for the Copy ID button in the Pagebuilder Section configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Copy id'**
+  String get pagebuilder_section_copy_id_tooltip;
 }
 
 class _AppLocalizationsDelegate

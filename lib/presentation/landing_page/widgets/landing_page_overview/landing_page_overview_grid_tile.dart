@@ -60,13 +60,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
   }
 
   bool _isDefaultPage() {
-    if (landingPage.isDefaultPage == null ||
-        (landingPage.isDefaultPage != null &&
-            landingPage.isDefaultPage! == false)) {
-      return false;
-    } else {
-      return true;
-    }
+    return landingPage.isDefaultPage ?? false;
   }
 
   @override
@@ -113,7 +107,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              if (_isDefaultPage()) ...[
+              if (!_isDefaultPage()) ...[
                 Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -228,8 +222,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                             }
                           })
                     ]),
-              ] else if (landingPage.isDefaultPage != null &&
-                  landingPage.isDefaultPage == true) ...[
+              ] else if (_isDefaultPage()) ...[
                 Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -240,7 +233,20 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                       ] else ...[
                         const SizedBox(height: 40)
                       ],
-                      const Spacer()
+                      const Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            final baseURL =
+                                Environment().getLandingpageBaseURL();
+                            CustomNavigator.openURLInNewTab(
+                                "$baseURL?preview=true&id=${landingPage.id.value}");
+                          },
+                          iconSize: 24,
+                          tooltip:
+                              localizations.landingpage_overview_show_tooltip,
+                          icon: Icon(Icons.preview,
+                              color: themeData.colorScheme.secondary,
+                              size: 24)),
                     ])
               ] else ...[
                 const Spacer()

@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_anchor_button_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_background.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_column_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_contactform_config.dart';
@@ -40,6 +41,8 @@ class LandingPageBuilderConfigMenuDesignTab extends StatelessWidget {
           PagebuilderConfigMenuFooterConfig(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.videoPlayer) ...[
           PagebuilderConfigMenuVideoPlayerConfig(model: model)
+        ] else if (model.elementType == PageBuilderWidgetType.anchorButton) ...[
+          PagebuilderConfigMenuAnchorButtonConfig(model: model)
         ],
         const SizedBox(height: 8),
         PagebuilderConfigMenuLayout(model: model),

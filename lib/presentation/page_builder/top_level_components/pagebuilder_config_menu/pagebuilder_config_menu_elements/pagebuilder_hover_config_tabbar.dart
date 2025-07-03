@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderHoverConfigTabBar<T> extends StatefulWidget {
@@ -39,21 +40,20 @@ class _PagebuilderHoverConfigTabBarState<T>
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            _buildTabButton("Normal", 0),
-            _buildTabButton("Hover", 1),
-          ],
-        ),
+        _buildCustomTabBar(themeData, localization),
         const SizedBox(height: 12),
         if (isHover)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Hover aktivieren"),
+              Text(localization.pagebuilder_config_menu_hover_switch,
+                  style: themeData.textTheme.bodyMedium),
               Switch(
                 value: widget.hoverEnabled,
                 onChanged: widget.onHoverEnabledChanged,
@@ -72,21 +72,60 @@ class _PagebuilderHoverConfigTabBarState<T>
     );
   }
 
-  Widget _buildTabButton(String label, int index) {
-    final isSelected = selectedTabIndex == index;
-    return Expanded(
-      child: TextButton(
-        onPressed: () => setState(() => selectedTabIndex = index),
-        style: TextButton.styleFrom(
-          backgroundColor: isSelected ? Colors.blue.shade100 : null,
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+  Widget _buildCustomTabBar(
+      ThemeData themeData, AppLocalizations localization) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.grey.shade300,
+            width: 1,
           ),
         ),
       ),
+      child: Row(
+        children: [
+          _buildTab(
+              localization.pagebuilder_config_menu_normal_tab, 0, themeData),
+          _buildTab(
+              localization.pagebuilder_config_menu_hover_tab, 1, themeData),
+        ],
+      ),
     );
+  }
+
+  Widget _buildTab(String label, int index, ThemeData themeData) {
+    final isSelected = selectedTabIndex == index;
+    return Expanded(
+        child: MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => setState(() => selectedTabIndex = index),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: isSelected
+                    ? themeData.colorScheme.secondary
+                    : Colors.transparent,
+                width: 2,
+              ),
+            ),
+          ),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: isSelected
+                  ? themeData.colorScheme.secondary
+                  : Colors.grey.shade600,
+              fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+              fontSize: 14,
+            ),
+          ),
+        ),
+      ),
+    ));
   }
 }
