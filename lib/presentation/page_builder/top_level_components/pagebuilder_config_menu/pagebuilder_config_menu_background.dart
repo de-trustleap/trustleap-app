@@ -116,6 +116,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                   width: null,
                   height: null,
                   contentMode: null,
+                  showPromoterImage: null,
                   overlayColor: null),
           widgetModel: isWidget ? model : null,
           onSelected: (properties) {

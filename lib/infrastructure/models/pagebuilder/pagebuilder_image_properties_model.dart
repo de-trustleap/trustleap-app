@@ -16,6 +16,7 @@ class PageBuilderImagePropertiesModel extends Equatable
   final double? height;
   final String? contentMode;
   final String? overlayColor;
+  final bool? showPromoterImage;
   final String? newImageBase64;
 
   const PageBuilderImagePropertiesModel(
@@ -25,6 +26,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       required this.height,
       required this.contentMode,
       required this.overlayColor,
+      required this.showPromoterImage,
       required this.newImageBase64});
 
   Map<String, dynamic> toMap() {
@@ -35,6 +37,7 @@ class PageBuilderImagePropertiesModel extends Equatable
     if (height != null) map['height'] = height;
     if (contentMode != null) map['contentMode'] = contentMode;
     if (overlayColor != null) map['overlayColor'] = overlayColor;
+    if (showPromoterImage != null) map['showPromoterImage'] = showPromoterImage;
     if (newImageBase64 != null) map['newImageBase64'] = newImageBase64;
     return map;
   }
@@ -50,6 +53,9 @@ class PageBuilderImagePropertiesModel extends Equatable
             map['contentMode'] != null ? map['contentMode'] as String : null,
         overlayColor:
             map['overlayColor'] != null ? map['overlayColor'] as String : null,
+        showPromoterImage: map['showPromoterImage'] != null
+            ? map['showPromoterImage'] as bool
+            : null,
         newImageBase64: map['newImageBase64'] != null
             ? map['newImageBase64'] as String
             : null);
@@ -62,6 +68,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       double? height,
       String? contentMode,
       String? overlayColor,
+      bool? showPromoterImage,
       String? newImageBase64}) {
     return PageBuilderImagePropertiesModel(
         url: url ?? this.url,
@@ -70,6 +77,7 @@ class PageBuilderImagePropertiesModel extends Equatable
         height: height ?? this.height,
         contentMode: contentMode ?? this.contentMode,
         overlayColor: overlayColor ?? this.overlayColor,
+        showPromoterImage: showPromoterImage ?? this.showPromoterImage,
         newImageBase64: newImageBase64 ?? this.newImageBase64);
   }
 
@@ -82,7 +90,8 @@ class PageBuilderImagePropertiesModel extends Equatable
         contentMode: BoxFitMapper.getBoxFitFromString(contentMode),
         overlayColor: overlayColor != null
             ? Color(ColorUtility.getHexIntFromString(overlayColor!))
-            : null);
+            : null,
+        showPromoterImage: showPromoterImage);
   }
 
   factory PageBuilderImagePropertiesModel.fromDomain(
@@ -96,6 +105,7 @@ class PageBuilderImagePropertiesModel extends Equatable
         overlayColor: properties.overlayColor?.toARGB32() != null
             ? properties.overlayColor!.toARGB32().toRadixString(16)
             : null,
+        showPromoterImage: properties.showPromoterImage,
         newImageBase64: properties.localImage != null
             ? base64Encode(properties.localImage!)
             : null);
@@ -109,6 +119,7 @@ class PageBuilderImagePropertiesModel extends Equatable
         height,
         contentMode,
         overlayColor,
+        showPromoterImage,
         newImageBase64
       ];
 }

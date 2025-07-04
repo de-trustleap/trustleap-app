@@ -13,6 +13,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           contentMode: "cover",
+          showPromoterImage: false,
           newImageBase64: "image",
           overlayColor: "ff000000");
       final expectedResult = PageBuilderImagePropertiesModel(
@@ -21,6 +22,7 @@ void main() {
           width: 300.0,
           height: 400.0,
           contentMode: "cover",
+          showPromoterImage: false,
           newImageBase64: "image",
           overlayColor: "ff000000");
       // When
@@ -39,6 +41,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           contentMode: "cover",
+          showPromoterImage: false,
           newImageBase64: "image",
           overlayColor: "ff000000");
       final expectedResult = {
@@ -47,6 +50,7 @@ void main() {
         "width": 300.0,
         "height": 300.0,
         "contentMode": "cover",
+        "showPromoterImage": false,
         "newImageBase64": "image",
         "overlayColor": "ff000000"
       };
@@ -66,6 +70,7 @@ void main() {
         "width": 300.0,
         "height": 300.0,
         "contentMode": "cover",
+        "showPromoterImage": false,
         "newImageBase64": "image",
         "overlayColor": "ff000000"
       };
@@ -75,6 +80,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           contentMode: "cover",
+          showPromoterImage: false,
           newImageBase64: "image",
           overlayColor: "ff000000");
       // When
@@ -95,6 +101,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           contentMode: "cover",
+          showPromoterImage: false,
           newImageBase64: "image",
           overlayColor: "ff000000");
       final expectedResult = PageBuilderImageProperties(
@@ -103,6 +110,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           contentMode: BoxFit.cover,
+          showPromoterImage: false,
           overlayColor: Colors.black);
       // When
       final result = model.toDomain();
@@ -122,6 +130,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           contentMode: BoxFit.cover,
+          showPromoterImage: false,
           overlayColor: Colors.black);
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
@@ -129,6 +138,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           contentMode: "cover",
+          showPromoterImage: false,
           newImageBase64: null,
           overlayColor: "ff000000");
       // When
@@ -147,6 +157,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           contentMode: "cover",
+          showPromoterImage: false,
           newImageBase64: null,
           overlayColor: "ff000000");
       final properties2 = PageBuilderImagePropertiesModel(
@@ -155,6 +166,7 @@ void main() {
           width: 300.0,
           height: 300.0,
           contentMode: "cover",
+          showPromoterImage: false,
           newImageBase64: null,
           overlayColor: "ff000000");
       // Then

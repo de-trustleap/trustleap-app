@@ -1,4 +1,4 @@
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
@@ -56,6 +56,7 @@ void main() {
           width: 100.0,
           height: 150.0,
           localImage: Uint8List(0),
+          showPromoterImage: false,
           contentMode: BoxFit.cover,
           overlayColor: null);
 
@@ -144,63 +145,63 @@ void main() {
         widgets: [mockColumnWidget, mockRowWidget],
       );
 
-      final mockPageBuilderPage = PageBuilderPage(
+      mockPageBuilderPage = PageBuilderPage(
         id: UniqueID.fromUniqueString("page1"),
         backgroundColor: null,
         sections: [mockSection],
       );
+    });
 
-      test('should return null if widget is not found by id', () {
-        final nonExistentWidgetId =
-            UniqueID.fromUniqueString("nonExistentWidget");
-        final foundWidget = widgetFinder.findWidgetById(
-            mockPageBuilderPage, nonExistentWidgetId);
-        expect(foundWidget, isNull);
-      });
+    test('should return null if widget is not found by id', () {
+      final nonExistentWidgetId =
+          UniqueID.fromUniqueString("nonExistentWidget");
+      final foundWidget = widgetFinder.findWidgetById(
+          mockPageBuilderPage, nonExistentWidgetId);
+      expect(foundWidget, isNull);
+    });
 
-      test('should find widget in children of a column widget', () {
-        final foundWidget =
-            widgetFinder.findWidgetById(mockPageBuilderPage, widgetId1);
-        expect(foundWidget?.id, equals(widgetId1));
-      });
+    test('should find widget in children of a column widget', () {
+      final foundWidget =
+          widgetFinder.findWidgetById(mockPageBuilderPage, widgetId1);
+      expect(foundWidget?.id, equals(widgetId1));
+    });
 
-      test('should find widget in a row widget children', () {
-        final foundWidget =
-            widgetFinder.findWidgetById(mockPageBuilderPage, widgetId3);
-        expect(foundWidget?.id, equals(widgetId3));
-      });
+    test('should find widget in a row widget children', () {
+      final foundWidget =
+          widgetFinder.findWidgetById(mockPageBuilderPage, widgetId3);
+      expect(foundWidget?.id, equals(widgetId3));
+    });
 
-      test('should find widget in containerChild if nested', () {
-        final containerWidget = PageBuilderWidget(
-          id: UniqueID.fromUniqueString("containerWidget"),
-          elementType: PageBuilderWidgetType.container,
-          children: [],
-          background: null,
-          hoverBackground: null,
-          properties: null,
-          hoverProperties: null,
-          containerChild: mockPageBuilderPage.sections![0].widgets![0],
-          widthPercentage: 100.0,
-          maxWidth: null,
-          alignment: null,
-          margin: null,
-          padding: null,
-        );
+    test('should find widget in containerChild if nested', () {
+      final containerWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("containerWidget"),
+        elementType: PageBuilderWidgetType.container,
+        children: [],
+        background: null,
+        hoverBackground: null,
+        properties: null,
+        hoverProperties: null,
+        containerChild: mockPageBuilderPage.sections![0].widgets![0],
+        widthPercentage: 100.0,
+        maxWidth: null,
+        alignment: null,
+        margin: null,
+        padding: null,
+      );
 
-        final foundWidget =
-            widgetFinder.findWidgetById(mockPageBuilderPage, widgetId1);
-        expect(foundWidget?.id, equals(widgetId1));
-      });
+      final foundWidget =
+          widgetFinder.findWidgetById(mockPageBuilderPage, widgetId1);
+      expect(foundWidget?.id, equals(widgetId1));
+    });
 
-      test(
-          'should return null if widget is not found in containerChild or children',
-          () {
-        final nonExistentWidgetId =
-            UniqueID.fromUniqueString("nonExistentWidget");
-        final foundWidget = widgetFinder.findWidgetById(
-            mockPageBuilderPage, nonExistentWidgetId);
-        expect(foundWidget, isNull);
-      });
+    test(
+        'should return null if widget is not found in containerChild or children',
+        () {
+      final nonExistentWidgetId =
+          UniqueID.fromUniqueString("nonExistentWidget");
+      final foundWidget = widgetFinder.findWidgetById(
+          mockPageBuilderPage, nonExistentWidgetId);
+      expect(foundWidget, isNull);
     });
   });
 }
