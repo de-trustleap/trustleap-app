@@ -39,7 +39,8 @@ class _PagebuilderImageControlState extends State<PagebuilderImageControl> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Promoter Bild anzeigen",
+                  localization
+                      .landingpage_pagebuilder_layout_menu_image_control_switch,
                   style: themeData.textTheme.bodyMedium,
                 ),
                 Switch(
@@ -57,7 +58,8 @@ class _PagebuilderImageControlState extends State<PagebuilderImageControl> {
           ],
           Text(
               (widget.properties.showPromoterImage ?? false)
-                  ? "Gib noch ein Platzhalter Bild an, falls das Promoter Bild nicht existiert"
+                  ? localization
+                      .landingpage_pagebuilder_layout_menu_image_control_title_promoter
                   : localization
                       .landingpage_pagebuilder_layout_menu_image_control_title,
               style: themeData.textTheme.bodySmall),

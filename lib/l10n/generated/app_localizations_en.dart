@@ -1332,8 +1332,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_layout_menu_alignment => 'Alignment';
 
   @override
+  String get landingpage_pagebuilder_layout_menu_image_control_switch =>
+      'Show pronoter image';
+
+  @override
   String get landingpage_pagebuilder_layout_menu_image_control_title =>
       'Background image';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_image_control_title_promoter =>
+      'Specify a placeholder image if the promoter image does not exist';
 
   @override
   String get landingpage_pagebuilder_layout_menu_background_contentmode =>

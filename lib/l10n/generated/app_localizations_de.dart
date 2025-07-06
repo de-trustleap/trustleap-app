@@ -1359,8 +1359,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_layout_menu_alignment => 'Ausrichtung';
 
   @override
+  String get landingpage_pagebuilder_layout_menu_image_control_switch =>
+      'Promoter Bild anzeigen';
+
+  @override
   String get landingpage_pagebuilder_layout_menu_image_control_title =>
       'Hintergrundbild';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_image_control_title_promoter =>
+      'Gib noch ein Platzhalter Bild an, falls das Promoter Bild nicht existiert';
 
   @override
   String get landingpage_pagebuilder_layout_menu_background_contentmode =>
