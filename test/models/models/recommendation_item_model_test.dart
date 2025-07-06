@@ -21,6 +21,7 @@ void main() {
           reason: "",
           statusLevel: "recommendationSend",
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -35,6 +36,7 @@ void main() {
           statusLevel: "recommendationSend",
           statusTimestamps: null,
           reason: "",
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -60,6 +62,7 @@ void main() {
           reason: "",
           statusLevel: "recommendationSend",
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -74,6 +77,7 @@ void main() {
         "reason": "",
         "statusLevel": "recommendationSend",
         "statusTimestamps": null,
+        "promoterImageDownloadURL": null,
         "expiresAt": date.toIso8601String(),
         "createdAt": date.toIso8601String(),
         "lastUpdated": null
@@ -114,6 +118,7 @@ void main() {
           reason: null,
           statusLevel: "recommendationSend",
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -154,6 +159,7 @@ void main() {
           reason: null,
           statusLevel: "recommendationSend",
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -180,6 +186,7 @@ void main() {
           reason: "",
           statusLevel: "recommendationSend",
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -195,6 +202,7 @@ void main() {
           userID: "1",
           statusLevel: StatusLevel.recommendationSend,
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -223,6 +231,7 @@ void main() {
           userID: "1",
           statusLevel: StatusLevel.recommendationSend,
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -237,6 +246,7 @@ void main() {
           reason: null,
           statusLevel: "recommendationSend",
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -262,6 +272,7 @@ void main() {
           reason: "",
           statusLevel: "recommendationSend",
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);
@@ -276,6 +287,7 @@ void main() {
           reason: "",
           statusLevel: "recommendationSend",
           statusTimestamps: null,
+          promoterImageDownloadURL: null,
           expiresAt: date,
           createdAt: date,
           lastUpdated: null);

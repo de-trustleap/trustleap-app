@@ -119,6 +119,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                   showPromoterImage: null,
                   overlayColor: null),
           widgetModel: isWidget ? model : null,
+          showPromoterSwitch: false,
           onSelected: (properties) {
             onChangedLocal(props?.copyWith(imageProperties: properties) ??
                 const PagebuilderBackground(

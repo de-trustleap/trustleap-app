@@ -62,8 +62,3 @@ class PagebuilderAnchorButtonPropertiesModel extends Equatable
   @override
   List<Object?> get props => [sectionID, buttonProperties];
 }
-
-// TODO: IMAGE PROPERTIES NEUES FELD SHOWPROMOTERIMAGE.
-// TODO: TESTS ANPASSEN.
-// TODO: AUCH IM BACKEND IMPLEMENTIEREN.
-// TODO: BEI RECO ERSTELLUNG PROMOTER IMAGE DOWNLOAD URL MIT ABSPEICHERN.

@@ -28,6 +28,7 @@ void main() {
         statusLevel: StatusLevel.recommendationSend,
         statusTimestamps: null,
         defaultLandingPageID: "3",
+        promoterImageDownloadURL: null,
         lastUpdated: null);
 
     test("should call recommendation repo when function is called", () async {

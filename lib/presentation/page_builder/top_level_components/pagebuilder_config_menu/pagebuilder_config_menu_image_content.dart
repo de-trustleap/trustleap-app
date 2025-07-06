@@ -28,6 +28,7 @@ class PagebuilderConfigMenuImageContent extends StatelessWidget {
             PagebuilderImageControl(
                 properties: model.properties as PageBuilderImageProperties,
                 widgetModel: model,
+                showPromoterSwitch: true,
                 onSelected: (imageProperties) {
                   updateImageProperties(imageProperties, pagebuilderCubit);
                 })
