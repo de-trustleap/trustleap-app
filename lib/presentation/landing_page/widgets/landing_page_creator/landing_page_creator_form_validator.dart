@@ -26,7 +26,7 @@ class LandingPageCreatorFormValidator {
 
   String? validateLandingPageContactEmailAddress(String? input) {
     const emailRegex =
-        r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$";
     if (input == null || input.isEmpty) {
       return localization.auth_validation_missing_email;
     } else if (RegExp(emailRegex).hasMatch(input.trim())) {
