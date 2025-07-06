@@ -14,6 +14,7 @@ class RecommendationItemModel extends Equatable {
   final String? statusLevel;
   final Map<int, DateTime?>? statusTimestamps;
   final String? userID;
+  final String? promoterImageDownloadURL;
   final DateTime createdAt;
   final DateTime expiresAt;
   final DateTime? lastUpdated;
@@ -29,6 +30,7 @@ class RecommendationItemModel extends Equatable {
       required this.statusLevel,
       required this.statusTimestamps,
       required this.userID,
+      required this.promoterImageDownloadURL,
       required this.expiresAt,
       required this.createdAt,
       required this.lastUpdated});
@@ -44,6 +46,7 @@ class RecommendationItemModel extends Equatable {
       String? statusLevel,
       Map<int, DateTime?>? statusTimestamps,
       String? userID,
+      String? promoterImageDownloadURL,
       DateTime? expiresAt,
       DateTime? createdAt,
       DateTime? lastUpdated}) {
@@ -58,6 +61,8 @@ class RecommendationItemModel extends Equatable {
         statusLevel: statusLevel ?? this.statusLevel,
         statusTimestamps: statusTimestamps ?? this.statusTimestamps,
         userID: userID ?? this.userID,
+        promoterImageDownloadURL:
+            promoterImageDownloadURL ?? this.promoterImageDownloadURL,
         expiresAt: expiresAt ?? this.expiresAt,
         createdAt: createdAt ?? this.createdAt,
         lastUpdated: lastUpdated ?? this.lastUpdated);
@@ -80,6 +85,7 @@ class RecommendationItemModel extends Equatable {
                   MapEntry(e.key.toString(), e.value!.toIso8601String())),
             ),
       'userID': userID,
+      'promoterImageDownloadURL': promoterImageDownloadURL,
       'expiresAt': expiresAt.toIso8601String(),
       'createdAt': createdAt.toIso8601String(),
       'lastUpdated': lastUpdated?.toIso8601String(),
@@ -109,6 +115,9 @@ class RecommendationItemModel extends Equatable {
                 (key, value) => MapEntry(int.parse(key), DateTime.parse(value)))
             : null,
         userID: map['userID'] != null ? map['userID'] as String : null,
+        promoterImageDownloadURL: map['promoterImageDownloadURL'] != null
+            ? map['promoterImageDownloadURL'] as String
+            : null,
         expiresAt: (map['expiresAt'] as Timestamp).toDate(),
         createdAt: (map['createdAt'] as Timestamp).toDate(),
         lastUpdated: map['lastUpdated'] != null
@@ -134,6 +143,7 @@ class RecommendationItemModel extends Equatable {
         statusLevel: _getStatusLevelFromString(statusLevel),
         statusTimestamps: statusTimestamps,
         userID: userID,
+        promoterImageDownloadURL: promoterImageDownloadURL,
         expiresAt: expiresAt,
         createdAt: createdAt,
         lastUpdated: lastUpdated);
@@ -152,6 +162,7 @@ class RecommendationItemModel extends Equatable {
         statusLevel: recommendation.statusLevel?.name,
         statusTimestamps: recommendation.statusTimestamps,
         userID: recommendation.userID,
+        promoterImageDownloadURL: recommendation.promoterImageDownloadURL,
         expiresAt: recommendation.expiresAt,
         createdAt: recommendation.createdAt,
         lastUpdated: recommendation.lastUpdated);
@@ -189,6 +200,7 @@ class RecommendationItemModel extends Equatable {
         reason,
         expiresAt,
         defaultLandingPageID,
-        userID
+        userID,
+        promoterImageDownloadURL
       ];
 }

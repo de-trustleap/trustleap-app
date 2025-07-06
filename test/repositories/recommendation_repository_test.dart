@@ -28,7 +28,8 @@ void main() {
         defaultLandingPageID: "3",
         userID: "1",
         statusLevel: StatusLevel.recommendationSend,
-        statusTimestamps: null);
+        statusTimestamps: null,
+        promoterImageDownloadURL: null);
 
     test("should return unit when saving of recommendation was successful",
         () async {
@@ -73,7 +74,8 @@ void main() {
         defaultLandingPageID: "2",
         userID: "1",
         statusLevel: StatusLevel.recommendationSend,
-        statusTimestamps: null);
+        statusTimestamps: null,
+        promoterImageDownloadURL: null);
     final recommendations = [
       UserRecommendation(
           id: UniqueID.fromUniqueString("1"),
@@ -158,7 +160,8 @@ void main() {
         defaultLandingPageID: "2",
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
-        statusTimestamps: {0: date, 1: date, 2: date});
+        statusTimestamps: {0: date, 1: date, 2: date},
+        promoterImageDownloadURL: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -209,7 +212,8 @@ void main() {
         defaultLandingPageID: "2",
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
-        statusTimestamps: {0: date, 1: date, 2: date});
+        statusTimestamps: {0: date, 1: date, 2: date},
+        promoterImageDownloadURL: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -307,7 +311,8 @@ void main() {
         defaultLandingPageID: "2",
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
-        statusTimestamps: {0: date, 1: date, 2: date});
+        statusTimestamps: {0: date, 1: date, 2: date},
+        promoterImageDownloadURL: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -357,7 +362,8 @@ void main() {
         defaultLandingPageID: "2",
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
-        statusTimestamps: {0: date, 1: date, 2: date});
+        statusTimestamps: {0: date, 1: date, 2: date},
+        promoterImageDownloadURL: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",
@@ -406,7 +412,8 @@ void main() {
         defaultLandingPageID: "2",
         userID: "1",
         statusLevel: StatusLevel.contactFormSent,
-        statusTimestamps: {0: date, 1: date, 2: date});
+        statusTimestamps: {0: date, 1: date, 2: date},
+        promoterImageDownloadURL: null);
     final userRecommendation = UserRecommendation(
         id: UniqueID.fromUniqueString("1"),
         recoID: "1",

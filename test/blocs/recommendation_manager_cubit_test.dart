@@ -36,7 +36,8 @@ void main() {
         defaultLandingPageID: "2",
         userID: "1",
         statusLevel: StatusLevel.recommendationSend,
-        statusTimestamps: null);
+        statusTimestamps: null,
+        promoterImageDownloadURL: null);
     final recommendations = [
       UserRecommendation(
           id: UniqueID.fromUniqueString("1"),

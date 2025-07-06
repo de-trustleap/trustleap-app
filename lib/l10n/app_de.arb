@@ -1538,9 +1538,17 @@
     "@landingpage_pagebuilder_layout_menu_alignment": {
         "description": "Titel Ausrichtung Menüpunkt im Pagebuilder Config Menü im Layout Bereich"
     },
+    "landingpage_pagebuilder_layout_menu_image_control_switch": "Promoter Bild anzeigen",
+    "@landingpage_pagebuilder_layout_menu_image_control_switch": {
+        "description": "Switch Titel für Promoter Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
     "landingpage_pagebuilder_layout_menu_image_control_title": "Hintergrundbild",
     "@landingpage_pagebuilder_layout_menu_image_control_title": {
         "description": "Titel Hintergrundbild Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
+    },
+    "landingpage_pagebuilder_layout_menu_image_control_title_promoter": "Gib noch ein Platzhalter Bild an, falls das Promoter Bild nicht existiert",
+    "@landingpage_pagebuilder_layout_menu_image_control_title_promoter": {
+        "description": "Titel Hintergrundbild Menüpunkt für Bild wenn Promoter Bild genutzt werden soll im Pagebuilder Config Menü im Hintergrund Bereich"
     },
     "landingpage_pagebuilder_layout_menu_background_contentmode": "Anzeigemodus",
     "@landingpage_pagebuilder_layout_menu_background_contentmode": {
