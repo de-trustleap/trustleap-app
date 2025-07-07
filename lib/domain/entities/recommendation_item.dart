@@ -22,6 +22,7 @@ class RecommendationItem extends Equatable {
   final StatusLevel? statusLevel;
   final Map<int, DateTime?>? statusTimestamps;
   final String? userID;
+  final String? promoterImageDownloadURL;
   final DateTime expiresAt;
   final DateTime createdAt;
   final DateTime? lastUpdated;
@@ -38,6 +39,7 @@ class RecommendationItem extends Equatable {
       required this.statusLevel,
       required this.statusTimestamps,
       required this.userID,
+      required this.promoterImageDownloadURL,
       this.lastUpdated,
       DateTime? expiresAt,
       DateTime? createdAt})
@@ -56,6 +58,7 @@ class RecommendationItem extends Equatable {
       StatusLevel? statusLevel,
       Map<int, DateTime?>? statusTimestamps,
       String? userID,
+      String? promoterImageDownloadURL,
       DateTime? lastUpdated}) {
     return RecommendationItem(
         id: id ?? this.id,
@@ -69,6 +72,8 @@ class RecommendationItem extends Equatable {
         statusLevel: statusLevel ?? this.statusLevel,
         statusTimestamps: statusTimestamps ?? this.statusTimestamps,
         userID: userID ?? this.userID,
+        promoterImageDownloadURL:
+            promoterImageDownloadURL ?? this.promoterImageDownloadURL,
         lastUpdated: lastUpdated ?? this.lastUpdated,
         expiresAt: expiresAt,
         createdAt: createdAt);
@@ -85,6 +90,7 @@ class RecommendationItem extends Equatable {
         serviceProviderName,
         defaultLandingPageID,
         statusLevel,
-        userID
+        userID,
+        promoterImageDownloadURL
       ];
 }

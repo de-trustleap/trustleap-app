@@ -95,6 +95,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
               statusLevel: StatusLevel.recommendationSend,
               statusTimestamps: {0: DateTime.now()},
               userID: currentUser?.id.value ?? parentUser?.id.value,
+              promoterImageDownloadURL: null,
               promotionTemplate: reasons.firstWhere((e) {
                 return e.reason == selectedReason?.reason;
               }).promotionTemplate!));
