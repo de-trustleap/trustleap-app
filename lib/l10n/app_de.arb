@@ -794,6 +794,10 @@
     "@register_promoter_missing_company_error_message": {
         "description": "Fehlermeldung die erscheint, wenn bei der Promoter Registrierung kein Unternehmen existiert."
     },
+    "register_promoter_landingpage_assign_title": "Landingpages Zuweisung",
+    "@register_promoter_landingpage_assign_title": {
+        "description": "Titel der Checkboxes für die Landingpage Zuweisung bei der Promoter Registrierung"
+    },
     "promoter_register_tab_title": "Promoter registrieren",
     "@promoter_register_tab_title": {
         "description": "Titel für den Promoter registrieren Tab"

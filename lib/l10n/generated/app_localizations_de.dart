@@ -717,6 +717,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist';
 
   @override
+  String get register_promoter_landingpage_assign_title =>
+      'Landingpages Zuweisung';
+
+  @override
   String get promoter_register_tab_title => 'Promoter registrieren';
 
   @override

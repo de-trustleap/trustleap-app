@@ -295,7 +295,9 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                 keyboardType: TextInputType.emailAddress)
                           ]),
                       const SizedBox(height: textFieldSpacing),
-                      SelectableText("Landingpages Zuweisung",
+                      SelectableText(
+                          localization
+                              .register_promoter_landingpage_assign_title,
                           style: themeData.textTheme.bodyLarge!
                               .copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8),
@@ -339,14 +341,14 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                       ),
                       if (state is PromoterLandingPagesMissingState) ...[
                         const SizedBox(height: 20),
-                        const FormErrorView(
-                            message:
-                                "Dem Promoter wurde noch keine Landingpage zugewiesen")
+                        FormErrorView(
+                            message: localization
+                                .register_promoter_missing_landingpage_error_message)
                       ] else if (state is PromoterCompanyMissingState) ...[
                         const SizedBox(height: 20),
-                        const FormErrorView(
-                            message:
-                                "Du kannst keinen Promoter registrieren, da du keinem Unternehmen zugehörig bist")
+                        FormErrorView(
+                            message: localization
+                                .register_promoter_missing_company_error_message)
                       ] else if (errorMessage != "" &&
                           showError &&
                           (state is PromoterRegisterFailureState ||

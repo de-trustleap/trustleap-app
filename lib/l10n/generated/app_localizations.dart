@@ -1283,6 +1283,12 @@ abstract class AppLocalizations {
   /// **'You cannot register a promoter because you are not affiliated with any company'**
   String get register_promoter_missing_company_error_message;
 
+  /// Title of the checkboxes for the landing page assignment during promoter registration
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Landingpages'**
+  String get register_promoter_landingpage_assign_title;
+
   /// Title for the register promoter tab
   ///
   /// In en, this message translates to:
