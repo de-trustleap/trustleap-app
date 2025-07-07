@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/legals_check.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/landingpage_checkbox_item.dart';
@@ -49,11 +50,21 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
   bool validationHasError = false;
   String? genderValid;
   bool buttonDisabled = false;
+  var privacyPolicyChecked = false;
+  var termsAndConditionsChecked = false;
 
   @override
   void initState() {
     Modular.get<PromoterCubit>().getCurrentUser();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (!privacyPolicyChecked || !termsAndConditionsChecked) {
+      setButtonToDisabled(true);
+    }
+    super.didChangeDependencies();
   }
 
   @override
@@ -284,7 +295,30 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
                                 keyboardType: TextInputType.emailAddress)
                           ]),
                       const SizedBox(height: textFieldSpacing),
+                      SelectableText("Landingpages Zuweisung",
+                          style: themeData.textTheme.bodyLarge!
+                              .copyWith(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 8),
                       Column(children: createCheckboxes()),
+                      const SizedBox(height: textFieldSpacing),
+                      LegalsCheck(
+                        maxWidth: maxWidth - textFieldSpacing,
+                        initialTermsAndConditionsChecked:
+                            termsAndConditionsChecked,
+                        initialPrivacyPolicyChecked: privacyPolicyChecked,
+                        isLoggedIn: true,
+                        onChanged: (termsChecked, privacyChecked) {
+                          if (termsChecked && privacyChecked) {
+                            setButtonToDisabled(false);
+                          } else {
+                            setButtonToDisabled(true);
+                          }
+                          setState(() {
+                            termsAndConditionsChecked = termsChecked;
+                            privacyPolicyChecked = privacyChecked;
+                          });
+                        },
+                      ),
                       const SizedBox(height: textFieldSpacing * 2),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
