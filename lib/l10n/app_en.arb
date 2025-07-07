@@ -794,6 +794,10 @@
     "@register_promoter_missing_company_error_message": {
         "description": "Error message that appears if no company exists during promoter registration."
     },
+    "register_promoter_landingpage_assign_title": "Assign Landingpages",
+    "@register_promoter_landingpage_assign_title": {
+        "description": "Title of the checkboxes for the landing page assignment during promoter registration"
+    },
     "promoter_register_tab_title": "Register promoter",
     "@promoter_register_tab_title": {
         "description": "Title for the register promoter tab"

@@ -706,6 +706,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'You cannot register a promoter because you are not affiliated with any company';
 
   @override
+  String get register_promoter_landingpage_assign_title =>
+      'Assign Landingpages';
+
+  @override
   String get promoter_register_tab_title => 'Register promoter';
 
   @override
