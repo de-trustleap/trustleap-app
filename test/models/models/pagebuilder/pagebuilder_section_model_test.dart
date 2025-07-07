@@ -146,6 +146,7 @@ void main() {
                 "contentMode": "cover",
                 "width": 200.0,
                 "height": 200.0,
+                "showPromoterImage": false,
                 "url":
                     "https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/landingPageContentImages%2FL9SPWUuY7mJKWUaX16Xt%2F4ce25fce-242b-471b-8a25-83e920e95e8d?alt=media&token=3c7bdc32-f607-4eee-923f-41410591d1d0"
               }
@@ -197,7 +198,8 @@ void main() {
                       width: 200,
                       height: 200,
                       contentMode: BoxFit.cover,
-                      overlayColor: null),
+                      overlayColor: null,
+                      showPromoterImage: false),
                   hoverProperties: null,
                   children: null,
                   containerChild: null,
@@ -303,7 +305,8 @@ void main() {
                       width: 200,
                       height: 200,
                       contentMode: BoxFit.cover,
-                      overlayColor: null),
+                      overlayColor: null,
+                      showPromoterImage: false),
                   hoverProperties: null,
                   children: null,
                   containerChild: null,
@@ -386,6 +389,7 @@ void main() {
                 "width": 200.0,
                 "height": 200.0,
                 "contentMode": "cover",
+                "showPromoterImage": false,
                 "url":
                     "https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/landingPageContentImages%2FL9SPWUuY7mJKWUaX16Xt%2F4ce25fce-242b-471b-8a25-83e920e95e8d?alt=media&token=3c7bdc32-f607-4eee-923f-41410591d1d0"
               }

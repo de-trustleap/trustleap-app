@@ -706,6 +706,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'You cannot register a promoter because you are not affiliated with any company';
 
   @override
+  String get register_promoter_landingpage_assign_title =>
+      'Assign Landingpages';
+
+  @override
   String get promoter_register_tab_title => 'Register promoter';
 
   @override
@@ -1332,8 +1336,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_layout_menu_alignment => 'Alignment';
 
   @override
+  String get landingpage_pagebuilder_layout_menu_image_control_switch =>
+      'Show pronoter image';
+
+  @override
   String get landingpage_pagebuilder_layout_menu_image_control_title =>
       'Background image';
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_image_control_title_promoter =>
+      'Specify a placeholder image if the promoter image does not exist';
 
   @override
   String get landingpage_pagebuilder_layout_menu_background_contentmode =>

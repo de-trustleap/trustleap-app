@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/failure_mapper.dart';
@@ -11,12 +10,11 @@ import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/clickable_link.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/legals_check.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
-import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -117,7 +115,6 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final validator = AuthValidator(localization: localization);
@@ -377,81 +374,24 @@ class _RegisterFormState extends State<RegisterForm> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Column(children: [
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Checkbox(
-                                  value: termsAndConditionsChecked,
-                                  onChanged: (checked) {
-                                    if (checked == true &&
-                                        privacyPolicyChecked == true) {
-                                      setButtonToDisabled(false);
-                                    } else {
-                                      setButtonToDisabled(true);
-                                    }
-                                    setState(() {
-                                      termsAndConditionsChecked =
-                                          checked ?? false;
-                                    });
-                                  }),
-                              const SizedBox(width: 8),
-                              Text(
-                                  localization
-                                      .register_terms_and_condition_text,
-                                  style: themeData.textTheme.bodyMedium),
-                              const SizedBox(width: 4),
-                              ClickableLink(
-                                  title: localization
-                                      .register_terms_and_condition_link,
-                                  onTap: () {
-                                    CustomNavigator.openInNewTab(
-                                        RoutePaths.termsAndCondition);
-                                  }),
-                              const SizedBox(width: 4),
-                              Text(
-                                  localization
-                                      .register_terms_and_condition_text2,
-                                  style: themeData.textTheme.bodyMedium)
-                            ]),
-                      ),
-                      SizedBox(
-                        width: getResponsiveWidth(1),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Checkbox(
-                                  value: privacyPolicyChecked,
-                                  onChanged: (checked) {
-                                    if (checked == true &&
-                                        termsAndConditionsChecked == true) {
-                                      setButtonToDisabled(false);
-                                    } else {
-                                      setButtonToDisabled(true);
-                                    }
-                                    setState(() {
-                                      privacyPolicyChecked = checked ?? false;
-                                    });
-                                  }),
-                              const SizedBox(width: 8),
-                              Text(localization.register_privacy_policy_text,
-                                  style: themeData.textTheme.bodyMedium),
-                              const SizedBox(width: 4),
-                              ClickableLink(
-                                  title:
-                                      localization.register_privacy_policy_link,
-                                  onTap: () {
-                                    CustomNavigator.openInNewTab(
-                                        RoutePaths.privacyPolicy);
-                                  }),
-                              const SizedBox(width: 4),
-                              Text(localization.register_privacy_policy_text2,
-                                  style: themeData.textTheme.bodyMedium)
-                            ]),
-                      ),
-                    ])
+                    LegalsCheck(
+                      maxWidth: getResponsiveWidth(1),
+                      initialTermsAndConditionsChecked:
+                          termsAndConditionsChecked,
+                      initialPrivacyPolicyChecked: privacyPolicyChecked,
+                      isLoggedIn: false,
+                      onChanged: (termsChecked, privacyChecked) {
+                        if (termsChecked && privacyChecked) {
+                          setButtonToDisabled(false);
+                        } else {
+                          setButtonToDisabled(true);
+                        }
+                        setState(() {
+                          termsAndConditionsChecked = termsChecked;
+                          privacyPolicyChecked = privacyChecked;
+                        });
+                      },
+                    ),
                   ],
                 ),
                 const SizedBox(height: textFieldSpacing * 2),
