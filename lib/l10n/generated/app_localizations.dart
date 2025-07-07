@@ -1283,6 +1283,12 @@ abstract class AppLocalizations {
   /// **'You cannot register a promoter because you are not affiliated with any company'**
   String get register_promoter_missing_company_error_message;
 
+  /// Title of the checkboxes for the landing page assignment during promoter registration
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Landingpages'**
+  String get register_promoter_landingpage_assign_title;
+
   /// Title for the register promoter tab
   ///
   /// In en, this message translates to:
@@ -2381,11 +2387,23 @@ abstract class AppLocalizations {
   /// **'Alignment'**
   String get landingpage_pagebuilder_layout_menu_alignment;
 
+  /// Switch title for promoter image in pagebuilder config menu in background area
+  ///
+  /// In en, this message translates to:
+  /// **'Show pronoter image'**
+  String get landingpage_pagebuilder_layout_menu_image_control_switch;
+
   /// Title background image menu in the Pagebuilder Config Menu in the background area
   ///
   /// In en, this message translates to:
   /// **'Background image'**
   String get landingpage_pagebuilder_layout_menu_image_control_title;
+
+  /// Title background image menu item for image if promoter image should be used in the Pagebuilder Config menu in the background area
+  ///
+  /// In en, this message translates to:
+  /// **'Specify a placeholder image if the promoter image does not exist'**
+  String get landingpage_pagebuilder_layout_menu_image_control_title_promoter;
 
   /// Title contentmode menu in the Pagebuilder Config Menu in the background area
   ///

@@ -13,14 +13,16 @@ void main() {
           width: 200.0,
           height: 200.0,
           contentMode: BoxFit.cover,
-          overlayColor: null);
+          overlayColor: null,
+          showPromoterImage: false);
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 30.0,
           width: 250.0,
           height: 200.0,
           contentMode: BoxFit.cover,
-          overlayColor: null);
+          overlayColor: null,
+          showPromoterImage: false);
       // When
       final result = model.copyWith(width: 250.0);
       // Then
@@ -41,6 +43,7 @@ void main() {
         overlayColor: const Color(0x80000000),
         localImage: localImageData,
         hasChanged: true,
+        showPromoterImage: false,
       );
       // When
       final copy = original.deepCopy();
@@ -67,14 +70,16 @@ void main() {
           width: 200.0,
           height: 200.0,
           contentMode: BoxFit.cover,
-          overlayColor: null);
+          overlayColor: null,
+          showPromoterImage: false);
       final properties2 = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 30.0,
           width: 200.0,
           height: 200.0,
           contentMode: BoxFit.cover,
-          overlayColor: null);
+          overlayColor: null,
+          showPromoterImage: false);
       // Then
       expect(properties1, properties2);
     });
