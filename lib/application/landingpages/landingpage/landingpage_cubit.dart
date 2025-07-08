@@ -52,7 +52,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     } else if (imageData.lengthInBytes > fileSizeLimit) {
       emit(LandingPageImageExceedsFileSizeLimitFailureState());
     } else {
-      emit(CreateLandingPageLoadingState());
+      emit(CreateLandingPageWithAILoadingState());
       final failureOrSuccess = await landingPageRepo.createLandingPage(
           landingpage, imageData, imageHasChanged, "", aiGeneration);
       failureOrSuccess.fold(

@@ -19,6 +19,12 @@ class CreateLandingPageLoadingState extends LandingPageState
   List<Object> get props => [];
 }
 
+class CreateLandingPageWithAILoadingState extends LandingPageState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
 class CreateLandingPageFailureState extends LandingPageState
     with EquatableMixin {
   final DatabaseFailure failure;
