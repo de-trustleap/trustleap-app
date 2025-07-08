@@ -8,11 +8,13 @@ class LandingPageCreatorThirdStepGrid extends StatelessWidget {
   final List<LandingPageTemplate> landingpageTemplates;
   final int? selectedIndex;
   final Function(int) onSelectIndex;
+  final bool disabled;
   const LandingPageCreatorThirdStepGrid(
       {super.key,
       required this.landingpageTemplates,
       required this.selectedIndex,
-      required this.onSelectIndex});
+      required this.onSelectIndex,
+      this.disabled = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +42,11 @@ class LandingPageCreatorThirdStepGrid extends StatelessWidget {
                             child: LandingPageCreatorThirdStepGridTile(
                                 template: landingpageTemplates[index],
                                 isSelected: isSelected,
+                                disabled: disabled,
                                 onTap: () {
-                                  onSelectIndex(index);
+                                  if (!disabled) {
+                                    onSelectIndex(index);
+                                  }
                                 })))));
           }),
         )));

@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 
@@ -17,7 +18,8 @@ abstract class LandingPageRepository {
       LandingPage landingPage,
       Uint8List imageData,
       bool imageHasChanged,
-      String templateID);
+      String templateID,
+      PagebuilderAiGeneration? aiGeneration);
 
   Future<Either<DatabaseFailure, Unit>> deleteLandingPage(
       String id, String ownerID);

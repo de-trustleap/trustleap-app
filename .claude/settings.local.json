@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(ls:*)",
-      "Bash(flutter test:*)"
+      "Bash(flutter test:*)",
+      "Bash(flutter analyze:*)",
+      "mcp__ide__getDiagnostics"
     ],
     "deny": []
   }

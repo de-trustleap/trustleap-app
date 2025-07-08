@@ -11,12 +11,14 @@ import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/core/helpers/custom_claims.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_template_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_ai_generation_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_sorting_helper.dart';
@@ -95,12 +97,19 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       LandingPage landingPage,
       Uint8List imageData,
       bool imageHasChanged,
-      String templateID) async {
+      String templateID,
+      PagebuilderAiGeneration? aiGeneration) async {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable =
-        firebaseFunctions.httpsCallable("createLandingPage");
+        firebaseFunctions.httpsCallable("createLandingPage",
+            options: HttpsCallableOptions(timeout: const Duration(minutes: 6)));
     final landingPageModel = LandingPageModel.fromDomain(landingPage);
     var companyData = landingPageModel.companyData;
+    var aiGenerationMap = {};
+    if (aiGeneration != null) {
+      aiGenerationMap =
+          PagebuilderAiGenerationModel.fromDomain(aiGeneration).toMap();
+    }
     companyData = {
       "id": companyData?["id"],
       "name": companyData?["name"],
@@ -130,10 +139,13 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "isActive": landingPageModel.isActive,
         "templateID": templateID,
         "contactEmailAddress": landingPageModel.contactEmailAddress,
-        "companyData": landingPageModel.companyData != null ? companyData : null
+        "companyData":
+            landingPageModel.companyData != null ? companyData : null,
+        "aiGeneration": aiGeneration != null ? aiGenerationMap : null
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
+      print("THE CALL ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

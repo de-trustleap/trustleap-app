@@ -134,6 +134,12 @@ class _LandingPageCreatorMultiPageFormState
                 Modular.get<LandingPageCubit>().createLandingPage(
                     landingPage, image, imageHasChanged, templateID);
               }
+            },
+            onAISaveTapped: (landingPage, image, imageHasChanged, aiData) {
+              if (image != null) {
+                Modular.get<LandingPageCubit>().createLandingPageWithAI(
+                    landingPage, image, imageHasChanged, aiData);
+              }
             })
     ];
   }

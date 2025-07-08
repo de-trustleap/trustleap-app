@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
@@ -35,7 +36,25 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     } else {
       emit(CreateLandingPageLoadingState());
       final failureOrSuccess = await landingPageRepo.createLandingPage(
-          landingpage, imageData, imageHasChanged, templateID);
+          landingpage, imageData, imageHasChanged, templateID, null);
+      failureOrSuccess.fold(
+          (failure) => emit(CreateLandingPageFailureState(failure: failure)),
+          (_) => emit(CreatedLandingPageSuccessState()));
+    }
+  }
+
+  void createLandingPageWithAI(LandingPage? landingpage, Uint8List imageData,
+      bool imageHasChanged, PagebuilderAiGeneration aiGeneration) async {
+    if (landingpage == null) {
+      emit(LandingPageShowValidationState());
+    } else if (imageData == [0]) {
+      emit(LandingPageNoImageFailureState());
+    } else if (imageData.lengthInBytes > fileSizeLimit) {
+      emit(LandingPageImageExceedsFileSizeLimitFailureState());
+    } else {
+      emit(CreateLandingPageLoadingState());
+      final failureOrSuccess = await landingPageRepo.createLandingPage(
+          landingpage, imageData, imageHasChanged, "", aiGeneration);
       failureOrSuccess.fold(
           (failure) => emit(CreateLandingPageFailureState(failure: failure)),
           (_) => emit(CreatedLandingPageSuccessState()));
