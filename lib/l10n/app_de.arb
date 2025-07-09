@@ -1872,6 +1872,58 @@
     "@landingpage_creator_default_page_info_text": {
         "description": "Informationstext für das Erstellen einer Default Page im Landingpage Creator"
     },
+    "landingpage_creator_ai_loading_subtitle": "Die KI erstellt gerade deine Landing Page...",
+    "@landingpage_creator_ai_loading_subtitle": {
+        "description": "Subtitel für das Loading Overlay der KI Generierung im Landingpage Creator"
+    },
+    "landingpage_creator_ai_loading_subtitle2": "Das kann bis zu 5 Minuten dauern. Bitte warten...",
+    "@landingpage_creator_ai_loading_subtitle2": {
+        "description": "Weiterer Subtitel für das Loading Overlay der KI Generierung im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_section_title": "Oder lasse dir die Seite von unserer KI erstellen",
+    "@landingpage_creator_ai_form_section_title": {
+        "description": "Section Titel für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_title": "Gib ein paar Informationen zu deinem Unternehmen ein und lass die KI eine maßgeschneiderte Landing Page erstellen.",
+    "@landingpage_creator_ai_form_title": {
+        "description": "Titel für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_radio_title": "Art der Landing Page:",
+    "@landingpage_creator_ai_form_radio_title": {
+        "description": "Titel für Radio Button Section für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_radio_business": "Business/Unternehmen",
+    "@landingpage_creator_ai_form_radio_business": {
+        "description": "Business Radio Button für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_radio_finance": "Finanzberater",
+    "@landingpage_creator_ai_form_radio_finance": {
+        "description": "Finanzberater Radio Button für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_radio_individual": "Individuell",
+    "@landingpage_creator_ai_form_radio_individual": {
+        "description": "Individuell Radio Button für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_business_placeholder": "Branche/Unternehmenstyp",
+    "@landingpage_creator_ai_form_business_placeholder": {
+        "description": "Platzhalter für Business Textfeld für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_finance_placeholder": "Spezialisierung",
+    "@landingpage_creator_ai_form_finance_placeholder": {
+        "description": "Platzhalter für Spezialisierung Textfeld für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_custom_description_placeholder": "Zusätzliche Informationen (optional)",
+    "@landingpage_creator_ai_form_custom_description_placeholder": {
+        "description": "Platzhalter für zusätzliche Informationen Textfeld für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_character_count": "Zeichen",
+    "@landingpage_creator_ai_form_character_count": {
+        "description": "Zeichen Zähler für die KI Generierung Section im Landingpage Creator"
+    },
+    "landingpage_creator_ai_form_example": "Beispiel: Unser Finanzbüro liegt zentral in der Innenstadt, familiengeführt seit 1985, spezialisiert auf unabhängige Finanzberatung und Altersvorsorge. Seriosität und Vertrauen stehen im Mittelpunkt – klare Strukturen, ruhige Blau- und Grautöne gewünscht.",
+    "@landingpage_creator_ai_form_example": {
+        "description": "Beispiel Text für die KI Generierung Section im Landingpage Creator"
+    },
     "landingpage_overview_no_default_page_title": "Landingpage einrichten",
     "@landingpage_overview_no_default_page_title": {
         "description": "Titel für die Seite die angezeigt wird wenn man noch keine Default Landingpage erstellt hat."

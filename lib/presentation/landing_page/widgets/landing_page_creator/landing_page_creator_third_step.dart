@@ -3,12 +3,14 @@ import 'dart:typed_data';
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_ai_generator_form.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_third_step_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,8 @@ class LandingPageCreatorThirdStep extends StatefulWidget {
   final bool isLoading;
   final Function(LandingPage) onBack;
   final Function(LandingPage, Uint8List?, bool, String) onSaveTapped;
+  final Function(LandingPage, Uint8List?, bool, PagebuilderAiGeneration)?
+      onAISaveTapped;
   const LandingPageCreatorThirdStep(
       {super.key,
       required this.landingPage,
@@ -31,7 +35,8 @@ class LandingPageCreatorThirdStep extends StatefulWidget {
       required this.buttonsDisabled,
       required this.isLoading,
       required this.onBack,
-      required this.onSaveTapped});
+      required this.onSaveTapped,
+      this.onAISaveTapped});
 
   @override
   State<LandingPageCreatorThirdStep> createState() =>
@@ -42,6 +47,7 @@ class _LandingPageCreatorThirdStepState
     extends State<LandingPageCreatorThirdStep> {
   int? selectedTileIndex;
   late List<LandingPageTemplate> templates;
+  PagebuilderAiGeneration? _aiData;
 
   @override
   void initState() {
@@ -86,13 +92,33 @@ class _LandingPageCreatorThirdStepState
                         LandingPageCreatorThirdStepGrid(
                             landingpageTemplates: templates,
                             selectedIndex: selectedTileIndex,
+                            disabled: _aiData?.hasContent ?? false,
                             onSelectIndex: (index) {
                               setState(() {
-                                selectedTileIndex = index;
+                                if (selectedTileIndex == index) {
+                                  selectedTileIndex = null;
+                                } else {
+                                  selectedTileIndex = index;
+                                }
                               });
                             }),
                       ],
                       const SizedBox(height: 48),
+                      SelectableText(
+                        localization.landingpage_creator_ai_form_section_title,
+                        style: themeData.textTheme.headlineLarge!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 16),
+                      LandingPageAIGenerationForm(
+                        disabled: selectedTileIndex != null,
+                        onAIDataChanged: (aiData) {
+                          setState(() {
+                            _aiData = aiData;
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 24),
                       ResponsiveRowColumn(
                           rowMainAxisAlignment: MainAxisAlignment.center,
                           layout: responsiveValue.largerThan(MOBILE)
@@ -117,19 +143,32 @@ class _LandingPageCreatorThirdStepState
                                 child: PrimaryButton(
                                     title: localization.landingpage_create_txt,
                                     disabled: widget.buttonsDisabled ||
-                                        selectedTileIndex == null,
+                                        (selectedTileIndex == null &&
+                                            !(_aiData?.hasContent ?? false)),
                                     isLoading: widget.isLoading,
                                     width: responsiveValue.isMobile
                                         ? maxWidth - 20
                                         : maxWidth / 2 - 20,
                                     onTap: () {
-                                      widget.onSaveTapped(
-                                          widget.landingPage!,
-                                          widget.image,
-                                          widget.imageHasChanged,
-                                          templates[selectedTileIndex ?? 0]
-                                              .id
-                                              .value);
+                                      if (_aiData?.hasContent ?? false) {
+                                        // AI Generation
+                                        if (widget.onAISaveTapped != null) {
+                                          widget.onAISaveTapped!(
+                                              widget.landingPage!,
+                                              widget.image,
+                                              widget.imageHasChanged,
+                                              _aiData!);
+                                        }
+                                      } else if (selectedTileIndex != null) {
+                                        // Template Selection
+                                        widget.onSaveTapped(
+                                            widget.landingPage!,
+                                            widget.image,
+                                            widget.imageHasChanged,
+                                            templates[selectedTileIndex!]
+                                                .id
+                                                .value);
+                                      }
                                     }))
                           ]),
                     ]);

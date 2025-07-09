@@ -1901,6 +1901,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get register_promoter_landingpage_assign_title => (super.noSuchMethod(
+        Invocation.getter(#register_promoter_landingpage_assign_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#register_promoter_landingpage_assign_title),
+        ),
+      ) as String);
+
+  @override
   String get promoter_register_tab_title => (super.noSuchMethod(
         Invocation.getter(#promoter_register_tab_title),
         returnValue: _i3.dummyValue<String>(
@@ -3345,6 +3354,18 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_config_menu_anchor_button_type =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_config_menu_anchor_button_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_config_menu_anchor_button_type),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type =>
       (super.noSuchMethod(
         Invocation.getter(#landingpage_pagebuilder_config_menu_unknown_type),
@@ -3678,6 +3699,18 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_layout_menu_image_control_switch =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_layout_menu_image_control_switch),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_layout_menu_image_control_switch),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_layout_menu_image_control_title =>
       (super.noSuchMethod(
         Invocation.getter(
@@ -3686,6 +3719,18 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           this,
           Invocation.getter(
               #landingpage_pagebuilder_layout_menu_image_control_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_layout_menu_image_control_title_promoter =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_layout_menu_image_control_title_promoter),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_layout_menu_image_control_title_promoter),
         ),
       ) as String);
 
@@ -5335,56 +5380,12 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
-  String get pagebuilder_text_placeholder_recommendation_first_name =>
-      (super.noSuchMethod(
-        Invocation.getter(
-            #pagebuilder_text_placeholder_recommendation_first_name),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(
-              #pagebuilder_text_placeholder_recommendation_first_name),
-        ),
-      ) as String);
-
-  @override
-  String get pagebuilder_text_placeholder_recommendation_last_name =>
-      (super.noSuchMethod(
-        Invocation.getter(
-            #pagebuilder_text_placeholder_recommendation_last_name),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(
-              #pagebuilder_text_placeholder_recommendation_last_name),
-        ),
-      ) as String);
-
-  @override
   String get pagebuilder_text_placeholder_recommendation_name =>
       (super.noSuchMethod(
         Invocation.getter(#pagebuilder_text_placeholder_recommendation_name),
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#pagebuilder_text_placeholder_recommendation_name),
-        ),
-      ) as String);
-
-  @override
-  String get pagebuilder_text_placeholder_promoter_first_name =>
-      (super.noSuchMethod(
-        Invocation.getter(#pagebuilder_text_placeholder_promoter_first_name),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#pagebuilder_text_placeholder_promoter_first_name),
-        ),
-      ) as String);
-
-  @override
-  String get pagebuilder_text_placeholder_promoter_last_name =>
-      (super.noSuchMethod(
-        Invocation.getter(#pagebuilder_text_placeholder_promoter_last_name),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#pagebuilder_text_placeholder_promoter_last_name),
         ),
       ) as String);
 
@@ -5403,6 +5404,85 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#pagebuilder_text_placeholder_picker),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_config_menu_normal_tab => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_config_menu_normal_tab),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_config_menu_normal_tab),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_config_menu_hover_tab => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_config_menu_hover_tab),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_config_menu_hover_tab),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_config_menu_hover_switch => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_config_menu_hover_switch),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_config_menu_hover_switch),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_anchor_button_content_section_id =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_anchor_button_content_section_id),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_anchor_button_content_section_id),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_anchor_button_content_section_id_subtitle =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_anchor_button_content_section_id_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_anchor_button_content_section_id_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_anchor_button_content_section_id_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_anchor_button_content_section_id_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_anchor_button_content_section_id_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_id => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_id),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_id),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_copy_id_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_copy_id_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_copy_id_tooltip),
         ),
       ) as String);
 

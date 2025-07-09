@@ -36,17 +36,17 @@ void main() {
     const templateID = "1";
     test("should call landingpage repo if function is called", () async {
       // Given
-      when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged, templateID))
+      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
+              imageHasChanged, templateID, null))
           .thenAnswer((_) async => right(unit));
       // When
       landingPageCubit.createLandingPage(
           testLandingPage, testImageData, imageHasChanged, templateID);
       await untilCalled(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID));
+          testLandingPage, testImageData, imageHasChanged, templateID, null));
       // Then
       verify(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID));
+          testLandingPage, testImageData, imageHasChanged, templateID, null));
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
 
@@ -59,8 +59,8 @@ void main() {
         CreatedLandingPageSuccessState()
       ];
       // When
-      when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged, templateID))
+      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
+              imageHasChanged, templateID, null))
           .thenAnswer((_) async => right(unit));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
@@ -77,8 +77,8 @@ void main() {
         CreateLandingPageFailureState(failure: BackendFailure())
       ];
       // When
-      when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged, templateID))
+      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
+              imageHasChanged, templateID, null))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));

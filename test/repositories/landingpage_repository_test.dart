@@ -65,15 +65,15 @@ void main() {
         () async {
       // Given
       final expectedResult = right(unit);
-      when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged, templateID))
+      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
+              imageHasChanged, templateID, null))
           .thenAnswer((_) async => right(unit));
       // When
       final result = await mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID);
+          testLandingPage, testImageData, imageHasChanged, templateID, null);
       // Then
       verify(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID));
+          testLandingPage, testImageData, imageHasChanged, templateID, null));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });
@@ -81,15 +81,15 @@ void main() {
     test("should return failure when the call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockLandingPageRepo.createLandingPage(
-              testLandingPage, testImageData, imageHasChanged, templateID))
+      when(mockLandingPageRepo.createLandingPage(testLandingPage, testImageData,
+              imageHasChanged, templateID, null))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
       final result = await mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID);
+          testLandingPage, testImageData, imageHasChanged, templateID, null);
       // Then
       verify(mockLandingPageRepo.createLandingPage(
-          testLandingPage, testImageData, imageHasChanged, templateID));
+          testLandingPage, testImageData, imageHasChanged, templateID, null));
       expect(result, expectedResult);
       verifyNoMoreInteractions(mockLandingPageRepo);
     });

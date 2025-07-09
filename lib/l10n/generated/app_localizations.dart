@@ -2870,6 +2870,84 @@ abstract class AppLocalizations {
   /// **'The data from your company profile is used to create the default landing page. This data will be displayed on the default landing page. If you change your company data, the data on your default page will also change.'**
   String get landingpage_creator_default_page_info_text;
 
+  /// Subtitle for the loading overlay of the AI ​​generation in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'The AI ​​is currently creating your landing page...'**
+  String get landingpage_creator_ai_loading_subtitle;
+
+  /// Another Subtitle for the loading overlay of the AI ​​generation in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'This may take up to 5 minutes. Please wait...'**
+  String get landingpage_creator_ai_loading_subtitle2;
+
+  /// Section title for the AI ​​Generation Section in the Landing Page Creator
+  ///
+  /// In en, this message translates to:
+  /// **'Or let our AI create the page for you'**
+  String get landingpage_creator_ai_form_section_title;
+
+  /// Title for the AI ​​Generation Section in the Landing Page Creator
+  ///
+  /// In en, this message translates to:
+  /// **'Enter some information about your business and let the AI ​​create a customized landing page.'**
+  String get landingpage_creator_ai_form_title;
+
+  /// Title for Radio Button Section for the AI ​​Generation Section in the Landing Page Creator
+  ///
+  /// In en, this message translates to:
+  /// **'Kind of landing page:'**
+  String get landingpage_creator_ai_form_radio_title;
+
+  /// Business Radio Button for the AI ​​Generation Section in the Landing Page Creator
+  ///
+  /// In en, this message translates to:
+  /// **'Business/Company'**
+  String get landingpage_creator_ai_form_radio_business;
+
+  /// Financial Advisor Radio Button for the AI ​​Generation Section in the Landing Page Creator
+  ///
+  /// In en, this message translates to:
+  /// **'Finance Advisor'**
+  String get landingpage_creator_ai_form_radio_finance;
+
+  /// Individual radio button for the AI ​​generation section in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'Individual'**
+  String get landingpage_creator_ai_form_radio_individual;
+
+  /// Placeholder for business text field for the AI ​​generation section in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'Industry/Company Type'**
+  String get landingpage_creator_ai_form_business_placeholder;
+
+  /// Placeholder for specialization text field for the AI ​​generation section in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'Specialization'**
+  String get landingpage_creator_ai_form_finance_placeholder;
+
+  /// Placeholder for additional information Text field for the AI ​​generation section in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'Additional information (optional)'**
+  String get landingpage_creator_ai_form_custom_description_placeholder;
+
+  /// Character counter for the AI ​​generation section in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'Characters'**
+  String get landingpage_creator_ai_form_character_count;
+
+  /// Example text for the AI ​​generation section in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'Example: Our financial office is centrally located in the city center, family-run since 1985, and specializes in independent financial advice and retirement planning. Reliability and trust are our focus – clear structures and calm shades of blue and gray are desired.'**
+  String get landingpage_creator_ai_form_example;
+
   /// Title for the page that is displayed if you have not yet created a default landing page.
   ///
   /// In en, this message translates to:

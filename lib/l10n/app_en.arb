@@ -1872,6 +1872,58 @@
     "@landingpage_creator_default_page_info_text": {
         "description": "information text for the creation of a default landingpage in the landingpage creator"
     },
+    "landingpage_creator_ai_loading_subtitle": "The AI ​​is currently creating your landing page...",
+    "@landingpage_creator_ai_loading_subtitle": {
+        "description": "Subtitle for the loading overlay of the AI ​​generation in the landing page creator"
+    },
+    "landingpage_creator_ai_loading_subtitle2": "This may take up to 5 minutes. Please wait...",
+    "@landingpage_creator_ai_loading_subtitle2": {
+        "description": "Another Subtitle for the loading overlay of the AI ​​generation in the landing page creator"
+    },
+    "landingpage_creator_ai_form_section_title": "Or let our AI create the page for you",
+    "@landingpage_creator_ai_form_section_title": {
+        "description": "Section title for the AI ​​Generation Section in the Landing Page Creator"
+    },
+    "landingpage_creator_ai_form_title": "Enter some information about your business and let the AI ​​create a customized landing page.",
+    "@landingpage_creator_ai_form_title": {
+        "description": "Title for the AI ​​Generation Section in the Landing Page Creator"
+    },
+    "landingpage_creator_ai_form_radio_title": "Kind of landing page:",
+    "@landingpage_creator_ai_form_radio_title": {
+        "description": "Title for Radio Button Section for the AI ​​Generation Section in the Landing Page Creator"
+    },
+    "landingpage_creator_ai_form_radio_business": "Business/Company",
+    "@landingpage_creator_ai_form_radio_business": {
+        "description": "Business Radio Button for the AI ​​Generation Section in the Landing Page Creator"
+    },
+    "landingpage_creator_ai_form_radio_finance": "Finance Advisor",
+    "@landingpage_creator_ai_form_radio_finance": {
+        "description": "Financial Advisor Radio Button for the AI ​​Generation Section in the Landing Page Creator"
+    },
+    "landingpage_creator_ai_form_radio_individual": "Individual",
+    "@landingpage_creator_ai_form_radio_individual": {
+        "description": "Individual radio button for the AI ​​generation section in the landing page creator"
+    },
+    "landingpage_creator_ai_form_business_placeholder": "Industry/Company Type",
+    "@landingpage_creator_ai_form_business_placeholder": {
+        "description": "Placeholder for business text field for the AI ​​generation section in the landing page creator"
+    },
+    "landingpage_creator_ai_form_finance_placeholder": "Specialization",
+    "@landingpage_creator_ai_form_finance_placeholder": {
+        "description": "Placeholder for specialization text field for the AI ​​generation section in the landing page creator"
+    },
+    "landingpage_creator_ai_form_custom_description_placeholder": "Additional information (optional)",
+    "@landingpage_creator_ai_form_custom_description_placeholder": {
+        "description": "Placeholder for additional information Text field for the AI ​​generation section in the landing page creator"
+    },
+    "landingpage_creator_ai_form_character_count": "Characters",
+    "@landingpage_creator_ai_form_character_count": {
+        "description": "Character counter for the AI ​​generation section in the landing page creator"
+    },
+    "landingpage_creator_ai_form_example": "Example: Our financial office is centrally located in the city center, family-run since 1985, and specializes in independent financial advice and retirement planning. Reliability and trust are our focus – clear structures and calm shades of blue and gray are desired.",
+    "@landingpage_creator_ai_form_example": {
+        "description": "Example text for the AI ​​generation section in the landing page creator"
+    },
     "landingpage_overview_no_default_page_title": "Setup Landingpage",
     "@landingpage_overview_no_default_page_title": {
         "description": "Title for the page that is displayed if you have not yet created a default landing page."

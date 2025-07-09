@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/ai_loading_overlay.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_first_step.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_progress_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_second_step.dart';
@@ -43,6 +44,7 @@ class _LandingPageCreatorMultiPageFormState
   bool imageValid = false;
   bool lastFormButtonsDisabled = false;
   bool isLoading = false;
+  bool isAIGenerating = false;
   late double progress;
   String errorMessage = "";
   LandingPage? landingPage;
@@ -134,6 +136,12 @@ class _LandingPageCreatorMultiPageFormState
                 Modular.get<LandingPageCubit>().createLandingPage(
                     landingPage, image, imageHasChanged, templateID);
               }
+            },
+            onAISaveTapped: (landingPage, image, imageHasChanged, aiData) {
+              if (image != null) {
+                Modular.get<LandingPageCubit>().createLandingPageWithAI(
+                    landingPage, image, imageHasChanged, aiData);
+              }
             })
     ];
   }
@@ -151,6 +159,7 @@ class _LandingPageCreatorMultiPageFormState
               listener: (context, state) {
                 if (state is CreatedLandingPageSuccessState) {
                   showError = false;
+                  isAIGenerating = false;
                   const params = "?createdNewPage=true";
                   if (landingPage?.isDefaultPage == null ||
                       landingPage?.isDefaultPage == false) {
@@ -191,6 +200,7 @@ class _LandingPageCreatorMultiPageFormState
                         state.failure, localization);
                     lastFormButtonsDisabled = false;
                     isLoading = false;
+                    isAIGenerating = false;
                   });
                 } else if (state is EditLandingPageFailureState) {
                   setState(() {
@@ -205,6 +215,10 @@ class _LandingPageCreatorMultiPageFormState
                   setState(() {
                     lastFormButtonsDisabled = true;
                     isLoading = true;
+                  });
+                } else if (state is CreateLandingPageWithAILoadingState) {
+                  setState(() {
+                    isAIGenerating = true;
                   });
                 } else if (state is GetLandingPageTemplatesFailureState) {
                   setState(() {
@@ -228,19 +242,27 @@ class _LandingPageCreatorMultiPageFormState
         child: BlocBuilder<LandingPageCubit, LandingPageState>(
           bloc: landingPageCubit,
           builder: (context, state) {
-            return ListView(children: [
-              _steps[_currentStep],
-              const SizedBox(height: 20),
-              LandingPageCreatorProgressIndicator(
-                  progress: progress, elementsTotal: _steps.length),
-              SizedBox(height: responsiveValue.isMobile ? 50 : 100),
-              if (errorMessage.isNotEmpty && showError == true) ...[
-                const SizedBox(height: 20),
-                CenteredConstrainedWrapper(
-                    child: FormErrorView(message: errorMessage))
-              ]
-            ]);
+            return Stack(
+              children: [
+                ListView(children: [
+                  _steps[_currentStep],
+                  const SizedBox(height: 20),
+                  LandingPageCreatorProgressIndicator(
+                      progress: progress, elementsTotal: _steps.length),
+                  SizedBox(height: responsiveValue.isMobile ? 50 : 100),
+                  if (errorMessage.isNotEmpty && showError == true) ...[
+                    const SizedBox(height: 20),
+                    CenteredConstrainedWrapper(
+                        child: FormErrorView(message: errorMessage))
+                  ]
+                ]),
+                if (isAIGenerating) const AILoadingOverlay(),
+              ],
+            );
           },
         ));
   }
 }
+
+// TODO: TESTS (FERTIG)
+// TODO: LOCALIZATION

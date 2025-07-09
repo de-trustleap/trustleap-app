@@ -8,13 +8,15 @@ import 'package:responsive_framework/responsive_framework.dart';
 class LandingPageCreatorThirdStepGridTile extends StatefulWidget {
   final LandingPageTemplate template;
   final bool isSelected;
+  final bool disabled;
   final VoidCallback onTap;
 
   const LandingPageCreatorThirdStepGridTile(
       {super.key,
       required this.template,
       required this.isSelected,
-      required this.onTap});
+      required this.onTap,
+      this.disabled = false});
 
   @override
   State<LandingPageCreatorThirdStepGridTile> createState() =>
@@ -30,25 +32,29 @@ class _LandingPageCreatorThirdStepGridTileState
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) {
-        setState(() {
-          _isHovered = true;
-        });
-      },
-      onExit: (_) {
-        setState(() {
-          _isHovered = false;
-        });
-      },
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: AnimatedScale(
-          scale: _isHovered ? 1.1 : 1.0,
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
-          child: Container(
+    return Opacity(
+      opacity: widget.disabled ? 0.5 : 1.0,
+      child: MouseRegion(
+        cursor: widget.disabled ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+        onEnter: (_) {
+          if (!widget.disabled) {
+            setState(() {
+              _isHovered = true;
+            });
+          }
+        },
+        onExit: (_) {
+          setState(() {
+            _isHovered = false;
+          });
+        },
+        child: GestureDetector(
+          onTap: widget.disabled ? null : widget.onTap,
+          child: AnimatedScale(
+            scale: _isHovered && !widget.disabled ? 1.1 : 1.0,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            child: Container(
             width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
             height: 200,
             decoration: BoxDecoration(
@@ -95,6 +101,7 @@ class _LandingPageCreatorThirdStepGridTileState
                       maxLines: 2)
                 ],
               ),
+            ),
             ),
           ),
         ),
