@@ -1658,6 +1658,54 @@ class AppLocalizationsDe extends AppLocalizations {
       'Für das Erstellen der Default Landingpage werden die Daten aus deinem Unternehmensprofil verwendet. Diese werden auf der Default Landingpage angezeigt.\nWenn du deine Unternehmensdaten änderst, dann ändern sich auch die Daten auf deiner Default Page.';
 
   @override
+  String get landingpage_creator_ai_loading_subtitle =>
+      'Die KI erstellt gerade deine Landing Page...';
+
+  @override
+  String get landingpage_creator_ai_loading_subtitle2 =>
+      'Das kann bis zu 5 Minuten dauern. Bitte warten...';
+
+  @override
+  String get landingpage_creator_ai_form_section_title =>
+      'Oder lasse dir die Seite von unserer KI erstellen';
+
+  @override
+  String get landingpage_creator_ai_form_title =>
+      'Gib ein paar Informationen zu deinem Unternehmen ein und lass die KI eine maßgeschneiderte Landing Page erstellen.';
+
+  @override
+  String get landingpage_creator_ai_form_radio_title => 'Art der Landing Page:';
+
+  @override
+  String get landingpage_creator_ai_form_radio_business =>
+      'Business/Unternehmen';
+
+  @override
+  String get landingpage_creator_ai_form_radio_finance => 'Finanzberater';
+
+  @override
+  String get landingpage_creator_ai_form_radio_individual => 'Individuell';
+
+  @override
+  String get landingpage_creator_ai_form_business_placeholder =>
+      'Branche/Unternehmenstyp';
+
+  @override
+  String get landingpage_creator_ai_form_finance_placeholder =>
+      'Spezialisierung';
+
+  @override
+  String get landingpage_creator_ai_form_custom_description_placeholder =>
+      'Zusätzliche Informationen (optional)';
+
+  @override
+  String get landingpage_creator_ai_form_character_count => 'Zeichen';
+
+  @override
+  String get landingpage_creator_ai_form_example =>
+      'Beispiel: Unser Finanzbüro liegt zentral in der Innenstadt, familiengeführt seit 1985, spezialisiert auf unabhängige Finanzberatung und Altersvorsorge. Seriosität und Vertrauen stehen im Mittelpunkt – klare Strukturen, ruhige Blau- und Grautöne gewünscht.';
+
+  @override
   String get landingpage_overview_no_default_page_title =>
       'Landingpage einrichten';
 

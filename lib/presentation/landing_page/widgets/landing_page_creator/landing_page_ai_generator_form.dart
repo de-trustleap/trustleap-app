@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,7 +51,6 @@ class _LandingPageAIGenerationFormState
   }
 
   void _onContentChanged() {
-    // AI Data an Parent weitergeben
     final aiData = PagebuilderAiGeneration(
       businessType: _businessTypeController.text.isEmpty
           ? null
@@ -65,6 +65,7 @@ class _LandingPageAIGenerationFormState
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Opacity(
       opacity: widget.disabled ? 0.5 : 1.0,
@@ -74,14 +75,12 @@ class _LandingPageAIGenerationFormState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Gib ein paar Informationen zu deinem Unternehmen ein und lass die KI eine maßgeschneiderte Landing Page erstellen.",
+              localization.landingpage_creator_ai_form_title,
               style: themeData.textTheme.bodyLarge,
             ),
             const SizedBox(height: 24),
-
-            // Landing Page Typ Auswahl
             Text(
-              "Art der Landing Page:",
+              localization.landingpage_creator_ai_form_radio_title,
               style: themeData.textTheme.titleMedium!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
@@ -89,7 +88,8 @@ class _LandingPageAIGenerationFormState
             Column(
               children: [
                 RadioListTile<LandingPageType>(
-                  title: const Text('Business/Unternehmen'),
+                  title: Text(
+                      localization.landingpage_creator_ai_form_radio_business),
                   value: LandingPageType.business,
                   groupValue: _selectedType,
                   onChanged: widget.disabled
@@ -101,7 +101,8 @@ class _LandingPageAIGenerationFormState
                         },
                 ),
                 RadioListTile<LandingPageType>(
-                  title: const Text('Finanzberater'),
+                  title: Text(
+                      localization.landingpage_creator_ai_form_radio_finance),
                   value: LandingPageType.financialAdvisor,
                   groupValue: _selectedType,
                   onChanged: widget.disabled
@@ -113,7 +114,8 @@ class _LandingPageAIGenerationFormState
                         },
                 ),
                 RadioListTile<LandingPageType>(
-                  title: const Text('Individuell'),
+                  title: Text(localization
+                      .landingpage_creator_ai_form_radio_individual),
                   value: LandingPageType.custom,
                   groupValue: _selectedType,
                   onChanged: widget.disabled
@@ -130,14 +132,16 @@ class _LandingPageAIGenerationFormState
             FormTextfield(
               controller: _businessTypeController,
               placeholder: _selectedType == LandingPageType.financialAdvisor
-                  ? "Spezialisierung"
-                  : "Branche/Unternehmenstyp",
+                  ? localization.landingpage_creator_ai_form_finance_placeholder
+                  : localization
+                      .landingpage_creator_ai_form_business_placeholder,
               disabled: widget.disabled,
             ),
             const SizedBox(height: 16),
             FormTextfield(
               controller: _customDescriptionController,
-              placeholder: "Zusätzliche Informationen (optional)",
+              placeholder: localization
+                  .landingpage_creator_ai_form_custom_description_placeholder,
               maxLines: 5,
               minLines: 3,
               keyboardType: TextInputType.multiline,
@@ -148,7 +152,7 @@ class _LandingPageAIGenerationFormState
             ),
             const SizedBox(height: 8),
             Text(
-              "$_currentLength/$_maxLength Zeichen",
+              "$_currentLength/$_maxLength ${localization.landingpage_creator_ai_form_character_count}",
               style: themeData.textTheme.bodySmall!.copyWith(
                 color: _currentLength > _maxLength
                     ? themeData.colorScheme.error
@@ -157,7 +161,7 @@ class _LandingPageAIGenerationFormState
             ),
             const SizedBox(height: 4),
             Text(
-              "Beispiel: 'Unser Café liegt in der Altstadt, Familienbetrieb seit 1890, gemütliche Atmosphäre, warme Braun/Beige-Töne gewünscht'",
+              localization.landingpage_creator_ai_form_example,
               style: themeData.textTheme.bodySmall!.copyWith(
                 color: themeData.colorScheme.onSurface.withValues(alpha: 0.7),
               ),

@@ -1631,6 +1631,53 @@ class AppLocalizationsEn extends AppLocalizations {
       'The data from your company profile is used to create the default landing page. This data will be displayed on the default landing page. If you change your company data, the data on your default page will also change.';
 
   @override
+  String get landingpage_creator_ai_loading_subtitle =>
+      'The AI ​​is currently creating your landing page...';
+
+  @override
+  String get landingpage_creator_ai_loading_subtitle2 =>
+      'This may take up to 5 minutes. Please wait...';
+
+  @override
+  String get landingpage_creator_ai_form_section_title =>
+      'Or let our AI create the page for you';
+
+  @override
+  String get landingpage_creator_ai_form_title =>
+      'Enter some information about your business and let the AI ​​create a customized landing page.';
+
+  @override
+  String get landingpage_creator_ai_form_radio_title => 'Kind of landing page:';
+
+  @override
+  String get landingpage_creator_ai_form_radio_business => 'Business/Company';
+
+  @override
+  String get landingpage_creator_ai_form_radio_finance => 'Finance Advisor';
+
+  @override
+  String get landingpage_creator_ai_form_radio_individual => 'Individual';
+
+  @override
+  String get landingpage_creator_ai_form_business_placeholder =>
+      'Industry/Company Type';
+
+  @override
+  String get landingpage_creator_ai_form_finance_placeholder =>
+      'Specialization';
+
+  @override
+  String get landingpage_creator_ai_form_custom_description_placeholder =>
+      'Additional information (optional)';
+
+  @override
+  String get landingpage_creator_ai_form_character_count => 'Characters';
+
+  @override
+  String get landingpage_creator_ai_form_example =>
+      'Example: Our financial office is centrally located in the city center, family-run since 1985, and specializes in independent financial advice and retirement planning. Reliability and trust are our focus – clear structures and calm shades of blue and gray are desired.';
+
+  @override
   String get landingpage_overview_no_default_page_title => 'Setup Landingpage';
 
   @override

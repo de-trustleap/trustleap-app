@@ -10,8 +10,8 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_c
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_third_step_grid.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_ai_generator_form.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_third_step_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -105,7 +105,7 @@ class _LandingPageCreatorThirdStepState
                       ],
                       const SizedBox(height: 48),
                       SelectableText(
-                        "Oder lasse dir die Seite von unserer KI erstellen",
+                        localization.landingpage_creator_ai_form_section_title,
                         style: themeData.textTheme.headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),

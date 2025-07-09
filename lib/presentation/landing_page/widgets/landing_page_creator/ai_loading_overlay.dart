@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -7,16 +8,15 @@ class AILoadingOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Stack(
       children: [
-        // Semi-transparent background
         Positioned.fill(
           child: Container(
             color: Colors.black.withValues(alpha: 0.5),
           ),
         ),
-        // Loading content
         Positioned.fill(
           child: Center(
             child: Container(
@@ -39,7 +39,7 @@ class AILoadingOverlay extends StatelessWidget {
                   const LoadingIndicator(),
                   const SizedBox(height: 24),
                   Text(
-                    "Die KI erstellt gerade deine Landing Page...",
+                    localization.landingpage_creator_ai_loading_subtitle,
                     style: themeData.textTheme.titleMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -47,9 +47,10 @@ class AILoadingOverlay extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Das kann bis zu 5 Minuten dauern. Bitte warten...",
+                    localization.landingpage_creator_ai_loading_subtitle2,
                     style: themeData.textTheme.bodyMedium!.copyWith(
-                      color: themeData.colorScheme.onSurface.withValues(alpha: 0.7),
+                      color: themeData.colorScheme.onSurface
+                          .withValues(alpha: 0.7),
                     ),
                     textAlign: TextAlign.center,
                   ),
