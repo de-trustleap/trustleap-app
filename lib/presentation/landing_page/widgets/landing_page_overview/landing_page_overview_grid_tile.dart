@@ -76,7 +76,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             (permissions.hasEditLandingPagePermission())) &&
         !_isDefaultPage()) {
       return InkWell(
-          onTap: () => CustomNavigator.openInNewTab(
+          onTap: () => CustomNavigator.navigate(
               "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
           child: buildTile(themeData, responsiveValue, localizations, context));
     } else {

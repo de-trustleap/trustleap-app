@@ -4543,6 +4543,129 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_creator_ai_loading_subtitle => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_loading_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_loading_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_loading_subtitle2 => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_loading_subtitle2),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_loading_subtitle2),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_section_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_section_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_section_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_radio_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_radio_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_radio_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_radio_business => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_radio_business),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_radio_business),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_radio_finance => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_radio_finance),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_radio_finance),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_radio_individual =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_radio_individual),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_radio_individual),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_business_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_business_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_business_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_finance_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_finance_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_finance_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_custom_description_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_creator_ai_form_custom_description_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_creator_ai_form_custom_description_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_character_count => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_character_count),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_character_count),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_ai_form_example => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_ai_form_example),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_ai_form_example),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_no_default_page_title => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_no_default_page_title),
         returnValue: _i3.dummyValue<String>(
