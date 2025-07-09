@@ -27,7 +27,7 @@ class _LandingPageBuilderHierarchyOverlayState
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    
+
     return Positioned(
       left: _position.dx,
       top: _position.dy,
@@ -65,7 +65,6 @@ class _LandingPageBuilderHierarchyOverlayState
             ),
             child: Column(
               children: [
-                // Header with drag handle and close button
                 Container(
                   height: 48,
                   decoration: BoxDecoration(
@@ -77,7 +76,6 @@ class _LandingPageBuilderHierarchyOverlayState
                   ),
                   child: Row(
                     children: [
-                      // Drag handle
                       Container(
                         width: 8,
                         height: 48,
@@ -86,22 +84,21 @@ class _LandingPageBuilderHierarchyOverlayState
                           width: 4,
                           height: 20,
                           decoration: BoxDecoration(
-                            color: themeData.colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+                            color: themeData.colorScheme.onSurfaceVariant
+                                .withValues(alpha: 0.4),
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),
                       ),
                       const SizedBox(width: 12),
-                      // Title
                       Expanded(
                         child: Text(
-                          'Struktur',
+                          "Seitenstruktur",
                           style: themeData.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
-                      // Close button
                       IconButton(
                         onPressed: widget.onClose,
                         icon: Icon(
@@ -119,7 +116,6 @@ class _LandingPageBuilderHierarchyOverlayState
                     ],
                   ),
                 ),
-                // Content area
                 Expanded(
                   child: LandingPageBuilderHierarchyTreeView(
                     page: widget.page,

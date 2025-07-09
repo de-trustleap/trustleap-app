@@ -72,27 +72,6 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
         });
   }
 
-  PageBuilderWidget? findSectionByWidgetId(
-      PagebuilderContent content, UniqueID widgetId) {
-    for (var section in content.content?.sections ?? []) {
-      for (var widget in section.widgets ?? []) {
-        if (widget.id == widgetId) {
-          return section;
-        }
-        // Falls das Widget ein Container ist und Kinder hat, durchsuche die Kinder auch
-        if (widget.children != null) {
-          for (var child in widget.children!) {
-            if (child.id == widgetId) {
-              return section;
-            }
-          }
-        }
-      }
-    }
-    // Wenn nichts gefunden wird, gebe null zurück
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
@@ -101,87 +80,89 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
     return BlocProvider(
       create: (context) => Modular.get<PagebuilderSelectionCubit>(),
       child: BlocConsumer<PagebuilderBloc, PagebuilderState>(
-        bloc: pageBuilderCubit,
-        listener: (context, state) {
-          if (state is GetLandingPageAndUserSuccessState) {
-            pageBuilderContent = state.content;
-            if (!state.saveLoading && state.saveFailure != null) {
-              _showSaveFailureDialog(localization);
-              htmlEvents.disableLeavePageListeners();
-              isUpdated = false;
-            } else if (!state.saveLoading && state.saveSuccessful != null) {
-              CustomSnackBar.of(context).showCustomSnackBar(
-                  localization.landingpage_pagebuilder_save_success_snackbar);
-              htmlEvents.disableLeavePageListeners();
-              isUpdated = false;
-            } else if (state.isUpdated != null && state.isUpdated!) {
-              htmlEvents.enableLeavePageListeners(localization);
-              isUpdated = true;
-              final configMenuCubit = Modular.get<PagebuilderConfigMenuCubit>();
-              final currentState = configMenuCubit.state;
-              if (currentState is PageBuilderConfigMenuOpenedState &&
-                  state.content.content != null) {
-                final updatedModel = widgetFinder.findWidgetById(
-                    state.content.content!, currentState.model.id);
-                if (updatedModel != null) {
-                  configMenuCubit.openConfigMenu(updatedModel);
-                }
-              } else if (currentState
-                      is PageBuilderSectionConfigMenuOpenedState &&
-                  state.content.content != null) {
-                final updatedSection = widgetFinder.findSectionById(
-                    state.content.content!, currentState.model.id);
-                if (updatedSection != null) {
-                  configMenuCubit.openSectionConfigMenu(updatedSection);
+          bloc: pageBuilderCubit,
+          listener: (context, state) {
+            if (state is GetLandingPageAndUserSuccessState) {
+              pageBuilderContent = state.content;
+              if (!state.saveLoading && state.saveFailure != null) {
+                _showSaveFailureDialog(localization);
+                htmlEvents.disableLeavePageListeners();
+                isUpdated = false;
+              } else if (!state.saveLoading && state.saveSuccessful != null) {
+                CustomSnackBar.of(context).showCustomSnackBar(
+                    localization.landingpage_pagebuilder_save_success_snackbar);
+                htmlEvents.disableLeavePageListeners();
+                isUpdated = false;
+              } else if (state.isUpdated != null && state.isUpdated!) {
+                htmlEvents.enableLeavePageListeners(localization);
+                isUpdated = true;
+                final configMenuCubit =
+                    Modular.get<PagebuilderConfigMenuCubit>();
+                final currentState = configMenuCubit.state;
+                if (currentState is PageBuilderConfigMenuOpenedState &&
+                    state.content.content != null) {
+                  final updatedModel = widgetFinder.findWidgetById(
+                      state.content.content!, currentState.model.id);
+                  if (updatedModel != null) {
+                    configMenuCubit.openConfigMenu(updatedModel);
+                  }
+                } else if (currentState
+                        is PageBuilderSectionConfigMenuOpenedState &&
+                    state.content.content != null) {
+                  final updatedSection = widgetFinder.findSectionById(
+                      state.content.content!, currentState.model.id);
+                  if (updatedSection != null) {
+                    configMenuCubit.openSectionConfigMenu(updatedSection);
+                  }
                 }
               }
             }
-          }
-        },
-        builder: (context, state) {
-          if (state is GetLandingPageFailureState) {
-            return ErrorView(
-                title: localization
-                    .landingpage_pagebuilder_container_request_error,
-                message: DatabaseFailureMapper.mapFailureMessage(
-                    state.failure, localization),
-                callback: () => {
-                      Modular.get<PagebuilderBloc>()
-                        ..add(GetLandingPageEvent(id))
-                    });
-          } else if (state is GetLandingPageAndUserSuccessState) {
-            if (state.content.user?.id != state.content.landingPage?.ownerID) {
+          },
+          builder: (context, state) {
+            if (state is GetLandingPageFailureState) {
               return ErrorView(
                   title: localization
-                      .landingpage_pagebuilder_container_permission_error_title,
-                  message: localization
-                      .landingpage_pagebuilder_container_permission_error_message,
+                      .landingpage_pagebuilder_container_request_error,
+                  message: DatabaseFailureMapper.mapFailureMessage(
+                      state.failure, localization),
                   callback: () => {
                         Modular.get<PagebuilderBloc>()
                           ..add(GetLandingPageEvent(id))
                       });
-            } else {
-              return Scaffold(
-                    appBar: LandingPageBuilderAppBar(
-                      content: state.content, 
-                      isLoading: state.saveLoading,
-                      isHierarchyOpen: _isHierarchyOverlayOpen,
-                      onHierarchyToggle: () {
-                        setState(() {
-                          _isHierarchyOverlayOpen = !_isHierarchyOverlayOpen;
+            } else if (state is GetLandingPageAndUserSuccessState) {
+              if (state.content.user?.id !=
+                  state.content.landingPage?.ownerID) {
+                return ErrorView(
+                    title: localization
+                        .landingpage_pagebuilder_container_permission_error_title,
+                    message: localization
+                        .landingpage_pagebuilder_container_permission_error_message,
+                    callback: () => {
+                          Modular.get<PagebuilderBloc>()
+                            ..add(GetLandingPageEvent(id))
                         });
-                      },
-                    ),
-                    body: Stack(
-                      children: [
-                        state.content.content != null
-                            ? LandingPageBuilderPageBuilder(
-                                model: state.content.content!,
-                                configMenuCubit: pageBuilderMenuCubit,
-                              )
-                            : const Text("FEHLER!"),
-                      // Hierarchy overlay
-                      if (_isHierarchyOverlayOpen && state.content.content != null)
+              } else {
+                return Scaffold(
+                  appBar: LandingPageBuilderAppBar(
+                    content: state.content,
+                    isLoading: state.saveLoading,
+                    isHierarchyOpen: _isHierarchyOverlayOpen,
+                    onHierarchyToggle: () {
+                      setState(() {
+                        _isHierarchyOverlayOpen = !_isHierarchyOverlayOpen;
+                      });
+                    },
+                  ),
+                  body: Stack(
+                    children: [
+                      state.content.content != null
+                          ? LandingPageBuilderPageBuilder(
+                              model: state.content.content!,
+                              configMenuCubit: pageBuilderMenuCubit,
+                            )
+                          : const Text("FEHLER!"),
+                      if (_isHierarchyOverlayOpen &&
+                          state.content.content != null)
                         LandingPageBuilderHierarchyOverlay(
                           page: state.content.content!,
                           onClose: () {
@@ -190,22 +171,26 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                             });
                           },
                           onItemSelected: (widgetId, isSection) {
-                            final hierarchyHelper = LandingPageBuilderHierarchyHelper(
+                            final hierarchyHelper =
+                                LandingPageBuilderHierarchyHelper(
                               page: state.content.content!,
                               configMenuCubit: pageBuilderMenuCubit,
-                              selectionCubit: BlocProvider.of<PagebuilderSelectionCubit>(context),
+                              selectionCubit:
+                                  BlocProvider.of<PagebuilderSelectionCubit>(
+                                      context),
                             );
-                            hierarchyHelper.onHierarchyItemSelected(widgetId, isSection);
+                            hierarchyHelper.onHierarchyItemSelected(
+                                widgetId, isSection);
                           },
                         ),
-                      ],
-                    ),
-                  );
+                    ],
+                  ),
+                );
+              }
+            } else {
+              return const LoadingIndicator();
             }
-          } else {
-            return const LoadingIndicator();
-          }
-        }),
-      );
+          }),
+    );
   }
 }

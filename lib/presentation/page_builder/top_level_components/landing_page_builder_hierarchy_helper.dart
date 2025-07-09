@@ -2,8 +2,8 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LandingPageBuilderHierarchyHelper {
   final PageBuilderPage page;
@@ -16,7 +16,6 @@ class LandingPageBuilderHierarchyHelper {
     required this.selectionCubit,
   });
 
-  // Factory constructor for easier integration with context
   factory LandingPageBuilderHierarchyHelper.fromContext({
     required PageBuilderPage page,
     required PagebuilderConfigMenuCubit configMenuCubit,
@@ -30,14 +29,14 @@ class LandingPageBuilderHierarchyHelper {
   }
 
   void onHierarchyItemSelected(String widgetId, bool isSection) {
-    // Update selection
     selectionCubit.selectWidget(widgetId);
-    
-    // Open appropriate config menu
+
     if (isSection) {
-      final section = page.sections?.where(
-        (section) => section.id.value == widgetId,
-      ).firstOrNull;
+      final section = page.sections
+          ?.where(
+            (section) => section.id.value == widgetId,
+          )
+          .firstOrNull;
       if (section != null) {
         configMenuCubit.openSectionConfigMenu(section);
       }
@@ -59,23 +58,22 @@ class LandingPageBuilderHierarchyHelper {
     return null;
   }
 
-  PageBuilderWidget? _findWidgetInTree(PageBuilderWidget widget, String widgetId) {
+  PageBuilderWidget? _findWidgetInTree(
+      PageBuilderWidget widget, String widgetId) {
     if (widget.id.value == widgetId) return widget;
-    
-    // Check children
+
     if (widget.children != null) {
       for (final child in widget.children!) {
         final found = _findWidgetInTree(child, widgetId);
         if (found != null) return found;
       }
     }
-    
-    // Check container child
+
     if (widget.containerChild != null) {
       final found = _findWidgetInTree(widget.containerChild!, widgetId);
       if (found != null) return found;
     }
-    
+
     return null;
   }
 }
