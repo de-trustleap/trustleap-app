@@ -28,13 +28,14 @@ class _LandingPageBuilderHierarchyTreeViewState
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     final sections = widget.page.sections ?? [];
 
     if (sections.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
           "Keine Elemente vorhanden",
-          style: TextStyle(fontSize: 14, color: Colors.grey),
+          style: themeData.textTheme.bodyMedium,
         ),
       );
     }
@@ -308,7 +309,7 @@ class _LandingPageBuilderHierarchyTreeViewState
   }
 }
 
-// TODO: KOMMENTARE ENTFERNEN
-// TODO: BUTTON SICHTBARER MACHEN. SECONDARY HINTERGRUNDFARBE, KREIS, ICON WEIß
-// TODO: APP FARBEN FÜR OVERLAY NUTZEN
+// TODO: KOMMENTARE ENTFERNEN (FERTIG)
+// TODO: BUTTON SICHTBARER MACHEN. SECONDARY HINTERGRUNDFARBE, KREIS, ICON WEIß (FERTIG)
+// TODO: APP FARBEN FÜR OVERLAY NUTZEN (FERTIG)
 // TODO: LOCALIZATION

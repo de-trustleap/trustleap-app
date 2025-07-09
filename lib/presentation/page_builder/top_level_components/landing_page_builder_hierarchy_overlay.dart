@@ -76,21 +76,7 @@ class _LandingPageBuilderHierarchyOverlayState
                   ),
                   child: Row(
                     children: [
-                      Container(
-                        width: 8,
-                        height: 48,
-                        alignment: Alignment.center,
-                        child: Container(
-                          width: 4,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            color: themeData.colorScheme.onSurfaceVariant
-                                .withValues(alpha: 0.4),
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: Text(
                           "Seitenstruktur",

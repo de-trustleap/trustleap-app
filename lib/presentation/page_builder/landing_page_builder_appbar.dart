@@ -37,17 +37,25 @@ class LandingPageBuilderAppBar extends StatelessWidget
               style: themeData.textTheme.bodyLarge,
             ),
             centerTitle: true,
-            leading: Tooltip(
-              message: "Hierarchie anzeigen",
-              child: IconButton(
-                onPressed: onHierarchyToggle,
-                icon: Icon(
-                  Icons.account_tree,
-                  color: themeData.colorScheme.secondary,
+            actions: [
+              Tooltip(
+                message: "Hierarchie anzeigen",
+                child: Container(
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: themeData.colorScheme.secondary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    onPressed: onHierarchyToggle,
+                    icon: const Icon(
+                      Icons.account_tree,
+                      color: Colors.white,
+                    ),
+                    iconSize: 24,
+                  ),
                 ),
               ),
-            ),
-            actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 24),
                 child: PrimaryButton(
