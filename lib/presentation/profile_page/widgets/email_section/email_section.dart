@@ -47,13 +47,26 @@ class _EmailSectionState extends State<EmailSection> {
 
   EmailSectionVisibleTextField visibleField = EmailSectionVisibleTextField.none;
   bool _isExpanded = false;
-
-  bool isEmailVerified = false;
+  bool? _cachedEmailVerificationStatus;
 
   @override
   void initState() {
     super.initState();
-    Modular.get<ProfileCubit>().verifyEmail();
+    _verifyEmailIfNeeded();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _verifyEmailIfNeeded();
+  }
+
+  void _verifyEmailIfNeeded() {
+    final currentState = Modular.get<ProfileCubit>().state;
+    if (currentState is! ProfileEmailVerifySuccessState &&
+        _cachedEmailVerificationStatus == null) {
+      Modular.get<ProfileCubit>().verifyEmail();
+    }
   }
 
   @override
@@ -130,9 +143,7 @@ class _EmailSectionState extends State<EmailSection> {
           bloc: profileCubit,
           listener: (context, state) {
             if (state is ProfileEmailVerifySuccessState) {
-              setState(() {
-                isEmailVerified = state.isEmailVerified;
-              });
+              _cachedEmailVerificationStatus = state.isEmailVerified;
             } else if (state is ProfileEmailUpdateFailureState) {
               errorMessage = DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization);
@@ -157,6 +168,10 @@ class _EmailSectionState extends State<EmailSection> {
             }
           },
           builder: (context, state) {
+            final isEmailVerified = state is ProfileEmailVerifySuccessState
+                ? state.isEmailVerified
+                : _cachedEmailVerificationStatus ?? false;
+
             return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
