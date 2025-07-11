@@ -161,8 +161,9 @@ class _LandingPageCreatorMultiPageFormState
                   showError = false;
                   isAIGenerating = false;
                   const params = "?createdNewPage=true";
-                  if (landingPage?.isDefaultPage == null ||
-                      landingPage?.isDefaultPage == false) {
+                  if ((landingPage?.isDefaultPage == null ||
+                          landingPage?.isDefaultPage == false) &&
+                      responsiveValue.isDesktop) {
                     CustomNavigator.openInNewTab(
                         "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage?.id.value}");
                   }

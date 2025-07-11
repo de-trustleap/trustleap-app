@@ -2065,4 +2065,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_hierarchy_overlay_video_player => 'Video player';
+
+  @override
+  String get pagebuilder_mobile_not_supported_title =>
+      'PageBuilder only available for desktop';
+
+  @override
+  String get pagebuilder_mobile_not_supported_subtitle =>
+      'The PageBuilder is only available on desktop devices. Please open this page on a computer or laptop.\n\n If you\'re already on a computer, resize the browser window.';
 }
