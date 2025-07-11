@@ -2389,5 +2389,13 @@
     "pagebuilder_hierarchy_overlay_video_player": "Video Player",
     "@pagebuilder_hierarchy_overlay_video_player": {
         "description": "Video Player Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_mobile_not_supported_title": "PageBuilder nur auf Desktop verfügbar",
+    "@pagebuilder_mobile_not_supported_title": {
+        "description": "Titel der Mobile not Supported View im Pagebuilder"
+    },
+    "pagebuilder_mobile_not_supported_subtitle": "Der PageBuilder ist nur auf Desktop-Geräten verfügbar. Bitte öffnen Sie diese Seite auf einem Computer oder Laptop.\n\n Bist du schon auf einem Computer dann ziehe das Browserfenster größer.",
+    "@pagebuilder_mobile_not_supported_subtitle": {
+        "description": "Untertitel der Mobile not Supported View im Pagebuilder"
     }
 }

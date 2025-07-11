@@ -74,7 +74,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
 
     if ((landingPage.ownerID == user.id ||
             (permissions.hasEditLandingPagePermission())) &&
-        !_isDefaultPage()) {
+        !_isDefaultPage() &&
+        responsiveValue.isDesktop) {
       return InkWell(
           onTap: () => CustomNavigator.navigate(
               "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),

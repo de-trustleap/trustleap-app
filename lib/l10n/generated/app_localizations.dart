@@ -3637,6 +3637,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Video player'**
   String get pagebuilder_hierarchy_overlay_video_player;
+
+  /// Title of the Mobile not Supported View in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'PageBuilder only available for desktop'**
+  String get pagebuilder_mobile_not_supported_title;
+
+  /// Subtitle of the Mobile not Supported View in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'The PageBuilder is only available on desktop devices. Please open this page on a computer or laptop.\n\n If you\'re already on a computer, resize the browser window.'**
+  String get pagebuilder_mobile_not_supported_subtitle;
 }
 
 class _AppLocalizationsDelegate

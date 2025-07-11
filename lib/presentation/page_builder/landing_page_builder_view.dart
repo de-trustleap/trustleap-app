@@ -16,10 +16,12 @@ import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_fin
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_page_builder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_overlay.dart';
+import 'package:finanzbegleiter/presentation/page_builder/widgets/pagebuilder_mobile_not_supported_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageBuilderView extends StatefulWidget {
   const LandingPageBuilderView({super.key});
@@ -74,6 +76,11 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final pageBuilderCubit = Modular.get<PagebuilderBloc>();
+    final responsiveValue = ResponsiveBreakpoints.of(context);
+
+    if (!responsiveValue.isDesktop) {
+      return const PagebuilderMobileNotSupportedView();
+    }
 
     return BlocProvider(
       create: (context) => Modular.get<PagebuilderSelectionCubit>(),
