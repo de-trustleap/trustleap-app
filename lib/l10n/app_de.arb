@@ -2329,5 +2329,65 @@
     "pagebuilder_section_copy_id_tooltip": "ID kopieren",
     "@pagebuilder_section_copy_id_tooltip": {
         "description": "Tooltip für den ID kopieren Button in der Pagebuilder Section Konfiguration"
+    },
+    "pagebuilder_hierarchy_button_tooltip": "Seitenhierarchie anzeigen",
+    "@pagebuilder_hierarchy_button_tooltip": {
+        "description": "Button Tooltip für den Seitenhierarchie Button in der Pagebuilder AppBar"
+    },
+    "pagebuilder_hierarchy_overlay_title": "Seitenstruktur",
+    "@pagebuilder_hierarchy_overlay_title": {
+        "description": "Titel des Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_no_elements": "Keine Elemente vorhanden",
+    "@pagebuilder_hierarchy_overlay_no_elements": {
+        "description": "Keine Elemente vorhanden Text im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_section_element": "Section",
+    "@pagebuilder_hierarchy_overlay_section_element": {
+        "description": "Ausklappbares Section Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_text": "Text",
+    "@pagebuilder_hierarchy_overlay_text": {
+        "description": "Text Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_image": "Bild",
+    "@pagebuilder_hierarchy_overlay_image": {
+        "description": "Bild Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_button": "Button",
+    "@pagebuilder_hierarchy_overlay_button": {
+        "description": "Button Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_anchor_button": "Anker Button",
+    "@pagebuilder_hierarchy_overlay_anchor_button": {
+        "description": "Anker Button Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_container": "Container",
+    "@pagebuilder_hierarchy_overlay_container": {
+        "description": "Container Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_row": "Reihe",
+    "@pagebuilder_hierarchy_overlay_row": {
+        "description": "Reihe Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_column": "Spalte",
+    "@pagebuilder_hierarchy_overlay_column": {
+        "description": "Spalte Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_icon": "Icon",
+    "@pagebuilder_hierarchy_overlay_icon": {
+        "description": "Icon Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_contact_form": "Kontaktformular",
+    "@pagebuilder_hierarchy_overlay_contact_form": {
+        "description": "Kontaktformular Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_footer": "Footer",
+    "@pagebuilder_hierarchy_overlay_footer": {
+        "description": "Footer Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_video_player": "Video Player",
+    "@pagebuilder_hierarchy_overlay_video_player": {
+        "description": "Video Player Element im Hierarchie Overlay im Pagebuilder"
     }
 }

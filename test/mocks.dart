@@ -34,9 +34,12 @@ import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart'
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart';
 import 'package:finanzbegleiter/application/admin_registration_code/admin_registration_code_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:mockito/annotations.dart';
 
 @GenerateMocks([
@@ -76,6 +79,9 @@ import 'package:mockito/annotations.dart';
   CompanyRequestCubit,
   CompanyRequestObserverCubit,
   AdminRegistrationCodeCubit,
+  PagebuilderConfigMenuCubit,
+  PagebuilderSelectionCubit,
+  BuildContext,
   FirebaseAuth,
   FirebaseFirestore,
   FirebaseStorage,

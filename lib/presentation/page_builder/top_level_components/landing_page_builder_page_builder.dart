@@ -10,7 +10,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageBuilderPageBuilder extends StatefulWidget {
   final PageBuilderPage model;
-  const LandingPageBuilderPageBuilder({super.key, required this.model});
+  final PagebuilderConfigMenuCubit? configMenuCubit;
+  
+  const LandingPageBuilderPageBuilder({
+    super.key,
+    required this.model,
+    this.configMenuCubit,
+  });
 
   @override
   State<LandingPageBuilderPageBuilder> createState() =>
@@ -19,15 +25,19 @@ class LandingPageBuilderPageBuilder extends StatefulWidget {
 
 class _LandingPageBuilderPageBuilderState
     extends State<LandingPageBuilderPageBuilder> {
-  final pageBuilderMenuCubit = Modular.get<PagebuilderConfigMenuCubit>();
+  late PagebuilderConfigMenuCubit pageBuilderMenuCubit;
   bool _isConfigMenuOpen = false;
 
   @override
+  void initState() {
+    super.initState();
+    pageBuilderMenuCubit = widget.configMenuCubit ?? Modular.get<PagebuilderConfigMenuCubit>();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => Modular.get<PagebuilderSelectionCubit>(),
-      child: Row(
-        children: [
+    return Row(
+      children: [
           BlocConsumer<PagebuilderConfigMenuCubit, PagebuilderConfigMenuState>(
               bloc: pageBuilderMenuCubit,
               listener: (context, state) {
@@ -85,7 +95,6 @@ class _LandingPageBuilderPageBuilderState
             ),
           ),
         ],
-      ),
-    );
+      );
   }
 }

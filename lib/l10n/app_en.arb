@@ -2329,5 +2329,65 @@
     "pagebuilder_section_copy_id_tooltip": "Copy id",
     "@pagebuilder_section_copy_id_tooltip": {
         "description": "Tooltip for the Copy ID button in the Pagebuilder Section configuration"
+    },
+    "pagebuilder_hierarchy_button_tooltip": "Show page hierarchy",
+    "@pagebuilder_hierarchy_button_tooltip": {
+        "description": "Button tooltip for the page hierarchy button in the Pagebuilder AppBar"
+    },
+    "pagebuilder_hierarchy_overlay_title": "Page structure",
+    "@pagebuilder_hierarchy_overlay_title": {
+        "description": "Title of the hierarchy overlay in the Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_no_elements": "No elements available",
+    "@pagebuilder_hierarchy_overlay_no_elements": {
+        "description": "No elements available text in the hierarchy overlay in the Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_section_element": "Section",
+    "@pagebuilder_hierarchy_overlay_section_element": {
+        "description": "Collapsible section element in the hierarchy overlay in the Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_text": "Text",
+    "@pagebuilder_hierarchy_overlay_text": {
+        "description": "Text element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_image": "Image",
+    "@pagebuilder_hierarchy_overlay_image": {
+        "description": "Image element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_button": "Button",
+    "@pagebuilder_hierarchy_overlay_button": {
+        "description": "Button element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_anchor_button": "Anchor button",
+    "@pagebuilder_hierarchy_overlay_anchor_button": {
+        "description": "Anchor button element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_container": "Container",
+    "@pagebuilder_hierarchy_overlay_container": {
+        "description": "Container element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_row": "Row",
+    "@pagebuilder_hierarchy_overlay_row": {
+        "description": "Row element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_column": "Column",
+    "@pagebuilder_hierarchy_overlay_column": {
+        "description": "Column element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_icon": "Icon",
+    "@pagebuilder_hierarchy_overlay_icon": {
+        "description": "Icon element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_contact_form": "Contact form",
+    "@pagebuilder_hierarchy_overlay_contact_form": {
+        "description": "Contact form element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_footer": "Footer",
+    "@pagebuilder_hierarchy_overlay_footer": {
+        "description": "Footer element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_video_player": "Video player",
+    "@pagebuilder_hierarchy_overlay_video_player": {
+        "description": "Video player element in the hierarchy overlay in the pagebuilder"
     }
 }
