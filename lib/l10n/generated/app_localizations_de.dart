@@ -2060,4 +2060,51 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_section_copy_id_tooltip => 'ID kopieren';
+
+  @override
+  String get pagebuilder_hierarchy_button_tooltip =>
+      'Seitenhierarchie anzeigen';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_title => 'Seitenstruktur';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_no_elements =>
+      'Keine Elemente vorhanden';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_section_element => 'Section';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_text => 'Text';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_image => 'Bild';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_button => 'Button';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_anchor_button => 'Anker Button';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_container => 'Container';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_row => 'Reihe';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_column => 'Spalte';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_icon => 'Icon';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_contact_form => 'Kontaktformular';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_footer => 'Footer';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_video_player => 'Video Player';
 }

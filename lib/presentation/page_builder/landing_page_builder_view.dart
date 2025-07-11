@@ -4,9 +4,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
@@ -15,9 +13,9 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_appbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_html_events.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_finder.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_hierarchy_helper.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_hierarchy_overlay.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_page_builder.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_helper.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_overlay.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

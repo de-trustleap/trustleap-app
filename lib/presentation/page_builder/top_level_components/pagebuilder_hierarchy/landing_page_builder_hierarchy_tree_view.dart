@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,12 +30,13 @@ class _LandingPageBuilderHierarchyTreeViewState
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     final sections = widget.page.sections ?? [];
 
     if (sections.isEmpty) {
       return Center(
         child: Text(
-          "Keine Elemente vorhanden",
+          localization.pagebuilder_hierarchy_overlay_no_elements,
           style: themeData.textTheme.bodyMedium,
         ),
       );
@@ -47,16 +49,16 @@ class _LandingPageBuilderHierarchyTreeViewState
           itemCount: sections.length,
           itemBuilder: (context, index) {
             final section = sections[index];
-            return _buildSectionItem(section, selectedWidgetId, index + 1);
+            return _buildSectionItem(
+                section, selectedWidgetId, index + 1, themeData, localization);
           },
         );
       },
     );
   }
 
-  Widget _buildSectionItem(
-      PageBuilderSection section, String? selectedWidgetId, int sectionNumber) {
-    final themeData = Theme.of(context);
+  Widget _buildSectionItem(PageBuilderSection section, String? selectedWidgetId,
+      int sectionNumber, ThemeData themeData, AppLocalizations localization) {
     final isExpanded = _expandedSections.contains(section.id.value);
     final isSelected = selectedWidgetId == section.id.value;
     final widgets = section.widgets ?? [];
@@ -68,8 +70,7 @@ class _LandingPageBuilderHierarchyTreeViewState
           margin: const EdgeInsets.only(bottom: 4),
           child: Material(
             color: isSelected
-                ? themeData.colorScheme.secondaryContainer
-                    .withValues(alpha: 0.3)
+                ? themeData.colorScheme.secondary
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             child: InkWell(
@@ -98,7 +99,9 @@ class _LandingPageBuilderHierarchyTreeViewState
                         child: Icon(
                           isExpanded ? Icons.expand_more : Icons.chevron_right,
                           size: 16,
-                          color: themeData.colorScheme.onSurfaceVariant,
+                          color: isSelected
+                              ? Colors.white
+                              : themeData.colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -106,17 +109,17 @@ class _LandingPageBuilderHierarchyTreeViewState
                     Icon(
                       Icons.view_agenda,
                       size: 16,
-                      color: themeData.colorScheme.primary,
+                      color: isSelected
+                          ? Colors.white
+                          : themeData.colorScheme.primary,
                     ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        "Section $sectionNumber",
+                        "${localization.pagebuilder_hierarchy_overlay_section_element} $sectionNumber",
                         style: themeData.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.w500,
-                          color: isSelected
-                              ? themeData.colorScheme.onSecondaryContainer
-                              : null,
+                          color: isSelected ? Colors.white : null,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -124,7 +127,9 @@ class _LandingPageBuilderHierarchyTreeViewState
                     Text(
                       '${widgets.length}',
                       style: themeData.textTheme.bodySmall?.copyWith(
-                        color: themeData.colorScheme.onSurfaceVariant,
+                        color: isSelected
+                            ? Colors.white
+                            : themeData.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -138,8 +143,8 @@ class _LandingPageBuilderHierarchyTreeViewState
             padding: const EdgeInsets.only(left: 16, bottom: 8),
             child: Column(
               children: widgets
-                  .map(
-                      (widget) => _buildWidgetItem(widget, selectedWidgetId, 0))
+                  .map((widget) => _buildWidgetItem(
+                      widget, selectedWidgetId, 0, themeData, localization))
                   .toList(),
             ),
           ),
@@ -147,9 +152,8 @@ class _LandingPageBuilderHierarchyTreeViewState
     );
   }
 
-  Widget _buildWidgetItem(
-      PageBuilderWidget widget, String? selectedWidgetId, int depth) {
-    final themeData = Theme.of(context);
+  Widget _buildWidgetItem(PageBuilderWidget widget, String? selectedWidgetId,
+      int depth, ThemeData themeData, AppLocalizations localization) {
     final widgetId = widget.id.value;
     final isExpanded = _expandedWidgets.contains(widgetId);
     final isSelected = selectedWidgetId == widgetId;
@@ -164,8 +168,7 @@ class _LandingPageBuilderHierarchyTreeViewState
         children: [
           Material(
             color: isSelected
-                ? themeData.colorScheme.secondaryContainer
-                    .withValues(alpha: 0.3)
+                ? themeData.colorScheme.secondary
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(6),
             child: InkWell(
@@ -202,7 +205,9 @@ class _LandingPageBuilderHierarchyTreeViewState
                                 ? Icons.expand_more
                                 : Icons.chevron_right,
                             size: 12,
-                            color: themeData.colorScheme.onSurfaceVariant,
+                            color: isSelected
+                                ? Colors.white
+                                : themeData.colorScheme.onSurfaceVariant,
                           ),
                         ),
                       )
@@ -212,16 +217,16 @@ class _LandingPageBuilderHierarchyTreeViewState
                     Icon(
                       _getWidgetIcon(widget.elementType),
                       size: 14,
-                      color: themeData.colorScheme.onSurfaceVariant,
+                      color: isSelected
+                          ? Colors.white
+                          : themeData.colorScheme.onSurfaceVariant,
                     ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        _getWidgetLabel(widget.elementType),
+                        _getWidgetLabel(widget.elementType, localization),
                         style: themeData.textTheme.bodySmall?.copyWith(
-                          color: isSelected
-                              ? themeData.colorScheme.onSecondaryContainer
-                              : null,
+                          color: isSelected ? Colors.white : null,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -237,11 +242,11 @@ class _LandingPageBuilderHierarchyTreeViewState
               child: Column(
                 children: [
                   if (widget.children != null)
-                    ...widget.children!.map((child) =>
-                        _buildWidgetItem(child, selectedWidgetId, depth + 1)),
+                    ...widget.children!.map((child) => _buildWidgetItem(child,
+                        selectedWidgetId, depth + 1, themeData, localization)),
                   if (widget.containerChild != null)
-                    _buildWidgetItem(
-                        widget.containerChild!, selectedWidgetId, depth + 1),
+                    _buildWidgetItem(widget.containerChild!, selectedWidgetId,
+                        depth + 1, themeData, localization),
                 ],
               ),
             ),
@@ -279,37 +284,33 @@ class _LandingPageBuilderHierarchyTreeViewState
     }
   }
 
-  String _getWidgetLabel(PageBuilderWidgetType? elementType) {
+  String _getWidgetLabel(
+      PageBuilderWidgetType? elementType, AppLocalizations localization) {
     switch (elementType) {
       case PageBuilderWidgetType.text:
-        return 'Text';
+        return localization.pagebuilder_hierarchy_overlay_text;
       case PageBuilderWidgetType.image:
-        return 'Bild';
+        return localization.pagebuilder_hierarchy_overlay_image;
       case PageBuilderWidgetType.button:
-        return 'Button';
+        return localization.pagebuilder_hierarchy_overlay_button;
       case PageBuilderWidgetType.anchorButton:
-        return 'Anchor Button';
+        return localization.pagebuilder_hierarchy_overlay_anchor_button;
       case PageBuilderWidgetType.container:
-        return 'Container';
+        return localization.pagebuilder_hierarchy_overlay_container;
       case PageBuilderWidgetType.row:
-        return 'Zeile';
+        return localization.pagebuilder_hierarchy_overlay_row;
       case PageBuilderWidgetType.column:
-        return 'Spalte';
+        return localization.pagebuilder_hierarchy_overlay_column;
       case PageBuilderWidgetType.icon:
-        return 'Icon';
+        return localization.pagebuilder_hierarchy_overlay_icon;
       case PageBuilderWidgetType.contactForm:
-        return 'Kontaktformular';
+        return localization.pagebuilder_hierarchy_overlay_contact_form;
       case PageBuilderWidgetType.footer:
-        return 'Footer';
+        return localization.pagebuilder_hierarchy_overlay_footer;
       case PageBuilderWidgetType.videoPlayer:
-        return 'Video Player';
+        return localization.pagebuilder_hierarchy_overlay_video_player;
       default:
-        return elementType?.name ?? 'Widget';
+        return elementType?.name ?? "";
     }
   }
 }
-
-// TODO: KOMMENTARE ENTFERNEN (FERTIG)
-// TODO: BUTTON SICHTBARER MACHEN. SECONDARY HINTERGRUNDFARBE, KREIS, ICON WEIß (FERTIG)
-// TODO: APP FARBEN FÜR OVERLAY NUTZEN (FERTIG)
-// TODO: LOCALIZATION

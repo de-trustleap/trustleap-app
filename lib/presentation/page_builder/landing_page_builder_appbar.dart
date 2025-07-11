@@ -39,7 +39,7 @@ class LandingPageBuilderAppBar extends StatelessWidget
             centerTitle: true,
             actions: [
               Tooltip(
-                message: "Hierarchie anzeigen",
+                message: localization.pagebuilder_hierarchy_button_tooltip,
                 child: Container(
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
