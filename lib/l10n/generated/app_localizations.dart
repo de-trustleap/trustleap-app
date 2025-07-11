@@ -3547,6 +3547,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copy id'**
   String get pagebuilder_section_copy_id_tooltip;
+
+  /// Button tooltip for the page hierarchy button in the Pagebuilder AppBar
+  ///
+  /// In en, this message translates to:
+  /// **'Show page hierarchy'**
+  String get pagebuilder_hierarchy_button_tooltip;
+
+  /// Title of the hierarchy overlay in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Page structure'**
+  String get pagebuilder_hierarchy_overlay_title;
+
+  /// No elements available text in the hierarchy overlay in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'No elements available'**
+  String get pagebuilder_hierarchy_overlay_no_elements;
+
+  /// Collapsible section element in the hierarchy overlay in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Section'**
+  String get pagebuilder_hierarchy_overlay_section_element;
+
+  /// Text element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get pagebuilder_hierarchy_overlay_text;
+
+  /// Image element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Image'**
+  String get pagebuilder_hierarchy_overlay_image;
+
+  /// Button element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Button'**
+  String get pagebuilder_hierarchy_overlay_button;
+
+  /// Anchor button element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Anchor button'**
+  String get pagebuilder_hierarchy_overlay_anchor_button;
+
+  /// Container element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Container'**
+  String get pagebuilder_hierarchy_overlay_container;
+
+  /// Row element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Row'**
+  String get pagebuilder_hierarchy_overlay_row;
+
+  /// Column element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Column'**
+  String get pagebuilder_hierarchy_overlay_column;
+
+  /// Icon element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Icon'**
+  String get pagebuilder_hierarchy_overlay_icon;
+
+  /// Contact form element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Contact form'**
+  String get pagebuilder_hierarchy_overlay_contact_form;
+
+  /// Footer element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Footer'**
+  String get pagebuilder_hierarchy_overlay_footer;
+
+  /// Video player element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Video player'**
+  String get pagebuilder_hierarchy_overlay_video_player;
 }
 
 class _AppLocalizationsDelegate
