@@ -2019,4 +2019,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_section_copy_id_tooltip => 'Copy id';
+
+  @override
+  String get pagebuilder_hierarchy_button_tooltip => 'Show page hierarchy';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_title => 'Page structure';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_no_elements =>
+      'No elements available';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_section_element => 'Section';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_text => 'Text';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_image => 'Image';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_button => 'Button';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_anchor_button => 'Anchor button';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_container => 'Container';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_row => 'Row';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_column => 'Column';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_icon => 'Icon';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_contact_form => 'Contact form';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_footer => 'Footer';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_video_player => 'Video player';
 }

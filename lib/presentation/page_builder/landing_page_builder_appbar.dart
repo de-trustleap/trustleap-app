@@ -9,9 +9,17 @@ class LandingPageBuilderAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final PagebuilderContent content;
   final bool isLoading;
+  final bool isHierarchyOpen;
+  final VoidCallback onHierarchyToggle;
   final dividerHeight = 0.5;
-  const LandingPageBuilderAppBar(
-      {super.key, required this.content, required this.isLoading});
+
+  const LandingPageBuilderAppBar({
+    super.key,
+    required this.content,
+    required this.isLoading,
+    required this.isHierarchyOpen,
+    required this.onHierarchyToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,26 @@ class LandingPageBuilderAppBar extends StatelessWidget
               content.landingPage?.name ?? "",
               style: themeData.textTheme.bodyLarge,
             ),
+            centerTitle: true,
             actions: [
+              Tooltip(
+                message: localization.pagebuilder_hierarchy_button_tooltip,
+                child: Container(
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: themeData.colorScheme.secondary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    onPressed: onHierarchyToggle,
+                    icon: const Icon(
+                      Icons.account_tree,
+                      color: Colors.white,
+                    ),
+                    iconSize: 24,
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(right: 24),
                 child: PrimaryButton(
