@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
@@ -358,6 +359,154 @@ class RecommendationRepositoryImplementation
         "notesLastEdited": userRecoModel.notesLastEdited?.toIso8601String()
       }, SetOptions(merge: true));
       return right(recommendation);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, List<PromoterRecommendations>>> getRecommendationsCompany(
+      String userID) async {
+    final recoCollection = firestore.collection("recommendations");
+    final usersRecosCollection = firestore.collection("usersRecommendations");
+    final userCollection = firestore.collection("users");
+    final CustomUser? user;
+    try {
+      final userDoc = await userCollection.doc(userID).get();
+      if (!userDoc.exists || userDoc.data() == null) {
+        return left(NotFoundFailure());
+      }
+      user = UserModel.fromMap(userDoc.data()!).toDomain();
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+    try {
+      // 1. GET REGISTERED PROMOTERS
+      if (user.registeredPromoterIDs == null || user.registeredPromoterIDs!.isEmpty) {
+        return right([]);
+      }
+
+      final promoterIDs = user.registeredPromoterIDs!;
+      final chunks = promoterIDs.slices(10);
+      final List<QuerySnapshot<Map<String, dynamic>>> promoterQuerySnapshots = [];
+      final List<CustomUser> promoters = [];
+
+      // Fetch all registered promoters
+      await Future.forEach(chunks, (element) async {
+        final document = await userCollection
+            .orderBy("firstName", descending: true)
+            .where(FieldPath.documentId, whereIn: element)
+            .get();
+        promoterQuerySnapshots.add(document);
+      });
+
+      for (var document in promoterQuerySnapshots) {
+        for (var snapshot in document.docs) {
+          var doc = snapshot.data();
+          var promoter = UserModel.fromFirestore(doc, snapshot.id).toDomain();
+          // Only include active promoters
+          if (promoter.deletesAt == null) {
+            promoters.add(promoter);
+          }
+        }
+      }
+
+      // 2. BATCH FETCH ALL USERRECOMMENDATIONS FROM ALL PROMOTERS
+      final allUserRecoIDs = promoters
+          .expand((promoter) => promoter.recommendationIDs ?? [])
+          .toSet()
+          .toList();
+
+      if (allUserRecoIDs.isEmpty) {
+        // All promoters without recommendations
+        final promotersWithoutRecos = promoters.map((promoter) => 
+            PromoterRecommendations(promoter: promoter, recommendations: [])).toList();
+        return right(promotersWithoutRecos);
+      }
+
+      // Batch fetch all UserRecommendations in parallel
+      final userRecoChunks = allUserRecoIDs.slices(10);
+      final List<UserRecommendation> allUserRecos = [];
+      final Set<String> allRecoIDsToFetch = {};
+
+      final userRecoFutures = userRecoChunks.map((chunk) async {
+        final snapshot = await usersRecosCollection
+            .orderBy("recommendationID", descending: true)
+            .where(FieldPath.documentId, whereIn: chunk)
+            .get();
+        
+        final List<UserRecommendation> chunkUserRecos = [];
+        for (var doc in snapshot.docs) {
+          final userRecoModel = UserRecommendationModel.fromFirestore(doc.data(), doc.id).toDomain();
+          chunkUserRecos.add(userRecoModel);
+          if (userRecoModel.recoID != null) {
+            allRecoIDsToFetch.add(userRecoModel.recoID!);
+          }
+        }
+        return chunkUserRecos;
+      });
+
+      final userRecoResults = await Future.wait(userRecoFutures);
+      for (final chunk in userRecoResults) {
+        allUserRecos.addAll(chunk);
+      }
+
+      // 3. BATCH FETCH ALL RECOMMENDATIONITEMS IN PARALLEL
+      final Map<String, RecommendationItem> recoMap = {};
+      if (allRecoIDsToFetch.isNotEmpty) {
+        final recoChunks = allRecoIDsToFetch.toList().slices(10);
+        
+        final recoFutures = recoChunks.map((chunk) async {
+          final snapshot = await recoCollection
+              .where(FieldPath.documentId, whereIn: chunk)
+              .get();
+          
+          final Map<String, RecommendationItem> chunkRecoMap = {};
+          for (var doc in snapshot.docs) {
+            final recoItem = RecommendationItemModel.fromFirestore(doc.data(), doc.id).toDomain();
+            chunkRecoMap[doc.id] = recoItem;
+          }
+          return chunkRecoMap;
+        });
+
+        final recoResults = await Future.wait(recoFutures);
+        for (final chunkMap in recoResults) {
+          recoMap.addAll(chunkMap);
+        }
+      }
+
+      // 4. GROUP AND COMBINE DATA PER PROMOTER
+      final Map<String, List<UserRecommendation>> promoterRecoMap = {};
+      
+      // Group UserRecommendations by promoter
+      for (final promoter in promoters) {
+        final promoterUserRecos = allUserRecos
+            .where((userReco) => promoter.recommendationIDs?.contains(userReco.id.value) ?? false)
+            .map((userReco) {
+              final recommendation = userReco.recoID != null ? recoMap[userReco.recoID!] : null;
+              return userReco.copyWith(recommendation: recommendation);
+            })
+            .toList();
+
+        // Sort by creation date
+        promoterUserRecos.sort((a, b) {
+          return (b.recommendation?.createdAt ?? DateTime.now())
+              .compareTo(a.recommendation?.createdAt ?? DateTime.now());
+        });
+
+        promoterRecoMap[promoter.id.value] = promoterUserRecos;
+      }
+
+      // 5. CREATE FINAL RESULT
+      final List<PromoterRecommendations> promotersWithRecommendations = promoters.map((promoter) {
+        final recommendations = promoterRecoMap[promoter.id.value] ?? [];
+        return PromoterRecommendations(
+          promoter: promoter,
+          recommendations: recommendations,
+        );
+      }).toList();
+
+      return right(promotersWithRecommendations);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
