@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -10,7 +11,6 @@ import 'package:finanzbegleiter/presentation/dashboard_page/widgets/underlined_d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 
 class DashboardRecommendations extends StatefulWidget {
   final CustomUser user;
@@ -24,7 +24,7 @@ class DashboardRecommendations extends StatefulWidget {
 class _DashboardRecommendationsState extends State<DashboardRecommendations> {
   TimePeriod _selectedTimePeriod = TimePeriod.week;
   int? _selectedStatusLevel = 1;
-  String? _selectedPromoterId; // null = "Alle"
+  String? _selectedPromoterId;
 
   @override
   void initState() {
@@ -42,6 +42,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     final cubit = Modular.get<DashboardRecommendationsCubit>();
 
     return CardContainer(
@@ -49,7 +50,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Anzahl der Empfehlungen",
+            localization.dashboard_recommendations_title,
             style: themeData.textTheme.titleMedium!
                 .copyWith(fontWeight: FontWeight.bold),
           ),
@@ -93,7 +94,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                       return UnderlinedDropdown<String?>(
                         value: _selectedPromoterId,
                         items: DashboardRecommendationsHelper.getPromoterItems(
-                            state.promoterRecommendations!),
+                            state.promoterRecommendations!, localization),
                         onChanged: (String? newValue) {
                           setState(() {
                             _selectedPromoterId = newValue;
@@ -132,7 +133,8 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
               } else if (state
                   is DashboardRecommendationsGetRecosFailureState) {
                 return ErrorView(
-                    title: "Laden der Empfehlungen fehlgeschlagen",
+                    title: localization
+                        .dashboard_recommendations_loading_error_title,
                     message: "",
                     callback: () => {
                           widget.user.role == Role.company

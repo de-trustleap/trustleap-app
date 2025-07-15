@@ -100,9 +100,9 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       String templateID,
       PagebuilderAiGeneration? aiGeneration) async {
     final appCheckToken = await appCheck.getToken();
-    HttpsCallable callable =
-        firebaseFunctions.httpsCallable("createLandingPage",
-            options: HttpsCallableOptions(timeout: const Duration(minutes: 6)));
+    HttpsCallable callable = firebaseFunctions.httpsCallable(
+        "createLandingPage",
+        options: HttpsCallableOptions(timeout: const Duration(minutes: 6)));
     final landingPageModel = LandingPageModel.fromDomain(landingPage);
     var companyData = landingPageModel.companyData;
     var aiGenerationMap = {};
@@ -145,7 +145,6 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
-      print("THE CALL ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

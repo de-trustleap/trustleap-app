@@ -2,18 +2,20 @@ import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_r
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class DashboardRecommendationsHelper {
   /// Creates dropdown items for promoter selection including an "Alle" option
   static List<DropdownMenuItem<String?>> getPromoterItems(
-      List<PromoterRecommendations> promoterRecommendations) {
+      List<PromoterRecommendations> promoterRecommendations,
+      AppLocalizations localization) {
     final items = <DropdownMenuItem<String?>>[];
 
     // "Alle" Option
-    items.add(const DropdownMenuItem<String?>(
+    items.add(DropdownMenuItem<String?>(
       value: null,
-      child: Text("Alle"),
+      child: Text(localization.dashboard_recommendations_all_promoter),
     ));
 
     // Promoter Options
@@ -24,18 +26,13 @@ class DashboardRecommendationsHelper {
 
       items.add(DropdownMenuItem<String?>(
         value: promoter.id.value,
-        child:
-            Text(displayName.isNotEmpty ? displayName : "Unbekannter Promoter"),
+        child: Text(displayName.isNotEmpty
+            ? displayName
+            : localization.dashboard_recommendations_missing_promoter_name),
       ));
     }
 
     return items;
-  }
-
-  /// Creates promoter display name from first and last name
-  static String getPromoterDisplayName(String? firstName, String? lastName) {
-    final displayName = "${firstName ?? ''} ${lastName ?? ''}".trim();
-    return displayName.isNotEmpty ? displayName : "Unbekannter Promoter";
   }
 
   /// Filters recommendations based on selected promoter and user role

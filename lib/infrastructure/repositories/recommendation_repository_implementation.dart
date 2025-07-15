@@ -121,7 +121,6 @@ class RecommendationRepositoryImplementation
       });
       return right(recoItems);
     } on FirebaseException catch (e) {
-      print("THE ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

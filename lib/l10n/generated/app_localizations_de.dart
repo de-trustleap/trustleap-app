@@ -2115,4 +2115,32 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get pagebuilder_mobile_not_supported_subtitle =>
       'Der PageBuilder ist nur auf Desktop-Geräten verfügbar. Bitte öffnen Sie diese Seite auf einem Computer oder Laptop.\n\n Bist du schon auf einem Computer dann ziehe das Browserfenster größer.';
+
+  @override
+  String get dashboard_user_not_found_error_title => 'Nutzer nicht gefunden';
+
+  @override
+  String get dashboard_user_not_found_error_message =>
+      'Der aktuelle Nutzer wurde nicht gefunden. Bitte versuche es später nochmal.';
+
+  @override
+  String get dashboard_greeting => 'Hi';
+
+  @override
+  String get dashboard_recommendations_title => 'Anzahl der Empfehlungen';
+
+  @override
+  String get dashboard_recommendations_loading_error_title =>
+      'Laden der Empfehlungen fehlgeschlagen';
+
+  @override
+  String get dashboard_recommendations_chart_no_recommendations =>
+      'Keine Empfehlungen vorhanden';
+
+  @override
+  String get dashboard_recommendations_all_promoter => 'Alle';
+
+  @override
+  String get dashboard_recommendations_missing_promoter_name =>
+      'Unbekannter Promoter';
 }

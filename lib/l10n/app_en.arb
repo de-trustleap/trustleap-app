@@ -2397,5 +2397,37 @@
     "pagebuilder_mobile_not_supported_subtitle": "The PageBuilder is only available on desktop devices. Please open this page on a computer or laptop.\n\n If you're already on a computer, resize the browser window.",
     "@pagebuilder_mobile_not_supported_subtitle": {
         "description": "Subtitle of the Mobile not Supported View in the Pagebuilder"
+    },
+    "dashboard_user_not_found_error_title": "User not found",
+    "@dashboard_user_not_found_error_title": {
+        "description": "User not found error title on the dashboard page"
+    },
+    "dashboard_user_not_found_error_message": "The current user could not be found. Please try again later.",
+    "@dashboard_user_not_found_error_message": {
+        "description": "User not found error message on the dashboard page"
+    },
+    "dashboard_greeting": "Hi",
+    "@dashboard_greeting": {
+        "description": "Welcoming the user on the dashboard page"
+    },
+    "dashboard_recommendations_title": "Number of recommendations",
+    "@dashboard_recommendations_title": {
+        "description": "Title for the recommendation statistics on the dashboard page"
+    },
+    "dashboard_recommendations_loading_error_title": "Loading recommendations failed",
+    "@dashboard_recommendations_loading_error_title": {
+        "description": "Loading error for the recommendation statistics on the dashboard page"
+    },
+    "dashboard_recommendations_chart_no_recommendations": "No recommendations available",
+    "@dashboard_recommendations_chart_no_recommendations": {
+        "description": "Message in case there are no recommendations for the recommendation statistics on the dashboard page"
+    },
+    "dashboard_recommendations_all_promoter": "All",
+    "@dashboard_recommendations_all_promoter": {
+        "description": "Dropdown entry for displaying all recommendations of all promoters for the recommendation statistics on the dashboard page"
+    },
+    "dashboard_recommendations_missing_promoter_name": "Unkown promoter",
+    "@dashboard_recommendations_missing_promoter_name": {
+        "description": "Dropdown entry in case the promoter name is missing for the referral statistics on the dashboard page"
     }
 }

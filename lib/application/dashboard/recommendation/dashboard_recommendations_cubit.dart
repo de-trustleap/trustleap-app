@@ -50,5 +50,4 @@ class DashboardRecommendationsCubit
   }
 }
 
-// TODO: Tests
 // TODO: Localizations

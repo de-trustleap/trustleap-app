@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations.dart';
@@ -23,22 +24,23 @@ class _DashboardOverviewState extends State<DashboardOverview> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
     final cubit = Modular.get<DashboardOverviewCubit>();
     return BlocBuilder<DashboardOverviewCubit, DashboardOverviewState>(
       bloc: cubit,
       builder: (context, state) {
         if (state is DashboardOverviewGetUserFailureState) {
           return ErrorView(
-              title: "User nicht gefunden",
-              message:
-                  "Der aktuelle Nutzer wurde nicht gefunden. Bitte versuche es später nochmal.",
+              title: localization.dashboard_user_not_found_error_title,
+              message: localization.dashboard_user_not_found_error_message,
               callback: () =>
                   {Modular.get<DashboardOverviewCubit>().getUser()});
         } else if (state is DashboardOverviewGetUserSuccessState) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Hi ${state.user.firstName}!",
+              Text(
+                  "${localization.dashboard_greeting} ${state.user.firstName}!",
                   style: themeData.textTheme.titleLarge!
                       .copyWith(fontSize: 40, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
