@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_c
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations_chart.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations_helper.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/underlined_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,13 +24,15 @@ class DashboardRecommendations extends StatefulWidget {
 class _DashboardRecommendationsState extends State<DashboardRecommendations> {
   TimePeriod _selectedTimePeriod = TimePeriod.week;
   int? _selectedStatusLevel = 1;
+  String? _selectedPromoterId; // null = "Alle"
 
   @override
   void initState() {
     super.initState();
 
     if (widget.user.role == Role.company) {
-      Modular.get<DashboardRecommendationsCubit>().getRecommendationsCompany();
+      Modular.get<DashboardRecommendationsCubit>()
+          .getRecommendationsCompany(widget.user.id.value);
     } else {
       Modular.get<DashboardRecommendationsCubit>()
           .getRecommendationsPromoter(widget.user.id.value);
@@ -51,7 +54,9 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Row(
+          Wrap(
+            spacing: 24,
+            runSpacing: 16,
             children: [
               UnderlinedDropdown<TimePeriod>(
                 value: _selectedTimePeriod,
@@ -69,7 +74,6 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                   }
                 },
               ),
-              const SizedBox(width: 24),
               UnderlinedDropdown<int>(
                 value: _selectedStatusLevel,
                 items: _getStatusLevelItems(),
@@ -79,6 +83,27 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                   });
                 },
               ),
+              if (widget.user.role == Role.company)
+                BlocBuilder<DashboardRecommendationsCubit,
+                    DashboardRecommendationsState>(
+                  bloc: cubit,
+                  builder: (context, state) {
+                    if (state is DashboardRecommendationsGetRecosSuccessState &&
+                        state.promoterRecommendations != null) {
+                      return UnderlinedDropdown<String?>(
+                        value: _selectedPromoterId,
+                        items: DashboardRecommendationsHelper.getPromoterItems(
+                            state.promoterRecommendations!),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedPromoterId = newValue;
+                          });
+                        },
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
             ],
           ),
           const SizedBox(height: 16),
@@ -88,7 +113,18 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
             builder: (context, state) {
               if (state is DashboardRecommendationsGetRecosSuccessState) {
                 return DashboardRecommendationsChart(
-                  recommendations: state.recommendation,
+                  recommendations:
+                      DashboardRecommendationsHelper.getFilteredRecommendations(
+                    state: state,
+                    selectedPromoterId: _selectedPromoterId,
+                    userRole: widget.user.role ?? Role.none,
+                  ),
+                  timePeriod: _selectedTimePeriod,
+                  statusLevel: _selectedStatusLevel,
+                );
+              } else if (state is DashboardRecommendationsGetRecosNotFoundFailureState) {
+                return DashboardRecommendationsChart(
+                  recommendations: [],
                   timePeriod: _selectedTimePeriod,
                   statusLevel: _selectedStatusLevel,
                 );
@@ -99,7 +135,8 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                     message: "",
                     callback: () => {
                           widget.user.role == Role.company
-                              ? cubit.getRecommendationsCompany()
+                              ? cubit.getRecommendationsCompany(
+                                  widget.user.id.value)
                               : cubit.getRecommendationsPromoter(
                                   widget.user.id.value)
                         });

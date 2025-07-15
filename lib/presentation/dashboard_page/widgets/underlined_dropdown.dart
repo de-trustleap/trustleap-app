@@ -16,30 +16,30 @@ class UnderlinedDropdown<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: themeData.colorScheme.secondary,
-            width: 1.0,
-          ),
-        ),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<T>(
-          value: value,
-          selectedItemBuilder: (context) {
-            return items.map((item) {
-              final itemWidget = item.child;
-              String displayText = "";
+    return DropdownButtonHideUnderline(
+      child: DropdownButton<T>(
+        value: value,
+        selectedItemBuilder: (context) {
+          return items.map((item) {
+            final itemWidget = item.child;
+            String displayText = "";
 
-              if (itemWidget is Text) {
-                displayText = itemWidget.data ?? "";
-              } else {
-                displayText = itemWidget.toString();
-              }
+            if (itemWidget is Text) {
+              displayText = itemWidget.data ?? "";
+            } else {
+              displayText = itemWidget.toString();
+            }
 
-              return Row(
+            return Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: themeData.colorScheme.secondary,
+                    width: 1.0,
+                  ),
+                ),
+              ),
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
@@ -55,15 +55,15 @@ class UnderlinedDropdown<T> extends StatelessWidget {
                     ),
                   ),
                 ],
-              );
-            }).toList();
-          },
-          items: items,
-          onChanged: onChanged,
-          icon: const SizedBox.shrink(),
-          isDense: true,
-          style: themeData.textTheme.bodyMedium,
-        ),
+              ),
+            );
+          }).toList();
+        },
+        items: items,
+        onChanged: onChanged,
+        icon: const SizedBox.shrink(),
+        isDense: true,
+        style: themeData.textTheme.bodyMedium,
       ),
     );
   }

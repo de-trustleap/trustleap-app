@@ -121,6 +121,7 @@ class RecommendationRepositoryImplementation
       });
       return right(recoItems);
     } on FirebaseException catch (e) {
+      print("THE ERROR: $e");
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
@@ -365,8 +366,8 @@ class RecommendationRepositoryImplementation
   }
 
   @override
-  Future<Either<DatabaseFailure, List<PromoterRecommendations>>> getRecommendationsCompany(
-      String userID) async {
+  Future<Either<DatabaseFailure, List<PromoterRecommendations>>>
+      getRecommendationsCompany(String userID) async {
     final recoCollection = firestore.collection("recommendations");
     final usersRecosCollection = firestore.collection("usersRecommendations");
     final userCollection = firestore.collection("users");
@@ -382,13 +383,15 @@ class RecommendationRepositoryImplementation
     }
     try {
       // 1. GET REGISTERED PROMOTERS
-      if (user.registeredPromoterIDs == null || user.registeredPromoterIDs!.isEmpty) {
+      if (user.registeredPromoterIDs == null ||
+          user.registeredPromoterIDs!.isEmpty) {
         return right([]);
       }
 
       final promoterIDs = user.registeredPromoterIDs!;
       final chunks = promoterIDs.slices(10);
-      final List<QuerySnapshot<Map<String, dynamic>>> promoterQuerySnapshots = [];
+      final List<QuerySnapshot<Map<String, dynamic>>> promoterQuerySnapshots =
+          [];
       final List<CustomUser> promoters = [];
 
       // Fetch all registered promoters
@@ -419,8 +422,10 @@ class RecommendationRepositoryImplementation
 
       if (allUserRecoIDs.isEmpty) {
         // All promoters without recommendations
-        final promotersWithoutRecos = promoters.map((promoter) => 
-            PromoterRecommendations(promoter: promoter, recommendations: [])).toList();
+        final promotersWithoutRecos = promoters
+            .map((promoter) => PromoterRecommendations(
+                promoter: promoter, recommendations: []))
+            .toList();
         return right(promotersWithoutRecos);
       }
 
@@ -434,10 +439,12 @@ class RecommendationRepositoryImplementation
             .orderBy("recommendationID", descending: true)
             .where(FieldPath.documentId, whereIn: chunk)
             .get();
-        
+
         final List<UserRecommendation> chunkUserRecos = [];
         for (var doc in snapshot.docs) {
-          final userRecoModel = UserRecommendationModel.fromFirestore(doc.data(), doc.id).toDomain();
+          final userRecoModel =
+              UserRecommendationModel.fromFirestore(doc.data(), doc.id)
+                  .toDomain();
           chunkUserRecos.add(userRecoModel);
           if (userRecoModel.recoID != null) {
             allRecoIDsToFetch.add(userRecoModel.recoID!);
@@ -455,15 +462,17 @@ class RecommendationRepositoryImplementation
       final Map<String, RecommendationItem> recoMap = {};
       if (allRecoIDsToFetch.isNotEmpty) {
         final recoChunks = allRecoIDsToFetch.toList().slices(10);
-        
+
         final recoFutures = recoChunks.map((chunk) async {
           final snapshot = await recoCollection
               .where(FieldPath.documentId, whereIn: chunk)
               .get();
-          
+
           final Map<String, RecommendationItem> chunkRecoMap = {};
           for (var doc in snapshot.docs) {
-            final recoItem = RecommendationItemModel.fromFirestore(doc.data(), doc.id).toDomain();
+            final recoItem =
+                RecommendationItemModel.fromFirestore(doc.data(), doc.id)
+                    .toDomain();
             chunkRecoMap[doc.id] = recoItem;
           }
           return chunkRecoMap;
@@ -477,16 +486,18 @@ class RecommendationRepositoryImplementation
 
       // 4. GROUP AND COMBINE DATA PER PROMOTER
       final Map<String, List<UserRecommendation>> promoterRecoMap = {};
-      
+
       // Group UserRecommendations by promoter
       for (final promoter in promoters) {
         final promoterUserRecos = allUserRecos
-            .where((userReco) => promoter.recommendationIDs?.contains(userReco.id.value) ?? false)
+            .where((userReco) =>
+                promoter.recommendationIDs?.contains(userReco.id.value) ??
+                false)
             .map((userReco) {
-              final recommendation = userReco.recoID != null ? recoMap[userReco.recoID!] : null;
-              return userReco.copyWith(recommendation: recommendation);
-            })
-            .toList();
+          final recommendation =
+              userReco.recoID != null ? recoMap[userReco.recoID!] : null;
+          return userReco.copyWith(recommendation: recommendation);
+        }).toList();
 
         // Sort by creation date
         promoterUserRecos.sort((a, b) {
@@ -498,7 +509,8 @@ class RecommendationRepositoryImplementation
       }
 
       // 5. CREATE FINAL RESULT
-      final List<PromoterRecommendations> promotersWithRecommendations = promoters.map((promoter) {
+      final List<PromoterRecommendations> promotersWithRecommendations =
+          promoters.map((promoter) {
         final recommendations = promoterRecoMap[promoter.id.value] ?? [];
         return PromoterRecommendations(
           promoter: promoter,
