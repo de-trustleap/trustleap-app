@@ -2143,4 +2143,8 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get dashboard_recommendations_missing_promoter_name =>
       'Unbekannter Promoter';
+
+  @override
+  String get dashboard_recommendations_own_recommendations =>
+      'Eigene Empfehlungen';
 }

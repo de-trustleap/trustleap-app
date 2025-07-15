@@ -57,7 +57,7 @@ class RecommendationRepositoryImplementation
       if (!userDoc.exists || userDoc.data() == null) {
         return left(NotFoundFailure());
       }
-      user = UserModel.fromMap(userDoc.data()!).toDomain();
+      user = UserModel.fromFirestore(userDoc.data()!, userDoc.id).toDomain();
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
@@ -199,7 +199,7 @@ class RecommendationRepositoryImplementation
       if (!userDoc.exists || userDoc.data() == null) {
         return left(NotFoundFailure());
       }
-      user = UserModel.fromMap(userDoc.data()!).toDomain();
+      user = UserModel.fromFirestore(userDoc.data()!, userDoc.id).toDomain();
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
@@ -376,44 +376,52 @@ class RecommendationRepositoryImplementation
       if (!userDoc.exists || userDoc.data() == null) {
         return left(NotFoundFailure());
       }
-      user = UserModel.fromMap(userDoc.data()!).toDomain();
+      user = UserModel.fromFirestore(userDoc.data()!, userDoc.id).toDomain();
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
     try {
-      // 1. GET REGISTERED PROMOTERS
-      if (user.registeredPromoterIDs == null ||
-          user.registeredPromoterIDs!.isEmpty) {
-        return right([]);
-      }
-
-      final promoterIDs = user.registeredPromoterIDs!;
-      final chunks = promoterIDs.slices(10);
-      final List<QuerySnapshot<Map<String, dynamic>>> promoterQuerySnapshots =
-          [];
+      // 1. GET REGISTERED PROMOTERS AND COMPANY USER'S OWN RECOMMENDATIONS
       final List<CustomUser> promoters = [];
+      
+      // Add company user as promoter if they have recommendations
+      if (user.recommendationIDs != null && user.recommendationIDs!.isNotEmpty) {
+        promoters.add(user);
+      }
+      
+      // Add registered promoters
+      if (user.registeredPromoterIDs != null && user.registeredPromoterIDs!.isNotEmpty) {
+        final promoterIDs = user.registeredPromoterIDs!;
+        final chunks = promoterIDs.slices(10);
+        final List<QuerySnapshot<Map<String, dynamic>>> promoterQuerySnapshots = [];
 
-      // Fetch all registered promoters
-      await Future.forEach(chunks, (element) async {
-        final document = await userCollection
-            .orderBy("firstName", descending: true)
-            .where(FieldPath.documentId, whereIn: element)
-            .get();
-        promoterQuerySnapshots.add(document);
-      });
+        // Fetch all registered promoters
+        await Future.forEach(chunks, (element) async {
+          final document = await userCollection
+              .orderBy("firstName", descending: true)
+              .where(FieldPath.documentId, whereIn: element)
+              .get();
+          promoterQuerySnapshots.add(document);
+        });
 
-      for (var document in promoterQuerySnapshots) {
-        for (var snapshot in document.docs) {
-          var doc = snapshot.data();
-          var promoter = UserModel.fromFirestore(doc, snapshot.id).toDomain();
-          // Only include active promoters
-          if (promoter.deletesAt == null) {
-            promoters.add(promoter);
+        for (var document in promoterQuerySnapshots) {
+          for (var snapshot in document.docs) {
+            var doc = snapshot.data();
+            var promoter = UserModel.fromFirestore(doc, snapshot.id).toDomain();
+            // Only include active promoters
+            if (promoter.deletesAt == null) {
+              promoters.add(promoter);
+            }
           }
         }
       }
 
-      // 2. BATCH FETCH ALL USERRECOMMENDATIONS FROM ALL PROMOTERS
+      // If no promoters and no own recommendations, return empty list
+      if (promoters.isEmpty) {
+        return right([]);
+      }
+
+      // 2. BATCH FETCH ALL USERRECOMMENDATIONS FROM ALL PROMOTERS (INCLUDING COMPANY USER)
       final allUserRecoIDs = promoters
           .expand((promoter) => promoter.recommendationIDs ?? [])
           .toSet()

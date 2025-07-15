@@ -9,26 +9,66 @@ class DashboardRecommendationsHelper {
   /// Creates dropdown items for promoter selection including an "Alle" option
   static List<DropdownMenuItem<String?>> getPromoterItems(
       List<PromoterRecommendations> promoterRecommendations,
-      AppLocalizations localization) {
+      AppLocalizations localization,
+      String? companyUserId) {
     final items = <DropdownMenuItem<String?>>[];
 
-    // "Alle" Option
+    // "Alle" Option (always first)
     items.add(DropdownMenuItem<String?>(
       value: null,
       child: Text(localization.dashboard_recommendations_all_promoter),
     ));
 
-    // Promoter Options
+    // Separate company user and other promoters
+    PromoterRecommendations? companyUserEntry;
+    final List<PromoterRecommendations> otherPromoters = [];
+
     for (final promoterRec in promoterRecommendations) {
+      if (companyUserId != null &&
+          promoterRec.promoter.id.value == companyUserId) {
+        companyUserEntry = promoterRec;
+      } else {
+        otherPromoters.add(promoterRec);
+      }
+    }
+
+    // Add company user entry if exists (second position)
+    if (companyUserEntry != null) {
+      items.add(DropdownMenuItem<String?>(
+        value: companyUserEntry.promoter.id.value,
+        child: Text(localization.dashboard_recommendations_own_recommendations),
+      ));
+    }
+
+    // Sort other promoters alphabetically by display name
+    otherPromoters.sort((a, b) {
+      final nameA =
+          "${a.promoter.firstName ?? ''} ${a.promoter.lastName ?? ''}".trim();
+      final nameB =
+          "${b.promoter.firstName ?? ''} ${b.promoter.lastName ?? ''}".trim();
+
+      final displayNameA = nameA.isNotEmpty
+          ? nameA
+          : localization.dashboard_recommendations_missing_promoter_name;
+      final displayNameB = nameB.isNotEmpty
+          ? nameB
+          : localization.dashboard_recommendations_missing_promoter_name;
+
+      return displayNameA.compareTo(displayNameB);
+    });
+
+    // Add sorted promoters
+    for (final promoterRec in otherPromoters) {
       final promoter = promoterRec.promoter;
-      final displayName =
+      final name =
           "${promoter.firstName ?? ''} ${promoter.lastName ?? ''}".trim();
+      final displayName = name.isNotEmpty
+          ? name
+          : localization.dashboard_recommendations_missing_promoter_name;
 
       items.add(DropdownMenuItem<String?>(
         value: promoter.id.value,
-        child: Text(displayName.isNotEmpty
-            ? displayName
-            : localization.dashboard_recommendations_missing_promoter_name),
+        child: Text(displayName),
       ));
     }
 

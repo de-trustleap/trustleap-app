@@ -94,7 +94,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                       return UnderlinedDropdown<String?>(
                         value: _selectedPromoterId,
                         items: DashboardRecommendationsHelper.getPromoterItems(
-                            state.promoterRecommendations!, localization),
+                            state.promoterRecommendations!, localization, widget.user.id.value),
                         onChanged: (String? newValue) {
                           setState(() {
                             _selectedPromoterId = newValue;

@@ -2429,5 +2429,9 @@
     "dashboard_recommendations_missing_promoter_name": "Unkown promoter",
     "@dashboard_recommendations_missing_promoter_name": {
         "description": "Dropdown entry in case the promoter name is missing for the referral statistics on the dashboard page"
+    },
+    "dashboard_recommendations_own_recommendations": "Own recommendations",
+    "@dashboard_recommendations_own_recommendations": {
+        "description": "Dropdown entry for the company's own recommendations for the recommendation statistics on the dashboard page"
     }
 }

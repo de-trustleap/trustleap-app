@@ -2429,5 +2429,9 @@
     "dashboard_recommendations_missing_promoter_name": "Unbekannter Promoter",
     "@dashboard_recommendations_missing_promoter_name": {
         "description": "Dropdown Eintrag für den Fall dass der Promoter Name fehlt für die Empfehlungsstatistik auf der Dashboard Seite"
+    },
+    "dashboard_recommendations_own_recommendations": "Eigene Empfehlungen",
+    "@dashboard_recommendations_own_recommendations": {
+        "description": "Dropdown Eintrag für die eigenen Empfehlungen des Unternehmens für die Empfehlungsstatistik auf der Dashboard Seite"
     }
 }

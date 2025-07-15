@@ -16,6 +16,9 @@ class MockAppLocalizations extends Mock implements AppLocalizations {
   
   @override
   String get dashboard_recommendations_missing_promoter_name => "Unbekannter Promoter";
+  
+  @override
+  String get dashboard_recommendations_own_recommendations => "Eigene Empfehlungen";
 }
 
 void main() {
@@ -31,7 +34,7 @@ void main() {
         final promoterRecommendations = <PromoterRecommendations>[];
 
         final result = DashboardRecommendationsHelper.getPromoterItems(
-            promoterRecommendations, mockLocalizations);
+            promoterRecommendations, mockLocalizations, null);
 
         expect(result.length, equals(1));
         expect(result.first.value, isNull);
@@ -57,7 +60,7 @@ void main() {
         ];
 
         final result = DashboardRecommendationsHelper.getPromoterItems(
-            promoterRecommendations, mockLocalizations);
+            promoterRecommendations, mockLocalizations, null);
 
         expect(result.length, equals(3)); // "Alle" + 2 promoters
         expect(result[1].value, equals("1"));
@@ -78,7 +81,7 @@ void main() {
         ];
 
         final result = DashboardRecommendationsHelper.getPromoterItems(
-            promoterRecommendations, mockLocalizations);
+            promoterRecommendations, mockLocalizations, null);
 
         expect(result.length, equals(2));
         expect((result[1].child as Text).data, equals("Unbekannter Promoter"));
@@ -96,7 +99,7 @@ void main() {
         ];
 
         final result = DashboardRecommendationsHelper.getPromoterItems(
-            promoterRecommendations, mockLocalizations);
+            promoterRecommendations, mockLocalizations, null);
 
         expect(result.length, equals(2));
         expect((result[1].child as Text).data, equals("Unbekannter Promoter"));
@@ -120,11 +123,36 @@ void main() {
         ];
 
         final result = DashboardRecommendationsHelper.getPromoterItems(
-            promoterRecommendations, mockLocalizations);
+            promoterRecommendations, mockLocalizations, null);
 
         expect(result.length, equals(3));
         expect((result[1].child as Text).data, equals("John"));
         expect((result[2].child as Text).data, equals("Doe"));
+      });
+
+      test("should show 'Eigene Empfehlungen' for company user", () {
+        final companyUser = CustomUser(
+          id: UniqueID.fromUniqueString("company123"),
+          firstName: "Company",
+          lastName: "User",
+        );
+        final promoter = CustomUser(
+          id: UniqueID.fromUniqueString("promoter456"),
+          firstName: "John",
+          lastName: "Doe",
+        );
+
+        final promoterRecommendations = [
+          PromoterRecommendations(promoter: companyUser, recommendations: []),
+          PromoterRecommendations(promoter: promoter, recommendations: []),
+        ];
+
+        final result = DashboardRecommendationsHelper.getPromoterItems(
+            promoterRecommendations, mockLocalizations, "company123");
+
+        expect(result.length, equals(3)); // "Alle" + company user + promoter
+        expect((result[1].child as Text).data, equals("Eigene Empfehlungen"));
+        expect((result[2].child as Text).data, equals("John Doe"));
       });
     });
 

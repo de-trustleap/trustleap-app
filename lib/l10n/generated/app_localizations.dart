@@ -3697,6 +3697,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unkown promoter'**
   String get dashboard_recommendations_missing_promoter_name;
+
+  /// Dropdown entry for the company's own recommendations for the recommendation statistics on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'Own recommendations'**
+  String get dashboard_recommendations_own_recommendations;
 }
 
 class _AppLocalizationsDelegate
