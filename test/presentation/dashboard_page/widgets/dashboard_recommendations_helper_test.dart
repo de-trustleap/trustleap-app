@@ -1,4 +1,4 @@
-import "package:finanzbegleiter/application/dashboard/overview/cubit/dashboard_recommendations_cubit.dart";
+import "package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart";
 import "package:finanzbegleiter/constants.dart";
 import "package:finanzbegleiter/domain/entities/id.dart";
 import "package:finanzbegleiter/domain/entities/promoter_recommendations.dart";
@@ -121,18 +121,36 @@ void main() {
         recommendations1 = [
           UserRecommendation(
             id: UniqueID.fromUniqueString("rec1"),
+            recoID: "reco1",
             userID: "user1",
+            priority: RecommendationPriority.medium,
+            isFavorite: false,
+            notes: "Test",
+            notesLastEdited: null,
+            recommendation: null,
           ),
           UserRecommendation(
             id: UniqueID.fromUniqueString("rec2"),
+            recoID: "reco2",
             userID: "user1",
+            priority: RecommendationPriority.medium,
+            isFavorite: false,
+            notes: "Test",
+            notesLastEdited: null,
+            recommendation: null,
           ),
         ];
 
         recommendations2 = [
           UserRecommendation(
             id: UniqueID.fromUniqueString("rec3"),
+            recoID: "reco3",
             userID: "user1",
+            priority: RecommendationPriority.medium,
+            isFavorite: false,
+            notes: "Test",
+            notesLastEdited: null,
+            recommendation: null,
           ),
         ];
 

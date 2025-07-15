@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/dashboard/overview/cubit/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -122,7 +122,8 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                   timePeriod: _selectedTimePeriod,
                   statusLevel: _selectedStatusLevel,
                 );
-              } else if (state is DashboardRecommendationsGetRecosNotFoundFailureState) {
+              } else if (state
+                  is DashboardRecommendationsGetRecosNotFoundFailureState) {
                 return DashboardRecommendationsChart(
                   recommendations: [],
                   timePeriod: _selectedTimePeriod,

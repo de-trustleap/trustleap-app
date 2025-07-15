@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/application/dashboard/overview/cubit/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
@@ -24,7 +24,8 @@ class DashboardRecommendationsHelper {
 
       items.add(DropdownMenuItem<String?>(
         value: promoter.id.value,
-        child: Text(displayName.isNotEmpty ? displayName : "Unbekannter Promoter"),
+        child:
+            Text(displayName.isNotEmpty ? displayName : "Unbekannter Promoter"),
       ));
     }
 

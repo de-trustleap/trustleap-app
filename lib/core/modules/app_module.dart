@@ -6,7 +6,7 @@ import 'package:finanzbegleiter/application/authentication/auth_observer/auth_ob
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart';
-import 'package:finanzbegleiter/application/dashboard/overview/cubit/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';

@@ -5610,6 +5610,160 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_hierarchy_button_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_button_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_no_elements => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_no_elements),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_no_elements),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_section_element =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_section_element),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_section_element),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_text => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_text),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_image => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_image),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_image),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_button => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_button),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_anchor_button => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_anchor_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_anchor_button),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_container => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_container),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_container),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_row => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_row),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_row),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_column => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_column),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_column),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_icon => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_icon),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_icon),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_contact_form => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_contact_form),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_contact_form),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_footer => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_footer),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_footer),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_video_player => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_video_player),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_video_player),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_mobile_not_supported_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_mobile_not_supported_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_mobile_not_supported_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_mobile_not_supported_subtitle => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_mobile_not_supported_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_mobile_not_supported_subtitle),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,

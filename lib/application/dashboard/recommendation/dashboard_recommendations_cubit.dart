@@ -49,3 +49,6 @@ class DashboardRecommendationsCubit
             recommendation: recommendations)));
   }
 }
+
+// TODO: Tests
+// TODO: Localizations

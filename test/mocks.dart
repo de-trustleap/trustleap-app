@@ -21,6 +21,8 @@ import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dar
 import 'package:finanzbegleiter/application/legals/legals_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
@@ -29,6 +31,7 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 import 'package:finanzbegleiter/domain/repositories/legals_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/dashboard_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
@@ -81,6 +84,9 @@ import 'package:mockito/annotations.dart';
   AdminRegistrationCodeCubit,
   PagebuilderConfigMenuCubit,
   PagebuilderSelectionCubit,
+  DashboardOverviewCubit,
+  DashboardRecommendationsCubit,
+  DashboardRepository,
   BuildContext,
   FirebaseAuth,
   FirebaseFirestore,
