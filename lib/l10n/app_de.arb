@@ -2397,5 +2397,68 @@
     "pagebuilder_mobile_not_supported_subtitle": "Der PageBuilder ist nur auf Desktop-Geräten verfügbar. Bitte öffnen Sie diese Seite auf einem Computer oder Laptop.\n\n Bist du schon auf einem Computer dann ziehe das Browserfenster größer.",
     "@pagebuilder_mobile_not_supported_subtitle": {
         "description": "Untertitel der Mobile not Supported View im Pagebuilder"
+    },
+    "dashboard_user_not_found_error_title": "Nutzer nicht gefunden",
+    "@dashboard_user_not_found_error_title": {
+        "description": "Nutzer nicht gefunden Fehler Titel auf der Dashboard Seite"
+    },
+    "dashboard_user_not_found_error_message": "Der aktuelle Nutzer wurde nicht gefunden. Bitte versuche es später nochmal.",
+    "@dashboard_user_not_found_error_message": {
+        "description": "Nutzer nicht gefunden Fehler Nachricht auf der Dashboard Seite"
+    },
+    "dashboard_greeting": "Hi",
+    "@dashboard_greeting": {
+        "description": "Begrüßung des Nutzers auf der Dashboard Seite"
+    },
+    "dashboard_recommendations_title": "Anzahl der Empfehlungen",
+    "@dashboard_recommendations_title": {
+        "description": "Titel für die Empfehlungsstatistik auf der Dashboard Seite"
+    },
+    "dashboard_recommendations_loading_error_title": "Laden der Empfehlungen fehlgeschlagen",
+    "@dashboard_recommendations_loading_error_title": {
+        "description": "Ladefehler für die Empfehlungsstatistik auf der Dashboard Seite"
+    },
+    "dashboard_recommendations_chart_no_recommendations": "Keine Empfehlungen vorhanden",
+    "@dashboard_recommendations_chart_no_recommendations": {
+        "description": "Nachricht für den Fall dass keine Empfehlungen vorhanden sind für die Empfehlungsstatistik auf der Dashboard Seite"
+    },
+    "dashboard_recommendations_all_promoter": "Alle",
+    "@dashboard_recommendations_all_promoter": {
+        "description": "Dropdown Eintrag für die Anzeige aller Empfehlungen aller Promoter für die Empfehlungsstatistik auf der Dashboard Seite"
+    },
+    "dashboard_recommendations_missing_promoter_name": "Unbekannter Promoter",
+    "@dashboard_recommendations_missing_promoter_name": {
+        "description": "Dropdown Eintrag für den Fall dass der Promoter Name fehlt für die Empfehlungsstatistik auf der Dashboard Seite"
+    },
+    "dashboard_recommendations_own_recommendations": "Eigene Empfehlungen",
+    "@dashboard_recommendations_own_recommendations": {
+        "description": "Dropdown Eintrag für die eigenen Empfehlungen des Unternehmens für die Empfehlungsstatistik auf der Dashboard Seite"
+    },
+    "dashboard_recommendations_last_24_hours": "Letzte 24 Stunden: {count, plural, =0{0 Empfehlungen} =1{1 Empfehlung} other{{count} Empfehlungen}}",
+    "@dashboard_recommendations_last_24_hours": {
+        "description": "Zeigt die Anzahl der Empfehlungen in den letzten 24 Stunden an",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_recommendations_last_7_days": "Letzte 7 Tage: {count, plural, =0{0 Empfehlungen} =1{1 Empfehlung} other{{count} Empfehlungen}}",
+    "@dashboard_recommendations_last_7_days": {
+        "description": "Zeigt die Anzahl der Empfehlungen in den letzten 7 Tagen an",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_recommendations_last_month": "Letzter Monat: {count, plural, =0{0 Empfehlungen} =1{1 Empfehlung} other{{count} Empfehlungen}}",
+    "@dashboard_recommendations_last_month": {
+        "description": "Zeigt die Anzahl der Empfehlungen im letzten Monat an",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     }
 }

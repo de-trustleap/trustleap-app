@@ -2,7 +2,10 @@ import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
+import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -445,6 +448,72 @@ void main() {
       final result = await mockRecoRepo.setNotes(userRecommendation);
       // Then
       verify(mockRecoRepo.setNotes(userRecommendation));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
+
+  group("RecommendationRepositoryImplementation_getRecommendationsCompany", () {
+    final userID = "1";
+    final date = DateTime.now();
+    final recommendation = RecommendationItem(
+        id: "1",
+        name: "Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: StatusLevel.contactFormSent,
+        statusTimestamps: {0: date, 1: date, 2: date},
+        promoterImageDownloadURL: null);
+    final userRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: "1",
+        priority: RecommendationPriority.medium,
+        isFavorite: false,
+        notes: "Test",
+        notesLastEdited: null,
+        recommendation: recommendation);
+    final promoterRecommendations = [
+      PromoterRecommendations(
+          promoter: CustomUser(
+              id: UniqueID.fromUniqueString("2"),
+              email: "test@example.com",
+              firstName: "Test",
+              lastName: "User",
+              role: Role.promoter,
+              place: "Test City",
+              recommendationIDs: ["1"],
+              createdAt: date),
+          recommendations: [userRecommendation])
+    ];
+
+    test("should return promoter recommendations when call was successful", () async {
+      // Given
+      final expectedResult = right(promoterRecommendations);
+      when(mockRecoRepo.getRecommendationsCompany(userID))
+          .thenAnswer((_) async => right(promoterRecommendations));
+      // When
+      final result = await mockRecoRepo.getRecommendationsCompany(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendationsCompany(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockRecoRepo.getRecommendationsCompany(userID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockRecoRepo.getRecommendationsCompany(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendationsCompany(userID));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });

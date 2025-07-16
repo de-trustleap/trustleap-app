@@ -264,6 +264,3 @@ class _LandingPageCreatorMultiPageFormState
         ));
   }
 }
-
-// TODO: TESTS (FERTIG)
-// TODO: LOCALIZATION

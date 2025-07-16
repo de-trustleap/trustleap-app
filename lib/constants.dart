@@ -91,3 +91,12 @@ enum PageBuilderSpacingType { padding, margin }
 enum LegalsType { privacyPolicy, termsAndCondition }
 
 enum LogLevel { debug, info, warn, error }
+
+enum TimePeriod {
+  day("Tag"),
+  week("Woche"),
+  month("Monat");
+
+  final String value;
+  const TimePeriod(this.value);
+}

@@ -2073,4 +2073,72 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pagebuilder_mobile_not_supported_subtitle =>
       'The PageBuilder is only available on desktop devices. Please open this page on a computer or laptop.\n\n If you\'re already on a computer, resize the browser window.';
+
+  @override
+  String get dashboard_user_not_found_error_title => 'User not found';
+
+  @override
+  String get dashboard_user_not_found_error_message =>
+      'The current user could not be found. Please try again later.';
+
+  @override
+  String get dashboard_greeting => 'Hi';
+
+  @override
+  String get dashboard_recommendations_title => 'Number of recommendations';
+
+  @override
+  String get dashboard_recommendations_loading_error_title =>
+      'Loading recommendations failed';
+
+  @override
+  String get dashboard_recommendations_chart_no_recommendations =>
+      'No recommendations available';
+
+  @override
+  String get dashboard_recommendations_all_promoter => 'All';
+
+  @override
+  String get dashboard_recommendations_missing_promoter_name =>
+      'Unkown promoter';
+
+  @override
+  String get dashboard_recommendations_own_recommendations =>
+      'Own recommendations';
+
+  @override
+  String dashboard_recommendations_last_24_hours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count recommendations',
+      one: '1 recommendation',
+      zero: '0 recommendations',
+    );
+    return 'Last 24 hours: $_temp0';
+  }
+
+  @override
+  String dashboard_recommendations_last_7_days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count recommendations',
+      one: '1 recommendation',
+      zero: '0 recommendations',
+    );
+    return 'Last 7 days: $_temp0';
+  }
+
+  @override
+  String dashboard_recommendations_last_month(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count recommendations',
+      one: '1 recommendation',
+      zero: '0 recommendations',
+    );
+    return 'Last month: $_temp0';
+  }
 }

@@ -21,7 +21,16 @@ class PagebuilderIconControl extends StatefulWidget {
 class _PagebuilderIconControlState extends State<PagebuilderIconControl> {
   Icon? _pickedIcon;
 
-  _pickIcon(ThemeData themeData, AppLocalizations localization) async {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialIcon != null) {
+      _pickedIcon = Icon(IconUtility.getIconFromHexCode(widget.initialIcon));
+    }
+  }
+
+  Future<void> _pickIcon(
+      ThemeData themeData, AppLocalizations localization) async {
     IconPickerIcon? icon = await showIconPicker(
       context,
       configuration: SinglePickerConfiguration(
@@ -42,12 +51,11 @@ class _PagebuilderIconControlState extends State<PagebuilderIconControl> {
     );
 
     if (icon != null) {
-      _pickedIcon = Icon(icon.data);
-    } else {
-      _pickedIcon = null;
+      setState(() {
+        _pickedIcon = Icon(icon.data);
+      });
+      widget.onSelected(icon.data.codePoint.toRadixString(16));
     }
-    setState(() {});
-    widget.onSelected(_pickedIcon?.icon?.codePoint.toRadixString(16));
   }
 
   @override
@@ -60,8 +68,11 @@ class _PagebuilderIconControlState extends State<PagebuilderIconControl> {
       children: [
         Text(widget.title, style: themeData.textTheme.bodySmall),
         Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Icon(IconUtility.getIconFromHexCode(widget.initialIcon),
-              size: 48, color: themeData.colorScheme.surfaceTint),
+          Icon(
+              _pickedIcon?.icon ??
+                  IconUtility.getIconFromHexCode(widget.initialIcon),
+              size: 48,
+              color: themeData.colorScheme.surfaceTint),
           const SizedBox(width: 16),
           IconButton(
             onPressed: () => _pickIcon(themeData, localization),
