@@ -85,8 +85,7 @@ void main() {
           recoID: "1",
           userID: userID,
           priority: RecommendationPriority.medium,
-          isFavorite: false,
-          notes: "Test",
+            notes: "Test",
           notesLastEdited: null,
           recommendation: recommendation)
     ];
@@ -170,7 +169,6 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: false,
         notes: "Test",
         notesLastEdited: null,
         recommendation: recommendation);
@@ -222,7 +220,6 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: false,
         notes: "Test",
         notesLastEdited: null,
         recommendation: recommendation);
@@ -321,19 +318,18 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: false,
         notes: "Test",
         notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
       final expectedResult = right(userRecommendation);
-      when(mockRecoRepo.setFavorite(userRecommendation))
+      when(mockRecoRepo.setFavorite(userRecommendation, "1"))
           .thenAnswer((_) async => right(userRecommendation));
       // When
-      final result = await mockRecoRepo.setFavorite(userRecommendation);
+      final result = await mockRecoRepo.setFavorite(userRecommendation, "1");
       // Then
-      verify(mockRecoRepo.setFavorite(userRecommendation));
+      verify(mockRecoRepo.setFavorite(userRecommendation, "1"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
@@ -341,12 +337,12 @@ void main() {
     test("should return failure when call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockRecoRepo.setFavorite(userRecommendation))
+      when(mockRecoRepo.setFavorite(userRecommendation, "1"))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockRecoRepo.setFavorite(userRecommendation);
+      final result = await mockRecoRepo.setFavorite(userRecommendation, "1");
       // Then
-      verify(mockRecoRepo.setFavorite(userRecommendation));
+      verify(mockRecoRepo.setFavorite(userRecommendation, "1"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
@@ -372,7 +368,6 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: false,
         notes: "Test",
         notesLastEdited: null,
         recommendation: recommendation);
@@ -422,7 +417,6 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: false,
         notes: "Test",
         notesLastEdited: null,
         recommendation: recommendation);
@@ -474,7 +468,6 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: false,
         notes: "Test",
         notesLastEdited: null,
         recommendation: recommendation);

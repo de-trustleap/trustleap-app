@@ -11,6 +11,7 @@ part 'recommendation_manager_state.dart';
 class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
   final RecommendationRepository recommendationRepo;
   final UserRepository userRepo;
+  
   RecommendationManagerCubit(this.recommendationRepo, this.userRepo)
       : super(RecommendationManagerInitial());
 
@@ -34,6 +35,38 @@ class RecommendationManagerCubit extends Cubit<RecommendationManagerState> {
       } else {
         emit(RecommendationGetRecosSuccessState(
             recoItems: recommendations,
+            showSetAppointmentSnackBar: false,
+            showFinishedSnackBar: false,
+            showFavoriteSnackbar: false,
+            showPrioritySnackbar: false,
+            showNotesSnackbar: false));
+      }
+    });
+  }
+
+  void getRecommendationsForCompany(String? userID) async {
+    if (userID == null) {
+      emit(RecommendationGetRecosFailureState(failure: NotFoundFailure()));
+      return;
+    }
+    emit(RecommendationManagerLoadingState());
+    final failureOrSuccess =
+        await recommendationRepo.getRecommendationsCompany(userID);
+    failureOrSuccess.fold((failure) {
+      if (failure is NotFoundFailure) {
+        emit(RecommendationGetRecosNoRecosState());
+      } else {
+        emit(RecommendationGetRecosFailureState(failure: failure));
+      }
+    }, (promoterRecommendations) {
+      if (promoterRecommendations.isEmpty) {
+        emit(RecommendationGetRecosNoRecosState());
+      } else {
+        final flattenedRecommendations = promoterRecommendations
+            .expand((promoterRec) => promoterRec.recommendations)
+            .toList();
+        emit(RecommendationGetRecosSuccessState(
+            recoItems: flattenedRecommendations,
             showSetAppointmentSnackBar: false,
             showFinishedSnackBar: false,
             showFavoriteSnackbar: false,

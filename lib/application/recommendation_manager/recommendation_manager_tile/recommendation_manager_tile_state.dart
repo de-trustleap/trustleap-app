@@ -38,16 +38,18 @@ class RecommendationSetStatusSuccessState extends RecommendationManagerTileState
   final bool? settedFavorite;
   final bool? settedPriority;
   final bool? settedNotes;
+  final DateTime timestamp;
 
   RecommendationSetStatusSuccessState(
       {required this.recommendation,
       this.settedFavorite,
       this.settedPriority,
-      this.settedNotes});
+      this.settedNotes})
+      : timestamp = DateTime.now();
 
   @override
   List<Object?> get props =>
-      [recommendation, settedFavorite, settedPriority, settedNotes];
+      [recommendation, settedFavorite, settedPriority, settedNotes, timestamp];
 }
 
 class RecommendationSetFinishedSuccessState
@@ -58,4 +60,39 @@ class RecommendationSetFinishedSuccessState
 
   @override
   List<Object?> get props => [];
+}
+
+class RecommendationManagerTileGetUserSuccessState
+    extends RecommendationManagerTileState with EquatableMixin {
+  final CustomUser user;
+
+  RecommendationManagerTileGetUserSuccessState({required this.user});
+
+  @override
+  List<Object?> get props => [user];
+}
+
+class RecommendationManagerTileGetUserFailureState
+    extends RecommendationManagerTileState with EquatableMixin {
+  final DatabaseFailure failure;
+
+  RecommendationManagerTileGetUserFailureState({required this.failure});
+
+  @override
+  List<Object?> get props => [failure];
+}
+
+class RecommendationManagerTileFavoriteUpdatedState
+    extends RecommendationManagerTileState with EquatableMixin {
+  final CustomUser user;
+  final UserRecommendation recommendation;
+  final DateTime timestamp;
+
+  RecommendationManagerTileFavoriteUpdatedState({
+    required this.user, 
+    required this.recommendation
+  }) : timestamp = DateTime.now();
+
+  @override
+  List<Object?> get props => [user, recommendation, timestamp];
 }

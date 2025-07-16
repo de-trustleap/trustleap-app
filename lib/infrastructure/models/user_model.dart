@@ -25,6 +25,7 @@ class UserModel extends Equatable {
   final List<String>? registeredPromoterIDs;
   final List<String>? landingPageIDs;
   final List<String>? recommendationIDs;
+  final List<String>? favoriteRecommendationIDs;
   final List<String>? archivedRecommendationIDs;
   final DateTime? deletesAt;
   final DateTime? lastUpdated;
@@ -50,6 +51,7 @@ class UserModel extends Equatable {
       this.registeredPromoterIDs,
       this.landingPageIDs,
       this.recommendationIDs,
+      this.favoriteRecommendationIDs,
       this.archivedRecommendationIDs,
       this.deletesAt,
       this.lastUpdated,
@@ -76,6 +78,7 @@ class UserModel extends Equatable {
       'registeredPromoterIDs': registeredPromoterIDs,
       'landingPageIDs': landingPageIDs,
       'recommendationIDs': recommendationIDs,
+      'favoriteRecommendationIDs': favoriteRecommendationIDs,
       'archivedRecommendationIDs': archivedRecommendationIDs,
       'deletesAt': deletesAt,
       'lastUpdated': lastUpdated,
@@ -121,6 +124,9 @@ class UserModel extends Equatable {
       recommendationIDs: map['recommendationIDs'] != null
           ? List<String>.from(map['recommendationIDs'])
           : null,
+      favoriteRecommendationIDs: map['favoriteRecommendationIDs'] != null
+          ? List<String>.from(map['favoriteRecommendationIDs'])
+          : null,
       archivedRecommendationIDs: map['archivedRecommendationIDs'] != null
           ? List<String>.from(map['archivedRecommendationIDs'])
           : null,
@@ -154,6 +160,7 @@ class UserModel extends Equatable {
     List<String>? registeredPromoterIDs,
     List<String>? landingPageIDs,
     List<String>? recommendationIDs,
+    List<String>? favoriteRecommendationIDs,
     List<String>? archivedRecommendationIDs,
     DateTime? deletesAt,
     DateTime? lastUpdated,
@@ -183,6 +190,8 @@ class UserModel extends Equatable {
           registeredPromoterIDs ?? this.registeredPromoterIDs,
       landingPageIDs: landingPageIDs ?? this.landingPageIDs,
       recommendationIDs: recommendationIDs ?? this.recommendationIDs,
+      favoriteRecommendationIDs:
+          favoriteRecommendationIDs ?? this.favoriteRecommendationIDs,
       archivedRecommendationIDs:
           archivedRecommendationIDs ?? this.archivedRecommendationIDs,
       deletesAt: deletesAt ?? this.deletesAt,
@@ -218,6 +227,7 @@ class UserModel extends Equatable {
         registeredPromoterIDs: registeredPromoterIDs,
         landingPageIDs: landingPageIDs,
         recommendationIDs: recommendationIDs,
+        favoriteRecommendationIDs: favoriteRecommendationIDs,
         archivedRecommendationIDs: archivedRecommendationIDs,
         deletesAt: deletesAt,
         lastUpdated: lastUpdated,
@@ -245,6 +255,7 @@ class UserModel extends Equatable {
         registeredPromoterIDs: user.registeredPromoterIDs,
         landingPageIDs: user.landingPageIDs,
         recommendationIDs: user.recommendationIDs,
+        favoriteRecommendationIDs: user.favoriteRecommendationIDs,
         archivedRecommendationIDs: user.archivedRecommendationIDs,
         deletesAt: user.deletesAt,
         lastUpdated: user.lastUpdated,
@@ -271,6 +282,7 @@ class UserModel extends Equatable {
         registeredPromoterIDs,
         landingPageIDs,
         recommendationIDs,
+        favoriteRecommendationIDs,
         archivedRecommendationIDs
       ];
 }

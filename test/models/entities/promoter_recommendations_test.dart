@@ -38,7 +38,6 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: false,
         notes: "Test",
         notesLastEdited: null,
         recommendation: recommendation);
@@ -141,7 +140,6 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: false,
         notes: "Test",
         notesLastEdited: null,
         recommendation: recommendation);

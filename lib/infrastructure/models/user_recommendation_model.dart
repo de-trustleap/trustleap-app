@@ -9,7 +9,6 @@ class UserRecommendationModel extends Equatable {
   final String? recoID;
   final String? userID;
   final String? priority;
-  final bool? isFavorite;
   final String? notes;
   final DateTime? notesLastEdited;
   final Map<String, dynamic>? recommendation;
@@ -19,7 +18,6 @@ class UserRecommendationModel extends Equatable {
       required this.recoID,
       required this.userID,
       required this.priority,
-      required this.isFavorite,
       required this.notes,
       required this.notesLastEdited,
       required this.recommendation});
@@ -29,7 +27,6 @@ class UserRecommendationModel extends Equatable {
       String? recoID,
       String? userID,
       String? priority,
-      bool? isFavorite,
       String? notes,
       DateTime? notesLastEdited,
       Map<String, dynamic>? recommendation}) {
@@ -38,7 +35,6 @@ class UserRecommendationModel extends Equatable {
         recoID: recoID ?? this.recoID,
         userID: userID ?? this.userID,
         priority: priority ?? this.priority,
-        isFavorite: isFavorite ?? this.isFavorite,
         notes: notes ?? this.notes,
         notesLastEdited: notesLastEdited ?? this.notesLastEdited,
         recommendation: recommendation ?? this.recommendation);
@@ -50,7 +46,6 @@ class UserRecommendationModel extends Equatable {
       'recoID': recoID,
       'userID': userID,
       'priority': priority,
-      'isFavorite': isFavorite,
       'notes': notes,
       'notesLastEdited': notesLastEdited?.toIso8601String()
     };
@@ -64,8 +59,6 @@ class UserRecommendationModel extends Equatable {
             : null,
         userID: map['userID'] != null ? map['userID'] as String : null,
         priority: map['priority'] != null ? map['priority'] as String : null,
-        isFavorite:
-            map['isFavorite'] != null ? map['isFavorite'] as bool : null,
         notes: map['notes'] != null ? map['notes'] as String : null,
         notesLastEdited: map['notesLastEdited'] != null
             ? DateTime.parse(map['notesLastEdited'])
@@ -86,7 +79,6 @@ class UserRecommendationModel extends Equatable {
         recoID: recoID,
         userID: userID,
         priority: _getPriorityFromString(priority),
-        isFavorite: isFavorite,
         notes: notes,
         notesLastEdited: notesLastEdited,
         recommendation: recommendation != null
@@ -101,7 +93,6 @@ class UserRecommendationModel extends Equatable {
         recoID: recommendation.recoID,
         userID: recommendation.userID,
         priority: recommendation.priority?.name,
-        isFavorite: recommendation.isFavorite,
         notes: recommendation.notes,
         notesLastEdited: recommendation.notesLastEdited,
         recommendation: recommendation.recommendation != null
@@ -127,14 +118,6 @@ class UserRecommendationModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        id,
-        recoID,
-        userID,
-        priority,
-        isFavorite,
-        notes,
-        notesLastEdited,
-        recommendation
-      ];
+  List<Object?> get props =>
+      [id, recoID, userID, priority, notes, notesLastEdited, recommendation];
 }

@@ -6,6 +6,7 @@ class RecommendationFilter {
   static List<UserRecommendation> applyFilters({
     required List<UserRecommendation> items,
     required RecommendationOverviewFilterStates filterStates,
+    List<String>? favoriteRecommendationIDs,
   }) {
     // filter by status
     List<UserRecommendation> filtered = items.where((item) {
@@ -21,11 +22,12 @@ class RecommendationFilter {
 
     // filter by favorite
     filtered = filtered.where((item) {
+      final isFavorite = favoriteRecommendationIDs?.contains(item.id.value) ?? false;
       switch (filterStates.favoriteFilterState) {
         case RecommendationFavoriteFilterState.isFavorite:
-          return item.isFavorite == true;
+          return isFavorite;
         case RecommendationFavoriteFilterState.isNotFavorite:
-          return item.isFavorite != true;
+          return !isFavorite;
         case RecommendationFavoriteFilterState.all:
           return true;
       }

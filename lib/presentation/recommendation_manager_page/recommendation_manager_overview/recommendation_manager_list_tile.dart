@@ -22,6 +22,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 class RecommendationManagerListTile extends StatefulWidget {
   final UserRecommendation recommendation;
   final bool isPromoter;
+  final List<String>? favoriteRecommendationIDs;
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
@@ -33,6 +34,7 @@ class RecommendationManagerListTile extends StatefulWidget {
       {super.key,
       required this.recommendation,
       required this.isPromoter,
+      required this.favoriteRecommendationIDs,
       required this.onAppointmentPressed,
       required this.onFinishedPressed,
       required this.onFailedPressed,
@@ -71,7 +73,8 @@ class _RecommendationManagerListTileState
           (current is RecommendationSetStatusSuccessState &&
               current.recommendation.id == _recommendation.id) ||
           (current is RecommendationSetFinishedSuccessState &&
-              current.recommendation.id == _recommendation.id),
+              current.recommendation.id == _recommendation.id) ||
+          (current is RecommendationManagerTileFavoriteUpdatedState),
       listener: (context, state) {
         if (state is RecommendationSetStatusSuccessState) {
           setState(() {
@@ -88,6 +91,10 @@ class _RecommendationManagerListTileState
               state.settedNotes ?? false);
         } else if (state is RecommendationSetFinishedSuccessState) {
           widget.onUpdate(state.recommendation, true, false, false, false);
+        } else if (state is RecommendationManagerTileFavoriteUpdatedState) {
+          setState(() {
+            // Trigger rebuild to show updated favorite status
+          });
         }
       },
       builder: (context, state) {
@@ -123,13 +130,10 @@ class _RecommendationManagerListTileState
               Flexible(
                   flex: 1,
                   child: RecommendationManagerFavoriteButton(
-                      isFavorite: _recommendation.isFavorite ?? false,
-                      onPressed: () => widget
-                              .onFavoritePressed(widget.recommendation.copyWith(
-                            isFavorite: _recommendation.isFavorite != null
-                                ? !_recommendation.isFavorite!
-                                : false,
-                          )))),
+                      isFavorite: cubit.currentFavoriteRecommendationIDs
+                          .contains(_recommendation.id.value),
+                      onPressed: () =>
+                          widget.onFavoritePressed(widget.recommendation))),
               const SizedBox(width: 8)
             ]),
             children: [
