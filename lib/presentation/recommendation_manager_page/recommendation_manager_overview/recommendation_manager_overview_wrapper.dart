@@ -111,6 +111,16 @@ class _RecommendationManagerPageState
         .setFinished(recommendation, success);
   }
 
+  void _requestRecommendations(CustomUser? user) {
+    if (user?.role == Role.company) {
+      Modular.get<RecommendationManagerCubit>()
+          .getRecommendationsForCompany(user?.id.value);
+    } else {
+      Modular.get<RecommendationManagerCubit>()
+          .getRecommendations(user?.id.value);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -125,20 +135,18 @@ class _RecommendationManagerPageState
         listener: (context, state) {
           if (state is RecommendationManagerGetUserSuccessState) {
             currentUser = state.user;
-            Modular.get<RecommendationManagerCubit>()
-                .getRecommendations(state.user.id.value);
+            Modular.get<RecommendationManagerTileCubit>().initializeFavorites(state.user.favoriteRecommendationIDs);
+            _requestRecommendations(state.user);
           } else if (state is RecommendationDeleteRecoSuccessState) {
             CustomSnackBar.of(context).showCustomSnackBar(
                 localization.recommendation_manager_delete_snackbar);
-            Modular.get<RecommendationManagerCubit>()
-                .getRecommendations(currentUser?.id.value);
+            _requestRecommendations(currentUser);
           } else if (state is RecommendationDeleteRecoFailureState) {
             CustomSnackBar.of(context).showCustomSnackBar(
                 DatabaseFailureMapper.mapFailureMessage(
                     state.failure, localization),
                 SnackBarType.failure);
-            Modular.get<RecommendationManagerCubit>()
-                .getRecommendations(currentUser?.id.value);
+            _requestRecommendations(currentUser);
           } else if (state is RecommendationGetRecosSuccessState) {
             if (state.showFavoriteSnackbar) {
               CustomSnackBar.of(context).showCustomSnackBar(
@@ -190,10 +198,7 @@ class _RecommendationManagerPageState
           title: localization.recommendation_manager_failure_text,
           message: DatabaseFailureMapper.mapFailureMessage(
               state.failure, localization),
-          callback: () => {
-                Modular.get<RecommendationManagerCubit>()
-                    .getRecommendations(currentUser?.id.value)
-              });
+          callback: () => {_requestRecommendations(currentUser)});
     } else if (state is RecommendationGetRecosSuccessState) {
       return ListView(children: [
         SizedBox(height: responsiveValue.isMobile ? 40 : 80),
@@ -201,6 +206,7 @@ class _RecommendationManagerPageState
           child: RecommendationManagerOverview(
               recommendations: state.recoItems,
               isPromoter: currentUser?.role == Role.promoter,
+              favoriteRecommendationIDs: currentUser?.favoriteRecommendationIDs,
               onAppointmentPressed: (recommendation) {
                 Modular.get<RecommendationManagerTileCubit>()
                     .setAppointmentState(recommendation);
@@ -216,7 +222,7 @@ class _RecommendationManagerPageState
               },
               onFavoritePressed: (recommendation) {
                 Modular.get<RecommendationManagerTileCubit>()
-                    .setFavorite(recommendation);
+                    .setFavorite(recommendation, currentUser?.id.value ?? '');
               },
               onPriorityChanged: (recommendation) {
                 Modular.get<RecommendationManagerTileCubit>()

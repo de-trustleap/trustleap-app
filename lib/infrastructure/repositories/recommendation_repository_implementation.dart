@@ -320,13 +320,29 @@ class RecommendationRepositoryImplementation
 
   @override
   Future<Either<DatabaseFailure, UserRecommendation>> setFavorite(
-      UserRecommendation recommendation) async {
-    final userRecoCollection = firestore.collection("usersRecommendations");
-    final userRecoModel = UserRecommendationModel.fromDomain(recommendation);
+      UserRecommendation recommendation, String userID) async {
+    final userCollection = firestore.collection("users");
+    final userDoc = await userCollection.doc(userID).get();
+    
+    if (!userDoc.exists) {
+      return left(NotFoundFailure());
+    }
+
+    final userData = userDoc.data()!;
+    final favoriteRecommendationIDs = List<String>.from(userData['favoriteRecommendationIDs'] ?? []);
+    final recommendationId = recommendation.id.value;
+
     try {
-      await userRecoCollection.doc(userRecoModel.id).set(
-          {"isFavorite": userRecoModel.isFavorite ?? false},
-          SetOptions(merge: true));
+      if (favoriteRecommendationIDs.contains(recommendationId)) {
+        favoriteRecommendationIDs.remove(recommendationId);
+      } else {
+        favoriteRecommendationIDs.add(recommendationId);
+      }
+
+      await userCollection.doc(userID).set({
+        'favoriteRecommendationIDs': favoriteRecommendationIDs,
+      }, SetOptions(merge: true));
+      
       return right(recommendation);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));

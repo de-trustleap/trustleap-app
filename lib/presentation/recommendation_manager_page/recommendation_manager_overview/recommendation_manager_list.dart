@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 class RecommendationManagerList extends StatelessWidget {
   final List<UserRecommendation> recommendations;
   final bool isPromoter;
+  final List<String>? favoriteRecommendationIDs;
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
@@ -18,6 +19,7 @@ class RecommendationManagerList extends StatelessWidget {
       {super.key,
       required this.recommendations,
       required this.isPromoter,
+      required this.favoriteRecommendationIDs,
       required this.onAppointmentPressed,
       required this.onFinishedPressed,
       required this.onFailedPressed,
@@ -84,6 +86,7 @@ class RecommendationManagerList extends StatelessWidget {
                 key: ValueKey(recommendations[index].id.value),
                 recommendation: recommendations[index],
                 isPromoter: isPromoter,
+                favoriteRecommendationIDs: favoriteRecommendationIDs,
                 onAppointmentPressed: onAppointmentPressed,
                 onFinishedPressed: onFinishedPressed,
                 onFailedPressed: onFailedPressed,

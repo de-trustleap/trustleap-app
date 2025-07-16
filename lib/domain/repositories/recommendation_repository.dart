@@ -19,7 +19,7 @@ abstract class RecommendationRepository {
   Future<Either<DatabaseFailure, List<ArchivedRecommendationItem>>>
       getArchivedRecommendations(String userID);
   Future<Either<DatabaseFailure, UserRecommendation>> setFavorite(
-      UserRecommendation recommendation);
+      UserRecommendation recommendation, String userID);
   Future<Either<DatabaseFailure, UserRecommendation>> setPriority(
       UserRecommendation recommendation);
   Future<Either<DatabaseFailure, UserRecommendation>> setNotes(

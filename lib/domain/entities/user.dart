@@ -24,6 +24,7 @@ class CustomUser extends Equatable {
   final List<String>? registeredPromoterIDs;
   final List<String>? landingPageIDs;
   final List<String>? recommendationIDs;
+  final List<String>? favoriteRecommendationIDs;
   final List<String>? archivedRecommendationIDs;
   final DateTime? deletesAt;
   final DateTime? lastUpdated;
@@ -50,6 +51,7 @@ class CustomUser extends Equatable {
       this.registeredPromoterIDs,
       this.landingPageIDs,
       this.recommendationIDs,
+      this.favoriteRecommendationIDs,
       this.archivedRecommendationIDs,
       this.deletesAt,
       this.lastUpdated,
@@ -76,6 +78,7 @@ class CustomUser extends Equatable {
       List<String>? registeredPromoterIDs,
       List<String>? landingPageIDs,
       List<String>? recommendationIDs,
+      List<String>? favoriteRecommendationIDs,
       List<String>? archivedRecommendationIDs,
       DateTime? deletesAt,
       DateTime? lastUpdated,
@@ -105,6 +108,8 @@ class CustomUser extends Equatable {
             registeredPromoterIDs ?? this.registeredPromoterIDs,
         landingPageIDs: landingPageIDs ?? this.landingPageIDs,
         recommendationIDs: recommendationIDs ?? this.recommendationIDs,
+        favoriteRecommendationIDs:
+            favoriteRecommendationIDs ?? this.favoriteRecommendationIDs,
         archivedRecommendationIDs:
             archivedRecommendationIDs ?? this.archivedRecommendationIDs,
         deletesAt: deletesAt ?? this.deletesAt,
@@ -131,6 +136,7 @@ class CustomUser extends Equatable {
         registeredPromoterIDs,
         landingPageIDs,
         recommendationIDs,
+        favoriteRecommendationIDs,
         archivedRecommendationIDs
       ];
 }

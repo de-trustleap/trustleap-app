@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
@@ -6,10 +7,13 @@ import 'package:finanzbegleiter/presentation/recommendation_manager_page/recomme
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class RecommendationManagerOverview extends StatefulWidget {
   final List<UserRecommendation> recommendations;
   final bool isPromoter;
+  final List<String>? favoriteRecommendationIDs;
   final Function(UserRecommendation) onAppointmentPressed;
   final Function(UserRecommendation) onFinishedPressed;
   final Function(UserRecommendation) onFailedPressed;
@@ -21,6 +25,7 @@ class RecommendationManagerOverview extends StatefulWidget {
       {super.key,
       required this.recommendations,
       required this.isPromoter,
+      required this.favoriteRecommendationIDs,
       required this.onAppointmentPressed,
       required this.onFinishedPressed,
       required this.onFailedPressed,
@@ -65,6 +70,7 @@ class _RecommendationManagerOverviewState
         _filteredRecommendations = RecommendationFilter.applyFilters(
           items: _searchFilteredRecommendations,
           filterStates: _currentFilterStates,
+          favoriteRecommendationIDs: Modular.get<RecommendationManagerTileCubit>().currentFavoriteRecommendationIDs,
         );
       });
     });
@@ -92,6 +98,7 @@ class _RecommendationManagerOverviewState
     _filteredRecommendations = RecommendationFilter.applyFilters(
       items: _searchFilteredRecommendations,
       filterStates: _currentFilterStates,
+      favoriteRecommendationIDs: Modular.get<RecommendationManagerTileCubit>().currentFavoriteRecommendationIDs,
     );
   }
 
@@ -105,42 +112,59 @@ class _RecommendationManagerOverviewState
     setState(() {
       _currentFilterStates = filterStates;
       _filteredRecommendations = RecommendationFilter.applyFilters(
-          items: _searchFilteredRecommendations, filterStates: filterStates);
+          items: _searchFilteredRecommendations, 
+          filterStates: filterStates,
+          favoriteRecommendationIDs: Modular.get<RecommendationManagerTileCubit>().currentFavoriteRecommendationIDs);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return CardContainer(
-      maxWidth: 1200,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          RecommendationManagerListHeader(
-              searchController: _searchController,
-              onFilterPressed: onFilterPressed),
-          ExpandedSection(
-              expand: _filterIsExpanded,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 16),
-                    RecommendationManagerExpandableFilter(
-                        onFilterChanged: onFilterChanged, isArchive: false)
-                  ])),
-          const SizedBox(height: 20),
-          RecommendationManagerList(
-            recommendations: _filteredRecommendations,
-            isPromoter: widget.isPromoter,
-            onAppointmentPressed: widget.onAppointmentPressed,
-            onFinishedPressed: widget.onFinishedPressed,
-            onFailedPressed: widget.onFailedPressed,
-            onDeletePressed: widget.onDeletePressed,
-            onFavoritePressed: widget.onFavoritePressed,
-            onPriorityChanged: widget.onPriorityChanged,
-            onUpdate: widget.onUpdate,
-          ),
-        ],
+    return BlocListener<RecommendationManagerTileCubit, RecommendationManagerTileState>(
+      bloc: Modular.get<RecommendationManagerTileCubit>(),
+      listener: (context, state) {
+        if (state is RecommendationManagerTileFavoriteUpdatedState) {
+          setState(() {
+            _filteredRecommendations = RecommendationFilter.applyFilters(
+              items: _searchFilteredRecommendations,
+              filterStates: _currentFilterStates,
+              favoriteRecommendationIDs: Modular.get<RecommendationManagerTileCubit>().currentFavoriteRecommendationIDs,
+            );
+          });
+        }
+      },
+      child: CardContainer(
+        maxWidth: 1200,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            RecommendationManagerListHeader(
+                searchController: _searchController,
+                onFilterPressed: onFilterPressed),
+            ExpandedSection(
+                expand: _filterIsExpanded,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 16),
+                      RecommendationManagerExpandableFilter(
+                          onFilterChanged: onFilterChanged, isArchive: false)
+                    ])),
+            const SizedBox(height: 20),
+            RecommendationManagerList(
+              recommendations: _filteredRecommendations,
+              isPromoter: widget.isPromoter,
+              favoriteRecommendationIDs: widget.favoriteRecommendationIDs,
+              onAppointmentPressed: widget.onAppointmentPressed,
+              onFinishedPressed: widget.onFinishedPressed,
+              onFailedPressed: widget.onFailedPressed,
+              onDeletePressed: widget.onDeletePressed,
+              onFavoritePressed: widget.onFavoritePressed,
+              onPriorityChanged: widget.onPriorityChanged,
+              onUpdate: widget.onUpdate,
+            ),
+          ],
+        ),
       ),
     );
   }

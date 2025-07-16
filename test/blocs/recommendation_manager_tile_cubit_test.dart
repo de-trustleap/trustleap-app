@@ -11,10 +11,12 @@ import '../mocks.mocks.dart';
 void main() {
   late RecommendationManagerTileCubit recoManagerTileCubit;
   late MockRecommendationRepository mockRecoRepo;
+  late MockUserRepository mockUserRepo;
 
   setUp(() {
     mockRecoRepo = MockRecommendationRepository();
-    recoManagerTileCubit = RecommendationManagerTileCubit(mockRecoRepo);
+    mockUserRepo = MockUserRepository();
+    recoManagerTileCubit = RecommendationManagerTileCubit(mockRecoRepo, mockUserRepo);
   });
 
   test("init state should be RecommendationsInitial", () {
@@ -188,13 +190,13 @@ void main() {
 
     test("should call recommendation repo when function is called", () async {
       // Given
-      when(mockRecoRepo.setFavorite(userRecommendation))
+      when(mockRecoRepo.setFavorite(userRecommendation, "1"))
           .thenAnswer((_) async => right(userRecommendation));
       // When
-      recoManagerTileCubit.setFavorite(userRecommendation);
-      await untilCalled(mockRecoRepo.setFavorite(userRecommendation));
+      recoManagerTileCubit.setFavorite(userRecommendation, "1");
+      await untilCalled(mockRecoRepo.setFavorite(userRecommendation, "1"));
       // Then
-      verify(mockRecoRepo.setFavorite(userRecommendation));
+      verify(mockRecoRepo.setFavorite(userRecommendation, "1"));
       verifyNoMoreInteractions(mockRecoRepo);
     });
 
@@ -206,11 +208,11 @@ void main() {
         RecommendationSetStatusSuccessState(
             recommendation: userRecommendation, settedFavorite: true)
       ];
-      when(mockRecoRepo.setFavorite(userRecommendation))
+      when(mockRecoRepo.setFavorite(userRecommendation, "1"))
           .thenAnswer((_) async => right(userRecommendation));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
-      recoManagerTileCubit.setFavorite(userRecommendation);
+      recoManagerTileCubit.setFavorite(userRecommendation, "1");
     });
 
     test(
@@ -221,11 +223,11 @@ void main() {
         RecommendationSetStatusFailureState(
             failure: BackendFailure(), recommendation: userRecommendation)
       ];
-      when(mockRecoRepo.setFavorite(userRecommendation))
+      when(mockRecoRepo.setFavorite(userRecommendation, "1"))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder(expectedResult));
-      recoManagerTileCubit.setFavorite(userRecommendation);
+      recoManagerTileCubit.setFavorite(userRecommendation, "1");
     });
   });
 
