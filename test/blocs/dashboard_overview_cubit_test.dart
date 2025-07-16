@@ -11,12 +11,10 @@ import '../mocks.mocks.dart';
 void main() {
   late DashboardOverviewCubit cubit;
   late MockUserRepository mockUserRepo;
-  late MockDashboardRepository mockDashboardRepo;
 
   setUp(() {
     mockUserRepo = MockUserRepository();
-    mockDashboardRepo = MockDashboardRepository();
-    cubit = DashboardOverviewCubit(mockUserRepo, mockDashboardRepo);
+    cubit = DashboardOverviewCubit(mockUserRepo);
   });
 
   group("DashboardOverviewCubit_InitialState", () {
@@ -39,8 +37,7 @@ void main() {
 
     test("should call repo if getUser is called", () async {
       // Given
-      when(mockUserRepo.getUser())
-          .thenAnswer((_) async => right(testUser));
+      when(mockUserRepo.getUser()).thenAnswer((_) async => right(testUser));
 
       // When
       cubit.getUser();
@@ -51,21 +48,23 @@ void main() {
       verifyNoMoreInteractions(mockUserRepo);
     });
 
-    test("should emit LoadingState and then SuccessState when getUser is called", () {
+    test(
+        "should emit LoadingState and then SuccessState when getUser is called",
+        () {
       // Given
       final expectedResult = [
         DashboardOverviewGetUserLoadingState(),
         DashboardOverviewGetUserSuccessState(user: testUser)
       ];
-      when(mockUserRepo.getUser())
-          .thenAnswer((_) async => right(testUser));
+      when(mockUserRepo.getUser()).thenAnswer((_) async => right(testUser));
 
       // Then
       expectLater(cubit.stream, emitsInOrder(expectedResult));
       cubit.getUser();
     });
 
-    test("should emit LoadingState and then FailureState when getUser fails", () {
+    test("should emit LoadingState and then FailureState when getUser fails",
+        () {
       // Given
       final expectedResult = [
         DashboardOverviewGetUserLoadingState(),
@@ -79,7 +78,9 @@ void main() {
       cubit.getUser();
     });
 
-    test("should emit LoadingState and then FailureState when getUser returns NotFoundFailure", () {
+    test(
+        "should emit LoadingState and then FailureState when getUser returns NotFoundFailure",
+        () {
       // Given
       final expectedResult = [
         DashboardOverviewGetUserLoadingState(),

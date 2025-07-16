@@ -13,13 +13,11 @@ import '../mocks.mocks.dart';
 
 void main() {
   late DashboardRecommendationsCubit cubit;
-  late MockDashboardRepository mockDashboardRepo;
   late MockRecommendationRepository mockRecommendationRepo;
 
   setUp(() {
-    mockDashboardRepo = MockDashboardRepository();
     mockRecommendationRepo = MockRecommendationRepository();
-    cubit = DashboardRecommendationsCubit(mockDashboardRepo, mockRecommendationRepo);
+    cubit = DashboardRecommendationsCubit(mockRecommendationRepo);
   });
 
   group("DashboardRecommendationsCubit_InitialState", () {

@@ -31,7 +31,6 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 import 'package:finanzbegleiter/domain/repositories/legals_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
-import 'package:finanzbegleiter/domain/repositories/dashboard_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
@@ -86,7 +85,6 @@ import 'package:mockito/annotations.dart';
   PagebuilderSelectionCubit,
   DashboardOverviewCubit,
   DashboardRecommendationsCubit,
-  DashboardRepository,
   BuildContext,
   FirebaseAuth,
   FirebaseFirestore,
