@@ -3649,6 +3649,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The PageBuilder is only available on desktop devices. Please open this page on a computer or laptop.\n\n If you\'re already on a computer, resize the browser window.'**
   String get pagebuilder_mobile_not_supported_subtitle;
+
+  /// User not found error title on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'User not found'**
+  String get dashboard_user_not_found_error_title;
+
+  /// User not found error message on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'The current user could not be found. Please try again later.'**
+  String get dashboard_user_not_found_error_message;
+
+  /// Welcoming the user on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'Hi'**
+  String get dashboard_greeting;
+
+  /// Title for the recommendation statistics on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'Number of recommendations'**
+  String get dashboard_recommendations_title;
+
+  /// Loading error for the recommendation statistics on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'Loading recommendations failed'**
+  String get dashboard_recommendations_loading_error_title;
+
+  /// Message in case there are no recommendations for the recommendation statistics on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations available'**
+  String get dashboard_recommendations_chart_no_recommendations;
+
+  /// Dropdown entry for displaying all recommendations of all promoters for the recommendation statistics on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get dashboard_recommendations_all_promoter;
+
+  /// Dropdown entry in case the promoter name is missing for the referral statistics on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'Unkown promoter'**
+  String get dashboard_recommendations_missing_promoter_name;
+
+  /// Dropdown entry for the company's own recommendations for the recommendation statistics on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'Own recommendations'**
+  String get dashboard_recommendations_own_recommendations;
+
+  /// Shows the number of recommendations in the last 24 hours
+  ///
+  /// In en, this message translates to:
+  /// **'Last 24 hours: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}'**
+  String dashboard_recommendations_last_24_hours(int count);
+
+  /// Shows the number of recommendations in the last 7 days
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}'**
+  String dashboard_recommendations_last_7_days(int count);
+
+  /// Shows the number of recommendations in the last month
+  ///
+  /// In en, this message translates to:
+  /// **'Last month: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}'**
+  String dashboard_recommendations_last_month(int count);
 }
 
 class _AppLocalizationsDelegate

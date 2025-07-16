@@ -5610,6 +5610,246 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_hierarchy_button_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_button_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_no_elements => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_no_elements),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_no_elements),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_section_element =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_section_element),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_section_element),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_text => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_text),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_image => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_image),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_image),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_button => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_button),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_anchor_button => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_anchor_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_anchor_button),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_container => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_container),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_container),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_row => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_row),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_row),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_column => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_column),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_column),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_icon => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_icon),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_icon),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_contact_form => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_contact_form),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_contact_form),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_footer => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_footer),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_footer),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_video_player => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_video_player),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_video_player),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_mobile_not_supported_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_mobile_not_supported_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_mobile_not_supported_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_mobile_not_supported_subtitle => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_mobile_not_supported_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_mobile_not_supported_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_user_not_found_error_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_user_not_found_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_user_not_found_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_user_not_found_error_message => (super.noSuchMethod(
+        Invocation.getter(#dashboard_user_not_found_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_user_not_found_error_message),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_greeting => (super.noSuchMethod(
+        Invocation.getter(#dashboard_greeting),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_greeting),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_loading_error_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_loading_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_loading_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_chart_no_recommendations =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_chart_no_recommendations),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_recommendations_chart_no_recommendations),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_all_promoter => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_all_promoter),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_all_promoter),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_missing_promoter_name =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_missing_promoter_name),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_missing_promoter_name),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_own_recommendations =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_own_recommendations),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_own_recommendations),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -5701,6 +5941,54 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           Invocation.method(
             #send_recommendation_alert_description,
             [receiver],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_recommendations_last_24_hours(int? count) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_recommendations_last_24_hours,
+          [count],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_recommendations_last_24_hours,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_recommendations_last_7_days(int? count) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_recommendations_last_7_days,
+          [count],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_recommendations_last_7_days,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_recommendations_last_month(int? count) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_recommendations_last_month,
+          [count],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_recommendations_last_month,
+            [count],
           ),
         ),
       ) as String);
