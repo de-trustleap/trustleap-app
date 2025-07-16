@@ -46,74 +46,80 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
     final cubit = Modular.get<DashboardRecommendationsCubit>();
 
     return CardContainer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            localization.dashboard_recommendations_title,
-            style: themeData.textTheme.titleMedium!
-                .copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          Wrap(
-            spacing: 24,
-            runSpacing: 16,
+      child: BlocBuilder<DashboardRecommendationsCubit,
+          DashboardRecommendationsState>(
+        bloc: cubit,
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              UnderlinedDropdown<TimePeriod>(
-                value: _selectedTimePeriod,
-                items: TimePeriod.values.map((period) {
-                  return DropdownMenuItem<TimePeriod>(
-                    value: period,
-                    child: Text(period.value),
-                  );
-                }).toList(),
-                onChanged: (TimePeriod? newValue) {
-                  if (newValue != null) {
-                    setState(() {
-                      _selectedTimePeriod = newValue;
-                    });
-                  }
-                },
+              Text(
+                localization.dashboard_recommendations_title,
+                style: themeData.textTheme.bodyLarge!
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
-              UnderlinedDropdown<int>(
-                value: _selectedStatusLevel,
-                items: _getStatusLevelItems(),
-                onChanged: (int? newValue) {
-                  setState(() {
-                    _selectedStatusLevel = newValue;
-                  });
-                },
-              ),
-              if (widget.user.role == Role.company)
-                BlocBuilder<DashboardRecommendationsCubit,
-                    DashboardRecommendationsState>(
-                  bloc: cubit,
-                  builder: (context, state) {
-                    if (state is DashboardRecommendationsGetRecosSuccessState &&
-                        state.promoterRecommendations != null) {
-                      return UnderlinedDropdown<String?>(
-                        value: _selectedPromoterId,
-                        items: DashboardRecommendationsHelper.getPromoterItems(
-                            state.promoterRecommendations!, localization, widget.user.id.value),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedPromoterId = newValue;
-                          });
-                        },
+              const SizedBox(height: 16),
+              Wrap(
+                spacing: 24,
+                runSpacing: 16,
+                children: [
+                  UnderlinedDropdown<TimePeriod>(
+                    value: _selectedTimePeriod,
+                    items: TimePeriod.values.map((period) {
+                      return DropdownMenuItem<TimePeriod>(
+                        value: period,
+                        child: Text(period.value),
                       );
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          BlocBuilder<DashboardRecommendationsCubit,
-              DashboardRecommendationsState>(
-            bloc: cubit,
-            builder: (context, state) {
-              if (state is DashboardRecommendationsGetRecosSuccessState) {
-                return DashboardRecommendationsChart(
+                    }).toList(),
+                    onChanged: (TimePeriod? newValue) {
+                      if (newValue != null) {
+                        setState(() {
+                          _selectedTimePeriod = newValue;
+                        });
+                      }
+                    },
+                  ),
+                  UnderlinedDropdown<int>(
+                    value: _selectedStatusLevel,
+                    items: _getStatusLevelItems(),
+                    onChanged: (int? newValue) {
+                      setState(() {
+                        _selectedStatusLevel = newValue;
+                      });
+                    },
+                  ),
+                  if (widget.user.role == Role.company &&
+                      state is DashboardRecommendationsGetRecosSuccessState &&
+                      state.promoterRecommendations != null)
+                    UnderlinedDropdown<String?>(
+                      value: _selectedPromoterId,
+                      items: DashboardRecommendationsHelper.getPromoterItems(
+                          state.promoterRecommendations!,
+                          localization,
+                          widget.user.id.value),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedPromoterId = newValue;
+                        });
+                      },
+                    ),
+                  if (state is DashboardRecommendationsGetRecosSuccessState)
+                    Text(
+                      DashboardRecommendationsHelper.getTimePeriodSummaryText(
+                        state: state,
+                        selectedPromoterId: _selectedPromoterId,
+                        userRole: widget.user.role ?? Role.none,
+                        timePeriod: _selectedTimePeriod,
+                        localization: localization,
+                      ),
+                      style: themeData.textTheme.bodySmall!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              if (state is DashboardRecommendationsGetRecosSuccessState)
+                DashboardRecommendationsChart(
                   recommendations:
                       DashboardRecommendationsHelper.getFilteredRecommendations(
                     state: state,
@@ -122,17 +128,16 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                   ),
                   timePeriod: _selectedTimePeriod,
                   statusLevel: _selectedStatusLevel,
-                );
-              } else if (state
-                  is DashboardRecommendationsGetRecosNotFoundFailureState) {
-                return DashboardRecommendationsChart(
+                )
+              else if (state
+                  is DashboardRecommendationsGetRecosNotFoundFailureState)
+                DashboardRecommendationsChart(
                   recommendations: [],
                   timePeriod: _selectedTimePeriod,
                   statusLevel: _selectedStatusLevel,
-                );
-              } else if (state
-                  is DashboardRecommendationsGetRecosFailureState) {
-                return ErrorView(
+                )
+              else if (state is DashboardRecommendationsGetRecosFailureState)
+                ErrorView(
                     title: localization
                         .dashboard_recommendations_loading_error_title,
                     message: "",
@@ -142,13 +147,12 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                                   widget.user.id.value)
                               : cubit.getRecommendationsPromoter(
                                   widget.user.id.value)
-                        });
-              } else {
-                return const LoadingIndicator();
-              }
-            },
-          ),
-        ],
+                        })
+              else
+                const LoadingIndicator(),
+            ],
+          );
+        },
       ),
     );
   }

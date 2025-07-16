@@ -2433,5 +2433,32 @@
     "dashboard_recommendations_own_recommendations": "Own recommendations",
     "@dashboard_recommendations_own_recommendations": {
         "description": "Dropdown entry for the company's own recommendations for the recommendation statistics on the dashboard page"
+    },
+    "dashboard_recommendations_last_24_hours": "Last 24 hours: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}",
+    "@dashboard_recommendations_last_24_hours": {
+        "description": "Shows the number of recommendations in the last 24 hours",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_recommendations_last_7_days": "Last 7 days: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}",
+    "@dashboard_recommendations_last_7_days": {
+        "description": "Shows the number of recommendations in the last 7 days",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_recommendations_last_month": "Last month: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}",
+    "@dashboard_recommendations_last_month": {
+        "description": "Shows the number of recommendations in the last month",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     }
 }

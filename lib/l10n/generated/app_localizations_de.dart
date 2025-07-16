@@ -2147,4 +2147,40 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get dashboard_recommendations_own_recommendations =>
       'Eigene Empfehlungen';
+
+  @override
+  String dashboard_recommendations_last_24_hours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Empfehlungen',
+      one: '1 Empfehlung',
+      zero: '0 Empfehlungen',
+    );
+    return 'Letzte 24 Stunden: $_temp0';
+  }
+
+  @override
+  String dashboard_recommendations_last_7_days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Empfehlungen',
+      one: '1 Empfehlung',
+      zero: '0 Empfehlungen',
+    );
+    return 'Letzte 7 Tage: $_temp0';
+  }
+
+  @override
+  String dashboard_recommendations_last_month(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Empfehlungen',
+      one: '1 Empfehlung',
+      zero: '0 Empfehlungen',
+    );
+    return 'Letzter Monat: $_temp0';
+  }
 }

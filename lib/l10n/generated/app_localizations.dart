@@ -3703,6 +3703,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Own recommendations'**
   String get dashboard_recommendations_own_recommendations;
+
+  /// Shows the number of recommendations in the last 24 hours
+  ///
+  /// In en, this message translates to:
+  /// **'Last 24 hours: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}'**
+  String dashboard_recommendations_last_24_hours(int count);
+
+  /// Shows the number of recommendations in the last 7 days
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}'**
+  String dashboard_recommendations_last_7_days(int count);
+
+  /// Shows the number of recommendations in the last month
+  ///
+  /// In en, this message translates to:
+  /// **'Last month: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}'**
+  String dashboard_recommendations_last_month(int count);
 }
 
 class _AppLocalizationsDelegate

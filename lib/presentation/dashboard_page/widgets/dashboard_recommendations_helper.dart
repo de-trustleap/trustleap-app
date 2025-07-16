@@ -101,4 +101,47 @@ class DashboardRecommendationsHelper {
 
     return state.recommendation;
   }
+
+  /// Gets the localized summary text showing recommendation count for selected time period
+  static String getTimePeriodSummaryText({
+    required DashboardRecommendationsGetRecosSuccessState state,
+    required String? selectedPromoterId,
+    required Role userRole,
+    required TimePeriod timePeriod,
+    required AppLocalizations localization,
+  }) {
+    final recommendations = getFilteredRecommendations(
+      state: state,
+      selectedPromoterId: selectedPromoterId,
+      userRole: userRole,
+    );
+    final now = DateTime.now();
+    DateTime startDate;
+
+    switch (timePeriod) {
+      case TimePeriod.day:
+        startDate = now.subtract(const Duration(hours: 24));
+        break;
+      case TimePeriod.week:
+        startDate = now.subtract(const Duration(days: 7));
+        break;
+      case TimePeriod.month:
+        startDate = DateTime(now.year, now.month - 1, now.day);
+        break;
+    }
+
+    final count = recommendations.where((rec) {
+      final createdAt = rec.recommendation?.createdAt;
+      return createdAt != null && createdAt.isAfter(startDate);
+    }).length;
+
+    switch (timePeriod) {
+      case TimePeriod.day:
+        return localization.dashboard_recommendations_last_24_hours(count);
+      case TimePeriod.week:
+        return localization.dashboard_recommendations_last_7_days(count);
+      case TimePeriod.month:
+        return localization.dashboard_recommendations_last_month(count);
+    }
+  }
 }

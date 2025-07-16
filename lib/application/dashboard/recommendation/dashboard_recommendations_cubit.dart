@@ -49,7 +49,3 @@ class DashboardRecommendationsCubit
             recommendation: recommendations)));
   }
 }
-
-// TODO: Localizations
-// TODO: TEXT ZB LETZTE 7 TAGE: 5 PROMOTER
-// TODO: EIGENE EMPFEHLUNGEN VON COMPANY AUCH ANZEIGEN (FERTIG)

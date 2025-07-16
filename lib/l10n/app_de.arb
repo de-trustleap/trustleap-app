@@ -2433,5 +2433,32 @@
     "dashboard_recommendations_own_recommendations": "Eigene Empfehlungen",
     "@dashboard_recommendations_own_recommendations": {
         "description": "Dropdown Eintrag für die eigenen Empfehlungen des Unternehmens für die Empfehlungsstatistik auf der Dashboard Seite"
+    },
+    "dashboard_recommendations_last_24_hours": "Letzte 24 Stunden: {count, plural, =0{0 Empfehlungen} =1{1 Empfehlung} other{{count} Empfehlungen}}",
+    "@dashboard_recommendations_last_24_hours": {
+        "description": "Zeigt die Anzahl der Empfehlungen in den letzten 24 Stunden an",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_recommendations_last_7_days": "Letzte 7 Tage: {count, plural, =0{0 Empfehlungen} =1{1 Empfehlung} other{{count} Empfehlungen}}",
+    "@dashboard_recommendations_last_7_days": {
+        "description": "Zeigt die Anzahl der Empfehlungen in den letzten 7 Tagen an",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_recommendations_last_month": "Letzter Monat: {count, plural, =0{0 Empfehlungen} =1{1 Empfehlung} other{{count} Empfehlungen}}",
+    "@dashboard_recommendations_last_month": {
+        "description": "Zeigt die Anzahl der Empfehlungen im letzten Monat an",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     }
 }
