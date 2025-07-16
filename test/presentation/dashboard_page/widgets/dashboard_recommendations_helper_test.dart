@@ -185,7 +185,7 @@ void main() {
             recoID: "reco1",
             userID: "user1",
             priority: RecommendationPriority.medium,
-            isFavorite: false,
+    
             notes: "Test",
             notesLastEdited: null,
             recommendation: null,
@@ -195,7 +195,7 @@ void main() {
             recoID: "reco2",
             userID: "user1",
             priority: RecommendationPriority.medium,
-            isFavorite: false,
+    
             notes: "Test",
             notesLastEdited: null,
             recommendation: null,
@@ -208,7 +208,7 @@ void main() {
             recoID: "reco3",
             userID: "user1",
             priority: RecommendationPriority.medium,
-            isFavorite: false,
+    
             notes: "Test",
             notesLastEdited: null,
             recommendation: null,
@@ -309,7 +309,7 @@ void main() {
             recoID: "reco1",
             userID: "user1",
             priority: RecommendationPriority.medium,
-            isFavorite: false,
+    
             notes: "Test",
             notesLastEdited: null,
             recommendation: RecommendationItem(
@@ -333,7 +333,7 @@ void main() {
             recoID: "reco2",
             userID: "user1",
             priority: RecommendationPriority.medium,
-            isFavorite: false,
+    
             notes: "Test",
             notesLastEdited: null,
             recommendation: RecommendationItem(
@@ -405,7 +405,7 @@ void main() {
           recoID: "reco1",
           userID: "user1",
           priority: RecommendationPriority.medium,
-          isFavorite: false,
+  
           notes: "Test",
           notesLastEdited: null,
           recommendation: RecommendationItem(
@@ -477,7 +477,7 @@ void main() {
           recoID: "reco1",
           userID: "user1",
           priority: RecommendationPriority.medium,
-          isFavorite: false,
+  
           notes: "Test",
           notesLastEdited: null,
           recommendation: RecommendationItem(
@@ -501,7 +501,7 @@ void main() {
           recoID: "reco2",
           userID: "user1",
           priority: RecommendationPriority.medium,
-          isFavorite: false,
+  
           notes: "Test",
           notesLastEdited: null,
           recommendation: RecommendationItem(
@@ -555,7 +555,7 @@ void main() {
             recoID: "reco1",
             userID: "user1",
             priority: RecommendationPriority.medium,
-            isFavorite: false,
+    
             notes: "Test",
             notesLastEdited: null,
             recommendation: RecommendationItem(
@@ -579,7 +579,7 @@ void main() {
             recoID: "reco2",
             userID: "user1",
             priority: RecommendationPriority.medium,
-            isFavorite: false,
+    
             notes: "Test",
             notesLastEdited: null,
             recommendation: RecommendationItem(
@@ -603,7 +603,7 @@ void main() {
             recoID: "reco3",
             userID: "user1",
             priority: RecommendationPriority.medium,
-            isFavorite: false,
+    
             notes: "Test",
             notesLastEdited: null,
             recommendation: RecommendationItem(
@@ -627,7 +627,7 @@ void main() {
             recoID: "reco4",
             userID: "user1",
             priority: RecommendationPriority.medium,
-            isFavorite: false,
+    
             notes: "Test",
             notesLastEdited: null,
             recommendation: RecommendationItem(

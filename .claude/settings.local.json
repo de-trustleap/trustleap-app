@@ -6,7 +6,8 @@
       "Bash(flutter analyze:*)",
       "mcp__ide__getDiagnostics",
       "Bash(rg:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(find:*)"
     ],
     "deny": []
   }

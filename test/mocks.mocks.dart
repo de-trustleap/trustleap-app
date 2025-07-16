@@ -7851,11 +7851,16 @@ class MockRecommendationRepository extends _i1.Mock
   @override
   _i20.Future<
       _i2.Either<_i29.DatabaseFailure, _i43.UserRecommendation>> setFavorite(
-          _i43.UserRecommendation? recommendation) =>
+    _i43.UserRecommendation? recommendation,
+    String? userID,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #setFavorite,
-          [recommendation],
+          [
+            recommendation,
+            userID,
+          ],
         ),
         returnValue: _i20.Future<
                 _i2
@@ -7864,7 +7869,10 @@ class MockRecommendationRepository extends _i1.Mock
           this,
           Invocation.method(
             #setFavorite,
-            [recommendation],
+            [
+              recommendation,
+              userID,
+            ],
           ),
         )),
       ) as _i20

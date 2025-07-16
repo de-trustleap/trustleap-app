@@ -12,7 +12,7 @@ void main() {
         recoID: "1",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: true,
+
         notes: "Test",
         notesLastEdited: null,
         recommendation: RecommendationItem(
@@ -33,11 +33,11 @@ void main() {
           expiresAt: DateTime(2024, 12, 31),
         )),
     UserRecommendation(
-        id: UniqueID.fromUniqueString("1"),
+        id: UniqueID.fromUniqueString("2"),
         recoID: "2",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: false,
+
         notes: "Test",
         notesLastEdited: null,
         recommendation: RecommendationItem(
@@ -58,11 +58,11 @@ void main() {
           expiresAt: DateTime(2024, 11, 30),
         )),
     UserRecommendation(
-        id: UniqueID.fromUniqueString("1"),
+        id: UniqueID.fromUniqueString("3"),
         recoID: "3",
         userID: "1",
         priority: RecommendationPriority.medium,
-        isFavorite: true,
+
         notes: "Test",
         notesLastEdited: null,
         recommendation: RecommendationItem(
@@ -176,6 +176,7 @@ void main() {
     final result = RecommendationFilter.applyFilters(
       items: testItems,
       filterStates: filterStates,
+      favoriteRecommendationIDs: ['1', '3'], // Anna and Clara are favorites
     );
 
     expect(result.length, 2);
@@ -190,6 +191,7 @@ void main() {
     final result = RecommendationFilter.applyFilters(
       items: testItems,
       filterStates: filterStates,
+      favoriteRecommendationIDs: ['1', '3'], // Anna and Clara are favorites, so Ben is not
     );
 
     expect(result.length, 1);

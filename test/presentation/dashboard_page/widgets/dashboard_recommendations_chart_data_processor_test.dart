@@ -55,7 +55,7 @@ void main() {
           recoID: "1",
           userID: "user1",
           priority: RecommendationPriority.medium,
-          isFavorite: false,
+  
           notes: "Test note",
           notesLastEdited: null,
           recommendation: recommendation1,
@@ -65,7 +65,7 @@ void main() {
           recoID: "2",
           userID: "user1",
           priority: RecommendationPriority.high,
-          isFavorite: true,
+  
           notes: "Test note 2",
           notesLastEdited: null,
           recommendation: recommendation2,

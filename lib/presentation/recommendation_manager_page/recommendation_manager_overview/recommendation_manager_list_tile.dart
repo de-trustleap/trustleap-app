@@ -131,7 +131,7 @@ class _RecommendationManagerListTileState
                   flex: 1,
                   child: RecommendationManagerFavoriteButton(
                       isFavorite: cubit.currentFavoriteRecommendationIDs
-                              .contains(_recommendation.id.value),
+                          .contains(_recommendation.id.value),
                       onPressed: () =>
                           widget.onFavoritePressed(widget.recommendation))),
               const SizedBox(width: 8)
@@ -299,5 +299,3 @@ class _RecommendationManagerListTileState
         ]));
   }
 }
-
-// TODO: FAVORITEN USER UPDATE ÜBER RECOMMENDATIONMANAGERTILECUBIT STEUERN
