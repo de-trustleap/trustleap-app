@@ -90,7 +90,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                   ),
                   if (widget.user.role == Role.company &&
                       state is DashboardRecommendationsGetRecosSuccessState &&
-                      state.promoterRecommendations != null)
+                      state.promoterRecommendations != null) ...[
                     UnderlinedDropdown<String?>(
                       value: _selectedPromoterId,
                       items: DashboardRecommendationsHelper.getPromoterItems(
@@ -103,6 +103,8 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                         });
                       },
                     ),
+                    const Spacer()
+                  ],
                   if (state is DashboardRecommendationsGetRecosSuccessState)
                     Text(
                       DashboardRecommendationsHelper.getTimePeriodSummaryText(

@@ -3,16 +3,14 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
-import 'package:finanzbegleiter/domain/repositories/dashboard_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
 
 part 'dashboard_recommendations_state.dart';
 
 class DashboardRecommendationsCubit
     extends Cubit<DashboardRecommendationsState> {
-  final DashboardRepository dashboardRepo;
   final RecommendationRepository recommendationRepo;
-  DashboardRecommendationsCubit(this.dashboardRepo, this.recommendationRepo)
+  DashboardRecommendationsCubit(this.recommendationRepo)
       : super(DashboardRecommendationsInitial());
 
   void getRecommendationsCompany(String userID) async {
