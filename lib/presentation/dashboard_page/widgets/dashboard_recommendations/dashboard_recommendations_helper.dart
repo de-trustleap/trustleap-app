@@ -126,6 +126,7 @@ class DashboardRecommendationsHelper {
         startDate = now.subtract(const Duration(days: 7));
         break;
       case TimePeriod.month:
+      case TimePeriod.year:
         startDate = DateTime(now.year, now.month - 1, now.day);
         break;
     }
@@ -141,6 +142,7 @@ class DashboardRecommendationsHelper {
       case TimePeriod.week:
         return localization.dashboard_recommendations_last_7_days(count);
       case TimePeriod.month:
+      case TimePeriod.year:
         return localization.dashboard_recommendations_last_month(count);
     }
   }

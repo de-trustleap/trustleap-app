@@ -5,7 +5,7 @@ import "package:finanzbegleiter/domain/entities/promoter_recommendations.dart";
 import "package:finanzbegleiter/domain/entities/recommendation_item.dart";
 import "package:finanzbegleiter/domain/entities/user.dart";
 import "package:finanzbegleiter/domain/entities/user_recommendation.dart";
-import "package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations_helper.dart";
+import "package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_helper.dart";
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:finanzbegleiter/l10n/generated/app_localizations.dart";

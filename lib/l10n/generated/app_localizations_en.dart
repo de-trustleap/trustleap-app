@@ -2141,4 +2141,50 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return 'Last month: $_temp0';
   }
+
+  @override
+  String get dashboard_promoters_title => 'Number of Promoters';
+
+  @override
+  String get dashboard_promoters_loading_error_title =>
+      'Loading promoters failed';
+
+  @override
+  String dashboard_promoters_last_7_days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count promoters',
+      one: '1 promoter',
+      zero: '0 promoters',
+    );
+    return 'Last 7 days: $_temp0';
+  }
+
+  @override
+  String dashboard_promoters_last_month(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count promoters',
+      one: '1 promoter',
+      zero: '0 promoters',
+    );
+    return 'Last month: $_temp0';
+  }
+
+  @override
+  String dashboard_promoters_last_year(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count promoters',
+      one: '1 promoter',
+      zero: '0 promoters',
+    );
+    return 'Last year: $_temp0';
+  }
+
+  @override
+  String get dashboard_promoters_chart_no_promoters => 'No promoters found';
 }

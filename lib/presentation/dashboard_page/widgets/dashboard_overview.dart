@@ -1,7 +1,9 @@
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +46,12 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                   style: themeData.textTheme.titleLarge!
                       .copyWith(fontSize: 40, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
-              DashboardRecommendations(user: state.user)
+              DashboardRecommendations(user: state.user),
+              if (state.user.role == Role.company) ...[
+                const SizedBox(height: 40),
+                DashboardPromoters(user: state.user)
+              ],
+              const SizedBox(height: 40)
             ],
           );
         } else {

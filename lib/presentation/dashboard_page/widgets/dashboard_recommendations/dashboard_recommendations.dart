@@ -65,7 +65,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                 children: [
                   UnderlinedDropdown<TimePeriod>(
                     value: _selectedTimePeriod,
-                    items: TimePeriod.values.map((period) {
+                    items: [TimePeriod.day, TimePeriod.week, TimePeriod.month].map((period) {
                       return DropdownMenuItem<TimePeriod>(
                         value: period,
                         child: Text(period.value),

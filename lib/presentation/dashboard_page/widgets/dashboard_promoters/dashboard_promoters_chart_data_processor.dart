@@ -1,29 +1,27 @@
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
-class DashboardRecommendationsChartDataProcessor {
-  final List<UserRecommendation> recommendations;
+class DashboardPromotersChartDataProcessor {
+  final List<CustomUser> promoters;
   final TimePeriod timePeriod;
-  final int? statusLevel;
 
-  DashboardRecommendationsChartDataProcessor({
-    required this.recommendations,
+  DashboardPromotersChartDataProcessor({
+    required this.promoters,
     required this.timePeriod,
-    this.statusLevel,
   });
 
   List<FlSpot> generateSpots() {
     final spots = <FlSpot>[];
     final now = DateTime.now();
-    final recommendationsByPeriod = _groupRecommendationsByPeriod();
+    final promotersByPeriod = _groupPromotersByPeriod();
 
     final periodLength = getPeriodLength();
 
     for (int i = 0; i < periodLength; i++) {
       final date = _getDateForIndex(i, now);
-      final count = recommendationsByPeriod[date] ?? 0;
+      final count = promotersByPeriod[date] ?? 0;
       spots.add(FlSpot(i.toDouble(), count.toDouble()));
     }
 
@@ -33,45 +31,36 @@ class DashboardRecommendationsChartDataProcessor {
   int getPeriodLength() {
     switch (timePeriod) {
       case TimePeriod.day:
-        return 24;
       case TimePeriod.week:
         return 7;
       case TimePeriod.month:
-      case TimePeriod.year:
         return 30;
+      case TimePeriod.year:
+        return 12;
     }
   }
 
   DateTime _getDateForIndex(int index, DateTime now) {
     switch (timePeriod) {
       case TimePeriod.day:
-        final hour = now.subtract(Duration(hours: 23 - index));
-        return DateTime(hour.year, hour.month, hour.day, hour.hour);
       case TimePeriod.week:
         final day = now.subtract(Duration(days: 6 - index));
         return DateTime(day.year, day.month, day.day);
       case TimePeriod.month:
-      case TimePeriod.year:
         final day = now.subtract(Duration(days: 29 - index));
         return DateTime(day.year, day.month, day.day);
+      case TimePeriod.year:
+        final month = DateTime(now.year, now.month - (11 - index), 1);
+        return DateTime(month.year, month.month, 1);
     }
   }
 
-  Map<DateTime, int> _groupRecommendationsByPeriod() {
+  Map<DateTime, int> _groupPromotersByPeriod() {
     final Map<DateTime, int> groupedData = {};
 
-    final filteredRecommendations = statusLevel != null
-        ? recommendations
-            .where((rec) =>
-                rec.recommendation?.statusLevel?.index == (statusLevel! - 1))
-            .toList()
-        : recommendations;
-
-    for (final recommendation in filteredRecommendations) {
-      final statusTimestamp =
-          recommendation.recommendation?.statusTimestamps?[0];
-      if (statusTimestamp != null) {
-        final dateKey = _getDateKeyForTimestamp(statusTimestamp);
+    for (final promoter in promoters) {
+      if (promoter.createdAt != null) {
+        final dateKey = _getDateKeyForTimestamp(promoter.createdAt!);
         groupedData[dateKey] = (groupedData[dateKey] ?? 0) + 1;
       }
     }
@@ -82,12 +71,11 @@ class DashboardRecommendationsChartDataProcessor {
   DateTime _getDateKeyForTimestamp(DateTime timestamp) {
     switch (timePeriod) {
       case TimePeriod.day:
-        return DateTime(
-            timestamp.year, timestamp.month, timestamp.day, timestamp.hour);
       case TimePeriod.week:
       case TimePeriod.month:
-      case TimePeriod.year:
         return DateTime(timestamp.year, timestamp.month, timestamp.day);
+      case TimePeriod.year:
+        return DateTime(timestamp.year, timestamp.month, 1);
     }
   }
 
@@ -96,33 +84,34 @@ class DashboardRecommendationsChartDataProcessor {
 
     switch (timePeriod) {
       case TimePeriod.day:
-        return '${index.toString().padLeft(2, '0')}:00';
       case TimePeriod.week:
         final day = now.subtract(Duration(days: 6 - index));
         return DateFormat('E', 'de_DE').format(day);
       case TimePeriod.month:
-      case TimePeriod.year:
         final day = now.subtract(Duration(days: 29 - index));
         return DateFormat('dd.MM').format(day);
+      case TimePeriod.year:
+        final month = DateTime(now.year, now.month - (11 - index), 1);
+        return DateFormat('MMM', 'de_DE').format(month);
     }
   }
 
   double getXAxisInterval() {
     switch (timePeriod) {
       case TimePeriod.day:
-        return 6; // Alle 6 Stunden (4 Labels: 0, 6, 12, 18)
       case TimePeriod.week:
         return 1; // Jeden Tag
       case TimePeriod.month:
+        return 5; // Alle 5 Tage
       case TimePeriod.year:
-        return 5; // Alle 5 Tage (6 Labels: 0, 5, 10, 15, 20, 25)
+        return 2; // Alle 2 Monate
     }
   }
 
   double getMaxY() {
-    final recommendationsByPeriod = _groupRecommendationsByPeriod();
-    if (recommendationsByPeriod.isEmpty) return 10;
-    final maxValue = recommendationsByPeriod.values
+    final promotersByPeriod = _groupPromotersByPeriod();
+    if (promotersByPeriod.isEmpty) return 10;
+    final maxValue = promotersByPeriod.values
         .fold(0, (max, count) => count > max ? count : max);
     // Add some padding to the top
     return (maxValue + (maxValue * 0.2)).clamp(5.0, double.infinity);
