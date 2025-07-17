@@ -3721,6 +3721,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last month: {count, plural, =0{0 recommendations} =1{1 recommendation} other{{count} recommendations}}'**
   String dashboard_recommendations_last_month(int count);
+
+  /// The title for the dashboard promoters widget
+  ///
+  /// In en, this message translates to:
+  /// **'Number of Promoters'**
+  String get dashboard_promoters_title;
+
+  /// Error message when loading promoters fails
+  ///
+  /// In en, this message translates to:
+  /// **'Loading promoters failed'**
+  String get dashboard_promoters_loading_error_title;
+
+  /// Shows the number of promoters in the last 7 days
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days: {count, plural, =0{0 promoters} =1{1 promoter} other{{count} promoters}}'**
+  String dashboard_promoters_last_7_days(int count);
+
+  /// Shows the number of promoters in the last month
+  ///
+  /// In en, this message translates to:
+  /// **'Last month: {count, plural, =0{0 promoters} =1{1 promoter} other{{count} promoters}}'**
+  String dashboard_promoters_last_month(int count);
+
+  /// Shows the number of promoters in the last year
+  ///
+  /// In en, this message translates to:
+  /// **'Last year: {count, plural, =0{0 promoters} =1{1 promoter} other{{count} promoters}}'**
+  String dashboard_promoters_last_year(int count);
+
+  /// Message when no promoters are found for the chart
+  ///
+  /// In en, this message translates to:
+  /// **'No promoters found'**
+  String get dashboard_promoters_chart_no_promoters;
 }
 
 class _AppLocalizationsDelegate

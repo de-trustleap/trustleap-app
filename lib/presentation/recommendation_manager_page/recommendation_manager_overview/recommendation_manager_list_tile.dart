@@ -93,7 +93,8 @@ class _RecommendationManagerListTileState
           widget.onUpdate(state.recommendation, true, false, false, false);
         } else if (state is RecommendationManagerTileFavoriteUpdatedState) {
           setState(() {
-            // Trigger rebuild to show updated favorite status
+            // Force rebuild by accessing a harmless property
+            context.mounted;
           });
         }
       },

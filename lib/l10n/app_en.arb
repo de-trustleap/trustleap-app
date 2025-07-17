@@ -2460,5 +2460,44 @@
                 "type": "int"
             }
         }
+    },
+    "dashboard_promoters_title": "Number of Promoters",
+    "@dashboard_promoters_title": {
+        "description": "The title for the dashboard promoters widget"
+    },
+    "dashboard_promoters_loading_error_title": "Loading promoters failed",
+    "@dashboard_promoters_loading_error_title": {
+        "description": "Error message when loading promoters fails"
+    },
+    "dashboard_promoters_last_7_days": "Last 7 days: {count, plural, =0{0 promoters} =1{1 promoter} other{{count} promoters}}",
+    "@dashboard_promoters_last_7_days": {
+        "description": "Shows the number of promoters in the last 7 days",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_promoters_last_month": "Last month: {count, plural, =0{0 promoters} =1{1 promoter} other{{count} promoters}}",
+    "@dashboard_promoters_last_month": {
+        "description": "Shows the number of promoters in the last month",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_promoters_last_year": "Last year: {count, plural, =0{0 promoters} =1{1 promoter} other{{count} promoters}}",
+    "@dashboard_promoters_last_year": {
+        "description": "Shows the number of promoters in the last year",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_promoters_chart_no_promoters": "No promoters found",
+    "@dashboard_promoters_chart_no_promoters": {
+        "description": "Message when no promoters are found for the chart"
     }
 }

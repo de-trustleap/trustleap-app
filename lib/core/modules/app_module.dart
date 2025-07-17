@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/promoters/dashboard_promoters_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
@@ -123,6 +124,7 @@ class AppModule extends Module {
       ..addLazySingleton(WebLoggingCubit.new)
       ..addLazySingleton(DashboardOverviewCubit.new)
       ..addLazySingleton(DashboardRecommendationsCubit.new)
+      ..addLazySingleton(DashboardPromotersCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)

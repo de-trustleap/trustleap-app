@@ -5,8 +5,8 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations_chart.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations_helper.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_chart.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_helper.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/underlined_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,7 +65,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                 children: [
                   UnderlinedDropdown<TimePeriod>(
                     value: _selectedTimePeriod,
-                    items: TimePeriod.values.map((period) {
+                    items: [TimePeriod.day, TimePeriod.week, TimePeriod.month].map((period) {
                       return DropdownMenuItem<TimePeriod>(
                         value: period,
                         child: Text(period.value),

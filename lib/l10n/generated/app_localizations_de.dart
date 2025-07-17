@@ -2183,4 +2183,51 @@ class AppLocalizationsDe extends AppLocalizations {
     );
     return 'Letzter Monat: $_temp0';
   }
+
+  @override
+  String get dashboard_promoters_title => 'Anzahl der Promoter';
+
+  @override
+  String get dashboard_promoters_loading_error_title =>
+      'Laden der Promoter fehlgeschlagen';
+
+  @override
+  String dashboard_promoters_last_7_days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Promoter',
+      one: '1 Promoter',
+      zero: '0 Promoter',
+    );
+    return 'Letzte 7 Tage: $_temp0';
+  }
+
+  @override
+  String dashboard_promoters_last_month(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Promoter',
+      one: '1 Promoter',
+      zero: '0 Promoter',
+    );
+    return 'Letzter Monat: $_temp0';
+  }
+
+  @override
+  String dashboard_promoters_last_year(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Promoter',
+      one: '1 Promoter',
+      zero: '0 Promoter',
+    );
+    return 'Letztes Jahr: $_temp0';
+  }
+
+  @override
+  String get dashboard_promoters_chart_no_promoters =>
+      'Keine Promoter gefunden';
 }

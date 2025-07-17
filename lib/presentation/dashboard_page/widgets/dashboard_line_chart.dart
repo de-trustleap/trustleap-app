@@ -1,26 +1,31 @@
-import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
-import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations_chart_data_processor.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class DashboardRecommendationsChart extends StatelessWidget {
-  final List<UserRecommendation> recommendations;
-  final TimePeriod timePeriod;
-  final int? statusLevel;
+class DashboardLineChart extends StatelessWidget {
+  final List<FlSpot> spots;
+  final double maxX;
+  final double maxY;
+  final double xAxisInterval;
+  final double yAxisInterval;
+  final String Function(int) getXAxisLabel;
+  final String emptyStateMessage;
+  final bool isEmpty;
 
-  const DashboardRecommendationsChart({
+  const DashboardLineChart({
     super.key,
-    required this.recommendations,
-    required this.timePeriod,
-    this.statusLevel,
+    required this.spots,
+    required this.maxX,
+    required this.maxY,
+    required this.xAxisInterval,
+    required this.yAxisInterval,
+    required this.getXAxisLabel,
+    required this.emptyStateMessage,
+    required this.isEmpty,
   });
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final localization = AppLocalizations.of(context);
 
     return Container(
       height: 300,
@@ -32,10 +37,10 @@ class DashboardRecommendationsChart extends StatelessWidget {
           color: themeData.colorScheme.outline.withValues(alpha: 0.2),
         ),
       ),
-      child: recommendations.isEmpty
+      child: isEmpty
           ? Center(
               child: Text(
-                localization.dashboard_recommendations_chart_no_recommendations,
+                emptyStateMessage,
                 style: themeData.textTheme.bodyMedium?.copyWith(
                   color: themeData.colorScheme.onSurfaceVariant,
                 ),
@@ -46,14 +51,6 @@ class DashboardRecommendationsChart extends StatelessWidget {
   }
 
   Widget _buildChart(ThemeData themeData) {
-    final dataProcessor = DashboardRecommendationsChartDataProcessor(
-      recommendations: recommendations,
-      timePeriod: timePeriod,
-      statusLevel: statusLevel,
-    );
-    
-    final spots = dataProcessor.generateSpots();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -76,12 +73,12 @@ class DashboardRecommendationsChart extends StatelessWidget {
                   sideTitles: SideTitles(
                     showTitles: true,
                     reservedSize: 32,
-                    interval: dataProcessor.getXAxisInterval(),
+                    interval: xAxisInterval,
                     getTitlesWidget: (value, meta) {
                       return Padding(
                         padding: const EdgeInsets.only(top: 8),
                         child: Text(
-                          dataProcessor.getXAxisLabel(value.toInt()),
+                          getXAxisLabel(value.toInt()),
                           style: themeData.textTheme.bodySmall?.copyWith(
                             color: themeData.colorScheme.onSurfaceVariant,
                           ),
@@ -94,7 +91,7 @@ class DashboardRecommendationsChart extends StatelessWidget {
                   sideTitles: SideTitles(
                     showTitles: true,
                     reservedSize: 40,
-                    interval: dataProcessor.getYAxisInterval(),
+                    interval: yAxisInterval,
                     getTitlesWidget: (value, meta) {
                       return Text(
                         value.toInt().toString(),
@@ -147,9 +144,9 @@ class DashboardRecommendationsChart extends StatelessWidget {
                 ),
               ],
               minX: 0,
-              maxX: (dataProcessor.getPeriodLength() - 1).toDouble(),
+              maxX: maxX,
               minY: 0,
-              maxY: dataProcessor.getMaxY(),
+              maxY: maxY,
             ),
           ),
         ),

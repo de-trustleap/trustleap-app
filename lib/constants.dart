@@ -95,7 +95,8 @@ enum LogLevel { debug, info, warn, error }
 enum TimePeriod {
   day("Tag"),
   week("Woche"),
-  month("Monat");
+  month("Monat"),
+  year("Jahr");
 
   final String value;
   const TimePeriod(this.value);

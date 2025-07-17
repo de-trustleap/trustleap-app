@@ -1,8 +1,10 @@
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -44,7 +46,39 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                   style: themeData.textTheme.titleLarge!
                       .copyWith(fontSize: 40, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
-              DashboardRecommendations(user: state.user)
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  if (state.user.role == Role.company &&
+                      constraints.maxWidth >= 1200) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: DashboardRecommendations(user: state.user),
+                          ),
+                          const SizedBox(width: 40),
+                          Expanded(
+                            child: DashboardPromoters(user: state.user),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        DashboardRecommendations(user: state.user),
+                        if (state.user.role == Role.company) ...[
+                          const SizedBox(height: 40),
+                          DashboardPromoters(user: state.user),
+                        ],
+                      ],
+                    );
+                  }
+                },
+              ),
+              const SizedBox(height: 40)
             ],
           );
         } else {

@@ -2460,5 +2460,44 @@
                 "type": "int"
             }
         }
+    },
+    "dashboard_promoters_title": "Anzahl der Promoter",
+    "@dashboard_promoters_title": {
+        "description": "Der Titel für das Dashboard-Promoter-Widget"
+    },
+    "dashboard_promoters_loading_error_title": "Laden der Promoter fehlgeschlagen",
+    "@dashboard_promoters_loading_error_title": {
+        "description": "Fehlermeldung beim Laden der Promoter"
+    },
+    "dashboard_promoters_last_7_days": "Letzte 7 Tage: {count, plural, =0{0 Promoter} =1{1 Promoter} other{{count} Promoter}}",
+    "@dashboard_promoters_last_7_days": {
+        "description": "Zeigt die Anzahl der Promoter in den letzten 7 Tagen an",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_promoters_last_month": "Letzter Monat: {count, plural, =0{0 Promoter} =1{1 Promoter} other{{count} Promoter}}",
+    "@dashboard_promoters_last_month": {
+        "description": "Zeigt die Anzahl der Promoter im letzten Monat an",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_promoters_last_year": "Letztes Jahr: {count, plural, =0{0 Promoter} =1{1 Promoter} other{{count} Promoter}}",
+    "@dashboard_promoters_last_year": {
+        "description": "Zeigt die Anzahl der Promoter im letzten Jahr an",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dashboard_promoters_chart_no_promoters": "Keine Promoter gefunden",
+    "@dashboard_promoters_chart_no_promoters": {
+        "description": "Nachricht wenn keine Promoter für das Chart gefunden wurden"
     }
 }

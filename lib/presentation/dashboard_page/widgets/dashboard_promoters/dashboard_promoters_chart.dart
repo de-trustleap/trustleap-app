@@ -1,0 +1,39 @@
+import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_line_chart.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters_chart_data_processor.dart';
+import 'package:flutter/material.dart';
+
+class DashboardPromotersChart extends StatelessWidget {
+  final List<CustomUser> promoters;
+  final TimePeriod timePeriod;
+
+  const DashboardPromotersChart({
+    super.key,
+    required this.promoters,
+    required this.timePeriod,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context);
+    final dataProcessor = DashboardPromotersChartDataProcessor(
+      promoters: promoters,
+      timePeriod: timePeriod,
+    );
+
+    final spots = dataProcessor.generateSpots();
+
+    return DashboardLineChart(
+      spots: spots,
+      maxX: (dataProcessor.getPeriodLength() - 1).toDouble(),
+      maxY: dataProcessor.getMaxY(),
+      xAxisInterval: dataProcessor.getXAxisInterval(),
+      yAxisInterval: dataProcessor.getYAxisInterval(),
+      getXAxisLabel: dataProcessor.getXAxisLabel,
+      emptyStateMessage: localization.dashboard_promoters_chart_no_promoters,
+      isEmpty: promoters.isEmpty,
+    );
+  }
+}
