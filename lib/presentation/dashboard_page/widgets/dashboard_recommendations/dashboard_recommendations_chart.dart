@@ -1,7 +1,7 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations_chart_data_processor.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_chart_data_processor.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +51,7 @@ class DashboardRecommendationsChart extends StatelessWidget {
       timePeriod: timePeriod,
       statusLevel: statusLevel,
     );
-    
+
     final spots = dataProcessor.generateSpots();
 
     return Column(
