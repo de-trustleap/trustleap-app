@@ -1,6 +1,8 @@
+import 'package:finanzbegleiter/application/dashboard/promoters/dashboard_promoters_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class DashboardPromoters extends StatefulWidget {
   final CustomUser user;
@@ -12,6 +14,14 @@ class DashboardPromoters extends StatefulWidget {
 
 class _DashboardPromotersState extends State<DashboardPromoters> {
   TimePeriod _selectedTimePeriod = TimePeriod.week;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Modular.get<DashboardPromotersCubit>().getRegisteredPromoters(widget.user);
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
