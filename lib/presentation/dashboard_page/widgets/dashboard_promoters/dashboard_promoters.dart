@@ -48,9 +48,7 @@ class _DashboardPromotersState extends State<DashboardPromoters> {
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              Wrap(
-                spacing: 24,
-                runSpacing: 16,
+              Row(
                 children: [
                   UnderlinedDropdown<TimePeriod>(
                     value: _selectedTimePeriod,
@@ -69,12 +67,16 @@ class _DashboardPromotersState extends State<DashboardPromoters> {
                       }
                     },
                   ),
-                  if (state is DashboardPromotersGetRegisteredPromotersSuccessState)
+                  if (state
+                      is DashboardPromotersGetRegisteredPromotersSuccessState) ...[
+                    const Spacer(),
                     Text(
-                      _getTimePeriodSummaryText(state.promoters, _selectedTimePeriod, localization),
+                      _getTimePeriodSummaryText(
+                          state.promoters, _selectedTimePeriod, localization),
                       style: themeData.textTheme.bodySmall!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
+                  ]
                 ],
               ),
               const SizedBox(height: 16),
@@ -83,12 +85,14 @@ class _DashboardPromotersState extends State<DashboardPromoters> {
                   promoters: state.promoters,
                   timePeriod: _selectedTimePeriod,
                 )
-              else if (state is DashboardPromotersGetRegisteredPromotersEmptyState)
+              else if (state
+                  is DashboardPromotersGetRegisteredPromotersEmptyState)
                 DashboardPromotersChart(
                   promoters: [],
                   timePeriod: _selectedTimePeriod,
                 )
-              else if (state is DashboardPromotersGetRegisteredPromotersFailureState)
+              else if (state
+                  is DashboardPromotersGetRegisteredPromotersFailureState)
                 ErrorView(
                   title: localization.dashboard_promoters_loading_error_title,
                   message: "",
@@ -103,10 +107,11 @@ class _DashboardPromotersState extends State<DashboardPromoters> {
     );
   }
 
-  String _getTimePeriodSummaryText(List<CustomUser> promoters, TimePeriod timePeriod, AppLocalizations localization) {
+  String _getTimePeriodSummaryText(List<CustomUser> promoters,
+      TimePeriod timePeriod, AppLocalizations localization) {
     final now = DateTime.now();
     DateTime startDate;
-    
+
     switch (timePeriod) {
       case TimePeriod.week:
         startDate = now.subtract(const Duration(days: 7));
@@ -122,7 +127,8 @@ class _DashboardPromotersState extends State<DashboardPromoters> {
     }
 
     final filteredPromoters = promoters.where((promoter) {
-      return promoter.createdAt != null && promoter.createdAt!.isAfter(startDate);
+      return promoter.createdAt != null &&
+          promoter.createdAt!.isAfter(startDate);
     }).length;
 
     switch (timePeriod) {

@@ -46,11 +46,38 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                   style: themeData.textTheme.titleLarge!
                       .copyWith(fontSize: 40, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
-              DashboardRecommendations(user: state.user),
-              if (state.user.role == Role.company) ...[
-                const SizedBox(height: 40),
-                DashboardPromoters(user: state.user)
-              ],
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  if (state.user.role == Role.company &&
+                      constraints.maxWidth >= 1200) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: DashboardRecommendations(user: state.user),
+                          ),
+                          const SizedBox(width: 40),
+                          Expanded(
+                            child: DashboardPromoters(user: state.user),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        DashboardRecommendations(user: state.user),
+                        if (state.user.role == Role.company) ...[
+                          const SizedBox(height: 40),
+                          DashboardPromoters(user: state.user),
+                        ],
+                      ],
+                    );
+                  }
+                },
+              ),
               const SizedBox(height: 40)
             ],
           );
