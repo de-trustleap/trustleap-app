@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
@@ -49,6 +50,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   // This is neeeded to make it possible to not apply new filters on an already filtered array.
   List<Promoter> unfilteredData = [];
   bool _isLoading = false;
+  PromoterSearchOption _selectedSearchOption = PromoterSearchOption.fullName;
 
   @override
   void initState() {
@@ -85,7 +87,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
       setState(() {
         lastIndexLoaded = 0;
         visiblePromoters = [];
-        searchResults = filter.onSearchQueryChanged(trimmedQuery, allPromoters);
+        searchResults = filter.onSearchQueryChanged(trimmedQuery, allPromoters, _selectedSearchOption);
         unfilteredData = searchResults;
         searchResults = filter.onFilterChanged(_filterStates, searchResults);
       });
@@ -110,6 +112,13 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
     searchResults = [];
     lastIndexLoaded = 0;
     _searchController.clear();
+  }
+
+  void onSearchOptionChanged(PromoterSearchOption option) {
+    setState(() {
+      _selectedSearchOption = option;
+    });
+    onSearchQueryChanged(_searchController.text);
   }
 
   void submitDeletion(String id, bool isRegistered) {
@@ -249,7 +258,8 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
           setState(() {
             _viewState = viewState;
           });
-        });
+        },
+        onSearchOptionChanged: onSearchOptionChanged);
   }
 
   void _onScroll() {

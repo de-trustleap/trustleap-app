@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_view_state_button.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_page.dart';
@@ -13,13 +15,15 @@ class PromoterOverviewHeader extends StatefulWidget {
   final Function clearSearch;
   final Function(PromoterOverviewFilterStates filterStates) onFilterChanged;
   final Function(PromotersOverviewViewState) onViewStateButtonPressed;
+  final Function(PromoterSearchOption) onSearchOptionChanged;
   const PromoterOverviewHeader(
       {super.key,
       required this.searchController,
       required this.onSearchQueryChanged,
       required this.clearSearch,
       required this.onFilterChanged,
-      required this.onViewStateButtonPressed});
+      required this.onViewStateButtonPressed,
+      required this.onSearchOptionChanged});
 
   @override
   State<PromoterOverviewHeader> createState() => _PromoterOverviewHeaderState();
@@ -27,6 +31,7 @@ class PromoterOverviewHeader extends StatefulWidget {
 
 class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
   bool _isExpanded = false;
+  PromoterSearchOption _selectedSearchOption = PromoterSearchOption.fullName;
 
   void onFilterPressed() {
     setState(() {
@@ -43,79 +48,81 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Flexible(
-            flex: responsiveValue.isDesktop ? 2 : 0,
-            child: SelectableText(localization.promoter_overview_title,
-                style: themeData.textTheme.headlineLarge!
-                    .copyWith(fontWeight: FontWeight.bold)),
-          ),
-          if (responsiveValue.isDesktop) ...[
-            const Spacer(),
-            Flexible(
-                flex: 5,
-                child: SearchBar(
-                  controller: widget.searchController,
-                  leading: const Icon(Icons.search),
-                  onChanged: widget.onSearchQueryChanged,
-                  trailing: [
-                    IconButton(
-                        onPressed: () => widget.clearSearch(),
-                        tooltip: localization.promoter_overview_reset_search_tooltip,
-                        icon: const Icon(Icons.close))
-                  ],
-                  hintText: localization.promoter_overview_search_placeholder,
-                )),
-            const SizedBox(width: 8),
-            SizedBox(
-              width: 48,
-              height: 48,
-              child: IconButton(
-                  onPressed: () => onFilterPressed(),
-                  tooltip: localization.promoter_overview_filter_tooltip,
-                  icon: Icon(Icons.filter_list,
-                      color: themeData.colorScheme.secondary, size: 32)),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          SelectableText(localization.promoter_overview_title,
+              style: themeData.textTheme.headlineLarge!
+                  .copyWith(fontWeight: FontWeight.bold)),
+          PromoterOverviewViewStateButton(onSelected: (selectedValue) {
+            widget.onViewStateButtonPressed(selectedValue);
+          }),
+        ]),
+        const SizedBox(height: 16),
+        ResponsiveRowColumn(
+          layout: responsiveValue.isDesktop
+              ? ResponsiveRowColumnType.ROW
+              : ResponsiveRowColumnType.COLUMN,
+          rowCrossAxisAlignment: CrossAxisAlignment.center,
+          columnCrossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ResponsiveRowColumnItem(
+              child: UnderlinedDropdown<PromoterSearchOption>(
+                value: _selectedSearchOption,
+                items: PromoterSearchOption.values.map((option) {
+                  return DropdownMenuItem<PromoterSearchOption>(
+                    value: option,
+                    child: Text(option.value),
+                  );
+                }).toList(),
+                onChanged: (PromoterSearchOption? newValue) {
+                  if (newValue != null) {
+                    setState(() {
+                      _selectedSearchOption = newValue;
+                    });
+                    widget.onSearchOptionChanged(newValue);
+                  }
+                },
+              ),
+            ),
+            ResponsiveRowColumnItem(
+              child: responsiveValue.isDesktop
+                  ? const SizedBox(width: 24)
+                  : const SizedBox(height: 16),
+            ),
+            ResponsiveRowColumnItem(
+              rowFlex: 1,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SearchBar(
+                      controller: widget.searchController,
+                      leading: const Icon(Icons.search),
+                      onChanged: widget.onSearchQueryChanged,
+                      trailing: [
+                        IconButton(
+                            onPressed: () => widget.clearSearch(),
+                            tooltip: localization
+                                .promoter_overview_reset_search_tooltip,
+                            icon: const Icon(Icons.close))
+                      ],
+                      hintText:
+                          localization.promoter_overview_search_placeholder,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: IconButton(
+                        onPressed: () => onFilterPressed(),
+                        tooltip: localization.promoter_overview_filter_tooltip,
+                        icon: Icon(Icons.filter_list,
+                            color: themeData.colorScheme.secondary, size: 32)),
+                  ),
+                ],
+              ),
             ),
           ],
-          const Spacer(),
-          Flexible(
-            flex: responsiveValue.isDesktop ? 2 : 0,
-            child: PromoterOverviewViewStateButton(onSelected: (selectedValue) {
-              widget.onViewStateButtonPressed(selectedValue);
-            }),
-          )
-        ]),
-        if (responsiveValue.smallerThan(DESKTOP)) ...[
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: SearchBar(
-                  controller: widget.searchController,
-                  leading: const Icon(Icons.search),
-                  onChanged: widget.onSearchQueryChanged,
-                  trailing: [
-                    IconButton(
-                        onPressed: () => widget.clearSearch(),
-                        icon: const Icon(Icons.close))
-                  ],
-                  hintText: localization.promoter_overview_search_placeholder,
-                ),
-              ),
-              const SizedBox(width: 8),
-              SizedBox(
-                width: 48,
-                height: 48,
-                child: IconButton(
-                    onPressed: () => onFilterPressed(),
-                    icon: Icon(Icons.filter_list,
-                        color: themeData.colorScheme.secondary, size: 32)),
-              )
-            ],
-          )
-        ],
+        ),
         ExpandedSection(
             expand: _isExpanded,
             child: Column(

@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 
@@ -99,18 +100,22 @@ class PromoterOverviewFilter {
   }
 
   List<Promoter> onSearchQueryChanged(
-      String query, List<Promoter> allPromoters) {
+      String query, List<Promoter> allPromoters, PromoterSearchOption searchOption) {
     return allPromoters.where((element) {
-      if (element.firstName != null &&
-          element.lastName != null &&
-          element.email != null) {
-        final fullName = "${element.firstName!} ${element.lastName!}";
-        final fullNameReversed = "${element.lastName!} ${element.firstName!}";
-        return fullName.toLowerCase().contains(query.toLowerCase()) ||
-            fullNameReversed.toLowerCase().contains(query.toLowerCase()) ||
-            element.email!.toLowerCase().contains(query.toLowerCase());
-      } else {
-        return false;
+      switch (searchOption) {
+        case PromoterSearchOption.fullName:
+          if (element.firstName != null && element.lastName != null) {
+            final fullName = "${element.firstName!} ${element.lastName!}";
+            final fullNameReversed = "${element.lastName!} ${element.firstName!}";
+            return fullName.toLowerCase().contains(query.toLowerCase()) ||
+                fullNameReversed.toLowerCase().contains(query.toLowerCase());
+          }
+          return false;
+        case PromoterSearchOption.email:
+          if (element.email != null) {
+            return element.email!.toLowerCase().contains(query.toLowerCase());
+          }
+          return false;
       }
     }).toList();
   }

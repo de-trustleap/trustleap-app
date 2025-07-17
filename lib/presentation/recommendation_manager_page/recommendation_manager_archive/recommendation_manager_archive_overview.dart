@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
@@ -26,6 +27,7 @@ class _RecommendationManagerArchiveOverviewState
   RecommendationOverviewFilterStates _currentFilterStates =
       RecommendationOverviewFilterStates(isArchive: true);
   bool _filterIsExpanded = false;
+  RecommendationSearchOption _selectedSearchOption = RecommendationSearchOption.promoterName;
 
   @override
   void initState() {
@@ -33,23 +35,32 @@ class _RecommendationManagerArchiveOverviewState
 
     _setInitialFilterData();
     _searchController.addListener(() {
-      final query = _searchController.text.toLowerCase();
-      setState(() {
-        _searchFilteredRecommendations = widget.recommendations.where((item) {
-          final name = item.name?.toLowerCase() ?? "";
-          final promoter = item.promoterName?.toLowerCase() ?? "";
-          final reason = item.reason?.toLowerCase() ?? "";
+      _performSearch();
+    });
+  }
 
-          return name.contains(query) ||
-              promoter.contains(query) ||
-              reason.contains(query);
-        }).toList();
+  void _performSearch() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      _searchFilteredRecommendations = widget.recommendations.where((item) {
+        final name = item.name?.toLowerCase() ?? "";
+        final promoter = item.promoterName?.toLowerCase() ?? "";
+        final reason = item.reason?.toLowerCase() ?? "";
 
-        _filteredRecommendations = RecommendationArchiveFilter.applyFilters(
-          items: _searchFilteredRecommendations,
-          filterStates: _currentFilterStates,
-        );
-      });
+        switch (_selectedSearchOption) {
+          case RecommendationSearchOption.name:
+            return name.contains(query);
+          case RecommendationSearchOption.promoterName:
+            return promoter.contains(query);
+          case RecommendationSearchOption.reason:
+            return reason.contains(query);
+        }
+      }).toList();
+
+      _filteredRecommendations = RecommendationArchiveFilter.applyFilters(
+        items: _searchFilteredRecommendations,
+        filterStates: _currentFilterStates,
+      );
     });
   }
 
@@ -93,6 +104,13 @@ class _RecommendationManagerArchiveOverviewState
     });
   }
 
+  void onSearchOptionChanged(RecommendationSearchOption option) {
+    setState(() {
+      _selectedSearchOption = option;
+    });
+    _performSearch();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CardContainer(
@@ -102,7 +120,8 @@ class _RecommendationManagerArchiveOverviewState
         children: [
           RecommendationManagerListHeader(
               searchController: _searchController,
-              onFilterPressed: onFilterPressed),
+              onFilterPressed: onFilterPressed,
+              onSearchOptionChanged: onSearchOptionChanged),
           ExpandedSection(
               expand: _filterIsExpanded,
               child: Column(

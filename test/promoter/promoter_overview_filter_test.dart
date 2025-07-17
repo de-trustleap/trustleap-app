@@ -287,7 +287,7 @@ void main() {
             createdAt: date)
       ];
       // When
-      final result = sut.onSearchQueryChanged(query, allPromoters);
+      final result = sut.onSearchQueryChanged(query, allPromoters, PromoterSearchOption.fullName);
       // Then
       expect(expectedResult, result);
     });
@@ -297,7 +297,7 @@ void main() {
       const query = "Test3";
       final List<Promoter> expectedResult = [];
       // When
-      final result = sut.onSearchQueryChanged(query, allPromoters);
+      final result = sut.onSearchQueryChanged(query, allPromoters, PromoterSearchOption.fullName);
       // Then
       expect(expectedResult, result);
     });
@@ -320,7 +320,48 @@ void main() {
             createdAt: date)
       ];
       // When
-      final result = sut.onSearchQueryChanged(query, allPromoters);
+      final result = sut.onSearchQueryChanged(query, allPromoters, PromoterSearchOption.fullName);
+      // Then
+      expect(expectedResult, result);
+    });
+
+    test("should return element when searching by email", () {
+      // Given
+      const query = "tester2@test.de";
+      final List<Promoter> expectedResult = [
+        Promoter(
+            id: UniqueID.fromUniqueString("2"),
+            gender: Gender.female,
+            firstName: "Test2",
+            lastName: "Tester",
+            birthDate: "23.12.2023",
+            email: "tester2@test.de",
+            thumbnailDownloadURL: "https://test2.de",
+            registered: true,
+            createdAt: date)
+      ];
+      // When
+      final result = sut.onSearchQueryChanged(query, allPromoters, PromoterSearchOption.email);
+      // Then
+      expect(expectedResult, result);
+    });
+
+    test("should return empty list when searching by email with fullName query", () {
+      // Given
+      const query = "Test2";
+      final List<Promoter> expectedResult = [];
+      // When
+      final result = sut.onSearchQueryChanged(query, allPromoters, PromoterSearchOption.email);
+      // Then
+      expect(expectedResult, result);
+    });
+
+    test("should return empty list when searching by name with email query", () {
+      // Given
+      const query = "tester2@test.de";
+      final List<Promoter> expectedResult = [];
+      // When
+      final result = sut.onSearchQueryChanged(query, allPromoters, PromoterSearchOption.fullName);
       // Then
       expect(expectedResult, result);
     });

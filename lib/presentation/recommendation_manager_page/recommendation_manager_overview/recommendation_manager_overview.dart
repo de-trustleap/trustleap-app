@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
@@ -47,6 +48,7 @@ class _RecommendationManagerOverviewState
   RecommendationOverviewFilterStates _currentFilterStates =
       RecommendationOverviewFilterStates(isArchive: false);
   bool _filterIsExpanded = false;
+  RecommendationSearchOption _selectedSearchOption = RecommendationSearchOption.promoterName;
 
   @override
   void initState() {
@@ -54,25 +56,34 @@ class _RecommendationManagerOverviewState
 
     _setInitialFilterData();
     _searchController.addListener(() {
-      final query = _searchController.text.toLowerCase();
-      setState(() {
-        _searchFilteredRecommendations = widget.recommendations.where((item) {
-          final name = item.recommendation?.name?.toLowerCase() ?? "";
-          final promoter =
-              item.recommendation?.promoterName?.toLowerCase() ?? "";
-          final reason = item.recommendation?.reason?.toLowerCase() ?? "";
+      _performSearch();
+    });
+  }
 
-          return name.contains(query) ||
-              promoter.contains(query) ||
-              reason.contains(query);
-        }).toList();
+  void _performSearch() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      _searchFilteredRecommendations = widget.recommendations.where((item) {
+        final name = item.recommendation?.name?.toLowerCase() ?? "";
+        final promoter =
+            item.recommendation?.promoterName?.toLowerCase() ?? "";
+        final reason = item.recommendation?.reason?.toLowerCase() ?? "";
 
-        _filteredRecommendations = RecommendationFilter.applyFilters(
-          items: _searchFilteredRecommendations,
-          filterStates: _currentFilterStates,
-          favoriteRecommendationIDs: Modular.get<RecommendationManagerTileCubit>().currentFavoriteRecommendationIDs,
-        );
-      });
+        switch (_selectedSearchOption) {
+          case RecommendationSearchOption.name:
+            return name.contains(query);
+          case RecommendationSearchOption.promoterName:
+            return promoter.contains(query);
+          case RecommendationSearchOption.reason:
+            return reason.contains(query);
+        }
+      }).toList();
+
+      _filteredRecommendations = RecommendationFilter.applyFilters(
+        items: _searchFilteredRecommendations,
+        filterStates: _currentFilterStates,
+        favoriteRecommendationIDs: Modular.get<RecommendationManagerTileCubit>().currentFavoriteRecommendationIDs,
+      );
     });
   }
 
@@ -118,6 +129,13 @@ class _RecommendationManagerOverviewState
     });
   }
 
+  void onSearchOptionChanged(RecommendationSearchOption option) {
+    setState(() {
+      _selectedSearchOption = option;
+    });
+    _performSearch();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<RecommendationManagerTileCubit, RecommendationManagerTileState>(
@@ -140,7 +158,8 @@ class _RecommendationManagerOverviewState
           children: [
             RecommendationManagerListHeader(
                 searchController: _searchController,
-                onFilterPressed: onFilterPressed),
+                onFilterPressed: onFilterPressed,
+                onSearchOptionChanged: onSearchOptionChanged),
             ExpandedSection(
                 expand: _filterIsExpanded,
                 child: Column(
