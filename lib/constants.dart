@@ -101,3 +101,20 @@ enum TimePeriod {
   final String value;
   const TimePeriod(this.value);
 }
+
+enum RecommendationSearchOption {
+  promoterName("Suche nach Promotern"),
+  name("Suche nach Empfehlungsempfängern"),
+  reason("Suche nach Empfehlungsgründen");
+
+  final String value;
+  const RecommendationSearchOption(this.value);
+}
+
+enum PromoterSearchOption {
+  fullName("Suche nach Name"),
+  email("Suche nach E-Mail");
+
+  final String value;
+  const PromoterSearchOption(this.value);
+}
