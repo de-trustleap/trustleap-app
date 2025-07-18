@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/environment.dart';
@@ -52,11 +54,32 @@ class _RecommendationManagerListTileState
     extends State<RecommendationManagerListTile> {
   late UserRecommendation _recommendation;
   bool addNote = false;
+  Timer? _viewTimer;
 
   @override
   void initState() {
     super.initState();
     _recommendation = widget.recommendation;
+  }
+
+  @override
+  void dispose() {
+    _viewTimer?.cancel();
+    super.dispose();
+  }
+
+  void _startViewTimer(String recommendationID) {
+    _viewTimer?.cancel();
+    _viewTimer = Timer(const Duration(seconds: 3), () {
+      final cubit = Modular.get<RecommendationManagerTileCubit>();
+      cubit.markAsViewed(recommendationID);
+    });
+  }
+
+  void _markAsViewedAndCancelTimer(String recommendationID) {
+    _viewTimer?.cancel();
+    final cubit = Modular.get<RecommendationManagerTileCubit>();
+    cubit.markAsViewed(recommendationID);
   }
 
   @override
@@ -74,7 +97,9 @@ class _RecommendationManagerListTileState
               current.recommendation.id == _recommendation.id) ||
           (current is RecommendationSetFinishedSuccessState &&
               current.recommendation.id == _recommendation.id) ||
-          (current is RecommendationManagerTileFavoriteUpdatedState),
+          (current is RecommendationManagerTileFavoriteUpdatedState) ||
+          (current is RecommendationManagerTileViewedState &&
+              current.recommendationID == _recommendation.id.value),
       listener: (context, state) {
         if (state is RecommendationSetStatusSuccessState) {
           setState(() {
@@ -96,12 +121,33 @@ class _RecommendationManagerListTileState
             // Force rebuild by accessing a harmless property
             context.mounted;
           });
+        } else if (state is RecommendationManagerTileViewedState) {
+          setState(() {
+            final updatedViewedByUsers =
+                List<LastViewed>.of(_recommendation.viewedByUsers);
+            updatedViewedByUsers
+                .removeWhere((view) => view.userID == state.lastViewed.userID);
+            updatedViewedByUsers.add(state.lastViewed);
+
+            _recommendation =
+                _recommendation.copyWith(viewedByUsers: updatedViewedByUsers);
+          });
         }
       },
       builder: (context, state) {
         return CollapsibleTile(
-            backgroundColor: themeData.colorScheme.surface,
+            backgroundColor: _recommendation
+                    .hasUnseenChanges(cubit.currentUser?.id.value ?? "")
+                ? Colors.green.withValues(alpha: 0.1)
+                : themeData.colorScheme.surface,
             showDivider: false,
+            onExpansionChanged: (isExpanded) {
+              if (isExpanded) {
+                _startViewTimer(_recommendation.id.value);
+              } else {
+                _markAsViewedAndCancelTimer(_recommendation.id.value);
+              }
+            },
             titleWidget: Row(children: [
               Flexible(
                   flex: 1,
@@ -231,8 +277,8 @@ class _RecommendationManagerListTileState
                     recommendation: _recommendation,
                     isEditing: addNote ? true : false,
                     onSave: (notes) =>
-                        Modular.get<RecommendationManagerTileCubit>().setNotes(
-                            _recommendation.copyWith(notes: notes)))
+                        Modular.get<RecommendationManagerTileCubit>()
+                            .setNotes(_recommendation.copyWith(notes: notes)))
               ],
               if (state is RecommendationSetStatusFailureState &&
                   state.recommendation.id.value ==

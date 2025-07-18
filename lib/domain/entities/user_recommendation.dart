@@ -72,11 +72,17 @@ class UserRecommendation extends Equatable {
     return edit != null && edit.editedBy != currentUserId;
   }
   
-  bool hasUnseenChangesByUser(String userID) {
+  bool hasUnseenChanges(String userID) {
     final lastViewed = viewedByUsers.where((view) => view.userID == userID).firstOrNull;
-    if (lastViewed == null) return lastEdits.isNotEmpty;
     
-    return lastEdits.any((edit) => edit.editedAt.isAfter(lastViewed.viewedAt));
+    // Filter nur Änderungen von anderen Usern
+    final changesFromOthers = lastEdits.where((edit) => edit.editedBy != userID);
+    
+    if (lastViewed == null) {
+      return changesFromOthers.isNotEmpty;
+    }
+    
+    return changesFromOthers.any((edit) => edit.editedAt.isAfter(lastViewed.viewedAt));
   }
 
   @override

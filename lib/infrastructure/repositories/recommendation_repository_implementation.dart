@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/last_edit.dart';
+import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -409,6 +410,29 @@ class RecommendationRepositoryImplementation
       return right(updatedRecommendation);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  void markAsViewed(String recommendationID, LastViewed lastViewed) async {
+    final userRecoCollection = firestore.collection("usersRecommendations");
+
+    final doc = await userRecoCollection.doc(recommendationID).get();
+    if (doc.exists) {
+      final data = doc.data() as Map<String, dynamic>;
+      final currentViewedByUsers =
+          data["viewedByUsers"] as List<dynamic>? ?? [];
+
+      currentViewedByUsers
+          .removeWhere((view) => view["userID"] == lastViewed.userID);
+      currentViewedByUsers.add({
+        "userID": lastViewed.userID,
+        "viewedAt": lastViewed.viewedAt.toIso8601String(),
+      });
+
+      await userRecoCollection.doc(recommendationID).set({
+        "viewedByUsers": currentViewedByUsers,
+      }, SetOptions(merge: true));
     }
   }
 

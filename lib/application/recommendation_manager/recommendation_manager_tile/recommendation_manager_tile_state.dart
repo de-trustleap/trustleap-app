@@ -96,3 +96,17 @@ class RecommendationManagerTileFavoriteUpdatedState
   @override
   List<Object?> get props => [user, recommendation, timestamp];
 }
+
+class RecommendationManagerTileViewedState
+    extends RecommendationManagerTileState with EquatableMixin {
+  final String recommendationID;
+  final LastViewed lastViewed;
+
+  RecommendationManagerTileViewedState({
+    required this.recommendationID,
+    required this.lastViewed
+  });
+
+  @override
+  List<Object?> get props => [recommendationID, lastViewed];
+}

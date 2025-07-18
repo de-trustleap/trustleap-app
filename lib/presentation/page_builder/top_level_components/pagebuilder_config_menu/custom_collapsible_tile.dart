@@ -8,6 +8,7 @@ class CollapsibleTile extends StatefulWidget {
   final Widget? titleWidget;
   final Color? backgroundColor;
   final bool showDivider;
+  final Function(bool)? onExpansionChanged;
 
   const CollapsibleTile(
       {super.key,
@@ -17,7 +18,8 @@ class CollapsibleTile extends StatefulWidget {
       this.animationCurve = Curves.easeInOut,
       this.titleWidget,
       this.backgroundColor,
-      this.showDivider = true});
+      this.showDivider = true,
+      this.onExpansionChanged});
 
   @override
   State<CollapsibleTile> createState() => _CustomExpansionTileState();
@@ -74,6 +76,8 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
         _controller.reverse();
       }
     });
+
+    widget.onExpansionChanged?.call(_isExpanded);
   }
 
   @override
