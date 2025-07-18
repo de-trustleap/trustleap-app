@@ -57,7 +57,6 @@ void main() {
           priority: RecommendationPriority.medium,
   
           notes: "Test note",
-          notesLastEdited: null,
           recommendation: recommendation1,
         ),
         UserRecommendation(
@@ -67,7 +66,6 @@ void main() {
           priority: RecommendationPriority.high,
   
           notes: "Test note 2",
-          notesLastEdited: null,
           recommendation: recommendation2,
         ),
       ];

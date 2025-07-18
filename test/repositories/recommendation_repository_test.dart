@@ -86,7 +86,6 @@ void main() {
           userID: userID,
           priority: RecommendationPriority.medium,
             notes: "Test",
-          notesLastEdited: null,
           recommendation: recommendation)
     ];
     test("should return recommendations when call was successful", () async {
@@ -170,7 +169,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should return item when call was successful", () async {
@@ -221,7 +219,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should return item when call was successful", () async {
@@ -319,7 +316,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
@@ -369,29 +365,28 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
       final expectedResult = right(userRecommendation);
-      when(mockRecoRepo.setPriority(userRecommendation))
+      when(mockRecoRepo.setPriority(userRecommendation, "user123"))
           .thenAnswer((_) async => right(userRecommendation));
       // When
-      final result = await mockRecoRepo.setPriority(userRecommendation);
+      final result = await mockRecoRepo.setPriority(userRecommendation, "user123");
       // Then
-      verify(mockRecoRepo.setPriority(userRecommendation));
+      verify(mockRecoRepo.setPriority(userRecommendation, "user123"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
     test("should return failure when call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockRecoRepo.setPriority(userRecommendation))
+      when(mockRecoRepo.setPriority(userRecommendation, "user123"))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockRecoRepo.setPriority(userRecommendation);
+      final result = await mockRecoRepo.setPriority(userRecommendation, "user123");
       // Then
-      verify(mockRecoRepo.setPriority(userRecommendation));
+      verify(mockRecoRepo.setPriority(userRecommendation, "user123"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
@@ -418,17 +413,16 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
       final expectedResult = right(userRecommendation);
-      when(mockRecoRepo.setNotes(userRecommendation))
+      when(mockRecoRepo.setNotes(userRecommendation, "user123"))
           .thenAnswer((_) async => right(userRecommendation));
       // When
-      final result = await mockRecoRepo.setNotes(userRecommendation);
+      final result = await mockRecoRepo.setNotes(userRecommendation, "user123");
       // Then
-      verify(mockRecoRepo.setNotes(userRecommendation));
+      verify(mockRecoRepo.setNotes(userRecommendation, "user123"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
@@ -436,12 +430,12 @@ void main() {
     test("should return failure when call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockRecoRepo.setNotes(userRecommendation))
+      when(mockRecoRepo.setNotes(userRecommendation, "user123"))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockRecoRepo.setNotes(userRecommendation);
+      final result = await mockRecoRepo.setNotes(userRecommendation, "user123");
       // Then
-      verify(mockRecoRepo.setNotes(userRecommendation));
+      verify(mockRecoRepo.setNotes(userRecommendation, "user123"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
@@ -469,7 +463,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     final promoterRecommendations = [
       PromoterRecommendations(

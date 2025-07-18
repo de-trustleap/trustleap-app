@@ -55,7 +55,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should call user repo when function is called", () async {
@@ -120,7 +119,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should call recommendation repo when function is called", () async {
@@ -186,7 +184,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should call recommendation repo when function is called", () async {
@@ -255,29 +252,37 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     test("should call recommendation repo when function is called", () async {
       // Given
-      when(mockRecoRepo.setPriority(userRecommendation))
+      when(mockUserRepo.getUser())
+          .thenAnswer((_) async => right(mockUser));
+      when(mockRecoRepo.setPriority(userRecommendation, mockUser.id.value))
           .thenAnswer((_) async => right(userRecommendation));
       // When
+      recoManagerTileCubit.getUser();
+      await untilCalled(mockUserRepo.getUser());
       recoManagerTileCubit.setPriority(userRecommendation);
-      await untilCalled(mockRecoRepo.setPriority(userRecommendation));
+      await untilCalled(mockRecoRepo.setPriority(userRecommendation, mockUser.id.value));
       // Then
-      verify(mockRecoRepo.setPriority(userRecommendation));
+      verify(mockRecoRepo.setPriority(userRecommendation, mockUser.id.value));
       verifyNoMoreInteractions(mockRecoRepo);
     });
     test(
         "should emit RecommendationSetStatusSuccessState when call was successful",
         () async {
       // Given
-      when(mockRecoRepo.setPriority(userRecommendation))
+      when(mockUserRepo.getUser())
+          .thenAnswer((_) async => right(mockUser));
+      when(mockRecoRepo.setPriority(userRecommendation, mockUser.id.value))
           .thenAnswer((_) async => right(userRecommendation));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationManagerTileGetUserSuccessState>(),
         isA<RecommendationSetStatusSuccessState>()
       ]));
+      recoManagerTileCubit.getUser();
+      await untilCalled(mockUserRepo.getUser());
       recoManagerTileCubit.setPriority(userRecommendation);
     });
 
@@ -285,12 +290,17 @@ void main() {
         "should emit RecommendationSetStatusFailureState when call was successful",
         () async {
       // Given
-      when(mockRecoRepo.setPriority(userRecommendation))
+      when(mockUserRepo.getUser())
+          .thenAnswer((_) async => right(mockUser));
+      when(mockRecoRepo.setPriority(userRecommendation, mockUser.id.value))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationManagerTileGetUserSuccessState>(),
         isA<RecommendationSetStatusFailureState>()
       ]));
+      recoManagerTileCubit.getUser();
+      await untilCalled(mockUserRepo.getUser());
       recoManagerTileCubit.setPriority(userRecommendation);
     });
   });
@@ -316,41 +326,54 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     test("should call recommendation repo when function is called", () async {
       // Given
-      when(mockRecoRepo.setNotes(userRecommendation))
+      when(mockUserRepo.getUser())
+          .thenAnswer((_) async => right(mockUser));
+      when(mockRecoRepo.setNotes(userRecommendation, mockUser.id.value))
           .thenAnswer((_) async => right(userRecommendation));
       // When
+      recoManagerTileCubit.getUser();
+      await untilCalled(mockUserRepo.getUser());
       recoManagerTileCubit.setNotes(userRecommendation);
-      await untilCalled(mockRecoRepo.setNotes(userRecommendation));
+      await untilCalled(mockRecoRepo.setNotes(userRecommendation, mockUser.id.value));
       // Then
-      verify(mockRecoRepo.setNotes(userRecommendation));
+      verify(mockRecoRepo.setNotes(userRecommendation, mockUser.id.value));
       verifyNoMoreInteractions(mockRecoRepo);
     });
     test(
         "should emit RecommendationSetStatusSuccessState when call was successful",
         () async {
       // Given
-      when(mockRecoRepo.setNotes(userRecommendation))
+      when(mockUserRepo.getUser())
+          .thenAnswer((_) async => right(mockUser));
+      when(mockRecoRepo.setNotes(userRecommendation, mockUser.id.value))
           .thenAnswer((_) async => right(userRecommendation));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationManagerTileGetUserSuccessState>(),
         isA<RecommendationSetStatusSuccessState>()
       ]));
+      recoManagerTileCubit.getUser();
+      await untilCalled(mockUserRepo.getUser());
       recoManagerTileCubit.setNotes(userRecommendation);
     });
     test(
         "should emit RecommendationSetStatusFailureState when call was successful",
         () async {
       // Given
-      when(mockRecoRepo.setNotes(userRecommendation))
+      when(mockUserRepo.getUser())
+          .thenAnswer((_) async => right(mockUser));
+      when(mockRecoRepo.setNotes(userRecommendation, mockUser.id.value))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
       expectLater(recoManagerTileCubit.stream, emitsInOrder([
+        isA<RecommendationManagerTileGetUserSuccessState>(),
         isA<RecommendationSetStatusFailureState>()
       ]));
+      recoManagerTileCubit.getUser();
+      await untilCalled(mockUserRepo.getUser());
       recoManagerTileCubit.setNotes(userRecommendation);
     });
   });

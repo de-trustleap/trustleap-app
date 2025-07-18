@@ -39,7 +39,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
 
     final recommendations = [userRecommendation];
@@ -141,7 +140,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
 
     final recommendations = [userRecommendation];

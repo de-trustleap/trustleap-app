@@ -232,8 +232,7 @@ class _RecommendationManagerListTileState
                     isEditing: addNote ? true : false,
                     onSave: (notes) =>
                         Modular.get<RecommendationManagerTileCubit>().setNotes(
-                            _recommendation.copyWith(
-                                notes: notes, notesLastEdited: DateTime.now())))
+                            _recommendation.copyWith(notes: notes)))
               ],
               if (state is RecommendationSetStatusFailureState &&
                   state.recommendation.id.value ==

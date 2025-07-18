@@ -21,9 +21,9 @@ abstract class RecommendationRepository {
   Future<Either<DatabaseFailure, UserRecommendation>> setFavorite(
       UserRecommendation recommendation, String userID);
   Future<Either<DatabaseFailure, UserRecommendation>> setPriority(
-      UserRecommendation recommendation);
+      UserRecommendation recommendation, String currentUserID);
   Future<Either<DatabaseFailure, UserRecommendation>> setNotes(
-      UserRecommendation recommendation);
+      UserRecommendation recommendation, String currentUserID);
   Future<Either<DatabaseFailure, List<PromoterRecommendations>>> getRecommendationsCompany(
       String userID);
 }

@@ -46,7 +46,6 @@ void main() {
           priority: RecommendationPriority.medium,
   
           notes: "Test",
-          notesLastEdited: null,
           recommendation: recommendation)
     ];
 

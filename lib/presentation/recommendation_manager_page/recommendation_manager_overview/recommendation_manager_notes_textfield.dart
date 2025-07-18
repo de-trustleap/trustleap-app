@@ -61,6 +61,22 @@ class _RecommendationManagerNotesTextfieldState
     widget.onSave(_text);
   }
 
+  Widget _buildLastEditedWidget(BuildContext context, ThemeData themeData, AppLocalizations localization) {
+    final notesLastEdit = widget.recommendation.getLastEdit("notes");
+    if (notesLastEdit != null) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8),
+          Text(
+              "${localization.recommendation_manager_notes_last_updated} ${RecommendationManagerHelper(localization: localization).getDateText(context, notesLastEdit.editedAt)}",
+              style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13))
+        ],
+      );
+    }
+    return const SizedBox.shrink();
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -92,12 +108,7 @@ class _RecommendationManagerNotesTextfieldState
             icon: Icon(_isEditing ? Icons.save : Icons.edit,
                 size: 24, color: themeData.colorScheme.secondary))
       ]),
-      if (widget.recommendation.notesLastEdited != null) ...[
-        const SizedBox(height: 8),
-        Text(
-            "${localization.recommendation_manager_notes_last_updated} ${RecommendationManagerHelper(localization: localization).getDateText(context, widget.recommendation.notesLastEdited!)}",
-            style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13))
-      ]
+      _buildLastEditedWidget(context, themeData, localization)
     ]);
   }
 }

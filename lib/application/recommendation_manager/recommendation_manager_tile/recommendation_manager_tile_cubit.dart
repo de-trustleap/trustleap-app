@@ -112,11 +112,11 @@ class RecommendationManagerTileCubit
   }
 
   void setPriority(UserRecommendation recommendation) async {
-    if (recommendation.priority == null) {
+    if (recommendation.priority == null || _currentUser == null) {
       return;
     }
     final failureOrSuccess =
-        await recommendationRepo.setPriority(recommendation);
+        await recommendationRepo.setPriority(recommendation, _currentUser!.id.value);
     failureOrSuccess.fold(
         (failure) => emit(RecommendationSetStatusFailureState(
             failure: failure, recommendation: recommendation)),
@@ -125,10 +125,10 @@ class RecommendationManagerTileCubit
   }
 
   void setNotes(UserRecommendation recommendation) async {
-    if (recommendation.notes == null) {
+    if (recommendation.notes == null || _currentUser == null) {
       return;
     }
-    final failureOrSuccess = await recommendationRepo.setNotes(recommendation);
+    final failureOrSuccess = await recommendationRepo.setNotes(recommendation, _currentUser!.id.value);
     failureOrSuccess.fold(
         (failure) => emit(RecommendationSetStatusFailureState(
             failure: failure, recommendation: recommendation)),

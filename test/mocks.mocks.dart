@@ -6370,6 +6370,33 @@ class MockAppLocalizations extends _i1.Mock implements _i24.AppLocalizations {
       ) as String);
 
   @override
+  String get dashboard_promoters_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoters_title),
+        returnValue: _i25.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoters_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoters_loading_error_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoters_loading_error_title),
+        returnValue: _i25.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoters_loading_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoters_chart_no_promoters => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoters_chart_no_promoters),
+        returnValue: _i25.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoters_chart_no_promoters),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -6508,6 +6535,51 @@ class MockAppLocalizations extends _i1.Mock implements _i24.AppLocalizations {
           this,
           Invocation.method(
             #dashboard_recommendations_last_month,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_promoters_last_7_days(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_promoters_last_7_days,
+          [count],
+        ),
+        returnValue: _i25.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_promoters_last_7_days,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_promoters_last_month(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_promoters_last_month,
+          [count],
+        ),
+        returnValue: _i25.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_promoters_last_month,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_promoters_last_year(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_promoters_last_year,
+          [count],
+        ),
+        returnValue: _i25.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_promoters_last_year,
             [count],
           ),
         ),
@@ -7881,11 +7953,16 @@ class MockRecommendationRepository extends _i1.Mock
   @override
   _i20.Future<
       _i2.Either<_i29.DatabaseFailure, _i43.UserRecommendation>> setPriority(
-          _i43.UserRecommendation? recommendation) =>
+    _i43.UserRecommendation? recommendation,
+    String? currentUserID,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #setPriority,
-          [recommendation],
+          [
+            recommendation,
+            currentUserID,
+          ],
         ),
         returnValue: _i20.Future<
                 _i2
@@ -7894,7 +7971,10 @@ class MockRecommendationRepository extends _i1.Mock
           this,
           Invocation.method(
             #setPriority,
-            [recommendation],
+            [
+              recommendation,
+              currentUserID,
+            ],
           ),
         )),
       ) as _i20
@@ -7903,11 +7983,16 @@ class MockRecommendationRepository extends _i1.Mock
   @override
   _i20.Future<
       _i2.Either<_i29.DatabaseFailure, _i43.UserRecommendation>> setNotes(
-          _i43.UserRecommendation? recommendation) =>
+    _i43.UserRecommendation? recommendation,
+    String? currentUserID,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #setNotes,
-          [recommendation],
+          [
+            recommendation,
+            currentUserID,
+          ],
         ),
         returnValue: _i20.Future<
                 _i2
@@ -7916,7 +8001,10 @@ class MockRecommendationRepository extends _i1.Mock
           this,
           Invocation.method(
             #setNotes,
-            [recommendation],
+            [
+              recommendation,
+              currentUserID,
+            ],
           ),
         )),
       ) as _i20

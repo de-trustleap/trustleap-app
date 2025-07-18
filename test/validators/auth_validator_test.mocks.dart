@@ -5850,6 +5850,33 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get dashboard_promoters_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoters_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoters_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoters_loading_error_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoters_loading_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoters_loading_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoters_chart_no_promoters => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoters_chart_no_promoters),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoters_chart_no_promoters),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -5988,6 +6015,51 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           this,
           Invocation.method(
             #dashboard_recommendations_last_month,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_promoters_last_7_days(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_promoters_last_7_days,
+          [count],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_promoters_last_7_days,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_promoters_last_month(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_promoters_last_month,
+          [count],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_promoters_last_month,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_promoters_last_year(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_promoters_last_year,
+          [count],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_promoters_last_year,
             [count],
           ),
         ),
