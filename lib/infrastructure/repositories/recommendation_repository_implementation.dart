@@ -606,8 +606,10 @@ class RecommendationRepositoryImplementation
     }
   }
 }
-// TODO: Fixe die Tests (FERTIG)
-// TODO: Teste ob die Timestamps von lastEdit richtig gespeichert werden (FERTIG)
-// TODO: Highlighte eine Zelle die Updates enthält und entferne das Highlight wieder nachdem die Zelle geöffnet und wieder geschlossen wurde. (FERTIG)
-// TODO: Zeige in der Zelle einen Text an wer was bearbeitet hat
-// TODO: Passe den Text unter dem Notizfeld an indem auch der Name des Bearbeiters dort steht.
+
+// TODO: Passe den Text unter dem Notizfeld an indem auch der Name des Bearbeiters dort steht. (FERTIG)
+// TODO: TESTS FÜR USERREPO UND RECOREPO
+// TODO: TESTS FÜR CUBITS
+// TODO: TESTS FÜR MODELS
+// TODO: TESTS FÜR HELPER
+// TODO: LOCALIZATIONS
