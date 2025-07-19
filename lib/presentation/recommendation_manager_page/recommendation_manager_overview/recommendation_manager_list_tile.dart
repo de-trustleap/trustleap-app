@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -51,10 +52,11 @@ class RecommendationManagerListTile extends StatefulWidget {
 }
 
 class _RecommendationManagerListTileState
-    extends State<RecommendationManagerListTile> {
+    extends State<RecommendationManagerListTile> with TickerProviderStateMixin {
   late UserRecommendation _recommendation;
   bool addNote = false;
   Timer? _viewTimer;
+  bool _shouldAnimateToSurface = false;
 
   @override
   void initState() {
@@ -66,6 +68,24 @@ class _RecommendationManagerListTileState
   void dispose() {
     _viewTimer?.cancel();
     super.dispose();
+  }
+
+  void _startBackgroundFadeAnimation() {
+    setState(() {
+      _shouldAnimateToSurface = true;
+    });
+  }
+
+  double _getOverlayOpacity(String currentUserID) {
+    if (_shouldAnimateToSurface) {
+      return 0.0;
+    }
+
+    final hasUnseenChanges = _recommendation.hasUnseenChanges(currentUserID);
+    if (hasUnseenChanges) {
+      return 0.1;
+    }
+    return 0.0;
   }
 
   void _startViewTimer(String recommendationID) {
@@ -122,6 +142,13 @@ class _RecommendationManagerListTileState
             context.mounted;
           });
         } else if (state is RecommendationManagerTileViewedState) {
+          final hadUnseenChanges = _recommendation
+              .hasUnseenChanges(cubit.currentUser?.id.value ?? "");
+
+          if (hadUnseenChanges) {
+            _startBackgroundFadeAnimation();
+          }
+
           setState(() {
             final updatedViewedByUsers =
                 List<LastViewed>.of(_recommendation.viewedByUsers);
@@ -135,159 +162,179 @@ class _RecommendationManagerListTileState
         }
       },
       builder: (context, state) {
-        return CollapsibleTile(
-            backgroundColor: _recommendation
-                    .hasUnseenChanges(cubit.currentUser?.id.value ?? "")
-                ? Colors.green.withValues(alpha: 0.1)
-                : themeData.colorScheme.surface,
-            showDivider: false,
-            onExpansionChanged: (isExpanded) {
-              if (isExpanded) {
-                _startViewTimer(_recommendation.id.value);
-              } else {
-                _markAsViewedAndCancelTimer(_recommendation.id.value);
-              }
-            },
-            titleWidget: Row(children: [
-              Flexible(
-                  flex: 1,
-                  child:
-                      _buildPriorityCell(_recommendation.priority, themeData)),
-              Flexible(
-                  flex: 3,
-                  child: _buildCell(
-                      widget.isPromoter
-                          ? _recommendation.recommendation?.name ?? ""
-                          : _recommendation.recommendation?.promoterName ?? "",
-                      themeData)),
-              Flexible(
-                  flex: 3,
-                  child: _buildCell(
-                      helper.getStringFromStatusLevel(
-                              _recommendation.recommendation?.statusLevel) ??
-                          "",
-                      themeData)),
-              Flexible(
-                  flex: 2,
-                  child: _buildCell(
-                      helper.getExpiresInDaysCount(
-                          _recommendation.recommendation?.expiresAt ??
-                              DateTime.now()),
-                      themeData)),
-              Flexible(
-                  flex: 1,
-                  child: RecommendationManagerFavoriteButton(
-                      isFavorite: cubit.currentFavoriteRecommendationIDs
-                          .contains(_recommendation.id.value),
-                      onPressed: () =>
-                          widget.onFavoritePressed(widget.recommendation))),
-              const SizedBox(width: 8)
-            ]),
-            children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(localization.recommendation_manager_list_tile_receiver,
-                      style: themeData.textTheme.bodyMedium),
-                  const SizedBox(height: 4),
-                  Text(_recommendation.recommendation?.name ?? "",
-                      style: themeData.textTheme.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold))
-                ]),
-                const Spacer(),
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(localization.recommendation_manager_list_tile_reason,
-                      style: themeData.textTheme.bodyMedium),
-                  const SizedBox(height: 4),
-                  Text(_recommendation.recommendation?.reason ?? "",
-                      style: themeData.textTheme.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold))
-                ])
+        return Container(
+          color: themeData.colorScheme.surface,
+          child: CollapsibleTile(
+              backgroundColor: Colors.transparent,
+              showDivider: false,
+              onExpansionChanged: (isExpanded) {
+                if (isExpanded) {
+                  _startViewTimer(_recommendation.id.value);
+                } else {
+                  _markAsViewedAndCancelTimer(_recommendation.id.value);
+                }
+              },
+              titleWidget: Row(children: [
+                Flexible(
+                    flex: 1,
+                    child: _buildPriorityCell(
+                        _recommendation.priority, themeData)),
+                Flexible(
+                    flex: 3,
+                    child: _buildCell(
+                        widget.isPromoter
+                            ? _recommendation.recommendation?.name ?? ""
+                            : _recommendation.recommendation?.promoterName ??
+                                "",
+                        themeData)),
+                Flexible(
+                    flex: 3,
+                    child: _buildCell(
+                        helper.getStringFromStatusLevel(
+                                _recommendation.recommendation?.statusLevel) ??
+                            "",
+                        themeData)),
+                Flexible(
+                    flex: 2,
+                    child: _buildCell(
+                        helper.getExpiresInDaysCount(
+                            _recommendation.recommendation?.expiresAt ??
+                                DateTime.now()),
+                        themeData)),
+                Flexible(
+                    flex: 1,
+                    child: RecommendationManagerFavoriteButton(
+                        isFavorite: cubit.currentFavoriteRecommendationIDs
+                            .contains(_recommendation.id.value),
+                        onPressed: () =>
+                            widget.onFavoritePressed(widget.recommendation))),
+                const SizedBox(width: 8)
               ]),
-              const SizedBox(height: 16),
-              RecommendationManagerStatusProgressIndicator(
-                  level: _recommendation.recommendation?.statusLevel ??
-                      StatusLevel.recommendationSend,
-                  statusTimestamps:
-                      _recommendation.recommendation?.statusTimestamps ?? {}),
-              const SizedBox(height: 16),
-              RecommendationManagerListTileIconRow(
-                  key: ValueKey(
-                      "${_recommendation.id}-${_recommendation.recommendation?.statusLevel}"),
-                  recommendation: _recommendation,
-                  onAppointmentPressed: widget.onAppointmentPressed,
-                  onFinishedPressed: widget.onFinishedPressed,
-                  onFailedPressed: widget.onFailedPressed,
-                  onDeletePressed: widget.onDeletePressed),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ClickableLink(
-                      title: localization
-                          .recommendation_manager_show_landingpage_button,
-                      onTap: () {
-                        final baseURL = Environment().getLandingpageBaseURL();
-                        CustomNavigator.openURLInNewTab(
-                            "$baseURL?id=${_recommendation.recoID}");
-                      }),
-                  if (state is RecommendationSetStatusLoadingState &&
-                      state.recommendation.id.value ==
-                          _recommendation.id.value) ...[
-                    const LoadingIndicator(size: 20)
-                  ],
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    _getPriorityIcon(_recommendation.priority, themeData),
-                    PopupMenuButton<RecommendationPriority>(
-                        tooltip: localization
-                            .recommendation_manager_select_priority_tooltip,
-                        itemBuilder: (context) => [
-                              _getPopupMenuItem(RecommendationPriority.high,
-                                  themeData, localization, responsiveValue),
-                              _getPopupMenuItem(RecommendationPriority.medium,
-                                  themeData, localization, responsiveValue),
-                              _getPopupMenuItem(RecommendationPriority.low,
-                                  themeData, localization, responsiveValue)
-                            ],
-                        onSelected: (value) => widget.onPriorityChanged(
-                            _recommendation.copyWith(priority: value))),
-                    if (_recommendation.notes == null ||
-                        (_recommendation.notes != null &&
-                            _recommendation.notes!.isEmpty)) ...[
-                      const SizedBox(width: 16),
-                      IconButton(
-                          tooltip: localization
-                              .recommendation_manager_add_note_button_tooltip,
-                          onPressed: () {
-                            setState(() {
-                              addNote = true;
-                            });
-                          },
-                          color: themeData.colorScheme.secondary,
-                          iconSize: 24,
-                          icon: const Icon(Icons.note_add))
-                    ]
-                  ])
-                ],
+              backgroundOverlay: AnimatedContainer(
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.easeOut,
+                decoration: BoxDecoration(
+                  color: themeData.colorScheme.primary.withValues(
+                      alpha: _getOverlayOpacity(
+                          cubit.currentUser?.id.value ?? "")),
+                ),
               ),
-              if (addNote ||
-                  (_recommendation.notes != null &&
-                      _recommendation.notes!.isNotEmpty)) ...[
+              children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                localization
+                                    .recommendation_manager_list_tile_receiver,
+                                style: themeData.textTheme.bodyMedium),
+                            const SizedBox(height: 4),
+                            Text(_recommendation.recommendation?.name ?? "",
+                                style: themeData.textTheme.bodyMedium!
+                                    .copyWith(fontWeight: FontWeight.bold))
+                          ]),
+                      const Spacer(),
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                localization
+                                    .recommendation_manager_list_tile_reason,
+                                style: themeData.textTheme.bodyMedium),
+                            const SizedBox(height: 4),
+                            Text(_recommendation.recommendation?.reason ?? "",
+                                style: themeData.textTheme.bodyMedium!
+                                    .copyWith(fontWeight: FontWeight.bold))
+                          ])
+                    ]),
                 const SizedBox(height: 16),
-                RecommendationManagerNotesTextfield(
+                RecommendationManagerStatusProgressIndicator(
+                    level: _recommendation.recommendation?.statusLevel ??
+                        StatusLevel.recommendationSend,
+                    statusTimestamps:
+                        _recommendation.recommendation?.statusTimestamps ?? {}),
+                const SizedBox(height: 16),
+                RecommendationManagerListTileIconRow(
+                    key: ValueKey(
+                        "${_recommendation.id}-${_recommendation.recommendation?.statusLevel}"),
                     recommendation: _recommendation,
-                    isEditing: addNote ? true : false,
-                    onSave: (notes) =>
-                        Modular.get<RecommendationManagerTileCubit>()
-                            .setNotes(_recommendation.copyWith(notes: notes)))
-              ],
-              if (state is RecommendationSetStatusFailureState &&
-                  state.recommendation.id.value ==
-                      _recommendation.id.value) ...[
-                FormErrorView(
-                    message: DatabaseFailureMapper.mapFailureMessage(
-                        state.failure, localization))
-              ]
-            ]);
+                    onAppointmentPressed: widget.onAppointmentPressed,
+                    onFinishedPressed: widget.onFinishedPressed,
+                    onFailedPressed: widget.onFailedPressed,
+                    onDeletePressed: widget.onDeletePressed),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ClickableLink(
+                        title: localization
+                            .recommendation_manager_show_landingpage_button,
+                        onTap: () {
+                          final baseURL = Environment().getLandingpageBaseURL();
+                          CustomNavigator.openURLInNewTab(
+                              "$baseURL?id=${_recommendation.recoID}");
+                        }),
+                    if (state is RecommendationSetStatusLoadingState &&
+                        state.recommendation.id.value ==
+                            _recommendation.id.value) ...[
+                      const LoadingIndicator(size: 20)
+                    ],
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      _getPriorityIcon(_recommendation.priority, themeData),
+                      PopupMenuButton<RecommendationPriority>(
+                          tooltip: localization
+                              .recommendation_manager_select_priority_tooltip,
+                          itemBuilder: (context) => [
+                                _getPopupMenuItem(RecommendationPriority.high,
+                                    themeData, localization, responsiveValue),
+                                _getPopupMenuItem(RecommendationPriority.medium,
+                                    themeData, localization, responsiveValue),
+                                _getPopupMenuItem(RecommendationPriority.low,
+                                    themeData, localization, responsiveValue)
+                              ],
+                          onSelected: (value) => widget.onPriorityChanged(
+                              _recommendation.copyWith(priority: value))),
+                      if (_recommendation.notes == null ||
+                          (_recommendation.notes != null &&
+                              _recommendation.notes!.isEmpty)) ...[
+                        const SizedBox(width: 16),
+                        IconButton(
+                            tooltip: localization
+                                .recommendation_manager_add_note_button_tooltip,
+                            onPressed: () {
+                              setState(() {
+                                addNote = true;
+                              });
+                            },
+                            color: themeData.colorScheme.secondary,
+                            iconSize: 24,
+                            icon: const Icon(Icons.note_add))
+                      ]
+                    ])
+                  ],
+                ),
+                if (addNote ||
+                    (_recommendation.notes != null &&
+                        _recommendation.notes!.isNotEmpty)) ...[
+                  const SizedBox(height: 16),
+                  RecommendationManagerNotesTextfield(
+                      recommendation: _recommendation,
+                      isEditing: addNote ? true : false,
+                      onSave: (notes) =>
+                          Modular.get<RecommendationManagerTileCubit>()
+                              .setNotes(_recommendation.copyWith(notes: notes)))
+                ],
+                if (state is RecommendationSetStatusFailureState &&
+                    state.recommendation.id.value ==
+                        _recommendation.id.value) ...[
+                  FormErrorView(
+                      message: DatabaseFailureMapper.mapFailureMessage(
+                          state.failure, localization)),
+                ]
+              ]),
+        );
       },
     );
   }
