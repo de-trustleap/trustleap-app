@@ -162,4 +162,16 @@ class RecommendationManagerTileCubit
     emit(RecommendationManagerTileViewedState(
         recommendationID: recommendationID, lastViewed: lastViewed));
   }
+
+  Future<String> getUserDisplayName(String userID) async {
+    final userResult = await userRepo.getUserByID(userId: userID);
+    return userResult.fold(
+      (failure) => "",
+      (user) {
+        final firstName = user.firstName ?? "";
+        final lastName = user.lastName ?? "";
+        return "$firstName $lastName".trim();
+      },
+    );
+  }
 }

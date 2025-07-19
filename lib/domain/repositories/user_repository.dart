@@ -12,4 +12,6 @@ abstract class UserRepository {
   Future<Either<DatabaseFailure, CustomUser>> getUser();
   Future<Either<DatabaseFailure, CustomUser>> getParentUser(
       {required String parentID});
+  Future<Either<DatabaseFailure, CustomUser>> getUserByID(
+      {required String userId});
 }

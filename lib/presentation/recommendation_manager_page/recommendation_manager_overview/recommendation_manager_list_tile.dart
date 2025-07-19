@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/domain/entities/last_edit.dart';
 import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
@@ -77,15 +78,75 @@ class _RecommendationManagerListTileState
   }
 
   double _getOverlayOpacity(String currentUserID) {
+    final hasUnseenChanges = _recommendation.hasUnseenChanges(currentUserID);
+
     if (_shouldAnimateToSurface) {
       return 0.0;
     }
 
-    final hasUnseenChanges = _recommendation.hasUnseenChanges(currentUserID);
     if (hasUnseenChanges) {
       return 0.1;
     }
     return 0.0;
+  }
+
+  Future<String?> _buildLastEditMessage(String currentUserID) async {
+    final lastViewed = _recommendation.viewedByUsers
+        .where((view) => view.userID == currentUserID)
+        .firstOrNull;
+
+    // Filter nur Änderungen von anderen Usern
+    final changesFromOthers = _recommendation.lastEdits
+        .where((edit) => edit.editedBy != currentUserID);
+
+    List<LastEdit> relevantEdits;
+    if (lastViewed == null) {
+      relevantEdits = changesFromOthers.toList();
+    } else {
+      relevantEdits = changesFromOthers
+          .where((edit) => edit.editedAt.isAfter(lastViewed.viewedAt))
+          .toList();
+    }
+
+    if (relevantEdits.isEmpty) return null;
+
+    // Gruppiere nach Benutzer und sortiere nach neuester Bearbeitung
+    final editsByUser = <String, List<LastEdit>>{};
+    for (final edit in relevantEdits) {
+      editsByUser.putIfAbsent(edit.editedBy, () => []).add(edit);
+    }
+
+    final userWithMostRecentEdit = editsByUser.entries
+        .map((entry) => MapEntry(
+            entry.key,
+            entry.value
+                .map((e) => e.editedAt)
+                .reduce((a, b) => a.isAfter(b) ? a : b)))
+        .reduce((a, b) => a.value.isAfter(b.value) ? a : b);
+
+    final userEdits = editsByUser[userWithMostRecentEdit.key]!;
+    final editedFields = <String>[];
+
+    for (final edit in userEdits) {
+      switch (edit.fieldName) {
+        case "priority":
+          editedFields.add("Priorität");
+          break;
+        case "notes":
+          editedFields.add("Notizen");
+          break;
+        default:
+          editedFields.add(edit.fieldName);
+      }
+    }
+
+    final cubit = Modular.get<RecommendationManagerTileCubit>();
+    final userName = await cubit.getUserDisplayName(userWithMostRecentEdit.key);
+    if (userName.isEmpty) return null;
+
+    final fieldsText = editedFields.join(" und ");
+
+    return "$userName hat $fieldsText angepasst";
   }
 
   void _startViewTimer(String recommendationID) {
@@ -211,7 +272,7 @@ class _RecommendationManagerListTileState
                 const SizedBox(width: 8)
               ]),
               backgroundOverlay: AnimatedContainer(
-                duration: const Duration(milliseconds: 1000),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeOut,
                 decoration: BoxDecoration(
                   color: themeData.colorScheme.primary.withValues(
@@ -220,6 +281,36 @@ class _RecommendationManagerListTileState
                 ),
               ),
               children: [
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                  child: _recommendation.hasUnseenChanges(
+                              cubit.currentUser?.id.value ?? "") &&
+                          !_shouldAnimateToSurface
+                      ? FutureBuilder<String?>(
+                          future: _buildLastEditMessage(
+                              cubit.currentUser?.id.value ?? ""),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData && snapshot.data != null) {
+                              return Column(
+                                children: [
+                                  Text(
+                                    snapshot.data!,
+                                    style: themeData.textTheme.bodySmall
+                                        ?.copyWith(
+                                            color:
+                                                themeData.colorScheme.primary,
+                                            fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 16),
+                                ],
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          },
+                        )
+                      : const SizedBox.shrink(),
+                ),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
