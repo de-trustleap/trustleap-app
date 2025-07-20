@@ -62,30 +62,34 @@ class UserRecommendation extends Equatable {
         viewedByUsers: viewedByUsers ?? this.viewedByUsers);
   }
 
-  // Hilfsmethoden
   LastEdit? getLastEdit(String fieldName) {
     return lastEdits.where((edit) => edit.fieldName == fieldName).firstOrNull;
   }
-  
-  bool wasFieldEditedByOther(String fieldName, String currentUserId) {
-    final edit = getLastEdit(fieldName);
-    return edit != null && edit.editedBy != currentUserId;
-  }
-  
+
   bool hasUnseenChanges(String userID) {
-    final lastViewed = viewedByUsers.where((view) => view.userID == userID).firstOrNull;
-    
-    // Filter nur Änderungen von anderen Usern
-    final changesFromOthers = lastEdits.where((edit) => edit.editedBy != userID);
-    
+    final lastViewed =
+        viewedByUsers.where((view) => view.userID == userID).firstOrNull;
+
+    final changesFromOthers =
+        lastEdits.where((edit) => edit.editedBy != userID);
+
     if (lastViewed == null) {
       return changesFromOthers.isNotEmpty;
     }
-    
-    return changesFromOthers.any((edit) => edit.editedAt.isAfter(lastViewed.viewedAt));
+
+    return changesFromOthers
+        .any((edit) => edit.editedAt.isAfter(lastViewed.viewedAt));
   }
 
   @override
-  List<Object?> get props =>
-      [id, recoID, userID, priority, notes, recommendation, lastEdits, viewedByUsers];
+  List<Object?> get props => [
+        id,
+        recoID,
+        userID,
+        priority,
+        notes,
+        recommendation,
+        lastEdits,
+        viewedByUsers
+      ];
 }

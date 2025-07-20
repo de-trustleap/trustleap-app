@@ -607,9 +607,5 @@ class RecommendationRepositoryImplementation
   }
 }
 
-// TODO: Passe den Text unter dem Notizfeld an indem auch der Name des Bearbeiters dort steht. (FERTIG)
-// TODO: TESTS FÜR USERREPO UND RECOREPO
-// TODO: TESTS FÜR CUBITS
-// TODO: TESTS FÜR MODELS
-// TODO: TESTS FÜR HELPER
+// TODO: BACKEND ANPASSEN
 // TODO: LOCALIZATIONS

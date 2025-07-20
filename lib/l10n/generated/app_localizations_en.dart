@@ -266,7 +266,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String landingpage_creation_progress_indicator_text(
-      int currentStep, int elementsTotal) {
+    int currentStep,
+    int elementsTotal,
+  ) {
     return 'Step $currentStep of $elementsTotal';
   }
 
@@ -329,13 +331,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String
-      get landingpage_create_promotion_placeholder_service_provider_first_name =>
-          'First name of provider';
+  get landingpage_create_promotion_placeholder_service_provider_first_name =>
+      'First name of provider';
 
   @override
   String
-      get landingpage_create_promotion_placeholder_service_provider_last_name =>
-          'Last name of provider';
+  get landingpage_create_promotion_placeholder_service_provider_last_name =>
+      'Last name of provider';
 
   @override
   String get landingpage_create_promotion_placeholder_service_provider_name =>
@@ -523,8 +525,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String
-      get profile_page_email_section_change_email_password_continue_button_title =>
-          'Continue';
+  get profile_page_email_section_change_email_password_continue_button_title =>
+      'Continue';
 
   @override
   String get profile_page_email_section_resend_verify_email_button_title =>
@@ -559,8 +561,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String
-      get profile_page_image_section_large_image_view_close_button_tooltip_title =>
-          'Close';
+  get profile_page_image_section_large_image_view_close_button_tooltip_title =>
+      'Close';
 
   @override
   String get profile_page_password_update_section_title => 'Change password';
@@ -571,18 +573,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String
-      get profile_page_password_update_section_new_password_textfield_placeholder =>
-          'New password';
+  get profile_page_password_update_section_new_password_textfield_placeholder =>
+      'New password';
 
   @override
   String
-      get profile_page_password_update_section_new_password_repeat_textfield_placeholder =>
-          'Repeat new password';
+  get profile_page_password_update_section_new_password_repeat_textfield_placeholder =>
+      'Repeat new password';
 
   @override
   String
-      get profile_page_password_update_section_new_password_confirm_button_text =>
-          'Change password';
+  get profile_page_password_update_section_new_password_confirm_button_text =>
+      'Change password';
 
   @override
   String get profile_page_password_update_section_reauth_description =>
@@ -590,13 +592,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String
-      get profile_page_password_update_section_reauth_password_textfield_placeholder =>
-          'Password';
+  get profile_page_password_update_section_reauth_password_textfield_placeholder =>
+      'Password';
 
   @override
   String
-      get profile_page_password_update_section_reauth_continue_button_title =>
-          'Weiter';
+  get profile_page_password_update_section_reauth_continue_button_title =>
+      'Weiter';
 
   @override
   String get profile_page_contact_section_title => 'Contact Information';
@@ -1469,8 +1471,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String
-      get landingpage_pagebuilder_icon_config_icon_picker_search_no_results =>
-          'No results for:';
+  get landingpage_pagebuilder_icon_config_icon_picker_search_no_results =>
+      'No results for:';
 
   @override
   String get landingpage_pagebuilder_contactform_content_email =>
@@ -1554,8 +1556,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String
-      get pagebuilder_textfield_config_textfield_placeholder_text_configuration =>
-          'Textfield placeholder configuration';
+  get pagebuilder_textfield_config_textfield_placeholder_text_configuration =>
+      'Textfield placeholder configuration';
 
   @override
   String get landingpage_pagebuilder_config_menu_section_type => 'Section';
@@ -1614,13 +1616,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String
-      get landingpage_pagebuilder_video_player_config_youtube_link_description =>
-          'Please provide the YouTube link where your video can be accessed.';
+  get landingpage_pagebuilder_video_player_config_youtube_link_description =>
+      'Please provide the YouTube link where your video can be accessed.';
 
   @override
   String
-      get landingpage_pagebuilder_video_player_config_youtube_link_placeholder =>
-          'Youtube link';
+  get landingpage_pagebuilder_video_player_config_youtube_link_placeholder =>
+      'Youtube link';
 
   @override
   String get landingpage_creator_missing_companydata_error =>

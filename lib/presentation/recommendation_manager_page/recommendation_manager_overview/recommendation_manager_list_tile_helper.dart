@@ -59,7 +59,7 @@ class RecommendationManagerListTileHelper {
         .reduce((a, b) => a.value.isAfter(b.value) ? a : b);
 
     final userEdits = editsByUser[userWithMostRecentEdit.key]!;
-    final editedFields = <String>[];
+    final editedFields = <String>{};
 
     for (final edit in userEdits) {
       switch (edit.fieldName) {
@@ -78,7 +78,7 @@ class RecommendationManagerListTileHelper {
     final userName = await cubit.getUserDisplayName(userWithMostRecentEdit.key);
     if (userName.isEmpty) return null;
 
-    final fieldsText = editedFields.join(" und ");
+    final fieldsText = editedFields.toList().join(" und ");
 
     return "$userName hat $fieldsText angepasst";
   }
