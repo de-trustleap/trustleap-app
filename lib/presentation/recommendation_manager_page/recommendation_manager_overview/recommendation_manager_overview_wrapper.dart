@@ -136,6 +136,7 @@ class _RecommendationManagerPageState
           if (state is RecommendationManagerGetUserSuccessState) {
             currentUser = state.user;
             Modular.get<RecommendationManagerTileCubit>().initializeFavorites(state.user.favoriteRecommendationIDs);
+            Modular.get<RecommendationManagerTileCubit>().getUser();
             _requestRecommendations(state.user);
           } else if (state is RecommendationDeleteRecoSuccessState) {
             CustomSnackBar.of(context).showCustomSnackBar(

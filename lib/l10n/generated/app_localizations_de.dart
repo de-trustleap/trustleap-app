@@ -2026,6 +2026,17 @@ class AppLocalizationsDe extends AppLocalizations {
       'Notizen erfolgreich angepasst!';
 
   @override
+  String recommendation_manager_notes_last_edited_by_user(String date) {
+    return 'Zuletzt von dir bearbeitet am $date';
+  }
+
+  @override
+  String recommendation_manager_notes_last_edited_by_other(
+      String userName, String date) {
+    return 'Zuletzt von $userName bearbeitet am $date';
+  }
+
+  @override
   String get pagebuilder_text_placeholder_recommendation_name =>
       'Name des Empfohlenen';
 
@@ -2230,4 +2241,18 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get dashboard_promoters_chart_no_promoters =>
       'Keine Promoter gefunden';
+
+  @override
+  String get recommendation_manager_field_priority => 'Priorität';
+
+  @override
+  String get recommendation_manager_field_notes => 'Notizen';
+
+  @override
+  String get recommendation_manager_field_connector => ' und ';
+
+  @override
+  String recommendation_manager_edit_message(String userName, String fields) {
+    return '$userName hat $fields angepasst';
+  }
 }

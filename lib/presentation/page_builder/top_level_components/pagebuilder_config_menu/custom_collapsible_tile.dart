@@ -8,6 +8,8 @@ class CollapsibleTile extends StatefulWidget {
   final Widget? titleWidget;
   final Color? backgroundColor;
   final bool showDivider;
+  final Function(bool)? onExpansionChanged;
+  final Widget? backgroundOverlay;
 
   const CollapsibleTile(
       {super.key,
@@ -17,7 +19,9 @@ class CollapsibleTile extends StatefulWidget {
       this.animationCurve = Curves.easeInOut,
       this.titleWidget,
       this.backgroundColor,
-      this.showDivider = true});
+      this.showDivider = true,
+      this.onExpansionChanged,
+      this.backgroundOverlay});
 
   @override
   State<CollapsibleTile> createState() => _CustomExpansionTileState();
@@ -74,6 +78,8 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
         _controller.reverse();
       }
     });
+
+    widget.onExpansionChanged?.call(_isExpanded);
   }
 
   @override
@@ -87,63 +93,76 @@ class _CustomExpansionTileState extends State<CollapsibleTile>
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Stack(
         children: [
-          ListTile(
-            title: widget.titleWidget ??
-                Text(
-                  widget.title ?? "",
-                  style: themeData.textTheme.bodyMedium,
-                ),
-            trailing: RotationTransition(
-              turns: _iconRotation,
-              child: Icon(
-                Icons.expand_more,
-                color: themeData.colorScheme.secondary,
+          if (widget.backgroundOverlay != null)
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: widget.backgroundOverlay!,
               ),
             ),
-            onTap: _toggleExpansion,
-          ),
-          ClipRect(
-            child: AnimatedBuilder(
-              animation: _heightFactor,
-              builder: (context, child) {
-                return Align(
-                  heightFactor: _heightFactor.value,
-                  alignment: Alignment.topCenter,
-                  child: child,
-                );
-              },
-              child: _isExpanded ||
-                      _controller.status != AnimationStatus.dismissed
-                  ? FadeTransition(
-                      opacity: _opacity,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          if (widget.showDivider) ...[
-                            Container(
-                              height: 0.8,
-                              color: themeData.textTheme.bodyMedium?.color
-                                  ?.withValues(alpha: 0.5),
-                            )
-                          ],
-                          const SizedBox(height: 16),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: widget.children,
-                            ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: widget.titleWidget ??
+                    Text(
+                      widget.title ?? "",
+                      style: themeData.textTheme.bodyMedium,
+                    ),
+                trailing: RotationTransition(
+                  turns: _iconRotation,
+                  child: Icon(
+                    Icons.expand_more,
+                    color: themeData.colorScheme.secondary,
+                  ),
+                ),
+                onTap: _toggleExpansion,
+              ),
+              ClipRect(
+                child: AnimatedBuilder(
+                  animation: _heightFactor,
+                  builder: (context, child) {
+                    return Align(
+                      heightFactor: _heightFactor.value,
+                      alignment: Alignment.topCenter,
+                      child: child,
+                    );
+                  },
+                  child: _isExpanded ||
+                          _controller.status != AnimationStatus.dismissed
+                      ? FadeTransition(
+                          opacity: _opacity,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              if (widget.showDivider) ...[
+                                Container(
+                                  height: 0.8,
+                                  color: themeData.textTheme.bodyMedium?.color
+                                      ?.withValues(alpha: 0.5),
+                                )
+                              ],
+                              const SizedBox(height: 16),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: widget.children,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                            ],
                           ),
-                          const SizedBox(height: 16),
-                        ],
-                      ),
-                    )
-                  : null,
-            ),
+                        )
+                      : null,
+                ),
+              ),
+            ],
           ),
         ],
       ),

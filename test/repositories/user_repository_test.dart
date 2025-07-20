@@ -129,4 +129,100 @@ void main() {
       verifyNoMoreInteractions(mockUserRepo);
     });
   });
+
+  group("UserRepositoryImplementation_GetUserByID", () {
+    const testUserID = "user123";
+    final testUser = CustomUser(
+        id: UniqueID.fromUniqueString(testUserID),
+        gender: Gender.male,
+        firstName: "Max",
+        lastName: "Mustermann",
+        birthDate: "01.01.1990",
+        email: "max.mustermann@test.de",
+        role: Role.company);
+
+    test("should return user when getUserByID call was successful", () async {
+      // Given
+      final expectedResult = right(testUser);
+      when(mockUserRepo.getUserByID(userId: testUserID))
+          .thenAnswer((_) async => right(testUser));
+      // When
+      final result = await mockUserRepo.getUserByID(userId: testUserID);
+      // Then
+      verify(mockUserRepo.getUserByID(userId: testUserID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockUserRepo);
+    });
+
+    test("should return NotFoundFailure when user does not exist", () async {
+      // Given
+      final expectedResult = left(NotFoundFailure());
+      when(mockUserRepo.getUserByID(userId: testUserID))
+          .thenAnswer((_) async => left(NotFoundFailure()));
+      // When
+      final result = await mockUserRepo.getUserByID(userId: testUserID);
+      // Then
+      verify(mockUserRepo.getUserByID(userId: testUserID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockUserRepo);
+    });
+
+    test("should return BackendFailure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockUserRepo.getUserByID(userId: testUserID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockUserRepo.getUserByID(userId: testUserID);
+      // Then
+      verify(mockUserRepo.getUserByID(userId: testUserID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockUserRepo);
+    });
+
+    test("should handle different user IDs correctly", () async {
+      // Given
+      const userID1 = "user123";
+      const userID2 = "user456";
+      final user1 = CustomUser(
+          id: UniqueID.fromUniqueString(userID1),
+          firstName: "Max",
+          lastName: "Mustermann",
+          email: "max@test.de");
+      final user2 = CustomUser(
+          id: UniqueID.fromUniqueString(userID2),
+          firstName: "Anna",
+          lastName: "Schmidt",
+          email: "anna@test.de");
+
+      when(mockUserRepo.getUserByID(userId: userID1))
+          .thenAnswer((_) async => right(user1));
+      when(mockUserRepo.getUserByID(userId: userID2))
+          .thenAnswer((_) async => right(user2));
+
+      // When
+      final result1 = await mockUserRepo.getUserByID(userId: userID1);
+      final result2 = await mockUserRepo.getUserByID(userId: userID2);
+
+      // Then
+      verify(mockUserRepo.getUserByID(userId: userID1));
+      verify(mockUserRepo.getUserByID(userId: userID2));
+      expect(result1, right(user1));
+      expect(result2, right(user2));
+      verifyNoMoreInteractions(mockUserRepo);
+    });
+
+    test("should return PermissionDeniedFailure when access is denied", () async {
+      // Given
+      final expectedResult = left(PermissionDeniedFailure());
+      when(mockUserRepo.getUserByID(userId: testUserID))
+          .thenAnswer((_) async => left(PermissionDeniedFailure()));
+      // When
+      final result = await mockUserRepo.getUserByID(userId: testUserID);
+      // Then
+      verify(mockUserRepo.getUserByID(userId: testUserID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockUserRepo);
+    });
+  });
 }

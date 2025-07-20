@@ -5,6 +5,8 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/last_edit.dart';
+import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -323,13 +325,14 @@ class RecommendationRepositoryImplementation
       UserRecommendation recommendation, String userID) async {
     final userCollection = firestore.collection("users");
     final userDoc = await userCollection.doc(userID).get();
-    
+
     if (!userDoc.exists) {
       return left(NotFoundFailure());
     }
 
     final userData = userDoc.data()!;
-    final favoriteRecommendationIDs = List<String>.from(userData['favoriteRecommendationIDs'] ?? []);
+    final favoriteRecommendationIDs =
+        List<String>.from(userData['favoriteRecommendationIDs'] ?? []);
     final recommendationId = recommendation.id.value;
 
     try {
@@ -342,7 +345,7 @@ class RecommendationRepositoryImplementation
       await userCollection.doc(userID).set({
         'favoriteRecommendationIDs': favoriteRecommendationIDs,
       }, SetOptions(merge: true));
-      
+
       return right(recommendation);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
@@ -351,14 +354,30 @@ class RecommendationRepositoryImplementation
 
   @override
   Future<Either<DatabaseFailure, UserRecommendation>> setPriority(
-      UserRecommendation recommendation) async {
+      UserRecommendation recommendation, String currentUserID) async {
     final userRecoCollection = firestore.collection("usersRecommendations");
-    final userRecoModel = UserRecommendationModel.fromDomain(recommendation);
+
+    final lastEdit = LastEdit(
+      fieldName: "priority",
+      editedBy: currentUserID,
+      editedAt: DateTime.now(),
+    );
+
+    final updatedLastEdits = List<LastEdit>.of(recommendation.lastEdits);
+    updatedLastEdits.removeWhere((edit) => edit.fieldName == "priority");
+    updatedLastEdits.add(lastEdit);
+
+    final updatedRecommendation =
+        recommendation.copyWith(lastEdits: updatedLastEdits);
+    final userRecoModel =
+        UserRecommendationModel.fromDomain(updatedRecommendation);
+
     try {
-      await userRecoCollection.doc(userRecoModel.id).set(
-          {"priority": userRecoModel.priority ?? "medium"},
-          SetOptions(merge: true));
-      return right(recommendation);
+      await userRecoCollection.doc(userRecoModel.id).set({
+        "priority": userRecoModel.priority ?? "medium",
+        "lastEdits": userRecoModel.lastEdits
+      }, SetOptions(merge: true));
+      return right(updatedRecommendation);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
@@ -366,17 +385,54 @@ class RecommendationRepositoryImplementation
 
   @override
   Future<Either<DatabaseFailure, UserRecommendation>> setNotes(
-      UserRecommendation recommendation) async {
+      UserRecommendation recommendation, String currentUserID) async {
     final userRecoCollection = firestore.collection("usersRecommendations");
-    final userRecoModel = UserRecommendationModel.fromDomain(recommendation);
+
+    final lastEdit = LastEdit(
+      fieldName: "notes",
+      editedBy: currentUserID,
+      editedAt: DateTime.now(),
+    );
+
+    final updatedLastEdits = List<LastEdit>.of(recommendation.lastEdits);
+    updatedLastEdits.removeWhere((edit) => edit.fieldName == "notes");
+    updatedLastEdits.add(lastEdit);
+
+    final updatedRecommendation =
+        recommendation.copyWith(lastEdits: updatedLastEdits);
+    final userRecoModel =
+        UserRecommendationModel.fromDomain(updatedRecommendation);
+
     try {
-      await userRecoCollection.doc(userRecoModel.id).set({
-        "notes": userRecoModel.notes,
-        "notesLastEdited": userRecoModel.notesLastEdited?.toIso8601String()
-      }, SetOptions(merge: true));
-      return right(recommendation);
+      await userRecoCollection.doc(userRecoModel.id).set(
+          {"notes": userRecoModel.notes, "lastEdits": userRecoModel.lastEdits},
+          SetOptions(merge: true));
+      return right(updatedRecommendation);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  void markAsViewed(String recommendationID, LastViewed lastViewed) async {
+    final userRecoCollection = firestore.collection("usersRecommendations");
+
+    final doc = await userRecoCollection.doc(recommendationID).get();
+    if (doc.exists) {
+      final data = doc.data() as Map<String, dynamic>;
+      final currentViewedByUsers =
+          data["viewedByUsers"] as List<dynamic>? ?? [];
+
+      currentViewedByUsers
+          .removeWhere((view) => view["userID"] == lastViewed.userID);
+      currentViewedByUsers.add({
+        "userID": lastViewed.userID,
+        "viewedAt": lastViewed.viewedAt.toIso8601String(),
+      });
+
+      await userRecoCollection.doc(recommendationID).set({
+        "viewedByUsers": currentViewedByUsers,
+      }, SetOptions(merge: true));
     }
   }
 
@@ -399,17 +455,20 @@ class RecommendationRepositoryImplementation
     try {
       // 1. GET REGISTERED PROMOTERS AND COMPANY USER'S OWN RECOMMENDATIONS
       final List<CustomUser> promoters = [];
-      
+
       // Add company user as promoter if they have recommendations
-      if (user.recommendationIDs != null && user.recommendationIDs!.isNotEmpty) {
+      if (user.recommendationIDs != null &&
+          user.recommendationIDs!.isNotEmpty) {
         promoters.add(user);
       }
-      
+
       // Add registered promoters
-      if (user.registeredPromoterIDs != null && user.registeredPromoterIDs!.isNotEmpty) {
+      if (user.registeredPromoterIDs != null &&
+          user.registeredPromoterIDs!.isNotEmpty) {
         final promoterIDs = user.registeredPromoterIDs!;
         final chunks = promoterIDs.slices(10);
-        final List<QuerySnapshot<Map<String, dynamic>>> promoterQuerySnapshots = [];
+        final List<QuerySnapshot<Map<String, dynamic>>> promoterQuerySnapshots =
+            [];
 
         // Fetch all registered promoters
         await Future.forEach(chunks, (element) async {
@@ -547,3 +606,6 @@ class RecommendationRepositoryImplementation
     }
   }
 }
+
+// TODO: BACKEND ANPASSEN
+// TODO: LOCALIZATIONS

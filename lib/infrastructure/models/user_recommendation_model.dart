@@ -2,6 +2,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
+import 'package:finanzbegleiter/infrastructure/models/last_edit_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/last_viewed_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/recommendation_item_model.dart';
 
 class UserRecommendationModel extends Equatable {
@@ -10,8 +12,9 @@ class UserRecommendationModel extends Equatable {
   final String? userID;
   final String? priority;
   final String? notes;
-  final DateTime? notesLastEdited;
   final Map<String, dynamic>? recommendation;
+  final List<Map<String, dynamic>> lastEdits;
+  final List<Map<String, dynamic>> viewedByUsers;
 
   const UserRecommendationModel(
       {required this.id,
@@ -19,8 +22,9 @@ class UserRecommendationModel extends Equatable {
       required this.userID,
       required this.priority,
       required this.notes,
-      required this.notesLastEdited,
-      required this.recommendation});
+      required this.recommendation,
+      this.lastEdits = const [],
+      this.viewedByUsers = const []});
 
   UserRecommendationModel copyWith(
       {String? id,
@@ -28,16 +32,18 @@ class UserRecommendationModel extends Equatable {
       String? userID,
       String? priority,
       String? notes,
-      DateTime? notesLastEdited,
-      Map<String, dynamic>? recommendation}) {
+      Map<String, dynamic>? recommendation,
+      List<Map<String, dynamic>>? lastEdits,
+      List<Map<String, dynamic>>? viewedByUsers}) {
     return UserRecommendationModel(
         id: id ?? this.id,
         recoID: recoID ?? this.recoID,
         userID: userID ?? this.userID,
         priority: priority ?? this.priority,
         notes: notes ?? this.notes,
-        notesLastEdited: notesLastEdited ?? this.notesLastEdited,
-        recommendation: recommendation ?? this.recommendation);
+        recommendation: recommendation ?? this.recommendation,
+        lastEdits: lastEdits ?? this.lastEdits,
+        viewedByUsers: viewedByUsers ?? this.viewedByUsers);
   }
 
   Map<String, dynamic> toMap() {
@@ -47,7 +53,8 @@ class UserRecommendationModel extends Equatable {
       'userID': userID,
       'priority': priority,
       'notes': notes,
-      'notesLastEdited': notesLastEdited?.toIso8601String()
+      'lastEdits': lastEdits,
+      'viewedByUsers': viewedByUsers
     };
   }
 
@@ -60,12 +67,15 @@ class UserRecommendationModel extends Equatable {
         userID: map['userID'] != null ? map['userID'] as String : null,
         priority: map['priority'] != null ? map['priority'] as String : null,
         notes: map['notes'] != null ? map['notes'] as String : null,
-        notesLastEdited: map['notesLastEdited'] != null
-            ? DateTime.parse(map['notesLastEdited'])
-            : null,
         recommendation: map['recommendation'] != null
             ? map['recommendation'] as Map<String, dynamic>
-            : null);
+            : null,
+        lastEdits: map['lastEdits'] != null
+            ? List<Map<String, dynamic>>.from(map['lastEdits'])
+            : [],
+        viewedByUsers: map['viewedByUsers'] != null
+            ? List<Map<String, dynamic>>.from(map['viewedByUsers'])
+            : []);
   }
 
   factory UserRecommendationModel.fromFirestore(
@@ -80,10 +90,15 @@ class UserRecommendationModel extends Equatable {
         userID: userID,
         priority: _getPriorityFromString(priority),
         notes: notes,
-        notesLastEdited: notesLastEdited,
         recommendation: recommendation != null
             ? RecommendationItemModel.fromMap(recommendation!).toDomain()
-            : null);
+            : null,
+        lastEdits: lastEdits
+            .map((editMap) => LastEditModel.fromMap(editMap).toDomain())
+            .toList(),
+        viewedByUsers: viewedByUsers
+            .map((viewMap) => LastViewedModel.fromMap(viewMap).toDomain())
+            .toList());
   }
 
   factory UserRecommendationModel.fromDomain(
@@ -94,11 +109,16 @@ class UserRecommendationModel extends Equatable {
         userID: recommendation.userID,
         priority: recommendation.priority?.name,
         notes: recommendation.notes,
-        notesLastEdited: recommendation.notesLastEdited,
         recommendation: recommendation.recommendation != null
             ? RecommendationItemModel.fromDomain(recommendation.recommendation!)
                 .toMap()
-            : null);
+            : null,
+        lastEdits: recommendation.lastEdits
+            .map((edit) => LastEditModel.fromDomain(edit).toMap())
+            .toList(),
+        viewedByUsers: recommendation.viewedByUsers
+            .map((view) => LastViewedModel.fromDomain(view).toMap())
+            .toList());
   }
 
   RecommendationPriority? _getPriorityFromString(String? priority) {
@@ -119,5 +139,5 @@ class UserRecommendationModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, recoID, userID, priority, notes, notesLastEdited, recommendation];
+      [id, recoID, userID, priority, notes, recommendation, lastEdits, viewedByUsers];
 }

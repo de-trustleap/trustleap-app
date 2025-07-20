@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/last_edit.dart';
+import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 
@@ -26,8 +28,9 @@ class UserRecommendation extends Equatable {
   final String? userID;
   final RecommendationPriority? priority;
   final String? notes;
-  final DateTime? notesLastEdited;
   final RecommendationItem? recommendation;
+  final List<LastEdit> lastEdits;
+  final List<LastViewed> viewedByUsers;
 
   const UserRecommendation(
       {required this.id,
@@ -35,8 +38,9 @@ class UserRecommendation extends Equatable {
       required this.userID,
       required this.priority,
       required this.notes,
-      required this.notesLastEdited,
-      required this.recommendation});
+      required this.recommendation,
+      this.lastEdits = const [],
+      this.viewedByUsers = const []});
 
   UserRecommendation copyWith(
       {UniqueID? id,
@@ -44,19 +48,48 @@ class UserRecommendation extends Equatable {
       String? userID,
       RecommendationPriority? priority,
       String? notes,
-      DateTime? notesLastEdited,
-      RecommendationItem? recommendation}) {
+      RecommendationItem? recommendation,
+      List<LastEdit>? lastEdits,
+      List<LastViewed>? viewedByUsers}) {
     return UserRecommendation(
         id: id ?? this.id,
         recoID: recoID ?? this.recoID,
         userID: userID ?? this.userID,
         priority: priority ?? this.priority,
         notes: notes ?? this.notes,
-        notesLastEdited: notesLastEdited ?? this.notesLastEdited,
-        recommendation: recommendation ?? this.recommendation);
+        recommendation: recommendation ?? this.recommendation,
+        lastEdits: lastEdits ?? this.lastEdits,
+        viewedByUsers: viewedByUsers ?? this.viewedByUsers);
+  }
+
+  LastEdit? getLastEdit(String fieldName) {
+    return lastEdits.where((edit) => edit.fieldName == fieldName).firstOrNull;
+  }
+
+  bool hasUnseenChanges(String userID) {
+    final lastViewed =
+        viewedByUsers.where((view) => view.userID == userID).firstOrNull;
+
+    final changesFromOthers =
+        lastEdits.where((edit) => edit.editedBy != userID);
+
+    if (lastViewed == null) {
+      return changesFromOthers.isNotEmpty;
+    }
+
+    return changesFromOthers
+        .any((edit) => edit.editedAt.isAfter(lastViewed.viewedAt));
   }
 
   @override
-  List<Object?> get props =>
-      [id, recoID, userID, priority, notes, notesLastEdited, recommendation];
+  List<Object?> get props => [
+        id,
+        recoID,
+        userID,
+        priority,
+        notes,
+        recommendation,
+        lastEdits,
+        viewedByUsers
+      ];
 }

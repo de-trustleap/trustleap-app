@@ -1985,6 +1985,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Notes successfully changed!';
 
   @override
+  String recommendation_manager_notes_last_edited_by_user(String date) {
+    return 'Last edited by you on $date';
+  }
+
+  @override
+  String recommendation_manager_notes_last_edited_by_other(
+      String userName, String date) {
+    return 'Last edited by $userName on $date';
+  }
+
+  @override
   String get pagebuilder_text_placeholder_recommendation_name =>
       'Name of recommendation';
 
@@ -2187,4 +2198,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dashboard_promoters_chart_no_promoters => 'No promoters found';
+
+  @override
+  String get recommendation_manager_field_priority => 'Priority';
+
+  @override
+  String get recommendation_manager_field_notes => 'Notes';
+
+  @override
+  String get recommendation_manager_field_connector => ' and ';
+
+  @override
+  String recommendation_manager_edit_message(String userName, String fields) {
+    return '$userName has adjusted $fields';
+  }
 }

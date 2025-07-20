@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dart';
+import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
@@ -21,9 +22,10 @@ abstract class RecommendationRepository {
   Future<Either<DatabaseFailure, UserRecommendation>> setFavorite(
       UserRecommendation recommendation, String userID);
   Future<Either<DatabaseFailure, UserRecommendation>> setPriority(
-      UserRecommendation recommendation);
+      UserRecommendation recommendation, String currentUserID);
   Future<Either<DatabaseFailure, UserRecommendation>> setNotes(
-      UserRecommendation recommendation);
+      UserRecommendation recommendation, String currentUserID);
+  void markAsViewed(String recommendationID, LastViewed lastViewed);
   Future<Either<DatabaseFailure, List<PromoterRecommendations>>> getRecommendationsCompany(
       String userID);
 }

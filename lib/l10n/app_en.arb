@@ -2286,6 +2286,27 @@
     "@recommendation_manager_notes_snackbar": {
         "description": "Snackbar message when notes of recommendation has been successfully changed on the recommendation manager page"
     },
+    "recommendation_manager_notes_last_edited_by_user": "Last edited by you on {date}",
+    "@recommendation_manager_notes_last_edited_by_user": {
+        "description": "Text showing when the current user last edited the notes",
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "recommendation_manager_notes_last_edited_by_other": "Last edited by {userName} on {date}",
+    "@recommendation_manager_notes_last_edited_by_other": {
+        "description": "Text showing when another user last edited the notes",
+        "placeholders": {
+            "userName": {
+                "type": "String"
+            },
+            "date": {
+                "type": "String"
+            }
+        }
+    },
     "pagebuilder_text_placeholder_recommendation_name": "Name of recommendation",
     "@pagebuilder_text_placeholder_recommendation_name": {
         "description": "Placeholder dropdown entry for name of the recommended person in Pagebuilder Text Config menu"
@@ -2499,5 +2520,29 @@
     "dashboard_promoters_chart_no_promoters": "No promoters found",
     "@dashboard_promoters_chart_no_promoters": {
         "description": "Message when no promoters are found for the chart"
+    },
+    "recommendation_manager_field_priority": "Priority",
+    "@recommendation_manager_field_priority": {
+        "description": "The field name for priority in recommendation edits"
+    },
+    "recommendation_manager_field_notes": "Notes",
+    "@recommendation_manager_field_notes": {
+        "description": "The field name for notes in recommendation edits"
+    },
+    "recommendation_manager_field_connector": " and ",
+    "@recommendation_manager_field_connector": {
+        "description": "The connector word between multiple edited fields"
+    },
+    "recommendation_manager_edit_message": "{userName} has adjusted {fields}",
+    "@recommendation_manager_edit_message": {
+        "description": "Message showing who edited which fields of a recommendation",
+        "placeholders": {
+            "userName": {
+                "type": "String"
+            },
+            "fields": {
+                "type": "String"
+            }
+        }
     }
 }

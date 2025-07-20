@@ -5850,6 +5850,60 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get dashboard_promoters_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoters_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoters_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoters_loading_error_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoters_loading_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoters_loading_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoters_chart_no_promoters => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoters_chart_no_promoters),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoters_chart_no_promoters),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_field_priority => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_field_priority),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_field_priority),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_field_notes => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_field_notes),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_field_notes),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_field_connector => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_field_connector),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_field_connector),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -5989,6 +6043,76 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           Invocation.method(
             #dashboard_recommendations_last_month,
             [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_promoters_last_7_days(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_promoters_last_7_days,
+          [count],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_promoters_last_7_days,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_promoters_last_month(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_promoters_last_month,
+          [count],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_promoters_last_month,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String dashboard_promoters_last_year(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #dashboard_promoters_last_year,
+          [count],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #dashboard_promoters_last_year,
+            [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String recommendation_manager_edit_message(
+    String? userName,
+    String? fields,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #recommendation_manager_edit_message,
+          [
+            userName,
+            fields,
+          ],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #recommendation_manager_edit_message,
+            [
+              userName,
+              fields,
+            ],
           ),
         ),
       ) as String);

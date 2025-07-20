@@ -187,7 +187,6 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            notesLastEdited: null,
             recommendation: null,
           ),
           UserRecommendation(
@@ -197,7 +196,6 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            notesLastEdited: null,
             recommendation: null,
           ),
         ];
@@ -210,7 +208,6 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            notesLastEdited: null,
             recommendation: null,
           ),
         ];
@@ -311,7 +308,6 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            notesLastEdited: null,
             recommendation: RecommendationItem(
               id: "item1",
               name: "Test",
@@ -335,7 +331,6 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            notesLastEdited: null,
             recommendation: RecommendationItem(
               id: "item2",
               name: "Test",
@@ -407,7 +402,6 @@ void main() {
           priority: RecommendationPriority.medium,
   
           notes: "Test",
-          notesLastEdited: null,
           recommendation: RecommendationItem(
             id: "item1",
             name: "Test",
@@ -479,7 +473,6 @@ void main() {
           priority: RecommendationPriority.medium,
   
           notes: "Test",
-          notesLastEdited: null,
           recommendation: RecommendationItem(
             id: "item1",
             name: "Test",
@@ -503,7 +496,6 @@ void main() {
           priority: RecommendationPriority.medium,
   
           notes: "Test",
-          notesLastEdited: null,
           recommendation: RecommendationItem(
             id: "item2",
             name: "Test",
@@ -557,7 +549,6 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            notesLastEdited: null,
             recommendation: RecommendationItem(
               id: "item1",
               name: "Test",
@@ -581,7 +572,6 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            notesLastEdited: null,
             recommendation: RecommendationItem(
               id: "item2",
               name: "Test",
@@ -605,7 +595,6 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            notesLastEdited: null,
             recommendation: RecommendationItem(
               id: "item3",
               name: "Test",
@@ -629,7 +618,6 @@ void main() {
             priority: RecommendationPriority.medium,
     
             notes: "Test",
-            notesLastEdited: null,
             recommendation: RecommendationItem(
               id: "item4",
               name: "Test",

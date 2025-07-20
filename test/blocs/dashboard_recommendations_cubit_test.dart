@@ -61,7 +61,6 @@ void main() {
         priority: RecommendationPriority.medium,
 
         notes: "Test",
-        notesLastEdited: null,
         recommendation: testRecommendation);
 
     final testPromoterRecommendations = [
@@ -155,7 +154,6 @@ void main() {
         priority: RecommendationPriority.medium,
 
         notes: "Test",
-        notesLastEdited: null,
         recommendation: testRecommendation);
 
     final testRecommendations = [testUserRecommendation];

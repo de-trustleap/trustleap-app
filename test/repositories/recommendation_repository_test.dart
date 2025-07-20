@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dar
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:dartz/dartz.dart';
@@ -86,7 +87,6 @@ void main() {
           userID: userID,
           priority: RecommendationPriority.medium,
             notes: "Test",
-          notesLastEdited: null,
           recommendation: recommendation)
     ];
     test("should return recommendations when call was successful", () async {
@@ -170,7 +170,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should return item when call was successful", () async {
@@ -221,7 +220,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
 
     test("should return item when call was successful", () async {
@@ -319,7 +317,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
@@ -369,29 +366,28 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
       final expectedResult = right(userRecommendation);
-      when(mockRecoRepo.setPriority(userRecommendation))
+      when(mockRecoRepo.setPriority(userRecommendation, "user123"))
           .thenAnswer((_) async => right(userRecommendation));
       // When
-      final result = await mockRecoRepo.setPriority(userRecommendation);
+      final result = await mockRecoRepo.setPriority(userRecommendation, "user123");
       // Then
-      verify(mockRecoRepo.setPriority(userRecommendation));
+      verify(mockRecoRepo.setPriority(userRecommendation, "user123"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
     test("should return failure when call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockRecoRepo.setPriority(userRecommendation))
+      when(mockRecoRepo.setPriority(userRecommendation, "user123"))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockRecoRepo.setPriority(userRecommendation);
+      final result = await mockRecoRepo.setPriority(userRecommendation, "user123");
       // Then
-      verify(mockRecoRepo.setPriority(userRecommendation));
+      verify(mockRecoRepo.setPriority(userRecommendation, "user123"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
@@ -418,17 +414,16 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     test("should return item when call was successful", () async {
       // Given
       final expectedResult = right(userRecommendation);
-      when(mockRecoRepo.setNotes(userRecommendation))
+      when(mockRecoRepo.setNotes(userRecommendation, "user123"))
           .thenAnswer((_) async => right(userRecommendation));
       // When
-      final result = await mockRecoRepo.setNotes(userRecommendation);
+      final result = await mockRecoRepo.setNotes(userRecommendation, "user123");
       // Then
-      verify(mockRecoRepo.setNotes(userRecommendation));
+      verify(mockRecoRepo.setNotes(userRecommendation, "user123"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
@@ -436,12 +431,12 @@ void main() {
     test("should return failure when call has failed", () async {
       // Given
       final expectedResult = left(BackendFailure());
-      when(mockRecoRepo.setNotes(userRecommendation))
+      when(mockRecoRepo.setNotes(userRecommendation, "user123"))
           .thenAnswer((_) async => left(BackendFailure()));
       // When
-      final result = await mockRecoRepo.setNotes(userRecommendation);
+      final result = await mockRecoRepo.setNotes(userRecommendation, "user123");
       // Then
-      verify(mockRecoRepo.setNotes(userRecommendation));
+      verify(mockRecoRepo.setNotes(userRecommendation, "user123"));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockRecoRepo);
     });
@@ -469,7 +464,6 @@ void main() {
         userID: "1",
         priority: RecommendationPriority.medium,
         notes: "Test",
-        notesLastEdited: null,
         recommendation: recommendation);
     final promoterRecommendations = [
       PromoterRecommendations(
@@ -508,6 +502,77 @@ void main() {
       // Then
       verify(mockRecoRepo.getRecommendationsCompany(userID));
       expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
+
+  group("RecommendationRepositoryImplementation_markAsViewed", () {
+    final recommendationID = "recommendation123";
+    final lastViewed = LastViewed(
+      userID: "user123",
+      viewedAt: DateTime(2023, 12, 25, 10, 30, 0),
+    );
+
+    test("should call markAsViewed with correct parameters", () async {
+      // Given
+      when(mockRecoRepo.markAsViewed(recommendationID, lastViewed))
+          .thenReturn(null);
+      
+      // When
+      mockRecoRepo.markAsViewed(recommendationID, lastViewed);
+      
+      // Then
+      verify(mockRecoRepo.markAsViewed(recommendationID, lastViewed)).called(1);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should handle multiple markAsViewed calls for same recommendation", () async {
+      // Given
+      final lastViewed1 = LastViewed(
+        userID: "user123",
+        viewedAt: DateTime(2023, 12, 25, 10, 30, 0),
+      );
+      final lastViewed2 = LastViewed(
+        userID: "user456",
+        viewedAt: DateTime(2023, 12, 25, 11, 0, 0),
+      );
+      
+      when(mockRecoRepo.markAsViewed(recommendationID, lastViewed1))
+          .thenReturn(null);
+      when(mockRecoRepo.markAsViewed(recommendationID, lastViewed2))
+          .thenReturn(null);
+      
+      // When
+      mockRecoRepo.markAsViewed(recommendationID, lastViewed1);
+      mockRecoRepo.markAsViewed(recommendationID, lastViewed2);
+      
+      // Then
+      verify(mockRecoRepo.markAsViewed(recommendationID, lastViewed1)).called(1);
+      verify(mockRecoRepo.markAsViewed(recommendationID, lastViewed2)).called(1);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should handle markAsViewed with different recommendation IDs", () async {
+      // Given
+      final recommendationID1 = "recommendation123";
+      final recommendationID2 = "recommendation456";
+      final lastViewed1 = LastViewed(
+        userID: "user123",
+        viewedAt: DateTime(2023, 12, 25, 10, 30, 0),
+      );
+      
+      when(mockRecoRepo.markAsViewed(recommendationID1, lastViewed1))
+          .thenReturn(null);
+      when(mockRecoRepo.markAsViewed(recommendationID2, lastViewed1))
+          .thenReturn(null);
+      
+      // When
+      mockRecoRepo.markAsViewed(recommendationID1, lastViewed1);
+      mockRecoRepo.markAsViewed(recommendationID2, lastViewed1);
+      
+      // Then
+      verify(mockRecoRepo.markAsViewed(recommendationID1, lastViewed1)).called(1);
+      verify(mockRecoRepo.markAsViewed(recommendationID2, lastViewed1)).called(1);
       verifyNoMoreInteractions(mockRecoRepo);
     });
   });

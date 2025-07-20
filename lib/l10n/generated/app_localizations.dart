@@ -3482,6 +3482,19 @@ abstract class AppLocalizations {
   /// **'Notes successfully changed!'**
   String get recommendation_manager_notes_snackbar;
 
+  /// Text showing when the current user last edited the notes
+  ///
+  /// In en, this message translates to:
+  /// **'Last edited by you on {date}'**
+  String recommendation_manager_notes_last_edited_by_user(String date);
+
+  /// Text showing when another user last edited the notes
+  ///
+  /// In en, this message translates to:
+  /// **'Last edited by {userName} on {date}'**
+  String recommendation_manager_notes_last_edited_by_other(
+      String userName, String date);
+
   /// Placeholder dropdown entry for name of the recommended person in Pagebuilder Text Config menu
   ///
   /// In en, this message translates to:
@@ -3757,6 +3770,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No promoters found'**
   String get dashboard_promoters_chart_no_promoters;
+
+  /// The field name for priority in recommendation edits
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get recommendation_manager_field_priority;
+
+  /// The field name for notes in recommendation edits
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get recommendation_manager_field_notes;
+
+  /// The connector word between multiple edited fields
+  ///
+  /// In en, this message translates to:
+  /// **' and '**
+  String get recommendation_manager_field_connector;
+
+  /// Message showing who edited which fields of a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'{userName} has adjusted {fields}'**
+  String recommendation_manager_edit_message(String userName, String fields);
 }
 
 class _AppLocalizationsDelegate

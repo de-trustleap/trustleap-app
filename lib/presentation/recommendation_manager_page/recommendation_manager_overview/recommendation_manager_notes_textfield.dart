@@ -1,8 +1,10 @@
+import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class RecommendationManagerNotesTextfield extends StatefulWidget {
   final UserRecommendation recommendation;
@@ -61,6 +63,48 @@ class _RecommendationManagerNotesTextfieldState
     widget.onSave(_text);
   }
 
+  Widget _buildLastEditedWidget(BuildContext context, ThemeData themeData, AppLocalizations localization) {
+    final notesLastEdit = widget.recommendation.getLastEdit("notes");
+    if (notesLastEdit != null) {
+      final cubit = Modular.get<RecommendationManagerTileCubit>();
+      final currentUserID = cubit.currentUser?.id.value ?? "";
+      final isCurrentUser = notesLastEdit.editedBy == currentUserID;
+      
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8),
+          if (isCurrentUser)
+            Text(
+                localization.recommendation_manager_notes_last_edited_by_user(
+                    RecommendationManagerHelper(localization: localization).getDateText(context, notesLastEdit.editedAt)
+                ),
+                style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13))
+          else
+            FutureBuilder<String>(
+              future: cubit.getUserDisplayName(notesLastEdit.editedBy),
+              builder: (context, snapshot) {
+                final userName = snapshot.data ?? "";
+                if (userName.isNotEmpty) {
+                  return Text(
+                      localization.recommendation_manager_notes_last_edited_by_other(
+                          userName,
+                          RecommendationManagerHelper(localization: localization).getDateText(context, notesLastEdit.editedAt)
+                      ),
+                      style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13));
+                } else {
+                  return Text(
+                      "${localization.recommendation_manager_notes_last_updated} ${RecommendationManagerHelper(localization: localization).getDateText(context, notesLastEdit.editedAt)}",
+                      style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13));
+                }
+              },
+            )
+        ],
+      );
+    }
+    return const SizedBox.shrink();
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -92,12 +136,7 @@ class _RecommendationManagerNotesTextfieldState
             icon: Icon(_isEditing ? Icons.save : Icons.edit,
                 size: 24, color: themeData.colorScheme.secondary))
       ]),
-      if (widget.recommendation.notesLastEdited != null) ...[
-        const SizedBox(height: 8),
-        Text(
-            "${localization.recommendation_manager_notes_last_updated} ${RecommendationManagerHelper(localization: localization).getDateText(context, widget.recommendation.notesLastEdited!)}",
-            style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13))
-      ]
+      _buildLastEditedWidget(context, themeData, localization)
     ]);
   }
 }

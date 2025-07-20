@@ -14,7 +14,6 @@ void main() {
         priority: RecommendationPriority.medium,
 
         notes: "Test",
-        notesLastEdited: null,
         recommendation: RecommendationItem(
           id: '1',
           name: 'Anna',
@@ -39,7 +38,6 @@ void main() {
         priority: RecommendationPriority.medium,
 
         notes: "Test",
-        notesLastEdited: null,
         recommendation: RecommendationItem(
           id: '2',
           name: 'Ben',
@@ -64,7 +62,6 @@ void main() {
         priority: RecommendationPriority.medium,
 
         notes: "Test",
-        notesLastEdited: null,
         recommendation: RecommendationItem(
           id: '3',
           name: 'Clara',

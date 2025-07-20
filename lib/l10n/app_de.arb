@@ -2286,6 +2286,27 @@
     "@recommendation_manager_notes_snackbar": {
         "description": "Snackbar Nachricht wenn Notizen bei Empfehlung erfolgreich angepasst wurden auf der Empfehlungsmanager Seite"
     },
+    "recommendation_manager_notes_last_edited_by_user": "Zuletzt von dir bearbeitet am {date}",
+    "@recommendation_manager_notes_last_edited_by_user": {
+        "description": "Text der anzeigt wann der aktuelle Benutzer die Notizen zuletzt bearbeitet hat",
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "recommendation_manager_notes_last_edited_by_other": "Zuletzt von {userName} bearbeitet am {date}",
+    "@recommendation_manager_notes_last_edited_by_other": {
+        "description": "Text der anzeigt wann ein anderer Benutzer die Notizen zuletzt bearbeitet hat",
+        "placeholders": {
+            "userName": {
+                "type": "String"
+            },
+            "date": {
+                "type": "String"
+            }
+        }
+    },
     "pagebuilder_text_placeholder_recommendation_name": "Name des Empfohlenen",
     "@pagebuilder_text_placeholder_recommendation_name": {
         "description": "Platzhalter Dropdown Eintrag für Name des Empfohlenen in Pagebuilder Text Config Menü"
@@ -2499,5 +2520,29 @@
     "dashboard_promoters_chart_no_promoters": "Keine Promoter gefunden",
     "@dashboard_promoters_chart_no_promoters": {
         "description": "Nachricht wenn keine Promoter für das Chart gefunden wurden"
+    },
+    "recommendation_manager_field_priority": "Priorität",
+    "@recommendation_manager_field_priority": {
+        "description": "Der Feldname für Priorität in Empfehlungsbearbeitungen"
+    },
+    "recommendation_manager_field_notes": "Notizen",
+    "@recommendation_manager_field_notes": {
+        "description": "Der Feldname für Notizen in Empfehlungsbearbeitungen"
+    },
+    "recommendation_manager_field_connector": " und ",
+    "@recommendation_manager_field_connector": {
+        "description": "Das Verbindungswort zwischen mehreren bearbeiteten Feldern"
+    },
+    "recommendation_manager_edit_message": "{userName} hat {fields} angepasst",
+    "@recommendation_manager_edit_message": {
+        "description": "Nachricht die anzeigt, wer welche Felder einer Empfehlung bearbeitet hat",
+        "placeholders": {
+            "userName": {
+                "type": "String"
+            },
+            "fields": {
+                "type": "String"
+            }
+        }
     }
 }
