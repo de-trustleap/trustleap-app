@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/last_edit.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RecommendationManagerListTileHelper {
@@ -24,6 +25,7 @@ class RecommendationManagerListTileHelper {
   static Future<String?> buildLastEditMessage(
     UserRecommendation recommendation,
     String currentUserID,
+    AppLocalizations localizations,
   ) async {
     final lastViewed = recommendation.viewedByUsers
         .where((view) => view.userID == currentUserID)
@@ -64,10 +66,10 @@ class RecommendationManagerListTileHelper {
     for (final edit in userEdits) {
       switch (edit.fieldName) {
         case "priority":
-          editedFields.add("Priorität");
+          editedFields.add(localizations.recommendation_manager_field_priority);
           break;
         case "notes":
-          editedFields.add("Notizen");
+          editedFields.add(localizations.recommendation_manager_field_notes);
           break;
         default:
           editedFields.add(edit.fieldName);
@@ -78,8 +80,8 @@ class RecommendationManagerListTileHelper {
     final userName = await cubit.getUserDisplayName(userWithMostRecentEdit.key);
     if (userName.isEmpty) return null;
 
-    final fieldsText = editedFields.toList().join(" und ");
+    final fieldsText = editedFields.toList().join(localizations.recommendation_manager_field_connector);
 
-    return "$userName hat $fieldsText angepasst";
+    return localizations.recommendation_manager_edit_message(userName, fieldsText);
   }
 }

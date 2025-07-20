@@ -77,8 +77,6 @@ class _RecommendationManagerListTileState
     });
   }
 
-
-
   void _startViewTimer(String recommendationID) {
     _viewTimer?.cancel();
     _viewTimer = Timer(const Duration(seconds: 3), () {
@@ -206,10 +204,11 @@ class _RecommendationManagerListTileState
                 curve: Curves.easeOut,
                 decoration: BoxDecoration(
                   color: themeData.colorScheme.primary.withValues(
-                      alpha: RecommendationManagerListTileHelper.getOverlayOpacity(
-                          _recommendation,
-                          cubit.currentUser?.id.value ?? "",
-                          _shouldAnimateToSurface)),
+                      alpha:
+                          RecommendationManagerListTileHelper.getOverlayOpacity(
+                              _recommendation,
+                              cubit.currentUser?.id.value ?? "",
+                              _shouldAnimateToSurface)),
                 ),
               ),
               children: [
@@ -220,9 +219,11 @@ class _RecommendationManagerListTileState
                               cubit.currentUser?.id.value ?? "") &&
                           !_shouldAnimateToSurface
                       ? FutureBuilder<String?>(
-                          future: RecommendationManagerListTileHelper.buildLastEditMessage(
-                              _recommendation,
-                              cubit.currentUser?.id.value ?? ""),
+                          future: RecommendationManagerListTileHelper
+                              .buildLastEditMessage(
+                                  _recommendation,
+                                  cubit.currentUser?.id.value ?? "",
+                                  localization),
                           builder: (context, snapshot) {
                             if (snapshot.hasData && snapshot.data != null) {
                               return Column(

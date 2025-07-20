@@ -5877,6 +5877,33 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get recommendation_manager_field_priority => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_field_priority),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_field_priority),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_field_notes => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_field_notes),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_field_notes),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_manager_field_connector => (super.noSuchMethod(
+        Invocation.getter(#recommendation_manager_field_connector),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_manager_field_connector),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -6061,6 +6088,31 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           Invocation.method(
             #dashboard_promoters_last_year,
             [count],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String recommendation_manager_edit_message(
+    String? userName,
+    String? fields,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #recommendation_manager_edit_message,
+          [
+            userName,
+            fields,
+          ],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #recommendation_manager_edit_message,
+            [
+              userName,
+              fields,
+            ],
           ),
         ),
       ) as String);

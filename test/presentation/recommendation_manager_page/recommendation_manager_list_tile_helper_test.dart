@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/last_viewed.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/presentation/recommendation_manager_page/recommendation_manager_overview/recommendation_manager_list_tile_helper.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -24,9 +25,11 @@ class TestModule extends Module {
 
 void main() {
   late MockRecommendationManagerTileCubit mockCubit;
+  late MockAppLocalizations mockLocalizations;
   
   setUp(() {
     mockCubit = MockRecommendationManagerTileCubit();
+    mockLocalizations = MockAppLocalizations();
     Modular.init(TestModule(mockCubit));
   });
   
@@ -164,6 +167,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithOwnEdits,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then
@@ -195,6 +199,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithOldEdits,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then
@@ -203,6 +208,10 @@ void main() {
 
     test("should return formatted message for priority edit", () async {
       // Given
+      when(mockLocalizations.recommendation_manager_field_priority).thenReturn("Priorität");
+      when(mockLocalizations.recommendation_manager_field_connector).thenReturn(" und ");
+      when(mockLocalizations.recommendation_manager_edit_message("Max Mustermann", "Priorität"))
+          .thenReturn("Max Mustermann hat Priorität angepasst");
       when(mockCubit.getUserDisplayName(otherUserID))
           .thenAnswer((_) async => "Max Mustermann");
       
@@ -220,6 +229,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithPriorityEdit,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then
@@ -229,6 +239,10 @@ void main() {
 
     test("should return formatted message for notes edit", () async {
       // Given
+      when(mockLocalizations.recommendation_manager_field_notes).thenReturn("Notizen");
+      when(mockLocalizations.recommendation_manager_field_connector).thenReturn(" und ");
+      when(mockLocalizations.recommendation_manager_edit_message("Jane Doe", "Notizen"))
+          .thenReturn("Jane Doe hat Notizen angepasst");
       when(mockCubit.getUserDisplayName(otherUserID))
           .thenAnswer((_) async => "Jane Doe");
       
@@ -246,6 +260,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithNotesEdit,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then
@@ -255,6 +270,11 @@ void main() {
 
     test("should return formatted message for multiple edits", () async {
       // Given
+      when(mockLocalizations.recommendation_manager_field_priority).thenReturn("Priorität");
+      when(mockLocalizations.recommendation_manager_field_notes).thenReturn("Notizen");
+      when(mockLocalizations.recommendation_manager_field_connector).thenReturn(" und ");
+      when(mockLocalizations.recommendation_manager_edit_message("John Smith", "Priorität und Notizen"))
+          .thenReturn("John Smith hat Priorität und Notizen angepasst");
       when(mockCubit.getUserDisplayName(otherUserID))
           .thenAnswer((_) async => "John Smith");
       
@@ -277,6 +297,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithMultipleEdits,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then
@@ -286,6 +307,9 @@ void main() {
 
     test("should return formatted message for unknown field name", () async {
       // Given
+      when(mockLocalizations.recommendation_manager_field_connector).thenReturn(" und ");
+      when(mockLocalizations.recommendation_manager_edit_message("Unknown User", "unknownField"))
+          .thenReturn("Unknown User hat unknownField angepasst");
       when(mockCubit.getUserDisplayName(otherUserID))
           .thenAnswer((_) async => "Unknown User");
       
@@ -303,6 +327,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithUnknownEdit,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then
@@ -312,6 +337,8 @@ void main() {
 
     test("should return null when getUserDisplayName returns empty string", () async {
       // Given
+      when(mockLocalizations.recommendation_manager_field_priority).thenReturn("Priorität");
+      when(mockLocalizations.recommendation_manager_field_connector).thenReturn(" und ");
       when(mockCubit.getUserDisplayName(otherUserID))
           .thenAnswer((_) async => "");
       
@@ -329,6 +356,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithEdit,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then
@@ -343,6 +371,10 @@ void main() {
       final now = DateTime.now();
       final earlier = now.subtract(const Duration(hours: 1));
       
+      when(mockLocalizations.recommendation_manager_field_notes).thenReturn("Notizen");
+      when(mockLocalizations.recommendation_manager_field_connector).thenReturn(" und ");
+      when(mockLocalizations.recommendation_manager_edit_message("Most Recent User", "Notizen"))
+          .thenReturn("Most Recent User hat Notizen angepasst");
       when(mockCubit.getUserDisplayName(user2))
           .thenAnswer((_) async => "Most Recent User");
       
@@ -365,6 +397,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithMultipleUsers,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then
@@ -379,6 +412,10 @@ void main() {
       final editBefore = viewedAt.subtract(const Duration(hours: 1));
       final editAfter = viewedAt.add(const Duration(hours: 1));
       
+      when(mockLocalizations.recommendation_manager_field_notes).thenReturn("Notizen");
+      when(mockLocalizations.recommendation_manager_field_connector).thenReturn(" und ");
+      when(mockLocalizations.recommendation_manager_edit_message("Recent Editor", "Notizen"))
+          .thenReturn("Recent Editor hat Notizen angepasst");
       when(mockCubit.getUserDisplayName(otherUserID))
           .thenAnswer((_) async => "Recent Editor");
       
@@ -407,6 +444,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithViewedAndEdits,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then
@@ -416,6 +454,11 @@ void main() {
 
     test("should handle multiple edits from same user correctly", () async {
       // Given
+      when(mockLocalizations.recommendation_manager_field_priority).thenReturn("Priorität");
+      when(mockLocalizations.recommendation_manager_field_notes).thenReturn("Notizen");
+      when(mockLocalizations.recommendation_manager_field_connector).thenReturn(" und ");
+      when(mockLocalizations.recommendation_manager_edit_message("Multi Editor", "Priorität und Notizen"))
+          .thenReturn("Multi Editor hat Priorität und Notizen angepasst");
       when(mockCubit.getUserDisplayName(otherUserID))
           .thenAnswer((_) async => "Multi Editor");
       
@@ -444,6 +487,7 @@ void main() {
       final result = await RecommendationManagerListTileHelper.buildLastEditMessage(
         recommendationWithMultipleSameUserEdits,
         currentUserID,
+        mockLocalizations,
       );
       
       // Then

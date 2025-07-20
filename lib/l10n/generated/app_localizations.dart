@@ -63,7 +63,7 @@ import 'app_localizations_en.dart';
 /// property.
 abstract class AppLocalizations {
   AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -86,16 +86,16 @@ abstract class AppLocalizations {
   /// of delegates is preferred or required.
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('de'),
-    Locale('en'),
+    Locale('en')
   ];
 
   /// The firstname in the register form
@@ -565,9 +565,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Step {currentStep} of {elementsTotal}'**
   String landingpage_creation_progress_indicator_text(
-    int currentStep,
-    int elementsTotal,
-  );
+      int currentStep, int elementsTotal);
 
   /// Placeholder for impressum in landingpage creation form
   ///
@@ -670,14 +668,14 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'First name of provider'**
   String
-  get landingpage_create_promotion_placeholder_service_provider_first_name;
+      get landingpage_create_promotion_placeholder_service_provider_first_name;
 
   /// Placeholder variable for the last name of provider
   ///
   /// In en, this message translates to:
   /// **'Last name of provider'**
   String
-  get landingpage_create_promotion_placeholder_service_provider_last_name;
+      get landingpage_create_promotion_placeholder_service_provider_last_name;
 
   /// Placeholder variable for the name of provider
   ///
@@ -990,7 +988,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue'**
   String
-  get profile_page_email_section_change_email_password_continue_button_title;
+      get profile_page_email_section_change_email_password_continue_button_title;
 
   /// button title of the resend email verification button in the email area on the profile page.
   ///
@@ -1045,7 +1043,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String
-  get profile_page_image_section_large_image_view_close_button_tooltip_title;
+      get profile_page_image_section_large_image_view_close_button_tooltip_title;
 
   /// title of the change password section on profile page.
   ///
@@ -1064,21 +1062,21 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New password'**
   String
-  get profile_page_password_update_section_new_password_textfield_placeholder;
+      get profile_page_password_update_section_new_password_textfield_placeholder;
 
   /// placeholder for the new password repeat text field on the change password page in the profile page.
   ///
   /// In en, this message translates to:
   /// **'Repeat new password'**
   String
-  get profile_page_password_update_section_new_password_repeat_textfield_placeholder;
+      get profile_page_password_update_section_new_password_repeat_textfield_placeholder;
 
   /// button title for the confirm password change button on the change password page in the profile page.
   ///
   /// In en, this message translates to:
   /// **'Change password'**
   String
-  get profile_page_password_update_section_new_password_confirm_button_text;
+      get profile_page_password_update_section_new_password_confirm_button_text;
 
   /// Description for reauthentication on the Change Password page in the Profile page.
   ///
@@ -1091,7 +1089,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password'**
   String
-  get profile_page_password_update_section_reauth_password_textfield_placeholder;
+      get profile_page_password_update_section_reauth_password_textfield_placeholder;
 
   /// Continue button title of reauthentication on the change password page in the profile page.
   ///
@@ -2760,7 +2758,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Textfield placeholder configuration'**
   String
-  get pagebuilder_textfield_config_textfield_placeholder_text_configuration;
+      get pagebuilder_textfield_config_textfield_placeholder_text_configuration;
 
   /// Section Title in the Pagebuilder Config Menu
   ///
@@ -2851,14 +2849,14 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please provide the YouTube link where your video can be accessed.'**
   String
-  get landingpage_pagebuilder_video_player_config_youtube_link_description;
+      get landingpage_pagebuilder_video_player_config_youtube_link_description;
 
   /// Placeholder for the video player youtube link in the pagebuilder video player configuration.
   ///
   /// In en, this message translates to:
   /// **'Youtube link'**
   String
-  get landingpage_pagebuilder_video_player_config_youtube_link_placeholder;
+      get landingpage_pagebuilder_video_player_config_youtube_link_placeholder;
 
   /// Error message when company data were not found for the creation of a default landingpage
   ///
@@ -3484,6 +3482,19 @@ abstract class AppLocalizations {
   /// **'Notes successfully changed!'**
   String get recommendation_manager_notes_snackbar;
 
+  /// Text showing when the current user last edited the notes
+  ///
+  /// In en, this message translates to:
+  /// **'Last edited by you on {date}'**
+  String recommendation_manager_notes_last_edited_by_user(String date);
+
+  /// Text showing when another user last edited the notes
+  ///
+  /// In en, this message translates to:
+  /// **'Last edited by {userName} on {date}'**
+  String recommendation_manager_notes_last_edited_by_other(
+      String userName, String date);
+
   /// Placeholder dropdown entry for name of the recommended person in Pagebuilder Text Config menu
   ///
   /// In en, this message translates to:
@@ -3759,6 +3770,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No promoters found'**
   String get dashboard_promoters_chart_no_promoters;
+
+  /// The field name for priority in recommendation edits
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get recommendation_manager_field_priority;
+
+  /// The field name for notes in recommendation edits
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get recommendation_manager_field_notes;
+
+  /// The connector word between multiple edited fields
+  ///
+  /// In en, this message translates to:
+  /// **' and '**
+  String get recommendation_manager_field_connector;
+
+  /// Message showing who edited which fields of a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'{userName} has adjusted {fields}'**
+  String recommendation_manager_edit_message(String userName, String fields);
 }
 
 class _AppLocalizationsDelegate
@@ -3788,9 +3823,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

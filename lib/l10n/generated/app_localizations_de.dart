@@ -273,9 +273,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String landingpage_creation_progress_indicator_text(
-    int currentStep,
-    int elementsTotal,
-  ) {
+      int currentStep, int elementsTotal) {
     return 'Schritt $currentStep von $elementsTotal';
   }
 
@@ -338,13 +336,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String
-  get landingpage_create_promotion_placeholder_service_provider_first_name =>
-      'Vorname des Dienstleisters';
+      get landingpage_create_promotion_placeholder_service_provider_first_name =>
+          'Vorname des Dienstleisters';
 
   @override
   String
-  get landingpage_create_promotion_placeholder_service_provider_last_name =>
-      'Nachname des Dienstleisters';
+      get landingpage_create_promotion_placeholder_service_provider_last_name =>
+          'Nachname des Dienstleisters';
 
   @override
   String get landingpage_create_promotion_placeholder_service_provider_name =>
@@ -536,8 +534,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String
-  get profile_page_email_section_change_email_password_continue_button_title =>
-      'Weiter';
+      get profile_page_email_section_change_email_password_continue_button_title =>
+          'Weiter';
 
   @override
   String get profile_page_email_section_resend_verify_email_button_title =>
@@ -572,8 +570,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String
-  get profile_page_image_section_large_image_view_close_button_tooltip_title =>
-      'Schließen';
+      get profile_page_image_section_large_image_view_close_button_tooltip_title =>
+          'Schließen';
 
   @override
   String get profile_page_password_update_section_title => 'Passwort ändern';
@@ -584,18 +582,18 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String
-  get profile_page_password_update_section_new_password_textfield_placeholder =>
-      'Neues Passwort';
+      get profile_page_password_update_section_new_password_textfield_placeholder =>
+          'Neues Passwort';
 
   @override
   String
-  get profile_page_password_update_section_new_password_repeat_textfield_placeholder =>
-      'Neues Passwort wiederholen';
+      get profile_page_password_update_section_new_password_repeat_textfield_placeholder =>
+          'Neues Passwort wiederholen';
 
   @override
   String
-  get profile_page_password_update_section_new_password_confirm_button_text =>
-      'Passwort ändern';
+      get profile_page_password_update_section_new_password_confirm_button_text =>
+          'Passwort ändern';
 
   @override
   String get profile_page_password_update_section_reauth_description =>
@@ -603,13 +601,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String
-  get profile_page_password_update_section_reauth_password_textfield_placeholder =>
-      'Passwort';
+      get profile_page_password_update_section_reauth_password_textfield_placeholder =>
+          'Passwort';
 
   @override
   String
-  get profile_page_password_update_section_reauth_continue_button_title =>
-      'Weiter';
+      get profile_page_password_update_section_reauth_continue_button_title =>
+          'Weiter';
 
   @override
   String get profile_page_contact_section_title => 'Kontaktinformationen';
@@ -1500,8 +1498,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String
-  get landingpage_pagebuilder_icon_config_icon_picker_search_no_results =>
-      'Keine Ergebnisse für:';
+      get landingpage_pagebuilder_icon_config_icon_picker_search_no_results =>
+          'Keine Ergebnisse für:';
 
   @override
   String get landingpage_pagebuilder_contactform_content_email =>
@@ -1584,8 +1582,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String
-  get pagebuilder_textfield_config_textfield_placeholder_text_configuration =>
-      'Textfeld Platzhalter Konfiguration';
+      get pagebuilder_textfield_config_textfield_placeholder_text_configuration =>
+          'Textfeld Platzhalter Konfiguration';
 
   @override
   String get landingpage_pagebuilder_config_menu_section_type => 'Section';
@@ -1643,14 +1641,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'Youtube Link';
 
   @override
-  String
-  get landingpage_pagebuilder_video_player_config_youtube_link_description =>
+  String get landingpage_pagebuilder_video_player_config_youtube_link_description =>
       'Gib hier bitte den Youtube Link an, über den dein Video erreichbar ist.';
 
   @override
   String
-  get landingpage_pagebuilder_video_player_config_youtube_link_placeholder =>
-      'Youtube Link';
+      get landingpage_pagebuilder_video_player_config_youtube_link_placeholder =>
+          'Youtube Link';
 
   @override
   String get landingpage_creator_missing_companydata_error =>
@@ -2029,6 +2026,17 @@ class AppLocalizationsDe extends AppLocalizations {
       'Notizen erfolgreich angepasst!';
 
   @override
+  String recommendation_manager_notes_last_edited_by_user(String date) {
+    return 'Zuletzt von dir bearbeitet am $date';
+  }
+
+  @override
+  String recommendation_manager_notes_last_edited_by_other(
+      String userName, String date) {
+    return 'Zuletzt von $userName bearbeitet am $date';
+  }
+
+  @override
   String get pagebuilder_text_placeholder_recommendation_name =>
       'Name des Empfohlenen';
 
@@ -2233,4 +2241,18 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get dashboard_promoters_chart_no_promoters =>
       'Keine Promoter gefunden';
+
+  @override
+  String get recommendation_manager_field_priority => 'Priorität';
+
+  @override
+  String get recommendation_manager_field_notes => 'Notizen';
+
+  @override
+  String get recommendation_manager_field_connector => ' und ';
+
+  @override
+  String recommendation_manager_edit_message(String userName, String fields) {
+    return '$userName hat $fields angepasst';
+  }
 }

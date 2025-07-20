@@ -76,7 +76,9 @@ class _RecommendationManagerNotesTextfieldState
           const SizedBox(height: 8),
           if (isCurrentUser)
             Text(
-                "Zuletzt von dir bearbeitet am ${RecommendationManagerHelper(localization: localization).getDateText(context, notesLastEdit.editedAt)}",
+                localization.recommendation_manager_notes_last_edited_by_user(
+                    RecommendationManagerHelper(localization: localization).getDateText(context, notesLastEdit.editedAt)
+                ),
                 style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13))
           else
             FutureBuilder<String>(
@@ -85,7 +87,10 @@ class _RecommendationManagerNotesTextfieldState
                 final userName = snapshot.data ?? "";
                 if (userName.isNotEmpty) {
                   return Text(
-                      "Zuletzt von $userName bearbeitet am ${RecommendationManagerHelper(localization: localization).getDateText(context, notesLastEdit.editedAt)}",
+                      localization.recommendation_manager_notes_last_edited_by_other(
+                          userName,
+                          RecommendationManagerHelper(localization: localization).getDateText(context, notesLastEdit.editedAt)
+                      ),
                       style: themeData.textTheme.bodySmall!.copyWith(fontSize: 13));
                 } else {
                   return Text(
