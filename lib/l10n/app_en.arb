@@ -228,6 +228,10 @@
     "@landingpage_overview_empty_page_button_title": {
         "description": "Title for the button on the page that appears when you don't have a landing page yet"
     },
+    "landingpage_overview_pending_tooltip": "The page is currently being created. Please wait...",
+    "@landingpage_overview_pending_tooltip": {
+        "description": "Tooltip for landing page tiles that are still being created"
+    },
     "landingpage_delete_alert_title": "Do you really want to delete the selected landing page?",
     "@landingpage_delete_alert_title": {
         "description": "Title for the Landing Page Deletion Dialog"

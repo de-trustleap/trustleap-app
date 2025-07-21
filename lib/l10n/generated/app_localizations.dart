@@ -440,6 +440,12 @@ abstract class AppLocalizations {
   /// **'Register Landing Page'**
   String get landingpage_overview_empty_page_button_title;
 
+  /// Tooltip for landing page tiles that are still being created
+  ///
+  /// In en, this message translates to:
+  /// **'The page is currently being created. Please wait...'**
+  String get landingpage_overview_pending_tooltip;
+
   /// Title for the Landing Page Deletion Dialog
   ///
   /// In en, this message translates to:

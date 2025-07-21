@@ -198,6 +198,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Landingpage registrieren';
 
   @override
+  String get landingpage_overview_pending_tooltip =>
+      'Die Seite wird gerade erstellt. Bitte warten...';
+
+  @override
   String get landingpage_delete_alert_title =>
       'Soll die ausgewählte Landingpage wirklich gelöscht werden?';
 
