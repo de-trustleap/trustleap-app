@@ -66,7 +66,7 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
 
   void setButtonStateToDisabled(bool disabled) {
     setState(() {
-      buttonDisabled = disabled;
+      buttonDisabled = disabled || !avvChecked;
     });
   }
 
@@ -74,6 +74,7 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
     setState(() {
       showError = false;
       errorMessage = "";
+      buttonDisabled = !avvChecked;
     });
   }
 
@@ -269,14 +270,14 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
                       Checkbox(
                           value: avvChecked,
                           onChanged: (checked) {
+                            setState(() {
+                              avvChecked = checked ?? false;
+                            });
                             if (checked == true) {
                               setButtonStateToDisabled(false);
                             } else {
                               setButtonStateToDisabled(true);
                             }
-                            setState(() {
-                              avvChecked = checked ?? false;
-                            });
                           }),
                       const SizedBox(width: 8),
                       Text(
