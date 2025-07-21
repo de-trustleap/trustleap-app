@@ -191,6 +191,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Register Landing Page';
 
   @override
+  String get landingpage_overview_pending_tooltip =>
+      'The page is currently being created. Please wait...';
+
+  @override
   String get landingpage_delete_alert_title =>
       'Do you really want to delete the selected landing page?';
 
