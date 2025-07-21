@@ -105,7 +105,11 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
 
   void setButtonStateToDisabled(bool disabled) {
     setState(() {
-      buttonDisabled = disabled;
+      if (showAVVCheckbox && !avvChecked) {
+        buttonDisabled = true;
+      } else {
+        buttonDisabled = disabled;
+      }
     });
   }
 
@@ -114,6 +118,9 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
       showError = false;
       errorMessage = "";
       showAVVCheckbox = true;
+      if (showAVVCheckbox && !avvChecked) {
+        buttonDisabled = true;
+      }
     });
   }
 
@@ -366,14 +373,14 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
                         Checkbox(
                             value: avvChecked,
                             onChanged: (checked) {
+                              setState(() {
+                                avvChecked = checked ?? false;
+                              });
                               if (checked == true) {
                                 setButtonStateToDisabled(false);
                               } else {
                                 setButtonStateToDisabled(true);
                               }
-                              setState(() {
-                                avvChecked = checked ?? false;
-                              });
                             }),
                         const SizedBox(width: 8),
                         Text(
