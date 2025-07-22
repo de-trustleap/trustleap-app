@@ -5913,6 +5913,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get feedback_send_button => (super.noSuchMethod(
+        Invocation.getter(#feedback_send_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_send_button),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,

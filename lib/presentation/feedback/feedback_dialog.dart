@@ -72,7 +72,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
         if (state is SentFeedbackSuccessState) {
           Navigator.of(context).pop();
           CustomSnackBar.of(context).showCustomSnackBar(
-            'Feedback erfolgreich gesendet!',
+            localization.feedback_success_message,
             SnackBarType.success,
           );
         }
@@ -97,7 +97,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Feedback geben', // TODO: Add to localization
+                      localization.feedback_dialog_title,
                       style: themeData.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -105,7 +105,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                     IconButton(
                       onPressed: onCancel,
                       icon: const Icon(Icons.close),
-                      tooltip: 'Schließen', // TODO: Add to localization
+                      tooltip: localization.feedback_dialog_close,
                     ),
                   ],
                 ),
@@ -122,7 +122,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                             controller: titleController,
                             disabled: state is SentFeedbackLoadingState,
                             placeholder:
-                                'Titel eingeben...', // TODO: Add to localization
+                                localization.feedback_title_placeholder,
                             validator: validator.validateTitle,
                           ),
                           const SizedBox(height: 16),
@@ -131,13 +131,13 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                             controller: descriptionController,
                             disabled: state is SentFeedbackLoadingState,
                             placeholder:
-                                'Beschreibung eingeben...', // TODO: Add to localization
+                                localization.feedback_description_placeholder,
                             validator: validator.validateDescription,
                             maxLines: 5,
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'Bilder (optional, max. 3)', // TODO: Add to localization
+                            localization.feedback_images_label,
                             style: themeData.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w500,
                             ),
@@ -157,7 +157,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                                     Expanded(
                                       child: SecondaryButton(
                                         title:
-                                            'Abbrechen', // TODO: Add to localization
+                                            localization.feedback_cancel_button,
                                         onTap: onCancel,
                                         disabled:
                                             state is SentFeedbackLoadingState,
@@ -167,8 +167,8 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: PrimaryButton(
-                                        title:
-                                            'Senden', // TODO: Add to localization
+                                        title: localization
+                                            .feedback_send_dialog_button,
                                         onTap: state is SentFeedbackLoadingState
                                             ? null
                                             : onSubmit,
@@ -185,7 +185,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                                   children: [
                                     SecondaryButton(
                                       title:
-                                          'Abbrechen', // TODO: Add to localization
+                                          localization.feedback_cancel_button,
                                       onTap: onCancel,
                                       disabled:
                                           state is SentFeedbackLoadingState,
@@ -193,8 +193,8 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                                     ),
                                     const SizedBox(height: 12),
                                     PrimaryButton(
-                                      title:
-                                          'Senden', // TODO: Add to localization
+                                      title: localization
+                                          .feedback_send_dialog_button,
                                       onTap: state is SentFeedbackLoadingState
                                           ? null
                                           : onSubmit,

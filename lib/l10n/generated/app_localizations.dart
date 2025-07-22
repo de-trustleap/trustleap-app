@@ -3800,6 +3800,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{userName} has adjusted {fields}'**
   String recommendation_manager_edit_message(String userName, String fields);
+
+  /// Button tooltip for sending feedback
+  ///
+  /// In en, this message translates to:
+  /// **'Send Feedback'**
+  String get feedback_send_button;
+
+  /// Error message when feedback title is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Title is required'**
+  String get feedback_title_required;
+
+  /// Error message when feedback title is too long
+  ///
+  /// In en, this message translates to:
+  /// **'Title can be at most 100 characters long'**
+  String get feedback_title_too_long;
+
+  /// Error message when feedback description is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Description is required'**
+  String get feedback_description_required;
+
+  /// Error message when feedback description is too long
+  ///
+  /// In en, this message translates to:
+  /// **'Description can be at most 1000 characters long'**
+  String get feedback_description_too_long;
+
+  /// Title of the feedback dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Give Feedback'**
+  String get feedback_dialog_title;
+
+  /// Tooltip for close button in feedback dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get feedback_dialog_close;
+
+  /// Placeholder for title input field in feedback dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Enter title...'**
+  String get feedback_title_placeholder;
+
+  /// Placeholder for description input field in feedback dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Enter description...'**
+  String get feedback_description_placeholder;
+
+  /// Label for image upload area in feedback dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Images (optional, max. 3)'**
+  String get feedback_images_label;
+
+  /// Text for cancel button in feedback dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get feedback_cancel_button;
+
+  /// Text for send button in feedback dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get feedback_send_dialog_button;
+
+  /// Success message after sending feedback
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback sent successfully!'**
+  String get feedback_success_message;
 }
 
 class _AppLocalizationsDelegate

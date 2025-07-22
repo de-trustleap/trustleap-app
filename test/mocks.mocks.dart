@@ -133,7 +133,6 @@ import 'package:firebase_core/firebase_core.dart' as _i18;
 import 'package:firebase_storage/firebase_storage.dart' as _i22;
 import 'package:flutter/foundation.dart' as _i17;
 import 'package:flutter/widgets.dart' as _i16;
-import 'package:flutter_image_compress/flutter_image_compress.dart' as _i82;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i26;
 
@@ -6449,6 +6448,15 @@ class MockAppLocalizations extends _i1.Mock implements _i25.AppLocalizations {
         returnValue: _i26.dummyValue<String>(
           this,
           Invocation.getter(#recommendation_manager_field_connector),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_send_button => (super.noSuchMethod(
+        Invocation.getter(#feedback_send_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_send_button),
         ),
       ) as String);
 
@@ -12861,16 +12869,6 @@ class MockFeedbackCubit extends _i1.Mock implements _i81.FeedbackCubit {
         returnValue: _i21.Future<void>.value(),
         returnValueForMissingStub: _i21.Future<void>.value(),
       ) as _i21.Future<void>);
-}
-
-/// A class which mocks [FlutterImageCompress].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockFlutterImageCompress extends _i1.Mock
-    implements _i82.FlutterImageCompress {
-  MockFlutterImageCompress() {
-    _i1.throwOnMissingStub(this);
-  }
 }
 
 /// A class which mocks [BuildContext].
