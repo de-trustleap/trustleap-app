@@ -6,6 +6,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
+import 'package:finanzbegleiter/core/helpers/image_compressor.dart';
 import 'package:finanzbegleiter/domain/entities/feedback.dart';
 import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart';
 import 'package:finanzbegleiter/infrastructure/models/feedback_model.dart';
@@ -26,8 +27,11 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("sendFeedback");
     final feedbackModel = FeedbackModel.fromDomain(feedback);
+
+    final compressedImages = await ImageCompressor.compressImages(images);
     final encodedImages =
-        images.map((imageData) => base64Encode(imageData)).toList();
+        compressedImages.map((imageData) => base64Encode(imageData)).toList();
+
     try {
       await callable.call({
         "appCheckToken": appCheckToken,
@@ -43,8 +47,8 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
   }
 }
 
-// TODO: CUBIT EINBINDEN
+// TODO: CUBIT EINBINDEN (FERTIG)
 // TODO: BACKEND FUNKTION IMPLEMENTIEREN
 // TODO: TESTEN!
-// TODO: NEUE TESTS FÜR CUBIT, REPO UND MODELS
+// TODO: NEUE TESTS FÜR CUBIT, REPO UND MODELS (FERTIG)
 // TODO: LOCALIZATION

@@ -25,6 +25,7 @@ import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overvie
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
+import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
@@ -36,6 +37,7 @@ import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart';
 import 'package:finanzbegleiter/application/admin_registration_code/admin_registration_code_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
@@ -55,6 +57,7 @@ import 'package:mockito/annotations.dart';
   UserRepository,
   PermissionRepository,
   AdminRegistrationCodeRepository,
+  FeedbackRepository,
   RecommendationRepository,
   LegalsRepository,
   User,
@@ -87,10 +90,11 @@ import 'package:mockito/annotations.dart';
   DashboardOverviewCubit,
   DashboardRecommendationsCubit,
   RecommendationManagerTileCubit,
+  FeedbackCubit,
   BuildContext,
   FirebaseAuth,
   FirebaseFirestore,
   FirebaseStorage,
-  FirebaseFunctions
+  FirebaseFunctions,
 ])
 void main() {}

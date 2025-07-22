@@ -606,6 +606,3 @@ class RecommendationRepositoryImplementation
     }
   }
 }
-
-// TODO: BACKEND ANPASSEN
-// TODO: LOCALIZATIONS

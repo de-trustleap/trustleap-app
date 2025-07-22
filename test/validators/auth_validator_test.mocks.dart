@@ -554,6 +554,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_overview_pending_tooltip => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_pending_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_pending_tooltip),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_delete_alert_title => (super.noSuchMethod(
         Invocation.getter(#landingpage_delete_alert_title),
         returnValue: _i3.dummyValue<String>(
@@ -5995,6 +6004,47 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           Invocation.method(
             #send_recommendation_alert_description,
             [receiver],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String recommendation_manager_notes_last_edited_by_user(String? date) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #recommendation_manager_notes_last_edited_by_user,
+          [date],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #recommendation_manager_notes_last_edited_by_user,
+            [date],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String recommendation_manager_notes_last_edited_by_other(
+    String? userName,
+    String? date,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #recommendation_manager_notes_last_edited_by_other,
+          [
+            userName,
+            date,
+          ],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #recommendation_manager_notes_last_edited_by_other,
+            [
+              userName,
+              date,
+            ],
           ),
         ),
       ) as String);
