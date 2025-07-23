@@ -68,6 +68,8 @@ class _MenuItemState extends State<MenuItem> {
         return localization.menuitems_company_requests;
       case MenuItems.registrationCodes:
         return "Codes";
+      case MenuItems.userFeedback:
+        return "Nutzer Feedback";
       case MenuItems.none:
         return "";
     }

@@ -9,6 +9,7 @@ enum MenuItems {
 
   adminCompanyRequests("Unternehmensanfragen"),
   registrationCodes("Codes"),
+  userFeedback("Nutzerfeedback"),
   none("");
 
   final String value;

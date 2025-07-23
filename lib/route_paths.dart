@@ -5,6 +5,7 @@ class RoutePaths {
   static const String companyRequestsPath = "/company-requests";
   static const String companyRequestDetails = "/company-request-details";
   static const String registrationCodes = "/registration-codes";
+  static const String userFeedback = "/user-feedback";
 
   static const String homePath = "/home";
   static const String dashboardPath = "/dashboard";
@@ -34,6 +35,7 @@ class RoutePaths {
     MenuItems.landingpage: RoutePaths.landingPagePath,
     MenuItems.activities: RoutePaths.activitiesPath,
     MenuItems.adminCompanyRequests: RoutePaths.companyRequestsPath,
-    MenuItems.registrationCodes: RoutePaths.registrationCodes
+    MenuItems.registrationCodes: RoutePaths.registrationCodes,
+    MenuItems.userFeedback: RoutePaths.userFeedback
   };
 }

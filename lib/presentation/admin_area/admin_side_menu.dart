@@ -33,6 +33,14 @@ class AdminSideMenu extends StatelessWidget {
                   type: MenuItems.registrationCodes,
                   isCollapsed: collapsed,
                   animationController: animationController,
+                  isAdmin: true),
+              const SizedBox(height: 20),
+              MenuItem(
+                  path: RoutePaths.userFeedback,
+                  icon: Icons.feedback,
+                  type: MenuItems.userFeedback,
+                  isCollapsed: collapsed,
+                  animationController: animationController,
                   isAdmin: true)
             ])
           ]);
