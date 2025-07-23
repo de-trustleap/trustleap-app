@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/application/company_request/company_request_obse
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/promoters/dashboard_promoters_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
@@ -42,6 +43,7 @@ import 'package:finanzbegleiter/core/modules/home_module.dart';
 import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/legals_repository.dart';
@@ -54,6 +56,7 @@ import 'package:finanzbegleiter/domain/repositories/web_logging_repository.dart'
 import 'package:finanzbegleiter/infrastructure/repositories/admin_registration_code_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/auth_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/company_repository_implementation.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/feedback_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/image_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/legals_repository_implementation.dart';
@@ -104,6 +107,8 @@ class AppModule extends Module {
           RecommendationRepositoryImplementation.new)
       ..addLazySingleton<WebLoggingRepository>(
           WebLoggingRepositoryImplementation.new)
+      ..addLazySingleton<FeedbackRepository>(
+          FeedbackRepositoryImplementation.new)
       ..addLazySingleton(ProfileObserverBloc.new)
       ..addLazySingleton(PagebuilderBloc.new)
       ..addLazySingleton(PagebuilderConfigMenuCubit.new)
@@ -125,6 +130,7 @@ class AppModule extends Module {
       ..addLazySingleton(DashboardOverviewCubit.new)
       ..addLazySingleton(DashboardRecommendationsCubit.new)
       ..addLazySingleton(DashboardPromotersCubit.new)
+      ..addLazySingleton(FeedbackCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)

@@ -2216,4 +2216,45 @@ class AppLocalizationsEn extends AppLocalizations {
   String recommendation_manager_edit_message(String userName, String fields) {
     return '$userName has adjusted $fields';
   }
+
+  @override
+  String get feedback_send_button => 'Send Feedback';
+
+  @override
+  String get feedback_title_required => 'Title is required';
+
+  @override
+  String get feedback_title_too_long =>
+      'Title can be at most 100 characters long';
+
+  @override
+  String get feedback_description_required => 'Description is required';
+
+  @override
+  String get feedback_description_too_long =>
+      'Description can be at most 1000 characters long';
+
+  @override
+  String get feedback_dialog_title => 'Give Feedback';
+
+  @override
+  String get feedback_dialog_close => 'Close';
+
+  @override
+  String get feedback_title_placeholder => 'Enter title...';
+
+  @override
+  String get feedback_description_placeholder => 'Enter description...';
+
+  @override
+  String get feedback_images_label => 'Images (optional, max. 3)';
+
+  @override
+  String get feedback_cancel_button => 'Cancel';
+
+  @override
+  String get feedback_send_dialog_button => 'Send';
+
+  @override
+  String get feedback_success_message => 'Feedback sent successfully!';
 }

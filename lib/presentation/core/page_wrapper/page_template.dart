@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/presentation/core/menu/appbar.dart';
 import 'package:finanzbegleiter/presentation/core/menu/collapsible_side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/menu/side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/feedback/feedback_floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -22,9 +23,10 @@ class PageTemplate extends StatelessWidget {
     if (responsiveValue.largerThan(TABLET)) {
       return const Scaffold(
           body: Row(children: [
-        CollapsibleSideMenu(isAdmin: false),
-        Expanded(child: RouterOutlet())
-      ]));
+            CollapsibleSideMenu(isAdmin: false),
+            Expanded(child: RouterOutlet())
+          ]),
+          floatingActionButton: FeedbackFloatingActionButton());
     } else {
       return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -34,7 +36,8 @@ class PageTemplate extends StatelessWidget {
           body: const RouterOutlet(),
           endDrawer: const SizedBox(
               width: MenuDimensions.menuOpenWidth,
-              child: Drawer(child: SideMenu())));
+              child: Drawer(child: SideMenu())),
+          floatingActionButton: const FeedbackFloatingActionButton());
     }
   }
 
