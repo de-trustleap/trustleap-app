@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finanzbegleiter/domain/entities/feedback.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/infrastructure/models/feedback_model.dart';
@@ -61,6 +62,8 @@ void main() {
         "description": "This is a test feedback description",
         "downloadImageUrl": "https://example.com/image.jpg",
         "thumbnailDownloadURL": "https://example.com/thumbnail.jpg",
+        "userAgent": null,
+        "createdAt": null,
       };
       // When
       final result = model.toMap();
@@ -82,6 +85,8 @@ void main() {
         "description": "This is a test feedback description",
         "downloadImageUrl": null,
         "thumbnailDownloadURL": null,
+        "userAgent": null,
+        "createdAt": null,
       };
       // When
       final result = model.toMap();
@@ -133,12 +138,17 @@ void main() {
   group("FeedbackModel_ToDomain", () {
     test("check if conversion from FeedbackModel to Feedback works", () {
       // Given
-      const model = FeedbackModel(
+      final testDate = DateTime.now();
+      final testTimestamp = Timestamp.fromDate(testDate);
+      
+      final model = FeedbackModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
         downloadImageUrl: "https://example.com/image.jpg",
         thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        userAgent: "test-agent",
+        createdAt: testTimestamp,
       );
 
       final expectedResult = Feedback(
@@ -147,6 +157,8 @@ void main() {
         description: "This is a test feedback description",
         downloadImageUrl: "https://example.com/image.jpg",
         thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        userAgent: "test-agent",
+        createdAt: testDate,
       );
 
       // When
@@ -157,16 +169,21 @@ void main() {
 
     test("check if conversion from FeedbackModel with null values to Feedback works", () {
       // Given
-      const model = FeedbackModel(
+      final testDate = DateTime.now();
+      final testTimestamp = Timestamp.fromDate(testDate);
+      
+      final model = FeedbackModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        createdAt: testTimestamp,
       );
 
       final expectedResult = Feedback(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        createdAt: testDate,
       );
 
       // When
@@ -179,24 +196,28 @@ void main() {
   group("FeedbackModel_FromDomain", () {
     test("check if conversion from Feedback to FeedbackModel works", () {
       // Given
+      final testDate = DateTime.now();
       final feedback = Feedback(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
         downloadImageUrl: "https://example.com/image.jpg",
         thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        userAgent: "test-agent",
+        createdAt: testDate,
       );
-      const expectedResult = FeedbackModel(
-        id: "1",
-        title: "Test Feedback",
-        description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
-      );
+      
       // When
       final result = FeedbackModel.fromDomain(feedback);
-      // Then
-      expect(result, expectedResult);
+      
+      // Then - Check individual fields since FieldValue.serverTimestamp() can't be compared directly
+      expect(result.id, "1");
+      expect(result.title, "Test Feedback");
+      expect(result.description, "This is a test feedback description");
+      expect(result.downloadImageUrl, "https://example.com/image.jpg");
+      expect(result.thumbnailDownloadURL, "https://example.com/thumbnail.jpg");
+      expect(result.userAgent, "test-agent");
+      expect(result.createdAt, isA<FieldValue>());
     });
 
     test("check if conversion from Feedback with null values to FeedbackModel works", () {
@@ -206,15 +227,18 @@ void main() {
         title: "Test Feedback",
         description: "This is a test feedback description",
       );
-      const expectedResult = FeedbackModel(
-        id: "1",
-        title: "Test Feedback",
-        description: "This is a test feedback description",
-      );
+      
       // When
       final result = FeedbackModel.fromDomain(feedback);
-      // Then
-      expect(result, expectedResult);
+      
+      // Then - Check individual fields since FieldValue.serverTimestamp() can't be compared directly
+      expect(result.id, "1");
+      expect(result.title, "Test Feedback");
+      expect(result.description, "This is a test feedback description");
+      expect(result.downloadImageUrl, null);
+      expect(result.thumbnailDownloadURL, null);
+      expect(result.userAgent, null);
+      expect(result.createdAt, isA<FieldValue>());
     });
   });
 
@@ -250,6 +274,7 @@ void main() {
         description: "This is a test feedback description",
         downloadImageUrl: "https://example.com/image.jpg",
         thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        userAgent: "test-agent",
       );
       const feedback2 = FeedbackModel(
         id: "1",
@@ -257,6 +282,7 @@ void main() {
         description: "This is a test feedback description",
         downloadImageUrl: "https://example.com/image.jpg",
         thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        userAgent: "test-agent",
       );
       // Then
       expect(feedback1, feedback2);

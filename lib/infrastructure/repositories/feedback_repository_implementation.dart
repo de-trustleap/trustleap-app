@@ -11,6 +11,7 @@ import 'package:finanzbegleiter/domain/entities/feedback.dart';
 import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart';
 import 'package:finanzbegleiter/infrastructure/models/feedback_model.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:web/web.dart';
 
 class FeedbackRepositoryImplementation implements FeedbackRepository {
   final FirebaseFunctions firebaseFunctions;
@@ -28,6 +29,7 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
     HttpsCallable callable = firebaseFunctions.httpsCallable("sendFeedback");
     final feedbackModel = FeedbackModel.fromDomain(feedback);
 
+    final userAgent = window.navigator.userAgent.toLowerCase();
     final compressedImages = await ImageCompressor.compressImages(images);
     final encodedImages =
         compressedImages.map((imageData) => base64Encode(imageData)).toList();
@@ -38,7 +40,8 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
         "id": feedbackModel.id,
         "title": feedbackModel.title,
         "description": feedbackModel.description,
-        "images": encodedImages
+        "images": encodedImages,
+        "userAgent": userAgent
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
@@ -50,5 +53,7 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
 // TODO: CUBIT EINBINDEN (FERTIG)
 // TODO: NEUE TESTS FÜR CUBIT, REPO UND MODELS (FERTIG)
 // TODO: LOCALIZATION (FERTIG)
+// TODO: USER AGENT MITSCHICKEN
+// TODO: TESTS AKTUALISIEREN
 // TODO: BACKEND FUNKTION IMPLEMENTIEREN
 // TODO: TESTEN!
