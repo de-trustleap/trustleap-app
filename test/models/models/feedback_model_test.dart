@@ -17,10 +17,10 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
-        downloadImageUrl: "https://example.com/image.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
       );
       // When
-      final result = feedback.copyWith(downloadImageUrl: "https://example.com/image.jpg");
+      final result = feedback.copyWith(downloadImageUrls: ["https://example.com/image.jpg"]);
       // Then
       expect(result, expectedResult);
     });
@@ -36,10 +36,10 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
-      final result = feedback.copyWith(thumbnailDownloadURL: "https://example.com/thumbnail.jpg");
+      final result = feedback.copyWith(thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"]);
       // Then
       expect(result, expectedResult);
     });
@@ -52,16 +52,16 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
 
       final expectedResult = {
         "id": "1",
         "title": "Test Feedback",
         "description": "This is a test feedback description",
-        "downloadImageUrl": "https://example.com/image.jpg",
-        "thumbnailDownloadURL": "https://example.com/thumbnail.jpg",
+        "downloadImageUrls": ["https://example.com/image.jpg"],
+        "thumbnailDownloadURLs": ["https://example.com/thumbnail.jpg"],
         "userAgent": null,
         "createdAt": null,
       };
@@ -83,8 +83,8 @@ void main() {
         "id": "1",
         "title": "Test Feedback",
         "description": "This is a test feedback description",
-        "downloadImageUrl": null,
-        "thumbnailDownloadURL": null,
+        "downloadImageUrls": null,
+        "thumbnailDownloadURLs": null,
         "userAgent": null,
         "createdAt": null,
       };
@@ -101,15 +101,15 @@ void main() {
       final map = {
         "title": "Test Feedback",
         "description": "This is a test feedback description",
-        "downloadImageUrl": "https://example.com/image.jpg",
-        "thumbnailDownloadURL": "https://example.com/thumbnail.jpg",
+        "downloadImageUrls": ["https://example.com/image.jpg"],
+        "thumbnailDownloadURLs": ["https://example.com/thumbnail.jpg"],
       };
       const expectedResult = FeedbackModel(
         id: "",
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
       final result = FeedbackModel.fromMap(map);
@@ -145,8 +145,8 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
         createdAt: testTimestamp,
       );
@@ -155,8 +155,8 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
         createdAt: testDate,
       );
@@ -201,8 +201,8 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
         createdAt: testDate,
       );
@@ -214,8 +214,8 @@ void main() {
       expect(result.id, "1");
       expect(result.title, "Test Feedback");
       expect(result.description, "This is a test feedback description");
-      expect(result.downloadImageUrl, "https://example.com/image.jpg");
-      expect(result.thumbnailDownloadURL, "https://example.com/thumbnail.jpg");
+      expect(result.downloadImageUrls, ["https://example.com/image.jpg"]);
+      expect(result.thumbnailDownloadURLs, ["https://example.com/thumbnail.jpg"]);
       expect(result.userAgent, "test-agent");
       expect(result.createdAt, isA<FieldValue>());
     });
@@ -235,8 +235,8 @@ void main() {
       expect(result.id, "1");
       expect(result.title, "Test Feedback");
       expect(result.description, "This is a test feedback description");
-      expect(result.downloadImageUrl, null);
-      expect(result.thumbnailDownloadURL, null);
+      expect(result.downloadImageUrls, null);
+      expect(result.thumbnailDownloadURLs, null);
       expect(result.userAgent, null);
       expect(result.createdAt, isA<FieldValue>());
     });
@@ -248,15 +248,15 @@ void main() {
       final map = {
         "title": "Test Feedback",
         "description": "This is a test feedback description",
-        "downloadImageUrl": "https://example.com/image.jpg",
-        "thumbnailDownloadURL": "https://example.com/thumbnail.jpg",
+        "downloadImageUrls": ["https://example.com/image.jpg"],
+        "thumbnailDownloadURLs": ["https://example.com/thumbnail.jpg"],
       };
       const expectedResult = FeedbackModel(
         id: "feedback-id-123",
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
       final result = FeedbackModel.fromFirestore(map, "feedback-id-123");
@@ -272,16 +272,16 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
       );
       const feedback2 = FeedbackModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
       );
       // Then

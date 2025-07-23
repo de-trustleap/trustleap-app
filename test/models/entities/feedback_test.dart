@@ -51,10 +51,10 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
-        downloadImageUrl: "https://example.com/image.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
       );
       // When
-      final result = feedback.copyWith(downloadImageUrl: "https://example.com/image.jpg");
+      final result = feedback.copyWith(downloadImageUrls: ["https://example.com/image.jpg"]);
       // Then
       expect(result, expectedResult);
     });
@@ -70,16 +70,16 @@ void main() {
         id: UniqueID.fromUniqueString("2"),
         title: "New Title",
         description: "New Description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
       final result = feedback.copyWith(
         id: UniqueID.fromUniqueString("2"),
         title: "New Title",
         description: "New Description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // Then
       expect(result, expectedResult);
@@ -91,17 +91,17 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
-        downloadImageUrl: "https://example.com/image.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
       );
       final expectedResult = Feedback(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
-      final result = feedback.copyWith(thumbnailDownloadURL: "https://example.com/thumbnail.jpg");
+      final result = feedback.copyWith(thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"]);
       // Then
       expect(result, expectedResult);
     });
@@ -114,16 +114,16 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
 
       final feedback2 = Feedback(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
-        downloadImageUrl: "https://example.com/image.jpg",
-        thumbnailDownloadURL: "https://example.com/thumbnail.jpg",
+        downloadImageUrls: ["https://example.com/image.jpg"],
+        thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // Then
       expect(feedback1, feedback2);

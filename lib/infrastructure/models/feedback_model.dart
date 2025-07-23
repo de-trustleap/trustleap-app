@@ -8,8 +8,8 @@ class FeedbackModel extends Equatable {
   final String id;
   final String? title;
   final String? description;
-  final String? downloadImageUrl;
-  final String? thumbnailDownloadURL;
+  final List<String>? downloadImageUrls;
+  final List<String>? thumbnailDownloadURLs;
   final String? userAgent;
   final dynamic createdAt;
 
@@ -17,8 +17,8 @@ class FeedbackModel extends Equatable {
       {required this.id,
       required this.title,
       required this.description,
-      this.downloadImageUrl,
-      this.thumbnailDownloadURL,
+      this.downloadImageUrls,
+      this.thumbnailDownloadURLs,
       this.userAgent,
       this.createdAt});
 
@@ -26,16 +26,17 @@ class FeedbackModel extends Equatable {
       {String? id,
       String? title,
       String? description,
-      String? downloadImageUrl,
-      String? thumbnailDownloadURL,
+      List<String>? downloadImageUrls,
+      List<String>? thumbnailDownloadURLs,
       String? userAgent,
       dynamic createdAt}) {
     return FeedbackModel(
         id: id ?? this.id,
         title: title ?? this.title,
         description: description ?? this.description,
-        downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
-        thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+        downloadImageUrls: downloadImageUrls ?? this.downloadImageUrls,
+        thumbnailDownloadURLs:
+            thumbnailDownloadURLs ?? this.thumbnailDownloadURLs,
         userAgent: userAgent ?? this.userAgent,
         createdAt: createdAt ?? this.createdAt);
   }
@@ -45,8 +46,8 @@ class FeedbackModel extends Equatable {
       'id': id,
       'title': title,
       'description': description,
-      'downloadImageUrl': downloadImageUrl,
-      'thumbnailDownloadURL': thumbnailDownloadURL,
+      'downloadImageUrls': downloadImageUrls,
+      'thumbnailDownloadURLs': thumbnailDownloadURLs,
       'userAgent': userAgent,
       'createdAt': createdAt
     };
@@ -58,13 +59,12 @@ class FeedbackModel extends Equatable {
         title: map['title'] != null ? map['title'] as String : null,
         description:
             map['description'] != null ? map['description'] as String : null,
-        downloadImageUrl: map['downloadImageUrl'] != null
-            ? map['downloadImageUrl'] as String
+        downloadImageUrls: map['downloadImageUrls'] != null
+            ? map['downloadImageUrls'] as List<String>
             : null,
-        thumbnailDownloadURL: (map['thumbnailDownloadURL'] != null
-                ? map['thumbnailDownloadURL'] as String
-                : null)
-            ?.replaceAll(RegExp(r'\s+'), ''),
+        thumbnailDownloadURLs: (map['thumbnailDownloadURLs'] != null
+            ? map['thumbnailDownloadURLs'] as List<String>
+            : null),
         userAgent: map['userAgent'] != null ? map['userAgent'] as String : null,
         createdAt: map['createdAt'] as dynamic);
   }
@@ -78,8 +78,8 @@ class FeedbackModel extends Equatable {
         id: UniqueID.fromUniqueString(id),
         title: title,
         description: description,
-        downloadImageUrl: downloadImageUrl,
-        thumbnailDownloadURL: thumbnailDownloadURL,
+        downloadImageUrls: downloadImageUrls,
+        thumbnailDownloadURLs: thumbnailDownloadURLs,
         userAgent: userAgent,
         createdAt: (createdAt as Timestamp).toDate());
   }
@@ -89,8 +89,8 @@ class FeedbackModel extends Equatable {
         id: feedback.id.value,
         title: feedback.title,
         description: feedback.description,
-        downloadImageUrl: feedback.downloadImageUrl,
-        thumbnailDownloadURL: feedback.thumbnailDownloadURL,
+        downloadImageUrls: feedback.downloadImageUrls,
+        thumbnailDownloadURLs: feedback.thumbnailDownloadURLs,
         userAgent: feedback.userAgent,
         createdAt: FieldValue.serverTimestamp());
   }
@@ -100,8 +100,8 @@ class FeedbackModel extends Equatable {
         id,
         title,
         description,
-        downloadImageUrl,
-        thumbnailDownloadURL,
+        downloadImageUrls,
+        thumbnailDownloadURLs,
         userAgent,
         createdAt
       ];

@@ -6,8 +6,8 @@ class Feedback extends Equatable {
   final UniqueID id;
   final String? title;
   final String? description;
-  final String? downloadImageUrl;
-  final String? thumbnailDownloadURL;
+  final List<String>? downloadImageUrls;
+  final List<String>? thumbnailDownloadURLs;
   final String? userAgent;
   final DateTime? createdAt;
 
@@ -15,8 +15,8 @@ class Feedback extends Equatable {
       {required this.id,
       required this.title,
       required this.description,
-      this.downloadImageUrl,
-      this.thumbnailDownloadURL,
+      this.downloadImageUrls,
+      this.thumbnailDownloadURLs,
       this.userAgent,
       this.createdAt});
 
@@ -24,16 +24,17 @@ class Feedback extends Equatable {
       {UniqueID? id,
       String? title,
       String? description,
-      String? downloadImageUrl,
-      String? thumbnailDownloadURL,
+      List<String>? downloadImageUrls,
+      List<String>? thumbnailDownloadURLs,
       String? userAgent,
       DateTime? createdAt}) {
     return Feedback(
         id: id ?? this.id,
         title: title ?? this.title,
         description: description ?? this.description,
-        downloadImageUrl: downloadImageUrl ?? this.downloadImageUrl,
-        thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+        downloadImageUrls: downloadImageUrls ?? this.downloadImageUrls,
+        thumbnailDownloadURLs:
+            thumbnailDownloadURLs ?? this.thumbnailDownloadURLs,
         userAgent: userAgent ?? this.userAgent,
         createdAt: createdAt ?? this.createdAt);
   }
@@ -43,8 +44,8 @@ class Feedback extends Equatable {
         id,
         title,
         description,
-        downloadImageUrl,
-        thumbnailDownloadURL,
+        downloadImageUrls,
+        thumbnailDownloadURLs,
         userAgent,
         createdAt
       ];
