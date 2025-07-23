@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/feedback.dart' as entities;
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart';
 
 part 'admin_feedback_state.dart';

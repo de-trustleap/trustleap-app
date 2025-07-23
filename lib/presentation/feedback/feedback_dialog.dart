@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/feedback.dart' as entities;
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -49,7 +49,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
 
   void onSubmit() {
     if (formKey.currentState?.validate() ?? false) {
-      final feedback = entities.Feedback(
+      final feedback = FeedbackItem(
         id: UniqueID(),
         title: titleController.text,
         description: descriptionController.text,

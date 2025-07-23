@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:finanzbegleiter/domain/entities/feedback.dart';
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
-class FeedbackModel extends Equatable {
+class FeedbackItemModel extends Equatable {
   final String id;
   final String? title;
   final String? description;
@@ -13,7 +13,7 @@ class FeedbackModel extends Equatable {
   final String? userAgent;
   final dynamic createdAt;
 
-  const FeedbackModel(
+  const FeedbackItemModel(
       {required this.id,
       required this.title,
       required this.description,
@@ -22,7 +22,7 @@ class FeedbackModel extends Equatable {
       this.userAgent,
       this.createdAt});
 
-  FeedbackModel copyWith(
+  FeedbackItemModel copyWith(
       {String? id,
       String? title,
       String? description,
@@ -30,7 +30,7 @@ class FeedbackModel extends Equatable {
       List<String>? thumbnailDownloadURLs,
       String? userAgent,
       dynamic createdAt}) {
-    return FeedbackModel(
+    return FeedbackItemModel(
         id: id ?? this.id,
         title: title ?? this.title,
         description: description ?? this.description,
@@ -53,8 +53,8 @@ class FeedbackModel extends Equatable {
     };
   }
 
-  factory FeedbackModel.fromMap(Map<String, dynamic> map) {
-    return FeedbackModel(
+  factory FeedbackItemModel.fromMap(Map<String, dynamic> map) {
+    return FeedbackItemModel(
         id: "",
         title: map['title'] != null ? map['title'] as String : null,
         description:
@@ -69,12 +69,12 @@ class FeedbackModel extends Equatable {
         createdAt: map['createdAt'] as dynamic);
   }
 
-  factory FeedbackModel.fromFirestore(Map<String, dynamic> doc, String id) {
-    return FeedbackModel.fromMap(doc).copyWith(id: id);
+  factory FeedbackItemModel.fromFirestore(Map<String, dynamic> doc, String id) {
+    return FeedbackItemModel.fromMap(doc).copyWith(id: id);
   }
 
-  Feedback toDomain() {
-    return Feedback(
+  FeedbackItem toDomain() {
+    return FeedbackItem(
         id: UniqueID.fromUniqueString(id),
         title: title,
         description: description,
@@ -84,8 +84,8 @@ class FeedbackModel extends Equatable {
         createdAt: (createdAt as Timestamp).toDate());
   }
 
-  factory FeedbackModel.fromDomain(Feedback feedback) {
-    return FeedbackModel(
+  factory FeedbackItemModel.fromDomain(FeedbackItem feedback) {
+    return FeedbackItemModel(
         id: feedback.id.value,
         title: feedback.title,
         description: feedback.description,

@@ -5922,6 +5922,114 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get feedback_title_required => (super.noSuchMethod(
+        Invocation.getter(#feedback_title_required),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_title_required),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_title_too_long => (super.noSuchMethod(
+        Invocation.getter(#feedback_title_too_long),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_title_too_long),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_description_required => (super.noSuchMethod(
+        Invocation.getter(#feedback_description_required),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_description_required),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_description_too_long => (super.noSuchMethod(
+        Invocation.getter(#feedback_description_too_long),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_description_too_long),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_dialog_title => (super.noSuchMethod(
+        Invocation.getter(#feedback_dialog_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_dialog_title),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_dialog_close => (super.noSuchMethod(
+        Invocation.getter(#feedback_dialog_close),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_dialog_close),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_title_placeholder => (super.noSuchMethod(
+        Invocation.getter(#feedback_title_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_title_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_description_placeholder => (super.noSuchMethod(
+        Invocation.getter(#feedback_description_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_description_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_images_label => (super.noSuchMethod(
+        Invocation.getter(#feedback_images_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_images_label),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_cancel_button => (super.noSuchMethod(
+        Invocation.getter(#feedback_cancel_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_cancel_button),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_send_dialog_button => (super.noSuchMethod(
+        Invocation.getter(#feedback_send_dialog_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_send_dialog_button),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_success_message => (super.noSuchMethod(
+        Invocation.getter(#feedback_success_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_success_message),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,

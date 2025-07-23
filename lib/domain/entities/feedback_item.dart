@@ -2,7 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
-class Feedback extends Equatable {
+class FeedbackItem extends Equatable {
   final UniqueID id;
   final String? title;
   final String? description;
@@ -11,7 +11,7 @@ class Feedback extends Equatable {
   final String? userAgent;
   final DateTime? createdAt;
 
-  const Feedback(
+  const FeedbackItem(
       {required this.id,
       required this.title,
       required this.description,
@@ -20,7 +20,7 @@ class Feedback extends Equatable {
       this.userAgent,
       this.createdAt});
 
-  Feedback copyWith(
+  FeedbackItem copyWith(
       {UniqueID? id,
       String? title,
       String? description,
@@ -28,7 +28,7 @@ class Feedback extends Equatable {
       List<String>? thumbnailDownloadURLs,
       String? userAgent,
       DateTime? createdAt}) {
-    return Feedback(
+    return FeedbackItem(
         id: id ?? this.id,
         title: title ?? this.title,
         description: description ?? this.description,

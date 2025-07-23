@@ -1,45 +1,51 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finanzbegleiter/domain/entities/feedback.dart';
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/infrastructure/models/feedback_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/feedback_item_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("FeedbackModel_CopyWith", () {
-    test("set downloadImageUrl with copyWith should set downloadImageUrl for resulting object", () {
+    test(
+        "set downloadImageUrl with copyWith should set downloadImageUrl for resulting object",
+        () {
       // Given
-      const feedback = FeedbackModel(
+      const feedback = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
       );
-      const expectedResult = FeedbackModel(
+      const expectedResult = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
         downloadImageUrls: ["https://example.com/image.jpg"],
       );
       // When
-      final result = feedback.copyWith(downloadImageUrls: ["https://example.com/image.jpg"]);
+      final result = feedback
+          .copyWith(downloadImageUrls: ["https://example.com/image.jpg"]);
       // Then
       expect(result, expectedResult);
     });
 
-    test("set thumbnailDownloadURL with copyWith should set thumbnailDownloadURL for resulting object", () {
+    test(
+        "set thumbnailDownloadURL with copyWith should set thumbnailDownloadURL for resulting object",
+        () {
       // Given
-      const feedback = FeedbackModel(
+      const feedback = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
       );
-      const expectedResult = FeedbackModel(
+      const expectedResult = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
-      final result = feedback.copyWith(thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"]);
+      final result = feedback.copyWith(
+          thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"]);
       // Then
       expect(result, expectedResult);
     });
@@ -48,7 +54,7 @@ void main() {
   group("FeedbackModel_ToMap", () {
     test("check if model is successfully converted to a map", () {
       // Given
-      const model = FeedbackModel(
+      const model = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -71,9 +77,10 @@ void main() {
       expect(result, expectedResult);
     });
 
-    test("check if model with null values is successfully converted to a map", () {
+    test("check if model with null values is successfully converted to a map",
+        () {
       // Given
-      const model = FeedbackModel(
+      const model = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -104,7 +111,7 @@ void main() {
         "downloadImageUrls": ["https://example.com/image.jpg"],
         "thumbnailDownloadURLs": ["https://example.com/thumbnail.jpg"],
       };
-      const expectedResult = FeedbackModel(
+      const expectedResult = FeedbackItemModel(
         id: "",
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -112,24 +119,25 @@ void main() {
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
-      final result = FeedbackModel.fromMap(map);
+      final result = FeedbackItemModel.fromMap(map);
       // Then
       expect(expectedResult, result);
     });
 
-    test("check if map with null values is successfully converted to model", () {
+    test("check if map with null values is successfully converted to model",
+        () {
       // Given
       final map = {
         "title": "Test Feedback",
         "description": "This is a test feedback description",
       };
-      const expectedResult = FeedbackModel(
+      const expectedResult = FeedbackItemModel(
         id: "",
         title: "Test Feedback",
         description: "This is a test feedback description",
       );
       // When
-      final result = FeedbackModel.fromMap(map);
+      final result = FeedbackItemModel.fromMap(map);
       // Then
       expect(expectedResult, result);
     });
@@ -140,8 +148,8 @@ void main() {
       // Given
       final testDate = DateTime.now();
       final testTimestamp = Timestamp.fromDate(testDate);
-      
-      final model = FeedbackModel(
+
+      final model = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -151,7 +159,7 @@ void main() {
         createdAt: testTimestamp,
       );
 
-      final expectedResult = Feedback(
+      final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -167,19 +175,21 @@ void main() {
       expect(expectedResult, result);
     });
 
-    test("check if conversion from FeedbackModel with null values to Feedback works", () {
+    test(
+        "check if conversion from FeedbackModel with null values to Feedback works",
+        () {
       // Given
       final testDate = DateTime.now();
       final testTimestamp = Timestamp.fromDate(testDate);
-      
-      final model = FeedbackModel(
+
+      final model = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
         createdAt: testTimestamp,
       );
 
-      final expectedResult = Feedback(
+      final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -197,7 +207,7 @@ void main() {
     test("check if conversion from Feedback to FeedbackModel works", () {
       // Given
       final testDate = DateTime.now();
-      final feedback = Feedback(
+      final feedback = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -206,31 +216,34 @@ void main() {
         userAgent: "test-agent",
         createdAt: testDate,
       );
-      
+
       // When
-      final result = FeedbackModel.fromDomain(feedback);
-      
-      // Then - Check individual fields since FieldValue.serverTimestamp() can't be compared directly
+      final result = FeedbackItemModel.fromDomain(feedback);
+
+      // Then
       expect(result.id, "1");
       expect(result.title, "Test Feedback");
       expect(result.description, "This is a test feedback description");
       expect(result.downloadImageUrls, ["https://example.com/image.jpg"]);
-      expect(result.thumbnailDownloadURLs, ["https://example.com/thumbnail.jpg"]);
+      expect(
+          result.thumbnailDownloadURLs, ["https://example.com/thumbnail.jpg"]);
       expect(result.userAgent, "test-agent");
       expect(result.createdAt, isA<FieldValue>());
     });
 
-    test("check if conversion from Feedback with null values to FeedbackModel works", () {
+    test(
+        "check if conversion from Feedback with null values to FeedbackModel works",
+        () {
       // Given
-      final feedback = Feedback(
+      final feedback = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
       );
-      
+
       // When
-      final result = FeedbackModel.fromDomain(feedback);
-      
+      final result = FeedbackItemModel.fromDomain(feedback);
+
       // Then - Check individual fields since FieldValue.serverTimestamp() can't be compared directly
       expect(result.id, "1");
       expect(result.title, "Test Feedback");
@@ -251,7 +264,7 @@ void main() {
         "downloadImageUrls": ["https://example.com/image.jpg"],
         "thumbnailDownloadURLs": ["https://example.com/thumbnail.jpg"],
       };
-      const expectedResult = FeedbackModel(
+      const expectedResult = FeedbackItemModel(
         id: "feedback-id-123",
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -259,7 +272,7 @@ void main() {
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
-      final result = FeedbackModel.fromFirestore(map, "feedback-id-123");
+      final result = FeedbackItemModel.fromFirestore(map, "feedback-id-123");
       // Then
       expect(expectedResult, result);
     });
@@ -268,7 +281,7 @@ void main() {
   group("FeedbackModel_Props", () {
     test("check if value equality works", () {
       // Given
-      const feedback1 = FeedbackModel(
+      const feedback1 = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -276,7 +289,7 @@ void main() {
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
       );
-      const feedback2 = FeedbackModel(
+      const feedback2 = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -290,12 +303,12 @@ void main() {
 
     test("check if inequality works with different titles", () {
       // Given
-      const feedback1 = FeedbackModel(
+      const feedback1 = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
       );
-      const feedback2 = FeedbackModel(
+      const feedback2 = FeedbackItemModel(
         id: "1",
         title: "Different Feedback",
         description: "This is a test feedback description",

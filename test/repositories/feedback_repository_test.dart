@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/feedback.dart';
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -18,7 +18,7 @@ void main() {
   });
 
   group("FeedbackRepositoryImplementation_SendFeedback", () {
-    final testFeedback = Feedback(
+    final testFeedback = FeedbackItem(
       id: UniqueID.fromUniqueString("test-id"),
       title: "Test Feedback",
       description: "This is a test feedback description",
@@ -99,7 +99,8 @@ void main() {
       verifyNoMoreInteractions(mockFeedbackRepo);
     });
 
-    test("should return UnavailableFailure when call has failed with service unavailable error",
+    test(
+        "should return UnavailableFailure when call has failed with service unavailable error",
         () async {
       // Given
       final expectedResult = left(UnavailableFailure());

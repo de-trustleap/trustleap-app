@@ -79,7 +79,7 @@ import 'package:finanzbegleiter/domain/entities/archived_recommendation_item.dar
     as _i46;
 import 'package:finanzbegleiter/domain/entities/company.dart' as _i31;
 import 'package:finanzbegleiter/domain/entities/company_request.dart' as _i32;
-import 'package:finanzbegleiter/domain/entities/feedback.dart' as _i43;
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart' as _i43;
 import 'package:finanzbegleiter/domain/entities/landing_page.dart' as _i37;
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart'
     as _i39;
@@ -6461,6 +6461,114 @@ class MockAppLocalizations extends _i1.Mock implements _i25.AppLocalizations {
       ) as String);
 
   @override
+  String get feedback_title_required => (super.noSuchMethod(
+        Invocation.getter(#feedback_title_required),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_title_required),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_title_too_long => (super.noSuchMethod(
+        Invocation.getter(#feedback_title_too_long),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_title_too_long),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_description_required => (super.noSuchMethod(
+        Invocation.getter(#feedback_description_required),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_description_required),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_description_too_long => (super.noSuchMethod(
+        Invocation.getter(#feedback_description_too_long),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_description_too_long),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_dialog_title => (super.noSuchMethod(
+        Invocation.getter(#feedback_dialog_title),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_dialog_title),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_dialog_close => (super.noSuchMethod(
+        Invocation.getter(#feedback_dialog_close),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_dialog_close),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_title_placeholder => (super.noSuchMethod(
+        Invocation.getter(#feedback_title_placeholder),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_title_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_description_placeholder => (super.noSuchMethod(
+        Invocation.getter(#feedback_description_placeholder),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_description_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_images_label => (super.noSuchMethod(
+        Invocation.getter(#feedback_images_label),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_images_label),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_cancel_button => (super.noSuchMethod(
+        Invocation.getter(#feedback_cancel_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_cancel_button),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_send_dialog_button => (super.noSuchMethod(
+        Invocation.getter(#feedback_send_dialog_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_send_dialog_button),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_success_message => (super.noSuchMethod(
+        Invocation.getter(#feedback_success_message),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_success_message),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -7922,7 +8030,7 @@ class MockFeedbackRepository extends _i1.Mock
 
   @override
   _i21.Future<_i2.Either<_i30.DatabaseFailure, _i2.Unit>> sendFeedback(
-    _i43.Feedback? feedback,
+    _i43.FeedbackItem? feedback,
     List<_i34.Uint8List>? images,
   ) =>
       (super.noSuchMethod(
@@ -7946,6 +8054,26 @@ class MockFeedbackRepository extends _i1.Mock
           ),
         )),
       ) as _i21.Future<_i2.Either<_i30.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i21.Future<_i2.Either<_i30.DatabaseFailure, List<_i43.FeedbackItem>>>
+      getFeedbackItems() => (super.noSuchMethod(
+            Invocation.method(
+              #getFeedbackItems,
+              [],
+            ),
+            returnValue: _i21.Future<
+                    _i2.Either<_i30.DatabaseFailure,
+                        List<_i43.FeedbackItem>>>.value(
+                _FakeEither_0<_i30.DatabaseFailure, List<_i43.FeedbackItem>>(
+              this,
+              Invocation.method(
+                #getFeedbackItems,
+                [],
+              ),
+            )),
+          ) as _i21.Future<
+              _i2.Either<_i30.DatabaseFailure, List<_i43.FeedbackItem>>>);
 }
 
 /// A class which mocks [RecommendationRepository].
@@ -12796,7 +12924,7 @@ class MockFeedbackCubit extends _i1.Mock implements _i81.FeedbackCubit {
 
   @override
   void sendFeedback(
-    _i43.Feedback? feedback,
+    _i43.FeedbackItem? feedback,
     List<_i34.Uint8List>? images,
   ) =>
       super.noSuchMethod(

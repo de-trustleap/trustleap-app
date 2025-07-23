@@ -8,9 +8,9 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/core/helpers/image_compressor.dart';
-import 'package:finanzbegleiter/domain/entities/feedback.dart' as entities;
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart';
-import 'package:finanzbegleiter/infrastructure/models/feedback_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/feedback_item_model.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:web/web.dart';
 
@@ -27,10 +27,10 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
 
   @override
   Future<Either<DatabaseFailure, Unit>> sendFeedback(
-      entities.Feedback feedback, List<Uint8List> images) async {
+      FeedbackItem feedback, List<Uint8List> images) async {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("sendFeedback");
-    final feedbackModel = FeedbackModel.fromDomain(feedback);
+    final feedbackModel = FeedbackItemModel.fromDomain(feedback);
 
     final userAgent = window.navigator.userAgent.toLowerCase();
     final compressedImages = await ImageCompressor.compressImages(images);
@@ -53,15 +53,15 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
   }
 
   @override
-  Future<Either<DatabaseFailure, List<entities.Feedback>>> getFeedbackItems() async {
+  Future<Either<DatabaseFailure, List<FeedbackItem>>> getFeedbackItems() async {
     try {
       final QuerySnapshot querySnapshot =
           await firestore.collection("feedback").get();
-      List<entities.Feedback> feedbackItems = [];
+      List<FeedbackItem> feedbackItems = [];
       for (final doc in querySnapshot.docs) {
         final map = doc.data() as Map<String, dynamic>;
-        feedbackItems.add(
-            FeedbackModel.fromFirestore(map, doc.id).toDomain());
+        feedbackItems
+            .add(FeedbackItemModel.fromFirestore(map, doc.id).toDomain());
       }
       return right(feedbackItems);
     } on FirebaseException catch (e) {
