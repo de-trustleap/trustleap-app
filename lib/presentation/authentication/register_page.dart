@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_form.dart';
+import 'package:finanzbegleiter/presentation/core/page_wrapper/auth_page_template.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,11 +11,13 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-      child: BlocProvider(
+    return AuthPageTemplate(
+      child: Center(
+        child: BlocProvider(
           create: (context) => Modular.get<SignInCubit>(),
-          child: RegisterForm(registrationCode: registrationCode)),
-    ));
+          child: RegisterForm(registrationCode: registrationCode),
+        ),
+      ),
+    );
   }
 }

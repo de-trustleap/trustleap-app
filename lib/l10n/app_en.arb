@@ -2548,5 +2548,57 @@
                 "type": "String"
             }
         }
+    },
+    "feedback_send_button": "Send Feedback",
+    "@feedback_send_button": {
+        "description": "Button tooltip for sending feedback"
+    },
+    "feedback_title_required": "Title is required",
+    "@feedback_title_required": {
+        "description": "Error message when feedback title is missing"
+    },
+    "feedback_title_too_long": "Title can be at most 100 characters long",
+    "@feedback_title_too_long": {
+        "description": "Error message when feedback title is too long"
+    },
+    "feedback_description_required": "Description is required",
+    "@feedback_description_required": {
+        "description": "Error message when feedback description is missing"
+    },
+    "feedback_description_too_long": "Description can be at most 1000 characters long",
+    "@feedback_description_too_long": {
+        "description": "Error message when feedback description is too long"
+    },
+    "feedback_dialog_title": "Give Feedback",
+    "@feedback_dialog_title": {
+        "description": "Title of the feedback dialog"
+    },
+    "feedback_dialog_close": "Close",
+    "@feedback_dialog_close": {
+        "description": "Tooltip for close button in feedback dialog"
+    },
+    "feedback_title_placeholder": "Enter title...",
+    "@feedback_title_placeholder": {
+        "description": "Placeholder for title input field in feedback dialog"
+    },
+    "feedback_description_placeholder": "Enter description...",
+    "@feedback_description_placeholder": {
+        "description": "Placeholder for description input field in feedback dialog"
+    },
+    "feedback_images_label": "Images (optional, max. 3)",
+    "@feedback_images_label": {
+        "description": "Label for image upload area in feedback dialog"
+    },
+    "feedback_cancel_button": "Cancel",
+    "@feedback_cancel_button": {
+        "description": "Text for cancel button in feedback dialog"
+    },
+    "feedback_send_dialog_button": "Send",
+    "@feedback_send_dialog_button": {
+        "description": "Text for send button in feedback dialog"
+    },
+    "feedback_success_message": "Feedback sent successfully!",
+    "@feedback_success_message": {
+        "description": "Success message after sending feedback"
     }
 }
