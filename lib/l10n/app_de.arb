@@ -212,6 +212,18 @@
     "@menuitems_company_requests": {
         "description": "Der Menüpunkt für die Registrierungsanfragen von Unternehmen"
     },
+    "menuitems_recommendation_manager": "Empfehlungsmanager",
+    "@menuitems_recommendation_manager": {
+        "description": "Der Menüpunkt für den Empfehlungsmanager"
+    },
+    "menuitems_registration_codes": "Codes",
+    "@menuitems_registration_codes": {
+        "description": "Der Menüpunkt für die Registrierungscodes"
+    },
+    "menuitems_user_feedback": "Nutzer Feedback",
+    "@menuitems_user_feedback": {
+        "description": "Der Menüpunkt für das Nutzer Feedback"
+    },
     "landingpage_overview_error_view_title": "Ein Fehler beim Abruf der Daten ist aufgetreten.",
     "@landingpage_overview_error_view_title": {
         "description": "Titel für die Error View die erscheint wenn ein Fehler beim Abruf der Daten aufgetreten ist"
@@ -2600,5 +2612,49 @@
     "feedback_success_message": "Feedback erfolgreich gesendet!",
     "@feedback_success_message": {
         "description": "Erfolgsmeldung nach dem Senden von Feedback"
+    },
+    "admin_feedback_no_feedback_title": "Kein Feedback gefunden",
+    "@admin_feedback_no_feedback_title": {
+        "description": "Titel der EmptyPage wenn kein Feedback vorhanden ist"
+    },
+    "admin_feedback_no_feedback_subtitle": "Es scheint noch kein Nutzer Feedback hinterlassen zu haben.",
+    "@admin_feedback_no_feedback_subtitle": {
+        "description": "Untertitel der EmptyPage wenn kein Feedback vorhanden ist"
+    },
+    "admin_feedback_refresh_button": "Aktualisieren",
+    "@admin_feedback_refresh_button": {
+        "description": "Button Text zum Aktualisieren der Feedback Liste"
+    },
+    "admin_feedback_error_title": "Es ist ein Fehler aufgetreten",
+    "@admin_feedback_error_title": {
+        "description": "Titel der ErrorView bei Fehlern beim Laden des Feedbacks"
+    },
+    "admin_feedback_delete_title": "Feedback löschen",
+    "@admin_feedback_delete_title": {
+        "description": "Titel des Bestätigungsdialogs zum Löschen von Feedback"
+    },
+    "admin_feedback_delete_message": "Willst du das Feedback wirklich löschen? Es ist danach nicht wiederherstellbar.",
+    "@admin_feedback_delete_message": {
+        "description": "Nachricht des Bestätigungsdialogs zum Löschen von Feedback"
+    },
+    "admin_feedback_delete_button": "Löschen",
+    "@admin_feedback_delete_button": {
+        "description": "Button Text zum Bestätigen des Löschens"
+    },
+    "admin_feedback_cancel_button": "Abbrechen",
+    "@admin_feedback_cancel_button": {
+        "description": "Button Text zum Abbrechen des Löschens"
+    },
+    "admin_feedback_description_label": "Beschreibung:",
+    "@admin_feedback_description_label": {
+        "description": "Label für die Beschreibung im Feedback Tile"
+    },
+    "admin_feedback_images_label": "Bilder:",
+    "@admin_feedback_images_label": {
+        "description": "Label für die Bilder im Feedback Tile"
+    },
+    "admin_feedback_list_title": "Nutzerfeedback",
+    "@admin_feedback_list_title": {
+        "description": "Titel der Admin Feedback Liste"
     }
 }

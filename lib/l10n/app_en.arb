@@ -212,6 +212,18 @@
     "@menuitems_company_requests": {
         "description": "the menu entry for the registration requests of the companies"
     },
+    "menuitems_recommendation_manager": "Recommendation Manager",
+    "@menuitems_recommendation_manager": {
+        "description": "the menu entry for the recommendation manager"
+    },
+    "menuitems_registration_codes": "Codes",
+    "@menuitems_registration_codes": {
+        "description": "the menu entry for the registration codes"
+    },
+    "menuitems_user_feedback": "User Feedback",
+    "@menuitems_user_feedback": {
+        "description": "the menu entry for the user feedback"
+    },
     "landingpage_overview_error_view_title": "An error occurred while retrieving the data.",
     "@landingpage_overview_error_view_title": {
         "description": "Title for the error view that appears if an error occurred while retrieving the data."
@@ -2600,5 +2612,49 @@
     "feedback_success_message": "Feedback sent successfully!",
     "@feedback_success_message": {
         "description": "Success message after sending feedback"
+    },
+    "admin_feedback_no_feedback_title": "No feedback found",
+    "@admin_feedback_no_feedback_title": {
+        "description": "Title of EmptyPage when no feedback is available"
+    },
+    "admin_feedback_no_feedback_subtitle": "It seems no user has left feedback yet.",
+    "@admin_feedback_no_feedback_subtitle": {
+        "description": "Subtitle of EmptyPage when no feedback is available"
+    },
+    "admin_feedback_refresh_button": "Refresh",
+    "@admin_feedback_refresh_button": {
+        "description": "Button text to refresh the feedback list"
+    },
+    "admin_feedback_error_title": "An error occurred",
+    "@admin_feedback_error_title": {
+        "description": "Title of ErrorView when loading feedback fails"
+    },
+    "admin_feedback_delete_title": "Delete feedback",
+    "@admin_feedback_delete_title": {
+        "description": "Title of confirmation dialog for deleting feedback"
+    },
+    "admin_feedback_delete_message": "Do you really want to delete this feedback? It cannot be restored afterwards.",
+    "@admin_feedback_delete_message": {
+        "description": "Message of confirmation dialog for deleting feedback"
+    },
+    "admin_feedback_delete_button": "Delete",
+    "@admin_feedback_delete_button": {
+        "description": "Button text to confirm deletion"
+    },
+    "admin_feedback_cancel_button": "Cancel",
+    "@admin_feedback_cancel_button": {
+        "description": "Button text to cancel deletion"
+    },
+    "admin_feedback_description_label": "Description:",
+    "@admin_feedback_description_label": {
+        "description": "Label for description in feedback tile"
+    },
+    "admin_feedback_images_label": "Images:",
+    "@admin_feedback_images_label": {
+        "description": "Label for images in feedback tile"
+    },
+    "admin_feedback_list_title": "User Feedback",
+    "@admin_feedback_list_title": {
+        "description": "Title of the Admin Feedback List"
     }
 }

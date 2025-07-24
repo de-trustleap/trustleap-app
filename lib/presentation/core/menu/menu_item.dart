@@ -57,7 +57,7 @@ class _MenuItemState extends State<MenuItem> {
       case MenuItems.recommendations:
         return localization.menuitems_recommendations;
       case MenuItems.recommendationManager:
-        return "Empfehlungsmanager";
+        return localization.menuitems_recommendation_manager;
       case MenuItems.promoters:
         return localization.menuitems_promoters;
       case MenuItems.landingpage:
@@ -67,9 +67,9 @@ class _MenuItemState extends State<MenuItem> {
       case MenuItems.adminCompanyRequests:
         return localization.menuitems_company_requests;
       case MenuItems.registrationCodes:
-        return "Codes";
+        return localization.menuitems_registration_codes;
       case MenuItems.userFeedback:
-        return "Nutzer Feedback";
+        return localization.menuitems_user_feedback;
       case MenuItems.none:
         return "";
     }

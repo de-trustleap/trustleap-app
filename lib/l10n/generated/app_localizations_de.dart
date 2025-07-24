@@ -182,6 +182,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get menuitems_company_requests => 'Anfragen';
 
   @override
+  String get menuitems_recommendation_manager => 'Empfehlungsmanager';
+
+  @override
+  String get menuitems_registration_codes => 'Codes';
+
+  @override
+  String get menuitems_user_feedback => 'Nutzer Feedback';
+
+  @override
   String get landingpage_overview_error_view_title =>
       'Ein Fehler beim Abruf der Daten ist aufgetreten.';
 
@@ -2300,4 +2309,39 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get feedback_success_message => 'Feedback erfolgreich gesendet!';
+
+  @override
+  String get admin_feedback_no_feedback_title => 'Kein Feedback gefunden';
+
+  @override
+  String get admin_feedback_no_feedback_subtitle =>
+      'Es scheint noch kein Nutzer Feedback hinterlassen zu haben.';
+
+  @override
+  String get admin_feedback_refresh_button => 'Aktualisieren';
+
+  @override
+  String get admin_feedback_error_title => 'Es ist ein Fehler aufgetreten';
+
+  @override
+  String get admin_feedback_delete_title => 'Feedback löschen';
+
+  @override
+  String get admin_feedback_delete_message =>
+      'Willst du das Feedback wirklich löschen? Es ist danach nicht wiederherstellbar.';
+
+  @override
+  String get admin_feedback_delete_button => 'Löschen';
+
+  @override
+  String get admin_feedback_cancel_button => 'Abbrechen';
+
+  @override
+  String get admin_feedback_description_label => 'Beschreibung:';
+
+  @override
+  String get admin_feedback_images_label => 'Bilder:';
+
+  @override
+  String get admin_feedback_list_title => 'Nutzerfeedback';
 }

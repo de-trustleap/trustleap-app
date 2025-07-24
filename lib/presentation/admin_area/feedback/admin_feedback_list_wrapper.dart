@@ -35,14 +35,13 @@ class _AdminFeedbackListWrapperState extends State<AdminFeedbackListWrapper> {
         if (state is AdminFeedbackNoFeedbackFoundState) {
           return EmptyPage(
               icon: Icons.person_add,
-              title: "Kein Feedback gefunden",
-              subTitle:
-                  "Es scheint noch kein Nutzer Feedback hinterlassen zu haben.",
-              buttonTitle: "Aktualisieren",
+              title: localization.admin_feedback_no_feedback_title,
+              subTitle: localization.admin_feedback_no_feedback_subtitle,
+              buttonTitle: localization.admin_feedback_refresh_button,
               onTap: () => cubit.getFeedbackItems());
         } else if (state is AdminFeedbackGetFeedbackFailureState) {
           return ErrorView(
-              title: "Es ist ein Fehler aufgetreten",
+              title: localization.admin_feedback_error_title,
               message: DatabaseFailureMapper.mapFailureMessage(
                   state.failure, localization),
               callback: () => cubit.getFeedbackItems());

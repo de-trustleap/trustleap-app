@@ -416,6 +416,24 @@ abstract class AppLocalizations {
   /// **'Requests'**
   String get menuitems_company_requests;
 
+  /// the menu entry for the recommendation manager
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation Manager'**
+  String get menuitems_recommendation_manager;
+
+  /// the menu entry for the registration codes
+  ///
+  /// In en, this message translates to:
+  /// **'Codes'**
+  String get menuitems_registration_codes;
+
+  /// the menu entry for the user feedback
+  ///
+  /// In en, this message translates to:
+  /// **'User Feedback'**
+  String get menuitems_user_feedback;
+
   /// Title for the error view that appears if an error occurred while retrieving the data.
   ///
   /// In en, this message translates to:
@@ -3878,6 +3896,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Feedback sent successfully!'**
   String get feedback_success_message;
+
+  /// Title of EmptyPage when no feedback is available
+  ///
+  /// In en, this message translates to:
+  /// **'No feedback found'**
+  String get admin_feedback_no_feedback_title;
+
+  /// Subtitle of EmptyPage when no feedback is available
+  ///
+  /// In en, this message translates to:
+  /// **'It seems no user has left feedback yet.'**
+  String get admin_feedback_no_feedback_subtitle;
+
+  /// Button text to refresh the feedback list
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get admin_feedback_refresh_button;
+
+  /// Title of ErrorView when loading feedback fails
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred'**
+  String get admin_feedback_error_title;
+
+  /// Title of confirmation dialog for deleting feedback
+  ///
+  /// In en, this message translates to:
+  /// **'Delete feedback'**
+  String get admin_feedback_delete_title;
+
+  /// Message of confirmation dialog for deleting feedback
+  ///
+  /// In en, this message translates to:
+  /// **'Do you really want to delete this feedback? It cannot be restored afterwards.'**
+  String get admin_feedback_delete_message;
+
+  /// Button text to confirm deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get admin_feedback_delete_button;
+
+  /// Button text to cancel deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get admin_feedback_cancel_button;
+
+  /// Label for description in feedback tile
+  ///
+  /// In en, this message translates to:
+  /// **'Description:'**
+  String get admin_feedback_description_label;
+
+  /// Label for images in feedback tile
+  ///
+  /// In en, this message translates to:
+  /// **'Images:'**
+  String get admin_feedback_images_label;
+
+  /// Title of the Admin Feedback List
+  ///
+  /// In en, this message translates to:
+  /// **'User Feedback'**
+  String get admin_feedback_list_title;
 }
 
 class _AppLocalizationsDelegate

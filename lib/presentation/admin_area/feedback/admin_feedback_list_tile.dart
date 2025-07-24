@@ -59,11 +59,10 @@ class AdminFeedbackListTile extends StatelessWidget {
         context: context,
         builder: (_) {
           return CustomAlertDialog(
-              title: "Feedback löschen",
-              message:
-                  "Willst du das Feedback wirklich löschen? Es ist danach nicht wiederherstellbar.",
-              actionButtonTitle: "Löschen",
-              cancelButtonTitle: "Abbrechen",
+              title: localizations.admin_feedback_delete_title,
+              message: localizations.admin_feedback_delete_message,
+              actionButtonTitle: localizations.admin_feedback_delete_button,
+              cancelButtonTitle: localizations.admin_feedback_cancel_button,
               actionButtonAction: () {
                 Modular.get<AdminFeedbackCubit>()
                     .deleteFeedback(feedbackItem.id.value);
@@ -93,7 +92,7 @@ class AdminFeedbackListTile extends StatelessWidget {
           ),
         ]),
         children: [
-          Text("Beschreibung:",
+          Text(localizations.admin_feedback_description_label,
               style: themeData.textTheme.bodyMedium!
                   .copyWith(fontWeight: FontWeight.bold)),
           Text(feedbackItem.description ?? "",
@@ -101,7 +100,7 @@ class AdminFeedbackListTile extends StatelessWidget {
           if (feedbackItem.downloadImageUrls != null &&
               feedbackItem.downloadImageUrls!.isNotEmpty) ...[
             const SizedBox(height: 12),
-            Text("Bilder:",
+            Text(localizations.admin_feedback_images_label,
                 style: themeData.textTheme.bodyMedium!
                     .copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),

@@ -33,5 +33,3 @@ class AdminFeedbackCubit extends Cubit<AdminFeedbackState> {
     );
   }
 }
-
-// TODO: LOCALIZATION
