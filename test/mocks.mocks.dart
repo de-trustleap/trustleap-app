@@ -2849,6 +2849,35 @@ class MockAppLocalizations extends _i1.Mock implements _i25.AppLocalizations {
       ) as String);
 
   @override
+  String get recommendation_page_leadTextField_send_Mail_button =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_page_leadTextField_send_Mail_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #recommendation_page_leadTextField_send_Mail_button),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_mail_subject_prefix => (super.noSuchMethod(
+        Invocation.getter(#recommendation_mail_subject_prefix),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_mail_subject_prefix),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_page_send_mail_error => (super.noSuchMethod(
+        Invocation.getter(#recommendation_page_send_mail_error),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_page_send_mail_error),
+        ),
+      ) as String);
+
+  @override
   String get recommendation_page_send_whatsapp_error => (super.noSuchMethod(
         Invocation.getter(#recommendation_page_send_whatsapp_error),
         returnValue: _i26.dummyValue<String>(
@@ -6457,6 +6486,114 @@ class MockAppLocalizations extends _i1.Mock implements _i25.AppLocalizations {
         returnValue: _i26.dummyValue<String>(
           this,
           Invocation.getter(#feedback_send_button),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_title_required => (super.noSuchMethod(
+        Invocation.getter(#feedback_title_required),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_title_required),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_title_too_long => (super.noSuchMethod(
+        Invocation.getter(#feedback_title_too_long),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_title_too_long),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_description_required => (super.noSuchMethod(
+        Invocation.getter(#feedback_description_required),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_description_required),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_description_too_long => (super.noSuchMethod(
+        Invocation.getter(#feedback_description_too_long),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_description_too_long),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_dialog_title => (super.noSuchMethod(
+        Invocation.getter(#feedback_dialog_title),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_dialog_title),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_dialog_close => (super.noSuchMethod(
+        Invocation.getter(#feedback_dialog_close),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_dialog_close),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_title_placeholder => (super.noSuchMethod(
+        Invocation.getter(#feedback_title_placeholder),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_title_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_description_placeholder => (super.noSuchMethod(
+        Invocation.getter(#feedback_description_placeholder),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_description_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_images_label => (super.noSuchMethod(
+        Invocation.getter(#feedback_images_label),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_images_label),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_cancel_button => (super.noSuchMethod(
+        Invocation.getter(#feedback_cancel_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_cancel_button),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_send_dialog_button => (super.noSuchMethod(
+        Invocation.getter(#feedback_send_dialog_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_send_dialog_button),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_success_message => (super.noSuchMethod(
+        Invocation.getter(#feedback_success_message),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_success_message),
         ),
       ) as String);
 
