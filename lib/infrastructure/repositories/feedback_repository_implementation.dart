@@ -63,8 +63,23 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
         feedbackItems
             .add(FeedbackItemModel.fromFirestore(map, doc.id).toDomain());
       }
+      if (feedbackItems.isEmpty) {
+        return left(NotFoundFailure());
+      }
       return right(feedbackItems);
     } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> deleteFeedback(String id) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable = firebaseFunctions.httpsCallable("deleteFeedback");
+    try {
+      await callable.call({"appCheckToken": appCheckToken, "feedbackID": id});
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }

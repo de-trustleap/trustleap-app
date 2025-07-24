@@ -13,14 +13,23 @@ class AdminFeedbackCubit extends Cubit<AdminFeedbackState> {
   void getFeedbackItems() async {
     emit(AdminFeedbackGetFeedbackLoadingState());
     final failureOrSuccess = await feedbackRepo.getFeedbackItems();
-    failureOrSuccess.fold(
-        (failure) =>
-            emit(AdminFeedbackGetFeedbackFailureState(failure: failure)),
+    failureOrSuccess.fold((failure) {
+      if (failure is NotFoundFailure) {
+        emit(AdminFeedbackNoFeedbackFoundState());
+      } else {
+        emit(AdminFeedbackGetFeedbackFailureState(failure: failure));
+      }
+    },
         (feedbacks) =>
             emit(AdminFeedbackGetFeedbackSuccessState(feedbacks: feedbacks)));
   }
-}
 
-// TODO: FEEDBACK IN FEEDBACKITEM UMBENENNEN
-// TODO: TESTS ANPASSEN
-// TODO: VIEW IMPLEMENTIEREN
+  void deleteFeedback(String id) async {
+    emit(AdminFeedbackGetFeedbackLoadingState());
+    final failureOrSuccess = await feedbackRepo.deleteFeedback(id);
+    failureOrSuccess.fold(
+      (failure) => emit(AdminFeedbackGetFeedbackFailureState(failure: failure)),
+      (_) => getFeedbackItems(),
+    );
+  }
+}

@@ -60,10 +60,14 @@ class FeedbackItemModel extends Equatable {
         description:
             map['description'] != null ? map['description'] as String : null,
         downloadImageUrls: map['downloadImageUrls'] != null
-            ? map['downloadImageUrls'] as List<String>
+            ? (map['downloadImageUrls'] as List)
+                .whereType<String>()
+                .toList()
             : null,
         thumbnailDownloadURLs: (map['thumbnailDownloadURLs'] != null
-            ? map['thumbnailDownloadURLs'] as List<String>
+            ? (map['thumbnailDownloadURLs'] as List)
+                .whereType<String>()
+                .toList()
             : null),
         userAgent: map['userAgent'] != null ? map['userAgent'] as String : null,
         createdAt: map['createdAt'] as dynamic);

@@ -22,6 +22,12 @@ final class AdminFeedbackGetFeedbackFailureState extends AdminFeedbackState
   List<Object?> get props => [failure];
 }
 
+final class AdminFeedbackNoFeedbackFoundState extends AdminFeedbackState
+    with EquatableMixin {
+  @override
+  List<Object> get props => [];
+}
+
 final class AdminFeedbackGetFeedbackSuccessState extends AdminFeedbackState
     with EquatableMixin {
   final List<FeedbackItem> feedbacks;

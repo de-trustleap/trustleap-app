@@ -8,4 +8,5 @@ abstract class FeedbackRepository {
   Future<Either<DatabaseFailure, Unit>> sendFeedback(
       FeedbackItem feedback, List<Uint8List> images);
   Future<Either<DatabaseFailure, List<FeedbackItem>>> getFeedbackItems();
+  Future<Either<DatabaseFailure, Unit>> deleteFeedback(String id);
 }

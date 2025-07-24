@@ -8074,6 +8074,25 @@ class MockFeedbackRepository extends _i1.Mock
             )),
           ) as _i21.Future<
               _i2.Either<_i30.DatabaseFailure, List<_i43.FeedbackItem>>>);
+
+  @override
+  _i21.Future<_i2.Either<_i30.DatabaseFailure, _i2.Unit>> deleteFeedback(
+          String? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteFeedback,
+          [id],
+        ),
+        returnValue:
+            _i21.Future<_i2.Either<_i30.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i30.DatabaseFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deleteFeedback,
+            [id],
+          ),
+        )),
+      ) as _i21.Future<_i2.Either<_i30.DatabaseFailure, _i2.Unit>>);
 }
 
 /// A class which mocks [RecommendationRepository].

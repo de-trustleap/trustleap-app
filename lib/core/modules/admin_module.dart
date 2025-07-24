@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/presentation/admin_area/admin_area.dart';
-import 'package:finanzbegleiter/presentation/admin_area/admin_feedback_page.dart';
+import 'package:finanzbegleiter/presentation/admin_area/feedback/admin_feedback_page.dart';
 import 'package:finanzbegleiter/presentation/admin_area/company_requests/admin_page.dart';
 import 'package:finanzbegleiter/presentation/admin_area/company_requests/company_request_detail_page.dart';
 import 'package:finanzbegleiter/presentation/admin_area/registration_code_creator.dart';
