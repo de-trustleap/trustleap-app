@@ -1,4 +1,4 @@
-import 'package:finanzbegleiter/domain/entities/feedback.dart';
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -6,12 +6,12 @@ void main() {
   group("Feedback_CopyWith", () {
     test("set title with copyWith should set title for resulting object", () {
       // Given
-      final feedback = Feedback(
+      final feedback = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Original Title",
         description: "Original Description",
       );
-      final expectedResult = Feedback(
+      final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "New Title",
         description: "Original Description",
@@ -22,14 +22,16 @@ void main() {
       expect(result, expectedResult);
     });
 
-    test("set description with copyWith should set description for resulting object", () {
+    test(
+        "set description with copyWith should set description for resulting object",
+        () {
       // Given
-      final feedback = Feedback(
+      final feedback = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Original Description",
       );
-      final expectedResult = Feedback(
+      final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "New Description",
@@ -40,33 +42,38 @@ void main() {
       expect(result, expectedResult);
     });
 
-    test("set downloadImageUrl with copyWith should set downloadImageUrl for resulting object", () {
+    test(
+        "set downloadImageUrl with copyWith should set downloadImageUrl for resulting object",
+        () {
       // Given
-      final feedback = Feedback(
+      final feedback = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
       );
-      final expectedResult = Feedback(
+      final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
         downloadImageUrls: ["https://example.com/image.jpg"],
       );
       // When
-      final result = feedback.copyWith(downloadImageUrls: ["https://example.com/image.jpg"]);
+      final result = feedback
+          .copyWith(downloadImageUrls: ["https://example.com/image.jpg"]);
       // Then
       expect(result, expectedResult);
     });
 
-    test("set multiple fields with copyWith should set all fields for resulting object", () {
+    test(
+        "set multiple fields with copyWith should set all fields for resulting object",
+        () {
       // Given
-      final feedback = Feedback(
+      final feedback = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Original Title",
         description: "Original Description",
       );
-      final expectedResult = Feedback(
+      final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("2"),
         title: "New Title",
         description: "New Description",
@@ -85,15 +92,17 @@ void main() {
       expect(result, expectedResult);
     });
 
-    test("set thumbnailDownloadURL with copyWith should set thumbnailDownloadURL for resulting object", () {
+    test(
+        "set thumbnailDownloadURL with copyWith should set thumbnailDownloadURL for resulting object",
+        () {
       // Given
-      final feedback = Feedback(
+      final feedback = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
         downloadImageUrls: ["https://example.com/image.jpg"],
       );
-      final expectedResult = Feedback(
+      final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
@@ -101,7 +110,8 @@ void main() {
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
-      final result = feedback.copyWith(thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"]);
+      final result = feedback.copyWith(
+          thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"]);
       // Then
       expect(result, expectedResult);
     });
@@ -110,7 +120,7 @@ void main() {
   group("Feedback_Props", () {
     test("check if value equality works", () {
       // Given
-      final feedback1 = Feedback(
+      final feedback1 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -118,7 +128,7 @@ void main() {
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
 
-      final feedback2 = Feedback(
+      final feedback2 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -131,13 +141,13 @@ void main() {
 
     test("check if value equality works with null values", () {
       // Given
-      final feedback1 = Feedback(
+      final feedback1 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
       );
 
-      final feedback2 = Feedback(
+      final feedback2 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -148,13 +158,13 @@ void main() {
 
     test("check if inequality works with different ids", () {
       // Given
-      final feedback1 = Feedback(
+      final feedback1 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
       );
 
-      final feedback2 = Feedback(
+      final feedback2 = FeedbackItem(
         id: UniqueID.fromUniqueString("2"),
         title: "Test Feedback",
         description: "This is a test feedback description",
@@ -165,13 +175,13 @@ void main() {
 
     test("check if inequality works with different titles", () {
       // Given
-      final feedback1 = Feedback(
+      final feedback1 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
       );
 
-      final feedback2 = Feedback(
+      final feedback2 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Different Feedback",
         description: "This is a test feedback description",
@@ -182,13 +192,13 @@ void main() {
 
     test("check if inequality works with different descriptions", () {
       // Given
-      final feedback1 = Feedback(
+      final feedback1 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "Original description",
       );
 
-      final feedback2 = Feedback(
+      final feedback2 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "Different description",

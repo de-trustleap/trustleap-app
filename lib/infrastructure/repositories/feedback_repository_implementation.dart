@@ -2,32 +2,35 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/core/helpers/image_compressor.dart';
-import 'package:finanzbegleiter/domain/entities/feedback.dart';
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart';
-import 'package:finanzbegleiter/infrastructure/models/feedback_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/feedback_item_model.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:web/web.dart';
 
 class FeedbackRepositoryImplementation implements FeedbackRepository {
   final FirebaseFunctions firebaseFunctions;
   final FirebaseAppCheck appCheck;
+  final FirebaseFirestore firestore;
 
   FeedbackRepositoryImplementation({
     required this.firebaseFunctions,
     required this.appCheck,
+    required this.firestore,
   });
 
   @override
   Future<Either<DatabaseFailure, Unit>> sendFeedback(
-      Feedback feedback, List<Uint8List> images) async {
+      FeedbackItem feedback, List<Uint8List> images) async {
     final appCheckToken = await appCheck.getToken();
     HttpsCallable callable = firebaseFunctions.httpsCallable("sendFeedback");
-    final feedbackModel = FeedbackModel.fromDomain(feedback);
+    final feedbackModel = FeedbackItemModel.fromDomain(feedback);
 
     final userAgent = window.navigator.userAgent.toLowerCase();
     final compressedImages = await ImageCompressor.compressImages(images);
@@ -48,12 +51,36 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
-}
 
-// TODO: CUBIT EINBINDEN (FERTIG)
-// TODO: NEUE TESTS FÜR CUBIT, REPO UND MODELS (FERTIG)
-// TODO: LOCALIZATION (FERTIG)
-// TODO: USER AGENT MITSCHICKEN (FERTIG)
-// TODO: TESTS AKTUALISIEREN (FERTIG)
-// TODO: BACKEND FUNKTION IMPLEMENTIEREN
-// TODO: TESTEN!
+  @override
+  Future<Either<DatabaseFailure, List<FeedbackItem>>> getFeedbackItems() async {
+    try {
+      final QuerySnapshot querySnapshot =
+          await firestore.collection("feedback").get();
+      List<FeedbackItem> feedbackItems = [];
+      for (final doc in querySnapshot.docs) {
+        final map = doc.data() as Map<String, dynamic>;
+        feedbackItems
+            .add(FeedbackItemModel.fromFirestore(map, doc.id).toDomain());
+      }
+      if (feedbackItems.isEmpty) {
+        return left(NotFoundFailure());
+      }
+      return right(feedbackItems);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, Unit>> deleteFeedback(String id) async {
+    final appCheckToken = await appCheck.getToken();
+    HttpsCallable callable = firebaseFunctions.httpsCallable("deleteFeedback");
+    try {
+      await callable.call({"appCheckToken": appCheckToken, "feedbackID": id});
+      return right(unit);
+    } on FirebaseFunctionsException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+}

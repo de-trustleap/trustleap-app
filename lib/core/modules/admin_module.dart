@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/presentation/admin_area/admin_area.dart';
+import 'package:finanzbegleiter/presentation/admin_area/feedback/admin_feedback_page.dart';
 import 'package:finanzbegleiter/presentation/admin_area/company_requests/admin_page.dart';
 import 'package:finanzbegleiter/presentation/admin_area/company_requests/company_request_detail_page.dart';
 import 'package:finanzbegleiter/presentation/admin_area/registration_code_creator.dart';
@@ -17,7 +18,9 @@ class AdminModule extends Module {
           ChildRoute(RoutePaths.companyRequestDetails,
               child: (_) => const CompanyRequestDetailPage()),
           ChildRoute(RoutePaths.registrationCodes,
-              child: (_) => const RegistrationCodeCreator())
+              child: (_) => const RegistrationCodeCreator()),
+          ChildRoute(RoutePaths.userFeedback,
+              child: (_) => const AdminFeedbackPage())
         ]);
     r.wildcard(child: (_) => const AdminArea());
   }

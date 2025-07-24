@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/feedback.dart';
+import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -24,12 +24,12 @@ void main() {
   });
 
   group("FeedbackCubit_SendFeedback", () {
-    final testFeedback = Feedback(
+    final testFeedback = FeedbackItem(
       id: UniqueID.fromUniqueString("test-id"),
       title: "Test Feedback",
       description: "This is a test feedback description",
     );
-    
+
     final testImages = [
       Uint8List.fromList([1, 2, 3, 4]),
       Uint8List.fromList([5, 6, 7, 8]),
@@ -39,17 +39,20 @@ void main() {
       // Given
       when(mockFeedbackRepo.sendFeedback(testFeedback, testImages))
           .thenAnswer((_) async => right(unit));
-      
+
       // When
       feedbackCubit.sendFeedback(testFeedback, testImages);
-      await untilCalled(mockFeedbackRepo.sendFeedback(testFeedback, testImages));
-      
+      await untilCalled(
+          mockFeedbackRepo.sendFeedback(testFeedback, testImages));
+
       // Then
       verify(mockFeedbackRepo.sendFeedback(testFeedback, testImages));
       verifyNoMoreInteractions(mockFeedbackRepo);
     });
 
-    test("should emit SentFeedbackLoadingState and then SentFeedbackSuccessState when call was successful", () async {
+    test(
+        "should emit SentFeedbackLoadingState and then SentFeedbackSuccessState when call was successful",
+        () async {
       // Given
       final expectedResult = [
         SentFeedbackLoadingState(),
@@ -57,13 +60,15 @@ void main() {
       ];
       when(mockFeedbackRepo.sendFeedback(testFeedback, testImages))
           .thenAnswer((_) async => right(unit));
-      
+
       // Then
       expectLater(feedbackCubit.stream, emitsInOrder(expectedResult));
       feedbackCubit.sendFeedback(testFeedback, testImages);
     });
 
-    test("should emit SentFeedbackLoadingState and then SentFeedbackFailureState when call has failed with PermissionDeniedFailure", () async {
+    test(
+        "should emit SentFeedbackLoadingState and then SentFeedbackFailureState when call has failed with PermissionDeniedFailure",
+        () async {
       // Given
       final expectedResult = [
         SentFeedbackLoadingState(),
@@ -71,13 +76,15 @@ void main() {
       ];
       when(mockFeedbackRepo.sendFeedback(testFeedback, testImages))
           .thenAnswer((_) async => left(PermissionDeniedFailure()));
-      
+
       // Then
       expectLater(feedbackCubit.stream, emitsInOrder(expectedResult));
       feedbackCubit.sendFeedback(testFeedback, testImages);
     });
 
-    test("should emit SentFeedbackLoadingState and then SentFeedbackFailureState when call has failed with BackendFailure", () async {
+    test(
+        "should emit SentFeedbackLoadingState and then SentFeedbackFailureState when call has failed with BackendFailure",
+        () async {
       // Given
       final expectedResult = [
         SentFeedbackLoadingState(),
@@ -85,13 +92,15 @@ void main() {
       ];
       when(mockFeedbackRepo.sendFeedback(testFeedback, testImages))
           .thenAnswer((_) async => left(BackendFailure()));
-      
+
       // Then
       expectLater(feedbackCubit.stream, emitsInOrder(expectedResult));
       feedbackCubit.sendFeedback(testFeedback, testImages);
     });
 
-    test("should emit SentFeedbackLoadingState and then SentFeedbackFailureState when call has failed with UnavailableFailure", () async {
+    test(
+        "should emit SentFeedbackLoadingState and then SentFeedbackFailureState when call has failed with UnavailableFailure",
+        () async {
       // Given
       final expectedResult = [
         SentFeedbackLoadingState(),
@@ -99,7 +108,7 @@ void main() {
       ];
       when(mockFeedbackRepo.sendFeedback(testFeedback, testImages))
           .thenAnswer((_) async => left(UnavailableFailure()));
-      
+
       // Then
       expectLater(feedbackCubit.stream, emitsInOrder(expectedResult));
       feedbackCubit.sendFeedback(testFeedback, testImages);
@@ -114,7 +123,7 @@ void main() {
       ];
       when(mockFeedbackRepo.sendFeedback(testFeedback, emptyImages))
           .thenAnswer((_) async => right(unit));
-      
+
       // Then
       expectLater(feedbackCubit.stream, emitsInOrder(expectedResult));
       feedbackCubit.sendFeedback(testFeedback, emptyImages);
@@ -133,7 +142,7 @@ void main() {
       ];
       when(mockFeedbackRepo.sendFeedback(testFeedback, multipleImages))
           .thenAnswer((_) async => right(unit));
-      
+
       // Then
       expectLater(feedbackCubit.stream, emitsInOrder(expectedResult));
       feedbackCubit.sendFeedback(testFeedback, multipleImages);

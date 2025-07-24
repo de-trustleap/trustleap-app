@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/application/company_request/company_request_obse
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/promoters/dashboard_promoters_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/feedback/admin_feedback/admin_feedback_cubit.dart';
 import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart';
@@ -131,6 +132,7 @@ class AppModule extends Module {
       ..addLazySingleton(DashboardRecommendationsCubit.new)
       ..addLazySingleton(DashboardPromotersCubit.new)
       ..addLazySingleton(FeedbackCubit.new)
+      ..addLazySingleton(AdminFeedbackCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
