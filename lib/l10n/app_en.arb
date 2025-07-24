@@ -986,6 +986,18 @@
     "@recommendation_page_leadTextField_send_button": {
         "description": "Title for the send button"
     },
+    "recommendation_page_leadTextField_send_Mail_button": "Send via Email",
+    "@recommendation_page_leadTextField_send_Mail_button": {
+        "description": "Title for the mail send button"
+    },
+    "recommendation_mail_subject_prefix": "Recommendation for you",
+    "@recommendation_mail_subject_prefix": {
+        "description": "Email subject prefix"
+    },
+    "recommendation_page_send_mail_error": "Error when sending the recommendation email",
+    "@recommendation_page_send_mail_error": {
+        "description": "Message if the recommendation email could not be sent."
+    },
     "recommendation_page_send_whatsapp_error": "WhatsApp is not installed or cannot be opened.",
     "@recommendation_page_send_whatsapp_error": {
         "description": "Message shown when the message cannot be sent"

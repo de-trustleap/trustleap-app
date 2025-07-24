@@ -861,6 +861,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Send via Whatsapp';
 
   @override
+  String get recommendation_page_leadTextField_send_Mail_button =>
+      'Send via Email';
+
+  @override
+  String get recommendation_mail_subject_prefix => 'Recommendation for you';
+
+  @override
+  String get recommendation_page_send_mail_error =>
+      'Error when sending the recommendation email';
+
+  @override
   String get recommendation_page_send_whatsapp_error =>
       'WhatsApp is not installed or cannot be opened.';
 

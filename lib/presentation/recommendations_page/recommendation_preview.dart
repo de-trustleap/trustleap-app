@@ -176,6 +176,39 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     }
   }
 
+  Future<void> _sendEmail(
+    RecommendationItem recommendation,
+    String message,
+    //String subject,
+  ) async {
+    final baseURL = Environment().getLandingpageBaseURL();
+    final link = "$baseURL?id=${recommendation.id}";
+    final localization = AppLocalizations.of(context);
+    if (!message.contains("[LINK]")) {
+      setState(() => showMissingLinkError = true);
+      return;
+    }
+    setState(() => showMissingLinkError = false);
+
+    final adaptedMessage = message.replaceAll("[LINK]", link);
+    final mailto = Uri(
+      scheme: 'mailto',
+      query: [
+        'subject=${Uri.encodeComponent("${localization.recommendation_mail_subject_prefix} (${recommendation.name})")}',
+        'body=${Uri.encodeComponent(adaptedMessage)}',
+      ].join('&'),
+    );
+
+    if (await canLaunchUrl(mailto)) {
+      await launchUrl(mailto);
+    } else {
+      if (!mounted) return;
+      CustomSnackBar.of(context).showCustomSnackBar(
+        localization.recommendation_page_send_mail_error
+      );
+    }
+  }
+
   void _startComeBackToPageListener(RecommendationItem recommendation) {
     _visibilitySubscription?.cancel();
     _visibilitySubscription = web.document.onVisibilityChange.listen((event) {
@@ -270,6 +303,11 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         onSendPressed: () {
           _sendMessage(widget.leads.first, controller.text);
         },
+        onMailPressed: () => _sendEmail(
+          lead,
+          controller.text,
+          //widget.selectedReason, // Betreff
+        ),
       ),
     );
   }
@@ -284,7 +322,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         ),
         const SizedBox(height: 30),
         SizedBox(
-          height: 400,
+          height: 500,
           child: TabBarView(
             controller: tabController,
             children: widget.leads.map((lead) {
@@ -300,6 +338,10 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                       onSendPressed: () {
                         _sendMessage(lead, controller.text);
                       },
+                      onMailPressed: () => _sendEmail(
+                        lead,
+                        controller.text,
+                      ),
                     ),
                   ],
                 ),

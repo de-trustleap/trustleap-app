@@ -1553,6 +1553,24 @@ abstract class AppLocalizations {
   /// **'Send via Whatsapp'**
   String get recommendation_page_leadTextField_send_button;
 
+  /// Title for the mail send button
+  ///
+  /// In en, this message translates to:
+  /// **'Send via Email'**
+  String get recommendation_page_leadTextField_send_Mail_button;
+
+  /// Email subject prefix
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation for you'**
+  String get recommendation_mail_subject_prefix;
+
+  /// Message if the recommendation email could not be sent.
+  ///
+  /// In en, this message translates to:
+  /// **'Error when sending the recommendation email'**
+  String get recommendation_page_send_mail_error;
+
   /// Message shown when the message cannot be sent
   ///
   /// In en, this message translates to:

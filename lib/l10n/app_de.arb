@@ -986,6 +986,18 @@
     "@recommendation_page_leadTextField_send_button": {
         "description": "Title für den Absende Button"
     },
+    "recommendation_page_leadTextField_send_Mail_button": "Senden per Email",
+    "@recommendation_page_leadTextField_send_Mail_button": {
+        "description": "Title für den Email Absende Button"
+    },
+    "recommendation_mail_subject_prefix": "Empfehlung für Dich",
+    "@recommendation_mail_subject_prefix": {
+        "description": "Email Betreff Prefix"
+    },
+    "recommendation_page_send_mail_error": "Fehler beim versende der Empfehlungsemail",
+    "@recommendation_page_send_mail_error": {
+        "description": "Nachricht wenn die Empfehlungsemail nicht versendet werden konnte."
+    },
     "recommendation_page_send_whatsapp_error": "WhatsApp ist nicht installiert oder kann nicht geöffnet werden.",
     "@recommendation_page_send_whatsapp_error": {
         "description": "Nachricht wenn die Message nicht versendet werden kann"

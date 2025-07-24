@@ -8,6 +8,7 @@ class RecommendationTextField extends StatelessWidget {
   final String leadName;
   final bool showError;
   final void Function()? onSendPressed;
+  final VoidCallback? onMailPressed;
 
   const RecommendationTextField({
     super.key,
@@ -15,6 +16,7 @@ class RecommendationTextField extends StatelessWidget {
     required this.leadName,
     required this.showError,
     this.onSendPressed,
+    this.onMailPressed,
   });
 
   @override
@@ -46,6 +48,12 @@ class RecommendationTextField extends StatelessWidget {
             title: localization.recommendation_page_leadTextField_send_button,
             onTap: onSendPressed,
             icon: Icons.send),
+        const SizedBox(height: 12),
+        PrimaryButton(
+          title: localization.recommendation_page_leadTextField_send_Mail_button,
+          onTap: onMailPressed,
+          icon: Icons.email,
+        ),
       ],
     );
   }
