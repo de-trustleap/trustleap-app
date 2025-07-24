@@ -3962,6 +3962,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'User Feedback'**
   String get admin_feedback_list_title;
+
+  /// Dropdown option for all landing pages
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get dashboard_recommendations_all_landingpages;
 }
 
 class _AppLocalizationsDelegate

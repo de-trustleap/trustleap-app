@@ -2301,4 +2301,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get admin_feedback_list_title => 'User Feedback';
+
+  @override
+  String get dashboard_recommendations_all_landingpages => 'All';
 }

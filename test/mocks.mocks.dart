@@ -1056,6 +1056,33 @@ class MockAppLocalizations extends _i1.Mock implements _i25.AppLocalizations {
       ) as String);
 
   @override
+  String get menuitems_recommendation_manager => (super.noSuchMethod(
+        Invocation.getter(#menuitems_recommendation_manager),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#menuitems_recommendation_manager),
+        ),
+      ) as String);
+
+  @override
+  String get menuitems_registration_codes => (super.noSuchMethod(
+        Invocation.getter(#menuitems_registration_codes),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#menuitems_registration_codes),
+        ),
+      ) as String);
+
+  @override
+  String get menuitems_user_feedback => (super.noSuchMethod(
+        Invocation.getter(#menuitems_user_feedback),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#menuitems_user_feedback),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_error_view_title => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_error_view_title),
         returnValue: _i26.dummyValue<String>(
@@ -6565,6 +6592,114 @@ class MockAppLocalizations extends _i1.Mock implements _i25.AppLocalizations {
         returnValue: _i26.dummyValue<String>(
           this,
           Invocation.getter(#feedback_success_message),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_no_feedback_title => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_no_feedback_title),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_no_feedback_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_no_feedback_subtitle => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_no_feedback_subtitle),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_no_feedback_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_refresh_button => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_refresh_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_refresh_button),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_error_title => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_error_title),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_delete_title => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_delete_title),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_delete_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_delete_message => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_delete_message),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_delete_message),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_delete_button => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_delete_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_delete_button),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_cancel_button => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_cancel_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_cancel_button),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_description_label => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_description_label),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_description_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_images_label => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_images_label),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_images_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_list_title => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_list_title),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_list_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_all_landingpages => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_all_landingpages),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_all_landingpages),
         ),
       ) as String);
 
@@ -12581,6 +12716,15 @@ class MockDashboardRecommendationsCubit extends _i1.Mock
       ) as _i6.RecommendationRepository);
 
   @override
+  _i13.LandingPageRepository get landingPageRepo => (super.noSuchMethod(
+        Invocation.getter(#landingPageRepo),
+        returnValue: _FakeLandingPageRepository_17(
+          this,
+          Invocation.getter(#landingPageRepo),
+        ),
+      ) as _i13.LandingPageRepository);
+
+  @override
   _i79.DashboardRecommendationsState get state => (super.noSuchMethod(
         Invocation.getter(#state),
         returnValue: _i26.dummyValue<_i79.DashboardRecommendationsState>(
@@ -12612,10 +12756,26 @@ class MockDashboardRecommendationsCubit extends _i1.Mock
       );
 
   @override
-  void getRecommendationsPromoter(String? userID) => super.noSuchMethod(
+  void getRecommendationsPromoter(
+    String? userID,
+    List<String>? landingPageIDs,
+  ) =>
+      super.noSuchMethod(
         Invocation.method(
           #getRecommendationsPromoter,
-          [userID],
+          [
+            userID,
+            landingPageIDs,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void filterLandingPagesForPromoter(String? promoterId) => super.noSuchMethod(
+        Invocation.method(
+          #filterLandingPagesForPromoter,
+          [promoterId],
         ),
         returnValueForMissingStub: null,
       );

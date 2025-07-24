@@ -6,7 +6,6 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class DashboardRecommendationsHelper {
-  /// Creates dropdown items for promoter selection including an "Alle" option
   static List<DropdownMenuItem<String?>> getPromoterItems(
       List<PromoterRecommendations> promoterRecommendations,
       AppLocalizations localization,
@@ -75,45 +74,66 @@ class DashboardRecommendationsHelper {
     return items;
   }
 
-  /// Filters recommendations based on selected promoter and user role
   static List<UserRecommendation> getFilteredRecommendations({
     required DashboardRecommendationsGetRecosSuccessState state,
     required String? selectedPromoterId,
     required Role userRole,
+    String? selectedLandingPageId,
   }) {
-    // If no promoter selected or user is promoter, return all recommendations
-    if (selectedPromoterId == null || userRole != Role.company) {
-      return state.recommendation;
-    }
+    List<UserRecommendation> recommendations;
 
-    // Filter by selected promoter
-    if (state.promoterRecommendations != null) {
-      try {
-        final selectedPromoterRec = state.promoterRecommendations!.firstWhere(
-          (promoterRec) => promoterRec.promoter.id.value == selectedPromoterId,
-        );
-        return selectedPromoterRec.recommendations;
-      } catch (e) {
-        // Promoter not found, return empty list instead of throwing
-        return [];
+    // First filter by promoter
+    if (selectedPromoterId == null || userRole != Role.company) {
+      recommendations = state.recommendation;
+    } else {
+      // Filter by selected promoter
+      if (state.promoterRecommendations != null) {
+        try {
+          final selectedPromoterRec = state.promoterRecommendations!.firstWhere(
+            (promoterRec) =>
+                promoterRec.promoter.id.value == selectedPromoterId,
+          );
+          recommendations = selectedPromoterRec.recommendations;
+        } catch (e) {
+          return [];
+        }
+      } else {
+        recommendations = state.recommendation;
       }
     }
 
-    return state.recommendation;
+    // Then filter by landing page if selected
+    if (selectedLandingPageId != null && state.allLandingPages != null) {
+      // Find the landing page name for the selected ID
+      final selectedLandingPage = state.allLandingPages!
+          .where((lp) => lp.id.value == selectedLandingPageId)
+          .firstOrNull;
+
+      if (selectedLandingPage != null && selectedLandingPage.name != null) {
+        // Filter recommendations where reason matches landing page name
+        recommendations = recommendations
+            .where(
+                (rec) => rec.recommendation?.reason == selectedLandingPage.name)
+            .toList();
+      }
+    }
+
+    return recommendations;
   }
 
-  /// Gets the localized summary text showing recommendation count for selected time period
   static String getTimePeriodSummaryText({
     required DashboardRecommendationsGetRecosSuccessState state,
     required String? selectedPromoterId,
     required Role userRole,
     required TimePeriod timePeriod,
     required AppLocalizations localization,
+    String? selectedLandingPageId,
   }) {
     final recommendations = getFilteredRecommendations(
       state: state,
       selectedPromoterId: selectedPromoterId,
       userRole: userRole,
+      selectedLandingPageId: selectedLandingPageId,
     );
     final now = DateTime.now();
     DateTime startDate;
