@@ -1,6 +1,7 @@
 import "package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart";
 import "package:finanzbegleiter/constants.dart";
 import "package:finanzbegleiter/domain/entities/id.dart";
+import "package:finanzbegleiter/domain/entities/landing_page.dart";
 import "package:finanzbegleiter/domain/entities/promoter_recommendations.dart";
 import "package:finanzbegleiter/domain/entities/recommendation_item.dart";
 import "package:finanzbegleiter/domain/entities/user.dart";
@@ -290,6 +291,276 @@ void main() {
 
         expect(result, equals(allRecommendations));
       });
+
+      test("should filter recommendations by landing page when selected", () {
+        final landingPage1 = LandingPage(
+          id: UniqueID.fromUniqueString("lp1"),
+          name: "Investment Page",
+        );
+        final landingPage2 = LandingPage(
+          id: UniqueID.fromUniqueString("lp2"),
+          name: "Savings Page",
+        );
+
+        final recommendationWithInvestment = UserRecommendation(
+          id: UniqueID.fromUniqueString("rec1"),
+          recoID: "reco1",
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: "item1",
+            name: "Test",
+            reason: "Investment Page", // matches landingPage1.name
+            landingPageID: "lp1",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: StatusLevel.recommendationSend,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+          ),
+        );
+
+        final recommendationWithSavings = UserRecommendation(
+          id: UniqueID.fromUniqueString("rec2"),
+          recoID: "reco2",
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: "item2",
+            name: "Test",
+            reason: "Savings Page", // matches landingPage2.name
+            landingPageID: "lp2",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: StatusLevel.recommendationSend,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+          ),
+        );
+
+        final stateWithLandingPages = DashboardRecommendationsGetRecosSuccessState(
+          recommendation: [recommendationWithInvestment, recommendationWithSavings],
+          promoterRecommendations: null,
+          allLandingPages: [landingPage1, landingPage2],
+          filteredLandingPages: [landingPage1, landingPage2],
+        );
+
+        final result = DashboardRecommendationsHelper.getFilteredRecommendations(
+          state: stateWithLandingPages,
+          selectedPromoterId: null,
+          userRole: Role.promoter,
+          selectedLandingPageId: "lp1",
+        );
+
+        expect(result.length, equals(1));
+        expect(result.first.recommendation?.reason, equals("Investment Page"));
+      });
+
+      test("should return all recommendations when no landing page selected", () {
+        final landingPage1 = LandingPage(
+          id: UniqueID.fromUniqueString("lp1"),
+          name: "Investment Page",
+        );
+
+        final recommendationWithInvestment = UserRecommendation(
+          id: UniqueID.fromUniqueString("rec1"),
+          recoID: "reco1",
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: "item1",
+            name: "Test",
+            reason: "Investment Page",
+            landingPageID: "lp1",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: StatusLevel.recommendationSend,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+          ),
+        );
+
+        final stateWithLandingPages = DashboardRecommendationsGetRecosSuccessState(
+          recommendation: [recommendationWithInvestment],
+          promoterRecommendations: null,
+          allLandingPages: [landingPage1],
+          filteredLandingPages: [landingPage1],
+        );
+
+        final result = DashboardRecommendationsHelper.getFilteredRecommendations(
+          state: stateWithLandingPages,
+          selectedPromoterId: null,
+          userRole: Role.promoter,
+          selectedLandingPageId: null, // No landing page selected
+        );
+
+        expect(result.length, equals(1));
+        expect(result.first.recommendation?.reason, equals("Investment Page"));
+      });
+
+      test("should return empty list when landing page selected but no matching recommendations", () {
+        final landingPage1 = LandingPage(
+          id: UniqueID.fromUniqueString("lp1"),
+          name: "Investment Page",
+        );
+
+        final recommendationWithDifferentReason = UserRecommendation(
+          id: UniqueID.fromUniqueString("rec1"),
+          recoID: "reco1",
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: "item1",
+            name: "Test",
+            reason: "Different Reason", // doesn't match landingPage1.name
+            landingPageID: "lp1",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: StatusLevel.recommendationSend,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+          ),
+        );
+
+        final stateWithLandingPages = DashboardRecommendationsGetRecosSuccessState(
+          recommendation: [recommendationWithDifferentReason],
+          promoterRecommendations: null,
+          allLandingPages: [landingPage1],
+          filteredLandingPages: [landingPage1],
+        );
+
+        final result = DashboardRecommendationsHelper.getFilteredRecommendations(
+          state: stateWithLandingPages,
+          selectedPromoterId: null,
+          userRole: Role.promoter,
+          selectedLandingPageId: "lp1",
+        );
+
+        expect(result.length, equals(0));
+      });
+
+      test("should filter by both promoter and landing page", () {
+        final landingPage1 = LandingPage(
+          id: UniqueID.fromUniqueString("lp1"),
+          name: "Investment Page",
+        );
+
+        final promoter1 = CustomUser(
+          id: UniqueID.fromUniqueString("promoter1"),
+          firstName: "John",
+          lastName: "Doe",
+        );
+
+        final promoter2 = CustomUser(
+          id: UniqueID.fromUniqueString("promoter2"),
+          firstName: "Jane",
+          lastName: "Smith",
+        );
+
+        final rec1 = UserRecommendation(
+          id: UniqueID.fromUniqueString("rec1"),
+          recoID: "reco1",
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: "item1",
+            name: "Test",
+            reason: "Investment Page",
+            landingPageID: "lp1",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: StatusLevel.recommendationSend,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+          ),
+        );
+
+        final rec2 = UserRecommendation(
+          id: UniqueID.fromUniqueString("rec2"),
+          recoID: "reco2",
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: "item2",
+            name: "Test",
+            reason: "Different Reason",
+            landingPageID: "lp1",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: StatusLevel.recommendationSend,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+          ),
+        );
+
+        final rec3 = UserRecommendation(
+          id: UniqueID.fromUniqueString("rec3"),
+          recoID: "reco3",
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: "item3",
+            name: "Test",
+            reason: "Investment Page",
+            landingPageID: "lp1",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: StatusLevel.recommendationSend,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+          ),
+        );
+
+        final stateWithBothFilters = DashboardRecommendationsGetRecosSuccessState(
+          recommendation: [rec1, rec2, rec3],
+          promoterRecommendations: [
+            PromoterRecommendations(promoter: promoter1, recommendations: [rec1, rec2]),
+            PromoterRecommendations(promoter: promoter2, recommendations: [rec3]),
+          ],
+          allLandingPages: [landingPage1],
+          filteredLandingPages: [landingPage1],
+        );
+
+        final result = DashboardRecommendationsHelper.getFilteredRecommendations(
+          state: stateWithBothFilters,
+          selectedPromoterId: "promoter1", // Filter by promoter1 first
+          userRole: Role.company,
+          selectedLandingPageId: "lp1", // Then filter by landing page
+        );
+
+        // Should only return rec1 (from promoter1 with matching reason)
+        expect(result.length, equals(1));
+        expect(result.first.id.value, equals("rec1"));
+        expect(result.first.recommendation?.reason, equals("Investment Page"));
+      });
     });
 
     group("getTimePeriodSummaryText", () {
@@ -362,6 +633,7 @@ void main() {
           userRole: Role.promoter,
           timePeriod: TimePeriod.day,
           localization: mockLocalizations,
+          selectedLandingPageId: null,
         );
 
         expect(result, equals("Letzte 24 Stunden: 2 Empfehlungen"));
@@ -374,6 +646,7 @@ void main() {
           userRole: Role.promoter,
           timePeriod: TimePeriod.week,
           localization: mockLocalizations,
+          selectedLandingPageId: null,
         );
 
         expect(result, equals("Letzte 7 Tage: 2 Empfehlungen"));
@@ -386,6 +659,7 @@ void main() {
           userRole: Role.promoter,
           timePeriod: TimePeriod.month,
           localization: mockLocalizations,
+          selectedLandingPageId: null,
         );
 
         expect(result, equals("Letzter Monat: 2 Empfehlungen"));
@@ -429,6 +703,7 @@ void main() {
           userRole: Role.promoter,
           timePeriod: TimePeriod.day,
           localization: mockLocalizations,
+          selectedLandingPageId: null,
         );
 
         expect(result, equals("Letzte 24 Stunden: 1 Empfehlung"));
@@ -446,6 +721,7 @@ void main() {
           userRole: Role.promoter,
           timePeriod: TimePeriod.day,
           localization: mockLocalizations,
+          selectedLandingPageId: null,
         );
 
         expect(result, equals("Letzte 24 Stunden: 0 Empfehlungen"));
@@ -529,6 +805,7 @@ void main() {
           userRole: Role.company,
           timePeriod: TimePeriod.day,
           localization: mockLocalizations,
+          selectedLandingPageId: null,
         );
 
         expect(result, equals("Letzte 24 Stunden: 1 Empfehlung"));
@@ -648,6 +925,7 @@ void main() {
           userRole: Role.promoter,
           timePeriod: TimePeriod.day,
           localization: mockLocalizations,
+          selectedLandingPageId: null,
         );
         expect(dayResult, equals("Letzte 24 Stunden: 1 Empfehlung"));
 
@@ -658,6 +936,7 @@ void main() {
           userRole: Role.promoter,
           timePeriod: TimePeriod.week,
           localization: mockLocalizations,
+          selectedLandingPageId: null,
         );
         expect(weekResult, equals("Letzte 7 Tage: 2 Empfehlungen"));
 
@@ -668,8 +947,84 @@ void main() {
           userRole: Role.promoter,
           timePeriod: TimePeriod.month,
           localization: mockLocalizations,
+          selectedLandingPageId: null,
         );
         expect(monthResult, equals("Letzter Monat: 3 Empfehlungen"));
+      });
+
+      test("should filter by landing page in summary text", () {
+        final landingPage1 = LandingPage(
+          id: UniqueID.fromUniqueString("lp1"),
+          name: "Investment Page",
+        );
+
+        final now = DateTime.now();
+        final yesterday = now.subtract(const Duration(hours: 12));
+
+        final recommendationWithMatchingReason = UserRecommendation(
+          id: UniqueID.fromUniqueString("rec1"),
+          recoID: "reco1",
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: "item1",
+            name: "Test",
+            reason: "Investment Page", // matches landingPage1.name
+            landingPageID: "lp1",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: StatusLevel.recommendationSend,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+            createdAt: yesterday,
+          ),
+        );
+
+        final recommendationWithDifferentReason = UserRecommendation(
+          id: UniqueID.fromUniqueString("rec2"),
+          recoID: "reco2",
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: "item2",
+            name: "Test",
+            reason: "Different Reason", // doesn't match landingPage1.name
+            landingPageID: "lp1",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: StatusLevel.recommendationSend,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+            createdAt: yesterday,
+          ),
+        );
+
+        final stateWithLandingPageFiltering = DashboardRecommendationsGetRecosSuccessState(
+          recommendation: [recommendationWithMatchingReason, recommendationWithDifferentReason],
+          promoterRecommendations: null,
+          allLandingPages: [landingPage1],
+          filteredLandingPages: [landingPage1],
+        );
+
+        final result = DashboardRecommendationsHelper.getTimePeriodSummaryText(
+          state: stateWithLandingPageFiltering,
+          selectedPromoterId: null,
+          userRole: Role.promoter,
+          timePeriod: TimePeriod.day,
+          localization: mockLocalizations,
+          selectedLandingPageId: "lp1", // Filter by landing page
+        );
+
+        // Should only count the recommendation with matching reason
+        expect(result, equals("Letzte 24 Stunden: 1 Empfehlung"));
       });
     });
   });

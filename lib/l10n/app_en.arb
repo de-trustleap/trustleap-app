@@ -2656,5 +2656,9 @@
     "admin_feedback_list_title": "User Feedback",
     "@admin_feedback_list_title": {
         "description": "Title of the Admin Feedback List"
+    },
+    "dashboard_recommendations_all_landingpages": "All",
+    "@dashboard_recommendations_all_landingpages": {
+        "description": "Dropdown option for all landing pages"
     }
 }
