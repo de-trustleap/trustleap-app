@@ -19,9 +19,17 @@
 
   <title>finanzbegleiter</title>
   <link rel="manifest" href="manifest.json">
+  
+  <!-- Startup Loading Animation -->
+  <link rel="stylesheet" href="startup_loading_animation.css">
 </head>
 
 <body>
+  <!-- Startup Loading Animation -->
+  <div id="flutter-loading" class="flutter-loading">
+    <img id="loading-gif" src="assets/assets/images/startup.gif" alt="Loading..." onerror="handleImageError()" />
+  </div>
+
   <script>
     // AppCheck Token logic
     function getAppCheckDebugToken() {
@@ -37,6 +45,10 @@
     self.FIREBASE_APPCHECK_DEBUG_TOKEN = getAppCheckDebugToken();
     console.log("✅ Aktueller AppCheck Debug Token:", self.FIREBASE_APPCHECK_DEBUG_TOKEN);
   </script>
+
+  <!-- Startup Loading Animation JavaScript -->
+  <script src="startup_loading_animation.js"></script>
+  
   <script src="flutter_bootstrap.js" async></script>
 </body>
 
