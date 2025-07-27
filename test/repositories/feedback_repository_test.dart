@@ -2,6 +2,7 @@
 import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
@@ -22,6 +23,7 @@ void main() {
       id: UniqueID.fromUniqueString("test-id"),
       title: "Test Feedback",
       description: "This is a test feedback description",
+      type: FeedbackType.feedback,
     );
 
     final testImages = [
@@ -140,16 +142,18 @@ void main() {
   });
 
   group("FeedbackRepositoryImplementation_GetFeedbackItems", () {
-    final testFeedbackItems = [
+    final testFeedbackItems = <FeedbackItem>[
       FeedbackItem(
         id: UniqueID.fromUniqueString("test-id-1"),
         title: "Test Feedback 1",
         description: "This is test feedback 1",
+        type: FeedbackType.feedback,
       ),
       FeedbackItem(
         id: UniqueID.fromUniqueString("test-id-2"),
         title: "Test Feedback 2", 
         description: "This is test feedback 2",
+        type: FeedbackType.bug,
       ),
     ];
 

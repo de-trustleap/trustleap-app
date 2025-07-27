@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
@@ -25,13 +26,16 @@ class FeedbackDialog extends StatefulWidget {
 }
 
 class _FeedbackDialogState extends State<FeedbackDialog> {
+  final emailController = TextEditingController();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<Uint8List> selectedImages = [];
+  FeedbackType selectedType = FeedbackType.feedback;
 
   @override
   void dispose() {
+    emailController.dispose();
     titleController.dispose();
     descriptionController.dispose();
     super.dispose();
@@ -51,8 +55,10 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
     if (formKey.currentState?.validate() ?? false) {
       final feedback = FeedbackItem(
         id: UniqueID(),
+        email: emailController.text.trim().isEmpty ? null : emailController.text.trim(),
         title: titleController.text,
         description: descriptionController.text,
+        type: selectedType,
       );
       Modular.get<FeedbackCubit>().sendFeedback(feedback, selectedImages);
     }
@@ -117,6 +123,41 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          Text(
+                            "Kategorie",
+                            style: themeData.textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: FeedbackType.values.map((type) {
+                              return Expanded(
+                                child: RadioListTile<FeedbackType>(
+                                  title: Text(type.value),
+                                  value: type,
+                                  groupValue: selectedType,
+                                  onChanged: state is SentFeedbackLoadingState
+                                      ? null
+                                      : (FeedbackType? value) {
+                                          setState(() {
+                                            selectedType = value!;
+                                          });
+                                        },
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                          const SizedBox(height: 16),
+                          FormTextfield(
+                            maxWidth: double.infinity,
+                            controller: emailController,
+                            disabled: state is SentFeedbackLoadingState,
+                            placeholder: "E-Mail Adresse (optional)",
+                            validator: validator.validateEmail,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          const SizedBox(height: 16),
                           FormTextfield(
                             maxWidth: double.infinity,
                             controller: titleController,

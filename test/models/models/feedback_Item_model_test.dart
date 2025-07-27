@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/infrastructure/models/feedback_item_model.dart';
@@ -14,11 +15,13 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
+        type: "Feedback",
       );
       const expectedResult = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
+        type: "Feedback",
         downloadImageUrls: ["https://example.com/image.jpg"],
       );
       // When
@@ -36,11 +39,13 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
+        type: "Feedback",
       );
       const expectedResult = FeedbackItemModel(
         id: "1",
         title: "Test Feedback",
         description: "Test Description",
+        type: "Feedback",
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
       // When
@@ -58,14 +63,17 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: "Feedback",
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
 
       final expectedResult = {
         "id": "1",
+        "email": null,
         "title": "Test Feedback",
         "description": "This is a test feedback description",
+        "type": "Feedback",
         "downloadImageUrls": ["https://example.com/image.jpg"],
         "thumbnailDownloadURLs": ["https://example.com/thumbnail.jpg"],
         "userAgent": null,
@@ -84,12 +92,15 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: "Feedback",
       );
 
       final expectedResult = {
         "id": "1",
+        "email": null,
         "title": "Test Feedback",
         "description": "This is a test feedback description",
+        "type": "Feedback",
         "downloadImageUrls": null,
         "thumbnailDownloadURLs": null,
         "userAgent": null,
@@ -115,6 +126,7 @@ void main() {
         id: "",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: null,
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
@@ -135,6 +147,7 @@ void main() {
         id: "",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: null,
       );
       // When
       final result = FeedbackItemModel.fromMap(map);
@@ -153,6 +166,7 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: "Feedback",
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
@@ -163,6 +177,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
@@ -186,6 +201,7 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: "Feedback",
         createdAt: testTimestamp,
       );
 
@@ -193,6 +209,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
         createdAt: testDate,
       );
 
@@ -211,6 +228,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
@@ -224,6 +242,7 @@ void main() {
       expect(result.id, "1");
       expect(result.title, "Test Feedback");
       expect(result.description, "This is a test feedback description");
+      expect(result.type, "Feedback");
       expect(result.downloadImageUrls, ["https://example.com/image.jpg"]);
       expect(
           result.thumbnailDownloadURLs, ["https://example.com/thumbnail.jpg"]);
@@ -239,6 +258,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
       );
 
       // When
@@ -248,6 +268,7 @@ void main() {
       expect(result.id, "1");
       expect(result.title, "Test Feedback");
       expect(result.description, "This is a test feedback description");
+      expect(result.type, "Feedback");
       expect(result.downloadImageUrls, null);
       expect(result.thumbnailDownloadURLs, null);
       expect(result.userAgent, null);
@@ -268,6 +289,7 @@ void main() {
         id: "feedback-id-123",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: null,
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
@@ -285,6 +307,7 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: "Feedback",
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
@@ -293,6 +316,7 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: "Feedback",
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
         userAgent: "test-agent",
@@ -307,11 +331,13 @@ void main() {
         id: "1",
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: "Feedback",
       );
       const feedback2 = FeedbackItemModel(
         id: "1",
         title: "Different Feedback",
         description: "This is a test feedback description",
+        type: "Feedback",
       );
       // Then
       expect(feedback1, isNot(equals(feedback2)));
