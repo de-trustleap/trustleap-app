@@ -92,6 +92,12 @@ class AdminFeedbackListTile extends StatelessWidget {
           ),
         ]),
         children: [
+          Text("Art des Feedbacks:",
+              style: themeData.textTheme.bodyMedium!
+                  .copyWith(fontWeight: FontWeight.bold)),
+          Text(feedbackItem.type?.name ?? "",
+              style: themeData.textTheme.bodyMedium),
+          const SizedBox(height: 12),
           Text(localizations.admin_feedback_description_label,
               style: themeData.textTheme.bodyMedium!
                   .copyWith(fontWeight: FontWeight.bold)),
@@ -163,6 +169,14 @@ class AdminFeedbackListTile extends StatelessWidget {
               ),
             ),
           ],
+          if (feedbackItem.email != null && feedbackItem.email != "") ...[
+            const SizedBox(height: 12),
+            Text("Einsender:",
+                style: themeData.textTheme.bodyMedium!
+                    .copyWith(fontWeight: FontWeight.bold)),
+            Text(feedbackItem.email ?? "",
+                style: themeData.textTheme.bodyMedium)
+          ]
         ]);
   }
 }

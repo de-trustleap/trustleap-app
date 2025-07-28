@@ -43,6 +43,8 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
         "id": feedbackModel.id,
         "title": feedbackModel.title,
         "description": feedbackModel.description,
+        "email": feedbackModel.email,
+        "type": feedbackModel.type,
         "images": encodedImages,
         "userAgent": userAgent
       });
@@ -66,6 +68,14 @@ class FeedbackRepositoryImplementation implements FeedbackRepository {
       if (feedbackItems.isEmpty) {
         return left(NotFoundFailure());
       }
+
+      feedbackItems.sort((a, b) {
+        if (a.createdAt == null && b.createdAt == null) return 0;
+        if (a.createdAt == null) return 1;
+        if (b.createdAt == null) return -1;
+        return b.createdAt!.compareTo(a.createdAt!);
+      });
+
       return right(feedbackItems);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
