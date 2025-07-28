@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:finanzbegleiter/presentation/feedback/feedback_image_upload.dart';
@@ -34,6 +35,12 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
   FeedbackType selectedType = FeedbackType.feedback;
 
   @override
+  void initState() {
+    super.initState();
+    Modular.get<FeedbackCubit>().getUser();
+  }
+
+  @override
   void dispose() {
     emailController.dispose();
     titleController.dispose();
@@ -55,7 +62,9 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
     if (formKey.currentState?.validate() ?? false) {
       final feedback = FeedbackItem(
         id: UniqueID(),
-        email: emailController.text.trim().isEmpty ? null : emailController.text.trim(),
+        email: emailController.text.trim().isEmpty
+            ? null
+            : emailController.text.trim(),
         title: titleController.text,
         description: descriptionController.text,
         type: selectedType,
@@ -81,6 +90,10 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
             localization.feedback_success_message,
             SnackBarType.success,
           );
+        } else if (state is FeedbackGetUserSuccessState) {
+          if (state.user.email != null && state.user.email!.isNotEmpty) {
+            emailController.text = state.user.email!;
+          }
         }
       },
       builder: (context, state) {
@@ -149,13 +162,23 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                             }).toList(),
                           ),
                           const SizedBox(height: 16),
-                          FormTextfield(
-                            maxWidth: double.infinity,
-                            controller: emailController,
-                            disabled: state is SentFeedbackLoadingState,
-                            placeholder: "E-Mail Adresse (optional)",
-                            validator: validator.validateEmail,
-                            keyboardType: TextInputType.emailAddress,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: FormTextfield(
+                                  maxWidth: double.infinity,
+                                  controller: emailController,
+                                  disabled: state is SentFeedbackLoadingState,
+                                  placeholder: "E-Mail Adresse (optional)",
+                                  validator: validator.validateEmail,
+                                  keyboardType: TextInputType.emailAddress,
+                                ),
+                              ),
+                              if (state is FeedbackGetUserLoadingState) ...[
+                                const SizedBox(width: 8),
+                                const LoadingIndicator(size: 16),
+                              ],
+                            ],
                           ),
                           const SizedBox(height: 16),
                           FormTextfield(
