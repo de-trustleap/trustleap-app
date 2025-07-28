@@ -137,7 +137,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            "Kategorie",
+                            localization.feedback_category_label,
                             style: themeData.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w500,
                             ),
@@ -169,7 +169,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                                   maxWidth: double.infinity,
                                   controller: emailController,
                                   disabled: state is SentFeedbackLoadingState,
-                                  placeholder: "E-Mail Adresse (optional)",
+                                  placeholder: localization.feedback_email_placeholder,
                                   validator: validator.validateEmail,
                                   keyboardType: TextInputType.emailAddress,
                                 ),

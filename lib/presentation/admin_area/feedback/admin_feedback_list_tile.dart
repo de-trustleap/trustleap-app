@@ -92,7 +92,7 @@ class AdminFeedbackListTile extends StatelessWidget {
           ),
         ]),
         children: [
-          Text("Art des Feedbacks:",
+          Text(localizations.admin_feedback_type_label,
               style: themeData.textTheme.bodyMedium!
                   .copyWith(fontWeight: FontWeight.bold)),
           Text(feedbackItem.type?.name ?? "",
@@ -171,7 +171,7 @@ class AdminFeedbackListTile extends StatelessWidget {
           ],
           if (feedbackItem.email != null && feedbackItem.email != "") ...[
             const SizedBox(height: 12),
-            Text("Einsender:",
+            Text(localizations.admin_feedback_sender_label,
                 style: themeData.textTheme.bodyMedium!
                     .copyWith(fontWeight: FontWeight.bold)),
             Text(feedbackItem.email ?? "",

@@ -3897,6 +3897,18 @@ abstract class AppLocalizations {
   /// **'Feedback sent successfully!'**
   String get feedback_success_message;
 
+  /// Placeholder for the email field in feedback dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Email address (optional)'**
+  String get feedback_email_placeholder;
+
+  /// Label for the category selection in feedback dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get feedback_category_label;
+
   /// Title of EmptyPage when no feedback is available
   ///
   /// In en, this message translates to:
@@ -3962,6 +3974,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'User Feedback'**
   String get admin_feedback_list_title;
+
+  /// Label for the type of feedback in the feedback tile
+  ///
+  /// In en, this message translates to:
+  /// **'Type of feedback:'**
+  String get admin_feedback_type_label;
+
+  /// Label for the sender in the feedback tile
+  ///
+  /// In en, this message translates to:
+  /// **'Sender:'**
+  String get admin_feedback_sender_label;
 
   /// Dropdown option for all landing pages
   ///

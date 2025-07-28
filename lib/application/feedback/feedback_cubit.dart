@@ -31,9 +31,3 @@ class FeedbackCubit extends Cubit<FeedbackState> {
         (user) => emit(FeedbackGetUserSuccessState(user: user)));
   }
 }
-
-// TODO: GET USER CALL EINBINDEN UND EMAIL FELD VORAUSFÜLLEN, FALLS VORHANDEN. (FERTIG)
-// TODO: TESTS AKTUALISIEREN UND ERWEITERN (FERTIG)
-// TODO: BACKEND ARBEITEN
-// TODO: ADMIN AREA
-// TODO: LOCALIZATION

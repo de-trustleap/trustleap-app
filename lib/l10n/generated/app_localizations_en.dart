@@ -2268,6 +2268,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get feedback_success_message => 'Feedback sent successfully!';
 
   @override
+  String get feedback_email_placeholder => 'Email address (optional)';
+
+  @override
+  String get feedback_category_label => 'Category';
+
+  @override
   String get admin_feedback_no_feedback_title => 'No feedback found';
 
   @override
@@ -2301,6 +2307,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get admin_feedback_list_title => 'User Feedback';
+
+  @override
+  String get admin_feedback_type_label => 'Type of feedback:';
+
+  @override
+  String get admin_feedback_sender_label => 'Sender:';
 
   @override
   String get dashboard_recommendations_all_landingpages => 'All';
