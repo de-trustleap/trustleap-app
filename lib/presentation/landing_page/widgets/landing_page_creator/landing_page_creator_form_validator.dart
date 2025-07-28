@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 
 class LandingPageCreatorFormValidator {
@@ -25,8 +26,6 @@ class LandingPageCreatorFormValidator {
   }
 
   String? validateLandingPageContactEmailAddress(String? input) {
-    const emailRegex =
-        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$";
     if (input == null || input.isEmpty) {
       return localization.auth_validation_missing_email;
     } else if (RegExp(emailRegex).hasMatch(input.trim())) {

@@ -119,3 +119,15 @@ enum PromoterSearchOption {
   final String value;
   const PromoterSearchOption(this.value);
 }
+
+/// Email validation regex pattern used across the app
+const String emailRegex =
+    r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$";
+
+enum FeedbackType {
+  feedback("Feedback"),
+  bug("Fehler");
+
+  final String value;
+  const FeedbackType(this.value);
+}

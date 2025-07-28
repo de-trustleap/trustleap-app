@@ -2613,6 +2613,14 @@
     "@feedback_success_message": {
         "description": "Success message after sending feedback"
     },
+    "feedback_email_placeholder": "Email address (optional)",
+    "@feedback_email_placeholder": {
+        "description": "Placeholder for the email field in feedback dialog"
+    },
+    "feedback_category_label": "Category",
+    "@feedback_category_label": {
+        "description": "Label for the category selection in feedback dialog"
+    },
     "admin_feedback_no_feedback_title": "No feedback found",
     "@admin_feedback_no_feedback_title": {
         "description": "Title of EmptyPage when no feedback is available"
@@ -2656,6 +2664,14 @@
     "admin_feedback_list_title": "User Feedback",
     "@admin_feedback_list_title": {
         "description": "Title of the Admin Feedback List"
+    },
+    "admin_feedback_type_label": "Type of feedback:",
+    "@admin_feedback_type_label": {
+        "description": "Label for the type of feedback in the feedback tile"
+    },
+    "admin_feedback_sender_label": "Sender:",
+    "@admin_feedback_sender_label": {
+        "description": "Label for the sender in the feedback tile"
     },
     "dashboard_recommendations_all_landingpages": "All",
     "@dashboard_recommendations_all_landingpages": {

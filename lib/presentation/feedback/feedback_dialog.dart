@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
@@ -8,6 +9,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:finanzbegleiter/presentation/feedback/feedback_image_upload.dart';
@@ -25,13 +27,22 @@ class FeedbackDialog extends StatefulWidget {
 }
 
 class _FeedbackDialogState extends State<FeedbackDialog> {
+  final emailController = TextEditingController();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<Uint8List> selectedImages = [];
+  FeedbackType selectedType = FeedbackType.feedback;
+
+  @override
+  void initState() {
+    super.initState();
+    Modular.get<FeedbackCubit>().getUser();
+  }
 
   @override
   void dispose() {
+    emailController.dispose();
     titleController.dispose();
     descriptionController.dispose();
     super.dispose();
@@ -51,8 +62,12 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
     if (formKey.currentState?.validate() ?? false) {
       final feedback = FeedbackItem(
         id: UniqueID(),
+        email: emailController.text.trim().isEmpty
+            ? null
+            : emailController.text.trim(),
         title: titleController.text,
         description: descriptionController.text,
+        type: selectedType,
       );
       Modular.get<FeedbackCubit>().sendFeedback(feedback, selectedImages);
     }
@@ -75,6 +90,10 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
             localization.feedback_success_message,
             SnackBarType.success,
           );
+        } else if (state is FeedbackGetUserSuccessState) {
+          if (state.user.email != null && state.user.email!.isNotEmpty) {
+            emailController.text = state.user.email!;
+          }
         }
       },
       builder: (context, state) {
@@ -117,6 +136,51 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          Text(
+                            localization.feedback_category_label,
+                            style: themeData.textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: FeedbackType.values.map((type) {
+                              return Expanded(
+                                child: RadioListTile<FeedbackType>(
+                                  title: Text(type.value),
+                                  value: type,
+                                  groupValue: selectedType,
+                                  onChanged: state is SentFeedbackLoadingState
+                                      ? null
+                                      : (FeedbackType? value) {
+                                          setState(() {
+                                            selectedType = value!;
+                                          });
+                                        },
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: FormTextfield(
+                                  maxWidth: double.infinity,
+                                  controller: emailController,
+                                  disabled: state is SentFeedbackLoadingState,
+                                  placeholder: localization.feedback_email_placeholder,
+                                  validator: validator.validateEmail,
+                                  keyboardType: TextInputType.emailAddress,
+                                ),
+                              ),
+                              if (state is FeedbackGetUserLoadingState) ...[
+                                const SizedBox(width: 8),
+                                const LoadingIndicator(size: 16),
+                              ],
+                            ],
+                          ),
+                          const SizedBox(height: 16),
                           FormTextfield(
                             maxWidth: double.infinity,
                             controller: titleController,

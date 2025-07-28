@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,11 +11,13 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Original Title",
         description: "Original Description",
+        type: FeedbackType.feedback,
       );
       final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "New Title",
         description: "Original Description",
+        type: FeedbackType.feedback,
       );
       // When
       final result = feedback.copyWith(title: "New Title");
@@ -30,11 +33,13 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Original Description",
+        type: FeedbackType.feedback,
       );
       final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "New Description",
+        type: FeedbackType.feedback,
       );
       // When
       final result = feedback.copyWith(description: "New Description");
@@ -50,11 +55,13 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
+        type: FeedbackType.feedback,
       );
       final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
+        type: FeedbackType.feedback,
         downloadImageUrls: ["https://example.com/image.jpg"],
       );
       // When
@@ -72,11 +79,13 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Original Title",
         description: "Original Description",
+        type: FeedbackType.feedback,
       );
       final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("2"),
         title: "New Title",
         description: "New Description",
+        type: FeedbackType.feedback,
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
@@ -100,12 +109,14 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
+        type: FeedbackType.feedback,
         downloadImageUrls: ["https://example.com/image.jpg"],
       );
       final expectedResult = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Title",
         description: "Test Description",
+        type: FeedbackType.feedback,
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
@@ -124,6 +135,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
@@ -132,6 +144,7 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
         downloadImageUrls: ["https://example.com/image.jpg"],
         thumbnailDownloadURLs: ["https://example.com/thumbnail.jpg"],
       );
@@ -145,12 +158,14 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
       );
 
       final feedback2 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
       );
       // Then
       expect(feedback1, feedback2);
@@ -162,12 +177,14 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
       );
 
       final feedback2 = FeedbackItem(
         id: UniqueID.fromUniqueString("2"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
       );
       // Then
       expect(feedback1, isNot(equals(feedback2)));
@@ -179,12 +196,14 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
       );
 
       final feedback2 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Different Feedback",
         description: "This is a test feedback description",
+        type: FeedbackType.feedback,
       );
       // Then
       expect(feedback1, isNot(equals(feedback2)));
@@ -196,12 +215,14 @@ void main() {
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "Original description",
+        type: FeedbackType.feedback,
       );
 
       final feedback2 = FeedbackItem(
         id: UniqueID.fromUniqueString("1"),
         title: "Test Feedback",
         description: "Different description",
+        type: FeedbackType.feedback,
       );
       // Then
       expect(feedback1, isNot(equals(feedback2)));

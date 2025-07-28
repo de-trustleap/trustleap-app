@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/application/feedback/admin_feedback/admin_feedback_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
@@ -22,16 +23,18 @@ void main() {
   });
 
   group("AdminFeedbackCubit_GetFeedbackItems", () {
-    final testFeedbackItems = [
+    final testFeedbackItems = <FeedbackItem>[
       FeedbackItem(
         id: UniqueID.fromUniqueString("test-id-1"),
         title: "Test Feedback 1",
         description: "This is test feedback 1",
+        type: FeedbackType.feedback,
       ),
       FeedbackItem(
         id: UniqueID.fromUniqueString("test-id-2"),
         title: "Test Feedback 2",
         description: "This is test feedback 2",
+        type: FeedbackType.bug,
       ),
     ];
 
@@ -116,11 +119,12 @@ void main() {
 
   group("AdminFeedbackCubit_DeleteFeedback", () {
     const testFeedbackId = "test-feedback-id";
-    final testFeedbackItems = [
+    final testFeedbackItems = <FeedbackItem>[
       FeedbackItem(
         id: UniqueID.fromUniqueString("remaining-id"),
         title: "Remaining Feedback",
         description: "This feedback remains after deletion",
+        type: FeedbackType.feedback,
       ),
     ];
 
