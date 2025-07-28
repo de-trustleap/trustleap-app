@@ -6057,6 +6057,24 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get feedback_email_placeholder => (super.noSuchMethod(
+        Invocation.getter(#feedback_email_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_email_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_category_label => (super.noSuchMethod(
+        Invocation.getter(#feedback_category_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_category_label),
+        ),
+      ) as String);
+
+  @override
   String get admin_feedback_no_feedback_title => (super.noSuchMethod(
         Invocation.getter(#admin_feedback_no_feedback_title),
         returnValue: _i3.dummyValue<String>(
@@ -6152,6 +6170,24 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#admin_feedback_list_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_type_label => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_type_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_type_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_sender_label => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_sender_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_sender_label),
         ),
       ) as String);
 

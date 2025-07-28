@@ -20,15 +20,73 @@ void main() {
   });
 
   group("LegalsModel_FromMap", () {
-    test("check if map is successfully converted to model", () {
+    test("check if map with versioned structure is successfully converted to model", () {
       // Given
       final map = {
-        "avv": "Test",
-        "privacyPolicy": "Test",
-        "termsAndCondition": "Test"
+        "avvVersions": [
+          {"content": "Old AVV", "version": 1, "archivedAt": "2023-01-01"},
+          {"content": "Latest AVV", "version": 2, "archivedAt": "2023-02-01"},
+        ],
+        "privacyPolicyVersions": [
+          {"content": "Latest Privacy Policy", "version": 1, "archivedAt": "2023-01-01"},
+        ],
+        "termsAndConditionsVersions": [
+          {"content": "Old Terms", "version": 1, "archivedAt": "2023-01-01"},
+          {"content": "Latest Terms", "version": 3, "archivedAt": "2023-03-01"},
+          {"content": "Middle Terms", "version": 2, "archivedAt": "2023-02-01"},
+        ]
       };
       final expectedResult = LegalsModel(
-          avv: "Test", privacyPolicy: "Test", termsAndCondition: "Test");
+          avv: "Latest AVV", 
+          privacyPolicy: "Latest Privacy Policy", 
+          termsAndCondition: "Latest Terms");
+      // When
+      final result = LegalsModel.fromMap(map);
+      // Then
+      expect(expectedResult, result);
+    });
+
+    test("check if map with empty version arrays returns null values", () {
+      // Given
+      final map = {
+        "avvVersions": [],
+        "privacyPolicyVersions": [],
+        "termsAndConditionsVersions": []
+      };
+      final expectedResult = LegalsModel(
+          avv: null, 
+          privacyPolicy: null, 
+          termsAndCondition: null);
+      // When
+      final result = LegalsModel.fromMap(map);
+      // Then
+      expect(expectedResult, result);
+    });
+
+    test("check if map with null version arrays returns null values", () {
+      // Given
+      final map = {
+        "avvVersions": null,
+        "privacyPolicyVersions": null,
+        "termsAndConditionsVersions": null
+      };
+      final expectedResult = LegalsModel(
+          avv: null, 
+          privacyPolicy: null, 
+          termsAndCondition: null);
+      // When
+      final result = LegalsModel.fromMap(map);
+      // Then
+      expect(expectedResult, result);
+    });
+
+    test("check if map with missing version arrays returns null values", () {
+      // Given
+      final map = <String, dynamic>{};
+      final expectedResult = LegalsModel(
+          avv: null, 
+          privacyPolicy: null, 
+          termsAndCondition: null);
       // When
       final result = LegalsModel.fromMap(map);
       // Then
