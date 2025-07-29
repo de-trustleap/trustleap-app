@@ -168,14 +168,14 @@ class DashboardRecommendationsHelper {
     }
   }
 
-  static RecommendationTrend calculateTrend({
-    required DashboardRecommendationsGetRecosSuccessState state,
-    required String? selectedPromoterId,
-    required Role userRole,
-    required TimePeriod timePeriod,
-    String? selectedLandingPageId,
-    int? statusLevel,
-  }) {
+  static RecommendationTrend calculateTrend(
+      {required DashboardRecommendationsGetRecosSuccessState state,
+      required String? selectedPromoterId,
+      required Role userRole,
+      required TimePeriod timePeriod,
+      String? selectedLandingPageId,
+      int? statusLevel,
+      DateTime? now}) {
     final recommendations = getFilteredRecommendations(
       state: state,
       selectedPromoterId: selectedPromoterId,
@@ -183,28 +183,29 @@ class DashboardRecommendationsHelper {
       selectedLandingPageId: selectedLandingPageId,
     );
 
-    final now = DateTime.now();
+    final currentTime = now ?? DateTime.now();
     DateTime currentPeriodStart;
     DateTime previousPeriodStart;
     DateTime previousPeriodEnd;
 
     switch (timePeriod) {
       case TimePeriod.day:
-        currentPeriodStart = now.subtract(const Duration(hours: 24));
-        previousPeriodStart = now.subtract(const Duration(hours: 48));
-        previousPeriodEnd = now.subtract(const Duration(hours: 24));
+        currentPeriodStart = currentTime.subtract(const Duration(hours: 24));
+        previousPeriodStart = currentTime.subtract(const Duration(hours: 48));
+        previousPeriodEnd = currentTime.subtract(const Duration(hours: 24));
         break;
       case TimePeriod.week:
-        currentPeriodStart = now.subtract(const Duration(days: 7));
-        previousPeriodStart = now.subtract(const Duration(days: 14));
-        previousPeriodEnd = now.subtract(const Duration(days: 7));
+        currentPeriodStart = currentTime.subtract(const Duration(days: 7));
+        previousPeriodStart = currentTime.subtract(const Duration(days: 14));
+        previousPeriodEnd = currentTime.subtract(const Duration(days: 7));
         break;
       case TimePeriod.month:
       case TimePeriod.year:
-        currentPeriodStart = DateTime(now.year, now.month, 1);
-        final previousMonth = DateTime(now.year, now.month - 1, 1);
+        currentPeriodStart = DateTime(currentTime.year, currentTime.month, 1);
+        final previousMonth =
+            DateTime(currentTime.year, currentTime.month - 1, 1);
         previousPeriodStart = previousMonth;
-        previousPeriodEnd = DateTime(now.year, now.month, 1);
+        previousPeriodEnd = DateTime(currentTime.year, currentTime.month, 1);
         break;
     }
 

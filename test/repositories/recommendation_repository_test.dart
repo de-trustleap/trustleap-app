@@ -260,6 +260,7 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
           reason: "Test",
+          landingPageID: "test-landing-page",
           promoterName: "Test",
           serviceProviderName: "Test",
           success: true,

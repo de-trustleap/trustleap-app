@@ -86,17 +86,17 @@ void main() {
 
     test("should call repo if getRecommendationsCompany is called", () async {
       // Given
-      when(mockRecommendationRepo.getRecommendationsCompany(userID))
+      when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
           .thenAnswer((_) async => right(testPromoterRecommendations));
       when(mockLandingPageRepo.getAllLandingPages(["lp1", "lp2"]))
           .thenAnswer((_) async => right(testLandingPages));
 
       // When
       cubit.getRecommendationsCompany(userID);
-      await untilCalled(mockRecommendationRepo.getRecommendationsCompany(userID));
+      await untilCalled(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID));
 
       // Then
-      verify(mockRecommendationRepo.getRecommendationsCompany(userID));
+      verify(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID));
       verify(mockLandingPageRepo.getAllLandingPages(["lp1", "lp2"]));
       verifyNoMoreInteractions(mockRecommendationRepo);
       verifyNoMoreInteractions(mockLandingPageRepo);
@@ -113,7 +113,7 @@ void main() {
           filteredLandingPages: testLandingPages,
         )
       ];
-      when(mockRecommendationRepo.getRecommendationsCompany(userID))
+      when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
           .thenAnswer((_) async => right(testPromoterRecommendations));
       when(mockLandingPageRepo.getAllLandingPages(["lp1", "lp2"]))
           .thenAnswer((_) async => right(testLandingPages));
@@ -129,7 +129,7 @@ void main() {
         DashboardRecommendationsGetRecosLoadingState(),
         DashboardRecommendationsGetRecosFailureState(failure: BackendFailure())
       ];
-      when(mockRecommendationRepo.getRecommendationsCompany(userID))
+      when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
           .thenAnswer((_) async => left(BackendFailure()));
 
       // Then
@@ -143,7 +143,7 @@ void main() {
         DashboardRecommendationsGetRecosLoadingState(),
         DashboardRecommendationsGetRecosNotFoundFailureState()
       ];
-      when(mockRecommendationRepo.getRecommendationsCompany(userID))
+      when(mockRecommendationRepo.getRecommendationsCompanyWithArchived(userID))
           .thenAnswer((_) async => left(NotFoundFailure()));
 
       // Then

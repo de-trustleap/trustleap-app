@@ -1087,6 +1087,7 @@ void main() {
             selectedPromoterId: null,
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(3));
@@ -1117,6 +1118,7 @@ void main() {
             selectedPromoterId: null,
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(1));
@@ -1147,6 +1149,7 @@ void main() {
             selectedPromoterId: null,
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(2));
@@ -1181,6 +1184,7 @@ void main() {
             selectedPromoterId: null,
             userRole: Role.promoter,
             timePeriod: TimePeriod.week,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(4));
@@ -1211,6 +1215,7 @@ void main() {
             selectedPromoterId: null,
             userRole: Role.promoter,
             timePeriod: TimePeriod.month,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(3));
@@ -1244,6 +1249,7 @@ void main() {
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
             statusLevel: 2,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(2)); // rec1 (0) + rec2 (1) 
@@ -1273,6 +1279,7 @@ void main() {
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
             statusLevel: 1,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(3)); // rec1 (matching level) + rec2 (archived) + rec3 (archived)
@@ -1293,6 +1300,7 @@ void main() {
             selectedPromoterId: null,
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(0));
@@ -1319,6 +1327,7 @@ void main() {
             selectedPromoterId: null,
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(2));
@@ -1346,6 +1355,7 @@ void main() {
             selectedPromoterId: null,
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(0));
@@ -1377,6 +1387,7 @@ void main() {
             selectedPromoterId: null,
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(1)); // Only rec2 counted
@@ -1420,6 +1431,7 @@ void main() {
             selectedPromoterId: "promoter1",
             userRole: Role.company,
             timePeriod: TimePeriod.day,
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(1)); // Only rec1 from promoter1
@@ -1495,6 +1507,7 @@ void main() {
             userRole: Role.promoter,
             timePeriod: TimePeriod.day,
             selectedLandingPageId: "lp1",
+            now: now,
           );
 
           expect(result.currentPeriodCount, equals(1)); // Only rec1 matches landing page

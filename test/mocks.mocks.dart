@@ -1084,6 +1084,15 @@ class MockAppLocalizations extends _i1.Mock implements _i25.AppLocalizations {
       ) as String);
 
   @override
+  String get menuitems_legals => (super.noSuchMethod(
+        Invocation.getter(#menuitems_legals),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#menuitems_legals),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_error_view_title => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_error_view_title),
         returnValue: _i26.dummyValue<String>(
@@ -6741,6 +6750,142 @@ class MockAppLocalizations extends _i1.Mock implements _i25.AppLocalizations {
       ) as String);
 
   @override
+  String get dashboard_recommendations_filter_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_title),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_period => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_period),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_period),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_status => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_status),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_status),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_promoter => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_promoter),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_promoter),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_landingpage =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_landingpage),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_landingpage),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_tooltip => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_tooltip),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_title => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_title),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_avv_label => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_avv_label),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_avv_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_avv_placeholder => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_avv_placeholder),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_avv_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_privacy_policy_label => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_privacy_policy_label),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_privacy_policy_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_privacy_policy_placeholder => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_privacy_policy_placeholder),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_privacy_policy_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_terms_label => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_terms_label),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_terms_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_terms_placeholder => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_terms_placeholder),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_terms_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_save_button => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_save_button),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_save_button),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_save_success => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_save_success),
+        returnValue: _i26.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_save_success),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -8548,6 +8693,29 @@ class MockRecommendationRepository extends _i1.Mock
               this,
               Invocation.method(
                 #getRecommendationsCompany,
+                [userID],
+              ),
+            )),
+          ) as _i21.Future<
+              _i2.Either<_i30.DatabaseFailure,
+                  List<_i48.PromoterRecommendations>>>);
+
+  @override
+  _i21.Future<
+          _i2.Either<_i30.DatabaseFailure, List<_i48.PromoterRecommendations>>>
+      getRecommendationsCompanyWithArchived(String? userID) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #getRecommendationsCompanyWithArchived,
+              [userID],
+            ),
+            returnValue: _i21.Future<
+                _i2.Either<_i30.DatabaseFailure,
+                    List<_i48.PromoterRecommendations>>>.value(_FakeEither_0<
+                _i30.DatabaseFailure, List<_i48.PromoterRecommendations>>(
+              this,
+              Invocation.method(
+                #getRecommendationsCompanyWithArchived,
                 [userID],
               ),
             )),
