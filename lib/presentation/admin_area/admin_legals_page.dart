@@ -89,7 +89,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
           } else if (state is AdminSaveLegalsSuccessState) {
             showError = false;
             CustomSnackBar.of(context).showCustomSnackBar(
-                "Daten für Rechtliches erfolgreich gespeichert!");
+                localization.admin_legals_save_success);
           }
         },
         builder: (context, state) {
@@ -102,7 +102,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SelectableText(
-                      "Rechtliches",
+                      localization.admin_legals_title,
                       style: themeData.textTheme.headlineLarge!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
@@ -125,7 +125,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Auftragsverarbeitungsvertrag",
+                              localization.admin_legals_avv_label,
                               style: themeData.textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -134,7 +134,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
                             FormTextfield(
                               controller: avvController,
                               maxWidth: double.infinity,
-                              placeholder: "AVV eingeben...",
+                              placeholder: localization.admin_legals_avv_placeholder,
                               maxLines: 15,
                               minLines: 15,
                               disabled: false,
@@ -142,7 +142,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
                             ),
                             const SizedBox(height: 24),
                             Text(
-                              "Datenschutzerklärung",
+                              localization.admin_legals_privacy_policy_label,
                               style: themeData.textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -151,7 +151,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
                             FormTextfield(
                               controller: privacyPolicyController,
                               maxWidth: double.infinity,
-                              placeholder: "Datenschutzerklärung eingeben...",
+                              placeholder: localization.admin_legals_privacy_policy_placeholder,
                               maxLines: 15,
                               minLines: 15,
                               disabled: false,
@@ -159,7 +159,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
                             ),
                             const SizedBox(height: 24),
                             Text(
-                              "Allgemeine Geschäftsbedingungen",
+                              localization.admin_legals_terms_label,
                               style: themeData.textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -168,7 +168,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
                             FormTextfield(
                               controller: termsAndConditionController,
                               maxWidth: double.infinity,
-                              placeholder: "AGBs eingeben...",
+                              placeholder: localization.admin_legals_terms_placeholder,
                               maxLines: 15,
                               minLines: 15,
                               disabled: false,
@@ -176,7 +176,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
                             ),
                             const SizedBox(height: 32),
                             PrimaryButton(
-                              title: "Speichern",
+                              title: localization.admin_legals_save_button,
                               onTap: _onSave,
                               isLoading: state is AdminSaveLegalsLoadingState,
                               width: 200,

@@ -224,6 +224,10 @@
     "@menuitems_user_feedback": {
         "description": "Der Menüpunkt für das Nutzer Feedback"
     },
+    "menuitems_legals": "Rechtliches",
+    "@menuitems_legals": {
+        "description": "Der Menüpunkt für Rechtliches"
+    },
     "landingpage_overview_error_view_title": "Ein Fehler beim Abruf der Daten ist aufgetreten.",
     "@landingpage_overview_error_view_title": {
         "description": "Titel für die Error View die erscheint wenn ein Fehler beim Abruf der Daten aufgetreten ist"
@@ -2676,5 +2680,41 @@
     "dashboard_recommendations_all_landingpages": "Alle",
     "@dashboard_recommendations_all_landingpages": {
         "description": "Dropdown Option für alle Landingpages"
+    },
+    "admin_legals_title": "Rechtliches",
+    "@admin_legals_title": {
+        "description": "Titel der Admin Legals Seite"
+    },
+    "admin_legals_avv_label": "Auftragsverarbeitungsvertrag",
+    "@admin_legals_avv_label": {
+        "description": "Label für AVV Feld"
+    },
+    "admin_legals_avv_placeholder": "AVV eingeben...",
+    "@admin_legals_avv_placeholder": {
+        "description": "Placeholder für AVV Textfeld"
+    },
+    "admin_legals_privacy_policy_label": "Datenschutzerklärung",
+    "@admin_legals_privacy_policy_label": {
+        "description": "Label für Datenschutzerklärung Feld"
+    },
+    "admin_legals_privacy_policy_placeholder": "Datenschutzerklärung eingeben...",
+    "@admin_legals_privacy_policy_placeholder": {
+        "description": "Placeholder für Datenschutzerklärung Textfeld"
+    },
+    "admin_legals_terms_label": "Allgemeine Geschäftsbedingungen",
+    "@admin_legals_terms_label": {
+        "description": "Label für AGB Feld"
+    },
+    "admin_legals_terms_placeholder": "AGBs eingeben...",
+    "@admin_legals_terms_placeholder": {
+        "description": "Placeholder für AGB Textfeld"
+    },
+    "admin_legals_save_button": "Speichern",
+    "@admin_legals_save_button": {
+        "description": "Speichern Button Text"
+    },
+    "admin_legals_save_success": "Daten für Rechtliches erfolgreich gespeichert!",
+    "@admin_legals_save_success": {
+        "description": "Erfolgsmeldung nach dem Speichern"
     }
 }

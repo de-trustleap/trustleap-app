@@ -71,7 +71,7 @@ class _MenuItemState extends State<MenuItem> {
       case MenuItems.userFeedback:
         return localization.menuitems_user_feedback;
       case MenuItems.legals:
-        return "Rechtliches";
+        return localization.menuitems_legals;
       case MenuItems.none:
         return "";
     }

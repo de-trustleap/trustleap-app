@@ -434,6 +434,12 @@ abstract class AppLocalizations {
   /// **'User Feedback'**
   String get menuitems_user_feedback;
 
+  /// the menu entry for legal documents
+  ///
+  /// In en, this message translates to:
+  /// **'Legal'**
+  String get menuitems_legals;
+
   /// Title for the error view that appears if an error occurred while retrieving the data.
   ///
   /// In en, this message translates to:
@@ -3992,6 +3998,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All'**
   String get dashboard_recommendations_all_landingpages;
+
+  /// Title of the Admin Legals page
+  ///
+  /// In en, this message translates to:
+  /// **'Legal'**
+  String get admin_legals_title;
+
+  /// Label for AVV field
+  ///
+  /// In en, this message translates to:
+  /// **'Data Processing Agreement'**
+  String get admin_legals_avv_label;
+
+  /// Placeholder for AVV text field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter DPA...'**
+  String get admin_legals_avv_placeholder;
+
+  /// Label for Privacy Policy field
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get admin_legals_privacy_policy_label;
+
+  /// Placeholder for Privacy Policy text field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Privacy Policy...'**
+  String get admin_legals_privacy_policy_placeholder;
+
+  /// Label for Terms field
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions'**
+  String get admin_legals_terms_label;
+
+  /// Placeholder for Terms text field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Terms and Conditions...'**
+  String get admin_legals_terms_placeholder;
+
+  /// Save button text
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get admin_legals_save_button;
+
+  /// Success message after saving
+  ///
+  /// In en, this message translates to:
+  /// **'Legal data successfully saved!'**
+  String get admin_legals_save_success;
 }
 
 class _AppLocalizationsDelegate
