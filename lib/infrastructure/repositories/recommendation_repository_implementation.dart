@@ -687,20 +687,18 @@ class RecommendationRepositoryImplementation
 
   RecommendationItem _convertArchivedToRecommendationItem(
       ArchivedRecommendationItem archived) {
-    // Determine status level based on success field
     StatusLevel statusLevel;
     if (archived.success == true) {
       statusLevel = StatusLevel.successful;
     } else if (archived.success == false) {
       statusLevel = StatusLevel.failed;
     } else {
-      statusLevel = StatusLevel.recommendationSend; // Default status
+      statusLevel = StatusLevel.recommendationSend;
     }
 
-    // Create status timestamps map
     final Map<int, DateTime?> statusTimestamps = {
-      0: archived.createdAt, // recommendationSend
-      5: archived.finishedTimeStamp, // finished (successful/failed)
+      0: archived.createdAt,
+      5: archived.finishedTimeStamp,
     };
 
     return RecommendationItem(
@@ -708,14 +706,14 @@ class RecommendationRepositoryImplementation
       name: archived.name,
       reason: archived.reason,
       landingPageID: archived.landingPageID,
-      promotionTemplate: null, // Not available in archived
+      promotionTemplate: null,
       promoterName: archived.promoterName,
       serviceProviderName: archived.serviceProviderName,
-      defaultLandingPageID: null, // Not available in archived
+      defaultLandingPageID: null,
       statusLevel: statusLevel,
       statusTimestamps: statusTimestamps,
       userID: archived.userID,
-      promoterImageDownloadURL: null, // Not available in archived
+      promoterImageDownloadURL: null,
       createdAt: archived.createdAt ?? DateTime.now(),
       expiresAt:
           archived.expiresAt ?? DateTime.now().add(const Duration(days: 14)),
