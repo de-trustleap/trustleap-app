@@ -20,7 +20,7 @@ class DashboardRecommendationsCubit
   void getRecommendationsCompany(String userID) async {
     emit(DashboardRecommendationsGetRecosLoadingState());
     final failureOrSuccess =
-        await recommendationRepo.getRecommendationsCompany(userID);
+        await recommendationRepo.getRecommendationsCompanyWithArchived(userID);
     failureOrSuccess.fold(
         (failure) => failure is NotFoundFailure
             ? emit(DashboardRecommendationsGetRecosNotFoundFailureState())
@@ -114,3 +114,5 @@ class DashboardRecommendationsCubit
     );
   }
 }
+
+// TODO: TRENDPFEIL PROZENTZAHL BERECHNEN

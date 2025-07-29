@@ -28,4 +28,6 @@ abstract class RecommendationRepository {
   void markAsViewed(String recommendationID, LastViewed lastViewed);
   Future<Either<DatabaseFailure, List<PromoterRecommendations>>> getRecommendationsCompany(
       String userID);
+  Future<Either<DatabaseFailure, List<PromoterRecommendations>>> getRecommendationsCompanyWithArchived(
+      String userID);
 }
