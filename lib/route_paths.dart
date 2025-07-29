@@ -6,6 +6,7 @@ class RoutePaths {
   static const String companyRequestDetails = "/company-request-details";
   static const String registrationCodes = "/registration-codes";
   static const String userFeedback = "/user-feedback";
+  static const String legals = "/legals";
 
   static const String homePath = "/home";
   static const String dashboardPath = "/dashboard";

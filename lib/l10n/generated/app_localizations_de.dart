@@ -191,6 +191,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get menuitems_user_feedback => 'Nutzer Feedback';
 
   @override
+  String get menuitems_legals => 'Rechtliches';
+
+  @override
   String get landingpage_overview_error_view_title =>
       'Ein Fehler beim Abruf der Daten ist aufgetreten.';
 
@@ -2359,4 +2362,33 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get dashboard_recommendations_all_landingpages => 'Alle';
+
+  @override
+  String get admin_legals_title => 'Rechtliches';
+
+  @override
+  String get admin_legals_avv_label => 'Auftragsverarbeitungsvertrag';
+
+  @override
+  String get admin_legals_avv_placeholder => 'AVV eingeben...';
+
+  @override
+  String get admin_legals_privacy_policy_label => 'Datenschutzerklärung';
+
+  @override
+  String get admin_legals_privacy_policy_placeholder =>
+      'Datenschutzerklärung eingeben...';
+
+  @override
+  String get admin_legals_terms_label => 'Allgemeine Geschäftsbedingungen';
+
+  @override
+  String get admin_legals_terms_placeholder => 'AGBs eingeben...';
+
+  @override
+  String get admin_legals_save_button => 'Speichern';
+
+  @override
+  String get admin_legals_save_success =>
+      'Daten für Rechtliches erfolgreich gespeichert!';
 }

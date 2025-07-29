@@ -27,13 +27,34 @@ class LegalsModel extends Equatable {
 
   factory LegalsModel.fromMap(Map<String, dynamic> map) {
     return LegalsModel(
-      avv: map['avv'] != null ? map['avv'] as String : null,
-      privacyPolicy:
-          map['privacyPolicy'] != null ? map['privacyPolicy'] as String : null,
-      termsAndCondition: map['termsAndCondition'] != null
-          ? map['termsAndCondition'] as String
-          : null,
+      avv: _getLatestVersionContent(map['avvVersions']),
+      privacyPolicy: _getLatestVersionContent(map['privacyPolicyVersions']),
+      termsAndCondition:
+          _getLatestVersionContent(map['termsAndConditionsVersions']),
     );
+  }
+
+  static String? _getLatestVersionContent(dynamic versions) {
+    if (versions == null || versions is! List || versions.isEmpty) {
+      return null;
+    }
+
+    if (versions.isEmpty) return null;
+
+    Map<String, dynamic>? latestVersion;
+    int highestVersion = 0;
+
+    for (final version in versions) {
+      if (version is Map<String, dynamic>) {
+        final versionNumber = version['version'] as int? ?? 0;
+        if (versionNumber > highestVersion) {
+          highestVersion = versionNumber;
+          latestVersion = version;
+        }
+      }
+    }
+
+    return latestVersion?['content'] as String?;
   }
 
   Legals toDomain() {
@@ -41,6 +62,14 @@ class LegalsModel extends Equatable {
       avv: avv,
       privacyPolicy: privacyPolicy,
       termsAndCondition: termsAndCondition,
+    );
+  }
+
+  factory LegalsModel.fromDomain(Legals legals) {
+    return LegalsModel(
+      avv: legals.avv,
+      privacyPolicy: legals.privacyPolicy,
+      termsAndCondition: legals.termsAndCondition,
     );
   }
 

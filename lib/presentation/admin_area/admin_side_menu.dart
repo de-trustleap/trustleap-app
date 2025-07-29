@@ -41,6 +41,14 @@ class AdminSideMenu extends StatelessWidget {
                   type: MenuItems.userFeedback,
                   isCollapsed: collapsed,
                   animationController: animationController,
+                  isAdmin: true),
+              const SizedBox(height: 20),
+              MenuItem(
+                  path: RoutePaths.legals,
+                  icon: Icons.document_scanner,
+                  type: MenuItems.legals,
+                  isCollapsed: collapsed,
+                  animationController: animationController,
                   isAdmin: true)
             ])
           ]);
