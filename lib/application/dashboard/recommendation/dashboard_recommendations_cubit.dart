@@ -145,5 +145,3 @@ class DashboardRecommendationsCubit
     );
   }
 }
-
-// TODO: LOCALIZATION

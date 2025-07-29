@@ -51,7 +51,7 @@ class _DashboardPromotersState extends State<DashboardPromoters> {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  Text("Zeitraum",
+                  Text(localization.dashboard_recommendations_filter_period,
                       style: themeData.textTheme.bodySmall!
                           .copyWith(fontWeight: FontWeight.bold)),
                   const SizedBox(width: 4),
