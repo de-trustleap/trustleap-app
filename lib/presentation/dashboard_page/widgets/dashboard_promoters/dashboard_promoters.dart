@@ -5,8 +5,8 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters_chart.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -50,6 +50,10 @@ class _DashboardPromotersState extends State<DashboardPromoters> {
               const SizedBox(height: 16),
               Row(
                 children: [
+                  Text("Zeitraum",
+                      style: themeData.textTheme.bodySmall!
+                          .copyWith(fontWeight: FontWeight.bold)),
+                  const SizedBox(width: 4),
                   UnderlinedDropdown<TimePeriod>(
                     value: _selectedTimePeriod,
                     items: [TimePeriod.week, TimePeriod.month, TimePeriod.year]

@@ -3999,6 +3999,42 @@ abstract class AppLocalizations {
   /// **'All'**
   String get dashboard_recommendations_all_landingpages;
 
+  /// Title for the dashboard recommendations filter popup
+  ///
+  /// In en, this message translates to:
+  /// **'Filter Recommendations'**
+  String get dashboard_recommendations_filter_title;
+
+  /// Label for the period filter
+  ///
+  /// In en, this message translates to:
+  /// **'Period'**
+  String get dashboard_recommendations_filter_period;
+
+  /// Label for the status filter
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get dashboard_recommendations_filter_status;
+
+  /// Label for the promoter filter
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter'**
+  String get dashboard_recommendations_filter_promoter;
+
+  /// Label for the landing page filter
+  ///
+  /// In en, this message translates to:
+  /// **'Landing Page'**
+  String get dashboard_recommendations_filter_landingpage;
+
+  /// Tooltip for the filter button
+  ///
+  /// In en, this message translates to:
+  /// **'Open filter'**
+  String get dashboard_recommendations_filter_tooltip;
+
   /// Title of the Admin Legals page
   ///
   /// In en, this message translates to:

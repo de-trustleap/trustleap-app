@@ -2321,6 +2321,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard_recommendations_all_landingpages => 'All';
 
   @override
+  String get dashboard_recommendations_filter_title => 'Filter Recommendations';
+
+  @override
+  String get dashboard_recommendations_filter_period => 'Period';
+
+  @override
+  String get dashboard_recommendations_filter_status => 'Status';
+
+  @override
+  String get dashboard_recommendations_filter_promoter => 'Promoter';
+
+  @override
+  String get dashboard_recommendations_filter_landingpage => 'Landing Page';
+
+  @override
+  String get dashboard_recommendations_filter_tooltip => 'Open filter';
+
+  @override
   String get admin_legals_title => 'Legal';
 
   @override
