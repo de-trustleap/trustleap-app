@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/legals.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
@@ -85,6 +86,10 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
             avvController.clear();
             privacyPolicyController.clear();
             termsAndConditionController.clear();
+          } else if (state is AdminSaveLegalsSuccessState) {
+            showError = false;
+            CustomSnackBar.of(context).showCustomSnackBar(
+                "Daten für Rechtliches erfolgreich gespeichert!");
           }
         },
         builder: (context, state) {
@@ -196,9 +201,3 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
     );
   }
 }
-
-// TODO: SAVE LEGALS IMPLEMENTIEREN (FERTIG)
-// TODO: SAVE LEGALS IN BACKEND IMPLEMENTIEREN MIT VERSIONIERUNG (FERTIG)
-// TODO: BEI SUCCESS STATE SNACKBAR ZEIGEN
-// TODO: TESTS ERWEITERN (FERTIG)
-// TODO: LOCALIZATION
