@@ -1027,5 +1027,481 @@ void main() {
         expect(result, equals("Letzte 24 Stunden: 1 Empfehlung"));
       });
     });
+
+    group("calculateTrend", () {
+      late DashboardRecommendationsGetRecosSuccessState state;
+      late DateTime now;
+
+      setUp(() {
+        now = DateTime(2024, 1, 15, 12, 0, 0); // Fixed time for consistent tests
+      });
+
+      UserRecommendation createRecommendation({
+        required String id,
+        required DateTime createdAt,
+        StatusLevel statusLevel = StatusLevel.recommendationSend,
+      }) {
+        return UserRecommendation(
+          id: UniqueID.fromUniqueString(id),
+          recoID: id,
+          userID: "user1",
+          priority: RecommendationPriority.medium,
+          notes: "Test",
+          recommendation: RecommendationItem(
+            id: id,
+            name: "Test",
+            reason: "Test",
+            landingPageID: "test",
+            promotionTemplate: "test",
+            promoterName: "Test",
+            serviceProviderName: "Test",
+            defaultLandingPageID: "test",
+            statusLevel: statusLevel,
+            statusTimestamps: {},
+            userID: "user1",
+            promoterImageDownloadURL: "test",
+            createdAt: createdAt,
+          ),
+        );
+      }
+
+      group("Day period", () {
+        test("should calculate positive trend when current period has more recommendations", () {
+          final recommendations = [
+            // Current period (last 24 hours): 3 recommendations
+            createRecommendation(id: "rec1", createdAt: now.subtract(Duration(hours: 2))),
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 12))),
+            createRecommendation(id: "rec3", createdAt: now.subtract(Duration(hours: 20))),
+            // Previous period (24-48 hours ago): 2 recommendations
+            createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 30))),
+            createRecommendation(id: "rec5", createdAt: now.subtract(Duration(hours: 40))),
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+          );
+
+          expect(result.currentPeriodCount, equals(3));
+          expect(result.previousPeriodCount, equals(2));
+          expect(result.percentageChange, equals(50.0)); // (3-2)/2 * 100 = 50%
+          expect(result.isIncreasing, isTrue);
+          expect(result.isDecreasing, isFalse);
+          expect(result.isStable, isFalse);
+        });
+
+        test("should calculate negative trend when current period has fewer recommendations", () {
+          final recommendations = [
+            // Current period (last 24 hours): 1 recommendation
+            createRecommendation(id: "rec1", createdAt: now.subtract(Duration(hours: 12))),
+            // Previous period (24-48 hours ago): 3 recommendations
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 30))),
+            createRecommendation(id: "rec3", createdAt: now.subtract(Duration(hours: 36))),
+            createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 42))),
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+          );
+
+          expect(result.currentPeriodCount, equals(1));
+          expect(result.previousPeriodCount, equals(3));
+          expect(result.percentageChange, closeTo(-66.67, 0.01)); // (1-3)/3 * 100 = -66.67%
+          expect(result.isIncreasing, isFalse);
+          expect(result.isDecreasing, isTrue);
+          expect(result.isStable, isFalse);
+        });
+
+        test("should calculate zero trend when both periods have same count", () {
+          final recommendations = [
+            // Current period (last 24 hours): 2 recommendations
+            createRecommendation(id: "rec1", createdAt: now.subtract(Duration(hours: 6))),
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 18))),
+            // Previous period (24-48 hours ago): 2 recommendations
+            createRecommendation(id: "rec3", createdAt: now.subtract(Duration(hours: 30))),
+            createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 42))),
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+          );
+
+          expect(result.currentPeriodCount, equals(2));
+          expect(result.previousPeriodCount, equals(2));
+          expect(result.percentageChange, equals(0.0));
+          expect(result.isIncreasing, isFalse);
+          expect(result.isDecreasing, isFalse);
+          expect(result.isStable, isTrue);
+        });
+      });
+
+      group("Week period", () {
+        test("should calculate trend for weekly data", () {
+          final recommendations = [
+            // Current period (last 7 days): 4 recommendations
+            createRecommendation(id: "rec1", createdAt: now.subtract(Duration(days: 1))),
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(days: 3))),
+            createRecommendation(id: "rec3", createdAt: now.subtract(Duration(days: 5))),
+            createRecommendation(id: "rec4", createdAt: now.subtract(Duration(days: 6))),
+            // Previous period (7-14 days ago): 2 recommendations
+            createRecommendation(id: "rec5", createdAt: now.subtract(Duration(days: 9))),
+            createRecommendation(id: "rec6", createdAt: now.subtract(Duration(days: 12))),
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.week,
+          );
+
+          expect(result.currentPeriodCount, equals(4));
+          expect(result.previousPeriodCount, equals(2));
+          expect(result.percentageChange, equals(100.0)); // (4-2)/2 * 100 = 100%
+          expect(result.isIncreasing, isTrue);
+        });
+      });
+
+      group("Month period", () {
+        test("should calculate trend for monthly data", () {
+          final recommendations = [
+            // Current month: 3 recommendations
+            createRecommendation(id: "rec1", createdAt: DateTime(2024, 1, 5)),
+            createRecommendation(id: "rec2", createdAt: DateTime(2024, 1, 10)),
+            createRecommendation(id: "rec3", createdAt: DateTime(2024, 1, 14)),
+            // Previous month: 1 recommendation
+            createRecommendation(id: "rec4", createdAt: DateTime(2023, 12, 15)),
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.month,
+          );
+
+          expect(result.currentPeriodCount, equals(3));
+          expect(result.previousPeriodCount, equals(1));
+          expect(result.percentageChange, equals(200.0)); // (3-1)/1 * 100 = 200%
+          expect(result.isIncreasing, isTrue);
+        });
+      });
+
+      group("Status level filtering", () {
+        test("should filter recommendations by status level for active recommendations", () {
+          final recommendations = [
+            // Current period
+            createRecommendation(id: "rec1", createdAt: now.subtract(Duration(hours: 12)), statusLevel: StatusLevel.recommendationSend), // index 0
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 12)), statusLevel: StatusLevel.linkClicked),        // index 1
+            createRecommendation(id: "rec3", createdAt: now.subtract(Duration(hours: 12)), statusLevel: StatusLevel.contactFormSent),    // index 2
+            // Previous period
+            createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 36)), statusLevel: StatusLevel.recommendationSend), // index 0
+            createRecommendation(id: "rec5", createdAt: now.subtract(Duration(hours: 36)), statusLevel: StatusLevel.linkClicked),        // index 1
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          // Test filtering for statusLevel 2 - should include statusLevel <= 2
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+            statusLevel: 2,
+          );
+
+          expect(result.currentPeriodCount, equals(2)); // rec1 (0) + rec2 (1) 
+          expect(result.previousPeriodCount, equals(2)); // rec4 (0) + rec5 (1)
+          expect(result.percentageChange, equals(0.0));
+        });
+
+        test("should include archived recommendations (successful/failed) for all status levels", () {
+          final recommendations = [
+            // Current period - mix of active and archived
+            createRecommendation(id: "rec1", createdAt: now.subtract(Duration(hours: 12)), statusLevel: StatusLevel.recommendationSend),
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 12)), statusLevel: StatusLevel.successful), // archived
+            createRecommendation(id: "rec3", createdAt: now.subtract(Duration(hours: 12)), statusLevel: StatusLevel.failed),     // archived
+            // Previous period
+            createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 36)), statusLevel: StatusLevel.successful), // archived
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          // Test with statusLevel 1 (recommendationSend) - should include archived recs
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+            statusLevel: 1,
+          );
+
+          expect(result.currentPeriodCount, equals(3)); // rec1 (matching level) + rec2 (archived) + rec3 (archived)
+          expect(result.previousPeriodCount, equals(1)); // rec4 (archived)
+          expect(result.percentageChange, equals(200.0)); // (3-1)/1 * 100 = 200%
+        });
+      });
+
+      group("Edge cases", () {
+        test("should handle empty recommendations list", () {
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: [],
+            promoterRecommendations: null,
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+          );
+
+          expect(result.currentPeriodCount, equals(0));
+          expect(result.previousPeriodCount, equals(0));
+          expect(result.percentageChange, equals(0.0));
+          expect(result.isStable, isTrue);
+        });
+
+        test("should handle zero previous count with positive current count (100% increase)", () {
+          final recommendations = [
+            // Current period: 2 recommendations
+            createRecommendation(id: "rec1", createdAt: now.subtract(Duration(hours: 12))),
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 18))),
+            // Previous period: 0 recommendations (no data)
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+          );
+
+          expect(result.currentPeriodCount, equals(2));
+          expect(result.previousPeriodCount, equals(0));
+          expect(result.percentageChange, equals(100.0)); // Special case: 100% when previous is 0
+          expect(result.isIncreasing, isTrue);
+        });
+
+        test("should handle zero current count with positive previous count (negative trend)", () {
+          final recommendations = [
+            // Current period: 0 recommendations
+            // Previous period: 3 recommendations
+            createRecommendation(id: "rec1", createdAt: now.subtract(Duration(hours: 30))),
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 36))),
+            createRecommendation(id: "rec3", createdAt: now.subtract(Duration(hours: 42))),
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+          );
+
+          expect(result.currentPeriodCount, equals(0));
+          expect(result.previousPeriodCount, equals(3));
+          expect(result.percentageChange, equals(-100.0)); // (0-3)/3 * 100 = -100%
+          expect(result.isDecreasing, isTrue);
+        });
+
+        test("should handle recommendations with null createdAt", () {
+          final recommendationsWithNullDate = [
+            UserRecommendation(
+              id: UniqueID.fromUniqueString("rec1"),
+              recoID: "rec1",
+              userID: "user1",
+              priority: RecommendationPriority.medium,
+              notes: "Test",
+              recommendation: null, // null recommendation
+            ),
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 12))),
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendationsWithNullDate,
+            promoterRecommendations: null,
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+          );
+
+          expect(result.currentPeriodCount, equals(1)); // Only rec2 counted
+          expect(result.previousPeriodCount, equals(0));
+          expect(result.percentageChange, equals(100.0));
+        });
+      });
+
+      group("Promoter filtering", () {
+        test("should filter by selected promoter for company user", () {
+          final promoter1 = CustomUser(
+            id: UniqueID.fromUniqueString("promoter1"),
+            firstName: "John",
+            lastName: "Doe",
+          );
+          final promoter2 = CustomUser(
+            id: UniqueID.fromUniqueString("promoter2"),
+            firstName: "Jane",
+            lastName: "Smith",
+          );
+
+          final promoter1Recs = [
+            createRecommendation(id: "rec1", createdAt: now.subtract(Duration(hours: 12))),
+            createRecommendation(id: "rec2", createdAt: now.subtract(Duration(hours: 36))),
+          ];
+          final promoter2Recs = [
+            createRecommendation(id: "rec3", createdAt: now.subtract(Duration(hours: 6))),
+            createRecommendation(id: "rec4", createdAt: now.subtract(Duration(hours: 30))),
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: [...promoter1Recs, ...promoter2Recs],
+            promoterRecommendations: [
+              PromoterRecommendations(promoter: promoter1, recommendations: promoter1Recs),
+              PromoterRecommendations(promoter: promoter2, recommendations: promoter2Recs),
+            ],
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: "promoter1",
+            userRole: Role.company,
+            timePeriod: TimePeriod.day,
+          );
+
+          expect(result.currentPeriodCount, equals(1)); // Only rec1 from promoter1
+          expect(result.previousPeriodCount, equals(1)); // Only rec2 from promoter1
+          expect(result.percentageChange, equals(0.0));
+        });
+      });
+
+      group("Landing page filtering", () {
+        test("should filter by selected landing page", () {
+          final landingPage1 = LandingPage(
+            id: UniqueID.fromUniqueString("lp1"),
+            name: "Investment Page",
+          );
+
+          final recommendations = [
+            UserRecommendation(
+              id: UniqueID.fromUniqueString("rec1"),
+              recoID: "rec1",
+              userID: "user1",
+              priority: RecommendationPriority.medium,
+              notes: "Test",
+              recommendation: RecommendationItem(
+                id: "rec1",
+                name: "Test",
+                reason: "Investment Page", // matches landingPage1.name
+                landingPageID: "lp1",
+                promotionTemplate: "test",
+                promoterName: "Test",
+                serviceProviderName: "Test",
+                defaultLandingPageID: "test",
+                statusLevel: StatusLevel.recommendationSend,
+                statusTimestamps: {},
+                userID: "user1",
+                promoterImageDownloadURL: "test",
+                createdAt: now.subtract(Duration(hours: 12)),
+              ),
+            ),
+            UserRecommendation(
+              id: UniqueID.fromUniqueString("rec2"),
+              recoID: "rec2",
+              userID: "user1",
+              priority: RecommendationPriority.medium,
+              notes: "Test",
+              recommendation: RecommendationItem(
+                id: "rec2",
+                name: "Test",
+                reason: "Different Page", // doesn't match
+                landingPageID: "lp2",
+                promotionTemplate: "test",
+                promoterName: "Test",
+                serviceProviderName: "Test",
+                defaultLandingPageID: "test",
+                statusLevel: StatusLevel.recommendationSend,
+                statusTimestamps: {},
+                userID: "user1",
+                promoterImageDownloadURL: "test",
+                createdAt: now.subtract(Duration(hours: 36)),
+              ),
+            ),
+          ];
+
+          state = DashboardRecommendationsGetRecosSuccessState(
+            recommendation: recommendations,
+            promoterRecommendations: null,
+            allLandingPages: [landingPage1],
+            filteredLandingPages: [landingPage1],
+          );
+
+          final result = DashboardRecommendationsHelper.calculateTrend(
+            state: state,
+            selectedPromoterId: null,
+            userRole: Role.promoter,
+            timePeriod: TimePeriod.day,
+            selectedLandingPageId: "lp1",
+          );
+
+          expect(result.currentPeriodCount, equals(1)); // Only rec1 matches landing page
+          expect(result.previousPeriodCount, equals(0)); // rec2 doesn't match
+          expect(result.percentageChange, equals(100.0));
+        });
+      });
+    });
   });
 }

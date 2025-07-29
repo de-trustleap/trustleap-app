@@ -182,6 +182,14 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
                   ),
                   timePeriod: _selectedTimePeriod,
                   statusLevel: _selectedStatusLevel,
+                  trend: DashboardRecommendationsHelper.calculateTrend(
+                    state: state,
+                    selectedPromoterId: _selectedPromoterId,
+                    userRole: widget.user.role ?? Role.none,
+                    timePeriod: _selectedTimePeriod,
+                    selectedLandingPageId: _selectedLandingPageId,
+                    statusLevel: _selectedStatusLevel,
+                  ),
                 )
               else if (state
                   is DashboardRecommendationsGetRecosNotFoundFailureState)
