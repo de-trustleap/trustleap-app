@@ -2364,6 +2364,24 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dashboard_recommendations_all_landingpages => 'Alle';
 
   @override
+  String get dashboard_recommendations_filter_title => 'Empfehlungen filtern';
+
+  @override
+  String get dashboard_recommendations_filter_period => 'Zeitraum';
+
+  @override
+  String get dashboard_recommendations_filter_status => 'Status';
+
+  @override
+  String get dashboard_recommendations_filter_promoter => 'Promoter';
+
+  @override
+  String get dashboard_recommendations_filter_landingpage => 'Landingpage';
+
+  @override
+  String get dashboard_recommendations_filter_tooltip => 'Filter öffnen';
+
+  @override
   String get admin_legals_title => 'Rechtliches';
 
   @override

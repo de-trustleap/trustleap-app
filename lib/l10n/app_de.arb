@@ -2681,6 +2681,30 @@
     "@dashboard_recommendations_all_landingpages": {
         "description": "Dropdown Option für alle Landingpages"
     },
+    "dashboard_recommendations_filter_title": "Empfehlungen filtern",
+    "@dashboard_recommendations_filter_title": {
+        "description": "Titel für das Filter-Popup der Dashboard-Empfehlungen"
+    },
+    "dashboard_recommendations_filter_period": "Zeitraum",
+    "@dashboard_recommendations_filter_period": {
+        "description": "Label für den Zeitraum-Filter"
+    },
+    "dashboard_recommendations_filter_status": "Status",
+    "@dashboard_recommendations_filter_status": {
+        "description": "Label für den Status-Filter"
+    },
+    "dashboard_recommendations_filter_promoter": "Promoter",
+    "@dashboard_recommendations_filter_promoter": {
+        "description": "Label für den Promoter-Filter"
+    },
+    "dashboard_recommendations_filter_landingpage": "Landingpage",
+    "@dashboard_recommendations_filter_landingpage": {
+        "description": "Label für den Landingpage-Filter"
+    },
+    "dashboard_recommendations_filter_tooltip": "Filter öffnen",
+    "@dashboard_recommendations_filter_tooltip": {
+        "description": "Tooltip für den Filter-Button"
+    },
     "admin_legals_title": "Rechtliches",
     "@admin_legals_title": {
         "description": "Titel der Admin Legals Seite"

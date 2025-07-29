@@ -4,13 +4,16 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_chart.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_filter.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_filter_bottom_sheet.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class DashboardRecommendations extends StatefulWidget {
   final CustomUser user;
@@ -26,6 +29,7 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
   int? _selectedStatusLevel = 1;
   String? _selectedPromoterId;
   String? _selectedLandingPageId;
+  bool _isFilterExpanded = false;
 
   @override
   void initState() {
@@ -38,6 +42,53 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
       Modular.get<DashboardRecommendationsCubit>().getRecommendationsPromoter(
           widget.user.id.value, widget.user.landingPageIDs);
     }
+  }
+
+  void onFilterPressed() {
+    final responsiveValue = ResponsiveBreakpoints.of(context);
+
+    if (responsiveValue.isMobile) {
+      _showFilterBottomSheet();
+    } else {
+      setState(() {
+        _isFilterExpanded = !_isFilterExpanded;
+      });
+    }
+  }
+
+  void _showFilterBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => DashboardRecommendationsFilterBottomSheet(
+        user: widget.user,
+        selectedTimePeriod: _selectedTimePeriod,
+        selectedStatusLevel: _selectedStatusLevel,
+        selectedPromoterId: _selectedPromoterId,
+        selectedLandingPageId: _selectedLandingPageId,
+        onTimePeriodChanged: (TimePeriod newValue) {
+          setState(() {
+            _selectedTimePeriod = newValue;
+          });
+        },
+        onStatusLevelChanged: (int? newValue) {
+          setState(() {
+            _selectedStatusLevel = newValue;
+          });
+        },
+        onPromoterChanged: (String? newValue) {
+          setState(() {
+            _selectedPromoterId = newValue;
+            _selectedLandingPageId = null;
+          });
+        },
+        onLandingPageChanged: (String? newValue) {
+          setState(() {
+            _selectedLandingPageId = newValue;
+          });
+        },
+      ),
+    );
   }
 
   @override
@@ -54,90 +105,58 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                localization.dashboard_recommendations_title,
-                style: themeData.textTheme.bodyLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              Wrap(
-                spacing: 24,
-                runSpacing: 16,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  UnderlinedDropdown<TimePeriod>(
-                    value: _selectedTimePeriod,
-                    items: [TimePeriod.day, TimePeriod.week, TimePeriod.month]
-                        .map((period) {
-                      return DropdownMenuItem<TimePeriod>(
-                        value: period,
-                        child: Text(period.value),
-                      );
-                    }).toList(),
-                    onChanged: (TimePeriod? newValue) {
-                      if (newValue != null) {
-                        setState(() {
-                          _selectedTimePeriod = newValue;
-                        });
-                      }
-                    },
+                  Text(
+                    localization.dashboard_recommendations_title,
+                    style: themeData.textTheme.bodyLarge!
+                        .copyWith(fontWeight: FontWeight.bold),
                   ),
-                  UnderlinedDropdown<int>(
-                    value: _selectedStatusLevel,
-                    items: _getStatusLevelItems(),
-                    onChanged: (int? newValue) {
-                      setState(() {
-                        _selectedStatusLevel = newValue;
-                      });
-                    },
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: IconButton(
+                        onPressed: () => onFilterPressed(),
+                        tooltip: localization.dashboard_recommendations_filter_tooltip,
+                        icon: Icon(Icons.filter_list,
+                            color: themeData.colorScheme.secondary, size: 32)),
                   ),
                 ],
               ),
               const SizedBox(height: 16),
-              if (widget.user.role == Role.company &&
-                  state is DashboardRecommendationsGetRecosSuccessState &&
-                  state.promoterRecommendations != null) ...[
-                UnderlinedDropdown<String?>(
-                  value: _selectedPromoterId,
-                  items: DashboardRecommendationsHelper.getPromoterItems(
-                      state.promoterRecommendations!,
-                      localization,
-                      widget.user.id.value),
-                  onChanged: (String? newValue) {
+              ExpandedSection(
+                expand: _isFilterExpanded,
+                child: DashboardRecommendationsFilter(
+                  user: widget.user,
+                  state: state,
+                  selectedTimePeriod: _selectedTimePeriod,
+                  selectedStatusLevel: _selectedStatusLevel,
+                  selectedPromoterId: _selectedPromoterId,
+                  selectedLandingPageId: _selectedLandingPageId,
+                  onTimePeriodChanged: (TimePeriod newValue) {
+                    setState(() {
+                      _selectedTimePeriod = newValue;
+                    });
+                  },
+                  onStatusLevelChanged: (int? newValue) {
+                    setState(() {
+                      _selectedStatusLevel = newValue;
+                    });
+                  },
+                  onPromoterChanged: (String? newValue) {
                     setState(() {
                       _selectedPromoterId = newValue;
                       _selectedLandingPageId = null;
                     });
-                    cubit.filterLandingPagesForPromoter(newValue);
                   },
-                ),
-                const SizedBox(height: 16),
-              ],
-              if (state is DashboardRecommendationsGetRecosSuccessState &&
-                  state.allLandingPages != null &&
-                  state.allLandingPages!.isNotEmpty) ...[
-                UnderlinedDropdown<String?>(
-                  value: _selectedLandingPageId,
-                  items: [
-                    DropdownMenuItem<String?>(
-                      value: null,
-                      child: Text(localization
-                          .dashboard_recommendations_all_landingpages),
-                    ),
-                    ...state.filteredLandingPages!.map((landingPage) {
-                      return DropdownMenuItem<String?>(
-                        value: landingPage.id.value,
-                        child: Text(landingPage.name ?? ""),
-                      );
-                    }),
-                  ],
-                  onChanged: (String? newValue) {
+                  onLandingPageChanged: (String? newValue) {
                     setState(() {
                       _selectedLandingPageId = newValue;
                     });
                   },
                 ),
-                const SizedBox(height: 16),
-              ],
+              ),
               if (state is DashboardRecommendationsGetRecosSuccessState)
                 Text(
                   DashboardRecommendationsHelper.getTimePeriodSummaryText(
@@ -191,36 +210,5 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
         },
       ),
     );
-  }
-
-  List<DropdownMenuItem<int>> _getStatusLevelItems() {
-    final localization = AppLocalizations.of(context);
-
-    return [
-      DropdownMenuItem<int>(
-        value: 1,
-        child: Text(localization.recommendation_manager_status_level_1),
-      ),
-      DropdownMenuItem<int>(
-        value: 2,
-        child: Text(localization.recommendation_manager_status_level_2),
-      ),
-      DropdownMenuItem<int>(
-        value: 3,
-        child: Text(localization.recommendation_manager_status_level_3),
-      ),
-      DropdownMenuItem<int>(
-        value: 4,
-        child: Text(localization.recommendation_manager_status_level_4),
-      ),
-      DropdownMenuItem<int>(
-        value: 5,
-        child: Text(localization.recommendation_manager_status_level_5),
-      ),
-      DropdownMenuItem<int>(
-        value: 6,
-        child: Text(localization.recommendation_manager_status_level_6),
-      ),
-    ];
   }
 }
