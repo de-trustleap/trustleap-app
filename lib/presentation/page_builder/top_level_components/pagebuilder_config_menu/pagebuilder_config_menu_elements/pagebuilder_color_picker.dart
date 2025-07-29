@@ -61,8 +61,8 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
     }
   }
 
-  void _showColorPickerDialog(
-      context, ThemeData themeData, AppLocalizations localization) {
+  void _showColorPickerDialog(BuildContext context, ThemeData themeData,
+      AppLocalizations localization) {
     showDialog(
       context: context,
       builder: (BuildContext context) {

@@ -67,7 +67,7 @@ class _LandingPageCreatorImageSectionState
     }
   }
 
-  _downloadCompanyImageFromURL() async {
+  Future<void> _downloadCompanyImageFromURL() async {
     if (widget.company?.companyImageDownloadURL != null &&
         _urlIsValid(widget.company!.companyImageDownloadURL!) &&
         _convertedImage == null) {
