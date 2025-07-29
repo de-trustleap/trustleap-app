@@ -1,8 +1,8 @@
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_helper.dart';
+import 'package:finanzbegleiter/domain/entities/dashboard_trend.dart';
 import 'package:flutter/material.dart';
 
 class DashboardTrendArrow extends StatelessWidget {
-  final RecommendationTrend trend;
+  final DashboardTrend trend;
 
   const DashboardTrendArrow({super.key, required this.trend});
 
@@ -26,14 +26,17 @@ class DashboardTrendArrow extends StatelessWidget {
       icon = Icons.arrow_downward;
     }
     
-    final percentage = trend.percentageChange.abs().toStringAsFixed(1);
+    final percentageValue = trend.percentageChange.abs();
+    final percentage = percentageValue == percentageValue.round() 
+        ? percentageValue.round().toString()
+        : percentageValue.toStringAsFixed(1);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

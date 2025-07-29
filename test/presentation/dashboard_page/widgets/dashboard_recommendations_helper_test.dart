@@ -1309,7 +1309,7 @@ void main() {
           expect(result.isStable, isTrue);
         });
 
-        test("should handle zero previous count with positive current count (100% increase)", () {
+        test("should handle zero previous count with positive current count (200% increase)", () {
           final recommendations = [
             // Current period: 2 recommendations
             createRecommendation(id: "rec1", createdAt: now.subtract(Duration(hours: 12))),
@@ -1332,7 +1332,7 @@ void main() {
 
           expect(result.currentPeriodCount, equals(2));
           expect(result.previousPeriodCount, equals(0));
-          expect(result.percentageChange, equals(100.0)); // Special case: 100% when previous is 0
+          expect(result.percentageChange, equals(200.0)); // 2 recommendations * 100% = 200%
           expect(result.isIncreasing, isTrue);
         });
 

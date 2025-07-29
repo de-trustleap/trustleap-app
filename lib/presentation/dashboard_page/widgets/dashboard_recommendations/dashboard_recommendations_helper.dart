@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/dashboard_trend.dart';
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
@@ -168,7 +169,7 @@ class DashboardRecommendationsHelper {
     }
   }
 
-  static RecommendationTrend calculateTrend(
+  static DashboardTrend calculateTrend(
       {required DashboardRecommendationsGetRecosSuccessState state,
       required String? selectedPromoterId,
       required Role userRole,
@@ -245,36 +246,30 @@ class DashboardRecommendationsHelper {
     }
 
     double percentageChange = 0.0;
+    bool isIncreasing = false;
+    bool isDecreasing = false;
+
     if (previousCount > 0) {
       percentageChange = ((currentCount - previousCount) / previousCount * 100);
+      
+      // Do not show changes under 1%
+      const threshold = 1.0;
+      if (percentageChange.abs() > threshold) {
+        isIncreasing = percentageChange > 0;
+        isDecreasing = percentageChange < 0;
+      }
     } else if (currentCount > 0) {
-      percentageChange = 100.0;
+      percentageChange = currentCount * 100.0;
+      isIncreasing = true;
     }
 
-    return RecommendationTrend(
+    return DashboardTrend(
       currentPeriodCount: currentCount,
       previousPeriodCount: previousCount,
       percentageChange: percentageChange,
-      isIncreasing: percentageChange > 0,
-      isDecreasing: percentageChange < 0,
+      isIncreasing: isIncreasing,
+      isDecreasing: isDecreasing,
     );
   }
 }
 
-class RecommendationTrend {
-  final int currentPeriodCount;
-  final int previousPeriodCount;
-  final double percentageChange;
-  final bool isIncreasing;
-  final bool isDecreasing;
-
-  const RecommendationTrend({
-    required this.currentPeriodCount,
-    required this.previousPeriodCount,
-    required this.percentageChange,
-    required this.isIncreasing,
-    required this.isDecreasing,
-  });
-
-  bool get isStable => !isIncreasing && !isDecreasing;
-}
