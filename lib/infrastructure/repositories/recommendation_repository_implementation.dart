@@ -605,4 +605,170 @@ class RecommendationRepositoryImplementation
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
   }
+
+  @override
+  Future<Either<DatabaseFailure, List<PromoterRecommendations>>>
+      getRecommendationsCompanyWithArchived(String userID) async {
+    try {
+      // 1. Get active recommendations
+      final activeRecommendationsResult =
+          await getRecommendationsCompany(userID);
+      if (activeRecommendationsResult.isLeft()) {
+        return activeRecommendationsResult;
+      }
+
+      final activeRecommendations =
+          activeRecommendationsResult.getOrElse(() => []);
+
+      // 2. Get archived recommendations
+      final archivedRecommendationsResult =
+          await getArchivedRecommendations(userID);
+      List<ArchivedRecommendationItem> archivedRecos = [];
+      if (archivedRecommendationsResult.isRight()) {
+        archivedRecos = archivedRecommendationsResult.getOrElse(() => []);
+      }
+
+      // 3. Convert archived recommendations to RecommendationItems and create UserRecommendations
+      final List<UserRecommendation> convertedArchivedRecommendations =
+          archivedRecos.map((archived) {
+        final recommendationItem =
+            _convertArchivedToRecommendationItem(archived);
+        return UserRecommendation(
+          id: archived.id,
+          userID: archived.userID ?? userID,
+          recoID: archived.id.value,
+          recommendation: recommendationItem,
+          priority: RecommendationPriority.medium,
+          notes: null,
+          lastEdits: [],
+          viewedByUsers: [],
+        );
+      }).toList();
+
+      // 4. Group archived recommendations by promoter and merge with active ones
+      final Map<String, List<UserRecommendation>> archivedByPromoter = {};
+      for (final userReco in convertedArchivedRecommendations) {
+        final promoterName = userReco.recommendation?.promoterName;
+        if (promoterName != null) {
+          archivedByPromoter.putIfAbsent(promoterName, () => []).add(userReco);
+        }
+      }
+
+      // 5. Merge archived recommendations with existing active recommendations
+      final List<PromoterRecommendations> mergedResults =
+          activeRecommendations.map((promoterReco) {
+        final promoterName = promoterReco.promoter.firstName != null &&
+                promoterReco.promoter.lastName != null
+            ? "${promoterReco.promoter.firstName} ${promoterReco.promoter.lastName}"
+            : promoterReco.promoter.firstName ??
+                promoterReco.promoter.lastName ??
+                "";
+
+        final archivedForPromoter = archivedByPromoter[promoterName] ?? [];
+        final allRecommendations = [
+          ...promoterReco.recommendations,
+          ...archivedForPromoter
+        ];
+
+        // Sort by creation date (newest first)
+        allRecommendations.sort((a, b) {
+          return (b.recommendation?.createdAt ?? DateTime.now())
+              .compareTo(a.recommendation?.createdAt ?? DateTime.now());
+        });
+
+        return promoterReco.copyWith(recommendations: allRecommendations);
+      }).toList();
+
+      return right(mergedResults);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  RecommendationItem _convertArchivedToRecommendationItem(
+      ArchivedRecommendationItem archived) {
+    StatusLevel statusLevel;
+    if (archived.success == true) {
+      statusLevel = StatusLevel.successful;
+    } else if (archived.success == false) {
+      statusLevel = StatusLevel.failed;
+    } else {
+      statusLevel = StatusLevel.recommendationSend;
+    }
+
+    final Map<int, DateTime?> statusTimestamps = {
+      0: archived.createdAt,
+      5: archived.finishedTimeStamp,
+    };
+
+    return RecommendationItem(
+      id: archived.id.value,
+      name: archived.name,
+      reason: archived.reason,
+      landingPageID: archived.landingPageID,
+      promotionTemplate: null,
+      promoterName: archived.promoterName,
+      serviceProviderName: archived.serviceProviderName,
+      defaultLandingPageID: null,
+      statusLevel: statusLevel,
+      statusTimestamps: statusTimestamps,
+      userID: archived.userID,
+      promoterImageDownloadURL: null,
+      createdAt: archived.createdAt ?? DateTime.now(),
+      expiresAt:
+          archived.expiresAt ?? DateTime.now().add(const Duration(days: 14)),
+    );
+  }
+
+  @override
+  Future<Either<DatabaseFailure, List<UserRecommendation>>> getRecommendationsWithArchived(
+      String userID) async {
+    try {
+      // 1. Get active recommendations
+      final activeRecommendationsResult = await getRecommendations(userID);
+      List<UserRecommendation> activeRecommendations = [];
+      if (activeRecommendationsResult.isRight()) {
+        activeRecommendations = activeRecommendationsResult.getOrElse(() => []);
+      }
+
+      // 2. Get archived recommendations
+      final archivedRecommendationsResult = await getArchivedRecommendations(userID);
+      List<ArchivedRecommendationItem> archivedRecos = [];
+      if (archivedRecommendationsResult.isRight()) {
+        archivedRecos = archivedRecommendationsResult.getOrElse(() => []);
+      }
+
+      // 3. Convert archived recommendations to UserRecommendations
+      final List<UserRecommendation> convertedArchivedRecommendations =
+          archivedRecos.map((archived) {
+        final recommendationItem = _convertArchivedToRecommendationItem(archived);
+        return UserRecommendation(
+          id: archived.id,
+          userID: archived.userID ?? userID,
+          recoID: archived.id.value,
+          recommendation: recommendationItem,
+          priority: RecommendationPriority.medium,
+          notes: null,
+          lastEdits: [],
+          viewedByUsers: [],
+        );
+      }).toList();
+
+      // 4. Merge active and archived recommendations
+      final allRecommendations = [
+        ...activeRecommendations,
+        ...convertedArchivedRecommendations
+      ];
+
+      // 5. Sort by creation date (newest first)
+      allRecommendations.sort((a, b) {
+        return (b.recommendation?.createdAt ?? DateTime.now())
+            .compareTo(a.recommendation?.createdAt ?? DateTime.now());
+      });
+
+      return right(allRecommendations);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }

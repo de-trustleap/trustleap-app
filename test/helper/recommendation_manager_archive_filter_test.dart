@@ -6,11 +6,12 @@ import 'package:finanzbegleiter/presentation/recommendation_manager_page/recomme
 
 void main() {
   group('RecommendationArchiveFilter', () {
-    final testData = [
+    final testData = <ArchivedRecommendationItem>[
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
           name: "Alice",
           reason: "Test 1",
+          landingPageID: "test-landing-page",
           promoterName: "Promoter X",
           serviceProviderName: "Test",
           success: true,
@@ -22,6 +23,7 @@ void main() {
           id: UniqueID.fromUniqueString("2"),
           name: "Bob",
           reason: "Test 2",
+          landingPageID: "test-landing-page",
           promoterName: "Promoter A",
           serviceProviderName: "Test",
           success: false,
@@ -33,6 +35,7 @@ void main() {
           id: UniqueID.fromUniqueString("3"),
           name: "Charlie",
           reason: "Test 3",
+          landingPageID: "test-landing-page",
           promoterName: "Promoter B",
           serviceProviderName: "Test",
           success: true,

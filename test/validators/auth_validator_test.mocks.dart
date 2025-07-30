@@ -544,6 +544,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get menuitems_legals => (super.noSuchMethod(
+        Invocation.getter(#menuitems_legals),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#menuitems_legals),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_overview_error_view_title => (super.noSuchMethod(
         Invocation.getter(#landingpage_overview_error_view_title),
         returnValue: _i3.dummyValue<String>(
@@ -6057,6 +6066,24 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get feedback_email_placeholder => (super.noSuchMethod(
+        Invocation.getter(#feedback_email_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_email_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get feedback_category_label => (super.noSuchMethod(
+        Invocation.getter(#feedback_category_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#feedback_category_label),
+        ),
+      ) as String);
+
+  @override
   String get admin_feedback_no_feedback_title => (super.noSuchMethod(
         Invocation.getter(#admin_feedback_no_feedback_title),
         returnValue: _i3.dummyValue<String>(
@@ -6156,11 +6183,165 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get admin_feedback_type_label => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_type_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_type_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_feedback_sender_label => (super.noSuchMethod(
+        Invocation.getter(#admin_feedback_sender_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_feedback_sender_label),
+        ),
+      ) as String);
+
+  @override
   String get dashboard_recommendations_all_landingpages => (super.noSuchMethod(
         Invocation.getter(#dashboard_recommendations_all_landingpages),
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#dashboard_recommendations_all_landingpages),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_period => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_period),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_period),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_status => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_status),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_status),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_promoter => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_promoter),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_promoter),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_landingpage =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_landingpage),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_landingpage),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_recommendations_filter_tooltip => (super.noSuchMethod(
+        Invocation.getter(#dashboard_recommendations_filter_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_recommendations_filter_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_title => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_avv_label => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_avv_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_avv_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_avv_placeholder => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_avv_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_avv_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_privacy_policy_label => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_privacy_policy_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_privacy_policy_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_privacy_policy_placeholder => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_privacy_policy_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_privacy_policy_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_terms_label => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_terms_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_terms_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_terms_placeholder => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_terms_placeholder),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_terms_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_save_button => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_save_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_save_button),
+        ),
+      ) as String);
+
+  @override
+  String get admin_legals_save_success => (super.noSuchMethod(
+        Invocation.getter(#admin_legals_save_success),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_legals_save_success),
         ),
       ) as String);
 

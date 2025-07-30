@@ -224,6 +224,10 @@
     "@menuitems_user_feedback": {
         "description": "the menu entry for the user feedback"
     },
+    "menuitems_legals": "Legal",
+    "@menuitems_legals": {
+        "description": "the menu entry for legal documents"
+    },
     "landingpage_overview_error_view_title": "An error occurred while retrieving the data.",
     "@landingpage_overview_error_view_title": {
         "description": "Title for the error view that appears if an error occurred while retrieving the data."
@@ -2676,5 +2680,65 @@
     "dashboard_recommendations_all_landingpages": "All",
     "@dashboard_recommendations_all_landingpages": {
         "description": "Dropdown option for all landing pages"
+    },
+    "dashboard_recommendations_filter_title": "Filter Recommendations",
+    "@dashboard_recommendations_filter_title": {
+        "description": "Title for the dashboard recommendations filter popup"
+    },
+    "dashboard_recommendations_filter_period": "Period",
+    "@dashboard_recommendations_filter_period": {
+        "description": "Label for the period filter"
+    },
+    "dashboard_recommendations_filter_status": "Status",
+    "@dashboard_recommendations_filter_status": {
+        "description": "Label for the status filter"
+    },
+    "dashboard_recommendations_filter_promoter": "Promoter",
+    "@dashboard_recommendations_filter_promoter": {
+        "description": "Label for the promoter filter"
+    },
+    "dashboard_recommendations_filter_landingpage": "Landing Page",
+    "@dashboard_recommendations_filter_landingpage": {
+        "description": "Label for the landing page filter"
+    },
+    "dashboard_recommendations_filter_tooltip": "Open filter",
+    "@dashboard_recommendations_filter_tooltip": {
+        "description": "Tooltip for the filter button"
+    },
+    "admin_legals_title": "Legal",
+    "@admin_legals_title": {
+        "description": "Title of the Admin Legals page"
+    },
+    "admin_legals_avv_label": "Data Processing Agreement",
+    "@admin_legals_avv_label": {
+        "description": "Label for AVV field"
+    },
+    "admin_legals_avv_placeholder": "Enter DPA...",
+    "@admin_legals_avv_placeholder": {
+        "description": "Placeholder for AVV text field"
+    },
+    "admin_legals_privacy_policy_label": "Privacy Policy",
+    "@admin_legals_privacy_policy_label": {
+        "description": "Label for Privacy Policy field"
+    },
+    "admin_legals_privacy_policy_placeholder": "Enter Privacy Policy...",
+    "@admin_legals_privacy_policy_placeholder": {
+        "description": "Placeholder for Privacy Policy text field"
+    },
+    "admin_legals_terms_label": "Terms and Conditions",
+    "@admin_legals_terms_label": {
+        "description": "Label for Terms field"
+    },
+    "admin_legals_terms_placeholder": "Enter Terms and Conditions...",
+    "@admin_legals_terms_placeholder": {
+        "description": "Placeholder for Terms text field"
+    },
+    "admin_legals_save_button": "Save",
+    "@admin_legals_save_button": {
+        "description": "Save button text"
+    },
+    "admin_legals_save_success": "Legal data successfully saved!",
+    "@admin_legals_save_success": {
+        "description": "Success message after saving"
     }
 }

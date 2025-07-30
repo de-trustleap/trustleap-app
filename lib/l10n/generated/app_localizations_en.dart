@@ -185,6 +185,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get menuitems_user_feedback => 'User Feedback';
 
   @override
+  String get menuitems_legals => 'Legal';
+
+  @override
   String get landingpage_overview_error_view_title =>
       'An error occurred while retrieving the data.';
 
@@ -2316,4 +2319,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dashboard_recommendations_all_landingpages => 'All';
+
+  @override
+  String get dashboard_recommendations_filter_title => 'Filter Recommendations';
+
+  @override
+  String get dashboard_recommendations_filter_period => 'Period';
+
+  @override
+  String get dashboard_recommendations_filter_status => 'Status';
+
+  @override
+  String get dashboard_recommendations_filter_promoter => 'Promoter';
+
+  @override
+  String get dashboard_recommendations_filter_landingpage => 'Landing Page';
+
+  @override
+  String get dashboard_recommendations_filter_tooltip => 'Open filter';
+
+  @override
+  String get admin_legals_title => 'Legal';
+
+  @override
+  String get admin_legals_avv_label => 'Data Processing Agreement';
+
+  @override
+  String get admin_legals_avv_placeholder => 'Enter DPA...';
+
+  @override
+  String get admin_legals_privacy_policy_label => 'Privacy Policy';
+
+  @override
+  String get admin_legals_privacy_policy_placeholder =>
+      'Enter Privacy Policy...';
+
+  @override
+  String get admin_legals_terms_label => 'Terms and Conditions';
+
+  @override
+  String get admin_legals_terms_placeholder => 'Enter Terms and Conditions...';
+
+  @override
+  String get admin_legals_save_button => 'Save';
+
+  @override
+  String get admin_legals_save_success => 'Legal data successfully saved!';
 }
