@@ -577,4 +577,138 @@ void main() {
       verifyNoMoreInteractions(mockRecoRepo);
     });
   });
+
+  group("RecommendationRepositoryImplementation_getRecommendationsWithArchived", () {
+    final userID = "1";
+    final date = DateTime.now();
+    
+    // Active recommendation
+    final activeRecommendation = RecommendationItem(
+        id: "1",
+        name: "Active Test",
+        reason: "Test",
+        landingPageID: "1",
+        promotionTemplate: "",
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: "2",
+        userID: "1",
+        statusLevel: StatusLevel.contactFormSent,
+        statusTimestamps: {0: date, 1: date, 2: date},
+        promoterImageDownloadURL: null);
+    
+    final activeUserRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("1"),
+        recoID: "1",
+        userID: userID,
+        priority: RecommendationPriority.medium,
+        notes: "Active Test",
+        recommendation: activeRecommendation);
+    
+    // Archived recommendation (converted to UserRecommendation)
+    final archivedRecommendation = RecommendationItem(
+        id: "2",
+        name: "Archived Test",
+        reason: "Test",
+        landingPageID: "test-landing-page",
+        promotionTemplate: null,
+        promoterName: "Test",
+        serviceProviderName: "Test",
+        defaultLandingPageID: null,
+        userID: "1",
+        statusLevel: StatusLevel.successful,
+        statusTimestamps: {0: date, 5: date},
+        promoterImageDownloadURL: null);
+    
+    final archivedUserRecommendation = UserRecommendation(
+        id: UniqueID.fromUniqueString("2"),
+        recoID: "2",
+        userID: userID,
+        priority: RecommendationPriority.medium,
+        notes: null,
+        recommendation: archivedRecommendation);
+    
+    final combinedRecommendations = [activeUserRecommendation, archivedUserRecommendation];
+
+    test("should return combined active and archived recommendations when call was successful", () async {
+      // Given
+      final expectedResult = right(combinedRecommendations);
+      when(mockRecoRepo.getRecommendationsWithArchived(userID))
+          .thenAnswer((_) async => right(combinedRecommendations));
+      // When
+      final result = await mockRecoRepo.getRecommendationsWithArchived(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendationsWithArchived(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return failure when call has failed", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockRecoRepo.getRecommendationsWithArchived(userID))
+          .thenAnswer((_) async => left(BackendFailure()));
+      // When
+      final result = await mockRecoRepo.getRecommendationsWithArchived(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendationsWithArchived(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return NotFoundFailure when no recommendations exist", () async {
+      // Given
+      final expectedResult = left(NotFoundFailure());
+      when(mockRecoRepo.getRecommendationsWithArchived(userID))
+          .thenAnswer((_) async => left(NotFoundFailure()));
+      // When
+      final result = await mockRecoRepo.getRecommendationsWithArchived(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendationsWithArchived(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return empty list when user has no recommendations", () async {
+      // Given
+      final List<UserRecommendation> emptyList = [];
+      final expectedResult = right(emptyList);
+      when(mockRecoRepo.getRecommendationsWithArchived(userID))
+          .thenAnswer((_) async => right(emptyList));
+      // When
+      final result = await mockRecoRepo.getRecommendationsWithArchived(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendationsWithArchived(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return only active recommendations when no archived recommendations exist", () async {
+      // Given
+      final activeOnlyRecommendations = [activeUserRecommendation];
+      final expectedResult = right(activeOnlyRecommendations);
+      when(mockRecoRepo.getRecommendationsWithArchived(userID))
+          .thenAnswer((_) async => right(activeOnlyRecommendations));
+      // When
+      final result = await mockRecoRepo.getRecommendationsWithArchived(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendationsWithArchived(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+
+    test("should return only archived recommendations when no active recommendations exist", () async {
+      // Given
+      final archivedOnlyRecommendations = [archivedUserRecommendation];
+      final expectedResult = right(archivedOnlyRecommendations);
+      when(mockRecoRepo.getRecommendationsWithArchived(userID))
+          .thenAnswer((_) async => right(archivedOnlyRecommendations));
+      // When
+      final result = await mockRecoRepo.getRecommendationsWithArchived(userID);
+      // Then
+      verify(mockRecoRepo.getRecommendationsWithArchived(userID));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockRecoRepo);
+    });
+  });
 }

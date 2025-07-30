@@ -8722,6 +8722,26 @@ class MockRecommendationRepository extends _i1.Mock
           ) as _i21.Future<
               _i2.Either<_i30.DatabaseFailure,
                   List<_i48.PromoterRecommendations>>>);
+
+  @override
+  _i21.Future<_i2.Either<_i30.DatabaseFailure, List<_i45.UserRecommendation>>>
+      getRecommendationsWithArchived(String? userID) => (super.noSuchMethod(
+            Invocation.method(
+              #getRecommendationsWithArchived,
+              [userID],
+            ),
+            returnValue: _i21.Future<
+                _i2.Either<_i30.DatabaseFailure,
+                    List<_i45.UserRecommendation>>>.value(_FakeEither_0<
+                _i30.DatabaseFailure, List<_i45.UserRecommendation>>(
+              this,
+              Invocation.method(
+                #getRecommendationsWithArchived,
+                [userID],
+              ),
+            )),
+          ) as _i21.Future<
+              _i2.Either<_i30.DatabaseFailure, List<_i45.UserRecommendation>>>);
 }
 
 /// A class which mocks [LegalsRepository].

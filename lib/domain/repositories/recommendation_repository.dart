@@ -30,4 +30,6 @@ abstract class RecommendationRepository {
       String userID);
   Future<Either<DatabaseFailure, List<PromoterRecommendations>>> getRecommendationsCompanyWithArchived(
       String userID);
+  Future<Either<DatabaseFailure, List<UserRecommendation>>> getRecommendationsWithArchived(
+      String userID);
 }

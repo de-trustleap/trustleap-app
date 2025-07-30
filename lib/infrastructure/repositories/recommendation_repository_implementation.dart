@@ -719,4 +719,56 @@ class RecommendationRepositoryImplementation
           archived.expiresAt ?? DateTime.now().add(const Duration(days: 14)),
     );
   }
+
+  @override
+  Future<Either<DatabaseFailure, List<UserRecommendation>>> getRecommendationsWithArchived(
+      String userID) async {
+    try {
+      // 1. Get active recommendations
+      final activeRecommendationsResult = await getRecommendations(userID);
+      List<UserRecommendation> activeRecommendations = [];
+      if (activeRecommendationsResult.isRight()) {
+        activeRecommendations = activeRecommendationsResult.getOrElse(() => []);
+      }
+
+      // 2. Get archived recommendations
+      final archivedRecommendationsResult = await getArchivedRecommendations(userID);
+      List<ArchivedRecommendationItem> archivedRecos = [];
+      if (archivedRecommendationsResult.isRight()) {
+        archivedRecos = archivedRecommendationsResult.getOrElse(() => []);
+      }
+
+      // 3. Convert archived recommendations to UserRecommendations
+      final List<UserRecommendation> convertedArchivedRecommendations =
+          archivedRecos.map((archived) {
+        final recommendationItem = _convertArchivedToRecommendationItem(archived);
+        return UserRecommendation(
+          id: archived.id,
+          userID: archived.userID ?? userID,
+          recoID: archived.id.value,
+          recommendation: recommendationItem,
+          priority: RecommendationPriority.medium,
+          notes: null,
+          lastEdits: [],
+          viewedByUsers: [],
+        );
+      }).toList();
+
+      // 4. Merge active and archived recommendations
+      final allRecommendations = [
+        ...activeRecommendations,
+        ...convertedArchivedRecommendations
+      ];
+
+      // 5. Sort by creation date (newest first)
+      allRecommendations.sort((a, b) {
+        return (b.recommendation?.createdAt ?? DateTime.now())
+            .compareTo(a.recommendation?.createdAt ?? DateTime.now());
+      });
+
+      return right(allRecommendations);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
 }

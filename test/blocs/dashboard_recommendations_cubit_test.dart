@@ -194,17 +194,17 @@ void main() {
 
     test("should call repo if getRecommendationsPromoter is called", () async {
       // Given
-      when(mockRecommendationRepo.getRecommendations(userID))
+      when(mockRecommendationRepo.getRecommendationsWithArchived(userID))
           .thenAnswer((_) async => right(testRecommendations));
       when(mockLandingPageRepo.getAllLandingPages(landingPageIDs))
           .thenAnswer((_) async => right(testPromoterLandingPages));
 
       // When
       cubit.getRecommendationsPromoter(userID, landingPageIDs);
-      await untilCalled(mockRecommendationRepo.getRecommendations(userID));
+      await untilCalled(mockRecommendationRepo.getRecommendationsWithArchived(userID));
 
       // Then
-      verify(mockRecommendationRepo.getRecommendations(userID));
+      verify(mockRecommendationRepo.getRecommendationsWithArchived(userID));
       verify(mockLandingPageRepo.getAllLandingPages(landingPageIDs));
       verifyNoMoreInteractions(mockRecommendationRepo);
       verifyNoMoreInteractions(mockLandingPageRepo);
@@ -220,7 +220,7 @@ void main() {
           filteredLandingPages: testPromoterLandingPages,
         )
       ];
-      when(mockRecommendationRepo.getRecommendations(userID))
+      when(mockRecommendationRepo.getRecommendationsWithArchived(userID))
           .thenAnswer((_) async => right(testRecommendations));
       when(mockLandingPageRepo.getAllLandingPages(landingPageIDs))
           .thenAnswer((_) async => right(testPromoterLandingPages));
@@ -236,7 +236,7 @@ void main() {
         DashboardRecommendationsGetRecosLoadingState(),
         DashboardRecommendationsGetRecosFailureState(failure: BackendFailure())
       ];
-      when(mockRecommendationRepo.getRecommendations(userID))
+      when(mockRecommendationRepo.getRecommendationsWithArchived(userID))
           .thenAnswer((_) async => left(BackendFailure()));
 
       // Then
@@ -250,7 +250,7 @@ void main() {
         DashboardRecommendationsGetRecosLoadingState(),
         DashboardRecommendationsGetRecosNotFoundFailureState()
       ];
-      when(mockRecommendationRepo.getRecommendations(userID))
+      when(mockRecommendationRepo.getRecommendationsWithArchived(userID))
           .thenAnswer((_) async => left(NotFoundFailure()));
 
       // Then
@@ -420,7 +420,7 @@ void main() {
         )
       ];
 
-      when(mockRecommendationRepo.getRecommendations(userID))
+      when(mockRecommendationRepo.getRecommendationsWithArchived(userID))
           .thenAnswer((_) async => right(testRecommendations));
 
       // Then
@@ -452,7 +452,7 @@ void main() {
         )
       ];
 
-      when(mockRecommendationRepo.getRecommendations(userID))
+      when(mockRecommendationRepo.getRecommendationsWithArchived(userID))
           .thenAnswer((_) async => right(testRecommendations));
       when(mockLandingPageRepo.getAllLandingPages(landingPageIDs))
           .thenAnswer((_) async => left(BackendFailure()));

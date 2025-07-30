@@ -84,9 +84,9 @@ class DashboardRecommendationsCubit
     ));
     */
 
-    // Original implementation:
+    // Original implementation with archived recommendations:
     final failureOrSuccess =
-        await recommendationRepo.getRecommendations(userID);
+        await recommendationRepo.getRecommendationsWithArchived(userID);
     failureOrSuccess.fold(
         (failure) => failure is NotFoundFailure
             ? emit(DashboardRecommendationsGetRecosNotFoundFailureState())
