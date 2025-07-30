@@ -71,11 +71,12 @@ void main() {
   group("RecommendationManagerArchiveCubit_getArchivedRecommendations", () {
     final userID = "1";
     final date = DateTime.now();
-    final recommendations = [
+    final recommendations = <ArchivedRecommendationItem>[
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
           reason: "Test",
+          landingPageID: "test-landing-page",
           promoterName: "Test",
           serviceProviderName: "Test",
           success: true,

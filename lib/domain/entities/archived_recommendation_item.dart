@@ -6,6 +6,7 @@ class ArchivedRecommendationItem extends Equatable {
   final UniqueID id;
   final String? name;
   final String? reason;
+  final String? landingPageID;
   final String? promoterName;
   final String? serviceProviderName;
   final bool? success;
@@ -18,6 +19,7 @@ class ArchivedRecommendationItem extends Equatable {
     required this.id,
     required this.name,
     required this.reason,
+    required this.landingPageID,
     required this.promoterName,
     required this.serviceProviderName,
     required this.success,
@@ -31,6 +33,7 @@ class ArchivedRecommendationItem extends Equatable {
     UniqueID? id,
     String? name,
     String? reason,
+    String? landingPageID,
     String? promoterName,
     String? serviceProviderName,
     bool? success,
@@ -43,6 +46,7 @@ class ArchivedRecommendationItem extends Equatable {
       id: id ?? this.id,
       name: name ?? this.name,
       reason: reason ?? this.reason,
+      landingPageID: landingPageID ?? this.landingPageID,
       promoterName: promoterName ?? this.promoterName,
       serviceProviderName: serviceProviderName ?? this.serviceProviderName,
       success: success ?? this.success,
@@ -55,5 +59,5 @@ class ArchivedRecommendationItem extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, reason, promoterName, serviceProviderName, success, userID];
+      [id, name, reason, landingPageID, promoterName, serviceProviderName, success, userID];
 }

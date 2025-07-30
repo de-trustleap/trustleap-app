@@ -8,6 +8,7 @@ class ArchivedRecommendationItemModel extends Equatable {
   final String id;
   final String? name;
   final String? reason;
+  final String? landingPageID;
   final String? promoterName;
   final String? serviceProviderName;
   final bool? success;
@@ -20,6 +21,7 @@ class ArchivedRecommendationItemModel extends Equatable {
     required this.id,
     required this.name,
     required this.reason,
+    required this.landingPageID,
     required this.promoterName,
     required this.serviceProviderName,
     required this.success,
@@ -33,6 +35,7 @@ class ArchivedRecommendationItemModel extends Equatable {
     String? id,
     String? name,
     String? reason,
+    String? landingPageID,
     String? promoterName,
     String? serviceProviderName,
     bool? success,
@@ -45,6 +48,7 @@ class ArchivedRecommendationItemModel extends Equatable {
       id: id ?? this.id,
       name: name ?? this.name,
       reason: reason ?? this.reason,
+      landingPageID: landingPageID ?? this.landingPageID,
       promoterName: promoterName ?? this.promoterName,
       serviceProviderName: serviceProviderName ?? this.serviceProviderName,
       success: success ?? this.success,
@@ -60,6 +64,7 @@ class ArchivedRecommendationItemModel extends Equatable {
       'id': id,
       'name': name,
       'reason': reason,
+      'landingPageID': landingPageID,
       'promoterName': promoterName,
       'serviceProviderName': serviceProviderName,
       'success': success,
@@ -75,6 +80,7 @@ class ArchivedRecommendationItemModel extends Equatable {
         id: "",
         name: map['name'] != null ? map['name'] as String : null,
         reason: map['reason'] != null ? map['reason'] as String : null,
+        landingPageID: map['landingPageID'] != null ? map['landingPageID'] as String : null,
         promoterName:
             map['promoterName'] != null ? map['promoterName'] as String : null,
         serviceProviderName: map['serviceProviderName'] != null
@@ -97,6 +103,7 @@ class ArchivedRecommendationItemModel extends Equatable {
         id: UniqueID.fromUniqueString(id),
         name: name,
         reason: reason,
+        landingPageID: landingPageID,
         promoterName: promoterName,
         serviceProviderName: serviceProviderName,
         success: success,
@@ -112,6 +119,7 @@ class ArchivedRecommendationItemModel extends Equatable {
         id: recommendation.id.value,
         name: recommendation.name,
         reason: recommendation.reason,
+        landingPageID: recommendation.landingPageID,
         promoterName: recommendation.promoterName,
         serviceProviderName: recommendation.serviceProviderName,
         success: recommendation.success,
@@ -123,5 +131,5 @@ class ArchivedRecommendationItemModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, reason, promoterName, serviceProviderName, success, userID];
+      [id, name, reason, landingPageID, promoterName, serviceProviderName, success, userID];
 }
