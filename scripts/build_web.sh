@@ -3,13 +3,17 @@
 # 1. Change path to project root
 cd "$(dirname "$0")/.."
 
-# 2. Create Icon Packs
+# 2. Generate Licenses
+echo "📄 Generiere LICENSES.md..."
+./scripts/generate_licenses.sh
+
+# 3. Create Icon Packs
 dart run flutter_iconpicker:generate_packs --packs allMaterial
 
-# 3. Build for Flutter Web
+# 4. Build for Flutter Web
 flutter build web --release --no-tree-shake-icons
 
-# 4. Copy .woffs fonts into build folder
+# 5. Copy .woffs fonts into build folder
 # Check if the build web was successful
 if [ $? -eq 0 ]; then
     # Create the font folder if it doesn't exists

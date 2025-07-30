@@ -8,7 +8,8 @@
       "Bash(rg:*)",
       "Bash(grep:*)",
       "Bash(find:*)",
-      "Bash(dart test:*)"
+      "Bash(dart test:*)",
+      "Bash(awk:*)"
     ],
     "deny": []
   }
