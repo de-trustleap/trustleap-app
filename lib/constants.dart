@@ -98,6 +98,7 @@ enum TimePeriod {
   day("Tag"),
   week("Woche"),
   month("Monat"),
+  quarter("Quartal"),
   year("Jahr");
 
   final String value;

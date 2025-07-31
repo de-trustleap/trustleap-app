@@ -1,8 +1,10 @@
 import 'package:finanzbegleiter/application/dashboard/promoter_ranking/promoter_ranking_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -17,12 +19,14 @@ class DashboardPromoterRanking extends StatefulWidget {
 }
 
 class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
+  TimePeriod _selectedTimePeriod = TimePeriod.month;
+
   @override
   void initState() {
     super.initState();
 
     Modular.get<PromoterRankingCubit>()
-        .getTop3Promoters(widget.user.registeredPromoterIDs ?? []);
+        .getTop3Promoters(widget.user.registeredPromoterIDs ?? [], timePeriod: _selectedTimePeriod);
   }
 
   @override
@@ -38,10 +42,45 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Promoter Rangliste",
-                style: themeData.textTheme.bodyLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Promoter Rangliste",
+                    style: themeData.textTheme.bodyLarge!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Zeitraum:",
+                        style: themeData.textTheme.bodySmall!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(width: 8),
+                      UnderlinedDropdown<TimePeriod>(
+                        value: _selectedTimePeriod,
+                        items: [TimePeriod.month, TimePeriod.quarter, TimePeriod.year]
+                            .map((period) {
+                          return DropdownMenuItem<TimePeriod>(
+                            value: period,
+                            child: Text(period.value),
+                          );
+                        }).toList(),
+                        onChanged: (TimePeriod? newPeriod) {
+                          if (newPeriod != null) {
+                            setState(() {
+                              _selectedTimePeriod = newPeriod;
+                            });
+                            // Reload data with new time period
+                            Modular.get<PromoterRankingCubit>()
+                                .getTop3Promoters(widget.user.registeredPromoterIDs ?? [], timePeriod: _selectedTimePeriod);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               if (state is PromoterRankingGetTop3FailureState) ...[
@@ -51,7 +90,7 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
                       "Die Promoter-Rangliste konnte nicht geladen werden.",
                   callback: () => Modular.get<PromoterRankingCubit>()
                       .getTop3Promoters(
-                          widget.user.registeredPromoterIDs ?? []),
+                          widget.user.registeredPromoterIDs ?? [], timePeriod: _selectedTimePeriod),
                 )
               ] else if (state is PromoterRankingGetTop3NoPromotersState) ...[
                 Padding(

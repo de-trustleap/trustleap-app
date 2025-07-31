@@ -20,23 +20,6 @@ class DashboardRecommendationsCubit
   void getRecommendationsCompany(String userID) async {
     emit(DashboardRecommendationsGetRecosLoadingState());
 
-    /* TODO: Uncomment for testing trend functionality
-    // For testing purposes, return mock data
-    final mockPromoterRecommendations = DashboardRecommendationsMockData.getMockPromoterRecommendations();
-    final allRecommendations = <UserRecommendation>[];
-    for (final promoterRec in mockPromoterRecommendations) {
-      allRecommendations.addAll(promoterRec.recommendations);
-    }
-
-    emit(DashboardRecommendationsGetRecosSuccessState(
-      recommendation: allRecommendations,
-      promoterRecommendations: mockPromoterRecommendations,
-      allLandingPages: const [], // Empty for mock data
-      filteredLandingPages: const [], // Empty for mock data
-    ));
-    */
-
-    // Original implementation:
     final failureOrSuccess =
         await recommendationRepo.getRecommendationsCompanyWithArchived(userID);
     failureOrSuccess.fold(
@@ -73,18 +56,6 @@ class DashboardRecommendationsCubit
       String userID, List<String>? landingPageIDs) async {
     emit(DashboardRecommendationsGetRecosLoadingState());
 
-    /* TODO: Uncomment for testing trend functionality
-    // For testing purposes, return mock data
-    final mockRecommendations = DashboardRecommendationsMockData.getMockRecommendations();
-
-    emit(DashboardRecommendationsGetRecosSuccessState(
-      recommendation: mockRecommendations,
-      allLandingPages: const [], // Empty for mock data
-      filteredLandingPages: const [], // Empty for mock data
-    ));
-    */
-
-    // Original implementation with archived recommendations:
     final failureOrSuccess =
         await recommendationRepo.getRecommendationsWithArchived(userID);
     failureOrSuccess.fold(

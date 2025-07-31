@@ -148,6 +148,7 @@ class DashboardRecommendationsHelper {
         startDate = now.subtract(const Duration(days: 7));
         break;
       case TimePeriod.month:
+      case TimePeriod.quarter:
       case TimePeriod.year:
         startDate = DateTime(now.year, now.month - 1, now.day);
         break;
@@ -164,6 +165,7 @@ class DashboardRecommendationsHelper {
       case TimePeriod.week:
         return localization.dashboard_recommendations_last_7_days(count);
       case TimePeriod.month:
+      case TimePeriod.quarter:
       case TimePeriod.year:
         return localization.dashboard_recommendations_last_month(count);
     }
@@ -201,6 +203,7 @@ class DashboardRecommendationsHelper {
         previousPeriodEnd = currentTime.subtract(const Duration(days: 7));
         break;
       case TimePeriod.month:
+      case TimePeriod.quarter:
       case TimePeriod.year:
         currentPeriodStart = DateTime(currentTime.year, currentTime.month, 1);
         final previousMonth =
@@ -251,7 +254,7 @@ class DashboardRecommendationsHelper {
 
     if (previousCount > 0) {
       percentageChange = ((currentCount - previousCount) / previousCount * 100);
-      
+
       // Do not show changes under 1%
       const threshold = 1.0;
       if (percentageChange.abs() > threshold) {
@@ -272,4 +275,3 @@ class DashboardRecommendationsHelper {
     );
   }
 }
-

@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/dashboard_ranked_promoter.dart';
@@ -18,7 +19,8 @@ class DashboardRepositoryImplementation implements DashboardRepository {
 
   @override
   Future<Either<DatabaseFailure, List<DashboardRankedPromoter>>>
-      getTop3Promoters(List<String> registeredPromoterIDs) async {
+      getTop3Promoters(List<String> registeredPromoterIDs,
+          {TimePeriod? timePeriod}) async {
     if (registeredPromoterIDs.isEmpty) {
       return right([]);
     }
@@ -53,7 +55,8 @@ class DashboardRepositoryImplementation implements DashboardRepository {
           promoterCompletedCounts[promoter.id.value] = 0;
         } else {
           final completedCountResult = await _countCompletedRecommendations(
-              promoter.archivedRecommendationIDs!, archivedRecoCollection);
+              promoter.archivedRecommendationIDs!, archivedRecoCollection,
+              timePeriod: timePeriod);
 
           if (completedCountResult.isLeft()) {
             return completedCountResult.fold(
@@ -129,9 +132,34 @@ class DashboardRepositoryImplementation implements DashboardRepository {
   /// Helper method to count completed recommendations for a promoter
   Future<Either<DatabaseFailure, int>> _countCompletedRecommendations(
       List<String> recommendationIDs,
-      CollectionReference<Map<String, dynamic>> archivedRecoCollection) async {
+      CollectionReference<Map<String, dynamic>> archivedRecoCollection,
+      {TimePeriod? timePeriod}) async {
     if (recommendationIDs.isEmpty) {
       return right(0);
+    }
+
+    // Calculate date range based on TimePeriod
+    DateTime? startDate;
+    if (timePeriod != null) {
+      final now = DateTime.now();
+      switch (timePeriod) {
+        case TimePeriod.day:
+        case TimePeriod.week:
+          startDate = now.subtract(Duration(days: now.weekday - 1));
+          startDate = DateTime(startDate.year, startDate.month, startDate.day);
+          break;
+        case TimePeriod.month:
+          startDate = DateTime(now.year, now.month, 1);
+          break;
+        case TimePeriod.quarter:
+          final currentQuarter = ((now.month - 1) ~/ 3) + 1;
+          final quarterStartMonth = (currentQuarter - 1) * 3 + 1;
+          startDate = DateTime(now.year, quarterStartMonth, 1);
+          break;
+        case TimePeriod.year:
+          startDate = DateTime(now.year, 1, 1);
+          break;
+      }
     }
 
     // Split into chunks of 10 for Firestore whereIn limitation
@@ -150,7 +178,15 @@ class DashboardRepositoryImplementation implements DashboardRepository {
                 doc.data(), doc.id);
 
             if (archivedReco.success != null) {
-              completedCount++;
+              // Apply time period filtering if specified
+              if (startDate != null) {
+                if (archivedReco.finishedTimeStamp.isAfter(startDate)) {
+                  completedCount++;
+                }
+              } else {
+                // No time filtering, count all completed
+                completedCount++;
+              }
             }
           }
         }
