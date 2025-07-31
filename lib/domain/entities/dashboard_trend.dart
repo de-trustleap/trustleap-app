@@ -1,4 +1,6 @@
-class DashboardTrend {
+import 'package:equatable/equatable.dart';
+
+class DashboardTrend extends Equatable {
   final int currentPeriodCount;
   final int previousPeriodCount;
   final double percentageChange;
@@ -14,4 +16,13 @@ class DashboardTrend {
   });
 
   bool get isStable => !isIncreasing && !isDecreasing;
+
+  @override
+  List<Object?> get props => [
+        currentPeriodCount,
+        previousPeriodCount,
+        percentageChange,
+        isIncreasing,
+        isDecreasing
+      ];
 }
