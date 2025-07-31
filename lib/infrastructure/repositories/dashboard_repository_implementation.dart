@@ -48,12 +48,12 @@ class DashboardRepositoryImplementation implements DashboardRepository {
       final Map<String, String> promoterIDToName = {};
 
       for (final promoter in promoters) {
-        if (promoter.recommendationIDs == null ||
-            promoter.recommendationIDs!.isEmpty) {
+        if (promoter.archivedRecommendationIDs == null ||
+            promoter.archivedRecommendationIDs!.isEmpty) {
           promoterCompletedCounts[promoter.id.value] = 0;
         } else {
           final completedCountResult = await _countCompletedRecommendations(
-              promoter.recommendationIDs!, archivedRecoCollection);
+              promoter.archivedRecommendationIDs!, archivedRecoCollection);
 
           if (completedCountResult.isLeft()) {
             return completedCountResult.fold(
