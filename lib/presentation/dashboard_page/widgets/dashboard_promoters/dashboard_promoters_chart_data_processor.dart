@@ -34,6 +34,7 @@ class DashboardPromotersChartDataProcessor {
       case TimePeriod.week:
         return 7;
       case TimePeriod.month:
+      case TimePeriod.quarter:
         return 30;
       case TimePeriod.year:
         return 12;
@@ -47,6 +48,7 @@ class DashboardPromotersChartDataProcessor {
         final day = now.subtract(Duration(days: 6 - index));
         return DateTime(day.year, day.month, day.day);
       case TimePeriod.month:
+      case TimePeriod.quarter:
         final day = now.subtract(Duration(days: 29 - index));
         return DateTime(day.year, day.month, day.day);
       case TimePeriod.year:
@@ -73,6 +75,7 @@ class DashboardPromotersChartDataProcessor {
       case TimePeriod.day:
       case TimePeriod.week:
       case TimePeriod.month:
+      case TimePeriod.quarter:
         return DateTime(timestamp.year, timestamp.month, timestamp.day);
       case TimePeriod.year:
         return DateTime(timestamp.year, timestamp.month, 1);
@@ -88,6 +91,7 @@ class DashboardPromotersChartDataProcessor {
         final day = now.subtract(Duration(days: 6 - index));
         return DateFormat('E', 'de_DE').format(day);
       case TimePeriod.month:
+      case TimePeriod.quarter:
         final day = now.subtract(Duration(days: 29 - index));
         return DateFormat('dd.MM').format(day);
       case TimePeriod.year:
@@ -102,6 +106,7 @@ class DashboardPromotersChartDataProcessor {
       case TimePeriod.week:
         return 1; // Jeden Tag
       case TimePeriod.month:
+      case TimePeriod.quarter:
         return 5; // Alle 5 Tage
       case TimePeriod.year:
         return 2; // Alle 2 Monate

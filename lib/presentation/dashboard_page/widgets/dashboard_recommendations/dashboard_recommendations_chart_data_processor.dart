@@ -37,6 +37,7 @@ class DashboardRecommendationsChartDataProcessor {
       case TimePeriod.week:
         return 7;
       case TimePeriod.month:
+      case TimePeriod.quarter:
       case TimePeriod.year:
         return 30;
     }
@@ -51,6 +52,7 @@ class DashboardRecommendationsChartDataProcessor {
         final day = now.subtract(Duration(days: 6 - index));
         return DateTime(day.year, day.month, day.day);
       case TimePeriod.month:
+      case TimePeriod.quarter:
       case TimePeriod.year:
         final day = now.subtract(Duration(days: 29 - index));
         return DateTime(day.year, day.month, day.day);
@@ -86,6 +88,7 @@ class DashboardRecommendationsChartDataProcessor {
             timestamp.year, timestamp.month, timestamp.day, timestamp.hour);
       case TimePeriod.week:
       case TimePeriod.month:
+      case TimePeriod.quarter:
       case TimePeriod.year:
         return DateTime(timestamp.year, timestamp.month, timestamp.day);
     }
@@ -101,6 +104,7 @@ class DashboardRecommendationsChartDataProcessor {
         final day = now.subtract(Duration(days: 6 - index));
         return DateFormat('E', 'de_DE').format(day);
       case TimePeriod.month:
+      case TimePeriod.quarter:
       case TimePeriod.year:
         final day = now.subtract(Duration(days: 29 - index));
         return DateFormat('dd.MM').format(day);
@@ -114,6 +118,7 @@ class DashboardRecommendationsChartDataProcessor {
       case TimePeriod.week:
         return 1; // Jeden Tag
       case TimePeriod.month:
+      case TimePeriod.quarter:
       case TimePeriod.year:
         return 5; // Alle 5 Tage (6 Labels: 0, 5, 10, 15, 20, 25)
     }

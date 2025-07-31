@@ -2705,6 +2705,30 @@
     "@dashboard_recommendations_filter_tooltip": {
         "description": "Tooltip for the filter button"
     },
+    "dashboard_promoter_ranking_title": "Promoter Ranking",
+    "@dashboard_promoter_ranking_title": {
+        "description": "Title of the promoter ranking"
+    },
+    "dashboard_promoter_ranking_period": "Period:",
+    "@dashboard_promoter_ranking_period": {
+        "description": "Label for the period filter"
+    },
+    "dashboard_promoter_ranking_loading_error_title": "Loading Error",
+    "@dashboard_promoter_ranking_loading_error_title": {
+        "description": "Title for error loading promoter ranking"
+    },
+    "dashboard_promoter_ranking_loading_error_message": "The promoter ranking could not be loaded.",
+    "@dashboard_promoter_ranking_loading_error_message": {
+        "description": "Error message when loading promoter ranking fails"
+    },
+    "dashboard_promoter_ranking_no_promoters": "No promoters found.",
+    "@dashboard_promoter_ranking_no_promoters": {
+        "description": "Message when no promoters are found"
+    },
+    "dashboard_promoter_ranking_no_data": "No promoter data available.",
+    "@dashboard_promoter_ranking_no_data": {
+        "description": "Message when no promoter data is available"
+    },
     "admin_legals_title": "Legal",
     "@admin_legals_title": {
         "description": "Title of the Admin Legals page"
