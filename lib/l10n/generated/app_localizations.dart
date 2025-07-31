@@ -4035,6 +4035,42 @@ abstract class AppLocalizations {
   /// **'Open filter'**
   String get dashboard_recommendations_filter_tooltip;
 
+  /// Title of the promoter ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter Ranking'**
+  String get dashboard_promoter_ranking_title;
+
+  /// Label for the period filter
+  ///
+  /// In en, this message translates to:
+  /// **'Period:'**
+  String get dashboard_promoter_ranking_period;
+
+  /// Title for error loading promoter ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Loading Error'**
+  String get dashboard_promoter_ranking_loading_error_title;
+
+  /// Error message when loading promoter ranking fails
+  ///
+  /// In en, this message translates to:
+  /// **'The promoter ranking could not be loaded.'**
+  String get dashboard_promoter_ranking_loading_error_message;
+
+  /// Message when no promoters are found
+  ///
+  /// In en, this message translates to:
+  /// **'No promoters found.'**
+  String get dashboard_promoter_ranking_no_promoters;
+
+  /// Message when no promoter data is available
+  ///
+  /// In en, this message translates to:
+  /// **'No promoter data available.'**
+  String get dashboard_promoter_ranking_no_data;
+
   /// Title of the Admin Legals page
   ///
   /// In en, this message translates to:

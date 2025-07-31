@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/dashboard/promoter_ranking/promoter_ranking_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
@@ -25,13 +26,15 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
   void initState() {
     super.initState();
 
-    Modular.get<PromoterRankingCubit>()
-        .getTop3Promoters(widget.user.registeredPromoterIDs ?? [], timePeriod: _selectedTimePeriod);
+    Modular.get<PromoterRankingCubit>().getTop3Promoters(
+        widget.user.registeredPromoterIDs ?? [],
+        timePeriod: _selectedTimePeriod);
   }
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
     final cubit = Modular.get<PromoterRankingCubit>();
 
     return BlocBuilder<PromoterRankingCubit, PromoterRankingState>(
@@ -46,22 +49,25 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Promoter Rangliste",
+                    localizations.dashboard_promoter_ranking_title,
                     style: themeData.textTheme.bodyLarge!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   Row(
                     children: [
                       Text(
-                        "Zeitraum:",
+                        localizations.dashboard_promoter_ranking_period,
                         style: themeData.textTheme.bodySmall!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(width: 8),
                       UnderlinedDropdown<TimePeriod>(
                         value: _selectedTimePeriod,
-                        items: [TimePeriod.month, TimePeriod.quarter, TimePeriod.year]
-                            .map((period) {
+                        items: [
+                          TimePeriod.month,
+                          TimePeriod.quarter,
+                          TimePeriod.year
+                        ].map((period) {
                           return DropdownMenuItem<TimePeriod>(
                             value: period,
                             child: Text(period.value),
@@ -72,9 +78,10 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
                             setState(() {
                               _selectedTimePeriod = newPeriod;
                             });
-                            // Reload data with new time period
                             Modular.get<PromoterRankingCubit>()
-                                .getTop3Promoters(widget.user.registeredPromoterIDs ?? [], timePeriod: _selectedTimePeriod);
+                                .getTop3Promoters(
+                                    widget.user.registeredPromoterIDs ?? [],
+                                    timePeriod: _selectedTimePeriod);
                           }
                         },
                       ),
@@ -85,25 +92,26 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
               const SizedBox(height: 16),
               if (state is PromoterRankingGetTop3FailureState) ...[
                 ErrorView(
-                  title: "Fehler beim Laden",
-                  message:
-                      "Die Promoter-Rangliste konnte nicht geladen werden.",
+                  title: localizations
+                      .dashboard_promoter_ranking_loading_error_title,
+                  message: localizations
+                      .dashboard_promoter_ranking_loading_error_message,
                   callback: () => Modular.get<PromoterRankingCubit>()
-                      .getTop3Promoters(
-                          widget.user.registeredPromoterIDs ?? [], timePeriod: _selectedTimePeriod),
+                      .getTop3Promoters(widget.user.registeredPromoterIDs ?? [],
+                          timePeriod: _selectedTimePeriod),
                 )
               ] else if (state is PromoterRankingGetTop3NoPromotersState) ...[
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
-                    "Keine Promoter gefunden.",
+                    localizations.dashboard_promoter_ranking_no_promoters,
                     style: themeData.textTheme.bodyLarge?.copyWith(
                       color: themeData.colorScheme.onSurfaceVariant,
                     ),
                   ),
                 )
               ] else if (state is PromoterRankingGetTop3SuccessState) ...[
-                _buildPromoterList(state.promoters, themeData)
+                _buildPromoterList(state.promoters, themeData, localizations)
               ] else ...[
                 const LoadingIndicator()
               ]
@@ -114,12 +122,13 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
     );
   }
 
-  Widget _buildPromoterList(List<dynamic> promoters, ThemeData themeData) {
+  Widget _buildPromoterList(List<dynamic> promoters, ThemeData themeData,
+      AppLocalizations localizations) {
     if (promoters.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(20.0),
         child: Text(
-          "Keine Promoter-Daten verfügbar.",
+          localizations.dashboard_promoter_ranking_no_data,
           style: themeData.textTheme.bodyMedium?.copyWith(
             color: themeData.colorScheme.onSurfaceVariant,
           ),
@@ -175,7 +184,8 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
           ),
           Container(
             constraints: const BoxConstraints(minWidth: 32),
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
             decoration: BoxDecoration(
               color: themeData.colorScheme.primaryContainer,
               borderRadius: BorderRadius.circular(16),

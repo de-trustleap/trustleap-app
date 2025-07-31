@@ -2705,6 +2705,30 @@
     "@dashboard_recommendations_filter_tooltip": {
         "description": "Tooltip für den Filter-Button"
     },
+    "dashboard_promoter_ranking_title": "Promoter Rangliste",
+    "@dashboard_promoter_ranking_title": {
+        "description": "Titel der Promoter Rangliste"
+    },
+    "dashboard_promoter_ranking_period": "Zeitraum:",
+    "@dashboard_promoter_ranking_period": {
+        "description": "Label für den Zeitraum-Filter"
+    },
+    "dashboard_promoter_ranking_loading_error_title": "Fehler beim Laden",
+    "@dashboard_promoter_ranking_loading_error_title": {
+        "description": "Titel für Fehler beim Laden der Promoter-Rangliste"
+    },
+    "dashboard_promoter_ranking_loading_error_message": "Die Promoter-Rangliste konnte nicht geladen werden.",
+    "@dashboard_promoter_ranking_loading_error_message": {
+        "description": "Fehlermeldung beim Laden der Promoter-Rangliste"
+    },
+    "dashboard_promoter_ranking_no_promoters": "Keine Promoter gefunden.",
+    "@dashboard_promoter_ranking_no_promoters": {
+        "description": "Meldung wenn keine Promoter gefunden wurden"
+    },
+    "dashboard_promoter_ranking_no_data": "Keine Promoter-Daten verfügbar.",
+    "@dashboard_promoter_ranking_no_data": {
+        "description": "Meldung wenn keine Promoter-Daten verfügbar sind"
+    },
     "admin_legals_title": "Rechtliches",
     "@admin_legals_title": {
         "description": "Titel der Admin Legals Seite"

@@ -2339,6 +2339,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard_recommendations_filter_tooltip => 'Open filter';
 
   @override
+  String get dashboard_promoter_ranking_title => 'Promoter Ranking';
+
+  @override
+  String get dashboard_promoter_ranking_period => 'Period:';
+
+  @override
+  String get dashboard_promoter_ranking_loading_error_title => 'Loading Error';
+
+  @override
+  String get dashboard_promoter_ranking_loading_error_message =>
+      'The promoter ranking could not be loaded.';
+
+  @override
+  String get dashboard_promoter_ranking_no_promoters => 'No promoters found.';
+
+  @override
+  String get dashboard_promoter_ranking_no_data =>
+      'No promoter data available.';
+
+  @override
   String get admin_legals_title => 'Legal';
 
   @override
