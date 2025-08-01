@@ -2788,5 +2788,21 @@
     "admin_legals_save_success": "Daten für Rechtliches erfolgreich gespeichert!",
     "@admin_legals_save_success": {
         "description": "Erfolgsmeldung nach dem Speichern"
+    },
+    "dashboard_quicklink_recommendation_text": "Heute schon eine Empfehlung ausgesprochen?",
+    "@dashboard_quicklink_recommendation_text": {
+        "description": "Text für den ersten Dashboard Quicklink - Empfehlung aussprechen"
+    },
+    "dashboard_quicklink_recommendation_button": "Empfehlung aussprechen",
+    "@dashboard_quicklink_recommendation_button": {
+        "description": "Button Text für den ersten Dashboard Quicklink - Empfehlung aussprechen"
+    },
+    "dashboard_quicklink_manager_text": "Heute schon deine Empfehlungen überprüft?",
+    "@dashboard_quicklink_manager_text": {
+        "description": "Text für den zweiten Dashboard Quicklink - Empfehlungsmanager"
+    },
+    "dashboard_quicklink_manager_button": "Zum Empfehlungsmanager",
+    "@dashboard_quicklink_manager_button": {
+        "description": "Button Text für den zweiten Dashboard Quicklink - Empfehlungsmanager"
     }
 }

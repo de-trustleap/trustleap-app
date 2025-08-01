@@ -3,10 +3,12 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoter_ranking/dashboard_promoter_ranking.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_landingpage_ranking/dashboard_landingpage_ranking.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoter_ranking/dashboard_promoter_ranking.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_quicklink.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,6 +21,8 @@ class DashboardOverview extends StatefulWidget {
 }
 
 class _DashboardOverviewState extends State<DashboardOverview> {
+  final largeLayoutBreakpoint = 1200;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +34,7 @@ class _DashboardOverviewState extends State<DashboardOverview> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final cubit = Modular.get<DashboardOverviewCubit>();
+
     return BlocBuilder<DashboardOverviewCubit, DashboardOverviewState>(
       bloc: cubit,
       builder: (context, state) {
@@ -48,10 +53,41 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                   style: themeData.textTheme.titleLarge!
                       .copyWith(fontSize: 40, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
+              if (state.user.role == Role.promoter) ...[
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          DashboardQuicklink(
+                            text: localization
+                                .dashboard_quicklink_recommendation_text,
+                            buttonText: localization
+                                .dashboard_quicklink_recommendation_button,
+                            path: RoutePaths.homePath +
+                                RoutePaths.recommendationsPath,
+                          ),
+                          const SizedBox(width: 20),
+                          DashboardQuicklink(
+                            text: localization.dashboard_quicklink_manager_text,
+                            buttonText:
+                                localization.dashboard_quicklink_manager_button,
+                            path: RoutePaths.homePath +
+                                RoutePaths.recommendationManagerPath,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 40),
+              ],
               LayoutBuilder(
                 builder: (context, constraints) {
                   if (state.user.role == Role.company &&
-                      constraints.maxWidth >= 1200) {
+                      constraints.maxWidth >= largeLayoutBreakpoint) {
                     return Column(
                       children: [
                         Padding(
@@ -77,11 +113,13 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                child: DashboardPromoterRanking(user: state.user),
+                                child:
+                                    DashboardPromoterRanking(user: state.user),
                               ),
                               const SizedBox(width: 40),
                               Expanded(
-                                child: DashboardLandingpageRanking(user: state.user),
+                                child: DashboardLandingpageRanking(
+                                    user: state.user),
                               ),
                             ],
                           ),

@@ -2407,4 +2407,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get admin_legals_save_success => 'Legal data successfully saved!';
+
+  @override
+  String get dashboard_quicklink_recommendation_text =>
+      'Have you made a recommendation today?';
+
+  @override
+  String get dashboard_quicklink_recommendation_button =>
+      'Make a recommendation';
+
+  @override
+  String get dashboard_quicklink_manager_text =>
+      'Have you checked your recommendations today?';
+
+  @override
+  String get dashboard_quicklink_manager_button =>
+      'Go to Recommendation Manager';
 }
