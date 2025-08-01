@@ -2788,5 +2788,21 @@
     "admin_legals_save_success": "Legal data successfully saved!",
     "@admin_legals_save_success": {
         "description": "Success message after saving"
+    },
+    "dashboard_quicklink_recommendation_text": "Have you made a recommendation today?",
+    "@dashboard_quicklink_recommendation_text": {
+        "description": "Text for the first dashboard quicklink - make recommendation"
+    },
+    "dashboard_quicklink_recommendation_button": "Make a recommendation",
+    "@dashboard_quicklink_recommendation_button": {
+        "description": "Button text for the first dashboard quicklink - make recommendation"
+    },
+    "dashboard_quicklink_manager_text": "Have you checked your recommendations today?",
+    "@dashboard_quicklink_manager_text": {
+        "description": "Text for the second dashboard quicklink - recommendation manager"
+    },
+    "dashboard_quicklink_manager_button": "Go to Recommendation Manager",
+    "@dashboard_quicklink_manager_button": {
+        "description": "Button text for the second dashboard quicklink - recommendation manager"
     }
 }

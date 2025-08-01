@@ -2453,4 +2453,19 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get admin_legals_save_success =>
       'Daten für Rechtliches erfolgreich gespeichert!';
+
+  @override
+  String get dashboard_quicklink_recommendation_text =>
+      'Heute schon eine Empfehlung ausgesprochen?';
+
+  @override
+  String get dashboard_quicklink_recommendation_button =>
+      'Empfehlung aussprechen';
+
+  @override
+  String get dashboard_quicklink_manager_text =>
+      'Heute schon deine Empfehlungen überprüft?';
+
+  @override
+  String get dashboard_quicklink_manager_button => 'Zum Empfehlungsmanager';
 }

@@ -4160,6 +4160,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Legal data successfully saved!'**
   String get admin_legals_save_success;
+
+  /// Text for the first dashboard quicklink - make recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Have you made a recommendation today?'**
+  String get dashboard_quicklink_recommendation_text;
+
+  /// Button text for the first dashboard quicklink - make recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Make a recommendation'**
+  String get dashboard_quicklink_recommendation_button;
+
+  /// Text for the second dashboard quicklink - recommendation manager
+  ///
+  /// In en, this message translates to:
+  /// **'Have you checked your recommendations today?'**
+  String get dashboard_quicklink_manager_text;
+
+  /// Button text for the second dashboard quicklink - recommendation manager
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Recommendation Manager'**
+  String get dashboard_quicklink_manager_button;
 }
 
 class _AppLocalizationsDelegate
