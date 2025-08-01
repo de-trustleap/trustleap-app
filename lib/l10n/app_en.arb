@@ -2729,6 +2729,30 @@
     "@dashboard_promoter_ranking_no_data": {
         "description": "Message when no promoter data is available"
     },
+    "dashboard_landingpage_ranking_title": "Landingpages Ranking",
+    "@dashboard_landingpage_ranking_title": {
+        "description": "Title for the landing page ranking"
+    },
+    "dashboard_landingpage_ranking_period": "Period:",
+    "@dashboard_landingpage_ranking_period": {
+        "description": "Label for the period selection in the landing page ranking"
+    },
+    "dashboard_landingpage_ranking_loading_error_title": "Loading Error",
+    "@dashboard_landingpage_ranking_loading_error_title": {
+        "description": "Error title when loading landing page ranking"
+    },
+    "dashboard_landingpage_ranking_loading_error_message": "The landing page ranking could not be loaded.",
+    "@dashboard_landingpage_ranking_loading_error_message": {
+        "description": "Error message when loading landing page ranking"
+    },
+    "dashboard_landingpage_ranking_no_landingpages": "No landing pages found.",
+    "@dashboard_landingpage_ranking_no_landingpages": {
+        "description": "Message when no landing pages are found"
+    },
+    "dashboard_landingpage_ranking_no_data": "No landing page data available.",
+    "@dashboard_landingpage_ranking_no_data": {
+        "description": "Message when no landing page data is available"
+    },
     "admin_legals_title": "Legal",
     "@admin_legals_title": {
         "description": "Title of the Admin Legals page"

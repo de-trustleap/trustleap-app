@@ -51,14 +51,14 @@ class _DashboardLandingpageRankingState
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Top 3 Landingpages",
+                  localizations.dashboard_landingpage_ranking_title,
                   style: themeData.textTheme.bodyLarge!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children: [
                     Text(
-                      "Zeitraum",
+                      localizations.dashboard_landingpage_ranking_period,
                       style: themeData.textTheme.bodySmall!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
@@ -94,9 +94,8 @@ class _DashboardLandingpageRankingState
             const SizedBox(height: 16),
             if (state is DashboardLandingPageRankingGetTop3FailureState) ...[
               ErrorView(
-                title: "Fehler beim Laden",
-                message:
-                    "Die Landingpage Rangliste konnte nicht geladen werden",
+                title: localizations.dashboard_landingpage_ranking_loading_error_title,
+                message: localizations.dashboard_landingpage_ranking_loading_error_message,
                 callback: () => Modular.get<DashboardLandingpageRankingCubit>()
                     .getTop3LandingPages(
                         widget.user.landingPageIDs ?? [], _selectedTimePeriod),
@@ -106,7 +105,7 @@ class _DashboardLandingpageRankingState
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
-                  "Keine Landingpages gefunden",
+                  localizations.dashboard_landingpage_ranking_no_landingpages,
                   style: themeData.textTheme.bodyLarge?.copyWith(
                     color: themeData.colorScheme.onSurfaceVariant,
                   ),
@@ -130,7 +129,7 @@ class _DashboardLandingpageRankingState
       return Padding(
         padding: const EdgeInsets.all(20.0),
         child: Text(
-          localizations.dashboard_promoter_ranking_no_data,
+          localizations.dashboard_landingpage_ranking_no_data,
           style: themeData.textTheme.bodyMedium?.copyWith(
             color: themeData.colorScheme.onSurfaceVariant,
           ),

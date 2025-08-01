@@ -29,7 +29,3 @@ class DashboardLandingpageRankingCubit
     }
   }
 }
-
-// TODO: IMPLEMENT UI FOR TOP 3 CARD (FERTIG)
-// TODO: UPDATE TESTS (FERTIG)
-// TODO: LOCALIZATION

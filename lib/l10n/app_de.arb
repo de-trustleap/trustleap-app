@@ -2729,6 +2729,30 @@
     "@dashboard_promoter_ranking_no_data": {
         "description": "Meldung wenn keine Promoter-Daten verfügbar sind"
     },
+    "dashboard_landingpage_ranking_title": "Landingpages Rangliste",
+    "@dashboard_landingpage_ranking_title": {
+        "description": "Titel für die Landingpage Rangliste"
+    },
+    "dashboard_landingpage_ranking_period": "Zeitraum:",
+    "@dashboard_landingpage_ranking_period": {
+        "description": "Label für die Zeitraum-Auswahl in der Landingpage Rangliste"
+    },
+    "dashboard_landingpage_ranking_loading_error_title": "Fehler beim Laden",
+    "@dashboard_landingpage_ranking_loading_error_title": {
+        "description": "Fehler-Titel beim Laden der Landingpage Rangliste"
+    },
+    "dashboard_landingpage_ranking_loading_error_message": "Die Landingpage-Rangliste konnte nicht geladen werden.",
+    "@dashboard_landingpage_ranking_loading_error_message": {
+        "description": "Fehler-Nachricht beim Laden der Landingpage Rangliste"
+    },
+    "dashboard_landingpage_ranking_no_landingpages": "Keine Landingpages gefunden.",
+    "@dashboard_landingpage_ranking_no_landingpages": {
+        "description": "Meldung wenn keine Landingpages gefunden wurden"
+    },
+    "dashboard_landingpage_ranking_no_data": "Keine Landingpage-Daten verfügbar.",
+    "@dashboard_landingpage_ranking_no_data": {
+        "description": "Meldung wenn keine Landingpage-Daten verfügbar sind"
+    },
     "admin_legals_title": "Rechtliches",
     "@admin_legals_title": {
         "description": "Titel der Admin Legals Seite"
