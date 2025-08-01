@@ -49,7 +49,7 @@ void main() {
           .thenAnswer((_) async => right(mockRankedPromoters));
 
       // When
-      cubit.getTop3Promoters(testPromoterIDs);
+      cubit.getTop3Promoters(testPromoterIDs, null);
       await untilCalled(mockDashboardRepo.getTop3Promoters(testPromoterIDs));
 
       // Then
@@ -65,7 +65,7 @@ void main() {
           .thenAnswer((_) async => right(mockRankedPromoters));
 
       // When
-      cubit.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.month);
+      cubit.getTop3Promoters(testPromoterIDs, TimePeriod.month);
       await untilCalled(mockDashboardRepo.getTop3Promoters(testPromoterIDs,
           timePeriod: TimePeriod.month));
 
@@ -88,7 +88,7 @@ void main() {
 
       // Then
       expectLater(cubit.stream, emitsInOrder(expectedResult));
-      cubit.getTop3Promoters(testPromoterIDs);
+      cubit.getTop3Promoters(testPromoterIDs, null);
     });
 
     test(
@@ -105,7 +105,7 @@ void main() {
 
       // Then
       expectLater(cubit.stream, emitsInOrder(expectedResult));
-      cubit.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.quarter);
+      cubit.getTop3Promoters(testPromoterIDs, TimePeriod.quarter);
     });
 
     test("should emit NoPromotersState when promoterIDs list is empty", () {
@@ -114,7 +114,7 @@ void main() {
 
       // Then
       expectLater(cubit.stream, emitsInOrder(expectedResult));
-      cubit.getTop3Promoters([]);
+      cubit.getTop3Promoters([], null);
     });
 
     test(
@@ -130,7 +130,7 @@ void main() {
 
       // Then
       expectLater(cubit.stream, emitsInOrder(expectedResult));
-      cubit.getTop3Promoters(testPromoterIDs);
+      cubit.getTop3Promoters(testPromoterIDs, null);
     });
 
     test(
@@ -147,7 +147,7 @@ void main() {
 
       // Then
       expectLater(cubit.stream, emitsInOrder(expectedResult));
-      cubit.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.month);
+      cubit.getTop3Promoters(testPromoterIDs, TimePeriod.month);
     });
 
     test(
@@ -164,7 +164,7 @@ void main() {
 
       // Then
       expectLater(cubit.stream, emitsInOrder(expectedResult));
-      cubit.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.year);
+      cubit.getTop3Promoters(testPromoterIDs, TimePeriod.year);
     });
 
     test(
@@ -181,7 +181,7 @@ void main() {
 
       // Then
       expectLater(cubit.stream, emitsInOrder(expectedResult));
-      cubit.getTop3Promoters(testPromoterIDs);
+      cubit.getTop3Promoters(testPromoterIDs, null);
     });
   });
 }

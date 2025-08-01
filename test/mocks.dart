@@ -24,6 +24,7 @@ import 'package:finanzbegleiter/application/recommendations/recommendations_cubi
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/promoter_ranking/dashboard_promoter_ranking_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/landingpage_ranking/dashboard_landingpage_ranking_cubit.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
@@ -95,6 +96,7 @@ import 'package:mockito/annotations.dart';
   RecommendationManagerTileCubit,
   FeedbackCubit,
   DashboardPromoterRankingCubit,
+  DashboardLandingpageRankingCubit,
   BuildContext,
   FirebaseAuth,
   FirebaseFirestore,

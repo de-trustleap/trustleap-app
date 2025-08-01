@@ -19,8 +19,8 @@ class DashboardLandingpageRankingCubit
       emit(DashboardLandingPageRankingGetTop3NoPagesState());
     } else {
       emit(DashboardLandingPageRankingGetTop3LoadingState());
-      final failureOrSuccess =
-          await dashboardRepo.getTop3LandingPages(landingPageIDs, timePeriod: timePeriod);
+      final failureOrSuccess = await dashboardRepo
+          .getTop3LandingPages(landingPageIDs, timePeriod: timePeriod);
       failureOrSuccess.fold(
           (failure) => emit(
               DashboardLandingPageRankingGetTop3FailureState(failure: failure)),
@@ -30,6 +30,6 @@ class DashboardLandingpageRankingCubit
   }
 }
 
-// TODO: IMPLEMENT UI FOR TOP 3 CARD
-// TODO: UPDATE TESTS
+// TODO: IMPLEMENT UI FOR TOP 3 CARD (FERTIG)
+// TODO: UPDATE TESTS (FERTIG)
 // TODO: LOCALIZATION
