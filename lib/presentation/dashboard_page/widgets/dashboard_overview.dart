@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoter_ranking/dashboard_promoter_ranking.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_landingpage_ranking/dashboard_landingpage_ranking.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,8 +76,13 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              DashboardPromoterRanking(user: state.user),
-                              const Spacer(),
+                              Expanded(
+                                child: DashboardPromoterRanking(user: state.user),
+                              ),
+                              const SizedBox(width: 40),
+                              Expanded(
+                                child: DashboardLandingpageRanking(user: state.user),
+                              ),
                             ],
                           ),
                         ),
@@ -91,6 +97,8 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                           DashboardPromoters(user: state.user),
                           const SizedBox(height: 40),
                           DashboardPromoterRanking(user: state.user),
+                          const SizedBox(height: 40),
+                          DashboardLandingpageRanking(user: state.user),
                         ],
                       ],
                     );

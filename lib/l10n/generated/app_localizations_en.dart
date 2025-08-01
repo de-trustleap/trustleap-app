@@ -2359,6 +2359,28 @@ class AppLocalizationsEn extends AppLocalizations {
       'No promoter data available.';
 
   @override
+  String get dashboard_landingpage_ranking_title => 'Landingpages Ranking';
+
+  @override
+  String get dashboard_landingpage_ranking_period => 'Period:';
+
+  @override
+  String get dashboard_landingpage_ranking_loading_error_title =>
+      'Loading Error';
+
+  @override
+  String get dashboard_landingpage_ranking_loading_error_message =>
+      'The landing page ranking could not be loaded.';
+
+  @override
+  String get dashboard_landingpage_ranking_no_landingpages =>
+      'No landing pages found.';
+
+  @override
+  String get dashboard_landingpage_ranking_no_data =>
+      'No landing page data available.';
+
+  @override
   String get admin_legals_title => 'Legal';
 
   @override

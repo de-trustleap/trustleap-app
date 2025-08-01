@@ -5,14 +5,15 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/dashboard_ranked_promoter.dart';
 import 'package:finanzbegleiter/domain/repositories/dashboard_repository.dart';
 
-part 'promoter_ranking_state.dart';
+part 'dashboard_promoter_ranking_state.dart';
 
-class PromoterRankingCubit extends Cubit<PromoterRankingState> {
+class DashboardPromoterRankingCubit extends Cubit<PromoterRankingState> {
   final DashboardRepository dashboardRepo;
-  PromoterRankingCubit(this.dashboardRepo) : super(PromoterRankingInitial());
+  DashboardPromoterRankingCubit(this.dashboardRepo)
+      : super(PromoterRankingInitial());
 
-  void getTop3Promoters(List<String> registeredPromoterIDs,
-      {TimePeriod? timePeriod}) async {
+  void getTop3Promoters(
+      List<String> registeredPromoterIDs, TimePeriod? timePeriod) async {
     if (registeredPromoterIDs.isEmpty) {
       emit(PromoterRankingGetTop3NoPromotersState());
     } else {

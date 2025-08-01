@@ -6,8 +6,9 @@ import 'package:finanzbegleiter/application/authentication/auth_observer/auth_ob
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/landingpage_ranking/dashboard_landingpage_ranking_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
-import 'package:finanzbegleiter/application/dashboard/promoter_ranking/promoter_ranking_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/promoter_ranking/dashboard_promoter_ranking_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/promoters/dashboard_promoters_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/feedback/admin_feedback/admin_feedback_cubit.dart';
@@ -140,7 +141,8 @@ class AppModule extends Module {
       ..addLazySingleton(FeedbackCubit.new)
       ..addLazySingleton(AdminFeedbackCubit.new)
       ..addLazySingleton(AdminLegalsCubit.new)
-      ..addLazySingleton(PromoterRankingCubit.new)
+      ..addLazySingleton(DashboardPromoterRankingCubit.new)
+      ..addLazySingleton(DashboardLandingpageRankingCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)

@@ -4071,6 +4071,42 @@ abstract class AppLocalizations {
   /// **'No promoter data available.'**
   String get dashboard_promoter_ranking_no_data;
 
+  /// Title for the landing page ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Landingpages Ranking'**
+  String get dashboard_landingpage_ranking_title;
+
+  /// Label for the period selection in the landing page ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Period:'**
+  String get dashboard_landingpage_ranking_period;
+
+  /// Error title when loading landing page ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Loading Error'**
+  String get dashboard_landingpage_ranking_loading_error_title;
+
+  /// Error message when loading landing page ranking
+  ///
+  /// In en, this message translates to:
+  /// **'The landing page ranking could not be loaded.'**
+  String get dashboard_landingpage_ranking_loading_error_message;
+
+  /// Message when no landing pages are found
+  ///
+  /// In en, this message translates to:
+  /// **'No landing pages found.'**
+  String get dashboard_landingpage_ranking_no_landingpages;
+
+  /// Message when no landing page data is available
+  ///
+  /// In en, this message translates to:
+  /// **'No landing page data available.'**
+  String get dashboard_landingpage_ranking_no_data;
+
   /// Title of the Admin Legals page
   ///
   /// In en, this message translates to:

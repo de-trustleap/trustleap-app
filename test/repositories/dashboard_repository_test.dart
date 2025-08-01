@@ -2,6 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/dashboard_ranked_landingpage.dart';
 import 'package:finanzbegleiter/domain/entities/dashboard_ranked_promoter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -257,6 +258,253 @@ void main() {
       expect(expectedResult, result);
       final promoters = result.getOrElse(() => []);
       expect(promoters.every((p) => p.completedRecommendationsCount == 0), true);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+  });
+
+  group("DashboardRepository_getTop3LandingPages", () {
+    const testLandingPageIDs = ["landing1", "landing2", "landing3"];
+    const mockRankedLandingPages = [
+      DashboardRankedLandingpage(
+        landingPageName: "Immobilien Beratung",
+        rank: 1,
+        completedRecommendationsCount: 25,
+      ),
+      DashboardRankedLandingpage(
+        landingPageName: "Versicherungs Check",
+        rank: 2,
+        completedRecommendationsCount: 18,
+      ),
+      DashboardRankedLandingpage(
+        landingPageName: "Altersvorsorge Planer",
+        rank: 3,
+        completedRecommendationsCount: 12,
+      ),
+    ];
+
+    test(
+        "should return List<DashboardRankedLandingpage> when call is successful without TimePeriod",
+        () async {
+      // Given
+      final expectedResult = right(mockRankedLandingPages);
+      when(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs))
+          .thenAnswer((_) async => right(mockRankedLandingPages));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(testLandingPageIDs);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+
+    test(
+        "should return List<DashboardRankedLandingpage> when call is successful with TimePeriod.month",
+        () async {
+      // Given
+      final expectedResult = right(mockRankedLandingPages);
+      when(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.month))
+          .thenAnswer((_) async => right(mockRankedLandingPages));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.month);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.month));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+
+    test(
+        "should return List<DashboardRankedLandingpage> when call is successful with TimePeriod.quarter",
+        () async {
+      // Given
+      const quarterMockData = [
+        DashboardRankedLandingpage(
+          landingPageName: "Kredit Beratung",
+          rank: 1,
+          completedRecommendationsCount: 67,
+        ),
+        DashboardRankedLandingpage(
+          landingPageName: "Investment Guide",
+          rank: 2,
+          completedRecommendationsCount: 54,
+        ),
+        DashboardRankedLandingpage(
+          landingPageName: "Immobilien Beratung",
+          rank: 3,
+          completedRecommendationsCount: 48,
+        ),
+      ];
+      final expectedResult = right(quarterMockData);
+      when(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.quarter))
+          .thenAnswer((_) async => right(quarterMockData));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.quarter);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.quarter));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+
+    test(
+        "should return List<DashboardRankedLandingpage> when call is successful with TimePeriod.year",
+        () async {
+      // Given
+      const yearMockData = [
+        DashboardRankedLandingpage(
+          landingPageName: "Investment Guide",
+          rank: 1,
+          completedRecommendationsCount: 234,
+        ),
+        DashboardRankedLandingpage(
+          landingPageName: "Steuer Optimierung",
+          rank: 2,
+          completedRecommendationsCount: 189,
+        ),
+        DashboardRankedLandingpage(
+          landingPageName: "Kredit Beratung",
+          rank: 3,
+          completedRecommendationsCount: 167,
+        ),
+      ];
+      final expectedResult = right(yearMockData);
+      when(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.year))
+          .thenAnswer((_) async => right(yearMockData));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.year);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.year));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+
+    test("should return empty list when landingPageIDs list is empty", () async {
+      // Given
+      const emptyLandingPageIDs = <String>[];
+      when(mockDashboardRepo.getTop3LandingPages(emptyLandingPageIDs))
+          .thenAnswer((_) async => right(<DashboardRankedLandingpage>[]));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(emptyLandingPageIDs);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(emptyLandingPageIDs));
+      expect(result.isRight(), true);
+      expect(result.getOrElse(() => []).isEmpty, true);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+
+    test("should return DatabaseFailure when call fails with BackendFailure", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs))
+          .thenAnswer((_) async => left(BackendFailure()));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(testLandingPageIDs);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+
+    test("should return DatabaseFailure when call fails with NotFoundFailure", () async {
+      // Given
+      final expectedResult = left(NotFoundFailure());
+      when(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.month))
+          .thenAnswer((_) async => left(NotFoundFailure()));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.month);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.month));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+
+    test("should return DatabaseFailure when call fails with PermissionDeniedFailure", () async {
+      // Given
+      final expectedResult = left(PermissionDeniedFailure());
+      when(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.quarter))
+          .thenAnswer((_) async => left(PermissionDeniedFailure()));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.quarter);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.quarter));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+
+    test("should return less than 3 landing pages when only 2 landing pages exist", () async {
+      // Given
+      const twoLandingPageIDs = ["landing1", "landing2"];
+      const twoLandingPageResults = [
+        DashboardRankedLandingpage(
+          landingPageName: "Immobilien Beratung",
+          rank: 1,
+          completedRecommendationsCount: 25,
+        ),
+        DashboardRankedLandingpage(
+          landingPageName: "Versicherungs Check",
+          rank: 2,
+          completedRecommendationsCount: 18,
+        ),
+      ];
+      final expectedResult = right(twoLandingPageResults);
+      when(mockDashboardRepo.getTop3LandingPages(twoLandingPageIDs))
+          .thenAnswer((_) async => right(twoLandingPageResults));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(twoLandingPageIDs);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(twoLandingPageIDs));
+      expect(expectedResult, result);
+      expect(result.getOrElse(() => []).length, 2);
+      verifyNoMoreInteractions(mockDashboardRepo);
+    });
+
+    test("should return landing pages with 0 completed recommendations when no archived recommendations exist", () async {
+      // Given
+      const zeroCompletedLandingPages = [
+        DashboardRankedLandingpage(
+          landingPageName: "New Landing Page 1",
+          rank: 1,
+          completedRecommendationsCount: 0,
+        ),
+        DashboardRankedLandingpage(
+          landingPageName: "New Landing Page 2",
+          rank: 2,
+          completedRecommendationsCount: 0,
+        ),
+        DashboardRankedLandingpage(
+          landingPageName: "New Landing Page 3",
+          rank: 3,
+          completedRecommendationsCount: 0,
+        ),
+      ];
+      final expectedResult = right(zeroCompletedLandingPages);
+      when(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.month))
+          .thenAnswer((_) async => right(zeroCompletedLandingPages));
+      
+      // When
+      final result = await mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.month);
+      
+      // Then
+      verify(mockDashboardRepo.getTop3LandingPages(testLandingPageIDs, timePeriod: TimePeriod.month));
+      expect(expectedResult, result);
+      final landingPages = result.getOrElse(() => []);
+      expect(landingPages.every((lp) => lp.completedRecommendationsCount == 0), true);
       verifyNoMoreInteractions(mockDashboardRepo);
     });
   });

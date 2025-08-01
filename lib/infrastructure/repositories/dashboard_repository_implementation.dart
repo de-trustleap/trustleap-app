@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
+import 'package:finanzbegleiter/domain/entities/dashboard_ranked_landingpage.dart';
 import 'package:finanzbegleiter/domain/entities/dashboard_ranked_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/dashboard_repository.dart';
@@ -178,13 +179,11 @@ class DashboardRepositoryImplementation implements DashboardRepository {
                 doc.data(), doc.id);
 
             if (archivedReco.success != null) {
-              // Apply time period filtering if specified
               if (startDate != null) {
                 if (archivedReco.finishedTimeStamp.isAfter(startDate)) {
                   completedCount++;
                 }
               } else {
-                // No time filtering, count all completed
                 completedCount++;
               }
             }
@@ -193,6 +192,154 @@ class DashboardRepositoryImplementation implements DashboardRepository {
       }
 
       return right(completedCount);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseFailure, List<DashboardRankedLandingpage>>>
+      getTop3LandingPages(List<String> landingPageIDs,
+          {TimePeriod? timePeriod}) async {
+    if (landingPageIDs.isEmpty) {
+      return right([]);
+    }
+
+    final landingPageCollection = firestore.collection("landingPages");
+    final archivedRecoCollection =
+        firestore.collection("archivedRecommendations");
+
+    try {
+      // 1. Get all landing pages
+      final landingPagesResult =
+          await _getLandingPagesFromIDs(landingPageIDs, landingPageCollection);
+
+      if (landingPagesResult.isLeft()) {
+        return landingPagesResult.fold(
+            (failure) => left(failure), (_) => right([]));
+      }
+
+      final landingPages = landingPagesResult.getOrElse(() => []);
+
+      if (landingPages.isEmpty) {
+        return right([]);
+      }
+
+      // 2. Count completed recommendations for each landing page by querying archived recommendations
+      final Map<String, int> landingPageCompletedCounts = {};
+      final Map<String, String> landingPageIDToName = {};
+
+      for (final landingPage in landingPages) {
+        landingPageIDToName[landingPage['id']] =
+            landingPage['name'] ?? "Unknown Landing Page";
+        landingPageCompletedCounts[landingPage['id']] = 0;
+      }
+
+      // Calculate date range based on TimePeriod
+      DateTime? startDate;
+      if (timePeriod != null) {
+        final now = DateTime.now();
+        switch (timePeriod) {
+          case TimePeriod.day:
+          case TimePeriod.week:
+            startDate = now.subtract(Duration(days: now.weekday - 1));
+            startDate =
+                DateTime(startDate.year, startDate.month, startDate.day);
+            break;
+          case TimePeriod.month:
+            startDate = DateTime(now.year, now.month, 1);
+            break;
+          case TimePeriod.quarter:
+            final currentQuarter = ((now.month - 1) ~/ 3) + 1;
+            final quarterStartMonth = (currentQuarter - 1) * 3 + 1;
+            startDate = DateTime(now.year, quarterStartMonth, 1);
+            break;
+          case TimePeriod.year:
+            startDate = DateTime(now.year, 1, 1);
+            break;
+        }
+      }
+
+      // 3. Query all archived recommendations and count by landing page
+      final querySnapshot = await archivedRecoCollection.get();
+
+      for (final doc in querySnapshot.docs) {
+        if (doc.exists) {
+          final archivedReco =
+              ArchivedRecommendationItemModel.fromFirestore(doc.data(), doc.id);
+
+          if (archivedReco.success != null &&
+              archivedReco.landingPageID != null &&
+              landingPageIDs.contains(archivedReco.landingPageID)) {
+            bool shouldCount = true;
+            if (startDate != null) {
+              shouldCount = archivedReco.finishedTimeStamp.isAfter(startDate);
+            }
+
+            if (shouldCount) {
+              final currentCount =
+                  landingPageCompletedCounts[archivedReco.landingPageID!] ?? 0;
+              landingPageCompletedCounts[archivedReco.landingPageID!] =
+                  currentCount + 1;
+            }
+          }
+        }
+      }
+
+      // 4. Sort by completed count and take top 3
+      final sortedLandingPages = landingPageCompletedCounts.entries.toList()
+        ..sort((a, b) => b.value.compareTo(a.value));
+
+      final top3 = sortedLandingPages.take(3).toList();
+
+      // 5. Convert to DashboardRankedLandingpage
+      final result = top3.asMap().entries.map((entry) {
+        final rank = entry.key + 1; // 1-based ranking
+        final landingPageEntry = entry.value;
+        final landingPageID = landingPageEntry.key;
+        final completedCount = landingPageEntry.value;
+        final landingPageName =
+            landingPageIDToName[landingPageID] ?? "Unknown Landing Page";
+
+        return DashboardRankedLandingpage(
+          landingPageName: landingPageName,
+          rank: rank,
+          completedRecommendationsCount: completedCount,
+        );
+      }).toList();
+
+      return right(result);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  /// Helper method to get landing pages from their IDs
+  Future<Either<DatabaseFailure, List<Map<String, dynamic>>>>
+      _getLandingPagesFromIDs(
+          List<String> landingPageIDs,
+          CollectionReference<Map<String, dynamic>>
+              landingPageCollection) async {
+    // Split into chunks of 10 for Firestore whereIn limitation
+    final chunks = landingPageIDs.slices(10);
+    final List<Map<String, dynamic>> landingPages = [];
+
+    try {
+      for (final chunk in chunks) {
+        final querySnapshot = await landingPageCollection
+            .where(FieldPath.documentId, whereIn: chunk)
+            .get();
+
+        for (final doc in querySnapshot.docs) {
+          if (doc.exists) {
+            final data = doc.data();
+            data["id"] = doc.id;
+            landingPages.add(data);
+          }
+        }
+      }
+
+      return right(landingPages);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }

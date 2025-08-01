@@ -2404,6 +2404,28 @@ class AppLocalizationsDe extends AppLocalizations {
       'Keine Promoter-Daten verfügbar.';
 
   @override
+  String get dashboard_landingpage_ranking_title => 'Landingpages Rangliste';
+
+  @override
+  String get dashboard_landingpage_ranking_period => 'Zeitraum:';
+
+  @override
+  String get dashboard_landingpage_ranking_loading_error_title =>
+      'Fehler beim Laden';
+
+  @override
+  String get dashboard_landingpage_ranking_loading_error_message =>
+      'Die Landingpage-Rangliste konnte nicht geladen werden.';
+
+  @override
+  String get dashboard_landingpage_ranking_no_landingpages =>
+      'Keine Landingpages gefunden.';
+
+  @override
+  String get dashboard_landingpage_ranking_no_data =>
+      'Keine Landingpage-Daten verfügbar.';
+
+  @override
   String get admin_legals_title => 'Rechtliches';
 
   @override
