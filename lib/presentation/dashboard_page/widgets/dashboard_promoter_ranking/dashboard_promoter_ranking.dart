@@ -1,5 +1,6 @@
-import 'package:finanzbegleiter/application/dashboard/promoter_ranking/promoter_ranking_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/promoter_ranking/dashboard_promoter_ranking_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/dashboard_ranked_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -26,18 +27,17 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
   void initState() {
     super.initState();
 
-    Modular.get<PromoterRankingCubit>().getTop3Promoters(
-        widget.user.registeredPromoterIDs ?? [],
-        timePeriod: _selectedTimePeriod);
+    Modular.get<DashboardPromoterRankingCubit>().getTop3Promoters(
+        widget.user.registeredPromoterIDs ?? [], _selectedTimePeriod);
   }
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localizations = AppLocalizations.of(context);
-    final cubit = Modular.get<PromoterRankingCubit>();
+    final cubit = Modular.get<DashboardPromoterRankingCubit>();
 
-    return BlocBuilder<PromoterRankingCubit, PromoterRankingState>(
+    return BlocBuilder<DashboardPromoterRankingCubit, PromoterRankingState>(
       bloc: cubit,
       builder: (context, state) {
         return CardContainer(
@@ -78,10 +78,10 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
                             setState(() {
                               _selectedTimePeriod = newPeriod;
                             });
-                            Modular.get<PromoterRankingCubit>()
+                            Modular.get<DashboardPromoterRankingCubit>()
                                 .getTop3Promoters(
                                     widget.user.registeredPromoterIDs ?? [],
-                                    timePeriod: _selectedTimePeriod);
+                                    _selectedTimePeriod);
                           }
                         },
                       ),
@@ -96,9 +96,9 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
                       .dashboard_promoter_ranking_loading_error_title,
                   message: localizations
                       .dashboard_promoter_ranking_loading_error_message,
-                  callback: () => Modular.get<PromoterRankingCubit>()
+                  callback: () => Modular.get<DashboardPromoterRankingCubit>()
                       .getTop3Promoters(widget.user.registeredPromoterIDs ?? [],
-                          timePeriod: _selectedTimePeriod),
+                          _selectedTimePeriod),
                 )
               ] else if (state is PromoterRankingGetTop3NoPromotersState) ...[
                 Padding(
@@ -122,8 +122,8 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
     );
   }
 
-  Widget _buildPromoterList(List<dynamic> promoters, ThemeData themeData,
-      AppLocalizations localizations) {
+  Widget _buildPromoterList(List<DashboardRankedPromoter> promoters,
+      ThemeData themeData, AppLocalizations localizations) {
     if (promoters.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(20.0),
@@ -143,7 +143,8 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
     );
   }
 
-  Widget _buildPromoterRow(dynamic promoter, ThemeData themeData) {
+  Widget _buildPromoterRow(
+      DashboardRankedPromoter promoter, ThemeData themeData) {
     String getMedalEmoji(int rank) {
       switch (rank) {
         case 1:

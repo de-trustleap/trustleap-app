@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:finanzbegleiter/application/dashboard/promoter_ranking/promoter_ranking_cubit.dart';
+import 'package:finanzbegleiter/application/dashboard/promoter_ranking/dashboard_promoter_ranking_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/dashboard_ranked_promoter.dart';
@@ -8,12 +8,12 @@ import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';
 
 void main() {
-  late PromoterRankingCubit cubit;
+  late DashboardPromoterRankingCubit cubit;
   late MockDashboardRepository mockDashboardRepo;
 
   setUp(() {
     mockDashboardRepo = MockDashboardRepository();
-    cubit = PromoterRankingCubit(mockDashboardRepo);
+    cubit = DashboardPromoterRankingCubit(mockDashboardRepo);
   });
 
   group("PromoterRankingCubit_InitialState", () {
@@ -42,7 +42,8 @@ void main() {
       ),
     ];
 
-    test("should call repo if getTop3Promoters is called without TimePeriod", () async {
+    test("should call repo if getTop3Promoters is called without TimePeriod",
+        () async {
       // Given
       when(mockDashboardRepo.getTop3Promoters(testPromoterIDs))
           .thenAnswer((_) async => right(mockRankedPromoters));
@@ -56,21 +57,27 @@ void main() {
       verifyNoMoreInteractions(mockDashboardRepo);
     });
 
-    test("should call repo if getTop3Promoters is called with TimePeriod", () async {
+    test("should call repo if getTop3Promoters is called with TimePeriod",
+        () async {
       // Given
-      when(mockDashboardRepo.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.month))
+      when(mockDashboardRepo.getTop3Promoters(testPromoterIDs,
+              timePeriod: TimePeriod.month))
           .thenAnswer((_) async => right(mockRankedPromoters));
 
       // When
       cubit.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.month);
-      await untilCalled(mockDashboardRepo.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.month));
+      await untilCalled(mockDashboardRepo.getTop3Promoters(testPromoterIDs,
+          timePeriod: TimePeriod.month));
 
       // Then
-      verify(mockDashboardRepo.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.month));
+      verify(mockDashboardRepo.getTop3Promoters(testPromoterIDs,
+          timePeriod: TimePeriod.month));
       verifyNoMoreInteractions(mockDashboardRepo);
     });
 
-    test("should emit LoadingState and then SuccessState when getTop3Promoters is successful", () {
+    test(
+        "should emit LoadingState and then SuccessState when getTop3Promoters is successful",
+        () {
       // Given
       final expectedResult = [
         PromoterRankingGetTop3LoadingState(),
@@ -84,13 +91,16 @@ void main() {
       cubit.getTop3Promoters(testPromoterIDs);
     });
 
-    test("should emit LoadingState and then SuccessState when getTop3Promoters is successful with TimePeriod", () {
+    test(
+        "should emit LoadingState and then SuccessState when getTop3Promoters is successful with TimePeriod",
+        () {
       // Given
       final expectedResult = [
         PromoterRankingGetTop3LoadingState(),
         PromoterRankingGetTop3SuccessState(promoters: mockRankedPromoters)
       ];
-      when(mockDashboardRepo.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.quarter))
+      when(mockDashboardRepo.getTop3Promoters(testPromoterIDs,
+              timePeriod: TimePeriod.quarter))
           .thenAnswer((_) async => right(mockRankedPromoters));
 
       // Then
@@ -107,7 +117,9 @@ void main() {
       cubit.getTop3Promoters([]);
     });
 
-    test("should emit LoadingState and then FailureState when getTop3Promoters fails with BackendFailure", () {
+    test(
+        "should emit LoadingState and then FailureState when getTop3Promoters fails with BackendFailure",
+        () {
       // Given
       final expectedResult = [
         PromoterRankingGetTop3LoadingState(),
@@ -121,13 +133,16 @@ void main() {
       cubit.getTop3Promoters(testPromoterIDs);
     });
 
-    test("should emit LoadingState and then FailureState when getTop3Promoters fails with NotFoundFailure", () {
+    test(
+        "should emit LoadingState and then FailureState when getTop3Promoters fails with NotFoundFailure",
+        () {
       // Given
       final expectedResult = [
         PromoterRankingGetTop3LoadingState(),
         PromoterRankingGetTop3FailureState(failure: NotFoundFailure())
       ];
-      when(mockDashboardRepo.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.month))
+      when(mockDashboardRepo.getTop3Promoters(testPromoterIDs,
+              timePeriod: TimePeriod.month))
           .thenAnswer((_) async => left(NotFoundFailure()));
 
       // Then
@@ -135,13 +150,16 @@ void main() {
       cubit.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.month);
     });
 
-    test("should emit LoadingState and then FailureState when getTop3Promoters fails with PermissionDeniedFailure", () {
+    test(
+        "should emit LoadingState and then FailureState when getTop3Promoters fails with PermissionDeniedFailure",
+        () {
       // Given
       final expectedResult = [
         PromoterRankingGetTop3LoadingState(),
         PromoterRankingGetTop3FailureState(failure: PermissionDeniedFailure())
       ];
-      when(mockDashboardRepo.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.year))
+      when(mockDashboardRepo.getTop3Promoters(testPromoterIDs,
+              timePeriod: TimePeriod.year))
           .thenAnswer((_) async => left(PermissionDeniedFailure()));
 
       // Then
@@ -149,11 +167,14 @@ void main() {
       cubit.getTop3Promoters(testPromoterIDs, timePeriod: TimePeriod.year);
     });
 
-    test("should emit LoadingState and then SuccessState when getTop3Promoters returns empty list", () {
+    test(
+        "should emit LoadingState and then SuccessState when getTop3Promoters returns empty list",
+        () {
       // Given
       final expectedResult = [
         PromoterRankingGetTop3LoadingState(),
-        PromoterRankingGetTop3SuccessState(promoters: <DashboardRankedPromoter>[])
+        PromoterRankingGetTop3SuccessState(
+            promoters: <DashboardRankedPromoter>[])
       ];
       when(mockDashboardRepo.getTop3Promoters(testPromoterIDs))
           .thenAnswer((_) async => right(<DashboardRankedPromoter>[]));

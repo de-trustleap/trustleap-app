@@ -6265,6 +6265,62 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get dashboard_promoter_ranking_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_period => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_period),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_period),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_loading_error_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_loading_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_loading_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_loading_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_loading_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_loading_error_message),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_no_promoters => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_no_promoters),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_no_promoters),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_no_data => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_no_data),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_no_data),
+        ),
+      ) as String);
+
+  @override
   String get admin_legals_title => (super.noSuchMethod(
         Invocation.getter(#admin_legals_title),
         returnValue: _i3.dummyValue<String>(

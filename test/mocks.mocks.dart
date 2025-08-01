@@ -29,7 +29,7 @@ import 'package:finanzbegleiter/application/company_request/company_request_obse
     as _i75;
 import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart'
     as _i81;
-import 'package:finanzbegleiter/application/dashboard/promoter_ranking/promoter_ranking_cubit.dart'
+import 'package:finanzbegleiter/application/dashboard/promoter_ranking/dashboard_promoter_ranking_cubit.dart'
     as _i85;
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart'
     as _i82;
@@ -451,8 +451,9 @@ class _FakeActionCodeInfo_25 extends _i1.SmartFake
         );
 }
 
-class _FakeSettings_26 extends _i1.SmartFake implements _i20.Settings {
-  _FakeSettings_26(
+class _FakePasswordValidationStatus_26 extends _i1.SmartFake
+    implements _i3.PasswordValidationStatus {
+  _FakePasswordValidationStatus_26(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -461,9 +462,19 @@ class _FakeSettings_26 extends _i1.SmartFake implements _i20.Settings {
         );
 }
 
-class _FakeCollectionReference_27<T extends Object?> extends _i1.SmartFake
+class _FakeSettings_27 extends _i1.SmartFake implements _i20.Settings {
+  _FakeSettings_27(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCollectionReference_28<T extends Object?> extends _i1.SmartFake
     implements _i21.CollectionReference<T> {
-  _FakeCollectionReference_27(
+  _FakeCollectionReference_28(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -472,8 +483,8 @@ class _FakeCollectionReference_27<T extends Object?> extends _i1.SmartFake
         );
 }
 
-class _FakeWriteBatch_28 extends _i1.SmartFake implements _i21.WriteBatch {
-  _FakeWriteBatch_28(
+class _FakeWriteBatch_29 extends _i1.SmartFake implements _i21.WriteBatch {
+  _FakeWriteBatch_29(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -482,9 +493,9 @@ class _FakeWriteBatch_28 extends _i1.SmartFake implements _i21.WriteBatch {
         );
 }
 
-class _FakeLoadBundleTask_29 extends _i1.SmartFake
+class _FakeLoadBundleTask_30 extends _i1.SmartFake
     implements _i21.LoadBundleTask {
-  _FakeLoadBundleTask_29(
+  _FakeLoadBundleTask_30(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -493,9 +504,9 @@ class _FakeLoadBundleTask_29 extends _i1.SmartFake
         );
 }
 
-class _FakeQuerySnapshot_30<T1 extends Object?> extends _i1.SmartFake
+class _FakeQuerySnapshot_31<T1 extends Object?> extends _i1.SmartFake
     implements _i21.QuerySnapshot<T1> {
-  _FakeQuerySnapshot_30(
+  _FakeQuerySnapshot_31(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -504,9 +515,9 @@ class _FakeQuerySnapshot_30<T1 extends Object?> extends _i1.SmartFake
         );
 }
 
-class _FakeQuery_31<T extends Object?> extends _i1.SmartFake
+class _FakeQuery_32<T extends Object?> extends _i1.SmartFake
     implements _i21.Query<T> {
-  _FakeQuery_31(
+  _FakeQuery_32(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -515,9 +526,9 @@ class _FakeQuery_31<T extends Object?> extends _i1.SmartFake
         );
 }
 
-class _FakeDocumentReference_32<T extends Object?> extends _i1.SmartFake
+class _FakeDocumentReference_33<T extends Object?> extends _i1.SmartFake
     implements _i21.DocumentReference<T> {
-  _FakeDocumentReference_32(
+  _FakeDocumentReference_33(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -526,8 +537,8 @@ class _FakeDocumentReference_32<T extends Object?> extends _i1.SmartFake
         );
 }
 
-class _FakeFuture_33<T1> extends _i1.SmartFake implements _i22.Future<T1> {
-  _FakeFuture_33(
+class _FakeFuture_34<T1> extends _i1.SmartFake implements _i22.Future<T1> {
+  _FakeFuture_34(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -536,8 +547,8 @@ class _FakeFuture_33<T1> extends _i1.SmartFake implements _i22.Future<T1> {
         );
 }
 
-class _FakeDuration_34 extends _i1.SmartFake implements Duration {
-  _FakeDuration_34(
+class _FakeDuration_35 extends _i1.SmartFake implements Duration {
+  _FakeDuration_35(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -546,8 +557,8 @@ class _FakeDuration_34 extends _i1.SmartFake implements Duration {
         );
 }
 
-class _FakeReference_35 extends _i1.SmartFake implements _i23.Reference {
-  _FakeReference_35(
+class _FakeReference_36 extends _i1.SmartFake implements _i23.Reference {
+  _FakeReference_36(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -556,9 +567,9 @@ class _FakeReference_35 extends _i1.SmartFake implements _i23.Reference {
         );
 }
 
-class _FakeFirebaseFunctionsPlatform_36 extends _i1.SmartFake
+class _FakeFirebaseFunctionsPlatform_37 extends _i1.SmartFake
     implements _i24.FirebaseFunctionsPlatform {
-  _FakeFirebaseFunctionsPlatform_36(
+  _FakeFirebaseFunctionsPlatform_37(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -567,9 +578,9 @@ class _FakeFirebaseFunctionsPlatform_36 extends _i1.SmartFake
         );
 }
 
-class _FakeHttpsCallable_37 extends _i1.SmartFake
+class _FakeHttpsCallable_38 extends _i1.SmartFake
     implements _i25.HttpsCallable {
-  _FakeHttpsCallable_37(
+  _FakeHttpsCallable_38(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -6822,6 +6833,62 @@ class MockAppLocalizations extends _i1.Mock implements _i26.AppLocalizations {
       ) as String);
 
   @override
+  String get dashboard_promoter_ranking_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_title),
+        returnValue: _i27.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_period => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_period),
+        returnValue: _i27.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_period),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_loading_error_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_loading_error_title),
+        returnValue: _i27.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_loading_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_loading_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_loading_error_message),
+        returnValue: _i27.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_loading_error_message),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_no_promoters => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_no_promoters),
+        returnValue: _i27.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_no_promoters),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_promoter_ranking_no_data => (super.noSuchMethod(
+        Invocation.getter(#dashboard_promoter_ranking_no_data),
+        returnValue: _i27.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_promoter_ranking_no_data),
+        ),
+      ) as String);
+
+  @override
   String get admin_legals_title => (super.noSuchMethod(
         Invocation.getter(#admin_legals_title),
         returnValue: _i27.dummyValue<String>(
@@ -9145,16 +9212,6 @@ class MockUser extends _i1.Mock implements _i3.User {
           ),
         )),
       ) as _i22.Future<_i3.User>);
-
-  @override
-  _i22.Future<void> updateEmail(String? newEmail) => (super.noSuchMethod(
-        Invocation.method(
-          #updateEmail,
-          [newEmail],
-        ),
-        returnValue: _i22.Future<void>.value(),
-        returnValueForMissingStub: _i22.Future<void>.value(),
-      ) as _i22.Future<void>);
 
   @override
   _i22.Future<void> updatePassword(String? newPassword) => (super.noSuchMethod(
@@ -13513,12 +13570,12 @@ class MockFeedbackCubit extends _i1.Mock implements _i84.FeedbackCubit {
       ) as _i22.Future<void>);
 }
 
-/// A class which mocks [PromoterRankingCubit].
+/// A class which mocks [DashboardPromoterRankingCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPromoterRankingCubit extends _i1.Mock
-    implements _i85.PromoterRankingCubit {
-  MockPromoterRankingCubit() {
+class MockDashboardPromoterRankingCubit extends _i1.Mock
+    implements _i85.DashboardPromoterRankingCubit {
+  MockDashboardPromoterRankingCubit() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -13921,16 +13978,6 @@ class MockFirebaseAuth extends _i1.Mock implements _i3.FirebaseAuth {
       ) as _i22.Future<_i3.UserCredential>);
 
   @override
-  _i22.Future<List<String>> fetchSignInMethodsForEmail(String? email) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchSignInMethodsForEmail,
-          [email],
-        ),
-        returnValue: _i22.Future<List<String>>.value(<String>[]),
-      ) as _i22.Future<List<String>>);
-
-  @override
   _i22.Future<_i3.UserCredential> getRedirectResult() => (super.noSuchMethod(
         Invocation.method(
           #getRedirectResult,
@@ -14245,16 +14292,6 @@ class MockFirebaseAuth extends _i1.Mock implements _i3.FirebaseAuth {
       ) as _i22.Future<void>);
 
   @override
-  _i22.Future<void> signOut() => (super.noSuchMethod(
-        Invocation.method(
-          #signOut,
-          [],
-        ),
-        returnValue: _i22.Future<void>.value(),
-        returnValueForMissingStub: _i22.Future<void>.value(),
-      ) as _i22.Future<void>);
-
-  @override
   _i22.Future<String> verifyPasswordResetCode(String? code) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -14317,6 +14354,16 @@ class MockFirebaseAuth extends _i1.Mock implements _i3.FirebaseAuth {
       ) as _i22.Future<void>);
 
   @override
+  _i22.Future<void> signOut() => (super.noSuchMethod(
+        Invocation.method(
+          #signOut,
+          [],
+        ),
+        returnValue: _i22.Future<void>.value(),
+        returnValueForMissingStub: _i22.Future<void>.value(),
+      ) as _i22.Future<void>);
+
+  @override
   _i22.Future<void> initializeRecaptchaConfig() => (super.noSuchMethod(
         Invocation.method(
           #initializeRecaptchaConfig,
@@ -14325,6 +14372,32 @@ class MockFirebaseAuth extends _i1.Mock implements _i3.FirebaseAuth {
         returnValue: _i22.Future<void>.value(),
         returnValueForMissingStub: _i22.Future<void>.value(),
       ) as _i22.Future<void>);
+
+  @override
+  _i22.Future<_i3.PasswordValidationStatus> validatePassword(
+    _i3.FirebaseAuth? auth,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #validatePassword,
+          [
+            auth,
+            password,
+          ],
+        ),
+        returnValue: _i22.Future<_i3.PasswordValidationStatus>.value(
+            _FakePasswordValidationStatus_26(
+          this,
+          Invocation.method(
+            #validatePassword,
+            [
+              auth,
+              password,
+            ],
+          ),
+        )),
+      ) as _i22.Future<_i3.PasswordValidationStatus>);
 }
 
 /// A class which mocks [FirebaseFirestore].
@@ -14345,15 +14418,6 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
       ) as _i19.FirebaseApp);
 
   @override
-  String get databaseURL => (super.noSuchMethod(
-        Invocation.getter(#databaseURL),
-        returnValue: _i27.dummyValue<String>(
-          this,
-          Invocation.getter(#databaseURL),
-        ),
-      ) as String);
-
-  @override
   String get databaseId => (super.noSuchMethod(
         Invocation.getter(#databaseId),
         returnValue: _i27.dummyValue<String>(
@@ -14365,7 +14429,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
   @override
   _i20.Settings get settings => (super.noSuchMethod(
         Invocation.getter(#settings),
-        returnValue: _FakeSettings_26(
+        returnValue: _FakeSettings_27(
           this,
           Invocation.getter(#settings),
         ),
@@ -14376,15 +14440,6 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
         Invocation.setter(
           #app,
           _app,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set databaseURL(String? _databaseURL) => super.noSuchMethod(
-        Invocation.setter(
-          #databaseURL,
-          _databaseURL,
         ),
         returnValueForMissingStub: null,
       );
@@ -14421,7 +14476,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
           #collection,
           [collectionPath],
         ),
-        returnValue: _FakeCollectionReference_27<Map<String, dynamic>>(
+        returnValue: _FakeCollectionReference_28<Map<String, dynamic>>(
           this,
           Invocation.method(
             #collection,
@@ -14436,7 +14491,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
           #batch,
           [],
         ),
-        returnValue: _FakeWriteBatch_28(
+        returnValue: _FakeWriteBatch_29(
           this,
           Invocation.method(
             #batch,
@@ -14456,24 +14511,12 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
       ) as _i22.Future<void>);
 
   @override
-  _i22.Future<void> enablePersistence(
-          [_i20.PersistenceSettings? persistenceSettings]) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #enablePersistence,
-          [persistenceSettings],
-        ),
-        returnValue: _i22.Future<void>.value(),
-        returnValueForMissingStub: _i22.Future<void>.value(),
-      ) as _i22.Future<void>);
-
-  @override
   _i21.LoadBundleTask loadBundle(_i35.Uint8List? bundle) => (super.noSuchMethod(
         Invocation.method(
           #loadBundle,
           [bundle],
         ),
-        returnValue: _FakeLoadBundleTask_29(
+        returnValue: _FakeLoadBundleTask_30(
           this,
           Invocation.method(
             #loadBundle,
@@ -14522,7 +14565,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
           },
         ),
         returnValue:
-            _i22.Future<_i21.QuerySnapshot<T>>.value(_FakeQuerySnapshot_30<T>(
+            _i22.Future<_i21.QuerySnapshot<T>>.value(_FakeQuerySnapshot_31<T>(
           this,
           Invocation.method(
             #namedQueryWithConverterGet,
@@ -14549,7 +14592,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
         ),
         returnValue:
             _i22.Future<_i21.QuerySnapshot<Map<String, dynamic>>>.value(
-                _FakeQuerySnapshot_30<Map<String, dynamic>>(
+                _FakeQuerySnapshot_31<Map<String, dynamic>>(
           this,
           Invocation.method(
             #namedQueryGet,
@@ -14566,7 +14609,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
           #collectionGroup,
           [collectionPath],
         ),
-        returnValue: _FakeQuery_31<Map<String, dynamic>>(
+        returnValue: _FakeQuery_32<Map<String, dynamic>>(
           this,
           Invocation.method(
             #collectionGroup,
@@ -14592,7 +14635,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
           #doc,
           [documentPath],
         ),
-        returnValue: _FakeDocumentReference_32<Map<String, dynamic>>(
+        returnValue: _FakeDocumentReference_33<Map<String, dynamic>>(
           this,
           Invocation.method(
             #doc,
@@ -14649,7 +14692,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
               ),
               (T v) => _i22.Future<T>.value(v),
             ) ??
-            _FakeFuture_33<T>(
+            _FakeFuture_34<T>(
               this,
               Invocation.method(
                 #runTransaction,
@@ -14677,24 +14720,6 @@ class MockFirebaseFirestore extends _i1.Mock implements _i21.FirebaseFirestore {
         Invocation.method(
           #waitForPendingWrites,
           [],
-        ),
-        returnValue: _i22.Future<void>.value(),
-        returnValueForMissingStub: _i22.Future<void>.value(),
-      ) as _i22.Future<void>);
-
-  @override
-  _i22.Future<void> setIndexConfiguration({
-    required List<_i20.Index>? indexes,
-    List<_i20.FieldOverrides>? fieldOverrides,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #setIndexConfiguration,
-          [],
-          {
-            #indexes: indexes,
-            #fieldOverrides: fieldOverrides,
-          },
         ),
         returnValue: _i22.Future<void>.value(),
         returnValueForMissingStub: _i22.Future<void>.value(),
@@ -14741,7 +14766,7 @@ class MockFirebaseStorage extends _i1.Mock implements _i23.FirebaseStorage {
   @override
   Duration get maxOperationRetryTime => (super.noSuchMethod(
         Invocation.getter(#maxOperationRetryTime),
-        returnValue: _FakeDuration_34(
+        returnValue: _FakeDuration_35(
           this,
           Invocation.getter(#maxOperationRetryTime),
         ),
@@ -14750,7 +14775,7 @@ class MockFirebaseStorage extends _i1.Mock implements _i23.FirebaseStorage {
   @override
   Duration get maxUploadRetryTime => (super.noSuchMethod(
         Invocation.getter(#maxUploadRetryTime),
-        returnValue: _FakeDuration_34(
+        returnValue: _FakeDuration_35(
           this,
           Invocation.getter(#maxUploadRetryTime),
         ),
@@ -14759,7 +14784,7 @@ class MockFirebaseStorage extends _i1.Mock implements _i23.FirebaseStorage {
   @override
   Duration get maxDownloadRetryTime => (super.noSuchMethod(
         Invocation.getter(#maxDownloadRetryTime),
-        returnValue: _FakeDuration_34(
+        returnValue: _FakeDuration_35(
           this,
           Invocation.getter(#maxDownloadRetryTime),
         ),
@@ -14795,7 +14820,7 @@ class MockFirebaseStorage extends _i1.Mock implements _i23.FirebaseStorage {
           #ref,
           [path],
         ),
-        returnValue: _FakeReference_35(
+        returnValue: _FakeReference_36(
           this,
           Invocation.method(
             #ref,
@@ -14810,7 +14835,7 @@ class MockFirebaseStorage extends _i1.Mock implements _i23.FirebaseStorage {
           #refFromURL,
           [url],
         ),
-        returnValue: _FakeReference_35(
+        returnValue: _FakeReference_36(
           this,
           Invocation.method(
             #refFromURL,
@@ -14886,7 +14911,7 @@ class MockFirebaseFunctions extends _i1.Mock implements _i25.FirebaseFunctions {
   @override
   _i24.FirebaseFunctionsPlatform get delegate => (super.noSuchMethod(
         Invocation.getter(#delegate),
-        returnValue: _FakeFirebaseFunctionsPlatform_36(
+        returnValue: _FakeFirebaseFunctionsPlatform_37(
           this,
           Invocation.getter(#delegate),
         ),
@@ -14909,7 +14934,7 @@ class MockFirebaseFunctions extends _i1.Mock implements _i25.FirebaseFunctions {
           [name],
           {#options: options},
         ),
-        returnValue: _FakeHttpsCallable_37(
+        returnValue: _FakeHttpsCallable_38(
           this,
           Invocation.method(
             #httpsCallable,
@@ -14930,7 +14955,7 @@ class MockFirebaseFunctions extends _i1.Mock implements _i25.FirebaseFunctions {
           [url],
           {#options: options},
         ),
-        returnValue: _FakeHttpsCallable_37(
+        returnValue: _FakeHttpsCallable_38(
           this,
           Invocation.method(
             #httpsCallableFromUrl,
@@ -14951,7 +14976,7 @@ class MockFirebaseFunctions extends _i1.Mock implements _i25.FirebaseFunctions {
           [uri],
           {#options: options},
         ),
-        returnValue: _FakeHttpsCallable_37(
+        returnValue: _FakeHttpsCallable_38(
           this,
           Invocation.method(
             #httpsCallableFromUri,

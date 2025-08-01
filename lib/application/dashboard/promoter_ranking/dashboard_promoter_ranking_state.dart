@@ -1,4 +1,4 @@
-part of 'promoter_ranking_cubit.dart';
+part of 'dashboard_promoter_ranking_cubit.dart';
 
 sealed class PromoterRankingState {}
 
