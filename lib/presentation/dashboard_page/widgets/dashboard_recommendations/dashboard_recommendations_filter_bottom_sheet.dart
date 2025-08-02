@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class DashboardRecommendationsFilterBottomSheet extends StatelessWidget {
+class DashboardRecommendationsFilterBottomSheet extends StatefulWidget {
   final CustomUser user;
   final TimePeriod selectedTimePeriod;
   final int? selectedStatusLevel;
@@ -30,6 +30,27 @@ class DashboardRecommendationsFilterBottomSheet extends StatelessWidget {
     required this.onPromoterChanged,
     required this.onLandingPageChanged,
   });
+
+  @override
+  State<DashboardRecommendationsFilterBottomSheet> createState() =>
+      _DashboardRecommendationsFilterBottomSheetState();
+}
+
+class _DashboardRecommendationsFilterBottomSheetState
+    extends State<DashboardRecommendationsFilterBottomSheet> {
+  late TimePeriod _selectedTimePeriod;
+  late int? _selectedStatusLevel;
+  late String? _selectedPromoterId;
+  late String? _selectedLandingPageId;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedTimePeriod = widget.selectedTimePeriod;
+    _selectedStatusLevel = widget.selectedStatusLevel;
+    _selectedPromoterId = widget.selectedPromoterId;
+    _selectedLandingPageId = widget.selectedLandingPageId;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +88,36 @@ class DashboardRecommendationsFilterBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DashboardRecommendationsFilter(
-              user: user,
+              user: widget.user,
               state: state,
-              selectedTimePeriod: selectedTimePeriod,
-              selectedStatusLevel: selectedStatusLevel,
-              selectedPromoterId: selectedPromoterId,
-              selectedLandingPageId: selectedLandingPageId,
-              onTimePeriodChanged: onTimePeriodChanged,
-              onStatusLevelChanged: onStatusLevelChanged,
-              onPromoterChanged: onPromoterChanged,
-              onLandingPageChanged: onLandingPageChanged,
+              selectedTimePeriod: _selectedTimePeriod,
+              selectedStatusLevel: _selectedStatusLevel,
+              selectedPromoterId: _selectedPromoterId,
+              selectedLandingPageId: _selectedLandingPageId,
+              onTimePeriodChanged: (TimePeriod newValue) {
+                setState(() {
+                  _selectedTimePeriod = newValue;
+                });
+                widget.onTimePeriodChanged(newValue);
+              },
+              onStatusLevelChanged: (int? newValue) {
+                setState(() {
+                  _selectedStatusLevel = newValue;
+                });
+                widget.onStatusLevelChanged(newValue);
+              },
+              onPromoterChanged: (String? newValue) {
+                setState(() {
+                  _selectedPromoterId = newValue;
+                });
+                widget.onPromoterChanged(newValue);
+              },
+              onLandingPageChanged: (String? newValue) {
+                setState(() {
+                  _selectedLandingPageId = newValue;
+                });
+                widget.onLandingPageChanged(newValue);
+              },
             ),
             const SizedBox(height: 16),
           ],
