@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/page_transitions.dart';
 import 'package:finanzbegleiter/presentation/activity_page/activity_page.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/home_page.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/dashboard_page.dart';
@@ -19,7 +20,8 @@ class HomeModule extends Module {
   void routes(r) {
     r.child(Modular.initialRoute,
         child: (_) => const HomePage(),
-        transition: TransitionType.noTransition,
+        transition: TransitionType.custom,
+        customTransition: PageTransitions.fadePageTransition,
         children: [
           ChildRoute(RoutePaths.dashboardPath,
               child: (_) => const DashboardPage()),
