@@ -7,12 +7,12 @@ import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class DashboardTutorialStepList extends StatelessWidget {
+class DashboardTutorialStepListPromoter extends StatelessWidget {
   final int currentStep;
   final CustomUser user;
   final VoidCallback onUserUpdate;
 
-  const DashboardTutorialStepList({
+  const DashboardTutorialStepListPromoter({
     super.key,
     required this.currentStep,
     required this.user,
@@ -48,7 +48,7 @@ class DashboardTutorialStepList extends StatelessWidget {
           buttonAction: () {
             CustomNavigator.navigate(
                 RoutePaths.homePath + RoutePaths.profilePath);
-            cubit.setStep(user, 2);
+            cubit.setStep(user, 8); // Jump to backend step 8
           },
           isLast: false,
           user: user,
@@ -56,84 +56,7 @@ class DashboardTutorialStepList extends StatelessWidget {
         ),
         DashboardTutorialStep(
           stepIndex: 2,
-          currentStep: currentStep,
-          title:
-              localization.dashboard_tutorial_step_company_registration_title,
-          content:
-              localization.dashboard_tutorial_step_company_registration_content,
-          buttonText: localization.dashboard_tutorial_button_to_profile,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.profilePath),
-          isLast: false,
-          user: user,
-          onUserUpdate: onUserUpdate,
-        ),
-        DashboardTutorialStep(
-          stepIndex: 3,
-          currentStep: currentStep,
-          title: localization.dashboard_tutorial_step_company_approval_title,
-          content:
-              localization.dashboard_tutorial_step_company_approval_content,
-          buttonText: null,
-          buttonAction: null,
-          isLast: false,
-          user: user,
-          onUserUpdate: onUserUpdate,
-        ),
-        DashboardTutorialStep(
-          stepIndex: 4,
-          currentStep: currentStep,
-          title: localization.dashboard_tutorial_step_default_landingpage_title,
-          content:
-              localization.dashboard_tutorial_step_default_landingpage_content,
-          buttonText: localization.dashboard_tutorial_button_to_landingpages,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.landingPagePath),
-          isLast: false,
-          user: user,
-          onUserUpdate: onUserUpdate,
-        ),
-        DashboardTutorialStep(
-          stepIndex: 5,
-          currentStep: currentStep,
-          title: localization.dashboard_tutorial_step_landingpage_title,
-          content: localization.dashboard_tutorial_step_landingpage_content,
-          buttonText: localization.dashboard_tutorial_button_to_landingpages,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.landingPagePath),
-          isLast: false,
-          user: user,
-          onUserUpdate: onUserUpdate,
-        ),
-        DashboardTutorialStep(
-          stepIndex: 6,
-          currentStep: currentStep,
-          title:
-              localization.dashboard_tutorial_step_promoter_registration_title,
-          content: localization
-              .dashboard_tutorial_step_promoter_registration_content,
-          buttonText: localization.dashboard_tutorial_button_register_promoter,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.promotersPath),
-          isLast: false,
-          user: user,
-          onUserUpdate: onUserUpdate,
-        ),
-        DashboardTutorialStep(
-          stepIndex: 7,
-          currentStep: currentStep,
-          title: localization.dashboard_tutorial_step_promoter_waiting_title,
-          content:
-              localization.dashboard_tutorial_step_promoter_waiting_content,
-          buttonText: null,
-          buttonAction: null,
-          isLast: false,
-          user: user,
-          onUserUpdate: onUserUpdate,
-        ),
-        DashboardTutorialStep(
-          stepIndex: 8,
-          currentStep: currentStep,
+          currentStep: _mapCurrentStep(currentStep),
           title: localization.dashboard_tutorial_step_recommendation_title,
           content: localization.dashboard_tutorial_step_recommendation_content,
           buttonText:
@@ -145,8 +68,8 @@ class DashboardTutorialStepList extends StatelessWidget {
           onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
-          stepIndex: 9,
-          currentStep: currentStep,
+          stepIndex: 3,
+          currentStep: _mapCurrentStep(currentStep),
           title:
               localization.dashboard_tutorial_step_recommendation_manager_title,
           content: localization
@@ -163,8 +86,8 @@ class DashboardTutorialStepList extends StatelessWidget {
           onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
-          stepIndex: 10,
-          currentStep: currentStep,
+          stepIndex: 4,
+          currentStep: _mapCurrentStep(currentStep),
           title: localization.dashboard_tutorial_step_complete_title,
           content: localization.dashboard_tutorial_step_complete_content,
           buttonText: null,
@@ -175,5 +98,22 @@ class DashboardTutorialStepList extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  int _mapCurrentStep(int backendStep) {
+    switch (backendStep) {
+      case 0:
+        return 0;
+      case 1:
+        return 1;
+      case 8:
+        return 2;
+      case 9:
+        return 3;
+      case 10:
+        return 4;
+      default:
+        return backendStep;
+    }
   }
 }

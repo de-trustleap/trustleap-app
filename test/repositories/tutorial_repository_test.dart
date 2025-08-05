@@ -15,8 +15,8 @@ void main() {
     mockTutorialRepo = MockTutorialRepository();
   });
 
-  group("TutorialRepository_getCurrentStep", () {
-    final testUser = CustomUser(
+  group("TutorialRepository_getCurrentStep_CompanyUser", () {
+    final companyUser = CustomUser(
       id: UniqueID.fromUniqueString("123"),
       gender: Gender.male,
       firstName: "Tester",
@@ -25,6 +25,7 @@ void main() {
       email: "tester@test.de",
       role: Role.company,
       tutorialStep: 5,
+      parentUserID: null,
       companyID: "company123",
       defaultLandingPageID: "landing123",
       landingPageIDs: ["landing456"],
@@ -36,14 +37,14 @@ void main() {
       // Given
       const expectedStep = 8;
       final expectedResult = right(expectedStep);
-      when(mockTutorialRepo.getCurrentStep(testUser))
+      when(mockTutorialRepo.getCurrentStep(companyUser))
           .thenAnswer((_) async => right(expectedStep));
 
       // When
-      final result = await mockTutorialRepo.getCurrentStep(testUser);
+      final result = await mockTutorialRepo.getCurrentStep(companyUser);
 
       // Then
-      verify(mockTutorialRepo.getCurrentStep(testUser));
+      verify(mockTutorialRepo.getCurrentStep(companyUser));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockTutorialRepo);
     });
@@ -52,8 +53,8 @@ void main() {
       // Given
       const expectedStep = 0;
       final expectedResult = right(expectedStep);
-      final unverifiedUser = testUser.copyWith(tutorialStep: 0);
-      
+      final unverifiedUser = companyUser.copyWith(tutorialStep: 0);
+
       when(mockTutorialRepo.getCurrentStep(unverifiedUser))
           .thenAnswer((_) async => right(expectedStep));
 
@@ -70,7 +71,7 @@ void main() {
       // Given
       const expectedStep = 1;
       final expectedResult = right(expectedStep);
-      final incompleteUser = testUser.copyWith(
+      final incompleteUser = companyUser.copyWith(
         firstName: null,
         tutorialStep: 1,
       );
@@ -91,7 +92,7 @@ void main() {
       // Given
       const expectedStep = 2;
       final expectedResult = right(expectedStep);
-      final noCompanyUser = testUser.copyWith(
+      final noCompanyUser = companyUser.copyWith(
         companyID: null,
         pendingCompanyRequestID: null,
         tutorialStep: 1,
@@ -112,14 +113,148 @@ void main() {
     test("should return failure when database call fails", () async {
       // Given
       final expectedResult = left(PermissionDeniedFailure());
-      when(mockTutorialRepo.getCurrentStep(testUser))
+      when(mockTutorialRepo.getCurrentStep(companyUser))
           .thenAnswer((_) async => left(PermissionDeniedFailure()));
 
       // When
-      final result = await mockTutorialRepo.getCurrentStep(testUser);
+      final result = await mockTutorialRepo.getCurrentStep(companyUser);
 
       // Then
-      verify(mockTutorialRepo.getCurrentStep(testUser));
+      verify(mockTutorialRepo.getCurrentStep(companyUser));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockTutorialRepo);
+    });
+  });
+
+  group("TutorialRepository_getCurrentStep_PromoterUser", () {
+    final promoterUser = CustomUser(
+      id: UniqueID.fromUniqueString("456"),
+      gender: Gender.female,
+      firstName: "Promoter",
+      lastName: "Test",
+      birthDate: "15.05.95",
+      email: "promoter@test.de",
+      role: Role.promoter,
+      tutorialStep: 3,
+      parentUserID: "parent123",
+      recommendationIDs: ["recommendation456"],
+    );
+
+    test("should return step 0 for unverified email", () async {
+      // Given
+      const expectedStep = 0;
+      final expectedResult = right(expectedStep);
+      final unverifiedUser = promoterUser.copyWith(tutorialStep: 0);
+
+      when(mockTutorialRepo.getCurrentStep(unverifiedUser))
+          .thenAnswer((_) async => right(expectedStep));
+
+      // When
+      final result = await mockTutorialRepo.getCurrentStep(unverifiedUser);
+
+      // Then
+      verify(mockTutorialRepo.getCurrentStep(unverifiedUser));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockTutorialRepo);
+    });
+
+    test("should return step 1 for incomplete contact data", () async {
+      // Given
+      const expectedStep = 1;
+      final expectedResult = right(expectedStep);
+      final incompleteUser = promoterUser.copyWith(
+        firstName: null,
+        tutorialStep: 1,
+      );
+
+      when(mockTutorialRepo.getCurrentStep(incompleteUser))
+          .thenAnswer((_) async => right(expectedStep));
+
+      // When
+      final result = await mockTutorialRepo.getCurrentStep(incompleteUser);
+
+      // Then
+      verify(mockTutorialRepo.getCurrentStep(incompleteUser));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockTutorialRepo);
+    });
+
+    test(
+        "should return step 8 for missing recommendation (skips company steps 2-7)",
+        () async {
+      // Given
+      const expectedStep = 8;
+      final expectedResult = right(expectedStep);
+      final noRecommendationUser = promoterUser.copyWith(
+        recommendationIDs: null,
+      );
+
+      when(mockTutorialRepo.getCurrentStep(noRecommendationUser))
+          .thenAnswer((_) async => right(expectedStep));
+
+      // When
+      final result =
+          await mockTutorialRepo.getCurrentStep(noRecommendationUser);
+
+      // Then
+      verify(mockTutorialRepo.getCurrentStep(noRecommendationUser));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockTutorialRepo);
+    });
+
+    test("should return step 9 for recommendation manager step", () async {
+      // Given
+      const expectedStep = 9;
+      final expectedResult = right(expectedStep);
+      final managerStepUser = promoterUser.copyWith(
+        recommendationIDs: ["recommendation123"],
+        tutorialStep: 8,
+      );
+
+      when(mockTutorialRepo.getCurrentStep(managerStepUser))
+          .thenAnswer((_) async => right(expectedStep));
+
+      // When
+      final result = await mockTutorialRepo.getCurrentStep(managerStepUser);
+
+      // Then
+      verify(mockTutorialRepo.getCurrentStep(managerStepUser));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockTutorialRepo);
+    });
+
+    test("should return step 10 for completed tutorial", () async {
+      // Given
+      const expectedStep = 10;
+      final expectedResult = right(expectedStep);
+      final completedUser = promoterUser.copyWith(
+        recommendationIDs: ["recommendation123"],
+        tutorialStep: 10,
+      );
+
+      when(mockTutorialRepo.getCurrentStep(completedUser))
+          .thenAnswer((_) async => right(expectedStep));
+
+      // When
+      final result = await mockTutorialRepo.getCurrentStep(completedUser);
+
+      // Then
+      verify(mockTutorialRepo.getCurrentStep(completedUser));
+      expect(expectedResult, result);
+      verifyNoMoreInteractions(mockTutorialRepo);
+    });
+
+    test("should return failure when database call fails", () async {
+      // Given
+      final expectedResult = left(BackendFailure());
+      when(mockTutorialRepo.getCurrentStep(promoterUser))
+          .thenAnswer((_) async => left(BackendFailure()));
+
+      // When
+      final result = await mockTutorialRepo.getCurrentStep(promoterUser);
+
+      // Then
+      verify(mockTutorialRepo.getCurrentStep(promoterUser));
       expect(expectedResult, result);
       verifyNoMoreInteractions(mockTutorialRepo);
     });
