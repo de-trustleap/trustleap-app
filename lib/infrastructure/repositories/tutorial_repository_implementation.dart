@@ -31,7 +31,6 @@ class TutorialRepositoryImplementation implements TutorialRepository {
 
       // Skip email verification for staging
       if (!Environment().isStaging() && !isVerified) {
-        print("NOT VERIFIED");
         return right(0);
       }
 
@@ -137,6 +136,3 @@ class TutorialRepositoryImplementation implements TutorialRepository {
     await doc.update({"tutorialStep": step});
   }
 }
-
-// TODO: TESTS SCHREIBEN
-// TODO: LOCALIZATION

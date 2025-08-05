@@ -2034,6 +2034,125 @@ class AppLocalizationsDe extends AppLocalizations {
       'Notizen zuletzt bearbeitet am:';
 
   @override
+  String get dashboard_tutorial_title => 'Kleine Starthilfe';
+
+  @override
+  String get dashboard_tutorial_step_email_verification_title =>
+      'E-Mail Adresse verifizieren';
+
+  @override
+  String get dashboard_tutorial_step_email_verification_content =>
+      'Verifiziere deine E-Mail Adresse. Um den Verifizierungslink erneut zu senden, besuche dein Profil.';
+
+  @override
+  String get dashboard_tutorial_step_contact_data_title =>
+      'Kontaktdaten vervollständigen';
+
+  @override
+  String get dashboard_tutorial_step_contact_data_content =>
+      'Gehe in dein Profil und vervollständige deine Kontaktdaten.';
+
+  @override
+  String get dashboard_tutorial_step_company_registration_title =>
+      'Unternehmen registrieren';
+
+  @override
+  String get dashboard_tutorial_step_company_registration_content =>
+      'Gehe in dein Profil und registriere dein Unternehmen';
+
+  @override
+  String get dashboard_tutorial_step_company_approval_title =>
+      'Warten auf Freischaltung';
+
+  @override
+  String get dashboard_tutorial_step_company_approval_content =>
+      'Du hast eine Registrierungsanfrage für dein Unternehmen gestellt. Die Bearbeitung der Anfrage kann ein paar Tage dauern. Schaue später nochmal vorbei.';
+
+  @override
+  String get dashboard_tutorial_step_default_landingpage_title =>
+      'Default Landingpage anlegen';
+
+  @override
+  String get dashboard_tutorial_step_default_landingpage_content =>
+      'Für die Nutzung der App musst du eine Default Landingpage anlegen. Auf diese wird zurückgegriffen, falls deine normale Landingpage nicht funktioniert.';
+
+  @override
+  String get dashboard_tutorial_step_landingpage_title =>
+      'Landingpage erstellen';
+
+  @override
+  String get dashboard_tutorial_step_landingpage_content =>
+      'Du hast deine Default Landingpage erfolgreich erstellt. Jetzt wird noch eine normale Landingpage benötigt, um dein Produkt oder deine Dienstleistung zu bewerben.';
+
+  @override
+  String get dashboard_tutorial_step_promoter_registration_title =>
+      'Promoter registrieren';
+
+  @override
+  String get dashboard_tutorial_step_promoter_registration_content =>
+      'Um deine Dienstleistung oder dein Produkt zu bewerben sind Promoter notwendig. Erstelle deinen ersten Promoter.';
+
+  @override
+  String get dashboard_tutorial_step_promoter_waiting_title =>
+      'Auf Promoter warten';
+
+  @override
+  String get dashboard_tutorial_step_promoter_waiting_content =>
+      'Der eingeladene Promoter muss sich jetzt registrieren. Bitte warte bis das geschehen ist.';
+
+  @override
+  String get dashboard_tutorial_step_recommendation_title =>
+      'Empfehlung aussprechen';
+
+  @override
+  String get dashboard_tutorial_step_recommendation_content =>
+      'Es ist an der Zeit deine erste Empfehlung auszusprechen, um deinen ersten Kunden zu gewinnen.';
+
+  @override
+  String get dashboard_tutorial_step_recommendation_manager_title =>
+      'Empfehlungsmanager überprüfen';
+
+  @override
+  String get dashboard_tutorial_step_recommendation_manager_content =>
+      'Deine erste Empfehlung wird jetzt im Empfehlungsmanager angezeigt. Hier kannst du die Empfehlung priorisieren, Notizen hinterlassen und den Status deiner Empfehlung überprüfen. Außerdem siehst du hier auch alle Empfehlungen die deine Promoter ausgesprochen haben.';
+
+  @override
+  String get dashboard_tutorial_step_complete_title => 'Tutorial abschließen';
+
+  @override
+  String get dashboard_tutorial_step_complete_content =>
+      'Du hast alle Schritte zur Nutzung der App abgeschlossen.';
+
+  @override
+  String get dashboard_tutorial_button_to_profile => 'Zum Profil';
+
+  @override
+  String get dashboard_tutorial_button_to_landingpages => 'Zu den Landingpages';
+
+  @override
+  String get dashboard_tutorial_button_register_promoter =>
+      'Promoter registrieren';
+
+  @override
+  String get dashboard_tutorial_button_make_recommendation =>
+      'Empfehlung aussprechen';
+
+  @override
+  String get dashboard_tutorial_button_to_recommendation_manager =>
+      'Zum Empfehlungsmanager';
+
+  @override
+  String get dashboard_tutorial_button_hide_tutorial => 'Tutorial ausblenden';
+
+  @override
+  String get dashboard_tutorial_error_title =>
+      'Abruf des Tutorials fehlgeschlagen';
+
+  @override
+  String get dashboard_tutorial_error_message =>
+      'Der Aufruf ist fehlgeschlagen. Versuche es bitte erneut.';
+
+  @override
   String get recommendation_manager_add_note_button_tooltip =>
       'Notiz hinzufügen';
 
