@@ -54,8 +54,14 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                   style: themeData.textTheme.titleLarge!
                       .copyWith(fontSize: 40, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
-              DashboardTutorial(user: state.user),
-              const SizedBox(height: 40),
+              if (state.user.tutorialStep != null) ...[
+                DashboardTutorial(
+                  user: state.user,
+                  onUserUpdate: () =>
+                      Modular.get<DashboardOverviewCubit>().getUser(),
+                ),
+                const SizedBox(height: 40)
+              ],
               if (state.user.role == Role.promoter) ...[
                 LayoutBuilder(
                   builder: (context, constraints) {

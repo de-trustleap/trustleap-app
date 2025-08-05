@@ -5,6 +5,8 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/tutorial_repository.dart';
+import 'package:finanzbegleiter/environment.dart';
+import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class TutorialRepositoryImplementation implements TutorialRepository {
@@ -27,41 +29,52 @@ class TutorialRepositoryImplementation implements TutorialRepository {
       final hasRegisteredPromoter = _hasRegisteredPromoter(user);
       final hasRecommendation = _hasRecommendation(user);
 
-      if (!isVerified) {
-        return right(1);
+      // Skip email verification for staging
+      if (!Environment().isStaging() && !isVerified) {
+        print("NOT VERIFIED");
+        return right(0);
       }
 
       if (!hasAllContactData) {
+        return right(1);
+      }
+
+      if (!hasPendingCompanyRequest &&
+          !hasCompany &&
+          user.tutorialStep != null &&
+          user.tutorialStep! < 2) {
         return right(2);
       }
 
-      if (!hasPendingCompanyRequest && !hasCompany) {
+      if (hasPendingCompanyRequest && !hasCompany) {
         return right(3);
       }
 
-      if (hasPendingCompanyRequest && !hasCompany) {
+      if (hasCompany && !hasDefaultLandingPage) {
         return right(4);
       }
 
-      if (hasCompany && !hasDefaultLandingPage) {
-        return right(5);
-      }
-
       if (hasDefaultLandingPage && !hasLandingPage) {
-        return right(6);
+        return right(5);
       }
 
       if (hasLandingPage &&
           !hasUnregisteredPromoter &&
           !hasRegisteredPromoter) {
-        return right(7);
+        return right(6);
       }
 
       if (hasUnregisteredPromoter && !hasRegisteredPromoter) {
+        return right(7);
+      }
+
+      if (hasRegisteredPromoter && !hasRecommendation) {
         return right(8);
       }
 
-      if ((hasRegisteredPromoter) && !hasRecommendation) {
+      if (hasRecommendation &&
+          user.tutorialStep != null &&
+          user.tutorialStep! < 10) {
         return right(9);
       }
 
@@ -116,10 +129,14 @@ class TutorialRepositoryImplementation implements TutorialRepository {
   bool _hasRecommendation(CustomUser user) {
     return user.recommendationIDs?.isNotEmpty == true;
   }
+
+  @override
+  Future<void> setStep(CustomUser user, int? step) async {
+    final userModel = UserModel.fromDomain(user);
+    final doc = firestore.collection("users").doc(userModel.id);
+    await doc.update({"tutorialStep": step});
+  }
 }
 
-// TODO: NUR AKTUELLER STEP SOLL CONTENT ANZEIGEN (DONE)
-// TODO: CUBIT IMPLEMENTIEREN
-// TODO: ALLE STEPS IMPLEMENTIEREN
-// TODO: AM ENDE VOM TUTORIAL TUTORIALSTEP = NULL SETZEN
-// TODO: FÜR STAGING SOLL ES EINEN TUTORIAL ÜBERSPRINGEN BUTTON GEBEN
+// TODO: TESTS SCHREIBEN
+// TODO: LOCALIZATION
