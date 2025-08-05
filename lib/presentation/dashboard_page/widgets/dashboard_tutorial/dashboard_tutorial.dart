@@ -3,7 +3,8 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
-import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_tutorial/dashboard_tutorial_step_list.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_tutorial/dashboard_tutorial_step_list_company.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_tutorial/dashboard_tutorial_step_list_promoter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -58,11 +59,17 @@ class _DashboardTutorialState extends State<DashboardTutorial> {
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 16),
-                    DashboardTutorialStepList(
-                      currentStep: _currentStep,
-                      user: widget.user,
-                      onUserUpdate: widget.onUserUpdate,
-                    )
+                    widget.user.parentUserID != null
+                        ? DashboardTutorialStepListPromoter(
+                            currentStep: _currentStep,
+                            user: widget.user,
+                            onUserUpdate: widget.onUserUpdate,
+                          )
+                        : DashboardTutorialStepListCompany(
+                            currentStep: _currentStep,
+                            user: widget.user,
+                            onUserUpdate: widget.onUserUpdate,
+                          )
                   ]));
         }
       },

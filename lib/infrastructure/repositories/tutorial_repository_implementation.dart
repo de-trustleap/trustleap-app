@@ -19,68 +19,102 @@ class TutorialRepositoryImplementation implements TutorialRepository {
   @override
   Future<Either<DatabaseFailure, int>> getCurrentStep(CustomUser user) async {
     try {
-      final isVerified = await _isEmailVerified();
-      final hasAllContactData = _hasAllContactData(user);
-      final hasPendingCompanyRequest = _hasPendingCompanyRequest(user);
-      final hasCompany = _hasRegisteredCompany(user);
-      final hasDefaultLandingPage = _hasDefaultLandingPage(user);
-      final hasLandingPage = _hasLandingPage(user);
-      final hasUnregisteredPromoter = _hasUnregisteredPromoter(user);
-      final hasRegisteredPromoter = _hasRegisteredPromoter(user);
-      final hasRecommendation = _hasRecommendation(user);
-
-      // Skip email verification for staging
-      if (!Environment().isStaging() && !isVerified) {
-        return right(0);
+      if (user.parentUserID != null) {
+        return _getPromoterCurrentStep(user);
+      } else {
+        return _getCompanyCurrentStep(user);
       }
-
-      if (!hasAllContactData) {
-        return right(1);
-      }
-
-      if (!hasPendingCompanyRequest &&
-          !hasCompany &&
-          user.tutorialStep != null &&
-          user.tutorialStep! < 2) {
-        return right(2);
-      }
-
-      if (hasPendingCompanyRequest && !hasCompany) {
-        return right(3);
-      }
-
-      if (hasCompany && !hasDefaultLandingPage) {
-        return right(4);
-      }
-
-      if (hasDefaultLandingPage && !hasLandingPage) {
-        return right(5);
-      }
-
-      if (hasLandingPage &&
-          !hasUnregisteredPromoter &&
-          !hasRegisteredPromoter) {
-        return right(6);
-      }
-
-      if (hasUnregisteredPromoter && !hasRegisteredPromoter) {
-        return right(7);
-      }
-
-      if (hasRegisteredPromoter && !hasRecommendation) {
-        return right(8);
-      }
-
-      if (hasRecommendation &&
-          user.tutorialStep != null &&
-          user.tutorialStep! < 10) {
-        return right(9);
-      }
-
-      return right(10);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     }
+  }
+
+  Future<Either<DatabaseFailure, int>> _getPromoterCurrentStep(
+      CustomUser user) async {
+    final isVerified = await _isEmailVerified();
+    final hasAllContactData = _hasAllContactData(user);
+    final hasRecommendation = _hasRecommendation(user);
+
+    if (!Environment().isStaging() && !isVerified) {
+      return right(0);
+    }
+
+    if (!hasAllContactData) {
+      return right(1);
+    }
+
+    if (!hasRecommendation) {
+      return right(8);
+    }
+
+    if (hasRecommendation &&
+        user.tutorialStep != null &&
+        user.tutorialStep! < 10) {
+      return right(9);
+    }
+
+    return right(10);
+  }
+
+  Future<Either<DatabaseFailure, int>> _getCompanyCurrentStep(
+      CustomUser user) async {
+    final isVerified = await _isEmailVerified();
+    final hasAllContactData = _hasAllContactData(user);
+    final hasPendingCompanyRequest = _hasPendingCompanyRequest(user);
+    final hasCompany = _hasRegisteredCompany(user);
+    final hasDefaultLandingPage = _hasDefaultLandingPage(user);
+    final hasLandingPage = _hasLandingPage(user);
+    final hasUnregisteredPromoter = _hasUnregisteredPromoter(user);
+    final hasRegisteredPromoter = _hasRegisteredPromoter(user);
+    final hasRecommendation = _hasRecommendation(user);
+
+    // Skip email verification for staging
+    if (!Environment().isStaging() && !isVerified) {
+      return right(0);
+    }
+
+    if (!hasAllContactData) {
+      return right(1);
+    }
+
+    if (!hasPendingCompanyRequest &&
+        !hasCompany &&
+        user.tutorialStep != null &&
+        user.tutorialStep! < 2) {
+      return right(2);
+    }
+
+    if (hasPendingCompanyRequest && !hasCompany) {
+      return right(3);
+    }
+
+    if (hasCompany && !hasDefaultLandingPage) {
+      return right(4);
+    }
+
+    if (hasDefaultLandingPage && !hasLandingPage) {
+      return right(5);
+    }
+
+    if (hasLandingPage && !hasUnregisteredPromoter && !hasRegisteredPromoter) {
+      return right(6);
+    }
+
+    if (hasUnregisteredPromoter && !hasRegisteredPromoter) {
+      return right(7);
+    }
+
+    if (hasRegisteredPromoter && !hasRecommendation) {
+      return right(8);
+    }
+
+    if (hasRecommendation &&
+        user.tutorialStep != null &&
+        user.tutorialStep! < 10) {
+      return right(9);
+    }
+
+    return right(10);
   }
 
   Future<bool> _isEmailVerified() async {
