@@ -1994,6 +1994,122 @@ class AppLocalizationsEn extends AppLocalizations {
       'Notes last edited at:';
 
   @override
+  String get dashboard_tutorial_title => 'Quick Start Guide';
+
+  @override
+  String get dashboard_tutorial_step_email_verification_title =>
+      'Verify email address';
+
+  @override
+  String get dashboard_tutorial_step_email_verification_content =>
+      'Verify your email address. To resend the verification link, visit your profile.';
+
+  @override
+  String get dashboard_tutorial_step_contact_data_title =>
+      'Complete contact data';
+
+  @override
+  String get dashboard_tutorial_step_contact_data_content =>
+      'Go to your profile and complete your contact data.';
+
+  @override
+  String get dashboard_tutorial_step_company_registration_title =>
+      'Register company';
+
+  @override
+  String get dashboard_tutorial_step_company_registration_content =>
+      'Go to your profile and register your company';
+
+  @override
+  String get dashboard_tutorial_step_company_approval_title =>
+      'Wait for approval';
+
+  @override
+  String get dashboard_tutorial_step_company_approval_content =>
+      'You have submitted a registration request for your company. Processing the request may take a few days. Please check back later.';
+
+  @override
+  String get dashboard_tutorial_step_default_landingpage_title =>
+      'Create default landing page';
+
+  @override
+  String get dashboard_tutorial_step_default_landingpage_content =>
+      'To use the app, you must create a default landing page. This will be used as a fallback if your normal landing page doesn\'t work.';
+
+  @override
+  String get dashboard_tutorial_step_landingpage_title => 'Create landing page';
+
+  @override
+  String get dashboard_tutorial_step_landingpage_content =>
+      'You have successfully created your default landing page. Now you need a normal landing page to promote your product or service.';
+
+  @override
+  String get dashboard_tutorial_step_promoter_registration_title =>
+      'Register promoter';
+
+  @override
+  String get dashboard_tutorial_step_promoter_registration_content =>
+      'To promote your service or product, promoters are necessary. Create your first promoter.';
+
+  @override
+  String get dashboard_tutorial_step_promoter_waiting_title =>
+      'Wait for promoter';
+
+  @override
+  String get dashboard_tutorial_step_promoter_waiting_content =>
+      'The invited promoter must now register. Please wait until this happens.';
+
+  @override
+  String get dashboard_tutorial_step_recommendation_title =>
+      'Make recommendation';
+
+  @override
+  String get dashboard_tutorial_step_recommendation_content =>
+      'It\'s time to make your first recommendation to win your first customer.';
+
+  @override
+  String get dashboard_tutorial_step_recommendation_manager_title =>
+      'Check recommendation manager';
+
+  @override
+  String get dashboard_tutorial_step_recommendation_manager_content =>
+      'Your first recommendation is now displayed in the recommendation manager. Here you can prioritize the recommendation, leave notes, and check the status of your recommendation. You will also see all recommendations made by your promoters.';
+
+  @override
+  String get dashboard_tutorial_step_complete_title => 'Complete tutorial';
+
+  @override
+  String get dashboard_tutorial_step_complete_content =>
+      'You have completed all steps for using the app.';
+
+  @override
+  String get dashboard_tutorial_button_to_profile => 'To profile';
+
+  @override
+  String get dashboard_tutorial_button_to_landingpages => 'To landing pages';
+
+  @override
+  String get dashboard_tutorial_button_register_promoter => 'Register promoter';
+
+  @override
+  String get dashboard_tutorial_button_make_recommendation =>
+      'Make recommendation';
+
+  @override
+  String get dashboard_tutorial_button_to_recommendation_manager =>
+      'To recommendation manager';
+
+  @override
+  String get dashboard_tutorial_button_hide_tutorial => 'Hide tutorial';
+
+  @override
+  String get dashboard_tutorial_error_title => 'Failed to load tutorial';
+
+  @override
+  String get dashboard_tutorial_error_message =>
+      'The request failed. Please try again.';
+
+  @override
   String get recommendation_manager_add_note_button_tooltip => 'Add note';
 
   @override

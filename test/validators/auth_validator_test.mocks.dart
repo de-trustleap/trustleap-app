@@ -6321,6 +6321,64 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get dashboard_landingpage_ranking_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_landingpage_ranking_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_landingpage_ranking_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_landingpage_ranking_period => (super.noSuchMethod(
+        Invocation.getter(#dashboard_landingpage_ranking_period),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_landingpage_ranking_period),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_landingpage_ranking_loading_error_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_landingpage_ranking_loading_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_landingpage_ranking_loading_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_landingpage_ranking_loading_error_message =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_landingpage_ranking_loading_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_landingpage_ranking_loading_error_message),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_landingpage_ranking_no_landingpages =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_landingpage_ranking_no_landingpages),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_landingpage_ranking_no_landingpages),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_landingpage_ranking_no_data => (super.noSuchMethod(
+        Invocation.getter(#dashboard_landingpage_ranking_no_data),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_landingpage_ranking_no_data),
+        ),
+      ) as String);
+
+  @override
   String get admin_legals_title => (super.noSuchMethod(
         Invocation.getter(#admin_legals_title),
         returnValue: _i3.dummyValue<String>(
@@ -6398,6 +6456,42 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#admin_legals_save_success),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_quicklink_recommendation_text => (super.noSuchMethod(
+        Invocation.getter(#dashboard_quicklink_recommendation_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_quicklink_recommendation_text),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_quicklink_recommendation_button => (super.noSuchMethod(
+        Invocation.getter(#dashboard_quicklink_recommendation_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_quicklink_recommendation_button),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_quicklink_manager_text => (super.noSuchMethod(
+        Invocation.getter(#dashboard_quicklink_manager_text),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_quicklink_manager_text),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_quicklink_manager_button => (super.noSuchMethod(
+        Invocation.getter(#dashboard_quicklink_manager_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_quicklink_manager_button),
         ),
       ) as String);
 
