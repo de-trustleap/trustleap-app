@@ -15,7 +15,6 @@ class DashboardTutorialCubit extends Cubit<DashboardTutorialState> {
     failureOrSuccess
         .fold((failure) => emit(DashboardTutorialFailure(failure: failure)),
             (currentStep) {
-      print("CURRENTSTEP: $currentStep");
       emit(DashboardTutorialSuccess(currentStep: currentStep));
     });
   }

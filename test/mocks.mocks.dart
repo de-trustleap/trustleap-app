@@ -9099,6 +9099,23 @@ class MockTutorialRepository extends _i1.Mock
           ),
         )),
       ) as _i23.Future<_i2.Either<_i32.DatabaseFailure, int>>);
+
+  @override
+  _i23.Future<void> setStep(
+    _i30.CustomUser? user,
+    int? step,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setStep,
+          [
+            user,
+            step,
+          ],
+        ),
+        returnValue: _i23.Future<void>.value(),
+        returnValueForMissingStub: _i23.Future<void>.value(),
+      ) as _i23.Future<void>);
 }
 
 /// A class which mocks [User].
@@ -13994,20 +14011,19 @@ class MockDashboardTutorialCubit extends _i1.Mock
       ) as _i17.TutorialRepository);
 
   @override
-  _i89.DashboardTutorialCubitState get state => (super.noSuchMethod(
+  _i89.DashboardTutorialState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i89.DashboardTutorialCubitState>(
+        returnValue: _i28.dummyValue<_i89.DashboardTutorialState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i89.DashboardTutorialCubitState);
+      ) as _i89.DashboardTutorialState);
 
   @override
-  _i23.Stream<_i89.DashboardTutorialCubitState> get stream =>
-      (super.noSuchMethod(
+  _i23.Stream<_i89.DashboardTutorialState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i89.DashboardTutorialCubitState>.empty(),
-      ) as _i23.Stream<_i89.DashboardTutorialCubitState>);
+        returnValue: _i23.Stream<_i89.DashboardTutorialState>.empty(),
+      ) as _i23.Stream<_i89.DashboardTutorialState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -14025,7 +14041,23 @@ class MockDashboardTutorialCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i89.DashboardTutorialCubitState? state) => super.noSuchMethod(
+  void setStep(
+    _i30.CustomUser? user,
+    int? step,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setStep,
+          [
+            user,
+            step,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i89.DashboardTutorialState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -14034,7 +14066,7 @@ class MockDashboardTutorialCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i89.DashboardTutorialCubitState>? change) =>
+  void onChange(_i54.Change<_i89.DashboardTutorialState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
