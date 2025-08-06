@@ -16,25 +16,7 @@ class RecommendationManagerArchiveLoadingState
   List<Object?> get props => [];
 }
 
-class RecommendationManagerArchiveGetUserSuccessState
-    extends RecommendationManagerArchiveState with EquatableMixin {
-  final CustomUser user;
 
-  RecommendationManagerArchiveGetUserSuccessState({required this.user});
-
-  @override
-  List<Object?> get props => [user];
-}
-
-class RecommendationManagerArchiveGetUserFailureState
-    extends RecommendationManagerArchiveState with EquatableMixin {
-  final DatabaseFailure failure;
-
-  RecommendationManagerArchiveGetUserFailureState({required this.failure});
-
-  @override
-  List<Object?> get props => [failure];
-}
 
 class RecommendationManagerArchiveGetRecommendationsSuccessState
     extends RecommendationManagerArchiveState with EquatableMixin {

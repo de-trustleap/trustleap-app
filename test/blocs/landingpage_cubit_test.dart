@@ -13,12 +13,10 @@ import '../mocks.mocks.dart';
 void main() {
   late LandingPageCubit landingPageCubit;
   late MockLandingPageRepository mockLandingPageRepo;
-  late MockUserRepository mockUserRepo;
 
   setUp(() {
     mockLandingPageRepo = MockLandingPageRepository();
-    mockUserRepo = MockUserRepository();
-    landingPageCubit = LandingPageCubit(mockLandingPageRepo, mockUserRepo);
+    landingPageCubit = LandingPageCubit(mockLandingPageRepo);
   });
 
   test("init state should be LandingPageInitial", () {
@@ -300,50 +298,6 @@ void main() {
     });
   });
 
-  group("LandingPageCubit_GetUser", () {
-    final mockUser = CustomUser(id: UniqueID.fromUniqueString("1"));
-    test("should call user repo when function is called", () async {
-      // Given
-      when(mockUserRepo.getUser()).thenAnswer((_) async => right(mockUser));
-      // When
-      landingPageCubit.getUser();
-      await untilCalled(mockUserRepo.getUser());
-      // Then
-      verify(mockUserRepo.getUser());
-      verifyNoMoreInteractions(mockUserRepo);
-    });
-
-    test(
-        "should emit GetUserLoadingState and then GetUserSuccessState when function is called",
-        () async {
-      // Given
-      final expectedResult = [
-        GetUserLoadingState(),
-        GetUserSuccessState(user: mockUser)
-      ];
-      // When
-      when(mockUserRepo.getUser()).thenAnswer((_) async => right(mockUser));
-      // Then
-      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
-      landingPageCubit.getUser();
-    });
-
-    test(
-        "should emit DuplicateLandingPageLoadingState and then DuplicateLandingPageFailureState when function is called and there was an error",
-        () async {
-      // Given
-      final expectedResult = [
-        GetUserLoadingState(),
-        GetUserFailureState(failure: BackendFailure())
-      ];
-      // When
-      when(mockUserRepo.getUser())
-          .thenAnswer((_) async => left(BackendFailure()));
-      // Then
-      expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
-      landingPageCubit.getUser();
-    });
-  });
 
   group("LandingPageCubit_CheckLandingPageImage", () {
     final testLandingPage = LandingPage(

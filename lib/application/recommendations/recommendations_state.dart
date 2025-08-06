@@ -16,17 +16,7 @@ class RecommendationLoadingState extends RecommendationsState
   List<Object?> get props => [];
 }
 
-class RecommendationGetCurrentUserSuccessState extends RecommendationsState
-    with EquatableMixin {
-  final CustomUser user;
 
-  const RecommendationGetCurrentUserSuccessState({
-    required this.user,
-  });
-
-  @override
-  List<Object?> get props => [user];
-}
 
 class RecommendationGetUserFailureState extends RecommendationsState
     with EquatableMixin {

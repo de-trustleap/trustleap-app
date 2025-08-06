@@ -7,7 +7,6 @@ import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart';
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/landingpage_ranking/dashboard_landingpage_ranking_cubit.dart';
-import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/promoter_ranking/dashboard_promoter_ranking_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/promoters/dashboard_promoters_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
@@ -30,7 +29,6 @@ import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
-import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
@@ -39,6 +37,7 @@ import 'package:finanzbegleiter/application/recommendation_manager/recommendatio
 import 'package:finanzbegleiter/application/recommendations/recommendations_alert/recommendations_alert_cubit.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/application/web_logging/web_logging_cubit.dart';
 import 'package:finanzbegleiter/core/modules/admin_guard.dart';
 import 'package:finanzbegleiter/core/modules/admin_module.dart';
@@ -122,7 +121,6 @@ class AppModule extends Module {
           DashboardRepositoryImplementation.new)
       ..addLazySingleton<TutorialRepository>(
           TutorialRepositoryImplementation.new)
-      ..addLazySingleton(ProfileObserverBloc.new)
       ..addLazySingleton(PagebuilderBloc.new)
       ..addLazySingleton(PagebuilderConfigMenuCubit.new)
       ..addLazySingleton(PermissionCubit.new)
@@ -140,7 +138,6 @@ class AppModule extends Module {
       ..addLazySingleton(RecommendationManagerTileCubit.new)
       ..addLazySingleton(RecommendationManagerArchiveCubit.new)
       ..addLazySingleton(WebLoggingCubit.new)
-      ..addLazySingleton(DashboardOverviewCubit.new)
       ..addLazySingleton(DashboardRecommendationsCubit.new)
       ..addLazySingleton(DashboardPromotersCubit.new)
       ..addLazySingleton(FeedbackCubit.new)
@@ -149,6 +146,7 @@ class AppModule extends Module {
       ..addLazySingleton(DashboardPromoterRankingCubit.new)
       ..addLazySingleton(DashboardLandingpageRankingCubit.new)
       ..addLazySingleton(DashboardTutorialCubit.new)
+      ..addLazySingleton(UserObserverCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)

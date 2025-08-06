@@ -11,9 +11,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class DashboardTutorial extends StatefulWidget {
   final CustomUser user;
-  final VoidCallback onUserUpdate;
-  const DashboardTutorial(
-      {super.key, required this.user, required this.onUserUpdate});
+  const DashboardTutorial({super.key, required this.user});
 
   @override
   State<DashboardTutorial> createState() => _DashboardTutorialState();
@@ -63,12 +61,10 @@ class _DashboardTutorialState extends State<DashboardTutorial> {
                         ? DashboardTutorialStepListPromoter(
                             currentStep: _currentStep,
                             user: widget.user,
-                            onUserUpdate: widget.onUserUpdate,
                           )
                         : DashboardTutorialStepListCompany(
                             currentStep: _currentStep,
                             user: widget.user,
-                            onUserUpdate: widget.onUserUpdate,
                           )
                   ]));
         }

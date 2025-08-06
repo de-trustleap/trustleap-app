@@ -1,8 +1,6 @@
-import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_landingpage_ranking/dashboard_landingpage_ranking.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoter_ranking/dashboard_promoter_ranking.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters.dart';
@@ -12,7 +10,6 @@ import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_tu
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class DashboardOverview extends StatefulWidget {
   const DashboardOverview({super.key});
@@ -25,27 +22,13 @@ class _DashboardOverviewState extends State<DashboardOverview> {
   final largeLayoutBreakpoint = 1200;
 
   @override
-  void initState() {
-    super.initState();
-    Modular.get<DashboardOverviewCubit>().getUser();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final cubit = Modular.get<DashboardOverviewCubit>();
 
-    return BlocBuilder<DashboardOverviewCubit, DashboardOverviewState>(
-      bloc: cubit,
+    return BlocBuilder<UserObserverCubit, UserObserverState>(
       builder: (context, state) {
-        if (state is DashboardOverviewGetUserFailureState) {
-          return ErrorView(
-              title: localization.dashboard_user_not_found_error_title,
-              message: localization.dashboard_user_not_found_error_message,
-              callback: () =>
-                  {Modular.get<DashboardOverviewCubit>().getUser()});
-        } else if (state is DashboardOverviewGetUserSuccessState) {
+        if (state is UserObserverSuccess) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -57,8 +40,6 @@ class _DashboardOverviewState extends State<DashboardOverview> {
               if (state.user.tutorialStep != null) ...[
                 DashboardTutorial(
                   user: state.user,
-                  onUserUpdate: () =>
-                      Modular.get<DashboardOverviewCubit>().getUser(),
                 ),
                 const SizedBox(height: 40)
               ],
@@ -156,7 +137,7 @@ class _DashboardOverviewState extends State<DashboardOverview> {
             ],
           );
         } else {
-          return const LoadingIndicator();
+          return const SizedBox.shrink();
         }
       },
     );

@@ -9,16 +9,14 @@ import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
-import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 
 part 'promoter_state.dart';
 
 class PromoterCubit extends Cubit<PromoterState> {
   final PromoterRepository promoterRepo;
-  final UserRepository userRepo;
   final LandingPageRepository landingPagesRepo;
 
-  PromoterCubit(this.promoterRepo, this.userRepo, this.landingPagesRepo)
+  PromoterCubit(this.promoterRepo, this.landingPagesRepo)
       : super(PromoterInitial());
 
   void registerPromoter(UnregisteredPromoter? promoter) async {
@@ -54,20 +52,6 @@ class PromoterCubit extends Cubit<PromoterState> {
         });
       }
     }
-  }
-
-  void getCurrentUser() async {
-    emit(PromoterLoadingState());
-    final failureOrSuccess = await userRepo.getUser();
-    failureOrSuccess.fold((failure) {
-      if (!isClosed) {
-        emit(PromoterGetCurrentUserFailureState(failure: failure));
-      }
-    }, (user) {
-      if (!isClosed) {
-        emit(PromoterGetCurrentUserSuccessState(user: user));
-      }
-    });
   }
 
   void getPromotingLandingPages(List<String> landingPageIDs) async {

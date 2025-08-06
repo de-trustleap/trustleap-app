@@ -43,28 +43,6 @@ class CreatedLandingPageSuccessState extends LandingPageState
   List<Object> get props => [];
 }
 
-class GetUserSuccessState extends LandingPageState with EquatableMixin {
-  final CustomUser user;
-  GetUserSuccessState({
-    required this.user,
-  });
-  @override
-  List<Object> get props => [user];
-}
-
-class GetUserLoadingState extends LandingPageState with EquatableMixin {
-  @override
-  List<Object> get props => [];
-}
-
-class GetUserFailureState extends LandingPageState with EquatableMixin {
-  final DatabaseFailure failure;
-  GetUserFailureState({
-    required this.failure,
-  });
-  @override
-  List<Object> get props => [failure];
-}
 
 class DeleteLandingPageLoadingState extends LandingPageState
     with EquatableMixin {

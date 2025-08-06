@@ -16,12 +16,10 @@ import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
-import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/application/legals/legals_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
-import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/promoter_ranking/dashboard_promoter_ranking_cubit.dart';
 import 'package:finanzbegleiter/application/dashboard/landingpage_ranking/dashboard_landingpage_ranking_cubit.dart';
@@ -79,7 +77,6 @@ import 'package:mockito/annotations.dart';
   LegalsCubit,
   CompanyImageBloc,
   LandingPageImageBloc,
-  ProfileObserverBloc,
   CompanyObserverCubit,
   PermissionCubit,
   CompanyCubit,
@@ -94,7 +91,6 @@ import 'package:mockito/annotations.dart';
   AdminRegistrationCodeCubit,
   PagebuilderConfigMenuCubit,
   PagebuilderSelectionCubit,
-  DashboardOverviewCubit,
   DashboardRecommendationsCubit,
   RecommendationManagerTileCubit,
   FeedbackCubit,

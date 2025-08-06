@@ -10,63 +10,18 @@ import '../mocks.mocks.dart';
 
 void main() {
   late RecommendationManagerArchiveCubit recoManagerCubit;
-  late MockUserRepository mockUserRepo;
   late MockRecommendationRepository mockRecoRepo;
 
   setUp(() {
-    mockUserRepo = MockUserRepository();
     mockRecoRepo = MockRecommendationRepository();
     recoManagerCubit =
-        RecommendationManagerArchiveCubit(mockRecoRepo, mockUserRepo);
+        RecommendationManagerArchiveCubit(mockRecoRepo);
   });
 
   test("init state should be RecommendationsInitial", () {
     expect(recoManagerCubit.state, RecommendationManagerArchiveInitial());
   });
 
-  group("RecommendationManagerArchiveCubit_getUser", () {
-    final user = CustomUser(id: UniqueID.fromUniqueString("1"));
-    test("should call user repo when function is called", () async {
-      // Given
-      when(mockUserRepo.getUser()).thenAnswer((_) async => right(user));
-      // When
-      recoManagerCubit.getUser();
-      await untilCalled(mockUserRepo.getUser());
-      // Then
-      verify(mockUserRepo.getUser());
-      verifyNoMoreInteractions(mockUserRepo);
-    });
-
-    test(
-        "should emit RecommendationManagerArchiveLoadingState and then RecommendationManagerArchiveGetUserSuccessState when call was successful",
-        () async {
-      // Given
-      final expectedResult = [
-        RecommendationManagerArchiveLoadingState(),
-        RecommendationManagerArchiveGetUserSuccessState(user: user)
-      ];
-      when(mockUserRepo.getUser()).thenAnswer((_) async => right(user));
-      // Then
-      expectLater(recoManagerCubit.stream, emitsInOrder(expectedResult));
-      recoManagerCubit.getUser();
-    });
-
-    test(
-        "should emit RecommendationManagerArchiveLoadingState and then RecommendationManagerArchiveGetUserFailureState when call has failed",
-        () async {
-      // Given
-      final expectedResult = [
-        RecommendationManagerArchiveLoadingState(),
-        RecommendationManagerArchiveGetUserFailureState(
-            failure: BackendFailure())
-      ];
-      when(mockUserRepo.getUser())
-          .thenAnswer((_) async => left(BackendFailure()));
-      // Then
-      expectLater(recoManagerCubit.stream, emitsInOrder(expectedResult));
-      recoManagerCubit.getUser();
-    });
-  });
 
   group("RecommendationManagerArchiveCubit_getArchivedRecommendations", () {
     final userID = "1";

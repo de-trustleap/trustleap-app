@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
-import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
@@ -35,9 +35,9 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
-    return BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
+    return BlocBuilder<UserObserverCubit, UserObserverState>(
       builder: (context, state) {
-        if (state is ProfileUserObserverSuccess) {
+        if (state is UserObserverSuccess) {
           return Container(
               width: double.infinity,
               decoration: BoxDecoration(color: themeData.colorScheme.surface),
@@ -89,15 +89,15 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                       SizedBox(height: responsiveValue.isMobile ? 50 : 100)
                     ])),
               ]));
-        } else if (state is ProfileUserObserverFailure) {
+        } else if (state is UserObserverFailure) {
           return CenteredConstrainedWrapper(
               child: ErrorView(
                   title: localization.profile_page_request_failure_message,
                   message: DatabaseFailureMapper.mapFailureMessage(
                       state.failure, localization),
                   callback: () => {
-                        BlocProvider.of<ProfileObserverBloc>(context)
-                            .add(ProfileObserveUserEvent())
+                        BlocProvider.of<UserObserverCubit>(context)
+                            .observeUser()
                       }));
         } else {
           return CenteredConstrainedWrapper(

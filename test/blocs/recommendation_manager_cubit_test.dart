@@ -10,13 +10,11 @@ import '../mocks.mocks.dart';
 
 void main() {
   late RecommendationManagerCubit recoManagerCubit;
-  late MockUserRepository mockUserRepo;
   late MockRecommendationRepository mockRecoRepo;
 
   setUp(() {
-    mockUserRepo = MockUserRepository();
     mockRecoRepo = MockRecommendationRepository();
-    recoManagerCubit = RecommendationManagerCubit(mockRecoRepo, mockUserRepo);
+    recoManagerCubit = RecommendationManagerCubit(mockRecoRepo);
   });
 
   test("init state should be RecommendationsInitial", () {

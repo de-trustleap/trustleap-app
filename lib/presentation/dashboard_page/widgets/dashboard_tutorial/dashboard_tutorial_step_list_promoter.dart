@@ -10,13 +10,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 class DashboardTutorialStepListPromoter extends StatelessWidget {
   final int currentStep;
   final CustomUser user;
-  final VoidCallback onUserUpdate;
 
   const DashboardTutorialStepListPromoter({
     super.key,
     required this.currentStep,
     required this.user,
-    required this.onUserUpdate,
   });
 
   @override
@@ -37,7 +35,6 @@ class DashboardTutorialStepListPromoter extends StatelessWidget {
               RoutePaths.homePath + RoutePaths.profilePath),
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 1,
@@ -52,7 +49,6 @@ class DashboardTutorialStepListPromoter extends StatelessWidget {
           },
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 2,
@@ -65,7 +61,6 @@ class DashboardTutorialStepListPromoter extends StatelessWidget {
               RoutePaths.homePath + RoutePaths.recommendationsPath),
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 3,
@@ -83,7 +78,6 @@ class DashboardTutorialStepListPromoter extends StatelessWidget {
           },
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 4,
@@ -94,7 +88,6 @@ class DashboardTutorialStepListPromoter extends StatelessWidget {
           buttonAction: null,
           isLast: true,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
       ],
     );

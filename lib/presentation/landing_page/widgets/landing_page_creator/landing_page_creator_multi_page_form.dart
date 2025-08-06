@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -59,7 +60,15 @@ class _LandingPageCreatorMultiPageFormState
     isEditMode = widget.landingPage != null;
     landingPage = widget.landingPage;
 
-    Modular.get<LandingPageCubit>().getUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userState = BlocProvider.of<UserObserverCubit>(context).state;
+      if (userState is UserObserverSuccess &&
+          userState.user.companyID != null) {
+        BlocProvider.of<CompanyCubit>(context)
+            .getCompany(userState.user.companyID!);
+      }
+    });
+
     _initializeSteps();
 
     progress = 1 / _steps.length;
@@ -175,12 +184,6 @@ class _LandingPageCreatorMultiPageFormState
                   const params = "?editedPage=true";
                   CustomNavigator.pushAndReplace(
                       RoutePaths.homePath + RoutePaths.landingPagePath, params);
-                } else if (state is GetUserSuccessState) {
-                  showError = false;
-                  if (state.user.companyID != null) {
-                    BlocProvider.of<CompanyCubit>(context)
-                        .getCompany(state.user.companyID!);
-                  }
                 } else if (state is LandingPageNoImageFailureState) {
                   setState(() {
                     imageValid = false;

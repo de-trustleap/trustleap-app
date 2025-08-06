@@ -14,7 +14,6 @@ class DashboardTutorialStep extends StatelessWidget {
   final VoidCallback? buttonAction;
   final bool isLast;
   final CustomUser user;
-  final VoidCallback onUserUpdate;
 
   const DashboardTutorialStep({
     super.key,
@@ -26,7 +25,6 @@ class DashboardTutorialStep extends StatelessWidget {
     this.buttonAction,
     required this.isLast,
     required this.user,
-    required this.onUserUpdate,
   });
 
   @override
@@ -112,7 +110,6 @@ class DashboardTutorialStep extends StatelessWidget {
                         onTap: () {
                           Modular.get<DashboardTutorialCubit>()
                               .setStep(user, null);
-                          onUserUpdate();
                         })
                   ]
                 ],

@@ -5529,6 +5529,317 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get dashboard_tutorial_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_email_verification_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_email_verification_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_email_verification_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_email_verification_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_email_verification_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_email_verification_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_contact_data_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_contact_data_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_contact_data_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_contact_data_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_contact_data_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_contact_data_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_company_registration_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_company_registration_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_company_registration_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_company_registration_content =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #dashboard_tutorial_step_company_registration_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_company_registration_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_company_approval_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_company_approval_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_company_approval_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_company_approval_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_company_approval_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_company_approval_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_default_landingpage_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_default_landingpage_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_default_landingpage_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_default_landingpage_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_default_landingpage_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_default_landingpage_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_landingpage_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_landingpage_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_landingpage_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_landingpage_content => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_landingpage_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_landingpage_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_promoter_registration_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_promoter_registration_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_promoter_registration_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_promoter_registration_content =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #dashboard_tutorial_step_promoter_registration_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_promoter_registration_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_promoter_waiting_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_promoter_waiting_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_promoter_waiting_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_promoter_waiting_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_promoter_waiting_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_promoter_waiting_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_recommendation_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_recommendation_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_recommendation_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_recommendation_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_recommendation_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_recommendation_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_recommendation_manager_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #dashboard_tutorial_step_recommendation_manager_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_recommendation_manager_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_recommendation_manager_content =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #dashboard_tutorial_step_recommendation_manager_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_recommendation_manager_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_complete_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_complete_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_complete_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_complete_content => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_complete_content),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_complete_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_to_profile => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_to_profile),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_to_profile),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_to_landingpages => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_to_landingpages),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_to_landingpages),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_register_promoter => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_register_promoter),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_register_promoter),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_make_recommendation =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_make_recommendation),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_make_recommendation),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_to_recommendation_manager =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_to_recommendation_manager),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_button_to_recommendation_manager),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_hide_tutorial => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_hide_tutorial),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_hide_tutorial),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_error_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_error_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_error_message => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_error_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_error_message),
+        ),
+      ) as String);
+
+  @override
   String get recommendation_manager_add_note_button_tooltip =>
       (super.noSuchMethod(
         Invocation.getter(#recommendation_manager_add_note_button_tooltip),

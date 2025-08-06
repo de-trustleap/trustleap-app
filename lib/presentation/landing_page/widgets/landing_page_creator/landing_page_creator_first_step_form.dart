@@ -2,7 +2,7 @@
 import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
-import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
@@ -11,10 +11,8 @@ import 'package:finanzbegleiter/infrastructure/models/company_model.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_emoji_picker.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_form_validator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_placeholder_picker.dart';
@@ -51,8 +49,6 @@ class _LandingPageCreatorFormState
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   CustomUser? user;
 
-  bool showError = false;
-  String errorMessage = "";
   bool validationHasError = false;
   bool buttonDisabled = false;
   bool _isEmojiPickerExpanded = false;
@@ -60,7 +56,6 @@ class _LandingPageCreatorFormState
   @override
   void initState() {
     super.initState();
-    Modular.get<LandingPageCubit>().getUser();
     if (widget.landingPage != null) {
       nameTextController.text = widget.landingPage?.name ?? "";
       descriptionTextController.text = widget.landingPage?.description ?? "";
@@ -79,13 +74,6 @@ class _LandingPageCreatorFormState
     promotionTemplateTextController.dispose();
 
     super.dispose();
-  }
-
-  void resetError() {
-    setState(() {
-      showError = false;
-      errorMessage = "";
-    });
   }
 
   void setButtonToDisabled(bool disabled) {
@@ -154,27 +142,18 @@ class _LandingPageCreatorFormState
         LandingPageCreatorFormValidator(localization: localization);
     const double textFieldSpacing = 20;
 
-    return BlocConsumer<LandingPageCubit, LandingPageState>(
-      bloc: landingPageCubit,
-      listener: (context, state) {
-        if (state is GetUserSuccessState) {
-          user = state.user;
+    return BlocBuilder<UserObserverCubit, UserObserverState>(
+      builder: (context, userState) {
+        if (userState is UserObserverSuccess) {
+          user = userState.user;
         }
-      },
-      builder: (context, state) {
-        if (state is GetUserFailureState) {
-          return ErrorView(
-              title: localization.profile_page_request_failure_message,
-              message: DatabaseFailureMapper.mapFailureMessage(
-                  state.failure, localization),
-              callback: () => {Modular.get<LandingPageCubit>().getUser()});
-        } else {
-          return CardContainer(
-              child: LayoutBuilder(builder: (context, constraints) {
-            final maxWidth = constraints.maxWidth;
-            if (state is GetUserLoadingState) {
-              return const LoadingIndicator();
-            } else {
+
+        return BlocBuilder<LandingPageCubit, LandingPageState>(
+          bloc: landingPageCubit,
+          builder: (context, state) {
+            return CardContainer(
+                child: LayoutBuilder(builder: (context, constraints) {
+              final maxWidth = constraints.maxWidth;
               return Form(
                   key: formKey,
                   autovalidateMode: state is LandingPageShowValidationState
@@ -202,7 +181,6 @@ class _LandingPageCreatorFormState
                                   controller: nameTextController,
                                   disabled: false,
                                   placeholder: localization.placeholder_title,
-                                  onChanged: resetError,
                                   validator: validator.validateLandingPageName)
                             ]),
                         const SizedBox(height: textFieldSpacing),
@@ -215,7 +193,6 @@ class _LandingPageCreatorFormState
                                   disabled: false,
                                   placeholder:
                                       localization.placeholder_description,
-                                  onChanged: resetError,
                                   validator: validator.validateLandingPageText,
                                   minLines: 2,
                                   maxLines: 5,
@@ -231,7 +208,6 @@ class _LandingPageCreatorFormState
                                   disabled: false,
                                   placeholder: localization
                                       .landingpage_creator_placeholder_contact_email,
-                                  onChanged: resetError,
                                   validator: validator
                                       .validateLandingPageContactEmailAddress,
                                   keyboardType: TextInputType.emailAddress)
@@ -288,7 +264,6 @@ class _LandingPageCreatorFormState
                                     disabled: false,
                                     placeholder: localization
                                         .landingpage_create_promotion_template_placeholder,
-                                    onChanged: resetError,
                                     minLines: 4,
                                     maxLines: 10,
                                     keyboardType: TextInputType.multiline)
@@ -315,9 +290,9 @@ class _LandingPageCreatorFormState
                           ],
                         ),
                       ]));
-            }
-          }));
-        }
+            }));
+          },
+        );
       },
     );
   }
