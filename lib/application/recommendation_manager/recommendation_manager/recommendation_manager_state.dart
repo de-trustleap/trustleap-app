@@ -61,25 +61,7 @@ class RecommendationGetRecosNoRecosState extends RecommendationManagerState
   List<Object?> get props => [];
 }
 
-class RecommendationManagerGetUserSuccessState
-    extends RecommendationManagerState with EquatableMixin {
-  final CustomUser user;
 
-  RecommendationManagerGetUserSuccessState({required this.user});
-
-  @override
-  List<Object?> get props => [user];
-}
-
-class RecommendationManagerGetUserFailureState
-    extends RecommendationManagerState with EquatableMixin {
-  final DatabaseFailure failure;
-
-  RecommendationManagerGetUserFailureState({required this.failure});
-
-  @override
-  List<Object?> get props => [failure];
-}
 
 class RecommendationDeleteRecoFailureState extends RecommendationManagerState
     with EquatableMixin {

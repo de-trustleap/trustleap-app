@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_archive/recommendation_manager_archive_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -31,7 +32,14 @@ class _RecommendationManagerArchiveOverviewState
   @override
   void initState() {
     super.initState();
-    Modular.get<RecommendationManagerArchiveCubit>().getUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userState = BlocProvider.of<UserObserverCubit>(context).state;
+      if (userState is UserObserverSuccess) {
+        currentUser = userState.user;
+        Modular.get<RecommendationManagerArchiveCubit>()
+            .getArchivedRecommendations(userState.user.id.value);
+      }
+    });
   }
 
   @override
@@ -42,16 +50,9 @@ class _RecommendationManagerArchiveOverviewState
     final localization = AppLocalizations.of(context);
     final cubit = Modular.get<RecommendationManagerArchiveCubit>();
 
-    return BlocConsumer<RecommendationManagerArchiveCubit,
+    return BlocBuilder<RecommendationManagerArchiveCubit,
         RecommendationManagerArchiveState>(
       bloc: cubit,
-      listener: (context, state) {
-        if (state is RecommendationManagerArchiveGetUserSuccessState) {
-          currentUser = state.user;
-          Modular.get<RecommendationManagerArchiveCubit>()
-              .getArchivedRecommendations(state.user.id.value);
-        }
-      },
       builder: (context, state) {
         if (state is RecommendationManagerArchiveLoadingState) {
           return const LoadingIndicator();

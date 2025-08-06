@@ -20,22 +20,16 @@ class RecommendationManagerTileCubit
   RecommendationManagerTileCubit(this.recommendationRepo, this.userRepo)
       : super(RecommendationManagerTileInitial());
 
-  void getUser() async {
-    final userResult = await userRepo.getUser();
-    userResult.fold(
-        (failure) => emit(
-            RecommendationManagerTileGetUserFailureState(failure: failure)),
-        (user) {
-      _currentUser = user;
-      _globalFavoriteRecommendationIDs =
-          List<String>.from(user.favoriteRecommendationIDs ?? []);
-      emit(RecommendationManagerTileGetUserSuccessState(user: user));
-    });
-  }
 
   void initializeFavorites(List<String>? favoriteRecommendationIDs) {
     _globalFavoriteRecommendationIDs =
         List<String>.from(favoriteRecommendationIDs ?? []);
+  }
+
+  void setCurrentUser(CustomUser user) {
+    _currentUser = user;
+    _globalFavoriteRecommendationIDs =
+        List<String>.from(user.favoriteRecommendationIDs ?? []);
   }
 
   List<String> get currentFavoriteRecommendationIDs =>
@@ -78,15 +72,6 @@ class RecommendationManagerTileCubit
 
   void setFavorite(
       UserRecommendation recommendation, String currentUserID) async {
-    if (_currentUser == null) {
-      final userResult = await userRepo.getUser();
-      userResult.fold((failure) {
-        emit(RecommendationSetStatusFailureState(
-            failure: failure, recommendation: recommendation));
-        return;
-      }, (user) => _currentUser = user);
-    }
-
     if (_currentUser == null) {
       emit(RecommendationSetStatusFailureState(
           failure: NotFoundFailure(), recommendation: recommendation));
@@ -143,11 +128,6 @@ class RecommendationManagerTileCubit
   }
 
   void markAsViewed(String recommendationID) async {
-    if (_currentUser == null) {
-      final userResult = await userRepo.getUser();
-      userResult.fold((failure) => null, (user) => _currentUser = user);
-    }
-
     if (_currentUser == null) {
       return;
     }

@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager/recommendation_manager_cubit.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -37,7 +38,15 @@ class _RecommendationManagerPageState
   @override
   void initState() {
     super.initState();
-    Modular.get<RecommendationManagerCubit>().getUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userState = BlocProvider.of<UserObserverCubit>(context).state;
+      if (userState is UserObserverSuccess) {
+        currentUser = userState.user;
+        Modular.get<RecommendationManagerTileCubit>().initializeFavorites(userState.user.favoriteRecommendationIDs);
+        Modular.get<RecommendationManagerTileCubit>().setCurrentUser(userState.user);
+        _requestRecommendations(userState.user);
+      }
+    });
   }
 
   void showDeleteAlert(AppLocalizations localizations, String recoID,
@@ -133,12 +142,7 @@ class _RecommendationManagerPageState
     return BlocConsumer<RecommendationManagerCubit, RecommendationManagerState>(
         bloc: recoManagerCubit,
         listener: (context, state) {
-          if (state is RecommendationManagerGetUserSuccessState) {
-            currentUser = state.user;
-            Modular.get<RecommendationManagerTileCubit>().initializeFavorites(state.user.favoriteRecommendationIDs);
-            Modular.get<RecommendationManagerTileCubit>().getUser();
-            _requestRecommendations(state.user);
-          } else if (state is RecommendationDeleteRecoSuccessState) {
+          if (state is RecommendationDeleteRecoSuccessState) {
             CustomSnackBar.of(context).showCustomSnackBar(
                 localization.recommendation_manager_delete_snackbar);
             _requestRecommendations(currentUser);

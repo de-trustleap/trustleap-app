@@ -62,25 +62,7 @@ class RecommendationSetFinishedSuccessState
   List<Object?> get props => [];
 }
 
-class RecommendationManagerTileGetUserSuccessState
-    extends RecommendationManagerTileState with EquatableMixin {
-  final CustomUser user;
 
-  RecommendationManagerTileGetUserSuccessState({required this.user});
-
-  @override
-  List<Object?> get props => [user];
-}
-
-class RecommendationManagerTileGetUserFailureState
-    extends RecommendationManagerTileState with EquatableMixin {
-  final DatabaseFailure failure;
-
-  RecommendationManagerTileGetUserFailureState({required this.failure});
-
-  @override
-  List<Object?> get props => [failure];
-}
 
 class RecommendationManagerTileFavoriteUpdatedState
     extends RecommendationManagerTileState with EquatableMixin {
