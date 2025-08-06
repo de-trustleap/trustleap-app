@@ -4,7 +4,7 @@ import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.da
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
-import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/permissions.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -38,8 +38,6 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   void initState() {
-    BlocProvider.of<ProfileObserverBloc>(context)
-        .add(ProfileObserveUserEvent());
     if (widget.registeredCompany == "true") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         CustomSnackBar.of(context).showCustomSnackBar(
@@ -73,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage>
           BlocProvider(create: (context) => Modular.get<CompanyImageBloc>()),
           BlocProvider(create: (context) => Modular.get<CompanyRequestCubit>())
         ],
-        child: BlocBuilder<ProfileObserverBloc, ProfileObserverState>(
+        child: BlocBuilder<UserObserverCubit, UserObserverState>(
           builder: (context, state) {
             return Padding(
               padding: EdgeInsets.only(top: topPadding),
@@ -84,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   bool _canAccessCompanyProfile(
-      ProfileUserObserverSuccess state, Permissions permissions) {
+      UserObserverSuccess state, Permissions permissions) {
     if (permissions.hasReadCompanyPermission() &&
         state.user.companyID != null) {
       return true;
@@ -94,12 +92,12 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   List<TabbarContent> getTabbarContent(
-      ProfileObserverState state, Permissions permissions) {
+      UserObserverState state, Permissions permissions) {
     return [
       TabbarContent(
           tab: const CustomTab(icon: Icons.person, title: "Persönliche Daten"),
           content: const ProfileGeneralView()),
-      if (state is ProfileUserObserverSuccess &&
+      if (state is UserObserverSuccess &&
           _canAccessCompanyProfile(state, permissions)) ...[
         TabbarContent(
             tab: const CustomTab(icon: Icons.home, title: "Unternehmen"),
@@ -117,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   Widget tabbar(ResponsiveBreakpointsData responsiveValue,
-      ProfileObserverState state, Permissions permissions) {
+      UserObserverState state, Permissions permissions) {
     List<TabbarContent> tabViews = getTabbarContent(state, permissions);
     tabController = TabController(length: tabViews.length, vsync: this);
     return Column(
