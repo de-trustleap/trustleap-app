@@ -3500,6 +3500,192 @@ abstract class AppLocalizations {
   /// **'Notes last edited at:'**
   String get recommendation_manager_notes_last_updated;
 
+  /// The title of the tutorial widget on the dashboard page
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Start Guide'**
+  String get dashboard_tutorial_title;
+
+  /// Title for Step 0: Email verification
+  ///
+  /// In en, this message translates to:
+  /// **'Verify email address'**
+  String get dashboard_tutorial_step_email_verification_title;
+
+  /// Content for Step 0: Email verification
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your email address. To resend the verification link, visit your profile.'**
+  String get dashboard_tutorial_step_email_verification_content;
+
+  /// Title for Step 1: Complete contact data
+  ///
+  /// In en, this message translates to:
+  /// **'Complete contact data'**
+  String get dashboard_tutorial_step_contact_data_title;
+
+  /// Content for Step 1: Complete contact data
+  ///
+  /// In en, this message translates to:
+  /// **'Go to your profile and complete your contact data.'**
+  String get dashboard_tutorial_step_contact_data_content;
+
+  /// Title for Step 2: Register company
+  ///
+  /// In en, this message translates to:
+  /// **'Register company'**
+  String get dashboard_tutorial_step_company_registration_title;
+
+  /// Content for Step 2: Register company
+  ///
+  /// In en, this message translates to:
+  /// **'Go to your profile and register your company'**
+  String get dashboard_tutorial_step_company_registration_content;
+
+  /// Title for Step 3: Wait for approval
+  ///
+  /// In en, this message translates to:
+  /// **'Wait for approval'**
+  String get dashboard_tutorial_step_company_approval_title;
+
+  /// Content for Step 3: Wait for approval
+  ///
+  /// In en, this message translates to:
+  /// **'You have submitted a registration request for your company. Processing the request may take a few days. Please check back later.'**
+  String get dashboard_tutorial_step_company_approval_content;
+
+  /// Title for Step 4: Create default landing page
+  ///
+  /// In en, this message translates to:
+  /// **'Create default landing page'**
+  String get dashboard_tutorial_step_default_landingpage_title;
+
+  /// Content for Step 4: Create default landing page
+  ///
+  /// In en, this message translates to:
+  /// **'To use the app, you must create a default landing page. This will be used as a fallback if your normal landing page doesn\'t work.'**
+  String get dashboard_tutorial_step_default_landingpage_content;
+
+  /// Title for Step 5: Create landing page
+  ///
+  /// In en, this message translates to:
+  /// **'Create landing page'**
+  String get dashboard_tutorial_step_landingpage_title;
+
+  /// Content for Step 5: Create landing page
+  ///
+  /// In en, this message translates to:
+  /// **'You have successfully created your default landing page. Now you need a normal landing page to promote your product or service.'**
+  String get dashboard_tutorial_step_landingpage_content;
+
+  /// Title for Step 6: Register promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Register promoter'**
+  String get dashboard_tutorial_step_promoter_registration_title;
+
+  /// Content for Step 6: Register promoter
+  ///
+  /// In en, this message translates to:
+  /// **'To promote your service or product, promoters are necessary. Create your first promoter.'**
+  String get dashboard_tutorial_step_promoter_registration_content;
+
+  /// Title for Step 7: Wait for promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Wait for promoter'**
+  String get dashboard_tutorial_step_promoter_waiting_title;
+
+  /// Content for Step 7: Wait for promoter
+  ///
+  /// In en, this message translates to:
+  /// **'The invited promoter must now register. Please wait until this happens.'**
+  String get dashboard_tutorial_step_promoter_waiting_content;
+
+  /// Title for Step 8: Make recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Make recommendation'**
+  String get dashboard_tutorial_step_recommendation_title;
+
+  /// Content for Step 8: Make recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s time to make your first recommendation to win your first customer.'**
+  String get dashboard_tutorial_step_recommendation_content;
+
+  /// Title for Step 9: Check recommendation manager
+  ///
+  /// In en, this message translates to:
+  /// **'Check recommendation manager'**
+  String get dashboard_tutorial_step_recommendation_manager_title;
+
+  /// Content for Step 9: Check recommendation manager
+  ///
+  /// In en, this message translates to:
+  /// **'Your first recommendation is now displayed in the recommendation manager. Here you can prioritize the recommendation, leave notes, and check the status of your recommendation. You will also see all recommendations made by your promoters.'**
+  String get dashboard_tutorial_step_recommendation_manager_content;
+
+  /// Title for Step 10: Complete tutorial
+  ///
+  /// In en, this message translates to:
+  /// **'Complete tutorial'**
+  String get dashboard_tutorial_step_complete_title;
+
+  /// Content for Step 10: Complete tutorial
+  ///
+  /// In en, this message translates to:
+  /// **'You have completed all steps for using the app.'**
+  String get dashboard_tutorial_step_complete_content;
+
+  /// Button text for navigation to profile
+  ///
+  /// In en, this message translates to:
+  /// **'To profile'**
+  String get dashboard_tutorial_button_to_profile;
+
+  /// Button text for navigation to landing pages
+  ///
+  /// In en, this message translates to:
+  /// **'To landing pages'**
+  String get dashboard_tutorial_button_to_landingpages;
+
+  /// Button text for register promoter
+  ///
+  /// In en, this message translates to:
+  /// **'Register promoter'**
+  String get dashboard_tutorial_button_register_promoter;
+
+  /// Button text for make recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Make recommendation'**
+  String get dashboard_tutorial_button_make_recommendation;
+
+  /// Button text for navigation to recommendation manager
+  ///
+  /// In en, this message translates to:
+  /// **'To recommendation manager'**
+  String get dashboard_tutorial_button_to_recommendation_manager;
+
+  /// Button text for hide tutorial
+  ///
+  /// In en, this message translates to:
+  /// **'Hide tutorial'**
+  String get dashboard_tutorial_button_hide_tutorial;
+
+  /// Error title when tutorial cannot be loaded
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load tutorial'**
+  String get dashboard_tutorial_error_title;
+
+  /// Error message when tutorial cannot be loaded
+  ///
+  /// In en, this message translates to:
+  /// **'The request failed. Please try again.'**
+  String get dashboard_tutorial_error_message;
+
   /// Tooltip for the Add Note button in the cells on the Recommendation Manager page
   ///
   /// In en, this message translates to:

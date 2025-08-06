@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_pr
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_promoters/dashboard_promoters.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_quicklink.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations.dart';
+import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_tutorial/dashboard_tutorial.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,6 +54,14 @@ class _DashboardOverviewState extends State<DashboardOverview> {
                   style: themeData.textTheme.titleLarge!
                       .copyWith(fontSize: 40, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
+              if (state.user.tutorialStep != null) ...[
+                DashboardTutorial(
+                  user: state.user,
+                  onUserUpdate: () =>
+                      Modular.get<DashboardOverviewCubit>().getUser(),
+                ),
+                const SizedBox(height: 40)
+              ],
               if (state.user.role == Role.promoter) ...[
                 LayoutBuilder(
                   builder: (context, constraints) {

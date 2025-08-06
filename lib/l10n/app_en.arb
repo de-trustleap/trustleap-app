@@ -2298,6 +2298,130 @@
     "@recommendation_manager_notes_last_updated": {
         "description": "Notes Last edited text in the cells on the Recommendation Manager page"
     },
+    "dashboard_tutorial_title": "Quick Start Guide",
+    "@dashboard_tutorial_title": {
+        "description": "The title of the tutorial widget on the dashboard page"
+    },
+    "dashboard_tutorial_step_email_verification_title": "Verify email address",
+    "@dashboard_tutorial_step_email_verification_title": {
+        "description": "Title for Step 0: Email verification"
+    },
+    "dashboard_tutorial_step_email_verification_content": "Verify your email address. To resend the verification link, visit your profile.",
+    "@dashboard_tutorial_step_email_verification_content": {
+        "description": "Content for Step 0: Email verification"
+    },
+    "dashboard_tutorial_step_contact_data_title": "Complete contact data",
+    "@dashboard_tutorial_step_contact_data_title": {
+        "description": "Title for Step 1: Complete contact data"
+    },
+    "dashboard_tutorial_step_contact_data_content": "Go to your profile and complete your contact data.",
+    "@dashboard_tutorial_step_contact_data_content": {
+        "description": "Content for Step 1: Complete contact data"
+    },
+    "dashboard_tutorial_step_company_registration_title": "Register company",
+    "@dashboard_tutorial_step_company_registration_title": {
+        "description": "Title for Step 2: Register company"
+    },
+    "dashboard_tutorial_step_company_registration_content": "Go to your profile and register your company",
+    "@dashboard_tutorial_step_company_registration_content": {
+        "description": "Content for Step 2: Register company"
+    },
+    "dashboard_tutorial_step_company_approval_title": "Wait for approval",
+    "@dashboard_tutorial_step_company_approval_title": {
+        "description": "Title for Step 3: Wait for approval"
+    },
+    "dashboard_tutorial_step_company_approval_content": "You have submitted a registration request for your company. Processing the request may take a few days. Please check back later.",
+    "@dashboard_tutorial_step_company_approval_content": {
+        "description": "Content for Step 3: Wait for approval"
+    },
+    "dashboard_tutorial_step_default_landingpage_title": "Create default landing page",
+    "@dashboard_tutorial_step_default_landingpage_title": {
+        "description": "Title for Step 4: Create default landing page"
+    },
+    "dashboard_tutorial_step_default_landingpage_content": "To use the app, you must create a default landing page. This will be used as a fallback if your normal landing page doesn't work.",
+    "@dashboard_tutorial_step_default_landingpage_content": {
+        "description": "Content for Step 4: Create default landing page"
+    },
+    "dashboard_tutorial_step_landingpage_title": "Create landing page",
+    "@dashboard_tutorial_step_landingpage_title": {
+        "description": "Title for Step 5: Create landing page"
+    },
+    "dashboard_tutorial_step_landingpage_content": "You have successfully created your default landing page. Now you need a normal landing page to promote your product or service.",
+    "@dashboard_tutorial_step_landingpage_content": {
+        "description": "Content for Step 5: Create landing page"
+    },
+    "dashboard_tutorial_step_promoter_registration_title": "Register promoter",
+    "@dashboard_tutorial_step_promoter_registration_title": {
+        "description": "Title for Step 6: Register promoter"
+    },
+    "dashboard_tutorial_step_promoter_registration_content": "To promote your service or product, promoters are necessary. Create your first promoter.",
+    "@dashboard_tutorial_step_promoter_registration_content": {
+        "description": "Content for Step 6: Register promoter"
+    },
+    "dashboard_tutorial_step_promoter_waiting_title": "Wait for promoter",
+    "@dashboard_tutorial_step_promoter_waiting_title": {
+        "description": "Title for Step 7: Wait for promoter"
+    },
+    "dashboard_tutorial_step_promoter_waiting_content": "The invited promoter must now register. Please wait until this happens.",
+    "@dashboard_tutorial_step_promoter_waiting_content": {
+        "description": "Content for Step 7: Wait for promoter"
+    },
+    "dashboard_tutorial_step_recommendation_title": "Make recommendation",
+    "@dashboard_tutorial_step_recommendation_title": {
+        "description": "Title for Step 8: Make recommendation"
+    },
+    "dashboard_tutorial_step_recommendation_content": "It's time to make your first recommendation to win your first customer.",
+    "@dashboard_tutorial_step_recommendation_content": {
+        "description": "Content for Step 8: Make recommendation"
+    },
+    "dashboard_tutorial_step_recommendation_manager_title": "Check recommendation manager",
+    "@dashboard_tutorial_step_recommendation_manager_title": {
+        "description": "Title for Step 9: Check recommendation manager"
+    },
+    "dashboard_tutorial_step_recommendation_manager_content": "Your first recommendation is now displayed in the recommendation manager. Here you can prioritize the recommendation, leave notes, and check the status of your recommendation. You will also see all recommendations made by your promoters.",
+    "@dashboard_tutorial_step_recommendation_manager_content": {
+        "description": "Content for Step 9: Check recommendation manager"
+    },
+    "dashboard_tutorial_step_complete_title": "Complete tutorial",
+    "@dashboard_tutorial_step_complete_title": {
+        "description": "Title for Step 10: Complete tutorial"
+    },
+    "dashboard_tutorial_step_complete_content": "You have completed all steps for using the app.",
+    "@dashboard_tutorial_step_complete_content": {
+        "description": "Content for Step 10: Complete tutorial"
+    },
+    "dashboard_tutorial_button_to_profile": "To profile",
+    "@dashboard_tutorial_button_to_profile": {
+        "description": "Button text for navigation to profile"
+    },
+    "dashboard_tutorial_button_to_landingpages": "To landing pages",
+    "@dashboard_tutorial_button_to_landingpages": {
+        "description": "Button text for navigation to landing pages"
+    },
+    "dashboard_tutorial_button_register_promoter": "Register promoter",
+    "@dashboard_tutorial_button_register_promoter": {
+        "description": "Button text for register promoter"
+    },
+    "dashboard_tutorial_button_make_recommendation": "Make recommendation",
+    "@dashboard_tutorial_button_make_recommendation": {
+        "description": "Button text for make recommendation"
+    },
+    "dashboard_tutorial_button_to_recommendation_manager": "To recommendation manager",
+    "@dashboard_tutorial_button_to_recommendation_manager": {
+        "description": "Button text for navigation to recommendation manager"
+    },
+    "dashboard_tutorial_button_hide_tutorial": "Hide tutorial",
+    "@dashboard_tutorial_button_hide_tutorial": {
+        "description": "Button text for hide tutorial"
+    },
+    "dashboard_tutorial_error_title": "Failed to load tutorial",
+    "@dashboard_tutorial_error_title": {
+        "description": "Error title when tutorial cannot be loaded"
+    },
+    "dashboard_tutorial_error_message": "The request failed. Please try again.",
+    "@dashboard_tutorial_error_message": {
+        "description": "Error message when tutorial cannot be loaded"
+    },
     "recommendation_manager_add_note_button_tooltip": "Add note",
     "@recommendation_manager_add_note_button_tooltip": {
         "description": "Tooltip for the Add Note button in the cells on the Recommendation Manager page"

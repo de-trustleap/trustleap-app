@@ -2298,6 +2298,130 @@
     "@recommendation_manager_notes_last_updated": {
         "description": "Notizen Zuletzt bearbeitet Text in den Zellen auf der Empfehlungsmanager Seite"
     },
+    "dashboard_tutorial_title": "Kleine Starthilfe",
+    "@dashboard_tutorial_title": {
+        "description": "Der Titel des Tutorial-Widgets auf der Dashboard-Seite"
+    },
+    "dashboard_tutorial_step_email_verification_title": "E-Mail Adresse verifizieren",
+    "@dashboard_tutorial_step_email_verification_title": {
+        "description": "Titel für Step 0: E-Mail Verifizierung"
+    },
+    "dashboard_tutorial_step_email_verification_content": "Verifiziere deine E-Mail Adresse. Um den Verifizierungslink erneut zu senden, besuche dein Profil.",
+    "@dashboard_tutorial_step_email_verification_content": {
+        "description": "Inhalt für Step 0: E-Mail Verifizierung"
+    },
+    "dashboard_tutorial_step_contact_data_title": "Kontaktdaten vervollständigen",
+    "@dashboard_tutorial_step_contact_data_title": {
+        "description": "Titel für Step 1: Kontaktdaten vervollständigen"
+    },
+    "dashboard_tutorial_step_contact_data_content": "Gehe in dein Profil und vervollständige deine Kontaktdaten.",
+    "@dashboard_tutorial_step_contact_data_content": {
+        "description": "Inhalt für Step 1: Kontaktdaten vervollständigen"
+    },
+    "dashboard_tutorial_step_company_registration_title": "Unternehmen registrieren",
+    "@dashboard_tutorial_step_company_registration_title": {
+        "description": "Titel für Step 2: Unternehmen registrieren"
+    },
+    "dashboard_tutorial_step_company_registration_content": "Gehe in dein Profil und registriere dein Unternehmen",
+    "@dashboard_tutorial_step_company_registration_content": {
+        "description": "Inhalt für Step 2: Unternehmen registrieren"
+    },
+    "dashboard_tutorial_step_company_approval_title": "Warten auf Freischaltung",
+    "@dashboard_tutorial_step_company_approval_title": {
+        "description": "Titel für Step 3: Warten auf Freischaltung"
+    },
+    "dashboard_tutorial_step_company_approval_content": "Du hast eine Registrierungsanfrage für dein Unternehmen gestellt. Die Bearbeitung der Anfrage kann ein paar Tage dauern. Schaue später nochmal vorbei.",
+    "@dashboard_tutorial_step_company_approval_content": {
+        "description": "Inhalt für Step 3: Warten auf Freischaltung"
+    },
+    "dashboard_tutorial_step_default_landingpage_title": "Default Landingpage anlegen",
+    "@dashboard_tutorial_step_default_landingpage_title": {
+        "description": "Titel für Step 4: Default Landingpage anlegen"
+    },
+    "dashboard_tutorial_step_default_landingpage_content": "Für die Nutzung der App musst du eine Default Landingpage anlegen. Auf diese wird zurückgegriffen, falls deine normale Landingpage nicht funktioniert.",
+    "@dashboard_tutorial_step_default_landingpage_content": {
+        "description": "Inhalt für Step 4: Default Landingpage anlegen"
+    },
+    "dashboard_tutorial_step_landingpage_title": "Landingpage erstellen",
+    "@dashboard_tutorial_step_landingpage_title": {
+        "description": "Titel für Step 5: Landingpage erstellen"
+    },
+    "dashboard_tutorial_step_landingpage_content": "Du hast deine Default Landingpage erfolgreich erstellt. Jetzt wird noch eine normale Landingpage benötigt, um dein Produkt oder deine Dienstleistung zu bewerben.",
+    "@dashboard_tutorial_step_landingpage_content": {
+        "description": "Inhalt für Step 5: Landingpage erstellen"
+    },
+    "dashboard_tutorial_step_promoter_registration_title": "Promoter registrieren",
+    "@dashboard_tutorial_step_promoter_registration_title": {
+        "description": "Titel für Step 6: Promoter registrieren"
+    },
+    "dashboard_tutorial_step_promoter_registration_content": "Um deine Dienstleistung oder dein Produkt zu bewerben sind Promoter notwendig. Erstelle deinen ersten Promoter.",
+    "@dashboard_tutorial_step_promoter_registration_content": {
+        "description": "Inhalt für Step 6: Promoter registrieren"
+    },
+    "dashboard_tutorial_step_promoter_waiting_title": "Auf Promoter warten",
+    "@dashboard_tutorial_step_promoter_waiting_title": {
+        "description": "Titel für Step 7: Auf Promoter warten"
+    },
+    "dashboard_tutorial_step_promoter_waiting_content": "Der eingeladene Promoter muss sich jetzt registrieren. Bitte warte bis das geschehen ist.",
+    "@dashboard_tutorial_step_promoter_waiting_content": {
+        "description": "Inhalt für Step 7: Auf Promoter warten"
+    },
+    "dashboard_tutorial_step_recommendation_title": "Empfehlung aussprechen",
+    "@dashboard_tutorial_step_recommendation_title": {
+        "description": "Titel für Step 8: Empfehlung aussprechen"
+    },
+    "dashboard_tutorial_step_recommendation_content": "Es ist an der Zeit deine erste Empfehlung auszusprechen, um deinen ersten Kunden zu gewinnen.",
+    "@dashboard_tutorial_step_recommendation_content": {
+        "description": "Inhalt für Step 8: Empfehlung aussprechen"
+    },
+    "dashboard_tutorial_step_recommendation_manager_title": "Empfehlungsmanager überprüfen",
+    "@dashboard_tutorial_step_recommendation_manager_title": {
+        "description": "Titel für Step 9: Empfehlungsmanager überprüfen"
+    },
+    "dashboard_tutorial_step_recommendation_manager_content": "Deine erste Empfehlung wird jetzt im Empfehlungsmanager angezeigt. Hier kannst du die Empfehlung priorisieren, Notizen hinterlassen und den Status deiner Empfehlung überprüfen. Außerdem siehst du hier auch alle Empfehlungen die deine Promoter ausgesprochen haben.",
+    "@dashboard_tutorial_step_recommendation_manager_content": {
+        "description": "Inhalt für Step 9: Empfehlungsmanager überprüfen"
+    },
+    "dashboard_tutorial_step_complete_title": "Tutorial abschließen",
+    "@dashboard_tutorial_step_complete_title": {
+        "description": "Titel für Step 10: Tutorial abschließen"
+    },
+    "dashboard_tutorial_step_complete_content": "Du hast alle Schritte zur Nutzung der App abgeschlossen.",
+    "@dashboard_tutorial_step_complete_content": {
+        "description": "Inhalt für Step 10: Tutorial abschließen"
+    },
+    "dashboard_tutorial_button_to_profile": "Zum Profil",
+    "@dashboard_tutorial_button_to_profile": {
+        "description": "Button-Text für Navigation zum Profil"
+    },
+    "dashboard_tutorial_button_to_landingpages": "Zu den Landingpages",
+    "@dashboard_tutorial_button_to_landingpages": {
+        "description": "Button-Text für Navigation zu den Landingpages"
+    },
+    "dashboard_tutorial_button_register_promoter": "Promoter registrieren",
+    "@dashboard_tutorial_button_register_promoter": {
+        "description": "Button-Text für Promoter registrieren"
+    },
+    "dashboard_tutorial_button_make_recommendation": "Empfehlung aussprechen",
+    "@dashboard_tutorial_button_make_recommendation": {
+        "description": "Button-Text für Empfehlung aussprechen"
+    },
+    "dashboard_tutorial_button_to_recommendation_manager": "Zum Empfehlungsmanager",
+    "@dashboard_tutorial_button_to_recommendation_manager": {
+        "description": "Button-Text für Navigation zum Empfehlungsmanager"
+    },
+    "dashboard_tutorial_button_hide_tutorial": "Tutorial ausblenden",
+    "@dashboard_tutorial_button_hide_tutorial": {
+        "description": "Button-Text für Tutorial ausblenden"
+    },
+    "dashboard_tutorial_error_title": "Abruf des Tutorials fehlgeschlagen",
+    "@dashboard_tutorial_error_title": {
+        "description": "Fehler-Titel wenn Tutorial nicht geladen werden kann"
+    },
+    "dashboard_tutorial_error_message": "Der Aufruf ist fehlgeschlagen. Versuche es bitte erneut.",
+    "@dashboard_tutorial_error_message": {
+        "description": "Fehler-Nachricht wenn Tutorial nicht geladen werden kann"
+    },
     "recommendation_manager_add_note_button_tooltip": "Notiz hinzufügen",
     "@recommendation_manager_add_note_button_tooltip": {
         "description": "Tooltip für den Notiz hinzufügen Button in den Zellen auf der Empfehlungsmanager Seite"

@@ -70,6 +70,7 @@ void main() {
         'archivedRecommendationIDs': null,
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
+        'tutorialStep': null,
         "deletesAt": null,
         "lastUpdated": null,
         "createdAt": Timestamp(100000, 0)
