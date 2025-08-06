@@ -9,20 +9,16 @@ import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
-import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 
 part 'landingpage_state.dart';
 
 class LandingPageCubit extends Cubit<LandingPageState> {
   final LandingPageRepository landingPageRepo;
-  final UserRepository userRepo;
   final fileSizeLimit = 5000000;
 
   LandingPageCubit(
     this.landingPageRepo,
-    this.userRepo,
   ) : super(LandingPageInitial());
 
   void createLandingPage(LandingPage? landingpage, Uint8List imageData,
@@ -133,14 +129,6 @@ class LandingPageCubit extends Cubit<LandingPageState> {
             emit(GetLandingPageTemplatesFailureState(failure: failure)),
         (templates) =>
             emit(GetLandingPageTemplatesSuccessState(templates: templates)));
-  }
-
-  void getUser() async {
-    emit(GetUserLoadingState());
-    final failureOrSuccess = await userRepo.getUser();
-    failureOrSuccess.fold(
-        (failure) => emit(GetUserFailureState(failure: failure)),
-        (user) => emit(GetUserSuccessState(user: user)));
   }
 
   void getPromoters(

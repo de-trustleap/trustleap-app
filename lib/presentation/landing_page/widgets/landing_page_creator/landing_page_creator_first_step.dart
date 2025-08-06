@@ -45,7 +45,6 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
   void initState() {
     super.initState();
     id = UniqueID();
-    Modular.get<LandingPageCubit>().getUser();
   }
 
   void _onContinue(LandingPage landingPage) {

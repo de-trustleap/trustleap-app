@@ -12379,15 +12379,6 @@ class MockLandingPageCubit extends _i1.Mock implements _i72.LandingPageCubit {
       ) as _i13.LandingPageRepository);
 
   @override
-  _i7.UserRepository get userRepo => (super.noSuchMethod(
-        Invocation.getter(#userRepo),
-        returnValue: _FakeUserRepository_11(
-          this,
-          Invocation.getter(#userRepo),
-        ),
-      ) as _i7.UserRepository);
-
-  @override
   int get fileSizeLimit => (super.noSuchMethod(
         Invocation.getter(#fileSizeLimit),
         returnValue: 0,
@@ -12544,15 +12535,6 @@ class MockLandingPageCubit extends _i1.Mock implements _i72.LandingPageCubit {
   void getAllLandingPageTemplates() => super.noSuchMethod(
         Invocation.method(
           #getAllLandingPageTemplates,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void getUser() => super.noSuchMethod(
-        Invocation.method(
-          #getUser,
           [],
         ),
         returnValueForMissingStub: null,
