@@ -37,9 +37,3 @@ class UserObserverCubit extends Cubit<UserObserverState> {
     return super.close();
   }
 }
-
-    // TODO: IMPLEMENT USER OBSERVER (GIBT ES SCHON IN USERREPO) (DONE)
-    // TODO: OBSERVER EINBAUEN IN MAIN
-    // TODO: USER OBSERVER VON PROFIL LÖSCHEN
-    // TODO: PROFILE PAGE REPARIEREN
-    // TODO: ANDERE GETUSER CALLS LÖSCHEN

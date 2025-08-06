@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -52,9 +53,25 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
 
   @override
   void initState() {
-    Modular.get<RecommendationsCubit>().getUser();
     focusNode = FocusNode();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeUserData();
+    });
+  }
+
+  void _initializeUserData() {
+    final userState = BlocProvider.of<UserObserverCubit>(context).state;
+    if (userState is UserObserverSuccess) {
+      setUser(userState.user);
+      Modular.get<RecommendationsCubit>()
+          .getRecommendationReasons(userState.user.landingPageIDs ?? []);
+      if (userState.user.role == Role.promoter &&
+          userState.user.parentUserID != null) {
+        Modular.get<RecommendationsCubit>()
+            .getParentUser(userState.user.parentUserID!);
+      }
+    }
   }
 
   @override
@@ -180,16 +197,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
       return BlocConsumer<RecommendationsCubit, RecommendationsState>(
         bloc: recoCubit,
         listener: (context, state) {
-          if (state is RecommendationGetCurrentUserSuccessState) {
-            setUser(state.user);
-            Modular.get<RecommendationsCubit>()
-                .getRecommendationReasons(state.user.landingPageIDs ?? []);
-            if (state.user.role == Role.promoter &&
-                state.user.parentUserID != null) {
-              Modular.get<RecommendationsCubit>()
-                  .getParentUser(state.user.parentUserID!);
-            }
-          } else if (state is RecommendationGetParentUserSuccessState) {
+          if (state is RecommendationGetParentUserSuccessState) {
             setParentUser(state.user);
           } else if (state is RecommendationGetReasonsSuccessState) {
             setState(() {
@@ -210,9 +218,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                       RoutePaths.homePath + RoutePaths.landingPagePath);
                 });
           }
-          if (state is RecommendationGetCurrentUserSuccessState ||
-              state is RecommendationGetParentUserSuccessState ||
-              state is RecommendationGetReasonsSuccessState) {
+          if (currentUser != null || parentUser != null) {
             return Form(
                 key: formKey,
                 autovalidateMode: validationHasError
@@ -336,8 +342,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                     title: localization.recommendations_error_view_title,
                     message: DatabaseFailureMapper.mapFailureMessage(
                         state.failure, localization),
-                    callback: () =>
-                        {Modular.get<RecommendationsCubit>().getUser()}));
+                    callback: _initializeUserData));
           } else {
             return const LoadingIndicator();
           }

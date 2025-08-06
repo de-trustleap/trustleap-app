@@ -25,48 +25,6 @@ void main() {
     expect(recommendationCubit.state, RecommendationsInitial());
   });
 
-  group("RecommendationCubit_GetUser", () {
-    final mockUser = CustomUser(id: UniqueID.fromUniqueString("1"));
-    test("should call user repo when function is called", () async {
-      // Given
-      when(mockUserRepo.getUser()).thenAnswer((_) async => right(mockUser));
-      // When
-      recommendationCubit.getUser();
-      await untilCalled(mockUserRepo.getUser());
-      // Then
-      verify(mockUserRepo.getUser());
-      verifyNoMoreInteractions(mockUserRepo);
-    });
-
-    test(
-        "should emit RecommendationLoadingState and then RecommendationGetCurrentUserSuccessState when call was successful",
-        () async {
-      // Given
-      final expectedResult = [
-        RecommendationLoadingState(),
-        RecommendationGetCurrentUserSuccessState(user: mockUser)
-      ];
-      when(mockUserRepo.getUser()).thenAnswer((_) async => right(mockUser));
-      // Then
-      expectLater(recommendationCubit.stream, emitsInOrder(expectedResult));
-      recommendationCubit.getUser();
-    });
-
-    test(
-        "should emit RecommendationLoadingState and then RecommendationGetUserFailureState when call has failed",
-        () async {
-      // Given
-      final expectedResult = [
-        RecommendationLoadingState(),
-        RecommendationGetUserFailureState(failure: BackendFailure())
-      ];
-      when(mockUserRepo.getUser())
-          .thenAnswer((_) async => left(BackendFailure()));
-      // Then
-      expectLater(recommendationCubit.stream, emitsInOrder(expectedResult));
-      recommendationCubit.getUser();
-    });
-  });
 
   group("RecommendationCubit_GetParentUser", () {
     const parentID = "1";

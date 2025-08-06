@@ -15,20 +15,6 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
   RecommendationsCubit(this.userRepo, this.landingPagesRepo)
       : super(RecommendationsInitial());
 
-  void getUser() async {
-    emit(RecommendationLoadingState());
-    final failureOrSuccess = await userRepo.getUser();
-    failureOrSuccess.fold((failure) {
-      if (!isClosed) {
-        emit(RecommendationGetUserFailureState(failure: failure));
-      }
-    }, (user) {
-      if (!isClosed) {
-        emit(RecommendationGetCurrentUserSuccessState(user: user));
-      }
-    });
-  }
-
   void getParentUser(String parentID) async {
     emit(RecommendationLoadingState());
     final failureOrSuccess = await userRepo.getParentUser(parentID: parentID);
@@ -68,3 +54,6 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
     }
   }
 }
+
+// TODO: GETUSER ENTFERNEN (DONE)
+// TODO: GETCURRENTUSER ENTFERNEN
