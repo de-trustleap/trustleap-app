@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
@@ -9,7 +10,6 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:finanzbegleiter/presentation/feedback/feedback_image_upload.dart';
@@ -37,7 +37,13 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
   @override
   void initState() {
     super.initState();
-    Modular.get<FeedbackCubit>().getUser();
+    // Pre-fill email from UserObserver if available
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userState = BlocProvider.of<UserObserverCubit>(context).state;
+      if (userState is UserObserverSuccess && userState.user.email != null) {
+        emailController.text = userState.user.email!;
+      }
+    });
   }
 
   @override
@@ -90,10 +96,6 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
             localization.feedback_success_message,
             SnackBarType.success,
           );
-        } else if (state is FeedbackGetUserSuccessState) {
-          if (state.user.email != null && state.user.email!.isNotEmpty) {
-            emailController.text = state.user.email!;
-          }
         }
       },
       builder: (context, state) {
@@ -174,10 +176,6 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                                   keyboardType: TextInputType.emailAddress,
                                 ),
                               ),
-                              if (state is FeedbackGetUserLoadingState) ...[
-                                const SizedBox(width: 8),
-                                const LoadingIndicator(size: 16),
-                              ],
                             ],
                           ),
                           const SizedBox(height: 16),

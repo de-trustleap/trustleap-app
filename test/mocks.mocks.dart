@@ -13694,15 +13694,6 @@ class MockFeedbackCubit extends _i1.Mock implements _i84.FeedbackCubit {
       ) as _i15.FeedbackRepository);
 
   @override
-  _i7.UserRepository get userRepo => (super.noSuchMethod(
-        Invocation.getter(#userRepo),
-        returnValue: _FakeUserRepository_11(
-          this,
-          Invocation.getter(#userRepo),
-        ),
-      ) as _i7.UserRepository);
-
-  @override
   _i84.FeedbackState get state => (super.noSuchMethod(
         Invocation.getter(#state),
         returnValue: _i28.dummyValue<_i84.FeedbackState>(
@@ -13735,15 +13726,6 @@ class MockFeedbackCubit extends _i1.Mock implements _i84.FeedbackCubit {
             feedback,
             images,
           ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void getUser() => super.noSuchMethod(
-        Invocation.method(
-          #getUser,
-          [],
         ),
         returnValueForMissingStub: null,
       );
