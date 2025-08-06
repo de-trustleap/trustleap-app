@@ -12,15 +12,13 @@ import 'package:finanzbegleiter/domain/entities/permissions.dart';
 void main() {
   late PromoterCubit promoterCubit;
   late MockPromoterRepository mockPromoterRepo;
-  late MockUserRepository mockUserRepo;
   late MockLandingPageRepository mockLandingPagesRepo;
 
   setUp(() {
-    mockUserRepo = MockUserRepository();
     mockLandingPagesRepo = MockLandingPageRepository();
     mockPromoterRepo = MockPromoterRepository();
     promoterCubit =
-        PromoterCubit(mockPromoterRepo, mockUserRepo, mockLandingPagesRepo);
+        PromoterCubit(mockPromoterRepo, mockLandingPagesRepo);
   });
 
   test("init state should be PromoterInitial", () {

@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
@@ -39,8 +40,19 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
 
   @override
   void initState() {
-    Modular.get<PromoterCubit>().getCurrentUser();
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userState = BlocProvider.of<UserObserverCubit>(context).state;
+      if (userState is UserObserverSuccess) {
+        currentUser = userState.user;
+        final permissionState = BlocProvider.of<PermissionCubit>(context).state;
+        if (permissionState is PermissionSuccessState) {
+          Modular.get<PromoterCubit>().getPromoter(
+              widget.promoterID, currentUser, permissionState.permissions);
+        }
+      }
+    });
   }
 
   void submit() {
@@ -48,7 +60,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
         landingPageItems.isNotEmpty &&
         promoter?.registered != null) {
       Modular.get<PromoterCubit>().editPromoter(promoter!.registered!,
-          getSelectedLandingPagesIDs(), promoter!.id.value);
+          getSelectedLandingPagesIDs(), widget.promoterID);
     }
   }
 
@@ -124,11 +136,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
             BlocListener<PromoterCubit, PromoterState>(
                 bloc: promoterCubit,
                 listener: (context, state) {
-                  if (state is PromoterGetCurrentUserSuccessState) {
-                    currentUser = state.user;
-                    Modular.get<PromoterCubit>().getPromoter(
-                        widget.promoterID, currentUser, permissions);
-                  } else if (state is PromoterGetLandingPagesSuccessState) {
+                  if (state is PromoterGetLandingPagesSuccessState) {
                     setState(() {
                       landingPageItems.clear();
                       for (var landingPage in state.landingPages) {
@@ -175,16 +183,6 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                           landingPageState
                               is ToggleLandingPageActivityLoadingState) {
                         return const LoadingIndicator();
-                      } else if (promoterState
-                          is PromoterGetCurrentUserFailureState) {
-                        return ErrorView(
-                            title: localization
-                                .landingpage_overview_error_view_title,
-                            message: DatabaseFailureMapper.mapFailureMessage(
-                                promoterState.failure, localization),
-                            callback: () => {
-                                  Modular.get<PromoterCubit>().getCurrentUser()
-                                });
                       } else if (promoterState
                           is PromoterGetLandingPagesFailureState) {
                         return ErrorView(

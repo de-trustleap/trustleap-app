@@ -62,29 +62,6 @@ final class PromoterLoadingState extends PromoterState with EquatableMixin {
   List<Object?> get props => [];
 }
 
-final class PromoterGetCurrentUserFailureState extends PromoterState
-    with EquatableMixin {
-  final DatabaseFailure failure;
-
-  const PromoterGetCurrentUserFailureState({
-    required this.failure,
-  });
-
-  @override
-  List<Object?> get props => [failure];
-}
-
-final class PromoterGetCurrentUserSuccessState extends PromoterState
-    with EquatableMixin {
-  final CustomUser? user;
-
-  PromoterGetCurrentUserSuccessState({
-    required this.user,
-  });
-
-  @override
-  List<Object?> get props => [user];
-}
 
 final class PromoterGetLandingPagesFailureState extends PromoterState
     with EquatableMixin {

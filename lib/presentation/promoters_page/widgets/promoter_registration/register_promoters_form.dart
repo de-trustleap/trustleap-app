@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
@@ -55,8 +56,16 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
 
   @override
   void initState() {
-    Modular.get<PromoterCubit>().getCurrentUser();
     super.initState();
+    // Load user and landing pages directly from UserObserver
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userState = BlocProvider.of<UserObserverCubit>(context).state;
+      if (userState is UserObserverSuccess) {
+        currentUser = userState.user;
+        Modular.get<PromoterCubit>()
+            .getPromotingLandingPages(currentUser?.landingPageIDs ?? []);
+      }
+    });
   }
 
   @override
@@ -176,10 +185,6 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
         } else if (state is PromoterRegisteredSuccessState) {
           widget.changesSaved();
           setButtonToDisabled(false);
-        } else if (state is PromoterGetCurrentUserSuccessState) {
-          currentUser = state.user;
-          Modular.get<PromoterCubit>()
-              .getPromotingLandingPages(currentUser?.landingPageIDs ?? []);
         } else if (state is PromoterRegisterLoadingState) {
           setButtonToDisabled(true);
         } else if (state is PromoterGetLandingPagesSuccessState) {
@@ -197,13 +202,6 @@ class _RegisterPromotersFormState extends State<RegisterPromotersForm> {
           final maxWidth = constraints.maxWidth;
           if (state is PromoterLoadingState) {
             return const LoadingIndicator();
-          } else if (state is PromoterGetCurrentUserFailureState) {
-            return ErrorView(
-                title: localization.landingpage_overview_error_view_title,
-                message: DatabaseFailureMapper.mapFailureMessage(
-                    state.failure, localization),
-                callback: () =>
-                    {Modular.get<PromoterCubit>().getCurrentUser()});
           } else if (state is PromoterGetLandingPagesFailureState) {
             return ErrorView(
                 title: localization.landingpage_overview_error_view_title,
