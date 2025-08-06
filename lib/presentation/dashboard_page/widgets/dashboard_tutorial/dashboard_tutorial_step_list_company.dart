@@ -10,13 +10,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 class DashboardTutorialStepListCompany extends StatelessWidget {
   final int currentStep;
   final CustomUser user;
-  final VoidCallback onUserUpdate;
 
   const DashboardTutorialStepListCompany({
     super.key,
     required this.currentStep,
     required this.user,
-    required this.onUserUpdate,
   });
 
   @override
@@ -37,7 +35,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               RoutePaths.homePath + RoutePaths.profilePath),
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 1,
@@ -52,7 +49,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           },
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 2,
@@ -66,7 +62,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               RoutePaths.homePath + RoutePaths.profilePath),
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 3,
@@ -78,7 +73,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           buttonAction: null,
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 4,
@@ -91,7 +85,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               RoutePaths.homePath + RoutePaths.landingPagePath),
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 5,
@@ -103,7 +96,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               RoutePaths.homePath + RoutePaths.landingPagePath),
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 6,
@@ -117,7 +109,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               RoutePaths.homePath + RoutePaths.promotersPath),
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 7,
@@ -129,7 +120,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           buttonAction: null,
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 8,
@@ -142,7 +132,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               RoutePaths.homePath + RoutePaths.recommendationsPath),
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 9,
@@ -160,7 +149,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           },
           isLast: false,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
         DashboardTutorialStep(
           stepIndex: 10,
@@ -171,7 +159,6 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           buttonAction: null,
           isLast: true,
           user: user,
-          onUserUpdate: onUserUpdate,
         ),
       ],
     );

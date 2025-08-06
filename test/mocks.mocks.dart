@@ -16,7 +16,7 @@ import 'package:cloud_functions_platform_interface/cloud_functions_platform_inte
     as _i25;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:finanzbegleiter/application/admin_registration_code/admin_registration_code_cubit.dart'
-    as _i78;
+    as _i77;
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart'
     as _i55;
 import 'package:finanzbegleiter/application/authentication/auth_observer/auth_observer_bloc.dart'
@@ -24,21 +24,19 @@ import 'package:finanzbegleiter/application/authentication/auth_observer/auth_ob
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart'
     as _i5;
 import 'package:finanzbegleiter/application/company_request/company_request/company_request_cubit.dart'
-    as _i76;
+    as _i75;
 import 'package:finanzbegleiter/application/company_request/company_request_observer/company_request_observer_cubit.dart'
-    as _i77;
+    as _i76;
 import 'package:finanzbegleiter/application/dashboard/landingpage_ranking/dashboard_landingpage_ranking_cubit.dart'
-    as _i88;
-import 'package:finanzbegleiter/application/dashboard/overview/dashboard_overview_cubit.dart'
-    as _i83;
-import 'package:finanzbegleiter/application/dashboard/promoter_ranking/dashboard_promoter_ranking_cubit.dart'
-    as _i87;
-import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart'
-    as _i84;
-import 'package:finanzbegleiter/application/dashboard/tutorial/dashboard_tutorial_cubit.dart'
-    as _i89;
-import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart'
     as _i86;
+import 'package:finanzbegleiter/application/dashboard/promoter_ranking/dashboard_promoter_ranking_cubit.dart'
+    as _i85;
+import 'package:finanzbegleiter/application/dashboard/recommendation/dashboard_recommendations_cubit.dart'
+    as _i82;
+import 'package:finanzbegleiter/application/dashboard/tutorial/dashboard_tutorial_cubit.dart'
+    as _i87;
+import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart'
+    as _i84;
 import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart'
     as _i63;
 import 'package:finanzbegleiter/application/images/landing_page/landing_page_image_bloc.dart'
@@ -46,35 +44,33 @@ import 'package:finanzbegleiter/application/images/landing_page/landing_page_ima
 import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart'
     as _i61;
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart'
-    as _i73;
-import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart'
     as _i72;
+import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart'
+    as _i71;
 import 'package:finanzbegleiter/application/legals/legals_cubit.dart' as _i62;
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart' as _i57;
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart'
-    as _i79;
+    as _i78;
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart'
-    as _i82;
+    as _i81;
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart'
-    as _i67;
-import 'package:finanzbegleiter/application/profile/company/company_cubit.dart'
-    as _i68;
-import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart'
     as _i66;
+import 'package:finanzbegleiter/application/profile/company/company_cubit.dart'
+    as _i67;
+import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart'
+    as _i65;
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart'
     as _i60;
-import 'package:finanzbegleiter/application/profile/profile_observer/profile_observer_bloc.dart'
-    as _i65;
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart'
-    as _i69;
+    as _i68;
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart'
-    as _i70;
+    as _i69;
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
-    as _i85;
+    as _i83;
 import 'package:finanzbegleiter/application/recommendations/recommendations_alert/recommendations_alert_cubit.dart'
     as _i58;
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart'
-    as _i71;
+    as _i70;
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart' as _i59;
 import 'package:finanzbegleiter/constants.dart' as _i37;
 import 'package:finanzbegleiter/core/failures/auth_failures.dart' as _i31;
@@ -98,11 +94,11 @@ import 'package:finanzbegleiter/domain/entities/legals.dart' as _i51;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart'
     as _i40;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart'
-    as _i75;
+    as _i74;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart'
-    as _i81;
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart'
     as _i80;
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart'
+    as _i79;
 import 'package:finanzbegleiter/domain/entities/permissions.dart' as _i44;
 import 'package:finanzbegleiter/domain/entities/promoter.dart' as _i42;
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart'
@@ -131,7 +127,7 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 import 'package:finanzbegleiter/domain/repositories/legals_repository.dart'
     as _i9;
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart'
-    as _i74;
+    as _i73;
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart'
     as _i11;
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart'
@@ -6116,6 +6112,317 @@ class MockAppLocalizations extends _i1.Mock implements _i27.AppLocalizations {
       ) as String);
 
   @override
+  String get dashboard_tutorial_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_email_verification_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_email_verification_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_email_verification_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_email_verification_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_email_verification_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_email_verification_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_contact_data_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_contact_data_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_contact_data_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_contact_data_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_contact_data_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_contact_data_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_company_registration_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_company_registration_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_company_registration_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_company_registration_content =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #dashboard_tutorial_step_company_registration_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_company_registration_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_company_approval_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_company_approval_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_company_approval_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_company_approval_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_company_approval_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_company_approval_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_default_landingpage_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_default_landingpage_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_default_landingpage_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_default_landingpage_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_default_landingpage_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_default_landingpage_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_landingpage_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_landingpage_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_landingpage_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_landingpage_content => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_landingpage_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_landingpage_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_promoter_registration_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_promoter_registration_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_promoter_registration_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_promoter_registration_content =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #dashboard_tutorial_step_promoter_registration_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_promoter_registration_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_promoter_waiting_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_promoter_waiting_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_promoter_waiting_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_promoter_waiting_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_promoter_waiting_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_promoter_waiting_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_recommendation_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_recommendation_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_recommendation_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_recommendation_content =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_recommendation_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_recommendation_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_recommendation_manager_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #dashboard_tutorial_step_recommendation_manager_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_recommendation_manager_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_recommendation_manager_content =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #dashboard_tutorial_step_recommendation_manager_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_step_recommendation_manager_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_complete_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_complete_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_complete_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_step_complete_content => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_step_complete_content),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_step_complete_content),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_to_profile => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_to_profile),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_to_profile),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_to_landingpages => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_to_landingpages),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_to_landingpages),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_register_promoter => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_register_promoter),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_register_promoter),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_make_recommendation =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_make_recommendation),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_make_recommendation),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_to_recommendation_manager =>
+      (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_to_recommendation_manager),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #dashboard_tutorial_button_to_recommendation_manager),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_button_hide_tutorial => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_button_hide_tutorial),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_button_hide_tutorial),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_error_title => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_error_title),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_error_title),
+        ),
+      ) as String);
+
+  @override
+  String get dashboard_tutorial_error_message => (super.noSuchMethod(
+        Invocation.getter(#dashboard_tutorial_error_message),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.getter(#dashboard_tutorial_error_message),
+        ),
+      ) as String);
+
+  @override
   String get recommendation_manager_add_note_button_tooltip =>
       (super.noSuchMethod(
         Invocation.getter(#recommendation_manager_add_note_button_tooltip),
@@ -10987,156 +11294,11 @@ class MockLandingPageImageBloc extends _i1.Mock
       );
 }
 
-/// A class which mocks [ProfileObserverBloc].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockProfileObserverBloc extends _i1.Mock
-    implements _i65.ProfileObserverBloc {
-  MockProfileObserverBloc() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i7.UserRepository get userRepo => (super.noSuchMethod(
-        Invocation.getter(#userRepo),
-        returnValue: _FakeUserRepository_11(
-          this,
-          Invocation.getter(#userRepo),
-        ),
-      ) as _i7.UserRepository);
-
-  @override
-  _i65.ProfileObserverState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i65.ProfileObserverState>(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i65.ProfileObserverState);
-
-  @override
-  _i23.Stream<_i65.ProfileObserverState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i65.ProfileObserverState>.empty(),
-      ) as _i23.Stream<_i65.ProfileObserverState>);
-
-  @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  void add(_i65.ProfileObserverEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onEvent(_i65.ProfileObserverEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void emit(_i65.ProfileObserverState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void on<E extends _i65.ProfileObserverEvent>(
-    _i54.EventHandler<E, _i65.ProfileObserverState>? handler, {
-    _i54.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onTransition(
-          _i54.Transition<_i65.ProfileObserverEvent, _i65.ProfileObserverState>?
-              transition) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i23.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i23.Future<void>.value(),
-        returnValueForMissingStub: _i23.Future<void>.value(),
-      ) as _i23.Future<void>);
-
-  @override
-  void onChange(_i54.Change<_i65.ProfileObserverState>? change) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-}
-
 /// A class which mocks [CompanyObserverCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCompanyObserverCubit extends _i1.Mock
-    implements _i66.CompanyObserverCubit {
+    implements _i65.CompanyObserverCubit {
   MockCompanyObserverCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -11151,19 +11313,19 @@ class MockCompanyObserverCubit extends _i1.Mock
       ) as _i10.CompanyRepository);
 
   @override
-  _i66.CompanyObserverState get state => (super.noSuchMethod(
+  _i65.CompanyObserverState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i66.CompanyObserverState>(
+        returnValue: _i28.dummyValue<_i65.CompanyObserverState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i66.CompanyObserverState);
+      ) as _i65.CompanyObserverState);
 
   @override
-  _i23.Stream<_i66.CompanyObserverState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i65.CompanyObserverState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i66.CompanyObserverState>.empty(),
-      ) as _i23.Stream<_i66.CompanyObserverState>);
+        returnValue: _i23.Stream<_i65.CompanyObserverState>.empty(),
+      ) as _i23.Stream<_i65.CompanyObserverState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -11202,7 +11364,7 @@ class MockCompanyObserverCubit extends _i1.Mock
       ) as _i23.Future<void>);
 
   @override
-  void emit(_i66.CompanyObserverState? state) => super.noSuchMethod(
+  void emit(_i65.CompanyObserverState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -11211,7 +11373,7 @@ class MockCompanyObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i66.CompanyObserverState>? change) =>
+  void onChange(_i54.Change<_i65.CompanyObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -11256,7 +11418,7 @@ class MockCompanyObserverCubit extends _i1.Mock
 /// A class which mocks [PermissionCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPermissionCubit extends _i1.Mock implements _i67.PermissionCubit {
+class MockPermissionCubit extends _i1.Mock implements _i66.PermissionCubit {
   MockPermissionCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -11287,19 +11449,19 @@ class MockPermissionCubit extends _i1.Mock implements _i67.PermissionCubit {
       );
 
   @override
-  _i67.PermissionState get state => (super.noSuchMethod(
+  _i66.PermissionState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i67.PermissionState>(
+        returnValue: _i28.dummyValue<_i66.PermissionState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i67.PermissionState);
+      ) as _i66.PermissionState);
 
   @override
-  _i23.Stream<_i67.PermissionState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i66.PermissionState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i67.PermissionState>.empty(),
-      ) as _i23.Stream<_i67.PermissionState>);
+        returnValue: _i23.Stream<_i66.PermissionState>.empty(),
+      ) as _i23.Stream<_i66.PermissionState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -11327,7 +11489,7 @@ class MockPermissionCubit extends _i1.Mock implements _i67.PermissionCubit {
       ) as _i23.Future<void>);
 
   @override
-  void emit(_i67.PermissionState? state) => super.noSuchMethod(
+  void emit(_i66.PermissionState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -11336,7 +11498,7 @@ class MockPermissionCubit extends _i1.Mock implements _i67.PermissionCubit {
       );
 
   @override
-  void onChange(_i54.Change<_i67.PermissionState>? change) =>
+  void onChange(_i54.Change<_i66.PermissionState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -11381,7 +11543,7 @@ class MockPermissionCubit extends _i1.Mock implements _i67.PermissionCubit {
 /// A class which mocks [CompanyCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCompanyCubit extends _i1.Mock implements _i68.CompanyCubit {
+class MockCompanyCubit extends _i1.Mock implements _i67.CompanyCubit {
   MockCompanyCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -11405,19 +11567,19 @@ class MockCompanyCubit extends _i1.Mock implements _i68.CompanyCubit {
       ) as _i4.AuthRepository);
 
   @override
-  _i68.CompanyState get state => (super.noSuchMethod(
+  _i67.CompanyState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i68.CompanyState>(
+        returnValue: _i28.dummyValue<_i67.CompanyState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i68.CompanyState);
+      ) as _i67.CompanyState);
 
   @override
-  _i23.Stream<_i68.CompanyState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i67.CompanyState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i68.CompanyState>.empty(),
-      ) as _i23.Stream<_i68.CompanyState>);
+        returnValue: _i23.Stream<_i67.CompanyState>.empty(),
+      ) as _i23.Stream<_i67.CompanyState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -11492,7 +11654,7 @@ class MockCompanyCubit extends _i1.Mock implements _i68.CompanyCubit {
       );
 
   @override
-  void emit(_i68.CompanyState? state) => super.noSuchMethod(
+  void emit(_i67.CompanyState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -11501,7 +11663,7 @@ class MockCompanyCubit extends _i1.Mock implements _i68.CompanyCubit {
       );
 
   @override
-  void onChange(_i54.Change<_i68.CompanyState>? change) => super.noSuchMethod(
+  void onChange(_i54.Change<_i67.CompanyState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -11555,7 +11717,7 @@ class MockCompanyCubit extends _i1.Mock implements _i68.CompanyCubit {
 /// A class which mocks [PromoterCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPromoterCubit extends _i1.Mock implements _i69.PromoterCubit {
+class MockPromoterCubit extends _i1.Mock implements _i68.PromoterCubit {
   MockPromoterCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -11588,19 +11750,19 @@ class MockPromoterCubit extends _i1.Mock implements _i69.PromoterCubit {
       ) as _i13.LandingPageRepository);
 
   @override
-  _i69.PromoterState get state => (super.noSuchMethod(
+  _i68.PromoterState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i69.PromoterState>(
+        returnValue: _i28.dummyValue<_i68.PromoterState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i69.PromoterState);
+      ) as _i68.PromoterState);
 
   @override
-  _i23.Stream<_i69.PromoterState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i68.PromoterState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i69.PromoterState>.empty(),
-      ) as _i23.Stream<_i69.PromoterState>);
+        returnValue: _i23.Stream<_i68.PromoterState>.empty(),
+      ) as _i23.Stream<_i68.PromoterState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -11690,7 +11852,7 @@ class MockPromoterCubit extends _i1.Mock implements _i69.PromoterCubit {
       );
 
   @override
-  void emit(_i69.PromoterState? state) => super.noSuchMethod(
+  void emit(_i68.PromoterState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -11699,7 +11861,7 @@ class MockPromoterCubit extends _i1.Mock implements _i69.PromoterCubit {
       );
 
   @override
-  void onChange(_i54.Change<_i69.PromoterState>? change) => super.noSuchMethod(
+  void onChange(_i54.Change<_i68.PromoterState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -11754,7 +11916,7 @@ class MockPromoterCubit extends _i1.Mock implements _i69.PromoterCubit {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPromoterObserverCubit extends _i1.Mock
-    implements _i70.PromoterObserverCubit {
+    implements _i69.PromoterObserverCubit {
   MockPromoterObserverCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -11769,19 +11931,19 @@ class MockPromoterObserverCubit extends _i1.Mock
       ) as _i12.PromoterRepository);
 
   @override
-  _i70.PromoterObserverState get state => (super.noSuchMethod(
+  _i69.PromoterObserverState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i70.PromoterObserverState>(
+        returnValue: _i28.dummyValue<_i69.PromoterObserverState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i70.PromoterObserverState);
+      ) as _i69.PromoterObserverState);
 
   @override
-  _i23.Stream<_i70.PromoterObserverState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i69.PromoterObserverState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i70.PromoterObserverState>.empty(),
-      ) as _i23.Stream<_i70.PromoterObserverState>);
+        returnValue: _i23.Stream<_i69.PromoterObserverState>.empty(),
+      ) as _i23.Stream<_i69.PromoterObserverState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -11880,7 +12042,7 @@ class MockPromoterObserverCubit extends _i1.Mock
       ) as _i23.Future<void>);
 
   @override
-  void emit(_i70.PromoterObserverState? state) => super.noSuchMethod(
+  void emit(_i69.PromoterObserverState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -11889,7 +12051,7 @@ class MockPromoterObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i70.PromoterObserverState>? change) =>
+  void onChange(_i54.Change<_i69.PromoterObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -11935,7 +12097,7 @@ class MockPromoterObserverCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRecommendationsCubit extends _i1.Mock
-    implements _i71.RecommendationsCubit {
+    implements _i70.RecommendationsCubit {
   MockRecommendationsCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -11959,19 +12121,19 @@ class MockRecommendationsCubit extends _i1.Mock
       ) as _i13.LandingPageRepository);
 
   @override
-  _i71.RecommendationsState get state => (super.noSuchMethod(
+  _i70.RecommendationsState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i71.RecommendationsState>(
+        returnValue: _i28.dummyValue<_i70.RecommendationsState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i71.RecommendationsState);
+      ) as _i70.RecommendationsState);
 
   @override
-  _i23.Stream<_i71.RecommendationsState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i70.RecommendationsState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i71.RecommendationsState>.empty(),
-      ) as _i23.Stream<_i71.RecommendationsState>);
+        returnValue: _i23.Stream<_i70.RecommendationsState>.empty(),
+      ) as _i23.Stream<_i70.RecommendationsState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12008,7 +12170,7 @@ class MockRecommendationsCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i71.RecommendationsState? state) => super.noSuchMethod(
+  void emit(_i70.RecommendationsState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12017,7 +12179,7 @@ class MockRecommendationsCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i71.RecommendationsState>? change) =>
+  void onChange(_i54.Change<_i70.RecommendationsState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -12073,7 +12235,7 @@ class MockRecommendationsCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLandingPageObserverCubit extends _i1.Mock
-    implements _i72.LandingPageObserverCubit {
+    implements _i71.LandingPageObserverCubit {
   MockLandingPageObserverCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -12088,19 +12250,19 @@ class MockLandingPageObserverCubit extends _i1.Mock
       ) as _i13.LandingPageRepository);
 
   @override
-  _i72.LandingPageObserverState get state => (super.noSuchMethod(
+  _i71.LandingPageObserverState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i72.LandingPageObserverState>(
+        returnValue: _i28.dummyValue<_i71.LandingPageObserverState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i72.LandingPageObserverState);
+      ) as _i71.LandingPageObserverState);
 
   @override
-  _i23.Stream<_i72.LandingPageObserverState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i71.LandingPageObserverState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i72.LandingPageObserverState>.empty(),
-      ) as _i23.Stream<_i72.LandingPageObserverState>);
+        returnValue: _i23.Stream<_i71.LandingPageObserverState>.empty(),
+      ) as _i23.Stream<_i71.LandingPageObserverState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12148,7 +12310,7 @@ class MockLandingPageObserverCubit extends _i1.Mock
       ) as _i23.Future<void>);
 
   @override
-  void emit(_i72.LandingPageObserverState? state) => super.noSuchMethod(
+  void emit(_i71.LandingPageObserverState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12157,7 +12319,7 @@ class MockLandingPageObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i72.LandingPageObserverState>? change) =>
+  void onChange(_i54.Change<_i71.LandingPageObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -12202,7 +12364,7 @@ class MockLandingPageObserverCubit extends _i1.Mock
 /// A class which mocks [LandingPageCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLandingPageCubit extends _i1.Mock implements _i73.LandingPageCubit {
+class MockLandingPageCubit extends _i1.Mock implements _i72.LandingPageCubit {
   MockLandingPageCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -12232,19 +12394,19 @@ class MockLandingPageCubit extends _i1.Mock implements _i73.LandingPageCubit {
       ) as int);
 
   @override
-  _i73.LandingPageState get state => (super.noSuchMethod(
+  _i72.LandingPageState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i73.LandingPageState>(
+        returnValue: _i28.dummyValue<_i72.LandingPageState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i73.LandingPageState);
+      ) as _i72.LandingPageState);
 
   @override
-  _i23.Stream<_i73.LandingPageState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i72.LandingPageState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i73.LandingPageState>.empty(),
-      ) as _i23.Stream<_i73.LandingPageState>);
+        returnValue: _i23.Stream<_i72.LandingPageState>.empty(),
+      ) as _i23.Stream<_i72.LandingPageState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12445,7 +12607,7 @@ class MockLandingPageCubit extends _i1.Mock implements _i73.LandingPageCubit {
       ) as List<_i42.Promoter>);
 
   @override
-  void emit(_i73.LandingPageState? state) => super.noSuchMethod(
+  void emit(_i72.LandingPageState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12454,7 +12616,7 @@ class MockLandingPageCubit extends _i1.Mock implements _i73.LandingPageCubit {
       );
 
   @override
-  void onChange(_i54.Change<_i73.LandingPageState>? change) =>
+  void onChange(_i54.Change<_i72.LandingPageState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -12510,13 +12672,13 @@ class MockLandingPageCubit extends _i1.Mock implements _i73.LandingPageCubit {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderRepository extends _i1.Mock
-    implements _i74.PagebuilderRepository {
+    implements _i73.PagebuilderRepository {
   MockPagebuilderRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i23.Future<_i2.Either<_i32.DatabaseFailure, _i75.PageBuilderPage>>
+  _i23.Future<_i2.Either<_i32.DatabaseFailure, _i74.PageBuilderPage>>
       getLandingPageContent(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getLandingPageContent,
@@ -12524,8 +12686,8 @@ class MockPagebuilderRepository extends _i1.Mock
             ),
             returnValue: _i23.Future<
                     _i2
-                    .Either<_i32.DatabaseFailure, _i75.PageBuilderPage>>.value(
-                _FakeEither_0<_i32.DatabaseFailure, _i75.PageBuilderPage>(
+                    .Either<_i32.DatabaseFailure, _i74.PageBuilderPage>>.value(
+                _FakeEither_0<_i32.DatabaseFailure, _i74.PageBuilderPage>(
               this,
               Invocation.method(
                 #getLandingPageContent,
@@ -12533,11 +12695,11 @@ class MockPagebuilderRepository extends _i1.Mock
               ),
             )),
           ) as _i23
-              .Future<_i2.Either<_i32.DatabaseFailure, _i75.PageBuilderPage>>);
+              .Future<_i2.Either<_i32.DatabaseFailure, _i74.PageBuilderPage>>);
 
   @override
   _i23.Future<_i2.Either<_i32.DatabaseFailure, _i2.Unit>>
-      saveLandingPageContent(_i75.PageBuilderPage? page) => (super.noSuchMethod(
+      saveLandingPageContent(_i74.PageBuilderPage? page) => (super.noSuchMethod(
             Invocation.method(
               #saveLandingPageContent,
               [page],
@@ -12558,7 +12720,7 @@ class MockPagebuilderRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCompanyRequestCubit extends _i1.Mock
-    implements _i76.CompanyRequestCubit {
+    implements _i75.CompanyRequestCubit {
   MockCompanyRequestCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -12582,19 +12744,19 @@ class MockCompanyRequestCubit extends _i1.Mock
       ) as _i7.UserRepository);
 
   @override
-  _i76.CompanyRequestState get state => (super.noSuchMethod(
+  _i75.CompanyRequestState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i76.CompanyRequestState>(
+        returnValue: _i28.dummyValue<_i75.CompanyRequestState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i76.CompanyRequestState);
+      ) as _i75.CompanyRequestState);
 
   @override
-  _i23.Stream<_i76.CompanyRequestState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i75.CompanyRequestState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i76.CompanyRequestState>.empty(),
-      ) as _i23.Stream<_i76.CompanyRequestState>);
+        returnValue: _i23.Stream<_i75.CompanyRequestState>.empty(),
+      ) as _i23.Stream<_i75.CompanyRequestState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12630,7 +12792,7 @@ class MockCompanyRequestCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i76.CompanyRequestState? state) => super.noSuchMethod(
+  void emit(_i75.CompanyRequestState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12639,7 +12801,7 @@ class MockCompanyRequestCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i76.CompanyRequestState>? change) =>
+  void onChange(_i54.Change<_i75.CompanyRequestState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -12695,7 +12857,7 @@ class MockCompanyRequestCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCompanyRequestObserverCubit extends _i1.Mock
-    implements _i77.CompanyRequestObserverCubit {
+    implements _i76.CompanyRequestObserverCubit {
   MockCompanyRequestObserverCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -12710,20 +12872,20 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
       ) as _i10.CompanyRepository);
 
   @override
-  _i77.CompanyRequestObserverState get state => (super.noSuchMethod(
+  _i76.CompanyRequestObserverState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i77.CompanyRequestObserverState>(
+        returnValue: _i28.dummyValue<_i76.CompanyRequestObserverState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i77.CompanyRequestObserverState);
+      ) as _i76.CompanyRequestObserverState);
 
   @override
-  _i23.Stream<_i77.CompanyRequestObserverState> get stream =>
+  _i23.Stream<_i76.CompanyRequestObserverState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i77.CompanyRequestObserverState>.empty(),
-      ) as _i23.Stream<_i77.CompanyRequestObserverState>);
+        returnValue: _i23.Stream<_i76.CompanyRequestObserverState>.empty(),
+      ) as _i23.Stream<_i76.CompanyRequestObserverState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12773,7 +12935,7 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
       ) as _i23.Future<void>);
 
   @override
-  void emit(_i77.CompanyRequestObserverState? state) => super.noSuchMethod(
+  void emit(_i76.CompanyRequestObserverState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12782,7 +12944,7 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i77.CompanyRequestObserverState>? change) =>
+  void onChange(_i54.Change<_i76.CompanyRequestObserverState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -12828,7 +12990,7 @@ class MockCompanyRequestObserverCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAdminRegistrationCodeCubit extends _i1.Mock
-    implements _i78.AdminRegistrationCodeCubit {
+    implements _i77.AdminRegistrationCodeCubit {
   MockAdminRegistrationCodeCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -12844,20 +13006,20 @@ class MockAdminRegistrationCodeCubit extends _i1.Mock
       ) as _i14.AdminRegistrationCodeRepository);
 
   @override
-  _i78.AdminRegistrationCodeState get state => (super.noSuchMethod(
+  _i77.AdminRegistrationCodeState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i78.AdminRegistrationCodeState>(
+        returnValue: _i28.dummyValue<_i77.AdminRegistrationCodeState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i78.AdminRegistrationCodeState);
+      ) as _i77.AdminRegistrationCodeState);
 
   @override
-  _i23.Stream<_i78.AdminRegistrationCodeState> get stream =>
+  _i23.Stream<_i77.AdminRegistrationCodeState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i78.AdminRegistrationCodeState>.empty(),
-      ) as _i23.Stream<_i78.AdminRegistrationCodeState>);
+        returnValue: _i23.Stream<_i77.AdminRegistrationCodeState>.empty(),
+      ) as _i23.Stream<_i77.AdminRegistrationCodeState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12884,7 +13046,7 @@ class MockAdminRegistrationCodeCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i78.AdminRegistrationCodeState? state) => super.noSuchMethod(
+  void emit(_i77.AdminRegistrationCodeState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12893,7 +13055,7 @@ class MockAdminRegistrationCodeCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i78.AdminRegistrationCodeState>? change) =>
+  void onChange(_i54.Change<_i77.AdminRegistrationCodeState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -12949,26 +13111,26 @@ class MockAdminRegistrationCodeCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderConfigMenuCubit extends _i1.Mock
-    implements _i79.PagebuilderConfigMenuCubit {
+    implements _i78.PagebuilderConfigMenuCubit {
   MockPagebuilderConfigMenuCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i79.PagebuilderConfigMenuState get state => (super.noSuchMethod(
+  _i78.PagebuilderConfigMenuState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i79.PagebuilderConfigMenuState>(
+        returnValue: _i28.dummyValue<_i78.PagebuilderConfigMenuState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i79.PagebuilderConfigMenuState);
+      ) as _i78.PagebuilderConfigMenuState);
 
   @override
-  _i23.Stream<_i79.PagebuilderConfigMenuState> get stream =>
+  _i23.Stream<_i78.PagebuilderConfigMenuState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i79.PagebuilderConfigMenuState>.empty(),
-      ) as _i23.Stream<_i79.PagebuilderConfigMenuState>);
+        returnValue: _i23.Stream<_i78.PagebuilderConfigMenuState>.empty(),
+      ) as _i23.Stream<_i78.PagebuilderConfigMenuState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12977,7 +13139,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void openConfigMenu(_i80.PageBuilderWidget? model) => super.noSuchMethod(
+  void openConfigMenu(_i79.PageBuilderWidget? model) => super.noSuchMethod(
         Invocation.method(
           #openConfigMenu,
           [model],
@@ -12986,7 +13148,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void openSectionConfigMenu(_i81.PageBuilderSection? model) =>
+  void openSectionConfigMenu(_i80.PageBuilderSection? model) =>
       super.noSuchMethod(
         Invocation.method(
           #openSectionConfigMenu,
@@ -12996,7 +13158,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i79.PagebuilderConfigMenuState? state) => super.noSuchMethod(
+  void emit(_i78.PagebuilderConfigMenuState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -13005,7 +13167,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i79.PagebuilderConfigMenuState>? change) =>
+  void onChange(_i54.Change<_i78.PagebuilderConfigMenuState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -13061,7 +13223,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderSelectionCubit extends _i1.Mock
-    implements _i82.PagebuilderSelectionCubit {
+    implements _i81.PagebuilderSelectionCubit {
   MockPagebuilderSelectionCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -13148,121 +13310,11 @@ class MockPagebuilderSelectionCubit extends _i1.Mock
       ) as _i23.Future<void>);
 }
 
-/// A class which mocks [DashboardOverviewCubit].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockDashboardOverviewCubit extends _i1.Mock
-    implements _i83.DashboardOverviewCubit {
-  MockDashboardOverviewCubit() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i7.UserRepository get userRepo => (super.noSuchMethod(
-        Invocation.getter(#userRepo),
-        returnValue: _FakeUserRepository_11(
-          this,
-          Invocation.getter(#userRepo),
-        ),
-      ) as _i7.UserRepository);
-
-  @override
-  _i83.DashboardOverviewState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i83.DashboardOverviewState>(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i83.DashboardOverviewState);
-
-  @override
-  _i23.Stream<_i83.DashboardOverviewState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i83.DashboardOverviewState>.empty(),
-      ) as _i23.Stream<_i83.DashboardOverviewState>);
-
-  @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  void getUser() => super.noSuchMethod(
-        Invocation.method(
-          #getUser,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void emit(_i83.DashboardOverviewState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onChange(_i54.Change<_i83.DashboardOverviewState>? change) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i23.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i23.Future<void>.value(),
-        returnValueForMissingStub: _i23.Future<void>.value(),
-      ) as _i23.Future<void>);
-}
-
 /// A class which mocks [DashboardRecommendationsCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDashboardRecommendationsCubit extends _i1.Mock
-    implements _i84.DashboardRecommendationsCubit {
+    implements _i82.DashboardRecommendationsCubit {
   MockDashboardRecommendationsCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -13286,20 +13338,20 @@ class MockDashboardRecommendationsCubit extends _i1.Mock
       ) as _i13.LandingPageRepository);
 
   @override
-  _i84.DashboardRecommendationsState get state => (super.noSuchMethod(
+  _i82.DashboardRecommendationsState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i84.DashboardRecommendationsState>(
+        returnValue: _i28.dummyValue<_i82.DashboardRecommendationsState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i84.DashboardRecommendationsState);
+      ) as _i82.DashboardRecommendationsState);
 
   @override
-  _i23.Stream<_i84.DashboardRecommendationsState> get stream =>
+  _i23.Stream<_i82.DashboardRecommendationsState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i84.DashboardRecommendationsState>.empty(),
-      ) as _i23.Stream<_i84.DashboardRecommendationsState>);
+        returnValue: _i23.Stream<_i82.DashboardRecommendationsState>.empty(),
+      ) as _i23.Stream<_i82.DashboardRecommendationsState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -13342,7 +13394,7 @@ class MockDashboardRecommendationsCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i84.DashboardRecommendationsState? state) => super.noSuchMethod(
+  void emit(_i82.DashboardRecommendationsState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -13351,7 +13403,7 @@ class MockDashboardRecommendationsCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i84.DashboardRecommendationsState>? change) =>
+  void onChange(_i54.Change<_i82.DashboardRecommendationsState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -13407,7 +13459,7 @@ class MockDashboardRecommendationsCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRecommendationManagerTileCubit extends _i1.Mock
-    implements _i85.RecommendationManagerTileCubit {
+    implements _i83.RecommendationManagerTileCubit {
   MockRecommendationManagerTileCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -13437,20 +13489,20 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as List<String>);
 
   @override
-  _i85.RecommendationManagerTileState get state => (super.noSuchMethod(
+  _i83.RecommendationManagerTileState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i85.RecommendationManagerTileState>(
+        returnValue: _i28.dummyValue<_i83.RecommendationManagerTileState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i85.RecommendationManagerTileState);
+      ) as _i83.RecommendationManagerTileState);
 
   @override
-  _i23.Stream<_i85.RecommendationManagerTileState> get stream =>
+  _i23.Stream<_i83.RecommendationManagerTileState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i85.RecommendationManagerTileState>.empty(),
-      ) as _i23.Stream<_i85.RecommendationManagerTileState>);
+        returnValue: _i23.Stream<_i83.RecommendationManagerTileState>.empty(),
+      ) as _i23.Stream<_i83.RecommendationManagerTileState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -13563,7 +13615,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as _i23.Future<String>);
 
   @override
-  void emit(_i85.RecommendationManagerTileState? state) => super.noSuchMethod(
+  void emit(_i83.RecommendationManagerTileState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -13572,7 +13624,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i85.RecommendationManagerTileState>? change) =>
+  void onChange(_i54.Change<_i83.RecommendationManagerTileState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -13627,7 +13679,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
 /// A class which mocks [FeedbackCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFeedbackCubit extends _i1.Mock implements _i86.FeedbackCubit {
+class MockFeedbackCubit extends _i1.Mock implements _i84.FeedbackCubit {
   MockFeedbackCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -13651,19 +13703,19 @@ class MockFeedbackCubit extends _i1.Mock implements _i86.FeedbackCubit {
       ) as _i7.UserRepository);
 
   @override
-  _i86.FeedbackState get state => (super.noSuchMethod(
+  _i84.FeedbackState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i86.FeedbackState>(
+        returnValue: _i28.dummyValue<_i84.FeedbackState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i86.FeedbackState);
+      ) as _i84.FeedbackState);
 
   @override
-  _i23.Stream<_i86.FeedbackState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i84.FeedbackState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i86.FeedbackState>.empty(),
-      ) as _i23.Stream<_i86.FeedbackState>);
+        returnValue: _i23.Stream<_i84.FeedbackState>.empty(),
+      ) as _i23.Stream<_i84.FeedbackState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -13697,7 +13749,7 @@ class MockFeedbackCubit extends _i1.Mock implements _i86.FeedbackCubit {
       );
 
   @override
-  void emit(_i86.FeedbackState? state) => super.noSuchMethod(
+  void emit(_i84.FeedbackState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -13706,7 +13758,7 @@ class MockFeedbackCubit extends _i1.Mock implements _i86.FeedbackCubit {
       );
 
   @override
-  void onChange(_i54.Change<_i86.FeedbackState>? change) => super.noSuchMethod(
+  void onChange(_i54.Change<_i84.FeedbackState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -13761,7 +13813,7 @@ class MockFeedbackCubit extends _i1.Mock implements _i86.FeedbackCubit {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDashboardPromoterRankingCubit extends _i1.Mock
-    implements _i87.DashboardPromoterRankingCubit {
+    implements _i85.DashboardPromoterRankingCubit {
   MockDashboardPromoterRankingCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -13776,19 +13828,19 @@ class MockDashboardPromoterRankingCubit extends _i1.Mock
       ) as _i16.DashboardRepository);
 
   @override
-  _i87.PromoterRankingState get state => (super.noSuchMethod(
+  _i85.PromoterRankingState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i87.PromoterRankingState>(
+        returnValue: _i28.dummyValue<_i85.PromoterRankingState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i87.PromoterRankingState);
+      ) as _i85.PromoterRankingState);
 
   @override
-  _i23.Stream<_i87.PromoterRankingState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i85.PromoterRankingState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i87.PromoterRankingState>.empty(),
-      ) as _i23.Stream<_i87.PromoterRankingState>);
+        returnValue: _i23.Stream<_i85.PromoterRankingState>.empty(),
+      ) as _i23.Stream<_i85.PromoterRankingState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -13813,7 +13865,7 @@ class MockDashboardPromoterRankingCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i87.PromoterRankingState? state) => super.noSuchMethod(
+  void emit(_i85.PromoterRankingState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -13822,7 +13874,7 @@ class MockDashboardPromoterRankingCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i87.PromoterRankingState>? change) =>
+  void onChange(_i54.Change<_i85.PromoterRankingState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -13878,7 +13930,7 @@ class MockDashboardPromoterRankingCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDashboardLandingpageRankingCubit extends _i1.Mock
-    implements _i88.DashboardLandingpageRankingCubit {
+    implements _i86.DashboardLandingpageRankingCubit {
   MockDashboardLandingpageRankingCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -13893,20 +13945,20 @@ class MockDashboardLandingpageRankingCubit extends _i1.Mock
       ) as _i16.DashboardRepository);
 
   @override
-  _i88.DashboardLandingpageRankingState get state => (super.noSuchMethod(
+  _i86.DashboardLandingpageRankingState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i88.DashboardLandingpageRankingState>(
+        returnValue: _i28.dummyValue<_i86.DashboardLandingpageRankingState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i88.DashboardLandingpageRankingState);
+      ) as _i86.DashboardLandingpageRankingState);
 
   @override
-  _i23.Stream<_i88.DashboardLandingpageRankingState> get stream =>
+  _i23.Stream<_i86.DashboardLandingpageRankingState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i88.DashboardLandingpageRankingState>.empty(),
-      ) as _i23.Stream<_i88.DashboardLandingpageRankingState>);
+        returnValue: _i23.Stream<_i86.DashboardLandingpageRankingState>.empty(),
+      ) as _i23.Stream<_i86.DashboardLandingpageRankingState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -13931,7 +13983,7 @@ class MockDashboardLandingpageRankingCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i88.DashboardLandingpageRankingState? state) => super.noSuchMethod(
+  void emit(_i86.DashboardLandingpageRankingState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -13940,7 +13992,7 @@ class MockDashboardLandingpageRankingCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i88.DashboardLandingpageRankingState>? change) =>
+  void onChange(_i54.Change<_i86.DashboardLandingpageRankingState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -13996,7 +14048,7 @@ class MockDashboardLandingpageRankingCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDashboardTutorialCubit extends _i1.Mock
-    implements _i89.DashboardTutorialCubit {
+    implements _i87.DashboardTutorialCubit {
   MockDashboardTutorialCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -14011,19 +14063,19 @@ class MockDashboardTutorialCubit extends _i1.Mock
       ) as _i17.TutorialRepository);
 
   @override
-  _i89.DashboardTutorialState get state => (super.noSuchMethod(
+  _i87.DashboardTutorialState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i28.dummyValue<_i89.DashboardTutorialState>(
+        returnValue: _i28.dummyValue<_i87.DashboardTutorialState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i89.DashboardTutorialState);
+      ) as _i87.DashboardTutorialState);
 
   @override
-  _i23.Stream<_i89.DashboardTutorialState> get stream => (super.noSuchMethod(
+  _i23.Stream<_i87.DashboardTutorialState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i23.Stream<_i89.DashboardTutorialState>.empty(),
-      ) as _i23.Stream<_i89.DashboardTutorialState>);
+        returnValue: _i23.Stream<_i87.DashboardTutorialState>.empty(),
+      ) as _i23.Stream<_i87.DashboardTutorialState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -14057,7 +14109,7 @@ class MockDashboardTutorialCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i89.DashboardTutorialState? state) => super.noSuchMethod(
+  void emit(_i87.DashboardTutorialState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -14066,7 +14118,7 @@ class MockDashboardTutorialCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i54.Change<_i89.DashboardTutorialState>? change) =>
+  void onChange(_i54.Change<_i87.DashboardTutorialState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,

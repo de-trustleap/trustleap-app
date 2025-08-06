@@ -1,11 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/presentation/core/menu/appbar.dart';
 import 'package:finanzbegleiter/presentation/core/menu/collapsible_side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/menu/side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/feedback/feedback_floating_action_button.dart';
+import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,24 +20,43 @@ class PageTemplate extends StatelessWidget {
     super.key,
   });
 
+  Widget getMainContent(BuildContext context) {
+    return BlocBuilder<UserObserverCubit, UserObserverState>(
+      builder: (context, userState) {
+        if (userState is UserObserverFailure) {
+          final localization = AppLocalizations.of(context);
+          return ErrorView(
+            title: "Abrufen des Nutzers fehlgeschlagen",
+            message: DatabaseFailureMapper.mapFailureMessage(
+                userState.failure, localization),
+            callback: () {
+              BlocProvider.of<UserObserverCubit>(context).observeUser();
+            },
+          );
+        }
+        return const RouterOutlet();
+      },
+    );
+  }
+
   Widget getResponsiveWidget(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final themeData = Theme.of(context);
 
     if (responsiveValue.largerThan(TABLET)) {
-      return const Scaffold(
+      return Scaffold(
           body: Row(children: [
-            CollapsibleSideMenu(isAdmin: false),
-            Expanded(child: RouterOutlet())
+            const CollapsibleSideMenu(isAdmin: false),
+            Expanded(child: getMainContent(context))
           ]),
-          floatingActionButton: FeedbackFloatingActionButton());
+          floatingActionButton: const FeedbackFloatingActionButton());
     } else {
       return Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: const PreferredSize(
               preferredSize: Size(double.infinity, 44), child: CustomAppBar()),
           backgroundColor: themeData.colorScheme.surface,
-          body: const RouterOutlet(),
+          body: getMainContent(context),
           endDrawer: const SizedBox(
               width: MenuDimensions.menuOpenWidth,
               child: Drawer(child: SideMenu())),
