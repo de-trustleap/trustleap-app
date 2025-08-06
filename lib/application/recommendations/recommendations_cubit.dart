@@ -54,6 +54,3 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
     }
   }
 }
-
-// TODO: GETUSER ENTFERNEN (DONE)
-// TODO: GETCURRENTUSER ENTFERNEN
