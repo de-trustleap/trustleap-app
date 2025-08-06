@@ -39,6 +39,7 @@ import 'package:finanzbegleiter/application/recommendation_manager/recommendatio
 import 'package:finanzbegleiter/application/recommendations/recommendations_alert/recommendations_alert_cubit.dart';
 import 'package:finanzbegleiter/application/recommendations/recommendations_cubit.dart';
 import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/application/web_logging/web_logging_cubit.dart';
 import 'package:finanzbegleiter/core/modules/admin_guard.dart';
 import 'package:finanzbegleiter/core/modules/admin_module.dart';
@@ -149,6 +150,7 @@ class AppModule extends Module {
       ..addLazySingleton(DashboardPromoterRankingCubit.new)
       ..addLazySingleton(DashboardLandingpageRankingCubit.new)
       ..addLazySingleton(DashboardTutorialCubit.new)
+      ..addLazySingleton(UserObserverCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
