@@ -134,6 +134,8 @@ class CustomUser extends Equatable {
         email,
         parentUserID,
         role,
+        pendingCompanyRequestID,
+        defaultLandingPageID,
         profileImageDownloadURL,
         thumbnailDownloadURL,
         unregisteredPromoterIDs,
@@ -142,6 +144,7 @@ class CustomUser extends Equatable {
         tutorialStep,
         recommendationIDs,
         favoriteRecommendationIDs,
-        archivedRecommendationIDs
+        archivedRecommendationIDs,
+        lastUpdated
       ];
 }

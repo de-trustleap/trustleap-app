@@ -80,7 +80,7 @@ class TutorialRepositoryImplementation implements TutorialRepository {
     if (!hasPendingCompanyRequest &&
         !hasCompany &&
         user.tutorialStep != null &&
-        user.tutorialStep! < 2) {
+        user.tutorialStep! <= 2) {
       return right(2);
     }
 

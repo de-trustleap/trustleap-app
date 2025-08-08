@@ -31,8 +31,11 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           content:
               localization.dashboard_tutorial_step_email_verification_content,
           buttonText: localization.dashboard_tutorial_button_to_profile,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.profilePath),
+          buttonAction: () {
+            CustomNavigator.navigate(
+                RoutePaths.homePath + RoutePaths.profilePath);
+            cubit.setStep(user, 1);
+          },
           isLast: false,
           user: user,
         ),
@@ -58,8 +61,11 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           content:
               localization.dashboard_tutorial_step_company_registration_content,
           buttonText: localization.dashboard_tutorial_button_to_profile,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.profilePath),
+          buttonAction: () {
+            CustomNavigator.navigate(
+                RoutePaths.homePath + RoutePaths.profilePath);
+            cubit.setStep(user, 3);
+          },
           isLast: false,
           user: user,
         ),
@@ -81,8 +87,11 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           content:
               localization.dashboard_tutorial_step_default_landingpage_content,
           buttonText: localization.dashboard_tutorial_button_to_landingpages,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.landingPagePath),
+          buttonAction: () {
+            CustomNavigator.navigate(
+                RoutePaths.homePath + RoutePaths.landingPagePath);
+            cubit.setStep(user, 5);
+          },
           isLast: false,
           user: user,
         ),
@@ -92,8 +101,11 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           title: localization.dashboard_tutorial_step_landingpage_title,
           content: localization.dashboard_tutorial_step_landingpage_content,
           buttonText: localization.dashboard_tutorial_button_to_landingpages,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.landingPagePath),
+          buttonAction: () {
+            CustomNavigator.navigate(
+                RoutePaths.homePath + RoutePaths.landingPagePath);
+            cubit.setStep(user, 6);
+          },
           isLast: false,
           user: user,
         ),
@@ -105,8 +117,11 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           content: localization
               .dashboard_tutorial_step_promoter_registration_content,
           buttonText: localization.dashboard_tutorial_button_register_promoter,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.promotersPath),
+          buttonAction: () {
+            CustomNavigator.navigate(
+                RoutePaths.homePath + RoutePaths.promotersPath);
+            cubit.setStep(user, 7);
+          },
           isLast: false,
           user: user,
         ),
@@ -128,8 +143,11 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           content: localization.dashboard_tutorial_step_recommendation_content,
           buttonText:
               localization.dashboard_tutorial_button_make_recommendation,
-          buttonAction: () => CustomNavigator.navigate(
-              RoutePaths.homePath + RoutePaths.recommendationsPath),
+          buttonAction: () {
+            CustomNavigator.navigate(
+                RoutePaths.homePath + RoutePaths.recommendationsPath);
+            cubit.setStep(user, 9);
+          },
           isLast: false,
           user: user,
         ),
