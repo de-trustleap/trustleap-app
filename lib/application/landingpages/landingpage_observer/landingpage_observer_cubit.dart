@@ -15,6 +15,7 @@ part 'landingpage_observer_state.dart';
 class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
   final LandingPageRepository landingPagesRepo;
   StreamSubscription<Either<DatabaseFailure, CustomUser>>? _usersStreamSub;
+  bool _isObserving = false;
 
   LandingPageObserverCubit(
     this.landingPagesRepo,
@@ -26,6 +27,13 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
     _usersStreamSub = null;
     _usersStreamSub = landingPagesRepo.observeAllLandingPages().listen(
         (failureOrSuccess) => landingPageObserverUpdated(failureOrSuccess));
+    _isObserving = true;
+  }
+
+  void ensureObserving() {
+    if (!_isObserving && _usersStreamSub == null) {
+      observeAllLandingPages();
+    }
   }
 
   void landingPageObserverUpdated(
@@ -57,6 +65,7 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
   void stopObserving() {
     _usersStreamSub?.cancel();
     _usersStreamSub = null;
+    _isObserving = false;
   }
 
   @override
