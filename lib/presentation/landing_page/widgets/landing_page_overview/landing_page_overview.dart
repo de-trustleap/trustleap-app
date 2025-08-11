@@ -31,7 +31,7 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
   @override
   void initState() {
     super.initState();
-    Modular.get<LandingPageObserverCubit>().observeAllLandingPages();
+    Modular.get<LandingPageObserverCubit>().ensureObserving();
   }
 
   void submitDeletion(String id, String parentUserID) {
@@ -267,7 +267,7 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                       observerState.failure, localization),
                   callback: () => {
                         Modular.get<LandingPageObserverCubit>()
-                            .observeAllLandingPages()
+                            .ensureObserving()
                       });
             } else {
               return const LoadingIndicator();
