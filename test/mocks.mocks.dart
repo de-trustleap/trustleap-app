@@ -8474,15 +8474,24 @@ class MockPromoterRepository extends _i1.Mock
           ) as _i23.Future<_i2.Either<_i32.DatabaseFailure, bool>>);
 
   @override
-  _i23.Stream<_i2.Either<_i32.DatabaseFailure, _i30.CustomUser>>
-      observeAllPromoters() => (super.noSuchMethod(
+  _i23.Stream<_i2.Either<_i32.DatabaseFailure, List<_i42.Promoter>>>
+      observePromotersByIds({
+    required List<String>? registeredIds,
+    required List<String>? unregisteredIds,
+  }) =>
+          (super.noSuchMethod(
             Invocation.method(
-              #observeAllPromoters,
+              #observePromotersByIds,
               [],
+              {
+                #registeredIds: registeredIds,
+                #unregisteredIds: unregisteredIds,
+              },
             ),
             returnValue: _i23.Stream<
-                _i2.Either<_i32.DatabaseFailure, _i30.CustomUser>>.empty(),
-          ) as _i23.Stream<_i2.Either<_i32.DatabaseFailure, _i30.CustomUser>>);
+                _i2.Either<_i32.DatabaseFailure, List<_i42.Promoter>>>.empty(),
+          ) as _i23
+              .Stream<_i2.Either<_i32.DatabaseFailure, List<_i42.Promoter>>>);
 
   @override
   _i23.Future<_i2.Either<_i32.DatabaseFailure, List<_i30.CustomUser>>>
@@ -11906,11 +11915,11 @@ class MockPromoterObserverCubit extends _i1.Mock
   }
 
   @override
-  _i12.PromoterRepository get recommendationsRepo => (super.noSuchMethod(
-        Invocation.getter(#recommendationsRepo),
+  _i12.PromoterRepository get promoterRepo => (super.noSuchMethod(
+        Invocation.getter(#promoterRepo),
         returnValue: _FakePromoterRepository_16(
           this,
-          Invocation.getter(#recommendationsRepo),
+          Invocation.getter(#promoterRepo),
         ),
       ) as _i12.PromoterRepository);
 
@@ -11936,10 +11945,10 @@ class MockPromoterObserverCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void observeAllPromoters() => super.noSuchMethod(
+  void observePromotersForUser(_i30.CustomUser? user) => super.noSuchMethod(
         Invocation.method(
-          #observeAllPromoters,
-          [],
+          #observePromotersForUser,
+          [user],
         ),
         returnValueForMissingStub: null,
       );
@@ -11972,17 +11981,6 @@ class MockPromoterObserverCubit extends _i1.Mock
             results,
             last,
           ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void promotersObserverUpdated(
-          _i2.Either<_i32.DatabaseFailure, _i30.CustomUser>? failureOrUser) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #promotersObserverUpdated,
-          [failureOrUser],
         ),
         returnValueForMissingStub: null,
       );

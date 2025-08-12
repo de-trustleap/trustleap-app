@@ -17,6 +17,9 @@ final class PromotersObserverFailure extends PromoterObserverState {
   const PromotersObserverFailure({
     required this.failure,
   });
+
+  @override
+  List<Object> get props => [failure];
 }
 
 final class PromotersObserverSuccess extends PromoterObserverState {
@@ -25,6 +28,9 @@ final class PromotersObserverSuccess extends PromoterObserverState {
   const PromotersObserverSuccess({
     required this.promoters,
   });
+
+  @override
+  List<Object> get props => [promoters];
 }
 
 final class PromotersObserverGetElementsSuccess extends PromoterObserverState {
@@ -33,6 +39,9 @@ final class PromotersObserverGetElementsSuccess extends PromoterObserverState {
   const PromotersObserverGetElementsSuccess({
     required this.promoters,
   });
+
+  @override
+  List<Object> get props => [promoters];
 }
 
 final class PromotersObserverSearchNotFound extends PromoterObserverState {}

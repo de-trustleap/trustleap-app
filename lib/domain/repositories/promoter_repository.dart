@@ -10,7 +10,10 @@ abstract class PromoterRepository {
       {required UnregisteredPromoter promoter});
   Future<Either<DatabaseFailure, bool>> checkIfPromoterAlreadyExists(
       {required String email});
-  Stream<Either<DatabaseFailure, CustomUser>> observeAllPromoters();
+  Stream<Either<DatabaseFailure, List<Promoter>>> observePromotersByIds({
+    required List<String> registeredIds,
+    required List<String> unregisteredIds,
+  });
   Future<Either<DatabaseFailure, List<CustomUser>>> getRegisteredPromoters(
       List<String> ids);
   Future<Either<DatabaseFailure, List<UnregisteredPromoter>>>
