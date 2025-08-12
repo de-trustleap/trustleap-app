@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
@@ -9,70 +10,200 @@ import 'package:mockito/mockito.dart';
 import '../mocks.mocks.dart';
 
 void main() {
-  late LandingPageObserverCubit landingPageObserverCubit;
+  late LandingPageObserverCubit cubit;
   late MockLandingPageRepository mockLandingPageRepo;
+
+  setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+  });
 
   setUp(() {
     mockLandingPageRepo = MockLandingPageRepository();
-    landingPageObserverCubit = LandingPageObserverCubit(mockLandingPageRepo);
+    cubit = LandingPageObserverCubit(mockLandingPageRepo);
   });
 
-  test("init state should be LandingPageObserverInitial", () {
-    expect(landingPageObserverCubit.state, LandingPageObserverInitial());
+  tearDown(() {
+    cubit.close();
   });
 
-  group("LandingpageObserverCubit_observeLandingpages", () {
-    const userId = "1";
-    const landingpageId1 = "1";
-    final testUser = CustomUser(id: UniqueID.fromUniqueString(userId));
-    final List<LandingPage> landingPages = [
-      LandingPage(id: UniqueID.fromUniqueString(landingpageId1))
+  group('LandingPageObserverCubit_InitialState', () {
+    test('initial state should be LandingPageObserverInitial', () {
+      expect(cubit.state, LandingPageObserverInitial());
+    });
+  });
+
+  group('LandingPageObserverCubit_observeLandingPagesForUser', () {
+    final testUser = CustomUser(
+      id: UniqueID.fromUniqueString("user123"),
+      email: "test@example.com",
+      firstName: "Test",
+      lastName: "User",
+      role: Role.company,
+      landingPageIDs: ["page1", "page2"],
+      defaultLandingPageID: "defaultPage",
+    );
+
+    final testLandingPages = [
+      LandingPage(
+        id: UniqueID.fromUniqueString("page1"),
+        name: "Test Page 1",
+      ),
+      LandingPage(
+        id: UniqueID.fromUniqueString("page2"),
+        name: "Test Page 2",
+      ),
+      LandingPage(
+        id: UniqueID.fromUniqueString("defaultPage"),
+        name: "Default Page",
+        isDefaultPage: true,
+      ),
     ];
-    test("should call repo if function is called", () async {
+
+    test('should call repo when observeLandingPagesForUser is called', () async {
       // Given
-      when(mockLandingPageRepo.observeAllLandingPages()).thenAnswer((_) =>
-          Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
-              [right(testUser)]));
+      when(mockLandingPageRepo.observeLandingPagesByIds(any))
+          .thenAnswer((_) => Stream.value(right(testLandingPages)));
+
       // When
-      landingPageObserverCubit.observeAllLandingPages();
-      await untilCalled(mockLandingPageRepo.observeAllLandingPages());
+      cubit.observeLandingPagesForUser(testUser);
+      await untilCalled(mockLandingPageRepo.observeLandingPagesByIds(any));
+
       // Then
-      verify(mockLandingPageRepo.observeAllLandingPages());
-      verifyNoMoreInteractions(mockLandingPageRepo);
+      verify(mockLandingPageRepo.observeLandingPagesByIds(any)).called(1);
     });
 
-    test(
-        "should emit LandingPageObserverLoading and then LandingPageObserverSuccess when event is added",
-        () {
+    test('should emit [LandingPageObserverLoading, LandingPageObserverSuccess] when observeLandingPagesForUser succeeds', () {
       // Given
       final expectedResult = [
         LandingPageObserverLoading(),
-        LandingPageObserverSuccess(landingPages: landingPages, user: testUser)
+        LandingPageObserverSuccess(landingPages: testLandingPages, user: testUser),
       ];
-      when(mockLandingPageRepo.observeAllLandingPages()).thenAnswer((_) =>
-          Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
-              [right(testUser)]));
+      when(mockLandingPageRepo.observeLandingPagesByIds(any))
+          .thenAnswer((_) => Stream.value(right(testLandingPages)));
+
       // Then
-      expectLater(
-          landingPageObserverCubit.stream, emitsInOrder(expectedResult));
-      landingPageObserverCubit.observeAllLandingPages();
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.observeLandingPagesForUser(testUser);
     });
 
-    test(
-        "should emit LandingPageObserverLoading and then LandingPageObserverFailure when event is added and repo failed",
-        () {
+    test('should emit [LandingPageObserverLoading, LandingPageObserverFailure] when observeLandingPagesForUser fails', () {
       // Given
       final expectedResult = [
         LandingPageObserverLoading(),
-        LandingPageObserverFailure(failure: BackendFailure())
+        LandingPageObserverFailure(failure: BackendFailure()),
       ];
-      when(mockLandingPageRepo.observeAllLandingPages()).thenAnswer((_) =>
-          Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
-              [left(BackendFailure())]));
+      when(mockLandingPageRepo.observeLandingPagesByIds(any))
+          .thenAnswer((_) => Stream.value(left(BackendFailure())));
+
       // Then
-      expectLater(
-          landingPageObserverCubit.stream, emitsInOrder(expectedResult));
-      landingPageObserverCubit.observeAllLandingPages();
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.observeLandingPagesForUser(testUser);
+    });
+
+    test('should emit empty success state when user has no landing pages', () {
+      // Given
+      final userWithoutPages = CustomUser(
+        id: UniqueID.fromUniqueString("user456"),
+        email: "empty@example.com",
+        firstName: "Empty",
+        lastName: "User",
+        role: Role.company,
+        landingPageIDs: [],
+        defaultLandingPageID: null,
+      );
+      final expectedResult = [
+        LandingPageObserverLoading(),
+        LandingPageObserverSuccess(landingPages: const [], user: userWithoutPages),
+      ];
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.observeLandingPagesForUser(userWithoutPages);
+    });
+
+    test('should include defaultLandingPageID in observed IDs if not already included', () async {
+      // Given
+      final userWithSeparateDefault = testUser.copyWith(
+        landingPageIDs: ["page1"],
+        defaultLandingPageID: "defaultPage",
+      );
+      when(mockLandingPageRepo.observeLandingPagesByIds(any))
+          .thenAnswer((_) => Stream.value(right(testLandingPages)));
+
+      // When
+      cubit.observeLandingPagesForUser(userWithSeparateDefault);
+      await untilCalled(mockLandingPageRepo.observeLandingPagesByIds(any));
+
+      // Then
+      final captured = verify(mockLandingPageRepo.observeLandingPagesByIds(captureAny)).captured;
+      final observedIds = captured.first as List<String>;
+      expect(observedIds, contains("page1"));
+      expect(observedIds, contains("defaultPage"));
+      expect(observedIds.length, equals(2));
+    });
+
+    test('should not restart observer if same user and same IDs', () async {
+      // Given
+      when(mockLandingPageRepo.observeLandingPagesByIds(any))
+          .thenAnswer((_) => Stream.value(right(testLandingPages)));
+
+      // When - call twice with same user
+      cubit.observeLandingPagesForUser(testUser);
+      await untilCalled(mockLandingPageRepo.observeLandingPagesByIds(any));
+      
+      cubit.observeLandingPagesForUser(testUser);
+      await Future.delayed(Duration.zero); // Allow any potential calls
+
+      // Then - should only be called once
+      verify(mockLandingPageRepo.observeLandingPagesByIds(any)).called(1);
+    });
+
+    test('should restart observer if different user', () async {
+      // Given
+      final otherUser = testUser.copyWith(
+        id: UniqueID.fromUniqueString("otherUser"),
+      );
+      when(mockLandingPageRepo.observeLandingPagesByIds(any))
+          .thenAnswer((_) => Stream.value(right(testLandingPages)));
+
+      // When
+      cubit.observeLandingPagesForUser(testUser);
+      await untilCalled(mockLandingPageRepo.observeLandingPagesByIds(any));
+      
+      cubit.observeLandingPagesForUser(otherUser);
+      await untilCalled(mockLandingPageRepo.observeLandingPagesByIds(any));
+
+      // Then
+      verify(mockLandingPageRepo.observeLandingPagesByIds(any)).called(2);
+    });
+
+    test('should restart observer if same user but different IDs', () async {
+      // Given
+      final userWithDifferentPages = testUser.copyWith(
+        landingPageIDs: ["page3", "page4"],
+      );
+      when(mockLandingPageRepo.observeLandingPagesByIds(any))
+          .thenAnswer((_) => Stream.value(right(testLandingPages)));
+
+      // When
+      cubit.observeLandingPagesForUser(testUser);
+      await untilCalled(mockLandingPageRepo.observeLandingPagesByIds(any));
+      
+      cubit.observeLandingPagesForUser(userWithDifferentPages);
+      await untilCalled(mockLandingPageRepo.observeLandingPagesByIds(any));
+
+      // Then
+      verify(mockLandingPageRepo.observeLandingPagesByIds(any)).called(2);
+    });
+  });
+
+  group('LandingPageObserverCubit_stopObserving', () {
+    test('should stop observing when stopObserving is called', () {
+      // When
+      cubit.stopObserving();
+
+      // Then - should not throw and should reset internal state
+      expect(() => cubit.stopObserving(), returnsNormally);
     });
   });
 }

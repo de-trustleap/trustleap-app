@@ -10,11 +10,11 @@ import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/unregistered_promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
-import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/unregistered_promoter_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:rxdart/rxdart.dart';
 
 class PromoterRepositoryImplementation implements PromoterRepository {
   final FirebaseFirestore firestore;
@@ -72,23 +72,200 @@ class PromoterRepositoryImplementation implements PromoterRepository {
   }
 
   @override
-  Stream<Either<DatabaseFailure, CustomUser>> observeAllPromoters() async* {
-    final userDoc = await firestore.userDocument();
-    var requestedUser = await userDoc.get();
-    if (!requestedUser.exists) {
-      yield left(NotFoundFailure());
+  Stream<Either<DatabaseFailure, List<Promoter>>> observePromotersByIds({
+    required List<String> registeredIds,
+    required List<String> unregisteredIds,
+  }) async* {
+    if (registeredIds.isEmpty && unregisteredIds.isEmpty) {
+      yield right([]);
+      return;
     }
-    yield* userDoc.snapshots().map((snapshot) {
-      var document = snapshot.data() as Map<String, dynamic>;
-      var model = UserModel.fromFirestore(document, snapshot.id).toDomain();
-      return right<DatabaseFailure, CustomUser>(model);
-    }).handleError((e) {
-      if (e is FirebaseException) {
-        return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
-      } else {
-        return left(BackendFailure());
-      }
+
+    try {
+      // Create streams for both registered and unregistered promoters
+      Stream<List<Promoter>> registeredStream = registeredIds.isEmpty
+          ? Stream.value([])
+          : _observeRegisteredPromotersById(registeredIds);
+
+      Stream<List<Promoter>> unregisteredStream = unregisteredIds.isEmpty
+          ? Stream.value([])
+          : _observeUnregisteredPromotersById(unregisteredIds);
+
+      // Combine both streams
+      yield* Rx.combineLatest2(
+        registeredStream,
+        unregisteredStream,
+        (List<Promoter> registered, List<Promoter> unregistered) async {
+          // Combine both lists
+          final allPromoters = [...registered, ...unregistered];
+
+          // Fetch and assign landing pages
+          final promotersWithLandingPages =
+              await _fetchAndAssignLandingPagesForStream(allPromoters);
+
+          // Sort promoters
+          final sortedPromoters =
+              _sortPromotersForStream(promotersWithLandingPages);
+
+          return right<DatabaseFailure, List<Promoter>>(sortedPromoters);
+        },
+      ).asyncMap((future) => future).handleError((e) {
+        if (e is FirebaseException) {
+          return left(
+              FirebaseExceptionParser.getDatabaseException(code: e.code));
+        } else {
+          return left(BackendFailure());
+        }
+      });
+    } on FirebaseException catch (e) {
+      yield left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
+  }
+
+  Stream<List<Promoter>> _observeRegisteredPromotersById(List<String> ids) {
+    final usersCollection = firestore.collection("users");
+    final chunks = ids.slices(10);
+
+    if (chunks.length == 1) {
+      return usersCollection
+          .where(FieldPath.documentId, whereIn: chunks.first)
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs
+            .map(
+                (doc) => UserModel.fromFirestore(doc.data(), doc.id).toDomain())
+            .where((user) =>
+                user.deletesAt == null) // Filter out deactivated users
+            .map((user) => Promoter.fromUser(user))
+            .toList();
+      });
+    } else {
+      final chunkStreams = chunks
+          .map((chunk) => usersCollection
+              .where(FieldPath.documentId, whereIn: chunk)
+              .snapshots()
+              .map((snapshot) => snapshot.docs))
+          .toList();
+
+      return Rx.combineLatestList(chunkStreams).map((listOfDocLists) {
+        final List<Promoter> promoters = [];
+        for (var docList in listOfDocLists) {
+          for (var doc in docList) {
+            final user = UserModel.fromFirestore(doc.data(), doc.id).toDomain();
+            if (user.deletesAt == null) {
+              // Filter out deactivated users
+              promoters.add(Promoter.fromUser(user));
+            }
+          }
+        }
+        return promoters;
+      });
+    }
+  }
+
+  Stream<List<Promoter>> _observeUnregisteredPromotersById(List<String> ids) {
+    final unregisteredCollection =
+        firestore.collection("unregisteredPromoters");
+    final chunks = ids.slices(10);
+
+    if (chunks.length == 1) {
+      return unregisteredCollection
+          .where(FieldPath.documentId, whereIn: chunks.first)
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs
+            .map((doc) =>
+                UnregisteredPromoterModel.fromFirestore(doc.data(), doc.id)
+                    .toDomain())
+            .map((unregisteredPromoter) =>
+                Promoter.fromUnregisteredPromoter(unregisteredPromoter))
+            .toList();
+      });
+    } else {
+      final chunkStreams = chunks
+          .map((chunk) => unregisteredCollection
+              .where(FieldPath.documentId, whereIn: chunk)
+              .snapshots()
+              .map((snapshot) => snapshot.docs))
+          .toList();
+
+      return Rx.combineLatestList(chunkStreams).map((listOfDocLists) {
+        final List<Promoter> promoters = [];
+        for (var docList in listOfDocLists) {
+          for (var doc in docList) {
+            final unregisteredPromoter =
+                UnregisteredPromoterModel.fromFirestore(doc.data(), doc.id)
+                    .toDomain();
+            promoters
+                .add(Promoter.fromUnregisteredPromoter(unregisteredPromoter));
+          }
+        }
+        return promoters;
+      });
+    }
+  }
+
+  Future<List<Promoter>> _fetchAndAssignLandingPagesForStream(
+      List<Promoter> promoters) async {
+    final allLandingPageIDs = promoters
+        .expand((p) => p.landingPageIDs ?? [])
+        .whereType<String>()
+        .toSet()
+        .toList();
+
+    if (allLandingPageIDs.isEmpty) {
+      return promoters;
+    }
+
+    final failureOrLandingPages = await getLandingPages(allLandingPageIDs);
+    return failureOrLandingPages.fold(
+      (failure) =>
+          promoters, // Return promoters without landing pages on failure
+      (landingPages) {
+        final landingPageMap = {
+          for (var page in landingPages) page.id.value: page
+        };
+
+        return promoters.map((p) {
+          final pages = p.landingPageIDs
+              ?.map((id) => landingPageMap[id])
+              .whereType<LandingPage>()
+              .toList();
+          return p.copyWith(landingPages: pages);
+        }).toList();
+      },
+    );
+  }
+
+  List<Promoter> _sortPromotersForStream(List<Promoter> promoters) {
+    final List<Promoter> sortedPromoters = promoters;
+    sortedPromoters.sort((a, b) {
+      DateTime aDate = a.expiresAt ?? a.createdAt ?? DateTime(1970);
+      DateTime bDate = b.expiresAt ?? b.createdAt ?? DateTime(1970);
+      return bDate.compareTo(aDate);
     });
+    sortedPromoters.sort((a, b) {
+      bool aWarning = _showLandingPageWarningForStream(a);
+      bool bWarning = _showLandingPageWarningForStream(b);
+      if (aWarning == bWarning) return 0;
+      return aWarning ? -1 : 1;
+    });
+    sortedPromoters.sort((a, b) {
+      bool aActive = a.registered ?? false;
+      bool bActive = b.registered ?? false;
+      if (aActive == bActive) return 0;
+      return aActive ? -1 : 1;
+    });
+    return sortedPromoters;
+  }
+
+  bool _showLandingPageWarningForStream(Promoter promoter) {
+    if (promoter.landingPages == null || promoter.landingPages!.isEmpty) {
+      return true;
+    } else {
+      return promoter.landingPages!.every((landingPage) =>
+          landingPage.isActive == null || landingPage.isActive == false);
+    }
   }
 
   @override

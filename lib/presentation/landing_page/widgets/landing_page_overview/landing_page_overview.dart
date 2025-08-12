@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage_observer/landingpage_observer_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -31,7 +32,12 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
   @override
   void initState() {
     super.initState();
-    Modular.get<LandingPageObserverCubit>().ensureObserving();
+    final userObserverCubit = Modular.get<UserObserverCubit>();
+    final currentUserState = userObserverCubit.state;
+    if (currentUserState is UserObserverSuccess) {
+      Modular.get<LandingPageObserverCubit>()
+          .observeLandingPagesForUser(currentUserState.user);
+    }
   }
 
   void submitDeletion(String id, String parentUserID) {
@@ -168,113 +174,136 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
   Widget build(BuildContext context) {
     final landingPageCubit = Modular.get<LandingPageCubit>();
     final landingPageObserverCubit = Modular.get<LandingPageObserverCubit>();
+    final userObserverCubit = Modular.get<UserObserverCubit>();
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
-    return BlocConsumer<LandingPageCubit, LandingPageState>(
-      bloc: landingPageCubit,
-      listener: (context, state) {
-        if (state is DeleteLandingPageSuccessState) {
-          CustomSnackBar.of(context).showCustomSnackBar(
-              localization.landingpage_success_delete_snackbar_message);
-        } else if (state is DuplicateLandingPageSuccessState) {
-          CustomSnackBar.of(context).showCustomSnackBar(
-              localization.landingpage_snackbar_success_duplicated);
-        } else if (state is ToggleLandingPageActivitySuccessState) {
-          CustomSnackBar.of(context).showCustomSnackBar(state.isActive == true
-              ? localization.landingpage_snackbar_success_toggled_enabled
-              : localization.landingpage_snackbar_success_toggled_disabled);
-        } else if (state is ToggleLandingPageActivityFailureState) {
-          CustomSnackBar.of(context).showCustomSnackBar(
-              localization.landingpage_snackbar_failure_toggled,
-              SnackBarType.failure);
-        }
-      },
-      builder: (context, state) {
-        return BlocBuilder<LandingPageObserverCubit, LandingPageObserverState>(
-          bloc: landingPageObserverCubit,
-          builder: (context, observerState) {
-            if (state is DeleteLandingPageLoadingState ||
-                state is DuplicateLandingPageLoadingState ||
-                state is ToggleLandingPageActivityLoadingState) {
-              return const LoadingIndicator();
-            } else if (observerState is LandingPageObserverSuccess) {
-              if (showEmptyPage(
-                  observerState.landingPages, observerState.user)) {
-                return EmptyPage(
-                    icon: Icons.note_add,
-                    title: localization.landingpage_overview_empty_page_title,
-                    subTitle:
-                        localization.landingpage_overview_empty_page_subtitle,
-                    buttonTitle: localization.landingpage_create_buttontitle,
-                    onTap: () {
-                      CustomNavigator.navigate(RoutePaths.homePath +
-                          RoutePaths.landingPageCreatorPath);
-                    });
-              } else if (showCreateDefaultPage(
-                  observerState.landingPages, observerState.user)) {
-                return EmptyPage(
-                    icon: Icons.note_add,
-                    title:
-                        localization.landingpage_overview_no_default_page_title,
-                    subTitle: localization
-                        .landingpage_overview_no_default_page_subtitle,
-                    buttonTitle: localization
-                        .landingpage_overview_no_default_page_button_title,
-                    onTap: () {
-                      CustomNavigator.pushNamed(
-                          "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
-                          arguments: {
-                            "landingPage": null,
-                            "createDefaultPage": true,
-                          });
-                    });
-              } else {
-                return CardContainer(
-                    maxWidth: 1200,
-                    child: Column(
-                      children: [
-                        SelectableText(localization.landingpage_overview_title,
-                            style: themeData.textTheme.headlineLarge!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 24),
-                        LandingPageOverviewGrid(
-                            landingpages: observerState.landingPages,
-                            user: observerState.user,
-                            deletePressed: (landingPageID, parentUserID,
-                                    associatedUsersIDs) =>
-                                showDeleteAlertWithPromoterCheck(
-                                    landingPageID,
-                                    parentUserID,
-                                    associatedUsersIDs,
-                                    localization,
-                                    themeData),
-                            duplicatePressed: (landinPageID) =>
-                                submitDuplication(landinPageID),
-                            isActivePressed:
-                                (landinPageID, landingPageIsActive) =>
-                                    submitIsActive(
-                                        landinPageID,
-                                        landingPageIsActive,
-                                        observerState.user.id.value))
-                      ],
-                    ));
-              }
-            } else if (observerState is LandingPageObserverFailure) {
-              return ErrorView(
-                  title: localization.landingpage_overview_error_view_title,
-                  message: DatabaseFailureMapper.mapFailureMessage(
-                      observerState.failure, localization),
-                  callback: () => {
-                        Modular.get<LandingPageObserverCubit>()
-                            .ensureObserving()
-                      });
-            } else {
-              return const LoadingIndicator();
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<UserObserverCubit, UserObserverState>(
+          bloc: userObserverCubit,
+          listener: (context, state) {
+            if (state is UserObserverSuccess) {
+              landingPageObserverCubit.observeLandingPagesForUser(state.user);
             }
           },
-        );
-      },
+        ),
+      ],
+      child: BlocConsumer<LandingPageCubit, LandingPageState>(
+          bloc: landingPageCubit,
+          listener: (context, state) {
+            if (state is DeleteLandingPageSuccessState) {
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  localization.landingpage_success_delete_snackbar_message);
+            } else if (state is DuplicateLandingPageSuccessState) {
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  localization.landingpage_snackbar_success_duplicated);
+            } else if (state is ToggleLandingPageActivitySuccessState) {
+              CustomSnackBar.of(context).showCustomSnackBar(state.isActive ==
+                      true
+                  ? localization.landingpage_snackbar_success_toggled_enabled
+                  : localization.landingpage_snackbar_success_toggled_disabled);
+            } else if (state is ToggleLandingPageActivityFailureState) {
+              CustomSnackBar.of(context).showCustomSnackBar(
+                  localization.landingpage_snackbar_failure_toggled,
+                  SnackBarType.failure);
+            }
+          },
+          builder: (context, state) {
+            return BlocBuilder<LandingPageObserverCubit,
+                LandingPageObserverState>(
+              bloc: landingPageObserverCubit,
+              builder: (context, observerState) {
+                if (state is DeleteLandingPageLoadingState ||
+                    state is DuplicateLandingPageLoadingState ||
+                    state is ToggleLandingPageActivityLoadingState) {
+                  return const LoadingIndicator();
+                } else if (observerState is LandingPageObserverSuccess) {
+                  if (showEmptyPage(
+                      observerState.landingPages, observerState.user)) {
+                    return EmptyPage(
+                        icon: Icons.note_add,
+                        title:
+                            localization.landingpage_overview_empty_page_title,
+                        subTitle: localization
+                            .landingpage_overview_empty_page_subtitle,
+                        buttonTitle:
+                            localization.landingpage_create_buttontitle,
+                        onTap: () {
+                          CustomNavigator.navigate(RoutePaths.homePath +
+                              RoutePaths.landingPageCreatorPath);
+                        });
+                  } else if (showCreateDefaultPage(
+                      observerState.landingPages, observerState.user)) {
+                    return EmptyPage(
+                        icon: Icons.note_add,
+                        title: localization
+                            .landingpage_overview_no_default_page_title,
+                        subTitle: localization
+                            .landingpage_overview_no_default_page_subtitle,
+                        buttonTitle: localization
+                            .landingpage_overview_no_default_page_button_title,
+                        onTap: () {
+                          CustomNavigator.pushNamed(
+                              "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
+                              arguments: {
+                                "landingPage": null,
+                                "createDefaultPage": true,
+                              });
+                        });
+                  } else {
+                    return CardContainer(
+                        maxWidth: 1200,
+                        child: Column(
+                          children: [
+                            SelectableText(
+                                localization.landingpage_overview_title,
+                                style: themeData.textTheme.headlineLarge!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 24),
+                            LandingPageOverviewGrid(
+                                landingpages: observerState.landingPages,
+                                user: observerState.user,
+                                deletePressed: (landingPageID, parentUserID,
+                                        associatedUsersIDs) =>
+                                    showDeleteAlertWithPromoterCheck(
+                                        landingPageID,
+                                        parentUserID,
+                                        associatedUsersIDs,
+                                        localization,
+                                        themeData),
+                                duplicatePressed: (landinPageID) =>
+                                    submitDuplication(landinPageID),
+                                isActivePressed:
+                                    (landinPageID, landingPageIsActive) =>
+                                        submitIsActive(
+                                            landinPageID,
+                                            landingPageIsActive,
+                                            observerState.user.id.value))
+                          ],
+                        ));
+                  }
+                } else if (observerState is LandingPageObserverFailure) {
+                  return ErrorView(
+                      title: localization.landingpage_overview_error_view_title,
+                      message: DatabaseFailureMapper.mapFailureMessage(
+                          observerState.failure, localization),
+                      callback: () {
+                        final userObserverCubit =
+                            Modular.get<UserObserverCubit>();
+                        final currentUserState = userObserverCubit.state;
+                        if (currentUserState is UserObserverSuccess) {
+                          Modular.get<LandingPageObserverCubit>()
+                              .observeLandingPagesForUser(
+                                  currentUserState.user);
+                        }
+                      });
+                } else {
+                  return const LoadingIndicator();
+                }
+              },
+            );
+          }),
     );
   }
 }

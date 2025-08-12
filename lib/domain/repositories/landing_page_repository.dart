@@ -6,10 +6,10 @@ import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
 
 abstract class LandingPageRepository {
-  Stream<Either<DatabaseFailure, CustomUser>> observeAllLandingPages();
+  Stream<Either<DatabaseFailure, List<LandingPage>>> observeLandingPagesByIds(
+      List<String> ids);
 
   Future<Either<DatabaseFailure, List<LandingPage>>> getAllLandingPages(
       List<String> ids);
