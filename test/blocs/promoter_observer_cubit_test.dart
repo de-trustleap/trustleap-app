@@ -22,58 +22,6 @@ void main() {
     expect(promoterObserverCubit.state, PromoterObserverInitial());
   });
 
-  group("PromoterObserverCubit_ObserveAllPromoters", () {
-    final testUser = CustomUser(id: UniqueID.fromUniqueString("1"));
-    final promoters = [
-      Promoter(id: UniqueID.fromUniqueString("1")),
-      Promoter(id: UniqueID.fromUniqueString("2"))
-    ];
-
-    test("should call repo if function is called", () async {
-      // Given
-      when(mockPromoterRepo.observeAllPromoters()).thenAnswer((_) =>
-          Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
-              [right(testUser)]));
-      // When
-      promoterObserverCubit.observeAllPromoters();
-      await untilCalled(mockPromoterRepo.observeAllPromoters());
-      // Then
-      verify(mockPromoterRepo.observeAllPromoters());
-      verifyNoMoreInteractions(mockPromoterRepo);
-    });
-
-    test(
-        "should emit PromotersObserverLoading and then PromotersObserverSuccess when event is added",
-        () {
-      // Given
-      final expectedResult = [
-        PromotersObserverLoading(),
-        PromotersObserverSuccess(promoters: promoters)
-      ];
-      when(mockPromoterRepo.observeAllPromoters()).thenAnswer((_) =>
-          Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
-              [right(testUser)]));
-      // Then
-      expectLater(promoterObserverCubit.stream, emitsInOrder(expectedResult));
-      promoterObserverCubit.observeAllPromoters();
-    });
-
-    test(
-        "should emit PromotersObserverLoading and then PromotersObserverFailure when event is added and repo failed",
-        () {
-      // Given
-      final expectedResult = [
-        PromotersObserverLoading(),
-        PromotersObserverFailure(failure: BackendFailure())
-      ];
-      when(mockPromoterRepo.observeAllPromoters()).thenAnswer((_) =>
-          Stream<Either<DatabaseFailure, CustomUser>>.fromIterable(
-              [left(BackendFailure())]));
-      // Then
-      expectLater(promoterObserverCubit.stream, emitsInOrder(expectedResult));
-      promoterObserverCubit.observeAllPromoters();
-    });
-  });
 
   group("PromoterObserverCubit_SortPromoters", () {
     final promoters = [

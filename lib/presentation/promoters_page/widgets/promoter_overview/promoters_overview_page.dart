@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dart';
 import 'package:finanzbegleiter/application/promoter/promoter_observer/promoter_observer_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
@@ -55,7 +56,12 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   @override
   void initState() {
     super.initState();
-    Modular.get<PromoterObserverCubit>().observeAllPromoters();
+    final userObserverCubit = Modular.get<UserObserverCubit>();
+    final currentUserState = userObserverCubit.state;
+    if (currentUserState is UserObserverSuccess) {
+      Modular.get<PromoterObserverCubit>()
+          .observePromotersForUser(currentUserState.user);
+    }
     _controller.addListener(_onScroll);
     _filterStates = PromoterOverviewFilterStates();
   }
@@ -87,7 +93,8 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
       setState(() {
         lastIndexLoaded = 0;
         visiblePromoters = [];
-        searchResults = filter.onSearchQueryChanged(trimmedQuery, allPromoters, _selectedSearchOption);
+        searchResults = filter.onSearchQueryChanged(
+            trimmedQuery, allPromoters, _selectedSearchOption);
         unfilteredData = searchResults;
         searchResults = filter.onFilterChanged(_filterStates, searchResults);
       });
@@ -149,95 +156,117 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
     final localization = AppLocalizations.of(context);
     final promoterCubit = Modular.get<PromoterCubit>();
     final promoterObserverCubit = Modular.get<PromoterObserverCubit>();
-    return BlocConsumer<PromoterObserverCubit, PromoterObserverState>(
-      bloc: promoterObserverCubit,
-      listener: (context, state) {
-        if (state is PromotersObserverSuccess) {
-          resetPromoters(state.promoters);
-          Modular.get<PromoterObserverCubit>()
-              .getPromoters(allPromoters, lastIndexLoaded);
-        } else if (state is PromotersObserverGetElementsSuccess) {
-          if (state.promoters.isEmpty) {
-            lastIndexLoaded = visiblePromoters.length;
-          } else {
-            setState(() {
-              visiblePromoters.addAll(state.promoters);
-              lastIndexLoaded = visiblePromoters.length;
-              _isLoading = false;
-            });
-          }
-        }
-      },
-      builder: (context, state) {
-        return BlocConsumer<PromoterCubit, PromoterState>(
-            bloc: promoterCubit,
-            listener: (context, promoterState) {
-              if (promoterState is PromoterDeleteSuccessState) {
-                CustomSnackBar.of(context).showCustomSnackBar(localization
-                    .promoter_overview_delete_promoter_success_snackbar);
-                Modular.get<PromoterObserverCubit>().observeAllPromoters();
-              } else if (promoterState is PromoterDeleteFailureState) {
-                CustomSnackBar.of(context).showCustomSnackBar(
-                    localization
-                        .promoter_overview_delete_promoter_failure_snackbar,
-                    SnackBarType.failure);
+    final userObserverCubit = Modular.get<UserObserverCubit>();
+
+    return MultiBlocListener(
+        listeners: [
+          BlocListener<UserObserverCubit, UserObserverState>(
+            bloc: userObserverCubit,
+            listener: (context, state) {
+              if (state is UserObserverSuccess) {
+                promoterObserverCubit.observePromotersForUser(state.user);
               }
             },
-            builder: (context, promoterState) {
-              if (state is PromotersObserverGetElementsSuccess) {
-                if (state.promoters.isEmpty && visiblePromoters.isEmpty) {
-                  return EmptyPage(
-                      icon: Icons.person_add,
-                      title: localization.promoter_overview_empty_page_title,
-                      subTitle:
-                          localization.promoter_overview_empty_page_subtitle,
-                      buttonTitle: localization
-                          .promoter_overview_empty_page_button_title,
-                      onTap: () {
-                        widget.tabController.animateTo(1);
-                      });
-                } else {
-                  return headerWithChildren([
-                    const SizedBox(height: 24),
-                    if (_viewState == PromotersOverviewViewState.grid) ...[
-                      PromoterOverviewGrid(
-                        controller: _controller,
-                        promoters: visiblePromoters,
-                        deletePressed: (promoterId, isRegistered) =>
-                            showDeleteAlert(
-                                promoterId, isRegistered, localization),
-                      )
-                    ] else ...[
-                      PromoterOverviewList(
-                          controller: _controller, promoters: visiblePromoters)
-                    ]
-                  ]);
-                }
-              } else if (state is PromotersObserverSearchNotFound) {
-                return headerWithChildren([
-                  const SizedBox(height: 24),
-                  NoSearchResultsView(
-                      title: localization
-                          .promoter_overview_no_search_results_title,
-                      description: localization
-                          .promoter_overview_no_search_results_subtitle),
-                  const SizedBox(height: 24)
-                ]);
-              } else if (state is PromotersObserverFailure) {
-                return ErrorView(
-                    title: localization.promoter_overview_error_view_title,
-                    message: DatabaseFailureMapper.mapFailureMessage(
-                        state.failure, localization),
-                    callback: () => {
-                          Modular.get<PromoterObserverCubit>()
-                              .observeAllPromoters()
-                        });
+          ),
+        ],
+        child: BlocConsumer<PromoterObserverCubit, PromoterObserverState>(
+          bloc: promoterObserverCubit,
+          listener: (context, state) {
+            if (state is PromotersObserverSuccess) {
+              resetPromoters(state.promoters);
+              Modular.get<PromoterObserverCubit>()
+                  .getPromoters(allPromoters, lastIndexLoaded);
+            } else if (state is PromotersObserverGetElementsSuccess) {
+              if (state.promoters.isEmpty) {
+                lastIndexLoaded = visiblePromoters.length;
               } else {
-                return const LoadingIndicator();
+                setState(() {
+                  visiblePromoters.addAll(state.promoters);
+                  lastIndexLoaded = visiblePromoters.length;
+                  _isLoading = false;
+                });
               }
-            });
-      },
-    );
+            }
+          },
+          builder: (context, state) {
+            return BlocConsumer<PromoterCubit, PromoterState>(
+                bloc: promoterCubit,
+                listener: (context, promoterState) {
+                  if (promoterState is PromoterDeleteSuccessState) {
+                    CustomSnackBar.of(context).showCustomSnackBar(localization
+                        .promoter_overview_delete_promoter_success_snackbar);
+                  } else if (promoterState is PromoterDeleteFailureState) {
+                    CustomSnackBar.of(context).showCustomSnackBar(
+                        localization
+                            .promoter_overview_delete_promoter_failure_snackbar,
+                        SnackBarType.failure);
+                  }
+                },
+                builder: (context, promoterState) {
+                  if (promoterState is PromoterLoadingState) {
+                    return const LoadingIndicator();
+                  }
+                  if (state is PromotersObserverGetElementsSuccess) {
+                    if (state.promoters.isEmpty && visiblePromoters.isEmpty) {
+                      return EmptyPage(
+                          icon: Icons.person_add,
+                          title:
+                              localization.promoter_overview_empty_page_title,
+                          subTitle: localization
+                              .promoter_overview_empty_page_subtitle,
+                          buttonTitle: localization
+                              .promoter_overview_empty_page_button_title,
+                          onTap: () {
+                            widget.tabController.animateTo(1);
+                          });
+                    } else {
+                      return headerWithChildren([
+                        const SizedBox(height: 24),
+                        if (_viewState == PromotersOverviewViewState.grid) ...[
+                          PromoterOverviewGrid(
+                            controller: _controller,
+                            promoters: visiblePromoters,
+                            deletePressed: (promoterId, isRegistered) =>
+                                showDeleteAlert(
+                                    promoterId, isRegistered, localization),
+                          )
+                        ] else ...[
+                          PromoterOverviewList(
+                              controller: _controller,
+                              promoters: visiblePromoters)
+                        ]
+                      ]);
+                    }
+                  } else if (state is PromotersObserverSearchNotFound) {
+                    return headerWithChildren([
+                      const SizedBox(height: 24),
+                      NoSearchResultsView(
+                          title: localization
+                              .promoter_overview_no_search_results_title,
+                          description: localization
+                              .promoter_overview_no_search_results_subtitle),
+                      const SizedBox(height: 24)
+                    ]);
+                  } else if (state is PromotersObserverFailure) {
+                    return ErrorView(
+                        title: localization.promoter_overview_error_view_title,
+                        message: DatabaseFailureMapper.mapFailureMessage(
+                            state.failure, localization),
+                        callback: () {
+                          final userObserverCubit =
+                              Modular.get<UserObserverCubit>();
+                          final currentUserState = userObserverCubit.state;
+                          if (currentUserState is UserObserverSuccess) {
+                            Modular.get<PromoterObserverCubit>()
+                                .observePromotersForUser(currentUserState.user);
+                          }
+                        });
+                  } else {
+                    return const LoadingIndicator();
+                  }
+                });
+          },
+        ));
   }
 
   Widget headerWithChildren(List<Widget> children) {

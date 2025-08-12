@@ -1,4 +1,4 @@
-import "package:test/test.dart";
+import 'package:flutter_test/flutter_test.dart';
 import "package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart";
 import "package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart";
 import "package:flutter/material.dart";

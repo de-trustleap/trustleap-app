@@ -8,14 +8,11 @@ import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
-import 'package:finanzbegleiter/core/helpers/custom_claims.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
-import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
-import 'package:finanzbegleiter/infrastructure/extensions/firebase_helpers.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/landing_page_template_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_ai_generation_model.dart';
@@ -24,6 +21,7 @@ import 'package:finanzbegleiter/infrastructure/models/user_model.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_sorting_helper.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rxdart/rxdart.dart';
 
 class LandingPageRepositoryImplementation implements LandingPageRepository {
   final FirebaseFirestore firestore;
@@ -38,26 +36,78 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
       required this.appCheck});
 
   @override
-  Stream<Either<DatabaseFailure, CustomUser>> observeAllLandingPages() async* {
-    final userDoc = await firestore.userDocument();
-
-    var requestedUser = await userDoc.get();
-    if (!requestedUser.exists) {
-      yield left(NotFoundFailure());
+  Stream<Either<DatabaseFailure, List<LandingPage>>> observeLandingPagesByIds(
+      List<String> ids) async* {
+    if (ids.isEmpty) {
+      yield right([]);
+      return;
     }
-    final role = await CustomClaims(auth: firebaseAuth).getUserCustomClaims();
-    yield* userDoc.snapshots().map((snapshot) {
-      var document = snapshot.data() as Map<String, dynamic>;
-      var model = UserModel.fromFirestore(document, snapshot.id).toDomain();
-      model = model.copyWith(role: role);
-      return right<DatabaseFailure, CustomUser>(model);
-    }).handleError((e) {
-      if (e is FirebaseException) {
-        return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+
+    final landingPagesCollection = firestore.collection("landingPages");
+
+    try {
+      // Handle chunks of max 10 IDs due to Firestore whereIn limitation
+      final chunks = ids.slices(10);
+
+      if (chunks.length == 1) {
+        // Single chunk - simple stream
+        yield* landingPagesCollection
+            .where(FieldPath.documentId, whereIn: chunks.first)
+            .snapshots()
+            .map((snapshot) {
+          final List<LandingPage> landingPages = [];
+          for (var doc in snapshot.docs) {
+            var model =
+                LandingPageModel.fromFirestore(doc.data(), doc.id).toDomain();
+            landingPages.add(model);
+          }
+          final sortedPages = LandingPageRepositorySortingHelper()
+              .sortLandingPages(landingPages);
+          return right<DatabaseFailure, List<LandingPage>>(sortedPages);
+        }).handleError((e) {
+          if (e is FirebaseException) {
+            return left(
+                FirebaseExceptionParser.getDatabaseException(code: e.code));
+          } else {
+            return left(BackendFailure());
+          }
+        });
       } else {
-        return left(BackendFailure());
+        // Multiple chunks - combine all streams using rxdart
+        final chunkStreams = chunks
+            .map((chunk) => landingPagesCollection
+                .where(FieldPath.documentId, whereIn: chunk)
+                .orderBy("name", descending: true)
+                .snapshots()
+                .map((snapshot) => snapshot.docs))
+            .toList();
+
+        // Combine all chunk streams into one stream that emits when any chunk changes
+        yield* Rx.combineLatestList(chunkStreams).map((listOfDocLists) {
+          final List<LandingPage> landingPages = [];
+          // Flatten all document lists into one list
+          for (var docList in listOfDocLists) {
+            for (var doc in docList) {
+              var model =
+                  LandingPageModel.fromFirestore(doc.data(), doc.id).toDomain();
+              landingPages.add(model);
+            }
+          }
+          final sortedPages = LandingPageRepositorySortingHelper()
+              .sortLandingPages(landingPages);
+          return right<DatabaseFailure, List<LandingPage>>(sortedPages);
+        }).handleError((e) {
+          if (e is FirebaseException) {
+            return left(
+                FirebaseExceptionParser.getDatabaseException(code: e.code));
+          } else {
+            return left(BackendFailure());
+          }
+        });
       }
-    });
+    } on FirebaseException catch (e) {
+      yield left(FirebaseExceptionParser.getDatabaseException(code: e.code));
+    }
   }
 
   @override

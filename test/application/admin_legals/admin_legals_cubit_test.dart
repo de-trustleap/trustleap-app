@@ -1,4 +1,3 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/application/legals/admin_legals/admin_legals_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -21,6 +20,12 @@ void main() {
     cubit.close();
   });
 
+  group('AdminLegalsCubit_InitialState', () {
+    test('initial state should be AdminLegalsInitial', () {
+      expect(cubit.state, AdminLegalsInitial());
+    });
+  });
+
   group('AdminLegalsCubit_GetLegals', () {
     const testLegals = Legals(
       avv: "Test AVV",
@@ -28,59 +33,61 @@ void main() {
       termsAndCondition: "Test Terms",
     );
 
-    blocTest<AdminLegalsCubit, AdminLegalsState>(
-      'should emit [AdminGetLegalsLoadingState, AdminGetLegalsSuccessState] when getAllLegals succeeds',
-      build: () {
-        when(mockLegalsRepository.getAllLegals())
-            .thenAnswer((_) async => right(testLegals));
-        return cubit;
-      },
-      act: (cubit) => cubit.getLegals(),
-      expect: () => [
+    test('should call repo when getLegals is called', () async {
+      // Given
+      when(mockLegalsRepository.getAllLegals())
+          .thenAnswer((_) async => right(testLegals));
+
+      // When
+      cubit.getLegals();
+      await untilCalled(mockLegalsRepository.getAllLegals());
+
+      // Then
+      verify(mockLegalsRepository.getAllLegals()).called(1);
+      verifyNoMoreInteractions(mockLegalsRepository);
+    });
+
+    test('should emit [AdminGetLegalsLoadingState, AdminGetLegalsSuccessState] when getAllLegals succeeds', () {
+      // Given
+      final expectedResult = [
         AdminGetLegalsLoadingState(),
         AdminGetLegalsSuccessState(legals: testLegals),
-      ],
-      verify: (cubit) {
-        verify(mockLegalsRepository.getAllLegals()).called(1);
-        verifyNoMoreInteractions(mockLegalsRepository);
-      },
-    );
+      ];
+      when(mockLegalsRepository.getAllLegals())
+          .thenAnswer((_) async => right(testLegals));
 
-    blocTest<AdminLegalsCubit, AdminLegalsState>(
-      'should emit [AdminGetLegalsLoadingState, AdminGetLegalsFailureState] when getAllLegals fails',
-      build: () {
-        when(mockLegalsRepository.getAllLegals())
-            .thenAnswer((_) async => left(NotFoundFailure()));
-        return cubit;
-      },
-      act: (cubit) => cubit.getLegals(),
-      expect: () => [
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.getLegals();
+    });
+
+    test('should emit [AdminGetLegalsLoadingState, AdminGetLegalsFailureState] when getAllLegals fails', () {
+      // Given
+      final expectedResult = [
         AdminGetLegalsLoadingState(),
         AdminGetLegalsFailureState(failure: NotFoundFailure()),
-      ],
-      verify: (cubit) {
-        verify(mockLegalsRepository.getAllLegals()).called(1);
-        verifyNoMoreInteractions(mockLegalsRepository);
-      },
-    );
+      ];
+      when(mockLegalsRepository.getAllLegals())
+          .thenAnswer((_) async => left(NotFoundFailure()));
 
-    blocTest<AdminLegalsCubit, AdminLegalsState>(
-      'should emit [AdminGetLegalsLoadingState, AdminGetLegalsFailureState] when backend error occurs',
-      build: () {
-        when(mockLegalsRepository.getAllLegals())
-            .thenAnswer((_) async => left(BackendFailure()));
-        return cubit;
-      },
-      act: (cubit) => cubit.getLegals(),
-      expect: () => [
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.getLegals();
+    });
+
+    test('should emit [AdminGetLegalsLoadingState, AdminGetLegalsFailureState] when backend error occurs', () {
+      // Given
+      final expectedResult = [
         AdminGetLegalsLoadingState(),
         AdminGetLegalsFailureState(failure: BackendFailure()),
-      ],
-      verify: (cubit) {
-        verify(mockLegalsRepository.getAllLegals()).called(1);
-        verifyNoMoreInteractions(mockLegalsRepository);
-      },
-    );
+      ];
+      when(mockLegalsRepository.getAllLegals())
+          .thenAnswer((_) async => left(BackendFailure()));
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.getLegals();
+    });
   });
 
   group('AdminLegalsCubit_SaveLegals', () {
@@ -90,103 +97,93 @@ void main() {
       termsAndCondition: "Updated Terms",
     );
 
-    blocTest<AdminLegalsCubit, AdminLegalsState>(
-      'should emit [AdminSaveLegalsLoadingState, AdminSaveLegalsSuccessState] when saveLegals succeeds',
-      build: () {
-        when(mockLegalsRepository.saveLegals(testLegals))
-            .thenAnswer((_) async => right(unit));
-        return cubit;
-      },
-      act: (cubit) => cubit.saveLegals(testLegals),
-      expect: () => [
+    test('should call repo when saveLegals is called', () async {
+      // Given
+      when(mockLegalsRepository.saveLegals(testLegals))
+          .thenAnswer((_) async => right(unit));
+
+      // When
+      cubit.saveLegals(testLegals);
+      await untilCalled(mockLegalsRepository.saveLegals(testLegals));
+
+      // Then
+      verify(mockLegalsRepository.saveLegals(testLegals)).called(1);
+      verifyNoMoreInteractions(mockLegalsRepository);
+    });
+
+    test('should emit [AdminSaveLegalsLoadingState, AdminSaveLegalsSuccessState] when saveLegals succeeds', () {
+      // Given
+      final expectedResult = [
         AdminSaveLegalsLoadingState(),
         AdminSaveLegalsSuccessState(),
-      ],
-      verify: (cubit) {
-        verify(mockLegalsRepository.saveLegals(testLegals)).called(1);
-        verifyNoMoreInteractions(mockLegalsRepository);
-      },
-    );
+      ];
+      when(mockLegalsRepository.saveLegals(testLegals))
+          .thenAnswer((_) async => right(unit));
 
-    blocTest<AdminLegalsCubit, AdminLegalsState>(
-      'should emit [AdminSaveLegalsLoadingState, AdminSaveLegalsFailureState] when saveLegals fails',
-      build: () {
-        when(mockLegalsRepository.saveLegals(testLegals))
-            .thenAnswer((_) async => left(BackendFailure()));
-        return cubit;
-      },
-      act: (cubit) => cubit.saveLegals(testLegals),
-      expect: () => [
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.saveLegals(testLegals);
+    });
+
+    test('should emit [AdminSaveLegalsLoadingState, AdminSaveLegalsFailureState] when saveLegals fails', () {
+      // Given
+      final expectedResult = [
         AdminSaveLegalsLoadingState(),
         AdminSaveLegalsFailureState(failure: BackendFailure()),
-      ],
-      verify: (cubit) {
-        verify(mockLegalsRepository.saveLegals(testLegals)).called(1);
-        verifyNoMoreInteractions(mockLegalsRepository);
-      },
-    );
+      ];
+      when(mockLegalsRepository.saveLegals(testLegals))
+          .thenAnswer((_) async => left(BackendFailure()));
 
-    blocTest<AdminLegalsCubit, AdminLegalsState>(
-      'should emit [AdminSaveLegalsLoadingState, AdminSaveLegalsFailureState] when permission error occurs',
-      build: () {
-        when(mockLegalsRepository.saveLegals(testLegals))
-            .thenAnswer((_) async => left(PermissionDeniedFailure()));
-        return cubit;
-      },
-      act: (cubit) => cubit.saveLegals(testLegals),
-      expect: () => [
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.saveLegals(testLegals);
+    });
+
+    test('should emit [AdminSaveLegalsLoadingState, AdminSaveLegalsFailureState] when permission error occurs', () {
+      // Given
+      final expectedResult = [
         AdminSaveLegalsLoadingState(),
         AdminSaveLegalsFailureState(failure: PermissionDeniedFailure()),
-      ],
-      verify: (cubit) {
-        verify(mockLegalsRepository.saveLegals(testLegals)).called(1);
-        verifyNoMoreInteractions(mockLegalsRepository);
-      },
-    );
+      ];
+      when(mockLegalsRepository.saveLegals(testLegals))
+          .thenAnswer((_) async => left(PermissionDeniedFailure()));
 
-    blocTest<AdminLegalsCubit, AdminLegalsState>(
-      'should emit [AdminLegalsShowValidationState] when saveLegals is called with null',
-      build: () => cubit,
-      act: (cubit) => cubit.saveLegals(null),
-      expect: () => [
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.saveLegals(testLegals);
+    });
+
+    test('should emit [AdminLegalsShowValidationState] when saveLegals is called with null', () {
+      // Given
+      final expectedResult = [
         AdminLegalsShowValidationState(),
-      ],
-      verify: (cubit) {
-        verifyNever(mockLegalsRepository.saveLegals(any));
-      },
-    );
+      ];
 
-    blocTest<AdminLegalsCubit, AdminLegalsState>(
-      'should handle legals with null values correctly',
-      build: () {
-        const legalsWithNulls = Legals(
-          avv: null,
-          privacyPolicy: "Only Privacy Policy",
-          termsAndCondition: null,
-        );
-        when(mockLegalsRepository.saveLegals(legalsWithNulls))
-            .thenAnswer((_) async => right(unit));
-        return cubit;
-      },
-      act: (cubit) => cubit.saveLegals(const Legals(
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.saveLegals(null);
+      
+      // Verify no repo interaction
+      verifyNever(mockLegalsRepository.saveLegals(any));
+    });
+
+    test('should handle legals with null values correctly', () {
+      // Given
+      const legalsWithNulls = Legals(
         avv: null,
         privacyPolicy: "Only Privacy Policy",
         termsAndCondition: null,
-      )),
-      expect: () => [
+      );
+      final expectedResult = [
         AdminSaveLegalsLoadingState(),
         AdminSaveLegalsSuccessState(),
-      ],
-      verify: (cubit) {
-        verify(mockLegalsRepository.saveLegals(any)).called(1);
-        verifyNoMoreInteractions(mockLegalsRepository);
-      },
-    );
-  });
+      ];
+      when(mockLegalsRepository.saveLegals(legalsWithNulls))
+          .thenAnswer((_) async => right(unit));
 
-  group('AdminLegalsCubit_InitialState', () {
-    test('initial state should be AdminLegalsInitial', () {
-      expect(cubit.state, AdminLegalsInitial());
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.saveLegals(legalsWithNulls);
     });
   });
 }

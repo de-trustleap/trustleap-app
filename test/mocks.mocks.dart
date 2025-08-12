@@ -8142,15 +8142,17 @@ class MockLandingPageRepository extends _i1.Mock
   }
 
   @override
-  _i23.Stream<_i2.Either<_i32.DatabaseFailure, _i30.CustomUser>>
-      observeAllLandingPages() => (super.noSuchMethod(
+  _i23.Stream<_i2.Either<_i32.DatabaseFailure, List<_i39.LandingPage>>>
+      observeLandingPagesByIds(List<String>? ids) => (super.noSuchMethod(
             Invocation.method(
-              #observeAllLandingPages,
-              [],
+              #observeLandingPagesByIds,
+              [ids],
             ),
             returnValue: _i23.Stream<
-                _i2.Either<_i32.DatabaseFailure, _i30.CustomUser>>.empty(),
-          ) as _i23.Stream<_i2.Either<_i32.DatabaseFailure, _i30.CustomUser>>);
+                _i2
+                .Either<_i32.DatabaseFailure, List<_i39.LandingPage>>>.empty(),
+          ) as _i23.Stream<
+              _i2.Either<_i32.DatabaseFailure, List<_i39.LandingPage>>>);
 
   @override
   _i23.Future<
@@ -8472,15 +8474,24 @@ class MockPromoterRepository extends _i1.Mock
           ) as _i23.Future<_i2.Either<_i32.DatabaseFailure, bool>>);
 
   @override
-  _i23.Stream<_i2.Either<_i32.DatabaseFailure, _i30.CustomUser>>
-      observeAllPromoters() => (super.noSuchMethod(
+  _i23.Stream<_i2.Either<_i32.DatabaseFailure, List<_i42.Promoter>>>
+      observePromotersByIds({
+    required List<String>? registeredIds,
+    required List<String>? unregisteredIds,
+  }) =>
+          (super.noSuchMethod(
             Invocation.method(
-              #observeAllPromoters,
+              #observePromotersByIds,
               [],
+              {
+                #registeredIds: registeredIds,
+                #unregisteredIds: unregisteredIds,
+              },
             ),
             returnValue: _i23.Stream<
-                _i2.Either<_i32.DatabaseFailure, _i30.CustomUser>>.empty(),
-          ) as _i23.Stream<_i2.Either<_i32.DatabaseFailure, _i30.CustomUser>>);
+                _i2.Either<_i32.DatabaseFailure, List<_i42.Promoter>>>.empty(),
+          ) as _i23
+              .Stream<_i2.Either<_i32.DatabaseFailure, List<_i42.Promoter>>>);
 
   @override
   _i23.Future<_i2.Either<_i32.DatabaseFailure, List<_i30.CustomUser>>>
@@ -11732,15 +11743,6 @@ class MockPromoterCubit extends _i1.Mock implements _i68.PromoterCubit {
       ) as _i12.PromoterRepository);
 
   @override
-  _i7.UserRepository get userRepo => (super.noSuchMethod(
-        Invocation.getter(#userRepo),
-        returnValue: _FakeUserRepository_11(
-          this,
-          Invocation.getter(#userRepo),
-        ),
-      ) as _i7.UserRepository);
-
-  @override
   _i13.LandingPageRepository get landingPagesRepo => (super.noSuchMethod(
         Invocation.getter(#landingPagesRepo),
         returnValue: _FakeLandingPageRepository_17(
@@ -11776,15 +11778,6 @@ class MockPromoterCubit extends _i1.Mock implements _i68.PromoterCubit {
         Invocation.method(
           #registerPromoter,
           [promoter],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void getCurrentUser() => super.noSuchMethod(
-        Invocation.method(
-          #getCurrentUser,
-          [],
         ),
         returnValueForMissingStub: null,
       );
@@ -11922,11 +11915,11 @@ class MockPromoterObserverCubit extends _i1.Mock
   }
 
   @override
-  _i12.PromoterRepository get recommendationsRepo => (super.noSuchMethod(
-        Invocation.getter(#recommendationsRepo),
+  _i12.PromoterRepository get promoterRepo => (super.noSuchMethod(
+        Invocation.getter(#promoterRepo),
         returnValue: _FakePromoterRepository_16(
           this,
-          Invocation.getter(#recommendationsRepo),
+          Invocation.getter(#promoterRepo),
         ),
       ) as _i12.PromoterRepository);
 
@@ -11952,10 +11945,10 @@ class MockPromoterObserverCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void observeAllPromoters() => super.noSuchMethod(
+  void observePromotersForUser(_i30.CustomUser? user) => super.noSuchMethod(
         Invocation.method(
-          #observeAllPromoters,
-          [],
+          #observePromotersForUser,
+          [user],
         ),
         returnValueForMissingStub: null,
       );
@@ -11988,17 +11981,6 @@ class MockPromoterObserverCubit extends _i1.Mock
             results,
             last,
           ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void promotersObserverUpdated(
-          _i2.Either<_i32.DatabaseFailure, _i30.CustomUser>? failureOrUser) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #promotersObserverUpdated,
-          [failureOrUser],
         ),
         returnValueForMissingStub: null,
       );
@@ -12142,15 +12124,6 @@ class MockRecommendationsCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void getUser() => super.noSuchMethod(
-        Invocation.method(
-          #getUser,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   void getParentUser(String? parentID) => super.noSuchMethod(
         Invocation.method(
           #getParentUser,
@@ -12271,21 +12244,10 @@ class MockLandingPageObserverCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void observeAllLandingPages() => super.noSuchMethod(
+  void observeLandingPagesForUser(_i30.CustomUser? user) => super.noSuchMethod(
         Invocation.method(
-          #observeAllLandingPages,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void landingPageObserverUpdated(
-          _i2.Either<_i32.DatabaseFailure, _i30.CustomUser>? failureOrUser) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #landingPageObserverUpdated,
-          [failureOrUser],
+          #observeLandingPagesForUser,
+          [user],
         ),
         returnValueForMissingStub: null,
       );
@@ -13493,20 +13455,20 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void getUser() => super.noSuchMethod(
-        Invocation.method(
-          #getUser,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   void initializeFavorites(List<String>? favoriteRecommendationIDs) =>
       super.noSuchMethod(
         Invocation.method(
           #initializeFavorites,
           [favoriteRecommendationIDs],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setCurrentUser(_i30.CustomUser? user) => super.noSuchMethod(
+        Invocation.method(
+          #setCurrentUser,
+          [user],
         ),
         returnValueForMissingStub: null,
       );

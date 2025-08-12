@@ -2,10 +2,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
-import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
@@ -13,18 +13,55 @@ import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 part 'promoter_observer_state.dart';
 
 class PromoterObserverCubit extends Cubit<PromoterObserverState> {
-  final PromoterRepository recommendationsRepo;
-  StreamSubscription<Either<DatabaseFailure, CustomUser>>? _usersStreamSub;
+  final PromoterRepository promoterRepo;
+  StreamSubscription<Either<DatabaseFailure, List<Promoter>>>?
+      _promotersStreamSub;
+  String? _currentUserId;
+  List<String> _currentRegisteredIds = [];
+  List<String> _currentUnregisteredIds = [];
 
   PromoterObserverCubit(
-    this.recommendationsRepo,
+    this.promoterRepo,
   ) : super(PromoterObserverInitial());
 
-  void observeAllPromoters() async {
+  void observePromotersForUser(CustomUser user) async {
+    final registeredIds = user.registeredPromoterIDs ?? [];
+    final unregisteredIds = user.unregisteredPromoterIDs ?? [];
+
+    // Check if we need to restart the observer (different user or different IDs)
+    if (_currentUserId == user.id.value &&
+        _promotersStreamSub != null &&
+        const ListEquality().equals(_currentRegisteredIds, registeredIds) &&
+        const ListEquality().equals(_currentUnregisteredIds, unregisteredIds)) {
+      return;
+    }
+    _currentUserId = user.id.value;
+    _currentRegisteredIds = [...registeredIds];
+    _currentUnregisteredIds = [...unregisteredIds];
+
+    // Start new observation
     emit(PromotersObserverLoading());
-    await _usersStreamSub?.cancel();
-    _usersStreamSub = recommendationsRepo.observeAllPromoters().listen(
-        (failureOrSuccess) => promotersObserverUpdated(failureOrSuccess));
+    await _promotersStreamSub?.cancel();
+
+    if (registeredIds.isNotEmpty || unregisteredIds.isNotEmpty) {
+      _promotersStreamSub = promoterRepo
+          .observePromotersByIds(
+            registeredIds: registeredIds,
+            unregisteredIds: unregisteredIds,
+          )
+          .listen(
+              (failureOrSuccess) => _promoterObserverUpdated(failureOrSuccess));
+    } else {
+      emit(const PromotersObserverSuccess(promoters: []));
+    }
+  }
+
+  void _promoterObserverUpdated(
+      Either<DatabaseFailure, List<Promoter>> failureOrPromoters) {
+    failureOrPromoters.fold(
+      (failure) => emit(PromotersObserverFailure(failure: failure)),
+      (promoters) => emit(PromotersObserverSuccess(promoters: promoters)),
+    );
   }
 
   void getPromoters(List<Promoter> promoters, int last) {
@@ -43,80 +80,6 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
     } else {
       emit(PromotersObserverGetElementsSuccess(promoters: visiblePromoters));
     }
-  }
-
-  void promotersObserverUpdated(
-      Either<DatabaseFailure, CustomUser> failureOrUser) async {
-    emit(PromotersObserverLoading());
-    failureOrUser
-        .fold((failure) => emit(PromotersObserverFailure(failure: failure)),
-            (user) async {
-      final registeredPromoterIDs = user.registeredPromoterIDs;
-      final unregisteredPromoterIDs = user.unregisteredPromoterIDs;
-      List<Promoter> promoters = [];
-      if (registeredPromoterIDs != null && registeredPromoterIDs.isNotEmpty) {
-        final failureOrSuccess = await recommendationsRepo
-            .getRegisteredPromoters(registeredPromoterIDs);
-        failureOrSuccess
-            .fold((failure) => emit(PromotersObserverFailure(failure: failure)),
-                (registeredPromoters) {
-          for (final registeredPromoter in registeredPromoters) {
-            promoters.add(Promoter.fromUser(registeredPromoter));
-          }
-        });
-      }
-      if (unregisteredPromoterIDs != null &&
-          unregisteredPromoterIDs.isNotEmpty) {
-        final failureOrSuccess = await recommendationsRepo
-            .getUnregisteredPromoters(unregisteredPromoterIDs);
-        failureOrSuccess
-            .fold((failure) => emit(PromotersObserverFailure(failure: failure)),
-                (unregisteredPromoters) {
-          for (final unregisteredPromoter in unregisteredPromoters) {
-            promoters
-                .add(Promoter.fromUnregisteredPromoter(unregisteredPromoter));
-          }
-        });
-      }
-      promoters = await _fetchAndAssignLandingPages(promoters);
-      promoters = sortPromoters(promoters);
-      emit(PromotersObserverSuccess(promoters: promoters));
-    });
-  }
-
-  Future<List<Promoter>> _fetchAndAssignLandingPages(
-      List<Promoter> promoters) async {
-    final allLandingPageIDs = promoters
-        .expand((p) => p.landingPageIDs ?? [])
-        .whereType<String>()
-        .toSet()
-        .toList();
-    if (allLandingPageIDs.isEmpty) {
-      return Future.value(promoters);
-    }
-    final failureOrLandingPages =
-        await recommendationsRepo.getLandingPages(allLandingPageIDs);
-    return failureOrLandingPages.fold(
-      (failure) {
-        emit(PromotersObserverFailure(failure: failure));
-        return Future.value(promoters);
-      },
-      (landingPages) {
-        final landingPageMap = {
-          for (var page in landingPages) page.id.value: page
-        };
-
-        final updatedPromoters = promoters.map((p) {
-          final pages = p.landingPageIDs
-              ?.map((id) => landingPageMap[id])
-              .whereType<LandingPage>()
-              .toList();
-          return p.copyWith(landingPages: pages);
-        }).toList();
-
-        return Future.value(updatedPromoters);
-      },
-    );
   }
 
   List<Promoter> sortPromoters(List<Promoter> promoters) {
@@ -151,14 +114,16 @@ class PromoterObserverCubit extends Cubit<PromoterObserverState> {
   }
 
   void stopObserving() {
-    _usersStreamSub?.cancel();
-    _usersStreamSub = null;
-    emit(PromoterObserverInitial());
+    _promotersStreamSub?.cancel();
+    _promotersStreamSub = null;
+    _currentUserId = null;
+    _currentRegisteredIds = [];
+    _currentUnregisteredIds = [];
   }
 
   @override
   Future<void> close() async {
-    await _usersStreamSub?.cancel();
+    await _promotersStreamSub?.cancel();
     return super.close();
   }
 }
