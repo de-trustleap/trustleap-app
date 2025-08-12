@@ -14,63 +14,73 @@ part 'landingpage_observer_state.dart';
 
 class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
   final LandingPageRepository landingPagesRepo;
-  StreamSubscription<Either<DatabaseFailure, CustomUser>>? _usersStreamSub;
-  bool _isObserving = false;
+  StreamSubscription<Either<DatabaseFailure, List<LandingPage>>>?
+      _landingPagesStreamSub;
+  String? _currentUserId;
+  List<String> _currentLandingPageIds = [];
 
   LandingPageObserverCubit(
     this.landingPagesRepo,
   ) : super(LandingPageObserverInitial());
 
-  void observeAllLandingPages() async {
+  void observeLandingPagesForUser(CustomUser user) async {
+    // Get all landing page IDs including default page
+    var landingPageIds = <String>[...(user.landingPageIDs ?? [])];
+    if (user.defaultLandingPageID != null && !landingPageIds.contains(user.defaultLandingPageID!)) {
+      landingPageIds.add(user.defaultLandingPageID!);
+    }
+    
+    // Check if we need to restart the observer (different user or different IDs)
+    final currentSorted = [..._currentLandingPageIds]..sort();
+    final newSorted = [...landingPageIds]..sort();
+    
+    if (_currentUserId == user.id.value && 
+        _landingPagesStreamSub != null &&
+        currentSorted.toString() == newSorted.toString()) {
+      // Same user and same IDs - stream is already observing correctly
+      return;
+    }
+    
+    // Update tracking variables
+    _currentUserId = user.id.value;
+    _currentLandingPageIds = landingPageIds;
+    
+    // Start new observation
     emit(LandingPageObserverLoading());
-    await _usersStreamSub?.cancel();
-    _usersStreamSub = null;
-    _usersStreamSub = landingPagesRepo.observeAllLandingPages().listen(
-        (failureOrSuccess) => landingPageObserverUpdated(failureOrSuccess));
-    _isObserving = true;
-  }
+    await _landingPagesStreamSub?.cancel();
 
-  void ensureObserving() {
-    if (!_isObserving && _usersStreamSub == null) {
-      observeAllLandingPages();
+    if (landingPageIds.isNotEmpty) {
+      _landingPagesStreamSub = landingPagesRepo
+          .observeLandingPagesByIds(landingPageIds)
+          .listen((failureOrSuccess) =>
+              _landingPageObserverUpdated(failureOrSuccess, user));
+    } else {
+      emit(LandingPageObserverSuccess(landingPages: const [], user: user));
     }
   }
 
-  void landingPageObserverUpdated(
-      Either<DatabaseFailure, CustomUser> failureOrUser) async {
-    emit(LandingPageObserverLoading());
-    failureOrUser
-        .fold((failure) => emit(LandingPageObserverFailure(failure: failure)),
-            (user) async {
-      var landingPagesIDs = user.landingPageIDs ?? [];
-      if (user.defaultLandingPageID != null) {
-        landingPagesIDs.add(user.defaultLandingPageID!);
-      }
-      if (landingPagesIDs.isNotEmpty) {
-        final failureOrSuccess =
-            await landingPagesRepo.getAllLandingPages(landingPagesIDs);
-        failureOrSuccess.fold((failure) {
-          emit(LandingPageObserverFailure(failure: failure));
-        }, (landingPages) {
-          PaintingBinding.instance.imageCache.clear();
-          emit(LandingPageObserverSuccess(
-              landingPages: landingPages, user: user));
-        });
-      } else {
-        emit(LandingPageObserverSuccess(landingPages: const [], user: user));
-      }
-    });
+  void _landingPageObserverUpdated(
+      Either<DatabaseFailure, List<LandingPage>> failureOrLandingPages,
+      CustomUser user) {
+    failureOrLandingPages.fold(
+      (failure) => emit(LandingPageObserverFailure(failure: failure)),
+      (landingPages) {
+        PaintingBinding.instance.imageCache.clear();
+        emit(LandingPageObserverSuccess(landingPages: landingPages, user: user));
+      },
+    );
   }
 
   void stopObserving() {
-    _usersStreamSub?.cancel();
-    _usersStreamSub = null;
-    _isObserving = false;
+    _landingPagesStreamSub?.cancel();
+    _landingPagesStreamSub = null;
+    _currentUserId = null;
+    _currentLandingPageIds = [];
   }
 
   @override
   Future<void> close() async {
-    await _usersStreamSub?.cancel();
+    await _landingPagesStreamSub?.cancel();
     return super.close();
   }
 }

@@ -17,6 +17,9 @@ final class LandingPageObserverFailure extends LandingPageObserverState {
   const LandingPageObserverFailure({
     required this.failure,
   });
+
+  @override
+  List<Object> get props => [failure];
 }
 
 final class LandingPageObserverSuccess extends LandingPageObserverState {
@@ -25,4 +28,7 @@ final class LandingPageObserverSuccess extends LandingPageObserverState {
 
   const LandingPageObserverSuccess(
       {required this.landingPages, required this.user});
+
+  @override
+  List<Object> get props => [landingPages, user];
 }
