@@ -4335,6 +4335,18 @@ abstract class AppLocalizations {
   /// **'Enter Terms and Conditions...'**
   String get admin_legals_terms_placeholder;
 
+  /// Label for Imprint field
+  ///
+  /// In en, this message translates to:
+  /// **'Imprint'**
+  String get admin_legals_imprint_label;
+
+  /// Placeholder for Imprint text field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Imprint...'**
+  String get admin_legals_imprint_placeholder;
+
   /// Save button text
   ///
   /// In en, this message translates to:

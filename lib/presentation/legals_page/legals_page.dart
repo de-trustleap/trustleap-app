@@ -27,8 +27,10 @@ class _LegalsPageState extends State<LegalsPage> {
     final currentRoute = Modular.to.path;
     if (currentRoute.contains("privacy-policy")) {
       legalsType = LegalsType.privacyPolicy;
-    } else {
+    } else if (currentRoute.contains("terms-and-condition")) {
       legalsType = LegalsType.termsAndCondition;
+    } else {
+      legalsType = LegalsType.imprint;
     }
     Modular.get<LegalsCubit>().getLegals(legalsType);
   }

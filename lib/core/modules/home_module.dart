@@ -61,6 +61,8 @@ class HomeModule extends Module {
         child: (_) => const LegalsPage());
     r.child("${Modular.initialRoute}${RoutePaths.termsAndCondition}",
         child: (_) => const LegalsPage());
+    r.child("${Modular.initialRoute}${RoutePaths.imprint}",
+        child: (_) => const LegalsPage());
     r.wildcard(child: (_) => const DashboardPage());
   }
 }

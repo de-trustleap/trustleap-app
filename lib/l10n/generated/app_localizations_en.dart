@@ -2519,6 +2519,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get admin_legals_terms_placeholder => 'Enter Terms and Conditions...';
 
   @override
+  String get admin_legals_imprint_label => 'Imprint';
+
+  @override
+  String get admin_legals_imprint_placeholder => 'Enter Imprint...';
+
+  @override
   String get admin_legals_save_button => 'Save';
 
   @override

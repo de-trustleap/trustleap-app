@@ -2905,6 +2905,14 @@
     "@admin_legals_terms_placeholder": {
         "description": "Placeholder for Terms text field"
     },
+    "admin_legals_imprint_label": "Imprint",
+    "@admin_legals_imprint_label": {
+        "description": "Label for Imprint field"
+    },
+    "admin_legals_imprint_placeholder": "Enter Imprint...",
+    "@admin_legals_imprint_placeholder": {
+        "description": "Placeholder for Imprint text field"
+    },
     "admin_legals_save_button": "Save",
     "@admin_legals_save_button": {
         "description": "Save button text"

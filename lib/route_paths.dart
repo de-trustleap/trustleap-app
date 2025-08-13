@@ -25,6 +25,7 @@ class RoutePaths {
   static const String passwordReset = "/password-reset";
   static const String privacyPolicy = "/privacy-policy";
   static const String termsAndCondition = "/terms-and-condition";
+  static const String imprint = "/imprint";
 
   static const String landingPageBuilderPath = "/landingpage-builder";
 

@@ -90,7 +90,7 @@ enum PageBuilderSectionLayout { row, column, none }
 
 enum PageBuilderSpacingType { padding, margin }
 
-enum LegalsType { privacyPolicy, termsAndCondition }
+enum LegalsType { privacyPolicy, termsAndCondition, imprint }
 
 enum LogLevel { debug, info, warn, error }
 

@@ -34,6 +34,8 @@ class LegalsRepositoryImplementation implements LegalsRepository {
             return right(legals.privacyPolicy);
           case LegalsType.termsAndCondition:
             return right(legals.termsAndCondition);
+          case LegalsType.imprint:
+            return right(legals.imprint);
         }
       }
     } on FirebaseException catch (e) {
@@ -67,7 +69,8 @@ class LegalsRepositoryImplementation implements LegalsRepository {
         "appCheckToken": appCheckToken,
         "avv": model.avv,
         "privacyPolicy": model.privacyPolicy,
-        "termsAndConditions": model.termsAndCondition
+        "termsAndConditions": model.termsAndCondition,
+        "imprint": model.imprint
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {

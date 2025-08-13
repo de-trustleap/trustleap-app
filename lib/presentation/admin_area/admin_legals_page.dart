@@ -24,6 +24,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
   final avvController = TextEditingController();
   final privacyPolicyController = TextEditingController();
   final termsAndConditionController = TextEditingController();
+  final imprintController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool validationHasError = false;
   bool showError = false;
@@ -40,6 +41,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
     avvController.dispose();
     privacyPolicyController.dispose();
     termsAndConditionController.dispose();
+    imprintController.dispose();
     super.dispose();
   }
 
@@ -56,7 +58,8 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
       Modular.get<AdminLegalsCubit>().saveLegals(Legals(
           avv: avvController.text.trim(),
           privacyPolicy: privacyPolicyController.text.trim(),
-          termsAndCondition: termsAndConditionController.text.trim()));
+          termsAndCondition: termsAndConditionController.text.trim(),
+          imprint: imprintController.text.trim()));
     } else {
       validationHasError = true;
       Modular.get<AdminLegalsCubit>().saveLegals(null);
@@ -79,6 +82,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
             privacyPolicyController.text = state.legals.privacyPolicy ?? '';
             termsAndConditionController.text =
                 state.legals.termsAndCondition ?? '';
+            imprintController.text = state.legals.imprint ?? '';
           } else if (state is AdminGetLegalsFailureState) {
             errorMessage = DatabaseFailureMapper.mapFailureMessage(
                 state.failure, localization);
@@ -86,6 +90,7 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
             avvController.clear();
             privacyPolicyController.clear();
             termsAndConditionController.clear();
+            imprintController.clear();
           } else if (state is AdminSaveLegalsSuccessState) {
             showError = false;
             CustomSnackBar.of(context).showCustomSnackBar(
@@ -169,6 +174,23 @@ class _AdminLegalsPageState extends State<AdminLegalsPage> {
                               controller: termsAndConditionController,
                               maxWidth: double.infinity,
                               placeholder: localization.admin_legals_terms_placeholder,
+                              maxLines: 15,
+                              minLines: 15,
+                              disabled: false,
+                              onChanged: resetError,
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              localization.admin_legals_imprint_label,
+                              style: themeData.textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            FormTextfield(
+                              controller: imprintController,
+                              maxWidth: double.infinity,
+                              placeholder: localization.admin_legals_imprint_placeholder,
                               maxLines: 15,
                               minLines: 15,
                               disabled: false,
