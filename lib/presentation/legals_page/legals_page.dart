@@ -25,7 +25,7 @@ class _LegalsPageState extends State<LegalsPage> {
     super.initState();
 
     final currentRoute = Modular.to.path;
-    if (currentRoute.contains("privacyPolicy")) {
+    if (currentRoute.contains("privacy-policy")) {
       legalsType = LegalsType.privacyPolicy;
     } else {
       legalsType = LegalsType.termsAndCondition;

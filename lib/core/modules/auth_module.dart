@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/core/modules/admin_guard.dart';
 import 'package:finanzbegleiter/core/modules/admin_module.dart';
 import 'package:finanzbegleiter/core/modules/auth_guard.dart';
 import 'package:finanzbegleiter/core/modules/home_module.dart';
+import 'package:finanzbegleiter/core/modules/legals_guard.dart';
 import 'package:finanzbegleiter/presentation/authentication/login_page.dart';
 import 'package:finanzbegleiter/presentation/authentication/password_forgotten_page.dart';
 import 'package:finanzbegleiter/presentation/authentication/register_page.dart';
@@ -18,8 +19,8 @@ class AuthModule extends Module {
             registrationCode: r.args.queryParams["registrationCode"]));
     r.child(RoutePaths.passwordReset,
         child: (_) => const PasswordForgottenPage());
-    r.child(RoutePaths.privacyPolicy, child: (_) => const LegalsPage());
-    r.child(RoutePaths.termsAndCondition, child: (_) => const LegalsPage());
+    r.child(RoutePaths.privacyPolicy, child: (_) => const LegalsPage(), guards: [LegalsGuard(RoutePaths.privacyPolicy)]);
+    r.child(RoutePaths.termsAndCondition, child: (_) => const LegalsPage(), guards: [LegalsGuard(RoutePaths.termsAndCondition)]);
     r.module(RoutePaths.homePath, module: HomeModule(), guards: [AuthGuard()]);
     r.module(RoutePaths.adminPath,
         module: AdminModule(), guards: [AdminGuard()]);

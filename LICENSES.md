@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2025-07-30 19:56:10
+Last updated: 2025-08-12 13:53:23
 
 ---
 
@@ -34,18 +34,9 @@ These are the packages explicitly listed in your pubspec.yaml:
 - **Description**: Custom event transformers inspired by ember concurrency. Built to be used with
   the bloc state management package.
 
-### bloc_test
-
-- **Version**: 10.0.0
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://bloclibrary.dev>
-- **Description**: A testing library which makes it easy to test blocs. Built to be used with the
-  bloc state management package.
-
 ### build_runner
 
-- **Version**: 2.6.0
+- **Version**: 2.6.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_runner>
@@ -140,7 +131,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_auth
 
-- **Version**: 6.0.0
+- **Version**: 6.0.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/auth>
@@ -244,7 +235,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### http
 
-- **Version**: 1.4.0
+- **Version**: 1.5.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/http/tree/master/pkgs/http>
@@ -278,15 +269,6 @@ These are the packages explicitly listed in your pubspec.yaml:
 - **Description**: A mock framework inspired by Mockito with APIs for Fakes, Mocks, behavior
   verification, and stubbing.
 
-### mocktail
-
-- **Version**: 1.0.4
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/felangel/mocktail/tree/main/packages/mocktail>
-- **Description**: A Dart mock library which simplifies mocking with null safety support and no
-  manual mocks or code generation.
-
 ### responsive_framework
 
 - **Version**: 1.5.1
@@ -307,7 +289,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### sentry_flutter
 
-- **Version**: 9.5.0
+- **Version**: 9.6.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/flutter/>
@@ -355,7 +337,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### _fe_analyzer_shared
 
-- **Version**: 86.0.0
+- **Version**: 88.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/_fe_analyzer_shared>
@@ -371,7 +353,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### analyzer
 
-- **Version**: 8.0.0
+- **Version**: 8.1.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/analyzer>
@@ -422,7 +404,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### build
 
-- **Version**: 3.0.0
+- **Version**: 3.0.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build>
@@ -446,7 +428,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### build_resolvers
 
-- **Version**: 3.0.0
+- **Version**: 3.0.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_resolvers>
@@ -454,7 +436,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### build_runner_core
 
-- **Version**: 9.2.0
+- **Version**: 9.2.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_runner_core>
@@ -472,7 +454,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### built_value
 
-- **Version**: 8.11.0
+- **Version**: 8.11.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/google/built_value.dart/tree/master/built_value>
@@ -528,15 +510,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://www.github.com/kranfix/dart-circularbuffer>
 - **Description**: A Dart Circular Buffer container based on List with a fixed capacity.
-
-### cli_config
-
-- **Version**: 0.2.0
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/cli_config>
-- **Description**: A library to take config values from configuration files, CLI arguments, and
-  environment variables.
 
 ### clock
 
@@ -595,14 +568,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: Utilities for converting between data representations. Provides a number of
   Sink, Codec, Decoder, and Encoder types.
 
-### coverage
-
-- **Version**: 1.15.0
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/coverage>
-- **Description**: Coverage data manipulation and formatting
-
 ### cross_file
 
 - **Version**: 0.3.4+2
@@ -640,7 +605,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### dart_style
 
-- **Version**: 3.1.1
+- **Version**: 3.1.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/dart_style>
@@ -681,15 +646,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://dcli.onepub.dev>
 - **Description**: Provides Terminal/Ansi functions used by DCli the Dart Console SDK but is also
   intended to be used directly.
-
-### diff_match_patch
-
-- **Version**: 0.4.1
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/jheyne/diff-match-patch>
-- **Description**: The Diff Match and Patch libraries offer robust algorithms to perform the
-  operations required for synchronizing plain text.
 
 ### fake_async
 
@@ -768,7 +724,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_auth_platform_interface
 
-- **Version**: 8.0.0
+- **Version**: 8.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_auth/firebase_auth_platform_interface>
@@ -776,7 +732,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_auth_web
 
-- **Version**: 6.0.0
+- **Version**: 6.0.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_auth/firebase_auth_web>
@@ -909,7 +865,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### flutter_plugin_android_lifecycle
 
-- **Version**: 2.0.28
+- **Version**: 2.0.29
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/flutter_plugin_android_lifecycle>
@@ -917,7 +873,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### font_awesome_flutter
 
-- **Version**: 10.8.0
+- **Version**: 10.9.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/fluttercommunity/font_awesome_flutter>
@@ -984,7 +940,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_android
 
-- **Version**: 0.8.12+24
+- **Version**: 0.8.12+25
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_android>
@@ -1064,13 +1020,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: A library to access JNI from Dart and Flutter that acts as a support library
   for package:jnigen.
 
-### js
+### json_annotation
 
-- **Version**: 0.7.2
+- **Version**: 4.9.0
 - **License**: MIT
 - **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/js>
-- **Description**: Annotations to create static Dart interfaces for JavaScript APIs.
+- **Website**: <https://github.com/google/json_serializable.dart/tree/master/json_annotation>
+- **Description**: Classes and helper functions that support JSON code generation via the
+  `json_serializable` package.
 
 ### json2yaml
 
@@ -1080,15 +1037,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/alexei-sintotski/json2yaml>
 - **Description**: Dart package to render JSON data to YAML with built-in automatic beautifier and
   support for Dart pubspec.yaml and pubspec.lock conventions
-
-### json_annotation
-
-- **Version**: 4.9.0
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/google/json_serializable.dart/tree/master/json_annotation>
-- **Description**: Classes and helper functions that support JSON code generation via the
-  `json_serializable` package.
 
 ### leak_tracker
 
@@ -1203,14 +1151,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: A Flutter Widget which helps nest multiple widgets without needing to manually
   nest them.
 
-### node_preamble
-
-- **Version**: 2.0.2
-- **License**: MIT
-- **Author**: Michael Bullington
-- **Website**: <https://github.com/mbullington/node_preamble.dart>
-- **Description**: Better node.js preamble for dart2js, use it in your build system.
-
 ### octo_image
 
 - **Version**: 2.1.0
@@ -1230,7 +1170,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### package_info_plus
 
-- **Version**: 8.3.0
+- **Version**: 8.3.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/fluttercommunity/plus_plugins>
@@ -1239,7 +1179,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### package_info_plus_platform_interface
 
-- **Version**: 3.2.0
+- **Version**: 3.2.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/fluttercommunity/plus_plugins>
@@ -1401,7 +1341,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### scrollview_observer
 
-- **Version**: 1.26.1
+- **Version**: 1.26.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/fluttercandies/flutter_scrollview_observer>
@@ -1410,7 +1350,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### sentry
 
-- **Version**: 9.5.0
+- **Version**: 9.6.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/dart/>
@@ -1419,7 +1359,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### settings_yaml
 
-- **Version**: 8.3.0
+- **Version**: 8.3.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/bsutton/settings_yaml>
@@ -1437,7 +1377,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### shared_preferences_android
 
-- **Version**: 2.4.10
+- **Version**: 2.4.11
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/shared_preferences/shared_preferences_android>
@@ -1491,22 +1431,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/dart-lang/shelf/tree/master/pkgs/shelf>
 - **Description**: A model for web server middleware that encourages composition and easy reuse.
 
-### shelf_packages_handler
-
-- **Version**: 3.0.2
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/shelf/tree/master/pkgs/shelf_packages_handler>
-- **Description**: A shelf handler for serving a `packages/` directory.
-
-### shelf_static
-
-- **Version**: 1.1.3
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/shelf/tree/master/pkgs/shelf_static>
-- **Description**: Static file server support for the shelf package and ecosystem.
-
 ### shelf_web_socket
 
 - **Version**: 3.0.0
@@ -1517,27 +1441,11 @@ These packages are automatically included as dependencies of your direct depende
 
 ### source_gen
 
-- **Version**: 3.0.0
+- **Version**: 3.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/source_gen/tree/master/source_gen>
 - **Description**: Source code generation builders and utilities for the Dart build system
-
-### source_map_stack_trace
-
-- **Version**: 2.1.2
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/source_map_stack_trace>
-- **Description**: A package for applying source maps to stack traces.
-
-### source_maps
-
-- **Version**: 0.10.13
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/source_maps>
-- **Description**: A library to programmatically manipulate source map files.
 
 ### source_span
 
@@ -1636,7 +1544,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### strings
 
-- **Version**: 4.0.0
+- **Version**: 4.0.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/onepub-dev/strings>
@@ -1677,14 +1585,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/term_glyph>
 - **Description**: Useful Unicode glyphs and ASCII substitutes.
 
-### test
-
-- **Version**: 1.26.3
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/test/tree/master/pkgs/test>
-- **Description**: A full featured library for writing and running Dart tests across platforms.
-
 ### test_api
 
 - **Version**: 0.7.7
@@ -1692,14 +1592,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/test/tree/master/pkgs/test_api>
 - **Description**: The user facing API for structuring Dart tests and checking expectations.
-
-### test_core
-
-- **Version**: 0.6.12
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/test/tree/master/pkgs/test_core>
-- **Description**: A basic library for writing tests and running them on the VM.
 
 ### timing
 
@@ -1737,7 +1629,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### url_launcher_android
 
-- **Version**: 6.3.16
+- **Version**: 6.3.17
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_android>
@@ -1843,15 +1735,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: StreamChannel wrappers for WebSockets. Provides a cross-platform
   WebSocketChannel API, a cross-platform implementation of that API tha
   communicates over an underlying StreamChannel.
-
-### webkit_inspection_protocol
-
-- **Version**: 1.2.1
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/google/webkit_inspection_protocol.dart>
-- **Description**: A client for the Chrome DevTools Protocol (previously called the Webki
-  Inspection Protocol).
 
 ### win32
 
