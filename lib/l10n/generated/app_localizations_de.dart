@@ -2567,11 +2567,26 @@ class AppLocalizationsDe extends AppLocalizations {
   String get admin_legals_terms_placeholder => 'AGBs eingeben...';
 
   @override
+  String get admin_legals_imprint_label => 'Impressum';
+
+  @override
+  String get admin_legals_imprint_placeholder => 'Impressum eingeben...';
+
+  @override
   String get admin_legals_save_button => 'Speichern';
 
   @override
   String get admin_legals_save_success =>
       'Daten für Rechtliches erfolgreich gespeichert!';
+
+  @override
+  String get footer_privacy_policy => 'Datenschutzerklärung';
+
+  @override
+  String get footer_imprint => 'Impressum';
+
+  @override
+  String get footer_terms_and_conditions => 'AGBs';
 
   @override
   String get dashboard_quicklink_recommendation_text =>

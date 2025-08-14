@@ -2905,6 +2905,14 @@
     "@admin_legals_terms_placeholder": {
         "description": "Placeholder für AGB Textfeld"
     },
+    "admin_legals_imprint_label": "Impressum",
+    "@admin_legals_imprint_label": {
+        "description": "Label für Impressum Feld"
+    },
+    "admin_legals_imprint_placeholder": "Impressum eingeben...",
+    "@admin_legals_imprint_placeholder": {
+        "description": "Placeholder für Impressum Textfeld"
+    },
     "admin_legals_save_button": "Speichern",
     "@admin_legals_save_button": {
         "description": "Speichern Button Text"
@@ -2912,6 +2920,18 @@
     "admin_legals_save_success": "Daten für Rechtliches erfolgreich gespeichert!",
     "@admin_legals_save_success": {
         "description": "Erfolgsmeldung nach dem Speichern"
+    },
+    "footer_privacy_policy": "Datenschutzerklärung",
+    "@footer_privacy_policy": {
+        "description": "Link zu Datenschutzerklärung im Footer"
+    },
+    "footer_imprint": "Impressum",
+    "@footer_imprint": {
+        "description": "Link zu Impressum im Footer"
+    },
+    "footer_terms_and_conditions": "AGBs",
+    "@footer_terms_and_conditions": {
+        "description": "Link zu AGBs im Footer"
     },
     "dashboard_quicklink_recommendation_text": "Heute schon eine Empfehlung ausgesprochen?",
     "@dashboard_quicklink_recommendation_text": {

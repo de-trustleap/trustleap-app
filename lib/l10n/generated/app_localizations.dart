@@ -4335,6 +4335,18 @@ abstract class AppLocalizations {
   /// **'Enter Terms and Conditions...'**
   String get admin_legals_terms_placeholder;
 
+  /// Label for Imprint field
+  ///
+  /// In en, this message translates to:
+  /// **'Imprint'**
+  String get admin_legals_imprint_label;
+
+  /// Placeholder for Imprint text field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Imprint...'**
+  String get admin_legals_imprint_placeholder;
+
   /// Save button text
   ///
   /// In en, this message translates to:
@@ -4346,6 +4358,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Legal data successfully saved!'**
   String get admin_legals_save_success;
+
+  /// Link to Privacy Policy in footer
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get footer_privacy_policy;
+
+  /// Link to Imprint in footer
+  ///
+  /// In en, this message translates to:
+  /// **'Imprint'**
+  String get footer_imprint;
+
+  /// Link to Terms & Conditions in footer
+  ///
+  /// In en, this message translates to:
+  /// **'Terms & Conditions'**
+  String get footer_terms_and_conditions;
 
   /// Text for the first dashboard quicklink - make recommendation
   ///

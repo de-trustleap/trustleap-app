@@ -5,25 +5,25 @@ class Legals extends Equatable {
   final String? avv;
   final String? privacyPolicy;
   final String? termsAndCondition;
+  final String? imprint;
 
-  const Legals({
-    this.avv,
-    this.privacyPolicy,
-    this.termsAndCondition,
-  });
+  const Legals(
+      {this.avv, this.privacyPolicy, this.termsAndCondition, this.imprint});
 
-  Legals copyWith({
-    String? avv,
-    String? privacyPolicy,
-    String? termsAndCondition,
-  }) {
+  Legals copyWith(
+      {String? avv,
+      String? privacyPolicy,
+      String? termsAndCondition,
+      String? imprint}) {
     return Legals(
-      avv: avv ?? this.avv,
-      privacyPolicy: privacyPolicy ?? this.privacyPolicy,
-      termsAndCondition: termsAndCondition ?? this.termsAndCondition,
-    );
+        avv: avv ?? this.avv,
+        privacyPolicy: privacyPolicy ?? this.privacyPolicy,
+        termsAndCondition: termsAndCondition ?? this.termsAndCondition,
+        imprint: imprint ?? this.imprint);
   }
 
   @override
-  List<Object?> get props => [avv, privacyPolicy, termsAndCondition];
+  List<Object?> get props => [avv, privacyPolicy, termsAndCondition, imprint];
 }
+
+// TODO: FÜGE FOOTER BEI LOGIN HINZU
