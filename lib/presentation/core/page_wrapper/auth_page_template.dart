@@ -1,5 +1,7 @@
+import 'package:finanzbegleiter/presentation/authentication/widgets/auth_footer.dart';
 import 'package:finanzbegleiter/presentation/feedback/feedback_floating_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class AuthPageTemplate extends StatelessWidget {
   final Widget child;
@@ -11,9 +13,20 @@ class AuthPageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsiveValue = ResponsiveBreakpoints.of(context);
+
     return Scaffold(
-      body: child,
-      floatingActionButton: const FeedbackFloatingActionButton(),
+      body: Column(
+        children: [
+          Expanded(child: child),
+          const SizedBox(height: 40),
+          const AuthFooter(),
+        ],
+      ),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: responsiveValue.isMobile ? 40 : 0),
+        child: const FeedbackFloatingActionButton(),
+      ),
     );
   }
 }
