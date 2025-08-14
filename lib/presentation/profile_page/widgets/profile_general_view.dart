@@ -10,7 +10,6 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_sectio
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_image_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_register_company_section.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/promoters_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -76,8 +75,6 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                                     localization
                                         .profile_page_snackbar_email_verification)
                               }),
-                      SizedBox(height: responsiveValue.isMobile ? 20 : 60),
-                      PromotersSection(user: state.user),
                       SizedBox(height: responsiveValue.isMobile ? 20 : 60),
                       SecondaryButton(
                           title: localization.profile_page_logout_button_title,

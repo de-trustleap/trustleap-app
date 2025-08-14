@@ -746,10 +746,6 @@
     "@profile_page_promoters_section_title": {
         "description": "title of the promoter section on the profile page."
     },
-    "profile_page_promoters_section_recommender_count": "Number of promoters:",
-    "@profile_page_promoters_section_recommender_count": {
-        "description": "Number of promoters in the promoter area on the profile page."
-    },
     "gender_picker_choose": "Choose your gender",
     "@gender_picker_choose": {
         "description": "The text above the gender dropdown menu if no gender has yet been selected."

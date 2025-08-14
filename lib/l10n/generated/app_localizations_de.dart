@@ -675,10 +675,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profile_page_promoters_section_title => 'Promoter';
 
   @override
-  String get profile_page_promoters_section_recommender_count =>
-      'Anzahl der Promoter:';
-
-  @override
   String get gender_picker_choose => 'Wählen Sie ihr Geschlecht';
 
   @override

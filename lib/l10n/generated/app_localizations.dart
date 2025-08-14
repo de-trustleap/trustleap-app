@@ -1211,12 +1211,6 @@ abstract class AppLocalizations {
   /// **'Promoter'**
   String get profile_page_promoters_section_title;
 
-  /// Number of promoters in the promoter area on the profile page.
-  ///
-  /// In en, this message translates to:
-  /// **'Number of promoters:'**
-  String get profile_page_promoters_section_recommender_count;
-
   /// The text above the gender dropdown menu if no gender has yet been selected.
   ///
   /// In en, this message translates to:

@@ -663,10 +663,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_page_promoters_section_title => 'Promoter';
 
   @override
-  String get profile_page_promoters_section_recommender_count =>
-      'Number of promoters:';
-
-  @override
   String get gender_picker_choose => 'Choose your gender';
 
   @override

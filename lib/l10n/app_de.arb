@@ -746,10 +746,6 @@
     "@profile_page_promoters_section_title": {
         "description": "Titel des Promoter Bereichs auf der Profil Seite."
     },
-    "profile_page_promoters_section_recommender_count": "Anzahl der Promoter:",
-    "@profile_page_promoters_section_recommender_count": {
-        "description": "Anzahl der Promoter im Promoter Bereich auf der Profil Seite."
-    },
     "gender_picker_choose": "Wählen Sie ihr Geschlecht",
     "@gender_picker_choose": {
         "description": "Der Text über dem Geschlechter Dropdown Menü wenn noch kein Geschlecht gewählt wurde."
