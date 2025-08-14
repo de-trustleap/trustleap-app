@@ -2580,6 +2580,15 @@ class AppLocalizationsDe extends AppLocalizations {
       'Daten für Rechtliches erfolgreich gespeichert!';
 
   @override
+  String get footer_privacy_policy => 'Datenschutzerklärung';
+
+  @override
+  String get footer_imprint => 'Impressum';
+
+  @override
+  String get footer_terms_and_conditions => 'AGBs';
+
+  @override
   String get dashboard_quicklink_recommendation_text =>
       'Heute schon eine Empfehlung ausgesprochen?';
 

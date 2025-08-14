@@ -2531,6 +2531,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get admin_legals_save_success => 'Legal data successfully saved!';
 
   @override
+  String get footer_privacy_policy => 'Privacy Policy';
+
+  @override
+  String get footer_imprint => 'Imprint';
+
+  @override
+  String get footer_terms_and_conditions => 'Terms & Conditions';
+
+  @override
   String get dashboard_quicklink_recommendation_text =>
       'Have you made a recommendation today?';
 
