@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dar
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_tree_view.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageBuilderHierarchyOverlay extends StatefulWidget {
   final PageBuilderPage page;
@@ -22,23 +23,27 @@ class LandingPageBuilderHierarchyOverlay extends StatefulWidget {
 
 class _LandingPageBuilderHierarchyOverlayState
     extends State<LandingPageBuilderHierarchyOverlay> {
-  Offset _position = const Offset(20, 100);
+  final overlayWidth = 320.0;
+  Offset? _position;
   bool _isDragging = false;
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
+
+    _position ??= Offset(responsiveValue.screenWidth - overlayWidth - 16, 80);
 
     return Positioned(
-      left: _position.dx,
-      top: _position.dy,
+      left: _position!.dx,
+      top: _position!.dy,
       child: GestureDetector(
         onPanUpdate: (details) {
           setState(() {
             _position = Offset(
-              _position.dx + details.delta.dx,
-              _position.dy + details.delta.dy,
+              _position!.dx + details.delta.dx,
+              _position!.dy + details.delta.dy,
             );
           });
         },
@@ -56,7 +61,7 @@ class _LandingPageBuilderHierarchyOverlayState
           elevation: _isDragging ? 12 : 8,
           borderRadius: BorderRadius.circular(12),
           child: Container(
-            width: 320,
+            width: overlayWidth,
             height: 400,
             decoration: BoxDecoration(
               color: themeData.colorScheme.surface,

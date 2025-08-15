@@ -17,9 +17,9 @@ class InfoButton extends StatelessWidget {
       text: text,
       showButton: false,
       tooltipOffset: tooltipOffset,
-      child: const Icon(
-        Icons.info,
-        color: Colors.red,
+      child: Icon(
+        Icons.info_outline,
+        color: Theme.of(context).colorScheme.secondary,
         size: 24,
       ),
     );
