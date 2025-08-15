@@ -1211,12 +1211,6 @@ abstract class AppLocalizations {
   /// **'Promoter'**
   String get profile_page_promoters_section_title;
 
-  /// Number of promoters in the promoter area on the profile page.
-  ///
-  /// In en, this message translates to:
-  /// **'Number of promoters:'**
-  String get profile_page_promoters_section_recommender_count;
-
   /// The text above the gender dropdown menu if no gender has yet been selected.
   ///
   /// In en, this message translates to:
@@ -4400,6 +4394,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Go to Recommendation Manager'**
   String get dashboard_quicklink_manager_button;
+
+  /// Tooltip text for the info button in dashboard recommendations
+  ///
+  /// In en, this message translates to:
+  /// **'Here you can see how many recommendations your promoters have sent in the selected time period.'**
+  String get dashboard_recommendations_info_tooltip;
+
+  /// Tooltip text for the info button in dashboard promoters
+  ///
+  /// In en, this message translates to:
+  /// **'Here you can see how many promoters you have gained in the selected time period.'**
+  String get dashboard_promoters_info_tooltip;
+
+  /// Tooltip text for the info button in dashboard promoter ranking
+  ///
+  /// In en, this message translates to:
+  /// **'This analysis shows you which promoters have generated the most successfully completed recommendations in the selected time period.'**
+  String get dashboard_promoter_ranking_info_tooltip;
+
+  /// Tooltip text for the info button in dashboard landing page ranking
+  ///
+  /// In en, this message translates to:
+  /// **'This analysis shows you which of your landing pages have generated the most completed recommendations in the selected time period.'**
+  String get dashboard_landingpage_ranking_info_tooltip;
 }
 
 class _AppLocalizationsDelegate

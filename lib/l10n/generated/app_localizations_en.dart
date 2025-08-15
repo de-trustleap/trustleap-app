@@ -663,10 +663,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_page_promoters_section_title => 'Promoter';
 
   @override
-  String get profile_page_promoters_section_recommender_count =>
-      'Number of promoters:';
-
-  @override
   String get gender_picker_choose => 'Choose your gender';
 
   @override
@@ -2554,4 +2550,20 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dashboard_quicklink_manager_button =>
       'Go to Recommendation Manager';
+
+  @override
+  String get dashboard_recommendations_info_tooltip =>
+      'Here you can see how many recommendations your promoters have sent in the selected time period.';
+
+  @override
+  String get dashboard_promoters_info_tooltip =>
+      'Here you can see how many promoters you have gained in the selected time period.';
+
+  @override
+  String get dashboard_promoter_ranking_info_tooltip =>
+      'This analysis shows you which promoters have generated the most successfully completed recommendations in the selected time period.';
+
+  @override
+  String get dashboard_landingpage_ranking_info_tooltip =>
+      'This analysis shows you which of your landing pages have generated the most completed recommendations in the selected time period.';
 }

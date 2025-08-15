@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_buttons/info_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_chart.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/widgets/dashboard_recommendations/dashboard_recommendations_filter.dart';
@@ -106,19 +107,25 @@ class _DashboardRecommendationsState extends State<DashboardRecommendations> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     localization.dashboard_recommendations_title,
                     style: themeData.textTheme.bodyLarge!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
+                  const SizedBox(width: 8),
+                  InfoButton(
+                      text:
+                          localization.dashboard_recommendations_info_tooltip),
+                  const Spacer(),
                   SizedBox(
                     width: 48,
                     height: 48,
                     child: IconButton(
                         onPressed: () => onFilterPressed(),
-                        tooltip: localization.dashboard_recommendations_filter_tooltip,
+                        tooltip: localization
+                            .dashboard_recommendations_filter_tooltip,
                         icon: Icon(Icons.filter_list,
                             color: themeData.colorScheme.secondary, size: 32)),
                   ),

@@ -30,7 +30,11 @@ class RegisterButton extends StatelessWidget {
                     ? themeData.textTheme.bodySmall!
                         .copyWith(color: themeData.colorScheme.secondary)
                     : themeData.textTheme.bodyMedium!
-                        .copyWith(color: themeData.colorScheme.secondary)))
+                        .copyWith(color: themeData.colorScheme.secondary))),
+        SelectableText(" und starten",
+            style: responsiveValue.isMobile
+                ? themeData.textTheme.bodySmall
+                : themeData.textTheme.bodyMedium),
       ],
     );
   }

@@ -746,10 +746,6 @@
     "@profile_page_promoters_section_title": {
         "description": "Titel des Promoter Bereichs auf der Profil Seite."
     },
-    "profile_page_promoters_section_recommender_count": "Anzahl der Promoter:",
-    "@profile_page_promoters_section_recommender_count": {
-        "description": "Anzahl der Promoter im Promoter Bereich auf der Profil Seite."
-    },
     "gender_picker_choose": "Wählen Sie ihr Geschlecht",
     "@gender_picker_choose": {
         "description": "Der Text über dem Geschlechter Dropdown Menü wenn noch kein Geschlecht gewählt wurde."
@@ -2948,5 +2944,21 @@
     "dashboard_quicklink_manager_button": "Zum Empfehlungsmanager",
     "@dashboard_quicklink_manager_button": {
         "description": "Button Text für den zweiten Dashboard Quicklink - Empfehlungsmanager"
+    },
+    "dashboard_recommendations_info_tooltip": "Hier siehst du wieviele Empfehlungen deine Promoter in der ausgewählten Zeitspanne versendet haben.",
+    "@dashboard_recommendations_info_tooltip": {
+        "description": "Tooltip-Text für den Info-Button bei Dashboard Empfehlungen"
+    },
+    "dashboard_promoters_info_tooltip": "Hier siehst du, wie viele Promoter du im ausgewählten Zeitraum hinzubekommen hast.",
+    "@dashboard_promoters_info_tooltip": {
+        "description": "Tooltip-Text für den Info-Button bei Dashboard Promoter"
+    },
+    "dashboard_promoter_ranking_info_tooltip": "Die Auswertung zeigt dir, welche Promoter im gewählten Zeitraum die meisten erfolgreich abgeschlossenen Empfehlungen generiert haben.",
+    "@dashboard_promoter_ranking_info_tooltip": {
+        "description": "Tooltip-Text für den Info-Button bei Dashboard Promoter Ranking"
+    },
+    "dashboard_landingpage_ranking_info_tooltip": "Diese Auswertung zeigt dir, welche deiner Landingpages im ausgewählten Zeitraum die meisten abgeschlossenen Empfehlungen generiert haben.",
+    "@dashboard_landingpage_ranking_info_tooltip": {
+        "description": "Tooltip-Text für den Info-Button bei Dashboard Landingpage Ranking"
     }
 }

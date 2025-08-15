@@ -14,7 +14,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_icon.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_buttons/tooltip_icon.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/landingpage_checkbox_item.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_edit/promoter_edit_no_data_view.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoter_no_landingpage_view.dart';
