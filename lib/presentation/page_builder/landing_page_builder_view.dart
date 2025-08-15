@@ -35,7 +35,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
   late String id;
   late LandingPageBuilderHtmlEvents htmlEvents;
   bool isUpdated = false;
-  bool _isHierarchyOverlayOpen = false;
+  bool _isHierarchyOverlayOpen = true;
   final widgetFinder = PagebuilderWidgetFinder();
   final pageBuilderMenuCubit = Modular.get<PagebuilderConfigMenuCubit>();
 
