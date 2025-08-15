@@ -1,29 +1,30 @@
+import 'package:finanzbegleiter/core/helpers/device_detection.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/clickable_link.dart';
 import 'package:flutter/material.dart';
 
-class TooltipIcon extends StatefulWidget {
-  final IconData icon;
+class TooltipBase extends StatefulWidget {
+  final Widget child;
   final String text;
-  final String buttonText;
+  final String? buttonText;
   final bool showButton;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double tooltipOffset;
 
-  const TooltipIcon({
+  const TooltipBase({
     super.key,
-    required this.icon,
+    required this.child,
     required this.text,
-    required this.buttonText,
-    required this.onPressed,
+    this.buttonText,
+    this.onPressed,
     this.showButton = true,
     this.tooltipOffset = 30,
   });
 
   @override
-  State<TooltipIcon> createState() => _TooltipIconState();
+  State<TooltipBase> createState() => _TooltipBaseState();
 }
 
-class _TooltipIconState extends State<TooltipIcon> {
+class _TooltipBaseState extends State<TooltipBase> {
   OverlayEntry? overlayEntry;
   final LayerLink _layerLink = LayerLink();
   bool _isMouseInside = false;
@@ -61,9 +62,9 @@ class _TooltipIconState extends State<TooltipIcon> {
                     if (widget.showButton) ...[
                       const SizedBox(height: 8),
                       ClickableLink(
-                          title: widget.buttonText,
+                          title: widget.buttonText ?? "",
                           fontSize: 14,
-                          onTap: () => {widget.onPressed()})
+                          onTap: () => widget.onPressed?.call())
                     ]
                   ],
                 ),
@@ -91,21 +92,33 @@ class _TooltipIconState extends State<TooltipIcon> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) {
-        _isMouseInside = true;
-        _showTooltip(context);
-      },
-      onExit: (_) {
-        // Delay is needed here to make sure that the mouse can move from icon to tooltip
-        Future.delayed(const Duration(milliseconds: 100), () {
-          if (!_isMouseInside) _hideTooltip();
-        });
-      },
-      child: CompositedTransformTarget(
-        link: _layerLink,
-        child: Icon(widget.icon, color: Colors.red, size: 24),
-      ),
-    );
+    if (DeviceDetection.isTouchDevice(context)) {
+      // On touch devices: use tap gesture
+      return GestureDetector(
+        onTap: () => _showTooltip(context),
+        child: CompositedTransformTarget(
+          link: _layerLink,
+          child: widget.child,
+        ),
+      );
+    } else {
+      // On desktop: use hover
+      return MouseRegion(
+        onEnter: (_) {
+          _isMouseInside = true;
+          _showTooltip(context);
+        },
+        onExit: (_) {
+          // Delay is needed here to make sure that the mouse can move from icon to tooltip
+          Future.delayed(const Duration(milliseconds: 100), () {
+            if (!_isMouseInside) _hideTooltip();
+          });
+        },
+        child: CompositedTransformTarget(
+          link: _layerLink,
+          child: widget.child,
+        ),
+      );
+    }
   }
 }

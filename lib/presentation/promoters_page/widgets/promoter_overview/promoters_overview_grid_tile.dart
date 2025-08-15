@@ -9,7 +9,7 @@ import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extensio
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/placeholder_image.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_icon.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_buttons/tooltip_icon.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/promoter_helper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_registration_badge.dart';
 import 'package:finanzbegleiter/route_paths.dart';

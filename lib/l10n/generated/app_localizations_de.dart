@@ -2598,4 +2598,20 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get dashboard_quicklink_manager_button => 'Zum Empfehlungsmanager';
+
+  @override
+  String get dashboard_recommendations_info_tooltip =>
+      'Hier siehst du wieviele Empfehlungen deine Promoter in der ausgewählten Zeitspanne versendet haben.';
+
+  @override
+  String get dashboard_promoters_info_tooltip =>
+      'Hier siehst du, wie viele Promoter du im ausgewählten Zeitraum hinzubekommen hast.';
+
+  @override
+  String get dashboard_promoter_ranking_info_tooltip =>
+      'Die Auswertung zeigt dir, welche Promoter im gewählten Zeitraum die meisten erfolgreich abgeschlossenen Empfehlungen generiert haben.';
+
+  @override
+  String get dashboard_landingpage_ranking_info_tooltip =>
+      'Diese Auswertung zeigt dir, welche deiner Landingpages im ausgewählten Zeitraum die meisten abgeschlossenen Empfehlungen generiert haben.';
 }

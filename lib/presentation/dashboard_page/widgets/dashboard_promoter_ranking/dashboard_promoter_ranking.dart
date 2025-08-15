@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_buttons/info_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -46,13 +47,18 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     localizations.dashboard_promoter_ranking_title,
                     style: themeData.textTheme.bodyLarge!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
+                  const SizedBox(width: 8),
+                  InfoButton(
+                      text: localizations
+                          .dashboard_promoter_ranking_info_tooltip),
+                  const Spacer(),
                   Row(
                     children: [
                       Text(
