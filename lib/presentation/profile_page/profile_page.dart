@@ -9,13 +9,12 @@ import 'package:finanzbegleiter/domain/entities/permissions.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/profile_company_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/delete_account/profile_delete_account_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/password_update/profile_password_update_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_general_view.dart';
-import 'package:flutter/foundation.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -38,6 +37,15 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   void initState() {
+    // Redirect /profile to /profile/general
+    final currentRoute = Modular.to.path;
+    if (currentRoute == RoutePaths.profilePath) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Modular.to.navigate(
+            "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profileGeneralPath}");
+      });
+    }
+
     if (widget.registeredCompany == "true") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         CustomSnackBar.of(context).showCustomSnackBar(
@@ -75,7 +83,9 @@ class _ProfilePageState extends State<ProfilePage>
           builder: (context, state) {
             return Padding(
               padding: EdgeInsets.only(top: topPadding),
-              child: tabbar(responsiveValue, state, permissions),
+              child: CustomTabBar(
+                tabs: getCustomTabItems(state, permissions),
+              ),
             );
           },
         ));
@@ -91,53 +101,37 @@ class _ProfilePageState extends State<ProfilePage>
     }
   }
 
-  List<TabbarContent> getTabbarContent(
+  List<CustomTabItem> getCustomTabItems(
       UserObserverState state, Permissions permissions) {
     return [
-      TabbarContent(
-          tab: const CustomTab(icon: Icons.person, title: "Persönliche Daten"),
+      CustomTabItem(
+          title: "Persönliche Daten",
+          icon: Icons.person,
+          route:
+              "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profileGeneralPath}",
           content: const ProfileGeneralView()),
       if (state is UserObserverSuccess &&
           _canAccessCompanyProfile(state, permissions)) ...[
-        TabbarContent(
-            tab: const CustomTab(icon: Icons.home, title: "Unternehmen"),
+        CustomTabItem(
+            title: "Unternehmen",
+            icon: Icons.home,
+            route:
+                "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profileCompanyPath}",
             content: ProfileCompanyView(
                 user: state.user, companyID: state.user.companyID!))
       ],
-      TabbarContent(
-          tab: const CustomTab(icon: Icons.lock, title: "Passwort ändern"),
+      CustomTabItem(
+          title: "Passwort ändern",
+          icon: Icons.lock,
+          route:
+              "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profilePasswordPath}",
           content: const ProfilePasswordUpdateView()),
-      TabbarContent(
-          tab: const CustomTab(
-              icon: Icons.delete_forever, title: "Account löschen"),
+      CustomTabItem(
+          title: "Account löschen",
+          icon: Icons.delete_forever,
+          route:
+              "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profileDeletePath}",
           content: const ProfileDeleteAccountView())
     ];
-  }
-
-  Widget tabbar(ResponsiveBreakpointsData responsiveValue,
-      UserObserverState state, Permissions permissions) {
-    List<TabbarContent> tabViews = getTabbarContent(state, permissions);
-    tabController = TabController(length: tabViews.length, vsync: this);
-    return Column(
-      children: [
-        SizedBox(
-            width: responsiveValue.screenWidth * 0.9,
-            child: TabBar(
-                controller: tabController,
-                tabAlignment: responsiveValue.isMobile
-                    ? TabAlignment.start
-                    : TabAlignment.fill,
-                isScrollable: responsiveValue.isMobile ? true : false,
-                tabs: tabViews.map((e) => e.tab).toList(),
-                indicatorPadding: const EdgeInsets.only(bottom: 4))),
-        Expanded(
-            child: TabBarView(
-                controller: tabController,
-                physics: kIsWeb
-                    ? const NeverScrollableScrollPhysics()
-                    : const ScrollPhysics(),
-                children: tabViews.map((e) => e.content).toList()))
-      ],
-    );
   }
 }

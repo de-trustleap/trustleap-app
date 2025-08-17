@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersOverviewWrapper extends StatefulWidget {
-  final TabController? tabController;
 
   const PromotersOverviewWrapper({
     super.key,
-    required this.tabController,
   });
 
   @override
@@ -34,15 +32,13 @@ class _PromotersOverviewWrapperState extends State<PromotersOverviewWrapper>
         decoration: BoxDecoration(color: themeData.colorScheme.surface),
         child: ListView(children: [
           SizedBox(height: responsiveValue.isMobile ? 20 : 80),
-          if (widget.tabController != null) ...[
-            CenteredConstrainedWrapper(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                  PromotersOverviewPage(tabController: widget.tabController!)
-                ]))
-          ]
+          CenteredConstrainedWrapper(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                const PromotersOverviewPage()
+              ]))
         ]));
   }
 }

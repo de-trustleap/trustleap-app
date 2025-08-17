@@ -11,10 +11,16 @@ class RoutePaths {
   static const String homePath = "/home";
   static const String dashboardPath = "/dashboard";
   static const String profilePath = "/profile";
+  static const String profileGeneralPath = "/general";
+  static const String profileCompanyPath = "/company";
+  static const String profilePasswordPath = "/change-password";
+  static const String profileDeletePath = "/delete-account";
   static const String companyRegistration = "/company-registration";
   static const String recommendationsPath = "/recommendations";
   static const String recommendationManagerPath = "/recommendation-manager";
   static const String promotersPath = "/promoters";
+  static const String promotersOverviewPath = "/overview";
+  static const String promotersRegisterPath = "/register";
   static const String editPromoterPath = "/edit-promoter";
   static const String landingPagePath = "/landingpage";
   static const String landingPageCreatorPath = "/landingpage-creator";

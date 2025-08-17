@@ -1,14 +1,14 @@
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoters_form.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class RegisterPromotersView extends StatefulWidget {
-  final TabController tabController;
   final Function newPromoterCreated;
   const RegisterPromotersView(
       {super.key,
-      required this.tabController,
       required this.newPromoterCreated});
 
   @override
@@ -38,7 +38,7 @@ class _RegisterPromotersViewState extends State<RegisterPromotersView>
                   mainAxisSize: MainAxisSize.min,
                   children: [
                 RegisterPromotersForm(changesSaved: () {
-                  widget.tabController.animateTo(0);
+                  Modular.to.navigate("${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersOverviewPath}");
                   widget.newPromoterCreated();
                 })
               ])),

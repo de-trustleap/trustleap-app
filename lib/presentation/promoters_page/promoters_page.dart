@@ -3,11 +3,11 @@ import 'package:finanzbegleiter/domain/entities/permissions.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tab.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/tabbar_content.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/tab_bar/custom_tabbar.dart';
+import 'package:finanzbegleiter/route_paths.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_wrapper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoters_view.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -20,28 +20,21 @@ class PromotersPage extends StatefulWidget {
   State<PromotersPage> createState() => _PromotersPageState();
 }
 
-class _PromotersPageState extends State<PromotersPage>
-    with SingleTickerProviderStateMixin {
-  TabController? tabController;
+class _PromotersPageState extends State<PromotersPage> {
   bool initialSnackbarAlreadyShown = false;
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final permissions = (context.watchModular<PermissionCubit>().state
-              as PermissionSuccessState)
-          .permissions;
+    // Redirect /promoters to /promoters/overview
+    final currentRoute = Modular.to.path;
+    if (currentRoute == RoutePaths.promotersPath) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Modular.to.navigate("${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersOverviewPath}");
+      });
+    }
 
-      if (mounted) {
-        setState(() {
-          tabController = TabController(
-              length: permissions.hasRegisterPromoterPermission() ? 2 : 1,
-              vsync: this);
-        });
-      }
-    });
   }
 
   @override
@@ -61,7 +54,6 @@ class _PromotersPageState extends State<PromotersPage>
 
   @override
   void dispose() {
-    tabController?.dispose();
     super.dispose();
   }
 
@@ -75,27 +67,26 @@ class _PromotersPageState extends State<PromotersPage>
 
     return Padding(
       padding: EdgeInsets.only(top: responsiveValue.screenHeight * 0.02),
-      child: tabController != null
-          ? tabbar(responsiveValue, permissions, localization)
-          : const SizedBox.shrink(),
+      child: CustomTabBar(
+        tabs: getCustomTabItems(permissions, localization),
+      ),
     );
   }
 
-  List<TabbarContent> getTabbarContent(
+  List<CustomTabItem> getCustomTabItems(
       Permissions permissions, AppLocalizations localization) {
     return [
-      TabbarContent(
-          tab: CustomTab(
-              icon: Icons.people, title: localization.my_promoters_tab_title),
-          content: PromotersOverviewWrapper(tabController: tabController)),
-      if (_canAccessPromoterRegistration(permissions) &&
-          tabController != null) ...[
-        TabbarContent(
-            tab: CustomTab(
-                icon: Icons.person_add,
-                title: localization.promoter_register_tab_title),
+      CustomTabItem(
+          title: localization.my_promoters_tab_title,
+          icon: Icons.people,
+          route: "${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersOverviewPath}",
+          content: const PromotersOverviewWrapper()),
+      if (_canAccessPromoterRegistration(permissions)) ...[
+        CustomTabItem(
+            title: localization.promoter_register_tab_title,
+            icon: Icons.person_add,
+            route: "${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersRegisterPath}",
             content: RegisterPromotersView(
-                tabController: tabController!,
                 newPromoterCreated: () {
                   CustomSnackBar.of(context).showCustomSnackBar(
                       AppLocalizations.of(context)
@@ -105,32 +96,6 @@ class _PromotersPageState extends State<PromotersPage>
     ];
   }
 
-  Widget tabbar(ResponsiveBreakpointsData responsiveValue,
-      Permissions permissions, AppLocalizations localization) {
-    return Column(
-      children: [
-        SizedBox(
-            width: responsiveValue.largerThan(TABLET)
-                ? responsiveValue.screenWidth * 0.6
-                : responsiveValue.screenWidth * 0.9,
-            child: TabBar(
-                controller: tabController,
-                tabs: getTabbarContent(permissions, localization)
-                    .map((e) => e.tab)
-                    .toList(),
-                indicatorPadding: const EdgeInsets.only(bottom: 4))),
-        Expanded(
-            child: TabBarView(
-                controller: tabController,
-                physics: kIsWeb
-                    ? const NeverScrollableScrollPhysics()
-                    : const ScrollPhysics(),
-                children: getTabbarContent(permissions, localization)
-                    .map((e) => e.content)
-                    .toList()))
-      ],
-    );
-  }
 
   bool _canAccessPromoterRegistration(Permissions permissions) {
     if (permissions.hasRegisterPromoterPermission()) {
