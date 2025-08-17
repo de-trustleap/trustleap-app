@@ -143,7 +143,8 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   Future<void> _sendMessage(
       RecommendationItem recommendation, String message) async {
     final baseURL = Environment().getLandingpageBaseURL();
-    final link = "$baseURL?id=${recommendation.id}";
+    final link =
+        "$baseURL?p=${recommendation.promoterName}&id=${recommendation.id}";
 
     var adaptedMessage = "";
     if (!message.contains("[LINK]")) {
