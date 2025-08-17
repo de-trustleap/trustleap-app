@@ -299,7 +299,7 @@ class _RecommendationManagerListTileState
                         onTap: () {
                           final baseURL = Environment().getLandingpageBaseURL();
                           CustomNavigator.openURLInNewTab(
-                              "$baseURL?id=${_recommendation.recoID}");
+                              "$baseURL?p=${_recommendation.recommendation?.promoterName ?? ""}&id=${_recommendation.recoID}");
                         }),
                     if (state is RecommendationSetStatusLoadingState &&
                         state.recommendation.id.value ==

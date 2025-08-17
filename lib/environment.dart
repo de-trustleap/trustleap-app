@@ -5,9 +5,8 @@ class Environment {
   final prodBaseURL = "app.trust-leap.de";
   final stagingBaseURL = "staging.trust-leap.de";
 
-  final landingPageProdBaseURL = "https://landingpages.trust-leap.de";
-  final landingPageStagingBaseURL =
-      "https://landingpages-staging.trust-leap.de";
+  final landingPageProdBaseURL = "https://empfohlen-von.de";
+  final landingPageStagingBaseURL = "https://staging.empfohlen-von.de";
 
   bool isStaging() {
     final String currentUrl = web.window.location.hostname;
