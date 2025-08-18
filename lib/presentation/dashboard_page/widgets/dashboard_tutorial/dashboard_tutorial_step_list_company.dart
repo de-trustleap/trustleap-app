@@ -118,8 +118,9 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               .dashboard_tutorial_step_promoter_registration_content,
           buttonText: localization.dashboard_tutorial_button_register_promoter,
           buttonAction: () {
-            CustomNavigator.navigate(
-                RoutePaths.homePath + RoutePaths.promotersPath);
+            CustomNavigator.navigate(RoutePaths.homePath +
+                RoutePaths.promotersPath +
+                RoutePaths.promotersRegisterPath);
             cubit.setStep(user, 7);
           },
           isLast: false,

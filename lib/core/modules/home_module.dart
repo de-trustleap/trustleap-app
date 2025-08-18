@@ -51,7 +51,13 @@ class HomeModule extends Module {
           ChildRoute(RoutePaths.recommendationsPath,
               child: (_) => const RecommendationsPage()),
           ChildRoute(RoutePaths.recommendationManagerPath,
-              child: (_) => const RecommendationManagerPage()),
+              child: (_) => const RecommendationManagerPage(),
+              children: [
+                ChildRoute(RoutePaths.recommendationManagerActivePath,
+                    child: (_) => const RecommendationManagerPage()),
+                ChildRoute(RoutePaths.recommendationManagerArchivePath,
+                    child: (_) => const RecommendationManagerPage()),
+              ]),
           ChildRoute(RoutePaths.promotersPath,
               child: (_) => PromotersPage(
                     editedPromoter: r.args.queryParams["editedPromoter"],
