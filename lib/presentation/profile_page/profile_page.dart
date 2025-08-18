@@ -68,6 +68,7 @@ class _ProfilePageState extends State<ProfilePage>
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
+    final localization = AppLocalizations.of(context);
     screenHeight = responsiveValue.screenHeight;
     topPadding = responsiveValue.screenHeight * 0.02;
     return MultiBlocProvider(
@@ -84,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage>
             return Padding(
               padding: EdgeInsets.only(top: topPadding),
               child: CustomTabBar(
-                tabs: getCustomTabItems(state, permissions),
+                tabs: getCustomTabItems(state, permissions, localization),
               ),
             );
           },
@@ -102,10 +103,10 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   List<CustomTabItem> getCustomTabItems(
-      UserObserverState state, Permissions permissions) {
+      UserObserverState state, Permissions permissions, AppLocalizations localization) {
     return [
       CustomTabItem(
-          title: "Persönliche Daten",
+          title: localization.profile_general_tab,
           icon: Icons.person,
           route:
               "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profileGeneralPath}",
@@ -113,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage>
       if (state is UserObserverSuccess &&
           _canAccessCompanyProfile(state, permissions)) ...[
         CustomTabItem(
-            title: "Unternehmen",
+            title: localization.profile_company_tab,
             icon: Icons.home,
             route:
                 "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profileCompanyPath}",
@@ -121,13 +122,13 @@ class _ProfilePageState extends State<ProfilePage>
                 user: state.user, companyID: state.user.companyID!))
       ],
       CustomTabItem(
-          title: "Passwort ändern",
+          title: localization.profile_password_tab,
           icon: Icons.lock,
           route:
               "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profilePasswordPath}",
           content: const ProfilePasswordUpdateView()),
       CustomTabItem(
-          title: "Account löschen",
+          title: localization.profile_delete_tab,
           icon: Icons.delete_forever,
           route:
               "${RoutePaths.homePath}${RoutePaths.profilePath}${RoutePaths.profileDeletePath}",

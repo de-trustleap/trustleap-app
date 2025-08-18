@@ -4418,6 +4418,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This analysis shows you which of your landing pages have generated the most completed recommendations in the selected time period.'**
   String get dashboard_landingpage_ranking_info_tooltip;
+
+  /// Tab title for personal data in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Data'**
+  String get profile_general_tab;
+
+  /// Tab title for company in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get profile_company_tab;
+
+  /// Tab title for change password in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get profile_password_tab;
+
+  /// Tab title for delete account in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get profile_delete_tab;
 }
 
 class _AppLocalizationsDelegate

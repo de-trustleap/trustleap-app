@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersOverviewWrapper extends StatefulWidget {
-
   const PromotersOverviewWrapper({
     super.key,
   });
@@ -32,13 +31,11 @@ class _PromotersOverviewWrapperState extends State<PromotersOverviewWrapper>
         decoration: BoxDecoration(color: themeData.colorScheme.surface),
         child: ListView(children: [
           SizedBox(height: responsiveValue.isMobile ? 20 : 80),
-          CenteredConstrainedWrapper(
+          const CenteredConstrainedWrapper(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                const PromotersOverviewPage()
-              ]))
+                  children: [PromotersOverviewPage()]))
         ]));
   }
 }

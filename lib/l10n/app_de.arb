@@ -2960,5 +2960,21 @@
     "dashboard_landingpage_ranking_info_tooltip": "Diese Auswertung zeigt dir, welche deiner Landingpages im ausgewählten Zeitraum die meisten abgeschlossenen Empfehlungen generiert haben.",
     "@dashboard_landingpage_ranking_info_tooltip": {
         "description": "Tooltip-Text für den Info-Button bei Dashboard Landingpage Ranking"
+    },
+    "profile_general_tab": "Persönliche Daten",
+    "@profile_general_tab": {
+        "description": "Tab-Titel für persönliche Daten im Profil"
+    },
+    "profile_company_tab": "Unternehmen",
+    "@profile_company_tab": {
+        "description": "Tab-Titel für Unternehmen im Profil"
+    },
+    "profile_password_tab": "Passwort ändern",
+    "@profile_password_tab": {
+        "description": "Tab-Titel für Passwort ändern im Profil"
+    },
+    "profile_delete_tab": "Account löschen",
+    "@profile_delete_tab": {
+        "description": "Tab-Titel für Account löschen im Profil"
     }
 }

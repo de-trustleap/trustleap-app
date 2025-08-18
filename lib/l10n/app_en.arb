@@ -2960,5 +2960,21 @@
     "dashboard_landingpage_ranking_info_tooltip": "This analysis shows you which of your landing pages have generated the most completed recommendations in the selected time period.",
     "@dashboard_landingpage_ranking_info_tooltip": {
         "description": "Tooltip text for the info button in dashboard landing page ranking"
+    },
+    "profile_general_tab": "Personal Data",
+    "@profile_general_tab": {
+        "description": "Tab title for personal data in profile"
+    },
+    "profile_company_tab": "Company",
+    "@profile_company_tab": {
+        "description": "Tab title for company in profile"
+    },
+    "profile_password_tab": "Change Password",
+    "@profile_password_tab": {
+        "description": "Tab title for change password in profile"
+    },
+    "profile_delete_tab": "Delete Account",
+    "@profile_delete_tab": {
+        "description": "Tab title for delete account in profile"
     }
 }

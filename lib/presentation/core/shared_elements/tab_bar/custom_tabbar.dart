@@ -28,19 +28,19 @@ class CustomTabBar extends StatefulWidget {
   State<CustomTabBar> createState() => _CustomTabBarState();
 }
 
-class _CustomTabBarState extends State<CustomTabBar> with TickerProviderStateMixin {
+class _CustomTabBarState extends State<CustomTabBar>
+    with TickerProviderStateMixin {
   late TabController _tabController;
-
-  String get currentRoute => Modular.to.path;
+  String _currentRoute = '';
 
   int get currentIndex {
-    final index = widget.tabs.indexWhere((tab) => tab.route == currentRoute);
+    final index = widget.tabs.indexWhere((tab) => tab.route == _currentRoute);
     return index >= 0 ? index : 0;
   }
 
   Widget get currentContent {
     final tab = widget.tabs.firstWhere(
-      (tab) => tab.route == currentRoute,
+      (tab) => tab.route == _currentRoute,
       orElse: () => widget.tabs.first,
     );
     return tab.content;
@@ -49,6 +49,7 @@ class _CustomTabBarState extends State<CustomTabBar> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
+    _currentRoute = Modular.to.path;
     _tabController = TabController(length: widget.tabs.length, vsync: this);
     _updateTabController();
   }
@@ -83,20 +84,26 @@ class _CustomTabBarState extends State<CustomTabBar> with TickerProviderStateMix
   void _onTabTap(int index) {
     final route = widget.tabs[index].route;
     Modular.to.navigate(route);
-    if (mounted) setState(() {});
+    if (mounted) {
+      setState(() {
+        _currentRoute = route;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
-    
+
     return Column(
       children: [
         SizedBox(
           width: responsiveValue.screenWidth * 0.9,
           child: TabBar(
             controller: _tabController,
-            tabs: widget.tabs.map((tab) => _buildTab(tab, context, responsiveValue)).toList(),
+            tabs: widget.tabs
+                .map((tab) => _buildTab(tab, context, responsiveValue))
+                .toList(),
             onTap: _onTabTap,
             tabAlignment: responsiveValue.isMobile
                 ? TabAlignment.start
@@ -121,7 +128,7 @@ class _CustomTabBarState extends State<CustomTabBar> with TickerProviderStateMix
               );
             },
             child: Container(
-              key: ValueKey(currentRoute),
+              key: ValueKey(_currentRoute),
               child: currentContent,
             ),
           ),
@@ -130,8 +137,8 @@ class _CustomTabBarState extends State<CustomTabBar> with TickerProviderStateMix
     );
   }
 
-  Widget _buildTab(CustomTabItem tabItem, BuildContext context, ResponsiveBreakpointsData responsiveValue) {
-    
+  Widget _buildTab(CustomTabItem tabItem, BuildContext context,
+      ResponsiveBreakpointsData responsiveValue) {
     return Tab(
       child: SizedBox(
         width: responsiveValue.isMobile ? 200 : 400,
