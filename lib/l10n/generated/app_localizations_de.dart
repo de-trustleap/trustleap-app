@@ -2614,4 +2614,16 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get dashboard_landingpage_ranking_info_tooltip =>
       'Diese Auswertung zeigt dir, welche deiner Landingpages im ausgewählten Zeitraum die meisten abgeschlossenen Empfehlungen generiert haben.';
+
+  @override
+  String get profile_general_tab => 'Persönliche Daten';
+
+  @override
+  String get profile_company_tab => 'Unternehmen';
+
+  @override
+  String get profile_password_tab => 'Passwort ändern';
+
+  @override
+  String get profile_delete_tab => 'Account löschen';
 }
