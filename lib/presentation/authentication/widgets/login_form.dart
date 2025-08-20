@@ -63,6 +63,7 @@ class _LoginFormState extends State<LoginForm> {
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final navigator = CustomNavigator.of(context);
 
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
@@ -119,10 +120,8 @@ class _LoginFormState extends State<LoginForm> {
                       const SizedBox(height: 16),
                       PasswordForgottenButton(
                           key: const Key("passwordForgottenButton"),
-                          onTap: () => {
-                                CustomNavigator.pushNamed(
-                                    RoutePaths.passwordReset)
-                              }),
+                          onTap: () =>
+                              {navigator.pushNamed(RoutePaths.passwordReset)}),
                       const SizedBox(height: 24),
                       PrimaryButton(
                           title: localization.login_login_buttontitle,
@@ -137,10 +136,8 @@ class _LoginFormState extends State<LoginForm> {
                       const SizedBox(height: 24),
                       RegisterButton(
                           key: const Key("registerButton"),
-                          onTap: () => {
-                                CustomNavigator.pushNamed(
-                                    RoutePaths.registerPath)
-                              }),
+                          onTap: () =>
+                              {navigator.pushNamed(RoutePaths.registerPath)}),
                       if (errorMessage != "" &&
                           showError &&
                           ((signInState is SignInFailureState) ||

@@ -127,6 +127,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final navigator = CustomNavigator.of(context);
     const spacing = 20.0;
     if (widget.promoterID == "") {
       return const PromoterEditNoDataView();
@@ -155,7 +156,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
                         currentUser?.landingPageIDs ?? []);
                   } else if (state is PromoterEditSuccessState) {
                     const params = "?editedPromoter=true";
-                    CustomNavigator.pushAndReplace(
+                    navigator.pushAndReplace(
                         RoutePaths.homePath + RoutePaths.promotersPath, params);
                   }
                 }),

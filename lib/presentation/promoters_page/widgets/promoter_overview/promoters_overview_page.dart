@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.da
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -27,7 +28,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 enum PromotersOverviewViewState { grid, list }
 
 class PromotersOverviewPage extends StatefulWidget {
-
   const PromotersOverviewPage({
     super.key,
   });
@@ -128,12 +128,12 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   }
 
   void submitDeletion(String id, bool isRegistered) {
-    CustomNavigator.pop();
+    CustomNavigator.of(context).pop();
     Modular.get<PromoterCubit>().deletePromoter(id, isRegistered);
   }
 
-  void showDeleteAlert(
-      String id, bool isRegistered, AppLocalizations localization) {
+  void showDeleteAlert(String id, bool isRegistered,
+      AppLocalizations localization, CustomNavigatorBase navigator) {
     showDialog(
         context: context,
         builder: (_) {
@@ -146,13 +146,14 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
               cancelButtonTitle: localization
                   .promoter_overview_delete_promoter_alert_cancel_button,
               actionButtonAction: () => submitDeletion(id, isRegistered),
-              cancelButtonAction: () => CustomNavigator.pop());
+              cancelButtonAction: () => navigator.pop());
         });
   }
 
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
     final promoterCubit = Modular.get<PromoterCubit>();
     final promoterObserverCubit = Modular.get<PromoterObserverCubit>();
     final userObserverCubit = Modular.get<UserObserverCubit>();
@@ -216,7 +217,8 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                           buttonTitle: localization
                               .promoter_overview_empty_page_button_title,
                           onTap: () {
-                            Modular.to.navigate("${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersRegisterPath}");
+                            Modular.to.navigate(
+                                "${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersRegisterPath}");
                           });
                     } else {
                       return headerWithChildren([
@@ -226,8 +228,8 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                             controller: _controller,
                             promoters: visiblePromoters,
                             deletePressed: (promoterId, isRegistered) =>
-                                showDeleteAlert(
-                                    promoterId, isRegistered, localization),
+                                showDeleteAlert(promoterId, isRegistered,
+                                    localization, navigator),
                           )
                         ] else ...[
                           PromoterOverviewList(

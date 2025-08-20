@@ -54,6 +54,7 @@ class _LegalsCheckWidgetState extends State<LegalsCheck> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
 
     return Column(
       children: [
@@ -77,7 +78,7 @@ class _LegalsCheckWidgetState extends State<LegalsCheck> {
               ClickableLink(
                 title: localization.register_terms_and_condition_link,
                 onTap: () {
-                  CustomNavigator.openInNewTab(widget.isLoggedIn
+                  navigator.openInNewTab(widget.isLoggedIn
                       ? RoutePaths.homePath + RoutePaths.termsAndCondition
                       : RoutePaths.termsAndCondition);
                 },
@@ -112,7 +113,7 @@ class _LegalsCheckWidgetState extends State<LegalsCheck> {
               ClickableLink(
                 title: localization.register_privacy_policy_link,
                 onTap: () {
-                  CustomNavigator.openInNewTab(widget.isLoggedIn
+                  navigator.openInNewTab(widget.isLoggedIn
                       ? RoutePaths.homePath + RoutePaths.privacyPolicy
                       : RoutePaths.privacyPolicy);
                 },

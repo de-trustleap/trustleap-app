@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/helpers/textfield_decimal_number_formatter.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
@@ -88,7 +89,7 @@ class _PagebuilderTextShadowControlState
   }
 
   void _showShadowConfigDialog(BuildContext context, ThemeData themeData,
-      AppLocalizations localization) {
+      AppLocalizations localization, CustomNavigatorBase navigator) {
     _setInitialShadowTexts();
     showDialog(
         context: context,
@@ -107,7 +108,7 @@ class _PagebuilderTextShadowControlState
                               .landingpage_pagebuilder_text_config_shadow_alert_title,
                           style: themeData.textTheme.bodyLarge),
                       IconButton(
-                          onPressed: () => CustomNavigator.pop(),
+                          onPressed: () => navigator.pop(),
                           icon: Icon(Icons.close,
                               size: 24,
                               color: themeData.colorScheme.surfaceTint))
@@ -150,8 +151,8 @@ class _PagebuilderTextShadowControlState
                           controller: blurRadiusController,
                           disabled: false,
                           desktopStyle: themeData.textTheme.bodySmall,
-                          keyboardType:
-                              const TextInputType.numberWithOptions(decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
                           inputFormatters: [
                             DecimalNumberFormatter(
                                 maxIntegerDigits: 3, maxDecimalDigits: 2)
@@ -172,8 +173,8 @@ class _PagebuilderTextShadowControlState
                           controller: xOffsetController,
                           disabled: false,
                           desktopStyle: themeData.textTheme.bodySmall,
-                          keyboardType:
-                              const TextInputType.numberWithOptions(decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
                           inputFormatters: [
                             DecimalNumberFormatter(
                                 maxIntegerDigits: 3, maxDecimalDigits: 2)
@@ -194,8 +195,8 @@ class _PagebuilderTextShadowControlState
                           controller: yOffsetController,
                           disabled: false,
                           desktopStyle: themeData.textTheme.bodySmall,
-                          keyboardType:
-                              const TextInputType.numberWithOptions(decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
                           inputFormatters: [
                             DecimalNumberFormatter(
                                 maxIntegerDigits: 3, maxDecimalDigits: 2)
@@ -207,7 +208,7 @@ class _PagebuilderTextShadowControlState
                     title: localization
                         .landingpage_pagebuilder_text_config_shadow_alert_apply,
                     onTap: () {
-                      CustomNavigator.pop();
+                      navigator.pop();
                       widget.onSelected(_getShadowFromTextFields());
                     })
               ]));
@@ -218,6 +219,7 @@ class _PagebuilderTextShadowControlState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
 
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(widget.title, style: themeData.textTheme.bodySmall),
@@ -230,7 +232,8 @@ class _PagebuilderTextShadowControlState
         const SizedBox(width: 8),
         IconButton(
           onPressed: () {
-            _showShadowConfigDialog(context, themeData, localization);
+            _showShadowConfigDialog(
+                context, themeData, localization, navigator);
           },
           icon: Icon(Icons.edit,
               color: themeData.colorScheme.secondary, size: 24),

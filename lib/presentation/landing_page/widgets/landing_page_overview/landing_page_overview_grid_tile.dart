@@ -68,6 +68,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localizations = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
@@ -78,7 +79,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
         !_isPending() &&
         responsiveValue.isDesktop) {
       return InkWell(
-          onTap: () => CustomNavigator.openInNewTab(
+          onTap: () => navigator.openInNewTab(
               "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
           child: buildTile(themeData, responsiveValue, localizations, context));
     } else {

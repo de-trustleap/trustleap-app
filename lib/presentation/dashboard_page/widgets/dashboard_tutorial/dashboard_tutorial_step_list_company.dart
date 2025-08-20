@@ -21,6 +21,7 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final cubit = Modular.get<DashboardTutorialCubit>();
+    final navigator = CustomNavigator.of(context);
 
     return Column(
       children: [
@@ -32,8 +33,7 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               localization.dashboard_tutorial_step_email_verification_content,
           buttonText: localization.dashboard_tutorial_button_to_profile,
           buttonAction: () {
-            CustomNavigator.navigate(
-                RoutePaths.homePath + RoutePaths.profilePath);
+            navigator.navigate(RoutePaths.homePath + RoutePaths.profilePath);
             cubit.setStep(user, 1);
           },
           isLast: false,
@@ -46,8 +46,7 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           content: localization.dashboard_tutorial_step_contact_data_content,
           buttonText: localization.dashboard_tutorial_button_to_profile,
           buttonAction: () {
-            CustomNavigator.navigate(
-                RoutePaths.homePath + RoutePaths.profilePath);
+            navigator.navigate(RoutePaths.homePath + RoutePaths.profilePath);
             cubit.setStep(user, 2);
           },
           isLast: false,
@@ -62,8 +61,7 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               localization.dashboard_tutorial_step_company_registration_content,
           buttonText: localization.dashboard_tutorial_button_to_profile,
           buttonAction: () {
-            CustomNavigator.navigate(
-                RoutePaths.homePath + RoutePaths.profilePath);
+            navigator.navigate(RoutePaths.homePath + RoutePaths.profilePath);
             cubit.setStep(user, 3);
           },
           isLast: false,
@@ -88,8 +86,8 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               localization.dashboard_tutorial_step_default_landingpage_content,
           buttonText: localization.dashboard_tutorial_button_to_landingpages,
           buttonAction: () {
-            CustomNavigator.navigate(
-                RoutePaths.homePath + RoutePaths.landingPagePath);
+            navigator
+                .navigate(RoutePaths.homePath + RoutePaths.landingPagePath);
             cubit.setStep(user, 5);
           },
           isLast: false,
@@ -102,8 +100,8 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           content: localization.dashboard_tutorial_step_landingpage_content,
           buttonText: localization.dashboard_tutorial_button_to_landingpages,
           buttonAction: () {
-            CustomNavigator.navigate(
-                RoutePaths.homePath + RoutePaths.landingPagePath);
+            navigator
+                .navigate(RoutePaths.homePath + RoutePaths.landingPagePath);
             cubit.setStep(user, 6);
           },
           isLast: false,
@@ -118,7 +116,7 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
               .dashboard_tutorial_step_promoter_registration_content,
           buttonText: localization.dashboard_tutorial_button_register_promoter,
           buttonAction: () {
-            CustomNavigator.navigate(RoutePaths.homePath +
+            navigator.navigate(RoutePaths.homePath +
                 RoutePaths.promotersPath +
                 RoutePaths.promotersRegisterPath);
             cubit.setStep(user, 7);
@@ -145,8 +143,8 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           buttonText:
               localization.dashboard_tutorial_button_make_recommendation,
           buttonAction: () {
-            CustomNavigator.navigate(
-                RoutePaths.homePath + RoutePaths.recommendationsPath);
+            navigator
+                .navigate(RoutePaths.homePath + RoutePaths.recommendationsPath);
             cubit.setStep(user, 9);
           },
           isLast: false,
@@ -162,7 +160,7 @@ class DashboardTutorialStepListCompany extends StatelessWidget {
           buttonText:
               localization.dashboard_tutorial_button_to_recommendation_manager,
           buttonAction: () {
-            CustomNavigator.navigate(
+            navigator.navigate(
                 RoutePaths.homePath + RoutePaths.recommendationManagerPath);
             cubit.setStep(user, 10);
           },

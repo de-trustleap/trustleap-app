@@ -81,6 +81,7 @@ class _MenuItemState extends State<MenuItem> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
 
     return BlocBuilder<MenuCubit, MenuState>(
       buildWhen: (previous, current) =>
@@ -109,10 +110,9 @@ class _MenuItemState extends State<MenuItem> {
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
                   if (widget.isAdmin) {
-                    CustomNavigator.navigate(
-                        RoutePaths.adminPath + widget.path);
+                    navigator.navigate(RoutePaths.adminPath + widget.path);
                   } else {
-                    CustomNavigator.navigate(RoutePaths.homePath + widget.path);
+                    navigator.navigate(RoutePaths.homePath + widget.path);
                   }
                 },
                 child: Padding(

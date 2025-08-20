@@ -1,6 +1,5 @@
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -29,7 +28,7 @@ class RouterObserver extends NavigatorObserver {
   }
 
   void handleNavigation() {
-    final path = CustomNavigator.currentPath;
+    final path = Modular.to.path;
 
     final MenuCubit menuCubit = Modular.get<MenuCubit>();
 

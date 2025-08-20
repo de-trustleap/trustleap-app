@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.da
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -42,15 +43,21 @@ class _RecommendationManagerPageState
       final userState = BlocProvider.of<UserObserverCubit>(context).state;
       if (userState is UserObserverSuccess) {
         currentUser = userState.user;
-        Modular.get<RecommendationManagerTileCubit>().initializeFavorites(userState.user.favoriteRecommendationIDs);
-        Modular.get<RecommendationManagerTileCubit>().setCurrentUser(userState.user);
+        Modular.get<RecommendationManagerTileCubit>()
+            .initializeFavorites(userState.user.favoriteRecommendationIDs);
+        Modular.get<RecommendationManagerTileCubit>()
+            .setCurrentUser(userState.user);
         _requestRecommendations(userState.user);
       }
     });
   }
 
-  void showDeleteAlert(AppLocalizations localizations, String recoID,
-      String userID, String userRecoID) {
+  void showDeleteAlert(
+      AppLocalizations localizations,
+      CustomNavigatorBase navigator,
+      String recoID,
+      String userID,
+      String userRecoID) {
     showDialog(
         context: context,
         builder: (_) {
@@ -64,12 +71,12 @@ class _RecommendationManagerPageState
                   .recommendation_manager_delete_alert_cancel_button,
               actionButtonAction: () =>
                   _submitDeleteRecommendation(recoID, userID, userRecoID),
-              cancelButtonAction: () => CustomNavigator.pop());
+              cancelButtonAction: () => navigator.pop());
         });
   }
 
-  void showFinishAlert(
-      AppLocalizations localizations, UserRecommendation recommendation) {
+  void showFinishAlert(AppLocalizations localizations,
+      CustomNavigatorBase navigator, UserRecommendation recommendation) {
     showDialog(
         context: context,
         builder: (_) {
@@ -83,12 +90,12 @@ class _RecommendationManagerPageState
                   .recommendation_manager_finish_alert_cancel_button,
               actionButtonAction: () =>
                   _submitFinishRecommendation(recommendation, true),
-              cancelButtonAction: () => CustomNavigator.pop());
+              cancelButtonAction: () => navigator.pop());
         });
   }
 
-  void showFailedAlert(
-      AppLocalizations localizations, UserRecommendation recommendation) {
+  void showFailedAlert(AppLocalizations localizations,
+      CustomNavigatorBase navigator, UserRecommendation recommendation) {
     showDialog(
         context: context,
         builder: (_) {
@@ -102,20 +109,20 @@ class _RecommendationManagerPageState
                   .recommendation_manager_failed_alert_cancel_button,
               actionButtonAction: () =>
                   _submitFinishRecommendation(recommendation, false),
-              cancelButtonAction: () => CustomNavigator.pop());
+              cancelButtonAction: () => navigator.pop());
         });
   }
 
   void _submitDeleteRecommendation(
       String recoID, String userID, String userRecoID) {
-    CustomNavigator.pop();
+    CustomNavigator.of(context).pop();
     Modular.get<RecommendationManagerCubit>()
         .deleteRecommendation(recoID, userID, userRecoID);
   }
 
   void _submitFinishRecommendation(
       UserRecommendation recommendation, bool success) {
-    CustomNavigator.pop();
+    CustomNavigator.of(context).pop();
     Modular.get<RecommendationManagerTileCubit>()
         .setFinished(recommendation, success);
   }
@@ -137,6 +144,7 @@ class _RecommendationManagerPageState
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
     final recoManagerCubit = Modular.get<RecommendationManagerCubit>();
 
     return BlocConsumer<RecommendationManagerCubit, RecommendationManagerState>(
@@ -179,7 +187,7 @@ class _RecommendationManagerPageState
                 width: double.infinity,
                 decoration: BoxDecoration(color: themeData.colorScheme.surface),
                 child: _createContainerChildWidget(
-                    state, responsiveValue, localization));
+                    state, responsiveValue, localization, navigator));
           }
         });
   }
@@ -187,7 +195,8 @@ class _RecommendationManagerPageState
   Widget _createContainerChildWidget(
       RecommendationManagerState state,
       ResponsiveBreakpointsData responsiveValue,
-      AppLocalizations localization) {
+      AppLocalizations localization,
+      CustomNavigatorBase navigator) {
     if (state is RecommendationGetRecosNoRecosState) {
       return EmptyPage(
           icon: Icons.person_add,
@@ -195,8 +204,8 @@ class _RecommendationManagerPageState
           subTitle: localization.recommendation_manager_no_data_description,
           buttonTitle: localization.recommendation_manager_no_data_button_title,
           onTap: () {
-            CustomNavigator.navigate(
-                RoutePaths.homePath + RoutePaths.recommendationsPath);
+            navigator
+                .navigate(RoutePaths.homePath + RoutePaths.recommendationsPath);
           });
     } else if (state is RecommendationGetRecosFailureState) {
       return ErrorView(
@@ -217,13 +226,14 @@ class _RecommendationManagerPageState
                     .setAppointmentState(recommendation);
               },
               onFinishedPressed: (recommendation) {
-                showFinishAlert(localization, recommendation);
+                showFinishAlert(localization, navigator, recommendation);
               },
               onFailedPressed: (recommendation) {
-                showFailedAlert(localization, recommendation);
+                showFailedAlert(localization, navigator, recommendation);
               },
               onDeletePressed: (recoID, userID, userRecoID) {
-                showDeleteAlert(localization, recoID, userID, userRecoID);
+                showDeleteAlert(
+                    localization, navigator, recoID, userID, userRecoID);
               },
               onFavoritePressed: (recommendation) {
                 Modular.get<RecommendationManagerTileCubit>()

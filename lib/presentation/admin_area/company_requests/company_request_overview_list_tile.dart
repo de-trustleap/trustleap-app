@@ -12,10 +12,11 @@ class CompanyRequestOverviewListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localizations = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
 
     return InkWell(
       onTap: () {
-        CustomNavigator.pushNamed(
+        navigator.pushNamed(
             RoutePaths.adminPath + RoutePaths.companyRequestDetails,
             arguments: model);
       },

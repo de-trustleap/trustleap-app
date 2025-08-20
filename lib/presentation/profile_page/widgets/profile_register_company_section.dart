@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/company_request/company_request/comp
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -43,6 +44,7 @@ class _ProfileRegisterCompanySectionState
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
     const spacing = 20;
 
     return BlocBuilder<CompanyRequestCubit, CompanyRequestState>(
@@ -60,7 +62,7 @@ class _ProfileRegisterCompanySectionState
                 SizedBox(height: spacing.toDouble()),
                 if (!_hasPendingCompanyRequest()) ...[
                   registerRequestView(themeData, responsiveValue, localization,
-                      maxWidth, spacing)
+                      navigator, maxWidth, spacing)
                 ] else if (state is PendingCompanyRequestSuccessState) ...[
                   SizedBox(
                     width: maxWidth,
@@ -99,6 +101,7 @@ class _ProfileRegisterCompanySectionState
       ThemeData themeData,
       ResponsiveBreakpointsData responsiveValue,
       AppLocalizations localization,
+      CustomNavigatorBase navigator,
       double maxWidth,
       int spacing) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -118,7 +121,7 @@ class _ProfileRegisterCompanySectionState
                   : maxWidth / 2 - spacing,
               disabled: false,
               onTap: () {
-                CustomNavigator.navigate(
+                navigator.navigate(
                     RoutePaths.homePath + RoutePaths.companyRegistration);
               })
         ],

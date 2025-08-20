@@ -2,5 +2,4 @@ arb-dir: lib/l10n
 output-dir: lib/l10n/generated
 template_arb_file: app_de.arb
 output-localization-file: app_localizations.dart
-synthetic-package: false
 nullable-getter: false
