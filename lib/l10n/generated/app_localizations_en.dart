@@ -390,6 +390,19 @@ class AppLocalizationsEn extends AppLocalizations {
       'Contact email address';
 
   @override
+  String get landingpage_creator_business_model_title => 'Business Model';
+
+  @override
+  String get landingpage_creator_business_model_b2b_label => 'B2B';
+
+  @override
+  String get landingpage_creator_business_model_b2c_label => 'B2C';
+
+  @override
+  String get landingpage_creator_business_model_info_tooltip =>
+      'Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\\nIf you address both business customers and end consumers, choose B2C.';
+
+  @override
   String get error_msg_pleace_upload_picture => 'Please upload an image';
 
   @override
