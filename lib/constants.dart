@@ -133,3 +133,5 @@ enum FeedbackType {
   final String value;
   const FeedbackType(this.value);
 }
+
+enum BusinessModel { b2b, b2c }

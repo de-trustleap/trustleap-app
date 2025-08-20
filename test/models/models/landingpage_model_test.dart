@@ -65,6 +65,7 @@ void main() {
         "termsAndConditions": "Test",
         "scripts": "<script> Test </script>",
         "contactEmailAddress": "test@x.de",
+        "businessModel": null,
         "companyData": null
       };
       // When
