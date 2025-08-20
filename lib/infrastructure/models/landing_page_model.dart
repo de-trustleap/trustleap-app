@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 
@@ -24,6 +25,7 @@ class LandingPageModel extends Equatable {
   final String? termsAndConditions;
   final String? scriptTags;
   final String? contactEmailAddress;
+  final String? businessModel;
   final Map<String, dynamic>? companyData;
 
   const LandingPageModel(
@@ -46,6 +48,7 @@ class LandingPageModel extends Equatable {
       this.termsAndConditions,
       this.scriptTags,
       this.contactEmailAddress,
+      this.businessModel,
       this.companyData});
 
   LandingPageModel copyWith(
@@ -68,6 +71,7 @@ class LandingPageModel extends Equatable {
       String? termsAndConditions,
       String? scriptTags,
       String? contactEmailAddress,
+      String? businessModel,
       Map<String, dynamic>? companyData}) {
     return LandingPageModel(
         id: id ?? this.id,
@@ -89,6 +93,7 @@ class LandingPageModel extends Equatable {
         termsAndConditions: termsAndConditions ?? this.termsAndConditions,
         scriptTags: scriptTags ?? this.scriptTags,
         contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
+        businessModel: businessModel ?? this.businessModel,
         companyData: companyData ?? this.companyData);
   }
 
@@ -113,6 +118,7 @@ class LandingPageModel extends Equatable {
       'termsAndConditions': termsAndConditions,
       'scripts': scriptTags,
       'contactEmailAddress': contactEmailAddress,
+      'businessModel': businessModel,
       'companyData': companyData
     };
   }
@@ -159,6 +165,9 @@ class LandingPageModel extends Equatable {
         contactEmailAddress: map['contactEmailAddress'] != null
             ? map['contactEmailAddress'] as String
             : null,
+        businessModel: map['businessModel'] != null
+            ? map['businessModel'] as String
+            : null,
         companyData: map['companyData'] != null
             ? map['companyData'] as Map<String, dynamic>
             : null);
@@ -190,6 +199,7 @@ class LandingPageModel extends Equatable {
         termsAndConditions: termsAndConditions,
         scriptTags: scriptTags,
         contactEmailAddress: contactEmailAddress,
+        businessModel: _getBusinessModelFromString(businessModel),
         companyData: companyData);
   }
 
@@ -214,7 +224,22 @@ class LandingPageModel extends Equatable {
         termsAndConditions: landingPage.termsAndConditions,
         scriptTags: landingPage.scriptTags,
         contactEmailAddress: landingPage.contactEmailAddress,
+        businessModel: landingPage.businessModel?.name,
         companyData: landingPage.companyData);
+  }
+
+  BusinessModel? _getBusinessModelFromString(String? businessModel) {
+    if (businessModel == null) {
+      return null;
+    }
+    switch (businessModel) {
+      case "b2b":
+        return BusinessModel.b2b;
+      case "b2c":
+        return BusinessModel.b2c;
+      default:
+        return null;
+    }
   }
 
   @override
@@ -235,6 +260,7 @@ class LandingPageModel extends Equatable {
         termsAndConditions,
         scriptTags,
         contactEmailAddress,
+        businessModel,
         companyData
       ];
 }

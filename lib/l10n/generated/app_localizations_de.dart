@@ -397,6 +397,19 @@ class AppLocalizationsDe extends AppLocalizations {
       'Kontakt E-Mail Adresse';
 
   @override
+  String get landingpage_creator_business_model_title => 'Geschäftsmodell';
+
+  @override
+  String get landingpage_creator_business_model_b2b_label => 'B2B';
+
+  @override
+  String get landingpage_creator_business_model_b2c_label => 'B2C';
+
+  @override
+  String get landingpage_creator_business_model_info_tooltip =>
+      'Wähle ob deine Kunden B2B (Geschäftskunden) oder B2C (Endverbraucher) sind. Das ist wichtig um im Falle von B2B Kunden einen Disclaimer auf der Landingpage einzubetten.\\nWenn du Geschäftskunden und Endverbraucher ansprichst dann wähle B2C aus.';
+
+  @override
   String get error_msg_pleace_upload_picture => 'Bitte ein Bild hochladen';
 
   @override
@@ -2614,4 +2627,16 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get dashboard_landingpage_ranking_info_tooltip =>
       'Diese Auswertung zeigt dir, welche deiner Landingpages im ausgewählten Zeitraum die meisten abgeschlossenen Empfehlungen generiert haben.';
+
+  @override
+  String get profile_general_tab => 'Persönliche Daten';
+
+  @override
+  String get profile_company_tab => 'Unternehmen';
+
+  @override
+  String get profile_password_tab => 'Passwort ändern';
+
+  @override
+  String get profile_delete_tab => 'Account löschen';
 }

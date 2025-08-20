@@ -767,6 +767,30 @@ abstract class AppLocalizations {
   /// **'Contact email address'**
   String get landingpage_creator_placeholder_contact_email;
 
+  /// Title for business model selection in landingpage creator
+  ///
+  /// In en, this message translates to:
+  /// **'Business Model'**
+  String get landingpage_creator_business_model_title;
+
+  /// Label for B2B business model
+  ///
+  /// In en, this message translates to:
+  /// **'B2B'**
+  String get landingpage_creator_business_model_b2b_label;
+
+  /// Label for B2C business model
+  ///
+  /// In en, this message translates to:
+  /// **'B2C'**
+  String get landingpage_creator_business_model_b2c_label;
+
+  /// Tooltip text for the business model InfoButton
+  ///
+  /// In en, this message translates to:
+  /// **'Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\\nIf you address both business customers and end consumers, choose B2C.'**
+  String get landingpage_creator_business_model_info_tooltip;
+
   /// Error message when no image has been uploaded.
   ///
   /// In en, this message translates to:
@@ -4418,6 +4442,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This analysis shows you which of your landing pages have generated the most completed recommendations in the selected time period.'**
   String get dashboard_landingpage_ranking_info_tooltip;
+
+  /// Tab title for personal data in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Data'**
+  String get profile_general_tab;
+
+  /// Tab title for company in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get profile_company_tab;
+
+  /// Tab title for change password in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get profile_password_tab;
+
+  /// Tab title for delete account in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get profile_delete_tab;
 }
 
 class _AppLocalizationsDelegate

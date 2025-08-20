@@ -189,6 +189,7 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "isActive": landingPageModel.isActive,
         "templateID": templateID,
         "contactEmailAddress": landingPageModel.contactEmailAddress,
+        "businessModel": landingPageModel.businessModel,
         "companyData":
             landingPageModel.companyData != null ? companyData : null,
         "aiGeneration": aiGeneration != null ? aiGenerationMap : null

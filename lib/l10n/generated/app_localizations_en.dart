@@ -390,6 +390,19 @@ class AppLocalizationsEn extends AppLocalizations {
       'Contact email address';
 
   @override
+  String get landingpage_creator_business_model_title => 'Business Model';
+
+  @override
+  String get landingpage_creator_business_model_b2b_label => 'B2B';
+
+  @override
+  String get landingpage_creator_business_model_b2c_label => 'B2C';
+
+  @override
+  String get landingpage_creator_business_model_info_tooltip =>
+      'Choose whether your customers are B2B (business customers) or B2C (end consumers). This is important to embed a disclaimer on the landing page in case of B2B customers.\\nIf you address both business customers and end consumers, choose B2C.';
+
+  @override
   String get error_msg_pleace_upload_picture => 'Please upload an image';
 
   @override
@@ -2566,4 +2579,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dashboard_landingpage_ranking_info_tooltip =>
       'This analysis shows you which of your landing pages have generated the most completed recommendations in the selected time period.';
+
+  @override
+  String get profile_general_tab => 'Personal Data';
+
+  @override
+  String get profile_company_tab => 'Company';
+
+  @override
+  String get profile_password_tab => 'Change Password';
+
+  @override
+  String get profile_delete_tab => 'Delete Account';
 }

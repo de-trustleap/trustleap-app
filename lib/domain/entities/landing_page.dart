@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 
 class LandingPage extends Equatable {
@@ -22,6 +23,7 @@ class LandingPage extends Equatable {
   final String? termsAndConditions;
   final String? scriptTags;
   final String? contactEmailAddress;
+  final BusinessModel? businessModel;
   final Map<String, dynamic>? companyData;
 
   const LandingPage(
@@ -44,6 +46,7 @@ class LandingPage extends Equatable {
       this.termsAndConditions,
       this.scriptTags,
       this.contactEmailAddress,
+      this.businessModel,
       this.companyData});
 
   LandingPage copyWith(
@@ -66,6 +69,7 @@ class LandingPage extends Equatable {
       String? termsAndConditions,
       String? scriptTags,
       String? contactEmailAddress,
+      BusinessModel? businessModel,
       Map<String, dynamic>? companyData}) {
     return LandingPage(
         id: id ?? this.id,
@@ -87,6 +91,7 @@ class LandingPage extends Equatable {
         termsAndConditions: termsAndConditions ?? this.termsAndConditions,
         scriptTags: scriptTags ?? this.scriptTags,
         contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
+        businessModel: businessModel ?? this.businessModel,
         companyData: companyData ?? this.companyData);
   }
 
@@ -108,6 +113,7 @@ class LandingPage extends Equatable {
         termsAndConditions,
         scriptTags,
         contactEmailAddress,
+        businessModel,
         companyData
       ];
 }

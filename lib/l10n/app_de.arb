@@ -454,6 +454,22 @@
     "@landingpage_creator_placeholder_contact_email": {
         "description": "Platzhalter für Kontakt Email Adresse im Landingpage Creator"
     },
+    "landingpage_creator_business_model_title": "Geschäftsmodell",
+    "@landingpage_creator_business_model_title": {
+        "description": "Der Titel für die Geschäftsmodell Auswahl im Landingpage Creator"
+    },
+    "landingpage_creator_business_model_b2b_label": "B2B",
+    "@landingpage_creator_business_model_b2b_label": {
+        "description": "Das Label für B2B Geschäftsmodell"
+    },
+    "landingpage_creator_business_model_b2c_label": "B2C",
+    "@landingpage_creator_business_model_b2c_label": {
+        "description": "Das Label für B2C Geschäftsmodell"
+    },
+    "landingpage_creator_business_model_info_tooltip": "Wähle ob deine Kunden B2B (Geschäftskunden) oder B2C (Endverbraucher) sind. Das ist wichtig um im Falle von B2B Kunden einen Disclaimer auf der Landingpage einzubetten.\\nWenn du Geschäftskunden und Endverbraucher ansprichst dann wähle B2C aus.",
+    "@landingpage_creator_business_model_info_tooltip": {
+        "description": "Der Tooltip Text für das Geschäftsmodell InfoButton"
+    },
     "error_msg_pleace_upload_picture": "Bitte ein Bild hochladen",
     "@error_msg_pleace_upload_picture": {
         "description": "Fehlernachricht wenn kein Bild hochgeladen wurde."
@@ -2960,5 +2976,21 @@
     "dashboard_landingpage_ranking_info_tooltip": "Diese Auswertung zeigt dir, welche deiner Landingpages im ausgewählten Zeitraum die meisten abgeschlossenen Empfehlungen generiert haben.",
     "@dashboard_landingpage_ranking_info_tooltip": {
         "description": "Tooltip-Text für den Info-Button bei Dashboard Landingpage Ranking"
+    },
+    "profile_general_tab": "Persönliche Daten",
+    "@profile_general_tab": {
+        "description": "Tab-Titel für persönliche Daten im Profil"
+    },
+    "profile_company_tab": "Unternehmen",
+    "@profile_company_tab": {
+        "description": "Tab-Titel für Unternehmen im Profil"
+    },
+    "profile_password_tab": "Passwort ändern",
+    "@profile_password_tab": {
+        "description": "Tab-Titel für Passwort ändern im Profil"
+    },
+    "profile_delete_tab": "Account löschen",
+    "@profile_delete_tab": {
+        "description": "Tab-Titel für Account löschen im Profil"
     }
 }

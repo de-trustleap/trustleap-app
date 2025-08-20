@@ -19,6 +19,7 @@ import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_ove
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_list.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -26,11 +27,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 enum PromotersOverviewViewState { grid, list }
 
 class PromotersOverviewPage extends StatefulWidget {
-  final TabController tabController;
 
   const PromotersOverviewPage({
     super.key,
-    required this.tabController,
   });
 
   @override
@@ -217,7 +216,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                           buttonTitle: localization
                               .promoter_overview_empty_page_button_title,
                           onTap: () {
-                            widget.tabController.animateTo(1);
+                            Modular.to.navigate("${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersRegisterPath}");
                           });
                     } else {
                       return headerWithChildren([

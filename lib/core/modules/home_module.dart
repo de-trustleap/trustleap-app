@@ -27,17 +27,49 @@ class HomeModule extends Module {
               child: (_) => const DashboardPage()),
           ChildRoute(RoutePaths.profilePath,
               child: (_) => ProfilePage(
-                  registeredCompany: r.args.queryParams["registeredCompany"])),
+                  registeredCompany: r.args.queryParams["registeredCompany"]),
+              children: [
+                ChildRoute(RoutePaths.profileGeneralPath,
+                    child: (_) => ProfilePage(
+                        registeredCompany:
+                            r.args.queryParams["registeredCompany"])),
+                ChildRoute(RoutePaths.profileCompanyPath,
+                    child: (_) => ProfilePage(
+                        registeredCompany:
+                            r.args.queryParams["registeredCompany"])),
+                ChildRoute(RoutePaths.profilePasswordPath,
+                    child: (_) => ProfilePage(
+                        registeredCompany:
+                            r.args.queryParams["registeredCompany"])),
+                ChildRoute(RoutePaths.profileDeletePath,
+                    child: (_) => ProfilePage(
+                        registeredCompany:
+                            r.args.queryParams["registeredCompany"])),
+              ]),
           ChildRoute(RoutePaths.companyRegistration,
               child: (_) => const CompanyRegistrationPage()),
           ChildRoute(RoutePaths.recommendationsPath,
               child: (_) => const RecommendationsPage()),
           ChildRoute(RoutePaths.recommendationManagerPath,
-              child: (_) => const RecommendationManagerPage()),
+              child: (_) => const RecommendationManagerPage(),
+              children: [
+                ChildRoute(RoutePaths.recommendationManagerActivePath,
+                    child: (_) => const RecommendationManagerPage()),
+                ChildRoute(RoutePaths.recommendationManagerArchivePath,
+                    child: (_) => const RecommendationManagerPage()),
+              ]),
           ChildRoute(RoutePaths.promotersPath,
               child: (_) => PromotersPage(
                     editedPromoter: r.args.queryParams["editedPromoter"],
-                  )),
+                  ),
+              children: [
+                ChildRoute(RoutePaths.promotersOverviewPath,
+                    child: (_) => PromotersPage(
+                        editedPromoter: r.args.queryParams["editedPromoter"])),
+                ChildRoute(RoutePaths.promotersRegisterPath,
+                    child: (_) => PromotersPage(
+                        editedPromoter: r.args.queryParams["editedPromoter"])),
+              ]),
           ChildRoute("${RoutePaths.editPromoterPath}/:id",
               child: (_) =>
                   PromoterEditPage(promoterID: r.args.params["id"] ?? "")),
