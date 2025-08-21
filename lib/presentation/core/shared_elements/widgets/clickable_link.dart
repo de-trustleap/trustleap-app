@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 
 class ClickableLink extends StatelessWidget {
   final String title;
@@ -16,7 +17,7 @@ class ClickableLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     return InkWell(
         onTap: () => onTap(),
         child: Text(title,

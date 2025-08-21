@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -116,7 +117,7 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final validator = AuthValidator(localization: localization);
     const double textFieldSpacing = 20;
     const double maxViewWidth = 500;
@@ -129,6 +130,7 @@ class _RegisterFormState extends State<RegisterForm> {
         {bool shouldWrapToNextLine = true}) {
       double mobileWidth =
           max(0, (responsiveValue.screenWidth - listPadding * 2));
+      
       if (fieldCount == 1) {
         return max(
             0, responsiveValue.largerThan(MOBILE) ? maxViewWidth : mobileWidth);
@@ -362,6 +364,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 const SizedBox(height: textFieldSpacing),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   FormTextfield(
+                      key: const Key("codeTextField"),
                       maxWidth: getResponsiveWidth(1),
                       controller: codeTextController,
                       disabled: false,
@@ -399,6 +402,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   SizedBox(
                     width: getResponsiveWidth(1),
                     child: PrimaryButton(
+                        key: const Key("registerButton"),
                         title: localization.register_now_buttontitle,
                         disabled: buttonDisabled,
                         isLoading: state is SignInLoadingState,
