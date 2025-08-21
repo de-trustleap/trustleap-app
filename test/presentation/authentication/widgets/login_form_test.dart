@@ -206,7 +206,7 @@ void main() {
     testWidgets(
         'should call checkForAuthState when SignInSuccessState is emitted',
         (tester) async {
-      // Given - create mock with success state
+      // Given
       final successMockCubit = MockSignInCubit();
       final successState = SignInSuccessState(creds: MockUserCredential());
 

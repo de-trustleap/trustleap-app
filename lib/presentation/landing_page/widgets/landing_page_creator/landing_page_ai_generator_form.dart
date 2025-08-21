@@ -85,48 +85,34 @@ class _LandingPageAIGenerationFormState
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-            Column(
-              children: [
-                RadioListTile<LandingPageType>(
-                  title: Text(
-                      localization.landingpage_creator_ai_form_radio_business),
-                  value: LandingPageType.business,
-                  groupValue: _selectedType,
-                  onChanged: widget.disabled
-                      ? null
-                      : (value) {
-                          setState(() {
-                            _selectedType = value!;
-                          });
-                        },
-                ),
-                RadioListTile<LandingPageType>(
-                  title: Text(
-                      localization.landingpage_creator_ai_form_radio_finance),
-                  value: LandingPageType.financialAdvisor,
-                  groupValue: _selectedType,
-                  onChanged: widget.disabled
-                      ? null
-                      : (value) {
-                          setState(() {
-                            _selectedType = value!;
-                          });
-                        },
-                ),
-                RadioListTile<LandingPageType>(
-                  title: Text(localization
-                      .landingpage_creator_ai_form_radio_individual),
-                  value: LandingPageType.custom,
-                  groupValue: _selectedType,
-                  onChanged: widget.disabled
-                      ? null
-                      : (value) {
-                          setState(() {
-                            _selectedType = value!;
-                          });
-                        },
-                ),
-              ],
+            RadioGroup<LandingPageType>(
+              groupValue: _selectedType,
+              onChanged: (LandingPageType? value) {
+                if (!widget.disabled && value != null) {
+                  setState(() {
+                    _selectedType = value;
+                  });
+                }
+              },
+              child: Column(
+                children: [
+                  RadioListTile<LandingPageType>(
+                    title: Text(
+                        localization.landingpage_creator_ai_form_radio_business),
+                    value: LandingPageType.business,
+                  ),
+                  RadioListTile<LandingPageType>(
+                    title: Text(
+                        localization.landingpage_creator_ai_form_radio_finance),
+                    value: LandingPageType.financialAdvisor,
+                  ),
+                  RadioListTile<LandingPageType>(
+                    title: Text(localization
+                        .landingpage_creator_ai_form_radio_individual),
+                    value: LandingPageType.custom,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 24),
             FormTextfield(

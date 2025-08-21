@@ -48,47 +48,41 @@ class _PromoterOverviewHeaderExpandableFilterState
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              RadioListTile(
-                  title: SelectableText(
-                      localization.promoter_overview_filter_show_all,
-                      style: themeData.textTheme.bodySmall),
-                  value: PromoterRegistrationFilterState.all,
-                  groupValue: filterStates.registrationFilterState,
-                  onChanged: (value) {
+              RadioGroup<PromoterRegistrationFilterState>(
+                groupValue: filterStates.registrationFilterState,
+                onChanged: (PromoterRegistrationFilterState? value) {
+                  if (value != null) {
                     setState(() {
-                      filterStates.registrationFilterState =
-                          value ?? PromoterRegistrationFilterState.all;
+                      filterStates.registrationFilterState = value;
                       widget.onFilterChanged(filterStates);
                     });
-                  }),
-              const SizedBox(height: 8),
-              RadioListTile(
-                  title: SelectableText(
-                      localization.promoter_overview_filter_show_registered,
-                      style: themeData.textTheme.bodySmall),
-                  value: PromoterRegistrationFilterState.registered,
-                  groupValue: filterStates.registrationFilterState,
-                  onChanged: (value) {
-                    setState(() {
-                      filterStates.registrationFilterState =
-                          value ?? PromoterRegistrationFilterState.all;
-                      widget.onFilterChanged(filterStates);
-                    });
-                  }),
-              const SizedBox(height: 8),
-              RadioListTile(
-                  title: SelectableText(
-                      localization.promoter_overview_filter_show_unregistered,
-                      style: themeData.textTheme.bodySmall),
-                  value: PromoterRegistrationFilterState.unregistered,
-                  groupValue: filterStates.registrationFilterState,
-                  onChanged: (value) {
-                    setState(() {
-                      filterStates.registrationFilterState =
-                          value ?? PromoterRegistrationFilterState.all;
-                      widget.onFilterChanged(filterStates);
-                    });
-                  }),
+                  }
+                },
+                child: Column(
+                  children: [
+                    RadioListTile<PromoterRegistrationFilterState>(
+                        title: SelectableText(
+                            localization.promoter_overview_filter_show_all,
+                            style: themeData.textTheme.bodySmall),
+                        value: PromoterRegistrationFilterState.all,
+                    ),
+                    const SizedBox(height: 8),
+                    RadioListTile<PromoterRegistrationFilterState>(
+                        title: SelectableText(
+                            localization.promoter_overview_filter_show_registered,
+                            style: themeData.textTheme.bodySmall),
+                        value: PromoterRegistrationFilterState.registered,
+                    ),
+                    const SizedBox(height: 8),
+                    RadioListTile<PromoterRegistrationFilterState>(
+                        title: SelectableText(
+                            localization.promoter_overview_filter_show_unregistered,
+                            style: themeData.textTheme.bodySmall),
+                        value: PromoterRegistrationFilterState.unregistered,
+                    ),
+                  ],
+                ),
+              ),
             ]),
       ),
       Expanded(
@@ -130,32 +124,33 @@ class _PromoterOverviewHeaderExpandableFilterState
                         sortBy ?? PromoterSortByFilterState.createdAt;
                     widget.onFilterChanged(filterStates);
                   }),
-              RadioListTile(
-                  title: SelectableText(
-                      localization.promoter_overview_filter_sortorder_desc,
-                      style: themeData.textTheme.bodySmall),
-                  value: PromoterSortOrderFilterState.desc,
-                  groupValue: filterStates.sortOrderFilterState,
-                  onChanged: (value) {
+              RadioGroup<PromoterSortOrderFilterState>(
+                groupValue: filterStates.sortOrderFilterState,
+                onChanged: (PromoterSortOrderFilterState? value) {
+                  if (value != null) {
                     setState(() {
-                      filterStates.sortOrderFilterState =
-                          value ?? PromoterSortOrderFilterState.desc;
+                      filterStates.sortOrderFilterState = value;
                       widget.onFilterChanged(filterStates);
                     });
-                  }),
-              RadioListTile(
-                  title: SelectableText(
-                      localization.promoter_overview_filter_sortorder_asc,
-                      style: themeData.textTheme.bodySmall),
-                  value: PromoterSortOrderFilterState.asc,
-                  groupValue: filterStates.sortOrderFilterState,
-                  onChanged: (value) {
-                    setState(() {
-                      filterStates.sortOrderFilterState =
-                          value ?? PromoterSortOrderFilterState.desc;
-                      widget.onFilterChanged(filterStates);
-                    });
-                  }),
+                  }
+                },
+                child: Column(
+                  children: [
+                    RadioListTile<PromoterSortOrderFilterState>(
+                        title: SelectableText(
+                            localization.promoter_overview_filter_sortorder_desc,
+                            style: themeData.textTheme.bodySmall),
+                        value: PromoterSortOrderFilterState.desc,
+                    ),
+                    RadioListTile<PromoterSortOrderFilterState>(
+                        title: SelectableText(
+                            localization.promoter_overview_filter_sortorder_asc,
+                            style: themeData.textTheme.bodySmall),
+                        value: PromoterSortOrderFilterState.asc,
+                    ),
+                  ],
+                ),
+              ),
             ]),
       )
     ]);
