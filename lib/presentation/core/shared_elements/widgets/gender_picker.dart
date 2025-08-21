@@ -3,7 +3,6 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class GenderPicker extends StatelessWidget {
   final double width;

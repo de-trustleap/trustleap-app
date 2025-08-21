@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
+import 'package:flutter/material.dart';
 
 class ClickableLink extends StatelessWidget {
   final String title;

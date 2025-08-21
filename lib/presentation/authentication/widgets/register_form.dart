@@ -240,6 +240,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       children: [
                         ResponsiveRowColumnItem(
                             child: FormTextfield(
+                                key: const Key("firstNameTextField"),
                                 controller: firstNameTextController,
                                 maxWidth: getResponsiveWidth(2),
                                 disabled: false,
@@ -253,6 +254,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 width: textFieldSpacing)),
                         ResponsiveRowColumnItem(
                             child: FormTextfield(
+                                key: const Key("lastNameTextField"),
                                 controller: lastNameTextController,
                                 maxWidth: getResponsiveWidth(2),
                                 disabled: false,
@@ -325,6 +327,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 const SizedBox(height: textFieldSpacing),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   FormTextfield(
+                      key: const Key("emailTextField"),
                       maxWidth: getResponsiveWidth(1),
                       controller: emailTextController,
                       disabled: false,
@@ -337,6 +340,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 const SizedBox(height: textFieldSpacing),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   FormTextfield(
+                      key: const Key("passwordTextField"),
                       maxWidth: getResponsiveWidth(1),
                       controller: passwordTextController,
                       disabled: false,
