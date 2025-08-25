@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/authentication/signIn/sign_in_cubit.dart';
+import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
@@ -10,25 +11,77 @@ import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/authentication/widgets/auth_footer.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_form.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/legals_check.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
-import '../../../widget_test_helper.dart';
 import '../../../widget_test_wrapper.dart';
 import '../../../mocks.mocks.dart';
 import '../../../repositories/mock_user_credential.dart';
+
+// Test Module für Register Form Navigation Tests
+class RegisterTestNavigationModule extends Module {
+  final SignInCubit signInCubit;
+  final AuthCubit authCubit;
+
+  RegisterTestNavigationModule({
+    required this.signInCubit,
+    required this.authCubit,
+  });
+
+  @override
+  void binds(i) {
+    i.addSingleton<SignInCubit>(() => signInCubit);
+    i.addSingleton<AuthCubit>(() => authCubit);
+  }
+
+  @override
+  void routes(r) {
+    r.child('/',
+        child: (_) => Scaffold(
+              body: Column(
+                children: [
+                  Expanded(
+                    child: MultiBlocProvider(
+                      providers: [
+                        BlocProvider<SignInCubit>(create: (_) => signInCubit),
+                        BlocProvider<AuthCubit>(create: (_) => authCubit),
+                      ],
+                      child: const RegisterForm(),
+                    ),
+                  ),
+                  const AuthFooter(),
+                ],
+              ),
+            ));
+    r.child(RoutePaths.privacyPolicy,
+        child: (_) => const Scaffold(
+              body: Center(child: Text('Privacy Policy Page')),
+            ));
+    r.child(RoutePaths.imprint,
+        child: (_) => const Scaffold(
+              body: Center(child: Text('Imprint Page')),
+            ));
+    r.child(RoutePaths.termsAndCondition,
+        child: (_) => const Scaffold(
+              body: Center(child: Text('Terms and Conditions Page')),
+            ));
+  }
+}
 
 void main() {
   LiveTestWidgetsFlutterBinding();
@@ -39,7 +92,10 @@ void main() {
 
   setUp(() {
     ResponsiveHelper.enableTestMode();
-    WidgetTestHelper.setupDummyValues();
+
+    provideDummy<AuthState>(AuthStateUnAuthenticated());
+    provideDummy<PermissionState>(PermissionInitial());
+    provideDummy<SignInState>(SignInInitial());
 
     mockAuthRepository = MockAuthRepository();
     signInCubit = SignInCubit(authRepo: mockAuthRepository);
@@ -48,42 +104,35 @@ void main() {
 
   tearDown(() {
     ResponsiveHelper.disableTestMode();
+    Modular.destroy();
   });
 
-  Widget createWidgetUnderTest({String? registrationCode}) {
-    final widget = RegisterForm(registrationCode: registrationCode);
-
-    return MaterialApp(
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('de'),
-      ],
-      home: CustomNavigator.create(
-        child: Scaffold(
-          body: MultiBlocProvider(
-            providers: [
-              BlocProvider<SignInCubit>(create: (_) => signInCubit),
-              BlocProvider<AuthCubit>(create: (_) => authCubit),
-            ],
-            child: widget,
-          ),
-        ),
+  Widget createNavigationTestApp() {
+    return WidgetTestWrapper.createTestWidget(
+      child:
+          Container(), // Placeholder, actual child comes from navigation module routes
+      withNavigation: true,
+      navigationModule: RegisterTestNavigationModule(
+        signInCubit: signInCubit,
+        authCubit: authCubit,
       ),
+    );
+  }
+
+  Widget createWidgetUnderTest({String? registrationCode}) {
+    return WidgetTestWrapper.createTestWidget(
+      child: RegisterForm(registrationCode: registrationCode),
+      providers: [
+        BlocProvider<SignInCubit>(create: (_) => signInCubit),
+        BlocProvider<AuthCubit>(create: (_) => authCubit),
+      ],
+      withCustomNavigator: true,
     );
   }
 
   Future<void> pumpWidgetWithResponsiveInit(WidgetTester tester,
       {String? registrationCode}) async {
-    // Set wider test window size to prevent overflow
-    tester.view.physicalSize = const Size(1200, 2000);
-    tester.view.devicePixelRatio = 1.0;
-
+    // ResponsiveWrapper handles the size and responsive setup now
     await tester
         .pumpWidget(createWidgetUnderTest(registrationCode: registrationCode));
     await tester.pumpAndSettle();
@@ -401,7 +450,8 @@ void main() {
       }
     });
 
-    testWidgets('should show invalid code error when code validation returns false',
+    testWidgets(
+        'should show invalid code error when code validation returns false',
         (tester) async {
       // Mock repository to return code validation false (code not valid)
       when(mockAuthRepository.isRegistrationCodeValid(
@@ -449,13 +499,14 @@ void main() {
       when(mockAuthRepository.isRegistrationCodeValid(
               email: anyNamed('email'), code: anyNamed('code')))
           .thenAnswer((_) async => right(true));
-      
+
       when(mockAuthRepository.registerAndCreateUser(
               email: anyNamed('email'),
               password: anyNamed('password'),
               user: anyNamed('user'),
               privacyPolicyAccepted: anyNamed('privacyPolicyAccepted'),
-              termsAndConditionsAccepted: anyNamed('termsAndConditionsAccepted')))
+              termsAndConditionsAccepted:
+                  anyNamed('termsAndConditionsAccepted')))
           .thenAnswer((_) async => left(EmailAlreadyInUseFailure()));
 
       await pumpWidgetWithResponsiveInit(tester);
@@ -466,8 +517,8 @@ void main() {
       final codeField = find.byKey(const Key('codeTextField'));
       final firstNameField = find.byKey(const Key('firstNameTextField'));
 
-      if (emailField.evaluate().isNotEmpty && 
-          passwordField.evaluate().isNotEmpty && 
+      if (emailField.evaluate().isNotEmpty &&
+          passwordField.evaluate().isNotEmpty &&
           codeField.evaluate().isNotEmpty &&
           firstNameField.evaluate().isNotEmpty) {
         await tester.enterText(emailField, 'existing@example.com');
@@ -528,6 +579,95 @@ void main() {
         final codeFieldWidget = tester.widget<FormTextfield>(codeField);
         expect(codeFieldWidget.controller.text, equals(''));
       }
+    });
+  });
+
+  group('RegisterForm Footer Navigation Tests', () {
+    testWidgets(
+        'should navigate to privacy policy when footer button is tapped',
+        (tester) async {
+      await tester.pumpWidget(createNavigationTestApp());
+      await tester.pumpAndSettle();
+
+      // Find privacy policy button in footer
+      final privacyButton = find.text('Privacy Policy');
+      expect(privacyButton, findsOneWidget);
+
+      // Tap privacy policy button
+      await tester.tap(privacyButton);
+
+      // Wait for navigation to complete
+      for (int i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+        if (Modular.to.path == RoutePaths.privacyPolicy) break;
+      }
+      await tester.pumpAndSettle();
+
+      // Verify navigation was successful
+      expect(Modular.to.path, equals(RoutePaths.privacyPolicy));
+    });
+
+    testWidgets('should navigate to imprint when footer button is tapped',
+        (tester) async {
+      await tester.pumpWidget(createNavigationTestApp());
+      await tester.pumpAndSettle();
+
+      // Find imprint button in footer
+      final imprintButton = find.text('Imprint');
+      expect(imprintButton, findsOneWidget);
+
+      // Tap imprint button
+      await tester.tap(imprintButton);
+
+      // Wait for navigation to complete
+      for (int i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+        if (Modular.to.path == RoutePaths.imprint) break;
+      }
+      await tester.pumpAndSettle();
+
+      // Verify navigation was successful
+      expect(Modular.to.path, equals(RoutePaths.imprint));
+    });
+
+    testWidgets(
+        'should navigate to terms and conditions when footer button is tapped',
+        (tester) async {
+      await tester.pumpWidget(createNavigationTestApp());
+      await tester.pumpAndSettle();
+
+      // Find terms and conditions button in footer
+      final termsButton = find.text('Terms & Conditions');
+      expect(termsButton, findsOneWidget);
+
+      // Tap terms button
+      await tester.tap(termsButton);
+
+      // Wait for navigation to complete
+      for (int i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+        if (Modular.to.path == RoutePaths.termsAndCondition) break;
+      }
+      await tester.pumpAndSettle();
+
+      // Verify navigation was successful
+      expect(Modular.to.path, equals(RoutePaths.termsAndCondition));
+    });
+
+    testWidgets('should have all footer buttons available', (tester) async {
+      await tester.pumpWidget(createNavigationTestApp());
+      await tester.pumpAndSettle();
+
+      // Verify all footer buttons exist
+      expect(find.text('Privacy Policy'), findsOneWidget);
+      expect(find.text('Imprint'), findsOneWidget);
+      expect(find.text('Terms & Conditions'), findsOneWidget);
+
+      // Verify we're on the register page initially
+      expect(find.byType(RegisterForm), findsOneWidget);
+      expect(find.text('Privacy Policy Page'), findsNothing);
+      expect(find.text('Imprint Page'), findsNothing);
+      expect(find.text('Terms and Conditions Page'), findsNothing);
     });
   });
 }

@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/password_forgotten_button.dart';
 import 'package:finanzbegleiter/presentation/authentication/widgets/register_button.dart';
@@ -13,7 +14,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primar
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -62,7 +62,7 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final navigator = CustomNavigator.of(context);
 
     return BlocConsumer<SignInCubit, SignInState>(

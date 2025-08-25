@@ -25,5 +25,3 @@ class Legals extends Equatable {
   @override
   List<Object?> get props => [avv, privacyPolicy, termsAndCondition, imprint];
 }
-
-// TODO: FÜGE FOOTER BEI LOGIN HINZU
