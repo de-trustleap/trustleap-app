@@ -54,8 +54,9 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
   }
 
   void alertAction() {
-    CustomNavigator.pop();
-    CustomNavigator.navigate(RoutePaths.loginPath);
+    final navigator = CustomNavigator.of(context);
+    navigator.pop();
+    navigator.navigate(RoutePaths.loginPath);
   }
 
   void showSuccessDialog(AppLocalizations localizations) {

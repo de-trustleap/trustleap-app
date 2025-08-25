@@ -187,6 +187,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
     final recoCubit = Modular.get<RecommendationsCubit>();
     final validator = RecommendationValidator(localization: localization);
     const double textFieldSpacing = 20;
@@ -214,7 +215,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                 buttonTitle:
                     localization.recommendation_missing_landingpage_button,
                 onTap: () {
-                  CustomNavigator.navigate(
+                  navigator.navigate(
                       RoutePaths.homePath + RoutePaths.landingPagePath);
                 });
           }

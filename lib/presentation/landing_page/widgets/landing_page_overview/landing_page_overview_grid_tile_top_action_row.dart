@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/permissions.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -49,13 +50,11 @@ class LandingPageOverviewGridTileTopActionRow extends StatelessWidget {
     }
   }
 
-  IconButton _getEditButton(
-    ThemeData themeData,
-    AppLocalizations localizations,
-  ) {
+  IconButton _getEditButton(ThemeData themeData, AppLocalizations localizations,
+      CustomNavigatorBase navigator) {
     return IconButton(
         onPressed: () {
-          CustomNavigator.pushNamed(
+          navigator.pushNamed(
               "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
               arguments: {"landingPage": landingPage});
         },
@@ -65,14 +64,12 @@ class LandingPageOverviewGridTileTopActionRow extends StatelessWidget {
             Icon(Icons.edit, color: themeData.colorScheme.secondary, size: 24));
   }
 
-  IconButton _getPreviewButton(
-    ThemeData themeData,
-    AppLocalizations localizations,
-  ) {
+  IconButton _getPreviewButton(ThemeData themeData,
+      AppLocalizations localizations, CustomNavigatorBase navigator) {
     return IconButton(
         onPressed: () {
           final baseURL = Environment().getLandingpageBaseURL();
-          CustomNavigator.openURLInNewTab(
+          navigator.openURLInNewTab(
               "$baseURL?preview=true&id=${landingPage.id.value}");
         },
         iconSize: 24,
@@ -168,6 +165,7 @@ class LandingPageOverviewGridTileTopActionRow extends StatelessWidget {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
 
     if (_isPending()) {
       return Row(
@@ -186,12 +184,12 @@ class LandingPageOverviewGridTileTopActionRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             if (permissions.hasEditDefaultLandingPagePermission()) ...[
-              _getEditButton(themeData, localization),
+              _getEditButton(themeData, localization, navigator),
             ] else ...[
               const SizedBox(height: 40)
             ],
             const Spacer(),
-            _getPreviewButton(themeData, localization),
+            _getPreviewButton(themeData, localization, navigator),
           ]);
     }
 
@@ -201,10 +199,10 @@ class LandingPageOverviewGridTileTopActionRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             if (permissions.hasEditLandingPagePermission()) ...[
-              _getEditButton(themeData, localization),
+              _getEditButton(themeData, localization, navigator),
               const Spacer(),
             ],
-            _getPreviewButton(themeData, localization),
+            _getPreviewButton(themeData, localization, navigator),
             const Spacer(),
             _buildPopupMenu(themeData, localization, responsiveValue)
           ]);

@@ -33,6 +33,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
@@ -79,7 +80,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
                                 ),
                               )
                             : AddNewLandingPageGridTile(
-                                onPressed: () => CustomNavigator.navigate(
+                                onPressed: () => navigator.navigate(
                                   RoutePaths.homePath +
                                       RoutePaths.landingPageCreatorPath,
                                 ),

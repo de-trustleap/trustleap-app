@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
@@ -63,7 +64,8 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
     }
   }
 
-  void showAlert(AppLocalizations localizations) {
+  void showAlert(
+      AppLocalizations localizations, CustomNavigatorBase navigator) {
     showDialog(
         context: context,
         builder: (_) {
@@ -75,12 +77,12 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
               cancelButtonTitle: localizations
                   .delete_account_confirmation_alert_cancel_button_title,
               actionButtonAction: submitAccountDeletion,
-              cancelButtonAction: () => CustomNavigator.pop());
+              cancelButtonAction: () => navigator.pop());
         });
   }
 
   void submitAccountDeletion() {
-    CustomNavigator.pop();
+    CustomNavigator.of(context).pop();
     Modular.get<ProfileCubit>().deleteAccount();
   }
 
@@ -91,6 +93,7 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
+    final navigator = CustomNavigator.of(context);
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
@@ -104,7 +107,7 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
             setButtonToDisabled(false);
           } else if (state
               is ProfileReauthenticateForAccountDeletionSuccessState) {
-            showAlert(localization);
+            showAlert(localization, navigator);
             setButtonToDisabled(false);
           } else if (state is ProfileAccountDeletionSuccessState) {
             BlocProvider.of<AuthCubit>(context).signOut();

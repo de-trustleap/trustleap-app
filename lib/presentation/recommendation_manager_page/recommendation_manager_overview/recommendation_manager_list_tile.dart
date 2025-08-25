@@ -96,6 +96,7 @@ class _RecommendationManagerListTileState
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final navigator = CustomNavigator.of(context);
     final helper = RecommendationManagerHelper(localization: localization);
     final cubit = Modular.get<RecommendationManagerTileCubit>();
     return BlocConsumer<RecommendationManagerTileCubit,
@@ -298,7 +299,7 @@ class _RecommendationManagerListTileState
                             .recommendation_manager_show_landingpage_button,
                         onTap: () {
                           final baseURL = Environment().getLandingpageBaseURL();
-                          CustomNavigator.openURLInNewTab(
+                          navigator.openURLInNewTab(
                               "$baseURL?p=${_recommendation.recommendation?.promoterName ?? ""}&id=${_recommendation.recoID}");
                         }),
                     if (state is RecommendationSetStatusLoadingState &&

@@ -29,6 +29,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
     final themeData = Theme.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
@@ -60,7 +61,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
                             .promoter_overview_inactive_landingpage_tooltip_warning_action,
                         showButton: permissions.hasEditPromoterPermission(),
                         onPressed: () {
-                          CustomNavigator.navigate(
+                          navigator.navigate(
                               "${RoutePaths.homePath}${RoutePaths.editPromoterPath}/${promoter.id.value}");
                         },
                       ),
@@ -122,7 +123,7 @@ class PromotersOverviewGridTile extends StatelessWidget {
                               deletePressed(promoter.id.value,
                                   promoter.registered ?? false);
                             } else if (newValue == "edit") {
-                              CustomNavigator.navigate(
+                              navigator.navigate(
                                   "${RoutePaths.homePath}${RoutePaths.editPromoterPath}/${promoter.id.value}");
                             }
                           })

@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.da
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/modules/app_module.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/core/router_observer.dart';
 import 'package:finanzbegleiter/core/web_crash_reporter.dart';
 import 'package:finanzbegleiter/environment.dart';
@@ -69,7 +70,9 @@ Future<void> main() async {
         ModularApp(
           module: AppModule(),
           child: SentryWidget(
-            child: const MyApp(),
+            child: CustomNavigator.create(
+              child: const MyApp(),
+            ),
           ),
         ),
       );
@@ -81,7 +84,7 @@ Future<void> main() async {
   );
 }
 
-void routeToInitial(AuthStatus status) {
+void routeToInitial(AuthStatus status, CustomNavigatorBase navigator) {
   late String lastRoute;
   WebCrashReporter.report("App started", null, LogLevel.info);
   if (kIsWeb) {
@@ -97,27 +100,26 @@ void routeToInitial(AuthStatus status) {
       debugPrint("NOT AUTHENTICATED");
       if (lastRoute.contains(RoutePaths.homePath) ||
           lastRoute.contains(RoutePaths.adminPath)) {
-        CustomNavigator.navigate(RoutePaths.loginPath);
+        navigator.navigate(RoutePaths.loginPath);
       } else {
-        CustomNavigator.navigate(lastRoute);
+        navigator.navigate(lastRoute);
       }
       break;
     case AuthStatus.authenticated:
       debugPrint("AUTHENTICATED");
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.homePath)) {
-        CustomNavigator.navigate(lastRoute);
+        navigator.navigate(lastRoute);
       } else {
-        CustomNavigator.navigate(
-            RoutePaths.homePath + RoutePaths.dashboardPath);
+        navigator.navigate(RoutePaths.homePath + RoutePaths.dashboardPath);
       }
       break;
     case AuthStatus.authenticatedAsAdmin:
       debugPrint("AUTHENTICATED AS ADMIN");
       if (lastRoute != "/" && lastRoute.contains(RoutePaths.adminPath)) {
-        CustomNavigator.navigate(lastRoute);
+        navigator.navigate(lastRoute);
       } else {
-        CustomNavigator.navigate(
-            RoutePaths.adminPath + RoutePaths.companyRequestsPath);
+        navigator
+            .navigate(RoutePaths.adminPath + RoutePaths.companyRequestsPath);
       }
       break;
   }
@@ -153,6 +155,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final navigator = CustomNavigator.of(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(create: (context) {
@@ -177,14 +180,14 @@ class MyApp extends StatelessWidget {
                   if (state is AuthStateUnAuthenticated) {
                     Modular.get<PermissionCubit>().permissionInitiallyLoaded =
                         false;
-                    routeToInitial(AuthStatus.unAuthenticated);
+                    routeToInitial(AuthStatus.unAuthenticated, navigator);
                   } else if (state is AuthStateAuthenticated) {
                     Modular.get<PermissionCubit>().observePermissions();
                     Modular.get<UserObserverCubit>().observeUser();
                   } else if (state is AuthStateAuthenticatedAsAdmin) {
                     Modular.get<PermissionCubit>().permissionInitiallyLoaded =
                         false;
-                    routeToInitial(AuthStatus.authenticatedAsAdmin);
+                    routeToInitial(AuthStatus.authenticatedAsAdmin, navigator);
                   }
                 }),
             BlocListener<AuthObserverBloc, AuthObserverState>(
@@ -192,7 +195,7 @@ class MyApp extends StatelessWidget {
               if (state is AuthObserverStateUnAuthenticated) {
                 Modular.get<PermissionCubit>().permissionInitiallyLoaded =
                     false;
-                routeToInitial(AuthStatus.unAuthenticated);
+                routeToInitial(AuthStatus.unAuthenticated, navigator);
               } else if (state is AuthObserverStateAuthenticated) {
                 Modular.get<PermissionCubit>().observePermissions();
                 Modular.get<UserObserverCubit>().observeUser();
@@ -202,7 +205,7 @@ class MyApp extends StatelessWidget {
                 listener: (context, state) {
               if (state is PermissionSuccessState &&
                   !state.permissionInitiallyLoaded) {
-                routeToInitial(AuthStatus.authenticated);
+                routeToInitial(AuthStatus.authenticated, navigator);
               } else if (state is PermissionFailureState) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   Modular.get<AuthCubit>().signOut();

@@ -190,7 +190,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                   recommendationReceiverName: recommendation.name,
                   cancelAction: () {
                     isAlertVisible = false;
-                    CustomNavigator.pop();
+                    CustomNavigator.of(context).pop();
                   },
                   action: () =>
                       _onRecommendationSentSuccessful(recommendation));
@@ -206,20 +206,21 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
   @override
   Widget build(BuildContext context) {
+    final navigator = CustomNavigator.of(context);
     final recoCubit = Modular.get<RecommendationsAlertCubit>();
     return BlocListener<RecommendationsAlertCubit, RecommendationsAlertState>(
       bloc: recoCubit,
       listener: (context, state) {
         if (state is RecommendationSaveLoadingState) {
           if (isAlertVisible) {
-            CustomNavigator.pop();
+            navigator.pop();
             showDialog(
                 context: context,
                 builder: (_) {
                   return RecommendationConfirmationDialogLoading(
                       cancelAction: () {
                         isAlertVisible = false;
-                        CustomNavigator.pop();
+                        navigator.pop();
                       },
                       action: () => _onRecommendationSentSuccessful(
                           state.recommendation));
@@ -227,7 +228,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
           }
         } else if (state is RecommendationSaveFailureState) {
           if (isAlertVisible) {
-            CustomNavigator.pop();
+            navigator.pop();
             showDialog(
                 context: context,
                 builder: (_) {
@@ -236,7 +237,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                       recommendationReceiverName: state.recommendation.name,
                       cancelAction: () {
                         isAlertVisible = false;
-                        CustomNavigator.pop();
+                        navigator.pop();
                       },
                       action: () => _onRecommendationSentSuccessful(
                           state.recommendation));
@@ -245,7 +246,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         } else if (state is RecommendationSaveSuccessState) {
           if (isAlertVisible) {
             isAlertVisible = false;
-            CustomNavigator.pop();
+            navigator.pop();
             widget.onSaveSuccess(state.recommendation);
           }
         }

@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -57,7 +58,8 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
     super.dispose();
   }
 
-  void _showSaveFailureDialog(AppLocalizations localizations) {
+  void _showSaveFailureDialog(
+      AppLocalizations localizations, CustomNavigatorBase navigator) {
     showDialog(
         context: context,
         builder: (_) {
@@ -68,7 +70,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                   .landingpage_pagebuilder_save_error_alert_message,
               actionButtonTitle:
                   localizations.landingpage_pagebuilder_save_error_alert_button,
-              actionButtonAction: () => CustomNavigator.pop());
+              actionButtonAction: () => navigator.pop());
         });
   }
 
@@ -77,6 +79,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
     final localization = AppLocalizations.of(context);
     final pageBuilderCubit = Modular.get<PagebuilderBloc>();
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final navigator = CustomNavigator.of(context);
 
     if (!responsiveValue.isDesktop) {
       return const PagebuilderMobileNotSupportedView();
@@ -90,7 +93,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
             if (state is GetLandingPageAndUserSuccessState) {
               pageBuilderContent = state.content;
               if (!state.saveLoading && state.saveFailure != null) {
-                _showSaveFailureDialog(localization);
+                _showSaveFailureDialog(localization, navigator);
                 htmlEvents.disableLeavePageListeners();
                 isUpdated = false;
               } else if (!state.saveLoading && state.saveSuccessful != null) {

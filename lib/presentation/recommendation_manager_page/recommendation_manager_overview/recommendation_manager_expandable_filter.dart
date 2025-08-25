@@ -150,34 +150,35 @@ class _RecommendationManagerExpandableFilterState
                                     RecommendationSortByFilterState.expiresAt;
                                 widget.onFilterChanged(filterStates);
                               }),
-                          RadioListTile(
-                              title: SelectableText(
-                                  localization
-                                      .recommendation_manager_filter_descending,
-                                  style: themeData.textTheme.bodySmall),
-                              value: RecommendationSortOrderFilterState.desc,
-                              groupValue: filterStates.sortOrderFilterState,
-                              onChanged: (value) {
+                          RadioGroup<RecommendationSortOrderFilterState>(
+                            groupValue: filterStates.sortOrderFilterState,
+                            onChanged: (RecommendationSortOrderFilterState? value) {
+                              if (value != null) {
                                 setState(() {
-                                  filterStates.sortOrderFilterState = value ??
-                                      RecommendationSortOrderFilterState.desc;
+                                  filterStates.sortOrderFilterState = value;
                                   widget.onFilterChanged(filterStates);
                                 });
-                              }),
-                          RadioListTile(
-                              title: SelectableText(
-                                  localization
-                                      .recommendation_manager_filter_ascending,
-                                  style: themeData.textTheme.bodySmall),
-                              value: RecommendationSortOrderFilterState.asc,
-                              groupValue: filterStates.sortOrderFilterState,
-                              onChanged: (value) {
-                                setState(() {
-                                  filterStates.sortOrderFilterState = value ??
-                                      RecommendationSortOrderFilterState.desc;
-                                  widget.onFilterChanged(filterStates);
-                                });
-                              }),
+                              }
+                            },
+                            child: Column(
+                              children: [
+                                RadioListTile<RecommendationSortOrderFilterState>(
+                                    title: SelectableText(
+                                        localization
+                                            .recommendation_manager_filter_descending,
+                                        style: themeData.textTheme.bodySmall),
+                                    value: RecommendationSortOrderFilterState.desc,
+                                ),
+                                RadioListTile<RecommendationSortOrderFilterState>(
+                                    title: SelectableText(
+                                        localization
+                                            .recommendation_manager_filter_ascending,
+                                        style: themeData.textTheme.bodySmall),
+                                    value: RecommendationSortOrderFilterState.asc,
+                                ),
+                              ],
+                            ),
+                          ),
                         ]),
                   ]),
             ),

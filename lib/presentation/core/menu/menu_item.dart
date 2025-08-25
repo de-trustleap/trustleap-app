@@ -81,6 +81,7 @@ class _MenuItemState extends State<MenuItem> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
 
     return BlocBuilder<MenuCubit, MenuState>(
       buildWhen: (previous, current) =>
@@ -94,9 +95,7 @@ class _MenuItemState extends State<MenuItem> {
 
         return LayoutBuilder(
           builder: (context, constraints) {
-            final hoveredTransform = Matrix4.identity()..scale(1.1);
-            final transform =
-                itemIsHovered ? hoveredTransform : Matrix4.identity();
+            final scaleValue = itemIsHovered ? 1.1 : 1.0;
             final width = constraints.maxWidth;
             const height = 56.0;
             const padding = 12.0;
@@ -109,10 +108,9 @@ class _MenuItemState extends State<MenuItem> {
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
                   if (widget.isAdmin) {
-                    CustomNavigator.navigate(
-                        RoutePaths.adminPath + widget.path);
+                    navigator.navigate(RoutePaths.adminPath + widget.path);
                   } else {
-                    CustomNavigator.navigate(RoutePaths.homePath + widget.path);
+                    navigator.navigate(RoutePaths.homePath + widget.path);
                   }
                 },
                 child: Padding(
@@ -138,42 +136,45 @@ class _MenuItemState extends State<MenuItem> {
                         animation:
                             _widthAnimation ?? AlwaysStoppedAnimation(width),
                         builder: (context, child) {
-                          return AnimatedContainer(
+                          return AnimatedScale(
+                            scale: scaleValue,
                             duration: const Duration(milliseconds: 200),
-                            transform: transform,
-                            width: _widthAnimation?.value ?? width,
-                            height: height,
-                            curve: const Cubic(0.5, 0.8, 0.4, 1),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: padding,
-                              vertical: 16,
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  widget.icon,
-                                  color: isCurrentlySelected
-                                      ? themeData.colorScheme.surface
-                                      : themeData.iconTheme.color,
-                                ),
-                                if (_widthAnimation == null ||
-                                    _widthAnimation!.value >=
-                                        MenuDimensions.menuOpenWidth) ...[
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Text(
-                                      getLocalizedMenuItem(localization),
-                                      style: isCurrentlySelected
-                                          ? themeData.textTheme.bodyMedium!
-                                              .copyWith(
-                                              color:
-                                                  themeData.colorScheme.surface,
-                                            )
-                                          : themeData.textTheme.bodyMedium,
-                                    ),
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              width: _widthAnimation?.value ?? width,
+                              height: height,
+                              curve: const Cubic(0.5, 0.8, 0.4, 1),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: padding,
+                                vertical: 16,
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    widget.icon,
+                                    color: isCurrentlySelected
+                                        ? themeData.colorScheme.surface
+                                        : themeData.iconTheme.color,
                                   ),
-                                ]
-                              ],
+                                  if (_widthAnimation == null ||
+                                      _widthAnimation!.value >=
+                                          MenuDimensions.menuOpenWidth) ...[
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Text(
+                                        getLocalizedMenuItem(localization),
+                                        style: isCurrentlySelected
+                                            ? themeData.textTheme.bodyMedium!
+                                                .copyWith(
+                                                color: themeData
+                                                    .colorScheme.surface,
+                                              )
+                                            : themeData.textTheme.bodyMedium,
+                                      ),
+                                    ),
+                                  ]
+                                ],
+                              ),
                             ),
                           );
                         },

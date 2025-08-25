@@ -26,6 +26,8 @@ class _MyWidgetState extends State<MenuLogo> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = CustomNavigator.of(context);
+
     return MouseRegion(
       onEnter: _onEnter,
       onExit: _onExit,
@@ -36,7 +38,7 @@ class _MyWidgetState extends State<MenuLogo> {
         curve: Curves.easeInOut,
         child: InkWell(
           onTap: () {
-            CustomNavigator.navigate(RoutePaths.dashboardPath);
+            navigator.navigate(RoutePaths.dashboardPath);
           },
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,

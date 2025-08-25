@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.da
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -40,8 +41,9 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
     }
   }
 
-  void submitDeletion(String id, String parentUserID) {
-    CustomNavigator.pop();
+  void submitDeletion(
+      String id, String parentUserID, CustomNavigatorBase navigator) {
+    navigator.pop();
     Modular.get<LandingPageCubit>().deleteLandingPage(id, parentUserID);
   }
 
@@ -82,14 +84,15 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
     }
   }
 
-  List<ClickableLink> _getPromoterLink(List<Promoter> promoters) {
+  List<ClickableLink> _getPromoterLink(
+      List<Promoter> promoters, CustomNavigatorBase navigator) {
     List<ClickableLink> links = [];
     for (Promoter promoter in promoters) {
       links.add(ClickableLink(
           title: "${promoter.firstName ?? ""} ${promoter.lastName ?? ""}",
           onTap: () {
-            CustomNavigator.pop();
-            CustomNavigator.navigate(
+            navigator.pop();
+            navigator.navigate(
                 "${RoutePaths.homePath}${RoutePaths.editPromoterPath}/${promoter.id.value}");
           }));
     }
@@ -101,7 +104,8 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
       String parentUserID,
       List<String> associatedUsersIDs,
       AppLocalizations localization,
-      ThemeData themeData) {
+      ThemeData themeData,
+      CustomNavigatorBase navigator) {
     final landingPageCubit = Modular.get<LandingPageCubit>();
 
     showDialog(
@@ -116,7 +120,7 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                 message: "",
                 isLoading: true,
                 actionButtonTitle: localization.cancel_buttontitle,
-                actionButtonAction: () => CustomNavigator.pop(),
+                actionButtonAction: () => navigator.pop(),
               );
             } else if (state is GetPromotersSuccessState) {
               if (state.promoters.isEmpty) {
@@ -125,8 +129,9 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                   message: localization.landingpage_delete_alert_msg,
                   actionButtonTitle: localization.delete_buttontitle,
                   cancelButtonTitle: localization.cancel_buttontitle,
-                  actionButtonAction: () => submitDeletion(id, parentUserID),
-                  cancelButtonAction: () => CustomNavigator.pop(),
+                  actionButtonAction: () =>
+                      submitDeletion(id, parentUserID, navigator),
+                  cancelButtonAction: () => navigator.pop(),
                 );
               } else {
                 return CustomAlertDialog(
@@ -139,7 +144,7 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                             localization
                                 .landingpage_delete_alert_msg_promoter_warning,
                             style: themeData.textTheme.bodyMedium),
-                        ..._getPromoterLink(state.promoters),
+                        ..._getPromoterLink(state.promoters, navigator),
                         Text(
                             localization
                                 .landingpage_delete_alert_msg_promoter_warning_continue,
@@ -148,8 +153,9 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                   message: "",
                   actionButtonTitle: localization.delete_buttontitle,
                   cancelButtonTitle: localization.cancel_buttontitle,
-                  actionButtonAction: () => submitDeletion(id, parentUserID),
-                  cancelButtonAction: () => CustomNavigator.pop(),
+                  actionButtonAction: () =>
+                      submitDeletion(id, parentUserID, navigator),
+                  cancelButtonAction: () => navigator.pop(),
                 );
               }
             } else {
@@ -158,8 +164,9 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                 message: localization.landingpage_delete_alert_msg,
                 actionButtonTitle: localization.delete_buttontitle,
                 cancelButtonTitle: localization.cancel_buttontitle,
-                actionButtonAction: () => submitDeletion(id, parentUserID),
-                cancelButtonAction: () => CustomNavigator.pop(),
+                actionButtonAction: () =>
+                    submitDeletion(id, parentUserID, navigator),
+                cancelButtonAction: () => navigator.pop(),
               );
             }
           },
@@ -177,6 +184,7 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
     final userObserverCubit = Modular.get<UserObserverCubit>();
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
 
     return MultiBlocListener(
       listeners: [
@@ -230,7 +238,7 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                         buttonTitle:
                             localization.landingpage_create_buttontitle,
                         onTap: () {
-                          CustomNavigator.navigate(RoutePaths.homePath +
+                          navigator.navigate(RoutePaths.homePath +
                               RoutePaths.landingPageCreatorPath);
                         });
                   } else if (showCreateDefaultPage(
@@ -244,7 +252,7 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                         buttonTitle: localization
                             .landingpage_overview_no_default_page_button_title,
                         onTap: () {
-                          CustomNavigator.pushNamed(
+                          navigator.pushNamed(
                               "${RoutePaths.homePath}${RoutePaths.landingPageCreatorPath}",
                               arguments: {
                                 "landingPage": null,
@@ -271,7 +279,8 @@ class _LandingPageOverviewState extends State<LandingPageOverview> {
                                         parentUserID,
                                         associatedUsersIDs,
                                         localization,
-                                        themeData),
+                                        themeData,
+                                        navigator),
                                 duplicatePressed: (landinPageID) =>
                                     submitDuplication(landinPageID),
                                 isActivePressed:

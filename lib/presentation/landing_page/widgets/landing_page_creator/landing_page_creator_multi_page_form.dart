@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
-import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
+import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
@@ -160,6 +160,7 @@ class _LandingPageCreatorMultiPageFormState
     final landingPageCubit = Modular.get<LandingPageCubit>();
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final navigator = CustomNavigator.of(context);
     _initializeSteps();
     return MultiBlocListener(
         listeners: [
@@ -173,16 +174,16 @@ class _LandingPageCreatorMultiPageFormState
                   if ((landingPage?.isDefaultPage == null ||
                           landingPage?.isDefaultPage == false) &&
                       responsiveValue.isDesktop) {
-                    CustomNavigator.openInNewTab(
+                    navigator.openInNewTab(
                         "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage?.id.value}");
                   }
-                  CustomNavigator.navigate(RoutePaths.homePath +
+                  navigator.navigate(RoutePaths.homePath +
                       RoutePaths.landingPagePath +
                       params);
                 } else if (state is EditLandingPageSuccessState) {
                   showError = false;
                   const params = "?editedPage=true";
-                  CustomNavigator.pushAndReplace(
+                  navigator.pushAndReplace(
                       RoutePaths.homePath + RoutePaths.landingPagePath, params);
                 } else if (state is LandingPageNoImageFailureState) {
                   setState(() {

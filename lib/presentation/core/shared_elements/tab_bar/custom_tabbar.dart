@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'custom_tab.dart';
 
 class CustomTabItem {
   final String title;
   final IconData icon;
-  final String route;
-  final Widget content;
+  final String? route;
+  final Widget? content;
 
   const CustomTabItem({
     required this.title,
     required this.icon,
-    required this.route,
-    required this.content,
+    this.route,
+    this.content,
   });
 }
 
@@ -43,7 +44,7 @@ class _CustomTabBarState extends State<CustomTabBar>
       (tab) => tab.route == _currentRoute,
       orElse: () => widget.tabs.first,
     );
-    return tab.content;
+    return tab.content ?? Container();
   }
 
   @override
@@ -83,11 +84,13 @@ class _CustomTabBarState extends State<CustomTabBar>
 
   void _onTabTap(int index) {
     final route = widget.tabs[index].route;
-    Modular.to.navigate(route);
-    if (mounted) {
-      setState(() {
-        _currentRoute = route;
-      });
+    if (route != null) {
+      Modular.to.navigate(route);
+      if (mounted) {
+        setState(() {
+          _currentRoute = route;
+        });
+      }
     }
   }
 
@@ -139,41 +142,10 @@ class _CustomTabBarState extends State<CustomTabBar>
 
   Widget _buildTab(CustomTabItem tabItem, BuildContext context,
       ResponsiveBreakpointsData responsiveValue) {
-    return Tab(
-      child: SizedBox(
-        width: responsiveValue.isMobile ? 200 : 400,
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            curve: const Cubic(0.5, 0.8, 0.4, 1),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  tabItem.icon,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .surfaceTint
-                      .withValues(alpha: 0.8),
-                ),
-                const SizedBox(width: 8),
-                Flexible(
-                  child: Text(
-                    tabItem.title,
-                    style: responsiveValue.isMobile
-                        ? Theme.of(context).textTheme.bodySmall
-                        : Theme.of(context).textTheme.bodyMedium,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
+    return CustomTab(
+      title: tabItem.title,
+      icon: tabItem.icon,
+      responsiveValue: responsiveValue,
     );
   }
 }

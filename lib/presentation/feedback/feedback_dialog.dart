@@ -145,23 +145,25 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Row(
-                            children: FeedbackType.values.map((type) {
-                              return Expanded(
-                                child: RadioListTile<FeedbackType>(
-                                  title: Text(type.value),
-                                  value: type,
-                                  groupValue: selectedType,
-                                  onChanged: state is SentFeedbackLoadingState
-                                      ? null
-                                      : (FeedbackType? value) {
-                                          setState(() {
-                                            selectedType = value!;
-                                          });
-                                        },
-                                ),
-                              );
-                            }).toList(),
+                          RadioGroup<FeedbackType>(
+                            groupValue: selectedType,
+                            onChanged: (FeedbackType? value) {
+                              if (state is! SentFeedbackLoadingState && value != null) {
+                                setState(() {
+                                  selectedType = value;
+                                });
+                              }
+                            },
+                            child: Row(
+                              children: FeedbackType.values.map((type) {
+                                return Expanded(
+                                  child: RadioListTile<FeedbackType>(
+                                    title: Text(type.value),
+                                    value: type,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
                           const SizedBox(height: 16),
                           Row(

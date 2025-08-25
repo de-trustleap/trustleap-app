@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finanzbegleiter/application/feedback/admin_feedback/admin_feedback_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
@@ -54,7 +55,8 @@ class AdminFeedbackListTile extends StatelessWidget {
     );
   }
 
-  void showDeleteAlert(AppLocalizations localizations, BuildContext context) {
+  void showDeleteAlert(AppLocalizations localizations, BuildContext context,
+      CustomNavigatorBase navigator) {
     showDialog(
         context: context,
         builder: (_) {
@@ -66,9 +68,9 @@ class AdminFeedbackListTile extends StatelessWidget {
               actionButtonAction: () {
                 Modular.get<AdminFeedbackCubit>()
                     .deleteFeedback(feedbackItem.id.value);
-                CustomNavigator.pop();
+                navigator.pop();
               },
-              cancelButtonAction: () => CustomNavigator.pop());
+              cancelButtonAction: () => navigator.pop());
         });
   }
 
@@ -76,6 +78,8 @@ class AdminFeedbackListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localizations = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
+
     return CollapsibleTile(
         backgroundColor: themeData.colorScheme.surface,
         showDivider: false,
@@ -84,7 +88,7 @@ class AdminFeedbackListTile extends StatelessWidget {
           Text(feedbackItem.title ?? "", style: themeData.textTheme.bodyLarge),
           IconButton(
             onPressed: () {
-              showDeleteAlert(localizations, context);
+              showDeleteAlert(localizations, context, navigator);
             },
             icon: const Icon(Icons.delete),
             iconSize: 24,

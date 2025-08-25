@@ -1,39 +1,35 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:web/web.dart' as web;
+import 'package:flutter/widgets.dart';
+import 'navigation/custom_navigator_base.dart';
+import 'navigation/custom_navigator_web.dart'
+    if (dart.library.io) 'navigation/custom_navigator_mobile.dart';
 
-class CustomNavigator {
-  static String get currentPath {
-    return Modular.to.path;
+class CustomNavigator extends InheritedWidget {
+  const CustomNavigator({
+    super.key,
+    required super.child,
+    required this.navigator,
+  });
+
+  final CustomNavigatorBase navigator;
+
+  static CustomNavigatorBase of(BuildContext context) {
+    final CustomNavigator? result =
+        context.dependOnInheritedWidgetOfExactType<CustomNavigator>();
+    assert(result != null, 'No CustomNavigator found in context');
+    return result!.navigator;
   }
 
-  static void navigate(String route, {Object? arguments}) {
-    Modular.to.navigate(route, arguments: arguments);
+  factory CustomNavigator.create({Key? key, required Widget child}) {
+    final navigator = CustomNavigatorImplementation();
+    return CustomNavigator(
+      key: key,
+      navigator: navigator,
+      child: child,
+    );
   }
 
-  static void pushNamed(String route, {Object? arguments}) {
-    Modular.to.pushNamed(route, arguments: arguments);
-  }
-
-  static void pushAndReplace(String route, String params) {
-    Modular.to.popUntil((route) => route.isFirst);
-    Modular.to.pushNamed(route + params);
-  }
-
-  static void openInNewTab(String route) {
-    if (kIsWeb) {
-      final url = '${web.window.location.origin}$route';
-      web.window.open(url, '_blank');
-    }
-  }
-
-  static void openURLInNewTab(String url) {
-    if (kIsWeb) {
-      web.window.open(url, '_blank');
-    }
-  }
-
-  static void pop() {
-    Modular.to.pop();
+  @override
+  bool updateShouldNotify(CustomNavigator oldWidget) {
+    return navigator != oldWidget.navigator;
   }
 }

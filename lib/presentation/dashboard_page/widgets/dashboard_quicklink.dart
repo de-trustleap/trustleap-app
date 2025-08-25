@@ -15,6 +15,7 @@ class DashboardQuicklink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final navigator = CustomNavigator.of(context);
     return CardContainer(
         maxWidth: 280,
         child: Column(
@@ -24,7 +25,7 @@ class DashboardQuicklink extends StatelessWidget {
               Text(text, maxLines: 2, style: themeData.textTheme.bodySmall),
               const SizedBox(height: 8),
               TextButton(
-                  onPressed: () => CustomNavigator.navigate(path),
+                  onPressed: () => navigator.navigate(path),
                   child: Text(buttonText,
                       style: themeData.textTheme.bodySmall!
                           .copyWith(color: themeData.colorScheme.secondary)))

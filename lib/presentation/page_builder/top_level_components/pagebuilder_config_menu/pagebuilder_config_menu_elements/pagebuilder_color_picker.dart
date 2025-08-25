@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
@@ -62,7 +63,7 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
   }
 
   void _showColorPickerDialog(BuildContext context, ThemeData themeData,
-      AppLocalizations localization) {
+      AppLocalizations localization, CustomNavigatorBase navigator) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -84,7 +85,7 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
                               .landingpage_pagebuilder_color_picker_title,
                           style: themeData.textTheme.bodyLarge),
                       IconButton(
-                          onPressed: () => CustomNavigator.pop(),
+                          onPressed: () => navigator.pop(),
                           icon: Icon(Icons.close,
                               size: 24,
                               color: themeData.colorScheme.surfaceTint))
@@ -159,7 +160,7 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
                 PrimaryButton(
                     title: localization
                         .landingpage_pagebuilder_color_picker_ok_button,
-                    onTap: () => CustomNavigator.pop())
+                    onTap: () => navigator.pop())
               ],
             );
           }),
@@ -172,10 +173,11 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final navigator = CustomNavigator.of(context);
 
     return InkWell(
         onTap: () {
-          _showColorPickerDialog(context, themeData, localization);
+          _showColorPickerDialog(context, themeData, localization, navigator);
         },
         child: Container(
           width: 36,
