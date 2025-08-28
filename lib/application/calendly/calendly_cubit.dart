@@ -22,7 +22,6 @@ class CalendlyCubit extends Cubit<CalendlyState> {
     authUrlResult.fold(
       (failure) => emit(CalendlyConnectionFailureState(failure: failure)),
       (authUrl) {
-        // Emit state with OAuth URL so UI can open it
         emit(CalendlyOAuthReadyState(authUrl: authUrl));
       },
     );
@@ -62,6 +61,7 @@ class CalendlyCubit extends Cubit<CalendlyState> {
 
   void startObservingAuthStatus() {
     _authStatusSubscription?.cancel();
+    _authStatusSubscription = null;
 
     _authStatusSubscription =
         calendlyRepository.observeAuthenticationStatus().listen(

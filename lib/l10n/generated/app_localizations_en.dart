@@ -2624,7 +2624,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_creator_calendly_disconnect_button =>
-      'Disconnect (Test)';
+      'Disconnect Calendly';
 
   @override
   String get landingpage_creator_calendly_connected =>
@@ -2645,6 +2645,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get landingpage_creator_calendly_event_types_empty =>
       'No Event Types found. Please create Event Types in your Calendly Dashboard.';
+
+  @override
+  String get landingpage_creator_calendly_must_be_connected_error =>
+      'Calendly must be connected before you can continue.';
 
   @override
   String get calendly_success_connected => 'Calendly successfully connected!';

@@ -39,12 +39,12 @@ class CalendlySection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          CalendlyConnectionWidget(
+          const CalendlyConnectionWidget(
             isRequired: false,
             selectedEventTypeUrl: null,
-            onEventTypeSelected: (_) {},
             showEventTypes: false,
             showDisconnectButton: true,
+            onConnectionStatusChanged: null,
           ),
         ],
       ),

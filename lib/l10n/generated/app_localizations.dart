@@ -4521,10 +4521,10 @@ abstract class AppLocalizations {
   /// **'Connecting...'**
   String get landingpage_creator_calendly_connecting;
 
-  /// Button text for Calendly disconnection (Test)
+  /// Button text for Calendly disconnection
   ///
   /// In en, this message translates to:
-  /// **'Disconnect (Test)'**
+  /// **'Disconnect Calendly'**
   String get landingpage_creator_calendly_disconnect_button;
 
   /// Text when Calendly is successfully connected
@@ -4556,6 +4556,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Event Types found. Please create Event Types in your Calendly Dashboard.'**
   String get landingpage_creator_calendly_event_types_empty;
+
+  /// Error message when Calendly is selected but not connected
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly must be connected before you can continue.'**
+  String get landingpage_creator_calendly_must_be_connected_error;
 
   /// Success message after successful Calendly connection
   ///

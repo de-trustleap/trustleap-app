@@ -3029,9 +3029,9 @@
     "@landingpage_creator_calendly_connecting": {
         "description": "Button text while Calendly connection is running"
     },
-    "landingpage_creator_calendly_disconnect_button": "Disconnect (Test)",
+    "landingpage_creator_calendly_disconnect_button": "Disconnect Calendly",
     "@landingpage_creator_calendly_disconnect_button": {
-        "description": "Button text for Calendly disconnection (Test)"
+        "description": "Button text for Calendly disconnection"
     },
     "landingpage_creator_calendly_connected": "Calendly account successfully connected",
     "@landingpage_creator_calendly_connected": {
@@ -3052,6 +3052,10 @@
     "landingpage_creator_calendly_event_types_empty": "No Event Types found. Please create Event Types in your Calendly Dashboard.",
     "@landingpage_creator_calendly_event_types_empty": {
         "description": "Text when no Event Types were found"
+    },
+    "landingpage_creator_calendly_must_be_connected_error": "Calendly must be connected before you can continue.",
+    "@landingpage_creator_calendly_must_be_connected_error": {
+        "description": "Error message when Calendly is selected but not connected"
     },
     "calendly_success_connected": "Calendly successfully connected!",
     "@calendly_success_connected": {

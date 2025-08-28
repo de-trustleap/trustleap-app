@@ -10,21 +10,24 @@ import 'package:flutter_modular/flutter_modular.dart';
 class CalendlyConnectionWidget extends StatefulWidget {
   final bool isRequired;
   final String? selectedEventTypeUrl;
-  final Function(String?) onEventTypeSelected;
+  final Function(String?)? onEventTypeSelected;
   final bool showEventTypes;
   final bool showDisconnectButton;
+  final Function(bool)? onConnectionStatusChanged;
 
   const CalendlyConnectionWidget({
     super.key,
     required this.isRequired,
     required this.selectedEventTypeUrl,
-    required this.onEventTypeSelected,
+    this.onEventTypeSelected,
     this.showEventTypes = true,
     this.showDisconnectButton = false,
+    this.onConnectionStatusChanged,
   });
 
   @override
-  State<CalendlyConnectionWidget> createState() => _CalendlyConnectionWidgetState();
+  State<CalendlyConnectionWidget> createState() =>
+      _CalendlyConnectionWidgetState();
 }
 
 class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
@@ -37,18 +40,22 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
   void initState() {
     super.initState();
     _initializeCalendlyState();
-    _startObservingCalendlyAuth();
+    final calendlyCubit = Modular.get<CalendlyCubit>();
+    calendlyCubit.startObservingAuthStatus();
   }
 
   void _initializeCalendlyState() {
     final calendlyCubit = Modular.get<CalendlyCubit>();
     final currentState = calendlyCubit.state;
-    
+
     if (currentState is CalendlyConnectedState) {
       setState(() {
         isCalendlyConnected = true;
         eventTypes = currentState.eventTypes;
         isLoadingEventTypes = false;
+      });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.onConnectionStatusChanged?.call(true);
       });
     } else if (currentState is CalendlyAuthenticatedState) {
       setState(() {
@@ -56,12 +63,10 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
         eventTypes = [];
         isLoadingEventTypes = true;
       });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.onConnectionStatusChanged?.call(true);
+      });
     }
-  }
-
-  void _startObservingCalendlyAuth() {
-    final calendlyCubit = Modular.get<CalendlyCubit>();
-    calendlyCubit.startObservingAuthStatus();
   }
 
   @override
@@ -90,6 +95,30 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
     await calendlyCubit.disconnect();
   }
 
+  String? _getValidInitialSelection() {
+    if (eventTypes.isEmpty) return null;
+
+    if (widget.selectedEventTypeUrl == null ||
+        widget.selectedEventTypeUrl!.isEmpty) {
+      return null;
+    }
+
+    final hasValidSelection = eventTypes.any((eventType) =>
+        eventType['scheduling_url'] == widget.selectedEventTypeUrl);
+    return hasValidSelection ? widget.selectedEventTypeUrl : null;
+  }
+
+  List<DropdownMenuEntry<String>> _buildDropdownEntries() {
+    return eventTypes.map<DropdownMenuEntry<String>>((eventType) {
+      final name = eventType['name'] as String? ?? 'Unbekannt';
+      final schedulingUrl = eventType['scheduling_url'] as String? ?? '';
+      return DropdownMenuEntry<String>(
+        value: schedulingUrl,
+        label: name,
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -110,6 +139,7 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
             eventTypes = state.eventTypes;
             isLoadingEventTypes = false;
           });
+          widget.onConnectionStatusChanged?.call(true);
           customSnackbar.showCustomSnackBar(
             localization.calendly_success_connected,
             SnackBarType.success,
@@ -119,17 +149,19 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
             isCalendlyConnected = true;
             isConnectingCalendly = false;
             eventTypes = [];
-            widget.onEventTypeSelected(null);
+            widget.onEventTypeSelected?.call(null);
             isLoadingEventTypes = true;
           });
+          widget.onConnectionStatusChanged?.call(true);
         } else if (state is CalendlyNotAuthenticatedState) {
           setState(() {
             isCalendlyConnected = false;
             isConnectingCalendly = false;
             eventTypes = [];
-            widget.onEventTypeSelected(null);
+            widget.onEventTypeSelected?.call(null);
             isLoadingEventTypes = false;
           });
+          widget.onConnectionStatusChanged?.call(false);
         } else if (state is CalendlyConnectionFailureState) {
           setState(() {
             isConnectingCalendly = false;
@@ -148,9 +180,10 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
             isCalendlyConnected = false;
             isConnectingCalendly = false;
             eventTypes = [];
-            widget.onEventTypeSelected(null);
+            widget.onEventTypeSelected?.call(null);
             isLoadingEventTypes = false;
           });
+          widget.onConnectionStatusChanged?.call(false);
           customSnackbar.showCustomSnackBar(
             localization.calendly_success_disconnected,
             SnackBarType.success,
@@ -188,7 +221,8 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
                 if (widget.showDisconnectButton) ...[
                   const SizedBox(height: 16),
                   SecondaryButton(
-                    title: localization.landingpage_creator_calendly_disconnect_button,
+                    title: localization
+                        .landingpage_creator_calendly_disconnect_button,
                     disabled: false,
                     width: 200,
                     onTap: _disconnectCalendly,
@@ -197,13 +231,19 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
               ],
             ),
           ] else ...[
-            SecondaryButton(
-              title: isConnectingCalendly
-                  ? localization.landingpage_creator_calendly_connecting
-                  : localization.landingpage_creator_calendly_connect_button,
-              disabled: isConnectingCalendly,
-              width: 200,
-              onTap: _connectCalendly,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SecondaryButton(
+                  title: isConnectingCalendly
+                      ? localization.landingpage_creator_calendly_connecting
+                      : localization
+                          .landingpage_creator_calendly_connect_button,
+                  disabled: isConnectingCalendly,
+                  width: 200,
+                  onTap: _connectCalendly,
+                ),
+              ],
             ),
           ],
           const SizedBox(height: 16),
@@ -211,7 +251,8 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
             FormField<String>(
               validator: (value) {
                 if (widget.isRequired && widget.selectedEventTypeUrl == null) {
-                  return localization.landingpage_creator_calendly_event_type_validation;
+                  return localization
+                      .landingpage_creator_calendly_event_type_validation;
                 }
                 return null;
               },
@@ -221,20 +262,14 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
                   children: [
                     DropdownMenu<String>(
                       width: double.infinity,
-                      label: Text(localization.landingpage_creator_calendly_event_type_select),
-                      initialSelection: widget.selectedEventTypeUrl,
+                      label: Text(localization
+                          .landingpage_creator_calendly_event_type_select),
+                      initialSelection: _getValidInitialSelection(),
                       enableSearch: false,
                       requestFocusOnTap: false,
-                      dropdownMenuEntries: eventTypes.map<DropdownMenuEntry<String>>((eventType) {
-                        final name = eventType['name'] as String? ?? 'Unbekannt';
-                        final schedulingUrl = eventType['scheduling_url'] as String? ?? '';
-                        return DropdownMenuEntry<String>(
-                          value: schedulingUrl,
-                          label: name,
-                        );
-                      }).toList(),
+                      dropdownMenuEntries: _buildDropdownEntries(),
                       onSelected: (String? newValue) {
-                        widget.onEventTypeSelected(newValue);
+                        widget.onEventTypeSelected?.call(newValue);
                         state.didChange(newValue);
                       },
                     ),
@@ -255,7 +290,8 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
           ] else if (widget.showEventTypes && isCalendlyConnected) ...[
             Text(
               isLoadingEventTypes
-                  ? localization.landingpage_creator_calendly_event_types_loading
+                  ? localization
+                      .landingpage_creator_calendly_event_types_loading
                   : localization.landingpage_creator_calendly_event_types_empty,
               style: themeData.textTheme.bodyMedium?.copyWith(
                 color: isLoadingEventTypes ? null : themeData.colorScheme.error,
