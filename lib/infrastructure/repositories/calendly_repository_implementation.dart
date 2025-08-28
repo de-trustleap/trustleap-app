@@ -61,7 +61,6 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
 
       return right(uri.toString());
     } catch (e) {
-      print("THE ERROR AUTH: $e");
       return left(BackendFailure());
     }
   }
@@ -103,38 +102,49 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
       getUserEventTypes() async {
     try {
       final tokenResult = await _getStoredToken();
+      final userInfoResult = await getUserInfo();
+      
       return tokenResult.fold(
         (failure) => left(failure),
         (token) async {
           if (token == null) {
             return left(BackendFailure());
           }
+          
+          return userInfoResult.fold(
+            (failure) => left(failure),
+            (userInfo) async {
+              final userUri = userInfo["uri"] as String?;
+              if (userUri == null) {
+                return left(BackendFailure());
+              }
 
-          final response = await httpClient.get(
-            Uri.parse("$_apiBaseUrl/event_types"),
-            headers: {
-              "Authorization": "Bearer $token",
-              "Content-Type": "application/json",
+              final response = await httpClient.get(
+                Uri.parse("$_apiBaseUrl/event_types?user=$userUri"),
+                headers: {
+                  "Authorization": "Bearer $token",
+                  "Content-Type": "application/json",
+                },
+              );
+
+              if (response.statusCode == 200) {
+                final data = json.decode(response.body) as Map<String, dynamic>;
+                final eventTypes = (data["collection"] as List<dynamic>)
+                    .map((item) => item as Map<String, dynamic>)
+                    .toList();
+
+                return right(eventTypes);
+              } else if (response.statusCode == 401) {
+                await clearAuthentication();
+                return left(BackendFailure());
+              } else {
+                return left(BackendFailure());
+              }
             },
           );
-
-          if (response.statusCode == 200) {
-            final data = json.decode(response.body) as Map<String, dynamic>;
-            final eventTypes = (data["collection"] as List<dynamic>)
-                .map((item) => item as Map<String, dynamic>)
-                .toList();
-
-            return right(eventTypes);
-          } else if (response.statusCode == 401) {
-            await clearAuthentication();
-            return left(BackendFailure());
-          } else {
-            return left(BackendFailure());
-          }
         },
       );
     } catch (e) {
-      print("GETUSEREVENTERROR: $e");
       return left(BackendFailure());
     }
   }
@@ -262,7 +272,6 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
         final isExpired = DateTime.now().millisecondsSinceEpoch > expiresAt;
         return right(!isExpired);
       } on FirebaseException catch (e) {
-        print("OBSERVERERROR: $e");
         return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
       }
     });

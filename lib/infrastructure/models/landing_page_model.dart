@@ -27,6 +27,7 @@ class LandingPageModel extends Equatable {
   final String? contactEmailAddress;
   final String? businessModel;
   final String? contactOption;
+  final String? calendlyEventURL;
   final Map<String, dynamic>? companyData;
 
   const LandingPageModel(
@@ -51,6 +52,7 @@ class LandingPageModel extends Equatable {
       this.contactEmailAddress,
       this.businessModel,
       this.contactOption,
+      this.calendlyEventURL,
       this.companyData});
 
   LandingPageModel copyWith(
@@ -75,6 +77,7 @@ class LandingPageModel extends Equatable {
       String? contactEmailAddress,
       String? businessModel,
       String? contactOption,
+      String? calendlyEventURL,
       Map<String, dynamic>? companyData}) {
     return LandingPageModel(
         id: id ?? this.id,
@@ -98,6 +101,7 @@ class LandingPageModel extends Equatable {
         contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
         businessModel: businessModel ?? this.businessModel,
         contactOption: contactOption ?? this.contactOption,
+        calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
         companyData: companyData ?? this.companyData);
   }
 
@@ -124,6 +128,7 @@ class LandingPageModel extends Equatable {
       'contactEmailAddress': contactEmailAddress,
       'businessModel': businessModel,
       'contactOption': contactOption,
+      'calendlyEventURL': calendlyEventURL,
       'companyData': companyData
     };
   }
@@ -176,6 +181,9 @@ class LandingPageModel extends Equatable {
         contactOption: map['contactOption'] != null
             ? map['contactOption'] as String
             : null,
+        calendlyEventURL: map['calendlyEventURL'] != null
+            ? map['calendlyEventURL'] as String
+            : null,
         companyData: map['companyData'] != null
             ? map['companyData'] as Map<String, dynamic>
             : null);
@@ -209,6 +217,7 @@ class LandingPageModel extends Equatable {
         contactEmailAddress: contactEmailAddress,
         businessModel: _getBusinessModelFromString(businessModel),
         contactOption: _getContactOptionFromString(contactOption),
+        calendlyEventURL: calendlyEventURL,
         companyData: companyData);
   }
 
@@ -235,6 +244,7 @@ class LandingPageModel extends Equatable {
         contactEmailAddress: landingPage.contactEmailAddress,
         businessModel: landingPage.businessModel?.name,
         contactOption: landingPage.contactOption?.name,
+        calendlyEventURL: landingPage.calendlyEventURL,
         companyData: landingPage.companyData);
   }
 
@@ -288,6 +298,7 @@ class LandingPageModel extends Equatable {
         contactEmailAddress,
         businessModel,
         contactOption,
+        calendlyEventURL,
         companyData
       ];
 }
@@ -297,7 +308,7 @@ class LandingPageModel extends Equatable {
 // TODO: WENN BOTH ODER CALENDLY ANGEZEIGT WIRD DANN CALENDLY URL UND WEBHOOK URL FELDER ANZEIGEN (DONE)
 // TODO: CALENDLY ACCOUNT MACHEN UND CLIENTID, CLIENTSECRET UND REDIRECTURI ERHALTEN (DONE)
 // TODO: EXCHANGECODEFORTOKEN IN BACKEND IMPLEMENTIEREN (DONE)
-// TODO: KONTAKT EMAIL VON SEITE 1 LÖSCHEN
-// TODO: CALENDLY URL HERAUSFINDEN
-// TODO: BACKEND ANPASSEN
+// TODO: KONTAKT EMAIL VON SEITE 1 LÖSCHEN (DONE)
+// TODO: PROFILE CALENDLY SECTION
+// TODO: BACKEND ANPASSEN FÜR WEBHOOKS
 // TODO: LOCALIZATION

@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrai
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/calendly_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_image_section.dart';
@@ -67,6 +68,8 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                         SizedBox(height: responsiveValue.isMobile ? 20 : 60),
                         ProfileRegisterCompanySection(user: state.user),
                       ],
+                      SizedBox(height: responsiveValue.isMobile ? 20 : 60),
+                      const CalendlySection(),
                       SizedBox(height: responsiveValue.isMobile ? 20 : 60),
                       EmailSection(
                           user: state.user,

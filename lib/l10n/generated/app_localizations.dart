@@ -1229,6 +1229,18 @@ abstract class AppLocalizations {
   /// **'An error occurred while retrieving the data.'**
   String get profile_page_request_failure_message;
 
+  /// Title of the Calendly section on the profile page
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly Integration'**
+  String get profile_page_calendly_integration_title;
+
+  /// Description of the Calendly integration on the profile page
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your Calendly account to enable appointment booking.'**
+  String get profile_page_calendly_integration_description;
+
   /// title of the promoter section on the profile page.
   ///
   /// In en, this message translates to:
@@ -4466,6 +4478,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete Account'**
   String get profile_delete_tab;
+
+  /// Title for contact option selection in LandingPage Creator
+  ///
+  /// In en, this message translates to:
+  /// **'Select Contact Option'**
+  String get landingpage_creator_contact_option_title;
+
+  /// Info text for contact option selection in LandingPage Creator
+  ///
+  /// In en, this message translates to:
+  /// **'Choose how interested parties can contact you.'**
+  String get landingpage_creator_contact_option_info;
+
+  /// Label for Calendly option
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly'**
+  String get landingpage_creator_contact_option_calendly;
+
+  /// Label for contact form option
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Form'**
+  String get landingpage_creator_contact_option_form;
+
+  /// Label for both options (Calendly + Contact Form)
+  ///
+  /// In en, this message translates to:
+  /// **'Both'**
+  String get landingpage_creator_contact_option_both;
+
+  /// Button text for Calendly connection
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Calendly'**
+  String get landingpage_creator_calendly_connect_button;
+
+  /// Button text while Calendly connection is running
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting...'**
+  String get landingpage_creator_calendly_connecting;
+
+  /// Button text for Calendly disconnection (Test)
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect (Test)'**
+  String get landingpage_creator_calendly_disconnect_button;
+
+  /// Text when Calendly is successfully connected
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly account successfully connected'**
+  String get landingpage_creator_calendly_connected;
+
+  /// Label for Event Type dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Select Calendly Event Type'**
+  String get landingpage_creator_calendly_event_type_select;
+
+  /// Validation message for Event Type selection
+  ///
+  /// In en, this message translates to:
+  /// **'Please select an Event Type'**
+  String get landingpage_creator_calendly_event_type_validation;
+
+  /// Text while Event Types are loading
+  ///
+  /// In en, this message translates to:
+  /// **'Loading Event Types...'**
+  String get landingpage_creator_calendly_event_types_loading;
+
+  /// Text when no Event Types were found
+  ///
+  /// In en, this message translates to:
+  /// **'No Event Types found. Please create Event Types in your Calendly Dashboard.'**
+  String get landingpage_creator_calendly_event_types_empty;
+
+  /// Success message after successful Calendly connection
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly successfully connected!'**
+  String get calendly_success_connected;
+
+  /// Success message after Calendly disconnection
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly successfully disconnected'**
+  String get calendly_success_disconnected;
+
+  /// Error message for Calendly connection problem
+  ///
+  /// In en, this message translates to:
+  /// **'Error connecting to Calendly'**
+  String get calendly_error_connection;
 }
 
 class _AppLocalizationsDelegate

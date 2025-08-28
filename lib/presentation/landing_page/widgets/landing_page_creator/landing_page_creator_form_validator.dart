@@ -50,4 +50,16 @@ class LandingPageCreatorFormValidator {
       return null;
     }
   }
+
+  String? validateCalendlyEventUrl(String? input, bool isRequired) {
+    if (isRequired && (input == null || input.trim().isEmpty)) {
+      return "Calendly Event URL ist erforderlich";
+    }
+    if (input != null && input.trim().isNotEmpty) {
+      if (!input.contains('calendly.com/')) {
+        return "Bitte geben Sie eine gültige Calendly URL ein";
+      }
+    }
+    return null;
+  }
 }

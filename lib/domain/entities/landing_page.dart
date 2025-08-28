@@ -23,6 +23,7 @@ class LandingPage extends Equatable {
   final String? termsAndConditions;
   final String? scriptTags;
   final String? contactEmailAddress;
+  final String? calendlyEventURL;
   final BusinessModel? businessModel;
   final ContactOption? contactOption;
   final Map<String, dynamic>? companyData;
@@ -47,6 +48,7 @@ class LandingPage extends Equatable {
       this.termsAndConditions,
       this.scriptTags,
       this.contactEmailAddress,
+      this.calendlyEventURL,
       this.businessModel,
       this.contactOption,
       this.companyData});
@@ -71,6 +73,7 @@ class LandingPage extends Equatable {
       String? termsAndConditions,
       String? scriptTags,
       String? contactEmailAddress,
+      String? calendlyEventURL,
       BusinessModel? businessModel,
       ContactOption? contactOption,
       Map<String, dynamic>? companyData}) {
@@ -94,6 +97,7 @@ class LandingPage extends Equatable {
         termsAndConditions: termsAndConditions ?? this.termsAndConditions,
         scriptTags: scriptTags ?? this.scriptTags,
         contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
+        calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
         businessModel: businessModel ?? this.businessModel,
         contactOption: contactOption ?? this.contactOption,
         companyData: companyData ?? this.companyData);
@@ -117,6 +121,7 @@ class LandingPage extends Equatable {
         termsAndConditions,
         scriptTags,
         contactEmailAddress,
+        calendlyEventURL,
         businessModel,
         contactOption,
         companyData

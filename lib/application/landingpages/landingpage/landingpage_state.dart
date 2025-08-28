@@ -89,8 +89,13 @@ class LandingPageImageExceedsFileSizeLimitFailureState
     extends LandingPageState {}
 
 class LandingPageImageValid extends LandingPageState with EquatableMixin {
+  final DateTime timestamp;
+
+  LandingPageImageValid({DateTime? timestamp}) 
+      : timestamp = timestamp ?? DateTime.now();
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [timestamp];
 }
 
 class LandingPageNoImageFailureState extends LandingPageState

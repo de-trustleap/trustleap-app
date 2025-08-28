@@ -44,7 +44,6 @@ class _LandingPageCreatorFormState
     extends State<LandingPageCreatorFirstStepForm> {
   final nameTextController = TextEditingController();
   final descriptionTextController = TextEditingController();
-  final contactEmailAddressTextController = TextEditingController();
   final promotionTemplateTextController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   CustomUser? user;
@@ -59,8 +58,6 @@ class _LandingPageCreatorFormState
     if (widget.landingPage != null) {
       nameTextController.text = widget.landingPage?.name ?? "";
       descriptionTextController.text = widget.landingPage?.description ?? "";
-      contactEmailAddressTextController.text =
-          widget.landingPage?.contactEmailAddress ?? "";
       promotionTemplateTextController.text =
           widget.landingPage?.promotionTemplate ?? "";
     }
@@ -70,7 +67,6 @@ class _LandingPageCreatorFormState
   void dispose() {
     nameTextController.dispose();
     descriptionTextController.dispose();
-    contactEmailAddressTextController.dispose();
     promotionTemplateTextController.dispose();
 
     super.dispose();
@@ -101,7 +97,7 @@ class _LandingPageCreatorFormState
           initialInformation: widget.landingPage?.initialInformation,
           termsAndConditions: widget.landingPage?.termsAndConditions,
           scriptTags: widget.landingPage?.scriptTags,
-          contactEmailAddress: contactEmailAddressTextController.text.trim(),
+          contactEmailAddress: null,
           businessModel: null,
           ownerID: user!.id,
           companyData: (widget.company != null && widget.createDefaultPage)
@@ -198,20 +194,6 @@ class _LandingPageCreatorFormState
                                   minLines: 2,
                                   maxLines: 5,
                                   keyboardType: TextInputType.multiline)
-                            ]),
-                        const SizedBox(height: textFieldSpacing),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FormTextfield(
-                                  maxWidth: maxWidth,
-                                  controller: contactEmailAddressTextController,
-                                  disabled: false,
-                                  placeholder: localization
-                                      .landingpage_creator_placeholder_contact_email,
-                                  validator: validator
-                                      .validateLandingPageContactEmailAddress,
-                                  keyboardType: TextInputType.emailAddress)
                             ]),
                         const SizedBox(height: textFieldSpacing),
                         if (!widget.createDefaultPage) ...[

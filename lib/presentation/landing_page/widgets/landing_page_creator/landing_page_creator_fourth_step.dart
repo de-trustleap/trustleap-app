@@ -11,7 +11,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/secondary_button.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_ai_generator_form.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_third_step_grid.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_fourth_step_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -89,7 +89,7 @@ class _LandingPageCreatorFourthStepState
                       if (state is GetLandingPageTemplatesLoadingState) ...[
                         const LoadingIndicator()
                       ] else if (templates.isNotEmpty) ...[
-                        LandingPageCreatorThirdStepGrid(
+                        LandingPageCreatorFourthStepGrid(
                             landingpageTemplates: templates,
                             selectedIndex: selectedTileIndex,
                             disabled: _aiData?.hasContent ?? false,

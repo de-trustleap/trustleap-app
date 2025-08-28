@@ -673,6 +673,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'An error occurred while retrieving the data.';
 
   @override
+  String get profile_page_calendly_integration_title => 'Calendly Integration';
+
+  @override
+  String get profile_page_calendly_integration_description =>
+      'Connect your Calendly account to enable appointment booking.';
+
+  @override
   String get profile_page_promoters_section_title => 'Promoter';
 
   @override
@@ -2591,4 +2598,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_delete_tab => 'Delete Account';
+
+  @override
+  String get landingpage_creator_contact_option_title =>
+      'Select Contact Option';
+
+  @override
+  String get landingpage_creator_contact_option_info =>
+      'Choose how interested parties can contact you.';
+
+  @override
+  String get landingpage_creator_contact_option_calendly => 'Calendly';
+
+  @override
+  String get landingpage_creator_contact_option_form => 'Contact Form';
+
+  @override
+  String get landingpage_creator_contact_option_both => 'Both';
+
+  @override
+  String get landingpage_creator_calendly_connect_button => 'Connect Calendly';
+
+  @override
+  String get landingpage_creator_calendly_connecting => 'Connecting...';
+
+  @override
+  String get landingpage_creator_calendly_disconnect_button =>
+      'Disconnect (Test)';
+
+  @override
+  String get landingpage_creator_calendly_connected =>
+      'Calendly account successfully connected';
+
+  @override
+  String get landingpage_creator_calendly_event_type_select =>
+      'Select Calendly Event Type';
+
+  @override
+  String get landingpage_creator_calendly_event_type_validation =>
+      'Please select an Event Type';
+
+  @override
+  String get landingpage_creator_calendly_event_types_loading =>
+      'Loading Event Types...';
+
+  @override
+  String get landingpage_creator_calendly_event_types_empty =>
+      'No Event Types found. Please create Event Types in your Calendly Dashboard.';
+
+  @override
+  String get calendly_success_connected => 'Calendly successfully connected!';
+
+  @override
+  String get calendly_success_disconnected =>
+      'Calendly successfully disconnected';
+
+  @override
+  String get calendly_error_connection => 'Error connecting to Calendly';
 }

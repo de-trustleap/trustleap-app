@@ -43,6 +43,7 @@ void main() {
           termsAndConditions: "Test",
           scriptTags: "<script> Test </script>",
           contactEmailAddress: "test@x.de",
+          calendlyEventURL: null,
           companyData: null);
 
       final expectedResult = {
@@ -67,6 +68,7 @@ void main() {
         "contactEmailAddress": "test@x.de",
         "businessModel": null,
         "contactOption": null,
+        "calendlyEventURL": null,
         "companyData": null
       };
       // When
@@ -103,7 +105,8 @@ void main() {
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
           createdAt: Timestamp(100000, 0),
-          isActive: true);
+          isActive: true,
+          calendlyEventURL: null);
       // When
       final result = LandingPageModel.fromMap(map);
       // Then
@@ -136,7 +139,8 @@ void main() {
           associatedUsersIDs: const ["1", "2"],
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
-          createdAt: Timestamp(100000, 0));
+          createdAt: Timestamp(100000, 0),
+          calendlyEventURL: null);
       // When
       final result = LandingPageModel.fromFirestore(map, "1");
       // Then
@@ -157,7 +161,8 @@ void main() {
           associatedUsersIDs: const ["1", "2"],
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
-          createdAt: Timestamp(100000, 0));
+          createdAt: Timestamp(100000, 0),
+          calendlyEventURL: null);
       final exoectedResult = LandingPage(
           id: UniqueID.fromUniqueString("1"),
           name: "Test",
@@ -199,7 +204,8 @@ void main() {
           associatedUsersIDs: const ["1", "2"],
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
-          createdAt: Timestamp(100000, 0));
+          createdAt: Timestamp(100000, 0),
+          calendlyEventURL: null);
       // When
       final result = LandingPageModel.fromDomain(model);
       // Then
@@ -220,7 +226,8 @@ void main() {
           associatedUsersIDs: const ["1", "2"],
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
-          createdAt: Timestamp(100000, 0));
+          createdAt: Timestamp(100000, 0),
+          calendlyEventURL: null);
       final model2 = LandingPageModel(
           id: "1",
           name: "Test",
@@ -231,7 +238,8 @@ void main() {
           associatedUsersIDs: const ["1", "2"],
           lastUpdatedAt: Timestamp(100000, 0).toDate(),
           isDefaultPage: false,
-          createdAt: Timestamp(100000, 0));
+          createdAt: Timestamp(100000, 0),
+          calendlyEventURL: null);
       // Then
       expect(model, model2);
     });
