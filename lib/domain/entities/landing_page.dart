@@ -24,6 +24,7 @@ class LandingPage extends Equatable {
   final String? scriptTags;
   final String? contactEmailAddress;
   final BusinessModel? businessModel;
+  final ContactOption? contactOption;
   final Map<String, dynamic>? companyData;
 
   const LandingPage(
@@ -47,6 +48,7 @@ class LandingPage extends Equatable {
       this.scriptTags,
       this.contactEmailAddress,
       this.businessModel,
+      this.contactOption,
       this.companyData});
 
   LandingPage copyWith(
@@ -70,6 +72,7 @@ class LandingPage extends Equatable {
       String? scriptTags,
       String? contactEmailAddress,
       BusinessModel? businessModel,
+      ContactOption? contactOption,
       Map<String, dynamic>? companyData}) {
     return LandingPage(
         id: id ?? this.id,
@@ -92,6 +95,7 @@ class LandingPage extends Equatable {
         scriptTags: scriptTags ?? this.scriptTags,
         contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
         businessModel: businessModel ?? this.businessModel,
+        contactOption: contactOption ?? this.contactOption,
         companyData: companyData ?? this.companyData);
   }
 
@@ -114,6 +118,7 @@ class LandingPage extends Equatable {
         scriptTags,
         contactEmailAddress,
         businessModel,
+        contactOption,
         companyData
       ];
 }

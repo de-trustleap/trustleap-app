@@ -38,4 +38,12 @@ class Environment {
       return landingPageProdBaseURL;
     }
   }
+
+  String getBaseURL() {
+    if (isStaging()) {
+      return stagingBaseURL;
+    } else {
+      return prodBaseURL;
+    }
+  }
 }

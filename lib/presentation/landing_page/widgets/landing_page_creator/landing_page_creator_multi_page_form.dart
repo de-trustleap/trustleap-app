@@ -16,6 +16,7 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_c
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_progress_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_second_step.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_third_step.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_fourth_step.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -138,6 +139,29 @@ class _LandingPageCreatorMultiPageFormState
                 this.landingPage = landingPage;
                 _currentStep -= 1;
                 progress = 2 / _steps.length;
+              });
+            },
+            onContinue: (landingPage, image, imageHasChanged) {
+              setState(() {
+                this.landingPage = landingPage;
+                this.image = image;
+                this.imageHasChanged = imageHasChanged;
+                _currentStep += 1;
+                progress = 4 / _steps.length;
+              });
+            }),
+      if (!widget.createDefaultPage && !isEditMode)
+        LandingPageCreatorFourthStep(
+            landingPage: landingPage,
+            image: image,
+            imageHasChanged: imageHasChanged,
+            buttonsDisabled: lastFormButtonsDisabled,
+            isLoading: isLoading,
+            onBack: (landingPage) {
+              setState(() {
+                this.landingPage = landingPage;
+                _currentStep -= 1;
+                progress = 3 / _steps.length;
               });
             },
             onSaveTapped: (landingPage, image, imageHasChanged, templateID) {

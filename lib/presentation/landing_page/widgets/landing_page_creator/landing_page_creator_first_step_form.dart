@@ -3,7 +3,6 @@ import 'dart:typed_data';
 
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
-import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
@@ -15,7 +14,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/tooltip_buttons/info_button.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_form_validator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_placeholder_picker.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +52,6 @@ class _LandingPageCreatorFormState
   bool validationHasError = false;
   bool buttonDisabled = false;
   bool _isEmojiPickerExpanded = false;
-  BusinessModel? selectedBusinessModel = BusinessModel.b2c;
 
   @override
   void initState() {
@@ -66,8 +63,6 @@ class _LandingPageCreatorFormState
           widget.landingPage?.contactEmailAddress ?? "";
       promotionTemplateTextController.text =
           widget.landingPage?.promotionTemplate ?? "";
-      selectedBusinessModel =
-          widget.landingPage?.businessModel ?? BusinessModel.b2c;
     }
   }
 
@@ -107,7 +102,7 @@ class _LandingPageCreatorFormState
           termsAndConditions: widget.landingPage?.termsAndConditions,
           scriptTags: widget.landingPage?.scriptTags,
           contactEmailAddress: contactEmailAddressTextController.text.trim(),
-          businessModel: selectedBusinessModel,
+          businessModel: null,
           ownerID: user!.id,
           companyData: (widget.company != null && widget.createDefaultPage)
               ? CompanyModel.fromDomain(widget.company!).toMap()
@@ -219,42 +214,6 @@ class _LandingPageCreatorFormState
                                   keyboardType: TextInputType.emailAddress)
                             ]),
                         const SizedBox(height: textFieldSpacing),
-                        Row(
-                          children: [
-                            SelectableText(localization.landingpage_creator_business_model_title,
-                                style: themeData.textTheme.bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold)),
-                            const SizedBox(width: 8),
-                            InfoButton(
-                              text: localization.landingpage_creator_business_model_info_tooltip,
-                            ),
-                          ],
-                        ),
-                        RadioGroup<BusinessModel>(
-                          groupValue: selectedBusinessModel,
-                          onChanged: (BusinessModel? value) {
-                            setState(() {
-                              selectedBusinessModel = value;
-                            });
-                          },
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: RadioListTile<BusinessModel>(
-                                  title: Text(localization.landingpage_creator_business_model_b2b_label),
-                                  value: BusinessModel.b2b,
-                                ),
-                              ),
-                              Expanded(
-                                child: RadioListTile<BusinessModel>(
-                                  title: Text(localization.landingpage_creator_business_model_b2c_label),
-                                  value: BusinessModel.b2c,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: textFieldSpacing * 2),
                         if (!widget.createDefaultPage) ...[
                           SelectableText(
                               localization
