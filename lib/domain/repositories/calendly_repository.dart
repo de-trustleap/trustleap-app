@@ -18,6 +18,9 @@ abstract class CalendlyRepository {
   /// Clear stored authentication data
   Future<Either<DatabaseFailure, Unit>> clearAuthentication();
 
+  /// Refresh expired access token using refresh token
+  Future<Either<DatabaseFailure, Unit>> refreshToken();
+
   /// Observe authentication status changes in real-time
   Stream<Either<DatabaseFailure, bool>> observeAuthenticationStatus();
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -18,16 +19,17 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
   final http.Client httpClient = http.Client();
   final FirebaseFirestore firestore;
   final FirebaseAuth firebaseAuth;
+  final FirebaseFunctions firebaseFunctions;
   final Environment environment = Environment();
 
   // PKCE parameters
   String? _codeVerifier;
   String? _codeChallenge;
 
-  CalendlyRepositoryImplementation({
-    required this.firestore,
-    required this.firebaseAuth,
-  });
+  CalendlyRepositoryImplementation(
+      {required this.firestore,
+      required this.firebaseAuth,
+      required this.firebaseFunctions});
 
   @override
   Future<Either<DatabaseFailure, String>> getAuthorizationUrl() async {
@@ -103,14 +105,14 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
     try {
       final tokenResult = await _getStoredToken();
       final userInfoResult = await getUserInfo();
-      
+
       return tokenResult.fold(
         (failure) => left(failure),
         (token) async {
           if (token == null) {
             return left(BackendFailure());
           }
-          
+
           return userInfoResult.fold(
             (failure) => left(failure),
             (userInfo) async {
@@ -152,32 +154,12 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
   @override
   Future<Either<DatabaseFailure, bool>> isAuthenticated() async {
     try {
-      final user = firebaseAuth.currentUser;
-      if (user == null) {
-        return right(false);
-      }
+      final tokenResult = await _getStoredToken();
 
-      final docSnapshot = await firestore
-          .collection("users")
-          .doc(user.uid)
-          .collection("integrations")
-          .doc("calendly")
-          .get();
-
-      if (!docSnapshot.exists) {
-        return right(false);
-      }
-
-      final data = docSnapshot.data()!;
-      final accessToken = data["accessToken"] as String?;
-      final expiresAt = data["expiresAt"] as int?;
-
-      if (accessToken == null || expiresAt == null) {
-        return right(false);
-      }
-
-      final isExpired = DateTime.now().millisecondsSinceEpoch > expiresAt;
-      return right(!isExpired);
+      return tokenResult.fold(
+        (failure) => left(failure),
+        (token) => right(token != null),
+      );
     } catch (e) {
       return left(BackendFailure());
     }
@@ -209,10 +191,14 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
         return right(null);
       }
 
-      // Check if token is still valid
-      final isExpired = DateTime.now().millisecondsSinceEpoch > expiresAt;
+      // Check if token is expired or expires within 5 minutes
+      final now = DateTime.now().millisecondsSinceEpoch;
+      final bufferTime = 5 * 60 * 1000;
+      final isExpired = now > (expiresAt - bufferTime);
+
       if (isExpired) {
-        return right(null);
+        return right(
+            null); // Return null if expired, let the cubit handle refresh
       }
 
       return right(accessToken);
@@ -243,6 +229,17 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
   }
 
   @override
+  Future<Either<DatabaseFailure, Unit>> refreshToken() async {
+    try {
+      final callable = firebaseFunctions.httpsCallable('calendlyRefreshToken');
+      await callable.call();
+      return right(unit);
+    } catch (e) {
+      return left(BackendFailure());
+    }
+  }
+
+  @override
   Stream<Either<DatabaseFailure, bool>> observeAuthenticationStatus() {
     final user = firebaseAuth.currentUser;
     if (user == null) {
@@ -255,7 +252,7 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
         .collection("integrations")
         .doc("calendly")
         .snapshots()
-        .map((snapshot) {
+        .asyncMap((snapshot) async {
       try {
         if (!snapshot.exists) {
           return right(false);
@@ -269,8 +266,17 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
           return right(false);
         }
 
-        final isExpired = DateTime.now().millisecondsSinceEpoch > expiresAt;
-        return right(!isExpired);
+        // Check if token is expired or expires within 5 minutes
+        final now = DateTime.now().millisecondsSinceEpoch;
+        final bufferTime = 5 * 60 * 1000;
+        final isExpired = now > (expiresAt - bufferTime);
+
+        if (isExpired) {
+          refreshToken();
+          return right(false);
+        }
+
+        return right(true);
       } on FirebaseException catch (e) {
         return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
       }
@@ -286,10 +292,11 @@ class CalendlyRepositoryImplementation implements CalendlyRepository {
         .join();
   }
 
-  /// Generate code challenge from verifier using SHA256
   String _generateCodeChallenge(String verifier) {
     final bytes = utf8.encode(verifier);
     final digest = sha256.convert(bytes);
     return base64Url.encode(digest.bytes).replaceAll('=', '');
   }
 }
+
+// TODO: TESTS FÜR CUBIT UND REPO

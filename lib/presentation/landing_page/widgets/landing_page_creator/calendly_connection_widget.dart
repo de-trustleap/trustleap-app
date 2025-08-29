@@ -226,7 +226,8 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
                   SecondaryButton(
                     title: localization
                         .landingpage_creator_calendly_disconnect_button,
-                    disabled: false,
+                    disabled: isConnectingCalendly,
+                    isLoading: isConnectingCalendly,
                     width: 200,
                     onTap: _disconnectCalendly,
                   ),

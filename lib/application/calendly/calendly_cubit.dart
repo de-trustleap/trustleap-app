@@ -32,11 +32,21 @@ class CalendlyCubit extends Cubit<CalendlyState> {
     final userInfoResult = await calendlyRepository.getUserInfo();
 
     await userInfoResult.fold(
-      (failure) async => emit(CalendlyConnectionFailureState(failure: failure)),
+      (failure) async {
+        if (failure is NotFoundFailure) {
+          // Token might be expired, try to refresh
+          final refreshResult = await calendlyRepository.refreshToken();
+          refreshResult.fold(
+            (refreshFailure) =>
+                emit(CalendlyConnectionFailureState(failure: refreshFailure)),
+            (_) => _fetchUserInfo(), // Retry after refresh
+          );
+        } else {
+          emit(CalendlyConnectionFailureState(failure: failure));
+        }
+      },
       (userInfo) async {
         emit(CalendlyAuthenticatedState(userInfo: userInfo));
-
-        // Automatically fetch event types after successful user info
         final eventTypesResult = await calendlyRepository.getUserEventTypes();
 
         eventTypesResult.fold(
@@ -59,6 +69,17 @@ class CalendlyCubit extends Cubit<CalendlyState> {
     );
   }
 
+  Future<void> _refreshToken() async {
+    emit(CalendlyConnectingState());
+
+    final result = await calendlyRepository.refreshToken();
+
+    result.fold(
+      (failure) => emit(CalendlyConnectionFailureState(failure: failure)),
+      (_) => _fetchUserInfo(),
+    );
+  }
+
   void startObservingAuthStatus() {
     _authStatusSubscription?.cancel();
     _authStatusSubscription = null;
@@ -78,13 +99,27 @@ class CalendlyCubit extends Cubit<CalendlyState> {
             if (isAuthenticated) {
               _fetchUserInfo();
             } else {
-              emit(CalendlyNotAuthenticatedState());
+              _checkAndRefreshToken();
             }
           },
         );
       },
       onError: (error) {
         emit(CalendlyConnectionFailureState(failure: BackendFailure()));
+      },
+    );
+  }
+
+  Future<void> _checkAndRefreshToken() async {
+    final authResult = await calendlyRepository.isAuthenticated();
+    authResult.fold(
+      (failure) => emit(CalendlyConnectionFailureState(failure: failure)),
+      (isAuth) {
+        if (!isAuth) {
+          _refreshToken();
+        } else {
+          emit(CalendlyNotAuthenticatedState());
+        }
       },
     );
   }
