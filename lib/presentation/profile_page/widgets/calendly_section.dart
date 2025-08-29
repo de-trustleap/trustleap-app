@@ -15,28 +15,16 @@ class CalendlySection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(
-                Icons.calendar_today,
-                size: 24,
-                color: themeData.colorScheme.primary,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                localization.profile_page_calendly_integration_title,
-                style: themeData.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+          SelectableText(
+            localization.profile_page_calendly_integration_title,
+            style: themeData.textTheme.headlineLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 8),
-          Text(
+          SelectableText(
             localization.profile_page_calendly_integration_description,
-            style: themeData.textTheme.bodyMedium?.copyWith(
-              color: themeData.colorScheme.onSurfaceVariant,
-            ),
+            style: themeData.textTheme.bodyMedium,
           ),
           const SizedBox(height: 16),
           const CalendlyConnectionWidget(
