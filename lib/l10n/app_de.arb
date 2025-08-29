@@ -3037,21 +3037,21 @@
     "@landingpage_creator_calendly_connected": {
         "description": "Text wenn Calendly erfolgreich verbunden ist"
     },
-    "landingpage_creator_calendly_event_type_select": "Calendly Event Type auswählen",
+    "landingpage_creator_calendly_event_type_select": "Calendly Event Typ auswählen",
     "@landingpage_creator_calendly_event_type_select": {
-        "description": "Label für Event Type Dropdown"
+        "description": "Label für Event Typ Dropdown"
     },
-    "landingpage_creator_calendly_event_type_validation": "Bitte wählen Sie einen Event Type aus",
+    "landingpage_creator_calendly_event_type_validation": "Bitte wählen Sie einen Event Typ aus",
     "@landingpage_creator_calendly_event_type_validation": {
-        "description": "Validierungsmeldung für Event Type Auswahl"
+        "description": "Validierungsmeldung für Event Typ Auswahl"
     },
-    "landingpage_creator_calendly_event_types_loading": "Event Types werden geladen...",
+    "landingpage_creator_calendly_event_types_loading": "Event Typen werden geladen...",
     "@landingpage_creator_calendly_event_types_loading": {
-        "description": "Text während Event Types geladen werden"
+        "description": "Text während Event Typen geladen werden"
     },
-    "landingpage_creator_calendly_event_types_empty": "Keine Event Types gefunden. Bitte erstellen Sie Event Types in Ihrem Calendly Dashboard.",
+    "landingpage_creator_calendly_event_types_empty": "Keine Event Typen gefunden. Bitte erstellen Sie Event Typen in Ihrem Calendly Dashboard.",
     "@landingpage_creator_calendly_event_types_empty": {
-        "description": "Text wenn keine Event Types gefunden wurden"
+        "description": "Text wenn keine Event Typen gefunden wurden"
     },
     "landingpage_creator_calendly_must_be_connected_error": "Calendly muss erst verbunden werden, bevor Sie fortfahren können.",
     "@landingpage_creator_calendly_must_be_connected_error": {

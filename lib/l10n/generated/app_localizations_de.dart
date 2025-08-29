@@ -2680,19 +2680,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_creator_calendly_event_type_select =>
-      'Calendly Event Type auswählen';
+      'Calendly Event Typ auswählen';
 
   @override
   String get landingpage_creator_calendly_event_type_validation =>
-      'Bitte wählen Sie einen Event Type aus';
+      'Bitte wählen Sie einen Event Typ aus';
 
   @override
   String get landingpage_creator_calendly_event_types_loading =>
-      'Event Types werden geladen...';
+      'Event Typen werden geladen...';
 
   @override
   String get landingpage_creator_calendly_event_types_empty =>
-      'Keine Event Types gefunden. Bitte erstellen Sie Event Types in Ihrem Calendly Dashboard.';
+      'Keine Event Typen gefunden. Bitte erstellen Sie Event Typen in Ihrem Calendly Dashboard.';
 
   @override
   String get landingpage_creator_calendly_must_be_connected_error =>

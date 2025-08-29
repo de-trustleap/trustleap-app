@@ -133,6 +133,7 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
           final navigator = CustomNavigator.of(context);
           navigator.openURLInNewTab(state.authUrl);
         } else if (state is CalendlyConnectedState) {
+          final wasConnecting = isConnectingCalendly;
           setState(() {
             isCalendlyConnected = true;
             isConnectingCalendly = false;
@@ -140,10 +141,12 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
             isLoadingEventTypes = false;
           });
           widget.onConnectionStatusChanged?.call(true);
-          customSnackbar.showCustomSnackBar(
-            localization.calendly_success_connected,
-            SnackBarType.success,
-          );
+          if (wasConnecting) {
+            customSnackbar.showCustomSnackBar(
+              localization.calendly_success_connected,
+              SnackBarType.success,
+            );
+          }
         } else if (state is CalendlyAuthenticatedState) {
           setState(() {
             isCalendlyConnected = true;
