@@ -47,6 +47,7 @@ dependencies:
   sentry_flutter: ^9.0.0
   fl_chart: ^1.0.0
   flutter_image_compress: ^2.4.0
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:

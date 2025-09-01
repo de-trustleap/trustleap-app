@@ -26,6 +26,8 @@ class LandingPageModel extends Equatable {
   final String? scriptTags;
   final String? contactEmailAddress;
   final String? businessModel;
+  final String? contactOption;
+  final String? calendlyEventURL;
   final Map<String, dynamic>? companyData;
 
   const LandingPageModel(
@@ -49,6 +51,8 @@ class LandingPageModel extends Equatable {
       this.scriptTags,
       this.contactEmailAddress,
       this.businessModel,
+      this.contactOption,
+      this.calendlyEventURL,
       this.companyData});
 
   LandingPageModel copyWith(
@@ -72,6 +76,8 @@ class LandingPageModel extends Equatable {
       String? scriptTags,
       String? contactEmailAddress,
       String? businessModel,
+      String? contactOption,
+      String? calendlyEventURL,
       Map<String, dynamic>? companyData}) {
     return LandingPageModel(
         id: id ?? this.id,
@@ -94,6 +100,8 @@ class LandingPageModel extends Equatable {
         scriptTags: scriptTags ?? this.scriptTags,
         contactEmailAddress: contactEmailAddress ?? this.contactEmailAddress,
         businessModel: businessModel ?? this.businessModel,
+        contactOption: contactOption ?? this.contactOption,
+        calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
         companyData: companyData ?? this.companyData);
   }
 
@@ -119,6 +127,8 @@ class LandingPageModel extends Equatable {
       'scripts': scriptTags,
       'contactEmailAddress': contactEmailAddress,
       'businessModel': businessModel,
+      'contactOption': contactOption,
+      'calendlyEventURL': calendlyEventURL,
       'companyData': companyData
     };
   }
@@ -168,6 +178,12 @@ class LandingPageModel extends Equatable {
         businessModel: map['businessModel'] != null
             ? map['businessModel'] as String
             : null,
+        contactOption: map['contactOption'] != null
+            ? map['contactOption'] as String
+            : null,
+        calendlyEventURL: map['calendlyEventURL'] != null
+            ? map['calendlyEventURL'] as String
+            : null,
         companyData: map['companyData'] != null
             ? map['companyData'] as Map<String, dynamic>
             : null);
@@ -200,6 +216,8 @@ class LandingPageModel extends Equatable {
         scriptTags: scriptTags,
         contactEmailAddress: contactEmailAddress,
         businessModel: _getBusinessModelFromString(businessModel),
+        contactOption: _getContactOptionFromString(contactOption),
+        calendlyEventURL: calendlyEventURL,
         companyData: companyData);
   }
 
@@ -225,6 +243,8 @@ class LandingPageModel extends Equatable {
         scriptTags: landingPage.scriptTags,
         contactEmailAddress: landingPage.contactEmailAddress,
         businessModel: landingPage.businessModel?.name,
+        contactOption: landingPage.contactOption?.name,
+        calendlyEventURL: landingPage.calendlyEventURL,
         companyData: landingPage.companyData);
   }
 
@@ -237,6 +257,22 @@ class LandingPageModel extends Equatable {
         return BusinessModel.b2b;
       case "b2c":
         return BusinessModel.b2c;
+      default:
+        return null;
+    }
+  }
+
+  ContactOption? _getContactOptionFromString(String? contactOption) {
+    if (contactOption == null) {
+      return null;
+    }
+    switch (contactOption) {
+      case "calendly":
+        return ContactOption.calendly;
+      case "contactForm":
+        return ContactOption.constactForm;
+      case "both":
+        return ContactOption.both;
       default:
         return null;
     }
@@ -261,6 +297,8 @@ class LandingPageModel extends Equatable {
         scriptTags,
         contactEmailAddress,
         businessModel,
+        contactOption,
+        calendlyEventURL,
         companyData
       ];
 }

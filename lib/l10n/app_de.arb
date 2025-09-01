@@ -758,6 +758,14 @@
     "@profile_page_request_failure_message": {
         "description": "Meldung wenn keine Daten geladen werden können auf der Profil Seite."
     },
+    "profile_page_calendly_integration_title": "Calendly Integration",
+    "@profile_page_calendly_integration_title": {
+        "description": "Titel der Calendly-Sektion auf der Profilseite"
+    },
+    "profile_page_calendly_integration_description": "Verbinden Sie Ihr Calendly-Konto, um Terminbuchungen zu ermöglichen.",
+    "@profile_page_calendly_integration_description": {
+        "description": "Beschreibung der Calendly-Integration auf der Profilseite"
+    },
     "profile_page_promoters_section_title": "Promoter",
     "@profile_page_promoters_section_title": {
         "description": "Titel des Promoter Bereichs auf der Profil Seite."
@@ -2992,5 +3000,73 @@
     "profile_delete_tab": "Account löschen",
     "@profile_delete_tab": {
         "description": "Tab-Titel für Account löschen im Profil"
+    },
+    "landingpage_creator_contact_option_title": "Kontaktmöglichkeit auswählen",
+    "@landingpage_creator_contact_option_title": {
+        "description": "Titel für Kontaktmöglichkeit Auswahl in LandingPage Creator"
+    },
+    "landingpage_creator_contact_option_info": "Wählen Sie aus, wie Interessenten Kontakt zu Ihnen aufnehmen können.",
+    "@landingpage_creator_contact_option_info": {
+        "description": "Info-Text für Kontaktmöglichkeit Auswahl in LandingPage Creator"
+    },
+    "landingpage_creator_contact_option_calendly": "Calendly",
+    "@landingpage_creator_contact_option_calendly": {
+        "description": "Label für Calendly Option"
+    },
+    "landingpage_creator_contact_option_form": "Kontaktformular",
+    "@landingpage_creator_contact_option_form": {
+        "description": "Label für Kontaktformular Option"
+    },
+    "landingpage_creator_contact_option_both": "Beides",
+    "@landingpage_creator_contact_option_both": {
+        "description": "Label für Beide Optionen (Calendly + Kontaktformular)"
+    },
+    "landingpage_creator_calendly_connect_button": "Verbinde Calendly",
+    "@landingpage_creator_calendly_connect_button": {
+        "description": "Button Text für Calendly Verbindung"
+    },
+    "landingpage_creator_calendly_connecting": "Verbinde...",
+    "@landingpage_creator_calendly_connecting": {
+        "description": "Button Text während Calendly Verbindung läuft"
+    },
+    "landingpage_creator_calendly_disconnect_button": "Verbindung trennen",
+    "@landingpage_creator_calendly_disconnect_button": {
+        "description": "Button Text für Calendly Trennung"
+    },
+    "landingpage_creator_calendly_connected": "Calendly Account erfolgreich verbunden",
+    "@landingpage_creator_calendly_connected": {
+        "description": "Text wenn Calendly erfolgreich verbunden ist"
+    },
+    "landingpage_creator_calendly_event_type_select": "Calendly Event Typ auswählen",
+    "@landingpage_creator_calendly_event_type_select": {
+        "description": "Label für Event Typ Dropdown"
+    },
+    "landingpage_creator_calendly_event_type_validation": "Bitte wählen Sie einen Event Typ aus",
+    "@landingpage_creator_calendly_event_type_validation": {
+        "description": "Validierungsmeldung für Event Typ Auswahl"
+    },
+    "landingpage_creator_calendly_event_types_loading": "Event Typen werden geladen...",
+    "@landingpage_creator_calendly_event_types_loading": {
+        "description": "Text während Event Typen geladen werden"
+    },
+    "landingpage_creator_calendly_event_types_empty": "Keine Event Typen gefunden. Bitte erstellen Sie Event Typen in Ihrem Calendly Dashboard.",
+    "@landingpage_creator_calendly_event_types_empty": {
+        "description": "Text wenn keine Event Typen gefunden wurden"
+    },
+    "landingpage_creator_calendly_must_be_connected_error": "Calendly muss erst verbunden werden, bevor Sie fortfahren können.",
+    "@landingpage_creator_calendly_must_be_connected_error": {
+        "description": "Fehlermeldung wenn Calendly ausgewählt wurde aber nicht verbunden ist"
+    },
+    "calendly_success_connected": "Calendly erfolgreich verbunden!",
+    "@calendly_success_connected": {
+        "description": "Success-Nachricht nach erfolgreicher Calendly Verbindung"
+    },
+    "calendly_success_disconnected": "Calendly erfolgreich getrennt",
+    "@calendly_success_disconnected": {
+        "description": "Success-Nachricht nach Calendly Trennung"
+    },
+    "calendly_error_connection": "Fehler beim Verbinden mit Calendly",
+    "@calendly_error_connection": {
+        "description": "Fehlermeldung bei Calendly Verbindungsproblem"
     }
 }

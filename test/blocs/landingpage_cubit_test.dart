@@ -314,7 +314,7 @@ void main() {
     final testImageData = Uint8List(1);
     test("should emit LandingPageImageValid when there is a download url", () {
       // Given
-      final expectedResult = [LandingPageImageValid()];
+      final expectedResult = [isA<LandingPageImageValid>()];
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
       landingPageCubit.checkLandingPageImage(testLandingPage2, testImageData);
@@ -324,7 +324,7 @@ void main() {
         "should emit LandingPageImageValid when there is no download url and imageData is there",
         () {
       // Given
-      final expectedResult = [LandingPageImageValid()];
+      final expectedResult = [isA<LandingPageImageValid>()];
       // Then
       expectLater(landingPageCubit.stream, emitsInOrder(expectedResult));
       landingPageCubit.checkLandingPageImage(testLandingPage, testImageData);
