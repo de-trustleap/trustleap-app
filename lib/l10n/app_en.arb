@@ -758,6 +758,14 @@
     "@profile_page_request_failure_message": {
         "description": "Message if no data can be loaded on the profile page."
     },
+    "profile_page_calendly_integration_title": "Calendly Integration",
+    "@profile_page_calendly_integration_title": {
+        "description": "Title of the Calendly section on the profile page"
+    },
+    "profile_page_calendly_integration_description": "Connect your Calendly account to enable appointment booking.",
+    "@profile_page_calendly_integration_description": {
+        "description": "Description of the Calendly integration on the profile page"
+    },
     "profile_page_promoters_section_title": "Promoter",
     "@profile_page_promoters_section_title": {
         "description": "title of the promoter section on the profile page."
@@ -2992,5 +3000,73 @@
     "profile_delete_tab": "Delete Account",
     "@profile_delete_tab": {
         "description": "Tab title for delete account in profile"
+    },
+    "landingpage_creator_contact_option_title": "Select Contact Option",
+    "@landingpage_creator_contact_option_title": {
+        "description": "Title for contact option selection in LandingPage Creator"
+    },
+    "landingpage_creator_contact_option_info": "Choose how interested parties can contact you.",
+    "@landingpage_creator_contact_option_info": {
+        "description": "Info text for contact option selection in LandingPage Creator"
+    },
+    "landingpage_creator_contact_option_calendly": "Calendly",
+    "@landingpage_creator_contact_option_calendly": {
+        "description": "Label for Calendly option"
+    },
+    "landingpage_creator_contact_option_form": "Contact Form",
+    "@landingpage_creator_contact_option_form": {
+        "description": "Label for contact form option"
+    },
+    "landingpage_creator_contact_option_both": "Both",
+    "@landingpage_creator_contact_option_both": {
+        "description": "Label for both options (Calendly + Contact Form)"
+    },
+    "landingpage_creator_calendly_connect_button": "Connect Calendly",
+    "@landingpage_creator_calendly_connect_button": {
+        "description": "Button text for Calendly connection"
+    },
+    "landingpage_creator_calendly_connecting": "Connecting...",
+    "@landingpage_creator_calendly_connecting": {
+        "description": "Button text while Calendly connection is running"
+    },
+    "landingpage_creator_calendly_disconnect_button": "Disconnect Calendly",
+    "@landingpage_creator_calendly_disconnect_button": {
+        "description": "Button text for Calendly disconnection"
+    },
+    "landingpage_creator_calendly_connected": "Calendly account successfully connected",
+    "@landingpage_creator_calendly_connected": {
+        "description": "Text when Calendly is successfully connected"
+    },
+    "landingpage_creator_calendly_event_type_select": "Select Calendly Event Type",
+    "@landingpage_creator_calendly_event_type_select": {
+        "description": "Label for Event Type dropdown"
+    },
+    "landingpage_creator_calendly_event_type_validation": "Please select an Event Type",
+    "@landingpage_creator_calendly_event_type_validation": {
+        "description": "Validation message for Event Type selection"
+    },
+    "landingpage_creator_calendly_event_types_loading": "Loading Event Types...",
+    "@landingpage_creator_calendly_event_types_loading": {
+        "description": "Text while Event Types are loading"
+    },
+    "landingpage_creator_calendly_event_types_empty": "No Event Types found. Please create Event Types in your Calendly Dashboard.",
+    "@landingpage_creator_calendly_event_types_empty": {
+        "description": "Text when no Event Types were found"
+    },
+    "landingpage_creator_calendly_must_be_connected_error": "Calendly must be connected before you can continue.",
+    "@landingpage_creator_calendly_must_be_connected_error": {
+        "description": "Error message when Calendly is selected but not connected"
+    },
+    "calendly_success_connected": "Calendly successfully connected!",
+    "@calendly_success_connected": {
+        "description": "Success message after successful Calendly connection"
+    },
+    "calendly_success_disconnected": "Calendly successfully disconnected",
+    "@calendly_success_disconnected": {
+        "description": "Success message after Calendly disconnection"
+    },
+    "calendly_error_connection": "Error connecting to Calendly",
+    "@calendly_error_connection": {
+        "description": "Error message for Calendly connection problem"
     }
 }

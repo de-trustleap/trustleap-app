@@ -685,6 +685,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'Ein Fehler beim Abruf der Daten ist aufgetreten.';
 
   @override
+  String get profile_page_calendly_integration_title => 'Calendly Integration';
+
+  @override
+  String get profile_page_calendly_integration_description =>
+      'Verbinden Sie Ihr Calendly-Konto, um Terminbuchungen zu ermöglichen.';
+
+  @override
   String get profile_page_promoters_section_title => 'Promoter';
 
   @override
@@ -2639,4 +2646,64 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get profile_delete_tab => 'Account löschen';
+
+  @override
+  String get landingpage_creator_contact_option_title =>
+      'Kontaktmöglichkeit auswählen';
+
+  @override
+  String get landingpage_creator_contact_option_info =>
+      'Wählen Sie aus, wie Interessenten Kontakt zu Ihnen aufnehmen können.';
+
+  @override
+  String get landingpage_creator_contact_option_calendly => 'Calendly';
+
+  @override
+  String get landingpage_creator_contact_option_form => 'Kontaktformular';
+
+  @override
+  String get landingpage_creator_contact_option_both => 'Beides';
+
+  @override
+  String get landingpage_creator_calendly_connect_button => 'Verbinde Calendly';
+
+  @override
+  String get landingpage_creator_calendly_connecting => 'Verbinde...';
+
+  @override
+  String get landingpage_creator_calendly_disconnect_button =>
+      'Verbindung trennen';
+
+  @override
+  String get landingpage_creator_calendly_connected =>
+      'Calendly Account erfolgreich verbunden';
+
+  @override
+  String get landingpage_creator_calendly_event_type_select =>
+      'Calendly Event Typ auswählen';
+
+  @override
+  String get landingpage_creator_calendly_event_type_validation =>
+      'Bitte wählen Sie einen Event Typ aus';
+
+  @override
+  String get landingpage_creator_calendly_event_types_loading =>
+      'Event Typen werden geladen...';
+
+  @override
+  String get landingpage_creator_calendly_event_types_empty =>
+      'Keine Event Typen gefunden. Bitte erstellen Sie Event Typen in Ihrem Calendly Dashboard.';
+
+  @override
+  String get landingpage_creator_calendly_must_be_connected_error =>
+      'Calendly muss erst verbunden werden, bevor Sie fortfahren können.';
+
+  @override
+  String get calendly_success_connected => 'Calendly erfolgreich verbunden!';
+
+  @override
+  String get calendly_success_disconnected => 'Calendly erfolgreich getrennt';
+
+  @override
+  String get calendly_error_connection => 'Fehler beim Verbinden mit Calendly';
 }

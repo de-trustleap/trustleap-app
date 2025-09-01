@@ -1,15 +1,15 @@
 import 'package:finanzbegleiter/domain/entities/landing_page_template.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_third_step_grid_tile.dart';
+import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_fourth_step_grid_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class LandingPageCreatorThirdStepGrid extends StatelessWidget {
+class LandingPageCreatorFourthStepGrid extends StatelessWidget {
   final List<LandingPageTemplate> landingpageTemplates;
   final int? selectedIndex;
   final Function(int) onSelectIndex;
   final bool disabled;
-  const LandingPageCreatorThirdStepGrid(
+  const LandingPageCreatorFourthStepGrid(
       {super.key,
       required this.landingpageTemplates,
       required this.selectedIndex,
@@ -39,7 +39,7 @@ class LandingPageCreatorThirdStepGrid extends StatelessWidget {
                 child: ScaleAnimation(
                     child: Center(
                         child: GridTile(
-                            child: LandingPageCreatorThirdStepGridTile(
+                            child: LandingPageCreatorFourthStepGridTile(
                                 template: landingpageTemplates[index],
                                 isSelected: isSelected,
                                 disabled: disabled,

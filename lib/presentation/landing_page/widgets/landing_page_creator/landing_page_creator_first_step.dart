@@ -49,8 +49,8 @@ class _LandingPageCreatorInputState extends State<LandingPageCreatorFirstStep> {
 
   void _onContinue(LandingPage landingPage) {
     this.landingPage = landingPage;
-    Modular.get<LandingPageCubit>()
-        .checkLandingPageImage(widget.landingPage, image);
+    final landingPageCubit = Modular.get<LandingPageCubit>();
+    landingPageCubit.checkLandingPageImage(widget.landingPage, image);
   }
 
   @override

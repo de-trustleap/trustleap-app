@@ -1819,6 +1819,25 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get profile_page_calendly_integration_title => (super.noSuchMethod(
+        Invocation.getter(#profile_page_calendly_integration_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_page_calendly_integration_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_page_calendly_integration_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#profile_page_calendly_integration_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_page_calendly_integration_description),
+        ),
+      ) as String);
+
+  @override
   String get profile_page_promoters_section_title => (super.noSuchMethod(
         Invocation.getter(#profile_page_promoters_section_title),
         returnValue: _i3.dummyValue<String>(
@@ -6949,6 +6968,168 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#profile_delete_tab),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_contact_option_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_contact_option_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_contact_option_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_contact_option_info => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_contact_option_info),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_contact_option_info),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_contact_option_calendly => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_contact_option_calendly),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_contact_option_calendly),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_contact_option_form => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_contact_option_form),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_contact_option_form),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_contact_option_both => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_contact_option_both),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_contact_option_both),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_calendly_connect_button => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_calendly_connect_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_calendly_connect_button),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_calendly_connecting => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_calendly_connecting),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_calendly_connecting),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_calendly_disconnect_button =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_calendly_disconnect_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_calendly_disconnect_button),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_calendly_connected => (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_calendly_connected),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_calendly_connected),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_calendly_event_type_select =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_calendly_event_type_select),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_calendly_event_type_select),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_calendly_event_type_validation =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_calendly_event_type_validation),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_creator_calendly_event_type_validation),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_calendly_event_types_loading =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_calendly_event_types_loading),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_calendly_event_types_loading),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_calendly_event_types_empty =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_creator_calendly_event_types_empty),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_creator_calendly_event_types_empty),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_creator_calendly_must_be_connected_error =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_creator_calendly_must_be_connected_error),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_creator_calendly_must_be_connected_error),
+        ),
+      ) as String);
+
+  @override
+  String get calendly_success_connected => (super.noSuchMethod(
+        Invocation.getter(#calendly_success_connected),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#calendly_success_connected),
+        ),
+      ) as String);
+
+  @override
+  String get calendly_success_disconnected => (super.noSuchMethod(
+        Invocation.getter(#calendly_success_disconnected),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#calendly_success_disconnected),
+        ),
+      ) as String);
+
+  @override
+  String get calendly_error_connection => (super.noSuchMethod(
+        Invocation.getter(#calendly_error_connection),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#calendly_error_connection),
         ),
       ) as String);
 
