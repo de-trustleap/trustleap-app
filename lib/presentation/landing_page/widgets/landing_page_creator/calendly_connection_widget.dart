@@ -166,13 +166,14 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
           });
           widget.onConnectionStatusChanged?.call(false);
         } else if (state is CalendlyConnectionFailureState) {
+          final wasConnecting = isConnectingCalendly;
           setState(() {
             isConnectingCalendly = false;
             if (isCalendlyConnected) {
               isLoadingEventTypes = false;
             }
           });
-          if (!isCalendlyConnected) {
+          if (wasConnecting && !isCalendlyConnected) {
             customSnackbar.showCustomSnackBar(
               localization.calendly_error_connection,
               SnackBarType.failure,

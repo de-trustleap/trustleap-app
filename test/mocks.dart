@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart';
 import 'package:finanzbegleiter/domain/repositories/auth_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/calendly_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
@@ -26,6 +27,7 @@ import 'package:mockito/annotations.dart';
 @GenerateMocks([
   AppLocalizations,
   AuthRepository,
+  CalendlyRepository,
   CompanyRepository,
   ImageRepository,
   LandingPageRepository,
