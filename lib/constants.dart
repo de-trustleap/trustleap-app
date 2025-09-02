@@ -83,6 +83,7 @@ enum PageBuilderWidgetType {
   footer,
   videoPlayer,
   anchorButton,
+  calendly,
   none
 }
 

@@ -2255,6 +2255,12 @@ abstract class AppLocalizations {
   /// **'Anchor Button'**
   String get landingpage_pagebuilder_config_menu_anchor_button_type;
 
+  /// Calendly title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly'**
+  String get landingpage_pagebuilder_config_menu_calendly_type;
+
   /// Unknown title in the pagebuilder config menu
   ///
   /// In en, this message translates to:

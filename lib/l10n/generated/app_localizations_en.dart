@@ -1262,6 +1262,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Anchor Button';
 
   @override
+  String get landingpage_pagebuilder_config_menu_calendly_type => 'Calendly';
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unknown';
 
   @override

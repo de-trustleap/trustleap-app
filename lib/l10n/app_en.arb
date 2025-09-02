@@ -1454,6 +1454,10 @@
     "@landingpage_pagebuilder_config_menu_anchor_button_type": {
         "description": "Anchor button title in the pagebuilder config menu"
     },
+    "landingpage_pagebuilder_config_menu_calendly_type": "Calendly",
+    "@landingpage_pagebuilder_config_menu_calendly_type": {
+        "description": "Calendly title in the pagebuilder config menu"
+    },
     "landingpage_pagebuilder_config_menu_unknown_type": "Unknown",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unknown title in the pagebuilder config menu"
