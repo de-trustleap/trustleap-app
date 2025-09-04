@@ -194,6 +194,9 @@ class LandingPageModel extends Equatable {
   }
 
   LandingPage toDomain() {
+    final convertedBusinessModel = _getBusinessModelFromString(businessModel);
+    final convertedContactOption = _getContactOptionFromString(contactOption);
+    
     return LandingPage(
         id: UniqueID.fromUniqueString(id),
         name: name,
@@ -215,8 +218,8 @@ class LandingPageModel extends Equatable {
         termsAndConditions: termsAndConditions,
         scriptTags: scriptTags,
         contactEmailAddress: contactEmailAddress,
-        businessModel: _getBusinessModelFromString(businessModel),
-        contactOption: _getContactOptionFromString(contactOption),
+        businessModel: convertedBusinessModel,
+        contactOption: convertedContactOption,
         calendlyEventURL: calendlyEventURL,
         companyData: companyData);
   }
@@ -270,7 +273,7 @@ class LandingPageModel extends Equatable {
       case "calendly":
         return ContactOption.calendly;
       case "contactForm":
-        return ContactOption.constactForm;
+        return ContactOption.contactForm;
       case "both":
         return ContactOption.both;
       default:

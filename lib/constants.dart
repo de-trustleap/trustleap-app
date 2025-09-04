@@ -137,4 +137,4 @@ enum FeedbackType {
 
 enum BusinessModel { b2b, b2c }
 
-enum ContactOption { calendly, constactForm, both }
+enum ContactOption { calendly, contactForm, both }

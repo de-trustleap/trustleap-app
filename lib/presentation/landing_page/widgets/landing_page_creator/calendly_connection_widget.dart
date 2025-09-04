@@ -152,7 +152,6 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
             isCalendlyConnected = true;
             isConnectingCalendly = false;
             eventTypes = [];
-            widget.onEventTypeSelected?.call(null);
             isLoadingEventTypes = true;
           });
           widget.onConnectionStatusChanged?.call(true);
