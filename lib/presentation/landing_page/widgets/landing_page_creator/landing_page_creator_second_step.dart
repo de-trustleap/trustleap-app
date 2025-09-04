@@ -67,9 +67,7 @@ class _LandingPageCreatorSecondStepState
   }
 
   String _getSubmitButtonText(AppLocalizations localization) {
-    if (widget.isEditMode) {
-      return localization.landingpage_creation_edit_button_text;
-    } else if (widget.landingPage?.isDefaultPage ?? false) {
+    if (widget.landingPage?.isDefaultPage ?? false) {
       return localization.landingpage_create_buttontitle;
     } else {
       return localization.landingpage_creation_continue;

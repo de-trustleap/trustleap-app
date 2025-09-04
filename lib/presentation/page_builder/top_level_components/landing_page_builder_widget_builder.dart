@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
@@ -16,6 +17,7 @@ import 'package:finanzbegleiter/presentation/page_builder/page_elements/contact_
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/footer_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/icon_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/image_view.dart';
+import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_calendly.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_text.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/video_player_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
@@ -68,6 +70,9 @@ class LandingPageBuilderWidgetBuilder {
             (model.properties as PagebuilderAnchorButtonProperties)
                 .buttonProperties!,
             model);
+      case PageBuilderWidgetType.calendly:
+        return buildCalendlyWidget(
+            model.properties as PagebuilderCalendlyProperties, model);
       default:
         return const SizedBox.shrink();
     }
@@ -196,5 +201,10 @@ class LandingPageBuilderWidgetBuilder {
       model: model,
       child: PageBuilderButtonView(properties: properties, widgetModel: model),
     );
+  }
+
+  Widget buildCalendlyWidget(
+      PagebuilderCalendlyProperties properties, PageBuilderWidget model) {
+    return PagebuilderCalendly(properties: properties, widgetModel: model);
   }
 }

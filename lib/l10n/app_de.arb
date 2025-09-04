@@ -1454,6 +1454,10 @@
     "@landingpage_pagebuilder_config_menu_anchor_button_type": {
         "description": "Anker Button Titel im Pagebuilder Config Menü"
     },
+    "landingpage_pagebuilder_config_menu_calendly_type": "Calendly",
+    "@landingpage_pagebuilder_config_menu_calendly_type": {
+        "description": "Calendly Titel im Pagebuilder Config Menü"
+    },
     "landingpage_pagebuilder_config_menu_unknown_type": "Unbekannt",
     "@landingpage_pagebuilder_config_menu_unknown_type": {
         "description": "Unbekannt Titel im Pagebuilder Config Menü"
@@ -1891,6 +1895,58 @@
     "landingpage_pagebuilder_video_player_config_title": "Video Player Konfiguration",
     "@landingpage_pagebuilder_video_player_config_title": {
         "description": "Titel der ausklappabren View für die Video Player Konfiguration in der Pagebuilder Video Player Konfiguration"
+    },
+    "pagebuilder_calendly_config_title": "Calendly Konfiguration",
+    "@pagebuilder_calendly_config_title": {
+        "description": "Titel für die Calendly Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_calendly_config_width": "Breite",
+    "@pagebuilder_calendly_config_width": {
+        "description": "Menüpunkt für Calendly Breite in der Calendly Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_calendly_config_height": "Höhe",
+    "@pagebuilder_calendly_config_height": {
+        "description": "Menüpunkt für Calendly Höhe in der Calendly Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_calendly_config_border_radius": "Eckenradius",
+    "@pagebuilder_calendly_config_border_radius": {
+        "description": "Menüpunkt für Calendly Eckenradius in der Calendly Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_calendly_content_title": "Calendly Event Auswahl",
+    "@pagebuilder_calendly_content_title": {
+        "description": "Titel für die Calendly Event Auswahl im Pagebuilder Config Menü"
+    },
+    "pagebuilder_calendly_content_loading_event_types": "Event Types werden geladen...",
+    "@pagebuilder_calendly_content_loading_event_types": {
+        "description": "Ladeanzeige beim Laden der Event Types"
+    },
+    "pagebuilder_calendly_content_connecting": "Verbindung wird hergestellt...",
+    "@pagebuilder_calendly_content_connecting": {
+        "description": "Anzeige beim Verbindungsaufbau zu Calendly"
+    },
+    "pagebuilder_calendly_content_error_prefix": "Fehler:",
+    "@pagebuilder_calendly_content_error_prefix": {
+        "description": "Präfix für Fehlermeldungen bei Calendly Verbindung"
+    },
+    "pagebuilder_calendly_content_select_event_type": "Event Type auswählen:",
+    "@pagebuilder_calendly_content_select_event_type": {
+        "description": "Label für Event Type Auswahl Dropdown"
+    },
+    "pagebuilder_calendly_content_choose_event_type": "Event Type wählen...",
+    "@pagebuilder_calendly_content_choose_event_type": {
+        "description": "Placeholder für Event Type Dropdown"
+    },
+    "pagebuilder_calendly_content_connection_required": "Calendly Verbindung erforderlich",
+    "@pagebuilder_calendly_content_connection_required": {
+        "description": "Titel wenn Calendly Verbindung benötigt wird"
+    },
+    "pagebuilder_calendly_content_connection_description": "Um Event Types auszuwählen, müssen Sie sich zuerst mit Calendly verbinden.",
+    "@pagebuilder_calendly_content_connection_description": {
+        "description": "Beschreibung warum Calendly Verbindung benötigt wird"
+    },
+    "pagebuilder_calendly_content_connect_button": "Mit Calendly verbinden",
+    "@pagebuilder_calendly_content_connect_button": {
+        "description": "Button Text zum Verbinden mit Calendly"
     },
     "landingpage_pagebuilder_video_player_config_youtube_link": "Youtube Link",
     "@landingpage_pagebuilder_video_player_config_youtube_link": {

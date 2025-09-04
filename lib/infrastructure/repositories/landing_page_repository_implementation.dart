@@ -190,6 +190,8 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
         "templateID": templateID,
         "contactEmailAddress": landingPageModel.contactEmailAddress,
         "businessModel": landingPageModel.businessModel,
+        "contactOption": landingPageModel.contactOption,
+        "calendlyEventURL": landingPageModel.calendlyEventURL,
         "companyData":
             landingPageModel.companyData != null ? companyData : null,
         "aiGeneration": aiGeneration != null ? aiGenerationMap : null
@@ -219,25 +221,29 @@ class LandingPageRepositoryImplementation implements LandingPageRepository {
   Future<Either<DatabaseFailure, Unit>> editLandingPage(LandingPage landingPage,
       Uint8List? imageData, bool imageHasChanged) async {
     final appCheckToken = await appCheck.getToken();
+    final landingPageModel = LandingPageModel.fromDomain(landingPage);
     HttpsCallable callable = firebaseFunctions.httpsCallable("editLandingPage");
     try {
       await callable.call({
         "appCheckToken": appCheckToken,
-        "id": landingPage.id.value,
-        "title": landingPage.name,
-        "description": landingPage.description,
-        "promotionTemplate": landingPage.promotionTemplate,
-        "impressum": landingPage.impressum,
-        "privacyPolicy": landingPage.privacyPolicy,
-        "initialInformation": landingPage.initialInformation,
-        "termsAndConditions": landingPage.termsAndConditions,
-        "scripts": landingPage.scriptTags,
-        "ownerID": landingPage.ownerID?.value,
+        "id": landingPageModel.id,
+        "title": landingPageModel.name,
+        "description": landingPageModel.description,
+        "promotionTemplate": landingPageModel.promotionTemplate,
+        "impressum": landingPageModel.impressum,
+        "privacyPolicy": landingPageModel.privacyPolicy,
+        "initialInformation": landingPageModel.initialInformation,
+        "termsAndConditions": landingPageModel.termsAndConditions,
+        "scripts": landingPageModel.scriptTags,
+        "ownerID": landingPageModel.ownerID,
         "imageData": imageData != null ? base64Encode(imageData) : null,
         "imageHasChanged": imageHasChanged,
-        "isDefaultPage": landingPage.isDefaultPage,
-        "isActive": landingPage.isActive,
-        "contactEmailAddress": landingPage.contactEmailAddress
+        "isDefaultPage": landingPageModel.isDefaultPage,
+        "isActive": landingPageModel.isActive,
+        "businessModel": landingPageModel.businessModel,
+        "contactEmailAddress": landingPageModel.contactEmailAddress,
+        "contactOption": landingPageModel.contactOption,
+        "calendlyEventURL": landingPageModel.calendlyEventURL,
       });
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
