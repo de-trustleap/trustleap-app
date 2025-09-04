@@ -62,8 +62,9 @@ class _CollapsibleSideMenuState extends State<CollapsibleSideMenu>
             AnimatedBuilder(
               animation: _animationController,
               builder: (context, theWidget) {
-                return SizedBox(
+                return Container(
                   width: _widthAnimation.value,
+                  color: themeData.colorScheme.onPrimaryContainer,
                   child: widget.isAdmin
                       ? AdminSideMenu(
                           collapsed: collapsed,
@@ -75,19 +76,22 @@ class _CollapsibleSideMenuState extends State<CollapsibleSideMenu>
                 );
               },
             ),
-            Row(
-              children: [
-                if (menuIsHovered)
-                  MenuToggleButton(
-                      collapsed: collapsed,
-                      animationController: _animationController,
-                      toggleCollapseButtonOnTap: (isCollapsed) {
-                        BlocProvider.of<MenuCubit>(context)
-                            .collapseMenu(!isCollapsed);
-                      }),
-                Container(
-                    width: 0.5, color: themeData.textTheme.bodyMedium!.color),
-              ],
+            Container(
+              color: themeData.colorScheme.onPrimaryContainer,
+              child: Row(
+                children: [
+                  if (menuIsHovered)
+                    MenuToggleButton(
+                        collapsed: collapsed,
+                        animationController: _animationController,
+                        toggleCollapseButtonOnTap: (isCollapsed) {
+                          BlocProvider.of<MenuCubit>(context)
+                              .collapseMenu(!isCollapsed);
+                        }),
+                  Container(
+                      width: 0.5, color: themeData.textTheme.bodyMedium!.color),
+                ],
+              ),
             )
           ],
         ),

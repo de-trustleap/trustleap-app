@@ -13,10 +13,12 @@ class PagebuilderConfigMenuCalendlyContent extends StatefulWidget {
   const PagebuilderConfigMenuCalendlyContent({super.key, required this.model});
 
   @override
-  State<PagebuilderConfigMenuCalendlyContent> createState() => _PagebuilderConfigMenuCalendlyContentState();
+  State<PagebuilderConfigMenuCalendlyContent> createState() =>
+      _PagebuilderConfigMenuCalendlyContentState();
 }
 
-class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfigMenuCalendlyContent> {
+class _PagebuilderConfigMenuCalendlyContentState
+    extends State<PagebuilderConfigMenuCalendlyContent> {
   late CalendlyCubit calendlyCubit;
 
   @override
@@ -32,8 +34,8 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
     super.dispose();
   }
 
-  void updateCalendlyProperties(
-      PagebuilderCalendlyProperties properties, PagebuilderBloc pagebuilderCubit) {
+  void updateCalendlyProperties(PagebuilderCalendlyProperties properties,
+      PagebuilderBloc pagebuilderCubit) {
     final updatedWidget = widget.model.copyWith(properties: properties);
     pagebuilderCubit.add(UpdateWidgetEvent(updatedWidget));
   }
@@ -52,8 +54,8 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
           builder: (context, calendlyState) {
             if (calendlyState is CalendlyConnectedState) {
               return _buildEventTypeDropdown(
-                calendlyState.eventTypes, 
-                properties, 
+                calendlyState.eventTypes,
+                properties,
                 pagebuilderCubit,
               );
             } else if (calendlyState is CalendlyAuthenticatedState) {
@@ -61,7 +63,8 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
                 children: [
                   const CircularProgressIndicator(),
                   const SizedBox(height: 8),
-                  Text(localization.pagebuilder_calendly_content_loading_event_types),
+                  Text(localization
+                      .pagebuilder_calendly_content_loading_event_types),
                 ],
               );
             } else if (calendlyState is CalendlyNotAuthenticatedState) {
@@ -79,7 +82,8 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
                 children: [
                   const Icon(Icons.error, color: Colors.red),
                   const SizedBox(height: 8),
-                  Text("${localization.pagebuilder_calendly_content_error_prefix} ${calendlyState.failure.toString()}"),
+                  Text(
+                      "${localization.pagebuilder_calendly_content_error_prefix} ${calendlyState.failure.toString()}"),
                   const SizedBox(height: 8),
                   _buildLoginButton(calendlyCubit, localization),
                 ],
@@ -99,14 +103,22 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
     PagebuilderBloc pagebuilderCubit,
   ) {
     final localization = AppLocalizations.of(context);
+
+    final validValue = eventTypes.any((eventType) =>
+            eventType['scheduling_url'] == properties.calendlyEventURL)
+        ? properties.calendlyEventURL
+        : null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(localization.pagebuilder_calendly_content_select_event_type, style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(localization.pagebuilder_calendly_content_select_event_type,
+            style: const TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: properties.calendlyEventUrl,
-          hint: Text(localization.pagebuilder_calendly_content_choose_event_type),
+          initialValue: validValue,
+          hint:
+              Text(localization.pagebuilder_calendly_content_choose_event_type),
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -125,10 +137,10 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
                 (eventType) => eventType['scheduling_url'] == selectedUrl,
               );
               final eventTypeName = selectedEventType['name'] as String? ?? '';
-              
+
               updateCalendlyProperties(
                 properties.copyWith(
-                  calendlyEventUrl: selectedUrl,
+                  calendlyEventURL: selectedUrl,
                   eventTypeName: eventTypeName,
                 ),
                 pagebuilderCubit,
@@ -140,7 +152,8 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
     );
   }
 
-  Widget _buildLoginButton(CalendlyCubit calendlyCubit, AppLocalizations localization) {
+  Widget _buildLoginButton(
+      CalendlyCubit calendlyCubit, AppLocalizations localization) {
     return Column(
       children: [
         const Icon(Icons.calendar_today, size: 48, color: Colors.grey),
