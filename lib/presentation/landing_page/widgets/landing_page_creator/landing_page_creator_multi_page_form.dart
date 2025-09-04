@@ -105,9 +105,16 @@ class _LandingPageCreatorMultiPageFormState
           isLoading: isLoading,
           isEditMode: isEditMode,
           onContinueTapped: (landingPage, image, imageHasChanged, isEditMode) {
-            if (isEditMode) {
+            if (isEditMode && (landingPage.isDefaultPage ?? false)) {
               Modular.get<LandingPageCubit>()
                   .editLandingPage(landingPage, image, imageHasChanged);
+            } else if (isEditMode && !(landingPage.isDefaultPage ?? false)) {
+              setState(() {
+                this.image = image;
+                this.landingPage = landingPage;
+                _currentStep += 1;
+                progress = 3 / _steps.length;
+              });
             } else if ((landingPage.isDefaultPage ?? false) && image != null) {
               Modular.get<LandingPageCubit>()
                   .createLandingPage(landingPage, image, imageHasChanged, "");
@@ -127,13 +134,14 @@ class _LandingPageCreatorMultiPageFormState
               progress = 1 / _steps.length;
             });
           }),
-      if (!widget.createDefaultPage && !isEditMode)
+      if (!widget.createDefaultPage)
         LandingPageCreatorThirdStep(
             landingPage: landingPage,
             image: image,
             imageHasChanged: imageHasChanged,
             buttonsDisabled: lastFormButtonsDisabled,
             isLoading: isLoading,
+            isEditMode: isEditMode,
             onBack: (landingPage) {
               setState(() {
                 this.landingPage = landingPage;
