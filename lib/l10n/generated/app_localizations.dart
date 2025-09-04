@@ -2255,6 +2255,12 @@ abstract class AppLocalizations {
   /// **'Anchor Button'**
   String get landingpage_pagebuilder_config_menu_anchor_button_type;
 
+  /// Calendly title in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly'**
+  String get landingpage_pagebuilder_config_menu_calendly_type;
+
   /// Unknown title in the pagebuilder config menu
   ///
   /// In en, this message translates to:
@@ -2897,6 +2903,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Video Player Configuration'**
   String get landingpage_pagebuilder_video_player_config_title;
+
+  /// Title for the Calendly configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly Configuration'**
+  String get pagebuilder_calendly_config_title;
+
+  /// Menu item for Calendly width in the Calendly configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Width'**
+  String get pagebuilder_calendly_config_width;
+
+  /// Menu item for Calendly height in the Calendly configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get pagebuilder_calendly_config_height;
+
+  /// Menu item for Calendly border radius in the Calendly configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border Radius'**
+  String get pagebuilder_calendly_config_border_radius;
+
+  /// Title for the Calendly event selection in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly Event Selection'**
+  String get pagebuilder_calendly_content_title;
+
+  /// Loading indicator when loading event types
+  ///
+  /// In en, this message translates to:
+  /// **'Loading event types...'**
+  String get pagebuilder_calendly_content_loading_event_types;
+
+  /// Display when connecting to Calendly
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting...'**
+  String get pagebuilder_calendly_content_connecting;
+
+  /// Prefix for error messages with Calendly connection
+  ///
+  /// In en, this message translates to:
+  /// **'Error:'**
+  String get pagebuilder_calendly_content_error_prefix;
+
+  /// Label for event type selection dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Select event type:'**
+  String get pagebuilder_calendly_content_select_event_type;
+
+  /// Placeholder for event type dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Choose event type...'**
+  String get pagebuilder_calendly_content_choose_event_type;
+
+  /// Title when Calendly connection is needed
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly connection required'**
+  String get pagebuilder_calendly_content_connection_required;
+
+  /// Description why Calendly connection is needed
+  ///
+  /// In en, this message translates to:
+  /// **'To select event types, you must first connect to Calendly.'**
+  String get pagebuilder_calendly_content_connection_description;
+
+  /// Button text to connect to Calendly
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to Calendly'**
+  String get pagebuilder_calendly_content_connect_button;
 
   /// Title for the collapsible view for the video player youtube link in the pagebuilder video player configuration.
   ///

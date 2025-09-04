@@ -97,8 +97,10 @@ class _LandingPageCreatorFormState
           initialInformation: widget.landingPage?.initialInformation,
           termsAndConditions: widget.landingPage?.termsAndConditions,
           scriptTags: widget.landingPage?.scriptTags,
-          contactEmailAddress: null,
-          businessModel: null,
+          contactEmailAddress: widget.landingPage?.contactEmailAddress,
+          businessModel: widget.landingPage?.businessModel,
+          contactOption: widget.landingPage?.contactOption,
+          calendlyEventURL: widget.landingPage?.calendlyEventURL,
           ownerID: user!.id,
           companyData: (widget.company != null && widget.createDefaultPage)
               ? CompanyModel.fromDomain(widget.company!).toMap()

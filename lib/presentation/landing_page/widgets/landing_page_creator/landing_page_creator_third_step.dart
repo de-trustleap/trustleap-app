@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -13,6 +14,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/toolti
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/calendly_connection_widget.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_form_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageCreatorThirdStep extends StatefulWidget {
@@ -21,6 +23,7 @@ class LandingPageCreatorThirdStep extends StatefulWidget {
   final bool imageHasChanged;
   final bool buttonsDisabled;
   final bool isLoading;
+  final bool isEditMode;
   final Function(LandingPage) onBack;
   final Function(LandingPage, Uint8List?, bool) onContinue;
 
@@ -31,6 +34,7 @@ class LandingPageCreatorThirdStep extends StatefulWidget {
     required this.imageHasChanged,
     required this.buttonsDisabled,
     required this.isLoading,
+    required this.isEditMode,
     required this.onBack,
     required this.onContinue,
   });
@@ -97,14 +101,19 @@ class _LandingPageCreatorThirdStepState
         calendlyEventURL: selectedEventTypeUrl,
       );
       if (updatedLandingPage != null) {
-        widget.onContinue(
-            updatedLandingPage, widget.image, widget.imageHasChanged);
+        if (widget.isEditMode) {
+          Modular.get<LandingPageCubit>()
+              .editLandingPage(updatedLandingPage, widget.image, widget.imageHasChanged);
+        } else {
+          widget.onContinue(
+              updatedLandingPage, widget.image, widget.imageHasChanged);
+        }
       }
     }
   }
 
   bool _needsContactEmail() {
-    return selectedContactOption == ContactOption.constactForm ||
+    return selectedContactOption == ContactOption.contactForm ||
         selectedContactOption == ContactOption.both;
   }
 
@@ -204,7 +213,7 @@ class _LandingPageCreatorThirdStepState
                         RadioListTile<ContactOption>(
                           title: Text(localization
                               .landingpage_creator_contact_option_form),
-                          value: ContactOption.constactForm,
+                          value: ContactOption.contactForm,
                         ),
                         RadioListTile<ContactOption>(
                           title: Text(localization
@@ -282,7 +291,9 @@ class _LandingPageCreatorThirdStepState
                           child: SizedBox(width: 20, height: 20)),
                       ResponsiveRowColumnItem(
                         child: PrimaryButton(
-                          title: localization.landingpage_creation_continue,
+                          title: widget.isEditMode 
+                              ? localization.landingpage_creation_edit_button_text
+                              : localization.landingpage_creation_continue,
                           disabled: widget.buttonsDisabled ||
                               selectedBusinessModel == null ||
                               selectedContactOption == null,
