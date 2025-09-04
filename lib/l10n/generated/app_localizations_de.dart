@@ -1286,6 +1286,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Anker Button';
 
   @override
+  String get landingpage_pagebuilder_config_menu_calendly_type => 'Calendly';
+
+  @override
   String get landingpage_pagebuilder_config_menu_unknown_type => 'Unbekannt';
 
   @override
@@ -1667,6 +1670,52 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get landingpage_pagebuilder_video_player_config_title =>
       'Video Player Konfiguration';
+
+  @override
+  String get pagebuilder_calendly_config_title => 'Calendly Konfiguration';
+
+  @override
+  String get pagebuilder_calendly_config_width => 'Breite';
+
+  @override
+  String get pagebuilder_calendly_config_height => 'Höhe';
+
+  @override
+  String get pagebuilder_calendly_config_border_radius => 'Eckenradius';
+
+  @override
+  String get pagebuilder_calendly_content_title => 'Calendly Event Auswahl';
+
+  @override
+  String get pagebuilder_calendly_content_loading_event_types =>
+      'Event Types werden geladen...';
+
+  @override
+  String get pagebuilder_calendly_content_connecting =>
+      'Verbindung wird hergestellt...';
+
+  @override
+  String get pagebuilder_calendly_content_error_prefix => 'Fehler:';
+
+  @override
+  String get pagebuilder_calendly_content_select_event_type =>
+      'Event Type auswählen:';
+
+  @override
+  String get pagebuilder_calendly_content_choose_event_type =>
+      'Event Type wählen...';
+
+  @override
+  String get pagebuilder_calendly_content_connection_required =>
+      'Calendly Verbindung erforderlich';
+
+  @override
+  String get pagebuilder_calendly_content_connection_description =>
+      'Um Event Types auszuwählen, müssen Sie sich zuerst mit Calendly verbinden.';
+
+  @override
+  String get pagebuilder_calendly_content_connect_button =>
+      'Mit Calendly verbinden';
 
   @override
   String get landingpage_pagebuilder_video_player_config_youtube_link =>

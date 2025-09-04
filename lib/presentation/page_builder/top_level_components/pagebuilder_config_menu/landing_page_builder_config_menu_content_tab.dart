@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_anchor_button_content.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_calendly_content.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_contactform_content.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_icon_content.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_image_content.dart';
@@ -30,6 +31,8 @@ class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
           PagebuilderConfigMenuVideoPlayerContent(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.anchorButton) ...[
           PagebuilderConfigMenuAnchorButtonContent(model: model)
+        ] else if (model.elementType == PageBuilderWidgetType.calendly) ...[
+          PagebuilderConfigMenuCalendlyContent(model: model)
         ],
         const SizedBox(height: 40)
       ],
