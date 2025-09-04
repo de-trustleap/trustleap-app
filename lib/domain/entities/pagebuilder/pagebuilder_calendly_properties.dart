@@ -37,5 +37,3 @@ class PagebuilderCalendlyProperties extends Equatable
   List<Object?> get props =>
       [width, height, borderRadius, calendlyEventUrl, eventTypeName];
 }
-
-// TODO: LOCALIZATION

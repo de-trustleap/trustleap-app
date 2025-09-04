@@ -1644,6 +1644,51 @@ class AppLocalizationsEn extends AppLocalizations {
       'Video Player Configuration';
 
   @override
+  String get pagebuilder_calendly_config_title => 'Calendly Configuration';
+
+  @override
+  String get pagebuilder_calendly_config_width => 'Width';
+
+  @override
+  String get pagebuilder_calendly_config_height => 'Height';
+
+  @override
+  String get pagebuilder_calendly_config_border_radius => 'Border Radius';
+
+  @override
+  String get pagebuilder_calendly_content_title => 'Calendly Event Selection';
+
+  @override
+  String get pagebuilder_calendly_content_loading_event_types =>
+      'Loading event types...';
+
+  @override
+  String get pagebuilder_calendly_content_connecting => 'Connecting...';
+
+  @override
+  String get pagebuilder_calendly_content_error_prefix => 'Error:';
+
+  @override
+  String get pagebuilder_calendly_content_select_event_type =>
+      'Select event type:';
+
+  @override
+  String get pagebuilder_calendly_content_choose_event_type =>
+      'Choose event type...';
+
+  @override
+  String get pagebuilder_calendly_content_connection_required =>
+      'Calendly connection required';
+
+  @override
+  String get pagebuilder_calendly_content_connection_description =>
+      'To select event types, you must first connect to Calendly.';
+
+  @override
+  String get pagebuilder_calendly_content_connect_button =>
+      'Connect to Calendly';
+
+  @override
   String get landingpage_pagebuilder_video_player_config_youtube_link =>
       'Youtube link';
 

@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/calendly/calendly_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,9 +42,10 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
   Widget build(BuildContext context) {
     final pagebuilderCubit = Modular.get<PagebuilderBloc>();
     final properties = widget.model.properties as PagebuilderCalendlyProperties;
+    final localization = AppLocalizations.of(context);
 
     return CollapsibleTile(
-      title: "Calendly Event Auswahl",
+      title: localization.pagebuilder_calendly_content_title,
       children: [
         BlocBuilder<CalendlyCubit, CalendlyState>(
           bloc: calendlyCubit,
@@ -59,17 +61,17 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
                 children: [
                   const CircularProgressIndicator(),
                   const SizedBox(height: 8),
-                  const Text("Event Types werden geladen..."),
+                  Text(localization.pagebuilder_calendly_content_loading_event_types),
                 ],
               );
             } else if (calendlyState is CalendlyNotAuthenticatedState) {
-              return _buildLoginButton(calendlyCubit);
+              return _buildLoginButton(calendlyCubit, localization);
             } else if (calendlyState is CalendlyConnectingState) {
               return Column(
                 children: [
                   const CircularProgressIndicator(),
                   const SizedBox(height: 8),
-                  const Text("Verbindung wird hergestellt..."),
+                  Text(localization.pagebuilder_calendly_content_connecting),
                 ],
               );
             } else if (calendlyState is CalendlyConnectionFailureState) {
@@ -77,13 +79,13 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
                 children: [
                   const Icon(Icons.error, color: Colors.red),
                   const SizedBox(height: 8),
-                  Text("Fehler: ${calendlyState.failure.toString()}"),
+                  Text("${localization.pagebuilder_calendly_content_error_prefix} ${calendlyState.failure.toString()}"),
                   const SizedBox(height: 8),
-                  _buildLoginButton(calendlyCubit),
+                  _buildLoginButton(calendlyCubit, localization),
                 ],
               );
             } else {
-              return _buildLoginButton(calendlyCubit);
+              return _buildLoginButton(calendlyCubit, localization);
             }
           },
         ),
@@ -96,14 +98,15 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
     PagebuilderCalendlyProperties properties,
     PagebuilderBloc pagebuilderCubit,
   ) {
+    final localization = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Event Type auswählen:", style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(localization.pagebuilder_calendly_content_select_event_type, style: const TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
           value: properties.calendlyEventUrl,
-          hint: const Text("Event Type wählen..."),
+          hint: Text(localization.pagebuilder_calendly_content_choose_event_type),
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -137,26 +140,26 @@ class _PagebuilderConfigMenuCalendlyContentState extends State<PagebuilderConfig
     );
   }
 
-  Widget _buildLoginButton(CalendlyCubit calendlyCubit) {
+  Widget _buildLoginButton(CalendlyCubit calendlyCubit, AppLocalizations localization) {
     return Column(
       children: [
         const Icon(Icons.calendar_today, size: 48, color: Colors.grey),
         const SizedBox(height: 16),
-        const Text(
-          "Calendly Verbindung erforderlich",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        Text(
+          localization.pagebuilder_calendly_content_connection_required,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
-        const Text(
-          "Um Event Types auszuwählen, müssen Sie sich zuerst mit Calendly verbinden.",
+        Text(
+          localization.pagebuilder_calendly_content_connection_description,
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.grey),
+          style: const TextStyle(color: Colors.grey),
         ),
         const SizedBox(height: 16),
         ElevatedButton.icon(
           onPressed: () => calendlyCubit.connectToCalendly(),
           icon: const Icon(Icons.link),
-          label: const Text("Mit Calendly verbinden"),
+          label: Text(localization.pagebuilder_calendly_content_connect_button),
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           ),
