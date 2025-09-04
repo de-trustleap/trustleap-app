@@ -34,6 +34,7 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
   bool isCalendlyConnected = false;
   bool isConnectingCalendly = false;
   bool isLoadingEventTypes = false;
+  bool hasAttemptedConnection = false;
   List<Map<String, dynamic>> eventTypes = [];
 
   @override
@@ -81,13 +82,10 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
 
     setState(() {
       isConnectingCalendly = true;
+      hasAttemptedConnection = true;
     });
 
     await calendlyCubit.connectToCalendly();
-
-    setState(() {
-      isConnectingCalendly = false;
-    });
   }
 
   void _disconnectCalendly() async {
@@ -172,7 +170,7 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
               isLoadingEventTypes = false;
             }
           });
-          if (wasConnecting && !isCalendlyConnected) {
+          if (hasAttemptedConnection && !isCalendlyConnected) {
             customSnackbar.showCustomSnackBar(
               localization.calendly_error_connection,
               SnackBarType.failure,
