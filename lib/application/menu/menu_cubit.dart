@@ -6,6 +6,7 @@ part 'menu_state.dart';
 
 class MenuCubit extends Cubit<MenuState> {
   MenuItems? selectedItem;
+  bool isCollapsed = false;
 
   MenuCubit() : super(MenuInitial());
 
@@ -17,6 +18,10 @@ class MenuCubit extends Cubit<MenuState> {
   }
 
   void collapseMenu(bool collapsed) {
+    isCollapsed = collapsed;
     emit(MenuIsCollapsedState(collapsed: collapsed));
+    if (selectedItem != null) {
+      emit(MenuItemSelectedState(selectedMenuItem: selectedItem!));
+    }
   }
 }
