@@ -28,7 +28,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
 
   final maxLandingPageCount = 11;
   final double tileWidth = 200;
-  final double aspectRatio = 7;
+  final double aspectRatio = 0.7;
 
   @override
   Widget build(BuildContext context) {
@@ -124,3 +124,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
     );
   }
 }
+
+// TODO: Empfehlungen fehlt SizedBox nach unten
+// TODO: Bei Tabbar schauen ob sie scrollbar sein muss
+// TODO: Side Menu soll sich schließen wenn man einen Menüpunkt gewählt hat
