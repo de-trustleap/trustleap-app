@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+
 import 'custom_tab.dart';
 
 class CustomTabItem {
@@ -97,46 +98,53 @@ class _CustomTabBarState extends State<CustomTabBar>
   @override
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
+    final themeData = Theme.of(context);
 
-    return Column(
-      children: [
-        SizedBox(
-          width: responsiveValue.screenWidth * 0.9,
-          child: TabBar(
-            controller: _tabController,
-            tabs: widget.tabs
-                .map((tab) => _buildTab(tab, context, responsiveValue))
-                .toList(),
-            onTap: _onTabTap,
-            tabAlignment: responsiveValue.isMobile
-                ? TabAlignment.start
-                : TabAlignment.fill,
-            isScrollable: responsiveValue.isMobile,
-            indicatorPadding: const EdgeInsets.only(bottom: 4),
-          ),
-        ),
-        Expanded(
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 250),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return FadeTransition(
-                opacity: Tween<double>(
-                  begin: 0.0,
-                  end: 1.0,
-                ).animate(CurvedAnimation(
-                  parent: animation,
-                  curve: const Interval(0.3, 1.0, curve: Curves.easeOut),
-                )),
-                child: child,
-              );
-            },
-            child: Container(
-              key: ValueKey(_currentRoute),
-              child: currentContent,
+    return Container(
+      color: themeData.colorScheme.onPrimaryContainer,
+      child: Column(
+        children: [
+          SizedBox(height: responsiveValue.screenHeight * 0.02),
+          SizedBox(
+            width: responsiveValue.screenWidth * 0.9,
+            child: TabBar(
+              controller: _tabController,
+              tabs: widget.tabs
+                  .map((tab) => _buildTab(tab, context, responsiveValue))
+                  .toList(),
+              onTap: _onTabTap,
+              tabAlignment: responsiveValue.isMobile
+                  ? TabAlignment.start
+                  : TabAlignment.fill,
+              isScrollable: responsiveValue.isMobile,
+              indicatorPadding: const EdgeInsets.only(bottom: 4),
+              dividerColor: themeData.textTheme.bodyMedium!.color,
+              dividerHeight: 0.5,
             ),
           ),
-        ),
-      ],
+          Expanded(
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(
+                  opacity: Tween<double>(
+                    begin: 0.0,
+                    end: 1.0,
+                  ).animate(CurvedAnimation(
+                    parent: animation,
+                    curve: const Interval(0.3, 1.0, curve: Curves.easeOut),
+                  )),
+                  child: child,
+                );
+              },
+              child: Container(
+                key: ValueKey(_currentRoute),
+                child: currentContent,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

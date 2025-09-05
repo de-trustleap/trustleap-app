@@ -7,14 +7,14 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
   final double? width;
   final double? height;
   final double? borderRadius;
-  final String? calendlyEventUrl;
+  final String? calendlyEventURL;
   final String? eventTypeName;
 
   const PagebuilderCalendlyPropertiesModel({
     required this.width,
     required this.height,
     required this.borderRadius,
-    required this.calendlyEventUrl,
+    required this.calendlyEventURL,
     required this.eventTypeName,
   });
 
@@ -23,7 +23,7 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
     if (width != null) map['width'] = width;
     if (height != null) map['height'] = height;
     if (borderRadius != null) map['borderRadius'] = borderRadius;
-    if (calendlyEventUrl != null) map['calendlyEventUrl'] = calendlyEventUrl;
+    if (calendlyEventURL != null) map['calendlyEventURL'] = calendlyEventURL;
     if (eventTypeName != null) map['eventTypeName'] = eventTypeName;
     return map;
   }
@@ -33,7 +33,7 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
       width: map['width'] != null ? map['width'] as double : null,
       height: map['height'] != null ? map['height'] as double : null,
       borderRadius: map['borderRadius'] != null ? map['borderRadius'] as double : null,
-      calendlyEventUrl: map['calendlyEventUrl'] != null ? map['calendlyEventUrl'] as String : null,
+      calendlyEventURL: map['calendlyEventURL'] != null ? map['calendlyEventURL'] as String : null,
       eventTypeName: map['eventTypeName'] != null ? map['eventTypeName'] as String : null,
     );
   }
@@ -42,14 +42,14 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
     double? width,
     double? height,
     double? borderRadius,
-    String? calendlyEventUrl,
+    String? calendlyEventURL,
     String? eventTypeName,
   }) {
     return PagebuilderCalendlyPropertiesModel(
       width: width ?? this.width,
       height: height ?? this.height,
       borderRadius: borderRadius ?? this.borderRadius,
-      calendlyEventUrl: calendlyEventUrl ?? this.calendlyEventUrl,
+      calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
       eventTypeName: eventTypeName ?? this.eventTypeName,
     );
   }
@@ -59,7 +59,7 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
       width: width,
       height: height,
       borderRadius: borderRadius,
-      calendlyEventUrl: calendlyEventUrl,
+      calendlyEventURL: calendlyEventURL,
       eventTypeName: eventTypeName,
     );
   }
@@ -70,11 +70,11 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
       width: properties.width,
       height: properties.height,
       borderRadius: properties.borderRadius,
-      calendlyEventUrl: properties.calendlyEventUrl,
+      calendlyEventURL: properties.calendlyEventURL,
       eventTypeName: properties.eventTypeName,
     );
   }
 
   @override
-  List<Object?> get props => [width, height, borderRadius, calendlyEventUrl, eventTypeName];
+  List<Object?> get props => [width, height, borderRadius, calendlyEventURL, eventTypeName];
 }

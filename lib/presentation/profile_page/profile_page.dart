@@ -18,7 +18,6 @@ import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfilePage extends StatefulWidget {
   final String? registeredCompany;
@@ -31,8 +30,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage>
     with TickerProviderStateMixin {
-  late double screenHeight;
-  late double topPadding;
   late TabController tabController;
 
   @override
@@ -64,13 +61,10 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    final responsiveValue = ResponsiveBreakpoints.of(context);
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
     final localization = AppLocalizations.of(context);
-    screenHeight = responsiveValue.screenHeight;
-    topPadding = responsiveValue.screenHeight * 0.02;
     return MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -82,11 +76,8 @@ class _ProfilePageState extends State<ProfilePage>
         ],
         child: BlocBuilder<UserObserverCubit, UserObserverState>(
           builder: (context, state) {
-            return Padding(
-              padding: EdgeInsets.only(top: topPadding),
-              child: CustomTabBar(
-                tabs: getCustomTabItems(state, permissions, localization),
-              ),
+            return CustomTabBar(
+              tabs: getCustomTabItems(state, permissions, localization),
             );
           },
         ));
