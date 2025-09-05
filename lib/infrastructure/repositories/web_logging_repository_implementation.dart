@@ -34,4 +34,3 @@ class WebLoggingRepositoryImplementation implements WebLoggingRepository {
     }
   }
 }
-// TODO: MENÜ SELEKTION GEHT BEI EINKLAPPEN UND AUSKLAPPEN VERLOREN
