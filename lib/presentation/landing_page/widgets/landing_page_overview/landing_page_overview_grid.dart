@@ -27,6 +27,8 @@ class LandingPageOverviewGrid extends StatelessWidget {
       required this.isActivePressed});
 
   final maxLandingPageCount = 11;
+  final double tileWidth = 200;
+  final double aspectRatio = 7;
 
   @override
   Widget build(BuildContext context) {
@@ -41,94 +43,84 @@ class LandingPageOverviewGrid extends StatelessWidget {
     return Container(
       constraints: const BoxConstraints(maxHeight: 1000),
       child: LayoutBuilder(builder: (context, constraints) {
-        int crossAxisCount = (constraints.maxWidth / 250).floor().clamp(2, 4);
+        final double horizontalSpacing =
+            responsiveValue.largerThan(MOBILE) ? 24 : 12;
+        final double verticalSpacing =
+            responsiveValue.largerThan(MOBILE) ? 24 : 12;
 
         return AnimationLimiter(
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: constraints.maxWidth / crossAxisCount,
-              crossAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
-              mainAxisSpacing: responsiveValue.largerThan(MOBILE) ? 24 : 12,
-              childAspectRatio: calculateChildAspectRatio(responsiveValue),
-            ),
-            itemCount: landingpages.length +
-                (permissions.hasCreateLandingPagePermission() ? 1 : 0),
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            physics: const ScrollPhysics(),
-            itemBuilder: (context, index) {
-              if (permissions.hasCreateLandingPagePermission() && index == 0) {
-                return AnimationConfiguration.staggeredGrid(
-                  position: index,
-                  duration: const Duration(milliseconds: 150),
-                  columnCount: responsiveValue.largerThan(MOBILE) ? 4 : 2,
-                  child: ScaleAnimation(
-                    child: Center(
-                      child: GridTile(
-                        child: landingpages.length >= maxLandingPageCount
-                            ? Center(
-                                child: SelectableText(
-                                  localization
-                                      .landingpage_overview_max_count_msg,
-                                  style:
-                                      themeData.textTheme.labelSmall!.copyWith(
-                                    fontSize:
-                                        responsiveValue.isMobile ? 10 : 20,
-                                    fontWeight: FontWeight.bold,
+          child: SingleChildScrollView(
+            child: Wrap(
+              spacing: horizontalSpacing,
+              runSpacing: verticalSpacing,
+              children: List.generate(
+                landingpages.length +
+                    (permissions.hasCreateLandingPagePermission() ? 1 : 0),
+                (index) {
+                  if (permissions.hasCreateLandingPagePermission() &&
+                      index == 0) {
+                    return AnimationConfiguration.staggeredGrid(
+                      position: index,
+                      duration: const Duration(milliseconds: 150),
+                      columnCount: responsiveValue.largerThan(MOBILE) ? 4 : 2,
+                      child: ScaleAnimation(
+                        child: SizedBox(
+                          width: tileWidth,
+                          height: tileWidth / aspectRatio,
+                          child: landingpages.length >= maxLandingPageCount
+                              ? Center(
+                                  child: SelectableText(
+                                    localization
+                                        .landingpage_overview_max_count_msg,
+                                    style: themeData.textTheme.labelSmall!
+                                        .copyWith(
+                                      fontSize:
+                                          responsiveValue.isMobile ? 10 : 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
+                                )
+                              : AddNewLandingPageGridTile(
+                                  onPressed: () => navigator.navigate(
+                                    RoutePaths.homePath +
+                                        RoutePaths.landingPageCreatorPath,
+                                  ),
                                 ),
-                              )
-                            : AddNewLandingPageGridTile(
-                                onPressed: () => navigator.navigate(
-                                  RoutePaths.homePath +
-                                      RoutePaths.landingPageCreatorPath,
-                                ),
-                              ),
+                        ),
+                      ),
+                    );
+                  }
+
+                  int landingPageIndex = index -
+                      (permissions.hasCreateLandingPagePermission() ? 1 : 0);
+
+                  return AnimationConfiguration.staggeredGrid(
+                    position: index,
+                    duration: const Duration(milliseconds: 150),
+                    columnCount: responsiveValue.largerThan(MOBILE) ? 4 : 2,
+                    child: ScaleAnimation(
+                      child: SizedBox(
+                        width: tileWidth,
+                        height: tileWidth / aspectRatio,
+                        child: LandingPageOverviewGridTile(
+                          landingPage: landingpages[landingPageIndex],
+                          user: user,
+                          isDuplicationAllowed:
+                              landingpages.length < maxLandingPageCount,
+                          deletePressed: deletePressed,
+                          duplicatePressed: duplicatePressed,
+                          isActivePressed: isActivePressed,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              }
-
-              // Wenn der Index größer als 0 ist, zeigen wir eine Landing Page an und verschieben den Index um 1
-              int landingPageIndex = index -
-                  (permissions.hasCreateLandingPagePermission() ? 1 : 0);
-
-              return AnimationConfiguration.staggeredGrid(
-                position: index,
-                duration: const Duration(milliseconds: 150),
-                columnCount: responsiveValue.largerThan(MOBILE) ? 4 : 2,
-                child: ScaleAnimation(
-                  child: Center(
-                    child: GridTile(
-                      child: LandingPageOverviewGridTile(
-                        landingPage: landingpages[landingPageIndex],
-                        user: user,
-                        isDuplicationAllowed:
-                            landingpages.length < maxLandingPageCount,
-                        deletePressed: deletePressed,
-                        duplicatePressed: duplicatePressed,
-                        isActivePressed: isActivePressed,
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
+                  );
+                },
+              ).toList(),
+            ),
           ),
         );
       }),
     );
-  }
-}
-
-double calculateChildAspectRatio(ResponsiveBreakpointsData responsiveValue) {
-  if (responsiveValue.isDesktop) {
-    return 0.85;
-  } else if (responsiveValue.isTablet) {
-    return 0.68;
-  } else {
-    return 0.6;
   }
 }

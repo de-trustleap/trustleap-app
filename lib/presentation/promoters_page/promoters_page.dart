@@ -9,7 +9,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_wrapper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoters_view.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class PromotersPage extends StatefulWidget {
   final String? editedPromoter;
@@ -59,17 +58,13 @@ class _PromotersPageState extends State<PromotersPage> {
 
   @override
   Widget build(BuildContext context) {
-    final responsiveValue = ResponsiveBreakpoints.of(context);
     final localization = AppLocalizations.of(context);
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
 
-    return Padding(
-      padding: EdgeInsets.only(top: responsiveValue.screenHeight * 0.02),
-      child: CustomTabBar(
-        tabs: getCustomTabItems(permissions, localization),
-      ),
+    return CustomTabBar(
+      tabs: getCustomTabItems(permissions, localization),
     );
   }
 

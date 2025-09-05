@@ -163,7 +163,6 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
           });
           widget.onConnectionStatusChanged?.call(false);
         } else if (state is CalendlyConnectionFailureState) {
-          final wasConnecting = isConnectingCalendly;
           setState(() {
             isConnectingCalendly = false;
             if (isCalendlyConnected) {

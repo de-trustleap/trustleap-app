@@ -6,14 +6,14 @@ class PagebuilderCalendlyProperties extends Equatable
   final double? width;
   final double? height;
   final double? borderRadius;
-  final String? calendlyEventUrl;
+  final String? calendlyEventURL;
   final String? eventTypeName;
 
   const PagebuilderCalendlyProperties({
     required this.width,
     required this.height,
     required this.borderRadius,
-    required this.calendlyEventUrl,
+    required this.calendlyEventURL,
     required this.eventTypeName,
   });
 
@@ -21,19 +21,19 @@ class PagebuilderCalendlyProperties extends Equatable
     double? width,
     double? height,
     double? borderRadius,
-    String? calendlyEventUrl,
+    String? calendlyEventURL,
     String? eventTypeName,
   }) {
     return PagebuilderCalendlyProperties(
       width: width ?? this.width,
       height: height ?? this.height,
       borderRadius: borderRadius ?? this.borderRadius,
-      calendlyEventUrl: calendlyEventUrl ?? this.calendlyEventUrl,
+      calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
       eventTypeName: eventTypeName ?? this.eventTypeName,
     );
   }
 
   @override
   List<Object?> get props =>
-      [width, height, borderRadius, calendlyEventUrl, eventTypeName];
+      [width, height, borderRadius, calendlyEventURL, eventTypeName];
 }
