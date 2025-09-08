@@ -16,7 +16,8 @@ class RecommendationsPage extends StatelessWidget {
         decoration: BoxDecoration(color: themeData.colorScheme.surface),
         child: ListView(children: [
           SizedBox(height: responsiveValue.isMobile ? 40 : 80),
-          const CenteredConstrainedWrapper(child: RecommendationsForm())
+          const CenteredConstrainedWrapper(child: RecommendationsForm()),
+          SizedBox(height: responsiveValue.isMobile ? 40 : 80)
         ]));
   }
 }

@@ -41,7 +41,7 @@ class AdminFeedbackListTile extends StatelessWidget {
               top: 40,
               right: 20,
               child: IconButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => CustomNavigator.of(context).pop(),
                 icon: const Icon(
                   Icons.close,
                   color: Colors.white,

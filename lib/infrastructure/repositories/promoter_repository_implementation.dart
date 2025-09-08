@@ -132,8 +132,16 @@ class PromoterRepositoryImplementation implements PromoterRepository {
           .snapshots()
           .map((snapshot) {
         return snapshot.docs
-            .map(
-                (doc) => UserModel.fromFirestore(doc.data(), doc.id).toDomain())
+            .map((doc) {
+              try {
+                return UserModel.fromFirestore(doc.data(), doc.id).toDomain();
+              } catch (e) {
+                // TODO: Logging implementieren welches kaputte User loggt.
+                return null;
+              }
+            })
+            .whereType<
+                CustomUser>() // Filter out null values from failed parsing
             .where((user) =>
                 user.deletesAt == null) // Filter out deactivated users
             .map((user) => Promoter.fromUser(user))
@@ -174,9 +182,18 @@ class PromoterRepositoryImplementation implements PromoterRepository {
           .snapshots()
           .map((snapshot) {
         return snapshot.docs
-            .map((doc) =>
-                UnregisteredPromoterModel.fromFirestore(doc.data(), doc.id)
-                    .toDomain())
+            .map((doc) {
+              try {
+                return UnregisteredPromoterModel.fromFirestore(
+                        doc.data(), doc.id)
+                    .toDomain();
+              } catch (e) {
+                // TODO: Logging implementieren welches kaputte unregistrierte Promoter loggt.
+                return null;
+              }
+            })
+            .whereType<
+                UnregisteredPromoter>() // Filter out null values from failed parsing
             .map((unregisteredPromoter) =>
                 Promoter.fromUnregisteredPromoter(unregisteredPromoter))
             .toList();
@@ -394,10 +411,15 @@ class PromoterRepositoryImplementation implements PromoterRepository {
       });
       for (var document in querySnapshots) {
         for (var snapshot in document.docs) {
-          var doc = snapshot.data();
-          var model =
-              LandingPageModel.fromFirestore(doc, snapshot.id).toDomain();
-          landingPages.add(model);
+          try {
+            var doc = snapshot.data();
+            var model =
+                LandingPageModel.fromFirestore(doc, snapshot.id).toDomain();
+            landingPages.add(model);
+          } catch (e) {
+            // TODO: Logging implementieren welches kaputte Landingpages loggt.
+            continue;
+          }
         }
       }
       return right(landingPages);

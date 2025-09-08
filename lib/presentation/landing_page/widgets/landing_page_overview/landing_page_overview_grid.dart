@@ -28,7 +28,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
 
   final maxLandingPageCount = 11;
   final double tileWidth = 200;
-  final double aspectRatio = 7;
+  final double aspectRatio = 0.7;
 
   @override
   Widget build(BuildContext context) {

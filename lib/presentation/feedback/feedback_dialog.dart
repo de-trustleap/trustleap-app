@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:finanzbegleiter/application/feedback/feedback_cubit.dart';
 import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/feedback_item.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
@@ -61,7 +62,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
   }
 
   void onCancel() {
-    Navigator.of(context).pop();
+    CustomNavigator.of(context).pop();
   }
 
   void onSubmit() {
@@ -91,7 +92,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
       bloc: cubit,
       listener: (context, state) {
         if (state is SentFeedbackSuccessState) {
-          Navigator.of(context).pop();
+          CustomNavigator.of(context).pop();
           CustomSnackBar.of(context).showCustomSnackBar(
             localization.feedback_success_message,
             SnackBarType.success,
@@ -148,7 +149,8 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                           RadioGroup<FeedbackType>(
                             groupValue: selectedType,
                             onChanged: (FeedbackType? value) {
-                              if (state is! SentFeedbackLoadingState && value != null) {
+                              if (state is! SentFeedbackLoadingState &&
+                                  value != null) {
                                 setState(() {
                                   selectedType = value;
                                 });
@@ -173,7 +175,8 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                                   maxWidth: double.infinity,
                                   controller: emailController,
                                   disabled: state is SentFeedbackLoadingState,
-                                  placeholder: localization.feedback_email_placeholder,
+                                  placeholder:
+                                      localization.feedback_email_placeholder,
                                   validator: validator.validateEmail,
                                   keyboardType: TextInputType.emailAddress,
                                 ),

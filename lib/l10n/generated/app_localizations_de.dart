@@ -2688,7 +2688,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profile_general_tab => 'Persönliche Daten';
 
   @override
-  String get profile_company_tab => 'Unternehmen';
+  String get profile_company_tab => 'Unter­nehmen';
 
   @override
   String get profile_password_tab => 'Passwort ändern';
