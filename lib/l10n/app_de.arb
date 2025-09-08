@@ -3045,7 +3045,7 @@
     "@profile_general_tab": {
         "description": "Tab-Titel für persönliche Daten im Profil"
     },
-    "profile_company_tab": "Unternehmen",
+    "profile_company_tab": "Unter\u00ADnehmen",
     "@profile_company_tab": {
         "description": "Tab-Titel für Unternehmen im Profil"
     },

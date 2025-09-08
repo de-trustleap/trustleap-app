@@ -107,6 +107,9 @@ class _MenuItemState extends State<MenuItem> {
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
+                  if (Scaffold.of(context).isEndDrawerOpen) {
+                    navigator.pop();
+                  }
                   if (widget.isAdmin) {
                     navigator.navigate(RoutePaths.adminPath + widget.path);
                   } else {
