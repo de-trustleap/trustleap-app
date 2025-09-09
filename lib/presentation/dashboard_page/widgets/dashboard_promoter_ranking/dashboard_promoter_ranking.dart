@@ -11,6 +11,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underl
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class DashboardPromoterRanking extends StatefulWidget {
   final CustomUser user;
@@ -46,55 +47,7 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    localizations.dashboard_promoter_ranking_title,
-                    style: themeData.textTheme.bodyLarge!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(width: 8),
-                  InfoButton(
-                      text: localizations
-                          .dashboard_promoter_ranking_info_tooltip),
-                  const Spacer(),
-                  Row(
-                    children: [
-                      Text(
-                        localizations.dashboard_promoter_ranking_period,
-                        style: themeData.textTheme.bodySmall!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(width: 8),
-                      UnderlinedDropdown<TimePeriod>(
-                        value: _selectedTimePeriod,
-                        items: [
-                          TimePeriod.month,
-                          TimePeriod.quarter,
-                          TimePeriod.year
-                        ].map((period) {
-                          return DropdownMenuItem<TimePeriod>(
-                            value: period,
-                            child: Text(period.value),
-                          );
-                        }).toList(),
-                        onChanged: (TimePeriod? newPeriod) {
-                          if (newPeriod != null) {
-                            setState(() {
-                              _selectedTimePeriod = newPeriod;
-                            });
-                            Modular.get<DashboardPromoterRankingCubit>()
-                                .getTop3Promoters(
-                                    widget.user.registeredPromoterIDs ?? [],
-                                    _selectedTimePeriod);
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              _buildHeader(themeData, localizations),
               const SizedBox(height: 16),
               if (state is PromoterRankingGetTop3FailureState) ...[
                 ErrorView(
@@ -126,6 +79,108 @@ class _DashboardPromoterRankingState extends State<DashboardPromoterRanking> {
         );
       },
     );
+  }
+
+  Widget _buildHeader(ThemeData themeData, AppLocalizations localizations) {
+    final responsiveValue = ResponsiveBreakpoints.of(context);
+
+    if (responsiveValue.isMobile) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                localizations.dashboard_promoter_ranking_title,
+                style: themeData.textTheme.bodyLarge!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(width: 8),
+              InfoButton(
+                  text: localizations.dashboard_promoter_ranking_info_tooltip),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Text(
+                localizations.dashboard_promoter_ranking_period,
+                style: themeData.textTheme.bodySmall!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(width: 8),
+              UnderlinedDropdown<TimePeriod>(
+                value: _selectedTimePeriod,
+                items: [TimePeriod.month, TimePeriod.quarter, TimePeriod.year]
+                    .map((period) {
+                  return DropdownMenuItem<TimePeriod>(
+                    value: period,
+                    child: Text(period.value),
+                  );
+                }).toList(),
+                onChanged: (TimePeriod? newPeriod) {
+                  if (newPeriod != null) {
+                    setState(() {
+                      _selectedTimePeriod = newPeriod;
+                    });
+                    Modular.get<DashboardPromoterRankingCubit>()
+                        .getTop3Promoters(
+                            widget.user.registeredPromoterIDs ?? [],
+                            _selectedTimePeriod);
+                  }
+                },
+              ),
+            ],
+          ),
+        ],
+      );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            localizations.dashboard_promoter_ranking_title,
+            style: themeData.textTheme.bodyLarge!
+                .copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(width: 8),
+          InfoButton(
+              text: localizations.dashboard_promoter_ranking_info_tooltip),
+          const Spacer(),
+          Row(
+            children: [
+              Text(
+                localizations.dashboard_promoter_ranking_period,
+                style: themeData.textTheme.bodySmall!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(width: 8),
+              UnderlinedDropdown<TimePeriod>(
+                value: _selectedTimePeriod,
+                items: [TimePeriod.month, TimePeriod.quarter, TimePeriod.year]
+                    .map((period) {
+                  return DropdownMenuItem<TimePeriod>(
+                    value: period,
+                    child: Text(period.value),
+                  );
+                }).toList(),
+                onChanged: (TimePeriod? newPeriod) {
+                  if (newPeriod != null) {
+                    setState(() {
+                      _selectedTimePeriod = newPeriod;
+                    });
+                    Modular.get<DashboardPromoterRankingCubit>()
+                        .getTop3Promoters(
+                            widget.user.registeredPromoterIDs ?? [],
+                            _selectedTimePeriod);
+                  }
+                },
+              ),
+            ],
+          ),
+        ],
+      );
+    }
   }
 
   Widget _buildPromoterList(List<DashboardRankedPromoter> promoters,
