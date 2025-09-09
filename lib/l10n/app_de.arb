@@ -1350,6 +1350,22 @@
     "@promoter_overview_filter_tooltip": {
         "description": "Tooltip für den Filter Button in der Promoter Übersicht"
     },
+    "promoter_overview_filter_title": "Promoter Filter",
+    "@promoter_overview_filter_title": {
+        "description": "Titel für das Promoter Filter Bottom Sheet"
+    },
+    "promoter_overview_filter_registration_title": "Registrierungsstatus",
+    "@promoter_overview_filter_registration_title": {
+        "description": "Sektion Titel für Registrierungsfilter"
+    },
+    "promoter_overview_filter_sortby_title": "Sortierung",
+    "@promoter_overview_filter_sortby_title": {
+        "description": "Sektion Titel für Sortierungsfilter"
+    },
+    "promoter_overview_filter_sortorder_title": "Sortierreihenfolge",
+    "@promoter_overview_filter_sortorder_title": {
+        "description": "Sektion Titel für Sortierungsreihenfolge"
+    },
     "promoter_overview_view_switch_grid_tooltip": "Gridansicht",
     "@promoter_overview_view_switch_grid_tooltip": {
         "description": "Tooltip für den Grid Button in der Promoter Übersicht"

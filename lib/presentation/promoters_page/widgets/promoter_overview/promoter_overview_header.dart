@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_filter_bottom_sheet.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_view_state_button.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_page.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +33,28 @@ class PromoterOverviewHeader extends StatefulWidget {
 class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
   bool _isExpanded = false;
   PromoterSearchOption _selectedSearchOption = PromoterSearchOption.fullName;
+  PromoterOverviewFilterStates _filterStates = PromoterOverviewFilterStates();
 
-  void onFilterPressed() {
-    setState(() {
-      _isExpanded = !_isExpanded;
-    });
+  void onFilterPressed(ResponsiveBreakpointsData responsiveValue) {
+    if (responsiveValue.isMobile) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (context) => PromoterOverviewFilterBottomSheet(
+          filterStates: _filterStates,
+          onFilterChanged: (PromoterOverviewFilterStates filterStates) {
+            setState(() {
+              _filterStates = filterStates;
+            });
+            widget.onFilterChanged(filterStates);
+          },
+        ),
+      );
+    } else {
+      setState(() {
+        _isExpanded = !_isExpanded;
+      });
+    }
   }
 
   @override
@@ -113,7 +131,7 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
                     width: 48,
                     height: 48,
                     child: IconButton(
-                        onPressed: () => onFilterPressed(),
+                        onPressed: () => onFilterPressed(responsiveValue),
                         tooltip: localization.promoter_overview_filter_tooltip,
                         icon: Icon(Icons.filter_list,
                             color: themeData.colorScheme.secondary, size: 32)),
@@ -130,7 +148,12 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
                 children: [
                   const SizedBox(height: 16),
                   PromoterOverviewHeaderExpandableFilter(
-                      onFilterChanged: widget.onFilterChanged)
+                      onFilterChanged: (PromoterOverviewFilterStates filterStates) {
+                        setState(() {
+                          _filterStates = filterStates;
+                        });
+                        widget.onFilterChanged(filterStates);
+                      })
                 ]))
       ],
     );
