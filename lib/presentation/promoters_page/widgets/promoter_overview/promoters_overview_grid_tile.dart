@@ -36,7 +36,6 @@ class PromotersOverviewGridTile extends StatelessWidget {
 
     return Container(
       width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-      height: 300,
       decoration: BoxDecoration(
           color: themeData.colorScheme.surface,
           border: Border.all(color: Colors.transparent),
@@ -187,9 +186,10 @@ class PromotersOverviewGridTile extends StatelessWidget {
                     PromoterHelper(localization: localization)
                         .getPromoterDateText(context, promoter)!,
                     style: themeData.textTheme.bodySmall!.copyWith(
-                        fontSize: 12,
+                        fontSize: responsiveValue.isMobile ? 10 : 12,
                         color: themeData.colorScheme.surfaceTint
-                            .withValues(alpha: 0.6)),
+                            .withValues(alpha: 0.6),
+                        overflow: TextOverflow.ellipsis),
                     maxLines: 1)
               ]
             ]),

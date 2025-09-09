@@ -38,9 +38,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
             as PermissionSuccessState)
         .permissions;
 
-    return Container(
-      constraints: const BoxConstraints(maxHeight: 1000),
-      child: LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
         final double horizontalSpacing =
             responsiveValue.largerThan(MOBILE) ? 24 : 12;
         final double verticalSpacing =
@@ -139,7 +137,6 @@ class LandingPageOverviewGrid extends StatelessWidget {
             ),
           ),
         );
-      }),
-    );
+      });
   }
 }
