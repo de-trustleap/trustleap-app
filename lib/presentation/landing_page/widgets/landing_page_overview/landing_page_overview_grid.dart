@@ -67,6 +67,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
         }
 
         return AnimationLimiter(
+          key: ValueKey('landingpage-grid-${responsiveValue.isMobile}'),
           child: SingleChildScrollView(
             child: Wrap(
               spacing: horizontalSpacing,

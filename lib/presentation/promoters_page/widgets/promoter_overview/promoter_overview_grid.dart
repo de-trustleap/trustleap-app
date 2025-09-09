@@ -49,6 +49,7 @@ class PromoterOverviewGrid extends StatelessWidget {
         }
 
         return AnimationLimiter(
+          key: ValueKey('promoter-grid-${responsiveValue.isMobile}'),
           child: SingleChildScrollView(
             controller: controller,
             child: Wrap(
