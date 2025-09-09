@@ -7,6 +7,6 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        title: const SelectableText("Finanzwegbegleiter"));
+        title: const SelectableText("Trustleap"));
   }
 }

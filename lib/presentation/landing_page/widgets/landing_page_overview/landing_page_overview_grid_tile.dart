@@ -103,7 +103,6 @@ class LandingPageOverviewGridTile extends StatelessWidget {
             : "",
         child: Container(
           width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
-          height: 300,
           decoration: BoxDecoration(
               color: _getBackgroundColor(themeData),
               border: Border.all(color: Colors.transparent),
@@ -155,25 +154,27 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                       landingPage.lastUpdatedAt == null) ...[
                     const SizedBox(height: 16),
                     SelectableText(
-                        "Erstellt am ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
+                        "${localizations.landingpage_overview_created_at} ${DateTimeFormatter().getStringFromDate(context, landingPage.createdAt!)}",
                         style: themeData.textTheme.bodySmall!.copyWith(
-                            fontSize: 12,
+                            fontSize: responsiveValue.isMobile ? 10 : 12,
                             color: themeData.colorScheme.surfaceTint
-                                .withValues(alpha: 0.6)),
+                                .withValues(alpha: 0.6),
+                            overflow: TextOverflow.ellipsis),
                         maxLines: 1),
                   ] else if (landingPage.lastUpdatedAt != null) ...[
                     const SizedBox(height: 8),
                     SelectableText(
-                        "Geändert am ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
+                        "${localizations.landingpage_overview_updated_at} ${DateTimeFormatter().getStringFromDate(context, landingPage.lastUpdatedAt!)}",
                         style: themeData.textTheme.bodySmall!.copyWith(
-                            fontSize: 12,
+                            fontSize: responsiveValue.isMobile ? 10 : 12,
                             color: themeData.colorScheme.surfaceTint
-                                .withValues(alpha: 0.6)),
+                                .withValues(alpha: 0.6),
+                            overflow: TextOverflow.ellipsis),
                         maxLines: 1)
                   ],
                   if (!(landingPage.isActive ?? false) &&
                       !(landingPage.isDefaultPage ?? false)) ...[
-                    SelectableText("DEAKTIVIERT",
+                    SelectableText(localizations.landingpage_overview_deactivated,
                         style: themeData.textTheme.bodySmall!.copyWith(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

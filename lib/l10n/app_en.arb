@@ -2032,6 +2032,18 @@
     "@landingpage_overview_no_default_page_button_title": {
         "description": "Button title for the page that is displayed if you have not yet created a default landing page."
     },
+    "landingpage_overview_created_at": "Created on",
+    "@landingpage_overview_created_at": {
+        "description": "Label for the creation date of a landing page"
+    },
+    "landingpage_overview_updated_at": "Modified on",
+    "@landingpage_overview_updated_at": {
+        "description": "Label for the modification date of a landing page"
+    },
+    "landingpage_overview_deactivated": "DEACTIVATED",
+    "@landingpage_overview_deactivated": {
+        "description": "Status text for deactivated landing pages"
+    },
     "edit_promoter_no_data_title": "No data found",
     "@edit_promoter_no_data_title": {
         "description": "Title of the view that appears when no id is given for editing the promoter."

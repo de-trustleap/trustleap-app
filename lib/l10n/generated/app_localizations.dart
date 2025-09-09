@@ -3110,6 +3110,24 @@ abstract class AppLocalizations {
   /// **'Create default landingpage'**
   String get landingpage_overview_no_default_page_button_title;
 
+  /// Label for the creation date of a landing page
+  ///
+  /// In en, this message translates to:
+  /// **'Created on'**
+  String get landingpage_overview_created_at;
+
+  /// Label for the modification date of a landing page
+  ///
+  /// In en, this message translates to:
+  /// **'Modified on'**
+  String get landingpage_overview_updated_at;
+
+  /// Status text for deactivated landing pages
+  ///
+  /// In en, this message translates to:
+  /// **'DEACTIVATED'**
+  String get landingpage_overview_deactivated;
+
   /// Title of the view that appears when no id is given for editing the promoter.
   ///
   /// In en, this message translates to:

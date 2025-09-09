@@ -20,17 +20,31 @@ class PromoterOverviewGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final responsiveValue = ResponsiveBreakpoints.of(context);
 
-    return Container(
-      constraints: const BoxConstraints(maxHeight: 1000),
-      child: LayoutBuilder(builder: (context, constraints) {
-        final double tileWidth = 200;
+    return LayoutBuilder(builder: (context, constraints) {
         final double horizontalSpacing =
             responsiveValue.largerThan(MOBILE) ? 24 : 12;
         final double verticalSpacing =
             responsiveValue.largerThan(MOBILE) ? 24 : 12;
-        final double aspectRatio = 0.64;
+
+        double tileWidth;
+        int columnsCount;
+
+        if (responsiveValue.isMobile) {
+          columnsCount = 2;
+          final double availableWidth = constraints.maxWidth;
+          final double totalSpacing = horizontalSpacing * (columnsCount - 1);
+          tileWidth = (availableWidth - totalSpacing) / columnsCount;
+        } else {
+          tileWidth = 200;
+          columnsCount =
+              (constraints.maxWidth / (tileWidth + horizontalSpacing))
+                  .floor()
+                  .clamp(1, double.infinity)
+                  .toInt();
+        }
 
         return AnimationLimiter(
+          key: ValueKey('promoter-grid-${responsiveValue.isMobile}-$columnsCount-${tileWidth.toInt()}'),
           child: SingleChildScrollView(
             controller: controller,
             child: Wrap(
@@ -43,13 +57,15 @@ class PromoterOverviewGrid extends StatelessWidget {
                 return AnimationConfiguration.staggeredGrid(
                   position: index,
                   duration: const Duration(milliseconds: 150),
-                  columnCount: responsiveValue.largerThan(MOBILE) ? 3 : 2,
+                  columnCount: columnsCount,
                   child: ScaleAnimation(
-                    child: SizedBox(
-                      width: tileWidth,
-                      height: tileWidth / aspectRatio,
-                      child: PromotersOverviewGridTile(
-                          promoter: promoter, deletePressed: deletePressed),
+                    child: IntrinsicHeight(
+                      child: SizedBox(
+                        key: ValueKey('tile-${promoter.id.value}-${responsiveValue.isMobile}'),
+                        width: tileWidth,
+                        child: PromotersOverviewGridTile(
+                            promoter: promoter, deletePressed: deletePressed),
+                      ),
                     ),
                   ),
                 );
@@ -57,7 +73,6 @@ class PromoterOverviewGrid extends StatelessWidget {
             ),
           ),
         );
-      }),
-    );
+      });
   }
 }

@@ -27,8 +27,6 @@ class LandingPageOverviewGrid extends StatelessWidget {
       required this.isActivePressed});
 
   final maxLandingPageCount = 11;
-  final double tileWidth = 200;
-  final double aspectRatio = 0.7;
 
   @override
   Widget build(BuildContext context) {
@@ -40,15 +38,34 @@ class LandingPageOverviewGrid extends StatelessWidget {
             as PermissionSuccessState)
         .permissions;
 
-    return Container(
-      constraints: const BoxConstraints(maxHeight: 1000),
-      child: LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
         final double horizontalSpacing =
             responsiveValue.largerThan(MOBILE) ? 24 : 12;
         final double verticalSpacing =
             responsiveValue.largerThan(MOBILE) ? 24 : 12;
 
+        double tileWidth;
+        double aspectRatio;
+        int columnsCount;
+
+        if (responsiveValue.isMobile) {
+          columnsCount = 2;
+          final double availableWidth = constraints.maxWidth;
+          final double totalSpacing = horizontalSpacing * (columnsCount - 1);
+          tileWidth = (availableWidth - totalSpacing) / columnsCount;
+          aspectRatio = 0.55;
+        } else {
+          tileWidth = 200;
+          aspectRatio = 0.7;
+          columnsCount =
+              (constraints.maxWidth / (tileWidth + horizontalSpacing))
+                  .floor()
+                  .clamp(1, double.infinity)
+                  .toInt();
+        }
+
         return AnimationLimiter(
+          key: ValueKey('landingpage-grid-${responsiveValue.isMobile}'),
           child: SingleChildScrollView(
             child: Wrap(
               spacing: horizontalSpacing,
@@ -62,7 +79,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
                     return AnimationConfiguration.staggeredGrid(
                       position: index,
                       duration: const Duration(milliseconds: 150),
-                      columnCount: responsiveValue.largerThan(MOBILE) ? 4 : 2,
+                      columnCount: columnsCount,
                       child: ScaleAnimation(
                         child: SizedBox(
                           width: tileWidth,
@@ -98,7 +115,7 @@ class LandingPageOverviewGrid extends StatelessWidget {
                   return AnimationConfiguration.staggeredGrid(
                     position: index,
                     duration: const Duration(milliseconds: 150),
-                    columnCount: responsiveValue.largerThan(MOBILE) ? 4 : 2,
+                    columnCount: columnsCount,
                     child: ScaleAnimation(
                       child: SizedBox(
                         width: tileWidth,
@@ -120,7 +137,6 @@ class LandingPageOverviewGrid extends StatelessWidget {
             ),
           ),
         );
-      }),
-    );
+      });
   }
 }

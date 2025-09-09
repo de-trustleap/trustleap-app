@@ -1769,6 +1769,15 @@ class AppLocalizationsEn extends AppLocalizations {
       'Create default landingpage';
 
   @override
+  String get landingpage_overview_created_at => 'Created on';
+
+  @override
+  String get landingpage_overview_updated_at => 'Modified on';
+
+  @override
+  String get landingpage_overview_deactivated => 'DEACTIVATED';
+
+  @override
   String get edit_promoter_no_data_title => 'No data found';
 
   @override
