@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2025-09-05 12:00:24
+Last updated: 2025-09-09 14:07:47
 
 ---
 
@@ -36,7 +36,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### build_runner
 
-- **Version**: 2.7.2
+- **Version**: 2.8.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_runner>
@@ -433,22 +433,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_daemon>
 - **Description**: A daemon for running Dart builds.
-
-### build_resolvers
-
-- **Version**: 3.0.4
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/build/tree/master/build_resolvers>
-- **Description**: Resolve Dart code in a Builder
-
-### build_runner_core
-
-- **Version**: 9.3.2
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/build/tree/master/build_runner_core>
-- **Description**: Core tools to organize the structure of a build and run Builders.
 
 ### built_collection
 
@@ -1592,15 +1576,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/test/tree/master/pkgs/test_api>
 - **Description**: The user facing API for structuring Dart tests and checking expectations.
-
-### timing
-
-- **Version**: 1.0.2
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/timing>
-- **Description**: A simple package for tracking the performance of synchronous and asynchronous
-  actions.
 
 ### typed_data
 
