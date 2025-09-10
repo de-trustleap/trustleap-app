@@ -263,21 +263,19 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       return const SizedBox();
     }
     final controller = _textControllers[lead.id]!;
-    return SizedBox(
-      height: 250,
-      child: RecommendationTextField(
-        controller: controller,
-        leadName: lead.name ?? "",
-        showError: showMissingLinkError,
-        onSendPressed: () {
-          _sendMessage(widget.leads.first, controller.text);
-        },
-      ),
+    return RecommendationTextField(
+      controller: controller,
+      leadName: lead.name ?? "",
+      showError: showMissingLinkError,
+      onSendPressed: () {
+        _sendMessage(widget.leads.first, controller.text);
+      },
     );
   }
 
   Widget _buildMultipleRecommendationsWidget() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         TabBar(
           controller: tabController,
@@ -286,24 +284,20 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         ),
         const SizedBox(height: 30),
         SizedBox(
-          height: 400,
+          height: 250,
           child: TabBarView(
             controller: tabController,
             children: widget.leads.map((lead) {
               final controller = _textControllers[lead.id]!;
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    RecommendationTextField(
-                      controller: controller,
-                      leadName: lead.name ?? "",
-                      showError: showMissingLinkError,
-                      onSendPressed: () {
-                        _sendMessage(lead, controller.text);
-                      },
-                    ),
-                  ],
+                child: RecommendationTextField(
+                  controller: controller,
+                  leadName: lead.name ?? "",
+                  showError: showMissingLinkError,
+                  onSendPressed: () {
+                    _sendMessage(lead, controller.text);
+                  },
                 ),
               );
             }).toList(),

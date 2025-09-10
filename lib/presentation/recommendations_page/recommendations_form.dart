@@ -259,22 +259,23 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                           ]),
                       const SizedBox(height: textFieldSpacing),
                       Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            FormTextfield(
-                                maxWidth: maxWidth * 0.85,
-                                controller: leadTextController,
-                                disabled: false,
-                                placeholder: localization
-                                    .recommendations_form_recommendation_name_placeholder,
-                                onChanged: resetError,
-                                onFieldSubmitted: () {
-                                  addLead(validator);
-                                  focusNode!.requestFocus();
-                                },
-                                focusNode: focusNode,
-                                validator: validator.validateLeadsName),
-                            const Spacer(),
+                            Expanded(
+                              child: FormTextfield(
+                                  maxWidth: double.infinity,
+                                  controller: leadTextController,
+                                  disabled: false,
+                                  placeholder: localization
+                                      .recommendations_form_recommendation_name_placeholder,
+                                  onChanged: resetError,
+                                  onFieldSubmitted: () {
+                                    addLead(validator);
+                                    focusNode!.requestFocus();
+                                  },
+                                  focusNode: focusNode,
+                                  validator: validator.validateLeadsName),
+                            ),
+                            const SizedBox(width: 8),
                             IconButton(
                                 onPressed: () => addLead(validator),
                                 tooltip: localization
