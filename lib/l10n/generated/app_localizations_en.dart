@@ -1174,6 +1174,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get promoter_overview_filter_tooltip => 'Filter promoters';
 
   @override
+  String get promoter_overview_filter_title => 'Promoter Filter';
+
+  @override
+  String get promoter_overview_filter_registration_title =>
+      'Registration Status';
+
+  @override
+  String get promoter_overview_filter_sortby_title => 'Sort By';
+
+  @override
+  String get promoter_overview_filter_sortorder_title => 'Sort Order';
+
+  @override
   String get promoter_overview_view_switch_grid_tooltip => 'Grid view';
 
   @override

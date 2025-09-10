@@ -2099,6 +2099,30 @@ abstract class AppLocalizations {
   /// **'Filter promoters'**
   String get promoter_overview_filter_tooltip;
 
+  /// Title for the promoter filter bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Promoter Filter'**
+  String get promoter_overview_filter_title;
+
+  /// Section title for registration filter
+  ///
+  /// In en, this message translates to:
+  /// **'Registration Status'**
+  String get promoter_overview_filter_registration_title;
+
+  /// Section title for sort by filter
+  ///
+  /// In en, this message translates to:
+  /// **'Sort By'**
+  String get promoter_overview_filter_sortby_title;
+
+  /// Section title for sort order filter
+  ///
+  /// In en, this message translates to:
+  /// **'Sort Order'**
+  String get promoter_overview_filter_sortorder_title;
+
   /// Tooltip for the grid button on the promoter overview page
   ///
   /// In en, this message translates to:

@@ -62,32 +62,34 @@ class _LegalsCheckWidgetState extends State<LegalsCheck> {
           width: widget.maxWidth,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Checkbox(
                 value: termsAndConditionsChecked,
                 onChanged: _updateTermsAndConditions,
               ),
               const SizedBox(width: 8),
-              Flexible(
-                child: Text(
-                  localization.register_terms_and_condition_text,
-                  style: themeData.textTheme.bodyMedium,
-                ),
-              ),
-              const SizedBox(width: 4),
-              ClickableLink(
-                title: localization.register_terms_and_condition_link,
-                onTap: () {
-                  navigator.openInNewTab(widget.isLoggedIn
-                      ? RoutePaths.homePath + RoutePaths.termsAndCondition
-                      : RoutePaths.termsAndCondition);
-                },
-              ),
-              const SizedBox(width: 4),
-              Flexible(
-                child: Text(
-                  localization.register_terms_and_condition_text2,
-                  style: themeData.textTheme.bodyMedium,
+              Expanded(
+                child: RichText(
+                  text: TextSpan(
+                    style: themeData.textTheme.bodyMedium,
+                    children: [
+                      TextSpan(text: localization.register_terms_and_condition_text),
+                      const TextSpan(text: ' '),
+                      WidgetSpan(
+                        child: ClickableLink(
+                          title: localization.register_terms_and_condition_link,
+                          onTap: () {
+                            navigator.openInNewTab(widget.isLoggedIn
+                                ? RoutePaths.homePath + RoutePaths.termsAndCondition
+                                : RoutePaths.termsAndCondition);
+                          },
+                        ),
+                      ),
+                      const TextSpan(text: ' '),
+                      TextSpan(text: localization.register_terms_and_condition_text2),
+                    ],
+                  ),
                 ),
               )
             ],
@@ -97,32 +99,34 @@ class _LegalsCheckWidgetState extends State<LegalsCheck> {
           width: widget.maxWidth,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Checkbox(
                 value: privacyPolicyChecked,
                 onChanged: _updatePrivacyPolicy,
               ),
               const SizedBox(width: 8),
-              Flexible(
-                child: Text(
-                  localization.register_privacy_policy_text,
-                  style: themeData.textTheme.bodyMedium,
-                ),
-              ),
-              const SizedBox(width: 4),
-              ClickableLink(
-                title: localization.register_privacy_policy_link,
-                onTap: () {
-                  navigator.openInNewTab(widget.isLoggedIn
-                      ? RoutePaths.homePath + RoutePaths.privacyPolicy
-                      : RoutePaths.privacyPolicy);
-                },
-              ),
-              const SizedBox(width: 4),
-              Flexible(
-                child: Text(
-                  localization.register_privacy_policy_text2,
-                  style: themeData.textTheme.bodyMedium,
+              Expanded(
+                child: RichText(
+                  text: TextSpan(
+                    style: themeData.textTheme.bodyMedium,
+                    children: [
+                      TextSpan(text: localization.register_privacy_policy_text),
+                      const TextSpan(text: ' '),
+                      WidgetSpan(
+                        child: ClickableLink(
+                          title: localization.register_privacy_policy_link,
+                          onTap: () {
+                            navigator.openInNewTab(widget.isLoggedIn
+                                ? RoutePaths.homePath + RoutePaths.privacyPolicy
+                                : RoutePaths.privacyPolicy);
+                          },
+                        ),
+                      ),
+                      const TextSpan(text: ' '),
+                      TextSpan(text: localization.register_privacy_policy_text2),
+                    ],
+                  ),
                 ),
               )
             ],

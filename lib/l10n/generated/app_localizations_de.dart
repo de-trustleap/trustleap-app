@@ -1197,6 +1197,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get promoter_overview_filter_tooltip => 'Promoter filtern';
 
   @override
+  String get promoter_overview_filter_title => 'Promoter Filter';
+
+  @override
+  String get promoter_overview_filter_registration_title =>
+      'Registrierungsstatus';
+
+  @override
+  String get promoter_overview_filter_sortby_title => 'Sortierung';
+
+  @override
+  String get promoter_overview_filter_sortorder_title => 'Sortierreihenfolge';
+
+  @override
   String get promoter_overview_view_switch_grid_tooltip => 'Gridansicht';
 
   @override

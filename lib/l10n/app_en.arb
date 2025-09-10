@@ -1350,6 +1350,22 @@
     "@promoter_overview_filter_tooltip": {
         "description": "Tooltip for the filter button on the promoter overview page"
     },
+    "promoter_overview_filter_title": "Promoter Filter",
+    "@promoter_overview_filter_title": {
+        "description": "Title for the promoter filter bottom sheet"
+    },
+    "promoter_overview_filter_registration_title": "Registration Status",
+    "@promoter_overview_filter_registration_title": {
+        "description": "Section title for registration filter"
+    },
+    "promoter_overview_filter_sortby_title": "Sort By",
+    "@promoter_overview_filter_sortby_title": {
+        "description": "Section title for sort by filter"
+    },
+    "promoter_overview_filter_sortorder_title": "Sort Order",
+    "@promoter_overview_filter_sortorder_title": {
+        "description": "Section title for sort order filter"
+    },
     "promoter_overview_view_switch_grid_tooltip": "Grid view",
     "@promoter_overview_view_switch_grid_tooltip": {
         "description": "Tooltip for the grid button on the promoter overview page"
