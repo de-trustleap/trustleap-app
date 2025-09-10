@@ -24,6 +24,7 @@ import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 enum PromotersOverviewViewState { grid, list }
 
@@ -154,6 +155,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final navigator = CustomNavigator.of(context);
+    final responsiveValue = ResponsiveBreakpoints.of(context);
     final promoterCubit = Modular.get<PromoterCubit>();
     final promoterObserverCubit = Modular.get<PromoterObserverCubit>();
     final userObserverCubit = Modular.get<UserObserverCubit>();
@@ -236,7 +238,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                               controller: _controller,
                               promoters: visiblePromoters)
                         ]
-                      ]);
+                      ], responsiveValue);
                     }
                   } else if (state is PromotersObserverSearchNotFound) {
                     return headerWithChildren([
@@ -247,7 +249,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
                           description: localization
                               .promoter_overview_no_search_results_subtitle),
                       const SizedBox(height: 24)
-                    ]);
+                    ], responsiveValue);
                   } else if (state is PromotersObserverFailure) {
                     return ErrorView(
                         title: localization.promoter_overview_error_view_title,
@@ -270,12 +272,17 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
         ));
   }
 
-  Widget headerWithChildren(List<Widget> children) {
+  Widget headerWithChildren(
+      List<Widget> children, ResponsiveBreakpointsData responsiveValue) {
     children.insert(0, header());
-    return CardContainer(
-        maxWidth: 1200,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center, children: children));
+    return Column(children: [
+      CardContainer(
+          maxWidth: 1200,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: children)),
+      SizedBox(height: responsiveValue.isMobile ? 40 : 80),
+    ]);
   }
 
   Widget header() {
