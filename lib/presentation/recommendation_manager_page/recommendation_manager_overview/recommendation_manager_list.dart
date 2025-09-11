@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/user_recommendation.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/no_search_results_view.dart';
@@ -32,43 +33,46 @@ class RecommendationManagerList extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
 
     return Column(children: [
-      SizedBox(
-        width: double.infinity,
-        child: Row(children: [
-          Flexible(
-              flex: 1,
-              child: _buildHeaderCell(
-                  localization.recommendation_manager_list_header_priority,
-                  themeData)),
-          Flexible(
-              flex: 3,
-              child: _buildHeaderCell(
-                  isPromoter
-                      ? localization.recommendation_manager_list_header_receiver
-                      : localization
-                          .recommendation_manager_list_header_promoter,
-                  themeData)),
-          Flexible(
-              flex: 3,
-              child: _buildHeaderCell(
-                  localization.recommendation_manager_list_header_status,
-                  themeData)),
-          Flexible(
-              flex: 2,
-              child: _buildHeaderCell(
-                  localization
-                      .recommendation_manager_list_header_expiration_date,
-                  themeData)),
-          const Flexible(flex: 1, child: SizedBox(width: 24)),
-          const SizedBox(
-            width: 70,
-            child: Icon(Icons.expand_more, color: Colors.transparent),
-          ),
-        ]),
-      ),
-      const Divider(height: 1),
+      if (!responsiveValue.isMobile) ...[
+        SizedBox(
+          width: double.infinity,
+          child: Row(children: [
+            Flexible(
+                flex: 1,
+                child: _buildHeaderCell(
+                    localization.recommendation_manager_list_header_priority,
+                    themeData)),
+            Flexible(
+                flex: 3,
+                child: _buildHeaderCell(
+                    isPromoter
+                        ? localization.recommendation_manager_list_header_receiver
+                        : localization
+                            .recommendation_manager_list_header_promoter,
+                    themeData)),
+            Flexible(
+                flex: 3,
+                child: _buildHeaderCell(
+                    localization.recommendation_manager_list_header_status,
+                    themeData)),
+            Flexible(
+                flex: 2,
+                child: _buildHeaderCell(
+                    localization
+                        .recommendation_manager_list_header_expiration_date,
+                    themeData)),
+            const Flexible(flex: 1, child: SizedBox(width: 24)),
+            const SizedBox(
+              width: 70,
+              child: Icon(Icons.expand_more, color: Colors.transparent),
+            ),
+          ]),
+        ),
+        const Divider(height: 1),
+      ],
       if (recommendations.isEmpty) ...[
         const SizedBox(height: 40),
         NoSearchResultsView(
