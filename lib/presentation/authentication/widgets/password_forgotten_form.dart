@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart'
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
@@ -11,7 +12,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primar
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class PasswordForgottenForm extends StatefulWidget {
   const PasswordForgottenForm({super.key});
@@ -78,7 +78,7 @@ class _PasswordForgottenFormState extends State<PasswordForgottenForm> {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     const double padding = 20;
     return BlocConsumer<AuthCubit, AuthState>(listener: ((context, state) {
       if (state is AuthPasswordResetFailureState) {
