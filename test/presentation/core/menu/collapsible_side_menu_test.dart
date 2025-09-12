@@ -5,9 +5,11 @@ import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/presentation/admin_area/admin_side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/menu/collapsible_side_menu.dart';
 import 'package:finanzbegleiter/presentation/core/menu/menu_toggle_button.dart';
+import 'package:finanzbegleiter/presentation/core/menu/menu_item.dart';
 import 'package:finanzbegleiter/presentation/core/menu/side_menu.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +87,9 @@ void main() {
     ResponsiveHelper.disableTestMode();
     // Clear Modular cache after each test to prevent module caching issues
     Modular.destroy();
+    // Ensure all animation controllers are disposed
+    menuCubit.close();
+    permissionCubit.close();
   });
 
   Widget createWidgetUnderTest({bool isAdmin = false}) {
@@ -462,6 +467,182 @@ void main() {
       final adminSideMenu = tester.widget<AdminSideMenu>(adminSideMenuFinder);
       expect(adminSideMenu.animationController, isNotNull);
       // AdminSideMenu doesn't have widthAnimation property, which is correct
+    });
+  });
+
+  group('CollapsibleSideMenu MenuItem Interaction Tests', () {
+    testWidgets('should contain MenuItem widgets that are interactive', (tester) async {
+      // Given
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.pumpAndSettle();
+
+      // Find MenuItems
+      final menuItems = find.byType(MenuItem);
+      expect(menuItems, findsAtLeastNWidgets(1));
+      
+      final firstMenuItem = menuItems.first;
+      
+      // Then - MenuItem should have GestureDetector for tappability
+      final gestureDetector = find.descendant(
+        of: firstMenuItem,
+        matching: find.byType(GestureDetector),
+      );
+      expect(gestureDetector, findsOneWidget);
+      
+      // And MenuItem should be present and properly structured
+      expect(find.byType(MenuItem), findsAtLeastNWidgets(1));
+    });
+
+    testWidgets('should show different MenuItems for admin vs regular user', (tester) async {
+      // Given - regular menu
+      await tester.pumpWidget(createWidgetUnderTest(isAdmin: false));
+      await tester.pumpAndSettle();
+
+      final regularMenuItems = tester.widgetList<MenuItem>(find.byType(MenuItem));
+      final regularMenuTypes = regularMenuItems.map((item) => item.type).toSet();
+      
+      // When - create admin menu
+      await tester.pumpWidget(createWidgetUnderTest(isAdmin: true));
+      await tester.pumpAndSettle();
+
+      final adminMenuItems = tester.widgetList<MenuItem>(find.byType(MenuItem));
+      final adminMenuTypes = adminMenuItems.map((item) => item.type).toSet();
+      
+      // Then - should have different MenuItems (different types/paths)
+      expect(regularMenuItems.length, greaterThan(0));
+      expect(adminMenuItems.length, greaterThan(0));
+      
+      // Admin and regular menus should have at least some different MenuItem types
+      expect(regularMenuTypes, isNot(equals(adminMenuTypes)));
+    });
+
+    testWidgets('should have MenuItems with proper structure and properties', (tester) async {
+      // Given
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.pumpAndSettle();
+
+      // Find first MenuItem
+      final menuItems = find.byType(MenuItem);
+      expect(menuItems, findsAtLeastNWidgets(1));
+      
+      final firstMenuItem = menuItems.first;
+      final menuItemWidget = tester.widget<MenuItem>(firstMenuItem);
+      
+      // Then - MenuItem should have required properties
+      expect(menuItemWidget.path, isNotEmpty);
+      expect(menuItemWidget.icon, isNotNull);
+      expect(menuItemWidget.type, isNotNull);
+      expect(menuItemWidget.isCollapsed, isA<bool>());
+    });
+  });
+
+  group('CollapsibleSideMenu Visual Selection Tests', () {
+    testWidgets('should show visual selection when MenuCubit emits selected state', (tester) async {
+      // Given
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.pumpAndSettle();
+
+      // Find MenuItems
+      final menuItems = find.byType(MenuItem);
+      expect(menuItems, findsAtLeastNWidgets(1));
+      
+      // When - manually select a menu item through MenuCubit (simulating navigation selection)
+      menuCubit.selectMenu(MenuItems.profile);
+      await tester.pumpAndSettle();
+      
+      // Then - MenuCubit should have the selected item
+      expect(menuCubit.selectedItem, MenuItems.profile);
+      
+      // And the MenuItems should rebuild to show the selection
+      // (The BlocBuilder in MenuItem will rebuild when MenuItemSelectedState is emitted)
+      expect(find.byType(MenuItem), findsAtLeastNWidgets(1));
+    });
+
+    testWidgets('should handle selection state changes correctly', (tester) async {
+      // Given
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.pumpAndSettle();
+
+      // Initially no item selected
+      expect(menuCubit.selectedItem, isNull);
+      
+      // When - select profile menu item
+      menuCubit.selectMenu(MenuItems.profile);
+      await tester.pumpAndSettle();
+      
+      expect(menuCubit.selectedItem, MenuItems.profile);
+      
+      // When - select dashboard menu item  
+      menuCubit.selectMenu(MenuItems.dashboard);
+      await tester.pumpAndSettle();
+      
+      // Then - selection should change
+      expect(menuCubit.selectedItem, MenuItems.dashboard);
+    });
+
+    testWidgets('should show primary color overlay on selected MenuItem', (tester) async {
+      // Given
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.pumpAndSettle();
+
+      // Get theme for color comparison
+      final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
+      final theme = materialApp.theme ?? ThemeData();
+      final primaryColor = theme.colorScheme.primary;
+
+      // Initially, no MenuItem should have primary color (no selection)
+      final initialMenuItems = tester.widgetList<MenuItem>(find.byType(MenuItem));
+      for (final menuItem in initialMenuItems) {
+        expect(menuItem.type == menuCubit.selectedItem, false,
+            reason: 'No MenuItem should be selected initially');
+      }
+
+      // When - manually select profile menu item (like RouterObserver would do)
+      menuCubit.selectMenu(MenuItems.profile);
+      await tester.pumpAndSettle();
+
+      // Then - verify MenuCubit state changed
+      expect(menuCubit.selectedItem, MenuItems.profile);
+
+      // Find all MenuItems after selection
+      final menuItems = tester.widgetList<MenuItem>(find.byType(MenuItem));
+      expect(menuItems.length, greaterThan(0));
+
+      // Look for the specific MenuItem that should be selected
+      MenuItem? selectedMenuItem;
+      for (final menuItem in menuItems) {
+        if (menuItem.type == MenuItems.profile) {
+          selectedMenuItem = menuItem;
+          break;
+        }
+      }
+
+      expect(selectedMenuItem, isNotNull, 
+          reason: 'Should find the profile MenuItem in the widget tree');
+
+      // Now check if the selected MenuItem has visual indication
+      // Look for AnimatedContainer with primary color within the selected MenuItem
+      final selectedMenuItemFinder = find.byWidget(selectedMenuItem!);
+      final animatedContainersInSelectedItem = find.descendant(
+        of: selectedMenuItemFinder,
+        matching: find.byType(AnimatedContainer),
+      );
+
+      expect(animatedContainersInSelectedItem, findsAtLeastNWidgets(1));
+
+      // Check that the selected MenuItem's AnimatedContainer has primary color
+      bool foundPrimaryColorInSelectedItem = false;
+      for (final finder in animatedContainersInSelectedItem.evaluate()) {
+        final container = tester.widget<AnimatedContainer>(find.byWidget(finder.widget));
+        final decoration = container.decoration as BoxDecoration?;
+        if (decoration?.color == primaryColor) {
+          foundPrimaryColorInSelectedItem = true;
+          break;
+        }
+      }
+
+      expect(foundPrimaryColorInSelectedItem, true, 
+        reason: 'Selected MenuItem should have AnimatedContainer with primary color');
     });
   });
 
