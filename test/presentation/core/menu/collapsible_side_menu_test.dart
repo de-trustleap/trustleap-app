@@ -66,11 +66,9 @@ void main() {
   setUp(() {
     ResponsiveHelper.enableTestMode();
 
-    // Add dummy states as done in RegisterForm tests
     provideDummy<MenuState>(MenuInitial());
     provideDummy<PermissionState>(PermissionInitial());
 
-    // Create fresh instances for each test like RegisterForm does
     menuCubit = MenuCubit();
     mockPermissionRepository = MockPermissionRepository();
     permissionCubit = PermissionCubit(permissionRepo: mockPermissionRepository);
@@ -87,16 +85,13 @@ void main() {
     ResponsiveHelper.disableTestMode();
     // Clear Modular cache after each test to prevent module caching issues
     Modular.destroy();
-    // Ensure all animation controllers are disposed
     menuCubit.close();
     permissionCubit.close();
   });
 
   Widget createWidgetUnderTest({bool isAdmin = false}) {
-    // Force clean module state before creating new module to prevent route caching
     Modular.destroy();
 
-    // Ensure ResponsiveHelper is in test mode
     ResponsiveHelper.enableTestMode();
 
     // Create the widget tree manually without relying on routes
@@ -239,7 +234,7 @@ void main() {
       // Then - Focus on user-visible behavior, not implementation details
       expect(find.byType(CollapsibleSideMenu), findsOneWidget);
       expect(find.byType(MouseRegion), findsAtLeastNWidgets(1));
-      
+
       // Verify it can handle hover interactions (essential behavior)
       final mouseRegions = find.byType(MouseRegion);
       expect(mouseRegions, findsAtLeastNWidgets(1));
@@ -253,7 +248,6 @@ void main() {
       // Given
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
-
 
       // When
       menuCubit.collapseMenu(true);
@@ -360,7 +354,6 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest(isAdmin: false));
       await tester.pumpAndSettle();
 
-
       // Then
       final sideMenu = tester.widget<SideMenu>(find.byType(SideMenu));
       expect(sideMenu.animationController, isNotNull);
@@ -373,7 +366,6 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest(isAdmin: true));
       await tester.pumpAndSettle();
 
-
       // Then
       final adminSideMenu =
           tester.widget<AdminSideMenu>(find.byType(AdminSideMenu));
@@ -384,7 +376,6 @@ void main() {
       // When
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
-
 
       // Get the SideMenu to access its animation
       final sideMenu = tester.widget<SideMenu>(find.byType(SideMenu));
@@ -401,7 +392,6 @@ void main() {
       // Given
       await tester.pumpWidget(createWidgetUnderTest(isAdmin: false));
       await tester.pumpAndSettle();
-
 
       // Initially not collapsed
       var sideMenu = tester.widget<SideMenu>(find.byType(SideMenu));
@@ -423,7 +413,6 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest(isAdmin: true));
       await tester.pumpAndSettle();
 
-
       // Initially not collapsed
       var adminSideMenu =
           tester.widget<AdminSideMenu>(find.byType(AdminSideMenu));
@@ -444,7 +433,6 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest(isAdmin: false));
       await tester.pumpAndSettle();
 
-
       // Then
       final sideMenuFinder = find.byType(SideMenu);
       expect(sideMenuFinder, findsOneWidget);
@@ -459,7 +447,6 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest(isAdmin: true));
       await tester.pumpAndSettle();
 
-
       // Then - AdminSideMenu should only get animationController, not widthAnimation
       final adminSideMenuFinder = find.byType(AdminSideMenu);
       expect(adminSideMenuFinder, findsOneWidget);
@@ -471,7 +458,8 @@ void main() {
   });
 
   group('CollapsibleSideMenu MenuItem Interaction Tests', () {
-    testWidgets('should contain MenuItem widgets that are interactive', (tester) async {
+    testWidgets('should contain MenuItem widgets that are interactive',
+        (tester) async {
       // Given
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
@@ -479,44 +467,48 @@ void main() {
       // Find MenuItems
       final menuItems = find.byType(MenuItem);
       expect(menuItems, findsAtLeastNWidgets(1));
-      
+
       final firstMenuItem = menuItems.first;
-      
+
       // Then - MenuItem should have GestureDetector for tappability
       final gestureDetector = find.descendant(
         of: firstMenuItem,
         matching: find.byType(GestureDetector),
       );
       expect(gestureDetector, findsOneWidget);
-      
+
       // And MenuItem should be present and properly structured
       expect(find.byType(MenuItem), findsAtLeastNWidgets(1));
     });
 
-    testWidgets('should show different MenuItems for admin vs regular user', (tester) async {
+    testWidgets('should show different MenuItems for admin vs regular user',
+        (tester) async {
       // Given - regular menu
       await tester.pumpWidget(createWidgetUnderTest(isAdmin: false));
       await tester.pumpAndSettle();
 
-      final regularMenuItems = tester.widgetList<MenuItem>(find.byType(MenuItem));
-      final regularMenuTypes = regularMenuItems.map((item) => item.type).toSet();
-      
+      final regularMenuItems =
+          tester.widgetList<MenuItem>(find.byType(MenuItem));
+      final regularMenuTypes =
+          regularMenuItems.map((item) => item.type).toSet();
+
       // When - create admin menu
       await tester.pumpWidget(createWidgetUnderTest(isAdmin: true));
       await tester.pumpAndSettle();
 
       final adminMenuItems = tester.widgetList<MenuItem>(find.byType(MenuItem));
       final adminMenuTypes = adminMenuItems.map((item) => item.type).toSet();
-      
+
       // Then - should have different MenuItems (different types/paths)
       expect(regularMenuItems.length, greaterThan(0));
       expect(adminMenuItems.length, greaterThan(0));
-      
+
       // Admin and regular menus should have at least some different MenuItem types
       expect(regularMenuTypes, isNot(equals(adminMenuTypes)));
     });
 
-    testWidgets('should have MenuItems with proper structure and properties', (tester) async {
+    testWidgets('should have MenuItems with proper structure and properties',
+        (tester) async {
       // Given
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
@@ -524,10 +516,10 @@ void main() {
       // Find first MenuItem
       final menuItems = find.byType(MenuItem);
       expect(menuItems, findsAtLeastNWidgets(1));
-      
+
       final firstMenuItem = menuItems.first;
       final menuItemWidget = tester.widget<MenuItem>(firstMenuItem);
-      
+
       // Then - MenuItem should have required properties
       expect(menuItemWidget.path, isNotEmpty);
       expect(menuItemWidget.icon, isNotNull);
@@ -537,7 +529,9 @@ void main() {
   });
 
   group('CollapsibleSideMenu Visual Selection Tests', () {
-    testWidgets('should show visual selection when MenuCubit emits selected state', (tester) async {
+    testWidgets(
+        'should show visual selection when MenuCubit emits selected state',
+        (tester) async {
       // Given
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
@@ -545,42 +539,44 @@ void main() {
       // Find MenuItems
       final menuItems = find.byType(MenuItem);
       expect(menuItems, findsAtLeastNWidgets(1));
-      
+
       // When - manually select a menu item through MenuCubit (simulating navigation selection)
       menuCubit.selectMenu(MenuItems.profile);
       await tester.pumpAndSettle();
-      
+
       // Then - MenuCubit should have the selected item
       expect(menuCubit.selectedItem, MenuItems.profile);
-      
+
       // And the MenuItems should rebuild to show the selection
       // (The BlocBuilder in MenuItem will rebuild when MenuItemSelectedState is emitted)
       expect(find.byType(MenuItem), findsAtLeastNWidgets(1));
     });
 
-    testWidgets('should handle selection state changes correctly', (tester) async {
+    testWidgets('should handle selection state changes correctly',
+        (tester) async {
       // Given
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
 
       // Initially no item selected
       expect(menuCubit.selectedItem, isNull);
-      
+
       // When - select profile menu item
       menuCubit.selectMenu(MenuItems.profile);
       await tester.pumpAndSettle();
-      
+
       expect(menuCubit.selectedItem, MenuItems.profile);
-      
-      // When - select dashboard menu item  
+
+      // When - select dashboard menu item
       menuCubit.selectMenu(MenuItems.dashboard);
       await tester.pumpAndSettle();
-      
+
       // Then - selection should change
       expect(menuCubit.selectedItem, MenuItems.dashboard);
     });
 
-    testWidgets('should show primary color overlay on selected MenuItem', (tester) async {
+    testWidgets('should show primary color overlay on selected MenuItem',
+        (tester) async {
       // Given
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
@@ -591,7 +587,8 @@ void main() {
       final primaryColor = theme.colorScheme.primary;
 
       // Initially, no MenuItem should have primary color (no selection)
-      final initialMenuItems = tester.widgetList<MenuItem>(find.byType(MenuItem));
+      final initialMenuItems =
+          tester.widgetList<MenuItem>(find.byType(MenuItem));
       for (final menuItem in initialMenuItems) {
         expect(menuItem.type == menuCubit.selectedItem, false,
             reason: 'No MenuItem should be selected initially');
@@ -617,7 +614,7 @@ void main() {
         }
       }
 
-      expect(selectedMenuItem, isNotNull, 
+      expect(selectedMenuItem, isNotNull,
           reason: 'Should find the profile MenuItem in the widget tree');
 
       // Now check if the selected MenuItem has visual indication
@@ -633,7 +630,8 @@ void main() {
       // Check that the selected MenuItem's AnimatedContainer has primary color
       bool foundPrimaryColorInSelectedItem = false;
       for (final finder in animatedContainersInSelectedItem.evaluate()) {
-        final container = tester.widget<AnimatedContainer>(find.byWidget(finder.widget));
+        final container =
+            tester.widget<AnimatedContainer>(find.byWidget(finder.widget));
         final decoration = container.decoration as BoxDecoration?;
         if (decoration?.color == primaryColor) {
           foundPrimaryColorInSelectedItem = true;
@@ -641,13 +639,15 @@ void main() {
         }
       }
 
-      expect(foundPrimaryColorInSelectedItem, true, 
-        reason: 'Selected MenuItem should have AnimatedContainer with primary color');
+      expect(foundPrimaryColorInSelectedItem, true,
+          reason:
+              'Selected MenuItem should have AnimatedContainer with primary color');
     });
   });
 
   group('CollapsibleSideMenu Behavior Tests', () {
-    testWidgets('should maintain consistent state during user interactions', (tester) async {
+    testWidgets('should maintain consistent state during user interactions',
+        (tester) async {
       // When
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
@@ -655,19 +655,19 @@ void main() {
       // Initially should show correct menu type
       expect(find.byType(SideMenu), findsOneWidget);
       expect(find.byType(AdminSideMenu), findsNothing);
-      
+
       // Should handle multiple interactions consistently
       final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
       await gesture.addPointer(location: Offset.zero);
       addTearDown(gesture.removePointer);
-      
+
       final collapsibleSideMenu = find.byType(CollapsibleSideMenu);
       await gesture.moveTo(tester.getCenter(collapsibleSideMenu));
       await tester.pumpAndSettle();
-      
+
       // Verify hover shows toggle button
       expect(find.byType(MenuToggleButton), findsOneWidget);
-      
+
       // Verify hover exit hides toggle button
       await gesture.moveTo(const Offset(1000, 1000));
       await tester.pumpAndSettle();
