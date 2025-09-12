@@ -2952,11 +2952,35 @@ abstract class AppLocalizations {
   /// **'Border Radius'**
   String get pagebuilder_calendly_config_border_radius;
 
+  /// Menu item for Calendly text color in the Calendly configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Text Color'**
+  String get pagebuilder_calendly_config_text_color;
+
+  /// Menu item for Calendly background color in the Calendly configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Background Color'**
+  String get pagebuilder_calendly_config_background_color;
+
+  /// Menu item for Calendly primary color in the Calendly configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Color'**
+  String get pagebuilder_calendly_config_primary_color;
+
   /// Title for the Calendly event selection in the pagebuilder config menu
   ///
   /// In en, this message translates to:
   /// **'Calendly Event Selection'**
   String get pagebuilder_calendly_content_title;
+
+  /// Checkbox label to hide event details in Calendly configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Hide Event Details'**
+  String get pagebuilder_calendly_content_hide_event_details;
 
   /// Loading indicator when loading event types
   ///

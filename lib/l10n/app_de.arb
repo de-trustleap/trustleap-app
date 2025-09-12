@@ -1928,9 +1928,25 @@
     "@pagebuilder_calendly_config_border_radius": {
         "description": "Menüpunkt für Calendly Eckenradius in der Calendly Konfiguration im Pagebuilder Config Menü"
     },
+    "pagebuilder_calendly_config_text_color": "Textfarbe",
+    "@pagebuilder_calendly_config_text_color": {
+        "description": "Menüpunkt für Calendly Textfarbe in der Calendly Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_calendly_config_background_color": "Hintergrundfarbe",
+    "@pagebuilder_calendly_config_background_color": {
+        "description": "Menüpunkt für Calendly Hintergrundfarbe in der Calendly Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_calendly_config_primary_color": "Akzentfarbe",
+    "@pagebuilder_calendly_config_primary_color": {
+        "description": "Menüpunkt für Calendly Akzentfarbe in der Calendly Konfiguration im Pagebuilder Config Menü"
+    },
     "pagebuilder_calendly_content_title": "Calendly Event Auswahl",
     "@pagebuilder_calendly_content_title": {
         "description": "Titel für die Calendly Event Auswahl im Pagebuilder Config Menü"
+    },
+    "pagebuilder_calendly_content_hide_event_details": "Event Details verbergen",
+    "@pagebuilder_calendly_content_hide_event_details": {
+        "description": "Checkbox Label zum Verbergen der Event Details in der Calendly Konfiguration"
     },
     "pagebuilder_calendly_content_loading_event_types": "Event Types werden geladen...",
     "@pagebuilder_calendly_content_loading_event_types": {
