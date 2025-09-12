@@ -9,7 +9,9 @@
       "Bash(grep:*)",
       "Bash(find:*)",
       "Bash(dart test:*)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebFetch(domain:api.flutter.dev)"
     ],
     "deny": []
   }
