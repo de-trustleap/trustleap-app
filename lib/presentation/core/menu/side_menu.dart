@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/presentation/core/menu/menu_item.dart';
 import 'package:finanzbegleiter/presentation/core/menu/menu_logo.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/theme_switch.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class SideMenu extends StatelessWidget {
   final bool collapsed;
@@ -25,7 +25,7 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     bool shouldShowThemeSwitcher = widthAnimation != null &&
         widthAnimation!.value >= MenuDimensions.menuOpenWidth;
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)
         .permissions;
