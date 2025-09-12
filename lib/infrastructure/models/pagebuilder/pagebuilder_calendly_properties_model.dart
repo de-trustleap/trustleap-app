@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:flutter/material.dart';
 
 class PagebuilderCalendlyPropertiesModel extends Equatable
     implements PageBuilderProperties {
@@ -9,14 +11,21 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
   final double? borderRadius;
   final String? calendlyEventURL;
   final String? eventTypeName;
+  final String? textColor;
+  final String? backgroundColor;
+  final String? primaryColor;
+  final bool? hideEventTypeDetails;
 
-  const PagebuilderCalendlyPropertiesModel({
-    required this.width,
-    required this.height,
-    required this.borderRadius,
-    required this.calendlyEventURL,
-    required this.eventTypeName,
-  });
+  const PagebuilderCalendlyPropertiesModel(
+      {required this.width,
+      required this.height,
+      required this.borderRadius,
+      required this.calendlyEventURL,
+      required this.eventTypeName,
+      required this.textColor,
+      required this.backgroundColor,
+      required this.primaryColor,
+      required this.hideEventTypeDetails});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -25,56 +34,110 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
     if (borderRadius != null) map['borderRadius'] = borderRadius;
     if (calendlyEventURL != null) map['calendlyEventURL'] = calendlyEventURL;
     if (eventTypeName != null) map['eventTypeName'] = eventTypeName;
+    if (textColor != null) map['textColor'] = textColor;
+    if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
+    if (primaryColor != null) map['primaryColor'] = primaryColor;
+    if (hideEventTypeDetails != null) {
+      map['hideEventTypeDetails'] = hideEventTypeDetails;
+    }
     return map;
   }
 
   factory PagebuilderCalendlyPropertiesModel.fromMap(Map<String, dynamic> map) {
     return PagebuilderCalendlyPropertiesModel(
-      width: map['width'] != null ? map['width'] as double : null,
-      height: map['height'] != null ? map['height'] as double : null,
-      borderRadius: map['borderRadius'] != null ? map['borderRadius'] as double : null,
-      calendlyEventURL: map['calendlyEventURL'] != null ? map['calendlyEventURL'] as String : null,
-      eventTypeName: map['eventTypeName'] != null ? map['eventTypeName'] as String : null,
-    );
+        width: map['width'] != null ? map['width'] as double : null,
+        height: map['height'] != null ? map['height'] as double : null,
+        borderRadius:
+            map['borderRadius'] != null ? map['borderRadius'] as double : null,
+        calendlyEventURL: map['calendlyEventURL'] != null
+            ? map['calendlyEventURL'] as String
+            : null,
+        eventTypeName: map['eventTypeName'] != null
+            ? map['eventTypeName'] as String
+            : null,
+        textColor: map['textColor'] != null ? map['textColor'] as String : null,
+        backgroundColor: map['backgroundColor'] != null
+            ? map['backgroundColor'] as String
+            : null,
+        primaryColor:
+            map['primaryColor'] != null ? map['primaryColor'] as String : null,
+        hideEventTypeDetails: map['hideEventTypeDetails'] != null
+            ? map['hideEventTypeDetails'] as bool
+            : null);
   }
 
-  PagebuilderCalendlyPropertiesModel copyWith({
-    double? width,
-    double? height,
-    double? borderRadius,
-    String? calendlyEventURL,
-    String? eventTypeName,
-  }) {
+  PagebuilderCalendlyPropertiesModel copyWith(
+      {double? width,
+      double? height,
+      double? borderRadius,
+      String? calendlyEventURL,
+      String? eventTypeName,
+      String? textColor,
+      String? backgroundColor,
+      String? primaryColor,
+      bool? hideEventTypeDetails}) {
     return PagebuilderCalendlyPropertiesModel(
-      width: width ?? this.width,
-      height: height ?? this.height,
-      borderRadius: borderRadius ?? this.borderRadius,
-      calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
-      eventTypeName: eventTypeName ?? this.eventTypeName,
-    );
+        width: width ?? this.width,
+        height: height ?? this.height,
+        borderRadius: borderRadius ?? this.borderRadius,
+        calendlyEventURL: calendlyEventURL ?? this.calendlyEventURL,
+        eventTypeName: eventTypeName ?? this.eventTypeName,
+        textColor: textColor ?? this.textColor,
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        primaryColor: primaryColor ?? this.primaryColor,
+        hideEventTypeDetails:
+            hideEventTypeDetails ?? this.hideEventTypeDetails);
   }
 
   PagebuilderCalendlyProperties toDomain() {
     return PagebuilderCalendlyProperties(
-      width: width,
-      height: height,
-      borderRadius: borderRadius,
-      calendlyEventURL: calendlyEventURL,
-      eventTypeName: eventTypeName,
-    );
+        width: width,
+        height: height,
+        borderRadius: borderRadius,
+        calendlyEventURL: calendlyEventURL,
+        eventTypeName: eventTypeName,
+        textColor: textColor != null
+            ? Color(ColorUtility.getHexIntFromString(textColor!))
+            : null,
+        backgroundColor: backgroundColor != null
+            ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
+            : null,
+        primaryColor: primaryColor != null
+            ? Color(ColorUtility.getHexIntFromString(primaryColor!))
+            : null,
+        hideEventTypeDetails: hideEventTypeDetails);
   }
 
   factory PagebuilderCalendlyPropertiesModel.fromDomain(
       PagebuilderCalendlyProperties properties) {
     return PagebuilderCalendlyPropertiesModel(
-      width: properties.width,
-      height: properties.height,
-      borderRadius: properties.borderRadius,
-      calendlyEventURL: properties.calendlyEventURL,
-      eventTypeName: properties.eventTypeName,
-    );
+        width: properties.width,
+        height: properties.height,
+        borderRadius: properties.borderRadius,
+        calendlyEventURL: properties.calendlyEventURL,
+        eventTypeName: properties.eventTypeName,
+        textColor: properties.textColor?.toARGB32() != null
+            ? properties.textColor!.toARGB32().toRadixString(16)
+            : null,
+        backgroundColor: properties.backgroundColor?.toARGB32() != null
+            ? properties.backgroundColor!.toARGB32().toRadixString(16)
+            : null,
+        primaryColor: properties.primaryColor?.toARGB32() != null
+            ? properties.primaryColor!.toARGB32().toRadixString(16)
+            : null,
+        hideEventTypeDetails: properties.hideEventTypeDetails);
   }
 
   @override
-  List<Object?> get props => [width, height, borderRadius, calendlyEventURL, eventTypeName];
+  List<Object?> get props => [
+        width,
+        height,
+        borderRadius,
+        calendlyEventURL,
+        eventTypeName,
+        textColor,
+        backgroundColor,
+        primaryColor,
+        hideEventTypeDetails
+      ];
 }

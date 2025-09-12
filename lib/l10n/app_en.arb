@@ -1928,9 +1928,25 @@
     "@pagebuilder_calendly_config_border_radius": {
         "description": "Menu item for Calendly border radius in the Calendly configuration in the pagebuilder config menu"
     },
+    "pagebuilder_calendly_config_text_color": "Text Color",
+    "@pagebuilder_calendly_config_text_color": {
+        "description": "Menu item for Calendly text color in the Calendly configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_calendly_config_background_color": "Background Color",
+    "@pagebuilder_calendly_config_background_color": {
+        "description": "Menu item for Calendly background color in the Calendly configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_calendly_config_primary_color": "Primary Color",
+    "@pagebuilder_calendly_config_primary_color": {
+        "description": "Menu item for Calendly primary color in the Calendly configuration in the pagebuilder config menu"
+    },
     "pagebuilder_calendly_content_title": "Calendly Event Selection",
     "@pagebuilder_calendly_content_title": {
         "description": "Title for the Calendly event selection in the pagebuilder config menu"
+    },
+    "pagebuilder_calendly_content_hide_event_details": "Hide Event Details",
+    "@pagebuilder_calendly_content_hide_event_details": {
+        "description": "Checkbox label to hide event details in Calendly configuration"
     },
     "pagebuilder_calendly_content_loading_event_types": "Loading event types...",
     "@pagebuilder_calendly_content_loading_event_types": {

@@ -102,6 +102,7 @@ class _PagebuilderConfigMenuCalendlyContentState
     PagebuilderCalendlyProperties properties,
     PagebuilderBloc pagebuilderCubit,
   ) {
+    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
     final validValue = eventTypes.any((eventType) =>
@@ -147,6 +148,22 @@ class _PagebuilderConfigMenuCalendlyContentState
               );
             }
           },
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Checkbox(
+              value: properties.hideEventTypeDetails ?? false,
+              onChanged: (bool? value) {
+                updateCalendlyProperties(
+                  properties.copyWith(hideEventTypeDetails: value ?? false),
+                  pagebuilderCubit,
+                );
+              },
+            ),
+            Text(localization.pagebuilder_calendly_content_hide_event_details,
+                style: themeData.textTheme.bodySmall),
+          ],
         ),
       ],
     );

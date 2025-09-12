@@ -1669,7 +1669,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pagebuilder_calendly_config_border_radius => 'Border Radius';
 
   @override
+  String get pagebuilder_calendly_config_text_color => 'Text Color';
+
+  @override
+  String get pagebuilder_calendly_config_background_color => 'Background Color';
+
+  @override
+  String get pagebuilder_calendly_config_primary_color => 'Primary Color';
+
+  @override
   String get pagebuilder_calendly_content_title => 'Calendly Event Selection';
+
+  @override
+  String get pagebuilder_calendly_content_hide_event_details =>
+      'Hide Event Details';
 
   @override
   String get pagebuilder_calendly_content_loading_event_types =>
