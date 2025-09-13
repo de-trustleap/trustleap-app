@@ -65,8 +65,8 @@ class PageBuilderShadowModel extends Equatable {
 
   factory PageBuilderShadowModel.fromDomain(PageBuilderShadow shadow) {
     return PageBuilderShadowModel(
-        color: shadow.color?.toARGB32() != null
-            ? shadow.color!.toARGB32().toRadixString(16)
+        color: shadow.color != null
+            ? ColorUtility.colorToHex(shadow.color!)
             : null,
         spreadRadius: shadow.spreadRadius,
         blurRadius: shadow.blurRadius,

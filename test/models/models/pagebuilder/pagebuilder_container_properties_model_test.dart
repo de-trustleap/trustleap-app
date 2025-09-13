@@ -10,21 +10,21 @@ void main() {
       // Given
       final model =
           PageBuilderContainerPropertiesModel(borderRadius: 12.0, shadow: {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 2,
         "blurRadius": 1,
         "offset": {"x": 5, "y": 5}
       });
       final expectedResult =
           PageBuilderContainerPropertiesModel(borderRadius: 12.0, shadow: {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 5,
         "blurRadius": 5,
         "offset": {"x": 5, "y": 6}
       });
       // When
       final result = model.copyWith(shadow: {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 5,
         "blurRadius": 5,
         "offset": {"x": 5, "y": 6}
@@ -39,7 +39,7 @@ void main() {
       // Given
       final model =
           PageBuilderContainerPropertiesModel(borderRadius: 12.0, shadow: {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 2,
         "blurRadius": 1,
         "offset": {"x": 5, "y": 5}
@@ -47,7 +47,7 @@ void main() {
       final expectedResult = {
         "borderRadius": 12.0,
         "shadow": {
-          "color": "ff000000",
+          "color": "FF000000",
           "spreadRadius": 2,
           "blurRadius": 1,
           "offset": {"x": 5, "y": 5}
@@ -66,7 +66,7 @@ void main() {
       final map = {
         "borderRadius": 12.0,
         "shadow": {
-          "color": "ff000000",
+          "color": "FF000000",
           "spreadRadius": 2,
           "blurRadius": 1,
           "offset": {"x": 5, "y": 5}
@@ -74,7 +74,7 @@ void main() {
       };
       final expectedResult =
           PageBuilderContainerPropertiesModel(borderRadius: 12.0, shadow: {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 2,
         "blurRadius": 1,
         "offset": {"x": 5, "y": 5}
@@ -93,7 +93,7 @@ void main() {
       // Given
       final model =
           PageBuilderContainerPropertiesModel(borderRadius: 12.0, shadow: {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 2.0,
         "blurRadius": 1.0,
         "offset": {"x": 5.0, "y": 5.0}
@@ -101,7 +101,7 @@ void main() {
       final expectedResult = PageBuilderContainerProperties(
           borderRadius: 12.0,
           shadow: PageBuilderShadow(
-              color: Color(0xff000000),
+              color: Color(0xFF000000),
               spreadRadius: 2,
               blurRadius: 1,
               offset: Offset(5, 5)));
@@ -120,13 +120,13 @@ void main() {
       final model = PageBuilderContainerProperties(
           borderRadius: 12.0,
           shadow: PageBuilderShadow(
-              color: Color(0xff000000),
+              color: Color(0xFF000000),
               spreadRadius: 2,
               blurRadius: 1,
               offset: Offset(5, 5)));
       final expectedResult =
           PageBuilderContainerPropertiesModel(borderRadius: 12.0, shadow: {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 2.0,
         "blurRadius": 1.0,
         "offset": {"x": 5.0, "y": 5.0}
@@ -143,14 +143,14 @@ void main() {
       // Given
       final properties1 =
           PageBuilderContainerPropertiesModel(borderRadius: 12.0, shadow: {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 2.0,
         "blurRadius": 1.0,
         "offset": {"x": 5.0, "y": 5.0}
       });
       final properties2 =
           PageBuilderContainerPropertiesModel(borderRadius: 12.0, shadow: {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 2.0,
         "blurRadius": 1.0,
         "offset": {"x": 5.0, "y": 5.0}

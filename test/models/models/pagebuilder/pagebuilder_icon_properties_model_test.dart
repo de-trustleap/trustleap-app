@@ -68,7 +68,7 @@ void main() {
       final model = PageBuilderIconProperties(
           code: "25A", size: 24.0, color: Colors.black);
       final expectedResult = PageBuilderIconPropertiesModel(
-          code: "25A", size: 24.0, color: "ff000000");
+          code: "25A", size: 24.0, color: "FF000000");
       // When
       final result = PageBuilderIconPropertiesModel.fromDomain(model);
       // Then
@@ -80,9 +80,9 @@ void main() {
     test("check if value equality works", () {
       // Given
       final properties1 = PageBuilderIconPropertiesModel(
-          code: "25A", size: 24.0, color: "ff000000");
+          code: "25A", size: 24.0, color: "FF000000");
       final properties2 = PageBuilderIconPropertiesModel(
-          code: "25A", size: 24.0, color: "ff000000");
+          code: "25A", size: 24.0, color: "FF000000");
       // Then
       expect(properties1, properties2);
     });

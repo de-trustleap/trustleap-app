@@ -79,7 +79,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
         !_isPending() &&
         responsiveValue.isDesktop) {
       return InkWell(
-          onTap: () => navigator.openInNewTab(
+          onTap: () => navigator.navigate(
               "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
           child: buildTile(themeData, responsiveValue, localizations, context));
     } else {
@@ -174,7 +174,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                   ],
                   if (!(landingPage.isActive ?? false) &&
                       !(landingPage.isDefaultPage ?? false)) ...[
-                    SelectableText(localizations.landingpage_overview_deactivated,
+                    SelectableText(
+                        localizations.landingpage_overview_deactivated,
                         style: themeData.textTheme.bodySmall!.copyWith(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

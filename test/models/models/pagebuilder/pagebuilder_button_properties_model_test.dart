@@ -34,13 +34,13 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "ffffffff",
+          backgroundColor: "FFFFFFFF",
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = {
         "width": 200,
         "height": 60,
         "borderRadius": 12,
-        "backgroundColor": "ffffffff",
+        "backgroundColor": "FFFFFFFF",
         "textProperties": {"text": "Test", "fontSize": 16.0}
       };
       // When
@@ -57,14 +57,14 @@ void main() {
         "width": 200.0,
         "height": 60.0,
         "borderRadius": 12.0,
-        "backgroundColor": "ffffffff",
+        "backgroundColor": "FFFFFFFF",
         "textProperties": {"text": "Test", "fontSize": 16.0}
       };
       final expectedResult = PageBuilderButtonPropertiesModel(
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "ffffffff",
+          backgroundColor: "FFFFFFFF",
           textProperties: {"text": "Test", "fontSize": 16.0});
       // When
       final result = PageBuilderButtonPropertiesModel.fromMap(map);
@@ -82,7 +82,7 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "ffffffff",
+          backgroundColor: "FFFFFFFF",
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = PageBuilderButtonProperties(
           width: 200,
@@ -132,7 +132,7 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "ffffffff",
+          backgroundColor: "FFFFFFFF",
           textProperties: {
             "text": "Test",
             "fontSize": 16.0,
@@ -152,7 +152,7 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "ffffffff",
+          backgroundColor: "FFFFFFFF",
           textProperties: {
             "text": "Test",
             "fontSize": 16.0,
@@ -162,7 +162,7 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "ffffffff",
+          backgroundColor: "FFFFFFFF",
           textProperties: {
             "text": "Test",
             "fontSize": 16.0,

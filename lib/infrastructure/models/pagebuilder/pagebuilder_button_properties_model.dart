@@ -80,8 +80,8 @@ class PageBuilderButtonPropertiesModel extends Equatable
         width: properties.width,
         height: properties.height,
         borderRadius: properties.borderRadius,
-        backgroundColor: properties.backgroundColor?.toARGB32() != null
-            ? properties.backgroundColor!.toARGB32().toRadixString(16)
+        backgroundColor: properties.backgroundColor != null
+            ? ColorUtility.colorToHex(properties.backgroundColor!)
             : null,
         textProperties: properties.textProperties != null
             ? PageBuilderTextPropertiesModel.fromDomain(

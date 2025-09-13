@@ -114,11 +114,11 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
         minLines: properties.minLines,
         maxLines: properties.maxLines,
         isRequired: properties.isRequired,
-        backgroundColor: properties.backgroundColor?.toARGB32() != null
-            ? properties.backgroundColor!.toARGB32().toRadixString(16)
+        backgroundColor: properties.backgroundColor != null
+            ? ColorUtility.colorToHex(properties.backgroundColor!)
             : null,
-        borderColor: properties.borderColor?.toARGB32() != null
-            ? properties.borderColor!.toARGB32().toRadixString(16)
+        borderColor: properties.borderColor != null
+            ? ColorUtility.colorToHex(properties.borderColor!)
             : null,
         placeHolderTextProperties: properties.placeHolderTextProperties != null
             ? PageBuilderTextPropertiesModel.fromDomain(

@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
@@ -25,7 +26,7 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
   void initState() {
     super.initState();
     _selectedColor = widget.initialColor;
-    _hexTextFieldController.text = _colorToHex(_selectedColor);
+    _hexTextFieldController.text = ColorUtility.colorToHex(_selectedColor, includeHashPrefix: true);
   }
 
   @override
@@ -35,15 +36,6 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
       setState(() {
         _selectedColor = widget.initialColor;
       });
-    }
-  }
-
-  String _colorToHex(Color color) {
-    try {
-      String hex = color.toARGB32().toRadixString(16).toUpperCase();
-      return "#${hex.padLeft(8, '0')}";
-    } catch (e) {
-      return "#00000000";
     }
   }
 
@@ -96,7 +88,7 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
                     setState(() {
                       _selectedColor = color;
                       _hexTextFieldController.text =
-                          _colorToHex(_selectedColor);
+                          ColorUtility.colorToHex(_selectedColor, includeHashPrefix: true);
                       widget.onSelected(_selectedColor);
                     });
                   },

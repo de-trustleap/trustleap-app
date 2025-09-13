@@ -15,7 +15,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "ff000000");
+          overlayColor: "FF000000");
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
@@ -24,7 +24,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "ff000000");
+          overlayColor: "FF000000");
       // When
       final result = model.copyWith(height: 400.0);
       // Then
@@ -43,7 +43,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "ff000000");
+          overlayColor: "FF000000");
       final expectedResult = {
         "url": "https://test.de",
         "borderRadius": 12.0,
@@ -52,7 +52,7 @@ void main() {
         "contentMode": "cover",
         "showPromoterImage": false,
         "newImageBase64": "image",
-        "overlayColor": "ff000000"
+        "overlayColor": "FF000000"
       };
       // When
       final result = model.toMap();
@@ -72,7 +72,7 @@ void main() {
         "contentMode": "cover",
         "showPromoterImage": false,
         "newImageBase64": "image",
-        "overlayColor": "ff000000"
+        "overlayColor": "FF000000"
       };
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
@@ -82,7 +82,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "ff000000");
+          overlayColor: "FF000000");
       // When
       final result = PageBuilderImagePropertiesModel.fromMap(map);
       // Then
@@ -103,7 +103,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "ff000000");
+          overlayColor: "FF000000");
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 12.0,
@@ -140,7 +140,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: null,
-          overlayColor: "ff000000");
+          overlayColor: "FF000000");
       // When
       final result = PageBuilderImagePropertiesModel.fromDomain(model);
       // Then
@@ -159,7 +159,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: null,
-          overlayColor: "ff000000");
+          overlayColor: "FF000000");
       final properties2 = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
@@ -168,7 +168,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: null,
-          overlayColor: "ff000000");
+          overlayColor: "FF000000");
       // Then
       expect(properties1, properties2);
     });

@@ -15,7 +15,7 @@ void main() {
           minLines: 1,
           maxLines: 1,
           isRequired: false,
-          backgroundColor: "ff000000",
+          backgroundColor: "FF000000",
           borderColor: null,
           placeHolderTextProperties: {
             "text": "Test",
@@ -32,7 +32,7 @@ void main() {
           minLines: 1,
           maxLines: 1,
           isRequired: false,
-          backgroundColor: "fff00000",
+          backgroundColor: "FFf00000",
           borderColor: null,
           placeHolderTextProperties: {
             "text": "Test",
@@ -45,7 +45,7 @@ void main() {
             "fontFamily": "Poppins"
           });
       // When
-      final result = model.copyWith(backgroundColor: "fff00000");
+      final result = model.copyWith(backgroundColor: "FFf00000");
       // Then
       expect(result, expectedResult);
     });
@@ -59,7 +59,7 @@ void main() {
           minLines: 1,
           maxLines: 1,
           isRequired: false,
-          backgroundColor: "ff000000",
+          backgroundColor: "FF000000",
           borderColor: null,
           placeHolderTextProperties: {
             "text": "Test",
@@ -76,7 +76,7 @@ void main() {
         "minLines": 1,
         "maxLines": 1,
         "isRequired": false,
-        "backgroundColor": "ff000000",
+        "backgroundColor": "FF000000",
         "placeHolderTextProperties": {
           "text": "Test",
           "fontSize": 14.0,
@@ -103,7 +103,7 @@ void main() {
         "minLines": 1,
         "maxLines": 1,
         "isRequired": false,
-        "backgroundColor": "ff000000",
+        "backgroundColor": "FF000000",
         "placeHolderTextProperties": {
           "text": "Test",
           "fontSize": 14.0,
@@ -120,7 +120,7 @@ void main() {
           minLines: 1,
           maxLines: 1,
           isRequired: false,
-          backgroundColor: "ff000000",
+          backgroundColor: "FF000000",
           borderColor: null,
           placeHolderTextProperties: {
             "text": "Test",
@@ -149,7 +149,7 @@ void main() {
           minLines: 1,
           maxLines: 1,
           isRequired: false,
-          backgroundColor: "ff000000",
+          backgroundColor: "FF000000",
           borderColor: null,
           placeHolderTextProperties: {
             "text": "Test",
@@ -236,7 +236,7 @@ void main() {
           minLines: 1,
           maxLines: 1,
           isRequired: false,
-          backgroundColor: "ff000000",
+          backgroundColor: "FF000000",
           borderColor: null,
           placeHolderTextProperties: {
             "text": "Test",
@@ -265,7 +265,7 @@ void main() {
           minLines: 1,
           maxLines: 1,
           isRequired: false,
-          backgroundColor: "ff000000",
+          backgroundColor: "FF000000",
           borderColor: null,
           placeHolderTextProperties: {
             "text": "Test",
@@ -284,7 +284,7 @@ void main() {
           minLines: 1,
           maxLines: 1,
           isRequired: false,
-          backgroundColor: "ff000000",
+          backgroundColor: "FF000000",
           borderColor: null,
           placeHolderTextProperties: {
             "text": "Test",

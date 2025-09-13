@@ -16,7 +16,7 @@ void main() {
           lineHeight: 1.5,
           letterSpacing: null,
           textShadow: null,
-          color: "ff000000",
+          color: "FF000000",
           alignment: "center",
           isBold: null,
           isItalic: null);
@@ -27,7 +27,7 @@ void main() {
           lineHeight: 1.2,
           letterSpacing: null,
           textShadow: null,
-          color: "ff000000",
+          color: "FF000000",
           alignment: "center",
           isBold: null,
           isItalic: null);
@@ -48,7 +48,7 @@ void main() {
           lineHeight: 1.5,
           letterSpacing: null,
           textShadow: null,
-          color: "ff000000",
+          color: "FF000000",
           alignment: "center",
           isBold: null,
           isItalic: null);
@@ -57,7 +57,7 @@ void main() {
         "fontSize": 20.0,
         "fontFamily": "Poppins",
         "lineHeight": 1.5,
-        "color": "ff000000",
+        "color": "FF000000",
         "alignment": "center"
       };
       // When
@@ -75,7 +75,7 @@ void main() {
         "fontSize": 20.0,
         "fontFamily": "Poppins",
         "lineHeight": 1.5,
-        "color": "ff000000",
+        "color": "FF000000",
         "alignment": "center"
       };
       final expectedResult = PageBuilderTextPropertiesModel(
@@ -85,7 +85,7 @@ void main() {
           lineHeight: 1.5,
           letterSpacing: null,
           textShadow: null,
-          color: "ff000000",
+          color: "FF000000",
           alignment: "center",
           isBold: null,
           isItalic: null);
@@ -108,7 +108,7 @@ void main() {
           lineHeight: 1.5,
           letterSpacing: null,
           textShadow: null,
-          color: "ff000000",
+          color: "FF000000",
           alignment: "center",
           isBold: null,
           isItalic: null);
@@ -153,7 +153,7 @@ void main() {
           lineHeight: 1.5,
           letterSpacing: null,
           textShadow: null,
-          color: "ff000000",
+          color: "FF000000",
           alignment: "center",
           isBold: null,
           isItalic: null);
@@ -174,7 +174,7 @@ void main() {
           lineHeight: 1.5,
           letterSpacing: null,
           textShadow: null,
-          color: "ff000000",
+          color: "FF000000",
           alignment: "center",
           isBold: null,
           isItalic: null);
@@ -197,7 +197,7 @@ void main() {
           lineHeight: 1.5,
           letterSpacing: null,
           textShadow: null,
-          color: "ff000000",
+          color: "FF000000",
           alignment: "center",
           isBold: null,
           isItalic: null);
@@ -208,7 +208,7 @@ void main() {
           lineHeight: 1.5,
           letterSpacing: null,
           textShadow: null,
-          color: "ff000000",
+          color: "FF000000",
           alignment: "center",
           isBold: null,
           isItalic: null);

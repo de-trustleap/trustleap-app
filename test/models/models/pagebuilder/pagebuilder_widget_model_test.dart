@@ -61,7 +61,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30,
-          background: {"backgroundColor": "ffffffff"},
+          background: {"backgroundColor": "FFFFFFFF"},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -73,7 +73,7 @@ void main() {
         "properties": {"borderRadius": 12},
         "children": [],
         "widthPercentage": 30,
-        "background": {"backgroundColor": "ffffffff"},
+        "background": {"backgroundColor": "FFFFFFFF"},
         "maxWidth": 300
       };
       // When
@@ -92,7 +92,7 @@ void main() {
         "properties": {"borderRadius": 12},
         "children": [],
         "widthPercentage": 30.0,
-        "background": {"backgroundColor": "ffffffff"},
+        "background": {"backgroundColor": "FFFFFFFF"},
         "maxWidth": 300.0
       };
       final expectedResult = PageBuilderWidgetModel(
@@ -103,7 +103,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "ffffffff"},
+          background: {"backgroundColor": "FFFFFFFF"},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -129,7 +129,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "ffffffff"},
+          background: {"backgroundColor": "FFFFFFFF"},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -191,7 +191,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "ffffffff"},
+          background: {"backgroundColor": "FFFFFFFF"},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -300,7 +300,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "ffffffff"},
+          background: {"backgroundColor": "FFFFFFFF"},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -314,7 +314,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "ffffffff"},
+          background: {"backgroundColor": "FFFFFFFF"},
           hoverBackground: null,
           padding: null,
           margin: null,
