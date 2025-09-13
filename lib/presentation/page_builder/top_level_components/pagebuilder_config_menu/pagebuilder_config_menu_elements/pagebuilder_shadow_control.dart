@@ -123,20 +123,20 @@ class _PagebuilderTextShadowControlState
                                 .landingpage_pagebuilder_text_config_shadow_alert_spread_radius,
                             style: themeData.textTheme.bodySmall),
                         const SizedBox(width: 20),
+                        FormTextfield(
+                            maxWidth: 200,
+                            controller: spreadRadiusController,
+                            disabled: false,
+                            desktopStyle: themeData.textTheme.bodySmall,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                decimal: true),
+                            inputFormatters: [
+                              DecimalNumberFormatter(
+                                  maxIntegerDigits: 3, maxDecimalDigits: 2)
+                            ],
+                            placeholder: "")
                       ]),
                   const SizedBox(height: 20),
-                  FormTextfield(
-                      maxWidth: 200,
-                      controller: spreadRadiusController,
-                      disabled: false,
-                      desktopStyle: themeData.textTheme.bodySmall,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: [
-                        DecimalNumberFormatter(
-                            maxIntegerDigits: 3, maxDecimalDigits: 2)
-                      ],
-                      placeholder: "")
                 ],
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

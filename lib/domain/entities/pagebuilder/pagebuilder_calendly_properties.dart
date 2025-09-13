@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class PagebuilderCalendlyProperties extends Equatable
   final Color? backgroundColor;
   final Color? primaryColor;
   final bool? hideEventTypeDetails;
+  final PageBuilderShadow? shadow;
 
   const PagebuilderCalendlyProperties(
       {required this.width,
@@ -23,7 +25,8 @@ class PagebuilderCalendlyProperties extends Equatable
       required this.textColor,
       required this.backgroundColor,
       required this.primaryColor,
-      required this.hideEventTypeDetails});
+      required this.hideEventTypeDetails,
+      required this.shadow});
 
   PagebuilderCalendlyProperties copyWith(
       {double? width,
@@ -34,7 +37,8 @@ class PagebuilderCalendlyProperties extends Equatable
       Color? textColor,
       Color? backgroundColor,
       Color? primaryColor,
-      bool? hideEventTypeDetails}) {
+      bool? hideEventTypeDetails,
+      PageBuilderShadow? shadow}) {
     return PagebuilderCalendlyProperties(
         width: width ?? this.width,
         height: height ?? this.height,
@@ -44,8 +48,8 @@ class PagebuilderCalendlyProperties extends Equatable
         textColor: textColor ?? this.textColor,
         backgroundColor: backgroundColor ?? this.backgroundColor,
         primaryColor: primaryColor ?? this.primaryColor,
-        hideEventTypeDetails:
-            hideEventTypeDetails ?? this.hideEventTypeDetails);
+        hideEventTypeDetails: hideEventTypeDetails ?? this.hideEventTypeDetails,
+        shadow: shadow ?? this.shadow);
   }
 
   @override
@@ -58,6 +62,7 @@ class PagebuilderCalendlyProperties extends Equatable
         textColor,
         backgroundColor,
         primaryColor,
-        hideEventTypeDetails
+        hideEventTypeDetails,
+        shadow
       ];
 }

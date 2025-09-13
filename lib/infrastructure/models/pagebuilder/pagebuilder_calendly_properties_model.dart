@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/infrastructure/models/model_helper/shadow_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_shadow_model.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderCalendlyPropertiesModel extends Equatable
@@ -15,6 +17,7 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
   final String? backgroundColor;
   final String? primaryColor;
   final bool? hideEventTypeDetails;
+  final Map<String, dynamic>? shadow;
 
   const PagebuilderCalendlyPropertiesModel(
       {required this.width,
@@ -25,7 +28,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
       required this.textColor,
       required this.backgroundColor,
       required this.primaryColor,
-      required this.hideEventTypeDetails});
+      required this.hideEventTypeDetails,
+      required this.shadow});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -40,6 +44,7 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
     if (hideEventTypeDetails != null) {
       map['hideEventTypeDetails'] = hideEventTypeDetails;
     }
+    if (shadow != null) map['shadow'] = shadow;
     return map;
   }
 
@@ -63,6 +68,9 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
             map['primaryColor'] != null ? map['primaryColor'] as String : null,
         hideEventTypeDetails: map['hideEventTypeDetails'] != null
             ? map['hideEventTypeDetails'] as bool
+            : null,
+        shadow: map['shadow'] != null
+            ? map['shadow'] as Map<String, dynamic>
             : null);
   }
 
@@ -75,7 +83,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
       String? textColor,
       String? backgroundColor,
       String? primaryColor,
-      bool? hideEventTypeDetails}) {
+      bool? hideEventTypeDetails,
+      Map<String, dynamic>? shadow}) {
     return PagebuilderCalendlyPropertiesModel(
         width: width ?? this.width,
         height: height ?? this.height,
@@ -85,8 +94,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         textColor: textColor ?? this.textColor,
         backgroundColor: backgroundColor ?? this.backgroundColor,
         primaryColor: primaryColor ?? this.primaryColor,
-        hideEventTypeDetails:
-            hideEventTypeDetails ?? this.hideEventTypeDetails);
+        hideEventTypeDetails: hideEventTypeDetails ?? this.hideEventTypeDetails,
+        shadow: shadow ?? this.shadow);
   }
 
   PagebuilderCalendlyProperties toDomain() {
@@ -105,7 +114,10 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         primaryColor: primaryColor != null
             ? Color(ColorUtility.getHexIntFromString(primaryColor!))
             : null,
-        hideEventTypeDetails: hideEventTypeDetails);
+        hideEventTypeDetails: hideEventTypeDetails,
+        shadow: shadow != null
+            ? PageBuilderShadowModel.fromMap(shadow!).toDomain()
+            : null);
   }
 
   factory PagebuilderCalendlyPropertiesModel.fromDomain(
@@ -125,7 +137,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         primaryColor: properties.primaryColor?.toARGB32() != null
             ? properties.primaryColor!.toARGB32().toRadixString(16)
             : null,
-        hideEventTypeDetails: properties.hideEventTypeDetails);
+        hideEventTypeDetails: properties.hideEventTypeDetails,
+        shadow: ShadowMapper.getMapFromShadow(properties.shadow));
   }
 
   @override
@@ -138,6 +151,7 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         textColor,
         backgroundColor,
         primaryColor,
-        hideEventTypeDetails
+        hideEventTypeDetails,
+        shadow
       ];
 }
