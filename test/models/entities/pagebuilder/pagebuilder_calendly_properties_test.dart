@@ -18,6 +18,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
         width: 300.0,
@@ -29,6 +30,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        shadow: null,
       );
       // When
       final result = model.copyWith(
@@ -51,6 +53,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
         width: 300.0,
@@ -62,6 +65,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: true,
+        shadow: null,
       );
       // When
       final result = model.copyWith(hideEventTypeDetails: true);
@@ -81,6 +85,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
         width: 300.0,
@@ -92,6 +97,7 @@ void main() {
         backgroundColor: Colors.grey,
         primaryColor: Colors.green,
         hideEventTypeDetails: false,
+        shadow: null,
       );
       // When
       final result = model.copyWith(
@@ -117,6 +123,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        shadow: null,
       );
       const properties2 = PagebuilderCalendlyProperties(
         width: 300.0,
@@ -128,6 +135,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        shadow: null,
       );
       // Then
       expect(properties1, properties2);
@@ -145,6 +153,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       const properties2 = PagebuilderCalendlyProperties(
         width: null,
@@ -156,6 +165,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       // Then
       expect(properties1, properties2);

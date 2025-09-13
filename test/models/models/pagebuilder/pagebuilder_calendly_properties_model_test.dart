@@ -19,6 +19,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: false,
+        shadow: null,
       );
       const expectedResult = PagebuilderCalendlyPropertiesModel(
         width: 300.0,
@@ -30,6 +31,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: false,
+        shadow: null,
       );
       // When
       final result = model.copyWith(
@@ -52,6 +54,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: false,
+        shadow: null,
       );
       const expectedResult = PagebuilderCalendlyPropertiesModel(
         width: 300.0,
@@ -63,6 +66,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: true,
+        shadow: null,
       );
       // When
       final result = model.copyWith(hideEventTypeDetails: true);
@@ -84,6 +88,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: true,
+        shadow: null,
       );
       final expectedResult = {
         "width": 300.0,
@@ -114,6 +119,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       const expectedResult = <String, dynamic>{};
       // When
@@ -147,6 +153,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: true,
+        shadow: null,
       );
       // When
       final result = PagebuilderCalendlyPropertiesModel.fromMap(map);
@@ -167,6 +174,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       // When
       final result = PagebuilderCalendlyPropertiesModel.fromMap(map);
@@ -190,6 +198,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: true,
+        shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
         width: 300.0,
@@ -201,6 +210,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: const Color(0xff2196f3),
         hideEventTypeDetails: true,
+        shadow: null,
       );
       // When
       final result = model.toDomain();
@@ -220,6 +230,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
         width: null,
@@ -231,6 +242,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       // When
       final result = model.toDomain();
@@ -254,6 +266,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: const Color(0xff2196f3),
         hideEventTypeDetails: true,
+        shadow: null,
       );
       const expectedResult = PagebuilderCalendlyPropertiesModel(
         width: 300.0,
@@ -265,6 +278,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: true,
+        shadow: null,
       );
       // When
       final result = PagebuilderCalendlyPropertiesModel.fromDomain(model);
@@ -284,6 +298,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       const expectedResult = PagebuilderCalendlyPropertiesModel(
         width: null,
@@ -295,6 +310,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       // When
       final result = PagebuilderCalendlyPropertiesModel.fromDomain(model);
@@ -316,6 +332,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: true,
+        shadow: null,
       );
       const properties2 = PagebuilderCalendlyPropertiesModel(
         width: 300.0,
@@ -327,6 +344,7 @@ void main() {
         backgroundColor: "ffffffff",
         primaryColor: "ff2196f3",
         hideEventTypeDetails: true,
+        shadow: null,
       );
       // Then
       expect(properties1, properties2);
@@ -344,6 +362,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       const properties2 = PagebuilderCalendlyPropertiesModel(
         width: null,
@@ -355,6 +374,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        shadow: null,
       );
       // Then
       expect(properties1, properties2);
