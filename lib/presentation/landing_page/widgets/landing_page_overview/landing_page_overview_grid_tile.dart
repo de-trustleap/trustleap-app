@@ -79,7 +79,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
         !_isPending() &&
         responsiveValue.isDesktop) {
       return InkWell(
-          onTap: () => navigator.navigate(
+          onTap: () => navigator.openInNewTab(
               "${RoutePaths.homePath}${RoutePaths.landingPageBuilderPath}/${landingPage.id.value}"),
           child: buildTile(themeData, responsiveValue, localizations, context));
     } else {

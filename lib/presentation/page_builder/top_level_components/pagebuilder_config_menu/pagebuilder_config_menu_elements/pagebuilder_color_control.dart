@@ -5,8 +5,9 @@ class PagebuilderColorControl extends StatelessWidget {
   final String title;
   final Color initialColor;
   final Function(Color) onSelected;
+  final bool enableOpacity;
   const PagebuilderColorControl(
-      {super.key, required this.title, required this.initialColor, required this.onSelected});
+      {super.key, required this.title, required this.initialColor, required this.onSelected, this.enableOpacity = true});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class PagebuilderColorControl extends StatelessWidget {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(title,
           style: themeData.textTheme.bodySmall),
-      PagebuilderColorPicker(initialColor: initialColor, onSelected: onSelected)
+      PagebuilderColorPicker(initialColor: initialColor, onSelected: onSelected, enableOpacity: enableOpacity)
     ]);
   }
 }

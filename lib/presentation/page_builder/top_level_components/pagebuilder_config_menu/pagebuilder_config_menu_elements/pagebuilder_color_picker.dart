@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 class PagebuilderColorPicker extends StatefulWidget {
   final Color initialColor;
   final Function(Color) onSelected;
+  final bool enableOpacity;
   const PagebuilderColorPicker(
-      {super.key, required this.initialColor, required this.onSelected});
+      {super.key, required this.initialColor, required this.onSelected, this.enableOpacity = true});
 
   @override
   State<PagebuilderColorPicker> createState() =>
@@ -98,7 +99,7 @@ class _PagebuilderColorControlState extends State<PagebuilderColorPicker> {
                     ColorPickerType.wheel: true,
                   },
                   showRecentColors: false,
-                  enableOpacity: true,
+                  enableOpacity: widget.enableOpacity,
                   enableShadesSelection: false,
                   showColorCode: false,
                   focusedEditHasNoColor: true,
