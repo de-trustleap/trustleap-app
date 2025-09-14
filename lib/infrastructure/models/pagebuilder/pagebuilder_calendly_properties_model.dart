@@ -128,14 +128,14 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         borderRadius: properties.borderRadius,
         calendlyEventURL: properties.calendlyEventURL,
         eventTypeName: properties.eventTypeName,
-        textColor: properties.textColor?.toARGB32() != null
-            ? properties.textColor!.toARGB32().toRadixString(16)
+        textColor: properties.textColor != null
+            ? ColorUtility.colorToHex(properties.textColor!)
             : null,
-        backgroundColor: properties.backgroundColor?.toARGB32() != null
-            ? properties.backgroundColor!.toARGB32().toRadixString(16)
+        backgroundColor: properties.backgroundColor != null
+            ? ColorUtility.colorToHex(properties.backgroundColor!)
             : null,
-        primaryColor: properties.primaryColor?.toARGB32() != null
-            ? properties.primaryColor!.toARGB32().toRadixString(16)
+        primaryColor: properties.primaryColor != null
+            ? ColorUtility.colorToHex(properties.primaryColor!)
             : null,
         hideEventTypeDetails: properties.hideEventTypeDetails,
         shadow: ShadowMapper.getMapFromShadow(properties.shadow));

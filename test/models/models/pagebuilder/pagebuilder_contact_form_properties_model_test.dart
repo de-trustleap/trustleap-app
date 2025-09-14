@@ -96,7 +96,7 @@ void main() {
             "width": 200,
             "height": 70,
             "borderRadius": 4,
-            "backgroundColor": "FF333a56",
+            "backgroundColor": "FF333A56",
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -188,7 +188,7 @@ void main() {
             "width": 200,
             "height": 70,
             "borderRadius": 4,
-            "backgroundColor": "FF333a56",
+            "backgroundColor": "FF333A56",
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -308,7 +308,7 @@ void main() {
             "width": 200,
             "height": 70,
             "borderRadius": 4,
-            "backgroundColor": "FF333a56",
+            "backgroundColor": "FF333A56",
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -400,7 +400,7 @@ void main() {
           "width": 200,
           "height": 70,
           "borderRadius": 4,
-          "backgroundColor": "FF333a56",
+          "backgroundColor": "FF333A56",
           "textProperties": {
             "alignment": "center",
             "fontSize": 16.0,
@@ -503,7 +503,7 @@ void main() {
           "width": 200,
           "height": 70,
           "borderRadius": 4,
-          "backgroundColor": "FF333a56",
+          "backgroundColor": "FF333A56",
           "textProperties": {
             "alignment": "center",
             "fontSize": 16.0,
@@ -596,7 +596,7 @@ void main() {
             "width": 200,
             "height": 70,
             "borderRadius": 4,
-            "backgroundColor": "FF333a56",
+            "backgroundColor": "FF333A56",
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -694,7 +694,7 @@ void main() {
             "width": 200.0,
             "height": 70.0,
             "borderRadius": 4.0,
-            "backgroundColor": "FF333a56",
+            "backgroundColor": "FF333A56",
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -825,7 +825,7 @@ void main() {
               width: 200.0,
               height: 70.0,
               borderRadius: 4,
-              backgroundColor: Color(0xFF333a56),
+              backgroundColor: Color(0xFF333A56),
               textProperties: PageBuilderTextProperties(
                   text: "NACHRICHT SENDEN",
                   fontSize: 16.0,
@@ -971,7 +971,7 @@ void main() {
               width: 200.0,
               height: 70.0,
               borderRadius: 4,
-              backgroundColor: Color(0xFF333a56),
+              backgroundColor: Color(0xFF333A56),
               textProperties: PageBuilderTextProperties(
                   text: "NACHRICHT SENDEN",
                   fontSize: 16.0,
@@ -990,12 +990,12 @@ void main() {
             "minLines": 1,
             "maxLines": 1,
             "isRequired": true,
-            "borderColor": "fff9f9f9",
+            "borderColor": "FFF9F9F9",
             "placeHolderTextProperties": {
               "alignment": "left",
               "fontSize": 16.0,
               "fontFamily": "Roboto",
-              "color": "ff9a9a9c",
+              "color": "FF9A9A9C",
               "text": "Ihr Name"
             },
             "textProperties": {
@@ -1059,12 +1059,12 @@ void main() {
             "width": 200.0,
             "height": 70.0,
             "borderRadius": 4.0,
-            "backgroundColor": "ff333a56",
+            "backgroundColor": "FF333A56",
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
               "fontFamily": "Roboto",
-              "color": "ffffffff",
+              "color": "FFFFFFFF",
               "text": "NACHRICHT SENDEN"
             }
           });
@@ -1090,12 +1090,12 @@ void main() {
             "minLines": 1,
             "maxLines": 1,
             "isRequired": true,
-            "borderColor": "fff9f9f9",
+            "borderColor": "FFF9F9F9",
             "placeHolderTextProperties": {
               "alignment": "left",
               "fontSize": 16.0,
               "fontFamily": "Roboto",
-              "color": "ff9a9a9c",
+              "color": "FF9A9A9C",
               "text": "Ihr Name"
             },
             "textProperties": {
@@ -1159,12 +1159,12 @@ void main() {
             "width": 200.0,
             "height": 70.0,
             "borderRadius": 4.0,
-            "backgroundColor": "ff333a56",
+            "backgroundColor": "FF333A56",
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
               "fontFamily": "Roboto",
-              "color": "ffffffff",
+              "color": "FFFFFFFF",
               "text": "NACHRICHT SENDEN"
             }
           });
@@ -1175,12 +1175,12 @@ void main() {
             "minLines": 1,
             "maxLines": 1,
             "isRequired": true,
-            "borderColor": "fff9f9f9",
+            "borderColor": "FFF9F9F9",
             "placeHolderTextProperties": {
               "alignment": "left",
               "fontSize": 16.0,
               "fontFamily": "Roboto",
-              "color": "ff9a9a9c",
+              "color": "FF9A9A9C",
               "text": "Ihr Name"
             },
             "textProperties": {
@@ -1244,12 +1244,12 @@ void main() {
             "width": 200.0,
             "height": 70.0,
             "borderRadius": 4.0,
-            "backgroundColor": "ff333a56",
+            "backgroundColor": "FF333A56",
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
               "fontFamily": "Roboto",
-              "color": "ffffffff",
+              "color": "FFFFFFFF",
               "text": "NACHRICHT SENDEN"
             }
           });

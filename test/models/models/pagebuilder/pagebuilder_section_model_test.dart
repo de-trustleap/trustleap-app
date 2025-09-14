@@ -410,7 +410,7 @@ void main() {
                 },
                 "properties": {
                   "alignment": "left",
-                  "color": "ffffffff",
+                  "color": "FFFFFFFF",
                   "fontSize": 18.0,
                   "fontFamily": "Merriweather",
                   "isItalic": true,

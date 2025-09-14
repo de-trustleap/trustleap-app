@@ -81,7 +81,7 @@ void main() {
           sections: [],
           backgroundColor: Color(0xFFFFFFFF));
       final expectedResult = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "ffffffff");
+          id: "1", sections: [], backgroundColor: "FFFFFFFF");
       // When
       final result = PageBuilderPageModel.fromDomain(model);
       expect(result, expectedResult);
@@ -173,9 +173,9 @@ void main() {
     test("check if value equality works", () {
       // Given
       final page1 = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "fff0f0f0");
+          id: "1", sections: [], backgroundColor: "FFF0F0F0");
       final page2 = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "fff0f0f0");
+          id: "1", sections: [], backgroundColor: "FFF0F0F0");
       // Then
       expect(page1, page2);
     });

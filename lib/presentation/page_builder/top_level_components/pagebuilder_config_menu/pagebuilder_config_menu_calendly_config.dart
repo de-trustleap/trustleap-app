@@ -70,6 +70,7 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
           PagebuilderColorControl(
             title: localization.pagebuilder_calendly_config_text_color,
             initialColor: properties.textColor ?? Colors.black,
+            enableOpacity: false,
             onSelected: (color) {
               updateCalendlyProperties(
                 properties.copyWith(textColor: color),
@@ -81,6 +82,7 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
           PagebuilderColorControl(
             title: localization.pagebuilder_calendly_config_background_color,
             initialColor: properties.backgroundColor ?? Colors.black,
+            enableOpacity: false,
             onSelected: (color) {
               updateCalendlyProperties(
                 properties.copyWith(backgroundColor: color),
@@ -92,6 +94,7 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
           PagebuilderColorControl(
             title: localization.pagebuilder_calendly_config_primary_color,
             initialColor: properties.primaryColor ?? Colors.black,
+            enableOpacity: false,
             onSelected: (color) {
               updateCalendlyProperties(
                 properties.copyWith(primaryColor: color),

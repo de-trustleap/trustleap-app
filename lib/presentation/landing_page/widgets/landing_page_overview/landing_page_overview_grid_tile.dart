@@ -174,7 +174,8 @@ class LandingPageOverviewGridTile extends StatelessWidget {
                   ],
                   if (!(landingPage.isActive ?? false) &&
                       !(landingPage.isDefaultPage ?? false)) ...[
-                    SelectableText(localizations.landingpage_overview_deactivated,
+                    SelectableText(
+                        localizations.landingpage_overview_deactivated,
                         style: themeData.textTheme.bodySmall!.copyWith(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

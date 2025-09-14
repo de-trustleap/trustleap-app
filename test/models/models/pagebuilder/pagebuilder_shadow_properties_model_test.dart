@@ -10,12 +10,12 @@ void main() {
         () {
       // Given
       final model = PageBuilderShadowModel(
-          color: "ff000000",
+          color: "FF000000",
           spreadRadius: 2.0,
           blurRadius: 2.0,
           offset: {"y": 5.0, "x": 2.0});
       final expectedResult = PageBuilderShadowModel(
-          color: "ff000000",
+          color: "FF000000",
           spreadRadius: 2.0,
           blurRadius: 5.0,
           offset: {"y": 5.0, "x": 2.0});
@@ -30,12 +30,12 @@ void main() {
     test("check if model is successfully converted to a map", () {
       // Given
       final model = PageBuilderShadowModel(
-          color: "ff000000",
+          color: "FF000000",
           spreadRadius: 2.0,
           blurRadius: 2.0,
           offset: {"y": 5.0, "x": 2.0});
       final expectedResult = {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 2.0,
         "blurRadius": 2.0,
         "offset": {"y": 5.0, "x": 2.0}
@@ -51,13 +51,13 @@ void main() {
     test("check if map is successfully converted to model", () {
       // Given
       final map = {
-        "color": "ff000000",
+        "color": "FF000000",
         "spreadRadius": 2.0,
         "blurRadius": 2.0,
         "offset": {"y": 5.0, "x": 2.0}
       };
       final expectedResult = PageBuilderShadowModel(
-          color: "ff000000",
+          color: "FF000000",
           spreadRadius: 2.0,
           blurRadius: 2.0,
           offset: {"y": 5.0, "x": 2.0});
@@ -74,7 +74,7 @@ void main() {
         () {
       // Given
       final model = PageBuilderShadowModel(
-          color: "ff000000",
+          color: "FF000000",
           spreadRadius: 2.0,
           blurRadius: 2.0,
           offset: {"y": 5.0, "x": 2.0});
@@ -101,7 +101,7 @@ void main() {
           blurRadius: 2.0,
           offset: Offset(2.0, 5.0));
       final expectedResult = PageBuilderShadowModel(
-          color: "ff000000",
+          color: "FF000000",
           spreadRadius: 2.0,
           blurRadius: 2.0,
           offset: {"y": 5.0, "x": 2.0});
@@ -116,12 +116,12 @@ void main() {
     test("check if value equality works", () {
       // Given
       final properties1 = PageBuilderShadowModel(
-          color: "ff000000",
+          color: "FF000000",
           spreadRadius: 2.0,
           blurRadius: 2.0,
           offset: {"y": 5.0, "x": 2.0});
       final properties2 = PageBuilderShadowModel(
-          color: "ff000000",
+          color: "FF000000",
           spreadRadius: 2.0,
           blurRadius: 2.0,
           offset: {"y": 5.0, "x": 2.0});

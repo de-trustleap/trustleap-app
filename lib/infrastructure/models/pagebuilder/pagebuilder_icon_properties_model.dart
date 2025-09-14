@@ -58,8 +58,8 @@ class PageBuilderIconPropertiesModel extends Equatable
     return PageBuilderIconPropertiesModel(
         code: properties.code,
         size: properties.size,
-        color: properties.color?.toARGB32() != null
-            ? properties.color!.toARGB32().toRadixString(16)
+        color: properties.color != null
+            ? ColorUtility.colorToHex(properties.color!)
             : null);
   }
 

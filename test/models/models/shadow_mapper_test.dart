@@ -31,7 +31,7 @@ void main() {
         offset: null,
       );
       final result = ShadowMapper.getMapFromShadow(shadowWithColor);
-      expect(result, {'color': 'fff44336'});
+      expect(result, {'color': 'FFF44336'});
     });
 
     test('returns map with spreadRadius when spreadRadius is non-zero', () {
@@ -76,7 +76,7 @@ void main() {
       );
       final result = ShadowMapper.getMapFromShadow(shadow);
       expect(result, {
-        'color': 'ff2196f3',
+        'color': 'FF2196F3',
         'spreadRadius': 5.0,
         'blurRadius': 10.0,
         'offset': {'x': 1.0, 'y': 1.0},
@@ -91,7 +91,7 @@ void main() {
         offset: null,
       );
       final result = ShadowMapper.getMapFromShadow(shadow);
-      expect(result, {'color': 'ff4caf50'});
+      expect(result, {'color': 'FF4CAF50'});
     });
   });
 }

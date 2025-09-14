@@ -117,8 +117,8 @@ class PageBuilderTextPropertiesModel extends Equatable
         fontFamily: properties.fontFamily,
         lineHeight: properties.lineHeight,
         letterSpacing: properties.letterSpacing,
-        color: properties.color?.toARGB32() != null
-            ? properties.color!.toARGB32().toRadixString(16)
+        color: properties.color != null
+            ? ColorUtility.colorToHex(properties.color!)
             : null,
         alignment: properties.alignment?.name,
         textShadow: ShadowMapper.getMapFromShadow(properties.textShadow),

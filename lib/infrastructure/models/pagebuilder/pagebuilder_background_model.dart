@@ -62,16 +62,16 @@ class PagebuilderBackgroundModel extends Equatable {
   factory PagebuilderBackgroundModel.fromDomain(
       PagebuilderBackground properties) {
     return PagebuilderBackgroundModel(
-        backgroundColor: properties.backgroundColor?.toARGB32() != null
-            ? properties.backgroundColor!.toARGB32().toRadixString(16)
+        backgroundColor: properties.backgroundColor != null
+            ? ColorUtility.colorToHex(properties.backgroundColor!)
             : null,
         imageProperties: properties.imageProperties != null
             ? PageBuilderImagePropertiesModel.fromDomain(
                     properties.imageProperties!)
                 .toMap()
             : null,
-        overlayColor: properties.overlayColor?.toARGB32() != null
-            ? properties.overlayColor!.toARGB32().toRadixString(16)
+        overlayColor: properties.overlayColor != null
+            ? ColorUtility.colorToHex(properties.overlayColor!)
             : null);
   }
 
