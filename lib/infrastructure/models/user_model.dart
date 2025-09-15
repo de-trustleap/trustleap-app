@@ -28,6 +28,7 @@ class UserModel extends Equatable {
   final List<String>? recommendationIDs;
   final List<String>? favoriteRecommendationIDs;
   final List<String>? archivedRecommendationIDs;
+  final int? recommendationCountLast30Days;
   final DateTime? deletesAt;
   final DateTime? lastUpdated;
   final dynamic createdAt;
@@ -55,6 +56,7 @@ class UserModel extends Equatable {
       this.recommendationIDs,
       this.favoriteRecommendationIDs,
       this.archivedRecommendationIDs,
+      this.recommendationCountLast30Days,
       this.deletesAt,
       this.lastUpdated,
       this.createdAt});
@@ -83,6 +85,7 @@ class UserModel extends Equatable {
       'recommendationIDs': recommendationIDs,
       'favoriteRecommendationIDs': favoriteRecommendationIDs,
       'archivedRecommendationIDs': archivedRecommendationIDs,
+      'recommendationCountLast30Days': recommendationCountLast30Days,
       'deletesAt': deletesAt,
       'lastUpdated': lastUpdated,
       'createdAt': createdAt,
@@ -135,6 +138,9 @@ class UserModel extends Equatable {
       archivedRecommendationIDs: map['archivedRecommendationIDs'] != null
           ? List<String>.from(map['archivedRecommendationIDs'])
           : null,
+      recommendationCountLast30Days: map['recommendationCountLast30Days'] != null
+          ? map['recommendationCountLast30Days'] as int
+          : null,
       deletesAt: map['deletesAt'] != null
           ? (map['deletesAt'] as Timestamp).toDate()
           : null,
@@ -168,6 +174,7 @@ class UserModel extends Equatable {
     List<String>? recommendationIDs,
     List<String>? favoriteRecommendationIDs,
     List<String>? archivedRecommendationIDs,
+    int? recommendationCountLast30Days,
     DateTime? deletesAt,
     DateTime? lastUpdated,
     dynamic createdAt,
@@ -201,6 +208,8 @@ class UserModel extends Equatable {
           favoriteRecommendationIDs ?? this.favoriteRecommendationIDs,
       archivedRecommendationIDs:
           archivedRecommendationIDs ?? this.archivedRecommendationIDs,
+      recommendationCountLast30Days:
+          recommendationCountLast30Days ?? this.recommendationCountLast30Days,
       deletesAt: deletesAt ?? this.deletesAt,
       lastUpdated: lastUpdated ?? this.lastUpdated,
       createdAt: createdAt ?? this.createdAt,
@@ -237,6 +246,7 @@ class UserModel extends Equatable {
         recommendationIDs: recommendationIDs,
         favoriteRecommendationIDs: favoriteRecommendationIDs,
         archivedRecommendationIDs: archivedRecommendationIDs,
+        recommendationCountLast30Days: recommendationCountLast30Days,
         deletesAt: deletesAt,
         lastUpdated: lastUpdated,
         createdAt: (createdAt as Timestamp).toDate());
@@ -266,6 +276,7 @@ class UserModel extends Equatable {
         recommendationIDs: user.recommendationIDs,
         favoriteRecommendationIDs: user.favoriteRecommendationIDs,
         archivedRecommendationIDs: user.archivedRecommendationIDs,
+        recommendationCountLast30Days: user.recommendationCountLast30Days,
         deletesAt: user.deletesAt,
         lastUpdated: user.lastUpdated,
         createdAt: FieldValue.serverTimestamp());
@@ -293,6 +304,7 @@ class UserModel extends Equatable {
         landingPageIDs,
         recommendationIDs,
         favoriteRecommendationIDs,
-        archivedRecommendationIDs
+        archivedRecommendationIDs,
+        recommendationCountLast30Days
       ];
 }
