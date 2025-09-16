@@ -20,6 +20,17 @@ class RecommendationFormHelper {
     return reasons.any((reason) => reason.isActive == true);
   }
 
+  Duration? calculateTimeUntilReset(DateTime now, DateTime resetDateTime) {
+    // Berechne bis 0 Uhr des Tages NACH dem recommendationCounterResetAt
+    final resetDate =
+        DateTime(resetDateTime.year, resetDateTime.month, resetDateTime.day);
+    final nextMidnight = resetDate.add(const Duration(days: 1));
+    final difference = nextMidnight.difference(now);
+
+    if (difference.inHours <= 0) return null;
+    return difference;
+  }
+
   String? getRecommendationLimitResetText(
     BuildContext context,
     CustomUser? currentUser,
@@ -34,16 +45,16 @@ class RecommendationFormHelper {
 
     final localization = AppLocalizations.of(context);
     final now = DateTime.now();
-    final resetTime = user.recommendationCounterResetAt!;
-    final difference = resetTime.difference(now);
+    final resetDateTime = user.recommendationCounterResetAt!;
+
+    final difference = calculateTimeUntilReset(now, resetDateTime);
+    if (difference == null) return null;
 
     if (difference.inHours < 24) {
       final hours = difference.inHours;
-      if (hours <= 0) return null;
       return localization.recommendations_limit_reset_hours(hours);
     } else {
       final days = difference.inDays;
-      if (days <= 0) return null;
       return localization.recommendations_limit_reset_days(days);
     }
   }

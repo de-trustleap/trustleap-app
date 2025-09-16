@@ -30,7 +30,8 @@ void main() {
         expect(result, false);
       });
 
-      test('should return false when recommendationCountLast30Days is null', () {
+      test('should return false when recommendationCountLast30Days is null',
+          () {
         // Given
         final user = CustomUser(
           id: UniqueID.fromUniqueString("test"),
@@ -285,13 +286,16 @@ void main() {
         expect(result.promoterName, "Jane Smith");
         expect(result.serviceProviderName, "Service Provider");
         expect(result.defaultLandingPageID, "default-landing-page");
-        expect(result.statusLevel.toString(), StatusLevel.recommendationSend.toString());
+        expect(result.statusLevel.toString(),
+            StatusLevel.recommendationSend.toString());
         expect(result.userID, "current-user");
         expect(result.promotionTemplate, "Test Template");
         expect(result.statusTimestamps, isNotEmpty);
       });
 
-      test('should create RecommendationItem with parent user data when current user is null', () {
+      test(
+          'should create RecommendationItem with parent user data when current user is null',
+          () {
         // Given
         final parentUser = CustomUser(
           id: UniqueID.fromUniqueString("parent-user"),
@@ -325,8 +329,79 @@ void main() {
       });
     });
 
-    // Note: getRecommendationLimitResetText tests are skipped because they require
-    // BuildContext for localization. These would need to be tested in integration tests
-    // or the method would need to be refactored to accept localization strings directly.
+    group('calculateTimeUntilReset', () {
+      test('should calculate days until reset correctly', () {
+        // Given
+        final now = DateTime(2024, 12, 15, 10, 0); // 15.12.2024 10:00
+        final resetDateTime = DateTime(2024, 12, 16, 14, 0); // 16.12.2024 14:00
+
+        // When
+        final result = helper.calculateTimeUntilReset(now, resetDateTime);
+
+        // Then
+        // Sollte bis 17.12.2024 00:00 rechnen (Tag nach resetDateTime)
+        final expectedDifference = DateTime(2024, 12, 17, 0, 0).difference(now);
+        expect(result, expectedDifference);
+        expect(result!.inDays, 1); // Etwa 1 Tag
+      });
+
+      test('should calculate hours until reset correctly', () {
+        // Given
+        final now = DateTime(2024, 12, 16, 20, 0); // 16.12.2024 20:00
+        final resetDateTime = DateTime(2024, 12, 16, 14, 0); // 16.12.2024 14:00
+
+        // When
+        final result = helper.calculateTimeUntilReset(now, resetDateTime);
+
+        // Then
+        // Sollte bis 17.12.2024 00:00 rechnen (Tag nach resetDateTime)
+        final expectedDifference = DateTime(2024, 12, 17, 0, 0).difference(now);
+        expect(result, expectedDifference);
+        expect(result!.inHours, 4); // 4 Stunden bis Mitternacht
+      });
+
+      test('should return null when reset time has passed', () {
+        // Given
+        final now = DateTime(2024, 12, 18, 10, 0); // 18.12.2024 10:00
+        final resetDateTime = DateTime(2024, 12, 16, 14, 0); // 16.12.2024 14:00
+
+        // When
+        final result = helper.calculateTimeUntilReset(now, resetDateTime);
+
+        // Then
+        // Reset war am 17.12.2024 00:00, jetzt ist es schon 18.12.2024
+        expect(result, null);
+      });
+
+      test('should handle same day reset correctly', () {
+        // Given
+        final now = DateTime(2024, 12, 16, 10, 0); // 16.12.2024 10:00
+        final resetDateTime = DateTime(2024, 12, 16, 14, 0); // 16.12.2024 14:00
+
+        // When
+        final result = helper.calculateTimeUntilReset(now, resetDateTime);
+
+        // Then
+        // Sollte bis 17.12.2024 00:00 rechnen (Tag nach resetDateTime)
+        final expectedDifference = DateTime(2024, 12, 17, 0, 0).difference(now);
+        expect(result, expectedDifference);
+        expect(result!.inHours,
+            14); // 14 Stunden bis Mitternacht des nächsten Tages
+      });
+
+      test('should handle edge case at exact midnight', () {
+        // Given
+        final now = DateTime(
+            2024, 12, 17, 0, 0); // 17.12.2024 00:00 (exakt Mitternacht)
+        final resetDateTime = DateTime(2024, 12, 16, 14, 0); // 16.12.2024 14:00
+
+        // When
+        final result = helper.calculateTimeUntilReset(now, resetDateTime);
+
+        // Then
+        // Reset sollte genau jetzt stattfinden
+        expect(result, null);
+      });
+    });
   });
 }
