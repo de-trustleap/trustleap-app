@@ -2141,6 +2141,36 @@ abstract class AppLocalizations {
   /// **'Add recommendation'**
   String get recommendations_form_add_button_tooltip;
 
+  /// Title for the recommendation limit
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation Limit'**
+  String get recommendations_limit_title;
+
+  /// Description of the recommendation limit
+  ///
+  /// In en, this message translates to:
+  /// **'You can send up to 6 recommendations per month.'**
+  String get recommendations_limit_description;
+
+  /// Status of the recommendation limit with current count
+  ///
+  /// In en, this message translates to:
+  /// **'Sent in the last 30 days: {current} / {max}'**
+  String recommendations_limit_status(int current, int max);
+
+  /// Success message after sending a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'The recommendation to {name} has been sent successfully!'**
+  String recommendations_sent_success(String name);
+
+  /// Tooltip when the recommendation limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation limit reached'**
+  String get recommendations_limit_reached_tooltip;
+
   /// Error title on the page builder page if request fails
   ///
   /// In en, this message translates to:

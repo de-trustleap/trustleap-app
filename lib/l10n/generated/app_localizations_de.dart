@@ -1219,6 +1219,27 @@ class AppLocalizationsDe extends AppLocalizations {
   String get recommendations_form_add_button_tooltip => 'Empfehlung hinzufügen';
 
   @override
+  String get recommendations_limit_title => 'Empfehlungs-Limit';
+
+  @override
+  String get recommendations_limit_description =>
+      'Sie können bis zu 6 Empfehlungen pro Monat versenden.';
+
+  @override
+  String recommendations_limit_status(int current, int max) {
+    return 'In den letzten 30 Tagen versendet: $current / $max';
+  }
+
+  @override
+  String recommendations_sent_success(String name) {
+    return 'Die Empfehlung an $name wurde erfolgreich versendet!';
+  }
+
+  @override
+  String get recommendations_limit_reached_tooltip =>
+      'Empfehlungslimit erreicht';
+
+  @override
   String get landingpage_pagebuilder_container_request_error =>
       'Beim Abruf der Daten ist ein Fehler aufgetreten';
 

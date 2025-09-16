@@ -7,6 +7,7 @@ class RecommendationTextField extends StatelessWidget {
   final TextEditingController controller;
   final String leadName;
   final bool showError;
+  final bool disabled;
   final void Function()? onSendPressed;
 
   const RecommendationTextField({
@@ -14,6 +15,7 @@ class RecommendationTextField extends StatelessWidget {
     required this.controller,
     required this.leadName,
     required this.showError,
+    this.disabled = false,
     this.onSendPressed,
   });
 
@@ -45,6 +47,7 @@ class RecommendationTextField extends StatelessWidget {
         PrimaryButton(
             title: localization.recommendation_page_leadTextField_send_button,
             onTap: onSendPressed,
+            disabled: disabled,
             icon: Icons.send),
       ],
     );

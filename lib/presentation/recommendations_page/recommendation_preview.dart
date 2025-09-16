@@ -22,12 +22,14 @@ class RecommendationPreview extends StatefulWidget {
   final String userID;
   final List<RecommendationItem> leads;
   final Function(RecommendationItem) onSaveSuccess;
+  final bool disabled;
 
   const RecommendationPreview(
       {super.key,
       required this.userID,
       required this.leads,
-      required this.onSaveSuccess});
+      required this.onSaveSuccess,
+      this.disabled = false});
 
   @override
   State<RecommendationPreview> createState() => _RecommendationPreviewState();
@@ -267,6 +269,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       controller: controller,
       leadName: lead.name ?? "",
       showError: showMissingLinkError,
+      disabled: widget.disabled,
       onSendPressed: () {
         _sendMessage(widget.leads.first, controller.text);
       },
@@ -295,6 +298,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                   controller: controller,
                   leadName: lead.name ?? "",
                   showError: showMissingLinkError,
+                  disabled: widget.disabled,
                   onSendPressed: () {
                     _sendMessage(lead, controller.text);
                   },
