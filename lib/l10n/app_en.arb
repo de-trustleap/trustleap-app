@@ -1400,6 +1400,26 @@
             }
         }
     },
+    "recommendations_limit_reset_days": "Resets in: {days} days",
+    "@recommendations_limit_reset_days": {
+        "description": "Text for the reset time of the recommendation limit in days",
+        "placeholders": {
+            "days": {
+                "type": "int",
+                "description": "Number of days until reset"
+            }
+        }
+    },
+    "recommendations_limit_reset_hours": "Resets in: {hours} hours",
+    "@recommendations_limit_reset_hours": {
+        "description": "Text for the reset time of the recommendation limit in hours",
+        "placeholders": {
+            "hours": {
+                "type": "int",
+                "description": "Number of hours until reset"
+            }
+        }
+    },
     "recommendations_sent_success": "The recommendation to {name} has been sent successfully!",
     "@recommendations_sent_success": {
         "description": "Success message after sending a recommendation",

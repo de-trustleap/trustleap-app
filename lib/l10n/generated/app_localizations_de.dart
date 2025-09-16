@@ -1231,6 +1231,16 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String recommendations_limit_reset_days(int days) {
+    return 'Wird zurückgesetzt in: $days Tagen';
+  }
+
+  @override
+  String recommendations_limit_reset_hours(int hours) {
+    return 'Wird zurückgesetzt in: $hours Stunden';
+  }
+
+  @override
   String recommendations_sent_success(String name) {
     return 'Die Empfehlung an $name wurde erfolgreich versendet!';
   }

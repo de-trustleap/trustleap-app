@@ -31,6 +31,7 @@ class CustomUser extends Equatable {
   final DateTime? deletesAt;
   final DateTime? lastUpdated;
   final DateTime? createdAt;
+  final DateTime? recommendationCounterResetAt;
 
   const CustomUser(
       {required this.id,
@@ -59,7 +60,8 @@ class CustomUser extends Equatable {
       this.recommendationCountLast30Days,
       this.deletesAt,
       this.lastUpdated,
-      this.createdAt});
+      this.createdAt,
+      this.recommendationCounterResetAt});
 
   CustomUser copyWith(
       {UniqueID? id,
@@ -88,7 +90,8 @@ class CustomUser extends Equatable {
       int? recommendationCountLast30Days,
       DateTime? deletesAt,
       DateTime? lastUpdated,
-      DateTime? createdAt}) {
+      DateTime? createdAt,
+      DateTime? recommendationCounterResetAt}) {
     return CustomUser(
         id: id ?? this.id,
         gender: gender ?? this.gender,
@@ -123,7 +126,9 @@ class CustomUser extends Equatable {
             recommendationCountLast30Days ?? this.recommendationCountLast30Days,
         deletesAt: deletesAt ?? this.deletesAt,
         lastUpdated: lastUpdated ?? this.lastUpdated,
-        createdAt: createdAt ?? this.createdAt);
+        createdAt: createdAt ?? this.createdAt,
+        recommendationCounterResetAt:
+            recommendationCounterResetAt ?? this.recommendationCounterResetAt);
   }
 
   @override
@@ -151,6 +156,7 @@ class CustomUser extends Equatable {
         favoriteRecommendationIDs,
         archivedRecommendationIDs,
         recommendationCountLast30Days,
-        lastUpdated
+        lastUpdated,
+        recommendationCounterResetAt
       ];
 }

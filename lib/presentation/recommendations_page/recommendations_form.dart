@@ -3,7 +3,6 @@ import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.da
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_reason.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
@@ -19,6 +18,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_preview.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_reason_picker.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_validator.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_form_helper.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,6 +51,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   String? reasonValid;
   bool promoterTextFieldDisabled = false;
   List<RecommendationReason> reasons = [];
+  final helper = RecommendationFormHelper();
 
   @override
   void initState() {
@@ -100,23 +101,15 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
         setState(() {
           validationHasError = false;
           reasonValid = null;
-          leads.add(RecommendationItem(
-              id: UniqueID().value,
-              name: leadTextController.text.trim(),
-              reason: selectedReason!.reason!,
-              landingPageID: selectedReason!.id!.value,
-              promoterName: promoterTextController.text.trim(),
-              serviceProviderName: serviceProviderTextController.text.trim(),
-              defaultLandingPageID: currentUser != null
-                  ? currentUser?.defaultLandingPageID
-                  : parentUser?.defaultLandingPageID,
-              statusLevel: StatusLevel.recommendationSend,
-              statusTimestamps: {0: DateTime.now()},
-              userID: currentUser?.id.value ?? parentUser?.id.value,
-              promoterImageDownloadURL: null,
-              promotionTemplate: reasons.firstWhere((e) {
-                return e.reason == selectedReason?.reason;
-              }).promotionTemplate!));
+          leads.add(helper.createRecommendationItem(
+            leadName: leadTextController.text,
+            promoterName: promoterTextController.text,
+            serviceProviderName: serviceProviderTextController.text,
+            selectedReason: selectedReason!,
+            reasons: reasons,
+            currentUser: currentUser,
+            parentUser: parentUser,
+          ));
           leadTextController.clear();
           generateRecommendation();
         });
@@ -164,18 +157,16 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   String getReasonValues() {
-    selectedReason = selectedReason ??
-        reasons.firstWhere(
-          (e) {
-            return e.isActive == true;
-          },
-          orElse: () => const RecommendationReason(
-              id: null,
-              reason: "null",
-              isActive: null,
-              promotionTemplate: null),
-        );
-    return selectedReason?.reason as String;
+    selectedReason = selectedReason ?? reasons.firstWhere(
+      (e) => e.isActive == true,
+      orElse: () => const RecommendationReason(
+        id: null,
+        reason: "null",
+        isActive: null,
+        promotionTemplate: null,
+      ),
+    );
+    return helper.getReasonValues(reasons, selectedReason);
   }
 
   void generateRecommendation() {
@@ -185,16 +176,15 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   bool isRecommendationLimitReached() {
-    if (currentUser?.role != Role.promoter) {
-      return false;
-    }
-    const int maxRecommendationsPerMonth = 6;
-    final int currentCount = currentUser?.recommendationCountLast30Days ?? 0;
-    return currentCount >= maxRecommendationsPerMonth;
+    return helper.isRecommendationLimitReached(currentUser);
   }
 
   bool hasActiveReasons() {
-    return reasons.any((reason) => reason.isActive == true);
+    return helper.hasActiveReasons(reasons);
+  }
+
+  String? getRecommendationLimitResetText() {
+    return helper.getRecommendationLimitResetText(context, currentUser, parentUser);
   }
 
   @override
@@ -409,6 +399,18 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
+                                  if (getRecommendationLimitResetText() != null) ...[
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      getRecommendationLimitResetText()!,
+                                      style:
+                                          themeData.textTheme.bodySmall?.copyWith(
+                                        color: themeData
+                                            .colorScheme.onSurfaceVariant,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  ],
                                 ],
                               ),
                             ),
