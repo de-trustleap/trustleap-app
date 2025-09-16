@@ -27,6 +27,7 @@ class CustomUser extends Equatable {
   final List<String>? recommendationIDs;
   final List<String>? favoriteRecommendationIDs;
   final List<String>? archivedRecommendationIDs;
+  final int? recommendationCountLast30Days;
   final DateTime? deletesAt;
   final DateTime? lastUpdated;
   final DateTime? createdAt;
@@ -55,6 +56,7 @@ class CustomUser extends Equatable {
       this.recommendationIDs,
       this.favoriteRecommendationIDs,
       this.archivedRecommendationIDs,
+      this.recommendationCountLast30Days,
       this.deletesAt,
       this.lastUpdated,
       this.createdAt});
@@ -83,6 +85,7 @@ class CustomUser extends Equatable {
       List<String>? recommendationIDs,
       List<String>? favoriteRecommendationIDs,
       List<String>? archivedRecommendationIDs,
+      int? recommendationCountLast30Days,
       DateTime? deletesAt,
       DateTime? lastUpdated,
       DateTime? createdAt}) {
@@ -116,6 +119,8 @@ class CustomUser extends Equatable {
             favoriteRecommendationIDs ?? this.favoriteRecommendationIDs,
         archivedRecommendationIDs:
             archivedRecommendationIDs ?? this.archivedRecommendationIDs,
+        recommendationCountLast30Days:
+            recommendationCountLast30Days ?? this.recommendationCountLast30Days,
         deletesAt: deletesAt ?? this.deletesAt,
         lastUpdated: lastUpdated ?? this.lastUpdated,
         createdAt: createdAt ?? this.createdAt);
@@ -145,6 +150,7 @@ class CustomUser extends Equatable {
         recommendationIDs,
         favoriteRecommendationIDs,
         archivedRecommendationIDs,
+        recommendationCountLast30Days,
         lastUpdated
       ];
 }

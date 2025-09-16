@@ -1378,6 +1378,42 @@
     "@recommendations_form_add_button_tooltip": {
         "description": "Tooltip for the add recommendation button in the recommendations form"
     },
+    "recommendations_limit_title": "Recommendation Limit",
+    "@recommendations_limit_title": {
+        "description": "Title for the recommendation limit"
+    },
+    "recommendations_limit_description": "You can send up to 6 recommendations per month.",
+    "@recommendations_limit_description": {
+        "description": "Description of the recommendation limit"
+    },
+    "recommendations_limit_status": "Sent in the last 30 days: {current} / {max}",
+    "@recommendations_limit_status": {
+        "description": "Status of the recommendation limit with current count",
+        "placeholders": {
+            "current": {
+                "type": "int",
+                "description": "Number of recommendations already sent"
+            },
+            "max": {
+                "type": "int",
+                "description": "Maximum number of recommendations per month"
+            }
+        }
+    },
+    "recommendations_sent_success": "The recommendation to {name} has been sent successfully!",
+    "@recommendations_sent_success": {
+        "description": "Success message after sending a recommendation",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "description": "Name of the person the recommendation was sent to"
+            }
+        }
+    },
+    "recommendations_limit_reached_tooltip": "Recommendation limit reached",
+    "@recommendations_limit_reached_tooltip": {
+        "description": "Tooltip when the recommendation limit is reached"
+    },
     "landingpage_pagebuilder_container_request_error": "An error occurred while retrieving the data",
     "@landingpage_pagebuilder_container_request_error": {
         "description": "Error title on the page builder page if request fails"

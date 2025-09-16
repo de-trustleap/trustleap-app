@@ -1378,6 +1378,42 @@
     "@recommendations_form_add_button_tooltip": {
         "description": "Tooltip für den Empfehlung hinzufügen Button im Empfehlungsformular"
     },
+    "recommendations_limit_title": "Empfehlungs-Limit",
+    "@recommendations_limit_title": {
+        "description": "Titel für das Empfehlungslimit"
+    },
+    "recommendations_limit_description": "Sie können bis zu 6 Empfehlungen pro Monat versenden.",
+    "@recommendations_limit_description": {
+        "description": "Beschreibung des Empfehlungslimits"
+    },
+    "recommendations_limit_status": "In den letzten 30 Tagen versendet: {current} / {max}",
+    "@recommendations_limit_status": {
+        "description": "Status des Empfehlungslimits mit aktueller Anzahl",
+        "placeholders": {
+            "current": {
+                "type": "int",
+                "description": "Anzahl der bereits versendeten Empfehlungen"
+            },
+            "max": {
+                "type": "int",
+                "description": "Maximale Anzahl der Empfehlungen pro Monat"
+            }
+        }
+    },
+    "recommendations_sent_success": "Die Empfehlung an {name} wurde erfolgreich versendet!",
+    "@recommendations_sent_success": {
+        "description": "Erfolgsmeldung nach dem Versenden einer Empfehlung",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "description": "Name der Person, an die die Empfehlung gesendet wurde"
+            }
+        }
+    },
+    "recommendations_limit_reached_tooltip": "Empfehlungslimit erreicht",
+    "@recommendations_limit_reached_tooltip": {
+        "description": "Tooltip wenn das Empfehlungslimit erreicht ist"
+    },
     "landingpage_pagebuilder_container_request_error": "Beim Abruf der Daten ist ein Fehler aufgetreten",
     "@landingpage_pagebuilder_container_request_error": {
         "description": "Fehlermeldung auf der Pagebuilder Seite wenn Request fehlschlägt"
