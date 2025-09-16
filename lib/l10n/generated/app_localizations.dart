@@ -2159,6 +2159,18 @@ abstract class AppLocalizations {
   /// **'Sent in the last 30 days: {current} / {max}'**
   String recommendations_limit_status(int current, int max);
 
+  /// Text for the reset time of the recommendation limit in days
+  ///
+  /// In en, this message translates to:
+  /// **'Resets in: {days} days'**
+  String recommendations_limit_reset_days(int days);
+
+  /// Text for the reset time of the recommendation limit in hours
+  ///
+  /// In en, this message translates to:
+  /// **'Resets in: {hours} hours'**
+  String recommendations_limit_reset_hours(int hours);
+
   /// Success message after sending a recommendation
   ///
   /// In en, this message translates to:

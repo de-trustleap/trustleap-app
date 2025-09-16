@@ -32,6 +32,7 @@ class UserModel extends Equatable {
   final DateTime? deletesAt;
   final DateTime? lastUpdated;
   final dynamic createdAt;
+  final DateTime? recommendationCounterResetAt;
 
   const UserModel(
       {required this.id,
@@ -59,7 +60,8 @@ class UserModel extends Equatable {
       this.recommendationCountLast30Days,
       this.deletesAt,
       this.lastUpdated,
-      this.createdAt});
+      this.createdAt,
+      this.recommendationCounterResetAt});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -89,131 +91,137 @@ class UserModel extends Equatable {
       'deletesAt': deletesAt,
       'lastUpdated': lastUpdated,
       'createdAt': createdAt,
+      'recommendationCounterResetAt': recommendationCounterResetAt
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: "",
-      gender: map['gender'] != null ? map['gender'] as String : "none",
-      firstName: map['firstName'] != null ? map['firstName'] as String : null,
-      lastName: map['lastName'] != null ? map['lastName'] as String : null,
-      birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
-      address: map['address'] != null ? map['address'] as String : null,
-      postCode: map['postCode'] != null ? map['postCode'] as String : null,
-      place: map['place'] != null ? map['place'] as String : null,
-      email: map['email'] != null ? map['email'] as String : null,
-      parentUserID:
-          map['parentUserID'] != null ? map['parentUserID'] as String : null,
-      companyID: map['companyID'] != null ? map['companyID'] as String : null,
-      profileImageDownloadURL: map['profileImageDownloadURL'] != null
-          ? map['profileImageDownloadURL'] as String
-          : null,
-      thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
-          ? map['thumbnailDownloadURL'] as String
-          : null,
-      pendingCompanyRequestID: map['pendingCompanyRequestID'] != null
-          ? map['pendingCompanyRequestID'] as String
-          : null,
-      defaultLandingPageID: map['defaultLandingPageID'] != null
-          ? map['defaultLandingPageID'] as String
-          : null,
-      tutorialStep:
-          map['tutorialStep'] != null ? map['tutorialStep'] as int : null,
-      unregisteredPromoterIDs: map['unregisteredPromoterIDs'] != null
-          ? List<String>.from(map['unregisteredPromoterIDs'])
-          : null,
-      registeredPromoterIDs: map['registeredPromoterIDs'] != null
-          ? List<String>.from(map['registeredPromoterIDs'])
-          : null,
-      landingPageIDs: map['landingPageIDs'] != null
-          ? List<String>.from(map['landingPageIDs'])
-          : null,
-      recommendationIDs: map['recommendationIDs'] != null
-          ? List<String>.from(map['recommendationIDs'])
-          : null,
-      favoriteRecommendationIDs: map['favoriteRecommendationIDs'] != null
-          ? List<String>.from(map['favoriteRecommendationIDs'])
-          : null,
-      archivedRecommendationIDs: map['archivedRecommendationIDs'] != null
-          ? List<String>.from(map['archivedRecommendationIDs'])
-          : null,
-      recommendationCountLast30Days: map['recommendationCountLast30Days'] != null
-          ? map['recommendationCountLast30Days'] as int
-          : null,
-      deletesAt: map['deletesAt'] != null
-          ? (map['deletesAt'] as Timestamp).toDate()
-          : null,
-      lastUpdated: map['lastUpdated'] != null
-          ? (map['lastUpdated'] as Timestamp).toDate()
-          : null,
-      createdAt: map['createdAt'] as dynamic,
-    );
+        id: "",
+        gender: map['gender'] != null ? map['gender'] as String : "none",
+        firstName: map['firstName'] != null ? map['firstName'] as String : null,
+        lastName: map['lastName'] != null ? map['lastName'] as String : null,
+        birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
+        address: map['address'] != null ? map['address'] as String : null,
+        postCode: map['postCode'] != null ? map['postCode'] as String : null,
+        place: map['place'] != null ? map['place'] as String : null,
+        email: map['email'] != null ? map['email'] as String : null,
+        parentUserID:
+            map['parentUserID'] != null ? map['parentUserID'] as String : null,
+        companyID: map['companyID'] != null ? map['companyID'] as String : null,
+        profileImageDownloadURL: map['profileImageDownloadURL'] != null
+            ? map['profileImageDownloadURL'] as String
+            : null,
+        thumbnailDownloadURL: map['thumbnailDownloadURL'] != null
+            ? map['thumbnailDownloadURL'] as String
+            : null,
+        pendingCompanyRequestID: map['pendingCompanyRequestID'] != null
+            ? map['pendingCompanyRequestID'] as String
+            : null,
+        defaultLandingPageID: map['defaultLandingPageID'] != null
+            ? map['defaultLandingPageID'] as String
+            : null,
+        tutorialStep:
+            map['tutorialStep'] != null ? map['tutorialStep'] as int : null,
+        unregisteredPromoterIDs: map['unregisteredPromoterIDs'] != null
+            ? List<String>.from(map['unregisteredPromoterIDs'])
+            : null,
+        registeredPromoterIDs: map['registeredPromoterIDs'] != null
+            ? List<String>.from(map['registeredPromoterIDs'])
+            : null,
+        landingPageIDs: map['landingPageIDs'] != null
+            ? List<String>.from(map['landingPageIDs'])
+            : null,
+        recommendationIDs: map['recommendationIDs'] != null
+            ? List<String>.from(map['recommendationIDs'])
+            : null,
+        favoriteRecommendationIDs: map['favoriteRecommendationIDs'] != null
+            ? List<String>.from(map['favoriteRecommendationIDs'])
+            : null,
+        archivedRecommendationIDs: map['archivedRecommendationIDs'] != null
+            ? List<String>.from(map['archivedRecommendationIDs'])
+            : null,
+        recommendationCountLast30Days:
+            map['recommendationCountLast30Days'] != null
+                ? map['recommendationCountLast30Days'] as int
+                : null,
+        deletesAt: map['deletesAt'] != null
+            ? (map['deletesAt'] as Timestamp).toDate()
+            : null,
+        lastUpdated: map['lastUpdated'] != null
+            ? (map['lastUpdated'] as Timestamp).toDate()
+            : null,
+        createdAt: map['createdAt'] as dynamic,
+        recommendationCounterResetAt:
+            map['recommendationCounterResetAt'] != null
+                ? (map['recommendationCounterResetAt'] as Timestamp).toDate()
+                : null);
   }
 
-  UserModel copyWith({
-    String? id,
-    String? gender,
-    String? firstName,
-    String? lastName,
-    String? birthDate,
-    String? address,
-    String? postCode,
-    String? place,
-    String? email,
-    String? parentUserID,
-    String? companyID,
-    String? profileImageDownloadURL,
-    String? thumbnailDownloadURL,
-    String? pendingCompanyRequestID,
-    String? defaultLandingPageID,
-    int? tutorialStep,
-    List<String>? unregisteredPromoterIDs,
-    List<String>? registeredPromoterIDs,
-    List<String>? landingPageIDs,
-    List<String>? recommendationIDs,
-    List<String>? favoriteRecommendationIDs,
-    List<String>? archivedRecommendationIDs,
-    int? recommendationCountLast30Days,
-    DateTime? deletesAt,
-    DateTime? lastUpdated,
-    dynamic createdAt,
-  }) {
+  UserModel copyWith(
+      {String? id,
+      String? gender,
+      String? firstName,
+      String? lastName,
+      String? birthDate,
+      String? address,
+      String? postCode,
+      String? place,
+      String? email,
+      String? parentUserID,
+      String? companyID,
+      String? profileImageDownloadURL,
+      String? thumbnailDownloadURL,
+      String? pendingCompanyRequestID,
+      String? defaultLandingPageID,
+      int? tutorialStep,
+      List<String>? unregisteredPromoterIDs,
+      List<String>? registeredPromoterIDs,
+      List<String>? landingPageIDs,
+      List<String>? recommendationIDs,
+      List<String>? favoriteRecommendationIDs,
+      List<String>? archivedRecommendationIDs,
+      int? recommendationCountLast30Days,
+      DateTime? deletesAt,
+      DateTime? lastUpdated,
+      dynamic createdAt,
+      DateTime? recommendationCounterResetAt}) {
     return UserModel(
-      id: id ?? this.id,
-      gender: gender ?? this.gender,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      birthDate: birthDate ?? this.birthDate,
-      address: address ?? this.address,
-      postCode: postCode ?? this.postCode,
-      place: place ?? this.place,
-      email: email ?? this.email,
-      parentUserID: parentUserID ?? this.parentUserID,
-      companyID: companyID ?? this.companyID,
-      profileImageDownloadURL:
-          profileImageDownloadURL ?? this.profileImageDownloadURL,
-      thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
-      pendingCompanyRequestID:
-          pendingCompanyRequestID ?? this.pendingCompanyRequestID,
-      unregisteredPromoterIDs:
-          unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
-      defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
-      tutorialStep: tutorialStep ?? this.tutorialStep,
-      registeredPromoterIDs:
-          registeredPromoterIDs ?? this.registeredPromoterIDs,
-      landingPageIDs: landingPageIDs ?? this.landingPageIDs,
-      recommendationIDs: recommendationIDs ?? this.recommendationIDs,
-      favoriteRecommendationIDs:
-          favoriteRecommendationIDs ?? this.favoriteRecommendationIDs,
-      archivedRecommendationIDs:
-          archivedRecommendationIDs ?? this.archivedRecommendationIDs,
-      recommendationCountLast30Days:
-          recommendationCountLast30Days ?? this.recommendationCountLast30Days,
-      deletesAt: deletesAt ?? this.deletesAt,
-      lastUpdated: lastUpdated ?? this.lastUpdated,
-      createdAt: createdAt ?? this.createdAt,
-    );
+        id: id ?? this.id,
+        gender: gender ?? this.gender,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        birthDate: birthDate ?? this.birthDate,
+        address: address ?? this.address,
+        postCode: postCode ?? this.postCode,
+        place: place ?? this.place,
+        email: email ?? this.email,
+        parentUserID: parentUserID ?? this.parentUserID,
+        companyID: companyID ?? this.companyID,
+        profileImageDownloadURL:
+            profileImageDownloadURL ?? this.profileImageDownloadURL,
+        thumbnailDownloadURL: thumbnailDownloadURL ?? this.thumbnailDownloadURL,
+        pendingCompanyRequestID:
+            pendingCompanyRequestID ?? this.pendingCompanyRequestID,
+        unregisteredPromoterIDs:
+            unregisteredPromoterIDs ?? this.unregisteredPromoterIDs,
+        defaultLandingPageID: defaultLandingPageID ?? this.defaultLandingPageID,
+        tutorialStep: tutorialStep ?? this.tutorialStep,
+        registeredPromoterIDs:
+            registeredPromoterIDs ?? this.registeredPromoterIDs,
+        landingPageIDs: landingPageIDs ?? this.landingPageIDs,
+        recommendationIDs: recommendationIDs ?? this.recommendationIDs,
+        favoriteRecommendationIDs:
+            favoriteRecommendationIDs ?? this.favoriteRecommendationIDs,
+        archivedRecommendationIDs:
+            archivedRecommendationIDs ?? this.archivedRecommendationIDs,
+        recommendationCountLast30Days:
+            recommendationCountLast30Days ?? this.recommendationCountLast30Days,
+        deletesAt: deletesAt ?? this.deletesAt,
+        lastUpdated: lastUpdated ?? this.lastUpdated,
+        createdAt: createdAt ?? this.createdAt,
+        recommendationCounterResetAt:
+            recommendationCounterResetAt ?? this.recommendationCounterResetAt);
   }
 
   factory UserModel.fromFirestore(Map<String, dynamic> doc, String id) {
@@ -249,7 +257,8 @@ class UserModel extends Equatable {
         recommendationCountLast30Days: recommendationCountLast30Days,
         deletesAt: deletesAt,
         lastUpdated: lastUpdated,
-        createdAt: (createdAt as Timestamp).toDate());
+        createdAt: (createdAt as Timestamp).toDate(),
+        recommendationCounterResetAt: recommendationCounterResetAt);
   }
 
   factory UserModel.fromDomain(CustomUser user) {
@@ -279,7 +288,8 @@ class UserModel extends Equatable {
         recommendationCountLast30Days: user.recommendationCountLast30Days,
         deletesAt: user.deletesAt,
         lastUpdated: user.lastUpdated,
-        createdAt: FieldValue.serverTimestamp());
+        createdAt: FieldValue.serverTimestamp(),
+        recommendationCounterResetAt: user.recommendationCounterResetAt);
   }
 
   @override
@@ -305,6 +315,7 @@ class UserModel extends Equatable {
         recommendationIDs,
         favoriteRecommendationIDs,
         archivedRecommendationIDs,
-        recommendationCountLast30Days
+        recommendationCountLast30Days,
+        recommendationCounterResetAt
       ];
 }

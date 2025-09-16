@@ -1400,6 +1400,26 @@
             }
         }
     },
+    "recommendations_limit_reset_days": "Wird zurückgesetzt in: {days} Tagen",
+    "@recommendations_limit_reset_days": {
+        "description": "Text für die Zurücksetzung des Empfehlungslimits in Tagen",
+        "placeholders": {
+            "days": {
+                "type": "int",
+                "description": "Anzahl der Tage bis zur Zurücksetzung"
+            }
+        }
+    },
+    "recommendations_limit_reset_hours": "Wird zurückgesetzt in: {hours} Stunden",
+    "@recommendations_limit_reset_hours": {
+        "description": "Text für die Zurücksetzung des Empfehlungslimits in Stunden",
+        "placeholders": {
+            "hours": {
+                "type": "int",
+                "description": "Anzahl der Stunden bis zur Zurücksetzung"
+            }
+        }
+    },
     "recommendations_sent_success": "Die Empfehlung an {name} wurde erfolgreich versendet!",
     "@recommendations_sent_success": {
         "description": "Erfolgsmeldung nach dem Versenden einer Empfehlung",

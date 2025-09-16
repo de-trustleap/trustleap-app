@@ -74,7 +74,8 @@ void main() {
         'tutorialStep': null,
         "deletesAt": null,
         "lastUpdated": null,
-        "createdAt": Timestamp(100000, 0)
+        "createdAt": Timestamp(100000, 0),
+        'recommendationCounterResetAt': null
       };
       // When
       final result = model.toMap();
@@ -101,7 +102,8 @@ void main() {
         "landingPageIDs": ["id"],
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
-        "createdAt": Timestamp(100000, 0)
+        "createdAt": Timestamp(100000, 0),
+        "recommendationCounterResetAt": null
       };
       final expectedResult = UserModel(
           id: "",
@@ -118,7 +120,8 @@ void main() {
           landingPageIDs: const ["id"],
           registeredPromoterIDs: const ["id"],
           unregisteredPromoterIDs: const ["id"],
-          createdAt: Timestamp(100000, 0));
+          createdAt: Timestamp(100000, 0),
+          recommendationCounterResetAt: null);
       // When
       final result = UserModel.fromMap(map);
       // Then
