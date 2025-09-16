@@ -339,8 +339,9 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                                     resetError();
                                   })
                             ]),
-                        const SizedBox(height: 8),
-                        Container(
+                        if (currentUser?.role == Role.promoter) ...[
+                          const SizedBox(height: 8),
+                          Container(
                           width: maxWidth,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
@@ -384,6 +385,7 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
                             ],
                           ),
                         ),
+                        ],
                       ],
                       if (showRecommendation && leads.isNotEmpty) ...[
                         const SizedBox(height: tabFieldSpacing),
