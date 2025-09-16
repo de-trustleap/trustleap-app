@@ -68,6 +68,7 @@ void main() {
         'recommendationIDs': null,
         'favoriteRecommendationIDs': null,
         'archivedRecommendationIDs': null,
+        'recommendationCountLast30Days': null,
         "registeredPromoterIDs": ["id"],
         "unregisteredPromoterIDs": ["id"],
         'tutorialStep': null,

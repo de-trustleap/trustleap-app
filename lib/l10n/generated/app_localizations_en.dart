@@ -1196,6 +1196,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendations_form_add_button_tooltip => 'Add recommendation';
 
   @override
+  String get recommendations_limit_title => 'Recommendation Limit';
+
+  @override
+  String get recommendations_limit_description =>
+      'You can send up to 6 recommendations per month.';
+
+  @override
+  String recommendations_limit_status(int current, int max) {
+    return 'Sent in the last 30 days: $current / $max';
+  }
+
+  @override
+  String recommendations_sent_success(String name) {
+    return 'The recommendation to $name has been sent successfully!';
+  }
+
+  @override
+  String get recommendations_limit_reached_tooltip =>
+      'Recommendation limit reached';
+
+  @override
   String get landingpage_pagebuilder_container_request_error =>
       'An error occurred while retrieving the data';
 
