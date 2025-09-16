@@ -1217,6 +1217,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Recommendation limit reached';
 
   @override
+  String get recommendations_no_active_landingpage_tooltip =>
+      'No active landing page assigned';
+
+  @override
+  String get recommendations_no_active_landingpage_warning =>
+      'No recommendations possible - You have no active landing page assigned';
+
+  @override
   String get landingpage_pagebuilder_container_request_error =>
       'An error occurred while retrieving the data';
 

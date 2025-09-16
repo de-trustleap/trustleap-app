@@ -19,11 +19,23 @@ class FormErrorView extends StatelessWidget {
             borderRadius: BorderRadius.circular(8)),
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: SelectableText(message,
-              style: themeData.textTheme.bodyLarge!.copyWith(
-                  color: themeData.colorScheme.error,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold)),
+          child: Row(
+            children: [
+              Icon(
+                Icons.warning,
+                color: themeData.colorScheme.error,
+                size: 20,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: SelectableText(message,
+                    style: themeData.textTheme.bodyLarge!.copyWith(
+                        color: themeData.colorScheme.error,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ],
+          ),
         ));
   }
 }

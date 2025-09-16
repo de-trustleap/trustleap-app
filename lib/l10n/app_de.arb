@@ -1414,6 +1414,14 @@
     "@recommendations_limit_reached_tooltip": {
         "description": "Tooltip wenn das Empfehlungslimit erreicht ist"
     },
+    "recommendations_no_active_landingpage_tooltip": "Keine aktive Landingpage zugewiesen",
+    "@recommendations_no_active_landingpage_tooltip": {
+        "description": "Tooltip wenn keine aktive Landingpage zugewiesen ist"
+    },
+    "recommendations_no_active_landingpage_warning": "Keine Empfehlungen möglich - Ihnen ist keine aktive Landingpage zugewiesen",
+    "@recommendations_no_active_landingpage_warning": {
+        "description": "Warnung wenn keine aktive Landingpage zugewiesen ist"
+    },
     "landingpage_pagebuilder_container_request_error": "Beim Abruf der Daten ist ein Fehler aufgetreten",
     "@landingpage_pagebuilder_container_request_error": {
         "description": "Fehlermeldung auf der Pagebuilder Seite wenn Request fehlschlägt"
