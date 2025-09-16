@@ -2171,6 +2171,18 @@ abstract class AppLocalizations {
   /// **'Recommendation limit reached'**
   String get recommendations_limit_reached_tooltip;
 
+  /// Tooltip when no active landing page is assigned
+  ///
+  /// In en, this message translates to:
+  /// **'No active landing page assigned'**
+  String get recommendations_no_active_landingpage_tooltip;
+
+  /// Warning when no active landing page is assigned
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations possible - You have no active landing page assigned'**
+  String get recommendations_no_active_landingpage_warning;
+
   /// Error title on the page builder page if request fails
   ///
   /// In en, this message translates to:

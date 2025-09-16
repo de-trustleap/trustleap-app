@@ -1240,6 +1240,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Empfehlungslimit erreicht';
 
   @override
+  String get recommendations_no_active_landingpage_tooltip =>
+      'Keine aktive Landingpage zugewiesen';
+
+  @override
+  String get recommendations_no_active_landingpage_warning =>
+      'Keine Empfehlungen möglich - Ihnen ist keine aktive Landingpage zugewiesen';
+
+  @override
   String get landingpage_pagebuilder_container_request_error =>
       'Beim Abruf der Daten ist ein Fehler aufgetreten';
 
