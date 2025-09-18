@@ -15,6 +15,7 @@ class PagebuilderCalendlyProperties extends Equatable
   final Color? primaryColor;
   final bool? hideEventTypeDetails;
   final PageBuilderShadow? shadow;
+  final bool? useIntrinsicHeight;
 
   const PagebuilderCalendlyProperties(
       {required this.width,
@@ -26,7 +27,8 @@ class PagebuilderCalendlyProperties extends Equatable
       required this.backgroundColor,
       required this.primaryColor,
       required this.hideEventTypeDetails,
-      required this.shadow});
+      required this.shadow,
+      required this.useIntrinsicHeight});
 
   PagebuilderCalendlyProperties copyWith(
       {double? width,
@@ -38,7 +40,8 @@ class PagebuilderCalendlyProperties extends Equatable
       Color? backgroundColor,
       Color? primaryColor,
       bool? hideEventTypeDetails,
-      PageBuilderShadow? shadow}) {
+      PageBuilderShadow? shadow,
+      bool? useIntrinsicHeight}) {
     return PagebuilderCalendlyProperties(
         width: width ?? this.width,
         height: height ?? this.height,
@@ -49,7 +52,8 @@ class PagebuilderCalendlyProperties extends Equatable
         backgroundColor: backgroundColor ?? this.backgroundColor,
         primaryColor: primaryColor ?? this.primaryColor,
         hideEventTypeDetails: hideEventTypeDetails ?? this.hideEventTypeDetails,
-        shadow: shadow ?? this.shadow);
+        shadow: shadow ?? this.shadow,
+        useIntrinsicHeight: useIntrinsicHeight ?? this.useIntrinsicHeight);
   }
 
   @override
@@ -63,6 +67,7 @@ class PagebuilderCalendlyProperties extends Equatable
         backgroundColor,
         primaryColor,
         hideEventTypeDetails,
-        shadow
+        shadow,
+        useIntrinsicHeight
       ];
 }

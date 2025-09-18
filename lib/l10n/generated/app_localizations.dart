@@ -3686,6 +3686,12 @@ abstract class AppLocalizations {
   /// **'Low'**
   String get recommendation_priority_low;
 
+  /// Label for the checkbox to enable dynamic height for Calendly widget
+  ///
+  /// In en, this message translates to:
+  /// **'Dynamic Height'**
+  String get pagebuilder_calendly_config_dynamic_height;
+
   /// The text above the priority dropdown menu in the filter on the Recommendation Manager page
   ///
   /// In en, this message translates to:

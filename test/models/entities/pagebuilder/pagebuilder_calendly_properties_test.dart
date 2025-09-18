@@ -18,6 +18,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        useIntrinsicHeight: false,
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
@@ -30,6 +31,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        useIntrinsicHeight: false,
         shadow: null,
       );
       // When
@@ -53,6 +55,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        useIntrinsicHeight: false,
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
@@ -65,6 +68,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: true,
+        useIntrinsicHeight: false,
         shadow: null,
       );
       // When
@@ -85,6 +89,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        useIntrinsicHeight: false,
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
@@ -97,6 +102,7 @@ void main() {
         backgroundColor: Colors.grey,
         primaryColor: Colors.green,
         hideEventTypeDetails: false,
+        useIntrinsicHeight: false,
         shadow: null,
       );
       // When
@@ -123,6 +129,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        useIntrinsicHeight: false,
         shadow: null,
       );
       const properties2 = PagebuilderCalendlyProperties(
@@ -135,6 +142,7 @@ void main() {
         backgroundColor: Colors.white,
         primaryColor: Colors.blue,
         hideEventTypeDetails: false,
+        useIntrinsicHeight: false,
         shadow: null,
       );
       // Then
@@ -153,6 +161,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        useIntrinsicHeight: null,
         shadow: null,
       );
       const properties2 = PagebuilderCalendlyProperties(
@@ -165,6 +174,7 @@ void main() {
         backgroundColor: null,
         primaryColor: null,
         hideEventTypeDetails: null,
+        useIntrinsicHeight: null,
         shadow: null,
       );
       // Then

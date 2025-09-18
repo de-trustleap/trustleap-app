@@ -2103,6 +2103,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendation_priority_low => 'Low';
 
   @override
+  String get pagebuilder_calendly_config_dynamic_height => 'Dynamic Height';
+
+  @override
   String get recommendation_manager_filter_sort_by_priorities =>
       'Sort by priority';
 

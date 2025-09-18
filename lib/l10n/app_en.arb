@@ -2450,6 +2450,10 @@
     "@recommendation_priority_low": {
         "description": "The priority Low for a recommendation"
     },
+    "pagebuilder_calendly_config_dynamic_height": "Dynamic Height",
+    "@pagebuilder_calendly_config_dynamic_height": {
+        "description": "Label for the checkbox to enable dynamic height for Calendly widget"
+    },
     "recommendation_manager_filter_sort_by_priorities": "Sort by priority",
     "@recommendation_manager_filter_sort_by_priorities": {
         "description": "The text above the priority dropdown menu in the filter on the Recommendation Manager page"
