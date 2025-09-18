@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_switch_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -102,7 +103,6 @@ class _PagebuilderConfigMenuCalendlyContentState
     PagebuilderCalendlyProperties properties,
     PagebuilderBloc pagebuilderCubit,
   ) {
-    final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
     final validValue = eventTypes.any((eventType) =>
@@ -150,20 +150,15 @@ class _PagebuilderConfigMenuCalendlyContentState
           },
         ),
         const SizedBox(height: 16),
-        Row(
-          children: [
-            Checkbox(
-              value: properties.hideEventTypeDetails ?? false,
-              onChanged: (bool? value) {
-                updateCalendlyProperties(
-                  properties.copyWith(hideEventTypeDetails: value ?? false),
-                  pagebuilderCubit,
-                );
-              },
-            ),
-            Text(localization.pagebuilder_calendly_content_hide_event_details,
-                style: themeData.textTheme.bodySmall),
-          ],
+        PagebuilderSwitchControl(
+          title: localization.pagebuilder_calendly_content_hide_event_details,
+          isActive: properties.hideEventTypeDetails ?? false,
+          onSelected: (value) {
+            updateCalendlyProperties(
+              properties.copyWith(hideEventTypeDetails: value),
+              pagebuilderCubit,
+            );
+          },
         ),
       ],
     );

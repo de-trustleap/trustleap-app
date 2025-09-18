@@ -18,6 +18,7 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
   final String? primaryColor;
   final bool? hideEventTypeDetails;
   final Map<String, dynamic>? shadow;
+  final bool? useIntrinsicHeight;
 
   const PagebuilderCalendlyPropertiesModel(
       {required this.width,
@@ -29,7 +30,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
       required this.backgroundColor,
       required this.primaryColor,
       required this.hideEventTypeDetails,
-      required this.shadow});
+      required this.shadow,
+      required this.useIntrinsicHeight});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -45,6 +47,9 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
       map['hideEventTypeDetails'] = hideEventTypeDetails;
     }
     if (shadow != null) map['shadow'] = shadow;
+    if (useIntrinsicHeight != null) {
+      map['useIntrinsicHeight'] = useIntrinsicHeight;
+    }
     return map;
   }
 
@@ -71,6 +76,9 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
             : null,
         shadow: map['shadow'] != null
             ? map['shadow'] as Map<String, dynamic>
+            : null,
+        useIntrinsicHeight: map['useIntrinsicHeight'] != null
+            ? map['useIntrinsicHeight'] as bool
             : null);
   }
 
@@ -84,7 +92,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
       String? backgroundColor,
       String? primaryColor,
       bool? hideEventTypeDetails,
-      Map<String, dynamic>? shadow}) {
+      Map<String, dynamic>? shadow,
+      bool? useIntrinsicHeight}) {
     return PagebuilderCalendlyPropertiesModel(
         width: width ?? this.width,
         height: height ?? this.height,
@@ -95,7 +104,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         backgroundColor: backgroundColor ?? this.backgroundColor,
         primaryColor: primaryColor ?? this.primaryColor,
         hideEventTypeDetails: hideEventTypeDetails ?? this.hideEventTypeDetails,
-        shadow: shadow ?? this.shadow);
+        shadow: shadow ?? this.shadow,
+        useIntrinsicHeight: useIntrinsicHeight ?? this.useIntrinsicHeight);
   }
 
   PagebuilderCalendlyProperties toDomain() {
@@ -117,7 +127,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         hideEventTypeDetails: hideEventTypeDetails,
         shadow: shadow != null
             ? PageBuilderShadowModel.fromMap(shadow!).toDomain()
-            : null);
+            : null,
+        useIntrinsicHeight: useIntrinsicHeight);
   }
 
   factory PagebuilderCalendlyPropertiesModel.fromDomain(
@@ -138,7 +149,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
             ? ColorUtility.colorToHex(properties.primaryColor!)
             : null,
         hideEventTypeDetails: properties.hideEventTypeDetails,
-        shadow: ShadowMapper.getMapFromShadow(properties.shadow));
+        shadow: ShadowMapper.getMapFromShadow(properties.shadow),
+        useIntrinsicHeight: properties.useIntrinsicHeight);
   }
 
   @override
@@ -152,6 +164,7 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         backgroundColor,
         primaryColor,
         hideEventTypeDetails,
-        shadow
+        shadow,
+        useIntrinsicHeight
       ];
 }

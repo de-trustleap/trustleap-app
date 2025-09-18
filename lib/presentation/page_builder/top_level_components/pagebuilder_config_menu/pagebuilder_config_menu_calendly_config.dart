@@ -3,9 +3,10 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_control.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_shadow_control.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_switch_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -41,14 +42,27 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
             },
           ),
           const SizedBox(height: 16),
-          PagebuilderNumberStepperControl(
-            title: localization.pagebuilder_calendly_config_height,
-            initialValue: properties.height?.toInt() ?? 200,
-            minValue: 100,
-            maxValue: 800,
+          if (!(properties.useIntrinsicHeight ?? false)) ...[
+            PagebuilderNumberStepperControl(
+              title: localization.pagebuilder_calendly_config_height,
+              initialValue: properties.height?.toInt() ?? 200,
+              minValue: 100,
+              maxValue: 800,
+              onSelected: (value) {
+                updateCalendlyProperties(
+                  properties.copyWith(height: value.toDouble()),
+                  pagebuilderCubit,
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+          ],
+          PagebuilderSwitchControl(
+            title: localization.pagebuilder_calendly_config_dynamic_height,
+            isActive: properties.useIntrinsicHeight ?? false,
             onSelected: (value) {
               updateCalendlyProperties(
-                properties.copyWith(height: value.toDouble()),
+                properties.copyWith(useIntrinsicHeight: value),
                 pagebuilderCubit,
               );
             },
@@ -104,7 +118,8 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           PagebuilderShadowControl(
-            title: localization.landingpage_pagebuilder_container_config_container_shadow,
+            title: localization
+                .landingpage_pagebuilder_container_config_container_shadow,
             initialShadow: properties.shadow,
             showSpreadRadius: true,
             onSelected: (shadow) {
