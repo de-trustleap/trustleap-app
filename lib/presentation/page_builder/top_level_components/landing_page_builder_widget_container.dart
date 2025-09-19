@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pa
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_edit_button.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/section_max_width_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -40,8 +41,8 @@ class _LandingPageBuilderWidgetContainerState
             final isSelected = selectedWidgetId == widgetID;
             final showBorder = isHovered || isSelected;
             return Container(
-              constraints: BoxConstraints(
-                  maxWidth: widget.model.maxWidth ?? double.infinity),
+              constraints:
+                  BoxConstraints(maxWidth: _getEffectiveMaxWidth(context)),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
                     widget.model.margin?.left ?? 0,
@@ -202,5 +203,19 @@ class _LandingPageBuilderWidgetContainerState
         );
       },
     );
+  }
+
+  double _getEffectiveMaxWidth(BuildContext context) {
+    final widgetMaxWidth = widget.model.maxWidth;
+    final sectionProvider = SectionMaxWidthProvider.of(context);
+    final sectionMaxWidth = sectionProvider?.sectionMaxWidth;
+
+    if (widgetMaxWidth != null) {
+      return widgetMaxWidth;
+    }
+    if (sectionMaxWidth != null) {
+      return sectionMaxWidth;
+    }
+    return double.infinity;
   }
 }

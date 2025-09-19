@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_edit_button.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_builder.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/section_max_width_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -31,7 +32,8 @@ class _LandingPageBuilderSectionViewState
     switch (widget.model.layout) {
       case PageBuilderSectionLayout.column:
       default:
-        return ConstrainedBox(
+        return Center(
+            child: ConstrainedBox(
           constraints: BoxConstraints(
               maxWidth: widget.model.maxWidth ?? double.infinity),
           child: MouseRegion(
@@ -54,6 +56,7 @@ class _LandingPageBuilderSectionViewState
                   alignment: Alignment.center,
                   children: [
                     Container(
+                        width: double.infinity,
                         decoration: BoxDecoration(
                           color: widget.model.background?.backgroundColor,
                           border: showBorder
@@ -115,13 +118,16 @@ class _LandingPageBuilderSectionViewState
                             ],
                             Container(
                               alignment: Alignment.center,
-                              child: Column(
-                                  children: widget.model.widgets != null
-                                      ? widget.model.widgets!
-                                          .map((widget) =>
-                                              widgetBuilder.build(widget))
-                                          .toList()
-                                      : []),
+                              child: SectionMaxWidthProvider(
+                                sectionMaxWidth: widget.model.maxWidth,
+                                child: Column(
+                                    children: widget.model.widgets != null
+                                        ? widget.model.widgets!
+                                            .map((widget) =>
+                                                widgetBuilder.build(widget))
+                                            .toList()
+                                        : []),
+                              ),
                             )
                           ],
                         )),
@@ -138,7 +144,7 @@ class _LandingPageBuilderSectionViewState
               },
             ),
           ),
-        );
+        ));
     }
   }
 }
