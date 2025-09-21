@@ -1,13 +1,37 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-class FormErrorView extends StatelessWidget {
+class FormErrorView extends StatefulWidget {
   final String message;
+  final bool autoScroll;
 
   const FormErrorView({
     super.key,
     required this.message,
+    this.autoScroll = true,
   });
+
+  @override
+  State<FormErrorView> createState() => _FormErrorViewState();
+}
+
+class _FormErrorViewState extends State<FormErrorView> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.autoScroll) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          Scrollable.ensureVisible(
+            context,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            alignment: 0.1,
+          );
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +52,7 @@ class FormErrorView extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: SelectableText(message,
+                child: SelectableText(widget.message,
                     style: themeData.textTheme.bodyLarge!.copyWith(
                         color: themeData.colorScheme.error,
                         fontSize: 14,
