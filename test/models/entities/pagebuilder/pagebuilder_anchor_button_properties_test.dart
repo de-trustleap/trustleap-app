@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderAnchorButtonProperties_CopyWith", () {
@@ -17,7 +18,7 @@ void main() {
               width: 200.0,
               height: 50.0,
               borderRadius: 10.0,
-              backgroundColor: Colors.white,
+              backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
                   fontSize: 18.0,
@@ -35,7 +36,7 @@ void main() {
               width: 200.0,
               height: 50.0,
               borderRadius: 10.0,
-              backgroundColor: Colors.white,
+              backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
                   fontSize: 18.0,
@@ -81,7 +82,7 @@ void main() {
         width: 100.0,
         height: 40.0,
         borderRadius: 4.0,
-        backgroundColor: Colors.green,
+        backgroundPaint: const PagebuilderPaint.color(Colors.green),
         textProperties: originalTextProperties,
       );
 
@@ -117,7 +118,7 @@ void main() {
         width: 300.0,
         height: 80.0,
         borderRadius: 16.0,
-        backgroundColor: Colors.purple,
+        backgroundPaint: const PagebuilderPaint.color(Colors.purple),
         textProperties: mutatedTextProperties,
       );
 
@@ -131,7 +132,7 @@ void main() {
       expect(original.buttonProperties?.width, equals(100.0));
       expect(original.buttonProperties?.height, equals(40.0));
       expect(original.buttonProperties?.borderRadius, equals(4.0));
-      expect(original.buttonProperties?.backgroundColor, equals(Colors.green));
+      expect(original.buttonProperties?.backgroundPaint?.color, equals(Colors.green));
       expect(original.buttonProperties?.textProperties?.text,
           equals('Original Text'));
       expect(original.buttonProperties?.textProperties?.fontSize, equals(14.0));
@@ -158,7 +159,7 @@ void main() {
               width: 200.0,
               height: 50.0,
               borderRadius: 10.0,
-              backgroundColor: Colors.white,
+              backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
                   fontSize: 18.0,
@@ -176,7 +177,7 @@ void main() {
               width: 200.0,
               height: 50.0,
               borderRadius: 10.0,
-              backgroundColor: Colors.white,
+              backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
                   fontSize: 18.0,

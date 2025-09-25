@@ -108,7 +108,7 @@ void main() {
               width: 200.0,
               height: 200.0,
               borderRadius: 12.0,
-              backgroundColor: null,
+              backgroundPaint: null,
               textProperties: PageBuilderTextProperties(
                   text: "Test",
                   fontSize: 16.0,
@@ -138,7 +138,7 @@ void main() {
               width: 200.0,
               height: 200.0,
               borderRadius: 12.0,
-              backgroundColor: null,
+              backgroundPaint: null,
               textProperties: PageBuilderTextProperties(
                   text: "Test",
                   fontSize: 16.0,

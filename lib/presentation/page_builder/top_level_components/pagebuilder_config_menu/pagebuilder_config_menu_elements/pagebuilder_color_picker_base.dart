@@ -98,7 +98,6 @@ class _PagebuilderColorPickerBaseState
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Header
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -116,7 +115,6 @@ class _PagebuilderColorPickerBaseState
                       ),
                     ],
                   ),
-                  // Tab Bar for Color/Gradient navigation (only show if gradients enabled)
                   if (widget.enableGradients) ...[
                     const SizedBox(height: 16),
                     PagebuilderColorGradientTabBar(
@@ -129,9 +127,7 @@ class _PagebuilderColorPickerBaseState
                     ),
                     const SizedBox(height: 16),
                   ],
-                  // Content based on current tab
                   if (_isColorTab) ...[
-                    // Color Tab
                     PagebuilderColorTab(
                       initialColor: _selectedColor,
                       enableOpacity: widget.enableOpacity,

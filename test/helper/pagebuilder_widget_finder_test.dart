@@ -58,7 +58,7 @@ void main() {
           localImage: Uint8List(0),
           showPromoterImage: false,
           contentMode: BoxFit.cover,
-          overlayColor: null);
+          overlayPaint: null);
 
       final mockTextWidget1 = PageBuilderWidget(
           id: UniqueID.fromUniqueString("widget1"),

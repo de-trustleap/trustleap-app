@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfiel
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderContactFormProperties_CopyWith", () {
@@ -133,7 +134,7 @@ void main() {
               width: 200,
               height: 100,
               borderRadius: 12.0,
-              backgroundColor: null,
+              backgroundPaint: null,
               textProperties: null));
       final expectedResult = PageBuilderContactFormProperties(
           email: "test@test.de",
@@ -257,7 +258,7 @@ void main() {
               width: 200,
               height: 100,
               borderRadius: 16,
-              backgroundColor: null,
+              backgroundPaint: null,
               textProperties: null));
       // When
       final result = model.copyWith(
@@ -294,7 +295,7 @@ void main() {
               width: 200,
               height: 100,
               borderRadius: 16,
-              backgroundColor: null,
+              backgroundPaint: null,
               textProperties: null));
       // Then
       expect(result, expectedResult);
@@ -426,7 +427,7 @@ void main() {
               width: 200,
               height: 100,
               borderRadius: 12.0,
-              backgroundColor: null,
+              backgroundPaint: null,
               textProperties: null));
       final properties2 = PageBuilderContactFormProperties(
           email: "test@test.de",
@@ -550,7 +551,7 @@ void main() {
               width: 200,
               height: 100,
               borderRadius: 12.0,
-              backgroundColor: null,
+              backgroundPaint: null,
               textProperties: null));
       // Then
       expect(properties1, properties2);

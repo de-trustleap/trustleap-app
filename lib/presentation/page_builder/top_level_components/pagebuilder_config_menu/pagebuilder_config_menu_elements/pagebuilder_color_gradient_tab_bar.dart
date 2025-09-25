@@ -23,25 +23,21 @@ class PagebuilderColorGradientTabBar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
               color: isColorMode
-                  ? themeData.primaryColor
+                  ? themeData.colorScheme.secondary
                   : Colors.transparent,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
                 bottomLeft: Radius.circular(8),
               ),
               border: Border.all(
-                color: isColorMode
-                    ? themeData.primaryColor
-                    : Colors.grey,
+                color: isColorMode ? themeData.primaryColor : Colors.grey,
               ),
             ),
-            child: Text(
-              "Farbe",
-              style: TextStyle(
-                color: isColorMode ? Colors.white : Colors.grey,
-                fontWeight: isColorMode ? FontWeight.bold : FontWeight.normal,
-              ),
-            ),
+            child: Text("Farbe",
+                style: themeData.textTheme.bodyMedium!.copyWith(
+                    color: isColorMode ? Colors.white : Colors.grey.shade800,
+                    fontWeight:
+                        isColorMode ? FontWeight.bold : FontWeight.normal)),
           ),
         ),
         GestureDetector(
@@ -50,24 +46,22 @@ class PagebuilderColorGradientTabBar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
               color: !isColorMode
-                  ? themeData.primaryColor
+                  ? themeData.colorScheme.secondary
                   : Colors.transparent,
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(8),
                 bottomRight: Radius.circular(8),
               ),
               border: Border.all(
-                color: !isColorMode
-                    ? themeData.primaryColor
-                    : Colors.grey,
+                color: !isColorMode ? themeData.primaryColor : Colors.grey,
               ),
             ),
             child: Text(
-              "Gradient",
-              style: TextStyle(
-                color: !isColorMode ? Colors.white : Colors.grey,
-                fontWeight: !isColorMode ? FontWeight.bold : FontWeight.normal,
-              ),
+              "Farbverlauf",
+              style: themeData.textTheme.bodyMedium!.copyWith(
+                  color: isColorMode ? Colors.grey.shade800 : Colors.white,
+                  fontWeight:
+                      isColorMode ? FontWeight.normal : FontWeight.bold),
             ),
           ),
         ),

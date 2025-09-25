@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderSection_CopyWith", () {
@@ -28,9 +29,9 @@ void main() {
                 containerChild: null,
                 widthPercentage: 30,
                 background: PagebuilderBackground(
-                    backgroundColor: Colors.white,
+                    backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
-                    overlayColor: null),
+                    overlayPaint: null),
                 hoverBackground: null,
                 padding: null,
                 margin: null,
@@ -54,9 +55,9 @@ void main() {
                 containerChild: null,
                 widthPercentage: 30,
                 background: PagebuilderBackground(
-                    backgroundColor: Colors.white,
+                    backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
-                    overlayColor: null),
+                    overlayPaint: null),
                 hoverBackground: null,
                 padding: null,
                 margin: null,
@@ -78,9 +79,9 @@ void main() {
             containerChild: null,
             widthPercentage: 30,
             background: PagebuilderBackground(
-                backgroundColor: Colors.white,
+                backgroundPaint: const PagebuilderPaint.color(Colors.white),
                 imageProperties: null,
-                overlayColor: null),
+                overlayPaint: null),
             hoverBackground: null,
             padding: null,
             margin: null,
@@ -110,9 +111,9 @@ void main() {
                 containerChild: null,
                 widthPercentage: 30,
                 background: PagebuilderBackground(
-                    backgroundColor: Colors.white,
+                    backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
-                    overlayColor: null),
+                    overlayPaint: null),
                 hoverBackground: null,
                 padding: null,
                 margin: null,
@@ -136,9 +137,9 @@ void main() {
                 containerChild: null,
                 widthPercentage: 30,
                 background: PagebuilderBackground(
-                    backgroundColor: Colors.white,
+                    backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
-                    overlayColor: null),
+                    overlayPaint: null),
                 hoverBackground: null,
                 padding: null,
                 margin: null,

@@ -33,7 +33,8 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
   void initState() {
     super.initState();
     _selectedColor = widget.initialColor;
-    _hexTextFieldController.text = ColorUtility.colorToHex(_selectedColor, includeHashPrefix: true);
+    _hexTextFieldController.text =
+        ColorUtility.colorToHex(_selectedColor, includeHashPrefix: true);
   }
 
   @override
@@ -42,7 +43,8 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
     if (widget.initialColor != oldWidget.initialColor) {
       setState(() {
         _selectedColor = widget.initialColor;
-        _hexTextFieldController.text = ColorUtility.colorToHex(_selectedColor, includeHashPrefix: true);
+        _hexTextFieldController.text =
+            ColorUtility.colorToHex(_selectedColor, includeHashPrefix: true);
       });
     }
   }
@@ -79,7 +81,6 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
           },
         ),
         const SizedBox(height: 16),
-        // Color Picker - grayed out when inactive
         Opacity(
           opacity: widget.isColorMode ? 1.0 : 0.5,
           child: IgnorePointer(
@@ -90,8 +91,9 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
                 if (widget.isColorMode) {
                   setState(() {
                     _selectedColor = color;
-                    _hexTextFieldController.text =
-                        ColorUtility.colorToHex(_selectedColor, includeHashPrefix: true);
+                    _hexTextFieldController.text = ColorUtility.colorToHex(
+                        _selectedColor,
+                        includeHashPrefix: true);
                   });
                   widget.onColorChanged(color);
                 }
@@ -142,17 +144,20 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
                       }
                     },
                     decoration: InputDecoration(
-                      labelText: localization.landingpage_pagebuilder_color_picker_hex_textfield,
+                      labelText: localization
+                          .landingpage_pagebuilder_color_picker_hex_textfield,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 2.0),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.grey, width: 1.0),
+                        borderSide:
+                            const BorderSide(color: Colors.grey, width: 1.0),
                       ),
                     ),
                   ),

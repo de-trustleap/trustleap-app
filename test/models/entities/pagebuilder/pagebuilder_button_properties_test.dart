@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderButtonProperties_CopyWith", () {
@@ -14,7 +15,7 @@ void main() {
           width: 200.0,
           height: 50.0,
           borderRadius: 10.0,
-          backgroundColor: Colors.white,
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: 18.0,
@@ -30,7 +31,7 @@ void main() {
           width: 400.0,
           height: 50.0,
           borderRadius: 12.0,
-          backgroundColor: Colors.white,
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: 18.0,
@@ -74,7 +75,7 @@ void main() {
         width: 200.0,
         height: 50.0,
         borderRadius: 8.0,
-        backgroundColor: Color(0xFF2196F3),
+        backgroundPaint: const PagebuilderPaint.color(Color(0xFF2196F3)),
         textProperties: textProperties,
       );
 
@@ -86,7 +87,7 @@ void main() {
       expect(copy.width, equals(original.width));
       expect(copy.height, equals(original.height));
       expect(copy.borderRadius, equals(original.borderRadius));
-      expect(copy.backgroundColor, equals(original.backgroundColor));
+      expect(copy.backgroundPaint?.color, equals(original.backgroundPaint?.color));
       expect(copy.textProperties, equals(original.textProperties));
     });
   });
@@ -98,7 +99,7 @@ void main() {
           width: 200.0,
           height: 50.0,
           borderRadius: 10.0,
-          backgroundColor: Colors.white,
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: 18.0,
@@ -114,7 +115,7 @@ void main() {
           width: 200.0,
           height: 50.0,
           borderRadius: 10.0,
-          backgroundColor: Colors.white,
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: 18.0,

@@ -42,7 +42,6 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
     }
   }
 
-
   void _showColorPicker(BuildContext context, ThemeData themeData,
       AppLocalizations localization, int stopIndex) {
     final stop = _selectedGradient.stops[stopIndex];
@@ -135,17 +134,14 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Switch Control
         PagebuilderSwitchControl(
-          title: "Gradient auswählen",
+          title: "Farbverlauf auswählen",
           isActive: isActive,
           onSelected: (bool isSelected) {
-            widget.onModeChanged(
-                !isSelected); // Invert because this is the gradient switch
+            widget.onModeChanged(!isSelected);
           },
         ),
         const SizedBox(height: 16),
-        // Gradient Picker - grayed out when inactive
         Opacity(
           opacity: isActive ? 1.0 : 0.5,
           child: IgnorePointer(
@@ -153,7 +149,6 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Gradient Preview
                 Container(
                   height: 80,
                   width: double.infinity,
@@ -165,7 +160,6 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                // Gradient Type Selection
                 Row(
                   children: [
                     Text("Typ: ", style: themeData.textTheme.bodyMedium),
@@ -193,7 +187,6 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                // Color Stops
                 Text("Farben:", style: themeData.textTheme.bodyMedium),
                 const SizedBox(height: 8),
                 ...List.generate(_selectedGradient.stops.length, (index) {
@@ -202,7 +195,6 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
                       children: [
-                        // Color preview
                         GestureDetector(
                           onTap: isActive
                               ? () => _showColorPicker(
@@ -220,7 +212,6 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        // Position slider
                         Expanded(
                           child: Slider(
                             value: stop.position,
@@ -244,7 +235,6 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                                 : null,
                           ),
                         ),
-                        // Remove button
                         if (_selectedGradient.stops.length > 2)
                           IconButton(
                             icon: const Icon(Icons.remove_circle_outline),
@@ -266,7 +256,6 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                     ),
                   );
                 }),
-                // Add color button
                 if (_selectedGradient.stops.length < 5)
                   TextButton.icon(
                     onPressed: isActive
@@ -275,9 +264,11 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                               final newStops =
                                   List<PagebuilderGradientStop>.from(
                                       _selectedGradient.stops);
-                              newStops.add(const PagebuilderGradientStop(
-                                  color: Colors.green, position: 0.5));
-                              newStops.sort((a, b) => a.position.compareTo(b.position));
+                              newStops.add(PagebuilderGradientStop(
+                                  color: themeData.colorScheme.secondary,
+                                  position: 0.5));
+                              newStops.sort(
+                                  (a, b) => a.position.compareTo(b.position));
                               _selectedGradient =
                                   _selectedGradient.copyWith(stops: newStops);
                             });
@@ -285,7 +276,8 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                           }
                         : null,
                     icon: const Icon(Icons.add),
-                    label: const Text("Farbe hinzufügen"),
+                    label: Text("Farbe hinzufügen",
+                        style: themeData.textTheme.bodyMedium),
                   ),
               ],
             ),

@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_pro
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderContactFormPropertiesModel_CopyWith", () {
@@ -96,7 +97,7 @@ void main() {
             "width": 200,
             "height": 70,
             "borderRadius": 4,
-            "backgroundColor": "FF333A56",
+            "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -188,7 +189,7 @@ void main() {
             "width": 200,
             "height": 70,
             "borderRadius": 4,
-            "backgroundColor": "FF333A56",
+            "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -308,7 +309,7 @@ void main() {
             "width": 200,
             "height": 70,
             "borderRadius": 4,
-            "backgroundColor": "FF333A56",
+            "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -400,7 +401,7 @@ void main() {
           "width": 200,
           "height": 70,
           "borderRadius": 4,
-          "backgroundColor": "FF333A56",
+          "backgroundPaint": {"color": "FF333A56"},
           "textProperties": {
             "alignment": "center",
             "fontSize": 16.0,
@@ -503,7 +504,7 @@ void main() {
           "width": 200,
           "height": 70,
           "borderRadius": 4,
-          "backgroundColor": "FF333A56",
+          "backgroundPaint": {"color": "FF333A56"},
           "textProperties": {
             "alignment": "center",
             "fontSize": 16.0,
@@ -596,7 +597,7 @@ void main() {
             "width": 200,
             "height": 70,
             "borderRadius": 4,
-            "backgroundColor": "FF333A56",
+            "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -624,7 +625,7 @@ void main() {
             "minLines": 1,
             "maxLines": 1,
             "isRequired": true,
-            "backgroundColor": null,
+            "backgroundPaint": null,
             "borderColor": "FFF9F9F9",
             "placeHolderTextProperties": {
               "alignment": "left",
@@ -694,7 +695,7 @@ void main() {
             "width": 200.0,
             "height": 70.0,
             "borderRadius": 4.0,
-            "backgroundColor": "FF333A56",
+            "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -825,7 +826,7 @@ void main() {
               width: 200.0,
               height: 70.0,
               borderRadius: 4,
-              backgroundColor: Color(0xFF333A56),
+              backgroundPaint: const PagebuilderPaint.color(Color(0xFF333A56)),
               textProperties: PageBuilderTextProperties(
                   text: "NACHRICHT SENDEN",
                   fontSize: 16.0,
@@ -971,7 +972,7 @@ void main() {
               width: 200.0,
               height: 70.0,
               borderRadius: 4,
-              backgroundColor: Color(0xFF333A56),
+              backgroundPaint: const PagebuilderPaint.color(Color(0xFF333A56)),
               textProperties: PageBuilderTextProperties(
                   text: "NACHRICHT SENDEN",
                   fontSize: 16.0,
@@ -1059,7 +1060,7 @@ void main() {
             "width": 200.0,
             "height": 70.0,
             "borderRadius": 4.0,
-            "backgroundColor": "FF333A56",
+            "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -1159,7 +1160,7 @@ void main() {
             "width": 200.0,
             "height": 70.0,
             "borderRadius": 4.0,
-            "backgroundColor": "FF333A56",
+            "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
@@ -1244,7 +1245,7 @@ void main() {
             "width": 200.0,
             "height": 70.0,
             "borderRadius": 4.0,
-            "backgroundColor": "FF333A56",
+            "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
               "fontSize": 16.0,
