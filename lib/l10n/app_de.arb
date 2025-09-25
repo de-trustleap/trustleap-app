@@ -3236,5 +3236,53 @@
     "calendly_error_connection": "Fehler beim Verbinden mit Calendly",
     "@calendly_error_connection": {
         "description": "Fehlermeldung bei Calendly Verbindungsproblem"
+    },
+    "pagebuilder_color_tab": "Farbe",
+    "@pagebuilder_color_tab": {
+        "description": "Tab-Titel für die Farbauswahl im PageBuilder"
+    },
+    "pagebuilder_gradient_tab": "Farbverlauf",
+    "@pagebuilder_gradient_tab": {
+        "description": "Tab-Titel für die Farbverlauf-Auswahl im PageBuilder"
+    },
+    "pagebuilder_color_select": "Farbe auswählen",
+    "@pagebuilder_color_select": {
+        "description": "Switch-Titel für die Farbauswahl im PageBuilder"
+    },
+    "pagebuilder_gradient_select": "Farbverlauf auswählen",
+    "@pagebuilder_gradient_select": {
+        "description": "Switch-Titel für die Farbverlauf-Auswahl im PageBuilder"
+    },
+    "pagebuilder_gradient_color_select": "Farbe auswählen",
+    "@pagebuilder_gradient_color_select": {
+        "description": "Dialog-Titel für die Farbauswahl im Gradient-Editor"
+    },
+    "pagebuilder_gradient_type_label": "Typ: ",
+    "@pagebuilder_gradient_type_label": {
+        "description": "Label für die Gradient-Typ-Auswahl"
+    },
+    "pagebuilder_gradient_type_linear": "Linear",
+    "@pagebuilder_gradient_type_linear": {
+        "description": "Name für linearen Gradient-Typ"
+    },
+    "pagebuilder_gradient_type_radial": "Radial",
+    "@pagebuilder_gradient_type_radial": {
+        "description": "Name für radialen Gradient-Typ"
+    },
+    "pagebuilder_gradient_type_sweep": "Sweep",
+    "@pagebuilder_gradient_type_sweep": {
+        "description": "Name für Sweep Gradient-Typ"
+    },
+    "pagebuilder_gradient_colors_label": "Farben:",
+    "@pagebuilder_gradient_colors_label": {
+        "description": "Label für die Farbliste im Gradient-Editor"
+    },
+    "pagebuilder_gradient_add_color": "Farbe hinzufügen",
+    "@pagebuilder_gradient_add_color": {
+        "description": "Button-Text zum Hinzufügen einer neuen Farbe im Gradient"
+    },
+    "pagebuilder_ok": "OK",
+    "@pagebuilder_ok": {
+        "description": "OK-Button Text"
     }
 }

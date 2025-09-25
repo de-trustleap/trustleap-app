@@ -35,9 +35,8 @@ class _PagebuilderColorPickerBaseState
     extends State<PagebuilderColorPickerBase> {
   late Color _selectedColor;
   late PagebuilderGradient _selectedGradient;
-  late bool _isColorMode; // Which switch is active (determines output)
-  late bool
-      _isColorTab; // Which tab is currently shown (true = color tab, false = gradient tab)
+  late bool _isColorMode;
+  late bool _isColorTab;
 
   @override
   void initState() {
@@ -48,11 +47,9 @@ class _PagebuilderColorPickerBaseState
 
     // Logic for initial state
     if (!widget.enableGradients) {
-      // If gradients disabled, always show color tab and color mode
       _isColorTab = true;
       _isColorMode = true;
     } else {
-      // If gradients enabled, check if gradient exists
       _isColorMode = widget.initialGradient == null;
       _isColorTab = widget.initialGradient == null;
     }
@@ -71,7 +68,6 @@ class _PagebuilderColorPickerBaseState
         _selectedGradient =
             widget.initialGradient ?? PagebuilderGradient.defaultLinear();
 
-        // Update tab and mode when gradient changes
         if (!widget.enableGradients) {
           _isColorTab = true;
           _isColorMode = true;
@@ -150,7 +146,6 @@ class _PagebuilderColorPickerBaseState
                       },
                     ),
                   ] else ...[
-                    // Gradient Tab
                     PagebuilderGradientTab(
                       initialGradient: _selectedGradient,
                       isColorMode: _isColorMode,

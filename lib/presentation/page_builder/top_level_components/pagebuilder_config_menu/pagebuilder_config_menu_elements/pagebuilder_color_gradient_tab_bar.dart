@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderColorGradientTabBar extends StatelessWidget {
@@ -13,6 +14,7 @@ class PagebuilderColorGradientTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +35,7 @@ class PagebuilderColorGradientTabBar extends StatelessWidget {
                 color: isColorMode ? themeData.primaryColor : Colors.grey,
               ),
             ),
-            child: Text("Farbe",
+            child: Text(localization.pagebuilder_color_tab,
                 style: themeData.textTheme.bodyMedium!.copyWith(
                     color: isColorMode ? Colors.white : Colors.grey.shade800,
                     fontWeight:
@@ -57,7 +59,7 @@ class PagebuilderColorGradientTabBar extends StatelessWidget {
               ),
             ),
             child: Text(
-              "Farbverlauf",
+              localization.pagebuilder_gradient_tab,
               style: themeData.textTheme.bodyMedium!.copyWith(
                   color: isColorMode ? Colors.grey.shade800 : Colors.white,
                   fontWeight:

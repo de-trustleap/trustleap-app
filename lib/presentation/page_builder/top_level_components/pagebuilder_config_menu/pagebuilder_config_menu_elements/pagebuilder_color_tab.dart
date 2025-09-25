@@ -74,7 +74,7 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
       children: [
         // Switch Control
         PagebuilderSwitchControl(
-          title: "Farbe auswählen",
+          title: localization.pagebuilder_color_select,
           isActive: widget.isColorMode,
           onSelected: (bool isSelected) {
             widget.onModeChanged(isSelected);

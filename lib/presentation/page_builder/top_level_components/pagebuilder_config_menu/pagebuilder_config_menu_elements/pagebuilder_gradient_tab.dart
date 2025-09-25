@@ -63,7 +63,7 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Farbe auswählen",
+                      Text(localization.pagebuilder_gradient_color_select,
                           style: themeData.textTheme.bodyLarge),
                       IconButton(
                         onPressed: () => Navigator.of(context).pop(),
@@ -92,7 +92,7 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                   ),
                   const SizedBox(height: 16),
                   PrimaryButton(
-                    title: "OK",
+                    title: localization.pagebuilder_ok,
                     onTap: () {
                       setState(() {
                         final newStops = List<PagebuilderGradientStop>.from(
@@ -114,14 +114,14 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
     );
   }
 
-  String _getGradientTypeName(PagebuilderGradientType type) {
+  String _getGradientTypeName(PagebuilderGradientType type, AppLocalizations localization) {
     switch (type) {
       case PagebuilderGradientType.linear:
-        return "Linear";
+        return localization.pagebuilder_gradient_type_linear;
       case PagebuilderGradientType.radial:
-        return "Radial";
+        return localization.pagebuilder_gradient_type_radial;
       case PagebuilderGradientType.sweep:
-        return "Sweep";
+        return localization.pagebuilder_gradient_type_sweep;
     }
   }
 
@@ -135,7 +135,7 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
       mainAxisSize: MainAxisSize.min,
       children: [
         PagebuilderSwitchControl(
-          title: "Farbverlauf auswählen",
+          title: localization.pagebuilder_gradient_select,
           isActive: isActive,
           onSelected: (bool isSelected) {
             widget.onModeChanged(!isSelected);
@@ -162,7 +162,7 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                 const SizedBox(height: 16),
                 Row(
                   children: [
-                    Text("Typ: ", style: themeData.textTheme.bodyMedium),
+                    Text(localization.pagebuilder_gradient_type_label, style: themeData.textTheme.bodyMedium),
                     const SizedBox(width: 8),
                     DropdownButton<PagebuilderGradientType>(
                       value: _selectedGradient.type,
@@ -180,14 +180,14 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                       items: PagebuilderGradientType.values.map((type) {
                         return DropdownMenuItem<PagebuilderGradientType>(
                           value: type,
-                          child: Text(_getGradientTypeName(type)),
+                          child: Text(_getGradientTypeName(type, localization)),
                         );
                       }).toList(),
                     ),
                   ],
                 ),
                 const SizedBox(height: 16),
-                Text("Farben:", style: themeData.textTheme.bodyMedium),
+                Text(localization.pagebuilder_gradient_colors_label, style: themeData.textTheme.bodyMedium),
                 const SizedBox(height: 8),
                 ...List.generate(_selectedGradient.stops.length, (index) {
                   final stop = _selectedGradient.stops[index];
@@ -276,7 +276,7 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                           }
                         : null,
                     icon: const Icon(Icons.add),
-                    label: Text("Farbe hinzufügen",
+                    label: Text(localization.pagebuilder_gradient_add_color,
                         style: themeData.textTheme.bodyMedium),
                   ),
               ],

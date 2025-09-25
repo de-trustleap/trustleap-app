@@ -35,6 +35,5 @@ class PagebuilderColorControl extends StatelessWidget {
   }
 }
 
-// TODO: LOCALIZATION
 // TODO: PAGEBUILDER PROJEKT ANPASSEN
 // TODO: CHATGPT PAGEBUILDER AI PIPELINE REPARIEREN

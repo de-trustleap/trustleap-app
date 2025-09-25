@@ -4790,6 +4790,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error connecting to Calendly'**
   String get calendly_error_connection;
+
+  /// Tab title for color selection in PageBuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get pagebuilder_color_tab;
+
+  /// Tab title for gradient selection in PageBuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Gradient'**
+  String get pagebuilder_gradient_tab;
+
+  /// Switch title for color selection in PageBuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Select Color'**
+  String get pagebuilder_color_select;
+
+  /// Switch title for gradient selection in PageBuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Select Gradient'**
+  String get pagebuilder_gradient_select;
+
+  /// Dialog title for color selection in gradient editor
+  ///
+  /// In en, this message translates to:
+  /// **'Select Color'**
+  String get pagebuilder_gradient_color_select;
+
+  /// Label for gradient type selection
+  ///
+  /// In en, this message translates to:
+  /// **'Type: '**
+  String get pagebuilder_gradient_type_label;
+
+  /// Name for linear gradient type
+  ///
+  /// In en, this message translates to:
+  /// **'Linear'**
+  String get pagebuilder_gradient_type_linear;
+
+  /// Name for radial gradient type
+  ///
+  /// In en, this message translates to:
+  /// **'Radial'**
+  String get pagebuilder_gradient_type_radial;
+
+  /// Name for sweep gradient type
+  ///
+  /// In en, this message translates to:
+  /// **'Sweep'**
+  String get pagebuilder_gradient_type_sweep;
+
+  /// Label for color list in gradient editor
+  ///
+  /// In en, this message translates to:
+  /// **'Colors:'**
+  String get pagebuilder_gradient_colors_label;
+
+  /// Button text to add a new color to the gradient
+  ///
+  /// In en, this message translates to:
+  /// **'Add Color'**
+  String get pagebuilder_gradient_add_color;
+
+  /// OK button text
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get pagebuilder_ok;
 }
 
 class _AppLocalizationsDelegate
