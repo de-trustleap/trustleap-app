@@ -23,7 +23,12 @@ class PageBuilderButtonView extends StatelessWidget {
         height: properties.height,
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
-            color: properties.backgroundColor,
+            color: properties.backgroundPaint?.isColor == true
+                ? properties.backgroundPaint?.color
+                : null,
+            gradient: properties.backgroundPaint?.isGradient == true
+                ? properties.backgroundPaint?.gradient?.toFlutterGradient()
+                : null,
             borderRadius: BorderRadius.circular(properties.borderRadius ?? 0)),
         alignment: AlignmentMapper.getAlignmentFromTextAlignment(
             properties.textProperties?.alignment),

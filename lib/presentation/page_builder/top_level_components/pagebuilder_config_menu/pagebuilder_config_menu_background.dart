@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -32,18 +33,18 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
             PagebuilderHoverConfigTabBar<PagebuilderBackground>(
               properties: model?.background ??
                   const PagebuilderBackground(
-                      backgroundColor: null,
+                      backgroundPaint: null,
                       imageProperties: null,
-                      overlayColor: null),
+                      overlayPaint: null),
               hoverProperties: model?.hoverBackground,
               hoverEnabled: model?.hoverBackground != null,
               onHoverEnabledChanged: (enabled) {
                 if (enabled) {
                   final hoverBackground = (model?.background ??
                           const PagebuilderBackground(
-                              backgroundColor: null,
+                              backgroundPaint: null,
                               imageProperties: null,
-                              overlayColor: null))
+                              overlayPaint: null))
                       .deepCopy();
                   final updatedWidget =
                       model!.copyWith(hoverBackground: hoverBackground);
@@ -72,9 +73,9 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
             _buildBackgroundConfigUI(
                 section?.background ??
                     const PagebuilderBackground(
-                        backgroundColor: null,
+                        backgroundPaint: null,
                         imageProperties: null,
-                        overlayColor: null),
+                        overlayPaint: null),
                 false,
                 localization,
                 (updated) => _updateSectionBackground(updated, pagebuilderBloc),
@@ -98,14 +99,24 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
       PagebuilderColorControl(
           title:
               localization.landingpage_pagebuilder_layout_menu_background_color,
-          initialColor: props?.backgroundColor ?? Colors.transparent,
-          onSelected: (color) {
-            onChangedLocal(props?.copyWith(backgroundColor: color) ??
+          initialColor: props?.backgroundPaint?.color ?? Colors.transparent,
+          onColorSelected: (color) {
+            final paint = PagebuilderPaint.color(color);
+            onChangedLocal(props?.copyWith(backgroundPaint: paint) ??
                 const PagebuilderBackground(
-                        backgroundColor: null,
+                        backgroundPaint: null,
                         imageProperties: null,
-                        overlayColor: null)
-                    .copyWith(backgroundColor: color));
+                        overlayPaint: null)
+                    .copyWith(backgroundPaint: paint));
+          },
+          onGradientSelected: (gradient) {
+            final paint = PagebuilderPaint.gradient(gradient);
+            onChangedLocal(props?.copyWith(backgroundPaint: paint) ??
+                const PagebuilderBackground(
+                        backgroundPaint: null,
+                        imageProperties: null,
+                        overlayPaint: null)
+                    .copyWith(backgroundPaint: paint));
           }),
       const SizedBox(height: 20),
       PagebuilderImageControl(
@@ -117,15 +128,15 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                   height: null,
                   contentMode: null,
                   showPromoterImage: null,
-                  overlayColor: null),
+                  overlayPaint: null),
           widgetModel: isWidget ? model : null,
           showPromoterSwitch: false,
           onSelected: (properties) {
             onChangedLocal(props?.copyWith(imageProperties: properties) ??
                 const PagebuilderBackground(
-                        backgroundColor: null,
+                        backgroundPaint: null,
                         imageProperties: null,
-                        overlayColor: null)
+                        overlayPaint: null)
                     .copyWith(imageProperties: properties));
           },
           onDelete: () {
@@ -150,14 +161,24 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
         PagebuilderColorControl(
             title: localization
                 .landingpage_pagebuilder_layout_menu_background_overlay,
-            initialColor: props?.overlayColor ?? Colors.transparent,
-            onSelected: (color) {
-              onChangedLocal(props?.copyWith(overlayColor: color) ??
+            initialColor: props?.overlayPaint?.color ?? Colors.transparent,
+            onColorSelected: (color) {
+              final paint = PagebuilderPaint.color(color);
+              onChangedLocal(props?.copyWith(overlayPaint: paint) ??
                   const PagebuilderBackground(
-                          backgroundColor: null,
+                          backgroundPaint: null,
                           imageProperties: null,
-                          overlayColor: null)
-                      .copyWith(overlayColor: color));
+                          overlayPaint: null)
+                      .copyWith(overlayPaint: paint));
+            },
+            onGradientSelected: (gradient) {
+              final paint = PagebuilderPaint.gradient(gradient);
+              onChangedLocal(props?.copyWith(overlayPaint: paint) ??
+                  const PagebuilderBackground(
+                          backgroundPaint: null,
+                          imageProperties: null,
+                          overlayPaint: null)
+                      .copyWith(overlayPaint: paint));
             }),
       ]
     ]);

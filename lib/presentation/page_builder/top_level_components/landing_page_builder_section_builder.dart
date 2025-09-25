@@ -58,7 +58,12 @@ class _LandingPageBuilderSectionViewState
                     Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: widget.model.background?.backgroundColor,
+                          color: widget.model.background?.backgroundPaint?.isColor == true
+                              ? widget.model.background?.backgroundPaint?.color
+                              : null,
+                          gradient: widget.model.background?.backgroundPaint?.isGradient == true
+                              ? widget.model.background?.backgroundPaint?.gradient?.toFlutterGradient()
+                              : null,
                           border: showBorder
                               ? Border.all(
                                   color: isSelected
@@ -103,7 +108,7 @@ class _LandingPageBuilderSectionViewState
                                   ),
                                 ),
                               ),
-                            if (widget.model.background?.overlayColor != null &&
+                            if (widget.model.background?.overlayPaint != null &&
                                 (widget.model.background?.imageProperties
                                             ?.localImage !=
                                         null ||
@@ -113,8 +118,12 @@ class _LandingPageBuilderSectionViewState
                               Positioned.fill(
                                   child: DecoratedBox(
                                       decoration: BoxDecoration(
-                                          color: widget
-                                              .model.background!.overlayColor)))
+                                          color: widget.model.background!.overlayPaint!.isColor == true
+                                              ? widget.model.background!.overlayPaint!.color
+                                              : null,
+                                          gradient: widget.model.background!.overlayPaint!.isGradient == true
+                                              ? widget.model.background!.overlayPaint!.gradient?.toFlutterGradient()
+                                              : null)))
                             ],
                             Container(
                               alignment: Alignment.center,

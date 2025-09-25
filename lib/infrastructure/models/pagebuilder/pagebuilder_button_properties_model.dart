@@ -1,23 +1,22 @@
 import 'package:equatable/equatable.dart';
-import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
-import 'package:flutter/material.dart';
 
 class PageBuilderButtonPropertiesModel extends Equatable
     implements PageBuilderProperties {
   final double? width;
   final double? height;
   final double? borderRadius;
-  final String? backgroundColor;
+  final Map<String, dynamic>? backgroundPaint;
   final Map<String, dynamic>? textProperties;
 
   const PageBuilderButtonPropertiesModel({
     required this.width,
     required this.height,
     required this.borderRadius,
-    required this.backgroundColor,
+    required this.backgroundPaint,
     required this.textProperties,
   });
 
@@ -26,7 +25,7 @@ class PageBuilderButtonPropertiesModel extends Equatable
     if (width != null) map['width'] = width;
     if (height != null) map['height'] = height;
     if (borderRadius != null) map['borderRadius'] = borderRadius;
-    if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
+    if (backgroundPaint != null) map['backgroundPaint'] = backgroundPaint;
     if (textProperties != null) map['textProperties'] = textProperties;
     return map;
   }
@@ -37,8 +36,8 @@ class PageBuilderButtonPropertiesModel extends Equatable
         height: map['height'] != null ? map['height'] as double : null,
         borderRadius:
             map['borderRadius'] != null ? map['borderRadius'] as double : null,
-        backgroundColor: map['backgroundColor'] != null
-            ? map['backgroundColor'] as String
+        backgroundPaint: map['backgroundPaint'] != null
+            ? map['backgroundPaint'] as Map<String, dynamic>
             : null,
         textProperties: map['textProperties'] != null
             ? map['textProperties'] as Map<String, dynamic>
@@ -49,14 +48,14 @@ class PageBuilderButtonPropertiesModel extends Equatable
     double? width,
     double? height,
     double? borderRadius,
-    String? backgroundColor,
+    Map<String, dynamic>? backgroundPaint,
     Map<String, dynamic>? textProperties,
   }) {
     return PageBuilderButtonPropertiesModel(
       width: width ?? this.width,
       height: height ?? this.height,
       borderRadius: borderRadius ?? this.borderRadius,
-      backgroundColor: backgroundColor ?? this.backgroundColor,
+      backgroundPaint: backgroundPaint ?? this.backgroundPaint,
       textProperties: textProperties ?? this.textProperties,
     );
   }
@@ -66,8 +65,8 @@ class PageBuilderButtonPropertiesModel extends Equatable
         width: width,
         height: height,
         borderRadius: borderRadius,
-        backgroundColor: backgroundColor != null
-            ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
+        backgroundPaint: backgroundPaint != null
+            ? PagebuilderPaintModel.fromMap(backgroundPaint!).toDomain()
             : null,
         textProperties: textProperties != null
             ? PageBuilderTextPropertiesModel.fromMap(textProperties!).toDomain()
@@ -80,8 +79,9 @@ class PageBuilderButtonPropertiesModel extends Equatable
         width: properties.width,
         height: properties.height,
         borderRadius: properties.borderRadius,
-        backgroundColor: properties.backgroundColor != null
-            ? ColorUtility.colorToHex(properties.backgroundColor!)
+        backgroundPaint: properties.backgroundPaint != null
+            ? PagebuilderPaintModel.fromDomain(properties.backgroundPaint!)
+                .toMap()
             : null,
         textProperties: properties.textProperties != null
             ? PageBuilderTextPropertiesModel.fromDomain(
@@ -92,5 +92,5 @@ class PageBuilderButtonPropertiesModel extends Equatable
 
   @override
   List<Object?> get props =>
-      [width, height, borderRadius, backgroundColor, textProperties];
+      [width, height, borderRadius, backgroundPaint, textProperties];
 }

@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
@@ -87,9 +88,14 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
       const SizedBox(height: 20),
       PagebuilderColorControl(
           title: localization.pagebuilder_button_config_button_background_color,
-          initialColor: props?.backgroundColor ?? Colors.transparent,
-          onSelected: (color) {
-            onChangedLocal(props?.copyWith(backgroundColor: color));
+          initialColor: props?.backgroundPaint?.color ?? Colors.transparent,
+          onColorSelected: (color) {
+            final paint = PagebuilderPaint.color(color);
+            onChangedLocal(props?.copyWith(backgroundPaint: paint));
+          },
+          onGradientSelected: (gradient) {
+            final paint = PagebuilderPaint.gradient(gradient);
+            onChangedLocal(props?.copyWith(backgroundPaint: paint));
           }),
       const SizedBox(height: 40),
       Text(localization.pagebuilder_button_config_button_text_configuration,
