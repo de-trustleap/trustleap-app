@@ -81,7 +81,7 @@ class PagebuilderConfigMenuTextConfig extends StatelessWidget {
         PagebuilderColorControl(
             title: localization.landingpage_pagebuilder_text_config_color,
             initialColor: props?.color ?? Colors.black,
-            onSelected: (color) {
+            onColorSelected: (color) {
               onChangedLocal(props?.copyWith(color: color));
             }),
         const SizedBox(height: 20),

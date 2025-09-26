@@ -3236,5 +3236,53 @@
     "calendly_error_connection": "Error connecting to Calendly",
     "@calendly_error_connection": {
         "description": "Error message for Calendly connection problem"
+    },
+    "pagebuilder_color_tab": "Color",
+    "@pagebuilder_color_tab": {
+        "description": "Tab title for color selection in PageBuilder"
+    },
+    "pagebuilder_gradient_tab": "Gradient",
+    "@pagebuilder_gradient_tab": {
+        "description": "Tab title for gradient selection in PageBuilder"
+    },
+    "pagebuilder_color_select": "Select Color",
+    "@pagebuilder_color_select": {
+        "description": "Switch title for color selection in PageBuilder"
+    },
+    "pagebuilder_gradient_select": "Select Gradient",
+    "@pagebuilder_gradient_select": {
+        "description": "Switch title for gradient selection in PageBuilder"
+    },
+    "pagebuilder_gradient_color_select": "Select Color",
+    "@pagebuilder_gradient_color_select": {
+        "description": "Dialog title for color selection in gradient editor"
+    },
+    "pagebuilder_gradient_type_label": "Type: ",
+    "@pagebuilder_gradient_type_label": {
+        "description": "Label for gradient type selection"
+    },
+    "pagebuilder_gradient_type_linear": "Linear",
+    "@pagebuilder_gradient_type_linear": {
+        "description": "Name for linear gradient type"
+    },
+    "pagebuilder_gradient_type_radial": "Radial",
+    "@pagebuilder_gradient_type_radial": {
+        "description": "Name for radial gradient type"
+    },
+    "pagebuilder_gradient_type_sweep": "Sweep",
+    "@pagebuilder_gradient_type_sweep": {
+        "description": "Name for sweep gradient type"
+    },
+    "pagebuilder_gradient_colors_label": "Colors:",
+    "@pagebuilder_gradient_colors_label": {
+        "description": "Label for color list in gradient editor"
+    },
+    "pagebuilder_gradient_add_color": "Add Color",
+    "@pagebuilder_gradient_add_color": {
+        "description": "Button text to add a new color to the gradient"
+    },
+    "pagebuilder_ok": "OK",
+    "@pagebuilder_ok": {
+        "description": "OK button text"
     }
 }

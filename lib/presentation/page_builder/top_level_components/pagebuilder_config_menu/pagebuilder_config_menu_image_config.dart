@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
@@ -86,9 +87,14 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
       const SizedBox(height: 20),
       PagebuilderColorControl(
           title: localization.pagebuilder_image_config_image_overlay,
-          initialColor: props?.overlayColor ?? Colors.transparent,
-          onSelected: (color) {
-            onChangedLocal(props?.copyWith(overlayColor: color));
+          initialColor: props?.overlayPaint?.color ?? Colors.transparent,
+          onColorSelected: (color) {
+            final paint = PagebuilderPaint.color(color);
+            onChangedLocal(props?.copyWith(overlayPaint: paint));
+          },
+          onGradientSelected: (gradient) {
+            final paint = PagebuilderPaint.gradient(gradient);
+            onChangedLocal(props?.copyWith(overlayPaint: paint));
           }),
       const SizedBox(height: 20),
       PagebuilderNumberStepperControl(

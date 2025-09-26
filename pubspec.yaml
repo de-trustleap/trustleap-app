@@ -12,7 +12,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   responsive_framework: ^1.1.1
-  bloc: ^9.0.0
+  bloc: ^9.0.1
   flutter_bloc: ^9.1.0
   firebase_core: ">=3.6.0 <5.0.0"
   firebase_auth: ">=5.3.1 <7.0.0"

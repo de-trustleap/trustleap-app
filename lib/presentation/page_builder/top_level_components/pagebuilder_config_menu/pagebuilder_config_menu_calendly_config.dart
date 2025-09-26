@@ -82,40 +82,38 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           PagebuilderColorControl(
-            title: localization.pagebuilder_calendly_config_text_color,
-            initialColor: properties.textColor ?? Colors.black,
-            enableOpacity: false,
-            onSelected: (color) {
-              updateCalendlyProperties(
-                properties.copyWith(textColor: color),
-                pagebuilderCubit,
-              );
-            },
-          ),
+              title: localization.pagebuilder_calendly_config_text_color,
+              initialColor: properties.textColor ?? Colors.black,
+              enableOpacity: false,
+              enableGradients: false,
+              onColorSelected: (color) {
+                updateCalendlyProperties(
+                  properties.copyWith(textColor: color),
+                  pagebuilderCubit,
+                );
+              }),
           const SizedBox(height: 16),
           PagebuilderColorControl(
-            title: localization.pagebuilder_calendly_config_background_color,
-            initialColor: properties.backgroundColor ?? Colors.black,
-            enableOpacity: false,
-            onSelected: (color) {
-              updateCalendlyProperties(
-                properties.copyWith(backgroundColor: color),
-                pagebuilderCubit,
-              );
-            },
-          ),
+              title: localization.pagebuilder_calendly_config_background_color,
+              initialColor: properties.backgroundColor ?? Colors.black,
+              enableOpacity: false,
+              onColorSelected: (color) {
+                updateCalendlyProperties(
+                  properties.copyWith(backgroundColor: color),
+                  pagebuilderCubit,
+                );
+              }),
           const SizedBox(height: 16),
           PagebuilderColorControl(
-            title: localization.pagebuilder_calendly_config_primary_color,
-            initialColor: properties.primaryColor ?? Colors.black,
-            enableOpacity: false,
-            onSelected: (color) {
-              updateCalendlyProperties(
-                properties.copyWith(primaryColor: color),
-                pagebuilderCubit,
-              );
-            },
-          ),
+              title: localization.pagebuilder_calendly_config_primary_color,
+              initialColor: properties.primaryColor ?? Colors.black,
+              enableOpacity: false,
+              onColorSelected: (color) {
+                updateCalendlyProperties(
+                  properties.copyWith(primaryColor: color),
+                  pagebuilderCubit,
+                );
+              }),
           const SizedBox(height: 16),
           PagebuilderShadowControl(
             title: localization

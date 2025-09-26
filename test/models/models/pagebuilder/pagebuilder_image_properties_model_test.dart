@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderImagePropertiesModel_CopyWith", () {
@@ -15,7 +16,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "FF000000");
+          overlayPaint: {"color": "FF000000"});
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
@@ -24,7 +25,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "FF000000");
+          overlayPaint: {"color": "FF000000"});
       // When
       final result = model.copyWith(height: 400.0);
       // Then
@@ -43,7 +44,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "FF000000");
+          overlayPaint: {"color": "FF000000"});
       final expectedResult = {
         "url": "https://test.de",
         "borderRadius": 12.0,
@@ -52,7 +53,7 @@ void main() {
         "contentMode": "cover",
         "showPromoterImage": false,
         "newImageBase64": "image",
-        "overlayColor": "FF000000"
+        "overlayPaint": {"color": "FF000000"}
       };
       // When
       final result = model.toMap();
@@ -72,7 +73,7 @@ void main() {
         "contentMode": "cover",
         "showPromoterImage": false,
         "newImageBase64": "image",
-        "overlayColor": "FF000000"
+        "overlayPaint": {"color": "FF000000"}
       };
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
@@ -82,7 +83,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "FF000000");
+          overlayPaint: {"color": "FF000000"});
       // When
       final result = PageBuilderImagePropertiesModel.fromMap(map);
       // Then
@@ -103,7 +104,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayColor: "FF000000");
+          overlayPaint: {"color": "FF000000"});
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
           borderRadius: 12.0,
@@ -111,7 +112,7 @@ void main() {
           height: 300.0,
           contentMode: BoxFit.cover,
           showPromoterImage: false,
-          overlayColor: Colors.black);
+          overlayPaint: const PagebuilderPaint.color(Colors.black));
       // When
       final result = model.toDomain();
       // Then
@@ -131,7 +132,7 @@ void main() {
           height: 300.0,
           contentMode: BoxFit.cover,
           showPromoterImage: false,
-          overlayColor: Colors.black);
+          overlayPaint: const PagebuilderPaint.color(Colors.black));
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
@@ -140,7 +141,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: null,
-          overlayColor: "FF000000");
+          overlayPaint: {"color": "FF000000"});
       // When
       final result = PageBuilderImagePropertiesModel.fromDomain(model);
       // Then
@@ -159,7 +160,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: null,
-          overlayColor: "FF000000");
+          overlayPaint: {"color": "FF000000"});
       final properties2 = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           borderRadius: 12.0,
@@ -168,7 +169,7 @@ void main() {
           contentMode: "cover",
           showPromoterImage: false,
           newImageBase64: null,
-          overlayColor: "FF000000");
+          overlayPaint: {"color": "FF000000"});
       // Then
       expect(properties1, properties2);
     });

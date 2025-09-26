@@ -2784,4 +2784,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calendly_error_connection => 'Error connecting to Calendly';
+
+  @override
+  String get pagebuilder_color_tab => 'Color';
+
+  @override
+  String get pagebuilder_gradient_tab => 'Gradient';
+
+  @override
+  String get pagebuilder_color_select => 'Select Color';
+
+  @override
+  String get pagebuilder_gradient_select => 'Select Gradient';
+
+  @override
+  String get pagebuilder_gradient_color_select => 'Select Color';
+
+  @override
+  String get pagebuilder_gradient_type_label => 'Type: ';
+
+  @override
+  String get pagebuilder_gradient_type_linear => 'Linear';
+
+  @override
+  String get pagebuilder_gradient_type_radial => 'Radial';
+
+  @override
+  String get pagebuilder_gradient_type_sweep => 'Sweep';
+
+  @override
+  String get pagebuilder_gradient_colors_label => 'Colors:';
+
+  @override
+  String get pagebuilder_gradient_add_color => 'Add Color';
+
+  @override
+  String get pagebuilder_ok => 'OK';
 }

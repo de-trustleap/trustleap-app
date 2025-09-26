@@ -1,80 +1,82 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
-import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
 
 class PagebuilderBackgroundModel extends Equatable {
-  final String? backgroundColor;
+  final Map<String, dynamic>? backgroundPaint;
   final Map<String, dynamic>? imageProperties;
-  final String? overlayColor;
+  final Map<String, dynamic>? overlayPaint;
 
   const PagebuilderBackgroundModel(
-      {required this.backgroundColor,
+      {required this.backgroundPaint,
       required this.imageProperties,
-      required this.overlayColor});
+      required this.overlayPaint});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
-    if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
-    if (imageProperties != null) map['imageProperties'] = imageProperties;
-    if (overlayColor != null) map['overlayColor'] = overlayColor;
+    if (backgroundPaint != null) map["backgroundPaint"] = backgroundPaint;
+    if (imageProperties != null) map["imageProperties"] = imageProperties;
+    if (overlayPaint != null) map["overlayPaint"] = overlayPaint;
     return map;
   }
 
   factory PagebuilderBackgroundModel.fromMap(Map<String, dynamic> map) {
     return PagebuilderBackgroundModel(
-        backgroundColor: map['backgroundColor'] != null
-            ? map['backgroundColor'] as String
+        backgroundPaint: map["backgroundPaint"] != null
+            ? map["backgroundPaint"] as Map<String, dynamic>
             : null,
-        imageProperties: map['imageProperties'] != null
-            ? map['imageProperties'] as Map<String, dynamic>
+        imageProperties: map["imageProperties"] != null
+            ? map["imageProperties"] as Map<String, dynamic>
             : null,
-        overlayColor:
-            map['overlayColor'] != null ? map['overlayColor'] as String : null);
+        overlayPaint: map["overlayPaint"] != null
+            ? map["overlayPaint"] as Map<String, dynamic>
+            : null);
   }
 
   PagebuilderBackgroundModel copyWith(
-      {String? backgroundColor,
+      {Map<String, dynamic>? backgroundPaint,
       Map<String, dynamic>? imageProperties,
-      String? overlayColor}) {
+      Map<String, dynamic>? overlayPaint}) {
     return PagebuilderBackgroundModel(
-        backgroundColor: backgroundColor ?? this.backgroundColor,
+        backgroundPaint: backgroundPaint ?? this.backgroundPaint,
         imageProperties: imageProperties ?? this.imageProperties,
-        overlayColor: overlayColor ?? this.overlayColor);
+        overlayPaint: overlayPaint ?? this.overlayPaint);
   }
 
   PagebuilderBackground toDomain() {
     return PagebuilderBackground(
-        backgroundColor: backgroundColor != null
-            ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
+        backgroundPaint: backgroundPaint != null
+            ? PagebuilderPaintModel.fromMap(backgroundPaint!).toDomain()
             : null,
         imageProperties: imageProperties != null
             ? PageBuilderImagePropertiesModel.fromMap(imageProperties!)
                 .toDomain()
             : null,
-        overlayColor: overlayColor != null
-            ? Color(ColorUtility.getHexIntFromString(overlayColor!))
+        overlayPaint: overlayPaint != null
+            ? PagebuilderPaintModel.fromMap(overlayPaint!).toDomain()
             : null);
   }
 
   factory PagebuilderBackgroundModel.fromDomain(
       PagebuilderBackground properties) {
     return PagebuilderBackgroundModel(
-        backgroundColor: properties.backgroundColor != null
-            ? ColorUtility.colorToHex(properties.backgroundColor!)
+        backgroundPaint: properties.backgroundPaint != null
+            ? PagebuilderPaintModel.fromDomain(properties.backgroundPaint!)
+                .toMap()
             : null,
         imageProperties: properties.imageProperties != null
             ? PageBuilderImagePropertiesModel.fromDomain(
                     properties.imageProperties!)
                 .toMap()
             : null,
-        overlayColor: properties.overlayColor != null
-            ? ColorUtility.colorToHex(properties.overlayColor!)
+        overlayPaint: properties.overlayPaint != null
+            ? PagebuilderPaintModel.fromDomain(properties.overlayPaint!)
+                .toMap()
             : null);
   }
 
   @override
-  List<Object?> get props => [backgroundColor, imageProperties, overlayColor];
+  List<Object?> get props => [backgroundPaint, imageProperties, overlayPaint];
 }

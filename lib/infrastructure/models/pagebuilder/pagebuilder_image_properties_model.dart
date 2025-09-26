@@ -1,12 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
-import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/boxfit_mapper.dart';
-import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
 
 class PageBuilderImagePropertiesModel extends Equatable
     implements PageBuilderProperties {
@@ -15,7 +13,7 @@ class PageBuilderImagePropertiesModel extends Equatable
   final double? width;
   final double? height;
   final String? contentMode;
-  final String? overlayColor;
+  final Map<String, dynamic>? overlayPaint;
   final bool? showPromoterImage;
   final String? newImageBase64;
 
@@ -25,7 +23,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       required this.width,
       required this.height,
       required this.contentMode,
-      required this.overlayColor,
+      required this.overlayPaint,
       required this.showPromoterImage,
       required this.newImageBase64});
 
@@ -36,7 +34,7 @@ class PageBuilderImagePropertiesModel extends Equatable
     if (width != null) map['width'] = width;
     if (height != null) map['height'] = height;
     if (contentMode != null) map['contentMode'] = contentMode;
-    if (overlayColor != null) map['overlayColor'] = overlayColor;
+    if (overlayPaint != null) map['overlayPaint'] = overlayPaint;
     if (showPromoterImage != null) map['showPromoterImage'] = showPromoterImage;
     if (newImageBase64 != null) map['newImageBase64'] = newImageBase64;
     return map;
@@ -51,8 +49,9 @@ class PageBuilderImagePropertiesModel extends Equatable
         height: map['height'] != null ? map['height'] as double : null,
         contentMode:
             map['contentMode'] != null ? map['contentMode'] as String : null,
-        overlayColor:
-            map['overlayColor'] != null ? map['overlayColor'] as String : null,
+        overlayPaint: map['overlayPaint'] != null
+            ? map['overlayPaint'] as Map<String, dynamic>
+            : null,
         showPromoterImage: map['showPromoterImage'] != null
             ? map['showPromoterImage'] as bool
             : null,
@@ -67,7 +66,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       double? width,
       double? height,
       String? contentMode,
-      String? overlayColor,
+      Map<String, dynamic>? overlayPaint,
       bool? showPromoterImage,
       String? newImageBase64}) {
     return PageBuilderImagePropertiesModel(
@@ -76,7 +75,7 @@ class PageBuilderImagePropertiesModel extends Equatable
         width: width ?? this.width,
         height: height ?? this.height,
         contentMode: contentMode ?? this.contentMode,
-        overlayColor: overlayColor ?? this.overlayColor,
+        overlayPaint: overlayPaint ?? this.overlayPaint,
         showPromoterImage: showPromoterImage ?? this.showPromoterImage,
         newImageBase64: newImageBase64 ?? this.newImageBase64);
   }
@@ -88,8 +87,8 @@ class PageBuilderImagePropertiesModel extends Equatable
         width: width,
         height: height,
         contentMode: BoxFitMapper.getBoxFitFromString(contentMode),
-        overlayColor: overlayColor != null
-            ? Color(ColorUtility.getHexIntFromString(overlayColor!))
+        overlayPaint: overlayPaint != null
+            ? PagebuilderPaintModel.fromMap(overlayPaint!).toDomain()
             : null,
         showPromoterImage: showPromoterImage);
   }
@@ -102,8 +101,8 @@ class PageBuilderImagePropertiesModel extends Equatable
         width: properties.width,
         height: properties.height,
         contentMode: BoxFitMapper.getStringFromBoxFit(properties.contentMode),
-        overlayColor: properties.overlayColor != null
-            ? ColorUtility.colorToHex(properties.overlayColor!)
+        overlayPaint: properties.overlayPaint != null
+            ? PagebuilderPaintModel.fromDomain(properties.overlayPaint!).toMap()
             : null,
         showPromoterImage: properties.showPromoterImage,
         newImageBase64: properties.localImage != null
@@ -118,7 +117,7 @@ class PageBuilderImagePropertiesModel extends Equatable
         width,
         height,
         contentMode,
-        overlayColor,
+        overlayPaint,
         showPromoterImage,
         newImageBase64
       ];

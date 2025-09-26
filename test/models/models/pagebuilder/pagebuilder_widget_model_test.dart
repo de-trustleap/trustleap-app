@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderWidgetModel_CopyWith", () {
@@ -61,7 +62,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30,
-          background: {"backgroundColor": "FFFFFFFF"},
+          background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -73,7 +74,7 @@ void main() {
         "properties": {"borderRadius": 12},
         "children": [],
         "widthPercentage": 30,
-        "background": {"backgroundColor": "FFFFFFFF"},
+        "background": {"backgroundPaint": {"color": "FFFFFFFF"}},
         "maxWidth": 300
       };
       // When
@@ -92,7 +93,7 @@ void main() {
         "properties": {"borderRadius": 12},
         "children": [],
         "widthPercentage": 30.0,
-        "background": {"backgroundColor": "FFFFFFFF"},
+        "background": {"backgroundPaint": {"color": "FFFFFFFF"}},
         "maxWidth": 300.0
       };
       final expectedResult = PageBuilderWidgetModel(
@@ -103,7 +104,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "FFFFFFFF"},
+          background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -129,7 +130,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "FFFFFFFF"},
+          background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -145,9 +146,9 @@ void main() {
           containerChild: null,
           widthPercentage: 30,
           background: PagebuilderBackground(
-              backgroundColor: Colors.white,
+              backgroundPaint: const PagebuilderPaint.color(Colors.white),
               imageProperties: null,
-              overlayColor: null),
+              overlayPaint: null),
           hoverBackground: null,
           padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
           margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
@@ -175,9 +176,9 @@ void main() {
           containerChild: null,
           widthPercentage: 30,
           background: PagebuilderBackground(
-              backgroundColor: Colors.white,
+              backgroundPaint: const PagebuilderPaint.color(Colors.white),
               imageProperties: null,
-              overlayColor: null),
+              overlayPaint: null),
           hoverBackground: null,
           padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
           margin: null,
@@ -191,7 +192,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "FFFFFFFF"},
+          background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -300,7 +301,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "FFFFFFFF"},
+          background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
           margin: null,
@@ -314,7 +315,7 @@ void main() {
           children: [],
           containerChild: null,
           widthPercentage: 30.0,
-          background: {"backgroundColor": "FFFFFFFF"},
+          background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
           margin: null,

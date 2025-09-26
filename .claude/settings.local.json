@@ -11,7 +11,8 @@
       "Bash(dart test:*)",
       "Bash(awk:*)",
       "WebFetch(domain:stackoverflow.com)",
-      "WebFetch(domain:api.flutter.dev)"
+      "WebFetch(domain:api.flutter.dev)",
+      "Read(//Users/marcelspindler/Documents/Dev/Finanzbegleiter/**)"
     ],
     "deny": []
   }

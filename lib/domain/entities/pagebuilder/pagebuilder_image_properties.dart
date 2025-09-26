@@ -2,6 +2,7 @@
 import 'dart:typed_data';
 
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class PageBuilderImageProperties extends Equatable
   final double? width;
   final double? height;
   final BoxFit? contentMode;
-  final Color? overlayColor;
+  final PagebuilderPaint? overlayPaint;
   final bool? showPromoterImage;
 
   final Uint8List? localImage;
@@ -24,7 +25,7 @@ class PageBuilderImageProperties extends Equatable
       required this.width,
       required this.height,
       required this.contentMode,
-      required this.overlayColor,
+      required this.overlayPaint,
       required this.showPromoterImage,
       this.localImage,
       this.hasChanged = false});
@@ -35,7 +36,7 @@ class PageBuilderImageProperties extends Equatable
       double? width,
       double? height,
       BoxFit? contentMode,
-      Color? overlayColor,
+      PagebuilderPaint? overlayPaint,
       bool? showPromoterImage,
       Uint8List? localImage,
       bool? hasChanged}) {
@@ -45,7 +46,7 @@ class PageBuilderImageProperties extends Equatable
         width: width ?? this.width,
         height: height ?? this.height,
         contentMode: contentMode ?? this.contentMode,
-        overlayColor: overlayColor ?? this.overlayColor,
+        overlayPaint: overlayPaint ?? this.overlayPaint,
         showPromoterImage: showPromoterImage ?? this.showPromoterImage,
         localImage: localImage ?? this.localImage,
         hasChanged: hasChanged ?? this.hasChanged);
@@ -58,8 +59,7 @@ class PageBuilderImageProperties extends Equatable
       width: width,
       height: height,
       contentMode: contentMode,
-      overlayColor:
-          overlayColor != null ? Color(overlayColor!.toARGB32()) : null,
+      overlayPaint: overlayPaint?.deepCopy(),
       showPromoterImage: showPromoterImage,
       localImage: localImage != null ? Uint8List.fromList(localImage!) : null,
       hasChanged: hasChanged,
@@ -73,7 +73,7 @@ class PageBuilderImageProperties extends Equatable
         width,
         height,
         contentMode,
-        overlayColor,
+        overlayPaint,
         showPromoterImage,
         localImage
       ];

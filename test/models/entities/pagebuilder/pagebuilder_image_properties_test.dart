@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:flutter/material.dart';
 import "dart:typed_data";
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderImageProperties_CopyWith", () {
@@ -13,7 +14,7 @@ void main() {
           width: 200.0,
           height: 200.0,
           contentMode: BoxFit.cover,
-          overlayColor: null,
+          overlayPaint: null,
           showPromoterImage: false);
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
@@ -21,7 +22,7 @@ void main() {
           width: 250.0,
           height: 200.0,
           contentMode: BoxFit.cover,
-          overlayColor: null,
+          overlayPaint: null,
           showPromoterImage: false);
       // When
       final result = model.copyWith(width: 250.0);
@@ -40,7 +41,7 @@ void main() {
         width: 300.0,
         height: 200.0,
         contentMode: BoxFit.cover,
-        overlayColor: const Color(0x80000000),
+        overlayPaint: const PagebuilderPaint.color(Color(0x80000000)),
         localImage: localImageData,
         hasChanged: true,
         showPromoterImage: false,
@@ -54,7 +55,7 @@ void main() {
       expect(copy.width, equals(original.width));
       expect(copy.height, equals(original.height));
       expect(copy.contentMode, equals(original.contentMode));
-      expect(copy.overlayColor, equals(original.overlayColor));
+      expect(copy.overlayPaint?.color, equals(original.overlayPaint?.color));
       expect(copy.localImage, equals(original.localImage));
       expect(copy.hasChanged, equals(original.hasChanged));
       expect(copy, equals(original));
@@ -70,7 +71,7 @@ void main() {
           width: 200.0,
           height: 200.0,
           contentMode: BoxFit.cover,
-          overlayColor: null,
+          overlayPaint: null,
           showPromoterImage: false);
       final properties2 = PageBuilderImageProperties(
           url: "https://test.de",
@@ -78,7 +79,7 @@ void main() {
           width: 200.0,
           height: 200.0,
           contentMode: BoxFit.cover,
-          overlayColor: null,
+          overlayPaint: null,
           showPromoterImage: false);
       // Then
       expect(properties1, properties2);

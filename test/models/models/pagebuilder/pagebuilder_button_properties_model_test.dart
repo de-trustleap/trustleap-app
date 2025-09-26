@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_bu
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   group("PagebuilderButtonPropertiesModel_CopyWith", () {
@@ -12,13 +13,13 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: null,
+          backgroundPaint: null,
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = PageBuilderButtonPropertiesModel(
           width: 200.0,
           height: 80.0,
           borderRadius: 12.0,
-          backgroundColor: null,
+          backgroundPaint: null,
           textProperties: {"text": "Test", "fontSize": 16.0});
       // When
       final result = model.copyWith(height: 80.0);
@@ -34,13 +35,13 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "FFFFFFFF",
+          backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = {
         "width": 200,
         "height": 60,
         "borderRadius": 12,
-        "backgroundColor": "FFFFFFFF",
+        "backgroundPaint": {"color": "FFFFFFFF"},
         "textProperties": {"text": "Test", "fontSize": 16.0}
       };
       // When
@@ -57,14 +58,14 @@ void main() {
         "width": 200.0,
         "height": 60.0,
         "borderRadius": 12.0,
-        "backgroundColor": "FFFFFFFF",
+        "backgroundPaint": {"color": "FFFFFFFF"},
         "textProperties": {"text": "Test", "fontSize": 16.0}
       };
       final expectedResult = PageBuilderButtonPropertiesModel(
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "FFFFFFFF",
+          backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {"text": "Test", "fontSize": 16.0});
       // When
       final result = PageBuilderButtonPropertiesModel.fromMap(map);
@@ -82,13 +83,13 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "FFFFFFFF",
+          backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = PageBuilderButtonProperties(
           width: 200,
           height: 60,
           borderRadius: 12,
-          backgroundColor: Colors.white,
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: 16,
@@ -116,7 +117,7 @@ void main() {
           width: 200,
           height: 60,
           borderRadius: 12,
-          backgroundColor: Colors.white,
+          backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: 16,
@@ -132,7 +133,7 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "FFFFFFFF",
+          backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {
             "text": "Test",
             "fontSize": 16.0,
@@ -152,7 +153,7 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "FFFFFFFF",
+          backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {
             "text": "Test",
             "fontSize": 16.0,
@@ -162,7 +163,7 @@ void main() {
           width: 200.0,
           height: 60.0,
           borderRadius: 12.0,
-          backgroundColor: "FFFFFFFF",
+          backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {
             "text": "Test",
             "fontSize": 16.0,

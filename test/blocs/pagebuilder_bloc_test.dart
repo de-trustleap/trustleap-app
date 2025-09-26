@@ -17,6 +17,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/foundation.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 
 void main() {
   late PagebuilderBloc pageBuilderBloc;
@@ -268,7 +269,7 @@ void main() {
         height: 150.0,
         localImage: Uint8List(0),
         contentMode: BoxFit.cover,
-        overlayColor: null,
+        overlayPaint: null,
         showPromoterImage: false);
 
     final mockTextWidget1 = PageBuilderWidget(

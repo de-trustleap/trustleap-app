@@ -125,12 +125,20 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
               )
             ],
             if (!widget.isConfigMenu &&
-                widget.properties.overlayColor != null) ...[
+                widget.properties.overlayPaint != null) ...[
               ClipRRect(
                   borderRadius: BorderRadius.circular(
                       widget.properties.borderRadius ?? 0),
                   child: Container(
-                      color: widget.properties.overlayColor,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              widget.properties.borderRadius ?? 0),
+                          color: widget.properties.overlayPaint?.isColor == true
+                              ? widget.properties.overlayPaint?.color
+                              : null,
+                          gradient: widget.properties.overlayPaint?.isGradient == true
+                              ? widget.properties.overlayPaint?.gradient?.toFlutterGradient()
+                              : null),
                       width: widget.properties.width,
                       height: widget.properties.height))
             ],
