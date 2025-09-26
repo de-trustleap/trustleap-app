@@ -34,6 +34,3 @@ class PagebuilderColorControl extends StatelessWidget {
     ]);
   }
 }
-
-// TODO: PAGEBUILDER PROJEKT ANPASSEN
-// TODO: CHATGPT PAGEBUILDER AI PIPELINE REPARIEREN
