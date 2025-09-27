@@ -67,11 +67,13 @@ class _LandingPageAIGenerationFormState
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
-    return Opacity(
-      opacity: widget.disabled ? 0.5 : 1.0,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+    return IgnorePointer(
+      ignoring: widget.disabled,
+      child: Opacity(
+        opacity: widget.disabled ? 0.5 : 1.0,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -152,7 +154,8 @@ class _LandingPageAIGenerationFormState
                 color: themeData.colorScheme.onSurface.withValues(alpha: 0.7),
               ),
             ),
-          ],
+            ],
+          ),
         ),
       ),
     );
