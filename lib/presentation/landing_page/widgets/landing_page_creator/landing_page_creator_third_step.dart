@@ -122,6 +122,22 @@ class _LandingPageCreatorThirdStepState
         selectedContactOption == ContactOption.both;
   }
 
+  bool _isButtonEnabled() {
+    if (widget.buttonsDisabled ||
+        selectedBusinessModel == null ||
+        selectedContactOption == null) {
+      return false;
+    }
+
+    if (_needsCalendly()) {
+      if (!isCalendlyConnected || selectedEventTypeUrl == null || selectedEventTypeUrl!.isEmpty) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -291,12 +307,10 @@ class _LandingPageCreatorThirdStepState
                           child: SizedBox(width: 20, height: 20)),
                       ResponsiveRowColumnItem(
                         child: PrimaryButton(
-                          title: widget.isEditMode 
+                          title: widget.isEditMode
                               ? localization.landingpage_creation_edit_button_text
                               : localization.landingpage_creation_continue,
-                          disabled: widget.buttonsDisabled ||
-                              selectedBusinessModel == null ||
-                              selectedContactOption == null,
+                          disabled: !_isButtonEnabled(),
                           isLoading: widget.isLoading,
                           width: responsiveValue.isMobile
                               ? maxWidth - 20
