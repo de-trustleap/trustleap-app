@@ -97,6 +97,7 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
           title: localization
               .pagebuilder_textfield_config_textfield_background_color,
           initialColor: props?.backgroundColor ?? Colors.transparent,
+          enableGradients: false,
           onColorSelected: (backgroundColor) {
             onChangedLocal(props?.copyWith(backgroundColor: backgroundColor));
           }),
@@ -105,6 +106,7 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
           title:
               localization.pagebuilder_textfield_config_textfield_border_color,
           initialColor: props?.borderColor ?? Colors.transparent,
+          enableGradients: false,
           onColorSelected: (borderColor) {
             onChangedLocal(props?.copyWith(borderColor: borderColor));
           }),

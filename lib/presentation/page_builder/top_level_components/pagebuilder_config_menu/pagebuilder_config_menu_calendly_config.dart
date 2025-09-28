@@ -96,6 +96,7 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
           PagebuilderColorControl(
               title: localization.pagebuilder_calendly_config_background_color,
               initialColor: properties.backgroundColor ?? Colors.black,
+              enableGradients: false,
               enableOpacity: false,
               onColorSelected: (color) {
                 updateCalendlyProperties(
@@ -107,6 +108,7 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
           PagebuilderColorControl(
               title: localization.pagebuilder_calendly_config_primary_color,
               initialColor: properties.primaryColor ?? Colors.black,
+              enableGradients: false,
               enableOpacity: false,
               onColorSelected: (color) {
                 updateCalendlyProperties(
