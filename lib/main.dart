@@ -53,7 +53,7 @@ Future<void> main() async {
 
       if (kIsWeb) {
         await FirebaseAppCheck.instance.activate(
-          webProvider: ReCaptchaV3Provider(environment.getAppCheckToken()),
+          providerWeb: ReCaptchaV3Provider(environment.getAppCheckToken()),
         );
       }
 

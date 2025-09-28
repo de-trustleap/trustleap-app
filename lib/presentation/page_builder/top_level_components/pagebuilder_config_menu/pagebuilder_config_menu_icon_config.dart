@@ -77,6 +77,7 @@ class PagebuilderConfigMenuIconConfig extends StatelessWidget {
       PagebuilderColorControl(
           title: localization.landingpage_pagebuilder_icon_config_color,
           initialColor: props?.color ?? Colors.black,
+          enableGradients: false,
           onColorSelected: (color) {
             onChangedLocal(props?.copyWith(color: color));
           }),
