@@ -32,10 +32,15 @@ class _LandingPageBuilderSectionViewState
     switch (widget.model.layout) {
       case PageBuilderSectionLayout.column:
       default:
+        final shouldConstrainBackground =
+            widget.model.backgroundConstrained ?? false;
+        final outerMaxWidth =
+            shouldConstrainBackground ? widget.model.maxWidth : null;
+
         return Center(
             child: ConstrainedBox(
-          constraints: BoxConstraints(
-              maxWidth: widget.model.maxWidth ?? double.infinity),
+          constraints:
+              BoxConstraints(maxWidth: outerMaxWidth ?? double.infinity),
           child: MouseRegion(
             onEnter: (_) {
               setState(() {
@@ -58,11 +63,17 @@ class _LandingPageBuilderSectionViewState
                     Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: widget.model.background?.backgroundPaint?.isColor == true
+                          color: widget.model.background?.backgroundPaint
+                                      ?.isColor ==
+                                  true
                               ? widget.model.background?.backgroundPaint?.color
                               : null,
-                          gradient: widget.model.background?.backgroundPaint?.isGradient == true
-                              ? widget.model.background?.backgroundPaint?.gradient?.toFlutterGradient()
+                          gradient: widget.model.background?.backgroundPaint
+                                      ?.isGradient ==
+                                  true
+                              ? widget
+                                  .model.background?.backgroundPaint?.gradient
+                                  ?.toFlutterGradient()
                               : null,
                           border: showBorder
                               ? Border.all(
@@ -118,25 +129,53 @@ class _LandingPageBuilderSectionViewState
                               Positioned.fill(
                                   child: DecoratedBox(
                                       decoration: BoxDecoration(
-                                          color: widget.model.background!.overlayPaint!.isColor == true
-                                              ? widget.model.background!.overlayPaint!.color
+                                          color: widget.model.background!
+                                                      .overlayPaint!.isColor ==
+                                                  true
+                                              ? widget.model.background!
+                                                  .overlayPaint!.color
                                               : null,
-                                          gradient: widget.model.background!.overlayPaint!.isGradient == true
-                                              ? widget.model.background!.overlayPaint!.gradient?.toFlutterGradient()
+                                          gradient: widget
+                                                      .model
+                                                      .background!
+                                                      .overlayPaint!
+                                                      .isGradient ==
+                                                  true
+                                              ? widget.model.background!
+                                                  .overlayPaint!.gradient
+                                                  ?.toFlutterGradient()
                                               : null)))
                             ],
                             Container(
                               alignment: Alignment.center,
-                              child: SectionMaxWidthProvider(
-                                sectionMaxWidth: widget.model.maxWidth,
-                                child: Column(
-                                    children: widget.model.widgets != null
-                                        ? widget.model.widgets!
-                                            .map((widget) =>
-                                                widgetBuilder.build(widget))
-                                            .toList()
-                                        : []),
-                              ),
+                              child: shouldConstrainBackground
+                                  ? SectionMaxWidthProvider(
+                                      sectionMaxWidth: widget.model.maxWidth,
+                                      child: Column(
+                                          children: widget.model.widgets != null
+                                              ? widget.model.widgets!
+                                                  .map((widget) => widgetBuilder
+                                                      .build(widget))
+                                                  .toList()
+                                              : []),
+                                    )
+                                  : ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                          maxWidth: widget.model.maxWidth ??
+                                              double.infinity),
+                                      child: SectionMaxWidthProvider(
+                                        sectionMaxWidth: widget.model.maxWidth,
+                                        child: Column(
+                                            children:
+                                                widget.model.widgets != null
+                                                    ? widget.model.widgets!
+                                                        .map((widget) =>
+                                                            widgetBuilder
+                                                                .build(widget))
+                                                        .toList()
+                                                    : []),
+                                      ),
+                                    ),
                             )
                           ],
                         )),

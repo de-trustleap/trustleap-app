@@ -3006,6 +3006,24 @@ abstract class AppLocalizations {
   /// **'Border Radius'**
   String get pagebuilder_calendly_config_border_radius;
 
+  /// Title for section max width configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Max Width'**
+  String get pagebuilder_section_maxwidth_title;
+
+  /// Label for section max width stepper control in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Max Width'**
+  String get pagebuilder_section_maxwidth;
+
+  /// Checkbox label for background constraint in section max width configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Apply max width to background'**
+  String get pagebuilder_section_background_constrained;
+
   /// Menu item for Calendly text color in the Calendly configuration in the pagebuilder config menu
   ///
   /// In en, this message translates to:

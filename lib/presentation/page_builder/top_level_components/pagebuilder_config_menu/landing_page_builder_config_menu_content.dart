@@ -113,7 +113,6 @@ class _LandingPageBuilderConfigMenuContentState
                           1),
                     ],
                   ),
-                  // Animated Indicator
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.easeInOut,

@@ -1992,6 +1992,18 @@
     "@pagebuilder_calendly_config_border_radius": {
         "description": "Menu item for Calendly border radius in the Calendly configuration in the pagebuilder config menu"
     },
+    "pagebuilder_section_maxwidth_title": "Max Width",
+    "@pagebuilder_section_maxwidth_title": {
+        "description": "Title for section max width configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_section_maxwidth": "Max Width",
+    "@pagebuilder_section_maxwidth": {
+        "description": "Label for section max width stepper control in the pagebuilder config menu"
+    },
+    "pagebuilder_section_background_constrained": "Apply max width to background",
+    "@pagebuilder_section_background_constrained": {
+        "description": "Checkbox label for background constraint in section max width configuration in the pagebuilder config menu"
+    },
     "pagebuilder_calendly_config_text_color": "Text Color",
     "@pagebuilder_calendly_config_text_color": {
         "description": "Menu item for Calendly text color in the Calendly configuration in the pagebuilder config menu"

@@ -1736,6 +1736,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pagebuilder_calendly_config_border_radius => 'Eckenradius';
 
   @override
+  String get pagebuilder_section_maxwidth_title => 'Maximale Breite';
+
+  @override
+  String get pagebuilder_section_maxwidth => 'Maximale Breite';
+
+  @override
+  String get pagebuilder_section_background_constrained =>
+      'Max-Breite auf Hintergrund anwenden';
+
+  @override
   String get pagebuilder_calendly_config_text_color => 'Textfarbe';
 
   @override
