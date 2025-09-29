@@ -112,14 +112,14 @@ void main() {
             layout: PageBuilderSectionLayout.column,
             widgets: [],
             background: null,
-            maxWidth: null),
+            maxWidth: null, backgroundConstrained: null),
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
                 "bc3dc5e1-f43a-415c-9664-3692f3075d1c"),
             layout: PageBuilderSectionLayout.column,
             widgets: [],
             background: null,
-            maxWidth: null)
+            maxWidth: null, backgroundConstrained: null)
       ];
       // When
       final result = model.getPageBuilderSectionList(sections);
@@ -138,14 +138,16 @@ void main() {
             layout: PageBuilderSectionLayout.column,
             widgets: [],
             background: null,
-            maxWidth: 500),
+            maxWidth: 500,
+            backgroundConstrained: null),
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
                 "bc3dc5e1-f43a-415c-9664-3692f3075d1c"),
             layout: PageBuilderSectionLayout.column,
             widgets: [],
             background: null,
-            maxWidth: 400)
+            maxWidth: 400,
+            backgroundConstrained: null)
       ];
       final expectedResult = [
         {

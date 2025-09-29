@@ -12,6 +12,7 @@ class PageBuilderSectionModel extends Equatable {
   final String? layout;
   final Map<String, dynamic>? background;
   final double? maxWidth;
+  final bool? backgroundConstrained;
   final List<Map<String, dynamic>>? widgets;
 
   const PageBuilderSectionModel({
@@ -19,6 +20,7 @@ class PageBuilderSectionModel extends Equatable {
     required this.layout,
     required this.background,
     required this.maxWidth,
+    required this.backgroundConstrained,
     required this.widgets,
   });
 
@@ -27,6 +29,9 @@ class PageBuilderSectionModel extends Equatable {
     if (layout != null) map['layout'] = layout;
     if (background != null) map['background'] = background;
     if (maxWidth != null) map['maxWidth'] = maxWidth;
+    if (backgroundConstrained != null) {
+      map['backgroundConstrained'] = backgroundConstrained;
+    }
     if (widgets != null) map['widgets'] = widgets;
     return map;
   }
@@ -39,6 +44,9 @@ class PageBuilderSectionModel extends Equatable {
             ? map['background'] as Map<String, dynamic>
             : null,
         maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
+        backgroundConstrained: map['backgroundConstrained'] != null
+            ? map['backgroundConstrained'] as bool
+            : null,
         widgets: map['widgets'] != null
             ? List<Map<String, dynamic>>.from((map['widgets'] as List)
                 .map((item) => item as Map<String, dynamic>))
@@ -50,6 +58,7 @@ class PageBuilderSectionModel extends Equatable {
     String? layout,
     Map<String, dynamic>? background,
     double? maxWidth,
+    bool? backgroundConstrained,
     List<Map<String, dynamic>>? widgets,
   }) {
     return PageBuilderSectionModel(
@@ -57,6 +66,8 @@ class PageBuilderSectionModel extends Equatable {
       layout: layout ?? this.layout,
       background: background ?? this.background,
       maxWidth: maxWidth ?? this.maxWidth,
+      backgroundConstrained:
+          backgroundConstrained ?? this.backgroundConstrained,
       widgets: widgets ?? this.widgets,
     );
   }
@@ -72,6 +83,7 @@ class PageBuilderSectionModel extends Equatable {
             ? PagebuilderBackgroundModel.fromMap(background!).toDomain()
             : null,
         maxWidth: maxWidth,
+        backgroundConstrained: backgroundConstrained,
         widgets: getPageBuilderWidgetList(widgets));
   }
 
@@ -83,6 +95,7 @@ class PageBuilderSectionModel extends Equatable {
             ? PagebuilderBackgroundModel.fromDomain(section.background!).toMap()
             : null,
         maxWidth: section.maxWidth,
+        backgroundConstrained: section.backgroundConstrained,
         widgets: getMapFromPageBuilderWidgetList(section.widgets));
   }
 
@@ -108,5 +121,6 @@ class PageBuilderSectionModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, layout, background, maxWidth, widgets];
+  List<Object?> get props =>
+      [id, layout, background, maxWidth, backgroundConstrained, widgets];
 }

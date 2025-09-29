@@ -19,7 +19,8 @@ void main() {
                 layout: PageBuilderSectionLayout.column,
                 widgets: [],
                 background: null,
-                maxWidth: 300)
+                maxWidth: 300,
+                backgroundConstrained: null)
           ],
           backgroundColor: Colors.red);
       final expectedResult = PageBuilderPage(
@@ -44,7 +45,8 @@ void main() {
                 layout: PageBuilderSectionLayout.column,
                 widgets: [],
                 background: null,
-                maxWidth: 300)
+                maxWidth: 300,
+                backgroundConstrained: null)
           ],
           backgroundColor: Colors.red);
 
@@ -56,7 +58,8 @@ void main() {
                 layout: PageBuilderSectionLayout.column,
                 widgets: [],
                 background: null,
-                maxWidth: 300)
+                maxWidth: 300,
+                backgroundConstrained: null)
           ],
           backgroundColor: Colors.red);
       // Then

@@ -19,13 +19,13 @@ void main() {
           id: "1",
           layout: "column",
           background: null,
-          maxWidth: 300,
+          maxWidth: 300, backgroundConstrained: null,
           widgets: []);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           layout: "column",
           background: null,
-          maxWidth: 500,
+          maxWidth: 500, backgroundConstrained: null,
           widgets: []);
       // When
       final result = section.copyWith(maxWidth: 500);
@@ -41,7 +41,7 @@ void main() {
           id: "1",
           layout: "column",
           background: null,
-          maxWidth: 300,
+          maxWidth: 300, backgroundConstrained: null,
           widgets: []);
       final expectedResult = {
         "id": "1",
@@ -69,7 +69,7 @@ void main() {
           id: "1",
           layout: "column",
           background: null,
-          maxWidth: 300,
+          maxWidth: 300, backgroundConstrained: null,
           widgets: []);
       // When
       final result = PageBuilderSectionModel.fromMap(map);
@@ -87,14 +87,14 @@ void main() {
           id: "1",
           layout: "column",
           background: null,
-          maxWidth: 800,
+          maxWidth: 800, backgroundConstrained: null,
           widgets: []);
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
-          maxWidth: 800);
+          maxWidth: 800, backgroundConstrained: null);
       // When
       final result = model.toDomain();
       // Then
@@ -112,12 +112,12 @@ void main() {
           layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
-          maxWidth: 800);
+          maxWidth: 800, backgroundConstrained: null);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           layout: "column",
           background: null,
-          maxWidth: 800,
+          maxWidth: 800, backgroundConstrained: null,
           widgets: []);
       // When
       final result = PageBuilderSectionModel.fromDomain(model);
@@ -272,7 +272,7 @@ void main() {
           id: "1",
           layout: "column",
           background: null,
-          maxWidth: 800,
+          maxWidth: 800, backgroundConstrained: null,
           widgets: widgets);
       // When
       final result = model.getPageBuilderWidgetList(widgets);
@@ -438,13 +438,13 @@ void main() {
           layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
-          maxWidth: 800);
+          maxWidth: 800, backgroundConstrained: null);
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
-          maxWidth: 800);
+          maxWidth: 800, backgroundConstrained: null);
       // Then
       expect(section1, section2);
     });

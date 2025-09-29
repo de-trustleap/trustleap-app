@@ -142,6 +142,7 @@ void main() {
         layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
+        backgroundConstrained: null,
         widgets: [mockColumnWidget, mockRowWidget],
       );
 

@@ -24,7 +24,8 @@ void main() {
                     layout: PageBuilderSectionLayout.column,
                     widgets: [],
                     background: null,
-                    maxWidth: 300)
+                    maxWidth: 300,
+                    backgroundConstrained: null)
               ],
               backgroundColor: Colors.red),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
@@ -38,7 +39,8 @@ void main() {
                     layout: PageBuilderSectionLayout.column,
                     widgets: [],
                     background: null,
-                    maxWidth: 500)
+                    maxWidth: 500,
+                    backgroundConstrained: null)
               ],
               backgroundColor: Colors.red),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
@@ -52,7 +54,8 @@ void main() {
                   layout: PageBuilderSectionLayout.column,
                   widgets: [],
                   background: null,
-                  maxWidth: 500)
+                  maxWidth: 500,
+                  backgroundConstrained: null)
             ],
             backgroundColor: Colors.red),
       );
@@ -74,7 +77,8 @@ void main() {
                     layout: PageBuilderSectionLayout.column,
                     widgets: [],
                     background: null,
-                    maxWidth: 300)
+                    maxWidth: 300,
+                    backgroundConstrained: null)
               ],
               backgroundColor: Colors.red),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
@@ -88,7 +92,8 @@ void main() {
                     layout: PageBuilderSectionLayout.column,
                     widgets: [],
                     background: null,
-                    maxWidth: 300)
+                    maxWidth: 300,
+                    backgroundConstrained: null)
               ],
               backgroundColor: Colors.red),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
