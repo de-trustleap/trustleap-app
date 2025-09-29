@@ -39,7 +39,8 @@ void main() {
                 alignment: null)
           ],
           background: null,
-          maxWidth: 300);
+          maxWidth: 300,
+          backgroundConstrained: null);
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
@@ -65,7 +66,8 @@ void main() {
                 alignment: Alignment.center)
           ],
           background: null,
-          maxWidth: 400);
+          maxWidth: 400,
+          backgroundConstrained: null);
       // When
       final result = section.copyWith(maxWidth: 400, widgets: [
         PageBuilderWidget(
@@ -121,7 +123,8 @@ void main() {
                 alignment: null)
           ],
           background: null,
-          maxWidth: 300);
+          maxWidth: 300,
+          backgroundConstrained: null);
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           layout: PageBuilderSectionLayout.column,
@@ -147,7 +150,8 @@ void main() {
                 alignment: null)
           ],
           background: null,
-          maxWidth: 300);
+          maxWidth: 300,
+          backgroundConstrained: null);
       // Then
       expect(section1, section2);
     });

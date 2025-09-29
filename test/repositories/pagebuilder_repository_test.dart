@@ -64,6 +64,7 @@ void main() {
               layout: PageBuilderSectionLayout.column,
               background: null,
               maxWidth: null,
+              backgroundConstrained: null,
               widgets: [
                 PageBuilderWidget(
                     id: UniqueID.fromUniqueString("3"),

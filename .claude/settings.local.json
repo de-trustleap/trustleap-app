@@ -12,7 +12,8 @@
       "Bash(awk:*)",
       "WebFetch(domain:stackoverflow.com)",
       "WebFetch(domain:api.flutter.dev)",
-      "Read(//Users/marcelspindler/Documents/Dev/Finanzbegleiter/**)"
+      "Read(//Users/marcelspindler/Documents/Dev/Finanzbegleiter/**)",
+      "Bash(sed:*)"
     ],
     "deny": []
   }
