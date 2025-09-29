@@ -33,7 +33,10 @@ class _LandingPageBuilderWidgetContainerState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final widgetID = widget.model.id.value;
+    final selectionCubit = Modular.get<PagebuilderSelectionCubit>();
+
     return BlocBuilder<PagebuilderSelectionCubit, String?>(
+      bloc: selectionCubit,
       builder: (context, selectedWidgetId) {
         return BlocBuilder<PagebuilderHoverCubit, String?>(
           builder: (context, hoveredWidgetId) {
@@ -77,11 +80,18 @@ class _LandingPageBuilderWidgetContainerState
                         ),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: widget.model.background?.backgroundPaint?.isColor == true
-                                ? widget.model.background?.backgroundPaint?.color
+                            color: widget.model.background?.backgroundPaint
+                                        ?.isColor ==
+                                    true
+                                ? widget
+                                    .model.background?.backgroundPaint?.color
                                 : null,
-                            gradient: widget.model.background?.backgroundPaint?.isGradient == true
-                                ? widget.model.background?.backgroundPaint?.gradient?.toFlutterGradient()
+                            gradient: widget.model.background?.backgroundPaint
+                                        ?.isGradient ==
+                                    true
+                                ? widget
+                                    .model.background?.backgroundPaint?.gradient
+                                    ?.toFlutterGradient()
                                 : null,
                             borderRadius:
                                 widget.properties?.borderRadius != null
@@ -165,17 +175,26 @@ class _LandingPageBuilderWidgetContainerState
                                 Positioned.fill(
                                     child: DecoratedBox(
                                         decoration: BoxDecoration(
-                                            borderRadius: widget.properties
-                                                        ?.borderRadius !=
-                                                    null
-                                                ? BorderRadius.circular(widget
-                                                    .properties!.borderRadius!)
-                                                : null,
-                                            color: widget.model.background!.overlayPaint!.isColor == true
-                                                ? widget.model.background!.overlayPaint!.color
-                                                : null,
-                                            gradient: widget.model.background!.overlayPaint!.isGradient == true
-                                                ? widget.model.background!.overlayPaint!.gradient?.toFlutterGradient()
+                                            borderRadius:
+                                                widget.properties?.borderRadius != null
+                                                    ? BorderRadius.circular(widget
+                                                        .properties!
+                                                        .borderRadius!)
+                                                    : null,
+                                            color:
+                                                widget.model.background!.overlayPaint!.isColor == true
+                                                    ? widget.model.background!
+                                                        .overlayPaint!.color
+                                                    : null,
+                                            gradient: widget
+                                                        .model
+                                                        .background!
+                                                        .overlayPaint!
+                                                        .isGradient ==
+                                                    true
+                                                ? widget.model.background!
+                                                    .overlayPaint!.gradient
+                                                    ?.toFlutterGradient()
                                                 : null)))
                               ],
                               Align(
@@ -197,7 +216,7 @@ class _LandingPageBuilderWidgetContainerState
                       ),
                       if (isHovered || isSelected) ...[
                         LandingPageBuilderWidgetEditButton(onPressed: () {
-                          BlocProvider.of<PagebuilderSelectionCubit>(context)
+                          Modular.get<PagebuilderSelectionCubit>()
                               .selectWidget(widgetID);
                           Modular.get<PagebuilderConfigMenuCubit>()
                               .openConfigMenu(widget.model);

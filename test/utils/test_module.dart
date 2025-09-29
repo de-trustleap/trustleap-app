@@ -191,8 +191,8 @@ class TestModule extends Module {
       ..add(CompanyCubit.new)
       ..add(CompanyRequestCubit.new)
       ..add(CompanyRequestObserverCubit.new)
-      ..add(PagebuilderHoverCubit.new)
-      ..add(PagebuilderSelectionCubit.new);
+      ..addLazySingleton(PagebuilderHoverCubit.new)
+      ..addLazySingleton(PagebuilderSelectionCubit.new);
   }
 
   final Widget? testWidget;

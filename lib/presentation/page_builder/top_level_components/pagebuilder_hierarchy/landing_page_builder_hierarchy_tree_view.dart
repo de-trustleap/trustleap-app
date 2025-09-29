@@ -4,8 +4,10 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dar
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageBuilderHierarchyTreeView extends StatefulWidget {
   final PageBuilderPage page;
@@ -26,11 +28,14 @@ class _LandingPageBuilderHierarchyTreeViewState
     extends State<LandingPageBuilderHierarchyTreeView> {
   final Set<String> _expandedSections = {};
   final Set<String> _expandedWidgets = {};
+  String? _lastSelectedWidgetId;
+  LandingPageBuilderHierarchyHelper? _hierarchyHelper;
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
+    final selectionCubit = Modular.get<PagebuilderSelectionCubit>();
     final sections = widget.page.sections ?? [];
 
     if (sections.isEmpty) {
@@ -43,7 +48,21 @@ class _LandingPageBuilderHierarchyTreeViewState
     }
 
     return BlocBuilder<PagebuilderSelectionCubit, String?>(
+      bloc: selectionCubit,
       builder: (context, selectedWidgetId) {
+        _hierarchyHelper ??= LandingPageBuilderHierarchyHelper(
+          page: widget.page,
+        );
+
+        // Auto-expand tree when selection changes
+        if (selectedWidgetId != null &&
+            selectedWidgetId != _lastSelectedWidgetId) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _autoExpandForWidget(selectedWidgetId);
+          });
+          _lastSelectedWidgetId = selectedWidgetId;
+        }
+
         return ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: sections.length,
@@ -312,5 +331,37 @@ class _LandingPageBuilderHierarchyTreeViewState
       default:
         return elementType?.name ?? "";
     }
+  }
+
+  /// Auto-expands the tree to make the selected widget visible using intelligent expansion
+  void _autoExpandForWidget(String widgetId) {
+    if (_hierarchyHelper == null) return;
+
+    final expansionState = _hierarchyHelper!.getOptimalExpansionState(widgetId);
+    final sectionsToExpand = expansionState['sectionsToExpand'] ?? <String>[];
+    final widgetsToExpand = expansionState['widgetsToExpand'] ?? <String>[];
+    final sectionsToCollapse =
+        expansionState['sectionsToCollapse'] ?? <String>[];
+    final widgetsToCollapse = expansionState['widgetsToCollapse'] ?? <String>[];
+
+    setState(() {
+      // First collapse sections and widgets that should be closed
+      for (final sectionId in sectionsToCollapse) {
+        _expandedSections.remove(sectionId);
+      }
+
+      for (final widgetId in widgetsToCollapse) {
+        _expandedWidgets.remove(widgetId);
+      }
+
+      // Then expand the required sections and widgets
+      for (final sectionId in sectionsToExpand) {
+        _expandedSections.add(sectionId);
+      }
+
+      for (final widgetId in widgetsToExpand) {
+        _expandedWidgets.add(widgetId);
+      }
+    });
   }
 }

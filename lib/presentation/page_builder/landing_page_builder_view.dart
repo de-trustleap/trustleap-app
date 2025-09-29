@@ -1,7 +1,6 @@
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
@@ -85,9 +84,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
       return const PagebuilderMobileNotSupportedView();
     }
 
-    return BlocProvider(
-      create: (context) => Modular.get<PagebuilderSelectionCubit>(),
-      child: BlocConsumer<PagebuilderBloc, PagebuilderState>(
+    return BlocConsumer<PagebuilderBloc, PagebuilderState>(
           bloc: pageBuilderCubit,
           listener: (context, state) {
             if (state is GetLandingPageAndUserSuccessState) {
@@ -182,10 +179,6 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                             final hierarchyHelper =
                                 LandingPageBuilderHierarchyHelper(
                               page: state.content.content!,
-                              configMenuCubit: pageBuilderMenuCubit,
-                              selectionCubit:
-                                  BlocProvider.of<PagebuilderSelectionCubit>(
-                                      context),
                             );
                             hierarchyHelper.onHierarchyItemSelected(
                                 widgetId, isSection);
@@ -198,7 +191,6 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
             } else {
               return const LoadingIndicator();
             }
-          }),
-    );
+          });
   }
 }
