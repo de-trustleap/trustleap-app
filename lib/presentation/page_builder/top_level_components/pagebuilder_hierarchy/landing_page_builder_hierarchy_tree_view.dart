@@ -333,7 +333,6 @@ class _LandingPageBuilderHierarchyTreeViewState
     }
   }
 
-  /// Auto-expands the tree to make the selected widget visible using intelligent expansion
   void _autoExpandForWidget(String widgetId) {
     if (_hierarchyHelper == null) return;
 
@@ -345,7 +344,6 @@ class _LandingPageBuilderHierarchyTreeViewState
     final widgetsToCollapse = expansionState['widgetsToCollapse'] ?? <String>[];
 
     setState(() {
-      // First collapse sections and widgets that should be closed
       for (final sectionId in sectionsToCollapse) {
         _expandedSections.remove(sectionId);
       }
@@ -354,7 +352,6 @@ class _LandingPageBuilderHierarchyTreeViewState
         _expandedWidgets.remove(widgetId);
       }
 
-      // Then expand the required sections and widgets
       for (final sectionId in sectionsToExpand) {
         _expandedSections.add(sectionId);
       }

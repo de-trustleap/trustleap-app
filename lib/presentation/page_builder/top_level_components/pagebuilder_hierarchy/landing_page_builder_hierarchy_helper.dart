@@ -106,7 +106,6 @@ class LandingPageBuilderHierarchyHelper {
   }
 
   _TargetInfo? _findTargetLocation(String targetWidgetId) {
-    // Check if it's a section first
     for (final section in page.sections ?? []) {
       if (section.id.value == targetWidgetId) {
         return _TargetInfo(
@@ -117,7 +116,6 @@ class LandingPageBuilderHierarchyHelper {
       }
     }
 
-    // Check if it's a widget
     for (final section in page.sections ?? []) {
       if (_widgetExistsInSection(targetWidgetId, section)) {
         final widgetPath = _findWidgetPathInSection(targetWidgetId, section);
@@ -278,7 +276,6 @@ class LandingPageBuilderHierarchyHelper {
   }
 }
 
-/// Helper class to store target information
 class _TargetInfo {
   final String sectionId;
   final bool isSection;

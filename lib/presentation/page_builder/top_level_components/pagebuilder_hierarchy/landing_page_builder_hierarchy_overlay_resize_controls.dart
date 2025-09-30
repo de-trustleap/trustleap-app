@@ -30,7 +30,6 @@ class LandingPageBuilderHierarchyOverlayResizeControls extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Corner resize handles
         _buildResizeHandle(
           top: 0,
           left: 0,
@@ -210,7 +209,8 @@ class LandingPageBuilderHierarchyOverlayResizeControls extends StatelessWidget {
           onPanUpdate: (details) => onPanUpdate(details.delta),
           onPanStart: (details) => onResizeStart(),
           onPanEnd: (details) => onResizeEnd(),
-          behavior: HitTestBehavior.translucent, // Only intercept when actually hit
+          behavior:
+              HitTestBehavior.translucent, // Only intercept when actually hit
           child: SizedBox(
             width: width,
             height: height,
