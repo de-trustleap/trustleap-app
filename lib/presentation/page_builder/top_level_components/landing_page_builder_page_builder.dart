@@ -27,19 +27,12 @@ class _LandingPageBuilderPageBuilderState
     extends State<LandingPageBuilderPageBuilder> {
   late PagebuilderConfigMenuCubit pageBuilderMenuCubit;
   bool _isConfigMenuOpen = false;
-  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     pageBuilderMenuCubit =
         widget.configMenuCubit ?? Modular.get<PagebuilderConfigMenuCubit>();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -93,7 +86,6 @@ class _LandingPageBuilderPageBuilderState
             child: BlocProvider(
               create: (context) => Modular.get<PagebuilderHoverCubit>(),
               child: ListView(
-                  controller: _scrollController,
                   children: widget.model.sections != null
                       ? widget.model.sections!
                           .map((section) => LandingPageBuilderSectionView(
