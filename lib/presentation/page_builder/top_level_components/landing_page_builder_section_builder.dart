@@ -28,6 +28,7 @@ class _LandingPageBuilderSectionViewState
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final selectionCubit = Modular.get<PagebuilderSelectionCubit>();
 
     switch (widget.model.layout) {
       case PageBuilderSectionLayout.column:
@@ -53,6 +54,7 @@ class _LandingPageBuilderSectionViewState
               });
             },
             child: BlocBuilder<PagebuilderSelectionCubit, String?>(
+              bloc: selectionCubit,
               builder: (context, selectedSectionId) {
                 final isSelected = selectedSectionId == widget.model.id.value;
                 final showBorder = _isHovered || isSelected;
@@ -181,7 +183,7 @@ class _LandingPageBuilderSectionViewState
                         )),
                     if (_isHovered) ...[
                       LandingPageBuilderSectionEditButton(onPressed: () {
-                        BlocProvider.of<PagebuilderSelectionCubit>(context)
+                        Modular.get<PagebuilderSelectionCubit>()
                             .selectWidget(widget.model.id.value);
                         Modular.get<PagebuilderConfigMenuCubit>()
                             .openSectionConfigMenu(widget.model);

@@ -11,7 +11,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 class LandingPageBuilderPageBuilder extends StatefulWidget {
   final PageBuilderPage model;
   final PagebuilderConfigMenuCubit? configMenuCubit;
-  
+
   const LandingPageBuilderPageBuilder({
     super.key,
     required this.model,
@@ -31,70 +31,73 @@ class _LandingPageBuilderPageBuilderState
   @override
   void initState() {
     super.initState();
-    pageBuilderMenuCubit = widget.configMenuCubit ?? Modular.get<PagebuilderConfigMenuCubit>();
+    pageBuilderMenuCubit =
+        widget.configMenuCubit ?? Modular.get<PagebuilderConfigMenuCubit>();
   }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-          BlocConsumer<PagebuilderConfigMenuCubit, PagebuilderConfigMenuState>(
-              bloc: pageBuilderMenuCubit,
-              listener: (context, state) {
-                if (state is PageBuilderConfigMenuOpenedState ||
-                    state is PageBuilderSectionConfigMenuOpenedState) {
-                  setState(() {
-                    _isConfigMenuOpen = true;
-                  });
-                }
-              },
-              builder: (context, state) {
-                if (state is PageBuilderConfigMenuOpenedState) {
-                  return LandingPageBuilderConfigMenu(
-                      key: ValueKey(state.model.id),
-                      isOpen: _isConfigMenuOpen,
-                      model: state.model,
-                      section: null,
-                      closeMenu: () {
-                        BlocProvider.of<PagebuilderSelectionCubit>(context)
-                            .selectWidget(null);
-                        setState(() {
-                          _isConfigMenuOpen = false;
-                        });
+        BlocConsumer<PagebuilderConfigMenuCubit, PagebuilderConfigMenuState>(
+            bloc: pageBuilderMenuCubit,
+            listener: (context, state) {
+              if (state is PageBuilderConfigMenuOpenedState ||
+                  state is PageBuilderSectionConfigMenuOpenedState) {
+                setState(() {
+                  _isConfigMenuOpen = true;
+                });
+              }
+            },
+            builder: (context, state) {
+              if (state is PageBuilderConfigMenuOpenedState) {
+                return LandingPageBuilderConfigMenu(
+                    key: ValueKey(state.model.id),
+                    isOpen: _isConfigMenuOpen,
+                    model: state.model,
+                    section: null,
+                    closeMenu: () {
+                      Modular.get<PagebuilderSelectionCubit>()
+                          .selectWidget(null);
+                      setState(() {
+                        _isConfigMenuOpen = false;
                       });
-                } else if (state is PageBuilderSectionConfigMenuOpenedState) {
-                  return LandingPageBuilderConfigMenu(
-                      key: ValueKey(state.model.id),
-                      isOpen: _isConfigMenuOpen,
-                      model: null,
-                      section: state.model,
-                      closeMenu: () {
-                        BlocProvider.of<PagebuilderSelectionCubit>(context)
-                            .selectWidget(null);
-                        setState(() {
-                          _isConfigMenuOpen = false;
-                        });
+                    });
+              } else if (state is PageBuilderSectionConfigMenuOpenedState) {
+                return LandingPageBuilderConfigMenu(
+                    key: ValueKey(state.model.id),
+                    isOpen: _isConfigMenuOpen,
+                    model: null,
+                    section: state.model,
+                    closeMenu: () {
+                      Modular.get<PagebuilderSelectionCubit>()
+                          .selectWidget(null);
+                      setState(() {
+                        _isConfigMenuOpen = false;
                       });
-                } else {
-                  return const SizedBox.shrink();
-                }
-              }),
-          Expanded(
-            child: Container(
-              color: widget.model.backgroundColor,
-              child: BlocProvider(
-                create: (context) => Modular.get<PagebuilderHoverCubit>(),
-                child: ListView(
-                    children: widget.model.sections != null
-                        ? widget.model.sections!
-                            .map((section) =>
-                                LandingPageBuilderSectionView(model: section))
-                            .toList()
-                        : []),
-              ),
+                    });
+              } else {
+                return const SizedBox.shrink();
+              }
+            }),
+        Expanded(
+          child: Container(
+            color: widget.model.backgroundColor,
+            child: BlocProvider(
+              create: (context) => Modular.get<PagebuilderHoverCubit>(),
+              child: ListView(
+                  children: widget.model.sections != null
+                      ? widget.model.sections!
+                          .map((section) => LandingPageBuilderSectionView(
+                                key: ValueKey(section.id.value),
+                                model: section,
+                              ))
+                          .toList()
+                      : []),
             ),
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }

@@ -1,35 +1,19 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageBuilderHierarchyHelper {
   final PageBuilderPage page;
-  final PagebuilderConfigMenuCubit configMenuCubit;
-  final PagebuilderSelectionCubit selectionCubit;
 
   LandingPageBuilderHierarchyHelper({
     required this.page,
-    required this.configMenuCubit,
-    required this.selectionCubit,
   });
 
-  factory LandingPageBuilderHierarchyHelper.fromContext({
-    required PageBuilderPage page,
-    required PagebuilderConfigMenuCubit configMenuCubit,
-    required BuildContext context,
-  }) {
-    return LandingPageBuilderHierarchyHelper(
-      page: page,
-      configMenuCubit: configMenuCubit,
-      selectionCubit: BlocProvider.of<PagebuilderSelectionCubit>(context),
-    );
-  }
-
   void onHierarchyItemSelected(String widgetId, bool isSection) {
-    selectionCubit.selectWidget(widgetId);
+    Modular.get<PagebuilderSelectionCubit>().selectWidget(widgetId);
 
     if (isSection) {
       final section = page.sections
@@ -38,12 +22,13 @@ class LandingPageBuilderHierarchyHelper {
           )
           .firstOrNull;
       if (section != null) {
-        configMenuCubit.openSectionConfigMenu(section);
+        Modular.get<PagebuilderConfigMenuCubit>()
+            .openSectionConfigMenu(section);
       }
     } else {
       final widget = findWidgetById(widgetId);
       if (widget != null) {
-        configMenuCubit.openConfigMenu(widget);
+        Modular.get<PagebuilderConfigMenuCubit>().openConfigMenu(widget);
       }
     }
   }
@@ -76,4 +61,229 @@ class LandingPageBuilderHierarchyHelper {
 
     return null;
   }
+
+  Map<String, dynamic> getOptimalExpansionState(String targetWidgetId) {
+    final result = {
+      'sectionsToExpand': <String>[],
+      'widgetsToExpand': <String>[],
+      'sectionsToCollapse': <String>[],
+      'widgetsToCollapse': <String>[],
+    };
+
+    final targetInfo = _findTargetLocation(targetWidgetId);
+    if (targetInfo == null) return result;
+
+    final sectionsToExpand = result['sectionsToExpand'] as List<String>;
+    final widgetsToExpand = result['widgetsToExpand'] as List<String>;
+    final sectionsToCollapse = result['sectionsToCollapse'] as List<String>;
+    final widgetsToCollapse = result['widgetsToCollapse'] as List<String>;
+
+    sectionsToExpand.add(targetInfo.sectionId);
+
+    if (!targetInfo.isSection) {
+      widgetsToExpand.addAll(targetInfo.widgetPath);
+    }
+
+    for (final section in page.sections ?? []) {
+      if (section.id.value != targetInfo.sectionId) {
+        sectionsToCollapse.add(section.id.value);
+        _collectAllWidgetIds(section, widgetsToCollapse);
+      } else if (!targetInfo.isSection) {
+        _collectWidgetsToCollapseInSection(
+            section, targetInfo.widgetPath, widgetsToCollapse);
+      }
+    }
+
+    return result;
+  }
+
+  Map<String, List<String>> getExpansionPathForWidget(String targetWidgetId) {
+    final targetInfo = _findTargetLocation(targetWidgetId);
+    return {
+      'sections': targetInfo != null ? [targetInfo.sectionId] : <String>[],
+      'widgets': targetInfo?.widgetPath ?? <String>[],
+    };
+  }
+
+  _TargetInfo? _findTargetLocation(String targetWidgetId) {
+    for (final section in page.sections ?? []) {
+      if (section.id.value == targetWidgetId) {
+        return _TargetInfo(
+          sectionId: section.id.value,
+          isSection: true,
+          widgetPath: [],
+        );
+      }
+    }
+
+    for (final section in page.sections ?? []) {
+      if (_widgetExistsInSection(targetWidgetId, section)) {
+        final widgetPath = _findWidgetPathInSection(targetWidgetId, section);
+        return _TargetInfo(
+          sectionId: section.id.value,
+          isSection: false,
+          widgetPath: widgetPath,
+        );
+      }
+    }
+
+    return null;
+  }
+
+  List<String> _findWidgetPathInSection(
+      String targetWidgetId, PageBuilderSection section) {
+    final widgets = section.widgets ?? [];
+
+    for (final widget in widgets) {
+      if (widget.id.value == targetWidgetId) {
+        return [];
+      }
+
+      final path = _findWidgetPathInWidget(targetWidgetId, widget, []);
+      if (path.isNotEmpty) {
+        return path;
+      }
+    }
+
+    return [];
+  }
+
+  List<String> _findWidgetPathInWidget(String targetWidgetId,
+      PageBuilderWidget widget, List<String> currentPath) {
+    if (widget.id.value == targetWidgetId) {
+      return currentPath;
+    }
+
+    final newPath = [...currentPath, widget.id.value];
+
+    if (widget.children != null) {
+      for (final child in widget.children!) {
+        final path = _findWidgetPathInWidget(targetWidgetId, child, newPath);
+        if (path.isNotEmpty) {
+          return path;
+        }
+      }
+    }
+
+    if (widget.containerChild != null) {
+      final path = _findWidgetPathInWidget(
+          targetWidgetId, widget.containerChild!, newPath);
+      if (path.isNotEmpty) {
+        return path;
+      }
+    }
+
+    return [];
+  }
+
+  bool _widgetExistsInSection(
+      String targetWidgetId, PageBuilderSection section) {
+    final widgets = section.widgets ?? [];
+
+    for (final widget in widgets) {
+      if (_widgetExistsInWidgetTree(targetWidgetId, widget)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  bool _widgetExistsInWidgetTree(
+      String targetWidgetId, PageBuilderWidget widget) {
+    if (widget.id.value == targetWidgetId) {
+      return true;
+    }
+
+    if (widget.children != null) {
+      for (final child in widget.children!) {
+        if (_widgetExistsInWidgetTree(targetWidgetId, child)) {
+          return true;
+        }
+      }
+    }
+
+    if (widget.containerChild != null) {
+      if (_widgetExistsInWidgetTree(targetWidgetId, widget.containerChild!)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  void _collectAllWidgetIds(
+      PageBuilderSection section, List<String> collectedIds) {
+    final widgets = section.widgets ?? [];
+
+    for (final widget in widgets) {
+      _collectAllWidgetIdsInWidget(widget, collectedIds);
+    }
+  }
+
+  void _collectAllWidgetIdsInWidget(
+      PageBuilderWidget widget, List<String> collectedIds) {
+    collectedIds.add(widget.id.value);
+
+    if (widget.children != null) {
+      for (final child in widget.children!) {
+        _collectAllWidgetIdsInWidget(child, collectedIds);
+      }
+    }
+
+    if (widget.containerChild != null) {
+      _collectAllWidgetIdsInWidget(widget.containerChild!, collectedIds);
+    }
+  }
+
+  void _collectWidgetsToCollapseInSection(PageBuilderSection section,
+      List<String> expandPath, List<String> collectedIds) {
+    final widgets = section.widgets ?? [];
+
+    for (final widget in widgets) {
+      _collectWidgetsToCollapseInWidget(widget, expandPath, collectedIds);
+    }
+  }
+
+  void _collectWidgetsToCollapseInWidget(PageBuilderWidget widget,
+      List<String> expandPath, List<String> collectedIds) {
+    final widgetId = widget.id.value;
+
+    if (!expandPath.contains(widgetId)) {
+      collectedIds.add(widgetId);
+
+      if (widget.children != null) {
+        for (final child in widget.children!) {
+          _collectAllWidgetIdsInWidget(child, collectedIds);
+        }
+      }
+
+      if (widget.containerChild != null) {
+        _collectAllWidgetIdsInWidget(widget.containerChild!, collectedIds);
+      }
+    } else {
+      if (widget.children != null) {
+        for (final child in widget.children!) {
+          _collectWidgetsToCollapseInWidget(child, expandPath, collectedIds);
+        }
+      }
+
+      if (widget.containerChild != null) {
+        _collectWidgetsToCollapseInWidget(
+            widget.containerChild!, expandPath, collectedIds);
+      }
+    }
+  }
+}
+
+class _TargetInfo {
+  final String sectionId;
+  final bool isSection;
+  final List<String> widgetPath;
+
+  _TargetInfo({
+    required this.sectionId,
+    required this.isSection,
+    required this.widgetPath,
+  });
 }
