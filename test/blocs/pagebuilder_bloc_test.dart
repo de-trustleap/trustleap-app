@@ -139,6 +139,7 @@ void main() {
         sections: [
           PageBuilderSection(
               id: UniqueID.fromUniqueString("2"),
+              name: "Test Section",
               layout: PageBuilderSectionLayout.column,
               background: null,
               maxWidth: null,
@@ -352,6 +353,7 @@ void main() {
 
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
+      name: "Mock Section",
       layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,

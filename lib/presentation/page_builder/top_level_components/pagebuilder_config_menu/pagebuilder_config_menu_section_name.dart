@@ -24,6 +24,7 @@ class PagebuilderConfigMenuSectionName extends StatefulWidget {
 class _PagebuilderConfigMenuSectionNameState
     extends State<PagebuilderConfigMenuSectionName> {
   late TextEditingController _controller;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -37,12 +38,27 @@ class _PagebuilderConfigMenuSectionNameState
     super.dispose();
   }
 
+  void _handleTextChange() {
+    final currentValue = _controller.text;
+    final validationError = PagebuilderSectionNameValidator.validate(
+      currentValue,
+      AppLocalizations.of(context),
+      existingSectionNames: widget.existingSectionNames,
+      currentSectionName: widget.sectionName,
+    );
+
+    if (validationError == null) {
+      widget.onChanged?.call(currentValue);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
     return Form(
+      key: _formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -60,7 +76,7 @@ class _PagebuilderConfigMenuSectionNameState
                   existingSectionNames: widget.existingSectionNames,
                   currentSectionName: widget.sectionName,
                 ),
-                onChanged: (value) => widget.onChanged?.call(value),
+                onChanged: () => _handleTextChange(),
               ),
             ),
             const SizedBox(width: 8),

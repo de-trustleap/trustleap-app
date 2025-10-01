@@ -94,11 +94,13 @@ void main() {
       final sections = [
         {
           "id": "23af1357-fe6f-4fbd-bc38-f8d2561c92b9",
+          "name": "Test Section 1",
           "layout": "column",
           "widgets": []
         },
         {
           "id": "bc3dc5e1-f43a-415c-9664-3692f3075d1c",
+          "name": "Test Section 2",
           "layout": "column",
           "widgets": []
         },
@@ -109,6 +111,7 @@ void main() {
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
                 "23af1357-fe6f-4fbd-bc38-f8d2561c92b9"),
+            name: "Test Section 1",
             layout: PageBuilderSectionLayout.column,
             widgets: [],
             background: null,
@@ -116,6 +119,7 @@ void main() {
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
                 "bc3dc5e1-f43a-415c-9664-3692f3075d1c"),
+            name: "Test Section 2",
             layout: PageBuilderSectionLayout.column,
             widgets: [],
             background: null,
@@ -135,6 +139,7 @@ void main() {
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
                 "23af1357-fe6f-4fbd-bc38-f8d2561c92b9"),
+            name: "Test Section 1",
             layout: PageBuilderSectionLayout.column,
             widgets: [],
             background: null,
@@ -143,6 +148,7 @@ void main() {
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
                 "bc3dc5e1-f43a-415c-9664-3692f3075d1c"),
+            name: "Test Section 2",
             layout: PageBuilderSectionLayout.column,
             widgets: [],
             background: null,
@@ -152,15 +158,17 @@ void main() {
       final expectedResult = [
         {
           "id": "23af1357-fe6f-4fbd-bc38-f8d2561c92b9",
+          "name": "Test Section 1",
           "layout": "column",
           "widgets": [],
-          "maxWidth": 500
+          "maxWidth": 500.0
         },
         {
           "id": "bc3dc5e1-f43a-415c-9664-3692f3075d1c",
+          "name": "Test Section 2",
           "layout": "column",
           "widgets": [],
-          "maxWidth": 400
+          "maxWidth": 400.0
         }
       ];
       // When

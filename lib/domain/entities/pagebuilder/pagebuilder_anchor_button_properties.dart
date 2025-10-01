@@ -13,7 +13,7 @@ class PagebuilderAnchorButtonProperties extends Equatable
   });
 
   PagebuilderAnchorButtonProperties copyWith({
-    String? sectionID,
+    String? sectionName,
     PageBuilderButtonProperties? buttonProperties,
   }) {
     return PagebuilderAnchorButtonProperties(

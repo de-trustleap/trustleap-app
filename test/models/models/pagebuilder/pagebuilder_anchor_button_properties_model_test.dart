@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 void main() {
   group("PagebuilderAnchorButtonPropertiesModel_CopyWith", () {
     test(
-        "set sectionID with copyWith should set sectionID for resulting object",
+        "set sectionName with copyWith should set sectionName for resulting object",
         () {
       // Given
       final model = PagebuilderAnchorButtonPropertiesModel(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: {
             "width": 200,
             "height": 200,
@@ -21,7 +21,7 @@ void main() {
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       final expectedResult = PagebuilderAnchorButtonPropertiesModel(
-          sectionID: "2",
+          sectionName: "2",
           buttonProperties: {
             "width": 200,
             "height": 200,
@@ -29,7 +29,7 @@ void main() {
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       // When
-      final result = model.copyWith(sectionID: "2");
+      final result = model.copyWith(sectionName: "2");
       // Then
       expect(result, expectedResult);
     });
@@ -39,7 +39,7 @@ void main() {
     test("check if model is successfully converted to a map", () {
       // Given
       final model = PagebuilderAnchorButtonPropertiesModel(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: {
             "width": 200,
             "height": 200,
@@ -47,7 +47,7 @@ void main() {
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       final expectedResult = {
-        "sectionID": "1",
+        "sectionName": "1",
         "buttonProperties": {
           "width": 200,
           "height": 200,
@@ -66,7 +66,7 @@ void main() {
     test("check if map is successfully converted to model", () {
       // Given
       final map = {
-        "sectionID": "1",
+        "sectionName": "1",
         "buttonProperties": {
           "width": 200.0,
           "height": 200.0,
@@ -75,7 +75,7 @@ void main() {
         }
       };
       final expectedResult = PagebuilderAnchorButtonPropertiesModel(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,
@@ -95,7 +95,7 @@ void main() {
         () {
       // Given
       final model = PagebuilderAnchorButtonPropertiesModel(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,
@@ -103,7 +103,7 @@ void main() {
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       final expectedResult = PagebuilderAnchorButtonProperties(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
               width: 200.0,
               height: 200.0,
@@ -133,7 +133,7 @@ void main() {
         () {
       // Given
       final model = PagebuilderAnchorButtonProperties(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
               width: 200.0,
               height: 200.0,
@@ -151,7 +151,7 @@ void main() {
                   isBold: null,
                   isItalic: null)));
       final expectedResult = PagebuilderAnchorButtonPropertiesModel(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,
@@ -169,7 +169,7 @@ void main() {
     test("check if value equality works", () {
       // Given
       final model = PagebuilderAnchorButtonPropertiesModel(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,
@@ -177,7 +177,7 @@ void main() {
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       final model2 = PagebuilderAnchorButtonPropertiesModel(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,

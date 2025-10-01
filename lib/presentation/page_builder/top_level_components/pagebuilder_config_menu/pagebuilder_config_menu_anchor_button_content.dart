@@ -44,7 +44,7 @@ class PagebuilderConfigMenuAnchorButtonContent extends StatelessWidget {
                 onChanged: (text) {
                   final updatedProperties =
                       (model.properties as PagebuilderAnchorButtonProperties)
-                          .copyWith(sectionID: text);
+                          .copyWith(sectionName: text);
                   updateTextProperties(updatedProperties, pagebuilderCubit);
                 })
           ]);
@@ -53,3 +53,7 @@ class PagebuilderConfigMenuAnchorButtonContent extends StatelessWidget {
     }
   }
 }
+
+// TODO: MAXWIDTH FELD BEI SECTION KANN MAN NICHT REINSCHREIBEN
+// TODO: DROPDOWN BEI ANCHOR BUTTON FÜR SECTION NAMES
+// TODO: GRADIENTS WERDEN NACH DEM SPEICHERN NICHT RICHTIG IN DER VORSCHAU ÜBERNOMMEN
