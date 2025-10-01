@@ -12,6 +12,7 @@ class LandingPageBuilderConfigMenuContent extends StatefulWidget {
   final double menuWidth;
   final PageBuilderWidget? model;
   final PageBuilderSection? section;
+  final List<PageBuilderSection> allSections;
   final bool showOnlyDesignTab;
   final Function closeMenu;
   const LandingPageBuilderConfigMenuContent(
@@ -20,6 +21,7 @@ class LandingPageBuilderConfigMenuContent extends StatefulWidget {
       required this.menuWidth,
       required this.model,
       required this.section,
+      required this.allSections,
       required this.showOnlyDesignTab,
       required this.closeMenu});
 
@@ -59,7 +61,10 @@ class _LandingPageBuilderConfigMenuContentState
 
   Widget _getContent() {
     if (widget.section != null) {
-      return LandingPageBuilderConfigMenuSection(section: widget.section!);
+      return LandingPageBuilderConfigMenuSection(
+        section: widget.section!,
+        allSections: widget.allSections,
+      );
     } else if (widget.showOnlyDesignTab && widget.model != null) {
       return LandingPageBuilderConfigMenuDesignTab(model: widget.model!);
     } else if (widget.model != null) {

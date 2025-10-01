@@ -28,19 +28,19 @@ class PagebuilderConfigMenuAnchorButtonContent extends StatelessWidget {
     if (model.elementType == PageBuilderWidgetType.anchorButton &&
         model.properties is PagebuilderAnchorButtonProperties) {
       return CollapsibleTile(
-          title: localization.pagebuilder_anchor_button_content_section_id,
+          title: localization.pagebuilder_anchor_button_content_section_name,
           children: [
             Text(
                 localization
-                    .pagebuilder_anchor_button_content_section_id_subtitle,
+                    .pagebuilder_anchor_button_content_section_name_subtitle,
                 style: themeData.textTheme.bodySmall),
             const SizedBox(height: 30),
             PagebuilderTextField(
                 initialText:
                     (model.properties as PagebuilderAnchorButtonProperties)
-                        .sectionID,
+                        .sectionName,
                 placeholder: localization
-                    .pagebuilder_anchor_button_content_section_id_placeholder,
+                    .pagebuilder_anchor_button_content_section_name_placeholder,
                 onChanged: (text) {
                   final updatedProperties =
                       (model.properties as PagebuilderAnchorButtonProperties)

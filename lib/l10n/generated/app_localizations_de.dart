@@ -2343,15 +2343,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pagebuilder_config_menu_hover_switch => 'Hover aktivieren';
 
   @override
-  String get pagebuilder_anchor_button_content_section_id => 'Section ID';
+  String get pagebuilder_anchor_button_content_section_name => 'Section Name';
 
   @override
-  String get pagebuilder_anchor_button_content_section_id_subtitle =>
-      'Gib bitte die Section ID ein, zu welcher gescrollt werden soll. Diese findest du in der jeweiligen Section.';
+  String get pagebuilder_anchor_button_content_section_name_subtitle =>
+      'Gib bitte den Section Namen ein, zu welcher gescrollt werden soll. Diesen findest du in der jeweiligen Section.';
 
   @override
-  String get pagebuilder_anchor_button_content_section_id_placeholder =>
-      'Section ID';
+  String get pagebuilder_anchor_button_content_section_name_placeholder =>
+      'Section Name';
 
   @override
   String get pagebuilder_section_id => 'ID:';
@@ -2878,4 +2878,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_ok => 'OK';
+
+  @override
+  String get pagebuilder_section_id_placeholder => 'Section ID';
+
+  @override
+  String get pagebuilder_section_name_error_empty =>
+      'Section ID darf nicht leer sein';
+
+  @override
+  String get pagebuilder_section_name_error_too_long =>
+      'Section ID darf nicht länger als 50 Zeichen sein';
+
+  @override
+  String get pagebuilder_section_name_error_duplicate =>
+      'Section ID existiert bereits';
 }
