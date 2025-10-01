@@ -102,5 +102,3 @@ class _LandingPageBuilderPageBuilderState
     );
   }
 }
-
-// TODO: TEMPLATES UPDATEN FÜR COLOR UND SECTION NAME

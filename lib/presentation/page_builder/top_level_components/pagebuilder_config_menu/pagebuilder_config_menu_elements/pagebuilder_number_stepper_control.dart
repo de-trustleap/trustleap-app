@@ -7,13 +7,16 @@ class PagebuilderNumberStepperControl extends StatelessWidget {
   final int minValue;
   final int maxValue;
   final Function(int) onSelected;
+  final bool bigNumbers;
+
   const PagebuilderNumberStepperControl(
       {super.key,
       required this.title,
       required this.initialValue,
       required this.minValue,
       required this.maxValue,
-      required this.onSelected});
+      required this.onSelected,
+      this.bigNumbers = false});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,8 @@ class PagebuilderNumberStepperControl extends StatelessWidget {
               initialValue: initialValue,
               minValue: minValue,
               maxValue: maxValue,
-              onSelected: onSelected)
+              onSelected: onSelected,
+              bigNumbers: bigNumbers)
         ]);
   }
 }
