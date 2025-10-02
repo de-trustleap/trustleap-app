@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class PagebuilderColorControl extends StatelessWidget {
   final String title;
   final Color initialColor;
+  final PagebuilderGradient? initialGradient;
   final Function(Color) onColorSelected;
   final Function(PagebuilderGradient)? onGradientSelected;
   final bool enableOpacity;
@@ -13,6 +14,7 @@ class PagebuilderColorControl extends StatelessWidget {
       {super.key,
       required this.title,
       required this.initialColor,
+      this.initialGradient,
       required this.onColorSelected,
       this.onGradientSelected,
       this.enableOpacity = true,
@@ -26,6 +28,7 @@ class PagebuilderColorControl extends StatelessWidget {
       Text(title, style: themeData.textTheme.bodySmall),
       PagebuilderColorPickerBase(
         initialColor: initialColor,
+        initialGradient: initialGradient,
         onColorSelected: onColorSelected,
         onGradientSelected: onGradientSelected,
         enableOpacity: enableOpacity,

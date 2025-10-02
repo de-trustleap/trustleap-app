@@ -2683,9 +2683,9 @@
     "@pagebuilder_anchor_button_content_section_name_subtitle": {
         "description": "Subtitle for the collapsible view for the anchor button section name in the pagebuilder anchor button configuration"
     },
-    "pagebuilder_anchor_button_content_section_name_placeholder": "Section name",
-    "@pagebuilder_anchor_button_content_section_name_placeholder": {
-        "description": "Placeholder for the textfield in the collapsible view for the anchor button section name in the pagebuilder anchor button configuration"
+    "pagebuilder_anchor_button_content_no_sections_available": "No sections available",
+    "@pagebuilder_anchor_button_content_no_sections_available": {
+        "description": "Message shown when no sections are available for selection in the anchor button configuration"
     },
     "pagebuilder_section_id": "ID:",
     "@pagebuilder_section_id": {
@@ -3297,20 +3297,20 @@
     "@pagebuilder_ok": {
         "description": "OK button text"
     },
-    "pagebuilder_section_id_placeholder": "Section ID",
+    "pagebuilder_section_id_placeholder": "Section name",
     "@pagebuilder_section_id_placeholder": {
-        "description": "Placeholder text for section ID input field"
+        "description": "Placeholder text for section name input field"
     },
-    "pagebuilder_section_name_error_empty": "Section ID cannot be empty",
+    "pagebuilder_section_name_error_empty": "Section name cannot be empty",
     "@pagebuilder_section_name_error_empty": {
-        "description": "Error message when section ID is empty"
+        "description": "Error message when section name is empty"
     },
-    "pagebuilder_section_name_error_too_long": "Section ID cannot exceed 50 characters",
+    "pagebuilder_section_name_error_too_long": "Section name cannot exceed 50 characters",
     "@pagebuilder_section_name_error_too_long": {
-        "description": "Error message when section ID is too long"
+        "description": "Error message when section name is too long"
     },
     "pagebuilder_section_name_error_duplicate": "Section ID already exists",
     "@pagebuilder_section_name_error_duplicate": {
-        "description": "Error message when section ID is duplicate"
+        "description": "Error message when section name is duplicate"
     }
 }

@@ -2683,9 +2683,9 @@
     "@pagebuilder_anchor_button_content_section_name_subtitle": {
         "description": "Subtitel des aufklappbaren Menüs für die Section Name im Pagebuilder Anker Button Config Menü"
     },
-    "pagebuilder_anchor_button_content_section_name_placeholder": "Section Name",
-    "@pagebuilder_anchor_button_content_section_name_placeholder": {
-        "description": "Platzhalter des Textfeldes im aufklappbaren Menüs für den Section Namen im Pagebuilder Anker Button Config Menü"
+    "pagebuilder_anchor_button_content_no_sections_available": "Keine Sections verfügbar",
+    "@pagebuilder_anchor_button_content_no_sections_available": {
+        "description": "Nachricht die angezeigt wird wenn keine Sections zur Auswahl im Anker Button Konfiguration verfügbar sind"
     },
     "pagebuilder_section_id": "ID:",
     "@pagebuilder_section_id": {
@@ -3297,20 +3297,20 @@
     "@pagebuilder_ok": {
         "description": "OK-Button Text"
     },
-    "pagebuilder_section_id_placeholder": "Section ID",
+    "pagebuilder_section_id_placeholder": "Section Name",
     "@pagebuilder_section_id_placeholder": {
-        "description": "Platzhalter-Text für das Section-ID-Eingabefeld"
+        "description": "Platzhalter-Text für das Section-Name-Eingabefeld"
     },
-    "pagebuilder_section_name_error_empty": "Section ID darf nicht leer sein",
+    "pagebuilder_section_name_error_empty": "Section Name darf nicht leer sein",
     "@pagebuilder_section_name_error_empty": {
-        "description": "Fehlermeldung wenn Section ID leer ist"
+        "description": "Fehlermeldung wenn Section Name leer ist"
     },
-    "pagebuilder_section_name_error_too_long": "Section ID darf nicht länger als 50 Zeichen sein",
+    "pagebuilder_section_name_error_too_long": "Section Name darf nicht länger als 50 Zeichen sein",
     "@pagebuilder_section_name_error_too_long": {
-        "description": "Fehlermeldung wenn Section ID zu lang ist"
+        "description": "Fehlermeldung wenn Section Name zu lang ist"
     },
-    "pagebuilder_section_name_error_duplicate": "Section ID existiert bereits",
+    "pagebuilder_section_name_error_duplicate": "Section Name existiert bereits",
     "@pagebuilder_section_name_error_duplicate": {
-        "description": "Fehlermeldung wenn Section ID bereits existiert"
+        "description": "Fehlermeldung wenn Section Name bereits existiert"
     }
 }

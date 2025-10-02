@@ -4017,11 +4017,11 @@ abstract class AppLocalizations {
   /// **'Please enter the section name you want to scroll to. You can find this in the respective section.'**
   String get pagebuilder_anchor_button_content_section_name_subtitle;
 
-  /// Placeholder for the textfield in the collapsible view for the anchor button section name in the pagebuilder anchor button configuration
+  /// Message shown when no sections are available for selection in the anchor button configuration
   ///
   /// In en, this message translates to:
-  /// **'Section name'**
-  String get pagebuilder_anchor_button_content_section_name_placeholder;
+  /// **'No sections available'**
+  String get pagebuilder_anchor_button_content_no_sections_available;
 
   /// Text before the ID in the Pagebuilder Section configuration
   ///
@@ -4881,25 +4881,25 @@ abstract class AppLocalizations {
   /// **'OK'**
   String get pagebuilder_ok;
 
-  /// Placeholder text for section ID input field
+  /// Placeholder text for section name input field
   ///
   /// In en, this message translates to:
-  /// **'Section ID'**
+  /// **'Section name'**
   String get pagebuilder_section_id_placeholder;
 
-  /// Error message when section ID is empty
+  /// Error message when section name is empty
   ///
   /// In en, this message translates to:
-  /// **'Section ID cannot be empty'**
+  /// **'Section name cannot be empty'**
   String get pagebuilder_section_name_error_empty;
 
-  /// Error message when section ID is too long
+  /// Error message when section name is too long
   ///
   /// In en, this message translates to:
-  /// **'Section ID cannot exceed 50 characters'**
+  /// **'Section name cannot exceed 50 characters'**
   String get pagebuilder_section_name_error_too_long;
 
-  /// Error message when section ID is duplicate
+  /// Error message when section name is duplicate
   ///
   /// In en, this message translates to:
   /// **'Section ID already exists'**
