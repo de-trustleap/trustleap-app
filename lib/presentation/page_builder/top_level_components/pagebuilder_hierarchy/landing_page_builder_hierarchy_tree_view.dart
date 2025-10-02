@@ -135,7 +135,7 @@ class _LandingPageBuilderHierarchyTreeViewState
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        "${localization.pagebuilder_hierarchy_overlay_section_element} $sectionNumber",
+                        section.name ?? "${localization.pagebuilder_hierarchy_overlay_section_element} $sectionNumber",
                         style: themeData.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.w500,
                           color: isSelected ? Colors.white : null,

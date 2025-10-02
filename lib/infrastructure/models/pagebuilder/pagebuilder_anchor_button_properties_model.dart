@@ -5,17 +5,17 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_bu
 
 class PagebuilderAnchorButtonPropertiesModel extends Equatable
     implements PageBuilderProperties {
-  final String? sectionID;
+  final String? sectionName;
   final Map<String, dynamic>? buttonProperties;
 
   const PagebuilderAnchorButtonPropertiesModel({
-    required this.sectionID,
+    required this.sectionName,
     required this.buttonProperties,
   });
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
-    if (sectionID != null) map['sectionID'] = sectionID;
+    if (sectionName != null) map['sectionName'] = sectionName;
     if (buttonProperties != null) map['buttonProperties'] = buttonProperties;
     return map;
   }
@@ -23,25 +23,26 @@ class PagebuilderAnchorButtonPropertiesModel extends Equatable
   factory PagebuilderAnchorButtonPropertiesModel.fromMap(
       Map<String, dynamic> map) {
     return PagebuilderAnchorButtonPropertiesModel(
-        sectionID: map['sectionID'] != null ? map['sectionID'] as String : null,
+        sectionName:
+            map['sectionName'] != null ? map['sectionName'] as String : null,
         buttonProperties: map['buttonProperties'] != null
             ? map['buttonProperties'] as Map<String, dynamic>
             : null);
   }
 
   PagebuilderAnchorButtonPropertiesModel copyWith({
-    String? sectionID,
+    String? sectionName,
     Map<String, dynamic>? buttonProperties,
   }) {
     return PagebuilderAnchorButtonPropertiesModel(
-      sectionID: sectionID ?? this.sectionID,
+      sectionName: sectionName ?? this.sectionName,
       buttonProperties: buttonProperties ?? this.buttonProperties,
     );
   }
 
   PagebuilderAnchorButtonProperties toDomain() {
     return PagebuilderAnchorButtonProperties(
-        sectionID: sectionID,
+        sectionName: sectionName,
         buttonProperties: buttonProperties != null
             ? PageBuilderButtonPropertiesModel.fromMap(buttonProperties!)
                 .toDomain()
@@ -51,7 +52,7 @@ class PagebuilderAnchorButtonPropertiesModel extends Equatable
   factory PagebuilderAnchorButtonPropertiesModel.fromDomain(
       PagebuilderAnchorButtonProperties properties) {
     return PagebuilderAnchorButtonPropertiesModel(
-        sectionID: properties.sectionID,
+        sectionName: properties.sectionName,
         buttonProperties: properties.buttonProperties != null
             ? PageBuilderButtonPropertiesModel.fromDomain(
                     properties.buttonProperties!)
@@ -60,5 +61,5 @@ class PagebuilderAnchorButtonPropertiesModel extends Equatable
   }
 
   @override
-  List<Object?> get props => [sectionID, buttonProperties];
+  List<Object?> get props => [sectionName, buttonProperties];
 }

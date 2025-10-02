@@ -100,6 +100,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
           title:
               localization.landingpage_pagebuilder_layout_menu_background_color,
           initialColor: props?.backgroundPaint?.color ?? Colors.transparent,
+          initialGradient: props?.backgroundPaint?.gradient,
           onColorSelected: (color) {
             final paint = PagebuilderPaint.color(color);
             onChangedLocal(props?.copyWith(backgroundPaint: paint) ??
@@ -162,6 +163,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
             title: localization
                 .landingpage_pagebuilder_layout_menu_background_overlay,
             initialColor: props?.overlayPaint?.color ?? Colors.transparent,
+            initialGradient: props?.overlayPaint?.gradient,
             onColorSelected: (color) {
               final paint = PagebuilderPaint.color(color);
               onChangedLocal(props?.copyWith(overlayPaint: paint) ??

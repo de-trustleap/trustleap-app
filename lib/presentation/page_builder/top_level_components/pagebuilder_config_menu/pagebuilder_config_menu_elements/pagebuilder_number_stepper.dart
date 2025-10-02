@@ -8,6 +8,7 @@ class PagebuilderNumberStepper extends StatefulWidget {
   final int maxValue;
   final String placeholder;
   final Function(int) onSelected;
+  final bool bigNumbers;
 
   const PagebuilderNumberStepper(
       {super.key,
@@ -15,7 +16,8 @@ class PagebuilderNumberStepper extends StatefulWidget {
       required this.minValue,
       required this.maxValue,
       required this.onSelected,
-      this.placeholder = ""});
+      this.placeholder = "",
+      this.bigNumbers = false});
 
   @override
   State<PagebuilderNumberStepper> createState() =>
@@ -39,7 +41,9 @@ class _NumberInputWithArrowsState extends State<PagebuilderNumberStepper> {
     if (oldWidget.initialValue != widget.initialValue) {
       setState(() {
         _currentValue = widget.initialValue;
-        _controller.text = _currentValue.toString();
+        if (_controller.text != _currentValue.toString()) {
+          _controller.text = _currentValue.toString();
+        }
       });
     }
   }
@@ -65,14 +69,19 @@ class _NumberInputWithArrowsState extends State<PagebuilderNumberStepper> {
   }
 
   void _onInputChanged() {
-    final value = int.tryParse(_controller.text);
-    if (value != null && value >= widget.minValue && value <= widget.maxValue) {
-      setState(() {
-        _currentValue = value;
-      });
+    final inputText = _controller.text;
+
+    if (inputText.isEmpty) {
+      return;
+    }
+
+    final value = int.tryParse(inputText);
+    if (value != null &&
+        value >= widget.minValue &&
+        value <= widget.maxValue &&
+        _currentValue != value) {
+      _currentValue = value;
       widget.onSelected(_currentValue);
-    } else {
-      _controller.text = _currentValue.toString();
     }
   }
 
@@ -82,12 +91,14 @@ class _NumberInputWithArrowsState extends State<PagebuilderNumberStepper> {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          width: 75,
+          width: widget.bigNumbers ? 100 : 75,
           child: FormTextfield(
             controller: _controller,
             keyboardType: TextInputType.number,
             inputFormatters: [
-              DecimalNumberFormatter(maxIntegerDigits: 3, maxDecimalDigits: 0)
+              DecimalNumberFormatter(
+                  maxIntegerDigits: widget.bigNumbers ? 5 : 3,
+                  maxDecimalDigits: 0)
             ],
             disabled: false,
             placeholder: widget.placeholder,

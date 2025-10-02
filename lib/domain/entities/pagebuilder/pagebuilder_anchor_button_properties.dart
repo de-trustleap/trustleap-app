@@ -4,31 +4,31 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 
 class PagebuilderAnchorButtonProperties extends Equatable
     implements PageBuilderProperties {
-  final String? sectionID;
+  final String? sectionName;
   final PageBuilderButtonProperties? buttonProperties;
 
   const PagebuilderAnchorButtonProperties({
-    required this.sectionID,
+    required this.sectionName,
     required this.buttonProperties,
   });
 
   PagebuilderAnchorButtonProperties copyWith({
-    String? sectionID,
+    String? sectionName,
     PageBuilderButtonProperties? buttonProperties,
   }) {
     return PagebuilderAnchorButtonProperties(
-      sectionID: sectionID ?? this.sectionID,
+      sectionName: sectionName ?? this.sectionName,
       buttonProperties: buttonProperties ?? this.buttonProperties,
     );
   }
 
   PagebuilderAnchorButtonProperties deepCopy() {
     return PagebuilderAnchorButtonProperties(
-      sectionID: sectionID,
+      sectionName: sectionName,
       buttonProperties: buttonProperties?.deepCopy(),
     );
   }
 
   @override
-  List<Object?> get props => [sectionID, buttonProperties];
+  List<Object?> get props => [sectionName, buttonProperties];
 }

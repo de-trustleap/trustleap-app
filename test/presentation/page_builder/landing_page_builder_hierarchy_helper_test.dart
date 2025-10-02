@@ -62,6 +62,7 @@ void main() {
 
       final testSection = PageBuilderSection(
         id: UniqueID.fromUniqueString('section-1'),
+        name: 'Test Section',
         layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
@@ -139,6 +140,7 @@ void main() {
 
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-2'),
+          name: 'Test Section 2',
           layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
@@ -200,6 +202,7 @@ void main() {
 
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-3'),
+          name: 'Test Section 3',
           layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
@@ -310,6 +313,7 @@ void main() {
 
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('test-section'),
+          name: 'Nested Test Section',
           layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
@@ -371,6 +375,7 @@ void main() {
 
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('container-section'),
+          name: 'Container Section',
           layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
@@ -457,6 +462,7 @@ void main() {
 
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('deep-section'),
+          name: 'Deep Section',
           layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
@@ -488,6 +494,7 @@ void main() {
         // Given - Create a page with multiple sections
         final section1 = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
+          name: 'Section 1',
           layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
@@ -497,6 +504,7 @@ void main() {
 
         final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-2'),
+          name: 'Section 2',
           layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
@@ -558,6 +566,7 @@ void main() {
 
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('test-section'),
+          name: 'Test Section with Widgets',
           layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,

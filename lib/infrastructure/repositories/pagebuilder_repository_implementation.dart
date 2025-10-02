@@ -44,9 +44,10 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("updatePageContent");
     final pageModel = PageBuilderPageModel.fromDomain(page);
+    final pageMap = pageModel.toMap();
+
     try {
-      await callable
-          .call({"appCheckToken": appCheckToken, "page": pageModel.toMap()});
+      await callable.call({"appCheckToken": appCheckToken, "page": pageMap});
       return right(unit);
     } on FirebaseFunctionsException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
