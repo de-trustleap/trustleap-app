@@ -88,6 +88,7 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
       PagebuilderColorControl(
           title: localization.pagebuilder_image_config_image_overlay,
           initialColor: props?.overlayPaint?.color ?? Colors.transparent,
+          initialGradient: props?.overlayPaint?.gradient,
           onColorSelected: (color) {
             final paint = PagebuilderPaint.color(color);
             onChangedLocal(props?.copyWith(overlayPaint: paint));

@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_wi
 
 class PageBuilderSectionModel extends Equatable {
   final String id;
+  final String? name;
   final String? layout;
   final Map<String, dynamic>? background;
   final double? maxWidth;
@@ -17,6 +18,7 @@ class PageBuilderSectionModel extends Equatable {
 
   const PageBuilderSectionModel({
     required this.id,
+    required this.name,
     required this.layout,
     required this.background,
     required this.maxWidth,
@@ -26,6 +28,7 @@ class PageBuilderSectionModel extends Equatable {
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'id': id};
+    if (name != null) map['name'] = name;
     if (layout != null) map['layout'] = layout;
     if (background != null) map['background'] = background;
     if (maxWidth != null) map['maxWidth'] = maxWidth;
@@ -39,6 +42,7 @@ class PageBuilderSectionModel extends Equatable {
   factory PageBuilderSectionModel.fromMap(Map<String, dynamic> map) {
     return PageBuilderSectionModel(
         id: map['id'] != null ? map['id'] as String : "",
+        name: map['name'] != null ? map['name'] as String : null,
         layout: map['layout'] != null ? map['layout'] as String : "none",
         background: map['background'] != null
             ? map['background'] as Map<String, dynamic>
@@ -55,6 +59,7 @@ class PageBuilderSectionModel extends Equatable {
 
   PageBuilderSectionModel copyWith({
     String? id,
+    String? name,
     String? layout,
     Map<String, dynamic>? background,
     double? maxWidth,
@@ -63,6 +68,7 @@ class PageBuilderSectionModel extends Equatable {
   }) {
     return PageBuilderSectionModel(
       id: id ?? this.id,
+      name: name ?? this.name,
       layout: layout ?? this.layout,
       background: background ?? this.background,
       maxWidth: maxWidth ?? this.maxWidth,
@@ -75,6 +81,7 @@ class PageBuilderSectionModel extends Equatable {
   PageBuilderSection toDomain() {
     return PageBuilderSection(
         id: UniqueID.fromUniqueString(id),
+        name: name,
         layout: layout == null
             ? PageBuilderSectionLayout.none
             : PageBuilderSectionLayout.values
@@ -90,6 +97,7 @@ class PageBuilderSectionModel extends Equatable {
   factory PageBuilderSectionModel.fromDomain(PageBuilderSection section) {
     return PageBuilderSectionModel(
         id: section.id.value,
+        name: section.name,
         layout: section.layout?.name,
         background: section.background != null
             ? PagebuilderBackgroundModel.fromDomain(section.background!).toMap()
@@ -122,5 +130,5 @@ class PageBuilderSectionModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, layout, background, maxWidth, backgroundConstrained, widgets];
+      [id, name, layout, background, maxWidth, backgroundConstrained, widgets];
 }

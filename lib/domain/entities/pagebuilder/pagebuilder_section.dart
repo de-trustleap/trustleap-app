@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 
 class PageBuilderSection extends Equatable {
   final UniqueID id;
+  final String? name;
   final PageBuilderSectionLayout? layout;
   final PagebuilderBackground? background;
   final double? maxWidth;
@@ -15,6 +16,7 @@ class PageBuilderSection extends Equatable {
 
   const PageBuilderSection(
       {required this.id,
+      required this.name,
       required this.layout,
       required this.widgets,
       required this.background,
@@ -23,6 +25,7 @@ class PageBuilderSection extends Equatable {
 
   PageBuilderSection copyWith(
       {UniqueID? id,
+      String? name,
       PageBuilderSectionLayout? layout,
       List<PageBuilderWidget>? widgets,
       PagebuilderBackground? background,
@@ -30,6 +33,7 @@ class PageBuilderSection extends Equatable {
       bool? backgroundConstrained}) {
     return PageBuilderSection(
         id: id ?? this.id,
+        name: name ?? this.name,
         layout: layout ?? this.layout,
         widgets: widgets ?? this.widgets,
         background: background ?? this.background,
@@ -40,5 +44,5 @@ class PageBuilderSection extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, layout, background, maxWidth, backgroundConstrained, widgets];
+      [id, name, layout, background, maxWidth, backgroundConstrained, widgets];
 }

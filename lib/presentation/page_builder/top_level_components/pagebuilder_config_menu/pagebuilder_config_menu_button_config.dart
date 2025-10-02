@@ -89,6 +89,7 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
       PagebuilderColorControl(
           title: localization.pagebuilder_button_config_button_background_color,
           initialColor: props?.backgroundPaint?.color ?? Colors.transparent,
+          initialGradient: props?.backgroundPaint?.gradient,
           onColorSelected: (color) {
             final paint = PagebuilderPaint.color(color);
             onChangedLocal(props?.copyWith(backgroundPaint: paint));

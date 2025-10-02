@@ -25,8 +25,9 @@ class PagebuilderConfigMenuSectionMaxWidth extends StatelessWidget {
         PagebuilderNumberStepperControl(
           title: localization.pagebuilder_section_maxwidth,
           initialValue: section.maxWidth?.toInt() ?? 1200,
-          minValue: 300,
-          maxValue: 2000,
+          minValue: 1,
+          maxValue: 10000,
+          bigNumbers: true,
           onSelected: (value) {
             final updatedSection = section.copyWith(
               maxWidth: value.toDouble(),

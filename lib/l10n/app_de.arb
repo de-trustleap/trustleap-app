@@ -2675,17 +2675,17 @@
     "@pagebuilder_config_menu_hover_switch": {
         "description": "Titel des Hover Switches im Hover Tab im Pagebuilder Config Menü"
     },
-    "pagebuilder_anchor_button_content_section_id": "Section ID",
-    "@pagebuilder_anchor_button_content_section_id": {
-        "description": "Titel des aufklappbaren Menüs für die Section ID im Pagebuilder Anker Button Config Menü"
+    "pagebuilder_anchor_button_content_section_name": "Section Name",
+    "@pagebuilder_anchor_button_content_section_name": {
+        "description": "Titel des aufklappbaren Menüs für die Section Name im Pagebuilder Anker Button Config Menü"
     },
-    "pagebuilder_anchor_button_content_section_id_subtitle": "Gib bitte die Section ID ein, zu welcher gescrollt werden soll. Diese findest du in der jeweiligen Section.",
-    "@pagebuilder_anchor_button_content_section_id_subtitle": {
-        "description": "Subtitel des aufklappbaren Menüs für die Section ID im Pagebuilder Anker Button Config Menü"
+    "pagebuilder_anchor_button_content_section_name_subtitle": "Gib bitte den Section Namen ein, zu welcher gescrollt werden soll. Diesen findest du in der jeweiligen Section.",
+    "@pagebuilder_anchor_button_content_section_name_subtitle": {
+        "description": "Subtitel des aufklappbaren Menüs für die Section Name im Pagebuilder Anker Button Config Menü"
     },
-    "pagebuilder_anchor_button_content_section_id_placeholder": "Section ID",
-    "@pagebuilder_anchor_button_content_section_id_placeholder": {
-        "description": "Platzhalter des Textfeldes im aufklappbaren Menüs für die Section ID im Pagebuilder Anker Button Config Menü"
+    "pagebuilder_anchor_button_content_no_sections_available": "Keine Sections verfügbar",
+    "@pagebuilder_anchor_button_content_no_sections_available": {
+        "description": "Nachricht die angezeigt wird wenn keine Sections zur Auswahl im Anker Button Konfiguration verfügbar sind"
     },
     "pagebuilder_section_id": "ID:",
     "@pagebuilder_section_id": {
@@ -3296,5 +3296,21 @@
     "pagebuilder_ok": "OK",
     "@pagebuilder_ok": {
         "description": "OK-Button Text"
+    },
+    "pagebuilder_section_id_placeholder": "Section Name",
+    "@pagebuilder_section_id_placeholder": {
+        "description": "Platzhalter-Text für das Section-Name-Eingabefeld"
+    },
+    "pagebuilder_section_name_error_empty": "Section Name darf nicht leer sein",
+    "@pagebuilder_section_name_error_empty": {
+        "description": "Fehlermeldung wenn Section Name leer ist"
+    },
+    "pagebuilder_section_name_error_too_long": "Section Name darf nicht länger als 50 Zeichen sein",
+    "@pagebuilder_section_name_error_too_long": {
+        "description": "Fehlermeldung wenn Section Name zu lang ist"
+    },
+    "pagebuilder_section_name_error_duplicate": "Section Name existiert bereits",
+    "@pagebuilder_section_name_error_duplicate": {
+        "description": "Fehlermeldung wenn Section Name bereits existiert"
     }
 }

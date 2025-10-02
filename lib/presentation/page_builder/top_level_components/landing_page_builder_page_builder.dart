@@ -69,6 +69,7 @@ class _LandingPageBuilderPageBuilderState
                     isOpen: _isConfigMenuOpen,
                     model: null,
                     section: state.model,
+                    allSections: widget.model.sections ?? [],
                     closeMenu: () {
                       Modular.get<PagebuilderSelectionCubit>()
                           .selectWidget(null);

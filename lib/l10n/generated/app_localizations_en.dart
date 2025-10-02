@@ -2298,15 +2298,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pagebuilder_config_menu_hover_switch => 'Activate hover';
 
   @override
-  String get pagebuilder_anchor_button_content_section_id => 'Section ID';
+  String get pagebuilder_anchor_button_content_section_name => 'Section Name';
 
   @override
-  String get pagebuilder_anchor_button_content_section_id_subtitle =>
-      'Please enter the section ID you want to scroll to. You can find this in the respective section.';
+  String get pagebuilder_anchor_button_content_section_name_subtitle =>
+      'Please enter the section name you want to scroll to. You can find this in the respective section.';
 
   @override
-  String get pagebuilder_anchor_button_content_section_id_placeholder =>
-      'Section ID';
+  String get pagebuilder_anchor_button_content_no_sections_available =>
+      'No sections available';
 
   @override
   String get pagebuilder_section_id => 'ID:';
@@ -2830,4 +2830,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_ok => 'OK';
+
+  @override
+  String get pagebuilder_section_id_placeholder => 'Section name';
+
+  @override
+  String get pagebuilder_section_name_error_empty =>
+      'Section name cannot be empty';
+
+  @override
+  String get pagebuilder_section_name_error_too_long =>
+      'Section name cannot exceed 50 characters';
+
+  @override
+  String get pagebuilder_section_name_error_duplicate =>
+      'Section ID already exists';
 }

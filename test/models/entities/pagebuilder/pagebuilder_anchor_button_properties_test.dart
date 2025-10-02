@@ -9,11 +9,11 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.da
 void main() {
   group("PagebuilderAnchorButtonProperties_CopyWith", () {
     test(
-        "set sectionID with copyWith should set sectionID for resulting object",
+        "set sectionName with copyWith should set sectionName for resulting object",
         () {
       // Given
       final model = PagebuilderAnchorButtonProperties(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
               width: 200.0,
               height: 50.0,
@@ -31,7 +31,7 @@ void main() {
                   isBold: null,
                   isItalic: true)));
       final expectedResult = PagebuilderAnchorButtonProperties(
-          sectionID: "2",
+          sectionName: "2",
           buttonProperties: PageBuilderButtonProperties(
               width: 200.0,
               height: 50.0,
@@ -49,7 +49,7 @@ void main() {
                   isBold: null,
                   isItalic: true)));
       // When
-      final result = model.copyWith(sectionID: "2");
+      final result = model.copyWith(sectionName: "2");
       // Then
       expect(result, expectedResult);
     });
@@ -87,7 +87,7 @@ void main() {
       );
 
       final original = PagebuilderAnchorButtonProperties(
-        sectionID: 'original-section',
+        sectionName: 'original-section',
         buttonProperties: originalButtonProperties,
       );
 
@@ -123,12 +123,12 @@ void main() {
       );
 
       final mutatedCopy = PagebuilderAnchorButtonProperties(
-        sectionID: 'mutated-section',
+        sectionName: 'mutated-section',
         buttonProperties: mutatedButtonProperties,
       );
 
       // Then
-      expect(original.sectionID, equals('original-section'));
+      expect(original.sectionName, equals('original-section'));
       expect(original.buttonProperties?.width, equals(100.0));
       expect(original.buttonProperties?.height, equals(40.0));
       expect(original.buttonProperties?.borderRadius, equals(4.0));
@@ -141,7 +141,7 @@ void main() {
       expect(original.buttonProperties?.textProperties?.textShadow?.color,
           equals(Colors.red));
 
-      expect(mutatedCopy.sectionID, equals('mutated-section'));
+      expect(mutatedCopy.sectionName, equals('mutated-section'));
       expect(mutatedCopy.buttonProperties?.width, equals(300.0));
       expect(mutatedCopy.buttonProperties?.textProperties?.text,
           equals('Mutated Text'));
@@ -154,7 +154,7 @@ void main() {
     test("check if value equality works", () {
       // When
       final model = PagebuilderAnchorButtonProperties(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
               width: 200.0,
               height: 50.0,
@@ -172,7 +172,7 @@ void main() {
                   isBold: null,
                   isItalic: true)));
       final model2 = PagebuilderAnchorButtonProperties(
-          sectionID: "1",
+          sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
               width: 200.0,
               height: 50.0,

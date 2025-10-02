@@ -46,7 +46,7 @@ class PagebuilderConfigMenuAnchorButtonConfig extends StatelessWidget {
                         ? null
                         : (hoverProperties ??
                                 PagebuilderAnchorButtonProperties(
-                                  sectionID: properties.sectionID,
+                                  sectionName: properties.sectionName,
                                   buttonProperties: null,
                                 ))
                             .copyWith(
