@@ -91,6 +91,8 @@ enum PageBuilderSectionLayout { row, column, none }
 
 enum PageBuilderSpacingType { padding, margin }
 
+enum PagebuilderResponsiveBreakpoint { mobile, tablet, desktop }
+
 enum LegalsType { privacyPolicy, termsAndCondition, imprint }
 
 enum LogLevel { debug, info, warn, error }

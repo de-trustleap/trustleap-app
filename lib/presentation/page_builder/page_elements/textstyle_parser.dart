@@ -1,14 +1,15 @@
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant_extensions.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:flutter/material.dart';
 
 class TextStyleParser {
   TextStyle getTextStyleFromProperties(PageBuilderTextProperties? properties) {
     return TextStyle(
-        fontSize: properties?.fontSize,
+        fontSize: properties?.fontSize?.getValue(),
         fontFamily: properties?.fontFamily,
         fontFamilyFallback: const ["Poppins"],
-        height: properties?.lineHeight ?? 1.0,
-        letterSpacing: properties?.letterSpacing,
+        height: properties?.lineHeight?.getValue() ?? 1.0,
+        letterSpacing: properties?.letterSpacing?.getValue(),
         color: properties?.color,
         shadows: properties?.textShadow != null
             ? [

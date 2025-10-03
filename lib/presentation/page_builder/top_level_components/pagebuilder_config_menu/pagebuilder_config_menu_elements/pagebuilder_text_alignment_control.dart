@@ -1,12 +1,21 @@
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_breakpoint_selector.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderTextAlignmentControl extends StatefulWidget {
   final TextAlign initialAlignment;
   final Function(TextAlign) onSelected;
+  final PagebuilderResponsiveBreakpoint currentBreakpoint;
+  final ValueChanged<PagebuilderResponsiveBreakpoint> onBreakpointChanged;
 
-  const PagebuilderTextAlignmentControl(
-      {super.key, required this.initialAlignment, required this.onSelected});
+  const PagebuilderTextAlignmentControl({
+    super.key,
+    required this.initialAlignment,
+    required this.onSelected,
+    required this.currentBreakpoint,
+    required this.onBreakpointChanged,
+  });
 
   @override
   State<PagebuilderTextAlignmentControl> createState() =>
@@ -38,11 +47,21 @@ class _PagebuilderTextAlignmentControlState
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(localization.landingpage_pagebuilder_text_config_alignment,
-            style: themeData.textTheme.bodySmall),
+        Row(
+          children: [
+            Text(localization.landingpage_pagebuilder_text_config_alignment,
+                style: themeData.textTheme.bodySmall),
+            const SizedBox(width: 8),
+            PagebuilderBreakpointSelector(
+              currentBreakpoint: widget.currentBreakpoint,
+              onBreakpointChanged: widget.onBreakpointChanged,
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
         SegmentedButton<TextAlign>(
             segments: [
               ButtonSegment<TextAlign>(
