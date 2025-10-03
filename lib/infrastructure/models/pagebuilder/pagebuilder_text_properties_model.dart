@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/shadow_mapper.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_shadow_model.dart';
@@ -40,8 +40,9 @@ class PageBuilderTextPropertiesModel extends Equatable
     if (fontSize != null) map['fontSize'] = fontSize!.toMapValue();
     if (fontFamily != null) map['fontFamily'] = fontFamily;
     if (lineHeight != null) map['lineHeight'] = lineHeight!.toMapValue();
-    if (letterSpacing != null)
+    if (letterSpacing != null) {
       map['letterSpacing'] = letterSpacing!.toMapValue();
+    }
     if (color != null) map['color'] = color;
     if (alignment != null) map['alignment'] = alignment!.toMapValue();
     if (textShadow != null) map['textShadow'] = textShadow;
@@ -71,7 +72,7 @@ class PageBuilderTextPropertiesModel extends Equatable
         alignment: PagebuilderResponsiveOrConstantModel.fromMapValue(
           map['alignment'],
           (v) => v as String,
-        ),
+        ) ?? const PagebuilderResponsiveOrConstantModel.constant("left"),
         textShadow: map['textShadow'] != null
             ? map['textShadow'] as Map<String, dynamic>
             : null,

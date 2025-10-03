@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderSectionModel_CopyWith", () {
@@ -237,13 +238,13 @@ void main() {
                       properties: PageBuilderTextProperties(
                           text:
                               "Du wurdest positiv von Max Mustermann\nweiterempfohlen.\nMax möchte, dass wir uns kennenlernen.",
-                          fontSize: 18,
+                          fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                           fontFamily: "Merriweather",
                           lineHeight: null,
                           letterSpacing: null,
                           textShadow: null,
                           color: Color(0xFFFFFFFF),
-                          alignment: TextAlign.left,
+                          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                           isBold: null,
                           isItalic: true),
                       hoverProperties: null,
@@ -344,13 +345,13 @@ void main() {
                       properties: PageBuilderTextProperties(
                           text:
                               "Du wurdest positiv von Max Mustermann\nweiterempfohlen.\nMax möchte, dass wir uns kennenlernen.",
-                          fontSize: 18,
+                          fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                           fontFamily: "Merriweather",
                           lineHeight: null,
                           letterSpacing: null,
                           textShadow: null,
                           color: Color(0xFFFFFFFF),
-                          alignment: TextAlign.left,
+                          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                           isBold: null,
                           isItalic: true),
                       hoverProperties: null,

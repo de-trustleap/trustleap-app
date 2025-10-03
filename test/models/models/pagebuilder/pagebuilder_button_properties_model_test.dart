@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderButtonPropertiesModel_CopyWith", () {
@@ -92,13 +93,13 @@ void main() {
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: null,
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null));
       // When
@@ -120,13 +121,13 @@ void main() {
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: null,
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null));
       final expectedResult = PageBuilderButtonPropertiesModel(

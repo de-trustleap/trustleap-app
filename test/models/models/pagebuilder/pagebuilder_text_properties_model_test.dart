@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:flutter/material.dart';
 
@@ -11,28 +13,28 @@ void main() {
       // Given
       final model = PageBuilderTextPropertiesModel(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: "center",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
           isBold: null,
           isItalic: null);
       final expectedResult = PageBuilderTextPropertiesModel(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.2,
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.2),
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: "center",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
           isBold: null,
           isItalic: null);
       // When
-      final result = model.copyWith(lineHeight: 1.2);
+      final result = model.copyWith(lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.2));
       // Then
       expect(result, expectedResult);
     });
@@ -43,13 +45,13 @@ void main() {
       // Given
       final model = PageBuilderTextPropertiesModel(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: "center",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
           isBold: null,
           isItalic: null);
       final expectedResult = {
@@ -80,13 +82,13 @@ void main() {
       };
       final expectedResult = PageBuilderTextPropertiesModel(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: "center",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
           isBold: null,
           isItalic: null);
       // When
@@ -103,24 +105,24 @@ void main() {
       // Given
       final model = PageBuilderTextPropertiesModel(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: "center",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
           isBold: null,
           isItalic: null);
       final expectedResult = PageBuilderTextProperties(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: TextAlign.center,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
           isBold: null,
           isItalic: null);
       // When
@@ -137,24 +139,24 @@ void main() {
       // Given
       final model = PageBuilderTextProperties(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: TextAlign.center,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
           isBold: null,
           isItalic: null);
       final expectedResult = PageBuilderTextPropertiesModel(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: "center",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
           isBold: null,
           isItalic: null);
       // When
@@ -169,13 +171,13 @@ void main() {
       // Given
       final model = PageBuilderTextPropertiesModel(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: "center",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
           isBold: null,
           isItalic: null);
       final alignment = "right";
@@ -192,24 +194,24 @@ void main() {
       // Given
       final properties1 = PageBuilderTextPropertiesModel(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: "center",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
           isBold: null,
           isItalic: null);
       final properties2 = PageBuilderTextPropertiesModel(
           text: "Test",
-          fontSize: 20.0,
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: "center",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
           isBold: null,
           isItalic: null);
       // Then

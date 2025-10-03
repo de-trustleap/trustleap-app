@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_footer_properties_model.dart';
 import 'package:flutter/material.dart';
 
@@ -199,45 +200,45 @@ void main() {
       final expectedResult = PagebuilderFooterProperties(
           privacyPolicyTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               textShadow: null,
               isBold: null,
               isItalic: null),
           impressumTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               textShadow: null,
               isBold: null,
               isItalic: null),
           initialInformationTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               textShadow: null,
               isBold: null,
               isItalic: null),
           termsAndConditionsTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               textShadow: null,
               isBold: null,
               isItalic: null));
@@ -256,7 +257,7 @@ void main() {
       final model = PagebuilderFooterProperties(
           privacyPolicyTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
@@ -267,7 +268,7 @@ void main() {
               isItalic: null),
           impressumTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
@@ -278,7 +279,7 @@ void main() {
               isItalic: null),
           initialInformationTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
@@ -289,7 +290,7 @@ void main() {
               isItalic: null),
           termsAndConditionsTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,

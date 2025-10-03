@@ -13,6 +13,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/constants.dart';
 
 void main() {
@@ -81,12 +82,12 @@ void main() {
                     alignment: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
-                        fontSize: 16,
+                        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
                         fontFamily: "TestFont",
                         color: Colors.black,
-                        alignment: TextAlign.center,
-                        lineHeight: 1.5,
-                        letterSpacing: 1.0,
+                        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
+                        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+                        letterSpacing: const PagebuilderResponsiveOrConstant.constant(1.0),
                         textShadow: PageBuilderShadow(
                             color: Colors.black,
                             spreadRadius: 1.0,

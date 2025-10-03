@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_pro
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderAnchorButtonProperties_CopyWith", () {
@@ -21,7 +22,7 @@ void main() {
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
-                  fontSize: 18.0,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -39,7 +40,7 @@ void main() {
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
-                  fontSize: 18.0,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -67,12 +68,12 @@ void main() {
 
       final originalTextProperties = PageBuilderTextProperties(
         text: 'Original Text',
-        fontSize: 14.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
         fontFamily: 'Roboto',
-        lineHeight: 1.2,
-        letterSpacing: 0.3,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.2),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(0.3),
         color: Colors.black,
-        alignment: TextAlign.left,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         textShadow: originalTextShadow,
         isBold: false,
         isItalic: true,
@@ -103,12 +104,12 @@ void main() {
 
       final mutatedTextProperties = PageBuilderTextProperties(
         text: 'Mutated Text',
-        fontSize: 20.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
         fontFamily: 'Helvetica',
-        lineHeight: 2.0,
-        letterSpacing: 1.0,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(2.0),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(1.0),
         color: Colors.yellow,
-        alignment: TextAlign.right,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.right),
         textShadow: mutatedTextShadow,
         isBold: true,
         isItalic: false,
@@ -135,7 +136,7 @@ void main() {
       expect(original.buttonProperties?.backgroundPaint?.color, equals(Colors.green));
       expect(original.buttonProperties?.textProperties?.text,
           equals('Original Text'));
-      expect(original.buttonProperties?.textProperties?.fontSize, equals(14.0));
+      expect(original.buttonProperties?.textProperties?.fontSize, equals(const PagebuilderResponsiveOrConstant.constant(14.0)));
       expect(original.buttonProperties?.textProperties?.color,
           equals(Colors.black));
       expect(original.buttonProperties?.textProperties?.textShadow?.color,
@@ -162,7 +163,7 @@ void main() {
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
-                  fontSize: 18.0,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -180,7 +181,7 @@ void main() {
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
-                  fontSize: 18.0,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,

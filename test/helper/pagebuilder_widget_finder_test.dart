@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_fin
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group('PagebuilderWidgetFinder_findWidgetById', () {
@@ -28,11 +29,11 @@ void main() {
 
       final mockTextProperties1 = PageBuilderTextProperties(
           text: "Text 1",
-          fontSize: 16.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
           fontFamily: "TestFont",
           color: Colors.black,
-          alignment: TextAlign.left,
-          lineHeight: 1.5,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           isBold: null,
@@ -40,11 +41,11 @@ void main() {
 
       final mockTextProperties2 = PageBuilderTextProperties(
           text: "Text 2",
-          fontSize: 18.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
           fontFamily: "TestFont",
           color: Colors.red,
-          alignment: TextAlign.center,
-          lineHeight: 1.5,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           isBold: null,

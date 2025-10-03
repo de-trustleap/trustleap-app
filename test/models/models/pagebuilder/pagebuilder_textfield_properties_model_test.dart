@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_textfield_properties_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfield_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -170,24 +171,24 @@ void main() {
           borderColor: null,
           placeHolderTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null));
       // When
@@ -211,24 +212,24 @@ void main() {
           borderColor: null,
           placeHolderTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null));
       final expectedResult = PageBuilderTextFieldPropertiesModel(

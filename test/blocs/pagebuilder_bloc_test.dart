@@ -18,6 +18,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_pro
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   late PagebuilderBloc pageBuilderBloc;
@@ -159,11 +160,11 @@ void main() {
                     alignment: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
-                        fontSize: 16,
+                        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
                         fontFamily: "TestFont",
                         color: Colors.black,
-                        alignment: TextAlign.center,
-                        lineHeight: 1.5,
+                        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
+                        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
                         letterSpacing: null,
                         textShadow: null,
                         isBold: null,
@@ -242,11 +243,11 @@ void main() {
   group("PagebuilderCubit_updateWidgets", () {
     final mockTextProperties1 = PageBuilderTextProperties(
         text: "Text 1",
-        fontSize: 16.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
         fontFamily: "TestFont",
         color: Colors.black,
-        alignment: TextAlign.left,
-        lineHeight: 1.5,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
         letterSpacing: null,
         textShadow: null,
         isBold: null,
@@ -254,11 +255,11 @@ void main() {
 
     final mockTextProperties2 = PageBuilderTextProperties(
         text: "Text 2",
-        fontSize: 18.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
         fontFamily: "TestFont",
         color: Colors.red,
-        alignment: TextAlign.center,
-        lineHeight: 1.5,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
         letterSpacing: null,
         textShadow: null,
         isBold: null,
@@ -387,7 +388,7 @@ void main() {
       // Given
       final updatedWidget = mockTextWidget1.copyWith(
         widthPercentage: 80,
-        properties: mockTextProperties1.copyWith(text: "Text3", fontSize: 30),
+        properties: mockTextProperties1.copyWith(text: "Text3", fontSize: const PagebuilderResponsiveOrConstant.constant(30.0)),
       );
 
       final updatedColumnWidget = mockColumnWidget.copyWith(children: [

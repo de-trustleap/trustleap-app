@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderTextProperties_CopyWith", () {
@@ -11,28 +12,28 @@ void main() {
       // Given
       final model = PageBuilderTextProperties(
           text: "Test",
-          fontSize: 16.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
           fontFamily: "Poppins",
           lineHeight: null,
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: TextAlign.left,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
           isBold: false,
           isItalic: null);
       final expectedResult = PageBuilderTextProperties(
           text: "Test2",
-          fontSize: 18.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
           fontFamily: "Poppins",
           lineHeight: null,
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: TextAlign.left,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
           isBold: false,
           isItalic: null);
       // When
-      final result = model.copyWith(text: "Test2", fontSize: 18.0);
+      final result = model.copyWith(text: "Test2", fontSize: const PagebuilderResponsiveOrConstant.constant(18.0));
       // Then
       expect(result, expectedResult);
     });
@@ -49,12 +50,12 @@ void main() {
       );
       const original = PageBuilderTextProperties(
         text: "Hello World",
-        fontSize: 16.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
         fontFamily: "Arial",
-        lineHeight: 1.5,
-        letterSpacing: 0.5,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(0.5),
         color: Color(0xFF2196F3),
-        alignment: TextAlign.center,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
         textShadow: textShadow,
         isBold: true,
         isItalic: false,
@@ -82,24 +83,24 @@ void main() {
       // Given
       final properties1 = PageBuilderTextProperties(
           text: "Test",
-          fontSize: 16.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
           fontFamily: "Poppins",
           lineHeight: null,
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: TextAlign.left,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
           isBold: false,
           isItalic: null);
       final properties2 = PageBuilderTextProperties(
           text: "Test",
-          fontSize: 16.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
           fontFamily: "Poppins",
           lineHeight: null,
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: TextAlign.left,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
           isBold: false,
           isItalic: null);
       // Then

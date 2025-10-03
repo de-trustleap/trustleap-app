@@ -1,14 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
-class PagebuilderResponsiveOrConstantModel<T> {
+class PagebuilderResponsiveOrConstantModel<T> extends Equatable {
   final T? constantValue;
   final Map<String, T>? responsiveValue;
 
-  PagebuilderResponsiveOrConstantModel.constant(this.constantValue)
+  const PagebuilderResponsiveOrConstantModel.constant(this.constantValue)
       : responsiveValue = null;
 
-  PagebuilderResponsiveOrConstantModel.responsive(this.responsiveValue)
+  const PagebuilderResponsiveOrConstantModel.responsive(this.responsiveValue)
       : constantValue = null;
 
   Object? toMapValue() {
@@ -50,4 +51,7 @@ class PagebuilderResponsiveOrConstantModel<T> {
     return PagebuilderResponsiveOrConstantModel.responsive(
         value.responsiveValue);
   }
+
+  @override
+  List<Object?> get props => [constantValue, responsiveValue];
 }

@@ -8,7 +8,9 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderWidgetModel_CopyWith", () {
@@ -232,13 +234,13 @@ void main() {
           alignment: null);
       final expectedResult = PageBuilderTextProperties(
           text: "Test",
-          fontSize: 16,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: null,
-          alignment: TextAlign.left,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
           isBold: true,
           isItalic: null);
       // When
@@ -253,13 +255,13 @@ void main() {
       // Given
       final properties = PageBuilderTextProperties(
           text: "Test",
-          fontSize: 16,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: null,
-          alignment: TextAlign.left,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
           isBold: true,
           isItalic: null);
       final expectedResult = {

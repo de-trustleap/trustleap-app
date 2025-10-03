@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfiel
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderTextfieldProperties_CopyWith", () {
@@ -19,24 +20,24 @@ void main() {
           borderColor: Colors.black,
           placeHolderTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true));
       final expectedResult = PageBuilderTextFieldProperties(
@@ -48,24 +49,24 @@ void main() {
           borderColor: Colors.black,
           placeHolderTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: "Poppins",
-              lineHeight: 1.5,
+              lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true));
       // When
@@ -73,13 +74,13 @@ void main() {
           minLines: 2,
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: "Poppins",
-              lineHeight: 1.5,
+              lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true));
       // Then
@@ -98,12 +99,12 @@ void main() {
       );
       const placeholderTextProperties = PageBuilderTextProperties(
         text: "Enter your text",
-        fontSize: 14.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
         fontFamily: "Arial",
-        lineHeight: 1.2,
-        letterSpacing: 0.0,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.2),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(0.0),
         color: Color(0xFF757575),
-        alignment: TextAlign.left,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         textShadow: placeholderTextShadow,
         isBold: false,
         isItalic: true,
@@ -116,12 +117,12 @@ void main() {
       );
       const textProperties = PageBuilderTextProperties(
         text: "User input",
-        fontSize: 16.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
         fontFamily: "Roboto",
-        lineHeight: 1.4,
-        letterSpacing: 0.2,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.4),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(0.2),
         color: Color(0xFF212121),
-        alignment: TextAlign.left,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         textShadow: textShadow,
         isBold: false,
         isItalic: false,
@@ -165,24 +166,24 @@ void main() {
           borderColor: Colors.black,
           placeHolderTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true));
       final properties2 = PageBuilderTextFieldProperties(
@@ -194,24 +195,24 @@ void main() {
           borderColor: Colors.black,
           placeHolderTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 16.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true));
       // Then

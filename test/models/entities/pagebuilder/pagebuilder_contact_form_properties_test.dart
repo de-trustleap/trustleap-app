@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderContactFormProperties_CopyWith", () {
@@ -23,7 +24,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -34,7 +35,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -52,7 +53,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -63,7 +64,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -81,7 +82,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -92,7 +93,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -110,7 +111,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -121,7 +122,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -147,7 +148,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -158,7 +159,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -176,7 +177,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -187,7 +188,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -205,7 +206,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -216,7 +217,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -234,7 +235,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -245,7 +246,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -271,7 +272,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -282,7 +283,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -316,7 +317,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -327,7 +328,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -345,7 +346,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -356,7 +357,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -374,7 +375,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -385,7 +386,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -403,7 +404,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -414,7 +415,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -440,7 +441,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -451,7 +452,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -469,7 +470,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -480,7 +481,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -498,7 +499,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -509,7 +510,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -527,7 +528,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -538,7 +539,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,

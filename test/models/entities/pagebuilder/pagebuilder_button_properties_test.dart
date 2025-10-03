@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_pro
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderButtonProperties_CopyWith", () {
@@ -18,7 +19,7 @@ void main() {
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 18.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
@@ -34,7 +35,7 @@ void main() {
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 18.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
@@ -55,12 +56,12 @@ void main() {
       // Given
       const textProperties = PageBuilderTextProperties(
         text: "Test Button",
-        fontSize: 16.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
         fontFamily: "Arial",
-        lineHeight: 1.2,
-        letterSpacing: 0.5,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.2),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(0.5),
         color: Colors.white,
-        alignment: TextAlign.center,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
         textShadow: PageBuilderShadow(
           color: Colors.black26,
           spreadRadius: 0.0,
@@ -102,7 +103,7 @@ void main() {
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 18.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
@@ -118,7 +119,7 @@ void main() {
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 18.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
