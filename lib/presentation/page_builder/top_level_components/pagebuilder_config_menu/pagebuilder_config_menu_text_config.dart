@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -11,6 +12,8 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_shadow_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_text_alignment_control.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderConfigMenuTextConfig extends StatefulWidget {
   final PageBuilderTextProperties? properties;
@@ -35,51 +38,54 @@ class PagebuilderConfigMenuTextConfig extends StatefulWidget {
 
 class _PagebuilderConfigMenuTextConfigState
     extends State<PagebuilderConfigMenuTextConfig> {
-  PagebuilderResponsiveBreakpoint _currentBreakpoint =
-      PagebuilderResponsiveBreakpoint.desktop;
-
   void _onBreakpointChanged(PagebuilderResponsiveBreakpoint breakpoint) {
-    setState(() {
-      _currentBreakpoint = breakpoint;
-    });
+    Modular.get<PagebuilderResponsiveBreakpointCubit>().setBreakpoint(breakpoint);
   }
 
   @override
   Widget build(BuildContext context) {
-    final helper = PagebuilderResponsiveConfigHelper(_currentBreakpoint);
+    final breakpointCubit = Modular.get<PagebuilderResponsiveBreakpointCubit>();
     final localization = AppLocalizations.of(context);
     final themeData = Theme.of(context);
 
-    if (widget.properties != null) {
-      if (!widget.showHoverTabBar) {
-        return _buildConfigUI(widget.properties!, false, themeData,
-            localization, widget.onChanged, helper);
-      }
+    return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+        PagebuilderResponsiveBreakpoint>(
+      bloc: breakpointCubit,
+      builder: (context, currentBreakpoint) {
+        final helper = PagebuilderResponsiveConfigHelper(currentBreakpoint);
 
-      return PagebuilderHoverConfigTabBar<PageBuilderTextProperties>(
-        properties: widget.properties!,
-        hoverProperties: widget.hoverProperties,
-        hoverEnabled: widget.hoverProperties != null,
-        onHoverEnabledChanged: (enabled) {
-          if (enabled) {
-            widget.onChangedHover(widget.properties?.deepCopy());
-          } else {
-            widget.onChangedHover(null);
+        if (widget.properties != null) {
+          if (!widget.showHoverTabBar) {
+            return _buildConfigUI(widget.properties!, false, themeData,
+                localization, widget.onChanged, helper, currentBreakpoint);
           }
-        },
-        onChanged: (updated, isHover) {
-          if (isHover) {
-            widget.onChangedHover(updated);
-          } else {
-            widget.onChanged(updated);
-          }
-        },
-        configBuilder: (props, disabled, onChangedLocal) => _buildConfigUI(
-            props, disabled, themeData, localization, onChangedLocal, helper),
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
+
+          return PagebuilderHoverConfigTabBar<PageBuilderTextProperties>(
+            properties: widget.properties!,
+            hoverProperties: widget.hoverProperties,
+            hoverEnabled: widget.hoverProperties != null,
+            onHoverEnabledChanged: (enabled) {
+              if (enabled) {
+                widget.onChangedHover(widget.properties?.deepCopy());
+              } else {
+                widget.onChangedHover(null);
+              }
+            },
+            onChanged: (updated, isHover) {
+              if (isHover) {
+                widget.onChangedHover(updated);
+              } else {
+                widget.onChanged(updated);
+              }
+            },
+            configBuilder: (props, disabled, onChangedLocal) => _buildConfigUI(
+                props, disabled, themeData, localization, onChangedLocal, helper, currentBreakpoint),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
+    );
   }
 
   Widget _buildConfigUI(
@@ -88,7 +94,8 @@ class _PagebuilderConfigMenuTextConfigState
       ThemeData themeData,
       AppLocalizations localization,
       Function(PageBuilderTextProperties?) onChangedLocal,
-      PagebuilderResponsiveConfigHelper helper) {
+      PagebuilderResponsiveConfigHelper helper,
+      PagebuilderResponsiveBreakpoint currentBreakpoint) {
     if (disabled) {
       return const SizedBox.shrink();
     } else {
@@ -100,7 +107,7 @@ class _PagebuilderConfigMenuTextConfigState
               onChangedLocal(props?.copyWith(
                   alignment: helper.setValue(props.alignment, alignment)));
             },
-            currentBreakpoint: _currentBreakpoint,
+            currentBreakpoint: currentBreakpoint,
             onBreakpointChanged: _onBreakpointChanged),
         const SizedBox(height: 20),
         PagebuilderColorControl(
@@ -122,7 +129,7 @@ class _PagebuilderConfigMenuTextConfigState
               style: themeData.textTheme.bodySmall),
           const SizedBox(width: 8),
           PagebuilderBreakpointSelector(
-            currentBreakpoint: _currentBreakpoint,
+            currentBreakpoint: currentBreakpoint,
             onBreakpointChanged: _onBreakpointChanged,
           ),
           const Spacer(),
@@ -146,7 +153,7 @@ class _PagebuilderConfigMenuTextConfigState
               onChangedLocal(props?.copyWith(
                   lineHeight: helper.setValue(props.lineHeight, lineHeight)));
             },
-            currentBreakpoint: _currentBreakpoint,
+            currentBreakpoint: currentBreakpoint,
             onBreakpointChanged: _onBreakpointChanged),
         const SizedBox(height: 20),
         PagebuilderNumberDropdown(
@@ -160,7 +167,7 @@ class _PagebuilderConfigMenuTextConfigState
                   letterSpacing:
                       helper.setValue(props.letterSpacing, letterSpacing)));
             },
-            currentBreakpoint: _currentBreakpoint,
+            currentBreakpoint: currentBreakpoint,
             onBreakpointChanged: _onBreakpointChanged),
         const SizedBox(height: 20),
         PagebuilderShadowControl(

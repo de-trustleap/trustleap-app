@@ -11,6 +11,7 @@ class LandingPageBuilderAppBar extends StatelessWidget
   final bool isLoading;
   final bool isHierarchyOpen;
   final VoidCallback onHierarchyToggle;
+  final VoidCallback onResponsivePreviewToggle;
   final dividerHeight = 0.5;
 
   const LandingPageBuilderAppBar({
@@ -19,6 +20,7 @@ class LandingPageBuilderAppBar extends StatelessWidget
     required this.isLoading,
     required this.isHierarchyOpen,
     required this.onHierarchyToggle,
+    required this.onResponsivePreviewToggle,
   });
 
   @override
@@ -38,6 +40,24 @@ class LandingPageBuilderAppBar extends StatelessWidget
             ),
             centerTitle: true,
             actions: [
+              Tooltip(
+                message: "Responsiver Modus",
+                child: Container(
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: themeData.colorScheme.secondary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    onPressed: onResponsivePreviewToggle,
+                    icon: const Icon(
+                      Icons.devices,
+                      color: Colors.white,
+                    ),
+                    iconSize: 24,
+                  ),
+                ),
+              ),
               Tooltip(
                 message: localization.pagebuilder_hierarchy_button_tooltip,
                 child: Container(

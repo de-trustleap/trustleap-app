@@ -1,6 +1,8 @@
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
@@ -36,6 +38,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
   late LandingPageBuilderHtmlEvents htmlEvents;
   bool isUpdated = false;
   bool _isHierarchyOverlayOpen = true;
+  bool _isResponsivePreviewOpen = false;
   final widgetFinder = PagebuilderWidgetFinder();
   final pageBuilderMenuCubit = Modular.get<PagebuilderConfigMenuCubit>();
 
@@ -84,9 +87,20 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
       return const PagebuilderMobileNotSupportedView();
     }
 
-    return BlocConsumer<PagebuilderBloc, PagebuilderState>(
-          bloc: pageBuilderCubit,
-          listener: (context, state) {
+    return BlocListener<PagebuilderResponsiveBreakpointCubit,
+            PagebuilderResponsiveBreakpoint>(
+        bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+        listener: (context, breakpoint) {
+          if (breakpoint != PagebuilderResponsiveBreakpoint.desktop &&
+              !_isResponsivePreviewOpen) {
+            setState(() {
+              _isResponsivePreviewOpen = true;
+            });
+          }
+        },
+        child: BlocConsumer<PagebuilderBloc, PagebuilderState>(
+            bloc: pageBuilderCubit,
+            listener: (context, state) {
             if (state is GetLandingPageAndUserSuccessState) {
               pageBuilderContent = state.content;
               if (!state.saveLoading && state.saveFailure != null) {
@@ -157,6 +171,11 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                         _isHierarchyOverlayOpen = !_isHierarchyOverlayOpen;
                       });
                     },
+                    onResponsivePreviewToggle: () {
+                      setState(() {
+                        _isResponsivePreviewOpen = !_isResponsivePreviewOpen;
+                      });
+                    },
                   ),
                   body: Stack(
                     children: [
@@ -164,6 +183,12 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                           ? LandingPageBuilderPageBuilder(
                               model: state.content.content!,
                               configMenuCubit: pageBuilderMenuCubit,
+                              isResponsivePreviewOpen: _isResponsivePreviewOpen,
+                              onResponsivePreviewClose: () {
+                                setState(() {
+                                  _isResponsivePreviewOpen = false;
+                                });
+                              },
                             )
                           : const Text("FEHLER!"),
                       if (_isHierarchyOverlayOpen &&
@@ -191,6 +216,6 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
             } else {
               return const LoadingIndicator();
             }
-          });
+          }));
   }
 }
