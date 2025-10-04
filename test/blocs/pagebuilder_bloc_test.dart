@@ -268,10 +268,10 @@ void main() {
     final mockImageProperties = PageBuilderImageProperties(
         url: "https://example.com/image.png",
         borderRadius: 10.0,
-        width: 100.0,
-        height: 150.0,
+        width: const PagebuilderResponsiveOrConstant.constant(100.0),
+        height: const PagebuilderResponsiveOrConstant.constant(150.0),
         localImage: Uint8List(0),
-        contentMode: BoxFit.cover,
+        contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
         overlayPaint: null,
         showPromoterImage: false);
 

@@ -1,4 +1,6 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
@@ -10,7 +12,9 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_config_menu_dropdown.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_image_control.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_responsive_config_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderConfigMenuBackground extends StatelessWidget {
@@ -147,17 +151,33 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
           }),
       if (props?.imageProperties != null) ...[
         const SizedBox(height: 20),
-        PagebuilderConfigMenuDrowdown(
-            title: localization
-                .landingpage_pagebuilder_layout_menu_background_contentmode,
-            initialValue: props?.imageProperties?.contentMode ?? BoxFit.cover,
-            type: PagebuilderDropdownType.contentMode,
-            onSelected: (contentMode) {
-              final updatedImageProperties =
-                  props!.imageProperties!.copyWith(contentMode: contentMode);
-              onChangedLocal(
-                  props.copyWith(imageProperties: updatedImageProperties));
-            }),
+        BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+            PagebuilderResponsiveBreakpoint>(
+          bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+          builder: (context, currentBreakpoint) {
+            final helper = PagebuilderResponsiveConfigHelper(currentBreakpoint);
+            return PagebuilderConfigMenuDrowdown(
+                title: localization
+                    .landingpage_pagebuilder_layout_menu_background_contentmode,
+                initialValue: helper.getValue(props?.imageProperties?.contentMode) ??
+                    BoxFit.cover,
+                type: PagebuilderDropdownType.contentMode,
+                showResponsiveButton: true,
+                currentBreakpoint: currentBreakpoint,
+                onBreakpointChanged: (breakpoint) {
+                  Modular.get<PagebuilderResponsiveBreakpointCubit>()
+                      .setBreakpoint(breakpoint);
+                },
+                onSelected: (contentMode) {
+                  final updatedContentMode = helper.setValue(
+                      props?.imageProperties?.contentMode, contentMode);
+                  final updatedImageProperties = props!.imageProperties!
+                      .copyWith(contentMode: updatedContentMode);
+                  onChangedLocal(
+                      props.copyWith(imageProperties: updatedImageProperties));
+                });
+          },
+        ),
         const SizedBox(height: 20),
         PagebuilderColorControl(
             title: localization

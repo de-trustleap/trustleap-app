@@ -29,6 +29,17 @@ class PagebuilderResponsiveOrConstant<T> extends Equatable {
     }
   }
 
+  PagebuilderResponsiveOrConstant<T> deepCopy() {
+    if (constantValue != null) {
+      return PagebuilderResponsiveOrConstant.constant(constantValue as T);
+    }
+    if (responsiveValue != null) {
+      return PagebuilderResponsiveOrConstant.responsive(
+          Map<String, T>.from(responsiveValue!));
+    }
+    return PagebuilderResponsiveOrConstant.constant(null as T);
+  }
+
   @override
   List<Object?> get props => [constantValue, responsiveValue];
 }

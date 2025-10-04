@@ -3,16 +3,19 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/boxfit_mapper.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
+import 'package:flutter/material.dart';
 
 class PageBuilderImagePropertiesModel extends Equatable
     implements PageBuilderProperties {
   final String? url;
   final double? borderRadius;
-  final double? width;
-  final double? height;
-  final String? contentMode;
+  final PagebuilderResponsiveOrConstantModel<double>? width;
+  final PagebuilderResponsiveOrConstantModel<double>? height;
+  final PagebuilderResponsiveOrConstantModel<String>? contentMode;
   final Map<String, dynamic>? overlayPaint;
   final bool? showPromoterImage;
   final String? newImageBase64;
@@ -31,9 +34,9 @@ class PageBuilderImagePropertiesModel extends Equatable
     Map<String, dynamic> map = {};
     if (url != null) map['url'] = url;
     if (borderRadius != null) map['borderRadius'] = borderRadius;
-    if (width != null) map['width'] = width;
-    if (height != null) map['height'] = height;
-    if (contentMode != null) map['contentMode'] = contentMode;
+    if (width != null) map['width'] = width!.toMapValue();
+    if (height != null) map['height'] = height!.toMapValue();
+    if (contentMode != null) map['contentMode'] = contentMode!.toMapValue();
     if (overlayPaint != null) map['overlayPaint'] = overlayPaint;
     if (showPromoterImage != null) map['showPromoterImage'] = showPromoterImage;
     if (newImageBase64 != null) map['newImageBase64'] = newImageBase64;
@@ -45,10 +48,18 @@ class PageBuilderImagePropertiesModel extends Equatable
         url: map['url'] != null ? map['url'] as String : null,
         borderRadius:
             map['borderRadius'] != null ? map['borderRadius'] as double : null,
-        width: map['width'] != null ? map['width'] as double : null,
-        height: map['height'] != null ? map['height'] as double : null,
-        contentMode:
-            map['contentMode'] != null ? map['contentMode'] as String : null,
+        width: PagebuilderResponsiveOrConstantModel.fromMapValue(
+          map['width'],
+          (v) => v as double,
+        ),
+        height: PagebuilderResponsiveOrConstantModel.fromMapValue(
+          map['height'],
+          (v) => v as double,
+        ),
+        contentMode: PagebuilderResponsiveOrConstantModel.fromMapValue(
+          map['contentMode'],
+          (v) => v as String,
+        ),
         overlayPaint: map['overlayPaint'] != null
             ? map['overlayPaint'] as Map<String, dynamic>
             : null,
@@ -63,9 +74,9 @@ class PageBuilderImagePropertiesModel extends Equatable
   PageBuilderImagePropertiesModel copyWith(
       {String? url,
       double? borderRadius,
-      double? width,
-      double? height,
-      String? contentMode,
+      PagebuilderResponsiveOrConstantModel<double>? width,
+      PagebuilderResponsiveOrConstantModel<double>? height,
+      PagebuilderResponsiveOrConstantModel<String>? contentMode,
       Map<String, dynamic>? overlayPaint,
       bool? showPromoterImage,
       String? newImageBase64}) {
@@ -84,13 +95,54 @@ class PageBuilderImagePropertiesModel extends Equatable
     return PageBuilderImageProperties(
         url: url,
         borderRadius: borderRadius,
-        width: width,
-        height: height,
-        contentMode: BoxFitMapper.getBoxFitFromString(contentMode),
+        width: width?.toDomain(),
+        height: height?.toDomain(),
+        contentMode: _contentModeToDomain(contentMode),
         overlayPaint: overlayPaint != null
             ? PagebuilderPaintModel.fromMap(overlayPaint!).toDomain()
             : null,
         showPromoterImage: showPromoterImage);
+  }
+
+  PagebuilderResponsiveOrConstant<BoxFit>? _contentModeToDomain(
+      PagebuilderResponsiveOrConstantModel<String>? contentModeModel) {
+    if (contentModeModel == null) return null;
+
+    if (contentModeModel.constantValue != null) {
+      final boxFit =
+          BoxFitMapper.getBoxFitFromString(contentModeModel.constantValue);
+      return boxFit != null
+          ? PagebuilderResponsiveOrConstant.constant(boxFit)
+          : null;
+    }
+
+    if (contentModeModel.responsiveValue != null) {
+      final Map<String, BoxFit> mappedValues = {};
+
+      if (contentModeModel.responsiveValue!["mobile"] != null) {
+        final value = BoxFitMapper.getBoxFitFromString(
+            contentModeModel.responsiveValue!["mobile"]);
+        if (value != null) mappedValues["mobile"] = value;
+      }
+
+      if (contentModeModel.responsiveValue!["tablet"] != null) {
+        final value = BoxFitMapper.getBoxFitFromString(
+            contentModeModel.responsiveValue!["tablet"]);
+        if (value != null) mappedValues["tablet"] = value;
+      }
+
+      if (contentModeModel.responsiveValue!["desktop"] != null) {
+        final value = BoxFitMapper.getBoxFitFromString(
+            contentModeModel.responsiveValue!["desktop"]);
+        if (value != null) mappedValues["desktop"] = value;
+      }
+
+      return mappedValues.isNotEmpty
+          ? PagebuilderResponsiveOrConstant.responsive(mappedValues)
+          : null;
+    }
+
+    return null;
   }
 
   factory PageBuilderImagePropertiesModel.fromDomain(
@@ -98,9 +150,10 @@ class PageBuilderImagePropertiesModel extends Equatable
     return PageBuilderImagePropertiesModel(
         url: properties.url,
         borderRadius: properties.borderRadius,
-        width: properties.width,
-        height: properties.height,
-        contentMode: BoxFitMapper.getStringFromBoxFit(properties.contentMode),
+        width: PagebuilderResponsiveOrConstantModel.fromDomain(properties.width),
+        height:
+            PagebuilderResponsiveOrConstantModel.fromDomain(properties.height),
+        contentMode: _contentModeFromDomain(properties.contentMode),
         overlayPaint: properties.overlayPaint != null
             ? PagebuilderPaintModel.fromDomain(properties.overlayPaint!).toMap()
             : null,
@@ -108,6 +161,47 @@ class PageBuilderImagePropertiesModel extends Equatable
         newImageBase64: properties.localImage != null
             ? base64Encode(properties.localImage!)
             : null);
+  }
+
+  static PagebuilderResponsiveOrConstantModel<String>? _contentModeFromDomain(
+      PagebuilderResponsiveOrConstant<BoxFit>? contentMode) {
+    if (contentMode == null) return null;
+
+    if (contentMode.constantValue != null) {
+      final stringValue =
+          BoxFitMapper.getStringFromBoxFit(contentMode.constantValue);
+      return stringValue != null
+          ? PagebuilderResponsiveOrConstantModel.constant(stringValue)
+          : null;
+    }
+
+    if (contentMode.responsiveValue != null) {
+      final Map<String, String> mappedValues = {};
+
+      if (contentMode.responsiveValue!["mobile"] != null) {
+        final value = BoxFitMapper.getStringFromBoxFit(
+            contentMode.responsiveValue!["mobile"]);
+        if (value != null) mappedValues["mobile"] = value;
+      }
+
+      if (contentMode.responsiveValue!["tablet"] != null) {
+        final value = BoxFitMapper.getStringFromBoxFit(
+            contentMode.responsiveValue!["tablet"]);
+        if (value != null) mappedValues["tablet"] = value;
+      }
+
+      if (contentMode.responsiveValue!["desktop"] != null) {
+        final value = BoxFitMapper.getStringFromBoxFit(
+            contentMode.responsiveValue!["desktop"]);
+        if (value != null) mappedValues["desktop"] = value;
+      }
+
+      return mappedValues.isNotEmpty
+          ? PagebuilderResponsiveOrConstantModel.responsive(mappedValues)
+          : null;
+    }
+
+    return null;
   }
 
   @override
