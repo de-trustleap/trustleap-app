@@ -11,7 +11,6 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -26,6 +25,7 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_fo
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_row_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_spacing_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_video_player_properties_model.dart';
 
@@ -163,8 +163,8 @@ class PageBuilderWidgetModel extends Equatable {
         hoverBackground: hoverBackground != null
             ? PagebuilderBackgroundModel.fromMap(hoverBackground!).toDomain()
             : null,
-        padding: PageBuilderSpacing.fromMap(padding),
-        margin: PageBuilderSpacing.fromMap(margin),
+        padding: PageBuilderSpacingModel.fromMap(padding).toDomain(),
+        margin: PageBuilderSpacingModel.fromMap(margin).toDomain(),
         maxWidth: maxWidth,
         alignment: AlignmentMapper.getAlignmentFromString(alignment));
   }
@@ -189,8 +189,8 @@ class PageBuilderWidgetModel extends Equatable {
             ? PagebuilderBackgroundModel.fromDomain(widget.hoverBackground!)
                 .toMap()
             : null,
-        padding: getMapFromPadding(widget.padding),
-        margin: getMapFromPadding(widget.margin),
+        padding: PageBuilderSpacingModel.fromDomain(widget.padding).toMap(),
+        margin: PageBuilderSpacingModel.fromDomain(widget.margin).toMap(),
         maxWidth: widget.maxWidth,
         alignment: AlignmentMapper.getStringFromAlignment(widget.alignment));
   }
@@ -270,26 +270,6 @@ class PageBuilderWidgetModel extends Equatable {
           .toMap();
     } else {
       return null;
-    }
-  }
-
-  static Map<String, dynamic>? getMapFromPadding(PageBuilderSpacing? padding) {
-    if (padding == null) {
-      return null;
-    }
-    Map<String, dynamic> map = {};
-    if (padding.top != null && padding.top != 0) map['top'] = padding.top;
-    if (padding.bottom != null && padding.bottom != 0) {
-      map['bottom'] = padding.bottom;
-    }
-    if (padding.left != null && padding.left != 0) map['left'] = padding.left;
-    if (padding.right != null && padding.right != 0) {
-      map['right'] = padding.right;
-    }
-    if (map.isEmpty) {
-      return null;
-    } else {
-      return map;
     }
   }
 

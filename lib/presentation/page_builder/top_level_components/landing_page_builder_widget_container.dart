@@ -60,10 +60,10 @@ class _LandingPageBuilderWidgetContainerState
                   BoxConstraints(maxWidth: _getEffectiveMaxWidth(context)),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
-                    widget.model.margin?.left ?? 0,
-                    widget.model.margin?.top ?? 0,
-                    widget.model.margin?.right ?? 0,
-                    widget.model.margin?.bottom ?? 0),
+                    widget.model.margin?.left?.getValueForBreakpoint(breakpoint) ?? 0,
+                    widget.model.margin?.top?.getValueForBreakpoint(breakpoint) ?? 0,
+                    widget.model.margin?.right?.getValueForBreakpoint(breakpoint) ?? 0,
+                    widget.model.margin?.bottom?.getValueForBreakpoint(breakpoint) ?? 0),
                 child: MouseRegion(
                   onEnter: (_) {
                     BlocProvider.of<PagebuilderHoverCubit>(context)
@@ -210,10 +210,10 @@ class _LandingPageBuilderWidgetContainerState
                                     widget.model.alignment ?? Alignment.center,
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(
-                                    widget.model.padding?.left ?? 0,
-                                    widget.model.padding?.top ?? 0,
-                                    widget.model.padding?.right ?? 0,
-                                    widget.model.padding?.bottom ?? 0,
+                                    widget.model.padding?.left?.getValueForBreakpoint(breakpoint) ?? 0,
+                                    widget.model.padding?.top?.getValueForBreakpoint(breakpoint) ?? 0,
+                                    widget.model.padding?.right?.getValueForBreakpoint(breakpoint) ?? 0,
+                                    widget.model.padding?.bottom?.getValueForBreakpoint(breakpoint) ?? 0,
                                   ),
                                   child: widget.child,
                                 ),

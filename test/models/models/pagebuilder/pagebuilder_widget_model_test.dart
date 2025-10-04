@@ -152,8 +152,8 @@ void main() {
               imageProperties: null,
               overlayPaint: null),
           hoverBackground: null,
-          padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
-          margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+          padding: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
+          margin: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
           maxWidth: 300,
           alignment: null);
       // When
@@ -182,7 +182,7 @@ void main() {
               imageProperties: null,
               overlayPaint: null),
           hoverBackground: null,
-          padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+          padding: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
           margin: null,
           maxWidth: 300,
           alignment: null);
@@ -279,18 +279,6 @@ void main() {
     });
   });
 
-  group("PagebuilderWidgetModel_GetMapFromPadding", () {
-    test("check if returns correct map from padding", () {
-      // Given
-      final padding =
-          PageBuilderSpacing(top: 12.0, bottom: 12.0, left: 12.0, right: 16.0);
-      final expectedResult = {"top": 12, "bottom": 12, "left": 12, "right": 16};
-      // When
-      final result = PageBuilderWidgetModel.getMapFromPadding(padding);
-      // Then
-      expect(result, expectedResult);
-    });
-  });
 
   group("PagebuilderWidgetModel_Props", () {
     test("check if value equality works", () {

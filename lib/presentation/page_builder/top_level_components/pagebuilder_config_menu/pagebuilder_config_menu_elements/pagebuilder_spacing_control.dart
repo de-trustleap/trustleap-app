@@ -1,9 +1,15 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_breakpoint_selector.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_responsive_config_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 enum PageBuilderSpacingDirection { top, left, bottom, right }
 
@@ -26,66 +32,100 @@ class PagebuilderSpacingControl extends StatelessWidget {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: themeData.textTheme.bodySmall),
-        const SizedBox(height: 16),
-        _buildStepperRow(
-            [PageBuilderSpacingDirection.top, PageBuilderSpacingDirection.left],
-            localization),
-        const SizedBox(height: 16),
-        _buildStepperRow([
-          PageBuilderSpacingDirection.bottom,
-          PageBuilderSpacingDirection.right
-        ], localization),
-      ],
+    return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+        PagebuilderResponsiveBreakpoint>(
+      bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+      builder: (context, currentBreakpoint) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(title, style: themeData.textTheme.bodySmall),
+                const SizedBox(width: 8),
+                PagebuilderBreakpointSelector(
+                  currentBreakpoint: currentBreakpoint,
+                  onBreakpointChanged: (breakpoint) {
+                    Modular.get<PagebuilderResponsiveBreakpointCubit>()
+                        .setBreakpoint(breakpoint);
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            _buildStepperRow(
+                [
+                  PageBuilderSpacingDirection.top,
+                  PageBuilderSpacingDirection.left
+                ],
+                localization,
+                currentBreakpoint),
+            const SizedBox(height: 16),
+            _buildStepperRow([
+              PageBuilderSpacingDirection.bottom,
+              PageBuilderSpacingDirection.right
+            ], localization, currentBreakpoint),
+          ],
+        );
+      },
     );
   }
 
-  Widget _buildStepperRow(List<PageBuilderSpacingDirection> directions,
-      AppLocalizations localization) {
+  Widget _buildStepperRow(
+      List<PageBuilderSpacingDirection> directions,
+      AppLocalizations localization,
+      PagebuilderResponsiveBreakpoint currentBreakpoint) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: directions
           .map((direction) => Padding(
                 padding: const EdgeInsets.only(right: 40.0),
-                child: _buildStepper(direction, localization),
+                child: _buildStepper(direction, localization, currentBreakpoint),
               ))
           .toList(),
     );
   }
 
   Widget _buildStepper(
-      PageBuilderSpacingDirection direction, AppLocalizations localization) {
+      PageBuilderSpacingDirection direction,
+      AppLocalizations localization,
+      PagebuilderResponsiveBreakpoint currentBreakpoint) {
+    final helper = PagebuilderResponsiveConfigHelper(currentBreakpoint);
+
     double getValue() {
       final spacing = _getSpacing();
       switch (direction) {
         case PageBuilderSpacingDirection.top:
-          return spacing?.top ?? 0.0;
+          return helper.getValue(spacing?.top) ?? 0.0;
         case PageBuilderSpacingDirection.left:
-          return spacing?.left ?? 0.0;
+          return helper.getValue(spacing?.left) ?? 0.0;
         case PageBuilderSpacingDirection.bottom:
-          return spacing?.bottom ?? 0.0;
+          return helper.getValue(spacing?.bottom) ?? 0.0;
         case PageBuilderSpacingDirection.right:
-          return spacing?.right ?? 0.0;
+          return helper.getValue(spacing?.right) ?? 0.0;
       }
     }
 
     void updateValue(double value) {
       final spacing = _getSpacing() ??
-          const PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0);
+          const PageBuilderSpacing(
+              top: PagebuilderResponsiveOrConstant.constant(0.0),
+              bottom: PagebuilderResponsiveOrConstant.constant(0.0),
+              left: PagebuilderResponsiveOrConstant.constant(0.0),
+              right: PagebuilderResponsiveOrConstant.constant(0.0));
       final updatedSpacing = spacing.copyWith(
-        top: direction == PageBuilderSpacingDirection.top ? value : spacing.top,
+        top: direction == PageBuilderSpacingDirection.top
+            ? helper.setValue(spacing.top, value)
+            : spacing.top,
         left: direction == PageBuilderSpacingDirection.left
-            ? value
+            ? helper.setValue(spacing.left, value)
             : spacing.left,
         bottom: direction == PageBuilderSpacingDirection.bottom
-            ? value
+            ? helper.setValue(spacing.bottom, value)
             : spacing.bottom,
         right: direction == PageBuilderSpacingDirection.right
-            ? value
+            ? helper.setValue(spacing.right, value)
             : spacing.right,
       );
       onChanged(updatedSpacing);

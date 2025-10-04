@@ -218,9 +218,9 @@ void main() {
                   background: null,
                   hoverBackground: null,
                   padding:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(16)),
                   margin:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   maxWidth: null,
                   alignment: null),
               PageBuilderWidget(
@@ -253,19 +253,19 @@ void main() {
                       widthPercentage: null,
                       background: null,
                       hoverBackground: null,
-                      padding: PageBuilderSpacing(
-                          top: 20, bottom: 20, left: 20, right: 20),
-                      margin: PageBuilderSpacing(
-                          top: 0, bottom: 0, left: 0, right: 0),
+                      padding: const PageBuilderSpacing(
+                          top: PagebuilderResponsiveOrConstant.constant(20), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
+                      margin: const PageBuilderSpacing(
+                          top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                       maxWidth: null,
                       alignment: null),
                   widthPercentage: 50,
                   background: null,
                   hoverBackground: null,
                   padding:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   margin:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   maxWidth: null,
                   alignment: null)
             ],
@@ -274,8 +274,8 @@ void main() {
             background: null,
             hoverBackground: null,
             padding:
-                PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
-            margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(40), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
+            margin: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
             maxWidth: 950,
             alignment: null)
       ];
@@ -326,7 +326,7 @@ void main() {
                   background: null,
                   hoverBackground: null,
                   padding:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(16)),
                   margin: null,
                   maxWidth: null,
                   alignment: null),
@@ -360,8 +360,8 @@ void main() {
                       widthPercentage: null,
                       background: null,
                       hoverBackground: null,
-                      padding: PageBuilderSpacing(
-                          top: 20, bottom: 20, left: 20, right: 20),
+                      padding: const PageBuilderSpacing(
+                          top: PagebuilderResponsiveOrConstant.constant(20), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
                       margin: null,
                       maxWidth: null,
                       alignment: null),
@@ -369,7 +369,7 @@ void main() {
                   background: null,
                   hoverBackground: null,
                   padding:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   margin: null,
                   maxWidth: null,
                   alignment: null)
@@ -379,7 +379,7 @@ void main() {
             background: null,
             hoverBackground: null,
             padding:
-                PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
+                const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(40), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
             margin: null,
             maxWidth: 950,
             alignment: null)

@@ -75,7 +75,7 @@ void main() {
           alignment: null,
           margin: null,
           padding:
-              PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+              const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(8.0), bottom: PagebuilderResponsiveOrConstant.constant(8.0), left: PagebuilderResponsiveOrConstant.constant(5.0), right: PagebuilderResponsiveOrConstant.constant(5.0)));
 
       final mockTextWidget2 = PageBuilderWidget(
           id: UniqueID.fromUniqueString("widget2"),
@@ -91,7 +91,7 @@ void main() {
           alignment: null,
           margin: null,
           padding:
-              PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+              const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(8.0), bottom: PagebuilderResponsiveOrConstant.constant(8.0), left: PagebuilderResponsiveOrConstant.constant(5.0), right: PagebuilderResponsiveOrConstant.constant(5.0)));
 
       final mockImageWidget = PageBuilderWidget(
           id: UniqueID.fromUniqueString("widget3"),
