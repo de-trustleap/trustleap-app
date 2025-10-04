@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_video_player_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,9 +10,13 @@ void main() {
     test("set link with copyWith should set link for resulting object", () {
       // Given
       final model = PagebuilderVideoPlayerPropertiesModel(
-          width: 500, height: 250, link: "https://test.de");
+          width: const PagebuilderResponsiveOrConstantModel.constant(500.0),
+          height: const PagebuilderResponsiveOrConstantModel.constant(250.0),
+          link: "https://test.de");
       final expectedResult = PagebuilderVideoPlayerPropertiesModel(
-          width: 500, height: 250, link: "https://test-neu.de");
+          width: const PagebuilderResponsiveOrConstantModel.constant(500.0),
+          height: const PagebuilderResponsiveOrConstantModel.constant(250.0),
+          link: "https://test-neu.de");
       // When
       final result = model.copyWith(link: "https://test-neu.de");
       // Then
@@ -22,10 +28,12 @@ void main() {
     test("check if model is successfully converted to a map", () {
       // Given
       final model = PagebuilderVideoPlayerPropertiesModel(
-          width: 500, height: 250, link: "https://test.de");
+          width: const PagebuilderResponsiveOrConstantModel.constant(500.0),
+          height: const PagebuilderResponsiveOrConstantModel.constant(250.0),
+          link: "https://test.de");
       final expectedResult = {
-        "width": 500,
-        "height": 250,
+        "width": 500.0,
+        "height": 250.0,
         "link": "https://test.de"
       };
       // When
@@ -40,7 +48,9 @@ void main() {
       // Given
       final map = {"width": 500.0, "height": 250.0, "link": "https://test.de"};
       final expectedResult = PagebuilderVideoPlayerPropertiesModel(
-          width: 500, height: 250, link: "https://test.de");
+          width: const PagebuilderResponsiveOrConstantModel.constant(500.0),
+          height: const PagebuilderResponsiveOrConstantModel.constant(250.0),
+          link: "https://test.de");
       // When
       final result = PagebuilderVideoPlayerPropertiesModel.fromMap(map);
       // Then
@@ -54,9 +64,13 @@ void main() {
         () {
       // Given
       final model = PagebuilderVideoPlayerPropertiesModel(
-          width: 500, height: 250, link: "https://test.de");
+          width: const PagebuilderResponsiveOrConstantModel.constant(500.0),
+          height: const PagebuilderResponsiveOrConstantModel.constant(250.0),
+          link: "https://test.de");
       final expectedResult = PagebuilderVideoPlayerProperties(
-          width: 500, height: 250, link: "https://test.de");
+          width: const PagebuilderResponsiveOrConstant.constant(500.0),
+          height: const PagebuilderResponsiveOrConstant.constant(250.0),
+          link: "https://test.de");
       // When
       final result = model.toDomain();
       // Then
@@ -70,9 +84,13 @@ void main() {
         () {
       // Given
       final model = PagebuilderVideoPlayerProperties(
-          width: 500, height: 250, link: "https://test.de");
+          width: const PagebuilderResponsiveOrConstant.constant(500.0),
+          height: const PagebuilderResponsiveOrConstant.constant(250.0),
+          link: "https://test.de");
       final expectedResult = PagebuilderVideoPlayerPropertiesModel(
-          width: 500, height: 250, link: "https://test.de");
+          width: const PagebuilderResponsiveOrConstantModel.constant(500.0),
+          height: const PagebuilderResponsiveOrConstantModel.constant(250.0),
+          link: "https://test.de");
       // When
       final result = PagebuilderVideoPlayerPropertiesModel.fromDomain(model);
       // Then
@@ -84,9 +102,13 @@ void main() {
     test("check if value equality works", () {
       // Given
       final properties1 = PagebuilderVideoPlayerPropertiesModel(
-          width: 500, height: 250, link: "https://test.de");
+          width: const PagebuilderResponsiveOrConstantModel.constant(500.0),
+          height: const PagebuilderResponsiveOrConstantModel.constant(250.0),
+          link: "https://test.de");
       final properties2 = PagebuilderVideoPlayerPropertiesModel(
-          width: 500, height: 250, link: "https://test.de");
+          width: const PagebuilderResponsiveOrConstantModel.constant(500.0),
+          height: const PagebuilderResponsiveOrConstantModel.constant(250.0),
+          link: "https://test.de");
       // Then
       expect(properties1, properties2);
     });

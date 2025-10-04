@@ -8,18 +8,16 @@ class PagebuilderSizeControl extends StatelessWidget {
   final double width;
   final double height;
   final Function(Size) onChanged;
-  final bool showResponsiveButton;
-  final PagebuilderResponsiveBreakpoint? currentBreakpoint;
-  final Function(PagebuilderResponsiveBreakpoint)? onBreakpointChanged;
+  final PagebuilderResponsiveBreakpoint currentBreakpoint;
+  final Function(PagebuilderResponsiveBreakpoint) onBreakpointChanged;
 
   const PagebuilderSizeControl({
     super.key,
     required this.width,
     required this.height,
     required this.onChanged,
-    this.showResponsiveButton = false,
-    this.currentBreakpoint,
-    this.onBreakpointChanged,
+    required this.currentBreakpoint,
+    required this.onBreakpointChanged,
   });
 
   @override
@@ -30,17 +28,13 @@ class PagebuilderSizeControl extends StatelessWidget {
       Text(localization.pagebuilder_layout_menu_size_control_size,
           style: themeData.textTheme.bodySmall),
       const SizedBox(width: 8),
-      if (showResponsiveButton &&
-          currentBreakpoint != null &&
-          onBreakpointChanged != null) ...[
-        PagebuilderBreakpointSelector(
-          currentBreakpoint: currentBreakpoint!,
-          onBreakpointChanged: (breakpoint) {
-            onBreakpointChanged!(breakpoint);
-          },
-        ),
-        const SizedBox(width: 8),
-      ],
+      PagebuilderBreakpointSelector(
+        currentBreakpoint: currentBreakpoint,
+        onBreakpointChanged: (breakpoint) {
+          onBreakpointChanged(breakpoint);
+        },
+      ),
+      const SizedBox(width: 8),
       const Spacer(),
       PagebuilderNumberStepper(
           initialValue: width.toInt(),

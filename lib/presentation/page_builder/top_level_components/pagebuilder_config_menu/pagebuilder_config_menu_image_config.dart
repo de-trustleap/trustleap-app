@@ -129,7 +129,6 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
           PagebuilderSizeControl(
               width: helper.getValue(props?.width) ?? 0,
               height: helper.getValue(props?.height) ?? 0,
-              showResponsiveButton: true,
               currentBreakpoint: currentBreakpoint,
               onBreakpointChanged: (breakpoint) {
                 Modular.get<PagebuilderResponsiveBreakpointCubit>()
