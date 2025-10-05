@@ -4,11 +4,11 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_pro
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_breakpoint_selector.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_control.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_responsive_config_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_font_family_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_dropdown.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_responsive_config_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_shadow_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_text_alignment_control.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +38,6 @@ class PagebuilderConfigMenuTextConfig extends StatefulWidget {
 
 class _PagebuilderConfigMenuTextConfigState
     extends State<PagebuilderConfigMenuTextConfig> {
-  void _onBreakpointChanged(PagebuilderResponsiveBreakpoint breakpoint) {
-    Modular.get<PagebuilderResponsiveBreakpointCubit>().setBreakpoint(breakpoint);
-  }
-
   @override
   Widget build(BuildContext context) {
     final breakpointCubit = Modular.get<PagebuilderResponsiveBreakpointCubit>();
@@ -79,7 +75,13 @@ class _PagebuilderConfigMenuTextConfigState
               }
             },
             configBuilder: (props, disabled, onChangedLocal) => _buildConfigUI(
-                props, disabled, themeData, localization, onChangedLocal, helper, currentBreakpoint),
+                props,
+                disabled,
+                themeData,
+                localization,
+                onChangedLocal,
+                helper,
+                currentBreakpoint),
           );
         } else {
           return const SizedBox.shrink();
@@ -107,8 +109,7 @@ class _PagebuilderConfigMenuTextConfigState
               onChangedLocal(props?.copyWith(
                   alignment: helper.setValue(props.alignment, alignment)));
             },
-            currentBreakpoint: currentBreakpoint,
-            onBreakpointChanged: _onBreakpointChanged),
+            currentBreakpoint: currentBreakpoint),
         const SizedBox(height: 20),
         PagebuilderColorControl(
             title: localization.landingpage_pagebuilder_text_config_color,
@@ -130,7 +131,6 @@ class _PagebuilderConfigMenuTextConfigState
           const SizedBox(width: 8),
           PagebuilderBreakpointSelector(
             currentBreakpoint: currentBreakpoint,
-            onBreakpointChanged: _onBreakpointChanged,
           ),
           const Spacer(),
           PagebuilderNumberStepper(
@@ -153,8 +153,7 @@ class _PagebuilderConfigMenuTextConfigState
               onChangedLocal(props?.copyWith(
                   lineHeight: helper.setValue(props.lineHeight, lineHeight)));
             },
-            currentBreakpoint: currentBreakpoint,
-            onBreakpointChanged: _onBreakpointChanged),
+            currentBreakpoint: currentBreakpoint),
         const SizedBox(height: 20),
         PagebuilderNumberDropdown(
             title:
@@ -167,8 +166,7 @@ class _PagebuilderConfigMenuTextConfigState
                   letterSpacing:
                       helper.setValue(props.letterSpacing, letterSpacing)));
             },
-            currentBreakpoint: currentBreakpoint,
-            onBreakpointChanged: _onBreakpointChanged),
+            currentBreakpoint: currentBreakpoint),
         const SizedBox(height: 20),
         PagebuilderShadowControl(
             title: localization.landingpage_pagebuilder_text_config_shadow,

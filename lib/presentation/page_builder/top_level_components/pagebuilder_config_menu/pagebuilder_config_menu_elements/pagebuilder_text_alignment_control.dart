@@ -7,14 +7,12 @@ class PagebuilderTextAlignmentControl extends StatefulWidget {
   final TextAlign initialAlignment;
   final Function(TextAlign) onSelected;
   final PagebuilderResponsiveBreakpoint currentBreakpoint;
-  final ValueChanged<PagebuilderResponsiveBreakpoint> onBreakpointChanged;
 
   const PagebuilderTextAlignmentControl({
     super.key,
     required this.initialAlignment,
     required this.onSelected,
     required this.currentBreakpoint,
-    required this.onBreakpointChanged,
   });
 
   @override
@@ -57,7 +55,6 @@ class _PagebuilderTextAlignmentControlState
             const SizedBox(width: 8),
             PagebuilderBreakpointSelector(
               currentBreakpoint: widget.currentBreakpoint,
-              onBreakpointChanged: widget.onBreakpointChanged,
             ),
           ],
         ),

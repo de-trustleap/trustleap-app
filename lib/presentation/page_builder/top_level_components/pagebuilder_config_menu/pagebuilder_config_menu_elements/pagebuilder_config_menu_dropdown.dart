@@ -20,17 +20,16 @@ class PagebuilderConfigMenuDrowdown<T> extends StatelessWidget {
   final Function(T) onSelected;
   final bool showResponsiveButton;
   final PagebuilderResponsiveBreakpoint? currentBreakpoint;
-  final Function(PagebuilderResponsiveBreakpoint)? onBreakpointChanged;
 
-  PagebuilderConfigMenuDrowdown(
-      {super.key,
-      required this.title,
-      required this.initialValue,
-      required this.type,
-      required this.onSelected,
-      this.showResponsiveButton = false,
-      this.currentBreakpoint,
-      this.onBreakpointChanged});
+  PagebuilderConfigMenuDrowdown({
+    super.key,
+    required this.title,
+    required this.initialValue,
+    required this.type,
+    required this.onSelected,
+    this.showResponsiveButton = false,
+    this.currentBreakpoint,
+  });
 
   final contentModeValues = [BoxFit.cover, BoxFit.contain, BoxFit.fill];
   final alignmentValues = [
@@ -126,14 +125,9 @@ class PagebuilderConfigMenuDrowdown<T> extends StatelessWidget {
           ),
           const SizedBox(width: 8),
         ],
-        if (showResponsiveButton &&
-            currentBreakpoint != null &&
-            onBreakpointChanged != null) ...[
+        if (showResponsiveButton && currentBreakpoint != null) ...[
           PagebuilderBreakpointSelector(
             currentBreakpoint: currentBreakpoint!,
-            onBreakpointChanged: (breakpoint) {
-              onBreakpointChanged!(breakpoint);
-            },
           ),
           const SizedBox(width: 8),
         ],

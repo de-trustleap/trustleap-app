@@ -46,10 +46,6 @@ class PagebuilderSpacingControl extends StatelessWidget {
                 const SizedBox(width: 8),
                 PagebuilderBreakpointSelector(
                   currentBreakpoint: currentBreakpoint,
-                  onBreakpointChanged: (breakpoint) {
-                    Modular.get<PagebuilderResponsiveBreakpointCubit>()
-                        .setBreakpoint(breakpoint);
-                  },
                 ),
               ],
             ),

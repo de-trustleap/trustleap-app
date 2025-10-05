@@ -8,7 +8,6 @@ class PagebuilderNumberDropdown extends StatelessWidget {
   final List<double> numbers;
   final Function(double) onSelected;
   final PagebuilderResponsiveBreakpoint? currentBreakpoint;
-  final ValueChanged<PagebuilderResponsiveBreakpoint>? onBreakpointChanged;
 
   const PagebuilderNumberDropdown({
     super.key,
@@ -17,7 +16,6 @@ class PagebuilderNumberDropdown extends StatelessWidget {
     required this.numbers,
     required this.onSelected,
     this.currentBreakpoint,
-    this.onBreakpointChanged,
   });
 
   List<DropdownMenuEntry<double>> createDropdownEntries() {
@@ -34,11 +32,10 @@ class PagebuilderNumberDropdown extends StatelessWidget {
     final themeData = Theme.of(context);
     return Row(children: [
       Text(title, style: themeData.textTheme.bodySmall),
-      if (currentBreakpoint != null && onBreakpointChanged != null) ...[
+      if (currentBreakpoint != null) ...[
         const SizedBox(width: 8),
         PagebuilderBreakpointSelector(
           currentBreakpoint: currentBreakpoint!,
-          onBreakpointChanged: onBreakpointChanged!,
         ),
       ],
       const Spacer(),

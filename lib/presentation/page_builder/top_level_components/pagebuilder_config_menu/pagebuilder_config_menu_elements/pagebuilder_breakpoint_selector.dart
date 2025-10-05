@@ -1,14 +1,14 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderBreakpointSelector extends StatelessWidget {
   final PagebuilderResponsiveBreakpoint currentBreakpoint;
-  final ValueChanged<PagebuilderResponsiveBreakpoint> onBreakpointChanged;
 
   const PagebuilderBreakpointSelector({
     super.key,
     required this.currentBreakpoint,
-    required this.onBreakpointChanged,
   });
 
   @override
@@ -19,7 +19,10 @@ class PagebuilderBreakpointSelector extends StatelessWidget {
       initialValue: currentBreakpoint,
       icon: Icon(_getIconForBreakpoint(currentBreakpoint), size: 20),
       tooltip: _getTooltipForBreakpoint(currentBreakpoint),
-      onSelected: onBreakpointChanged,
+      onSelected: (breakpoint) {
+        Modular.get<PagebuilderResponsiveBreakpointCubit>()
+            .setBreakpoint(breakpoint);
+      },
       itemBuilder: (BuildContext context) => [
         PopupMenuItem(
           value: PagebuilderResponsiveBreakpoint.desktop,

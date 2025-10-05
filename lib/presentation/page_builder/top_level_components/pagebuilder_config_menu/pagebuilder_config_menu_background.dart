@@ -164,10 +164,6 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                 type: PagebuilderDropdownType.contentMode,
                 showResponsiveButton: true,
                 currentBreakpoint: currentBreakpoint,
-                onBreakpointChanged: (breakpoint) {
-                  Modular.get<PagebuilderResponsiveBreakpointCubit>()
-                      .setBreakpoint(breakpoint);
-                },
                 onSelected: (contentMode) {
                   final updatedContentMode = helper.setValue(
                       props?.imageProperties?.contentMode, contentMode);

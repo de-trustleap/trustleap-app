@@ -37,17 +37,13 @@ class PagebuilderConfigMenuVideoPlayerConfig extends StatelessWidget {
           final props = model.properties as PagebuilderVideoPlayerProperties;
 
           return CollapsibleTile(
-              title:
-                  localization.landingpage_pagebuilder_video_player_config_title,
+              title: localization
+                  .landingpage_pagebuilder_video_player_config_title,
               children: [
                 PagebuilderSizeControl(
                     width: helper.getValue(props.width) ?? 0,
                     height: helper.getValue(props.height) ?? 0,
                     currentBreakpoint: currentBreakpoint,
-                    onBreakpointChanged: (breakpoint) {
-                      Modular.get<PagebuilderResponsiveBreakpointCubit>()
-                          .setBreakpoint(breakpoint);
-                    },
                     onChanged: (size) {
                       final updatedProperties = props.copyWith(
                           width: helper.setValue(props.width, size.width),

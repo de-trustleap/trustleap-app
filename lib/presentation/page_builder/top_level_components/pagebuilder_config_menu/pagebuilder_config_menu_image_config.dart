@@ -92,10 +92,6 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
               type: PagebuilderDropdownType.contentMode,
               showResponsiveButton: true,
               currentBreakpoint: currentBreakpoint,
-              onBreakpointChanged: (breakpoint) {
-                Modular.get<PagebuilderResponsiveBreakpointCubit>()
-                    .setBreakpoint(breakpoint);
-              },
               onSelected: (contentMode) {
                 final updatedContentMode =
                     helper.setValue(props?.contentMode, contentMode);
@@ -130,10 +126,6 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
               width: helper.getValue(props?.width) ?? 0,
               height: helper.getValue(props?.height) ?? 0,
               currentBreakpoint: currentBreakpoint,
-              onBreakpointChanged: (breakpoint) {
-                Modular.get<PagebuilderResponsiveBreakpointCubit>()
-                    .setBreakpoint(breakpoint);
-              },
               onChanged: (size) {
                 final updatedWidth = helper.setValue(props?.width, size.width);
                 final updatedHeight =

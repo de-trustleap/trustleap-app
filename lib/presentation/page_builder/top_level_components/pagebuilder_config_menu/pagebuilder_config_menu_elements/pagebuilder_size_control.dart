@@ -9,7 +9,6 @@ class PagebuilderSizeControl extends StatelessWidget {
   final double height;
   final Function(Size) onChanged;
   final PagebuilderResponsiveBreakpoint currentBreakpoint;
-  final Function(PagebuilderResponsiveBreakpoint) onBreakpointChanged;
 
   const PagebuilderSizeControl({
     super.key,
@@ -17,7 +16,6 @@ class PagebuilderSizeControl extends StatelessWidget {
     required this.height,
     required this.onChanged,
     required this.currentBreakpoint,
-    required this.onBreakpointChanged,
   });
 
   @override
@@ -30,9 +28,6 @@ class PagebuilderSizeControl extends StatelessWidget {
       const SizedBox(width: 8),
       PagebuilderBreakpointSelector(
         currentBreakpoint: currentBreakpoint,
-        onBreakpointChanged: (breakpoint) {
-          onBreakpointChanged(breakpoint);
-        },
       ),
       const SizedBox(width: 8),
       const Spacer(),
