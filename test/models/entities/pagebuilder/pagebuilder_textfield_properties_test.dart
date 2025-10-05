@@ -11,8 +11,8 @@ void main() {
         "set minLines and textProperties with copyWith should set minLines and textProperties for resulting object",
         () {
       // Given
-      final model = PageBuilderTextFieldProperties(
-          width: 200.0,
+      const model = PageBuilderTextFieldProperties(
+          width: PagebuilderResponsiveOrConstant.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: true,
@@ -40,8 +40,8 @@ void main() {
               alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true));
-      final expectedResult = PageBuilderTextFieldProperties(
-          width: 200.0,
+      const expectedResult = PageBuilderTextFieldProperties(
+          width: PagebuilderResponsiveOrConstant.constant(200.0),
           minLines: 2,
           maxLines: 1,
           isRequired: true,
@@ -128,7 +128,7 @@ void main() {
         isItalic: false,
       );
       const original = PageBuilderTextFieldProperties(
-        width: 300.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
         minLines: 1,
         maxLines: 3,
         isRequired: true,
@@ -157,8 +157,8 @@ void main() {
   group("PagebuilderTextfieldProperties_Props", () {
     test("check if value equality works", () {
       // Given
-      final properties1 = PageBuilderTextFieldProperties(
-          width: 200.0,
+      const properties1 = PageBuilderTextFieldProperties(
+          width: PagebuilderResponsiveOrConstant.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: true,
@@ -186,8 +186,8 @@ void main() {
               alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: true));
-      final properties2 = PageBuilderTextFieldProperties(
-          width: 200.0,
+      const properties2 = PageBuilderTextFieldProperties(
+          width: PagebuilderResponsiveOrConstant.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: true,

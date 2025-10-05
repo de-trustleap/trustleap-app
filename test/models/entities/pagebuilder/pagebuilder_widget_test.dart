@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:mockito/mockito.dart';
@@ -100,8 +101,10 @@ void main() {
       final model = PageBuilderWidget(
           id: UniqueID.fromUniqueString("1"),
           elementType: PageBuilderWidgetType.icon,
-          properties: PageBuilderIconProperties(
-              code: "55", size: 24, color: Colors.black),
+          properties: const PageBuilderIconProperties(
+              code: "55",
+              size: PagebuilderResponsiveOrConstant.constant(24.0),
+              color: Colors.black),
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -126,8 +129,10 @@ void main() {
       final model = PageBuilderWidget(
           id: UniqueID.fromUniqueString("1"),
           elementType: PageBuilderWidgetType.none,
-          properties: PageBuilderIconProperties(
-              code: "55", size: 24, color: Colors.black),
+          properties: const PageBuilderIconProperties(
+              code: "55",
+              size: PagebuilderResponsiveOrConstant.constant(24.0),
+              color: Colors.black),
           hoverProperties: null,
           children: [],
           containerChild: null,

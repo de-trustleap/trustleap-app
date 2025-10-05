@@ -16,7 +16,7 @@ void main() {
       final model = PageBuilderContactFormProperties(
           email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 200.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -45,7 +45,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -74,7 +74,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -103,7 +103,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -140,7 +140,7 @@ void main() {
       final expectedResult = PageBuilderContactFormProperties(
           email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -169,7 +169,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -198,7 +198,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -227,7 +227,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -264,7 +264,7 @@ void main() {
       // When
       final result = model.copyWith(
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300.0,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -309,7 +309,7 @@ void main() {
       final properties1 = PageBuilderContactFormProperties(
           email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 200.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -338,7 +338,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -367,7 +367,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -396,7 +396,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -433,7 +433,7 @@ void main() {
       final properties2 = PageBuilderContactFormProperties(
           email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 200.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -462,7 +462,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -491,7 +491,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -520,7 +520,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,

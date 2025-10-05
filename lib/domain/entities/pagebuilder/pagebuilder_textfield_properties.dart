@@ -2,11 +2,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
 
 class PageBuilderTextFieldProperties extends Equatable
     implements PageBuilderProperties {
-  final double? width;
+  final PagebuilderResponsiveOrConstant<double>? width;
   final int? minLines;
   final int? maxLines;
   final bool? isRequired;
@@ -27,7 +28,7 @@ class PageBuilderTextFieldProperties extends Equatable
   });
 
   PageBuilderTextFieldProperties copyWith(
-      {double? width,
+      {PagebuilderResponsiveOrConstant<double>? width,
       int? minLines,
       int? maxLines,
       bool? isRequired,

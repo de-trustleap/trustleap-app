@@ -708,8 +708,8 @@ void main() {
           });
       final expectedResult = PageBuilderContactFormProperties(
           email: "test@test.de",
-          nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 200.0,
+          nameTextFieldProperties: const PageBuilderTextFieldProperties(
+              width: PagebuilderResponsiveOrConstant.constant(200.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -737,8 +737,8 @@ void main() {
                   alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                   isBold: null,
                   isItalic: null)),
-          emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 400.0,
+          emailTextFieldProperties: const PageBuilderTextFieldProperties(
+              width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -766,8 +766,8 @@ void main() {
                   alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                   isBold: null,
                   isItalic: null)),
-          phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 400.0,
+          phoneTextFieldProperties: const PageBuilderTextFieldProperties(
+              width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 1,
               maxLines: 1,
               isRequired: false,
@@ -795,8 +795,8 @@ void main() {
                   alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                   isBold: null,
                   isItalic: null)),
-          messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 400.0,
+          messageTextFieldProperties: const PageBuilderTextFieldProperties(
+              width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 4,
               maxLines: 5,
               isRequired: true,
@@ -854,8 +854,8 @@ void main() {
       // Given
       final model = PageBuilderContactFormProperties(
           email: "test@test.de",
-          nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 200.0,
+          nameTextFieldProperties: const PageBuilderTextFieldProperties(
+              width: PagebuilderResponsiveOrConstant.constant(200.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -883,8 +883,8 @@ void main() {
                   alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                   isBold: null,
                   isItalic: null)),
-          emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 400.0,
+          emailTextFieldProperties: const PageBuilderTextFieldProperties(
+              width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -912,8 +912,8 @@ void main() {
                   alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                   isBold: null,
                   isItalic: null)),
-          phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 400.0,
+          phoneTextFieldProperties: const PageBuilderTextFieldProperties(
+              width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 1,
               maxLines: 1,
               isRequired: false,
@@ -941,8 +941,8 @@ void main() {
                   alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                   isBold: null,
                   isItalic: null)),
-          messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 400.0,
+          messageTextFieldProperties: const PageBuilderTextFieldProperties(
+              width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 4,
               maxLines: 5,
               isRequired: true,
