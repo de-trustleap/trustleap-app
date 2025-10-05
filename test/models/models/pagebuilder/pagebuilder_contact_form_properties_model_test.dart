@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfiel
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
@@ -824,8 +825,8 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 70.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(70.0),
               borderRadius: 4,
               backgroundPaint: const PagebuilderPaint.color(Color(0xFF333A56)),
               textProperties: PageBuilderTextProperties(
@@ -970,8 +971,8 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 70.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(70.0),
               borderRadius: 4,
               backgroundPaint: const PagebuilderPaint.color(Color(0xFF333A56)),
               textProperties: PageBuilderTextProperties(

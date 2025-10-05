@@ -2,12 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
 
 class PageBuilderButtonPropertiesModel extends Equatable
     implements PageBuilderProperties {
-  final double? width;
-  final double? height;
+  final PagebuilderResponsiveOrConstantModel<double>? width;
+  final PagebuilderResponsiveOrConstantModel<double>? height;
   final double? borderRadius;
   final Map<String, dynamic>? backgroundPaint;
   final Map<String, dynamic>? textProperties;
@@ -22,8 +23,8 @@ class PageBuilderButtonPropertiesModel extends Equatable
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
-    if (width != null) map['width'] = width;
-    if (height != null) map['height'] = height;
+    if (width != null) map['width'] = width!.toMapValue();
+    if (height != null) map['height'] = height!.toMapValue();
     if (borderRadius != null) map['borderRadius'] = borderRadius;
     if (backgroundPaint != null) map['backgroundPaint'] = backgroundPaint;
     if (textProperties != null) map['textProperties'] = textProperties;
@@ -32,8 +33,10 @@ class PageBuilderButtonPropertiesModel extends Equatable
 
   factory PageBuilderButtonPropertiesModel.fromMap(Map<String, dynamic> map) {
     return PageBuilderButtonPropertiesModel(
-        width: map['width'] != null ? map['width'] as double : null,
-        height: map['height'] != null ? map['height'] as double : null,
+        width: PagebuilderResponsiveOrConstantModel.fromMapValue(
+            map['width'], (v) => v as double),
+        height: PagebuilderResponsiveOrConstantModel.fromMapValue(
+            map['height'], (v) => v as double),
         borderRadius:
             map['borderRadius'] != null ? map['borderRadius'] as double : null,
         backgroundPaint: map['backgroundPaint'] != null
@@ -45,8 +48,8 @@ class PageBuilderButtonPropertiesModel extends Equatable
   }
 
   PageBuilderButtonPropertiesModel copyWith({
-    double? width,
-    double? height,
+    PagebuilderResponsiveOrConstantModel<double>? width,
+    PagebuilderResponsiveOrConstantModel<double>? height,
     double? borderRadius,
     Map<String, dynamic>? backgroundPaint,
     Map<String, dynamic>? textProperties,
@@ -62,8 +65,8 @@ class PageBuilderButtonPropertiesModel extends Equatable
 
   PageBuilderButtonProperties toDomain() {
     return PageBuilderButtonProperties(
-        width: width,
-        height: height,
+        width: width?.toDomain(),
+        height: height?.toDomain(),
         borderRadius: borderRadius,
         backgroundPaint: backgroundPaint != null
             ? PagebuilderPaintModel.fromMap(backgroundPaint!).toDomain()
@@ -76,8 +79,10 @@ class PageBuilderButtonPropertiesModel extends Equatable
   factory PageBuilderButtonPropertiesModel.fromDomain(
       PageBuilderButtonProperties properties) {
     return PageBuilderButtonPropertiesModel(
-        width: properties.width,
-        height: properties.height,
+        width: PagebuilderResponsiveOrConstantModel.fromDomain(
+            properties.width),
+        height: PagebuilderResponsiveOrConstantModel.fromDomain(
+            properties.height),
         borderRadius: properties.borderRadius,
         backgroundPaint: properties.backgroundPaint != null
             ? PagebuilderPaintModel.fromDomain(properties.backgroundPaint!)

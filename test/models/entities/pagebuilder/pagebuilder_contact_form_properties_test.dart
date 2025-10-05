@@ -132,8 +132,8 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 12.0,
               backgroundPaint: null,
               textProperties: null));
@@ -256,8 +256,8 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 16,
               backgroundPaint: null,
               textProperties: null));
@@ -293,8 +293,8 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 16,
               backgroundPaint: null,
               textProperties: null));
@@ -425,8 +425,8 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 12.0,
               backgroundPaint: null,
               textProperties: null));
@@ -549,8 +549,8 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 12.0,
               backgroundPaint: null,
               textProperties: null));

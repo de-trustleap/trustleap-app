@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_b
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -106,8 +107,8 @@ void main() {
       final expectedResult = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 200.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(200.0),
               borderRadius: 12.0,
               backgroundPaint: null,
               textProperties: PageBuilderTextProperties(
@@ -136,8 +137,8 @@ void main() {
       final model = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 200.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(200.0),
               borderRadius: 12.0,
               backgroundPaint: null,
               textProperties: PageBuilderTextProperties(

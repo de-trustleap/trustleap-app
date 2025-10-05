@@ -13,8 +13,8 @@ void main() {
         () {
       // Given
       final model = PageBuilderButtonProperties(
-          width: 200.0,
-          height: 50.0,
+          width: const PagebuilderResponsiveOrConstant.constant(200.0),
+          height: const PagebuilderResponsiveOrConstant.constant(50.0),
           borderRadius: 10.0,
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
@@ -29,8 +29,8 @@ void main() {
               isBold: null,
               isItalic: true));
       final expectedResult = PageBuilderButtonProperties(
-          width: 400.0,
-          height: 50.0,
+          width: const PagebuilderResponsiveOrConstant.constant(400.0),
+          height: const PagebuilderResponsiveOrConstant.constant(50.0),
           borderRadius: 12.0,
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
@@ -45,7 +45,9 @@ void main() {
               isBold: null,
               isItalic: true));
       // When
-      final result = model.copyWith(width: 400.0, borderRadius: 12.0);
+      final result = model.copyWith(
+          width: const PagebuilderResponsiveOrConstant.constant(400.0),
+          borderRadius: 12.0);
       // Then
       expect(result, expectedResult);
     });
@@ -73,8 +75,8 @@ void main() {
       );
 
       const original = PageBuilderButtonProperties(
-        width: 200.0,
-        height: 50.0,
+        width: const PagebuilderResponsiveOrConstant.constant(200.0),
+        height: const PagebuilderResponsiveOrConstant.constant(50.0),
         borderRadius: 8.0,
         backgroundPaint: const PagebuilderPaint.color(Color(0xFF2196F3)),
         textProperties: textProperties,
@@ -97,8 +99,8 @@ void main() {
     test("check if value equality works", () {
       // Given
       final properties1 = PageBuilderButtonProperties(
-          width: 200.0,
-          height: 50.0,
+          width: const PagebuilderResponsiveOrConstant.constant(200.0),
+          height: const PagebuilderResponsiveOrConstant.constant(50.0),
           borderRadius: 10.0,
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
@@ -113,8 +115,8 @@ void main() {
               isBold: false,
               isItalic: true));
       final properties2 = PageBuilderButtonProperties(
-          width: 200.0,
-          height: 50.0,
+          width: const PagebuilderResponsiveOrConstant.constant(200.0),
+          height: const PagebuilderResponsiveOrConstant.constant(50.0),
           borderRadius: 10.0,
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(

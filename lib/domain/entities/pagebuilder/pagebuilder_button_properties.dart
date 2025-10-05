@@ -3,11 +3,12 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 class PageBuilderButtonProperties extends Equatable
     implements PageBuilderProperties {
-  final double? width;
-  final double? height;
+  final PagebuilderResponsiveOrConstant<double>? width;
+  final PagebuilderResponsiveOrConstant<double>? height;
   final double? borderRadius;
   final PagebuilderPaint? backgroundPaint;
   final PageBuilderTextProperties? textProperties;
@@ -21,8 +22,8 @@ class PageBuilderButtonProperties extends Equatable
   });
 
   PageBuilderButtonProperties copyWith({
-    double? width,
-    double? height,
+    PagebuilderResponsiveOrConstant<double>? width,
+    PagebuilderResponsiveOrConstant<double>? height,
     double? borderRadius,
     PagebuilderPaint? backgroundPaint,
     PageBuilderTextProperties? textProperties,
@@ -38,8 +39,8 @@ class PageBuilderButtonProperties extends Equatable
 
   PageBuilderButtonProperties deepCopy() {
     return PageBuilderButtonProperties(
-      width: width,
-      height: height,
+      width: width?.deepCopy(),
+      height: height?.deepCopy(),
       borderRadius: borderRadius,
       backgroundPaint: backgroundPaint?.deepCopy(),
       textProperties: textProperties?.deepCopy(),

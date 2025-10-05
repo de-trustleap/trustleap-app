@@ -16,8 +16,8 @@ void main() {
       final model = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 50.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(50.0),
               borderRadius: 10.0,
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
@@ -34,8 +34,8 @@ void main() {
       final expectedResult = PagebuilderAnchorButtonProperties(
           sectionName: "2",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 50.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(50.0),
               borderRadius: 10.0,
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
@@ -80,8 +80,8 @@ void main() {
       );
 
       final originalButtonProperties = PageBuilderButtonProperties(
-        width: 100.0,
-        height: 40.0,
+        width: const PagebuilderResponsiveOrConstant.constant(100.0),
+        height: const PagebuilderResponsiveOrConstant.constant(40.0),
         borderRadius: 4.0,
         backgroundPaint: const PagebuilderPaint.color(Colors.green),
         textProperties: originalTextProperties,
@@ -116,8 +116,8 @@ void main() {
       );
 
       final mutatedButtonProperties = PageBuilderButtonProperties(
-        width: 300.0,
-        height: 80.0,
+        width: const PagebuilderResponsiveOrConstant.constant(300.0),
+        height: const PagebuilderResponsiveOrConstant.constant(80.0),
         borderRadius: 16.0,
         backgroundPaint: const PagebuilderPaint.color(Colors.purple),
         textProperties: mutatedTextProperties,
@@ -130,8 +130,8 @@ void main() {
 
       // Then
       expect(original.sectionName, equals('original-section'));
-      expect(original.buttonProperties?.width, equals(100.0));
-      expect(original.buttonProperties?.height, equals(40.0));
+      expect(original.buttonProperties?.width, equals(const PagebuilderResponsiveOrConstant.constant(100.0)));
+      expect(original.buttonProperties?.height, equals(const PagebuilderResponsiveOrConstant.constant(40.0)));
       expect(original.buttonProperties?.borderRadius, equals(4.0));
       expect(original.buttonProperties?.backgroundPaint?.color, equals(Colors.green));
       expect(original.buttonProperties?.textProperties?.text,
@@ -143,7 +143,7 @@ void main() {
           equals(Colors.red));
 
       expect(mutatedCopy.sectionName, equals('mutated-section'));
-      expect(mutatedCopy.buttonProperties?.width, equals(300.0));
+      expect(mutatedCopy.buttonProperties?.width, equals(const PagebuilderResponsiveOrConstant.constant(300.0)));
       expect(mutatedCopy.buttonProperties?.textProperties?.text,
           equals('Mutated Text'));
       expect(mutatedCopy.buttonProperties?.textProperties?.textShadow?.color,
@@ -157,8 +157,8 @@ void main() {
       final model = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 50.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(50.0),
               borderRadius: 10.0,
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
@@ -175,8 +175,8 @@ void main() {
       final model2 = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 50.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(50.0),
               borderRadius: 10.0,
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
