@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_edit_button.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_builder.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_invisible_color_filter.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/section_max_width_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,12 +70,17 @@ class _LandingPageBuilderSectionViewState
                             .model.background?.imageProperties?.contentMode
                             ?.getValueForBreakpoint(breakpoint) ??
                         BoxFit.cover;
+                    final isVisibleOnCurrentBreakpoint =
+                        widget.model.visibleOn == null ||
+                            widget.model.visibleOn!.contains(breakpoint);
 
                     return Stack(
                       clipBehavior: Clip.none,
                       alignment: Alignment.center,
                       children: [
-                        Container(
+                        PagebuilderInvisibleColorFilter(
+                          isVisible: isVisibleOnCurrentBreakpoint,
+                          child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: widget.model.background?.backgroundPaint
@@ -89,14 +95,6 @@ class _LandingPageBuilderSectionViewState
                                   ? widget.model.background?.backgroundPaint
                                       ?.gradient
                                       ?.toFlutterGradient()
-                                  : null,
-                              border: showBorder
-                                  ? Border.all(
-                                      color: isSelected
-                                          ? themeData.colorScheme.secondary
-                                          : themeData.colorScheme.primary,
-                                      width: 2.0,
-                                    )
                                   : null,
                             ),
                             child: Stack(
@@ -199,7 +197,24 @@ class _LandingPageBuilderSectionViewState
                                         ),
                                 )
                               ],
-                            )),
+                            ),
+                          ),
+                        ),
+                        if (showBorder)
+                          Positioned.fill(
+                            child: IgnorePointer(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? themeData.colorScheme.secondary
+                                        : themeData.colorScheme.primary,
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         if (_isHovered) ...[
                           LandingPageBuilderSectionEditButton(onPressed: () {
                             Modular.get<PagebuilderSelectionCubit>()
