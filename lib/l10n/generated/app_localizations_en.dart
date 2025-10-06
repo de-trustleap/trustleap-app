@@ -2866,4 +2866,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pagebuilder_section_name_error_duplicate =>
       'Section ID already exists';
+
+  @override
+  String get pagebuilder_section_visible_on_title => 'Visible on';
+
+  @override
+  String get pagebuilder_section_visible_on_desktop => 'Desktop';
+
+  @override
+  String get pagebuilder_section_visible_on_tablet => 'Tablet';
+
+  @override
+  String get pagebuilder_section_visible_on_mobile => 'Mobile';
 }

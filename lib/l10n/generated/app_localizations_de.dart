@@ -2915,4 +2915,16 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get pagebuilder_section_name_error_duplicate =>
       'Section Name existiert bereits';
+
+  @override
+  String get pagebuilder_section_visible_on_title => 'Sichtbar auf';
+
+  @override
+  String get pagebuilder_section_visible_on_desktop => 'Desktop';
+
+  @override
+  String get pagebuilder_section_visible_on_tablet => 'Tablet';
+
+  @override
+  String get pagebuilder_section_visible_on_mobile => 'Mobile';
 }

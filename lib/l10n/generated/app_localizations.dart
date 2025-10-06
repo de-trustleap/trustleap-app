@@ -4940,6 +4940,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Section ID already exists'**
   String get pagebuilder_section_name_error_duplicate;
+
+  /// Title for section visibility configuration in Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Visible on'**
+  String get pagebuilder_section_visible_on_title;
+
+  /// Label for Desktop checkbox in section visibility configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop'**
+  String get pagebuilder_section_visible_on_desktop;
+
+  /// Label for Tablet checkbox in section visibility configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Tablet'**
+  String get pagebuilder_section_visible_on_tablet;
+
+  /// Label for Mobile checkbox in section visibility configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile'**
+  String get pagebuilder_section_visible_on_mobile;
 }
 
 class _AppLocalizationsDelegate

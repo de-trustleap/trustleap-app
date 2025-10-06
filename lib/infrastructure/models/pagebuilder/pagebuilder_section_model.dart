@@ -15,6 +15,7 @@ class PageBuilderSectionModel extends Equatable {
   final double? maxWidth;
   final bool? backgroundConstrained;
   final List<Map<String, dynamic>>? widgets;
+  final List<String>? visibleOn;
 
   const PageBuilderSectionModel({
     required this.id,
@@ -24,6 +25,7 @@ class PageBuilderSectionModel extends Equatable {
     required this.maxWidth,
     required this.backgroundConstrained,
     required this.widgets,
+    required this.visibleOn,
   });
 
   Map<String, dynamic> toMap() {
@@ -36,6 +38,7 @@ class PageBuilderSectionModel extends Equatable {
       map['backgroundConstrained'] = backgroundConstrained;
     }
     if (widgets != null) map['widgets'] = widgets;
+    if (visibleOn != null) map['visibleOn'] = visibleOn;
     return map;
   }
 
@@ -54,6 +57,9 @@ class PageBuilderSectionModel extends Equatable {
         widgets: map['widgets'] != null
             ? List<Map<String, dynamic>>.from((map['widgets'] as List)
                 .map((item) => item as Map<String, dynamic>))
+            : null,
+        visibleOn: map['visibleOn'] != null
+            ? List<String>.from(map['visibleOn'] as List)
             : null);
   }
 
@@ -65,6 +71,7 @@ class PageBuilderSectionModel extends Equatable {
     double? maxWidth,
     bool? backgroundConstrained,
     List<Map<String, dynamic>>? widgets,
+    List<String>? visibleOn,
   }) {
     return PageBuilderSectionModel(
       id: id ?? this.id,
@@ -75,6 +82,7 @@ class PageBuilderSectionModel extends Equatable {
       backgroundConstrained:
           backgroundConstrained ?? this.backgroundConstrained,
       widgets: widgets ?? this.widgets,
+      visibleOn: visibleOn ?? this.visibleOn,
     );
   }
 
@@ -91,7 +99,11 @@ class PageBuilderSectionModel extends Equatable {
             : null,
         maxWidth: maxWidth,
         backgroundConstrained: backgroundConstrained,
-        widgets: getPageBuilderWidgetList(widgets));
+        widgets: getPageBuilderWidgetList(widgets),
+        visibleOn: visibleOn
+            ?.map((breakpointName) => PagebuilderResponsiveBreakpoint.values
+                .firstWhere((e) => e.name == breakpointName))
+            .toList());
   }
 
   factory PageBuilderSectionModel.fromDomain(PageBuilderSection section) {
@@ -104,7 +116,8 @@ class PageBuilderSectionModel extends Equatable {
             : null,
         maxWidth: section.maxWidth,
         backgroundConstrained: section.backgroundConstrained,
-        widgets: getMapFromPageBuilderWidgetList(section.widgets));
+        widgets: getMapFromPageBuilderWidgetList(section.widgets),
+        visibleOn: section.visibleOn?.map((e) => e.name).toList());
   }
 
   List<PageBuilderWidget>? getPageBuilderWidgetList(
@@ -130,5 +143,5 @@ class PageBuilderSectionModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, name, layout, background, maxWidth, backgroundConstrained, widgets];
+      [id, name, layout, background, maxWidth, backgroundConstrained, widgets, visibleOn];
 }

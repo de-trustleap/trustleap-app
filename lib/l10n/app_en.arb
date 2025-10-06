@@ -3341,5 +3341,21 @@
     "pagebuilder_section_name_error_duplicate": "Section ID already exists",
     "@pagebuilder_section_name_error_duplicate": {
         "description": "Error message when section name is duplicate"
+    },
+    "pagebuilder_section_visible_on_title": "Visible on",
+    "@pagebuilder_section_visible_on_title": {
+        "description": "Title for section visibility configuration in Pagebuilder Config Menu"
+    },
+    "pagebuilder_section_visible_on_desktop": "Desktop",
+    "@pagebuilder_section_visible_on_desktop": {
+        "description": "Label for Desktop checkbox in section visibility configuration"
+    },
+    "pagebuilder_section_visible_on_tablet": "Tablet",
+    "@pagebuilder_section_visible_on_tablet": {
+        "description": "Label for Tablet checkbox in section visibility configuration"
+    },
+    "pagebuilder_section_visible_on_mobile": "Mobile",
+    "@pagebuilder_section_visible_on_mobile": {
+        "description": "Label for Mobile checkbox in section visibility configuration"
     }
 }

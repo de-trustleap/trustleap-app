@@ -3341,5 +3341,21 @@
     "pagebuilder_section_name_error_duplicate": "Section Name existiert bereits",
     "@pagebuilder_section_name_error_duplicate": {
         "description": "Fehlermeldung wenn Section Name bereits existiert"
+    },
+    "pagebuilder_section_visible_on_title": "Sichtbar auf",
+    "@pagebuilder_section_visible_on_title": {
+        "description": "Titel für die Section Sichtbarkeits-Konfiguration im Pagebuilder Config Menü"
+    },
+    "pagebuilder_section_visible_on_desktop": "Desktop",
+    "@pagebuilder_section_visible_on_desktop": {
+        "description": "Label für Desktop Checkbox in der Section Sichtbarkeits-Konfiguration"
+    },
+    "pagebuilder_section_visible_on_tablet": "Tablet",
+    "@pagebuilder_section_visible_on_tablet": {
+        "description": "Label für Tablet Checkbox in der Section Sichtbarkeits-Konfiguration"
+    },
+    "pagebuilder_section_visible_on_mobile": "Mobile",
+    "@pagebuilder_section_visible_on_mobile": {
+        "description": "Label für Mobile Checkbox in der Section Sichtbarkeits-Konfiguration"
     }
 }

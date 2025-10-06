@@ -170,7 +170,8 @@ void main() {
                         isBold: null,
                         isItalic: null),
                     hoverProperties: null)
-              ])
+              ],
+              visibleOn: null)
         ]);
     final testUser = CustomUser(id: UniqueID.fromUniqueString("2"));
     final testContent = PagebuilderContent(
@@ -360,6 +361,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       widgets: [mockColumnWidget, mockRowWidget],
+      visibleOn: null,
     );
 
     final mockPageBuilderPage = PageBuilderPage(

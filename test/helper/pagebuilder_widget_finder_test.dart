@@ -146,6 +146,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         widgets: [mockColumnWidget, mockRowWidget],
+        visibleOn: null,
       );
 
       mockPageBuilderPage = PageBuilderPage(

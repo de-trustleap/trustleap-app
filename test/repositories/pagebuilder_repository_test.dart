@@ -96,7 +96,8 @@ void main() {
                         isBold: null,
                         isItalic: null),
                     hoverProperties: null)
-              ])
+              ],
+              visibleOn: null)
         ],
         backgroundColor: null);
     test(

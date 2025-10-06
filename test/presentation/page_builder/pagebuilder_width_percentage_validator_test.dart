@@ -144,6 +144,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [rowWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
@@ -238,6 +239,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [columnWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
@@ -331,6 +333,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [rowWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
@@ -408,6 +411,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [columnWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
@@ -785,6 +789,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [rowWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
@@ -878,6 +883,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [rowWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
@@ -971,6 +977,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [rowWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
@@ -1072,6 +1079,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [rowWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
@@ -1173,6 +1181,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [rowWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
@@ -1250,6 +1259,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [columnWidget],
+          visibleOn: null,
         );
 
         final page = PageBuilderPage(
