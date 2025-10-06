@@ -1666,6 +1666,19 @@
     "@landingpage_pagebuilder_layout_menu_alignment": {
         "description": "Title alignment menu in the Pagebuilder Config Menu in the layout area"
     },
+    "landingpage_pagebuilder_layout_menu_width_percentage": "Width in %",
+    "@landingpage_pagebuilder_layout_menu_width_percentage": {
+        "description": "Title width in percent menu in the Pagebuilder Config Menu in the layout area"
+    },
+    "landingpage_pagebuilder_layout_menu_width_warning": "Sum of widths: {totalWidth}% (will be scaled to 100%)",
+    "@landingpage_pagebuilder_layout_menu_width_warning": {
+        "description": "Warning when the sum of widths exceeds 100% in the Pagebuilder Config Menu in the layout area",
+        "placeholders": {
+            "totalWidth": {
+                "type": "String"
+            }
+        }
+    },
     "landingpage_pagebuilder_layout_menu_image_control_switch": "Show pronoter image",
     "@landingpage_pagebuilder_layout_menu_image_control_switch": {
         "description": "Switch title for promoter image in pagebuilder config menu in background area"
@@ -2698,6 +2711,22 @@
     "pagebuilder_hierarchy_button_tooltip": "Show page hierarchy",
     "@pagebuilder_hierarchy_button_tooltip": {
         "description": "Button tooltip for the page hierarchy button in the Pagebuilder AppBar"
+    },
+    "pagebuilder_responsive_preview_button_tooltip": "Responsive mode",
+    "@pagebuilder_responsive_preview_button_tooltip": {
+        "description": "Button tooltip for the responsive preview button in the Pagebuilder AppBar"
+    },
+    "pagebuilder_breakpoint_desktop": "Desktop",
+    "@pagebuilder_breakpoint_desktop": {
+        "description": "Label for Desktop breakpoint in the Pagebuilder"
+    },
+    "pagebuilder_breakpoint_tablet": "Tablet",
+    "@pagebuilder_breakpoint_tablet": {
+        "description": "Label for Tablet breakpoint in the Pagebuilder"
+    },
+    "pagebuilder_breakpoint_mobile": "Mobile",
+    "@pagebuilder_breakpoint_mobile": {
+        "description": "Label for Mobile breakpoint in the Pagebuilder"
     },
     "pagebuilder_hierarchy_overlay_title": "Page structure",
     "@pagebuilder_hierarchy_overlay_title": {

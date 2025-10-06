@@ -1423,6 +1423,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_layout_menu_alignment => 'Alignment';
 
   @override
+  String get landingpage_pagebuilder_layout_menu_width_percentage =>
+      'Width in %';
+
+  @override
+  String landingpage_pagebuilder_layout_menu_width_warning(String totalWidth) {
+    return 'Sum of widths: $totalWidth% (will be scaled to 100%)';
+  }
+
+  @override
   String get landingpage_pagebuilder_layout_menu_image_control_switch =>
       'Show pronoter image';
 
@@ -2316,6 +2325,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_hierarchy_button_tooltip => 'Show page hierarchy';
+
+  @override
+  String get pagebuilder_responsive_preview_button_tooltip => 'Responsive mode';
+
+  @override
+  String get pagebuilder_breakpoint_desktop => 'Desktop';
+
+  @override
+  String get pagebuilder_breakpoint_tablet => 'Tablet';
+
+  @override
+  String get pagebuilder_breakpoint_mobile => 'Mobile';
 
   @override
   String get pagebuilder_hierarchy_overlay_title => 'Page structure';

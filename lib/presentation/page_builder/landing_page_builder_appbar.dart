@@ -41,7 +41,7 @@ class LandingPageBuilderAppBar extends StatelessWidget
             centerTitle: true,
             actions: [
               Tooltip(
-                message: "Responsiver Modus",
+                message: localization.pagebuilder_responsive_preview_button_tooltip,
                 child: Container(
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(

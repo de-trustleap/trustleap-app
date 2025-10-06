@@ -24,6 +24,7 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_co
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_footer_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_row_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_spacing_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
@@ -36,7 +37,7 @@ class PageBuilderWidgetModel extends Equatable {
   final Map<String, dynamic>? hoverProperties;
   final List<PageBuilderWidgetModel>? children;
   final PageBuilderWidgetModel? containerChild;
-  final double? widthPercentage;
+  final PagebuilderResponsiveOrConstantModel<double>? widthPercentage;
   final Map<String, dynamic>? background;
   final Map<String, dynamic>? hoverBackground;
   final Map<String, dynamic>? padding;
@@ -68,7 +69,7 @@ class PageBuilderWidgetModel extends Equatable {
       map['children'] = children!.map((child) => child.toMap()).toList();
     }
     if (containerChild != null) map['containerChild'] = containerChild!.toMap();
-    if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
+    if (widthPercentage != null) map['widthPercentage'] = widthPercentage!.toMapValue();
     if (background != null) map['background'] = background;
     if (hoverBackground != null) map['hoverBackground'] = hoverBackground;
     if (padding != null) map['padding'] = padding;
@@ -99,7 +100,8 @@ class PageBuilderWidgetModel extends Equatable {
                 map['containerChild'] as Map<String, dynamic>)
             : null,
         widthPercentage: map['widthPercentage'] != null
-            ? map['widthPercentage'] as double
+            ? PagebuilderResponsiveOrConstantModel.fromMapValue(
+                map['widthPercentage'], (v) => v as double)
             : null,
         background: map['background'] != null
             ? map['background'] as Map<String, dynamic>
@@ -122,7 +124,7 @@ class PageBuilderWidgetModel extends Equatable {
       Map<String, dynamic>? hoverProperties,
       List<PageBuilderWidgetModel>? children,
       PageBuilderWidgetModel? containerChild,
-      double? widthPercentage,
+      PagebuilderResponsiveOrConstantModel<double>? widthPercentage,
       Map<String, dynamic>? background,
       Map<String, dynamic>? hoverBackground,
       Map<String, dynamic>? padding,
@@ -156,7 +158,7 @@ class PageBuilderWidgetModel extends Equatable {
         hoverProperties: getPropertiesByType(elementType, hoverProperties),
         children: children?.map((child) => child.toDomain()).toList(),
         containerChild: containerChild?.toDomain(),
-        widthPercentage: widthPercentage,
+        widthPercentage: widthPercentage?.toDomain(),
         background: background != null
             ? PagebuilderBackgroundModel.fromMap(background!).toDomain()
             : null,
@@ -181,7 +183,10 @@ class PageBuilderWidgetModel extends Equatable {
         containerChild: widget.containerChild != null
             ? PageBuilderWidgetModel.fromDomain(widget.containerChild!)
             : null,
-        widthPercentage: widget.widthPercentage,
+        widthPercentage: widget.widthPercentage != null
+            ? PagebuilderResponsiveOrConstantModel.fromDomain(
+                widget.widthPercentage!)
+            : null,
         background: widget.background != null
             ? PagebuilderBackgroundModel.fromDomain(widget.background!).toMap()
             : null,

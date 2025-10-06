@@ -1450,6 +1450,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get landingpage_pagebuilder_layout_menu_alignment => 'Ausrichtung';
 
   @override
+  String get landingpage_pagebuilder_layout_menu_width_percentage =>
+      'Breite in %';
+
+  @override
+  String landingpage_pagebuilder_layout_menu_width_warning(String totalWidth) {
+    return 'Summe der Breiten: $totalWidth% (wird auf 100% skaliert)';
+  }
+
+  @override
   String get landingpage_pagebuilder_layout_menu_image_control_switch =>
       'Promoter Bild anzeigen';
 
@@ -2362,6 +2371,19 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get pagebuilder_hierarchy_button_tooltip =>
       'Seitenhierarchie anzeigen';
+
+  @override
+  String get pagebuilder_responsive_preview_button_tooltip =>
+      'Responsiver Modus';
+
+  @override
+  String get pagebuilder_breakpoint_desktop => 'Desktop';
+
+  @override
+  String get pagebuilder_breakpoint_tablet => 'Tablet';
+
+  @override
+  String get pagebuilder_breakpoint_mobile => 'Mobile';
 
   @override
   String get pagebuilder_hierarchy_overlay_title => 'Seitenstruktur';

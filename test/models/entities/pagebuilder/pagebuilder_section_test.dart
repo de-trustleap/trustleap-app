@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_backgrou
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderSection_CopyWith", () {
@@ -28,7 +29,7 @@ void main() {
                 hoverProperties: null,
                 children: [],
                 containerChild: null,
-                widthPercentage: 30,
+                widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
                 background: PagebuilderBackground(
                     backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
@@ -56,7 +57,7 @@ void main() {
                 hoverProperties: null,
                 children: [],
                 containerChild: null,
-                widthPercentage: 30,
+                widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
                 background: PagebuilderBackground(
                     backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
@@ -81,7 +82,7 @@ void main() {
             hoverProperties: null,
             children: [],
             containerChild: null,
-            widthPercentage: 30,
+            widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
             background: PagebuilderBackground(
                 backgroundPaint: const PagebuilderPaint.color(Colors.white),
                 imageProperties: null,
@@ -114,7 +115,7 @@ void main() {
                 hoverProperties: null,
                 children: [],
                 containerChild: null,
-                widthPercentage: 30,
+                widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
                 background: PagebuilderBackground(
                     backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
@@ -142,7 +143,7 @@ void main() {
                 hoverProperties: null,
                 children: [],
                 containerChild: null,
-                widthPercentage: 30,
+                widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
                 background: PagebuilderBackground(
                     backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,

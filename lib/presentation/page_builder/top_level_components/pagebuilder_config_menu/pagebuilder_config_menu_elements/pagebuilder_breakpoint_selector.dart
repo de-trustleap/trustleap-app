@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -14,11 +15,12 @@ class PagebuilderBreakpointSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return PopupMenuButton<PagebuilderResponsiveBreakpoint>(
       initialValue: currentBreakpoint,
       icon: Icon(_getIconForBreakpoint(currentBreakpoint), size: 20),
-      tooltip: _getTooltipForBreakpoint(currentBreakpoint),
+      tooltip: _getTooltipForBreakpoint(currentBreakpoint, localization),
       onSelected: (breakpoint) {
         Modular.get<PagebuilderResponsiveBreakpointCubit>()
             .setBreakpoint(breakpoint);
@@ -31,7 +33,7 @@ class PagebuilderBreakpointSelector extends StatelessWidget {
               Icon(Icons.desktop_windows,
                   size: 18, color: themeData.colorScheme.secondary),
               const SizedBox(width: 8),
-              const Text("Desktop"),
+              Text(localization.pagebuilder_breakpoint_desktop),
             ],
           ),
         ),
@@ -42,7 +44,7 @@ class PagebuilderBreakpointSelector extends StatelessWidget {
               Icon(Icons.tablet,
                   size: 18, color: themeData.colorScheme.secondary),
               const SizedBox(width: 8),
-              const Text("Tablet"),
+              Text(localization.pagebuilder_breakpoint_tablet),
             ],
           ),
         ),
@@ -53,7 +55,7 @@ class PagebuilderBreakpointSelector extends StatelessWidget {
               Icon(Icons.phone_android,
                   size: 18, color: themeData.colorScheme.secondary),
               const SizedBox(width: 8),
-              const Text("Mobile"),
+              Text(localization.pagebuilder_breakpoint_mobile),
             ],
           ),
         ),
@@ -72,14 +74,15 @@ class PagebuilderBreakpointSelector extends StatelessWidget {
     }
   }
 
-  String _getTooltipForBreakpoint(PagebuilderResponsiveBreakpoint breakpoint) {
+  String _getTooltipForBreakpoint(
+      PagebuilderResponsiveBreakpoint breakpoint, AppLocalizations localization) {
     switch (breakpoint) {
       case PagebuilderResponsiveBreakpoint.mobile:
-        return "Mobile";
+        return localization.pagebuilder_breakpoint_mobile;
       case PagebuilderResponsiveBreakpoint.tablet:
-        return "Tablet";
+        return localization.pagebuilder_breakpoint_tablet;
       case PagebuilderResponsiveBreakpoint.desktop:
-        return "Desktop";
+        return localization.pagebuilder_breakpoint_desktop;
     }
   }
 }

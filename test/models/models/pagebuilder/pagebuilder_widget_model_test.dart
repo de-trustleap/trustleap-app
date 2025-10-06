@@ -10,7 +10,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_pro
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 
 void main() {
   group("PagebuilderWidgetModel_CopyWith", () {
@@ -24,7 +24,7 @@ void main() {
           hoverProperties: null,
           children: null,
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30),
           background: null,
           hoverBackground: null,
           padding: null,
@@ -38,7 +38,7 @@ void main() {
           hoverProperties: null,
           children: null,
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30),
           background: null,
           hoverBackground: null,
           padding: {"top": 16, "bottom": 16, "left": 0, "right": 0},
@@ -63,7 +63,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -105,7 +105,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -131,7 +131,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -146,7 +146,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
           background: PagebuilderBackground(
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               imageProperties: null,
@@ -176,7 +176,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
           background: PagebuilderBackground(
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               imageProperties: null,
@@ -193,7 +193,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -290,7 +290,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -304,7 +304,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,

@@ -2531,6 +2531,18 @@ abstract class AppLocalizations {
   /// **'Alignment'**
   String get landingpage_pagebuilder_layout_menu_alignment;
 
+  /// Title width in percent menu in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Width in %'**
+  String get landingpage_pagebuilder_layout_menu_width_percentage;
+
+  /// Warning when the sum of widths exceeds 100% in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Sum of widths: {totalWidth}% (will be scaled to 100%)'**
+  String landingpage_pagebuilder_layout_menu_width_warning(String totalWidth);
+
   /// Switch title for promoter image in pagebuilder config menu in background area
   ///
   /// In en, this message translates to:
@@ -4040,6 +4052,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show page hierarchy'**
   String get pagebuilder_hierarchy_button_tooltip;
+
+  /// Button tooltip for the responsive preview button in the Pagebuilder AppBar
+  ///
+  /// In en, this message translates to:
+  /// **'Responsive mode'**
+  String get pagebuilder_responsive_preview_button_tooltip;
+
+  /// Label for Desktop breakpoint in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop'**
+  String get pagebuilder_breakpoint_desktop;
+
+  /// Label for Tablet breakpoint in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Tablet'**
+  String get pagebuilder_breakpoint_tablet;
+
+  /// Label for Mobile breakpoint in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile'**
+  String get pagebuilder_breakpoint_mobile;
 
   /// Title of the hierarchy overlay in the Pagebuilder
   ///

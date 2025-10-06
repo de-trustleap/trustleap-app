@@ -45,7 +45,8 @@ void main() {
           properties: PagebuilderRowProperties(
               equalHeights: null,
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center),
+              crossAxisAlignment: CrossAxisAlignment.center,
+              switchToColumnFor: null),
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -62,7 +63,8 @@ void main() {
           properties: PagebuilderRowProperties(
               equalHeights: null,
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center));
+              crossAxisAlignment: CrossAxisAlignment.center,
+              switchToColumnFor: null));
       // Then
       expect(result, expectedResult);
     });

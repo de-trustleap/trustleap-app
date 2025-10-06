@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_section_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
@@ -214,7 +215,7 @@ void main() {
                   hoverProperties: null,
                   children: null,
                   containerChild: null,
-                  widthPercentage: 50,
+                  widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
                   padding:
@@ -259,7 +260,7 @@ void main() {
                           top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                       maxWidth: null,
                       alignment: null),
-                  widthPercentage: 50,
+                  widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
                   padding:
@@ -322,7 +323,7 @@ void main() {
                   hoverProperties: null,
                   children: null,
                   containerChild: null,
-                  widthPercentage: 50,
+                  widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
                   padding:
@@ -365,7 +366,7 @@ void main() {
                       margin: null,
                       maxWidth: null,
                       alignment: null),
-                  widthPercentage: 50,
+                  widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
                   padding:

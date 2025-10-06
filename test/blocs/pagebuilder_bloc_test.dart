@@ -283,7 +283,7 @@ void main() {
         properties: mockTextProperties1,
         hoverProperties: null,
         children: [],
-        widthPercentage: 100.0,
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
         containerChild: null,
         maxWidth: null,
         alignment: null,
@@ -299,7 +299,7 @@ void main() {
         properties: mockTextProperties2,
         hoverProperties: null,
         children: [],
-        widthPercentage: 100.0,
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
         maxWidth: null,
         containerChild: null,
         alignment: null,
@@ -316,7 +316,7 @@ void main() {
         hoverProperties: null,
         children: [],
         containerChild: null,
-        widthPercentage: 100.0,
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
         maxWidth: null,
         alignment: null,
         margin: null,
@@ -331,7 +331,7 @@ void main() {
         hoverProperties: null,
         children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
         containerChild: null,
-        widthPercentage: 100.0,
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
         maxWidth: null,
         alignment: null,
         margin: null,
@@ -346,7 +346,7 @@ void main() {
         hoverProperties: null,
         children: [mockTextWidget1, mockImageWidget],
         containerChild: null,
-        widthPercentage: 100.0,
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
         maxWidth: null,
         alignment: null,
         margin: null,
@@ -387,7 +387,7 @@ void main() {
         () async {
       // Given
       final updatedWidget = mockTextWidget1.copyWith(
-        widthPercentage: 80,
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(80),
         properties: mockTextProperties1.copyWith(text: "Text3", fontSize: const PagebuilderResponsiveOrConstant.constant(30.0)),
       );
 
