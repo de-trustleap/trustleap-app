@@ -1,10 +1,12 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_breakpoint_size.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_reorder_section_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_builder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_responsive_toolbar.dart';
@@ -35,12 +37,34 @@ class _LandingPageBuilderPageBuilderState
     extends State<LandingPageBuilderPageBuilder> {
   late PagebuilderConfigMenuCubit pageBuilderMenuCubit;
   bool _isConfigMenuOpen = false;
+  List<PageBuilderSection>? _reorderedSections;
 
   @override
   void initState() {
     super.initState();
     pageBuilderMenuCubit =
         widget.configMenuCubit ?? Modular.get<PagebuilderConfigMenuCubit>();
+  }
+
+  @override
+  void didUpdateWidget(LandingPageBuilderPageBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.model.sections != widget.model.sections) {
+      _reorderedSections = null;
+    }
+  }
+
+  void _handleReorder(int oldIndex, int newIndex) {
+    final sections = _reorderedSections ?? widget.model.sections;
+    if (sections != null && sections.isNotEmpty) {
+      setState(() {
+        _reorderedSections = PagebuilderReorderSectionHelper.reorderSections(
+            sections, oldIndex, newIndex);
+      });
+
+      Modular.get<PagebuilderBloc>()
+          .add(ReorderSectionsEvent(oldIndex, newIndex));
+    }
   }
 
   @override
@@ -102,7 +126,8 @@ class _LandingPageBuilderPageBuilderState
                   bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
                   builder: (context, breakpoint) {
                     final maxWidth =
-                        PagebuilderResponsiveBreakpointSize.getWidth(breakpoint);
+                        PagebuilderResponsiveBreakpointSize.getWidth(
+                            breakpoint);
 
                     return Container(
                       color: const Color(0xFF323232),
@@ -110,20 +135,20 @@ class _LandingPageBuilderPageBuilderState
                       child: Container(
                         constraints: BoxConstraints(maxWidth: maxWidth),
                         color: widget.model.backgroundColor,
-                        child: BlocProvider(
-                          create: (context) =>
-                              Modular.get<PagebuilderHoverCubit>(),
-                          child: ListView(
-                              children: widget.model.sections != null
-                                  ? widget.model.sections!
-                                      .map((section) =>
-                                          LandingPageBuilderSectionView(
-                                            key: ValueKey(section.id.value),
-                                            model: section,
-                                          ))
-                                      .toList()
-                                  : []),
-                        ),
+                        child: ReorderableListView(
+                            onReorder: _handleReorder,
+                            children: (_reorderedSections ?? widget.model.sections) != null
+                                ? (_reorderedSections ?? widget.model.sections)!
+                                    .asMap()
+                                    .entries
+                                    .map((entry) =>
+                                        LandingPageBuilderSectionView(
+                                          key: ValueKey(entry.value.id.value),
+                                          model: entry.value,
+                                          index: entry.key,
+                                        ))
+                                    .toList()
+                                : []),
                       ),
                     );
                   },

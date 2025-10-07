@@ -36,11 +36,13 @@ class _LandingPageBuilderWidgetContainerState
     final themeData = Theme.of(context);
     final widgetID = widget.model.id.value;
     final selectionCubit = Modular.get<PagebuilderSelectionCubit>();
+    final hoverCubit = Modular.get<PagebuilderHoverCubit>();
 
     return BlocBuilder<PagebuilderSelectionCubit, String?>(
       bloc: selectionCubit,
       builder: (context, selectedWidgetId) {
         return BlocBuilder<PagebuilderHoverCubit, String?>(
+          bloc: hoverCubit,
           builder: (context, hoveredWidgetId) {
             final isHovered = hoveredWidgetId == widgetID;
             final isSelected = selectedWidgetId == widgetID;
@@ -66,14 +68,11 @@ class _LandingPageBuilderWidgetContainerState
                     widget.model.margin?.bottom?.getValueForBreakpoint(breakpoint) ?? 0),
                 child: MouseRegion(
                   onEnter: (_) {
-                    BlocProvider.of<PagebuilderHoverCubit>(context)
-                        .setHovered(widgetID);
+                    hoverCubit.setHovered(widgetID);
                   },
                   onExit: (_) {
-                    if (BlocProvider.of<PagebuilderHoverCubit>(context).state ==
-                        widgetID) {
-                      BlocProvider.of<PagebuilderHoverCubit>(context)
-                          .setHovered(null);
+                    if (hoverCubit.state == widgetID) {
+                      hoverCubit.setHovered(null);
                     }
                   },
                   child: Stack(
