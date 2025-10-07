@@ -474,10 +474,6 @@
     "@error_msg_pleace_upload_picture": {
         "description": "Fehlernachricht wenn kein Bild hochgeladen wurde."
     },
-    "menuitems_activities": "Aktivitäten",
-    "@menuitems_activities": {
-        "description": "Der Menüpunkt für die Aktivitäten"
-    },
     "auth_failure_email_already_in_use": "Die E-Mail Adresse ist bereits vergeben.",
     "@auth_failure_email_already_in_use": {
         "description": "Fehlermeldung wenn die E-Mail Adresse bereits vergeben ist."

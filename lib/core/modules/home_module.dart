@@ -1,5 +1,4 @@
 import 'package:finanzbegleiter/core/page_transitions.dart';
-import 'package:finanzbegleiter/presentation/activity_page/activity_page.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/home_page.dart';
 import 'package:finanzbegleiter/presentation/dashboard_page/dashboard_page.dart';
 import 'package:finanzbegleiter/presentation/landing_page/landing_page.dart';
@@ -83,9 +82,7 @@ class HomeModule extends Module {
             return LandingPageCreator(
                 landingPage: args?["landingPage"],
                 createDefaultPage: args?["createDefaultPage"] ?? false);
-          }),
-          ChildRoute(RoutePaths.activitiesPath,
-              child: (_) => const ActivityPage())
+          })
         ]);
     r.child("${Modular.initialRoute}${RoutePaths.landingPageBuilderPath}/:id",
         child: (_) => const LandingPageBuilderView());

@@ -5,7 +5,6 @@ enum MenuItems {
   recommendationManager("Empfehlungsmanager"),
   promoters("Promoter"),
   landingpage("Landingpage"),
-  activities("Aktivitäten"),
 
   adminCompanyRequests("Unternehmensanfragen"),
   registrationCodes("Codes"),

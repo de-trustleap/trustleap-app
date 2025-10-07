@@ -62,8 +62,6 @@ class _MenuItemState extends State<MenuItem> {
         return localization.menuitems_promoters;
       case MenuItems.landingpage:
         return localization.menuitems_landingpage;
-      case MenuItems.activities:
-        return localization.menuitems_activities;
       case MenuItems.adminCompanyRequests:
         return localization.menuitems_company_requests;
       case MenuItems.registrationCodes:

@@ -797,12 +797,6 @@ abstract class AppLocalizations {
   /// **'Please upload an image'**
   String get error_msg_pleace_upload_picture;
 
-  /// the menu entry for the activities
-  ///
-  /// In en, this message translates to:
-  /// **'Activities'**
-  String get menuitems_activities;
-
   /// error message when the email address is already taken.
   ///
   /// In en, this message translates to:

@@ -474,10 +474,6 @@
     "@error_msg_pleace_upload_picture": {
         "description": "Error message when no image has been uploaded."
     },
-    "menuitems_activities": "Activities",
-    "@menuitems_activities": {
-        "description": "the menu entry for the activities"
-    },
     "auth_failure_email_already_in_use": "The email adress is already taken.",
     "@auth_failure_email_already_in_use": {
         "description": "error message when the email address is already taken."

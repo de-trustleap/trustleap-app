@@ -44,8 +44,6 @@ class RouterObserver extends NavigatorObserver {
       menuCubit.selectMenu(MenuItems.promoters);
     } else if (path.contains(RoutePaths.landingPagePath)) {
       menuCubit.selectMenu(MenuItems.landingpage);
-    } else if (path.contains(RoutePaths.activitiesPath)) {
-      menuCubit.selectMenu(MenuItems.activities);
     } else {
       menuCubit.selectMenu(MenuItems.none);
     }

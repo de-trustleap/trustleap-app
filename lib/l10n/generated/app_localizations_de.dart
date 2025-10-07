@@ -413,9 +413,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get error_msg_pleace_upload_picture => 'Bitte ein Bild hochladen';
 
   @override
-  String get menuitems_activities => 'Aktivitäten';
-
-  @override
   String get auth_failure_email_already_in_use =>
       'Die E-Mail Adresse ist bereits vergeben.';
 

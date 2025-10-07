@@ -406,9 +406,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error_msg_pleace_upload_picture => 'Please upload an image';
 
   @override
-  String get menuitems_activities => 'Activities';
-
-  @override
   String get auth_failure_email_already_in_use =>
       'The email adress is already taken.';
 

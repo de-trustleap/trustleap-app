@@ -19,10 +19,12 @@ class AILoadingOverlay extends StatelessWidget {
         ),
         Positioned.fill(
           child: Center(
-            child: Container(
-              padding: const EdgeInsets.all(32),
-              margin: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: Container(
+                padding: const EdgeInsets.all(32),
+                margin: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
                 color: themeData.colorScheme.surface,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
@@ -55,6 +57,7 @@ class AILoadingOverlay extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ],
+              ),
               ),
             ),
           ),
