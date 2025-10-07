@@ -3,13 +3,14 @@ import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/shadow_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_shadow_model.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderCalendlyPropertiesModel extends Equatable
     implements PageBuilderProperties {
-  final double? width;
-  final double? height;
+  final PagebuilderResponsiveOrConstantModel<double>? width;
+  final PagebuilderResponsiveOrConstantModel<double>? height;
   final double? borderRadius;
   final String? calendlyEventURL;
   final String? eventTypeName;
@@ -35,8 +36,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
-    if (width != null) map['width'] = width;
-    if (height != null) map['height'] = height;
+    if (width != null) map['width'] = width!.toMapValue();
+    if (height != null) map['height'] = height!.toMapValue();
     if (borderRadius != null) map['borderRadius'] = borderRadius;
     if (calendlyEventURL != null) map['calendlyEventURL'] = calendlyEventURL;
     if (eventTypeName != null) map['eventTypeName'] = eventTypeName;
@@ -55,8 +56,10 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
 
   factory PagebuilderCalendlyPropertiesModel.fromMap(Map<String, dynamic> map) {
     return PagebuilderCalendlyPropertiesModel(
-        width: map['width'] != null ? map['width'] as double : null,
-        height: map['height'] != null ? map['height'] as double : null,
+        width: PagebuilderResponsiveOrConstantModel.fromMapValue(
+            map['width'], (v) => v as double),
+        height: PagebuilderResponsiveOrConstantModel.fromMapValue(
+            map['height'], (v) => v as double),
         borderRadius:
             map['borderRadius'] != null ? map['borderRadius'] as double : null,
         calendlyEventURL: map['calendlyEventURL'] != null
@@ -83,8 +86,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
   }
 
   PagebuilderCalendlyPropertiesModel copyWith(
-      {double? width,
-      double? height,
+      {PagebuilderResponsiveOrConstantModel<double>? width,
+      PagebuilderResponsiveOrConstantModel<double>? height,
       double? borderRadius,
       String? calendlyEventURL,
       String? eventTypeName,
@@ -110,8 +113,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
 
   PagebuilderCalendlyProperties toDomain() {
     return PagebuilderCalendlyProperties(
-        width: width,
-        height: height,
+        width: width?.toDomain(),
+        height: height?.toDomain(),
         borderRadius: borderRadius,
         calendlyEventURL: calendlyEventURL,
         eventTypeName: eventTypeName,
@@ -134,8 +137,10 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
   factory PagebuilderCalendlyPropertiesModel.fromDomain(
       PagebuilderCalendlyProperties properties) {
     return PagebuilderCalendlyPropertiesModel(
-        width: properties.width,
-        height: properties.height,
+        width: PagebuilderResponsiveOrConstantModel.fromDomain(
+            properties.width),
+        height: PagebuilderResponsiveOrConstantModel.fromDomain(
+            properties.height),
         borderRadius: properties.borderRadius,
         calendlyEventURL: properties.calendlyEventURL,
         eventTypeName: properties.eventTypeName,

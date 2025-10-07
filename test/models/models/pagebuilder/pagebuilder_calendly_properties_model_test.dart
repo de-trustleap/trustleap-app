@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_calendly_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,8 +12,8 @@ void main() {
         () {
       // Given
       const model = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -23,8 +25,8 @@ void main() {
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test2",
         eventTypeName: "Test Event 2",
@@ -47,8 +49,8 @@ void main() {
     test("set hideEventTypeDetails with copyWith should set hideEventTypeDetails for resulting object", () {
       // Given
       const model = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -60,8 +62,8 @@ void main() {
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -83,8 +85,8 @@ void main() {
     test("check if model is successfully converted to a map", () {
       // Given
       const model = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -152,8 +154,8 @@ void main() {
         "useIntrinsicHeight": false,
       };
       const expectedResult = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -199,8 +201,8 @@ void main() {
         () {
       // Given
       const model = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -212,8 +214,8 @@ void main() {
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -271,8 +273,8 @@ void main() {
         () {
       // Given
       const model = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -284,8 +286,8 @@ void main() {
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -341,8 +343,8 @@ void main() {
     test("check if value equality works", () {
       // Given
       const properties1 = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -354,8 +356,8 @@ void main() {
         shadow: null,
       );
       const properties2 = PagebuilderCalendlyPropertiesModel(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstantModel.constant(300.0),
+        height: PagebuilderResponsiveOrConstantModel.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",

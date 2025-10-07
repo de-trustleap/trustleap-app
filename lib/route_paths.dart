@@ -26,7 +26,6 @@ class RoutePaths {
   static const String editPromoterPath = "/edit-promoter";
   static const String landingPagePath = "/landingpage";
   static const String landingPageCreatorPath = "/landingpage-creator";
-  static const String activitiesPath = "/activities";
 
   static const String loginPath = "/";
   static const String registerPath = "/register";
@@ -43,7 +42,6 @@ class RoutePaths {
     MenuItems.recommendations: RoutePaths.recommendationsPath,
     MenuItems.promoters: RoutePaths.promotersPath,
     MenuItems.landingpage: RoutePaths.landingPagePath,
-    MenuItems.activities: RoutePaths.activitiesPath,
     MenuItems.adminCompanyRequests: RoutePaths.companyRequestsPath,
     MenuItems.registrationCodes: RoutePaths.registrationCodes,
     MenuItems.userFeedback: RoutePaths.userFeedback

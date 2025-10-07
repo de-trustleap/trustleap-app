@@ -4,15 +4,16 @@ import 'dart:typed_data';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
 
 class PageBuilderImageProperties extends Equatable
     implements PageBuilderProperties {
   final String? url;
   final double? borderRadius;
-  final double? width;
-  final double? height;
-  final BoxFit? contentMode;
+  final PagebuilderResponsiveOrConstant<double>? width;
+  final PagebuilderResponsiveOrConstant<double>? height;
+  final PagebuilderResponsiveOrConstant<BoxFit>? contentMode;
   final PagebuilderPaint? overlayPaint;
   final bool? showPromoterImage;
 
@@ -33,9 +34,9 @@ class PageBuilderImageProperties extends Equatable
   PageBuilderImageProperties copyWith(
       {String? url,
       double? borderRadius,
-      double? width,
-      double? height,
-      BoxFit? contentMode,
+      PagebuilderResponsiveOrConstant<double>? width,
+      PagebuilderResponsiveOrConstant<double>? height,
+      PagebuilderResponsiveOrConstant<BoxFit>? contentMode,
       PagebuilderPaint? overlayPaint,
       bool? showPromoterImage,
       Uint8List? localImage,
@@ -56,9 +57,9 @@ class PageBuilderImageProperties extends Equatable
     return PageBuilderImageProperties(
       url: url,
       borderRadius: borderRadius,
-      width: width,
-      height: height,
-      contentMode: contentMode,
+      width: width?.deepCopy(),
+      height: height?.deepCopy(),
+      contentMode: contentMode?.deepCopy(),
       overlayPaint: overlayPaint?.deepCopy(),
       showPromoterImage: showPromoterImage,
       localImage: localImage != null ? Uint8List.fromList(localImage!) : null,

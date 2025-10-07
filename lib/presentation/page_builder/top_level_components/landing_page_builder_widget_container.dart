@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_edit_button.dart';
@@ -43,15 +45,25 @@ class _LandingPageBuilderWidgetContainerState
             final isHovered = hoveredWidgetId == widgetID;
             final isSelected = selectedWidgetId == widgetID;
             final showBorder = isHovered || isSelected;
-            return Container(
+
+            return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+                PagebuilderResponsiveBreakpoint>(
+              bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+              builder: (context, breakpoint) {
+                final contentMode = widget.model.background?.imageProperties
+                        ?.contentMode
+                        ?.getValueForBreakpoint(breakpoint) ??
+                    BoxFit.cover;
+
+                return Container(
               constraints:
                   BoxConstraints(maxWidth: _getEffectiveMaxWidth(context)),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
-                    widget.model.margin?.left ?? 0,
-                    widget.model.margin?.top ?? 0,
-                    widget.model.margin?.right ?? 0,
-                    widget.model.margin?.bottom ?? 0),
+                    widget.model.margin?.left?.getValueForBreakpoint(breakpoint) ?? 0,
+                    widget.model.margin?.top?.getValueForBreakpoint(breakpoint) ?? 0,
+                    widget.model.margin?.right?.getValueForBreakpoint(breakpoint) ?? 0,
+                    widget.model.margin?.bottom?.getValueForBreakpoint(breakpoint) ?? 0),
                 child: MouseRegion(
                   onEnter: (_) {
                     BlocProvider.of<PagebuilderHoverCubit>(context)
@@ -134,9 +146,7 @@ class _LandingPageBuilderWidgetContainerState
                                   child: Image.network(
                                       widget.model.background!.imageProperties!
                                           .url!,
-                                      fit: widget.model.background
-                                              ?.imageProperties?.contentMode ??
-                                          BoxFit.cover),
+                                      fit: contentMode),
                                 ))
                               ],
                               if (widget.model.background?.imageProperties
@@ -146,9 +156,7 @@ class _LandingPageBuilderWidgetContainerState
                                   child: Container(
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                        fit: widget.model.background!
-                                                .imageProperties!.contentMode ??
-                                            BoxFit.cover,
+                                        fit: contentMode,
                                         image: MemoryImage(widget
                                             .model
                                             .background!
@@ -202,10 +210,10 @@ class _LandingPageBuilderWidgetContainerState
                                     widget.model.alignment ?? Alignment.center,
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(
-                                    widget.model.padding?.left ?? 0,
-                                    widget.model.padding?.top ?? 0,
-                                    widget.model.padding?.right ?? 0,
-                                    widget.model.padding?.bottom ?? 0,
+                                    widget.model.padding?.left?.getValueForBreakpoint(breakpoint) ?? 0,
+                                    widget.model.padding?.top?.getValueForBreakpoint(breakpoint) ?? 0,
+                                    widget.model.padding?.right?.getValueForBreakpoint(breakpoint) ?? 0,
+                                    widget.model.padding?.bottom?.getValueForBreakpoint(breakpoint) ?? 0,
                                   ),
                                   child: widget.child,
                                 ),
@@ -226,6 +234,8 @@ class _LandingPageBuilderWidgetContainerState
                   ),
                 ),
               ),
+            );
+              },
             );
           },
         );

@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_pro
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderAnchorButtonProperties_CopyWith", () {
@@ -15,13 +16,13 @@ void main() {
       final model = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 50.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(50.0),
               borderRadius: 10.0,
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
-                  fontSize: 18.0,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -33,13 +34,13 @@ void main() {
       final expectedResult = PagebuilderAnchorButtonProperties(
           sectionName: "2",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 50.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(50.0),
               borderRadius: 10.0,
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
-                  fontSize: 18.0,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -67,20 +68,20 @@ void main() {
 
       final originalTextProperties = PageBuilderTextProperties(
         text: 'Original Text',
-        fontSize: 14.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
         fontFamily: 'Roboto',
-        lineHeight: 1.2,
-        letterSpacing: 0.3,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.2),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(0.3),
         color: Colors.black,
-        alignment: TextAlign.left,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         textShadow: originalTextShadow,
         isBold: false,
         isItalic: true,
       );
 
       final originalButtonProperties = PageBuilderButtonProperties(
-        width: 100.0,
-        height: 40.0,
+        width: const PagebuilderResponsiveOrConstant.constant(100.0),
+        height: const PagebuilderResponsiveOrConstant.constant(40.0),
         borderRadius: 4.0,
         backgroundPaint: const PagebuilderPaint.color(Colors.green),
         textProperties: originalTextProperties,
@@ -103,20 +104,20 @@ void main() {
 
       final mutatedTextProperties = PageBuilderTextProperties(
         text: 'Mutated Text',
-        fontSize: 20.0,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
         fontFamily: 'Helvetica',
-        lineHeight: 2.0,
-        letterSpacing: 1.0,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(2.0),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(1.0),
         color: Colors.yellow,
-        alignment: TextAlign.right,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.right),
         textShadow: mutatedTextShadow,
         isBold: true,
         isItalic: false,
       );
 
       final mutatedButtonProperties = PageBuilderButtonProperties(
-        width: 300.0,
-        height: 80.0,
+        width: const PagebuilderResponsiveOrConstant.constant(300.0),
+        height: const PagebuilderResponsiveOrConstant.constant(80.0),
         borderRadius: 16.0,
         backgroundPaint: const PagebuilderPaint.color(Colors.purple),
         textProperties: mutatedTextProperties,
@@ -129,20 +130,20 @@ void main() {
 
       // Then
       expect(original.sectionName, equals('original-section'));
-      expect(original.buttonProperties?.width, equals(100.0));
-      expect(original.buttonProperties?.height, equals(40.0));
+      expect(original.buttonProperties?.width, equals(const PagebuilderResponsiveOrConstant.constant(100.0)));
+      expect(original.buttonProperties?.height, equals(const PagebuilderResponsiveOrConstant.constant(40.0)));
       expect(original.buttonProperties?.borderRadius, equals(4.0));
       expect(original.buttonProperties?.backgroundPaint?.color, equals(Colors.green));
       expect(original.buttonProperties?.textProperties?.text,
           equals('Original Text'));
-      expect(original.buttonProperties?.textProperties?.fontSize, equals(14.0));
+      expect(original.buttonProperties?.textProperties?.fontSize, equals(const PagebuilderResponsiveOrConstant.constant(14.0)));
       expect(original.buttonProperties?.textProperties?.color,
           equals(Colors.black));
       expect(original.buttonProperties?.textProperties?.textShadow?.color,
           equals(Colors.red));
 
       expect(mutatedCopy.sectionName, equals('mutated-section'));
-      expect(mutatedCopy.buttonProperties?.width, equals(300.0));
+      expect(mutatedCopy.buttonProperties?.width, equals(const PagebuilderResponsiveOrConstant.constant(300.0)));
       expect(mutatedCopy.buttonProperties?.textProperties?.text,
           equals('Mutated Text'));
       expect(mutatedCopy.buttonProperties?.textProperties?.textShadow?.color,
@@ -156,13 +157,13 @@ void main() {
       final model = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 50.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(50.0),
               borderRadius: 10.0,
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
-                  fontSize: 18.0,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -174,13 +175,13 @@ void main() {
       final model2 = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
-              width: 200.0,
-              height: 50.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
+              height: const PagebuilderResponsiveOrConstant.constant(50.0),
               borderRadius: 10.0,
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
-                  fontSize: 18.0,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,

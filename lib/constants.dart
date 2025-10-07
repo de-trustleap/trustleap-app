@@ -5,7 +5,6 @@ enum MenuItems {
   recommendationManager("Empfehlungsmanager"),
   promoters("Promoter"),
   landingpage("Landingpage"),
-  activities("Aktivitäten"),
 
   adminCompanyRequests("Unternehmensanfragen"),
   registrationCodes("Codes"),
@@ -90,6 +89,8 @@ enum PageBuilderWidgetType {
 enum PageBuilderSectionLayout { row, column, none }
 
 enum PageBuilderSpacingType { padding, margin }
+
+enum PagebuilderResponsiveBreakpoint { mobile, tablet, desktop }
 
 enum LegalsType { privacyPolicy, termsAndCondition, imprint }
 

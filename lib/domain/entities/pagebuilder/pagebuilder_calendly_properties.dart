@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderCalendlyProperties extends Equatable
     implements PageBuilderProperties {
-  final double? width;
-  final double? height;
+  final PagebuilderResponsiveOrConstant<double>? width;
+  final PagebuilderResponsiveOrConstant<double>? height;
   final double? borderRadius;
   final String? calendlyEventURL;
   final String? eventTypeName;
@@ -31,8 +32,8 @@ class PagebuilderCalendlyProperties extends Equatable
       required this.useIntrinsicHeight});
 
   PagebuilderCalendlyProperties copyWith(
-      {double? width,
-      double? height,
+      {PagebuilderResponsiveOrConstant<double>? width,
+      PagebuilderResponsiveOrConstant<double>? height,
       double? borderRadius,
       String? calendlyEventURL,
       String? eventTypeName,

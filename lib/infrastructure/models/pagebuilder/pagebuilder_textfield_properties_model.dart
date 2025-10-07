@@ -2,12 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfield_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
 import 'package:flutter/material.dart';
 
 class PageBuilderTextFieldPropertiesModel extends Equatable
     implements PageBuilderProperties {
-  final double? width;
+  final PagebuilderResponsiveOrConstantModel<double>? width;
   final int? minLines;
   final int? maxLines;
   final bool? isRequired;
@@ -29,7 +30,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
-    if (width != null) map['width'] = width;
+    if (width != null) map['width'] = width!.toMapValue();
     if (minLines != null) map['minLines'] = minLines;
     if (maxLines != null) map['maxLines'] = maxLines;
     if (isRequired != null) map['isRequired'] = isRequired;
@@ -45,7 +46,8 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
   factory PageBuilderTextFieldPropertiesModel.fromMap(
       Map<String, dynamic> map) {
     return PageBuilderTextFieldPropertiesModel(
-        width: map['width'] != null ? map['width'] as double : null,
+        width: PagebuilderResponsiveOrConstantModel.fromMapValue(
+            map['width'], (v) => v as double),
         minLines: map['minLines'] != null ? map['minLines'] as int : null,
         maxLines: map['maxLines'] != null ? map['maxLines'] as int : null,
         isRequired:
@@ -64,7 +66,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
   }
 
   PageBuilderTextFieldPropertiesModel copyWith({
-    double? width,
+    PagebuilderResponsiveOrConstantModel<double>? width,
     int? minLines,
     int? maxLines,
     bool? isRequired,
@@ -88,7 +90,7 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
 
   PageBuilderTextFieldProperties toDomain() {
     return PageBuilderTextFieldProperties(
-        width: width,
+        width: width?.toDomain(),
         minLines: minLines,
         maxLines: maxLines,
         isRequired: isRequired,
@@ -110,7 +112,8 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
   factory PageBuilderTextFieldPropertiesModel.fromDomain(
       PageBuilderTextFieldProperties properties) {
     return PageBuilderTextFieldPropertiesModel(
-        width: properties.width,
+        width: PagebuilderResponsiveOrConstantModel.fromDomain(
+            properties.width),
         minLines: properties.minLines,
         maxLines: properties.maxLines,
         isRequired: properties.isRequired,

@@ -26,7 +26,8 @@ class PagebuilderConfigMenuRowConfig extends StatelessWidget {
           const PagebuilderRowProperties(
               equalHeights: null,
               mainAxisAlignment: null,
-              crossAxisAlignment: null);
+              crossAxisAlignment: null,
+              switchToColumnFor: null);
 
       return CollapsibleTile(
           title: localization.landingpage_pagebuilder_row_config_row_title,
@@ -90,7 +91,8 @@ class PagebuilderConfigMenuRowConfig extends StatelessWidget {
                 PagebuilderRowProperties(
                     equalHeights: isSelected,
                     mainAxisAlignment: null,
-                    crossAxisAlignment: null));
+                    crossAxisAlignment: null,
+                    switchToColumnFor: null));
           }),
       const SizedBox(height: 20),
       PagebuilderConfigMenuDrowdown(
@@ -103,7 +105,8 @@ class PagebuilderConfigMenuRowConfig extends StatelessWidget {
                 PagebuilderRowProperties(
                     equalHeights: null,
                     mainAxisAlignment: value,
-                    crossAxisAlignment: null));
+                    crossAxisAlignment: null,
+                    switchToColumnFor: null));
           }),
       const SizedBox(height: 20),
       PagebuilderConfigMenuDrowdown(
@@ -116,7 +119,8 @@ class PagebuilderConfigMenuRowConfig extends StatelessWidget {
                 PagebuilderRowProperties(
                     equalHeights: null,
                     mainAxisAlignment: null,
-                    crossAxisAlignment: value));
+                    crossAxisAlignment: value,
+                    switchToColumnFor: null));
           }),
     ]);
   }

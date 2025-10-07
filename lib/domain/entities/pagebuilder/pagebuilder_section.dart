@@ -13,6 +13,7 @@ class PageBuilderSection extends Equatable {
   final double? maxWidth;
   final bool? backgroundConstrained;
   final List<PageBuilderWidget>? widgets;
+  final List<PagebuilderResponsiveBreakpoint>? visibleOn;
 
   const PageBuilderSection(
       {required this.id,
@@ -21,16 +22,20 @@ class PageBuilderSection extends Equatable {
       required this.widgets,
       required this.background,
       required this.maxWidth,
-      required this.backgroundConstrained});
+      required this.backgroundConstrained,
+      required this.visibleOn});
 
-  PageBuilderSection copyWith(
-      {UniqueID? id,
-      String? name,
-      PageBuilderSectionLayout? layout,
-      List<PageBuilderWidget>? widgets,
-      PagebuilderBackground? background,
-      double? maxWidth,
-      bool? backgroundConstrained}) {
+  PageBuilderSection copyWith({
+    UniqueID? id,
+    String? name,
+    PageBuilderSectionLayout? layout,
+    List<PageBuilderWidget>? widgets,
+    PagebuilderBackground? background,
+    double? maxWidth,
+    bool? backgroundConstrained,
+    List<PagebuilderResponsiveBreakpoint>? visibleOn,
+    bool updateVisibleOn = false,
+  }) {
     return PageBuilderSection(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -39,10 +44,20 @@ class PageBuilderSection extends Equatable {
         background: background ?? this.background,
         maxWidth: maxWidth ?? this.maxWidth,
         backgroundConstrained:
-            backgroundConstrained ?? this.backgroundConstrained);
+            backgroundConstrained ?? this.backgroundConstrained,
+        visibleOn:
+            updateVisibleOn ? visibleOn : (visibleOn ?? this.visibleOn));
   }
 
   @override
-  List<Object?> get props =>
-      [id, name, layout, background, maxWidth, backgroundConstrained, widgets];
+  List<Object?> get props => [
+        id,
+        name,
+        layout,
+        background,
+        maxWidth,
+        backgroundConstrained,
+        widgets,
+        visibleOn
+      ];
 }

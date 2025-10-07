@@ -2,13 +2,38 @@ import 'package:flutter_test/flutter_test.dart';
 import "package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart";
 import "package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart";
 import "package:flutter/material.dart";
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:finanzbegleiter/constants.dart';
+
+class TextStyleParserTestModule extends Module {
+  final PagebuilderResponsiveBreakpointCubit breakpointCubit;
+
+  TextStyleParserTestModule(this.breakpointCubit);
+
+  @override
+  void binds(i) {
+    i.addInstance<PagebuilderResponsiveBreakpointCubit>(breakpointCubit);
+  }
+
+  @override
+  void routes(r) {}
+}
 
 void main() {
   group("TextStyleParser Tests", () {
     late TextStyleParser textStyleParser;
+    late PagebuilderResponsiveBreakpointCubit breakpointCubit;
 
     setUp(() {
       textStyleParser = TextStyleParser();
+      breakpointCubit = PagebuilderResponsiveBreakpointCubit();
+      Modular.init(TextStyleParserTestModule(breakpointCubit));
+    });
+
+    tearDown(() {
+      Modular.destroy();
     });
 
     test("Should return default TextStyle when properties is null", () {
@@ -24,13 +49,13 @@ void main() {
         () {
       final properties = PageBuilderTextProperties(
         text: "Test",
-        fontSize: 14,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
         fontFamily: "Roboto",
-        lineHeight: 1.5,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
         letterSpacing: null,
         textShadow: null,
         color: Colors.black,
-        alignment: TextAlign.left,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         isBold: true,
         isItalic: false,
       );
@@ -47,13 +72,13 @@ void main() {
         () {
       final properties = PageBuilderTextProperties(
         text: "Test",
-        fontSize: 12,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
         fontFamily: "Arial",
-        lineHeight: 1.2,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.2),
         letterSpacing: null,
         textShadow: null,
         color: Colors.blue,
-        alignment: TextAlign.center,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
         isBold: false,
         isItalic: true,
       );
@@ -71,13 +96,13 @@ void main() {
         () {
       final properties = PageBuilderTextProperties(
         text: "Test",
-        fontSize: 16,
+        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
         fontFamily: "Times New Roman",
-        lineHeight: 1.4,
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.4),
         letterSpacing: null,
         textShadow: null,
         color: Colors.red,
-        alignment: TextAlign.right,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.right),
         isBold: false,
         isItalic: false,
       );

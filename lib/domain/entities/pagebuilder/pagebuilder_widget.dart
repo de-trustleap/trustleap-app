@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class PageBuilderWidget extends Equatable {
   final PageBuilderProperties? hoverProperties;
   final List<PageBuilderWidget>? children;
   final PageBuilderWidget? containerChild;
-  final double? widthPercentage;
+  final PagebuilderResponsiveOrConstant<double>? widthPercentage;
   final PagebuilderBackground? background;
   final PagebuilderBackground? hoverBackground;
   final PageBuilderSpacing? padding;
@@ -46,7 +47,7 @@ class PageBuilderWidget extends Equatable {
       PageBuilderProperties? hoverProperties,
       List<PageBuilderWidget>? children,
       PageBuilderWidget? containerChild,
-      double? widthPercentage,
+      PagebuilderResponsiveOrConstant<double>? widthPercentage,
       PagebuilderBackground? background,
       PagebuilderBackground? hoverBackground,
       PageBuilderSpacing? padding,

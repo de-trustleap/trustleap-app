@@ -8,7 +8,9 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 
 void main() {
   group("PagebuilderWidgetModel_CopyWith", () {
@@ -22,7 +24,7 @@ void main() {
           hoverProperties: null,
           children: null,
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30),
           background: null,
           hoverBackground: null,
           padding: null,
@@ -36,7 +38,7 @@ void main() {
           hoverProperties: null,
           children: null,
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30),
           background: null,
           hoverBackground: null,
           padding: {"top": 16, "bottom": 16, "left": 0, "right": 0},
@@ -61,7 +63,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -103,7 +105,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -129,7 +131,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -144,14 +146,14 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
           background: PagebuilderBackground(
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               imageProperties: null,
               overlayPaint: null),
           hoverBackground: null,
-          padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
-          margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+          padding: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
+          margin: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
           maxWidth: 300,
           alignment: null);
       // When
@@ -174,13 +176,13 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30,
+          widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
           background: PagebuilderBackground(
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               imageProperties: null,
               overlayPaint: null),
           hoverBackground: null,
-          padding: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+          padding: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
           margin: null,
           maxWidth: 300,
           alignment: null);
@@ -191,7 +193,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -232,13 +234,13 @@ void main() {
           alignment: null);
       final expectedResult = PageBuilderTextProperties(
           text: "Test",
-          fontSize: 16,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: null,
-          alignment: TextAlign.left,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
           isBold: true,
           isItalic: null);
       // When
@@ -253,13 +255,13 @@ void main() {
       // Given
       final properties = PageBuilderTextProperties(
           text: "Test",
-          fontSize: 16,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
           fontFamily: "Poppins",
-          lineHeight: 1.5,
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           color: null,
-          alignment: TextAlign.left,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
           isBold: true,
           isItalic: null);
       final expectedResult = {
@@ -277,18 +279,6 @@ void main() {
     });
   });
 
-  group("PagebuilderWidgetModel_GetMapFromPadding", () {
-    test("check if returns correct map from padding", () {
-      // Given
-      final padding =
-          PageBuilderSpacing(top: 12.0, bottom: 12.0, left: 12.0, right: 16.0);
-      final expectedResult = {"top": 12, "bottom": 12, "left": 12, "right": 16};
-      // When
-      final result = PageBuilderWidgetModel.getMapFromPadding(padding);
-      // Then
-      expect(result, expectedResult);
-    });
-  });
 
   group("PagebuilderWidgetModel_Props", () {
     test("check if value equality works", () {
@@ -300,7 +290,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,
@@ -314,7 +304,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 30.0,
+          widthPercentage: const PagebuilderResponsiveOrConstantModel.constant(30.0),
           background: {"backgroundPaint": {"color": "FFFFFFFF"}},
           hoverBackground: null,
           padding: null,

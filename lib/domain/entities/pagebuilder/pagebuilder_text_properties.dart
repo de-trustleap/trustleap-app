@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +8,12 @@ import 'package:flutter/material.dart';
 class PageBuilderTextProperties extends Equatable
     implements PageBuilderProperties {
   final String? text;
-  final double? fontSize;
+  final PagebuilderResponsiveOrConstant<double>? fontSize;
   final String? fontFamily;
-  final double? lineHeight;
-  final double? letterSpacing;
+  final PagebuilderResponsiveOrConstant<double>? lineHeight;
+  final PagebuilderResponsiveOrConstant<double>? letterSpacing;
   final Color? color;
-  final TextAlign? alignment;
+  final PagebuilderResponsiveOrConstant<TextAlign>? alignment;
   final PageBuilderShadow? textShadow;
   final bool? isBold;
   final bool? isItalic;
@@ -31,12 +32,12 @@ class PageBuilderTextProperties extends Equatable
 
   PageBuilderTextProperties copyWith(
       {String? text,
-      double? fontSize,
+      PagebuilderResponsiveOrConstant<double>? fontSize,
       String? fontFamily,
-      double? lineHeight,
-      double? letterSpacing,
+      PagebuilderResponsiveOrConstant<double>? lineHeight,
+      PagebuilderResponsiveOrConstant<double>? letterSpacing,
       Color? color,
-      TextAlign? alignment,
+      PagebuilderResponsiveOrConstant<TextAlign>? alignment,
       PageBuilderShadow? textShadow,
       bool? isBold,
       bool? isItalic}) {

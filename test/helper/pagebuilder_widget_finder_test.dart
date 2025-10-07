@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_fin
 import 'package:finanzbegleiter/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group('PagebuilderWidgetFinder_findWidgetById', () {
@@ -28,11 +29,11 @@ void main() {
 
       final mockTextProperties1 = PageBuilderTextProperties(
           text: "Text 1",
-          fontSize: 16.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
           fontFamily: "TestFont",
           color: Colors.black,
-          alignment: TextAlign.left,
-          lineHeight: 1.5,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           isBold: null,
@@ -40,11 +41,11 @@ void main() {
 
       final mockTextProperties2 = PageBuilderTextProperties(
           text: "Text 2",
-          fontSize: 18.0,
+          fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
           fontFamily: "TestFont",
           color: Colors.red,
-          alignment: TextAlign.center,
-          lineHeight: 1.5,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
           textShadow: null,
           isBold: null,
@@ -53,11 +54,11 @@ void main() {
       final mockImageProperties = PageBuilderImageProperties(
           url: "https://example.com/image.png",
           borderRadius: 10.0,
-          width: 100.0,
-          height: 150.0,
+          width: const PagebuilderResponsiveOrConstant.constant(100.0),
+          height: const PagebuilderResponsiveOrConstant.constant(150.0),
           localImage: Uint8List(0),
           showPromoterImage: false,
-          contentMode: BoxFit.cover,
+          contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
           overlayPaint: null);
 
       final mockTextWidget1 = PageBuilderWidget(
@@ -68,13 +69,13 @@ void main() {
           properties: mockTextProperties1,
           hoverProperties: null,
           children: [],
-          widthPercentage: 100.0,
+          widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
           containerChild: null,
           maxWidth: null,
           alignment: null,
           margin: null,
           padding:
-              PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+              const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(8.0), bottom: PagebuilderResponsiveOrConstant.constant(8.0), left: PagebuilderResponsiveOrConstant.constant(5.0), right: PagebuilderResponsiveOrConstant.constant(5.0)));
 
       final mockTextWidget2 = PageBuilderWidget(
           id: UniqueID.fromUniqueString("widget2"),
@@ -84,13 +85,13 @@ void main() {
           properties: mockTextProperties2,
           hoverProperties: null,
           children: [],
-          widthPercentage: 100.0,
+          widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
           maxWidth: null,
           containerChild: null,
           alignment: null,
           margin: null,
           padding:
-              PageBuilderSpacing(top: 8.0, bottom: 8.0, left: 5.0, right: 5.0));
+              const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(8.0), bottom: PagebuilderResponsiveOrConstant.constant(8.0), left: PagebuilderResponsiveOrConstant.constant(5.0), right: PagebuilderResponsiveOrConstant.constant(5.0)));
 
       final mockImageWidget = PageBuilderWidget(
           id: UniqueID.fromUniqueString("widget3"),
@@ -101,7 +102,7 @@ void main() {
           hoverProperties: null,
           children: [],
           containerChild: null,
-          widthPercentage: 100.0,
+          widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
           maxWidth: null,
           alignment: null,
           margin: null,
@@ -116,7 +117,7 @@ void main() {
           hoverProperties: null,
           children: [mockTextWidget1, mockTextWidget2, mockImageWidget],
           containerChild: null,
-          widthPercentage: 100.0,
+          widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
           maxWidth: null,
           alignment: null,
           margin: null,
@@ -131,7 +132,7 @@ void main() {
           hoverProperties: null,
           children: [mockTextWidget1, mockImageWidget],
           containerChild: null,
-          widthPercentage: 100.0,
+          widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
           maxWidth: null,
           alignment: null,
           margin: null,
@@ -145,6 +146,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         widgets: [mockColumnWidget, mockRowWidget],
+        visibleOn: null,
       );
 
       mockPageBuilderPage = PageBuilderPage(
@@ -184,7 +186,7 @@ void main() {
         properties: null,
         hoverProperties: null,
         containerChild: mockPageBuilderPage.sections![0].widgets![0],
-        widthPercentage: 100.0,
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
         maxWidth: null,
         alignment: null,
         margin: null,

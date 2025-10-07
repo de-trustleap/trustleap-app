@@ -21,7 +21,8 @@ void main() {
                 widgets: [],
                 background: null,
                 maxWidth: 300,
-                backgroundConstrained: null)
+                backgroundConstrained: null,
+                visibleOn: null)
           ],
           backgroundColor: Colors.red);
       final expectedResult = PageBuilderPage(
@@ -48,7 +49,8 @@ void main() {
                 widgets: [],
                 background: null,
                 maxWidth: 300,
-                backgroundConstrained: null)
+                backgroundConstrained: null,
+                visibleOn: null)
           ],
           backgroundColor: Colors.red);
 
@@ -62,7 +64,8 @@ void main() {
                 widgets: [],
                 background: null,
                 maxWidth: 300,
-                backgroundConstrained: null)
+                backgroundConstrained: null,
+                visibleOn: null)
           ],
           backgroundColor: Colors.red);
       // Then

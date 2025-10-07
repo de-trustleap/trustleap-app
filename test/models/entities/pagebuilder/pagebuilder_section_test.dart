@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_backgrou
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderSection_CopyWith", () {
@@ -28,7 +29,7 @@ void main() {
                 hoverProperties: null,
                 children: [],
                 containerChild: null,
-                widthPercentage: 30,
+                widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
                 background: PagebuilderBackground(
                     backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
@@ -41,7 +42,8 @@ void main() {
           ],
           background: null,
           maxWidth: 300,
-          backgroundConstrained: null);
+          backgroundConstrained: null,
+          visibleOn: null);
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
@@ -56,7 +58,7 @@ void main() {
                 hoverProperties: null,
                 children: [],
                 containerChild: null,
-                widthPercentage: 30,
+                widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
                 background: PagebuilderBackground(
                     backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
@@ -69,7 +71,8 @@ void main() {
           ],
           background: null,
           maxWidth: 400,
-          backgroundConstrained: null);
+          backgroundConstrained: null,
+          visibleOn: null);
       // When
       final result = section.copyWith(maxWidth: 400, widgets: [
         PageBuilderWidget(
@@ -81,7 +84,7 @@ void main() {
             hoverProperties: null,
             children: [],
             containerChild: null,
-            widthPercentage: 30,
+            widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
             background: PagebuilderBackground(
                 backgroundPaint: const PagebuilderPaint.color(Colors.white),
                 imageProperties: null,
@@ -114,7 +117,7 @@ void main() {
                 hoverProperties: null,
                 children: [],
                 containerChild: null,
-                widthPercentage: 30,
+                widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
                 background: PagebuilderBackground(
                     backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
@@ -127,7 +130,8 @@ void main() {
           ],
           background: null,
           maxWidth: 300,
-          backgroundConstrained: null);
+          backgroundConstrained: null,
+          visibleOn: null);
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
@@ -142,7 +146,7 @@ void main() {
                 hoverProperties: null,
                 children: [],
                 containerChild: null,
-                widthPercentage: 30,
+                widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
                 background: PagebuilderBackground(
                     backgroundPaint: const PagebuilderPaint.color(Colors.white),
                     imageProperties: null,
@@ -155,7 +159,8 @@ void main() {
           ],
           background: null,
           maxWidth: 300,
-          backgroundConstrained: null);
+          backgroundConstrained: null,
+          visibleOn: null);
       // Then
       expect(section1, section2);
     });

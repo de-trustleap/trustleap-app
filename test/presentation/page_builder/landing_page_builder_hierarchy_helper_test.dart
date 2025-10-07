@@ -68,6 +68,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         widgets: [testWidget],
+        visibleOn: null,
       );
 
       testPage = PageBuilderPage(
@@ -146,6 +147,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [parentWidget],
+          visibleOn: null,
         );
 
         final pageWithNested = PageBuilderPage(
@@ -208,6 +210,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [containerWidget],
+          visibleOn: null,
         );
 
         final pageWithContainer = PageBuilderPage(
@@ -319,6 +322,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [parentWidget],
+          visibleOn: null,
         );
 
         final pageWithNested = PageBuilderPage(
@@ -381,6 +385,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [containerWidget],
+          visibleOn: null,
         );
 
         final pageWithContainer = PageBuilderPage(
@@ -468,6 +473,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [topWidget],
+          visibleOn: null,
         );
 
         final deepPage = PageBuilderPage(
@@ -500,6 +506,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [testPage.sections![0].widgets![0]], // Use existing widget
+          visibleOn: null,
         );
 
         final section2 = PageBuilderSection(
@@ -510,6 +517,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [],
+          visibleOn: null,
         );
 
         final multiSectionPage = PageBuilderPage(
@@ -572,6 +580,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
           widgets: [widget1, widget2],
+          visibleOn: null,
         );
 
         final testPage = PageBuilderPage(

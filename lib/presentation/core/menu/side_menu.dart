@@ -81,14 +81,7 @@ class SideMenu extends StatelessWidget {
               type: MenuItems.landingpage,
               isCollapsed: collapsed,
               animationController: animationController),
-          const SizedBox(height: 28),
         ],
-        MenuItem(
-            path: RoutePaths.activitiesPath,
-            icon: Icons.history,
-            type: MenuItems.activities,
-            isCollapsed: collapsed,
-            animationController: animationController),
         const SizedBox(height: 56),
         AnimatedOpacity(
             opacity: shouldShowThemeSwitcher ? 1.0 : 0,

@@ -3,12 +3,14 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_section_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderSectionModel_CopyWith", () {
@@ -21,14 +23,14 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 300, backgroundConstrained: null,
-          widgets: []);
+          widgets: [], visibleOn: null);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           name: "Test Section",
           layout: "column",
           background: null,
           maxWidth: 500, backgroundConstrained: null,
-          widgets: []);
+          widgets: [], visibleOn: null);
       // When
       final result = section.copyWith(maxWidth: 500);
       // Then
@@ -45,7 +47,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 300, backgroundConstrained: null,
-          widgets: []);
+          widgets: [], visibleOn: null);
       final expectedResult = {
         "id": "1",
         "name": "Test Section",
@@ -76,7 +78,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 300, backgroundConstrained: null,
-          widgets: []);
+          widgets: [], visibleOn: null);
       // When
       final result = PageBuilderSectionModel.fromMap(map);
       // Then
@@ -95,14 +97,15 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 800, backgroundConstrained: null,
-          widgets: []);
+          widgets: [], visibleOn: null);
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
           layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
-          maxWidth: 800, backgroundConstrained: null);
+          maxWidth: 800, backgroundConstrained: null,
+          visibleOn: null);
       // When
       final result = model.toDomain();
       // Then
@@ -121,14 +124,15 @@ void main() {
           layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
-          maxWidth: 800, backgroundConstrained: null);
+          maxWidth: 800, backgroundConstrained: null,
+          visibleOn: null);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           name: "Test Section",
           layout: "column",
           background: null,
           maxWidth: 800, backgroundConstrained: null,
-          widgets: []);
+          widgets: [], visibleOn: null);
       // When
       final result = PageBuilderSectionModel.fromDomain(model);
       // Then
@@ -205,21 +209,21 @@ void main() {
                       url:
                           "https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/landingPageContentImages%2FL9SPWUuY7mJKWUaX16Xt%2F4ce25fce-242b-471b-8a25-83e920e95e8d?alt=media&token=3c7bdc32-f607-4eee-923f-41410591d1d0",
                       borderRadius: 100,
-                      width: 200,
-                      height: 200,
-                      contentMode: BoxFit.cover,
+                      width: const PagebuilderResponsiveOrConstant.constant(200),
+                      height: const PagebuilderResponsiveOrConstant.constant(200),
+                      contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
                       overlayPaint: null,
                       showPromoterImage: false),
                   hoverProperties: null,
                   children: null,
                   containerChild: null,
-                  widthPercentage: 50,
+                  widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
                   padding:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(16)),
                   margin:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   maxWidth: null,
                   alignment: null),
               PageBuilderWidget(
@@ -237,13 +241,13 @@ void main() {
                       properties: PageBuilderTextProperties(
                           text:
                               "Du wurdest positiv von Max Mustermann\nweiterempfohlen.\nMax möchte, dass wir uns kennenlernen.",
-                          fontSize: 18,
+                          fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                           fontFamily: "Merriweather",
                           lineHeight: null,
                           letterSpacing: null,
                           textShadow: null,
                           color: Color(0xFFFFFFFF),
-                          alignment: TextAlign.left,
+                          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                           isBold: null,
                           isItalic: true),
                       hoverProperties: null,
@@ -252,19 +256,19 @@ void main() {
                       widthPercentage: null,
                       background: null,
                       hoverBackground: null,
-                      padding: PageBuilderSpacing(
-                          top: 20, bottom: 20, left: 20, right: 20),
-                      margin: PageBuilderSpacing(
-                          top: 0, bottom: 0, left: 0, right: 0),
+                      padding: const PageBuilderSpacing(
+                          top: PagebuilderResponsiveOrConstant.constant(20), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
+                      margin: const PageBuilderSpacing(
+                          top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                       maxWidth: null,
                       alignment: null),
-                  widthPercentage: 50,
+                  widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
                   padding:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   margin:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   maxWidth: null,
                   alignment: null)
             ],
@@ -273,8 +277,8 @@ void main() {
             background: null,
             hoverBackground: null,
             padding:
-                PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
-            margin: PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(40), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
+            margin: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
             maxWidth: 950,
             alignment: null)
       ];
@@ -284,7 +288,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 800, backgroundConstrained: null,
-          widgets: widgets);
+          widgets: widgets, visibleOn: null);
       // When
       final result = model.getPageBuilderWidgetList(widgets);
       // Then
@@ -313,19 +317,19 @@ void main() {
                       url:
                           "https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/landingPageContentImages%2FL9SPWUuY7mJKWUaX16Xt%2F4ce25fce-242b-471b-8a25-83e920e95e8d?alt=media&token=3c7bdc32-f607-4eee-923f-41410591d1d0",
                       borderRadius: 100,
-                      width: 200,
-                      height: 200,
-                      contentMode: BoxFit.cover,
+                      width: const PagebuilderResponsiveOrConstant.constant(200),
+                      height: const PagebuilderResponsiveOrConstant.constant(200),
+                      contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
                       overlayPaint: null,
                       showPromoterImage: false),
                   hoverProperties: null,
                   children: null,
                   containerChild: null,
-                  widthPercentage: 50,
+                  widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
                   padding:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 16),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(16)),
                   margin: null,
                   maxWidth: null,
                   alignment: null),
@@ -344,13 +348,13 @@ void main() {
                       properties: PageBuilderTextProperties(
                           text:
                               "Du wurdest positiv von Max Mustermann\nweiterempfohlen.\nMax möchte, dass wir uns kennenlernen.",
-                          fontSize: 18,
+                          fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
                           fontFamily: "Merriweather",
                           lineHeight: null,
                           letterSpacing: null,
                           textShadow: null,
                           color: Color(0xFFFFFFFF),
-                          alignment: TextAlign.left,
+                          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
                           isBold: null,
                           isItalic: true),
                       hoverProperties: null,
@@ -359,16 +363,16 @@ void main() {
                       widthPercentage: null,
                       background: null,
                       hoverBackground: null,
-                      padding: PageBuilderSpacing(
-                          top: 20, bottom: 20, left: 20, right: 20),
+                      padding: const PageBuilderSpacing(
+                          top: PagebuilderResponsiveOrConstant.constant(20), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
                       margin: null,
                       maxWidth: null,
                       alignment: null),
-                  widthPercentage: 50,
+                  widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
                   padding:
-                      PageBuilderSpacing(top: 0, bottom: 0, left: 0, right: 0),
+                      const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   margin: null,
                   maxWidth: null,
                   alignment: null)
@@ -378,7 +382,7 @@ void main() {
             background: null,
             hoverBackground: null,
             padding:
-                PageBuilderSpacing(top: 40, bottom: 20, left: 20, right: 20),
+                const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(40), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
             margin: null,
             maxWidth: 950,
             alignment: null)
@@ -450,14 +454,16 @@ void main() {
           layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
-          maxWidth: 800, backgroundConstrained: null);
+          maxWidth: 800, backgroundConstrained: null,
+          visibleOn: null);
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
           layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
-          maxWidth: 800, backgroundConstrained: null);
+          maxWidth: 800, backgroundConstrained: null,
+          visibleOn: null);
       // Then
       expect(section1, section2);
     });

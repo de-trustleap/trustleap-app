@@ -11,7 +11,6 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -25,7 +24,9 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_co
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_footer_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_row_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_spacing_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_video_player_properties_model.dart';
 
@@ -36,7 +37,7 @@ class PageBuilderWidgetModel extends Equatable {
   final Map<String, dynamic>? hoverProperties;
   final List<PageBuilderWidgetModel>? children;
   final PageBuilderWidgetModel? containerChild;
-  final double? widthPercentage;
+  final PagebuilderResponsiveOrConstantModel<double>? widthPercentage;
   final Map<String, dynamic>? background;
   final Map<String, dynamic>? hoverBackground;
   final Map<String, dynamic>? padding;
@@ -68,7 +69,7 @@ class PageBuilderWidgetModel extends Equatable {
       map['children'] = children!.map((child) => child.toMap()).toList();
     }
     if (containerChild != null) map['containerChild'] = containerChild!.toMap();
-    if (widthPercentage != null) map['widthPercentage'] = widthPercentage;
+    if (widthPercentage != null) map['widthPercentage'] = widthPercentage!.toMapValue();
     if (background != null) map['background'] = background;
     if (hoverBackground != null) map['hoverBackground'] = hoverBackground;
     if (padding != null) map['padding'] = padding;
@@ -99,7 +100,8 @@ class PageBuilderWidgetModel extends Equatable {
                 map['containerChild'] as Map<String, dynamic>)
             : null,
         widthPercentage: map['widthPercentage'] != null
-            ? map['widthPercentage'] as double
+            ? PagebuilderResponsiveOrConstantModel.fromMapValue(
+                map['widthPercentage'], (v) => v as double)
             : null,
         background: map['background'] != null
             ? map['background'] as Map<String, dynamic>
@@ -122,7 +124,7 @@ class PageBuilderWidgetModel extends Equatable {
       Map<String, dynamic>? hoverProperties,
       List<PageBuilderWidgetModel>? children,
       PageBuilderWidgetModel? containerChild,
-      double? widthPercentage,
+      PagebuilderResponsiveOrConstantModel<double>? widthPercentage,
       Map<String, dynamic>? background,
       Map<String, dynamic>? hoverBackground,
       Map<String, dynamic>? padding,
@@ -156,15 +158,15 @@ class PageBuilderWidgetModel extends Equatable {
         hoverProperties: getPropertiesByType(elementType, hoverProperties),
         children: children?.map((child) => child.toDomain()).toList(),
         containerChild: containerChild?.toDomain(),
-        widthPercentage: widthPercentage,
+        widthPercentage: widthPercentage?.toDomain(),
         background: background != null
             ? PagebuilderBackgroundModel.fromMap(background!).toDomain()
             : null,
         hoverBackground: hoverBackground != null
             ? PagebuilderBackgroundModel.fromMap(hoverBackground!).toDomain()
             : null,
-        padding: PageBuilderSpacing.fromMap(padding),
-        margin: PageBuilderSpacing.fromMap(margin),
+        padding: PageBuilderSpacingModel.fromMap(padding).toDomain(),
+        margin: PageBuilderSpacingModel.fromMap(margin).toDomain(),
         maxWidth: maxWidth,
         alignment: AlignmentMapper.getAlignmentFromString(alignment));
   }
@@ -181,7 +183,10 @@ class PageBuilderWidgetModel extends Equatable {
         containerChild: widget.containerChild != null
             ? PageBuilderWidgetModel.fromDomain(widget.containerChild!)
             : null,
-        widthPercentage: widget.widthPercentage,
+        widthPercentage: widget.widthPercentage != null
+            ? PagebuilderResponsiveOrConstantModel.fromDomain(
+                widget.widthPercentage!)
+            : null,
         background: widget.background != null
             ? PagebuilderBackgroundModel.fromDomain(widget.background!).toMap()
             : null,
@@ -189,8 +194,8 @@ class PageBuilderWidgetModel extends Equatable {
             ? PagebuilderBackgroundModel.fromDomain(widget.hoverBackground!)
                 .toMap()
             : null,
-        padding: getMapFromPadding(widget.padding),
-        margin: getMapFromPadding(widget.margin),
+        padding: PageBuilderSpacingModel.fromDomain(widget.padding).toMap(),
+        margin: PageBuilderSpacingModel.fromDomain(widget.margin).toMap(),
         maxWidth: widget.maxWidth,
         alignment: AlignmentMapper.getStringFromAlignment(widget.alignment));
   }
@@ -270,26 +275,6 @@ class PageBuilderWidgetModel extends Equatable {
           .toMap();
     } else {
       return null;
-    }
-  }
-
-  static Map<String, dynamic>? getMapFromPadding(PageBuilderSpacing? padding) {
-    if (padding == null) {
-      return null;
-    }
-    Map<String, dynamic> map = {};
-    if (padding.top != null && padding.top != 0) map['top'] = padding.top;
-    if (padding.bottom != null && padding.bottom != 0) {
-      map['bottom'] = padding.bottom;
-    }
-    if (padding.left != null && padding.left != 0) map['left'] = padding.left;
-    if (padding.right != null && padding.right != 0) {
-      map['right'] = padding.right;
-    }
-    if (map.isEmpty) {
-      return null;
-    } else {
-      return map;
     }
   }
 

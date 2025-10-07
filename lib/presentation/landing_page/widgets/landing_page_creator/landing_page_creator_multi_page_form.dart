@@ -11,7 +11,7 @@ import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_error_view.dart';
-import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/ai_loading_overlay.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_overlay.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_first_step.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_progress_indicator.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_creator_second_step.dart';
@@ -293,7 +293,12 @@ class _LandingPageCreatorMultiPageFormState
                         child: FormErrorView(message: errorMessage))
                   ]
                 ]),
-                if (isAIGenerating) const AILoadingOverlay(),
+                if (isAIGenerating)
+                  LoadingOverlay(
+                    title: localization.landingpage_creator_ai_loading_subtitle,
+                    subtitle:
+                        localization.landingpage_creator_ai_loading_subtitle2,
+                  ),
               ],
             );
           },

@@ -1,13 +1,17 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_responsive_config_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_shadow_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_switch_control.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
@@ -26,37 +30,52 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
     final properties = model.properties as PagebuilderCalendlyProperties;
     final localization = AppLocalizations.of(context);
 
-    return CollapsibleTile(
-        title: localization.pagebuilder_calendly_config_title,
-        children: [
-          PagebuilderNumberStepperControl(
-            title: localization.pagebuilder_calendly_config_width,
-            initialValue: properties.width?.toInt() ?? 300,
-            minValue: 100,
-            maxValue: 1000,
-            onSelected: (value) {
-              updateCalendlyProperties(
-                properties.copyWith(width: value.toDouble()),
-                pagebuilderCubit,
-              );
-            },
-          ),
-          const SizedBox(height: 16),
-          if (!(properties.useIntrinsicHeight ?? false)) ...[
-            PagebuilderNumberStepperControl(
-              title: localization.pagebuilder_calendly_config_height,
-              initialValue: properties.height?.toInt() ?? 200,
-              minValue: 100,
-              maxValue: 800,
-              onSelected: (value) {
-                updateCalendlyProperties(
-                  properties.copyWith(height: value.toDouble()),
-                  pagebuilderCubit,
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-          ],
+    return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+        PagebuilderResponsiveBreakpoint>(
+      bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+      builder: (context, currentBreakpoint) {
+        final helper = PagebuilderResponsiveConfigHelper(currentBreakpoint);
+
+        return CollapsibleTile(
+            title: localization.pagebuilder_calendly_config_title,
+            children: [
+              PagebuilderNumberStepperControl(
+                title: localization.pagebuilder_calendly_config_width,
+                initialValue: helper.getValue(properties.width)?.toInt() ?? 300,
+                minValue: 100,
+                maxValue: 1000,
+                showResponsiveButton: true,
+                currentBreakpoint: currentBreakpoint,
+                onSelected: (value) {
+                  final updatedWidth =
+                      helper.setValue(properties.width, value.toDouble());
+                  updateCalendlyProperties(
+                    properties.copyWith(width: updatedWidth),
+                    pagebuilderCubit,
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+              if (!(properties.useIntrinsicHeight ?? false)) ...[
+                PagebuilderNumberStepperControl(
+                  title: localization.pagebuilder_calendly_config_height,
+                  initialValue:
+                      helper.getValue(properties.height)?.toInt() ?? 200,
+                  minValue: 100,
+                  maxValue: 800,
+                  showResponsiveButton: true,
+                  currentBreakpoint: currentBreakpoint,
+                  onSelected: (value) {
+                    final updatedHeight =
+                        helper.setValue(properties.height, value.toDouble());
+                    updateCalendlyProperties(
+                      properties.copyWith(height: updatedHeight),
+                      pagebuilderCubit,
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+              ],
           PagebuilderSwitchControl(
             title: localization.pagebuilder_calendly_config_dynamic_height,
             isActive: properties.useIntrinsicHeight ?? false,
@@ -130,5 +149,7 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
             },
           ),
         ]);
+      },
+    );
   }
 }

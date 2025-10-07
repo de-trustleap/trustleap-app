@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,8 +10,8 @@ void main() {
         () {
       // Given
       const model = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -22,8 +23,8 @@ void main() {
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test2",
         eventTypeName: "Test Event 2",
@@ -46,8 +47,8 @@ void main() {
     test("set hideEventTypeDetails with copyWith should set hideEventTypeDetails for resulting object", () {
       // Given
       const model = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -59,8 +60,8 @@ void main() {
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -80,8 +81,8 @@ void main() {
     test("set colors with copyWith should set colors for resulting object", () {
       // Given
       const model = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -93,8 +94,8 @@ void main() {
         shadow: null,
       );
       const expectedResult = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -120,8 +121,8 @@ void main() {
     test("check if value equality works", () {
       // Given
       const properties1 = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",
@@ -133,8 +134,8 @@ void main() {
         shadow: null,
       );
       const properties2 = PagebuilderCalendlyProperties(
-        width: 300.0,
-        height: 200.0,
+        width: PagebuilderResponsiveOrConstant.constant(300.0),
+        height: PagebuilderResponsiveOrConstant.constant(200.0),
         borderRadius: 8.0,
         calendlyEventURL: "https://calendly.com/test",
         eventTypeName: "Test Event",

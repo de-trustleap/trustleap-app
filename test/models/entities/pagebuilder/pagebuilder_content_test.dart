@@ -26,7 +26,8 @@ void main() {
                     widgets: [],
                     background: null,
                     maxWidth: 300,
-                    backgroundConstrained: null)
+                    backgroundConstrained: null,
+                    visibleOn: null)
               ],
               backgroundColor: Colors.red),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
@@ -42,7 +43,8 @@ void main() {
                     widgets: [],
                     background: null,
                     maxWidth: 500,
-                    backgroundConstrained: null)
+                    backgroundConstrained: null,
+                    visibleOn: null)
               ],
               backgroundColor: Colors.red),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
@@ -58,7 +60,8 @@ void main() {
                   widgets: [],
                   background: null,
                   maxWidth: 500,
-                  backgroundConstrained: null)
+                  backgroundConstrained: null,
+                  visibleOn: null)
             ],
             backgroundColor: Colors.red),
       );
@@ -82,7 +85,8 @@ void main() {
                     widgets: [],
                     background: null,
                     maxWidth: 300,
-                    backgroundConstrained: null)
+                    backgroundConstrained: null,
+                    visibleOn: null)
               ],
               backgroundColor: Colors.red),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
@@ -98,7 +102,8 @@ void main() {
                     widgets: [],
                     background: null,
                     maxWidth: 300,
-                    backgroundConstrained: null)
+                    backgroundConstrained: null,
+                    visibleOn: null)
               ],
               backgroundColor: Colors.red),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));

@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant_extensions.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class PagebuilderFooterView extends StatelessWidget {
                     style: parser.getTextStyleFromProperties(
                         properties.privacyPolicyTextProperties),
                     textAlign:
-                        properties.privacyPolicyTextProperties?.alignment ??
+                        properties.privacyPolicyTextProperties?.alignment?.getValue() ??
                             TextAlign.center)
               ],
               if (properties.impressumTextProperties != null) ...[
@@ -38,7 +39,7 @@ class PagebuilderFooterView extends StatelessWidget {
                 Text(properties.impressumTextProperties?.text ?? "",
                     style: parser.getTextStyleFromProperties(
                         properties.impressumTextProperties),
-                    textAlign: properties.impressumTextProperties?.alignment ??
+                    textAlign: properties.impressumTextProperties?.alignment?.getValue() ??
                         TextAlign.center),
               ],
               if (properties.initialInformationTextProperties != null) ...[
@@ -51,7 +52,7 @@ class PagebuilderFooterView extends StatelessWidget {
                     style: parser.getTextStyleFromProperties(
                         properties.initialInformationTextProperties),
                     textAlign: properties
-                            .initialInformationTextProperties?.alignment ??
+                            .initialInformationTextProperties?.alignment?.getValue() ??
                         TextAlign.center),
               ],
               if (properties.termsAndConditionsTextProperties != null) ...[
@@ -64,7 +65,7 @@ class PagebuilderFooterView extends StatelessWidget {
                     style: parser.getTextStyleFromProperties(
                         properties.termsAndConditionsTextProperties),
                     textAlign: properties
-                            .termsAndConditionsTextProperties?.alignment ??
+                            .termsAndConditionsTextProperties?.alignment?.getValue() ??
                         TextAlign.center),
               ]
             ]));

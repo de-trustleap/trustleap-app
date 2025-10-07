@@ -474,10 +474,6 @@
     "@error_msg_pleace_upload_picture": {
         "description": "Error message when no image has been uploaded."
     },
-    "menuitems_activities": "Activities",
-    "@menuitems_activities": {
-        "description": "the menu entry for the activities"
-    },
     "auth_failure_email_already_in_use": "The email adress is already taken.",
     "@auth_failure_email_already_in_use": {
         "description": "error message when the email address is already taken."
@@ -1666,6 +1662,19 @@
     "@landingpage_pagebuilder_layout_menu_alignment": {
         "description": "Title alignment menu in the Pagebuilder Config Menu in the layout area"
     },
+    "landingpage_pagebuilder_layout_menu_width_percentage": "Width in %",
+    "@landingpage_pagebuilder_layout_menu_width_percentage": {
+        "description": "Title width in percent menu in the Pagebuilder Config Menu in the layout area"
+    },
+    "landingpage_pagebuilder_layout_menu_width_warning": "Sum of widths: {totalWidth}% (will be scaled to 100%)",
+    "@landingpage_pagebuilder_layout_menu_width_warning": {
+        "description": "Warning when the sum of widths exceeds 100% in the Pagebuilder Config Menu in the layout area",
+        "placeholders": {
+            "totalWidth": {
+                "type": "String"
+            }
+        }
+    },
     "landingpage_pagebuilder_layout_menu_image_control_switch": "Show pronoter image",
     "@landingpage_pagebuilder_layout_menu_image_control_switch": {
         "description": "Switch title for promoter image in pagebuilder config menu in background area"
@@ -2163,6 +2172,14 @@
     "send_recommendation_alert_title": "Recommendation sent?",
     "@send_recommendation_alert_title": {
         "description": "Title of the alert to confirm whether you have sent a recommendation."
+    },
+    "save_recommendation_loading_title": "Save recommendation",
+    "@save_recommendation_loading_title": {
+        "description": "Title of the loading dialog when saving a recommendation"
+    },
+    "save_recommendation_loading_subtitle": "The recommendation is being saved",
+    "@save_recommendation_loading_subtitle": {
+        "description": "Subtitle of the loading dialog when saving a recommendation"
     },
     "send_recommendation_alert_description": "Did you successfully send the recommendation to {receiver}? The link in the recommendation will only become valid once you confirm it here.",
     "@send_recommendation_alert_description": {
@@ -2698,6 +2715,22 @@
     "pagebuilder_hierarchy_button_tooltip": "Show page hierarchy",
     "@pagebuilder_hierarchy_button_tooltip": {
         "description": "Button tooltip for the page hierarchy button in the Pagebuilder AppBar"
+    },
+    "pagebuilder_responsive_preview_button_tooltip": "Responsive mode",
+    "@pagebuilder_responsive_preview_button_tooltip": {
+        "description": "Button tooltip for the responsive preview button in the Pagebuilder AppBar"
+    },
+    "pagebuilder_breakpoint_desktop": "Desktop",
+    "@pagebuilder_breakpoint_desktop": {
+        "description": "Label for Desktop breakpoint in the Pagebuilder"
+    },
+    "pagebuilder_breakpoint_tablet": "Tablet",
+    "@pagebuilder_breakpoint_tablet": {
+        "description": "Label for Tablet breakpoint in the Pagebuilder"
+    },
+    "pagebuilder_breakpoint_mobile": "Mobile",
+    "@pagebuilder_breakpoint_mobile": {
+        "description": "Label for Mobile breakpoint in the Pagebuilder"
     },
     "pagebuilder_hierarchy_overlay_title": "Page structure",
     "@pagebuilder_hierarchy_overlay_title": {
@@ -3312,5 +3345,21 @@
     "pagebuilder_section_name_error_duplicate": "Section ID already exists",
     "@pagebuilder_section_name_error_duplicate": {
         "description": "Error message when section name is duplicate"
+    },
+    "pagebuilder_section_visible_on_title": "Visible on",
+    "@pagebuilder_section_visible_on_title": {
+        "description": "Title for section visibility configuration in Pagebuilder Config Menu"
+    },
+    "pagebuilder_section_visible_on_desktop": "Desktop",
+    "@pagebuilder_section_visible_on_desktop": {
+        "description": "Label for Desktop checkbox in section visibility configuration"
+    },
+    "pagebuilder_section_visible_on_tablet": "Tablet",
+    "@pagebuilder_section_visible_on_tablet": {
+        "description": "Label for Tablet checkbox in section visibility configuration"
+    },
+    "pagebuilder_section_visible_on_mobile": "Mobile",
+    "@pagebuilder_section_visible_on_mobile": {
+        "description": "Label for Mobile checkbox in section visibility configuration"
     }
 }

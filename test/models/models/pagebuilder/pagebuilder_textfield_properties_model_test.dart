@@ -1,7 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_textfield_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfield_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,8 +12,8 @@ void main() {
         "set backgroundColor with copyWith should set backgroundColor for resulting object",
         () {
       // Given
-      final model = PageBuilderTextFieldPropertiesModel(
-          width: 200.0,
+      const model = PageBuilderTextFieldPropertiesModel(
+          width: PagebuilderResponsiveOrConstantModel.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,
@@ -27,8 +29,8 @@ void main() {
             "fontSize": 14.0,
             "fontFamily": "Poppins"
           });
-      final expectedResult = PageBuilderTextFieldPropertiesModel(
-          width: 200.0,
+      const expectedResult = PageBuilderTextFieldPropertiesModel(
+          width: PagebuilderResponsiveOrConstantModel.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,
@@ -54,8 +56,8 @@ void main() {
   group("PagebuilderTextfieldPropertiesModel_ToMap", () {
     test("check if model is successfully converted to a map", () {
       // Given
-      final model = PageBuilderTextFieldPropertiesModel(
-          width: 200.0,
+      const model = PageBuilderTextFieldPropertiesModel(
+          width: PagebuilderResponsiveOrConstantModel.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,
@@ -115,8 +117,8 @@ void main() {
           "fontFamily": "Poppins"
         }
       };
-      final expectedResult = PageBuilderTextFieldPropertiesModel(
-          width: 200.0,
+      const expectedResult = PageBuilderTextFieldPropertiesModel(
+          width: PagebuilderResponsiveOrConstantModel.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,
@@ -144,8 +146,8 @@ void main() {
         "check if conversion from PagebuilderTextfieldPropertiesModel to PagebuilderTextfieldProperties works",
         () {
       // Given
-      final model = PageBuilderTextFieldPropertiesModel(
-          width: 200.0,
+      const model = PageBuilderTextFieldPropertiesModel(
+          width: PagebuilderResponsiveOrConstantModel.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,
@@ -161,8 +163,8 @@ void main() {
             "fontSize": 14.0,
             "fontFamily": "Poppins"
           });
-      final expectedResult = PageBuilderTextFieldProperties(
-          width: 200.0,
+      const expectedResult = PageBuilderTextFieldProperties(
+          width: PagebuilderResponsiveOrConstant.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,
@@ -170,24 +172,24 @@ void main() {
           borderColor: null,
           placeHolderTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null));
       // When
@@ -202,8 +204,8 @@ void main() {
         "check if conversion from PagebuilderTextfieldProperties to PagebuilderTextfieldPropertiesModel works",
         () {
       // Given
-      final model = PageBuilderTextFieldProperties(
-          width: 200.0,
+      const model = PageBuilderTextFieldProperties(
+          width: PagebuilderResponsiveOrConstant.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,
@@ -211,28 +213,28 @@ void main() {
           borderColor: null,
           placeHolderTextProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null),
           textProperties: PageBuilderTextProperties(
               text: "Test",
-              fontSize: 14.0,
+              fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
               fontFamily: "Poppins",
               lineHeight: null,
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: TextAlign.left,
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
               isBold: null,
               isItalic: null));
-      final expectedResult = PageBuilderTextFieldPropertiesModel(
-          width: 200.0,
+      const expectedResult = PageBuilderTextFieldPropertiesModel(
+          width: PagebuilderResponsiveOrConstantModel.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,
@@ -260,8 +262,8 @@ void main() {
   group("PagebuilderTextfieldPropertiesModel_Props", () {
     test("check if value equality works", () {
       // Given
-      final properties1 = PageBuilderTextFieldPropertiesModel(
-          width: 200.0,
+      const properties1 = PageBuilderTextFieldPropertiesModel(
+          width: PagebuilderResponsiveOrConstantModel.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,
@@ -279,8 +281,8 @@ void main() {
             "fontFamily": "Poppins",
             "alignment": "left"
           });
-      final properties2 = PageBuilderTextFieldPropertiesModel(
-          width: 200.0,
+      const properties2 = PageBuilderTextFieldPropertiesModel(
+          width: PagebuilderResponsiveOrConstantModel.constant(200.0),
           minLines: 1,
           maxLines: 1,
           isRequired: false,

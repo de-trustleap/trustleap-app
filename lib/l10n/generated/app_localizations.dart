@@ -797,12 +797,6 @@ abstract class AppLocalizations {
   /// **'Please upload an image'**
   String get error_msg_pleace_upload_picture;
 
-  /// the menu entry for the activities
-  ///
-  /// In en, this message translates to:
-  /// **'Activities'**
-  String get menuitems_activities;
-
   /// error message when the email address is already taken.
   ///
   /// In en, this message translates to:
@@ -2531,6 +2525,18 @@ abstract class AppLocalizations {
   /// **'Alignment'**
   String get landingpage_pagebuilder_layout_menu_alignment;
 
+  /// Title width in percent menu in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Width in %'**
+  String get landingpage_pagebuilder_layout_menu_width_percentage;
+
+  /// Warning when the sum of widths exceeds 100% in the Pagebuilder Config Menu in the layout area
+  ///
+  /// In en, this message translates to:
+  /// **'Sum of widths: {totalWidth}% (will be scaled to 100%)'**
+  String landingpage_pagebuilder_layout_menu_width_warning(String totalWidth);
+
   /// Switch title for promoter image in pagebuilder config menu in background area
   ///
   /// In en, this message translates to:
@@ -3265,6 +3271,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recommendation sent?'**
   String get send_recommendation_alert_title;
+
+  /// Title of the loading dialog when saving a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Save recommendation'**
+  String get save_recommendation_loading_title;
+
+  /// Subtitle of the loading dialog when saving a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'The recommendation is being saved'**
+  String get save_recommendation_loading_subtitle;
 
   /// Description of the alert to confirm whether you have sent a recommendation.
   ///
@@ -4040,6 +4058,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show page hierarchy'**
   String get pagebuilder_hierarchy_button_tooltip;
+
+  /// Button tooltip for the responsive preview button in the Pagebuilder AppBar
+  ///
+  /// In en, this message translates to:
+  /// **'Responsive mode'**
+  String get pagebuilder_responsive_preview_button_tooltip;
+
+  /// Label for Desktop breakpoint in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop'**
+  String get pagebuilder_breakpoint_desktop;
+
+  /// Label for Tablet breakpoint in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Tablet'**
+  String get pagebuilder_breakpoint_tablet;
+
+  /// Label for Mobile breakpoint in the Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile'**
+  String get pagebuilder_breakpoint_mobile;
 
   /// Title of the hierarchy overlay in the Pagebuilder
   ///
@@ -4904,6 +4946,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Section ID already exists'**
   String get pagebuilder_section_name_error_duplicate;
+
+  /// Title for section visibility configuration in Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Visible on'**
+  String get pagebuilder_section_visible_on_title;
+
+  /// Label for Desktop checkbox in section visibility configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop'**
+  String get pagebuilder_section_visible_on_desktop;
+
+  /// Label for Tablet checkbox in section visibility configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Tablet'**
+  String get pagebuilder_section_visible_on_tablet;
+
+  /// Label for Mobile checkbox in section visibility configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile'**
+  String get pagebuilder_section_visible_on_mobile;
 }
 
 class _AppLocalizationsDelegate

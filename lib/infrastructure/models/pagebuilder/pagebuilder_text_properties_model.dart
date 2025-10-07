@@ -3,19 +3,21 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/shadow_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_shadow_model.dart';
 import 'package:flutter/material.dart';
 
 class PageBuilderTextPropertiesModel extends Equatable
     implements PageBuilderProperties {
   final String? text;
-  final double? fontSize;
+  final PagebuilderResponsiveOrConstantModel<double>? fontSize;
   final String? fontFamily;
-  final double? lineHeight;
-  final double? letterSpacing;
+  final PagebuilderResponsiveOrConstantModel<double>? lineHeight;
+  final PagebuilderResponsiveOrConstantModel<double>? letterSpacing;
   final String? color;
-  final String? alignment;
+  final PagebuilderResponsiveOrConstantModel<String>? alignment;
   final Map<String, dynamic>? textShadow;
   final bool? isBold;
   final bool? isItalic;
@@ -35,12 +37,14 @@ class PageBuilderTextPropertiesModel extends Equatable
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
     if (text != null) map['text'] = text;
-    if (fontSize != null) map['fontSize'] = fontSize;
+    if (fontSize != null) map['fontSize'] = fontSize!.toMapValue();
     if (fontFamily != null) map['fontFamily'] = fontFamily;
-    if (lineHeight != null) map['lineHeight'] = lineHeight;
-    if (letterSpacing != null) map['letterSpacing'] = letterSpacing;
+    if (lineHeight != null) map['lineHeight'] = lineHeight!.toMapValue();
+    if (letterSpacing != null) {
+      map['letterSpacing'] = letterSpacing!.toMapValue();
+    }
     if (color != null) map['color'] = color;
-    if (alignment != null) map['alignment'] = alignment;
+    if (alignment != null) map['alignment'] = alignment!.toMapValue();
     if (textShadow != null) map['textShadow'] = textShadow;
     if (isBold != null) map['isBold'] = isBold;
     if (isItalic != null) map['isItalic'] = isItalic;
@@ -50,16 +54,25 @@ class PageBuilderTextPropertiesModel extends Equatable
   factory PageBuilderTextPropertiesModel.fromMap(Map<String, dynamic> map) {
     return PageBuilderTextPropertiesModel(
         text: map['text'] != null ? map['text'] as String : null,
-        fontSize: map['fontSize'] != null ? map['fontSize'] as double : null,
+        fontSize: PagebuilderResponsiveOrConstantModel.fromMapValue(
+          map['fontSize'],
+          (v) => v as double,
+        ),
         fontFamily:
             map['fontFamily'] != null ? map['fontFamily'] as String : null,
-        lineHeight:
-            map['lineHeight'] != null ? map['lineHeight'] as double : null,
-        letterSpacing: map['letterSpacing'] != null
-            ? map['letterSpacing'] as double
-            : null,
+        lineHeight: PagebuilderResponsiveOrConstantModel.fromMapValue(
+          map['lineHeight'],
+          (v) => v as double,
+        ),
+        letterSpacing: PagebuilderResponsiveOrConstantModel.fromMapValue(
+          map['letterSpacing'],
+          (v) => v as double,
+        ),
         color: map['color'] != null ? map['color'] as String : null,
-        alignment: map['alignment'] != null ? map['alignment'] as String : null,
+        alignment: PagebuilderResponsiveOrConstantModel.fromMapValue(
+          map['alignment'],
+          (v) => v as String,
+        ) ?? const PagebuilderResponsiveOrConstantModel.constant("left"),
         textShadow: map['textShadow'] != null
             ? map['textShadow'] as Map<String, dynamic>
             : null,
@@ -69,12 +82,12 @@ class PageBuilderTextPropertiesModel extends Equatable
 
   PageBuilderTextPropertiesModel copyWith(
       {String? text,
-      double? fontSize,
+      PagebuilderResponsiveOrConstantModel<double>? fontSize,
       String? fontFamily,
-      double? lineHeight,
-      double? letterSpacing,
+      PagebuilderResponsiveOrConstantModel<double>? lineHeight,
+      PagebuilderResponsiveOrConstantModel<double>? letterSpacing,
       String? color,
-      String? alignment,
+      PagebuilderResponsiveOrConstantModel<String>? alignment,
       Map<String, dynamic>? textShadow,
       bool? isBold,
       bool? isItalic}) {
@@ -94,14 +107,14 @@ class PageBuilderTextPropertiesModel extends Equatable
   PageBuilderTextProperties toDomain() {
     return PageBuilderTextProperties(
         text: text,
-        fontSize: fontSize,
+        fontSize: fontSize?.toDomain(),
         fontFamily: fontFamily,
-        lineHeight: lineHeight,
-        letterSpacing: letterSpacing,
+        lineHeight: lineHeight?.toDomain(),
+        letterSpacing: letterSpacing?.toDomain(),
         color: color != null
             ? Color(ColorUtility.getHexIntFromString(color!))
             : null,
-        alignment: getTextAlignFromString(alignment),
+        alignment: _alignmentToDomain(alignment),
         textShadow: textShadow != null
             ? PageBuilderShadowModel.fromMap(textShadow!).toDomain()
             : null,
@@ -109,21 +122,73 @@ class PageBuilderTextPropertiesModel extends Equatable
         isItalic: isItalic);
   }
 
+  PagebuilderResponsiveOrConstant<TextAlign>? _alignmentToDomain(
+      PagebuilderResponsiveOrConstantModel<String>? alignmentModel) {
+    if (alignmentModel == null) return null;
+
+    if (alignmentModel.constantValue != null) {
+      return PagebuilderResponsiveOrConstant.constant(
+          getTextAlignFromString(alignmentModel.constantValue));
+    }
+
+    if (alignmentModel.responsiveValue != null) {
+      return PagebuilderResponsiveOrConstant.responsive({
+        if (alignmentModel.responsiveValue!["mobile"] != null)
+          "mobile":
+              getTextAlignFromString(alignmentModel.responsiveValue!["mobile"]),
+        if (alignmentModel.responsiveValue!["tablet"] != null)
+          "tablet":
+              getTextAlignFromString(alignmentModel.responsiveValue!["tablet"]),
+        if (alignmentModel.responsiveValue!["desktop"] != null)
+          "desktop": getTextAlignFromString(
+              alignmentModel.responsiveValue!["desktop"]),
+      });
+    }
+
+    return null;
+  }
+
   factory PageBuilderTextPropertiesModel.fromDomain(
       PageBuilderTextProperties properties) {
     return PageBuilderTextPropertiesModel(
         text: properties.text,
-        fontSize: properties.fontSize,
+        fontSize: PagebuilderResponsiveOrConstantModel.fromDomain(
+            properties.fontSize),
         fontFamily: properties.fontFamily,
-        lineHeight: properties.lineHeight,
-        letterSpacing: properties.letterSpacing,
+        lineHeight: PagebuilderResponsiveOrConstantModel.fromDomain(
+            properties.lineHeight),
+        letterSpacing: PagebuilderResponsiveOrConstantModel.fromDomain(
+            properties.letterSpacing),
         color: properties.color != null
             ? ColorUtility.colorToHex(properties.color!)
             : null,
-        alignment: properties.alignment?.name,
+        alignment: _alignmentFromDomain(properties.alignment),
         textShadow: ShadowMapper.getMapFromShadow(properties.textShadow),
         isBold: properties.isBold,
         isItalic: properties.isItalic);
+  }
+
+  static PagebuilderResponsiveOrConstantModel<String>? _alignmentFromDomain(
+      PagebuilderResponsiveOrConstant<TextAlign>? alignment) {
+    if (alignment == null) return null;
+
+    if (alignment.constantValue != null) {
+      return PagebuilderResponsiveOrConstantModel.constant(
+          alignment.constantValue!.name);
+    }
+
+    if (alignment.responsiveValue != null) {
+      return PagebuilderResponsiveOrConstantModel.responsive({
+        if (alignment.responsiveValue!["mobile"] != null)
+          "mobile": alignment.responsiveValue!["mobile"]!.name,
+        if (alignment.responsiveValue!["tablet"] != null)
+          "tablet": alignment.responsiveValue!["tablet"]!.name,
+        if (alignment.responsiveValue!["desktop"] != null)
+          "desktop": alignment.responsiveValue!["desktop"]!.name,
+      });
+    }
+
+    return null;
   }
 
   TextAlign getTextAlignFromString(String? alignment) {

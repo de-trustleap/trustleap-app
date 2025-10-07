@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 void main() {
   group("PagebuilderContactFormProperties_CopyWith", () {
@@ -15,7 +16,7 @@ void main() {
       final model = PageBuilderContactFormProperties(
           email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 200.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -23,7 +24,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -34,7 +35,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -44,7 +45,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -52,7 +53,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -63,7 +64,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -73,7 +74,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -81,7 +82,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -92,7 +93,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -102,7 +103,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -110,7 +111,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -121,7 +122,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -131,15 +132,15 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 12.0,
               backgroundPaint: null,
               textProperties: null));
       final expectedResult = PageBuilderContactFormProperties(
           email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -147,7 +148,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -158,7 +159,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -168,7 +169,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -176,7 +177,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -187,7 +188,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -197,7 +198,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -205,7 +206,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -216,7 +217,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -226,7 +227,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -234,7 +235,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -245,7 +246,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -255,15 +256,15 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 16,
               backgroundPaint: null,
               textProperties: null));
       // When
       final result = model.copyWith(
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300.0,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -271,7 +272,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -282,7 +283,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -292,8 +293,8 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 16,
               backgroundPaint: null,
               textProperties: null));
@@ -308,7 +309,7 @@ void main() {
       final properties1 = PageBuilderContactFormProperties(
           email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 200.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -316,7 +317,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -327,7 +328,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -337,7 +338,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -345,7 +346,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -356,7 +357,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -366,7 +367,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -374,7 +375,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -385,7 +386,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -395,7 +396,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -403,7 +404,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -414,7 +415,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -424,15 +425,15 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 12.0,
               backgroundPaint: null,
               textProperties: null));
       final properties2 = PageBuilderContactFormProperties(
           email: "test@test.de",
           nameTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 200.0,
+              width: const PagebuilderResponsiveOrConstant.constant(200.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -440,7 +441,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -451,7 +452,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -461,7 +462,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           emailTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -469,7 +470,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -480,7 +481,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -490,7 +491,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           phoneTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -498,7 +499,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -509,7 +510,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -519,7 +520,7 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           messageTextFieldProperties: PageBuilderTextFieldProperties(
-              width: 300,
+              width: const PagebuilderResponsiveOrConstant.constant(300.0),
               minLines: 1,
               maxLines: 1,
               isRequired: true,
@@ -527,7 +528,7 @@ void main() {
               borderColor: null,
               placeHolderTextProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -538,7 +539,7 @@ void main() {
                   isItalic: null),
               textProperties: PageBuilderTextProperties(
                   text: "test",
-                  fontSize: 12,
+                  fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
                   fontFamily: "Poppins",
                   lineHeight: null,
                   letterSpacing: null,
@@ -548,8 +549,8 @@ void main() {
                   isBold: null,
                   isItalic: null)),
           buttonProperties: PageBuilderButtonProperties(
-              width: 200,
-              height: 100,
+              width: const PagebuilderResponsiveOrConstant.constant(200),
+              height: const PagebuilderResponsiveOrConstant.constant(100),
               borderRadius: 12.0,
               backgroundPaint: null,
               textProperties: null));

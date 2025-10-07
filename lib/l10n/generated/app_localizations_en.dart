@@ -406,9 +406,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error_msg_pleace_upload_picture => 'Please upload an image';
 
   @override
-  String get menuitems_activities => 'Activities';
-
-  @override
   String get auth_failure_email_already_in_use =>
       'The email adress is already taken.';
 
@@ -1423,6 +1420,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingpage_pagebuilder_layout_menu_alignment => 'Alignment';
 
   @override
+  String get landingpage_pagebuilder_layout_menu_width_percentage =>
+      'Width in %';
+
+  @override
+  String landingpage_pagebuilder_layout_menu_width_warning(String totalWidth) {
+    return 'Sum of widths: $totalWidth% (will be scaled to 100%)';
+  }
+
+  @override
   String get landingpage_pagebuilder_layout_menu_image_control_switch =>
       'Show pronoter image';
 
@@ -1861,6 +1867,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get send_recommendation_alert_title => 'Recommendation sent?';
+
+  @override
+  String get save_recommendation_loading_title => 'Save recommendation';
+
+  @override
+  String get save_recommendation_loading_subtitle =>
+      'The recommendation is being saved';
 
   @override
   String send_recommendation_alert_description(String receiver) {
@@ -2316,6 +2329,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_hierarchy_button_tooltip => 'Show page hierarchy';
+
+  @override
+  String get pagebuilder_responsive_preview_button_tooltip => 'Responsive mode';
+
+  @override
+  String get pagebuilder_breakpoint_desktop => 'Desktop';
+
+  @override
+  String get pagebuilder_breakpoint_tablet => 'Tablet';
+
+  @override
+  String get pagebuilder_breakpoint_mobile => 'Mobile';
 
   @override
   String get pagebuilder_hierarchy_overlay_title => 'Page structure';
@@ -2845,4 +2870,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pagebuilder_section_name_error_duplicate =>
       'Section ID already exists';
+
+  @override
+  String get pagebuilder_section_visible_on_title => 'Visible on';
+
+  @override
+  String get pagebuilder_section_visible_on_desktop => 'Desktop';
+
+  @override
+  String get pagebuilder_section_visible_on_tablet => 'Tablet';
+
+  @override
+  String get pagebuilder_section_visible_on_mobile => 'Mobile';
 }

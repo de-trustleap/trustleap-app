@@ -12,11 +12,13 @@ void main() {
       final model = PagebuilderRowPropertiesModel(
           equalHeights: false,
           mainAxisAlignment: "center",
-          crossAxisAlignment: "end");
+          crossAxisAlignment: "end",
+          switchToColumnFor: null);
       final expectedResult = PagebuilderRowPropertiesModel(
           equalHeights: false,
           mainAxisAlignment: "center",
-          crossAxisAlignment: "start");
+          crossAxisAlignment: "start",
+          switchToColumnFor: null);
       // When
       final result = model.copyWith(crossAxisAlignment: "start");
       // Then
@@ -30,7 +32,8 @@ void main() {
       final model = PagebuilderRowPropertiesModel(
           equalHeights: false,
           mainAxisAlignment: "center",
-          crossAxisAlignment: "end");
+          crossAxisAlignment: "end",
+          switchToColumnFor: null);
       final expectedResult = {
         "equalHeights": false,
         "mainAxisAlignment": "center",
@@ -54,7 +57,8 @@ void main() {
       final expectedResult = PagebuilderRowPropertiesModel(
           equalHeights: false,
           mainAxisAlignment: "center",
-          crossAxisAlignment: "end");
+          crossAxisAlignment: "end",
+          switchToColumnFor: null);
       // When
       final result = PagebuilderRowPropertiesModel.fromMap(map);
       // Then
@@ -70,11 +74,13 @@ void main() {
       final model = PagebuilderRowPropertiesModel(
           equalHeights: false,
           mainAxisAlignment: "center",
-          crossAxisAlignment: "end");
+          crossAxisAlignment: "end",
+          switchToColumnFor: null);
       final expectedResult = PagebuilderRowProperties(
           equalHeights: false,
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end);
+          crossAxisAlignment: CrossAxisAlignment.end,
+          switchToColumnFor: null);
       // When
       final result = model.toDomain();
       // Then
@@ -90,11 +96,13 @@ void main() {
       final model = PagebuilderRowProperties(
           equalHeights: false,
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end);
+          crossAxisAlignment: CrossAxisAlignment.end,
+          switchToColumnFor: null);
       final expectedResult = PagebuilderRowPropertiesModel(
           equalHeights: false,
           mainAxisAlignment: "center",
-          crossAxisAlignment: "end");
+          crossAxisAlignment: "end",
+          switchToColumnFor: null);
       // When
       final result = PagebuilderRowPropertiesModel.fromDomain(model);
       // Then
@@ -108,11 +116,13 @@ void main() {
       final properties1 = PagebuilderRowPropertiesModel(
           equalHeights: false,
           mainAxisAlignment: "center",
-          crossAxisAlignment: "end");
+          crossAxisAlignment: "end",
+          switchToColumnFor: null);
       final properties2 = PagebuilderRowPropertiesModel(
           equalHeights: false,
           mainAxisAlignment: "center",
-          crossAxisAlignment: "end");
+          crossAxisAlignment: "end",
+          switchToColumnFor: null);
       // Then
       expect(properties1, properties2);
     });

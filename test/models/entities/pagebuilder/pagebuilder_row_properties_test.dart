@@ -8,14 +8,16 @@ void main() {
         "set equalHeights with copyWith should set equalHeights for resulting object",
         () {
       // Given
-      final model = PagebuilderRowProperties(
+      const model = PagebuilderRowProperties(
           equalHeights: true,
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end);
+          crossAxisAlignment: CrossAxisAlignment.end,
+          switchToColumnFor: null);
       final expectedResult = PagebuilderRowProperties(
           equalHeights: false,
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end);
+          crossAxisAlignment: CrossAxisAlignment.end,
+          switchToColumnFor: null);
       // When
       final result = model.copyWith(equalHeights: false);
       // Then
@@ -30,6 +32,7 @@ void main() {
         equalHeights: true,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        switchToColumnFor: null,
       );
       // When
       final copy = original.deepCopy();
@@ -48,11 +51,13 @@ void main() {
       final properties1 = PagebuilderRowProperties(
           equalHeights: true,
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end);
+          crossAxisAlignment: CrossAxisAlignment.end,
+          switchToColumnFor: null);
       final properties2 = PagebuilderRowProperties(
           equalHeights: true,
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end);
+          crossAxisAlignment: CrossAxisAlignment.end,
+          switchToColumnFor: null);
       // Then
       expect(properties1, properties2);
     });
