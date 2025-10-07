@@ -2173,6 +2173,14 @@
     "@send_recommendation_alert_title": {
         "description": "Titel des Alerts zum Bestätigen, ob man eine Empfehlung verschickt hat."
     },
+    "save_recommendation_loading_title": "Empfehlung speichern",
+    "@save_recommendation_loading_title": {
+        "description": "Titel des Loading-Dialogs beim Speichern einer Empfehlung"
+    },
+    "save_recommendation_loading_subtitle": "Die Empfehlung wird gespeichert",
+    "@save_recommendation_loading_subtitle": {
+        "description": "Untertitel des Loading-Dialogs beim Speichern einer Empfehlung"
+    },
     "send_recommendation_alert_description": "Hast du die Empfehlung erfolgreich an {receiver} verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.",
     "@send_recommendation_alert_description": {
         "description": "Beschreibung im Alert zum Bestätigen, ob man eine Empfehlung verschickt hat.",

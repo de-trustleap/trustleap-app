@@ -3272,6 +3272,18 @@ abstract class AppLocalizations {
   /// **'Recommendation sent?'**
   String get send_recommendation_alert_title;
 
+  /// Title of the loading dialog when saving a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Save recommendation'**
+  String get save_recommendation_loading_title;
+
+  /// Subtitle of the loading dialog when saving a recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'The recommendation is being saved'**
+  String get save_recommendation_loading_subtitle;
+
   /// Description of the alert to confirm whether you have sent a recommendation.
   ///
   /// In en, this message translates to:

@@ -9,7 +9,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackba
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_template_placeholder.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_confirmation_dialog.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_confirmation_dialog_error.dart';
-import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_confirmation_dialog_loading.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_overlay.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_textfield.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -218,14 +218,13 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
             navigator.pop();
             showDialog(
                 context: context,
-                builder: (_) {
-                  return RecommendationConfirmationDialogLoading(
-                      cancelAction: () {
-                        isAlertVisible = false;
-                        navigator.pop();
-                      },
-                      action: () => _onRecommendationSentSuccessful(
-                          state.recommendation));
+                barrierDismissible: false,
+                builder: (dialogContext) {
+                  final localization = AppLocalizations.of(dialogContext);
+                  return LoadingOverlay(
+                    title: localization.save_recommendation_loading_title,
+                    subtitle: localization.save_recommendation_loading_subtitle,
+                  );
                 });
           }
         } else if (state is RecommendationSaveFailureState) {

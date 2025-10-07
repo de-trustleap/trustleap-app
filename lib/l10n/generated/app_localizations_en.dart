@@ -1869,6 +1869,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get send_recommendation_alert_title => 'Recommendation sent?';
 
   @override
+  String get save_recommendation_loading_title => 'Save recommendation';
+
+  @override
+  String get save_recommendation_loading_subtitle =>
+      'The recommendation is being saved';
+
+  @override
   String send_recommendation_alert_description(String receiver) {
     return 'Did you successfully send the recommendation to $receiver? The link in the recommendation will only become valid once you confirm it here.';
   }

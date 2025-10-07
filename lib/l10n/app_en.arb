@@ -2173,6 +2173,14 @@
     "@send_recommendation_alert_title": {
         "description": "Title of the alert to confirm whether you have sent a recommendation."
     },
+    "save_recommendation_loading_title": "Save recommendation",
+    "@save_recommendation_loading_title": {
+        "description": "Title of the loading dialog when saving a recommendation"
+    },
+    "save_recommendation_loading_subtitle": "The recommendation is being saved",
+    "@save_recommendation_loading_subtitle": {
+        "description": "Subtitle of the loading dialog when saving a recommendation"
+    },
     "send_recommendation_alert_description": "Did you successfully send the recommendation to {receiver}? The link in the recommendation will only become valid once you confirm it here.",
     "@send_recommendation_alert_description": {
         "description": "Description of the alert to confirm whether you have sent a recommendation.",

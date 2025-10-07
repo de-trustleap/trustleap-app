@@ -1899,6 +1899,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get send_recommendation_alert_title => 'Empfehlung verschickt?';
 
   @override
+  String get save_recommendation_loading_title => 'Empfehlung speichern';
+
+  @override
+  String get save_recommendation_loading_subtitle =>
+      'Die Empfehlung wird gespeichert';
+
+  @override
   String send_recommendation_alert_description(String receiver) {
     return 'Hast du die Empfehlung erfolgreich an $receiver verschickt? Der Link in der Empfehlung wird erst gültig wenn du hier bestätigst.';
   }
