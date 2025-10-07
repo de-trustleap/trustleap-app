@@ -1825,7 +1825,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get landingpage_creator_ai_loading_subtitle2 =>
-      'Das kann bis zu 5 Minuten dauern. Bitte warten...';
+      'Das kann bis zu 5 Minuten dauern.\nDu kannst diese Seite verlassen. Die Landingpage wird dir nach der Generierung in der Übersicht angezeigt.';
 
   @override
   String get landingpage_creator_ai_form_section_title =>
