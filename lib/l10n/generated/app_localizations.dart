@@ -3149,7 +3149,7 @@ abstract class AppLocalizations {
   /// Another Subtitle for the loading overlay of the AI ​​generation in the landing page creator
   ///
   /// In en, this message translates to:
-  /// **'This may take up to 5 minutes. Please wait...'**
+  /// **'This may take up to 5 minutes.\nYou can leave this site. The landingpage will appear in your overview when it has been generated.'**
   String get landingpage_creator_ai_loading_subtitle2;
 
   /// Section title for the AI ​​Generation Section in the Landing Page Creator

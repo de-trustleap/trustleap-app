@@ -3,7 +3,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_b
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_edit_button.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_controls.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_builder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_invisible_color_filter.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/section_max_width_provider.dart';
@@ -13,8 +13,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageBuilderSectionView extends StatefulWidget {
   final PageBuilderSection model;
+  final int index;
 
-  const LandingPageBuilderSectionView({super.key, required this.model});
+  const LandingPageBuilderSectionView({
+    super.key,
+    required this.model,
+    required this.index,
+  });
 
   @override
   State<LandingPageBuilderSectionView> createState() =>
@@ -216,12 +221,15 @@ class _LandingPageBuilderSectionViewState
                             ),
                           ),
                         if (_isHovered) ...[
-                          LandingPageBuilderSectionEditButton(onPressed: () {
-                            Modular.get<PagebuilderSelectionCubit>()
-                                .selectWidget(widget.model.id.value);
-                            Modular.get<PagebuilderConfigMenuCubit>()
-                                .openSectionConfigMenu(widget.model);
-                          })
+                          LandingPageBuilderSectionControls(
+                            index: widget.index,
+                            onEditPressed: () {
+                              Modular.get<PagebuilderSelectionCubit>()
+                                  .selectWidget(widget.model.id.value);
+                              Modular.get<PagebuilderConfigMenuCubit>()
+                                  .openSectionConfigMenu(widget.model);
+                            },
+                          )
                         ]
                       ],
                     );

@@ -446,4 +446,241 @@ void main() {
       pageBuilderBloc.add(UpdateWidgetEvent(updatedWidget));
     });
   });
+
+  group("PagebuilderBloc_reorderSections", () {
+    final section1 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      name: "Section 1",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final section2 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section2"),
+      name: "Section 2",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final section3 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section3"),
+      name: "Section 3",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      backgroundColor: null,
+      sections: [section1, section2, section3],
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("landingPage1"),
+      contentID: UniqueID.fromUniqueString("content1"),
+    );
+
+    final mockUser = CustomUser(
+      id: UniqueID.fromUniqueString("user1"),
+    );
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should emit GetLandingPageAndUserSuccessState with reordered sections when moving from index 0 to 2",
+        () async {
+      // Given
+      final updatedPageBuilderPage = mockPageBuilderPage.copyWith(
+        sections: [section2, section1, section3],
+      );
+
+      final updatedContent =
+          mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
+
+      final expectedResult = GetLandingPageAndUserSuccessState(
+        content: updatedContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            expectedResult,
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReorderSectionsEvent(0, 2));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState with reordered sections when moving from index 2 to 0",
+        () async {
+      // Given
+      final updatedPageBuilderPage = mockPageBuilderPage.copyWith(
+        sections: [section3, section1, section2],
+      );
+
+      final updatedContent =
+          mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
+
+      final expectedResult = GetLandingPageAndUserSuccessState(
+        content: updatedContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            expectedResult,
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReorderSectionsEvent(2, 0));
+    });
+
+    test("should not emit any state if sections list is null", () async {
+      // Given
+      final pageWithNoSections = mockPageBuilderPage.copyWith(sections: null);
+      final contentWithNoSections =
+          mockPagebuilderContent.copyWith(content: pageWithNoSections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: contentWithNoSections,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithNoSections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReorderSectionsEvent(0, 1));
+    });
+
+    test("should not emit any state if sections list is empty", () async {
+      // Given
+      final pageWithEmptySections = mockPageBuilderPage.copyWith(sections: []);
+      final contentWithEmptySections =
+          mockPagebuilderContent.copyWith(content: pageWithEmptySections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: contentWithEmptySections,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithEmptySections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReorderSectionsEvent(0, 1));
+    });
+
+    test("should mark content as updated after reordering", () async {
+      // Given
+      final updatedPageBuilderPage = mockPageBuilderPage.copyWith(
+        sections: [section2, section1, section3],
+      );
+
+      final updatedContent =
+          mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>(
+                (state) => state.isUpdated == true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReorderSectionsEvent(0, 2));
+    });
+  });
 }

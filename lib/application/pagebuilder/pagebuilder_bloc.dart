@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_reorder_section_helper.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'pagebuilder_event.dart';
@@ -32,7 +33,33 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
         transformer: (events, mapper) => events
             .debounceTime(const Duration(milliseconds: 100))
             .switchMap(mapper));
+    on<ReorderSectionsEvent>(_onReorderSections);
     on<SaveLandingPageContentEvent>(_onSaveLandingPageContent);
+  }
+
+  void _onReorderSections(
+      ReorderSectionsEvent event, Emitter<PagebuilderState> emit) {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final sections = currentState.content.content?.sections;
+
+      if (sections == null || sections.isEmpty) return;
+
+      final updatedSections = PagebuilderReorderSectionHelper.reorderSections(
+          sections, event.oldIndex, event.newIndex);
+
+      final updatedContent =
+          currentState.content.content?.copyWith(sections: updatedSections);
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: updatedContent);
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
   }
 
   Future<void> _onGetLandingPage(

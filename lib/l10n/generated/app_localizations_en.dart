@@ -1797,7 +1797,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get landingpage_creator_ai_loading_subtitle2 =>
-      'This may take up to 5 minutes. Please wait...';
+      'This may take up to 5 minutes.\nYou can leave this site. The landingpage will appear in your overview when it has been generated.';
 
   @override
   String get landingpage_creator_ai_form_section_title =>
