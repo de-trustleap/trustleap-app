@@ -10,8 +10,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PagebuilderVideoPlayerView extends StatelessWidget {
   final PagebuilderVideoPlayerProperties properties;
   final PageBuilderWidget widgetModel;
-  const PagebuilderVideoPlayerView(
-      {super.key, required this.properties, required this.widgetModel});
+  final int? index;
+
+  const PagebuilderVideoPlayerView({
+    super.key,
+    required this.properties,
+    required this.widgetModel,
+    this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +32,7 @@ class PagebuilderVideoPlayerView extends StatelessWidget {
 
         return LandingPageBuilderWidgetContainer(
           model: widgetModel,
+          index: index,
           child: Container(
               width: width,
               height: height,

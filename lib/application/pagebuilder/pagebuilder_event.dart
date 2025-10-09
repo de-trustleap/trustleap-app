@@ -49,6 +49,17 @@ class ReorderSectionsEvent extends PagebuilderEvent with EquatableMixin {
   List<Object?> get props => [oldIndex, newIndex];
 }
 
+class ReorderWidgetEvent extends PagebuilderEvent with EquatableMixin {
+  final String parentWidgetId;
+  final int oldIndex;
+  final int newIndex;
+
+  ReorderWidgetEvent(this.parentWidgetId, this.oldIndex, this.newIndex);
+
+  @override
+  List<Object?> get props => [parentWidgetId, oldIndex, newIndex];
+}
+
 class SaveLandingPageContentEvent extends PagebuilderEvent with EquatableMixin {
   final PagebuilderContent? content;
 

@@ -8,8 +8,14 @@ import 'package:flutter/material.dart';
 class PagebuilderFooterView extends StatelessWidget {
   final PagebuilderFooterProperties properties;
   final PageBuilderWidget widgetModel;
-  const PagebuilderFooterView(
-      {super.key, required this.properties, required this.widgetModel});
+  final int? index;
+
+  const PagebuilderFooterView({
+    super.key,
+    required this.properties,
+    required this.widgetModel,
+    this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +23,7 @@ class PagebuilderFooterView extends StatelessWidget {
 
     return LandingPageBuilderWidgetContainer(
         model: widgetModel,
+        index: index,
         child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
