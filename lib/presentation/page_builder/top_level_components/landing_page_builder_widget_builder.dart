@@ -23,96 +23,112 @@ import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuil
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_text.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/video_player_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/reorderable_column_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageBuilderWidgetBuilder {
-  Widget build(PageBuilderWidget model) {
+  Widget build(PageBuilderWidget model, {int? index}) {
     switch (model.elementType) {
       case PageBuilderWidgetType.container:
         if (model.properties != null) {
           return buildContainerWidget(
-              model.properties as PageBuilderContainerProperties, model);
+              model.properties as PageBuilderContainerProperties, model,
+              index: index);
         } else {
-          return buildContainerWidget(null, model);
+          return buildContainerWidget(null, model, index: index);
         }
       case PageBuilderWidgetType.column:
         if (model.properties != null) {
-          return buildColumnWidget(
+          return _buildColumnWidget(
               model.properties as PagebuilderColumnProperties, model);
         } else {
-          return buildColumnWidget(null, model);
+          return _buildColumnWidget(null, model);
         }
       case PageBuilderWidgetType.row:
         if (model.properties != null) {
           return buildRowWidget(
-              model.properties as PagebuilderRowProperties, model);
+              model.properties as PagebuilderRowProperties, model,
+              index: index);
         } else {
-          return buildRowWidget(null, model);
+          return buildRowWidget(null, model, index: index);
         }
       case PageBuilderWidgetType.text:
         return buildTextWidget(
-            model.properties as PageBuilderTextProperties, model);
+            model.properties as PageBuilderTextProperties, model,
+            index: index);
       case PageBuilderWidgetType.image:
         return buildImageWidget(
-            model.properties as PageBuilderImageProperties, model);
+            model.properties as PageBuilderImageProperties, model,
+            index: index);
       case PageBuilderWidgetType.icon:
         return buildIconWidget(
-            model.properties as PageBuilderIconProperties, model);
+            model.properties as PageBuilderIconProperties, model,
+            index: index);
       case PageBuilderWidgetType.contactForm:
         return buildContactFormWidget(
-            model.properties as PageBuilderContactFormProperties, model);
+            model.properties as PageBuilderContactFormProperties, model,
+            index: index);
       case PageBuilderWidgetType.footer:
         return buildFooterWidget(
-            model.properties as PagebuilderFooterProperties, model);
+            model.properties as PagebuilderFooterProperties, model,
+            index: index);
       case PageBuilderWidgetType.videoPlayer:
         return buildVideoPlayerWidget(
-            model.properties as PagebuilderVideoPlayerProperties, model);
+            model.properties as PagebuilderVideoPlayerProperties, model,
+            index: index);
       case PageBuilderWidgetType.anchorButton:
         return buildButtonWidget(
             (model.properties as PagebuilderAnchorButtonProperties)
                 .buttonProperties!,
-            model);
+            model,
+            index: index);
       case PageBuilderWidgetType.calendly:
         return buildCalendlyWidget(
-            model.properties as PagebuilderCalendlyProperties, model);
+            model.properties as PagebuilderCalendlyProperties, model,
+            index: index);
       default:
         return const SizedBox.shrink();
     }
   }
 
   Widget buildContainerWidget(
-      PageBuilderContainerProperties? properties, PageBuilderWidget model) {
+      PageBuilderContainerProperties? properties, PageBuilderWidget model,
+      {int? index}) {
     return LandingPageBuilderWidgetContainer(
-        properties: properties,
-        model: model,
-        child: model.containerChild != null
-            ? build(model.containerChild!)
-            : const SizedBox.shrink());
+      properties: properties,
+      model: model,
+      index: index,
+      child: model.containerChild != null
+          ? build(model.containerChild!)
+          : const SizedBox.shrink(),
+    );
   }
 
-  Widget buildColumnWidget(
+  Widget _buildColumnWidget(
       PagebuilderColumnProperties? properties, PageBuilderWidget model) {
     if (model.children == null || model.children!.isEmpty) {
       return const SizedBox.shrink();
     }
-    return LandingPageBuilderWidgetContainer(
+
+    final mainAxisAlignment =
+        properties?.mainAxisAlignment ?? MainAxisAlignment.center;
+    final crossAxisAlignment =
+        properties?.crossAxisAlignment ?? CrossAxisAlignment.center;
+
+    return ReorderableColumnWidget(
       model: model,
-      child: Column(
-          mainAxisAlignment:
-              properties?.mainAxisAlignment ?? MainAxisAlignment.center,
-          crossAxisAlignment:
-              properties?.crossAxisAlignment ?? CrossAxisAlignment.center,
-          children: model.children?.map((child) {
-                return build(child);
-              }).toList() ??
-              []),
+      properties: properties,
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
+      buildChild: (child, index) => build(child, index: index),
     );
   }
 
   Widget buildRowWidget(
-      PagebuilderRowProperties? properties, PageBuilderWidget model) {
+      PagebuilderRowProperties? properties, PageBuilderWidget model,
+      {int? index}) {
     if (model.children == null || model.children!.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -129,6 +145,7 @@ class LandingPageBuilderWidgetBuilder {
           // Switch to Column layout - swap main and cross axis alignments
           return LandingPageBuilderWidgetContainer(
             model: model,
+            index: index,
             child: Column(
               // Row's mainAxis (horizontal) becomes Column's crossAxis
               crossAxisAlignment: AxisAlignmentConverter.mainAxisToCrossAxis(
@@ -148,7 +165,8 @@ class LandingPageBuilderWidgetBuilder {
             0,
             (sum, child) =>
                 sum +
-                (child.widthPercentage?.getValueForBreakpoint(breakpoint) ?? 0));
+                (child.widthPercentage?.getValueForBreakpoint(breakpoint) ??
+                    0));
         // Falls die Gesamtbreite über 100% liegt, passe die Werte an
         final scaleFactor =
             totalWidthPercentage > 100 ? 100 / totalWidthPercentage : 1.0;
@@ -183,6 +201,7 @@ class LandingPageBuilderWidgetBuilder {
         }
         return LandingPageBuilderWidgetContainer(
           model: model,
+          index: index,
           child: properties?.equalHeights == true
               ? IntrinsicHeight(
                   child: Row(
@@ -203,47 +222,61 @@ class LandingPageBuilderWidgetBuilder {
   }
 
   Widget buildTextWidget(
-      PageBuilderTextProperties properties, PageBuilderWidget model) {
-    return PagebuilderText(properties: properties, widgetModel: model);
+      PageBuilderTextProperties properties, PageBuilderWidget model,
+      {int? index}) {
+    return PagebuilderText(
+        properties: properties, widgetModel: model, index: index);
   }
 
   Widget buildImageWidget(
-      PageBuilderImageProperties properties, PageBuilderWidget model) {
-    return PageBuilderImageView(properties: properties, widgetModel: model);
+      PageBuilderImageProperties properties, PageBuilderWidget model,
+      {int? index}) {
+    return PageBuilderImageView(
+        properties: properties, widgetModel: model, index: index);
   }
 
   Widget buildIconWidget(
-      PageBuilderIconProperties properties, PageBuilderWidget model) {
-    return PageBuilderIconView(properties: properties, widgetModel: model);
+      PageBuilderIconProperties properties, PageBuilderWidget model,
+      {int? index}) {
+    return PageBuilderIconView(
+        properties: properties, widgetModel: model, index: index);
   }
 
   Widget buildContactFormWidget(
-      PageBuilderContactFormProperties properties, PageBuilderWidget model) {
+      PageBuilderContactFormProperties properties, PageBuilderWidget model,
+      {int? index}) {
     return PageBuilderContactFormView(
-        properties: properties, widgetModel: model);
+        properties: properties, widgetModel: model, index: index);
   }
 
   Widget buildFooterWidget(
-      PagebuilderFooterProperties properties, PageBuilderWidget model) {
-    return PagebuilderFooterView(properties: properties, widgetModel: model);
+      PagebuilderFooterProperties properties, PageBuilderWidget model,
+      {int? index}) {
+    return PagebuilderFooterView(
+        properties: properties, widgetModel: model, index: index);
   }
 
   Widget buildVideoPlayerWidget(
-      PagebuilderVideoPlayerProperties properties, PageBuilderWidget model) {
+      PagebuilderVideoPlayerProperties properties, PageBuilderWidget model,
+      {int? index}) {
     return PagebuilderVideoPlayerView(
-        properties: properties, widgetModel: model);
+        properties: properties, widgetModel: model, index: index);
   }
 
   Widget buildButtonWidget(
-      PageBuilderButtonProperties properties, PageBuilderWidget model) {
+      PageBuilderButtonProperties properties, PageBuilderWidget model,
+      {int? index}) {
     return LandingPageBuilderWidgetContainer(
       model: model,
+      index: index,
       child: PageBuilderButtonView(properties: properties, widgetModel: model),
     );
   }
 
   Widget buildCalendlyWidget(
-      PagebuilderCalendlyProperties properties, PageBuilderWidget model) {
-    return PagebuilderCalendly(properties: properties, widgetModel: model);
+      PagebuilderCalendlyProperties properties, PageBuilderWidget model,
+      {int? index}) {
+    return PagebuilderCalendly(
+        properties: properties, widgetModel: model, index: index);
   }
 }

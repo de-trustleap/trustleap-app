@@ -8,15 +8,25 @@ import 'package:flutter/material.dart';
 class PagebuilderText extends StatelessWidget {
   final PageBuilderTextProperties properties;
   final PageBuilderWidget widgetModel;
-  const PagebuilderText(
-      {super.key, required this.properties, required this.widgetModel});
+  final int? index;
+
+  const PagebuilderText({
+    super.key,
+    required this.properties,
+    required this.widgetModel,
+    this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
     return LandingPageBuilderWidgetContainer(
-        model: widgetModel,
-        child: Text(properties.text ?? "",
-            style: TextStyleParser().getTextStyleFromProperties(properties),
-            textAlign: properties.alignment?.getValue()));
+      model: widgetModel,
+      index: index,
+      child: Text(
+        properties.text ?? "",
+        style: TextStyleParser().getTextStyleFromProperties(properties),
+        textAlign: properties.alignment?.getValue(),
+      ),
+    );
   }
 }

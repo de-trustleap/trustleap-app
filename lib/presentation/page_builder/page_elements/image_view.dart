@@ -17,13 +17,16 @@ class PageBuilderImageView extends StatefulWidget {
   final PageBuilderWidget? widgetModel;
   final bool isConfigMenu;
   final Function(PageBuilderImageProperties)? onSelectedInConfigMenu;
+  final int? index;
 
-  const PageBuilderImageView(
-      {super.key,
-      required this.properties,
-      required this.widgetModel,
-      this.isConfigMenu = false,
-      this.onSelectedInConfigMenu});
+  const PageBuilderImageView({
+    super.key,
+    required this.properties,
+    required this.widgetModel,
+    this.isConfigMenu = false,
+    this.onSelectedInConfigMenu,
+    this.index,
+  });
 
   @override
   State<PageBuilderImageView> createState() => _PageBuilderImageViewState();
@@ -206,13 +209,13 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.widgetModel != null) {
-      return widget.isConfigMenu
-          ? _imageElement(context)
-          : LandingPageBuilderWidgetContainer(
-              model: widget.widgetModel!, child: _imageElement(context));
-    } else {
-      return _imageElement(context);
+    if (widget.widgetModel != null && !widget.isConfigMenu) {
+      return LandingPageBuilderWidgetContainer(
+        model: widget.widgetModel!,
+        index: widget.index,
+        child: _imageElement(context),
+      );
     }
+    return _imageElement(context);
   }
 }

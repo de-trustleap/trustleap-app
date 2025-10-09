@@ -10,11 +10,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PagebuilderCalendly extends StatelessWidget {
   final PagebuilderCalendlyProperties properties;
   final PageBuilderWidget widgetModel;
+  final int? index;
 
   const PagebuilderCalendly({
     super.key,
     required this.properties,
     required this.widgetModel,
+    this.index,
   });
 
   @override
@@ -28,6 +30,7 @@ class PagebuilderCalendly extends StatelessWidget {
 
         return LandingPageBuilderWidgetContainer(
           model: widgetModel,
+          index: index,
           child: Container(
             width: width,
             height: height,

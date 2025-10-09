@@ -1,3 +1,5 @@
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_drag_control.dart';
 import 'package:flutter/material.dart';
 
 class LandingPageBuilderSectionControls extends StatelessWidget {
@@ -26,10 +28,10 @@ class LandingPageBuilderSectionControls extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ReorderableDragStartListener(
-                index: index,
-                child: const Icon(Icons.drag_indicator,
-                    color: Colors.white, size: 20),
+              const PagebuilderDragControl<PageBuilderSection>(
+                icon: Icons.drag_indicator,
+                color: Colors.white,
+                size: 20,
               ),
               const SizedBox(width: 4),
               IconButton(

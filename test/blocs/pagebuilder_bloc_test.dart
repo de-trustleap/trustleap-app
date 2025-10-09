@@ -683,4 +683,292 @@ void main() {
       pageBuilderBloc.add(ReorderSectionsEvent(0, 2));
     });
   });
+
+  group("PagebuilderBloc_ReorderWidget", () {
+    final widget1 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget1"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Widget 1",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+        isBold: null,
+        isItalic: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+    );
+
+    final widget2 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget2"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Widget 2",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+        isBold: null,
+        isItalic: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+    );
+
+    final widget3 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget3"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Widget 3",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+        isBold: null,
+        isItalic: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+    );
+
+    final columnWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("column1"),
+      elementType: PageBuilderWidgetType.column,
+      properties: null,
+      hoverProperties: null,
+      children: [widget1, widget2, widget3],
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+    );
+
+    final mockSection = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      name: "Test Section",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      widgets: [columnWidget],
+      visibleOn: null,
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      sections: [mockSection],
+      backgroundColor: null,
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("lp1"),
+      contentID: UniqueID.fromUniqueString("page1"),
+    );
+
+    final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should emit GetLandingPageAndUserSuccessState with reordered widgets when moving from index 0 to 2",
+        () async {
+      // Given
+      final reorderedColumnWidget = columnWidget.copyWith(
+        children: [widget2, widget1, widget3],
+      );
+      final updatedSection = mockSection.copyWith(
+        widgets: [reorderedColumnWidget],
+      );
+      final updatedPageBuilderPage = mockPageBuilderPage.copyWith(
+        sections: [updatedSection],
+      );
+      final updatedContent =
+          mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
+
+      final expectedResult = GetLandingPageAndUserSuccessState(
+        content: updatedContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            expectedResult,
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReorderWidgetEvent("column1", 0, 2));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState with reordered widgets when moving from index 2 to 0",
+        () async {
+      // Given
+      final reorderedColumnWidget = columnWidget.copyWith(
+        children: [widget3, widget1, widget2],
+      );
+      final updatedSection = mockSection.copyWith(
+        widgets: [reorderedColumnWidget],
+      );
+      final updatedPageBuilderPage = mockPageBuilderPage.copyWith(
+        sections: [updatedSection],
+      );
+      final updatedContent =
+          mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
+
+      final expectedResult = GetLandingPageAndUserSuccessState(
+        content: updatedContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            expectedResult,
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReorderWidgetEvent("column1", 2, 0));
+    });
+
+    test("should mark content as updated after reordering widgets", () async {
+      // Given
+      final reorderedColumnWidget = columnWidget.copyWith(
+        children: [widget2, widget1, widget3],
+      );
+      final updatedSection = mockSection.copyWith(
+        widgets: [reorderedColumnWidget],
+      );
+      final updatedPageBuilderPage = mockPageBuilderPage.copyWith(
+        sections: [updatedSection],
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>(
+                (state) => state.isUpdated == true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReorderWidgetEvent("column1", 0, 2));
+    });
+
+    test("should not emit any state if parent widget is not found", () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReorderWidgetEvent("nonexistent", 0, 1));
+    });
+  });
 }

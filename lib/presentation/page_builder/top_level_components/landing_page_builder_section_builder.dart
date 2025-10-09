@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_drag/pagebuilder_drag_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
@@ -50,193 +51,212 @@ class _LandingPageBuilderSectionViewState
             child: ConstrainedBox(
           constraints:
               BoxConstraints(maxWidth: outerMaxWidth ?? double.infinity),
-          child: MouseRegion(
-            onEnter: (_) {
-              setState(() {
-                _isHovered = true;
-              });
-            },
-            onExit: (_) {
-              setState(() {
-                _isHovered = false;
-              });
-            },
-            child: BlocBuilder<PagebuilderSelectionCubit, String?>(
-              bloc: selectionCubit,
-              builder: (context, selectedSectionId) {
-                final isSelected = selectedSectionId == widget.model.id.value;
-                final showBorder = _isHovered || isSelected;
+          child: BlocBuilder<PagebuilderDragCubit, bool>(
+            bloc: Modular.get<PagebuilderDragCubit>(),
+            builder: (context, isDragging) {
+              return MouseRegion(
+                onEnter: (_) {
+                  setState(() {
+                    _isHovered = true;
+                  });
+                },
+                onExit: (_) {
+                  if (!isDragging) {
+                    setState(() {
+                      _isHovered = false;
+                    });
+                  }
+                },
+                child: BlocBuilder<PagebuilderSelectionCubit, String?>(
+                  bloc: selectionCubit,
+                  builder: (context, selectedSectionId) {
+                    final isSelected =
+                        selectedSectionId == widget.model.id.value;
+                    final showBorder =
+                        (_isHovered && !isDragging) || isSelected;
 
-                return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
-                    PagebuilderResponsiveBreakpoint>(
-                  bloc: breakpointCubit,
-                  builder: (context, breakpoint) {
-                    final contentMode = widget
-                            .model.background?.imageProperties?.contentMode
-                            ?.getValueForBreakpoint(breakpoint) ??
-                        BoxFit.cover;
-                    final isVisibleOnCurrentBreakpoint =
-                        widget.model.visibleOn == null ||
-                            widget.model.visibleOn!.contains(breakpoint);
+                    return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+                        PagebuilderResponsiveBreakpoint>(
+                      bloc: breakpointCubit,
+                      builder: (context, breakpoint) {
+                        final contentMode = widget
+                                .model.background?.imageProperties?.contentMode
+                                ?.getValueForBreakpoint(breakpoint) ??
+                            BoxFit.cover;
+                        final isVisibleOnCurrentBreakpoint =
+                            widget.model.visibleOn == null ||
+                                widget.model.visibleOn!.contains(breakpoint);
 
-                    return Stack(
-                      clipBehavior: Clip.none,
-                      alignment: Alignment.center,
-                      children: [
-                        PagebuilderInvisibleColorFilter(
-                          isVisible: isVisibleOnCurrentBreakpoint,
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: widget.model.background?.backgroundPaint
-                                          ?.isColor ==
-                                      true
-                                  ? widget
-                                      .model.background?.backgroundPaint?.color
-                                  : null,
-                              gradient: widget.model.background?.backgroundPaint
-                                          ?.isGradient ==
-                                      true
-                                  ? widget.model.background?.backgroundPaint
-                                      ?.gradient
-                                      ?.toFlutterGradient()
-                                  : null,
-                            ),
-                            child: Stack(
-                              children: [
-                                if (widget.model.background?.imageProperties
-                                            ?.localImage ==
-                                        null &&
-                                    widget.model.background?.imageProperties
-                                            ?.url !=
-                                        null) ...[
-                                  Positioned.fill(
-                                    child: Image.network(
-                                        widget.model.background!
-                                            .imageProperties!.url!,
-                                        fit: contentMode),
-                                  )
-                                ],
-                                if (widget.model.background?.imageProperties
-                                        ?.localImage !=
-                                    null)
-                                  Positioned.fill(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          fit: contentMode,
-                                          image: MemoryImage(widget
-                                              .model
-                                              .background!
-                                              .imageProperties!
-                                              .localImage!),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                if (widget.model.background?.overlayPaint !=
-                                        null &&
-                                    (widget.model.background?.imageProperties
-                                                ?.localImage !=
-                                            null ||
+                        return Stack(
+                          clipBehavior: Clip.none,
+                          alignment: Alignment.center,
+                          children: [
+                            PagebuilderInvisibleColorFilter(
+                              isVisible: isVisibleOnCurrentBreakpoint,
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: widget.model.background
+                                              ?.backgroundPaint?.isColor ==
+                                          true
+                                      ? widget.model.background?.backgroundPaint
+                                          ?.color
+                                      : null,
+                                  gradient: widget.model.background
+                                              ?.backgroundPaint?.isGradient ==
+                                          true
+                                      ? widget.model.background?.backgroundPaint
+                                          ?.gradient
+                                          ?.toFlutterGradient()
+                                      : null,
+                                ),
+                                child: Stack(
+                                  children: [
+                                    if (widget.model.background?.imageProperties
+                                                ?.localImage ==
+                                            null &&
                                         widget.model.background?.imageProperties
                                                 ?.url !=
-                                            null)) ...[
-                                  Positioned.fill(
-                                      child: DecoratedBox(
+                                            null) ...[
+                                      Positioned.fill(
+                                        child: Image.network(
+                                            widget.model.background!
+                                                .imageProperties!.url!,
+                                            fit: contentMode),
+                                      )
+                                    ],
+                                    if (widget.model.background?.imageProperties
+                                            ?.localImage !=
+                                        null)
+                                      Positioned.fill(
+                                        child: Container(
                                           decoration: BoxDecoration(
-                                              color: widget
-                                                          .model
-                                                          .background!
-                                                          .overlayPaint!
-                                                          .isColor ==
-                                                      true
-                                                  ? widget.model.background!
-                                                      .overlayPaint!.color
-                                                  : null,
-                                              gradient: widget
-                                                          .model
-                                                          .background!
-                                                          .overlayPaint!
-                                                          .isGradient ==
-                                                      true
-                                                  ? widget.model.background!
-                                                      .overlayPaint!.gradient
-                                                      ?.toFlutterGradient()
-                                                  : null)))
-                                ],
-                                Container(
-                                  alignment: Alignment.center,
-                                  child: shouldConstrainBackground
-                                      ? SectionMaxWidthProvider(
-                                          sectionMaxWidth:
-                                              widget.model.maxWidth,
-                                          child: Column(
-                                              children: widget.model.widgets !=
-                                                      null
-                                                  ? widget.model.widgets!
-                                                      .map((widget) =>
-                                                          widgetBuilder
-                                                              .build(widget))
-                                                      .toList()
-                                                  : []),
-                                        )
-                                      : ConstrainedBox(
-                                          constraints: BoxConstraints(
-                                              maxWidth: widget.model.maxWidth ??
-                                                  double.infinity),
-                                          child: SectionMaxWidthProvider(
-                                            sectionMaxWidth:
-                                                widget.model.maxWidth,
-                                            child: Column(
-                                                children: widget
-                                                            .model.widgets !=
-                                                        null
-                                                    ? widget.model.widgets!
-                                                        .map((widget) =>
-                                                            widgetBuilder
-                                                                .build(widget))
-                                                        .toList()
-                                                    : []),
+                                            image: DecorationImage(
+                                              fit: contentMode,
+                                              image: MemoryImage(widget
+                                                  .model
+                                                  .background!
+                                                  .imageProperties!
+                                                  .localImage!),
+                                            ),
                                           ),
                                         ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        if (showBorder)
-                          Positioned.fill(
-                            child: IgnorePointer(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: isSelected
-                                        ? themeData.colorScheme.secondary
-                                        : themeData.colorScheme.primary,
-                                    width: 2.0,
-                                  ),
+                                      ),
+                                    if (widget.model.background?.overlayPaint !=
+                                            null &&
+                                        (widget
+                                                    .model
+                                                    .background
+                                                    ?.imageProperties
+                                                    ?.localImage !=
+                                                null ||
+                                            widget.model.background
+                                                    ?.imageProperties?.url !=
+                                                null)) ...[
+                                      Positioned.fill(
+                                          child: DecoratedBox(
+                                              decoration: BoxDecoration(
+                                                  color: widget
+                                                              .model
+                                                              .background!
+                                                              .overlayPaint!
+                                                              .isColor ==
+                                                          true
+                                                      ? widget.model.background!
+                                                          .overlayPaint!.color
+                                                      : null,
+                                                  gradient: widget
+                                                              .model
+                                                              .background!
+                                                              .overlayPaint!
+                                                              .isGradient ==
+                                                          true
+                                                      ? widget
+                                                          .model
+                                                          .background!
+                                                          .overlayPaint!
+                                                          .gradient
+                                                          ?.toFlutterGradient()
+                                                      : null)))
+                                    ],
+                                    Container(
+                                      alignment: Alignment.center,
+                                      child: shouldConstrainBackground
+                                          ? SectionMaxWidthProvider(
+                                              sectionMaxWidth:
+                                                  widget.model.maxWidth,
+                                              child: Column(
+                                                  children: widget
+                                                              .model.widgets !=
+                                                          null
+                                                      ? widget.model.widgets!
+                                                          .map((widget) =>
+                                                              widgetBuilder
+                                                                  .build(
+                                                                      widget))
+                                                          .toList()
+                                                      : []),
+                                            )
+                                          : ConstrainedBox(
+                                              constraints: BoxConstraints(
+                                                  maxWidth:
+                                                      widget.model.maxWidth ??
+                                                          double.infinity),
+                                              child: SectionMaxWidthProvider(
+                                                sectionMaxWidth:
+                                                    widget.model.maxWidth,
+                                                child: Column(
+                                                    children: widget.model
+                                                                .widgets !=
+                                                            null
+                                                        ? widget.model.widgets!
+                                                            .map((widget) =>
+                                                                widgetBuilder
+                                                                    .build(
+                                                                        widget))
+                                                            .toList()
+                                                        : []),
+                                              ),
+                                            ),
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
-                          ),
-                        if (_isHovered) ...[
-                          LandingPageBuilderSectionControls(
-                            index: widget.index,
-                            onEditPressed: () {
-                              Modular.get<PagebuilderSelectionCubit>()
-                                  .selectWidget(widget.model.id.value);
-                              Modular.get<PagebuilderConfigMenuCubit>()
-                                  .openSectionConfigMenu(widget.model);
-                            },
-                          )
-                        ]
-                      ],
+                            if (showBorder)
+                              Positioned.fill(
+                                child: IgnorePointer(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: isSelected
+                                            ? themeData.colorScheme.secondary
+                                            : themeData.colorScheme.primary,
+                                        width: 2.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            if (showBorder) ...[
+                              LandingPageBuilderSectionControls(
+                                index: widget.index,
+                                onEditPressed: () {
+                                  Modular.get<PagebuilderSelectionCubit>()
+                                      .selectWidget(widget.model.id.value);
+                                  Modular.get<PagebuilderConfigMenuCubit>()
+                                      .openSectionConfigMenu(widget.model);
+                                },
+                              )
+                            ]
+                          ],
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ));
     }

@@ -7,7 +7,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
-import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_reorder_section_helper.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_reorder_helper.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'pagebuilder_event.dart';
@@ -34,6 +34,7 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
             .debounceTime(const Duration(milliseconds: 100))
             .switchMap(mapper));
     on<ReorderSectionsEvent>(_onReorderSections);
+    on<ReorderWidgetEvent>(_onReorderWidget);
     on<SaveLandingPageContentEvent>(_onSaveLandingPageContent);
   }
 
@@ -45,7 +46,7 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
 
       if (sections == null || sections.isEmpty) return;
 
-      final updatedSections = PagebuilderReorderSectionHelper.reorderSections(
+      final updatedSections = PagebuilderReorderHelper.reorderSections(
           sections, event.oldIndex, event.newIndex);
 
       final updatedContent =
@@ -60,6 +61,64 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
         isUpdated: true,
       ));
     }
+  }
+
+  void _onReorderWidget(
+      ReorderWidgetEvent event, Emitter<PagebuilderState> emit) {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final sections = currentState.content.content?.sections;
+
+      if (sections == null || sections.isEmpty) return;
+
+      final updatedSections = sections.map((section) {
+        final updatedWidgets = section.widgets?.map((widget) {
+          return _reorderChildrenInWidget(
+              widget, event.parentWidgetId, event.oldIndex, event.newIndex);
+        }).toList();
+        return section.copyWith(widgets: updatedWidgets);
+      }).toList();
+
+      final updatedContent =
+          currentState.content.content?.copyWith(sections: updatedSections);
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: updatedContent);
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
+
+  PageBuilderWidget _reorderChildrenInWidget(PageBuilderWidget widget,
+      String parentWidgetId, int oldIndex, int newIndex) {
+    if (widget.id.value == parentWidgetId) {
+      if (widget.children != null && widget.children!.isNotEmpty) {
+        final reorderedChildren = PagebuilderReorderHelper.reorderWidgets(
+            widget.children!, oldIndex, newIndex);
+        return widget.copyWith(children: reorderedChildren);
+      }
+      return widget;
+    }
+
+    if (widget.containerChild != null) {
+      final updatedContainerChild = _reorderChildrenInWidget(
+          widget.containerChild!, parentWidgetId, oldIndex, newIndex);
+      return widget.copyWith(containerChild: updatedContainerChild);
+    }
+
+    if (widget.children != null && widget.children!.isNotEmpty) {
+      final updatedChildren = widget.children!
+          .map((child) => _reorderChildrenInWidget(
+              child, parentWidgetId, oldIndex, newIndex))
+          .toList();
+      return widget.copyWith(children: updatedChildren);
+    }
+
+    return widget;
   }
 
   Future<void> _onGetLandingPage(

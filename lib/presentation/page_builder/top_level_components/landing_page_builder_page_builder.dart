@@ -6,9 +6,9 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_breakpoint_size.dart';
-import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_reorder_section_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_builder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_responsive_toolbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,34 +37,12 @@ class _LandingPageBuilderPageBuilderState
     extends State<LandingPageBuilderPageBuilder> {
   late PagebuilderConfigMenuCubit pageBuilderMenuCubit;
   bool _isConfigMenuOpen = false;
-  List<PageBuilderSection>? _reorderedSections;
 
   @override
   void initState() {
     super.initState();
     pageBuilderMenuCubit =
         widget.configMenuCubit ?? Modular.get<PagebuilderConfigMenuCubit>();
-  }
-
-  @override
-  void didUpdateWidget(LandingPageBuilderPageBuilder oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.model.sections != widget.model.sections) {
-      _reorderedSections = null;
-    }
-  }
-
-  void _handleReorder(int oldIndex, int newIndex) {
-    final sections = _reorderedSections ?? widget.model.sections;
-    if (sections != null && sections.isNotEmpty) {
-      setState(() {
-        _reorderedSections = PagebuilderReorderSectionHelper.reorderSections(
-            sections, oldIndex, newIndex);
-      });
-
-      Modular.get<PagebuilderBloc>()
-          .add(ReorderSectionsEvent(oldIndex, newIndex));
-    }
   }
 
   @override
@@ -132,23 +110,33 @@ class _LandingPageBuilderPageBuilderState
                     return Container(
                       color: const Color(0xFF323232),
                       alignment: Alignment.topCenter,
-                      child: Container(
-                        constraints: BoxConstraints(maxWidth: maxWidth),
-                        color: widget.model.backgroundColor,
-                        child: ReorderableListView(
-                            onReorder: _handleReorder,
-                            children: (_reorderedSections ?? widget.model.sections) != null
-                                ? (_reorderedSections ?? widget.model.sections)!
-                                    .asMap()
-                                    .entries
-                                    .map((entry) =>
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: [
+                          Container(
+                            constraints: BoxConstraints(maxWidth: maxWidth),
+                            color: widget.model.backgroundColor,
+                            child: widget.model.sections != null &&
+                                    widget.model.sections!.isNotEmpty
+                                ? PagebuilderReorderableElement<
+                                    PageBuilderSection>(
+                                    containerId: 'page-sections',
+                                    items: widget.model.sections!,
+                                    getItemId: (section) => section.id.value,
+                                    onReorder: (oldIndex, newIndex) {
+                                      Modular.get<PagebuilderBloc>().add(
+                                          ReorderSectionsEvent(
+                                              oldIndex, newIndex));
+                                    },
+                                    buildChild: (section, index) =>
                                         LandingPageBuilderSectionView(
-                                          key: ValueKey(entry.value.id.value),
-                                          model: entry.value,
-                                          index: entry.key,
-                                        ))
-                                    .toList()
-                                : []),
+                                      model: section,
+                                      index: index,
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                          ),
+                        ],
                       ),
                     );
                   },

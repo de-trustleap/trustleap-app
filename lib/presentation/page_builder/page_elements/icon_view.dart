@@ -12,11 +12,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PageBuilderIconView extends StatelessWidget {
   final PageBuilderIconProperties properties;
   final PageBuilderWidget widgetModel;
+  final int? index;
 
   const PageBuilderIconView({
     super.key,
     required this.properties,
     required this.widgetModel,
+    this.index,
   });
 
   @override
@@ -29,6 +31,7 @@ class PageBuilderIconView extends StatelessWidget {
 
         return LandingPageBuilderWidgetContainer(
           model: widgetModel,
+          index: index,
           child: Icon(IconUtility.getIconFromHexCode(properties.code),
               size: size, color: properties.color),
         );

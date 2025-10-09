@@ -24,6 +24,7 @@ import 'package:finanzbegleiter/application/legals/legals_cubit.dart';
 import 'package:finanzbegleiter/application/menu/menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_drag/pagebuilder_drag_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
@@ -167,7 +168,8 @@ class AppModule extends Module {
       ..add(CompanyRequestCubit.new)
       ..add(CompanyRequestObserverCubit.new)
       ..addLazySingleton(PagebuilderHoverCubit.new)
-      ..addLazySingleton(PagebuilderSelectionCubit.new);
+      ..addLazySingleton(PagebuilderSelectionCubit.new)
+      ..addLazySingleton(PagebuilderDragCubit.new);
   }
 
   @override

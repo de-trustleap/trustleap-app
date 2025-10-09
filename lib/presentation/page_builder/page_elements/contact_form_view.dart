@@ -9,16 +9,20 @@ import 'package:flutter/material.dart';
 class PageBuilderContactFormView extends StatelessWidget {
   final PageBuilderContactFormProperties properties;
   final PageBuilderWidget widgetModel;
+  final int? index;
+
   const PageBuilderContactFormView({
     super.key,
     required this.properties,
     required this.widgetModel,
+    this.index,
   });
 
   @override
   Widget build(BuildContext context) {
     return LandingPageBuilderWidgetContainer(
       model: widgetModel,
+      index: index,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
