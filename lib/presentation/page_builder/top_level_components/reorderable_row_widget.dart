@@ -191,12 +191,19 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
               setState(() => _hoveringIndex = null);
             },
             onAcceptWithDetails: (details) {
-              _handleReorder(details.data.index, index);
+              // When dragging left to right, insert AFTER this element (index + 1)
+              // When dragging right to left, insert BEFORE this element (index)
+              final targetIndex = details.data.index < index ? index + 1 : index;
+              _handleReorder(details.data.index, targetIndex);
             },
             builder: (context, candidateData, rejectedData) {
+              // Determine indicator position based on drag direction
+              final showIndicatorBefore = isHovering && (_draggingIndex! > index);
+              final showIndicatorAfter = isHovering && (_draggingIndex! < index);
+
               return Row(
                 children: [
-                  if (isHovering)
+                  if (showIndicatorBefore)
                     Container(
                       width: 4,
                       color: Theme.of(context).colorScheme.secondary,
@@ -220,8 +227,7 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                         // Get the actual width of the item from the RenderBox
                         double? width;
                         final renderBox =
-                            itemKey.currentContext?.findRenderObject()
-                                as RenderBox?;
+                            itemKey.currentContext?.findRenderObject() as RenderBox?;
                         if (renderBox != null) {
                           width = renderBox.size.width;
                         }
@@ -247,6 +253,11 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                       ),
                     ),
                   ),
+                  if (showIndicatorAfter)
+                    Container(
+                      width: 4,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                 ],
               );
             },
@@ -298,7 +309,12 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
       );
     }
 
-    final rowContent = widget.properties?.equalHeights == true
+    // Use IntrinsicHeight when equalHeights is true OR when hovering
+    // (hovering needs IntrinsicHeight to make the indicator visible)
+    final needsIntrinsicHeight = widget.properties?.equalHeights == true ||
+                                   _hoveringIndex != null;
+
+    final rowContent = needsIntrinsicHeight
         ? IntrinsicHeight(
             child: Row(
               mainAxisAlignment: widget.properties?.mainAxisAlignment ??

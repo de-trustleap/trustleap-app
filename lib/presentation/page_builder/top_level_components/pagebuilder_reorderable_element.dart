@@ -161,9 +161,8 @@ class _PagebuilderReorderableElementState<T>
                   buildFeedback: (context) {
                     // Get the actual width of the item from the RenderBox
                     double? width;
-                    final renderBox =
-                        itemKey.currentContext?.findRenderObject()
-                            as RenderBox?;
+                    final renderBox = itemKey.currentContext?.findRenderObject()
+                        as RenderBox?;
                     if (renderBox != null) {
                       width = renderBox.size.width;
                     }
@@ -199,7 +198,8 @@ class _PagebuilderReorderableElementState<T>
     dragTargets.add(
       DragTarget<DragData<T>>(
         onWillAcceptWithDetails: (details) {
-          final isSameContainer = details.data.containerId == widget.containerId;
+          final isSameContainer =
+              details.data.containerId == widget.containerId;
           final targetIndex = items.length;
           final isDifferentIndex = details.data.index != targetIndex;
 
@@ -235,3 +235,7 @@ class _PagebuilderReorderableElementState<T>
     );
   }
 }
+
+// TODO: ROW WITH IMAGE AND TEXT NOT WORKING WITH DRAG (DONE)
+// TODO: FIX RESPONSIVE MODE
+// TODO: ADD MORE SPACE TO DRAG ELEMENT AT BEGINNING OR END OF ROW/COLUMN
