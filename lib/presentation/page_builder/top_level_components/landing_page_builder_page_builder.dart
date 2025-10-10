@@ -113,28 +113,30 @@ class _LandingPageBuilderPageBuilderState
                       child: ListView(
                         shrinkWrap: true,
                         children: [
-                          Container(
-                            constraints: BoxConstraints(maxWidth: maxWidth),
-                            color: widget.model.backgroundColor,
-                            child: widget.model.sections != null &&
-                                    widget.model.sections!.isNotEmpty
-                                ? PagebuilderReorderableElement<
-                                    PageBuilderSection>(
-                                    containerId: 'page-sections',
-                                    items: widget.model.sections!,
-                                    getItemId: (section) => section.id.value,
-                                    onReorder: (oldIndex, newIndex) {
-                                      Modular.get<PagebuilderBloc>().add(
-                                          ReorderSectionsEvent(
-                                              oldIndex, newIndex));
-                                    },
-                                    buildChild: (section, index) =>
-                                        LandingPageBuilderSectionView(
-                                      model: section,
-                                      index: index,
-                                    ),
-                                  )
-                                : const SizedBox.shrink(),
+                          Center(
+                            child: Container(
+                              width: maxWidth,
+                              color: widget.model.backgroundColor,
+                              child: widget.model.sections != null &&
+                                      widget.model.sections!.isNotEmpty
+                                  ? PagebuilderReorderableElement<
+                                      PageBuilderSection>(
+                                      containerId: 'page-sections',
+                                      items: widget.model.sections!,
+                                      getItemId: (section) => section.id.value,
+                                      onReorder: (oldIndex, newIndex) {
+                                        Modular.get<PagebuilderBloc>().add(
+                                            ReorderSectionsEvent(
+                                                oldIndex, newIndex));
+                                      },
+                                      buildChild: (section, index) =>
+                                          LandingPageBuilderSectionView(
+                                        model: section,
+                                        index: index,
+                                      ),
+                                    )
+                                  : const SizedBox.shrink(),
+                            ),
                           ),
                         ],
                       ),

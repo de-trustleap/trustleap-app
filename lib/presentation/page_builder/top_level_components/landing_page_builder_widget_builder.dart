@@ -1,4 +1,3 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
@@ -13,7 +12,6 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_prop
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/infrastructure/models/model_helper/axis_alignment_converter.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/button_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/contact_form_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/footer_view.dart';
@@ -24,9 +22,8 @@ import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuil
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/video_player_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/reorderable_column_widget.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/reorderable_row_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class LandingPageBuilderWidgetBuilder {
   Widget build(PageBuilderWidget model, {int? index}) {
@@ -133,91 +130,11 @@ class LandingPageBuilderWidgetBuilder {
       return const SizedBox.shrink();
     }
 
-    return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
-        PagebuilderResponsiveBreakpoint>(
-      bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
-      builder: (context, breakpoint) {
-        // Check if we should switch to Column for current breakpoint
-        final shouldBeColumn = properties?.switchToColumnFor != null &&
-            properties!.switchToColumnFor!.contains(breakpoint);
-
-        if (shouldBeColumn) {
-          // Switch to Column layout - swap main and cross axis alignments
-          return LandingPageBuilderWidgetContainer(
-            model: model,
-            index: index,
-            child: Column(
-              // Row's mainAxis (horizontal) becomes Column's crossAxis
-              crossAxisAlignment: AxisAlignmentConverter.mainAxisToCrossAxis(
-                  properties.mainAxisAlignment ?? MainAxisAlignment.center),
-              // Row's crossAxis (vertical) becomes Column's mainAxis
-              mainAxisAlignment: AxisAlignmentConverter.crossAxisToMainAxis(
-                  properties.crossAxisAlignment ?? CrossAxisAlignment.center),
-              children:
-                  model.children?.map((child) => build(child)).toList() ?? [],
-            ),
-          );
-        }
-
-        // Regular Row layout
-        // Berechne den Gesamtwert der definierten widthPercentage Werte
-        final totalWidthPercentage = model.children!.fold<double>(
-            0,
-            (sum, child) =>
-                sum +
-                (child.widthPercentage?.getValueForBreakpoint(breakpoint) ??
-                    0));
-        // Falls die Gesamtbreite über 100% liegt, passe die Werte an
-        final scaleFactor =
-            totalWidthPercentage > 100 ? 100 / totalWidthPercentage : 1.0;
-        // Restliche Breite berechnen, falls die Gesamtbreite unter 100% liegt
-        final remainingWidthPercentage =
-            100 - totalWidthPercentage * scaleFactor;
-
-        // Erstelle eine Liste für die Kinder der Row
-        List<Widget> rowChildren = [];
-
-        // Füge die Expanded-Widgets für jedes Kind hinzu
-        for (var child in model.children!) {
-          final flexValue =
-              (child.widthPercentage?.getValueForBreakpoint(breakpoint) ?? 0) *
-                  scaleFactor;
-          rowChildren.add(
-            Expanded(
-              flex: (flexValue * 100).toInt(),
-              child: build(child),
-            ),
-          );
-        }
-
-        // Füge eine SizedBox am Ende hinzu, falls restliche Breite vorhanden ist
-        if (remainingWidthPercentage > 0) {
-          rowChildren.add(
-            Expanded(
-              flex: (remainingWidthPercentage * 100).toInt(),
-              child: const SizedBox.shrink(),
-            ),
-          );
-        }
-        return LandingPageBuilderWidgetContainer(
-          model: model,
-          index: index,
-          child: properties?.equalHeights == true
-              ? IntrinsicHeight(
-                  child: Row(
-                    mainAxisAlignment: properties?.mainAxisAlignment ??
-                        MainAxisAlignment.center,
-                    crossAxisAlignment: properties?.crossAxisAlignment ??
-                        CrossAxisAlignment.center,
-                    children: rowChildren,
-                  ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: rowChildren,
-                ),
-        );
-      },
+    return ReorderableRowWidget(
+      model: model,
+      properties: properties,
+      index: index,
+      buildChild: (child, childIndex) => build(child, index: childIndex),
     );
   }
 
