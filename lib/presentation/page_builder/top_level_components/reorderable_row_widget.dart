@@ -123,6 +123,8 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
   int? _draggingIndex;
   int? _hoveringIndex;
   final Map<int, GlobalKey> _itemKeys = {};
+  bool _hoveringAfterLast = false;
+  bool _leftRightwards = false;
 
   @override
   void didUpdateWidget(_ReorderableRowContent oldWidget) {
@@ -144,6 +146,8 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
         _reorderedItems = updatedItems;
         _hoveringIndex = null;
         _draggingIndex = null;
+        _hoveringAfterLast = false;
+        _leftRightwards = false;
       });
 
       Modular.get<PagebuilderDragCubit>().setDragging(false);
@@ -163,6 +167,7 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
 
       _itemKeys.putIfAbsent(index, () => GlobalKey());
       final itemKey = _itemKeys[index]!;
+      final isLastItem = index == items.length - 1;
 
       final flexValue =
           (child.widthPercentage?.getValueForBreakpoint(widget.breakpoint) ??
@@ -181,16 +186,89 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                   details.data.containerId == widget.model.id.value;
               if (!isSameContainer) return false;
 
+              // For last item, accept if hovering after last OR if different index
+              if (isLastItem) {
+                final isDifferentIndex = details.data.index != index;
+                if (isDifferentIndex && !_hoveringAfterLast) {
+                  setState(() {
+                    _hoveringIndex = index;
+                    _hoveringAfterLast = false;
+                    _leftRightwards = false;
+                  });
+                }
+                return isDifferentIndex || _hoveringAfterLast;
+              }
+
               final isDifferentIndex = details.data.index != index;
               if (isDifferentIndex) {
-                setState(() => _hoveringIndex = index);
+                setState(() {
+                  _hoveringIndex = index;
+                  _hoveringAfterLast = false;
+                  _leftRightwards = false;
+                });
               }
               return isDifferentIndex;
             },
+            onMove: (details) {
+              // Only handle if we're dragging in this container and this is last item
+              if (!isLastItem || _draggingIndex == null) {
+                return;
+              }
+
+              final isSameContainer = details.data.containerId == widget.model.id.value;
+              if (!isSameContainer) {
+                return;
+              }
+
+              // Check if we're in the right part of the element (right 30%)
+              final renderBox = itemKey.currentContext?.findRenderObject() as RenderBox?;
+              if (renderBox != null) {
+                final localPosition = renderBox.globalToLocal(details.offset);
+                final width = renderBox.size.width;
+                final isInRightPart = localPosition.dx > width * 0.7;
+
+                if (isInRightPart) {
+                  setState(() {
+                    _hoveringIndex = items.length;
+                    _hoveringAfterLast = true;
+                  });
+                }
+              }
+            },
             onLeave: (_) {
-              setState(() => _hoveringIndex = null);
+              // Only handle onLeave if we're dragging in this container
+              final isDraggingInThisContainer = _draggingIndex != null;
+              if (!isDraggingInThisContainer) {
+                return;
+              }
+
+              // For last item, mark that we left rightwards if we were hovering after last
+              if (isLastItem) {
+                if (_hoveringAfterLast) {
+                  setState(() {
+                    _leftRightwards = true;
+                  });
+                } else {
+                  setState(() {
+                    _hoveringIndex = items.length;
+                    _hoveringAfterLast = true;
+                  });
+                }
+              } else {
+                setState(() {
+                  _hoveringIndex = null;
+                  _hoveringAfterLast = false;
+                  _leftRightwards = false;
+                });
+              }
             },
             onAcceptWithDetails: (details) {
+              // If hovering after last and this is the last item, drop at end
+              if (_hoveringAfterLast && isLastItem) {
+                _handleReorder(details.data.index, items.length);
+                return;
+              }
+
               // When dragging left to right, insert AFTER this element (index + 1)
               // When dragging right to left, insert BEFORE this element (index)
               final targetIndex = details.data.index < index ? index + 1 : index;
@@ -199,7 +277,8 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             builder: (context, candidateData, rejectedData) {
               // Determine indicator position based on drag direction
               final showIndicatorBefore = isHovering && (_draggingIndex! > index);
-              final showIndicatorAfter = isHovering && (_draggingIndex! < index);
+              final showIndicatorAfter = (isHovering && (_draggingIndex! < index)) ||
+                                         (isLastItem && _hoveringAfterLast);
 
               return Row(
                 children: [
@@ -217,9 +296,16 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                         Modular.get<PagebuilderDragCubit>().setDragging(true);
                       },
                       onDragEnd: () {
+                        // If we left rightwards, trigger reorder to end
+                        if (_leftRightwards && _draggingIndex != null && _draggingIndex != items.length - 1) {
+                          _handleReorder(_draggingIndex!, items.length);
+                        }
+
                         setState(() {
                           _draggingIndex = null;
                           _hoveringIndex = null;
+                          _hoveringAfterLast = false;
+                          _leftRightwards = false;
                         });
                         Modular.get<PagebuilderDragCubit>().setDragging(false);
                       },
@@ -265,39 +351,6 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
         ),
       );
     }
-
-    // Add DragTarget at the end
-    rowChildren.add(
-      DragTarget<DragData<PageBuilderWidget>>(
-        onWillAcceptWithDetails: (details) {
-          final isSameContainer =
-              details.data.containerId == widget.model.id.value;
-          final targetIndex = items.length;
-          final isDifferentIndex = details.data.index != targetIndex;
-
-          if (isSameContainer && isDifferentIndex) {
-            setState(() => _hoveringIndex = targetIndex);
-            return true;
-          }
-          return false;
-        },
-        onLeave: (_) {
-          setState(() => _hoveringIndex = null);
-        },
-        onAcceptWithDetails: (details) {
-          _handleReorder(details.data.index, items.length);
-        },
-        builder: (context, candidateData, rejectedData) {
-          final isHovering = _hoveringIndex == items.length;
-          return Container(
-            width: isHovering ? 4 : 20,
-            color: isHovering
-                ? Theme.of(context).colorScheme.secondary
-                : Colors.transparent,
-          );
-        },
-      ),
-    );
 
     // Add remaining width spacer if needed
     if (widget.remainingWidthPercentage > 0) {
