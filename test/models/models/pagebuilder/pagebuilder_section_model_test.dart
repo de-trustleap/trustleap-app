@@ -23,6 +23,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 300, backgroundConstrained: null,
+          customCSS: null,
           widgets: [], visibleOn: null);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
@@ -30,6 +31,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 500, backgroundConstrained: null,
+          customCSS: null,
           widgets: [], visibleOn: null);
       // When
       final result = section.copyWith(maxWidth: 500);
@@ -47,6 +49,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 300, backgroundConstrained: null,
+          customCSS: null,
           widgets: [], visibleOn: null);
       final expectedResult = {
         "id": "1",
@@ -78,6 +81,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 300, backgroundConstrained: null,
+          customCSS: null,
           widgets: [], visibleOn: null);
       // When
       final result = PageBuilderSectionModel.fromMap(map);
@@ -97,6 +101,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 800, backgroundConstrained: null,
+          customCSS: null,
           widgets: [], visibleOn: null);
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
@@ -105,6 +110,7 @@ void main() {
           widgets: [],
           background: null,
           maxWidth: 800, backgroundConstrained: null,
+          customCSS: null,
           visibleOn: null);
       // When
       final result = model.toDomain();
@@ -125,6 +131,7 @@ void main() {
           widgets: [],
           background: null,
           maxWidth: 800, backgroundConstrained: null,
+          customCSS: null,
           visibleOn: null);
       final expectedResult = PageBuilderSectionModel(
           id: "1",
@@ -132,6 +139,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 800, backgroundConstrained: null,
+          customCSS: null,
           widgets: [], visibleOn: null);
       // When
       final result = PageBuilderSectionModel.fromDomain(model);
@@ -225,7 +233,8 @@ void main() {
                   margin:
                       const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   maxWidth: null,
-                  alignment: null),
+                  alignment: null,
+                  customCSS: null),
               PageBuilderWidget(
                   id: UniqueID.fromUniqueString(
                       "660d39c1-70f7-4eb7-ba8b-41580a17d9a6"),
@@ -261,7 +270,8 @@ void main() {
                       margin: const PageBuilderSpacing(
                           top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                       maxWidth: null,
-                      alignment: null),
+                      alignment: null,
+                      customCSS: null),
                   widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
@@ -270,7 +280,8 @@ void main() {
                   margin:
                       const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   maxWidth: null,
-                  alignment: null)
+                  alignment: null,
+                  customCSS: null)
             ],
             containerChild: null,
             widthPercentage: null,
@@ -280,7 +291,8 @@ void main() {
                 const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(40), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
             margin: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
             maxWidth: 950,
-            alignment: null)
+            alignment: null,
+            customCSS: null)
       ];
       final model = PageBuilderSectionModel(
           id: "1",
@@ -288,6 +300,7 @@ void main() {
           layout: "column",
           background: null,
           maxWidth: 800, backgroundConstrained: null,
+          customCSS: null,
           widgets: widgets, visibleOn: null);
       // When
       final result = model.getPageBuilderWidgetList(widgets);
@@ -332,7 +345,8 @@ void main() {
                       const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(16)),
                   margin: null,
                   maxWidth: null,
-                  alignment: null),
+                  alignment: null,
+                  customCSS: null),
               PageBuilderWidget(
                   id: UniqueID.fromUniqueString(
                       "660d39c1-70f7-4eb7-ba8b-41580a17d9a6"),
@@ -367,7 +381,8 @@ void main() {
                           top: PagebuilderResponsiveOrConstant.constant(20), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
                       margin: null,
                       maxWidth: null,
-                      alignment: null),
+                      alignment: null,
+                      customCSS: null),
                   widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
                   background: null,
                   hoverBackground: null,
@@ -375,7 +390,8 @@ void main() {
                       const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
                   margin: null,
                   maxWidth: null,
-                  alignment: null)
+                  alignment: null,
+                  customCSS: null)
             ],
             containerChild: null,
             widthPercentage: null,
@@ -385,7 +401,8 @@ void main() {
                 const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(40), bottom: PagebuilderResponsiveOrConstant.constant(20), left: PagebuilderResponsiveOrConstant.constant(20), right: PagebuilderResponsiveOrConstant.constant(20)),
             margin: null,
             maxWidth: 950,
-            alignment: null)
+            alignment: null,
+            customCSS: null)
       ];
       final expectedResult = [
         {
@@ -455,6 +472,7 @@ void main() {
           widgets: [],
           background: null,
           maxWidth: 800, backgroundConstrained: null,
+          customCSS: null,
           visibleOn: null);
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
@@ -463,6 +481,7 @@ void main() {
           widgets: [],
           background: null,
           maxWidth: 800, backgroundConstrained: null,
+          customCSS: null,
           visibleOn: null);
       // Then
       expect(section1, section2);

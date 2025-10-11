@@ -147,7 +147,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [rowWidget],
           visibleOn: null,
         );
@@ -246,7 +245,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [columnWidget],
           visibleOn: null,
         );
@@ -344,7 +342,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [rowWidget],
           visibleOn: null,
         );
@@ -425,7 +422,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [columnWidget],
           visibleOn: null,
         );
@@ -819,7 +815,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [rowWidget],
           visibleOn: null,
         );
@@ -917,7 +912,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [rowWidget],
           visibleOn: null,
         );
@@ -1015,7 +1009,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [rowWidget],
           visibleOn: null,
         );
@@ -1121,7 +1114,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [rowWidget],
           visibleOn: null,
         );
@@ -1227,7 +1219,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [rowWidget],
           visibleOn: null,
         );
@@ -1308,7 +1299,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-          customCSS: null,
           widgets: [columnWidget],
           visibleOn: null,
         );

@@ -116,6 +116,7 @@ void main() {
             widgets: [],
             background: null,
             maxWidth: null, backgroundConstrained: null,
+            customCSS: null,
             visibleOn: null),
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
@@ -125,6 +126,7 @@ void main() {
             widgets: [],
             background: null,
             maxWidth: null, backgroundConstrained: null,
+            customCSS: null,
             visibleOn: null)
       ];
       // When
@@ -147,6 +149,7 @@ void main() {
             background: null,
             maxWidth: 500,
             backgroundConstrained: null,
+            customCSS: null,
             visibleOn: null),
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
@@ -157,6 +160,7 @@ void main() {
             background: null,
             maxWidth: 400,
             backgroundConstrained: null,
+            customCSS: null,
             visibleOn: null)
       ];
       final expectedResult = [

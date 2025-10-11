@@ -67,6 +67,7 @@ void main() {
               background: null,
               maxWidth: null,
               backgroundConstrained: null,
+              customCSS: null,
               widgets: [
                 PageBuilderWidget(
                     id: UniqueID.fromUniqueString("3"),
@@ -80,6 +81,7 @@ void main() {
                     containerChild: null,
                     maxWidth: null,
                     alignment: null,
+                    customCSS: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),

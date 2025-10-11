@@ -12,6 +12,7 @@ class PageBuilderSection extends Equatable {
   final PagebuilderBackground? background;
   final double? maxWidth;
   final bool? backgroundConstrained;
+  final String? customCSS;
   final List<PageBuilderWidget>? widgets;
   final List<PagebuilderResponsiveBreakpoint>? visibleOn;
 
@@ -23,6 +24,7 @@ class PageBuilderSection extends Equatable {
       required this.background,
       required this.maxWidth,
       required this.backgroundConstrained,
+      required this.customCSS,
       required this.visibleOn});
 
   PageBuilderSection copyWith({
@@ -33,6 +35,7 @@ class PageBuilderSection extends Equatable {
     PagebuilderBackground? background,
     double? maxWidth,
     bool? backgroundConstrained,
+    String? customCSS,
     List<PagebuilderResponsiveBreakpoint>? visibleOn,
     bool updateVisibleOn = false,
   }) {
@@ -45,8 +48,8 @@ class PageBuilderSection extends Equatable {
         maxWidth: maxWidth ?? this.maxWidth,
         backgroundConstrained:
             backgroundConstrained ?? this.backgroundConstrained,
-        visibleOn:
-            updateVisibleOn ? visibleOn : (visibleOn ?? this.visibleOn));
+        customCSS: customCSS ?? this.customCSS,
+        visibleOn: updateVisibleOn ? visibleOn : (visibleOn ?? this.visibleOn));
   }
 
   @override
@@ -57,6 +60,7 @@ class PageBuilderSection extends Equatable {
         background,
         maxWidth,
         backgroundConstrained,
+        customCSS,
         widgets,
         visibleOn
       ];

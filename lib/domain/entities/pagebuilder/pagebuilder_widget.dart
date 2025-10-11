@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +24,7 @@ class PageBuilderWidget extends Equatable {
   final PageBuilderSpacing? margin;
   final double? maxWidth;
   final Alignment? alignment;
+  final String? customCSS;
 
   const PageBuilderWidget(
       {required this.id,
@@ -38,7 +39,8 @@ class PageBuilderWidget extends Equatable {
       required this.padding,
       required this.margin,
       required this.maxWidth,
-      required this.alignment});
+      required this.alignment,
+      required this.customCSS});
 
   PageBuilderWidget copyWith(
       {UniqueID? id,
@@ -54,6 +56,7 @@ class PageBuilderWidget extends Equatable {
       PageBuilderSpacing? margin,
       double? maxWidth,
       Alignment? alignment,
+      String? customCSS,
       bool removeHoverProperties = false,
       bool removeHoverBackground = false}) {
     return PageBuilderWidget(
@@ -73,7 +76,8 @@ class PageBuilderWidget extends Equatable {
         padding: padding ?? this.padding,
         margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
-        alignment: alignment ?? this.alignment);
+        alignment: alignment ?? this.alignment,
+        customCSS: customCSS ?? this.customCSS);
   }
 
   String getWidgetTitle(AppLocalizations localization) {
@@ -124,6 +128,7 @@ class PageBuilderWidget extends Equatable {
         padding,
         margin,
         maxWidth,
-        alignment
+        alignment,
+        customCSS
       ];
 }
