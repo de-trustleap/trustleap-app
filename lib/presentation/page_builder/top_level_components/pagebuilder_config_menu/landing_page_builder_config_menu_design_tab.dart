@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_column_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_contactform_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_container_config.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_custom_css.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_footer_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_icon_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_image_config.dart';
@@ -51,6 +52,8 @@ class LandingPageBuilderConfigMenuDesignTab extends StatelessWidget {
         PagebuilderConfigMenuLayout(model: model),
         const SizedBox(height: 8),
         PagebuilderConfigMenuBackground(model: model, section: null),
+        const SizedBox(height: 8),
+        PagebuilderConfigMenuCustomCSS(model: model, section: null),
         const SizedBox(height: 40)
       ],
     );

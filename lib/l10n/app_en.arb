@@ -1703,6 +1703,14 @@
     "@landingpage_pagebuilder_layout_menu_background_color": {
         "description": "Title background color image menu in the Pagebuilder Config Menu in the background area"
     },
+    "landingpage_pagebuilder_custom_css_menu_title": "Custom CSS",
+    "@landingpage_pagebuilder_custom_css_menu_title": {
+        "description": "Title for Custom CSS menu item in the Pagebuilder Config Menu"
+    },
+    "landingpage_pagebuilder_custom_css_menu_description": "To further customize the layout of this element, you can add custom CSS here.\nCSS changes are not visible in the pagebuilder. You need to check it in the landingpage preview.",
+    "@landingpage_pagebuilder_custom_css_menu_description": {
+        "description": "Description for Custom CSS menu item in the Pagebuilder Config Menu"
+    },
     "pagebuilder_layout_menu_alignment_top_left": "top left",
     "@pagebuilder_layout_menu_alignment_top_left": {
         "description": "Title for dropdown entry in the alignment menu in the pagebuilder config menu"

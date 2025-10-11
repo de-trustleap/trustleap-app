@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_background.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_custom_css.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_section_maxwidth.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_section_name.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_section_visible_on.dart';
@@ -44,6 +45,8 @@ class LandingPageBuilderConfigMenuSection extends StatelessWidget {
       PagebuilderConfigMenuSectionMaxWidth(section: section),
       const SizedBox(height: 8),
       PagebuilderConfigMenuBackground(model: null, section: section),
+      const SizedBox(height: 8),
+      PagebuilderConfigMenuCustomCSS(model: null, section: section),
       const SizedBox(height: 8),
       PagebuilderConfigMenuSectionVisibleOn(section: section),
       const SizedBox(height: 40)
