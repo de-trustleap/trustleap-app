@@ -4982,6 +4982,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mobile'**
   String get pagebuilder_section_visible_on_mobile;
+
+  /// Tooltip for Undo button in Pagebuilder Appbar
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get pagebuilder_undo_tooltip;
+
+  /// Tooltip for Redo button in Pagebuilder Appbar
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get pagebuilder_redo_tooltip;
 }
 
 class _AppLocalizationsDelegate

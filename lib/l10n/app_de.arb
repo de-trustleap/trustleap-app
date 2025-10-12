@@ -3369,5 +3369,13 @@
     "pagebuilder_section_visible_on_mobile": "Mobile",
     "@pagebuilder_section_visible_on_mobile": {
         "description": "Label für Mobile Checkbox in der Section Sichtbarkeits-Konfiguration"
+    },
+    "pagebuilder_undo_tooltip": "Rückgängig machen",
+    "@pagebuilder_undo_tooltip": {
+        "description": "Tooltip für Undo Button in der Pagebuilder Appbar"
+    },
+    "pagebuilder_redo_tooltip": "Wiederholen",
+    "@pagebuilder_redo_tooltip": {
+        "description": "Tooltip für Redo Button in der Pagebuilder Appbar"
     }
 }

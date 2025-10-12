@@ -2939,4 +2939,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_section_visible_on_mobile => 'Mobile';
+
+  @override
+  String get pagebuilder_undo_tooltip => 'Rückgängig machen';
+
+  @override
+  String get pagebuilder_redo_tooltip => 'Wiederholen';
 }
