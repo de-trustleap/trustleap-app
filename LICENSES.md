@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2025-10-10 16:47:22
+Last updated: 2025-10-12 15:59:49
 
 ---
 
@@ -199,6 +199,14 @@ These are the packages explicitly listed in your pubspec.yaml:
   Component) design pattern. Built to be used with the bloc state managemen
   package.
 
+### flutter_code_editor
+
+- **Version**: 0.3.5
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/akvelon/flutter-code-editor>
+- **Description**: A customizable code field supporting syntax highlighting and code folding.
+
 ### flutter_dropzone
 
 - **Version**: 4.2.1
@@ -206,6 +214,15 @@ These are the packages explicitly listed in your pubspec.yaml:
 - **Author**: Package Contributors
 - **Website**: <https://github.com/deakjahn/flutter_dropzone>
 - **Description**: A drag-and-drop Flutter plugin (Web only).
+
+### flutter_highlight
+
+- **Version**: 0.7.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/git-touch/highlight>
+- **Description**: Syntax highlighting widget for Flutter with lots of languages and themes
+  support.
 
 ### flutter_iconpicker
 
@@ -240,6 +257,14 @@ These are the packages explicitly listed in your pubspec.yaml:
 - **Website**: <https://github.com/mobiten/flutter_staggered_animations>
 - **Description**: Easily add staggered animations to your ListView, GridView, Column and Row
   children as shown in Material Design guidelines
+
+### highlight
+
+- **Version**: 0.7.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/pd4d10/highlight>
+- **Description**: Syntax highlighting for Dart with lots of languages and themes support.
 
 ### http
 
@@ -345,7 +370,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### _fe_analyzer_shared
 
-- **Version**: 89.0.0
+- **Version**: 90.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/_fe_analyzer_shared>
@@ -361,7 +386,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### analyzer
 
-- **Version**: 8.2.0
+- **Version**: 8.3.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/analyzer>
@@ -400,6 +425,15 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/Flutterando/auto_injector>
 - **Description**: Automatic Dependency Injection System, but without build_runner :)
+
+### autotrie
+
+- **Version**: 2.0.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/AKushWarrior/autotrie>
+- **Description**: A auto-completion engine for Dart/Flutter, based around an optimized Trie
+  implementation.
 
 ### boolean_selector
 
@@ -476,6 +510,15 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/core/tree/main/pkgs/characters>
 - **Description**: String replacement with operations that are Unicode/grapheme cluster aware.
+
+### charcode
+
+- **Version**: 1.4.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/lrhn/charcode>
+- **Description**: Constants for ASCII and common non-ASCII character codes. Integer constants
+  corresponding to the code points of individual characters.
 
 ### checked_yaml
 
@@ -897,6 +940,15 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/graphs>
 - **Description**: Graph algorithms that operate on graphs in any representation.
 
+### hive
+
+- **Version**: 2.2.3
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/hivedb/hive/tree/master/hive>
+- **Description**: Lightweight and blazing fast key-value database written in pure Dart. Strongly
+  encrypted using AES-256.
+
 ### http_multi_server
 
 - **Version**: 3.2.2
@@ -1037,6 +1089,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/dart-lang/leak_tracker/tree/main/pkgs/leak_tracker_testing>
 - **Description**: Leak tracking code intended for usage in tests.
 
+### linked_scroll_controller
+
+- **Version**: 0.2.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/google/flutter.widgets>
+- **Description**: A scroll controller that allows two or more scroll views to be in sync.
+
 ### lints
 
 - **Version**: 6.0.0
@@ -1100,6 +1160,15 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/mime>
 - **Description**: Utilities for handling media (MIME) types, including determining a type from a
   file extension and file contents.
+
+### mocktail
+
+- **Version**: 1.0.4
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/felangel/mocktail/tree/main/packages/mocktail>
+- **Description**: A Dart mock library which simplifies mocking with null safety support and no
+  manual mocks or code generation.
 
 ### modular_core
 
@@ -1322,6 +1391,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/onepub-dev/scope>
 - **Description**: A Dependency injection (Inversion of Control) library. Supports nested Scopes
   and multiple values of the same type.
+
+### scrollable_positioned_list
+
+- **Version**: 0.3.8
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/google/flutter.widgets/tree/master/packages/scrollable_positioned_list>
+- **Description**: A list with helper methods to programmatically scroll to an item.
 
 ### scrollview_observer
 
@@ -1576,6 +1653,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/test/tree/master/pkgs/test_api>
 - **Description**: The user facing API for structuring Dart tests and checking expectations.
+
+### tuple
+
+- **Version**: 2.0.2
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/google/tuple.dart>
+- **Description**: A library providing a tuple data structure.
 
 ### typed_data
 

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_local_history.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
@@ -17,6 +18,9 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
   final LandingPageRepository landingPageRepo;
   final PagebuilderRepository pageBuilderRepo;
   final UserRepository userRepo;
+
+  final PagebuilderLocalHistory _localHistory = PagebuilderLocalHistory();
+  bool _isUndoRedoOperation = false;
 
   PagebuilderBloc({
     required this.landingPageRepo,
@@ -36,6 +40,45 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     on<ReorderSectionsEvent>(_onReorderSections);
     on<ReorderWidgetEvent>(_onReorderWidget);
     on<SaveLandingPageContentEvent>(_onSaveLandingPageContent);
+    on<UndoPagebuilderEvent>(_onUndo);
+    on<RedoPagebuilderEvent>(_onRedo);
+  }
+
+  bool canUndo() => _localHistory.canUndo();
+  bool canRedo() => _localHistory.canRedo();
+
+  void _onUndo(UndoPagebuilderEvent event, Emitter<PagebuilderState> emit) {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final content = _localHistory.undo();
+      if (content != null) {
+        _isUndoRedoOperation = true;
+        emit(GetLandingPageAndUserSuccessState(
+          content: content,
+          saveLoading: false,
+          saveFailure: null,
+          saveSuccessful: null,
+          isUpdated: true,
+        ));
+        _isUndoRedoOperation = false;
+      }
+    }
+  }
+
+  void _onRedo(RedoPagebuilderEvent event, Emitter<PagebuilderState> emit) {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final content = _localHistory.redo();
+      if (content != null) {
+        _isUndoRedoOperation = true;
+        emit(GetLandingPageAndUserSuccessState(
+          content: content,
+          saveLoading: false,
+          saveFailure: null,
+          saveSuccessful: null,
+          isUpdated: true,
+        ));
+        _isUndoRedoOperation = false;
+      }
+    }
   }
 
   void _onReorderSections(
@@ -53,6 +96,11 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
           currentState.content.content?.copyWith(sections: updatedSections);
       final updatedPageBuilderContent =
           currentState.content.copyWith(content: updatedContent);
+
+      if (!_isUndoRedoOperation) {
+        _localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
       emit(GetLandingPageAndUserSuccessState(
         content: updatedPageBuilderContent,
         saveLoading: false,
@@ -83,6 +131,11 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
           currentState.content.content?.copyWith(sections: updatedSections);
       final updatedPageBuilderContent =
           currentState.content.copyWith(content: updatedContent);
+
+      if (!_isUndoRedoOperation) {
+        _localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
       emit(GetLandingPageAndUserSuccessState(
         content: updatedPageBuilderContent,
         saveLoading: false,
@@ -192,6 +245,11 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
           currentState.content.content?.copyWith(sections: updatedSections);
       final updatedPageBuilderContent =
           currentState.content.copyWith(content: updatedContent);
+
+      if (!_isUndoRedoOperation) {
+        _localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
       emit(GetLandingPageAndUserSuccessState(
         content: updatedPageBuilderContent,
         saveLoading: false,
@@ -223,6 +281,11 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
 
       final updatedPageBuilderContent =
           currentState.content.copyWith(content: updatedContent);
+
+      if (!_isUndoRedoOperation) {
+        _localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
       emit(GetLandingPageAndUserSuccessState(
         content: updatedPageBuilderContent,
         saveLoading: false,

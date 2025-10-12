@@ -68,3 +68,13 @@ class SaveLandingPageContentEvent extends PagebuilderEvent with EquatableMixin {
   @override
   List<Object?> get props => [content];
 }
+
+class UndoPagebuilderEvent extends PagebuilderEvent with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+class RedoPagebuilderEvent extends PagebuilderEvent with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}

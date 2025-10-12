@@ -14,6 +14,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_appbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_html_events.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_keyboard_shortcuts.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_finder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_page_builder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_helper.dart';
@@ -161,8 +162,9 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                             ..add(GetLandingPageEvent(id))
                         });
               } else {
-                return Scaffold(
-                  appBar: LandingPageBuilderAppBar(
+                return PagebuilderKeyboardShortcuts(
+                  child: Scaffold(
+                    appBar: LandingPageBuilderAppBar(
                     content: state.content,
                     isLoading: state.saveLoading,
                     isHierarchyOpen: _isHierarchyOverlayOpen,
@@ -209,7 +211,8 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                                 widgetId, isSection);
                           },
                         ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               }

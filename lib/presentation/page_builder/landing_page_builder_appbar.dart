@@ -44,6 +44,44 @@ class LandingPageBuilderAppBar extends StatelessWidget
             ),
             centerTitle: true,
             actions: [
+              BlocBuilder<PagebuilderBloc, PagebuilderState>(
+                bloc: Modular.get<PagebuilderBloc>(),
+                builder: (context, state) {
+                  final bloc = Modular.get<PagebuilderBloc>();
+                  return Row(
+                    children: [
+                      Tooltip(
+                        message: localization.pagebuilder_undo_tooltip,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.undo,
+                            color: bloc.canUndo()
+                                ? themeData.colorScheme.secondary
+                                : null,
+                          ),
+                          onPressed: bloc.canUndo()
+                              ? () => bloc.add(UndoPagebuilderEvent())
+                              : null,
+                        ),
+                      ),
+                      Tooltip(
+                        message: localization.pagebuilder_redo_tooltip,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.redo,
+                            color: bloc.canRedo()
+                                ? themeData.colorScheme.secondary
+                                : null,
+                          ),
+                          onPressed: bloc.canRedo()
+                              ? () => bloc.add(RedoPagebuilderEvent())
+                              : null,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

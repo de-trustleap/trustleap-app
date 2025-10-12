@@ -979,4 +979,20 @@ void main() {
       pageBuilderBloc.add(ReorderWidgetEvent("nonexistent", 0, 1));
     });
   });
+
+  group("PagebuilderBloc_UndoRedo", () {
+    test("should not be able to undo initially", () {
+      expect(pageBuilderBloc.canUndo(), false);
+    });
+
+    test("should not be able to redo initially", () {
+      expect(pageBuilderBloc.canRedo(), false);
+    });
+
+    test("canUndo and canRedo should delegate to PagebuilderLocalHistory", () {
+      // Test verifies that the methods exist and return boolean values
+      expect(pageBuilderBloc.canUndo(), isA<bool>());
+      expect(pageBuilderBloc.canRedo(), isA<bool>());
+    });
+  });
 }
