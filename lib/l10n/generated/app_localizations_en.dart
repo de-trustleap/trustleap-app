@@ -1456,6 +1456,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Background color';
 
   @override
+  String get landingpage_pagebuilder_custom_css_menu_title => 'Custom CSS';
+
+  @override
+  String get landingpage_pagebuilder_custom_css_menu_description =>
+      'To further customize the layout of this element, you can add custom CSS here.\nCSS changes are not visible in the pagebuilder. You need to check it in the landingpage preview.';
+
+  @override
   String get pagebuilder_layout_menu_alignment_top_left => 'top left';
 
   @override

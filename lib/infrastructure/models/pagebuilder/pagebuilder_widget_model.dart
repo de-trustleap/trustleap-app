@@ -44,6 +44,7 @@ class PageBuilderWidgetModel extends Equatable {
   final Map<String, dynamic>? margin;
   final double? maxWidth;
   final String? alignment;
+  final String? customCSS;
 
   const PageBuilderWidgetModel(
       {required this.id,
@@ -58,7 +59,8 @@ class PageBuilderWidgetModel extends Equatable {
       required this.padding,
       required this.margin,
       required this.maxWidth,
-      required this.alignment});
+      required this.alignment,
+      required this.customCSS});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'id': id};
@@ -69,13 +71,16 @@ class PageBuilderWidgetModel extends Equatable {
       map['children'] = children!.map((child) => child.toMap()).toList();
     }
     if (containerChild != null) map['containerChild'] = containerChild!.toMap();
-    if (widthPercentage != null) map['widthPercentage'] = widthPercentage!.toMapValue();
+    if (widthPercentage != null) {
+      map['widthPercentage'] = widthPercentage!.toMapValue();
+    }
     if (background != null) map['background'] = background;
     if (hoverBackground != null) map['hoverBackground'] = hoverBackground;
     if (padding != null) map['padding'] = padding;
     if (margin != null) map['margin'] = margin;
     if (maxWidth != null) map['maxWidth'] = maxWidth;
     if (alignment != null) map['alignment'] = alignment;
+    if (customCSS != null) map['customCSS'] = customCSS;
     return map;
   }
 
@@ -109,12 +114,11 @@ class PageBuilderWidgetModel extends Equatable {
         hoverBackground: map['hoverBackground'] != null
             ? map['hoverBackground'] as Map<String, dynamic>
             : null,
-        padding: map['padding'] != null
-            ? map['padding'] as Map<String, dynamic>
-            : null,
+        padding: map['padding'] != null ? map['padding'] as Map<String, dynamic> : null,
         margin: map['margin'] != null ? map['margin'] as Map<String, dynamic> : null,
         maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
-        alignment: map['alignment'] != null ? map['alignment'] as String : null);
+        alignment: map['alignment'] != null ? map['alignment'] as String : null,
+        customCSS: map['customCSS'] != null ? map['customCSS'] as String : null);
   }
 
   PageBuilderWidgetModel copyWith(
@@ -130,7 +134,8 @@ class PageBuilderWidgetModel extends Equatable {
       Map<String, dynamic>? padding,
       Map<String, dynamic>? margin,
       double? maxWidth,
-      String? alignment}) {
+      String? alignment,
+      String? customCSS}) {
     return PageBuilderWidgetModel(
         id: id ?? this.id,
         elementType: elementType ?? this.elementType,
@@ -144,7 +149,8 @@ class PageBuilderWidgetModel extends Equatable {
         padding: padding ?? this.padding,
         margin: margin ?? this.margin,
         maxWidth: maxWidth ?? this.maxWidth,
-        alignment: alignment ?? this.alignment);
+        alignment: alignment ?? this.alignment,
+        customCSS: customCSS ?? this.customCSS);
   }
 
   PageBuilderWidget toDomain() {
@@ -168,7 +174,8 @@ class PageBuilderWidgetModel extends Equatable {
         padding: PageBuilderSpacingModel.fromMap(padding).toDomain(),
         margin: PageBuilderSpacingModel.fromMap(margin).toDomain(),
         maxWidth: maxWidth,
-        alignment: AlignmentMapper.getAlignmentFromString(alignment));
+        alignment: AlignmentMapper.getAlignmentFromString(alignment),
+        customCSS: customCSS);
   }
 
   factory PageBuilderWidgetModel.fromDomain(PageBuilderWidget widget) {
@@ -197,7 +204,8 @@ class PageBuilderWidgetModel extends Equatable {
         padding: PageBuilderSpacingModel.fromDomain(widget.padding).toMap(),
         margin: PageBuilderSpacingModel.fromDomain(widget.margin).toMap(),
         maxWidth: widget.maxWidth,
-        alignment: AlignmentMapper.getStringFromAlignment(widget.alignment));
+        alignment: AlignmentMapper.getStringFromAlignment(widget.alignment),
+        customCSS: widget.customCSS);
   }
 
   PageBuilderProperties? getPropertiesByType(
@@ -271,8 +279,7 @@ class PageBuilderWidgetModel extends Equatable {
       return PagebuilderAnchorButtonPropertiesModel.fromDomain(properties)
           .toMap();
     } else if (properties is PagebuilderCalendlyProperties) {
-      return PagebuilderCalendlyPropertiesModel.fromDomain(properties)
-          .toMap();
+      return PagebuilderCalendlyPropertiesModel.fromDomain(properties).toMap();
     } else {
       return null;
     }
@@ -292,6 +299,7 @@ class PageBuilderWidgetModel extends Equatable {
         padding,
         margin,
         maxWidth,
-        alignment
+        alignment,
+        customCSS
       ];
 }

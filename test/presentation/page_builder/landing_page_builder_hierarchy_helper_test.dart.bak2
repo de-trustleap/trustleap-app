@@ -68,7 +68,6 @@ void main() {
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
-        customCSS: null,
         widgets: [testWidget],
         visibleOn: null,
       );
@@ -150,7 +149,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-        customCSS: null,
           widgets: [parentWidget],
           visibleOn: null,
         );
@@ -216,7 +214,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-        customCSS: null,
           widgets: [containerWidget],
           visibleOn: null,
         );
@@ -331,7 +328,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-        customCSS: null,
           widgets: [parentWidget],
           visibleOn: null,
         );
@@ -397,7 +393,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-        customCSS: null,
           widgets: [containerWidget],
           visibleOn: null,
         );
@@ -489,7 +484,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-        customCSS: null,
           widgets: [topWidget],
           visibleOn: null,
         );
@@ -523,7 +517,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-        customCSS: null,
           widgets: [testPage.sections![0].widgets![0]], // Use existing widget
           visibleOn: null,
         );
@@ -535,7 +528,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-        customCSS: null,
           widgets: [],
           visibleOn: null,
         );
@@ -601,7 +593,6 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
-        customCSS: null,
           widgets: [widget1, widget2],
           visibleOn: null,
         );

@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2025-10-07 13:51:07
+Last updated: 2025-10-10 16:47:22
 
 ---
 
@@ -297,7 +297,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### sentry_flutter
 
-- **Version**: 9.6.0
+- **Version**: 9.7.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/flutter/>
@@ -412,7 +412,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### build
 
-- **Version**: 4.0.1
+- **Version**: 4.0.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build>
@@ -849,7 +849,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### flutter_plugin_android_lifecycle
 
-- **Version**: 2.0.30
+- **Version**: 2.0.31
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/flutter_plugin_android_lifecycle>
@@ -915,7 +915,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_android
 
-- **Version**: 0.8.13+3
+- **Version**: 0.8.13+4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_android>
@@ -1126,6 +1126,15 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: A Flutter Widget which helps nest multiple widgets without needing to manually
   nest them.
 
+### objective_c
+
+- **Version**: 8.1.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/dart-lang/native/tree/main/pkgs/objective_c>
+- **Description**: A library to access Objective C from Flutter that acts as a support library for
+  package:ffigen.
+
 ### octo_image
 
 - **Version**: 2.1.0
@@ -1181,7 +1190,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### path_provider_android
 
-- **Version**: 2.2.18
+- **Version**: 2.2.19
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/path_provider/path_provider_android>
@@ -1325,7 +1334,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### sentry
 
-- **Version**: 9.6.0
+- **Version**: 9.7.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/dart/>
@@ -1352,7 +1361,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### shared_preferences_android
 
-- **Version**: 2.4.14
+- **Version**: 2.4.15
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/shared_preferences/shared_preferences_android>
@@ -1416,7 +1425,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### source_gen
 
-- **Version**: 4.0.1
+- **Version**: 4.0.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/source_gen/tree/master/source_gen>
@@ -1595,7 +1604,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### url_launcher_android
 
-- **Version**: 6.3.23
+- **Version**: 6.3.24
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_android>
@@ -1704,7 +1713,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### win32
 
-- **Version**: 5.14.0
+- **Version**: 5.15.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://win32.pub>

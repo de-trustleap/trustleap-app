@@ -37,7 +37,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
 
       final expectedResult = PageBuilderWidget(
           id: UniqueID.fromUniqueString("1"),
@@ -56,7 +57,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       // When
       final result = model.copyWith(
           elementType: PageBuilderWidgetType.row,
@@ -88,7 +90,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final expectedResult = "Spalte";
       when(mockLocalizations.landingpage_pagebuilder_config_menu_column_type)
           .thenReturn("Spalte");
@@ -116,7 +119,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final expectedResult = "Icon";
       when(mockLocalizations.landingpage_pagebuilder_config_menu_icon_type)
           .thenReturn("Icon");
@@ -144,7 +148,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final expectedResult = "Unbekannt";
       when(mockLocalizations.landingpage_pagebuilder_config_menu_unknown_type)
           .thenReturn("Unbekannt");
@@ -173,7 +178,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final widget2 = PageBuilderWidget(
           id: UniqueID.fromUniqueString("1"),
           elementType: PageBuilderWidgetType.column,
@@ -189,7 +195,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       // Then
       expect(widget1, widget2);
     });

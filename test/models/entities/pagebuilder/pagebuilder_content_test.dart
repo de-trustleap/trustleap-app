@@ -27,6 +27,7 @@ void main() {
                     background: null,
                     maxWidth: 300,
                     backgroundConstrained: null,
+                    customCSS: null,
                     visibleOn: null)
               ],
               backgroundColor: Colors.red),
@@ -44,6 +45,7 @@ void main() {
                     background: null,
                     maxWidth: 500,
                     backgroundConstrained: null,
+                    customCSS: null,
                     visibleOn: null)
               ],
               backgroundColor: Colors.red),
@@ -61,6 +63,7 @@ void main() {
                   background: null,
                   maxWidth: 500,
                   backgroundConstrained: null,
+                  customCSS: null,
                   visibleOn: null)
             ],
             backgroundColor: Colors.red),
@@ -86,6 +89,7 @@ void main() {
                     background: null,
                     maxWidth: 300,
                     backgroundConstrained: null,
+                    customCSS: null,
                     visibleOn: null)
               ],
               backgroundColor: Colors.red),
@@ -103,6 +107,7 @@ void main() {
                     background: null,
                     maxWidth: 300,
                     backgroundConstrained: null,
+                    customCSS: null,
                     visibleOn: null)
               ],
               backgroundColor: Colors.red),

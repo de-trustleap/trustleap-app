@@ -38,11 +38,13 @@ void main() {
                 padding: null,
                 margin: null,
                 maxWidth: 300,
-                alignment: null)
+                alignment: null,
+                customCSS: null)
           ],
           background: null,
           maxWidth: 300,
           backgroundConstrained: null,
+          customCSS: null,
           visibleOn: null);
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
@@ -67,11 +69,13 @@ void main() {
                 padding: null,
                 margin: null,
                 maxWidth: 300,
-                alignment: Alignment.center)
+                alignment: Alignment.center,
+                customCSS: null)
           ],
           background: null,
           maxWidth: 400,
           backgroundConstrained: null,
+          customCSS: null,
           visibleOn: null);
       // When
       final result = section.copyWith(maxWidth: 400, widgets: [
@@ -93,7 +97,8 @@ void main() {
             padding: null,
             margin: null,
             maxWidth: 300,
-            alignment: Alignment.center)
+            alignment: Alignment.center,
+            customCSS: null)
       ]);
       // Then
       expect(result, expectedResult);
@@ -126,11 +131,13 @@ void main() {
                 padding: null,
                 margin: null,
                 maxWidth: 300,
-                alignment: null)
+                alignment: null,
+                customCSS: null)
           ],
           background: null,
           maxWidth: 300,
           backgroundConstrained: null,
+          customCSS: null,
           visibleOn: null);
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
@@ -155,11 +162,13 @@ void main() {
                 padding: null,
                 margin: null,
                 maxWidth: 300,
-                alignment: null)
+                alignment: null,
+                customCSS: null)
           ],
           background: null,
           maxWidth: 300,
           backgroundConstrained: null,
+          customCSS: null,
           visibleOn: null);
       // Then
       expect(section1, section2);

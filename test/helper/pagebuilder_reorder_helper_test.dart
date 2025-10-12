@@ -18,6 +18,7 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
+          customCSS: null,
           widgets: [],
           visibleOn: null,
         ),
@@ -28,6 +29,7 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
+          customCSS: null,
           widgets: [],
           visibleOn: null,
         ),
@@ -38,6 +40,7 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
+          customCSS: null,
           widgets: [],
           visibleOn: null,
         ),
@@ -48,6 +51,7 @@ void main() {
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
+          customCSS: null,
           widgets: [],
           visibleOn: null,
         ),
@@ -180,6 +184,7 @@ void main() {
           margin: null,
           maxWidth: null,
           alignment: null,
+          customCSS: null,
         ),
         PageBuilderWidget(
           id: UniqueID.fromUniqueString("widget2"),
@@ -195,6 +200,7 @@ void main() {
           margin: null,
           maxWidth: null,
           alignment: null,
+          customCSS: null,
         ),
         PageBuilderWidget(
           id: UniqueID.fromUniqueString("widget3"),
@@ -210,6 +216,7 @@ void main() {
           margin: null,
           maxWidth: null,
           alignment: null,
+          customCSS: null,
         ),
         PageBuilderWidget(
           id: UniqueID.fromUniqueString("widget4"),
@@ -225,6 +232,7 @@ void main() {
           margin: null,
           maxWidth: null,
           alignment: null,
+          customCSS: null,
         ),
       ];
     });

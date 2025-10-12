@@ -2579,6 +2579,18 @@ abstract class AppLocalizations {
   /// **'Background color'**
   String get landingpage_pagebuilder_layout_menu_background_color;
 
+  /// Title for Custom CSS menu item in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'Custom CSS'**
+  String get landingpage_pagebuilder_custom_css_menu_title;
+
+  /// Description for Custom CSS menu item in the Pagebuilder Config Menu
+  ///
+  /// In en, this message translates to:
+  /// **'To further customize the layout of this element, you can add custom CSS here.\nCSS changes are not visible in the pagebuilder. You need to check it in the landingpage preview.'**
+  String get landingpage_pagebuilder_custom_css_menu_description;
+
   /// Title for dropdown entry in the alignment menu in the pagebuilder config menu
   ///
   /// In en, this message translates to:

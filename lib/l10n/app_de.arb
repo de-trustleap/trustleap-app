@@ -1703,6 +1703,14 @@
     "@landingpage_pagebuilder_layout_menu_background_color": {
         "description": "Titel Hintergrundfarbe Menüpunkt für Bild im Pagebuilder Config Menü im Hintergrund Bereich"
     },
+    "landingpage_pagebuilder_custom_css_menu_title": "Benutzerdefiniertes CSS",
+    "@landingpage_pagebuilder_custom_css_menu_title": {
+        "description": "Titel für Custom CSS Menüpunkt im Pagebuilder Config Menü"
+    },
+    "landingpage_pagebuilder_custom_css_menu_description": "Um das Layout dieses Elements noch weiter zu anzupassen gibt es die Möglichkeit hier benutzerdefiniertes CSS hinzuzufügen.\nÄnderungen am CSS sind im Pagebuilder nicht sichtbar. Um die Änderungen zu sehen musst du die Landingpage Vorschau aufrufen.",
+    "@landingpage_pagebuilder_custom_css_menu_description": {
+        "description": "Beschreibung für Custom CSS Menüpunkt im Pagebuilder Config Menü"
+    },
     "pagebuilder_layout_menu_alignment_top_left": "Oben links",
     "@pagebuilder_layout_menu_alignment_top_left": {
         "description": "Titel für Dropdown Eintrag im Ausrichtung Menüpunkt im Pagebuilder Config Menü"

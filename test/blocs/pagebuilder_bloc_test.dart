@@ -145,6 +145,7 @@ void main() {
               background: null,
               maxWidth: null,
               backgroundConstrained: null,
+              customCSS: null,
               widgets: [
                 PageBuilderWidget(
                     id: UniqueID.fromUniqueString("3"),
@@ -158,6 +159,7 @@ void main() {
                     margin: null,
                     maxWidth: null,
                     alignment: null,
+                    customCSS: null,
                     properties: PageBuilderTextProperties(
                         text: "Test",
                         fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -288,6 +290,7 @@ void main() {
         containerChild: null,
         maxWidth: null,
         alignment: null,
+        customCSS: null,
         margin: null,
         padding:
             const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(8.0), bottom: PagebuilderResponsiveOrConstant.constant(8.0), left: PagebuilderResponsiveOrConstant.constant(5.0), right: PagebuilderResponsiveOrConstant.constant(5.0)));
@@ -304,6 +307,7 @@ void main() {
         maxWidth: null,
         containerChild: null,
         alignment: null,
+        customCSS: null,
         margin: null,
         padding:
             const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(8.0), bottom: PagebuilderResponsiveOrConstant.constant(8.0), left: PagebuilderResponsiveOrConstant.constant(5.0), right: PagebuilderResponsiveOrConstant.constant(5.0)));
@@ -320,6 +324,7 @@ void main() {
         widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
         maxWidth: null,
         alignment: null,
+        customCSS: null,
         margin: null,
         padding: null);
 
@@ -335,6 +340,7 @@ void main() {
         widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
         maxWidth: null,
         alignment: null,
+        customCSS: null,
         margin: null,
         padding: null);
 
@@ -350,6 +356,7 @@ void main() {
         widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
         maxWidth: null,
         alignment: null,
+        customCSS: null,
         margin: null,
         padding: null);
 
@@ -360,6 +367,7 @@ void main() {
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
+      customCSS: null,
       widgets: [mockColumnWidget, mockRowWidget],
       visibleOn: null,
     );
@@ -455,7 +463,7 @@ void main() {
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
-      widgets: [],
+          customCSS: null,      widgets: [],
       visibleOn: null,
     );
 
@@ -466,7 +474,7 @@ void main() {
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
-      widgets: [],
+          customCSS: null,      widgets: [],
       visibleOn: null,
     );
 
@@ -477,7 +485,7 @@ void main() {
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
-      widgets: [],
+          customCSS: null,      widgets: [],
       visibleOn: null,
     );
 
@@ -710,7 +718,7 @@ void main() {
       margin: null,
       maxWidth: null,
       alignment: null,
-    );
+          customCSS: null,    );
 
     final widget2 = PageBuilderWidget(
       id: UniqueID.fromUniqueString("widget2"),
@@ -737,7 +745,7 @@ void main() {
       margin: null,
       maxWidth: null,
       alignment: null,
-    );
+          customCSS: null,    );
 
     final widget3 = PageBuilderWidget(
       id: UniqueID.fromUniqueString("widget3"),
@@ -764,7 +772,7 @@ void main() {
       margin: null,
       maxWidth: null,
       alignment: null,
-    );
+          customCSS: null,    );
 
     final columnWidget = PageBuilderWidget(
       id: UniqueID.fromUniqueString("column1"),
@@ -780,7 +788,7 @@ void main() {
       margin: null,
       maxWidth: null,
       alignment: null,
-    );
+          customCSS: null,    );
 
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
@@ -789,7 +797,7 @@ void main() {
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
-      widgets: [columnWidget],
+          customCSS: null,      widgets: [columnWidget],
       visibleOn: null,
     );
 

@@ -30,7 +30,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final expectedResult = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
@@ -44,7 +45,8 @@ void main() {
           padding: {"top": 16, "bottom": 16, "left": 0, "right": 0},
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       // When
       final result = model
           .copyWith(padding: {"top": 16, "bottom": 16, "left": 0, "right": 0});
@@ -69,7 +71,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: 300.0,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final expectedResult = {
         "id": "1",
         "elementType": "container",
@@ -111,7 +114,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: 300.0,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       // When
       final result = PageBuilderWidgetModel.fromMap(map);
       // Then
@@ -137,7 +141,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: 300.0,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final expectedResult = PageBuilderWidget(
           id: UniqueID.fromUniqueString("1"),
           elementType: PageBuilderWidgetType.container,
@@ -155,7 +160,8 @@ void main() {
           padding: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
           margin: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
           maxWidth: 300,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       // When
       final result = model.toDomain();
       // Then
@@ -185,7 +191,8 @@ void main() {
           padding: const PageBuilderSpacing(top: PagebuilderResponsiveOrConstant.constant(0), bottom: PagebuilderResponsiveOrConstant.constant(0), left: PagebuilderResponsiveOrConstant.constant(0), right: PagebuilderResponsiveOrConstant.constant(0)),
           margin: null,
           maxWidth: 300,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final expectedResult = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
@@ -199,7 +206,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: 300.0,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       // When
       final result = PageBuilderWidgetModel.fromDomain(model);
       // Then
@@ -231,7 +239,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: null,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final expectedResult = PageBuilderTextProperties(
           text: "Test",
           fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -296,7 +305,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: 300.0,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       final widget2 = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
@@ -310,7 +320,8 @@ void main() {
           padding: null,
           margin: null,
           maxWidth: 300.0,
-          alignment: null);
+          alignment: null,
+          customCSS: null);
       // Then
       expect(widget1, widget2);
     });

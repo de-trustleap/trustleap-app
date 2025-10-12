@@ -163,13 +163,15 @@ class _PagebuilderReorderableElementState<T>
               return;
             }
 
-            final isSameContainer = details.data.containerId == widget.containerId;
+            final isSameContainer =
+                details.data.containerId == widget.containerId;
             if (!isSameContainer) {
               return;
             }
 
             // Check if we're in the lower part of the element (bottom 30%)
-            final renderBox = itemKey.currentContext?.findRenderObject() as RenderBox?;
+            final renderBox =
+                itemKey.currentContext?.findRenderObject() as RenderBox?;
             if (renderBox != null) {
               final localPosition = renderBox.globalToLocal(details.offset);
               final height = renderBox.size.height;
@@ -213,7 +215,8 @@ class _PagebuilderReorderableElementState<T>
           onAcceptWithDetails: (details) {
             // If hovering after last and this is the last item, drop at end
             // Otherwise drop at this item's position
-            final targetIndex = (_hoveringAfterLast && isLastItem) ? items.length : index;
+            final targetIndex =
+                (_hoveringAfterLast && isLastItem) ? items.length : index;
             _handleReorder(details.data.index, targetIndex);
             setState(() {
               _hoveringAfterLast = false;
@@ -240,7 +243,9 @@ class _PagebuilderReorderableElementState<T>
                   },
                   onDragEnd: () {
                     // If we left downwards, trigger reorder to end
-                    if (_leftDownwards && _draggingIndex != null && _draggingIndex != items.length - 1) {
+                    if (_leftDownwards &&
+                        _draggingIndex != null &&
+                        _draggingIndex != items.length - 1) {
                       _handleReorder(_draggingIndex!, items.length);
                     }
 
@@ -298,7 +303,3 @@ class _PagebuilderReorderableElementState<T>
     );
   }
 }
-
-// TODO: ROW WITH IMAGE AND TEXT NOT WORKING WITH DRAG (DONE)
-// TODO: FIX RESPONSIVE MODE (DONE)
-// TODO: ADD MORE SPACE TO DRAG ELEMENT AT BEGINNING OR END OF ROW/COLUMN

@@ -14,6 +14,7 @@ class PageBuilderSectionModel extends Equatable {
   final Map<String, dynamic>? background;
   final double? maxWidth;
   final bool? backgroundConstrained;
+  final String? customCSS;
   final List<Map<String, dynamic>>? widgets;
   final List<String>? visibleOn;
 
@@ -24,6 +25,7 @@ class PageBuilderSectionModel extends Equatable {
     required this.background,
     required this.maxWidth,
     required this.backgroundConstrained,
+    required this.customCSS,
     required this.widgets,
     required this.visibleOn,
   });
@@ -37,6 +39,7 @@ class PageBuilderSectionModel extends Equatable {
     if (backgroundConstrained != null) {
       map['backgroundConstrained'] = backgroundConstrained;
     }
+    if (customCSS != null) map['customCSS'] = customCSS;
     if (widgets != null) map['widgets'] = widgets;
     if (visibleOn != null) map['visibleOn'] = visibleOn;
     return map;
@@ -54,6 +57,7 @@ class PageBuilderSectionModel extends Equatable {
         backgroundConstrained: map['backgroundConstrained'] != null
             ? map['backgroundConstrained'] as bool
             : null,
+        customCSS: map['customCSS'] != null ? map['customCSS'] as String : null,
         widgets: map['widgets'] != null
             ? List<Map<String, dynamic>>.from((map['widgets'] as List)
                 .map((item) => item as Map<String, dynamic>))
@@ -70,6 +74,7 @@ class PageBuilderSectionModel extends Equatable {
     Map<String, dynamic>? background,
     double? maxWidth,
     bool? backgroundConstrained,
+    String? customCSS,
     List<Map<String, dynamic>>? widgets,
     List<String>? visibleOn,
   }) {
@@ -81,6 +86,7 @@ class PageBuilderSectionModel extends Equatable {
       maxWidth: maxWidth ?? this.maxWidth,
       backgroundConstrained:
           backgroundConstrained ?? this.backgroundConstrained,
+      customCSS: customCSS ?? this.customCSS,
       widgets: widgets ?? this.widgets,
       visibleOn: visibleOn ?? this.visibleOn,
     );
@@ -99,6 +105,7 @@ class PageBuilderSectionModel extends Equatable {
             : null,
         maxWidth: maxWidth,
         backgroundConstrained: backgroundConstrained,
+        customCSS: customCSS,
         widgets: getPageBuilderWidgetList(widgets),
         visibleOn: visibleOn
             ?.map((breakpointName) => PagebuilderResponsiveBreakpoint.values
@@ -114,6 +121,7 @@ class PageBuilderSectionModel extends Equatable {
         background: section.background != null
             ? PagebuilderBackgroundModel.fromDomain(section.background!).toMap()
             : null,
+        customCSS: section.customCSS,
         maxWidth: section.maxWidth,
         backgroundConstrained: section.backgroundConstrained,
         widgets: getMapFromPageBuilderWidgetList(section.widgets),
@@ -142,6 +150,15 @@ class PageBuilderSectionModel extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [id, name, layout, background, maxWidth, backgroundConstrained, widgets, visibleOn];
+  List<Object?> get props => [
+        id,
+        name,
+        layout,
+        background,
+        maxWidth,
+        backgroundConstrained,
+        customCSS,
+        widgets,
+        visibleOn
+      ];
 }

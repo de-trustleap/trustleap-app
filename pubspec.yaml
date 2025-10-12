@@ -48,6 +48,9 @@ dependencies:
   fl_chart: ^1.0.0
   flutter_image_compress: ^2.4.0
   crypto: ^3.0.3
+  flutter_code_editor: ^0.3.5
+  flutter_highlight: ^0.7.0
+  highlight: ^0.7.0
 
 dev_dependencies:
   flutter_test:
