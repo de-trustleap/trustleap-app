@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_zoom/pagebuilder_zoom_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
@@ -99,47 +100,57 @@ class _LandingPageBuilderPageBuilderState
                   onClose: widget.onResponsivePreviewClose,
                 ),
               Expanded(
-                child: BlocBuilder<PagebuilderResponsiveBreakpointCubit,
-                    PagebuilderResponsiveBreakpoint>(
-                  bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
-                  builder: (context, breakpoint) {
-                    final maxWidth =
-                        PagebuilderResponsiveBreakpointSize.getWidth(
-                            breakpoint);
+                child: BlocBuilder<PagebuilderZoomCubit, PagebuilderZoomLevel>(
+                  bloc: Modular.get<PagebuilderZoomCubit>(),
+                  builder: (context, zoomLevel) {
+                    return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+                        PagebuilderResponsiveBreakpoint>(
+                      bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+                      builder: (context, breakpoint) {
+                        final maxWidth =
+                            PagebuilderResponsiveBreakpointSize.getWidth(
+                                breakpoint);
 
-                    return Container(
-                      color: const Color(0xFF323232),
-                      alignment: Alignment.topCenter,
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          Center(
-                            child: Container(
-                              width: maxWidth,
-                              color: widget.model.backgroundColor,
-                              child: widget.model.sections != null &&
-                                      widget.model.sections!.isNotEmpty
-                                  ? PagebuilderReorderableElement<
-                                      PageBuilderSection>(
-                                      containerId: 'page-sections',
-                                      items: widget.model.sections!,
-                                      getItemId: (section) => section.id.value,
-                                      onReorder: (oldIndex, newIndex) {
-                                        Modular.get<PagebuilderBloc>().add(
-                                            ReorderSectionsEvent(
-                                                oldIndex, newIndex));
-                                      },
-                                      buildChild: (section, index) =>
-                                          LandingPageBuilderSectionView(
-                                        model: section,
-                                        index: index,
-                                      ),
-                                    )
-                                  : const SizedBox.shrink(),
-                            ),
+                        return Container(
+                          color: const Color(0xFF323232),
+                          alignment: Alignment.topCenter,
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: [
+                              Center(
+                                child: Transform.scale(
+                                  scale: zoomLevel.scale,
+                                  alignment: Alignment.topCenter,
+                                  child: Container(
+                                    width: maxWidth,
+                                    color: widget.model.backgroundColor,
+                                    child: widget.model.sections != null &&
+                                            widget.model.sections!.isNotEmpty
+                                        ? PagebuilderReorderableElement<
+                                            PageBuilderSection>(
+                                            containerId: 'page-sections',
+                                            items: widget.model.sections!,
+                                            getItemId: (section) =>
+                                                section.id.value,
+                                            onReorder: (oldIndex, newIndex) {
+                                              Modular.get<PagebuilderBloc>().add(
+                                                  ReorderSectionsEvent(
+                                                      oldIndex, newIndex));
+                                            },
+                                            buildChild: (section, index) =>
+                                                LandingPageBuilderSectionView(
+                                              model: section,
+                                              index: index,
+                                            ),
+                                          )
+                                        : const SizedBox.shrink(),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        );
+                      },
                     );
                   },
                 ),
