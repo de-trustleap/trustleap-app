@@ -28,6 +28,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_drag/pagebui
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_zoom/pagebuilder_zoom_cubit.dart';
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
@@ -156,6 +157,7 @@ class AppModule extends Module {
       ..addLazySingleton(UserObserverCubit.new)
       ..addLazySingleton(CalendlyCubit.new)
       ..addLazySingleton(PagebuilderResponsiveBreakpointCubit.new)
+      ..addLazySingleton(PagebuilderZoomCubit.new)
       ..add(SignInCubit.new)
       ..add(AuthCubit.new)
       ..add(AuthObserverBloc.new)
