@@ -2945,4 +2945,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_redo_tooltip => 'Wiederholen';
+
+  @override
+  String get pagebuilder_page_menu_title => 'Elemente';
 }

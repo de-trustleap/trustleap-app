@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget_factory.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,18 @@ class _ReorderableColumnWidgetState extends State<ReorderableColumnWidget> {
         onReorder: (oldIndex, newIndex) {
           Modular.get<PagebuilderBloc>()
               .add(ReorderWidgetEvent(widget.model.id.value, oldIndex, newIndex));
+        },
+        onAddWidget: (widgetLibraryData, targetWidgetId, position) {
+          // Create new widget from factory
+          final newWidget = PagebuilderWidgetFactory.createDefaultWidget(
+              widgetLibraryData.widgetType);
+
+          // Add widget at position
+          Modular.get<PagebuilderBloc>().add(AddWidgetAtPositionEvent(
+            newWidget: newWidget,
+            targetWidgetId: targetWidgetId,
+            position: position,
+          ));
         },
         buildChild: (child, index) => widget.buildChild(child, index),
       ),

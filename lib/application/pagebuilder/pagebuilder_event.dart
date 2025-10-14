@@ -78,3 +78,26 @@ class RedoPagebuilderEvent extends PagebuilderEvent with EquatableMixin {
   @override
   List<Object?> get props => [];
 }
+
+enum DropPosition {
+  before,
+  after,
+  above,
+  below,
+  inside,
+}
+
+class AddWidgetAtPositionEvent extends PagebuilderEvent with EquatableMixin {
+  final PageBuilderWidget newWidget;
+  final String targetWidgetId;
+  final DropPosition position;
+
+  AddWidgetAtPositionEvent({
+    required this.newWidget,
+    required this.targetWidgetId,
+    required this.position,
+  });
+
+  @override
+  List<Object?> get props => [newWidget, targetWidgetId, position];
+}

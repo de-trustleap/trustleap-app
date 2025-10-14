@@ -3377,5 +3377,9 @@
     "pagebuilder_redo_tooltip": "Redo",
     "@pagebuilder_redo_tooltip": {
         "description": "Tooltip for Redo button in Pagebuilder Appbar"
+    },
+    "pagebuilder_page_menu_title": "Elements",
+    "@pagebuilder_page_menu_title": {
+        "description": "Title for the Pagebuilder widget menu"
     }
 }

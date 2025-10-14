@@ -3377,5 +3377,9 @@
     "pagebuilder_redo_tooltip": "Wiederholen",
     "@pagebuilder_redo_tooltip": {
         "description": "Tooltip für Redo Button in der Pagebuilder Appbar"
+    },
+    "pagebuilder_page_menu_title": "Elemente",
+    "@pagebuilder_page_menu_title": {
+        "description": "Titel für das Pagebuilder Widget Menü"
     }
 }

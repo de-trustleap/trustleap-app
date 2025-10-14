@@ -2895,4 +2895,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_redo_tooltip => 'Redo';
+
+  @override
+  String get pagebuilder_page_menu_title => 'Elements';
 }

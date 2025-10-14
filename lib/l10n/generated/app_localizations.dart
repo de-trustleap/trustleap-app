@@ -4994,6 +4994,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Redo'**
   String get pagebuilder_redo_tooltip;
+
+  /// Title for the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Elements'**
+  String get pagebuilder_page_menu_title;
 }
 
 class _AppLocalizationsDelegate
