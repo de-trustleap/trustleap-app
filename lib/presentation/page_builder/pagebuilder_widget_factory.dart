@@ -119,7 +119,7 @@ class PagebuilderWidgetFactory {
       widthPercentage: null,
       background: PagebuilderBackground(
           backgroundPaint: PagebuilderPaint(
-              color: Color(ColorUtility.getHexIntFromString("80F5F5F5"))),
+              color: Color(ColorUtility.getHexIntFromString("FFFFFFFF"))),
           imageProperties: null,
           overlayPaint: null),
       hoverBackground: null,
@@ -461,5 +461,5 @@ class PagebuilderWidgetFactory {
 // TODO: MAN KANN NOCH KEINE WIDGETS IN CONTAINER ZIEHEN (DONE)
 // TODO: WIDGETS IN ROWS VERSCHIEBEN ZEIGT KEINE INDICATOR MEHR AN (DONE)
 // TODO: CONTAINER ERKENNT MAN TEILWEISE NICHT. BESSER WEIß UND HALB TRANSPARENT
-// TODO: ES FUNKTIONIERT NOCH WENN MIT DRAG AND DROP UND AUTOMATISCH WRAPPEN MIT COLUMN ODER ROW WENN DAS PARENT EINES WIDGETS DIREKT DIE SECTION IST.
+// TODO: ES FUNKTIONIERT NOCH WENN MIT DRAG AND DROP UND AUTOMATISCH WRAPPEN MIT COLUMN ODER ROW WENN DAS PARENT EINES WIDGETS DIREKT DIE SECTION IST. (DONE)
 // TODO: TESTS SCHREIBEN. VOR ALLEM FÜR HELPER KLASSEN UND PAGEBUILDERBLOC.

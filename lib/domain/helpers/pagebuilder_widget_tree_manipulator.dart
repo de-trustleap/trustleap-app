@@ -14,6 +14,69 @@ import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_pla
 ///
 /// Uses PagebuilderWidgetTreeSearcher internally for navigation.
 class PagebuilderWidgetTreeManipulator {
+  /// Adds a widget at a specific position relative to a target widget in a list.
+  ///
+  /// This handles the case where widgets are at the top level (e.g., in a Section).
+  /// If the target widget is found in the list, it wraps both widgets appropriately
+  /// or inserts the new widget at the correct position.
+  static List<PageBuilderWidget> addWidgetAtPositionInList(
+    List<PageBuilderWidget> widgets,
+    String targetWidgetId,
+    PageBuilderWidget newWidget,
+    DropPosition position,
+  ) {
+    // Find the target widget in the list
+    final targetIndex = widgets.indexWhere((w) => w.id.value == targetWidgetId);
+
+    if (targetIndex != -1) {
+      // Target found at top level - need to wrap or insert
+      final targetWidget = widgets[targetIndex];
+
+      // For "inside" position, add to the target widget's children
+      if (position == DropPosition.inside) {
+        final updatedTarget = addWidgetAtPosition(
+          targetWidget,
+          targetWidgetId,
+          newWidget,
+          position,
+        );
+        final updatedWidgets = List<PageBuilderWidget>.from(widgets);
+        updatedWidgets[targetIndex] = updatedTarget;
+        return updatedWidgets;
+      }
+
+      // For before/after (horizontal) positions, wrap in Row
+      if (position == DropPosition.before || position == DropPosition.after) {
+        final wrapperWidget = PagebuilderWidgetPlacementHelper.wrapWidgets(
+          targetWidget: targetWidget,
+          newWidget: newWidget,
+          position: position,
+        );
+        final updatedWidgets = List<PageBuilderWidget>.from(widgets);
+        updatedWidgets[targetIndex] = wrapperWidget;
+        return updatedWidgets;
+      }
+
+      // For above/below (vertical) positions, wrap in Column
+      if (position == DropPosition.above || position == DropPosition.below) {
+        final wrapperWidget = PagebuilderWidgetPlacementHelper.wrapWidgets(
+          targetWidget: targetWidget,
+          newWidget: newWidget,
+          position: position,
+        );
+        final updatedWidgets = List<PageBuilderWidget>.from(widgets);
+        updatedWidgets[targetIndex] = wrapperWidget;
+        return updatedWidgets;
+      }
+    }
+
+    // Target not found at top level - recursively search in each widget
+    return widgets
+        .map((widget) =>
+            addWidgetAtPosition(widget, targetWidgetId, newWidget, position))
+        .toList();
+  }
+
   /// Adds a widget at a specific position relative to a target widget.
   ///
   /// Recursively searches for the target widget and inserts the new widget

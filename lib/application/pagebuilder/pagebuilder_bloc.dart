@@ -319,10 +319,16 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
       if (sections == null || sections.isEmpty) return;
 
       final updatedSections = sections.map((section) {
-        final updatedWidgets = section.widgets?.map((widget) {
-          return PagebuilderWidgetTreeManipulator.addWidgetAtPosition(
-              widget, event.targetWidgetId, event.newWidget, event.position);
-        }).toList();
+        if (section.widgets == null || section.widgets!.isEmpty) {
+          return section;
+        }
+
+        final updatedWidgets = PagebuilderWidgetTreeManipulator.addWidgetAtPositionInList(
+          section.widgets!,
+          event.targetWidgetId,
+          event.newWidget,
+          event.position,
+        );
         return section.copyWith(widgets: updatedWidgets);
       }).toList();
 
