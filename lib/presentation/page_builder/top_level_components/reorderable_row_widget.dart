@@ -442,27 +442,31 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
               // For reorder: use drag direction logic
               final showInsideIndicator = isHovering &&
                   _libraryWidgetHoverPosition == DropPosition.inside;
+
+              // For reorder: show horizontal indicators based on drag direction
+              final showReorderIndicatorBefore = isHovering &&
+                  _draggingIndex != null &&
+                  _draggingIndex! > index;
+              final showReorderIndicatorAfter = (isHovering &&
+                      _draggingIndex != null &&
+                      (_draggingIndex! < index)) ||
+                  (isLastItem && _hoveringAfterLast);
+
+              // Combine library widget indicators with reorder indicators
               final showLeftIndicator = (isHovering &&
                   _libraryWidgetHoverPosition == DropPosition.before) ||
-                  showInsideIndicator;
+                  showInsideIndicator ||
+                  showReorderIndicatorBefore;
               final showRightIndicator = (isHovering &&
                   _libraryWidgetHoverPosition == DropPosition.after) ||
-                  showInsideIndicator;
+                  showInsideIndicator ||
+                  showReorderIndicatorAfter;
               final showTopIndicator = (isHovering &&
                   (_libraryWidgetHoverPosition == DropPosition.above)) ||
                   showInsideIndicator;
               final showBottomIndicator = (isHovering &&
                   _libraryWidgetHoverPosition == DropPosition.below) ||
                   showInsideIndicator;
-
-              // For reorder: show horizontal indicators based on drag direction
-              final showIndicatorBefore = isHovering &&
-                  _draggingIndex != null &&
-                  _draggingIndex! > index;
-              final showIndicatorAfter = (isHovering &&
-                      _draggingIndex != null &&
-                      (_draggingIndex! < index)) ||
-                  (isLastItem && _hoveringAfterLast);
 
               return Column(
                 children: [
@@ -518,30 +522,14 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                             ),
                           );
                         },
-                        child: Row(
-                          children: [
-                            if (showIndicatorBefore)
-                              Container(
-                                width: 4,
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                            Expanded(
-                              child: Container(
-                                key: itemKey,
-                                child: _draggingIndex == index
-                                    ? Opacity(
-                                        opacity: 0.3,
-                                        child: widget.buildChild(child, index),
-                                      )
-                                    : widget.buildChild(child, index),
-                              ),
-                            ),
-                            if (showIndicatorAfter)
-                              Container(
-                                width: 4,
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                          ],
+                        child: Container(
+                          key: itemKey,
+                          child: _draggingIndex == index
+                              ? Opacity(
+                                  opacity: 0.3,
+                                  child: widget.buildChild(child, index),
+                                )
+                              : widget.buildChild(child, index),
                         ),
                       ),
                       if (showLeftIndicator)
