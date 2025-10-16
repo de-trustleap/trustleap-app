@@ -7,8 +7,9 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/drag_data/pagebuilde
 import 'package:finanzbegleiter/domain/entities/pagebuilder/drag_data/widget_library_drag_data.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget_factory.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_factory.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/axis_alignment_converter.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_drag_position_detector.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,7 @@ class ReorderableRowWidget extends StatelessWidget {
                   containerId: model.id.value,
                   items: model.children!,
                   getItemId: (item) => item.id.value,
+                  isContainer: (item) => item.elementType == PageBuilderWidgetType.container,
                   onReorder: (oldIndex, newIndex) {
                     Modular.get<PagebuilderBloc>().add(
                         ReorderWidgetEvent(model.id.value, oldIndex, newIndex));
@@ -206,44 +208,35 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             onWillAcceptWithDetails: (details) {
               // Handle WidgetLibraryDragData - always accept
               if (details.data is WidgetLibraryDragData) {
-                // Initial position detection
-                final renderBox =
-                    itemKey.currentContext?.findRenderObject() as RenderBox?;
-                if (renderBox != null) {
-                  final localPosition = renderBox.globalToLocal(details.offset);
-                  final size = renderBox.size;
+                // Check if target item is a container
+                final targetIsContainer = child.elementType == PageBuilderWidgetType.container;
 
-                  // Determine if hover is on edges (30% threshold)
-                  final leftEdge = localPosition.dx < size.width * 0.3;
-                  final rightEdge = localPosition.dx > size.width * 0.7;
-                  final topEdge = localPosition.dy < size.height * 0.3;
-                  final bottomEdge = localPosition.dy > size.height * 0.3;
+                // Use helper to detect initial position
+                final initialPosition =
+                    PagebuilderDragPositionDetector.detectPositionFromRenderBox(
+                          itemKey: itemKey,
+                          globalOffset: details.offset,
+                          isLastItem: isLastItem,
+                          isInRow: true, // Row prioritizes vertical placement
+                        ) ??
+                        DropPosition
+                            .above; // Fallback if RenderBox not available
 
-                  DropPosition initialPosition = DropPosition.before;
-                  if (topEdge) {
-                    initialPosition = DropPosition.above;
-                  } else if (bottomEdge && isLastItem) {
-                    initialPosition = DropPosition.below;
-                  } else if (leftEdge) {
-                    initialPosition = DropPosition.before;
-                  } else if (rightEdge) {
-                    initialPosition = DropPosition.after;
-                  }
+                // For containers, prefer "inside" position when hovering near center
+                final finalPosition = PagebuilderDragPositionDetector.adjustPositionForContainer(
+                  detectedPosition: initialPosition,
+                  targetIsContainer: targetIsContainer,
+                  itemKey: itemKey,
+                  globalOffset: details.offset,
+                );
 
-                  setState(() {
-                    _hoveringIndex = index;
-                    _hoveringAfterLast = bottomEdge && isLastItem;
-                    _leftRightwards = false;
-                    _libraryWidgetHoverPosition = initialPosition;
-                  });
-                } else {
-                  setState(() {
-                    _hoveringIndex = index;
-                    _hoveringAfterLast = false;
-                    _leftRightwards = false;
-                    _libraryWidgetHoverPosition = DropPosition.before;
-                  });
-                }
+                setState(() {
+                  _hoveringIndex = index;
+                  _hoveringAfterLast =
+                      finalPosition == DropPosition.after && isLastItem;
+                  _leftRightwards = false;
+                  _libraryWidgetHoverPosition = finalPosition;
+                });
                 return true;
               } else if (details.data
                   is PagebuilderReorderDragData<PageBuilderWidget>) {
@@ -281,59 +274,37 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             onMove: (details) {
               // Handle WidgetLibraryDragData - detect position for all 4 directions
               if (details.data is WidgetLibraryDragData) {
-                final renderBox =
-                    itemKey.currentContext?.findRenderObject() as RenderBox?;
-                if (renderBox == null) return;
+                // Check if target item is a container
+                final targetIsContainer = child.elementType == PageBuilderWidgetType.container;
 
-                final localPosition = renderBox.globalToLocal(details.offset);
-                final size = renderBox.size;
+                // Use helper to detect position
+                final detectedPosition =
+                    PagebuilderDragPositionDetector.detectPositionFromRenderBox(
+                  itemKey: itemKey,
+                  globalOffset: details.offset,
+                  isLastItem: isLastItem,
+                  isInRow: true, // Row prioritizes vertical placement
+                );
 
-                // Determine if hover is on edges (30% threshold)
-                final leftEdge = localPosition.dx < size.width * 0.3;
-                final rightEdge = localPosition.dx > size.width * 0.7;
-                final topEdge = localPosition.dy < size.height * 0.3;
-                final bottomEdge = localPosition.dy > size.height * 0.7;
+                if (detectedPosition == null) return;
 
-                // Prioritize vertical positioning (top/bottom) for Rows
-                if (topEdge) {
-                  setState(() {
-                    _hoveringIndex = index;
-                    _hoveringAfterLast = false;
-                    _libraryWidgetHoverPosition = DropPosition.above;
-                  });
-                } else if (bottomEdge) {
-                  setState(() {
-                    _hoveringIndex = index;
-                    _hoveringAfterLast = false;
-                    _libraryWidgetHoverPosition = DropPosition.below;
-                  });
-                } else if (leftEdge) {
-                  setState(() {
-                    _hoveringIndex = index;
-                    _hoveringAfterLast = false;
-                    _libraryWidgetHoverPosition = DropPosition.before;
-                  });
-                } else if (rightEdge && isLastItem) {
-                  // Right edge only for last item
-                  setState(() {
-                    _hoveringIndex = items.length;
-                    _hoveringAfterLast = true;
-                    _libraryWidgetHoverPosition = DropPosition.after;
-                  });
-                } else if (rightEdge) {
-                  setState(() {
-                    _hoveringIndex = index;
-                    _hoveringAfterLast = false;
-                    _libraryWidgetHoverPosition = DropPosition.after;
-                  });
-                } else {
-                  // Center - default to before
-                  setState(() {
-                    _hoveringIndex = index;
-                    _hoveringAfterLast = false;
-                    _libraryWidgetHoverPosition = DropPosition.before;
-                  });
-                }
+                // For containers, prefer "inside" position when hovering near center
+                final finalPosition = PagebuilderDragPositionDetector.adjustPositionForContainer(
+                  detectedPosition: detectedPosition,
+                  targetIsContainer: targetIsContainer,
+                  itemKey: itemKey,
+                  globalOffset: details.offset,
+                );
+
+                setState(() {
+                  _hoveringIndex =
+                      finalPosition == DropPosition.after && isLastItem
+                          ? items.length
+                          : index;
+                  _hoveringAfterLast =
+                      finalPosition == DropPosition.after && isLastItem;
+                  _libraryWidgetHoverPosition = finalPosition;
+                });
                 return;
               }
 
@@ -408,13 +379,26 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             },
             onAcceptWithDetails: (details) {
               if (details.data is WidgetLibraryDragData) {
-                // Handle new widget from library
                 final widgetLibraryData = details.data as WidgetLibraryDragData;
                 final targetWidgetId = child.id.value;
 
-                // Use detected hover position from onMove
-                final position =
-                    _libraryWidgetHoverPosition ?? DropPosition.before;
+                // Recalculate position at drop moment to ensure accuracy
+                DropPosition finalPosition = _libraryWidgetHoverPosition ?? DropPosition.before;
+
+                // Check if target is a container and recalculate position
+                final targetIsContainer = child.elementType == PageBuilderWidgetType.container;
+                finalPosition = PagebuilderDragPositionDetector.adjustPositionForContainer(
+                  detectedPosition: finalPosition,
+                  targetIsContainer: targetIsContainer,
+                  itemKey: itemKey,
+                  globalOffset: details.offset,
+                );
+
+                // Check if this drop should be processed
+                final isDragging = Modular.get<PagebuilderDragCubit>().state;
+                if (!isDragging) {
+                  return;
+                }
 
                 // Create new widget from factory
                 final newWidget = PagebuilderWidgetFactory.createDefaultWidget(
@@ -424,7 +408,7 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                 Modular.get<PagebuilderBloc>().add(AddWidgetAtPositionEvent(
                   newWidget: newWidget,
                   targetWidgetId: targetWidgetId,
-                  position: position,
+                  position: finalPosition,
                 ));
 
                 setState(() {
@@ -456,14 +440,20 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
               // Determine indicator position
               // For library widgets: use detected position (_libraryWidgetHoverPosition)
               // For reorder: use drag direction logic
-              final showLeftIndicator = isHovering &&
-                  _libraryWidgetHoverPosition == DropPosition.before;
-              final showRightIndicator = isHovering &&
-                  _libraryWidgetHoverPosition == DropPosition.after;
-              final showTopIndicator = isHovering &&
-                  (_libraryWidgetHoverPosition == DropPosition.above);
-              final showBottomIndicator = isHovering &&
-                  _libraryWidgetHoverPosition == DropPosition.below;
+              final showInsideIndicator = isHovering &&
+                  _libraryWidgetHoverPosition == DropPosition.inside;
+              final showLeftIndicator = (isHovering &&
+                  _libraryWidgetHoverPosition == DropPosition.before) ||
+                  showInsideIndicator;
+              final showRightIndicator = (isHovering &&
+                  _libraryWidgetHoverPosition == DropPosition.after) ||
+                  showInsideIndicator;
+              final showTopIndicator = (isHovering &&
+                  (_libraryWidgetHoverPosition == DropPosition.above)) ||
+                  showInsideIndicator;
+              final showBottomIndicator = (isHovering &&
+                  _libraryWidgetHoverPosition == DropPosition.below) ||
+                  showInsideIndicator;
 
               // For reorder: show horizontal indicators based on drag direction
               final showIndicatorBefore = isHovering &&
@@ -623,8 +613,3 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
     return rowContent;
   }
 }
-
-// TODO: CODE IST KOMPLEX GEWORDEN. FOLGENDE KLASSEN MÜSSEN KLARER STRUKTURIERT WERDEN: PAGEBUILDERBLOC, RECORDABLEROWWIDGET, PAGEBUILDERREORDABLEELEMENT
-// TODO: ES FUNKTIONIERT NOCH WENN MIT DRAG AND DROP UND AUTOMATISCH WRAPPEN MIT COLUMN ODER ROW WENN DAS PARENT EINES WIDGETS DIREKT DIE SECTION IST.
-// TODO: WIDGET FACTORY MIT SINNVOLLEN WERTEN ANPASSEN
-// TODO: TESTS SCHREIBEN. VOR ALLEM FÜR HELPER KLASSEN UND PAGEBUILDERBLOC.

@@ -21,11 +21,6 @@ class PagebuilderWidgetTemplates {
       widgetType: PageBuilderWidgetType.text,
     ),
     PagebuilderWidgetTemplate(
-      name: 'Button',
-      icon: Icons.smart_button,
-      widgetType: PageBuilderWidgetType.button,
-    ),
-    PagebuilderWidgetTemplate(
       name: 'Bild',
       icon: Icons.image,
       widgetType: PageBuilderWidgetType.image,
