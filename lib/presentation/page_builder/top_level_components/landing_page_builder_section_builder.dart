@@ -1,12 +1,16 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_drag/pagebuilder_drag_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_factory.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_controls.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_builder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_invisible_color_filter.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/section_max_width_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -185,17 +189,56 @@ class _LandingPageBuilderSectionViewState
                                           ? SectionMaxWidthProvider(
                                               sectionMaxWidth:
                                                   widget.model.maxWidth,
-                                              child: Column(
-                                                  children: widget
-                                                              .model.widgets !=
-                                                          null
-                                                      ? widget.model.widgets!
-                                                          .map((widget) =>
+                                              child: widget.model.widgets !=
+                                                          null &&
+                                                      widget.model.widgets!
+                                                          .isNotEmpty
+                                                  ? PagebuilderReorderableElement<
+                                                      PageBuilderWidget>(
+                                                      containerId:
+                                                          widget.model.id.value,
+                                                      items:
+                                                          widget.model.widgets!,
+                                                      getItemId: (widget) =>
+                                                          widget.id.value,
+                                                      isContainer: (widget) =>
+                                                          widget.elementType ==
+                                                          PageBuilderWidgetType
+                                                              .container,
+                                                      onReorder:
+                                                          (oldIndex, newIndex) {
+                                                        Modular.get<
+                                                                PagebuilderBloc>()
+                                                            .add(ReorderWidgetEvent(
+                                                                widget.model.id
+                                                                    .value,
+                                                                oldIndex,
+                                                                newIndex));
+                                                      },
+                                                      onAddWidget:
+                                                          (widgetLibraryData,
+                                                              targetWidgetId,
+                                                              position) {
+                                                        final newWidget =
+                                                            PagebuilderWidgetFactory
+                                                                .createDefaultWidget(
+                                                                    widgetLibraryData
+                                                                        .widgetType);
+                                                        Modular.get<
+                                                                PagebuilderBloc>()
+                                                            .add(AddWidgetAtPositionEvent(
+                                                          newWidget: newWidget,
+                                                          targetWidgetId:
+                                                              targetWidgetId,
+                                                          position: position,
+                                                        ));
+                                                      },
+                                                      buildChild:
+                                                          (widget, index) =>
                                                               widgetBuilder
-                                                                  .build(
-                                                                      widget))
-                                                          .toList()
-                                                      : []),
+                                                                  .build(widget),
+                                                    )
+                                                  : const SizedBox.shrink(),
                                             )
                                           : ConstrainedBox(
                                               constraints: BoxConstraints(
@@ -205,17 +248,59 @@ class _LandingPageBuilderSectionViewState
                                               child: SectionMaxWidthProvider(
                                                 sectionMaxWidth:
                                                     widget.model.maxWidth,
-                                                child: Column(
-                                                    children: widget.model
-                                                                .widgets !=
-                                                            null
-                                                        ? widget.model.widgets!
-                                                            .map((widget) =>
+                                                child: widget.model.widgets !=
+                                                            null &&
+                                                        widget.model.widgets!
+                                                            .isNotEmpty
+                                                    ? PagebuilderReorderableElement<
+                                                        PageBuilderWidget>(
+                                                        containerId: widget
+                                                            .model.id.value,
+                                                        items: widget
+                                                            .model.widgets!,
+                                                        getItemId: (widget) =>
+                                                            widget.id.value,
+                                                        isContainer: (widget) =>
+                                                            widget.elementType ==
+                                                            PageBuilderWidgetType
+                                                                .container,
+                                                        onReorder: (oldIndex,
+                                                            newIndex) {
+                                                          Modular.get<
+                                                                  PagebuilderBloc>()
+                                                              .add(ReorderWidgetEvent(
+                                                                  widget.model
+                                                                      .id.value,
+                                                                  oldIndex,
+                                                                  newIndex));
+                                                        },
+                                                        onAddWidget:
+                                                            (widgetLibraryData,
+                                                                targetWidgetId,
+                                                                position) {
+                                                          final newWidget =
+                                                              PagebuilderWidgetFactory
+                                                                  .createDefaultWidget(
+                                                                      widgetLibraryData
+                                                                          .widgetType);
+                                                          Modular.get<
+                                                                  PagebuilderBloc>()
+                                                              .add(
+                                                                  AddWidgetAtPositionEvent(
+                                                            newWidget:
+                                                                newWidget,
+                                                            targetWidgetId:
+                                                                targetWidgetId,
+                                                            position: position,
+                                                          ));
+                                                        },
+                                                        buildChild:
+                                                            (widget, index) =>
                                                                 widgetBuilder
                                                                     .build(
-                                                                        widget))
-                                                            .toList()
-                                                        : []),
+                                                                        widget),
+                                                      )
+                                                    : const SizedBox.shrink(),
                                               ),
                                             ),
                                     )

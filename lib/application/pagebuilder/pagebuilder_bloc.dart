@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_local_history.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/helpers/pagebuilder_widget_tree_manipulator.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
@@ -42,6 +43,7 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     on<SaveLandingPageContentEvent>(_onSaveLandingPageContent);
     on<UndoPagebuilderEvent>(_onUndo);
     on<RedoPagebuilderEvent>(_onRedo);
+    on<AddWidgetAtPositionEvent>(_onAddWidgetAtPosition);
   }
 
   bool canUndo() => _localHistory.canUndo();
@@ -121,7 +123,7 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
 
       final updatedSections = sections.map((section) {
         final updatedWidgets = section.widgets?.map((widget) {
-          return _reorderChildrenInWidget(
+          return PagebuilderWidgetTreeManipulator.reorderChildren(
               widget, event.parentWidgetId, event.oldIndex, event.newIndex);
         }).toList();
         return section.copyWith(widgets: updatedWidgets);
@@ -144,34 +146,6 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
         isUpdated: true,
       ));
     }
-  }
-
-  PageBuilderWidget _reorderChildrenInWidget(PageBuilderWidget widget,
-      String parentWidgetId, int oldIndex, int newIndex) {
-    if (widget.id.value == parentWidgetId) {
-      if (widget.children != null && widget.children!.isNotEmpty) {
-        final reorderedChildren = PagebuilderReorderHelper.reorderWidgets(
-            widget.children!, oldIndex, newIndex);
-        return widget.copyWith(children: reorderedChildren);
-      }
-      return widget;
-    }
-
-    if (widget.containerChild != null) {
-      final updatedContainerChild = _reorderChildrenInWidget(
-          widget.containerChild!, parentWidgetId, oldIndex, newIndex);
-      return widget.copyWith(containerChild: updatedContainerChild);
-    }
-
-    if (widget.children != null && widget.children!.isNotEmpty) {
-      final updatedChildren = widget.children!
-          .map((child) => _reorderChildrenInWidget(
-              child, parentWidgetId, oldIndex, newIndex))
-          .toList();
-      return widget.copyWith(children: updatedChildren);
-    }
-
-    return widget;
   }
 
   Future<void> _onGetLandingPage(
@@ -232,8 +206,8 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
       UpdateSectionEvent event, Emitter<PagebuilderState> emit) {
     if (state is GetLandingPageAndUserSuccessState) {
       final currentState = state as GetLandingPageAndUserSuccessState;
-      final updatedSections =
-          currentState.content.content?.sections?.map((section) {
+      final updatedSections = currentState.content.content?.sections
+          ?.map<PageBuilderSection>((section) {
         if (section.id == event.updatedSection.id) {
           return event.updatedSection;
         } else {
@@ -269,7 +243,11 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
         (section) {
           final updatedWidgets = section.widgets
               ?.map(
-                (widget) => _updateChildWidgets(widget, event.updatedWidget),
+                (widget) => PagebuilderWidgetTreeManipulator.updateWidget(
+                  widget,
+                  event.updatedWidget.id.value,
+                  (_) => event.updatedWidget,
+                ),
               )
               .toList();
           return section.copyWith(widgets: updatedWidgets);
@@ -332,28 +310,44 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     );
   }
 
-  PageBuilderWidget _updateChildWidgets(
-      PageBuilderWidget currentWidget, PageBuilderWidget updatedWidget) {
-    if (currentWidget.id == updatedWidget.id) {
-      return updatedWidget;
+  void _onAddWidgetAtPosition(
+      AddWidgetAtPositionEvent event, Emitter<PagebuilderState> emit) {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final sections = currentState.content.content?.sections;
+
+      if (sections == null || sections.isEmpty) return;
+
+      final updatedSections = sections.map((section) {
+        if (section.widgets == null || section.widgets!.isEmpty) {
+          return section;
+        }
+
+        final updatedWidgets = PagebuilderWidgetTreeManipulator.addWidgetAtPositionInList(
+          section.widgets!,
+          event.targetWidgetId,
+          event.newWidget,
+          event.position,
+        );
+        return section.copyWith(widgets: updatedWidgets);
+      }).toList();
+
+      final updatedContent =
+          currentState.content.content?.copyWith(sections: updatedSections);
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: updatedContent);
+
+      if (!_isUndoRedoOperation) {
+        _localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
     }
-
-    if (currentWidget.containerChild != null) {
-      final updatedContainerChild =
-          _updateChildWidgets(currentWidget.containerChild!, updatedWidget);
-      return currentWidget.copyWith(containerChild: updatedContainerChild);
-    }
-
-    if (currentWidget.children != null && currentWidget.children!.isNotEmpty) {
-      final updatedChildren = currentWidget.children!
-          .map(
-            (child) => _updateChildWidgets(child, updatedWidget),
-          )
-          .toList();
-
-      return currentWidget.copyWith(children: updatedChildren);
-    }
-
-    return currentWidget;
   }
 }

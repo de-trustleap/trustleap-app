@@ -4994,6 +4994,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Redo'**
   String get pagebuilder_redo_tooltip;
+
+  /// Title for the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Elements'**
+  String get pagebuilder_page_menu_title;
+
+  /// Name of the Text widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get pagebuilder_widget_template_text;
+
+  /// Name of the Image widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Image'**
+  String get pagebuilder_widget_template_image;
+
+  /// Name of the Container widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Container'**
+  String get pagebuilder_widget_template_container;
+
+  /// Name of the Icon widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Icon'**
+  String get pagebuilder_widget_template_icon;
+
+  /// Name of the Video widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get pagebuilder_widget_template_video;
+
+  /// Name of the Contact Form widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Form'**
+  String get pagebuilder_widget_template_contact_form;
+
+  /// Name of the Anchor Button widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Anchor Button'**
+  String get pagebuilder_widget_template_anchor_button;
+
+  /// Name of the Calendly widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly'**
+  String get pagebuilder_widget_template_calendly;
 }
 
 class _AppLocalizationsDelegate

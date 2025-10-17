@@ -3377,5 +3377,41 @@
     "pagebuilder_redo_tooltip": "Redo",
     "@pagebuilder_redo_tooltip": {
         "description": "Tooltip for Redo button in Pagebuilder Appbar"
+    },
+    "pagebuilder_page_menu_title": "Elements",
+    "@pagebuilder_page_menu_title": {
+        "description": "Title for the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_text": "Text",
+    "@pagebuilder_widget_template_text": {
+        "description": "Name of the Text widget template in the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_image": "Image",
+    "@pagebuilder_widget_template_image": {
+        "description": "Name of the Image widget template in the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_container": "Container",
+    "@pagebuilder_widget_template_container": {
+        "description": "Name of the Container widget template in the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_icon": "Icon",
+    "@pagebuilder_widget_template_icon": {
+        "description": "Name of the Icon widget template in the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_video": "Video",
+    "@pagebuilder_widget_template_video": {
+        "description": "Name of the Video widget template in the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_contact_form": "Contact Form",
+    "@pagebuilder_widget_template_contact_form": {
+        "description": "Name of the Contact Form widget template in the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_anchor_button": "Anchor Button",
+    "@pagebuilder_widget_template_anchor_button": {
+        "description": "Name of the Anchor Button widget template in the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_calendly": "Calendly",
+    "@pagebuilder_widget_template_calendly": {
+        "description": "Name of the Calendly widget template in the Pagebuilder widget menu"
     }
 }
