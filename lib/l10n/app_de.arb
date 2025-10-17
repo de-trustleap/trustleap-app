@@ -3377,5 +3377,41 @@
     "pagebuilder_redo_tooltip": "Wiederholen",
     "@pagebuilder_redo_tooltip": {
         "description": "Tooltip für Redo Button in der Pagebuilder Appbar"
+    },
+    "pagebuilder_page_menu_title": "Elemente",
+    "@pagebuilder_page_menu_title": {
+        "description": "Titel für das Pagebuilder Widget Menü"
+    },
+    "pagebuilder_widget_template_text": "Text",
+    "@pagebuilder_widget_template_text": {
+        "description": "Name des Text Widget Templates im Pagebuilder Widget Menü"
+    },
+    "pagebuilder_widget_template_image": "Bild",
+    "@pagebuilder_widget_template_image": {
+        "description": "Name des Bild Widget Templates im Pagebuilder Widget Menü"
+    },
+    "pagebuilder_widget_template_container": "Container",
+    "@pagebuilder_widget_template_container": {
+        "description": "Name des Container Widget Templates im Pagebuilder Widget Menü"
+    },
+    "pagebuilder_widget_template_icon": "Icon",
+    "@pagebuilder_widget_template_icon": {
+        "description": "Name des Icon Widget Templates im Pagebuilder Widget Menü"
+    },
+    "pagebuilder_widget_template_video": "Video",
+    "@pagebuilder_widget_template_video": {
+        "description": "Name des Video Widget Templates im Pagebuilder Widget Menü"
+    },
+    "pagebuilder_widget_template_contact_form": "Kontaktformular",
+    "@pagebuilder_widget_template_contact_form": {
+        "description": "Name des Kontaktformular Widget Templates im Pagebuilder Widget Menü"
+    },
+    "pagebuilder_widget_template_anchor_button": "Anker Button",
+    "@pagebuilder_widget_template_anchor_button": {
+        "description": "Name des Anker Button Widget Templates im Pagebuilder Widget Menü"
+    },
+    "pagebuilder_widget_template_calendly": "Calendly",
+    "@pagebuilder_widget_template_calendly": {
+        "description": "Name des Calendly Widget Templates im Pagebuilder Widget Menü"
     }
 }

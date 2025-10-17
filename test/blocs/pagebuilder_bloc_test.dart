@@ -995,4 +995,439 @@ void main() {
       expect(pageBuilderBloc.canRedo(), isA<bool>());
     });
   });
+
+  group("PagebuilderBloc_UpdateSection", () {
+    final mockSection = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      name: "Test Section",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: 1200.0,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      sections: [mockSection],
+      backgroundColor: null,
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("lp1"),
+      contentID: UniqueID.fromUniqueString("page1"),
+    );
+
+    final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should emit GetLandingPageAndUserSuccessState with updated section",
+        () async {
+      // Given
+      final updatedSection = mockSection.copyWith(
+        name: "Updated Section",
+        maxWidth: 1400.0,
+      );
+
+      final updatedPage = mockPageBuilderPage.copyWith(
+        sections: [updatedSection],
+      );
+
+      final updatedContent = mockPagebuilderContent.copyWith(
+        content: updatedPage,
+      );
+
+      final expectedResult = GetLandingPageAndUserSuccessState(
+        content: updatedContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            expectedResult,
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(UpdateSectionEvent(updatedSection));
+    });
+
+    test("should mark content as updated after section update", () async {
+      // Given
+      final updatedSection = mockSection.copyWith(
+        name: "Updated Section",
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>(
+                (state) => state.isUpdated == true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(UpdateSectionEvent(updatedSection));
+    });
+  });
+
+  group("PagebuilderBloc_AddWidgetAtPosition", () {
+    final targetWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("target"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Target",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+        isBold: null,
+        isItalic: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final newWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("new"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "New Widget",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+        isBold: null,
+        isItalic: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final mockSection = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      name: "Test Section",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [targetWidget],
+      visibleOn: null,
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      sections: [mockSection],
+      backgroundColor: null,
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("lp1"),
+      contentID: UniqueID.fromUniqueString("page1"),
+    );
+
+    final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should emit GetLandingPageAndUserSuccessState when adding widget with 'before' position",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              // Verify that a new state was emitted with isUpdated = true
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddWidgetAtPositionEvent(
+        newWidget: newWidget,
+        targetWidgetId: "target",
+        position: DropPosition.before,
+      ));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState when adding widget with 'after' position",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddWidgetAtPositionEvent(
+        newWidget: newWidget,
+        targetWidgetId: "target",
+        position: DropPosition.after,
+      ));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState when adding widget with 'above' position",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddWidgetAtPositionEvent(
+        newWidget: newWidget,
+        targetWidgetId: "target",
+        position: DropPosition.above,
+      ));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState when adding widget with 'below' position",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddWidgetAtPositionEvent(
+        newWidget: newWidget,
+        targetWidgetId: "target",
+        position: DropPosition.below,
+      ));
+    });
+
+    test("should mark content as updated after adding widget", () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>(
+                (state) => state.isUpdated == true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddWidgetAtPositionEvent(
+        newWidget: newWidget,
+        targetWidgetId: "target",
+        position: DropPosition.before,
+      ));
+    });
+
+    test("should not emit new state if sections are null", () async {
+      // Given
+      final pageWithNoSections = mockPageBuilderPage.copyWith(sections: null);
+      final contentWithNoSections =
+          mockPagebuilderContent.copyWith(content: pageWithNoSections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: contentWithNoSections,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithNoSections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddWidgetAtPositionEvent(
+        newWidget: newWidget,
+        targetWidgetId: "target",
+        position: DropPosition.before,
+      ));
+    });
+
+    test("should not emit new state if sections are empty", () async {
+      // Given
+      final pageWithEmptySections = mockPageBuilderPage.copyWith(sections: []);
+      final contentWithEmptySections =
+          mockPagebuilderContent.copyWith(content: pageWithEmptySections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: contentWithEmptySections,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithEmptySections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddWidgetAtPositionEvent(
+        newWidget: newWidget,
+        targetWidgetId: "target",
+        position: DropPosition.before,
+      ));
+    });
+  });
 }

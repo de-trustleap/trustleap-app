@@ -2,10 +2,14 @@ part of 'pagebuilder_config_menu_cubit.dart';
 
 sealed class PagebuilderConfigMenuState {}
 
-final class PagebuilderConfigMenuInitial extends PagebuilderConfigMenuState
+final class PageBuilderPageMenuOpenedState extends PagebuilderConfigMenuState
     with EquatableMixin {
+  final UniqueID id;
+
+  PageBuilderPageMenuOpenedState({required this.id});
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [id];
 }
 
 final class PageBuilderConfigMenuOpenedState extends PagebuilderConfigMenuState

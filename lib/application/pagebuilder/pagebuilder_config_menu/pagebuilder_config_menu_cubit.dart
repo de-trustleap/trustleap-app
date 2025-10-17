@@ -7,7 +7,8 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 part 'pagebuilder_config_menu_state.dart';
 
 class PagebuilderConfigMenuCubit extends Cubit<PagebuilderConfigMenuState> {
-  PagebuilderConfigMenuCubit() : super(PagebuilderConfigMenuInitial());
+  PagebuilderConfigMenuCubit()
+      : super(PageBuilderPageMenuOpenedState(id: UniqueID()));
 
   void openConfigMenu(PageBuilderWidget model) {
     final id = UniqueID();
@@ -17,5 +18,10 @@ class PagebuilderConfigMenuCubit extends Cubit<PagebuilderConfigMenuState> {
   void openSectionConfigMenu(PageBuilderSection model) {
     final id = UniqueID();
     emit(PageBuilderSectionConfigMenuOpenedState(id: id, model: model));
+  }
+
+  void closeConfigMenu() {
+    final id = UniqueID();
+    emit(PageBuilderPageMenuOpenedState(id: id));
   }
 }
