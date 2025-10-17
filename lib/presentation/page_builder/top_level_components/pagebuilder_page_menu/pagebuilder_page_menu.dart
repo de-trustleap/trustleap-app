@@ -24,7 +24,6 @@ class PagebuilderPageMenu extends StatelessWidget {
       color: themeData.colorScheme.surface,
       child: Column(
         children: [
-          // Header
           Padding(
             padding: const EdgeInsets.all(16),
             child: Align(
@@ -35,7 +34,6 @@ class PagebuilderPageMenu extends StatelessWidget {
               ),
             ),
           ),
-          // Widget Grid
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -76,6 +74,9 @@ class _WidgetTemplateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context);
+    final localizedName = template.getName(localization);
+
     return Draggable<WidgetLibraryDragData>(
       data: WidgetLibraryDragData(template.widgetType),
       onDragStarted: () {
@@ -108,7 +109,7 @@ class _WidgetTemplateCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    template.name,
+                    localizedName,
                     style:
                         themeData.textTheme.bodySmall?.copyWith(fontSize: 11),
                     textAlign: TextAlign.center,
@@ -137,7 +138,7 @@ class _WidgetTemplateCard extends StatelessWidget {
               const SizedBox(height: 6),
               Flexible(
                 child: Text(
-                  template.name,
+                  localizedName,
                   style: themeData.textTheme.bodySmall?.copyWith(fontSize: 11),
                   textAlign: TextAlign.center,
                   maxLines: 2,
@@ -162,7 +163,7 @@ class _WidgetTemplateCard extends StatelessWidget {
             const SizedBox(height: 6),
             Flexible(
               child: Text(
-                template.name,
+                localizedName,
                 style: themeData.textTheme.bodySmall?.copyWith(fontSize: 11),
                 textAlign: TextAlign.center,
                 maxLines: 2,

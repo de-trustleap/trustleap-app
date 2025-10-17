@@ -2898,4 +2898,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_page_menu_title => 'Elements';
+
+  @override
+  String get pagebuilder_widget_template_text => 'Text';
+
+  @override
+  String get pagebuilder_widget_template_image => 'Image';
+
+  @override
+  String get pagebuilder_widget_template_container => 'Container';
+
+  @override
+  String get pagebuilder_widget_template_icon => 'Icon';
+
+  @override
+  String get pagebuilder_widget_template_video => 'Video';
+
+  @override
+  String get pagebuilder_widget_template_contact_form => 'Contact Form';
+
+  @override
+  String get pagebuilder_widget_template_anchor_button => 'Anchor Button';
+
+  @override
+  String get pagebuilder_widget_template_calendly => 'Calendly';
 }

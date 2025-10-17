@@ -26,10 +26,8 @@ class PagebuilderWidgetPlacementHelper {
   }
 
   /// Wraps two widgets in an appropriate container (Row or Column) based on position.
-  ///
   /// For horizontal placement (before/after):
   /// - Creates a Row with 50/50 width distribution
-  ///
   /// For vertical placement (above/below):
   /// - Creates a Column
   /// - If target widget has widthPercentage, the Column inherits it (for Row parents)

@@ -2,7 +2,6 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:flutter/material.dart';
 
 /// Helper class to detect drop position based on mouse position within a widget.
-///
 /// Uses a 30% threshold to determine if the mouse is near edges (top/bottom/left/right).
 /// Uses a 15% threshold to determine if cursor is in center area for "inside" drops.
 /// The priority of position detection depends on the parent container type:
@@ -61,7 +60,6 @@ class PagebuilderDragPositionDetector {
   }
 
   /// Checks if the drag position is in the center area of the target.
-  ///
   /// Returns true if the position is not near the edges (15% threshold).
   /// This indicates an "inside" drop for containers.
   static bool isInCenterArea({
@@ -71,17 +69,17 @@ class PagebuilderDragPositionDetector {
     final localPosition = renderBox.globalToLocal(globalOffset);
     final size = renderBox.size;
 
-    // Check if cursor is in the center area (not at edges)
-    final isInCenterHorizontal = localPosition.dx > size.width * centerThreshold &&
-                                   localPosition.dx < size.width * (1 - centerThreshold);
-    final isInCenterVertical = localPosition.dy > size.height * centerThreshold &&
-                                 localPosition.dy < size.height * (1 - centerThreshold);
+    final isInCenterHorizontal =
+        localPosition.dx > size.width * centerThreshold &&
+            localPosition.dx < size.width * (1 - centerThreshold);
+    final isInCenterVertical =
+        localPosition.dy > size.height * centerThreshold &&
+            localPosition.dy < size.height * (1 - centerThreshold);
 
     return isInCenterHorizontal && isInCenterVertical;
   }
 
   /// Determines the final drop position for a container target.
-  ///
   /// If the target is a container and the cursor is in the center area,
   /// returns [DropPosition.inside]. Otherwise, returns the original detected position.
   static DropPosition adjustPositionForContainer({
