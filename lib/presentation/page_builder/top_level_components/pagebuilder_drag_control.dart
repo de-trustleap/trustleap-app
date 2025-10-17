@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/domain/entities/pagebuilder/drag_data/pagebuilder_reorder_drag_data.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class PagebuilderDragControl<T> extends StatelessWidget {
       return Icon(icon, color: color, size: size);
     }
 
-    return Draggable<DragData<T>>(
+    return Draggable<PagebuilderReorderDragData<T>>(
       data: provider.dragData,
       onDragStarted: provider.onDragStarted,
       onDragEnd: (_) => provider.onDragEnd(),

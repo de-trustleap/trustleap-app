@@ -2945,4 +2945,31 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_redo_tooltip => 'Wiederholen';
+
+  @override
+  String get pagebuilder_page_menu_title => 'Elemente';
+
+  @override
+  String get pagebuilder_widget_template_text => 'Text';
+
+  @override
+  String get pagebuilder_widget_template_image => 'Bild';
+
+  @override
+  String get pagebuilder_widget_template_container => 'Container';
+
+  @override
+  String get pagebuilder_widget_template_icon => 'Icon';
+
+  @override
+  String get pagebuilder_widget_template_video => 'Video';
+
+  @override
+  String get pagebuilder_widget_template_contact_form => 'Kontaktformular';
+
+  @override
+  String get pagebuilder_widget_template_anchor_button => 'Anker Button';
+
+  @override
+  String get pagebuilder_widget_template_calendly => 'Calendly';
 }

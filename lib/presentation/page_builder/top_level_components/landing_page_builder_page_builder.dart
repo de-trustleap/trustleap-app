@@ -37,7 +37,7 @@ class LandingPageBuilderPageBuilder extends StatefulWidget {
 class _LandingPageBuilderPageBuilderState
     extends State<LandingPageBuilderPageBuilder> {
   late PagebuilderConfigMenuCubit pageBuilderMenuCubit;
-  bool _isConfigMenuOpen = false;
+  bool _isConfigMenuOpen = true;
 
   @override
   void initState() {
@@ -58,18 +58,36 @@ class _LandingPageBuilderPageBuilderState
                 setState(() {
                   _isConfigMenuOpen = true;
                 });
+              } else if (state is PageBuilderPageMenuOpenedState) {
+                setState(() {
+                  _isConfigMenuOpen = true;
+                });
               }
             },
             builder: (context, state) {
-              if (state is PageBuilderConfigMenuOpenedState) {
+              if (state is PageBuilderPageMenuOpenedState) {
+                return LandingPageBuilderConfigMenu(
+                    key: ValueKey(state.id),
+                    isOpen: _isConfigMenuOpen,
+                    menuState: state,
+                    model: null,
+                    section: null,
+                    closeMenu: () {
+                      setState(() {
+                        _isConfigMenuOpen = false;
+                      });
+                    });
+              } else if (state is PageBuilderConfigMenuOpenedState) {
                 return LandingPageBuilderConfigMenu(
                     key: ValueKey(state.model.id),
                     isOpen: _isConfigMenuOpen,
+                    menuState: state,
                     model: state.model,
                     section: null,
                     closeMenu: () {
                       Modular.get<PagebuilderSelectionCubit>()
                           .selectWidget(null);
+                      pageBuilderMenuCubit.closeConfigMenu();
                       setState(() {
                         _isConfigMenuOpen = false;
                       });
@@ -78,12 +96,14 @@ class _LandingPageBuilderPageBuilderState
                 return LandingPageBuilderConfigMenu(
                     key: ValueKey(state.model.id),
                     isOpen: _isConfigMenuOpen,
+                    menuState: state,
                     model: null,
                     section: state.model,
                     allSections: widget.model.sections ?? [],
                     closeMenu: () {
                       Modular.get<PagebuilderSelectionCubit>()
                           .selectWidget(null);
+                      pageBuilderMenuCubit.closeConfigMenu();
                       setState(() {
                         _isConfigMenuOpen = false;
                       });
