@@ -103,4 +103,27 @@ class PagebuilderDragPositionDetector {
 
     return detectedPosition;
   }
+
+  static DropPosition detectFinalPosition({
+    required GlobalKey itemKey,
+    required Offset globalOffset,
+    required bool isLastItem,
+    required bool isInRow,
+    required bool targetIsContainer,
+    DropPosition fallback = DropPosition.above,
+  }) {
+    final initialPosition = detectPositionFromRenderBox(
+      itemKey: itemKey,
+      globalOffset: globalOffset,
+      isLastItem: isLastItem,
+      isInRow: isInRow,
+    ) ?? fallback;
+
+    return adjustPositionForContainer(
+      detectedPosition: initialPosition,
+      targetIsContainer: targetIsContainer,
+      itemKey: itemKey,
+      globalOffset: globalOffset,
+    );
+  }
 }
