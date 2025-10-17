@@ -61,7 +61,9 @@ class ReorderableRowWidget extends StatelessWidget {
                   containerId: model.id.value,
                   items: model.children!,
                   getItemId: (item) => item.id.value,
-                  isContainer: (item) => item.elementType == PageBuilderWidgetType.container,
+                  isContainer: (item) =>
+                      item.elementType == PageBuilderWidgetType.container &&
+                      item.containerChild == null,
                   onReorder: (oldIndex, newIndex) {
                     Modular.get<PagebuilderBloc>().add(
                         ReorderWidgetEvent(model.id.value, oldIndex, newIndex));
@@ -208,8 +210,9 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             onWillAcceptWithDetails: (details) {
               // Handle WidgetLibraryDragData - always accept
               if (details.data is WidgetLibraryDragData) {
-                // Check if target item is a container
-                final targetIsContainer = child.elementType == PageBuilderWidgetType.container;
+                // Check if target item is a container (only empty containers)
+                final targetIsContainer = child.elementType == PageBuilderWidgetType.container &&
+                    child.containerChild == null;
 
                 // Use helper to detect initial position
                 final initialPosition =
@@ -274,8 +277,9 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             onMove: (details) {
               // Handle WidgetLibraryDragData - detect position for all 4 directions
               if (details.data is WidgetLibraryDragData) {
-                // Check if target item is a container
-                final targetIsContainer = child.elementType == PageBuilderWidgetType.container;
+                // Check if target item is a container (only empty containers)
+                final targetIsContainer = child.elementType == PageBuilderWidgetType.container &&
+                    child.containerChild == null;
 
                 // Use helper to detect position
                 final detectedPosition =
@@ -385,8 +389,9 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                 // Recalculate position at drop moment to ensure accuracy
                 DropPosition finalPosition = _libraryWidgetHoverPosition ?? DropPosition.before;
 
-                // Check if target is a container and recalculate position
-                final targetIsContainer = child.elementType == PageBuilderWidgetType.container;
+                // Check if target is a container (only empty containers) and recalculate position
+                final targetIsContainer = child.elementType == PageBuilderWidgetType.container &&
+                    child.containerChild == null;
                 finalPosition = PagebuilderDragPositionDetector.adjustPositionForContainer(
                   detectedPosition: finalPosition,
                   targetIsContainer: targetIsContainer,
