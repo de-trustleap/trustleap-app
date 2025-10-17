@@ -108,13 +108,15 @@ class _WidgetTemplateCard extends StatelessWidget {
                     color: themeData.colorScheme.secondary,
                   ),
                   const SizedBox(height: 6),
-                  Text(
-                    localizedName,
-                    style:
-                        themeData.textTheme.bodySmall?.copyWith(fontSize: 11),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  Flexible(
+                    child: Text(
+                      localizedName,
+                      style:
+                          themeData.textTheme.bodySmall?.copyWith(fontSize: 9),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
