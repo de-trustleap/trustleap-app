@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/drag_data/pagebuilde
 import 'package:finanzbegleiter/domain/entities/pagebuilder/drag_data/widget_library_drag_data.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_drag_position_detector.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_drag_state.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_drag_indicators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -332,113 +333,66 @@ class _PagebuilderReorderableElementState<T>
             final isHovering =
                 _dragState.hoveringIndex == index && _dragState.draggingIndex != index;
             final isLastItem = index == items.length - 1;
-            final showIndicatorAfter = isLastItem && _dragState.hoveringAfterLast;
 
-            // Determine if we need horizontal indicators for library widgets
-            final showInsideIndicator = isHovering &&
-                _dragState.libraryWidgetHoverPosition == DropPosition.inside;
-            final showLeftIndicator = (isHovering &&
-                _dragState.libraryWidgetHoverPosition == DropPosition.before) ||
-                showInsideIndicator;
-            final showRightIndicator = (isHovering &&
-                _dragState.libraryWidgetHoverPosition == DropPosition.after) ||
-                showInsideIndicator;
-            final showTopIndicator = (isHovering &&
-                (_dragState.libraryWidgetHoverPosition == DropPosition.above ||
-                    _dragState.libraryWidgetHoverPosition == null)) ||
-                showInsideIndicator;
-            final showBottomIndicator = showIndicatorAfter || showInsideIndicator;
+            return PagebuilderDragIndicators(
+              isHovering: isHovering,
+              libraryWidgetHoverPosition: _dragState.libraryWidgetHoverPosition,
+              draggingIndex: _dragState.draggingIndex,
+              index: index,
+              isLastItem: isLastItem,
+              hoveringAfterLast: _dragState.hoveringAfterLast,
+              isInRow: false,
+              child: DraggableItemProvider<T>(
+                dragData: PagebuilderReorderDragData<T>(
+                    widget.containerId, index),
+                onDragStarted: () {
+                  setState(() {
+                    _dragState = _dragState.copyWith(draggingIndex: index);
+                  });
+                  Modular.get<PagebuilderDragCubit>().setDragging(true);
+                },
+                onDragEnd: () {
+                  // If we left downwards, trigger reorder to end
+                  if (_dragState.leftDownwards &&
+                      _dragState.draggingIndex != null &&
+                      _dragState.draggingIndex != items.length - 1) {
+                    _handleReorder(_dragState.draggingIndex!, items.length);
+                  }
 
-            return Column(
-              children: [
-                if (showTopIndicator &&
-                    (!showLeftIndicator || showInsideIndicator) &&
-                    (!showRightIndicator || showInsideIndicator))
-                  Container(
-                    height: 4,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                Stack(
-                  children: [
-                    DraggableItemProvider<T>(
-                      dragData: PagebuilderReorderDragData<T>(
-                          widget.containerId, index),
-                      onDragStarted: () {
-                        setState(() {
-                          _dragState = _dragState.copyWith(draggingIndex: index);
-                        });
-                        Modular.get<PagebuilderDragCubit>().setDragging(true);
-                      },
-                      onDragEnd: () {
-                        // If we left downwards, trigger reorder to end
-                        if (_dragState.leftDownwards &&
-                            _dragState.draggingIndex != null &&
-                            _dragState.draggingIndex != items.length - 1) {
-                          _handleReorder(_dragState.draggingIndex!, items.length);
-                        }
+                  setState(() {
+                    _dragState = _dragState.clearDrag();
+                  });
+                  Modular.get<PagebuilderDragCubit>().setDragging(false);
+                },
+                buildFeedback: (context) {
+                  // Get the actual width of the item from the RenderBox
+                  double? width;
+                  final renderBox = itemKey.currentContext
+                      ?.findRenderObject() as RenderBox?;
+                  if (renderBox != null) {
+                    width = renderBox.size.width;
+                  }
 
-                        setState(() {
-                          _dragState = _dragState.clearDrag();
-                        });
-                        Modular.get<PagebuilderDragCubit>().setDragging(false);
-                      },
-                      buildFeedback: (context) {
-                        // Get the actual width of the item from the RenderBox
-                        double? width;
-                        final renderBox = itemKey.currentContext
-                            ?.findRenderObject() as RenderBox?;
-                        if (renderBox != null) {
-                          width = renderBox.size.width;
-                        }
-
-                        return Opacity(
-                          opacity: _dragFeedbackOpacity,
-                          child: Material(
-                            child: SizedBox(
-                              width: width,
-                              child: widget.buildChild(item, index),
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        key: itemKey,
-                        child: _dragState.draggingIndex == index
-                            ? Opacity(
-                                opacity: _draggingChildOpacity,
-                                child: widget.buildChild(item, index),
-                              )
-                            : widget.buildChild(item, index),
+                  return Opacity(
+                    opacity: _dragFeedbackOpacity,
+                    child: Material(
+                      child: SizedBox(
+                        width: width,
+                        child: widget.buildChild(item, index),
                       ),
                     ),
-                    if (showLeftIndicator)
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: Container(
-                          width: 4,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ),
-                    if (showRightIndicator)
-                      Positioned(
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: Container(
-                          width: 4,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ),
-                  ],
+                  );
+                },
+                child: Container(
+                  key: itemKey,
+                  child: _dragState.draggingIndex == index
+                      ? Opacity(
+                          opacity: _draggingChildOpacity,
+                          child: widget.buildChild(item, index),
+                        )
+                      : widget.buildChild(item, index),
                 ),
-                if (showBottomIndicator)
-                  Container(
-                    height: 4,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-              ],
+              ),
             );
           },
         ),

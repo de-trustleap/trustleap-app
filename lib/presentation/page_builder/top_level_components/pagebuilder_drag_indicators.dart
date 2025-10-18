@@ -1,0 +1,116 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:flutter/material.dart';
+
+class PagebuilderDragIndicators extends StatelessWidget {
+  final bool isHovering;
+  final DropPosition? libraryWidgetHoverPosition;
+  final int? draggingIndex;
+  final int index;
+  final bool isLastItem;
+  final bool hoveringAfterLast;
+  final bool isInRow;
+  final Widget child;
+
+  const PagebuilderDragIndicators({
+    super.key,
+    required this.isHovering,
+    required this.libraryWidgetHoverPosition,
+    required this.draggingIndex,
+    required this.index,
+    required this.isLastItem,
+    required this.hoveringAfterLast,
+    required this.isInRow,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final showInsideIndicator =
+        isHovering && libraryWidgetHoverPosition == DropPosition.inside;
+
+    final bool showLeftIndicator;
+    final bool showRightIndicator;
+    final bool showTopIndicator;
+    final bool showBottomIndicator;
+
+    if (isInRow) {
+      final showReorderIndicatorBefore =
+          isHovering && draggingIndex != null && draggingIndex! > index;
+      final showReorderIndicatorAfter = (isHovering &&
+              draggingIndex != null &&
+              (draggingIndex! < index)) ||
+          (isLastItem && hoveringAfterLast);
+
+      showLeftIndicator = (isHovering &&
+              libraryWidgetHoverPosition == DropPosition.before) ||
+          showInsideIndicator ||
+          showReorderIndicatorBefore;
+      showRightIndicator = (isHovering &&
+              libraryWidgetHoverPosition == DropPosition.after) ||
+          showInsideIndicator ||
+          showReorderIndicatorAfter;
+      showTopIndicator =
+          (isHovering && (libraryWidgetHoverPosition == DropPosition.above)) ||
+              showInsideIndicator;
+      showBottomIndicator =
+          (isHovering && libraryWidgetHoverPosition == DropPosition.below) ||
+              showInsideIndicator;
+    } else {
+      final showIndicatorAfter = isLastItem && hoveringAfterLast;
+
+      showLeftIndicator =
+          (isHovering && libraryWidgetHoverPosition == DropPosition.before) ||
+              showInsideIndicator;
+      showRightIndicator =
+          (isHovering && libraryWidgetHoverPosition == DropPosition.after) ||
+              showInsideIndicator;
+      showTopIndicator = (isHovering &&
+              (libraryWidgetHoverPosition == DropPosition.above ||
+                  libraryWidgetHoverPosition == null)) ||
+          showInsideIndicator;
+      showBottomIndicator = showIndicatorAfter || showInsideIndicator;
+    }
+
+    return Column(
+      children: [
+        if (showTopIndicator &&
+            (!showLeftIndicator || showInsideIndicator) &&
+            (!showRightIndicator || showInsideIndicator))
+          Container(
+            height: 4,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        Stack(
+          children: [
+            child,
+            if (showLeftIndicator)
+              Positioned(
+                left: 0,
+                top: 0,
+                bottom: 0,
+                child: Container(
+                  width: 4,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+            if (showRightIndicator)
+              Positioned(
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: Container(
+                  width: 4,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+          ],
+        ),
+        if (showBottomIndicator)
+          Container(
+            height: 4,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+      ],
+    );
+  }
+}

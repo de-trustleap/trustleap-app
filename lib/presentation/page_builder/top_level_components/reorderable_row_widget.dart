@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/infrastructure/models/model_helper/axis_alignmen
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_drag_position_detector.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_drag_state.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_drag_indicators.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -423,128 +424,66 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
               }
             },
             builder: (context, candidateData, rejectedData) {
-              // Determine indicator position
-              // For library widgets: use detected position (_dragState.libraryWidgetHoverPosition)
-              // For reorder: use drag direction logic
-              final showInsideIndicator = isHovering &&
-                  _dragState.libraryWidgetHoverPosition == DropPosition.inside;
+              return PagebuilderDragIndicators(
+                isHovering: isHovering,
+                libraryWidgetHoverPosition: _dragState.libraryWidgetHoverPosition,
+                draggingIndex: _dragState.draggingIndex,
+                index: index,
+                isLastItem: isLastItem,
+                hoveringAfterLast: _dragState.hoveringAfterLast,
+                isInRow: true,
+                child: DraggableItemProvider<PageBuilderWidget>(
+                  dragData: PagebuilderReorderDragData<PageBuilderWidget>(
+                      widget.model.id.value, index),
+                  onDragStarted: () {
+                    setState(() {
+                      _dragState = _dragState.copyWith(draggingIndex: index);
+                    });
+                    Modular.get<PagebuilderDragCubit>().setDragging(true);
+                  },
+                  onDragEnd: () {
+                    // If we left rightwards, trigger reorder to end
+                    if (_dragState.leftDownwards &&
+                        _dragState.draggingIndex != null &&
+                        _dragState.draggingIndex != items.length - 1) {
+                      _handleReorder(_dragState.draggingIndex!, items.length);
+                    }
 
-              // For reorder: show horizontal indicators based on drag direction
-              final showReorderIndicatorBefore = isHovering &&
-                  _dragState.draggingIndex != null &&
-                  _dragState.draggingIndex! > index;
-              final showReorderIndicatorAfter = (isHovering &&
-                      _dragState.draggingIndex != null &&
-                      (_dragState.draggingIndex! < index)) ||
-                  (isLastItem && _dragState.hoveringAfterLast);
+                    setState(() {
+                      _dragState = _dragState.clearDrag();
+                    });
+                    Modular.get<PagebuilderDragCubit>()
+                        .setDragging(false);
+                  },
+                  buildFeedback: (context) {
+                    // Get the actual width of the item from the RenderBox
+                    double? width;
+                    final renderBox = itemKey.currentContext
+                        ?.findRenderObject() as RenderBox?;
+                    if (renderBox != null) {
+                      width = renderBox.size.width;
+                    }
 
-              // Combine library widget indicators with reorder indicators
-              final showLeftIndicator = (isHovering &&
-                  _dragState.libraryWidgetHoverPosition == DropPosition.before) ||
-                  showInsideIndicator ||
-                  showReorderIndicatorBefore;
-              final showRightIndicator = (isHovering &&
-                  _dragState.libraryWidgetHoverPosition == DropPosition.after) ||
-                  showInsideIndicator ||
-                  showReorderIndicatorAfter;
-              final showTopIndicator = (isHovering &&
-                  (_dragState.libraryWidgetHoverPosition == DropPosition.above)) ||
-                  showInsideIndicator;
-              final showBottomIndicator = (isHovering &&
-                  _dragState.libraryWidgetHoverPosition == DropPosition.below) ||
-                  showInsideIndicator;
-
-              return Column(
-                children: [
-                  if (showTopIndicator &&
-                      !showLeftIndicator &&
-                      !showRightIndicator)
-                    Container(
-                      height: 4,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                  Stack(
-                    children: [
-                      DraggableItemProvider<PageBuilderWidget>(
-                        dragData: PagebuilderReorderDragData<PageBuilderWidget>(
-                            widget.model.id.value, index),
-                        onDragStarted: () {
-                          setState(() {
-                            _dragState = _dragState.copyWith(draggingIndex: index);
-                          });
-                          Modular.get<PagebuilderDragCubit>().setDragging(true);
-                        },
-                        onDragEnd: () {
-                          // If we left rightwards, trigger reorder to end
-                          if (_dragState.leftDownwards &&
-                              _dragState.draggingIndex != null &&
-                              _dragState.draggingIndex != items.length - 1) {
-                            _handleReorder(_dragState.draggingIndex!, items.length);
-                          }
-
-                          setState(() {
-                            _dragState = _dragState.clearDrag();
-                          });
-                          Modular.get<PagebuilderDragCubit>()
-                              .setDragging(false);
-                        },
-                        buildFeedback: (context) {
-                          // Get the actual width of the item from the RenderBox
-                          double? width;
-                          final renderBox = itemKey.currentContext
-                              ?.findRenderObject() as RenderBox?;
-                          if (renderBox != null) {
-                            width = renderBox.size.width;
-                          }
-
-                          return Opacity(
-                            opacity: _dragFeedbackOpacity,
-                            child: Material(
-                              child: SizedBox(
-                                width: width,
-                                child: widget.buildChild(child, index),
-                              ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          key: itemKey,
-                          child: _dragState.draggingIndex == index
-                              ? Opacity(
-                                  opacity: _draggingChildOpacity,
-                                  child: widget.buildChild(child, index),
-                                )
-                              : widget.buildChild(child, index),
+                    return Opacity(
+                      opacity: _dragFeedbackOpacity,
+                      child: Material(
+                        child: SizedBox(
+                          width: width,
+                          child: widget.buildChild(child, index),
                         ),
                       ),
-                      if (showLeftIndicator)
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          bottom: 0,
-                          child: Container(
-                            width: 4,
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                        ),
-                      if (showRightIndicator)
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          bottom: 0,
-                          child: Container(
-                            width: 4,
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                        ),
-                    ],
+                    );
+                  },
+                  child: Container(
+                    key: itemKey,
+                    child: _dragState.draggingIndex == index
+                        ? Opacity(
+                            opacity: _draggingChildOpacity,
+                            child: widget.buildChild(child, index),
+                          )
+                        : widget.buildChild(child, index),
                   ),
-                  if (showBottomIndicator)
-                    Container(
-                      height: 4,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                ],
+                ),
               );
             },
           ),
