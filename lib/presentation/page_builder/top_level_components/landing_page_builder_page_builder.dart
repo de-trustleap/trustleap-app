@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dar
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_breakpoint_size.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_builder.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_add_section_button.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_responsive_toolbar.dart';
@@ -144,18 +145,20 @@ class _LandingPageBuilderPageBuilderState
                                   child: Container(
                                     width: maxWidth,
                                     color: widget.model.backgroundColor,
-                                    child: widget.model.sections != null &&
-                                            widget.model.sections!.isNotEmpty
-                                        ? PagebuilderReorderableElement<
-                                            PageBuilderSection>(
-                                            containerId: 'page-sections',
+                                    child: Column(
+                                      children: [
+                                        if (widget.model.sections != null &&
+                                            widget.model.sections!.isNotEmpty)
+                                          PagebuilderReorderableElement<
+                                              PageBuilderSection>(
+                                            containerId: "page-sections",
                                             items: widget.model.sections!,
                                             getItemId: (section) =>
                                                 section.id.value,
                                             isSection: (section) => true,
                                             onReorder: (oldIndex, newIndex) {
-                                              Modular.get<PagebuilderBloc>().add(
-                                                  ReorderSectionsEvent(
+                                              Modular.get<PagebuilderBloc>()
+                                                  .add(ReorderSectionsEvent(
                                                       oldIndex, newIndex));
                                             },
                                             buildChild: (section, index) =>
@@ -163,8 +166,10 @@ class _LandingPageBuilderPageBuilderState
                                               model: section,
                                               index: index,
                                             ),
-                                          )
-                                        : const SizedBox.shrink(),
+                                          ),
+                                        const PagebuilderAddSectionButton(),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
