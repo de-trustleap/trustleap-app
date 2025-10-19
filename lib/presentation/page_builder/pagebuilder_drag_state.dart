@@ -30,12 +30,18 @@ class PagebuilderDragState<T> {
     bool clearLibraryWidgetHoverPosition = false,
   }) {
     return PagebuilderDragState<T>(
-      reorderedItems: clearReorderedItems ? null : (reorderedItems ?? this.reorderedItems),
-      draggingIndex: clearDraggingIndex ? null : (draggingIndex ?? this.draggingIndex),
-      hoveringIndex: clearHoveringIndex ? null : (hoveringIndex ?? this.hoveringIndex),
+      reorderedItems: clearReorderedItems
+          ? null
+          : (reorderedItems ?? this.reorderedItems),
+      draggingIndex:
+          clearDraggingIndex ? null : (draggingIndex ?? this.draggingIndex),
+      hoveringIndex:
+          clearHoveringIndex ? null : (hoveringIndex ?? this.hoveringIndex),
       hoveringAfterLast: hoveringAfterLast ?? this.hoveringAfterLast,
       leftDownwards: leftDownwards ?? this.leftDownwards,
-      libraryWidgetHoverPosition: clearLibraryWidgetHoverPosition ? null : (libraryWidgetHoverPosition ?? this.libraryWidgetHoverPosition),
+      libraryWidgetHoverPosition: clearLibraryWidgetHoverPosition
+          ? null
+          : (libraryWidgetHoverPosition ?? this.libraryWidgetHoverPosition),
     );
   }
 
@@ -53,6 +59,7 @@ class PagebuilderDragState<T> {
       clearHoveringIndex: true,
       hoveringAfterLast: false,
       leftDownwards: false,
+      clearLibraryWidgetHoverPosition: true,
     );
   }
 }

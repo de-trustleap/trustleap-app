@@ -152,6 +152,7 @@ class _LandingPageBuilderPageBuilderState
                                             items: widget.model.sections!,
                                             getItemId: (section) =>
                                                 section.id.value,
+                                            isSection: (section) => true,
                                             onReorder: (oldIndex, newIndex) {
                                               Modular.get<PagebuilderBloc>().add(
                                                   ReorderSectionsEvent(

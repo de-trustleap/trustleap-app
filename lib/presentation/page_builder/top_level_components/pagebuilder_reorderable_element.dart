@@ -42,6 +42,7 @@ class PagebuilderReorderableElement<T> extends StatefulWidget {
   final void Function(int oldIndex, int newIndex) onReorder;
   final String Function(T) getItemId;
   final bool Function(T)? isContainer;
+  final bool Function(T)? isSection;
   final void Function(
           WidgetLibraryDragData, String targetWidgetId, DropPosition position)?
       onAddWidget;
@@ -54,6 +55,7 @@ class PagebuilderReorderableElement<T> extends StatefulWidget {
     required this.onReorder,
     required this.getItemId,
     this.isContainer,
+    this.isSection,
     this.onAddWidget,
   });
 
@@ -68,8 +70,14 @@ class _PagebuilderReorderableElementState<T>
   final double _dragFeedbackOpacity = 0.7;
   final double _draggingChildOpacity = 0.3;
 
-  PagebuilderDragState<T> _dragState = const PagebuilderDragState();
+  late PagebuilderDragState<T> _dragState;
   final Map<int, GlobalKey> _itemKeys = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _dragState = PagebuilderDragState<T>();
+  }
 
   @override
   void didUpdateWidget(PagebuilderReorderableElement<T> oldWidget) {
@@ -342,6 +350,7 @@ class _PagebuilderReorderableElementState<T>
               isLastItem: isLastItem,
               hoveringAfterLast: _dragState.hoveringAfterLast,
               isInRow: false,
+              isSection: widget.isSection?.call(item) ?? false,
               child: DraggableItemProvider<T>(
                 dragData: PagebuilderReorderDragData<T>(
                     widget.containerId, index),

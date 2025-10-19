@@ -9,6 +9,7 @@ class PagebuilderDragIndicators extends StatelessWidget {
   final bool isLastItem;
   final bool hoveringAfterLast;
   final bool isInRow;
+  final bool isSection;
   final Widget child;
 
   const PagebuilderDragIndicators({
@@ -20,6 +21,7 @@ class PagebuilderDragIndicators extends StatelessWidget {
     required this.isLastItem,
     required this.hoveringAfterLast,
     required this.isInRow,
+    this.isSection = false,
     required this.child,
   });
 
@@ -36,19 +38,18 @@ class PagebuilderDragIndicators extends StatelessWidget {
     if (isInRow) {
       final showReorderIndicatorBefore =
           isHovering && draggingIndex != null && draggingIndex! > index;
-      final showReorderIndicatorAfter = (isHovering &&
-              draggingIndex != null &&
-              (draggingIndex! < index)) ||
-          (isLastItem && hoveringAfterLast);
+      final showReorderIndicatorAfter =
+          (isHovering && draggingIndex != null && (draggingIndex! < index)) ||
+              (isLastItem && hoveringAfterLast);
 
-      showLeftIndicator = (isHovering &&
-              libraryWidgetHoverPosition == DropPosition.before) ||
-          showInsideIndicator ||
-          showReorderIndicatorBefore;
-      showRightIndicator = (isHovering &&
-              libraryWidgetHoverPosition == DropPosition.after) ||
-          showInsideIndicator ||
-          showReorderIndicatorAfter;
+      showLeftIndicator = !isSection &&
+          ((isHovering && libraryWidgetHoverPosition == DropPosition.before) ||
+              showInsideIndicator ||
+              showReorderIndicatorBefore);
+      showRightIndicator = !isSection &&
+          ((isHovering && libraryWidgetHoverPosition == DropPosition.after) ||
+              showInsideIndicator ||
+              showReorderIndicatorAfter);
       showTopIndicator =
           (isHovering && (libraryWidgetHoverPosition == DropPosition.above)) ||
               showInsideIndicator;
@@ -58,12 +59,12 @@ class PagebuilderDragIndicators extends StatelessWidget {
     } else {
       final showIndicatorAfter = isLastItem && hoveringAfterLast;
 
-      showLeftIndicator =
-          (isHovering && libraryWidgetHoverPosition == DropPosition.before) ||
-              showInsideIndicator;
-      showRightIndicator =
-          (isHovering && libraryWidgetHoverPosition == DropPosition.after) ||
-              showInsideIndicator;
+      showLeftIndicator = !isSection &&
+          ((isHovering && libraryWidgetHoverPosition == DropPosition.before) ||
+              showInsideIndicator);
+      showRightIndicator = !isSection &&
+          ((isHovering && libraryWidgetHoverPosition == DropPosition.after) ||
+              showInsideIndicator);
       showTopIndicator = (isHovering &&
               (libraryWidgetHoverPosition == DropPosition.above ||
                   libraryWidgetHoverPosition == null)) ||
