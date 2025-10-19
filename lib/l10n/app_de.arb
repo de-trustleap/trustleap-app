@@ -2700,6 +2700,10 @@
     "@pagebuilder_config_menu_hover_switch": {
         "description": "Titel des Hover Switches im Hover Tab im Pagebuilder Config Menü"
     },
+    "pagebuilder_anchor_button_config_title": "Anker Button Konfiguration",
+    "@pagebuilder_anchor_button_config_title": {
+        "description": "Titel des aufklappbaren Menüs für die Anker Button Konfiguration im Pagebuilder Config Menü"
+    },
     "pagebuilder_anchor_button_content_section_name": "Section Name",
     "@pagebuilder_anchor_button_content_section_name": {
         "description": "Titel des aufklappbaren Menüs für die Section Name im Pagebuilder Anker Button Config Menü"
@@ -2711,6 +2715,10 @@
     "pagebuilder_anchor_button_content_no_sections_available": "Keine Sections verfügbar",
     "@pagebuilder_anchor_button_content_no_sections_available": {
         "description": "Nachricht die angezeigt wird wenn keine Sections zur Auswahl im Anker Button Konfiguration verfügbar sind"
+    },
+    "pagebuilder_anchor_button_content_section_name_placeholder": "Bitte auswählen",
+    "@pagebuilder_anchor_button_content_section_name_placeholder": {
+        "description": "Platzhalter-Text für das Section Name Dropdown im Anker Button Config Menü wenn noch keine Section ausgewählt wurde"
     },
     "pagebuilder_section_id": "ID:",
     "@pagebuilder_section_id": {

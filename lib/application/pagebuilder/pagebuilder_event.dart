@@ -101,3 +101,25 @@ class AddWidgetAtPositionEvent extends PagebuilderEvent with EquatableMixin {
   @override
   List<Object?> get props => [newWidget, targetWidgetId, position];
 }
+
+class AddSectionEvent extends PagebuilderEvent with EquatableMixin {
+  final int columnCount;
+
+  AddSectionEvent(this.columnCount);
+
+  @override
+  List<Object?> get props => [columnCount];
+}
+
+class ReplacePlaceholderEvent extends PagebuilderEvent with EquatableMixin {
+  final String placeholderId;
+  final PageBuilderWidgetType widgetType;
+
+  ReplacePlaceholderEvent({
+    required this.placeholderId,
+    required this.widgetType,
+  });
+
+  @override
+  List<Object?> get props => [placeholderId, widgetType];
+}

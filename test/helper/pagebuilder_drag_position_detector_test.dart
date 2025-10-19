@@ -518,4 +518,220 @@ void main() {
       expect(finalPosition, equals(DropPosition.inside));
     });
   });
+
+  group("PagebuilderDragPositionDetector.detectFinalPosition", () {
+    testWidgets("combines detection and container adjustment for non-container",
+        (tester) async {
+      final key = GlobalKey();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Container(
+              key: key,
+              width: 100,
+              height: 100,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      );
+
+      final renderBox = key.currentContext!.findRenderObject() as RenderBox;
+      final globalTop = renderBox.localToGlobal(const Offset(50, 5));
+
+      final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+        itemKey: key,
+        globalOffset: globalTop,
+        isLastItem: false,
+        isInRow: false,
+        targetIsContainer: false,
+      );
+
+      expect(finalPosition, equals(DropPosition.above));
+    });
+
+    testWidgets("returns 'inside' for container when cursor is in center",
+        (tester) async {
+      final key = GlobalKey();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Container(
+              key: key,
+              width: 100,
+              height: 100,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      );
+
+      final renderBox = key.currentContext!.findRenderObject() as RenderBox;
+      final globalCenter = renderBox.localToGlobal(const Offset(50, 50));
+
+      final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+        itemKey: key,
+        globalOffset: globalCenter,
+        isLastItem: false,
+        isInRow: false,
+        targetIsContainer: true,
+      );
+
+      expect(finalPosition, equals(DropPosition.inside));
+    });
+
+    testWidgets("returns edge position for container when cursor is at edge",
+        (tester) async {
+      final key = GlobalKey();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Container(
+              key: key,
+              width: 100,
+              height: 100,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      );
+
+      final renderBox = key.currentContext!.findRenderObject() as RenderBox;
+      final globalLeft = renderBox.localToGlobal(const Offset(5, 50));
+
+      final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+        itemKey: key,
+        globalOffset: globalLeft,
+        isLastItem: false,
+        isInRow: false,
+        targetIsContainer: true,
+      );
+
+      expect(finalPosition, equals(DropPosition.before));
+    });
+
+    testWidgets("uses fallback when RenderBox is null", (tester) async {
+      final key = GlobalKey();
+
+      final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+        itemKey: key,
+        globalOffset: Offset.zero,
+        isLastItem: false,
+        isInRow: false,
+        targetIsContainer: false,
+        fallback: DropPosition.below,
+      );
+
+      expect(finalPosition, equals(DropPosition.below));
+    });
+
+    testWidgets("uses default fallback (above) when RenderBox is null and no fallback provided",
+        (tester) async {
+      final key = GlobalKey();
+
+      final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+        itemKey: key,
+        globalOffset: Offset.zero,
+        isLastItem: false,
+        isInRow: false,
+        targetIsContainer: false,
+      );
+
+      expect(finalPosition, equals(DropPosition.above));
+    });
+
+    testWidgets("respects isInRow parameter for Row layout", (tester) async {
+      final key = GlobalKey();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Container(
+              key: key,
+              width: 100,
+              height: 100,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      );
+
+      final renderBox = key.currentContext!.findRenderObject() as RenderBox;
+      final globalTop = renderBox.localToGlobal(const Offset(50, 5));
+
+      final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+        itemKey: key,
+        globalOffset: globalTop,
+        isLastItem: false,
+        isInRow: true,
+        targetIsContainer: false,
+      );
+
+      expect(finalPosition, equals(DropPosition.above));
+    });
+
+    testWidgets("detects 'below' for last item in Column", (tester) async {
+      final key = GlobalKey();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Container(
+              key: key,
+              width: 100,
+              height: 100,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      );
+
+      final renderBox = key.currentContext!.findRenderObject() as RenderBox;
+      final globalBottom = renderBox.localToGlobal(const Offset(50, 95));
+
+      final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+        itemKey: key,
+        globalOffset: globalBottom,
+        isLastItem: true,
+        isInRow: false,
+        targetIsContainer: false,
+      );
+
+      expect(finalPosition, equals(DropPosition.below));
+    });
+
+    testWidgets("returns 'inside' even for last item when container and center",
+        (tester) async {
+      final key = GlobalKey();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Container(
+              key: key,
+              width: 100,
+              height: 100,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      );
+
+      final renderBox = key.currentContext!.findRenderObject() as RenderBox;
+      final globalCenter = renderBox.localToGlobal(const Offset(50, 50));
+
+      final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+        itemKey: key,
+        globalOffset: globalCenter,
+        isLastItem: true,
+        isInRow: false,
+        targetIsContainer: true,
+      );
+
+      expect(finalPosition, equals(DropPosition.inside));
+    });
+  });
 }

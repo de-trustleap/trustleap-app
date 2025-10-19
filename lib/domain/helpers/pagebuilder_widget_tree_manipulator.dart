@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
@@ -295,36 +296,58 @@ class PagebuilderWidgetTreeManipulator {
     return widget;
   }
 
-  /// Deletes a widget from the tree.
-  /// Returns a new widget tree without the deleted widget.
-  static PageBuilderWidget? deleteWidget(
-    PageBuilderWidget widget,
-    String targetWidgetId,
-  ) {
-    if (widget.id.value == targetWidgetId) {
+  /// Removes all placeholder widgets from a page.
+  /// Also removes empty rows, columns, containers, and sections after placeholder removal.
+  /// This should be called before saving to ensure placeholders don't get persisted.
+  static PageBuilderPage removePlaceholders(PageBuilderPage page) {
+    final sectionsWithoutPlaceholders = page.sections
+        ?.map((section) {
+          final widgetsWithoutPlaceholders = section.widgets
+              ?.map((widget) => _removePlaceholdersFromWidget(widget))
+              .where((widget) => widget != null)
+              .cast<PageBuilderWidget>()
+              .toList();
+          return section.copyWith(widgets: widgetsWithoutPlaceholders);
+        })
+        .where(
+            (section) => section.widgets != null && section.widgets!.isNotEmpty)
+        .toList();
+
+    return page.copyWith(sections: sectionsWithoutPlaceholders);
+  }
+
+  /// Recursively removes placeholder widgets from a widget tree.
+  /// Also removes empty rows/columns/containers after placeholder removal.
+  static PageBuilderWidget? _removePlaceholdersFromWidget(
+      PageBuilderWidget widget) {
+    if (widget.elementType == PageBuilderWidgetType.placeholder) {
       return null;
     }
 
-    if (widget.containerChild != null) {
-      if (widget.containerChild!.id.value == targetWidgetId) {
-        return widget.copyWith(containerChild: null);
-      }
+    final childrenWithoutPlaceholders = widget.children
+        ?.map((child) => _removePlaceholdersFromWidget(child))
+        .where((child) => child != null)
+        .cast<PageBuilderWidget>()
+        .toList();
+    final containerChildWithoutPlaceholder = widget.containerChild != null
+        ? _removePlaceholdersFromWidget(widget.containerChild!)
+        : null;
 
-      final updatedContainerChild =
-          deleteWidget(widget.containerChild!, targetWidgetId);
-      return widget.copyWith(containerChild: updatedContainerChild);
+    if ((widget.elementType == PageBuilderWidgetType.row ||
+            widget.elementType == PageBuilderWidgetType.column) &&
+        (childrenWithoutPlaceholders == null ||
+            childrenWithoutPlaceholders.isEmpty)) {
+      return null;
     }
 
-    if (widget.children != null && widget.children!.isNotEmpty) {
-      final updatedChildren = widget.children!
-          .where((child) => child.id.value != targetWidgetId)
-          .map((child) => deleteWidget(child, targetWidgetId))
-          .whereType<PageBuilderWidget>() // Filter out nulls
-          .toList();
-
-      return widget.copyWith(children: updatedChildren);
+    if (widget.elementType == PageBuilderWidgetType.container &&
+        containerChildWithoutPlaceholder == null) {
+      return null;
     }
 
-    return widget;
+    return widget.copyWith(
+      children: childrenWithoutPlaceholders,
+      containerChild: containerChildWithoutPlaceholder,
+    );
   }
 }

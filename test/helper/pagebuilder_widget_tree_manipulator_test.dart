@@ -2,6 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/helpers/pagebuilder_widget_tree_manipulator.dart';
 import 'package:finanzbegleiter/constants.dart';
 
@@ -11,6 +13,26 @@ void main() {
     return PageBuilderWidget(
       id: UniqueID.fromUniqueString(id),
       elementType: PageBuilderWidgetType.text,
+      properties: null,
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: '',
+    );
+  }
+
+  // Helper function to create a placeholder widget
+  PageBuilderWidget createPlaceholderWidget(String id) {
+    return PageBuilderWidget(
+      id: UniqueID.fromUniqueString(id),
+      elementType: PageBuilderWidgetType.placeholder,
       properties: null,
       hoverProperties: null,
       children: null,
@@ -713,93 +735,335 @@ void main() {
     });
   });
 
-  group("PagebuilderWidgetTreeManipulator.deleteWidget", () {
-    test("deletes target widget at root level", () {
-      final widget = createTextWidget('target');
+  group("PagebuilderWidgetTreeManipulator.removePlaceholders", () {
+    test("removes all placeholder widgets from a page", () {
+      final placeholder1 = createPlaceholderWidget('placeholder1');
+      final placeholder2 = createPlaceholderWidget('placeholder2');
+      final textWidget = createTextWidget('text1');
+      final column = createColumnWidget('column', [placeholder1, textWidget, placeholder2]);
 
-      final result = PagebuilderWidgetTreeManipulator.deleteWidget(
-        widget,
-        'target',
+      final section = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section1'),
+        name: 'Test Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [column],
+        visibleOn: null,
       );
 
-      expect(result, isNull);
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [section],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      expect(result.sections?.length, 1);
+      expect(result.sections?[0].widgets?.length, 1);
+      expect(result.sections?[0].widgets?[0].children?.length, 1);
+      expect(result.sections?[0].widgets?[0].children?[0].id.value, 'text1');
     });
 
-    test("deletes target widget from children list", () {
-      final child1 = createTextWidget('child1');
-      final child2 = createTextWidget('child2');
-      final child3 = createTextWidget('child3');
-      final column = createColumnWidget('column', [child1, child2, child3]);
+    test("removes empty rows after removing placeholders", () {
+      final placeholder1 = createPlaceholderWidget('placeholder1');
+      final placeholder2 = createPlaceholderWidget('placeholder2');
+      final row = createRowWidget('row', [placeholder1, placeholder2]);
+      final textWidget = createTextWidget('text1');
+      final column = createColumnWidget('column', [row, textWidget]);
 
-      final result = PagebuilderWidgetTreeManipulator.deleteWidget(
-        column,
-        'child2',
+      final section = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section1'),
+        name: 'Test Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [column],
+        visibleOn: null,
       );
 
-      expect(result?.children?.length, 2);
-      expect(result?.children?[0].id.value, 'child1');
-      expect(result?.children?[1].id.value, 'child3');
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [section],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      // Row should be removed since all its children are placeholders
+      expect(result.sections?.length, 1);
+      expect(result.sections?[0].widgets?.length, 1);
+      expect(result.sections?[0].widgets?[0].children?.length, 1);
+      expect(result.sections?[0].widgets?[0].children?[0].id.value, 'text1');
     });
 
-    test("deletes container child", () {
-      final containerChild = createTextWidget('child');
-      final container = createContainerWidget('container', containerChild);
+    test("removes empty columns after removing placeholders", () {
+      final placeholder = createPlaceholderWidget('placeholder1');
+      final emptyColumn = createColumnWidget('column1', [placeholder]);
+      final textWidget = createTextWidget('text1');
+      final nonEmptyColumn = createColumnWidget('column2', [textWidget]);
 
-      final result = PagebuilderWidgetTreeManipulator.deleteWidget(
-        container,
-        'child',
+      final section = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section1'),
+        name: 'Test Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [emptyColumn, nonEmptyColumn],
+        visibleOn: null,
       );
 
-      // Note: Current implementation cannot set containerChild to null
-      // because copyWith doesn't support removing containerChild
-      // The result will still have the containerChild (unchanged)
-      expect(result?.containerChild, isNotNull);
-      expect(result?.containerChild?.id.value, 'child');
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [section],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      // Empty column should be removed
+      expect(result.sections?.length, 1);
+      expect(result.sections?[0].widgets?.length, 1);
+      expect(result.sections?[0].widgets?[0].id.value, 'column2');
     });
 
-    test("deletes target widget from deeply nested structure", () {
-      final deepChild = createTextWidget('deep-child');
-      final sibling = createTextWidget('sibling');
-      final innerColumn =
-          createColumnWidget('inner-column', [deepChild, sibling]);
-      final outerColumn = createColumnWidget('outer-column', [innerColumn]);
+    test("removes empty containers after removing placeholders", () {
+      final placeholder = createPlaceholderWidget('placeholder1');
+      final emptyContainer = createContainerWidget('container1', placeholder);
+      final textWidget = createTextWidget('text1');
+      final nonEmptyContainer = createContainerWidget('container2', textWidget);
 
-      final result = PagebuilderWidgetTreeManipulator.deleteWidget(
-        outerColumn,
-        'deep-child',
+      final section = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section1'),
+        name: 'Test Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [emptyContainer, nonEmptyContainer],
+        visibleOn: null,
       );
 
-      expect(result?.children?[0].children?.length, 1);
-      expect(result?.children?[0].children?[0].id.value, 'sibling');
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [section],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      // Empty container should be removed
+      expect(result.sections?.length, 1);
+      expect(result.sections?[0].widgets?.length, 1);
+      expect(result.sections?[0].widgets?[0].id.value, 'container2');
     });
 
-    test("returns unchanged widget when target not found", () {
-      final child1 = createTextWidget('child1');
-      final child2 = createTextWidget('child2');
-      final column = createColumnWidget('column', [child1, child2]);
+    test("removes empty sections after removing all placeholders", () {
+      final placeholder1 = createPlaceholderWidget('placeholder1');
+      final placeholder2 = createPlaceholderWidget('placeholder2');
+      final emptyColumn = createColumnWidget('column1', [placeholder1, placeholder2]);
 
-      final result = PagebuilderWidgetTreeManipulator.deleteWidget(
-        column,
-        'nonexistent',
+      final emptySection = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section1'),
+        name: 'Empty Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [emptyColumn],
+        visibleOn: null,
       );
 
-      expect(result?.children?.length, 2);
-      expect(result?.children?[0].id.value, 'child1');
-      expect(result?.children?[1].id.value, 'child2');
+      final textWidget = createTextWidget('text1');
+      final nonEmptySection = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section2'),
+        name: 'Non-Empty Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [textWidget],
+        visibleOn: null,
+      );
+
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [emptySection, nonEmptySection],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      // Empty section should be removed
+      expect(result.sections?.length, 1);
+      expect(result.sections?[0].id.value, 'section2');
     });
 
-    test("recursively searches and deletes in nested structure", () {
-      final grandChild = createTextWidget('grandchild');
-      final childColumn = createColumnWidget('child-column', [grandChild]);
-      final parentContainer =
-          createContainerWidget('parent-container', childColumn);
+    test("keeps non-placeholder widgets intact", () {
+      final textWidget = createTextWidget('text1');
+      final imageWidget = createTextWidget('image1'); // Using text widget as proxy
+      final column = createColumnWidget('column', [textWidget, imageWidget]);
 
-      final result = PagebuilderWidgetTreeManipulator.deleteWidget(
-        parentContainer,
-        'grandchild',
+      final section = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section1'),
+        name: 'Test Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [column],
+        visibleOn: null,
       );
 
-      expect(result?.containerChild?.children?.length, 0);
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [section],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      expect(result.sections?.length, 1);
+      expect(result.sections?[0].widgets?.length, 1);
+      expect(result.sections?[0].widgets?[0].children?.length, 2);
+      expect(result.sections?[0].widgets?[0].children?[0].id.value, 'text1');
+      expect(result.sections?[0].widgets?[0].children?[1].id.value, 'image1');
+    });
+
+    test("handles deeply nested placeholders", () {
+      final placeholder = createPlaceholderWidget('placeholder1');
+      final textWidget = createTextWidget('text1');
+      final innerRow = createRowWidget('inner-row', [placeholder, textWidget]);
+      final middleColumn = createColumnWidget('middle-column', [innerRow]);
+      final outerColumn = createColumnWidget('outer-column', [middleColumn]);
+
+      final section = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section1'),
+        name: 'Test Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [outerColumn],
+        visibleOn: null,
+      );
+
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [section],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      expect(result.sections?.length, 1);
+      // Should keep the structure but remove placeholder
+      final outerCol = result.sections?[0].widgets?[0];
+      expect(outerCol?.children?.length, 1);
+      final middleCol = outerCol?.children?[0];
+      expect(middleCol?.children?.length, 1);
+      final innerR = middleCol?.children?[0];
+      expect(innerR?.children?.length, 1);
+      expect(innerR?.children?[0].id.value, 'text1');
+    });
+
+    test("returns empty page when all widgets are placeholders", () {
+      final placeholder1 = createPlaceholderWidget('placeholder1');
+      final placeholder2 = createPlaceholderWidget('placeholder2');
+      final column = createColumnWidget('column', [placeholder1, placeholder2]);
+
+      final section = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section1'),
+        name: 'Test Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [column],
+        visibleOn: null,
+      );
+
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [section],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      // All placeholders removed, section should be empty and therefore removed
+      expect(result.sections, isEmpty);
+    });
+
+    test("handles mixed content with placeholders and real widgets", () {
+      final placeholder1 = createPlaceholderWidget('placeholder1');
+      final text1 = createTextWidget('text1');
+      final placeholder2 = createPlaceholderWidget('placeholder2');
+      final text2 = createTextWidget('text2');
+      final row = createRowWidget('row', [placeholder1, text1, placeholder2, text2]);
+
+      final section = PageBuilderSection(
+        id: UniqueID.fromUniqueString('section1'),
+        name: 'Test Section',
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [row],
+        visibleOn: null,
+      );
+
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [section],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      expect(result.sections?.length, 1);
+      expect(result.sections?[0].widgets?.length, 1);
+      expect(result.sections?[0].widgets?[0].children?.length, 2);
+      expect(result.sections?[0].widgets?[0].children?[0].id.value, 'text1');
+      expect(result.sections?[0].widgets?[0].children?[1].id.value, 'text2');
+    });
+
+    test("handles null sections", () {
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: null,
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      expect(result.sections, isNull);
+    });
+
+    test("handles empty sections list", () {
+      final page = PageBuilderPage(
+        id: UniqueID.fromUniqueString('page1'),
+        sections: [],
+        backgroundColor: null,
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
+
+      expect(result.sections, isEmpty);
     });
   });
 }

@@ -140,10 +140,8 @@ class PromoterRepositoryImplementation implements PromoterRepository {
                 return null;
               }
             })
-            .whereType<
-                CustomUser>() // Filter out null values from failed parsing
-            .where((user) =>
-                user.deletesAt == null) // Filter out deactivated users
+            .whereType<CustomUser>()
+            .where((user) => user.deletesAt == null)
             .map((user) => Promoter.fromUser(user))
             .toList();
       });
@@ -192,8 +190,7 @@ class PromoterRepositoryImplementation implements PromoterRepository {
                 return null;
               }
             })
-            .whereType<
-                UnregisteredPromoter>() // Filter out null values from failed parsing
+            .whereType<UnregisteredPromoter>()
             .map((unregisteredPromoter) =>
                 Promoter.fromUnregisteredPromoter(unregisteredPromoter))
             .toList();
