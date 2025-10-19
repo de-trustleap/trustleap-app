@@ -1430,4 +1430,458 @@ void main() {
       ));
     });
   });
+
+  group("PagebuilderBloc_AddSection", () {
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      sections: [],
+      backgroundColor: null,
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("lp1"),
+      contentID: UniqueID.fromUniqueString("page1"),
+    );
+
+    final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should emit GetLandingPageAndUserSuccessState with new section for 1 column",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              // Verify that new section was added
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final newSection = sections.last;
+              // For 1 column: Column -> Placeholder
+              return newSection.widgets?.length == 1 &&
+                  newSection.widgets!.first.elementType == PageBuilderWidgetType.column &&
+                  newSection.widgets!.first.children?.length == 1 &&
+                  newSection.widgets!.first.children!.first.elementType == PageBuilderWidgetType.placeholder &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddSectionEvent(1));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState with new section for 3 columns",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              // Verify that new section was added
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final newSection = sections.last;
+              // For 3 columns: Column -> Row -> 3 Placeholders with widthPercentage
+              if (newSection.widgets?.length != 1) return false;
+              final column = newSection.widgets!.first;
+              if (column.elementType != PageBuilderWidgetType.column) return false;
+              if (column.children?.length != 1) return false;
+
+              final row = column.children!.first;
+              if (row.elementType != PageBuilderWidgetType.row) return false;
+              if (row.children?.length != 3) return false;
+
+              // Check all children are placeholders with correct widthPercentage
+              for (final child in row.children!) {
+                if (child.elementType != PageBuilderWidgetType.placeholder) return false;
+                if (child.widthPercentage == null) return false;
+                // Should be approximately 33.33% for 3 columns
+                final percentage = child.widthPercentage!.constantValue;
+                if (percentage == null || (percentage - 33.33).abs() > 0.1) return false;
+              }
+
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddSectionEvent(3));
+    });
+
+    test("should mark content as updated after adding section", () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>(
+                (state) => state.isUpdated == true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddSectionEvent(2));
+    });
+
+    test("should not emit new state if current state is not success state",
+        () async {
+      // Then
+      expectLater(pageBuilderBloc.stream, emitsInOrder([]));
+
+      pageBuilderBloc.add(AddSectionEvent(1));
+    });
+  });
+
+  group("PagebuilderBloc_ReplacePlaceholder", () {
+    final placeholderWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("placeholder1"),
+      elementType: PageBuilderWidgetType.placeholder,
+      properties: null,
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: const PagebuilderResponsiveOrConstant.constant(50.0),
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final rowWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("row1"),
+      elementType: PageBuilderWidgetType.row,
+      properties: null,
+      hoverProperties: null,
+      children: [placeholderWidget],
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final columnWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("column1"),
+      elementType: PageBuilderWidgetType.column,
+      properties: null,
+      hoverProperties: null,
+      children: [rowWidget],
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final mockSection = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      name: "Test Section",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [columnWidget],
+      visibleOn: null,
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      sections: [mockSection],
+      backgroundColor: null,
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("lp1"),
+      contentID: UniqueID.fromUniqueString("page1"),
+    );
+
+    final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should emit GetLandingPageAndUserSuccessState with placeholder replaced by text widget",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              // Verify that placeholder was replaced with text widget
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              final column = section.widgets?.first;
+              if (column == null) return false;
+
+              final row = column.children?.first;
+              if (row == null || row.children == null || row.children!.isEmpty) return false;
+
+              final replacedWidget = row.children!.first;
+
+              // Should be text widget now, not placeholder
+              if (replacedWidget.elementType != PageBuilderWidgetType.text) return false;
+
+              // Should preserve widthPercentage from placeholder
+              if (replacedWidget.widthPercentage?.constantValue != 50.0) return false;
+
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReplacePlaceholderEvent(
+        placeholderId: "placeholder1",
+        widgetType: PageBuilderWidgetType.text,
+      ));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState with placeholder replaced by image widget",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              final column = section.widgets?.first;
+              if (column == null) return false;
+
+              final row = column.children?.first;
+              if (row == null || row.children == null || row.children!.isEmpty) return false;
+
+              final replacedWidget = row.children!.first;
+
+              return replacedWidget.elementType == PageBuilderWidgetType.image &&
+                  replacedWidget.widthPercentage?.constantValue == 50.0 &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReplacePlaceholderEvent(
+        placeholderId: "placeholder1",
+        widgetType: PageBuilderWidgetType.image,
+      ));
+    });
+
+    test("should mark content as updated after replacing placeholder",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+            predicate<GetLandingPageAndUserSuccessState>(
+                (state) => state.isUpdated == true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReplacePlaceholderEvent(
+        placeholderId: "placeholder1",
+        widgetType: PageBuilderWidgetType.text,
+      ));
+    });
+
+    test("should not emit new state if placeholder is not found", () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: mockPagebuilderContent,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReplacePlaceholderEvent(
+        placeholderId: "nonexistent",
+        widgetType: PageBuilderWidgetType.text,
+      ));
+    });
+
+    test("should not emit new state if sections are null", () async {
+      // Given
+      final pageWithNoSections = mockPageBuilderPage.copyWith(sections: null);
+      final contentWithNoSections =
+          mockPagebuilderContent.copyWith(content: pageWithNoSections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: contentWithNoSections,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithNoSections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReplacePlaceholderEvent(
+        placeholderId: "placeholder1",
+        widgetType: PageBuilderWidgetType.text,
+      ));
+    });
+
+    test("should not emit new state if sections are empty", () async {
+      // Given
+      final pageWithEmptySections = mockPageBuilderPage.copyWith(sections: []);
+      final contentWithEmptySections =
+          mockPagebuilderContent.copyWith(content: pageWithEmptySections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            GetLandingPageAndUserSuccessState(
+              content: contentWithEmptySections,
+              saveLoading: false,
+              saveFailure: null,
+              saveSuccessful: null,
+              isUpdated: false,
+            ),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithEmptySections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(ReplacePlaceholderEvent(
+        placeholderId: "placeholder1",
+        widgetType: PageBuilderWidgetType.text,
+      ));
+    });
+  });
 }
