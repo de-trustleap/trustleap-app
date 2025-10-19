@@ -42,6 +42,8 @@ class PagebuilderWidgetFactory {
         return _createRowWidget();
       case PageBuilderWidgetType.column:
         return _createColumnWidget();
+      case PageBuilderWidgetType.placeholder:
+        return _createPlaceholderWidget();
       default:
         return _createTextWidget();
     }
@@ -360,12 +362,12 @@ class PagebuilderWidgetFactory {
           borderRadius: 8.0,
           backgroundPaint: null,
           textProperties: PageBuilderTextProperties(
-            text: 'Zur Sektion',
+            text: "Zur Sektion",
             fontSize: PagebuilderResponsiveOrConstant.constant(16.0),
-            fontFamily: null,
+            fontFamily: "Roboto",
             lineHeight: null,
             letterSpacing: null,
-            color: Colors.white,
+            color: Colors.black,
             alignment:
                 PagebuilderResponsiveOrConstant.constant(TextAlign.center),
             textShadow: null,
@@ -456,5 +458,23 @@ class PagebuilderWidgetFactory {
       customCSS: null,
     );
   }
+
+  static PageBuilderWidget _createPlaceholderWidget() {
+    return PageBuilderWidget(
+      id: UniqueID(),
+      elementType: PageBuilderWidgetType.placeholder,
+      properties: null,
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+  }
 }
-// TODO: TESTS SCHREIBEN. VOR ALLEM FÜR HELPER KLASSEN UND PAGEBUILDERBLOC.

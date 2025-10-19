@@ -18,6 +18,7 @@ import 'package:finanzbegleiter/presentation/page_builder/page_elements/footer_v
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/icon_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/image_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_calendly.dart';
+import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_placeholder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_text.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/video_player_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
@@ -85,6 +86,8 @@ class LandingPageBuilderWidgetBuilder {
         return buildCalendlyWidget(
             model.properties as PagebuilderCalendlyProperties, model,
             index: index);
+      case PageBuilderWidgetType.placeholder:
+        return buildPlaceholderWidget(model, index: index);
       default:
         return const SizedBox.shrink();
     }
@@ -195,5 +198,12 @@ class LandingPageBuilderWidgetBuilder {
       {int? index}) {
     return PagebuilderCalendly(
         properties: properties, widgetModel: model, index: index);
+  }
+
+  Widget buildPlaceholderWidget(PageBuilderWidget model, {int? index}) {
+    return PagebuilderPlaceholder(
+      widgetModel: model,
+      index: index,
+    );
   }
 }

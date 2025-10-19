@@ -4035,6 +4035,12 @@ abstract class AppLocalizations {
   /// **'Activate hover'**
   String get pagebuilder_config_menu_hover_switch;
 
+  /// Title for the collapsible view for the anchor button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Anchor Button Configuration'**
+  String get pagebuilder_anchor_button_config_title;
+
   /// Title for the collapsible view for the anchor button section name in the pagebuilder anchor button configuration
   ///
   /// In en, this message translates to:
@@ -4052,6 +4058,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No sections available'**
   String get pagebuilder_anchor_button_content_no_sections_available;
+
+  /// Placeholder text for the section name dropdown in the anchor button config menu when no section is selected yet
+  ///
+  /// In en, this message translates to:
+  /// **'Please select'**
+  String get pagebuilder_anchor_button_content_section_name_placeholder;
 
   /// Text before the ID in the Pagebuilder Section configuration
   ///

@@ -1,15 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_local_history.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/helpers/pagebuilder_widget_tree_manipulator.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_reorder_helper.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_factory.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'pagebuilder_event.dart';
@@ -44,6 +48,8 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     on<UndoPagebuilderEvent>(_onUndo);
     on<RedoPagebuilderEvent>(_onRedo);
     on<AddWidgetAtPositionEvent>(_onAddWidgetAtPosition);
+    on<AddSectionEvent>(_onAddSection);
+    on<ReplacePlaceholderEvent>(_onReplacePlaceholder);
   }
 
   bool canUndo() => _localHistory.canUndo();
@@ -289,8 +295,12 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
       isUpdated: null,
     ));
 
-    final failureOrSuccess =
-        await pageBuilderRepo.saveLandingPageContent(event.content!.content!);
+    final contentWithoutPlaceholders =
+        PagebuilderWidgetTreeManipulator.removePlaceholders(
+            event.content!.content!);
+
+    final failureOrSuccess = await pageBuilderRepo
+        .saveLandingPageContent(contentWithoutPlaceholders);
 
     failureOrSuccess.fold(
       (failure) => emit(GetLandingPageAndUserSuccessState(
@@ -323,12 +333,202 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
           return section;
         }
 
-        final updatedWidgets = PagebuilderWidgetTreeManipulator.addWidgetAtPositionInList(
+        final updatedWidgets =
+            PagebuilderWidgetTreeManipulator.addWidgetAtPositionInList(
           section.widgets!,
           event.targetWidgetId,
           event.newWidget,
           event.position,
         );
+        return section.copyWith(widgets: updatedWidgets);
+      }).toList();
+
+      final updatedContent =
+          currentState.content.content?.copyWith(sections: updatedSections);
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: updatedContent);
+
+      if (!_isUndoRedoOperation) {
+        _localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
+
+  void _onAddSection(AddSectionEvent event, Emitter<PagebuilderState> emit) {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final currentPageBuilderContent = currentState.content;
+
+      final List<PageBuilderWidget> sectionWidgets = [];
+
+      if (event.columnCount == 1) {
+        // Column with single placeholder for 1 column
+        sectionWidgets.add(
+          PageBuilderWidget(
+            id: UniqueID(),
+            elementType: PageBuilderWidgetType.column,
+            properties: null,
+            hoverProperties: null,
+            children: [
+              PageBuilderWidget(
+                id: UniqueID(),
+                elementType: PageBuilderWidgetType.placeholder,
+                properties: null,
+                hoverProperties: null,
+                children: null,
+                containerChild: null,
+                widthPercentage: null,
+                background: null,
+                hoverBackground: null,
+                padding: null,
+                margin: null,
+                maxWidth: null,
+                alignment: null,
+                customCSS: null,
+              ),
+            ],
+            containerChild: null,
+            widthPercentage: null,
+            background: null,
+            hoverBackground: null,
+            padding: null,
+            margin: null,
+            maxWidth: null,
+            alignment: null,
+            customCSS: null,
+          ),
+        );
+      } else {
+        // Column with Row containing multiple placeholders
+        final rowChildren = List.generate(
+          event.columnCount,
+          (index) => PageBuilderWidget(
+            id: UniqueID(),
+            elementType: PageBuilderWidgetType.placeholder,
+            properties: null,
+            hoverProperties: null,
+            children: null,
+            containerChild: null,
+            widthPercentage: PagebuilderResponsiveOrConstant.constant(
+              100.0 / event.columnCount,
+            ),
+            background: null,
+            hoverBackground: null,
+            padding: null,
+            margin: null,
+            maxWidth: null,
+            alignment: null,
+            customCSS: null,
+          ),
+        );
+
+        sectionWidgets.add(
+          PageBuilderWidget(
+            id: UniqueID(),
+            elementType: PageBuilderWidgetType.column,
+            properties: null,
+            hoverProperties: null,
+            children: [
+              PageBuilderWidget(
+                id: UniqueID(),
+                elementType: PageBuilderWidgetType.row,
+                properties: null,
+                hoverProperties: null,
+                children: rowChildren,
+                containerChild: null,
+                widthPercentage: null,
+                background: null,
+                hoverBackground: null,
+                padding: null,
+                margin: null,
+                maxWidth: null,
+                alignment: null,
+                customCSS: null,
+              ),
+            ],
+            containerChild: null,
+            widthPercentage: null,
+            background: null,
+            hoverBackground: null,
+            padding: null,
+            margin: null,
+            maxWidth: null,
+            alignment: null,
+            customCSS: null,
+          ),
+        );
+      }
+
+      final newSection = PageBuilderSection(
+        id: UniqueID(),
+        name: "Neue Section",
+        layout: PageBuilderSectionLayout.column,
+        widgets: sectionWidgets,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: false,
+        customCSS: null,
+        visibleOn: null,
+      );
+
+      final updatedSections = [
+        ...?currentPageBuilderContent.content?.sections,
+        newSection,
+      ];
+
+      final updatedPage = currentPageBuilderContent.content?.copyWith(
+        sections: updatedSections,
+      );
+
+      final updatedPageBuilderContent = currentPageBuilderContent.copyWith(
+        content: updatedPage,
+      );
+
+      if (!_isUndoRedoOperation) {
+        _localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
+
+  void _onReplacePlaceholder(
+      ReplacePlaceholderEvent event, Emitter<PagebuilderState> emit) {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final sections = currentState.content.content?.sections;
+
+      if (sections == null || sections.isEmpty) return;
+
+      // Update all sections and replace the placeholder with the new widget
+      final updatedSections = sections.map((section) {
+        final updatedWidgets = section.widgets?.map((widget) {
+          return PagebuilderWidgetTreeManipulator.updateWidget(
+            widget,
+            event.placeholderId,
+            (placeholder) {
+              final newWidget = PagebuilderWidgetFactory.createDefaultWidget(
+                  event.widgetType);
+              return newWidget.copyWith(
+                widthPercentage: placeholder.widthPercentage,
+              );
+            },
+          );
+        }).toList();
         return section.copyWith(widgets: updatedWidgets);
       }).toList();
 

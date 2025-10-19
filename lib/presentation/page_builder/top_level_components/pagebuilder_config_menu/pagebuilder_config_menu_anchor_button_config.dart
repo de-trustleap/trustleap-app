@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_button_config.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class PagebuilderConfigMenuAnchorButtonConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pagebuilderBloc = Modular.get<PagebuilderBloc>();
+    final localization = AppLocalizations.of(context);
 
     if (model.elementType == PageBuilderWidgetType.anchorButton &&
         model.properties is PagebuilderAnchorButtonProperties) {
@@ -27,7 +29,7 @@ class PagebuilderConfigMenuAnchorButtonConfig extends StatelessWidget {
 
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         CollapsibleTile(
-          title: "Anker Button Konfiguration",
+          title: localization.pagebuilder_anchor_button_config_title,
           children: [
             PagebuilderConfigMenuButtonConfig(
               properties: properties.buttonProperties,

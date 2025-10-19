@@ -4,12 +4,14 @@ class UnderlinedDropdown<T> extends StatelessWidget {
   final T? value;
   final List<DropdownMenuItem<T>> items;
   final ValueChanged<T?>? onChanged;
+  final String? hint;
 
   const UnderlinedDropdown({
     super.key,
     required this.value,
     required this.items,
     required this.onChanged,
+    this.hint,
   });
 
   @override
@@ -19,6 +21,35 @@ class UnderlinedDropdown<T> extends StatelessWidget {
     return DropdownButtonHideUnderline(
       child: DropdownButton<T>(
         value: value,
+        hint: hint != null
+            ? Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: themeData.colorScheme.secondary,
+                      width: 1.0,
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.keyboard_arrow_down,
+                      size: 16,
+                      color: themeData.colorScheme.secondary,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      hint!,
+                      style: themeData.textTheme.bodyMedium?.copyWith(
+                        color: themeData.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : null,
         selectedItemBuilder: (context) {
           return items.map((item) {
             final itemWidget = item.child;

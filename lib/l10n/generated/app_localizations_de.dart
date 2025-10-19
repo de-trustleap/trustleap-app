@@ -2364,6 +2364,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pagebuilder_config_menu_hover_switch => 'Hover aktivieren';
 
   @override
+  String get pagebuilder_anchor_button_config_title =>
+      'Anker Button Konfiguration';
+
+  @override
   String get pagebuilder_anchor_button_content_section_name => 'Section Name';
 
   @override
@@ -2373,6 +2377,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get pagebuilder_anchor_button_content_no_sections_available =>
       'Keine Sections verfügbar';
+
+  @override
+  String get pagebuilder_anchor_button_content_section_name_placeholder =>
+      'Bitte auswählen';
 
   @override
   String get pagebuilder_section_id => 'ID:';

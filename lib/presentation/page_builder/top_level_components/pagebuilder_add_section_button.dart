@@ -1,38 +1,22 @@
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderAddSectionButton extends StatelessWidget {
   const PagebuilderAddSectionButton({super.key});
 
   void _showSectionTemplateMenu(BuildContext context) {
-    final RenderBox button = context.findRenderObject() as RenderBox;
-    final Offset offset = button.localToGlobal(Offset.zero);
-    final Size buttonSize = button.size;
-
-    showDialog(
+    PagebuilderOverlay.show(
       context: context,
-      barrierColor: Colors.transparent,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return Stack(
-          children: [
-            Positioned(
-              left: offset.dx + buttonSize.width / 2 - 200,
-              top: offset.dy - 150,
-              child: Material(
-                elevation: 8,
-                borderRadius: BorderRadius.circular(8),
-                child: _SectionTemplateGrid(
-                  onColumnCountSelected: (count) {
-                    Navigator.pop(context);
-                    print('Selected section with $count columns');
-                  },
-                ),
-              ),
-            ),
-          ],
-        );
-      },
+      content: _SectionTemplateGrid(
+        onColumnCountSelected: (count) {
+          Navigator.pop(context);
+          Modular.get<PagebuilderBloc>().add(AddSectionEvent(count));
+        },
+      ),
+      positionRelativeToWidget: true,
     );
   }
 
