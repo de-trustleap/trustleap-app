@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_b
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_zoom/pagebuilder_zoom_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_breakpoint_size.dart';
@@ -21,6 +22,7 @@ class LandingPageBuilderPageBuilder extends StatefulWidget {
   final PagebuilderConfigMenuCubit? configMenuCubit;
   final bool isResponsivePreviewOpen;
   final VoidCallback onResponsivePreviewClose;
+  final LandingPage? landingPage;
 
   const LandingPageBuilderPageBuilder({
     super.key,
@@ -28,6 +30,7 @@ class LandingPageBuilderPageBuilder extends StatefulWidget {
     this.configMenuCubit,
     required this.isResponsivePreviewOpen,
     required this.onResponsivePreviewClose,
+    this.landingPage,
   });
 
   @override
@@ -73,6 +76,7 @@ class _LandingPageBuilderPageBuilderState
                     menuState: state,
                     model: null,
                     section: null,
+                    landingPage: widget.landingPage,
                     closeMenu: () {
                       setState(() {
                         _isConfigMenuOpen = false;
@@ -85,6 +89,7 @@ class _LandingPageBuilderPageBuilderState
                     menuState: state,
                     model: state.model,
                     section: null,
+                    landingPage: widget.landingPage,
                     closeMenu: () {
                       Modular.get<PagebuilderSelectionCubit>()
                           .selectWidget(null);
@@ -101,6 +106,7 @@ class _LandingPageBuilderPageBuilderState
                     model: null,
                     section: state.model,
                     allSections: widget.model.sections ?? [],
+                    landingPage: widget.landingPage,
                     closeMenu: () {
                       Modular.get<PagebuilderSelectionCubit>()
                           .selectWidget(null);
@@ -169,6 +175,7 @@ class _LandingPageBuilderPageBuilderState
                                                     LandingPageBuilderSectionView(
                                                   model: section,
                                                   index: index,
+                                                  landingPage: widget.landingPage,
                                                 ),
                                               ),
                                             const PagebuilderAddSectionButton(),
