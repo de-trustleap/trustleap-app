@@ -191,6 +191,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                                   _isResponsivePreviewOpen = false;
                                 });
                               },
+                              landingPage: state.content.landingPage,
                             )
                           : const Text("FEHLER!"),
                       if (_isHierarchyOverlayOpen &&

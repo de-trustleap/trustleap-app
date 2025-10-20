@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -15,15 +16,19 @@ class LandingPageBuilderConfigMenuContent extends StatefulWidget {
   final List<PageBuilderSection> allSections;
   final bool showOnlyDesignTab;
   final Function closeMenu;
-  const LandingPageBuilderConfigMenuContent(
-      {super.key,
-      required this.animationDuration,
-      required this.menuWidth,
-      required this.model,
-      required this.section,
-      required this.allSections,
-      required this.showOnlyDesignTab,
-      required this.closeMenu});
+  final LandingPage? landingPage;
+
+  const LandingPageBuilderConfigMenuContent({
+    super.key,
+    required this.animationDuration,
+    required this.menuWidth,
+    required this.model,
+    required this.section,
+    required this.allSections,
+    required this.showOnlyDesignTab,
+    required this.closeMenu,
+    required this.landingPage,
+  });
 
   @override
   State<LandingPageBuilderConfigMenuContent> createState() =>
@@ -66,12 +71,18 @@ class _LandingPageBuilderConfigMenuContentState
         allSections: widget.allSections,
       );
     } else if (widget.showOnlyDesignTab && widget.model != null) {
-      return LandingPageBuilderConfigMenuDesignTab(model: widget.model!);
+      return LandingPageBuilderConfigMenuDesignTab(
+        model: widget.model!,
+        landingPage: widget.landingPage,
+      );
     } else if (widget.model != null) {
       if (_selectedTabIndex == 0) {
         return LandingPageBuilderConfigMenuContentTab(model: widget.model!);
       } else {
-        return LandingPageBuilderConfigMenuDesignTab(model: widget.model!);
+        return LandingPageBuilderConfigMenuDesignTab(
+          model: widget.model!,
+          landingPage: widget.landingPage,
+        );
       }
     } else {
       return const SizedBox.shrink();

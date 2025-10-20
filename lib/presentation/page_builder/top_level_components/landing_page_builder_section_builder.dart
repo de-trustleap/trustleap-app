@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_drag/pagebui
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_factory.dart';
@@ -19,11 +20,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 class LandingPageBuilderSectionView extends StatefulWidget {
   final PageBuilderSection model;
   final int index;
+  final LandingPage? landingPage;
 
   const LandingPageBuilderSectionView({
     super.key,
     required this.model,
     required this.index,
+    this.landingPage,
   });
 
   @override
@@ -33,9 +36,14 @@ class LandingPageBuilderSectionView extends StatefulWidget {
 
 class _LandingPageBuilderSectionViewState
     extends State<LandingPageBuilderSectionView> {
-  final LandingPageBuilderWidgetBuilder widgetBuilder =
-      LandingPageBuilderWidgetBuilder();
+  late final LandingPageBuilderWidgetBuilder widgetBuilder;
   bool _isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widgetBuilder = LandingPageBuilderWidgetBuilder(landingPage: widget.landingPage);
+  }
 
   @override
   Widget build(BuildContext context) {

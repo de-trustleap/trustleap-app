@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_anchor_button_config.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_background.dart';
@@ -18,7 +19,13 @@ import 'package:flutter/material.dart';
 
 class LandingPageBuilderConfigMenuDesignTab extends StatelessWidget {
   final PageBuilderWidget model;
-  const LandingPageBuilderConfigMenuDesignTab({super.key, required this.model});
+  final LandingPage? landingPage;
+
+  const LandingPageBuilderConfigMenuDesignTab({
+    super.key,
+    required this.model,
+    this.landingPage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +47,7 @@ class LandingPageBuilderConfigMenuDesignTab extends StatelessWidget {
         ] else if (model.elementType == PageBuilderWidgetType.contactForm) ...[
           PagebuilderConfigMenuContactFormConfig(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.footer) ...[
-          PagebuilderConfigMenuFooterConfig(model: model)
+          PagebuilderConfigMenuFooterConfig(model: model, landingPage: landingPage)
         ] else if (model.elementType == PageBuilderWidgetType.videoPlayer) ...[
           PagebuilderConfigMenuVideoPlayerConfig(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.anchorButton) ...[
