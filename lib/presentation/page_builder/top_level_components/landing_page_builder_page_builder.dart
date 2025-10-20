@@ -139,36 +139,42 @@ class _LandingPageBuilderPageBuilderState
                             shrinkWrap: true,
                             children: [
                               Center(
-                                child: Transform.scale(
-                                  scale: zoomLevel.scale,
-                                  alignment: Alignment.topCenter,
-                                  child: Container(
-                                    width: maxWidth,
-                                    color: widget.model.backgroundColor,
-                                    child: Column(
-                                      children: [
-                                        if (widget.model.sections != null &&
-                                            widget.model.sections!.isNotEmpty)
-                                          PagebuilderReorderableElement<
-                                              PageBuilderSection>(
-                                            containerId: "page-sections",
-                                            items: widget.model.sections!,
-                                            getItemId: (section) =>
-                                                section.id.value,
-                                            isSection: (section) => true,
-                                            onReorder: (oldIndex, newIndex) {
-                                              Modular.get<PagebuilderBloc>()
-                                                  .add(ReorderSectionsEvent(
-                                                      oldIndex, newIndex));
-                                            },
-                                            buildChild: (section, index) =>
-                                                LandingPageBuilderSectionView(
-                                              model: section,
-                                              index: index,
-                                            ),
-                                          ),
-                                        const PagebuilderAddSectionButton(),
-                                      ],
+                                child: ClipRect(
+                                  child: Align(
+                                    alignment: Alignment.topCenter,
+                                    heightFactor: zoomLevel.scale,
+                                    child: Transform(
+                                      transform: Matrix4.diagonal3Values(zoomLevel.scale, zoomLevel.scale, 1.0),
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        width: maxWidth,
+                                        color: widget.model.backgroundColor,
+                                        child: Column(
+                                          children: [
+                                            if (widget.model.sections != null &&
+                                                widget.model.sections!.isNotEmpty)
+                                              PagebuilderReorderableElement<
+                                                  PageBuilderSection>(
+                                                containerId: "page-sections",
+                                                items: widget.model.sections!,
+                                                getItemId: (section) =>
+                                                    section.id.value,
+                                                isSection: (section) => true,
+                                                onReorder: (oldIndex, newIndex) {
+                                                  Modular.get<PagebuilderBloc>()
+                                                      .add(ReorderSectionsEvent(
+                                                          oldIndex, newIndex));
+                                                },
+                                                buildChild: (section, index) =>
+                                                    LandingPageBuilderSectionView(
+                                                  model: section,
+                                                  index: index,
+                                                ),
+                                              ),
+                                            const PagebuilderAddSectionButton(),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
