@@ -251,7 +251,6 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
 
   void _onUpdateWidget(
       UpdateWidgetEvent event, Emitter<PagebuilderState> emit) {
-    print('🔵 _onUpdateWidget called');
     if (state is GetLandingPageAndUserSuccessState) {
       final currentState = state as GetLandingPageAndUserSuccessState;
 
@@ -276,13 +275,8 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
       final updatedPageBuilderContent =
           currentState.content.copyWith(content: updatedContent);
 
-      print('🔵 _onUpdateWidget: _isUndoRedoOperation=$_isUndoRedoOperation');
       if (!_isUndoRedoOperation) {
-        print('🔵 _onUpdateWidget: calling saveToHistory');
         _localHistory.saveToHistory(updatedPageBuilderContent);
-      } else {
-        print(
-            '🔵 _onUpdateWidget: SKIPPED saveToHistory because _isUndoRedoOperation=true');
       }
 
       emit(GetLandingPageAndUserSuccessState(

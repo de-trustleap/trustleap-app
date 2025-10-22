@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
+import 'package:finanzbegleiter/presentation/page_builder/utils/keyboard_shortcut_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -51,7 +52,7 @@ class LandingPageBuilderAppBar extends StatelessWidget
                   return Row(
                     children: [
                       Tooltip(
-                        message: localization.pagebuilder_undo_tooltip,
+                        message: "${localization.pagebuilder_undo_tooltip} (${KeyboardShortcutHelper.getUndoShortcut()})",
                         child: IconButton(
                           icon: Icon(
                             Icons.undo,
@@ -65,7 +66,7 @@ class LandingPageBuilderAppBar extends StatelessWidget
                         ),
                       ),
                       Tooltip(
-                        message: localization.pagebuilder_redo_tooltip,
+                        message: "${localization.pagebuilder_redo_tooltip} (${KeyboardShortcutHelper.getRedoShortcut()})",
                         child: IconButton(
                           icon: Icon(
                             Icons.redo,
