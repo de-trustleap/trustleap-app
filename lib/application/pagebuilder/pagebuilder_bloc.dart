@@ -27,6 +27,8 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
   final PagebuilderLocalHistory _localHistory = PagebuilderLocalHistory();
   bool _isUndoRedoOperation = false;
 
+  static const _updateDebounceTime = Duration(milliseconds: 100);
+
   PagebuilderBloc({
     required this.landingPageRepo,
     required this.pageBuilderRepo,
@@ -35,13 +37,11 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     on<GetLandingPageEvent>(_onGetLandingPage);
     on<GetLandingPageContentEvent>(_onGetLandingPageContent);
     on<UpdateWidgetEvent>(_onUpdateWidget,
-        transformer: (events, mapper) => events
-            .debounceTime(const Duration(milliseconds: 100))
-            .switchMap(mapper));
+        transformer: (events, mapper) =>
+            events.debounceTime(_updateDebounceTime).switchMap(mapper));
     on<UpdateSectionEvent>(_onUpdateSection,
-        transformer: (events, mapper) => events
-            .debounceTime(const Duration(milliseconds: 100))
-            .switchMap(mapper));
+        transformer: (events, mapper) =>
+            events.debounceTime(_updateDebounceTime).switchMap(mapper));
     on<ReorderSectionsEvent>(_onReorderSections);
     on<ReorderWidgetEvent>(_onReorderWidget);
     on<SaveLandingPageContentEvent>(_onSaveLandingPageContent);
@@ -55,8 +55,9 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
   bool canUndo() => _localHistory.canUndo();
   bool canRedo() => _localHistory.canRedo();
 
-  void _onUndo(UndoPagebuilderEvent event, Emitter<PagebuilderState> emit) {
-    if (state is GetLandingPageAndUserSuccessState) {
+  void _onUndo(
+      UndoPagebuilderEvent event, Emitter<PagebuilderState> emit) async {
+    if (state is GetLandingPageAndUserSuccessState && canUndo()) {
       final content = _localHistory.undo();
       if (content != null) {
         _isUndoRedoOperation = true;
@@ -67,13 +68,16 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
           saveSuccessful: null,
           isUpdated: true,
         ));
+        // Wait for debounced events to be processed before resetting flag
+        await Future.delayed(_updateDebounceTime * 2);
         _isUndoRedoOperation = false;
       }
     }
   }
 
-  void _onRedo(RedoPagebuilderEvent event, Emitter<PagebuilderState> emit) {
-    if (state is GetLandingPageAndUserSuccessState) {
+  void _onRedo(
+      RedoPagebuilderEvent event, Emitter<PagebuilderState> emit) async {
+    if (state is GetLandingPageAndUserSuccessState && canRedo()) {
       final content = _localHistory.redo();
       if (content != null) {
         _isUndoRedoOperation = true;
@@ -84,6 +88,8 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
           saveSuccessful: null,
           isUpdated: true,
         ));
+        // Wait for debounced events to be processed before resetting flag
+        await Future.delayed(_updateDebounceTime * 2);
         _isUndoRedoOperation = false;
       }
     }
@@ -197,6 +203,9 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
       (failure) => emit(GetLandingPageFailureState(failure: failure)),
       (content) {
         final pageBuilderContent = event.pageContent.copyWith(content: content);
+
+        _localHistory.saveToHistory(pageBuilderContent);
+
         emit(GetLandingPageAndUserSuccessState(
           content: pageBuilderContent,
           saveLoading: false,
@@ -242,6 +251,7 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
 
   void _onUpdateWidget(
       UpdateWidgetEvent event, Emitter<PagebuilderState> emit) {
+    print('🔵 _onUpdateWidget called');
     if (state is GetLandingPageAndUserSuccessState) {
       final currentState = state as GetLandingPageAndUserSuccessState;
 
@@ -266,8 +276,13 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
       final updatedPageBuilderContent =
           currentState.content.copyWith(content: updatedContent);
 
+      print('🔵 _onUpdateWidget: _isUndoRedoOperation=$_isUndoRedoOperation');
       if (!_isUndoRedoOperation) {
+        print('🔵 _onUpdateWidget: calling saveToHistory');
         _localHistory.saveToHistory(updatedPageBuilderContent);
+      } else {
+        print(
+            '🔵 _onUpdateWidget: SKIPPED saveToHistory because _isUndoRedoOperation=true');
       }
 
       emit(GetLandingPageAndUserSuccessState(

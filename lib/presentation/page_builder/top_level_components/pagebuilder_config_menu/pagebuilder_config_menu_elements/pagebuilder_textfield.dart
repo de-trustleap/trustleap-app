@@ -23,20 +23,28 @@ class PagebuilderTextField extends StatefulWidget {
 }
 
 class _PagebuilderTextFieldState extends State<PagebuilderTextField> {
-  TextEditingController _controller = TextEditingController();
+  late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
-    if (widget.controller != null) {
-      _controller = widget.controller!;
-    }
+    _controller = widget.controller ?? TextEditingController();
     _controller.text = widget.initialText ?? "";
   }
 
   @override
+  void didUpdateWidget(PagebuilderTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_controller.text != widget.initialText) {
+      _controller.text = widget.initialText ?? "";
+    }
+  }
+
+  @override
   void dispose() {
-    _controller.dispose();
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 
@@ -53,7 +61,9 @@ class _PagebuilderTextFieldState extends State<PagebuilderTextField> {
       placeholder: widget.placeholder ??
           localization.landingpage_pagebuilder_text_config_text_placeholder,
       desktopStyle: themeData.textTheme.bodySmall,
-      onChanged: () => widget.onChanged(_controller.text),
+      onChanged: () {
+        widget.onChanged(_controller.text);
+      },
     );
   }
 }
