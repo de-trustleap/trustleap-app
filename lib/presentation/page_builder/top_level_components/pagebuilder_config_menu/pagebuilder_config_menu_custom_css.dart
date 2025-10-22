@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -23,13 +24,16 @@ class PagebuilderConfigMenuCustomCSS extends StatefulWidget {
 class _PagebuilderConfigMenuCustomCSSState
     extends State<PagebuilderConfigMenuCustomCSS> {
   late CodeController _codeController;
+  Timer? _debounceTimer;
 
   @override
   void initState() {
     super.initState();
     final isWidget = widget.model != null;
     _codeController = CodeController(
-      text: isWidget ? (widget.model?.customCSS ?? '') : (widget.section?.customCSS ?? ''),
+      text: isWidget
+          ? (widget.model?.customCSS ?? '')
+          : (widget.section?.customCSS ?? ''),
       language: css,
     );
 
@@ -37,27 +41,49 @@ class _PagebuilderConfigMenuCustomCSSState
   }
 
   @override
+  void didUpdateWidget(PagebuilderConfigMenuCustomCSS oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final isWidget = widget.model != null;
+    final newCSS = isWidget
+        ? (widget.model?.customCSS ?? '')
+        : (widget.section?.customCSS ?? '');
+
+    if (_codeController.text != newCSS) {
+      _debounceTimer?.cancel();
+
+      _codeController.removeListener(_onCodeChanged);
+      _codeController.text = newCSS;
+      _codeController.addListener(_onCodeChanged);
+    }
+  }
+
+  @override
   void dispose() {
+    _debounceTimer?.cancel();
     _codeController.removeListener(_onCodeChanged);
     _codeController.dispose();
     super.dispose();
   }
 
   void _onCodeChanged() {
-    final pagebuilderBloc = Modular.get<PagebuilderBloc>();
-    final isWidget = widget.model != null;
+    _debounceTimer?.cancel();
 
-    if (isWidget) {
-      final updatedWidget = widget.model!.copyWith(
-        customCSS: _codeController.text.isEmpty ? null : _codeController.text,
-      );
-      pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-    } else {
-      final updatedSection = widget.section!.copyWith(
-        customCSS: _codeController.text.isEmpty ? null : _codeController.text,
-      );
-      pagebuilderBloc.add(UpdateSectionEvent(updatedSection));
-    }
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
+      final pagebuilderBloc = Modular.get<PagebuilderBloc>();
+      final isWidget = widget.model != null;
+
+      if (isWidget) {
+        final updatedWidget = widget.model!.copyWith(
+          customCSS: _codeController.text.isEmpty ? null : _codeController.text,
+        );
+        pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+      } else {
+        final updatedSection = widget.section!.copyWith(
+          customCSS: _codeController.text.isEmpty ? null : _codeController.text,
+        );
+        pagebuilderBloc.add(UpdateSectionEvent(updatedSection));
+      }
+    });
   }
 
   @override

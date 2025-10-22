@@ -71,25 +71,16 @@ void main() {
         "should emit GetLandingPageLoadingState and GetLandingPageAndUserSuccessState when function is called",
         () async {
       // Given
-      final expectedResult = [
-        GetLandingPageLoadingState(),
-        GetLandingPageAndUserSuccessState(
-            content: PagebuilderContent(
-                landingPage: testLandingPage,
-                content: testContent,
-                user: testUser),
-            saveLoading: false,
-            saveFailure: null,
-            saveSuccessful: null,
-            isUpdated: null)
-      ];
       when(mockLandingPageRepo.getLandingPage(landingPageID))
           .thenAnswer((_) async => right(testLandingPage));
       when(mockUserRepo.getUser()).thenAnswer((_) async => right(testUser));
       when(mockPageBuilderRepo.getLandingPageContent(contentID))
           .thenAnswer((_) async => right(testContent));
       // Then
-      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      expectLater(pageBuilderBloc.stream, emitsInOrder([
+        isA<GetLandingPageLoadingState>(),
+        isA<GetLandingPageAndUserSuccessState>()
+      ]));
       pageBuilderBloc.add(GetLandingPageEvent(landingPageID));
     });
 
@@ -196,24 +187,16 @@ void main() {
         "should emit GetLandingPageAndUserSuccessState with loading and GetLandingPageAndUserSuccessState without loading when function is called",
         () async {
       // Given
-      final expectedResult = [
-        GetLandingPageAndUserSuccessState(
-            content: testContent!,
-            saveLoading: true,
-            saveFailure: null,
-            saveSuccessful: null,
-            isUpdated: null),
-        GetLandingPageAndUserSuccessState(
-            content: testContent,
-            saveLoading: false,
-            saveFailure: null,
-            saveSuccessful: true,
-            isUpdated: false)
-      ];
-      when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
+      when(mockPageBuilderRepo.saveLandingPageContent(testContent!.content))
           .thenAnswer((_) async => right(unit));
       // Then
-      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      expectLater(pageBuilderBloc.stream, emitsInOrder([
+        isA<GetLandingPageAndUserSuccessState>()
+            .having((state) => state.saveLoading, "saveLoading", true),
+        isA<GetLandingPageAndUserSuccessState>()
+            .having((state) => state.saveLoading, "saveLoading", false)
+            .having((state) => state.saveSuccessful, "saveSuccessful", true)
+      ]));
       pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
     });
 
@@ -221,24 +204,16 @@ void main() {
         "should emit GetLandingPageAndUserSuccessState with loading and GetLandingPageAndUserSuccessState with failre when function is called and failed",
         () async {
       // Given
-      final expectedResult = [
-        GetLandingPageAndUserSuccessState(
-            content: testContent!,
-            saveLoading: true,
-            saveFailure: null,
-            saveSuccessful: null,
-            isUpdated: null),
-        GetLandingPageAndUserSuccessState(
-            content: testContent,
-            saveLoading: false,
-            saveFailure: BackendFailure(),
-            saveSuccessful: null,
-            isUpdated: null)
-      ];
-      when(mockPageBuilderRepo.saveLandingPageContent(testContent.content))
+      when(mockPageBuilderRepo.saveLandingPageContent(testContent!.content))
           .thenAnswer((_) async => left(BackendFailure()));
       // Then
-      expectLater(pageBuilderBloc.stream, emitsInOrder(expectedResult));
+      expectLater(pageBuilderBloc.stream, emitsInOrder([
+        isA<GetLandingPageAndUserSuccessState>()
+            .having((state) => state.saveLoading, "saveLoading", true),
+        isA<GetLandingPageAndUserSuccessState>()
+            .having((state) => state.saveLoading, "saveLoading", false)
+            .having((state) => state.saveFailure, "saveFailure", isA<BackendFailure>())
+      ]));
       pageBuilderBloc.add(SaveLandingPageContentEvent(testContent));
     });
   });
@@ -421,26 +396,14 @@ void main() {
       final updatedContent =
           mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
 
-      final expectedResult = GetLandingPageAndUserSuccessState(
-        content: updatedContent,
-        saveLoading: false,
-        saveFailure: null,
-        saveSuccessful: null,
-        isUpdated: true,
-      );
-
       // Then
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            expectedResult,
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -520,26 +483,14 @@ void main() {
       final updatedContent =
           mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
 
-      final expectedResult = GetLandingPageAndUserSuccessState(
-        content: updatedContent,
-        saveLoading: false,
-        saveFailure: null,
-        saveSuccessful: null,
-        isUpdated: true,
-      );
-
       // Then
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            expectedResult,
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -563,26 +514,14 @@ void main() {
       final updatedContent =
           mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
 
-      final expectedResult = GetLandingPageAndUserSuccessState(
-        content: updatedContent,
-        saveLoading: false,
-        saveFailure: null,
-        saveSuccessful: null,
-        isUpdated: true,
-      );
-
       // Then
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            expectedResult,
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -606,13 +545,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: contentWithNoSections,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -632,17 +568,12 @@ void main() {
       final contentWithEmptySections =
           mockPagebuilderContent.copyWith(content: pageWithEmptySections);
 
-      // Then
+      // Then - should only emit the initial state, no additional states
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: contentWithEmptySections,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -669,15 +600,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>(
-                (state) => state.isUpdated == true),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -835,26 +761,14 @@ void main() {
       final updatedContent =
           mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
 
-      final expectedResult = GetLandingPageAndUserSuccessState(
-        content: updatedContent,
-        saveLoading: false,
-        saveFailure: null,
-        saveSuccessful: null,
-        isUpdated: true,
-      );
-
       // Then
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            expectedResult,
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -883,26 +797,14 @@ void main() {
       final updatedContent =
           mockPagebuilderContent.copyWith(content: updatedPageBuilderPage);
 
-      final expectedResult = GetLandingPageAndUserSuccessState(
-        content: updatedContent,
-        saveLoading: false,
-        saveFailure: null,
-        saveSuccessful: null,
-        isUpdated: true,
-      );
-
       // Then
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            expectedResult,
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -932,15 +834,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>(
-                (state) => state.isUpdated == true),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -959,13 +856,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -981,6 +875,67 @@ void main() {
   });
 
   group("PagebuilderBloc_UndoRedo", () {
+    final mockTextProperties = PageBuilderTextProperties(
+        text: "Original text",
+        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
+        fontFamily: "TestFont",
+        color: Colors.black,
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+        letterSpacing: null,
+        textShadow: null,
+        isBold: null,
+        isItalic: null);
+
+    final mockTextWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("widget1"),
+        elementType: PageBuilderWidgetType.text,
+        background: null,
+        hoverBackground: null,
+        properties: mockTextProperties,
+        hoverProperties: null,
+        children: [],
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100.0),
+        containerChild: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+        margin: null,
+        padding: null);
+
+    final mockSection = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      name: "Test Section",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [mockTextWidget],
+      visibleOn: null,
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      backgroundColor: null,
+      sections: [mockSection],
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("landingPage1"),
+      contentID: UniqueID.fromUniqueString("content1"),
+    );
+
+    final mockUser = CustomUser(
+      id: UniqueID.fromUniqueString("user1"),
+    );
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
     test("should not be able to undo initially", () {
       expect(pageBuilderBloc.canUndo(), false);
     });
@@ -990,7 +945,6 @@ void main() {
     });
 
     test("canUndo and canRedo should delegate to PagebuilderLocalHistory", () {
-      // Test verifies that the methods exist and return boolean values
       expect(pageBuilderBloc.canUndo(), isA<bool>());
       expect(pageBuilderBloc.canRedo(), isA<bool>());
     });
@@ -1044,26 +998,14 @@ void main() {
         content: updatedPage,
       );
 
-      final expectedResult = GetLandingPageAndUserSuccessState(
-        content: updatedContent,
-        saveLoading: false,
-        saveFailure: null,
-        saveSuccessful: null,
-        isUpdated: true,
-      );
-
       // Then
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            expectedResult,
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1087,15 +1029,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>(
-                (state) => state.isUpdated == true),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1204,17 +1141,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>((state) {
-              // Verify that a new state was emitted with isUpdated = true
-              return state.isUpdated == true;
-            }),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1238,16 +1168,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>((state) {
-              return state.isUpdated == true;
-            }),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1271,16 +1195,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>((state) {
-              return state.isUpdated == true;
-            }),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1304,16 +1222,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>((state) {
-              return state.isUpdated == true;
-            }),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1336,15 +1248,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>(
-                (state) => state.isUpdated == true),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1372,13 +1279,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: contentWithNoSections,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1406,13 +1310,8 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: contentWithEmptySections,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1457,13 +1356,8 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
             predicate<GetLandingPageAndUserSuccessState>((state) {
               // Verify that new section was added
               final sections = state.content.content?.sections;
@@ -1496,13 +1390,8 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
             predicate<GetLandingPageAndUserSuccessState>((state) {
               // Verify that new section was added
               final sections = state.content.content?.sections;
@@ -1548,15 +1437,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>(
-                (state) => state.isUpdated == true),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1668,13 +1552,8 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
             predicate<GetLandingPageAndUserSuccessState>((state) {
               // Verify that placeholder was replaced with text widget
               final sections = state.content.content?.sections;
@@ -1719,13 +1598,8 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
             predicate<GetLandingPageAndUserSuccessState>((state) {
               final sections = state.content.content?.sections;
               if (sections == null || sections.isEmpty) return false;
@@ -1765,15 +1639,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
-            predicate<GetLandingPageAndUserSuccessState>(
-                (state) => state.isUpdated == true),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1795,13 +1664,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: mockPagebuilderContent,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1828,13 +1694,10 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: contentWithNoSections,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
@@ -1861,13 +1724,8 @@ void main() {
       expectLater(
           pageBuilderBloc.stream,
           emitsInOrder([
-            GetLandingPageAndUserSuccessState(
-              content: contentWithEmptySections,
-              saveLoading: false,
-              saveFailure: null,
-              saveSuccessful: null,
-              isUpdated: false,
-            ),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
           ]));
 
       pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(

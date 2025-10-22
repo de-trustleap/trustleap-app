@@ -150,7 +150,10 @@ class _LandingPageBuilderPageBuilderState
                                     alignment: Alignment.topCenter,
                                     heightFactor: zoomLevel.scale,
                                     child: Transform(
-                                      transform: Matrix4.diagonal3Values(zoomLevel.scale, zoomLevel.scale, 1.0),
+                                      transform: Matrix4.diagonal3Values(
+                                          zoomLevel.scale,
+                                          zoomLevel.scale,
+                                          1.0),
                                       alignment: Alignment.topCenter,
                                       child: Container(
                                         width: maxWidth,
@@ -158,7 +161,8 @@ class _LandingPageBuilderPageBuilderState
                                         child: Column(
                                           children: [
                                             if (widget.model.sections != null &&
-                                                widget.model.sections!.isNotEmpty)
+                                                widget
+                                                    .model.sections!.isNotEmpty)
                                               PagebuilderReorderableElement<
                                                   PageBuilderSection>(
                                                 containerId: "page-sections",
@@ -166,7 +170,8 @@ class _LandingPageBuilderPageBuilderState
                                                 getItemId: (section) =>
                                                     section.id.value,
                                                 isSection: (section) => true,
-                                                onReorder: (oldIndex, newIndex) {
+                                                onReorder:
+                                                    (oldIndex, newIndex) {
                                                   Modular.get<PagebuilderBloc>()
                                                       .add(ReorderSectionsEvent(
                                                           oldIndex, newIndex));
@@ -175,7 +180,8 @@ class _LandingPageBuilderPageBuilderState
                                                     LandingPageBuilderSectionView(
                                                   model: section,
                                                   index: index,
-                                                  landingPage: widget.landingPage,
+                                                  landingPage:
+                                                      widget.landingPage,
                                                 ),
                                               ),
                                             const PagebuilderAddSectionButton(),
@@ -201,3 +207,6 @@ class _LandingPageBuilderPageBuilderState
     );
   }
 }
+// TODO: ZEIGE IM TOOLTIP FÜR UNDO UND REDO AUCH DEN SHORTCUT AN. HIERZU KLASSE MACHEN DIE SHORTCUT JE OS ZURÜCKGIBT. (DONE)
+// TODO: TEST FIXEN
+// TODO: GGF NEUE TESTS SCHREIBEN
