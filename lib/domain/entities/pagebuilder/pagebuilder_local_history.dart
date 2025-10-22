@@ -10,6 +10,15 @@ class PagebuilderLocalHistory {
   bool canRedo() => _historyIndex < _history.length - 1;
 
   void saveToHistory(PagebuilderContent content) {
+    // Check if content is actually different from current history entry
+    if (_historyIndex >= 0 && _historyIndex < _history.length) {
+      final oldContent = _history[_historyIndex];
+      final isEqual = oldContent == content;
+      if (isEqual) {
+        return;
+      }
+    }
+
     if (_historyIndex < _history.length - 1) {
       _history.removeRange(_historyIndex + 1, _history.length);
     }

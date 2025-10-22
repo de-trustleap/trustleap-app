@@ -33,6 +33,14 @@ class _PagebuilderConfigMenuSectionNameState
   }
 
   @override
+  void didUpdateWidget(PagebuilderConfigMenuSectionName oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_controller.text != widget.sectionName) {
+      _controller.text = widget.sectionName ?? "";
+    }
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
