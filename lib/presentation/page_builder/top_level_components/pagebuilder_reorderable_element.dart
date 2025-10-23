@@ -152,6 +152,12 @@ class _PagebuilderReorderableElementState<T>
                   libraryWidgetHoverPosition: finalPosition,
                 );
               });
+
+              Modular.get<PagebuilderDragCubit>().setLibraryDragTarget(
+                containerId: widget.containerId,
+                containerKey: _containerKey,
+              );
+
               return true;
             } else if (details.data is PagebuilderReorderDragData<T>) {
               // Handle PagebuilderReorderDragData - check container
@@ -222,6 +228,12 @@ class _PagebuilderReorderableElementState<T>
                   libraryWidgetHoverPosition: finalPosition,
                 );
               });
+
+              Modular.get<PagebuilderDragCubit>().setLibraryDragTarget(
+                containerId: widget.containerId,
+                containerKey: _containerKey,
+              );
+
               return;
             }
 
@@ -263,6 +275,7 @@ class _PagebuilderReorderableElementState<T>
               setState(() {
                 _dragState = _dragState.clearHover();
               });
+              Modular.get<PagebuilderDragCubit>().clearLibraryDragTarget();
             } else if (data is PagebuilderReorderDragData<T>) {
               // Only handle onLeave if we're dragging in this container
               final isDraggingInThisContainer = _dragState.draggingIndex != null;

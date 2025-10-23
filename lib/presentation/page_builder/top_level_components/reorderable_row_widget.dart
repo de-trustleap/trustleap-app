@@ -232,6 +232,12 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                     libraryWidgetHoverPosition: finalPosition,
                   );
                 });
+
+                Modular.get<PagebuilderDragCubit>().setLibraryDragTarget(
+                  containerId: widget.model.id.value,
+                  containerKey: _containerKey,
+                );
+
                 return true;
               } else if (details.data
                   is PagebuilderReorderDragData<PageBuilderWidget>) {
@@ -292,6 +298,12 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                     libraryWidgetHoverPosition: finalPosition,
                   );
                 });
+
+                Modular.get<PagebuilderDragCubit>().setLibraryDragTarget(
+                  containerId: widget.model.id.value,
+                  containerKey: _containerKey,
+                );
+
                 return;
               }
 
@@ -335,6 +347,7 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                 setState(() {
                   _dragState = _dragState.clearHover();
                 });
+                Modular.get<PagebuilderDragCubit>().clearLibraryDragTarget();
               } else if (data
                   is PagebuilderReorderDragData<PageBuilderWidget>) {
                 // Only handle onLeave if we're dragging in this container
