@@ -50,9 +50,11 @@ class _LandingPageBuilderWidgetContainerState
             return BlocBuilder<PagebuilderDragCubit, bool>(
               bloc: Modular.get<PagebuilderDragCubit>(),
               builder: (context, isDragging) {
+                final dragCubit = Modular.get<PagebuilderDragCubit>();
                 final isHovered = hoveredWidgetId == widgetID;
                 final isSelected = selectedWidgetId == widgetID;
-                final showBorder = (isHovered && !isDragging) || isSelected;
+                final isLibraryDragTarget = dragCubit.libraryDragTargetContainerId == widgetID;
+                final showBorder = (isHovered && !isDragging) || isSelected || isLibraryDragTarget;
 
             return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
                 PagebuilderResponsiveBreakpoint>(

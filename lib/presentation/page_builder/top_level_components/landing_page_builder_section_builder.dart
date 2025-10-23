@@ -82,10 +82,12 @@ class _LandingPageBuilderSectionViewState
                 child: BlocBuilder<PagebuilderSelectionCubit, String?>(
                   bloc: selectionCubit,
                   builder: (context, selectedSectionId) {
+                    final dragCubit = Modular.get<PagebuilderDragCubit>();
                     final isSelected =
                         selectedSectionId == widget.model.id.value;
+                    final isLibraryDragTarget = dragCubit.libraryDragTargetContainerId == widget.model.id.value;
                     final showBorder =
-                        (_isHovered && !isDragging) || isSelected;
+                        (_isHovered && !isDragging) || isSelected || isLibraryDragTarget;
 
                     return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
                         PagebuilderResponsiveBreakpoint>(
