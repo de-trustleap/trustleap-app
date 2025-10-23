@@ -150,6 +150,7 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
 
   PagebuilderDragState<PageBuilderWidget> _dragState = const PagebuilderDragState();
   final Map<int, GlobalKey> _itemKeys = {};
+  final GlobalKey _containerKey = GlobalKey();
 
   @override
   void didUpdateWidget(_ReorderableRowContent oldWidget) {
@@ -439,7 +440,11 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                     setState(() {
                       _dragState = _dragState.copyWith(draggingIndex: index);
                     });
-                    Modular.get<PagebuilderDragCubit>().setDragging(true);
+                    Modular.get<PagebuilderDragCubit>().setDragging(
+                      true,
+                      containerId: widget.model.id.value,
+                      containerKey: _containerKey,
+                    );
                   },
                   onDragEnd: () {
                     // If we left rightwards, trigger reorder to end
@@ -509,6 +514,7 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
     final rowContent = needsIntrinsicHeight
         ? IntrinsicHeight(
             child: Row(
+              key: _containerKey,
               mainAxisAlignment: widget.properties?.mainAxisAlignment ??
                   MainAxisAlignment.center,
               crossAxisAlignment: widget.properties?.crossAxisAlignment ??
@@ -517,6 +523,7 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             ),
           )
         : Row(
+            key: _containerKey,
             mainAxisAlignment: widget.properties?.mainAxisAlignment ??
                 MainAxisAlignment.center,
             children: rowChildren,

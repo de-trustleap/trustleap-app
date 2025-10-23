@@ -11,6 +11,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuild
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_builder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_add_section_button.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorder_dimming_overlay.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_responsive_toolbar.dart';
 import 'package:flutter/material.dart';
@@ -120,93 +121,99 @@ class _LandingPageBuilderPageBuilderState
               }
             }),
         Expanded(
-          child: Column(
-            children: [
-              if (widget.isResponsivePreviewOpen)
-                PagebuilderResponsiveToolbar(
-                  onClose: widget.onResponsivePreviewClose,
-                ),
-              Expanded(
-                child: BlocBuilder<PagebuilderZoomCubit, PagebuilderZoomLevel>(
-                  bloc: Modular.get<PagebuilderZoomCubit>(),
-                  builder: (context, zoomLevel) {
-                    return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
-                        PagebuilderResponsiveBreakpoint>(
-                      bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
-                      builder: (context, breakpoint) {
-                        final maxWidth =
-                            PagebuilderResponsiveBreakpointSize.getWidth(
-                                breakpoint);
+          child: PagebuilderReorderDimmingOverlay(
+            child: Column(
+              children: [
+                if (widget.isResponsivePreviewOpen)
+                  PagebuilderResponsiveToolbar(
+                    onClose: widget.onResponsivePreviewClose,
+                  ),
+                Expanded(
+                  child:
+                      BlocBuilder<PagebuilderZoomCubit, PagebuilderZoomLevel>(
+                    bloc: Modular.get<PagebuilderZoomCubit>(),
+                    builder: (context, zoomLevel) {
+                      return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+                          PagebuilderResponsiveBreakpoint>(
+                        bloc:
+                            Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+                        builder: (context, breakpoint) {
+                          final maxWidth =
+                              PagebuilderResponsiveBreakpointSize.getWidth(
+                                  breakpoint);
 
-                        return Container(
-                          color: const Color(0xFF323232),
-                          alignment: Alignment.topCenter,
-                          child: ListView(
-                            shrinkWrap: true,
-                            children: [
-                              Center(
-                                child: ClipRect(
-                                  child: Align(
-                                    alignment: Alignment.topCenter,
-                                    heightFactor: zoomLevel.scale,
-                                    child: Transform(
-                                      transform: Matrix4.diagonal3Values(
-                                          zoomLevel.scale,
-                                          zoomLevel.scale,
-                                          1.0),
+                          return Container(
+                            color: const Color(0xFF323232),
+                            alignment: Alignment.topCenter,
+                            child: ListView(
+                              shrinkWrap: true,
+                              children: [
+                                Center(
+                                  child: ClipRect(
+                                    child: Align(
                                       alignment: Alignment.topCenter,
-                                      child: Container(
-                                        width: maxWidth,
-                                        color: widget.model.backgroundColor,
-                                        child: Column(
-                                          children: [
-                                            if (widget.model.sections != null &&
-                                                widget
-                                                    .model.sections!.isNotEmpty)
-                                              PagebuilderReorderableElement<
-                                                  PageBuilderSection>(
-                                                containerId: "page-sections",
-                                                items: widget.model.sections!,
-                                                getItemId: (section) =>
-                                                    section.id.value,
-                                                isSection: (section) => true,
-                                                onReorder:
-                                                    (oldIndex, newIndex) {
-                                                  Modular.get<PagebuilderBloc>()
-                                                      .add(ReorderSectionsEvent(
-                                                          oldIndex, newIndex));
-                                                },
-                                                buildChild: (section, index) =>
-                                                    LandingPageBuilderSectionView(
-                                                  model: section,
-                                                  index: index,
-                                                  landingPage:
-                                                      widget.landingPage,
+                                      heightFactor: zoomLevel.scale,
+                                      child: Transform(
+                                        transform: Matrix4.diagonal3Values(
+                                            zoomLevel.scale,
+                                            zoomLevel.scale,
+                                            1.0),
+                                        alignment: Alignment.topCenter,
+                                        child: Container(
+                                          width: maxWidth,
+                                          color: widget.model.backgroundColor,
+                                          child: Column(
+                                            children: [
+                                              if (widget.model.sections !=
+                                                      null &&
+                                                  widget.model.sections!
+                                                      .isNotEmpty)
+                                                PagebuilderReorderableElement<
+                                                    PageBuilderSection>(
+                                                  containerId: "page-sections",
+                                                  items: widget.model.sections!,
+                                                  getItemId: (section) =>
+                                                      section.id.value,
+                                                  isSection: (section) => true,
+                                                  onReorder:
+                                                      (oldIndex, newIndex) {
+                                                    Modular.get<
+                                                            PagebuilderBloc>()
+                                                        .add(
+                                                            ReorderSectionsEvent(
+                                                                oldIndex,
+                                                                newIndex));
+                                                  },
+                                                  buildChild: (section,
+                                                          index) =>
+                                                      LandingPageBuilderSectionView(
+                                                    model: section,
+                                                    index: index,
+                                                    landingPage:
+                                                        widget.landingPage,
+                                                  ),
                                                 ),
-                                              ),
-                                            const PagebuilderAddSectionButton(),
-                                          ],
+                                              const PagebuilderAddSectionButton(),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
     );
   }
 }
-// TODO: ZEIGE IM TOOLTIP FÜR UNDO UND REDO AUCH DEN SHORTCUT AN. HIERZU KLASSE MACHEN DIE SHORTCUT JE OS ZURÜCKGIBT. (DONE)
-// TODO: TEST FIXEN
-// TODO: GGF NEUE TESTS SCHREIBEN

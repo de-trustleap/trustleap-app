@@ -72,6 +72,7 @@ class _PagebuilderReorderableElementState<T>
 
   late PagebuilderDragState<T> _dragState;
   final Map<int, GlobalKey> _itemKeys = {};
+  final GlobalKey _containerKey = GlobalKey();
 
   @override
   void initState() {
@@ -358,7 +359,11 @@ class _PagebuilderReorderableElementState<T>
                   setState(() {
                     _dragState = _dragState.copyWith(draggingIndex: index);
                   });
-                  Modular.get<PagebuilderDragCubit>().setDragging(true);
+                  Modular.get<PagebuilderDragCubit>().setDragging(
+                    true,
+                    containerId: widget.containerId,
+                    containerKey: _containerKey,
+                  );
                 },
                 onDragEnd: () {
                   // If we left downwards, trigger reorder to end
@@ -409,6 +414,7 @@ class _PagebuilderReorderableElementState<T>
     }
 
     return Column(
+      key: _containerKey,
       children: dragTargets,
     );
   }
