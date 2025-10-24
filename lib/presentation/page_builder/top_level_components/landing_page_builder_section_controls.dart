@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 class LandingPageBuilderSectionControls extends StatelessWidget {
   final Function onEditPressed;
+  final Function onDeletePressed;
   final int index;
   const LandingPageBuilderSectionControls({
     super.key,
     required this.onEditPressed,
+    required this.onDeletePressed,
     required this.index,
   });
 
@@ -20,7 +22,7 @@ class LandingPageBuilderSectionControls extends StatelessWidget {
       child: ClipPath(
         clipper: InvertedTrapezoidClipper(),
         child: Container(
-          width: 100,
+          width: 140,
           height: 30,
           decoration: BoxDecoration(
             color: themeData.colorScheme.secondary,
@@ -41,6 +43,15 @@ class LandingPageBuilderSectionControls extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
                 icon: const Icon(Icons.edit, color: Colors.white, size: 20),
+              ),
+              const SizedBox(width: 4),
+              IconButton(
+                onPressed: () {
+                  onDeletePressed();
+                },
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                icon: const Icon(Icons.delete, color: Colors.white, size: 20),
               ),
             ],
           ),

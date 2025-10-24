@@ -123,3 +123,12 @@ class ReplacePlaceholderEvent extends PagebuilderEvent with EquatableMixin {
   @override
   List<Object?> get props => [placeholderId, widgetType];
 }
+
+class DeleteSectionEvent extends PagebuilderEvent with EquatableMixin {
+  final String sectionId;
+
+  DeleteSectionEvent(this.sectionId);
+
+  @override
+  List<Object?> get props => [sectionId];
+}

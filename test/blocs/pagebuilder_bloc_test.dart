@@ -1742,4 +1742,283 @@ void main() {
       ));
     });
   });
+
+  group("PagebuilderBloc_DeleteSection", () {
+    final section1 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      name: "Section 1",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final section2 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section2"),
+      name: "Section 2",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final section3 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section3"),
+      name: "Section 3",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      backgroundColor: null,
+      sections: [section1, section2, section3],
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("landingPage1"),
+      contentID: UniqueID.fromUniqueString("content1"),
+    );
+
+    final mockUser = CustomUser(
+      id: UniqueID.fromUniqueString("user1"),
+    );
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should emit GetLandingPageAndUserSuccessState with section deleted when deleting first section",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 2 sections left
+              if (sections == null || sections.length != 2) return false;
+              // Should be section2 and section3
+              return sections[0].id.value == "section2" &&
+                  sections[1].id.value == "section3" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteSectionEvent("section1"));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState with section deleted when deleting middle section",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 2 sections left
+              if (sections == null || sections.length != 2) return false;
+              // Should be section1 and section3
+              return sections[0].id.value == "section1" &&
+                  sections[1].id.value == "section3" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteSectionEvent("section2"));
+    });
+
+    test("should emit GetLandingPageAndUserSuccessState with section deleted when deleting last section",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 2 sections left
+              if (sections == null || sections.length != 2) return false;
+              // Should be section1 and section2
+              return sections[0].id.value == "section1" &&
+                  sections[1].id.value == "section2" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteSectionEvent("section3"));
+    });
+
+    test("should mark content as updated after deleting section", () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteSectionEvent("section1"));
+    });
+
+    test("should not emit new state if section to delete is not found",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should still have all 3 sections
+              return sections?.length == 3 && state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteSectionEvent("nonexistent"));
+    });
+
+    test("should not emit new state if sections list is null", () async {
+      // Given
+      final pageWithNoSections = mockPageBuilderPage.copyWith(sections: null);
+      final contentWithNoSections =
+          mockPagebuilderContent.copyWith(content: pageWithNoSections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithNoSections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteSectionEvent("section1"));
+    });
+
+    test("should not emit new state if sections list is empty", () async {
+      // Given
+      final pageWithEmptySections = mockPageBuilderPage.copyWith(sections: []);
+      final contentWithEmptySections =
+          mockPagebuilderContent.copyWith(content: pageWithEmptySections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithEmptySections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteSectionEvent("section1"));
+    });
+
+    test("should handle deleting the only remaining section", () async {
+      // Given
+      final pageWithOneSection = mockPageBuilderPage.copyWith(
+        sections: [section1],
+      );
+      final contentWithOneSection =
+          mockPagebuilderContent.copyWith(content: pageWithOneSection);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have empty list
+              return sections?.isEmpty == true && state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithOneSection,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteSectionEvent("section1"));
+    });
+  });
 }
