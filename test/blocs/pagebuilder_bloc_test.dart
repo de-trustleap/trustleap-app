@@ -2021,4 +2021,628 @@ void main() {
       pageBuilderBloc.add(DeleteSectionEvent("section1"));
     });
   });
+
+  group("PagebuilderBloc_DeleteWidget", () {
+    final widget1 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget1"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Widget 1",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+        isBold: null,
+        isItalic: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: const PagebuilderResponsiveOrConstant.constant(50.0),
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final widget2 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget2"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Widget 2",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+        isBold: null,
+        isItalic: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: const PagebuilderResponsiveOrConstant.constant(50.0),
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final widget3 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget3"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Widget 3",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+        isBold: null,
+        isItalic: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: const PagebuilderResponsiveOrConstant.constant(33.33),
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    test(
+        "should delete widget from Row with 2 widgets and unwrap the remaining widget",
+        () async {
+      final rowWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("row1"),
+        elementType: PageBuilderWidgetType.row,
+        properties: null,
+        hoverProperties: null,
+        children: [widget1, widget2],
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [rowWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              return section.widgets?.length == 1 &&
+                  section.widgets!.first.id.value == "widget2" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteWidgetEvent("widget1"));
+    });
+
+    test(
+        "should delete widget from Row with 3 widgets and redistribute widthPercentages",
+        () async {
+      final rowWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("row1"),
+        elementType: PageBuilderWidgetType.row,
+        properties: null,
+        hoverProperties: null,
+        children: [widget1, widget2, widget3],
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [rowWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              final widgets = section.widgets;
+              if (widgets == null || widgets.isEmpty) return false;
+
+              final row = widgets.first;
+              if (row.elementType != PageBuilderWidgetType.row) return false;
+              if (row.children == null || row.children!.length != 2)
+                return false;
+
+              for (final child in row.children!) {
+                final widthValue = child.widthPercentage?.constantValue;
+                if (widthValue == null || (widthValue - 50.0).abs() > 0.1) {
+                  return false;
+                }
+              }
+
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteWidgetEvent("widget1"));
+    });
+
+    test(
+        "should delete widget from Column with 2 widgets and unwrap the remaining widget",
+        () async {
+      final columnWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("column1"),
+        elementType: PageBuilderWidgetType.column,
+        properties: null,
+        hoverProperties: null,
+        children: [widget1, widget2],
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [columnWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              return section.widgets?.length == 1 &&
+                  section.widgets!.first.id.value == "widget2" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteWidgetEvent("widget1"));
+    });
+
+    test("should delete containerChild and remove the Container", () async {
+      final containerWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("container1"),
+        elementType: PageBuilderWidgetType.container,
+        properties: null,
+        hoverProperties: null,
+        children: null,
+        containerChild: widget1,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [containerWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              return section.widgets?.isEmpty == true &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteWidgetEvent("widget1"));
+    });
+
+    test("should mark content as updated after deleting widget", () async {
+      final rowWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("row1"),
+        elementType: PageBuilderWidgetType.row,
+        properties: null,
+        hoverProperties: null,
+        children: [widget1, widget2],
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [rowWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteWidgetEvent("widget1"));
+    });
+
+    test("should not emit new state if widget to delete is not found",
+        () async {
+      final rowWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("row1"),
+        elementType: PageBuilderWidgetType.row,
+        properties: null,
+        hoverProperties: null,
+        children: [widget1, widget2],
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [rowWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteWidgetEvent("nonexistent"));
+    });
+
+    test("should not emit new state if sections list is null", () async {
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: null,
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteWidgetEvent("widget1"));
+    });
+
+    test("should not emit new state if sections list is empty", () async {
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DeleteWidgetEvent("widget1"));
+    });
+  });
 }

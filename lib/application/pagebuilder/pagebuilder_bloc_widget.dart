@@ -162,4 +162,41 @@ extension PagebuilderBlocWidget on PagebuilderBloc {
       ));
     }
   }
+
+  Future<void> onDeleteWidget(
+      DeleteWidgetEvent event, Emitter<PagebuilderState> emit) async {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final sections = currentState.content.content?.sections;
+
+      if (sections == null || sections.isEmpty) return;
+
+      final updatedSections = sections.map((section) {
+        final updatedWidgets = section.widgets
+            ?.map((widget) =>
+                PagebuilderWidgetTreeManipulator.deleteWidget(widget, event.widgetId))
+            .where((widget) => widget != null)
+            .cast<PageBuilderWidget>()
+            .toList();
+        return section.copyWith(widgets: updatedWidgets);
+      }).toList();
+
+      final updatedContent =
+          currentState.content.content?.copyWith(sections: updatedSections);
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: updatedContent);
+
+      if (!isUndoRedoOperation) {
+        localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
 }

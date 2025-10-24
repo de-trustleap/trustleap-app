@@ -3,12 +3,14 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:flutter/material.dart';
 
 class LandingPageBuilderWidgetControls extends StatelessWidget {
-  final Function onPressed;
+  final Function onEdit;
+  final Function onDelete;
   final int? index;
 
   const LandingPageBuilderWidgetControls({
     super.key,
-    required this.onPressed,
+    required this.onEdit,
+    required this.onDelete,
     this.index,
   });
 
@@ -21,7 +23,7 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
       top: 0,
       left: 0,
       child: Container(
-        width: hasDragHandle ? 60 : 25,
+        width: hasDragHandle ? 85 : 50,
         height: 25,
         decoration: BoxDecoration(
           color: themeData.colorScheme.secondary,
@@ -38,22 +40,44 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                   const SizedBox(width: 4),
                   IconButton(
                     onPressed: () {
-                      onPressed();
+                      onEdit();
                     },
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     icon: const Icon(Icons.edit, color: Colors.white, size: 16),
                   ),
+                  const SizedBox(width: 4),
+                  IconButton(
+                    onPressed: () {
+                      onDelete();
+                    },
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    icon: const Icon(Icons.delete, color: Colors.white, size: 16),
+                  ),
                 ],
               )
-            : Center(
-                child: IconButton(
-                  onPressed: () {
-                    onPressed();
-                  },
-                  padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.edit, color: Colors.white, size: 16),
-                ),
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      onEdit();
+                    },
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    icon: const Icon(Icons.edit, color: Colors.white, size: 16),
+                  ),
+                  const SizedBox(width: 4),
+                  IconButton(
+                    onPressed: () {
+                      onDelete();
+                    },
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    icon: const Icon(Icons.delete, color: Colors.white, size: 16),
+                  ),
+                ],
               ),
       ),
     );
