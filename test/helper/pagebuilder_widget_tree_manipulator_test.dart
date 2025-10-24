@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/helpers/pagebuilder_widget_tree_manipulator.dart';
 import 'package:finanzbegleiter/constants.dart';
 
@@ -1064,6 +1065,245 @@ void main() {
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
 
       expect(result.sections, isEmpty);
+    });
+  });
+
+  group("PagebuilderWidgetTreeManipulator.deleteWidget", () {
+    test("should delete widget from Row with 2 widgets and unwrap remaining widget", () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+
+      final rowWidget = createRowWidget('row1', [widget1, widget2]).copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100),
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(rowWidget, 'widget1');
+
+      expect(result, isNotNull);
+      expect(result!.id.value, 'widget2');
+      expect(result.widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), 100);
+    });
+
+    test("should delete widget from Row with 3 widgets and redistribute widthPercentages", () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(33.33),
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(33.33),
+      );
+      final widget3 = createTextWidget('widget3').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(33.34),
+      );
+
+      final rowWidget = createRowWidget('row1', [widget1, widget2, widget3]);
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(rowWidget, 'widget2');
+
+      expect(result, isNotNull);
+      expect(result!.elementType, PageBuilderWidgetType.row);
+      expect(result.children?.length, 2);
+      expect(result.children![0].id.value, 'widget1');
+      expect(result.children![1].id.value, 'widget3');
+      // Check that widths are redistributed to 50% each
+      expect(result.children![0].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), 50);
+      expect(result.children![1].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), 50);
+    });
+
+    test("should delete widget from Column with 2 widgets and unwrap remaining widget", () {
+      final widget1 = createTextWidget('widget1');
+      final widget2 = createTextWidget('widget2');
+
+      final columnWidget = createColumnWidget('column1', [widget1, widget2]).copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100),
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(columnWidget, 'widget1');
+
+      expect(result, isNotNull);
+      expect(result!.id.value, 'widget2');
+      expect(result.widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), 100);
+    });
+
+    test("should delete widget from Column with 3+ widgets without unwrapping", () {
+      final widget1 = createTextWidget('widget1');
+      final widget2 = createTextWidget('widget2');
+      final widget3 = createTextWidget('widget3');
+
+      final columnWidget = createColumnWidget('column1', [widget1, widget2, widget3]);
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(columnWidget, 'widget2');
+
+      expect(result, isNotNull);
+      expect(result!.elementType, PageBuilderWidgetType.column);
+      expect(result.children?.length, 2);
+      expect(result.children![0].id.value, 'widget1');
+      expect(result.children![1].id.value, 'widget3');
+    });
+
+    test("should delete containerChild and remove Container", () {
+      final childWidget = createTextWidget('child1');
+      final containerWidget = createContainerWidget('container1', childWidget);
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(containerWidget, 'child1');
+
+      expect(result, isNull);
+    });
+
+    test("should return null when deleting the widget itself", () {
+      final widget = createTextWidget('widget1');
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(widget, 'widget1');
+
+      expect(result, isNull);
+    });
+
+    test("should delete nested widget in Row inside Column and unwrap", () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final rowWidget = createRowWidget('row1', [widget1, widget2]);
+      final widget3 = createTextWidget('widget3');
+      final columnWidget = createColumnWidget('column1', [rowWidget, widget3]);
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(columnWidget, 'widget1');
+
+      expect(result, isNotNull);
+      expect(result!.elementType, PageBuilderWidgetType.column);
+      expect(result.children?.length, 2);
+      // Row should have been unwrapped, leaving only widget2
+      expect(result.children![0].id.value, 'widget2');
+      expect(result.children![1].id.value, 'widget3');
+    });
+
+    test("should delete widget from Row and unwrap when only one remains after recursion", () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final nestedWidget1 = createTextWidget('nested1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final nestedWidget2 = createTextWidget('nested2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final nestedRow = createRowWidget('nestedRow', [nestedWidget1, nestedWidget2]).copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final rowWidget = createRowWidget('row1', [widget1, nestedRow]);
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(rowWidget, 'nested1');
+
+      expect(result, isNotNull);
+      expect(result!.elementType, PageBuilderWidgetType.row);
+      expect(result.children?.length, 2);
+      expect(result.children![0].id.value, 'widget1');
+      // nestedRow should have been unwrapped to nested2
+      expect(result.children![1].id.value, 'nested2');
+      expect(result.children![1].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), 50);
+    });
+
+    test("should return same widget when target not found", () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final rowWidget = createRowWidget('row1', [widget1, widget2]);
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(rowWidget, 'nonexistent');
+
+      expect(result, isNotNull);
+      expect(result!.id.value, 'row1');
+      expect(result.children?.length, 2);
+      expect(result.children![0].id.value, 'widget1');
+      expect(result.children![1].id.value, 'widget2');
+    });
+
+    test("should remove Row when deleting all children leaves it empty", () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(100),
+      );
+      final rowWidget = createRowWidget('row1', [widget1]);
+      final columnWidget = createColumnWidget('column1', [rowWidget]);
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(columnWidget, 'widget1');
+
+      expect(result, isNull);
+    });
+
+    test("should preserve widthPercentage from parent when unwrapping in Row", () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(30),
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(70),
+      );
+      final rowWidget = createRowWidget('row1', [widget1, widget2]).copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(80),
+      );
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(rowWidget, 'widget1');
+
+      expect(result, isNotNull);
+      expect(result!.id.value, 'widget2');
+      // Should inherit parent's widthPercentage
+      expect(result.widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), 80);
+    });
+
+    test("should handle deeply nested widget deletion", () {
+      final deepWidget = createTextWidget('deep').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final sibling = createTextWidget('sibling').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final innerRow = createRowWidget('innerRow', [deepWidget, sibling]);
+      final middleContainer = createContainerWidget('middleContainer', innerRow);
+      final anotherWidget = createTextWidget('another');
+      final outerColumn = createColumnWidget('outerColumn', [middleContainer, anotherWidget]);
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(outerColumn, 'deep');
+
+      expect(result, isNotNull);
+      expect(result!.elementType, PageBuilderWidgetType.column);
+      expect(result.children?.length, 2);
+      expect(result.children![0].elementType, PageBuilderWidgetType.container);
+      // innerRow should have been unwrapped to sibling
+      expect(result.children![0].containerChild?.id.value, 'sibling');
+      expect(result.children![1].id.value, 'another');
+    });
+
+    test("should delete from Row with 4 widgets and redistribute correctly", () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(25),
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(25),
+      );
+      final widget3 = createTextWidget('widget3').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(25),
+      );
+      final widget4 = createTextWidget('widget4').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(25),
+      );
+      final rowWidget = createRowWidget('row1', [widget1, widget2, widget3, widget4]);
+
+      final result = PagebuilderWidgetTreeManipulator.deleteWidget(rowWidget, 'widget2');
+
+      expect(result, isNotNull);
+      expect(result!.elementType, PageBuilderWidgetType.row);
+      expect(result.children?.length, 3);
+      // Check redistribution to ~33.33% each
+      expect(result.children![0].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(33.33, 0.01));
+      expect(result.children![1].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(33.33, 0.01));
+      expect(result.children![2].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(33.34, 0.01));
     });
   });
 }

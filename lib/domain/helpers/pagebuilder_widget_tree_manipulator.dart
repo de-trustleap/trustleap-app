@@ -350,4 +350,113 @@ class PagebuilderWidgetTreeManipulator {
       containerChild: containerChildWithoutPlaceholder,
     );
   }
+
+  /// Deletes a widget from the tree by its ID.
+  /// Handles special cases:
+  /// - If deleting from a Row with 2+ widgets: redistributes widthPercentages
+  /// - If deleting leaves only 1 widget in Row/Column: unwraps the remaining widget
+  /// - If deleting containerChild: returns null to remove the Container
+  static PageBuilderWidget? deleteWidget(
+    PageBuilderWidget widget,
+    String targetWidgetId,
+  ) {
+    if (widget.id.value == targetWidgetId) {
+      return null;
+    }
+
+    if (widget.containerChild != null) {
+      if (widget.containerChild!.id.value == targetWidgetId) {
+        return null;
+      }
+
+      final updatedContainerChild =
+          deleteWidget(widget.containerChild!, targetWidgetId);
+
+      if (updatedContainerChild == null) {
+        return null;
+      }
+
+      return widget.copyWith(containerChild: updatedContainerChild);
+    }
+
+    if (widget.children != null && widget.children!.isNotEmpty) {
+      final childIndex =
+          widget.children!.indexWhere((w) => w.id.value == targetWidgetId);
+
+      if (childIndex != -1) {
+        final updatedChildren = List<PageBuilderWidget>.from(widget.children!);
+        updatedChildren.removeAt(childIndex);
+
+        if (updatedChildren.isEmpty) {
+          if (widget.elementType == PageBuilderWidgetType.row ||
+              widget.elementType == PageBuilderWidgetType.column) {
+            return null;
+          }
+        } else if (updatedChildren.length == 1) {
+          if (widget.elementType == PageBuilderWidgetType.row ||
+              widget.elementType == PageBuilderWidgetType.column) {
+            final remainingWidget = updatedChildren.first;
+
+            if (widget.elementType == PageBuilderWidgetType.row) {
+              return remainingWidget.copyWith(
+                widthPercentage:
+                    widget.widthPercentage ?? remainingWidget.widthPercentage,
+              );
+            }
+
+            return remainingWidget.copyWith(
+              widthPercentage:
+                  widget.widthPercentage ?? remainingWidget.widthPercentage,
+            );
+          }
+        } else {
+          if (widget.elementType == PageBuilderWidgetType.row) {
+            final redistributedChildren =
+                PagebuilderWidgetPlacementHelper.redistributeWidthPercentages(
+                    updatedChildren);
+            return widget.copyWith(children: redistributedChildren);
+          }
+        }
+        return widget.copyWith(children: updatedChildren);
+      }
+
+      final updatedChildren = widget.children!
+          .map((child) => deleteWidget(child, targetWidgetId))
+          .where((child) => child != null)
+          .cast<PageBuilderWidget>()
+          .toList();
+
+      if (updatedChildren.isEmpty) {
+        if (widget.elementType == PageBuilderWidgetType.row ||
+            widget.elementType == PageBuilderWidgetType.column) {
+          return null;
+        }
+      } else if (updatedChildren.length == 1) {
+        if (widget.elementType == PageBuilderWidgetType.row ||
+            widget.elementType == PageBuilderWidgetType.column) {
+          final remainingWidget = updatedChildren.first;
+
+          if (widget.elementType == PageBuilderWidgetType.row) {
+            return remainingWidget.copyWith(
+              widthPercentage:
+                  widget.widthPercentage ?? remainingWidget.widthPercentage,
+            );
+          }
+
+          return remainingWidget.copyWith(
+            widthPercentage:
+                widget.widthPercentage ?? remainingWidget.widthPercentage,
+          );
+        }
+      } else if (widget.elementType == PageBuilderWidgetType.row) {
+        final redistributedChildren =
+            PagebuilderWidgetPlacementHelper.redistributeWidthPercentages(
+                updatedChildren);
+        return widget.copyWith(children: redistributedChildren);
+      }
+
+      return widget.copyWith(children: updatedChildren);
+    }
+    return widget;
+  }
 }
