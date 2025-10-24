@@ -342,6 +342,10 @@ class _LandingPageBuilderSectionViewState
                                   Modular.get<PagebuilderConfigMenuCubit>()
                                       .openSectionConfigMenu(widget.model);
                                 },
+                                onDeletePressed: () {
+                                  Modular.get<PagebuilderBloc>()
+                                      .add(DeleteSectionEvent(widget.model.id.value));
+                                },
                               )
                             ]
                           ],
