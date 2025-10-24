@@ -121,19 +121,19 @@ class _LandingPageBuilderPageBuilderState
               }
             }),
         Expanded(
-          child: PagebuilderReorderDimmingOverlay(
-            child: Column(
-              children: [
-                if (widget.isResponsivePreviewOpen)
-                  PagebuilderResponsiveToolbar(
-                    onClose: widget.onResponsivePreviewClose,
-                  ),
-                Expanded(
-                  child:
-                      BlocBuilder<PagebuilderZoomCubit, PagebuilderZoomLevel>(
-                    bloc: Modular.get<PagebuilderZoomCubit>(),
-                    builder: (context, zoomLevel) {
-                      return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+          child: BlocBuilder<PagebuilderZoomCubit, PagebuilderZoomLevel>(
+            bloc: Modular.get<PagebuilderZoomCubit>(),
+            builder: (context, zoomLevel) {
+              return PagebuilderReorderDimmingOverlay(
+                zoomScale: zoomLevel.scale,
+                child: Column(
+                  children: [
+                    if (widget.isResponsivePreviewOpen)
+                      PagebuilderResponsiveToolbar(
+                        onClose: widget.onResponsivePreviewClose,
+                      ),
+                    Expanded(
+                      child: BlocBuilder<PagebuilderResponsiveBreakpointCubit,
                           PagebuilderResponsiveBreakpoint>(
                         bloc:
                             Modular.get<PagebuilderResponsiveBreakpointCubit>(),
@@ -205,12 +205,12 @@ class _LandingPageBuilderPageBuilderState
                             ),
                           );
                         },
-                      );
-                    },
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ],
