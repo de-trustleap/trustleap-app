@@ -5,10 +5,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderReorderDimmingOverlay extends StatefulWidget {
   final Widget child;
+  final double zoomScale;
 
   const PagebuilderReorderDimmingOverlay({
     super.key,
     required this.child,
+    this.zoomScale = 1.0,
   });
 
   @override
@@ -40,6 +42,7 @@ class _PagebuilderReorderDimmingOverlayState
                     painter: _OverlayPainter(
                       activeContainerKey: activeContainerKey,
                       overlayKey: _overlayKey,
+                      zoomScale: widget.zoomScale,
                     ),
                   ),
                 ),
@@ -54,10 +57,12 @@ class _PagebuilderReorderDimmingOverlayState
 class _OverlayPainter extends CustomPainter {
   final GlobalKey activeContainerKey;
   final GlobalKey overlayKey;
+  final double zoomScale;
 
   _OverlayPainter({
     required this.activeContainerKey,
     required this.overlayKey,
+    this.zoomScale = 1.0,
   });
 
   @override
@@ -77,7 +82,8 @@ class _OverlayPainter extends CustomPainter {
         final overlayGlobalOffset = overlayRenderBox.localToGlobal(Offset.zero);
         final relativeOffset = containerGlobalOffset - overlayGlobalOffset;
 
-        final containerRect = relativeOffset & containerRenderBox.size;
+        final scaledSize = containerRenderBox.size * zoomScale;
+        final containerRect = relativeOffset & scaledSize;
         // Draw dimmed overlay with hole by drawing 4 rectangles around the container
         final paint = Paint()
           ..color = Colors.black.withValues(alpha: 0.5)
@@ -134,6 +140,7 @@ class _OverlayPainter extends CustomPainter {
   @override
   bool shouldRepaint(_OverlayPainter oldDelegate) {
     return oldDelegate.activeContainerKey != activeContainerKey ||
-        oldDelegate.overlayKey != overlayKey;
+        oldDelegate.overlayKey != overlayKey ||
+        oldDelegate.zoomScale != zoomScale;
   }
 }
