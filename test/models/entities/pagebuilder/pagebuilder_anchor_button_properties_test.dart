@@ -28,9 +28,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: null,
-                  isBold: null,
-                  isItalic: true)));
+                  alignment: null)));
       final expectedResult = PagebuilderAnchorButtonProperties(
           sectionName: "2",
           buttonProperties: PageBuilderButtonProperties(
@@ -46,9 +44,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: null,
-                  isBold: null,
-                  isItalic: true)));
+                  alignment: null)));
       // When
       final result = model.copyWith(sectionName: "2");
       // Then
@@ -75,8 +71,6 @@ void main() {
         color: Colors.black,
         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         textShadow: originalTextShadow,
-        isBold: false,
-        isItalic: true,
       );
 
       final originalButtonProperties = PageBuilderButtonProperties(
@@ -111,8 +105,6 @@ void main() {
         color: Colors.yellow,
         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.right),
         textShadow: mutatedTextShadow,
-        isBold: true,
-        isItalic: false,
       );
 
       final mutatedButtonProperties = PageBuilderButtonProperties(
@@ -169,9 +161,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: null,
-                  isBold: null,
-                  isItalic: true)));
+                  alignment: null)));
       final model2 = PagebuilderAnchorButtonProperties(
           sectionName: "1",
           buttonProperties: PageBuilderButtonProperties(
@@ -187,9 +177,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: null,
-                  isBold: null,
-                  isItalic: true)));
+                  alignment: null)));
       // Then
       expect(model, model2);
     });

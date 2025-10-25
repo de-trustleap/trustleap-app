@@ -18,9 +18,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-          isBold: false,
-          isItalic: null);
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left));
       final expectedResult = PageBuilderTextProperties(
           text: "Test2",
           fontSize: const PagebuilderResponsiveOrConstant.constant(18.0),
@@ -29,9 +27,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-          isBold: false,
-          isItalic: null);
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left));
       // When
       final result = model.copyWith(text: "Test2", fontSize: const PagebuilderResponsiveOrConstant.constant(18.0));
       // Then
@@ -57,8 +53,6 @@ void main() {
         color: Color(0xFF2196F3),
         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
         textShadow: textShadow,
-        isBold: true,
-        isItalic: false,
       );
       // When
       final copy = original.deepCopy();
@@ -72,8 +66,6 @@ void main() {
       expect(copy.color, equals(original.color));
       expect(copy.alignment, equals(original.alignment));
       expect(copy.textShadow, equals(original.textShadow));
-      expect(copy.isBold, equals(original.isBold));
-      expect(copy.isItalic, equals(original.isItalic));
       expect(copy, equals(original));
     });
   });
@@ -89,9 +81,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-          isBold: false,
-          isItalic: null);
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left));
       final properties2 = PageBuilderTextProperties(
           text: "Test",
           fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -100,9 +90,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-          isBold: false,
-          isItalic: null);
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left));
       // Then
       expect(properties1, properties2);
     });

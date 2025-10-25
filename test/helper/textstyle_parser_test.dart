@@ -41,54 +41,6 @@ void main() {
 
       expect(textStyle.fontSize, isNull);
       expect(textStyle.fontFamilyFallback, ["Poppins"]);
-      expect(textStyle.fontWeight, FontWeight.normal);
-      expect(textStyle.fontStyle, FontStyle.normal);
-    });
-
-    test("Should return TextStyle with bold fontWeight when isBold is true",
-        () {
-      final properties = PageBuilderTextProperties(
-        text: "Test",
-        fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
-        fontFamily: "Roboto",
-        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
-        letterSpacing: null,
-        textShadow: null,
-        color: Colors.black,
-        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-        isBold: true,
-        isItalic: false,
-      );
-      final textStyle = textStyleParser.getTextStyleFromProperties(properties);
-
-      expect(textStyle.fontSize, 14);
-      expect(textStyle.fontFamily, "Roboto");
-      expect(textStyle.fontWeight, FontWeight.bold);
-      expect(textStyle.fontStyle, FontStyle.normal);
-      expect(textStyle.color, Colors.black);
-    });
-
-    test("Should return TextStyle with italic fontStyle when isItalic is true",
-        () {
-      final properties = PageBuilderTextProperties(
-        text: "Test",
-        fontSize: const PagebuilderResponsiveOrConstant.constant(12.0),
-        fontFamily: "Arial",
-        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.2),
-        letterSpacing: null,
-        textShadow: null,
-        color: Colors.blue,
-        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
-        isBold: false,
-        isItalic: true,
-      );
-      final textStyle = textStyleParser.getTextStyleFromProperties(properties);
-
-      expect(textStyle.fontSize, 12);
-      expect(textStyle.fontFamily, "Arial");
-      expect(textStyle.fontWeight, FontWeight.normal);
-      expect(textStyle.fontStyle, FontStyle.italic);
-      expect(textStyle.color, Colors.blue);
     });
 
     test(
@@ -103,8 +55,6 @@ void main() {
         textShadow: null,
         color: Colors.red,
         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.right),
-        isBold: false,
-        isItalic: false,
       );
       final textStyle = textStyleParser.getTextStyleFromProperties(properties);
 

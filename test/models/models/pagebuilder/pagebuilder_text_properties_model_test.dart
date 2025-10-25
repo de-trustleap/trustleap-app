@@ -19,9 +19,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       final expectedResult = PageBuilderTextPropertiesModel(
           text: "Test",
           fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
@@ -30,9 +28,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       // When
       final result = model.copyWith(lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.2));
       // Then
@@ -51,9 +47,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       final expectedResult = {
         "text": "Test",
         "fontSize": 20.0,
@@ -88,9 +82,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       // When
       final result = PageBuilderTextPropertiesModel.fromMap(map);
       // Then
@@ -111,9 +103,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       final expectedResult = PageBuilderTextProperties(
           text: "Test",
           fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
@@ -122,9 +112,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
-          isBold: null,
-          isItalic: null);
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center));
       // When
       final result = model.toDomain();
       // Then
@@ -145,9 +133,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: Colors.black,
-          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
-          isBold: null,
-          isItalic: null);
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center));
       final expectedResult = PageBuilderTextPropertiesModel(
           text: "Test",
           fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
@@ -156,9 +142,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       // When
       final result = PageBuilderTextPropertiesModel.fromDomain(model);
       // Then
@@ -177,9 +161,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       final alignment = "right";
       final expectedResult = TextAlign.right;
       // When
@@ -200,9 +182,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       final properties2 = PageBuilderTextPropertiesModel(
           text: "Test",
           fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
@@ -211,9 +191,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       // Then
       expect(properties1, properties2);
     });
@@ -234,9 +212,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       final expectedResult = {
         "text": "Test",
         "fontSize": {
@@ -281,9 +257,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: null,
-          isItalic: null);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
       // When
       final result = PageBuilderTextPropertiesModel.fromMap(map);
       // Then
@@ -304,9 +278,7 @@ void main() {
             "mobile": "left",
             "tablet": "center",
             "desktop": "right"
-          }),
-          isBold: null,
-          isItalic: null);
+          }));
       final expectedResult = PageBuilderTextProperties(
           text: "Test",
           fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
@@ -319,9 +291,7 @@ void main() {
             "mobile": TextAlign.left,
             "tablet": TextAlign.center,
             "desktop": TextAlign.right
-          }),
-          isBold: null,
-          isItalic: null);
+          }));
       // When
       final result = model.toDomain();
       // Then
@@ -342,9 +312,7 @@ void main() {
             "mobile": TextAlign.left,
             "tablet": TextAlign.center,
             "desktop": TextAlign.right
-          }),
-          isBold: null,
-          isItalic: null);
+          }));
       final expectedResult = PageBuilderTextPropertiesModel(
           text: "Test",
           fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
@@ -357,9 +325,7 @@ void main() {
             "mobile": "left",
             "tablet": "center",
             "desktop": "right"
-          }),
-          isBold: null,
-          isItalic: null);
+          }));
       // When
       final result = PageBuilderTextPropertiesModel.fromDomain(model);
       // Then
@@ -384,9 +350,7 @@ void main() {
           letterSpacing: PagebuilderResponsiveOrConstantModel.constant(0.5),
           textShadow: null,
           color: "FF000000",
-          alignment: PagebuilderResponsiveOrConstantModel.constant("center"),
-          isBold: true,
-          isItalic: false);
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
 
       // When - convert to map and back
       final map = model.toMap();

@@ -26,9 +26,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -37,9 +35,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       const expectedResult = PageBuilderTextFieldProperties(
           width: PagebuilderResponsiveOrConstant.constant(200.0),
           minLines: 2,
@@ -55,9 +51,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -66,9 +60,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       // When
       final result = model.copyWith(
           minLines: 2,
@@ -80,9 +72,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       // Then
       expect(result, expectedResult);
     });
@@ -106,8 +96,6 @@ void main() {
         color: Color(0xFF757575),
         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         textShadow: placeholderTextShadow,
-        isBold: false,
-        isItalic: true,
       );
       const textShadow = PageBuilderShadow(
         color: Color(0x80000000),
@@ -124,8 +112,6 @@ void main() {
         color: Color(0xFF212121),
         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         textShadow: textShadow,
-        isBold: false,
-        isItalic: false,
       );
       const original = PageBuilderTextFieldProperties(
         width: PagebuilderResponsiveOrConstant.constant(300.0),
@@ -172,9 +158,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -183,9 +167,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       const properties2 = PageBuilderTextFieldProperties(
           width: PagebuilderResponsiveOrConstant.constant(200.0),
           minLines: 1,
@@ -201,9 +183,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -212,9 +192,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       // Then
       expect(properties1, properties2);
     });

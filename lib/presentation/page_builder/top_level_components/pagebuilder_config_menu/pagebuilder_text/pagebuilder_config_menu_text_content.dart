@@ -4,10 +4,11 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_pro
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_textfield.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_text/pagebuilder_html_text_editor.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_text/pagebuilder_text_placeholder_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 
 class PagebuilderConfigMenuTextContent extends StatefulWidget {
   final PageBuilderWidget model;
@@ -20,12 +21,12 @@ class PagebuilderConfigMenuTextContent extends StatefulWidget {
 
 class _PagebuilderConfigMenuTextContentState
     extends State<PagebuilderConfigMenuTextContent> {
-  final controller = TextEditingController();
+  final HtmlEditorController htmlController = HtmlEditorController();
 
   @override
   void dispose() {
+    htmlController.disable();
     super.dispose();
-    controller.dispose();
   }
 
   void updateTextProperties(
@@ -35,21 +36,7 @@ class _PagebuilderConfigMenuTextContentState
   }
 
   void _insertTextAtCursor(String textToInsert) {
-    int cursorIndex = controller.selection.baseOffset;
-
-    if (cursorIndex == -1) {
-      cursorIndex = 0;
-      controller.selection = TextSelection.collapsed(offset: cursorIndex);
-    }
-
-    String newText = controller.text.replaceRange(
-      cursorIndex,
-      cursorIndex,
-      textToInsert,
-    );
-    controller.text = newText;
-    controller.selection =
-        TextSelection.collapsed(offset: cursorIndex + textToInsert.length);
+    htmlController.insertText(textToInsert);
   }
 
   @override
@@ -61,26 +48,27 @@ class _PagebuilderConfigMenuTextContentState
       return CollapsibleTile(
           title: localization.landingpage_pagebuilder_text_config_content_title,
           children: [
-            PagebuilderTextPlaceholderPicker(onSelected: (placeholder) {
+            PagebuilderTextPlaceholderPicker(onSelected: (placeholder) async {
               _insertTextAtCursor(placeholder);
+              // Wait a bit for the editor to update, then get the HTML content
+              await Future.delayed(const Duration(milliseconds: 100));
+              final currentHtml = await htmlController.getText();
               final updatedProperties =
                   (widget.model.properties as PageBuilderTextProperties)
-                      .copyWith(text: controller.text);
+                      .copyWith(text: currentHtml);
               updateTextProperties(updatedProperties, pagebuilderCubit);
             }),
             const SizedBox(height: 16),
-            PagebuilderTextField(
-                controller: controller,
-                initialText:
-                    (widget.model.properties as PageBuilderTextProperties).text,
-                minLines: 5,
-                maxLines: 10,
-                onChanged: (text) {
-                  final updatedProperties =
-                      (widget.model.properties as PageBuilderTextProperties)
-                          .copyWith(text: text);
-                  updateTextProperties(updatedProperties, pagebuilderCubit);
-                })
+            PagebuilderHTMLTextEditor(
+              controller: htmlController,
+              initialHtml: (widget.model.properties as PageBuilderTextProperties).text,
+              onChanged: (html) {
+                final updatedProperties =
+                    (widget.model.properties as PageBuilderTextProperties)
+                        .copyWith(text: html);
+                updateTextProperties(updatedProperties, pagebuilderCubit);
+              },
+            )
           ]);
     } else {
       return const SizedBox.shrink();

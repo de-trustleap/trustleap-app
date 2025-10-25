@@ -62,8 +62,6 @@ class PagebuilderWidgetFactory {
         color: Colors.black,
         alignment: PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         textShadow: null,
-        isBold: false,
-        isItalic: false,
       ),
       hoverProperties: null,
       children: null,
@@ -206,9 +204,7 @@ class PagebuilderWidgetFactory {
                 color: Color(ColorUtility.getHexIntFromString("FF9A9A9C")),
                 alignment: const PagebuilderResponsiveOrConstant.constant(
                     TextAlign.left),
-                textShadow: null,
-                isBold: null,
-                isItalic: null),
+                textShadow: null),
             textProperties: const PageBuilderTextProperties(
                 text: null,
                 fontSize: PagebuilderResponsiveOrConstant.constant(16),
@@ -218,9 +214,7 @@ class PagebuilderWidgetFactory {
                 color: null,
                 alignment:
                     PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                textShadow: null,
-                isBold: null,
-                isItalic: null)),
+                textShadow: null)),
         emailTextFieldProperties: PageBuilderTextFieldProperties(
             width: const PagebuilderResponsiveOrConstant.constant(400),
             minLines: 1,
@@ -238,9 +232,7 @@ class PagebuilderWidgetFactory {
                 color: Color(ColorUtility.getHexIntFromString("FF9A9A9C")),
                 alignment: const PagebuilderResponsiveOrConstant.constant(
                     TextAlign.left),
-                textShadow: null,
-                isBold: null,
-                isItalic: null),
+                textShadow: null),
             textProperties: const PageBuilderTextProperties(
                 text: null,
                 fontSize: PagebuilderResponsiveOrConstant.constant(16),
@@ -250,9 +242,7 @@ class PagebuilderWidgetFactory {
                 color: null,
                 alignment:
                     PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                textShadow: null,
-                isBold: null,
-                isItalic: null)),
+                textShadow: null)),
         phoneTextFieldProperties: PageBuilderTextFieldProperties(
             width: const PagebuilderResponsiveOrConstant.constant(400),
             minLines: 1,
@@ -270,9 +260,7 @@ class PagebuilderWidgetFactory {
                 color: Color(ColorUtility.getHexIntFromString("FF9A9A9C")),
                 alignment: const PagebuilderResponsiveOrConstant.constant(
                     TextAlign.left),
-                textShadow: null,
-                isBold: null,
-                isItalic: null),
+                textShadow: null),
             textProperties: const PageBuilderTextProperties(
                 text: null,
                 fontSize: PagebuilderResponsiveOrConstant.constant(16),
@@ -282,9 +270,7 @@ class PagebuilderWidgetFactory {
                 color: null,
                 alignment:
                     PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                textShadow: null,
-                isBold: null,
-                isItalic: null)),
+                textShadow: null)),
         messageTextFieldProperties: PageBuilderTextFieldProperties(
             width: const PagebuilderResponsiveOrConstant.constant(400),
             minLines: 4,
@@ -302,9 +288,7 @@ class PagebuilderWidgetFactory {
                 color: Color(ColorUtility.getHexIntFromString("FF9A9A9C")),
                 alignment: const PagebuilderResponsiveOrConstant.constant(
                     TextAlign.left),
-                textShadow: null,
-                isBold: null,
-                isItalic: null),
+                textShadow: null),
             textProperties: const PageBuilderTextProperties(
                 text: null,
                 fontSize: PagebuilderResponsiveOrConstant.constant(16),
@@ -314,9 +298,7 @@ class PagebuilderWidgetFactory {
                 color: null,
                 alignment:
                     PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                textShadow: null,
-                isBold: null,
-                isItalic: null)),
+                textShadow: null)),
         buttonProperties: PageBuilderButtonProperties(
             width: const PagebuilderResponsiveOrConstant.constant(200),
             height: const PagebuilderResponsiveOrConstant.constant(70),
@@ -332,9 +314,7 @@ class PagebuilderWidgetFactory {
                 color: Color(ColorUtility.getHexIntFromString("FFFFFFFF")),
                 alignment: const PagebuilderResponsiveOrConstant.constant(
                     TextAlign.center),
-                textShadow: null,
-                isBold: null,
-                isItalic: null)),
+                textShadow: null)),
       ),
       hoverProperties: null,
       children: null,
@@ -371,8 +351,6 @@ class PagebuilderWidgetFactory {
             alignment:
                 PagebuilderResponsiveOrConstant.constant(TextAlign.center),
             textShadow: null,
-            isBold: false,
-            isItalic: false,
           ),
         ),
       ),
