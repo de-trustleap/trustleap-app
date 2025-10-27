@@ -32,6 +32,14 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
     controller = widget.controller ?? HtmlEditorController();
   }
 
+  @override
+  void didUpdateWidget(PagebuilderHTMLTextEditor oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialHtml != oldWidget.initialHtml) {
+      controller.setText(widget.initialHtml ?? "");
+    }
+  }
+
   void _applyTextColor(Color color) {
     setState(() {
       _currentTextColor = color;
