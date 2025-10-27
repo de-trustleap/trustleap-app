@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker_base.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 
@@ -22,11 +23,25 @@ class PagebuilderHTMLTextEditor extends StatefulWidget {
 
 class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
   late final HtmlEditorController controller;
+  Color _currentTextColor = Colors.black;
 
   @override
   void initState() {
     super.initState();
     controller = widget.controller ?? HtmlEditorController();
+  }
+
+  void _applyTextColor(Color color) {
+    setState(() {
+      _currentTextColor = color;
+    });
+
+    final r = (color.r * 255.0).round().toRadixString(16).padLeft(2, '0');
+    final g = (color.g * 255.0).round().toRadixString(16).padLeft(2, '0');
+    final b = (color.b * 255.0).round().toRadixString(16).padLeft(2, '0');
+    final hexColor = '#$r$g$b';
+
+    controller.execCommand('foreColor', argument: hexColor);
   }
 
   @override
@@ -39,47 +54,77 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
         border: Border.all(color: themeData.colorScheme.outline),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: HtmlEditor(
-        controller: controller,
-        htmlEditorOptions: HtmlEditorOptions(
-          hint: "Text eingeben...",
-          initialText: widget.initialHtml ?? "",
-          shouldEnsureVisible: true,
-          adjustHeightForKeyboard: true,
-        ),
-        htmlToolbarOptions: const HtmlToolbarOptions(
-          defaultToolbarButtons: [
-            FontButtons(
-              bold: true,
-              italic: true,
-              underline: true,
-              strikethrough: true,
-              superscript: true,
-              subscript: true,
-              clearAll: false,
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: themeData.colorScheme.surface,
+              border: Border(
+                bottom: BorderSide(color: themeData.colorScheme.outline),
+              ),
             ),
-            ListButtons(
-              ul: true,
-              ol: true,
-              listStyles: false,
+            child: Row(
+              children: [
+                PagebuilderColorPickerBase(
+                  initialColor: _currentTextColor,
+                  onColorSelected: _applyTextColor,
+                  enableOpacity: false,
+                  enableGradients: false,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  "Farbe auswählen",
+                  style: themeData.textTheme.bodySmall,
+                ),
+              ],
             ),
-          ],
-          toolbarPosition: ToolbarPosition.aboveEditor,
-          toolbarType: ToolbarType.nativeScrollable,
-        ),
-        otherOptions: OtherOptions(
-          height: 300,
-          decoration: BoxDecoration(
-            color: themeData.colorScheme.surface,
           ),
-        ),
-        callbacks: Callbacks(
-          onChangeContent: (String? changed) {
-            if (changed != null) {
-              widget.onChanged(changed);
-            }
-          },
-        ),
+          Expanded(
+            child: HtmlEditor(
+              controller: controller,
+              htmlEditorOptions: HtmlEditorOptions(
+                hint: "Text eingeben...",
+                initialText: widget.initialHtml ?? "",
+                shouldEnsureVisible: true,
+                adjustHeightForKeyboard: true,
+              ),
+              htmlToolbarOptions: const HtmlToolbarOptions(
+                defaultToolbarButtons: [
+                  FontButtons(
+                    bold: true,
+                    italic: true,
+                    underline: true,
+                    strikethrough: true,
+                    superscript: true,
+                    subscript: true,
+                    clearAll: false,
+                  ),
+                  ListButtons(
+                    ul: true,
+                    ol: true,
+                    listStyles: false,
+                  ),
+                ],
+                toolbarPosition: ToolbarPosition.aboveEditor,
+                toolbarType: ToolbarType.nativeScrollable,
+              ),
+              otherOptions: OtherOptions(
+                height: 250,
+                decoration: BoxDecoration(
+                  color: themeData.colorScheme.surface,
+                ),
+              ),
+              callbacks: Callbacks(
+                onChangeContent: (String? changed) {
+                  if (changed != null) {
+                    widget.onChanged(changed);
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

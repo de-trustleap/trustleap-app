@@ -10,6 +10,7 @@ class PagebuilderGradientTab extends StatefulWidget {
   final bool isColorMode;
   final Function(PagebuilderGradient) onGradientChanged;
   final Function(bool) onModeChanged;
+  final bool showModeSwitch;
 
   const PagebuilderGradientTab({
     super.key,
@@ -17,6 +18,7 @@ class PagebuilderGradientTab extends StatefulWidget {
     required this.isColorMode,
     required this.onGradientChanged,
     required this.onModeChanged,
+    this.showModeSwitch = true,
   });
 
   @override
@@ -134,14 +136,16 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        PagebuilderSwitchControl(
-          title: localization.pagebuilder_gradient_select,
-          isActive: isActive,
-          onSelected: (bool isSelected) {
-            widget.onModeChanged(!isSelected);
-          },
-        ),
-        const SizedBox(height: 16),
+        if (widget.showModeSwitch) ...[
+          PagebuilderSwitchControl(
+            title: localization.pagebuilder_gradient_select,
+            isActive: isActive,
+            onSelected: (bool isSelected) {
+              widget.onModeChanged(!isSelected);
+            },
+          ),
+          const SizedBox(height: 16),
+        ],
         Opacity(
           opacity: isActive ? 1.0 : 0.5,
           child: IgnorePointer(
