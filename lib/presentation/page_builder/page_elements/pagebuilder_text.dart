@@ -23,12 +23,13 @@ class PagebuilderText extends StatelessWidget {
     final htmlContent = properties.text ?? "";
     final baseStyle = TextStyleParser().getTextStyleFromProperties(properties);
 
+    // For text widgets, color is managed via HTML inline styles only
     final commonTextStyle = Style(
       fontFamily: baseStyle.fontFamily,
       fontFamilyFallback: baseStyle.fontFamilyFallback,
       fontSize:
           baseStyle.fontSize != null ? FontSize(baseStyle.fontSize!) : null,
-      color: baseStyle.color,
+      color: null, // Color is set via HTML inline styles
       lineHeight:
           baseStyle.height != null ? LineHeight(baseStyle.height!) : null,
       letterSpacing: baseStyle.letterSpacing,
@@ -48,7 +49,7 @@ class PagebuilderText extends StatelessWidget {
             fontSize: baseStyle.fontSize != null
                 ? FontSize(baseStyle.fontSize!)
                 : null,
-            color: baseStyle.color,
+            color: null, // Color is set via HTML inline styles
             lineHeight:
                 baseStyle.height != null ? LineHeight(baseStyle.height!) : null,
             letterSpacing: baseStyle.letterSpacing,
@@ -74,19 +75,19 @@ class PagebuilderText extends StatelessWidget {
           )),
           "u": commonTextStyle.merge(Style(
             textDecoration: TextDecoration.underline,
-            textDecorationColor: baseStyle.color,
+            textDecorationColor: null, // Inherits from text color
           )),
           "s": commonTextStyle.merge(Style(
             textDecoration: TextDecoration.lineThrough,
-            textDecorationColor: baseStyle.color,
+            textDecorationColor: null, // Inherits from text color
           )),
           "strike": commonTextStyle.merge(Style(
             textDecoration: TextDecoration.lineThrough,
-            textDecorationColor: baseStyle.color,
+            textDecorationColor: null, // Inherits from text color
           )),
           "del": commonTextStyle.merge(Style(
             textDecoration: TextDecoration.lineThrough,
-            textDecorationColor: baseStyle.color,
+            textDecorationColor: null, // Inherits from text color
           )),
           "sup": commonTextStyle.merge(Style(
             verticalAlign: VerticalAlign.sup,
@@ -115,7 +116,9 @@ class PagebuilderText extends StatelessWidget {
 // TODO: UNDERLINE LINE IST SCHWARZ STATT FONT COLOR (DONE)
 // TODO: FARBE ANPASSBAR MACHEN (DONE)
 // TODO: COLOR PICKER SOLL SWITCH NICHT ANZEIGEN WENN ES NUR EINEN TAB GIBT (DONE)
-// TODO: COLOR PICKER SOLL JE NACHDEM WELCHEN TEXT MAN AUSWÄHLT DIE AKTUELLE FARBE WIDERSPIEGELN
+// TODO: COLOR PICKER SOLL JE NACHDEM WELCHEN TEXT MAN AUSWÄHLT DIE AKTUELLE FARBE WIDERSPIEGELN (DONE)
+// TODO: COLOR PROPERTY ENTFERNEN
+// TODO: TESTS ANPASSEN
 // TODO: TEMPLATES MIT HTML TAGS ANPASSEN
-// TODO: PAGEBUILDER PROJECT ANPASSEN. ALSO ISBOLD UND ISITALIC LÖSCHEN
+// TODO: PAGEBUILDER PROJECT ANPASSEN. ALSO ISBOLD UND ISITALIC UND COLOR LÖSCHEN
 // TODO: SCHAUEN OB SPEICHERN FUNKTIONIERT

@@ -44,6 +44,14 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
     controller.execCommand('foreColor', argument: hexColor);
   }
 
+  void _onSelectionChanged(EditorSettings settings) {
+    if (mounted) {
+      setState(() {
+        _currentTextColor = settings.foregroundColor;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -121,6 +129,7 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
                     widget.onChanged(changed);
                   }
                 },
+                onChangeSelection: _onSelectionChanged,
               ),
             ),
           ),
