@@ -108,7 +108,7 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
                     strikethrough: true,
                     superscript: true,
                     subscript: true,
-                    clearAll: false,
+                    clearAll: true,
                   ),
                   ListButtons(
                     ul: true,
