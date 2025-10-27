@@ -3421,5 +3421,13 @@
     "pagebuilder_widget_template_calendly": "Calendly",
     "@pagebuilder_widget_template_calendly": {
         "description": "Name des Calendly Widget Templates im Pagebuilder Widget Menü"
+    },
+    "pagebuilder_html_text_editor_select_color": "Farbe auswählen",
+    "@pagebuilder_html_text_editor_select_color": {
+        "description": "Label für die Farbauswahl im HTML Text Editor"
+    },
+    "pagebuilder_html_text_editor_hint": "Text eingeben...",
+    "@pagebuilder_html_text_editor_hint": {
+        "description": "Platzhalter Text im HTML Text Editor"
     }
 }

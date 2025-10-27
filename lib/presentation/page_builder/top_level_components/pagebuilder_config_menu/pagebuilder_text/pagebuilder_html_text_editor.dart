@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker_base.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -55,6 +56,7 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Container(
       height: 350,
@@ -82,7 +84,7 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  "Farbe auswählen",
+                  localization.pagebuilder_html_text_editor_select_color,
                   style: themeData.textTheme.bodySmall,
                 ),
               ],
@@ -92,7 +94,7 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
             child: HtmlEditor(
               controller: controller,
               htmlEditorOptions: HtmlEditorOptions(
-                hint: "Text eingeben...",
+                hint: localization.pagebuilder_html_text_editor_hint,
                 initialText: widget.initialHtml ?? "",
                 shouldEnsureVisible: true,
                 adjustHeightForKeyboard: true,

@@ -50,7 +50,6 @@ class _PagebuilderConfigMenuTextContentState
           children: [
             PagebuilderTextPlaceholderPicker(onSelected: (placeholder) async {
               _insertTextAtCursor(placeholder);
-              // Wait a bit for the editor to update, then get the HTML content
               await Future.delayed(const Duration(milliseconds: 100));
               final currentHtml = await htmlController.getText();
               final updatedProperties =
@@ -61,7 +60,8 @@ class _PagebuilderConfigMenuTextContentState
             const SizedBox(height: 16),
             PagebuilderHTMLTextEditor(
               controller: htmlController,
-              initialHtml: (widget.model.properties as PageBuilderTextProperties).text,
+              initialHtml:
+                  (widget.model.properties as PageBuilderTextProperties).text,
               onChanged: (html) {
                 final updatedProperties =
                     (widget.model.properties as PageBuilderTextProperties)
