@@ -48,7 +48,7 @@ class PagebuilderText extends StatelessWidget {
             fontSize: baseStyle.fontSize != null
                 ? FontSize(baseStyle.fontSize!)
                 : null,
-            color: null,
+            color: Colors.black,
             lineHeight:
                 baseStyle.height != null ? LineHeight(baseStyle.height!) : null,
             letterSpacing: baseStyle.letterSpacing,
@@ -62,15 +62,19 @@ class PagebuilderText extends StatelessWidget {
           "span": commonTextStyle,
           "b": commonTextStyle.merge(Style(
             fontWeight: FontWeight.bold,
+            color: null,
           )),
           "strong": commonTextStyle.merge(Style(
             fontWeight: FontWeight.bold,
+            color: null,
           )),
           "i": commonTextStyle.merge(Style(
             fontStyle: FontStyle.italic,
+            color: null,
           )),
           "em": commonTextStyle.merge(Style(
             fontStyle: FontStyle.italic,
+            color: null,
           )),
           "u": commonTextStyle.merge(Style(
             textDecoration: TextDecoration.underline,
@@ -110,13 +114,3 @@ class PagebuilderText extends StatelessWidget {
     );
   }
 }
-
-// TODO: STRIKETHROUGH LINE IST SCHWARZ STATT FONT COLOR (DONE)
-// TODO: UNDERLINE LINE IST SCHWARZ STATT FONT COLOR (DONE)
-// TODO: FARBE ANPASSBAR MACHEN (DONE)
-// TODO: COLOR PICKER SOLL SWITCH NICHT ANZEIGEN WENN ES NUR EINEN TAB GIBT (DONE)
-// TODO: COLOR PICKER SOLL JE NACHDEM WELCHEN TEXT MAN AUSWÄHLT DIE AKTUELLE FARBE WIDERSPIEGELN (DONE)
-// TODO: UNDO REDO GEHT NICHT IM HTML EDITOR (DONE)
-// TODO: TEMPLATES MIT HTML TAGS ANPASSEN
-// TODO: PAGEBUILDER PROJECT ANPASSEN. ALSO ISBOLD UND ISITALIC LÖSCHEN
-// TODO: SCHAUEN OB SPEICHERN FUNKTIONIERT
