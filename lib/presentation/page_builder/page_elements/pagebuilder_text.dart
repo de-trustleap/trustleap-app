@@ -18,9 +18,19 @@ class PagebuilderText extends StatelessWidget {
     this.index,
   });
 
+  String _preprocessHtmlTextDecoration(String html) {
+    // Add text-decoration-color to span tags that have a color
+    // This ensures underline/strikethrough match the text color
+    final colorRegex = RegExp(r'<span style="color: (#[0-9A-Fa-f]{6})"');
+    return html.replaceAllMapped(colorRegex, (match) {
+      final color = match.group(1);
+      return '<span style="color: $color; text-decoration-color: $color"';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final htmlContent = properties.text ?? "";
+    final htmlContent = _preprocessHtmlTextDecoration(properties.text ?? "");
     final baseStyle = TextStyleParser().getTextStyleFromProperties(properties);
 
     final commonTextStyle = Style(
