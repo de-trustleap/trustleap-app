@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_gradient.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
@@ -48,6 +49,9 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
       AppLocalizations localization, int stopIndex) {
     final stop = _selectedGradient.stops[stopIndex];
     Color tempColor = stop.color;
+    final hexTextFieldController = TextEditingController(
+        text: ColorUtility.colorToHex(tempColor, includeHashPrefix: true));
+    Color hexTextfieldHoverColor = Colors.transparent;
 
     showDialog(
       context: context,
@@ -79,6 +83,9 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                     onColorChanged: (Color color) {
                       setColorState(() {
                         tempColor = color;
+                        hexTextFieldController.text = ColorUtility.colorToHex(
+                            tempColor,
+                            includeHashPrefix: true);
                       });
                     },
                     pickersEnabled: const <ColorPickerType, bool>{
@@ -91,6 +98,51 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                     enableShadesSelection: false,
                     showColorCode: false,
                     focusedEditHasNoColor: true,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    child: MouseRegion(
+                      onEnter: (_) {
+                        setColorState(() {
+                          hexTextfieldHoverColor = themeData.colorScheme.surface;
+                        });
+                      },
+                      onExit: (_) {
+                        setColorState(() {
+                          hexTextfieldHoverColor = Colors.transparent;
+                        });
+                      },
+                      child: Container(
+                        color: hexTextfieldHoverColor,
+                        child: TextField(
+                          controller: hexTextFieldController,
+                          onChanged: (value) {
+                            if (value.isNotEmpty) {
+                              setColorState(() {
+                                tempColor = ColorUtility.hexToColor(value);
+                              });
+                            }
+                          },
+                          decoration: InputDecoration(
+                            labelText: localization
+                                .landingpage_pagebuilder_color_picker_hex_textfield,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              borderSide:
+                                  const BorderSide(color: Colors.black, width: 2.0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              borderSide:
+                                  const BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   PrimaryButton(

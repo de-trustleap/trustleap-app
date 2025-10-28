@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2025-10-12 15:59:49
+Last updated: 2025-10-28 15:18:06
 
 ---
 
@@ -18,7 +18,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### bloc
 
-- **Version**: 9.0.1
+- **Version**: 9.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/felangel/bloc>
@@ -36,7 +36,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### build_runner
 
-- **Version**: 2.9.0
+- **Version**: 2.10.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_runner>
@@ -53,7 +53,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### cloud_firestore
 
-- **Version**: 6.0.2
+- **Version**: 6.0.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/firestore>
@@ -62,7 +62,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### cloud_functions
 
-- **Version**: 6.0.2
+- **Version**: 6.0.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/functions>
@@ -130,7 +130,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_app_check
 
-- **Version**: 0.4.1
+- **Version**: 0.4.1+1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/app-check>
@@ -139,7 +139,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_auth
 
-- **Version**: 6.1.0
+- **Version**: 6.1.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/auth>
@@ -148,7 +148,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_core
 
-- **Version**: 4.1.1
+- **Version**: 4.2.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/flutter/setup>
@@ -156,7 +156,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_storage
 
-- **Version**: 13.0.2
+- **Version**: 13.0.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/storage/flutter/start>
@@ -224,6 +224,14 @@ These are the packages explicitly listed in your pubspec.yaml:
 - **Description**: Syntax highlighting widget for Flutter with lots of languages and themes
   support.
 
+### flutter_html
+
+- **Version**: 3.0.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/Sub6Resources/flutter_html>
+- **Description**: A Flutter widget for rendering static HTML and CSS as Flutter widgets.
+
 ### flutter_iconpicker
 
 - **Version**: 4.0.3
@@ -265,6 +273,16 @@ These are the packages explicitly listed in your pubspec.yaml:
 - **Author**: Package Contributors
 - **Website**: <https://github.com/pd4d10/highlight>
 - **Description**: Syntax highlighting for Dart with lots of languages and themes support.
+
+### html_editor_enhanced
+
+- **Version**: 2.7.1
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/tneotia/html-editor-enhanced>
+- **Description**: HTML rich text editor for Android, iOS, and Web, using the Summernote library.
+  Enhanced with highly customizable widget-based controls, bug fixes, callbacks,
+  dark mode, and more.
 
 ### http
 
@@ -370,7 +388,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### _fe_analyzer_shared
 
-- **Version**: 90.0.0
+- **Version**: 92.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/_fe_analyzer_shared>
@@ -378,7 +396,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### _flutterfire_internals
 
-- **Version**: 1.3.62
+- **Version**: 1.3.63
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/firestore>
@@ -386,7 +404,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### analyzer
 
-- **Version**: 8.3.0
+- **Version**: 9.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/sdk/tree/main/pkg/analyzer>
@@ -462,7 +480,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### build_daemon
 
-- **Version**: 4.0.4
+- **Version**: 4.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_daemon>
@@ -556,7 +574,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_firestore_platform_interface
 
-- **Version**: 7.0.2
+- **Version**: 7.0.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_platform_interface>
@@ -564,7 +582,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_firestore_web
 
-- **Version**: 5.0.2
+- **Version**: 5.0.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_web>
@@ -572,7 +590,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_functions_platform_interface
 
-- **Version**: 5.8.5
+- **Version**: 5.8.6
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_functions/cloud_functions_platform_interface>
@@ -580,7 +598,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_functions_web
 
-- **Version**: 5.0.2
+- **Version**: 5.0.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_functions/cloud_functions_web>
@@ -611,6 +629,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/cross_file>
 - **Description**: An abstraction to allow working with files across multiple platforms.
 
+### csslib
+
+- **Version**: 1.0.2
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/csslib>
+- **Description**: A library for parsing and analyzing CSS (Cascading Style Sheets).
+
 ### csv
 
 - **Version**: 6.0.0
@@ -639,9 +665,18 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: Opinionated, automatic Dart source code formatter. Provides an API and a CLI
   tool.
 
+### dbus
+
+- **Version**: 0.7.11
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/canonical/dbus.dart>
+- **Description**: A native Dart implementation of the D-Bus message bus client. This package
+  allows Dart applications to directly access services on the Linux desktop.
+
 ### dcli
 
-- **Version**: 7.1.1
+- **Version**: 8.2.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://dcli.onepub.dev>
@@ -649,7 +684,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### dcli_common
 
-- **Version**: 7.1.0
+- **Version**: 8.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/onepub-dev/dcli>
@@ -657,7 +692,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### dcli_core
 
-- **Version**: 7.1.0
+- **Version**: 8.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://dcli.onepub.dev>
@@ -667,7 +702,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### dcli_terminal
 
-- **Version**: 7.1.0
+- **Version**: 8.0.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://dcli.onepub.dev>
@@ -701,6 +736,15 @@ These packages are automatically included as dependencies of your direct depende
   system access, as well as in-memory file systems, record-replay file systems,
   and chroot file systems.
 
+### file_picker
+
+- **Version**: 10.3.3
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/miguelpruivo/plugins_flutter_file_picker>
+- **Description**: A package that allows you to use a native file explorer to pick single or
+  multiple absolute file paths, with extension filtering support.
+
 ### file_selector_linux
 
 - **Version**: 0.9.3+2
@@ -711,7 +755,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### file_selector_macos
 
-- **Version**: 0.9.4+4
+- **Version**: 0.9.4+5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/file_selector/file_selector_macos>
@@ -735,7 +779,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_app_check_platform_interface
 
-- **Version**: 0.2.1
+- **Version**: 0.2.1+1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_app_check/firebase_app_check_platform_interface>
@@ -743,7 +787,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_app_check_web
 
-- **Version**: 0.2.1
+- **Version**: 0.2.1+1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_app_check/firebase_app_check_web>
@@ -751,7 +795,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_auth_platform_interface
 
-- **Version**: 8.1.2
+- **Version**: 8.1.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_auth/firebase_auth_platform_interface>
@@ -759,7 +803,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_auth_web
 
-- **Version**: 6.0.3
+- **Version**: 6.0.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_auth/firebase_auth_web>
@@ -767,7 +811,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_core_platform_interface
 
-- **Version**: 6.0.1
+- **Version**: 6.0.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_platform_interface>
@@ -775,7 +819,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_core_web
 
-- **Version**: 3.1.1
+- **Version**: 3.2.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_web>
@@ -783,7 +827,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_storage_platform_interface
 
-- **Version**: 5.2.13
+- **Version**: 5.2.14
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_platform_interface>
@@ -791,7 +835,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_storage_web
 
-- **Version**: 3.10.20
+- **Version**: 3.10.21
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_web>
@@ -881,6 +925,120 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/fluttercandies/flutter_image_compress>
 - **Description**: The web implementation of `flutter_image_compress`.
 
+### flutter_inappwebview
+
+- **Version**: 6.1.5
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://inappwebview.dev/>
+- **Description**: A Flutter plugin that allows you to add an inline webview, to use an headless
+  webview, and to open an in-app browser window.
+
+### flutter_inappwebview_android
+
+- **Version**: 1.1.3
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://inappwebview.dev/>
+- **Description**: Android implementation of the flutter_inappwebview plugin.
+
+### flutter_inappwebview_internal_annotations
+
+- **Version**: 1.2.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/pichillilorenzo/flutter_inappwebview>
+- **Description**: Internal annotations used by the generator of flutter_inappwebview plugin
+
+### flutter_inappwebview_ios
+
+- **Version**: 1.1.2
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://inappwebview.dev/>
+- **Description**: iOS implementation of the flutter_inappwebview plugin.
+
+### flutter_inappwebview_macos
+
+- **Version**: 1.1.2
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://inappwebview.dev/>
+- **Description**: macOS implementation of the flutter_inappwebview plugin.
+
+### flutter_inappwebview_platform_interface
+
+- **Version**: 1.3.0+1
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://inappwebview.dev/>
+- **Description**: A common platform interface for the flutter_inappwebview plugin.
+
+### flutter_inappwebview_web
+
+- **Version**: 1.1.2
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://inappwebview.dev/>
+- **Description**: Web implementation of the flutter_inappwebview plugin.
+
+### flutter_inappwebview_windows
+
+- **Version**: 0.6.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://inappwebview.dev/>
+- **Description**: Windows implementation of the flutter_inappwebview plugin.
+
+### flutter_keyboard_visibility
+
+- **Version**: 6.0.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/MisterJimson/flutter_keyboard_visibility>
+- **Description**: Flutter plugin for discovering the state of the soft-keyboard visibility on
+  Android and iOS.
+
+### flutter_keyboard_visibility_linux
+
+- **Version**: 1.0.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/MisterJimson/flutter_keyboard_visibility>
+- **Description**: An implementation for the linux platform of `flutter_keyboard_visibility'
+
+### flutter_keyboard_visibility_macos
+
+- **Version**: 1.0.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/MisterJimson/flutter_keyboard_visibility>
+- **Description**: An implementation for the macOS platform of `flutter_keyboard_visibility'
+
+### flutter_keyboard_visibility_platform_interface
+
+- **Version**: 2.0.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/MisterJimson/flutter_keyboard_visibility>
+- **Description**: A common platform interface for the flutter_keyboard_visibility plugin.
+
+### flutter_keyboard_visibility_web
+
+- **Version**: 2.0.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/MisterJimson/flutter_keyboard_visibility>
+- **Description**: An implementation for the web platform of `flutter_keyboard_visibility'
+
+### flutter_keyboard_visibility_windows
+
+- **Version**: 1.0.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/MisterJimson/flutter_keyboard_visibility>
+- **Description**: An implementation for the Windows platform of `flutter_keyboard_visibility'
+
 ### flutter_lints
 
 - **Version**: 6.0.0
@@ -892,7 +1050,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### flutter_plugin_android_lifecycle
 
-- **Version**: 2.0.31
+- **Version**: 2.0.32
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/flutter_plugin_android_lifecycle>
@@ -900,7 +1058,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### font_awesome_flutter
 
-- **Version**: 10.10.0
+- **Version**: 10.12.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/fluttercommunity/font_awesome_flutter>
@@ -949,6 +1107,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: Lightweight and blazing fast key-value database written in pure Dart. Strongly
   encrypted using AES-256.
 
+### html
+
+- **Version**: 0.15.6
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/html>
+- **Description**: APIs for parsing and manipulating HTML content outside the browser.
+
 ### http_multi_server
 
 - **Version**: 3.2.2
@@ -967,7 +1133,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_android
 
-- **Version**: 0.8.13+4
+- **Version**: 0.8.13+5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_android>
@@ -983,7 +1149,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_ios
 
-- **Version**: 0.8.13
+- **Version**: 0.8.13+1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_ios>
@@ -999,7 +1165,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_macos
 
-- **Version**: 0.2.2
+- **Version**: 0.2.2+1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_macos>
@@ -1007,7 +1173,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_platform_interface
 
-- **Version**: 2.11.0
+- **Version**: 2.11.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_platform_interface>
@@ -1020,6 +1186,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_windows>
 - **Description**: Windows platform implementation of image_picker
+
+### infinite_listview
+
+- **Version**: 1.1.0
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/fluttercommunity/flutter_infinite_listview>
+- **Description**: ListView with items that can be scrolled infinitely in both directions.
 
 ### ini
 
@@ -1106,6 +1280,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Description**: Official Dart lint rules. Defines the 'core' and 'recommended' set of lints
   suggested by the Dart team.
 
+### list_counter
+
+- **Version**: 1.0.2
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/Sub6Resources/ordered_list>
+- **Description**: A utility for counting in a variety of languages and styles. Made for lists.
+
 ### lists
 
 - **Version**: 1.0.1
@@ -1180,7 +1362,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### native_synchronization_temp
 
-- **Version**: 0.7.1
+- **Version**: 0.8.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/native_synchronization>
@@ -1194,6 +1376,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/rrousselGit/nested>
 - **Description**: A Flutter Widget which helps nest multiple widgets without needing to manually
   nest them.
+
+### numberpicker
+
+- **Version**: 2.1.2
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/MarcinusX/NumberPicker>
+- **Description**: NumberPicker is a widget allowing user to choose numbers by scrolling spinners.
 
 ### objective_c
 
@@ -1259,7 +1449,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### path_provider_android
 
-- **Version**: 2.2.19
+- **Version**: 2.2.20
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/path_provider/path_provider_android>
@@ -1267,7 +1457,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### path_provider_foundation
 
-- **Version**: 2.4.2
+- **Version**: 2.4.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/path_provider/path_provider_foundation>
@@ -1297,6 +1487,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/path_provider/path_provider_windows>
 - **Description**: Windows implementation of the path_provider plugin
 
+### petitparser
+
+- **Version**: 7.0.1
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://petitparser.github.io>
+- **Description**: A dynamic parser framework to build efficient grammars and parsers quickly.
+
 ### platform
 
 - **Version**: 3.1.6
@@ -1313,6 +1511,39 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/plugin_platform_interface>
 - **Description**: Reusable base class for platform interfaces of Flutter federated plugins, to
   help enforce best practices.
+
+### pointer_interceptor
+
+- **Version**: 0.10.1+2
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/flutter/packages/tree/main/packages/pointer_interceptor/pointer_interceptor>
+- **Description**: A widget to prevent clicks from being swallowed by underlying HtmlElementViews
+  on the web.
+
+### pointer_interceptor_ios
+
+- **Version**: 0.10.1+1
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/flutter/packages/tree/main/packages/pointer_interceptor/pointer_interceptor_ios>
+- **Description**: iOS implementation of the pointer_interceptor plugin.
+
+### pointer_interceptor_platform_interface
+
+- **Version**: 0.10.0+1
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/flutter/packages/tree/main/packages/pointer_interceptor/pointer_interceptor_platform_interface>
+- **Description**: A common platform interface for the pointer_interceptor plugin.
+
+### pointer_interceptor_web
+
+- **Version**: 0.10.3
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/flutter/packages/tree/main/packages/pointer_interceptor/pointer_interceptor_web>
+- **Description**: Web implementation of the pointer_interceptor plugin.
 
 ### pool
 
@@ -1358,7 +1589,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### pubspec_manager
 
-- **Version**: 2.0.1
+- **Version**: 3.0.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/onepub-dev/pubspec_manager>
@@ -1446,7 +1677,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### shared_preferences_foundation
 
-- **Version**: 2.5.4
+- **Version**: 2.5.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/shared_preferences/shared_preferences_foundation>
@@ -1697,7 +1928,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### url_launcher_ios
 
-- **Version**: 6.3.4
+- **Version**: 6.3.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_ios>
@@ -1713,7 +1944,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### url_launcher_macos
 
-- **Version**: 3.2.3
+- **Version**: 3.2.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_macos>
@@ -1745,7 +1976,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### validators2
 
-- **Version**: 5.0.0
+- **Version**: 5.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/onepub-dev/validators2>
@@ -1758,6 +1989,14 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/google/vector_math.dart>
 - **Description**: A Vector Math library for 2D and 3D applications.
+
+### visibility_detector
+
+- **Version**: 0.4.0+2
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/google/flutter.widgets/tree/master/packages/visibility_detector>
+- **Description**: A widget that detects the visibility of its child and notifies a callback.
 
 ### vm_service
 
@@ -1811,6 +2050,15 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/xdg_directories>
 - **Description**: A Dart package for reading XDG directory configuration information on Linux.
+
+### xml
+
+- **Version**: 6.6.1
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/renggli/dart-xml>
+- **Description**: A lightweight library for parsing, traversing, querying, transforming and
+  building XML documents.
 
 ### yaml
 

@@ -19,4 +19,19 @@ class ColorUtility {
       return includeHashPrefix ? "#00000000" : "00000000";
     }
   }
+
+  static Color hexToColor(String hex) {
+    try {
+      hex = hex.replaceAll("#", "");
+      if (hex.isEmpty || (hex.length != 6 && hex.length != 8)) {
+        return Colors.transparent;
+      }
+      if (hex.length == 6) {
+        hex = "FF$hex";
+      }
+      return Color(int.parse("0x$hex"));
+    } catch (e) {
+      return Colors.transparent;
+    }
+  }
 }
