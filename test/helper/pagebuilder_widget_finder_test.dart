@@ -35,9 +35,7 @@ void main() {
           alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
           lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
-          textShadow: null,
-          isBold: null,
-          isItalic: null);
+          textShadow: null);
 
       final mockTextProperties2 = PageBuilderTextProperties(
           text: "Text 2",
@@ -47,9 +45,7 @@ void main() {
           alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
           lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
           letterSpacing: null,
-          textShadow: null,
-          isBold: null,
-          isItalic: null);
+          textShadow: null);
 
       final mockImageProperties = PageBuilderImageProperties(
           url: "https://example.com/image.png",

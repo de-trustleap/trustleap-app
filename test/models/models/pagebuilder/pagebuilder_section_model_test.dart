@@ -192,7 +192,6 @@ void main() {
                   "color": "FFFFFFFF",
                   "fontSize": 18.0,
                   "fontFamily": "Merriweather",
-                  "isItalic": true,
                   "text":
                       "Du wurdest positiv von Max Mustermann\nweiterempfohlen.\nMax möchte, dass wir uns kennenlernen."
                 }
@@ -256,9 +255,7 @@ void main() {
                           letterSpacing: null,
                           textShadow: null,
                           color: Color(0xFFFFFFFF),
-                          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                          isBold: null,
-                          isItalic: true),
+                          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
                       hoverProperties: null,
                       children: null,
                       containerChild: null,
@@ -368,9 +365,7 @@ void main() {
                           letterSpacing: null,
                           textShadow: null,
                           color: Color(0xFFFFFFFF),
-                          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                          isBold: null,
-                          isItalic: true),
+                          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
                       hoverProperties: null,
                       children: null,
                       containerChild: null,
@@ -445,7 +440,6 @@ void main() {
                   "color": "FFFFFFFF",
                   "fontSize": 18.0,
                   "fontFamily": "Merriweather",
-                  "isItalic": true,
                   "text":
                       "Du wurdest positiv von Max Mustermann\nweiterempfohlen.\nMax möchte, dass wir uns kennenlernen."
                 }

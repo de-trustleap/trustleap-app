@@ -223,7 +223,6 @@ void main() {
         "text": "Test",
         "fontSize": 16.0,
         "fontFamily": "Poppins",
-        "isBold": true,
         "lineHeight": 1.5
       };
       final model = PageBuilderWidgetModel(
@@ -249,9 +248,7 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: null,
-          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-          isBold: true,
-          isItalic: null);
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left));
       // When
       final result = model.getPropertiesByType(type, properties);
       // Then
@@ -270,14 +267,11 @@ void main() {
           letterSpacing: null,
           textShadow: null,
           color: null,
-          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-          isBold: true,
-          isItalic: null);
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left));
       final expectedResult = {
         "text": "Test",
         "fontSize": 16.0,
         "fontFamily": "Poppins",
-        "isBold": true,
         "alignment": "left",
         "lineHeight": 1.5
       };

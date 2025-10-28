@@ -25,9 +25,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: null,
-              isBold: null,
-              isItalic: true));
+              alignment: null));
       final expectedResult = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(400.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
@@ -41,9 +39,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: null,
-              isBold: null,
-              isItalic: true));
+              alignment: null));
       // When
       final result = model.copyWith(
           width: const PagebuilderResponsiveOrConstant.constant(400.0),
@@ -70,8 +66,6 @@ void main() {
           blurRadius: 2.0,
           offset: Offset(1.0, 1.0),
         ),
-        isBold: true,
-        isItalic: false,
       );
 
       const original = PageBuilderButtonProperties(
@@ -111,9 +105,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: null,
-              isBold: false,
-              isItalic: true));
+              alignment: null));
       final properties2 = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
@@ -127,9 +119,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: null,
-              isBold: false,
-              isItalic: true));
+              alignment: null));
       // Then
       expect(properties1, properties2);
     });

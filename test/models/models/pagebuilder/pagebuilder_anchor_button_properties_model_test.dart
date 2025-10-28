@@ -119,9 +119,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null)));
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))));
       // When
       final result = model.toDomain();
       // Then
@@ -149,9 +147,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: null,
-                  isBold: null,
-                  isItalic: null)));
+                  alignment: null)));
       final expectedResult = PagebuilderAnchorButtonPropertiesModel(
           sectionName: "1",
           buttonProperties: {

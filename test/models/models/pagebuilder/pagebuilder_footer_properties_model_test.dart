@@ -206,9 +206,7 @@ void main() {
               letterSpacing: null,
               color: null,
               alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              textShadow: null,
-              isBold: null,
-              isItalic: null),
+              textShadow: null),
           impressumTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
@@ -217,9 +215,7 @@ void main() {
               letterSpacing: null,
               color: null,
               alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              textShadow: null,
-              isBold: null,
-              isItalic: null),
+              textShadow: null),
           initialInformationTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
@@ -228,9 +224,7 @@ void main() {
               letterSpacing: null,
               color: null,
               alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              textShadow: null,
-              isBold: null,
-              isItalic: null),
+              textShadow: null),
           termsAndConditionsTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
@@ -239,9 +233,7 @@ void main() {
               letterSpacing: null,
               color: null,
               alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              textShadow: null,
-              isBold: null,
-              isItalic: null));
+              textShadow: null));
       // When
       final result = model.toDomain();
       // Then
@@ -263,9 +255,7 @@ void main() {
               letterSpacing: null,
               color: null,
               alignment: null,
-              textShadow: null,
-              isBold: null,
-              isItalic: null),
+              textShadow: null),
           impressumTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
@@ -274,9 +264,7 @@ void main() {
               letterSpacing: null,
               color: null,
               alignment: null,
-              textShadow: null,
-              isBold: null,
-              isItalic: null),
+              textShadow: null),
           initialInformationTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
@@ -285,9 +273,7 @@ void main() {
               letterSpacing: null,
               color: null,
               alignment: null,
-              textShadow: null,
-              isBold: null,
-              isItalic: null),
+              textShadow: null),
           termsAndConditionsTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
@@ -296,9 +282,7 @@ void main() {
               letterSpacing: null,
               color: null,
               alignment: null,
-              textShadow: null,
-              isBold: null,
-              isItalic: null));
+              textShadow: null));
       final expectedResult = PagebuilderFooterPropertiesModel(
           privacyPolicyTextProperties: {
             "text": "Test",

@@ -19,6 +19,7 @@ class PagebuilderConfigMenuTextConfig extends StatefulWidget {
   final PageBuilderTextProperties? properties;
   final PageBuilderTextProperties? hoverProperties;
   final bool showHoverTabBar;
+  final bool hideColorPicker;
   final Function(PageBuilderTextProperties?) onChanged;
   final Function(PageBuilderTextProperties?) onChangedHover;
 
@@ -27,6 +28,7 @@ class PagebuilderConfigMenuTextConfig extends StatefulWidget {
     required this.properties,
     this.hoverProperties,
     this.showHoverTabBar = true,
+    this.hideColorPicker = false,
     required this.onChanged,
     required this.onChangedHover,
   });
@@ -110,14 +112,16 @@ class _PagebuilderConfigMenuTextConfigState
                   alignment: helper.setValue(props.alignment, alignment)));
             },
             currentBreakpoint: currentBreakpoint),
-        const SizedBox(height: 20),
-        PagebuilderColorControl(
-            title: localization.landingpage_pagebuilder_text_config_color,
-            initialColor: props?.color ?? Colors.black,
-            enableGradients: false,
-            onColorSelected: (color) {
-              onChangedLocal(props?.copyWith(color: color));
-            }),
+        if (!widget.hideColorPicker) ...[
+          const SizedBox(height: 20),
+          PagebuilderColorControl(
+              title: localization.landingpage_pagebuilder_text_config_color,
+              initialColor: props?.color ?? Colors.black,
+              enableGradients: false,
+              onColorSelected: (color) {
+                onChangedLocal(props?.copyWith(color: color));
+              }),
+        ],
         const SizedBox(height: 20),
         PagebuilderFontFamilyControl(
             initialValue: props?.fontFamily ?? "",

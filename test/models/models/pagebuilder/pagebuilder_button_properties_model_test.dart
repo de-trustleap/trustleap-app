@@ -100,9 +100,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: null));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       // When
       final result = model.toDomain();
       // Then
@@ -128,9 +126,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: null));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       final expectedResult = PageBuilderButtonPropertiesModel(
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),

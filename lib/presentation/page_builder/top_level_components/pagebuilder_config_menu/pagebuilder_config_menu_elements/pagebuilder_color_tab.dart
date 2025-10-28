@@ -10,6 +10,7 @@ class PagebuilderColorTab extends StatefulWidget {
   final bool isColorMode;
   final Function(Color) onColorChanged;
   final Function(bool) onModeChanged;
+  final bool showModeSwitch;
 
   const PagebuilderColorTab({
     super.key,
@@ -18,6 +19,7 @@ class PagebuilderColorTab extends StatefulWidget {
     required this.isColorMode,
     required this.onColorChanged,
     required this.onModeChanged,
+    this.showModeSwitch = true,
   });
 
   @override
@@ -72,15 +74,16 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Switch Control
-        PagebuilderSwitchControl(
-          title: localization.pagebuilder_color_select,
-          isActive: widget.isColorMode,
-          onSelected: (bool isSelected) {
-            widget.onModeChanged(isSelected);
-          },
-        ),
-        const SizedBox(height: 16),
+        if (widget.showModeSwitch) ...[
+          PagebuilderSwitchControl(
+            title: localization.pagebuilder_color_select,
+            isActive: widget.isColorMode,
+            onSelected: (bool isSelected) {
+              widget.onModeChanged(isSelected);
+            },
+          ),
+          const SizedBox(height: 16),
+        ],
         Opacity(
           opacity: widget.isColorMode ? 1.0 : 0.5,
           child: IgnorePointer(

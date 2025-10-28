@@ -159,9 +159,7 @@ void main() {
                         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
                         lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
                         letterSpacing: null,
-                        textShadow: null,
-                        isBold: null,
-                        isItalic: null),
+                        textShadow: null),
                     hoverProperties: null)
               ],
               visibleOn: null)
@@ -227,9 +225,7 @@ void main() {
         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
         letterSpacing: null,
-        textShadow: null,
-        isBold: null,
-        isItalic: null);
+        textShadow: null);
 
     final mockTextProperties2 = PageBuilderTextProperties(
         text: "Text 2",
@@ -239,9 +235,7 @@ void main() {
         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
         lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
         letterSpacing: null,
-        textShadow: null,
-        isBold: null,
-        isItalic: null);
+        textShadow: null);
 
     final mockImageProperties = PageBuilderImageProperties(
         url: "https://example.com/image.png",
@@ -631,8 +625,6 @@ void main() {
         color: null,
         alignment: null,
         textShadow: null,
-        isBold: null,
-        isItalic: null,
       ),
       hoverProperties: null,
       children: null,
@@ -658,8 +650,6 @@ void main() {
         color: null,
         alignment: null,
         textShadow: null,
-        isBold: null,
-        isItalic: null,
       ),
       hoverProperties: null,
       children: null,
@@ -685,8 +675,6 @@ void main() {
         color: null,
         alignment: null,
         textShadow: null,
-        isBold: null,
-        isItalic: null,
       ),
       hoverProperties: null,
       children: null,
@@ -883,9 +871,7 @@ void main() {
         alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
         lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
         letterSpacing: null,
-        textShadow: null,
-        isBold: null,
-        isItalic: null);
+        textShadow: null);
 
     final mockTextWidget = PageBuilderWidget(
         id: UniqueID.fromUniqueString("widget1"),
@@ -1060,8 +1046,6 @@ void main() {
         color: null,
         alignment: null,
         textShadow: null,
-        isBold: null,
-        isItalic: null,
       ),
       hoverProperties: null,
       children: null,
@@ -1088,8 +1072,6 @@ void main() {
         color: null,
         alignment: null,
         textShadow: null,
-        isBold: null,
-        isItalic: null,
       ),
       hoverProperties: null,
       children: null,
@@ -2035,8 +2017,6 @@ void main() {
         color: null,
         alignment: null,
         textShadow: null,
-        isBold: null,
-        isItalic: null,
       ),
       hoverProperties: null,
       children: null,
@@ -2063,8 +2043,6 @@ void main() {
         color: null,
         alignment: null,
         textShadow: null,
-        isBold: null,
-        isItalic: null,
       ),
       hoverProperties: null,
       children: null,
@@ -2091,8 +2069,6 @@ void main() {
         color: null,
         alignment: null,
         textShadow: null,
-        isBold: null,
-        isItalic: null,
       ),
       hoverProperties: null,
       children: null,

@@ -19,20 +19,17 @@ class PageBuilderTextPropertiesModel extends Equatable
   final String? color;
   final PagebuilderResponsiveOrConstantModel<String>? alignment;
   final Map<String, dynamic>? textShadow;
-  final bool? isBold;
-  final bool? isItalic;
 
-  const PageBuilderTextPropertiesModel(
-      {required this.text,
-      required this.fontSize,
-      required this.fontFamily,
-      required this.lineHeight,
-      required this.letterSpacing,
-      required this.color,
-      required this.alignment,
-      required this.textShadow,
-      required this.isBold,
-      required this.isItalic});
+  const PageBuilderTextPropertiesModel({
+    required this.text,
+    required this.fontSize,
+    required this.fontFamily,
+    required this.lineHeight,
+    required this.letterSpacing,
+    required this.color,
+    required this.alignment,
+    required this.textShadow,
+  });
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
@@ -46,80 +43,74 @@ class PageBuilderTextPropertiesModel extends Equatable
     if (color != null) map['color'] = color;
     if (alignment != null) map['alignment'] = alignment!.toMapValue();
     if (textShadow != null) map['textShadow'] = textShadow;
-    if (isBold != null) map['isBold'] = isBold;
-    if (isItalic != null) map['isItalic'] = isItalic;
     return map;
   }
 
   factory PageBuilderTextPropertiesModel.fromMap(Map<String, dynamic> map) {
     return PageBuilderTextPropertiesModel(
-        text: map['text'] != null ? map['text'] as String : null,
-        fontSize: PagebuilderResponsiveOrConstantModel.fromMapValue(
-          map['fontSize'],
-          (v) => v as double,
-        ),
-        fontFamily:
-            map['fontFamily'] != null ? map['fontFamily'] as String : null,
-        lineHeight: PagebuilderResponsiveOrConstantModel.fromMapValue(
-          map['lineHeight'],
-          (v) => v as double,
-        ),
-        letterSpacing: PagebuilderResponsiveOrConstantModel.fromMapValue(
-          map['letterSpacing'],
-          (v) => v as double,
-        ),
-        color: map['color'] != null ? map['color'] as String : null,
-        alignment: PagebuilderResponsiveOrConstantModel.fromMapValue(
-          map['alignment'],
-          (v) => v as String,
-        ) ?? const PagebuilderResponsiveOrConstantModel.constant("left"),
-        textShadow: map['textShadow'] != null
-            ? map['textShadow'] as Map<String, dynamic>
-            : null,
-        isBold: map['isBold'] != null ? map['isBold'] as bool : null,
-        isItalic: map['isItalic'] != null ? map['isItalic'] as bool : null);
+      text: map['text'] != null ? map['text'] as String : null,
+      fontSize: PagebuilderResponsiveOrConstantModel.fromMapValue(
+        map['fontSize'],
+        (v) => v as double,
+      ),
+      fontFamily:
+          map['fontFamily'] != null ? map['fontFamily'] as String : null,
+      lineHeight: PagebuilderResponsiveOrConstantModel.fromMapValue(
+        map['lineHeight'],
+        (v) => v as double,
+      ),
+      letterSpacing: PagebuilderResponsiveOrConstantModel.fromMapValue(
+        map['letterSpacing'],
+        (v) => v as double,
+      ),
+      color: map['color'] != null ? map['color'] as String : null,
+      alignment: PagebuilderResponsiveOrConstantModel.fromMapValue(
+        map['alignment'],
+        (v) => v as String,
+      ) ?? const PagebuilderResponsiveOrConstantModel.constant("left"),
+      textShadow: map['textShadow'] != null
+          ? map['textShadow'] as Map<String, dynamic>
+          : null,
+    );
   }
 
-  PageBuilderTextPropertiesModel copyWith(
-      {String? text,
-      PagebuilderResponsiveOrConstantModel<double>? fontSize,
-      String? fontFamily,
-      PagebuilderResponsiveOrConstantModel<double>? lineHeight,
-      PagebuilderResponsiveOrConstantModel<double>? letterSpacing,
-      String? color,
-      PagebuilderResponsiveOrConstantModel<String>? alignment,
-      Map<String, dynamic>? textShadow,
-      bool? isBold,
-      bool? isItalic}) {
+  PageBuilderTextPropertiesModel copyWith({
+    String? text,
+    PagebuilderResponsiveOrConstantModel<double>? fontSize,
+    String? fontFamily,
+    PagebuilderResponsiveOrConstantModel<double>? lineHeight,
+    PagebuilderResponsiveOrConstantModel<double>? letterSpacing,
+    String? color,
+    PagebuilderResponsiveOrConstantModel<String>? alignment,
+    Map<String, dynamic>? textShadow,
+  }) {
     return PageBuilderTextPropertiesModel(
-        text: text ?? this.text,
-        fontSize: fontSize ?? this.fontSize,
-        fontFamily: fontFamily ?? this.fontFamily,
-        lineHeight: lineHeight ?? this.lineHeight,
-        letterSpacing: letterSpacing ?? this.letterSpacing,
-        color: color ?? this.color,
-        alignment: alignment ?? this.alignment,
-        textShadow: textShadow ?? this.textShadow,
-        isBold: isBold ?? this.isBold,
-        isItalic: isItalic ?? this.isItalic);
+      text: text ?? this.text,
+      fontSize: fontSize ?? this.fontSize,
+      fontFamily: fontFamily ?? this.fontFamily,
+      lineHeight: lineHeight ?? this.lineHeight,
+      letterSpacing: letterSpacing ?? this.letterSpacing,
+      color: color ?? this.color,
+      alignment: alignment ?? this.alignment,
+      textShadow: textShadow ?? this.textShadow,
+    );
   }
 
   PageBuilderTextProperties toDomain() {
     return PageBuilderTextProperties(
-        text: text,
-        fontSize: fontSize?.toDomain(),
-        fontFamily: fontFamily,
-        lineHeight: lineHeight?.toDomain(),
-        letterSpacing: letterSpacing?.toDomain(),
-        color: color != null
-            ? Color(ColorUtility.getHexIntFromString(color!))
-            : null,
-        alignment: _alignmentToDomain(alignment),
-        textShadow: textShadow != null
-            ? PageBuilderShadowModel.fromMap(textShadow!).toDomain()
-            : null,
-        isBold: isBold,
-        isItalic: isItalic);
+      text: text,
+      fontSize: fontSize?.toDomain(),
+      fontFamily: fontFamily,
+      lineHeight: lineHeight?.toDomain(),
+      letterSpacing: letterSpacing?.toDomain(),
+      color: color != null
+          ? Color(ColorUtility.getHexIntFromString(color!))
+          : null,
+      alignment: _alignmentToDomain(alignment),
+      textShadow: textShadow != null
+          ? PageBuilderShadowModel.fromMap(textShadow!).toDomain()
+          : null,
+    );
   }
 
   PagebuilderResponsiveOrConstant<TextAlign>? _alignmentToDomain(
@@ -151,21 +142,20 @@ class PageBuilderTextPropertiesModel extends Equatable
   factory PageBuilderTextPropertiesModel.fromDomain(
       PageBuilderTextProperties properties) {
     return PageBuilderTextPropertiesModel(
-        text: properties.text,
-        fontSize: PagebuilderResponsiveOrConstantModel.fromDomain(
-            properties.fontSize),
-        fontFamily: properties.fontFamily,
-        lineHeight: PagebuilderResponsiveOrConstantModel.fromDomain(
-            properties.lineHeight),
-        letterSpacing: PagebuilderResponsiveOrConstantModel.fromDomain(
-            properties.letterSpacing),
-        color: properties.color != null
-            ? ColorUtility.colorToHex(properties.color!)
-            : null,
-        alignment: _alignmentFromDomain(properties.alignment),
-        textShadow: ShadowMapper.getMapFromShadow(properties.textShadow),
-        isBold: properties.isBold,
-        isItalic: properties.isItalic);
+      text: properties.text,
+      fontSize: PagebuilderResponsiveOrConstantModel.fromDomain(
+          properties.fontSize),
+      fontFamily: properties.fontFamily,
+      lineHeight: PagebuilderResponsiveOrConstantModel.fromDomain(
+          properties.lineHeight),
+      letterSpacing: PagebuilderResponsiveOrConstantModel.fromDomain(
+          properties.letterSpacing),
+      color: properties.color != null
+          ? ColorUtility.colorToHex(properties.color!)
+          : null,
+      alignment: _alignmentFromDomain(properties.alignment),
+      textShadow: ShadowMapper.getMapFromShadow(properties.textShadow),
+    );
   }
 
   static PagebuilderResponsiveOrConstantModel<String>? _alignmentFromDomain(
@@ -215,7 +205,5 @@ class PageBuilderTextPropertiesModel extends Equatable
         color,
         alignment,
         textShadow,
-        isBold,
-        isItalic
       ];
 }
