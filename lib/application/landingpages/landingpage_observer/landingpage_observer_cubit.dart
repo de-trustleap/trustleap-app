@@ -26,25 +26,25 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
   void observeLandingPagesForUser(CustomUser user) async {
     // Get all landing page IDs including default page
     var landingPageIds = <String>[...(user.landingPageIDs ?? [])];
-    if (user.defaultLandingPageID != null && !landingPageIds.contains(user.defaultLandingPageID!)) {
+    if (user.defaultLandingPageID != null &&
+        !landingPageIds.contains(user.defaultLandingPageID!)) {
       landingPageIds.add(user.defaultLandingPageID!);
     }
-    
+
     // Check if we need to restart the observer (different user or different IDs)
     final currentSorted = [..._currentLandingPageIds]..sort();
     final newSorted = [...landingPageIds]..sort();
-    
-    if (_currentUserId == user.id.value && 
+
+    if (_currentUserId == user.id.value &&
         _landingPagesStreamSub != null &&
         currentSorted.toString() == newSorted.toString()) {
       // Same user and same IDs - stream is already observing correctly
       return;
     }
-    
-    // Update tracking variables
+
     _currentUserId = user.id.value;
     _currentLandingPageIds = landingPageIds;
-    
+
     // Start new observation
     emit(LandingPageObserverLoading());
     await _landingPagesStreamSub?.cancel();
@@ -66,7 +66,8 @@ class LandingPageObserverCubit extends Cubit<LandingPageObserverState> {
       (failure) => emit(LandingPageObserverFailure(failure: failure)),
       (landingPages) {
         PaintingBinding.instance.imageCache.clear();
-        emit(LandingPageObserverSuccess(landingPages: landingPages, user: user));
+        emit(
+            LandingPageObserverSuccess(landingPages: landingPages, user: user));
       },
     );
   }

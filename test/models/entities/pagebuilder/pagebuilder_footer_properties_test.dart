@@ -19,9 +19,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           impressumTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -30,9 +28,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           initialInformationTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -41,9 +37,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           termsAndConditionsTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -52,9 +46,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       final expectedResult = PagebuilderFooterProperties(
           privacyPolicyTextProperties: PageBuilderTextProperties(
               text: "Test",
@@ -64,9 +56,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center)),
           impressumTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -75,9 +65,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           initialInformationTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -86,9 +74,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           termsAndConditionsTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -97,9 +83,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       // When
       final result = model.copyWith(
           privacyPolicyTextProperties: PageBuilderTextProperties(
@@ -110,9 +94,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center)));
       // Then
       expect(expectedResult, result);
     });
@@ -131,9 +113,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           impressumTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -142,9 +122,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           initialInformationTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -153,9 +131,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           termsAndConditionsTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -164,9 +140,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       final model2 = PagebuilderFooterProperties(
           privacyPolicyTextProperties: PageBuilderTextProperties(
               text: "Test",
@@ -176,9 +150,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           impressumTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -187,9 +159,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           initialInformationTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -198,9 +168,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           termsAndConditionsTextProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -209,9 +177,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: Colors.black,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: true));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       // Then
       expect(model, model2);
     });

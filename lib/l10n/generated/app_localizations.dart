@@ -5060,6 +5060,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calendly'**
   String get pagebuilder_widget_template_calendly;
+
+  /// Label for color selection in the HTML text editor
+  ///
+  /// In en, this message translates to:
+  /// **'Select Color'**
+  String get pagebuilder_html_text_editor_select_color;
+
+  /// Placeholder text in the HTML text editor
+  ///
+  /// In en, this message translates to:
+  /// **'Enter text...'**
+  String get pagebuilder_html_text_editor_hint;
 }
 
 class _AppLocalizationsDelegate

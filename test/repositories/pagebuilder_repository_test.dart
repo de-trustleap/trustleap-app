@@ -94,9 +94,7 @@ void main() {
                             color: Colors.black,
                             spreadRadius: 1.0,
                             blurRadius: 1.0,
-                            offset: Offset(1, 1)),
-                        isBold: null,
-                        isItalic: null),
+                            offset: Offset(1, 1))),
                     hoverProperties: null)
               ],
               visibleOn: null)

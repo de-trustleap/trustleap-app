@@ -128,6 +128,7 @@ class _PagebuilderColorPickerBaseState
                       initialColor: _selectedColor,
                       enableOpacity: widget.enableOpacity,
                       isColorMode: _isColorMode,
+                      showModeSwitch: widget.enableGradients,
                       onColorChanged: (Color color) {
                         setState(() {
                           _selectedColor = color;
@@ -149,6 +150,7 @@ class _PagebuilderColorPickerBaseState
                     PagebuilderGradientTab(
                       initialGradient: _selectedGradient,
                       isColorMode: _isColorMode,
+                      showModeSwitch: widget.enableGradients,
                       onGradientChanged: (PagebuilderGradient gradient) {
                         setState(() {
                           _selectedGradient = gradient;

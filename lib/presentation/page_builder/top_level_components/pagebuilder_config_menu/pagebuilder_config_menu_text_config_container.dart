@@ -28,6 +28,7 @@ class PagebuilderConfigMenuTextConfigContainer extends StatelessWidget {
                     ? model.hoverProperties as PageBuilderTextProperties
                     : null,
                 showHoverTabBar: true,
+                hideColorPicker: true,
                 onChanged: (properties) {
                   final updatedWidget = model.copyWith(properties: properties);
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));

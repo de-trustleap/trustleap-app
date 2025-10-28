@@ -15,43 +15,38 @@ class PageBuilderTextProperties extends Equatable
   final Color? color;
   final PagebuilderResponsiveOrConstant<TextAlign>? alignment;
   final PageBuilderShadow? textShadow;
-  final bool? isBold;
-  final bool? isItalic;
 
-  const PageBuilderTextProperties(
-      {required this.text,
-      required this.fontSize,
-      required this.fontFamily,
-      required this.lineHeight,
-      required this.letterSpacing,
-      required this.color,
-      required this.alignment,
-      required this.textShadow,
-      required this.isBold,
-      required this.isItalic});
+  const PageBuilderTextProperties({
+    required this.text,
+    required this.fontSize,
+    required this.fontFamily,
+    required this.lineHeight,
+    required this.letterSpacing,
+    required this.color,
+    required this.alignment,
+    required this.textShadow,
+  });
 
-  PageBuilderTextProperties copyWith(
-      {String? text,
-      PagebuilderResponsiveOrConstant<double>? fontSize,
-      String? fontFamily,
-      PagebuilderResponsiveOrConstant<double>? lineHeight,
-      PagebuilderResponsiveOrConstant<double>? letterSpacing,
-      Color? color,
-      PagebuilderResponsiveOrConstant<TextAlign>? alignment,
-      PageBuilderShadow? textShadow,
-      bool? isBold,
-      bool? isItalic}) {
+  PageBuilderTextProperties copyWith({
+    String? text,
+    PagebuilderResponsiveOrConstant<double>? fontSize,
+    String? fontFamily,
+    PagebuilderResponsiveOrConstant<double>? lineHeight,
+    PagebuilderResponsiveOrConstant<double>? letterSpacing,
+    Color? color,
+    PagebuilderResponsiveOrConstant<TextAlign>? alignment,
+    PageBuilderShadow? textShadow,
+  }) {
     return PageBuilderTextProperties(
-        text: text ?? this.text,
-        fontSize: fontSize ?? this.fontSize,
-        fontFamily: fontFamily ?? this.fontFamily,
-        lineHeight: lineHeight ?? this.lineHeight,
-        letterSpacing: letterSpacing ?? this.letterSpacing,
-        color: color ?? this.color,
-        alignment: alignment ?? this.alignment,
-        textShadow: textShadow ?? this.textShadow,
-        isBold: isBold ?? this.isBold,
-        isItalic: isItalic ?? this.isItalic);
+      text: text ?? this.text,
+      fontSize: fontSize ?? this.fontSize,
+      fontFamily: fontFamily ?? this.fontFamily,
+      lineHeight: lineHeight ?? this.lineHeight,
+      letterSpacing: letterSpacing ?? this.letterSpacing,
+      color: color ?? this.color,
+      alignment: alignment ?? this.alignment,
+      textShadow: textShadow ?? this.textShadow,
+    );
   }
 
   PageBuilderTextProperties deepCopy() {
@@ -64,8 +59,6 @@ class PageBuilderTextProperties extends Equatable
       color: color != null ? Color(color!.toARGB32()) : null,
       alignment: alignment,
       textShadow: textShadow?.deepCopy(),
-      isBold: isBold,
-      isItalic: isItalic,
     );
   }
 
@@ -79,7 +72,5 @@ class PageBuilderTextProperties extends Equatable
         color,
         alignment,
         textShadow,
-        isBold,
-        isItalic
       ];
 }

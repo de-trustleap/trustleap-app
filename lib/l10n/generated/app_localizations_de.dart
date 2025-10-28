@@ -2980,4 +2980,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_widget_template_calendly => 'Calendly';
+
+  @override
+  String get pagebuilder_html_text_editor_select_color => 'Farbe auswählen';
+
+  @override
+  String get pagebuilder_html_text_editor_hint => 'Text eingeben...';
 }

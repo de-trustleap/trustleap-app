@@ -723,9 +723,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: Color(0xFF9A9A9C),
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
               textProperties: PageBuilderTextProperties(
                   text: null,
                   fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -734,9 +732,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null)),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           emailTextFieldProperties: const PageBuilderTextFieldProperties(
               width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 1,
@@ -752,9 +748,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
               textProperties: PageBuilderTextProperties(
                   text: null,
                   fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -763,9 +757,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null)),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           phoneTextFieldProperties: const PageBuilderTextFieldProperties(
               width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 1,
@@ -781,9 +773,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
               textProperties: PageBuilderTextProperties(
                   text: null,
                   fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -792,9 +782,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null)),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           messageTextFieldProperties: const PageBuilderTextFieldProperties(
               width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 4,
@@ -810,9 +798,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
               textProperties: PageBuilderTextProperties(
                   text: null,
                   fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -821,9 +807,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null)),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(70.0),
@@ -837,9 +821,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: Colors.white,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
-                  isBold: null,
-                  isItalic: null)));
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center))));
       // When
       final result = model.toDomain();
       // Then
@@ -869,9 +851,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: Color(0xFF9A9A9C),
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
               textProperties: PageBuilderTextProperties(
                   text: null,
                   fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -880,9 +860,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null)),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           emailTextFieldProperties: const PageBuilderTextFieldProperties(
               width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 1,
@@ -898,9 +876,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
               textProperties: PageBuilderTextProperties(
                   text: null,
                   fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -909,9 +885,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null)),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           phoneTextFieldProperties: const PageBuilderTextFieldProperties(
               width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 1,
@@ -927,9 +901,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
               textProperties: PageBuilderTextProperties(
                   text: null,
                   fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -938,9 +910,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null)),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           messageTextFieldProperties: const PageBuilderTextFieldProperties(
               width: PagebuilderResponsiveOrConstant.constant(400.0),
               minLines: 4,
@@ -956,9 +926,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
               textProperties: PageBuilderTextProperties(
                   text: null,
                   fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
@@ -967,9 +935,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: null,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-                  isBold: null,
-                  isItalic: null)),
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left))),
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(70.0),
@@ -983,9 +949,7 @@ void main() {
                   letterSpacing: null,
                   textShadow: null,
                   color: Colors.white,
-                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
-                  isBold: null,
-                  isItalic: null)));
+                  alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center))));
       final expectedResult = PageBuilderContactFormPropertiesModel(
           email: "test@test.de",
           nameTextFieldProperties: {

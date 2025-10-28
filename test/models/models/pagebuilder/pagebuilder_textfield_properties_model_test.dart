@@ -178,9 +178,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: null),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
@@ -189,9 +187,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: null));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       // When
       final result = model.toDomain();
       // Then
@@ -219,9 +215,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: null),
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)),
           textProperties: PageBuilderTextProperties(
               text: "Test",
               fontSize: const PagebuilderResponsiveOrConstant.constant(14.0),
@@ -230,9 +224,7 @@ void main() {
               letterSpacing: null,
               textShadow: null,
               color: null,
-              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left),
-              isBold: null,
-              isItalic: null));
+              alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       const expectedResult = PageBuilderTextFieldPropertiesModel(
           width: PagebuilderResponsiveOrConstantModel.constant(200.0),
           minLines: 1,
