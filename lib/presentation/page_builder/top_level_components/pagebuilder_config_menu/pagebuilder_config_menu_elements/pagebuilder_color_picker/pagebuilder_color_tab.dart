@@ -51,21 +51,6 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
     }
   }
 
-  Color _hexToColor(String hex) {
-    try {
-      hex = hex.replaceAll("#", "");
-      if (hex.isEmpty || (hex.length != 6 && hex.length != 8)) {
-        return Colors.transparent;
-      }
-      if (hex.length == 6) {
-        hex = "FF$hex";
-      }
-      return Color(int.parse("0x$hex"));
-    } catch (e) {
-      return Colors.transparent;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -141,7 +126,7 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
                     onChanged: (value) {
                       if (widget.isColorMode && value.isNotEmpty) {
                         setState(() {
-                          _selectedColor = _hexToColor(value);
+                          _selectedColor = ColorUtility.hexToColor(value);
                         });
                         widget.onColorChanged(_selectedColor);
                       }
