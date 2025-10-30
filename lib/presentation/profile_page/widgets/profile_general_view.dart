@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart';
 import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -13,7 +14,6 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_image_
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_register_company_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileGeneralView extends StatefulWidget {
   const ProfileGeneralView({super.key});
@@ -33,7 +33,7 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
 
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
 
     return BlocBuilder<UserObserverCubit, UserObserverState>(
       builder: (context, state) {

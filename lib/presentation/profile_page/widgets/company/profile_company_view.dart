@@ -2,6 +2,7 @@
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -14,7 +15,6 @@ import 'package:finanzbegleiter/presentation/profile_page/widgets/company/compan
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileCompanyView extends StatefulWidget {
   final CustomUser user;
@@ -45,7 +45,7 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
 
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final companyObserverCubit = Modular.get<CompanyObserverCubit>();
     final permissions = (context.watchModular<PermissionCubit>().state
             as PermissionSuccessState)

@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/downloader.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -123,7 +124,7 @@ class _CompanyRegistrationFormState extends State<CompanyRegistrationForm> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final localization = AppLocalizations.of(context);
     final validator = CompanyValidator(localization: localization);
     const double textFieldSpacing = 20;

@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -49,7 +50,7 @@ class _CustomTabBarState extends State<CustomTabBar>
 
   @override
   Widget build(BuildContext context) {
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     if (responsiveValue.isMobile) {
       return CustomTabBarMobile(tabs: widget.tabs);
     }

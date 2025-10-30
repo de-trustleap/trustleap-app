@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -11,11 +12,22 @@ class CenteredConstrainedWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsiveData = ResponsiveHelper.of(context);
+
+    BoxConstraints constraints;
+    if (responsiveData.breakpoint.name == MOBILE) {
+      constraints = const BoxConstraints(maxWidth: 600);
+    } else if (responsiveData.breakpoint.name == TABLET) {
+      constraints = const BoxConstraints(maxWidth: 800);
+    } else {
+      constraints = const BoxConstraints(maxWidth: 1280);
+    }
+
     return Center(
-        child: ResponsiveConstraints(conditionalConstraints: const [
-      Condition.equals(name: MOBILE, value: BoxConstraints(maxWidth: 600)),
-      Condition.equals(name: TABLET, value: BoxConstraints(maxWidth: 800)),
-      Condition.largerThan(name: TABLET, value: BoxConstraints(maxWidth: 1280))
-    ], child: child));
+      child: ConstrainedBox(
+        constraints: constraints,
+        child: child,
+      ),
+    );
   }
 }

@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/authentication/auth/auth_cubit.dart'
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -134,7 +135,7 @@ class _EmailSectionState extends State<EmailSection> {
   Widget build(BuildContext context) {
     final profileCubit = Modular.get<ProfileCubit>();
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final localization = AppLocalizations.of(context);
 
     return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
