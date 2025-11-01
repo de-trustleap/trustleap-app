@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/auth_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/custom_alert_dialog.dart';
@@ -14,7 +15,6 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/second
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileDeleteAccountForm extends StatefulWidget {
   const ProfileDeleteAccountForm({super.key});
@@ -90,7 +90,7 @@ class _ProfileDeleteAccountFormState extends State<ProfileDeleteAccountForm> {
   Widget build(BuildContext context) {
     final profileCubit = Modular.get<ProfileCubit>();
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
     final navigator = CustomNavigator.of(context);

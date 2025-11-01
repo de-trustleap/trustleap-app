@@ -30,10 +30,12 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage>
     with TickerProviderStateMixin {
-  late TabController tabController;
+  TabController? tabController;
 
   @override
   void initState() {
+    super.initState();
+
     // Redirect /profile to /profile/general
     final currentRoute = Modular.to.path;
     if (currentRoute == RoutePaths.profilePath) {
@@ -50,12 +52,11 @@ class _ProfilePageState extends State<ProfilePage>
                 .profile_page_snackbar_company_registered);
       });
     }
-    super.initState();
   }
 
   @override
   void dispose() {
-    tabController.dispose();
+    tabController?.dispose();
     super.dispose();
   }
 
@@ -86,7 +87,8 @@ class _ProfilePageState extends State<ProfilePage>
   bool _canAccessCompanyProfile(
       UserObserverSuccess state, Permissions permissions) {
     if (permissions.hasReadCompanyPermission() &&
-        state.user.companyID != null) {
+        state.user.companyID != null &&
+        state.user.companyID!.isNotEmpty) {
       return true;
     } else {
       return false;

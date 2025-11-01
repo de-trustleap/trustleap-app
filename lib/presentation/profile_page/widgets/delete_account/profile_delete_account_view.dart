@@ -1,7 +1,7 @@
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/delete_account/profile_delete_account_form.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileDeleteAccountView extends StatefulWidget {
   const ProfileDeleteAccountView({super.key});
@@ -19,7 +19,7 @@ class _DeleteAccountViewState extends State<ProfileDeleteAccountView>
   Widget build(BuildContext context) {
     super.build(context);
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
 
     return Container(
         width: double.infinity,

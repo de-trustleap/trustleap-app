@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/date_time_formatter.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
@@ -42,7 +43,7 @@ class _ProfileRegisterCompanySectionState
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final localization = AppLocalizations.of(context);
     final navigator = CustomNavigator.of(context);
     const spacing = 20;

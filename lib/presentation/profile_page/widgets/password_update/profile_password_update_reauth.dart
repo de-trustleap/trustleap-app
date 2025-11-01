@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/core/helpers/auth_validator.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfilePasswordUpdateReauth extends StatelessWidget {
   final TextEditingController passwordTextController;
@@ -29,7 +29,7 @@ class ProfilePasswordUpdateReauth extends StatelessWidget {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final validator = AuthValidator(localization: localization);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     const double textFieldSpacing = 20;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

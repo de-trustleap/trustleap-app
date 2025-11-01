@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/helpers/downloader.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
@@ -165,7 +166,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final localization = AppLocalizations.of(context);
     final validator = CompanyValidator(localization: localization);
     final permissions =
