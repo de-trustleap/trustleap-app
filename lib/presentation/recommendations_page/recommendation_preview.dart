@@ -47,14 +47,11 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   void initState() {
     super.initState();
 
-    // Für alle Leads, die beim ersten Aufbau vorhanden sind, Controller anlegen
     for (final lead in widget.leads) {
       final text = parseTemplate(lead, lead.promotionTemplate ?? "");
-      // Lead muss eine eindeutige ID haben
       _textControllers[lead.id] = TextEditingController(text: text);
     }
 
-    // Falls wir mehr als einen Lead haben, TabController initialisieren
     if (widget.leads.length > 1) {
       tabController = TabController(
         length: widget.leads.length,
@@ -67,19 +64,15 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   void didUpdateWidget(covariant RecommendationPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // 1) Controller entfernen, die zu Leads gehören,
-    // die jetzt nicht mehr existieren
     final oldIds = oldWidget.leads.map((l) => l.id).toSet();
     final newIds = widget.leads.map((l) => l.id).toSet();
 
-    // leads, die entfernt wurden
     final removedIds = oldIds.difference(newIds);
     for (final id in removedIds) {
       _textControllers[id]?.dispose();
       _textControllers.remove(id);
     }
 
-    // 2) Neue Controller nur für hinzugekommene Leads anlegen
     for (final lead in widget.leads) {
       if (!_textControllers.containsKey(lead.id)) {
         final text = parseTemplate(lead, lead.promotionTemplate ?? "");
@@ -87,9 +80,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       }
     }
 
-    // 3) TabController anpassen, falls sich die Länge ändert
     if (widget.leads.length > 1) {
-      // Bei geändertem TabCount einen neuen TabController erstellen
       if (tabController == null ||
           tabController!.length != widget.leads.length) {
         tabController?.dispose();
@@ -99,7 +90,6 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
         );
       }
     } else {
-      // Bei nur einem Lead oder keinem Lead TabController entfernen
       tabController?.dispose();
       tabController = null;
     }
@@ -115,7 +105,6 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     super.dispose();
   }
 
-  // Hilfsfunktion, um mehrere Platzhalter zu ersetzen
   String parseTemplate(RecommendationItem lead, String template) {
     final serviceProviderLastName =
         (lead.serviceProviderName?.split(" "))?.skip(1).join(" ");
