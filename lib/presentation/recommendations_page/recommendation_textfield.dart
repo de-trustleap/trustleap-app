@@ -9,6 +9,7 @@ class RecommendationTextField extends StatelessWidget {
   final bool showError;
   final bool disabled;
   final void Function()? onSendPressed;
+  final void Function()? onEmailSendPressed;
 
   const RecommendationTextField({
     super.key,
@@ -17,6 +18,7 @@ class RecommendationTextField extends StatelessWidget {
     required this.showError,
     this.disabled = false,
     this.onSendPressed,
+    this.onEmailSendPressed,
   });
 
   @override
@@ -49,6 +51,12 @@ class RecommendationTextField extends StatelessWidget {
             onTap: onSendPressed,
             disabled: disabled,
             icon: Icons.send),
+        const SizedBox(height: 10),
+        PrimaryButton(
+            title: localization.recommendation_page_leadTextField_send_email_button,
+            onTap: onEmailSendPressed,
+            disabled: disabled,
+            icon: Icons.email),
       ],
     );
   }

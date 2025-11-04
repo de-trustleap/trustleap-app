@@ -1018,9 +1018,17 @@
     "@recommendation_page_leadTextField_send_button": {
         "description": "Title für den Absende Button"
     },
+    "recommendation_page_leadTextField_send_email_button": "Senden per E-Mail",
+    "@recommendation_page_leadTextField_send_email_button": {
+        "description": "Title für den E-Mail Absende Button"
+    },
     "recommendation_page_send_whatsapp_error": "WhatsApp ist nicht installiert oder kann nicht geöffnet werden.",
     "@recommendation_page_send_whatsapp_error": {
         "description": "Nachricht wenn die Message nicht versendet werden kann"
+    },
+    "recommendation_page_send_email_error": "E-Mail-Client konnte nicht geöffnet werden.",
+    "@recommendation_page_send_email_error": {
+        "description": "Nachricht wenn der E-Mail-Client nicht geöffnet werden kann"
     },
     "recommendation_page_max_item_Message": "Es dürfen maximal 6 Items hinzugefügt werden.",
     "@recommendation_page_max_item_Message": {
