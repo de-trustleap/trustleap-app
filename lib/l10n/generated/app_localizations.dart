@@ -1601,11 +1601,29 @@ abstract class AppLocalizations {
   /// **'Send via Whatsapp'**
   String get recommendation_page_leadTextField_send_button;
 
+  /// Title for the email send button
+  ///
+  /// In en, this message translates to:
+  /// **'Send via Email'**
+  String get recommendation_page_leadTextField_send_email_button;
+
   /// Message shown when the message cannot be sent
   ///
   /// In en, this message translates to:
   /// **'WhatsApp is not installed or cannot be opened.'**
   String get recommendation_page_send_whatsapp_error;
+
+  /// Message shown when the email client cannot be opened
+  ///
+  /// In en, this message translates to:
+  /// **'Email client could not be opened.'**
+  String get recommendation_page_send_email_error;
+
+  /// Subject for the email recommendation
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation for {name}'**
+  String recommendation_page_email_subject(String name);
 
   /// Message shown when more than 6 items are added
   ///

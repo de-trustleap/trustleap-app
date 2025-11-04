@@ -3,19 +3,16 @@ import 'dart:async';
 import 'package:finanzbegleiter/application/recommendations/recommendations_alert/recommendations_alert_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/domain/entities/recommendation_item.dart';
-import 'package:finanzbegleiter/environment.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_overlay.dart';
 import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_creator/landing_page_template_placeholder.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_confirmation_dialog.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_confirmation_dialog_error.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_overlay.dart';
+import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_sender.dart';
 import 'package:finanzbegleiter/presentation/recommendations_page/recommendation_textfield.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:web/web.dart' as web;
 
 class RecommendationPreview extends StatefulWidget {
@@ -42,6 +39,7 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
   StreamSubscription? _visibilitySubscription;
   bool showMissingLinkError = false;
   bool isAlertVisible = false;
+  final RecommendationSender _sender = RecommendationSender();
 
   @override
   void initState() {
@@ -133,11 +131,6 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
 
   Future<void> _sendMessage(
       RecommendationItem recommendation, String message) async {
-    final baseURL = Environment().getLandingpageBaseURL();
-    final link =
-        "$baseURL?p=${recommendation.promoterName}&id=${recommendation.id}";
-
-    var adaptedMessage = "";
     if (!message.contains("[LINK]")) {
       setState(() {
         showMissingLinkError = true;
@@ -148,24 +141,32 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       showMissingLinkError = false;
     });
 
-    adaptedMessage = message.replaceAll("[LINK]", link);
-    final localization = AppLocalizations.of(context);
-    final whatsappURL =
-        "https://api.whatsapp.com/send/?text=${Uri.encodeComponent(adaptedMessage)}";
-    final convertedURL = Uri.parse(whatsappURL);
-    if (kIsWeb) {
-      web.window.open(whatsappURL, '_blank');
-      _startComeBackToPageListener(recommendation);
+    await _sender.sendViaWhatsApp(
+      context: context,
+      recommendation: recommendation,
+      message: message,
+      onWebOpen: () => _startComeBackToPageListener(recommendation),
+    );
+  }
+
+  Future<void> _sendEmail(
+      RecommendationItem recommendation, String message) async {
+    if (!message.contains("[LINK]")) {
+      setState(() {
+        showMissingLinkError = true;
+      });
       return;
-    } else {
-      if (await canLaunchUrl(convertedURL)) {
-        await launchUrl(convertedURL, mode: LaunchMode.externalApplication);
-      } else {
-        if (!mounted) return;
-        CustomSnackBar.of(context).showCustomSnackBar(
-            localization.recommendation_page_send_whatsapp_error);
-      }
     }
+    setState(() {
+      showMissingLinkError = false;
+    });
+
+    await _sender.sendViaEmail(
+      context: context,
+      recommendation: recommendation,
+      message: message,
+      onWebOpen: () => _startComeBackToPageListener(recommendation),
+    );
   }
 
   void _startComeBackToPageListener(RecommendationItem recommendation) {
@@ -173,7 +174,6 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
     _visibilitySubscription = web.document.onVisibilityChange.listen((event) {
       if (!web.document.hidden && mounted && !isAlertVisible) {
         isAlertVisible = true;
-        // App ist wieder sichtbar (zurück im Tab)
         showDialog(
             context: context,
             builder: (_) {
@@ -261,6 +261,9 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
       onSendPressed: () {
         _sendMessage(widget.leads.first, controller.text);
       },
+      onEmailSendPressed: () {
+        _sendEmail(widget.leads.first, controller.text);
+      },
     );
   }
 
@@ -289,6 +292,9 @@ class _RecommendationPreviewState extends State<RecommendationPreview>
                   disabled: widget.disabled,
                   onSendPressed: () {
                     _sendMessage(lead, controller.text);
+                  },
+                  onEmailSendPressed: () {
+                    _sendEmail(lead, controller.text);
                   },
                 ),
               );

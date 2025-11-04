@@ -1018,9 +1018,26 @@
     "@recommendation_page_leadTextField_send_button": {
         "description": "Title for the send button"
     },
+    "recommendation_page_leadTextField_send_email_button": "Send via Email",
+    "@recommendation_page_leadTextField_send_email_button": {
+        "description": "Title for the email send button"
+    },
     "recommendation_page_send_whatsapp_error": "WhatsApp is not installed or cannot be opened.",
     "@recommendation_page_send_whatsapp_error": {
         "description": "Message shown when the message cannot be sent"
+    },
+    "recommendation_page_send_email_error": "Email client could not be opened.",
+    "@recommendation_page_send_email_error": {
+        "description": "Message shown when the email client cannot be opened"
+    },
+    "recommendation_page_email_subject": "Recommendation for {name}",
+    "@recommendation_page_email_subject": {
+        "description": "Subject for the email recommendation",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
     },
     "recommendation_page_max_item_Message": "A maximum of 6 items can be added.",
     "@recommendation_page_max_item_Message": {

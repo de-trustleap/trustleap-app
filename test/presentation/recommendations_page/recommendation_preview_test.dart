@@ -433,5 +433,144 @@ void main() {
       );
       expect(visibleTextField, isNotNull);
     });
+
+    testWidgets('should display email send button', (tester) async {
+      // Given
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      final lead = createTestRecommendation();
+
+      // When
+      await tester.pumpWidget(createWidgetUnderTest(leads: [lead]));
+      await tester.pumpAndSettle();
+
+      // Then
+      final textField = tester.widget<RecommendationTextField>(
+          find.byType(RecommendationTextField));
+      expect(textField.onEmailSendPressed, isNotNull);
+    });
+
+    testWidgets('should have both WhatsApp and Email send callbacks',
+        (tester) async {
+      // Given
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      final lead = createTestRecommendation();
+
+      // When
+      await tester.pumpWidget(createWidgetUnderTest(leads: [lead]));
+      await tester.pumpAndSettle();
+
+      // Then
+      final textField = tester.widget<RecommendationTextField>(
+          find.byType(RecommendationTextField));
+      expect(textField.onSendPressed, isNotNull);
+      expect(textField.onEmailSendPressed, isNotNull);
+    });
+
+    testWidgets('should pass email callback for multiple leads', (tester) async {
+      // Given
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      final leads = [
+        createTestRecommendation(id: '1', name: 'Person 1'),
+        createTestRecommendation(id: '2', name: 'Person 2'),
+      ];
+
+      // When
+      await tester.pumpWidget(createWidgetUnderTest(leads: leads));
+      await tester.pumpAndSettle();
+
+      // Then
+      final textFields = tester
+          .widgetList<RecommendationTextField>(find.byType(RecommendationTextField))
+          .toList();
+
+      for (final textField in textFields) {
+        expect(textField.onSendPressed, isNotNull);
+        expect(textField.onEmailSendPressed, isNotNull);
+      }
+    });
+
+    testWidgets('should create email callback with correct recommendation data',
+        (tester) async {
+      // Given
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      final lead = createTestRecommendation(
+        id: 'test-email-id',
+        name: 'Email Test Person',
+        promoterName: 'Email Promoter',
+      );
+
+      // When
+      await tester.pumpWidget(createWidgetUnderTest(leads: [lead]));
+      await tester.pumpAndSettle();
+
+      // Then
+      final textField = tester.widget<RecommendationTextField>(
+          find.byType(RecommendationTextField));
+      expect(textField.onEmailSendPressed, isNotNull);
+      expect(textField.leadName, equals('Email Test Person'));
+    });
+
+    testWidgets('should maintain email functionality when switching tabs',
+        (tester) async {
+      // Given
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      final leads = [
+        createTestRecommendation(id: '1', name: 'Person 1'),
+        createTestRecommendation(id: '2', name: 'Person 2'),
+      ];
+
+      // When
+      await tester.pumpWidget(createWidgetUnderTest(leads: leads));
+      await tester.pumpAndSettle();
+
+      // Verify first tab has email callback
+      final textFieldsBefore = tester
+          .widgetList<RecommendationTextField>(find.byType(RecommendationTextField))
+          .toList();
+      expect(textFieldsBefore.first.onEmailSendPressed, isNotNull);
+
+      // Switch to second tab
+      await tester.tap(find.text('Person 2'));
+      await tester.pumpAndSettle();
+
+      // Then - verify second tab also has email callback
+      final textFieldsAfter = tester
+          .widgetList<RecommendationTextField>(find.byType(RecommendationTextField))
+          .toList();
+
+      for (final textField in textFieldsAfter) {
+        expect(textField.onEmailSendPressed, isNotNull);
+      }
+    });
+
+    testWidgets('should pass disabled state to email button', (tester) async {
+      // Given
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      final lead = createTestRecommendation();
+
+      // When
+      await tester.pumpWidget(
+          createWidgetUnderTest(leads: [lead], disabled: true));
+      await tester.pumpAndSettle();
+
+      // Then
+      final textField = tester.widget<RecommendationTextField>(
+          find.byType(RecommendationTextField));
+      expect(textField.disabled, isTrue);
+      expect(textField.onEmailSendPressed, isNotNull);
+    });
+
+    testWidgets('should handle empty leads list without email callback errors',
+        (tester) async {
+      // Given
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+
+      // When
+      await tester.pumpWidget(createWidgetUnderTest(leads: []));
+      await tester.pumpAndSettle();
+
+      // Then - should not crash
+      expect(find.byType(RecommendationTextField), findsNothing);
+    });
   });
 }
