@@ -59,11 +59,8 @@ class RecommendationSender {
     final adaptedMessage = _prepareMessage(message, link);
     final localization = AppLocalizations.of(context);
 
-    // Create email with subject and body
-    final subject = Uri.encodeComponent(localization
-        .recommendation_page_email_subject(recommendation.name ?? ''));
     final body = Uri.encodeComponent(adaptedMessage);
-    final emailURL = "mailto:?subject=$subject&body=$body";
+    final emailURL = "mailto:?body=$body";
     final convertedURL = Uri.parse(emailURL);
 
     if (kIsWeb) {

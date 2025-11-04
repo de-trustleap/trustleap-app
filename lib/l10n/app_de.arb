@@ -1030,15 +1030,6 @@
     "@recommendation_page_send_email_error": {
         "description": "Nachricht wenn der E-Mail-Client nicht geöffnet werden kann"
     },
-    "recommendation_page_email_subject": "Empfehlung für {name}",
-    "@recommendation_page_email_subject": {
-        "description": "Betreff für die E-Mail-Empfehlung",
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "recommendation_page_max_item_Message": "Es dürfen maximal 6 Items hinzugefügt werden.",
     "@recommendation_page_max_item_Message": {
         "description": "Nachricht wenn mehr als 6 Items hinzugefügt werden"

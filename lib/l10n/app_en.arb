@@ -1030,15 +1030,6 @@
     "@recommendation_page_send_email_error": {
         "description": "Message shown when the email client cannot be opened"
     },
-    "recommendation_page_email_subject": "Recommendation for {name}",
-    "@recommendation_page_email_subject": {
-        "description": "Subject for the email recommendation",
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "recommendation_page_max_item_Message": "A maximum of 6 items can be added.",
     "@recommendation_page_max_item_Message": {
         "description": "Message shown when more than 6 items are added"

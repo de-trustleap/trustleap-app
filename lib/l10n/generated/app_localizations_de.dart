@@ -915,11 +915,6 @@ class AppLocalizationsDe extends AppLocalizations {
       'E-Mail-Client konnte nicht geöffnet werden.';
 
   @override
-  String recommendation_page_email_subject(String name) {
-    return 'Empfehlung für $name';
-  }
-
-  @override
   String get recommendation_page_max_item_Message =>
       'Es dürfen maximal 6 Items hinzugefügt werden.';
 

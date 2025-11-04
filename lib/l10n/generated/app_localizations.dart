@@ -1619,12 +1619,6 @@ abstract class AppLocalizations {
   /// **'Email client could not be opened.'**
   String get recommendation_page_send_email_error;
 
-  /// Subject for the email recommendation
-  ///
-  /// In en, this message translates to:
-  /// **'Recommendation for {name}'**
-  String recommendation_page_email_subject(String name);
-
   /// Message shown when more than 6 items are added
   ///
   /// In en, this message translates to:
