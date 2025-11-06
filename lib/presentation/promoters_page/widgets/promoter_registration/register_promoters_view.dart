@@ -1,15 +1,13 @@
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_registration/register_promoters_form.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class RegisterPromotersView extends StatefulWidget {
   final Function newPromoterCreated;
-  const RegisterPromotersView(
-      {super.key,
-      required this.newPromoterCreated});
+  const RegisterPromotersView({super.key, required this.newPromoterCreated});
 
   @override
   State<RegisterPromotersView> createState() => _RegisterPromotersViewState();
@@ -25,7 +23,7 @@ class _RegisterPromotersViewState extends State<RegisterPromotersView>
     super.build(context);
 
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
 
     return Container(
         width: double.infinity,
@@ -38,7 +36,8 @@ class _RegisterPromotersViewState extends State<RegisterPromotersView>
                   mainAxisSize: MainAxisSize.min,
                   children: [
                 RegisterPromotersForm(changesSaved: () {
-                  Modular.to.navigate("${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersOverviewPath}");
+                  Modular.to.navigate(
+                      "${RoutePaths.homePath}${RoutePaths.promotersPath}${RoutePaths.promotersOverviewPath}");
                   widget.newPromoterCreated();
                 })
               ])),

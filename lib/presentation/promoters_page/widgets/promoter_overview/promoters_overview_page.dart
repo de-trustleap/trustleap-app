@@ -6,6 +6,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
@@ -155,7 +156,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final navigator = CustomNavigator.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final promoterCubit = Modular.get<PromoterCubit>();
     final promoterObserverCubit = Modular.get<PromoterObserverCubit>();
     final userObserverCubit = Modular.get<UserObserverCubit>();

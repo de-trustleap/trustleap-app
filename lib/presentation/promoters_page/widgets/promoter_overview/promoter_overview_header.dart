@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/expanded_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
-import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_filter_bottom_sheet.dart';
+import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_header_expandable_filter.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoter_overview_view_state_button.dart';
 import 'package:finanzbegleiter/presentation/promoters_page/widgets/promoter_overview/promoters_overview_page.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
 
   @override
   Widget build(BuildContext context) {
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
@@ -147,13 +148,13 @@ class _PromoterOverviewHeaderState extends State<PromoterOverviewHeader> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 16),
-                  PromoterOverviewHeaderExpandableFilter(
-                      onFilterChanged: (PromoterOverviewFilterStates filterStates) {
-                        setState(() {
-                          _filterStates = filterStates;
-                        });
-                        widget.onFilterChanged(filterStates);
-                      })
+                  PromoterOverviewHeaderExpandableFilter(onFilterChanged:
+                      (PromoterOverviewFilterStates filterStates) {
+                    setState(() {
+                      _filterStates = filterStates;
+                    });
+                    widget.onFilterChanged(filterStates);
+                  })
                 ]))
       ],
     );

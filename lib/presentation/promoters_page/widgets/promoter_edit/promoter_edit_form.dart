@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/application/promoter/promoter/promoter_cubit.dar
 import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/promoter.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
@@ -22,7 +23,6 @@ import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class PromoterEditForm extends StatefulWidget {
   final String promoterID;
@@ -126,7 +126,7 @@ class _PromoterEditFormState extends State<PromoterEditForm> {
         .permissions;
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final navigator = CustomNavigator.of(context);
     const spacing = 20.0;
     if (widget.promoterID == "") {
