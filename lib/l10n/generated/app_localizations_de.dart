@@ -2994,4 +2994,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_html_text_editor_hint => 'Text eingeben...';
+
+  @override
+  String get pagebuilder_html_text_editor_background_color =>
+      'Editor Hintergrundfarbe';
 }

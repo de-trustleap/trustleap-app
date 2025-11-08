@@ -5084,6 +5084,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter text...'**
   String get pagebuilder_html_text_editor_hint;
+
+  /// Label for the background color of the HTML text editor
+  ///
+  /// In en, this message translates to:
+  /// **'Editor Background Color'**
+  String get pagebuilder_html_text_editor_background_color;
 }
 
 class _AppLocalizationsDelegate

@@ -25,6 +25,7 @@ class PagebuilderHTMLTextEditor extends StatefulWidget {
 class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
   late final HtmlEditorController controller;
   Color _currentTextColor = Colors.black;
+  Color _currentBackgroundColor = Colors.white;
 
   @override
   void initState() {
@@ -51,6 +52,12 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
     final hexColor = '#$r$g$b';
 
     controller.execCommand('foreColor', argument: hexColor);
+  }
+
+  void _applyBackgroundColor(Color color) {
+    setState(() {
+      _currentBackgroundColor = color;
+    });
   }
 
   void _onSelectionChanged(EditorSettings settings) {
@@ -82,64 +89,88 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
                 bottom: BorderSide(color: themeData.colorScheme.outline),
               ),
             ),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                PagebuilderColorPickerBase(
-                  initialColor: _currentTextColor,
-                  onColorSelected: _applyTextColor,
-                  enableOpacity: false,
-                  enableGradients: false,
+                Row(
+                  children: [
+                    PagebuilderColorPickerBase(
+                      initialColor: _currentBackgroundColor,
+                      onColorSelected: _applyBackgroundColor,
+                      enableOpacity: false,
+                      enableGradients: false,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      localization.pagebuilder_html_text_editor_background_color,
+                      style: themeData.textTheme.bodySmall,
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                Text(
-                  localization.pagebuilder_html_text_editor_select_color,
-                  style: themeData.textTheme.bodySmall,
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    PagebuilderColorPickerBase(
+                      initialColor: _currentTextColor,
+                      onColorSelected: _applyTextColor,
+                      enableOpacity: false,
+                      enableGradients: false,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      localization.pagebuilder_html_text_editor_select_color,
+                      style: themeData.textTheme.bodySmall,
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
           Expanded(
-            child: HtmlEditor(
-              controller: controller,
-              htmlEditorOptions: HtmlEditorOptions(
-                hint: localization.pagebuilder_html_text_editor_hint,
-                initialText: widget.initialHtml ?? "",
-                shouldEnsureVisible: true,
-                adjustHeightForKeyboard: true,
-              ),
-              htmlToolbarOptions: const HtmlToolbarOptions(
-                defaultToolbarButtons: [
-                  FontButtons(
-                    bold: true,
-                    italic: true,
-                    underline: true,
-                    strikethrough: true,
-                    superscript: true,
-                    subscript: true,
-                    clearAll: true,
-                  ),
-                  ListButtons(
-                    ul: true,
-                    ol: true,
-                    listStyles: false,
-                  ),
-                ],
-                toolbarPosition: ToolbarPosition.aboveEditor,
-                toolbarType: ToolbarType.nativeScrollable,
-              ),
-              otherOptions: OtherOptions(
-                height: 250,
-                decoration: BoxDecoration(
-                  color: themeData.colorScheme.surface,
+            child: Container(
+              color: _currentBackgroundColor,
+              child: HtmlEditor(
+                controller: controller,
+                htmlEditorOptions: HtmlEditorOptions(
+                  hint: localization.pagebuilder_html_text_editor_hint,
+                  initialText: widget.initialHtml ?? "",
+                  shouldEnsureVisible: true,
+                  adjustHeightForKeyboard: true,
                 ),
-              ),
-              callbacks: Callbacks(
-                onChangeContent: (String? changed) {
-                  if (changed != null) {
-                    widget.onChanged(changed);
-                  }
-                },
-                onChangeSelection: _onSelectionChanged,
+                htmlToolbarOptions: const HtmlToolbarOptions(
+                  defaultToolbarButtons: [
+                    FontButtons(
+                      bold: true,
+                      italic: true,
+                      underline: true,
+                      strikethrough: true,
+                      superscript: true,
+                      subscript: true,
+                      clearAll: true,
+                    ),
+                    ListButtons(
+                      ul: true,
+                      ol: true,
+                      listStyles: false,
+                    ),
+                  ],
+                  toolbarPosition: ToolbarPosition.aboveEditor,
+                  toolbarType: ToolbarType.nativeScrollable,
+                ),
+                otherOptions: const OtherOptions(
+                  height: 250,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                ),
+                callbacks: Callbacks(
+                  onChangeContent: (String? changed) {
+                    if (changed != null) {
+                      widget.onChanged(changed);
+                    }
+                  },
+                  onChangeSelection: _onSelectionChanged,
+                ),
               ),
             ),
           ),

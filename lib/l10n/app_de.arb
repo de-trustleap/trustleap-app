@@ -3437,5 +3437,9 @@
     "pagebuilder_html_text_editor_hint": "Text eingeben...",
     "@pagebuilder_html_text_editor_hint": {
         "description": "Platzhalter Text im HTML Text Editor"
+    },
+    "pagebuilder_html_text_editor_background_color": "Editor Hintergrundfarbe",
+    "@pagebuilder_html_text_editor_background_color": {
+        "description": "Label für die Hintergrundfarbe des HTML Text Editors"
     }
 }
