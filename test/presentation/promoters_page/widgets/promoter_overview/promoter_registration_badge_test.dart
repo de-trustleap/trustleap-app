@@ -11,6 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   Widget createWidgetUnderTest(PromoterRegistrationState state) {
     return MaterialApp(
+      locale: const Locale('de'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
