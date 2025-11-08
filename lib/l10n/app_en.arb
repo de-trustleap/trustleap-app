@@ -3437,5 +3437,9 @@
     "pagebuilder_html_text_editor_hint": "Enter text...",
     "@pagebuilder_html_text_editor_hint": {
         "description": "Placeholder text in the HTML text editor"
+    },
+    "pagebuilder_html_text_editor_background_color": "Editor Background Color",
+    "@pagebuilder_html_text_editor_background_color": {
+        "description": "Label for the background color of the HTML text editor"
     }
 }

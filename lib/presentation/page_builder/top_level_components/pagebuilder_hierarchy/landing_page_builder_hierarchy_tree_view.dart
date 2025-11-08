@@ -143,14 +143,6 @@ class _LandingPageBuilderHierarchyTreeViewState
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Text(
-                      '${widgets.length}',
-                      style: themeData.textTheme.bodySmall?.copyWith(
-                        color: isSelected
-                            ? Colors.white
-                            : themeData.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
                   ],
                 ),
               ),

@@ -299,16 +299,12 @@ void main() {
         firstName: 'John',
         lastName: 'Doe',
       );
-      print('TEST: Emitting UserObserverSuccess');
       userObserverCubit.emit(UserObserverSuccess(user: testUser));
 
-      print('TEST: Pumping widget');
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
-      print('TEST: Widget pumped and settled');
 
       // When
-      print('TEST: Emitting RecommendationGetReasonsSuccessState');
       recommendationsCubit.emit(RecommendationGetReasonsSuccessState(
         reasons: [
           RecommendationReason(
@@ -320,15 +316,6 @@ void main() {
         ],
       ));
       await tester.pumpAndSettle();
-      print('TEST: Reasons emitted and settled');
-
-      // Debug: Print all FormTextfield widgets and their controller texts
-      final allTextfields = find.byType(FormTextfield);
-      print('TEST: Found ${allTextfields.evaluate().length} FormTextfields');
-      for (var element in allTextfields.evaluate()) {
-        final widget = element.widget as FormTextfield;
-        print('TEST: FormTextfield with text: "${widget.controller.text}"');
-      }
 
       // Then
       final promoterField = find.byWidgetPredicate((widget) =>

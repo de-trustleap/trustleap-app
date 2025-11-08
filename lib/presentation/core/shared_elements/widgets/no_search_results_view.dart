@@ -1,5 +1,5 @@
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class NoSearchResultsView extends StatelessWidget {
   final String title;
@@ -10,7 +10,7 @@ class NoSearchResultsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
 
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -38,7 +39,7 @@ class _PromoterOverviewHeaderExpandableFilterState
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final responsiveValue = ResponsiveBreakpoints.of(context);
+    final responsiveValue = ResponsiveHelper.of(context);
     final localization = AppLocalizations.of(context);
 
     return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -61,24 +62,25 @@ class _PromoterOverviewHeaderExpandableFilterState
                 child: Column(
                   children: [
                     RadioListTile<PromoterRegistrationFilterState>(
-                        title: SelectableText(
-                            localization.promoter_overview_filter_show_all,
-                            style: themeData.textTheme.bodySmall),
-                        value: PromoterRegistrationFilterState.all,
+                      title: SelectableText(
+                          localization.promoter_overview_filter_show_all,
+                          style: themeData.textTheme.bodySmall),
+                      value: PromoterRegistrationFilterState.all,
                     ),
                     const SizedBox(height: 8),
                     RadioListTile<PromoterRegistrationFilterState>(
-                        title: SelectableText(
-                            localization.promoter_overview_filter_show_registered,
-                            style: themeData.textTheme.bodySmall),
-                        value: PromoterRegistrationFilterState.registered,
+                      title: SelectableText(
+                          localization.promoter_overview_filter_show_registered,
+                          style: themeData.textTheme.bodySmall),
+                      value: PromoterRegistrationFilterState.registered,
                     ),
                     const SizedBox(height: 8),
                     RadioListTile<PromoterRegistrationFilterState>(
-                        title: SelectableText(
-                            localization.promoter_overview_filter_show_unregistered,
-                            style: themeData.textTheme.bodySmall),
-                        value: PromoterRegistrationFilterState.unregistered,
+                      title: SelectableText(
+                          localization
+                              .promoter_overview_filter_show_unregistered,
+                          style: themeData.textTheme.bodySmall),
+                      value: PromoterRegistrationFilterState.unregistered,
                     ),
                   ],
                 ),
@@ -137,16 +139,16 @@ class _PromoterOverviewHeaderExpandableFilterState
                 child: Column(
                   children: [
                     RadioListTile<PromoterSortOrderFilterState>(
-                        title: SelectableText(
-                            localization.promoter_overview_filter_sortorder_desc,
-                            style: themeData.textTheme.bodySmall),
-                        value: PromoterSortOrderFilterState.desc,
+                      title: SelectableText(
+                          localization.promoter_overview_filter_sortorder_desc,
+                          style: themeData.textTheme.bodySmall),
+                      value: PromoterSortOrderFilterState.desc,
                     ),
                     RadioListTile<PromoterSortOrderFilterState>(
-                        title: SelectableText(
-                            localization.promoter_overview_filter_sortorder_asc,
-                            style: themeData.textTheme.bodySmall),
-                        value: PromoterSortOrderFilterState.asc,
+                      title: SelectableText(
+                          localization.promoter_overview_filter_sortorder_asc,
+                          style: themeData.textTheme.bodySmall),
+                      value: PromoterSortOrderFilterState.asc,
                     ),
                   ],
                 ),
