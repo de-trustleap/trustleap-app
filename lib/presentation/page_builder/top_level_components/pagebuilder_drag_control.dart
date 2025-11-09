@@ -22,21 +22,30 @@ class PagebuilderDragControl<T> extends StatelessWidget {
       return Icon(icon, color: color, size: size);
     }
 
-    return Draggable<PagebuilderReorderDragData<T>>(
-      data: provider.dragData,
-      onDragStarted: provider.onDragStarted,
-      onDragEnd: (_) => provider.onDragEnd(),
-      onDraggableCanceled: (_, __) => provider.onDragEnd(),
-      feedback: Transform.scale(
-        scale: 0.5,
-        alignment: Alignment.topLeft,
-        child: Opacity(
-          opacity: 0.7,
-          child: provider.buildFeedback(context),
+    return MouseRegion(
+      cursor: SystemMouseCursors.grab,
+      child: Draggable<PagebuilderReorderDragData<T>>(
+        data: provider.dragData,
+        onDragStarted: () {
+          provider.onDragStarted();
+        },
+        onDragEnd: (details) {
+          provider.onDragEnd();
+        },
+        onDraggableCanceled: (velocity, offset) {
+          provider.onDragEnd();
+        },
+        feedback: Transform.scale(
+          scale: 0.5,
+          alignment: Alignment.topLeft,
+          child: Opacity(
+            opacity: 0.7,
+            child: provider.buildFeedback(context),
+          ),
         ),
+        childWhenDragging: const SizedBox.shrink(),
+        child: Icon(icon, color: color, size: size),
       ),
-      childWhenDragging: const SizedBox.shrink(),
-      child: Icon(icon, color: color, size: size),
     );
   }
 }

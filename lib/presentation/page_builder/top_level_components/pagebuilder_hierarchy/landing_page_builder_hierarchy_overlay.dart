@@ -1,8 +1,10 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_tree_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_overlay_resize_controls.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingPageBuilderHierarchyOverlay extends StatefulWidget {
@@ -29,11 +31,25 @@ class _LandingPageBuilderHierarchyOverlayState
   Offset? _position;
   bool _isDragging = false;
   bool _isResizing = false;
+  bool _isInitialized = false;
 
   static const double _minWidth = 250.0;
   static const double _maxWidth = 600.0;
   static const double _minHeight = 300.0;
   static const double _maxHeight = 800.0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Force a rebuild after first frame to ensure widget tree is stable
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && !_isInitialized) {
+        setState(() {
+          _isInitialized = true;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,44 +64,46 @@ class _LandingPageBuilderHierarchyOverlayState
       top: _position!.dy,
       width: _overlayWidth,
       height: _overlayHeight,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onPanUpdate: (details) {
-          setState(() {
-            _position = Offset(
-              _position!.dx + details.delta.dx,
-              _position!.dy + details.delta.dy,
-            );
-          });
-        },
-        onPanStart: (details) {
-          setState(() {
-            _isDragging = true;
-          });
-        },
-        onPanEnd: (details) {
-          setState(() {
-            _isDragging = false;
-          });
-        },
-        child: Material(
-          elevation: (_isDragging || _isResizing) ? 12 : 8,
-          borderRadius: BorderRadius.circular(12),
-          child: Stack(
-            children: [
-              Container(
-                width: _overlayWidth,
-                height: _overlayHeight,
-                decoration: BoxDecoration(
-                  color: themeData.colorScheme.surface,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: themeData.colorScheme.outline.withValues(alpha: 0.2),
-                  ),
+      child: Material(
+        elevation: (_isDragging || _isResizing) ? 12 : 8,
+        borderRadius: BorderRadius.circular(12),
+        child: Stack(
+          children: [
+            Container(
+              width: _overlayWidth,
+              height: _overlayHeight,
+              decoration: BoxDecoration(
+                color: themeData.colorScheme.surface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: themeData.colorScheme.outline.withValues(alpha: 0.2),
                 ),
-                child: Column(
-                  children: [
-                    Container(
+              ),
+              child: Column(
+                children: [
+                  MouseRegion(
+                    cursor: SystemMouseCursors.move,
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onPanUpdate: (details) {
+                        setState(() {
+                          _position = Offset(
+                            _position!.dx + details.delta.dx,
+                            _position!.dy + details.delta.dy,
+                          );
+                        });
+                      },
+                      onPanStart: (details) {
+                        setState(() {
+                          _isDragging = true;
+                        });
+                      },
+                      onPanEnd: (details) {
+                        setState(() {
+                          _isDragging = false;
+                        });
+                      },
+                      child: Container(
                       height: 48,
                       decoration: BoxDecoration(
                         color: themeData.colorScheme.surfaceContainerHighest,
@@ -122,44 +140,50 @@ class _LandingPageBuilderHierarchyOverlayState
                         ],
                       ),
                     ),
-                    Expanded(
-                      child: LandingPageBuilderHierarchyTreeView(
-                        page: widget.page,
-                        onItemSelected: widget.onItemSelected,
-                      ),
                     ),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                    child: LandingPageBuilderHierarchyTreeView(
+                      key: const ValueKey('hierarchy-tree-view'),
+                      page: widget.page,
+                      onItemSelected: widget.onItemSelected,
+                      onSectionReorder: (oldIndex, newIndex) {
+                        Modular.get<PagebuilderBloc>()
+                            .add(ReorderSectionsEvent(oldIndex, newIndex));
+                      },
+                    ),
+                  ),
+                ],
               ),
-              // Resize controls
-              LandingPageBuilderHierarchyOverlayResizeControls(
-                width: _overlayWidth,
-                height: _overlayHeight,
-                position: _position!,
-                minWidth: _minWidth,
-                maxWidth: _maxWidth,
-                minHeight: _minHeight,
-                maxHeight: _maxHeight,
-                onResize: (width, height, position) {
-                  setState(() {
-                    _overlayWidth = width;
-                    _overlayHeight = height;
-                    _position = position;
-                  });
-                },
-                onResizeStart: () {
-                  setState(() {
-                    _isResizing = true;
-                  });
-                },
-                onResizeEnd: () {
-                  setState(() {
-                    _isResizing = false;
-                  });
-                },
-              ),
-            ],
-          ),
+            ),
+            // Resize controls
+            LandingPageBuilderHierarchyOverlayResizeControls(
+              width: _overlayWidth,
+              height: _overlayHeight,
+              position: _position!,
+              minWidth: _minWidth,
+              maxWidth: _maxWidth,
+              minHeight: _minHeight,
+              maxHeight: _maxHeight,
+              onResize: (width, height, position) {
+                setState(() {
+                  _overlayWidth = width;
+                  _overlayHeight = height;
+                  _position = position;
+                });
+              },
+              onResizeStart: () {
+                setState(() {
+                  _isResizing = true;
+                });
+              },
+              onResizeEnd: () {
+                setState(() {
+                  _isResizing = false;
+                });
+              },
+            ),
+          ],
         ),
       ),
     );
