@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2025-10-28 15:18:06
+Last updated: 2025-11-08 18:05:31
 
 ---
 
@@ -53,7 +53,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### cloud_firestore
 
-- **Version**: 6.0.3
+- **Version**: 6.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/firestore>
@@ -62,7 +62,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### cloud_functions
 
-- **Version**: 6.0.3
+- **Version**: 6.0.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/functions>
@@ -78,7 +78,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### crypto
 
-- **Version**: 3.0.6
+- **Version**: 3.0.7
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/core/tree/main/pkgs/crypto>
@@ -130,7 +130,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_app_check
 
-- **Version**: 0.4.1+1
+- **Version**: 0.4.1+2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/app-check>
@@ -139,7 +139,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_auth
 
-- **Version**: 6.1.1
+- **Version**: 6.1.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/auth>
@@ -148,7 +148,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_core
 
-- **Version**: 4.2.0
+- **Version**: 4.2.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/flutter/setup>
@@ -156,7 +156,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_storage
 
-- **Version**: 13.0.3
+- **Version**: 13.0.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/storage/flutter/start>
@@ -174,7 +174,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### flex_color_picker
 
-- **Version**: 3.7.1
+- **Version**: 3.7.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/rydmike/flex_color_picker>
@@ -340,7 +340,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### sentry_flutter
 
-- **Version**: 9.7.0
+- **Version**: 9.8.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/flutter/>
@@ -366,7 +366,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### uuid
 
-- **Version**: 4.5.1
+- **Version**: 4.5.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/Daegalus/dart-uuid>
@@ -396,7 +396,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### _flutterfire_internals
 
-- **Version**: 1.3.63
+- **Version**: 1.3.64
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/firestore>
@@ -574,7 +574,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_firestore_platform_interface
 
-- **Version**: 7.0.3
+- **Version**: 7.0.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_platform_interface>
@@ -582,7 +582,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_firestore_web
 
-- **Version**: 5.0.3
+- **Version**: 5.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_web>
@@ -590,7 +590,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_functions_platform_interface
 
-- **Version**: 5.8.6
+- **Version**: 5.8.7
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_functions/cloud_functions_platform_interface>
@@ -598,7 +598,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_functions_web
 
-- **Version**: 5.0.3
+- **Version**: 5.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_functions/cloud_functions_web>
@@ -623,7 +623,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cross_file
 
-- **Version**: 0.3.4+2
+- **Version**: 0.3.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/cross_file>
@@ -779,7 +779,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_app_check_platform_interface
 
-- **Version**: 0.2.1+1
+- **Version**: 0.2.1+2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_app_check/firebase_app_check_platform_interface>
@@ -787,7 +787,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_app_check_web
 
-- **Version**: 0.2.1+1
+- **Version**: 0.2.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_app_check/firebase_app_check_web>
@@ -795,7 +795,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_auth_platform_interface
 
-- **Version**: 8.1.3
+- **Version**: 8.1.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_auth/firebase_auth_platform_interface>
@@ -803,7 +803,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_auth_web
 
-- **Version**: 6.0.4
+- **Version**: 6.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_auth/firebase_auth_web>
@@ -819,7 +819,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_core_web
 
-- **Version**: 3.2.0
+- **Version**: 3.3.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_web>
@@ -827,7 +827,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_storage_platform_interface
 
-- **Version**: 5.2.14
+- **Version**: 5.2.15
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_platform_interface>
@@ -835,7 +835,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_storage_web
 
-- **Version**: 3.10.21
+- **Version**: 3.11.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_web>
@@ -852,7 +852,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### flex_seed_scheme
 
-- **Version**: 3.5.1
+- **Version**: 3.6.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/rydmike/flex_seed_scheme>
@@ -1133,7 +1133,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_android
 
-- **Version**: 0.8.13+5
+- **Version**: 0.8.13+7
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_android>
@@ -1214,7 +1214,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### jni
 
-- **Version**: 0.14.2
+- **Version**: 0.15.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/native/tree/main/pkgs/jni>
@@ -1387,7 +1387,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### objective_c
 
-- **Version**: 8.1.0
+- **Version**: 9.0.0+1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/native/tree/main/pkgs/objective_c>
@@ -1642,7 +1642,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### sentry
 
-- **Version**: 9.7.0
+- **Version**: 9.8.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/dart/>
@@ -1746,15 +1746,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/tools/tree/main/pkgs/source_span>
 - **Description**: Provides a standard representation for source code locations and spans.
-
-### sprintf
-
-- **Version**: 7.0.0
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/Naddiseo/dart-sprintf>
-- **Description**: Dart implementation of sprintf. Provides simple printf like formatting such as
-  sprintf("hello %s", ["world"]);
 
 ### sqflite
 

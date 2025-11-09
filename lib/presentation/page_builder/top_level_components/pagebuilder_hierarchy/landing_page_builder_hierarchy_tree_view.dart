@@ -4,7 +4,9 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dar
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_drag_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_helper.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,11 +14,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 class LandingPageBuilderHierarchyTreeView extends StatefulWidget {
   final PageBuilderPage page;
   final Function(String widgetId, bool isSection) onItemSelected;
+  final Function(int oldIndex, int newIndex)? onSectionReorder;
 
   const LandingPageBuilderHierarchyTreeView({
     super.key,
     required this.page,
     required this.onItemSelected,
+    this.onSectionReorder,
   });
 
   @override
@@ -47,13 +51,13 @@ class _LandingPageBuilderHierarchyTreeViewState
       );
     }
 
+    _hierarchyHelper ??= LandingPageBuilderHierarchyHelper(
+      page: widget.page,
+    );
+
     return BlocBuilder<PagebuilderSelectionCubit, String?>(
       bloc: selectionCubit,
       builder: (context, selectedWidgetId) {
-        _hierarchyHelper ??= LandingPageBuilderHierarchyHelper(
-          page: widget.page,
-        );
-
         // Auto-expand tree when selection changes
         if (selectedWidgetId != null &&
             selectedWidgetId != _lastSelectedWidgetId) {
@@ -63,14 +67,24 @@ class _LandingPageBuilderHierarchyTreeViewState
           _lastSelectedWidgetId = selectedWidgetId;
         }
 
-        return ListView.builder(
+        return ListView(
           padding: const EdgeInsets.all(8),
-          itemCount: sections.length,
-          itemBuilder: (context, index) {
-            final section = sections[index];
-            return _buildSectionItem(
-                section, selectedWidgetId, index + 1, themeData, localization);
-          },
+          children: [
+            PagebuilderReorderableElement<PageBuilderSection>(
+              key: const ValueKey('hierarchy-overlay-sections'),
+              containerId: 'hierarchy-overlay-sections',
+              items: sections,
+              getItemId: (section) => section.id.value,
+              isSection: (section) => true,
+              onReorder: (oldIndex, newIndex) {
+                widget.onSectionReorder?.call(oldIndex, newIndex);
+              },
+              buildChild: (section, index) {
+                return _buildSectionItem(
+                    section, selectedWidgetId, index + 1, themeData, localization);
+              },
+            ),
+          ],
         );
       },
     );
@@ -142,6 +156,14 @@ class _LandingPageBuilderHierarchyTreeViewState
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
+                    ),
+                    const SizedBox(width: 8),
+                    PagebuilderDragControl<PageBuilderSection>(
+                      icon: Icons.drag_indicator,
+                      color: isSelected
+                          ? Colors.white
+                          : themeData.colorScheme.onSurfaceVariant,
+                      size: 16,
                     ),
                   ],
                 ),
