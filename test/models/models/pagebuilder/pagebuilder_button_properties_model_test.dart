@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_button_properties_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
@@ -14,13 +15,13 @@ void main() {
       final model = PageBuilderButtonPropertiesModel(
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           backgroundPaint: null,
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = PageBuilderButtonPropertiesModel(
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(80.0),
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           backgroundPaint: null,
           textProperties: {"text": "Test", "fontSize": 16.0});
       // When
@@ -36,13 +37,13 @@ void main() {
       final model = PageBuilderButtonPropertiesModel(
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = {
         "width": 200.0,
         "height": 60.0,
-        "borderRadius": 12,
+        "border": {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
         "backgroundPaint": {"color": "FFFFFFFF"},
         "textProperties": {"text": "Test", "fontSize": 16.0}
       };
@@ -59,14 +60,14 @@ void main() {
       final map = {
         "width": 200.0,
         "height": 60.0,
-        "borderRadius": 12.0,
+        "border": {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
         "backgroundPaint": {"color": "FFFFFFFF"},
         "textProperties": {"text": "Test", "fontSize": 16.0}
       };
       final expectedResult = PageBuilderButtonPropertiesModel(
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {"text": "Test", "fontSize": 16.0});
       // When
@@ -84,13 +85,13 @@ void main() {
       final model = PageBuilderButtonPropertiesModel(
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {"text": "Test", "fontSize": 16.0});
       final expectedResult = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(60.0),
-          borderRadius: 12,
+          border: PagebuilderBorder(radius: 12.0, width: 2.0, color: Color(0xFFFF6B00)),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
@@ -116,7 +117,7 @@ void main() {
       final model = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(60.0),
-          borderRadius: 12,
+          border: PagebuilderBorder(radius: 12.0, width: 2.0, color: Color(0xFFFF6B00)),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
@@ -130,7 +131,7 @@ void main() {
       final expectedResult = PageBuilderButtonPropertiesModel(
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {
             "text": "Test",
@@ -150,7 +151,7 @@ void main() {
       final properties1 = PageBuilderButtonPropertiesModel(
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {
             "text": "Test",
@@ -160,7 +161,7 @@ void main() {
       final properties2 = PageBuilderButtonPropertiesModel(
           width: const PagebuilderResponsiveOrConstantModel.constant(200.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(60.0),
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           backgroundPaint: {"color": "FFFFFFFF"},
           textProperties: {
             "text": "Test",

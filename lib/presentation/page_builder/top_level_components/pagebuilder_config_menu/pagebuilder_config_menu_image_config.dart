@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -85,7 +86,7 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
       builder: (context, currentBreakpoint) {
         final helper = PagebuilderResponsiveConfigHelper(currentBreakpoint);
 
-        return Column(children: [
+        return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           PagebuilderConfigMenuDrowdown(
               title: localization.pagebuilder_image_config_content_mode,
               initialValue: helper.getValue(props?.contentMode) ?? BoxFit.cover,
@@ -112,16 +113,6 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
                 onChangedLocal(props?.copyWith(overlayPaint: paint));
               }),
           const SizedBox(height: 20),
-          PagebuilderNumberStepperControl(
-              title: localization.pagebuilder_image_config_border_radius,
-              initialValue: props?.borderRadius?.toInt() ?? 0,
-              minValue: 0,
-              maxValue: 1000,
-              onSelected: (radius) {
-                onChangedLocal(
-                    props?.copyWith(borderRadius: radius.toDouble()));
-              }),
-          const SizedBox(height: 20),
           PagebuilderSizeControl(
               width: helper.getValue(props?.width) ?? 0,
               height: helper.getValue(props?.height) ?? 0,
@@ -133,6 +124,46 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
                 onChangedLocal(props?.copyWith(
                     width: updatedWidth, height: updatedHeight));
               }),
+          const SizedBox(height: 30),
+          Text(
+            localization.pagebuilder_image_config_border_title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 20),
+          PagebuilderNumberStepperControl(
+              title: localization.pagebuilder_image_config_border_radius,
+              initialValue: props?.border?.radius?.toInt() ?? 0,
+              minValue: 0,
+              maxValue: 1000,
+              onSelected: (radius) {
+                final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                    .copyWith(radius: radius.toDouble());
+                onChangedLocal(
+                    props?.copyWith(border: newBorder));
+              }),
+          const SizedBox(height: 20),
+          PagebuilderNumberStepperControl(
+              title: localization.pagebuilder_image_config_border_width,
+              initialValue: props?.border?.width?.toInt() ?? 0,
+              minValue: 0,
+              maxValue: 100,
+              onSelected: (width) {
+                final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                    .copyWith(width: width.toDouble());
+                onChangedLocal(
+                    props?.copyWith(border: newBorder));
+              }),
+          const SizedBox(height: 20),
+          PagebuilderColorControl(
+              title: localization.pagebuilder_image_config_border_color,
+              initialColor: props?.border?.color ?? Colors.transparent,
+              onColorSelected: (color) {
+                final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                    .copyWith(color: color);
+                onChangedLocal(
+                    props?.copyWith(border: newBorder));
+              },
+              onGradientSelected: null),
         ]);
       },
     );

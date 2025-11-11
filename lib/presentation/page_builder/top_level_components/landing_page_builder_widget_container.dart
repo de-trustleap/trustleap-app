@@ -125,10 +125,21 @@ class _LandingPageBuilderWidgetContainerState
                                             ?.toFlutterGradient()
                                         : null,
                                     borderRadius: widget
-                                                .properties?.borderRadius !=
+                                                .properties?.border?.radius !=
                                             null
                                         ? BorderRadius.circular(
-                                            widget.properties!.borderRadius!)
+                                            widget.properties!.border!.radius!)
+                                        : null,
+                                    border: widget.properties?.border?.width !=
+                                                null &&
+                                            widget.properties?.border?.color !=
+                                                null
+                                        ? Border.all(
+                                            width: widget
+                                                .properties!.border!.width!,
+                                            color: widget
+                                                .properties!.border!.color!,
+                                          )
                                         : null,
                                     boxShadow: widget.properties?.shadow != null
                                         ? [
@@ -162,13 +173,12 @@ class _LandingPageBuilderWidgetContainerState
                                               null) ...[
                                         Positioned.fill(
                                             child: ClipRRect(
-                                          borderRadius:
-                                              widget.properties?.borderRadius !=
-                                                      null
-                                                  ? BorderRadius.circular(widget
-                                                      .properties!
-                                                      .borderRadius!)
-                                                  : BorderRadius.circular(0),
+                                          borderRadius: widget.properties
+                                                      ?.border?.radius !=
+                                                  null
+                                              ? BorderRadius.circular(widget
+                                                  .properties!.border!.radius!)
+                                              : BorderRadius.circular(0),
                                           child: Image.network(
                                               widget.model.background!
                                                   .imageProperties!.url!,
@@ -190,11 +200,12 @@ class _LandingPageBuilderWidgetContainerState
                                                     .localImage!),
                                               ),
                                               borderRadius: widget.properties
-                                                          ?.borderRadius !=
+                                                          ?.border?.radius !=
                                                       null
                                                   ? BorderRadius.circular(widget
                                                       .properties!
-                                                      .borderRadius!)
+                                                      .border!
+                                                      .radius!)
                                                   : null,
                                             ),
                                           ),
@@ -214,10 +225,12 @@ class _LandingPageBuilderWidgetContainerState
                                         Positioned.fill(
                                             child: DecoratedBox(
                                                 decoration: BoxDecoration(
-                                                    borderRadius: widget.properties?.borderRadius != null
+                                                    borderRadius: widget.properties?.border?.radius != null
                                                         ? BorderRadius.circular(
-                                                            widget.properties!
-                                                                .borderRadius!)
+                                                            widget
+                                                                .properties!
+                                                                .border!
+                                                                .radius!)
                                                         : null,
                                                     color: widget.model.background!.overlayPaint!.isColor == true
                                                         ? widget
@@ -313,3 +326,6 @@ class _LandingPageBuilderWidgetContainerState
     return double.infinity;
   }
 }
+
+// TODO: BACKEND ANPASSEN FÜR BORDER
+// TODO: TEMPLATES ANPASSEN FÜR BORDER

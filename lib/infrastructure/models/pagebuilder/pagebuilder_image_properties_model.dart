@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_pr
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/boxfit_mapper.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_border_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ import 'package:flutter/material.dart';
 class PageBuilderImagePropertiesModel extends Equatable
     implements PageBuilderProperties {
   final String? url;
-  final double? borderRadius;
+  final Map<String, dynamic>? border;
   final PagebuilderResponsiveOrConstantModel<double>? width;
   final PagebuilderResponsiveOrConstantModel<double>? height;
   final PagebuilderResponsiveOrConstantModel<String>? contentMode;
@@ -22,7 +23,7 @@ class PageBuilderImagePropertiesModel extends Equatable
 
   const PageBuilderImagePropertiesModel(
       {required this.url,
-      required this.borderRadius,
+      required this.border,
       required this.width,
       required this.height,
       required this.contentMode,
@@ -33,7 +34,7 @@ class PageBuilderImagePropertiesModel extends Equatable
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
     if (url != null) map['url'] = url;
-    if (borderRadius != null) map['borderRadius'] = borderRadius;
+    if (border != null) map['border'] = border;
     if (width != null) map['width'] = width!.toMapValue();
     if (height != null) map['height'] = height!.toMapValue();
     if (contentMode != null) map['contentMode'] = contentMode!.toMapValue();
@@ -46,8 +47,9 @@ class PageBuilderImagePropertiesModel extends Equatable
   factory PageBuilderImagePropertiesModel.fromMap(Map<String, dynamic> map) {
     return PageBuilderImagePropertiesModel(
         url: map['url'] != null ? map['url'] as String : null,
-        borderRadius:
-            map['borderRadius'] != null ? map['borderRadius'] as double : null,
+        border: map['border'] != null
+            ? map['border'] as Map<String, dynamic>
+            : null,
         width: PagebuilderResponsiveOrConstantModel.fromMapValue(
           map['width'],
           (v) => v as double,
@@ -73,7 +75,7 @@ class PageBuilderImagePropertiesModel extends Equatable
 
   PageBuilderImagePropertiesModel copyWith(
       {String? url,
-      double? borderRadius,
+      Map<String, dynamic>? border,
       PagebuilderResponsiveOrConstantModel<double>? width,
       PagebuilderResponsiveOrConstantModel<double>? height,
       PagebuilderResponsiveOrConstantModel<String>? contentMode,
@@ -82,7 +84,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       String? newImageBase64}) {
     return PageBuilderImagePropertiesModel(
         url: url ?? this.url,
-        borderRadius: borderRadius ?? this.borderRadius,
+        border: border ?? this.border,
         width: width ?? this.width,
         height: height ?? this.height,
         contentMode: contentMode ?? this.contentMode,
@@ -94,7 +96,9 @@ class PageBuilderImagePropertiesModel extends Equatable
   PageBuilderImageProperties toDomain() {
     return PageBuilderImageProperties(
         url: url,
-        borderRadius: borderRadius,
+        border: border != null
+            ? PagebuilderBorderModel.fromMap(border!).toDomain()
+            : null,
         width: width?.toDomain(),
         height: height?.toDomain(),
         contentMode: _contentModeToDomain(contentMode),
@@ -149,7 +153,9 @@ class PageBuilderImagePropertiesModel extends Equatable
       PageBuilderImageProperties properties) {
     return PageBuilderImagePropertiesModel(
         url: properties.url,
-        borderRadius: properties.borderRadius,
+        border: properties.border != null
+            ? PagebuilderBorderModel.fromDomain(properties.border!).toMap()
+            : null,
         width: PagebuilderResponsiveOrConstantModel.fromDomain(properties.width),
         height:
             PagebuilderResponsiveOrConstantModel.fromDomain(properties.height),
@@ -207,7 +213,7 @@ class PageBuilderImagePropertiesModel extends Equatable
   @override
   List<Object?> get props => [
         url,
-        borderRadius,
+        border,
         width,
         height,
         contentMode,

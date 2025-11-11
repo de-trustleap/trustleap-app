@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:flutter/material.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
@@ -12,7 +13,7 @@ void main() {
       // Given
       final model = PageBuilderImagePropertiesModel(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           width: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
@@ -21,7 +22,7 @@ void main() {
           overlayPaint: {"color": "FF000000"});
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           width: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(400.0),
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
@@ -40,7 +41,7 @@ void main() {
       // Given
       final model = PageBuilderImagePropertiesModel(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           width: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
@@ -49,7 +50,7 @@ void main() {
           overlayPaint: {"color": "FF000000"});
       final expectedResult = {
         "url": "https://test.de",
-        "borderRadius": 12.0,
+        "border": {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
         "width": 300.0,
         "height": 300.0,
         "contentMode": "cover",
@@ -69,7 +70,7 @@ void main() {
       // Given
       final map = {
         "url": "https://test.de",
-        "borderRadius": 12.0,
+        "border": {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
         "width": 300.0,
         "height": 300.0,
         "contentMode": "cover",
@@ -79,7 +80,7 @@ void main() {
       };
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           width: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
@@ -100,7 +101,7 @@ void main() {
       // Given
       final model = PageBuilderImagePropertiesModel(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           width: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
@@ -109,7 +110,7 @@ void main() {
           overlayPaint: {"color": "FF000000"});
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: PagebuilderBorder(radius: 12.0, width: 2.0, color: Color(0xFFFF6B00)),
           width: const PagebuilderResponsiveOrConstant.constant(300.0),
           height: const PagebuilderResponsiveOrConstant.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
@@ -129,7 +130,7 @@ void main() {
       // Given
       final model = PageBuilderImageProperties(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: PagebuilderBorder(radius: 12.0, width: 2.0, color: Color(0xFFFF6B00)),
           width: const PagebuilderResponsiveOrConstant.constant(300.0),
           height: const PagebuilderResponsiveOrConstant.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
@@ -137,7 +138,7 @@ void main() {
           overlayPaint: const PagebuilderPaint.color(Colors.black));
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           width: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
@@ -156,7 +157,7 @@ void main() {
       // Given
       final properties1 = PageBuilderImagePropertiesModel(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           width: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
@@ -165,7 +166,7 @@ void main() {
           overlayPaint: {"color": "FF000000"});
       final properties2 = PageBuilderImagePropertiesModel(
           url: "https://test.de",
-          borderRadius: 12.0,
+          border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
           width: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           height: const PagebuilderResponsiveOrConstantModel.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),

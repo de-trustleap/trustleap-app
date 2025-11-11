@@ -128,7 +128,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
           properties: props?.imageProperties ??
               const PageBuilderImageProperties(
                   url: null,
-                  borderRadius: null,
+                  border: null,
                   width: null,
                   height: null,
                   contentMode: null,

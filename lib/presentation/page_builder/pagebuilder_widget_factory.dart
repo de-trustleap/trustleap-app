@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
@@ -83,7 +84,7 @@ class PagebuilderWidgetFactory {
       elementType: PageBuilderWidgetType.image,
       properties: const PageBuilderImageProperties(
         url: null,
-        borderRadius: 0.0,
+        border: null,
         width: PagebuilderResponsiveOrConstant.constant(300.0),
         height: PagebuilderResponsiveOrConstant.constant(200.0),
         contentMode: PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
@@ -110,7 +111,7 @@ class PagebuilderWidgetFactory {
       id: UniqueID(),
       elementType: PageBuilderWidgetType.container,
       properties: const PageBuilderContainerProperties(
-        borderRadius: 0.0,
+        border: null,
         shadow: null,
       ),
       hoverProperties: null,
@@ -302,7 +303,8 @@ class PagebuilderWidgetFactory {
         buttonProperties: PageBuilderButtonProperties(
             width: const PagebuilderResponsiveOrConstant.constant(200),
             height: const PagebuilderResponsiveOrConstant.constant(70),
-            borderRadius: 4,
+            border:
+                const PagebuilderBorder(width: null, radius: 4, color: null),
             backgroundPaint: PagebuilderPaint(
                 color: Color(ColorUtility.getHexIntFromString("FF000000"))),
             textProperties: PageBuilderTextProperties(
@@ -339,7 +341,7 @@ class PagebuilderWidgetFactory {
         buttonProperties: PageBuilderButtonProperties(
           width: PagebuilderResponsiveOrConstant.constant(200.0),
           height: PagebuilderResponsiveOrConstant.constant(50.0),
-          borderRadius: 8.0,
+          border: PagebuilderBorder(width: null, radius: 8, color: null),
           backgroundPaint: null,
           textProperties: PageBuilderTextProperties(
             text: "Zur Sektion",

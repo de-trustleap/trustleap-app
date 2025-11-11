@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -82,17 +83,6 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
                     width: updatedWidth, height: updatedHeight));
               }),
           const SizedBox(height: 20),
-          PagebuilderNumberStepperControl(
-              title:
-                  localization.pagebuilder_button_config_button_border_radius,
-              initialValue: props?.borderRadius?.toInt() ?? 0,
-              minValue: 0,
-              maxValue: 1000,
-              onSelected: (borderRadius) {
-                onChangedLocal(
-                    props?.copyWith(borderRadius: borderRadius.toDouble()));
-              }),
-          const SizedBox(height: 20),
           PagebuilderColorControl(
               title: localization
                   .pagebuilder_button_config_button_background_color,
@@ -106,6 +96,45 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
                 final paint = PagebuilderPaint.gradient(gradient);
                 onChangedLocal(props?.copyWith(backgroundPaint: paint));
               }),
+          const SizedBox(height: 30),
+          Text(
+            localization.pagebuilder_button_config_button_border_title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 20),
+          PagebuilderNumberStepperControl(
+              title:
+                  localization.pagebuilder_button_config_button_border_radius,
+              initialValue: props?.border?.radius?.toInt() ?? 0,
+              minValue: 0,
+              maxValue: 1000,
+              onSelected: (radius) {
+                final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                    .copyWith(radius: radius.toDouble());
+                onChangedLocal(props?.copyWith(border: newBorder));
+              }),
+          const SizedBox(height: 20),
+          PagebuilderNumberStepperControl(
+              title:
+                  localization.pagebuilder_button_config_button_border_width,
+              initialValue: props?.border?.width?.toInt() ?? 0,
+              minValue: 0,
+              maxValue: 100,
+              onSelected: (width) {
+                final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                    .copyWith(width: width.toDouble());
+                onChangedLocal(props?.copyWith(border: newBorder));
+              }),
+          const SizedBox(height: 20),
+          PagebuilderColorControl(
+              title: localization.pagebuilder_button_config_button_border_color,
+              initialColor: props?.border?.color ?? Colors.transparent,
+              onColorSelected: (color) {
+                final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                    .copyWith(color: color);
+                onChangedLocal(props?.copyWith(border: newBorder));
+              },
+              onGradientSelected: null),
           const SizedBox(height: 40),
           Text(localization.pagebuilder_button_config_button_text_configuration,
               style: themeData.textTheme.bodyMedium

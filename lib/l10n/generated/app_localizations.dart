@@ -2699,6 +2699,24 @@ abstract class AppLocalizations {
   /// **'Radius'**
   String get pagebuilder_image_config_border_radius;
 
+  /// Title for border section in image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border'**
+  String get pagebuilder_image_config_border_title;
+
+  /// Title for border width in image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border width'**
+  String get pagebuilder_image_config_border_width;
+
+  /// Title for border color in image configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border color'**
+  String get pagebuilder_image_config_border_color;
+
   /// Title for image content menu in pagebuilder config menu
   ///
   /// In en, this message translates to:
@@ -2716,6 +2734,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shadow'**
   String get landingpage_pagebuilder_container_config_container_shadow;
+
+  /// Title for border section in container configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border'**
+  String get landingpage_pagebuilder_container_config_container_border_title;
+
+  /// Title for border width in container configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border width'**
+  String get landingpage_pagebuilder_container_config_container_border_width;
+
+  /// Title for border color in container configuration in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border color'**
+  String get landingpage_pagebuilder_container_config_container_border_color;
 
   /// Title for the collapsible view for the row configuration in the pagebuilder row configuration.
   ///
@@ -2831,17 +2867,35 @@ abstract class AppLocalizations {
   /// **'Height'**
   String get pagebuilder_button_config_button_height;
 
+  /// Menu for button background color in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Background color'**
+  String get pagebuilder_button_config_button_background_color;
+
+  /// Title for border section in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border'**
+  String get pagebuilder_button_config_button_border_title;
+
   /// Menu for button border radius in the button configuration in the pagebuilder config menu
   ///
   /// In en, this message translates to:
   /// **'Radius'**
   String get pagebuilder_button_config_button_border_radius;
 
-  /// Menu for button background color in the button configuration in the pagebuilder config menu
+  /// Menu for button border width in the button configuration in the pagebuilder config menu
   ///
   /// In en, this message translates to:
-  /// **'Background color'**
-  String get pagebuilder_button_config_button_background_color;
+  /// **'Border width'**
+  String get pagebuilder_button_config_button_border_width;
+
+  /// Menu for button border color in the button configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Border color'**
+  String get pagebuilder_button_config_button_border_color;
 
   /// Title for button text configuration in the button configuration in the pagebuilder config menu
   ///
