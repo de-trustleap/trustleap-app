@@ -2,6 +2,7 @@
 import 'dart:typed_data';
 
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/material.dart';
 class PageBuilderImageProperties extends Equatable
     implements PageBuilderProperties {
   final String? url;
-  final double? borderRadius;
+  final PagebuilderBorder? border;
   final PagebuilderResponsiveOrConstant<double>? width;
   final PagebuilderResponsiveOrConstant<double>? height;
   final PagebuilderResponsiveOrConstant<BoxFit>? contentMode;
@@ -22,7 +23,7 @@ class PageBuilderImageProperties extends Equatable
 
   const PageBuilderImageProperties(
       {required this.url,
-      required this.borderRadius,
+      required this.border,
       required this.width,
       required this.height,
       required this.contentMode,
@@ -33,7 +34,7 @@ class PageBuilderImageProperties extends Equatable
 
   PageBuilderImageProperties copyWith(
       {String? url,
-      double? borderRadius,
+      PagebuilderBorder? border,
       PagebuilderResponsiveOrConstant<double>? width,
       PagebuilderResponsiveOrConstant<double>? height,
       PagebuilderResponsiveOrConstant<BoxFit>? contentMode,
@@ -43,7 +44,7 @@ class PageBuilderImageProperties extends Equatable
       bool? hasChanged}) {
     return PageBuilderImageProperties(
         url: url ?? this.url,
-        borderRadius: borderRadius ?? this.borderRadius,
+        border: border ?? this.border,
         width: width ?? this.width,
         height: height ?? this.height,
         contentMode: contentMode ?? this.contentMode,
@@ -56,7 +57,7 @@ class PageBuilderImageProperties extends Equatable
   PageBuilderImageProperties deepCopy() {
     return PageBuilderImageProperties(
       url: url,
-      borderRadius: borderRadius,
+      border: border?.deepCopy(),
       width: width?.deepCopy(),
       height: height?.deepCopy(),
       contentMode: contentMode?.deepCopy(),
@@ -70,7 +71,7 @@ class PageBuilderImageProperties extends Equatable
   @override
   List<Object?> get props => [
         url,
-        borderRadius,
+        border,
         width,
         height,
         contentMode,

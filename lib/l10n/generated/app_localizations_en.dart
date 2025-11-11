@@ -1519,6 +1519,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pagebuilder_image_config_border_radius => 'Radius';
 
   @override
+  String get pagebuilder_image_config_border_title => 'Border';
+
+  @override
+  String get pagebuilder_image_config_border_width => 'Border width';
+
+  @override
+  String get pagebuilder_image_config_border_color => 'Border color';
+
+  @override
   String get pagebuilder_image_config_image_content => 'Image content';
 
   @override
@@ -1528,6 +1537,18 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get landingpage_pagebuilder_container_config_container_shadow =>
       'Shadow';
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_border_title =>
+      'Border';
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_border_width =>
+      'Border width';
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_border_color =>
+      'Border color';
 
   @override
   String get landingpage_pagebuilder_row_config_row_title =>
@@ -1599,11 +1620,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pagebuilder_button_config_button_height => 'Height';
 
   @override
+  String get pagebuilder_button_config_button_background_color =>
+      'Background color';
+
+  @override
+  String get pagebuilder_button_config_button_border_title => 'Border';
+
+  @override
   String get pagebuilder_button_config_button_border_radius => 'Radius';
 
   @override
-  String get pagebuilder_button_config_button_background_color =>
-      'Background color';
+  String get pagebuilder_button_config_button_border_width => 'Border width';
+
+  @override
+  String get pagebuilder_button_config_button_border_color => 'Border color';
 
   @override
   String get pagebuilder_button_config_button_text_configuration =>

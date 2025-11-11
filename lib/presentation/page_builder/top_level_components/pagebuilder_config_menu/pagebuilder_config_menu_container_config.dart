@@ -1,9 +1,11 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker/pagebuilder_color_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_shadow_control.dart';
@@ -74,16 +76,7 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return Column(children: [
-      PagebuilderNumberStepperControl(
-          title: localization.pagebuilder_image_config_border_radius,
-          initialValue: props?.borderRadius?.toInt() ?? 0,
-          minValue: 0,
-          maxValue: 1000,
-          onSelected: (radius) {
-            onChangedLocal(props?.copyWith(borderRadius: radius.toDouble()));
-          }),
-      const SizedBox(height: 20),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       PagebuilderShadowControl(
           title: localization
               .landingpage_pagebuilder_container_config_container_shadow,
@@ -91,7 +84,44 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
           showSpreadRadius: true,
           onSelected: (shadow) {
             onChangedLocal(props?.copyWith(shadow: shadow));
-          })
+          }),
+      const SizedBox(height: 30),
+      Text(
+        localization.landingpage_pagebuilder_container_config_container_border_title,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      const SizedBox(height: 20),
+      PagebuilderNumberStepperControl(
+          title: localization.pagebuilder_image_config_border_radius,
+          initialValue: props?.border?.radius?.toInt() ?? 0,
+          minValue: 0,
+          maxValue: 1000,
+          onSelected: (radius) {
+            final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                .copyWith(radius: radius.toDouble());
+            onChangedLocal(props?.copyWith(border: newBorder));
+          }),
+      const SizedBox(height: 20),
+      PagebuilderNumberStepperControl(
+          title: localization.landingpage_pagebuilder_container_config_container_border_width,
+          initialValue: props?.border?.width?.toInt() ?? 0,
+          minValue: 0,
+          maxValue: 100,
+          onSelected: (width) {
+            final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                .copyWith(width: width.toDouble());
+            onChangedLocal(props?.copyWith(border: newBorder));
+          }),
+      const SizedBox(height: 20),
+      PagebuilderColorControl(
+          title: localization.landingpage_pagebuilder_container_config_container_border_color,
+          initialColor: props?.border?.color ?? Colors.transparent,
+          onColorSelected: (color) {
+            final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                .copyWith(color: color);
+            onChangedLocal(props?.copyWith(border: newBorder));
+          },
+          onGradientSelected: null),
     ]);
   }
 }

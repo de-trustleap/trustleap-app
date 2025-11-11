@@ -96,14 +96,27 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
     return widget.properties.height?.getValueForBreakpoint(breakpoint);
   }
 
+  BoxDecoration _getBorderDecoration({DecorationImage? image}) {
+    return BoxDecoration(
+      borderRadius:
+          BorderRadius.circular(widget.properties.border?.radius ?? 0),
+      border: widget.properties.border?.width != null &&
+              widget.properties.border?.color != null
+          ? Border.all(
+              width: widget.properties.border!.width!,
+              color: widget.properties.border!.color!,
+            )
+          : null,
+      image: image,
+    );
+  }
+
   Widget _imageContainer(
       ImageProvider child, PagebuilderResponsiveBreakpoint breakpoint) {
     return Container(
         width: _getWidth(breakpoint),
         height: _getHeight(breakpoint),
-        decoration: BoxDecoration(
-            borderRadius:
-                BorderRadius.circular(widget.properties.borderRadius ?? 0),
+        decoration: _getBorderDecoration(
             image: DecorationImage(fit: _getBoxFit(breakpoint), image: child)));
   }
 
@@ -133,20 +146,23 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
                   _imageContainer(
                       MemoryImage(widget.properties.localImage!), breakpoint)
                 ] else if (widget.properties.url != null) ...[
-                  NetworkImageView(
-                    imageURL: widget.properties.url!,
-                    cornerRadius:
-                        widget.isConfigMenu ? 0 : widget.properties.borderRadius,
-                    width: width,
-                    height: height,
-                    contentMode: boxFit,
+                  Container(
+                    decoration: _getBorderDecoration(),
+                    child: NetworkImageView(
+                      imageURL: widget.properties.url!,
+                      cornerRadius:
+                          widget.isConfigMenu ? 0 : widget.properties.border?.radius,
+                      width: width,
+                      height: height,
+                      contentMode: boxFit,
+                    ),
                   )
                 ] else ...[
                   Container(
                     width: width,
                     height: height,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
+                    decoration: _getBorderDecoration(
+                      image: const DecorationImage(
                         image: AssetImage("assets/images/placeholder.png"),
                       ),
                     ),
@@ -156,11 +172,11 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
                     widget.properties.overlayPaint != null) ...[
                   ClipRRect(
                       borderRadius: BorderRadius.circular(
-                          widget.properties.borderRadius ?? 0),
+                          widget.properties.border?.radius ?? 0),
                       child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
-                                  widget.properties.borderRadius ?? 0),
+                                  widget.properties.border?.radius ?? 0),
                               color:
                                   widget.properties.overlayPaint?.isColor == true
                                       ? widget.properties.overlayPaint?.color

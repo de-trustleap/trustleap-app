@@ -43,7 +43,14 @@ class PageBuilderButtonView extends StatelessWidget {
             gradient: properties.backgroundPaint?.isGradient == true
                 ? properties.backgroundPaint?.gradient?.toFlutterGradient()
                 : null,
-            borderRadius: BorderRadius.circular(properties.borderRadius ?? 0)),
+            borderRadius: BorderRadius.circular(properties.border?.radius ?? 0),
+            border: properties.border?.width != null &&
+                    properties.border?.color != null
+                ? Border.all(
+                    width: properties.border!.width!,
+                    color: properties.border!.color!,
+                  )
+                : null),
         alignment: AlignmentMapper.getAlignmentFromTextAlignment(
             properties.textProperties?.alignment?.getValue()),
         child: Text(properties.textProperties?.text ?? "",

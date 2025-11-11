@@ -1783,6 +1783,18 @@
     "@pagebuilder_image_config_border_radius": {
         "description": "Title for radius in image configuration in pagebuilder config menu"
     },
+    "pagebuilder_image_config_border_title": "Border",
+    "@pagebuilder_image_config_border_title": {
+        "description": "Title for border section in image configuration in pagebuilder config menu"
+    },
+    "pagebuilder_image_config_border_width": "Border width",
+    "@pagebuilder_image_config_border_width": {
+        "description": "Title for border width in image configuration in pagebuilder config menu"
+    },
+    "pagebuilder_image_config_border_color": "Border color",
+    "@pagebuilder_image_config_border_color": {
+        "description": "Title for border color in image configuration in pagebuilder config menu"
+    },
     "pagebuilder_image_config_image_content": "Image content",
     "@pagebuilder_image_config_image_content": {
         "description": "Title for image content menu in pagebuilder config menu"
@@ -1794,6 +1806,18 @@
     "landingpage_pagebuilder_container_config_container_shadow": "Shadow",
     "@landingpage_pagebuilder_container_config_container_shadow": {
         "description": "Title for the shadow configuration in the pagebuilder container configuration."
+    },
+    "landingpage_pagebuilder_container_config_container_border_title": "Border",
+    "@landingpage_pagebuilder_container_config_container_border_title": {
+        "description": "Title for border section in container configuration in pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_container_config_container_border_width": "Border width",
+    "@landingpage_pagebuilder_container_config_container_border_width": {
+        "description": "Title for border width in container configuration in pagebuilder config menu"
+    },
+    "landingpage_pagebuilder_container_config_container_border_color": "Border color",
+    "@landingpage_pagebuilder_container_config_container_border_color": {
+        "description": "Title for border color in container configuration in pagebuilder config menu"
     },
     "landingpage_pagebuilder_row_config_row_title": "Row configuration",
     "@landingpage_pagebuilder_row_config_row_title": {
@@ -1871,13 +1895,25 @@
     "@pagebuilder_button_config_button_height": {
         "description": "Menu for button height in the button configuration in the pagebuilder config menu"
     },
+    "pagebuilder_button_config_button_background_color": "Background color",
+    "@pagebuilder_button_config_button_background_color": {
+        "description": "Menu for button background color in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_border_title": "Border",
+    "@pagebuilder_button_config_button_border_title": {
+        "description": "Title for border section in the button configuration in the pagebuilder config menu"
+    },
     "pagebuilder_button_config_button_border_radius": "Radius",
     "@pagebuilder_button_config_button_border_radius": {
         "description": "Menu for button border radius in the button configuration in the pagebuilder config menu"
     },
-    "pagebuilder_button_config_button_background_color": "Background color",
-    "@pagebuilder_button_config_button_background_color": {
-        "description": "Menu for button background color in the button configuration in the pagebuilder config menu"
+    "pagebuilder_button_config_button_border_width": "Border width",
+    "@pagebuilder_button_config_button_border_width": {
+        "description": "Menu for button border width in the button configuration in the pagebuilder config menu"
+    },
+    "pagebuilder_button_config_button_border_color": "Border color",
+    "@pagebuilder_button_config_button_border_color": {
+        "description": "Menu for button border color in the button configuration in the pagebuilder config menu"
     },
     "pagebuilder_button_config_button_text_configuration": "Button text configuration",
     "@pagebuilder_button_config_button_text_configuration": {
