@@ -326,6 +326,3 @@ class _LandingPageBuilderWidgetContainerState
     return double.infinity;
   }
 }
-
-// TODO: BACKEND ANPASSEN FÜR BORDER
-// TODO: TEMPLATES ANPASSEN FÜR BORDER

@@ -5,19 +5,35 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_textfield.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_text/pagebuilder_html_text_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 
-class PagebuilderConfigMenuAnchorButtonContent extends StatelessWidget {
+class PagebuilderConfigMenuAnchorButtonContent extends StatefulWidget {
   final PageBuilderWidget model;
   const PagebuilderConfigMenuAnchorButtonContent(
       {super.key, required this.model});
 
+  @override
+  State<PagebuilderConfigMenuAnchorButtonContent> createState() =>
+      _PagebuilderConfigMenuAnchorButtonContentState();
+}
+
+class _PagebuilderConfigMenuAnchorButtonContentState
+    extends State<PagebuilderConfigMenuAnchorButtonContent> {
+  final HtmlEditorController htmlController = HtmlEditorController();
+
+  @override
+  void dispose() {
+    htmlController.disable();
+    super.dispose();
+  }
+
   void updateTextProperties(PagebuilderAnchorButtonProperties properties,
       PagebuilderBloc pagebuilderCubit) {
-    final updatedWidget = model.copyWith(properties: properties);
+    final updatedWidget = widget.model.copyWith(properties: properties);
     pagebuilderCubit.add(UpdateWidgetEvent(updatedWidget));
   }
 
@@ -27,8 +43,8 @@ class PagebuilderConfigMenuAnchorButtonContent extends StatelessWidget {
     final localization = AppLocalizations.of(context);
     final pagebuilderCubit = Modular.get<PagebuilderBloc>();
 
-    if (model.elementType == PageBuilderWidgetType.anchorButton &&
-        model.properties is PagebuilderAnchorButtonProperties) {
+    if (widget.model.elementType == PageBuilderWidgetType.anchorButton &&
+        widget.model.properties is PagebuilderAnchorButtonProperties) {
       return BlocBuilder<PagebuilderBloc, PagebuilderState>(
         bloc: pagebuilderCubit,
         builder: (context, state) {
@@ -44,10 +60,10 @@ class PagebuilderConfigMenuAnchorButtonContent extends StatelessWidget {
           }
 
           final currentSectionName =
-              (model.properties as PagebuilderAnchorButtonProperties)
+              (widget.model.properties as PagebuilderAnchorButtonProperties)
                   .sectionName;
           final properties =
-              model.properties as PagebuilderAnchorButtonProperties;
+              widget.model.properties as PagebuilderAnchorButtonProperties;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,14 +71,14 @@ class PagebuilderConfigMenuAnchorButtonContent extends StatelessWidget {
               CollapsibleTile(
                 title: "Button Titel",
                 children: [
-                  PagebuilderTextField(
-                    initialText:
-                        properties.buttonProperties?.textProperties?.text,
-                    onChanged: (newText) {
-                      final updatedTextProperties =
-                          properties.buttonProperties?.textProperties?.copyWith(
-                        text: newText,
-                      );
+                  PagebuilderHTMLTextEditor(
+                    controller: htmlController,
+                    initialHtml:
+                        properties.buttonProperties?.textProperties?.text ?? "",
+                    onChanged: (html) {
+                      final updatedTextProperties = properties
+                          .buttonProperties?.textProperties
+                          ?.copyWith(text: html);
                       final updatedButtonProperties =
                           properties.buttonProperties?.copyWith(
                         textProperties: updatedTextProperties,
@@ -72,10 +88,7 @@ class PagebuilderConfigMenuAnchorButtonContent extends StatelessWidget {
                       );
                       updateTextProperties(updatedProperties, pagebuilderCubit);
                     },
-                    minLines: 1,
-                    maxLines: 1,
-                    placeholder: "Button Text eingeben",
-                  ),
+                  )
                 ],
               ),
               const SizedBox(height: 20),
@@ -104,7 +117,8 @@ class PagebuilderConfigMenuAnchorButtonContent extends StatelessWidget {
                             }).toList(),
                             onChanged: (selectedSectionName) {
                               if (selectedSectionName != null) {
-                                final updatedProperties = (model.properties
+                                final updatedProperties = (widget
+                                            .model.properties
                                         as PagebuilderAnchorButtonProperties)
                                     .copyWith(sectionName: selectedSectionName);
                                 updateTextProperties(
