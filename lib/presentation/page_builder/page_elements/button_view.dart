@@ -5,7 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant_extensions.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
-import 'package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart';
+import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_html_renderer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -13,9 +13,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PageBuilderButtonView extends StatelessWidget {
   final PageBuilderButtonProperties properties;
   final PageBuilderWidget widgetModel;
-  final TextStyleParser parser = TextStyleParser();
 
-  PageBuilderButtonView({
+  const PageBuilderButtonView({
     super.key,
     required this.properties,
     required this.widgetModel,
@@ -53,9 +52,9 @@ class PageBuilderButtonView extends StatelessWidget {
                 : null),
         alignment: AlignmentMapper.getAlignmentFromTextAlignment(
             properties.textProperties?.alignment?.getValue()),
-        child: Text(properties.textProperties?.text ?? "",
-            style:
-                parser.getTextStyleFromProperties(properties.textProperties)));
+        child: PagebuilderHtmlRenderer(
+            textProperties: properties.textProperties,
+            useInlineDisplay: true));
       },
     );
   }
