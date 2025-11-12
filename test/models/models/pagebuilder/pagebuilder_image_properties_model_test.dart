@@ -19,7 +19,8 @@ void main() {
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayPaint: {"color": "FF000000"});
+          overlayPaint: {"color": "FF000000"},
+          shadow: null);
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
@@ -28,7 +29,8 @@ void main() {
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayPaint: {"color": "FF000000"});
+          overlayPaint: {"color": "FF000000"},
+          shadow: null);
       // When
       final result = model.copyWith(height: const PagebuilderResponsiveOrConstantModel.constant(400.0));
       // Then
@@ -47,7 +49,8 @@ void main() {
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayPaint: {"color": "FF000000"});
+          overlayPaint: {"color": "FF000000"},
+          shadow: null);
       final expectedResult = {
         "url": "https://test.de",
         "border": {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
@@ -86,7 +89,8 @@ void main() {
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayPaint: {"color": "FF000000"});
+          overlayPaint: {"color": "FF000000"},
+          shadow: null);
       // When
       final result = PageBuilderImagePropertiesModel.fromMap(map);
       // Then
@@ -107,7 +111,8 @@ void main() {
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
           showPromoterImage: false,
           newImageBase64: "image",
-          overlayPaint: {"color": "FF000000"});
+          overlayPaint: {"color": "FF000000"},
+          shadow: null);
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
           border: PagebuilderBorder(radius: 12.0, width: 2.0, color: Color(0xFFFF6B00)),
@@ -115,7 +120,8 @@ void main() {
           height: const PagebuilderResponsiveOrConstant.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
           showPromoterImage: false,
-          overlayPaint: const PagebuilderPaint.color(Colors.black));
+          overlayPaint: const PagebuilderPaint.color(Colors.black),
+          shadow: null);
       // When
       final result = model.toDomain();
       // Then
@@ -135,7 +141,8 @@ void main() {
           height: const PagebuilderResponsiveOrConstant.constant(300.0),
           contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
           showPromoterImage: false,
-          overlayPaint: const PagebuilderPaint.color(Colors.black));
+          overlayPaint: const PagebuilderPaint.color(Colors.black),
+          shadow: null);
       final expectedResult = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
@@ -144,7 +151,8 @@ void main() {
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
           showPromoterImage: false,
           newImageBase64: null,
-          overlayPaint: {"color": "FF000000"});
+          overlayPaint: {"color": "FF000000"},
+          shadow: null);
       // When
       final result = PageBuilderImagePropertiesModel.fromDomain(model);
       // Then
@@ -163,7 +171,8 @@ void main() {
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
           showPromoterImage: false,
           newImageBase64: null,
-          overlayPaint: {"color": "FF000000"});
+          overlayPaint: {"color": "FF000000"},
+          shadow: null);
       final properties2 = PageBuilderImagePropertiesModel(
           url: "https://test.de",
           border: {"radius": 12.0, "width": 2.0, "color": "FFFF6B00"},
@@ -172,7 +181,8 @@ void main() {
           contentMode: const PagebuilderResponsiveOrConstantModel.constant("cover"),
           showPromoterImage: false,
           newImageBase64: null,
-          overlayPaint: {"color": "FF000000"});
+          overlayPaint: {"color": "FF000000"},
+          shadow: null);
       // Then
       expect(properties1, properties2);
     });

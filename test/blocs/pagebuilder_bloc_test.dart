@@ -246,6 +246,7 @@ void main() {
         localImage: Uint8List(0),
         contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
         overlayPaint: null,
+        shadow: null,
         showPromoterImage: false);
 
     final mockTextWidget1 = PageBuilderWidget(

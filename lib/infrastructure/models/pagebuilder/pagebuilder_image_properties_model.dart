@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/infrastructure/models/model_helper/boxfit_mapper
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_border_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_shadow_model.dart';
 import 'package:flutter/material.dart';
 
 class PageBuilderImagePropertiesModel extends Equatable
@@ -18,6 +19,7 @@ class PageBuilderImagePropertiesModel extends Equatable
   final PagebuilderResponsiveOrConstantModel<double>? height;
   final PagebuilderResponsiveOrConstantModel<String>? contentMode;
   final Map<String, dynamic>? overlayPaint;
+  final Map<String, dynamic>? shadow;
   final bool? showPromoterImage;
   final String? newImageBase64;
 
@@ -28,6 +30,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       required this.height,
       required this.contentMode,
       required this.overlayPaint,
+      required this.shadow,
       required this.showPromoterImage,
       required this.newImageBase64});
 
@@ -39,6 +42,7 @@ class PageBuilderImagePropertiesModel extends Equatable
     if (height != null) map['height'] = height!.toMapValue();
     if (contentMode != null) map['contentMode'] = contentMode!.toMapValue();
     if (overlayPaint != null) map['overlayPaint'] = overlayPaint;
+    if (shadow != null) map['shadow'] = shadow;
     if (showPromoterImage != null) map['showPromoterImage'] = showPromoterImage;
     if (newImageBase64 != null) map['newImageBase64'] = newImageBase64;
     return map;
@@ -65,6 +69,9 @@ class PageBuilderImagePropertiesModel extends Equatable
         overlayPaint: map['overlayPaint'] != null
             ? map['overlayPaint'] as Map<String, dynamic>
             : null,
+        shadow: map['shadow'] != null
+            ? map['shadow'] as Map<String, dynamic>
+            : null,
         showPromoterImage: map['showPromoterImage'] != null
             ? map['showPromoterImage'] as bool
             : null,
@@ -80,6 +87,7 @@ class PageBuilderImagePropertiesModel extends Equatable
       PagebuilderResponsiveOrConstantModel<double>? height,
       PagebuilderResponsiveOrConstantModel<String>? contentMode,
       Map<String, dynamic>? overlayPaint,
+      Map<String, dynamic>? shadow,
       bool? showPromoterImage,
       String? newImageBase64}) {
     return PageBuilderImagePropertiesModel(
@@ -89,6 +97,7 @@ class PageBuilderImagePropertiesModel extends Equatable
         height: height ?? this.height,
         contentMode: contentMode ?? this.contentMode,
         overlayPaint: overlayPaint ?? this.overlayPaint,
+        shadow: shadow ?? this.shadow,
         showPromoterImage: showPromoterImage ?? this.showPromoterImage,
         newImageBase64: newImageBase64 ?? this.newImageBase64);
   }
@@ -104,6 +113,9 @@ class PageBuilderImagePropertiesModel extends Equatable
         contentMode: _contentModeToDomain(contentMode),
         overlayPaint: overlayPaint != null
             ? PagebuilderPaintModel.fromMap(overlayPaint!).toDomain()
+            : null,
+        shadow: shadow != null
+            ? PageBuilderShadowModel.fromMap(shadow!).toDomain()
             : null,
         showPromoterImage: showPromoterImage);
   }
@@ -163,6 +175,9 @@ class PageBuilderImagePropertiesModel extends Equatable
         overlayPaint: properties.overlayPaint != null
             ? PagebuilderPaintModel.fromDomain(properties.overlayPaint!).toMap()
             : null,
+        shadow: properties.shadow != null
+            ? PageBuilderShadowModel.fromDomain(properties.shadow!).toMap()
+            : null,
         showPromoterImage: properties.showPromoterImage,
         newImageBase64: properties.localImage != null
             ? base64Encode(properties.localImage!)
@@ -218,6 +233,7 @@ class PageBuilderImagePropertiesModel extends Equatable
         height,
         contentMode,
         overlayPaint,
+        shadow,
         showPromoterImage,
         newImageBase64
       ];

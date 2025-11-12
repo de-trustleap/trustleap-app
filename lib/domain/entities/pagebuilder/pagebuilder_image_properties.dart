@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class PageBuilderImageProperties extends Equatable
   final PagebuilderResponsiveOrConstant<double>? height;
   final PagebuilderResponsiveOrConstant<BoxFit>? contentMode;
   final PagebuilderPaint? overlayPaint;
+  final PageBuilderShadow? shadow;
   final bool? showPromoterImage;
 
   final Uint8List? localImage;
@@ -28,6 +30,7 @@ class PageBuilderImageProperties extends Equatable
       required this.height,
       required this.contentMode,
       required this.overlayPaint,
+      required this.shadow,
       required this.showPromoterImage,
       this.localImage,
       this.hasChanged = false});
@@ -39,6 +42,7 @@ class PageBuilderImageProperties extends Equatable
       PagebuilderResponsiveOrConstant<double>? height,
       PagebuilderResponsiveOrConstant<BoxFit>? contentMode,
       PagebuilderPaint? overlayPaint,
+      PageBuilderShadow? shadow,
       bool? showPromoterImage,
       Uint8List? localImage,
       bool? hasChanged}) {
@@ -49,6 +53,7 @@ class PageBuilderImageProperties extends Equatable
         height: height ?? this.height,
         contentMode: contentMode ?? this.contentMode,
         overlayPaint: overlayPaint ?? this.overlayPaint,
+        shadow: shadow ?? this.shadow,
         showPromoterImage: showPromoterImage ?? this.showPromoterImage,
         localImage: localImage ?? this.localImage,
         hasChanged: hasChanged ?? this.hasChanged);
@@ -62,6 +67,7 @@ class PageBuilderImageProperties extends Equatable
       height: height?.deepCopy(),
       contentMode: contentMode?.deepCopy(),
       overlayPaint: overlayPaint?.deepCopy(),
+      shadow: shadow?.deepCopy(),
       showPromoterImage: showPromoterImage,
       localImage: localImage != null ? Uint8List.fromList(localImage!) : null,
       hasChanged: hasChanged,
@@ -76,6 +82,7 @@ class PageBuilderImageProperties extends Equatable
         height,
         contentMode,
         overlayPaint,
+        shadow,
         showPromoterImage,
         localImage
       ];

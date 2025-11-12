@@ -107,6 +107,16 @@ class _PageBuilderImageViewState extends State<PageBuilderImageView> {
               color: widget.properties.border!.color!,
             )
           : null,
+      boxShadow: widget.properties.shadow != null
+          ? [
+              BoxShadow(
+                color: widget.properties.shadow!.color ?? Colors.black,
+                spreadRadius: widget.properties.shadow!.spreadRadius ?? 0,
+                blurRadius: widget.properties.shadow!.blurRadius ?? 0,
+                offset: widget.properties.shadow!.offset ?? const Offset(0, 0),
+              )
+            ]
+          : null,
       image: image,
     );
   }
