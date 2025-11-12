@@ -133,6 +133,7 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                   height: null,
                   contentMode: null,
                   showPromoterImage: null,
+                  shadow: null,
                   overlayPaint: null),
           widgetModel: isWidget ? model : null,
           showPromoterSwitch: false,

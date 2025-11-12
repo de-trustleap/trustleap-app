@@ -17,6 +17,7 @@ void main() {
           height: const PagebuilderResponsiveOrConstant.constant(200.0),
           contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
           overlayPaint: null,
+          shadow: null,
           showPromoterImage: false);
       final expectedResult = PageBuilderImageProperties(
           url: "https://test.de",
@@ -25,6 +26,7 @@ void main() {
           height: const PagebuilderResponsiveOrConstant.constant(200.0),
           contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
           overlayPaint: null,
+          shadow: null,
           showPromoterImage: false);
       // When
       final result = model.copyWith(width: const PagebuilderResponsiveOrConstant.constant(250.0));
@@ -44,6 +46,7 @@ void main() {
         height: const PagebuilderResponsiveOrConstant.constant(200.0),
         contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
         overlayPaint: const PagebuilderPaint.color(Color(0x80000000)),
+        shadow: null,
         localImage: localImageData,
         hasChanged: true,
         showPromoterImage: false,
@@ -74,6 +77,7 @@ void main() {
           height: const PagebuilderResponsiveOrConstant.constant(200.0),
           contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
           overlayPaint: null,
+          shadow: null,
           showPromoterImage: false);
       final properties2 = PageBuilderImageProperties(
           url: "https://test.de",
@@ -82,6 +86,7 @@ void main() {
           height: const PagebuilderResponsiveOrConstant.constant(200.0),
           contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
           overlayPaint: null,
+          shadow: null,
           showPromoterImage: false);
       // Then
       expect(properties1, properties2);
