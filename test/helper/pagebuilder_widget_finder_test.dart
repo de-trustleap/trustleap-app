@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_finder.dart';
 import 'package:finanzbegleiter/constants.dart';
@@ -49,7 +50,7 @@ void main() {
 
       final mockImageProperties = PageBuilderImageProperties(
           url: "https://example.com/image.png",
-          borderRadius: 10.0,
+          border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
           width: const PagebuilderResponsiveOrConstant.constant(100.0),
           height: const PagebuilderResponsiveOrConstant.constant(150.0),
           localImage: Uint8List(0),

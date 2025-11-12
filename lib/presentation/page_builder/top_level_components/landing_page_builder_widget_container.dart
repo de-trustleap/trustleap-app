@@ -254,7 +254,9 @@ class _LandingPageBuilderWidgetContainerState
                                                         : null)))
                                       ],
                                       Align(
-                                        alignment: widget.model.alignment ??
+                                        alignment: widget.model.alignment
+                                                ?.getValueForBreakpoint(
+                                                    breakpoint) ??
                                             Alignment.center,
                                         child: Padding(
                                           padding: EdgeInsets.fromLTRB(

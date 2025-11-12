@@ -14,7 +14,9 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_prop
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
+import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_anchor_button_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_background_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_calendly_properties_model.dart';
@@ -43,7 +45,7 @@ class PageBuilderWidgetModel extends Equatable {
   final Map<String, dynamic>? padding;
   final Map<String, dynamic>? margin;
   final double? maxWidth;
-  final String? alignment;
+  final PagebuilderResponsiveOrConstantModel<String>? alignment;
   final String? customCSS;
 
   const PageBuilderWidgetModel(
@@ -79,7 +81,9 @@ class PageBuilderWidgetModel extends Equatable {
     if (padding != null) map['padding'] = padding;
     if (margin != null) map['margin'] = margin;
     if (maxWidth != null) map['maxWidth'] = maxWidth;
-    if (alignment != null) map['alignment'] = alignment;
+    if (alignment != null) {
+      map['alignment'] = alignment!.toMapValue();
+    }
     if (customCSS != null) map['customCSS'] = customCSS;
     return map;
   }
@@ -117,7 +121,10 @@ class PageBuilderWidgetModel extends Equatable {
         padding: map['padding'] != null ? map['padding'] as Map<String, dynamic> : null,
         margin: map['margin'] != null ? map['margin'] as Map<String, dynamic> : null,
         maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
-        alignment: map['alignment'] != null ? map['alignment'] as String : null,
+        alignment: map['alignment'] != null
+            ? PagebuilderResponsiveOrConstantModel.fromMapValue(
+                map['alignment'], (v) => v as String)
+            : null,
         customCSS: map['customCSS'] != null ? map['customCSS'] as String : null);
   }
 
@@ -134,7 +141,7 @@ class PageBuilderWidgetModel extends Equatable {
       Map<String, dynamic>? padding,
       Map<String, dynamic>? margin,
       double? maxWidth,
-      String? alignment,
+      PagebuilderResponsiveOrConstantModel<String>? alignment,
       String? customCSS}) {
     return PageBuilderWidgetModel(
         id: id ?? this.id,
@@ -174,7 +181,7 @@ class PageBuilderWidgetModel extends Equatable {
         padding: PageBuilderSpacingModel.fromMap(padding).toDomain(),
         margin: PageBuilderSpacingModel.fromMap(margin).toDomain(),
         maxWidth: maxWidth,
-        alignment: AlignmentMapper.getAlignmentFromString(alignment),
+        alignment: _convertAlignmentToDomain(alignment),
         customCSS: customCSS);
   }
 
@@ -204,7 +211,7 @@ class PageBuilderWidgetModel extends Equatable {
         padding: PageBuilderSpacingModel.fromDomain(widget.padding).toMap(),
         margin: PageBuilderSpacingModel.fromDomain(widget.margin).toMap(),
         maxWidth: widget.maxWidth,
-        alignment: AlignmentMapper.getStringFromAlignment(widget.alignment),
+        alignment: _convertAlignmentFromDomain(widget.alignment),
         customCSS: widget.customCSS);
   }
 
@@ -283,6 +290,47 @@ class PageBuilderWidgetModel extends Equatable {
     } else {
       return null;
     }
+  }
+
+  static PagebuilderResponsiveOrConstant<Alignment>? _convertAlignmentToDomain(
+      PagebuilderResponsiveOrConstantModel<String>? alignmentModel) {
+    if (alignmentModel == null) return null;
+
+    final domain = alignmentModel.toDomain();
+    if (domain.constantValue != null) {
+      return PagebuilderResponsiveOrConstant.constant(
+          AlignmentMapper.getAlignmentFromString(domain.constantValue!)!);
+    }
+
+    if (domain.responsiveValue != null) {
+      final convertedMap = <String, Alignment>{};
+      domain.responsiveValue!.forEach((key, value) {
+        convertedMap[key] = AlignmentMapper.getAlignmentFromString(value)!;
+      });
+      return PagebuilderResponsiveOrConstant.responsive(convertedMap);
+    }
+
+    return null;
+  }
+
+  static PagebuilderResponsiveOrConstantModel<String>? _convertAlignmentFromDomain(
+      PagebuilderResponsiveOrConstant<Alignment>? alignment) {
+    if (alignment == null) return null;
+
+    if (alignment.constantValue != null) {
+      return PagebuilderResponsiveOrConstantModel.constant(
+          AlignmentMapper.getStringFromAlignment(alignment.constantValue!)!);
+    }
+
+    if (alignment.responsiveValue != null) {
+      final convertedMap = <String, String>{};
+      alignment.responsiveValue!.forEach((key, value) {
+        convertedMap[key] = AlignmentMapper.getStringFromAlignment(value)!;
+      });
+      return PagebuilderResponsiveOrConstantModel.responsive(convertedMap);
+    }
+
+    return null;
   }
 
   @override

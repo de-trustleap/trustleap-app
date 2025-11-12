@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import '../mocks.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -239,7 +240,7 @@ void main() {
 
     final mockImageProperties = PageBuilderImageProperties(
         url: "https://example.com/image.png",
-        borderRadius: 10.0,
+        border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
         width: const PagebuilderResponsiveOrConstant.constant(100.0),
         height: const PagebuilderResponsiveOrConstant.constant(150.0),
         localImage: Uint8List(0),

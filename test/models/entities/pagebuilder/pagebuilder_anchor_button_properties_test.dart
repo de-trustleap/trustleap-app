@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
-              borderRadius: 10.0,
+              border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
@@ -34,7 +35,7 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
-              borderRadius: 10.0,
+              border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
@@ -76,7 +77,7 @@ void main() {
       final originalButtonProperties = PageBuilderButtonProperties(
         width: const PagebuilderResponsiveOrConstant.constant(100.0),
         height: const PagebuilderResponsiveOrConstant.constant(40.0),
-        borderRadius: 4.0,
+        border: const PagebuilderBorder(radius: 4.0, width: null, color: null),
         backgroundPaint: const PagebuilderPaint.color(Colors.green),
         textProperties: originalTextProperties,
       );
@@ -110,7 +111,7 @@ void main() {
       final mutatedButtonProperties = PageBuilderButtonProperties(
         width: const PagebuilderResponsiveOrConstant.constant(300.0),
         height: const PagebuilderResponsiveOrConstant.constant(80.0),
-        borderRadius: 16.0,
+        border: const PagebuilderBorder(radius: 16.0, width: null, color: null),
         backgroundPaint: const PagebuilderPaint.color(Colors.purple),
         textProperties: mutatedTextProperties,
       );
@@ -124,7 +125,7 @@ void main() {
       expect(original.sectionName, equals('original-section'));
       expect(original.buttonProperties?.width, equals(const PagebuilderResponsiveOrConstant.constant(100.0)));
       expect(original.buttonProperties?.height, equals(const PagebuilderResponsiveOrConstant.constant(40.0)));
-      expect(original.buttonProperties?.borderRadius, equals(4.0));
+      expect(original.buttonProperties?.border?.radius, equals(4.0));
       expect(original.buttonProperties?.backgroundPaint?.color, equals(Colors.green));
       expect(original.buttonProperties?.textProperties?.text,
           equals('Original Text'));
@@ -151,7 +152,7 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
-              borderRadius: 10.0,
+              border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",
@@ -167,7 +168,7 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
-              borderRadius: 10.0,
+              border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
                   text: "Test",

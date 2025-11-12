@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_button_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_anchor_button_properties_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
@@ -19,7 +20,7 @@ void main() {
           buttonProperties: {
             "width": 200,
             "height": 200,
-            "borderRadius": 12.0,
+            "border": {"radius": 12.0},
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       final expectedResult = PagebuilderAnchorButtonPropertiesModel(
@@ -27,7 +28,7 @@ void main() {
           buttonProperties: {
             "width": 200,
             "height": 200,
-            "borderRadius": 12.0,
+            "border": {"radius": 12.0},
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       // When
@@ -45,7 +46,7 @@ void main() {
           buttonProperties: {
             "width": 200,
             "height": 200,
-            "borderRadius": 12.0,
+            "border": {"radius": 12.0},
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       final expectedResult = {
@@ -53,7 +54,7 @@ void main() {
         "buttonProperties": {
           "width": 200,
           "height": 200,
-          "borderRadius": 12.0,
+          "border": {"radius": 12.0},
           "textProperties": {"text": "Test", "fontSize": 16.0}
         }
       };
@@ -72,7 +73,7 @@ void main() {
         "buttonProperties": {
           "width": 200.0,
           "height": 200.0,
-          "borderRadius": 12.0,
+          "border": {"radius": 12.0},
           "textProperties": {"text": "Test", "fontSize": 16.0}
         }
       };
@@ -81,7 +82,7 @@ void main() {
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,
-            "borderRadius": 12.0,
+            "border": {"radius": 12.0},
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       // When
@@ -101,7 +102,7 @@ void main() {
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,
-            "borderRadius": 12.0,
+            "border": {"radius": 12.0},
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       final expectedResult = PagebuilderAnchorButtonProperties(
@@ -109,7 +110,7 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(200.0),
-              borderRadius: 12.0,
+              border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
               backgroundPaint: null,
               textProperties: PageBuilderTextProperties(
                   text: "Test",
@@ -137,7 +138,7 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(200.0),
-              borderRadius: 12.0,
+              border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
               backgroundPaint: null,
               textProperties: PageBuilderTextProperties(
                   text: "Test",
@@ -153,7 +154,7 @@ void main() {
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,
-            "borderRadius": 12.0,
+            "border": {"radius": 12.0},
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       // When
@@ -171,7 +172,7 @@ void main() {
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,
-            "borderRadius": 12.0,
+            "border": {"radius": 12.0},
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       final model2 = PagebuilderAnchorButtonPropertiesModel(
@@ -179,7 +180,7 @@ void main() {
           buttonProperties: {
             "width": 200.0,
             "height": 200.0,
-            "borderRadius": 12.0,
+            "border": {"radius": 12.0},
             "textProperties": {"text": "Test", "fontSize": 16.0}
           });
       // Then
