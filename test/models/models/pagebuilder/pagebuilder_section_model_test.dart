@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.d
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
@@ -164,7 +165,7 @@ void main() {
               "widthPercentage": 50.0,
               "padding": {"right": 16.0},
               "properties": {
-                "borderRadius": 100.0,
+                "border": {"radius": 100.0},
                 "contentMode": "cover",
                 "width": 200.0,
                 "height": 200.0,
@@ -177,7 +178,7 @@ void main() {
               "id": "660d39c1-70f7-4eb7-ba8b-41580a17d9a6",
               "elementType": "container",
               "widthPercentage": 50.0,
-              "properties": {"borderRadius": 10.0},
+              "properties": {"border": {"radius": 10.0}},
               "containerChild": {
                 "id": "d10d39c1-70f7-4eb7-ba8b-41580a17d9a6",
                 "elementType": "text",
@@ -215,7 +216,7 @@ void main() {
                   properties: PageBuilderImageProperties(
                       url:
                           "https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/landingPageContentImages%2FL9SPWUuY7mJKWUaX16Xt%2F4ce25fce-242b-471b-8a25-83e920e95e8d?alt=media&token=3c7bdc32-f607-4eee-923f-41410591d1d0",
-                      borderRadius: 100,
+                      border: const PagebuilderBorder(radius: 100, width: null, color: null),
                       width: const PagebuilderResponsiveOrConstant.constant(200),
                       height: const PagebuilderResponsiveOrConstant.constant(200),
                       contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
@@ -239,7 +240,7 @@ void main() {
                       "660d39c1-70f7-4eb7-ba8b-41580a17d9a6"),
                   elementType: PageBuilderWidgetType.container,
                   properties: PageBuilderContainerProperties(
-                      borderRadius: 10, shadow: null),
+                      border: const PagebuilderBorder(radius: 10, width: null, color: null), shadow: null),
                   hoverProperties: null,
                   children: null,
                   containerChild: PageBuilderWidget(
@@ -326,7 +327,7 @@ void main() {
                   properties: PageBuilderImageProperties(
                       url:
                           "https://firebasestorage.googleapis.com/v0/b/finanzwegbegleiter.appspot.com/o/landingPageContentImages%2FL9SPWUuY7mJKWUaX16Xt%2F4ce25fce-242b-471b-8a25-83e920e95e8d?alt=media&token=3c7bdc32-f607-4eee-923f-41410591d1d0",
-                      borderRadius: 100,
+                      border: const PagebuilderBorder(radius: 100, width: null, color: null),
                       width: const PagebuilderResponsiveOrConstant.constant(200),
                       height: const PagebuilderResponsiveOrConstant.constant(200),
                       contentMode: const PagebuilderResponsiveOrConstant.constant(BoxFit.cover),
@@ -349,7 +350,7 @@ void main() {
                       "660d39c1-70f7-4eb7-ba8b-41580a17d9a6"),
                   elementType: PageBuilderWidgetType.container,
                   properties: PageBuilderContainerProperties(
-                      borderRadius: 10, shadow: null),
+                      border: const PagebuilderBorder(radius: 10, width: null, color: null), shadow: null),
                   hoverProperties: null,
                   children: null,
                   containerChild: PageBuilderWidget(
@@ -412,7 +413,7 @@ void main() {
               "widthPercentage": 50.0,
               "padding": {"right": 16.0},
               "properties": {
-                "borderRadius": 100.0,
+                "border": {"radius": 100.0},
                 "width": 200.0,
                 "height": 200.0,
                 "contentMode": "cover",
@@ -425,7 +426,7 @@ void main() {
               "id": "660d39c1-70f7-4eb7-ba8b-41580a17d9a6",
               "elementType": "container",
               "widthPercentage": 50.0,
-              "properties": {"borderRadius": 10.0},
+              "properties": {"border": {"radius": 10.0}},
               "containerChild": {
                 "id": "d10d39c1-70f7-4eb7-ba8b-41580a17d9a6",
                 "elementType": "text",

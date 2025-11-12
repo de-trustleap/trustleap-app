@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfield_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +99,7 @@ void main() {
           buttonProperties: {
             "width": 200,
             "height": 70,
-            "borderRadius": 4,
+            "border": {"radius": 4},
             "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
@@ -190,7 +191,7 @@ void main() {
           buttonProperties: {
             "width": 200,
             "height": 70,
-            "borderRadius": 4,
+            "border": {"radius": 4},
             "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
@@ -310,7 +311,7 @@ void main() {
           buttonProperties: {
             "width": 200,
             "height": 70,
-            "borderRadius": 4,
+            "border": {"radius": 4},
             "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
@@ -402,7 +403,7 @@ void main() {
         "buttonProperties": {
           "width": 200,
           "height": 70,
-          "borderRadius": 4,
+          "border": {"radius": 4},
           "backgroundPaint": {"color": "FF333A56"},
           "textProperties": {
             "alignment": "center",
@@ -505,7 +506,7 @@ void main() {
         "buttonProperties": {
           "width": 200,
           "height": 70,
-          "borderRadius": 4,
+          "border": {"radius": 4},
           "backgroundPaint": {"color": "FF333A56"},
           "textProperties": {
             "alignment": "center",
@@ -598,7 +599,7 @@ void main() {
           buttonProperties: {
             "width": 200,
             "height": 70,
-            "borderRadius": 4,
+            "border": {"radius": 4},
             "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
@@ -696,7 +697,7 @@ void main() {
           buttonProperties: {
             "width": 200.0,
             "height": 70.0,
-            "borderRadius": 4.0,
+            "border": {"radius": 4.0},
             "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
@@ -811,7 +812,7 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(70.0),
-              borderRadius: 4,
+              border: const PagebuilderBorder(radius: 4, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Color(0xFF333A56)),
               textProperties: PageBuilderTextProperties(
                   text: "NACHRICHT SENDEN",
@@ -939,7 +940,7 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(70.0),
-              borderRadius: 4,
+              border: const PagebuilderBorder(radius: 4, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Color(0xFF333A56)),
               textProperties: PageBuilderTextProperties(
                   text: "NACHRICHT SENDEN",
@@ -1025,7 +1026,7 @@ void main() {
           buttonProperties: {
             "width": 200.0,
             "height": 70.0,
-            "borderRadius": 4.0,
+            "border": {"radius": 4.0},
             "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
@@ -1125,7 +1126,7 @@ void main() {
           buttonProperties: {
             "width": 200.0,
             "height": 70.0,
-            "borderRadius": 4.0,
+            "border": {"radius": 4.0},
             "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",
@@ -1210,7 +1211,7 @@ void main() {
           buttonProperties: {
             "width": 200.0,
             "height": 70.0,
-            "borderRadius": 4.0,
+            "border": {"radius": 4.0},
             "backgroundPaint": {"color": "FF333A56"},
             "textProperties": {
               "alignment": "center",

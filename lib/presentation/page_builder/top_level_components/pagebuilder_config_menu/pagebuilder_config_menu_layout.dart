@@ -61,10 +61,13 @@ class PagebuilderConfigMenuLayout extends StatelessWidget {
               PagebuilderConfigMenuDrowdown(
                   title: localization
                       .landingpage_pagebuilder_layout_menu_alignment,
-                  initialValue: model.alignment ?? Alignment.center,
+                  initialValue: helper.getValue(model.alignment) ?? Alignment.center,
                   type: PagebuilderDropdownType.alignment,
+                  showResponsiveButton: true,
+                  currentBreakpoint: currentBreakpoint,
                   onSelected: (alignment) {
-                    final updatedWidget = model.copyWith(alignment: alignment);
+                    final updatedAlignment = helper.setValue(model.alignment, alignment);
+                    final updatedWidget = model.copyWith(alignment: updatedAlignment);
                     pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
                   }),
               if (model.widthPercentage != null) ...[

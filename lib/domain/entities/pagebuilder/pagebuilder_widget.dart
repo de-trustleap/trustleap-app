@@ -23,7 +23,7 @@ class PageBuilderWidget extends Equatable {
   final PageBuilderSpacing? padding;
   final PageBuilderSpacing? margin;
   final double? maxWidth;
-  final Alignment? alignment;
+  final PagebuilderResponsiveOrConstant<Alignment>? alignment;
   final String? customCSS;
 
   const PageBuilderWidget(
@@ -55,7 +55,7 @@ class PageBuilderWidget extends Equatable {
       PageBuilderSpacing? padding,
       PageBuilderSpacing? margin,
       double? maxWidth,
-      Alignment? alignment,
+      PagebuilderResponsiveOrConstant<Alignment>? alignment,
       String? customCSS,
       bool removeHoverProperties = false,
       bool removeHoverBackground = false}) {

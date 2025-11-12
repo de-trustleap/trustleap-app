@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,13 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuild
 void main() {
   group("PagebuilderButtonProperties_CopyWith", () {
     test(
-        "set width and borderRadius with copyWith should set width and borderRadius for resulting object",
+        "set width and border with copyWith should set width and border for resulting object",
         () {
       // Given
       final model = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
-          borderRadius: 10.0,
+          border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
@@ -29,7 +30,7 @@ void main() {
       final expectedResult = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(400.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
-          borderRadius: 12.0,
+          border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
@@ -43,7 +44,7 @@ void main() {
       // When
       final result = model.copyWith(
           width: const PagebuilderResponsiveOrConstant.constant(400.0),
-          borderRadius: 12.0);
+          border: const PagebuilderBorder(radius: 12.0, width: null, color: null));
       // Then
       expect(result, expectedResult);
     });
@@ -71,7 +72,7 @@ void main() {
       const original = PageBuilderButtonProperties(
         width: const PagebuilderResponsiveOrConstant.constant(200.0),
         height: const PagebuilderResponsiveOrConstant.constant(50.0),
-        borderRadius: 8.0,
+        border: const PagebuilderBorder(radius: 8.0, width: null, color: null),
         backgroundPaint: const PagebuilderPaint.color(Color(0xFF2196F3)),
         textProperties: textProperties,
       );
@@ -83,7 +84,7 @@ void main() {
       expect(copy, isNot(same(original)));
       expect(copy.width, equals(original.width));
       expect(copy.height, equals(original.height));
-      expect(copy.borderRadius, equals(original.borderRadius));
+      expect(copy.border?.radius, equals(original.border?.radius));
       expect(copy.backgroundPaint?.color, equals(original.backgroundPaint?.color));
       expect(copy.textProperties, equals(original.textProperties));
     });
@@ -95,7 +96,7 @@ void main() {
       final properties1 = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
-          borderRadius: 10.0,
+          border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
@@ -109,7 +110,7 @@ void main() {
       final properties2 = PageBuilderButtonProperties(
           width: const PagebuilderResponsiveOrConstant.constant(200.0),
           height: const PagebuilderResponsiveOrConstant.constant(50.0),
-          borderRadius: 10.0,
+          border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
           backgroundPaint: const PagebuilderPaint.color(Colors.white),
           textProperties: PageBuilderTextProperties(
               text: "Test",
