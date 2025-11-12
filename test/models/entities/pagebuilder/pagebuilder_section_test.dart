@@ -69,7 +69,7 @@ void main() {
                 padding: null,
                 margin: null,
                 maxWidth: 300,
-                alignment: Alignment.center,
+                alignment: const PagebuilderResponsiveOrConstant.constant(Alignment.center),
                 customCSS: null)
           ],
           background: null,
@@ -97,7 +97,7 @@ void main() {
             padding: null,
             margin: null,
             maxWidth: 300,
-            alignment: Alignment.center,
+            alignment: const PagebuilderResponsiveOrConstant.constant(Alignment.center),
             customCSS: null)
       ]);
       // Then

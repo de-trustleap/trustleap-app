@@ -20,7 +20,7 @@ void main() {
       final model = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
-          properties: {"borderRadius": 12},
+          properties: {},
           hoverProperties: null,
           children: null,
           containerChild: null,
@@ -35,7 +35,7 @@ void main() {
       final expectedResult = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
-          properties: {"borderRadius": 12},
+          properties: {},
           hoverProperties: null,
           children: null,
           containerChild: null,
@@ -61,7 +61,7 @@ void main() {
       final model = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
-          properties: {"borderRadius": 12},
+          properties: {},
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -76,7 +76,7 @@ void main() {
       final expectedResult = {
         "id": "1",
         "elementType": "container",
-        "properties": {"borderRadius": 12},
+        "properties": {},
         "children": [],
         "widthPercentage": 30,
         "background": {"backgroundPaint": {"color": "FFFFFFFF"}},
@@ -95,7 +95,6 @@ void main() {
       final map = {
         "id": "1",
         "elementType": "container",
-        "properties": {"borderRadius": 12},
         "children": [],
         "widthPercentage": 30.0,
         "background": {"backgroundPaint": {"color": "FFFFFFFF"}},
@@ -104,7 +103,7 @@ void main() {
       final expectedResult = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
-          properties: {"borderRadius": 12},
+          properties: null,
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -131,7 +130,7 @@ void main() {
       final model = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
-          properties: {"borderRadius": 12.0},
+          properties: {},
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -147,7 +146,7 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           elementType: PageBuilderWidgetType.container,
           properties:
-              PageBuilderContainerProperties(borderRadius: 12, shadow: null),
+              PageBuilderContainerProperties(border: null, shadow: null),
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -178,7 +177,7 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           elementType: PageBuilderWidgetType.container,
           properties:
-              PageBuilderContainerProperties(borderRadius: 12, shadow: null),
+              PageBuilderContainerProperties(border: null, shadow: null),
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -196,7 +195,7 @@ void main() {
       final expectedResult = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
-          properties: {"borderRadius": 12.0},
+          properties: {},
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -289,7 +288,7 @@ void main() {
       final widget1 = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
-          properties: {"borderRadius": 12},
+          properties: {},
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -304,7 +303,7 @@ void main() {
       final widget2 = PageBuilderWidgetModel(
           id: "1",
           elementType: "container",
-          properties: {"borderRadius": 12},
+          properties: {},
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -318,6 +317,180 @@ void main() {
           customCSS: null);
       // Then
       expect(widget1, widget2);
+    });
+  });
+
+  group("PagebuilderWidgetModel_ConvertAlignmentToDomain", () {
+    test("check if constant alignment is converted correctly from model to domain", () {
+      // Given
+      final alignmentModel = const PagebuilderResponsiveOrConstantModel<String>.constant("center");
+      final expectedResult = const PagebuilderResponsiveOrConstant<Alignment>.constant(Alignment.center);
+
+      // When
+      final result = PageBuilderWidgetModel(
+          id: "test",
+          elementType: "container",
+          properties: null,
+          hoverProperties: null,
+          children: null,
+          containerChild: null,
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: alignmentModel,
+          customCSS: null).toDomain().alignment;
+
+      // Then
+      expect(result, expectedResult);
+    });
+
+    test("check if responsive alignment is converted correctly from model to domain", () {
+      // Given
+      final alignmentModel = const PagebuilderResponsiveOrConstantModel<String>.responsive({
+        "mobile": "topLeft",
+        "tablet": "center",
+        "desktop": "bottomRight"
+      });
+      final expectedResult = const PagebuilderResponsiveOrConstant<Alignment>.responsive({
+        "mobile": Alignment.topLeft,
+        "tablet": Alignment.center,
+        "desktop": Alignment.bottomRight
+      });
+
+      // When
+      final result = PageBuilderWidgetModel(
+          id: "test",
+          elementType: "container",
+          properties: null,
+          hoverProperties: null,
+          children: null,
+          containerChild: null,
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: alignmentModel,
+          customCSS: null).toDomain().alignment;
+
+      // Then
+      expect(result, expectedResult);
+    });
+
+    test("check if null alignment is handled correctly", () {
+      // Given
+      const PagebuilderResponsiveOrConstantModel<String>? alignmentModel = null;
+
+      // When
+      final result = PageBuilderWidgetModel(
+          id: "test",
+          elementType: "container",
+          properties: null,
+          hoverProperties: null,
+          children: null,
+          containerChild: null,
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: alignmentModel,
+          customCSS: null).toDomain().alignment;
+
+      // Then
+      expect(result, null);
+    });
+  });
+
+  group("PagebuilderWidgetModel_ConvertAlignmentFromDomain", () {
+    test("check if constant alignment is converted correctly from domain to model", () {
+      // Given
+      final widget = PageBuilderWidget(
+          id: UniqueID.fromUniqueString("test"),
+          elementType: PageBuilderWidgetType.container,
+          properties: null,
+          hoverProperties: null,
+          children: null,
+          containerChild: null,
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: const PagebuilderResponsiveOrConstant<Alignment>.constant(Alignment.center),
+          customCSS: null);
+      final expectedResult = const PagebuilderResponsiveOrConstantModel<String>.constant("center");
+
+      // When
+      final result = PageBuilderWidgetModel.fromDomain(widget).alignment;
+
+      // Then
+      expect(result, expectedResult);
+    });
+
+    test("check if responsive alignment is converted correctly from domain to model", () {
+      // Given
+      final widget = PageBuilderWidget(
+          id: UniqueID.fromUniqueString("test"),
+          elementType: PageBuilderWidgetType.container,
+          properties: null,
+          hoverProperties: null,
+          children: null,
+          containerChild: null,
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: const PagebuilderResponsiveOrConstant<Alignment>.responsive({
+            "mobile": Alignment.topLeft,
+            "tablet": Alignment.center,
+            "desktop": Alignment.bottomRight
+          }),
+          customCSS: null);
+      final expectedResult = const PagebuilderResponsiveOrConstantModel<String>.responsive({
+        "mobile": "topLeft",
+        "tablet": "center",
+        "desktop": "bottomRight"
+      });
+
+      // When
+      final result = PageBuilderWidgetModel.fromDomain(widget).alignment;
+
+      // Then
+      expect(result, expectedResult);
+    });
+
+    test("check if null alignment is handled correctly from domain to model", () {
+      // Given
+      final widget = PageBuilderWidget(
+          id: UniqueID.fromUniqueString("test"),
+          elementType: PageBuilderWidgetType.container,
+          properties: null,
+          hoverProperties: null,
+          children: null,
+          containerChild: null,
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: null,
+          customCSS: null);
+
+      // When
+      final result = PageBuilderWidgetModel.fromDomain(widget).alignment;
+
+      // Then
+      expect(result, null);
     });
   });
 }
