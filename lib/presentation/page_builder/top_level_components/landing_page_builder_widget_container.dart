@@ -69,6 +69,11 @@ class _LandingPageBuilderWidgetContainerState
                             ?.getValueForBreakpoint(breakpoint) ??
                         BoxFit.cover;
 
+                    final containerWidth = widget.properties?.width
+                        ?.getValueForBreakpoint(breakpoint);
+                    final containerHeight = widget.properties?.height
+                        ?.getValueForBreakpoint(breakpoint);
+
                     return Container(
                       constraints: BoxConstraints(
                           maxWidth: _getEffectiveMaxWidth(context)),
@@ -110,6 +115,8 @@ class _LandingPageBuilderWidgetContainerState
                                       : null,
                                 ),
                                 child: Container(
+                                  width: containerWidth,
+                                  height: containerHeight,
                                   decoration: BoxDecoration(
                                     color: widget.model.background
                                                 ?.backgroundPaint?.isColor ==

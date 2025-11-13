@@ -111,9 +111,7 @@ class PagebuilderWidgetFactory {
       id: UniqueID(),
       elementType: PageBuilderWidgetType.container,
       properties: const PageBuilderContainerProperties(
-        border: null,
-        shadow: null,
-      ),
+          border: null, shadow: null, width: null, height: null),
       hoverProperties: null,
       children: null,
       containerChild: null,

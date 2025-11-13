@@ -16,14 +16,18 @@ void main() {
               color: Colors.black,
               spreadRadius: 1.0,
               blurRadius: 1.0,
-              offset: Offset(1, 2)));
+              offset: Offset(1, 2)),
+          width: null,
+          height: null);
       final expectedResult = PageBuilderContainerProperties(
           border: const PagebuilderBorder(radius: 8.0, width: null, color: null),
           shadow: PageBuilderShadow(
               color: Colors.black,
               spreadRadius: 1.0,
               blurRadius: 1.0,
-              offset: Offset(1, 2)));
+              offset: Offset(1, 2)),
+          width: null,
+          height: null);
       // When
       final result = model.copyWith(border: const PagebuilderBorder(radius: 8.0, width: null, color: null));
       // Then
@@ -44,6 +48,8 @@ void main() {
       const original = PageBuilderContainerProperties(
         border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
         shadow: shadow,
+        width: null,
+        height: null,
       );
       // When
       final copy = original.deepCopy();
@@ -65,14 +71,18 @@ void main() {
               color: Colors.black,
               spreadRadius: 1.0,
               blurRadius: 1.0,
-              offset: Offset(1, 2)));
+              offset: Offset(1, 2)),
+          width: null,
+          height: null);
       final properties2 = PageBuilderContainerProperties(
           border: const PagebuilderBorder(radius: 12.0, width: null, color: null),
           shadow: PageBuilderShadow(
               color: Colors.black,
               spreadRadius: 1.0,
               blurRadius: 1.0,
-              offset: Offset(1, 2)));
+              offset: Offset(1, 2)),
+          width: null,
+          height: null);
       // Then
       expect(properties1, properties2);
     });

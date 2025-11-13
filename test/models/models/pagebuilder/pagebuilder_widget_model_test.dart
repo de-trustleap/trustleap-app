@@ -146,7 +146,7 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           elementType: PageBuilderWidgetType.container,
           properties:
-              PageBuilderContainerProperties(border: null, shadow: null),
+              PageBuilderContainerProperties(border: null, shadow: null, width: null, height: null),
           hoverProperties: null,
           children: [],
           containerChild: null,
@@ -177,7 +177,7 @@ void main() {
           id: UniqueID.fromUniqueString("1"),
           elementType: PageBuilderWidgetType.container,
           properties:
-              PageBuilderContainerProperties(border: null, shadow: null),
+              PageBuilderContainerProperties(border: null, shadow: null, width: null, height: null),
           hoverProperties: null,
           children: [],
           containerChild: null,
