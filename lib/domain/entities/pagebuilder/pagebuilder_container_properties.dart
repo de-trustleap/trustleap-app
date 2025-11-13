@@ -3,22 +3,33 @@ import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 class PageBuilderContainerProperties extends Equatable
     implements PageBuilderProperties {
   final PagebuilderBorder? border;
   final PageBuilderShadow? shadow;
+  final PagebuilderResponsiveOrConstant<double>? width;
+  final PagebuilderResponsiveOrConstant<double>? height;
 
-  const PageBuilderContainerProperties(
-      {required this.border, required this.shadow});
+  const PageBuilderContainerProperties({
+    required this.border,
+    required this.shadow,
+    required this.width,
+    required this.height,
+  });
 
   PageBuilderContainerProperties copyWith({
     PagebuilderBorder? border,
     PageBuilderShadow? shadow,
+    PagebuilderResponsiveOrConstant<double>? width,
+    PagebuilderResponsiveOrConstant<double>? height,
   }) {
     return PageBuilderContainerProperties(
       border: border ?? this.border,
       shadow: shadow ?? this.shadow,
+      width: width ?? this.width,
+      height: height ?? this.height,
     );
   }
 
@@ -26,9 +37,11 @@ class PageBuilderContainerProperties extends Equatable
     return PageBuilderContainerProperties(
       border: border?.deepCopy(),
       shadow: shadow?.deepCopy(),
+      width: width?.deepCopy(),
+      height: height?.deepCopy(),
     );
   }
 
   @override
-  List<Object?> get props => [border, shadow];
+  List<Object?> get props => [border, shadow, width, height];
 }

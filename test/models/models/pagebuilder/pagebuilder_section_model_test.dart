@@ -241,7 +241,7 @@ void main() {
                       "660d39c1-70f7-4eb7-ba8b-41580a17d9a6"),
                   elementType: PageBuilderWidgetType.container,
                   properties: PageBuilderContainerProperties(
-                      border: const PagebuilderBorder(radius: 10, width: null, color: null), shadow: null),
+                      border: const PagebuilderBorder(radius: 10, width: null, color: null), shadow: null, width: null, height: null),
                   hoverProperties: null,
                   children: null,
                   containerChild: PageBuilderWidget(
@@ -352,7 +352,7 @@ void main() {
                       "660d39c1-70f7-4eb7-ba8b-41580a17d9a6"),
                   elementType: PageBuilderWidgetType.container,
                   properties: PageBuilderContainerProperties(
-                      border: const PagebuilderBorder(radius: 10, width: null, color: null), shadow: null),
+                      border: const PagebuilderBorder(radius: 10, width: null, color: null), shadow: null, width: null, height: null),
                   hoverProperties: null,
                   children: null,
                   containerChild: PageBuilderWidget(
