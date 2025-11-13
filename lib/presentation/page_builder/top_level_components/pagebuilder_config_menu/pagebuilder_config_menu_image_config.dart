@@ -12,6 +12,7 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/p
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_responsive_config_helper.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_shadow_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_size_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -124,6 +125,15 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
                 onChangedLocal(props?.copyWith(
                     width: updatedWidth, height: updatedHeight));
               }),
+          const SizedBox(height: 20),
+          PagebuilderShadowControl(
+              title: localization
+                  .landingpage_pagebuilder_container_config_container_shadow,
+              initialShadow: props?.shadow,
+              showSpreadRadius: true,
+              onSelected: (shadow) {
+                onChangedLocal(props?.copyWith(shadow: shadow));
+              }),
           const SizedBox(height: 30),
           Text(
             localization.pagebuilder_image_config_border_title,
@@ -136,10 +146,11 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
               minValue: 0,
               maxValue: 1000,
               onSelected: (radius) {
-                final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                final newBorder = (props?.border ??
+                        const PagebuilderBorder(
+                            width: null, radius: null, color: null))
                     .copyWith(radius: radius.toDouble());
-                onChangedLocal(
-                    props?.copyWith(border: newBorder));
+                onChangedLocal(props?.copyWith(border: newBorder));
               }),
           const SizedBox(height: 20),
           PagebuilderNumberStepperControl(
@@ -148,20 +159,22 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
               minValue: 0,
               maxValue: 100,
               onSelected: (width) {
-                final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                final newBorder = (props?.border ??
+                        const PagebuilderBorder(
+                            width: null, radius: null, color: null))
                     .copyWith(width: width.toDouble());
-                onChangedLocal(
-                    props?.copyWith(border: newBorder));
+                onChangedLocal(props?.copyWith(border: newBorder));
               }),
           const SizedBox(height: 20),
           PagebuilderColorControl(
               title: localization.pagebuilder_image_config_border_color,
               initialColor: props?.border?.color ?? Colors.transparent,
               onColorSelected: (color) {
-                final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
+                final newBorder = (props?.border ??
+                        const PagebuilderBorder(
+                            width: null, radius: null, color: null))
                     .copyWith(color: color);
-                onChangedLocal(
-                    props?.copyWith(border: newBorder));
+                onChangedLocal(props?.copyWith(border: newBorder));
               },
               onGradientSelected: null),
         ]);
