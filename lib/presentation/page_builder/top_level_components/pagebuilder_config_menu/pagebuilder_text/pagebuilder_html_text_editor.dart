@@ -26,18 +26,23 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
   late final HtmlEditorController controller;
   Color _currentTextColor = Colors.black;
   Color _currentBackgroundColor = Colors.white;
+  String _lastKnownText = "";
 
   @override
   void initState() {
     super.initState();
     controller = widget.controller ?? HtmlEditorController();
+    _lastKnownText = widget.initialHtml ?? "";
   }
 
   @override
   void didUpdateWidget(PagebuilderHTMLTextEditor oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.initialHtml != oldWidget.initialHtml) {
+    // Only update the editor if the text changed from outside (not from user input)
+    if (widget.initialHtml != oldWidget.initialHtml &&
+        widget.initialHtml != _lastKnownText) {
       controller.setText(widget.initialHtml ?? "");
+      _lastKnownText = widget.initialHtml ?? "";
     }
   }
 
@@ -166,6 +171,7 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
                 callbacks: Callbacks(
                   onChangeContent: (String? changed) {
                     if (changed != null) {
+                      _lastKnownText = changed;
                       widget.onChanged(changed);
                     }
                   },
