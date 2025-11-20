@@ -45,6 +45,8 @@ class _ReorderableColumnWidgetState extends State<ReorderableColumnWidget> {
         isContainer: (item) =>
             item.elementType == PageBuilderWidgetType.container &&
             item.containerChild == null,
+        mainAxisAlignment: widget.mainAxisAlignment,
+        crossAxisAlignment: widget.crossAxisAlignment,
         onReorder: (oldIndex, newIndex) {
           Modular.get<PagebuilderBloc>().add(
               ReorderWidgetEvent(widget.model.id.value, oldIndex, newIndex));

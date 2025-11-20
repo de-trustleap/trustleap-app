@@ -446,6 +446,7 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                 isLastItem: isLastItem,
                 hoveringAfterLast: _dragState.hoveringAfterLast,
                 isInRow: true,
+                expandHeight: widget.properties?.equalHeights == true,
                 child: DraggableItemProvider<PageBuilderWidget>(
                   dragData: PagebuilderReorderDragData<PageBuilderWidget>(
                       widget.model.id.value, index),
@@ -511,12 +512,17 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
 
     // Add remaining width spacer if needed
     if (widget.remainingWidthPercentage > 0) {
-      rowChildren.add(
-        Expanded(
-          flex: (widget.remainingWidthPercentage * 100).toInt(),
-          child: const SizedBox.shrink(),
-        ),
+      final spacer = Expanded(
+        flex: (widget.remainingWidthPercentage * 100).toInt(),
+        child: const SizedBox.shrink(),
       );
+
+      // Add spacer at beginning if end-aligned, otherwise at end
+      if (widget.properties?.mainAxisAlignment == MainAxisAlignment.end) {
+        rowChildren.insert(0, spacer);
+      } else {
+        rowChildren.add(spacer);
+      }
     }
 
     // Use IntrinsicHeight when equalHeights is true OR when hovering
@@ -524,14 +530,17 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
     final needsIntrinsicHeight =
         widget.properties?.equalHeights == true || _dragState.hoveringIndex != null;
 
+    final effectiveCrossAxis = widget.properties?.equalHeights == true
+        ? (widget.properties?.crossAxisAlignment ?? CrossAxisAlignment.stretch)
+        : (widget.properties?.crossAxisAlignment ?? CrossAxisAlignment.center);
+
     final rowContent = needsIntrinsicHeight
         ? IntrinsicHeight(
             child: Row(
               key: _containerKey,
               mainAxisAlignment: widget.properties?.mainAxisAlignment ??
                   MainAxisAlignment.center,
-              crossAxisAlignment: widget.properties?.crossAxisAlignment ??
-                  CrossAxisAlignment.center,
+              crossAxisAlignment: effectiveCrossAxis,
               children: rowChildren,
             ),
           )

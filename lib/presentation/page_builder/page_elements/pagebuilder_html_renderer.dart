@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant_extensions.dart';
+import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -29,6 +30,7 @@ class PagebuilderHtmlRenderer extends StatelessWidget {
   Widget build(BuildContext context) {
     final htmlContent = _preprocessHtmlTextDecoration(textProperties?.text ?? "");
     final baseStyle = TextStyleParser().getTextStyleFromProperties(textProperties);
+    final textAlignValue = textProperties?.alignment?.getValue();
 
     final commonTextStyle = Style(
       fontFamily: baseStyle.fontFamily,
@@ -41,10 +43,12 @@ class PagebuilderHtmlRenderer extends StatelessWidget {
       letterSpacing: baseStyle.letterSpacing,
     );
 
-    return Html(
-      data: htmlContent,
-      shrinkWrap: true,
-      style: {
+    return Align(
+      alignment: AlignmentMapper.getAlignmentFromTextAlignment(textAlignValue),
+      child: Html(
+        data: htmlContent,
+        shrinkWrap: true,
+        style: {
         "body": Style(
           margin: Margins.zero,
           padding: HtmlPaddings.zero,
@@ -63,8 +67,11 @@ class PagebuilderHtmlRenderer extends StatelessWidget {
         "p": commonTextStyle.merge(Style(
           margin: Margins.zero,
           padding: HtmlPaddings.zero,
+          textAlign: textProperties?.alignment?.getValue(),
         )),
-        "div": commonTextStyle,
+        "div": commonTextStyle.merge(Style(
+          textAlign: textProperties?.alignment?.getValue(),
+        )),
         "span": commonTextStyle,
         "b": commonTextStyle.merge(Style(
           fontWeight: FontWeight.bold,
@@ -106,16 +113,21 @@ class PagebuilderHtmlRenderer extends StatelessWidget {
         )),
         "ul": commonTextStyle.merge(Style(
           margin: Margins.zero,
-          padding: HtmlPaddings.zero,
+          padding: HtmlPaddings.only(
+            left: baseStyle.fontSize ?? 16,
+          ),
         )),
         "ol": commonTextStyle.merge(Style(
           margin: Margins.zero,
-          padding: HtmlPaddings.zero,
+          padding: HtmlPaddings.only(
+            left: baseStyle.fontSize ?? 16,
+          ),
         )),
         "li": commonTextStyle.merge(Style(
           margin: Margins.zero,
         )),
       },
+      ),
     );
   }
 }

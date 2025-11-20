@@ -46,6 +46,8 @@ class PagebuilderReorderableElement<T> extends StatefulWidget {
   final void Function(
           WidgetLibraryDragData, String targetWidgetId, DropPosition position)?
       onAddWidget;
+  final MainAxisAlignment? mainAxisAlignment;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   const PagebuilderReorderableElement({
     super.key,
@@ -57,6 +59,8 @@ class PagebuilderReorderableElement<T> extends StatefulWidget {
     this.isContainer,
     this.isSection,
     this.onAddWidget,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
   });
 
   @override
@@ -428,6 +432,8 @@ class _PagebuilderReorderableElementState<T>
 
     return Column(
       key: _containerKey,
+      mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.start,
+      crossAxisAlignment: widget.crossAxisAlignment ?? CrossAxisAlignment.center,
       children: dragTargets,
     );
   }
