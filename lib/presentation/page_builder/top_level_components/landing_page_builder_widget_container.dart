@@ -76,7 +76,8 @@ class _LandingPageBuilderWidgetContainerState
 
                     return Container(
                       constraints: BoxConstraints(
-                          maxWidth: _getEffectiveMaxWidth(context)),
+                        maxWidth: _getEffectiveMaxWidth(context),
+                      ),
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(
                             widget.model.margin?.left

@@ -10,6 +10,7 @@ class PagebuilderDragIndicators extends StatelessWidget {
   final bool hoveringAfterLast;
   final bool isInRow;
   final bool isSection;
+  final bool expandHeight;
   final Widget child;
 
   const PagebuilderDragIndicators({
@@ -22,8 +23,37 @@ class PagebuilderDragIndicators extends StatelessWidget {
     required this.hoveringAfterLast,
     required this.isInRow,
     this.isSection = false,
+    this.expandHeight = false,
     required this.child,
   });
+
+  Widget _buildStackWithIndicators(BuildContext context, bool showLeftIndicator, bool showRightIndicator) {
+    return Stack(
+      children: [
+        child,
+        if (showLeftIndicator)
+          Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 4,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
+        if (showRightIndicator)
+          Positioned(
+            right: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 4,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +102,10 @@ class PagebuilderDragIndicators extends StatelessWidget {
       showBottomIndicator = showIndicatorAfter || showInsideIndicator;
     }
 
+    final stackWidget = _buildStackWithIndicators(context, showLeftIndicator, showRightIndicator);
+
     return Column(
+      mainAxisSize: expandHeight ? MainAxisSize.max : MainAxisSize.min,
       children: [
         if (showTopIndicator &&
             (!showLeftIndicator || showInsideIndicator) &&
@@ -81,31 +114,7 @@ class PagebuilderDragIndicators extends StatelessWidget {
             height: 4,
             color: Theme.of(context).colorScheme.secondary,
           ),
-        Stack(
-          children: [
-            child,
-            if (showLeftIndicator)
-              Positioned(
-                left: 0,
-                top: 0,
-                bottom: 0,
-                child: Container(
-                  width: 4,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-              ),
-            if (showRightIndicator)
-              Positioned(
-                right: 0,
-                top: 0,
-                bottom: 0,
-                child: Container(
-                  width: 4,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-              ),
-          ],
-        ),
+        expandHeight ? Expanded(child: stackWidget) : stackWidget,
         if (showBottomIndicator)
           Container(
             height: 4,
