@@ -79,12 +79,11 @@ class _LandingPageBuilderSectionViewState
                     });
                   }
                 },
-                child: BlocBuilder<PagebuilderSelectionCubit, String?>(
+                child: BlocSelector<PagebuilderSelectionCubit, String?, bool>(
                   bloc: selectionCubit,
-                  builder: (context, selectedSectionId) {
+                  selector: (selectedSectionId) => selectedSectionId == widget.model.id.value,
+                  builder: (context, isSelected) {
                     final dragCubit = Modular.get<PagebuilderDragCubit>();
-                    final isSelected =
-                        selectedSectionId == widget.model.id.value;
                     final isLibraryDragTarget = dragCubit.libraryDragTargetContainerId == widget.model.id.value;
                     final showBorder =
                         (_isHovered && !isDragging) || isSelected || isLibraryDragTarget;

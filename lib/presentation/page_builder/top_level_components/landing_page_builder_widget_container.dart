@@ -42,18 +42,18 @@ class _LandingPageBuilderWidgetContainerState
     final selectionCubit = Modular.get<PagebuilderSelectionCubit>();
     final hoverCubit = Modular.get<PagebuilderHoverCubit>();
 
-    return BlocBuilder<PagebuilderSelectionCubit, String?>(
+    return BlocSelector<PagebuilderSelectionCubit, String?, bool>(
       bloc: selectionCubit,
-      builder: (context, selectedWidgetId) {
-        return BlocBuilder<PagebuilderHoverCubit, String?>(
+      selector: (selectedWidgetId) => selectedWidgetId == widgetID,
+      builder: (context, isSelected) {
+        return BlocSelector<PagebuilderHoverCubit, String?, bool>(
           bloc: hoverCubit,
-          builder: (context, hoveredWidgetId) {
+          selector: (hoveredWidgetId) => hoveredWidgetId == widgetID,
+          builder: (context, isHovered) {
             return BlocBuilder<PagebuilderDragCubit, bool>(
               bloc: Modular.get<PagebuilderDragCubit>(),
               builder: (context, isDragging) {
                 final dragCubit = Modular.get<PagebuilderDragCubit>();
-                final isHovered = hoveredWidgetId == widgetID;
-                final isSelected = selectedWidgetId == widgetID;
                 final isLibraryDragTarget =
                     dragCubit.libraryDragTargetContainerId == widgetID;
                 final showBorder = (isHovered && !isDragging) ||
