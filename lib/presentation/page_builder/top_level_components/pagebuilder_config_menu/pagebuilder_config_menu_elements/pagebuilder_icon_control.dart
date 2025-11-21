@@ -31,7 +31,6 @@ class _PagebuilderIconControlState extends State<PagebuilderIconControl> {
 
   Future<void> _pickIcon(
       ThemeData themeData, AppLocalizations localization) async {
-    print('==================== ICON PICKER OPENED ====================');
     IconPickerIcon? icon = await showIconPicker(
       context,
       configuration: SinglePickerConfiguration(
@@ -51,23 +50,13 @@ class _PagebuilderIconControlState extends State<PagebuilderIconControl> {
               .landingpage_pagebuilder_icon_config_icon_picker_search_no_results),
     );
 
-    print('Icon picker closed. Icon selected: ${icon != null}');
-
     if (icon != null) {
       final hexCodePoint = icon.data.codePoint.toRadixString(16);
-      print('==================== ICON SELECTED ====================');
-      print('Icon name: ${icon.data.toString()}');
-      print('Codepoint (decimal): ${icon.data.codePoint}');
-      print('Codepoint (hex): 0x$hexCodePoint');
-      print('For Flutter use: Icon(IconData(0x$hexCodePoint, fontFamily: \'MaterialIcons\'))');
-      print('========================================================');
 
       setState(() {
         _pickedIcon = Icon(icon.data);
       });
       widget.onSelected(hexCodePoint);
-    } else {
-      print('No icon selected (cancelled)');
     }
   }
 

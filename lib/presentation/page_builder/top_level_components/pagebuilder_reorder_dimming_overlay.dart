@@ -29,7 +29,11 @@ class _PagebuilderReorderDimmingOverlayState
       builder: (context, isDragging) {
         final dragCubit = Modular.get<PagebuilderDragCubit>();
         final activeContainerKey = dragCubit.activeContainerKey;
-        final shouldShowOverlay = isDragging && activeContainerKey != null;
+        final activeContainerId = dragCubit.activeContainerId;
+
+        // Check if dragging in hierarchy overlay
+        final isDraggingInHierarchy = activeContainerId?.startsWith('hierarchy-overlay') ?? false;
+        final shouldShowOverlay = isDragging;
 
         return Stack(
           children: [
@@ -43,6 +47,7 @@ class _PagebuilderReorderDimmingOverlayState
                       activeContainerKey: activeContainerKey,
                       overlayKey: _overlayKey,
                       zoomScale: widget.zoomScale,
+                      isDraggingInHierarchy: isDraggingInHierarchy,
                     ),
                   ),
                 ),
@@ -55,20 +60,28 @@ class _PagebuilderReorderDimmingOverlayState
 }
 
 class _OverlayPainter extends CustomPainter {
-  final GlobalKey activeContainerKey;
+  final GlobalKey? activeContainerKey;
   final GlobalKey overlayKey;
   final double zoomScale;
+  final bool isDraggingInHierarchy;
 
   _OverlayPainter({
     required this.activeContainerKey,
     required this.overlayKey,
     this.zoomScale = 1.0,
+    this.isDraggingInHierarchy = false,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
+    // If dragging in hierarchy overlay, always draw full overlay without cutout
+    if (isDraggingInHierarchy) {
+      _drawFullOverlay(canvas, size);
+      return;
+    }
+
     final containerRenderBox =
-        activeContainerKey.currentContext?.findRenderObject() as RenderBox?;
+        activeContainerKey?.currentContext?.findRenderObject() as RenderBox?;
     final overlayRenderBox =
         overlayKey.currentContext?.findRenderObject() as RenderBox?;
 
@@ -84,6 +97,7 @@ class _OverlayPainter extends CustomPainter {
 
         final scaledSize = containerRenderBox.size * zoomScale;
         final containerRect = relativeOffset & scaledSize;
+
         // Draw dimmed overlay with hole by drawing 4 rectangles around the container
         final paint = Paint()
           ..color = Colors.black.withValues(alpha: 0.5)
@@ -141,6 +155,7 @@ class _OverlayPainter extends CustomPainter {
   bool shouldRepaint(_OverlayPainter oldDelegate) {
     return oldDelegate.activeContainerKey != activeContainerKey ||
         oldDelegate.overlayKey != overlayKey ||
-        oldDelegate.zoomScale != zoomScale;
+        oldDelegate.zoomScale != zoomScale ||
+        oldDelegate.isDraggingInHierarchy != isDraggingInHierarchy;
   }
 }
