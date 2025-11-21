@@ -151,6 +151,10 @@ class _LandingPageBuilderHierarchyOverlayState
                         Modular.get<PagebuilderBloc>()
                             .add(ReorderSectionsEvent(oldIndex, newIndex));
                       },
+                      onWidgetReorder: (parentId, oldIndex, newIndex) {
+                        Modular.get<PagebuilderBloc>()
+                            .add(ReorderWidgetEvent(parentId, oldIndex, newIndex));
+                      },
                     ),
                   ),
                 ],
