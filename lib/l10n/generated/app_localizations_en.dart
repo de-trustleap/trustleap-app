@@ -2978,4 +2978,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pagebuilder_html_text_editor_background_color =>
       'Editor Background Color';
+
+  @override
+  String get pagebuilder_widget_controls_edit => 'Edit';
+
+  @override
+  String get pagebuilder_widget_controls_delete => 'Delete';
 }

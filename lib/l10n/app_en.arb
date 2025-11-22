@@ -3477,5 +3477,13 @@
     "pagebuilder_html_text_editor_background_color": "Editor Background Color",
     "@pagebuilder_html_text_editor_background_color": {
         "description": "Label for the background color of the HTML text editor"
+    },
+    "pagebuilder_widget_controls_edit": "Edit",
+    "@pagebuilder_widget_controls_edit": {
+        "description": "Label for the edit button in the widget controls"
+    },
+    "pagebuilder_widget_controls_delete": "Delete",
+    "@pagebuilder_widget_controls_delete": {
+        "description": "Label for the delete button in the widget controls"
     }
 }
