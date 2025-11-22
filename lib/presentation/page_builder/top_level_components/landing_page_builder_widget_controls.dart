@@ -94,55 +94,56 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                     ),
             )
           : Container(
-              width: 20,
-              height: 20,
+              width: 25,
+              height: 25,
               decoration: BoxDecoration(
                 color: themeData.colorScheme.secondary,
               ),
               child: PopupMenuButton<String>(
                 padding: EdgeInsets.zero,
+                iconSize: 16,
                 icon:
-                    const Icon(Icons.more_vert, color: Colors.white, size: 12),
-                iconSize: 12,
-                onSelected: (value) {
-                  if (value == "edit") {
-                    onEdit();
-                  } else if (value == "delete") {
-                    onDelete();
-                  }
+                    const Icon(Icons.more_vert, color: Colors.white, size: 14),
+                itemBuilder: (BuildContext context) {
+                  return <PopupMenuEntry<String>>[
+                    PopupMenuItem<String>(
+                      value: "edit",
+                      height: 32,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      onTap: () {
+                        onEdit();
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.edit,
+                              size: 14, color: themeData.colorScheme.secondary),
+                          const SizedBox(width: 6),
+                          Text(localization.pagebuilder_widget_controls_edit,
+                              style: const TextStyle(fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      value: "delete",
+                      height: 32,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      onTap: () {
+                        onDelete();
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.delete,
+                              size: 14, color: themeData.colorScheme.secondary),
+                          const SizedBox(width: 6),
+                          Text(localization.pagebuilder_widget_controls_delete,
+                              style: const TextStyle(fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                  ];
                 },
-                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                  PopupMenuItem<String>(
-                    value: "edit",
-                    height: 32,
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.edit,
-                            size: 14, color: themeData.colorScheme.secondary),
-                        const SizedBox(width: 6),
-                        Text(localization.pagebuilder_widget_controls_edit,
-                            style: const TextStyle(fontSize: 12)),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem<String>(
-                    value: "delete",
-                    height: 32,
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.delete,
-                            size: 14, color: themeData.colorScheme.secondary),
-                        const SizedBox(width: 6),
-                        Text(localization.pagebuilder_widget_controls_delete,
-                            style: const TextStyle(fontSize: 12)),
-                      ],
-                    ),
-                  ),
-                ],
               ),
             ),
     );
