@@ -149,5 +149,3 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
     );
   }
 }
-// TODO: ACTIONS FUNKTIONIEREN NOCH NICHT
-// TODO: DOPPELKLICK EINFÜHREN UM EDIT MODE ZU ÖFFNEN
