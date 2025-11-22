@@ -35,6 +35,13 @@ class LandingPageBuilderWidgetContainer extends StatefulWidget {
 
 class _LandingPageBuilderWidgetContainerState
     extends State<LandingPageBuilderWidgetContainer> {
+  final GlobalKey _widgetKey = GlobalKey();
+
+  double? getWidgetWidth() {
+    final renderBox = _widgetKey.currentContext?.findRenderObject() as RenderBox?;
+    return renderBox?.size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -79,134 +86,127 @@ class _LandingPageBuilderWidgetContainerState
                         maxWidth: _getEffectiveMaxWidth(context),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            widget.model.margin?.left
-                                    ?.getValueForBreakpoint(breakpoint) ??
-                                0,
-                            widget.model.margin?.top
-                                    ?.getValueForBreakpoint(breakpoint) ??
-                                0,
-                            widget.model.margin?.right
-                                    ?.getValueForBreakpoint(breakpoint) ??
-                                0,
-                            widget.model.margin?.bottom
-                                    ?.getValueForBreakpoint(breakpoint) ??
-                                0),
-                        child: MouseRegion(
-                          onEnter: (_) {
-                            hoverCubit.setHovered(widgetID);
-                          },
-                          onExit: (_) {
-                            if (!isDragging && hoverCubit.state == widgetID) {
-                              hoverCubit.setHovered(null);
-                            }
-                          },
-                          child: Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  border: showBorder
-                                      ? Border.all(
-                                          color: isSelected
-                                              ? themeData.colorScheme.secondary
-                                              : themeData.colorScheme.primary,
-                                          width: 2.0,
-                                        )
-                                      : null,
-                                ),
-                                child: Container(
-                                  width: containerWidth,
-                                  height: containerHeight,
-                                  decoration: BoxDecoration(
-                                    color: widget.model.background
-                                                ?.backgroundPaint?.isColor ==
-                                            true
-                                        ? widget.model.background
-                                            ?.backgroundPaint?.color
-                                        : null,
-                                    gradient: widget.model.background
-                                                ?.backgroundPaint?.isGradient ==
-                                            true
-                                        ? widget.model.background
-                                            ?.backgroundPaint?.gradient
-                                            ?.toFlutterGradient()
-                                        : null,
-                                    borderRadius: widget
-                                                .properties?.border?.radius !=
-                                            null
-                                        ? BorderRadius.circular(
-                                            widget.properties!.border!.radius!)
-                                        : null,
-                                    border: widget.properties?.border?.width !=
-                                                null &&
-                                            widget.properties?.border?.color !=
-                                                null
-                                        ? Border.all(
-                                            width: widget
-                                                .properties!.border!.width!,
-                                            color: widget
-                                                .properties!.border!.color!,
-                                          )
-                                        : null,
-                                    boxShadow: widget.properties?.shadow != null
-                                        ? [
-                                            BoxShadow(
-                                              color: widget.properties!.shadow!
-                                                      .color ??
-                                                  Colors.black,
-                                              spreadRadius: widget.properties!
-                                                      .shadow!.spreadRadius ??
-                                                  0,
-                                              blurRadius: widget.properties!
-                                                      .shadow!.blurRadius ??
-                                                  0,
-                                              offset: widget.properties!.shadow!
-                                                      .offset ??
-                                                  const Offset(0, 0),
-                                            ),
-                                          ]
-                                        : null,
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      if (widget
-                                                  .model
-                                                  .background
-                                                  ?.imageProperties
-                                                  ?.localImage ==
-                                              null &&
-                                          widget.model.background
-                                                  ?.imageProperties?.url !=
-                                              null) ...[
-                                        Positioned.fill(
-                                            child: ClipRRect(
-                                          borderRadius: widget.properties
-                                                      ?.border?.radius !=
-                                                  null
-                                              ? BorderRadius.circular(widget
-                                                  .properties!.border!.radius!)
-                                              : BorderRadius.circular(0),
-                                          child: Image.network(
-                                              widget.model.background!
-                                                  .imageProperties!.url!,
-                                              fit: contentMode),
-                                        ))
-                                      ],
-                                      if (widget.model.background
-                                              ?.imageProperties?.localImage !=
-                                          null)
-                                        Positioned.fill(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                fit: contentMode,
-                                                image: MemoryImage(widget
+                            padding: EdgeInsets.fromLTRB(
+                                widget.model.margin?.left
+                                        ?.getValueForBreakpoint(breakpoint) ??
+                                    0,
+                                widget.model.margin?.top
+                                        ?.getValueForBreakpoint(breakpoint) ??
+                                    0,
+                                widget.model.margin?.right
+                                        ?.getValueForBreakpoint(breakpoint) ??
+                                    0,
+                                widget.model.margin?.bottom
+                                        ?.getValueForBreakpoint(breakpoint) ??
+                                    0),
+                            child: MouseRegion(
+                              onEnter: (_) {
+                                hoverCubit.setHovered(widgetID);
+                              },
+                              onExit: (_) {
+                                if (!isDragging &&
+                                    hoverCubit.state == widgetID) {
+                                  hoverCubit.setHovered(null);
+                                }
+                              },
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    key: _widgetKey,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      border: showBorder
+                                          ? Border.all(
+                                              color: isSelected
+                                                  ? themeData
+                                                      .colorScheme.secondary
+                                                  : themeData
+                                                      .colorScheme.primary,
+                                              width: 2.0,
+                                            )
+                                          : null,
+                                    ),
+                                    child: Container(
+                                      width: containerWidth,
+                                      height: containerHeight,
+                                      decoration: BoxDecoration(
+                                        color: widget
                                                     .model
-                                                    .background!
-                                                    .imageProperties!
-                                                    .localImage!),
-                                              ),
+                                                    .background
+                                                    ?.backgroundPaint
+                                                    ?.isColor ==
+                                                true
+                                            ? widget.model.background
+                                                ?.backgroundPaint?.color
+                                            : null,
+                                        gradient: widget
+                                                    .model
+                                                    .background
+                                                    ?.backgroundPaint
+                                                    ?.isGradient ==
+                                                true
+                                            ? widget.model.background
+                                                ?.backgroundPaint?.gradient
+                                                ?.toFlutterGradient()
+                                            : null,
+                                        borderRadius:
+                                            widget.properties?.border?.radius !=
+                                                    null
+                                                ? BorderRadius.circular(widget
+                                                    .properties!
+                                                    .border!
+                                                    .radius!)
+                                                : null,
+                                        border:
+                                            widget.properties?.border?.width !=
+                                                        null &&
+                                                    widget.properties?.border
+                                                            ?.color !=
+                                                        null
+                                                ? Border.all(
+                                                    width: widget.properties!
+                                                        .border!.width!,
+                                                    color: widget.properties!
+                                                        .border!.color!,
+                                                  )
+                                                : null,
+                                        boxShadow:
+                                            widget.properties?.shadow != null
+                                                ? [
+                                                    BoxShadow(
+                                                      color: widget.properties!
+                                                              .shadow!.color ??
+                                                          Colors.black,
+                                                      spreadRadius: widget
+                                                              .properties!
+                                                              .shadow!
+                                                              .spreadRadius ??
+                                                          0,
+                                                      blurRadius: widget
+                                                              .properties!
+                                                              .shadow!
+                                                              .blurRadius ??
+                                                          0,
+                                                      offset: widget.properties!
+                                                              .shadow!.offset ??
+                                                          const Offset(0, 0),
+                                                    ),
+                                                  ]
+                                                : null,
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          if (widget
+                                                      .model
+                                                      .background
+                                                      ?.imageProperties
+                                                      ?.localImage ==
+                                                  null &&
+                                              widget.model.background
+                                                      ?.imageProperties?.url !=
+                                                  null) ...[
+                                            Positioned.fill(
+                                                child: ClipRRect(
                                               borderRadius: widget.properties
                                                           ?.border?.radius !=
                                                       null
@@ -214,104 +214,141 @@ class _LandingPageBuilderWidgetContainerState
                                                       .properties!
                                                       .border!
                                                       .radius!)
-                                                  : null,
-                                            ),
-                                          ),
-                                        ),
-                                      if (widget.model.background
-                                                  ?.overlayPaint !=
-                                              null &&
-                                          (widget
-                                                      .model
-                                                      .background
-                                                      ?.imageProperties
-                                                      ?.localImage !=
-                                                  null ||
-                                              widget.model.background
-                                                      ?.imageProperties?.url !=
-                                                  null)) ...[
-                                        Positioned.fill(
-                                            child: DecoratedBox(
+                                                  : BorderRadius.circular(0),
+                                              child: Image.network(
+                                                  widget.model.background!
+                                                      .imageProperties!.url!,
+                                                  fit: contentMode),
+                                            ))
+                                          ],
+                                          if (widget
+                                                  .model
+                                                  .background
+                                                  ?.imageProperties
+                                                  ?.localImage !=
+                                              null)
+                                            Positioned.fill(
+                                              child: Container(
                                                 decoration: BoxDecoration(
-                                                    borderRadius: widget.properties?.border?.radius != null
-                                                        ? BorderRadius.circular(
-                                                            widget
-                                                                .properties!
-                                                                .border!
-                                                                .radius!)
-                                                        : null,
-                                                    color: widget.model.background!.overlayPaint!.isColor == true
-                                                        ? widget
-                                                            .model
-                                                            .background!
-                                                            .overlayPaint!
-                                                            .color
-                                                        : null,
-                                                    gradient: widget
+                                                  image: DecorationImage(
+                                                    fit: contentMode,
+                                                    image: MemoryImage(widget
+                                                        .model
+                                                        .background!
+                                                        .imageProperties!
+                                                        .localImage!),
+                                                  ),
+                                                  borderRadius: widget
+                                                              .properties
+                                                              ?.border
+                                                              ?.radius !=
+                                                          null
+                                                      ? BorderRadius.circular(
+                                                          widget.properties!
+                                                              .border!.radius!)
+                                                      : null,
+                                                ),
+                                              ),
+                                            ),
+                                          if (widget.model.background
+                                                      ?.overlayPaint !=
+                                                  null &&
+                                              (widget
+                                                          .model
+                                                          .background
+                                                          ?.imageProperties
+                                                          ?.localImage !=
+                                                      null ||
+                                                  widget
+                                                          .model
+                                                          .background
+                                                          ?.imageProperties
+                                                          ?.url !=
+                                                      null)) ...[
+                                            Positioned.fill(
+                                                child: DecoratedBox(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: widget.properties?.border?.radius != null
+                                                            ? BorderRadius.circular(
+                                                                widget
+                                                                    .properties!
+                                                                    .border!
+                                                                    .radius!)
+                                                            : null,
+                                                        color: widget.model.background!.overlayPaint!.isColor == true
+                                                            ? widget
                                                                 .model
                                                                 .background!
                                                                 .overlayPaint!
-                                                                .isGradient ==
-                                                            true
-                                                        ? widget
-                                                            .model
-                                                            .background!
-                                                            .overlayPaint!
-                                                            .gradient
-                                                            ?.toFlutterGradient()
-                                                        : null)))
-                                      ],
-                                      Align(
-                                        alignment: widget.model.alignment
-                                                ?.getValueForBreakpoint(
-                                                    breakpoint) ??
-                                            Alignment.center,
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                            widget.model.padding?.left
+                                                                .color
+                                                            : null,
+                                                        gradient: widget
+                                                                    .model
+                                                                    .background!
+                                                                    .overlayPaint!
+                                                                    .isGradient ==
+                                                                true
+                                                            ? widget
+                                                                .model
+                                                                .background!
+                                                                .overlayPaint!
+                                                                .gradient
+                                                                ?.toFlutterGradient()
+                                                            : null)))
+                                          ],
+                                          Align(
+                                            alignment: widget.model.alignment
                                                     ?.getValueForBreakpoint(
                                                         breakpoint) ??
-                                                0,
-                                            widget.model.padding?.top
-                                                    ?.getValueForBreakpoint(
-                                                        breakpoint) ??
-                                                0,
-                                            widget.model.padding?.right
-                                                    ?.getValueForBreakpoint(
-                                                        breakpoint) ??
-                                                0,
-                                            widget.model.padding?.bottom
-                                                    ?.getValueForBreakpoint(
-                                                        breakpoint) ??
-                                                0,
+                                                Alignment.center,
+                                            child: Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                widget.model.padding?.left
+                                                        ?.getValueForBreakpoint(
+                                                            breakpoint) ??
+                                                    0,
+                                                widget.model.padding?.top
+                                                        ?.getValueForBreakpoint(
+                                                            breakpoint) ??
+                                                    0,
+                                                widget.model.padding?.right
+                                                        ?.getValueForBreakpoint(
+                                                            breakpoint) ??
+                                                    0,
+                                                widget.model.padding?.bottom
+                                                        ?.getValueForBreakpoint(
+                                                            breakpoint) ??
+                                                    0,
+                                              ),
+                                              child: widget.child,
+                                            ),
                                           ),
-                                          child: widget.child,
-                                        ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                  if (showBorder) ...[
+                                    LandingPageBuilderWidgetControls(
+                                      index: widget.index,
+                                      parentWidth: containerWidth ?? getWidgetWidth(),
+                                      onEdit: () {
+                                        Modular.get<PagebuilderSelectionCubit>()
+                                            .selectWidget(widgetID);
+                                        Modular.get<
+                                                PagebuilderConfigMenuCubit>()
+                                            .openConfigMenu(widget.model);
+                                      },
+                                      onDelete: () {
+                                        Modular.get<PagebuilderBloc>()
+                                            .add(DeleteWidgetEvent(widgetID));
+                                      },
+                                    )
+                                  ],
+                                ],
                               ),
-                              if (showBorder) ...[
-                                LandingPageBuilderWidgetControls(
-                                  index: widget.index,
-                                  onEdit: () {
-                                    Modular.get<PagebuilderSelectionCubit>()
-                                        .selectWidget(widgetID);
-                                    Modular.get<PagebuilderConfigMenuCubit>()
-                                        .openConfigMenu(widget.model);
-                                  },
-                                  onDelete: () {
-                                    Modular.get<PagebuilderBloc>()
-                                        .add(DeleteWidgetEvent(widgetID));
-                                  },
-                                )
-                              ],
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    );
+                        );
                   },
                 );
               },

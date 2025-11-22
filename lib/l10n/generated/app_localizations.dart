@@ -5144,6 +5144,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Editor Background Color'**
   String get pagebuilder_html_text_editor_background_color;
+
+  /// Label for the edit button in the widget controls
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get pagebuilder_widget_controls_edit;
+
+  /// Label for the delete button in the widget controls
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get pagebuilder_widget_controls_delete;
 }
 
 class _AppLocalizationsDelegate

@@ -3028,4 +3028,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get pagebuilder_html_text_editor_background_color =>
       'Editor Hintergrundfarbe';
+
+  @override
+  String get pagebuilder_widget_controls_edit => 'Bearbeiten';
+
+  @override
+  String get pagebuilder_widget_controls_delete => 'Löschen';
 }

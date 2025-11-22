@@ -426,6 +426,8 @@ class PagebuilderWidgetTreeManipulator {
           .cast<PageBuilderWidget>()
           .toList();
 
+      final childWasDeleted = updatedChildren.length != widget.children!.length;
+
       if (updatedChildren.isEmpty) {
         if (widget.elementType == PageBuilderWidgetType.row ||
             widget.elementType == PageBuilderWidgetType.column) {
@@ -448,7 +450,8 @@ class PagebuilderWidgetTreeManipulator {
                 widget.widthPercentage ?? remainingWidget.widthPercentage,
           );
         }
-      } else if (widget.elementType == PageBuilderWidgetType.row) {
+      } else if (childWasDeleted &&
+          widget.elementType == PageBuilderWidgetType.row) {
         final redistributedChildren =
             PagebuilderWidgetPlacementHelper.redistributeWidthPercentages(
                 updatedChildren);
