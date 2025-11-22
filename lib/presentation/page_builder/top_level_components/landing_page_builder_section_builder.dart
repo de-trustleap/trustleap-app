@@ -79,7 +79,14 @@ class _LandingPageBuilderSectionViewState
                     });
                   }
                 },
-                child: BlocSelector<PagebuilderSelectionCubit, String?, bool>(
+                child: GestureDetector(
+                  onDoubleTap: () {
+                    Modular.get<PagebuilderSelectionCubit>()
+                        .selectWidget(widget.model.id.value);
+                    Modular.get<PagebuilderConfigMenuCubit>()
+                        .openSectionConfigMenu(widget.model);
+                  },
+                  child: BlocSelector<PagebuilderSelectionCubit, String?, bool>(
                   bloc: selectionCubit,
                   selector: (selectedSectionId) => selectedSectionId == widget.model.id.value,
                   builder: (context, isSelected) {
@@ -352,6 +359,7 @@ class _LandingPageBuilderSectionViewState
                       },
                     );
                   },
+                ),
                 ),
               );
             },

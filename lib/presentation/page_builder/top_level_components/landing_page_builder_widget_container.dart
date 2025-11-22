@@ -109,10 +109,17 @@ class _LandingPageBuilderWidgetContainerState
                                   hoverCubit.setHovered(null);
                                 }
                               },
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    key: _widgetKey,
+                              child: GestureDetector(
+                                onDoubleTap: () {
+                                  Modular.get<PagebuilderSelectionCubit>()
+                                      .selectWidget(widgetID);
+                                  Modular.get<PagebuilderConfigMenuCubit>()
+                                      .openConfigMenu(widget.model);
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      key: _widgetKey,
                                     decoration: BoxDecoration(
                                       color: Colors.transparent,
                                       border: showBorder
@@ -345,6 +352,7 @@ class _LandingPageBuilderWidgetContainerState
                                     )
                                   ],
                                 ],
+                                ),
                               ),
                             ),
                           ),
