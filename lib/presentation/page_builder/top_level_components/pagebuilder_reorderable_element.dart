@@ -142,10 +142,14 @@ class _PagebuilderReorderableElementState<T>
                 );
               });
 
-              Modular.get<PagebuilderDragCubit>().setLibraryDragTarget(
-                containerId: widget.containerId,
-                containerKey: _containerKey,
-              );
+              final dragCubit = Modular.get<PagebuilderDragCubit>();
+              if (dragCubit.state.libraryDragTargetContainerId !=
+                  widget.containerId) {
+                dragCubit.setLibraryDragTarget(
+                  containerId: widget.containerId,
+                  containerKey: _containerKey,
+                );
+              }
 
               return true;
             } else if (details.data is PagebuilderReorderDragData<T>) {
@@ -228,10 +232,14 @@ class _PagebuilderReorderableElementState<T>
                 );
               });
 
-              Modular.get<PagebuilderDragCubit>().setLibraryDragTarget(
-                containerId: widget.containerId,
-                containerKey: _containerKey,
-              );
+              final dragCubit = Modular.get<PagebuilderDragCubit>();
+              if (dragCubit.state.libraryDragTargetContainerId !=
+                  widget.containerId) {
+                dragCubit.setLibraryDragTarget(
+                  containerId: widget.containerId,
+                  containerKey: _containerKey,
+                );
+              }
 
               return;
             }
@@ -313,7 +321,8 @@ class _PagebuilderReorderableElementState<T>
           onAcceptWithDetails: (details) {
             if (details.data is WidgetLibraryDragData) {
               // Check if we're still dragging - if not, this is a duplicate/stale event
-              final isDragging = Modular.get<PagebuilderDragCubit>().state;
+              final isDragging =
+                  Modular.get<PagebuilderDragCubit>().state.isDragging;
               if (!isDragging) {
                 return;
               }

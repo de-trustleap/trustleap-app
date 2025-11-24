@@ -149,7 +149,8 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
   final double _dragFeedbackOpacity = 0.7;
   final double _draggingChildOpacity = 0.3;
 
-  PagebuilderDragState<PageBuilderWidget> _dragState = const PagebuilderDragState();
+  PagebuilderDragState<PageBuilderWidget> _dragState =
+      const PagebuilderDragState();
   final Map<int, GlobalKey> _itemKeys = {};
   final GlobalKey _containerKey = GlobalKey();
 
@@ -205,7 +206,8 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                   0) *
               widget.scaleFactor;
 
-      final isHovering = _dragState.hoveringIndex == index && _dragState.draggingIndex != index;
+      final isHovering = _dragState.hoveringIndex == index &&
+          _dragState.draggingIndex != index;
 
       rowChildren.add(
         Expanded(
@@ -214,10 +216,12 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             key: ValueKey(child.id.value),
             onWillAcceptWithDetails: (details) {
               if (details.data is WidgetLibraryDragData) {
-                final targetIsContainer = child.elementType == PageBuilderWidgetType.container &&
-                    child.containerChild == null;
+                final targetIsContainer =
+                    child.elementType == PageBuilderWidgetType.container &&
+                        child.containerChild == null;
 
-                final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+                final finalPosition =
+                    PagebuilderDragPositionDetector.detectFinalPosition(
                   itemKey: itemKey,
                   globalOffset: details.offset,
                   isLastItem: isLastItem,
@@ -228,16 +232,21 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                 setState(() {
                   _dragState = _dragState.copyWith(
                     hoveringIndex: index,
-                    hoveringAfterLast: finalPosition == DropPosition.after && isLastItem,
+                    hoveringAfterLast:
+                        finalPosition == DropPosition.after && isLastItem,
                     leftDownwards: false,
                     libraryWidgetHoverPosition: finalPosition,
                   );
                 });
 
-                Modular.get<PagebuilderDragCubit>().setLibraryDragTarget(
-                  containerId: widget.model.id.value,
-                  containerKey: _containerKey,
-                );
+                final dragCubit = Modular.get<PagebuilderDragCubit>();
+                if (dragCubit.state.libraryDragTargetContainerId !=
+                    widget.model.id.value) {
+                  dragCubit.setLibraryDragTarget(
+                    containerId: widget.model.id.value,
+                    containerKey: _containerKey,
+                  );
+                }
 
                 return true;
               } else if (details.data
@@ -279,10 +288,12 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             },
             onMove: (details) {
               if (details.data is WidgetLibraryDragData) {
-                final targetIsContainer = child.elementType == PageBuilderWidgetType.container &&
-                    child.containerChild == null;
+                final targetIsContainer =
+                    child.elementType == PageBuilderWidgetType.container &&
+                        child.containerChild == null;
 
-                final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+                final finalPosition =
+                    PagebuilderDragPositionDetector.detectFinalPosition(
                   itemKey: itemKey,
                   globalOffset: details.offset,
                   isLastItem: isLastItem,
@@ -292,18 +303,24 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
 
                 setState(() {
                   _dragState = _dragState.copyWith(
-                    hoveringIndex: finalPosition == DropPosition.after && isLastItem
-                        ? items.length
-                        : index,
-                    hoveringAfterLast: finalPosition == DropPosition.after && isLastItem,
+                    hoveringIndex:
+                        finalPosition == DropPosition.after && isLastItem
+                            ? items.length
+                            : index,
+                    hoveringAfterLast:
+                        finalPosition == DropPosition.after && isLastItem,
                     libraryWidgetHoverPosition: finalPosition,
                   );
                 });
 
-                Modular.get<PagebuilderDragCubit>().setLibraryDragTarget(
-                  containerId: widget.model.id.value,
-                  containerKey: _containerKey,
-                );
+                final dragCubit = Modular.get<PagebuilderDragCubit>();
+                if (dragCubit.state.libraryDragTargetContainerId !=
+                    widget.model.id.value) {
+                  dragCubit.setLibraryDragTarget(
+                    containerId: widget.model.id.value,
+                    containerKey: _containerKey,
+                  );
+                }
 
                 return;
               }
@@ -329,7 +346,8 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                 if (renderBox != null) {
                   final localPosition = renderBox.globalToLocal(details.offset);
                   final width = renderBox.size.width;
-                  final isInRightPart = localPosition.dx > width * _dragAfterLastThreshold;
+                  final isInRightPart =
+                      localPosition.dx > width * _dragAfterLastThreshold;
 
                   if (isInRightPart) {
                     setState(() {
@@ -352,7 +370,8 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
               } else if (data
                   is PagebuilderReorderDragData<PageBuilderWidget>) {
                 // Only handle onLeave if we're dragging in this container
-                final isDraggingInThisContainer = _dragState.draggingIndex != null;
+                final isDraggingInThisContainer =
+                    _dragState.draggingIndex != null;
                 if (!isDraggingInThisContainer) {
                   return;
                 }
@@ -387,19 +406,23 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                 final widgetLibraryData = details.data as WidgetLibraryDragData;
                 final targetWidgetId = child.id.value;
 
-                final targetIsContainer = child.elementType == PageBuilderWidgetType.container &&
-                    child.containerChild == null;
-                final finalPosition = PagebuilderDragPositionDetector.detectFinalPosition(
+                final targetIsContainer =
+                    child.elementType == PageBuilderWidgetType.container &&
+                        child.containerChild == null;
+                final finalPosition =
+                    PagebuilderDragPositionDetector.detectFinalPosition(
                   itemKey: itemKey,
                   globalOffset: details.offset,
                   isLastItem: isLastItem,
                   isInRow: true,
                   targetIsContainer: targetIsContainer,
-                  fallback: _dragState.libraryWidgetHoverPosition ?? DropPosition.before,
+                  fallback: _dragState.libraryWidgetHoverPosition ??
+                      DropPosition.before,
                 );
 
                 // Check if this drop should be processed
-                final isDragging = Modular.get<PagebuilderDragCubit>().state;
+                final isDragging =
+                    Modular.get<PagebuilderDragCubit>().state.isDragging;
                 if (!isDragging) {
                   return;
                 }
@@ -441,7 +464,8 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             builder: (context, candidateData, rejectedData) {
               return PagebuilderDragIndicators(
                 isHovering: isHovering,
-                libraryWidgetHoverPosition: _dragState.libraryWidgetHoverPosition,
+                libraryWidgetHoverPosition:
+                    _dragState.libraryWidgetHoverPosition,
                 draggingIndex: _dragState.draggingIndex,
                 index: index,
                 isLastItem: isLastItem,
@@ -472,14 +496,13 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                     setState(() {
                       _dragState = _dragState.clearDrag();
                     });
-                    Modular.get<PagebuilderDragCubit>()
-                        .setDragging(false);
+                    Modular.get<PagebuilderDragCubit>().setDragging(false);
                   },
                   buildFeedback: (context) {
                     // Get the actual width of the item from the RenderBox
                     double? width;
-                    final renderBox = itemKey.currentContext
-                        ?.findRenderObject() as RenderBox?;
+                    final renderBox = itemKey.currentContext?.findRenderObject()
+                        as RenderBox?;
                     if (renderBox != null) {
                       width = renderBox.size.width;
                     }
@@ -513,23 +536,42 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
 
     // Add remaining width spacer if needed
     if (widget.remainingWidthPercentage > 0) {
-      final spacer = Expanded(
-        flex: (widget.remainingWidthPercentage * 100).toInt(),
-        child: const SizedBox.shrink(),
-      );
+      final mainAxisAlignment =
+          widget.properties?.mainAxisAlignment ?? MainAxisAlignment.center;
 
-      // Add spacer at beginning if end-aligned, otherwise at end
-      if (widget.properties?.mainAxisAlignment == MainAxisAlignment.end) {
-        rowChildren.insert(0, spacer);
+      if (mainAxisAlignment == MainAxisAlignment.center) {
+        // For center alignment, split the spacer in half
+        final halfSpacerFlex =
+            (widget.remainingWidthPercentage * 100 / 2).toInt();
+        final leftSpacer = Expanded(
+          flex: halfSpacerFlex,
+          child: const SizedBox.shrink(),
+        );
+        final rightSpacer = Expanded(
+          flex: halfSpacerFlex,
+          child: const SizedBox.shrink(),
+        );
+        rowChildren.insert(0, leftSpacer);
+        rowChildren.add(rightSpacer);
       } else {
-        rowChildren.add(spacer);
+        final spacer = Expanded(
+          flex: (widget.remainingWidthPercentage * 100).toInt(),
+          child: const SizedBox.shrink(),
+        );
+
+        // Add spacer at beginning if end-aligned, otherwise at end
+        if (mainAxisAlignment == MainAxisAlignment.end) {
+          rowChildren.insert(0, spacer);
+        } else {
+          rowChildren.add(spacer);
+        }
       }
     }
 
     // Use IntrinsicHeight when equalHeights is true OR when hovering
     // (hovering needs IntrinsicHeight to make the indicator visible)
-    final needsIntrinsicHeight =
-        widget.properties?.equalHeights == true || _dragState.hoveringIndex != null;
+    final needsIntrinsicHeight = widget.properties?.equalHeights == true ||
+        _dragState.hoveringIndex != null;
 
     final effectiveCrossAxis = widget.properties?.equalHeights == true
         ? (widget.properties?.crossAxisAlignment ?? CrossAxisAlignment.stretch)

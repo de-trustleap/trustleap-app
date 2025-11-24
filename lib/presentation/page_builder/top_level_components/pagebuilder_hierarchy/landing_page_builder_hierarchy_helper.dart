@@ -63,38 +63,63 @@ class LandingPageBuilderHierarchyHelper {
   }
 
   Map<String, dynamic> getOptimalExpansionState(String targetWidgetId) {
-    final result = {
-      'sectionsToExpand': <String>[],
-      'widgetsToExpand': <String>[],
-      'sectionsToCollapse': <String>[],
-      'widgetsToCollapse': <String>[],
-    };
-
-    final targetInfo = _findTargetLocation(targetWidgetId);
-    if (targetInfo == null) return result;
-
-    final sectionsToExpand = result['sectionsToExpand'] as List<String>;
-    final widgetsToExpand = result['widgetsToExpand'] as List<String>;
-    final sectionsToCollapse = result['sectionsToCollapse'] as List<String>;
-    final widgetsToCollapse = result['widgetsToCollapse'] as List<String>;
-
-    sectionsToExpand.add(targetInfo.sectionId);
-
-    if (!targetInfo.isSection) {
-      widgetsToExpand.addAll(targetInfo.widgetPath);
-    }
+    final sectionsToExpand = <String>[];
+    final widgetsToExpand = <String>[];
 
     for (final section in page.sections ?? []) {
-      if (section.id.value != targetInfo.sectionId) {
-        sectionsToCollapse.add(section.id.value);
-        _collectAllWidgetIds(section, widgetsToCollapse);
-      } else if (!targetInfo.isSection) {
-        _collectWidgetsToCollapseInSection(
-            section, targetInfo.widgetPath, widgetsToCollapse);
+      if (section.id.value == targetWidgetId) {
+        sectionsToExpand.add(targetWidgetId);
+        return {
+          'sectionsToExpand': sectionsToExpand,
+          'widgetsToExpand': widgetsToExpand,
+          'sectionsToCollapse': <String>[],
+          'widgetsToCollapse': <String>[],
+        };
       }
     }
 
-    return result;
+    _TargetInfo? targetInfo;
+    for (final section in page.sections ?? []) {
+      final widgetPath = _findWidgetPathInSection(targetWidgetId, section);
+      if (widgetPath.isNotEmpty ||
+          _widgetExistsAtRootLevel(targetWidgetId, section)) {
+        sectionsToExpand.add(section.id.value);
+        widgetsToExpand.addAll(widgetPath);
+        targetInfo = _TargetInfo(
+          sectionId: section.id.value,
+          isSection: false,
+          widgetPath: widgetPath,
+        );
+        break;
+      }
+    }
+
+    if (targetInfo == null) {
+      return {
+        'sectionsToExpand': <String>[],
+        'widgetsToExpand': <String>[],
+        'sectionsToCollapse': <String>[],
+        'widgetsToCollapse': <String>[],
+      };
+    }
+
+    return {
+      'sectionsToExpand': sectionsToExpand,
+      'widgetsToExpand': widgetsToExpand,
+      'sectionsToCollapse': <String>[],
+      'widgetsToCollapse': <String>[],
+    };
+  }
+
+  bool _widgetExistsAtRootLevel(
+      String targetWidgetId, PageBuilderSection section) {
+    final widgets = section.widgets ?? [];
+    for (final widget in widgets) {
+      if (widget.id.value == targetWidgetId) {
+        return true;
+      }
+    }
+    return false;
   }
 
   Map<String, List<String>> getExpansionPathForWidget(String targetWidgetId) {
@@ -210,69 +235,6 @@ class LandingPageBuilderHierarchyHelper {
     }
 
     return false;
-  }
-
-  void _collectAllWidgetIds(
-      PageBuilderSection section, List<String> collectedIds) {
-    final widgets = section.widgets ?? [];
-
-    for (final widget in widgets) {
-      _collectAllWidgetIdsInWidget(widget, collectedIds);
-    }
-  }
-
-  void _collectAllWidgetIdsInWidget(
-      PageBuilderWidget widget, List<String> collectedIds) {
-    collectedIds.add(widget.id.value);
-
-    if (widget.children != null) {
-      for (final child in widget.children!) {
-        _collectAllWidgetIdsInWidget(child, collectedIds);
-      }
-    }
-
-    if (widget.containerChild != null) {
-      _collectAllWidgetIdsInWidget(widget.containerChild!, collectedIds);
-    }
-  }
-
-  void _collectWidgetsToCollapseInSection(PageBuilderSection section,
-      List<String> expandPath, List<String> collectedIds) {
-    final widgets = section.widgets ?? [];
-
-    for (final widget in widgets) {
-      _collectWidgetsToCollapseInWidget(widget, expandPath, collectedIds);
-    }
-  }
-
-  void _collectWidgetsToCollapseInWidget(PageBuilderWidget widget,
-      List<String> expandPath, List<String> collectedIds) {
-    final widgetId = widget.id.value;
-
-    if (!expandPath.contains(widgetId)) {
-      collectedIds.add(widgetId);
-
-      if (widget.children != null) {
-        for (final child in widget.children!) {
-          _collectAllWidgetIdsInWidget(child, collectedIds);
-        }
-      }
-
-      if (widget.containerChild != null) {
-        _collectAllWidgetIdsInWidget(widget.containerChild!, collectedIds);
-      }
-    } else {
-      if (widget.children != null) {
-        for (final child in widget.children!) {
-          _collectWidgetsToCollapseInWidget(child, expandPath, collectedIds);
-        }
-      }
-
-      if (widget.containerChild != null) {
-        _collectWidgetsToCollapseInWidget(
-            widget.containerChild!, expandPath, collectedIds);
-      }
-    }
   }
 }
 

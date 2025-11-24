@@ -1,41 +1,38 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class PagebuilderDragCubit extends Cubit<bool> {
-  PagebuilderDragCubit() : super(false);
+part 'pagebuilder_drag_state.dart';
 
-  String? activeContainerId;
-  GlobalKey? activeContainerKey;
-
-  String? libraryDragTargetContainerId;
-  GlobalKey? libraryDragTargetContainerKey;
+class PagebuilderDragCubit extends Cubit<PagebuilderDragCubitState> {
+  PagebuilderDragCubit()
+      : super(const PagebuilderDragCubitState(isDragging: false));
 
   void setDragging(bool isDragging,
       {String? containerId, GlobalKey? containerKey}) {
     if (isDragging) {
-      activeContainerId = containerId;
-      activeContainerKey = containerKey;
+      emit(state.copyWith(
+        isDragging: true,
+        activeContainerId: containerId,
+        activeContainerKey: containerKey,
+      ));
     } else {
-      activeContainerId = null;
-      activeContainerKey = null;
-      libraryDragTargetContainerId = null;
-      libraryDragTargetContainerKey = null;
-    }
-
-    if (state != isDragging) {
-      emit(isDragging);
+      emit(state.copyWith(
+        isDragging: false,
+        clearActiveContainer: true,
+        clearLibraryDragTarget: true,
+      ));
     }
   }
 
   void setLibraryDragTarget({String? containerId, GlobalKey? containerKey}) {
-    libraryDragTargetContainerId = containerId;
-    libraryDragTargetContainerKey = containerKey;
-    emit(state);
+    emit(state.copyWith(
+      libraryDragTargetContainerId: containerId,
+      libraryDragTargetContainerKey: containerKey,
+    ));
   }
 
   void clearLibraryDragTarget() {
-    libraryDragTargetContainerId = null;
-    libraryDragTargetContainerKey = null;
-    emit(state);
+    emit(state.copyWith(clearLibraryDragTarget: true));
   }
 }

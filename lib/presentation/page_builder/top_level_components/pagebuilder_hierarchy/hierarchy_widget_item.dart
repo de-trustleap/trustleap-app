@@ -1,3 +1,5 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_hierarchy_expansion/pagebuilder_hierarchy_expansion_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -5,26 +7,22 @@ import 'package:finanzbegleiter/presentation/page_builder/top_level_components/d
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_drag_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class HierarchyWidgetItem extends StatelessWidget {
   final PageBuilderWidget widget;
-  final String? selectedWidgetId;
   final int depth;
   final Function(String widgetId, bool isSection) onItemSelected;
   final Function(String parentId, int oldIndex, int newIndex)? onWidgetReorder;
-  final Set<String> expandedWidgets;
-  final Function(String widgetId) onToggleExpand;
   final bool showDragHandle;
 
   const HierarchyWidgetItem({
     super.key,
     required this.widget,
-    required this.selectedWidgetId,
     required this.depth,
     required this.onItemSelected,
     required this.onWidgetReorder,
-    required this.expandedWidgets,
-    required this.onToggleExpand,
     this.showDragHandle = true,
   });
 
@@ -33,8 +31,26 @@ class HierarchyWidgetItem extends StatelessWidget {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final widgetId = widget.id.value;
-    final isExpanded = expandedWidgets.contains(widgetId);
-    final isSelected = selectedWidgetId == widgetId;
+
+    return RepaintBoundary(
+      child: BlocSelector<PagebuilderHierarchyExpansionCubit, PagebuilderHierarchyExpansionState, bool>(
+        bloc: Modular.get<PagebuilderHierarchyExpansionCubit>(),
+        selector: (state) => state.expandedWidgets.contains(widgetId),
+        builder: (context, isExpanded) {
+          return BlocSelector<PagebuilderSelectionCubit, String?, bool>(
+            bloc: Modular.get<PagebuilderSelectionCubit>(),
+            selector: (selectedWidgetId) => selectedWidgetId == widgetId,
+            builder: (context, isSelected) {
+              return _buildItem(context, themeData, localization, widgetId, isExpanded, isSelected);
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildItem(BuildContext context, ThemeData themeData, AppLocalizations localization,
+      String widgetId, bool isExpanded, bool isSelected) {
     final hasChildren =
         (widget.children != null && widget.children!.isNotEmpty) ||
             widget.containerChild != null;
@@ -69,7 +85,7 @@ class HierarchyWidgetItem extends StatelessWidget {
                     if (hasChildren)
                       GestureDetector(
                         onTap: () {
-                          onToggleExpand(widgetId);
+                          Modular.get<PagebuilderHierarchyExpansionCubit>().toggleWidget(widgetId);
                         },
                         child: Container(
                           width: 16,
@@ -137,12 +153,9 @@ class HierarchyWidgetItem extends StatelessWidget {
         (widget.children == null || widget.children!.isEmpty)) {
       return HierarchyWidgetItem(
         widget: widget.containerChild!,
-        selectedWidgetId: selectedWidgetId,
         depth: depth + 1,
         onItemSelected: onItemSelected,
         onWidgetReorder: onWidgetReorder,
-        expandedWidgets: expandedWidgets,
-        onToggleExpand: onToggleExpand,
         showDragHandle: false,
       );
     }
@@ -163,12 +176,9 @@ class HierarchyWidgetItem extends StatelessWidget {
         buildChild: (child, index) {
           return HierarchyWidgetItem(
             widget: child,
-            selectedWidgetId: selectedWidgetId,
             depth: depth + 1,
             onItemSelected: onItemSelected,
             onWidgetReorder: onWidgetReorder,
-            expandedWidgets: expandedWidgets,
-            onToggleExpand: onToggleExpand,
             showDragHandle: hasMultipleChildren,
           );
         },

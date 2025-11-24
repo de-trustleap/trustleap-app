@@ -15,15 +15,15 @@ void main() {
     });
 
     test("initial state should be false", () {
-      expect(cubit.state, false);
+      expect(cubit.state.isDragging, false);
     });
 
     test("initial activeContainerId should be null", () {
-      expect(cubit.activeContainerId, null);
+      expect(cubit.state.activeContainerId, null);
     });
 
     test("initial activeContainerKey should be null", () {
-      expect(cubit.activeContainerKey, null);
+      expect(cubit.state.activeContainerKey, null);
     });
 
     test("setDragging(true) should emit true and set containerId and containerKey", () {
@@ -32,9 +32,9 @@ void main() {
 
       cubit.setDragging(true, containerId: testContainerId, containerKey: testContainerKey);
 
-      expect(cubit.state, true);
-      expect(cubit.activeContainerId, testContainerId);
-      expect(cubit.activeContainerKey, testContainerKey);
+      expect(cubit.state.isDragging, true);
+      expect(cubit.state.activeContainerId, testContainerId);
+      expect(cubit.state.activeContainerKey, testContainerKey);
     });
 
     test("setDragging(false) should emit false and clear containerId and containerKey", () {
@@ -47,14 +47,14 @@ void main() {
       // Then set to false
       cubit.setDragging(false);
 
-      expect(cubit.state, false);
-      expect(cubit.activeContainerId, null);
-      expect(cubit.activeContainerKey, null);
+      expect(cubit.state.isDragging, false);
+      expect(cubit.state.activeContainerId, null);
+      expect(cubit.state.activeContainerKey, null);
     });
 
     test("setDragging should only emit when state changes", () {
       expectLater(
-        cubit.stream,
+        cubit.stream.map((state) => state.isDragging),
         emitsInOrder([true, false]),
       );
 
@@ -67,9 +67,9 @@ void main() {
     test("setDragging(true) without containerId should still set state", () {
       cubit.setDragging(true);
 
-      expect(cubit.state, true);
-      expect(cubit.activeContainerId, null);
-      expect(cubit.activeContainerKey, null);
+      expect(cubit.state.isDragging, true);
+      expect(cubit.state.activeContainerId, null);
+      expect(cubit.state.activeContainerKey, null);
     });
 
     test("setDragging(true) with only containerId should work", () {
@@ -77,9 +77,9 @@ void main() {
 
       cubit.setDragging(true, containerId: testContainerId);
 
-      expect(cubit.state, true);
-      expect(cubit.activeContainerId, testContainerId);
-      expect(cubit.activeContainerKey, null);
+      expect(cubit.state.isDragging, true);
+      expect(cubit.state.activeContainerId, testContainerId);
+      expect(cubit.state.activeContainerKey, null);
     });
 
     test("setDragging(true) with only containerKey should work", () {
@@ -87,9 +87,9 @@ void main() {
 
       cubit.setDragging(true, containerKey: testContainerKey);
 
-      expect(cubit.state, true);
-      expect(cubit.activeContainerId, null);
-      expect(cubit.activeContainerKey, testContainerKey);
+      expect(cubit.state.isDragging, true);
+      expect(cubit.state.activeContainerId, null);
+      expect(cubit.state.activeContainerKey, testContainerKey);
     });
 
     test("multiple setDragging(true) calls should update containerId and containerKey", () {
@@ -99,20 +99,20 @@ void main() {
       final secondContainerKey = GlobalKey();
 
       cubit.setDragging(true, containerId: firstContainerId, containerKey: firstContainerKey);
-      expect(cubit.activeContainerId, firstContainerId);
-      expect(cubit.activeContainerKey, firstContainerKey);
+      expect(cubit.state.activeContainerId, firstContainerId);
+      expect(cubit.state.activeContainerKey, firstContainerKey);
 
       cubit.setDragging(true, containerId: secondContainerId, containerKey: secondContainerKey);
-      expect(cubit.activeContainerId, secondContainerId);
-      expect(cubit.activeContainerKey, secondContainerKey);
+      expect(cubit.state.activeContainerId, secondContainerId);
+      expect(cubit.state.activeContainerKey, secondContainerKey);
     });
 
     test("initial libraryDragTargetContainerId should be null", () {
-      expect(cubit.libraryDragTargetContainerId, null);
+      expect(cubit.state.libraryDragTargetContainerId, null);
     });
 
     test("initial libraryDragTargetContainerKey should be null", () {
-      expect(cubit.libraryDragTargetContainerKey, null);
+      expect(cubit.state.libraryDragTargetContainerKey, null);
     });
 
     test("setLibraryDragTarget should set containerId and containerKey", () {
@@ -121,8 +121,8 @@ void main() {
 
       cubit.setLibraryDragTarget(containerId: testContainerId, containerKey: testContainerKey);
 
-      expect(cubit.libraryDragTargetContainerId, testContainerId);
-      expect(cubit.libraryDragTargetContainerKey, testContainerKey);
+      expect(cubit.state.libraryDragTargetContainerId, testContainerId);
+      expect(cubit.state.libraryDragTargetContainerKey, testContainerKey);
     });
 
     test("clearLibraryDragTarget should clear containerId and containerKey", () {
@@ -132,8 +132,8 @@ void main() {
       cubit.setLibraryDragTarget(containerId: testContainerId, containerKey: testContainerKey);
       cubit.clearLibraryDragTarget();
 
-      expect(cubit.libraryDragTargetContainerId, null);
-      expect(cubit.libraryDragTargetContainerKey, null);
+      expect(cubit.state.libraryDragTargetContainerId, null);
+      expect(cubit.state.libraryDragTargetContainerKey, null);
     });
 
     test("setDragging(false) should clear library drag target", () {
@@ -145,16 +145,16 @@ void main() {
       cubit.setDragging(true, containerId: testContainerId, containerKey: testContainerKey);
       cubit.setLibraryDragTarget(containerId: testLibraryTargetId, containerKey: testLibraryTargetKey);
 
-      expect(cubit.libraryDragTargetContainerId, testLibraryTargetId);
-      expect(cubit.libraryDragTargetContainerKey, testLibraryTargetKey);
+      expect(cubit.state.libraryDragTargetContainerId, testLibraryTargetId);
+      expect(cubit.state.libraryDragTargetContainerKey, testLibraryTargetKey);
 
       cubit.setDragging(false);
 
-      expect(cubit.state, false);
-      expect(cubit.activeContainerId, null);
-      expect(cubit.activeContainerKey, null);
-      expect(cubit.libraryDragTargetContainerId, null);
-      expect(cubit.libraryDragTargetContainerKey, null);
+      expect(cubit.state.isDragging, false);
+      expect(cubit.state.activeContainerId, null);
+      expect(cubit.state.activeContainerKey, null);
+      expect(cubit.state.libraryDragTargetContainerId, null);
+      expect(cubit.state.libraryDragTargetContainerKey, null);
     });
 
     test("setLibraryDragTarget with only containerId should work", () {
@@ -162,8 +162,8 @@ void main() {
 
       cubit.setLibraryDragTarget(containerId: testContainerId);
 
-      expect(cubit.libraryDragTargetContainerId, testContainerId);
-      expect(cubit.libraryDragTargetContainerKey, null);
+      expect(cubit.state.libraryDragTargetContainerId, testContainerId);
+      expect(cubit.state.libraryDragTargetContainerKey, null);
     });
 
     test("setLibraryDragTarget with only containerKey should work", () {
@@ -171,28 +171,28 @@ void main() {
 
       cubit.setLibraryDragTarget(containerKey: testContainerKey);
 
-      expect(cubit.libraryDragTargetContainerId, null);
-      expect(cubit.libraryDragTargetContainerKey, testContainerKey);
+      expect(cubit.state.libraryDragTargetContainerId, null);
+      expect(cubit.state.libraryDragTargetContainerKey, testContainerKey);
     });
 
     test("setLibraryDragTarget should work without affecting drag state", () {
-      expect(cubit.state, false);
+      expect(cubit.state.isDragging, false);
 
       cubit.setLibraryDragTarget(containerId: "test-id");
 
-      expect(cubit.state, false);
-      expect(cubit.libraryDragTargetContainerId, "test-id");
+      expect(cubit.state.isDragging, false);
+      expect(cubit.state.libraryDragTargetContainerId, "test-id");
     });
 
     test("clearLibraryDragTarget should work without affecting drag state", () {
       cubit.setLibraryDragTarget(containerId: "test-id");
-      expect(cubit.state, false);
-      expect(cubit.libraryDragTargetContainerId, "test-id");
+      expect(cubit.state.isDragging, false);
+      expect(cubit.state.libraryDragTargetContainerId, "test-id");
 
       cubit.clearLibraryDragTarget();
 
-      expect(cubit.state, false);
-      expect(cubit.libraryDragTargetContainerId, null);
+      expect(cubit.state.isDragging, false);
+      expect(cubit.state.libraryDragTargetContainerId, null);
     });
 
     test("multiple setLibraryDragTarget calls should update containerId and containerKey", () {
@@ -202,12 +202,12 @@ void main() {
       final secondContainerKey = GlobalKey();
 
       cubit.setLibraryDragTarget(containerId: firstContainerId, containerKey: firstContainerKey);
-      expect(cubit.libraryDragTargetContainerId, firstContainerId);
-      expect(cubit.libraryDragTargetContainerKey, firstContainerKey);
+      expect(cubit.state.libraryDragTargetContainerId, firstContainerId);
+      expect(cubit.state.libraryDragTargetContainerKey, firstContainerKey);
 
       cubit.setLibraryDragTarget(containerId: secondContainerId, containerKey: secondContainerKey);
-      expect(cubit.libraryDragTargetContainerId, secondContainerId);
-      expect(cubit.libraryDragTargetContainerKey, secondContainerKey);
+      expect(cubit.state.libraryDragTargetContainerId, secondContainerId);
+      expect(cubit.state.libraryDragTargetContainerKey, secondContainerKey);
     });
 
     test("setDragging(true) should not clear library drag target", () {
@@ -217,9 +217,9 @@ void main() {
       cubit.setLibraryDragTarget(containerId: testLibraryTargetId, containerKey: testLibraryTargetKey);
       cubit.setDragging(true, containerId: "test-container-id");
 
-      expect(cubit.state, true);
-      expect(cubit.libraryDragTargetContainerId, testLibraryTargetId);
-      expect(cubit.libraryDragTargetContainerKey, testLibraryTargetKey);
+      expect(cubit.state.isDragging, true);
+      expect(cubit.state.libraryDragTargetContainerId, testLibraryTargetId);
+      expect(cubit.state.libraryDragTargetContainerKey, testLibraryTargetKey);
     });
 
     test("setDragging(true) without parameters should not clear library drag target", () {
@@ -228,8 +228,8 @@ void main() {
       cubit.setLibraryDragTarget(containerId: testLibraryTargetId);
       cubit.setDragging(true);
 
-      expect(cubit.state, true);
-      expect(cubit.libraryDragTargetContainerId, testLibraryTargetId);
+      expect(cubit.state.isDragging, true);
+      expect(cubit.state.libraryDragTargetContainerId, testLibraryTargetId);
     });
 
     test("setLibraryDragTarget can be called without setDragging", () {
@@ -238,30 +238,30 @@ void main() {
 
       cubit.setLibraryDragTarget(containerId: testContainerId, containerKey: testContainerKey);
 
-      expect(cubit.state, false);
-      expect(cubit.libraryDragTargetContainerId, testContainerId);
-      expect(cubit.libraryDragTargetContainerKey, testContainerKey);
+      expect(cubit.state.isDragging, false);
+      expect(cubit.state.libraryDragTargetContainerId, testContainerId);
+      expect(cubit.state.libraryDragTargetContainerKey, testContainerKey);
     });
 
     test("clearLibraryDragTarget can be called when library drag target is not set", () {
-      expect(cubit.libraryDragTargetContainerId, null);
-      expect(cubit.libraryDragTargetContainerKey, null);
+      expect(cubit.state.libraryDragTargetContainerId, null);
+      expect(cubit.state.libraryDragTargetContainerKey, null);
 
       cubit.clearLibraryDragTarget();
 
-      expect(cubit.libraryDragTargetContainerId, null);
-      expect(cubit.libraryDragTargetContainerKey, null);
+      expect(cubit.state.libraryDragTargetContainerId, null);
+      expect(cubit.state.libraryDragTargetContainerKey, null);
     });
 
     test("setDragging(false) when library drag target is not set should work", () {
       cubit.setDragging(true, containerId: "test-id");
       cubit.setDragging(false);
 
-      expect(cubit.state, false);
-      expect(cubit.activeContainerId, null);
-      expect(cubit.activeContainerKey, null);
-      expect(cubit.libraryDragTargetContainerId, null);
-      expect(cubit.libraryDragTargetContainerKey, null);
+      expect(cubit.state.isDragging, false);
+      expect(cubit.state.activeContainerId, null);
+      expect(cubit.state.activeContainerKey, null);
+      expect(cubit.state.libraryDragTargetContainerId, null);
+      expect(cubit.state.libraryDragTargetContainerKey, null);
     });
   });
 }

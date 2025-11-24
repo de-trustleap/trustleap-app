@@ -17,8 +17,7 @@ import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_h
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_keyboard_shortcuts.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_finder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_page_builder.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_helper.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/landing_page_builder_hierarchy_overlay.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/hierarchy_overlay_wrapper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_mobile_not_supported_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +37,10 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
   late String id;
   late LandingPageBuilderHtmlEvents htmlEvents;
   bool isUpdated = false;
-  bool _isHierarchyOverlayOpen = true;
   bool _isResponsivePreviewOpen = false;
   final widgetFinder = PagebuilderWidgetFinder();
   final pageBuilderMenuCubit = Modular.get<PagebuilderConfigMenuCubit>();
+  final GlobalKey<HierarchyOverlayWrapperState> _hierarchyOverlayKey = GlobalKey();
 
   @override
   void initState() {
@@ -167,11 +166,9 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                     appBar: LandingPageBuilderAppBar(
                     content: state.content,
                     isLoading: state.saveLoading,
-                    isHierarchyOpen: _isHierarchyOverlayOpen,
+                    isHierarchyOpen: true,
                     onHierarchyToggle: () {
-                      setState(() {
-                        _isHierarchyOverlayOpen = !_isHierarchyOverlayOpen;
-                      });
+                      _hierarchyOverlayKey.currentState?.toggle();
                     },
                     onResponsivePreviewToggle: () {
                       setState(() {
@@ -194,23 +191,11 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                               landingPage: state.content.landingPage,
                             )
                           : const Text("FEHLER!"),
-                      if (_isHierarchyOverlayOpen &&
-                          state.content.content != null)
-                        LandingPageBuilderHierarchyOverlay(
+                      if (state.content.content != null)
+                        HierarchyOverlayWrapper(
+                          key: _hierarchyOverlayKey,
                           page: state.content.content!,
-                          onClose: () {
-                            setState(() {
-                              _isHierarchyOverlayOpen = false;
-                            });
-                          },
-                          onItemSelected: (widgetId, isSection) {
-                            final hierarchyHelper =
-                                LandingPageBuilderHierarchyHelper(
-                              page: state.content.content!,
-                            );
-                            hierarchyHelper.onHierarchyItemSelected(
-                                widgetId, isSection);
-                          },
+                          isInitiallyOpen: true,
                         ),
                       ],
                     ),
