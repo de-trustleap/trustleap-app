@@ -24,16 +24,27 @@ class _PagebuilderReorderDimmingOverlayState
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PagebuilderDragCubit, bool>(
+    return BlocBuilder<PagebuilderDragCubit, PagebuilderDragCubitState>(
       bloc: Modular.get<PagebuilderDragCubit>(),
-      builder: (context, isDragging) {
-        final dragCubit = Modular.get<PagebuilderDragCubit>();
-        final activeContainerKey = dragCubit.activeContainerKey;
-        final activeContainerId = dragCubit.activeContainerId;
+      buildWhen: (previous, current) {
+        // Only rebuild if dragging state changes or container keys change
+        return previous.isDragging != current.isDragging ||
+            previous.activeContainerKey != current.activeContainerKey ||
+            previous.libraryDragTargetContainerKey != current.libraryDragTargetContainerKey ||
+            previous.activeContainerId != current.activeContainerId;
+      },
+      builder: (context, dragState) {
+        final isDragging = dragState.isDragging;
+        final activeContainerKey = dragState.activeContainerKey;
+        final activeContainerId = dragState.activeContainerId;
+        final libraryDragTargetKey = dragState.libraryDragTargetContainerKey;
 
         // Check if dragging in hierarchy overlay
         final isDraggingInHierarchy = activeContainerId?.startsWith('hierarchy-overlay') ?? false;
         final shouldShowOverlay = isDragging;
+
+        // Use library drag target key if available, otherwise use active container key
+        final effectiveContainerKey = libraryDragTargetKey ?? activeContainerKey;
 
         return Stack(
           children: [
@@ -44,7 +55,7 @@ class _PagebuilderReorderDimmingOverlayState
                   child: CustomPaint(
                     key: _overlayKey,
                     painter: _OverlayPainter(
-                      activeContainerKey: activeContainerKey,
+                      activeContainerKey: effectiveContainerKey,
                       overlayKey: _overlayKey,
                       zoomScale: widget.zoomScale,
                       isDraggingInHierarchy: isDraggingInHierarchy,

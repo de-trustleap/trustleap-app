@@ -59,13 +59,15 @@ class _LandingPageBuilderSectionViewState
         final outerMaxWidth =
             shouldConstrainBackground ? widget.model.maxWidth : null;
 
-        return Center(
-            child: ConstrainedBox(
-          constraints:
-              BoxConstraints(maxWidth: outerMaxWidth ?? double.infinity),
-          child: BlocBuilder<PagebuilderDragCubit, bool>(
-            bloc: Modular.get<PagebuilderDragCubit>(),
-            builder: (context, isDragging) {
+        return RepaintBoundary(
+          child: Center(
+              child: ConstrainedBox(
+            constraints:
+                BoxConstraints(maxWidth: outerMaxWidth ?? double.infinity),
+            child: BlocBuilder<PagebuilderDragCubit, PagebuilderDragCubitState>(
+              bloc: Modular.get<PagebuilderDragCubit>(),
+              builder: (context, dragState) {
+              final isDragging = dragState.isDragging;
               return MouseRegion(
                 onEnter: (_) {
                   setState(() {
@@ -91,7 +93,7 @@ class _LandingPageBuilderSectionViewState
                   selector: (selectedSectionId) => selectedSectionId == widget.model.id.value,
                   builder: (context, isSelected) {
                     final dragCubit = Modular.get<PagebuilderDragCubit>();
-                    final isLibraryDragTarget = dragCubit.libraryDragTargetContainerId == widget.model.id.value;
+                    final isLibraryDragTarget = dragCubit.state.libraryDragTargetContainerId == widget.model.id.value;
                     final showBorder =
                         (_isHovered && !isDragging) || isSelected || isLibraryDragTarget;
 
@@ -362,9 +364,10 @@ class _LandingPageBuilderSectionViewState
                 ),
                 ),
               );
-            },
-          ),
-        ));
+              },
+            ),
+          )),
+        );
     }
   }
 }

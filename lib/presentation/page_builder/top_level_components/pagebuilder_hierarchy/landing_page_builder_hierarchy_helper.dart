@@ -63,38 +63,66 @@ class LandingPageBuilderHierarchyHelper {
   }
 
   Map<String, dynamic> getOptimalExpansionState(String targetWidgetId) {
-    final result = {
-      'sectionsToExpand': <String>[],
-      'widgetsToExpand': <String>[],
-      'sectionsToCollapse': <String>[],
-      'widgetsToCollapse': <String>[],
-    };
+    // For sections, we only need to expand that section
+    // For widgets, we need to expand the section and all parent widgets in the path
 
-    final targetInfo = _findTargetLocation(targetWidgetId);
-    if (targetInfo == null) return result;
+    final sectionsToExpand = <String>[];
+    final widgetsToExpand = <String>[];
 
-    final sectionsToExpand = result['sectionsToExpand'] as List<String>;
-    final widgetsToExpand = result['widgetsToExpand'] as List<String>;
-    final sectionsToCollapse = result['sectionsToCollapse'] as List<String>;
-    final widgetsToCollapse = result['widgetsToCollapse'] as List<String>;
-
-    sectionsToExpand.add(targetInfo.sectionId);
-
-    if (!targetInfo.isSection) {
-      widgetsToExpand.addAll(targetInfo.widgetPath);
-    }
-
+    // Fast path: check if it's a section first
     for (final section in page.sections ?? []) {
-      if (section.id.value != targetInfo.sectionId) {
-        sectionsToCollapse.add(section.id.value);
-        _collectAllWidgetIds(section, widgetsToCollapse);
-      } else if (!targetInfo.isSection) {
-        _collectWidgetsToCollapseInSection(
-            section, targetInfo.widgetPath, widgetsToCollapse);
+      if (section.id.value == targetWidgetId) {
+        sectionsToExpand.add(targetWidgetId);
+        return {
+          'sectionsToExpand': sectionsToExpand,
+          'widgetsToExpand': widgetsToExpand,
+          'sectionsToCollapse': <String>[],
+          'widgetsToCollapse': <String>[],
+        };
       }
     }
 
-    return result;
+    // Find the widget and its path in one pass
+    _TargetInfo? targetInfo;
+    for (final section in page.sections ?? []) {
+      final widgetPath = _findWidgetPathInSection(targetWidgetId, section);
+      if (widgetPath.isNotEmpty || _widgetExistsAtRootLevel(targetWidgetId, section)) {
+        sectionsToExpand.add(section.id.value);
+        widgetsToExpand.addAll(widgetPath);
+        targetInfo = _TargetInfo(
+          sectionId: section.id.value,
+          isSection: false,
+          widgetPath: widgetPath,
+        );
+        break;
+      }
+    }
+
+    if (targetInfo == null) {
+      return {
+        'sectionsToExpand': <String>[],
+        'widgetsToExpand': <String>[],
+        'sectionsToCollapse': <String>[],
+        'widgetsToCollapse': <String>[],
+      };
+    }
+
+    return {
+      'sectionsToExpand': sectionsToExpand,
+      'widgetsToExpand': widgetsToExpand,
+      'sectionsToCollapse': <String>[],
+      'widgetsToCollapse': <String>[],
+    };
+  }
+
+  bool _widgetExistsAtRootLevel(String targetWidgetId, PageBuilderSection section) {
+    final widgets = section.widgets ?? [];
+    for (final widget in widgets) {
+      if (widget.id.value == targetWidgetId) {
+        return true;
+      }
+    }
+    return false;
   }
 
   Map<String, List<String>> getExpansionPathForWidget(String targetWidgetId) {

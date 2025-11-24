@@ -38,7 +38,8 @@ class _LandingPageBuilderWidgetContainerState
   final GlobalKey _widgetKey = GlobalKey();
 
   double? getWidgetWidth() {
-    final renderBox = _widgetKey.currentContext?.findRenderObject() as RenderBox?;
+    final renderBox =
+        _widgetKey.currentContext?.findRenderObject() as RenderBox?;
     return renderBox?.size.width;
   }
 
@@ -49,77 +50,78 @@ class _LandingPageBuilderWidgetContainerState
     final selectionCubit = Modular.get<PagebuilderSelectionCubit>();
     final hoverCubit = Modular.get<PagebuilderHoverCubit>();
 
-    return BlocSelector<PagebuilderSelectionCubit, String?, bool>(
-      bloc: selectionCubit,
-      selector: (selectedWidgetId) => selectedWidgetId == widgetID,
-      builder: (context, isSelected) {
-        return BlocSelector<PagebuilderHoverCubit, String?, bool>(
-          bloc: hoverCubit,
-          selector: (hoveredWidgetId) => hoveredWidgetId == widgetID,
-          builder: (context, isHovered) {
-            return BlocBuilder<PagebuilderDragCubit, bool>(
-              bloc: Modular.get<PagebuilderDragCubit>(),
-              builder: (context, isDragging) {
-                final dragCubit = Modular.get<PagebuilderDragCubit>();
-                final isLibraryDragTarget =
-                    dragCubit.libraryDragTargetContainerId == widgetID;
-                final showBorder = (isHovered && !isDragging) ||
-                    isSelected ||
-                    isLibraryDragTarget;
+    return RepaintBoundary(
+      child: BlocSelector<PagebuilderSelectionCubit, String?, bool>(
+        bloc: selectionCubit,
+        selector: (selectedWidgetId) => selectedWidgetId == widgetID,
+        builder: (context, isSelected) {
+          return BlocSelector<PagebuilderHoverCubit, String?, bool>(
+            bloc: hoverCubit,
+            selector: (hoveredWidgetId) => hoveredWidgetId == widgetID,
+            builder: (context, isHovered) {
+              return BlocBuilder<PagebuilderDragCubit,
+                  PagebuilderDragCubitState>(
+                bloc: Modular.get<PagebuilderDragCubit>(),
+                builder: (context, dragState) {
+                  final isDragging = dragState.isDragging;
+                  final isLibraryDragTarget =
+                      dragState.libraryDragTargetContainerId == widgetID;
+                  final showBorder = (isHovered && !isDragging) ||
+                      isSelected ||
+                      isLibraryDragTarget;
 
-                return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
-                    PagebuilderResponsiveBreakpoint>(
-                  bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
-                  builder: (context, breakpoint) {
-                    final contentMode = widget
-                            .model.background?.imageProperties?.contentMode
-                            ?.getValueForBreakpoint(breakpoint) ??
-                        BoxFit.cover;
+                  return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+                      PagebuilderResponsiveBreakpoint>(
+                    bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+                    builder: (context, breakpoint) {
+                      final contentMode = widget
+                              .model.background?.imageProperties?.contentMode
+                              ?.getValueForBreakpoint(breakpoint) ??
+                          BoxFit.cover;
 
-                    final containerWidth = widget.properties?.width
-                        ?.getValueForBreakpoint(breakpoint);
-                    final containerHeight = widget.properties?.height
-                        ?.getValueForBreakpoint(breakpoint);
+                      final containerWidth = widget.properties?.width
+                          ?.getValueForBreakpoint(breakpoint);
+                      final containerHeight = widget.properties?.height
+                          ?.getValueForBreakpoint(breakpoint);
 
-                    return Container(
-                      constraints: BoxConstraints(
-                        maxWidth: _getEffectiveMaxWidth(context),
-                      ),
-                      child: Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                widget.model.margin?.left
-                                        ?.getValueForBreakpoint(breakpoint) ??
-                                    0,
-                                widget.model.margin?.top
-                                        ?.getValueForBreakpoint(breakpoint) ??
-                                    0,
-                                widget.model.margin?.right
-                                        ?.getValueForBreakpoint(breakpoint) ??
-                                    0,
-                                widget.model.margin?.bottom
-                                        ?.getValueForBreakpoint(breakpoint) ??
-                                    0),
-                            child: MouseRegion(
-                              onEnter: (_) {
-                                hoverCubit.setHovered(widgetID);
+                      return Container(
+                        constraints: BoxConstraints(
+                          maxWidth: _getEffectiveMaxWidth(context),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              widget.model.margin?.left
+                                      ?.getValueForBreakpoint(breakpoint) ??
+                                  0,
+                              widget.model.margin?.top
+                                      ?.getValueForBreakpoint(breakpoint) ??
+                                  0,
+                              widget.model.margin?.right
+                                      ?.getValueForBreakpoint(breakpoint) ??
+                                  0,
+                              widget.model.margin?.bottom
+                                      ?.getValueForBreakpoint(breakpoint) ??
+                                  0),
+                          child: MouseRegion(
+                            onEnter: (_) {
+                              hoverCubit.setHovered(widgetID);
+                            },
+                            onExit: (_) {
+                              if (!isDragging && hoverCubit.state == widgetID) {
+                                hoverCubit.setHovered(null);
+                              }
+                            },
+                            child: GestureDetector(
+                              onDoubleTap: () {
+                                Modular.get<PagebuilderSelectionCubit>()
+                                    .selectWidget(widgetID);
+                                Modular.get<PagebuilderConfigMenuCubit>()
+                                    .openConfigMenu(widget.model);
                               },
-                              onExit: (_) {
-                                if (!isDragging &&
-                                    hoverCubit.state == widgetID) {
-                                  hoverCubit.setHovered(null);
-                                }
-                              },
-                              child: GestureDetector(
-                                onDoubleTap: () {
-                                  Modular.get<PagebuilderSelectionCubit>()
-                                      .selectWidget(widgetID);
-                                  Modular.get<PagebuilderConfigMenuCubit>()
-                                      .openConfigMenu(widget.model);
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      key: _widgetKey,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    key: _widgetKey,
                                     decoration: BoxDecoration(
                                       color: Colors.transparent,
                                       border: showBorder
@@ -337,7 +339,8 @@ class _LandingPageBuilderWidgetContainerState
                                   if (showBorder) ...[
                                     LandingPageBuilderWidgetControls(
                                       index: widget.index,
-                                      parentWidth: containerWidth ?? getWidgetWidth(),
+                                      parentWidth:
+                                          containerWidth ?? getWidgetWidth(),
                                       onEdit: () {
                                         Modular.get<PagebuilderSelectionCubit>()
                                             .selectWidget(widgetID);
@@ -352,18 +355,19 @@ class _LandingPageBuilderWidgetContainerState
                                     )
                                   ],
                                 ],
-                                ),
                               ),
                             ),
                           ),
-                        );
-                  },
-                );
-              },
-            );
-          },
-        );
-      },
+                        ),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 

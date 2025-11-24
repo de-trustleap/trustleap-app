@@ -7,21 +7,15 @@ import 'package:flutter/material.dart';
 class HierarchyWidgetsList extends StatelessWidget {
   final String sectionId;
   final List<PageBuilderWidget> widgets;
-  final String? selectedWidgetId;
   final Function(String widgetId, bool isSection) onItemSelected;
   final Function(String parentId, int oldIndex, int newIndex)? onWidgetReorder;
-  final Set<String> expandedWidgets;
-  final Function(String widgetId) onToggleExpand;
 
   const HierarchyWidgetsList({
     super.key,
     required this.sectionId,
     required this.widgets,
-    required this.selectedWidgetId,
     required this.onItemSelected,
     required this.onWidgetReorder,
-    required this.expandedWidgets,
-    required this.onToggleExpand,
   });
 
   @override
@@ -38,12 +32,9 @@ class HierarchyWidgetsList extends StatelessWidget {
       buildChild: (widget, index) {
         return HierarchyWidgetItem(
           widget: widget,
-          selectedWidgetId: selectedWidgetId,
           depth: 0,
           onItemSelected: onItemSelected,
           onWidgetReorder: onWidgetReorder,
-          expandedWidgets: expandedWidgets,
-          onToggleExpand: onToggleExpand,
           showDragHandle: widgets.length > 1,
         );
       },
