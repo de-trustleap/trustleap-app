@@ -513,16 +513,33 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
 
     // Add remaining width spacer if needed
     if (widget.remainingWidthPercentage > 0) {
-      final spacer = Expanded(
-        flex: (widget.remainingWidthPercentage * 100).toInt(),
-        child: const SizedBox.shrink(),
-      );
+      final mainAxisAlignment = widget.properties?.mainAxisAlignment ?? MainAxisAlignment.center;
 
-      // Add spacer at beginning if end-aligned, otherwise at end
-      if (widget.properties?.mainAxisAlignment == MainAxisAlignment.end) {
-        rowChildren.insert(0, spacer);
+      if (mainAxisAlignment == MainAxisAlignment.center) {
+        // For center alignment, split the spacer in half
+        final halfSpacerFlex = (widget.remainingWidthPercentage * 100 / 2).toInt();
+        final leftSpacer = Expanded(
+          flex: halfSpacerFlex,
+          child: const SizedBox.shrink(),
+        );
+        final rightSpacer = Expanded(
+          flex: halfSpacerFlex,
+          child: const SizedBox.shrink(),
+        );
+        rowChildren.insert(0, leftSpacer);
+        rowChildren.add(rightSpacer);
       } else {
-        rowChildren.add(spacer);
+        final spacer = Expanded(
+          flex: (widget.remainingWidthPercentage * 100).toInt(),
+          child: const SizedBox.shrink(),
+        );
+
+        // Add spacer at beginning if end-aligned, otherwise at end
+        if (mainAxisAlignment == MainAxisAlignment.end) {
+          rowChildren.insert(0, spacer);
+        } else {
+          rowChildren.add(spacer);
+        }
       }
     }
 
