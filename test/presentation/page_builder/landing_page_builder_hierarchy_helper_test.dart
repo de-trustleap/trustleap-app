@@ -514,7 +514,7 @@ void main() {
     });
 
     group('getOptimalExpansionState', () {
-      test('should collapse other sections when selecting a section', () {
+      test('should expand selected section without collapse information', () {
         // Given - Create a page with multiple sections
         final section1 = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
@@ -555,10 +555,11 @@ void main() {
 
         // Then
         expect(result['sectionsToExpand'], equals(['section-1']));
-        expect(result['sectionsToCollapse'], equals(['section-2']));
+        expect(result['sectionsToCollapse'], isEmpty);
+        expect(result['widgetsToCollapse'], isEmpty);
       });
 
-      test('should collapse widgets outside the selected path', () {
+      test('should expand section for widget without collapse information', () {
         // Given - Create a page with multiple widgets in same section
         final widget1 = PageBuilderWidget(
           id: UniqueID.fromUniqueString('widget-1'),
@@ -622,7 +623,7 @@ void main() {
         // Then
         expect(result['sectionsToExpand'], equals(['test-section']));
         expect(result['widgetsToExpand'], isEmpty);
-        expect(result['widgetsToCollapse'], contains('widget-2'));
+        expect(result['widgetsToCollapse'], isEmpty);
       });
     });
   });
