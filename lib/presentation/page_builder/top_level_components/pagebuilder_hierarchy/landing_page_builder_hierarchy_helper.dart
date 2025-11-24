@@ -240,68 +240,6 @@ class LandingPageBuilderHierarchyHelper {
     return false;
   }
 
-  void _collectAllWidgetIds(
-      PageBuilderSection section, List<String> collectedIds) {
-    final widgets = section.widgets ?? [];
-
-    for (final widget in widgets) {
-      _collectAllWidgetIdsInWidget(widget, collectedIds);
-    }
-  }
-
-  void _collectAllWidgetIdsInWidget(
-      PageBuilderWidget widget, List<String> collectedIds) {
-    collectedIds.add(widget.id.value);
-
-    if (widget.children != null) {
-      for (final child in widget.children!) {
-        _collectAllWidgetIdsInWidget(child, collectedIds);
-      }
-    }
-
-    if (widget.containerChild != null) {
-      _collectAllWidgetIdsInWidget(widget.containerChild!, collectedIds);
-    }
-  }
-
-  void _collectWidgetsToCollapseInSection(PageBuilderSection section,
-      List<String> expandPath, List<String> collectedIds) {
-    final widgets = section.widgets ?? [];
-
-    for (final widget in widgets) {
-      _collectWidgetsToCollapseInWidget(widget, expandPath, collectedIds);
-    }
-  }
-
-  void _collectWidgetsToCollapseInWidget(PageBuilderWidget widget,
-      List<String> expandPath, List<String> collectedIds) {
-    final widgetId = widget.id.value;
-
-    if (!expandPath.contains(widgetId)) {
-      collectedIds.add(widgetId);
-
-      if (widget.children != null) {
-        for (final child in widget.children!) {
-          _collectAllWidgetIdsInWidget(child, collectedIds);
-        }
-      }
-
-      if (widget.containerChild != null) {
-        _collectAllWidgetIdsInWidget(widget.containerChild!, collectedIds);
-      }
-    } else {
-      if (widget.children != null) {
-        for (final child in widget.children!) {
-          _collectWidgetsToCollapseInWidget(child, expandPath, collectedIds);
-        }
-      }
-
-      if (widget.containerChild != null) {
-        _collectWidgetsToCollapseInWidget(
-            widget.containerChild!, expandPath, collectedIds);
-      }
-    }
-  }
 }
 
 class _TargetInfo {
