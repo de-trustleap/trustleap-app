@@ -239,7 +239,6 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                   );
                 });
 
-                // Only update if container changed
                 final dragCubit = Modular.get<PagebuilderDragCubit>();
                 if (dragCubit.state.libraryDragTargetContainerId !=
                     widget.model.id.value) {
@@ -314,7 +313,6 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
                   );
                 });
 
-                // Only update if container changed
                 final dragCubit = Modular.get<PagebuilderDragCubit>();
                 if (dragCubit.state.libraryDragTargetContainerId !=
                     widget.model.id.value) {

@@ -142,9 +142,9 @@ class _PagebuilderReorderableElementState<T>
                 );
               });
 
-              // Only update if container changed
               final dragCubit = Modular.get<PagebuilderDragCubit>();
-              if (dragCubit.state.libraryDragTargetContainerId != widget.containerId) {
+              if (dragCubit.state.libraryDragTargetContainerId !=
+                  widget.containerId) {
                 dragCubit.setLibraryDragTarget(
                   containerId: widget.containerId,
                   containerKey: _containerKey,
@@ -232,9 +232,9 @@ class _PagebuilderReorderableElementState<T>
                 );
               });
 
-              // Only update if container changed
               final dragCubit = Modular.get<PagebuilderDragCubit>();
-              if (dragCubit.state.libraryDragTargetContainerId != widget.containerId) {
+              if (dragCubit.state.libraryDragTargetContainerId !=
+                  widget.containerId) {
                 dragCubit.setLibraryDragTarget(
                   containerId: widget.containerId,
                   containerKey: _containerKey,
@@ -321,7 +321,8 @@ class _PagebuilderReorderableElementState<T>
           onAcceptWithDetails: (details) {
             if (details.data is WidgetLibraryDragData) {
               // Check if we're still dragging - if not, this is a duplicate/stale event
-              final isDragging = Modular.get<PagebuilderDragCubit>().state.isDragging;
+              final isDragging =
+                  Modular.get<PagebuilderDragCubit>().state.isDragging;
               if (!isDragging) {
                 return;
               }

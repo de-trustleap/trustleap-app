@@ -27,10 +27,10 @@ class _PagebuilderReorderDimmingOverlayState
     return BlocBuilder<PagebuilderDragCubit, PagebuilderDragCubitState>(
       bloc: Modular.get<PagebuilderDragCubit>(),
       buildWhen: (previous, current) {
-        // Only rebuild if dragging state changes or container keys change
         return previous.isDragging != current.isDragging ||
             previous.activeContainerKey != current.activeContainerKey ||
-            previous.libraryDragTargetContainerKey != current.libraryDragTargetContainerKey ||
+            previous.libraryDragTargetContainerKey !=
+                current.libraryDragTargetContainerKey ||
             previous.activeContainerId != current.activeContainerId;
       },
       builder: (context, dragState) {
@@ -40,11 +40,12 @@ class _PagebuilderReorderDimmingOverlayState
         final libraryDragTargetKey = dragState.libraryDragTargetContainerKey;
 
         // Check if dragging in hierarchy overlay
-        final isDraggingInHierarchy = activeContainerId?.startsWith('hierarchy-overlay') ?? false;
+        final isDraggingInHierarchy =
+            activeContainerId?.startsWith('hierarchy-overlay') ?? false;
         final shouldShowOverlay = isDragging;
 
-        // Use library drag target key if available, otherwise use active container key
-        final effectiveContainerKey = libraryDragTargetKey ?? activeContainerKey;
+        final effectiveContainerKey =
+            libraryDragTargetKey ?? activeContainerKey;
 
         return Stack(
           children: [

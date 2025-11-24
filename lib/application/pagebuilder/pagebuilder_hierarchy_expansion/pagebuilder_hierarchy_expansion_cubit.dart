@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 
-class PagebuilderHierarchyExpansionCubit extends Cubit<PagebuilderHierarchyExpansionState> {
+class PagebuilderHierarchyExpansionCubit
+    extends Cubit<PagebuilderHierarchyExpansionState> {
   PagebuilderHierarchyExpansionCubit()
       : super(const PagebuilderHierarchyExpansionState());
 
@@ -54,7 +55,6 @@ class PagebuilderHierarchyExpansionCubit extends Cubit<PagebuilderHierarchyExpan
     required Set<String> sectionsToCollapse,
     required Set<String> widgetsToCollapse,
   }) {
-    // Calculate new state
     Set<String> newExpandedSections;
     Set<String> newExpandedWidgets;
 

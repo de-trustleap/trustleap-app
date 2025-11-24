@@ -63,13 +63,9 @@ class LandingPageBuilderHierarchyHelper {
   }
 
   Map<String, dynamic> getOptimalExpansionState(String targetWidgetId) {
-    // For sections, we only need to expand that section
-    // For widgets, we need to expand the section and all parent widgets in the path
-
     final sectionsToExpand = <String>[];
     final widgetsToExpand = <String>[];
 
-    // Fast path: check if it's a section first
     for (final section in page.sections ?? []) {
       if (section.id.value == targetWidgetId) {
         sectionsToExpand.add(targetWidgetId);
@@ -82,11 +78,11 @@ class LandingPageBuilderHierarchyHelper {
       }
     }
 
-    // Find the widget and its path in one pass
     _TargetInfo? targetInfo;
     for (final section in page.sections ?? []) {
       final widgetPath = _findWidgetPathInSection(targetWidgetId, section);
-      if (widgetPath.isNotEmpty || _widgetExistsAtRootLevel(targetWidgetId, section)) {
+      if (widgetPath.isNotEmpty ||
+          _widgetExistsAtRootLevel(targetWidgetId, section)) {
         sectionsToExpand.add(section.id.value);
         widgetsToExpand.addAll(widgetPath);
         targetInfo = _TargetInfo(
@@ -115,7 +111,8 @@ class LandingPageBuilderHierarchyHelper {
     };
   }
 
-  bool _widgetExistsAtRootLevel(String targetWidgetId, PageBuilderSection section) {
+  bool _widgetExistsAtRootLevel(
+      String targetWidgetId, PageBuilderSection section) {
     final widgets = section.widgets ?? [];
     for (final widget in widgets) {
       if (widget.id.value == targetWidgetId) {
@@ -239,7 +236,6 @@ class LandingPageBuilderHierarchyHelper {
 
     return false;
   }
-
 }
 
 class _TargetInfo {
