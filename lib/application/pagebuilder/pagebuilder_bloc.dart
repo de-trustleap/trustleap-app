@@ -54,7 +54,9 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     on<AddSectionEvent>(onAddSection);
     on<ReplacePlaceholderEvent>(onReplacePlaceholder);
     on<DeleteSectionEvent>(onDeleteSection);
+    on<DuplicateSectionEvent>(onDuplicateSection);
     on<DeleteWidgetEvent>(onDeleteWidget);
+    on<DuplicateWidgetEvent>(onDuplicateWidget);
   }
 
   bool canUndo() => localHistory.canUndo();

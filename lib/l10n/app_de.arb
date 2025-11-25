@@ -3485,5 +3485,33 @@
     "pagebuilder_widget_controls_delete": "Löschen",
     "@pagebuilder_widget_controls_delete": {
         "description": "Label für den Löschen-Button in den Widget Controls"
+    },
+    "pagebuilder_widget_controls_duplicate": "Duplizieren",
+    "@pagebuilder_widget_controls_duplicate": {
+        "description": "Label für den Duplizieren-Button in den Widget Controls"
+    },
+    "pagebuilder_section_controls_duplicate": "Duplizieren",
+    "@pagebuilder_section_controls_duplicate": {
+        "description": "Label für den Duplizieren-Button in den Section Controls"
+    },
+    "pagebuilder_section_controls_delete": "Löschen",
+    "@pagebuilder_section_controls_delete": {
+        "description": "Label für den Löschen-Button in den Section Controls"
+    },
+    "pagebuilder_section_controls_edit_tooltip": "Bearbeiten",
+    "@pagebuilder_section_controls_edit_tooltip": {
+        "description": "Tooltip für den Bearbeiten-Button in den Section Controls"
+    },
+    "pagebuilder_section_controls_drag_tooltip": "Verschieben",
+    "@pagebuilder_section_controls_drag_tooltip": {
+        "description": "Tooltip für den Drag-Handle in den Section Controls"
+    },
+    "pagebuilder_widget_controls_edit_tooltip": "Bearbeiten",
+    "@pagebuilder_widget_controls_edit_tooltip": {
+        "description": "Tooltip für den Bearbeiten-Button in den Widget Controls"
+    },
+    "pagebuilder_widget_controls_drag_tooltip": "Verschieben",
+    "@pagebuilder_widget_controls_drag_tooltip": {
+        "description": "Tooltip für den Drag-Handle in den Widget Controls"
     }
 }

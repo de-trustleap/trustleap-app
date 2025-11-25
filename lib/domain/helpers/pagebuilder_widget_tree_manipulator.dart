@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -349,6 +350,82 @@ class PagebuilderWidgetTreeManipulator {
       children: childrenWithoutPlaceholders,
       containerChild: containerChildWithoutPlaceholder,
     );
+  }
+
+  /// Duplicates a widget in the tree by its ID.
+  /// The duplicated widget is inserted:
+  /// - In a Row: to the right of the original widget
+  /// - In a Column: below the original widget
+  /// - In a Container or other parent: below the original widget (wraps in Column if needed)
+  /// All nested widgets get new IDs to avoid conflicts.
+  static PageBuilderWidget duplicateWidget(
+    PageBuilderWidget widget,
+    String targetWidgetId,
+    PageBuilderWidget Function(PageBuilderWidget) duplicateWithNewIds,
+  ) {
+    // Check if any child needs duplication
+    if (widget.children != null && widget.children!.isNotEmpty) {
+      final childIndex =
+          widget.children!.indexWhere((w) => w.id.value == targetWidgetId);
+
+      if (childIndex != -1) {
+        final targetWidget = widget.children![childIndex];
+        final duplicatedWidget = duplicateWithNewIds(targetWidget);
+
+        final updatedChildren = List<PageBuilderWidget>.from(widget.children!);
+        updatedChildren.insert(childIndex + 1, duplicatedWidget);
+
+        // If parent is Row, redistribute width percentages
+        if (widget.elementType == PageBuilderWidgetType.row) {
+          final redistributedChildren =
+              PagebuilderWidgetPlacementHelper.redistributeWidthPercentages(
+                  updatedChildren);
+          return widget.copyWith(children: redistributedChildren);
+        }
+
+        return widget.copyWith(children: updatedChildren);
+      }
+
+      // Recursively search in children
+      final updatedChildren = widget.children!
+          .map((child) => duplicateWidget(child, targetWidgetId, duplicateWithNewIds))
+          .toList();
+      return widget.copyWith(children: updatedChildren);
+    }
+
+    // Handle container child
+    if (widget.containerChild != null) {
+      if (widget.containerChild!.id.value == targetWidgetId) {
+        // Duplicate the container child and wrap both in a Column
+        final targetWidget = widget.containerChild!;
+        final duplicatedWidget = duplicateWithNewIds(targetWidget);
+
+        final columnWidget = PageBuilderWidget(
+          id: UniqueID(),
+          elementType: PageBuilderWidgetType.column,
+          properties: null,
+          hoverProperties: null,
+          children: [targetWidget, duplicatedWidget],
+          containerChild: null,
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: null,
+          customCSS: null,
+        );
+
+        return widget.copyWith(containerChild: columnWidget);
+      }
+
+      final updatedContainerChild =
+          duplicateWidget(widget.containerChild!, targetWidgetId, duplicateWithNewIds);
+      return widget.copyWith(containerChild: updatedContainerChild);
+    }
+
+    return widget;
   }
 
   /// Deletes a widget from the tree by its ID.

@@ -1306,4 +1306,222 @@ void main() {
       expect(result.children![2].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(33.34, 0.01));
     });
   });
+
+  group('PagebuilderWidgetTreeManipulator.duplicateWidget', () {
+    // Helper function for duplicating with new IDs
+    PageBuilderWidget duplicateWithNewIds(PageBuilderWidget widget) {
+      return widget.copyWith(
+        id: UniqueID(),
+        children: widget.children
+            ?.map((child) => duplicateWithNewIds(child))
+            .toList(),
+        containerChild: widget.containerChild != null
+            ? duplicateWithNewIds(widget.containerChild!)
+            : null,
+      );
+    }
+
+    test('should duplicate widget in row and insert it to the right', () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final rowWidget = createRowWidget('row1', [widget1, widget2]);
+
+      final result = PagebuilderWidgetTreeManipulator.duplicateWidget(
+        rowWidget,
+        'widget1',
+        duplicateWithNewIds,
+      );
+
+      expect(result.elementType, PageBuilderWidgetType.row);
+      expect(result.children?.length, 3);
+      // Check that duplicated widget is at index 1 (after widget1)
+      expect(result.children![0].id.value, 'widget1');
+      expect(result.children![1].id.value, isNot('widget1')); // New ID
+      expect(result.children![2].id.value, 'widget2');
+      // Check width redistribution to ~33.33% each
+      expect(result.children![0].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(33.33, 0.01));
+      expect(result.children![1].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(33.33, 0.01));
+      expect(result.children![2].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(33.34, 0.01));
+    });
+
+    test('should duplicate widget in column and insert it below', () {
+      final widget1 = createTextWidget('widget1');
+      final widget2 = createTextWidget('widget2');
+      final columnWidget = createColumnWidget('column1', [widget1, widget2]);
+
+      final result = PagebuilderWidgetTreeManipulator.duplicateWidget(
+        columnWidget,
+        'widget1',
+        duplicateWithNewIds,
+      );
+
+      expect(result.elementType, PageBuilderWidgetType.column);
+      expect(result.children?.length, 3);
+      // Check that duplicated widget is at index 1 (after widget1)
+      expect(result.children![0].id.value, 'widget1');
+      expect(result.children![1].id.value, isNot('widget1')); // New ID
+      expect(result.children![2].id.value, 'widget2');
+    });
+
+    test('should duplicate last widget in row', () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final rowWidget = createRowWidget('row1', [widget1, widget2]);
+
+      final result = PagebuilderWidgetTreeManipulator.duplicateWidget(
+        rowWidget,
+        'widget2',
+        duplicateWithNewIds,
+      );
+
+      expect(result.elementType, PageBuilderWidgetType.row);
+      expect(result.children?.length, 3);
+      // Check that duplicated widget is at index 2 (after widget2)
+      expect(result.children![0].id.value, 'widget1');
+      expect(result.children![1].id.value, 'widget2');
+      expect(result.children![2].id.value, isNot('widget2')); // New ID
+    });
+
+    test('should duplicate container child and wrap in column', () {
+      final childWidget = createTextWidget('child1');
+      final containerWidget = createContainerWidget('container1', childWidget);
+
+      final result = PagebuilderWidgetTreeManipulator.duplicateWidget(
+        containerWidget,
+        'child1',
+        duplicateWithNewIds,
+      );
+
+      expect(result.elementType, PageBuilderWidgetType.container);
+      expect(result.containerChild, isNotNull);
+      // Container child should now be a column with 2 children
+      expect(result.containerChild!.elementType, PageBuilderWidgetType.column);
+      expect(result.containerChild!.children?.length, 2);
+      expect(result.containerChild!.children![0].id.value, 'child1');
+      expect(result.containerChild!.children![1].id.value, isNot('child1')); // New ID
+    });
+
+    test('should duplicate nested widget', () {
+      final innerWidget1 = createTextWidget('inner1');
+      final innerWidget2 = createTextWidget('inner2');
+      final innerRow = createRowWidget('innerRow', [innerWidget1, innerWidget2]);
+      final outerColumn = createColumnWidget('outerColumn', [innerRow]);
+
+      final result = PagebuilderWidgetTreeManipulator.duplicateWidget(
+        outerColumn,
+        'inner1',
+        duplicateWithNewIds,
+      );
+
+      expect(result.elementType, PageBuilderWidgetType.column);
+      expect(result.children?.length, 1);
+      final resultRow = result.children![0];
+      expect(resultRow.elementType, PageBuilderWidgetType.row);
+      expect(resultRow.children?.length, 3); // Original 2 + 1 duplicate
+      expect(resultRow.children![0].id.value, 'inner1');
+      expect(resultRow.children![1].id.value, isNot('inner1')); // New ID
+      expect(resultRow.children![2].id.value, 'inner2');
+    });
+
+    test('should preserve widget properties when duplicating', () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+        background: null,
+        padding: null,
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(50),
+      );
+      final rowWidget = createRowWidget('row1', [widget1, widget2]);
+
+      final result = PagebuilderWidgetTreeManipulator.duplicateWidget(
+        rowWidget,
+        'widget1',
+        duplicateWithNewIds,
+      );
+
+      expect(result.children?.length, 3);
+      final duplicatedWidget = result.children![1];
+      // Check that element type is preserved
+      expect(duplicatedWidget.elementType, widget1.elementType);
+    });
+
+    test('should duplicate widget with nested children', () {
+      final deepChild1 = createTextWidget('deepChild1');
+      final deepChild2 = createTextWidget('deepChild2');
+      final nestedColumn = createColumnWidget('nestedColumn', [deepChild1, deepChild2]);
+      final containerWidget = createContainerWidget('container1', nestedColumn);
+      final outerColumn = createColumnWidget('outerColumn', [containerWidget]);
+
+      final result = PagebuilderWidgetTreeManipulator.duplicateWidget(
+        outerColumn,
+        'deepChild1',
+        duplicateWithNewIds,
+      );
+
+      // Navigate to the nested column
+      final resultContainer = result.children![0];
+      final resultNestedColumn = resultContainer.containerChild!;
+
+      expect(resultNestedColumn.children?.length, 3); // 2 original + 1 duplicate
+      expect(resultNestedColumn.children![0].id.value, 'deepChild1');
+      expect(resultNestedColumn.children![1].id.value, isNot('deepChild1')); // New ID
+      expect(resultNestedColumn.children![2].id.value, 'deepChild2');
+    });
+
+    test('should not modify widget if target not found', () {
+      final widget1 = createTextWidget('widget1');
+      final widget2 = createTextWidget('widget2');
+      final columnWidget = createColumnWidget('column1', [widget1, widget2]);
+
+      final result = PagebuilderWidgetTreeManipulator.duplicateWidget(
+        columnWidget,
+        'nonexistent',
+        duplicateWithNewIds,
+      );
+
+      // Should return unchanged widget
+      expect(result.children?.length, 2);
+      expect(result.children![0].id.value, 'widget1');
+      expect(result.children![1].id.value, 'widget2');
+    });
+
+    test('should duplicate widget with 4 children in row and redistribute widths', () {
+      final widget1 = createTextWidget('widget1').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(25),
+      );
+      final widget2 = createTextWidget('widget2').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(25),
+      );
+      final widget3 = createTextWidget('widget3').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(25),
+      );
+      final widget4 = createTextWidget('widget4').copyWith(
+        widthPercentage: const PagebuilderResponsiveOrConstant.constant(25),
+      );
+      final rowWidget = createRowWidget('row1', [widget1, widget2, widget3, widget4]);
+
+      final result = PagebuilderWidgetTreeManipulator.duplicateWidget(
+        rowWidget,
+        'widget2',
+        duplicateWithNewIds,
+      );
+
+      expect(result.children?.length, 5); // 4 original + 1 duplicate
+      // Check redistribution to 20% each
+      expect(result.children![0].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(20.0, 0.01));
+      expect(result.children![1].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(20.0, 0.01));
+      expect(result.children![2].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(20.0, 0.01));
+      expect(result.children![3].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(20.0, 0.01));
+      expect(result.children![4].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop), closeTo(20.0, 0.01));
+    });
+  });
 }

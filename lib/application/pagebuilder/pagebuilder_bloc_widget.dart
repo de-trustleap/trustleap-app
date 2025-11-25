@@ -199,4 +199,54 @@ extension PagebuilderBlocWidget on PagebuilderBloc {
       ));
     }
   }
+
+  Future<void> onDuplicateWidget(
+      DuplicateWidgetEvent event, Emitter<PagebuilderState> emit) async {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final sections = currentState.content.content?.sections;
+
+      if (sections == null || sections.isEmpty) return;
+
+      final updatedSections = sections.map((section) {
+        final updatedWidgets = section.widgets?.map((widget) {
+          return PagebuilderWidgetTreeManipulator.duplicateWidget(
+            widget,
+            event.widgetId,
+            _duplicateWidgetWithNewIds,
+          );
+        }).toList();
+        return section.copyWith(widgets: updatedWidgets);
+      }).toList();
+
+      final updatedContent =
+          currentState.content.content?.copyWith(sections: updatedSections);
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: updatedContent);
+
+      if (!isUndoRedoOperation) {
+        localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
+
+  PageBuilderWidget _duplicateWidgetWithNewIds(PageBuilderWidget widget) {
+    return widget.copyWith(
+      id: UniqueID(),
+      children: widget.children
+          ?.map((child) => _duplicateWidgetWithNewIds(child))
+          .toList(),
+      containerChild: widget.containerChild != null
+          ? _duplicateWidgetWithNewIds(widget.containerChild!)
+          : null,
+    );
+  }
 }

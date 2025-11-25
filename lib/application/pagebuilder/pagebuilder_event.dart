@@ -133,10 +133,28 @@ class DeleteSectionEvent extends PagebuilderEvent with EquatableMixin {
   List<Object?> get props => [sectionId];
 }
 
+class DuplicateSectionEvent extends PagebuilderEvent with EquatableMixin {
+  final String sectionId;
+
+  DuplicateSectionEvent(this.sectionId);
+
+  @override
+  List<Object?> get props => [sectionId];
+}
+
 class DeleteWidgetEvent extends PagebuilderEvent with EquatableMixin {
   final String widgetId;
 
   DeleteWidgetEvent(this.widgetId);
+
+  @override
+  List<Object?> get props => [widgetId];
+}
+
+class DuplicateWidgetEvent extends PagebuilderEvent with EquatableMixin {
+  final String widgetId;
+
+  DuplicateWidgetEvent(this.widgetId);
 
   @override
   List<Object?> get props => [widgetId];

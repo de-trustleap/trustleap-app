@@ -3034,4 +3034,25 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_widget_controls_delete => 'Löschen';
+
+  @override
+  String get pagebuilder_widget_controls_duplicate => 'Duplizieren';
+
+  @override
+  String get pagebuilder_section_controls_duplicate => 'Duplizieren';
+
+  @override
+  String get pagebuilder_section_controls_delete => 'Löschen';
+
+  @override
+  String get pagebuilder_section_controls_edit_tooltip => 'Bearbeiten';
+
+  @override
+  String get pagebuilder_section_controls_drag_tooltip => 'Verschieben';
+
+  @override
+  String get pagebuilder_widget_controls_edit_tooltip => 'Bearbeiten';
+
+  @override
+  String get pagebuilder_widget_controls_drag_tooltip => 'Verschieben';
 }

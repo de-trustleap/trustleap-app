@@ -5156,6 +5156,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete'**
   String get pagebuilder_widget_controls_delete;
+
+  /// Label for the duplicate button in the widget controls
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get pagebuilder_widget_controls_duplicate;
+
+  /// Label for the duplicate button in the section controls
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get pagebuilder_section_controls_duplicate;
+
+  /// Label for the delete button in the section controls
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get pagebuilder_section_controls_delete;
+
+  /// Tooltip for the edit button in the section controls
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get pagebuilder_section_controls_edit_tooltip;
+
+  /// Tooltip for the drag handle in the section controls
+  ///
+  /// In en, this message translates to:
+  /// **'Move'**
+  String get pagebuilder_section_controls_drag_tooltip;
+
+  /// Tooltip for the edit button in the widget controls
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get pagebuilder_widget_controls_edit_tooltip;
+
+  /// Tooltip for the drag handle in the widget controls
+  ///
+  /// In en, this message translates to:
+  /// **'Move'**
+  String get pagebuilder_widget_controls_drag_tooltip;
 }
 
 class _AppLocalizationsDelegate

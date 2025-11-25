@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2025-11-08 18:05:31
+Last updated: 2025-11-24 19:29:12
 
 ---
 
@@ -36,7 +36,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### build_runner
 
-- **Version**: 2.10.1
+- **Version**: 2.10.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_runner>
@@ -112,7 +112,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### emoji_picker_flutter
 
-- **Version**: 4.3.0
+- **Version**: 4.4.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/Fintasys/emoji_picker_flutter>
@@ -286,7 +286,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### http
 
-- **Version**: 1.5.0
+- **Version**: 1.6.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/http/tree/master/pkgs/http>
@@ -294,7 +294,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### image_picker
 
-- **Version**: 1.2.0
+- **Version**: 1.2.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker>
@@ -313,7 +313,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### mockito
 
-- **Version**: 5.5.1
+- **Version**: 5.6.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/mockito>
@@ -464,7 +464,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### build
 
-- **Version**: 4.0.2
+- **Version**: 4.0.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build>
@@ -480,7 +480,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### build_daemon
 
-- **Version**: 4.1.0
+- **Version**: 4.1.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/build/tree/master/build_daemon>
@@ -498,7 +498,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### built_value
 
-- **Version**: 8.12.0
+- **Version**: 8.12.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/google/built_value.dart/tree/master/built_value>
@@ -623,7 +623,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cross_file
 
-- **Version**: 0.3.5
+- **Version**: 0.3.5+1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/cross_file>
@@ -658,7 +658,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### dart_style
 
-- **Version**: 3.1.2
+- **Version**: 3.1.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/dart_style>
@@ -738,7 +738,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### file_picker
 
-- **Version**: 10.3.3
+- **Version**: 10.3.7
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/miguelpruivo/plugins_flutter_file_picker>
@@ -747,7 +747,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### file_selector_linux
 
-- **Version**: 0.9.3+2
+- **Version**: 0.9.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/file_selector/file_selector_linux>
@@ -755,7 +755,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### file_selector_macos
 
-- **Version**: 0.9.4+5
+- **Version**: 0.9.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/file_selector/file_selector_macos>
@@ -763,7 +763,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### file_selector_platform_interface
 
-- **Version**: 2.6.2
+- **Version**: 2.7.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/file_selector/file_selector_platform_interface>
@@ -771,7 +771,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### file_selector_windows
 
-- **Version**: 0.9.3+4
+- **Version**: 0.9.3+5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/file_selector/file_selector_windows>
@@ -852,7 +852,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### flex_seed_scheme
 
-- **Version**: 3.6.1
+- **Version**: 4.0.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/rydmike/flex_seed_scheme>
@@ -1050,7 +1050,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### flutter_plugin_android_lifecycle
 
-- **Version**: 2.0.32
+- **Version**: 2.0.33
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/flutter_plugin_android_lifecycle>
@@ -1133,7 +1133,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_android
 
-- **Version**: 0.8.13+7
+- **Version**: 0.8.13+10
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_android>
@@ -1141,7 +1141,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_for_web
 
-- **Version**: 3.1.0
+- **Version**: 3.1.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_for_web>
@@ -1149,7 +1149,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### image_picker_ios
 
-- **Version**: 0.8.13+1
+- **Version**: 0.8.13+2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/image_picker/image_picker_ios>
@@ -1214,7 +1214,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### jni
 
-- **Version**: 0.15.0
+- **Version**: 0.15.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/native/tree/main/pkgs/jni>
@@ -1308,7 +1308,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### matcher
 
-- **Version**: 0.12.17
+- **Version**: 0.12.18
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/test/tree/master/pkgs/matcher>
@@ -1387,7 +1387,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### objective_c
 
-- **Version**: 9.0.0+1
+- **Version**: 9.1.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/native/tree/main/pkgs/objective_c>
@@ -1449,7 +1449,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### path_provider_android
 
-- **Version**: 2.2.20
+- **Version**: 2.2.22
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/path_provider/path_provider_android>
@@ -1457,7 +1457,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### path_provider_foundation
 
-- **Version**: 2.4.3
+- **Version**: 2.4.4
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/path_provider/path_provider_foundation>
@@ -1669,7 +1669,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### shared_preferences_android
 
-- **Version**: 2.4.15
+- **Version**: 2.4.17
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/shared_preferences/shared_preferences_android>
@@ -1677,7 +1677,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### shared_preferences_foundation
 
-- **Version**: 2.5.5
+- **Version**: 2.5.6
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/shared_preferences/shared_preferences_foundation>
@@ -1733,7 +1733,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### source_gen
 
-- **Version**: 4.0.2
+- **Version**: 4.1.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/source_gen/tree/master/source_gen>
@@ -1870,7 +1870,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### test_api
 
-- **Version**: 0.7.7
+- **Version**: 0.7.8
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/dart-lang/test/tree/master/pkgs/test_api>
@@ -1900,18 +1900,9 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/mezoni/unicode>
 - **Description**: Unicode characters library auto generated from <http://www.unicode.org>.
 
-### universal_io
-
-- **Version**: 2.2.2
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-io-packages/universal_io>
-- **Description**: Cross-platform 'dart:io' that adds browser support for HttpClient and some
-  other "dart:io" APIs.
-
 ### url_launcher_android
 
-- **Version**: 6.3.24
+- **Version**: 6.3.28
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_android>
@@ -1919,7 +1910,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### url_launcher_ios
 
-- **Version**: 6.3.5
+- **Version**: 6.3.6
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_ios>
@@ -1927,7 +1918,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### url_launcher_linux
 
-- **Version**: 3.2.1
+- **Version**: 3.2.2
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_linux>
@@ -1935,7 +1926,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### url_launcher_macos
 
-- **Version**: 3.2.4
+- **Version**: 3.2.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_macos>
@@ -1959,7 +1950,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### url_launcher_windows
 
-- **Version**: 3.1.4
+- **Version**: 3.1.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher_windows>
