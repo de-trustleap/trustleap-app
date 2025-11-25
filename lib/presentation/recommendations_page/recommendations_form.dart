@@ -65,14 +65,16 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   void _initializeUserData() {
     final userState = BlocProvider.of<UserObserverCubit>(context).state;
     if (userState is UserObserverSuccess) {
-      setUser(userState.user);
-      Modular.get<RecommendationsCubit>()
-          .getRecommendationReasons(userState.user.landingPageIDs ?? []);
-      if (userState.user.role == Role.promoter &&
-          userState.user.parentUserID != null) {
-        Modular.get<RecommendationsCubit>()
-            .getParentUser(userState.user.parentUserID!);
-      }
+      _loadRecommendationData(userState.user);
+    }
+  }
+
+  void _loadRecommendationData(CustomUser user) {
+    setUser(user);
+    Modular.get<RecommendationsCubit>()
+        .getRecommendationReasons(user.landingPageIDs ?? []);
+    if (user.role == Role.promoter && user.parentUserID != null) {
+      Modular.get<RecommendationsCubit>().getParentUser(user.parentUserID!);
     }
   }
 
@@ -157,15 +159,16 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   String getReasonValues() {
-    selectedReason = selectedReason ?? reasons.firstWhere(
-      (e) => e.isActive == true,
-      orElse: () => const RecommendationReason(
-        id: null,
-        reason: "null",
-        isActive: null,
-        promotionTemplate: null,
-      ),
-    );
+    selectedReason = selectedReason ??
+        reasons.firstWhere(
+          (e) => e.isActive == true,
+          orElse: () => const RecommendationReason(
+            id: null,
+            reason: "null",
+            isActive: null,
+            promotionTemplate: null,
+          ),
+        );
     return helper.getReasonValues(reasons, selectedReason);
   }
 
@@ -184,7 +187,8 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
   }
 
   String? getRecommendationLimitResetText() {
-    return helper.getRecommendationLimitResetText(context, currentUser, parentUser);
+    return helper.getRecommendationLimitResetText(
+        context, currentUser, parentUser);
   }
 
   @override
@@ -202,252 +206,269 @@ class _RecommendationsFormState extends State<RecommendationsForm> {
       return BlocListener<UserObserverCubit, UserObserverState>(
         listener: (context, state) {
           if (state is UserObserverSuccess) {
-            setState(() {
-              if (state.user.role == Role.promoter) {
-                currentUser = state.user;
-              } else {
-                parentUser = state.user;
-              }
-            });
+            _loadRecommendationData(state.user);
           }
         },
-        child: BlocConsumer<RecommendationsCubit, RecommendationsState>(
-          bloc: recoCubit,
-          listener: (context, state) {
-            if (state is RecommendationGetParentUserSuccessState) {
-              setParentUser(state.user);
-            } else if (state is RecommendationGetReasonsSuccessState) {
-              setState(() {
-                reasons = state.reasons;
-              });
-            }
-          },
-          builder: (context, state) {
-            if (state is RecommendationNoReasonsState) {
-              return EmptyPage(
-                  icon: Icons.person_add,
-                  title: localization.recommendation_missing_landingpage_title,
-                  subTitle:
-                      localization.recommendation_missing_landingpage_text,
-                  buttonTitle:
-                      localization.recommendation_missing_landingpage_button,
-                  onTap: () {
-                    navigator.navigate(
-                        RoutePaths.homePath + RoutePaths.landingPagePath);
-                  });
-            }
-            if (currentUser != null || parentUser != null) {
-              return Form(
-                  key: formKey,
-                  autovalidateMode: validationHasError
-                      ? AutovalidateMode.always
-                      : AutovalidateMode.disabled,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SelectableText(localization.recommendations_title,
-                            style: themeData.textTheme.headlineLarge!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 16),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FormTextfield(
-                                  maxWidth: maxWidth,
-                                  controller: promoterTextController,
-                                  disabled: promoterTextFieldDisabled,
-                                  placeholder: localization
-                                      .recommendations_form_promoter_placeholder,
-                                  onChanged: resetError,
-                                  validator: validator.validatePromotersName)
-                            ]),
-                        const SizedBox(height: textFieldSpacing),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FormTextfield(
-                                  maxWidth: maxWidth,
-                                  controller: serviceProviderTextController,
-                                  disabled: true,
-                                  placeholder: localization
-                                      .recommendations_form_service_provider_placeholder,
-                                  onChanged: resetError,
-                                  validator: validator.validateLeadsName)
-                            ]),
-                        const SizedBox(height: textFieldSpacing),
-                        Row(children: [
-                          Expanded(
-                            child: FormTextfield(
-                                maxWidth: double.infinity,
-                                controller: leadTextController,
-                                disabled: false,
-                                placeholder: localization
-                                    .recommendations_form_recommendation_name_placeholder,
-                                onChanged: resetError,
-                                onFieldSubmitted: () {
-                                  addLead(validator);
-                                  focusNode!.requestFocus();
-                                },
-                                focusNode: focusNode,
-                                validator: validator.validateLeadsName),
-                          ),
-                          const SizedBox(width: 8),
-                          IconButton(
-                              onPressed: (isRecommendationLimitReached() ||
-                                      !hasActiveReasons())
-                                  ? null
-                                  : () => addLead(validator),
-                              tooltip: isRecommendationLimitReached()
-                                  ? localization.recommendations_limit_reached_tooltip
-                                  : !hasActiveReasons()
-                                      ? localization.recommendations_no_active_landingpage_tooltip
-                                      : localization.recommendations_form_add_button_tooltip,
-                              icon: const Icon(Icons.add_circle),
-                              iconSize: 48,
-                              color: (isRecommendationLimitReached() ||
-                                      !hasActiveReasons())
-                                  ? Colors.grey[400]
-                                  : themeData.colorScheme.secondary)
-                        ]),
-                        const SizedBox(height: textFieldSpacing),
-                        Wrap(spacing: 8, runSpacing: 8, children: [
-                          for (var lead in leads)
-                            Chip(
-                              label: Text("${lead.name}\n${lead.reason}",
-                                  maxLines: 2),
-                              deleteIcon: const Icon(Icons.close, size: 16),
-                              onDeleted: () {
-                                setState(() {
-                                  leads.remove(lead);
-                                });
-                              },
-                            )
-                        ]),
-                        const SizedBox(height: textFieldSpacing),
-                        if (!hasActiveReasons()) ...[
-                          FormErrorView(
-                            message: localization.recommendations_no_active_landingpage_warning,
-                          ),
-                          const SizedBox(height: textFieldSpacing),
-                        ],
-                        if (reasons.isNotEmpty) ...[
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                RecommendationReasonPicker(
-                                    width: maxWidth,
-                                    validate: reasonValid,
-                                    reasons: reasons,
-                                    initialValue: getReasonValues(),
-                                    onSelected: (reason) {
-                                      setState(() {
-                                        reasonValid = validator
-                                            .validateReason(reason?.reason);
-                                        selectedReason = reason;
-                                      });
-                                      resetError();
-                                    })
-                              ]),
-                          if (currentUser?.role == Role.promoter) ...[
-                            const SizedBox(height: 8),
-                            Container(
-                              width: maxWidth,
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: themeData
-                                    .colorScheme.surfaceContainerHighest,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    localization.recommendations_limit_title,
-                                    style: themeData.textTheme.bodyMedium
-                                        ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: themeData
-                                          .colorScheme.onSurfaceVariant,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    localization
-                                        .recommendations_limit_description,
-                                    style:
-                                        themeData.textTheme.bodySmall?.copyWith(
-                                      color: themeData
-                                          .colorScheme.onSurfaceVariant,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    localization.recommendations_limit_status(
-                                      (currentUser ?? parentUser)
-                                              ?.recommendationCountLast30Days ??
-                                          0,
-                                      6,
-                                    ),
-                                    style:
-                                        themeData.textTheme.bodySmall?.copyWith(
-                                      color: ((currentUser ?? parentUser)
-                                                      ?.recommendationCountLast30Days ??
-                                                  0) >=
-                                              6
-                                          ? themeData.colorScheme.error
-                                          : themeData.colorScheme.primary,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  if (getRecommendationLimitResetText() != null) ...[
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      getRecommendationLimitResetText()!,
-                                      style:
-                                          themeData.textTheme.bodySmall?.copyWith(
-                                        color: themeData
-                                            .colorScheme.onSurfaceVariant,
-                                        fontStyle: FontStyle.italic,
-                                      ),
-                                    ),
-                                  ],
-                                ],
-                              ),
-                            ),
-                          ],
-                        ],
-                        if (showRecommendation && leads.isNotEmpty) ...[
-                          const SizedBox(height: tabFieldSpacing),
-                          RecommendationPreview(
-                              leads: leads,
-                              userID: currentUser != null
-                                  ? currentUser?.id.value ?? ""
-                                  : parentUser?.id.value ?? "",
-                              disabled: isRecommendationLimitReached(),
-                              onSaveSuccess: (recommendation) {
-                                setState(() {
-                                  leads.removeWhere(
-                                      (lead) => lead.id == recommendation.id);
-                                  if (leads.isEmpty) {
-                                    showRecommendation = false;
-                                  }
-                                });
-                                CustomSnackBar.of(context).showCustomSnackBar(
-                                    localization.recommendations_sent_success(
-                                        recommendation.name ?? ""));
-                              }),
-                        ],
-                      ]));
-            } else if (state is RecommendationGetUserFailureState) {
-              return CenteredConstrainedWrapper(
-                  child: ErrorView(
-                      title: localization.recommendations_error_view_title,
-                      message: DatabaseFailureMapper.mapFailureMessage(
-                          state.failure, localization),
-                      callback: _initializeUserData));
-            } else {
+        child: BlocBuilder<UserObserverCubit, UserObserverState>(
+          builder: (context, userState) {
+            if (userState is UserObserverLoading ||
+                userState is UserObserverInitial) {
               return const LoadingIndicator();
             }
+            return BlocConsumer<RecommendationsCubit, RecommendationsState>(
+              bloc: recoCubit,
+              listener: (context, state) {
+                if (state is RecommendationGetParentUserSuccessState) {
+                  setParentUser(state.user);
+                } else if (state is RecommendationGetReasonsSuccessState) {
+                  setState(() {
+                    reasons = state.reasons;
+                  });
+                }
+              },
+              builder: (context, state) {
+                if (state is RecommendationsInitial ||
+                    state is RecommendationLoadingState) {
+                  return const LoadingIndicator();
+                }
+                if (state is RecommendationNoReasonsState) {
+                  return EmptyPage(
+                      icon: Icons.person_add,
+                      title:
+                          localization.recommendation_missing_landingpage_title,
+                      subTitle:
+                          localization.recommendation_missing_landingpage_text,
+                      buttonTitle: localization
+                          .recommendation_missing_landingpage_button,
+                      onTap: () {
+                        navigator.navigate(
+                            RoutePaths.homePath + RoutePaths.landingPagePath);
+                      });
+                }
+                if (currentUser != null || parentUser != null) {
+                  return Form(
+                      key: formKey,
+                      autovalidateMode: validationHasError
+                          ? AutovalidateMode.always
+                          : AutovalidateMode.disabled,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SelectableText(localization.recommendations_title,
+                                style: themeData.textTheme.headlineLarge!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 16),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FormTextfield(
+                                      maxWidth: maxWidth,
+                                      controller: promoterTextController,
+                                      disabled: promoterTextFieldDisabled,
+                                      placeholder: localization
+                                          .recommendations_form_promoter_placeholder,
+                                      onChanged: resetError,
+                                      validator:
+                                          validator.validatePromotersName)
+                                ]),
+                            const SizedBox(height: textFieldSpacing),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FormTextfield(
+                                      maxWidth: maxWidth,
+                                      controller: serviceProviderTextController,
+                                      disabled: true,
+                                      placeholder: localization
+                                          .recommendations_form_service_provider_placeholder,
+                                      onChanged: resetError,
+                                      validator: validator.validateLeadsName)
+                                ]),
+                            const SizedBox(height: textFieldSpacing),
+                            Row(children: [
+                              Expanded(
+                                child: FormTextfield(
+                                    maxWidth: double.infinity,
+                                    controller: leadTextController,
+                                    disabled: false,
+                                    placeholder: localization
+                                        .recommendations_form_recommendation_name_placeholder,
+                                    onChanged: resetError,
+                                    onFieldSubmitted: () {
+                                      addLead(validator);
+                                      focusNode!.requestFocus();
+                                    },
+                                    focusNode: focusNode,
+                                    validator: validator.validateLeadsName),
+                              ),
+                              const SizedBox(width: 8),
+                              IconButton(
+                                  onPressed: (isRecommendationLimitReached() ||
+                                          !hasActiveReasons())
+                                      ? null
+                                      : () => addLead(validator),
+                                  tooltip: isRecommendationLimitReached()
+                                      ? localization
+                                          .recommendations_limit_reached_tooltip
+                                      : !hasActiveReasons()
+                                          ? localization
+                                              .recommendations_no_active_landingpage_tooltip
+                                          : localization
+                                              .recommendations_form_add_button_tooltip,
+                                  icon: const Icon(Icons.add_circle),
+                                  iconSize: 48,
+                                  color: (isRecommendationLimitReached() ||
+                                          !hasActiveReasons())
+                                      ? Colors.grey[400]
+                                      : themeData.colorScheme.secondary)
+                            ]),
+                            const SizedBox(height: textFieldSpacing),
+                            Wrap(spacing: 8, runSpacing: 8, children: [
+                              for (var lead in leads)
+                                Chip(
+                                  label: Text("${lead.name}\n${lead.reason}",
+                                      maxLines: 2),
+                                  deleteIcon: const Icon(Icons.close, size: 16),
+                                  onDeleted: () {
+                                    setState(() {
+                                      leads.remove(lead);
+                                    });
+                                  },
+                                )
+                            ]),
+                            const SizedBox(height: textFieldSpacing),
+                            if (!hasActiveReasons()) ...[
+                              FormErrorView(
+                                message: localization
+                                    .recommendations_no_active_landingpage_warning,
+                              ),
+                              const SizedBox(height: textFieldSpacing),
+                            ],
+                            if (reasons.isNotEmpty) ...[
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    RecommendationReasonPicker(
+                                        width: maxWidth,
+                                        validate: reasonValid,
+                                        reasons: reasons,
+                                        initialValue: getReasonValues(),
+                                        onSelected: (reason) {
+                                          setState(() {
+                                            reasonValid = validator
+                                                .validateReason(reason?.reason);
+                                            selectedReason = reason;
+                                          });
+                                          resetError();
+                                        })
+                                  ]),
+                              if (currentUser?.role == Role.promoter) ...[
+                                const SizedBox(height: 8),
+                                Container(
+                                  width: maxWidth,
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: themeData
+                                        .colorScheme.surfaceContainerHighest,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        localization
+                                            .recommendations_limit_title,
+                                        style: themeData.textTheme.bodyMedium
+                                            ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: themeData
+                                              .colorScheme.onSurfaceVariant,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        localization
+                                            .recommendations_limit_description,
+                                        style: themeData.textTheme.bodySmall
+                                            ?.copyWith(
+                                          color: themeData
+                                              .colorScheme.onSurfaceVariant,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        localization
+                                            .recommendations_limit_status(
+                                          (currentUser ?? parentUser)
+                                                  ?.recommendationCountLast30Days ??
+                                              0,
+                                          6,
+                                        ),
+                                        style: themeData.textTheme.bodySmall
+                                            ?.copyWith(
+                                          color: ((currentUser ?? parentUser)
+                                                          ?.recommendationCountLast30Days ??
+                                                      0) >=
+                                                  6
+                                              ? themeData.colorScheme.error
+                                              : themeData.colorScheme.primary,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      if (getRecommendationLimitResetText() !=
+                                          null) ...[
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          getRecommendationLimitResetText()!,
+                                          style: themeData.textTheme.bodySmall
+                                              ?.copyWith(
+                                            color: themeData
+                                                .colorScheme.onSurfaceVariant,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ],
+                            if (showRecommendation && leads.isNotEmpty) ...[
+                              const SizedBox(height: tabFieldSpacing),
+                              RecommendationPreview(
+                                  leads: leads,
+                                  userID: currentUser != null
+                                      ? currentUser?.id.value ?? ""
+                                      : parentUser?.id.value ?? "",
+                                  disabled: isRecommendationLimitReached(),
+                                  onSaveSuccess: (recommendation) {
+                                    setState(() {
+                                      leads.removeWhere((lead) =>
+                                          lead.id == recommendation.id);
+                                      if (leads.isEmpty) {
+                                        showRecommendation = false;
+                                      }
+                                    });
+                                    CustomSnackBar.of(context)
+                                        .showCustomSnackBar(localization
+                                            .recommendations_sent_success(
+                                                recommendation.name ?? ""));
+                                  }),
+                            ],
+                          ]));
+                } else if (state is RecommendationGetUserFailureState) {
+                  return CenteredConstrainedWrapper(
+                      child: ErrorView(
+                          title: localization.recommendations_error_view_title,
+                          message: DatabaseFailureMapper.mapFailureMessage(
+                              state.failure, localization),
+                          callback: _initializeUserData));
+                } else {
+                  return const LoadingIndicator();
+                }
+              },
+            );
           },
         ),
       );
