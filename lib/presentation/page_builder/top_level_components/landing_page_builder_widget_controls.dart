@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class LandingPageBuilderWidgetControls extends StatelessWidget {
   final Function onEdit;
   final Function onDelete;
+  final Function onDuplicate;
   final int? index;
   final double? parentWidth;
 
@@ -13,6 +14,7 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
     super.key,
     required this.onEdit,
     required this.onDelete,
+    required this.onDuplicate,
     this.index,
     this.parentWidth,
   });
@@ -42,8 +44,10 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Tooltip(
-                          message: localization.pagebuilder_widget_controls_drag_tooltip,
-                          child: const PagebuilderDragControl<PageBuilderWidget>(
+                          message: localization
+                              .pagebuilder_widget_controls_drag_tooltip,
+                          child:
+                              const PagebuilderDragControl<PageBuilderWidget>(
                             icon: Icons.drag_indicator,
                             color: Colors.white,
                             size: 16,
@@ -51,7 +55,8 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Tooltip(
-                          message: localization.pagebuilder_widget_controls_edit_tooltip,
+                          message: localization
+                              .pagebuilder_widget_controls_edit_tooltip,
                           child: IconButton(
                             onPressed: () {
                               onEdit();
@@ -63,14 +68,61 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 4),
-                        IconButton(
-                          onPressed: () {
-                            onDelete();
-                          },
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          icon: const Icon(Icons.delete,
-                              color: Colors.white, size: 16),
+                        SizedBox(
+                          width: 16,
+                          child: PopupMenuButton<String>(
+                            icon: const Icon(Icons.more_vert,
+                                color: Colors.white, size: 16),
+                            padding: EdgeInsets.zero,
+                            iconSize: 16,
+                            constraints: const BoxConstraints(),
+                            itemBuilder: (BuildContext context) => [
+                            PopupMenuItem<String>(
+                              value: 'duplicate',
+                              height: 32,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              onTap: () {
+                                onDuplicate();
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.content_copy,
+                                      size: 14,
+                                      color: themeData.colorScheme.secondary),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                      localization
+                                          .pagebuilder_widget_controls_duplicate,
+                                      style: const TextStyle(fontSize: 12)),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'delete',
+                              height: 32,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              onTap: () {
+                                onDelete();
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.delete,
+                                      size: 14,
+                                      color: themeData.colorScheme.secondary),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                      localization
+                                          .pagebuilder_widget_controls_delete,
+                                      style: const TextStyle(fontSize: 12)),
+                                ],
+                              ),
+                            ),
+                          ],
+                          ),
                         ),
                       ],
                     )
@@ -78,7 +130,8 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Tooltip(
-                          message: localization.pagebuilder_widget_controls_edit_tooltip,
+                          message: localization
+                              .pagebuilder_widget_controls_edit_tooltip,
                           child: IconButton(
                             onPressed: () {
                               onEdit();
@@ -90,14 +143,61 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 4),
-                        IconButton(
-                          onPressed: () {
-                            onDelete();
-                          },
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          icon: const Icon(Icons.delete,
-                              color: Colors.white, size: 16),
+                        SizedBox(
+                          width: 16,
+                          child: PopupMenuButton<String>(
+                            icon: const Icon(Icons.more_vert,
+                                color: Colors.white, size: 16),
+                            padding: EdgeInsets.zero,
+                            iconSize: 16,
+                            constraints: const BoxConstraints(),
+                            itemBuilder: (BuildContext context) => [
+                            PopupMenuItem<String>(
+                              value: 'duplicate',
+                              height: 32,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              onTap: () {
+                                onDuplicate();
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.content_copy,
+                                      size: 14,
+                                      color: themeData.colorScheme.secondary),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                      localization
+                                          .pagebuilder_widget_controls_duplicate,
+                                      style: const TextStyle(fontSize: 12)),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'delete',
+                              height: 32,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              onTap: () {
+                                onDelete();
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.delete,
+                                      size: 14,
+                                      color: themeData.colorScheme.secondary),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                      localization
+                                          .pagebuilder_widget_controls_delete,
+                                      style: const TextStyle(fontSize: 12)),
+                                ],
+                              ),
+                            ),
+                          ],
+                          ),
                         ),
                       ],
                     ),
@@ -129,6 +229,26 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                               size: 14, color: themeData.colorScheme.secondary),
                           const SizedBox(width: 6),
                           Text(localization.pagebuilder_widget_controls_edit,
+                              style: const TextStyle(fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      value: "duplicate",
+                      height: 32,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      onTap: () {
+                        onDuplicate();
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.content_copy,
+                              size: 14, color: themeData.colorScheme.secondary),
+                          const SizedBox(width: 6),
+                          Text(
+                              localization
+                                  .pagebuilder_widget_controls_duplicate,
                               style: const TextStyle(fontSize: 12)),
                         ],
                       ),

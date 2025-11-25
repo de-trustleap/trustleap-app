@@ -150,3 +150,12 @@ class DeleteWidgetEvent extends PagebuilderEvent with EquatableMixin {
   @override
   List<Object?> get props => [widgetId];
 }
+
+class DuplicateWidgetEvent extends PagebuilderEvent with EquatableMixin {
+  final String widgetId;
+
+  DuplicateWidgetEvent(this.widgetId);
+
+  @override
+  List<Object?> get props => [widgetId];
+}

@@ -2986,6 +2986,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pagebuilder_widget_controls_delete => 'Delete';
 
   @override
+  String get pagebuilder_widget_controls_duplicate => 'Duplicate';
+
+  @override
   String get pagebuilder_section_controls_duplicate => 'Duplicate';
 
   @override

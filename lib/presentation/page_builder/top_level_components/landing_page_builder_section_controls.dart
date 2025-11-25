@@ -55,12 +55,15 @@ class LandingPageBuilderSectionControls extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 4),
-              PopupMenuButton<String>(
-                icon:
-                    const Icon(Icons.more_vert, color: Colors.white, size: 20),
-                padding: EdgeInsets.zero,
-                iconSize: 20,
-                itemBuilder: (BuildContext context) => [
+              SizedBox(
+                width: 20,
+                child: PopupMenuButton<String>(
+                  icon:
+                      const Icon(Icons.more_vert, color: Colors.white, size: 20),
+                  padding: EdgeInsets.zero,
+                  iconSize: 20,
+                  constraints: const BoxConstraints(),
+                  itemBuilder: (BuildContext context) => [
                   PopupMenuItem<String>(
                     value: 'duplicate',
                     height: 40,
@@ -99,6 +102,7 @@ class LandingPageBuilderSectionControls extends StatelessWidget {
                     ),
                   ),
                 ],
+                ),
               ),
             ],
           ),

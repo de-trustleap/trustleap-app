@@ -5157,6 +5157,12 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get pagebuilder_widget_controls_delete;
 
+  /// Label for the duplicate button in the widget controls
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get pagebuilder_widget_controls_duplicate;
+
   /// Label for the duplicate button in the section controls
   ///
   /// In en, this message translates to:

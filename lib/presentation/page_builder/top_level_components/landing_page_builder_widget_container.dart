@@ -352,6 +352,10 @@ class _LandingPageBuilderWidgetContainerState
                                         Modular.get<PagebuilderBloc>()
                                             .add(DeleteWidgetEvent(widgetID));
                                       },
+                                      onDuplicate: () {
+                                        Modular.get<PagebuilderBloc>()
+                                            .add(DuplicateWidgetEvent(widgetID));
+                                      },
                                     )
                                   ],
                                 ],

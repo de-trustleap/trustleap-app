@@ -2979,4 +2979,499 @@ void main() {
       pageBuilderBloc.add(DeleteWidgetEvent("widget1"));
     });
   });
+
+  group("PagebuilderBloc_DuplicateWidget", () {
+    final widget1 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget1"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Widget 1",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: const PagebuilderResponsiveOrConstant.constant(50.0),
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final widget2 = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("widget2"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Widget 2",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: const PagebuilderResponsiveOrConstant.constant(50.0),
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    test("should duplicate widget in row and redistribute widths", () async {
+      final rowWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("row1"),
+        elementType: PageBuilderWidgetType.row,
+        properties: null,
+        hoverProperties: null,
+        children: [widget1, widget2],
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [rowWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              final row = section.widgets?.first;
+
+              // Should have 3 widgets now (2 original + 1 duplicate)
+              if (row?.children?.length != 3) return false;
+
+              // Check that duplicated widget has different ID
+              if (row!.children![1].id.value == "widget1") return false;
+
+              // Check width redistribution
+              final width1 = row.children![0].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop);
+              final width2 = row.children![1].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop);
+              final width3 = row.children![2].widthPercentage?.getValueForBreakpoint(PagebuilderResponsiveBreakpoint.desktop);
+
+              if (width1 == null || width2 == null || width3 == null) return false;
+
+              return (width1 - 33.33).abs() < 0.01 &&
+                     (width2 - 33.33).abs() < 0.01 &&
+                     (width3 - 33.34).abs() < 0.01 &&
+                     state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateWidgetEvent("widget1"));
+    });
+
+    test("should duplicate widget in column", () async {
+      final columnWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("column1"),
+        elementType: PageBuilderWidgetType.column,
+        properties: null,
+        hoverProperties: null,
+        children: [widget1, widget2],
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [columnWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              final column = section.widgets?.first;
+
+              // Should have 3 widgets now (2 original + 1 duplicate)
+              if (column?.children?.length != 3) return false;
+
+              // Check that first widget is still widget1
+              if (column!.children![0].id.value != "widget1") return false;
+
+              // Check that duplicated widget has different ID
+              if (column.children![1].id.value == "widget1") return false;
+
+              // Check that third widget is widget2
+              if (column.children![2].id.value != "widget2") return false;
+
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateWidgetEvent("widget1"));
+    });
+
+    test("should mark content as updated after duplicating widget", () async {
+      final rowWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("row1"),
+        elementType: PageBuilderWidgetType.row,
+        properties: null,
+        hoverProperties: null,
+        children: [widget1, widget2],
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [rowWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateWidgetEvent("widget1"));
+    });
+
+    test("should not emit new state if widget to duplicate is not found",
+        () async {
+      final rowWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("row1"),
+        elementType: PageBuilderWidgetType.row,
+        properties: null,
+        hoverProperties: null,
+        children: [widget1, widget2],
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [rowWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              final row = section.widgets?.first;
+
+              // Should still have 2 widgets
+              return row?.children?.length == 2 && state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateWidgetEvent("nonexistent"));
+    });
+
+    test("should duplicate container child and wrap in column", () async {
+      final childWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("child1"),
+        elementType: PageBuilderWidgetType.text,
+        properties: PageBuilderTextProperties(
+          text: "Child 1",
+          fontSize: null,
+          fontFamily: null,
+          lineHeight: null,
+          letterSpacing: null,
+          color: null,
+          alignment: null,
+          textShadow: null,
+        ),
+        hoverProperties: null,
+        children: null,
+        containerChild: null,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final containerWidget = PageBuilderWidget(
+        id: UniqueID.fromUniqueString("container1"),
+        elementType: PageBuilderWidgetType.container,
+        properties: null,
+        hoverProperties: null,
+        children: null,
+        containerChild: childWidget,
+        widthPercentage: null,
+        background: null,
+        hoverBackground: null,
+        padding: null,
+        margin: null,
+        maxWidth: null,
+        alignment: null,
+        customCSS: null,
+      );
+
+      final mockSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: PageBuilderSectionLayout.column,
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        widgets: [containerWidget],
+        visibleOn: null,
+      );
+
+      final mockPageBuilderPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("page1"),
+        sections: [mockSection],
+        backgroundColor: null,
+      );
+
+      final mockLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("lp1"),
+        contentID: UniqueID.fromUniqueString("page1"),
+      );
+
+      final mockUser = CustomUser(id: UniqueID.fromUniqueString("user1"));
+
+      final mockPagebuilderContent = PagebuilderContent(
+        landingPage: mockLandingPage,
+        content: mockPageBuilderPage,
+        user: mockUser,
+      );
+
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.isEmpty) return false;
+
+              final section = sections.first;
+              final container = section.widgets?.first;
+
+              // Container child should now be a column
+              if (container?.containerChild?.elementType != PageBuilderWidgetType.column) return false;
+
+              // Column should have 2 children
+              if (container!.containerChild!.children?.length != 2) return false;
+
+              // First child should be original
+              if (container.containerChild!.children![0].id.value != "child1") return false;
+
+              // Second child should have different ID
+              if (container.containerChild!.children![1].id.value == "child1") return false;
+
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateWidgetEvent("child1"));
+    });
+  });
 }
