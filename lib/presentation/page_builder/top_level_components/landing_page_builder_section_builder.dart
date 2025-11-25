@@ -354,6 +354,10 @@ class _LandingPageBuilderSectionViewState
                                   Modular.get<PagebuilderBloc>()
                                       .add(DeleteSectionEvent(widget.model.id.value));
                                 },
+                                onDuplicatePressed: () {
+                                  Modular.get<PagebuilderBloc>()
+                                      .add(DuplicateSectionEvent(widget.model.id.value));
+                                },
                               )
                             ]
                           ],

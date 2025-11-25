@@ -3485,5 +3485,29 @@
     "pagebuilder_widget_controls_delete": "Delete",
     "@pagebuilder_widget_controls_delete": {
         "description": "Label for the delete button in the widget controls"
+    },
+    "pagebuilder_section_controls_duplicate": "Duplicate",
+    "@pagebuilder_section_controls_duplicate": {
+        "description": "Label for the duplicate button in the section controls"
+    },
+    "pagebuilder_section_controls_delete": "Delete",
+    "@pagebuilder_section_controls_delete": {
+        "description": "Label for the delete button in the section controls"
+    },
+    "pagebuilder_section_controls_edit_tooltip": "Edit",
+    "@pagebuilder_section_controls_edit_tooltip": {
+        "description": "Tooltip for the edit button in the section controls"
+    },
+    "pagebuilder_section_controls_drag_tooltip": "Move",
+    "@pagebuilder_section_controls_drag_tooltip": {
+        "description": "Tooltip for the drag handle in the section controls"
+    },
+    "pagebuilder_widget_controls_edit_tooltip": "Edit",
+    "@pagebuilder_widget_controls_edit_tooltip": {
+        "description": "Tooltip for the edit button in the widget controls"
+    },
+    "pagebuilder_widget_controls_drag_tooltip": "Move",
+    "@pagebuilder_widget_controls_drag_tooltip": {
+        "description": "Tooltip for the drag handle in the widget controls"
     }
 }

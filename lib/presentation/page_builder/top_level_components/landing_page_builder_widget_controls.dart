@@ -41,20 +41,26 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const PagebuilderDragControl<PageBuilderWidget>(
-                          icon: Icons.drag_indicator,
-                          color: Colors.white,
-                          size: 16,
+                        Tooltip(
+                          message: localization.pagebuilder_widget_controls_drag_tooltip,
+                          child: const PagebuilderDragControl<PageBuilderWidget>(
+                            icon: Icons.drag_indicator,
+                            color: Colors.white,
+                            size: 16,
+                          ),
                         ),
                         const SizedBox(width: 4),
-                        IconButton(
-                          onPressed: () {
-                            onEdit();
-                          },
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          icon: const Icon(Icons.edit,
-                              color: Colors.white, size: 16),
+                        Tooltip(
+                          message: localization.pagebuilder_widget_controls_edit_tooltip,
+                          child: IconButton(
+                            onPressed: () {
+                              onEdit();
+                            },
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            icon: const Icon(Icons.edit,
+                                color: Colors.white, size: 16),
+                          ),
                         ),
                         const SizedBox(width: 4),
                         IconButton(
@@ -71,14 +77,17 @@ class LandingPageBuilderWidgetControls extends StatelessWidget {
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton(
-                          onPressed: () {
-                            onEdit();
-                          },
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          icon: const Icon(Icons.edit,
-                              color: Colors.white, size: 16),
+                        Tooltip(
+                          message: localization.pagebuilder_widget_controls_edit_tooltip,
+                          child: IconButton(
+                            onPressed: () {
+                              onEdit();
+                            },
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            icon: const Icon(Icons.edit,
+                                color: Colors.white, size: 16),
+                          ),
                         ),
                         const SizedBox(width: 4),
                         IconButton(

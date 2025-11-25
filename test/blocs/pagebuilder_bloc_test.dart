@@ -2006,6 +2006,362 @@ void main() {
     });
   });
 
+  group("PagebuilderBloc_DuplicateSection", () {
+    final childWidget = PageBuilderWidget(
+      id: UniqueID.fromUniqueString("child1"),
+      elementType: PageBuilderWidgetType.text,
+      properties: PageBuilderTextProperties(
+        text: "Test Text",
+        fontSize: null,
+        fontFamily: null,
+        lineHeight: null,
+        letterSpacing: null,
+        color: null,
+        alignment: null,
+        textShadow: null,
+      ),
+      hoverProperties: null,
+      children: null,
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+
+    final section1 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      name: "Section 1",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [childWidget],
+      visibleOn: null,
+    );
+
+    final section2 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section2"),
+      name: "Section 2",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final section3 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section3"),
+      name: "Section 3",
+      layout: PageBuilderSectionLayout.column,
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      backgroundColor: null,
+      sections: [section1, section2, section3],
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("landingPage1"),
+      contentID: UniqueID.fromUniqueString("content1"),
+    );
+
+    final mockUser = CustomUser(
+      id: UniqueID.fromUniqueString("user1"),
+    );
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should emit GetLandingPageAndUserSuccessState with duplicated section after original",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 4 sections now (3 original + 1 duplicate)
+              if (sections == null || sections.length != 4) return false;
+              // Duplicated section should be at index 1 (after section1)
+              // Check that the name has " (Kopie)" appended
+              if (!(sections[1].name?.contains("(Kopie)") ?? false)) return false;
+              // Check that the ID is different from original
+              if (sections[1].id.value == "section1") return false;
+              // Check that sections are in correct order
+              if (sections[0].id.value != "section1") return false;
+              if (sections[2].id.value != "section2") return false;
+              if (sections[3].id.value != "section3") return false;
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section1"));
+    });
+
+    test("should duplicate section with all its widgets and assign new IDs",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.length != 4) return false;
+
+              // Get the duplicated section
+              final duplicatedSection = sections[1];
+              final originalSection = sections[0];
+
+              // Check that widgets are duplicated
+              if (duplicatedSection.widgets?.length != originalSection.widgets?.length) {
+                return false;
+              }
+
+              // Check that widget IDs are different
+              if (duplicatedSection.widgets?[0].id.value == originalSection.widgets?[0].id.value) {
+                return false;
+              }
+
+              // Check that the widget properties are preserved
+              final origWidget = originalSection.widgets?[0];
+              final dupWidget = duplicatedSection.widgets?[0];
+              if (origWidget?.elementType != dupWidget?.elementType) return false;
+
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section1"));
+    });
+
+    test("should duplicate middle section and insert it at correct position",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 4 sections
+              if (sections == null || sections.length != 4) return false;
+              // Check order: section1, section2, duplicate of section2, section3
+              if (sections[0].id.value != "section1") return false;
+              if (sections[1].id.value != "section2") return false;
+              // Index 2 should be the duplicate (different ID but name with Kopie)
+              if (sections[2].id.value == "section2") return false;
+              if (!(sections[2].name?.contains("(Kopie)") ?? false)) return false;
+              if (sections[3].id.value != "section3") return false;
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section2"));
+    });
+
+    test("should duplicate last section and append it at the end", () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 4 sections
+              if (sections == null || sections.length != 4) return false;
+              // Check that the last section is the duplicate
+              if (sections[3].id.value == "section3") return false;
+              if (!(sections[3].name?.contains("(Kopie)") ?? false)) return false;
+              // Check order of other sections
+              if (sections[0].id.value != "section1") return false;
+              if (sections[1].id.value != "section2") return false;
+              if (sections[2].id.value != "section3") return false;
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section3"));
+    });
+
+    test("should mark content as updated after duplicating section",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section1"));
+    });
+
+    test("should not emit new state if section to duplicate is not found",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("nonexistent"));
+    });
+
+    test("should not emit new state if sections list is null", () async {
+      // Given
+      final pageWithNoSections = mockPageBuilderPage.copyWith(sections: null);
+      final contentWithNoSections =
+          mockPagebuilderContent.copyWith(content: pageWithNoSections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithNoSections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section1"));
+    });
+
+    test("should not emit new state if sections list is empty", () async {
+      // Given
+      final pageWithEmptySections = mockPageBuilderPage.copyWith(sections: []);
+      final contentWithEmptySections =
+          mockPagebuilderContent.copyWith(content: pageWithEmptySections);
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithEmptySections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section1"));
+    });
+
+    test("should append (Kopie) to section name when duplicating", () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              if (sections == null || sections.length != 4) return false;
+              // Check that the duplicated section has the correct name
+              final duplicatedSection = sections[1];
+              return duplicatedSection.name == "Section 1 (Kopie)" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section1"));
+    });
+  });
+
   group("PagebuilderBloc_DeleteWidget", () {
     final widget1 = PageBuilderWidget(
       id: UniqueID.fromUniqueString("widget1"),
