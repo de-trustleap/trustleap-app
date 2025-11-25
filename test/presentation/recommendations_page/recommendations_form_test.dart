@@ -158,7 +158,11 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pump();
 
-      // When - Directly emit NoReasonsState without going through user initialization
+      // When - Emit UserObserverSuccess first, then NoReasonsState
+      final testUser = createTestUser(role: Role.company, landingPageIDs: []);
+      userObserverCubit.emit(UserObserverSuccess(user: testUser));
+      await tester.pump();
+
       recommendationsCubit.emit(RecommendationNoReasonsState());
       await tester.pumpAndSettle();
 
