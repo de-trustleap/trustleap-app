@@ -1,129 +1,21 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_drag/pagebuilder_drag_cubit.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/drag_data/pagebuilder_drag_data.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/drag_data/pagebuilder_reorder_drag_data.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/drag_data/widget_library_drag_data.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
-import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_factory.dart';
-import 'package:finanzbegleiter/infrastructure/models/model_helper/axis_alignment_converter.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_drag_position_detector.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_drag_state.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_factory.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/draggable_item_provider.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_drag_indicators.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_row/reorderable_row_resize_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class ReorderableRowWidget extends StatelessWidget {
-  final PageBuilderWidget model;
-  final PagebuilderRowProperties? properties;
-  final int? index;
-  final Widget Function(PageBuilderWidget, int) buildChild;
-
-  const ReorderableRowWidget({
-    super.key,
-    required this.model,
-    required this.properties,
-    this.index,
-    required this.buildChild,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (model.children == null || model.children!.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    return BlocBuilder<PagebuilderResponsiveBreakpointCubit,
-        PagebuilderResponsiveBreakpoint>(
-      bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
-      builder: (context, breakpoint) {
-        // Check if we should switch to Column for current breakpoint
-        final shouldBeColumn = properties?.switchToColumnFor != null &&
-            properties!.switchToColumnFor!.contains(breakpoint);
-
-        if (shouldBeColumn) {
-          // Switch to Column layout - use column layout for reorderable element
-          return LandingPageBuilderWidgetContainer(
-            model: model,
-            index: index,
-            child: Column(
-              // Row's mainAxis (horizontal) becomes Column's crossAxis
-              crossAxisAlignment: AxisAlignmentConverter.mainAxisToCrossAxis(
-                  properties?.mainAxisAlignment ?? MainAxisAlignment.center),
-              // Row's crossAxis (vertical) becomes Column's mainAxis
-              mainAxisAlignment: AxisAlignmentConverter.crossAxisToMainAxis(
-                  properties?.crossAxisAlignment ?? CrossAxisAlignment.center),
-              children: [
-                PagebuilderReorderableElement<PageBuilderWidget>(
-                  containerId: model.id.value,
-                  items: model.children!,
-                  getItemId: (item) => item.id.value,
-                  isContainer: (item) =>
-                      item.elementType == PageBuilderWidgetType.container &&
-                      item.containerChild == null,
-                  onReorder: (oldIndex, newIndex) {
-                    Modular.get<PagebuilderBloc>().add(
-                        ReorderWidgetEvent(model.id.value, oldIndex, newIndex));
-                  },
-                  onAddWidget: (widgetLibraryData, targetWidgetId, position) {
-                    // Create new widget from factory
-                    final newWidget =
-                        PagebuilderWidgetFactory.createDefaultWidget(
-                            widgetLibraryData.widgetType);
-
-                    // Add widget at position
-                    Modular.get<PagebuilderBloc>().add(AddWidgetAtPositionEvent(
-                      newWidget: newWidget,
-                      targetWidgetId: targetWidgetId,
-                      position: position,
-                    ));
-                  },
-                  buildChild: (child, index) => buildChild(child, index),
-                ),
-              ],
-            ),
-          );
-        }
-
-        // Regular Row layout with drag and drop
-        // Calculate total width percentage
-        final totalWidthPercentage = model.children!.fold<double>(
-            0,
-            (sum, child) =>
-                sum +
-                (child.widthPercentage?.getValueForBreakpoint(breakpoint) ??
-                    0));
-        // Scale if over 100%
-        final scaleFactor =
-            totalWidthPercentage > 100 ? 100 / totalWidthPercentage : 1.0;
-        // Calculate remaining width
-        final remainingWidthPercentage =
-            100 - totalWidthPercentage * scaleFactor;
-
-        return LandingPageBuilderWidgetContainer(
-          model: model,
-          index: index,
-          child: _ReorderableRowContent(
-            model: model,
-            properties: properties,
-            breakpoint: breakpoint,
-            scaleFactor: scaleFactor,
-            remainingWidthPercentage: remainingWidthPercentage,
-            buildChild: buildChild,
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _ReorderableRowContent extends StatefulWidget {
+class ReorderableRowContent extends StatefulWidget {
   final PageBuilderWidget model;
   final PagebuilderRowProperties? properties;
   final PagebuilderResponsiveBreakpoint breakpoint;
@@ -131,7 +23,8 @@ class _ReorderableRowContent extends StatefulWidget {
   final double remainingWidthPercentage;
   final Widget Function(PageBuilderWidget, int) buildChild;
 
-  const _ReorderableRowContent({
+  const ReorderableRowContent({
+    super.key,
     required this.model,
     required this.properties,
     required this.breakpoint,
@@ -141,26 +34,47 @@ class _ReorderableRowContent extends StatefulWidget {
   });
 
   @override
-  State<_ReorderableRowContent> createState() => _ReorderableRowContentState();
+  State<ReorderableRowContent> createState() => ReorderableRowContentState();
 }
 
-class _ReorderableRowContentState extends State<_ReorderableRowContent> {
+class ReorderableRowContentState extends State<ReorderableRowContent> {
   final double _dragAfterLastThreshold = 0.7;
   final double _dragFeedbackOpacity = 0.7;
   final double _draggingChildOpacity = 0.3;
+  final double _resizeHoverThreshold = 10.0;
 
   PagebuilderDragState<PageBuilderWidget> _dragState =
       const PagebuilderDragState();
   final Map<int, GlobalKey> _itemKeys = {};
   final GlobalKey _containerKey = GlobalKey();
 
+  int?
+      _resizeHoverIndex; // Index of the gap where resize indicator should show (between index-1 and index)
+
+  // Local resize state for smooth dragging
+  bool _isResizing = false;
+  double _resizeDelta = 0.0;
+  int? _resizeLeftIndex;
+  int? _resizeRightIndex;
+  double _containerWidth = 0.0;
+
   @override
-  void didUpdateWidget(_ReorderableRowContent oldWidget) {
+  void didUpdateWidget(ReorderableRowContent oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.model.children != widget.model.children) {
       setState(() {
         _dragState = _dragState.copyWith(clearReorderedItems: true);
       });
+
+      // Clear local resize state when new props arrive
+      if (_isResizing) {
+        setState(() {
+          _isResizing = false;
+          _resizeDelta = 0.0;
+          _resizeLeftIndex = null;
+          _resizeRightIndex = null;
+        });
+      }
     }
   }
 
@@ -201,10 +115,33 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
       final itemKey = _itemKeys[index]!;
       final isLastItem = index == items.length - 1;
 
-      final flexValue =
+      // Calculate flex value with local resize delta for smooth dragging
+      double flexValue =
           (child.widthPercentage?.getValueForBreakpoint(widget.breakpoint) ??
                   0) *
               widget.scaleFactor;
+
+      // Apply local resize delta during dragging
+      if (_isResizing &&
+          _resizeLeftIndex != null &&
+          _resizeRightIndex != null &&
+          _containerWidth > 0) {
+        if (index == _resizeLeftIndex) {
+          final deltaPercentage = (_resizeDelta / _containerWidth) * 100;
+          flexValue = ((child.widthPercentage
+                          ?.getValueForBreakpoint(widget.breakpoint) ??
+                      0) +
+                  deltaPercentage) *
+              widget.scaleFactor;
+        } else if (index == _resizeRightIndex) {
+          final deltaPercentage = (_resizeDelta / _containerWidth) * 100;
+          flexValue = ((child.widthPercentage
+                          ?.getValueForBreakpoint(widget.breakpoint) ??
+                      0) -
+                  deltaPercentage) *
+              widget.scaleFactor;
+        }
+      }
 
       final isHovering = _dragState.hoveringIndex == index &&
           _dragState.draggingIndex != index;
@@ -594,6 +531,45 @@ class _ReorderableRowContentState extends State<_ReorderableRowContent> {
             children: rowChildren,
           );
 
-    return rowContent;
+    // Always show overlay with resize areas between elements
+    return Stack(
+      children: [
+        rowContent,
+        // Resize areas overlay
+        ReorderableRowResizeOverlay(
+          rowModel: widget.model,
+          items: items,
+          breakpoint: widget.breakpoint,
+          scaleFactor: widget.scaleFactor,
+          resizeHoverThreshold: _resizeHoverThreshold,
+          resizeHoverIndex: _resizeHoverIndex,
+          isResizing: _isResizing,
+          resizeDelta: _resizeDelta,
+          resizeLeftIndex: _resizeLeftIndex,
+          resizeRightIndex: _resizeRightIndex,
+          containerWidth: _containerWidth,
+          onResizeHoverChange: (index) {
+            setState(() {
+              _resizeHoverIndex = index;
+            });
+          },
+          onResizeStateChange: ({
+            required bool isResizing,
+            required double resizeDelta,
+            required int? resizeLeftIndex,
+            required int? resizeRightIndex,
+            required double containerWidth,
+          }) {
+            setState(() {
+              _isResizing = isResizing;
+              _resizeDelta = resizeDelta;
+              _resizeLeftIndex = resizeLeftIndex;
+              _resizeRightIndex = resizeRightIndex;
+              _containerWidth = containerWidth;
+            });
+          },
+        ),
+      ],
+    );
   }
 }
