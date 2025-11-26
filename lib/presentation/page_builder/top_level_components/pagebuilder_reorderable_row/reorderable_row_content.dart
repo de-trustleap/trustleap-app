@@ -531,11 +531,10 @@ class ReorderableRowContentState extends State<ReorderableRowContent> {
             children: rowChildren,
           );
 
-    // Always show overlay with resize areas between elements
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         rowContent,
-        // Resize areas overlay
         ReorderableRowResizeOverlay(
           rowModel: widget.model,
           items: items,

@@ -50,32 +50,73 @@ class ReorderableRowResizeOverlay extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final resizeAreas = <Widget>[];
+          final percentageLabels = <Widget>[];
 
           // Create resize areas between each pair of elements
           double leftOffset = 0;
           for (int i = 0; i < items.length; i++) {
             // Calculate width with local resize delta if resizing
-            double baseWidth =
-                (items[i].widthPercentage?.getValueForBreakpoint(breakpoint) ??
-                        0) *
-                    scaleFactor;
+            double basePercentage =
+                items[i].widthPercentage?.getValueForBreakpoint(breakpoint) ??
+                    0;
+            double baseWidth = basePercentage * scaleFactor;
 
+            double currentPercentage = basePercentage;
             double childWidth = baseWidth;
+
             if (isResizing &&
                 resizeLeftIndex != null &&
                 resizeRightIndex != null) {
               if (i == resizeLeftIndex) {
                 final deltaPercentage =
                     (resizeDelta / constraints.maxWidth) * 100;
+                currentPercentage = basePercentage + deltaPercentage;
                 childWidth = baseWidth + deltaPercentage * scaleFactor;
               } else if (i == resizeRightIndex) {
                 final deltaPercentage =
                     (resizeDelta / constraints.maxWidth) * 100;
+                currentPercentage = basePercentage - deltaPercentage;
                 childWidth = baseWidth - deltaPercentage * scaleFactor;
               }
             }
 
             final widthInPixels = (childWidth / 100) * constraints.maxWidth;
+
+            // Add percentage label above each element during resizing
+            if (isResizing) {
+              percentageLabels.add(
+                Positioned(
+                  left: leftOffset + (widthInPixels / 2) - 30,
+                  top: -28,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withValues(alpha: 0.9),
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.2),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      '${currentPercentage.toStringAsFixed(1)}%',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }
 
             // Add resize area after this element (between i and i+1)
             if (i < items.length - 1) {
@@ -234,11 +275,12 @@ class ReorderableRowResizeOverlay extends StatelessWidget {
             leftOffset += widthInPixels;
           }
 
-          return Stack(children: resizeAreas);
+          return Stack(
+            clipBehavior: Clip.none,
+            children: [...resizeAreas, ...percentageLabels],
+          );
         },
       ),
     );
   }
 }
-
-// TODO: OVERLAYS MIT % ANGABEN ÜBER JEDEM ROW ELEMENT ANZEIGEN
