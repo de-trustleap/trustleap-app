@@ -3108,6 +3108,12 @@ abstract class AppLocalizations {
   /// **'Apply max width to background'**
   String get pagebuilder_section_background_constrained;
 
+  /// Label for widget max width stepper control in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Max Width'**
+  String get pagebuilder_widget_maxwidth;
+
   /// Menu item for Calendly text color in the Calendly configuration in the pagebuilder config menu
   ///
   /// In en, this message translates to:

@@ -1798,6 +1798,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Max-Breite auf Hintergrund anwenden';
 
   @override
+  String get pagebuilder_widget_maxwidth => 'Maximale Breite';
+
+  @override
   String get pagebuilder_calendly_config_text_color => 'Textfarbe';
 
   @override
