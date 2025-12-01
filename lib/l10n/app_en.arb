@@ -2065,6 +2065,10 @@
     "@pagebuilder_section_background_constrained": {
         "description": "Checkbox label for background constraint in section max width configuration in the pagebuilder config menu"
     },
+    "pagebuilder_widget_maxwidth": "Max Width",
+    "@pagebuilder_widget_maxwidth": {
+        "description": "Label for widget max width stepper control in the pagebuilder config menu"
+    },
     "pagebuilder_calendly_config_text_color": "Text Color",
     "@pagebuilder_calendly_config_text_color": {
         "description": "Menu item for Calendly text color in the Calendly configuration in the pagebuilder config menu"
