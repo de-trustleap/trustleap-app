@@ -117,7 +117,20 @@ class PagebuilderConfigMenuLayout extends StatelessWidget {
                     ),
                   ),
                 ],
-              ]
+              ],
+              const SizedBox(height: 20),
+              PagebuilderNumberStepperControl(
+                  title: localization.pagebuilder_widget_maxwidth,
+                  initialValue: model.maxWidth?.toInt() ?? 1200,
+                  minValue: 1,
+                  maxValue: 10000,
+                  bigNumbers: true,
+                  onSelected: (value) {
+                    final updatedWidget = model.copyWith(
+                      maxWidth: value.toDouble(),
+                    );
+                    pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+                  })
             ]);
       },
     );

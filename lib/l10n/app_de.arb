@@ -2065,6 +2065,10 @@
     "@pagebuilder_section_background_constrained": {
         "description": "Checkbox Label für Hintergrund-Beschränkung in der Section Max-Breite Konfiguration im Pagebuilder Config Menü"
     },
+    "pagebuilder_widget_maxwidth": "Maximale Breite",
+    "@pagebuilder_widget_maxwidth": {
+        "description": "Label für Widget Max-Breite Stepper Control im Pagebuilder Config Menü"
+    },
     "pagebuilder_calendly_config_text_color": "Textfarbe",
     "@pagebuilder_calendly_config_text_color": {
         "description": "Menüpunkt für Calendly Textfarbe in der Calendly Konfiguration im Pagebuilder Config Menü"
