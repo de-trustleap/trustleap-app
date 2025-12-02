@@ -1769,6 +1769,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Apply max width to background';
 
   @override
+  String get pagebuilder_section_full_height => 'Full viewport height';
+
+  @override
   String get pagebuilder_widget_maxwidth => 'Max Width';
 
   @override

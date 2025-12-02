@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_background_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_widget_model.dart';
 
 class PageBuilderSectionModel extends Equatable {
@@ -15,6 +16,7 @@ class PageBuilderSectionModel extends Equatable {
   final double? maxWidth;
   final bool? backgroundConstrained;
   final String? customCSS;
+  final PagebuilderResponsiveOrConstantModel<bool>? fullHeight;
   final List<Map<String, dynamic>>? widgets;
   final List<String>? visibleOn;
 
@@ -26,6 +28,7 @@ class PageBuilderSectionModel extends Equatable {
     required this.maxWidth,
     required this.backgroundConstrained,
     required this.customCSS,
+    required this.fullHeight,
     required this.widgets,
     required this.visibleOn,
   });
@@ -40,6 +43,7 @@ class PageBuilderSectionModel extends Equatable {
       map['backgroundConstrained'] = backgroundConstrained;
     }
     if (customCSS != null) map['customCSS'] = customCSS;
+    if (fullHeight != null) map['fullHeight'] = fullHeight!.toMapValue();
     if (widgets != null) map['widgets'] = widgets;
     if (visibleOn != null) map['visibleOn'] = visibleOn;
     return map;
@@ -58,6 +62,10 @@ class PageBuilderSectionModel extends Equatable {
             ? map['backgroundConstrained'] as bool
             : null,
         customCSS: map['customCSS'] != null ? map['customCSS'] as String : null,
+        fullHeight: map['fullHeight'] != null
+            ? PagebuilderResponsiveOrConstantModel.fromMapValue(
+                map['fullHeight'], (v) => v as bool)
+            : null,
         widgets: map['widgets'] != null
             ? List<Map<String, dynamic>>.from((map['widgets'] as List)
                 .map((item) => item as Map<String, dynamic>))
@@ -75,6 +83,7 @@ class PageBuilderSectionModel extends Equatable {
     double? maxWidth,
     bool? backgroundConstrained,
     String? customCSS,
+    PagebuilderResponsiveOrConstantModel<bool>? fullHeight,
     List<Map<String, dynamic>>? widgets,
     List<String>? visibleOn,
   }) {
@@ -87,6 +96,7 @@ class PageBuilderSectionModel extends Equatable {
       backgroundConstrained:
           backgroundConstrained ?? this.backgroundConstrained,
       customCSS: customCSS ?? this.customCSS,
+      fullHeight: fullHeight ?? this.fullHeight,
       widgets: widgets ?? this.widgets,
       visibleOn: visibleOn ?? this.visibleOn,
     );
@@ -106,6 +116,7 @@ class PageBuilderSectionModel extends Equatable {
         maxWidth: maxWidth,
         backgroundConstrained: backgroundConstrained,
         customCSS: customCSS,
+        fullHeight: fullHeight?.toDomain(),
         widgets: getPageBuilderWidgetList(widgets),
         visibleOn: visibleOn
             ?.map((breakpointName) => PagebuilderResponsiveBreakpoint.values
@@ -124,6 +135,9 @@ class PageBuilderSectionModel extends Equatable {
         customCSS: section.customCSS,
         maxWidth: section.maxWidth,
         backgroundConstrained: section.backgroundConstrained,
+        fullHeight: section.fullHeight != null
+            ? PagebuilderResponsiveOrConstantModel.fromDomain(section.fullHeight!)
+            : null,
         widgets: getMapFromPageBuilderWidgetList(section.widgets),
         visibleOn: section.visibleOn?.map((e) => e.name).toList());
   }
@@ -158,6 +172,7 @@ class PageBuilderSectionModel extends Equatable {
         maxWidth,
         backgroundConstrained,
         customCSS,
+        fullHeight,
         widgets,
         visibleOn
       ];

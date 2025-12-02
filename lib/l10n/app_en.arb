@@ -2065,6 +2065,10 @@
     "@pagebuilder_section_background_constrained": {
         "description": "Checkbox label for background constraint in section max width configuration in the pagebuilder config menu"
     },
+    "pagebuilder_section_full_height": "Full viewport height",
+    "@pagebuilder_section_full_height": {
+        "description": "Checkbox label for full height option in section configuration in the pagebuilder config menu"
+    },
     "pagebuilder_widget_maxwidth": "Max Width",
     "@pagebuilder_widget_maxwidth": {
         "description": "Label for widget max width stepper control in the pagebuilder config menu"

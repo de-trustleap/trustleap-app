@@ -1798,6 +1798,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Max-Breite auf Hintergrund anwenden';
 
   @override
+  String get pagebuilder_section_full_height => 'Volle Höhe';
+
+  @override
   String get pagebuilder_widget_maxwidth => 'Maximale Breite';
 
   @override

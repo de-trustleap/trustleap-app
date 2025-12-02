@@ -116,6 +116,7 @@ extension PagebuilderBlocSection on PagebuilderBloc {
         maxWidth: null,
         backgroundConstrained: false,
         customCSS: null,
+        fullHeight: null,
         visibleOn: null,
       );
 

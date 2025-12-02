@@ -138,6 +138,7 @@ void main() {
               maxWidth: null,
               backgroundConstrained: null,
               customCSS: null,
+        fullHeight: null,
               widgets: [
                 PageBuilderWidget(
                     id: UniqueID.fromUniqueString("3"),
@@ -339,6 +340,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [mockColumnWidget, mockRowWidget],
       visibleOn: null,
     );
@@ -423,6 +425,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
           customCSS: null,      widgets: [],
+        fullHeight: null,
       visibleOn: null,
     );
 
@@ -434,6 +437,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
           customCSS: null,      widgets: [],
+        fullHeight: null,
       visibleOn: null,
     );
 
@@ -445,6 +449,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
           customCSS: null,      widgets: [],
+        fullHeight: null,
       visibleOn: null,
     );
 
@@ -714,6 +719,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
           customCSS: null,      widgets: [columnWidget],
+        fullHeight: null,
       visibleOn: null,
     );
 
@@ -899,6 +905,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [mockTextWidget],
       visibleOn: null,
     );
@@ -947,6 +954,7 @@ void main() {
       maxWidth: 1200.0,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [],
       visibleOn: null,
     );
@@ -1096,6 +1104,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [targetWidget],
       visibleOn: null,
     );
@@ -1507,6 +1516,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [columnWidget],
       visibleOn: null,
     );
@@ -1736,6 +1746,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [],
       visibleOn: null,
     );
@@ -1748,6 +1759,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [],
       visibleOn: null,
     );
@@ -1760,6 +1772,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [],
       visibleOn: null,
     );
@@ -2041,6 +2054,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [childWidget],
       visibleOn: null,
     );
@@ -2053,6 +2067,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [],
       visibleOn: null,
     );
@@ -2065,6 +2080,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+        fullHeight: null,
       widgets: [],
       visibleOn: null,
     );
@@ -2469,6 +2485,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [rowWidget],
         visibleOn: null,
       );
@@ -2547,6 +2564,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [rowWidget],
         visibleOn: null,
       );
@@ -2638,6 +2656,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [columnWidget],
         visibleOn: null,
       );
@@ -2714,6 +2733,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [containerWidget],
         visibleOn: null,
       );
@@ -2789,6 +2809,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [rowWidget],
         visibleOn: null,
       );
@@ -2859,6 +2880,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [rowWidget],
         visibleOn: null,
       );
@@ -3059,6 +3081,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [rowWidget],
         visibleOn: null,
       );
@@ -3151,6 +3174,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [columnWidget],
         visibleOn: null,
       );
@@ -3239,6 +3263,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [rowWidget],
         visibleOn: null,
       );
@@ -3309,6 +3334,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [rowWidget],
         visibleOn: null,
       );
@@ -3412,6 +3438,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [containerWidget],
         visibleOn: null,
       );
