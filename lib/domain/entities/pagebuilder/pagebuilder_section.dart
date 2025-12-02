@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 
 class PageBuilderSection extends Equatable {
   final UniqueID id;
@@ -13,6 +14,7 @@ class PageBuilderSection extends Equatable {
   final double? maxWidth;
   final bool? backgroundConstrained;
   final String? customCSS;
+  final PagebuilderResponsiveOrConstant<bool>? fullHeight;
   final List<PageBuilderWidget>? widgets;
   final List<PagebuilderResponsiveBreakpoint>? visibleOn;
 
@@ -25,6 +27,7 @@ class PageBuilderSection extends Equatable {
       required this.maxWidth,
       required this.backgroundConstrained,
       required this.customCSS,
+      required this.fullHeight,
       required this.visibleOn});
 
   PageBuilderSection copyWith({
@@ -36,6 +39,7 @@ class PageBuilderSection extends Equatable {
     double? maxWidth,
     bool? backgroundConstrained,
     String? customCSS,
+    PagebuilderResponsiveOrConstant<bool>? fullHeight,
     List<PagebuilderResponsiveBreakpoint>? visibleOn,
     bool updateVisibleOn = false,
   }) {
@@ -49,6 +53,7 @@ class PageBuilderSection extends Equatable {
         backgroundConstrained:
             backgroundConstrained ?? this.backgroundConstrained,
         customCSS: customCSS ?? this.customCSS,
+        fullHeight: fullHeight ?? this.fullHeight,
         visibleOn: updateVisibleOn ? visibleOn : (visibleOn ?? this.visibleOn));
   }
 
@@ -61,6 +66,7 @@ class PageBuilderSection extends Equatable {
         maxWidth,
         backgroundConstrained,
         customCSS,
+        fullHeight,
         widgets,
         visibleOn
       ];

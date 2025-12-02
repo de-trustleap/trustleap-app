@@ -3108,6 +3108,12 @@ abstract class AppLocalizations {
   /// **'Apply max width to background'**
   String get pagebuilder_section_background_constrained;
 
+  /// Checkbox label for full height option in section configuration in the pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Full viewport height'**
+  String get pagebuilder_section_full_height;
+
   /// Label for widget max width stepper control in the pagebuilder config menu
   ///
   /// In en, this message translates to:

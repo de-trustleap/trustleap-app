@@ -149,6 +149,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [mockColumnWidget, mockRowWidget],
         visibleOn: null,
       );

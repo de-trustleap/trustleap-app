@@ -160,6 +160,7 @@ void main() {
       maxWidth: 1200.0,
       backgroundConstrained: null,
       customCSS: null,
+      fullHeight: null,
       widgets: [],
       visibleOn: null,
     );
@@ -229,6 +230,7 @@ void main() {
         maxWidth: 1400.0,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [],
         visibleOn: null,
       );
@@ -301,6 +303,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [],
         visibleOn: null,
       );
@@ -393,6 +396,7 @@ void main() {
       maxWidth: null,
       backgroundConstrained: null,
       customCSS: null,
+      fullHeight: null,
       widgets: [],
       visibleOn: null,
     );
@@ -546,6 +550,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+        fullHeight: null,
         widgets: [],
         visibleOn: null,
       );

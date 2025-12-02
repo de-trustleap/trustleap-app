@@ -69,6 +69,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [testWidget],
         visibleOn: null,
       );
@@ -151,6 +152,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
           widgets: [parentWidget],
           visibleOn: null,
         );
@@ -217,6 +219,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
           widgets: [containerWidget],
           visibleOn: null,
         );
@@ -332,6 +335,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
           widgets: [parentWidget],
           visibleOn: null,
         );
@@ -398,6 +402,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
           widgets: [containerWidget],
           visibleOn: null,
         );
@@ -490,6 +495,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
           widgets: [topWidget],
           visibleOn: null,
         );
@@ -524,6 +530,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
           widgets: [testPage.sections![0].widgets![0]], // Use existing widget
           visibleOn: null,
         );
@@ -536,6 +543,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
           widgets: [],
           visibleOn: null,
         );
@@ -603,6 +611,7 @@ void main() {
           maxWidth: null,
           backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
           widgets: [widget1, widget2],
           visibleOn: null,
         );

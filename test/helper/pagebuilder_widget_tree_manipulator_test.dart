@@ -751,6 +751,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [column],
         visibleOn: null,
       );
@@ -784,6 +785,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [column],
         visibleOn: null,
       );
@@ -817,6 +819,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [emptyColumn, nonEmptyColumn],
         visibleOn: null,
       );
@@ -849,6 +852,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [emptyContainer, nonEmptyContainer],
         visibleOn: null,
       );
@@ -880,6 +884,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [emptyColumn],
         visibleOn: null,
       );
@@ -893,6 +898,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [textWidget],
         visibleOn: null,
       );
@@ -923,6 +929,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [column],
         visibleOn: null,
       );
@@ -957,6 +964,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [outerColumn],
         visibleOn: null,
       );
@@ -993,6 +1001,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [column],
         visibleOn: null,
       );
@@ -1024,6 +1033,7 @@ void main() {
         maxWidth: null,
         backgroundConstrained: null,
         customCSS: null,
+      fullHeight: null,
         widgets: [row],
         visibleOn: null,
       );
