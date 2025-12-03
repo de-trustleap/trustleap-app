@@ -84,7 +84,7 @@ enum PageBuilderWidgetType {
   anchorButton,
   calendly,
   placeholder,
-  spacer,
+  height,
   none
 }
 

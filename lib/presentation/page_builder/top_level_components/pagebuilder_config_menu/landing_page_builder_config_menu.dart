@@ -51,7 +51,7 @@ class _LandingPageBuilderConfigMenuState
 
   bool _shouldShowOnlyContentTab() {
     switch (widget.model?.elementType) {
-      case PageBuilderWidgetType.spacer:
+      case PageBuilderWidgetType.height:
         return true;
       default:
         return false;

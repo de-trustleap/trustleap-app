@@ -24,7 +24,7 @@ class PagebuilderConfigMenuSpacerContent extends StatelessWidget {
     final pagebuilderBloc = Modular.get<PagebuilderBloc>();
     final localization = AppLocalizations.of(context);
 
-    if (model.elementType == PageBuilderWidgetType.spacer &&
+    if (model.elementType == PageBuilderWidgetType.height &&
         model.properties is PageBuilderHeightProperties) {
       final properties = model.properties as PageBuilderHeightProperties;
 

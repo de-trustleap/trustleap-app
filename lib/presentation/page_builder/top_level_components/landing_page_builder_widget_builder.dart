@@ -93,7 +93,7 @@ class LandingPageBuilderWidgetBuilder {
         return buildCalendlyWidget(
             model.properties as PagebuilderCalendlyProperties, model,
             index: index);
-      case PageBuilderWidgetType.spacer:
+      case PageBuilderWidgetType.height:
         return buildSpacerWidget(
             model.properties as PageBuilderHeightProperties, model,
             index: index);

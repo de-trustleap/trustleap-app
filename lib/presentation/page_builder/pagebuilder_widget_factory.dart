@@ -44,7 +44,7 @@ class PagebuilderWidgetFactory {
         return _createRowWidget();
       case PageBuilderWidgetType.column:
         return _createColumnWidget();
-      case PageBuilderWidgetType.spacer:
+      case PageBuilderWidgetType.height:
         return _createSpacerWidget();
       case PageBuilderWidgetType.placeholder:
         return _createPlaceholderWidget();
@@ -443,7 +443,7 @@ class PagebuilderWidgetFactory {
   static PageBuilderWidget _createSpacerWidget() {
     return PageBuilderWidget(
       id: UniqueID(),
-      elementType: PageBuilderWidgetType.spacer,
+      elementType: PageBuilderWidgetType.height,
       properties: const PageBuilderHeightProperties(
         height: PagebuilderResponsiveOrConstant.constant(40),
       ),

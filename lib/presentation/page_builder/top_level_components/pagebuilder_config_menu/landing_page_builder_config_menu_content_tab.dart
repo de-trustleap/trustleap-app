@@ -37,7 +37,7 @@ class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
           PagebuilderConfigMenuAnchorButtonContent(model: model)
         ] else if (model.elementType == PageBuilderWidgetType.calendly) ...[
           PagebuilderConfigMenuCalendlyContent(model: model)
-        ] else if (model.elementType == PageBuilderWidgetType.spacer) ...[
+        ] else if (model.elementType == PageBuilderWidgetType.height) ...[
           PagebuilderConfigMenuSpacerContent(
             model: model,
           )

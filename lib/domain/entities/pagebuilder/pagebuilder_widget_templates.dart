@@ -29,7 +29,7 @@ class PagebuilderWidgetTemplate {
         return localizations.pagebuilder_widget_template_anchor_button;
       case PageBuilderWidgetType.calendly:
         return localizations.pagebuilder_widget_template_calendly;
-      case PageBuilderWidgetType.spacer:
+      case PageBuilderWidgetType.height:
         return localizations.pagebuilder_widget_template_spacer;
       default:
         return localizations.landingpage_pagebuilder_config_menu_unknown_type;
@@ -73,7 +73,7 @@ class PagebuilderWidgetTemplates {
     ),
     PagebuilderWidgetTemplate(
       icon: Icons.height,
-      widgetType: PageBuilderWidgetType.spacer,
+      widgetType: PageBuilderWidgetType.height,
     ),
   ];
 }
