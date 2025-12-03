@@ -1632,6 +1632,20 @@ class AppLocalizationsDe extends AppLocalizations {
           'Keine Ergebnisse für:';
 
   @override
+  String get landingpage_pagebuilder_spacer_config_title =>
+      'Höhe Konfiguration';
+
+  @override
+  String get landingpage_pagebuilder_spacer_config_height => 'Höhe';
+
+  @override
+  String get landingpage_pagebuilder_spacer_config_width_percentage =>
+      'Breite in %';
+
+  @override
+  String get landingpage_pagebuilder_config_menu_spacer_type => 'Höhe';
+
+  @override
   String get landingpage_pagebuilder_contactform_content_email =>
       'Kontaktformular E-Mail';
 
@@ -3024,6 +3038,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_widget_template_calendly => 'Calendly';
+
+  @override
+  String get pagebuilder_widget_template_spacer => 'Höhe';
 
   @override
   String get pagebuilder_html_text_editor_select_color => 'Farbe auswählen';

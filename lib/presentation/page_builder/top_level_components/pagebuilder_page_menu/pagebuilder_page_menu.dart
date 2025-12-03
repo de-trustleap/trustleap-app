@@ -91,36 +91,36 @@ class _WidgetTemplateCard extends StatelessWidget {
       feedback: Material(
         elevation: 8,
         borderRadius: BorderRadius.circular(16),
-        child: Opacity(
-          opacity: 0.8,
-          child: SizedBox(
-            width: 100,
-            height: 100,
-            child: CardContainer(
-              maxWidth: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    template.icon,
-                    size: 28,
-                    color: themeData.colorScheme.secondary,
-                  ),
-                  const SizedBox(height: 6),
-                  Flexible(
-                    child: Text(
-                      localizedName,
-                      style:
-                          themeData.textTheme.bodySmall?.copyWith(fontSize: 9),
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+        color: Colors.transparent,
+        child: Container(
+          width: 70,
+          height: 70,
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: themeData.colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                template.icon,
+                size: 20,
+                color: themeData.colorScheme.secondary,
               ),
-            ),
+              const SizedBox(height: 4),
+              Flexible(
+                child: Text(
+                  localizedName,
+                  style: themeData.textTheme.bodySmall?.copyWith(fontSize: 8),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
           ),
         ),
       ),

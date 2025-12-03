@@ -2837,6 +2837,30 @@ abstract class AppLocalizations {
   /// **'No results for:'**
   String get landingpage_pagebuilder_icon_config_icon_picker_search_no_results;
 
+  /// Title for the spacer configuration in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Height configuration'**
+  String get landingpage_pagebuilder_spacer_config_title;
+
+  /// Label for the height input in the spacer configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get landingpage_pagebuilder_spacer_config_height;
+
+  /// Label for the width percentage input in the spacer configuration
+  ///
+  /// In en, this message translates to:
+  /// **'Width in %'**
+  String get landingpage_pagebuilder_spacer_config_width_percentage;
+
+  /// Widget type name for spacer in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get landingpage_pagebuilder_config_menu_spacer_type;
+
   /// Title for the collapsible view for the contact form email adress in the pagebuilder contact form configuration.
   ///
   /// In en, this message translates to:
@@ -5138,6 +5162,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calendly'**
   String get pagebuilder_widget_template_calendly;
+
+  /// Name of the Spacer widget template in the Pagebuilder widget menu
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get pagebuilder_widget_template_spacer;
 
   /// Label for color selection in the HTML text editor
   ///

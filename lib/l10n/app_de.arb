@@ -1875,6 +1875,22 @@
     "@landingpage_pagebuilder_icon_config_icon_picker_search_no_results": {
         "description": "Text der angezeigt wird wenn Suche keine Ergebnisse liefert im Icon Pickers im Icon Inhalt Tab in der Pagebuilder Kontaktformular Konfiguration"
     },
+    "landingpage_pagebuilder_spacer_config_title": "Höhe Konfiguration",
+    "@landingpage_pagebuilder_spacer_config_title": {
+        "description": "Titel für die Abstand-Konfiguration im Pagebuilder"
+    },
+    "landingpage_pagebuilder_spacer_config_height": "Höhe",
+    "@landingpage_pagebuilder_spacer_config_height": {
+        "description": "Beschriftung für die Höhen-Eingabe in der Abstand-Konfiguration"
+    },
+    "landingpage_pagebuilder_spacer_config_width_percentage": "Breite in %",
+    "@landingpage_pagebuilder_spacer_config_width_percentage": {
+        "description": "Beschriftung für die Breiten-Prozent-Eingabe in der Abstand-Konfiguration"
+    },
+    "landingpage_pagebuilder_config_menu_spacer_type": "Höhe",
+    "@landingpage_pagebuilder_config_menu_spacer_type": {
+        "description": "Widget-Typ-Name für Abstand im Pagebuilder"
+    },
     "landingpage_pagebuilder_contactform_content_email": "Kontaktformular E-Mail",
     "@landingpage_pagebuilder_contactform_content_email": {
         "description": "Titel der ausklappabren View für die Kontaktformular E-Mail Adresse in der Pagebuilder Kontaktformular Konfiguration"
@@ -3473,6 +3489,10 @@
     "pagebuilder_widget_template_calendly": "Calendly",
     "@pagebuilder_widget_template_calendly": {
         "description": "Name des Calendly Widget Templates im Pagebuilder Widget Menü"
+    },
+    "pagebuilder_widget_template_spacer": "Höhe",
+    "@pagebuilder_widget_template_spacer": {
+        "description": "Name des Abstand Widget Templates im Pagebuilder Widget Menü"
     },
     "pagebuilder_html_text_editor_select_color": "Farbe auswählen",
     "@pagebuilder_html_text_editor_select_color": {

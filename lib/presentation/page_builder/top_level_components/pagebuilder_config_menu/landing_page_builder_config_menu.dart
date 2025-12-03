@@ -49,6 +49,15 @@ class _LandingPageBuilderConfigMenuState
     }
   }
 
+  bool _shouldShowOnlyContentTab() {
+    switch (widget.model?.elementType) {
+      case PageBuilderWidgetType.spacer:
+        return true;
+      default:
+        return false;
+    }
+  }
+
   Widget _getMenuContent() {
     if (widget.menuState is PageBuilderPageMenuOpenedState) {
       return PagebuilderPageMenu(
@@ -67,6 +76,7 @@ class _LandingPageBuilderConfigMenuState
         section: widget.section,
         allSections: widget.allSections ?? [],
         showOnlyDesignTab: _shouldShowOnlyDesignTab(),
+        showOnlyContentTab: _shouldShowOnlyContentTab(),
         closeMenu: widget.closeMenu,
         landingPage: widget.landingPage,
       );

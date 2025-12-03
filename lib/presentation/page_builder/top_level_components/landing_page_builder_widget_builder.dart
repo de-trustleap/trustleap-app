@@ -9,6 +9,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_height_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_player_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -22,6 +23,7 @@ import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuil
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_text.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/video_player_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_widget_container.dart';
+import 'package:finanzbegleiter/presentation/page_builder/widgets/pagebuilder_height_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/reorderable_column_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_row/reorderable_row_widget.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
@@ -90,6 +92,10 @@ class LandingPageBuilderWidgetBuilder {
       case PageBuilderWidgetType.calendly:
         return buildCalendlyWidget(
             model.properties as PagebuilderCalendlyProperties, model,
+            index: index);
+      case PageBuilderWidgetType.spacer:
+        return buildSpacerWidget(
+            model.properties as PageBuilderHeightProperties, model,
             index: index);
       case PageBuilderWidgetType.placeholder:
         return buildPlaceholderWidget(model, index: index);
@@ -206,6 +212,12 @@ class LandingPageBuilderWidgetBuilder {
       {int? index}) {
     return PagebuilderCalendly(
         properties: properties, widgetModel: model, index: index);
+  }
+
+  Widget buildSpacerWidget(
+      PageBuilderHeightProperties properties, PageBuilderWidget model,
+      {int? index}) {
+    return PageBuilderHeightView(model: model);
   }
 
   Widget buildPlaceholderWidget(PageBuilderWidget model, {int? index}) {

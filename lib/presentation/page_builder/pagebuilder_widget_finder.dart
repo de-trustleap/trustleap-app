@@ -29,12 +29,4 @@ class PagebuilderWidgetFinder {
     }
     return null;
   }
-
-  PageBuilderWidget? findWidgetByIdInSection(
-      PageBuilderSection section, UniqueID widgetId) {
-    return PagebuilderWidgetTreeSearcher.findWidgetByIdInSection(
-      section,
-      widgetId.value,
-    );
-  }
 }

@@ -1875,6 +1875,22 @@
     "@landingpage_pagebuilder_icon_config_icon_picker_search_no_results": {
         "description": "Text that is shown when the search have no results in the icon picker in the icon content tab in the pagebuilder icon configuration"
     },
+    "landingpage_pagebuilder_spacer_config_title": "Height configuration",
+    "@landingpage_pagebuilder_spacer_config_title": {
+        "description": "Title for the spacer configuration in the pagebuilder"
+    },
+    "landingpage_pagebuilder_spacer_config_height": "Height",
+    "@landingpage_pagebuilder_spacer_config_height": {
+        "description": "Label for the height input in the spacer configuration"
+    },
+    "landingpage_pagebuilder_spacer_config_width_percentage": "Width in %",
+    "@landingpage_pagebuilder_spacer_config_width_percentage": {
+        "description": "Label for the width percentage input in the spacer configuration"
+    },
+    "landingpage_pagebuilder_config_menu_spacer_type": "Height",
+    "@landingpage_pagebuilder_config_menu_spacer_type": {
+        "description": "Widget type name for spacer in the pagebuilder"
+    },
     "landingpage_pagebuilder_contactform_content_email": "Contactform email",
     "@landingpage_pagebuilder_contactform_content_email": {
         "description": "Title for the collapsible view for the contact form email adress in the pagebuilder contact form configuration."
@@ -3473,6 +3489,10 @@
     "pagebuilder_widget_template_calendly": "Calendly",
     "@pagebuilder_widget_template_calendly": {
         "description": "Name of the Calendly widget template in the Pagebuilder widget menu"
+    },
+    "pagebuilder_widget_template_spacer": "Height",
+    "@pagebuilder_widget_template_spacer": {
+        "description": "Name of the Spacer widget template in the Pagebuilder widget menu"
     },
     "pagebuilder_html_text_editor_select_color": "Select Color",
     "@pagebuilder_html_text_editor_select_color": {

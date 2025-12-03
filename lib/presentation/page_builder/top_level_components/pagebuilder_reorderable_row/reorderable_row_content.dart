@@ -531,43 +531,48 @@ class ReorderableRowContentState extends State<ReorderableRowContent> {
             children: rowChildren,
           );
 
+    final isGloballyDragging = Modular.get<PagebuilderDragCubit>().state.isDragging;
+    final shouldShowResizeOverlay =
+        (!isGloballyDragging && _dragState.draggingIndex == null) || _isResizing;
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
         rowContent,
-        ReorderableRowResizeOverlay(
-          rowModel: widget.model,
-          items: items,
-          breakpoint: widget.breakpoint,
-          scaleFactor: widget.scaleFactor,
-          resizeHoverThreshold: _resizeHoverThreshold,
-          resizeHoverIndex: _resizeHoverIndex,
-          isResizing: _isResizing,
-          resizeDelta: _resizeDelta,
-          resizeLeftIndex: _resizeLeftIndex,
-          resizeRightIndex: _resizeRightIndex,
-          containerWidth: _containerWidth,
-          onResizeHoverChange: (index) {
-            setState(() {
-              _resizeHoverIndex = index;
-            });
-          },
-          onResizeStateChange: ({
-            required bool isResizing,
-            required double resizeDelta,
-            required int? resizeLeftIndex,
-            required int? resizeRightIndex,
-            required double containerWidth,
-          }) {
-            setState(() {
-              _isResizing = isResizing;
-              _resizeDelta = resizeDelta;
-              _resizeLeftIndex = resizeLeftIndex;
-              _resizeRightIndex = resizeRightIndex;
-              _containerWidth = containerWidth;
-            });
-          },
-        ),
+        if (shouldShowResizeOverlay)
+          ReorderableRowResizeOverlay(
+            rowModel: widget.model,
+            items: items,
+            breakpoint: widget.breakpoint,
+            scaleFactor: widget.scaleFactor,
+            resizeHoverThreshold: _resizeHoverThreshold,
+            resizeHoverIndex: _resizeHoverIndex,
+            isResizing: _isResizing,
+            resizeDelta: _resizeDelta,
+            resizeLeftIndex: _resizeLeftIndex,
+            resizeRightIndex: _resizeRightIndex,
+            containerWidth: _containerWidth,
+            onResizeHoverChange: (index) {
+              setState(() {
+                _resizeHoverIndex = index;
+              });
+            },
+            onResizeStateChange: ({
+              required bool isResizing,
+              required double resizeDelta,
+              required int? resizeLeftIndex,
+              required int? resizeRightIndex,
+              required double containerWidth,
+            }) {
+              setState(() {
+                _isResizing = isResizing;
+                _resizeDelta = resizeDelta;
+                _resizeLeftIndex = resizeLeftIndex;
+                _resizeRightIndex = resizeRightIndex;
+                _containerWidth = containerWidth;
+              });
+            },
+          ),
       ],
     );
   }

@@ -15,6 +15,7 @@ class LandingPageBuilderConfigMenuContent extends StatefulWidget {
   final PageBuilderSection? section;
   final List<PageBuilderSection> allSections;
   final bool showOnlyDesignTab;
+  final bool showOnlyContentTab;
   final Function closeMenu;
   final LandingPage? landingPage;
 
@@ -26,6 +27,7 @@ class LandingPageBuilderConfigMenuContent extends StatefulWidget {
     required this.section,
     required this.allSections,
     required this.showOnlyDesignTab,
+    required this.showOnlyContentTab,
     required this.closeMenu,
     required this.landingPage,
   });
@@ -75,9 +77,15 @@ class _LandingPageBuilderConfigMenuContentState
         model: widget.model!,
         landingPage: widget.landingPage,
       );
+    } else if (widget.showOnlyContentTab && widget.model != null) {
+      return LandingPageBuilderConfigMenuContentTab(
+        model: widget.model!,
+      );
     } else if (widget.model != null) {
       if (_selectedTabIndex == 0) {
-        return LandingPageBuilderConfigMenuContentTab(model: widget.model!);
+        return LandingPageBuilderConfigMenuContentTab(
+          model: widget.model!,
+        );
       } else {
         return LandingPageBuilderConfigMenuDesignTab(
           model: widget.model!,
@@ -112,7 +120,9 @@ class _LandingPageBuilderConfigMenuContentState
             LandingPageBuilderConfigMenuHeader(
                 title: _getHeaderTitle(localization),
                 closePressed: () => widget.closeMenu()),
-            if (!widget.showOnlyDesignTab && widget.section == null) ...[
+            if (!widget.showOnlyDesignTab &&
+                !widget.showOnlyContentTab &&
+                widget.section == null) ...[
               Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
@@ -158,3 +168,6 @@ class _LandingPageBuilderConfigMenuContentState
     );
   }
 }
+
+// TODO: SPACER WIDGETS SOLLEN SCHRAFFIERT SEIN
+// TODO: SPACER WIDGETS SOLLEN PER DRAG RESIZABLE SEIN

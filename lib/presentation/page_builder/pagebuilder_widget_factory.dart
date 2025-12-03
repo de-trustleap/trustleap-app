@@ -11,6 +11,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_containe
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_height_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfield_properties.dart';
@@ -43,6 +44,8 @@ class PagebuilderWidgetFactory {
         return _createRowWidget();
       case PageBuilderWidgetType.column:
         return _createColumnWidget();
+      case PageBuilderWidgetType.spacer:
+        return _createSpacerWidget();
       case PageBuilderWidgetType.placeholder:
         return _createPlaceholderWidget();
       default:
@@ -425,6 +428,27 @@ class PagebuilderWidgetFactory {
       properties: null,
       hoverProperties: null,
       children: [],
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+  }
+
+  static PageBuilderWidget _createSpacerWidget() {
+    return PageBuilderWidget(
+      id: UniqueID(),
+      elementType: PageBuilderWidgetType.spacer,
+      properties: const PageBuilderHeightProperties(
+        height: PagebuilderResponsiveOrConstant.constant(40),
+      ),
+      hoverProperties: null,
+      children: null,
       containerChild: null,
       widthPercentage: null,
       background: null,
