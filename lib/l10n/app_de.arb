@@ -2872,6 +2872,14 @@
     "@pagebuilder_hierarchy_overlay_video_player": {
         "description": "Video Player Element im Hierarchie Overlay im Pagebuilder"
     },
+    "pagebuilder_hierarchy_overlay_calendly": "Calendly",
+    "@pagebuilder_hierarchy_overlay_calendly": {
+        "description": "Calendly Element im Hierarchie Overlay im Pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_height": "Höhe",
+    "@pagebuilder_hierarchy_overlay_height": {
+        "description": "Höhe Element im Hierarchie Overlay im Pagebuilder"
+    },
     "pagebuilder_mobile_not_supported_title": "PageBuilder nur auf Desktop verfügbar",
     "@pagebuilder_mobile_not_supported_title": {
         "description": "Titel der Mobile not Supported View im Pagebuilder"

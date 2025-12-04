@@ -4,7 +4,7 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_height_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_responsive_config_helper.dart';
 import 'package:flutter/material.dart';
@@ -28,38 +28,35 @@ class PagebuilderConfigMenuSpacerContent extends StatelessWidget {
         model.properties is PageBuilderHeightProperties) {
       final properties = model.properties as PageBuilderHeightProperties;
 
-      return CollapsibleTile(
-        title: localization.landingpage_pagebuilder_spacer_config_title,
-        children: [
-          BlocBuilder<PagebuilderResponsiveBreakpointCubit,
-              PagebuilderResponsiveBreakpoint>(
-            bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
-            builder: (context, currentBreakpoint) {
-              final helper =
-                  PagebuilderResponsiveConfigHelper(currentBreakpoint);
+      return CardContainer(
+        padding: const EdgeInsets.all(16),
+        child: BlocBuilder<PagebuilderResponsiveBreakpointCubit,
+            PagebuilderResponsiveBreakpoint>(
+          bloc: Modular.get<PagebuilderResponsiveBreakpointCubit>(),
+          builder: (context, currentBreakpoint) {
+            final helper =
+                PagebuilderResponsiveConfigHelper(currentBreakpoint);
 
-              // Spacer is only allowed in Columns/Sections, so always show height
-              return PagebuilderNumberStepperControl(
-                title: localization.landingpage_pagebuilder_spacer_config_height,
-                initialValue: helper.getValue(properties.height) ?? 40,
-                minValue: 1,
-                maxValue: 10000,
-                bigNumbers: true,
-                showResponsiveButton: true,
-                currentBreakpoint: currentBreakpoint,
-                onSelected: (value) {
-                  final updatedHeight =
-                      helper.setValue(properties.height, value);
-                  final updatedProperties =
-                      properties.copyWith(height: updatedHeight);
-                  final updatedWidget =
-                      model.copyWith(properties: updatedProperties);
-                  pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
-                },
-              );
-            },
-          ),
-        ],
+            return PagebuilderNumberStepperControl(
+              title: localization.landingpage_pagebuilder_spacer_config_height,
+              initialValue: helper.getValue(properties.height) ?? 40,
+              minValue: 1,
+              maxValue: 10000,
+              bigNumbers: true,
+              showResponsiveButton: true,
+              currentBreakpoint: currentBreakpoint,
+              onSelected: (value) {
+                final updatedHeight =
+                    helper.setValue(properties.height, value);
+                final updatedProperties =
+                    properties.copyWith(height: updatedHeight);
+                final updatedWidget =
+                    model.copyWith(properties: updatedProperties);
+                pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));
+              },
+            );
+          },
+        ),
       );
     } else {
       return const SizedBox.shrink();

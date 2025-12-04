@@ -2872,6 +2872,14 @@
     "@pagebuilder_hierarchy_overlay_video_player": {
         "description": "Video player element in the hierarchy overlay in the pagebuilder"
     },
+    "pagebuilder_hierarchy_overlay_calendly": "Calendly",
+    "@pagebuilder_hierarchy_overlay_calendly": {
+        "description": "Calendly element in the hierarchy overlay in the pagebuilder"
+    },
+    "pagebuilder_hierarchy_overlay_height": "Height",
+    "@pagebuilder_hierarchy_overlay_height": {
+        "description": "Height element in the hierarchy overlay in the pagebuilder"
+    },
     "pagebuilder_mobile_not_supported_title": "PageBuilder only available for desktop",
     "@pagebuilder_mobile_not_supported_title": {
         "description": "Title of the Mobile not Supported View in the Pagebuilder"

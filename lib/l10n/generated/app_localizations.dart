@@ -4293,6 +4293,18 @@ abstract class AppLocalizations {
   /// **'Video player'**
   String get pagebuilder_hierarchy_overlay_video_player;
 
+  /// Calendly element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly'**
+  String get pagebuilder_hierarchy_overlay_calendly;
+
+  /// Height element in the hierarchy overlay in the pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get pagebuilder_hierarchy_overlay_height;
+
   /// Title of the Mobile not Supported View in the Pagebuilder
   ///
   /// In en, this message translates to:

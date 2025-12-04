@@ -2507,6 +2507,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pagebuilder_hierarchy_overlay_video_player => 'Video Player';
 
   @override
+  String get pagebuilder_hierarchy_overlay_calendly => 'Calendly';
+
+  @override
+  String get pagebuilder_hierarchy_overlay_height => 'Höhe';
+
+  @override
   String get pagebuilder_mobile_not_supported_title =>
       'PageBuilder nur auf Desktop verfügbar';
 
