@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_hover/pagebu
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_responsive_config_helper.dart';
+import 'package:finanzbegleiter/presentation/page_builder/widgets/pagebuilder_resize_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -88,31 +89,8 @@ class ReorderableRowResizeOverlay extends StatelessWidget {
                 Positioned(
                   left: leftOffset + (widthInPixels / 2) - 30,
                   top: -28,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withValues(alpha: 0.9),
-                      borderRadius: BorderRadius.circular(4),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.2),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Text(
-                      '${currentPercentage.toStringAsFixed(1)}%',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                  child: PagebuilderResizeLabel(
+                    label: '${currentPercentage.toStringAsFixed(1)}%',
                   ),
                 ),
               );
