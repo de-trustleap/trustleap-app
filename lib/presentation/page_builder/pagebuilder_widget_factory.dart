@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_height_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
@@ -43,6 +44,8 @@ class PagebuilderWidgetFactory {
         return _createRowWidget();
       case PageBuilderWidgetType.column:
         return _createColumnWidget();
+      case PageBuilderWidgetType.height:
+        return _createHeightWidget();
       case PageBuilderWidgetType.placeholder:
         return _createPlaceholderWidget();
       default:
@@ -425,6 +428,27 @@ class PagebuilderWidgetFactory {
       properties: null,
       hoverProperties: null,
       children: [],
+      containerChild: null,
+      widthPercentage: null,
+      background: null,
+      hoverBackground: null,
+      padding: null,
+      margin: null,
+      maxWidth: null,
+      alignment: null,
+      customCSS: null,
+    );
+  }
+
+  static PageBuilderWidget _createHeightWidget() {
+    return PageBuilderWidget(
+      id: UniqueID(),
+      elementType: PageBuilderWidgetType.height,
+      properties: const PageBuilderHeightProperties(
+        height: PagebuilderResponsiveOrConstant.constant(40),
+      ),
+      hoverProperties: null,
+      children: null,
       containerChild: null,
       widthPercentage: null,
       background: null,

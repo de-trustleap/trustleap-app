@@ -212,6 +212,10 @@ class HierarchyWidgetItem extends StatelessWidget {
         return Icons.web_asset;
       case PageBuilderWidgetType.videoPlayer:
         return Icons.play_circle;
+      case PageBuilderWidgetType.calendly:
+        return Icons.calendar_month;
+      case PageBuilderWidgetType.height:
+        return Icons.height;
       default:
         return Icons.widgets;
     }
@@ -242,6 +246,10 @@ class HierarchyWidgetItem extends StatelessWidget {
         return localization.pagebuilder_hierarchy_overlay_footer;
       case PageBuilderWidgetType.videoPlayer:
         return localization.pagebuilder_hierarchy_overlay_video_player;
+      case PageBuilderWidgetType.calendly:
+        return localization.pagebuilder_hierarchy_overlay_calendly;
+      case PageBuilderWidgetType.height:
+        return localization.pagebuilder_hierarchy_overlay_height;
       default:
         return elementType?.name ?? "";
     }

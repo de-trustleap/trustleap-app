@@ -8,6 +8,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_p
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_height_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_row_properties.dart';
@@ -24,6 +25,7 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_co
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_contact_form_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_container_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_footer_properties_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_height_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_icon_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
@@ -252,6 +254,8 @@ class PageBuilderWidgetModel extends Equatable {
       case PageBuilderWidgetType.calendly:
         return PagebuilderCalendlyPropertiesModel.fromMap(properties)
             .toDomain();
+      case PageBuilderWidgetType.height:
+        return PageBuilderHeightPropertiesModel.fromMap(properties).toDomain();
       default:
         return null;
     }
@@ -287,6 +291,8 @@ class PageBuilderWidgetModel extends Equatable {
           .toMap();
     } else if (properties is PagebuilderCalendlyProperties) {
       return PagebuilderCalendlyPropertiesModel.fromDomain(properties).toMap();
+    } else if (properties is PageBuilderHeightProperties) {
+      return PageBuilderHeightPropertiesModel.fromDomain(properties).toMap();
     } else {
       return null;
     }
