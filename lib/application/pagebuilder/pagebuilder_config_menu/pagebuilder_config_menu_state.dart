@@ -2,6 +2,16 @@ part of 'pagebuilder_config_menu_cubit.dart';
 
 sealed class PagebuilderConfigMenuState {}
 
+final class PageBuilderConfigMenuClosedState extends PagebuilderConfigMenuState
+    with EquatableMixin {
+  final UniqueID id;
+
+  PageBuilderConfigMenuClosedState({required this.id});
+
+  @override
+  List<Object?> get props => [id];
+}
+
 final class PageBuilderPageMenuOpenedState extends PagebuilderConfigMenuState
     with EquatableMixin {
   final UniqueID id;

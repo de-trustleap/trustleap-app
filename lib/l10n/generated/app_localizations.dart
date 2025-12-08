@@ -5252,6 +5252,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Move'**
   String get pagebuilder_widget_controls_drag_tooltip;
+
+  /// Tooltip for the button to open the menu
+  ///
+  /// In en, this message translates to:
+  /// **'Open menu'**
+  String get pagebuilder_config_menu_open_tooltip;
+
+  /// Tooltip for the button to close the menu
+  ///
+  /// In en, this message translates to:
+  /// **'Close menu'**
+  String get pagebuilder_config_menu_close_tooltip;
+
+  /// Tooltip for the button to close responsive preview mode
+  ///
+  /// In en, this message translates to:
+  /// **'Normal mode'**
+  String get pagebuilder_responsive_preview_close_tooltip;
+
+  /// Tooltip for the button to hide the page hierarchy
+  ///
+  /// In en, this message translates to:
+  /// **'Hide page hierarchy'**
+  String get pagebuilder_hierarchy_close_tooltip;
 }
 
 class _AppLocalizationsDelegate

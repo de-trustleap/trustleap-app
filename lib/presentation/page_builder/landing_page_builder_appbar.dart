@@ -1,10 +1,12 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_zoom/pagebuilder_zoom_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/underlined_dropdown.dart';
 import 'package:finanzbegleiter/presentation/page_builder/utils/keyboard_shortcut_helper.dart';
+import 'package:finanzbegleiter/presentation/page_builder/widgets/pagebuilder_appbar_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,6 +16,7 @@ class LandingPageBuilderAppBar extends StatelessWidget
   final PagebuilderContent content;
   final bool isLoading;
   final bool isHierarchyOpen;
+  final bool isResponsivePreviewOpen;
   final VoidCallback onHierarchyToggle;
   final VoidCallback onResponsivePreviewToggle;
   final dividerHeight = 0.5;
@@ -23,6 +26,7 @@ class LandingPageBuilderAppBar extends StatelessWidget
     required this.content,
     required this.isLoading,
     required this.isHierarchyOpen,
+    required this.isResponsivePreviewOpen,
     required this.onHierarchyToggle,
     required this.onResponsivePreviewToggle,
   });
@@ -44,6 +48,23 @@ class LandingPageBuilderAppBar extends StatelessWidget
               style: themeData.textTheme.bodyLarge,
             ),
             centerTitle: true,
+            leading: BlocBuilder<PagebuilderConfigMenuCubit,
+                PagebuilderConfigMenuState>(
+              bloc: Modular.get<PagebuilderConfigMenuCubit>(),
+              builder: (context, state) {
+                final isMenuOpen = state is! PageBuilderConfigMenuClosedState;
+                return PagebuilderAppbarButton(
+                  icon: isMenuOpen ? Icons.menu_open : Icons.menu,
+                  tooltip: isMenuOpen
+                      ? localization.pagebuilder_config_menu_close_tooltip
+                      : localization.pagebuilder_config_menu_open_tooltip,
+                  onPressed: () {
+                    Modular.get<PagebuilderConfigMenuCubit>()
+                        .toggleConfigMenu();
+                  },
+                );
+              },
+            ),
             actions: [
               BlocBuilder<PagebuilderBloc, PagebuilderState>(
                 bloc: Modular.get<PagebuilderBloc>(),
@@ -107,42 +128,19 @@ class LandingPageBuilderAppBar extends StatelessWidget
                   },
                 ),
               ),
-              Tooltip(
-                message:
-                    localization.pagebuilder_responsive_preview_button_tooltip,
-                child: Container(
-                  margin: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: themeData.colorScheme.secondary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    onPressed: onResponsivePreviewToggle,
-                    icon: const Icon(
-                      Icons.devices,
-                      color: Colors.white,
-                    ),
-                    iconSize: 24,
-                  ),
-                ),
+              PagebuilderAppbarButton(
+                icon: Icons.devices,
+                tooltip: isResponsivePreviewOpen
+                    ? localization.pagebuilder_responsive_preview_close_tooltip
+                    : localization.pagebuilder_responsive_preview_button_tooltip,
+                onPressed: onResponsivePreviewToggle,
               ),
-              Tooltip(
-                message: localization.pagebuilder_hierarchy_button_tooltip,
-                child: Container(
-                  margin: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: themeData.colorScheme.secondary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    onPressed: onHierarchyToggle,
-                    icon: const Icon(
-                      Icons.account_tree,
-                      color: Colors.white,
-                    ),
-                    iconSize: 24,
-                  ),
-                ),
+              PagebuilderAppbarButton(
+                icon: Icons.account_tree,
+                tooltip: isHierarchyOpen
+                    ? localization.pagebuilder_hierarchy_close_tooltip
+                    : localization.pagebuilder_hierarchy_button_tooltip,
+                onPressed: onHierarchyToggle,
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 24),

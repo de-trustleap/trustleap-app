@@ -77,7 +77,9 @@ class _WidgetTemplateCard extends StatelessWidget {
     final localization = AppLocalizations.of(context);
     final localizedName = template.getName(localization);
 
-    return Draggable<WidgetLibraryDragData>(
+    return MouseRegion(
+      cursor: SystemMouseCursors.grab,
+      child: Draggable<WidgetLibraryDragData>(
       data: WidgetLibraryDragData(template.widgetType),
       onDragStarted: () {
         Modular.get<PagebuilderDragCubit>().setDragging(true);
@@ -174,6 +176,7 @@ class _WidgetTemplateCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

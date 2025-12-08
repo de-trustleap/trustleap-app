@@ -67,6 +67,10 @@ class _LandingPageBuilderPageBuilderState
                 setState(() {
                   _isConfigMenuOpen = true;
                 });
+              } else if (state is PageBuilderConfigMenuClosedState) {
+                setState(() {
+                  _isConfigMenuOpen = false;
+                });
               }
             },
             builder: (context, state) {
@@ -116,6 +120,15 @@ class _LandingPageBuilderPageBuilderState
                         _isConfigMenuOpen = false;
                       });
                     });
+              } else if (state is PageBuilderConfigMenuClosedState) {
+                return LandingPageBuilderConfigMenu(
+                    key: ValueKey(state.id),
+                    isOpen: false,
+                    menuState: state,
+                    model: null,
+                    section: null,
+                    landingPage: widget.landingPage,
+                    closeMenu: () {});
               } else {
                 return const SizedBox.shrink();
               }

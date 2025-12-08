@@ -24,4 +24,14 @@ class PagebuilderConfigMenuCubit extends Cubit<PagebuilderConfigMenuState> {
     final id = UniqueID();
     emit(PageBuilderPageMenuOpenedState(id: id));
   }
+
+  void toggleConfigMenu() {
+    final id = UniqueID();
+
+    if (state is PageBuilderConfigMenuClosedState) {
+      emit(PageBuilderPageMenuOpenedState(id: id));
+    } else {
+      emit(PageBuilderConfigMenuClosedState(id: id));
+    }
+  }
 }

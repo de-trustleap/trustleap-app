@@ -167,6 +167,7 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                     content: state.content,
                     isLoading: state.saveLoading,
                     isHierarchyOpen: true,
+                    isResponsivePreviewOpen: _isResponsivePreviewOpen,
                     onHierarchyToggle: () {
                       _hierarchyOverlayKey.currentState?.toggle();
                     },
