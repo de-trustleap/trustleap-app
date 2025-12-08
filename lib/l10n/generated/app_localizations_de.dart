@@ -3084,4 +3084,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_widget_controls_drag_tooltip => 'Verschieben';
+
+  @override
+  String get pagebuilder_config_menu_open_tooltip => 'Menü öffnen';
+
+  @override
+  String get pagebuilder_config_menu_close_tooltip => 'Menü schließen';
+
+  @override
+  String get pagebuilder_responsive_preview_close_tooltip => 'Normaler Modus';
+
+  @override
+  String get pagebuilder_hierarchy_close_tooltip =>
+      'Seitenhierarchie ausblenden';
 }

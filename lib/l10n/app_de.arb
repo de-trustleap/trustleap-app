@@ -3549,5 +3549,21 @@
     "pagebuilder_widget_controls_drag_tooltip": "Verschieben",
     "@pagebuilder_widget_controls_drag_tooltip": {
         "description": "Tooltip für den Drag-Handle in den Widget Controls"
+    },
+    "pagebuilder_config_menu_open_tooltip": "Menü öffnen",
+    "@pagebuilder_config_menu_open_tooltip": {
+        "description": "Tooltip für den Button zum Öffnen des Menüs"
+    },
+    "pagebuilder_config_menu_close_tooltip": "Menü schließen",
+    "@pagebuilder_config_menu_close_tooltip": {
+        "description": "Tooltip für den Button zum Schließen des Menüs"
+    },
+    "pagebuilder_responsive_preview_close_tooltip": "Normaler Modus",
+    "@pagebuilder_responsive_preview_close_tooltip": {
+        "description": "Tooltip für den Button zum Schließen des Responsive Preview Modus"
+    },
+    "pagebuilder_hierarchy_close_tooltip": "Seitenhierarchie ausblenden",
+    "@pagebuilder_hierarchy_close_tooltip": {
+        "description": "Tooltip für den Button zum Ausblenden der Seitenhierarchie"
     }
 }
