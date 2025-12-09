@@ -299,7 +299,12 @@ class _LandingPageCreatorThirdStepState
                               ? maxWidth - 20
                               : maxWidth / 2 - 20,
                           onTap: () {
-                            widget.onBack(widget.landingPage!);
+                            widget.onBack(widget.landingPage!.copyWith(
+                              businessModel: selectedBusinessModel,
+                              contactOption: selectedContactOption,
+                              contactEmailAddress: contactEmailController.text.trim(),
+                              calendlyEventURL: selectedEventTypeUrl,
+                            ));
                           },
                         ),
                       ),

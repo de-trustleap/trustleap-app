@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/i
 import 'package:finanzbegleiter/presentation/core/shared_elements/image_upload/image_upload_dropzone.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
@@ -41,13 +42,29 @@ class _LandingPageCreatorImageSectionState
   Uint8List? _convertedImage;
 
   @override
-  void didUpdateWidget(covariant LandingPageCreatorImageSection oldWidget) {
+  void initState() {
+    super.initState();
     if (!widget.isEditMode ||
         (widget.landingPage?.isDefaultPage == true &&
             widget.landingPage?.thumbnailDownloadURL == null)) {
-      _downloadCompanyImageFromURL();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _downloadCompanyImageFromURL();
+      });
     }
+  }
+
+  @override
+  void didUpdateWidget(covariant LandingPageCreatorImageSection oldWidget) {
     super.didUpdateWidget(oldWidget);
+    // Check if company changed from null to non-null OR if company ID changed
+    final companyChanged = oldWidget.company?.id != widget.company?.id;
+    if (companyChanged) {
+      if (!widget.isEditMode ||
+          (widget.landingPage?.isDefaultPage == true &&
+              widget.landingPage?.thumbnailDownloadURL == null)) {
+        _downloadCompanyImageFromURL();
+      }
+    }
   }
 
   bool _urlIsValid(String url) {
@@ -73,8 +90,12 @@ class _LandingPageCreatorImageSectionState
         _convertedImage == null) {
       http.Response response =
           await http.get(Uri.parse(widget.company!.companyImageDownloadURL!));
-      _convertedImage = response.bodyBytes;
-      widget.imageSelected(_convertedImage);
+      if (mounted) {
+        setState(() {
+          _convertedImage = response.bodyBytes;
+        });
+        widget.imageSelected(_convertedImage);
+      }
     }
   }
 
@@ -107,8 +128,10 @@ class _LandingPageCreatorImageSectionState
   @override
   Widget build(BuildContext context) {
     const Size imageSize = Size(200, 200);
+    final imageBloc = Modular.get<LandingPageImageBloc>();
 
     return BlocConsumer<LandingPageImageBloc, LandingPageImageState>(
+      bloc: imageBloc,
       listener: (context, state) {
         if (state is LandingPageImageUploadSuccessState) {
           //widget.imageUploadSuccessful();

@@ -82,7 +82,32 @@ class HomeModule extends Module {
             return LandingPageCreator(
                 landingPage: args?["landingPage"],
                 createDefaultPage: args?["createDefaultPage"] ?? false);
-          })
+          }, children: [
+            ChildRoute(RoutePaths.landingPageCreatorStep1Path, child: (_) {
+              final args = r.args.data as Map<String, dynamic>?;
+              return LandingPageCreator(
+                  landingPage: args?["landingPage"],
+                  createDefaultPage: args?["createDefaultPage"] ?? false);
+            }),
+            ChildRoute(RoutePaths.landingPageCreatorStep2Path, child: (_) {
+              final args = r.args.data as Map<String, dynamic>?;
+              return LandingPageCreator(
+                  landingPage: args?["landingPage"],
+                  createDefaultPage: args?["createDefaultPage"] ?? false);
+            }),
+            ChildRoute(RoutePaths.landingPageCreatorStep3Path, child: (_) {
+              final args = r.args.data as Map<String, dynamic>?;
+              return LandingPageCreator(
+                  landingPage: args?["landingPage"],
+                  createDefaultPage: args?["createDefaultPage"] ?? false);
+            }),
+            ChildRoute(RoutePaths.landingPageCreatorStep4Path, child: (_) {
+              final args = r.args.data as Map<String, dynamic>?;
+              return LandingPageCreator(
+                  landingPage: args?["landingPage"],
+                  createDefaultPage: args?["createDefaultPage"] ?? false);
+            }),
+          ])
         ]);
     r.child("${Modular.initialRoute}${RoutePaths.landingPageBuilderPath}/:id",
         child: (_) => const LandingPageBuilderView());

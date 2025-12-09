@@ -98,7 +98,6 @@ class TestModule extends Module {
     this.testWidget,
   });
 
-
   @override
   void binds(i) {
     // Bind mock repositories if provided
@@ -118,22 +117,26 @@ class TestModule extends Module {
       i.addLazySingleton<CompanyRepository>(() => mockCompanyRepository!);
     }
     if (mockLandingPageRepository != null) {
-      i.addLazySingleton<LandingPageRepository>(() => mockLandingPageRepository!);
+      i.addLazySingleton<LandingPageRepository>(
+          () => mockLandingPageRepository!);
     }
     if (mockPagebuilderRepository != null) {
-      i.addLazySingleton<PagebuilderRepository>(() => mockPagebuilderRepository!);
+      i.addLazySingleton<PagebuilderRepository>(
+          () => mockPagebuilderRepository!);
     }
     if (mockPermissionRepository != null) {
       i.addLazySingleton<PermissionRepository>(() => mockPermissionRepository!);
     }
     if (mockAdminRegistrationCodeRepository != null) {
-      i.addLazySingleton<AdminRegistrationCodeRepository>(() => mockAdminRegistrationCodeRepository!);
+      i.addLazySingleton<AdminRegistrationCodeRepository>(
+          () => mockAdminRegistrationCodeRepository!);
     }
     if (mockLegalsRepository != null) {
       i.addLazySingleton<LegalsRepository>(() => mockLegalsRepository!);
     }
     if (mockRecommendationRepository != null) {
-      i.addLazySingleton<RecommendationRepository>(() => mockRecommendationRepository!);
+      i.addLazySingleton<RecommendationRepository>(
+          () => mockRecommendationRepository!);
     }
     if (mockWebLoggingRepository != null) {
       i.addLazySingleton<WebLoggingRepository>(() => mockWebLoggingRepository!);
@@ -186,9 +189,9 @@ class TestModule extends Module {
       ..add(ThemeCubit.new)
       ..add(ProfileImageBloc.new)
       ..add(CompanyImageBloc.new)
-      ..add(LandingPageImageBloc.new)
+      ..addLazySingleton(LandingPageImageBloc.new)
       ..add(CompanyObserverCubit.new)
-      ..add(CompanyCubit.new)
+      ..addLazySingleton(CompanyCubit.new)
       ..add(CompanyRequestCubit.new)
       ..add(CompanyRequestObserverCubit.new)
       ..addLazySingleton(PagebuilderHoverCubit.new)
