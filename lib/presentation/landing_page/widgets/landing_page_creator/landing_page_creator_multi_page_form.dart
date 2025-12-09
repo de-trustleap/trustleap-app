@@ -1,11 +1,9 @@
-import 'dart:typed_data';
-
+import 'package:finanzbegleiter/application/landingpages/landing_page_creator/landing_page_creator_cubit.dart';
 import 'package:finanzbegleiter/application/landingpages/landingpage/landingpage_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
-import 'package:finanzbegleiter/domain/entities/company.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -36,141 +34,165 @@ class LandingPageCreatorMultiPageForm extends StatefulWidget {
 
 class _LandingPageCreatorMultiPageFormState
     extends State<LandingPageCreatorMultiPageForm> {
-  int _currentStep = 0;
-  late UniqueID id;
-  Company? company;
-  Uint8List? image;
-  bool imageHasChanged = false;
-  bool showError = false;
-  bool isEditMode = false;
-  bool imageValid = false;
-  bool lastFormButtonsDisabled = false;
-  bool isLoading = false;
-  bool isAIGenerating = false;
-  late double progress;
-  String errorMessage = "";
-  LandingPage? landingPage;
-
   late List<Widget> _steps;
+  int _currentStep = 0;
 
   @override
   void initState() {
     super.initState();
-    id = UniqueID();
 
-    isEditMode = widget.landingPage != null;
-    landingPage = widget.landingPage;
+    final creatorCubit = Modular.get<LandingPageCreatorCubit>();
+    creatorCubit.initialize(
+      landingPage: widget.landingPage,
+      createDefaultPage: widget.createDefaultPage,
+    );
+
+    Modular.to.addListener(_onRouteChanged);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userState = BlocProvider.of<UserObserverCubit>(context).state;
+      final userState = Modular.get<UserObserverCubit>().state;
       if (userState is UserObserverSuccess &&
           userState.user.companyID != null) {
-        BlocProvider.of<CompanyCubit>(context)
-            .getCompany(userState.user.companyID!);
+        Modular.get<CompanyCubit>().getCompany(userState.user.companyID!);
       }
+
+      final currentRoute = Modular.to.path;
+      if (!currentRoute.contains(RoutePaths.landingPageCreatorStep1Path)) {
+        Modular.to.navigate(RoutePaths.homePath +
+            RoutePaths.landingPageCreatorPath +
+            RoutePaths.landingPageCreatorStep1Path);
+      }
+      _updateCurrentStep();
     });
-
-    _initializeSteps();
-
-    progress = 1 / _steps.length;
   }
 
-  void _initializeSteps() {
+  @override
+  void dispose() {
+    Modular.to.removeListener(_onRouteChanged);
+    super.dispose();
+  }
+
+  void _onRouteChanged() {
+    _updateCurrentStep();
+  }
+
+  void _updateCurrentStep() {
+    final newStep = _getCurrentStepFromRoute();
+    if (mounted && newStep != _currentStep) {
+      setState(() {
+        _currentStep = newStep;
+      });
+    }
+  }
+
+  int _getCurrentStepFromRoute() {
+    final currentRoute = Modular.to.path;
+    if (currentRoute.contains(RoutePaths.landingPageCreatorStep1Path)) {
+      return 0;
+    } else if (currentRoute.contains(RoutePaths.landingPageCreatorStep2Path)) {
+      return 1;
+    } else if (currentRoute.contains(RoutePaths.landingPageCreatorStep3Path)) {
+      return 2;
+    } else if (currentRoute.contains(RoutePaths.landingPageCreatorStep4Path)) {
+      return 3;
+    }
+    return 0;
+  }
+
+  void _initializeSteps(LandingPageCreatorDataState creatorState) {
+    final creatorCubit = Modular.get<LandingPageCreatorCubit>();
     _steps = [
       LandingPageCreatorFirstStep(
-          landingPage: landingPage,
-          isEditMode: isEditMode,
+          key: ValueKey('step1_${creatorState.company?.id.value}'),
+          landingPage: creatorState.landingPage,
+          isEditMode: creatorState.isEditMode,
           createDefaultPage: widget.createDefaultPage,
-          company: company,
+          company: creatorState.company,
           onContinue: (landingPage, image, imageHasChanged) {
-            if (imageValid) {
-              setState(() {
-                this.image = image;
-                this.landingPage = landingPage;
-                this.landingPage = widget.createDefaultPage
-                    ? landingPage.copyWith(isDefaultPage: true)
-                    : landingPage.copyWith(isDefaultPage: false);
-                this.imageHasChanged = imageHasChanged;
-                _currentStep += 1;
-                progress = 2 / _steps.length;
-              });
+            final currentState = creatorCubit.state;
+            if (currentState.imageValid) {
+              creatorCubit.updateLandingPage(widget.createDefaultPage
+                  ? landingPage.copyWith(isDefaultPage: true)
+                  : landingPage.copyWith(isDefaultPage: false));
+              creatorCubit.updateImage(image, imageHasChanged);
+              Modular.to.navigate(RoutePaths.homePath +
+                  RoutePaths.landingPageCreatorPath +
+                  RoutePaths.landingPageCreatorStep2Path);
             }
           }),
       LandingPageCreatorSecondStep(
-          id: isEditMode ? (widget.landingPage?.id ?? UniqueID()) : id,
-          landingPage: landingPage,
-          image: image,
-          imageHasChanged: imageHasChanged,
-          buttonsDisabled: lastFormButtonsDisabled,
-          isLoading: isLoading,
-          isEditMode: isEditMode,
+          id: creatorState.isEditMode
+              ? (creatorState.landingPage?.id ?? UniqueID())
+              : (creatorState.id ?? UniqueID()),
+          landingPage: creatorState.landingPage,
+          image: creatorState.image,
+          imageHasChanged: creatorState.imageHasChanged,
+          buttonsDisabled: creatorState.lastFormButtonsDisabled,
+          isLoading: creatorState.isLoading,
+          isEditMode: creatorState.isEditMode,
           onContinueTapped: (landingPage, image, imageHasChanged, isEditMode) {
-            if (isEditMode && (landingPage.isDefaultPage ?? false)) {
+            final currentState = creatorCubit.state;
+            if (currentState.isEditMode &&
+                (landingPage.isDefaultPage ?? false)) {
               Modular.get<LandingPageCubit>()
                   .editLandingPage(landingPage, image, imageHasChanged);
-            } else if (isEditMode && !(landingPage.isDefaultPage ?? false)) {
-              setState(() {
-                this.image = image;
-                this.landingPage = landingPage;
-                _currentStep += 1;
-                progress = 3 / _steps.length;
-              });
+            } else if (currentState.isEditMode &&
+                !(landingPage.isDefaultPage ?? false)) {
+              creatorCubit.updateImage(image, imageHasChanged);
+              creatorCubit.updateLandingPage(landingPage);
+              Modular.to.navigate(RoutePaths.homePath +
+                  RoutePaths.landingPageCreatorPath +
+                  RoutePaths.landingPageCreatorStep3Path);
             } else if ((landingPage.isDefaultPage ?? false) && image != null) {
               Modular.get<LandingPageCubit>()
                   .createLandingPage(landingPage, image, imageHasChanged, "");
             } else if (image != null) {
-              setState(() {
-                this.image = image;
-                this.landingPage = landingPage;
-                _currentStep += 1;
-                progress = 3 / _steps.length;
-              });
+              creatorCubit.updateImage(image, imageHasChanged);
+              creatorCubit.updateLandingPage(landingPage);
+              Modular.to.navigate(RoutePaths.homePath +
+                  RoutePaths.landingPageCreatorPath +
+                  RoutePaths.landingPageCreatorStep3Path);
             }
           },
           onBack: (landingPage) {
-            setState(() {
-              this.landingPage = landingPage;
-              _currentStep -= 1;
-              progress = 1 / _steps.length;
-            });
+            creatorCubit.updateLandingPage(landingPage);
+            Modular.to.navigate(RoutePaths.homePath +
+                RoutePaths.landingPageCreatorPath +
+                RoutePaths.landingPageCreatorStep1Path);
           }),
       if (!widget.createDefaultPage)
         LandingPageCreatorThirdStep(
-            landingPage: landingPage,
-            image: image,
-            imageHasChanged: imageHasChanged,
-            buttonsDisabled: lastFormButtonsDisabled,
-            isLoading: isLoading,
-            isEditMode: isEditMode,
+            landingPage: creatorState.landingPage,
+            image: creatorState.image,
+            imageHasChanged: creatorState.imageHasChanged,
+            buttonsDisabled: creatorState.lastFormButtonsDisabled,
+            isLoading: creatorState.isLoading,
+            isEditMode: creatorState.isEditMode,
             onBack: (landingPage) {
-              setState(() {
-                this.landingPage = landingPage;
-                _currentStep -= 1;
-                progress = 2 / _steps.length;
-              });
+              creatorCubit.updateLandingPage(landingPage);
+              Modular.to.navigate(RoutePaths.homePath +
+                  RoutePaths.landingPageCreatorPath +
+                  RoutePaths.landingPageCreatorStep2Path);
             },
             onContinue: (landingPage, image, imageHasChanged) {
-              setState(() {
-                this.landingPage = landingPage;
-                this.image = image;
-                this.imageHasChanged = imageHasChanged;
-                _currentStep += 1;
-                progress = 4 / _steps.length;
-              });
+              creatorCubit.updateLandingPage(landingPage);
+              creatorCubit.updateImage(image, imageHasChanged);
+              Modular.to.navigate(RoutePaths.homePath +
+                  RoutePaths.landingPageCreatorPath +
+                  RoutePaths.landingPageCreatorStep4Path);
             }),
-      if (!widget.createDefaultPage && !isEditMode)
+      if (!widget.createDefaultPage && !creatorState.isEditMode)
         LandingPageCreatorFourthStep(
-            landingPage: landingPage,
-            image: image,
-            imageHasChanged: imageHasChanged,
-            buttonsDisabled: lastFormButtonsDisabled,
-            isLoading: isLoading,
+            landingPage: creatorState.landingPage,
+            image: creatorState.image,
+            imageHasChanged: creatorState.imageHasChanged,
+            buttonsDisabled: creatorState.lastFormButtonsDisabled,
+            isLoading: creatorState.isLoading,
             onBack: (landingPage) {
-              setState(() {
-                this.landingPage = landingPage;
-                _currentStep -= 1;
-                progress = 3 / _steps.length;
-              });
+              creatorCubit.updateLandingPage(landingPage);
+              Modular.to.navigate(RoutePaths.homePath +
+                  RoutePaths.landingPageCreatorPath +
+                  RoutePaths.landingPageCreatorStep3Path);
             },
             onSaveTapped: (landingPage, image, imageHasChanged, templateID) {
               if (image != null) {
@@ -190,19 +212,30 @@ class _LandingPageCreatorMultiPageFormState
   @override
   Widget build(BuildContext context) {
     final landingPageCubit = Modular.get<LandingPageCubit>();
+    final creatorCubit = Modular.get<LandingPageCreatorCubit>();
+    final companyCubit = Modular.get<CompanyCubit>();
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveBreakpoints.of(context);
     final navigator = CustomNavigator.of(context);
-    _initializeSteps();
+
     return MultiBlocListener(
         listeners: [
+          BlocListener<UserObserverCubit, UserObserverState>(
+              bloc: Modular.get<UserObserverCubit>(),
+              listener: (context, state) {
+                if (state is UserObserverSuccess &&
+                    state.user.companyID != null) {
+                  companyCubit.getCompany(state.user.companyID!);
+                }
+              }),
           BlocListener<LandingPageCubit, LandingPageState>(
               bloc: landingPageCubit,
               listener: (context, state) {
                 if (state is CreatedLandingPageSuccessState) {
-                  showError = false;
-                  isAIGenerating = false;
+                  creatorCubit.clearError();
+                  creatorCubit.setAIGenerating(false);
                   const params = "?createdNewPage=true";
+                  final landingPage = creatorCubit.state.landingPage;
                   if ((landingPage?.isDefaultPage == null ||
                           landingPage?.isDefaultPage == false) &&
                       responsiveValue.isDesktop) {
@@ -213,72 +246,57 @@ class _LandingPageCreatorMultiPageFormState
                       RoutePaths.landingPagePath +
                       params);
                 } else if (state is EditLandingPageSuccessState) {
-                  showError = false;
+                  creatorCubit.clearError();
                   const params = "?editedPage=true";
                   navigator.pushAndReplace(
                       RoutePaths.homePath + RoutePaths.landingPagePath, params);
                 } else if (state is LandingPageNoImageFailureState) {
-                  setState(() {
-                    imageValid = false;
-                  });
+                  creatorCubit.setImageValid(false);
                 } else if (state
                     is LandingPageImageExceedsFileSizeLimitFailureState) {
-                  setState(() {
-                    imageValid = false;
-                  });
+                  creatorCubit.setImageValid(false);
                 } else if (state is LandingPageImageValid) {
-                  setState(() {
-                    imageValid = true;
-                  });
+                  creatorCubit.setImageValid(true);
                 } else if (state is CreateLandingPageFailureState) {
-                  setState(() {
-                    showError = true;
-                    errorMessage = DatabaseFailureMapper.mapFailureMessage(
-                        state.failure, localization);
-                    lastFormButtonsDisabled = false;
-                    isLoading = false;
-                    isAIGenerating = false;
-                  });
+                  creatorCubit.setError(DatabaseFailureMapper.mapFailureMessage(
+                      state.failure, localization));
+                  creatorCubit.setLastFormButtonsDisabled(false);
+                  creatorCubit.setLoading(false);
+                  creatorCubit.setAIGenerating(false);
                 } else if (state is EditLandingPageFailureState) {
-                  setState(() {
-                    showError = true;
-                    errorMessage = DatabaseFailureMapper.mapFailureMessage(
-                        state.failure, localization);
-                    lastFormButtonsDisabled = false;
-                    isLoading = false;
-                  });
+                  creatorCubit.setError(DatabaseFailureMapper.mapFailureMessage(
+                      state.failure, localization));
+                  creatorCubit.setLastFormButtonsDisabled(false);
+                  creatorCubit.setLoading(false);
                 } else if (state is CreateLandingPageLoadingState ||
                     state is EditLandingPageLoadingState) {
-                  setState(() {
-                    lastFormButtonsDisabled = true;
-                    isLoading = true;
-                  });
+                  creatorCubit.setLastFormButtonsDisabled(true);
+                  creatorCubit.setLoading(true);
                 } else if (state is CreateLandingPageWithAILoadingState) {
-                  setState(() {
-                    isAIGenerating = true;
-                  });
+                  creatorCubit.setAIGenerating(true);
                 } else if (state is GetLandingPageTemplatesFailureState) {
-                  setState(() {
-                    showError = true;
-                    errorMessage = DatabaseFailureMapper.mapFailureMessage(
-                        state.failure, localization);
-                    lastFormButtonsDisabled = false;
-                  });
+                  creatorCubit.setError(DatabaseFailureMapper.mapFailureMessage(
+                      state.failure, localization));
+                  creatorCubit.setLastFormButtonsDisabled(false);
                 } else {
-                  showError = false;
+                  creatorCubit.clearError();
                 }
               }),
-          BlocListener<CompanyCubit, CompanyState>(listener: (context, state) {
-            if (state is GetCompanySuccessState) {
-              setState(() {
-                company = state.company;
-              });
-            }
-          })
+          BlocListener<CompanyCubit, CompanyState>(
+              bloc: companyCubit,
+              listener: (context, state) {
+                if (state is GetCompanySuccessState) {
+                  creatorCubit.setCompany(state.company);
+                }
+              })
         ],
-        child: BlocBuilder<LandingPageCubit, LandingPageState>(
-          bloc: landingPageCubit,
-          builder: (context, state) {
+        child:
+            BlocBuilder<LandingPageCreatorCubit, LandingPageCreatorDataState>(
+          bloc: creatorCubit,
+          builder: (context, creatorState) {
+            _initializeSteps(creatorState);
+            final progress = (_currentStep + 1) / _steps.length;
+
             return Stack(
               children: [
                 ListView(children: [
@@ -287,13 +305,15 @@ class _LandingPageCreatorMultiPageFormState
                   LandingPageCreatorProgressIndicator(
                       progress: progress, elementsTotal: _steps.length),
                   SizedBox(height: responsiveValue.isMobile ? 50 : 100),
-                  if (errorMessage.isNotEmpty && showError == true) ...[
+                  if (creatorState.errorMessage.isNotEmpty &&
+                      creatorState.showError) ...[
                     const SizedBox(height: 20),
                     CenteredConstrainedWrapper(
-                        child: FormErrorView(message: errorMessage))
+                        child:
+                            FormErrorView(message: creatorState.errorMessage))
                   ]
                 ]),
-                if (isAIGenerating)
+                if (creatorState.isAIGenerating)
                   LoadingOverlay(
                     title: localization.landingpage_creator_ai_loading_subtitle,
                     subtitle:

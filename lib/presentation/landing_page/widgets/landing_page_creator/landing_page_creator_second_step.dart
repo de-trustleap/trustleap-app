@@ -233,7 +233,15 @@ class _LandingPageCreatorSecondStepState
                                             ? maxWidth - textFieldSpacing
                                             : maxWidth / 2 - textFieldSpacing,
                                         onTap: () {
-                                          widget.onBack(widget.landingPage!);
+                                          if (widget.landingPage != null) {
+                                            widget.onBack(widget.landingPage!.copyWith(
+                                                id: widget.id,
+                                                impressum: impressumTextController.text.trim(),
+                                                privacyPolicy: privacyPolicyTextController.text.trim(),
+                                                initialInformation: initialInformationTextController.text.trim(),
+                                                termsAndConditions: termsAndConditionsTextController.text.trim(),
+                                                scriptTags: scriptTagsTextController.text.trim()));
+                                          }
                                         }),
                                   ),
                                   const ResponsiveRowColumnItem(
