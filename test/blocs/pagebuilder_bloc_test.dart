@@ -51,7 +51,8 @@ void main() {
     final testContent = PageBuilderPage(
         id: UniqueID.fromUniqueString(contentID),
         sections: null,
-        backgroundColor: null);
+        backgroundColor: null,
+        globalStyles: null);
     test("should call landingpage repo if function is called", () async {
       // Given
       when(mockLandingPageRepo.getLandingPage(landingPageID))
@@ -165,7 +166,8 @@ void main() {
                     hoverProperties: null)
               ],
               visibleOn: null)
-        ]);
+        ],
+        globalStyles: null);
     final testUser = CustomUser(id: UniqueID.fromUniqueString("2"));
     final testContent = PagebuilderContent(
         landingPage: testLandingPage, content: testPage, user: testUser);
@@ -349,6 +351,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       backgroundColor: null,
       sections: [mockSection],
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -457,6 +460,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       backgroundColor: null,
       sections: [section1, section2, section3],
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -727,6 +731,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       sections: [mockSection],
       backgroundColor: null,
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -914,6 +919,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       backgroundColor: null,
       sections: [mockSection],
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -963,6 +969,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       sections: [mockSection],
       backgroundColor: null,
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -1113,6 +1120,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       sections: [mockSection],
       backgroundColor: null,
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -1328,6 +1336,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       sections: [],
       backgroundColor: null,
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -1525,6 +1534,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       sections: [mockSection],
       backgroundColor: null,
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -1781,6 +1791,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       backgroundColor: null,
       sections: [section1, section2, section3],
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -2089,6 +2100,7 @@ void main() {
       id: UniqueID.fromUniqueString("page1"),
       backgroundColor: null,
       sections: [section1, section2, section3],
+      globalStyles: null,
     );
 
     final mockLandingPage = LandingPage(
@@ -2494,6 +2506,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -2573,6 +2586,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -2665,6 +2679,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -2742,6 +2757,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -2818,6 +2834,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -2889,6 +2906,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -2930,6 +2948,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: null,
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -2968,6 +2987,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -3090,6 +3110,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -3183,6 +3204,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -3272,6 +3294,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -3343,6 +3366,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(
@@ -3447,6 +3471,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: [mockSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final mockLandingPage = LandingPage(

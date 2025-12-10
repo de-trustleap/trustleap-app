@@ -157,6 +157,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(
@@ -257,6 +258,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(
@@ -356,6 +358,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(
@@ -438,6 +441,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(
@@ -833,6 +837,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(
@@ -932,6 +937,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(
@@ -1031,6 +1037,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(
@@ -1138,6 +1145,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(
@@ -1245,6 +1253,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(
@@ -1327,6 +1336,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-1'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final content = PagebuilderContent(

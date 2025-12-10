@@ -1,26 +1,35 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
+import 'package:finanzbegleiter/domain/helpers/pagebuilder_global_styles_resolver.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_global_styles_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_section_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PageBuilderPageModel extends Equatable {
   final String id;
   final List<Map<String, dynamic>>? sections;
   final String? backgroundColor;
+  final Map<String, dynamic>? globalStyles;
 
-  const PageBuilderPageModel(
-      {required this.id,
-      required this.sections,
-      required this.backgroundColor});
+  const PageBuilderPageModel({
+    required this.id,
+    required this.sections,
+    required this.backgroundColor,
+    required this.globalStyles,
+  });
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {'id': id};
     if (sections != null) map['sections'] = sections;
     if (backgroundColor != null) map['backgroundColor'] = backgroundColor;
+    if (globalStyles != null) map['globalStyles'] = globalStyles;
     return map;
   }
 
@@ -33,17 +42,24 @@ class PageBuilderPageModel extends Equatable {
         sections: map['sections'] != null
             ? List<Map<String, dynamic>>.from((map['sections'] as List)
                 .map((item) => item as Map<String, dynamic>))
+            : null,
+        globalStyles: map['globalStyles'] != null
+            ? map['globalStyles'] as Map<String, dynamic>
             : null);
   }
 
-  PageBuilderPageModel copyWith(
-      {String? id,
-      List<Map<String, dynamic>>? sections,
-      String? backgroundColor}) {
+  PageBuilderPageModel copyWith({
+    String? id,
+    List<Map<String, dynamic>>? sections,
+    String? backgroundColor,
+    Map<String, dynamic>? globalStyles,
+  }) {
     return PageBuilderPageModel(
-        id: id ?? this.id,
-        sections: sections ?? this.sections,
-        backgroundColor: backgroundColor ?? this.backgroundColor);
+      id: id ?? this.id,
+      sections: sections ?? this.sections,
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      globalStyles: globalStyles ?? this.globalStyles,
+    );
   }
 
   factory PageBuilderPageModel.fromFirestore(
@@ -52,21 +68,42 @@ class PageBuilderPageModel extends Equatable {
   }
 
   PageBuilderPage toDomain() {
+    // Get global styles first
+    final globalStylesDomain = getGlobalStylesFromMap(globalStyles);
+
+    // Resolve backgroundColor token if needed
+    Color? resolvedBackgroundColor;
+    if (backgroundColor != null) {
+      if (backgroundColor!.startsWith('@')) {
+        final blocState = Modular.get<PagebuilderBloc>().state;
+        final globalStylesForResolver = blocState is GetLandingPageAndUserSuccessState
+            ? blocState.content.content?.globalStyles
+            : null;
+
+        final resolver = PagebuilderGlobalStylesResolver(globalStylesForResolver);
+        resolvedBackgroundColor = resolver.resolveColorTokenToColor(backgroundColor!);
+      } else {
+        resolvedBackgroundColor = Color(ColorUtility.getHexIntFromString(backgroundColor!));
+      }
+    }
+
     return PageBuilderPage(
-        id: UniqueID.fromUniqueString(id),
-        backgroundColor: backgroundColor != null
-            ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
-            : null,
-        sections: getPageBuilderSectionList(sections));
+      id: UniqueID.fromUniqueString(id),
+      backgroundColor: resolvedBackgroundColor,
+      sections: getPageBuilderSectionList(sections),
+      globalStyles: globalStylesDomain,
+    );
   }
 
   factory PageBuilderPageModel.fromDomain(PageBuilderPage page) {
     return PageBuilderPageModel(
-        id: page.id.value,
-        backgroundColor: page.backgroundColor != null
-            ? ColorUtility.colorToHex(page.backgroundColor!)
-            : null,
-        sections: getMapFromPageBuilderSectionList(page.sections));
+      id: page.id.value,
+      backgroundColor: page.backgroundColor != null
+          ? ColorUtility.colorToHex(page.backgroundColor!)
+          : null,
+      sections: getMapFromPageBuilderSectionList(page.sections),
+      globalStyles: getMapFromGlobalStyles(page.globalStyles),
+    );
   }
 
   List<PageBuilderSection>? getPageBuilderSectionList(
@@ -77,6 +114,14 @@ class PageBuilderPageModel extends Equatable {
     final sectionModels =
         sections.map((map) => PageBuilderSectionModel.fromMap(map)).toList();
     return sectionModels.map((model) => model.toDomain()).toList();
+  }
+
+  PageBuilderGlobalStyles? getGlobalStylesFromMap(
+      Map<String, dynamic>? globalStyles) {
+    if (globalStyles == null) {
+      return null;
+    }
+    return PageBuilderGlobalStylesModel.fromMap(globalStyles).toDomain();
   }
 
   static List<Map<String, dynamic>>? getMapFromPageBuilderSectionList(
@@ -90,6 +135,14 @@ class PageBuilderPageModel extends Equatable {
     return widgetModels.map((model) => model.toMap()).toList();
   }
 
+  static Map<String, dynamic>? getMapFromGlobalStyles(
+      PageBuilderGlobalStyles? globalStyles) {
+    if (globalStyles == null) {
+      return null;
+    }
+    return PageBuilderGlobalStylesModel.fromDomain(globalStyles).toMap();
+  }
+
   @override
-  List<Object?> get props => [id, sections, backgroundColor];
+  List<Object?> get props => [id, sections, backgroundColor, globalStyles];
 }

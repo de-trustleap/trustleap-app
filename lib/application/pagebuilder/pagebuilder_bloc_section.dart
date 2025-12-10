@@ -179,6 +179,28 @@ extension PagebuilderBlocSection on PagebuilderBloc {
     }
   }
 
+  Future<void> onUpdatePage(
+      UpdatePageEvent event, Emitter<PagebuilderState> emit) async {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: event.updatedPage);
+
+      if (!isUndoRedoOperation) {
+        localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
+
   Future<void> onDeleteSection(
       DeleteSectionEvent event, Emitter<PagebuilderState> emit) async {
     if (state is GetLandingPageAndUserSuccessState) {

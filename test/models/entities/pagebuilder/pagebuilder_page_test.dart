@@ -26,11 +26,13 @@ void main() {
             fullHeight: null,
                 visibleOn: null)
           ],
-          backgroundColor: Colors.red);
+          backgroundColor: Colors.red,
+          globalStyles: null);
       final expectedResult = PageBuilderPage(
           id: UniqueID.fromUniqueString("1"),
           sections: [],
-          backgroundColor: Colors.green);
+          backgroundColor: Colors.green,
+          globalStyles: null);
       // When
       final result = page.copyWith(sections: [], backgroundColor: Colors.green);
       // Then
@@ -56,7 +58,8 @@ void main() {
             fullHeight: null,
                 visibleOn: null)
           ],
-          backgroundColor: Colors.red);
+          backgroundColor: Colors.red,
+          globalStyles: null);
 
       final page2 = PageBuilderPage(
           id: UniqueID.fromUniqueString("1"),
@@ -73,7 +76,8 @@ void main() {
             fullHeight: null,
                 visibleOn: null)
           ],
-          backgroundColor: Colors.red);
+          backgroundColor: Colors.red,
+          globalStyles: null);
       // Then
       expect(page1, page2);
     });

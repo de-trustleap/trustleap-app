@@ -111,6 +111,7 @@ import 'package:mockito/src/dummies.dart' as _i16;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
   _FakeEither_0(
@@ -1522,15 +1523,6 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
-  String get menuitems_activities => (super.noSuchMethod(
-        Invocation.getter(#menuitems_activities),
-        returnValue: _i16.dummyValue<String>(
-          this,
-          Invocation.getter(#menuitems_activities),
-        ),
-      ) as String);
-
-  @override
   String get auth_failure_email_already_in_use => (super.noSuchMethod(
         Invocation.getter(#auth_failure_email_already_in_use),
         returnValue: _i16.dummyValue<String>(
@@ -2795,11 +2787,31 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get recommendation_page_leadTextField_send_email_button =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendation_page_leadTextField_send_email_button),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #recommendation_page_leadTextField_send_email_button),
+        ),
+      ) as String);
+
+  @override
   String get recommendation_page_send_whatsapp_error => (super.noSuchMethod(
         Invocation.getter(#recommendation_page_send_whatsapp_error),
         returnValue: _i16.dummyValue<String>(
           this,
           Invocation.getter(#recommendation_page_send_whatsapp_error),
+        ),
+      ) as String);
+
+  @override
+  String get recommendation_page_send_email_error => (super.noSuchMethod(
+        Invocation.getter(#recommendation_page_send_email_error),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendation_page_send_email_error),
         ),
       ) as String);
 
@@ -3590,6 +3602,42 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get promoter_overview_filter_title => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_filter_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_filter_title),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_filter_registration_title => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_filter_registration_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_filter_registration_title),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_filter_sortby_title => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_filter_sortby_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_filter_sortby_title),
+        ),
+      ) as String);
+
+  @override
+  String get promoter_overview_filter_sortorder_title => (super.noSuchMethod(
+        Invocation.getter(#promoter_overview_filter_sortorder_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#promoter_overview_filter_sortorder_title),
+        ),
+      ) as String);
+
+  @override
   String get promoter_overview_view_switch_grid_tooltip => (super.noSuchMethod(
         Invocation.getter(#promoter_overview_view_switch_grid_tooltip),
         returnValue: _i16.dummyValue<String>(
@@ -3613,6 +3661,53 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
         returnValue: _i16.dummyValue<String>(
           this,
           Invocation.getter(#recommendations_form_add_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendations_limit_title => (super.noSuchMethod(
+        Invocation.getter(#recommendations_limit_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendations_limit_title),
+        ),
+      ) as String);
+
+  @override
+  String get recommendations_limit_description => (super.noSuchMethod(
+        Invocation.getter(#recommendations_limit_description),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendations_limit_description),
+        ),
+      ) as String);
+
+  @override
+  String get recommendations_limit_reached_tooltip => (super.noSuchMethod(
+        Invocation.getter(#recommendations_limit_reached_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendations_limit_reached_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendations_no_active_landingpage_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendations_no_active_landingpage_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendations_no_active_landingpage_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get recommendations_no_active_landingpage_warning =>
+      (super.noSuchMethod(
+        Invocation.getter(#recommendations_no_active_landingpage_warning),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#recommendations_no_active_landingpage_warning),
         ),
       ) as String);
 
@@ -3856,6 +3951,16 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
           this,
           Invocation.getter(
               #landingpage_pagebuilder_config_menu_anchor_button_type),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_calendly_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_calendly_type),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_calendly_type),
         ),
       ) as String);
 
@@ -4193,6 +4298,18 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_pagebuilder_layout_menu_width_percentage =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_layout_menu_width_percentage),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_layout_menu_width_percentage),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_layout_menu_image_control_switch =>
       (super.noSuchMethod(
         Invocation.getter(
@@ -4271,6 +4388,27 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
           this,
           Invocation.getter(
               #landingpage_pagebuilder_layout_menu_background_color),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_custom_css_menu_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_custom_css_menu_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_custom_css_menu_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_custom_css_menu_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_custom_css_menu_description),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_custom_css_menu_description),
         ),
       ) as String);
 
@@ -4425,6 +4563,33 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_image_config_border_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_image_config_border_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_image_config_border_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_image_config_border_width => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_image_config_border_width),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_image_config_border_width),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_image_config_border_color => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_image_config_border_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_image_config_border_color),
+        ),
+      ) as String);
+
+  @override
   String get pagebuilder_image_config_image_content => (super.noSuchMethod(
         Invocation.getter(#pagebuilder_image_config_image_content),
         returnValue: _i16.dummyValue<String>(
@@ -4454,6 +4619,42 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
           this,
           Invocation.getter(
               #landingpage_pagebuilder_container_config_container_shadow),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_border_title =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_config_container_border_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_config_container_border_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_border_width =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_config_container_border_width),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_config_container_border_width),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_config_container_border_color =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_config_container_border_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_config_container_border_color),
         ),
       ) as String);
 
@@ -4611,6 +4812,47 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
           ) as String);
 
   @override
+  String get landingpage_pagebuilder_spacer_config_title => (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_spacer_config_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_spacer_config_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_spacer_config_height =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_spacer_config_height),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_spacer_config_height),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_spacer_config_width_percentage =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_spacer_config_width_percentage),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_spacer_config_width_percentage),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_config_menu_spacer_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#landingpage_pagebuilder_config_menu_spacer_type),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_pagebuilder_config_menu_spacer_type),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_contactform_content_email =>
       (super.noSuchMethod(
         Invocation.getter(#landingpage_pagebuilder_contactform_content_email),
@@ -4663,6 +4905,26 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_button_config_button_background_color =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_button_background_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_button_background_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_button_border_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_button_border_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_button_border_title),
+        ),
+      ) as String);
+
+  @override
   String get pagebuilder_button_config_button_border_radius =>
       (super.noSuchMethod(
         Invocation.getter(#pagebuilder_button_config_button_border_radius),
@@ -4673,12 +4935,22 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
-  String get pagebuilder_button_config_button_background_color =>
+  String get pagebuilder_button_config_button_border_width =>
       (super.noSuchMethod(
-        Invocation.getter(#pagebuilder_button_config_button_background_color),
+        Invocation.getter(#pagebuilder_button_config_button_border_width),
         returnValue: _i16.dummyValue<String>(
           this,
-          Invocation.getter(#pagebuilder_button_config_button_background_color),
+          Invocation.getter(#pagebuilder_button_config_button_border_width),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_button_config_button_border_color =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_button_config_button_border_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_button_config_button_border_color),
         ),
       ) as String);
 
@@ -4980,6 +5252,212 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_calendly_config_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_config_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_config_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_config_width => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_config_width),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_config_width),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_config_height => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_config_height),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_config_height),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_config_border_radius => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_config_border_radius),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_config_border_radius),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_maxwidth_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_maxwidth_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_maxwidth_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_maxwidth => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_maxwidth),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_maxwidth),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_background_constrained => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_background_constrained),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_background_constrained),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_full_height => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_full_height),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_full_height),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_maxwidth => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_maxwidth),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_maxwidth),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_config_text_color => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_config_text_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_config_text_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_config_background_color =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_config_background_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_config_background_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_config_primary_color => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_config_primary_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_config_primary_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_content_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_hide_event_details =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_hide_event_details),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_content_hide_event_details),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_loading_event_types =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_loading_event_types),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_content_loading_event_types),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_connecting => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_connecting),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_content_connecting),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_error_prefix => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_error_prefix),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_content_error_prefix),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_select_event_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_select_event_type),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_content_select_event_type),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_choose_event_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_choose_event_type),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_content_choose_event_type),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_connection_required =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_connection_required),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_content_connection_required),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_connection_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_connection_description),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_calendly_content_connection_description),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_calendly_content_connect_button => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_content_connect_button),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_content_connect_button),
+        ),
+      ) as String);
+
+  @override
   String get landingpage_pagebuilder_video_player_config_youtube_link =>
       (super.noSuchMethod(
         Invocation.getter(
@@ -5189,6 +5667,33 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get landingpage_overview_created_at => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_created_at),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_created_at),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_updated_at => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_updated_at),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_updated_at),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_overview_deactivated => (super.noSuchMethod(
+        Invocation.getter(#landingpage_overview_deactivated),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#landingpage_overview_deactivated),
+        ),
+      ) as String);
+
+  @override
   String get edit_promoter_no_data_title => (super.noSuchMethod(
         Invocation.getter(#edit_promoter_no_data_title),
         returnValue: _i16.dummyValue<String>(
@@ -5212,6 +5717,24 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
         returnValue: _i16.dummyValue<String>(
           this,
           Invocation.getter(#send_recommendation_alert_title),
+        ),
+      ) as String);
+
+  @override
+  String get save_recommendation_loading_title => (super.noSuchMethod(
+        Invocation.getter(#save_recommendation_loading_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#save_recommendation_loading_title),
+        ),
+      ) as String);
+
+  @override
+  String get save_recommendation_loading_subtitle => (super.noSuchMethod(
+        Invocation.getter(#save_recommendation_loading_subtitle),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#save_recommendation_loading_subtitle),
         ),
       ) as String);
 
@@ -5901,6 +6424,15 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_calendly_config_dynamic_height => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_calendly_config_dynamic_height),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_calendly_config_dynamic_height),
+        ),
+      ) as String);
+
+  @override
   String get recommendation_manager_filter_sort_by_priorities =>
       (super.noSuchMethod(
         Invocation.getter(#recommendation_manager_filter_sort_by_priorities),
@@ -6363,36 +6895,57 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
-  String get pagebuilder_anchor_button_content_section_id =>
-      (super.noSuchMethod(
-        Invocation.getter(#pagebuilder_anchor_button_content_section_id),
+  String get pagebuilder_anchor_button_config_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_anchor_button_config_title),
         returnValue: _i16.dummyValue<String>(
           this,
-          Invocation.getter(#pagebuilder_anchor_button_content_section_id),
+          Invocation.getter(#pagebuilder_anchor_button_config_title),
         ),
       ) as String);
 
   @override
-  String get pagebuilder_anchor_button_content_section_id_subtitle =>
+  String get pagebuilder_anchor_button_content_section_name =>
       (super.noSuchMethod(
-        Invocation.getter(
-            #pagebuilder_anchor_button_content_section_id_subtitle),
+        Invocation.getter(#pagebuilder_anchor_button_content_section_name),
         returnValue: _i16.dummyValue<String>(
           this,
-          Invocation.getter(
-              #pagebuilder_anchor_button_content_section_id_subtitle),
+          Invocation.getter(#pagebuilder_anchor_button_content_section_name),
         ),
       ) as String);
 
   @override
-  String get pagebuilder_anchor_button_content_section_id_placeholder =>
+  String get pagebuilder_anchor_button_content_section_name_subtitle =>
       (super.noSuchMethod(
         Invocation.getter(
-            #pagebuilder_anchor_button_content_section_id_placeholder),
+            #pagebuilder_anchor_button_content_section_name_subtitle),
         returnValue: _i16.dummyValue<String>(
           this,
           Invocation.getter(
-              #pagebuilder_anchor_button_content_section_id_placeholder),
+              #pagebuilder_anchor_button_content_section_name_subtitle),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_anchor_button_content_no_sections_available =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_anchor_button_content_no_sections_available),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_anchor_button_content_no_sections_available),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_anchor_button_content_section_name_placeholder =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_anchor_button_content_section_name_placeholder),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_anchor_button_content_section_name_placeholder),
         ),
       ) as String);
 
@@ -6420,6 +6973,43 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
         returnValue: _i16.dummyValue<String>(
           this,
           Invocation.getter(#pagebuilder_hierarchy_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_responsive_preview_button_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_responsive_preview_button_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_responsive_preview_button_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_breakpoint_desktop => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_breakpoint_desktop),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_breakpoint_desktop),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_breakpoint_tablet => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_breakpoint_tablet),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_breakpoint_tablet),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_breakpoint_mobile => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_breakpoint_mobile),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_breakpoint_mobile),
         ),
       ) as String);
 
@@ -6547,6 +7137,24 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
         returnValue: _i16.dummyValue<String>(
           this,
           Invocation.getter(#pagebuilder_hierarchy_overlay_video_player),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_calendly => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_calendly),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_calendly),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_overlay_height => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_overlay_height),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_overlay_height),
         ),
       ) as String);
 
@@ -7535,6 +8143,440 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_color_tab => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_color_tab),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_color_tab),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_gradient_tab => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_gradient_tab),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_gradient_tab),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_color_select => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_color_select),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_color_select),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_gradient_select => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_gradient_select),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_gradient_select),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_gradient_color_select => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_gradient_color_select),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_gradient_color_select),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_gradient_type_label => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_gradient_type_label),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_gradient_type_label),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_gradient_type_linear => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_gradient_type_linear),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_gradient_type_linear),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_gradient_type_radial => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_gradient_type_radial),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_gradient_type_radial),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_gradient_type_sweep => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_gradient_type_sweep),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_gradient_type_sweep),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_gradient_colors_label => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_gradient_colors_label),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_gradient_colors_label),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_gradient_add_color => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_gradient_add_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_gradient_add_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_ok => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_ok),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_ok),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_id_placeholder => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_id_placeholder),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_id_placeholder),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_name_error_empty => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_name_error_empty),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_name_error_empty),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_name_error_too_long => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_name_error_too_long),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_name_error_too_long),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_name_error_duplicate => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_name_error_duplicate),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_name_error_duplicate),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_visible_on_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_visible_on_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_visible_on_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_visible_on_desktop => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_visible_on_desktop),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_visible_on_desktop),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_visible_on_tablet => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_visible_on_tablet),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_visible_on_tablet),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_visible_on_mobile => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_visible_on_mobile),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_visible_on_mobile),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_undo_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_undo_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_undo_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_redo_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_redo_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_redo_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_page_menu_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_page_menu_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_page_menu_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_text => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_text),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_text),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_image => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_image),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_image),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_container => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_container),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_container),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_icon => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_icon),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_icon),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_video => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_video),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_video),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_contact_form => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_contact_form),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_contact_form),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_anchor_button => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_anchor_button),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_anchor_button),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_calendly => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_calendly),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_calendly),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_template_spacer => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_template_spacer),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_template_spacer),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_html_text_editor_select_color => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_html_text_editor_select_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_html_text_editor_select_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_html_text_editor_hint => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_html_text_editor_hint),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_html_text_editor_hint),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_html_text_editor_background_color =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_html_text_editor_background_color),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_html_text_editor_background_color),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_controls_edit => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_controls_edit),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_controls_edit),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_controls_delete => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_controls_delete),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_controls_delete),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_controls_duplicate => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_controls_duplicate),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_controls_duplicate),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_controls_duplicate => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_controls_duplicate),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_controls_duplicate),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_controls_delete => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_controls_delete),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_controls_delete),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_controls_edit_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_controls_edit_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_controls_edit_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_controls_drag_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_controls_drag_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_controls_drag_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_controls_edit_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_controls_edit_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_controls_edit_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_widget_controls_drag_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_widget_controls_drag_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_widget_controls_drag_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_config_menu_open_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_config_menu_open_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_config_menu_open_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_config_menu_close_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_config_menu_close_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_config_menu_close_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_responsive_preview_close_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_responsive_preview_close_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_responsive_preview_close_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_hierarchy_close_tooltip => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_hierarchy_close_tooltip),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_hierarchy_close_tooltip),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -7585,6 +8627,93 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
           Invocation.method(
             #promoter_overview_creation_date,
             [date],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String recommendations_limit_status(
+    int? current,
+    int? max,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #recommendations_limit_status,
+          [
+            current,
+            max,
+          ],
+        ),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.method(
+            #recommendations_limit_status,
+            [
+              current,
+              max,
+            ],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String recommendations_limit_reset_days(int? days) => (super.noSuchMethod(
+        Invocation.method(
+          #recommendations_limit_reset_days,
+          [days],
+        ),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.method(
+            #recommendations_limit_reset_days,
+            [days],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String recommendations_limit_reset_hours(int? hours) => (super.noSuchMethod(
+        Invocation.method(
+          #recommendations_limit_reset_hours,
+          [hours],
+        ),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.method(
+            #recommendations_limit_reset_hours,
+            [hours],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String recommendations_sent_success(String? name) => (super.noSuchMethod(
+        Invocation.method(
+          #recommendations_sent_success,
+          [name],
+        ),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.method(
+            #recommendations_sent_success,
+            [name],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String landingpage_pagebuilder_layout_menu_width_warning(
+          String? totalWidth) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #landingpage_pagebuilder_layout_menu_width_warning,
+          [totalWidth],
+        ),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.method(
+            #landingpage_pagebuilder_layout_menu_width_warning,
+            [totalWidth],
           ),
         ),
       ) as String);
@@ -10173,6 +11302,24 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
+  void closeConfigMenu() => super.noSuchMethod(
+        Invocation.method(
+          #closeConfigMenu,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void toggleConfigMenu() => super.noSuchMethod(
+        Invocation.method(
+          #toggleConfigMenu,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void emit(_i56.PagebuilderConfigMenuState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
@@ -10714,10 +11861,10 @@ class MockFirebaseAuth extends _i1.Mock implements _i3.FirebaseAuth {
       ) as _i8.FirebaseApp);
 
   @override
-  set app(_i8.FirebaseApp? _app) => super.noSuchMethod(
+  set app(_i8.FirebaseApp? value) => super.noSuchMethod(
         Invocation.setter(
           #app,
-          _app,
+          value,
         ),
         returnValueForMissingStub: null,
       );
@@ -11297,19 +12444,19 @@ class MockFirebaseFirestore extends _i1.Mock implements _i10.FirebaseFirestore {
       ) as _i9.Settings);
 
   @override
-  set app(_i8.FirebaseApp? _app) => super.noSuchMethod(
+  set app(_i8.FirebaseApp? value) => super.noSuchMethod(
         Invocation.setter(
           #app,
-          _app,
+          value,
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  set databaseId(String? _databaseId) => super.noSuchMethod(
+  set databaseId(String? value) => super.noSuchMethod(
         Invocation.setter(
           #databaseId,
-          _databaseId,
+          value,
         ),
         returnValueForMissingStub: null,
       );
@@ -11652,19 +12799,19 @@ class MockFirebaseStorage extends _i1.Mock implements _i12.FirebaseStorage {
       ) as Duration);
 
   @override
-  set app(_i8.FirebaseApp? _app) => super.noSuchMethod(
+  set app(_i8.FirebaseApp? value) => super.noSuchMethod(
         Invocation.setter(
           #app,
-          _app,
+          value,
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  set bucket(String? _bucket) => super.noSuchMethod(
+  set bucket(String? value) => super.noSuchMethod(
         Invocation.setter(
           #bucket,
-          _bucket,
+          value,
         ),
         returnValueForMissingStub: null,
       );
@@ -11761,15 +12908,6 @@ class MockFirebaseFunctions extends _i1.Mock implements _i14.FirebaseFunctions {
   }
 
   @override
-  _i8.FirebaseApp get app => (super.noSuchMethod(
-        Invocation.getter(#app),
-        returnValue: _FakeFirebaseApp_13(
-          this,
-          Invocation.getter(#app),
-        ),
-      ) as _i8.FirebaseApp);
-
-  @override
   _i13.FirebaseFunctionsPlatform get delegate => (super.noSuchMethod(
         Invocation.getter(#delegate),
         returnValue: _FakeFirebaseFunctionsPlatform_26(
@@ -11777,6 +12915,15 @@ class MockFirebaseFunctions extends _i1.Mock implements _i14.FirebaseFunctions {
           Invocation.getter(#delegate),
         ),
       ) as _i13.FirebaseFunctionsPlatform);
+
+  @override
+  _i8.FirebaseApp get app => (super.noSuchMethod(
+        Invocation.getter(#app),
+        returnValue: _FakeFirebaseApp_13(
+          this,
+          Invocation.getter(#app),
+        ),
+      ) as _i8.FirebaseApp);
 
   @override
   Map<dynamic, dynamic> get pluginConstants => (super.noSuchMethod(

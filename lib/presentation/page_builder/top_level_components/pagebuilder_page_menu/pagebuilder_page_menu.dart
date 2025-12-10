@@ -1,12 +1,10 @@
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_drag/pagebuilder_drag_cubit.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget_templates.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/drag_data/widget_library_drag_data.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
-import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_page_menu/pagebuilder_global_styles_menu_config.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_page_menu/pagebuilder_widget_template_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
-class PagebuilderPageMenu extends StatelessWidget {
+class PagebuilderPageMenu extends StatefulWidget {
   final double menuWidth;
 
   const PagebuilderPageMenu({
@@ -15,12 +13,19 @@ class PagebuilderPageMenu extends StatelessWidget {
   });
 
   @override
+  State<PagebuilderPageMenu> createState() => _PagebuilderPageMenuState();
+}
+
+class _PagebuilderPageMenuState extends State<PagebuilderPageMenu> {
+  int selectedTabIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final localization = AppLocalizations.of(context);
 
     return Container(
-      width: menuWidth,
+      width: widget.menuWidth,
       color: themeData.colorScheme.surface,
       child: Column(
         children: [
@@ -34,149 +39,100 @@ class PagebuilderPageMenu extends StatelessWidget {
               ),
             ),
           ),
+          _buildCustomTabBar(themeData),
           Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 1.0,
-                ),
-                itemCount: PagebuilderWidgetTemplates.templates.length,
-                itemBuilder: (context, index) {
-                  final template = PagebuilderWidgetTemplates.templates[index];
-                  return _WidgetTemplateCard(
-                    template: template,
-                    themeData: themeData,
-                  );
-                },
-              ),
-            ),
+            child: selectedTabIndex == 0
+                ? _WidgetsTab(menuWidth: widget.menuWidth)
+                : const PagebuilderGlobalStylesMenuConfig(menuWidth: 300),
           ),
         ],
       ),
     );
   }
+
+  Widget _buildCustomTabBar(ThemeData themeData) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.grey.shade300,
+            width: 1,
+          ),
+        ),
+      ),
+      child: Row(
+        children: [
+          _buildTab("Widgets", 0, themeData),
+          _buildTab("Globale Styles", 1, themeData),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTab(String label, int index, ThemeData themeData) {
+    final isSelected = selectedTabIndex == index;
+    return Expanded(
+        child: MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => setState(() => selectedTabIndex = index),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: isSelected
+                    ? themeData.colorScheme.secondary
+                    : Colors.transparent,
+                width: 2,
+              ),
+            ),
+          ),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: isSelected
+                  ? themeData.colorScheme.secondary
+                  : Colors.grey.shade600,
+              fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+              fontSize: 14,
+            ),
+          ),
+        ),
+      ),
+    ));
+  }
 }
 
-class _WidgetTemplateCard extends StatelessWidget {
-  final PagebuilderWidgetTemplate template;
-  final ThemeData themeData;
+class _WidgetsTab extends StatelessWidget {
+  final double menuWidth;
 
-  const _WidgetTemplateCard({
-    required this.template,
-    required this.themeData,
-  });
+  const _WidgetsTab({required this.menuWidth});
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
-    final localizedName = template.getName(localization);
+    final themeData = Theme.of(context);
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.grab,
-      child: Draggable<WidgetLibraryDragData>(
-      data: WidgetLibraryDragData(template.widgetType),
-      onDragStarted: () {
-        Modular.get<PagebuilderDragCubit>().setDragging(true);
-      },
-      onDragEnd: (_) {
-        Modular.get<PagebuilderDragCubit>().setDragging(false);
-      },
-      onDraggableCanceled: (_, __) {
-        Modular.get<PagebuilderDragCubit>().setDragging(false);
-      },
-      feedback: Material(
-        elevation: 8,
-        borderRadius: BorderRadius.circular(16),
-        color: Colors.transparent,
-        child: Container(
-          width: 70,
-          height: 70,
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: themeData.colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.grey.withValues(alpha: 0.3)),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                template.icon,
-                size: 20,
-                color: themeData.colorScheme.secondary,
-              ),
-              const SizedBox(height: 4),
-              Flexible(
-                child: Text(
-                  localizedName,
-                  style: themeData.textTheme.bodySmall?.copyWith(fontSize: 8),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 1.0,
         ),
-      ),
-      childWhenDragging: Opacity(
-        opacity: 0.3,
-        child: CardContainer(
-          maxWidth: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                template.icon,
-                size: 28,
-                color: themeData.colorScheme.secondary,
-              ),
-              const SizedBox(height: 6),
-              Flexible(
-                child: Text(
-                  localizedName,
-                  style: themeData.textTheme.bodySmall?.copyWith(fontSize: 11),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      child: CardContainer(
-        maxWidth: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              template.icon,
-              size: 28,
-              color: themeData.colorScheme.secondary,
-            ),
-            const SizedBox(height: 6),
-            Flexible(
-              child: Text(
-                localizedName,
-                style: themeData.textTheme.bodySmall?.copyWith(fontSize: 11),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
-      ),
+        itemCount: PagebuilderWidgetTemplates.templates.length,
+        itemBuilder: (context, index) {
+          final template = PagebuilderWidgetTemplates.templates[index];
+          return PagebuilderWidgetTemplateCard(
+            template: template,
+            themeData: themeData,
+          );
+        },
       ),
     );
   }

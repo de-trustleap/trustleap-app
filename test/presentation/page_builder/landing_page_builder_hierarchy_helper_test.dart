@@ -78,6 +78,7 @@ void main() {
         id: UniqueID.fromUniqueString('page-1'),
         sections: [testSection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
 
@@ -161,6 +162,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-2'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final helperWithNested = LandingPageBuilderHierarchyHelper(
@@ -228,6 +230,7 @@ void main() {
           id: UniqueID.fromUniqueString('page-3'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final helperWithContainer = LandingPageBuilderHierarchyHelper(
@@ -344,6 +347,7 @@ void main() {
           id: UniqueID.fromUniqueString('test-page'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final nestedHelper = LandingPageBuilderHierarchyHelper(
@@ -411,6 +415,7 @@ void main() {
           id: UniqueID.fromUniqueString('container-page'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final containerHelper = LandingPageBuilderHierarchyHelper(
@@ -504,6 +509,7 @@ void main() {
           id: UniqueID.fromUniqueString('deep-page'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final deepHelper = LandingPageBuilderHierarchyHelper(
@@ -552,6 +558,7 @@ void main() {
           id: UniqueID.fromUniqueString('multi-page'),
           sections: [section1, section2],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final multiHelper = LandingPageBuilderHierarchyHelper(
@@ -620,6 +627,7 @@ void main() {
           id: UniqueID.fromUniqueString('test-page'),
           sections: [section],
           backgroundColor: null,
+          globalStyles: null,
         );
 
         final testHelper = LandingPageBuilderHierarchyHelper(

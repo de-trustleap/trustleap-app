@@ -16,6 +16,7 @@ import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/tutorial_repository.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';

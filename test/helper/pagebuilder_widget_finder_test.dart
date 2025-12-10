@@ -158,6 +158,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         backgroundColor: null,
         sections: [mockSection],
+        globalStyles: null,
       );
     });
 

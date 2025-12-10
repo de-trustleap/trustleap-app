@@ -5,6 +5,7 @@ import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_local_history.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
@@ -43,6 +44,9 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
         transformer: (events, mapper) =>
             events.debounceTime(updateDebounceTime).switchMap(mapper));
     on<UpdateSectionEvent>(onUpdateSection,
+        transformer: (events, mapper) =>
+            events.debounceTime(updateDebounceTime).switchMap(mapper));
+    on<UpdatePageEvent>(onUpdatePage,
         transformer: (events, mapper) =>
             events.debounceTime(updateDebounceTime).switchMap(mapper));
     on<ReorderSectionsEvent>(onReorderSections);

@@ -27,7 +27,8 @@ void main() {
     final testPage = PageBuilderPage(
         id: UniqueID.fromUniqueString("2"),
         sections: null,
-        backgroundColor: null);
+        backgroundColor: null,
+        globalStyles: null);
     final testID = "1";
     test("should return content when call was successful", () async {
       // Given
@@ -100,7 +101,8 @@ void main() {
               ],
               visibleOn: null)
         ],
-        backgroundColor: null);
+        backgroundColor: null,
+        globalStyles: null);
     test(
         "should return unit when content has been saved and call was successful",
         () async {

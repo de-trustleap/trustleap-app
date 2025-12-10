@@ -21,6 +21,7 @@ void main() {
         id: UniqueID.fromUniqueString("page1"),
         sections: const [],
         backgroundColor: null,
+        globalStyles: null,
       ),
       user: null,
     );
@@ -31,6 +32,7 @@ void main() {
         id: UniqueID.fromUniqueString("page2"),
         sections: const [],
         backgroundColor: null,
+        globalStyles: null,
       ),
       user: null,
     );
@@ -41,6 +43,7 @@ void main() {
         id: UniqueID.fromUniqueString("page3"),
         sections: const [],
         backgroundColor: null,
+        globalStyles: null,
       ),
       user: null,
     );
@@ -214,6 +217,7 @@ void main() {
             id: UniqueID.fromUniqueString("page$i"),
             sections: const [],
             backgroundColor: null,
+            globalStyles: null,
           ),
           user: null,
         ));

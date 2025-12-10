@@ -1,9 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
+import 'package:finanzbegleiter/domain/helpers/pagebuilder_global_styles_resolver.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_gradient_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderPaintModel extends Equatable {
   final String? color;
@@ -40,11 +44,20 @@ class PagebuilderPaintModel extends Equatable {
     );
   }
 
-  PagebuilderPaint toDomain() {
+  PagebuilderPaint toDomain([PageBuilderGlobalStyles? globalStyles]) {
     if (color != null) {
-      return PagebuilderPaint.color(
-        Color(ColorUtility.getHexIntFromString(color!))
-      );
+      // Check if color is a token (starts with @)
+      Color resolvedColor;
+      if (color!.startsWith('@')) {
+        // If globalStyles not provided, try to get from BLoC
+        final styles = globalStyles ?? _getGlobalStylesFromBloc();
+        final resolver = PagebuilderGlobalStylesResolver(styles);
+        resolvedColor = resolver.resolveColorTokenToColor(color!) ?? Colors.transparent;
+      } else {
+        resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
+      }
+
+      return PagebuilderPaint.color(resolvedColor);
     } else if (gradient != null) {
       return PagebuilderPaint.gradient(
         PagebuilderGradientModel.fromMap(gradient!).toDomain()
@@ -53,6 +66,17 @@ class PagebuilderPaintModel extends Equatable {
 
     // Fallback to transparent color if neither is set
     return const PagebuilderPaint.color(Colors.transparent);
+  }
+
+  PageBuilderGlobalStyles? _getGlobalStylesFromBloc() {
+    try {
+      final blocState = Modular.get<PagebuilderBloc>().state;
+      return blocState is GetLandingPageAndUserSuccessState
+          ? blocState.content.content?.globalStyles
+          : null;
+    } catch (e) {
+      return null;
+    }
   }
 
   factory PagebuilderPaintModel.fromDomain(PagebuilderPaint paint) {

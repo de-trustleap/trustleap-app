@@ -1,9 +1,12 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant_extensions.dart';
+import 'package:finanzbegleiter/domain/helpers/pagebuilder_global_styles_resolver.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderHtmlRenderer extends StatelessWidget {
   final PageBuilderTextProperties? textProperties;
@@ -28,7 +31,17 @@ class PagebuilderHtmlRenderer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final htmlContent = _preprocessHtmlTextDecoration(textProperties?.text ?? "");
+    // Get global styles from BLoC
+    final blocState = Modular.get<PagebuilderBloc>().state;
+    final globalStyles = blocState is GetLandingPageAndUserSuccessState
+        ? blocState.content.content?.globalStyles
+        : null;
+
+    // Create resolver and resolve all tokens in HTML
+    final resolver = PagebuilderGlobalStylesResolver(globalStyles);
+    String htmlContent = _preprocessHtmlTextDecoration(textProperties?.text ?? "");
+    htmlContent = resolver.resolveHtmlTokens(htmlContent);
+
     final baseStyle = TextStyleParser().getTextStyleFromProperties(textProperties);
     final textAlignValue = textProperties?.alignment?.getValue();
 
