@@ -2,6 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_gradient.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -249,6 +251,70 @@ void main() {
       // Then
       expect(result, expectedResult);
     });
+
+    test("check if token color is resolved with globalStyles", () {
+      // Given
+      const model = PagebuilderPaintModel(color: "@primary");
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      final expectedResult = PagebuilderPaint.color(
+        Color(0xFFFF5722),
+        globalColorToken: "@primary",
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, expectedResult.color);
+      expect(result.globalColorToken, "@primary");
+    });
+
+    test("check if token is preserved and color is resolved correctly", () {
+      // Given
+      const model = PagebuilderPaintModel(color: "@secondary");
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: Color(0xFF4CAF50),
+          tertiary: Color(0xFF2196F3),
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFF4CAF50));
+      expect(result.globalColorToken, "@secondary");
+    });
+
+    test("check if hex color does not create token", () {
+      // Given
+      const model = PagebuilderPaintModel(color: "FFFF5722");
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFFFF5722));
+      expect(result.globalColorToken, null); // Should NOT have a token
+    });
   });
 
   group("PagebuilderPaintModel_FromDomain", () {
@@ -384,6 +450,32 @@ void main() {
       final result = PagebuilderPaintModel.fromDomain(domainPaint);
       // Then
       expect(result, expectedResult);
+    });
+
+    test("check if conversion from paint with token preserves token", () {
+      // Given
+      const domainPaint = PagebuilderPaint.color(
+        Color(0xFFFF5722),
+        globalColorToken: "@primary",
+      );
+      const expectedResult = PagebuilderPaintModel(color: "@primary");
+      // When
+      final result = PagebuilderPaintModel.fromDomain(domainPaint);
+      // Then
+      expect(result.color, "@primary");
+    });
+
+    test("check if conversion from paint without token uses hex", () {
+      // Given
+      const domainPaint = PagebuilderPaint.color(
+        Color(0xFFFF5722),
+        globalColorToken: null,
+      );
+      const expectedResult = PagebuilderPaintModel(color: "FFFF5722");
+      // When
+      final result = PagebuilderPaintModel.fromDomain(domainPaint);
+      // Then
+      expect(result.color, "FFFF5722");
     });
   });
 

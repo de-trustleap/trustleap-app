@@ -32,8 +32,6 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
       }
 
       final data = document.data()!;
-
-      // Parse the model - tokens stay in models, will be resolved in toDomain()
       var model = PageBuilderPageModel.fromFirestore(data, id).toDomain();
       return right(model);
     } on FirebaseException catch (e) {
@@ -50,7 +48,6 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
     final pageModel = PageBuilderPageModel.fromDomain(page);
     var pageMap = pageModel.toMap();
 
-    // Apply reverse token resolution - convert hex colors back to tokens
     if (page.globalStyles != null) {
       final reverseResolver =
           PagebuilderGlobalStylesReverseResolver(page.globalStyles!);

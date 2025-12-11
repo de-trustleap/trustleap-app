@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_shadow.dart';
 import 'package:flutter/material.dart';
 
@@ -53,11 +54,27 @@ class PageBuilderShadowModel extends Equatable {
     );
   }
 
-  PageBuilderShadow toDomain() {
+  PageBuilderShadow toDomain(PageBuilderGlobalStyles? globalStyles) {
+    Color? resolvedColor;
+    String? globalColorToken;
+
+    if (color != null) {
+      // Check if color is a token (starts with @)
+      if (color!.startsWith('@')) {
+        // Store the token AND resolve it
+        globalColorToken = color;
+        final tokenColor = globalStyles?.resolveColorReference(color!);
+        resolvedColor = tokenColor ?? Colors.transparent;
+      } else {
+        // Direct hex color - no token
+        resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
+        globalColorToken = null;
+      }
+    }
+
     return PageBuilderShadow(
-        color: color != null
-            ? Color(ColorUtility.getHexIntFromString(color!))
-            : null,
+        color: resolvedColor,
+        globalColorToken: globalColorToken,
         spreadRadius: spreadRadius,
         blurRadius: blurRadius,
         offset: _mapToOffset(offset));
@@ -65,9 +82,9 @@ class PageBuilderShadowModel extends Equatable {
 
   factory PageBuilderShadowModel.fromDomain(PageBuilderShadow shadow) {
     return PageBuilderShadowModel(
-        color: shadow.color != null
+        color: shadow.globalColorToken ?? (shadow.color != null
             ? ColorUtility.colorToHex(shadow.color!)
-            : null,
+            : null),
         spreadRadius: shadow.spreadRadius,
         blurRadius: shadow.blurRadius,
         offset: _offsetToMap(shadow.offset));

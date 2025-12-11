@@ -8,6 +8,8 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dar
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_spacing.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import '../mocks.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -3524,6 +3526,213 @@ void main() {
       ));
 
       pageBuilderBloc.add(DuplicateWidgetEvent("child1"));
+    });
+  });
+
+  group("PagebuilderBloc_UpdateGlobalStyles", () {
+    test(
+        "should emit GetLandingPageAndUserSuccessState with updated globalStyles and isUpdated true",
+        () async {
+      // Given
+      const initialGlobalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF0000),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+
+      const updatedGlobalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFF00FF00),
+          secondary: Color(0xFF0000FF),
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+
+      final testPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("1"),
+        sections: [],
+        backgroundColor: null,
+        globalStyles: initialGlobalStyles,
+      );
+
+      final testLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("1"),
+        contentID: UniqueID.fromUniqueString("1"),
+      );
+
+      final testUser = CustomUser(id: UniqueID.fromUniqueString("1"));
+
+      final testContent = PagebuilderContent(
+        landingPage: testLandingPage,
+        content: testPage,
+        user: testUser,
+      );
+
+      final initialState = GetLandingPageAndUserSuccessState(
+        content: testContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      );
+
+      pageBuilderBloc.emit(initialState);
+
+      // Then
+      expectLater(
+        pageBuilderBloc.stream,
+        emits(predicate<GetLandingPageAndUserSuccessState>((state) {
+          return state.isUpdated == true &&
+                 state.content.content?.globalStyles?.colors?.primary == Color(0xFF00FF00) &&
+                 state.content.content?.globalStyles?.colors?.secondary == Color(0xFF0000FF);
+        })),
+      );
+
+      // When
+      pageBuilderBloc.add(UpdateGlobalStylesEvent(updatedGlobalStyles));
+    });
+
+    test(
+        "should not emit any state when currentPage is null",
+        () async {
+      // Given
+      const updatedGlobalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFF00FF00),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+
+      final testLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("1"),
+        contentID: UniqueID.fromUniqueString("1"),
+      );
+
+      final testUser = CustomUser(id: UniqueID.fromUniqueString("1"));
+
+      final testContent = PagebuilderContent(
+        landingPage: testLandingPage,
+        content: null,
+        user: testUser,
+      );
+
+      final initialState = GetLandingPageAndUserSuccessState(
+        content: testContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      );
+
+      pageBuilderBloc.emit(initialState);
+
+      // When
+      pageBuilderBloc.add(UpdateGlobalStylesEvent(updatedGlobalStyles));
+      await Future.delayed(Duration(milliseconds: 100));
+
+      // Then
+      expect(pageBuilderBloc.state, initialState);
+    });
+
+    test(
+        "should update globalStyles and preserve page structure",
+        () async {
+      // Given
+      const initialGlobalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF0000),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+
+      const updatedGlobalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFF00FF00),
+          secondary: Color(0xFF0000FF),
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+
+      final testSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1"),
+        name: "Test Section",
+        layout: null,
+        background: null,
+        widgets: [],
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        fullHeight: null,
+        visibleOn: null,
+      );
+
+      final testPage = PageBuilderPage(
+        id: UniqueID.fromUniqueString("1"),
+        sections: [testSection],
+        backgroundColor: null,
+        globalStyles: initialGlobalStyles,
+      );
+
+      final testLandingPage = LandingPage(
+        id: UniqueID.fromUniqueString("1"),
+        contentID: UniqueID.fromUniqueString("1"),
+      );
+
+      final testUser = CustomUser(id: UniqueID.fromUniqueString("1"));
+
+      final testContent = PagebuilderContent(
+        landingPage: testLandingPage,
+        content: testPage,
+        user: testUser,
+      );
+
+      final initialState = GetLandingPageAndUserSuccessState(
+        content: testContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      );
+
+      pageBuilderBloc.emit(initialState);
+
+      // Then
+      expectLater(
+        pageBuilderBloc.stream,
+        emits(predicate<GetLandingPageAndUserSuccessState>((state) {
+          // Check that globalStyles were updated
+          final stylesUpdated = state.content.content?.globalStyles?.colors?.primary == Color(0xFF00FF00) &&
+                 state.content.content?.globalStyles?.colors?.secondary == Color(0xFF0000FF);
+
+          // Check that page structure was preserved
+          final structurePreserved = state.content.content?.sections?.length == 1 &&
+                 state.content.content?.sections?[0].id.value == "section1";
+
+          return state.isUpdated == true && stylesUpdated && structurePreserved;
+        })),
+      );
+
+      // When
+      pageBuilderBloc.add(UpdateGlobalStylesEvent(updatedGlobalStyles));
     });
   });
 }

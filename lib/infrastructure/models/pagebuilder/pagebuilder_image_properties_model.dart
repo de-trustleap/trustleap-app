@@ -116,7 +116,7 @@ class PageBuilderImagePropertiesModel extends Equatable
             ? PagebuilderPaintModel.fromMap(overlayPaint!).toDomain(globalStyles)
             : null,
         shadow: shadow != null
-            ? PageBuilderShadowModel.fromMap(shadow!).toDomain()
+            ? PageBuilderShadowModel.fromMap(shadow!).toDomain(globalStyles)
             : null,
         showPromoterImage: showPromoterImage);
   }

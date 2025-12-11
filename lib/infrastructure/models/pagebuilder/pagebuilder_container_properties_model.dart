@@ -70,7 +70,7 @@ class PageBuilderContainerPropertiesModel extends Equatable
             ? PagebuilderBorderModel.fromMap(border!).toDomain(globalStyles)
             : null,
         shadow: shadow != null
-            ? PageBuilderShadowModel.fromMap(shadow!).toDomain()
+            ? PageBuilderShadowModel.fromMap(shadow!).toDomain(globalStyles)
             : null,
         width: width?.toDomain(),
         height: height?.toDomain());

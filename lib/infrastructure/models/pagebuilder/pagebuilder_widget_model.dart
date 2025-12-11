@@ -2,13 +2,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_height_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
@@ -18,7 +18,6 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_video_pl
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
-import 'package:flutter/material.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_anchor_button_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_background_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_calendly_properties_model.dart';
@@ -34,6 +33,7 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_ro
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_spacing_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_video_player_properties_model.dart';
+import 'package:flutter/material.dart';
 
 class PageBuilderWidgetModel extends Equatable {
   final String id;
@@ -124,10 +124,7 @@ class PageBuilderWidgetModel extends Equatable {
         padding: map['padding'] != null ? map['padding'] as Map<String, dynamic> : null,
         margin: map['margin'] != null ? map['margin'] as Map<String, dynamic> : null,
         maxWidth: map['maxWidth'] != null ? map['maxWidth'] as double : null,
-        alignment: map['alignment'] != null
-            ? PagebuilderResponsiveOrConstantModel.fromMapValue(
-                map['alignment'], (v) => v as String)
-            : null,
+        alignment: map['alignment'] != null ? PagebuilderResponsiveOrConstantModel.fromMapValue(map['alignment'], (v) => v as String) : null,
         customCSS: map['customCSS'] != null ? map['customCSS'] as String : null);
   }
 
@@ -171,15 +168,19 @@ class PageBuilderWidgetModel extends Equatable {
             : PageBuilderWidgetType.values
                 .firstWhere((element) => element.name == elementType),
         properties: getPropertiesByType(elementType, properties, globalStyles),
-        hoverProperties: getPropertiesByType(elementType, hoverProperties, globalStyles),
-        children: children?.map((child) => child.toDomain(globalStyles)).toList(),
+        hoverProperties:
+            getPropertiesByType(elementType, hoverProperties, globalStyles),
+        children:
+            children?.map((child) => child.toDomain(globalStyles)).toList(),
         containerChild: containerChild?.toDomain(globalStyles),
         widthPercentage: widthPercentage?.toDomain(),
         background: background != null
-            ? PagebuilderBackgroundModel.fromMap(background!).toDomain(globalStyles)
+            ? PagebuilderBackgroundModel.fromMap(background!)
+                .toDomain(globalStyles)
             : null,
         hoverBackground: hoverBackground != null
-            ? PagebuilderBackgroundModel.fromMap(hoverBackground!).toDomain(globalStyles)
+            ? PagebuilderBackgroundModel.fromMap(hoverBackground!)
+                .toDomain(globalStyles)
             : null,
         padding: PageBuilderSpacingModel.fromMap(padding).toDomain(),
         margin: PageBuilderSpacingModel.fromMap(margin).toDomain(),
@@ -218,8 +219,8 @@ class PageBuilderWidgetModel extends Equatable {
         customCSS: widget.customCSS);
   }
 
-  PageBuilderProperties? getPropertiesByType(
-      String? type, Map<String, dynamic>? properties, PageBuilderGlobalStyles? globalStyles) {
+  PageBuilderProperties? getPropertiesByType(String? type,
+      Map<String, dynamic>? properties, PageBuilderGlobalStyles? globalStyles) {
     if (properties == null) {
       return null;
     }
@@ -229,11 +230,14 @@ class PageBuilderWidgetModel extends Equatable {
             .firstWhere((element) => element.name == type);
     switch (widgetType) {
       case PageBuilderWidgetType.text:
-        return PageBuilderTextPropertiesModel.fromMap(properties).toDomain(globalStyles);
+        return PageBuilderTextPropertiesModel.fromMap(properties)
+            .toDomain(globalStyles);
       case PageBuilderWidgetType.image:
-        return PageBuilderImagePropertiesModel.fromMap(properties).toDomain(globalStyles);
+        return PageBuilderImagePropertiesModel.fromMap(properties)
+            .toDomain(globalStyles);
       case PageBuilderWidgetType.icon:
-        return PageBuilderIconPropertiesModel.fromMap(properties).toDomain(globalStyles);
+        return PageBuilderIconPropertiesModel.fromMap(properties)
+            .toDomain(globalStyles);
       case PageBuilderWidgetType.container:
         return PageBuilderContainerPropertiesModel.fromMap(properties)
             .toDomain(globalStyles);
@@ -245,7 +249,8 @@ class PageBuilderWidgetModel extends Equatable {
         return PageBuilderContactFormPropertiesModel.fromMap(properties)
             .toDomain(globalStyles);
       case PageBuilderWidgetType.footer:
-        return PagebuilderFooterPropertiesModel.fromMap(properties).toDomain(globalStyles);
+        return PagebuilderFooterPropertiesModel.fromMap(properties)
+            .toDomain(globalStyles);
       case PageBuilderWidgetType.videoPlayer:
         return PagebuilderVideoPlayerPropertiesModel.fromMap(properties)
             .toDomain();
@@ -254,7 +259,7 @@ class PageBuilderWidgetModel extends Equatable {
             .toDomain(globalStyles);
       case PageBuilderWidgetType.calendly:
         return PagebuilderCalendlyPropertiesModel.fromMap(properties)
-            .toDomain();
+            .toDomain(globalStyles);
       case PageBuilderWidgetType.height:
         return PageBuilderHeightPropertiesModel.fromMap(properties).toDomain();
       default:
@@ -320,8 +325,9 @@ class PageBuilderWidgetModel extends Equatable {
     return null;
   }
 
-  static PagebuilderResponsiveOrConstantModel<String>? _convertAlignmentFromDomain(
-      PagebuilderResponsiveOrConstant<Alignment>? alignment) {
+  static PagebuilderResponsiveOrConstantModel<String>?
+      _convertAlignmentFromDomain(
+          PagebuilderResponsiveOrConstant<Alignment>? alignment) {
     if (alignment == null) return null;
 
     if (alignment.constantValue != null) {

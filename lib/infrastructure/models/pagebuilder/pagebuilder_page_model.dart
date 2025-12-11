@@ -67,19 +67,16 @@ class PageBuilderPageModel extends Equatable {
   PageBuilderPage toDomain() {
     // Get global styles first
     final globalStylesDomain = getGlobalStylesFromMap(globalStyles);
-    print('📄 [PageBuilderPageModel.toDomain] globalStyles primary: ${globalStylesDomain?.colors?.primary}');
 
     // Resolve backgroundColor token if needed
     Color? resolvedBackgroundColor;
     String? bgColorToken;
     if (backgroundColor != null) {
-      print('📄 [PageBuilderPageModel.toDomain] backgroundColor: $backgroundColor');
       if (backgroundColor!.startsWith('@')) {
         // Store token and resolve it
         bgColorToken = backgroundColor;
         final resolvedColor = globalStylesDomain?.resolveColorReference(backgroundColor!);
         resolvedBackgroundColor = resolvedColor;
-        print('📄 [PageBuilderPageModel.toDomain] Resolved backgroundColor token to: $resolvedBackgroundColor (token: $bgColorToken)');
       } else {
         resolvedBackgroundColor = Color(ColorUtility.getHexIntFromString(backgroundColor!));
         bgColorToken = null;
@@ -87,7 +84,6 @@ class PageBuilderPageModel extends Equatable {
     }
 
     final domainSections = getPageBuilderSectionList(sections, globalStylesDomain);
-    print('📄 [PageBuilderPageModel.toDomain] Converting ${sections?.length} sections to domain');
 
     return PageBuilderPage(
       id: UniqueID.fromUniqueString(id),
@@ -102,7 +98,6 @@ class PageBuilderPageModel extends Equatable {
     // Use token if present, otherwise convert color to hex
     final bgColorValue = page.globalBackgroundColorToken ??
         (page.backgroundColor != null ? ColorUtility.colorToHex(page.backgroundColor!) : null);
-    print('📝 [PageBuilderPageModel.fromDomain] backgroundColor: ${page.globalBackgroundColorToken != null ? "token=$bgColorValue" : "hex=$bgColorValue"}');
 
     return PageBuilderPageModel(
       id: page.id.value,

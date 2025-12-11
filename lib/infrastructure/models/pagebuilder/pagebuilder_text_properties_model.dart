@@ -68,9 +68,10 @@ class PageBuilderTextPropertiesModel extends Equatable
       ),
       color: map['color'] != null ? map['color'] as String : null,
       alignment: PagebuilderResponsiveOrConstantModel.fromMapValue(
-        map['alignment'],
-        (v) => v as String,
-      ) ?? const PagebuilderResponsiveOrConstantModel.constant("left"),
+            map['alignment'],
+            (v) => v as String,
+          ) ??
+          const PagebuilderResponsiveOrConstantModel.constant("left"),
       textShadow: map['textShadow'] != null
           ? map['textShadow'] as Map<String, dynamic>
           : null,
@@ -125,7 +126,7 @@ class PageBuilderTextPropertiesModel extends Equatable
       globalColorToken: token,
       alignment: _alignmentToDomain(alignment),
       textShadow: textShadow != null
-          ? PageBuilderShadowModel.fromMap(textShadow!).toDomain()
+          ? PageBuilderShadowModel.fromMap(textShadow!).toDomain(globalStyles)
           : null,
     );
   }
@@ -160,12 +161,14 @@ class PageBuilderTextPropertiesModel extends Equatable
       PageBuilderTextProperties properties) {
     // Use token if present, otherwise convert color to hex
     final colorValue = properties.globalColorToken ??
-        (properties.color != null ? ColorUtility.colorToHex(properties.color!) : null);
+        (properties.color != null
+            ? ColorUtility.colorToHex(properties.color!)
+            : null);
 
     return PageBuilderTextPropertiesModel(
       text: properties.text,
-      fontSize: PagebuilderResponsiveOrConstantModel.fromDomain(
-          properties.fontSize),
+      fontSize:
+          PagebuilderResponsiveOrConstantModel.fromDomain(properties.fontSize),
       fontFamily: properties.fontFamily,
       lineHeight: PagebuilderResponsiveOrConstantModel.fromDomain(
           properties.lineHeight),

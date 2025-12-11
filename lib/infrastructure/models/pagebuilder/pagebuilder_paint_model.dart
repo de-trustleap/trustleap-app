@@ -48,15 +48,12 @@ class PagebuilderPaintModel extends Equatable {
 
       // Check if color is a token (starts with @)
       if (color!.startsWith('@')) {
-        print('🎨 [PagebuilderPaintModel.toDomain] Resolving token: $color with primary: ${globalStyles?.colors?.primary}');
         // Store the token AND resolve it
         token = color;
         final tokenColor = globalStyles?.resolveColorReference(color!);
         resolvedColor = tokenColor ?? Colors.transparent;
-        print('🎨 [PagebuilderPaintModel.toDomain] Resolved to: $resolvedColor (token preserved: $token)');
       } else {
         // Direct hex color - no token
-        print('🎨 [PagebuilderPaintModel.toDomain] Using direct hex: $color');
         resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
         token = null;
       }
@@ -76,7 +73,6 @@ class PagebuilderPaintModel extends Equatable {
     if (paint.isColor) {
       // If there's a token, use it; otherwise convert color to hex
       final colorValue = paint.globalColorToken ?? ColorUtility.colorToHex(paint.color!);
-      print('🎨 [PagebuilderPaintModel.fromDomain] Color: ${paint.globalColorToken != null ? "token=$colorValue" : "hex=$colorValue"}');
       return PagebuilderPaintModel(
         color: colorValue,
         gradient: null,

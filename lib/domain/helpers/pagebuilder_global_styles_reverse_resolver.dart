@@ -81,32 +81,26 @@ class PagebuilderGlobalStylesReverseResolver {
     // Check each global color (convert Color to 8-digit hex for comparison)
     if (colors.primary != null &&
         ColorUtility.colorToHex(colors.primary!).toUpperCase() == normalizedHex) {
-      print('🔄 [ReverseResolver] $fieldName: $hexColor -> @primary');
       return '@primary';
     }
     if (colors.secondary != null &&
         ColorUtility.colorToHex(colors.secondary!).toUpperCase() == normalizedHex) {
-      print('🔄 [ReverseResolver] $fieldName: $hexColor -> @secondary');
       return '@secondary';
     }
     if (colors.tertiary != null &&
         ColorUtility.colorToHex(colors.tertiary!).toUpperCase() == normalizedHex) {
-      print('🔄 [ReverseResolver] $fieldName: $hexColor -> @tertiary');
       return '@tertiary';
     }
     if (colors.background != null &&
         ColorUtility.colorToHex(colors.background!).toUpperCase() == normalizedHex) {
-      print('🔄 [ReverseResolver] $fieldName: $hexColor -> @background');
       return '@background';
     }
     if (colors.surface != null &&
         ColorUtility.colorToHex(colors.surface!).toUpperCase() == normalizedHex) {
-      print('🔄 [ReverseResolver] $fieldName: $hexColor -> @surface');
       return '@surface';
     }
 
     // No match found - return original hex
-    print('🔄 [ReverseResolver] $fieldName: $hexColor -> (no match, keeping hex)');
     return hexColor;
   }
 }

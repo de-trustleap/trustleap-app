@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 
 class PageBuilderShadow extends Equatable {
   final Color? color;
+  final String? globalColorToken;
   final double? spreadRadius;
   final double? blurRadius;
   final Offset? offset;
 
   const PageBuilderShadow({
     required this.color,
+    this.globalColorToken,
     required this.spreadRadius,
     required this.blurRadius,
     required this.offset,
@@ -17,12 +19,15 @@ class PageBuilderShadow extends Equatable {
 
   PageBuilderShadow copyWith({
     Color? color,
+    String? globalColorToken,
     double? spreadRadius,
     double? blurRadius,
     Offset? offset,
+    bool setGlobalColorTokenNull = false,
   }) {
     return PageBuilderShadow(
       color: color ?? this.color,
+      globalColorToken: setGlobalColorTokenNull ? null : (globalColorToken ?? this.globalColorToken),
       spreadRadius: spreadRadius ?? this.spreadRadius,
       blurRadius: blurRadius ?? this.blurRadius,
       offset: offset ?? this.offset,
@@ -32,6 +37,7 @@ class PageBuilderShadow extends Equatable {
   PageBuilderShadow deepCopy() {
     return PageBuilderShadow(
       color: color != null ? Color(color!.toARGB32()) : null,
+      globalColorToken: globalColorToken,
       spreadRadius: spreadRadius,
       blurRadius: blurRadius,
       offset: offset != null ? Offset(offset!.dx, offset!.dy) : null,
@@ -39,5 +45,5 @@ class PageBuilderShadow extends Equatable {
   }
 
   @override
-  List<Object?> get props => [color, spreadRadius, blurRadius, offset];
+  List<Object?> get props => [color, globalColorToken, spreadRadius, blurRadius, offset];
 }
