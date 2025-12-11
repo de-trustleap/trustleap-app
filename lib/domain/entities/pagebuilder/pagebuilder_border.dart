@@ -6,22 +6,26 @@ class PagebuilderBorder extends Equatable {
   final double? width;
   final double? radius;
   final Color? color;
+  final String? globalColorToken; // "@primary", "@secondary", etc. or null if not a token
 
   const PagebuilderBorder({
     required this.width,
     required this.radius,
     required this.color,
+    this.globalColorToken,
   });
 
   PagebuilderBorder copyWith({
     double? width,
     double? radius,
     Color? color,
+    String? globalColorToken,
   }) {
     return PagebuilderBorder(
       width: width ?? this.width,
       radius: radius ?? this.radius,
       color: color ?? this.color,
+      globalColorToken: globalColorToken ?? this.globalColorToken,
     );
   }
 
@@ -30,9 +34,10 @@ class PagebuilderBorder extends Equatable {
       width: width,
       radius: radius,
       color: color != null ? Color(color!.toARGB32()) : null,
+      globalColorToken: globalColorToken,
     );
   }
 
   @override
-  List<Object?> get props => [width, radius, color];
+  List<Object?> get props => [width, radius, color, globalColorToken];
 }

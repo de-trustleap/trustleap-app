@@ -131,7 +131,7 @@ void main() {
           fullHeight: null,
           visibleOn: null);
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -368,7 +368,7 @@ void main() {
           widgets: widgets,
           visibleOn: null);
       // When
-      final result = model.getPageBuilderWidgetList(widgets);
+      final result = model.getPageBuilderWidgetList(widgets, null);
       // Then
       expect(result, expectedResult);
     });

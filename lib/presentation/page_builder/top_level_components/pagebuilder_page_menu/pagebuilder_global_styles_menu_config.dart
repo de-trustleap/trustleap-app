@@ -197,12 +197,8 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
           fonts: null,
         );
 
-    final updatedPage = page.copyWith(
-      globalStyles: updatedGlobalStyles,
-    );
-
     Modular.get<PagebuilderBloc>().add(
-          UpdatePageEvent(updatedPage),
+          UpdateGlobalStylesEvent(updatedGlobalStyles),
         );
   }
 
@@ -222,12 +218,8 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
           fonts: fonts,
         );
 
-    final updatedPage = page.copyWith(
-      globalStyles: updatedGlobalStyles,
-    );
-
     Modular.get<PagebuilderBloc>().add(
-          UpdatePageEvent(updatedPage),
+          UpdateGlobalStylesEvent(updatedGlobalStyles),
         );
   }
 }

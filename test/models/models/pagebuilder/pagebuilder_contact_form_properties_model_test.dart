@@ -824,7 +824,7 @@ void main() {
                   color: Colors.white,
                   alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center))));
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });

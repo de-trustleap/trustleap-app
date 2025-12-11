@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/core/firebase_exception_parser.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
+import 'package:finanzbegleiter/domain/helpers/pagebuilder_global_styles_reverse_resolver.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_page_model.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -29,8 +30,11 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
       if (!document.exists && document.data() != null) {
         return left(NotFoundFailure());
       }
-      var model =
-          PageBuilderPageModel.fromFirestore(document.data()!, id).toDomain();
+
+      final data = document.data()!;
+
+      // Parse the model - tokens stay in models, will be resolved in toDomain()
+      var model = PageBuilderPageModel.fromFirestore(data, id).toDomain();
       return right(model);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
@@ -44,7 +48,14 @@ class PageBuilderRepositoryImplementation implements PagebuilderRepository {
     HttpsCallable callable =
         firebaseFunctions.httpsCallable("updatePageContent");
     final pageModel = PageBuilderPageModel.fromDomain(page);
-    final pageMap = pageModel.toMap();
+    var pageMap = pageModel.toMap();
+
+    // Apply reverse token resolution - convert hex colors back to tokens
+    if (page.globalStyles != null) {
+      final reverseResolver =
+          PagebuilderGlobalStylesReverseResolver(page.globalStyles!);
+      pageMap = reverseResolver.applyTokensToMap(pageMap);
+    }
 
     try {
       await callable.call({"appCheckToken": appCheckToken, "page": pageMap});

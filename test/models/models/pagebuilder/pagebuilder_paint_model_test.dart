@@ -173,7 +173,7 @@ void main() {
       const model = PagebuilderPaintModel(color: "FF0000FF");
       const expectedResult = PagebuilderPaint.color(Color(0xFF0000FF));
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -209,7 +209,7 @@ void main() {
       );
       final expectedResult = PagebuilderPaint.gradient(expectedGradient);
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -219,7 +219,7 @@ void main() {
       const model = PagebuilderPaintModel();
       const expectedResult = PagebuilderPaint.color(Colors.transparent);
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -245,7 +245,7 @@ void main() {
       );
       const expectedResult = PagebuilderPaint.color(Color(0xFF00FF00));
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });

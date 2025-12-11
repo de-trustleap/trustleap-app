@@ -9,22 +9,27 @@ class PageBuilderIconProperties extends Equatable
   final String? code;
   final PagebuilderResponsiveOrConstant<double>? size;
   final Color? color;
+  final String? globalColorToken; // "@primary", "@secondary", etc. or null if not a token
 
   const PageBuilderIconProperties({
     required this.code,
     required this.size,
     required this.color,
+    this.globalColorToken,
   });
 
   PageBuilderIconProperties copyWith({
     String? code,
     PagebuilderResponsiveOrConstant<double>? size,
     Color? color,
+    String? globalColorToken,
+    bool setGlobalColorTokenNull = false,
   }) {
     return PageBuilderIconProperties(
       code: code ?? this.code,
       size: size ?? this.size,
       color: color ?? this.color,
+      globalColorToken: setGlobalColorTokenNull ? null : (globalColorToken ?? this.globalColorToken),
     );
   }
 
@@ -33,6 +38,7 @@ class PageBuilderIconProperties extends Equatable
       code: code,
       size: size,
       color: color != null ? Color(color!.toARGB32()) : null,
+      globalColorToken: globalColorToken,
     );
   }
 

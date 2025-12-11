@@ -113,7 +113,7 @@ void main() {
         color: Color(0xFFFF6B00),
       );
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -133,7 +133,7 @@ void main() {
         color: null,
       );
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });

@@ -48,6 +48,15 @@ class UpdatePageEvent extends PagebuilderEvent with EquatableMixin {
   List<Object?> get props => [updatedPage];
 }
 
+class UpdateGlobalStylesEvent extends PagebuilderEvent with EquatableMixin {
+  final PageBuilderGlobalStyles globalStyles;
+
+  UpdateGlobalStylesEvent(this.globalStyles);
+
+  @override
+  List<Object?> get props => [globalStyles];
+}
+
 class ReorderSectionsEvent extends PagebuilderEvent with EquatableMixin {
   final int oldIndex;
   final int newIndex;

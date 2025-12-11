@@ -134,7 +134,7 @@ void main() {
             visibleOn: null)
       ];
       // When
-      final result = model.getPageBuilderSectionList(sections);
+      final result = model.getPageBuilderSectionList(sections, null);
       // Then
       expect(result, expectedResult);
     });

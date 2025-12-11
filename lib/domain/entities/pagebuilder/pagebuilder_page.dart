@@ -9,12 +9,14 @@ class PageBuilderPage extends Equatable {
   final UniqueID id;
   final List<PageBuilderSection>? sections;
   final Color? backgroundColor;
+  final String? globalBackgroundColorToken;
   final PageBuilderGlobalStyles? globalStyles;
 
   const PageBuilderPage({
     required this.id,
     required this.sections,
     required this.backgroundColor,
+    this.globalBackgroundColorToken,
     required this.globalStyles,
   });
 
@@ -22,16 +24,18 @@ class PageBuilderPage extends Equatable {
     UniqueID? id,
     List<PageBuilderSection>? sections,
     Color? backgroundColor,
+    String? globalBackgroundColorToken,
     PageBuilderGlobalStyles? globalStyles,
   }) {
     return PageBuilderPage(
       id: id ?? this.id,
       sections: sections ?? this.sections,
       backgroundColor: backgroundColor ?? this.backgroundColor,
+      globalBackgroundColorToken: globalBackgroundColorToken ?? this.globalBackgroundColorToken,
       globalStyles: globalStyles ?? this.globalStyles,
     );
   }
 
   @override
-  List<Object?> get props => [id, sections, backgroundColor, globalStyles];
+  List<Object?> get props => [id, sections, backgroundColor, globalBackgroundColorToken, globalStyles];
 }

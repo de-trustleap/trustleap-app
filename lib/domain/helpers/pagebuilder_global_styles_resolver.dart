@@ -74,7 +74,7 @@ class PagebuilderGlobalStylesResolver {
   }
 
   /// Resolves all color tokens in an HTML string
-  /// Returns 6-digit hex if alpha is FF (opaque), otherwise 8-digit hex
+  /// Returns 6-digit hex with # if alpha is FF (opaque), otherwise 8-digit hex without #
   String resolveHtmlColorTokens(String html) {
     // Match color tokens in style attributes: color: @primary
     final colorRegex = RegExp(r'color:\s*(@\w+)');
@@ -84,9 +84,9 @@ class PagebuilderGlobalStylesResolver {
 
       if (resolvedColor != null) {
         final hexString = ColorUtility.colorToHex(resolvedColor);
-        // Strip alpha channel if it's FF (fully opaque)
+        // Strip alpha channel if it's FF (fully opaque) and add # prefix
         final resolved = hexString.startsWith('FF') && hexString.length == 8
-            ? hexString.substring(2)
+            ? '#${hexString.substring(2)}'
             : hexString;
         return 'color: $resolved';
       }

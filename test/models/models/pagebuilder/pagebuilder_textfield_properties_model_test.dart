@@ -189,7 +189,7 @@ void main() {
               color: null,
               alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left)));
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });

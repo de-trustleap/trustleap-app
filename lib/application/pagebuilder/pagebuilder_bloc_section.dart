@@ -201,6 +201,53 @@ extension PagebuilderBlocSection on PagebuilderBloc {
     }
   }
 
+  Future<void> onUpdateGlobalStyles(
+      UpdateGlobalStylesEvent event, Emitter<PagebuilderState> emit) async {
+    print('🔄 [onUpdateGlobalStyles] Event fired with new globalStyles: ${event.globalStyles.colors?.primary}');
+
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final currentPage = currentState.content.content;
+
+      if (currentPage == null) return;
+
+      print('🔄 [onUpdateGlobalStyles] Current page has ${currentPage.sections?.length} sections');
+
+      print('🔄 [onUpdateGlobalStyles] Converting to model...');
+      // Convert domain to model - tokens are preserved in domain, so they stay as tokens
+      final pageModel = PageBuilderPageModel.fromDomain(currentPage);
+      var pageMap = pageModel.toMap();
+
+      print('🔄 [onUpdateGlobalStyles] Setting NEW globalStyles in map...');
+      // Update the globalStyles in the map to the NEW values
+      pageMap['globalStyles'] = PageBuilderPageModel.getMapFromGlobalStyles(event.globalStyles);
+
+      print('🔄 [onUpdateGlobalStyles] Converting back to domain with new globalStyles...');
+      // Convert back to domain - tokens will be resolved with NEW globalStyles
+      final modelWithTokens = PageBuilderPageModel.fromMap(pageMap);
+      final refreshedPage = modelWithTokens.toDomain();
+
+      print('🔄 [onUpdateGlobalStyles] Refreshed page has ${refreshedPage.sections?.length} sections');
+
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: refreshedPage);
+
+      if (!isUndoRedoOperation) {
+        localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+
+      print('🔄 [onUpdateGlobalStyles] State emitted');
+    }
+  }
+
   Future<void> onDeleteSection(
       DeleteSectionEvent event, Emitter<PagebuilderState> emit) async {
     if (state is GetLandingPageAndUserSuccessState) {

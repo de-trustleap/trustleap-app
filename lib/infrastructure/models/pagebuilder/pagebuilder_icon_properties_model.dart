@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
@@ -46,23 +47,39 @@ class PageBuilderIconPropertiesModel extends Equatable
     );
   }
 
-  PageBuilderIconProperties toDomain() {
+  PageBuilderIconProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
+    Color? resolvedColor;
+    String? token;
+    if (color != null) {
+      // Check if color is a token (starts with @)
+      if (color!.startsWith('@')) {
+        // Store token AND resolve it
+        token = color;
+        resolvedColor = globalStyles?.resolveColorReference(color!);
+      } else {
+        // Direct hex color
+        resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
+        token = null;
+      }
+    }
+
     return PageBuilderIconProperties(
         code: code,
         size: size?.toDomain(),
-        color: color != null
-            ? Color(ColorUtility.getHexIntFromString(color!))
-            : null);
+        color: resolvedColor,
+        globalColorToken: token);
   }
 
   factory PageBuilderIconPropertiesModel.fromDomain(
       PageBuilderIconProperties properties) {
+    // Use token if present, otherwise convert color to hex
+    final colorValue = properties.globalColorToken ??
+        (properties.color != null ? ColorUtility.colorToHex(properties.color!) : null);
+
     return PageBuilderIconPropertiesModel(
         code: properties.code,
         size: PagebuilderResponsiveOrConstantModel.fromDomain(properties.size),
-        color: properties.color != null
-            ? ColorUtility.colorToHex(properties.color!)
-            : null);
+        color: colorValue);
   }
 
   @override

@@ -13,6 +13,7 @@ class PageBuilderTextProperties extends Equatable
   final PagebuilderResponsiveOrConstant<double>? lineHeight;
   final PagebuilderResponsiveOrConstant<double>? letterSpacing;
   final Color? color;
+  final String? globalColorToken;
   final PagebuilderResponsiveOrConstant<TextAlign>? alignment;
   final PageBuilderShadow? textShadow;
 
@@ -23,6 +24,7 @@ class PageBuilderTextProperties extends Equatable
     required this.lineHeight,
     required this.letterSpacing,
     required this.color,
+    this.globalColorToken,
     required this.alignment,
     required this.textShadow,
   });
@@ -34,6 +36,7 @@ class PageBuilderTextProperties extends Equatable
     PagebuilderResponsiveOrConstant<double>? lineHeight,
     PagebuilderResponsiveOrConstant<double>? letterSpacing,
     Color? color,
+    String? globalColorToken,
     PagebuilderResponsiveOrConstant<TextAlign>? alignment,
     PageBuilderShadow? textShadow,
   }) {
@@ -44,6 +47,7 @@ class PageBuilderTextProperties extends Equatable
       lineHeight: lineHeight ?? this.lineHeight,
       letterSpacing: letterSpacing ?? this.letterSpacing,
       color: color ?? this.color,
+      globalColorToken: globalColorToken ?? this.globalColorToken,
       alignment: alignment ?? this.alignment,
       textShadow: textShadow ?? this.textShadow,
     );
@@ -57,6 +61,7 @@ class PageBuilderTextProperties extends Equatable
       lineHeight: lineHeight,
       letterSpacing: letterSpacing,
       color: color != null ? Color(color!.toARGB32()) : null,
+      globalColorToken: globalColorToken,
       alignment: alignment,
       textShadow: textShadow?.deepCopy(),
     );
@@ -70,6 +75,7 @@ class PageBuilderTextProperties extends Equatable
         lineHeight,
         letterSpacing,
         color,
+        globalColorToken,
         alignment,
         textShadow,
       ];

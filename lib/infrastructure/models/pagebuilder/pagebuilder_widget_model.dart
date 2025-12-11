@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_column_properties.dart';
@@ -162,23 +163,23 @@ class PageBuilderWidgetModel extends Equatable {
         customCSS: customCSS ?? this.customCSS);
   }
 
-  PageBuilderWidget toDomain() {
+  PageBuilderWidget toDomain(PageBuilderGlobalStyles? globalStyles) {
     return PageBuilderWidget(
         id: UniqueID.fromUniqueString(id),
         elementType: elementType == null
             ? PageBuilderWidgetType.none
             : PageBuilderWidgetType.values
                 .firstWhere((element) => element.name == elementType),
-        properties: getPropertiesByType(elementType, properties),
-        hoverProperties: getPropertiesByType(elementType, hoverProperties),
-        children: children?.map((child) => child.toDomain()).toList(),
-        containerChild: containerChild?.toDomain(),
+        properties: getPropertiesByType(elementType, properties, globalStyles),
+        hoverProperties: getPropertiesByType(elementType, hoverProperties, globalStyles),
+        children: children?.map((child) => child.toDomain(globalStyles)).toList(),
+        containerChild: containerChild?.toDomain(globalStyles),
         widthPercentage: widthPercentage?.toDomain(),
         background: background != null
-            ? PagebuilderBackgroundModel.fromMap(background!).toDomain()
+            ? PagebuilderBackgroundModel.fromMap(background!).toDomain(globalStyles)
             : null,
         hoverBackground: hoverBackground != null
-            ? PagebuilderBackgroundModel.fromMap(hoverBackground!).toDomain()
+            ? PagebuilderBackgroundModel.fromMap(hoverBackground!).toDomain(globalStyles)
             : null,
         padding: PageBuilderSpacingModel.fromMap(padding).toDomain(),
         margin: PageBuilderSpacingModel.fromMap(margin).toDomain(),
@@ -218,7 +219,7 @@ class PageBuilderWidgetModel extends Equatable {
   }
 
   PageBuilderProperties? getPropertiesByType(
-      String? type, Map<String, dynamic>? properties) {
+      String? type, Map<String, dynamic>? properties, PageBuilderGlobalStyles? globalStyles) {
     if (properties == null) {
       return null;
     }
@@ -228,29 +229,29 @@ class PageBuilderWidgetModel extends Equatable {
             .firstWhere((element) => element.name == type);
     switch (widgetType) {
       case PageBuilderWidgetType.text:
-        return PageBuilderTextPropertiesModel.fromMap(properties).toDomain();
+        return PageBuilderTextPropertiesModel.fromMap(properties).toDomain(globalStyles);
       case PageBuilderWidgetType.image:
-        return PageBuilderImagePropertiesModel.fromMap(properties).toDomain();
+        return PageBuilderImagePropertiesModel.fromMap(properties).toDomain(globalStyles);
       case PageBuilderWidgetType.icon:
-        return PageBuilderIconPropertiesModel.fromMap(properties).toDomain();
+        return PageBuilderIconPropertiesModel.fromMap(properties).toDomain(globalStyles);
       case PageBuilderWidgetType.container:
         return PageBuilderContainerPropertiesModel.fromMap(properties)
-            .toDomain();
+            .toDomain(globalStyles);
       case PageBuilderWidgetType.row:
         return PagebuilderRowPropertiesModel.fromMap(properties).toDomain();
       case PageBuilderWidgetType.column:
         return PagebuilderColumnPropertiesModel.fromMap(properties).toDomain();
       case PageBuilderWidgetType.contactForm:
         return PageBuilderContactFormPropertiesModel.fromMap(properties)
-            .toDomain();
+            .toDomain(globalStyles);
       case PageBuilderWidgetType.footer:
-        return PagebuilderFooterPropertiesModel.fromMap(properties).toDomain();
+        return PagebuilderFooterPropertiesModel.fromMap(properties).toDomain(globalStyles);
       case PageBuilderWidgetType.videoPlayer:
         return PagebuilderVideoPlayerPropertiesModel.fromMap(properties)
             .toDomain();
       case PageBuilderWidgetType.anchorButton:
         return PagebuilderAnchorButtonPropertiesModel.fromMap(properties)
-            .toDomain();
+            .toDomain(globalStyles);
       case PageBuilderWidgetType.calendly:
         return PagebuilderCalendlyPropertiesModel.fromMap(properties)
             .toDomain();

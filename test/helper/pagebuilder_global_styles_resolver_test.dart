@@ -446,7 +446,7 @@ void main() {
       // When
       final result = resolver.resolveHtmlColorTokens(html);
       // Then
-      expect(result, '<div style="color: FF0000">Text</div>');
+      expect(result, '<div style="color: #FF0000">Text</div>');
     });
 
     test("should resolve multiple color tokens in HTML with 6-digit hex for opaque colors", () {
@@ -469,7 +469,7 @@ void main() {
       final result = resolver.resolveHtmlColorTokens(html);
       // Then
       expect(result,
-          '<div style="color: FF0000">Text</div><span style="color: 00FF00">More</span>');
+          '<div style="color: #FF0000">Text</div><span style="color: #00FF00">More</span>');
     });
 
     test("should resolve transparent color token with 8-digit hex", () {
@@ -532,7 +532,7 @@ void main() {
       // When
       final result = resolver.resolveHtmlColorTokens(html);
       // Then
-      expect(result, '<div style="color: FF0000">Text</div>');
+      expect(result, '<div style="color: #FF0000">Text</div>');
     });
 
     test("should not resolve unresolvable tokens", () {
@@ -665,7 +665,7 @@ void main() {
       final result = resolver.resolveHtmlTokens(html);
       // Then
       expect(result,
-          '<div style="color: FF0000; font-family: Roboto">Text</div>');
+          '<div style="color: #FF0000; font-family: Roboto">Text</div>');
     });
 
     test("should resolve multiple mixed tokens in HTML", () {
@@ -692,7 +692,7 @@ void main() {
       final result = resolver.resolveHtmlTokens(html);
       // Then
       expect(result,
-          '<h1 style="color: FF0000; font-family: Roboto">Title</h1><p style="color: 00FF00; font-family: Open Sans">Body</p>');
+          '<h1 style="color: #FF0000; font-family: Roboto">Title</h1><p style="color: #00FF00; font-family: Open Sans">Body</p>');
     });
 
     test("should handle HTML with only color tokens", () {
@@ -713,7 +713,7 @@ void main() {
       // When
       final result = resolver.resolveHtmlTokens(html);
       // Then
-      expect(result, '<div style="color: FF0000">Text</div>');
+      expect(result, '<div style="color: #FF0000">Text</div>');
     });
 
     test("should handle HTML with only font tokens", () {

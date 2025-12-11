@@ -124,7 +124,7 @@ void main() {
           width: null,
           height: null);
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });

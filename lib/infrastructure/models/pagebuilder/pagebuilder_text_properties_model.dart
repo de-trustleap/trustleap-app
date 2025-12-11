@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
@@ -19,6 +20,7 @@ class PageBuilderTextPropertiesModel extends Equatable
   final String? color;
   final PagebuilderResponsiveOrConstantModel<String>? alignment;
   final Map<String, dynamic>? textShadow;
+  final String? globalColorToken;
 
   const PageBuilderTextPropertiesModel({
     required this.text,
@@ -29,6 +31,7 @@ class PageBuilderTextPropertiesModel extends Equatable
     required this.color,
     required this.alignment,
     required this.textShadow,
+    this.globalColorToken,
   });
 
   Map<String, dynamic> toMap() {
@@ -96,16 +99,30 @@ class PageBuilderTextPropertiesModel extends Equatable
     );
   }
 
-  PageBuilderTextProperties toDomain() {
+  PageBuilderTextProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
+    Color? resolvedColor;
+    String? token;
+    if (color != null) {
+      // Check if color is a token (starts with @)
+      if (color!.startsWith('@')) {
+        // Store token AND resolve it
+        token = color;
+        resolvedColor = globalStyles?.resolveColorReference(color!);
+      } else {
+        // Direct hex color
+        resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
+        token = null;
+      }
+    }
+
     return PageBuilderTextProperties(
       text: text,
       fontSize: fontSize?.toDomain(),
       fontFamily: fontFamily,
       lineHeight: lineHeight?.toDomain(),
       letterSpacing: letterSpacing?.toDomain(),
-      color: color != null
-          ? Color(ColorUtility.getHexIntFromString(color!))
-          : null,
+      color: resolvedColor,
+      globalColorToken: token,
       alignment: _alignmentToDomain(alignment),
       textShadow: textShadow != null
           ? PageBuilderShadowModel.fromMap(textShadow!).toDomain()
@@ -141,6 +158,10 @@ class PageBuilderTextPropertiesModel extends Equatable
 
   factory PageBuilderTextPropertiesModel.fromDomain(
       PageBuilderTextProperties properties) {
+    // Use token if present, otherwise convert color to hex
+    final colorValue = properties.globalColorToken ??
+        (properties.color != null ? ColorUtility.colorToHex(properties.color!) : null);
+
     return PageBuilderTextPropertiesModel(
       text: properties.text,
       fontSize: PagebuilderResponsiveOrConstantModel.fromDomain(
@@ -150,9 +171,8 @@ class PageBuilderTextPropertiesModel extends Equatable
           properties.lineHeight),
       letterSpacing: PagebuilderResponsiveOrConstantModel.fromDomain(
           properties.letterSpacing),
-      color: properties.color != null
-          ? ColorUtility.colorToHex(properties.color!)
-          : null,
+      color: colorValue,
+      globalColorToken: properties.globalColorToken,
       alignment: _alignmentFromDomain(properties.alignment),
       textShadow: ShadowMapper.getMapFromShadow(properties.textShadow),
     );

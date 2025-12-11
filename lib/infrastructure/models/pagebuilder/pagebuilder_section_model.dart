@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_background_model.dart';
@@ -102,7 +103,7 @@ class PageBuilderSectionModel extends Equatable {
     );
   }
 
-  PageBuilderSection toDomain() {
+  PageBuilderSection toDomain(PageBuilderGlobalStyles? globalStyles) {
     return PageBuilderSection(
         id: UniqueID.fromUniqueString(id),
         name: name,
@@ -111,13 +112,13 @@ class PageBuilderSectionModel extends Equatable {
             : PageBuilderSectionLayout.values
                 .firstWhere((element) => element.name == layout),
         background: background != null
-            ? PagebuilderBackgroundModel.fromMap(background!).toDomain()
+            ? PagebuilderBackgroundModel.fromMap(background!).toDomain(globalStyles)
             : null,
         maxWidth: maxWidth,
         backgroundConstrained: backgroundConstrained,
         customCSS: customCSS,
         fullHeight: fullHeight?.toDomain(),
-        widgets: getPageBuilderWidgetList(widgets),
+        widgets: getPageBuilderWidgetList(widgets, globalStyles),
         visibleOn: visibleOn
             ?.map((breakpointName) => PagebuilderResponsiveBreakpoint.values
                 .firstWhere((e) => e.name == breakpointName))
@@ -143,13 +144,13 @@ class PageBuilderSectionModel extends Equatable {
   }
 
   List<PageBuilderWidget>? getPageBuilderWidgetList(
-      List<Map<String, dynamic>>? widgets) {
+      List<Map<String, dynamic>>? widgets, PageBuilderGlobalStyles? globalStyles) {
     if (widgets == null) {
       return null;
     }
     final widgetModels =
         widgets.map((map) => PageBuilderWidgetModel.fromMap(map)).toList();
-    return widgetModels.map((model) => model.toDomain()).toList();
+    return widgetModels.map((model) => model.toDomain(globalStyles)).toList();
   }
 
   static List<Map<String, dynamic>>? getMapFromPageBuilderWidgetList(

@@ -114,7 +114,7 @@ void main() {
           color: Colors.black,
           alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center));
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -293,7 +293,7 @@ void main() {
             "desktop": TextAlign.right
           }));
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });

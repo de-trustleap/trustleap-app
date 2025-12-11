@@ -33,14 +33,16 @@ class PagebuilderHtmlRenderer extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get global styles from BLoC
     final blocState = Modular.get<PagebuilderBloc>().state;
+
     final globalStyles = blocState is GetLandingPageAndUserSuccessState
         ? blocState.content.content?.globalStyles
         : null;
 
-    // Create resolver and resolve all tokens in HTML
+    // Create resolver and resolve all tokens in HTML first
     final resolver = PagebuilderGlobalStylesResolver(globalStyles);
-    String htmlContent = _preprocessHtmlTextDecoration(textProperties?.text ?? "");
-    htmlContent = resolver.resolveHtmlTokens(htmlContent);
+    String htmlContent = resolver.resolveHtmlTokens(textProperties?.text ?? "");
+    // Then preprocess text decoration (after tokens are resolved)
+    htmlContent = _preprocessHtmlTextDecoration(htmlContent);
 
     final baseStyle = TextStyleParser().getTextStyleFromProperties(textProperties);
     final textAlignValue = textProperties?.alignment?.getValue();

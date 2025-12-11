@@ -1,16 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
-import 'package:finanzbegleiter/domain/helpers/pagebuilder_global_styles_resolver.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_global_styles_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_section_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class PageBuilderPageModel extends Equatable {
   final String id;
@@ -70,50 +67,59 @@ class PageBuilderPageModel extends Equatable {
   PageBuilderPage toDomain() {
     // Get global styles first
     final globalStylesDomain = getGlobalStylesFromMap(globalStyles);
+    print('📄 [PageBuilderPageModel.toDomain] globalStyles primary: ${globalStylesDomain?.colors?.primary}');
 
     // Resolve backgroundColor token if needed
     Color? resolvedBackgroundColor;
+    String? bgColorToken;
     if (backgroundColor != null) {
+      print('📄 [PageBuilderPageModel.toDomain] backgroundColor: $backgroundColor');
       if (backgroundColor!.startsWith('@')) {
-        final blocState = Modular.get<PagebuilderBloc>().state;
-        final globalStylesForResolver = blocState is GetLandingPageAndUserSuccessState
-            ? blocState.content.content?.globalStyles
-            : null;
-
-        final resolver = PagebuilderGlobalStylesResolver(globalStylesForResolver);
-        resolvedBackgroundColor = resolver.resolveColorTokenToColor(backgroundColor!);
+        // Store token and resolve it
+        bgColorToken = backgroundColor;
+        final resolvedColor = globalStylesDomain?.resolveColorReference(backgroundColor!);
+        resolvedBackgroundColor = resolvedColor;
+        print('📄 [PageBuilderPageModel.toDomain] Resolved backgroundColor token to: $resolvedBackgroundColor (token: $bgColorToken)');
       } else {
         resolvedBackgroundColor = Color(ColorUtility.getHexIntFromString(backgroundColor!));
+        bgColorToken = null;
       }
     }
+
+    final domainSections = getPageBuilderSectionList(sections, globalStylesDomain);
+    print('📄 [PageBuilderPageModel.toDomain] Converting ${sections?.length} sections to domain');
 
     return PageBuilderPage(
       id: UniqueID.fromUniqueString(id),
       backgroundColor: resolvedBackgroundColor,
-      sections: getPageBuilderSectionList(sections),
+      globalBackgroundColorToken: bgColorToken,
+      sections: domainSections,
       globalStyles: globalStylesDomain,
     );
   }
 
   factory PageBuilderPageModel.fromDomain(PageBuilderPage page) {
+    // Use token if present, otherwise convert color to hex
+    final bgColorValue = page.globalBackgroundColorToken ??
+        (page.backgroundColor != null ? ColorUtility.colorToHex(page.backgroundColor!) : null);
+    print('📝 [PageBuilderPageModel.fromDomain] backgroundColor: ${page.globalBackgroundColorToken != null ? "token=$bgColorValue" : "hex=$bgColorValue"}');
+
     return PageBuilderPageModel(
       id: page.id.value,
-      backgroundColor: page.backgroundColor != null
-          ? ColorUtility.colorToHex(page.backgroundColor!)
-          : null,
+      backgroundColor: bgColorValue,
       sections: getMapFromPageBuilderSectionList(page.sections),
       globalStyles: getMapFromGlobalStyles(page.globalStyles),
     );
   }
 
   List<PageBuilderSection>? getPageBuilderSectionList(
-      List<Map<String, dynamic>>? sections) {
+      List<Map<String, dynamic>>? sections, PageBuilderGlobalStyles? globalStyles) {
     if (sections == null) {
       return null;
     }
     final sectionModels =
         sections.map((map) => PageBuilderSectionModel.fromMap(map)).toList();
-    return sectionModels.map((model) => model.toDomain()).toList();
+    return sectionModels.map((model) => model.toDomain(globalStyles)).toList();
   }
 
   PageBuilderGlobalStyles? getGlobalStylesFromMap(

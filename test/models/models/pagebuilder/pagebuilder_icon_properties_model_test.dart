@@ -68,7 +68,7 @@ void main() {
           size: PagebuilderResponsiveOrConstant.constant(24.0),
           color: Colors.black);
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
