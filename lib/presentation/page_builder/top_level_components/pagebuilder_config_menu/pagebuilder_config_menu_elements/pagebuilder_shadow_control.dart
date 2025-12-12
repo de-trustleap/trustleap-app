@@ -227,7 +227,7 @@ class _PagebuilderTextShadowControlState
         PagebuilderColorPickerBase(
             initialColor: widget.initialShadow?.color ?? Colors.black,
             enableGradients: false,
-            onColorSelected: (color) {
+            onColorSelected: (color, {token}) {
               widget.onSelected(widget.initialShadow?.copyWith(color: color));
             }),
         const SizedBox(width: 8),

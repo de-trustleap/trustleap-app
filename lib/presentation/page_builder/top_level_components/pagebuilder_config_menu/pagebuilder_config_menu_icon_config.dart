@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -15,7 +16,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderConfigMenuIconConfig extends StatelessWidget {
   final PageBuilderWidget model;
-  const PagebuilderConfigMenuIconConfig({super.key, required this.model});
+  final PageBuilderGlobalColors? globalColors;
+  const PagebuilderConfigMenuIconConfig({super.key, required this.model, this.globalColors});
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +89,10 @@ class PagebuilderConfigMenuIconConfig extends StatelessWidget {
               title: localization.landingpage_pagebuilder_icon_config_color,
               initialColor: props?.color ?? Colors.black,
               enableGradients: false,
-              onColorSelected: (color) {
-                onChangedLocal(props?.copyWith(color: color));
+              globalColors: globalColors,
+              selectedGlobalColorToken: props?.globalColorToken,
+              onColorSelected: (color, {token}) {
+                onChangedLocal(props?.copyWith(color: color, globalColorToken: token));
               }),
           const SizedBox(height: 20),
           PagebuilderNumberStepperControl(

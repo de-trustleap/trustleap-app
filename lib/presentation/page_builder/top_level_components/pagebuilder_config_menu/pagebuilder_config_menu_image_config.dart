@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
@@ -20,7 +21,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderConfigMenuImageConfig extends StatelessWidget {
   final PageBuilderWidget model;
-  const PagebuilderConfigMenuImageConfig({super.key, required this.model});
+  final PageBuilderGlobalColors? globalColors;
+  const PagebuilderConfigMenuImageConfig({super.key, required this.model, this.globalColors});
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +107,10 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
               title: localization.pagebuilder_image_config_image_overlay,
               initialColor: props?.overlayPaint?.color ?? Colors.transparent,
               initialGradient: props?.overlayPaint?.gradient,
-              onColorSelected: (color) {
-                final paint = PagebuilderPaint.color(color);
+              globalColors: globalColors,
+              selectedGlobalColorToken: props?.overlayPaint?.globalColorToken,
+              onColorSelected: (color, {token}) {
+                final paint = PagebuilderPaint.color(color, globalColorToken: token);
                 onChangedLocal(props?.copyWith(overlayPaint: paint));
               },
               onGradientSelected: (gradient) {
@@ -169,11 +173,13 @@ class PagebuilderConfigMenuImageConfig extends StatelessWidget {
           PagebuilderColorControl(
               title: localization.pagebuilder_image_config_border_color,
               initialColor: props?.border?.color ?? Colors.transparent,
-              onColorSelected: (color) {
+              globalColors: globalColors,
+              selectedGlobalColorToken: props?.border?.globalColorToken,
+              onColorSelected: (color, {token}) {
                 final newBorder = (props?.border ??
                         const PagebuilderBorder(
-                            width: null, radius: null, color: null))
-                    .copyWith(color: color);
+                            width: null, radius: null, color: null, globalColorToken: null))
+                    .copyWith(color: color, globalColorToken: token);
                 onChangedLocal(props?.copyWith(border: newBorder));
               },
               onGradientSelected: null),

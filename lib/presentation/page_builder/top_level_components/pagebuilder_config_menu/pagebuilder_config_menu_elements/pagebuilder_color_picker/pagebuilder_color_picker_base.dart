@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_gradient.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
@@ -11,10 +12,12 @@ import 'package:flutter/material.dart';
 class PagebuilderColorPickerBase extends StatefulWidget {
   final Color initialColor;
   final PagebuilderGradient? initialGradient;
-  final Function(Color) onColorSelected;
+  final Function(Color, {String? token}) onColorSelected;
   final Function(PagebuilderGradient)? onGradientSelected;
   final bool enableOpacity;
   final bool enableGradients;
+  final PageBuilderGlobalColors? globalColors;
+  final String? selectedGlobalColorToken;
 
   const PagebuilderColorPickerBase({
     super.key,
@@ -24,6 +27,8 @@ class PagebuilderColorPickerBase extends StatefulWidget {
     this.onGradientSelected,
     this.enableOpacity = true,
     this.enableGradients = false,
+    this.globalColors,
+    this.selectedGlobalColorToken,
   });
 
   @override
@@ -37,11 +42,13 @@ class _PagebuilderColorPickerBaseState
   late PagebuilderGradient _selectedGradient;
   late bool _isColorMode;
   late bool _isColorTab;
+  String? _selectedToken;
 
   @override
   void initState() {
     super.initState();
     _selectedColor = widget.initialColor;
+    _selectedToken = widget.selectedGlobalColorToken;
     _selectedGradient =
         widget.initialGradient ?? PagebuilderGradient.defaultLinear();
 
@@ -61,6 +68,11 @@ class _PagebuilderColorPickerBaseState
     if (widget.initialColor != oldWidget.initialColor) {
       setState(() {
         _selectedColor = widget.initialColor;
+      });
+    }
+    if (widget.selectedGlobalColorToken != oldWidget.selectedGlobalColorToken) {
+      setState(() {
+        _selectedToken = widget.selectedGlobalColorToken;
       });
     }
     if (widget.initialGradient != oldWidget.initialGradient) {
@@ -129,18 +141,21 @@ class _PagebuilderColorPickerBaseState
                       enableOpacity: widget.enableOpacity,
                       isColorMode: _isColorMode,
                       showModeSwitch: widget.enableGradients,
-                      onColorChanged: (Color color) {
+                      globalColors: widget.globalColors,
+                      selectedGlobalColorToken: _selectedToken,
+                      onColorChanged: (Color color, {String? token}) {
                         setState(() {
                           _selectedColor = color;
+                          _selectedToken = token;
                         });
-                        widget.onColorSelected(color);
+                        widget.onColorSelected(color, token: token);
                       },
                       onModeChanged: (bool isColorMode) {
                         setState(() {
                           _isColorMode = isColorMode;
                         });
                         if (isColorMode) {
-                          widget.onColorSelected(_selectedColor);
+                          widget.onColorSelected(_selectedColor, token: _selectedToken);
                         } else {
                           widget.onGradientSelected?.call(_selectedGradient);
                         }
@@ -151,6 +166,7 @@ class _PagebuilderColorPickerBaseState
                       initialGradient: _selectedGradient,
                       isColorMode: _isColorMode,
                       showModeSwitch: widget.enableGradients,
+                      globalColors: widget.globalColors,
                       onGradientChanged: (PagebuilderGradient gradient) {
                         setState(() {
                           _selectedGradient = gradient;

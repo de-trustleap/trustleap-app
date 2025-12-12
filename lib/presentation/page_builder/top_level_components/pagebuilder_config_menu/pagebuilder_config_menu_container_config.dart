@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
@@ -18,7 +19,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
   final PageBuilderWidget model;
-  const PagebuilderConfigMenuContainerConfig({super.key, required this.model});
+  final PageBuilderGlobalColors? globalColors;
+  const PagebuilderConfigMenuContainerConfig({super.key, required this.model, this.globalColors});
 
   @override
   Widget build(BuildContext context) {
@@ -138,9 +140,11 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
       PagebuilderColorControl(
           title: localization.landingpage_pagebuilder_container_config_container_border_color,
           initialColor: props?.border?.color ?? Colors.transparent,
-          onColorSelected: (color) {
-            final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
-                .copyWith(color: color);
+          globalColors: globalColors,
+          selectedGlobalColorToken: props?.border?.globalColorToken,
+          onColorSelected: (color, {token}) {
+            final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null, globalColorToken: null))
+                .copyWith(color: color, globalColorToken: token);
             onChangedLocal(props?.copyWith(border: newBorder));
           },
           onGradientSelected: null),

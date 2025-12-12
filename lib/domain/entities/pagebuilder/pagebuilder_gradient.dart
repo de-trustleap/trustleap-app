@@ -11,19 +11,24 @@ enum PagebuilderGradientType {
 class PagebuilderGradientStop extends Equatable {
   final Color color;
   final double position;
+  final String? globalColorToken;
 
   const PagebuilderGradientStop({
     required this.color,
     required this.position,
+    required this.globalColorToken,
   });
 
   PagebuilderGradientStop copyWith({
     Color? color,
     double? position,
+    String? globalColorToken,
+    bool removeGlobalColorToken = false,
   }) {
     return PagebuilderGradientStop(
       color: color ?? this.color,
       position: position ?? this.position,
+      globalColorToken: removeGlobalColorToken ? null : (globalColorToken ?? this.globalColorToken),
     );
   }
 
@@ -31,11 +36,12 @@ class PagebuilderGradientStop extends Equatable {
     return PagebuilderGradientStop(
       color: Color(color.toARGB32()),
       position: position,
+      globalColorToken: globalColorToken,
     );
   }
 
   @override
-  List<Object?> get props => [color, position];
+  List<Object?> get props => [color, position, globalColorToken];
 }
 
 class PagebuilderGradient extends Equatable {
@@ -63,8 +69,8 @@ class PagebuilderGradient extends Equatable {
     return const PagebuilderGradient(
       type: PagebuilderGradientType.linear,
       stops: [
-        PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-        PagebuilderGradientStop(color: Colors.red, position: 1.0),
+        PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+        PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
       ],
     );
   }
@@ -73,8 +79,8 @@ class PagebuilderGradient extends Equatable {
     return const PagebuilderGradient(
       type: PagebuilderGradientType.radial,
       stops: [
-        PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-        PagebuilderGradientStop(color: Colors.red, position: 1.0),
+        PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+        PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
       ],
     );
   }
@@ -83,8 +89,8 @@ class PagebuilderGradient extends Equatable {
     return const PagebuilderGradient(
       type: PagebuilderGradientType.sweep,
       stops: [
-        PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-        PagebuilderGradientStop(color: Colors.red, position: 1.0),
+        PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+        PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
       ],
     );
   }

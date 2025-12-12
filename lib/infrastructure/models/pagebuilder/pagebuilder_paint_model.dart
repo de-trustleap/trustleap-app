@@ -61,7 +61,7 @@ class PagebuilderPaintModel extends Equatable {
       return PagebuilderPaint.color(resolvedColor, globalColorToken: token);
     } else if (gradient != null) {
       return PagebuilderPaint.gradient(
-        PagebuilderGradientModel.fromMap(gradient!).toDomain()
+        PagebuilderGradientModel.fromMap(gradient!).toDomain(globalStyles)
       );
     }
 

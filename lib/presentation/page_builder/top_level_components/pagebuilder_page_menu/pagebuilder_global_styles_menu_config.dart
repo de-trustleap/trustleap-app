@@ -44,7 +44,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               _ColorSection(
                 label: 'Primary',
                 color: globalStyles?.colors?.primary,
-                onColorChanged: (color) {
+                onColorChanged: (color, {token}) {
                   _updateGlobalColors(
                     context,
                     state,
@@ -63,7 +63,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               _ColorSection(
                 label: 'Secondary',
                 color: globalStyles?.colors?.secondary,
-                onColorChanged: (color) {
+                onColorChanged: (color, {token}) {
                   _updateGlobalColors(
                     context,
                     state,
@@ -82,7 +82,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               _ColorSection(
                 label: 'Tertiary',
                 color: globalStyles?.colors?.tertiary,
-                onColorChanged: (color) {
+                onColorChanged: (color, {token}) {
                   _updateGlobalColors(
                     context,
                     state,
@@ -101,7 +101,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               _ColorSection(
                 label: 'Background',
                 color: globalStyles?.colors?.background,
-                onColorChanged: (color) {
+                onColorChanged: (color, {token}) {
                   _updateGlobalColors(
                     context,
                     state,
@@ -120,7 +120,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               _ColorSection(
                 label: 'Surface',
                 color: globalStyles?.colors?.surface,
-                onColorChanged: (color) {
+                onColorChanged: (color, {token}) {
                   _updateGlobalColors(
                     context,
                     state,
@@ -227,7 +227,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
 class _ColorSection extends StatelessWidget {
   final String label;
   final Color? color;
-  final Function(Color) onColorChanged;
+  final Function(Color, {String? token}) onColorChanged;
 
   const _ColorSection({
     required this.label,

@@ -1,7 +1,9 @@
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_gradient.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker/pagebuilder_global_colors_palette.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_switch_control.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ class PagebuilderGradientTab extends StatefulWidget {
   final Function(PagebuilderGradient) onGradientChanged;
   final Function(bool) onModeChanged;
   final bool showModeSwitch;
+  final PageBuilderGlobalColors? globalColors;
 
   const PagebuilderGradientTab({
     super.key,
@@ -20,6 +23,7 @@ class PagebuilderGradientTab extends StatefulWidget {
     required this.onGradientChanged,
     required this.onModeChanged,
     this.showModeSwitch = true,
+    this.globalColors,
   });
 
   @override
@@ -49,6 +53,7 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
       AppLocalizations localization, int stopIndex) {
     final stop = _selectedGradient.stops[stopIndex];
     Color tempColor = stop.color;
+    String? tempToken = stop.globalColorToken;
     final hexTextFieldController = TextEditingController(
         text: ColorUtility.colorToHex(tempColor, includeHashPrefix: true));
     Color hexTextfieldHoverColor = Colors.transparent;
@@ -78,11 +83,26 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                       ),
                     ],
                   ),
+                  // Global Colors Palette
+                  if (widget.globalColors != null)
+                    PagebuilderGlobalColorsPalette(
+                      globalColors: widget.globalColors,
+                      selectedToken: tempToken,
+                      onGlobalColorSelected: (String token, Color color) {
+                        setColorState(() {
+                          tempColor = color;
+                          tempToken = token;
+                          hexTextFieldController.text =
+                              ColorUtility.colorToHex(color, includeHashPrefix: true);
+                        });
+                      },
+                    ),
                   ColorPicker(
                     color: tempColor,
                     onColorChanged: (Color color) {
                       setColorState(() {
                         tempColor = color;
+                        tempToken = null; // Clear token when manually selecting color
                         hexTextFieldController.text = ColorUtility.colorToHex(
                             tempColor,
                             includeHashPrefix: true);
@@ -120,6 +140,7 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                             if (value.isNotEmpty) {
                               setColorState(() {
                                 tempColor = ColorUtility.hexToColor(value);
+                                tempToken = null; // Clear token when manually entering hex
                               });
                             }
                           },
@@ -151,7 +172,11 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                       setState(() {
                         final newStops = List<PagebuilderGradientStop>.from(
                             _selectedGradient.stops);
-                        newStops[stopIndex] = stop.copyWith(color: tempColor);
+                        newStops[stopIndex] = stop.copyWith(
+                          color: tempColor,
+                          globalColorToken: tempToken,
+                          removeGlobalColorToken: tempToken == null,
+                        );
                         _selectedGradient =
                             _selectedGradient.copyWith(stops: newStops);
                       });
@@ -322,7 +347,8 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                                       _selectedGradient.stops);
                               newStops.add(PagebuilderGradientStop(
                                   color: themeData.colorScheme.secondary,
-                                  position: 0.5));
+                                  position: 0.5,
+                                  globalColorToken: null));
                               newStops.sort(
                                   (a, b) => a.position.compareTo(b.position));
                               _selectedGradient =

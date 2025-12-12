@@ -82,6 +82,7 @@ class _LandingPageBuilderPageBuilderState
                     model: null,
                     section: null,
                     landingPage: widget.landingPage,
+                    globalColors: widget.model.globalStyles?.colors,
                     closeMenu: () {
                       setState(() {
                         _isConfigMenuOpen = false;
@@ -95,6 +96,7 @@ class _LandingPageBuilderPageBuilderState
                     model: state.model,
                     section: null,
                     landingPage: widget.landingPage,
+                    globalColors: widget.model.globalStyles?.colors,
                     closeMenu: () {
                       Modular.get<PagebuilderSelectionCubit>()
                           .selectWidget(null);
@@ -112,6 +114,7 @@ class _LandingPageBuilderPageBuilderState
                     section: state.model,
                     allSections: widget.model.sections ?? [],
                     landingPage: widget.landingPage,
+                    globalColors: widget.model.globalStyles?.colors,
                     closeMenu: () {
                       Modular.get<PagebuilderSelectionCubit>()
                           .selectWidget(null);
@@ -128,6 +131,7 @@ class _LandingPageBuilderPageBuilderState
                     model: null,
                     section: null,
                     landingPage: widget.landingPage,
+                    globalColors: widget.model.globalStyles?.colors,
                     closeMenu: () {});
               } else {
                 return const SizedBox.shrink();

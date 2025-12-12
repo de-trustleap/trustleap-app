@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
@@ -16,7 +17,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
   final PageBuilderWidget model;
-  const PagebuilderConfigMenuCalendlyConfig({super.key, required this.model});
+  final PageBuilderGlobalColors? globalColors;
+  const PagebuilderConfigMenuCalendlyConfig({super.key, required this.model, this.globalColors});
 
   void updateCalendlyProperties(PagebuilderCalendlyProperties properties,
       PagebuilderBloc pagebuilderCubit) {
@@ -105,9 +107,11 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
                   initialColor: properties.textColor ?? Colors.black,
                   enableOpacity: false,
                   enableGradients: false,
-                  onColorSelected: (color) {
+                  globalColors: globalColors,
+                  selectedGlobalColorToken: properties.textColorToken,
+                  onColorSelected: (color, {token}) {
                     updateCalendlyProperties(
-                      properties.copyWith(textColor: color),
+                      properties.copyWith(textColor: color, textColorToken: token),
                       pagebuilderCubit,
                     );
                   }),
@@ -118,9 +122,11 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
                   initialColor: properties.backgroundColor ?? Colors.black,
                   enableGradients: false,
                   enableOpacity: false,
-                  onColorSelected: (color) {
+                  globalColors: globalColors,
+                  selectedGlobalColorToken: properties.backgroundColorToken,
+                  onColorSelected: (color, {token}) {
                     updateCalendlyProperties(
-                      properties.copyWith(backgroundColor: color),
+                      properties.copyWith(backgroundColor: color, backgroundColorToken: token),
                       pagebuilderCubit,
                     );
                   }),
@@ -130,9 +136,11 @@ class PagebuilderConfigMenuCalendlyConfig extends StatelessWidget {
                   initialColor: properties.primaryColor ?? Colors.black,
                   enableGradients: false,
                   enableOpacity: false,
-                  onColorSelected: (color) {
+                  globalColors: globalColors,
+                  selectedGlobalColorToken: properties.primaryColorToken,
+                  onColorSelected: (color, {token}) {
                     updateCalendlyProperties(
-                      properties.copyWith(primaryColor: color),
+                      properties.copyWith(primaryColor: color, primaryColorToken: token),
                       pagebuilderCubit,
                     );
                   }),

@@ -1,6 +1,7 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu_content.dart';
@@ -15,6 +16,7 @@ class LandingPageBuilderConfigMenu extends StatefulWidget {
   final List<PageBuilderSection>? allSections;
   final Function closeMenu;
   final LandingPage? landingPage;
+  final PageBuilderGlobalColors? globalColors;
 
   const LandingPageBuilderConfigMenu({
     super.key,
@@ -25,6 +27,7 @@ class LandingPageBuilderConfigMenu extends StatefulWidget {
     this.allSections,
     required this.closeMenu,
     required this.landingPage,
+    this.globalColors,
   });
 
   @override
@@ -79,6 +82,7 @@ class _LandingPageBuilderConfigMenuState
         showOnlyContentTab: _shouldShowOnlyContentTab(),
         closeMenu: widget.closeMenu,
         landingPage: widget.landingPage,
+        globalColors: widget.globalColors,
       );
     } else {
       return const SizedBox.shrink();
