@@ -44,7 +44,8 @@ class PagebuilderGlobalColorsPalette extends StatelessWidget {
             boxShadow: isSelected
                 ? [
                     BoxShadow(
-                      color: themeData.colorScheme.primary.withValues(alpha: 0.3),
+                      color:
+                          themeData.colorScheme.primary.withValues(alpha: 0.3),
                       blurRadius: 8,
                       spreadRadius: 1,
                     )
@@ -84,31 +85,31 @@ class PagebuilderGlobalColorsPalette extends StatelessWidget {
       if (globalColors!.primary != null)
         {
           'token': '@primary',
-          'label': 'Primary',
+          'label': 'Primär',
           'color': globalColors!.primary!
         },
       if (globalColors!.secondary != null)
         {
           'token': '@secondary',
-          'label': 'Secondary',
+          'label': 'Sekundär',
           'color': globalColors!.secondary!
         },
       if (globalColors!.tertiary != null)
         {
           'token': '@tertiary',
-          'label': 'Tertiary',
+          'label': 'Tertiär',
           'color': globalColors!.tertiary!
         },
       if (globalColors!.background != null)
         {
           'token': '@background',
-          'label': 'Background',
+          'label': 'Hintergrund',
           'color': globalColors!.background!
         },
       if (globalColors!.surface != null)
         {
           'token': '@surface',
-          'label': 'Surface',
+          'label': 'Container',
           'color': globalColors!.surface!
         },
     ];
@@ -122,7 +123,7 @@ class PagebuilderGlobalColorsPalette extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Global Colors',
+          "Globale Farben",
           style: themeData.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
             color: themeData.colorScheme.surfaceTint.withValues(alpha: 0.7),

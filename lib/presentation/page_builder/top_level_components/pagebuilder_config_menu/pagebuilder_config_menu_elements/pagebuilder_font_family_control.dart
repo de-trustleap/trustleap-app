@@ -7,6 +7,7 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
   final Function(String) onSelected;
   final PageBuilderGlobalFonts? globalFonts;
   final String? selectedGlobalFontToken;
+  final String? label;
 
   const PagebuilderFontFamilyControl({
     super.key,
@@ -14,6 +15,7 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
     required this.onSelected,
     this.globalFonts,
     this.selectedGlobalFontToken,
+    this.label,
   });
 
   @override
@@ -54,22 +56,22 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
           child: Text("Text Font", style: TextStyle(fontFamily: globalFonts!.text)),
         ));
       }
-    }
 
-    // Add "Andere" heading
-    items.add(DropdownMenuItem<String>(
-      enabled: false,
-      value: "__andere_header__",
-      child: Padding(
-        padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
-        child: Text(
-          "Andere",
-          style: themeData.textTheme.bodySmall?.copyWith(
-            fontWeight: FontWeight.bold,
+      // Add "Andere" heading only if we have global fonts
+      items.add(DropdownMenuItem<String>(
+        enabled: false,
+        value: "__andere_header__",
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
+          child: Text(
+            "Andere",
+            style: themeData.textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
-    ));
+      ));
+    }
 
     // Add standard fonts
     for (final font in standardFonts) {
@@ -86,7 +88,7 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          localization.landingpage_pagebuilder_text_config_font_family,
+          label ?? localization.landingpage_pagebuilder_text_config_font_family,
           style: themeData.textTheme.bodySmall,
         ),
         Container(

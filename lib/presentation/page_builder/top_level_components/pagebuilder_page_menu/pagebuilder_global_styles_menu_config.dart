@@ -35,14 +35,14 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Global Colors',
+                "Globale Farben",
                 style: themeData.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 16),
               _ColorSection(
-                label: 'Primary',
+                label: "Primär",
                 color: globalStyles?.colors?.primary,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -61,7 +61,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _ColorSection(
-                label: 'Secondary',
+                label: "Sekundär",
                 color: globalStyles?.colors?.secondary,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -80,7 +80,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _ColorSection(
-                label: 'Tertiary',
+                label: "Tertiär",
                 color: globalStyles?.colors?.tertiary,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -99,7 +99,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _ColorSection(
-                label: 'Background',
+                label: "Hintergrund",
                 color: globalStyles?.colors?.background,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -118,7 +118,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _ColorSection(
-                label: 'Surface',
+                label: "Container",
                 color: globalStyles?.colors?.surface,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -137,30 +137,27 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               Text(
-                'Global Fonts',
+                'Globale Schriftarten',
                 style: themeData.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 16),
               _FontSection(
-                label: 'Headline Font',
+                label: "Überschrift",
                 fontFamily: globalStyles?.fonts?.headline,
                 onFontChanged: (font) {
                   _updateGlobalFonts(
                     context,
                     state,
                     globalStyles?.fonts?.copyWith(headline: font) ??
-                        PageBuilderGlobalFonts(
-                          headline: font,
-                          text: null,
-                        ),
+                        PageBuilderGlobalFonts(headline: font, text: null),
                   );
                 },
               ),
               const SizedBox(height: 12),
               _FontSection(
-                label: 'Text Font',
+                label: "Fließtext",
                 fontFamily: globalStyles?.fonts?.text,
                 onFontChanged: (font) {
                   _updateGlobalFonts(
@@ -198,8 +195,8 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
         );
 
     Modular.get<PagebuilderBloc>().add(
-          UpdateGlobalStylesEvent(updatedGlobalStyles),
-        );
+      UpdateGlobalStylesEvent(updatedGlobalStyles),
+    );
   }
 
   void _updateGlobalFonts(
@@ -219,8 +216,8 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
         );
 
     Modular.get<PagebuilderBloc>().add(
-          UpdateGlobalStylesEvent(updatedGlobalStyles),
-        );
+      UpdateGlobalStylesEvent(updatedGlobalStyles),
+    );
   }
 }
 
@@ -262,6 +259,7 @@ class _FontSection extends StatelessWidget {
     return PagebuilderFontFamilyControl(
       initialValue: fontFamily ?? "Poppins",
       onSelected: onFontChanged,
+      label: label,
     );
   }
 }

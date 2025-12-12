@@ -82,7 +82,6 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
           ),
           const SizedBox(height: 16),
         ],
-        // Global Colors Palette
         if (widget.globalColors != null)
           PagebuilderGlobalColorsPalette(
             globalColors: widget.globalColors,
@@ -107,7 +106,8 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
                 if (widget.isColorMode) {
                   setState(() {
                     _selectedColor = color;
-                    _selectedToken = null; // Clear token when manually selecting color
+                    _selectedToken =
+                        null; // Clear token when manually selecting color
                     _hexTextFieldController.text = ColorUtility.colorToHex(
                         _selectedColor,
                         includeHashPrefix: true);
@@ -156,7 +156,8 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
                       if (widget.isColorMode && value.isNotEmpty) {
                         setState(() {
                           _selectedColor = ColorUtility.hexToColor(value);
-                          _selectedToken = null; // Clear token when manually entering hex
+                          _selectedToken =
+                              null; // Clear token when manually entering hex
                         });
                         widget.onColorChanged(_selectedColor);
                       }
