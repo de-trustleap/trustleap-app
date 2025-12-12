@@ -2,7 +2,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_b
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker/pagebuilder_color_control.dart';
@@ -20,7 +20,7 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
   final PageBuilderButtonProperties? hoverProperties;
   final Function(PageBuilderButtonProperties?) onChanged;
   final Function(PageBuilderButtonProperties?) onChangedHover;
-  final PageBuilderGlobalColors? globalColors;
+  final PageBuilderGlobalStyles? globalStyles;
 
   const PagebuilderConfigMenuButtonConfig({
     super.key,
@@ -28,7 +28,7 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
     this.hoverProperties,
     required this.onChanged,
     required this.onChangedHover,
-    this.globalColors,
+    this.globalStyles,
   });
 
   @override
@@ -93,7 +93,7 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
                   .pagebuilder_button_config_button_background_color,
               initialColor: props?.backgroundPaint?.color ?? Colors.transparent,
               initialGradient: props?.backgroundPaint?.gradient,
-              globalColors: globalColors,
+              globalColors: globalStyles?.colors,
               selectedGlobalColorToken: props?.backgroundPaint?.globalColorToken,
               onColorSelected: (color, {token}) {
                 final paint = PagebuilderPaint.color(color, globalColorToken: token);
@@ -136,7 +136,7 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
           PagebuilderColorControl(
               title: localization.pagebuilder_button_config_button_border_color,
               initialColor: props?.border?.color ?? Colors.transparent,
-              globalColors: globalColors,
+              globalColors: globalStyles?.colors,
               selectedGlobalColorToken: props?.border?.globalColorToken,
               onColorSelected: (color, {token}) {
                 final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null, globalColorToken: null))
@@ -153,6 +153,7 @@ class PagebuilderConfigMenuButtonConfig extends StatelessWidget {
               properties: props?.textProperties,
               hoverProperties: hoverProperties?.textProperties,
               showHoverTabBar: false,
+              globalStyles: globalStyles,
               onChanged: (textProperties) {
                 onChangedLocal(props?.copyWith(textProperties: textProperties));
               },

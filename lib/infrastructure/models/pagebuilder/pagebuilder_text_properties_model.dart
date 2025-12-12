@@ -102,28 +102,42 @@ class PageBuilderTextPropertiesModel extends Equatable
 
   PageBuilderTextProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
     Color? resolvedColor;
-    String? token;
+    String? colorToken;
     if (color != null) {
       // Check if color is a token (starts with @)
       if (color!.startsWith('@')) {
         // Store token AND resolve it
-        token = color;
+        colorToken = color;
         resolvedColor = globalStyles?.resolveColorReference(color!);
       } else {
         // Direct hex color
         resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
-        token = null;
+        colorToken = null;
+      }
+    }
+
+    // Resolve font family token if present
+    String? resolvedFontFamily;
+    if (fontFamily != null) {
+      if (fontFamily!.startsWith('@')) {
+        // Resolve font token
+        resolvedFontFamily = globalStyles?.resolveFontReference(fontFamily!);
+        // If resolution fails, fallback to a default font
+        resolvedFontFamily ??= "Roboto";
+      } else {
+        // Direct font name
+        resolvedFontFamily = fontFamily;
       }
     }
 
     return PageBuilderTextProperties(
       text: text,
       fontSize: fontSize?.toDomain(),
-      fontFamily: fontFamily,
+      fontFamily: resolvedFontFamily,
       lineHeight: lineHeight?.toDomain(),
       letterSpacing: letterSpacing?.toDomain(),
       color: resolvedColor,
-      globalColorToken: token,
+      globalColorToken: colorToken,
       alignment: _alignmentToDomain(alignment),
       textShadow: textShadow != null
           ? PageBuilderShadowModel.fromMap(textShadow!).toDomain(globalStyles)

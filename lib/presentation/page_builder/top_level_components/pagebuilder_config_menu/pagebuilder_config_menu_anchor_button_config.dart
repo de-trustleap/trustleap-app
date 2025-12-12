@@ -1,7 +1,7 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_anchor_button_properties.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
@@ -11,12 +11,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderConfigMenuAnchorButtonConfig extends StatelessWidget {
   final PageBuilderWidget model;
-  final PageBuilderGlobalColors? globalColors;
+  final PageBuilderGlobalStyles? globalStyles;
 
   const PagebuilderConfigMenuAnchorButtonConfig({
     super.key,
     required this.model,
-    this.globalColors,
+    this.globalStyles,
   });
 
   @override
@@ -37,7 +37,7 @@ class PagebuilderConfigMenuAnchorButtonConfig extends StatelessWidget {
             PagebuilderConfigMenuButtonConfig(
               properties: properties.buttonProperties,
               hoverProperties: hoverProperties?.buttonProperties,
-              globalColors: globalColors,
+              globalStyles: globalStyles,
               onChanged: (updatedButtonProperties) {
                 final updatedProperties = properties.copyWith(
                   buttonProperties: updatedButtonProperties,

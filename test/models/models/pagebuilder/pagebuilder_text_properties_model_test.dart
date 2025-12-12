@@ -284,6 +284,125 @@ void main() {
       // Then
       expect(result.color, "FFFF5722");
     });
+
+    test("check if headline font token is resolved with globalStyles in toDomain", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "@headline",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: PageBuilderGlobalFonts(
+          headline: "Merriweather",
+          text: "Roboto",
+        ),
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.fontFamily, "Merriweather");
+    });
+
+    test("check if text font token is resolved with globalStyles in toDomain", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "@text",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: PageBuilderGlobalFonts(
+          headline: "Merriweather",
+          text: "Poppins",
+        ),
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.fontFamily, "Poppins");
+    });
+
+    test("check if font token falls back to Roboto when token cannot be resolved", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "@headline",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.fontFamily, "Roboto");
+    });
+
+    test("check if direct font name works without token resolution", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "Poppins",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: PageBuilderGlobalFonts(
+          headline: "Merriweather",
+          text: "Roboto",
+        ),
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.fontFamily, "Poppins");
+    });
+
+    test("check if font token is preserved in model when using direct font", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "@headline",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      // When - toDomain and back to model
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: PageBuilderGlobalFonts(
+          headline: "Merriweather",
+          text: "Roboto",
+        ),
+      );
+      final domainResult = model.toDomain(globalStyles);
+      // Then - fontFamily should be resolved in domain
+      expect(domainResult.fontFamily, "Merriweather");
+      // And - the original model should still have the token
+      expect(model.fontFamily, "@headline");
+    });
   });
 
   group("PagebuilderTextPropertiesModel_GetTextAlignFromString", () {

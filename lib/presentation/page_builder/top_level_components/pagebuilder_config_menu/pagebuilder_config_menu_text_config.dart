@@ -1,6 +1,6 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_breakpoint_selector.dart';
@@ -23,7 +23,7 @@ class PagebuilderConfigMenuTextConfig extends StatefulWidget {
   final bool hideColorPicker;
   final Function(PageBuilderTextProperties?) onChanged;
   final Function(PageBuilderTextProperties?) onChangedHover;
-  final PageBuilderGlobalColors? globalColors;
+  final PageBuilderGlobalStyles? globalStyles;
 
   const PagebuilderConfigMenuTextConfig({
     super.key,
@@ -33,7 +33,7 @@ class PagebuilderConfigMenuTextConfig extends StatefulWidget {
     this.hideColorPicker = false,
     required this.onChanged,
     required this.onChangedHover,
-    this.globalColors,
+    this.globalStyles,
   });
 
   @override
@@ -121,7 +121,7 @@ class _PagebuilderConfigMenuTextConfigState
               title: localization.landingpage_pagebuilder_text_config_color,
               initialColor: props?.color ?? Colors.black,
               enableGradients: false,
-              globalColors: widget.globalColors,
+              globalColors: widget.globalStyles?.colors,
               selectedGlobalColorToken: props?.globalColorToken,
               onColorSelected: (color, {token}) {
                 onChangedLocal(props?.copyWith(color: color, globalColorToken: token));
@@ -130,6 +130,8 @@ class _PagebuilderConfigMenuTextConfigState
         const SizedBox(height: 20),
         PagebuilderFontFamilyControl(
             initialValue: props?.fontFamily ?? "",
+            globalFonts: widget.globalStyles?.fonts,
+            selectedGlobalFontToken: props?.fontFamily?.startsWith('@') == true ? props?.fontFamily : null,
             onSelected: (fontFamily) {
               onChangedLocal(props?.copyWith(fontFamily: fontFamily));
             }),

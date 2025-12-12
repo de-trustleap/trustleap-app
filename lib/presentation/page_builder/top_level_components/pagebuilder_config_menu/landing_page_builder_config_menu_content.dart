@@ -1,5 +1,5 @@
 import 'package:finanzbegleiter/domain/entities/landing_page.dart';
-import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -19,7 +19,7 @@ class LandingPageBuilderConfigMenuContent extends StatefulWidget {
   final bool showOnlyContentTab;
   final Function closeMenu;
   final LandingPage? landingPage;
-  final PageBuilderGlobalColors? globalColors;
+  final PageBuilderGlobalStyles? globalStyles;
 
   const LandingPageBuilderConfigMenuContent({
     super.key,
@@ -32,7 +32,7 @@ class LandingPageBuilderConfigMenuContent extends StatefulWidget {
     required this.showOnlyContentTab,
     required this.closeMenu,
     required this.landingPage,
-    this.globalColors,
+    this.globalStyles,
   });
 
   @override
@@ -79,24 +79,24 @@ class _LandingPageBuilderConfigMenuContentState
       return LandingPageBuilderConfigMenuDesignTab(
         model: widget.model!,
         landingPage: widget.landingPage,
-        globalColors: widget.globalColors,
+        globalStyles: widget.globalStyles,
       );
     } else if (widget.showOnlyContentTab && widget.model != null) {
       return LandingPageBuilderConfigMenuContentTab(
         model: widget.model!,
-        globalColors: widget.globalColors,
+        globalStyles: widget.globalStyles,
       );
     } else if (widget.model != null) {
       if (_selectedTabIndex == 0) {
         return LandingPageBuilderConfigMenuContentTab(
           model: widget.model!,
-          globalColors: widget.globalColors,
+          globalStyles: widget.globalStyles,
         );
       } else {
         return LandingPageBuilderConfigMenuDesignTab(
           model: widget.model!,
           landingPage: widget.landingPage,
-          globalColors: widget.globalColors,
+          globalStyles: widget.globalStyles,
         );
       }
     } else {
