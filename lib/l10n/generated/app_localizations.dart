@@ -5276,6 +5276,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hide page hierarchy'**
   String get pagebuilder_hierarchy_close_tooltip;
+
+  /// Title for the global colors palette
+  ///
+  /// In en, this message translates to:
+  /// **'Global Colors'**
+  String get pagebuilder_global_colors_palette_title;
+
+  /// Label for primary color
+  ///
+  /// In en, this message translates to:
+  /// **'Primary'**
+  String get pagebuilder_global_colors_palette_primary;
+
+  /// Label for secondary color
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary'**
+  String get pagebuilder_global_colors_palette_secondary;
+
+  /// Label for tertiary color
+  ///
+  /// In en, this message translates to:
+  /// **'Tertiary'**
+  String get pagebuilder_global_colors_palette_tertiary;
+
+  /// Label for background color
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get pagebuilder_global_colors_palette_background;
+
+  /// Label for surface/container color
+  ///
+  /// In en, this message translates to:
+  /// **'Surface'**
+  String get pagebuilder_global_colors_palette_surface;
+
+  /// Heading for global fonts in font dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Global'**
+  String get pagebuilder_font_family_control_global_heading;
+
+  /// Heading for other fonts in font dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get pagebuilder_font_family_control_other_heading;
+
+  /// Label for headline font
+  ///
+  /// In en, this message translates to:
+  /// **'Headline'**
+  String get pagebuilder_font_family_control_headline_font;
+
+  /// Label for body text font
+  ///
+  /// In en, this message translates to:
+  /// **'Body Text'**
+  String get pagebuilder_font_family_control_text_font;
+
+  /// Title for global fonts in the styles menu
+  ///
+  /// In en, this message translates to:
+  /// **'Global Fonts'**
+  String get pagebuilder_global_styles_fonts_title;
 }
 
 class _AppLocalizationsDelegate

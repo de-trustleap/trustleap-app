@@ -26,16 +26,15 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
     final standardFonts = ["Poppins", "Merriweather", "Roboto"];
     final items = <DropdownMenuItem<String>>[];
 
-    // Add global fonts if available
-    if (globalFonts != null && (globalFonts!.headline != null || globalFonts!.text != null)) {
-      // Add "Global" heading
+    if (globalFonts != null &&
+        (globalFonts!.headline != null || globalFonts!.text != null)) {
       items.add(DropdownMenuItem<String>(
         enabled: false,
         value: "__global_header__",
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, top: 4.0, bottom: 4.0),
           child: Text(
-            "Global",
+            localization.pagebuilder_font_family_control_global_heading,
             style: themeData.textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -46,25 +45,30 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
       if (globalFonts!.headline != null) {
         items.add(DropdownMenuItem<String>(
           value: "@headline",
-          child: Text("Headline Font", style: TextStyle(fontFamily: globalFonts!.headline)),
+          child: Text(
+            localization.pagebuilder_font_family_control_headline_font,
+            style: TextStyle(fontFamily: globalFonts!.headline),
+          ),
         ));
       }
 
       if (globalFonts!.text != null) {
         items.add(DropdownMenuItem<String>(
           value: "@text",
-          child: Text("Text Font", style: TextStyle(fontFamily: globalFonts!.text)),
+          child: Text(
+            localization.pagebuilder_font_family_control_text_font,
+            style: TextStyle(fontFamily: globalFonts!.text),
+          ),
         ));
       }
 
-      // Add "Andere" heading only if we have global fonts
       items.add(DropdownMenuItem<String>(
         enabled: false,
         value: "__andere_header__",
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 4.0),
           child: Text(
-            "Andere",
+            localization.pagebuilder_font_family_control_other_heading,
             style: themeData.textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -73,15 +77,12 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
       ));
     }
 
-    // Add standard fonts
     for (final font in standardFonts) {
       items.add(DropdownMenuItem<String>(
         value: font,
         child: Text(font, style: TextStyle(fontFamily: font)),
       ));
     }
-
-    // Determine current value - if it's a token, use the token, otherwise use the font name
     final currentValue = selectedGlobalFontToken ?? initialValue;
 
     return Row(
@@ -113,7 +114,8 @@ class PagebuilderFontFamilyControl extends StatelessWidget {
               }
             },
             underline: const SizedBox.shrink(),
-            icon: Icon(Icons.arrow_drop_down, color: themeData.colorScheme.onSurface),
+            icon: Icon(Icons.arrow_drop_down,
+                color: themeData.colorScheme.onSurface),
           ),
         ),
       ],

@@ -65,25 +65,25 @@ class PageBuilderPageModel extends Equatable {
   }
 
   PageBuilderPage toDomain() {
-    // Get global styles first
     final globalStylesDomain = getGlobalStylesFromMap(globalStyles);
 
-    // Resolve backgroundColor token if needed
     Color? resolvedBackgroundColor;
     String? bgColorToken;
     if (backgroundColor != null) {
       if (backgroundColor!.startsWith('@')) {
-        // Store token and resolve it
         bgColorToken = backgroundColor;
-        final resolvedColor = globalStylesDomain?.resolveColorReference(backgroundColor!);
+        final resolvedColor =
+            globalStylesDomain?.resolveColorReference(backgroundColor!);
         resolvedBackgroundColor = resolvedColor;
       } else {
-        resolvedBackgroundColor = Color(ColorUtility.getHexIntFromString(backgroundColor!));
+        resolvedBackgroundColor =
+            Color(ColorUtility.getHexIntFromString(backgroundColor!));
         bgColorToken = null;
       }
     }
 
-    final domainSections = getPageBuilderSectionList(sections, globalStylesDomain);
+    final domainSections =
+        getPageBuilderSectionList(sections, globalStylesDomain);
 
     return PageBuilderPage(
       id: UniqueID.fromUniqueString(id),
@@ -95,9 +95,10 @@ class PageBuilderPageModel extends Equatable {
   }
 
   factory PageBuilderPageModel.fromDomain(PageBuilderPage page) {
-    // Use token if present, otherwise convert color to hex
     final bgColorValue = page.globalBackgroundColorToken ??
-        (page.backgroundColor != null ? ColorUtility.colorToHex(page.backgroundColor!) : null);
+        (page.backgroundColor != null
+            ? ColorUtility.colorToHex(page.backgroundColor!)
+            : null);
 
     return PageBuilderPageModel(
       id: page.id.value,
@@ -108,7 +109,8 @@ class PageBuilderPageModel extends Equatable {
   }
 
   List<PageBuilderSection>? getPageBuilderSectionList(
-      List<Map<String, dynamic>>? sections, PageBuilderGlobalStyles? globalStyles) {
+      List<Map<String, dynamic>>? sections,
+      PageBuilderGlobalStyles? globalStyles) {
     if (sections == null) {
       return null;
     }

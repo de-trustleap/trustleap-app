@@ -51,13 +51,10 @@ class PageBuilderIconPropertiesModel extends Equatable
     Color? resolvedColor;
     String? token;
     if (color != null) {
-      // Check if color is a token (starts with @)
       if (color!.startsWith('@')) {
-        // Store token AND resolve it
         token = color;
         resolvedColor = globalStyles?.resolveColorReference(color!);
       } else {
-        // Direct hex color
         resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
         token = null;
       }
@@ -72,9 +69,10 @@ class PageBuilderIconPropertiesModel extends Equatable
 
   factory PageBuilderIconPropertiesModel.fromDomain(
       PageBuilderIconProperties properties) {
-    // Use token if present, otherwise convert color to hex
     final colorValue = properties.globalColorToken ??
-        (properties.color != null ? ColorUtility.colorToHex(properties.color!) : null);
+        (properties.color != null
+            ? ColorUtility.colorToHex(properties.color!)
+            : null);
 
     return PageBuilderIconPropertiesModel(
         code: properties.code,

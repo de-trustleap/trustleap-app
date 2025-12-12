@@ -112,7 +112,8 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         useIntrinsicHeight: useIntrinsicHeight ?? this.useIntrinsicHeight);
   }
 
-  PagebuilderCalendlyProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
+  PagebuilderCalendlyProperties toDomain(
+      PageBuilderGlobalStyles? globalStyles) {
     Color? resolvedTextColor;
     String? textColorToken;
     Color? resolvedBackgroundColor;
@@ -120,7 +121,6 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
     Color? resolvedPrimaryColor;
     String? primaryColorToken;
 
-    // Resolve textColor
     if (textColor != null) {
       if (textColor!.startsWith('@')) {
         textColorToken = textColor;
@@ -132,26 +132,27 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
       }
     }
 
-    // Resolve backgroundColor
     if (backgroundColor != null) {
       if (backgroundColor!.startsWith('@')) {
         backgroundColorToken = backgroundColor;
-        final tokenColor = globalStyles?.resolveColorReference(backgroundColor!);
+        final tokenColor =
+            globalStyles?.resolveColorReference(backgroundColor!);
         resolvedBackgroundColor = tokenColor ?? Colors.transparent;
       } else {
-        resolvedBackgroundColor = Color(ColorUtility.getHexIntFromString(backgroundColor!));
+        resolvedBackgroundColor =
+            Color(ColorUtility.getHexIntFromString(backgroundColor!));
         backgroundColorToken = null;
       }
     }
 
-    // Resolve primaryColor
     if (primaryColor != null) {
       if (primaryColor!.startsWith('@')) {
         primaryColorToken = primaryColor;
         final tokenColor = globalStyles?.resolveColorReference(primaryColor!);
         resolvedPrimaryColor = tokenColor ?? Colors.transparent;
       } else {
-        resolvedPrimaryColor = Color(ColorUtility.getHexIntFromString(primaryColor!));
+        resolvedPrimaryColor =
+            Color(ColorUtility.getHexIntFromString(primaryColor!));
         primaryColorToken = null;
       }
     }
@@ -178,22 +179,25 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
   factory PagebuilderCalendlyPropertiesModel.fromDomain(
       PagebuilderCalendlyProperties properties) {
     return PagebuilderCalendlyPropertiesModel(
-        width: PagebuilderResponsiveOrConstantModel.fromDomain(
-            properties.width),
-        height: PagebuilderResponsiveOrConstantModel.fromDomain(
-            properties.height),
+        width:
+            PagebuilderResponsiveOrConstantModel.fromDomain(properties.width),
+        height:
+            PagebuilderResponsiveOrConstantModel.fromDomain(properties.height),
         borderRadius: properties.borderRadius,
         calendlyEventURL: properties.calendlyEventURL,
         eventTypeName: properties.eventTypeName,
-        textColor: properties.textColorToken ?? (properties.textColor != null
-            ? ColorUtility.colorToHex(properties.textColor!)
-            : null),
-        backgroundColor: properties.backgroundColorToken ?? (properties.backgroundColor != null
-            ? ColorUtility.colorToHex(properties.backgroundColor!)
-            : null),
-        primaryColor: properties.primaryColorToken ?? (properties.primaryColor != null
-            ? ColorUtility.colorToHex(properties.primaryColor!)
-            : null),
+        textColor: properties.textColorToken ??
+            (properties.textColor != null
+                ? ColorUtility.colorToHex(properties.textColor!)
+                : null),
+        backgroundColor: properties.backgroundColorToken ??
+            (properties.backgroundColor != null
+                ? ColorUtility.colorToHex(properties.backgroundColor!)
+                : null),
+        primaryColor: properties.primaryColorToken ??
+            (properties.primaryColor != null
+                ? ColorUtility.colorToHex(properties.primaryColor!)
+                : null),
         hideEventTypeDetails: properties.hideEventTypeDetails,
         shadow: ShadowMapper.getMapFromShadow(properties.shadow),
         useIntrinsicHeight: properties.useIntrinsicHeight);

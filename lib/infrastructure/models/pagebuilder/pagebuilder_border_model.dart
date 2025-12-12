@@ -49,14 +49,11 @@ class PagebuilderBorderModel extends Equatable {
     String? token;
 
     if (color != null) {
-      // Check if color is a token (starts with @)
       if (color!.startsWith('@')) {
-        // Store the token AND resolve it
         token = color;
         final tokenColor = globalStyles?.resolveColorReference(color!);
         resolvedColor = tokenColor ?? Colors.transparent;
       } else {
-        // Direct hex color - no token
         resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
         token = null;
       }
@@ -71,10 +68,9 @@ class PagebuilderBorderModel extends Equatable {
   }
 
   factory PagebuilderBorderModel.fromDomain(PagebuilderBorder border) {
-    // If there's a token, use it; otherwise convert color to hex
     final colorValue = border.color != null
-      ? (border.globalColorToken ?? ColorUtility.colorToHex(border.color!))
-      : null;
+        ? (border.globalColorToken ?? ColorUtility.colorToHex(border.color!))
+        : null;
 
     return PagebuilderBorderModel(
       width: border.width,

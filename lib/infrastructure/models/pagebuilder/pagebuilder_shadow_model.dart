@@ -59,14 +59,11 @@ class PageBuilderShadowModel extends Equatable {
     String? globalColorToken;
 
     if (color != null) {
-      // Check if color is a token (starts with @)
       if (color!.startsWith('@')) {
-        // Store the token AND resolve it
         globalColorToken = color;
         final tokenColor = globalStyles?.resolveColorReference(color!);
         resolvedColor = tokenColor ?? Colors.transparent;
       } else {
-        // Direct hex color - no token
         resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
         globalColorToken = null;
       }
@@ -82,9 +79,10 @@ class PageBuilderShadowModel extends Equatable {
 
   factory PageBuilderShadowModel.fromDomain(PageBuilderShadow shadow) {
     return PageBuilderShadowModel(
-        color: shadow.globalColorToken ?? (shadow.color != null
-            ? ColorUtility.colorToHex(shadow.color!)
-            : null),
+        color: shadow.globalColorToken ??
+            (shadow.color != null
+                ? ColorUtility.colorToHex(shadow.color!)
+                : null),
         spreadRadius: shadow.spreadRadius,
         blurRadius: shadow.blurRadius,
         offset: _offsetToMap(shadow.offset));

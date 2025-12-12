@@ -1,14 +1,11 @@
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 
-/// Reverses token resolution - converts resolved hex colors back to tokens
-/// This should be applied BEFORE saving to Firestore to preserve tokens
 class PagebuilderGlobalStylesReverseResolver {
   final PageBuilderGlobalStyles globalStyles;
 
   PagebuilderGlobalStylesReverseResolver(this.globalStyles);
 
-  /// Recursively applies tokens to a Map structure
   /// Replaces hex colors that match global styles with their token equivalents
   Map<String, dynamic> applyTokensToMap(Map<String, dynamic> map) {
     final result = <String, dynamic>{};
@@ -18,16 +15,12 @@ class PagebuilderGlobalStylesReverseResolver {
       final value = entry.value;
 
       if (value is String && _isHexColor(value)) {
-        // This might be a resolved color - try to reverse it
         result[key] = _reverseResolveColor(key, value);
       } else if (value is Map<String, dynamic>) {
-        // Recursively apply tokens to nested maps
         result[key] = applyTokensToMap(value);
       } else if (value is List) {
-        // Recursively apply tokens to lists
         result[key] = _applyTokensToList(value);
       } else {
-        // Keep value as-is
         result[key] = value;
       }
     }
@@ -48,7 +41,6 @@ class PagebuilderGlobalStylesReverseResolver {
     }).toList();
   }
 
-  /// Checks if a string is a hex color (8 or 6 digits, optionally with #)
   bool _isHexColor(String value) {
     if (value.startsWith('#')) {
       return value.length == 7 || value.length == 9;
@@ -61,46 +53,46 @@ class PagebuilderGlobalStylesReverseResolver {
   String _reverseResolveColor(String fieldName, String hexColor) {
     final lowerFieldName = fieldName.toLowerCase();
 
-    // Only try to reverse resolve if this is a color field
-    if (lowerFieldName != 'color' &&
-        lowerFieldName != 'backgroundcolor' &&
-        !lowerFieldName.contains('color')) {
+    if (lowerFieldName != "color" &&
+        lowerFieldName != "backgroundcolor" &&
+        !lowerFieldName.contains("color")) {
       return hexColor;
     }
 
-    // Normalize hex color (remove # if present, ensure 8 digits with FF alpha)
-    String normalizedHex = hexColor.replaceAll('#', '').toUpperCase();
+    String normalizedHex = hexColor.replaceAll("#", "").toUpperCase();
     if (normalizedHex.length == 6) {
-      normalizedHex = 'FF$normalizedHex'; // Add alpha if missing
+      normalizedHex = "FF$normalizedHex";
     }
 
-    // Try to match with global style colors
     final colors = globalStyles.colors;
     if (colors == null) return hexColor;
 
     // Check each global color (convert Color to 8-digit hex for comparison)
     if (colors.primary != null &&
-        ColorUtility.colorToHex(colors.primary!).toUpperCase() == normalizedHex) {
-      return '@primary';
+        ColorUtility.colorToHex(colors.primary!).toUpperCase() ==
+            normalizedHex) {
+      return "@primary";
     }
     if (colors.secondary != null &&
-        ColorUtility.colorToHex(colors.secondary!).toUpperCase() == normalizedHex) {
-      return '@secondary';
+        ColorUtility.colorToHex(colors.secondary!).toUpperCase() ==
+            normalizedHex) {
+      return "@secondary";
     }
     if (colors.tertiary != null &&
-        ColorUtility.colorToHex(colors.tertiary!).toUpperCase() == normalizedHex) {
-      return '@tertiary';
+        ColorUtility.colorToHex(colors.tertiary!).toUpperCase() ==
+            normalizedHex) {
+      return "@tertiary";
     }
     if (colors.background != null &&
-        ColorUtility.colorToHex(colors.background!).toUpperCase() == normalizedHex) {
-      return '@background';
+        ColorUtility.colorToHex(colors.background!).toUpperCase() ==
+            normalizedHex) {
+      return "@background";
     }
     if (colors.surface != null &&
-        ColorUtility.colorToHex(colors.surface!).toUpperCase() == normalizedHex) {
-      return '@surface';
+        ColorUtility.colorToHex(colors.surface!).toUpperCase() ==
+            normalizedHex) {
+      return "@surface";
     }
-
-    // No match found - return original hex
     return hexColor;
   }
 }

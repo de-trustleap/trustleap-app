@@ -9,7 +9,7 @@ class PageBuilderIconProperties extends Equatable
   final String? code;
   final PagebuilderResponsiveOrConstant<double>? size;
   final Color? color;
-  final String? globalColorToken; // "@primary", "@secondary", etc. or null if not a token
+  final String? globalColorToken;
 
   const PageBuilderIconProperties({
     required this.code,
@@ -29,7 +29,9 @@ class PageBuilderIconProperties extends Equatable
       code: code ?? this.code,
       size: size ?? this.size,
       color: color ?? this.color,
-      globalColorToken: setGlobalColorTokenNull ? null : (globalColorToken ?? this.globalColorToken),
+      globalColorToken: setGlobalColorTokenNull
+          ? null
+          : (globalColorToken ?? this.globalColorToken),
     );
   }
 

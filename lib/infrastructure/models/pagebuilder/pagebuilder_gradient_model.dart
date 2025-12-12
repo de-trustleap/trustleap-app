@@ -42,14 +42,11 @@ class PagebuilderGradientStopModel extends Equatable {
     Color resolvedColor;
     String? token;
 
-    // Check if color is a token (starts with @)
     if (color.startsWith('@')) {
-      // Store the token AND resolve it
       token = color;
       final tokenColor = globalStyles?.resolveColorReference(color);
       resolvedColor = tokenColor ?? Colors.transparent;
     } else {
-      // Direct hex color - no token
       resolvedColor = Color(ColorUtility.getHexIntFromString(color));
       token = null;
     }
@@ -61,9 +58,10 @@ class PagebuilderGradientStopModel extends Equatable {
     );
   }
 
-  factory PagebuilderGradientStopModel.fromDomain(PagebuilderGradientStop stop) {
-    // If there's a token, use it; otherwise convert color to hex
-    final colorValue = stop.globalColorToken ?? ColorUtility.colorToHex(stop.color);
+  factory PagebuilderGradientStopModel.fromDomain(
+      PagebuilderGradientStop stop) {
+    final colorValue =
+        stop.globalColorToken ?? ColorUtility.colorToHex(stop.color);
     return PagebuilderGradientStopModel(
       color: colorValue,
       position: stop.position,
@@ -160,7 +158,8 @@ class PagebuilderGradientModel extends Equatable {
     }
 
     final domainStops = stops
-        .map((stop) => PagebuilderGradientStopModel.fromMap(stop).toDomain(globalStyles))
+        .map((stop) =>
+            PagebuilderGradientStopModel.fromMap(stop).toDomain(globalStyles))
         .toList();
 
     return PagebuilderGradient(

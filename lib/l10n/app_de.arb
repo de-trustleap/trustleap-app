@@ -3565,5 +3565,49 @@
     "pagebuilder_hierarchy_close_tooltip": "Seitenhierarchie ausblenden",
     "@pagebuilder_hierarchy_close_tooltip": {
         "description": "Tooltip für den Button zum Ausblenden der Seitenhierarchie"
+    },
+    "pagebuilder_global_colors_palette_title": "Globale Farben",
+    "@pagebuilder_global_colors_palette_title": {
+        "description": "Titel für die Palette der globalen Farben"
+    },
+    "pagebuilder_global_colors_palette_primary": "Primär",
+    "@pagebuilder_global_colors_palette_primary": {
+        "description": "Label für primäre Farbe"
+    },
+    "pagebuilder_global_colors_palette_secondary": "Sekundär",
+    "@pagebuilder_global_colors_palette_secondary": {
+        "description": "Label für sekundäre Farbe"
+    },
+    "pagebuilder_global_colors_palette_tertiary": "Tertiär",
+    "@pagebuilder_global_colors_palette_tertiary": {
+        "description": "Label für tertiäre Farbe"
+    },
+    "pagebuilder_global_colors_palette_background": "Hintergrund",
+    "@pagebuilder_global_colors_palette_background": {
+        "description": "Label für Hintergrundfarbe"
+    },
+    "pagebuilder_global_colors_palette_surface": "Container",
+    "@pagebuilder_global_colors_palette_surface": {
+        "description": "Label für Container-/Oberflächenfarbe"
+    },
+    "pagebuilder_font_family_control_global_heading": "Global",
+    "@pagebuilder_font_family_control_global_heading": {
+        "description": "Überschrift für globale Schriftarten im Font-Dropdown"
+    },
+    "pagebuilder_font_family_control_other_heading": "Andere",
+    "@pagebuilder_font_family_control_other_heading": {
+        "description": "Überschrift für andere Schriftarten im Font-Dropdown"
+    },
+    "pagebuilder_font_family_control_headline_font": "Überschrift",
+    "@pagebuilder_font_family_control_headline_font": {
+        "description": "Label für die Überschrift-Schriftart"
+    },
+    "pagebuilder_font_family_control_text_font": "Fließtext",
+    "@pagebuilder_font_family_control_text_font": {
+        "description": "Label für die Fließtext-Schriftart"
+    },
+    "pagebuilder_global_styles_fonts_title": "Globale Schriftarten",
+    "@pagebuilder_global_styles_fonts_title": {
+        "description": "Titel für die globalen Schriftarten im Styles-Menü"
     }
 }

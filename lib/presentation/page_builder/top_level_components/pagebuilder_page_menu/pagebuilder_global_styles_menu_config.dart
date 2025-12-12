@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_fonts.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker/pagebuilder_color_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_font_family_control.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     return BlocBuilder<PagebuilderBloc, PagebuilderState>(
       bloc: Modular.get<PagebuilderBloc>(),
@@ -35,14 +37,14 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Globale Farben",
+                localization.pagebuilder_global_colors_palette_title,
                 style: themeData.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 16),
               _ColorSection(
-                label: "Primär",
+                label: localization.pagebuilder_global_colors_palette_primary,
                 color: globalStyles?.colors?.primary,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -61,7 +63,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _ColorSection(
-                label: "Sekundär",
+                label: localization.pagebuilder_global_colors_palette_secondary,
                 color: globalStyles?.colors?.secondary,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -80,7 +82,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _ColorSection(
-                label: "Tertiär",
+                label: localization.pagebuilder_global_colors_palette_tertiary,
                 color: globalStyles?.colors?.tertiary,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -99,7 +101,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _ColorSection(
-                label: "Hintergrund",
+                label: localization.pagebuilder_global_colors_palette_background,
                 color: globalStyles?.colors?.background,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -118,7 +120,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _ColorSection(
-                label: "Container",
+                label: localization.pagebuilder_global_colors_palette_surface,
                 color: globalStyles?.colors?.surface,
                 onColorChanged: (color, {token}) {
                   _updateGlobalColors(
@@ -137,14 +139,14 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               Text(
-                'Globale Schriftarten',
+                localization.pagebuilder_global_styles_fonts_title,
                 style: themeData.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 16),
               _FontSection(
-                label: "Überschrift",
+                label: localization.pagebuilder_font_family_control_headline_font,
                 fontFamily: globalStyles?.fonts?.headline,
                 onFontChanged: (font) {
                   _updateGlobalFonts(
@@ -157,7 +159,7 @@ class PagebuilderGlobalStylesMenuConfig extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _FontSection(
-                label: "Fließtext",
+                label: localization.pagebuilder_font_family_control_text_font,
                 fontFamily: globalStyles?.fonts?.text,
                 onFontChanged: (font) {
                   _updateGlobalFonts(

@@ -209,15 +209,12 @@ extension PagebuilderBlocSection on PagebuilderBloc {
 
       if (currentPage == null) return;
 
-      // Convert domain to model - tokens are preserved in domain, so they stay as tokens
       final pageModel = PageBuilderPageModel.fromDomain(currentPage);
       var pageMap = pageModel.toMap();
 
-      // Update the globalStyles in the map to the NEW values
-      pageMap['globalStyles'] =
+      pageMap["globalStyles"] =
           PageBuilderPageModel.getMapFromGlobalStyles(event.globalStyles);
 
-      // Convert back to domain - tokens will be resolved with NEW globalStyles
       final modelWithTokens = PageBuilderPageModel.fromMap(pageMap);
       final refreshedPage = modelWithTokens.toDomain();
 

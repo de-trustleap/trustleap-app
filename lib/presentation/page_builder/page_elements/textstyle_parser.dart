@@ -11,7 +11,6 @@ class TextStyleParser {
     PageBuilderTextProperties? properties, [
     PageBuilderGlobalStyles? globalStyles,
   ]) {
-    // Get global styles from parameter or fall back to BLoC
     final styles = globalStyles ?? _getGlobalStylesFromBloc();
 
     final resolver = PagebuilderGlobalStylesResolver(styles);

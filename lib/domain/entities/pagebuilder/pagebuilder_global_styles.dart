@@ -18,15 +18,15 @@ class PageBuilderGlobalStyles extends Equatable {
 
     final tokenName = value.substring(1);
     switch (tokenName) {
-      case 'primary':
+      case "primary":
         return colors!.primary;
-      case 'secondary':
+      case "secondary":
         return colors!.secondary;
-      case 'tertiary':
+      case "tertiary":
         return colors!.tertiary;
-      case 'background':
+      case "background":
         return colors!.background;
-      case 'surface':
+      case "surface":
         return colors!.surface;
       default:
         return null;
@@ -38,9 +38,9 @@ class PageBuilderGlobalStyles extends Equatable {
 
     final tokenName = value.substring(1);
     switch (tokenName) {
-      case 'headline':
+      case "headline":
         return fonts!.headline;
-      case 'text':
+      case "text":
         return fonts!.text;
       default:
         return null;

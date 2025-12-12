@@ -106,8 +106,7 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
                 if (widget.isColorMode) {
                   setState(() {
                     _selectedColor = color;
-                    _selectedToken =
-                        null; // Clear token when manually selecting color
+                    _selectedToken = null;
                     _hexTextFieldController.text = ColorUtility.colorToHex(
                         _selectedColor,
                         includeHashPrefix: true);
@@ -156,8 +155,7 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
                       if (widget.isColorMode && value.isNotEmpty) {
                         setState(() {
                           _selectedColor = ColorUtility.hexToColor(value);
-                          _selectedToken =
-                              null; // Clear token when manually entering hex
+                          _selectedToken = null;
                         });
                         widget.onColorChanged(_selectedColor);
                       }

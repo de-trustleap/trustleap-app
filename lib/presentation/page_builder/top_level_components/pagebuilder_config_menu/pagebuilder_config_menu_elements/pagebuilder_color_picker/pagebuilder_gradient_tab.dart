@@ -83,7 +83,6 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                       ),
                     ],
                   ),
-                  // Global Colors Palette
                   if (widget.globalColors != null)
                     PagebuilderGlobalColorsPalette(
                       globalColors: widget.globalColors,
@@ -92,8 +91,9 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                         setColorState(() {
                           tempColor = color;
                           tempToken = token;
-                          hexTextFieldController.text =
-                              ColorUtility.colorToHex(color, includeHashPrefix: true);
+                          hexTextFieldController.text = ColorUtility.colorToHex(
+                              color,
+                              includeHashPrefix: true);
                         });
                       },
                     ),
@@ -102,7 +102,7 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                     onColorChanged: (Color color) {
                       setColorState(() {
                         tempColor = color;
-                        tempToken = null; // Clear token when manually selecting color
+                        tempToken = null;
                         hexTextFieldController.text = ColorUtility.colorToHex(
                             tempColor,
                             includeHashPrefix: true);
@@ -124,7 +124,8 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                     child: MouseRegion(
                       onEnter: (_) {
                         setColorState(() {
-                          hexTextfieldHoverColor = themeData.colorScheme.surface;
+                          hexTextfieldHoverColor =
+                              themeData.colorScheme.surface;
                         });
                       },
                       onExit: (_) {
@@ -140,7 +141,7 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                             if (value.isNotEmpty) {
                               setColorState(() {
                                 tempColor = ColorUtility.hexToColor(value);
-                                tempToken = null; // Clear token when manually entering hex
+                                tempToken = null;
                               });
                             }
                           },
@@ -152,13 +153,13 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12.0),
-                              borderSide:
-                                  const BorderSide(color: Colors.black, width: 2.0),
+                              borderSide: const BorderSide(
+                                  color: Colors.black, width: 2.0),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12.0),
-                              borderSide:
-                                  const BorderSide(color: Colors.grey, width: 1.0),
+                              borderSide: const BorderSide(
+                                  color: Colors.grey, width: 1.0),
                             ),
                           ),
                         ),
@@ -193,7 +194,8 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
     );
   }
 
-  String _getGradientTypeName(PagebuilderGradientType type, AppLocalizations localization) {
+  String _getGradientTypeName(
+      PagebuilderGradientType type, AppLocalizations localization) {
     switch (type) {
       case PagebuilderGradientType.linear:
         return localization.pagebuilder_gradient_type_linear;
@@ -243,7 +245,8 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                 const SizedBox(height: 16),
                 Row(
                   children: [
-                    Text(localization.pagebuilder_gradient_type_label, style: themeData.textTheme.bodyMedium),
+                    Text(localization.pagebuilder_gradient_type_label,
+                        style: themeData.textTheme.bodyMedium),
                     const SizedBox(width: 8),
                     DropdownButton<PagebuilderGradientType>(
                       value: _selectedGradient.type,
@@ -268,7 +271,8 @@ class _PagebuilderGradientTabState extends State<PagebuilderGradientTab> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                Text(localization.pagebuilder_gradient_colors_label, style: themeData.textTheme.bodyMedium),
+                Text(localization.pagebuilder_gradient_colors_label,
+                    style: themeData.textTheme.bodyMedium),
                 const SizedBox(height: 8),
                 ...List.generate(_selectedGradient.stops.length, (index) {
                   final stop = _selectedGradient.stops[index];

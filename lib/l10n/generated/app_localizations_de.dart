@@ -3097,4 +3097,37 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get pagebuilder_hierarchy_close_tooltip =>
       'Seitenhierarchie ausblenden';
+
+  @override
+  String get pagebuilder_global_colors_palette_title => 'Globale Farben';
+
+  @override
+  String get pagebuilder_global_colors_palette_primary => 'Primär';
+
+  @override
+  String get pagebuilder_global_colors_palette_secondary => 'Sekundär';
+
+  @override
+  String get pagebuilder_global_colors_palette_tertiary => 'Tertiär';
+
+  @override
+  String get pagebuilder_global_colors_palette_background => 'Hintergrund';
+
+  @override
+  String get pagebuilder_global_colors_palette_surface => 'Container';
+
+  @override
+  String get pagebuilder_font_family_control_global_heading => 'Global';
+
+  @override
+  String get pagebuilder_font_family_control_other_heading => 'Andere';
+
+  @override
+  String get pagebuilder_font_family_control_headline_font => 'Überschrift';
+
+  @override
+  String get pagebuilder_font_family_control_text_font => 'Fließtext';
+
+  @override
+  String get pagebuilder_global_styles_fonts_title => 'Globale Schriftarten';
 }

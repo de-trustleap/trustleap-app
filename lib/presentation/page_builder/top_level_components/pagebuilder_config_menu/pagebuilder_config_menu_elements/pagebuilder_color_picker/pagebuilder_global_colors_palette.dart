@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderGlobalColorsPalette extends StatelessWidget {
@@ -76,6 +77,7 @@ class PagebuilderGlobalColorsPalette extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
 
     if (globalColors == null) {
       return const SizedBox.shrink();
@@ -85,31 +87,31 @@ class PagebuilderGlobalColorsPalette extends StatelessWidget {
       if (globalColors!.primary != null)
         {
           'token': '@primary',
-          'label': 'Primär',
+          'label': localization.pagebuilder_global_colors_palette_primary,
           'color': globalColors!.primary!
         },
       if (globalColors!.secondary != null)
         {
           'token': '@secondary',
-          'label': 'Sekundär',
+          'label': localization.pagebuilder_global_colors_palette_secondary,
           'color': globalColors!.secondary!
         },
       if (globalColors!.tertiary != null)
         {
           'token': '@tertiary',
-          'label': 'Tertiär',
+          'label': localization.pagebuilder_global_colors_palette_tertiary,
           'color': globalColors!.tertiary!
         },
       if (globalColors!.background != null)
         {
           'token': '@background',
-          'label': 'Hintergrund',
+          'label': localization.pagebuilder_global_colors_palette_background,
           'color': globalColors!.background!
         },
       if (globalColors!.surface != null)
         {
           'token': '@surface',
-          'label': 'Container',
+          'label': localization.pagebuilder_global_colors_palette_surface,
           'color': globalColors!.surface!
         },
     ];
@@ -123,7 +125,7 @@ class PagebuilderGlobalColorsPalette extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Globale Farben",
+          localization.pagebuilder_global_colors_palette_title,
           style: themeData.textTheme.bodySmall?.copyWith(
             fontWeight: FontWeight.bold,
             color: themeData.colorScheme.surfaceTint.withValues(alpha: 0.7),

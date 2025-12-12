@@ -104,28 +104,21 @@ class PageBuilderTextPropertiesModel extends Equatable
     Color? resolvedColor;
     String? colorToken;
     if (color != null) {
-      // Check if color is a token (starts with @)
       if (color!.startsWith('@')) {
-        // Store token AND resolve it
         colorToken = color;
         resolvedColor = globalStyles?.resolveColorReference(color!);
       } else {
-        // Direct hex color
         resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
         colorToken = null;
       }
     }
 
-    // Resolve font family token if present
     String? resolvedFontFamily;
     if (fontFamily != null) {
       if (fontFamily!.startsWith('@')) {
-        // Resolve font token
         resolvedFontFamily = globalStyles?.resolveFontReference(fontFamily!);
-        // If resolution fails, fallback to a default font
         resolvedFontFamily ??= "Roboto";
       } else {
-        // Direct font name
         resolvedFontFamily = fontFamily;
       }
     }
@@ -173,7 +166,6 @@ class PageBuilderTextPropertiesModel extends Equatable
 
   factory PageBuilderTextPropertiesModel.fromDomain(
       PageBuilderTextProperties properties) {
-    // Use token if present, otherwise convert color to hex
     final colorValue = properties.globalColorToken ??
         (properties.color != null
             ? ColorUtility.colorToHex(properties.color!)

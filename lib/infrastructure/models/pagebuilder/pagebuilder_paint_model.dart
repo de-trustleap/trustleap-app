@@ -46,14 +46,11 @@ class PagebuilderPaintModel extends Equatable {
       Color resolvedColor;
       String? token;
 
-      // Check if color is a token (starts with @)
       if (color!.startsWith('@')) {
-        // Store the token AND resolve it
         token = color;
         final tokenColor = globalStyles?.resolveColorReference(color!);
         resolvedColor = tokenColor ?? Colors.transparent;
       } else {
-        // Direct hex color - no token
         resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
         token = null;
       }
@@ -61,18 +58,16 @@ class PagebuilderPaintModel extends Equatable {
       return PagebuilderPaint.color(resolvedColor, globalColorToken: token);
     } else if (gradient != null) {
       return PagebuilderPaint.gradient(
-        PagebuilderGradientModel.fromMap(gradient!).toDomain(globalStyles)
-      );
+          PagebuilderGradientModel.fromMap(gradient!).toDomain(globalStyles));
     }
 
-    // Fallback to transparent color if neither is set
     return const PagebuilderPaint.color(Colors.transparent);
   }
 
   factory PagebuilderPaintModel.fromDomain(PagebuilderPaint paint) {
     if (paint.isColor) {
-      // If there's a token, use it; otherwise convert color to hex
-      final colorValue = paint.globalColorToken ?? ColorUtility.colorToHex(paint.color!);
+      final colorValue =
+          paint.globalColorToken ?? ColorUtility.colorToHex(paint.color!);
       return PagebuilderPaintModel(
         color: colorValue,
         gradient: null,
@@ -84,9 +79,8 @@ class PagebuilderPaintModel extends Equatable {
       );
     }
 
-    // Fallback
     return const PagebuilderPaintModel(
-      color: "00000000", // Transparent
+      color: "00000000",
       gradient: null,
     );
   }

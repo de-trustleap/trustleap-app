@@ -6,7 +6,7 @@ class PagebuilderBorder extends Equatable {
   final double? width;
   final double? radius;
   final Color? color;
-  final String? globalColorToken; // "@primary", "@secondary", etc. or null if not a token
+  final String? globalColorToken;
 
   const PagebuilderBorder({
     required this.width,

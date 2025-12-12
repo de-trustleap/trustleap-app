@@ -89,21 +89,22 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
     );
   }
 
-  PageBuilderTextFieldProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
-    // Resolve backgroundColor token
+  PageBuilderTextFieldProperties toDomain(
+      PageBuilderGlobalStyles? globalStyles) {
     Color? resolvedBackgroundColor;
     String? bgToken;
     if (backgroundColor != null) {
       if (backgroundColor!.startsWith('@')) {
         bgToken = backgroundColor;
-        resolvedBackgroundColor = globalStyles?.resolveColorReference(backgroundColor!);
+        resolvedBackgroundColor =
+            globalStyles?.resolveColorReference(backgroundColor!);
       } else {
-        resolvedBackgroundColor = Color(ColorUtility.getHexIntFromString(backgroundColor!));
+        resolvedBackgroundColor =
+            Color(ColorUtility.getHexIntFromString(backgroundColor!));
         bgToken = null;
       }
     }
 
-    // Resolve borderColor token
     Color? resolvedBorderColor;
     String? borderToken;
     if (borderColor != null) {
@@ -111,7 +112,8 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
         borderToken = borderColor;
         resolvedBorderColor = globalStyles?.resolveColorReference(borderColor!);
       } else {
-        resolvedBorderColor = Color(ColorUtility.getHexIntFromString(borderColor!));
+        resolvedBorderColor =
+            Color(ColorUtility.getHexIntFromString(borderColor!));
         borderToken = null;
       }
     }
@@ -130,21 +132,25 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
                 .toDomain(globalStyles)
             : null,
         textProperties: textProperties != null
-            ? PageBuilderTextPropertiesModel.fromMap(textProperties!).toDomain(globalStyles)
+            ? PageBuilderTextPropertiesModel.fromMap(textProperties!)
+                .toDomain(globalStyles)
             : null);
   }
 
   factory PageBuilderTextFieldPropertiesModel.fromDomain(
       PageBuilderTextFieldProperties properties) {
-    // Use tokens if present, otherwise convert colors to hex
     final bgColorValue = properties.globalBackgroundColorToken ??
-        (properties.backgroundColor != null ? ColorUtility.colorToHex(properties.backgroundColor!) : null);
+        (properties.backgroundColor != null
+            ? ColorUtility.colorToHex(properties.backgroundColor!)
+            : null);
     final borderColorValue = properties.globalBorderColorToken ??
-        (properties.borderColor != null ? ColorUtility.colorToHex(properties.borderColor!) : null);
+        (properties.borderColor != null
+            ? ColorUtility.colorToHex(properties.borderColor!)
+            : null);
 
     return PageBuilderTextFieldPropertiesModel(
-        width: PagebuilderResponsiveOrConstantModel.fromDomain(
-            properties.width),
+        width:
+            PagebuilderResponsiveOrConstantModel.fromDomain(properties.width),
         minLines: properties.minLines,
         maxLines: properties.maxLines,
         isRequired: properties.isRequired,
