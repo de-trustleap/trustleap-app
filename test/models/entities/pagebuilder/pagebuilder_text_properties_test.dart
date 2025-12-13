@@ -33,6 +33,28 @@ void main() {
       // Then
       expect(result, expectedResult);
     });
+
+    test("should preserve globalFontToken and globalColorToken with copyWith", () {
+      // Given
+      final model = PageBuilderTextProperties(
+          text: "Test",
+          fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
+          fontFamily: "Merriweather",
+          globalFontToken: "@headline",
+          lineHeight: null,
+          letterSpacing: null,
+          textShadow: null,
+          color: Color(0xFFFF5722),
+          globalColorToken: "@primary",
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left));
+      // When
+      final result = model.copyWith(text: "Updated");
+      // Then
+      expect(result.globalFontToken, "@headline");
+      expect(result.globalColorToken, "@primary");
+      expect(result.fontFamily, "Merriweather");
+      expect(result.text, "Updated");
+    });
   });
 
   group("PageBuilderTextProperties_DeepCopy", () {
@@ -66,6 +88,35 @@ void main() {
       expect(copy.color, equals(original.color));
       expect(copy.alignment, equals(original.alignment));
       expect(copy.textShadow, equals(original.textShadow));
+      expect(copy, equals(original));
+    });
+
+    test("should preserve globalFontToken and globalColorToken in deepCopy", () {
+      // Given
+      const textShadow = PageBuilderShadow(
+        color: Color(0x80000000),
+        spreadRadius: 1.0,
+        blurRadius: 4.0,
+        offset: Offset(2.0, 2.0),
+      );
+      const original = PageBuilderTextProperties(
+        text: "Hello World",
+        fontSize: const PagebuilderResponsiveOrConstant.constant(16.0),
+        fontFamily: "Merriweather",
+        globalFontToken: "@headline",
+        lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+        letterSpacing: const PagebuilderResponsiveOrConstant.constant(0.5),
+        color: Color(0xFF2196F3),
+        globalColorToken: "@primary",
+        alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center),
+        textShadow: textShadow,
+      );
+      // When
+      final copy = original.deepCopy();
+      // Then
+      expect(copy.globalFontToken, "@headline");
+      expect(copy.globalColorToken, "@primary");
+      expect(copy.fontFamily, "Merriweather");
       expect(copy, equals(original));
     });
   });

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:flutter/material.dart';
 
 class PagebuilderBorderModel extends Equatable {
@@ -43,22 +44,38 @@ class PagebuilderBorderModel extends Equatable {
     );
   }
 
-  PagebuilderBorder toDomain() {
+  PagebuilderBorder toDomain(PageBuilderGlobalStyles? globalStyles) {
+    Color? resolvedColor;
+    String? token;
+
+    if (color != null) {
+      if (color!.startsWith('@')) {
+        token = color;
+        final tokenColor = globalStyles?.resolveColorReference(color!);
+        resolvedColor = tokenColor ?? Colors.transparent;
+      } else {
+        resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
+        token = null;
+      }
+    }
+
     return PagebuilderBorder(
       width: width,
       radius: radius,
-      color: color != null
-          ? Color(ColorUtility.getHexIntFromString(color!))
-          : null,
+      color: resolvedColor,
+      globalColorToken: token,
     );
   }
 
   factory PagebuilderBorderModel.fromDomain(PagebuilderBorder border) {
+    final colorValue = border.color != null
+        ? (border.globalColorToken ?? ColorUtility.colorToHex(border.color!))
+        : null;
+
     return PagebuilderBorderModel(
       width: border.width,
       radius: border.radius,
-      color:
-          border.color != null ? ColorUtility.colorToHex(border.color!) : null,
+      color: colorValue,
     );
   }
 

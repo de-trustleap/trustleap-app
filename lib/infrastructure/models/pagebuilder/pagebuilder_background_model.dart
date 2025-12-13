@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_image_properties_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
 
@@ -45,17 +46,17 @@ class PagebuilderBackgroundModel extends Equatable {
         overlayPaint: overlayPaint ?? this.overlayPaint);
   }
 
-  PagebuilderBackground toDomain() {
+  PagebuilderBackground toDomain(PageBuilderGlobalStyles? globalStyles) {
     return PagebuilderBackground(
         backgroundPaint: backgroundPaint != null
-            ? PagebuilderPaintModel.fromMap(backgroundPaint!).toDomain()
+            ? PagebuilderPaintModel.fromMap(backgroundPaint!).toDomain(globalStyles)
             : null,
         imageProperties: imageProperties != null
             ? PageBuilderImagePropertiesModel.fromMap(imageProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null,
         overlayPaint: overlayPaint != null
-            ? PagebuilderPaintModel.fromMap(overlayPaint!).toDomain()
+            ? PagebuilderPaintModel.fromMap(overlayPaint!).toDomain(globalStyles)
             : null);
   }
 

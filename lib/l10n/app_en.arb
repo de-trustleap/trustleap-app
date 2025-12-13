@@ -3565,5 +3565,49 @@
     "pagebuilder_hierarchy_close_tooltip": "Hide page hierarchy",
     "@pagebuilder_hierarchy_close_tooltip": {
         "description": "Tooltip for the button to hide the page hierarchy"
+    },
+    "pagebuilder_global_colors_palette_title": "Global Colors",
+    "@pagebuilder_global_colors_palette_title": {
+        "description": "Title for the global colors palette"
+    },
+    "pagebuilder_global_colors_palette_primary": "Primary",
+    "@pagebuilder_global_colors_palette_primary": {
+        "description": "Label for primary color"
+    },
+    "pagebuilder_global_colors_palette_secondary": "Secondary",
+    "@pagebuilder_global_colors_palette_secondary": {
+        "description": "Label for secondary color"
+    },
+    "pagebuilder_global_colors_palette_tertiary": "Tertiary",
+    "@pagebuilder_global_colors_palette_tertiary": {
+        "description": "Label for tertiary color"
+    },
+    "pagebuilder_global_colors_palette_background": "Background",
+    "@pagebuilder_global_colors_palette_background": {
+        "description": "Label for background color"
+    },
+    "pagebuilder_global_colors_palette_surface": "Surface",
+    "@pagebuilder_global_colors_palette_surface": {
+        "description": "Label for surface/container color"
+    },
+    "pagebuilder_font_family_control_global_heading": "Global",
+    "@pagebuilder_font_family_control_global_heading": {
+        "description": "Heading for global fonts in font dropdown"
+    },
+    "pagebuilder_font_family_control_other_heading": "Other",
+    "@pagebuilder_font_family_control_other_heading": {
+        "description": "Heading for other fonts in font dropdown"
+    },
+    "pagebuilder_font_family_control_headline_font": "Headline",
+    "@pagebuilder_font_family_control_headline_font": {
+        "description": "Label for headline font"
+    },
+    "pagebuilder_font_family_control_text_font": "Body Text",
+    "@pagebuilder_font_family_control_text_font": {
+        "description": "Label for body text font"
+    },
+    "pagebuilder_global_styles_fonts_title": "Global Fonts",
+    "@pagebuilder_global_styles_fonts_title": {
+        "description": "Title for global fonts in the styles menu"
     }
 }

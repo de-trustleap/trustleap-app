@@ -1,9 +1,12 @@
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant_extensions.dart';
+import 'package:finanzbegleiter/domain/helpers/pagebuilder_global_styles_resolver.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/alignment_mapper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/textstyle_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderHtmlRenderer extends StatelessWidget {
   final PageBuilderTextProperties? textProperties;
@@ -28,8 +31,18 @@ class PagebuilderHtmlRenderer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final htmlContent = _preprocessHtmlTextDecoration(textProperties?.text ?? "");
-    final baseStyle = TextStyleParser().getTextStyleFromProperties(textProperties);
+    final blocState = Modular.get<PagebuilderBloc>().state;
+
+    final globalStyles = blocState is GetLandingPageAndUserSuccessState
+        ? blocState.content.content?.globalStyles
+        : null;
+
+    final resolver = PagebuilderGlobalStylesResolver(globalStyles);
+    String htmlContent = resolver.resolveHtmlTokens(textProperties?.text ?? "");
+    htmlContent = _preprocessHtmlTextDecoration(htmlContent);
+
+    final baseStyle =
+        TextStyleParser().getTextStyleFromProperties(textProperties);
     final textAlignValue = textProperties?.alignment?.getValue();
 
     final commonTextStyle = Style(
@@ -49,84 +62,84 @@ class PagebuilderHtmlRenderer extends StatelessWidget {
         data: htmlContent,
         shrinkWrap: true,
         style: {
-        "body": Style(
-          margin: Margins.zero,
-          padding: HtmlPaddings.zero,
-          fontFamily: baseStyle.fontFamily,
-          fontFamilyFallback: baseStyle.fontFamilyFallback,
-          fontSize: baseStyle.fontSize != null
-              ? FontSize(baseStyle.fontSize!)
-              : null,
-          color: baseStyle.color ?? Colors.black,
-          lineHeight:
-              baseStyle.height != null ? LineHeight(baseStyle.height!) : null,
-          letterSpacing: baseStyle.letterSpacing,
-          textAlign: textProperties?.alignment?.getValue(),
-          display: useInlineDisplay ? Display.inline : null,
-        ),
-        "p": commonTextStyle.merge(Style(
-          margin: Margins.zero,
-          padding: HtmlPaddings.zero,
-          textAlign: textProperties?.alignment?.getValue(),
-        )),
-        "div": commonTextStyle.merge(Style(
-          textAlign: textProperties?.alignment?.getValue(),
-        )),
-        "span": commonTextStyle,
-        "b": commonTextStyle.merge(Style(
-          fontWeight: FontWeight.bold,
-          color: null,
-        )),
-        "strong": commonTextStyle.merge(Style(
-          fontWeight: FontWeight.bold,
-          color: null,
-        )),
-        "i": commonTextStyle.merge(Style(
-          fontStyle: FontStyle.italic,
-          color: null,
-        )),
-        "em": commonTextStyle.merge(Style(
-          fontStyle: FontStyle.italic,
-          color: null,
-        )),
-        "u": commonTextStyle.merge(Style(
-          textDecoration: TextDecoration.underline,
-          textDecorationColor: null,
-        )),
-        "s": commonTextStyle.merge(Style(
-          textDecoration: TextDecoration.lineThrough,
-          textDecorationColor: null,
-        )),
-        "strike": commonTextStyle.merge(Style(
-          textDecoration: TextDecoration.lineThrough,
-          textDecorationColor: null,
-        )),
-        "del": commonTextStyle.merge(Style(
-          textDecoration: TextDecoration.lineThrough,
-          textDecorationColor: null,
-        )),
-        "sup": commonTextStyle.merge(Style(
-          verticalAlign: VerticalAlign.sup,
-        )),
-        "sub": commonTextStyle.merge(Style(
-          verticalAlign: VerticalAlign.sub,
-        )),
-        "ul": commonTextStyle.merge(Style(
-          margin: Margins.zero,
-          padding: HtmlPaddings.only(
-            left: baseStyle.fontSize ?? 16,
+          "body": Style(
+            margin: Margins.zero,
+            padding: HtmlPaddings.zero,
+            fontFamily: baseStyle.fontFamily,
+            fontFamilyFallback: baseStyle.fontFamilyFallback,
+            fontSize: baseStyle.fontSize != null
+                ? FontSize(baseStyle.fontSize!)
+                : null,
+            color: baseStyle.color ?? Colors.black,
+            lineHeight:
+                baseStyle.height != null ? LineHeight(baseStyle.height!) : null,
+            letterSpacing: baseStyle.letterSpacing,
+            textAlign: textProperties?.alignment?.getValue(),
+            display: useInlineDisplay ? Display.inline : null,
           ),
-        )),
-        "ol": commonTextStyle.merge(Style(
-          margin: Margins.zero,
-          padding: HtmlPaddings.only(
-            left: baseStyle.fontSize ?? 16,
-          ),
-        )),
-        "li": commonTextStyle.merge(Style(
-          margin: Margins.zero,
-        )),
-      },
+          "p": commonTextStyle.merge(Style(
+            margin: Margins.zero,
+            padding: HtmlPaddings.zero,
+            textAlign: textProperties?.alignment?.getValue(),
+          )),
+          "div": commonTextStyle.merge(Style(
+            textAlign: textProperties?.alignment?.getValue(),
+          )),
+          "span": commonTextStyle,
+          "b": commonTextStyle.merge(Style(
+            fontWeight: FontWeight.bold,
+            color: null,
+          )),
+          "strong": commonTextStyle.merge(Style(
+            fontWeight: FontWeight.bold,
+            color: null,
+          )),
+          "i": commonTextStyle.merge(Style(
+            fontStyle: FontStyle.italic,
+            color: null,
+          )),
+          "em": commonTextStyle.merge(Style(
+            fontStyle: FontStyle.italic,
+            color: null,
+          )),
+          "u": commonTextStyle.merge(Style(
+            textDecoration: TextDecoration.underline,
+            textDecorationColor: null,
+          )),
+          "s": commonTextStyle.merge(Style(
+            textDecoration: TextDecoration.lineThrough,
+            textDecorationColor: null,
+          )),
+          "strike": commonTextStyle.merge(Style(
+            textDecoration: TextDecoration.lineThrough,
+            textDecorationColor: null,
+          )),
+          "del": commonTextStyle.merge(Style(
+            textDecoration: TextDecoration.lineThrough,
+            textDecorationColor: null,
+          )),
+          "sup": commonTextStyle.merge(Style(
+            verticalAlign: VerticalAlign.sup,
+          )),
+          "sub": commonTextStyle.merge(Style(
+            verticalAlign: VerticalAlign.sub,
+          )),
+          "ul": commonTextStyle.merge(Style(
+            margin: Margins.zero,
+            padding: HtmlPaddings.only(
+              left: baseStyle.fontSize ?? 16,
+            ),
+          )),
+          "ol": commonTextStyle.merge(Style(
+            margin: Margins.zero,
+            padding: HtmlPaddings.only(
+              left: baseStyle.fontSize ?? 16,
+            ),
+          )),
+          "li": commonTextStyle.merge(Style(
+            margin: Margins.zero,
+          )),
+        },
       ),
     );
   }

@@ -14,9 +14,9 @@ void main() {
         () {
       // Given
       final page = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "FF35A55");
+          id: "1", sections: [], backgroundColor: "FF35A55", globalStyles: null);
       final expectedResult = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "FFFFFFFF");
+          id: "1", sections: [], backgroundColor: "FFFFFFFF", globalStyles: null);
       // When
       final result = page.copyWith(backgroundColor: "FFFFFFFF");
       // Then
@@ -28,7 +28,7 @@ void main() {
     test("check if model is successfully converted to a map", () {
       // Given
       final model = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "FFFFFFFF");
+          id: "1", sections: [], backgroundColor: "FFFFFFFF", globalStyles: null);
       final expectedResult = {
         "id": "1",
         "sections": [],
@@ -46,7 +46,7 @@ void main() {
       // Given
       final map = {"id": "1", "sections": [], "backgroundColor": "FFFFFFFF"};
       final expectedResult = PageBuilderPageModel(
-          id: "", sections: [], backgroundColor: "FFFFFFFF");
+          id: "", sections: [], backgroundColor: "FFFFFFFF", globalStyles: null);
       // When
       final result = PageBuilderPageModel.fromMap(map);
       // Then
@@ -60,11 +60,12 @@ void main() {
         () {
       // Given
       final model = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "FFFFFFFF");
+          id: "1", sections: [], backgroundColor: "FFFFFFFF", globalStyles: null);
       final expectedResult = PageBuilderPage(
           id: UniqueID.fromUniqueString("1"),
           sections: [],
-          backgroundColor: Color(0xFFFFFFFF));
+          backgroundColor: Color(0xFFFFFFFF),
+          globalStyles: null);
       // When
       final result = model.toDomain();
       expect(result, expectedResult);
@@ -79,9 +80,10 @@ void main() {
       final model = PageBuilderPage(
           id: UniqueID.fromUniqueString("1"),
           sections: [],
-          backgroundColor: Color(0xFFFFFFFF));
+          backgroundColor: Color(0xFFFFFFFF),
+          globalStyles: null);
       final expectedResult = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "FFFFFFFF");
+          id: "1", sections: [], backgroundColor: "FFFFFFFF", globalStyles: null);
       // When
       final result = PageBuilderPageModel.fromDomain(model);
       expect(result, expectedResult);
@@ -106,7 +108,7 @@ void main() {
         },
       ];
       final model = PageBuilderPageModel(
-          id: "1", sections: sections, backgroundColor: "FFFFFFFF");
+          id: "1", sections: sections, backgroundColor: "FFFFFFFF", globalStyles: null);
       final expectedResult = [
         PageBuilderSection(
             id: UniqueID.fromUniqueString(
@@ -132,7 +134,7 @@ void main() {
             visibleOn: null)
       ];
       // When
-      final result = model.getPageBuilderSectionList(sections);
+      final result = model.getPageBuilderSectionList(sections, null);
       // Then
       expect(result, expectedResult);
     });
@@ -195,9 +197,9 @@ void main() {
     test("check if value equality works", () {
       // Given
       final page1 = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "FFF0F0F0");
+          id: "1", sections: [], backgroundColor: "FFF0F0F0", globalStyles: null);
       final page2 = PageBuilderPageModel(
-          id: "1", sections: [], backgroundColor: "FFF0F0F0");
+          id: "1", sections: [], backgroundColor: "FFF0F0F0", globalStyles: null);
       // Then
       expect(page1, page2);
     });

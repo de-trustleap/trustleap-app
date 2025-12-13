@@ -4,7 +4,9 @@ import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_content.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_local_history.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
@@ -12,15 +14,16 @@ import 'package:finanzbegleiter/domain/helpers/pagebuilder_widget_tree_manipulat
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_page_model.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_reorder_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_factory.dart';
 import 'package:rxdart/rxdart.dart';
 
-part 'pagebuilder_event.dart';
-part 'pagebuilder_state.dart';
 part 'pagebuilder_bloc_history.dart';
 part 'pagebuilder_bloc_section.dart';
 part 'pagebuilder_bloc_widget.dart';
+part 'pagebuilder_event.dart';
+part 'pagebuilder_state.dart';
 
 class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
   final LandingPageRepository landingPageRepo;
@@ -43,6 +46,12 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
         transformer: (events, mapper) =>
             events.debounceTime(updateDebounceTime).switchMap(mapper));
     on<UpdateSectionEvent>(onUpdateSection,
+        transformer: (events, mapper) =>
+            events.debounceTime(updateDebounceTime).switchMap(mapper));
+    on<UpdatePageEvent>(onUpdatePage,
+        transformer: (events, mapper) =>
+            events.debounceTime(updateDebounceTime).switchMap(mapper));
+    on<UpdateGlobalStylesEvent>(onUpdateGlobalStyles,
         transformer: (events, mapper) =>
             events.debounceTime(updateDebounceTime).switchMap(mapper));
     on<ReorderSectionsEvent>(onReorderSections);

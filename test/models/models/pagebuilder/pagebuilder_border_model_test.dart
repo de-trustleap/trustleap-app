@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_border_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -113,7 +115,7 @@ void main() {
         color: Color(0xFFFF6B00),
       );
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -133,7 +135,7 @@ void main() {
         color: null,
       );
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -178,6 +180,134 @@ void main() {
       final result = PagebuilderBorderModel.fromDomain(border);
       // Then
       expect(result, expectedResult);
+    });
+  });
+
+  group("PagebuilderBorderModel_GlobalStyles", () {
+    test("check if color token is resolved with globalStyles in toDomain", () {
+      // Given
+      final model = PagebuilderBorderModel(
+        width: 3.0,
+        radius: 12.0,
+        color: "@primary",
+      );
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFFFF5722));
+      expect(result.globalColorToken, "@primary");
+      expect(result.width, 3.0);
+      expect(result.radius, 12.0);
+    });
+
+    test("check if secondary color token is resolved with globalStyles in toDomain", () {
+      // Given
+      final model = PagebuilderBorderModel(
+        width: 2.0,
+        radius: 8.0,
+        color: "@secondary",
+      );
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: Color(0xFF2196F3),
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFF2196F3));
+      expect(result.globalColorToken, "@secondary");
+    });
+
+    test("check if hex color does not create token even with globalStyles present", () {
+      // Given
+      final model = PagebuilderBorderModel(
+        width: 2.0,
+        radius: 8.0,
+        color: "FFFF5722",
+      );
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFFFF5722));
+      expect(result.globalColorToken, null);
+    });
+
+    test("check if conversion from domain with token preserves token in fromDomain", () {
+      // Given
+      final domainBorder = PagebuilderBorder(
+        width: 3.0,
+        radius: 12.0,
+        color: Color(0xFFFF5722),
+        globalColorToken: "@primary",
+      );
+      // When
+      final result = PagebuilderBorderModel.fromDomain(domainBorder);
+      // Then
+      expect(result.color, "@primary");
+    });
+
+    test("check if conversion from domain without token uses hex color in fromDomain", () {
+      // Given
+      final domainBorder = PagebuilderBorder(
+        width: 3.0,
+        radius: 12.0,
+        color: Color(0xFFFF5722),
+        globalColorToken: null,
+      );
+      // When
+      final result = PagebuilderBorderModel.fromDomain(domainBorder);
+      // Then
+      expect(result.color, "FFFF5722");
+    });
+
+    test("check if null color is handled correctly with globalStyles", () {
+      // Given
+      final model = PagebuilderBorderModel(
+        width: 2.0,
+        radius: 8.0,
+        color: null,
+      );
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, null);
+      expect(result.globalColorToken, null);
     });
   });
 

@@ -10,9 +10,11 @@ class PageBuilderTextProperties extends Equatable
   final String? text;
   final PagebuilderResponsiveOrConstant<double>? fontSize;
   final String? fontFamily;
+  final String? globalFontToken;
   final PagebuilderResponsiveOrConstant<double>? lineHeight;
   final PagebuilderResponsiveOrConstant<double>? letterSpacing;
   final Color? color;
+  final String? globalColorToken;
   final PagebuilderResponsiveOrConstant<TextAlign>? alignment;
   final PageBuilderShadow? textShadow;
 
@@ -20,9 +22,11 @@ class PageBuilderTextProperties extends Equatable
     required this.text,
     required this.fontSize,
     required this.fontFamily,
+    this.globalFontToken,
     required this.lineHeight,
     required this.letterSpacing,
     required this.color,
+    this.globalColorToken,
     required this.alignment,
     required this.textShadow,
   });
@@ -31,9 +35,11 @@ class PageBuilderTextProperties extends Equatable
     String? text,
     PagebuilderResponsiveOrConstant<double>? fontSize,
     String? fontFamily,
+    String? globalFontToken,
     PagebuilderResponsiveOrConstant<double>? lineHeight,
     PagebuilderResponsiveOrConstant<double>? letterSpacing,
     Color? color,
+    String? globalColorToken,
     PagebuilderResponsiveOrConstant<TextAlign>? alignment,
     PageBuilderShadow? textShadow,
   }) {
@@ -41,9 +47,11 @@ class PageBuilderTextProperties extends Equatable
       text: text ?? this.text,
       fontSize: fontSize ?? this.fontSize,
       fontFamily: fontFamily ?? this.fontFamily,
+      globalFontToken: globalFontToken ?? this.globalFontToken,
       lineHeight: lineHeight ?? this.lineHeight,
       letterSpacing: letterSpacing ?? this.letterSpacing,
       color: color ?? this.color,
+      globalColorToken: globalColorToken ?? this.globalColorToken,
       alignment: alignment ?? this.alignment,
       textShadow: textShadow ?? this.textShadow,
     );
@@ -54,9 +62,11 @@ class PageBuilderTextProperties extends Equatable
       text: text,
       fontSize: fontSize,
       fontFamily: fontFamily,
+      globalFontToken: globalFontToken,
       lineHeight: lineHeight,
       letterSpacing: letterSpacing,
       color: color != null ? Color(color!.toARGB32()) : null,
+      globalColorToken: globalColorToken,
       alignment: alignment,
       textShadow: textShadow?.deepCopy(),
     );
@@ -67,9 +77,11 @@ class PageBuilderTextProperties extends Equatable
         text,
         fontSize,
         fontFamily,
+        globalFontToken,
         lineHeight,
         letterSpacing,
         color,
+        globalColorToken,
         alignment,
         textShadow,
       ];

@@ -31,7 +31,8 @@ void main() {
         fullHeight: null,
                     visibleOn: null)
               ],
-              backgroundColor: Colors.red),
+              backgroundColor: Colors.red,
+              globalStyles: null),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
       final expectedResult = PagebuilderContent(
           landingPage: LandingPage(id: UniqueID.fromUniqueString("1")),
@@ -50,7 +51,8 @@ void main() {
         fullHeight: null,
                     visibleOn: null)
               ],
-              backgroundColor: Colors.red),
+              backgroundColor: Colors.red,
+              globalStyles: null),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
       // When
       final result = model.copyWith(
@@ -69,7 +71,8 @@ void main() {
         fullHeight: null,
                   visibleOn: null)
             ],
-            backgroundColor: Colors.red),
+            backgroundColor: Colors.red,
+            globalStyles: null),
       );
       // Then
       expect(result, expectedResult);
@@ -96,7 +99,8 @@ void main() {
         fullHeight: null,
                     visibleOn: null)
               ],
-              backgroundColor: Colors.red),
+              backgroundColor: Colors.red,
+              globalStyles: null),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
       final properties2 = PagebuilderContent(
           landingPage: LandingPage(id: UniqueID.fromUniqueString("1")),
@@ -115,7 +119,8 @@ void main() {
         fullHeight: null,
                     visibleOn: null)
               ],
-              backgroundColor: Colors.red),
+              backgroundColor: Colors.red,
+              globalStyles: null),
           user: CustomUser(id: UniqueID.fromUniqueString("1")));
       // Then
       expect(properties1, properties2);

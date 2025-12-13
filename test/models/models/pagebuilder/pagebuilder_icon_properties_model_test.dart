@@ -3,6 +3,8 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_ic
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_icon_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -68,7 +70,7 @@ void main() {
           size: PagebuilderResponsiveOrConstant.constant(24.0),
           color: Colors.black);
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -91,6 +93,104 @@ void main() {
       final result = PageBuilderIconPropertiesModel.fromDomain(model);
       // Then
       expect(result, expectedResult);
+    });
+  });
+
+  group("PagebuilderIconPropertiesModel_GlobalStyles", () {
+    test("check if color token is resolved with globalStyles in toDomain", () {
+      // Given
+      const model = PageBuilderIconPropertiesModel(
+          code: "E88A",
+          size: PagebuilderResponsiveOrConstantModel.constant(32.0),
+          color: "@primary");
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFFFF5722));
+      expect(result.globalColorToken, "@primary");
+      expect(result.code, "E88A");
+    });
+
+    test("check if secondary color token is resolved with globalStyles in toDomain", () {
+      // Given
+      const model = PageBuilderIconPropertiesModel(
+          code: "E001",
+          size: PagebuilderResponsiveOrConstantModel.constant(48.0),
+          color: "@secondary");
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: Color(0xFF2196F3),
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFF2196F3));
+      expect(result.globalColorToken, "@secondary");
+    });
+
+    test("check if hex color does not create token even with globalStyles present", () {
+      // Given
+      const model = PageBuilderIconPropertiesModel(
+          code: "E002",
+          size: PagebuilderResponsiveOrConstantModel.constant(24.0),
+          color: "FFFF5722");
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFFFF5722));
+      expect(result.globalColorToken, null);
+    });
+
+    test("check if conversion from domain with token preserves token in fromDomain", () {
+      // Given
+      const domainProperties = PageBuilderIconProperties(
+          code: "E88A",
+          size: PagebuilderResponsiveOrConstant.constant(32.0),
+          color: Color(0xFFFF5722),
+          globalColorToken: "@primary");
+      // When
+      final result = PageBuilderIconPropertiesModel.fromDomain(domainProperties);
+      // Then
+      expect(result.color, "@primary");
+    });
+
+    test("check if conversion from domain without token uses hex color in fromDomain", () {
+      // Given
+      const domainProperties = PageBuilderIconProperties(
+          code: "E88A",
+          size: PagebuilderResponsiveOrConstant.constant(32.0),
+          color: Color(0xFFFF5722),
+          globalColorToken: null);
+      // When
+      final result = PageBuilderIconPropertiesModel.fromDomain(domainProperties);
+      // Then
+      expect(result.color, "FFFF5722");
     });
   });
 

@@ -3046,4 +3046,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_hierarchy_close_tooltip => 'Hide page hierarchy';
+
+  @override
+  String get pagebuilder_global_colors_palette_title => 'Global Colors';
+
+  @override
+  String get pagebuilder_global_colors_palette_primary => 'Primary';
+
+  @override
+  String get pagebuilder_global_colors_palette_secondary => 'Secondary';
+
+  @override
+  String get pagebuilder_global_colors_palette_tertiary => 'Tertiary';
+
+  @override
+  String get pagebuilder_global_colors_palette_background => 'Background';
+
+  @override
+  String get pagebuilder_global_colors_palette_surface => 'Surface';
+
+  @override
+  String get pagebuilder_font_family_control_global_heading => 'Global';
+
+  @override
+  String get pagebuilder_font_family_control_other_heading => 'Other';
+
+  @override
+  String get pagebuilder_font_family_control_headline_font => 'Headline';
+
+  @override
+  String get pagebuilder_font_family_control_text_font => 'Body Text';
+
+  @override
+  String get pagebuilder_global_styles_fonts_title => 'Global Fonts';
 }

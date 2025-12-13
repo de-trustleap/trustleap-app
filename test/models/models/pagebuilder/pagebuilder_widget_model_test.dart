@@ -162,7 +162,7 @@ void main() {
           alignment: null,
           customCSS: null);
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -249,7 +249,7 @@ void main() {
           color: null,
           alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.left));
       // When
-      final result = model.getPropertiesByType(type, properties);
+      final result = model.getPropertiesByType(type, properties, null);
       // Then
       expect(result, expectedResult);
     });
@@ -341,7 +341,7 @@ void main() {
           margin: null,
           maxWidth: null,
           alignment: alignmentModel,
-          customCSS: null).toDomain().alignment;
+          customCSS: null).toDomain(null).alignment;
 
       // Then
       expect(result, expectedResult);
@@ -375,7 +375,7 @@ void main() {
           margin: null,
           maxWidth: null,
           alignment: alignmentModel,
-          customCSS: null).toDomain().alignment;
+          customCSS: null).toDomain(null).alignment;
 
       // Then
       expect(result, expectedResult);
@@ -400,7 +400,7 @@ void main() {
           margin: null,
           maxWidth: null,
           alignment: alignmentModel,
-          customCSS: null).toDomain().alignment;
+          customCSS: null).toDomain(null).alignment;
 
       // Then
       expect(result, null);

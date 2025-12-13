@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/shadow_mapper.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_border_model.dart';
@@ -63,13 +64,13 @@ class PageBuilderContainerPropertiesModel extends Equatable
     );
   }
 
-  PageBuilderContainerProperties toDomain() {
+  PageBuilderContainerProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
     return PageBuilderContainerProperties(
         border: border != null
-            ? PagebuilderBorderModel.fromMap(border!).toDomain()
+            ? PagebuilderBorderModel.fromMap(border!).toDomain(globalStyles)
             : null,
         shadow: shadow != null
-            ? PageBuilderShadowModel.fromMap(shadow!).toDomain()
+            ? PageBuilderShadowModel.fromMap(shadow!).toDomain(globalStyles)
             : null,
         width: width?.toDomain(),
         height: height?.toDomain());

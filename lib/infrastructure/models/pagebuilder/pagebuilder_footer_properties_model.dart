@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_footer_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_text_properties_model.dart';
 
@@ -71,28 +72,28 @@ class PagebuilderFooterPropertiesModel extends Equatable
             this.termsAndConditionsTextProperties);
   }
 
-  PagebuilderFooterProperties toDomain() {
+  PagebuilderFooterProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
     return PagebuilderFooterProperties(
         privacyPolicyTextProperties: privacyPolicyTextProperties != null
             ? PageBuilderTextPropertiesModel.fromMap(
                     privacyPolicyTextProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null,
         impressumTextProperties: impressumTextProperties != null
             ? PageBuilderTextPropertiesModel.fromMap(impressumTextProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null,
         initialInformationTextProperties: initialInformationTextProperties !=
                 null
             ? PageBuilderTextPropertiesModel.fromMap(
                     initialInformationTextProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null,
         termsAndConditionsTextProperties: termsAndConditionsTextProperties !=
                 null
             ? PageBuilderTextPropertiesModel.fromMap(
                     termsAndConditionsTextProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null);
   }
 

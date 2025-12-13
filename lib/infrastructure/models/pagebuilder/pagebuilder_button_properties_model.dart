@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_button_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_border_model.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_paint_model.dart';
@@ -65,18 +66,18 @@ class PageBuilderButtonPropertiesModel extends Equatable
     );
   }
 
-  PageBuilderButtonProperties toDomain() {
+  PageBuilderButtonProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
     return PageBuilderButtonProperties(
         width: width?.toDomain(),
         height: height?.toDomain(),
         border: border != null
-            ? PagebuilderBorderModel.fromMap(border!).toDomain()
+            ? PagebuilderBorderModel.fromMap(border!).toDomain(globalStyles)
             : null,
         backgroundPaint: backgroundPaint != null
-            ? PagebuilderPaintModel.fromMap(backgroundPaint!).toDomain()
+            ? PagebuilderPaintModel.fromMap(backgroundPaint!).toDomain(globalStyles)
             : null,
         textProperties: textProperties != null
-            ? PageBuilderTextPropertiesModel.fromMap(textProperties!).toDomain()
+            ? PageBuilderTextPropertiesModel.fromMap(textProperties!).toDomain(globalStyles)
             : null);
   }
 

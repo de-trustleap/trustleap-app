@@ -179,6 +179,62 @@ extension PagebuilderBlocSection on PagebuilderBloc {
     }
   }
 
+  Future<void> onUpdatePage(
+      UpdatePageEvent event, Emitter<PagebuilderState> emit) async {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: event.updatedPage);
+
+      if (!isUndoRedoOperation) {
+        localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
+
+  Future<void> onUpdateGlobalStyles(
+      UpdateGlobalStylesEvent event, Emitter<PagebuilderState> emit) async {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final currentPage = currentState.content.content;
+
+      if (currentPage == null) return;
+
+      final pageModel = PageBuilderPageModel.fromDomain(currentPage);
+      var pageMap = pageModel.toMap();
+
+      pageMap["globalStyles"] =
+          PageBuilderPageModel.getMapFromGlobalStyles(event.globalStyles);
+
+      final modelWithTokens = PageBuilderPageModel.fromMap(pageMap);
+      final refreshedPage = modelWithTokens.toDomain();
+
+      final updatedPageBuilderContent =
+          currentState.content.copyWith(content: refreshedPage);
+
+      if (!isUndoRedoOperation) {
+        localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
+
   Future<void> onDeleteSection(
       DeleteSectionEvent event, Emitter<PagebuilderState> emit) async {
     if (state is GetLandingPageAndUserSuccessState) {

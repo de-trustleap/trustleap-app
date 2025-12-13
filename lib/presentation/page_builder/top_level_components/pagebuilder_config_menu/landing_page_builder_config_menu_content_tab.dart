@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_anchor_button_content.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_calendly_content.dart';
@@ -12,10 +13,12 @@ import 'package:flutter/material.dart';
 
 class LandingPageBuilderConfigMenuContentTab extends StatelessWidget {
   final PageBuilderWidget model;
+  final PageBuilderGlobalStyles? globalStyles;
 
   const LandingPageBuilderConfigMenuContentTab({
     super.key,
     required this.model,
+    this.globalStyles,
   });
 
   @override

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
@@ -19,6 +20,7 @@ class PageBuilderTextPropertiesModel extends Equatable
   final String? color;
   final PagebuilderResponsiveOrConstantModel<String>? alignment;
   final Map<String, dynamic>? textShadow;
+  final String? globalColorToken;
 
   const PageBuilderTextPropertiesModel({
     required this.text,
@@ -29,6 +31,7 @@ class PageBuilderTextPropertiesModel extends Equatable
     required this.color,
     required this.alignment,
     required this.textShadow,
+    this.globalColorToken,
   });
 
   Map<String, dynamic> toMap() {
@@ -65,9 +68,10 @@ class PageBuilderTextPropertiesModel extends Equatable
       ),
       color: map['color'] != null ? map['color'] as String : null,
       alignment: PagebuilderResponsiveOrConstantModel.fromMapValue(
-        map['alignment'],
-        (v) => v as String,
-      ) ?? const PagebuilderResponsiveOrConstantModel.constant("left"),
+            map['alignment'],
+            (v) => v as String,
+          ) ??
+          const PagebuilderResponsiveOrConstantModel.constant("left"),
       textShadow: map['textShadow'] != null
           ? map['textShadow'] as Map<String, dynamic>
           : null,
@@ -96,19 +100,44 @@ class PageBuilderTextPropertiesModel extends Equatable
     );
   }
 
-  PageBuilderTextProperties toDomain() {
+  PageBuilderTextProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
+    Color? resolvedColor;
+    String? colorToken;
+    if (color != null) {
+      if (color!.startsWith('@')) {
+        colorToken = color;
+        resolvedColor = globalStyles?.resolveColorReference(color!);
+      } else {
+        resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
+        colorToken = null;
+      }
+    }
+
+    String? resolvedFontFamily;
+    String? fontToken;
+    if (fontFamily != null) {
+      if (fontFamily!.startsWith('@')) {
+        fontToken = fontFamily;
+        resolvedFontFamily = globalStyles?.resolveFontReference(fontFamily!);
+        resolvedFontFamily ??= "Roboto";
+      } else {
+        resolvedFontFamily = fontFamily;
+        fontToken = null;
+      }
+    }
+
     return PageBuilderTextProperties(
       text: text,
       fontSize: fontSize?.toDomain(),
-      fontFamily: fontFamily,
+      fontFamily: resolvedFontFamily,
+      globalFontToken: fontToken,
       lineHeight: lineHeight?.toDomain(),
       letterSpacing: letterSpacing?.toDomain(),
-      color: color != null
-          ? Color(ColorUtility.getHexIntFromString(color!))
-          : null,
+      color: resolvedColor,
+      globalColorToken: colorToken,
       alignment: _alignmentToDomain(alignment),
       textShadow: textShadow != null
-          ? PageBuilderShadowModel.fromMap(textShadow!).toDomain()
+          ? PageBuilderShadowModel.fromMap(textShadow!).toDomain(globalStyles)
           : null,
     );
   }
@@ -141,18 +170,24 @@ class PageBuilderTextPropertiesModel extends Equatable
 
   factory PageBuilderTextPropertiesModel.fromDomain(
       PageBuilderTextProperties properties) {
+    final colorValue = properties.globalColorToken ??
+        (properties.color != null
+            ? ColorUtility.colorToHex(properties.color!)
+            : null);
+
+    final fontValue = properties.globalFontToken ?? properties.fontFamily;
+
     return PageBuilderTextPropertiesModel(
       text: properties.text,
-      fontSize: PagebuilderResponsiveOrConstantModel.fromDomain(
-          properties.fontSize),
-      fontFamily: properties.fontFamily,
+      fontSize:
+          PagebuilderResponsiveOrConstantModel.fromDomain(properties.fontSize),
+      fontFamily: fontValue,
       lineHeight: PagebuilderResponsiveOrConstantModel.fromDomain(
           properties.lineHeight),
       letterSpacing: PagebuilderResponsiveOrConstantModel.fromDomain(
           properties.letterSpacing),
-      color: properties.color != null
-          ? ColorUtility.colorToHex(properties.color!)
-          : null,
+      color: colorValue,
+      globalColorToken: properties.globalColorToken,
       alignment: _alignmentFromDomain(properties.alignment),
       textShadow: ShadowMapper.getMapFromShadow(properties.textShadow),
     );

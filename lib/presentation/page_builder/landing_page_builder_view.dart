@@ -15,10 +15,10 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loadin
 import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_appbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/landing_page_builder_html_events.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_keyboard_shortcuts.dart';
+import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_mobile_not_supported_view.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_finder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_page_builder.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_hierarchy/hierarchy_overlay_wrapper.dart';
-import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_mobile_not_supported_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +40,8 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
   bool _isResponsivePreviewOpen = false;
   final widgetFinder = PagebuilderWidgetFinder();
   final pageBuilderMenuCubit = Modular.get<PagebuilderConfigMenuCubit>();
-  final GlobalKey<HierarchyOverlayWrapperState> _hierarchyOverlayKey = GlobalKey();
+  final GlobalKey<HierarchyOverlayWrapperState> _hierarchyOverlayKey =
+      GlobalKey();
 
   @override
   void initState() {
@@ -101,111 +102,116 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
         child: BlocConsumer<PagebuilderBloc, PagebuilderState>(
             bloc: pageBuilderCubit,
             listener: (context, state) {
-            if (state is GetLandingPageAndUserSuccessState) {
-              pageBuilderContent = state.content;
-              if (!state.saveLoading && state.saveFailure != null) {
-                _showSaveFailureDialog(localization, navigator);
-                htmlEvents.disableLeavePageListeners();
-                isUpdated = false;
-              } else if (!state.saveLoading && state.saveSuccessful != null) {
-                CustomSnackBar.of(context).showCustomSnackBar(
-                    localization.landingpage_pagebuilder_save_success_snackbar);
-                htmlEvents.disableLeavePageListeners();
-                isUpdated = false;
-              } else if (state.isUpdated != null && state.isUpdated!) {
-                htmlEvents.enableLeavePageListeners(localization);
-                isUpdated = true;
-                final configMenuCubit =
-                    Modular.get<PagebuilderConfigMenuCubit>();
-                final currentState = configMenuCubit.state;
-                if (currentState is PageBuilderConfigMenuOpenedState &&
-                    state.content.content != null) {
-                  final updatedModel = widgetFinder.findWidgetById(
-                      state.content.content!, currentState.model.id);
-                  if (updatedModel != null) {
-                    configMenuCubit.openConfigMenu(updatedModel);
-                  }
-                } else if (currentState
-                        is PageBuilderSectionConfigMenuOpenedState &&
-                    state.content.content != null) {
-                  final updatedSection = widgetFinder.findSectionById(
-                      state.content.content!, currentState.model.id);
-                  if (updatedSection != null) {
-                    configMenuCubit.openSectionConfigMenu(updatedSection);
+              if (state is GetLandingPageAndUserSuccessState) {
+                pageBuilderContent = state.content;
+                if (!state.saveLoading && state.saveFailure != null) {
+                  _showSaveFailureDialog(localization, navigator);
+                  htmlEvents.disableLeavePageListeners();
+                  isUpdated = false;
+                } else if (!state.saveLoading && state.saveSuccessful != null) {
+                  CustomSnackBar.of(context).showCustomSnackBar(localization
+                      .landingpage_pagebuilder_save_success_snackbar);
+                  htmlEvents.disableLeavePageListeners();
+                  isUpdated = false;
+                } else if (state.isUpdated != null && state.isUpdated!) {
+                  htmlEvents.enableLeavePageListeners(localization);
+                  isUpdated = true;
+                  final configMenuCubit =
+                      Modular.get<PagebuilderConfigMenuCubit>();
+                  final currentState = configMenuCubit.state;
+                  if (currentState is PageBuilderConfigMenuOpenedState &&
+                      state.content.content != null) {
+                    final updatedModel = widgetFinder.findWidgetById(
+                        state.content.content!, currentState.model.id);
+                    if (updatedModel != null) {
+                      configMenuCubit.openConfigMenu(updatedModel);
+                    }
+                  } else if (currentState
+                          is PageBuilderSectionConfigMenuOpenedState &&
+                      state.content.content != null) {
+                    final updatedSection = widgetFinder.findSectionById(
+                        state.content.content!, currentState.model.id);
+                    if (updatedSection != null) {
+                      configMenuCubit.openSectionConfigMenu(updatedSection);
+                    }
                   }
                 }
               }
-            }
-          },
-          builder: (context, state) {
-            if (state is GetLandingPageFailureState) {
-              return ErrorView(
-                  title: localization
-                      .landingpage_pagebuilder_container_request_error,
-                  message: DatabaseFailureMapper.mapFailureMessage(
-                      state.failure, localization),
-                  callback: () => {
-                        Modular.get<PagebuilderBloc>()
-                          ..add(GetLandingPageEvent(id))
-                      });
-            } else if (state is GetLandingPageAndUserSuccessState) {
-              if (state.content.user?.id !=
-                  state.content.landingPage?.ownerID) {
+            },
+            builder: (context, state) {
+              if (state is GetLandingPageFailureState) {
                 return ErrorView(
                     title: localization
-                        .landingpage_pagebuilder_container_permission_error_title,
-                    message: localization
-                        .landingpage_pagebuilder_container_permission_error_message,
+                        .landingpage_pagebuilder_container_request_error,
+                    message: DatabaseFailureMapper.mapFailureMessage(
+                        state.failure, localization),
                     callback: () => {
                           Modular.get<PagebuilderBloc>()
                             ..add(GetLandingPageEvent(id))
                         });
-              } else {
-                return PagebuilderKeyboardShortcuts(
-                  child: Scaffold(
-                    appBar: LandingPageBuilderAppBar(
-                    content: state.content,
-                    isLoading: state.saveLoading,
-                    isHierarchyOpen: true,
-                    isResponsivePreviewOpen: _isResponsivePreviewOpen,
-                    onHierarchyToggle: () {
-                      _hierarchyOverlayKey.currentState?.toggle();
-                    },
-                    onResponsivePreviewToggle: () {
-                      setState(() {
-                        _isResponsivePreviewOpen = !_isResponsivePreviewOpen;
-                      });
-                    },
-                  ),
-                  body: Stack(
-                    children: [
-                      state.content.content != null
-                          ? LandingPageBuilderPageBuilder(
-                              model: state.content.content!,
-                              configMenuCubit: pageBuilderMenuCubit,
-                              isResponsivePreviewOpen: _isResponsivePreviewOpen,
-                              onResponsivePreviewClose: () {
-                                setState(() {
-                                  _isResponsivePreviewOpen = false;
-                                });
-                              },
-                              landingPage: state.content.landingPage,
-                            )
-                          : const Text("FEHLER!"),
-                      if (state.content.content != null)
-                        HierarchyOverlayWrapper(
-                          key: _hierarchyOverlayKey,
-                          page: state.content.content!,
-                          isInitiallyOpen: true,
-                        ),
-                      ],
+              } else if (state is GetLandingPageAndUserSuccessState) {
+                if (state.content.user?.id !=
+                    state.content.landingPage?.ownerID) {
+                  return ErrorView(
+                      title: localization
+                          .landingpage_pagebuilder_container_permission_error_title,
+                      message: localization
+                          .landingpage_pagebuilder_container_permission_error_message,
+                      callback: () => {
+                            Modular.get<PagebuilderBloc>()
+                              ..add(GetLandingPageEvent(id))
+                          });
+                } else {
+                  return PagebuilderKeyboardShortcuts(
+                    child: Scaffold(
+                      appBar: LandingPageBuilderAppBar(
+                        content: state.content,
+                        isLoading: state.saveLoading,
+                        isHierarchyOpen: true,
+                        isResponsivePreviewOpen: _isResponsivePreviewOpen,
+                        onHierarchyToggle: () {
+                          _hierarchyOverlayKey.currentState?.toggle();
+                        },
+                        onResponsivePreviewToggle: () {
+                          setState(() {
+                            _isResponsivePreviewOpen =
+                                !_isResponsivePreviewOpen;
+                          });
+                        },
+                      ),
+                      body: Stack(
+                        children: [
+                          state.content.content != null
+                              ? LandingPageBuilderPageBuilder(
+                                  model: state.content.content!,
+                                  configMenuCubit: pageBuilderMenuCubit,
+                                  isResponsivePreviewOpen:
+                                      _isResponsivePreviewOpen,
+                                  onResponsivePreviewClose: () {
+                                    setState(() {
+                                      _isResponsivePreviewOpen = false;
+                                    });
+                                  },
+                                  landingPage: state.content.landingPage,
+                                )
+                              : const Text("FEHLER!"),
+                          if (state.content.content != null)
+                            HierarchyOverlayWrapper(
+                              key: _hierarchyOverlayKey,
+                              page: state.content.content!,
+                              isInitiallyOpen: true,
+                            ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
+              } else {
+                return const LoadingIndicator();
               }
-            } else {
-              return const LoadingIndicator();
-            }
-          }));
+            }));
   }
 }
+
+// TODO: TEMPLATES ANPASSEN (PRIMARY IST GESETZT. TESTEN)
+// TODO: TEMPLATE NOCHMAL ANPASSEN. DAS ORANGE SOLLTE ÜBERALL DAS GLEICHE SEIN.

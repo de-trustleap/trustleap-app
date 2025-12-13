@@ -1,5 +1,7 @@
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker/pagebuilder_global_colors_palette.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_switch_control.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +10,11 @@ class PagebuilderColorTab extends StatefulWidget {
   final Color initialColor;
   final bool enableOpacity;
   final bool isColorMode;
-  final Function(Color) onColorChanged;
+  final Function(Color, {String? token}) onColorChanged;
   final Function(bool) onModeChanged;
   final bool showModeSwitch;
+  final PageBuilderGlobalColors? globalColors;
+  final String? selectedGlobalColorToken;
 
   const PagebuilderColorTab({
     super.key,
@@ -20,6 +24,8 @@ class PagebuilderColorTab extends StatefulWidget {
     required this.onColorChanged,
     required this.onModeChanged,
     this.showModeSwitch = true,
+    this.globalColors,
+    this.selectedGlobalColorToken,
   });
 
   @override
@@ -28,6 +34,7 @@ class PagebuilderColorTab extends StatefulWidget {
 
 class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
   late Color _selectedColor;
+  String? _selectedToken;
   Color _hexTextfieldHoverColor = Colors.transparent;
   final TextEditingController _hexTextFieldController = TextEditingController();
 
@@ -35,6 +42,7 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
   void initState() {
     super.initState();
     _selectedColor = widget.initialColor;
+    _selectedToken = widget.selectedGlobalColorToken;
     _hexTextFieldController.text =
         ColorUtility.colorToHex(_selectedColor, includeHashPrefix: true);
   }
@@ -47,6 +55,11 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
         _selectedColor = widget.initialColor;
         _hexTextFieldController.text =
             ColorUtility.colorToHex(_selectedColor, includeHashPrefix: true);
+      });
+    }
+    if (widget.selectedGlobalColorToken != oldWidget.selectedGlobalColorToken) {
+      setState(() {
+        _selectedToken = widget.selectedGlobalColorToken;
       });
     }
   }
@@ -69,6 +82,20 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
           ),
           const SizedBox(height: 16),
         ],
+        if (widget.globalColors != null)
+          PagebuilderGlobalColorsPalette(
+            globalColors: widget.globalColors,
+            selectedToken: _selectedToken,
+            onGlobalColorSelected: (String token, Color color) {
+              setState(() {
+                _selectedColor = color;
+                _selectedToken = token;
+                _hexTextFieldController.text =
+                    ColorUtility.colorToHex(color, includeHashPrefix: true);
+              });
+              widget.onColorChanged(color, token: token);
+            },
+          ),
         Opacity(
           opacity: widget.isColorMode ? 1.0 : 0.5,
           child: IgnorePointer(
@@ -79,6 +106,7 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
                 if (widget.isColorMode) {
                   setState(() {
                     _selectedColor = color;
+                    _selectedToken = null;
                     _hexTextFieldController.text = ColorUtility.colorToHex(
                         _selectedColor,
                         includeHashPrefix: true);
@@ -127,6 +155,7 @@ class _PagebuilderColorTabState extends State<PagebuilderColorTab> {
                       if (widget.isColorMode && value.isNotEmpty) {
                         setState(() {
                           _selectedColor = ColorUtility.hexToColor(value);
+                          _selectedToken = null;
                         });
                         widget.onColorChanged(_selectedColor);
                       }

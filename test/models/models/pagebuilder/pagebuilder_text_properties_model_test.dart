@@ -3,6 +3,9 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_te
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_fonts.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -114,7 +117,7 @@ void main() {
           color: Colors.black,
           alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center));
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -147,6 +150,319 @@ void main() {
       final result = PageBuilderTextPropertiesModel.fromDomain(model);
       // Then
       expect(result, expectedResult);
+    });
+  });
+
+  group("PagebuilderTextPropertiesModel_GlobalStyles", () {
+    test("check if color token is resolved with globalStyles in toDomain", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "Poppins",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "@primary",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      final expectedResult = PageBuilderTextProperties(
+          text: "Test",
+          fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
+          fontFamily: "Poppins",
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: Color(0xFFFF5722),
+          globalColorToken: "@primary",
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center));
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, expectedResult.color);
+      expect(result.globalColorToken, expectedResult.globalColorToken);
+      expect(result.text, expectedResult.text);
+    });
+
+    test("check if secondary color token is resolved with globalStyles in toDomain", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(16.0),
+          fontFamily: "Roboto",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.2),
+          letterSpacing: null,
+          textShadow: null,
+          color: "@secondary",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("left"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: Color(0xFF2196F3),
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFF2196F3));
+      expect(result.globalColorToken, "@secondary");
+    });
+
+    test("check if hex color does not create token even with globalStyles present", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "Poppins",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FFFF5722",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: PageBuilderGlobalColors(
+          primary: Color(0xFFFF5722),
+          secondary: null,
+          tertiary: null,
+          background: null,
+          surface: null,
+        ),
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.color, Color(0xFFFF5722));
+      expect(result.globalColorToken, null);
+    });
+
+    test("check if conversion from domain with token preserves token in fromDomain", () {
+      // Given
+      final domainProperties = PageBuilderTextProperties(
+          text: "Test",
+          fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
+          fontFamily: "Poppins",
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: Color(0xFFFF5722),
+          globalColorToken: "@primary",
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center));
+      // When
+      final result = PageBuilderTextPropertiesModel.fromDomain(domainProperties);
+      // Then
+      expect(result.color, "@primary");
+    });
+
+    test("check if conversion from domain without token uses hex color in fromDomain", () {
+      // Given
+      final domainProperties = PageBuilderTextProperties(
+          text: "Test",
+          fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
+          fontFamily: "Poppins",
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: Color(0xFFFF5722),
+          globalColorToken: null,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center));
+      // When
+      final result = PageBuilderTextPropertiesModel.fromDomain(domainProperties);
+      // Then
+      expect(result.color, "FFFF5722");
+    });
+
+    test("check if headline font token is resolved with globalStyles in toDomain", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "@headline",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: PageBuilderGlobalFonts(
+          headline: "Merriweather",
+          text: "Roboto",
+        ),
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.fontFamily, "Merriweather");
+    });
+
+    test("check if text font token is resolved with globalStyles in toDomain", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "@text",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: PageBuilderGlobalFonts(
+          headline: "Merriweather",
+          text: "Poppins",
+        ),
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.fontFamily, "Poppins");
+    });
+
+    test("check if font token falls back to Roboto when token cannot be resolved", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "@headline",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: null,
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.fontFamily, "Roboto");
+    });
+
+    test("check if direct font name works without token resolution", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "Poppins",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: PageBuilderGlobalFonts(
+          headline: "Merriweather",
+          text: "Roboto",
+        ),
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.fontFamily, "Poppins");
+    });
+
+    test("check if font token is preserved in model when using direct font", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "@headline",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      // When - toDomain and back to model
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: PageBuilderGlobalFonts(
+          headline: "Merriweather",
+          text: "Roboto",
+        ),
+      );
+      final domainResult = model.toDomain(globalStyles);
+      // Then - fontFamily should be resolved in domain
+      expect(domainResult.fontFamily, "Merriweather");
+      // And - the original model should still have the token
+      expect(model.fontFamily, "@headline");
+    });
+
+    test("check if globalFontToken is stored when toDomain converts font token", () {
+      // Given
+      final model = PageBuilderTextPropertiesModel(
+          text: "Test",
+          fontSize: PagebuilderResponsiveOrConstantModel.constant(20.0),
+          fontFamily: "@headline",
+          lineHeight: PagebuilderResponsiveOrConstantModel.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: "FF000000",
+          alignment: PagebuilderResponsiveOrConstantModel.constant("center"));
+      const globalStyles = PageBuilderGlobalStyles(
+        colors: null,
+        fonts: PageBuilderGlobalFonts(
+          headline: "Merriweather",
+          text: "Roboto",
+        ),
+      );
+      // When
+      final result = model.toDomain(globalStyles);
+      // Then
+      expect(result.globalFontToken, "@headline");
+      expect(result.fontFamily, "Merriweather");
+    });
+
+    test("check if conversion from domain with font token preserves token in fromDomain", () {
+      // Given
+      final domainProperties = PageBuilderTextProperties(
+          text: "Test",
+          fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
+          fontFamily: "Merriweather",
+          globalFontToken: "@headline",
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: Colors.black,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center));
+      // When
+      final result = PageBuilderTextPropertiesModel.fromDomain(domainProperties);
+      // Then
+      expect(result.fontFamily, "@headline");
+    });
+
+    test("check if conversion from domain without font token uses direct font in fromDomain", () {
+      // Given
+      final domainProperties = PageBuilderTextProperties(
+          text: "Test",
+          fontSize: const PagebuilderResponsiveOrConstant.constant(20.0),
+          fontFamily: "Poppins",
+          globalFontToken: null,
+          lineHeight: const PagebuilderResponsiveOrConstant.constant(1.5),
+          letterSpacing: null,
+          textShadow: null,
+          color: Colors.black,
+          alignment: const PagebuilderResponsiveOrConstant.constant(TextAlign.center));
+      // When
+      final result = PageBuilderTextPropertiesModel.fromDomain(domainProperties);
+      // Then
+      expect(result.fontFamily, "Poppins");
     });
   });
 
@@ -293,7 +609,7 @@ void main() {
             "desktop": TextAlign.right
           }));
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });

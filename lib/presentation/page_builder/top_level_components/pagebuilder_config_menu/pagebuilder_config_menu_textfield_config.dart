@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfield_properties.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker/pagebuilder_color_control.dart';
@@ -18,12 +19,14 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
   final PageBuilderTextFieldProperties? hoverProperties;
   final Function(PageBuilderTextFieldProperties?) onChanged;
   final Function(PageBuilderTextFieldProperties?) onChangedHover;
+  final PageBuilderGlobalStyles? globalStyles;
   const PagebuilderConfigMenuTextfieldConfig(
       {super.key,
       required this.properties,
       this.hoverProperties,
       required this.onChanged,
-      required this.onChangedHover});
+      required this.onChangedHover,
+      this.globalStyles});
 
   @override
   Widget build(BuildContext context) {
@@ -116,9 +119,11 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
                   .pagebuilder_textfield_config_textfield_background_color,
               initialColor: props?.backgroundColor ?? Colors.transparent,
               enableGradients: false,
-              onColorSelected: (backgroundColor) {
+              globalColors: globalStyles?.colors,
+              selectedGlobalColorToken: props?.globalBackgroundColorToken,
+              onColorSelected: (backgroundColor, {token}) {
                 onChangedLocal(
-                    props?.copyWith(backgroundColor: backgroundColor));
+                    props?.copyWith(backgroundColor: backgroundColor, globalBackgroundColorToken: token));
               }),
           const SizedBox(height: 20),
           PagebuilderColorControl(
@@ -126,8 +131,10 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
                   .pagebuilder_textfield_config_textfield_border_color,
               initialColor: props?.borderColor ?? Colors.transparent,
               enableGradients: false,
-              onColorSelected: (borderColor) {
-                onChangedLocal(props?.copyWith(borderColor: borderColor));
+              globalColors: globalStyles?.colors,
+              selectedGlobalColorToken: props?.globalBorderColorToken,
+              onColorSelected: (borderColor, {token}) {
+                onChangedLocal(props?.copyWith(borderColor: borderColor, globalBorderColorToken: token));
               }),
           const SizedBox(height: 20),
           PagebuilderTextField(
@@ -154,6 +161,7 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
               properties: props?.textProperties,
               hoverProperties: hoverProperties?.textProperties,
               showHoverTabBar: false,
+              globalStyles: globalStyles,
               onChanged: (textProperties) {
                 onChangedLocal(props?.copyWith(textProperties: textProperties));
               },
@@ -171,6 +179,7 @@ class PagebuilderConfigMenuTextfieldConfig extends StatelessWidget {
               properties: props?.placeHolderTextProperties,
               hoverProperties: hoverProperties?.placeHolderTextProperties,
               showHoverTabBar: false,
+              globalStyles: globalStyles,
               onChanged: (placeholderProperties) {
                 onChangedLocal(props?.copyWith(
                     placeHolderTextProperties: placeholderProperties));

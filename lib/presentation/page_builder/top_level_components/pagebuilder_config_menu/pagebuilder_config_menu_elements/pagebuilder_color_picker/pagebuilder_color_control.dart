@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_gradient.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker/pagebuilder_color_picker_base.dart';
 import 'package:flutter/material.dart';
@@ -6,19 +7,25 @@ class PagebuilderColorControl extends StatelessWidget {
   final String title;
   final Color initialColor;
   final PagebuilderGradient? initialGradient;
-  final Function(Color) onColorSelected;
+  final Function(Color, {String? token}) onColorSelected;
   final Function(PagebuilderGradient)? onGradientSelected;
   final bool enableOpacity;
   final bool enableGradients;
-  const PagebuilderColorControl(
-      {super.key,
-      required this.title,
-      required this.initialColor,
-      this.initialGradient,
-      required this.onColorSelected,
-      this.onGradientSelected,
-      this.enableOpacity = true,
-      this.enableGradients = true});
+  final PageBuilderGlobalColors? globalColors;
+  final String? selectedGlobalColorToken;
+
+  const PagebuilderColorControl({
+    super.key,
+    required this.title,
+    required this.initialColor,
+    this.initialGradient,
+    required this.onColorSelected,
+    this.onGradientSelected,
+    this.enableOpacity = true,
+    this.enableGradients = true,
+    this.globalColors,
+    this.selectedGlobalColorToken,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +40,8 @@ class PagebuilderColorControl extends StatelessWidget {
         onGradientSelected: onGradientSelected,
         enableOpacity: enableOpacity,
         enableGradients: enableGradients,
+        globalColors: globalColors,
+        selectedGlobalColorToken: selectedGlobalColorToken,
       )
     ]);
   }

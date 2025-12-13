@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_text_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
@@ -10,8 +11,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class PagebuilderConfigMenuTextConfigContainer extends StatelessWidget {
   final PageBuilderWidget model;
-  const PagebuilderConfigMenuTextConfigContainer(
-      {super.key, required this.model});
+  final PageBuilderGlobalStyles? globalStyles;
+
+  const PagebuilderConfigMenuTextConfigContainer({
+    super.key,
+    required this.model,
+    this.globalStyles,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +35,7 @@ class PagebuilderConfigMenuTextConfigContainer extends StatelessWidget {
                     : null,
                 showHoverTabBar: true,
                 hideColorPicker: true,
+                globalStyles: globalStyles,
                 onChanged: (properties) {
                   final updatedWidget = model.copyWith(properties: properties);
                   pagebuilderBloc.add(UpdateWidgetEvent(updatedWidget));

@@ -2,6 +2,7 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_background.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_colors.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_image_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
@@ -20,8 +21,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PagebuilderConfigMenuBackground extends StatelessWidget {
   final PageBuilderWidget? model;
   final PageBuilderSection? section;
+  final PageBuilderGlobalColors? globalColors;
   const PagebuilderConfigMenuBackground(
-      {super.key, required this.model, required this.section});
+      {super.key, required this.model, required this.section, this.globalColors});
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +107,10 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
               localization.landingpage_pagebuilder_layout_menu_background_color,
           initialColor: props?.backgroundPaint?.color ?? Colors.transparent,
           initialGradient: props?.backgroundPaint?.gradient,
-          onColorSelected: (color) {
-            final paint = PagebuilderPaint.color(color);
+          globalColors: globalColors,
+          selectedGlobalColorToken: props?.backgroundPaint?.globalColorToken,
+          onColorSelected: (color, {token}) {
+            final paint = PagebuilderPaint.color(color, globalColorToken: token);
             onChangedLocal(props?.copyWith(backgroundPaint: paint) ??
                 const PagebuilderBackground(
                         backgroundPaint: null,
@@ -182,8 +186,10 @@ class PagebuilderConfigMenuBackground extends StatelessWidget {
                 .landingpage_pagebuilder_layout_menu_background_overlay,
             initialColor: props?.overlayPaint?.color ?? Colors.transparent,
             initialGradient: props?.overlayPaint?.gradient,
-            onColorSelected: (color) {
-              final paint = PagebuilderPaint.color(color);
+            globalColors: globalColors,
+            selectedGlobalColorToken: props?.overlayPaint?.globalColorToken,
+            onColorSelected: (color, {token}) {
+              final paint = PagebuilderPaint.color(color, globalColorToken: token);
               onChangedLocal(props?.copyWith(overlayPaint: paint) ??
                   const PagebuilderBackground(
                           backgroundPaint: null,

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_gradient.dart';
 import 'package:flutter/material.dart';
 
@@ -37,16 +38,32 @@ class PagebuilderGradientStopModel extends Equatable {
     );
   }
 
-  PagebuilderGradientStop toDomain() {
+  PagebuilderGradientStop toDomain(PageBuilderGlobalStyles? globalStyles) {
+    Color resolvedColor;
+    String? token;
+
+    if (color.startsWith('@')) {
+      token = color;
+      final tokenColor = globalStyles?.resolveColorReference(color);
+      resolvedColor = tokenColor ?? Colors.transparent;
+    } else {
+      resolvedColor = Color(ColorUtility.getHexIntFromString(color));
+      token = null;
+    }
+
     return PagebuilderGradientStop(
-      color: Color(ColorUtility.getHexIntFromString(color)),
+      color: resolvedColor,
       position: position,
+      globalColorToken: token,
     );
   }
 
-  factory PagebuilderGradientStopModel.fromDomain(PagebuilderGradientStop stop) {
+  factory PagebuilderGradientStopModel.fromDomain(
+      PagebuilderGradientStop stop) {
+    final colorValue =
+        stop.globalColorToken ?? ColorUtility.colorToHex(stop.color);
     return PagebuilderGradientStopModel(
-      color: ColorUtility.colorToHex(stop.color),
+      color: colorValue,
       position: stop.position,
     );
   }
@@ -124,7 +141,7 @@ class PagebuilderGradientModel extends Equatable {
     );
   }
 
-  PagebuilderGradient toDomain() {
+  PagebuilderGradient toDomain(PageBuilderGlobalStyles? globalStyles) {
     PagebuilderGradientType gradientType;
     switch (type) {
       case "linear":
@@ -141,7 +158,8 @@ class PagebuilderGradientModel extends Equatable {
     }
 
     final domainStops = stops
-        .map((stop) => PagebuilderGradientStopModel.fromMap(stop).toDomain())
+        .map((stop) =>
+            PagebuilderGradientStopModel.fromMap(stop).toDomain(globalStyles))
         .toList();
 
     return PagebuilderGradient(

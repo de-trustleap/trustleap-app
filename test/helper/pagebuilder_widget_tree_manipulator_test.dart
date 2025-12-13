@@ -760,6 +760,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [section],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -794,6 +795,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [section],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -828,6 +830,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [section],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -861,6 +864,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [section],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -907,6 +911,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [emptySection, nonEmptySection],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -938,6 +943,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [section],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -973,6 +979,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [section],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -1010,6 +1017,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [section],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -1042,6 +1050,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [section],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -1058,6 +1067,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: null,
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);
@@ -1070,6 +1080,7 @@ void main() {
         id: UniqueID.fromUniqueString('page1'),
         sections: [],
         backgroundColor: null,
+        globalStyles: null,
       );
 
       final result = PagebuilderWidgetTreeManipulator.removePlaceholders(page);

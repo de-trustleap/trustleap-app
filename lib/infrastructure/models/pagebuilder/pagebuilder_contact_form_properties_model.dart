@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_contact_form_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_button_properties_model.dart';
@@ -86,32 +87,32 @@ class PageBuilderContactFormPropertiesModel extends Equatable
     );
   }
 
-  PageBuilderContactFormProperties toDomain() {
+  PageBuilderContactFormProperties toDomain(PageBuilderGlobalStyles? globalStyles) {
     return PageBuilderContactFormProperties(
         email: email,
         nameTextFieldProperties: nameTextFieldProperties != null
             ? PageBuilderTextFieldPropertiesModel.fromMap(
                     nameTextFieldProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null,
         emailTextFieldProperties: emailTextFieldProperties != null
             ? PageBuilderTextFieldPropertiesModel.fromMap(
                     emailTextFieldProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null,
         phoneTextFieldProperties: phoneTextFieldProperties != null
             ? PageBuilderTextFieldPropertiesModel.fromMap(
                     phoneTextFieldProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null,
         messageTextFieldProperties: messageTextFieldProperties != null
             ? PageBuilderTextFieldPropertiesModel.fromMap(
                     messageTextFieldProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null,
         buttonProperties: buttonProperties != null
             ? PageBuilderButtonPropertiesModel.fromMap(buttonProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null);
   }
 

@@ -46,7 +46,7 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
     }
   }
 
-  void _applyTextColor(Color color) {
+  void _applyTextColor(Color color, {String? token}) {
     setState(() {
       _currentTextColor = color;
     });
@@ -59,7 +59,7 @@ class _PagebuilderHTMLTextEditorState extends State<PagebuilderHTMLTextEditor> {
     controller.execCommand('foreColor', argument: hexColor);
   }
 
-  void _applyBackgroundColor(Color color) {
+  void _applyBackgroundColor(Color color, {String? token}) {
     setState(() {
       _currentBackgroundColor = color;
     });

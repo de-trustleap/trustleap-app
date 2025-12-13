@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_paint.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_gradient_model.dart';
 import 'package:flutter/material.dart';
@@ -40,25 +41,35 @@ class PagebuilderPaintModel extends Equatable {
     );
   }
 
-  PagebuilderPaint toDomain() {
+  PagebuilderPaint toDomain(PageBuilderGlobalStyles? globalStyles) {
     if (color != null) {
-      return PagebuilderPaint.color(
-        Color(ColorUtility.getHexIntFromString(color!))
-      );
+      Color resolvedColor;
+      String? token;
+
+      if (color!.startsWith('@')) {
+        token = color;
+        final tokenColor = globalStyles?.resolveColorReference(color!);
+        resolvedColor = tokenColor ?? Colors.transparent;
+      } else {
+        resolvedColor = Color(ColorUtility.getHexIntFromString(color!));
+        token = null;
+      }
+
+      return PagebuilderPaint.color(resolvedColor, globalColorToken: token);
     } else if (gradient != null) {
       return PagebuilderPaint.gradient(
-        PagebuilderGradientModel.fromMap(gradient!).toDomain()
-      );
+          PagebuilderGradientModel.fromMap(gradient!).toDomain(globalStyles));
     }
 
-    // Fallback to transparent color if neither is set
     return const PagebuilderPaint.color(Colors.transparent);
   }
 
   factory PagebuilderPaintModel.fromDomain(PagebuilderPaint paint) {
     if (paint.isColor) {
+      final colorValue =
+          paint.globalColorToken ?? ColorUtility.colorToHex(paint.color!);
       return PagebuilderPaintModel(
-        color: ColorUtility.colorToHex(paint.color!),
+        color: colorValue,
         gradient: null,
       );
     } else if (paint.isGradient) {
@@ -68,9 +79,8 @@ class PagebuilderPaintModel extends Equatable {
       );
     }
 
-    // Fallback
     return const PagebuilderPaintModel(
-      color: "00000000", // Transparent
+      color: "00000000",
       gradient: null,
     );
   }

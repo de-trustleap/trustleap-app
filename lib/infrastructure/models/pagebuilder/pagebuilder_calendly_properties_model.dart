@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_calendly_properties.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/model_helper/shadow_mapper.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
@@ -111,25 +112,66 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
         useIntrinsicHeight: useIntrinsicHeight ?? this.useIntrinsicHeight);
   }
 
-  PagebuilderCalendlyProperties toDomain() {
+  PagebuilderCalendlyProperties toDomain(
+      PageBuilderGlobalStyles? globalStyles) {
+    Color? resolvedTextColor;
+    String? textColorToken;
+    Color? resolvedBackgroundColor;
+    String? backgroundColorToken;
+    Color? resolvedPrimaryColor;
+    String? primaryColorToken;
+
+    if (textColor != null) {
+      if (textColor!.startsWith('@')) {
+        textColorToken = textColor;
+        final tokenColor = globalStyles?.resolveColorReference(textColor!);
+        resolvedTextColor = tokenColor ?? Colors.transparent;
+      } else {
+        resolvedTextColor = Color(ColorUtility.getHexIntFromString(textColor!));
+        textColorToken = null;
+      }
+    }
+
+    if (backgroundColor != null) {
+      if (backgroundColor!.startsWith('@')) {
+        backgroundColorToken = backgroundColor;
+        final tokenColor =
+            globalStyles?.resolveColorReference(backgroundColor!);
+        resolvedBackgroundColor = tokenColor ?? Colors.transparent;
+      } else {
+        resolvedBackgroundColor =
+            Color(ColorUtility.getHexIntFromString(backgroundColor!));
+        backgroundColorToken = null;
+      }
+    }
+
+    if (primaryColor != null) {
+      if (primaryColor!.startsWith('@')) {
+        primaryColorToken = primaryColor;
+        final tokenColor = globalStyles?.resolveColorReference(primaryColor!);
+        resolvedPrimaryColor = tokenColor ?? Colors.transparent;
+      } else {
+        resolvedPrimaryColor =
+            Color(ColorUtility.getHexIntFromString(primaryColor!));
+        primaryColorToken = null;
+      }
+    }
+
     return PagebuilderCalendlyProperties(
         width: width?.toDomain(),
         height: height?.toDomain(),
         borderRadius: borderRadius,
         calendlyEventURL: calendlyEventURL,
         eventTypeName: eventTypeName,
-        textColor: textColor != null
-            ? Color(ColorUtility.getHexIntFromString(textColor!))
-            : null,
-        backgroundColor: backgroundColor != null
-            ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
-            : null,
-        primaryColor: primaryColor != null
-            ? Color(ColorUtility.getHexIntFromString(primaryColor!))
-            : null,
+        textColor: resolvedTextColor,
+        textColorToken: textColorToken,
+        backgroundColor: resolvedBackgroundColor,
+        backgroundColorToken: backgroundColorToken,
+        primaryColor: resolvedPrimaryColor,
+        primaryColorToken: primaryColorToken,
         hideEventTypeDetails: hideEventTypeDetails,
         shadow: shadow != null
-            ? PageBuilderShadowModel.fromMap(shadow!).toDomain()
+            ? PageBuilderShadowModel.fromMap(shadow!).toDomain(globalStyles)
             : null,
         useIntrinsicHeight: useIntrinsicHeight);
   }
@@ -137,22 +179,25 @@ class PagebuilderCalendlyPropertiesModel extends Equatable
   factory PagebuilderCalendlyPropertiesModel.fromDomain(
       PagebuilderCalendlyProperties properties) {
     return PagebuilderCalendlyPropertiesModel(
-        width: PagebuilderResponsiveOrConstantModel.fromDomain(
-            properties.width),
-        height: PagebuilderResponsiveOrConstantModel.fromDomain(
-            properties.height),
+        width:
+            PagebuilderResponsiveOrConstantModel.fromDomain(properties.width),
+        height:
+            PagebuilderResponsiveOrConstantModel.fromDomain(properties.height),
         borderRadius: properties.borderRadius,
         calendlyEventURL: properties.calendlyEventURL,
         eventTypeName: properties.eventTypeName,
-        textColor: properties.textColor != null
-            ? ColorUtility.colorToHex(properties.textColor!)
-            : null,
-        backgroundColor: properties.backgroundColor != null
-            ? ColorUtility.colorToHex(properties.backgroundColor!)
-            : null,
-        primaryColor: properties.primaryColor != null
-            ? ColorUtility.colorToHex(properties.primaryColor!)
-            : null,
+        textColor: properties.textColorToken ??
+            (properties.textColor != null
+                ? ColorUtility.colorToHex(properties.textColor!)
+                : null),
+        backgroundColor: properties.backgroundColorToken ??
+            (properties.backgroundColor != null
+                ? ColorUtility.colorToHex(properties.backgroundColor!)
+                : null),
+        primaryColor: properties.primaryColorToken ??
+            (properties.primaryColor != null
+                ? ColorUtility.colorToHex(properties.primaryColor!)
+                : null),
         hideEventTypeDetails: properties.hideEventTypeDetails,
         shadow: ShadowMapper.getMapFromShadow(properties.shadow),
         useIntrinsicHeight: properties.useIntrinsicHeight);

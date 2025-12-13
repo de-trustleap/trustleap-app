@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:finanzbegleiter/core/helpers/color_utility.dart';
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_styles.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_textfield_properties.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_responsive_or_constant_model.dart';
@@ -88,41 +89,73 @@ class PageBuilderTextFieldPropertiesModel extends Equatable
     );
   }
 
-  PageBuilderTextFieldProperties toDomain() {
+  PageBuilderTextFieldProperties toDomain(
+      PageBuilderGlobalStyles? globalStyles) {
+    Color? resolvedBackgroundColor;
+    String? bgToken;
+    if (backgroundColor != null) {
+      if (backgroundColor!.startsWith('@')) {
+        bgToken = backgroundColor;
+        resolvedBackgroundColor =
+            globalStyles?.resolveColorReference(backgroundColor!);
+      } else {
+        resolvedBackgroundColor =
+            Color(ColorUtility.getHexIntFromString(backgroundColor!));
+        bgToken = null;
+      }
+    }
+
+    Color? resolvedBorderColor;
+    String? borderToken;
+    if (borderColor != null) {
+      if (borderColor!.startsWith('@')) {
+        borderToken = borderColor;
+        resolvedBorderColor = globalStyles?.resolveColorReference(borderColor!);
+      } else {
+        resolvedBorderColor =
+            Color(ColorUtility.getHexIntFromString(borderColor!));
+        borderToken = null;
+      }
+    }
+
     return PageBuilderTextFieldProperties(
         width: width?.toDomain(),
         minLines: minLines,
         maxLines: maxLines,
         isRequired: isRequired,
-        backgroundColor: backgroundColor != null
-            ? Color(ColorUtility.getHexIntFromString(backgroundColor!))
-            : null,
-        borderColor: borderColor != null
-            ? Color(ColorUtility.getHexIntFromString(borderColor!))
-            : null,
+        backgroundColor: resolvedBackgroundColor,
+        globalBackgroundColorToken: bgToken,
+        borderColor: resolvedBorderColor,
+        globalBorderColorToken: borderToken,
         placeHolderTextProperties: placeHolderTextProperties != null
             ? PageBuilderTextPropertiesModel.fromMap(placeHolderTextProperties!)
-                .toDomain()
+                .toDomain(globalStyles)
             : null,
         textProperties: textProperties != null
-            ? PageBuilderTextPropertiesModel.fromMap(textProperties!).toDomain()
+            ? PageBuilderTextPropertiesModel.fromMap(textProperties!)
+                .toDomain(globalStyles)
             : null);
   }
 
   factory PageBuilderTextFieldPropertiesModel.fromDomain(
       PageBuilderTextFieldProperties properties) {
+    final bgColorValue = properties.globalBackgroundColorToken ??
+        (properties.backgroundColor != null
+            ? ColorUtility.colorToHex(properties.backgroundColor!)
+            : null);
+    final borderColorValue = properties.globalBorderColorToken ??
+        (properties.borderColor != null
+            ? ColorUtility.colorToHex(properties.borderColor!)
+            : null);
+
     return PageBuilderTextFieldPropertiesModel(
-        width: PagebuilderResponsiveOrConstantModel.fromDomain(
-            properties.width),
+        width:
+            PagebuilderResponsiveOrConstantModel.fromDomain(properties.width),
         minLines: properties.minLines,
         maxLines: properties.maxLines,
         isRequired: properties.isRequired,
-        backgroundColor: properties.backgroundColor != null
-            ? ColorUtility.colorToHex(properties.backgroundColor!)
-            : null,
-        borderColor: properties.borderColor != null
-            ? ColorUtility.colorToHex(properties.borderColor!)
-            : null,
+        backgroundColor: bgColorValue,
+        borderColor: borderColorValue,
         placeHolderTextProperties: properties.placeHolderTextProperties != null
             ? PageBuilderTextPropertiesModel.fromDomain(
                     properties.placeHolderTextProperties!)

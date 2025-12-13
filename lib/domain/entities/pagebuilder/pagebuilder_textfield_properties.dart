@@ -12,7 +12,9 @@ class PageBuilderTextFieldProperties extends Equatable
   final int? maxLines;
   final bool? isRequired;
   final Color? backgroundColor;
+  final String? globalBackgroundColorToken;
   final Color? borderColor;
+  final String? globalBorderColorToken;
   final PageBuilderTextProperties? placeHolderTextProperties;
   final PageBuilderTextProperties? textProperties;
 
@@ -25,6 +27,8 @@ class PageBuilderTextFieldProperties extends Equatable
     required this.borderColor,
     required this.placeHolderTextProperties,
     required this.textProperties,
+    this.globalBackgroundColorToken,
+    this.globalBorderColorToken,
   });
 
   PageBuilderTextFieldProperties copyWith(
@@ -33,16 +37,24 @@ class PageBuilderTextFieldProperties extends Equatable
       int? maxLines,
       bool? isRequired,
       Color? backgroundColor,
+      String? globalBackgroundColorToken,
       Color? borderColor,
+      String? globalBorderColorToken,
       PageBuilderTextProperties? placeHolderTextProperties,
-      PageBuilderTextProperties? textProperties}) {
+      PageBuilderTextProperties? textProperties,
+      bool setBackgroundColorNull = false,
+      bool setGlobalBackgroundColorTokenNull = false,
+      bool setBorderColorNull = false,
+      bool setGlobalBorderColorTokenNull = false}) {
     return PageBuilderTextFieldProperties(
       width: width ?? this.width,
       minLines: minLines ?? this.minLines,
       maxLines: maxLines ?? this.maxLines,
       isRequired: isRequired ?? this.isRequired,
-      borderColor: borderColor ?? this.borderColor,
-      backgroundColor: backgroundColor ?? this.backgroundColor,
+      backgroundColor: setBackgroundColorNull ? null : (backgroundColor ?? this.backgroundColor),
+      globalBackgroundColorToken: setGlobalBackgroundColorTokenNull ? null : (globalBackgroundColorToken ?? this.globalBackgroundColorToken),
+      borderColor: setBorderColorNull ? null : (borderColor ?? this.borderColor),
+      globalBorderColorToken: setGlobalBorderColorTokenNull ? null : (globalBorderColorToken ?? this.globalBorderColorToken),
       placeHolderTextProperties:
           placeHolderTextProperties ?? this.placeHolderTextProperties,
       textProperties: textProperties ?? this.textProperties,
@@ -57,7 +69,9 @@ class PageBuilderTextFieldProperties extends Equatable
       isRequired: isRequired,
       backgroundColor:
           backgroundColor != null ? Color(backgroundColor!.toARGB32()) : null,
+      globalBackgroundColorToken: globalBackgroundColorToken,
       borderColor: borderColor != null ? Color(borderColor!.toARGB32()) : null,
+      globalBorderColorToken: globalBorderColorToken,
       placeHolderTextProperties: placeHolderTextProperties?.deepCopy(),
       textProperties: textProperties?.deepCopy(),
     );
@@ -70,7 +84,9 @@ class PageBuilderTextFieldProperties extends Equatable
         maxLines,
         isRequired,
         backgroundColor,
+        globalBackgroundColorToken,
         borderColor,
+        globalBorderColorToken,
         placeHolderTextProperties,
         textProperties
       ];
