@@ -10,6 +10,7 @@ class PageBuilderTextProperties extends Equatable
   final String? text;
   final PagebuilderResponsiveOrConstant<double>? fontSize;
   final String? fontFamily;
+  final String? globalFontToken;
   final PagebuilderResponsiveOrConstant<double>? lineHeight;
   final PagebuilderResponsiveOrConstant<double>? letterSpacing;
   final Color? color;
@@ -21,6 +22,7 @@ class PageBuilderTextProperties extends Equatable
     required this.text,
     required this.fontSize,
     required this.fontFamily,
+    this.globalFontToken,
     required this.lineHeight,
     required this.letterSpacing,
     required this.color,
@@ -33,6 +35,7 @@ class PageBuilderTextProperties extends Equatable
     String? text,
     PagebuilderResponsiveOrConstant<double>? fontSize,
     String? fontFamily,
+    String? globalFontToken,
     PagebuilderResponsiveOrConstant<double>? lineHeight,
     PagebuilderResponsiveOrConstant<double>? letterSpacing,
     Color? color,
@@ -44,6 +47,7 @@ class PageBuilderTextProperties extends Equatable
       text: text ?? this.text,
       fontSize: fontSize ?? this.fontSize,
       fontFamily: fontFamily ?? this.fontFamily,
+      globalFontToken: globalFontToken ?? this.globalFontToken,
       lineHeight: lineHeight ?? this.lineHeight,
       letterSpacing: letterSpacing ?? this.letterSpacing,
       color: color ?? this.color,
@@ -58,6 +62,7 @@ class PageBuilderTextProperties extends Equatable
       text: text,
       fontSize: fontSize,
       fontFamily: fontFamily,
+      globalFontToken: globalFontToken,
       lineHeight: lineHeight,
       letterSpacing: letterSpacing,
       color: color != null ? Color(color!.toARGB32()) : null,
@@ -72,6 +77,7 @@ class PageBuilderTextProperties extends Equatable
         text,
         fontSize,
         fontFamily,
+        globalFontToken,
         lineHeight,
         letterSpacing,
         color,

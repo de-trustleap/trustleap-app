@@ -114,12 +114,15 @@ class PageBuilderTextPropertiesModel extends Equatable
     }
 
     String? resolvedFontFamily;
+    String? fontToken;
     if (fontFamily != null) {
       if (fontFamily!.startsWith('@')) {
+        fontToken = fontFamily;
         resolvedFontFamily = globalStyles?.resolveFontReference(fontFamily!);
         resolvedFontFamily ??= "Roboto";
       } else {
         resolvedFontFamily = fontFamily;
+        fontToken = null;
       }
     }
 
@@ -127,6 +130,7 @@ class PageBuilderTextPropertiesModel extends Equatable
       text: text,
       fontSize: fontSize?.toDomain(),
       fontFamily: resolvedFontFamily,
+      globalFontToken: fontToken,
       lineHeight: lineHeight?.toDomain(),
       letterSpacing: letterSpacing?.toDomain(),
       color: resolvedColor,
@@ -171,11 +175,13 @@ class PageBuilderTextPropertiesModel extends Equatable
             ? ColorUtility.colorToHex(properties.color!)
             : null);
 
+    final fontValue = properties.globalFontToken ?? properties.fontFamily;
+
     return PageBuilderTextPropertiesModel(
       text: properties.text,
       fontSize:
           PagebuilderResponsiveOrConstantModel.fromDomain(properties.fontSize),
-      fontFamily: properties.fontFamily,
+      fontFamily: fontValue,
       lineHeight: PagebuilderResponsiveOrConstantModel.fromDomain(
           properties.lineHeight),
       letterSpacing: PagebuilderResponsiveOrConstantModel.fromDomain(
