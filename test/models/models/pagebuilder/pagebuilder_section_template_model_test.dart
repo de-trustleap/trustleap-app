@@ -18,7 +18,6 @@ void main() {
         "section": {
           "id": "section-123",
           "name": "Hero Section",
-          "layout": "column",
           "maxWidth": 1200.0,
           "widgets": []
         }
@@ -32,7 +31,6 @@ void main() {
       final expectedSection = PageBuilderSectionModel(
         id: "section-123",
         name: "Hero Section",
-        layout: "column",
         background: null,
         maxWidth: 1200,
         backgroundConstrained: null,
@@ -66,7 +64,6 @@ void main() {
       final sectionModel = PageBuilderSectionModel(
         id: "section-123",
         name: "Hero Section",
-        layout: "column",
         background: null,
         maxWidth: 1200,
         backgroundConstrained: null,
@@ -87,7 +84,6 @@ void main() {
       final expectedSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section-123"),
         name: "Hero Section",
-        layout: PageBuilderSectionLayout.column,
         widgets: [],
         background: null,
         maxWidth: 1200,
@@ -118,7 +114,6 @@ void main() {
       final section = PageBuilderSectionModel(
         id: "section-123",
         name: "Hero Section",
-        layout: "column",
         background: null,
         maxWidth: 1200,
         backgroundConstrained: null,
@@ -154,7 +149,6 @@ void main() {
       final section = PageBuilderSectionModel(
         id: "section-123",
         name: "Hero Section",
-        layout: "column",
         background: null,
         maxWidth: 1200,
         backgroundConstrained: null,
@@ -185,7 +179,6 @@ void main() {
       final section1 = PageBuilderSectionModel(
         id: "section-123",
         name: "Hero Section",
-        layout: "column",
         background: null,
         maxWidth: 1200,
         backgroundConstrained: null,
@@ -197,7 +190,6 @@ void main() {
       final section2 = PageBuilderSectionModel(
         id: "section-456",
         name: "About Section",
-        layout: "column",
         background: null,
         maxWidth: 1200,
         backgroundConstrained: null,

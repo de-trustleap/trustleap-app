@@ -104,7 +104,6 @@ void main() {
       section: PageBuilderSection(
         id: UniqueID.fromUniqueString("section-123"),
         name: "Hero Section",
-        layout: PageBuilderSectionLayout.column,
         widgets: [],
         background: null,
         maxWidth: 1200,

@@ -9,7 +9,6 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuild
 class PageBuilderSection extends Equatable {
   final UniqueID id;
   final String? name;
-  final PageBuilderSectionLayout? layout;
   final PagebuilderBackground? background;
   final double? maxWidth;
   final bool? backgroundConstrained;
@@ -21,7 +20,6 @@ class PageBuilderSection extends Equatable {
   const PageBuilderSection(
       {required this.id,
       required this.name,
-      required this.layout,
       required this.widgets,
       required this.background,
       required this.maxWidth,
@@ -33,7 +31,6 @@ class PageBuilderSection extends Equatable {
   PageBuilderSection copyWith({
     UniqueID? id,
     String? name,
-    PageBuilderSectionLayout? layout,
     List<PageBuilderWidget>? widgets,
     PagebuilderBackground? background,
     double? maxWidth,
@@ -46,7 +43,6 @@ class PageBuilderSection extends Equatable {
     return PageBuilderSection(
         id: id ?? this.id,
         name: name ?? this.name,
-        layout: layout ?? this.layout,
         widgets: widgets ?? this.widgets,
         background: background ?? this.background,
         maxWidth: maxWidth ?? this.maxWidth,
@@ -61,7 +57,6 @@ class PageBuilderSection extends Equatable {
   List<Object?> get props => [
         id,
         name,
-        layout,
         background,
         maxWidth,
         backgroundConstrained,

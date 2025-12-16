@@ -88,8 +88,6 @@ enum PageBuilderWidgetType {
   none
 }
 
-enum PageBuilderSectionLayout { row, column, none }
-
 enum PageBuilderSpacingType { padding, margin }
 
 enum PagebuilderResponsiveBreakpoint { mobile, tablet, desktop }

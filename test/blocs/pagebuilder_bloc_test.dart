@@ -136,7 +136,6 @@ void main() {
           PageBuilderSection(
               id: UniqueID.fromUniqueString("2"),
               name: "Test Section",
-              layout: PageBuilderSectionLayout.column,
               background: null,
               maxWidth: null,
               backgroundConstrained: null,
@@ -339,7 +338,6 @@ void main() {
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Mock Section",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -425,7 +423,6 @@ void main() {
     final section1 = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Section 1",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -437,7 +434,6 @@ void main() {
     final section2 = PageBuilderSection(
       id: UniqueID.fromUniqueString("section2"),
       name: "Section 2",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -449,7 +445,6 @@ void main() {
     final section3 = PageBuilderSection(
       id: UniqueID.fromUniqueString("section3"),
       name: "Section 3",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -720,7 +715,6 @@ void main() {
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Test Section",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -907,7 +901,6 @@ void main() {
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Test Section",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -957,7 +950,6 @@ void main() {
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Test Section",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: 1200.0,
       backgroundConstrained: null,
@@ -1108,7 +1100,6 @@ void main() {
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Test Section",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -1522,7 +1513,6 @@ void main() {
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Test Section",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -1753,7 +1743,6 @@ void main() {
     final section1 = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Section 1",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -1766,7 +1755,6 @@ void main() {
     final section2 = PageBuilderSection(
       id: UniqueID.fromUniqueString("section2"),
       name: "Section 2",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -1779,7 +1767,6 @@ void main() {
     final section3 = PageBuilderSection(
       id: UniqueID.fromUniqueString("section3"),
       name: "Section 3",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -2062,7 +2049,6 @@ void main() {
     final section1 = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Section 1",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -2075,7 +2061,6 @@ void main() {
     final section2 = PageBuilderSection(
       id: UniqueID.fromUniqueString("section2"),
       name: "Section 2",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -2088,7 +2073,6 @@ void main() {
     final section3 = PageBuilderSection(
       id: UniqueID.fromUniqueString("section3"),
       name: "Section 3",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -2494,7 +2478,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -2574,7 +2557,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -2667,7 +2649,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -2745,7 +2726,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -2822,7 +2802,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -2894,7 +2873,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -3098,7 +3076,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -3192,7 +3169,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -3282,7 +3258,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -3354,7 +3329,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -3459,7 +3433,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -3675,7 +3648,6 @@ void main() {
       final testSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: null,
         background: null,
         widgets: [],
         maxWidth: null,

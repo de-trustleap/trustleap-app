@@ -155,7 +155,6 @@ void main() {
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Test Section",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: 1200.0,
       backgroundConstrained: null,
@@ -225,7 +224,6 @@ void main() {
       final anotherSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section2"),
         name: "Another Section",
-        layout: PageBuilderSectionLayout.row,
         background: null,
         maxWidth: 1400.0,
         backgroundConstrained: null,
@@ -298,7 +296,6 @@ void main() {
       final mockSection = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test Section",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,
@@ -391,7 +388,6 @@ void main() {
     final mockSection = PageBuilderSection(
       id: UniqueID.fromUniqueString("section1"),
       name: "Test Section",
-      layout: PageBuilderSectionLayout.column,
       background: null,
       maxWidth: null,
       backgroundConstrained: null,
@@ -545,7 +541,6 @@ void main() {
       final section = PageBuilderSection(
         id: UniqueID.fromUniqueString("section1"),
         name: "Test",
-        layout: PageBuilderSectionLayout.column,
         background: null,
         maxWidth: null,
         backgroundConstrained: null,

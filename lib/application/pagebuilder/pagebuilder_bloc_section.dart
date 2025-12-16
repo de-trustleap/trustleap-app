@@ -110,7 +110,6 @@ extension PagebuilderBlocSection on PagebuilderBloc {
       final newSection = PageBuilderSection(
         id: UniqueID(),
         name: "Neue Section",
-        layout: PageBuilderSectionLayout.column,
         widgets: sectionWidgets,
         background: null,
         maxWidth: null,

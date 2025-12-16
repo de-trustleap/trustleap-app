@@ -18,7 +18,6 @@ void main() {
       final section = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
-          layout: PageBuilderSectionLayout.column,
           widgets: [
             PageBuilderWidget(
                 id: UniqueID.fromUniqueString("2"),
@@ -50,7 +49,6 @@ void main() {
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
-          layout: PageBuilderSectionLayout.column,
           widgets: [
             PageBuilderWidget(
                 id: UniqueID.fromUniqueString("2"),
@@ -113,7 +111,6 @@ void main() {
       final section1 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
-          layout: PageBuilderSectionLayout.column,
           widgets: [
             PageBuilderWidget(
                 id: UniqueID.fromUniqueString("2"),
@@ -145,7 +142,6 @@ void main() {
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
-          layout: PageBuilderSectionLayout.column,
           widgets: [
             PageBuilderWidget(
                 id: UniqueID.fromUniqueString("2"),
