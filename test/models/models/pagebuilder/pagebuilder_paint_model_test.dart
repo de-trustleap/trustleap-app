@@ -199,8 +199,8 @@ void main() {
       final expectedGradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -333,8 +333,8 @@ void main() {
       final domainGradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -371,8 +371,8 @@ void main() {
       final domainGradient = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.2),
-          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 0.8),
+          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.2, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 0.8, globalColorToken: null),
         ],
         begin: Alignment.center,
         end: Alignment.center,
@@ -409,8 +409,8 @@ void main() {
       final domainGradient = PagebuilderGradient(
         type: PagebuilderGradientType.sweep,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF800080), position: 0.1),
-          PagebuilderGradientStop(color: Color(0xFFFFA500), position: 0.9),
+          PagebuilderGradientStop(color: Color(0xFF800080), position: 0.1, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFFA500), position: 0.9, globalColorToken: null),
         ],
         begin: Alignment.center,
         end: Alignment.center,

@@ -11,10 +11,12 @@ void main() {
       final stop = PagebuilderGradientStop(
         color: Colors.blue,
         position: 0.0,
+        globalColorToken: null,
       );
       final expectedResult = PagebuilderGradientStop(
         color: Colors.red,
         position: 0.5,
+        globalColorToken: null,
       );
       // When
       final result = stop.copyWith(color: Colors.red, position: 0.5);
@@ -29,6 +31,7 @@ void main() {
       const originalStop = PagebuilderGradientStop(
         color: Color(0xFF2196F3), // Using Color instead of MaterialColor
         position: 0.3,
+        globalColorToken: null,
       );
 
       // When
@@ -47,10 +50,12 @@ void main() {
       const stop1 = PagebuilderGradientStop(
         color: Colors.blue,
         position: 0.5,
+        globalColorToken: null,
       );
       const stop2 = PagebuilderGradientStop(
         color: Colors.blue,
         position: 0.5,
+        globalColorToken: null,
       );
       // Then
       expect(stop1, stop2);
@@ -65,23 +70,23 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-          PagebuilderGradientStop(color: Colors.red, position: 1.0),
+          PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
         ],
       );
       final expectedResult = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Colors.green, position: 0.0),
-          PagebuilderGradientStop(color: Colors.yellow, position: 1.0),
+          PagebuilderGradientStop(color: Colors.green, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.yellow, position: 1.0, globalColorToken: null),
         ],
       );
       // When
       final result = gradient.copyWith(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Colors.green, position: 0.0),
-          PagebuilderGradientStop(color: Colors.yellow, position: 1.0),
+          PagebuilderGradientStop(color: Colors.green, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.yellow, position: 1.0, globalColorToken: null),
         ],
       );
       // Then
@@ -95,8 +100,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-          PagebuilderGradientStop(color: Colors.red, position: 1.0),
+          PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
         ],
         center: Alignment.center,
         radius: 0.5,
@@ -104,8 +109,8 @@ void main() {
       final expectedResult = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-          PagebuilderGradientStop(color: Colors.red, position: 1.0),
+          PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
         ],
         center: Alignment.topLeft,
         radius: 0.8,
@@ -174,8 +179,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-          PagebuilderGradientStop(color: Colors.red, position: 1.0),
+          PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -198,8 +203,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Colors.green, position: 0.2),
-          PagebuilderGradientStop(color: Colors.yellow, position: 0.8),
+          PagebuilderGradientStop(color: Colors.green, position: 0.2, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.yellow, position: 0.8, globalColorToken: null),
         ],
         center: Alignment.topCenter,
         radius: 0.7,
@@ -222,8 +227,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.sweep,
         stops: [
-          PagebuilderGradientStop(color: Colors.purple, position: 0.1),
-          PagebuilderGradientStop(color: Colors.orange, position: 0.9),
+          PagebuilderGradientStop(color: Colors.purple, position: 0.1, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.orange, position: 0.9, globalColorToken: null),
         ],
         center: Alignment.bottomLeft,
         startAngle: 1.0,
@@ -248,8 +253,8 @@ void main() {
     test('should create independent copies (mutation test)', () {
       // Given
       final originalStops = [
-        PagebuilderGradientStop(color: Color(0xFFF44336), position: 0.0), // Red
-        PagebuilderGradientStop(color: Color(0xFF2196F3), position: 1.0), // Blue
+        PagebuilderGradientStop(color: Color(0xFFF44336), position: 0.0, globalColorToken: null), // Red
+        PagebuilderGradientStop(color: Color(0xFF2196F3), position: 1.0, globalColorToken: null), // Blue
       ];
 
       final original = PagebuilderGradient(
@@ -297,8 +302,8 @@ void main() {
       final gradient1 = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-          PagebuilderGradientStop(color: Colors.red, position: 1.0),
+          PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
         ],
         begin: Alignment.centerLeft,
         end: Alignment.centerRight,
@@ -306,8 +311,8 @@ void main() {
       final gradient2 = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-          PagebuilderGradientStop(color: Colors.red, position: 1.0),
+          PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
         ],
         begin: Alignment.centerLeft,
         end: Alignment.centerRight,
@@ -321,15 +326,15 @@ void main() {
       final gradient1 = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-          PagebuilderGradientStop(color: Colors.red, position: 1.0),
+          PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
         ],
       );
       final gradient2 = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Colors.blue, position: 0.0),
-          PagebuilderGradientStop(color: Colors.red, position: 1.0),
+          PagebuilderGradientStop(color: Colors.blue, position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Colors.red, position: 1.0, globalColorToken: null),
         ],
       );
       // Then

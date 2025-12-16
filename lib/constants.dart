@@ -141,3 +141,5 @@ enum FeedbackType {
 enum BusinessModel { b2b, b2c }
 
 enum ContactOption { calendly, contactForm, both }
+
+enum SectionType { hero, about, product, callToAction, advantages, footer }
