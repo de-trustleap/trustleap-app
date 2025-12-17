@@ -15,6 +15,7 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_page_model.dart';
+import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_section_model.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_reorder_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_factory.dart';
 import 'package:rxdart/rxdart.dart';
@@ -61,6 +62,7 @@ class PagebuilderBloc extends Bloc<PagebuilderEvent, PagebuilderState> {
     on<RedoPagebuilderEvent>(onRedo);
     on<AddWidgetAtPositionEvent>(onAddWidgetAtPosition);
     on<AddSectionEvent>(onAddSection);
+    on<AddSectionFromTemplateEvent>(onAddSectionFromTemplate);
     on<ReplacePlaceholderEvent>(onReplacePlaceholder);
     on<DeleteSectionEvent>(onDeleteSection);
     on<DuplicateSectionEvent>(onDuplicateSection);

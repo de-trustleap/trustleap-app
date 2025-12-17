@@ -61,7 +61,7 @@ class PagebuilderSectionTemplateRepositoryImplementation
         docSnapshot.id,
       );
 
-      // Convert to domain entity (globalStyles can be null for templates)
+      // Convert to domain entity (globalStyles will be applied when adding to page)
       final domainEntity = model.toDomain(null);
 
       return right(domainEntity);

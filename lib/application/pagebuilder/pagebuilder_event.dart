@@ -129,6 +129,15 @@ class AddSectionEvent extends PagebuilderEvent with EquatableMixin {
   List<Object?> get props => [columnCount];
 }
 
+class AddSectionFromTemplateEvent extends PagebuilderEvent with EquatableMixin {
+  final PageBuilderSection section;
+
+  AddSectionFromTemplateEvent(this.section);
+
+  @override
+  List<Object?> get props => [section];
+}
+
 class ReplacePlaceholderEvent extends PagebuilderEvent with EquatableMixin {
   final String placeholderId;
   final PageBuilderWidgetType widgetType;

@@ -1,6 +1,50 @@
 part of 'pagebuilder_bloc.dart';
 
 extension PagebuilderBlocSection on PagebuilderBloc {
+  Future<void> onAddSectionFromTemplate(
+      AddSectionFromTemplateEvent event, Emitter<PagebuilderState> emit) async {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final currentPageBuilderContent = currentState.content;
+      final currentPage = currentPageBuilderContent.content;
+
+      if (currentPage == null) return;
+
+      // Apply current page's global styles to the template section
+      final sectionModel = PageBuilderSectionModel.fromDomain(event.section);
+      final sectionWithGlobalStyles =
+          sectionModel.toDomain(currentPage.globalStyles);
+
+      // Use the existing function to create a deep copy with new IDs
+      final newSection = _duplicateSectionWithNewIds(sectionWithGlobalStyles);
+
+      final updatedSections = [
+        ...?currentPageBuilderContent.content?.sections,
+        newSection,
+      ];
+
+      final updatedPage = currentPageBuilderContent.content?.copyWith(
+        sections: updatedSections,
+      );
+
+      final updatedPageBuilderContent = currentPageBuilderContent.copyWith(
+        content: updatedPage,
+      );
+
+      if (!isUndoRedoOperation) {
+        localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
+
   Future<void> onAddSection(
       AddSectionEvent event, Emitter<PagebuilderState> emit) async {
     if (state is GetLandingPageAndUserSuccessState) {
