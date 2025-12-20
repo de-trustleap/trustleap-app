@@ -4,6 +4,7 @@ import 'package:finanzbegleiter/presentation/admin_area/company_requests/admin_p
 import 'package:finanzbegleiter/presentation/admin_area/company_requests/company_request_detail_page.dart';
 import 'package:finanzbegleiter/presentation/admin_area/feedback/admin_feedback_page.dart';
 import 'package:finanzbegleiter/presentation/admin_area/registration_code_creator.dart';
+import 'package:finanzbegleiter/presentation/admin_area/templates/template_manager_page.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -22,7 +23,9 @@ class AdminModule extends Module {
               child: (_) => const RegistrationCodeCreator()),
           ChildRoute(RoutePaths.userFeedback,
               child: (_) => const AdminFeedbackPage()),
-          ChildRoute(RoutePaths.legals, child: (_) => const AdminLegalsPage())
+          ChildRoute(RoutePaths.legals, child: (_) => const AdminLegalsPage()),
+          ChildRoute(RoutePaths.templates,
+              child: (_) => const TemplateManagerPage())
         ]);
     r.wildcard(child: (_) => const AdminArea());
   }

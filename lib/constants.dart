@@ -10,6 +10,7 @@ enum MenuItems {
   registrationCodes("Codes"),
   userFeedback("Nutzerfeedback"),
   legals("Rechtliches"),
+  templates("Templates"),
   none("");
 
   final String value;
