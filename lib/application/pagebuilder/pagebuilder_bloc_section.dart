@@ -1,6 +1,48 @@
 part of 'pagebuilder_bloc.dart';
 
 extension PagebuilderBlocSection on PagebuilderBloc {
+  Future<void> onAddSectionFromTemplate(
+      AddSectionFromTemplateEvent event, Emitter<PagebuilderState> emit) async {
+    if (state is GetLandingPageAndUserSuccessState) {
+      final currentState = state as GetLandingPageAndUserSuccessState;
+      final currentPageBuilderContent = currentState.content;
+      final currentPage = currentPageBuilderContent.content;
+
+      if (currentPage == null) return;
+
+      final sectionModel = PageBuilderSectionModel.fromDomain(event.section);
+      final sectionWithGlobalStyles =
+          sectionModel.toDomain(currentPage.globalStyles);
+
+      final newSection = _duplicateSectionWithNewIds(sectionWithGlobalStyles);
+
+      final updatedSections = [
+        ...?currentPageBuilderContent.content?.sections,
+        newSection,
+      ];
+
+      final updatedPage = currentPageBuilderContent.content?.copyWith(
+        sections: updatedSections,
+      );
+
+      final updatedPageBuilderContent = currentPageBuilderContent.copyWith(
+        content: updatedPage,
+      );
+
+      if (!isUndoRedoOperation) {
+        localHistory.saveToHistory(updatedPageBuilderContent);
+      }
+
+      emit(GetLandingPageAndUserSuccessState(
+        content: updatedPageBuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: true,
+      ));
+    }
+  }
+
   Future<void> onAddSection(
       AddSectionEvent event, Emitter<PagebuilderState> emit) async {
     if (state is GetLandingPageAndUserSuccessState) {
@@ -110,7 +152,6 @@ extension PagebuilderBlocSection on PagebuilderBloc {
       final newSection = PageBuilderSection(
         id: UniqueID(),
         name: "Neue Section",
-        layout: PageBuilderSectionLayout.column,
         widgets: sectionWidgets,
         background: null,
         maxWidth: null,

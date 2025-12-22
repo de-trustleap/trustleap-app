@@ -14,7 +14,6 @@ void main() {
         PageBuilderSection(
           id: UniqueID.fromUniqueString("section1"),
           name: "Section 1",
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -26,7 +25,6 @@ void main() {
         PageBuilderSection(
           id: UniqueID.fromUniqueString("section2"),
           name: "Section 2",
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -38,7 +36,6 @@ void main() {
         PageBuilderSection(
           id: UniqueID.fromUniqueString("section3"),
           name: "Section 3",
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -50,7 +47,6 @@ void main() {
         PageBuilderSection(
           id: UniqueID.fromUniqueString("section4"),
           name: "Section 4",
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,

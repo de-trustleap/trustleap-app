@@ -8176,6 +8176,109 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_global_colors_palette_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_primary => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_primary),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_primary),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_secondary => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_secondary),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_secondary),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_tertiary => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_tertiary),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_tertiary),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_background =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_background),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_background),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_surface => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_surface),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_surface),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_font_family_control_global_heading =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_font_family_control_global_heading),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_font_family_control_global_heading),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_font_family_control_other_heading =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_font_family_control_other_heading),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_font_family_control_other_heading),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_font_family_control_headline_font =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_font_family_control_headline_font),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_font_family_control_headline_font),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_font_family_control_text_font => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_font_family_control_text_font),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_font_family_control_text_font),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_styles_fonts_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_styles_fonts_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_styles_fonts_title),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,

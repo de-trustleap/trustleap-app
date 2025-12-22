@@ -100,9 +100,10 @@ void main() {
       const expectedResult = PagebuilderGradientStop(
         color: Color(0xFF0000FF), // Pure blue, not MaterialColor
         position: 0.5,
+        globalColorToken: null,
       );
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -114,6 +115,7 @@ void main() {
       const domainStop = PagebuilderGradientStop(
         color: Colors.blue,
         position: 0.5,
+        globalColorToken: null,
       );
       const expectedResult = PagebuilderGradientStopModel(
         color: "FF2196F3",
@@ -337,8 +339,8 @@ void main() {
       final expectedResult = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0), // Blue
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0), // Red
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null), // Blue
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null), // Red
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -348,7 +350,7 @@ void main() {
         endAngle: 6.283185307179586,
       );
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -371,8 +373,8 @@ void main() {
       final expectedResult = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.2), // Green
-          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 0.8), // Yellow
+          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.2, globalColorToken: null), // Green
+          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 0.8, globalColorToken: null), // Yellow
         ],
         begin: Alignment.center,
         end: Alignment.center,
@@ -382,7 +384,7 @@ void main() {
         endAngle: 6.283185307179586,
       );
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -405,8 +407,8 @@ void main() {
       final expectedResult = PagebuilderGradient(
         type: PagebuilderGradientType.sweep,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF800080), position: 0.1),
-          PagebuilderGradientStop(color: Color(0xFFFFA500), position: 0.9),
+          PagebuilderGradientStop(color: Color(0xFF800080), position: 0.1, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFFA500), position: 0.9, globalColorToken: null),
         ],
         begin: Alignment.center,
         end: Alignment.center,
@@ -416,7 +418,7 @@ void main() {
         endAngle: 5.0,
       );
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result, expectedResult);
     });
@@ -437,7 +439,7 @@ void main() {
         endAngle: 6.283185307179586,
       );
       // When
-      final result = model.toDomain();
+      final result = model.toDomain(null);
       // Then
       expect(result.type, PagebuilderGradientType.linear);
     });
@@ -449,8 +451,8 @@ void main() {
       final domainGradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0), // Blue
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0), // Red
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null), // Blue
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null), // Red
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -483,8 +485,8 @@ void main() {
       final domainGradient = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.2), // Green
-          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 0.8), // Yellow
+          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.2, globalColorToken: null), // Green
+          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 0.8, globalColorToken: null), // Yellow
         ],
         begin: Alignment.center,
         end: Alignment.center,
@@ -517,8 +519,8 @@ void main() {
       final domainGradient = PagebuilderGradient(
         type: PagebuilderGradientType.sweep,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF800080), position: 0.1),
-          PagebuilderGradientStop(color: Color(0xFFFFA500), position: 0.9),
+          PagebuilderGradientStop(color: Color(0xFF800080), position: 0.1, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFFA500), position: 0.9, globalColorToken: null),
         ],
         begin: Alignment.center,
         end: Alignment.center,

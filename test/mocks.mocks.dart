@@ -7,7 +7,7 @@ import 'dart:async' as _i11;
 import 'dart:io' as _i30;
 import 'dart:typed_data' as _i28;
 
-import 'package:bloc/bloc.dart' as _i59;
+import 'package:bloc/bloc.dart' as _i64;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i10;
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart'
     as _i9;
@@ -16,11 +16,11 @@ import 'package:cloud_functions_platform_interface/cloud_functions_platform_inte
     as _i13;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart'
-    as _i56;
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart'
-    as _i60;
-import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
     as _i61;
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart'
+    as _i65;
+import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
+    as _i66;
 import 'package:finanzbegleiter/constants.dart' as _i29;
 import 'package:finanzbegleiter/core/failures/auth_failures.dart' as _i20;
 import 'package:finanzbegleiter/core/failures/database_failures.dart' as _i21;
@@ -43,11 +43,17 @@ import 'package:finanzbegleiter/domain/entities/legals.dart' as _i49;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart'
     as _i33;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart'
-    as _i55;
+    as _i60;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart'
-    as _i58;
+    as _i63;
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template.dart'
+    as _i56;
+import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template_meta.dart'
+    as _i55;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart'
-    as _i57;
+    as _i62;
+import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_upload.dart'
+    as _i58;
 import 'package:finanzbegleiter/domain/entities/permissions.dart' as _i39;
 import 'package:finanzbegleiter/domain/entities/promoter.dart' as _i35;
 import 'package:finanzbegleiter/domain/entities/promoter_recommendations.dart'
@@ -78,7 +84,11 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 import 'package:finanzbegleiter/domain/repositories/legals_repository.dart'
     as _i48;
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart'
+    as _i59;
+import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_repository.dart'
     as _i54;
+import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_upload_repository.dart'
+    as _i57;
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart'
     as _i38;
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart'
@@ -8577,6 +8587,109 @@ class MockAppLocalizations extends _i1.Mock implements _i15.AppLocalizations {
       ) as String);
 
   @override
+  String get pagebuilder_global_colors_palette_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_title),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_primary => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_primary),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_primary),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_secondary => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_secondary),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_secondary),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_tertiary => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_tertiary),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_tertiary),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_background =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_background),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_background),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_colors_palette_surface => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_colors_palette_surface),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_colors_palette_surface),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_font_family_control_global_heading =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_font_family_control_global_heading),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_font_family_control_global_heading),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_font_family_control_other_heading =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_font_family_control_other_heading),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_font_family_control_other_heading),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_font_family_control_headline_font =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_font_family_control_headline_font),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_font_family_control_headline_font),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_font_family_control_text_font => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_font_family_control_text_font),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_font_family_control_text_font),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_global_styles_fonts_title => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_global_styles_fonts_title),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_global_styles_fonts_title),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -10842,6 +10955,89 @@ class MockTutorialRepository extends _i1.Mock
       ) as _i11.Future<void>);
 }
 
+/// A class which mocks [PagebuilderSectionTemplateRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPagebuilderSectionTemplateRepository extends _i1.Mock
+    implements _i54.PagebuilderSectionTemplateRepository {
+  MockPagebuilderSectionTemplateRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i11.Future<
+      _i2.Either<_i21.DatabaseFailure,
+          List<_i55.PagebuilderSectionTemplateMeta>>> getAllTemplateMetas() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAllTemplateMetas,
+          [],
+        ),
+        returnValue: _i11.Future<
+            _i2.Either<_i21.DatabaseFailure,
+                List<_i55.PagebuilderSectionTemplateMeta>>>.value(_FakeEither_0<
+            _i21.DatabaseFailure, List<_i55.PagebuilderSectionTemplateMeta>>(
+          this,
+          Invocation.method(
+            #getAllTemplateMetas,
+            [],
+          ),
+        )),
+      ) as _i11.Future<
+          _i2.Either<_i21.DatabaseFailure,
+              List<_i55.PagebuilderSectionTemplateMeta>>>);
+
+  @override
+  _i11.Future<_i2.Either<_i21.DatabaseFailure, _i56.PagebuilderSectionTemplate>>
+      getTemplateById(String? id) => (super.noSuchMethod(
+            Invocation.method(
+              #getTemplateById,
+              [id],
+            ),
+            returnValue: _i11.Future<
+                _i2.Either<_i21.DatabaseFailure,
+                    _i56.PagebuilderSectionTemplate>>.value(_FakeEither_0<
+                _i21.DatabaseFailure, _i56.PagebuilderSectionTemplate>(
+              this,
+              Invocation.method(
+                #getTemplateById,
+                [id],
+              ),
+            )),
+          ) as _i11.Future<
+              _i2
+              .Either<_i21.DatabaseFailure, _i56.PagebuilderSectionTemplate>>);
+}
+
+/// A class which mocks [PagebuilderSectionTemplateUploadRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPagebuilderSectionTemplateUploadRepository extends _i1.Mock
+    implements _i57.PagebuilderSectionTemplateUploadRepository {
+  MockPagebuilderSectionTemplateUploadRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i11.Future<_i2.Either<_i21.DatabaseFailure, _i2.Unit>> uploadTemplate(
+          _i58.PagebuilderSectionTemplateUpload? template) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadTemplate,
+          [template],
+        ),
+        returnValue:
+            _i11.Future<_i2.Either<_i21.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i21.DatabaseFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #uploadTemplate,
+            [template],
+          ),
+        )),
+      ) as _i11.Future<_i2.Either<_i21.DatabaseFailure, _i2.Unit>>);
+}
+
 /// A class which mocks [User].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -11207,13 +11403,13 @@ class MockUser extends _i1.Mock implements _i3.User {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderRepository extends _i1.Mock
-    implements _i54.PagebuilderRepository {
+    implements _i59.PagebuilderRepository {
   MockPagebuilderRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i11.Future<_i2.Either<_i21.DatabaseFailure, _i55.PageBuilderPage>>
+  _i11.Future<_i2.Either<_i21.DatabaseFailure, _i60.PageBuilderPage>>
       getLandingPageContent(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getLandingPageContent,
@@ -11221,8 +11417,8 @@ class MockPagebuilderRepository extends _i1.Mock
             ),
             returnValue: _i11.Future<
                     _i2
-                    .Either<_i21.DatabaseFailure, _i55.PageBuilderPage>>.value(
-                _FakeEither_0<_i21.DatabaseFailure, _i55.PageBuilderPage>(
+                    .Either<_i21.DatabaseFailure, _i60.PageBuilderPage>>.value(
+                _FakeEither_0<_i21.DatabaseFailure, _i60.PageBuilderPage>(
               this,
               Invocation.method(
                 #getLandingPageContent,
@@ -11230,11 +11426,11 @@ class MockPagebuilderRepository extends _i1.Mock
               ),
             )),
           ) as _i11
-              .Future<_i2.Either<_i21.DatabaseFailure, _i55.PageBuilderPage>>);
+              .Future<_i2.Either<_i21.DatabaseFailure, _i60.PageBuilderPage>>);
 
   @override
   _i11.Future<_i2.Either<_i21.DatabaseFailure, _i2.Unit>>
-      saveLandingPageContent(_i55.PageBuilderPage? page) => (super.noSuchMethod(
+      saveLandingPageContent(_i60.PageBuilderPage? page) => (super.noSuchMethod(
             Invocation.method(
               #saveLandingPageContent,
               [page],
@@ -11255,26 +11451,26 @@ class MockPagebuilderRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderConfigMenuCubit extends _i1.Mock
-    implements _i56.PagebuilderConfigMenuCubit {
+    implements _i61.PagebuilderConfigMenuCubit {
   MockPagebuilderConfigMenuCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i56.PagebuilderConfigMenuState get state => (super.noSuchMethod(
+  _i61.PagebuilderConfigMenuState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i16.dummyValue<_i56.PagebuilderConfigMenuState>(
+        returnValue: _i16.dummyValue<_i61.PagebuilderConfigMenuState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i56.PagebuilderConfigMenuState);
+      ) as _i61.PagebuilderConfigMenuState);
 
   @override
-  _i11.Stream<_i56.PagebuilderConfigMenuState> get stream =>
+  _i11.Stream<_i61.PagebuilderConfigMenuState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i11.Stream<_i56.PagebuilderConfigMenuState>.empty(),
-      ) as _i11.Stream<_i56.PagebuilderConfigMenuState>);
+        returnValue: _i11.Stream<_i61.PagebuilderConfigMenuState>.empty(),
+      ) as _i11.Stream<_i61.PagebuilderConfigMenuState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -11283,7 +11479,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void openConfigMenu(_i57.PageBuilderWidget? model) => super.noSuchMethod(
+  void openConfigMenu(_i62.PageBuilderWidget? model) => super.noSuchMethod(
         Invocation.method(
           #openConfigMenu,
           [model],
@@ -11292,7 +11488,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void openSectionConfigMenu(_i58.PageBuilderSection? model) =>
+  void openSectionConfigMenu(_i63.PageBuilderSection? model) =>
       super.noSuchMethod(
         Invocation.method(
           #openSectionConfigMenu,
@@ -11320,7 +11516,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i56.PagebuilderConfigMenuState? state) => super.noSuchMethod(
+  void emit(_i61.PagebuilderConfigMenuState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -11329,7 +11525,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i59.Change<_i56.PagebuilderConfigMenuState>? change) =>
+  void onChange(_i64.Change<_i61.PagebuilderConfigMenuState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -11385,7 +11581,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderSelectionCubit extends _i1.Mock
-    implements _i60.PagebuilderSelectionCubit {
+    implements _i65.PagebuilderSelectionCubit {
   MockPagebuilderSelectionCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -11421,7 +11617,7 @@ class MockPagebuilderSelectionCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i59.Change<String?>? change) => super.noSuchMethod(
+  void onChange(_i64.Change<String?>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -11476,7 +11672,7 @@ class MockPagebuilderSelectionCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRecommendationManagerTileCubit extends _i1.Mock
-    implements _i61.RecommendationManagerTileCubit {
+    implements _i66.RecommendationManagerTileCubit {
   MockRecommendationManagerTileCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -11506,20 +11702,20 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as List<String>);
 
   @override
-  _i61.RecommendationManagerTileState get state => (super.noSuchMethod(
+  _i66.RecommendationManagerTileState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i16.dummyValue<_i61.RecommendationManagerTileState>(
+        returnValue: _i16.dummyValue<_i66.RecommendationManagerTileState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i61.RecommendationManagerTileState);
+      ) as _i66.RecommendationManagerTileState);
 
   @override
-  _i11.Stream<_i61.RecommendationManagerTileState> get stream =>
+  _i11.Stream<_i66.RecommendationManagerTileState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i11.Stream<_i61.RecommendationManagerTileState>.empty(),
-      ) as _i11.Stream<_i61.RecommendationManagerTileState>);
+        returnValue: _i11.Stream<_i66.RecommendationManagerTileState>.empty(),
+      ) as _i11.Stream<_i66.RecommendationManagerTileState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -11632,7 +11828,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as _i11.Future<String>);
 
   @override
-  void emit(_i61.RecommendationManagerTileState? state) => super.noSuchMethod(
+  void emit(_i66.RecommendationManagerTileState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -11641,7 +11837,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i59.Change<_i61.RecommendationManagerTileState>? change) =>
+  void onChange(_i64.Change<_i66.RecommendationManagerTileState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,

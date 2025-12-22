@@ -8,6 +8,11 @@ class Environment {
   final landingPageProdBaseURL = "https://empfohlen-von.de";
   final landingPageStagingBaseURL = "https://staging.empfohlen-von.de";
 
+  final cloudFunctionsProdBaseURL =
+      "https://europe-west3-finanzwegbegleiter.cloudfunctions.net";
+  final cloudFunctionsStagingBaseURL =
+      "https://europe-west3-trustleap-staging.cloudfunctions.net";
+
   bool isStaging() {
     final String currentUrl = web.window.location.hostname;
     final bool isStaging = currentUrl.contains(stagingBaseURL) ||
@@ -44,6 +49,14 @@ class Environment {
       return stagingBaseURL;
     } else {
       return prodBaseURL;
+    }
+  }
+
+  String getCloudFunctionsBaseURL() {
+    if (isStaging()) {
+      return cloudFunctionsStagingBaseURL;
+    } else {
+      return cloudFunctionsProdBaseURL;
     }
   }
 }

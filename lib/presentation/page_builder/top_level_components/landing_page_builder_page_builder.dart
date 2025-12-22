@@ -9,7 +9,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dar
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_breakpoint_size.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/landing_page_builder_section_builder.dart';
-import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_add_section_button.dart';
+import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_add_section_area.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/landing_page_builder_config_menu.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorder_dimming_overlay.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_reorderable_element.dart';
@@ -210,7 +210,7 @@ class _LandingPageBuilderPageBuilderState
                                                         widget.landingPage,
                                                   ),
                                                 ),
-                                              const PagebuilderAddSectionButton(),
+                                              const PagebuilderAddSectionArea(),
                                             ],
                                           ),
                                         ),

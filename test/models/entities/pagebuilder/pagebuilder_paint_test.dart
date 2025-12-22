@@ -31,8 +31,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
       );
       final paint = PagebuilderPaint.gradient(gradient);
@@ -58,8 +58,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 1.0, globalColorToken: null),
         ],
       );
       final paint = PagebuilderPaint.gradient(gradient);
@@ -94,8 +94,8 @@ void main() {
       final newGradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
       );
       // When
@@ -120,8 +120,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
       );
       final originalPaint = PagebuilderPaint.gradient(gradient);
@@ -138,8 +138,8 @@ void main() {
       final newGradient = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF00FF00), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFFFF00), position: 1.0, globalColorToken: null),
         ],
       );
       // When
@@ -159,8 +159,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
       );
       final originalPaint = PagebuilderPaint.gradient(gradient);
@@ -194,8 +194,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -227,8 +227,8 @@ void main() {
     test("deepCopy should create completely independent gradient copies", () {
       // Given
       final originalStops = [
-        PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-        PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+        PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+        PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
       ];
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
@@ -263,8 +263,8 @@ void main() {
       final gradient = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
       );
       final paint1 = PagebuilderPaint.gradient(gradient);
@@ -286,15 +286,15 @@ void main() {
       final gradient1 = PagebuilderGradient(
         type: PagebuilderGradientType.linear,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
       );
       final gradient2 = PagebuilderGradient(
         type: PagebuilderGradientType.radial,
         stops: [
-          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+          PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+          PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
         ],
       );
       final paint1 = PagebuilderPaint.gradient(gradient1);
@@ -310,8 +310,8 @@ void main() {
         PagebuilderGradient(
           type: PagebuilderGradientType.linear,
           stops: [
-            PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0),
-            PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0),
+            PagebuilderGradientStop(color: Color(0xFF0000FF), position: 0.0, globalColorToken: null),
+            PagebuilderGradientStop(color: Color(0xFFFF0000), position: 1.0, globalColorToken: null),
           ],
         ),
       );

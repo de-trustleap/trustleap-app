@@ -212,6 +212,3 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
             }));
   }
 }
-
-// TODO: TEMPLATES ANPASSEN (PRIMARY IST GESETZT. TESTEN)
-// TODO: TEMPLATE NOCHMAL ANPASSEN. DAS ORANGE SOLLTE ÜBERALL DAS GLEICHE SEIN.

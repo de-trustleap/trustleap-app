@@ -29,7 +29,9 @@ import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_drag/pagebui
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_hierarchy_expansion/pagebuilder_hierarchy_expansion_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_hover/pagebuilder_hover_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_section_template/pagebuilder_section_template_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart';
+import 'package:finanzbegleiter/application/pagebuilder_section_template_upload/pagebuilder_section_template_upload_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_zoom/pagebuilder_zoom_cubit.dart';
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
@@ -60,6 +62,8 @@ import 'package:finanzbegleiter/domain/repositories/image_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/legals_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_upload_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/promoter_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/recommendation_repository.dart';
@@ -76,6 +80,8 @@ import 'package:finanzbegleiter/infrastructure/repositories/image_repository_imp
 import 'package:finanzbegleiter/infrastructure/repositories/landing_page_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/legals_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/pagebuilder_repository_implementation.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/pagebuilder_section_template_repository_implementation.dart';
+import 'package:finanzbegleiter/infrastructure/repositories/pagebuilder_section_template_upload_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/permission_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/promoter_repository_implementation.dart';
 import 'package:finanzbegleiter/infrastructure/repositories/recommendation_repository_implementation.dart';
@@ -114,6 +120,10 @@ class AppModule extends Module {
           LandingPageRepositoryImplementation.new)
       ..addLazySingleton<PagebuilderRepository>(
           PageBuilderRepositoryImplementation.new)
+      ..addLazySingleton<PagebuilderSectionTemplateRepository>(
+          PagebuilderSectionTemplateRepositoryImplementation.new)
+      ..addLazySingleton<PagebuilderSectionTemplateUploadRepository>(
+          PagebuilderSectionTemplateUploadRepositoryImplementation.new)
       ..addLazySingleton<PermissionRepository>(
           PermissionRepositoryImplementation.new)
       ..addLazySingleton<AdminRegistrationCodeRepository>(
@@ -133,6 +143,8 @@ class AppModule extends Module {
           CalendlyRepositoryImplementation.new)
       ..addLazySingleton(PagebuilderBloc.new)
       ..addLazySingleton(PagebuilderConfigMenuCubit.new)
+      ..addLazySingleton(PagebuilderSectionTemplateCubit.new)
+      ..addLazySingleton(PagebuilderSectionTemplateUploadCubit.new)
       ..addLazySingleton(PermissionCubit.new)
       ..addLazySingleton(PromoterCubit.new)
       ..addLazySingleton(PromoterObserverCubit.new)

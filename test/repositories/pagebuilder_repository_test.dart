@@ -64,7 +64,6 @@ void main() {
           PageBuilderSection(
               id: UniqueID.fromUniqueString("2"),
               name: "Test Section",
-              layout: PageBuilderSectionLayout.column,
               background: null,
               maxWidth: null,
               backgroundConstrained: null,

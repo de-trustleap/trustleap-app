@@ -7,6 +7,7 @@ class RoutePaths {
   static const String registrationCodes = "/registration-codes";
   static const String userFeedback = "/user-feedback";
   static const String legals = "/legals";
+  static const String templates = "/templates";
 
   static const String homePath = "/home";
   static const String dashboardPath = "/dashboard";
@@ -48,6 +49,7 @@ class RoutePaths {
     MenuItems.landingpage: RoutePaths.landingPagePath,
     MenuItems.adminCompanyRequests: RoutePaths.companyRequestsPath,
     MenuItems.registrationCodes: RoutePaths.registrationCodes,
-    MenuItems.userFeedback: RoutePaths.userFeedback
+    MenuItems.userFeedback: RoutePaths.userFeedback,
+    MenuItems.templates: RoutePaths.templates
   };
 }

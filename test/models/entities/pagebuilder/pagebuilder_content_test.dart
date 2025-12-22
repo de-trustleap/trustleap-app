@@ -22,7 +22,6 @@ void main() {
                 PageBuilderSection(
                     id: UniqueID.fromUniqueString("2"),
                     name: "Test Section",
-                    layout: PageBuilderSectionLayout.column,
                     widgets: [],
                     background: null,
                     maxWidth: 300,
@@ -42,7 +41,6 @@ void main() {
                 PageBuilderSection(
                     id: UniqueID.fromUniqueString("2"),
                     name: "Test Section",
-                    layout: PageBuilderSectionLayout.column,
                     widgets: [],
                     background: null,
                     maxWidth: 500,
@@ -62,7 +60,6 @@ void main() {
               PageBuilderSection(
                   id: UniqueID.fromUniqueString("2"),
                   name: "Test Section",
-                  layout: PageBuilderSectionLayout.column,
                   widgets: [],
                   background: null,
                   maxWidth: 500,
@@ -90,7 +87,6 @@ void main() {
                 PageBuilderSection(
                     id: UniqueID.fromUniqueString("2"),
                     name: "Test Section",
-                    layout: PageBuilderSectionLayout.column,
                     widgets: [],
                     background: null,
                     maxWidth: 300,
@@ -110,7 +106,6 @@ void main() {
                 PageBuilderSection(
                     id: UniqueID.fromUniqueString("2"),
                     name: "Test Section",
-                    layout: PageBuilderSectionLayout.column,
                     widgets: [],
                     background: null,
                     maxWidth: 300,

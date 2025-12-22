@@ -5342,6 +5342,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Global Fonts'**
   String get pagebuilder_global_styles_fonts_title;
+
+  /// Title of the Template Manager page in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Template Manager'**
+  String get admin_area_template_manager_title;
+
+  /// Description text of the Template Manager page in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Upload section templates for the pagebuilder'**
+  String get admin_area_template_manager_description;
+
+  /// Heading for upload area in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Section Template'**
+  String get admin_area_template_manager_upload_heading;
+
+  /// Label for JSON file selection in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Section JSON'**
+  String get admin_area_template_manager_section_json_label;
+
+  /// Label for thumbnail file selection in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Thumbnail'**
+  String get admin_area_template_manager_thumbnail_label;
+
+  /// Placeholder text for file selection in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Choose file...'**
+  String get admin_area_template_manager_file_picker_hint;
+
+  /// Label for asset images area in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Asset Images'**
+  String get admin_area_template_manager_asset_images_label;
+
+  /// Button text for adding asset images in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Add Images'**
+  String get admin_area_template_manager_add_images_button;
+
+  /// Text when no assets are selected in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'No assets selected'**
+  String get admin_area_template_manager_no_assets_selected;
+
+  /// Label for section type dropdown in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Section Type'**
+  String get admin_area_template_manager_section_type_label;
+
+  /// Placeholder text for type selection in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Choose type...'**
+  String get admin_area_template_manager_type_hint;
+
+  /// Label for Hero section type in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Hero'**
+  String get admin_area_template_manager_type_hero;
+
+  /// Label for Product section type in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get admin_area_template_manager_type_product;
+
+  /// Label for About section type in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get admin_area_template_manager_type_about;
+
+  /// Label for Call To Action section type in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Call To Action'**
+  String get admin_area_template_manager_type_call_to_action;
+
+  /// Label for Advantages section type in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Advantages'**
+  String get admin_area_template_manager_type_advantages;
+
+  /// Label for Footer section type in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Footer'**
+  String get admin_area_template_manager_type_footer;
+
+  /// Label for environment dropdown in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get admin_area_template_manager_environment_label;
+
+  /// Label for both environments in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Staging & Production'**
+  String get admin_area_template_manager_environment_both;
+
+  /// Label for staging environment only in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Staging only'**
+  String get admin_area_template_manager_environment_staging;
+
+  /// Label for production environment only in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Production only'**
+  String get admin_area_template_manager_environment_prod;
+
+  /// Button text for uploading the template in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Template'**
+  String get admin_area_template_manager_upload_button;
+
+  /// Error message when JSON or thumbnail is missing in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least JSON and Thumbnail'**
+  String get admin_area_template_manager_error_missing_files;
+
+  /// Error message when type is not selected in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a type'**
+  String get admin_area_template_manager_error_missing_type;
+
+  /// Error message when reading files in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Error reading files'**
+  String get admin_area_template_manager_error_reading_files;
+
+  /// Success message after template upload in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Template uploaded successfully!'**
+  String get admin_area_template_manager_success_message;
+
+  /// Menu item for Templates in Admin Area
+  ///
+  /// In en, this message translates to:
+  /// **'Templates'**
+  String get menuitems_templates;
+
+  /// Tooltip for button to create an empty section in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Create empty section'**
+  String get pagebuilder_add_section_create_empty_tooltip;
+
+  /// Tooltip for button to create a section from template in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Create from template'**
+  String get pagebuilder_add_section_create_from_template_tooltip;
+
+  /// Heading for layout selection when creating a section in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your layout'**
+  String get pagebuilder_add_section_choose_layout_heading;
+
+  /// Label for Hero section type in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Hero'**
+  String get pagebuilder_section_type_hero;
+
+  /// Label for About section type in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get pagebuilder_section_type_about;
+
+  /// Label for Product section type in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get pagebuilder_section_type_product;
+
+  /// Label for Call to Action section type in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Call to Action'**
+  String get pagebuilder_section_type_call_to_action;
+
+  /// Label for Advantages section type in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Advantages'**
+  String get pagebuilder_section_type_advantages;
+
+  /// Label for Footer section type in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Footer'**
+  String get pagebuilder_section_type_footer;
+
+  /// Error message when loading a single template in Pagebuilder Template Library Dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading template'**
+  String get pagebuilder_template_library_error_loading_template;
+
+  /// Heading of the Template Library Dialog in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Template Selection'**
+  String get pagebuilder_template_library_heading;
+
+  /// Error message when loading all templates in Pagebuilder Template Library Dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading templates'**
+  String get pagebuilder_template_library_error_loading_templates;
+
+  /// Message when no templates are available for a specific type in Pagebuilder Template Library Dialog
+  ///
+  /// In en, this message translates to:
+  /// **'No templates available for {type}'**
+  String pagebuilder_template_library_no_templates_available(String type);
 }
 
 class _AppLocalizationsDelegate

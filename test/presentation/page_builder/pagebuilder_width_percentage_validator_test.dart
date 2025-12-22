@@ -143,7 +143,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -244,7 +243,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -344,7 +342,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -427,7 +424,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -823,7 +819,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -923,7 +918,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -1023,7 +1017,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -1131,7 +1124,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -1239,7 +1231,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,
@@ -1322,7 +1313,6 @@ void main() {
         final section = PageBuilderSection(
           id: UniqueID.fromUniqueString('section-1'),
           name: 'Test Section',
-          layout: PageBuilderSectionLayout.column,
           background: null,
           maxWidth: null,
           backgroundConstrained: null,

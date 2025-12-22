@@ -70,6 +70,8 @@ class _MenuItemState extends State<MenuItem> {
         return localization.menuitems_user_feedback;
       case MenuItems.legals:
         return localization.menuitems_legals;
+      case MenuItems.templates:
+        return localization.menuitems_templates;
       case MenuItems.none:
         return "";
     }

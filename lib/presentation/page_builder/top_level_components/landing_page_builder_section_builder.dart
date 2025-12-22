@@ -54,15 +54,12 @@ class _LandingPageBuilderSectionViewState
     final selectionCubit = Modular.get<PagebuilderSelectionCubit>();
     final breakpointCubit = Modular.get<PagebuilderResponsiveBreakpointCubit>();
 
-    switch (widget.model.layout) {
-      case PageBuilderSectionLayout.column:
-      default:
-        final shouldConstrainBackground =
-            widget.model.backgroundConstrained ?? false;
-        final outerMaxWidth =
-            shouldConstrainBackground ? widget.model.maxWidth : null;
+    final shouldConstrainBackground =
+        widget.model.backgroundConstrained ?? false;
+    final outerMaxWidth =
+        shouldConstrainBackground ? widget.model.maxWidth : null;
 
-        return RepaintBoundary(
+    return RepaintBoundary(
           child: Center(
               child: ConstrainedBox(
             constraints:
@@ -424,7 +421,6 @@ class _LandingPageBuilderSectionViewState
               },
             ),
           )),
-        );
-    }
+    );
   }
 }

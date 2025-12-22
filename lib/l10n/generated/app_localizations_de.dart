@@ -3130,4 +3130,142 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pagebuilder_global_styles_fonts_title => 'Globale Schriftarten';
+
+  @override
+  String get admin_area_template_manager_title => 'Template Manager';
+
+  @override
+  String get admin_area_template_manager_description =>
+      'Section Templates für den Pagebuilder hochladen';
+
+  @override
+  String get admin_area_template_manager_upload_heading =>
+      'Section Template hochladen';
+
+  @override
+  String get admin_area_template_manager_section_json_label => 'Section JSON';
+
+  @override
+  String get admin_area_template_manager_thumbnail_label => 'Thumbnail';
+
+  @override
+  String get admin_area_template_manager_file_picker_hint =>
+      'Datei auswählen...';
+
+  @override
+  String get admin_area_template_manager_asset_images_label => 'Asset Images';
+
+  @override
+  String get admin_area_template_manager_add_images_button =>
+      'Bilder hinzufügen';
+
+  @override
+  String get admin_area_template_manager_no_assets_selected =>
+      'Keine Assets ausgewählt';
+
+  @override
+  String get admin_area_template_manager_section_type_label => 'Section Type';
+
+  @override
+  String get admin_area_template_manager_type_hint => 'Type auswählen...';
+
+  @override
+  String get admin_area_template_manager_type_hero => 'Hero';
+
+  @override
+  String get admin_area_template_manager_type_product => 'Produkt';
+
+  @override
+  String get admin_area_template_manager_type_about => 'Über';
+
+  @override
+  String get admin_area_template_manager_type_call_to_action =>
+      'Call To Action';
+
+  @override
+  String get admin_area_template_manager_type_advantages => 'Vorteile';
+
+  @override
+  String get admin_area_template_manager_type_footer => 'Footer';
+
+  @override
+  String get admin_area_template_manager_environment_label => 'Environment';
+
+  @override
+  String get admin_area_template_manager_environment_both =>
+      'Staging & Production';
+
+  @override
+  String get admin_area_template_manager_environment_staging => 'Staging only';
+
+  @override
+  String get admin_area_template_manager_environment_prod => 'Production only';
+
+  @override
+  String get admin_area_template_manager_upload_button => 'Template hochladen';
+
+  @override
+  String get admin_area_template_manager_error_missing_files =>
+      'Bitte wähle mindestens JSON und Thumbnail aus';
+
+  @override
+  String get admin_area_template_manager_error_missing_type =>
+      'Bitte wähle einen Type aus';
+
+  @override
+  String get admin_area_template_manager_error_reading_files =>
+      'Fehler beim Lesen der Dateien';
+
+  @override
+  String get admin_area_template_manager_success_message =>
+      'Template erfolgreich hochgeladen!';
+
+  @override
+  String get menuitems_templates => 'Templates';
+
+  @override
+  String get pagebuilder_add_section_create_empty_tooltip =>
+      'Leere Section erstellen';
+
+  @override
+  String get pagebuilder_add_section_create_from_template_tooltip =>
+      'Aus Vorlage erstellen';
+
+  @override
+  String get pagebuilder_add_section_choose_layout_heading =>
+      'Wähle dein Layout';
+
+  @override
+  String get pagebuilder_section_type_hero => 'Hero';
+
+  @override
+  String get pagebuilder_section_type_about => 'Über';
+
+  @override
+  String get pagebuilder_section_type_product => 'Produkt';
+
+  @override
+  String get pagebuilder_section_type_call_to_action => 'Call to Action';
+
+  @override
+  String get pagebuilder_section_type_advantages => 'Vorteile';
+
+  @override
+  String get pagebuilder_section_type_footer => 'Fußzeile';
+
+  @override
+  String get pagebuilder_template_library_error_loading_template =>
+      'Fehler beim Laden der Vorlage';
+
+  @override
+  String get pagebuilder_template_library_heading => 'Vorlagen Auswahl';
+
+  @override
+  String get pagebuilder_template_library_error_loading_templates =>
+      'Fehler beim Laden der Templates';
+
+  @override
+  String pagebuilder_template_library_no_templates_available(String type) {
+    return 'Keine Templates für $type verfügbar';
+  }
 }

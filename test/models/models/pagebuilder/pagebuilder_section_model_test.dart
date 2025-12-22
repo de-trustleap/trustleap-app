@@ -21,7 +21,6 @@ void main() {
       final section = PageBuilderSectionModel(
           id: "1",
           name: "Test Section",
-          layout: "column",
           background: null,
           maxWidth: 300,
           backgroundConstrained: null,
@@ -32,7 +31,6 @@ void main() {
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           name: "Test Section",
-          layout: "column",
           background: null,
           maxWidth: 500,
           backgroundConstrained: null,
@@ -53,7 +51,6 @@ void main() {
       final model = PageBuilderSectionModel(
           id: "1",
           name: "Test Section",
-          layout: "column",
           background: null,
           maxWidth: 300,
           backgroundConstrained: null,
@@ -64,7 +61,6 @@ void main() {
       final expectedResult = {
         "id": "1",
         "name": "Test Section",
-        "layout": "column",
         "maxWidth": 300,
         "widgets": []
       };
@@ -81,14 +77,12 @@ void main() {
       final map = {
         "id": "1",
         "name": "Test Section",
-        "layout": "column",
         "maxWidth": 300.0,
         "widgets": []
       };
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           name: "Test Section",
-          layout: "column",
           background: null,
           maxWidth: 300,
           backgroundConstrained: null,
@@ -111,7 +105,6 @@ void main() {
       final model = PageBuilderSectionModel(
           id: "1",
           name: "Test Section",
-          layout: "column",
           background: null,
           maxWidth: 800,
           backgroundConstrained: null,
@@ -122,7 +115,6 @@ void main() {
       final expectedResult = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
-          layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
           maxWidth: 800,
@@ -145,7 +137,6 @@ void main() {
       final model = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
-          layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
           maxWidth: 800,
@@ -156,7 +147,6 @@ void main() {
       final expectedResult = PageBuilderSectionModel(
           id: "1",
           name: "Test Section",
-          layout: "column",
           background: null,
           maxWidth: 800,
           backgroundConstrained: null,
@@ -359,7 +349,6 @@ void main() {
       final model = PageBuilderSectionModel(
           id: "1",
           name: "Test Section",
-          layout: "column",
           background: null,
           maxWidth: 800,
           backgroundConstrained: null,
@@ -560,7 +549,6 @@ void main() {
       final section1 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
-          layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
           maxWidth: 800,
@@ -571,7 +559,6 @@ void main() {
       final section2 = PageBuilderSection(
           id: UniqueID.fromUniqueString("1"),
           name: "Test Section",
-          layout: PageBuilderSectionLayout.column,
           widgets: [],
           background: null,
           maxWidth: 800,

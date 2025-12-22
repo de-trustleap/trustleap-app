@@ -85,9 +85,10 @@ class PageBuilderGlobalColorsModel extends Equatable {
   }
 
   static String _colorToHex(Color color) {
-    return '#${color.value.toRadixString(16).substring(2).toUpperCase()}';
+    return '#${color.toARGB32().toRadixString(16).substring(2).toUpperCase()}';
   }
 
   @override
-  List<Object?> get props => [primary, secondary, tertiary, background, surface];
+  List<Object?> get props =>
+      [primary, secondary, tertiary, background, surface];
 }

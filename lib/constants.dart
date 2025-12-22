@@ -10,6 +10,7 @@ enum MenuItems {
   registrationCodes("Codes"),
   userFeedback("Nutzerfeedback"),
   legals("Rechtliches"),
+  templates("Templates"),
   none("");
 
   final String value;
@@ -88,8 +89,6 @@ enum PageBuilderWidgetType {
   none
 }
 
-enum PageBuilderSectionLayout { row, column, none }
-
 enum PageBuilderSpacingType { padding, margin }
 
 enum PagebuilderResponsiveBreakpoint { mobile, tablet, desktop }
@@ -141,3 +140,5 @@ enum FeedbackType {
 enum BusinessModel { b2b, b2c }
 
 enum ContactOption { calendly, contactForm, both }
+
+enum SectionType { hero, about, product, callToAction, advantages, footer }
