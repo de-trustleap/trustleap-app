@@ -3609,5 +3609,170 @@
     "pagebuilder_global_styles_fonts_title": "Globale Schriftarten",
     "@pagebuilder_global_styles_fonts_title": {
         "description": "Titel für die globalen Schriftarten im Styles-Menü"
+    },
+    "admin_area_template_manager_title": "Template Manager",
+    "@admin_area_template_manager_title": {
+        "description": "Titel der Template Manager Seite im Admin Area für Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_description": "Section Templates für den Pagebuilder hochladen",
+    "@admin_area_template_manager_description": {
+        "description": "Beschreibungstext der Template Manager Seite im Admin Area für Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_upload_heading": "Section Template hochladen",
+    "@admin_area_template_manager_upload_heading": {
+        "description": "Überschrift für Upload-Bereich im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_section_json_label": "Section JSON",
+    "@admin_area_template_manager_section_json_label": {
+        "description": "Label für JSON-Datei Auswahl im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_thumbnail_label": "Thumbnail",
+    "@admin_area_template_manager_thumbnail_label": {
+        "description": "Label für Thumbnail-Datei Auswahl im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_file_picker_hint": "Datei auswählen...",
+    "@admin_area_template_manager_file_picker_hint": {
+        "description": "Platzhalter-Text für Dateiauswahl im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_asset_images_label": "Asset Images",
+    "@admin_area_template_manager_asset_images_label": {
+        "description": "Label für Asset-Bilder Bereich im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_add_images_button": "Bilder hinzufügen",
+    "@admin_area_template_manager_add_images_button": {
+        "description": "Button-Text zum Hinzufügen von Asset-Bildern im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_no_assets_selected": "Keine Assets ausgewählt",
+    "@admin_area_template_manager_no_assets_selected": {
+        "description": "Text wenn keine Assets ausgewählt sind im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_section_type_label": "Section Type",
+    "@admin_area_template_manager_section_type_label": {
+        "description": "Label für Section-Type Dropdown im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_type_hint": "Type auswählen...",
+    "@admin_area_template_manager_type_hint": {
+        "description": "Platzhalter-Text für Type-Auswahl im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_type_hero": "Hero",
+    "@admin_area_template_manager_type_hero": {
+        "description": "Label für Hero Section Type im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_type_product": "Produkt",
+    "@admin_area_template_manager_type_product": {
+        "description": "Label für Produkt Section Type im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_type_about": "Über",
+    "@admin_area_template_manager_type_about": {
+        "description": "Label für Über Section Type im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_type_call_to_action": "Call To Action",
+    "@admin_area_template_manager_type_call_to_action": {
+        "description": "Label für Call To Action Section Type im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_type_advantages": "Vorteile",
+    "@admin_area_template_manager_type_advantages": {
+        "description": "Label für Vorteile Section Type im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_type_footer": "Footer",
+    "@admin_area_template_manager_type_footer": {
+        "description": "Label für Footer Section Type im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_environment_label": "Environment",
+    "@admin_area_template_manager_environment_label": {
+        "description": "Label für Environment Dropdown im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_environment_both": "Staging & Production",
+    "@admin_area_template_manager_environment_both": {
+        "description": "Label für beide Environments im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_environment_staging": "Staging only",
+    "@admin_area_template_manager_environment_staging": {
+        "description": "Label für nur Staging Environment im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_environment_prod": "Production only",
+    "@admin_area_template_manager_environment_prod": {
+        "description": "Label für nur Production Environment im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_upload_button": "Template hochladen",
+    "@admin_area_template_manager_upload_button": {
+        "description": "Button-Text zum Hochladen des Templates im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_error_missing_files": "Bitte wähle mindestens JSON und Thumbnail aus",
+    "@admin_area_template_manager_error_missing_files": {
+        "description": "Fehlermeldung wenn JSON oder Thumbnail fehlt im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_error_missing_type": "Bitte wähle einen Type aus",
+    "@admin_area_template_manager_error_missing_type": {
+        "description": "Fehlermeldung wenn Type nicht ausgewählt wurde im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_error_reading_files": "Fehler beim Lesen der Dateien",
+    "@admin_area_template_manager_error_reading_files": {
+        "description": "Fehlermeldung beim Lesen der Dateien im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_success_message": "Template erfolgreich hochgeladen!",
+    "@admin_area_template_manager_success_message": {
+        "description": "Erfolgsmeldung nach Template-Upload im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "menuitems_templates": "Templates",
+    "@menuitems_templates": {
+        "description": "Menüeintrag für Templates im Admin Area"
+    },
+    "pagebuilder_add_section_create_empty_tooltip": "Leere Section erstellen",
+    "@pagebuilder_add_section_create_empty_tooltip": {
+        "description": "Tooltip für Button zum Erstellen einer leeren Section im Pagebuilder"
+    },
+    "pagebuilder_add_section_create_from_template_tooltip": "Aus Vorlage erstellen",
+    "@pagebuilder_add_section_create_from_template_tooltip": {
+        "description": "Tooltip für Button zum Erstellen einer Section aus Vorlage im Pagebuilder"
+    },
+    "pagebuilder_add_section_choose_layout_heading": "Wähle dein Layout",
+    "@pagebuilder_add_section_choose_layout_heading": {
+        "description": "Überschrift für Layout-Auswahl beim Erstellen einer Section im Pagebuilder"
+    },
+    "pagebuilder_section_type_hero": "Hero",
+    "@pagebuilder_section_type_hero": {
+        "description": "Label für Hero Section Type im Pagebuilder"
+    },
+    "pagebuilder_section_type_about": "Über",
+    "@pagebuilder_section_type_about": {
+        "description": "Label für Über Section Type im Pagebuilder"
+    },
+    "pagebuilder_section_type_product": "Produkt",
+    "@pagebuilder_section_type_product": {
+        "description": "Label für Produkt Section Type im Pagebuilder"
+    },
+    "pagebuilder_section_type_call_to_action": "Call to Action",
+    "@pagebuilder_section_type_call_to_action": {
+        "description": "Label für Call to Action Section Type im Pagebuilder"
+    },
+    "pagebuilder_section_type_advantages": "Vorteile",
+    "@pagebuilder_section_type_advantages": {
+        "description": "Label für Vorteile Section Type im Pagebuilder"
+    },
+    "pagebuilder_section_type_footer": "Fußzeile",
+    "@pagebuilder_section_type_footer": {
+        "description": "Label für Fußzeile Section Type im Pagebuilder"
+    },
+    "pagebuilder_template_library_error_loading_template": "Fehler beim Laden der Vorlage",
+    "@pagebuilder_template_library_error_loading_template": {
+        "description": "Fehlermeldung beim Laden einer einzelnen Vorlage im Pagebuilder Template Library Dialog"
+    },
+    "pagebuilder_template_library_heading": "Vorlagen Auswahl",
+    "@pagebuilder_template_library_heading": {
+        "description": "Überschrift des Template Library Dialogs im Pagebuilder"
+    },
+    "pagebuilder_template_library_error_loading_templates": "Fehler beim Laden der Templates",
+    "@pagebuilder_template_library_error_loading_templates": {
+        "description": "Fehlermeldung beim Laden aller Templates im Pagebuilder Template Library Dialog"
+    },
+    "pagebuilder_template_library_no_templates_available": "Keine Templates für {type} verfügbar",
+    "@pagebuilder_template_library_no_templates_available": {
+        "description": "Nachricht wenn keine Templates für einen bestimmten Type verfügbar sind im Pagebuilder Template Library Dialog",
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
     }
 }

@@ -33,7 +33,6 @@ class TemplateManagerContent extends StatefulWidget {
 }
 
 class _TemplateManagerContentState extends State<TemplateManagerContent> {
-  // Form state
   PlatformFile? _jsonFile;
   PlatformFile? _thumbnailFile;
   List<PlatformFile> _assetFiles = [];
@@ -88,9 +87,11 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
   }
 
   void _uploadTemplate() {
+    final localization = AppLocalizations.of(context);
+
     if (_jsonFile == null || _thumbnailFile == null) {
       CustomSnackBar.of(context).showCustomSnackBar(
-        'Bitte wähle mindestens JSON und Thumbnail aus',
+        localization.admin_area_template_manager_error_missing_files,
         SnackBarType.failure,
       );
       return;
@@ -98,7 +99,7 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
 
     if (_selectedType == null) {
       CustomSnackBar.of(context).showCustomSnackBar(
-        'Bitte wähle einen Type aus',
+        localization.admin_area_template_manager_error_missing_type,
         SnackBarType.failure,
       );
       return;
@@ -106,13 +107,12 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
 
     if (_jsonFile!.bytes == null || _thumbnailFile!.bytes == null) {
       CustomSnackBar.of(context).showCustomSnackBar(
-        'Fehler beim Lesen der Dateien',
+        localization.admin_area_template_manager_error_reading_files,
         SnackBarType.failure,
       );
       return;
     }
 
-    // Create template upload entity
     final template = PagebuilderSectionTemplateUpload(
       jsonData: _jsonFile!.bytes!,
       jsonFileName: _jsonFile!.name,
@@ -130,7 +130,6 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
       type: _selectedType!.name,
     );
 
-    // Upload using cubit
     Modular.get<PagebuilderSectionTemplateUploadCubit>()
         .uploadTemplate(template);
   }
@@ -147,10 +146,9 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
       listener: (context, state) {
         if (state is PagebuilderSectionTemplateUploadSuccess) {
           CustomSnackBar.of(context).showCustomSnackBar(
-            'Template erfolgreich hochgeladen!',
+            localization.admin_area_template_manager_success_message,
             SnackBarType.success,
           );
-          // Reset form
           setState(() {
             _jsonFile = null;
             _thumbnailFile = null;
@@ -173,97 +171,83 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
         return ListView(
           shrinkWrap: true,
           children: [
-        CardContainer(
-          maxWidth: 1200,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
-              Row(
+            CardContainer(
+              maxWidth: 1200,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.dashboard_customize,
-                    size: 32,
-                    color: theme.colorScheme.primary,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.dashboard_customize,
+                        size: 32,
+                        color: theme.colorScheme.primary,
+                      ),
+                      const SizedBox(width: 16),
+                      Text(
+                        localization.admin_area_template_manager_title,
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(height: 8),
                   Text(
-                    'Template Manager',
-                    style: theme.textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+                    localization.admin_area_template_manager_description,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
+                  const SizedBox(height: 32),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.upload_file,
+                        color: theme.colorScheme.secondary,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        localization.admin_area_template_manager_upload_heading,
+                        style: theme.textTheme.titleLarge,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  _buildFilePicker(
+                    label: localization.admin_area_template_manager_section_json_label,
+                    file: _jsonFile,
+                    icon: Icons.code,
+                    onPick: _pickJsonFile,
+                    theme: theme,
+                    localization: localization,
+                  ),
+                  const SizedBox(height: 16),
+                  _buildFilePicker(
+                    label: localization.admin_area_template_manager_thumbnail_label,
+                    file: _thumbnailFile,
+                    icon: Icons.image,
+                    onPick: _pickThumbnail,
+                    theme: theme,
+                    localization: localization,
+                    isImage: true,
+                  ),
+                  const SizedBox(height: 16),
+                  _buildAssetPicker(theme, localization),
+                  const SizedBox(height: 16),
+                  _buildTypeDropdown(theme, localization),
+                  const SizedBox(height: 16),
+                  _buildEnvironmentDropdown(theme, localization),
+                  const SizedBox(height: 32),
+                  PrimaryButton(
+                    title: localization.admin_area_template_manager_upload_button,
+                    onTap: _uploadTemplate,
+                    isLoading: isLoading,
+                    width: 200,
+                  ),
                 ],
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Section Templates für den Pagebuilder hochladen',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                ),
-              ),
-              const SizedBox(height: 32),
-
-              // Upload Section Header
-              Row(
-                children: [
-                  Icon(
-                    Icons.upload_file,
-                    color: theme.colorScheme.secondary,
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    'Section Template hochladen',
-                    style: theme.textTheme.titleLarge,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-
-              // Upload Form
-              // JSON File Picker
-              _buildFilePicker(
-                label: 'Section JSON',
-                file: _jsonFile,
-                icon: Icons.code,
-                onPick: _pickJsonFile,
-                theme: theme,
-              ),
-              const SizedBox(height: 16),
-
-              // Thumbnail Picker
-              _buildFilePicker(
-                label: 'Thumbnail',
-                file: _thumbnailFile,
-                icon: Icons.image,
-                onPick: _pickThumbnail,
-                theme: theme,
-                isImage: true,
-              ),
-              const SizedBox(height: 16),
-
-              // Asset Images Picker
-              _buildAssetPicker(theme),
-              const SizedBox(height: 16),
-
-              // Type Dropdown
-              _buildTypeDropdown(theme),
-              const SizedBox(height: 16),
-
-              // Environment Dropdown
-              _buildEnvironmentDropdown(theme),
-              const SizedBox(height: 32),
-
-              // Upload Button
-              PrimaryButton(
-                title: 'Template hochladen',
-                onTap: _uploadTemplate,
-                isLoading: isLoading,
-                width: 200,
-              ),
-            ],
-          ),
-        ),
+            ),
           ],
         );
       },
@@ -276,6 +260,7 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
     required IconData icon,
     required VoidCallback onPick,
     required ThemeData theme,
+    required AppLocalizations localization,
     bool isImage = false,
   }) {
     return Column(
@@ -324,7 +309,7 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              file?.name ?? 'Datei auswählen...',
+                              file?.name ?? localization.admin_area_template_manager_file_picker_hint,
                               style: theme.textTheme.bodyMedium,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -354,7 +339,7 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
     );
   }
 
-  Widget _buildAssetPicker(ThemeData theme) {
+  Widget _buildAssetPicker(ThemeData theme, AppLocalizations localization) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -362,7 +347,7 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Asset Images',
+              localization.admin_area_template_manager_asset_images_label,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -370,7 +355,7 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
             TextButton.icon(
               onPressed: _pickAssets,
               icon: const Icon(Icons.add_photo_alternate),
-              label: const Text('Bilder hinzufügen'),
+              label: Text(localization.admin_area_template_manager_add_images_button),
             ),
           ],
         ),
@@ -386,7 +371,7 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
             ),
             child: Center(
               child: Text(
-                'Keine Assets ausgewählt',
+                localization.admin_area_template_manager_no_assets_selected,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
@@ -445,12 +430,12 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
     );
   }
 
-  Widget _buildTypeDropdown(ThemeData theme) {
+  Widget _buildTypeDropdown(ThemeData theme, AppLocalizations localization) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Section Type',
+          localization.admin_area_template_manager_section_type_label,
           style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -467,32 +452,32 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
           child: DropdownButton<SectionType>(
             isExpanded: true,
             value: _selectedType,
-            hint: const Text('Type auswählen...'),
+            hint: Text(localization.admin_area_template_manager_type_hint),
             underline: const SizedBox(),
-            items: const [
+            items: [
               DropdownMenuItem(
                 value: SectionType.hero,
-                child: Text('Hero'),
+                child: Text(localization.admin_area_template_manager_type_hero),
               ),
               DropdownMenuItem(
                 value: SectionType.product,
-                child: Text('Produkt'),
+                child: Text(localization.admin_area_template_manager_type_product),
               ),
               DropdownMenuItem(
                 value: SectionType.about,
-                child: Text('Über'),
+                child: Text(localization.admin_area_template_manager_type_about),
               ),
               DropdownMenuItem(
                 value: SectionType.callToAction,
-                child: Text('Call To Action'),
+                child: Text(localization.admin_area_template_manager_type_call_to_action),
               ),
               DropdownMenuItem(
                 value: SectionType.advantages,
-                child: Text('Vorteile'),
+                child: Text(localization.admin_area_template_manager_type_advantages),
               ),
               DropdownMenuItem(
                 value: SectionType.footer,
-                child: Text('Footer'),
+                child: Text(localization.admin_area_template_manager_type_footer),
               ),
             ],
             onChanged: (value) {
@@ -508,12 +493,12 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
     );
   }
 
-  Widget _buildEnvironmentDropdown(ThemeData theme) {
+  Widget _buildEnvironmentDropdown(ThemeData theme, AppLocalizations localization) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Environment',
+          localization.admin_area_template_manager_environment_label,
           style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -526,18 +511,18 @@ class _TemplateManagerContentState extends State<TemplateManagerContent> {
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          items: const [
+          items: [
             DropdownMenuItem(
               value: 'both',
-              child: Text('Staging & Production'),
+              child: Text(localization.admin_area_template_manager_environment_both),
             ),
             DropdownMenuItem(
               value: 'staging',
-              child: Text('Staging only'),
+              child: Text(localization.admin_area_template_manager_environment_staging),
             ),
             DropdownMenuItem(
               value: 'prod',
-              child: Text('Production only'),
+              child: Text(localization.admin_area_template_manager_environment_prod),
             ),
           ],
           onChanged: (value) {

@@ -92,10 +92,3 @@ class PageBuilderGlobalColorsModel extends Equatable {
   List<Object?> get props =>
       [primary, secondary, tertiary, background, surface];
 }
-
-// TODO: BACKEND MERGEN UND DEPLOYEN UND DENPENDABOT MRS MERGEN
-// TODO: FRONTEND KOMMENTARE LÖSCHEN
-// TODO: LOCALIZATION
-// TODO: TEMPLATE REPO ANLEGEN
-// TODO: 5 HERO TEMPLATES ANLEGEN (MIT GLOBALS)
-// TODO: 2 TEMPLATES JE KATEGORIE MACHEN (MIT GLOBALS)

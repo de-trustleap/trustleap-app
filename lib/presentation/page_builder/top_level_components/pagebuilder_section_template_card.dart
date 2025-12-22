@@ -37,7 +37,8 @@ class _PagebuilderSectionTemplateCardState
             boxShadow: _isHovered
                 ? [
                     BoxShadow(
-                      color: themeData.colorScheme.secondary.withValues(alpha: 0.2),
+                      color: themeData.colorScheme.secondary
+                          .withValues(alpha: 0.2),
                       blurRadius: 8,
                       offset: const Offset(0, 4),
                     ),
@@ -49,7 +50,6 @@ class _PagebuilderSectionTemplateCardState
             child: Stack(
               fit: StackFit.expand,
               children: [
-                // Cached Network Image
                 CachedNetworkImage(
                   imageUrl: widget.meta.thumbnailUrl,
                   fit: BoxFit.cover,
@@ -72,11 +72,10 @@ class _PagebuilderSectionTemplateCardState
                     ),
                   ),
                 ),
-
-                // Hover Overlay
                 if (_isHovered)
                   Container(
-                    color: themeData.colorScheme.secondary.withValues(alpha: 0.1),
+                    color:
+                        themeData.colorScheme.secondary.withValues(alpha: 0.1),
                     child: Center(
                       child: Icon(
                         Icons.add_circle,

@@ -25,28 +25,20 @@ class PagebuilderSectionTemplateUploadRepositoryImplementation
   Future<Either<DatabaseFailure, Unit>> uploadTemplate(
       PagebuilderSectionTemplateUpload template) async {
     try {
-      // Get current user
       final user = firebaseAuth.currentUser;
       if (user == null) {
         return left(BackendFailure());
       }
 
-      // Get ID token
       final idToken = await user.getIdToken();
       if (idToken == null) {
         return left(BackendFailure());
       }
-
-      // Get App Check token
       final appCheckToken = await appCheck.getToken();
-
-      // Get function URL from environment
       final functionUrl =
           '${environment.getCloudFunctionsBaseURL()}/uploadPagebuilderSectionTemplate';
-
       final model = PagebuilderSectionTemplateUploadModel.fromDomain(template);
 
-      // Prepare request body
       final body = jsonEncode({
         'appCheckToken': appCheckToken,
         'jsonContent': base64Encode(model.jsonData),
@@ -60,7 +52,6 @@ class PagebuilderSectionTemplateUploadRepositoryImplementation
         'type': model.type,
       });
 
-      // Make HTTP POST request
       final response = await http.post(
         Uri.parse(functionUrl),
         headers: {
@@ -73,11 +64,9 @@ class PagebuilderSectionTemplateUploadRepositoryImplementation
       if (response.statusCode == 200) {
         return right(unit);
       } else {
-        print("ERROR: ${response.statusCode} - ${response.body}");
         return left(BackendFailure());
       }
     } catch (e) {
-      print("ERROR: $e");
       return left(BackendFailure());
     }
   }

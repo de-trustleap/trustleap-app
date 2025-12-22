@@ -1,5 +1,6 @@
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/card_container.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/page_elements/pagebuilder_overlay.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_add_section_button.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_section_template_library_dialog.dart';
@@ -34,6 +35,8 @@ class PagebuilderAddSectionArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+
     return Container(
       height: 300,
       width: double.infinity,
@@ -48,11 +51,10 @@ class PagebuilderAddSectionArea extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Plus Button (leere Section erstellen)
             Builder(
               builder: (buttonContext) {
                 return PagebuilderAddSectionButton(
-                  tooltip: 'Leere Section erstellen',
+                  tooltip: localization.pagebuilder_add_section_create_empty_tooltip,
                   icon: Icons.add,
                   iconSize: 32,
                   color: themeData.colorScheme.secondary,
@@ -61,9 +63,8 @@ class PagebuilderAddSectionArea extends StatelessWidget {
               },
             ),
             const SizedBox(width: 16),
-            // Template Button (aus Vorlage erstellen)
             PagebuilderAddSectionButton(
-              tooltip: 'Aus Vorlage erstellen',
+              tooltip: localization.pagebuilder_add_section_create_from_template_tooltip,
               icon: Icons.dashboard,
               iconSize: 28,
               color: themeData.colorScheme.secondary,
@@ -84,7 +85,6 @@ class _SectionTemplateGrid extends StatelessWidget {
   });
 
   Widget _buildColumnIcon(int columnCount, Color color) {
-    // Calculate width to keep buttons same size
     const double maxWidth = 42.0;
     final double containerWidth =
         (maxWidth - (columnCount - 1) * 2) / columnCount;
@@ -112,6 +112,8 @@ class _SectionTemplateGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final localization = AppLocalizations.of(context);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -123,7 +125,7 @@ class _SectionTemplateGrid extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Wähle dein Layout",
+            localization.pagebuilder_add_section_choose_layout_heading,
             style: themeData.textTheme.titleMedium!
                 .copyWith(fontWeight: FontWeight.bold),
           ),

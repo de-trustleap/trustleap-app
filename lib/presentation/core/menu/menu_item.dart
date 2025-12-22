@@ -71,7 +71,7 @@ class _MenuItemState extends State<MenuItem> {
       case MenuItems.legals:
         return localization.menuitems_legals;
       case MenuItems.templates:
-        return "Templates";
+        return localization.menuitems_templates;
       case MenuItems.none:
         return "";
     }

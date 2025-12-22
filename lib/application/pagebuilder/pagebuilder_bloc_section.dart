@@ -10,12 +10,10 @@ extension PagebuilderBlocSection on PagebuilderBloc {
 
       if (currentPage == null) return;
 
-      // Apply current page's global styles to the template section
       final sectionModel = PageBuilderSectionModel.fromDomain(event.section);
       final sectionWithGlobalStyles =
           sectionModel.toDomain(currentPage.globalStyles);
 
-      // Use the existing function to create a deep copy with new IDs
       final newSection = _duplicateSectionWithNewIds(sectionWithGlobalStyles);
 
       final updatedSections = [

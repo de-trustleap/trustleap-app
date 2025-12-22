@@ -3079,4 +3079,140 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_global_styles_fonts_title => 'Global Fonts';
+
+  @override
+  String get admin_area_template_manager_title => 'Template Manager';
+
+  @override
+  String get admin_area_template_manager_description =>
+      'Upload section templates for the pagebuilder';
+
+  @override
+  String get admin_area_template_manager_upload_heading =>
+      'Upload Section Template';
+
+  @override
+  String get admin_area_template_manager_section_json_label => 'Section JSON';
+
+  @override
+  String get admin_area_template_manager_thumbnail_label => 'Thumbnail';
+
+  @override
+  String get admin_area_template_manager_file_picker_hint => 'Choose file...';
+
+  @override
+  String get admin_area_template_manager_asset_images_label => 'Asset Images';
+
+  @override
+  String get admin_area_template_manager_add_images_button => 'Add Images';
+
+  @override
+  String get admin_area_template_manager_no_assets_selected =>
+      'No assets selected';
+
+  @override
+  String get admin_area_template_manager_section_type_label => 'Section Type';
+
+  @override
+  String get admin_area_template_manager_type_hint => 'Choose type...';
+
+  @override
+  String get admin_area_template_manager_type_hero => 'Hero';
+
+  @override
+  String get admin_area_template_manager_type_product => 'Product';
+
+  @override
+  String get admin_area_template_manager_type_about => 'About';
+
+  @override
+  String get admin_area_template_manager_type_call_to_action =>
+      'Call To Action';
+
+  @override
+  String get admin_area_template_manager_type_advantages => 'Advantages';
+
+  @override
+  String get admin_area_template_manager_type_footer => 'Footer';
+
+  @override
+  String get admin_area_template_manager_environment_label => 'Environment';
+
+  @override
+  String get admin_area_template_manager_environment_both =>
+      'Staging & Production';
+
+  @override
+  String get admin_area_template_manager_environment_staging => 'Staging only';
+
+  @override
+  String get admin_area_template_manager_environment_prod => 'Production only';
+
+  @override
+  String get admin_area_template_manager_upload_button => 'Upload Template';
+
+  @override
+  String get admin_area_template_manager_error_missing_files =>
+      'Please select at least JSON and Thumbnail';
+
+  @override
+  String get admin_area_template_manager_error_missing_type =>
+      'Please select a type';
+
+  @override
+  String get admin_area_template_manager_error_reading_files =>
+      'Error reading files';
+
+  @override
+  String get admin_area_template_manager_success_message =>
+      'Template uploaded successfully!';
+
+  @override
+  String get menuitems_templates => 'Templates';
+
+  @override
+  String get pagebuilder_add_section_create_empty_tooltip =>
+      'Create empty section';
+
+  @override
+  String get pagebuilder_add_section_create_from_template_tooltip =>
+      'Create from template';
+
+  @override
+  String get pagebuilder_add_section_choose_layout_heading =>
+      'Choose your layout';
+
+  @override
+  String get pagebuilder_section_type_hero => 'Hero';
+
+  @override
+  String get pagebuilder_section_type_about => 'About';
+
+  @override
+  String get pagebuilder_section_type_product => 'Product';
+
+  @override
+  String get pagebuilder_section_type_call_to_action => 'Call to Action';
+
+  @override
+  String get pagebuilder_section_type_advantages => 'Advantages';
+
+  @override
+  String get pagebuilder_section_type_footer => 'Footer';
+
+  @override
+  String get pagebuilder_template_library_error_loading_template =>
+      'Error loading template';
+
+  @override
+  String get pagebuilder_template_library_heading => 'Template Selection';
+
+  @override
+  String get pagebuilder_template_library_error_loading_templates =>
+      'Error loading templates';
+
+  @override
+  String pagebuilder_template_library_no_templates_available(String type) {
+    return 'No templates available for $type';
+  }
 }

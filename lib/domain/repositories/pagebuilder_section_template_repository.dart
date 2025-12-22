@@ -4,11 +4,8 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template_meta.dart';
 
 abstract class PagebuilderSectionTemplateRepository {
-  /// Loads all template metadata (id, type, thumbnailUrl) - lightweight
   Future<Either<DatabaseFailure, List<PagebuilderSectionTemplateMeta>>>
       getAllTemplateMetas();
-
-  /// Loads full template with section data by ID
   Future<Either<DatabaseFailure, PagebuilderSectionTemplate>> getTemplateById(
       String id);
 }

@@ -18,10 +18,8 @@ class PagebuilderSectionTemplateRepositoryImplementation
   Future<Either<DatabaseFailure, List<PagebuilderSectionTemplateMeta>>>
       getAllTemplateMetas() async {
     try {
-      // Fetch from lightweight meta collection
-      final querySnapshot = await firestore
-          .collection('landingPageSectionsTemplatesMeta')
-          .get();
+      final querySnapshot =
+          await firestore.collection("landingPageSectionsTemplatesMeta").get();
 
       final List<PagebuilderSectionTemplateMeta> metas = [];
 
@@ -35,8 +33,7 @@ class PagebuilderSectionTemplateRepositoryImplementation
 
       return right(metas);
     } on FirebaseException catch (e) {
-      return left(
-          FirebaseExceptionParser.getDatabaseException(code: e.code));
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     } catch (e) {
       return left(BackendFailure());
     }
@@ -46,9 +43,8 @@ class PagebuilderSectionTemplateRepositoryImplementation
   Future<Either<DatabaseFailure, PagebuilderSectionTemplate>> getTemplateById(
       String id) async {
     try {
-      // Fetch from full template collection
       final docSnapshot = await firestore
-          .collection('landingPageSectionsTemplates')
+          .collection("landingPageSectionsTemplates")
           .doc(id)
           .get();
 
@@ -61,13 +57,11 @@ class PagebuilderSectionTemplateRepositoryImplementation
         docSnapshot.id,
       );
 
-      // Convert to domain entity (globalStyles will be applied when adding to page)
       final domainEntity = model.toDomain(null);
 
       return right(domainEntity);
     } on FirebaseException catch (e) {
-      return left(
-          FirebaseExceptionParser.getDatabaseException(code: e.code));
+      return left(FirebaseExceptionParser.getDatabaseException(code: e.code));
     } catch (e) {
       return left(BackendFailure());
     }

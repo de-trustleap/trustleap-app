@@ -37,17 +37,17 @@ class _PagebuilderSectionTemplateLibraryDialogState
   String _getSectionTypeLabel(SectionType type, AppLocalizations localization) {
     switch (type) {
       case SectionType.hero:
-        return 'Hero';
+        return localization.pagebuilder_section_type_hero;
       case SectionType.about:
-        return 'Über';
+        return localization.pagebuilder_section_type_about;
       case SectionType.product:
-        return 'Produkt';
+        return localization.pagebuilder_section_type_product;
       case SectionType.callToAction:
-        return 'Call to Action';
+        return localization.pagebuilder_section_type_call_to_action;
       case SectionType.advantages:
-        return 'Vorteile';
+        return localization.pagebuilder_section_type_advantages;
       case SectionType.footer:
-        return 'Fußzeile';
+        return localization.pagebuilder_section_type_footer;
     }
   }
 
@@ -61,16 +61,13 @@ class _PagebuilderSectionTemplateLibraryDialogState
       bloc: _cubit,
       listener: (context, state) {
         if (state is PagebuilderSectionTemplateFullLoadSuccess) {
-          // Add the section from the template to the page
           Modular.get<PagebuilderBloc>()
               .add(AddSectionFromTemplateEvent(state.template.section));
-          // Close the dialog after successfully adding the section
           Navigator.of(context).pop();
         } else if (state is PagebuilderSectionTemplateFailure) {
-          // Show error message using CustomSnackBar
           final customSnackbar = CustomSnackBar.of(context);
           customSnackbar.showCustomSnackBar(
-            'Fehler beim Laden der Vorlage',
+            localization.pagebuilder_template_library_error_loading_template,
             SnackBarType.failure,
           );
         }
@@ -83,11 +80,10 @@ class _PagebuilderSectionTemplateLibraryDialogState
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
               Row(
                 children: [
                   Text(
-                    'Vorlagen Auswahl',
+                    localization.pagebuilder_template_library_heading,
                     style: themeData.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -100,8 +96,6 @@ class _PagebuilderSectionTemplateLibraryDialogState
                 ],
               ),
               const SizedBox(height: 24),
-
-              // Filter Chips
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
@@ -126,8 +120,6 @@ class _PagebuilderSectionTemplateLibraryDialogState
                 }).toList(),
               ),
               const SizedBox(height: 24),
-
-              // Template Grid
               Expanded(
                 child:
                     _buildTemplateGrid(context, state, themeData, localization),
@@ -157,7 +149,7 @@ class _PagebuilderSectionTemplateLibraryDialogState
             ),
             const SizedBox(height: 16),
             Text(
-              'Fehler beim Laden der Templates',
+              localization.pagebuilder_template_library_error_loading_templates,
               style: themeData.textTheme.bodyLarge,
             ),
           ],
@@ -169,7 +161,9 @@ class _PagebuilderSectionTemplateLibraryDialogState
       if (filteredMetas.isEmpty) {
         return Center(
           child: Text(
-            'Keine Templates für ${_getSectionTypeLabel(_selectedType, localization)} verfügbar',
+            localization.pagebuilder_template_library_no_templates_available(
+              _getSectionTypeLabel(_selectedType, localization),
+            ),
             style: themeData.textTheme.bodyLarge?.copyWith(
               color: themeData.colorScheme.onSurface.withValues(alpha: 0.6),
             ),
@@ -191,14 +185,12 @@ class _PagebuilderSectionTemplateLibraryDialogState
           return PagebuilderSectionTemplateCard(
             meta: meta,
             onSelected: () {
-              // Load the full template from the repository
               _cubit.getTemplateById(meta.id);
             },
           );
         },
       );
     } else {
-      // Loading state (initial and loading)
       return Center(
         child: CircularProgressIndicator(
           color: themeData.colorScheme.secondary,
