@@ -88,18 +88,51 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
       builder: (context, currentBreakpoint) {
         final helper = PagebuilderResponsiveConfigHelper(currentBreakpoint);
 
+        final isAutoSizing = props?.width == null && props?.height == null;
+
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          PagebuilderSizeControl(
-              width: helper.getValue(props?.width) ?? 0,
-              height: helper.getValue(props?.height) ?? 0,
-              currentBreakpoint: currentBreakpoint,
-              onChanged: (size) {
-                final updatedWidth = helper.setValue(props?.width, size.width);
-                final updatedHeight =
-                    helper.setValue(props?.height, size.height);
-                onChangedLocal(props?.copyWith(
-                    width: updatedWidth, height: updatedHeight));
-              }),
+          Row(
+            children: [
+              Checkbox(
+                value: isAutoSizing,
+                onChanged: (value) {
+                  if (value == true) {
+                    // Enable auto sizing: set width and height to null
+                    onChangedLocal(props?.copyWith(
+                      removeWidth: true,
+                      removeHeight: true,
+                    ));
+                  } else {
+                    // Disable auto sizing: set width and height to 0
+                    final zeroWidth = helper.setValue(null, 0.0);
+                    final zeroHeight = helper.setValue(null, 0.0);
+                    onChangedLocal(props?.copyWith(
+                      width: zeroWidth,
+                      height: zeroHeight,
+                    ));
+                  }
+                },
+              ),
+              Text(
+                localization.landingpage_pagebuilder_container_config_auto_sizing,
+                style: const TextStyle(fontSize: 14),
+              ),
+            ],
+          ),
+          if (!isAutoSizing) ...[
+            const SizedBox(height: 10),
+            PagebuilderSizeControl(
+                width: helper.getValue(props?.width) ?? 0,
+                height: helper.getValue(props?.height) ?? 0,
+                currentBreakpoint: currentBreakpoint,
+                onChanged: (size) {
+                  final updatedWidth = helper.setValue(props?.width, size.width);
+                  final updatedHeight =
+                      helper.setValue(props?.height, size.height);
+                  onChangedLocal(props?.copyWith(
+                      width: updatedWidth, height: updatedHeight));
+                }),
+          ],
           const SizedBox(height: 20),
           PagebuilderShadowControl(
           title: localization

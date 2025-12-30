@@ -1535,6 +1535,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Container configuration';
 
   @override
+  String get landingpage_pagebuilder_container_config_auto_sizing =>
+      'Auto sizing';
+
+  @override
   String get landingpage_pagebuilder_container_config_container_shadow =>
       'Shadow';
 
