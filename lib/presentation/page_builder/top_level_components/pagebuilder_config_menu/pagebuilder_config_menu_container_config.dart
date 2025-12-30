@@ -1,4 +1,5 @@
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_bloc.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_border.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_container_properties.dart';
@@ -6,7 +7,6 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_global_c
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/custom_collapsible_tile.dart';
-import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_responsive_breakpoint/pagebuilder_responsive_breakpoint_cubit.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_color_picker/pagebuilder_color_control.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_hover_config_tabbar.dart';
 import 'package:finanzbegleiter/presentation/page_builder/top_level_components/pagebuilder_config_menu/pagebuilder_config_menu_elements/pagebuilder_number_stepper_control.dart';
@@ -20,7 +20,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
   final PageBuilderWidget model;
   final PageBuilderGlobalColors? globalColors;
-  const PagebuilderConfigMenuContainerConfig({super.key, required this.model, this.globalColors});
+  const PagebuilderConfigMenuContainerConfig(
+      {super.key, required this.model, this.globalColors});
 
   @override
   Widget build(BuildContext context) {
@@ -97,13 +98,11 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
                 value: isAutoSizing,
                 onChanged: (value) {
                   if (value == true) {
-                    // Enable auto sizing: set width and height to null
                     onChangedLocal(props?.copyWith(
                       removeWidth: true,
                       removeHeight: true,
                     ));
                   } else {
-                    // Disable auto sizing: set width and height to 0
                     final zeroWidth = helper.setValue(null, 0.0);
                     final zeroHeight = helper.setValue(null, 0.0);
                     onChangedLocal(props?.copyWith(
@@ -114,7 +113,8 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
                 },
               ),
               Text(
-                localization.landingpage_pagebuilder_container_config_auto_sizing,
+                localization
+                    .landingpage_pagebuilder_container_config_auto_sizing,
                 style: const TextStyle(fontSize: 14),
               ),
             ],
@@ -126,7 +126,8 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
                 height: helper.getValue(props?.height) ?? 0,
                 currentBreakpoint: currentBreakpoint,
                 onChanged: (size) {
-                  final updatedWidth = helper.setValue(props?.width, size.width);
+                  final updatedWidth =
+                      helper.setValue(props?.width, size.width);
                   final updatedHeight =
                       helper.setValue(props?.height, size.height);
                   onChangedLocal(props?.copyWith(
@@ -135,52 +136,64 @@ class PagebuilderConfigMenuContainerConfig extends StatelessWidget {
           ],
           const SizedBox(height: 20),
           PagebuilderShadowControl(
-          title: localization
-              .landingpage_pagebuilder_container_config_container_shadow,
-          initialShadow: props?.shadow,
-          showSpreadRadius: true,
-          onSelected: (shadow) {
-            onChangedLocal(props?.copyWith(shadow: shadow));
-          }),
-      const SizedBox(height: 30),
-      Text(
-        localization.landingpage_pagebuilder_container_config_container_border_title,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-      ),
-      const SizedBox(height: 20),
-      PagebuilderNumberStepperControl(
-          title: localization.pagebuilder_image_config_border_radius,
-          initialValue: props?.border?.radius?.toInt() ?? 0,
-          minValue: 0,
-          maxValue: 1000,
-          onSelected: (radius) {
-            final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
-                .copyWith(radius: radius.toDouble());
-            onChangedLocal(props?.copyWith(border: newBorder));
-          }),
-      const SizedBox(height: 20),
-      PagebuilderNumberStepperControl(
-          title: localization.landingpage_pagebuilder_container_config_container_border_width,
-          initialValue: props?.border?.width?.toInt() ?? 0,
-          minValue: 0,
-          maxValue: 100,
-          onSelected: (width) {
-            final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null))
-                .copyWith(width: width.toDouble());
-            onChangedLocal(props?.copyWith(border: newBorder));
-          }),
-      const SizedBox(height: 20),
-      PagebuilderColorControl(
-          title: localization.landingpage_pagebuilder_container_config_container_border_color,
-          initialColor: props?.border?.color ?? Colors.transparent,
-          globalColors: globalColors,
-          selectedGlobalColorToken: props?.border?.globalColorToken,
-          onColorSelected: (color, {token}) {
-            final newBorder = (props?.border ?? const PagebuilderBorder(width: null, radius: null, color: null, globalColorToken: null))
-                .copyWith(color: color, globalColorToken: token);
-            onChangedLocal(props?.copyWith(border: newBorder));
-          },
-          onGradientSelected: null),
+              title: localization
+                  .landingpage_pagebuilder_container_config_container_shadow,
+              initialShadow: props?.shadow,
+              showSpreadRadius: true,
+              onSelected: (shadow) {
+                onChangedLocal(props?.copyWith(shadow: shadow));
+              }),
+          const SizedBox(height: 30),
+          Text(
+            localization
+                .landingpage_pagebuilder_container_config_container_border_title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 20),
+          PagebuilderNumberStepperControl(
+              title: localization.pagebuilder_image_config_border_radius,
+              initialValue: props?.border?.radius?.toInt() ?? 0,
+              minValue: 0,
+              maxValue: 1000,
+              onSelected: (radius) {
+                final newBorder = (props?.border ??
+                        const PagebuilderBorder(
+                            width: null, radius: null, color: null))
+                    .copyWith(radius: radius.toDouble());
+                onChangedLocal(props?.copyWith(border: newBorder));
+              }),
+          const SizedBox(height: 20),
+          PagebuilderNumberStepperControl(
+              title: localization
+                  .landingpage_pagebuilder_container_config_container_border_width,
+              initialValue: props?.border?.width?.toInt() ?? 0,
+              minValue: 0,
+              maxValue: 100,
+              onSelected: (width) {
+                final newBorder = (props?.border ??
+                        const PagebuilderBorder(
+                            width: null, radius: null, color: null))
+                    .copyWith(width: width.toDouble());
+                onChangedLocal(props?.copyWith(border: newBorder));
+              }),
+          const SizedBox(height: 20),
+          PagebuilderColorControl(
+              title: localization
+                  .landingpage_pagebuilder_container_config_container_border_color,
+              initialColor: props?.border?.color ?? Colors.transparent,
+              globalColors: globalColors,
+              selectedGlobalColorToken: props?.border?.globalColorToken,
+              onColorSelected: (color, {token}) {
+                final newBorder = (props?.border ??
+                        const PagebuilderBorder(
+                            width: null,
+                            radius: null,
+                            color: null,
+                            globalColorToken: null))
+                    .copyWith(color: color, globalColorToken: token);
+                onChangedLocal(props?.copyWith(border: newBorder));
+              },
+              onGradientSelected: null),
         ]);
       },
     );
