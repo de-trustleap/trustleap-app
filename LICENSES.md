@@ -2,7 +2,7 @@
 
 This project uses the following third-party libraries and their respective licenses.
 
-Last updated: 2025-12-13 16:10:48
+Last updated: 2025-12-23 00:27:32
 
 ---
 
@@ -53,7 +53,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### cloud_firestore
 
-- **Version**: 6.1.0
+- **Version**: 6.1.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/firestore>
@@ -62,7 +62,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### cloud_functions
 
-- **Version**: 6.0.4
+- **Version**: 6.0.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/functions>
@@ -128,9 +128,18 @@ These are the packages explicitly listed in your pubspec.yaml:
 - **Description**: A Dart package that helps to implement value based equality without needing to
   explicitly override == and hashCode.
 
+### file_picker
+
+- **Version**: 10.3.8
+- **License**: MIT
+- **Author**: Package Contributors
+- **Website**: <https://github.com/miguelpruivo/plugins_flutter_file_picker>
+- **Description**: A package that allows you to use a native file explorer to pick single or
+  multiple absolute file paths, with extension filtering support.
+
 ### firebase_app_check
 
-- **Version**: 0.4.1+2
+- **Version**: 0.4.1+3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/app-check>
@@ -139,7 +148,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_auth
 
-- **Version**: 6.1.2
+- **Version**: 6.1.3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/auth>
@@ -148,7 +157,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_core
 
-- **Version**: 4.2.1
+- **Version**: 4.3.0
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/flutter/setup>
@@ -156,7 +165,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### firebase_storage
 
-- **Version**: 13.0.4
+- **Version**: 13.0.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/storage/flutter/start>
@@ -340,7 +349,7 @@ These are the packages explicitly listed in your pubspec.yaml:
 
 ### sentry_flutter
 
-- **Version**: 9.8.0
+- **Version**: 9.9.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/flutter/>
@@ -396,7 +405,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### _flutterfire_internals
 
-- **Version**: 1.3.64
+- **Version**: 1.3.65
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://firebase.google.com/docs/firestore>
@@ -574,7 +583,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_firestore_platform_interface
 
-- **Version**: 7.0.4
+- **Version**: 7.0.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_platform_interface>
@@ -582,7 +591,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_firestore_web
 
-- **Version**: 5.1.0
+- **Version**: 5.1.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_firestore/cloud_firestore_web>
@@ -590,7 +599,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_functions_platform_interface
 
-- **Version**: 5.8.7
+- **Version**: 5.8.8
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_functions/cloud_functions_platform_interface>
@@ -598,7 +607,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### cloud_functions_web
 
-- **Version**: 5.1.0
+- **Version**: 5.1.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/cloud_functions/cloud_functions_web>
@@ -736,15 +745,6 @@ These packages are automatically included as dependencies of your direct depende
   system access, as well as in-memory file systems, record-replay file systems,
   and chroot file systems.
 
-### file_picker
-
-- **Version**: 10.3.7
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/miguelpruivo/plugins_flutter_file_picker>
-- **Description**: A package that allows you to use a native file explorer to pick single or
-  multiple absolute file paths, with extension filtering support.
-
 ### file_selector_linux
 
 - **Version**: 0.9.4
@@ -779,7 +779,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_app_check_platform_interface
 
-- **Version**: 0.2.1+2
+- **Version**: 0.2.1+3
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_app_check/firebase_app_check_platform_interface>
@@ -787,7 +787,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_app_check_web
 
-- **Version**: 0.2.2
+- **Version**: 0.2.2+1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_app_check/firebase_app_check_web>
@@ -795,7 +795,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_auth_platform_interface
 
-- **Version**: 8.1.4
+- **Version**: 8.1.5
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_auth/firebase_auth_platform_interface>
@@ -803,7 +803,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_auth_web
 
-- **Version**: 6.1.0
+- **Version**: 6.1.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_auth/firebase_auth_web>
@@ -819,7 +819,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_core_web
 
-- **Version**: 3.3.0
+- **Version**: 3.3.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_core/firebase_core_web>
@@ -827,7 +827,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_storage_platform_interface
 
-- **Version**: 5.2.15
+- **Version**: 5.2.16
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_platform_interface>
@@ -835,7 +835,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### firebase_storage_web
 
-- **Version**: 3.11.0
+- **Version**: 3.11.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://github.com/firebase/flutterfire/tree/main/packages/firebase_storage/firebase_storage_web>
@@ -1385,15 +1385,6 @@ These packages are automatically included as dependencies of your direct depende
 - **Website**: <https://github.com/MarcinusX/NumberPicker>
 - **Description**: NumberPicker is a widget allowing user to choose numbers by scrolling spinners.
 
-### objective_c
-
-- **Version**: 9.2.1
-- **License**: MIT
-- **Author**: Package Contributors
-- **Website**: <https://github.com/dart-lang/native/tree/main/pkgs/objective_c>
-- **Description**: A library to access Objective C from Flutter that acts as a support library for
-  package:ffigen.
-
 ### octo_image
 
 - **Version**: 2.1.0
@@ -1642,7 +1633,7 @@ These packages are automatically included as dependencies of your direct depende
 
 ### sentry
 
-- **Version**: 9.8.0
+- **Version**: 9.9.1
 - **License**: MIT
 - **Author**: Package Contributors
 - **Website**: <https://docs.sentry.io/platforms/dart/>

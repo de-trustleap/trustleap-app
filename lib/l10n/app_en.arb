@@ -1803,6 +1803,10 @@
     "@landingpage_pagebuilder_container_config_container_title": {
         "description": "Title for the collapsible view for the container configuration in the pagebuilder container configuration."
     },
+    "landingpage_pagebuilder_container_config_auto_sizing": "Auto sizing",
+    "@landingpage_pagebuilder_container_config_auto_sizing": {
+        "description": "Checkbox label for automatic container sizing in pagebuilder config menu"
+    },
     "landingpage_pagebuilder_container_config_container_shadow": "Shadow",
     "@landingpage_pagebuilder_container_config_container_shadow": {
         "description": "Title for the shadow configuration in the pagebuilder container configuration."

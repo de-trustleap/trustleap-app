@@ -24,12 +24,14 @@ class PageBuilderContainerProperties extends Equatable
     PageBuilderShadow? shadow,
     PagebuilderResponsiveOrConstant<double>? width,
     PagebuilderResponsiveOrConstant<double>? height,
+    bool removeWidth = false,
+    bool removeHeight = false,
   }) {
     return PageBuilderContainerProperties(
       border: border ?? this.border,
       shadow: shadow ?? this.shadow,
-      width: width ?? this.width,
-      height: height ?? this.height,
+      width: removeWidth ? null : (width ?? this.width),
+      height: removeHeight ? null : (height ?? this.height),
     );
   }
 
