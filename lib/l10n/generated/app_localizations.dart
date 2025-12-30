@@ -2729,6 +2729,12 @@ abstract class AppLocalizations {
   /// **'Container configuration'**
   String get landingpage_pagebuilder_container_config_container_title;
 
+  /// Checkbox label for automatic container sizing in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Auto sizing'**
+  String get landingpage_pagebuilder_container_config_auto_sizing;
+
   /// Title for the shadow configuration in the pagebuilder container configuration.
   ///
   /// In en, this message translates to:

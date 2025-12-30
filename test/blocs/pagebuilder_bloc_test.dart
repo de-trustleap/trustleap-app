@@ -2374,6 +2374,430 @@ void main() {
 
       pageBuilderBloc.add(DuplicateSectionEvent("section1"));
     });
+
+    test("should generate unique name when duplicating section with existing (Kopie) name",
+        () async {
+      // Given - create a page with section1 and already duplicated "Section 1 (Kopie)"
+      final sectionWithKopie = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1_copy"),
+        name: "Section 1 (Kopie)",
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        fullHeight: null,
+        widgets: [],
+        visibleOn: null,
+      );
+
+      final pageWithDuplicate = mockPageBuilderPage.copyWith(
+        sections: [section1, sectionWithKopie, section2, section3],
+      );
+
+      final contentWithDuplicate = mockPagebuilderContent.copyWith(
+        content: pageWithDuplicate,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 5 sections now (4 original + 1 duplicate)
+              if (sections == null || sections.length != 5) return false;
+              // The new duplicate should have name "Section 1 (Kopie) (1)"
+              final newDuplicate = sections[1];
+              return newDuplicate.name == "Section 1 (Kopie) (1)" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithDuplicate,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section1"));
+    });
+
+    test("should increment number when multiple duplicates exist", () async {
+      // Given - create sections with Section 1 (Kopie) and Section 1 (Kopie) (1)
+      final sectionKopie1 = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1_copy1"),
+        name: "Section 1 (Kopie)",
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        fullHeight: null,
+        widgets: [],
+        visibleOn: null,
+      );
+
+      final sectionKopie2 = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section1_copy2"),
+        name: "Section 1 (Kopie) (1)",
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        fullHeight: null,
+        widgets: [],
+        visibleOn: null,
+      );
+
+      final pageWithMultipleDuplicates = mockPageBuilderPage.copyWith(
+        sections: [section1, sectionKopie1, sectionKopie2, section2],
+      );
+
+      final contentWithMultipleDuplicates = mockPagebuilderContent.copyWith(
+        content: pageWithMultipleDuplicates,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 5 sections now (4 original + 1 duplicate)
+              if (sections == null || sections.length != 5) return false;
+              // The new duplicate should have name "Section 1 (Kopie) (2)"
+              final newDuplicate = sections[1];
+              return newDuplicate.name == "Section 1 (Kopie) (2)" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithMultipleDuplicates,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(DuplicateSectionEvent("section1"));
+    });
+  });
+
+  group("PagebuilderBloc_AddSectionFromTemplate", () {
+    final templateSection = PageBuilderSection(
+      id: UniqueID.fromUniqueString("template_section"),
+      name: "Hero Template",
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      fullHeight: null,
+      widgets: [
+        PageBuilderWidget(
+          id: UniqueID.fromUniqueString("template_widget"),
+          elementType: PageBuilderWidgetType.text,
+          properties: PageBuilderTextProperties(
+            text: "Template Text",
+            fontSize: null,
+            fontFamily: null,
+            lineHeight: null,
+            letterSpacing: null,
+            color: null,
+            alignment: null,
+            textShadow: null,
+          ),
+          hoverProperties: null,
+          children: null,
+          containerChild: null,
+          widthPercentage: null,
+          background: null,
+          hoverBackground: null,
+          padding: null,
+          margin: null,
+          maxWidth: null,
+          alignment: null,
+          customCSS: null,
+        ),
+      ],
+      visibleOn: null,
+    );
+
+    final section1 = PageBuilderSection(
+      id: UniqueID.fromUniqueString("section1"),
+      name: "Section 1",
+      background: null,
+      maxWidth: null,
+      backgroundConstrained: null,
+      customCSS: null,
+      fullHeight: null,
+      widgets: [],
+      visibleOn: null,
+    );
+
+    final mockPageBuilderPage = PageBuilderPage(
+      id: UniqueID.fromUniqueString("page1"),
+      backgroundColor: null,
+      sections: [section1],
+      globalStyles: null,
+    );
+
+    final mockLandingPage = LandingPage(
+      id: UniqueID.fromUniqueString("landingPage1"),
+      contentID: UniqueID.fromUniqueString("content1"),
+    );
+
+    final mockUser = CustomUser(
+      id: UniqueID.fromUniqueString("user1"),
+    );
+
+    final mockPagebuilderContent = PagebuilderContent(
+      landingPage: mockLandingPage,
+      content: mockPageBuilderPage,
+      user: mockUser,
+    );
+
+    test("should add section from template with new IDs and original name when name is unique",
+        () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 2 sections now
+              if (sections == null || sections.length != 2) return false;
+
+              final addedSection = sections[1];
+
+              // Check that name is kept as original (no (Kopie) suffix when name is unique)
+              if (addedSection.name != "Hero Template") return false;
+
+              // Check that ID is different from template
+              if (addedSection.id.value == "template_section") return false;
+
+              // Check that widgets are duplicated with new IDs
+              if (addedSection.widgets?.isEmpty ?? true) return false;
+              if (addedSection.widgets?[0].id.value == "template_widget") {
+                return false;
+              }
+
+              return state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddSectionFromTemplateEvent(templateSection));
+    });
+
+    test("should append number when template name already exists",
+        () async {
+      // Given - add a section with the same name as template
+      final existingSection = PageBuilderSection(
+        id: UniqueID.fromUniqueString("existing"),
+        name: "Hero Template",
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        fullHeight: null,
+        widgets: [],
+        visibleOn: null,
+      );
+
+      final pageWithExisting = mockPageBuilderPage.copyWith(
+        sections: [section1, existingSection],
+      );
+
+      final contentWithExisting = mockPagebuilderContent.copyWith(
+        content: pageWithExisting,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 3 sections now
+              if (sections == null || sections.length != 3) return false;
+
+              final addedSection = sections[2];
+
+              // Should append (1) when name exists (no Kopie for templates)
+              return addedSection.name == "Hero Template (1)" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithExisting,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddSectionFromTemplateEvent(templateSection));
+    });
+
+    test("should handle multiple templates with same name correctly", () async {
+      // Given - add sections with Hero Template and Hero Template (1)
+      final existing1 = PageBuilderSection(
+        id: UniqueID.fromUniqueString("existing1"),
+        name: "Hero Template",
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        fullHeight: null,
+        widgets: [],
+        visibleOn: null,
+      );
+
+      final existing2 = PageBuilderSection(
+        id: UniqueID.fromUniqueString("existing2"),
+        name: "Hero Template (1)",
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        fullHeight: null,
+        widgets: [],
+        visibleOn: null,
+      );
+
+      final pageWithMultiple = mockPageBuilderPage.copyWith(
+        sections: [section1, existing1, existing2],
+      );
+
+      final contentWithMultiple = mockPagebuilderContent.copyWith(
+        content: pageWithMultiple,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 4 sections now
+              if (sections == null || sections.length != 4) return false;
+
+              final addedSection = sections[3];
+
+              // Should increment to (2)
+              return addedSection.name == "Hero Template (2)" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithMultiple,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddSectionFromTemplateEvent(templateSection));
+    });
+
+    test("should mark content as updated after adding template", () async {
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", true),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: mockPagebuilderContent,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddSectionFromTemplateEvent(templateSection));
+    });
+
+    test("should append template section to the end of sections list",
+        () async {
+      // Given - page with multiple existing sections
+      final section2 = PageBuilderSection(
+        id: UniqueID.fromUniqueString("section2"),
+        name: "Section 2",
+        background: null,
+        maxWidth: null,
+        backgroundConstrained: null,
+        customCSS: null,
+        fullHeight: null,
+        widgets: [],
+        visibleOn: null,
+      );
+
+      final pageWithMultipleSections = mockPageBuilderPage.copyWith(
+        sections: [section1, section2],
+      );
+
+      final contentWithMultipleSections = mockPagebuilderContent.copyWith(
+        content: pageWithMultipleSections,
+      );
+
+      // Then
+      expectLater(
+          pageBuilderBloc.stream,
+          emitsInOrder([
+            isA<GetLandingPageAndUserSuccessState>()
+                .having((state) => state.isUpdated, "isUpdated", false),
+            predicate<GetLandingPageAndUserSuccessState>((state) {
+              final sections = state.content.content?.sections;
+              // Should have 3 sections now
+              if (sections == null || sections.length != 3) return false;
+
+              // Check order
+              if (sections[0].id.value != "section1") return false;
+              if (sections[1].id.value != "section2") return false;
+
+              // Last section should be the template with original name
+              final addedSection = sections[2];
+              return addedSection.name == "Hero Template" &&
+                  state.isUpdated == true;
+            }),
+          ]));
+
+      pageBuilderBloc.emit(GetLandingPageAndUserSuccessState(
+        content: contentWithMultipleSections,
+        saveLoading: false,
+        saveFailure: null,
+        saveSuccessful: null,
+        isUpdated: false,
+      ));
+
+      pageBuilderBloc.add(AddSectionFromTemplateEvent(templateSection));
+    });
   });
 
   group("PagebuilderBloc_DeleteWidget", () {

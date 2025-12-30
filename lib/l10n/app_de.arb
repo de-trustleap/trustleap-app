@@ -1803,6 +1803,10 @@
     "@landingpage_pagebuilder_container_config_container_title": {
         "description": "Titel der ausklappabren View für die Container Konfiguration in der Pagebuilder Container Konfiguration"
     },
+    "landingpage_pagebuilder_container_config_auto_sizing": "Automatische Größe",
+    "@landingpage_pagebuilder_container_config_auto_sizing": {
+        "description": "Checkbox Label für automatische Container-Größe im Pagebuilder Config Menü"
+    },
     "landingpage_pagebuilder_container_config_container_shadow": "Schatten",
     "@landingpage_pagebuilder_container_config_container_shadow": {
         "description": "Titel für die Schatten Konfiguration in der Pagebuilder Container Konfiguration"
