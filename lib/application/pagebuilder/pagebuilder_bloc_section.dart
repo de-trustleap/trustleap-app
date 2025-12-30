@@ -14,10 +14,16 @@ extension PagebuilderBlocSection on PagebuilderBloc {
       final sectionWithGlobalStyles =
           sectionModel.toDomain(currentPage.globalStyles);
 
-      final newSection = _duplicateSectionWithNewIds(sectionWithGlobalStyles);
+      final existingSections =
+          currentPageBuilderContent.content?.sections ?? [];
+      final newSection = _duplicateSectionWithNewIds(
+        sectionWithGlobalStyles,
+        existingSections,
+        appendCopy: false,
+      );
 
       final updatedSections = [
-        ...?currentPageBuilderContent.content?.sections,
+        ...existingSections,
         newSection,
       ];
 
@@ -355,7 +361,11 @@ extension PagebuilderBlocSection on PagebuilderBloc {
       final sectionToDuplicate = sections[sectionIndex];
 
       // Create a deep copy with new IDs
-      final duplicatedSection = _duplicateSectionWithNewIds(sectionToDuplicate);
+      final duplicatedSection = _duplicateSectionWithNewIds(
+        sectionToDuplicate,
+        sections,
+        appendCopy: true,
+      );
 
       // Insert duplicated section right after the original
       final updatedSections = List<PageBuilderSection>.from(sections);
@@ -380,14 +390,44 @@ extension PagebuilderBlocSection on PagebuilderBloc {
     }
   }
 
-  PageBuilderSection _duplicateSectionWithNewIds(PageBuilderSection section) {
+  PageBuilderSection _duplicateSectionWithNewIds(
+    PageBuilderSection section,
+    List<PageBuilderSection> existingSections, {
+    required bool appendCopy,
+  }) {
+    final sectionName = section.name ?? "Section";
+    final baseName = appendCopy ? "$sectionName (Kopie)" : sectionName;
+    final uniqueName = _generateUniqueSectionName(
+      baseName,
+      existingSections,
+    );
+
     return section.copyWith(
       id: UniqueID(),
-      name: "${section.name} (Kopie)",
+      name: uniqueName,
       widgets: section.widgets
           ?.map((widget) => _duplicateWidgetWithNewIds(widget))
           .toList(),
     );
+  }
+
+  String _generateUniqueSectionName(
+    String baseName,
+    List<PageBuilderSection> existingSections,
+  ) {
+    final existingNames = existingSections.map((s) => s.name).toSet();
+
+    if (!existingNames.contains(baseName)) {
+      return baseName;
+    }
+    int counter = 1;
+    String candidateName;
+    do {
+      candidateName = "$baseName ($counter)";
+      counter++;
+    } while (existingNames.contains(candidateName));
+
+    return candidateName;
   }
 
   PageBuilderWidget _duplicateWidgetWithNewIds(PageBuilderWidget widget) {
