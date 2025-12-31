@@ -341,8 +341,11 @@ class PagebuilderWidgetTreeManipulator {
       return null;
     }
 
+    // Only remove container if it had a child that became null after placeholder removal
+    // Don't remove containers that never had a child (decorative elements like colored squares)
     if (widget.elementType == PageBuilderWidgetType.container &&
-        containerChildWithoutPlaceholder == null) {
+        containerChildWithoutPlaceholder == null &&
+        widget.containerChild != null) {
       return null;
     }
 
