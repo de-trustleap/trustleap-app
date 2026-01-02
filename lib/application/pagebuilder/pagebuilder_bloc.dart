@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
 import 'package:finanzbegleiter/domain/entities/id.dart';
@@ -11,6 +12,7 @@ import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/responsive/pagebuilder_responsive_or_constant.dart';
 import 'package:finanzbegleiter/domain/helpers/pagebuilder_widget_tree_manipulator.dart';
+import 'package:finanzbegleiter/domain/helpers/pagebuilder_widget_tree_searcher.dart';
 import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
@@ -18,6 +20,7 @@ import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_pa
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_section_model.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_reorder_helper.dart';
 import 'package:finanzbegleiter/presentation/page_builder/pagebuilder_widget_factory.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'pagebuilder_bloc_history.dart';
