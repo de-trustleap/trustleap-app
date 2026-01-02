@@ -259,19 +259,23 @@ class _CalendlyConnectionWidgetState extends State<CalendlyConnectionWidget> {
               },
               builder: (FormFieldState<String> state) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DropdownMenu<String>(
-                      width: double.infinity,
-                      label: Text(localization
-                          .landingpage_creator_calendly_event_type_select),
-                      initialSelection: _getValidInitialSelection(),
-                      enableSearch: false,
-                      requestFocusOnTap: false,
-                      dropdownMenuEntries: _buildDropdownEntries(),
-                      onSelected: (String? newValue) {
-                        widget.onEventTypeSelected?.call(newValue);
-                        state.didChange(newValue);
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        return DropdownMenu<String>(
+                          width: constraints.maxWidth,
+                          label: Text(localization
+                              .landingpage_creator_calendly_event_type_select),
+                          initialSelection: _getValidInitialSelection(),
+                          enableSearch: false,
+                          requestFocusOnTap: false,
+                          dropdownMenuEntries: _buildDropdownEntries(),
+                          onSelected: (String? newValue) {
+                            widget.onEventTypeSelected?.call(newValue);
+                            state.didChange(newValue);
+                          },
+                        );
                       },
                     ),
                     if (state.hasError)
