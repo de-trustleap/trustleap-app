@@ -20,7 +20,7 @@ class CenteredConstrainedWrapper extends StatelessWidget {
     } else if (responsiveData.breakpoint.name == TABLET) {
       constraints = const BoxConstraints(maxWidth: 800);
     } else {
-      constraints = const BoxConstraints(maxWidth: 1280);
+      constraints = const BoxConstraints(maxWidth: 1500);
     }
 
     return Center(

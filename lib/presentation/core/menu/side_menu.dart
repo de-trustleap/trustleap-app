@@ -30,69 +30,78 @@ class SideMenu extends StatelessWidget {
             as PermissionSuccessState)
         .permissions;
 
-    return ListView(children: [
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        if (responsiveValue.isDesktop) ...[
-          const SizedBox(height: 40),
-          const MenuLogo()
-        ],
-        const SizedBox(height: 40),
-        MenuItem(
-            path: RoutePaths.profilePath,
-            icon: Icons.person,
-            type: MenuItems.profile,
-            isCollapsed: collapsed,
-            animationController: animationController),
-        const SizedBox(height: 28),
-        MenuItem(
-            path: RoutePaths.dashboardPath,
-            icon: Icons.dashboard,
-            type: MenuItems.dashboard,
-            isCollapsed: collapsed,
-            animationController: animationController),
-        const SizedBox(height: 28),
-        MenuItem(
-            path: RoutePaths.recommendationsPath,
-            icon: Icons.thumb_up,
-            type: MenuItems.recommendations,
-            isCollapsed: collapsed,
-            animationController: animationController),
-        const SizedBox(height: 28),
-        MenuItem(
-            path: RoutePaths.recommendationManagerPath,
-            icon: Icons.receipt,
-            type: MenuItems.recommendationManager,
-            isCollapsed: collapsed,
-            animationController: animationController),
-        const SizedBox(height: 28),
-        if (permissions.hasShowPromoterMenuPermission()) ...[
-          MenuItem(
-              path: RoutePaths.promotersPath,
-              icon: Icons.phone_bluetooth_speaker,
-              type: MenuItems.promoters,
-              isCollapsed: collapsed,
-              animationController: animationController),
-          const SizedBox(height: 28),
-        ],
-        if (permissions.hasShowLandingPageMenuPermission()) ...[
-          MenuItem(
-              path: RoutePaths.landingPagePath,
-              icon: Icons.airplanemode_active,
-              type: MenuItems.landingpage,
-              isCollapsed: collapsed,
-              animationController: animationController),
-        ],
-        const SizedBox(height: 56),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(children: [
+            if (responsiveValue.isDesktop) ...[
+              const SizedBox(height: 40),
+              const MenuLogo()
+            ],
+            const SizedBox(height: 40),
+            MenuItem(
+                path: RoutePaths.profilePath,
+                icon: Icons.person,
+                type: MenuItems.profile,
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 28),
+            MenuItem(
+                path: RoutePaths.dashboardPath,
+                icon: Icons.dashboard,
+                type: MenuItems.dashboard,
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 28),
+            MenuItem(
+                path: RoutePaths.recommendationsPath,
+                icon: Icons.thumb_up,
+                type: MenuItems.recommendations,
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 28),
+            MenuItem(
+                path: RoutePaths.recommendationManagerPath,
+                icon: Icons.receipt,
+                type: MenuItems.recommendationManager,
+                isCollapsed: collapsed,
+                animationController: animationController),
+            const SizedBox(height: 28),
+            if (permissions.hasShowPromoterMenuPermission()) ...[
+              MenuItem(
+                  path: RoutePaths.promotersPath,
+                  icon: Icons.phone_bluetooth_speaker,
+                  type: MenuItems.promoters,
+                  isCollapsed: collapsed,
+                  animationController: animationController),
+              const SizedBox(height: 28),
+            ],
+            if (permissions.hasShowLandingPageMenuPermission()) ...[
+              MenuItem(
+                  path: RoutePaths.landingPagePath,
+                  icon: Icons.airplanemode_active,
+                  type: MenuItems.landingpage,
+                  isCollapsed: collapsed,
+                  animationController: animationController),
+              const SizedBox(height: 28),
+            ],
+          ]),
+        ),
         AnimatedOpacity(
             opacity: shouldShowThemeSwitcher ? 1.0 : 0,
             duration: const Duration(milliseconds: 100),
             child: IgnorePointer(
               ignoring: !shouldShowThemeSwitcher,
-              child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [ThemeSwitch()]),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ThemeSwitch(),
+                ),
+              ),
             )),
-      ]),
-    ]);
+        const SizedBox(height: 40),
+      ],
+    );
   }
 }

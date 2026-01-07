@@ -171,8 +171,6 @@ extension PagebuilderBlocWidget on PagebuilderBloc {
 
       if (sections == null || sections.isEmpty) return;
 
-      _closeConfigMenuIfWidgetDeleted(event.widgetId, sections);
-
       final updatedSections = sections.map((section) {
         final updatedWidgets = section.widgets
             ?.map((widget) => PagebuilderWidgetTreeManipulator.deleteWidget(
@@ -199,42 +197,6 @@ extension PagebuilderBlocWidget on PagebuilderBloc {
         saveSuccessful: null,
         isUpdated: true,
       ));
-    }
-  }
-
-  void _closeConfigMenuIfWidgetDeleted(
-      String deletedWidgetId, List<PageBuilderSection> sections) {
-    final configMenuCubit = Modular.get<PagebuilderConfigMenuCubit>();
-    final configMenuState = configMenuCubit.state;
-
-    if (configMenuState is PageBuilderConfigMenuOpenedState) {
-      final openedWidgetId = configMenuState.model.id.value;
-
-      // Quick check: if the opened widget IS the deleted widget
-      if (openedWidgetId == deletedWidgetId) {
-        configMenuCubit.closeConfigMenu();
-        return;
-      }
-
-      // Check if the opened widget is a child of the deleted widget (in OLD tree)
-      for (final section in sections) {
-        if (section.widgets != null) {
-          for (final widget in section.widgets!) {
-            final deletedWidget = PagebuilderWidgetTreeSearcher.findWidgetById(
-                widget, deletedWidgetId);
-            if (deletedWidget != null) {
-              // Found the widget to be deleted, check if opened widget is inside it
-              final openedWidgetInDeletedTree =
-                  PagebuilderWidgetTreeSearcher.findWidgetById(
-                      deletedWidget, openedWidgetId);
-              if (openedWidgetInDeletedTree != null) {
-                configMenuCubit.closeConfigMenu();
-                return;
-              }
-            }
-          }
-        }
-      }
     }
   }
 

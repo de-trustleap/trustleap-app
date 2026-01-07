@@ -1,6 +1,7 @@
 @TestOn('chrome')
 library;
 
+import 'package:finanzbegleiter/application/images/company/company_image_bloc.dart';
 import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company/company_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
@@ -28,16 +29,19 @@ import '../../../../mocks.mocks.dart';
 class CompanyContactSectionTestModule extends Module {
   final CompanyCubit companyCubit;
   final PermissionCubit permissionCubit;
+  final CompanyImageBloc companyImageBloc;
 
   CompanyContactSectionTestModule({
     required this.companyCubit,
     required this.permissionCubit,
+    required this.companyImageBloc,
   });
 
   @override
   void binds(i) {
     i.addSingleton<CompanyCubit>(() => companyCubit);
     i.addSingleton<PermissionCubit>(() => permissionCubit);
+    i.addSingleton<CompanyImageBloc>(() => companyImageBloc);
   }
 
   @override
@@ -50,8 +54,10 @@ void main() {
   late MockCompanyRepository mockCompanyRepository;
   late MockAuthRepository mockAuthRepository;
   late MockPermissionRepository mockPermissionRepository;
+  late MockImageRepository mockImageRepository;
   late CompanyCubit companyCubit;
   late PermissionCubit permissionCubit;
+  late CompanyImageBloc companyImageBloc;
 
   // Helper to ignore overflow errors in tests
   void Function(FlutterErrorDetails)? originalOnError;
@@ -75,8 +81,10 @@ void main() {
     mockCompanyRepository = MockCompanyRepository();
     mockAuthRepository = MockAuthRepository();
     mockPermissionRepository = MockPermissionRepository();
+    mockImageRepository = MockImageRepository();
     companyCubit = CompanyCubit(mockCompanyRepository, mockAuthRepository);
     permissionCubit = PermissionCubit(permissionRepo: mockPermissionRepository);
+    companyImageBloc = CompanyImageBloc(mockImageRepository);
   });
 
   tearDown(() {
@@ -84,6 +92,7 @@ void main() {
     Modular.destroy();
     companyCubit.close();
     permissionCubit.close();
+    companyImageBloc.close();
   });
 
   CustomUser createTestUser() {
@@ -130,6 +139,7 @@ void main() {
     final module = CompanyContactSectionTestModule(
       companyCubit: companyCubit,
       permissionCubit: permissionCubit,
+      companyImageBloc: companyImageBloc,
     );
 
     permissionCubit.emit(PermissionSuccessState(
@@ -152,11 +162,13 @@ void main() {
             providers: [
               BlocProvider<CompanyCubit>.value(value: companyCubit),
               BlocProvider<PermissionCubit>.value(value: permissionCubit),
+              BlocProvider<CompanyImageBloc>.value(value: companyImageBloc),
             ],
             child: CompanyContactSection(
               user: user,
               company: company,
               changesSaved: changesSaved ?? () {},
+              imageUploadSuccessful: () {},
             ),
           ),
         ),

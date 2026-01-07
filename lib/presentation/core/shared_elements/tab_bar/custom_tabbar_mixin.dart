@@ -54,7 +54,7 @@ mixin CustomTabBarMixin<T extends StatefulWidget> on State<T>, TickerProviderSta
   }
 
   Widget buildTab(CustomTabItem tabItem, BuildContext context,
-      ResponsiveBreakpointsData responsiveValue, double availableWidth) {
+      ResponsiveBreakpointsData responsiveValue, double? availableWidth) {
     return CustomTab(
       title: tabItem.title,
       icon: tabItem.icon,

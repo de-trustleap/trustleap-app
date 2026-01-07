@@ -125,6 +125,9 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                         state.content.content!, currentState.model.id);
                     if (updatedModel != null) {
                       configMenuCubit.openConfigMenu(updatedModel);
+                    } else {
+                      // Widget was deleted, close config menu
+                      configMenuCubit.closeConfigMenu();
                     }
                   } else if (currentState
                           is PageBuilderSectionConfigMenuOpenedState &&
@@ -133,6 +136,9 @@ class _LandingPageBuilderViewState extends State<LandingPageBuilderView> {
                         state.content.content!, currentState.model.id);
                     if (updatedSection != null) {
                       configMenuCubit.openSectionConfigMenu(updatedSection);
+                    } else {
+                      // Section was deleted, close config menu
+                      configMenuCubit.closeConfigMenu();
                     }
                   }
                 }

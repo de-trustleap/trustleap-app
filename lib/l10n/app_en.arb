@@ -706,6 +706,10 @@
     "@profile_page_contact_section_title": {
         "description": "Title of the contact information section in the profile page."
     },
+    "profile_page_contact_section_subtitle": "Update your personal information here.",
+    "@profile_page_contact_section_subtitle": {
+        "description": "Subtitle of the contact information section in the profile page."
+    },
     "profile_page_contact_section_form_firstname": "first name",
     "@profile_page_contact_section_form_firstname": {
         "description": "First name text field designation in the contact information area on the profile page."
@@ -1081,6 +1085,10 @@
     "profile_company_contact_section_title": "Company Information",
     "@profile_company_contact_section_title": {
         "description": "Title of the contact section in the company tab on the profile page."
+    },
+    "profile_company_contact_section_subtitle": "Update your company data here.",
+    "@profile_company_contact_section_subtitle": {
+        "description": "Subtitle of the contact section in the company tab on the profile page."
     },
     "profile_company_contact_section_name": "Company name",
     "@profile_company_contact_section_name": {

@@ -10,10 +10,10 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/second
 import 'package:finanzbegleiter/presentation/profile_page/widgets/calendly_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/email_section/email_section.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_image_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_register_company_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileGeneralView extends StatefulWidget {
   const ProfileGeneralView({super.key});
@@ -44,50 +44,72 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
               child: ListView(children: [
                 SizedBox(height: responsiveValue.isMobile ? 40 : 80),
                 CenteredConstrainedWrapper(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                      ProfileImageSection(
-                          user: state.user,
-                          imageUploadSuccessful: () => {
-                                CustomSnackBar.of(context).showCustomSnackBar(
-                                    localization
-                                        .profile_page_snackbar_image_changed_message)
-                              }),
-                      const SizedBox(height: 20),
-                      ContactSection(
-                          user: state.user,
-                          changesSaved: () => {
-                                CustomSnackBar.of(context).showCustomSnackBar(
-                                    localization
-                                        .profile_page_snackbar_contact_information_changes)
-                              }),
-                      if (state.user.companyID == null ||
-                          state.user.companyID == "") ...[
-                        SizedBox(height: responsiveValue.isMobile ? 20 : 60),
-                        ProfileRegisterCompanySection(user: state.user),
-                      ],
-                      SizedBox(height: responsiveValue.isMobile ? 20 : 60),
-                      const CalendlySection(),
-                      SizedBox(height: responsiveValue.isMobile ? 20 : 60),
-                      EmailSection(
-                          user: state.user,
-                          sendEmailVerificationCallback: () => {
-                                CustomSnackBar.of(context).showCustomSnackBar(
-                                    localization
-                                        .profile_page_snackbar_email_verification)
-                              }),
-                      SizedBox(height: responsiveValue.isMobile ? 20 : 60),
-                      SecondaryButton(
-                          title: localization.profile_page_logout_button_title,
-                          width: responsiveValue.isMobile
-                              ? responsiveValue.screenWidth - 80
-                              : 200,
-                          onTap: () =>
-                              {BlocProvider.of<AuthCubit>(context).signOut()}),
-                      SizedBox(height: responsiveValue.isMobile ? 50 : 100)
-                    ])),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final isWideScreen = constraints.maxWidth >= 1450;
+                        final secondColumnMaxWidth = isWideScreen ? 600.0 : 800.0;
+
+                        return Column(
+                          crossAxisAlignment: isWideScreen ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ResponsiveRowColumn(
+                              layout: isWideScreen
+                                  ? ResponsiveRowColumnType.ROW
+                                  : ResponsiveRowColumnType.COLUMN,
+                              rowMainAxisAlignment: isWideScreen ? MainAxisAlignment.start : MainAxisAlignment.center,
+                              rowCrossAxisAlignment: CrossAxisAlignment.start,
+                              rowSpacing: 20,
+                              columnSpacing: 60,
+                              children: [
+                                ResponsiveRowColumnItem(
+                                  child: ContactSection(
+                                    user: state.user,
+                                    changesSaved: () => {
+                                      CustomSnackBar.of(context).showCustomSnackBar(
+                                        localization.profile_page_snackbar_contact_information_changes)
+                                    },
+                                  ),
+                                ),
+                                ResponsiveRowColumnItem(
+                                  child: Column(
+                                    children: [
+                                      if (state.user.companyID == null ||
+                                          state.user.companyID == "") ...[
+                                        ProfileRegisterCompanySection(
+                                          user: state.user,
+                                          maxWidth: secondColumnMaxWidth,
+                                        ),
+                                        SizedBox(height: isWideScreen ? 20 : (responsiveValue.isMobile ? 20 : 60)),
+                                      ],
+                                      CalendlySection(maxWidth: secondColumnMaxWidth),
+                                      SizedBox(height: isWideScreen ? 20 : (responsiveValue.isMobile ? 20 : 60)),
+                                      EmailSection(
+                                        user: state.user,
+                                        maxWidth: secondColumnMaxWidth,
+                                        sendEmailVerificationCallback: () => {
+                                          CustomSnackBar.of(context).showCustomSnackBar(
+                                            localization.profile_page_snackbar_email_verification)
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: responsiveValue.isMobile ? 20 : 60),
+                            SecondaryButton(
+                              title: localization.profile_page_logout_button_title,
+                              width: responsiveValue.isMobile
+                                  ? responsiveValue.screenWidth - 80
+                                  : 200,
+                              onTap: () =>
+                                  {BlocProvider.of<AuthCubit>(context).signOut()}),
+                            SizedBox(height: responsiveValue.isMobile ? 50 : 100)
+                          ],
+                        );
+                      },
+                    )),
               ]));
         } else if (state is UserObserverFailure) {
           return CenteredConstrainedWrapper(

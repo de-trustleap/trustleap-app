@@ -4,7 +4,9 @@ import 'package:finanzbegleiter/presentation/landing_page/widgets/landing_page_c
 import 'package:flutter/material.dart';
 
 class CalendlySection extends StatelessWidget {
-  const CalendlySection({super.key});
+  final double? maxWidth;
+
+  const CalendlySection({super.key, this.maxWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,7 @@ class CalendlySection extends StatelessWidget {
     final localization = AppLocalizations.of(context);
 
     return CardContainer(
+      maxWidth: maxWidth,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
