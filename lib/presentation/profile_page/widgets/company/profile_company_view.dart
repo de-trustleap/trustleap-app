@@ -1,17 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/application/profile/company_observer/company_observer_cubit.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/domain/entities/user.dart';
-import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/core/page_wrapper/centered_constrained_wrapper.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/error_view.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/cached_image_view.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_contact_section.dart';
-import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_image_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -47,9 +43,6 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
     final localization = AppLocalizations.of(context);
     final responsiveValue = ResponsiveHelper.of(context);
     final companyObserverCubit = Modular.get<CompanyObserverCubit>();
-    final permissions = (context.watchModular<PermissionCubit>().state
-            as PermissionSuccessState)
-        .permissions;
 
     return BlocBuilder<CompanyObserverCubit, CompanyObserverState>(
       builder: (context, state) {
@@ -64,30 +57,17 @@ class _ProfileCompanyViewState extends State<ProfileCompanyView>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (permissions.hasEditCompanyPermission()) ...[
-                      CompanyImageSection(
-                          company: state.company,
-                          imageUploadSuccessful: () => {
-                                CustomSnackBar.of(context).showCustomSnackBar(
-                                    localization
-                                        .profile_page_snackbar_image_changed_message)
-                              }),
-                    ] else ...[
-                      CachedImageView(
-                          imageSize: const Size(200, 200),
-                          imageDownloadURL:
-                              state.company.companyImageDownloadURL ?? "",
-                          thumbnailDownloadURL:
-                              state.company.thumbnailDownloadURL ?? "",
-                          hovered: false)
-                    ],
-                    const SizedBox(height: 20),
                     CompanyContactSection(
                         user: widget.user,
                         company: state.company,
                         changesSaved: () {
                           CustomSnackBar.of(context).showCustomSnackBar(localization
                               .profile_company_contact_section_success_snackbar_message);
+                        },
+                        imageUploadSuccessful: () {
+                          CustomSnackBar.of(context).showCustomSnackBar(
+                              localization
+                                  .profile_page_snackbar_image_changed_message);
                         }),
                     SizedBox(height: responsiveValue.isMobile ? 50 : 100)
                   ],

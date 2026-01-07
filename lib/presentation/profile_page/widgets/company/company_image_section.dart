@@ -82,7 +82,7 @@ class _CompanyImageSectionState extends State<CompanyImageSection> {
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
-    const Size imageSize = Size(200, 200);
+    const Size imageSize = Size(120, 120);
 
     return BlocConsumer<CompanyImageBloc, CompanyImageState>(
       listener: (context, state) {

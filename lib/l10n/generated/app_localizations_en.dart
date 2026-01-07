@@ -628,6 +628,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_page_contact_section_title => 'Contact Information';
 
   @override
+  String get profile_page_contact_section_subtitle =>
+      'Update your personal information here.';
+
+  @override
   String get profile_page_contact_section_form_firstname => 'first name';
 
   @override
@@ -943,6 +947,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_company_contact_section_title => 'Company Information';
+
+  @override
+  String get profile_company_contact_section_subtitle =>
+      'Update your company data here.';
 
   @override
   String get profile_company_contact_section_name => 'Company name';

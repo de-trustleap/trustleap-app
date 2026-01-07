@@ -17,7 +17,9 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 class ProfileRegisterCompanySection extends StatefulWidget {
   final CustomUser user;
-  const ProfileRegisterCompanySection({super.key, required this.user});
+  final double? maxWidth;
+
+  const ProfileRegisterCompanySection({super.key, required this.user, this.maxWidth});
 
   @override
   State<ProfileRegisterCompanySection> createState() =>
@@ -51,6 +53,7 @@ class _ProfileRegisterCompanySectionState
     return BlocBuilder<CompanyRequestCubit, CompanyRequestState>(
       builder: (context, state) {
         return CardContainer(
+            maxWidth: widget.maxWidth,
             child: LayoutBuilder(builder: ((context, constraints) {
           final maxWidth = constraints.maxWidth;
           return Column(

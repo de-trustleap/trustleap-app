@@ -10,6 +10,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_e
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender_picker.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/profile_image_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -113,7 +114,7 @@ class _ContactSectionState extends State<ContactSection> {
     final validator = AuthValidator(localization: localization);
     const double textFieldSpacing = 20;
 
-    return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
+    return CardContainer(maxWidth: 800, child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
       return BlocConsumer<ProfileCubit, ProfileState>(
         bloc: profileCubit,
@@ -139,10 +140,34 @@ class _ContactSectionState extends State<ContactSection> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SelectableText(localization.profile_page_contact_section_title,
-                    style: themeData.textTheme.headlineLarge!
-                        .copyWith(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 16),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ProfileImageSection(
+                      user: widget.user,
+                      imageUploadSuccessful: () {},
+                    ),
+                    const SizedBox(width: 24),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SelectableText(localization.profile_page_contact_section_title,
+                              style: themeData.textTheme.headlineLarge!
+                                  .copyWith(fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 8),
+                          SelectableText(
+                            localization.profile_page_contact_section_subtitle,
+                            style: themeData.textTheme.bodyMedium!.copyWith(
+                              color: themeData.colorScheme.onSurface.withValues(alpha: 0.6),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   GenderPicker(
                       width: maxWidth,

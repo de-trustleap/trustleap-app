@@ -1151,6 +1151,12 @@ abstract class AppLocalizations {
   /// **'Contact Information'**
   String get profile_page_contact_section_title;
 
+  /// Subtitle of the contact information section in the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your personal information here.'**
+  String get profile_page_contact_section_subtitle;
+
   /// First name text field designation in the contact information area on the profile page.
   ///
   /// In en, this message translates to:
@@ -1696,6 +1702,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Company Information'**
   String get profile_company_contact_section_title;
+
+  /// Subtitle of the contact section in the company tab on the profile page.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your company data here.'**
+  String get profile_company_contact_section_subtitle;
 
   /// Name above the company name text field of the contact section in the company tab on the profile page.
   ///
