@@ -1,3 +1,4 @@
+import 'package:finanzbegleiter/application/images/profile/profile_image_bloc.dart';
 import 'package:finanzbegleiter/application/profile/profile/profile_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/failures/database_failures.dart';
@@ -11,6 +12,7 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/gender
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/contact_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,12 +23,14 @@ import '../../../mocks.mocks.dart';
 
 class ContactSectionTestModule extends Module {
   final ProfileCubit profileCubit;
+  final ProfileImageBloc profileImageBloc;
 
-  ContactSectionTestModule({required this.profileCubit});
+  ContactSectionTestModule({required this.profileCubit, required this.profileImageBloc});
 
   @override
   void binds(i) {
     i.addSingleton<ProfileCubit>(() => profileCubit);
+    i.addSingleton<ProfileImageBloc>(() => profileImageBloc);
   }
 
   @override
@@ -38,13 +42,16 @@ class ContactSectionTestModule extends Module {
 void main() {
   late MockUserRepository mockUserRepository;
   late MockAuthRepository mockAuthRepository;
+  late MockImageRepository mockImageRepository;
   late ProfileCubit profileCubit;
+  late ProfileImageBloc profileImageBloc;
 
   setUp(() {
     ResponsiveHelper.enableTestMode();
 
     mockUserRepository = MockUserRepository();
     mockAuthRepository = MockAuthRepository();
+    mockImageRepository = MockImageRepository();
 
     when(mockAuthRepository.getCurrentUser()).thenReturn(null);
     when(mockAuthRepository.getSignedInUser()).thenReturn(none());
@@ -53,12 +60,17 @@ void main() {
       authRepo: mockAuthRepository,
       userRepo: mockUserRepository,
     );
+
+    profileImageBloc = ProfileImageBloc(
+      mockImageRepository,
+    );
   });
 
   tearDown(() {
     ResponsiveHelper.disableTestMode();
     Modular.destroy();
     profileCubit.close();
+    profileImageBloc.close();
   });
 
   CustomUser createTestUser({
@@ -89,7 +101,10 @@ void main() {
     Modular.destroy();
     ResponsiveHelper.enableTestMode();
 
-    final module = ContactSectionTestModule(profileCubit: profileCubit);
+    final module = ContactSectionTestModule(
+      profileCubit: profileCubit,
+      profileImageBloc: profileImageBloc,
+    );
 
     return ModularApp(
       module: module,
@@ -102,9 +117,12 @@ void main() {
         ],
         supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
-          body: ContactSection(
-            user: user,
-            changesSaved: changesSaved ?? () {},
+          body: BlocProvider<ProfileImageBloc>.value(
+            value: profileImageBloc,
+            child: ContactSection(
+              user: user,
+              changesSaved: changesSaved ?? () {},
+            ),
           ),
         ),
       ),
@@ -121,6 +139,8 @@ void main() {
       // When
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
       await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Then
       expect(find.byType(GenderPicker), findsOneWidget);
@@ -143,7 +163,9 @@ void main() {
 
       // When
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Then
       expect(find.text('Jane'), findsOneWidget);
@@ -162,6 +184,8 @@ void main() {
       // When
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
       await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Then
       expect(find.byType(FormErrorView), findsNothing);
@@ -176,6 +200,8 @@ void main() {
       // When
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
       await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Then
       expect(find.byType(PrimaryButton), findsOneWidget);
@@ -196,6 +222,8 @@ void main() {
       // When
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
       await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Then
       final localization = await AppLocalizations.delegate.load(const Locale('en'));
@@ -218,7 +246,9 @@ void main() {
           callbackCalled = true;
         },
       ));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // When
       profileCubit.emit(ProfileUpdateContactInformationSuccessState());
@@ -235,7 +265,9 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
 
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // When
       profileCubit.emit(ProfileUpdateContactInformationFailureState(
@@ -255,7 +287,9 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
 
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // When
       profileCubit.emit(ProfileShowValidationState());
@@ -274,7 +308,9 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
 
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // When
       profileCubit.emit(ProfileUpdateContactInformationLoadingState());
@@ -298,7 +334,9 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
 
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       profileCubit.emit(ProfileUpdateContactInformationLoadingState());
       await tester.pump();
@@ -327,6 +365,8 @@ void main() {
       // When
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
       await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Then
       final localization = await AppLocalizations.delegate.load(const Locale('en'));
@@ -367,7 +407,9 @@ void main() {
 
       // When
       await tester.pumpWidget(createWidgetUnderTest(user: testUser));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Then
       expect(find.byType(GenderPicker), findsOneWidget);

@@ -25,11 +25,13 @@ enum EmailSectionVisibleTextField { password, email, none }
 class EmailSection extends StatefulWidget {
   final CustomUser user;
   final Function sendEmailVerificationCallback;
+  final double? maxWidth;
 
   const EmailSection(
       {super.key,
       required this.user,
-      required this.sendEmailVerificationCallback});
+      required this.sendEmailVerificationCallback,
+      this.maxWidth});
 
   @override
   State<EmailSection> createState() => _EmailSectionState();
@@ -138,7 +140,7 @@ class _EmailSectionState extends State<EmailSection> {
     final responsiveValue = ResponsiveHelper.of(context);
     final localization = AppLocalizations.of(context);
 
-    return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
+    return CardContainer(maxWidth: widget.maxWidth, child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
       return BlocConsumer<ProfileCubit, ProfileState>(
           bloc: profileCubit,

@@ -59,36 +59,26 @@ class _CustomTabBarState extends State<CustomTabBar>
 
   Widget _buildDesktopTabBar(
       BuildContext context, ResponsiveBreakpointsData responsiveValue) {
-    final themeData = Theme.of(context);
-
-    return Container(
-      color: themeData.colorScheme.onPrimaryContainer,
-      child: Column(
-        children: [
-          SizedBox(height: responsiveValue.screenHeight * 0.02),
-          SizedBox(
-            width: responsiveValue.screenWidth * 0.9,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return TabBar(
-                  controller: tabController,
-                  tabs: widget.tabs
-                      .map((tab) => buildTab(
-                          tab, context, responsiveValue, constraints.maxWidth))
-                      .toList(),
-                  onTap: onTabTap,
-                  tabAlignment: TabAlignment.fill,
-                  isScrollable: false,
-                  indicatorPadding: const EdgeInsets.only(bottom: 4),
-                  dividerColor: themeData.textTheme.bodyMedium!.color,
-                  dividerHeight: 0.5,
-                );
-              },
-            ),
+    return Column(
+      children: [
+        const SizedBox(height: 32),
+        SizedBox(
+          width: responsiveValue.screenWidth * 0.9,
+          child: TabBar(
+            controller: tabController,
+            tabs: widget.tabs
+                .map((tab) => buildTab(tab, context, responsiveValue, null))
+                .toList(),
+            onTap: onTabTap,
+            tabAlignment: TabAlignment.start,
+            isScrollable: true,
+            indicatorPadding: const EdgeInsets.only(bottom: 4),
+            dividerColor: Colors.transparent,
+            dividerHeight: 0,
           ),
-          buildAnimatedContent(),
-        ],
-      ),
+        ),
+        buildAnimatedContent(),
+      ],
     );
   }
 }

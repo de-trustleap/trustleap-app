@@ -290,8 +290,6 @@ extension PagebuilderBlocSection on PagebuilderBloc {
 
       if (sections == null || sections.isEmpty) return;
 
-      _closeConfigMenuIfSectionDeleted(event.sectionId, sections);
-
       final updatedSections = sections
           .where((section) => section.id.value != event.sectionId)
           .toList();
@@ -312,43 +310,6 @@ extension PagebuilderBlocSection on PagebuilderBloc {
         saveSuccessful: null,
         isUpdated: true,
       ));
-    }
-  }
-
-  void _closeConfigMenuIfSectionDeleted(
-      String deletedSectionId, List<PageBuilderSection> sections) {
-    final configMenuCubit = Modular.get<PagebuilderConfigMenuCubit>();
-    final configMenuState = configMenuCubit.state;
-
-    // Check if section config menu is open for the deleted section
-    if (configMenuState is PageBuilderSectionConfigMenuOpenedState) {
-      if (configMenuState.model.id.value == deletedSectionId) {
-        configMenuCubit.closeConfigMenu();
-        return;
-      }
-    }
-
-    // Check if a widget config menu is open for a widget inside the deleted section
-    if (configMenuState is PageBuilderConfigMenuOpenedState) {
-      final deletedSection = sections.firstWhere(
-        (section) => section.id.value == deletedSectionId,
-        orElse: () => sections.first,
-      );
-
-      if (deletedSection.id.value == deletedSectionId &&
-          deletedSection.widgets != null) {
-        final openedWidgetId = configMenuState.model.id.value;
-
-        // Check if the opened widget is in the deleted section
-        for (final widget in deletedSection.widgets!) {
-          if (PagebuilderWidgetTreeSearcher.findWidgetById(
-                  widget, openedWidgetId) !=
-              null) {
-            configMenuCubit.closeConfigMenu();
-            return;
-          }
-        }
-      }
     }
   }
 

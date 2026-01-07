@@ -280,7 +280,7 @@ class _PromotersOverviewPageState extends State<PromotersOverviewPage> {
       CardContainer(
           maxWidth: 1200,
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: children)),
       SizedBox(height: responsiveValue.isMobile ? 40 : 80),
     ]);

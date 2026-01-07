@@ -14,6 +14,8 @@ import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_e
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/form_textfield.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/loading_indicator.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/cached_image_view.dart';
+import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_image_section.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/company/company_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,12 +25,14 @@ class CompanyContactSection extends StatefulWidget {
   final CustomUser user;
   final Company company;
   final Function changesSaved;
+  final Function imageUploadSuccessful;
 
   const CompanyContactSection({
     super.key,
     required this.user,
     required this.company,
     required this.changesSaved,
+    required this.imageUploadSuccessful,
   });
 
   @override
@@ -174,7 +178,7 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
             .permissions;
     const double textFieldSpacing = 20;
 
-    return CardContainer(child: LayoutBuilder(builder: (context, constraints) {
+    return CardContainer(maxWidth: 800, child: LayoutBuilder(builder: (context, constraints) {
       final maxWidth = constraints.maxWidth;
       return BlocConsumer<CompanyCubit, CompanyState>(
         listener: (context, state) {
@@ -211,11 +215,44 @@ class _CompanyContactSectionState extends State<CompanyContactSection> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SelectableText(
-                        localization.profile_company_contact_section_title,
-                        style: themeData.textTheme.headlineLarge!
-                            .copyWith(fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 16),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if (permissions.hasEditCompanyPermission()) ...[
+                          CompanyImageSection(
+                            company: widget.company,
+                            imageUploadSuccessful: () => widget.imageUploadSuccessful(),
+                          ),
+                        ] else ...[
+                          CachedImageView(
+                            imageSize: const Size(120, 120),
+                            imageDownloadURL: widget.company.companyImageDownloadURL ?? "",
+                            thumbnailDownloadURL: widget.company.thumbnailDownloadURL ?? "",
+                            hovered: false,
+                          )
+                        ],
+                        const SizedBox(width: 24),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SelectableText(
+                                localization.profile_company_contact_section_title,
+                                style: themeData.textTheme.headlineLarge!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 8),
+                              SelectableText(
+                                localization.profile_company_contact_section_subtitle,
+                                style: themeData.textTheme.bodyMedium!.copyWith(
+                                  color: themeData.colorScheme.onSurface.withValues(alpha: 0.6),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

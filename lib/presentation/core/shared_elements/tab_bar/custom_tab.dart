@@ -28,7 +28,7 @@ class _CustomTabState extends State<CustomTab> {
         itemIsHovered = isHovering;
       });
 
-  double _calculateTabWidth() {
+  double? _calculateTabWidth() {
     if (widget.responsiveValue.isMobile && widget.availableWidth != null) {
       if (widget.totalTabs <= 3) {
         return (widget.availableWidth! / widget.totalTabs) - 8;
@@ -37,56 +37,90 @@ class _CustomTabState extends State<CustomTab> {
         return (widget.availableWidth! / 3.5) - 8;
       }
     }
-    return 400;
+    // For desktop with no availableWidth, return null to allow natural sizing
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     final scaleValue = itemIsHovered ? 1.05 : 1.0;
+    final tabWidth = _calculateTabWidth();
 
     return Tab(
-      child: SizedBox(
-        width: _calculateTabWidth(),
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          onEnter: (_) => hoverOnItem(true),
-          onExit: (_) => hoverOnItem(false),
-          child: AnimatedScale(
-            scale: scaleValue,
-            duration: const Duration(milliseconds: 300),
-            curve: const Cubic(0.5, 0.8, 0.4, 1),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  widget.icon,
-                  size: widget.responsiveValue.isMobile ? 16 : 20,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .surfaceTint
-                      .withValues(alpha: 0.8),
-                ),
-                SizedBox(width: widget.responsiveValue.isMobile ? 4 : 8),
-                Flexible(
-                  child: Text(
-                    widget.title,
-                    style: widget.responsiveValue.isMobile
-                        ? Theme.of(context).textTheme.labelSmall?.copyWith(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
-                            )
-                        : Theme.of(context).textTheme.bodyMedium,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
+      child: tabWidth != null
+          ? SizedBox(
+              width: tabWidth,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                onEnter: (_) => hoverOnItem(true),
+                onExit: (_) => hoverOnItem(false),
+                child: AnimatedScale(
+                  scale: scaleValue,
+                  duration: const Duration(milliseconds: 300),
+                  curve: const Cubic(0.5, 0.8, 0.4, 1),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        widget.icon,
+                        size: widget.responsiveValue.isMobile ? 16 : 20,
+                        color: themeData.colorScheme.surfaceTint
+                            .withValues(alpha: 0.8),
+                      ),
+                      SizedBox(width: widget.responsiveValue.isMobile ? 4 : 8),
+                      Flexible(
+                        child: Text(
+                          widget.title,
+                          style: themeData.textTheme.bodySmall,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
+            )
+          : MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (_) => hoverOnItem(true),
+              onExit: (_) => hoverOnItem(false),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: AnimatedScale(
+                  scale: scaleValue,
+                  duration: const Duration(milliseconds: 300),
+                  curve: const Cubic(0.5, 0.8, 0.4, 1),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        widget.icon,
+                        size: widget.responsiveValue.isMobile ? 16 : 20,
+                        color: themeData.colorScheme.surfaceTint
+                            .withValues(alpha: 0.8),
+                      ),
+                      SizedBox(width: widget.responsiveValue.isMobile ? 4 : 8),
+                      Flexible(
+                        child: Text(
+                          widget.title,
+                          style: themeData.textTheme.bodySmall,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }
