@@ -5600,6 +5600,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No templates available for {type}'**
   String pagebuilder_template_library_no_templates_available(String type);
+
+  /// Title of the cookie consent banner
+  ///
+  /// In en, this message translates to:
+  /// **'Your Privacy'**
+  String get cookie_consent_banner_title;
+
+  /// Description in the cookie consent banner
+  ///
+  /// In en, this message translates to:
+  /// **'We use cookies and similar technologies to provide and improve our website. Some are necessary for functionality, others help us analyze errors and optimize the website.'**
+  String get cookie_consent_banner_description;
+
+  /// Button text for 'Accept all cookies'
+  ///
+  /// In en, this message translates to:
+  /// **'Accept all'**
+  String get cookie_consent_banner_accept_all;
+
+  /// Button text for 'Only necessary cookies'
+  ///
+  /// In en, this message translates to:
+  /// **'Only necessary'**
+  String get cookie_consent_banner_reject_all;
+
+  /// Button text for 'Customize cookie settings'
+  ///
+  /// In en, this message translates to:
+  /// **'Customize'**
+  String get cookie_consent_banner_customize;
+
+  /// Title of the cookie settings dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Cookie Settings'**
+  String get cookie_consent_settings_title;
+
+  /// Description in the cookie settings dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Here you can customize your cookie preferences. Necessary cookies are always active and cannot be disabled.'**
+  String get cookie_consent_settings_description;
+
+  /// Button text to save cookie settings
+  ///
+  /// In en, this message translates to:
+  /// **'Save settings'**
+  String get cookie_consent_settings_save;
+
+  /// Button text to cancel cookie settings
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cookie_consent_settings_cancel;
+
+  /// Title of the 'Necessary cookies' category
+  ///
+  /// In en, this message translates to:
+  /// **'Necessary'**
+  String get cookie_consent_category_necessary_title;
+
+  /// Description of the 'Necessary cookies' category
+  ///
+  /// In en, this message translates to:
+  /// **'These cookies are required for the basic functions of the website, such as login, data storage and security. They cannot be disabled.'**
+  String get cookie_consent_category_necessary_description;
+
+  /// List of services in the 'Necessary cookies' category
+  ///
+  /// In en, this message translates to:
+  /// **'Firebase Authentication, Firestore, Cloud Functions, Storage, AppCheck'**
+  String get cookie_consent_category_necessary_services;
+
+  /// Title of the 'Statistics cookies' category
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics'**
+  String get cookie_consent_category_statistics_title;
+
+  /// Description of the 'Statistics cookies' category
+  ///
+  /// In en, this message translates to:
+  /// **'These cookies help us identify errors and improve the website. Technical error information is collected.'**
+  String get cookie_consent_category_statistics_description;
+
+  /// List of services in the 'Statistics cookies' category
+  ///
+  /// In en, this message translates to:
+  /// **'Sentry error tracking'**
+  String get cookie_consent_category_statistics_services;
+
+  /// Button text to open cookie settings
+  ///
+  /// In en, this message translates to:
+  /// **'Cookie Settings'**
+  String get cookie_consent_settings_button;
+
+  /// Success message after saving cookie settings
+  ///
+  /// In en, this message translates to:
+  /// **'Your cookie settings have been saved'**
+  String get cookie_consent_save_success;
+
+  /// Error message when saving cookie settings
+  ///
+  /// In en, this message translates to:
+  /// **'Error saving cookie settings'**
+  String get cookie_consent_save_error;
+
+  /// Label for cookies that are always active
+  ///
+  /// In en, this message translates to:
+  /// **'Always active'**
+  String get cookie_consent_always_active;
+
+  /// Link text to privacy policy
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get cookie_consent_privacy_policy;
 }
 
 class _AppLocalizationsDelegate

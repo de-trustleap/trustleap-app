@@ -3280,4 +3280,72 @@ class AppLocalizationsDe extends AppLocalizations {
   String pagebuilder_template_library_no_templates_available(String type) {
     return 'Keine Templates für $type verfügbar';
   }
+
+  @override
+  String get cookie_consent_banner_title => 'Ihre Privatsphäre';
+
+  @override
+  String get cookie_consent_banner_description =>
+      'Wir nutzen Cookies und ähnliche Technologien, um unsere Website bereitzustellen und zu verbessern. Einige sind notwendig für die Funktionalität, andere helfen uns, Fehler zu analysieren und die Website zu optimieren.';
+
+  @override
+  String get cookie_consent_banner_accept_all => 'Alle akzeptieren';
+
+  @override
+  String get cookie_consent_banner_reject_all => 'Nur notwendige';
+
+  @override
+  String get cookie_consent_banner_customize => 'Anpassen';
+
+  @override
+  String get cookie_consent_settings_title => 'Cookie-Einstellungen';
+
+  @override
+  String get cookie_consent_settings_description =>
+      'Hier können Sie Ihre Cookie-Präferenzen anpassen. Notwendige Cookies sind immer aktiv und können nicht deaktiviert werden.';
+
+  @override
+  String get cookie_consent_settings_save => 'Einstellungen speichern';
+
+  @override
+  String get cookie_consent_settings_cancel => 'Abbrechen';
+
+  @override
+  String get cookie_consent_category_necessary_title => 'Notwendig';
+
+  @override
+  String get cookie_consent_category_necessary_description =>
+      'Diese Cookies sind für die Grundfunktionen der Website erforderlich, wie z.B. Login, Datenspeicherung und Sicherheit. Sie können nicht deaktiviert werden.';
+
+  @override
+  String get cookie_consent_category_necessary_services =>
+      'Firebase Authentication, Firestore, Cloud Functions, Storage, AppCheck';
+
+  @override
+  String get cookie_consent_category_statistics_title => 'Statistiken';
+
+  @override
+  String get cookie_consent_category_statistics_description =>
+      'Diese Cookies helfen uns, Fehler zu erkennen und die Website zu verbessern. Es werden technische Fehlerinformationen gesammelt.';
+
+  @override
+  String get cookie_consent_category_statistics_services =>
+      'Sentry Fehleranalyse';
+
+  @override
+  String get cookie_consent_settings_button => 'Cookie-Einstellungen';
+
+  @override
+  String get cookie_consent_save_success =>
+      'Ihre Cookie-Einstellungen wurden gespeichert';
+
+  @override
+  String get cookie_consent_save_error =>
+      'Fehler beim Speichern der Cookie-Einstellungen';
+
+  @override
+  String get cookie_consent_always_active => 'Immer aktiv';
+
+  @override
+  String get cookie_consent_privacy_policy => 'Datenschutzerklärung';
 }
