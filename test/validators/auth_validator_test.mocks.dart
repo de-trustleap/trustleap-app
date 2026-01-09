@@ -1700,6 +1700,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get profile_page_contact_section_subtitle => (super.noSuchMethod(
+        Invocation.getter(#profile_page_contact_section_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_page_contact_section_subtitle),
+        ),
+      ) as String);
+
+  @override
   String get profile_page_contact_section_form_firstname => (super.noSuchMethod(
         Invocation.getter(#profile_page_contact_section_form_firstname),
         returnValue: _i3.dummyValue<String>(
@@ -2537,6 +2546,15 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
         returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#profile_company_contact_section_title),
+        ),
+      ) as String);
+
+  @override
+  String get profile_company_contact_section_subtitle => (super.noSuchMethod(
+        Invocation.getter(#profile_company_contact_section_subtitle),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#profile_company_contact_section_subtitle),
         ),
       ) as String);
 
@@ -4206,6 +4224,18 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
           this,
           Invocation.getter(
               #landingpage_pagebuilder_container_config_container_title),
+        ),
+      ) as String);
+
+  @override
+  String get landingpage_pagebuilder_container_config_auto_sizing =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #landingpage_pagebuilder_container_config_auto_sizing),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #landingpage_pagebuilder_container_config_auto_sizing),
         ),
       ) as String);
 
@@ -8279,6 +8309,563 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get admin_area_template_manager_title => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_description => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_description),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_upload_heading => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_upload_heading),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_upload_heading),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_section_json_label =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_section_json_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_section_json_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_thumbnail_label => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_thumbnail_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_thumbnail_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_file_picker_hint =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_file_picker_hint),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_file_picker_hint),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_asset_images_label =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_asset_images_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_asset_images_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_add_images_button =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_add_images_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_add_images_button),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_no_assets_selected =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_no_assets_selected),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_no_assets_selected),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_section_type_label =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_section_type_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_section_type_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_type_hint => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_type_hint),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_type_hint),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_type_hero => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_type_hero),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_type_hero),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_type_product => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_type_product),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_type_product),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_type_about => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_type_about),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_type_about),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_type_call_to_action =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_type_call_to_action),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_type_call_to_action),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_type_advantages => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_type_advantages),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_type_advantages),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_type_footer => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_type_footer),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_type_footer),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_environment_label =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_environment_label),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_environment_label),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_environment_both =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_environment_both),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_environment_both),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_environment_staging =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_environment_staging),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_environment_staging),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_environment_prod =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_environment_prod),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_environment_prod),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_upload_button => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_upload_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_upload_button),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_error_missing_files =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_error_missing_files),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_error_missing_files),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_error_missing_type =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_error_missing_type),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_error_missing_type),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_error_reading_files =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_error_reading_files),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_error_reading_files),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_success_message => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_success_message),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_success_message),
+        ),
+      ) as String);
+
+  @override
+  String get menuitems_templates => (super.noSuchMethod(
+        Invocation.getter(#menuitems_templates),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#menuitems_templates),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_add_section_create_empty_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_add_section_create_empty_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_add_section_create_empty_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_add_section_create_from_template_tooltip =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_add_section_create_from_template_tooltip),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_add_section_create_from_template_tooltip),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_add_section_choose_layout_heading =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_add_section_choose_layout_heading),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_add_section_choose_layout_heading),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_type_hero => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_type_hero),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_type_hero),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_type_about => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_type_about),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_type_about),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_type_product => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_type_product),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_type_product),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_type_call_to_action => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_type_call_to_action),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_type_call_to_action),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_type_advantages => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_type_advantages),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_type_advantages),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_section_type_footer => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_section_type_footer),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_section_type_footer),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_template_library_error_loading_template =>
+      (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_template_library_error_loading_template),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_template_library_error_loading_template),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_template_library_heading => (super.noSuchMethod(
+        Invocation.getter(#pagebuilder_template_library_heading),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#pagebuilder_template_library_heading),
+        ),
+      ) as String);
+
+  @override
+  String get pagebuilder_template_library_error_loading_templates =>
+      (super.noSuchMethod(
+        Invocation.getter(
+            #pagebuilder_template_library_error_loading_templates),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(
+              #pagebuilder_template_library_error_loading_templates),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_banner_title => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_banner_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_banner_title),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_banner_description => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_banner_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_banner_description),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_banner_accept_all => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_banner_accept_all),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_banner_accept_all),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_banner_reject_all => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_banner_reject_all),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_banner_reject_all),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_banner_customize => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_banner_customize),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_banner_customize),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_settings_title => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_settings_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_settings_title),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_settings_description => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_settings_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_settings_description),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_settings_save => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_settings_save),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_settings_save),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_settings_cancel => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_settings_cancel),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_settings_cancel),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_category_necessary_title => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_category_necessary_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_category_necessary_title),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_category_necessary_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_category_necessary_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_category_necessary_description),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_category_necessary_services => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_category_necessary_services),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_category_necessary_services),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_category_statistics_title => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_category_statistics_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_category_statistics_title),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_category_statistics_description =>
+      (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_category_statistics_description),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_category_statistics_description),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_category_statistics_services => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_category_statistics_services),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_category_statistics_services),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_settings_button => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_settings_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_settings_button),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_save_success => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_save_success),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_save_success),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_save_error => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_save_error),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_save_error),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_always_active => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_always_active),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_always_active),
+        ),
+      ) as String);
+
+  @override
+  String get cookie_consent_privacy_policy => (super.noSuchMethod(
+        Invocation.getter(#cookie_consent_privacy_policy),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#cookie_consent_privacy_policy),
+        ),
+      ) as String);
+
+  @override
   String landingpage_creation_progress_indicator_text(
     int? currentStep,
     int? elementsTotal,
@@ -8616,6 +9203,22 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
               userName,
               fields,
             ],
+          ),
+        ),
+      ) as String);
+
+  @override
+  String pagebuilder_template_library_no_templates_available(String? type) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pagebuilder_template_library_no_templates_available,
+          [type],
+        ),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.method(
+            #pagebuilder_template_library_no_templates_available,
+            [type],
           ),
         ),
       ) as String);

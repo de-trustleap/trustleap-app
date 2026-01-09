@@ -14,6 +14,7 @@ import 'package:finanzbegleiter/domain/repositories/user_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/permission_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/admin_registration_code_repository.dart';
+import 'package:finanzbegleiter/domain/repositories/consent_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_upload_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart';
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_repository.dart';
@@ -45,6 +46,7 @@ import 'package:mockito/annotations.dart';
   TutorialRepository,
   PagebuilderSectionTemplateRepository,
   PagebuilderSectionTemplateUploadRepository,
+  ConsentRepository,
   User,
   PagebuilderRepository,
   PagebuilderConfigMenuCubit,

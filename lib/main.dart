@@ -7,6 +7,7 @@ import 'package:finanzbegleiter/application/theme/theme_cubit.dart';
 import 'package:finanzbegleiter/application/user_observer/user_observer_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/custom_navigator.dart';
+import 'package:finanzbegleiter/core/helpers/stored_consent_reader.dart';
 import 'package:finanzbegleiter/core/modules/app_module.dart';
 import 'package:finanzbegleiter/core/navigation/custom_navigator_base.dart';
 import 'package:finanzbegleiter/core/router_observer.dart';
@@ -16,6 +17,7 @@ import 'package:finanzbegleiter/firebase_options_prod.dart';
 import 'package:finanzbegleiter/firebase_options_staging.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/l10n/l10n.dart';
+import 'package:finanzbegleiter/presentation/consent/consent_banner_wrapper.dart';
 import 'package:finanzbegleiter/route_paths.dart';
 import 'package:finanzbegleiter/themes/desktop_theme.dart';
 import 'package:finanzbegleiter/themes/mobile_theme.dart';
@@ -32,56 +34,69 @@ import 'package:url_strategy/url_strategy.dart';
 import 'package:web/web.dart' as web;
 
 Future<void> main() async {
-  await SentryFlutter.init(
-    (options) {
-      options.dsn =
-          'https://618cb82100c49afd9b092cd092c96202@o4509530459209728.ingest.de.sentry.io/4509530460586064';
-      options.sendDefaultPii = false;
-      options.tracesSampleRate = 0.1;
-      options.profilesSampleRate = 0.1;
-    },
-    appRunner: () async {
-      WidgetsFlutterBinding.ensureInitialized();
+  final hasStatisticsConsent = StoredConsentReader.hasStatisticsConsent();
 
-      final environment = Environment();
+  if (hasStatisticsConsent) {
+    // Initialize with Sentry if consent is given
+    await SentryFlutter.init(
+      (options) {
+        options.dsn =
+            'https://618cb82100c49afd9b092cd092c96202@o4509530459209728.ingest.de.sentry.io/4509530460586064';
+        options.sendDefaultPii = false;
+        options.tracesSampleRate = 0.1;
+        options.profilesSampleRate = 0.1;
+      },
+      appRunner: () => _runApp(hasStatisticsConsent),
+    );
+  } else {
+    await _runApp(hasStatisticsConsent);
+  }
+}
 
-      await Firebase.initializeApp(
-        options: environment.isStaging()
-            ? DefaultFirebaseOptionsStaging.currentPlatform
-            : DefaultFirebaseOptionsProd.currentPlatform,
-      );
+Future<void> _runApp(bool hasStatisticsConsent) async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-      if (kIsWeb) {
-        await FirebaseAppCheck.instance.activate(
-          providerWeb: ReCaptchaV3Provider(environment.getAppCheckToken()),
-        );
-      }
+  final environment = Environment();
 
-      setPathUrlStrategy();
+  await Firebase.initializeApp(
+    options: environment.isStaging()
+        ? DefaultFirebaseOptionsStaging.currentPlatform
+        : DefaultFirebaseOptionsProd.currentPlatform,
+  );
 
-      final observer = RouterObserver();
-      Modular.to.setObservers([observer]);
+  if (kIsWeb) {
+    await FirebaseAppCheck.instance.activate(
+      providerWeb: ReCaptchaV3Provider(environment.getAppCheckToken()),
+    );
+  }
 
-      Modular.to.addListener(() {
-        observer.handleNavigation();
-      });
+  setPathUrlStrategy();
 
-      runApp(
-        ModularApp(
-          module: AppModule(),
-          child: SentryWidget(
-            child: CustomNavigator.create(
+  final observer = RouterObserver();
+  Modular.to.setObservers([observer]);
+
+  Modular.to.addListener(() {
+    observer.handleNavigation();
+  });
+
+  runApp(
+    ModularApp(
+      module: AppModule(),
+      child: hasStatisticsConsent
+          ? SentryWidget(
+              child: CustomNavigator.create(
+                child: const MyApp(),
+              ),
+            )
+          : CustomNavigator.create(
               child: const MyApp(),
             ),
-          ),
-        ),
-      );
-
-      if (kIsWeb) {
-        WebCrashReporter.initialize();
-      }
-    },
+    ),
   );
+
+  if (kIsWeb) {
+    WebCrashReporter.initialize();
+  }
 }
 
 void routeToInitial(AuthStatus status, CustomNavigatorBase navigator) {
@@ -232,17 +247,19 @@ class MyApp extends StatelessWidget {
                           GlobalCupertinoLocalizations.delegate
                         ],
                         debugShowCheckedModeBanner: false,
-                        builder: (context, widget) =>
-                            ResponsiveBreakpoints.builder(
-                                child: widget!,
-                                breakpoints: const [
+                        builder: (context, widget) {
+                          return ResponsiveBreakpoints.builder(
+                            child: ConsentBannerWrapper(child: widget!),
+                            breakpoints: const [
                               Breakpoint(start: 0, end: 599, name: MOBILE),
                               Breakpoint(start: 600, end: 999, name: TABLET),
                               Breakpoint(
                                   start: 1000,
                                   end: double.infinity,
                                   name: DESKTOP)
-                            ]),
+                            ],
+                          );
+                        },
                       );
                     },
                   );
