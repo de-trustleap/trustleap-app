@@ -3787,7 +3787,7 @@
             }
         }
     },
-    "cookie_consent_banner_title": "Your Privacy",
+    "cookie_consent_banner_title": "We respect your Privacy",
     "@cookie_consent_banner_title": {
         "description": "Title of the cookie consent banner"
     },

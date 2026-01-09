@@ -3229,7 +3229,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get cookie_consent_banner_title => 'Your Privacy';
+  String get cookie_consent_banner_title => 'We respect your Privacy';
 
   @override
   String get cookie_consent_banner_description =>

@@ -36,30 +36,36 @@ class _ConsentBannerWrapperState extends State<ConsentBannerWrapper> {
     return BlocBuilder<ConsentCubit, ConsentState>(
       bloc: consentCubit,
       builder: (context, consentState) {
-        final shouldShowBanner = consentState is ConsentRequiredState ||
-            consentState is ConsentSavingState;
+        final shouldShowBanner = consentState is ConsentRequiredState;
 
         return Stack(
           children: [
             widget.child,
-            if (shouldShowBanner)
-              Positioned.fill(
-                child: Material(
-                  color: Colors.black.withValues(alpha: 0.5),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: CookieConsentBanner(
-                          onCustomizePressed: _onCustomizePressed,
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: shouldShowBanner
+                  ? Positioned.fill(
+                      key: const ValueKey('consent-banner'),
+                      child: Material(
+                        color: Colors.black.withValues(alpha: 0.5),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: CookieConsentBanner(
+                                onCustomizePressed: _onCustomizePressed,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    )
+                  : const SizedBox.shrink(
+                      key: ValueKey('no-banner'),
+                    ),
+            ),
             if (_showDialog)
               Positioned.fill(
                 child: Material(

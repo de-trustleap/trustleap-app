@@ -3282,7 +3282,7 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get cookie_consent_banner_title => 'Ihre Privatsphäre';
+  String get cookie_consent_banner_title => 'Wir schätzen Ihre Privatsphäre';
 
   @override
   String get cookie_consent_banner_description =>
@@ -3292,7 +3292,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cookie_consent_banner_accept_all => 'Alle akzeptieren';
 
   @override
-  String get cookie_consent_banner_reject_all => 'Nur notwendige';
+  String get cookie_consent_banner_reject_all => 'Ablehnen';
 
   @override
   String get cookie_consent_banner_customize => 'Anpassen';

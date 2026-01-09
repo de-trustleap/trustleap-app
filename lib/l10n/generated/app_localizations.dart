@@ -5604,7 +5604,7 @@ abstract class AppLocalizations {
   /// Title of the cookie consent banner
   ///
   /// In en, this message translates to:
-  /// **'Your Privacy'**
+  /// **'We respect your Privacy'**
   String get cookie_consent_banner_title;
 
   /// Description in the cookie consent banner

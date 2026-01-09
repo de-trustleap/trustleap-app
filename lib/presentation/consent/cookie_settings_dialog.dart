@@ -1,11 +1,14 @@
 import 'package:finanzbegleiter/application/consent/consent_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
+import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
 import 'package:finanzbegleiter/presentation/consent/cookie_consent_texts.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/outlined_custom_button.dart';
+import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
-/// Dialog for customizing cookie consent preferences.
 class CookieSettingsDialog extends StatefulWidget {
   final VoidCallback? onClose;
 
@@ -21,7 +24,6 @@ class _CookieSettingsDialogState extends State<CookieSettingsDialog> {
   @override
   void initState() {
     super.initState();
-    // Load current preferences
     final cubit = Modular.get<ConsentCubit>();
     final currentPreferences = cubit.getCurrentPreferences();
     _selectedCategories.addAll(currentPreferences.categories);
@@ -29,6 +31,7 @@ class _CookieSettingsDialogState extends State<CookieSettingsDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final responsiveValue = ResponsiveBreakpoints.of(context);
     final texts = CookieConsentTexts(AppLocalizations.of(context));
 
     return Dialog(
@@ -40,7 +43,6 @@ class _CookieSettingsDialogState extends State<CookieSettingsDialog> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
               Text(
                 texts.settingsTitle,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -53,8 +55,6 @@ class _CookieSettingsDialogState extends State<CookieSettingsDialog> {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 24),
-
-              // Consent Categories
               _buildCategoryCard(
                 context: context,
                 title: texts.categoryNecessaryTitle,
@@ -75,25 +75,34 @@ class _CookieSettingsDialogState extends State<CookieSettingsDialog> {
                 alwaysActiveText: texts.alwaysActive,
               ),
               const SizedBox(height: 24),
-
-              // Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              ResponsiveRowColumn(
+                layout: responsiveValue.isMobile
+                    ? ResponsiveRowColumnType.COLUMN
+                    : ResponsiveRowColumnType.ROW,
+                rowMainAxisAlignment: MainAxisAlignment.end,
+                columnCrossAxisAlignment: CrossAxisAlignment.stretch,
+                columnSpacing: 12,
+                rowSpacing: 16,
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      if (widget.onClose != null) {
-                        widget.onClose!();
-                      } else {
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    child: Text(texts.settingsCancel),
+                  ResponsiveRowColumnItem(
+                    child: OutlinedCustomButton(
+                      title: texts.settingsCancel,
+                      width: responsiveValue.isMobile ? double.infinity : 120,
+                      onTap: () {
+                        if (widget.onClose != null) {
+                          widget.onClose!();
+                        } else {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    ),
                   ),
-                  const SizedBox(width: 12),
-                  ElevatedButton(
-                    onPressed: () => _savePreferences(context),
-                    child: Text(texts.settingsSave),
+                  ResponsiveRowColumnItem(
+                    child: PrimaryButton(
+                      title: texts.settingsSave,
+                      width: responsiveValue.isMobile ? double.infinity : 230,
+                      onTap: () => _savePreferences(context),
+                    ),
                   ),
                 ],
               ),
@@ -200,7 +209,7 @@ class _CookieSettingsDialogState extends State<CookieSettingsDialog> {
     if (widget.onClose != null) {
       widget.onClose!();
     } else {
-      Navigator.of(context).pop();
+      CustomNavigator.of(context).pop();
     }
   }
 }

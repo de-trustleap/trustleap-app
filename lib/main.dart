@@ -270,6 +270,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// TODO: TESTS FÜR CONSENT STORAGE KLASSE
-// TODO: COOKIE BANNER DESIGN VERBESSERN

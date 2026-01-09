@@ -3787,7 +3787,7 @@
             }
         }
     },
-    "cookie_consent_banner_title": "Ihre Privatsphäre",
+    "cookie_consent_banner_title": "Wir schätzen Ihre Privatsphäre",
     "@cookie_consent_banner_title": {
         "description": "Titel des Cookie-Consent-Banners"
     },
@@ -3799,7 +3799,7 @@
     "@cookie_consent_banner_accept_all": {
         "description": "Button-Text für 'Alle Cookies akzeptieren'"
     },
-    "cookie_consent_banner_reject_all": "Nur notwendige",
+    "cookie_consent_banner_reject_all": "Ablehnen",
     "@cookie_consent_banner_reject_all": {
         "description": "Button-Text für 'Nur notwendige Cookies'"
     },
