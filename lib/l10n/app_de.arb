@@ -3786,5 +3786,85 @@
                 "type": "String"
             }
         }
+    },
+    "cookie_consent_banner_title": "Wir schätzen Ihre Privatsphäre",
+    "@cookie_consent_banner_title": {
+        "description": "Titel des Cookie-Consent-Banners"
+    },
+    "cookie_consent_banner_description": "Wir nutzen Cookies und ähnliche Technologien, um unsere Website bereitzustellen und zu verbessern. Einige sind notwendig für die Funktionalität, andere helfen uns, Fehler zu analysieren und die Website zu optimieren.",
+    "@cookie_consent_banner_description": {
+        "description": "Beschreibung im Cookie-Consent-Banner"
+    },
+    "cookie_consent_banner_accept_all": "Alle akzeptieren",
+    "@cookie_consent_banner_accept_all": {
+        "description": "Button-Text für 'Alle Cookies akzeptieren'"
+    },
+    "cookie_consent_banner_reject_all": "Ablehnen",
+    "@cookie_consent_banner_reject_all": {
+        "description": "Button-Text für 'Nur notwendige Cookies'"
+    },
+    "cookie_consent_banner_customize": "Anpassen",
+    "@cookie_consent_banner_customize": {
+        "description": "Button-Text für 'Cookie-Einstellungen anpassen'"
+    },
+    "cookie_consent_settings_title": "Cookie-Einstellungen",
+    "@cookie_consent_settings_title": {
+        "description": "Titel des Cookie-Einstellungs-Dialogs"
+    },
+    "cookie_consent_settings_description": "Hier können Sie Ihre Cookie-Präferenzen anpassen. Notwendige Cookies sind immer aktiv und können nicht deaktiviert werden.",
+    "@cookie_consent_settings_description": {
+        "description": "Beschreibung im Cookie-Einstellungs-Dialog"
+    },
+    "cookie_consent_settings_save": "Einstellungen speichern",
+    "@cookie_consent_settings_save": {
+        "description": "Button-Text zum Speichern der Cookie-Einstellungen"
+    },
+    "cookie_consent_settings_cancel": "Abbrechen",
+    "@cookie_consent_settings_cancel": {
+        "description": "Button-Text zum Abbrechen der Cookie-Einstellungen"
+    },
+    "cookie_consent_category_necessary_title": "Notwendig",
+    "@cookie_consent_category_necessary_title": {
+        "description": "Titel der Kategorie 'Notwendige Cookies'"
+    },
+    "cookie_consent_category_necessary_description": "Diese Cookies sind für die Grundfunktionen der Website erforderlich, wie z.B. Login, Datenspeicherung und Sicherheit. Sie können nicht deaktiviert werden.",
+    "@cookie_consent_category_necessary_description": {
+        "description": "Beschreibung der Kategorie 'Notwendige Cookies'"
+    },
+    "cookie_consent_category_necessary_services": "Firebase Authentication, Firestore, Cloud Functions, Storage, AppCheck",
+    "@cookie_consent_category_necessary_services": {
+        "description": "Liste der Services in der Kategorie 'Notwendige Cookies'"
+    },
+    "cookie_consent_category_statistics_title": "Statistiken",
+    "@cookie_consent_category_statistics_title": {
+        "description": "Titel der Kategorie 'Statistik-Cookies'"
+    },
+    "cookie_consent_category_statistics_description": "Diese Cookies helfen uns, Fehler zu erkennen und die Website zu verbessern. Es werden technische Fehlerinformationen gesammelt.",
+    "@cookie_consent_category_statistics_description": {
+        "description": "Beschreibung der Kategorie 'Statistik-Cookies'"
+    },
+    "cookie_consent_category_statistics_services": "Sentry Fehleranalyse",
+    "@cookie_consent_category_statistics_services": {
+        "description": "Liste der Services in der Kategorie 'Statistik-Cookies'"
+    },
+    "cookie_consent_settings_button": "Cookie-Einstellungen",
+    "@cookie_consent_settings_button": {
+        "description": "Button-Text für Cookie-Einstellungen öffnen"
+    },
+    "cookie_consent_save_success": "Ihre Cookie-Einstellungen wurden gespeichert",
+    "@cookie_consent_save_success": {
+        "description": "Erfolgsmeldung nach Speichern der Cookie-Einstellungen"
+    },
+    "cookie_consent_save_error": "Fehler beim Speichern der Cookie-Einstellungen",
+    "@cookie_consent_save_error": {
+        "description": "Fehlermeldung beim Speichern der Cookie-Einstellungen"
+    },
+    "cookie_consent_always_active": "Immer aktiv",
+    "@cookie_consent_always_active": {
+        "description": "Label für Cookies die immer aktiv sind"
+    },
+    "cookie_consent_privacy_policy": "Datenschutzerklärung",
+    "@cookie_consent_privacy_policy": {
+        "description": "Link-Text zur Datenschutzerklärung"
     }
 }

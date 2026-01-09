@@ -3,6 +3,7 @@ import 'package:finanzbegleiter/application/permissions/permission_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
 import 'package:finanzbegleiter/core/responsive/responsive_helper.dart';
 import 'package:finanzbegleiter/infrastructure/extensions/modular_watch_extension.dart';
+import 'package:finanzbegleiter/presentation/consent/cookie_settings_button.dart';
 import 'package:finanzbegleiter/presentation/core/menu/menu_item.dart';
 import 'package:finanzbegleiter/presentation/core/menu/menu_logo.dart';
 import 'package:finanzbegleiter/presentation/profile_page/widgets/theme_switch.dart';
@@ -94,9 +95,16 @@ class SideMenu extends StatelessWidget {
               ignoring: !shouldShowThemeSwitcher,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ThemeSwitch(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    CookieSettingsButton(),
+                    SizedBox(height: 8),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ThemeSwitch(),
+                    ),
+                  ],
                 ),
               ),
             )),

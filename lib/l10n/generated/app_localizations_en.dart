@@ -3227,4 +3227,71 @@ class AppLocalizationsEn extends AppLocalizations {
   String pagebuilder_template_library_no_templates_available(String type) {
     return 'No templates available for $type';
   }
+
+  @override
+  String get cookie_consent_banner_title => 'We respect your Privacy';
+
+  @override
+  String get cookie_consent_banner_description =>
+      'We use cookies and similar technologies to provide and improve our website. Some are necessary for functionality, others help us analyze errors and optimize the website.';
+
+  @override
+  String get cookie_consent_banner_accept_all => 'Accept all';
+
+  @override
+  String get cookie_consent_banner_reject_all => 'Only necessary';
+
+  @override
+  String get cookie_consent_banner_customize => 'Customize';
+
+  @override
+  String get cookie_consent_settings_title => 'Cookie Settings';
+
+  @override
+  String get cookie_consent_settings_description =>
+      'Here you can customize your cookie preferences. Necessary cookies are always active and cannot be disabled.';
+
+  @override
+  String get cookie_consent_settings_save => 'Save settings';
+
+  @override
+  String get cookie_consent_settings_cancel => 'Cancel';
+
+  @override
+  String get cookie_consent_category_necessary_title => 'Necessary';
+
+  @override
+  String get cookie_consent_category_necessary_description =>
+      'These cookies are required for the basic functions of the website, such as login, data storage and security. They cannot be disabled.';
+
+  @override
+  String get cookie_consent_category_necessary_services =>
+      'Firebase Authentication, Firestore, Cloud Functions, Storage, AppCheck';
+
+  @override
+  String get cookie_consent_category_statistics_title => 'Statistics';
+
+  @override
+  String get cookie_consent_category_statistics_description =>
+      'These cookies help us identify errors and improve the website. Technical error information is collected.';
+
+  @override
+  String get cookie_consent_category_statistics_services =>
+      'Sentry error tracking';
+
+  @override
+  String get cookie_consent_settings_button => 'Cookie Settings';
+
+  @override
+  String get cookie_consent_save_success =>
+      'Your cookie settings have been saved';
+
+  @override
+  String get cookie_consent_save_error => 'Error saving cookie settings';
+
+  @override
+  String get cookie_consent_always_active => 'Always active';
+
+  @override
+  String get cookie_consent_privacy_policy => 'Privacy Policy';
 }

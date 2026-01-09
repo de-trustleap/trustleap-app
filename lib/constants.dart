@@ -142,3 +142,14 @@ enum BusinessModel { b2b, b2c }
 enum ContactOption { calendly, contactForm, both }
 
 enum SectionType { hero, about, product, callToAction, advantages, footer }
+
+enum ConsentCategory {
+  necessary,
+  statistics,
+}
+
+enum ConsentMethod {
+  acceptAll,
+  rejectAll,
+  custom,
+}
