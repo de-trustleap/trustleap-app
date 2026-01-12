@@ -17,32 +17,61 @@ class CookieConsentBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final texts = CookieConsentTexts(AppLocalizations.of(context));
-    final cubit = Modular.get<ConsentCubit>();
+    try {
+      final theme = Theme.of(context);
+      final texts = CookieConsentTexts(AppLocalizations.of(context));
+      final cubit = Modular.get<ConsentCubit>();
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1200),
-          child: ResponsiveBreakpoints.of(context).isMobile
-              ? _buildMobileLayout(context, theme, texts, cubit)
-              : _buildDesktopLayout(context, theme, texts, cubit),
+      final responsiveValue = ResponsiveBreakpoints.of(context);
+      final isMobile = responsiveValue.isMobile;
+
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              blurRadius: 8,
+              offset: const Offset(0, -2),
+            ),
+          ],
         ),
-      ),
-    );
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1200),
+            child: isMobile
+                ? _buildMobileLayout(context, theme, texts, cubit)
+                : _buildDesktopLayout(context, theme, texts, cubit),
+          ),
+        ),
+      );
+    } catch (e) {
+      // Return a fallback banner with basic buttons
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(24),
+        color: Colors.white,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Cookie Consent Banner Error - Please refresh'),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                try {
+                  Modular.get<ConsentCubit>().acceptAll();
+                } catch (e) {
+                  // Silent fail
+                }
+              },
+              child: const Text('Accept All Cookies'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Widget _buildDesktopLayout(

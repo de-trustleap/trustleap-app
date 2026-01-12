@@ -42,10 +42,20 @@ class _LandingPageCreatorMultiPageFormState
     super.initState();
 
     final creatorCubit = Modular.get<LandingPageCreatorCubit>();
-    creatorCubit.initialize(
-      landingPage: widget.landingPage,
-      createDefaultPage: widget.createDefaultPage,
-    );
+
+    if (widget.landingPage != null) {
+      // Always initialize when we have landingPage data - could be a different landing page
+      creatorCubit.initialize(
+        landingPage: widget.landingPage,
+        createDefaultPage: widget.createDefaultPage,
+      );
+    } else if (creatorCubit.state.landingPage == null) {
+      // Initialize empty state only if cubit has no data
+      creatorCubit.initialize(
+        landingPage: null,
+        createDefaultPage: widget.createDefaultPage,
+      );
+    }
 
     Modular.to.addListener(_onRouteChanged);
 
@@ -69,6 +79,14 @@ class _LandingPageCreatorMultiPageFormState
   @override
   void dispose() {
     Modular.to.removeListener(_onRouteChanged);
+
+    // Only reset cubit when actually leaving the creator page
+    // (not when just navigating between steps)
+    final currentRoute = Modular.to.path;
+    if (!currentRoute.contains(RoutePaths.landingPageCreatorPath)) {
+      Modular.get<LandingPageCreatorCubit>().reset();
+    }
+
     super.dispose();
   }
 
@@ -103,7 +121,7 @@ class _LandingPageCreatorMultiPageFormState
     final creatorCubit = Modular.get<LandingPageCreatorCubit>();
     _steps = [
       LandingPageCreatorFirstStep(
-          key: ValueKey('step1_${creatorState.company?.id.value}'),
+          key: ValueKey('step1_${creatorState.landingPage?.id.value ?? "new"}'),
           landingPage: creatorState.landingPage,
           isEditMode: creatorState.isEditMode,
           createDefaultPage: widget.createDefaultPage,
