@@ -88,7 +88,7 @@ class _LandingPageCreatorFormState
             localization.landingpage_create_promotion_template_default_text;
       }
       widget.onContinueTap(LandingPage(
-          id: widget.id,
+          id: widget.landingPage?.id ?? widget.id,
           name: nameTextController.text.trim(),
           description: descriptionTextController.text.trim(),
           promotionTemplate: promotionTemplateText,

@@ -41,12 +41,12 @@ class _ConsentBannerWrapperState extends State<ConsentBannerWrapper> {
         return Stack(
           children: [
             widget.child,
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              child: shouldShowBanner
-                  ? Positioned.fill(
-                      key: const ValueKey('consent-banner'),
-                      child: Material(
+            Positioned.fill(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: shouldShowBanner
+                    ? Material(
+                        key: const ValueKey('consent-banner'),
                         color: Colors.black.withValues(alpha: 0.5),
                         child: Stack(
                           children: [
@@ -60,11 +60,11 @@ class _ConsentBannerWrapperState extends State<ConsentBannerWrapper> {
                             ),
                           ],
                         ),
+                      )
+                    : const SizedBox.expand(
+                        key: ValueKey('no-banner'),
                       ),
-                    )
-                  : const SizedBox.shrink(
-                      key: ValueKey('no-banner'),
-                    ),
+              ),
             ),
             if (_showDialog)
               Positioned.fill(
