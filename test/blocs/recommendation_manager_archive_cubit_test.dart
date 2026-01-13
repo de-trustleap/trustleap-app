@@ -29,7 +29,6 @@ void main() {
     final recommendations = <ArchivedRecommendationItem>[
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",

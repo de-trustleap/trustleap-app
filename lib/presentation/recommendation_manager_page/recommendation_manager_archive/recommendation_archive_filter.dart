@@ -26,14 +26,6 @@ class RecommendationArchiveFilter {
               aValue, bValue, filterStates.sortOrderFilterState);
         });
         break;
-      case RecommendationSortByFilterState.recommendationReceiver:
-        filtered.sort((a, b) {
-          final aValue = a.name ?? '';
-          final bValue = b.name ?? '';
-          return _sortStrings(
-              aValue, bValue, filterStates.sortOrderFilterState);
-        });
-        break;
       case RecommendationSortByFilterState.reason:
         filtered.sort((a, b) {
           final aValue = a.reason ?? '';

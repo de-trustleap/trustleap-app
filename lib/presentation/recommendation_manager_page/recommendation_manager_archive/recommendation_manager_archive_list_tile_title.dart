@@ -31,9 +31,7 @@ class RecommendationManagerArchiveListTileTitle extends StatelessWidget {
       Flexible(
           flex: 3,
           child: _buildCell(
-              isPromoter
-                  ? recommendation.name ?? ""
-                  : recommendation.promoterName ?? "",
+              recommendation.promoterName ?? "",
               themeData)),
       Flexible(
           flex: 3,
@@ -55,9 +53,7 @@ class RecommendationManagerArchiveListTileTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          isPromoter
-              ? recommendation.name ?? ""
-              : recommendation.promoterName ?? "",
+          recommendation.promoterName ?? "",
           style: themeData.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.w600,
           ),

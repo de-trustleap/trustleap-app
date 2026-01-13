@@ -255,10 +255,9 @@ void main() {
       () {
     final userID = "1";
     final date = DateTime.now();
-    final recommendations = [
+    final List<ArchivedRecommendationItem> recommendations = [
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",

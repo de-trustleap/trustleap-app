@@ -4,7 +4,6 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 
 class ArchivedRecommendationItem extends Equatable {
   final UniqueID id;
-  final String? name;
   final String? reason;
   final String? landingPageID;
   final String? promoterName;
@@ -17,7 +16,6 @@ class ArchivedRecommendationItem extends Equatable {
 
   const ArchivedRecommendationItem({
     required this.id,
-    required this.name,
     required this.reason,
     required this.landingPageID,
     required this.promoterName,
@@ -31,7 +29,6 @@ class ArchivedRecommendationItem extends Equatable {
 
   ArchivedRecommendationItem copyWith({
     UniqueID? id,
-    String? name,
     String? reason,
     String? landingPageID,
     String? promoterName,
@@ -44,7 +41,6 @@ class ArchivedRecommendationItem extends Equatable {
   }) {
     return ArchivedRecommendationItem(
       id: id ?? this.id,
-      name: name ?? this.name,
       reason: reason ?? this.reason,
       landingPageID: landingPageID ?? this.landingPageID,
       promoterName: promoterName ?? this.promoterName,
@@ -58,6 +54,13 @@ class ArchivedRecommendationItem extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [id, name, reason, landingPageID, promoterName, serviceProviderName, success, userID];
+  List<Object?> get props => [
+        id,
+        reason,
+        landingPageID,
+        promoterName,
+        serviceProviderName,
+        success,
+        userID
+      ];
 }

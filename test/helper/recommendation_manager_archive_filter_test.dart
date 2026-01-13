@@ -9,7 +9,6 @@ void main() {
     final testData = <ArchivedRecommendationItem>[
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
-          name: "Alice",
           reason: "Test 1",
           landingPageID: "test-landing-page",
           promoterName: "Promoter X",
@@ -21,7 +20,6 @@ void main() {
           expiresAt: null),
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("2"),
-          name: "Bob",
           reason: "Test 2",
           landingPageID: "test-landing-page",
           promoterName: "Promoter A",
@@ -33,7 +31,6 @@ void main() {
           expiresAt: null),
       ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("3"),
-          name: "Charlie",
           reason: "Test 3",
           landingPageID: "test-landing-page",
           promoterName: "Promoter B",
@@ -83,20 +80,6 @@ void main() {
 
       expect(result.map((e) => e.promoterName),
           ['Promoter A', 'Promoter B', 'Promoter X']);
-    });
-
-    test('sorts by receiver name descending', () {
-      final filter = RecommendationOverviewFilterStates(isArchive: true)
-        ..sortByFilterState =
-            RecommendationSortByFilterState.recommendationReceiver
-        ..sortOrderFilterState = RecommendationSortOrderFilterState.desc;
-
-      final result = RecommendationArchiveFilter.applyFilters(
-        items: testData,
-        filterStates: filter,
-      );
-
-      expect(result.map((e) => e.name), ['Charlie', 'Bob', 'Alice']);
     });
 
     test('sorts by finishedAt date ascending', () {
