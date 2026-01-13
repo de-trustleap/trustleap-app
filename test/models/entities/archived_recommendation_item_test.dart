@@ -4,12 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("ArchivedRecommendationItem_CopyWith", () {
-    test("set name with copyWith should set name for resulting object", () {
+    test("set reason with copyWith should set reason for resulting object", () {
       final date = DateTime.now();
       // Given
       final model = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
-          name: "Test",
           reason: "Test",
           promoterName: "Test",
           serviceProviderName: "Test",
@@ -21,8 +20,7 @@ void main() {
           landingPageID: "test-landing-page");
       final expectedResult = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
-          name: "Test new",
-          reason: "Test",
+          reason: "Test new",
           promoterName: "Test",
           serviceProviderName: "Test",
           success: true,
@@ -32,7 +30,7 @@ void main() {
           expiresAt: date,
           landingPageID: "test-landing-page");
       // When
-      final result = model.copyWith(name: "Test new");
+      final result = model.copyWith(reason: "Test new");
       // Then
       expect(result, expectedResult);
     });
@@ -44,7 +42,6 @@ void main() {
       // Given
       final model = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
-          name: "Test",
           reason: "Test",
           promoterName: "Test",
           serviceProviderName: "Test",
@@ -56,7 +53,6 @@ void main() {
           landingPageID: "test-landing-page");
       final model2 = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
-          name: "Test",
           reason: "Test",
           promoterName: "Test",
           serviceProviderName: "Test",

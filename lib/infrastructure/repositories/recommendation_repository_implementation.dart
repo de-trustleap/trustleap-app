@@ -703,7 +703,7 @@ class RecommendationRepositoryImplementation
 
     return RecommendationItem(
       id: archived.id.value,
-      name: archived.name,
+      name: null,
       reason: archived.reason,
       landingPageID: archived.landingPageID,
       promotionTemplate: null,
@@ -721,8 +721,8 @@ class RecommendationRepositoryImplementation
   }
 
   @override
-  Future<Either<DatabaseFailure, List<UserRecommendation>>> getRecommendationsWithArchived(
-      String userID) async {
+  Future<Either<DatabaseFailure, List<UserRecommendation>>>
+      getRecommendationsWithArchived(String userID) async {
     try {
       // 1. Get active recommendations
       final activeRecommendationsResult = await getRecommendations(userID);
@@ -732,7 +732,8 @@ class RecommendationRepositoryImplementation
       }
 
       // 2. Get archived recommendations
-      final archivedRecommendationsResult = await getArchivedRecommendations(userID);
+      final archivedRecommendationsResult =
+          await getArchivedRecommendations(userID);
       List<ArchivedRecommendationItem> archivedRecos = [];
       if (archivedRecommendationsResult.isRight()) {
         archivedRecos = archivedRecommendationsResult.getOrElse(() => []);
@@ -741,7 +742,8 @@ class RecommendationRepositoryImplementation
       // 3. Convert archived recommendations to UserRecommendations
       final List<UserRecommendation> convertedArchivedRecommendations =
           archivedRecos.map((archived) {
-        final recommendationItem = _convertArchivedToRecommendationItem(archived);
+        final recommendationItem =
+            _convertArchivedToRecommendationItem(archived);
         return UserRecommendation(
           id: archived.id,
           userID: archived.userID ?? userID,

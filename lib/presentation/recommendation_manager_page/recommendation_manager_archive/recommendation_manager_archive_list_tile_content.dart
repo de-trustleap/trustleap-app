@@ -30,18 +30,6 @@ class RecommendationManagerArchiveListTileContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                  localization.recommendation_manager_list_tile_receiver,
-                  style: themeData.textTheme.bodyMedium),
-              const SizedBox(height: 4),
-              Text(recommendation.name ?? "",
-                  style: themeData.textTheme.bodyMedium!
-                      .copyWith(fontWeight: FontWeight.bold))
-            ]),
-        const SizedBox(height: 16),
-        Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
                   localization.recommendation_manager_list_tile_reason,
                   style: themeData.textTheme.bodyMedium),
               const SizedBox(height: 4),
@@ -54,27 +42,13 @@ class RecommendationManagerArchiveListTileContent extends StatelessWidget {
   }
 
   Widget _buildDesktopContent(ThemeData themeData, AppLocalizations localization) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(localization.recommendation_manager_list_tile_receiver,
-              style: themeData.textTheme.bodyMedium),
-          const SizedBox(height: 4),
-          Text(recommendation.name ?? "",
-              style: themeData.textTheme.bodyMedium!
-                  .copyWith(fontWeight: FontWeight.bold))
-        ]),
-        const Spacer(),
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(localization.recommendation_manager_list_tile_reason,
-              style: themeData.textTheme.bodyMedium),
-          const SizedBox(height: 4),
-          Text(recommendation.reason ?? "",
-              style: themeData.textTheme.bodyMedium!
-                  .copyWith(fontWeight: FontWeight.bold))
-        ])
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(localization.recommendation_manager_list_tile_reason,
+          style: themeData.textTheme.bodyMedium),
+      const SizedBox(height: 4),
+      Text(recommendation.reason ?? "",
+          style: themeData.textTheme.bodyMedium!
+              .copyWith(fontWeight: FontWeight.bold))
+    ]);
   }
 }

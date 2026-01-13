@@ -6,7 +6,6 @@ import 'package:finanzbegleiter/domain/entities/id.dart';
 
 class ArchivedRecommendationItemModel extends Equatable {
   final String id;
-  final String? name;
   final String? reason;
   final String? landingPageID;
   final String? promoterName;
@@ -19,7 +18,6 @@ class ArchivedRecommendationItemModel extends Equatable {
 
   const ArchivedRecommendationItemModel({
     required this.id,
-    required this.name,
     required this.reason,
     required this.landingPageID,
     required this.promoterName,
@@ -33,7 +31,6 @@ class ArchivedRecommendationItemModel extends Equatable {
 
   ArchivedRecommendationItemModel copyWith({
     String? id,
-    String? name,
     String? reason,
     String? landingPageID,
     String? promoterName,
@@ -46,7 +43,6 @@ class ArchivedRecommendationItemModel extends Equatable {
   }) {
     return ArchivedRecommendationItemModel(
       id: id ?? this.id,
-      name: name ?? this.name,
       reason: reason ?? this.reason,
       landingPageID: landingPageID ?? this.landingPageID,
       promoterName: promoterName ?? this.promoterName,
@@ -62,7 +58,6 @@ class ArchivedRecommendationItemModel extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'name': name,
       'reason': reason,
       'landingPageID': landingPageID,
       'promoterName': promoterName,
@@ -78,9 +73,10 @@ class ArchivedRecommendationItemModel extends Equatable {
   factory ArchivedRecommendationItemModel.fromMap(Map<String, dynamic> map) {
     return ArchivedRecommendationItemModel(
         id: "",
-        name: map['name'] != null ? map['name'] as String : null,
         reason: map['reason'] != null ? map['reason'] as String : null,
-        landingPageID: map['landingPageID'] != null ? map['landingPageID'] as String : null,
+        landingPageID: map['landingPageID'] != null
+            ? map['landingPageID'] as String
+            : null,
         promoterName:
             map['promoterName'] != null ? map['promoterName'] as String : null,
         serviceProviderName: map['serviceProviderName'] != null
@@ -101,7 +97,6 @@ class ArchivedRecommendationItemModel extends Equatable {
   ArchivedRecommendationItem toDomain() {
     return ArchivedRecommendationItem(
         id: UniqueID.fromUniqueString(id),
-        name: name,
         reason: reason,
         landingPageID: landingPageID,
         promoterName: promoterName,
@@ -117,7 +112,6 @@ class ArchivedRecommendationItemModel extends Equatable {
       ArchivedRecommendationItem recommendation) {
     return ArchivedRecommendationItemModel(
         id: recommendation.id.value,
-        name: recommendation.name,
         reason: recommendation.reason,
         landingPageID: recommendation.landingPageID,
         promoterName: recommendation.promoterName,
@@ -130,6 +124,13 @@ class ArchivedRecommendationItemModel extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [id, name, reason, landingPageID, promoterName, serviceProviderName, success, userID];
+  List<Object?> get props => [
+        id,
+        reason,
+        landingPageID,
+        promoterName,
+        serviceProviderName,
+        success,
+        userID
+      ];
 }
