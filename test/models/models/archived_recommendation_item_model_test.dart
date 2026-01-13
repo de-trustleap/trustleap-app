@@ -13,7 +13,6 @@ void main() {
       // Given
       final model = ArchivedRecommendationItemModel(
           id: "1",
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",
@@ -25,7 +24,6 @@ void main() {
           expiresAt: date);
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test new",
@@ -48,7 +46,6 @@ void main() {
       // Given
       final model = ArchivedRecommendationItemModel(
           id: "1",
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",
@@ -60,7 +57,6 @@ void main() {
           expiresAt: date);
       final expectedResult = {
         "id": "1",
-        "name": "Test",
         "reason": "Test",
         "landingPageID": "test-landing-page",
         "promoterName": "Test",
@@ -84,7 +80,6 @@ void main() {
       // Given
       final map = {
         "id": "1",
-        "name": "Test",
         "reason": "Test",
         "landingPageID": "test-landing-page",
         "promoterName": "Test",
@@ -97,7 +92,6 @@ void main() {
       };
       final expectedResult = ArchivedRecommendationItemModel(
           id: "",
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",
@@ -120,7 +114,6 @@ void main() {
       // Given
       final map = {
         "id": "1",
-        "name": "Test",
         "reason": "Test",
         "landingPageID": "test-landing-page",
         "promoterName": "Test",
@@ -133,7 +126,6 @@ void main() {
       };
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",
@@ -158,7 +150,6 @@ void main() {
       // Given
       final model = ArchivedRecommendationItemModel(
           id: "1",
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",
@@ -170,7 +161,6 @@ void main() {
           expiresAt: date);
       final expectedResult = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",
@@ -195,7 +185,6 @@ void main() {
       // Given
       final model = ArchivedRecommendationItem(
           id: UniqueID.fromUniqueString("1"),
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",
@@ -207,7 +196,6 @@ void main() {
           expiresAt: date);
       final expectedResult = ArchivedRecommendationItemModel(
           id: "1",
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",
@@ -230,7 +218,6 @@ void main() {
       // Given
       final model = ArchivedRecommendationItemModel(
           id: "1",
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",
@@ -242,7 +229,6 @@ void main() {
           expiresAt: date);
       final model2 = ArchivedRecommendationItemModel(
           id: "1",
-          name: "Test",
           reason: "Test",
           landingPageID: "test-landing-page",
           promoterName: "Test",

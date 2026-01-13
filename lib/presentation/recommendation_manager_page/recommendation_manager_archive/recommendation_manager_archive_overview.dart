@@ -43,17 +43,16 @@ class _RecommendationManagerArchiveOverviewState
     final query = _searchController.text.toLowerCase();
     setState(() {
       _searchFilteredRecommendations = widget.recommendations.where((item) {
-        final name = item.name?.toLowerCase() ?? "";
         final promoter = item.promoterName?.toLowerCase() ?? "";
         final reason = item.reason?.toLowerCase() ?? "";
 
         switch (_selectedSearchOption) {
-          case RecommendationSearchOption.name:
-            return name.contains(query);
           case RecommendationSearchOption.promoterName:
             return promoter.contains(query);
           case RecommendationSearchOption.reason:
             return reason.contains(query);
+          case RecommendationSearchOption.name:
+            return false;
         }
       }).toList();
 
