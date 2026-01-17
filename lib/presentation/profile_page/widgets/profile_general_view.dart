@@ -63,12 +63,24 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                               columnSpacing: 60,
                               children: [
                                 ResponsiveRowColumnItem(
-                                  child: ContactSection(
-                                    user: state.user,
-                                    changesSaved: () => {
-                                      CustomSnackBar.of(context).showCustomSnackBar(
-                                        localization.profile_page_snackbar_contact_information_changes)
-                                    },
+                                  child: Column(
+                                    children: [
+                                      ContactSection(
+                                        user: state.user,
+                                        changesSaved: () => {
+                                          CustomSnackBar.of(context).showCustomSnackBar(
+                                            localization.profile_page_snackbar_contact_information_changes)
+                                        },
+                                      ),
+                                      if (isWideScreen) ...[
+                                        const SizedBox(height: 60),
+                                        SecondaryButton(
+                                          title: localization.profile_page_logout_button_title,
+                                          width: 200,
+                                          onTap: () =>
+                                              {BlocProvider.of<AuthCubit>(context).signOut()}),
+                                      ],
+                                    ],
                                   ),
                                 ),
                                 ResponsiveRowColumnItem(
@@ -97,14 +109,16 @@ class _ProfileGeneralViewState extends State<ProfileGeneralView>
                                 ),
                               ],
                             ),
-                            SizedBox(height: responsiveValue.isMobile ? 20 : 60),
-                            SecondaryButton(
-                              title: localization.profile_page_logout_button_title,
-                              width: responsiveValue.isMobile
-                                  ? responsiveValue.screenWidth - 80
-                                  : 200,
-                              onTap: () =>
-                                  {BlocProvider.of<AuthCubit>(context).signOut()}),
+                            if (!isWideScreen) ...[
+                              SizedBox(height: responsiveValue.isMobile ? 20 : 60),
+                              SecondaryButton(
+                                title: localization.profile_page_logout_button_title,
+                                width: responsiveValue.isMobile
+                                    ? responsiveValue.screenWidth - 80
+                                    : 200,
+                                onTap: () =>
+                                    {BlocProvider.of<AuthCubit>(context).signOut()}),
+                            ],
                             SizedBox(height: responsiveValue.isMobile ? 50 : 100)
                           ],
                         );
