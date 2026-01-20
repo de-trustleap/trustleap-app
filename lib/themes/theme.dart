@@ -356,3 +356,5 @@ class AppTheme {
           color: darkSecondaryColor,
           linearTrackColor: darkBackgroundContrastColor);
 }
+
+// TODO: IM PAGEBUILDER HTML TEXT EDITOR KANN MAN NICHT VERNÜNFTIG SCHREIBEN. DER CURSOR GEHT IMMER WOANDERS HIN. MEIST AN DEN ANFANG DES TEXTFELDES
