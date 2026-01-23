@@ -5559,6 +5559,30 @@ abstract class AppLocalizations {
   /// **'No templates available'**
   String get admin_area_template_manager_edit_no_templates;
 
+  /// Tooltip for the format JSON button in template editor
+  ///
+  /// In en, this message translates to:
+  /// **'Format JSON'**
+  String get admin_area_template_manager_json_format_tooltip;
+
+  /// Tooltip for the upload JSON file button in template editor
+  ///
+  /// In en, this message translates to:
+  /// **'Upload JSON file'**
+  String get admin_area_template_manager_json_upload_tooltip;
+
+  /// Error message for invalid JSON format in template editor
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid JSON format'**
+  String get admin_area_template_manager_json_invalid;
+
+  /// Label for new assets section in template editor
+  ///
+  /// In en, this message translates to:
+  /// **'New Assets'**
+  String get admin_area_template_manager_new_assets_label;
+
   /// Menu item for Templates in Admin Area
   ///
   /// In en, this message translates to:

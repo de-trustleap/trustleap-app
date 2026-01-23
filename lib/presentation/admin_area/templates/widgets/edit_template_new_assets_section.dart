@@ -26,7 +26,7 @@ class EditTemplateNewAssetsSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Neue Assets",
+              localization.admin_area_template_manager_new_assets_label,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),

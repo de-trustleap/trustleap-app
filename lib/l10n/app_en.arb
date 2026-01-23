@@ -3754,6 +3754,22 @@
     "@admin_area_template_manager_edit_no_templates": {
         "description": "Text when no templates are available in Admin Area"
     },
+    "admin_area_template_manager_json_format_tooltip": "Format JSON",
+    "@admin_area_template_manager_json_format_tooltip": {
+        "description": "Tooltip for the format JSON button in template editor"
+    },
+    "admin_area_template_manager_json_upload_tooltip": "Upload JSON file",
+    "@admin_area_template_manager_json_upload_tooltip": {
+        "description": "Tooltip for the upload JSON file button in template editor"
+    },
+    "admin_area_template_manager_json_invalid": "Invalid JSON format",
+    "@admin_area_template_manager_json_invalid": {
+        "description": "Error message for invalid JSON format in template editor"
+    },
+    "admin_area_template_manager_new_assets_label": "New Assets",
+    "@admin_area_template_manager_new_assets_label": {
+        "description": "Label for new assets section in template editor"
+    },
     "menuitems_templates": "Templates",
     "@menuitems_templates": {
         "description": "Menu item for Templates in Admin Area"

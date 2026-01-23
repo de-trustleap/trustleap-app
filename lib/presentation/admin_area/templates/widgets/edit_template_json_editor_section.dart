@@ -37,12 +37,12 @@ class EditTemplateJsonEditorSection extends StatelessWidget {
             IconButton(
               onPressed: onFormat,
               icon: const Icon(Icons.format_align_left),
-              tooltip: "JSON formatieren",
+              tooltip: localization.admin_area_template_manager_json_format_tooltip,
             ),
             IconButton(
               onPressed: onPickFile,
               icon: const Icon(Icons.upload_file),
-              tooltip: "JSON-Datei hochladen",
+              tooltip: localization.admin_area_template_manager_json_upload_tooltip,
             ),
           ],
         ),
@@ -79,7 +79,7 @@ class EditTemplateJsonEditorSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              "Ungültiges JSON-Format",
+              localization.admin_area_template_manager_json_invalid,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.error,
               ),

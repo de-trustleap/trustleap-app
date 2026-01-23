@@ -3203,6 +3203,19 @@ class AppLocalizationsEn extends AppLocalizations {
       'No templates available';
 
   @override
+  String get admin_area_template_manager_json_format_tooltip => 'Format JSON';
+
+  @override
+  String get admin_area_template_manager_json_upload_tooltip =>
+      'Upload JSON file';
+
+  @override
+  String get admin_area_template_manager_json_invalid => 'Invalid JSON format';
+
+  @override
+  String get admin_area_template_manager_new_assets_label => 'New Assets';
+
+  @override
   String get menuitems_templates => 'Templates';
 
   @override
