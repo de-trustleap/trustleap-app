@@ -3180,6 +3180,42 @@ class AppLocalizationsEn extends AppLocalizations {
       'Template uploaded successfully!';
 
   @override
+  String get admin_area_template_manager_tab_create => 'Create template';
+
+  @override
+  String get admin_area_template_manager_tab_edit => 'Edit templates';
+
+  @override
+  String get admin_area_template_manager_edit_dialog_title => 'Edit template';
+
+  @override
+  String get admin_area_template_manager_edit_success =>
+      'Template updated successfully!';
+
+  @override
+  String get admin_area_template_manager_edit_button => 'Update template';
+
+  @override
+  String get admin_area_template_manager_edit_loading => 'Loading templates...';
+
+  @override
+  String get admin_area_template_manager_edit_no_templates =>
+      'No templates available';
+
+  @override
+  String get admin_area_template_manager_json_format_tooltip => 'Format JSON';
+
+  @override
+  String get admin_area_template_manager_json_upload_tooltip =>
+      'Upload JSON file';
+
+  @override
+  String get admin_area_template_manager_json_invalid => 'Invalid JSON format';
+
+  @override
+  String get admin_area_template_manager_new_assets_label => 'New Assets';
+
+  @override
   String get menuitems_templates => 'Templates';
 
   @override

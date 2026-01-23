@@ -3726,6 +3726,50 @@
     "@admin_area_template_manager_success_message": {
         "description": "Success message after template upload in Admin Area for Pagebuilder Section Template Upload"
     },
+    "admin_area_template_manager_tab_create": "Create template",
+    "@admin_area_template_manager_tab_create": {
+        "description": "Tab label for create template in Admin Area Template Manager"
+    },
+    "admin_area_template_manager_tab_edit": "Edit templates",
+    "@admin_area_template_manager_tab_edit": {
+        "description": "Tab label for edit templates in Admin Area Template Manager"
+    },
+    "admin_area_template_manager_edit_dialog_title": "Edit template",
+    "@admin_area_template_manager_edit_dialog_title": {
+        "description": "Dialog title for edit template in Admin Area"
+    },
+    "admin_area_template_manager_edit_success": "Template updated successfully!",
+    "@admin_area_template_manager_edit_success": {
+        "description": "Success message after template edit in Admin Area"
+    },
+    "admin_area_template_manager_edit_button": "Update template",
+    "@admin_area_template_manager_edit_button": {
+        "description": "Button text for update template in Admin Area"
+    },
+    "admin_area_template_manager_edit_loading": "Loading templates...",
+    "@admin_area_template_manager_edit_loading": {
+        "description": "Loading text when loading templates in Admin Area"
+    },
+    "admin_area_template_manager_edit_no_templates": "No templates available",
+    "@admin_area_template_manager_edit_no_templates": {
+        "description": "Text when no templates are available in Admin Area"
+    },
+    "admin_area_template_manager_json_format_tooltip": "Format JSON",
+    "@admin_area_template_manager_json_format_tooltip": {
+        "description": "Tooltip for the format JSON button in template editor"
+    },
+    "admin_area_template_manager_json_upload_tooltip": "Upload JSON file",
+    "@admin_area_template_manager_json_upload_tooltip": {
+        "description": "Tooltip for the upload JSON file button in template editor"
+    },
+    "admin_area_template_manager_json_invalid": "Invalid JSON format",
+    "@admin_area_template_manager_json_invalid": {
+        "description": "Error message for invalid JSON format in template editor"
+    },
+    "admin_area_template_manager_new_assets_label": "New Assets",
+    "@admin_area_template_manager_new_assets_label": {
+        "description": "Label for new assets section in template editor"
+    },
     "menuitems_templates": "Templates",
     "@menuitems_templates": {
         "description": "Menu item for Templates in Admin Area"

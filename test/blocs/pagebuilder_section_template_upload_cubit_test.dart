@@ -3,6 +3,8 @@ import "dart:typed_data";
 import "package:dartz/dartz.dart";
 import "package:finanzbegleiter/application/pagebuilder_section_template_upload/pagebuilder_section_template_upload_cubit.dart";
 import "package:finanzbegleiter/core/failures/database_failures.dart";
+import "package:finanzbegleiter/domain/entities/pagebuilder_section_template_asset_replacement.dart";
+import "package:finanzbegleiter/domain/entities/pagebuilder_section_template_edit.dart";
 import "package:finanzbegleiter/domain/entities/pagebuilder_section_template_upload.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:mockito/mockito.dart";
@@ -285,6 +287,300 @@ void main() {
       final state1 =
           PagebuilderSectionTemplateUploadFailure(failure: BackendFailure());
       final state2 = PagebuilderSectionTemplateUploadFailure(
+          failure: PermissionDeniedFailure());
+
+      expect(state1, isNot(equals(state2)));
+    });
+  });
+
+  group("PagebuilderSectionTemplateUploadCubit_EditTemplate", () {
+    final testEditTemplate = PagebuilderSectionTemplateEdit(
+      templateId: "test-template-id",
+      environment: "staging",
+      jsonData: Uint8List.fromList([1, 2, 3, 4]),
+      thumbnailData: Uint8List.fromList([5, 6, 7, 8]),
+      deletedAssetUrls: ["https://example.com/deleted.webp"],
+      replacements: [
+        PagebuilderSectionTemplateAssetReplacement(
+          oldUrl: "https://example.com/old.webp",
+          newAssetData: Uint8List.fromList([9, 10, 11, 12]),
+        ),
+      ],
+      newAssetDataList: [Uint8List.fromList([13, 14, 15, 16])],
+      type: "hero",
+    );
+
+    test("should call repository when function is called", () async {
+      // Given
+      when(mockRepo.editTemplate(testEditTemplate))
+          .thenAnswer((_) async => right(unit));
+
+      // When
+      cubit.editTemplate(testEditTemplate);
+      await untilCalled(mockRepo.editTemplate(testEditTemplate));
+
+      // Then
+      verify(mockRepo.editTemplate(testEditTemplate));
+      verifyNoMoreInteractions(mockRepo);
+    });
+
+    test(
+        "should emit PagebuilderSectionTemplateEditLoading and then PagebuilderSectionTemplateEditSuccess when edit was successful",
+        () async {
+      // Given
+      final expectedResult = [
+        isA<PagebuilderSectionTemplateEditLoading>(),
+        isA<PagebuilderSectionTemplateEditSuccess>()
+      ];
+      when(mockRepo.editTemplate(testEditTemplate))
+          .thenAnswer((_) async => right(unit));
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.editTemplate(testEditTemplate);
+    });
+
+    test(
+        "should emit Loading and then Failure when edit has failed with PermissionDeniedFailure",
+        () async {
+      // Given
+      final failure = PermissionDeniedFailure();
+      final expectedResult = [
+        isA<PagebuilderSectionTemplateEditLoading>(),
+        predicate<PagebuilderSectionTemplateEditFailure>(
+            (state) => state.failure == failure)
+      ];
+      when(mockRepo.editTemplate(testEditTemplate))
+          .thenAnswer((_) async => left(failure));
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.editTemplate(testEditTemplate);
+    });
+
+    test(
+        "should emit Loading and then Failure when edit has failed with BackendFailure",
+        () async {
+      // Given
+      final failure = BackendFailure();
+      final expectedResult = [
+        isA<PagebuilderSectionTemplateEditLoading>(),
+        predicate<PagebuilderSectionTemplateEditFailure>(
+            (state) => state.failure == failure)
+      ];
+      when(mockRepo.editTemplate(testEditTemplate))
+          .thenAnswer((_) async => left(failure));
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.editTemplate(testEditTemplate);
+    });
+
+    test(
+        "should emit Loading and then Failure when edit has failed with UnavailableFailure",
+        () async {
+      // Given
+      final failure = UnavailableFailure();
+      final expectedResult = [
+        isA<PagebuilderSectionTemplateEditLoading>(),
+        predicate<PagebuilderSectionTemplateEditFailure>(
+            (state) => state.failure == failure)
+      ];
+      when(mockRepo.editTemplate(testEditTemplate))
+          .thenAnswer((_) async => left(failure));
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.editTemplate(testEditTemplate);
+    });
+
+    test("should handle edit with minimal fields correctly", () async {
+      // Given
+      final minimalEditTemplate = PagebuilderSectionTemplateEdit(
+        templateId: "test-template-id",
+        environment: "both",
+      );
+      final expectedResult = [
+        isA<PagebuilderSectionTemplateEditLoading>(),
+        isA<PagebuilderSectionTemplateEditSuccess>()
+      ];
+      when(mockRepo.editTemplate(minimalEditTemplate))
+          .thenAnswer((_) async => right(unit));
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.editTemplate(minimalEditTemplate);
+    });
+
+    test("should handle different section types correctly", () async {
+      // Given
+      final types = [
+        "hero",
+        "about",
+        "product",
+        "callToAction",
+        "advantages",
+        "footer"
+      ];
+
+      for (var type in types) {
+        final template = PagebuilderSectionTemplateEdit(
+          templateId: "test-template-id-$type",
+          environment: "staging",
+          type: type,
+        );
+
+        when(mockRepo.editTemplate(template))
+            .thenAnswer((_) async => right(unit));
+
+        // When
+        cubit.editTemplate(template);
+        await untilCalled(mockRepo.editTemplate(template));
+
+        // Then
+        expect(cubit.state, isA<PagebuilderSectionTemplateEditSuccess>());
+      }
+
+      verify(mockRepo.editTemplate(any)).called(types.length);
+      verifyNoMoreInteractions(mockRepo);
+    });
+
+    test("should handle different environments correctly", () async {
+      // Given
+      final environments = ["staging", "prod", "both"];
+
+      for (var env in environments) {
+        final template = PagebuilderSectionTemplateEdit(
+          templateId: "test-template-id-$env",
+          environment: env,
+        );
+
+        when(mockRepo.editTemplate(template))
+            .thenAnswer((_) async => right(unit));
+
+        // When
+        cubit.editTemplate(template);
+        await untilCalled(mockRepo.editTemplate(template));
+
+        // Then
+        expect(cubit.state, isA<PagebuilderSectionTemplateEditSuccess>());
+      }
+
+      verify(mockRepo.editTemplate(any)).called(environments.length);
+      verifyNoMoreInteractions(mockRepo);
+    });
+
+    test("should handle edit with multiple replacements correctly", () async {
+      // Given
+      final multiReplacementTemplate = PagebuilderSectionTemplateEdit(
+        templateId: "test-template-id",
+        environment: "staging",
+        replacements: [
+          PagebuilderSectionTemplateAssetReplacement(
+            oldUrl: "https://example.com/old1.webp",
+            newAssetData: Uint8List.fromList([1, 2, 3]),
+          ),
+          PagebuilderSectionTemplateAssetReplacement(
+            oldUrl: "https://example.com/old2.webp",
+            newAssetData: Uint8List.fromList([4, 5, 6]),
+          ),
+          PagebuilderSectionTemplateAssetReplacement(
+            oldUrl: "https://example.com/old3.webp",
+            newAssetData: Uint8List.fromList([7, 8, 9]),
+          ),
+        ],
+      );
+      final expectedResult = [
+        isA<PagebuilderSectionTemplateEditLoading>(),
+        isA<PagebuilderSectionTemplateEditSuccess>()
+      ];
+      when(mockRepo.editTemplate(multiReplacementTemplate))
+          .thenAnswer((_) async => right(unit));
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.editTemplate(multiReplacementTemplate);
+    });
+
+    test("should handle edit with multiple deleted assets correctly",
+        () async {
+      // Given
+      final multiDeleteTemplate = PagebuilderSectionTemplateEdit(
+        templateId: "test-template-id",
+        environment: "staging",
+        deletedAssetUrls: [
+          "https://example.com/deleted1.webp",
+          "https://example.com/deleted2.webp",
+          "https://example.com/deleted3.webp",
+        ],
+      );
+      final expectedResult = [
+        isA<PagebuilderSectionTemplateEditLoading>(),
+        isA<PagebuilderSectionTemplateEditSuccess>()
+      ];
+      when(mockRepo.editTemplate(multiDeleteTemplate))
+          .thenAnswer((_) async => right(unit));
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.editTemplate(multiDeleteTemplate);
+    });
+
+    test("should handle edit with multiple new assets correctly", () async {
+      // Given
+      final multiNewAssetTemplate = PagebuilderSectionTemplateEdit(
+        templateId: "test-template-id",
+        environment: "staging",
+        newAssetDataList: [
+          Uint8List.fromList([1, 2, 3]),
+          Uint8List.fromList([4, 5, 6]),
+          Uint8List.fromList([7, 8, 9]),
+        ],
+      );
+      final expectedResult = [
+        isA<PagebuilderSectionTemplateEditLoading>(),
+        isA<PagebuilderSectionTemplateEditSuccess>()
+      ];
+      when(mockRepo.editTemplate(multiNewAssetTemplate))
+          .thenAnswer((_) async => right(unit));
+
+      // Then
+      expectLater(cubit.stream, emitsInOrder(expectedResult));
+      cubit.editTemplate(multiNewAssetTemplate);
+    });
+  });
+
+  group("PagebuilderSectionTemplateUploadCubit Edit state equality", () {
+    test("two PagebuilderSectionTemplateEditLoading should be equal", () {
+      final state1 = PagebuilderSectionTemplateEditLoading();
+      final state2 = PagebuilderSectionTemplateEditLoading();
+
+      expect(state1, equals(state2));
+    });
+
+    test("two PagebuilderSectionTemplateEditSuccess should be equal", () {
+      final state1 = PagebuilderSectionTemplateEditSuccess();
+      final state2 = PagebuilderSectionTemplateEditSuccess();
+
+      expect(state1, equals(state2));
+    });
+
+    test(
+        "two PagebuilderSectionTemplateEditFailure with same failure should be equal",
+        () {
+      final failure = BackendFailure();
+      final state1 = PagebuilderSectionTemplateEditFailure(failure: failure);
+      final state2 = PagebuilderSectionTemplateEditFailure(failure: failure);
+
+      expect(state1, equals(state2));
+    });
+
+    test(
+        "two PagebuilderSectionTemplateEditFailure with different failures should not be equal",
+        () {
+      final state1 =
+          PagebuilderSectionTemplateEditFailure(failure: BackendFailure());
+      final state2 = PagebuilderSectionTemplateEditFailure(
           failure: PermissionDeniedFailure());
 
       expect(state1, isNot(equals(state2)));

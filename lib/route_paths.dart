@@ -8,6 +8,8 @@ class RoutePaths {
   static const String userFeedback = "/user-feedback";
   static const String legals = "/legals";
   static const String templates = "/templates";
+  static const String templateCreatePath = "/create";
+  static const String templateEditPath = "/edit";
 
   static const String homePath = "/home";
   static const String dashboardPath = "/dashboard";

@@ -8557,6 +8557,71 @@ class MockAppLocalizations extends _i1.Mock implements _i2.AppLocalizations {
       ) as String);
 
   @override
+  String get admin_area_template_manager_tab_create => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_tab_create),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_tab_create),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_tab_edit => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_tab_edit),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_tab_edit),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_dialog_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_dialog_title),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_dialog_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_success => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_success),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_success),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_button => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_button),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_button),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_loading => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_loading),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_loading),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_no_templates =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_no_templates),
+        returnValue: _i3.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_no_templates),
+        ),
+      ) as String);
+
+  @override
   String get menuitems_templates => (super.noSuchMethod(
         Invocation.getter(#menuitems_templates),
         returnValue: _i3.dummyValue<String>(

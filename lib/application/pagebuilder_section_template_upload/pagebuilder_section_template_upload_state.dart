@@ -29,3 +29,25 @@ final class PagebuilderSectionTemplateUploadFailure
   @override
   List<Object?> get props => [failure];
 }
+
+final class PagebuilderSectionTemplateEditLoading
+    extends PagebuilderSectionTemplateUploadState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+final class PagebuilderSectionTemplateEditSuccess
+    extends PagebuilderSectionTemplateUploadState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+final class PagebuilderSectionTemplateEditFailure
+    extends PagebuilderSectionTemplateUploadState with EquatableMixin {
+  final DatabaseFailure failure;
+
+  PagebuilderSectionTemplateEditFailure({required this.failure});
+
+  @override
+  List<Object?> get props => [failure];
+}
