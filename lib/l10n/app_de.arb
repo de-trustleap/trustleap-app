@@ -3726,6 +3726,34 @@
     "@admin_area_template_manager_success_message": {
         "description": "Erfolgsmeldung nach Template-Upload im Admin Area beim Pagebuilder Section Template Upload"
     },
+    "admin_area_template_manager_tab_create": "Template erstellen",
+    "@admin_area_template_manager_tab_create": {
+        "description": "Tab-Label für Template erstellen im Admin Area Template Manager"
+    },
+    "admin_area_template_manager_tab_edit": "Templates bearbeiten",
+    "@admin_area_template_manager_tab_edit": {
+        "description": "Tab-Label für Templates bearbeiten im Admin Area Template Manager"
+    },
+    "admin_area_template_manager_edit_dialog_title": "Template bearbeiten",
+    "@admin_area_template_manager_edit_dialog_title": {
+        "description": "Dialog-Titel für Template bearbeiten im Admin Area"
+    },
+    "admin_area_template_manager_edit_success": "Template erfolgreich aktualisiert!",
+    "@admin_area_template_manager_edit_success": {
+        "description": "Erfolgsmeldung nach Template-Edit im Admin Area"
+    },
+    "admin_area_template_manager_edit_button": "Template aktualisieren",
+    "@admin_area_template_manager_edit_button": {
+        "description": "Button-Text für Template aktualisieren im Admin Area"
+    },
+    "admin_area_template_manager_edit_loading": "Templates werden geladen...",
+    "@admin_area_template_manager_edit_loading": {
+        "description": "Ladetext beim Laden der Templates im Admin Area"
+    },
+    "admin_area_template_manager_edit_no_templates": "Keine Templates vorhanden",
+    "@admin_area_template_manager_edit_no_templates": {
+        "description": "Text wenn keine Templates vorhanden sind im Admin Area"
+    },
     "menuitems_templates": "Templates",
     "@menuitems_templates": {
         "description": "Menüeintrag für Templates im Admin Area"

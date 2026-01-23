@@ -25,7 +25,13 @@ class AdminModule extends Module {
               child: (_) => const AdminFeedbackPage()),
           ChildRoute(RoutePaths.legals, child: (_) => const AdminLegalsPage()),
           ChildRoute(RoutePaths.templates,
-              child: (_) => const TemplateManagerPage())
+              child: (_) => const TemplateManagerPage(),
+              children: [
+                ChildRoute(RoutePaths.templateCreatePath,
+                    child: (_) => const TemplateManagerPage()),
+                ChildRoute(RoutePaths.templateEditPath,
+                    child: (_) => const TemplateManagerPage()),
+              ])
         ]);
     r.wildcard(child: (_) => const AdminArea());
   }

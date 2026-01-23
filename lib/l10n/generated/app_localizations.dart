@@ -5517,6 +5517,48 @@ abstract class AppLocalizations {
   /// **'Template uploaded successfully!'**
   String get admin_area_template_manager_success_message;
 
+  /// Tab label for create template in Admin Area Template Manager
+  ///
+  /// In en, this message translates to:
+  /// **'Create template'**
+  String get admin_area_template_manager_tab_create;
+
+  /// Tab label for edit templates in Admin Area Template Manager
+  ///
+  /// In en, this message translates to:
+  /// **'Edit templates'**
+  String get admin_area_template_manager_tab_edit;
+
+  /// Dialog title for edit template in Admin Area
+  ///
+  /// In en, this message translates to:
+  /// **'Edit template'**
+  String get admin_area_template_manager_edit_dialog_title;
+
+  /// Success message after template edit in Admin Area
+  ///
+  /// In en, this message translates to:
+  /// **'Template updated successfully!'**
+  String get admin_area_template_manager_edit_success;
+
+  /// Button text for update template in Admin Area
+  ///
+  /// In en, this message translates to:
+  /// **'Update template'**
+  String get admin_area_template_manager_edit_button;
+
+  /// Loading text when loading templates in Admin Area
+  ///
+  /// In en, this message translates to:
+  /// **'Loading templates...'**
+  String get admin_area_template_manager_edit_loading;
+
+  /// Text when no templates are available in Admin Area
+  ///
+  /// In en, this message translates to:
+  /// **'No templates available'**
+  String get admin_area_template_manager_edit_no_templates;
+
   /// Menu item for Templates in Admin Area
   ///
   /// In en, this message translates to:

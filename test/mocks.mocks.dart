@@ -7,7 +7,7 @@ import 'dart:async' as _i12;
 import 'dart:io' as _i31;
 import 'dart:typed_data' as _i29;
 
-import 'package:bloc/bloc.dart' as _i66;
+import 'package:bloc/bloc.dart' as _i67;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i11;
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart'
     as _i10;
@@ -16,11 +16,11 @@ import 'package:cloud_functions_platform_interface/cloud_functions_platform_inte
     as _i14;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_config_menu/pagebuilder_config_menu_cubit.dart'
-    as _i63;
+    as _i64;
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_selection/pagebuilder_selection_cubit.dart'
-    as _i67;
-import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
     as _i68;
+import 'package:finanzbegleiter/application/recommendation_manager/recommendation_manager_tile/recommendation_manager_tile_cubit.dart'
+    as _i69;
 import 'package:finanzbegleiter/constants.dart' as _i30;
 import 'package:finanzbegleiter/core/failures/auth_failures.dart' as _i21;
 import 'package:finanzbegleiter/core/failures/database_failures.dart' as _i22;
@@ -44,15 +44,17 @@ import 'package:finanzbegleiter/domain/entities/legals.dart' as _i50;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_ai_generation.dart'
     as _i34;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_page.dart'
-    as _i62;
+    as _i63;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart'
-    as _i65;
+    as _i66;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template.dart'
     as _i57;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template_meta.dart'
     as _i56;
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_widget.dart'
-    as _i64;
+    as _i65;
+import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_edit.dart'
+    as _i60;
 import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_upload.dart'
     as _i59;
 import 'package:finanzbegleiter/domain/entities/permissions.dart' as _i40;
@@ -75,7 +77,7 @@ import 'package:finanzbegleiter/domain/repositories/calendly_repository.dart'
 import 'package:finanzbegleiter/domain/repositories/company_repository.dart'
     as _i24;
 import 'package:finanzbegleiter/domain/repositories/consent_repository.dart'
-    as _i60;
+    as _i61;
 import 'package:finanzbegleiter/domain/repositories/dashboard_repository.dart'
     as _i51;
 import 'package:finanzbegleiter/domain/repositories/feedback_repository.dart'
@@ -87,7 +89,7 @@ import 'package:finanzbegleiter/domain/repositories/landing_page_repository.dart
 import 'package:finanzbegleiter/domain/repositories/legals_repository.dart'
     as _i49;
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_repository.dart'
-    as _i61;
+    as _i62;
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_repository.dart'
     as _i55;
 import 'package:finanzbegleiter/domain/repositories/pagebuilder_section_template_upload_repository.dart'
@@ -8982,6 +8984,71 @@ class MockAppLocalizations extends _i1.Mock implements _i16.AppLocalizations {
       ) as String);
 
   @override
+  String get admin_area_template_manager_tab_create => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_tab_create),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_tab_create),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_tab_edit => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_tab_edit),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_tab_edit),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_dialog_title =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_dialog_title),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_dialog_title),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_success => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_success),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_success),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_button => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_button),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_button),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_loading => (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_loading),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_loading),
+        ),
+      ) as String);
+
+  @override
+  String get admin_area_template_manager_edit_no_templates =>
+      (super.noSuchMethod(
+        Invocation.getter(#admin_area_template_manager_edit_no_templates),
+        returnValue: _i17.dummyValue<String>(
+          this,
+          Invocation.getter(#admin_area_template_manager_edit_no_templates),
+        ),
+      ) as String);
+
+  @override
   String get menuitems_templates => (super.noSuchMethod(
         Invocation.getter(#menuitems_templates),
         returnValue: _i17.dummyValue<String>(
@@ -11653,12 +11720,31 @@ class MockPagebuilderSectionTemplateUploadRepository extends _i1.Mock
           ),
         )),
       ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
+
+  @override
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>> editTemplate(
+          _i60.PagebuilderSectionTemplateEdit? template) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #editTemplate,
+          [template],
+        ),
+        returnValue:
+            _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #editTemplate,
+            [template],
+          ),
+        )),
+      ) as _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>);
 }
 
 /// A class which mocks [ConsentRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockConsentRepository extends _i1.Mock implements _i60.ConsentRepository {
+class MockConsentRepository extends _i1.Mock implements _i61.ConsentRepository {
   MockConsentRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -12109,13 +12195,13 @@ class MockUser extends _i1.Mock implements _i4.User {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderRepository extends _i1.Mock
-    implements _i61.PagebuilderRepository {
+    implements _i62.PagebuilderRepository {
   MockPagebuilderRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i62.PageBuilderPage>>
+  _i12.Future<_i2.Either<_i22.DatabaseFailure, _i63.PageBuilderPage>>
       getLandingPageContent(String? id) => (super.noSuchMethod(
             Invocation.method(
               #getLandingPageContent,
@@ -12123,8 +12209,8 @@ class MockPagebuilderRepository extends _i1.Mock
             ),
             returnValue: _i12.Future<
                     _i2
-                    .Either<_i22.DatabaseFailure, _i62.PageBuilderPage>>.value(
-                _FakeEither_0<_i22.DatabaseFailure, _i62.PageBuilderPage>(
+                    .Either<_i22.DatabaseFailure, _i63.PageBuilderPage>>.value(
+                _FakeEither_0<_i22.DatabaseFailure, _i63.PageBuilderPage>(
               this,
               Invocation.method(
                 #getLandingPageContent,
@@ -12132,11 +12218,11 @@ class MockPagebuilderRepository extends _i1.Mock
               ),
             )),
           ) as _i12
-              .Future<_i2.Either<_i22.DatabaseFailure, _i62.PageBuilderPage>>);
+              .Future<_i2.Either<_i22.DatabaseFailure, _i63.PageBuilderPage>>);
 
   @override
   _i12.Future<_i2.Either<_i22.DatabaseFailure, _i2.Unit>>
-      saveLandingPageContent(_i62.PageBuilderPage? page) => (super.noSuchMethod(
+      saveLandingPageContent(_i63.PageBuilderPage? page) => (super.noSuchMethod(
             Invocation.method(
               #saveLandingPageContent,
               [page],
@@ -12157,26 +12243,26 @@ class MockPagebuilderRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderConfigMenuCubit extends _i1.Mock
-    implements _i63.PagebuilderConfigMenuCubit {
+    implements _i64.PagebuilderConfigMenuCubit {
   MockPagebuilderConfigMenuCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i63.PagebuilderConfigMenuState get state => (super.noSuchMethod(
+  _i64.PagebuilderConfigMenuState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i17.dummyValue<_i63.PagebuilderConfigMenuState>(
+        returnValue: _i17.dummyValue<_i64.PagebuilderConfigMenuState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i63.PagebuilderConfigMenuState);
+      ) as _i64.PagebuilderConfigMenuState);
 
   @override
-  _i12.Stream<_i63.PagebuilderConfigMenuState> get stream =>
+  _i12.Stream<_i64.PagebuilderConfigMenuState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i12.Stream<_i63.PagebuilderConfigMenuState>.empty(),
-      ) as _i12.Stream<_i63.PagebuilderConfigMenuState>);
+        returnValue: _i12.Stream<_i64.PagebuilderConfigMenuState>.empty(),
+      ) as _i12.Stream<_i64.PagebuilderConfigMenuState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12185,7 +12271,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       ) as bool);
 
   @override
-  void openConfigMenu(_i64.PageBuilderWidget? model) => super.noSuchMethod(
+  void openConfigMenu(_i65.PageBuilderWidget? model) => super.noSuchMethod(
         Invocation.method(
           #openConfigMenu,
           [model],
@@ -12194,7 +12280,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void openSectionConfigMenu(_i65.PageBuilderSection? model) =>
+  void openSectionConfigMenu(_i66.PageBuilderSection? model) =>
       super.noSuchMethod(
         Invocation.method(
           #openSectionConfigMenu,
@@ -12222,7 +12308,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void emit(_i63.PagebuilderConfigMenuState? state) => super.noSuchMethod(
+  void emit(_i64.PagebuilderConfigMenuState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12231,7 +12317,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i66.Change<_i63.PagebuilderConfigMenuState>? change) =>
+  void onChange(_i67.Change<_i64.PagebuilderConfigMenuState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -12287,7 +12373,7 @@ class MockPagebuilderConfigMenuCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPagebuilderSelectionCubit extends _i1.Mock
-    implements _i67.PagebuilderSelectionCubit {
+    implements _i68.PagebuilderSelectionCubit {
   MockPagebuilderSelectionCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -12323,7 +12409,7 @@ class MockPagebuilderSelectionCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i66.Change<String?>? change) => super.noSuchMethod(
+  void onChange(_i67.Change<String?>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -12378,7 +12464,7 @@ class MockPagebuilderSelectionCubit extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRecommendationManagerTileCubit extends _i1.Mock
-    implements _i68.RecommendationManagerTileCubit {
+    implements _i69.RecommendationManagerTileCubit {
   MockRecommendationManagerTileCubit() {
     _i1.throwOnMissingStub(this);
   }
@@ -12408,20 +12494,20 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as List<String>);
 
   @override
-  _i68.RecommendationManagerTileState get state => (super.noSuchMethod(
+  _i69.RecommendationManagerTileState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i17.dummyValue<_i68.RecommendationManagerTileState>(
+        returnValue: _i17.dummyValue<_i69.RecommendationManagerTileState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i68.RecommendationManagerTileState);
+      ) as _i69.RecommendationManagerTileState);
 
   @override
-  _i12.Stream<_i68.RecommendationManagerTileState> get stream =>
+  _i12.Stream<_i69.RecommendationManagerTileState> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i12.Stream<_i68.RecommendationManagerTileState>.empty(),
-      ) as _i12.Stream<_i68.RecommendationManagerTileState>);
+        returnValue: _i12.Stream<_i69.RecommendationManagerTileState>.empty(),
+      ) as _i12.Stream<_i69.RecommendationManagerTileState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -12534,7 +12620,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       ) as _i12.Future<String>);
 
   @override
-  void emit(_i68.RecommendationManagerTileState? state) => super.noSuchMethod(
+  void emit(_i69.RecommendationManagerTileState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -12543,7 +12629,7 @@ class MockRecommendationManagerTileCubit extends _i1.Mock
       );
 
   @override
-  void onChange(_i66.Change<_i68.RecommendationManagerTileState>? change) =>
+  void onChange(_i67.Change<_i69.RecommendationManagerTileState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
