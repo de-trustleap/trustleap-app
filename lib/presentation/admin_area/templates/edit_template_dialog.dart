@@ -1,24 +1,26 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:finanzbegleiter/application/pagebuilder/pagebuilder_section_template/pagebuilder_section_template_cubit.dart';
 import 'package:finanzbegleiter/application/pagebuilder_section_template_upload/pagebuilder_section_template_upload_cubit.dart';
 import 'package:finanzbegleiter/constants.dart';
-import 'package:finanzbegleiter/core/custom_navigator.dart';
 import 'package:finanzbegleiter/core/failures/database_failure_mapper.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder/pagebuilder_section_template_meta.dart';
 import 'package:finanzbegleiter/domain/entities/pagebuilder_section_template_edit.dart';
 import 'package:finanzbegleiter/infrastructure/models/pagebuilder/pagebuilder_section_model.dart';
 import 'package:finanzbegleiter/l10n/generated/app_localizations.dart';
+import 'package:finanzbegleiter/presentation/admin_area/templates/widgets/edit_template_dropdowns.dart';
+import 'package:finanzbegleiter/presentation/admin_area/templates/widgets/edit_template_existing_assets_section.dart';
+import 'package:finanzbegleiter/presentation/admin_area/templates/widgets/edit_template_json_editor_section.dart';
+import 'package:finanzbegleiter/presentation/admin_area/templates/widgets/edit_template_new_assets_section.dart';
+import 'package:finanzbegleiter/presentation/admin_area/templates/widgets/edit_template_thumbnail_section.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/custom_snackbar.dart';
 import 'package:finanzbegleiter/presentation/core/shared_elements/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
-import 'package:flutter_highlight/themes/monokai-sublime.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highlight/languages/json.dart' as highlight_json;
 
@@ -157,6 +159,13 @@ class _EditTemplateDialogState extends State<EditTemplateDialog> {
     });
   }
 
+  void _removeExistingAsset(String url) {
+    setState(() {
+      _existingAssetUrls.remove(url);
+      _deletedAssetUrls.add(url);
+    });
+  }
+
   Uint8List? _getJsonDataIfChanged() {
     if (_jsonController == null) return null;
     final currentJson = _jsonController!.text;
@@ -186,7 +195,6 @@ class _EditTemplateDialogState extends State<EditTemplateDialog> {
     final theme = Theme.of(context);
     final localization = AppLocalizations.of(context);
     final uploadCubit = Modular.get<PagebuilderSectionTemplateUploadCubit>();
-    final navigator = CustomNavigator.of(context);
 
     return BlocListener<PagebuilderSectionTemplateCubit,
         PagebuilderSectionTemplateState>(
@@ -223,7 +231,7 @@ class _EditTemplateDialogState extends State<EditTemplateDialog> {
               localization.admin_area_template_manager_edit_success,
               SnackBarType.success,
             );
-            navigator.pop();
+            Navigator.of(context).pop();
           } else if (state is PagebuilderSectionTemplateEditFailure) {
             final errorMessage = DatabaseFailureMapper.mapFailureMessage(
                 state.failure, localization);
@@ -241,114 +249,8 @@ class _EditTemplateDialogState extends State<EditTemplateDialog> {
               padding: const EdgeInsets.all(24),
               constraints: const BoxConstraints(maxWidth: 600, maxHeight: 800),
               child: _isLoadingTemplate
-                  ? Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CircularProgressIndicator(
-                            color: theme.colorScheme.secondary,
-                          ),
-                          const SizedBox(height: 16),
-                          Text(localization
-                              .admin_area_template_manager_edit_loading),
-                        ],
-                      ),
-                    )
-                  : SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                localization
-                                    .admin_area_template_manager_edit_dialog_title,
-                                style: theme.textTheme.headlineSmall?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                icon: const Icon(Icons.close),
-                                onPressed: () => navigator.pop(),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          Text(
-                            localization
-                                .admin_area_template_manager_thumbnail_label,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: SizedBox(
-                              height: 150,
-                              width: double.infinity,
-                              child: _thumbnailFile?.bytes != null
-                                  ? Image.memory(
-                                      _thumbnailFile!.bytes!,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : CachedNetworkImage(
-                                      imageUrl: widget.meta.thumbnailUrl,
-                                      fit: BoxFit.cover,
-                                      placeholder: (context, url) => Container(
-                                        color: theme
-                                            .colorScheme.surfaceContainerHighest,
-                                        child: Center(
-                                          child: CircularProgressIndicator(
-                                            color: theme.colorScheme.secondary,
-                                          ),
-                                        ),
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          Container(
-                                        color: theme
-                                            .colorScheme.surfaceContainerHighest,
-                                        child: Icon(
-                                          Icons.image_not_supported,
-                                          size: 48,
-                                          color: theme.colorScheme.onSurface
-                                              .withValues(alpha: 0.3),
-                                        ),
-                                      ),
-                                    ),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          TextButton.icon(
-                            onPressed: _pickThumbnail,
-                            icon: const Icon(Icons.image),
-                            label: Text(_thumbnailFile?.name ??
-                                localization
-                                    .admin_area_template_manager_file_picker_hint),
-                          ),
-                          const SizedBox(height: 16),
-                          _buildExistingAssets(theme, localization),
-                          const SizedBox(height: 16),
-                          _buildJsonEditor(theme, localization),
-                          const SizedBox(height: 16),
-                          _buildNewAssetPicker(theme, localization),
-                          const SizedBox(height: 16),
-                          _buildTypeDropdown(theme, localization),
-                          const SizedBox(height: 16),
-                          _buildEnvironmentDropdown(theme, localization),
-                          const SizedBox(height: 32),
-                          PrimaryButton(
-                            title: localization
-                                .admin_area_template_manager_edit_button,
-                            onTap: _updateTemplate,
-                            isLoading: isUpdating,
-                            width: double.infinity,
-                          ),
-                        ],
-                      ),
-                    ),
+                  ? _buildLoadingState(theme, localization)
+                  : _buildContent(theme, localization, isUpdating),
             ),
           );
         },
@@ -356,380 +258,94 @@ class _EditTemplateDialogState extends State<EditTemplateDialog> {
     );
   }
 
-  void _removeExistingAsset(String url) {
-    setState(() {
-      _existingAssetUrls.remove(url);
-      _deletedAssetUrls.add(url);
-    });
-  }
-
-  Widget _buildJsonEditor(ThemeData theme, AppLocalizations localization) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              localization.admin_area_template_manager_section_json_label,
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const Spacer(),
-            IconButton(
-              onPressed: _formatJson,
-              icon: const Icon(Icons.format_align_left),
-              tooltip: "JSON formatieren",
-            ),
-            IconButton(
-              onPressed: _pickJsonFile,
-              icon: const Icon(Icons.upload_file),
-              tooltip: "JSON-Datei hochladen",
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Container(
-          height: 300,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: _jsonHasError
-                  ? theme.colorScheme.error
-                  : theme.colorScheme.outline.withValues(alpha: 0.3),
-              width: _jsonHasError ? 2 : 1,
-            ),
-            borderRadius: BorderRadius.circular(8),
+  Widget _buildLoadingState(ThemeData theme, AppLocalizations localization) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircularProgressIndicator(
+            color: theme.colorScheme.secondary,
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: _jsonController != null
-                ? CodeTheme(
-                    data: CodeThemeData(styles: monokaiSublimeTheme),
-                    child: CodeField(
-                      controller: _jsonController!,
-                      textStyle: const TextStyle(
-                        fontFamily: "monospace",
-                        fontSize: 14,
-                      ),
-                      expands: true,
-                    ),
-                  )
-                : const Center(child: CircularProgressIndicator()),
-          ),
-        ),
-        if (_jsonHasError)
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Text(
-              "Ungültiges JSON-Format",
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.error,
-              ),
-            ),
-          ),
-      ],
+          const SizedBox(height: 16),
+          Text(localization.admin_area_template_manager_edit_loading),
+        ],
+      ),
     );
   }
 
-  Widget _buildExistingAssets(ThemeData theme, AppLocalizations localization) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildContent(
+    ThemeData theme,
+    AppLocalizations localization,
+    bool isUpdating,
+  ) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildHeader(theme, localization),
+          const SizedBox(height: 24),
+          EditTemplateThumbnailSection(
+            currentThumbnailUrl: widget.meta.thumbnailUrl,
+            selectedThumbnailFile: _thumbnailFile,
+            onPickThumbnail: _pickThumbnail,
+          ),
+          const SizedBox(height: 16),
+          EditTemplateExistingAssetsSection(
+            existingAssetUrls: _existingAssetUrls,
+            onRemoveAsset: _removeExistingAsset,
+          ),
+          const SizedBox(height: 16),
+          EditTemplateJsonEditorSection(
+            jsonController: _jsonController,
+            hasError: _jsonHasError,
+            onFormat: _formatJson,
+            onPickFile: _pickJsonFile,
+          ),
+          const SizedBox(height: 16),
+          EditTemplateNewAssetsSection(
+            newAssetFiles: _newAssetFiles,
+            onPickAssets: _pickNewAssets,
+            onRemoveAsset: _removeNewAsset,
+          ),
+          const SizedBox(height: 16),
+          EditTemplateTypeDropdown(
+            selectedType: _selectedType,
+            onChanged: (value) => setState(() => _selectedType = value),
+          ),
+          const SizedBox(height: 16),
+          EditTemplateEnvironmentDropdown(
+            environment: _environment,
+            onChanged: (value) => setState(() => _environment = value),
+          ),
+          const SizedBox(height: 32),
+          PrimaryButton(
+            title: localization.admin_area_template_manager_edit_button,
+            onTap: _updateTemplate,
+            isLoading: isUpdating,
+            width: double.infinity,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeader(
+    ThemeData theme,
+    AppLocalizations localization,
+  ) {
+    return Row(
       children: [
         Text(
-          localization.admin_area_template_manager_asset_images_label,
-          style: theme.textTheme.titleMedium?.copyWith(
+          localization.admin_area_template_manager_edit_dialog_title,
+          style: theme.textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 8),
-        if (_existingAssetUrls.isEmpty)
-          Container(
-            padding: const EdgeInsets.all(32),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: theme.colorScheme.outline.withValues(alpha: 0.3),
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Center(
-              child: Text(
-                localization.admin_area_template_manager_no_assets_selected,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
-                ),
-              ),
-            ),
-          )
-        else
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: _existingAssetUrls.map((url) {
-              return Stack(
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: theme.colorScheme.outline.withValues(alpha: 0.3),
-                      ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: CachedNetworkImage(
-                        imageUrl: url,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => Container(
-                          color: theme.colorScheme.surfaceContainerHighest,
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              color: theme.colorScheme.secondary,
-                              strokeWidth: 2,
-                            ),
-                          ),
-                        ),
-                        errorWidget: (context, url, error) => Container(
-                          color: theme.colorScheme.surfaceContainerHighest,
-                          child: Icon(
-                            Icons.image_not_supported,
-                            size: 24,
-                            color: theme.colorScheme.onSurface
-                                .withValues(alpha: 0.3),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 4,
-                    right: 4,
-                    child: InkWell(
-                      onTap: () => _removeExistingAsset(url),
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(
-                          Icons.close,
-                          size: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            }).toList(),
-          ),
-      ],
-    );
-  }
-
-  Widget _buildNewAssetPicker(ThemeData theme, AppLocalizations localization) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Neue Assets",
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            TextButton.icon(
-              onPressed: _pickNewAssets,
-              icon: const Icon(Icons.add_photo_alternate),
-              label: Text(
-                  localization.admin_area_template_manager_add_images_button),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        if (_newAssetFiles.isEmpty)
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: theme.colorScheme.outline.withValues(alpha: 0.3),
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Center(
-              child: Text(
-                localization.admin_area_template_manager_no_assets_selected,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
-                ),
-              ),
-            ),
-          )
-        else
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: _newAssetFiles.asMap().entries.map((entry) {
-              final index = entry.key;
-              final file = entry.value;
-              return Stack(
-                children: [
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: theme.colorScheme.outline.withValues(alpha: 0.3),
-                      ),
-                      image: file.bytes != null
-                          ? DecorationImage(
-                              image: MemoryImage(file.bytes!),
-                              fit: BoxFit.cover,
-                            )
-                          : null,
-                    ),
-                  ),
-                  Positioned(
-                    top: 4,
-                    right: 4,
-                    child: InkWell(
-                      onTap: () => _removeNewAsset(index),
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(
-                          Icons.close,
-                          size: 12,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            }).toList(),
-          ),
-      ],
-    );
-  }
-
-  Widget _buildTypeDropdown(ThemeData theme, AppLocalizations localization) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          localization.admin_area_template_manager_section_type_label,
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: theme.colorScheme.outline.withValues(alpha: 0.3),
-            ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: DropdownButton<SectionType>(
-            isExpanded: true,
-            value: _selectedType,
-            underline: const SizedBox(),
-            items: [
-              DropdownMenuItem(
-                value: SectionType.hero,
-                child: Text(localization.admin_area_template_manager_type_hero),
-              ),
-              DropdownMenuItem(
-                value: SectionType.product,
-                child:
-                    Text(localization.admin_area_template_manager_type_product),
-              ),
-              DropdownMenuItem(
-                value: SectionType.about,
-                child: Text(localization.admin_area_template_manager_type_about),
-              ),
-              DropdownMenuItem(
-                value: SectionType.callToAction,
-                child: Text(
-                    localization.admin_area_template_manager_type_call_to_action),
-              ),
-              DropdownMenuItem(
-                value: SectionType.advantages,
-                child: Text(
-                    localization.admin_area_template_manager_type_advantages),
-              ),
-              DropdownMenuItem(
-                value: SectionType.footer,
-                child:
-                    Text(localization.admin_area_template_manager_type_footer),
-              ),
-            ],
-            onChanged: (value) {
-              if (value != null) {
-                setState(() {
-                  _selectedType = value;
-                });
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildEnvironmentDropdown(
-      ThemeData theme, AppLocalizations localization) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          localization.admin_area_template_manager_environment_label,
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 8),
-        DropdownButtonFormField<String>(
-          initialValue: _environment,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          items: [
-            DropdownMenuItem(
-              value: "both",
-              child:
-                  Text(localization.admin_area_template_manager_environment_both),
-            ),
-            DropdownMenuItem(
-              value: "staging",
-              child: Text(
-                  localization.admin_area_template_manager_environment_staging),
-            ),
-            DropdownMenuItem(
-              value: "prod",
-              child: Text(
-                  localization.admin_area_template_manager_environment_prod),
-            ),
-          ],
-          onChanged: (value) {
-            if (value != null) {
-              setState(() {
-                _environment = value;
-              });
-            }
-          },
+        const Spacer(),
+        IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ],
     );
