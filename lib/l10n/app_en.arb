@@ -3690,6 +3690,14 @@
     "@admin_area_template_manager_type_footer": {
         "description": "Label for Footer section type in Admin Area for Pagebuilder Section Template Upload"
     },
+    "admin_area_template_manager_type_contact_form": "Contact Form",
+    "@admin_area_template_manager_type_contact_form": {
+        "description": "Label for Contact Form section type in Admin Area for Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_type_calendly": "Calendly",
+    "@admin_area_template_manager_type_calendly": {
+        "description": "Label for Calendly section type in Admin Area for Pagebuilder Section Template Upload"
+    },
     "admin_area_template_manager_environment_label": "Environment",
     "@admin_area_template_manager_environment_label": {
         "description": "Label for environment dropdown in Admin Area for Pagebuilder Section Template Upload"
@@ -3809,6 +3817,14 @@
     "pagebuilder_section_type_footer": "Footer",
     "@pagebuilder_section_type_footer": {
         "description": "Label for Footer section type in Pagebuilder"
+    },
+    "pagebuilder_section_type_contact_form": "Contact Form",
+    "@pagebuilder_section_type_contact_form": {
+        "description": "Label for Contact Form section type in Pagebuilder"
+    },
+    "pagebuilder_section_type_calendly": "Calendly",
+    "@pagebuilder_section_type_calendly": {
+        "description": "Label for Calendly section type in Pagebuilder"
     },
     "pagebuilder_template_library_error_loading_template": "Error loading template",
     "@pagebuilder_template_library_error_loading_template": {

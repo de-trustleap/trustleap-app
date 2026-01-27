@@ -47,6 +47,10 @@ class _EditTemplateViewState extends State<EditTemplateView> {
         return localization.pagebuilder_section_type_advantages;
       case SectionType.footer:
         return localization.pagebuilder_section_type_footer;
+      case SectionType.contact:
+        return localization.pagebuilder_section_type_contact_form;
+      case SectionType.calendly:
+        return localization.pagebuilder_section_type_calendly;
     }
   }
 

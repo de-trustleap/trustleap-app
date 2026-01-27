@@ -3148,6 +3148,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get admin_area_template_manager_type_footer => 'Footer';
 
   @override
+  String get admin_area_template_manager_type_contact_form => 'Contact Form';
+
+  @override
+  String get admin_area_template_manager_type_calendly => 'Calendly';
+
+  @override
   String get admin_area_template_manager_environment_label => 'Environment';
 
   @override
@@ -3247,6 +3253,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pagebuilder_section_type_footer => 'Footer';
+
+  @override
+  String get pagebuilder_section_type_contact_form => 'Contact Form';
+
+  @override
+  String get pagebuilder_section_type_calendly => 'Calendly';
 
   @override
   String get pagebuilder_template_library_error_loading_template =>

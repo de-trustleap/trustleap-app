@@ -66,6 +66,14 @@ class EditTemplateTypeDropdown extends StatelessWidget {
                 value: SectionType.footer,
                 child: Text(localization.admin_area_template_manager_type_footer),
               ),
+              DropdownMenuItem(
+                value: SectionType.contact,
+                child: Text(localization.admin_area_template_manager_type_contact_form),
+              ),
+              DropdownMenuItem(
+                value: SectionType.calendly,
+                child: Text(localization.admin_area_template_manager_type_calendly),
+              ),
             ],
             onChanged: (value) {
               if (value != null) {
