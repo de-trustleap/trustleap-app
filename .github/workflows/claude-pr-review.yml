@@ -1,12 +1,12 @@
 name: Claude PR Review
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  issue_comment:
+    types: [created]
 
 jobs:
   review:
-    if: github.event.pull_request.user.login != 'dependabot[bot]'
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/review')
     runs-on: ubuntu-latest
     permissions:
       contents: read
