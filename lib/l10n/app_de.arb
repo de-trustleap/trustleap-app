@@ -3690,6 +3690,14 @@
     "@admin_area_template_manager_type_footer": {
         "description": "Label für Footer Section Type im Admin Area beim Pagebuilder Section Template Upload"
     },
+    "admin_area_template_manager_type_contact_form": "Kontaktformular",
+    "@admin_area_template_manager_type_contact_form": {
+        "description": "Label für Kontaktformular Section Type im Admin Area beim Pagebuilder Section Template Upload"
+    },
+    "admin_area_template_manager_type_calendly": "Calendly",
+    "@admin_area_template_manager_type_calendly": {
+        "description": "Label für Calendly Section Type im Admin Area beim Pagebuilder Section Template Upload"
+    },
     "admin_area_template_manager_environment_label": "Environment",
     "@admin_area_template_manager_environment_label": {
         "description": "Label für Environment Dropdown im Admin Area beim Pagebuilder Section Template Upload"
@@ -3809,6 +3817,14 @@
     "pagebuilder_section_type_footer": "Fußzeile",
     "@pagebuilder_section_type_footer": {
         "description": "Label für Fußzeile Section Type im Pagebuilder"
+    },
+    "pagebuilder_section_type_contact_form": "Kontaktformular",
+    "@pagebuilder_section_type_contact_form": {
+        "description": "Label für Kontaktformular Section Type im Pagebuilder"
+    },
+    "pagebuilder_section_type_calendly": "Calendly",
+    "@pagebuilder_section_type_calendly": {
+        "description": "Label für Calendly Section Type im Pagebuilder"
     },
     "pagebuilder_template_library_error_loading_template": "Fehler beim Laden der Vorlage",
     "@pagebuilder_template_library_error_loading_template": {

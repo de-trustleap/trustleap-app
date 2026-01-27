@@ -5463,6 +5463,18 @@ abstract class AppLocalizations {
   /// **'Footer'**
   String get admin_area_template_manager_type_footer;
 
+  /// Label for Contact Form section type in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Form'**
+  String get admin_area_template_manager_type_contact_form;
+
+  /// Label for Calendly section type in Admin Area for Pagebuilder Section Template Upload
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly'**
+  String get admin_area_template_manager_type_calendly;
+
   /// Label for environment dropdown in Admin Area for Pagebuilder Section Template Upload
   ///
   /// In en, this message translates to:
@@ -5642,6 +5654,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Footer'**
   String get pagebuilder_section_type_footer;
+
+  /// Label for Contact Form section type in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Form'**
+  String get pagebuilder_section_type_contact_form;
+
+  /// Label for Calendly section type in Pagebuilder
+  ///
+  /// In en, this message translates to:
+  /// **'Calendly'**
+  String get pagebuilder_section_type_calendly;
 
   /// Error message when loading a single template in Pagebuilder Template Library Dialog
   ///
