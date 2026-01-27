@@ -2225,6 +2225,14 @@
     "@landingpage_creator_ai_form_example": {
         "description": "Example text for the AI ​​generation section in the landing page creator"
     },
+    "landingpage_creator_ai_generator_tile_title": "AI Generator",
+    "@landingpage_creator_ai_generator_tile_title": {
+        "description": "Title for the AI Generator tile in the landing page creator"
+    },
+    "landingpage_creator_ai_generator_tile_description": "Describe your business and get a customized page in no time.",
+    "@landingpage_creator_ai_generator_tile_description": {
+        "description": "Description for the AI Generator tile in the landing page creator"
+    },
     "landingpage_overview_no_default_page_title": "Setup Landingpage",
     "@landingpage_overview_no_default_page_title": {
         "description": "Title for the page that is displayed if you have not yet created a default landing page."

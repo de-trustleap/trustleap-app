@@ -45,7 +45,8 @@ class LandingPageCreatorFourthStep extends StatefulWidget {
 
 class _LandingPageCreatorFourthStepState
     extends State<LandingPageCreatorFourthStep> {
-  int? selectedTileIndex;
+  int? selectedTemplateIndex;
+  bool isAIGeneratorSelected = false;
   late List<LandingPageTemplate> templates;
   PagebuilderAiGeneration? _aiData;
 
@@ -91,33 +92,49 @@ class _LandingPageCreatorFourthStepState
                       ] else if (templates.isNotEmpty) ...[
                         LandingPageCreatorFourthStepGrid(
                             landingpageTemplates: templates,
-                            selectedIndex: selectedTileIndex,
-                            disabled: _aiData?.hasContent ?? false,
+                            selectedIndex: selectedTemplateIndex,
+                            isAIGeneratorSelected: isAIGeneratorSelected,
+                            disabled: false,
                             onSelectIndex: (index) {
                               setState(() {
-                                if (selectedTileIndex == index) {
-                                  selectedTileIndex = null;
+                                if (selectedTemplateIndex == index) {
+                                  selectedTemplateIndex = null;
                                 } else {
-                                  selectedTileIndex = index;
+                                  selectedTemplateIndex = index;
+                                  isAIGeneratorSelected = false;
+                                  _aiData = null;
+                                }
+                              });
+                            },
+                            onAIGeneratorTap: () {
+                              setState(() {
+                                if (isAIGeneratorSelected) {
+                                  isAIGeneratorSelected = false;
+                                  _aiData = null;
+                                } else {
+                                  isAIGeneratorSelected = true;
+                                  selectedTemplateIndex = null;
                                 }
                               });
                             }),
                       ],
-                      const SizedBox(height: 48),
-                      SelectableText(
-                        localization.landingpage_creator_ai_form_section_title,
-                        style: themeData.textTheme.headlineLarge!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 16),
-                      LandingPageAIGenerationForm(
-                        disabled: selectedTileIndex != null,
-                        onAIDataChanged: (aiData) {
-                          setState(() {
-                            _aiData = aiData;
-                          });
-                        },
-                      ),
+                      if (isAIGeneratorSelected) ...[
+                        const SizedBox(height: 48),
+                        SelectableText(
+                          localization.landingpage_creator_ai_form_section_title,
+                          style: themeData.textTheme.headlineLarge!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 16),
+                        LandingPageAIGenerationForm(
+                          disabled: false,
+                          onAIDataChanged: (aiData) {
+                            setState(() {
+                              _aiData = aiData;
+                            });
+                          },
+                        ),
+                      ],
                       const SizedBox(height: 24),
                       ResponsiveRowColumn(
                           rowMainAxisAlignment: MainAxisAlignment.center,
@@ -143,7 +160,7 @@ class _LandingPageCreatorFourthStepState
                                 child: PrimaryButton(
                                     title: localization.landingpage_create_txt,
                                     disabled: widget.buttonsDisabled ||
-                                        (selectedTileIndex == null &&
+                                        (selectedTemplateIndex == null &&
                                             !(_aiData?.hasContent ?? false)),
                                     isLoading: widget.isLoading,
                                     width: responsiveValue.isMobile
@@ -159,13 +176,13 @@ class _LandingPageCreatorFourthStepState
                                               widget.imageHasChanged,
                                               _aiData!);
                                         }
-                                      } else if (selectedTileIndex != null) {
+                                      } else if (selectedTemplateIndex != null) {
                                         // Template Selection
                                         widget.onSaveTapped(
                                             widget.landingPage!,
                                             widget.image,
                                             widget.imageHasChanged,
-                                            templates[selectedTileIndex!]
+                                            templates[selectedTemplateIndex!]
                                                 .id
                                                 .value);
                                       }

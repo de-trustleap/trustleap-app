@@ -1916,6 +1916,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Example: Our financial office is centrally located in the city center, family-run since 1985, and specializes in independent financial advice and retirement planning. Reliability and trust are our focus – clear structures and calm shades of blue and gray are desired.';
 
   @override
+  String get landingpage_creator_ai_generator_tile_title => 'AI Generator';
+
+  @override
+  String get landingpage_creator_ai_generator_tile_description =>
+      'Describe your business and get a customized page in no time.';
+
+  @override
   String get landingpage_overview_no_default_page_title => 'Setup Landingpage';
 
   @override

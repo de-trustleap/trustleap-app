@@ -1946,6 +1946,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'Beispiel: Unser Finanzbüro liegt zentral in der Innenstadt, familiengeführt seit 1985, spezialisiert auf unabhängige Finanzberatung und Altersvorsorge. Seriosität und Vertrauen stehen im Mittelpunkt – klare Strukturen, ruhige Blau- und Grautöne gewünscht.';
 
   @override
+  String get landingpage_creator_ai_generator_tile_title => 'KI Generator';
+
+  @override
+  String get landingpage_creator_ai_generator_tile_description =>
+      'Beschreibe dein Unternehmen und erhalte eine maßgeschneiderte Seite in kürzester Zeit.';
+
+  @override
   String get landingpage_overview_no_default_page_title =>
       'Landingpage einrichten';
 
