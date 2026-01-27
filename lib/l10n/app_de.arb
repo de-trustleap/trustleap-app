@@ -2225,6 +2225,14 @@
     "@landingpage_creator_ai_form_example": {
         "description": "Beispiel Text für die KI Generierung Section im Landingpage Creator"
     },
+    "landingpage_creator_ai_generator_tile_title": "KI Generator",
+    "@landingpage_creator_ai_generator_tile_title": {
+        "description": "Titel für die KI Generator Kachel im Landingpage Creator"
+    },
+    "landingpage_creator_ai_generator_tile_description": "Beschreibe dein Unternehmen und erhalte eine maßgeschneiderte Seite in kürzester Zeit.",
+    "@landingpage_creator_ai_generator_tile_description": {
+        "description": "Beschreibung für die KI Generator Kachel im Landingpage Creator"
+    },
     "landingpage_overview_no_default_page_title": "Landingpage einrichten",
     "@landingpage_overview_no_default_page_title": {
         "description": "Titel für die Seite die angezeigt wird wenn man noch keine Default Landingpage erstellt hat."

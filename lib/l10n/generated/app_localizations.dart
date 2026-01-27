@@ -3350,6 +3350,18 @@ abstract class AppLocalizations {
   /// **'Example: Our financial office is centrally located in the city center, family-run since 1985, and specializes in independent financial advice and retirement planning. Reliability and trust are our focus – clear structures and calm shades of blue and gray are desired.'**
   String get landingpage_creator_ai_form_example;
 
+  /// Title for the AI Generator tile in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'AI Generator'**
+  String get landingpage_creator_ai_generator_tile_title;
+
+  /// Description for the AI Generator tile in the landing page creator
+  ///
+  /// In en, this message translates to:
+  /// **'Describe your business and get a customized page in no time.'**
+  String get landingpage_creator_ai_generator_tile_description;
+
   /// Title for the page that is displayed if you have not yet created a default landing page.
   ///
   /// In en, this message translates to:

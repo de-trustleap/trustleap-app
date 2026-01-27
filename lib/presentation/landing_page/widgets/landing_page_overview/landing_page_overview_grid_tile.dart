@@ -53,14 +53,28 @@ class LandingPageOverviewGridTile extends StatelessWidget {
     return landingPage.contentID == null && !_isDefaultPage();
   }
 
-  Color _getBackgroundColor(ThemeData themeData) {
+  Color? _getBackgroundColor(ThemeData themeData) {
     if (_isPending()) {
       return themeData.colorScheme.surface.withValues(alpha: 0.5);
     } else if (_isDefaultPage()) {
-      return themeData.colorScheme.primary.withValues(alpha: 0.5);
+      return null; // Use gradient instead
     } else {
       return themeData.colorScheme.surface;
     }
+  }
+
+  Gradient? _getBackgroundGradient(ThemeData themeData) {
+    if (_isDefaultPage()) {
+      return LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          themeData.colorScheme.primary.withValues(alpha: 0.3),
+          themeData.colorScheme.primary.withValues(alpha: 0.15),
+        ],
+      );
+    }
+    return null;
   }
 
   @override
@@ -105,6 +119,7 @@ class LandingPageOverviewGridTile extends StatelessWidget {
           width: responsiveValue.largerThan(MOBILE) ? 200 : 170,
           decoration: BoxDecoration(
               color: _getBackgroundColor(themeData),
+              gradient: _getBackgroundGradient(themeData),
               border: Border.all(color: Colors.transparent),
               borderRadius: const BorderRadius.all(Radius.circular(20))),
           child: Padding(
