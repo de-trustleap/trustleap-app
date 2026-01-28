@@ -1547,6 +1547,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Auto sizing';
 
   @override
+  String get pagebuilder_button_config_auto_width => 'Auto width';
+
+  @override
   String get landingpage_pagebuilder_container_config_container_shadow =>
       'Shadow';
 
