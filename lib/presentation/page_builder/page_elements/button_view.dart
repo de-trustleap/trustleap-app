@@ -31,30 +31,41 @@ class PageBuilderButtonView extends StatelessWidget {
         final height =
             properties.height?.getValueForBreakpoint(breakpoint);
 
-        return Container(
-        width: width,
-        height: height,
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: BoxDecoration(
-            color: properties.backgroundPaint?.isColor == true
-                ? properties.backgroundPaint?.color
-                : null,
-            gradient: properties.backgroundPaint?.isGradient == true
-                ? properties.backgroundPaint?.gradient?.toFlutterGradient()
-                : null,
-            borderRadius: BorderRadius.circular(properties.border?.radius ?? 0),
-            border: properties.border?.width != null &&
-                    properties.border?.color != null
-                ? Border.all(
-                    width: properties.border!.width!,
-                    color: properties.border!.color!,
-                  )
-                : null),
-        alignment: AlignmentMapper.getAlignmentFromTextAlignment(
-            properties.textProperties?.alignment?.getValue()),
-        child: PagebuilderHtmlRenderer(
-            textProperties: properties.textProperties,
-            useInlineDisplay: true));
+        final buttonContainer = Container(
+          width: width,
+          height: height,
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          decoration: BoxDecoration(
+              color: properties.backgroundPaint?.isColor == true
+                  ? properties.backgroundPaint?.color
+                  : null,
+              gradient: properties.backgroundPaint?.isGradient == true
+                  ? properties.backgroundPaint?.gradient?.toFlutterGradient()
+                  : null,
+              borderRadius:
+                  BorderRadius.circular(properties.border?.radius ?? 0),
+              border: properties.border?.width != null &&
+                      properties.border?.color != null
+                  ? Border.all(
+                      width: properties.border!.width!,
+                      color: properties.border!.color!,
+                    )
+                  : null),
+          alignment: AlignmentMapper.getAlignmentFromTextAlignment(
+              properties.textProperties?.alignment?.getValue()),
+          child: PagebuilderHtmlRenderer(
+              textProperties: properties.textProperties,
+              useInlineDisplay: true),
+        );
+
+        if (width == null) {
+          return UnconstrainedBox(
+            alignment: Alignment.centerLeft,
+            child: buttonContainer,
+          );
+        }
+
+        return buttonContainer;
       },
     );
   }

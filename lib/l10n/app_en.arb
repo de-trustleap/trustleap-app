@@ -1815,6 +1815,10 @@
     "@landingpage_pagebuilder_container_config_auto_sizing": {
         "description": "Checkbox label for automatic container sizing in pagebuilder config menu"
     },
+    "pagebuilder_button_config_auto_width": "Auto width",
+    "@pagebuilder_button_config_auto_width": {
+        "description": "Checkbox label for automatic button width in pagebuilder config menu"
+    },
     "landingpage_pagebuilder_container_config_container_shadow": "Shadow",
     "@landingpage_pagebuilder_container_config_container_shadow": {
         "description": "Title for the shadow configuration in the pagebuilder container configuration."

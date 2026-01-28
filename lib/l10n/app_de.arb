@@ -1815,6 +1815,10 @@
     "@landingpage_pagebuilder_container_config_auto_sizing": {
         "description": "Checkbox Label für automatische Container-Größe im Pagebuilder Config Menü"
     },
+    "pagebuilder_button_config_auto_width": "Automatische Breite",
+    "@pagebuilder_button_config_auto_width": {
+        "description": "Checkbox Label für automatische Button-Breite im Pagebuilder Config Menü"
+    },
     "landingpage_pagebuilder_container_config_container_shadow": "Schatten",
     "@landingpage_pagebuilder_container_config_container_shadow": {
         "description": "Titel für die Schatten Konfiguration in der Pagebuilder Container Konfiguration"

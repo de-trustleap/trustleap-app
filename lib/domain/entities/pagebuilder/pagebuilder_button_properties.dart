@@ -28,9 +28,10 @@ class PageBuilderButtonProperties extends Equatable
     PagebuilderBorder? border,
     PagebuilderPaint? backgroundPaint,
     PageBuilderTextProperties? textProperties,
+    bool removeWidth = false,
   }) {
     return PageBuilderButtonProperties(
-      width: width ?? this.width,
+      width: removeWidth ? null : (width ?? this.width),
       height: height ?? this.height,
       border: border ?? this.border,
       backgroundPaint: backgroundPaint ?? this.backgroundPaint,

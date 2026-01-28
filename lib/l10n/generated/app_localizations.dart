@@ -2747,6 +2747,12 @@ abstract class AppLocalizations {
   /// **'Auto sizing'**
   String get landingpage_pagebuilder_container_config_auto_sizing;
 
+  /// Checkbox label for automatic button width in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Auto width'**
+  String get pagebuilder_button_config_auto_width;
+
   /// Title for the shadow configuration in the pagebuilder container configuration.
   ///
   /// In en, this message translates to:
