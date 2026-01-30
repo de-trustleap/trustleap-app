@@ -19,6 +19,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
@@ -35,6 +37,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
@@ -77,6 +81,8 @@ void main() {
       final originalButtonProperties = PageBuilderButtonProperties(
         width: const PagebuilderResponsiveOrConstant.constant(100.0),
         height: const PagebuilderResponsiveOrConstant.constant(40.0),
+        minWidthPercent: null,
+        contentPadding: null,
         border: const PagebuilderBorder(radius: 4.0, width: null, color: null),
         backgroundPaint: const PagebuilderPaint.color(Colors.green),
         textProperties: originalTextProperties,
@@ -111,6 +117,8 @@ void main() {
       final mutatedButtonProperties = PageBuilderButtonProperties(
         width: const PagebuilderResponsiveOrConstant.constant(300.0),
         height: const PagebuilderResponsiveOrConstant.constant(80.0),
+        minWidthPercent: null,
+        contentPadding: null,
         border: const PagebuilderBorder(radius: 16.0, width: null, color: null),
         backgroundPaint: const PagebuilderPaint.color(Colors.purple),
         textProperties: mutatedTextProperties,
@@ -152,6 +160,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(
@@ -168,6 +178,8 @@ void main() {
           buttonProperties: PageBuilderButtonProperties(
               width: const PagebuilderResponsiveOrConstant.constant(200.0),
               height: const PagebuilderResponsiveOrConstant.constant(50.0),
+              minWidthPercent: null,
+              contentPadding: null,
               border: const PagebuilderBorder(radius: 10.0, width: null, color: null),
               backgroundPaint: const PagebuilderPaint.color(Colors.white),
               textProperties: PageBuilderTextProperties(

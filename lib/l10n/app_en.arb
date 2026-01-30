@@ -1815,9 +1815,21 @@
     "@landingpage_pagebuilder_container_config_auto_sizing": {
         "description": "Checkbox label for automatic container sizing in pagebuilder config menu"
     },
-    "pagebuilder_button_config_auto_width": "Auto width",
+    "pagebuilder_button_config_auto_width": "Auto size",
     "@pagebuilder_button_config_auto_width": {
-        "description": "Checkbox label for automatic button width in pagebuilder config menu"
+        "description": "Radio button label for automatic button size in pagebuilder config menu"
+    },
+    "pagebuilder_button_config_min_width": "Min width (%)",
+    "@pagebuilder_button_config_min_width": {
+        "description": "Radio button label for minimum width in percent in pagebuilder config menu"
+    },
+    "pagebuilder_button_config_fixed_width": "Fixed size",
+    "@pagebuilder_button_config_fixed_width": {
+        "description": "Radio button label for fixed button size in pagebuilder config menu"
+    },
+    "pagebuilder_button_config_content_padding": "Text spacing",
+    "@pagebuilder_button_config_content_padding": {
+        "description": "Label for text spacing inside button in pagebuilder config menu"
     },
     "landingpage_pagebuilder_container_config_container_shadow": "Shadow",
     "@landingpage_pagebuilder_container_config_container_shadow": {

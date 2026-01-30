@@ -2747,11 +2747,29 @@ abstract class AppLocalizations {
   /// **'Auto sizing'**
   String get landingpage_pagebuilder_container_config_auto_sizing;
 
-  /// Checkbox label for automatic button width in pagebuilder config menu
+  /// Radio button label for automatic button size in pagebuilder config menu
   ///
   /// In en, this message translates to:
-  /// **'Auto width'**
+  /// **'Auto size'**
   String get pagebuilder_button_config_auto_width;
+
+  /// Radio button label for minimum width in percent in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Min width (%)'**
+  String get pagebuilder_button_config_min_width;
+
+  /// Radio button label for fixed button size in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Fixed size'**
+  String get pagebuilder_button_config_fixed_width;
+
+  /// Label for text spacing inside button in pagebuilder config menu
+  ///
+  /// In en, this message translates to:
+  /// **'Text spacing'**
+  String get pagebuilder_button_config_content_padding;
 
   /// Title for the shadow configuration in the pagebuilder container configuration.
   ///

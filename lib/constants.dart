@@ -91,6 +91,8 @@ enum PageBuilderWidgetType {
 
 enum PageBuilderSpacingType { padding, margin }
 
+enum PagebuilderButtonSizeMode { auto, minWidth, fixed }
+
 enum PagebuilderResponsiveBreakpoint { mobile, tablet, desktop }
 
 enum LegalsType { privacyPolicy, termsAndCondition, imprint }
@@ -162,3 +164,5 @@ enum ConsentMethod {
   rejectAll,
   custom,
 }
+// TODO: PAGEBUILDER PROJEKT ANPASSEN
+// TODO: FOOTER RESPONSIVE MACHEN
